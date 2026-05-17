@@ -1,8 +1,5 @@
-import {
-  migrateUuid,
-  migrateValueTransform,
-} from "../../data/shared/migrations/source-migrations.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { migrateUuid, migrateValueTransform } from "../../data/shared/migrations/source-migrations.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
@@ -18,7 +15,7 @@ const { ActiveEffect } = foundry.documents;
  * @mixes CommonDocument
  * @mixes RetrievalDocument
  */
-export default class TeriockActiveEffect extends mix(
+export default class TeriockActiveEffect extends mixClasses(
   ActiveEffect,
   mixins.BaseDocumentMixin,
   mixins.CommonDocumentMixin,

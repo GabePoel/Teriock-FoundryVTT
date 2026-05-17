@@ -5,33 +5,27 @@ import {
   SummonActivation,
   UseExternalActivation,
 } from "../../data/pseudo-documents/activations/_module.mjs";
-import {
-  migrateUuid,
-  migrateValueTransform,
-} from "../../data/shared/migrations/source-migrations.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { migrateUuid, migrateValueTransform } from "../../data/shared/migrations/source-migrations.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * The Teriock TableResult implementation.
  * @extends {TableResult}
- * @extends {ClientDocument}
- * @mixes EmbedCardDocument
  * @mixes BaseDocument
+ * @mixes EmbedCardDocument
  * @mixes PanelDocument
  * @implements {Teriock.Documents.TableResultInterface}
  */
-export default class TeriockTableResult extends mix(
+export default class TeriockTableResult extends mixClasses(
   TableResult,
   mixins.BaseDocumentMixin,
   mixins.PanelDocumentMixin,
   mixins.EmbedCardDocumentMixin,
 ) {
-  /** @inheritDoc */
   static migrateData(source, options, state) {
     migrateValueTransform(source, "documentUuid", migrateUuid);
     return super.migrateData(source, options, state);
@@ -60,8 +54,7 @@ export default class TeriockTableResult extends mix(
     const name = doc.fullName ?? doc.name ?? "";
     if (doc.documentName === "Actor") {
       const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
-        name:
-          doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
+        name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
       });
       activations.push(
         new SummonActivation({
@@ -88,10 +81,7 @@ export default class TeriockTableResult extends mix(
         }),
       );
     }
-    if (
-      ["ActiveEffect", "Item"].includes(doc.documentName) &&
-      doc.type !== "ability"
-    ) {
+    if (["ActiveEffect", "Item"].includes(doc.documentName) && doc.type !== "ability") {
       const label = name
         ? _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", {
             name,
@@ -103,9 +93,7 @@ export default class TeriockTableResult extends mix(
           display: { label },
           primary: activationFamily,
           secondary: activations,
-          target: ["imbuement", "property"].includes(doc.type)
-            ? "armament"
-            : "actor",
+          target: ["imbuement", "property"].includes(doc.type) ? "armament" : "actor",
         }),
       );
     }
@@ -116,8 +104,7 @@ export default class TeriockTableResult extends mix(
   getCardContextMenuEntries(doc) {
     return [
       {
-        onClick: async () =>
-          await (await fromUuid(this.documentUuid))?.sheet.render(true),
+        onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
         visible: () => this.documentUuid,
         icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),

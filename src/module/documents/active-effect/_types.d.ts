@@ -1,5 +1,5 @@
-import { BaseEffectSystem } from "../../data/systems/effects/_module.mjs";
 import { BaseEffectSheet } from "../../applications/sheets/effect-sheets/_module.mjs";
+import { BaseEffectSystem } from "../../data/systems/effects/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {

@@ -1,5 +1,5 @@
 import { TextField } from "../../../data/fields/_module.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { bindCommonActions } from "../../shared/_module.mjs";
 import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
@@ -13,13 +13,12 @@ import {
   MenuCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
-const { JournalEntryPageProseMirrorSheet } =
-  foundry.applications.sheets.journal;
+const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal;
 
 /**
  * @extends {JournalEntryPageProseMirrorSheet}
  */
-export default class HarmSheet extends mix(
+export default class HarmSheet extends mixClasses(
   JournalEntryPageProseMirrorSheet,
   BaseApplicationMixin,
   AutomationsCommonSheetPart,
@@ -68,10 +67,7 @@ export default class HarmSheet extends mix(
       imgPath: "system.img",
       system: this.document.system,
       systemFields: this.document.system.schema.fields,
-      textEnriched: await TeriockTextEditor.enrichHTML(
-        this.document.text.content,
-        { relativeTo: this.document },
-      ),
+      textEnriched: await TeriockTextEditor.enrichHTML(this.document.text.content, { relativeTo: this.document }),
       textField: new TextField({ label: "Description" }),
       type: this.document.type,
       uuid: this.document.uuid,

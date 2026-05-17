@@ -27,26 +27,19 @@ export default function CommandActivationFactory(command) {
 
     /** @inheritDoc */
     get icon() {
-      return (
-        this.symbol || getInteractionEntryValue(command, "icon", this.options)
-      );
+      return this.symbol || getInteractionEntryValue(command, "icon", this.options);
     }
 
     /** @inheritDoc */
     get label() {
-      return (
-        this.title || getInteractionEntryValue(command, "label", this.options)
-      );
+      return this.title || getInteractionEntryValue(command, "label", this.options);
     }
 
     /** @inheritDoc */
     async primaryAction() {
       if (!this.checkActors()) return;
       for (const a of this.actors) {
-        await command.primary(
-          a,
-          Object.assign({ event: this.event }, this.options),
-        );
+        await command.primary(a, Object.assign({ event: this.event }, this.options));
       }
     }
 
@@ -54,10 +47,7 @@ export default function CommandActivationFactory(command) {
     async secondaryAction() {
       if (!this.checkActors()) return;
       for (const a of this.actors) {
-        await command.secondary(
-          a,
-          Object.assign({ event: this.event }, this.options),
-        );
+        await command.secondary(a, Object.assign({ event: this.event }, this.options));
       }
     }
   }

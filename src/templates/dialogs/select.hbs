@@ -1,28 +1,39 @@
-<div class="dialog-form standard-form teriock dynamic-select"
-     style="display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden;">
+<div
+  class="dialog-form standard-form teriock dynamic-select"
+  style="display:flex; flex-direction:column; height:100%; min-height:0; overflow:hidden;"
+>
 
-  {{#if (exists hint)}}<p class="hint">{{{hint}}}</p>{{/if}}
+  {{#if (exists hint)}}
+    <p class="hint">
+      {{{ hint }}}
+    </p>
+  {{/if}}
 
   <div class="teriock-block-searchbar">
-    <label><input type="search" class="search-input" placeholder="Search..." autocomplete="off"></label>
+    <label>
+      <input class="search-input" type="search" placeholder="Search..." autocomplete="off" />
+    </label>
   </div>
 
   {{#if (exists documents)}}
     <div
       class="form-group"
       style="
-         display:block;
-         flex:1 1 auto; min-height:0;
-         overflow:auto;
-         --fade:10px; padding-block:var(--fade);
-         -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
-         mask-image:linear-gradient(to bottom, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
-       "
+        display:block;
+        flex:1 1 auto; min-height:0;
+        overflow:auto;
+        --fade:10px; padding-block:var(--fade);
+        -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+        mask-image:linear-gradient(to bottom, transparent 0, #000 var(--fade), #000 calc(100% - var(--fade)), transparent 100%);
+      "
     >
 
       <div class="doc-list-container" tabindex="0">
-        <ul class="doc-select teriock-block-container small" role="listbox"
-            aria-multiselectable="{{#if multi}}true{{else}}false{{/if}}">
+        <ul
+          class="doc-select teriock-block-container small"
+          role="listbox"
+          aria-multiselectable="{{#if multi}}true{{else}}false{{/if}}"
+        >
           {{#each documents as |doc id|}}
             <li class="doc-select-item">
               <label
@@ -30,38 +41,40 @@
                 data-rich-tooltip="true"
                 data-tooltip-direction="RIGHT"
                 {{#if (exists doc.uuid)}}
-                data-uuid="{{{doc.uuid}}}"
-                  {{#if ../tooltipAsync}}
-                data-tooltip-html="{{doc.tooltip}}"
-                data-make-tooltip="true"
-                  {{/if}}
+                  data-uuid="{{{ doc.uuid }}}"{{#if ../tooltipAsync}}data-tooltip-html="{{ doc.tooltip }}" data-make-tooltip="true"{{/if}}
                 {{/if}}
                 {{#if ../tooltip}}
-                data-tooltip-html="{{doc.tooltip}}"
-                data-tooltip-class="teriock teriock-rich-tooltip"
+                  data-tooltip-html="{{ doc.tooltip }}"
+                  data-tooltip-class="teriock teriock-rich-tooltip"
                 {{/if}}
               >
                 <div class="doc-checkbox-container">
                   <input
-                    id="doc-{{id}}"
+                    id="doc-{{ id }}"
                     {{#if checked}}
-                    checked="checked"
+                      checked="checked"
                     {{/if}}
                     {{#if ../multi}}
-                    type="checkbox"
-                    name="{{id}}"
+                      type="checkbox"
+                      name="{{ id }}"
                     {{else}}
-                    type="radio"
-                    name="choice"
-                    value="{{id}}"
+                      type="radio"
+                      name="choice"
+                      value="{{ id }}"
                     {{/if}}
-                  >
+                  />
                 </div>
                 <div class="doc-image-container">
-                  <img src="{{doc.img}}" alt="" {{#if doc.rescale}}class="rescale"{{/if}}>
+                  <img
+                    src="{{ doc.img }}"
+                    alt=""
+                    {{#if doc.rescale}}
+                      class="rescale"
+                    {{/if}}
+                  />
                 </div>
-                <div class="doc-name-container">{{doc.name}}</div>
-                <div class="doc-text-container">{{doc.text}}</div>
+                <div class="doc-name-container">{{ doc.name }}</div>
+                <div class="doc-text-container">{{ doc.text }}</div>
               </label>
             </li>
           {{/each}}

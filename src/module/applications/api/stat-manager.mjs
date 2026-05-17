@@ -7,9 +7,7 @@ import { DocumentDialogSheet } from "../sheets/utility-sheets/_module.mjs";
  * @property {boolean} _consumeStatDice
  * @property {boolean} _forHarm
  */
-export default class TeriockStatManager extends HackStatMixin(
-  DocumentDialogSheet,
-) {
+export default class TeriockStatManager extends HackStatMixin(DocumentDialogSheet) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -68,9 +66,7 @@ export default class TeriockStatManager extends HackStatMixin(
       });
     }
     /** @type {HTMLInputElement} */
-    const consumeDiceCheckbox = this.element.querySelector(
-      "[name='consume-dice']",
-    );
+    const consumeDiceCheckbox = this.element.querySelector("[name='consume-dice']");
     if (consumeDiceCheckbox) {
       consumeDiceCheckbox.addEventListener("change", () => {
         this._consumeStatDice = consumeDiceCheckbox.checked;

@@ -22,8 +22,8 @@ export default function AbilityExecutionGetInputPart(Base) {
     class AbilityExecutionGetInput extends Base {
       get _dialogFields() {
         const oldFields = super._dialogFields;
-        const newFields = oldFields.filter((f) => f.name === "competence");
-        const endFields = oldFields.filter((f) => f.name !== "competence");
+        const newFields = oldFields.filter(f => f.name === "competence");
+        const endFields = oldFields.filter(f => f.name !== "competence");
         return [
           ...newFields,
           {
@@ -33,30 +33,28 @@ export default function AbilityExecutionGetInputPart(Base) {
             value: this.piercing.raw,
             label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
             name: "piercing",
-            update: (v) => (this.piercing.raw = v),
+            update: v => (this.piercing.raw = v),
           },
           {
             condition: this.isAttack,
             field: new fields.NumberField({ deterministic: false }),
             hint: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.existing.hint",
             integer: true,
-            label:
-              "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.existing.label",
+            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.existing.label",
             max: 0,
             name: "existing-attack-penalty",
             placeholder: "0",
-            update: (v) => (this.existingAttackPenalty = v),
+            update: v => (this.existingAttackPenalty = v),
             value: this.existingAttackPenalty,
           },
           {
             condition: this.isAttack && this.actor,
             field: new FormulaField({ deterministic: false }),
             hint: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.hint",
-            label:
-              "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.label",
+            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.label",
             name: "incurred-attack-penalty",
             placeholder: "0",
-            update: (v) => (this.incurredAttackPenalty = v),
+            update: v => (this.incurredAttackPenalty = v),
             value: this.incurredAttackPenalty,
           },
           ...endFields,
@@ -67,7 +65,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
             name: "sb",
             small: true,
-            update: (v) => (this.sb = v),
+            update: v => (this.sb = v),
           },
           {
             condition: this.isAttack,
@@ -76,7 +74,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
             name: "vitals",
             small: true,
-            update: (v) => (this.vitals = v),
+            update: v => (this.vitals = v),
           },
           {
             condition: true,
@@ -84,7 +82,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
             name: "warded",
             small: true,
-            update: (v) => (this.warded = v),
+            update: v => (this.warded = v),
             value: !!this.warded,
           },
           {
@@ -93,7 +91,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Ability.EXECUTION.usesReaction.label",
             name: "uses-reaction",
             small: true,
-            update: (v) => (this.usesReaction = v),
+            update: v => (this.usesReaction = v),
             value: !!this.usesReaction,
           },
           {
@@ -101,7 +99,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Ability.EXECUTION.payCosts.label",
             name: "pay-costs",
             small: true,
-            update: (v) => (this.payCosts = v),
+            update: v => (this.payCosts = v),
             value: !!this.payCosts,
           },
         ];
@@ -111,7 +109,7 @@ export default function AbilityExecutionGetInputPart(Base) {
       get requiresCompetence() {
         return (
           super.requiresCompetence ||
-          this.automations.filter((a) => a.requiresCompetence).length !== 0 ||
+          this.automations.filter(a => a.requiresCompetence).length !== 0 ||
           !!this.source.system.overview.proficient ||
           !!this.source.system.overview.fluent ||
           (this.source.system.heightened && !this.flags.noHeighten)
@@ -124,10 +122,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        */
       async #determineCost(stat) {
         if (this.source.system.costs.primary[stat].type === "formula") {
-          const roll = new BaseRoll(
-            this.source.system.costs.primary[stat].formula,
-            this.rollData,
-          );
+          const roll = new BaseRoll(this.source.system.costs.primary[stat].formula, this.rollData);
           await roll.evaluate();
           return roll.total;
         } else {
@@ -140,8 +135,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        */
       #modifyCosts() {
         for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
-          this.costs[v.primary] +=
-            v.multiplier * this.source.system.costs.tweaks[k];
+          this.costs[v.primary] += v.multiplier * this.source.system.costs.tweaks[k];
         }
       }
 
@@ -151,10 +145,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @returns {boolean}
        */
       #shouldShowCostPrompt(stat) {
-        return (
-          this.source.system.costs.primary[stat].type === "description" &&
-          !this.options[`no${ucFirst(stat)}`]
-        );
+        return this.source.system.costs.primary[stat].type === "description" && !this.options[`no${ucFirst(stat)}`];
       }
 
       /**
@@ -170,9 +161,7 @@ export default function AbilityExecutionGetInputPart(Base) {
                 _loc("TERIOCK.COSTS.Long.primary", {
                   key: v.label,
                 }),
-                await TeriockTextEditor.enrichHTML(
-                  this.source.system.costs.primary[k].description,
-                ),
+                await TeriockTextEditor.enrichHTML(this.source.system.costs.primary[k].description),
                 k,
               ),
             );
@@ -181,10 +170,9 @@ export default function AbilityExecutionGetInputPart(Base) {
           }
         }
         if (this.canHeighten) {
-          const heightenDescription = await TeriockTextEditor.enrichHTML(
-            this.source.system.heightened,
-            { relativeTo: this.source },
-          );
+          const heightenDescription = await TeriockTextEditor.enrichHTML(this.source.system.heightened, {
+            relativeTo: this.source,
+          });
           dialogs.push(
             createDialogFieldset(
               _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened"),
@@ -204,10 +192,7 @@ export default function AbilityExecutionGetInputPart(Base) {
               });
           await TeriockDialog.prompt({
             window: {
-              icon: makeIconClass(
-                TERIOCK.display.icons.document.ability,
-                "title",
-              ),
+              icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"),
               title: title,
             },
             content: dialogs.join(""),
@@ -217,15 +202,11 @@ export default function AbilityExecutionGetInputPart(Base) {
               callback: (_event, button) => {
                 for (const k of Object.keys(TERIOCK.config.cost.primary.keys)) {
                   if (this.#shouldShowCostPrompt(k)) {
-                    this.costs[k] = Number(
-                      button.form.elements.namedItem(k).value,
-                    );
+                    this.costs[k] = Number(button.form.elements.namedItem(k).value);
                   }
                 }
                 if (this.canHeighten) {
-                  this.heightened = Number(
-                    button.form.elements.namedItem("heightened").value,
-                  );
+                  this.heightened = Number(button.form.elements.namedItem("heightened").value);
                   this.costs.mp += this.heightened;
                 }
               },
@@ -237,7 +218,7 @@ export default function AbilityExecutionGetInputPart(Base) {
 
       /** @inheritDoc */
       async _getInput() {
-        let out = await super._getInput();
+        const out = await super._getInput();
         await this._getCostInput();
         return out;
       }
@@ -247,11 +228,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @return {Promise<void>}
        */
       async _getTargets() {
-        if (
-          this.source.system.targets.size === 1 &&
-          this.source.system.targets.has("self") &&
-          this.executor
-        ) {
+        if (this.source.system.targets.size === 1 && this.source.system.targets.has("self") && this.executor) {
           this.targets.add(this.executor);
         } else {
           for (const target of game.user.targets) {

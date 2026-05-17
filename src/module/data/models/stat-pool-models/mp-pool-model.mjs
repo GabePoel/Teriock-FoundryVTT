@@ -3,7 +3,7 @@ import BaseStatPoolModel from "./base-stat-pool-model.mjs";
 
 export default class MpPoolModel extends BaseStatPoolModel {
   get callback() {
-    return /** @param {number} amount */ async (amount) => {
+    return /** @param {number} amount */ async amount => {
       await this.actor?.system.takeRevitalizing(amount);
     };
   }

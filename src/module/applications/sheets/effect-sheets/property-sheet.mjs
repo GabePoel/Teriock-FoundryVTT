@@ -1,5 +1,5 @@
 import { documentConfig } from "../../../constants/config/document-config.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import BaseEffectSheet from "./base-effect-sheet.mjs";
@@ -10,15 +10,9 @@ import BaseEffectSheet from "./base-effect-sheet.mjs";
  * @extends {BaseEffectSheet}
  * @mixes WikiButtonSheet
  */
-export default class PropertySheet extends mix(
-  BaseEffectSheet,
-  mixins.WikiButtonSheetMixin,
-) {
+export default class PropertySheet extends mixClasses(BaseEffectSheet, mixins.WikiButtonSheetMixin) {
   /** @inheritDoc */
-  static BARS = [
-    "teriock/sheets/effects/property/status-bar",
-    "teriock/sheets/shared/bars/consumable-bar",
-  ];
+  static BARS = ["teriock/sheets/effects/property/status-bar", "teriock/sheets/shared/bars/consumable-bar"];
 
   /**
    * @inheritDoc
@@ -40,11 +34,6 @@ export default class PropertySheet extends mix(
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.isEditable) return;
-    this._connectBuildContextMenu(
-      ".form-type-box",
-      TERIOCK.config.effect.form,
-      "system.form",
-      "click",
-    );
+    this._connectBuildContextMenu(".form-type-box", TERIOCK.config.effect.form, "system.form", "click");
   }
 }

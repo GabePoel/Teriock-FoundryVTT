@@ -33,11 +33,7 @@ export default class MacroActivation extends BaseActivation {
       {
         activation: this,
         actor:
-          this.actors.length > 0
-            ? this.actors[0]
-            : TeriockChatMessage.getSpeakerActor(
-                TeriockChatMessage.getSpeaker(),
-              ),
+          this.actors.length > 0 ? this.actors[0] : TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker()),
         actors: this.actors,
         event: this.event,
         message: this.document,

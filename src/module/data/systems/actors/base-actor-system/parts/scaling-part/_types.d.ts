@@ -2,7 +2,7 @@ declare global {
   namespace Teriock.Models {
     export type ActorScalingPartData = {
       /** <base> Presence */
-      presence: Teriock.Foundry.BarField & {
+      presence: Foundry.BarField & {
         /** <derived> Too much presence being used */
         overflow: boolean;
       };

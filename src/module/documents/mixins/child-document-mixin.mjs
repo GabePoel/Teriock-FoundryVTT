@@ -1,28 +1,23 @@
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { TeriockChatMessage } from "../_module.mjs";
 import { HierarchyDocumentMixin } from "./_module.mjs";
 import UsableDocumentMixin from "./usable-document-mixin.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
- * @param {typeof CommonDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function ChildDocumentMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
-     * @extends {ClientDocument}
+     * @mixes BaseDocument
      * @mixes CommonDocument
      * @mixes HierarchyDocument
      * @mixes PanelDocument
      * @mixes UsableDocument
      * @mixin
      */
-    class ChildDocument extends mix(
-      Base,
-      UsableDocumentMixin,
-      HierarchyDocumentMixin,
-    ) {
+    class ChildDocument extends mixClasses(Base, UsableDocumentMixin, HierarchyDocumentMixin) {
       /** @inheritDoc */
       static get documentMetadata() {
         return Object.assign(super.documentMetadata, { child: true });
@@ -47,11 +42,7 @@ export default function ChildDocumentMixin(Base) {
        * @returns {boolean}
        */
       get isSuppressed() {
-        return (
-          super.isSuppressed ||
-          this.system.makeSuppressed ||
-          this.dependee?.active === false
-        );
+        return super.isSuppressed || this.system.makeSuppressed || this.dependee?.active === false;
       }
 
       /** @inheritDoc */
@@ -112,10 +103,7 @@ export default function ChildDocumentMixin(Base) {
         copy._stats.duplicateSource = this.uuid;
         let copyDocument;
         if (this.isEmbedded) {
-          copyDocument = await this.parent.createEmbeddedDocuments(
-            this.documentName,
-            [copy],
-          );
+          copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
         } else if (this.inCompendium) {
           copyDocument = await this.constructor.create(copy, {
             pack: this.compendium.collection,

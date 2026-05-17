@@ -1,10 +1,24 @@
-<div class="character-sidebar sidebar-collapser theme-dark {{#if (not sidebarOpen)}}collapsed{{/if}}">
+<div
+  class="
+    character-sidebar
+    sidebar-collapser
+    theme-dark
+    {{#if (not sidebarOpen)}}
+      collapsed
+    {{/if}}
+  "
+>
   <div class="character-sidebar-container">
     <div class="character-intro-box">
       <div
-        class="character-avatar timage {{#if
-          (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}ring{{/if}}"
-        data-src="{{img}}"
+        class='
+          character-avatar
+          timage
+          {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
+            ring
+          {{/if}}
+        '
+        data-src="{{ img }}"
       >
         <div class="character-avatar-shadow">
           <div class="character-avatar-buttons take-harm-button">
@@ -12,19 +26,16 @@
               <div
                 class="thover"
                 {{#if document.prototypeToken.ring.enabled}}
-                data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringEnabled"}}"
+                  data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringEnabled"}}"
                 {{else}}
-                data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringDisabled"}}"
+                  data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringDisabled"}}"
                 {{/if}}
                 data-action="toggleRing"
               >
-                {{makeIcon
-                  (lookup TERIOCK.display.icons.ui (ifThen document.prototypeToken.ring.enabled "enabled" "disabled"))
-                  "light"
-                }}
+                {{makeIcon (lookup TERIOCK.display.icons.ui (ifThen document.prototypeToken.ring.enabled "enabled" "disabled")) "light"}}
               </div>
             {{/if}}
-            <div class="thover" data-tooltip="{{avatarTooltip}}" data-action="switchImage">
+            <div class="thover" data-tooltip="{{ avatarTooltip }}" data-action="switchImage">
               {{makeIcon avatarIcon "light"}}
             </div>
           </div>
@@ -32,10 +43,10 @@
         <img
           class="character-avatar-img"
           src="{{path document avatarImagePath}}"
-          data-edit="{{avatarImagePath}}"
+          data-edit="{{ avatarImagePath }}"
           data-action="editImage"
-          alt="{{name}}"
-        >
+          alt="{{ name }}"
+        />
         <div class="character-avatar-background">
           {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
             <div class="character-avatar-token-circle inner"></div>
@@ -43,8 +54,14 @@
           {{/if}}
         </div>
       </div>
-      <div data-debug="true" class="character-name {{#if
-        (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}ring{{/if}}"
+      <div
+        class='
+          character-name
+          {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
+            ring
+          {{/if}}
+        '
+        data-debug="true"
       >
         {{formInput
           fields.name
@@ -65,7 +82,7 @@
         </div>
         <div
           class="character-shortbox character-rank-box"
-          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
         >
           {{numberInput
             system.scaling.rank
@@ -79,9 +96,9 @@
         <div
           class="character-shortbox character-proficiency-box"
           {{#if system.scaling.brScale}}
-          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
+            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
           {{else}}
-          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
           {{/if}}
         >
           {{numberInput
@@ -96,9 +113,9 @@
         <div
           class="character-shortbox character-fluency-box"
           {{#if system.scaling.brScale}}
-          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
+            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
           {{else}}
-          data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
           {{/if}}
         >
           {{numberInput

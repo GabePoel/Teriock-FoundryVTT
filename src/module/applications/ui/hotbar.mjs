@@ -44,11 +44,7 @@ export default class TeriockHotbar extends Hotbar {
         const macro = this.#getMacroForSlot(li);
         if (macro.getFlag("teriock", "macroType") === "useGeneral") {
           const actor = game.actors.default;
-          const doc = await findBestDocument(
-            macro.getFlag("teriock", "macroLookupKey"),
-            actor,
-            { localOnly: false },
-          );
+          const doc = await findBestDocument(macro.getFlag("teriock", "macroLookupKey"), actor, { localOnly: false });
           await doc?.sheet.render(true);
         } else {
           const uuid = macro.getFlag("teriock", "macroDocumentUuid");
@@ -56,11 +52,9 @@ export default class TeriockHotbar extends Hotbar {
           await doc?.sheet.render(true);
         }
       },
-      visible: (li) => {
+      visible: li => {
         const macro = this.#getMacroForSlot(li);
-        return ["useGeneral", "useLinked"].includes(
-          macro.getFlag("teriock", "macroType"),
-        );
+        return ["useGeneral", "useLinked"].includes(macro.getFlag("teriock", "macroType"));
       },
     });
     return options;

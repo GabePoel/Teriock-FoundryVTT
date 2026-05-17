@@ -51,9 +51,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
   };
 
   documents.sort((a, b) =>
-    foundry.utils
-      .getProperty(a, options.nameKey)
-      .localeCompare(foundry.utils.getProperty(b, options.nameKey)),
+    foundry.utils.getProperty(a, options.nameKey).localeCompare(foundry.utils.getProperty(b, options.nameKey)),
   );
 
   if (!options.multi && options.checked && options.checked.length > 0) {
@@ -69,29 +67,20 @@ export async function selectDocumentsDialog(documents, options = {}) {
       name: foundry.utils.getProperty(doc, options.nameKey),
       rescale: doc.rescale || false,
       text: "",
-      tooltip: options.tooltipAsync
-        ? TeriockTextEditor.loadingPanelHTML
-        : undefined,
-      uuid:
-        options.tooltipAsync || options.openable
-          ? foundry.utils.getProperty(doc, options.tooltipUUID)
-          : undefined,
+      tooltip: options.tooltipAsync ? TeriockTextEditor.loadingPanelHTML : undefined,
+      uuid: options.tooltipAsync || options.openable ? foundry.utils.getProperty(doc, options.tooltipUUID) : undefined,
     };
     if (options.textKey) {
-      context.documents[id].text =
-        foundry.utils.getProperty(doc, options.textKey) || "";
+      context.documents[id].text = foundry.utils.getProperty(doc, options.textKey) || "";
     }
     if (options.tooltipKey && options.tooltip && !options.tooltipAsync) {
-      context.documents[id].tooltip = foundry.utils.getProperty(
-        doc,
-        options.tooltipKey,
-      );
+      context.documents[id].tooltip = foundry.utils.getProperty(doc, options.tooltipKey);
     }
   }
 
   if (options.tooltip && !options.tooltipKey && !options.tooltipAsync) {
     await Promise.all(
-      documents.map(async (doc) => {
+      documents.map(async doc => {
         const id = foundry.utils.getProperty(doc, options.idKey);
         context.documents[id].tooltip = await doc.toTooltip?.();
       }),
@@ -108,7 +97,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
   });
 
   const selected = await sheet.select();
-  if (selected) return selected.map((id) => idToDoc.get(id)).filter(Boolean);
+  if (selected) return selected.map(id => idToDoc.get(id)).filter(Boolean);
   else return [];
 }
 

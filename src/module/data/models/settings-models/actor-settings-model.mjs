@@ -1,7 +1,4 @@
-import {
-  blockGaplessField,
-  blockSizeField,
-} from "../../fields/helpers/builders.mjs";
+import { blockGaplessField, blockSizeField } from "../../fields/helpers/builders.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;

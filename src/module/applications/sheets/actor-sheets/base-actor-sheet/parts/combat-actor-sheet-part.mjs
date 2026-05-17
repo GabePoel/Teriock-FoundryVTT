@@ -4,7 +4,7 @@ import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -44,10 +44,7 @@ export default (Base) =>
      */
     static async #onSelectAttacker() {
       const attacker = await selectDocumentDialog(
-        [
-          ...this.document.equipment.filter((e) => e.system.equipped),
-          ...this.document.bodyParts,
-        ].filter((a) => a.active),
+        [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
         {
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint"),
           label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.label"),
@@ -69,10 +66,7 @@ export default (Base) =>
      */
     static async #onSelectBlocker() {
       const attacker = await selectDocumentDialog(
-        [
-          ...this.document.equipment.filter((e) => e.system.equipped),
-          ...this.document.bodyParts,
-        ].filter((a) => a.active),
+        [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
         {
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint"),
           label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.label"),

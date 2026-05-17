@@ -63,8 +63,8 @@ const triggerConfig = {
   },
   impact: {
     label: "TERIOCK.TRIGGERS.Impact.label",
-    choices: objectMap(impactConfig, (c) => c.take, {
-      filter: (c) => !c?.hidden,
+    choices: objectMap(impactConfig, c => c.take, {
+      filter: c => !c?.hidden,
     }),
   },
   mount: {

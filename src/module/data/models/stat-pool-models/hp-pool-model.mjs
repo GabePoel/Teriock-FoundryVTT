@@ -3,7 +3,7 @@ import BaseStatPoolModel from "./base-stat-pool-model.mjs";
 
 export default class HpPoolModel extends BaseStatPoolModel {
   get callback() {
-    return async (amount) => {
+    return async amount => {
       const criticallyWounded = this.actor?.statuses.has("criticallyWounded");
       await this.actor?.system.takeHealing(amount);
       if (!criticallyWounded) await this.actor?.system.takeAwaken();

@@ -1,8 +1,5 @@
-import {
-  selectDocumentDialog,
-  selectDocumentsDialog,
-} from "../../applications/dialogs/select-document-dialog.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { selectDocumentDialog, selectDocumentsDialog } from "../../applications/dialogs/select-document-dialog.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -17,11 +14,7 @@ const { User } = foundry.documents;
  * @implements {Teriock.Documents.UserInterface}
  * @property {Readonly<Set<TeriockToken>>} targets
  */
-export default class TeriockUser extends mix(
-  User,
-  mixins.BaseDocumentMixin,
-  mixins.EmbedCardDocumentMixin,
-) {
+export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMixin, mixins.EmbedCardDocumentMixin) {
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, { img: this.avatar });
@@ -34,9 +27,7 @@ export default class TeriockUser extends mix(
    * @returns {Set<TeriockToken>}
    */
   get visibleTokens() {
-    return new Set(
-      game.canvas?.tokens.placeables.filter((t) => t.isVisible) ?? [],
-    );
+    return new Set(game.canvas?.tokens.placeables.filter(t => t.isVisible) ?? []);
   }
 
   /** @inheritDoc */
@@ -59,7 +50,7 @@ export default class TeriockUser extends mix(
    */
   async selectTargetedToken(options = {}) {
     return selectDocumentDialog(
-      Array.from(this.targets).map((t) => t.document),
+      Array.from(this.targets).map(t => t.document),
       {
         hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.hint",
         imgKey: "texture.src",
@@ -78,7 +69,7 @@ export default class TeriockUser extends mix(
    */
   async selectTargetedTokens(options = {}) {
     return selectDocumentsDialog(
-      Array.from(this.targets).map((t) => t.document),
+      Array.from(this.targets).map(t => t.document),
       {
         hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.hint",
         imgKey: "texture.src",
@@ -96,7 +87,7 @@ export default class TeriockUser extends mix(
    */
   async selectVisibleToken(options = {}) {
     return selectDocumentDialog(
-      Array.from(this.visibleTokens).map((t) => t.document),
+      Array.from(this.visibleTokens).map(t => t.document),
       {
         hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.hint",
         imgKey: "texture.src",
@@ -115,7 +106,7 @@ export default class TeriockUser extends mix(
    */
   async selectVisibleTokens(options = {}) {
     return selectDocumentsDialog(
-      Array.from(this.visibleTokens).map((t) => t.document),
+      Array.from(this.visibleTokens).map(t => t.document),
       {
         hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.hint",
         imgKey: "texture.src",

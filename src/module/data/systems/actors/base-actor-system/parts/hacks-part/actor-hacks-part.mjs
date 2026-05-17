@@ -1,15 +1,12 @@
 import { hackConfig } from "../../../../../../constants/config/hack-config.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import {
-  initialBar,
-  initialSchema,
-} from "../../../../../fields/helpers/initializers.mjs";
+import { initialBar, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
 
 /**
  * Actor data model mixin that handles hacks.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -20,9 +17,7 @@ export default (Base) => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          hacks: new initialSchema(
-            objectMap(hackConfig, (conf) => initialBar({ max: conf.max })),
-          ),
+          hacks: new initialSchema(objectMap(hackConfig, conf => initialBar({ max: conf.max }))),
         });
       }
 

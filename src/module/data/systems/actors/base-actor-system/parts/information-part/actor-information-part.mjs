@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Actor data model mixin that handles display.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}

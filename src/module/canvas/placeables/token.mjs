@@ -13,17 +13,11 @@ export default class TeriockToken extends Token {
   async _drawEffects() {
     await super._drawEffects();
     const promises = [];
-    if (
-      this.document.hasStatusEffect("encumbered") &&
-      this.document?.actor?.system.encumbranceLevel > 0
-    ) {
+    if (this.document.hasStatusEffect("encumbered") && this.document?.actor?.system.encumbranceLevel > 0) {
       promises.push(this._drawEffect(getImage("conditions", "Encumbered")));
     }
     let overlayImg;
-    if (
-      this.document.hasStatusEffect("down") ||
-      this.document.hasStatusEffect("unconscious")
-    ) {
+    if (this.document.hasStatusEffect("down") || this.document.hasStatusEffect("unconscious")) {
       overlayImg = "icons/svg/unconscious.svg";
     }
     if (this.document.hasStatusEffect("criticallyWounded")) {

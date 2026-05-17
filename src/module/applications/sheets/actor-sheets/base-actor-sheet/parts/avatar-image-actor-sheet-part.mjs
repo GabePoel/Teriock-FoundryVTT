@@ -2,7 +2,7 @@
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @property {Teriock.Sheet.BaseActorSheetSettings} settings
@@ -35,8 +35,7 @@ export default (Base) =>
      */
     static async #onToggleRing() {
       await this.document.update({
-        "prototypeToken.ring.enabled":
-          !this.document.prototypeToken.ring.enabled,
+        "prototypeToken.ring.enabled": !this.document.prototypeToken.ring.enabled,
       });
     }
 

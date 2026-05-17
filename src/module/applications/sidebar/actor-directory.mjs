@@ -6,6 +6,4 @@ const { ActorDirectory } = foundry.applications.sidebar.tabs;
  * @extends {ActorDirectory}
  * @mixes Sidebar
  */
-export default class TeriockActorDirectory extends SidebarMixin(
-  ActorDirectory,
-) {}
+export default class TeriockActorDirectory extends SidebarMixin(ActorDirectory) {}

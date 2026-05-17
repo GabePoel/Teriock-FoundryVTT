@@ -5,7 +5,7 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
  * Species panel part.
  * @param {typeof SpeciesSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @mixin

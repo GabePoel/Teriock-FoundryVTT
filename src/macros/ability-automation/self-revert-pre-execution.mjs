@@ -1,23 +1,18 @@
 const transformationLevels = TERIOCK.config.transformation.level;
-const chosenTransformationLevel = await tm.dialogs.selectDialog(
-  transformationLevels,
-  {
-    hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
-    hintHtml: TERIOCK.content.conditions.transformed,
-    hintTitle: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle"),
-    initial: "minor",
-    label: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.label"),
-    other: true,
-    title: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.title"),
-  },
-);
+const chosenTransformationLevel = await tm.dialogs.selectDialog(transformationLevels, {
+  hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
+  hintHtml: TERIOCK.content.conditions.transformed,
+  hintTitle: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle"),
+  initial: "minor",
+  label: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.label"),
+  other: true,
+  title: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.title"),
+});
 let dc = "none";
 if (chosenTransformationLevel === "minor") dc = 6;
 if (chosenTransformationLevel === "full") dc = 12;
 if (chosenTransformationLevel === "greater") dc = 18;
-const activations = scope.execution.activations.filter(
-  (a) => a.type === "feat" && a.options.attribute === "int",
-);
+const activations = scope.execution.activations.filter(a => a.type === "feat" && a.options.attribute === "int");
 if (typeof dc === "number") {
   for (const a of activations) {
     a._source.options.threshold = `${dc - 2 * scope.execution.heightened}`;

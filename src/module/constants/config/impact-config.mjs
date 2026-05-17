@@ -5,8 +5,7 @@ import { icons } from "../display/icons.mjs";
 export const impactConfig = {
   damage: {
     aliases: ["dmg"],
-    apply: async (actor, amt, options) =>
-      await actor?.system.takeDamage(amt, options),
+    apply: async (actor, amt, options) => await actor?.system.takeDamage(amt, options),
     deal: "TERIOCK.EFFECTS.Impacts.damage.deal",
     icon: icons.effect.damage,
     label: "TERIOCK.EFFECTS.Impacts.damage.label",
@@ -15,8 +14,7 @@ export const impactConfig = {
     take: "TERIOCK.EFFECTS.Impacts.damage.take",
   },
   drain: {
-    apply: async (actor, amt, options) =>
-      await actor?.system.takeDrain(amt, options),
+    apply: async (actor, amt, options) => await actor?.system.takeDrain(amt, options),
     deal: "TERIOCK.EFFECTS.Impacts.drain.deal",
     icon: icons.effect.drain,
     label: "TERIOCK.EFFECTS.Impacts.drain.label",
@@ -54,7 +52,7 @@ export const impactConfig = {
     deal: "TERIOCK.EFFECTS.Impacts.setTempHp.deal",
     icon: icons.stat.hp,
     label: "TERIOCK.EFFECTS.Impacts.setTempHp.label",
-    reverse: async (actor) => await actor?.system.takeSetTempHp(0),
+    reverse: async actor => await actor?.system.takeSetTempHp(0),
     take: "TERIOCK.EFFECTS.Impacts.setTempHp.take",
   },
   setTempMp: {
@@ -63,7 +61,7 @@ export const impactConfig = {
     deal: "TERIOCK.EFFECTS.Impacts.setTempMp.deal",
     icon: icons.stat.mp,
     label: "TERIOCK.EFFECTS.Impacts.setTempMp.label",
-    reverse: async (actor) => await actor?.system.takeSetTempHp(0),
+    reverse: async actor => await actor?.system.takeSetTempHp(0),
     take: "TERIOCK.EFFECTS.Impacts.setTempMp.take",
   },
   gainTempHp: {
@@ -90,8 +88,7 @@ export const impactConfig = {
     label: "TERIOCK.EFFECTS.Impacts.sleep.label",
     deal: "TERIOCK.EFFECTS.Impacts.sleep.deal",
     take: "TERIOCK.EFFECTS.Impacts.sleep.take",
-    reverse: async (actor) =>
-      await actor?.toggleStatusEffect("asleep", { active: false }),
+    reverse: async actor => await actor?.toggleStatusEffect("asleep", { active: false }),
   },
   hide: {
     apply: async (actor, amt) => await actor?.system.takeHide(amt),
@@ -99,7 +96,7 @@ export const impactConfig = {
     icon: icons.ui.hide,
     label: "TERIOCK.EFFECTS.Impacts.hide.label",
     nullable: true,
-    reverse: async (actor) => await actor?.system.takeHide(null),
+    reverse: async actor => await actor?.system.takeHide(null),
     take: "TERIOCK.EFFECTS.Impacts.hide.take",
   },
   perceive: {
@@ -108,7 +105,7 @@ export const impactConfig = {
     icon: icons.ui.show,
     label: "TERIOCK.EFFECTS.Impacts.perceive.label",
     nullable: true,
-    reverse: async (actor) => await actor?.system.takePerceive(null),
+    reverse: async actor => await actor?.system.takePerceive(null),
     take: "TERIOCK.EFFECTS.Impacts.perceive.take",
   },
   kill: {
@@ -116,8 +113,7 @@ export const impactConfig = {
     deal: "TERIOCK.EFFECTS.Impacts.kill.deal",
     icon: icons.effect.kill,
     label: "TERIOCK.EFFECTS.Impacts.kill.label",
-    reverse: async (actor) =>
-      await actor?.toggleStatusEffect("dead", { active: false }),
+    reverse: async actor => await actor?.toggleStatusEffect("dead", { active: false }),
     take: "TERIOCK.EFFECTS.Impacts.kill.take",
   },
   pay: {

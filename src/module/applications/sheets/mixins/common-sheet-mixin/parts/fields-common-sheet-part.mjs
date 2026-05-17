@@ -3,7 +3,7 @@ import { updateDialog } from "../../../../dialogs/_module.mjs";
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   //noinspection JSUnresolvedReference
   return (
     /**
@@ -50,7 +50,7 @@ export default (Base) => {
         if (this.isEditable) {
           await updateDialog(
             this.document,
-            target.dataset.paths.split(" ").map((p) => p.trim()),
+            target.dataset.paths.split(" ").map(p => p.trim()),
             target.dataset.title,
             target.dataset.icon,
           );
@@ -65,9 +65,7 @@ export default (Base) => {
        */
       static async #onUpdateUnit(_event, target) {
         if (!this.isEditable) return;
-        await foundry.utils
-          .getProperty(this.document, target.dataset.path)
-          .updateDialog();
+        await foundry.utils.getProperty(this.document, target.dataset.path).updateDialog();
       }
 
       /** @inheritDoc */
@@ -84,14 +82,11 @@ export default (Base) => {
       _setupChangeHandlers() {
         // Change inputs
         this.element.querySelectorAll(".teriock-change-input").forEach(
-          /** @param {HTMLElement} el */ (el) => {
+          /** @param {HTMLElement} el */ el => {
             const { name } = el.attributes;
             if (!name?.value) return;
-            el.addEventListener("change", async (e) => {
-              const existing = foundry.utils.getProperty(
-                this.document,
-                name.value,
-              );
+            el.addEventListener("change", async e => {
+              const existing = foundry.utils.getProperty(this.document, name.value);
               const copy = foundry.utils.deepClone(existing) || [];
               copy[el.dataset.index][el.dataset.part] = e.currentTarget.value;
               await this.document.update({ [name.value]: copy });
@@ -101,13 +96,10 @@ export default (Base) => {
 
         // Remove change buttons
         this.element.querySelectorAll(".teriock-remove-change-button").forEach(
-          /** @param {HTMLButtonElement} button */ (button) => {
+          /** @param {HTMLButtonElement} button */ button => {
             const { name } = button.attributes;
             button.addEventListener("click", async () => {
-              const existing = foundry.utils.getProperty(
-                this.document,
-                name.value,
-              );
+              const existing = foundry.utils.getProperty(this.document, name.value);
               const copy = foundry.utils.deepClone(existing) || [];
               copy.splice(button.dataset.index, 1);
               await this.document.update({ [name.value]: copy });
@@ -121,10 +113,10 @@ export default (Base) => {
        * Configures change and click handlers for update inputs, select elements, and checkboxes.
        */
       _setupUpdateHandlers() {
-        this.element.querySelectorAll(".teriock-update-input").forEach((el) => {
+        this.element.querySelectorAll(".teriock-update-input").forEach(el => {
           const name = el.getAttribute("name");
           if (!name) return;
-          el.addEventListener("change", async (e) => {
+          el.addEventListener("change", async e => {
             const target = /** @type {HTMLFormElement} */ e.currentTarget;
             const value = target.value ?? target.getAttribute("data-value");
             await this.document.update({ [name]: value });

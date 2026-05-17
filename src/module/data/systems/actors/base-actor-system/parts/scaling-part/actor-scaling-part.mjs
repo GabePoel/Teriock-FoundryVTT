@@ -1,9 +1,5 @@
 import { config } from "../../../../../../constants/_module.mjs";
-import {
-  initialBoolean,
-  initialNumber,
-  initialSchema,
-} from "../../../../../fields/helpers/initializers.mjs";
+import { initialBoolean, initialNumber, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -11,7 +7,7 @@ const { fields } = foundry.data;
  * Actor data model that handles scaling.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -47,12 +43,12 @@ export default (Base) => {
         const data = {};
         const ranks = this.parent.ranks;
         for (const c of Object.keys(TERIOCK.index.classes)) {
-          const count = ranks.filter((r) => r.system.className === c).length;
+          const count = ranks.filter(r => r.system.className === c).length;
           data[`rank.${c}`] = count;
           data[`rank.${c.slice(0, 3).toLowerCase()}`] = count;
         }
         for (const a of Object.keys(TERIOCK.config.rank)) {
-          const count = ranks.filter((r) => r.system.archetype === a).length;
+          const count = ranks.filter(r => r.system.archetype === a).length;
           data[`rank.${a}`] = count;
           data[`rank.${a.slice(0, 3).toLowerCase()}`] = count;
         }
@@ -65,9 +61,7 @@ export default (Base) => {
        */
       #getSpeciesRollData() {
         const data = {};
-        for (const s of this.parent.species.filter(
-          (s) => s.active && s.system.identifier,
-        )) {
+        for (const s of this.parent.species.filter(s => s.active && s.system.identifier)) {
           data[`species.${s.system.identifier}`] = 1;
         }
         return data;
@@ -98,29 +92,17 @@ export default (Base) => {
 
       /** @inheritDoc */
       prepareBaseData() {
-        this.presence.max = Math.max(
-          config.character.defaults.maxPresence,
-          Math.floor(1 + (this.scaling.lvl + 1) / 5),
-        );
-        this.scaling.br = Math.max(
-          0,
-          ...this.parent.species.map((s) => s.system.br),
-        );
-        this.scaling.scale = this.scaling.brScale
-          ? this.scaling.br
-          : this.scaling.lvl;
+        this.presence.max = Math.max(config.character.defaults.maxPresence, Math.floor(1 + (this.scaling.lvl + 1) / 5));
+        this.scaling.br = Math.max(0, ...this.parent.species.map(s => s.system.br));
+        this.scaling.scale = this.scaling.brScale ? this.scaling.br : this.scaling.lvl;
         this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
         this.scaling.p = Math.max(
           TERIOCK.config.scaling.minP,
-          Math.floor(
-            TERIOCK.config.scaling.minP + 1 + (this.scaling.scale - 7) / 10,
-          ),
+          Math.floor(TERIOCK.config.scaling.minP + 1 + (this.scaling.scale - 7) / 10),
         );
         this.scaling.f = Math.max(
           TERIOCK.config.scaling.minF,
-          Math.floor(
-            TERIOCK.config.scaling.minF + (this.scaling.scale - 2) / 5,
-          ),
+          Math.floor(TERIOCK.config.scaling.minF + (this.scaling.scale - 2) / 5),
         );
         super.prepareBaseData();
       }

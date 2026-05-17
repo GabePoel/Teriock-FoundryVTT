@@ -19,9 +19,7 @@ export default async function setStatDiceDialog(pool) {
     },
   );
   const canToggle = pool.parent[`_canToggle${ucFirst(pool.stat)}Dice`];
-  const tooltip = !canToggle
-    ? _loc("TERIOCK.SYSTEMS.StatGiver.DIALOG.cantToggle")
-    : "";
+  const tooltip = !canToggle ? _loc("TERIOCK.SYSTEMS.StatGiver.DIALOG.cantToggle") : "";
   const dataset = {};
   if (tooltip.length > 0) {
     dataset.tooltip = tooltip;
@@ -42,14 +40,8 @@ export default async function setStatDiceDialog(pool) {
     modal: true,
     ok: {
       callback: async (_event, button) => {
-        const formulaInput =
-          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
-            "formula",
-          );
-        const disabledInput =
-          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
-            "disabled",
-          );
+        const formulaInput = /** @type {HTMLInputElement} */ button.form.elements.namedItem("formula");
+        const disabledInput = /** @type {HTMLInputElement} */ button.form.elements.namedItem("disabled");
         const formula = formulaInput.value;
         const disabled = disabledInput.checked;
         if (formula !== pool.formula || disabled !== pool.disabled) {

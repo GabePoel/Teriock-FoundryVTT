@@ -2,13 +2,12 @@ import { resolveDocuments } from "../../helpers/resolve.mjs";
 
 /**
  * Document mixin to support retrieving other documents.
- * @param {typeof CommonDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function RetrievalDocumentMixin(Base) {
-  //noinspection JSValidateTypes,JSUnusedGlobalSymbols
   return (
     /**
-     * @extends CommonDocument
+     * @mixes BaseDocument
      * @mixin
      */
     class RetrievalDocument extends Base {

@@ -1,10 +1,7 @@
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
-import {
-  migrateKey,
-  migrateUuid,
-} from "../../../shared/migrations/source-migrations.mjs";
+import { migrateKey, migrateUuid } from "../../../shared/migrations/source-migrations.mjs";
 import SelectAutomationMixin from "./select-automation-mixin.mjs";
 
 const { fields } = foundry.data;
@@ -17,15 +14,9 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
      * @property {boolean} multi
      * @property {Set<UUID<TeriockDocument>>} uuids
      */
-    class SelectExternalDocumentsAutomation extends mix(
-      Base,
-      SelectAutomationMixin,
-    ) {
+    class SelectExternalDocumentsAutomation extends mixClasses(Base, SelectAutomationMixin) {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.ExternalDocuments",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ExternalDocuments"];
 
       /** @inheritDoc */
       static defineSchema() {
@@ -99,7 +90,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
           expandTables: true,
           ...options,
         });
-        return docs.map((d) => d.uuid);
+        return docs.map(d => d.uuid);
       }
 
       /** @inheritDoc */

@@ -1,6 +1,6 @@
 import { config } from "../../constants/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { findBestDocument } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -20,7 +20,7 @@ const { Actor } = foundry.documents;
  * @mixes RetrievalDocument
  * @mixes PropagationData
  */
-export default class TeriockActor extends mix(
+export default class TeriockActor extends mixClasses(
   Actor,
   mixins.BaseDocumentMixin,
   mixins.CommonDocumentMixin,
@@ -60,12 +60,8 @@ export default class TeriockActor extends mix(
    * @returns {Teriock.Config.SizeEntry}
    */
   static sizeConfig(value) {
-    const minCategoryMaxSize = Math.min(
-      ...config.character.sizes.map((d) => d.max).filter((m) => m >= value),
-    );
-    return foundry.utils.deepClone(
-      config.character.sizes.find((d) => d.max === minCategoryMaxSize),
-    );
+    const minCategoryMaxSize = Math.min(...config.character.sizes.map(d => d.max).filter(m => m >= value));
+    return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
   /** @type Set<UUID<TeriockItem>> */
@@ -107,13 +103,9 @@ export default class TeriockActor extends mix(
   get defaultUser() {
     let selected;
     // See if any user has the actor as a character
-    selected = game.users.active.find(
-      (u) => u.character === this && this.canUserModify(u, "update"),
-    );
+    selected = game.users.active.find(u => u.character === this && this.canUserModify(u, "update"));
     // See if any players have control over the actor
-    selected ??= game.users.active.find(
-      (u) => !u.isActiveGM && this.canUserModify(u, "update"),
-    );
+    selected ??= game.users.active.find(u => !u.isActiveGM && this.canUserModify(u, "update"));
     // If all else fails, fall back to the active GM
     selected ??= game.users.activeGM;
     return selected;
@@ -132,9 +124,7 @@ export default class TeriockActor extends mix(
    * @returns {boolean}
    */
   get isDamaged() {
-    return (
-      this.system.hp.value < this.system.hp.max || this.statuses.has("hacked")
-    );
+    return this.system.hp.value < this.system.hp.max || this.statuses.has("hacked");
   }
 
   /**
@@ -155,9 +145,7 @@ export default class TeriockActor extends mix(
    * @returns {AnyActiveEffect[]}
    */
   get modifiableChildren() {
-    return [...this.validEffects, ...this.items.contents].filter(
-      (c) => !c.isEphemeral && !c.isReference,
-    );
+    return [...this.validEffects, ...this.items.contents].filter(c => !c.isEphemeral && !c.isReference);
   }
 
   /**
@@ -176,11 +164,9 @@ export default class TeriockActor extends mix(
    * @param {boolean} [options.localize]
    */
   _addVirtualStatus(condition, reason, options = {}) {
-    let { localize = true } = options;
+    const { localize = true } = options;
     if (!reason) reason = TERIOCK.reference.conditions[condition];
-    this.system.conditionInformation[condition]?.reasons?.add(
-      localize ? _loc(reason) : reason,
-    );
+    this.system.conditionInformation[condition]?.reasons?.add(localize ? _loc(reason) : reason);
     this.statuses.add(condition);
   }
 
@@ -203,10 +189,7 @@ export default class TeriockActor extends mix(
    * @internal
    */
   _applyActiveEffectsToChildren(phase) {
-    if (
-      !game.teriock.getSetting("nonHierarchicalChanges") ||
-      !this.getSetting("automation.nonHierarchicalChanges")
-    ) {
+    if (!game.teriock.getSetting("nonHierarchicalChanges") || !this.getSetting("automation.nonHierarchicalChanges")) {
       return;
     }
     /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
@@ -277,10 +260,7 @@ export default class TeriockActor extends mix(
         }
       }
       d.overrides ??= {};
-      foundry.utils.mergeObject(
-        d.overrides,
-        foundry.utils.expandObject(overrides),
-      );
+      foundry.utils.mergeObject(d.overrides, foundry.utils.expandObject(overrides));
     }
   }
 
@@ -289,17 +269,12 @@ export default class TeriockActor extends mix(
    * @param {Teriock.System.CompetenceLevel} value
    */
   _applyCompetenceAutomations(value) {
-    const autos = this.validEffects.flatMap((e) =>
-      e.system.activeAutomations.filter(
-        (a) => a?.type === "changeCompetence" && a?.competence.value === value,
-      ),
+    const autos = this.validEffects.flatMap(e =>
+      e.system.activeAutomations.filter(a => a?.type === "changeCompetence" && a?.competence.value === value),
     );
-    const identifiers = new Set(autos.map((a) => a.identifier));
+    const identifiers = new Set(autos.map(a => a.identifier));
     for (const c of this.modifiableChildren) {
-      if (
-        identifiers.has(c.typedIdentifier) &&
-        c.system.competence.raw < value
-      ) {
+      if (identifiers.has(c.typedIdentifier) && c.system.competence.raw < value) {
         c.system.competence.raw = value;
       }
     }
@@ -339,8 +314,7 @@ export default class TeriockActor extends mix(
     const yes = await super._preUpdate(changes, options, user);
     if (yes === false) return false;
 
-    const tokenUpdates =
-      foundry.utils.getProperty(changes, "prototypeToken") || {};
+    const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
     if (foundry.utils.hasProperty(changes, "system.size.raw")) {
       const tokenSize = this.constructor.sizeConfig(changes.size.raw).length;
       if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
@@ -356,8 +330,8 @@ export default class TeriockActor extends mix(
     if (Object.keys(tokenUpdates).length > 0) {
       await Promise.all(
         this.getDependentTokens()
-          .filter((t) => t.id)
-          .map((t) => t.update(foundry.utils.deepClone(tokenUpdates))),
+          .filter(t => t.id)
+          .map(t => t.update(foundry.utils.deepClone(tokenUpdates))),
       );
     }
   }
@@ -368,12 +342,8 @@ export default class TeriockActor extends mix(
    */
   async _processStagedItemCreations() {
     if (!this._stagedItemCreations) return [];
-    const items = await Promise.all(
-      this._stagedItemCreations.map((uuid) => fromUuid(uuid)),
-    );
-    const data = items.map((i) =>
-      game.items.fromCompendium(i, { keepId: true, clearSort: true }),
-    );
+    const items = await Promise.all(this._stagedItemCreations.map(uuid => fromUuid(uuid)));
+    const data = items.map(i => game.items.fromCompendium(i, { keepId: true, clearSort: true }));
     return this.createChildDocuments("Item", Array.from(data));
   }
 
@@ -383,10 +353,7 @@ export default class TeriockActor extends mix(
    */
   async _processStagedItemDeletions() {
     if (!this._stagedItemDeletions) return [];
-    return this.deleteChildDocuments(
-      "Item",
-      Array.from(this._stagedItemDeletions),
-    );
+    return this.deleteChildDocuments("Item", Array.from(this._stagedItemDeletions));
   }
 
   /**
@@ -394,9 +361,7 @@ export default class TeriockActor extends mix(
    * @returns {Promise<TeriockAbility[]>}
    */
   async allAbilities() {
-    const basicAbilitiesItem = await resolveDocument(
-      game.teriock.packs.essentials.index.getName("Basic Abilities"),
-    );
+    const basicAbilitiesItem = await resolveDocument(game.teriock.packs.essentials.index.getName("Basic Abilities"));
     return [...this.abilities, ...(basicAbilitiesItem?.abilities || [])];
   }
 
@@ -420,9 +385,7 @@ export default class TeriockActor extends mix(
    * @returns {Promise<void>}
    */
   async applyStatusEffects(statusIds) {
-    const effects = await Promise.all(
-      statusIds.map(async (id) => ActiveEffect.fromStatusEffect(id)),
-    );
+    const effects = await Promise.all(statusIds.map(async id => ActiveEffect.fromStatusEffect(id)));
     await this.createEmbeddedDocuments("ActiveEffect", effects, {
       keepId: true,
     });
@@ -434,9 +397,7 @@ export default class TeriockActor extends mix(
   cleanConditionInformation() {
     for (const part of ["arm", "leg"]) {
       const str = `TERIOCK.STATUSES.Hacks.${part}Hack`;
-      if (
-        this.system.conditionInformation.hacked.reasons.has(_loc(`${str}2`))
-      ) {
+      if (this.system.conditionInformation.hacked.reasons.has(_loc(`${str}2`))) {
         this.system.conditionInformation.hacked.reasons.delete(_loc(`${str}1`));
       }
     }
@@ -447,9 +408,7 @@ export default class TeriockActor extends mix(
 
   /** @inheritDoc */
   async getEffectiveChildren() {
-    const children = (await super.getEffectiveChildren()).filter(
-      (c) => c.type !== "ability",
-    );
+    const children = (await super.getEffectiveChildren()).filter(c => c.type !== "ability");
     const abilities = await this.allAbilities();
     children.push(...abilities);
     return children;
@@ -463,9 +422,7 @@ export default class TeriockActor extends mix(
 
   /** @inheritDoc */
   makeVisibleChildrenArray() {
-    return this.modifiableChildren.filter(
-      (c) => !c.metadata.revealable || c.system.revealed || game.user.isGM,
-    );
+    return this.modifiableChildren.filter(c => !c.metadata.revealable || c.system.revealed || game.user.isGM);
   }
 
   /**
@@ -514,14 +471,10 @@ export default class TeriockActor extends mix(
     if (!this.getSetting("automation.wound")) return;
     // Check what states are triggered in normal circumstances
     const hpUncn = this.system.hp.value < 1;
-    const hpCrit =
-      this.system.hp.value ===
-      (this.system.hp.min < 0 ? this.system.hp.min + 1 : 0);
+    const hpCrit = this.system.hp.value === (this.system.hp.min < 0 ? this.system.hp.min + 1 : 0);
     const hpDead = this.system.hp.value === this.system.hp.min;
     const mpUncn = this.system.mp.value < 1;
-    const mpCrit =
-      this.system.mp.value ===
-      (this.system.mp.min < 0 ? this.system.mp.min + 1 : 0);
+    const mpCrit = this.system.mp.value === (this.system.mp.min < 0 ? this.system.mp.min + 1 : 0);
     const mpDead = this.system.mp.value === this.system.mp.min;
 
     // Merge HP and MP
@@ -540,16 +493,10 @@ export default class TeriockActor extends mix(
 
     // Factoring in protections and overriding states, which states would automatically trigger
     if (hpDead && !protDead && !protDown) {
-      this._addVirtualStatuses(
-        ["dead", "down"],
-        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp",
-      );
+      this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp");
     }
     if (mpDead && !protDead && !protDown) {
-      this._addVirtualStatuses(
-        ["dead", "down"],
-        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp",
-      );
+      this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp");
     }
     if (hpCrit && !protCrit && !protDown && !autoDead) {
       this._addVirtualStatuses(
@@ -565,28 +512,16 @@ export default class TeriockActor extends mix(
     }
     if (hpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
       if (this.system.hp.value === 0) {
-        this._addVirtualStatuses(
-          ["unconscious", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp",
-        );
+        this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp");
       } else {
-        this._addVirtualStatuses(
-          ["unconscious", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp",
-        );
+        this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp");
       }
     }
     if (mpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
       if (this.system.mp.value === 0) {
-        this._addVirtualStatuses(
-          ["unconscious", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp",
-        );
+        this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp");
       } else {
-        this._addVirtualStatuses(
-          ["unconscious", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp",
-        );
+        this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp");
       }
     }
 
@@ -605,12 +540,8 @@ export default class TeriockActor extends mix(
    * @returns {Promise<void>}
    */
   async removeStatusEffects(statusIds) {
-    const candidates = statusIds
-      .map((id) => CONFIG.statusEffects[id])
-      .filter(Boolean);
-    const toRemove = candidates
-      .filter((e) => this.effects.get(e?._id))
-      .map((e) => e?._id);
+    const candidates = statusIds.map(id => CONFIG.statusEffects[id]).filter(Boolean);
+    const toRemove = candidates.filter(e => this.effects.get(e?._id)).map(e => e?._id);
     await this.deleteEmbeddedDocuments("ActiveEffect", toRemove);
   }
 
@@ -628,9 +559,7 @@ export default class TeriockActor extends mix(
       ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
         format: {
           actor: this.name,
-          type: TERIOCK.config.document[
-            options.type || "document"
-          ].label.toLowerCase(),
+          type: TERIOCK.config.document[options.type || "document"].label.toLowerCase(),
           name: lookup,
         },
         localize: true,

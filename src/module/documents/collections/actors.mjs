@@ -22,7 +22,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
     if (!actor) actor = this.get(speaker.actor);
     if (!actor) actor = game.user.character;
     if (!actor) {
-      actor = game.canvas?.tokens?.controlled.find((t) => t.actor)?.actor;
+      actor = game.canvas?.tokens?.controlled.find(t => t.actor)?.actor;
     }
     if (!actor) actor = ui?.activeWindow?.document?.actor;
     return actor ?? null;
@@ -33,7 +33,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
    * @returns {TeriockActor[]}
    */
   get pcs() {
-    return game.users.filter((u) => u.character).map((u) => u.character);
+    return game.users.filter(u => u.character).map(u => u.character);
   }
 
   /**
@@ -49,9 +49,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
    * @returns {TeriockActor[]}
    */
   get selected() {
-    const controlled = game.canvas.tokens.controlled
-      .map((t) => t?.actor)
-      .filter(Boolean);
+    const controlled = game.canvas.tokens.controlled.map(t => t?.actor).filter(Boolean);
     if (controlled.length) return controlled;
     return this.default ? [this.default] : [];
   }
@@ -61,11 +59,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
    * @returns {TeriockActor[]}
    */
   get visible() {
-    return (
-      game.scenes.viewed?.tokens
-        .filter((token) => token.actor)
-        .map((token) => token.actor) ?? []
-    );
+    return game.scenes.viewed?.tokens.filter(token => token.actor).map(token => token.actor) ?? [];
   }
 
   /**

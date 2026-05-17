@@ -4,10 +4,7 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 
 export default class ChangeMovementAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ChangeMovement",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeMovement"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -33,8 +30,6 @@ export default class ChangeMovementAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   async getActivations() {
-    return [
-      new ChangeMovementActivation({ movementAction: this.movementAction }),
-    ];
+    return [new ChangeMovementActivation({ movementAction: this.movementAction })];
   }
 }

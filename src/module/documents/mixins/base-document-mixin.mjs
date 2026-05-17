@@ -4,19 +4,20 @@ import { makeIcon } from "../../helpers/utils.mjs";
 
 /**
  * Base mixin.
- * @param {typeof ClientDocument} Base
+ * @param {typeof Foundry.ClientDocument} Base
  * @mixin
  */
 export default function BaseDocumentMixin(Base) {
   return (
     /**
-     * @extends {ClientDocument}
-     * @property {Readonly<boolean>} isOwner
-     * @property {Readonly<boolean>} isEmbedded
+     * @extends {Foundry.ClientDocument}
      * @mixin
      */
     class BaseDocument extends Base {
-      /** @returns {Teriock.Documents.DocumentMetadata} */
+      /**
+       * Metadata that Teriock uses but Foundry doesn't.
+       * @returns {Teriock.Documents.DocumentMetadata}
+       */
       static get documentMetadata() {
         return {
           child: false,
@@ -54,8 +55,8 @@ export default function BaseDocumentMixin(Base) {
             documentName: this.documentName,
             operation,
           });
-          if (!docs) return data.map((_d) => null);
-          return Promise.all(docs.map((d) => fromUuid(d)));
+          if (!docs) return data.map(_d => null);
+          return Promise.all(docs.map(d => fromUuid(d)));
         } else return super.createDocuments(data, operation);
       }
 
@@ -72,7 +73,7 @@ export default function BaseDocumentMixin(Base) {
             documentName: this.documentName,
             operation,
           });
-          if (!docs) return ids.map((_d) => null);
+          if (!docs) return ids.map(_d => null);
           return docs;
         } else return super.deleteDocuments(ids, operation);
       }
@@ -90,8 +91,8 @@ export default function BaseDocumentMixin(Base) {
             documentName: this.documentName,
             operation,
           });
-          if (!docs) return updates.map((_d) => null);
-          return Promise.all(docs.map((d) => fromUuid(d)));
+          if (!docs) return updates.map(_d => null);
+          return Promise.all(docs.map(d => fromUuid(d)));
         } else return super.updateDocuments(updates, operation);
       }
 
@@ -226,9 +227,7 @@ export default function BaseDocumentMixin(Base) {
         return (
           this.isOwner &&
           (this.checkAncestor(doc) || this.master === doc || this === doc) &&
-          (doc?.sheet.isEditable ||
-            !editable ||
-            ["consequence", "imbuement"].includes(this.type))
+          (doc?.sheet.isEditable || !editable || ["consequence", "imbuement"].includes(this.type))
         );
       }
 
@@ -256,6 +255,7 @@ export default function BaseDocumentMixin(Base) {
        * @returns {ContextMenuEntry[]}
        */
       getCardContextMenuEntries(doc) {
+        /** @type {ContextMenuEntry[]} */
         const entries = [];
         if (this.system?.getCardContextMenuEntries) {
           entries.push(...this.system.getCardContextMenuEntries(doc));
@@ -264,17 +264,13 @@ export default function BaseDocumentMixin(Base) {
           ...[
             {
               group: "open",
-              icon: makeIcon(
-                TERIOCK.display.icons.ui.openWindow,
-                "contextMenu",
-              ),
+              icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
               label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
               onClick: async () => {
                 const resolved = await resolveDocument(this.master);
                 if (resolved) await resolved.sheet?.render(true);
               },
-              visible: () =>
-                this.master?.isViewer && doc?.uuid !== this.master?.uuid,
+              visible: () => this.master?.isViewer && doc?.uuid !== this.master?.uuid,
             },
             {
               group: "document",
@@ -283,10 +279,7 @@ export default function BaseDocumentMixin(Base) {
               onClick: async () => await this.deleteDialog({ modal: true }),
               visible: () =>
                 this._checkValidEditorDocument(doc) ||
-                (this.inCompendium &&
-                  !this.compendium.locked &&
-                  !this.parent &&
-                  this.sup?.uuid === doc?.uuid),
+                (this.inCompendium && !this.compendium.locked && !this.parent && this.sup?.uuid === doc?.uuid),
             },
           ],
         );
@@ -295,10 +288,7 @@ export default function BaseDocumentMixin(Base) {
 
       /** @inheritdoc */
       getEmbeddedCollection(embeddedName) {
-        return (
-          this.pseudoCollections[embeddedName] ??
-          super.getEmbeddedCollection(embeddedName)
-        );
+        return this.pseudoCollections[embeddedName] ?? super.getEmbeddedCollection(embeddedName);
       }
 
       /**

@@ -7,17 +7,12 @@
           (concat
             (lookup
               TERIOCK.reference.attributes
-              system.expansion.featSaveAttribute
-            )
-            " "
-          )
-          ""
-        )
-        (lookup TERIOCK.config.ability.expansion system.expansion.type)
-      )
+              system.expansion.featSaveAttribute)
+            " ")
+          "")
+        (lookup TERIOCK.config.ability.expansion system.expansion.type))
       classes=(ifThen
-        editable (concat "expansion-box expansion-box-" system.expansion.type) ""
-      )
+        editable (concat "expansion-box expansion-box-" system.expansion.type) "")
       tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.delivery.label")
       icon=TERIOCK.display.icons.ability.expansion
     }}
@@ -26,10 +21,8 @@
         "<span style='flex: auto;' data-path='system.expansion.range' data-action='updateUnit'>"
         (ifThen
           (eq system.expansion.range.unitType "finite")
-          system.expansion.range.formula system.expansion.range.text
-        )
-        "</span>"
-      )
+          system.expansion.range.formula system.expansion.range.text)
+        "</span>")
       action="updateUnit"
       icon=TERIOCK.display.icons.ability.expansionRange
       tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.range.label")
@@ -39,8 +32,7 @@
       (formInput
         systemFields.expansion.fields.cap
         value=system._source.expansion.cap
-        disabled=(not editable)
-      )
+        disabled=(not editable))
       icon=TERIOCK.display.icons.ability.expansionCap
       unselected=system.expansion.cap
       include=(exists system.expansion.cap)

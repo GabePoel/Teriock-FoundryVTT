@@ -12,7 +12,7 @@
 <ol class="change-config-container" data-changes>
   {{#each changesData as |change i|}}
     {{#with ../fieldDefs as |changeFields|}}
-      <li class="change-container" data-index="{{i}}" data-path="{{../../changesPath}}">
+      <li class="change-container" data-index="{{ i }}" data-path="{{ ../../changesPath }}">
         <div class="change-entry">
           {{formInput
             changeFields.key
@@ -24,8 +24,7 @@
             classes="teriock-change-input"
             dataset=(object
               tooltip=change.key
-              property="key"
-            )
+              property="key")
           }}
           {{formInput
             changeFields.value
@@ -37,8 +36,7 @@
             classes="teriock-change-input"
             dataset=(object
               tooltip=change.value
-              property="value"
-            )
+              property="value")
           }}
         </div>
         <div class="change-config">
@@ -54,8 +52,7 @@
               classes="teriock-change-input"
               dataset=(object
                 tooltip=change.priority
-                property="priority"
-              )
+                property="priority")
             }}
           </div>
           <div class="change-assignment">
@@ -68,8 +65,7 @@
               id=(concat @root/appId ../../changesPath "." i ".type")
               classes="teriock-change-input"
               dataset=(object
-                property="type"
-              )
+                property="type")
             }}
             {{formInput
               changeFields.target
@@ -80,37 +76,15 @@
               id=(concat @root/appId ../../changesPath "." i ".target")
               classes="teriock-change-input"
               dataset=(object
-                property="target"
-              )
+                property="target")
             }}
           </div>
         </div>
         <div class="change-controls">
-          <button
-            class="change-delete"
-            data-action="deleteQualifiedChange"
-            data-tooltip="{{localize "TERIOCK.CHANGES.Actions.deleteChange"}}"
-            data-index="{{i}}"
-            data-path="{{../../changesPath}}"
-            data-value-path="{{../../valuePath}}"
-            {{#each ../additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
-            {{#if (not @root/editable)}}disabled="disabled"{{/if}}
-          >
-            {{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}
-          </button>
+          <button class="change-delete" data-action="deleteQualifiedChange" data-tooltip='{{localize "TERIOCK.CHANGES.Actions.deleteChange"}}' data-index="{{ i }}" data-path="{{ ../../changesPath }}" data-value-path="{{ ../../valuePath }}" {{#each ../additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}</button>
         </div>
       </li>
     {{/with}}
   {{/each}}
-  <button
-    class="add-change-button"
-    data-action="addQualifiedChange"
-    data-path="{{changesPath}}"
-    data-value-path="{{valuePath}}"
-    {{#each additionalAttrs as |value key|}}data-{{key}}="{{value}}" {{/each}}
-    {{#if (not @root/editable)}}disabled="disabled"{{/if}}
-  >
-    {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-    {{localize "TERIOCK.CHANGES.Actions.addChange"}}
-  </button>
+  <button class="add-change-button" data-action="addQualifiedChange" data-path="{{ changesPath }}" data-value-path="{{ valuePath }}" {{#each additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.CHANGES.Actions.addChange"}}</button>
 </ol>

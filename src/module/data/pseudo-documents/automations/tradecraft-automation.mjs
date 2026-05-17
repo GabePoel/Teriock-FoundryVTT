@@ -1,16 +1,9 @@
-import {
-  selectTradecraftDialog,
-  selectTradecraftsDialog,
-} from "../../../applications/dialogs/_module.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { selectTradecraftDialog, selectTradecraftsDialog } from "../../../applications/dialogs/_module.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { TradecraftActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
-import {
-  CompetenceAutomationMixin,
-  SelectAutomationMixin,
-  TriggerAutomationMixin,
-} from "./mixins/_module.mjs";
+import { CompetenceAutomationMixin, SelectAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -20,17 +13,14 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  * @mixes CompetenceAutomation
  */
-export default class TradecraftAutomation extends mix(
+export default class TradecraftAutomation extends mixClasses(
   ThresholdAutomation,
   SelectAutomationMixin,
   TriggerAutomationMixin,
   CompetenceAutomationMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Tradecraft",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Tradecraft"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -65,7 +55,7 @@ export default class TradecraftAutomation extends mix(
 
   /** @inheritDoc */
   static migrateData(source, options, state) {
-    migrateKey(source, "tradecraft", "tradecrafts", (v) => [v]);
+    migrateKey(source, "tradecraft", "tradecrafts", v => [v]);
     return super.migrateData(source, options, state);
   }
 
@@ -89,13 +79,11 @@ export default class TradecraftAutomation extends mix(
     return Array.from(this.tradecrafts)
       .filter(Boolean)
       .map(
-        (tradecraft) =>
+        tradecraft =>
           new TradecraftActivation({
             options: {
               bonus: this.bonus,
-              competence: this.overrideCompetence
-                ? this.competence.raw
-                : this.document?.system?.competence?.raw,
+              competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
               threshold: this.threshold,
               tradecraft,
             },
@@ -133,12 +121,10 @@ export default class TradecraftAutomation extends mix(
     const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
     if (!actor) return;
     await Promise.all(
-      selected.map((tradecraft) =>
+      selected.map(tradecraft =>
         actor.system.rollTradecraft(tradecraft, {
           bonus: this.bonus,
-          competence: this.overrideCompetence
-            ? this.competence.raw
-            : this.document.system.competence.raw,
+          competence: this.overrideCompetence ? this.competence.raw : this.document.system.competence.raw,
           threshold: this.threshold,
         }),
       ),

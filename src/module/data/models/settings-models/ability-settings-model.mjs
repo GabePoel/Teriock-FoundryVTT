@@ -4,10 +4,7 @@ const { fields } = foundry.data;
 
 export default class AbilitySettingsModel extends ChildSettingsModel {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.AbilitySettings",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.AbilitySettings"];
 
   /** @inheritDoc */
   static defineSchema() {

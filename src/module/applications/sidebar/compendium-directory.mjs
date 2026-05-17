@@ -7,7 +7,7 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
   _onMatchSearchDocuments(indexEntries, listEl) {
     super._onMatchSearchDocuments(indexEntries, listEl);
     const makeTooltips = game.teriock.getSetting("compendiumTooltips");
-    listEl.querySelectorAll("li.document-match[data-uuid]").forEach((el) => {
+    listEl.querySelectorAll("li.document-match[data-uuid]").forEach(el => {
       const uuid = el.getAttribute("data-uuid");
       // Remove sub-documents. This requires pre-indexing the compendium packs.
       // The packs are pre-indexed in the "ready" hook.

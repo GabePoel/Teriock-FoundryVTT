@@ -95,16 +95,10 @@ export async function classPanel(className) {
  * @param {object} options
  * @param {boolean} [options.makeTooltip]
  */
-export function quickAddAssociation(
-  docs,
-  title,
-  icon,
-  associations,
-  options = { makeTooltip: true },
-) {
+export function quickAddAssociation(docs, title, icon, associations, options = { makeTooltip: true }) {
   if (docs.length > 0) {
     const association = {
-      cards: docs.map((d) => {
+      cards: docs.map(d => {
         return {
           color: d.system.color,
           icon: d.system.tagIcon,
@@ -142,5 +136,5 @@ export function simplifyTag(tag) {
  * @returns {string[]}
  */
 export function simplifyTags(tags) {
-  return tags.map((t) => simplifyTag(t));
+  return tags.map(t => simplifyTag(t));
 }

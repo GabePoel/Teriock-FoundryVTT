@@ -2,15 +2,12 @@ import { BaseAutomation } from "../../../../../data/pseudo-documents/automations
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { makeIcon, objectMap } from "../../../../../helpers/utils.mjs";
 import { selectDialog } from "../../../../dialogs/select-dialog.mjs";
-import {
-  TeriockContextMenu,
-  TeriockTextEditor,
-} from "../../../../ux/_module.mjs";
+import { TeriockContextMenu, TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -39,10 +36,7 @@ export default (Base) => {
        */
       static async _onCreateAutomation() {
         const choices = localizeChoices(
-          objectMap(
-            this.document.system.constructor.automationTypes,
-            (a) => a.LABEL,
-          ),
+          objectMap(this.document.system.constructor.automationTypes, a => a.LABEL),
           { sort: true },
         );
         if (Object.keys(choices).length === 0) return;
@@ -58,10 +52,7 @@ export default (Base) => {
           });
         }
         if (!choice) return;
-        await BaseAutomation.create(
-          { type: choice },
-          { parent: this.document },
-        );
+        await BaseAutomation.create({ type: choice }, { parent: this.document });
       }
 
       /**
@@ -88,9 +79,7 @@ export default (Base) => {
         const path = target.dataset.path;
         const name = target.getAttribute("name");
         if (target.dataset.type === "number") term = Number(term);
-        const set = new Set(
-          Array.from(foundry.utils.getProperty(this.document, name)),
-        );
+        const set = new Set(Array.from(foundry.utils.getProperty(this.document, name)));
         if (present) set.delete(term);
         else set.add(term);
         await this.document.update({ [path]: Array.from(set) });
@@ -137,11 +126,7 @@ export default (Base) => {
         const auto = await BaseAutomation.fromDropData(dropData);
         if (!auto) return;
         const data = auto.toObject();
-        if (
-          !Object.keys(
-            this.document.system.constructor.automationTypes,
-          ).includes(data.type)
-        ) {
+        if (!Object.keys(this.document.system.constructor.automationTypes).includes(data.type)) {
           return;
         }
         await BaseAutomation.create(data, { parent: this.document });
@@ -186,14 +171,12 @@ export default (Base) => {
         if (this.document.system.automations) {
           const automations = this.document.system.automations.contents;
           context.automationEntries = await Promise.all(
-            automations.map(async (automation) => {
+            automations.map(async automation => {
               const formEditor = await automation.getEditor();
               const messages = automation.formMessages;
               return {
                 automation,
-                automationCollapsed: this._automationCollapsedIds.has(
-                  automation.id,
-                ),
+                automationCollapsed: this._automationCollapsedIds.has(automation.id),
                 formEditor: formEditor.outerHTML,
                 messages,
               };

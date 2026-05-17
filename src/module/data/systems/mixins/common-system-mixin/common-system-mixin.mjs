@@ -1,20 +1,9 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import {
-  fancifyFields,
-  fromIdentifier,
-  prefixObject,
-} from "../../../../helpers/utils.mjs";
-import {
-  AccessDataMixin,
-  AutomatedDataMixin,
-  PropagationDataMixin,
-} from "../../../shared/mixins/_module.mjs";
-import {
-  AutomatableSystemMixin,
-  RulesSystemMixin,
-} from "../../mixins/_module.mjs";
+import { fancifyFields, fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
+import { AccessDataMixin, AutomatedDataMixin, PropagationDataMixin } from "../../../shared/mixins/_module.mjs";
+import { AutomatableSystemMixin, RulesSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -38,7 +27,7 @@ export default function CommonSystemMixin(Base) {
      * @mixes AutomatedData
      * @mixin
      */
-    class CommonSystem extends mix(
+    class CommonSystem extends mixClasses(
       Base,
       RulesSystemMixin,
       PropagationDataMixin,
@@ -62,16 +51,10 @@ export default function CommonSystemMixin(Base) {
       ];
 
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Common",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Common"];
 
       /** @type {string[]} */
-      static PRESERVED_PROPERTIES = [
-        ...this.DEFAULT_PRESERVED_PROPERTIES,
-        "system.identifier",
-      ];
+      static PRESERVED_PROPERTIES = [...this.DEFAULT_PRESERVED_PROPERTIES, "system.identifier"];
 
       /** @returns {Teriock.Documents.ModelMetadata} */
       static get metadata() {
@@ -181,7 +164,7 @@ export default function CommonSystemMixin(Base) {
         return {
           color: this.color,
           draggable: true,
-          icons: this.embedIcons.filter((i) => this.#checkEmbedIcon(i)),
+          icons: this.embedIcons.filter(i => this.#checkEmbedIcon(i)),
           id: this.parent.id,
           img: this.parent.img,
           inactive: !this.parent.active,
@@ -204,7 +187,7 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Teriock.Messages.MessageBlock[]} */
       get messageBlocks() {
         return fancifyFields(this.displayFields)
-          .map((f) => {
+          .map(f => {
             const schema = this.parent.getSchema(f.path);
             const value = foundry.utils.getProperty(this.parent, f.path);
             if (value && !schema.gmOnly) {
@@ -215,7 +198,7 @@ export default function CommonSystemMixin(Base) {
               };
             }
           })
-          .filter((f) => f);
+          .filter(f => f);
       }
 
       /** @returns {Teriock.Documents.ModelMetadata} */
@@ -251,44 +234,32 @@ export default function CommonSystemMixin(Base) {
        */
       #makeChildDeltaMap(srcTypeMap, dstTypeMap, mapType) {
         const childMap = {};
-        for (const type of new Set([
-          ...Object.keys(srcTypeMap),
-          ...Object.keys(dstTypeMap),
-        ])) {
+        for (const type of new Set([...Object.keys(srcTypeMap), ...Object.keys(dstTypeMap)])) {
           const srcChildren = srcTypeMap[type] || [];
           const dstChildren = dstTypeMap[type] || [];
-          const srcKeys = srcChildren.map((s) => s.lookupKey);
-          const dstKeys = dstChildren.map((d) => d.lookupKey);
+          const srcKeys = srcChildren.map(s => s.lookupKey);
+          const dstKeys = dstChildren.map(d => d.lookupKey);
           let keys = [];
           if (mapType === "union") {
             keys = Array.from(new Set([...srcKeys, ...dstKeys]));
           } else if (mapType === "intersect") {
-            keys = srcKeys.filter((s) => dstKeys.includes(s));
+            keys = srcKeys.filter(s => dstKeys.includes(s));
           } else {
-            const srcDiffKeys = srcKeys.filter((s) => !dstKeys.includes(s));
-            const dstDiffKeys = dstKeys.filter((d) => !srcKeys.includes(d));
+            const srcDiffKeys = srcKeys.filter(s => !dstKeys.includes(s));
+            const dstDiffKeys = dstKeys.filter(d => !srcKeys.includes(d));
             const diffKeys = [...srcKeys, ...dstKeys];
             if (mapType === "diffSrc") keys = srcDiffKeys;
             else if (mapType === "diffDst") keys = dstDiffKeys;
             else if (mapType === "diff") keys = diffKeys;
           }
-          const srcDocs = srcChildren.filter((s) => keys.includes(s.lookupKey));
-          const dstDocs = dstChildren.filter((d) => keys.includes(d.lookupKey));
-          const docNames = new Set([
-            ...srcDocs.map((s) => s.documentName),
-            ...dstDocs.map((d) => d.documentName),
-          ]);
+          const srcDocs = srcChildren.filter(s => keys.includes(s.lookupKey));
+          const dstDocs = dstChildren.filter(d => keys.includes(d.lookupKey));
+          const docNames = new Set([...srcDocs.map(s => s.documentName), ...dstDocs.map(d => d.documentName)]);
           for (const docName of docNames) {
             const existing = childMap[docName] || { src: [], dst: [] };
             childMap[docName] = {
-              src: [
-                ...existing.src,
-                ...srcDocs.filter((s) => s.documentName === docName),
-              ],
-              dst: [
-                ...existing.dst,
-                ...dstDocs.filter((d) => d.documentName === docName),
-              ],
+              src: [...existing.src, ...srcDocs.filter(s => s.documentName === docName)],
+              dst: [...existing.dst, ...dstDocs.filter(d => d.documentName === docName)],
             };
           }
         }
@@ -303,7 +274,7 @@ export default function CommonSystemMixin(Base) {
         for (const [docName, children] of Object.entries(createMap)) {
           await this.parent.createChildDocuments(
             docName,
-            children.src.map((s) => s.toObject(true)),
+            children.src.map(s => s.toObject(true)),
           );
         }
       }
@@ -316,7 +287,7 @@ export default function CommonSystemMixin(Base) {
         for (const [docName, children] of Object.entries(deleteMap)) {
           await this.parent.deleteChildDocuments(
             docName,
-            children.dst.map((d) => d.id),
+            children.dst.map(d => d.id),
           );
         }
       }
@@ -349,11 +320,9 @@ export default function CommonSystemMixin(Base) {
       async _updateFromChildDeltaMap(updateMap) {
         for (const [docName, children] of Object.entries(updateMap)) {
           const updateArray = await Promise.all(
-            children.dst.map(async (d) => {
+            children.dst.map(async d => {
               const refreshDocument = await fromUuid(d._stats.compendiumSource);
-              const obj = refreshDocument
-                ? d.system.toRefreshObject(refreshDocument)
-                : {};
+              const obj = refreshDocument ? d.system.toRefreshObject(refreshDocument) : {};
               obj._id = d.id;
               return obj;
             }),
@@ -397,13 +366,9 @@ export default function CommonSystemMixin(Base) {
           blocks: this.messageBlocks,
           color: this.color || undefined,
           font: this.font,
-          icon:
-            TERIOCK.config.document[this.metadata.type]?.icon ||
-            TERIOCK.config.document.document.icon,
+          icon: TERIOCK.config.document[this.metadata.type]?.icon || TERIOCK.config.document.document.icon,
           image: this.parent.img,
-          label:
-            TERIOCK.config.document[this.metadata.type]?.label ||
-            TERIOCK.config.document.document.label,
+          label: TERIOCK.config.document[this.metadata.type]?.label || TERIOCK.config.document.document.label,
           name: this.parent.fullName,
           uuid: this.parent.uuid,
         };
@@ -412,14 +377,10 @@ export default function CommonSystemMixin(Base) {
           if (typeMap[type]) {
             let docs = typeMap[type];
             if (TERIOCK.config.document[type].documentName === "ActiveEffect") {
-              docs = docs.filter(
-                (e) =>
-                  !foundry.utils.hasProperty(e, "system.revealed") ||
-                  e.system.revealed,
-              );
+              docs = docs.filter(e => !foundry.utils.hasProperty(e, "system.revealed") || e.system.revealed);
             }
             docs = TERIOCK.config.document[type].sorter(docs);
-            docs = docs.filter((d) => !d.isEphemeral);
+            docs = docs.filter(d => !d.isEphemeral);
             quickAddAssociation(
               docs,
               TERIOCK.config.document[type].plural,
@@ -437,12 +398,7 @@ export default function CommonSystemMixin(Base) {
        */
       async getRefreshSources() {
         const resolvedNodes = await Promise.all(this._refreshPromises);
-        return resolvedNodes.filter(
-          (n) =>
-            n.document &&
-            n.document.isViewer &&
-            n.document.uuid !== this.parent.uuid,
-        );
+        return resolvedNodes.filter(n => n.document && n.document.isViewer && n.document.uuid !== this.parent.uuid);
       }
 
       /** @inheritDoc */
@@ -470,10 +426,7 @@ export default function CommonSystemMixin(Base) {
           await notesJournal?.sheet.render(true);
           notesJournal?.sheet.goToPage(notesPage.id);
         } else {
-          const journalEntryName = game.settings.get(
-            "teriock",
-            "gmDocumentNotesJournalName",
-          );
+          const journalEntryName = game.settings.get("teriock", "gmDocumentNotesJournalName");
           let notesJournal = game.journal.getName(journalEntryName);
           if (!notesJournal) {
             notesJournal = await TeriockJournalEntry.create({
@@ -485,32 +438,24 @@ export default function CommonSystemMixin(Base) {
               TERIOCK.config.document[this.parent.type]?.label ||
               _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
             notesPage = notesJournal.pages.find(
-              (p) =>
-                p.name === this.parent.name &&
-                notesJournal?.categories.get(p.category)?.name ===
-                  notesCategoryName,
+              p => p.name === this.parent.name && notesJournal?.categories.get(p.category)?.name === notesCategoryName,
             );
             if (!notesPage) {
-              let notesCategory =
-                notesJournal.categories.getName(notesCategoryName);
+              let notesCategory = notesJournal.categories.getName(notesCategoryName);
               if (!notesCategory) {
-                const categories = await notesJournal.createEmbeddedDocuments(
-                  "JournalEntryCategory",
-                  [{ name: notesCategoryName }],
-                );
+                const categories = await notesJournal.createEmbeddedDocuments("JournalEntryCategory", [
+                  { name: notesCategoryName },
+                ]);
                 notesCategory = categories[0];
               }
-              const pages = await notesJournal.createEmbeddedDocuments(
-                "JournalEntryPage",
-                [
-                  {
-                    category: notesCategory.id,
-                    name: this.parent.name,
-                    text: { content: `<p>@Embed[${this.parent.uuid}]</p>` },
-                    type: "text",
-                  },
-                ],
-              );
+              const pages = await notesJournal.createEmbeddedDocuments("JournalEntryPage", [
+                {
+                  category: notesCategory.id,
+                  name: this.parent.name,
+                  text: { content: `<p>@Embed[${this.parent.uuid}]</p>` },
+                  type: "text",
+                },
+              ]);
               notesPage = pages[0];
             }
             if (notesPage) {
@@ -571,35 +516,21 @@ export default function CommonSystemMixin(Base) {
             }
             const dstChildTypeMap = dstChildren.documentsByType;
             if (createChildren) {
-              const createMap = this.#makeChildDeltaMap(
-                srcChildTypeMap,
-                dstChildTypeMap,
-                "diffSrc",
-              );
+              const createMap = this.#makeChildDeltaMap(srcChildTypeMap, dstChildTypeMap, "diffSrc");
               await this._createFromChildDeltaMap(createMap);
             }
             if (deleteChildren) {
-              const deleteMap = this.#makeChildDeltaMap(
-                srcChildTypeMap,
-                dstChildTypeMap,
-                "diffDst",
-              );
+              const deleteMap = this.#makeChildDeltaMap(srcChildTypeMap, dstChildTypeMap, "diffDst");
               await this._deleteFromChildDeltaMap(deleteMap);
             }
             if (updateChildren) {
-              const updateMap = this.#makeChildDeltaMap(
-                srcChildTypeMap,
-                dstChildTypeMap,
-                "intersect",
-              );
+              const updateMap = this.#makeChildDeltaMap(srcChildTypeMap, dstChildTypeMap, "intersect");
               await this._updateFromChildDeltaMap(updateMap);
             }
           }
         }
         if (recursive) {
-          for (const child of fullOverride
-            ? await this.parent.getSubs()
-            : await this.parent.getChildArray()) {
+          for (const child of fullOverride ? await this.parent.getSubs() : await this.parent.getChildArray()) {
             const childSource = await fromUuid(child._stats.compendiumSource);
             await child.system.refreshFromSource(childSource, {
               deleteChildren,

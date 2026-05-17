@@ -10,7 +10,7 @@ export default class TeriockTokenHUD extends TokenHUD {
     for (const b of ["bar1", "bar2"]) {
       const bar = this.document.getBarAttribute(b);
       this.element.querySelectorAll(`.attribute.${b}`).forEach(
-        /** @param {HTMLElement} el */ (el) => {
+        /** @param {HTMLElement} el */ el => {
           el.dataset.attribute = bar?.attribute;
         },
       );

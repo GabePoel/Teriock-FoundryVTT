@@ -16,10 +16,7 @@ const rawContent = {
 const content = Object.fromEntries(
   Object.entries(rawContent).map(([category, records]) => {
     const prefixedRecords = Object.fromEntries(
-      Object.keys(records).map((key) => [
-        key,
-        `TERIOCK.CONTENT.${ucFirst(category)}.${key}`,
-      ]),
+      Object.keys(records).map(key => [key, `TERIOCK.CONTENT.${ucFirst(category)}.${key}`]),
     );
     return [category, prefixedRecords];
   }),

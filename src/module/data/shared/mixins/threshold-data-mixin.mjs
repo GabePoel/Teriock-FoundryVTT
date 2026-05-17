@@ -13,10 +13,7 @@ export default function ThresholdDataMixin(Base) {
     class ThresholdData extends Base {
       /** @inheritDoc */
       static parseEvent(event) {
-        return Object.assign(
-          super.parseEvent(event),
-          ThresholdRoll.parseEvent(event),
-        );
+        return Object.assign(super.parseEvent(event), ThresholdRoll.parseEvent(event));
       }
     }
   );

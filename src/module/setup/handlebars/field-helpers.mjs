@@ -7,7 +7,7 @@ import { makeIconClass } from "../../helpers/utils.mjs";
  * @returns {Handlebars.SafeString}
  */
 function formBox(input, options) {
-  let {
+  const {
     secondary = "",
     icon = "info",
     iconColor = "",
@@ -18,24 +18,21 @@ function formBox(input, options) {
     unselected = "",
     unselectedSecondary = "",
     tooltip = "",
-    overflow = "",
     action = "",
     classes = "",
     dataset = {},
+    overflow = "",
   } = options.hash;
   let content = input;
   let overflowTooltip = "";
-  if (overflow === true) overflow = input;
-  if (overflow && overflow.length > 16) {
-    overflowTooltip = `data-tooltip="${overflow}"`;
+  let overflowContent = overflow;
+  if (overflow === true) overflowContent = input;
+  if (overflowContent && overflowContent.length > 16) {
+    overflowTooltip = `data-tooltip="${overflowContent}"`;
   }
-  const hasSecondaryContent =
-    includeSecondary &&
-    (secondary.toString() ? secondary.toString().length > 0 : false);
+  const hasSecondaryContent = includeSecondary && (secondary.toString() ? secondary.toString().length > 0 : false);
   let unselectedContent = unselected;
-  const hasUnselected = unselected.toString()
-    ? unselected.toString().length > 0
-    : false;
+  const hasUnselected = unselected.toString() ? unselected.toString().length > 0 : false;
   if (hasUnselected) {
     if (hasSecondaryContent) {
       if (after) {
@@ -58,8 +55,7 @@ function formBox(input, options) {
   if (hasUnselected) {
     content = `<div class="selected">${content}</div>`;
   }
-  const tooltipStr =
-    tooltip && tooltip.toString().length > 0 ? `data-tooltip="${tooltip}"` : "";
+  const tooltipStr = tooltip && tooltip.toString().length > 0 ? `data-tooltip="${tooltip}"` : "";
   let iconStr = `<i class="${makeIconClass(icon, "light")}" ${tooltipStr}></i>`;
   let styleStr = "";
   if (iconColor && iconColor.toString().length > 0) {

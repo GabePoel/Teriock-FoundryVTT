@@ -1,27 +1,31 @@
 <div class="teriock-panel collapsable es-container">
-  <div class="overlay {{#if (exists classes)}}{{{ classes }}}{{/if}}"></div>
-  <header
-    class="teriock-panel-header"
-    data-action="toggle-collapse"
-  >
+  <div
+    class="
+      overlay
+      {{#if (exists classes)}}
+        {{ classes }}
+      {{/if}}
+    "
+  ></div>
+  <header class="teriock-panel-header" data-action="toggle-collapse">
     <div
       class="teriock-panel-image"
-      {{#if (exists color)}}style="outline-color: {{{color}}};"{{/if}}
+      {{#if (exists color)}}
+        style="outline-color:{{{ color }}};"
+      {{/if}}
     >
       <img
         {{#if (exists uuid)}}
-        data-uuid="{{uuid}}"
+          data-uuid="{{ uuid }}"
         {{/if}}
-        src="{{{image}}}"
+        src="{{{ image }}}"
         alt=""
         data-openable="true"
         data-openable-document="true"
-      >
+      />
     </div>
-    <div class="teriock-panel-header-name">{{{name}}}</div>
-    <div class="teriock-panel-header-icon">
-      {{makeIcon icon "light"}}
-    </div>
+    <div class="teriock-panel-header-name">{{{ name }}}</div>
+    <div class="teriock-panel-header-icon">{{makeIcon icon "light"}}</div>
     <div class="teriock-panel-header-expander">
       <i class="fa-fw fa-light fa-chevron-down"></i>
     </div>
@@ -33,12 +37,14 @@
           <div class="teriock-panel-bars">
             {{#each (cleanBars bars)}}
               <div class="teriock-panel-bar">
-                <div class="teriock-panel-bar-icon" data-tooltip="{{{label}}}" data-tooltip-direction="LEFT">
+                <div class="teriock-panel-bar-icon" data-tooltip="{{{ label }}}" data-tooltip-direction="LEFT">
                   {{makeIcon icon "light"}}
                 </div>
                 <div class="teriock-panel-bar-wrappers">
                   {{#each wrappers as |wrapper|}}
-                    <span class="teriock-panel-bar-wrapper">{{{wrapper}}}</span>
+                    <span class="teriock-panel-bar-wrapper">
+                      {{{ wrapper }}}
+                    </span>
                   {{/each}}
                 </div>
               </div>
@@ -47,32 +53,39 @@
         {{/if}}
         {{#each blocks}}
           {{#if (exists text)}}
-            <div class="teriock-panel-block {{#if (exists classes)}}{{{classes}}}{{/if}}">
-              <div class="teriock-panel-block-title">
-                {{{title}}}
-              </div>
-              <div class="teriock-panel-block-text">
-                {{{text}}}
-              </div>
+            <div
+              class="
+                teriock-panel-block
+                {{#if (exists classes)}}
+                  {{ classes }}
+                {{/if}}
+              "
+            >
+              <div class="teriock-panel-block-title">{{{ title }}}</div>
+              <div class="teriock-panel-block-text">{{{ text }}}</div>
             </div>
           {{/if}}
         {{/each}}
         {{#each associations}}
           {{#if (exists cards)}}
             <div class="teriock-panel-association-container">
-              <div class="teriock-panel-association collapsable {{#if message}}collapsed{{/if}}">
-                <div
-                  class="teriock-panel-association-row teriock-panel-association-title"
-                  data-action="toggle-collapse"
+              <div
+                class="
+                  teriock-panel-association
+                  collapsable
+                  {{#if message}}
+                    collapsed
+                  {{/if}}
+                "
+              >
+                <div class="teriock-panel-association-row teriock-panel-association-title" data-action="toggle-collapse"
                 >
                   {{#if (exists icon)}}
                     <div class="teriock-panel-association-icon">
                       {{makeIcon icon "light"}}
                     </div>
                   {{/if}}
-                  <div class="teriock-panel-association-name">
-                    {{{title}}}
-                  </div>
+                  <div class="teriock-panel-association-name">{{{ title }}}</div>
                   <div class="teriock-panel-association-expander">
                     <i class="fa-fw fa-light fa-chevron-down"></i>
                   </div>
@@ -82,31 +95,46 @@
                     {{#each cards}}
                       <a
                         class="teriock-panel-association-row teriock-panel-association-card"
-                        data-uuid="{{{uuid}}}"
-                        data-id="{{{id}}}"
-                        data-type="{{{type}}}"
-                        data-pack="{{{pack}}}"
+                        data-uuid="{{{ uuid }}}"
+                        data-id="{{{ id }}}"
+                        data-type="{{{ type }}}"
+                        data-pack="{{{ pack }}}"
                         {{#if (or draggable @root/user.isGm)}}
-                        draggable="true"
+                          draggable="true"
                         {{/if}}
                         data-link
                         data-tooltip-direction="LEFT"
-                        {{#if makeTooltip}}data-make-tooltip="true" {{/if}}
-                        {{#if (exists tooltip)}}data-tooltip="{{{tooltip}}}" {{/if}}
+                        {{#if makeTooltip}}
+                          data-make-tooltip="true"
+                        {{/if}}
+                        {{#if (exists tooltip)}}
+                          data-tooltip="{{{ tooltip }}}"
+                        {{/if}}
                       >
                         <div
                           class="teriock-panel-association-row-image"
-                          {{#if (exists color)}}style="outline-color: {{{color}}};"{{/if}}
+                          {{#if (exists color)}}
+                            style="outline-color:{{{ color }}};"
+                          {{/if}}
                         >
-                          <img src="{{{img}}}" alt="" class="{{#if rescale}}rescale{{/if}}">
+                          <img
+                            class="
+                              {{#if rescale}}
+                                rescale
+                              {{/if}}
+                            "
+                            src="{{{ img }}}"
+                            alt=""
+                          />
                         </div>
-                        <div class="teriock-panel-association-card-name">{{{name}}}</div>
+                        <div class="teriock-panel-association-card-name">{{{ name }}}</div>
                         {{#if (exists icon)}}
-                          <div class="teriock-panel-association-row-icon"
+                          <div
+                            class="teriock-panel-association-row-icon"
                             {{#if icon.tooltip}}
-                               data-tooltip="{{{icon.tooltip}}}"
-                               data-tooltip-class=""
-                               data-tooltip-direction="DOWN"
+                              data-tooltip="{{{ icon.tooltip }}}"
+                              data-tooltip-class=""
+                              data-tooltip-direction="DOWN"
                             {{/if}}
                           >
                             {{makeIcon icon.icon "light"}}

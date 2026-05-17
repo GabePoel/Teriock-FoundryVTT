@@ -15,15 +15,10 @@ export default function TradecraftExecutionMixin(Base) {
       /**
        * @param {Teriock.Execution.TradecraftExecutionOptions} options
        */
-      constructor(
-        options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {},
-      ) {
+      constructor(options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {}) {
         super(options);
         if (this.actor) {
-          this.bonus = addFormula(
-            this.actor.system.tradecrafts[this.tradecraft].formula,
-            this.bonus,
-          );
+          this.bonus = addFormula(this.actor.system.tradecrafts[this.tradecraft].formula, this.bonus);
         }
       }
 

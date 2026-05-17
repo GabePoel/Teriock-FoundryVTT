@@ -14,10 +14,7 @@ export default function CompetenceAutomationMixin(Base) {
      */
     class CompetenceAutomation extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.Competence",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Competence"];
 
       /** @inheritDoc */
       static defineSchema() {

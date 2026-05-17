@@ -1,3 +1,4 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { addFormula } from "../../../helpers/formula.mjs";
 import {
   AbilityExecutionActorUpdatePart,
@@ -7,7 +8,6 @@ import {
   AbilityExecutionRollsPart,
 } from "./parts/_module.mjs";
 
-//noinspection JSClosureCompilerSyntax,JSUnresolvedReference
 /**
  * @extends {AbilityExecutionConstructor}
  * @extends {BaseDocumentExecution}
@@ -17,12 +17,12 @@ import {
  * @mixes AbilityExecutionRolls
  * @mixes ThresholdExecution
  */
-export default class AbilityExecution extends AbilityExecutionChatPart(
-  AbilityExecutionRollsPart(
-    AbilityExecutionActorUpdatePart(
-      AbilityExecutionGetInputPart(AbilityExecutionConstructor),
-    ),
-  ),
+export default class AbilityExecution extends mixClasses(
+  AbilityExecutionConstructor,
+  AbilityExecutionGetInputPart,
+  AbilityExecutionActorUpdatePart,
+  AbilityExecutionRollsPart,
+  AbilityExecutionChatPart,
 ) {
   /** @inheritDoc */
   get competenceImprovesFormula() {

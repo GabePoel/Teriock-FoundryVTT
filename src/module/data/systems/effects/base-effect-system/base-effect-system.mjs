@@ -10,23 +10,12 @@ const { fields, ActiveEffectTypeDataModel } = foundry.data;
  * @mixes ChildSystem
  * @mixes AutomatedData
  */
-export default class BaseEffectSystem extends ChildSystemMixin(
-  ActiveEffectTypeDataModel,
-) {
+export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeDataModel) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.BaseEffect",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseEffect"];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = [
-    "disabled",
-    "duration",
-    "tint",
-    "transfer",
-    ...super.PRESERVED_PROPERTIES,
-  ];
+  static PRESERVED_PROPERTIES = ["disabled", "duration", "tint", "transfer", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static get metadata() {
@@ -49,10 +38,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {boolean}
    */
   get _isSuppressedDampened() {
-    return !!(
-      this.parent.parent?.type === "equipment" &&
-      this.parent.parent.system.dampened
-    );
+    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.dampened);
   }
 
   /**
@@ -62,8 +48,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
   get _isSuppressedDeattuned() {
     return !!(
       this.actor &&
-      (this.parent.parent?.type === "equipment" ||
-        this.parent.parent?.type === "mount") &&
+      (this.parent.parent?.type === "equipment" || this.parent.parent?.type === "mount") &&
       this.parent.parent.system.needsAttunement &&
       !this.mundane &&
       !this.parent.parent.system.isAttuned
@@ -75,18 +60,14 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {boolean}
    */
   get _isSuppressedDestroyed() {
-    return !!(
-      this.parent.parent?.type === "equipment" &&
-      this.parent.parent.system.destroyed
-    );
+    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.destroyed);
   }
 
   /** @inheritDoc */
   get _isSuppressedElder() {
     return (
       (this.parent.elder?.type !== "equipment" ||
-        (this.parent.elder?.type === "equipment" &&
-          this.parent.elder.system._isSuppressedConsumed)) &&
+        (this.parent.elder?.type === "equipment" && this.parent.elder.system._isSuppressedConsumed)) &&
       super._isSuppressedElder
     );
   }
@@ -96,10 +77,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {boolean}
    */
   get _isSuppressedShattered() {
-    return !!(
-      this.parent.parent?.type === "equipment" &&
-      this.parent.parent.system.shattered
-    );
+    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.shattered);
   }
 
   /**
@@ -107,10 +85,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {boolean}
    */
   get _isSuppressedStashed() {
-    return !!(
-      this.parent.parent?.type === "equipment" &&
-      this.parent.parent.system.stashed
-    );
+    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.stashed);
   }
 
   /**
@@ -118,10 +93,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {boolean}
    */
   get _isSuppressedUnequipped() {
-    return !!(
-      this.parent.parent?.type === "equipment" &&
-      !this.parent.parent.system.equipped
-    );
+    return !!(this.parent.parent?.type === "equipment" && !this.parent.parent.system.equipped);
   }
 
   /**
@@ -129,7 +101,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {boolean}
    */
   get canChange() {
-    return this.automations.contents.some((a) => a.metadata.changes);
+    return this.automations.contents.some(a => a.metadata.changes);
   }
 
   /**
@@ -137,9 +109,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get childChanges() {
-    return this.getAutomations("childChange", { active: true }).flatMap((a) =>
-      a.getChanges(),
-    );
+    return this.getAutomations("childChange", { active: true }).flatMap(a => a.getChanges());
   }
 
   /** @inheritDoc */
@@ -172,7 +142,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get itemChanges() {
-    return this.qualifiedChanges.flat().filter((c) => c.target === "Item");
+    return this.qualifiedChanges.flat().filter(c => c.target === "Item");
   }
 
   /** @inheritDoc */
@@ -202,7 +172,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
    */
   get qualifiedChanges() {
     const changes = [];
-    for (const a of this.activeAutomations.filter((a) => a.metadata.changes)) {
+    for (const a of this.activeAutomations.filter(a => a.metadata.changes)) {
       changes.push(...a.getChanges());
     }
     return changes;
@@ -232,11 +202,10 @@ export default class BaseEffectSystem extends ChildSystemMixin(
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    const statusAutomations =
-      /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
-        (a) => a.type === StatusAutomation.TYPE,
-      );
-    statusAutomations.forEach((a) => {
+    const statusAutomations = /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
+      a => a.type === StatusAutomation.TYPE,
+    );
+    statusAutomations.forEach(a => {
       if (a.relation === "include") {
         this.parent.statuses.add(a.status);
       }
@@ -246,9 +215,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(
   /** @inheritDoc */
   prepareChangeData() {
     super.prepareChangeData();
-    this.changes.push(
-      ...this.qualifiedChanges.filter((c) => c.target === "Actor"),
-    );
+    this.changes.push(...this.qualifiedChanges.filter(c => c.target === "Actor"));
   }
 
   /**

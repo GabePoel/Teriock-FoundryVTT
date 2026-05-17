@@ -1,10 +1,7 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { resolveDocuments } from "../../resolve.mjs";
-import {
-  inferIconFromIdentifier,
-  inferNameFromIdentifier,
-} from "../../utils.mjs";
+import { inferIconFromIdentifier, inferNameFromIdentifier } from "../../utils.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
@@ -53,9 +50,8 @@ async function useExternal(actor, options = {}) {
     ...options,
     expandFolders: true,
   });
-  const chosen =
-    documents.length > 1 ? await selectDocumentsDialog(documents) : documents;
-  await Promise.all(chosen.map((c) => c.use({ ...options, actor })));
+  const chosen = documents.length > 1 ? await selectDocumentsDialog(documents) : documents;
+  await Promise.all(chosen.map(c => c.use({ ...options, actor })));
 }
 
 /**
@@ -66,9 +62,9 @@ export const useLocalCommand = {
   ...thresholdCommand,
   aliases: ["use"],
   args: ["lookup"],
-  icon: (options) => inferIconFromIdentifier(options?.lookup),
+  icon: options => inferIconFromIdentifier(options?.lookup),
   id: "use-local",
-  label: (options) =>
+  label: options =>
     _loc("TERIOCK.COMMANDS.UseDocument.useNamed", {
       name: inferNameFromIdentifier(options?.lookup) || "",
     }),
@@ -83,10 +79,9 @@ export const useLocalCommand = {
 export const useExternalCommand = {
   ...thresholdCommand,
   args: ["uuid"],
-  icon: (options) => options?.icon || icons.ui.document,
+  icon: options => options?.icon || icons.ui.document,
   id: "use-external",
-  label: (options) =>
-    options?.label || _loc("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
+  label: options => options?.label || _loc("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
   primary: useExternal,
   secondary: useExternal,
 };

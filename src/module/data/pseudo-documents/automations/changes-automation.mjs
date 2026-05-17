@@ -42,23 +42,20 @@ export default class ChangesAutomation extends CritAutomation {
 
   /** @inheritDoc */
   getChanges() {
-    return this.changes.map((c) => {
+    return this.changes.map(c => {
       return { ...c, phase: TERIOCK.config.change.defaultPhase };
     });
   }
 
   /** @inheritDoc */
   async getEditor() {
-    const html = await TeriockTextEditor.renderTemplate(
-      "teriock/sheets/shared/changes",
-      {
-        changesData: this.changes,
-        changesPath: `${this.localPath}.changes`,
-        editable: this.document.sheet.isEditable,
-        fieldDefs: this.schema.fields.changes.element.fields,
-        valuePath: `_source.${this.localPath}.changes`,
-      },
-    );
+    const html = await TeriockTextEditor.renderTemplate("teriock/sheets/shared/changes", {
+      changesData: this.changes,
+      changesPath: `${this.localPath}.changes`,
+      editable: this.document.sheet.isEditable,
+      fieldDefs: this.schema.fields.changes.element.fields,
+      valuePath: `_source.${this.localPath}.changes`,
+    });
     return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);
   }
 }

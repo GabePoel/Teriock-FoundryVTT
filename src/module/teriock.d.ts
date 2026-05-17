@@ -18,14 +18,10 @@ declare global {
   const _loc: (stringId: string, data?: object) => string;
 
   /** Foundry VTT UUID */
-  type UUID<T = unknown> = string & {
-    [__brand]: T;
-  };
+  type UUID<T = unknown> = string & { [__brand]: T };
 
   /** Foundry VTT ID */
-  type ID<T = unknown> = string & {
-    [__brand]: T;
-  };
+  type ID<T = unknown> = string & { [__brand]: T };
 
   /**
    * A string that represents a document's identifier.
@@ -38,9 +34,7 @@ declare global {
   type TypedIdentifier = string;
 
   /** Safe Teriock UUID */
-  type SafeUUID<T = unknown> = string & {
-    [__brand]: T;
-  };
+  type SafeUUID<T = unknown> = string & { [__brand]: T };
 
   /**
    * Index representing a subset of document data.
@@ -54,9 +48,7 @@ declare global {
     sort: number;
     type: Teriock.Documents.CommonType;
     uuid: UUID<Doc>;
-    system: {
-      _sup?: ID<Doc>;
-    };
+    system: { _sup?: ID<Doc> };
   };
 
   /**

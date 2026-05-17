@@ -7,23 +7,17 @@ import BaseDocumentExecution from "../../base-document-execution/base-document-e
  * @extends {BaseDocumentExecution}
  * @mixes ThresholdExecution
  */
-export default class AbilityExecutionConstructor extends ThresholdExecutionMixin(
-  BaseDocumentExecution,
-) {
+export default class AbilityExecutionConstructor extends ThresholdExecutionMixin(BaseDocumentExecution) {
   /**
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
   constructor(options = {}) {
     super(options);
     const sys = this.source.system;
-    this.armament =
-      options.armament ?? this.#determineDefaultArmament(sys.interaction);
+    this.armament = options.armament ?? this.#determineDefaultArmament(sys.interaction);
     this.#initializeFlags(options);
     this.#initializeCosts(options);
-    this.sb =
-      options.sb ??
-      !!(this.armament && this.source.system.isContact) *
-        (this.actor?.system.offense.sb ?? 0);
+    this.sb = options.sb ?? !!(this.armament && this.source.system.isContact) * (this.actor?.system.offense.sb ?? 0);
     this.#determinePiercing(options);
     this.warded = this.#resolveWarded(options, sys);
     this.vitals = this.#resolveVitals(options, sys);
@@ -37,20 +31,11 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     }
     // Fall back to default token
     this.executor ??= this.actor?.defaultToken ?? null;
-    this.existingAttackPenalty = Number(
-      this.actor?.system.combat.attackPenalty,
-    );
-    this.usesReaction =
-      this.source.system.maneuver === "reactive" &&
-      this.source.system.executionTime.base === "r1";
-    this.payCosts =
-      this.actor?.getSetting("automation.payAbilityCosts") ?? true;
+    this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
+    this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
+    this.payCosts = this.actor?.getSetting("automation.payAbilityCosts") ?? true;
     this.targets = new Set();
-    if (
-      this.isAttack &&
-      formulaExists(this.armament?.system.hitBonus) &&
-      this.source.system.isContact
-    ) {
+    if (this.isAttack && formulaExists(this.armament?.system.hitBonus) && this.source.system.isContact) {
       this.bonus = addFormula(this.bonus, this.armament.system.hitBonus);
     }
   }
@@ -61,19 +46,13 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /** @inheritDoc */
   get activeAutomations() {
     return super.activeAutomations.filter(
-      (a) =>
-        (a.heighten.has(0) && !this.heightened) ||
-        (a.heighten.has(1) && this.heightened),
+      a => (a.heighten.has(0) && !this.heightened) || (a.heighten.has(1) && this.heightened),
     );
   }
 
   /** @returns {boolean} */
   get canHeighten() {
-    return (
-      this.competence.proficient &&
-      !!this.source.system.heightened &&
-      !this.flags.noHeighten
-    );
+    return this.competence.proficient && !!this.source.system.heightened && !this.flags.noHeighten;
   }
 
   /** @inheritDoc */
@@ -165,16 +144,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @returns {boolean}
    */
   get targetsActor() {
-    const validTargets = [
-      "creature",
-      "vitals",
-      "arm",
-      "leg",
-      "ability",
-      "attack",
-      "self",
-      "other",
-    ];
+    const validTargets = ["creature", "vitals", "arm", "leg", "ability", "attack", "self", "other"];
     for (const t of validTargets) {
       if (this.source.system.targets.has(t)) return true;
     }
@@ -242,12 +212,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #initializeFlags(options) {
     this.flags = {
-      noHeighten:
-        options.noHeighten ??
-        !this.source.getSetting("execution.promptHeighten"),
-      noTemplate:
-        options.noTemplate ??
-        !this.source.getSetting("execution.promptTemplate"),
+      noHeighten: options.noHeighten ?? !this.source.getSetting("execution.promptHeighten"),
+      noTemplate: options.noTemplate ?? !this.source.getSetting("execution.promptTemplate"),
     };
   }
 
@@ -259,9 +225,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   #resolveAttackPenalty(options) {
     if (options.attackPenalty !== undefined) return options.attackPenalty;
     if (!this.isAttack) return "0";
-    return this.isContact && this.armament
-      ? this.armament.system.attackPenalty
-      : this.source.system.attackPenalty;
+    return this.isContact && this.armament ? this.armament.system.attackPenalty : this.source.system.attackPenalty;
   }
 
   /**
@@ -272,12 +236,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #resolveLimb(options, sys) {
     if (options.limb !== undefined) return options.limb;
-    return (
-      sys.isContact &&
-      (sys.targets.has("arm") ||
-        sys.targets.has("leg") ||
-        sys.targets.has("limb"))
-    );
+    return sys.isContact && (sys.targets.has("arm") || sys.targets.has("leg") || sys.targets.has("limb"));
   }
 
   /**
@@ -288,8 +247,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #resolveVitals(options, sys) {
     if (options.vitals !== undefined) return options.vitals;
-    const armamentVitals =
-      this.armament?.system.vitals && sys.interaction === "attack";
+    const armamentVitals = this.armament?.system.vitals && sys.interaction === "attack";
     return sys.isContact && armamentVitals ? true : sys.targets.has("vitals");
   }
 
@@ -302,8 +260,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   #resolveWarded(options, sys) {
     if (options.warded !== undefined) return options.warded;
     const armamentWarded =
-      (this.armament?.system.warded &&
-        ["attack", "block"].includes(sys.interaction)) ||
+      (this.armament?.system.warded && ["attack", "block"].includes(sys.interaction)) ||
       this.actor?.system?.combat?.offense?.warded;
     return sys.isContact && armamentWarded ? true : !!sys.warded;
   }
@@ -334,10 +291,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   getAutomations(type, options = {}) {
     const autos = super.getAutomations(type, options);
     if (typeof options.crit === "boolean") {
-      return autos.filter(
-        (a) =>
-          (options.crit && a.crit?.has(1)) || (!options.crit && a.crit?.has(0)),
-      );
+      return autos.filter(a => (options.crit && a.crit?.has(1)) || (!options.crit && a.crit?.has(0)));
     }
     return autos;
   }

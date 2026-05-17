@@ -10,7 +10,7 @@ const { fields } = foundry.data;
  * Ability equipment part.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -19,11 +19,7 @@ export default (Base) => {
      */
     class AbilityEquipmentPart extends Base {
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = [
-        "system.grantOnly",
-        "system.grantUse",
-        ...super.PRESERVED_PROPERTIES,
-      ];
+      static PRESERVED_PROPERTIES = ["system.grantOnly", "system.grantUse", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static defineSchema() {
@@ -44,9 +40,7 @@ export default (Base) => {
       get grantUseIcon() {
         return {
           action: "toggleGrantUseDoc",
-          icon: this.grantUse
-            ? TERIOCK.display.icons.ability.onUse
-            : TERIOCK.display.icons.ability.notOnUse,
+          icon: this.grantUse ? TERIOCK.display.icons.ability.onUse : TERIOCK.display.icons.ability.notOnUse,
           onClick: async (_ev, doc) => {
             if (doc === this.parent.parent) {
               await this.parent.update({ "system.grantUse": !this.grantUse });
@@ -88,18 +82,11 @@ export default (Base) => {
           onClick: async () => {
             const data = await this.toScroll();
             const op = { keepEmbeddedIds: true, renderSheet: true };
-            if (
-              doc?.actor?.documentName === "Actor" &&
-              doc?.actor?.uuid === this.actor?.uuid
-            ) {
+            if (doc?.actor?.documentName === "Actor" && doc?.actor?.uuid === this.actor?.uuid) {
               await this.actor.createEmbeddedDocuments("Item", [data], op);
             } else TeriockItem.create(data, op);
           },
-          visible:
-            this.parent.parent?.isOwner &&
-            this.spell &&
-            doc !== this.parent &&
-            doc.sheet.isEditable,
+          visible: this.parent.parent?.isOwner && this.spell && doc !== this.parent && doc.sheet.isEditable,
         });
         return entries;
       }
@@ -116,10 +103,9 @@ export default (Base) => {
       prepareDerivedData() {
         super.prepareDerivedData();
         this.consumeSourceText = this.consumeSource
-          ? _loc(
-              `TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.${this.parent.parent ? "derived" : "noParent"}`,
-              { uuid: this.parent.parent?.uuid },
-            )
+          ? _loc(`TERIOCK.SYSTEMS.Ability.FIELDS.consumeSourceText.${this.parent.parent ? "derived" : "noParent"}`, {
+              uuid: this.parent.parent?.uuid,
+            })
           : "";
         this.grantOnlyText =
           this.isArmamentChild && this.grantOnly
@@ -142,19 +128,14 @@ export default (Base) => {
        * @returns {Promise<object>}
        */
       async toScroll(data = {}, equipmentType = "scroll") {
-        const reference = (await fromIdentifier("equipment:scroll"))?.toObject(
-          true,
-        ) || {
+        const reference = (await fromIdentifier("equipment:scroll"))?.toObject(true) || {
           type: "equipment",
           system: { equipmentType: "scroll" },
         };
         let img;
         if (toTitleCase(equipmentType) === "Scroll") {
           if (this.elements.size === 1) {
-            img = getImage(
-              "consumables",
-              toTitleCase(Array.from(this.elements)[0]) + " Spell Scroll",
-            );
+            img = getImage("consumables", toTitleCase(Array.from(this.elements)[0]) + " Spell Scroll");
           } else {
             img = getImage("consumables", "Celestial Spell Scroll");
           }

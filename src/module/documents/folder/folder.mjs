@@ -39,11 +39,11 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
     let out = [];
     if (folder) {
       out = folder.allContents;
-      if (types) out = out.filter((d) => types.includes(d.type));
+      if (types) out = out.filter(d => types.includes(d.type));
       if (uuids) {
-        out = out.map((d) => d.uuid);
+        out = out.map(d => d.uuid);
       } else if (folder.inCompendium) {
-        out = Promise.all(out.map((d) => fromUuid(d.uuid)));
+        out = Promise.all(out.map(d => fromUuid(d.uuid)));
       }
     }
     return out;
@@ -63,7 +63,7 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
 
   /** @inheritDoc */
   get contents() {
-    return super.contents.filter((d) => !d.system?._sup);
+    return super.contents.filter(d => !d.system?._sup);
   }
 
   /**

@@ -4,6 +4,7 @@ export { default as ConditionsActorSheetPart } from "./conditions-actor-sheet-pa
 export { default as DocumentCreationActorSheetPart } from "./document-creation-actor-sheet-part.mjs";
 export { default as FiltersActorSheetPart } from "./filters-actor-sheet-part.mjs";
 export { default as HidingActorSheetPart } from "./hiding-actor-sheet-part.mjs";
+export { default as ImpactActorSheetPart } from "./impact-actor-sheet-part.mjs";
 export { default as MechanicalActorSheetPart } from "./mechanical-actor-sheet-part.mjs";
 export { default as ProtectionsActorSheetPart } from "./protections-actor-sheet-part.mjs";
 export { default as RollingActorSheetPart } from "./rolling-actor-sheet-part.mjs";
@@ -11,5 +12,4 @@ export { default as SearchingActorSheetPart } from "./searching-actor-sheet-part
 export { default as SidebarActorSheetPart } from "./sidebar-actor-sheet-part.mjs";
 export { default as SortingActorSheetPart } from "./sorting-actor-sheet-part.mjs";
 export { default as TabsActorSheetPart } from "./tabs-actor-sheet-part.mjs";
-export { default as TakingActorSheetPart } from "./impact-actor-sheet-part.mjs";
 export { default as TradecraftsActorSheetPart } from "./tradecrafts-actor-sheet-part.mjs";

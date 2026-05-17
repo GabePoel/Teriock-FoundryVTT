@@ -1,7 +1,7 @@
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -25,14 +25,12 @@ export default (Base) => {
         const attr = target.dataset.edit;
         const current = foundry.utils.getProperty(this.document, attr);
         //noinspection JSUnresolvedReference
-        const defaultImg = this.document.constructor.getDefaultArtwork?.(
-          this.document.toObject(),
-        )?.img;
+        const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
         const options = {
           current,
           type: "image",
           redirectToRoot: defaultImg ? [defaultImg] : [],
-          callback: (path) => this.document.update({ [attr]: path }),
+          callback: path => this.document.update({ [attr]: path }),
           top: this.position.top + 40,
           left: this.position.left + 10,
         };

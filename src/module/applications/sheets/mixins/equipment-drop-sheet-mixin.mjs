@@ -18,19 +18,14 @@ export default function EquipmentDropSheetMixin(Base) {
       async _onDropChild(event, dropData) {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
-        let doc =
-          /** @type {TeriockEquipment} */ await Cls.fromDropData(dropData);
+        const doc = /** @type {TeriockEquipment} */ await Cls.fromDropData(dropData);
 
         // Throw error if storage isn't enabled
-        if (
-          doc.type === "equipment" &&
-          this.document.type === "equipment" &&
-          !this.document.system.storage.enabled
-        ) {
-          ui.notifications.error(
-            "TERIOCK.SHEETS.Equipment.NOTIFICATIONS.notStorage",
-            { format: { name: this.document.name }, localize: true },
-          );
+        if (doc.type === "equipment" && this.document.type === "equipment" && !this.document.system.storage.enabled) {
+          ui.notifications.error("TERIOCK.SHEETS.Equipment.NOTIFICATIONS.notStorage", {
+            format: { name: this.document.name },
+            localize: true,
+          });
           return;
         }
 
@@ -46,10 +41,7 @@ export default function EquipmentDropSheetMixin(Base) {
           doc.checkAncestor(this.document.actor)
         ) {
           const oldElder = await resolveDocument(_elder);
-          if (
-            this.document.type === "equipment" &&
-            this.document.system.storage.enabled
-          ) {
+          if (this.document.type === "equipment" && this.document.system.storage.enabled) {
             await doc.update({ "system._sup": this.document.id });
             if (oldElder) await oldElder.sheet?.render();
             return doc;
@@ -66,11 +58,7 @@ export default function EquipmentDropSheetMixin(Base) {
         // Delete old equipment if it was moved instead of duplicated
         if (created?.type === "equipment") {
           const elder = await doc.getElder();
-          if (
-            doc.isOwner &&
-            (elder?.type === "equipment" || elder?.documentName === "Actor") &&
-            doc.uuid
-          ) {
+          if (doc.isOwner && (elder?.type === "equipment" || elder?.documentName === "Actor") && doc.uuid) {
             await doc.delete();
           }
         }

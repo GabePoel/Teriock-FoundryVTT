@@ -17,10 +17,7 @@ export default function TriggerAutomationMixin(Base) {
      */
     class TriggerAutomation extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.Trigger",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Trigger"];
 
       /**
        * Whether to include condition restrictions on this triggering.
@@ -98,10 +95,7 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {boolean}
        */
       get _canRunPassively() {
-        return (
-          this.document.type !== "ability" ||
-          this.document.system["maneuver"] === "passive"
-        );
+        return this.document.type !== "ability" || this.document.system["maneuver"] === "passive";
       }
 
       /**
@@ -138,9 +132,7 @@ export default function TriggerAutomationMixin(Base) {
        * @return {boolean}
        */
       get _hasButtons() {
-        return (
-          !this.trigger || this.document?.documentName === "JournalEntryPage"
-        );
+        return !this.trigger || this.document?.documentName === "JournalEntryPage";
       }
 
       /**
@@ -173,17 +165,12 @@ export default function TriggerAutomationMixin(Base) {
        * @return {boolean}
        */
       _isActiveTrigger(trigger) {
-        return Object.keys(TERIOCK.config.trigger.execution.choices).includes(
-          trigger,
-        );
+        return Object.keys(TERIOCK.config.trigger.execution.choices).includes(trigger);
       }
 
       /** @inheritDoc */
       _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-        if (
-          this._triggerPaths.includes(path) &&
-          this.document?.documentName === "JournalEntryPage"
-        ) {
+        if (this._triggerPaths.includes(path) && this.document?.documentName === "JournalEntryPage") {
           inputConfig.disabled = true;
         }
         return super._makeFormGroup(path, groupConfig, inputConfig);
@@ -223,8 +210,7 @@ export default function TriggerAutomationMixin(Base) {
         return (
           trigger === this.trigger &&
           this._conditionsActive &&
-          (this._isActiveTrigger(trigger) ||
-            (this.active && this._canRunPassively && this._documentActive))
+          (this._isActiveTrigger(trigger) || (this.active && this._canRunPassively && this._documentActive))
         );
       }
 

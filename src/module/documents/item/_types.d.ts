@@ -1,6 +1,7 @@
-import { BaseItemSystem } from "../../data/systems/items/_module.mjs";
-import { BaseItemSheet } from "../../applications/sheets/item-sheets/_module.mjs";
 import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+
+import { BaseItemSheet } from "../../applications/sheets/item-sheets/_module.mjs";
+import { BaseItemSystem } from "../../data/systems/items/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {

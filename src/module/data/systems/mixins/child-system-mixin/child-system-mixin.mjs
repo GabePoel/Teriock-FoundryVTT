@@ -1,18 +1,11 @@
 import { impactConfig } from "../../../../constants/config/impact-config.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
-import {
-  EvaluationField,
-  FormulaField,
-  TextField,
-} from "../../../fields/_module.mjs";
+import { EvaluationField, FormulaField, TextField } from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
-import {
-  CommonSystemMixin,
-  HierarchySystemMixin,
-} from "../../mixins/_module.mjs";
+import { CommonSystemMixin, HierarchySystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;
@@ -30,23 +23,12 @@ export default function ChildSystemMixin(Base) {
      * @mixes HierarchySystem
      * @mixin
      */
-    class ChildSystem extends mix(
-      Base,
-      CommonSystemMixin,
-      UsableDataMixin,
-      HierarchySystemMixin,
-    ) {
+    class ChildSystem extends mixClasses(Base, CommonSystemMixin, UsableDataMixin, HierarchySystemMixin) {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat(
-        "TERIOCK.SYSTEMS.Child",
-      );
+      static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
 
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = [
-        "system.competence",
-        "system.qualifiers",
-        ...super.PRESERVED_PROPERTIES,
-      ];
+      static PRESERVED_PROPERTIES = ["system.competence", "system.qualifiers", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static defineSchema() {
@@ -56,13 +38,13 @@ export default function ChildSystemMixin(Base) {
           boosts: new fields.SchemaField(
             objectMap(
               impactConfig,
-              (e) =>
+              e =>
                 new FormulaField({
                   deterministic: false,
                   initial: "",
                   label: e.label,
                 }),
-              { filter: (e) => !e.hidden },
+              { filter: e => !e.hidden },
             ),
             { persisted: false },
           ),
@@ -102,18 +84,14 @@ export default function ChildSystemMixin(Base) {
 
       /** @inheritDoc */
       get _masterText() {
-        return this.parent.master?.documentName === "Actor"
-          ? ""
-          : super._masterText;
+        return this.parent.master?.documentName === "Actor" ? "" : super._masterText;
       }
 
       /** @returns {Teriock.Sheet.DisplayTag[]} */
       get displayTags() {
         return [
           {
-            label: this.parent.active
-              ? "TERIOCK.SHEETS.Common.TAGS.active"
-              : "TERIOCK.SHEETS.Common.TAGS.inactive",
+            label: this.parent.active ? "TERIOCK.SHEETS.Common.TAGS.active" : "TERIOCK.SHEETS.Common.TAGS.inactive",
             tooltip: "TERIOCK.SHEETS.Child.DISPLAY.activeStatus",
           },
         ];
@@ -153,9 +131,7 @@ export default function ChildSystemMixin(Base) {
           },
           {
             action: "toggleDisabledDoc",
-            icon: this.parent.disabled
-              ? TERIOCK.display.icons.ui.disabled
-              : TERIOCK.display.icons.ui.enabled,
+            icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
             onClick: () => this.parent.toggleDisabled(),
             tooltip: this.parent.disabled
               ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
@@ -182,9 +158,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @returns {boolean} */
       get makeEphemeral() {
-        return (
-          !!this.parent.elder?.isEphemeral || !!this.qualifiers.ephemeral.value
-        );
+        return !!this.parent.elder?.isEphemeral || !!this.qualifiers.ephemeral.value;
       }
 
       /** @returns {boolean} */
@@ -272,10 +246,7 @@ export default function ChildSystemMixin(Base) {
             },
             {
               group: "share",
-              icon: makeIcon(
-                TERIOCK.display.icons.ui.shareImage,
-                "contextMenu",
-              ),
+              icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
               label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
               onClick: this.parent.chatImage.bind(this.parent),
             },
@@ -290,8 +261,7 @@ export default function ChildSystemMixin(Base) {
               icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
               label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
               onClick: async () => await this.parent.duplicate(),
-              visible: () =>
-                this.parent._checkValidEditorDocument(doc, { self: false }),
+              visible: () => this.parent._checkValidEditorDocument(doc, { self: false }),
             },
           ],
         );
@@ -308,10 +278,7 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       async use(options = {}) {
         await this.parent.hookCall("use");
-        Hooks.callAll(
-          "teriock.use" + ucFirst(this.parent.type) + this.parent.type.slice(1),
-          [this.parent],
-        );
+        Hooks.callAll("teriock.use" + ucFirst(this.parent.type) + this.parent.type.slice(1), [this.parent]);
         await super.use(options);
       }
     }

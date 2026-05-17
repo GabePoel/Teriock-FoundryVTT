@@ -11,9 +11,7 @@ export default async function createHotbarFolderQuery(queryData, { _timeout }) {
   const name = queryData.name;
   const id = queryData.id;
   let macroFolder = game.folders.find(
-    (f) =>
-      f.name === game.teriock.getSetting("playerMacrosFolderName") &&
-      f.type === "Macro",
+    f => f.name === game.teriock.getSetting("playerMacrosFolderName") && f.type === "Macro",
   );
   if (!macroFolder) {
     macroFolder = await TeriockFolder.create({
@@ -21,15 +19,10 @@ export default async function createHotbarFolderQuery(queryData, { _timeout }) {
       type: "Macro",
     });
   }
-  let macroSubFolder = game.folders.find(
-    (f) =>
-      f.getFlag("teriock", "user") === id &&
-      f.getFlag("teriock", "hotbarFolder") &&
-      f.type === "Macro",
+  const macroSubFolder = game.folders.find(
+    f => f.getFlag("teriock", "user") === id && f.getFlag("teriock", "hotbarFolder") && f.type === "Macro",
   );
-  const folderName = name.endsWith("s")
-    ? `${name}' Macros`
-    : `${name}'s Macros`;
+  const folderName = name.endsWith("s") ? `${name}' Macros` : `${name}'s Macros`;
   if (!macroSubFolder) {
     await TeriockFolder.create({
       flags: { teriock: { user: id, hotbarFolder: true } },

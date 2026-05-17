@@ -66,9 +66,7 @@ export default class FluencySheet extends BaseEffectSheet {
             await this.document.update(updateData);
           },
           visible: () => {
-            return (
-              foundry.utils.getProperty(this.document.system, "field") === fKey
-            );
+            return foundry.utils.getProperty(this.document.system, "field") === fKey;
           },
         };
         options.push(option);
@@ -80,15 +78,7 @@ export default class FluencySheet extends BaseEffectSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    this._connectContextMenu(
-      ".field-box",
-      this.#fieldContextMenuEntries(),
-      "click",
-    );
-    this._connectContextMenu(
-      ".tradecraft-box",
-      this.#tradecraftContextMenuEntries(),
-      "click",
-    );
+    this._connectContextMenu(".field-box", this.#fieldContextMenuEntries(), "click");
+    this._connectContextMenu(".tradecraft-box", this.#tradecraftContextMenuEntries(), "click");
   }
 }

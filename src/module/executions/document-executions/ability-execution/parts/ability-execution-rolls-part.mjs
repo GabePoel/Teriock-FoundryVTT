@@ -36,9 +36,7 @@ export default function AbilityExecutionRollsPart(Base) {
 
       /** @inheritDoc */
       async _buildRolls() {
-        const modifyEffectAutomation = this.activeAutomations.find(
-          (a) => a.type === "modifyEffect",
-        );
+        const modifyEffectAutomation = this.activeAutomations.find(a => a.type === "modifyEffect");
         const preventThreshold = !!modifyEffectAutomation?.preventThreshold;
         const styles = {
           dice: {
@@ -56,9 +54,7 @@ export default function AbilityExecutionRollsPart(Base) {
           };
           if (this.piercing.ub) {
             generalRollOptions.styles.dice.classes += " ub";
-            generalRollOptions.styles.dice.tooltip = _loc(
-              "TERIOCK.TERMS.Properties.unblockable",
-            );
+            generalRollOptions.styles.dice.tooltip = _loc("TERIOCK.TERMS.Properties.unblockable");
           }
           for (const target of this.targets) {
             const rollOptions = foundry.utils.deepClone(generalRollOptions);
@@ -66,11 +62,7 @@ export default function AbilityExecutionRollsPart(Base) {
             if (target.actor) {
               rollOptions.threshold = target.actor.system.defense.cc;
               rollOptions.comparison = "gte";
-              if (
-                this.piercing.ub &&
-                (this.warded ||
-                  !target.actor.system.wielding.blocker?.system.spellTurning)
-              ) {
+              if (this.piercing.ub && (this.warded || !target.actor.system.wielding.blocker?.system.spellTurning)) {
                 rollOptions.threshold = target.actor.system.defense.ac;
                 rollOptions.comparison = "gt";
               }
@@ -80,18 +72,10 @@ export default function AbilityExecutionRollsPart(Base) {
                 rollOptions.threshold += TERIOCK.config.target.vitals;
               }
             }
-            this.rolls.push(
-              new ThresholdRoll(this.formula, this.rollData, rollOptions),
-            );
+            this.rolls.push(new ThresholdRoll(this.formula, this.rollData, rollOptions));
           }
           if (this.rolls.length === 0) {
-            this.rolls.push(
-              new ThresholdRoll(
-                this.formula,
-                this.rollData,
-                generalRollOptions,
-              ),
-            );
+            this.rolls.push(new ThresholdRoll(this.formula, this.rollData, generalRollOptions));
           }
         } else if (this.isFeat) {
           styles.total.icon = "star";

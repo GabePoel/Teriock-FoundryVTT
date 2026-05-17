@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -15,11 +15,7 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  * @mixes ConsumableSystem
  * @mixes WikiSystem
  */
-export default class BodySystem extends mix(
-  BaseItemSystem,
-  mixins.WikiSystemMixin,
-  mixins.ArmamentSystemMixin,
-) {
+export default class BodySystem extends mixClasses(BaseItemSystem, mixins.WikiSystemMixin, mixins.ArmamentSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
@@ -48,9 +44,7 @@ export default class BodySystem extends mix(
         this._defenseBar,
         {
           icon: TERIOCK.display.icons.equipment.equipmentClasses,
-          label: _loc(
-            "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-          ),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
           wrappers: [
             this.range.description,
             ...simplifyTags(this._equipmentClassesTags),

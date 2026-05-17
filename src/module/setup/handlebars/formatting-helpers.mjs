@@ -1,7 +1,4 @@
-import {
-  inferNameFromIdentifier,
-  makeIconClass,
-} from "../../helpers/utils.mjs";
+import { inferNameFromIdentifier, makeIconClass } from "../../helpers/utils.mjs";
 
 /**
  * Clamp bar inputs to non-negative numbers for percentage helpers.
@@ -35,7 +32,7 @@ function modifierIconClass(modifier) {
 
 /**
  * CSS class for a hackable body part's icon.
- * @param {Teriock.Foundry.BarField} [bar]
+ * @param {Foundry.BarField} [bar]
  * @returns {string}
  */
 function hackFill(bar) {

@@ -42,9 +42,7 @@ export default class BaseConfig extends TeriockBaseApplication {
   static async #onCommitChanges(_event, _form, formData) {
     let requiresClientReload = false;
     let requiresWorldReload = false;
-    for (const [key, value] of Object.entries(
-      foundry.utils.expandObject(formData.object),
-    )) {
+    for (const [key, value] of Object.entries(foundry.utils.expandObject(formData.object))) {
       const setting = game.settings.settings.get(`teriock.${key}`);
       const current = game.settings.get("teriock", key, { document: true });
       const prior = current?._source?.value ?? current;
@@ -52,10 +50,8 @@ export default class BaseConfig extends TeriockBaseApplication {
         document: true,
       });
       if (prior === (updated?._source?.value ?? updated)) continue;
-      requiresClientReload ||=
-        setting.scope !== "world" && setting?.requiresReload;
-      requiresWorldReload ||=
-        setting.scope === "world" && setting?.requiresReload;
+      requiresClientReload ||= setting.scope !== "world" && setting?.requiresReload;
+      requiresWorldReload ||= setting.scope === "world" && setting?.requiresReload;
     }
     if (requiresClientReload || requiresWorldReload) {
       return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
@@ -97,8 +93,7 @@ export default class BaseConfig extends TeriockBaseApplication {
    */
   createSettingField(name) {
     const setting = game.settings.settings.get(`teriock.${name}`);
-    if (!setting)
-      throw new Error(`Setting \`teriock.${name}\` not registered.`);
+    if (!setting) throw new Error(`Setting \`teriock.${name}\` not registered.`);
     const isDataField = setting.type instanceof fields.DataField;
     const Field = {
       [Boolean]: fields.BooleanField,
@@ -106,15 +101,11 @@ export default class BaseConfig extends TeriockBaseApplication {
       [String]: fields.StringField,
     }[setting.type];
     if (!isDataField && !Field) {
-      throw new Error(
-        "Automatic field generation only available for Boolean, Number, or String types",
-      );
+      throw new Error("Automatic field generation only available for Boolean, Number, or String types");
     }
     const data = {
       name,
-      field: isDataField
-        ? setting.type
-        : new Field({ required: true, blank: false }),
+      field: isDataField ? setting.type : new Field({ required: true, blank: false }),
       hint: _loc(setting.hint),
       label: _loc(setting.name),
       value: game.settings.get("teriock", name),
@@ -135,12 +126,10 @@ export default class BaseConfig extends TeriockBaseApplication {
   createSettingFields(settings) {
     if (typeof settings === "object") {
       if (!game.user.isGM) {
-        settings = Object.fromEntries(
-          Object.entries(settings).filter(([_k, v]) => v.scope !== "world"),
-        );
+        settings = Object.fromEntries(Object.entries(settings).filter(([_k, v]) => v.scope !== "world"));
       }
       settings = Object.keys(settings);
     }
-    return settings.map((s) => this.createSettingField(s));
+    return settings.map(s => this.createSettingField(s));
   }
 }

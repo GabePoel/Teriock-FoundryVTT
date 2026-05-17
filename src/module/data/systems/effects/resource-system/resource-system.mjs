@@ -1,5 +1,5 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
@@ -11,7 +11,7 @@ import CleanedEffectSystem from "../cleaned-effect-system.mjs";
  * @mixes ConsumableSystem
  * @mixes RevelationSystem
  */
-export default class ResourceSystem extends mix(
+export default class ResourceSystem extends mixClasses(
   CleanedEffectSystem,
   mixins.ConsumableSystemMixin,
   mixins.RevelationSystemMixin,

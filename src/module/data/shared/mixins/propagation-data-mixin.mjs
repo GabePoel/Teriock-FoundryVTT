@@ -25,10 +25,7 @@ export default function PropagationDataMixin(Base) {
        * @returns {Promise<void>}
        */
       async _preFireTrigger(trigger, scope = {}) {
-        await this._propagateOperation("_preFireTrigger", true, [
-          trigger,
-          scope,
-        ]);
+        await this._propagateOperation("_preFireTrigger", true, [trigger, scope]);
       }
 
       /**
@@ -55,9 +52,7 @@ export default function PropagationDataMixin(Base) {
         // Propagate operation to system
         const systemMethod = this.system?.[methodName];
         if (typeof systemMethod === "function") {
-          return isAsync
-            ? await systemMethod.apply(this.system, args)
-            : systemMethod.apply(this.system, args);
+          return isAsync ? await systemMethod.apply(this.system, args) : systemMethod.apply(this.system, args);
         }
       }
 

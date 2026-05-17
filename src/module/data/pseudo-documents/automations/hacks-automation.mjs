@@ -1,9 +1,6 @@
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
-import {
-  TakeHackActivation,
-  TakeUnhackActivation,
-} from "../activations/command-activations.mjs";
+import { TakeHackActivation, TakeUnhackActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -13,10 +10,7 @@ const { fields } = foundry.data;
  */
 export default class HacksAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Hacks",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Hacks"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -33,9 +27,7 @@ export default class HacksAutomation extends BaseAutomation {
     return Object.assign(super.defineSchema(), {
       hacks: new fields.SetField(
         new fields.StringField({
-          choices: localizeChoices(
-            objectMap(TERIOCK.config.hack, (h) => h.part),
-          ),
+          choices: localizeChoices(objectMap(TERIOCK.config.hack, h => h.part)),
         }),
         {
           label: "TERIOCK.TERMS.Common.hacks",
@@ -54,14 +46,14 @@ export default class HacksAutomation extends BaseAutomation {
   async getActivations() {
     if (this.reverse) {
       return Array.from(this.hacks).map(
-        (h) =>
+        h =>
           new TakeUnhackActivation({
             options: { part: h },
           }),
       );
     } else {
       return Array.from(this.hacks).map(
-        (h) =>
+        h =>
           new TakeHackActivation({
             options: { part: h },
           }),

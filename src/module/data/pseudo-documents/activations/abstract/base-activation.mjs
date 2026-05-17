@@ -74,7 +74,7 @@ export default class BaseActivation extends TypedPseudoDocument {
    * @returns {(TeriockActor|null)[]}
    */
   get targetedActors() {
-    return this.targetedTokens.map((t) => t.actor).filter(Boolean);
+    return this.targetedTokens.map(t => t.actor).filter(Boolean);
   }
 
   /**
@@ -90,7 +90,7 @@ export default class BaseActivation extends TypedPseudoDocument {
    * @returns {TeriockTokenDocument[]}
    */
   get tokenDocuments() {
-    return this.tokens.map((t) => t.document).filter(Boolean);
+    return this.tokens.map(t => t.document).filter(Boolean);
   }
 
   /**

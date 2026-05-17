@@ -36,11 +36,9 @@ export function makeIconElement(icon, ...styles) {
  */
 export function makeIconClass(icon, ...styles) {
   if (!icon) return "";
-  let prefix = "fa-";
+  const prefix = "fa-";
   let start = "fa-fw";
-  const styleClasses = styles
-    .map((s) => iconStyles[s] || s)
-    .filter((s) => typeof s === "string");
+  const styleClasses = styles.map(s => iconStyles[s] || s).filter(s => typeof s === "string");
   if (icon.startsWith("ms-")) start += " mic";
   if (icon.startsWith("mdi-")) {
     start += " mdi";
@@ -48,7 +46,7 @@ export function makeIconClass(icon, ...styles) {
       icon = `${icon} ${icon}-outline`;
     }
   }
-  const classString = styleClasses.map((s) => `${prefix}${s}`).join(" ");
+  const classString = styleClasses.map(s => `${prefix}${s}`).join(" ");
   return `${start} ${classString} ${icon}`;
 }
 
@@ -77,7 +75,7 @@ export function getRollIcon(rollFormula) {
  */
 export function fancifyFields(displayFields) {
   return displayFields
-    .map((f) => {
+    .map(f => {
       let fancy;
       if (typeof f === "string") fancy = { path: f };
       else fancy = f;
@@ -100,14 +98,14 @@ export function fancifyFields(displayFields) {
         button,
       };
     })
-    .filter((f) => f.visible);
+    .filter(f => f.visible);
 }
 
 /**
  * Iterate through an array with a progress bar using batched processing.
  * @param {Array} arr
  * @param {string} message
- * @param {Function} callback
+ * @param {function} callback
  * @param {object} [options]
  * @param {number} [options.batch=1]
  * @param {"info"|"success"|"warn"|"error"} [options.style="info"]
@@ -121,7 +119,7 @@ export async function progressBar(arr, message, callback, options = {}) {
   });
   for (let i = 0; i < count; i += batch) {
     const chunk = arr.slice(i, i + batch);
-    await Promise.all(chunk.map((item) => callback(item)));
+    await Promise.all(chunk.map(item => callback(item)));
     ui.notifications.update(progress, {
       pct: Math.min((i + batch) / count, 1),
     });
@@ -136,10 +134,7 @@ export async function progressBar(arr, message, callback, options = {}) {
  */
 export function prefixObject(obj, prefix) {
   return Object.fromEntries(
-    Object.entries(foundry.utils.flattenObject(obj)).map(([k, v]) => [
-      k.length > 0 ? `${prefix}.${k}` : prefix,
-      v,
-    ]),
+    Object.entries(foundry.utils.flattenObject(obj)).map(([k, v]) => [k.length > 0 ? `${prefix}.${k}` : prefix, v]),
   );
 }
 
@@ -190,7 +185,7 @@ export function objectMap(obj, fn, options = {}) {
  * @returns {Record<string, string>}
  */
 export function choiceMap(obj, fn, options = { localize: true }) {
-  const out = Object.fromEntries(Object.keys(obj).map((k) => [k, fn(k)]));
+  const out = Object.fromEntries(Object.keys(obj).map(k => [k, fn(k)]));
   if (options.localize) return localizeChoices(out);
   return out;
 }
@@ -228,7 +223,7 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
 
 /**
  * Helper function to ensure a value with a min and max is allowed.
- * @param {Teriock.Foundry.BarField} bar
+ * @param {Foundry.BarField} bar
  * @param {number} change
  * @returns {number}
  */
@@ -280,7 +275,7 @@ export function consolidateWriteOperations(operations) {
   for (const op of operations) {
     const opMini = { ...op };
     for (const exclusion of exclusions) delete opMini[exclusion];
-    const comOp = consolidated.find((co) => {
+    const comOp = consolidated.find(co => {
       const coMini = { ...co };
       for (const exclusion of exclusions) delete coMini[exclusion];
       return foundry.utils.equals(opMini, coMini);
@@ -289,10 +284,7 @@ export function consolidateWriteOperations(operations) {
       comOp.ids = [...(comOp.ids ?? []), ...(op?.ids ?? [])];
       comOp.data = [...(comOp.data ?? []), ...(op?.data ?? [])];
       comOp.updates = [...(comOp.updates ?? []), ...(op?.updates ?? [])];
-      comOp.replacements = Object.assign(
-        comOp.replacements ?? {},
-        op?.replacements ?? {},
-      );
+      comOp.replacements = Object.assign(comOp.replacements ?? {}, op?.replacements ?? {});
     } else consolidated.push(op);
   }
   return consolidated;
@@ -351,10 +343,7 @@ export function parseIdentifier(identifier) {
  * @returns {Promise<AnyCommonDocument|null>}
  */
 export async function findBestDocument(lookup, localDocument, options = {}) {
-  if (
-    options.localOnly &&
-    typeof localDocument?.getEffectiveChildren !== "function"
-  ) {
+  if (options.localOnly && typeof localDocument?.getEffectiveChildren !== "function") {
     return null;
   }
   if (!lookup) return null;
@@ -364,7 +353,7 @@ export async function findBestDocument(lookup, localDocument, options = {}) {
   });
   if (doc) return doc;
   const children = await localDocument.getEffectiveChildren();
-  return children.find((c) => c.lookupKey === lookup) ?? null;
+  return children.find(c => c.lookupKey === lookup) ?? null;
 }
 
 /**
@@ -377,13 +366,7 @@ export async function fromIdentifierLocal(identifier, localDocument) {
   if (typeof localDocument?.getEffectiveChildren !== "function") return null;
   if (!identifier) return null;
   const children = await localDocument.getEffectiveChildren();
-  return (
-    children.find(
-      (c) =>
-        c?.typedIdentifier === identifier ||
-        c?.system?.identifier === identifier,
-    ) ?? null
-  );
+  return children.find(c => c?.typedIdentifier === identifier || c?.system?.identifier === identifier) ?? null;
 }
 
 /**
@@ -423,17 +406,10 @@ export function fromIdentifierSync(identifier) {
     if (documentName === "Actor") collection = game.actors;
     if (documentName === "Item") collection = game.items;
     if (!collection) return null;
-    return (
-      collection.find(
-        (d) =>
-          d.type === parsed.type && d.system?.identifier === parsed.identifier,
-      ) ?? null
-    );
+    return collection.find(d => d.type === parsed.type && d.system?.identifier === parsed.identifier) ?? null;
   }
   const candidates = [...game.items.contents, ...game.actors.contents];
-  return (
-    candidates.find((d) => d.system?.identifier === parsed.identifier) ?? null
-  );
+  return candidates.find(d => d.system?.identifier === parsed.identifier) ?? null;
 }
 
 /**
@@ -450,13 +426,9 @@ export async function fromHarmIdentifier(identifier) {
   if (parsed.type === "drain") setting = "documentDrainSources";
   if (!setting) return null;
   const sourcesUuids = game.teriock.getSetting(setting);
-  const sources = await Promise.all(
-    Array.from(sourcesUuids).map((uuid) => foundry.utils.fromUuid(uuid)),
-  );
+  const sources = await Promise.all(Array.from(sourcesUuids).map(uuid => foundry.utils.fromUuid(uuid)));
   for (const source of sources) {
-    const doc = source?.pages?.contents?.find(
-      (p) => p.type === parsed.type && p.forcedIdentifier === parsed.identifier,
-    );
+    const doc = source?.pages?.contents?.find(p => p.type === parsed.type && p.forcedIdentifier === parsed.identifier);
     if (doc) return doc;
   }
   return null;
@@ -486,25 +458,19 @@ export async function fromIdentifier(identifier, options = {}) {
     const documentName = TERIOCK.config.document[parsed.type]?.documentName;
     if (!documentName) return null;
     const packs = game.packs.contents
-      .filter((p) => p.documentName === documentName)
-      .sort(
-        (a, b) =>
-          b.collection.startsWith("teriock.") -
-          a.collection.startsWith("teriock."),
-      );
+      .filter(p => p.documentName === documentName)
+      .sort((a, b) => b.collection.startsWith("teriock.") - a.collection.startsWith("teriock."));
     for (const pack of packs) {
       const docs = await pack.getDocuments({
         system: { identifier: parsed.identifier },
         type: parsed.type,
       });
-      const filtered = docs.filter((d) => {
+      const filtered = docs.filter(d => {
         if (d.sup) return false;
         const mutationFields = [
           "system.improvement",
           "system.limitation",
-          ...Object.keys(costConfig.tweaks).map(
-            (t) => `system.costs.tweaks.${t}`,
-          ),
+          ...Object.keys(costConfig.tweaks).map(t => `system.costs.tweaks.${t}`),
         ];
         for (const field of mutationFields) {
           if (foundry.utils.getProperty(d, field)) return false;

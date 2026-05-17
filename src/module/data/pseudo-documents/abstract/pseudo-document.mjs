@@ -42,19 +42,10 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   static async create(data = {}, { parent, ...operation } = {}) {
     if (!parent) throw new Error("Pseudo-documents must have parents");
-    const id =
-      operation.keepId && foundry.data.validators.isValidId(data._id)
-        ? data._id
-        : foundry.utils.randomID();
+    const id = operation.keepId && foundry.data.validators.isValidId(data._id) ? data._id : foundry.utils.randomID();
     /** @type {CommonSystem} */
-    const directParent = foundry.utils.isSubclass(
-      parent,
-      foundry.abstract.TypeDataModel,
-    )
-      ? parent
-      : parent.system;
-    const fieldPath =
-      directParent.metadata?.pseudos?.[this.metadata.documentName];
+    const directParent = foundry.utils.isSubclass(parent, foundry.abstract.TypeDataModel) ? parent : parent.system;
+    const fieldPath = directParent.metadata?.pseudos?.[this.metadata.documentName];
     if (!fieldPath) throw new Error("Invalid pseudo-document parent");
     const updateData = { [`${fieldPath}.${id}`]: { ...data, _id: id } };
     await directParent.document.update(updateData, operation);
@@ -79,7 +70,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
     const pseudo = await fromUuid(data.uuid);
     if (!pseudo) throw new Error("Failed to resolve PseudoDocument.");
     if (pseudo.documentName !== this.metadata.documentName) {
-      throw new Error(`Invalid type provided.`, pseudo);
+      throw new Error("Invalid type provided.", pseudo);
     }
     return pseudo;
   }
@@ -95,11 +86,9 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   static toCollectionObject(docs, options = {}) {
     return Object.fromEntries(
-      docs.map((d) => {
+      docs.map(d => {
         const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
-        const data = foundry.utils.isPlainObject(d)
-          ? d
-          : d.toObject(options.source ?? true);
+        const data = foundry.utils.isPlainObject(d) ? d : d.toObject(options.source ?? true);
         data._id = id;
         return [id, data];
       }),
@@ -120,8 +109,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   get fieldPath() {
     let path = this.parent.constructor.metadata.pseudos[this.documentName];
-    if (this.parent instanceof PseudoDocument)
-      path = [this.parent.fieldPath, this.parent.id, path].join(".");
+    if (this.parent instanceof PseudoDocument) path = [this.parent.fieldPath, this.parent.id, path].join(".");
     return path;
   }
 

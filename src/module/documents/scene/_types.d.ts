@@ -1,5 +1,6 @@
-import { TeriockScene, TeriockTokenDocument } from "../_module.mjs";
 import { Collection } from "@common/utils/_module.mjs";
+
+import { TeriockScene, TeriockTokenDocument } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
@@ -8,9 +9,7 @@ declare global {
       tokens: Collection<ID<TeriockTokenDocument>, TeriockTokenDocument>;
 
       get documentName(): "Scene";
-
       get id(): ID<TeriockScene>;
-
       get uuid(): UUID<TeriockScene>;
     }
   }

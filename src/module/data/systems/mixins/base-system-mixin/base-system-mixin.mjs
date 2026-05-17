@@ -43,9 +43,7 @@ export default function BaseSystemMixin(Base) {
         if (this._nameTags.length > 0) {
           name = _loc("TERIOCK.SYSTEMS.Base.EMBED.taggedNameString", {
             name,
-            tags: this._nameTags.join(
-              _loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"),
-            ),
+            tags: this._nameTags.join(_loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator")),
           });
         }
         return name.trim();

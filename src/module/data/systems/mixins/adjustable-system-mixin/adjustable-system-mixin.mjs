@@ -15,17 +15,10 @@ export default function AdjustableSystemMixin(Base) {
      */
     class AdjustableSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Adjustable",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Adjustable"];
 
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = [
-        "system.badge",
-        ...this._adjustableTextFields,
-        ...super.PRESERVED_PROPERTIES,
-      ];
+      static PRESERVED_PROPERTIES = ["system.badge", ...this._adjustableTextFields, ...super.PRESERVED_PROPERTIES];
 
       /**
        * @returns {string[]}

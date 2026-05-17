@@ -15,7 +15,7 @@ import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -65,9 +65,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onCreateAttunement() {
-        await this.document.createChildDocuments("ActiveEffect", [
-          newDocumentObj("attunement"),
-        ]);
+        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("attunement")]);
       }
 
       /**
@@ -90,9 +88,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onCreateConsequence() {
-        await this.document.createChildDocuments("ActiveEffect", [
-          newDocumentObj("consequence"),
-        ]);
+        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("consequence")]);
       }
 
       /**
@@ -141,9 +137,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onCreateImbuement() {
-        await this.document.createChildDocuments("ActiveEffect", [
-          newDocumentObj("imbuement"),
-        ]);
+        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("imbuement")]);
       }
 
       /**
@@ -151,9 +145,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onCreateMount() {
-        await this.document.createChildDocuments("Item", [
-          newDocumentObj("mount"),
-        ]);
+        await this.document.createChildDocuments("Item", [newDocumentObj("mount")]);
       }
 
       /**
@@ -161,9 +153,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onCreatePower() {
-        await this.document.createChildDocuments("Item", [
-          newDocumentObj("power"),
-        ]);
+        await this.document.createChildDocuments("Item", [newDocumentObj("power")]);
       }
 
       /**
@@ -190,7 +180,7 @@ export default (Base) => {
        * @todo There is 100% a simpler/more generalized version of this that could be made.
        */
       static async _onCreateRank() {
-        let rankClass = await selectClassDialog();
+        const rankClass = await selectClassDialog();
         const innate = this.document.documentName !== "Actor";
         if (!rankClass) return;
         const classIdentifier = toKebabCase(rankClass);
@@ -201,13 +191,12 @@ export default (Base) => {
           teriock.fromIdentifier(`rank:rank-4-${classIdentifier}`),
           teriock.fromIdentifier(`rank:rank-5-${classIdentifier}`),
         ]);
-        const referenceRank =
-          /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
-            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
-            openable: true,
-          });
+        const referenceRank = /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
+          title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
+          openable: true,
+        });
         const rankNumber = referenceRank.system.classRank;
-        let rank = /** @type {TeriockRank} */ referenceRank.clone();
+        const rank = /** @type {TeriockRank} */ referenceRank.clone();
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
           toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
@@ -217,26 +206,18 @@ export default (Base) => {
           return;
         }
         /** @type {TeriockRank[]} */
-        const existingRanks = (await this.document.getRanks()).filter(
-          (r) => r.system.className === rankClass,
-        );
+        const existingRanks = (await this.document.getRanks()).filter(r => r.system.className === rankClass);
         const combatAbilityNames = new Set(
-          referenceRank.abilities
-            .filter((a) => a.getFlag("teriock", "category") === "combat")
-            .map((a) => a.name),
+          referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === "combat").map(a => a.name),
         );
         const availableCombatAbilityNames = new Set(combatAbilityNames);
         const supportAbilityNames = new Set(
-          referenceRank.abilities
-            .filter((a) => a.getFlag("teriock", "category") === "support")
-            .map((a) => a.name),
+          referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === "support").map(a => a.name),
         );
         const availableSupportAbilityNames = new Set(supportAbilityNames);
         for (const existingRank of existingRanks) {
           for (const ability of existingRank.abilities) {
-            const existingAbility = rank.abilities.find(
-              (a) => a.name === ability.name,
-            );
+            const existingAbility = rank.abilities.find(a => a.name === ability.name);
             if (existingAbility) {
               availableCombatAbilityNames.delete(existingAbility.name);
               availableSupportAbilityNames.delete(existingAbility.name);
@@ -245,34 +226,24 @@ export default (Base) => {
         }
         const chosenAbilityNames = [];
         if (availableCombatAbilityNames.size > 1) {
-          const availableCombatAbilities = referenceRank.abilities.filter((a) =>
-            availableCombatAbilityNames.has(a.name),
-          );
-          const chosenCombatAbility = await selectDocumentDialog(
-            availableCombatAbilities,
-            {
-              title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat"),
-              openable: true,
-            },
-          );
+          const availableCombatAbilities = referenceRank.abilities.filter(a => availableCombatAbilityNames.has(a.name));
+          const chosenCombatAbility = await selectDocumentDialog(availableCombatAbilities, {
+            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat"),
+            openable: true,
+          });
           const chosenCombatAbilityName = chosenCombatAbility.name;
           chosenAbilityNames.push(chosenCombatAbilityName);
         } else {
           chosenAbilityNames.push(...availableCombatAbilityNames);
         }
         if (availableSupportAbilityNames.size > 1) {
-          const availableSupportAbilities = referenceRank.abilities.filter(
-            (a) => availableSupportAbilityNames.has(a.name),
+          const availableSupportAbilities = referenceRank.abilities.filter(a =>
+            availableSupportAbilityNames.has(a.name),
           );
-          const chosenSupportAbility = await selectDocumentDialog(
-            availableSupportAbilities,
-            {
-              title: _loc(
-                "TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport",
-              ),
-              openable: true,
-            },
-          );
+          const chosenSupportAbility = await selectDocumentDialog(availableSupportAbilities, {
+            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport"),
+            openable: true,
+          });
           const supportAbilityName = chosenSupportAbility.name;
           chosenAbilityNames.push(supportAbilityName);
         } else {
@@ -284,7 +255,7 @@ export default (Base) => {
           /** @type {TeriockAbility} */
           const chosenAbility = abilities.getName(chosenAbilityName);
           allowedAbilityIds.add(chosenAbility.id);
-          chosenAbility.allSubs.map((a) => allowedAbilityIds.add(a.id));
+          chosenAbility.allSubs.map(a => allowedAbilityIds.add(a.id));
         }
         for (const ability of abilities) {
           if (!allowedAbilityIds.has(ability?.id)) {
@@ -303,9 +274,7 @@ export default (Base) => {
        * @returns {Promise<void>}
        */
       static async _onCreateResource() {
-        await this.document.createChildDocuments("ActiveEffect", [
-          newDocumentObj("resource"),
-        ]);
+        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("resource")]);
       }
 
       /**
@@ -327,9 +296,9 @@ export default (Base) => {
       async _onRender(context, options) {
         await super._onRender(context, options);
         this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(
-          /** @param {HTMLElement} el */ (el) => {
+          /** @param {HTMLElement} el */ el => {
             const uuid = el.dataset.uuid;
-            fromUuid(uuid).then((doc) => doc?.onEmbed(el));
+            fromUuid(uuid).then(doc => doc?.onEmbed(el));
           },
         );
       }
@@ -338,18 +307,14 @@ export default (Base) => {
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         let children = await this.document.getVisibleChildren();
-        children = children.filter((c) => {
+        children = children.filter(c => {
           if (foundry.utils.hasProperty(c, "system.revealed")) {
-            return (
-              foundry.utils.getProperty(c, "system.revealed") || game.user.isGM
-            );
+            return foundry.utils.getProperty(c, "system.revealed") || game.user.isGM;
           } else return true;
         });
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter) {
-            context[options["getter"]] = TERIOCK.config.document[type].sorter(
-              children.filter((c) => c.type === type),
-            );
+            context[options["getter"]] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
           }
         }
         return context;

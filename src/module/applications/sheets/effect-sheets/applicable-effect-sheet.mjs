@@ -1,12 +1,8 @@
 import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
-import {
-  BaseSheetMixin,
-  ChangesSheetMixin,
-  ConfigButtonSheetMixin,
-} from "../mixins/_module.mjs";
+import { BaseSheetMixin, ChangesSheetMixin, ConfigButtonSheetMixin } from "../mixins/_module.mjs";
 import {
   AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
@@ -22,7 +18,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @extends {ActiveEffectConfig}
  * @mixes AutomationsCommonSheetPart
  */
-export default class ApplicableEffectSheet extends mix(
+export default class ApplicableEffectSheet extends mixClasses(
   ActiveEffectConfig,
   BaseSheetMixin,
   ConfigButtonSheetMixin,
@@ -90,9 +86,7 @@ export default class ApplicableEffectSheet extends mix(
     await super._onRender(context, options);
     this.element.querySelector("footer")?.remove();
     if (this.document.system._formPaths.length) {
-      const disabledGroup = this.element.querySelector(
-        ".form-group:has(.form-fields input[name='disabled'])",
-      );
+      const disabledGroup = this.element.querySelector(".form-group:has(.form-fields input[name='disabled'])");
       const editorForms = await this.document.system._getEditorForms();
       disabledGroup.after(editorForms);
     }

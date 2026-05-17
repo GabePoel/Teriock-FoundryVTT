@@ -23,7 +23,7 @@ export const applyStatusCommand = {
   args: ["status"],
   icon: icons.ui.apply,
   id: "apply",
-  label: (options) =>
+  label: options =>
     options?.status
       ? _loc("TERIOCK.COMMANDS.Status.applyNamed", {
           name: TERIOCK.reference.conditions[options.status],
@@ -41,7 +41,7 @@ export const removeStatusCommand = {
   args: ["status"],
   icon: icons.ui.undo,
   id: "remove",
-  label: (options) =>
+  label: options =>
     options?.status
       ? _loc("TERIOCK.COMMANDS.Status.removeNamed", {
           name: TERIOCK.reference.conditions[options.status],
@@ -59,7 +59,7 @@ export const toggleStatusCommand = {
   args: ["status"],
   icon: icons.ui.toggle,
   id: "toggle",
-  label: (options) =>
+  label: options =>
     options?.status
       ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", {
           name: TERIOCK.index.conditions[options.status],

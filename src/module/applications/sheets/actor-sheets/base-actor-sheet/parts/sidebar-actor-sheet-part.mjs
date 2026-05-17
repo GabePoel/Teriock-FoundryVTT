@@ -4,7 +4,7 @@ import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -46,9 +46,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async #onToggleSidebar() {
-      this.element
-        .querySelectorAll(".sidebar-collapser")
-        .forEach((el) => el.classList.toggle("collapsed"));
+      this.element.querySelectorAll(".sidebar-collapser").forEach(el => el.classList.toggle("collapsed"));
       this._sidebarOpen = !this._sidebarOpen;
     }
 
@@ -125,17 +123,8 @@ export default (Base) =>
     async _onRender(context, options) {
       await super._onRender(context, options);
 
-      this._connectContextMenu(
-        ".character-piercing-box",
-        this.#piercingContextMenu(),
-        "click",
-      );
-      this._connectContextMenu(
-        ".character-basics",
-        this.#scalingContextMenu(),
-        "contextmenu",
-        "down",
-      );
+      this._connectContextMenu(".character-piercing-box", this.#piercingContextMenu(), "click");
+      this._connectContextMenu(".character-basics", this.#scalingContextMenu(), "contextmenu", "down");
     }
 
     /** @inheritDoc */

@@ -1,9 +1,6 @@
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
-import {
-  UseExternalActivation,
-  UseLocalActivation,
-} from "../activations/command-activations.mjs";
+import { UseExternalActivation, UseLocalActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import {
   CompetenceAutomationMixin,
@@ -21,17 +18,14 @@ const { fields } = foundry.data;
  * @mixes CompetenceAutomation
  * @mixes TriggerAutomation
  */
-export default class UseDocumentsAutomation extends mix(
+export default class UseDocumentsAutomation extends mixClasses(
   BaseAutomation,
   SelectDocumentsAutomationMixin,
   TriggerAutomationMixin,
   CompetenceAutomationMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.UseDocuments",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.UseDocuments"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -70,14 +64,7 @@ export default class UseDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      ...this._selectionPaths,
-      "hr",
-      ...this._triggerPaths,
-      "hr",
-      "noHeighten",
-      ...this._competencePaths,
-    ];
+    return [...this._selectionPaths, "hr", ...this._triggerPaths, "hr", "noHeighten", ...this._competencePaths];
   }
 
   /** @inheritDoc */
@@ -102,9 +89,7 @@ export default class UseDocumentsAutomation extends mix(
         icon: TERIOCK.config.document[doc.type]?.icon,
       },
       options: {
-        competence: this.overrideCompetence
-          ? this.competence.raw
-          : this.document?.system?.competence?.raw,
+        competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
         expandTables: this.expandTables,
         icon,
         label,
@@ -133,10 +118,8 @@ export default class UseDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   async _getActivations() {
-    const external = Promise.all(
-      Array.from(this.uuids).map((d) => this.#makeExternalActivation(d)),
-    );
-    const local = this.identifiers.map((i) => this.#makeLocalActivation(i));
+    const external = Promise.all(Array.from(this.uuids).map(d => this.#makeExternalActivation(d)));
+    const local = this.identifiers.map(i => this.#makeLocalActivation(i));
     return [...(await external), ...local];
   }
 
@@ -159,16 +142,13 @@ export default class UseDocumentsAutomation extends mix(
       event: scope.execution?.options?.event,
       competence: this.overrideCompetence
         ? this.competence.raw
-        : (scope.execution?.competence?.raw ??
-          this.document.system.competence.raw),
+        : (scope.execution?.competence?.raw ?? this.document.system.competence.raw),
     });
   }
 
   /** @inheritDoc */
   async getDocuments(options = {}) {
-    return (await super.getDocuments(options)).filter(
-      (d) => d && typeof d.use === "function",
-    );
+    return (await super.getDocuments(options)).filter(d => d && typeof d.use === "function");
   }
 
   /**
@@ -189,7 +169,7 @@ export default class UseDocumentsAutomation extends mix(
     if (this.automatic && chosen.length === 1) {
       await chosen[0].use(options);
     } else {
-      await Promise.all(chosen.map((c) => c.use(options)));
+      await Promise.all(chosen.map(c => c.use(options)));
     }
   }
 }

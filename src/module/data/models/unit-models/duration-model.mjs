@@ -10,10 +10,7 @@ const { fields } = foundry.data;
  */
 export default class DurationModel extends TimeUnitModel {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.Duration",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Duration"];
 
   /**
    * Trigger choices.
@@ -65,21 +62,13 @@ export default class DurationModel extends TimeUnitModel {
     return Object.assign(super.defineSchema(), {
       conditions: conditionRequirementsField(),
       description: new fields.StringField(),
-      triggers: new fields.SetField(
-        new fields.StringField({ choices: this._triggerChoices }),
-      ),
+      triggers: new fields.SetField(new fields.StringField({ choices: this._triggerChoices })),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      ...super._formPaths,
-      "conditions.present",
-      "conditions.absent",
-      "triggers",
-      "description",
-    ];
+    return [...super._formPaths, "conditions.present", "conditions.absent", "triggers", "description"];
   }
 
   /** @inheritDoc */
@@ -92,13 +81,11 @@ export default class DurationModel extends TimeUnitModel {
    * @returns {string}
    */
   get prerequisiteString() {
-    const triggers = [
-      ...this.triggers.map((t) => DurationModel._triggerChoices[t].label),
-    ];
+    const triggers = [...this.triggers.map(t => DurationModel._triggerChoices[t].label)];
     const conditions = [
-      ...this.conditions.present.map((c) => TERIOCK.reference.conditions[c]),
+      ...this.conditions.present.map(c => TERIOCK.reference.conditions[c]),
       // TODO: Localize the "Not" replacements.
-      ...this.conditions.absent.map((c) =>
+      ...this.conditions.absent.map(c =>
         game.i18n
           .format("TERIOCK.MODELS.Duration.PREREQUISITES.notStatus", {
             status: TERIOCK.reference.conditions[c],
@@ -108,10 +95,9 @@ export default class DurationModel extends TimeUnitModel {
           .replace("Not Unconscious", "Conscious"),
       ),
     ];
-    let triggerPart = _loc(
-      "TERIOCK.MODELS.Duration.PREREQUISITES.untilTriggers",
-      { partial: listFormat(triggers, { type: "disjunction" }) },
-    );
+    let triggerPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.untilTriggers", {
+      partial: listFormat(triggers, { type: "disjunction" }),
+    });
     let conditionsPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.ongoing", {
       partial: listFormat(conditions, { sort: false }),
     });
@@ -128,7 +114,7 @@ export default class DurationModel extends TimeUnitModel {
   /** @inheritDoc */
   get text() {
     if (this.description) return this.description;
-    let prerequisite = this.prerequisiteString;
+    const prerequisite = this.prerequisiteString;
     let duration = super.text;
     if (prerequisite.length > 1) {
       if (prerequisite.length > 0 && this.unit === "unlimited") duration = "";
@@ -138,8 +124,7 @@ export default class DurationModel extends TimeUnitModel {
         end: prerequisite,
       });
     }
-    if (this.unit === "passive")
-      duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
+    if (this.unit === "passive") duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
     return duration;
   }
 }

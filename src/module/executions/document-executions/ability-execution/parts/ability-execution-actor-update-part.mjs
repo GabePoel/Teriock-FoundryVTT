@@ -20,7 +20,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        */
       get #paidCosts() {
         return Object.keys(costConfig.primary.keys).filter(
-          (c) => this.costs[c] > 0 && !this.options[`no${toTitleCase(c)}`],
+          c => this.costs[c] > 0 && !this.options[`no${toTitleCase(c)}`],
         );
       }
 
@@ -30,10 +30,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        */
       async _prepareAttackPenalty() {
         if (this.isAttack && formulaExists(this.incurredAttackPenalty)) {
-          this.attackPenalty = await BaseRoll.getValue(
-            this.incurredAttackPenalty,
-            this.rollData,
-          );
+          this.attackPenalty = await BaseRoll.getValue(this.incurredAttackPenalty, this.rollData);
         } else {
           this.attackPenalty = 0;
         }
@@ -44,8 +41,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
         await this._prepareAttackPenalty();
         if (this.actor) {
           if (this.isAttack) {
-            this.updates["system.combat.attackPenalty"] =
-              this.actor.system.combat.attackPenalty + this.attackPenalty;
+            this.updates["system.combat.attackPenalty"] = this.actor.system.combat.attackPenalty + this.attackPenalty;
           }
           if (this.usesReaction) {
             this.updates["system.combat.hasReaction"] = false;
@@ -54,8 +50,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
             const config = costConfig.primary.keys[c];
             if (config?.barStat) {
               this.updates[`system.${c}.value`] = Math.max(
-                this.actor.system[c].value +
-                  (config?.multiplier ?? 1) * this.costs[c],
+                this.actor.system[c].value + (config?.multiplier ?? 1) * this.costs[c],
                 this.actor.system[c].min ?? 0,
               );
             }
@@ -65,18 +60,11 @@ export default function AbilityExecutionActorUpdatePart(Base) {
 
       /** @inheritDoc */
       async _updateActor() {
-        if (
-          this.actor &&
-          this.payCosts &&
-          game.teriock.getSetting("autoPayAbilityCosts")
-        ) {
+        if (this.actor && this.payCosts && game.teriock.getSetting("autoPayAbilityCosts")) {
           for (const c of this.#paidCosts) {
             const config = costConfig.primary.keys[c];
             if (!config?.barStat) {
-              await impactConfig[config?.impact]?.apply(
-                this.actor,
-                this.costs[c],
-              );
+              await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]);
             }
           }
           if (Object.keys(this.updates).length > 0) {

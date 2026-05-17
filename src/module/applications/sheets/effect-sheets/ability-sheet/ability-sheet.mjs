@@ -1,5 +1,5 @@
 import { documentConfig } from "../../../../constants/config/document-config.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { elementClass } from "../../../../helpers/html.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -12,10 +12,7 @@ import abilityContextMenus from "./helpers/ability-context-menus.mjs";
  * @extends {BaseEffectSheet}
  * @mixes WikiButtonSheet
  */
-export default class AbilitySheet extends mix(
-  BaseEffectSheet,
-  mixins.WikiButtonSheetMixin,
-) {
+export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.WikiButtonSheetMixin) {
   /** @inheritDoc */
   static BARS = [
     "teriock/sheets/effects/ability/status-bar",
@@ -58,7 +55,7 @@ export default class AbilitySheet extends mix(
         "system.upgrades.competence.value": 1,
       },
       ...Object.fromEntries(
-        Object.keys(TERIOCK.config.cost.tweaks).map((k) => [
+        Object.keys(TERIOCK.config.cost.tweaks).map(k => [
           `.ab-tweak-${k}-button`,
           { [`system.costs.tweaks.${k}`]: 1 },
         ]),
@@ -70,14 +67,9 @@ export default class AbilitySheet extends mix(
    * Reset the elder sorcery elements that this sheet's window has.
    */
   #resetElderSorceryElements() {
-    this.window.content.classList.remove(
-      ...Object.keys(TERIOCK.reference.elements).map((e) => `es-${e}`),
-      "es-multi",
-    );
+    this.window.content.classList.remove(...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi");
     if (this.document.system.elderSorcery) {
-      this.window.content.classList.add(
-        elementClass(this.document.system.elements),
-      );
+      this.window.content.classList.add(elementClass(this.document.system.elements));
     }
   }
 

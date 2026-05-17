@@ -5,8 +5,7 @@
       classes=(ifThen editable "power-level-box")
       icon=(path TERIOCK.config.equipment.powerLevel "unknown" "icon")
       iconColor=(path
-        TERIOCK.config.equipment.powerLevel system.identification.powerLevel "color"
-      )
+        TERIOCK.config.equipment.powerLevel system.identification.powerLevel "color")
       tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
     }}
   {{else}}
@@ -15,8 +14,7 @@
       classes=(ifThen editable "power-level-box")
       icon=(path TERIOCK.config.equipment.powerLevel system.powerLevel "icon")
       iconColor=(path
-        TERIOCK.config.equipment.powerLevel system.powerLevel "color"
-      )
+        TERIOCK.config.equipment.powerLevel system.powerLevel "color")
       tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
     }}
   {{/if}}
@@ -25,8 +23,7 @@
       systemFields.equipmentType
       value=system.equipmentType
       disabled=(not editable)
-      placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
-    )
+      placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"))
     unselected=(inferName system.equipmentType "equipment")
     tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
     icon=TERIOCK.display.icons.equipment.equipmentType
@@ -37,19 +34,16 @@
       (ifThen
         (not (eq system.range.long.unitType "zero"))
         (localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.alt")
-        ""
-      )
+        "")
       "' data-path='system.range.long' data-action='updateUnit'>"
       (ifThen (eq system.range.long.unitType "finite") system.range.long.formula system.range.long.text)
-      "</span>"
-    )
+      "</span>")
     secondary=(concat
       "<span style='flex: auto;' data-tooltip='"
       (localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label")
       "' data-path='system.range.short' data-action='updateUnit'>"
       (ifThen (eq system.range.short.unitType "finite") system.range.short.formula system.range.short.text)
-      "</span>"
-    )
+      "</span>")
     after=false
     icon=TERIOCK.display.icons.ability.range
     includeSecondary=(not (eq system.range.long.unitType "zero"))

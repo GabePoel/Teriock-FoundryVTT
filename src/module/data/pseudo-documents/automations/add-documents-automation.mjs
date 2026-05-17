@@ -1,4 +1,4 @@
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { defaultJSONField } from "../../fields/helpers/builders.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
@@ -21,7 +21,7 @@ const { fields } = foundry.data;
  * @property {boolean} attachDocuments
  * @property {{enabled: boolean, data: object, overrideData: boolean, uuids: Set<UUID<AnyChildDocument>>[]}} children
  */
-export default class AddDocumentsAutomation extends mix(
+export default class AddDocumentsAutomation extends mixClasses(
   CritAutomation,
   SelectDocumentsAutomationMixin,
   CompetenceAutomationMixin,
@@ -29,10 +29,7 @@ export default class AddDocumentsAutomation extends mix(
   DisplayAutomationMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.AddDocuments",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.AddDocuments"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -151,7 +148,7 @@ export default class AddDocumentsAutomation extends mix(
    */
   async choose(options = {}) {
     const uuids = await super.choose(options);
-    return uuids.map((uuid) => {
+    return uuids.map(uuid => {
       const data = foundry.utils.expandObject({
         "system.competence.raw": this.overrideCompetence
           ? this.competence.raw
@@ -174,14 +171,12 @@ export default class AddDocumentsAutomation extends mix(
     for (const choice of choices) {
       const activationFamily = { root: choice };
       if (this.children.enabled) {
-        activationFamily.children = Array.from(this.children.uuids).map(
-          (uuid) => {
-            return {
-              uuid,
-              data: this.children.overrideData ? this.children.data : {},
-            };
-          },
-        );
+        activationFamily.children = Array.from(this.children.uuids).map(uuid => {
+          return {
+            uuid,
+            data: this.children.overrideData ? this.children.data : {},
+          };
+        });
       }
       const activationData = {
         display: {
@@ -197,6 +192,6 @@ export default class AddDocumentsAutomation extends mix(
 
   /** @inheritDoc */
   async getDocuments(options = {}) {
-    return (await super.getDocuments(options)).filter((d) => d && d.uuid);
+    return (await super.getDocuments(options)).filter(d => d && d.uuid);
   }
 }

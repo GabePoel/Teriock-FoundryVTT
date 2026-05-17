@@ -27,9 +27,7 @@ export default async function deathBagDialog(actor) {
   stonesHTML.append(stonesLegendHTML);
   for (const color of ["black", "red", "white"]) {
     stonesHTML.append(
-      actor.system.schema.fields.deathBag.fields.stones.fields[
-        color
-      ].toFormGroup(
+      actor.system.schema.fields.deathBag.fields.stones.fields[color].toFormGroup(
         { rootId: foundry.utils.randomID() },
         {
           name: color,
@@ -48,11 +46,7 @@ export default async function deathBagDialog(actor) {
           for (const color of ["black", "red", "white"]) {
             stonesFormulas[color] = button.form.elements.namedItem(color).value;
           }
-          await deathBagPull(
-            button.form.elements.namedItem("pull").value,
-            stonesFormulas,
-            actor,
-          );
+          await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas, actor);
         },
         default: true,
         label: _loc("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
@@ -77,9 +71,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   if (actor) {
     rollData = actor.getRollData();
   }
-  const toPullCount = Math.floor(
-    Math.max(await BaseRoll.getValue(pullFormula, rollData), 0),
-  );
+  const toPullCount = Math.floor(Math.max(await BaseRoll.getValue(pullFormula, rollData), 0));
   const startingStones =
     /** @type {Record<Teriock.Keys.DeathBagStoneColor, number>} */
     {};
@@ -91,14 +83,10 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   let totalStonesCount = 0;
   const wrappers = [];
   for (const [color, formula] of Object.entries(stonesFormulas)) {
-    startingStones[color] = Math.floor(
-      Math.max(await BaseRoll.getValue(formula, rollData), 0),
-    );
+    startingStones[color] = Math.floor(Math.max(await BaseRoll.getValue(formula, rollData), 0));
     totalStonesCount += startingStones[color];
     pulledStones[color] = 0;
-    wrappers.push(
-      `${startingStones[color]} ${TERIOCK.reference.deathBag[color]}`,
-    );
+    wrappers.push(`${startingStones[color]} ${TERIOCK.reference.deathBag[color]}`);
   }
   if (totalStonesCount > 99) {
     ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.maxStones", {
@@ -176,10 +164,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome"),
         text: outcome,
       });
-      const pullContent = await TeriockTextEditor.renderTemplate(
-        "teriock/ui/death-bag",
-        context,
-      );
+      const pullContent = await TeriockTextEditor.renderTemplate("teriock/ui/death-bag", context);
       const panel = await TeriockTextEditor.enrichPanel(panelParts);
       const chatMessageData = {
         content: pullContent,

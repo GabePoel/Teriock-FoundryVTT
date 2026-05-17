@@ -61,7 +61,7 @@ foundry.helpers.Hooks.once("init", function () {
     Object.assign(
       CONFIG.specialStatusEffects,
       Object.fromEntries(
-        Object.keys(constants.display.tokenMagic).map((v) => [
+        Object.keys(constants.display.tokenMagic).map(v => [
           helpers.string.toKebabCase(v).toUpperCase().replaceAll("-", "_"),
           v,
         ]),
@@ -244,10 +244,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   for (const [k, v] of Object.entries(constants.config.document)) {
     if (v?.documentName) {
-      CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(
-        v.icon,
-        "title",
-      );
+      CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
     }
   }
 
@@ -255,16 +252,8 @@ foundry.helpers.Hooks.once("init", function () {
   // ----------------
 
   // Unregister V1 Sheets
-  DocumentSheetConfig.unregisterSheet(
-    documents.TeriockActor,
-    "teriock",
-    ActorSheet,
-  );
-  DocumentSheetConfig.unregisterSheet(
-    documents.TeriockItem,
-    "teriock",
-    ItemSheet,
-  );
+  DocumentSheetConfig.unregisterSheet(documents.TeriockActor, "teriock", ActorSheet);
+  DocumentSheetConfig.unregisterSheet(documents.TeriockItem, "teriock", ItemSheet);
 
   // Register Custom V2 Sheets
   const sheetMap = [
@@ -427,12 +416,7 @@ foundry.helpers.Hooks.once("init", function () {
 
   CONFIG.Dice.rolls.length = 0;
   CONFIG.Dice.rolls.push(
-    ...[
-      dice.rolls.BaseRoll,
-      dice.rolls.ThresholdRoll,
-      dice.rolls.ImpactRoll,
-      dice.rolls.HarmRoll,
-    ],
+    ...[dice.rolls.BaseRoll, dice.rolls.ThresholdRoll, dice.rolls.ImpactRoll, dice.rolls.HarmRoll],
   );
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
   for (const category of Object.values(dice.functions)) {
@@ -483,14 +467,8 @@ foundry.helpers.Hooks.once("setup", function () {
 
 Hooks.once("i18nInit", () => {
   helpers.localization.performPreLocalization(TERIOCK);
-  helpers.localization.localizeObject(
-    teriock.applications.shared.imageContextMenuOptions,
-    { keys: ["name"] },
-  );
-  helpers.localization.localizeObject(
-    teriock.applications.shared.wikiContextMenuOptions,
-    { keys: ["name"] },
-  );
+  helpers.localization.localizeObject(teriock.applications.shared.imageContextMenuOptions, { keys: ["name"] });
+  helpers.localization.localizeObject(teriock.applications.shared.wikiContextMenuOptions, { keys: ["name"] });
   Object.assign(CONFIG.formulaEditor.contexts.child.labels, {
     ...TERIOCK.rollContext.ability,
     ...TERIOCK.rollContext.archetype,

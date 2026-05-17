@@ -10,10 +10,7 @@ const { fields } = foundry.data;
  */
 export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Status",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Status"];
 
   /** @inheritDoc */
   static get TYPE() {
@@ -24,9 +21,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
   static get _relationChoices() {
     return {
       ...super._relationChoices,
-      include: _loc(
-        "TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include",
-      ),
+      include: _loc("TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include"),
     };
   }
 
@@ -61,17 +56,10 @@ export default class StatusAutomation extends ChatStatusAutomation {
    */
   async selectVisibleTokens(options = {}) {
     return game.user.selectVisibleTokens({
-      hint: _loc(
-        "TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.hint",
-        {
-          effect:
-            this.document?.name ||
-            _loc(
-              "TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.effect",
-            ),
-          status: TERIOCK.reference.conditions[this.status],
-        },
-      ),
+      hint: _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.hint", {
+        effect: this.document?.name || _loc("TERIOCK.AUTOMATIONS.Status.DIALOGS.SelectVisibleTokens.effect"),
+        status: TERIOCK.reference.conditions[this.status],
+      }),
       multi: this.multi,
       ...options,
     });

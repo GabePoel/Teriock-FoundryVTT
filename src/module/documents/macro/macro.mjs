@@ -1,4 +1,4 @@
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { dedent } from "../../helpers/string.mjs";
 import { findBestDocument } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
@@ -14,7 +14,7 @@ const { Macro } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
-export default class TeriockMacro extends mix(
+export default class TeriockMacro extends mixClasses(
   Macro,
   mixins.BaseDocumentMixin,
   mixins.EmbedCardDocumentMixin,
@@ -27,10 +27,7 @@ export default class TeriockMacro extends mix(
   static get hotbarFolder() {
     if (!game.teriock.getSetting("sortNewPlayerMacros")) return null;
     return game.folders.find(
-      (f) =>
-        f.getFlag("teriock", "user") === game.user.id &&
-        f.getFlag("teriock", "hotbarFolder") &&
-        f.type === "Macro",
+      f => f.getFlag("teriock", "user") === game.user.id && f.getFlag("teriock", "hotbarFolder") && f.type === "Macro",
     );
   }
 
@@ -40,7 +37,7 @@ export default class TeriockMacro extends mix(
    */
   static async ensureHotbarFolder() {
     if (!game.teriock.getSetting("sortNewPlayerMacros")) return null;
-    let hotbarFolder = this.hotbarFolder;
+    const hotbarFolder = this.hotbarFolder;
     if (hotbarFolder) return hotbarFolder;
     await game.users.queryGM(
       "teriock.createHotbarFolder",
@@ -63,7 +60,7 @@ export default class TeriockMacro extends mix(
    */
   static async getGeneralUseMacro(doc) {
     const macro = game.macros.find(
-      (m) =>
+      m =>
         m.getFlag("teriock", "user") === game.user.id &&
         m.getFlag("teriock", "macroType") === "useGeneral" &&
         m.getFlag("teriock", "macroLookupKey") === doc.lookupKey,
@@ -79,9 +76,7 @@ export default class TeriockMacro extends mix(
    */
   static async getLinkedUseMacro(doc) {
     const macro = game.macros.find(
-      (m) =>
-        m.getFlag("teriock", "macroType" === "useLinked") &&
-        m.getFlag("teriock", "macroUuid" === doc.uuid),
+      m => m.getFlag("teriock", "macroType" === "useLinked") && m.getFlag("teriock", "macroUuid" === doc.uuid),
     );
     if (macro) return macro;
     return this.makeLinkedUseMacro(doc);
@@ -151,9 +146,8 @@ export default class TeriockMacro extends mix(
    */
   static async useDocumentGeneral(lookup, options) {
     const { actor, event } = options;
-    const tokens =
-      /** @type {TeriockToken[]} */ game.canvas?.tokens.controlled ?? [];
-    const actors = tokens.map((t) => t.actor).filter(Boolean);
+    const tokens = /** @type {TeriockToken[]} */ game.canvas?.tokens.controlled ?? [];
+    const actors = tokens.map(t => t.actor).filter(Boolean);
     if (actors.length === 0 && options.actor) actors.push(actor);
     game.actors.check(actors);
     for (const a of actors) {
@@ -183,7 +177,7 @@ export default class TeriockMacro extends mix(
   get embedActions() {
     return {
       ...super.embedActions,
-      execute: { primary: async (event) => await this.scopedExecute(event) },
+      execute: { primary: async event => await this.scopedExecute(event) },
     };
   }
 
@@ -201,10 +195,7 @@ export default class TeriockMacro extends mix(
     if (yes === false) return false;
 
     if (game.teriock.getSetting("sortNewPlayerMacros") && !this.folder) {
-      if (
-        (!game.user.isGM && this.constructor.hotbarFolder) ||
-        game.users.activeGM
-      ) {
+      if ((!game.user.isGM && this.constructor.hotbarFolder) || game.users.activeGM) {
         this.updateSource({
           folder: (await this.constructor.ensureHotbarFolder())?.id,
         });

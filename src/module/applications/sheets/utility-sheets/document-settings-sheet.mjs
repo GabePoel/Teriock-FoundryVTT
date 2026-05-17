@@ -68,8 +68,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
    */
   #quickSettingsField(path, options = {}) {
     return {
-      field:
-        this.document.flags?.teriockDocumentSettings?.schema?.getField(path),
+      field: this.document.flags?.teriockDocumentSettings?.schema?.getField(path),
       hint: options?.hint,
       label: options?.label,
       localize: true,
@@ -84,9 +83,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
     await super._onRender(context, options);
     // TODO: Eventually this identifier button logic should be moved into a custom identifier HTML element.
     /** @type {HTMLInputElement} */
-    const identifierInput = document.querySelector(
-      'input[name="system.identifier"]',
-    );
+    const identifierInput = document.querySelector('input[name="system.identifier"]');
     /** @type {HTMLDivElement} */
     const formFields = identifierInput.closest(".form-fields");
     formFields.style.gap = "0.25rem";
@@ -94,12 +91,8 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
       const button = document.createElement("button");
       button.className = "icon";
       button.style.flexBasis = "36px";
-      button.classList.add(
-        ...makeIconClass(TERIOCK.display.icons.ui.reset, "button").split(" "),
-      );
-      button.dataset.tooltip = _loc(
-        "TERIOCK.SHEETS.DocumentSettings.BUTTONS.resetIdentifier",
-      );
+      button.classList.add(...makeIconClass(TERIOCK.display.icons.ui.reset, "button").split(" "));
+      button.dataset.tooltip = _loc("TERIOCK.SHEETS.DocumentSettings.BUTTONS.resetIdentifier");
       button.dataset.action = "resetIdentifier";
       identifierInput.after(button);
     }
@@ -111,8 +104,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
     context.configs = [];
     const hasCompendiumSource =
       !!this.document._stats &&
-      (!!this.document._stats?.compendiumSource ||
-        this.document._stats?.compendiumSource === null);
+      (!!this.document._stats?.compendiumSource || this.document._stats?.compendiumSource === null);
     if (hasCompendiumSource && !this.document.isSecret) {
       context.configs.push({
         legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend",
@@ -123,8 +115,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
           }),
           this.#quickNormalField("_stats.compendiumSource", {
             hint: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.hint",
-            label:
-              "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
+            label: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
           }),
         ],
       });
@@ -148,9 +139,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
           context.configs.push({
             legend: field.label,
             localize: true,
-            fields: objectMap(field.fields, (f) =>
-              this.#quickSettingsField(f.fieldPath),
-            ),
+            fields: objectMap(field.fields, f => this.#quickSettingsField(f.fieldPath)),
           });
         }
       }

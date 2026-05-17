@@ -1,22 +1,14 @@
 /**
  * In the rare cases where subclassing doesn't work right, this can be used to transplant specific methods from a
  * subclass onto the original class.
- * @param {Function} Original
- * @param {Function} Subclass
+ * @param {function} Original
+ * @param {function} Subclass
  * @param {readonly string[]} names
  * @param {{ statics?: readonly string[] }} [options]
  */
-export function transplantOverrides(
-  Original,
-  Subclass,
-  names,
-  { statics = [] } = {},
-) {
+export function transplantOverrides(Original, Subclass, names, { statics = [] } = {}) {
   const originalDescriptors = Object.fromEntries(
-    names.map((n) => [
-      n,
-      Object.getOwnPropertyDescriptor(Original.prototype, n),
-    ]),
+    names.map(n => [n, Object.getOwnPropertyDescriptor(Original.prototype, n)]),
   );
 
   const Copy = Object.create(Object.getPrototypeOf(Original.prototype));
@@ -40,7 +32,7 @@ export function transplantOverrides(
   }
   Object.setPrototypeOf(Subclass.prototype, Copy);
 
-  const normalizeDescriptor = (d) => {
+  const normalizeDescriptor = d => {
     if ("value" in d) {
       d.writable = true;
       d.configurable = true;

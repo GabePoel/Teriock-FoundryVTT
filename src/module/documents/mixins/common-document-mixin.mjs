@@ -1,31 +1,26 @@
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { resolveDocuments } from "../../helpers/resolve.mjs";
 import { TeriockActor } from "../_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
-import {
-  EmbedCardDocumentMixin,
-  PanelDocumentMixin,
-  SettingsDocumentMixin,
-} from "./_module.mjs";
+import { EmbedCardDocumentMixin, PanelDocumentMixin, SettingsDocumentMixin } from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes.
  * @param {typeof BaseDocument} Base
  */
 export default function CommonDocumentMixin(Base) {
-  //noinspection JSUnusedGlobalSymbols
   return (
     /**
-     * @mixes PropagationData
      * @mixes BaseDocument
      * @mixes EmbedCardDocument
      * @mixes PanelDocument
+     * @mixes PropagationData
      * @mixes SettingsDocument
      * @mixin
      */
-    class CommonDocument extends mix(
+    class CommonDocument extends mixClasses(
       Base,
       PropagationDataMixin,
       EmbedCardDocumentMixin,
@@ -47,16 +42,10 @@ export default function CommonDocumentMixin(Base) {
        * @returns {boolean}
        */
       static validateChildType(parent, child) {
-        if (
-          !parent?.metadata?.childItemTypes ||
-          !parent?.metadata?.childEffectTypes
-        ) {
+        if (!parent?.metadata?.childItemTypes || !parent?.metadata?.childEffectTypes) {
           return true;
         }
-        const childTypes = new Set([
-          ...parent.metadata.childEffectTypes,
-          ...parent.metadata.childItemTypes,
-        ]);
+        const childTypes = new Set([...parent.metadata.childEffectTypes, ...parent.metadata.childItemTypes]);
         return childTypes.has(child?.type);
       }
 
@@ -113,8 +102,8 @@ export default function CommonDocumentMixin(Base) {
        */
       get childArray() {
         return [
-          ...(this.effects?.contents || []).filter((e) => !e.sup),
-          ...(this.items?.contents || []).filter((i) => !i.sup),
+          ...(this.effects?.contents || []).filter(e => !e.sup),
+          ...(this.items?.contents || []).filter(i => !i.sup),
         ];
       }
 
@@ -123,7 +112,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       get children() {
-        return new TypeCollection(this.childArray.map((c) => [c._id, c]));
+        return new TypeCollection(this.childArray.map(c => [c._id, c]));
       }
 
       /** @inheritDoc */
@@ -170,10 +159,7 @@ export default function CommonDocumentMixin(Base) {
         const yes = await super._preCreate(data, options, user);
         if (yes === false) return false;
 
-        if (
-          !data.img &&
-          TERIOCK.config.document[this.type]?.documentName === this.documentName
-        ) {
+        if (!data.img && TERIOCK.config.document[this.type]?.documentName === this.documentName) {
           this.updateSource({
             img: systemPath(`icons/documents/${data.type}.svg`),
           });
@@ -233,7 +219,7 @@ export default function CommonDocumentMixin(Base) {
        */
       async getChildren() {
         const children = await resolveDocuments(this.childArray);
-        return new TypeCollection(children.map((c) => [c._id, c]));
+        return new TypeCollection(children.map(c => [c._id, c]));
       }
 
       /**
@@ -275,7 +261,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {Promise<void|false>} The mutated data.
        */
       async hookCall(trigger, options = {}) {
-        let { skipCall = false, skipPropagation = false, scope = {} } = options;
+        const { skipCall = false, skipPropagation = false, scope = {} } = options;
         scope.trigger = trigger;
         if (!skipPropagation) await this.actor?.fireTrigger(trigger, scope);
         if (!skipCall) {
@@ -289,13 +275,8 @@ export default function CommonDocumentMixin(Base) {
        */
       makeVisibleChildrenArray() {
         return this.childArray
-          .filter((c) => !c.isEphemeral)
-          .filter(
-            (c) =>
-              c.documentName !== "ActiveEffect" ||
-              c.system.revealed ||
-              game.user.isGM,
-          );
+          .filter(c => !c.isEphemeral)
+          .filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
       }
 
       /** @inheritDoc */

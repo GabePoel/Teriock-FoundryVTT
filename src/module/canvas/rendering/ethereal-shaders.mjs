@@ -1,5 +1,4 @@
-const { BackgroundVisionShader, ColorationVisionShader } =
-  foundry.canvas.rendering.shaders;
+const { BackgroundVisionShader, ColorationVisionShader } = foundry.canvas.rendering.shaders;
 
 /**
  * Simple spooky background vision shader

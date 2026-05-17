@@ -9,10 +9,7 @@ const { fields } = foundry.data;
  */
 export default class StorageModel extends EmbeddedDataModel {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.Storage",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Storage"];
 
   /** @inheritDoc */
   static defineSchema() {
@@ -39,7 +36,7 @@ export default class StorageModel extends EmbeddedDataModel {
   get carriedCount() {
     // Async stored equipment is assumed to have a quantity of 1
     return this.storedEquipment
-      .map((e) => (e.system?.consumable ? (e.system?.quantity ?? 1) : 1) || 1)
+      .map(e => (e.system?.consumable ? (e.system?.quantity ?? 1) : 1) || 1)
       .reduce((a, b) => a + b, 0);
   }
 
@@ -50,7 +47,7 @@ export default class StorageModel extends EmbeddedDataModel {
   get carriedWeight() {
     // Async stored equipment is assumed to have a weight of 0
     return this.storedEquipment
-      .map((e) => e.system?.totalWeight ?? 0)
+      .map(e => e.system?.totalWeight ?? 0)
       .reduce((a, b) => a + b, 0)
       .toNearest(equipmentConfig.weight.interval);
   }

@@ -1,7 +1,4 @@
-import {
-  attributeField,
-  competenceField,
-} from "../../../../../fields/helpers/builders.mjs";
+import { attributeField, competenceField } from "../../../../../fields/helpers/builders.mjs";
 import { initialText } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -10,7 +7,7 @@ const { fields } = foundry.data;
  * Ability improvements part.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -74,11 +71,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get canChange() {
-        return (
-          super.canChange ||
-          !!this.upgrades.score.attribute ||
-          !!this.upgrades.competence.attribute
-        );
+        return super.canChange || !!this.upgrades.score.attribute || !!this.upgrades.competence.attribute;
       }
 
       /** @inheritDoc */
@@ -115,10 +108,10 @@ export default (Base) => {
         if (this.upgrades.score.attribute) {
           const attribute = attributeLink(this.upgrades.competence.attribute);
           const value = this.upgrades.score.value;
-          this.upgrades.score.text = _loc(
-            "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description",
-            { attribute, value },
-          );
+          this.upgrades.score.text = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description", {
+            attribute,
+            value,
+          });
         } else this.upgrades.score.text = "";
         if (this.upgrades.competence.value === 0) {
           this.upgrades.competence.attribute = null;
@@ -129,14 +122,13 @@ export default (Base) => {
           const page = TERIOCK.config.competence.levels[amount].page;
           const level = TERIOCK.config.competence.levels[amount].label;
           const upgrade = `@L[Core:${page}]{${level.toLowerCase()}}`;
-          const savesLabel = _loc(
-            "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves",
-          );
+          const savesLabel = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves");
           const saves = `@L[Core:Feat Interaction]{${savesLabel}}`;
-          this.upgrades.competence.text = _loc(
-            "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description",
-            { attribute, saves, upgrade },
-          );
+          this.upgrades.competence.text = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description", {
+            attribute,
+            saves,
+            upgrade,
+          });
         } else this.upgrades.competence.text = "";
       }
     }

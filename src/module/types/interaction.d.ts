@@ -45,10 +45,7 @@ declare global {
       threshold?: number;
     };
 
-    export type SimpleCommandFunction<O> = (
-      actor: TeriockActor,
-      options: O,
-    ) => Promise<void>;
+    export type SimpleCommandFunction<O> = (actor: TeriockActor, options: O) => Promise<void>;
 
     export type TradecraftOptions = ThresholdOptions & {
       tradecraft?: Teriock.Keys.Tradecraft;
@@ -73,6 +70,7 @@ declare global {
       impact?: Teriock.Keys.Impact;
       reverse?: boolean;
       boosts?: number;
+      rollData?: object;
     };
 
     export type StatusOptions = {

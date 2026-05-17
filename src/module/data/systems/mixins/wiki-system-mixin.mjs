@@ -22,14 +22,9 @@ export default function WikiSystemMixin(Base) {
        * @returns {boolean}
        */
       get isOnWiki() {
-        const index =
-          TERIOCK.index[TERIOCK.config.document[this.parent.type]["index"]];
+        const index = TERIOCK.index[TERIOCK.config.document[this.parent.type]["index"]];
         if (index) {
-          return !!index[
-            toCamelCase(
-              foundry.utils.getProperty(this.parent, this.metadata.pageNameKey),
-            )
-          ];
+          return !!index[toCamelCase(foundry.utils.getProperty(this.parent, this.metadata.pageNameKey))];
         }
         return false;
       }
@@ -41,10 +36,7 @@ export default function WikiSystemMixin(Base) {
        */
       get wikiPage() {
         const prefix = this.metadata.namespace;
-        const pageName = foundry.utils.getProperty(
-          this.parent,
-          this.metadata.pageNameKey,
-        );
+        const pageName = foundry.utils.getProperty(this.parent, this.metadata.pageNameKey);
         return `${prefix}:${pageName}`;
       }
 

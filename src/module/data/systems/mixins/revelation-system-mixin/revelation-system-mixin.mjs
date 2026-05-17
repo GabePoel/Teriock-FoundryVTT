@@ -14,10 +14,7 @@ export default function RevelationSystemMixin(Base) {
      */
     class RevelationSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Revelation",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Revelation"];
 
       /** @inheritDoc */
       static get metadata() {

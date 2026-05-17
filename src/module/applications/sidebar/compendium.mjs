@@ -17,9 +17,7 @@ export default class TeriockCompendium extends Compendium {
       docs = this.collection.index;
       for (const doc of docs) {
         if (foundry.utils.getProperty(doc, "system._sup")) {
-          this.element
-            ?.querySelector(`[data-entry-id="${doc?._id}"]`)
-            ?.remove();
+          this.element?.querySelector(`[data-entry-id="${doc?._id}"]`)?.remove();
         }
       }
     }
@@ -31,9 +29,7 @@ export default class TeriockCompendium extends Compendium {
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    if (
-      ["Actor", "Item", "ActiveEffect"].includes(this.collection?.documentName)
-    ) {
+    if (["Actor", "Item", "ActiveEffect"].includes(this.collection?.documentName)) {
       context.makeTooltip = true;
     }
     return context;

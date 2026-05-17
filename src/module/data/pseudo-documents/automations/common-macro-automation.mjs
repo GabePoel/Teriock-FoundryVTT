@@ -6,9 +6,7 @@ import { MacroAutomationMixin } from "./mixins/_module.mjs";
  * @extends {BaseAutomation}
  * @mixes MacroAutomation
  */
-export default class CommonMacroAutomation extends MacroAutomationMixin(
-  BaseAutomation,
-) {
+export default class CommonMacroAutomation extends MacroAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
   static get TYPE() {
     return "commonMacro";

@@ -55,23 +55,20 @@ export default function ThresholdExecutionMixin(Base) {
                 action: "disadvantage",
                 callback: () => (this.edge = -1),
                 icon: "fa-dice-d20",
-                label:
-                  "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+                label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
               },
               {
                 action: "normal",
                 callback: () => (this.edge = 0),
                 default: true,
                 icon: "fa-dice-d20",
-                label:
-                  "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+                label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
               },
               {
                 action: "advantage",
                 callback: () => (this.edge = 1),
                 icon: "fa-dice-d20",
-                label:
-                  "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+                label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
               },
             ]
           : [
@@ -93,21 +90,19 @@ export default function ThresholdExecutionMixin(Base) {
             condition: this.requiresCompetence,
             field: new fields.EmbeddedDataField(CompetenceModel).fields.raw,
             hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
-            label:
-              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
+            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
             name: "competence",
-            update: (v) => (this.competence.raw = Number(v)),
+            update: v => (this.competence.raw = Number(v)),
             value: this.competence.raw,
           },
           {
             condition: this.hasBonus,
             field: new FormulaField({ deterministic: false }),
             hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
-            label:
-              "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
+            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
             name: "bonus",
             placeholder: "0",
-            update: (v) => (this.bonus = v),
+            update: v => (this.bonus = v),
             value: this.bonus,
           },
         ];
@@ -268,7 +263,7 @@ export default function ThresholdExecutionMixin(Base) {
         if (hasSmallFields) content.append(smallContainer);
         if (!hasFields) return;
         const out = await TeriockDialog.wait({
-          buttons: this._dialogButtons.map((b) => {
+          buttons: this._dialogButtons.map(b => {
             return {
               action: b.action,
               callback: (_event, button) => {

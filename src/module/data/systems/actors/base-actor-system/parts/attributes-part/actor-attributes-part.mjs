@@ -8,7 +8,7 @@ const { SchemaField } = foundry.data.fields;
  * Actor data model mixin that handles attributes.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}

@@ -1,9 +1,6 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
-import {
-  fromIdentifierLocal,
-  fromQualifier,
-} from "../../../../helpers/utils.mjs";
+import { fromIdentifierLocal, fromQualifier } from "../../../../helpers/utils.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import SelectExternalDocumentsAutomationMixin from "./select-external-documents-automation-mixin.mjs";
 
@@ -16,22 +13,14 @@ export default function SelectDocumentsAutomationMixin(Base) {
      * @mixes SelectExternalDocumentsAutomation
      * @property {Set<TypedIdentifier|Identifier>} identifiers
      */
-    class SelectDocumentsAutomation extends mix(
-      Base,
-      SelectExternalDocumentsAutomationMixin,
-    ) {
+    class SelectDocumentsAutomation extends mixClasses(Base, SelectExternalDocumentsAutomationMixin) {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.UseDocuments",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.UseDocuments"];
 
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          identifiers: new fields.SetField(
-            new IdentifierField({ allowType: true }),
-          ),
+          identifiers: new fields.SetField(new IdentifierField({ allowType: true })),
           qualifier: new FormulaField({ initial: "0" }),
         });
       }
@@ -43,36 +32,21 @@ export default function SelectDocumentsAutomationMixin(Base) {
 
       /** @inheritDoc */
       get _selectionPaths() {
-        return [
-          "uuids",
-          "identifiers",
-          "qualifier",
-          "hr",
-          ...this._selectionOptionPaths,
-        ];
+        return ["uuids", "identifiers", "qualifier", "hr", ...this._selectionOptionPaths];
       }
 
       /** @inheritDoc */
       get hasDocuments() {
-        return (
-          this.uuids.size > 0 ||
-          this.identifiers.size > 0 ||
-          formulaExists(this.qualifier)
-        );
+        return this.uuids.size > 0 || this.identifiers.size > 0 || formulaExists(this.qualifier);
       }
 
       /** @inheritDoc */
       async getDocuments(options = {}) {
-        const actor =
-          options.actor ?? this.actor ?? this.document?.actor ?? null;
-        const local = await Promise.all(
-          this.identifiers.map((identifier) =>
-            fromIdentifierLocal(identifier, actor),
-          ),
-        );
+        const actor = options.actor ?? this.actor ?? this.document?.actor ?? null;
+        const local = await Promise.all(this.identifiers.map(identifier => fromIdentifierLocal(identifier, actor)));
         const external = await super.getDocuments(options);
-        let out = [...external, ...local].filter((d) => !!d);
-        const seen = new Set(out.map((d) => d.uuid));
+        const out = [...external, ...local].filter(d => !!d);
+        const seen = new Set(out.map(d => d.uuid));
         if (actor) {
           for (const child of await fromQualifier(actor, this.qualifier)) {
             if (seen.has(child.uuid)) continue;

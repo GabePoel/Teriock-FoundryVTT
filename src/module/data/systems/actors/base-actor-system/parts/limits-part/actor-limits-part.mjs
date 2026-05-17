@@ -1,7 +1,4 @@
-import {
-  initialBar,
-  initialNumber,
-} from "../../../../../fields/helpers/initializers.mjs";
+import { initialBar, initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -9,7 +6,7 @@ const { fields } = foundry.data;
  * Actor data model that handles limits.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -32,15 +29,10 @@ export default (Base) => {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.curses.value = this.parent.powers.filter(
-          (p) => p.system.type === "curse" && !p.disabled,
-        ).length;
+        this.curses.value = this.parent.powers.filter(p => p.system.type === "curse" && !p.disabled).length;
         this.rotators.value = this.parent.abilities.filter(
-          (a) =>
-            a.active &&
-            !a.isReference &&
-            (!a.parent || ["power", "rank"].includes(a.parent.type)) &&
-            a.system.rotator,
+          a =>
+            a.active && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type)) && a.system.rotator,
         ).length;
       }
     }

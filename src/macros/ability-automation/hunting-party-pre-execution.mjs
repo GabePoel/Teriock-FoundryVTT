@@ -1,15 +1,9 @@
-const refAct = scope.execution.activations.find(
-  (a) => a.type === "addDocuments",
-);
+const refAct = scope.execution.activations.find(a => a.type === "addDocuments");
 if (refAct) {
   const flankingData = refAct.toObject();
   const snareData = refAct.toObject();
-  const flankingSub = scope.ability.abilities.find(
-    (s) => s.system?.identifier === "flanking",
-  );
-  const snareSub = scope.ability.abilities.find(
-    (s) => s.system?.identifier === "snare",
-  );
+  const flankingSub = scope.ability.abilities.find(s => s.system?.identifier === "flanking");
+  const snareSub = scope.ability.abilities.find(s => s.system?.identifier === "snare");
   if (flankingSub) {
     const children = [{ uuid: flankingSub.uuid }];
     foundry.utils.setProperty(flankingData, "primary.children", children);
@@ -34,13 +28,7 @@ if (refAct) {
       }),
     );
   }
-  const flankingActivation =
-    new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(
-      flankingData,
-    );
-  const snareActivation =
-    new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(
-      snareData,
-    );
+  const flankingActivation = new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(flankingData);
+  const snareActivation = new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(snareData);
   scope.execution.activations = [flankingActivation, snareActivation];
 }

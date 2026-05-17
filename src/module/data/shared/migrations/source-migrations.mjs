@@ -2,10 +2,7 @@ const { hasProperty, setProperty, deleteProperty, getProperty } = foundry.utils;
 
 const PACKS = ["properties", "abilities"];
 const PACK_MAP = Object.fromEntries(
-  PACKS.map((id) => [
-    `Compendium.teriock.${id}.Item.`,
-    `Compendium.teriock.${id}.ActiveEffect.`,
-  ]),
+  PACKS.map(id => [`Compendium.teriock.${id}.Item.`, `Compendium.teriock.${id}.ActiveEffect.`]),
 );
 
 /**
@@ -31,7 +28,7 @@ export function migrateUuid(uuid) {
  * @param {string} newKey
  * @param {(val) => *} [transform]
  */
-export function migrateKey(source, oldKey, newKey, transform = (val) => val) {
+export function migrateKey(source, oldKey, newKey, transform = val => val) {
   if (hasProperty(source, oldKey) && !hasProperty(source, newKey)) {
     setProperty(source, transform(newKey), getProperty(source, oldKey));
   }

@@ -2,7 +2,7 @@
  * Actor data model that handles automatically derived token changes.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {AbstractActorSystem}
@@ -17,8 +17,7 @@ export default (Base) => {
        */
       _prepareTokenColor() {
         if (
-          (this.actor.statuses.has("down") ||
-            this.actor.statuses.has("dead")) &&
+          (this.actor.statuses.has("down") || this.actor.statuses.has("dead")) &&
           this.actor.getSetting("token.autoColoration")
         ) {
           this._tokenChanges.push({
@@ -36,9 +35,7 @@ export default (Base) => {
        */
       _prepareTokenDetectionModes() {
         if (!this.actor.getSetting("token.autoDetectionModes")) return;
-        for (const [sense, config] of Object.entries(
-          TERIOCK.config.character.sense,
-        )) {
+        for (const [sense, config] of Object.entries(TERIOCK.config.character.sense)) {
           if (config?.detectionMode) {
             this._tokenChanges.push({
               key: `detectionModes.${config.detectionMode}.range`,
@@ -62,9 +59,8 @@ export default (Base) => {
        * Prepare token vision changes.
        */
       _prepareTokenVision() {
-        let angle = 360;
+        const angle = 360;
         let maxRange = 0;
-        let range;
         let sightColor;
         let visionMode = "basic";
         for (const [k, v] of Object.entries(this.senses)) {
@@ -88,7 +84,7 @@ export default (Base) => {
           sightColor = "#ff0000";
           visionMode = "dead";
         }
-        range = Math.max(
+        const range = Math.max(
           ...Object.entries(this.senses)
             .filter(([k, _v]) => TERIOCK.config.character.sense[k]?.grantsSight)
             .map(([_k, v]) => v),
@@ -148,9 +144,7 @@ export default (Base) => {
         super.prepareVirtualEffects();
         this._prepareTokenColor();
         this._prepareTokenVision();
-        this.actor.tokenActiveEffectChanges["initial"].push(
-          ...this._tokenChanges,
-        );
+        this.actor.tokenActiveEffectChanges["initial"].push(...this._tokenChanges);
       }
     }
   );

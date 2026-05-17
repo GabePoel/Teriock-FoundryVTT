@@ -8,6 +8,4 @@ const { RollTables } = foundry.documents.collections;
  * @implements {DocumentCollection<TeriockRollTable>}
  * @property {TeriockRollTable|null} activeGM
  */
-export default class TeriockRollTables extends BaseWorldCollectionMixin(
-  RollTables,
-) {}
+export default class TeriockRollTables extends BaseWorldCollectionMixin(RollTables) {}

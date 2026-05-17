@@ -1,5 +1,5 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { IdentifierField, TextField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -20,17 +20,14 @@ const { fields } = foundry.data;
  * @mixes StatGiverSystem
  * @mixes WikiSystem
  */
-export default class RankSystem extends mix(
+export default class RankSystem extends mixClasses(
   BaseItemSystem,
   mixins.CompetenceDisplaySystemMixin,
   mixins.WikiSystemMixin,
   mixins.StatGiverSystemMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Rank",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rank"];
 
   /** @inheritDoc */
   static get metadata() {
@@ -81,10 +78,7 @@ export default class RankSystem extends mix(
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.config.rank[this.archetype].name;
     parts.text =
-      parts.text ||
-      (this.innate
-        ? _loc("TERIOCK.TERMS.PowerType.innate")
-        : _loc("TERIOCK.TERMS.PowerType.learned"));
+      parts.text || (this.innate ? _loc("TERIOCK.TERMS.PowerType.innate") : _loc("TERIOCK.TERMS.PowerType.learned"));
     return parts;
   }
 
@@ -131,9 +125,7 @@ export default class RankSystem extends mix(
             : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
                 value: this.maxAv,
               }),
-          this.innate
-            ? _loc("TERIOCK.SYSTEMS.Rank.PANELS.innate")
-            : _loc("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
+          this.innate ? _loc("TERIOCK.SYSTEMS.Rank.PANELS.innate") : _loc("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
         ],
       },
     ];
@@ -143,12 +135,7 @@ export default class RankSystem extends mix(
   get wikiPage() {
     const prefix = this.constructor.metadata.namespace;
     const pageName =
-      TERIOCK.index.classes[
-        foundry.utils.getProperty(
-          this.parent,
-          this.constructor.metadata.pageNameKey,
-        )
-      ];
+      TERIOCK.index.classes[foundry.utils.getProperty(this.parent, this.constructor.metadata.pageNameKey)];
     return `${prefix}:${pageName}`;
   }
 
@@ -165,14 +152,10 @@ export default class RankSystem extends mix(
     if (this.parent.checkEditor(userId) && this.actor && this.classRank === 1) {
       if (
         this.archetype !== "everyman" &&
-        !this.actor.archetypes
-          .map((a) => a.system.identifier)
-          .includes(this.archetype)
+        !this.actor.archetypes.map(a => a.system.identifier).includes(this.archetype)
       ) {
         const archetypeName = TERIOCK.config.rank[this.archetype].name;
-        this.actor._stagedItemCreations.add(
-          game.teriock.packs.classes.index.getName(archetypeName).uuid,
-        );
+        this.actor._stagedItemCreations.add(game.teriock.packs.classes.index.getName(archetypeName).uuid);
       }
     }
   }
@@ -181,12 +164,8 @@ export default class RankSystem extends mix(
   _onDelete(options, userId) {
     super._onDelete(options, userId);
     if (this.parent.checkEditor(userId) && this.actor) {
-      const archetypes = this.actor.archetypes.filter(
-        (a) => a.system.identifier === this.archetype,
-      );
-      const needsArchetype =
-        this.actor.ranks.filter((r) => r.system.archetype === this.archetype)
-          .length > 0;
+      const archetypes = this.actor.archetypes.filter(a => a.system.identifier === this.archetype);
+      const needsArchetype = this.actor.ranks.filter(r => r.system.archetype === this.archetype).length > 0;
       if (!needsArchetype && archetypes.length > 0) {
         for (const p of archetypes) {
           this.actor._stagedItemDeletions.add(p.id);
@@ -214,11 +193,7 @@ export default class RankSystem extends mix(
   prepareBaseData() {
     super.prepareBaseData();
     if (this.parent.sup?.type === "species") this.innate = true;
-    if (
-      game.teriock.getSetting("armorWeakensRanks") &&
-      this.actor &&
-      this.actor.system.defense.av.base > this.maxAv
-    ) {
+    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv) {
       this.proficient = false;
     }
   }

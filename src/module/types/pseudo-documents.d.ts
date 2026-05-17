@@ -1,5 +1,5 @@
-import * as automations from "../data/pseudo-documents/automations/_module.mjs";
 import * as activations from "../data/pseudo-documents/activations/_module.mjs";
+import * as automations from "../data/pseudo-documents/automations/_module.mjs";
 
 declare global {
   namespace Teriock.Automations {

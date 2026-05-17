@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -9,11 +9,11 @@ const { RollTable } = foundry.documents;
 /**
  * The Teriock RollTable implementation.
  * @extends {RollTable}
- * @extends {ClientDocument}
  * @mixes BaseDocument
+ * @mixes UsableDocument
  * @implements {Teriock.Documents.RollTableInterface}
  */
-export default class TeriockRollTable extends mix(
+export default class TeriockRollTable extends mixClasses(
   RollTable,
   mixins.BaseDocumentMixin,
   mixins.UsableDocumentMixin,
@@ -24,9 +24,7 @@ export default class TeriockRollTable extends mix(
    */
   async getAllContents() {
     const out = await this.getContents();
-    const allDocs = [
-      ...out.filter((d) => !["RollTable", "Folder"].includes(d.documentName)),
-    ];
+    const allDocs = [...out.filter(d => !["RollTable", "Folder"].includes(d.documentName))];
     for (const d of out) {
       if (["RollTable", "Folder"].includes(d.documentName)) {
         const toAdd = await d.getAllContents();
@@ -42,9 +40,7 @@ export default class TeriockRollTable extends mix(
    */
   async getContents() {
     const out = await Promise.all(
-      this.results
-        .filter((r) => r.type === "document")
-        .map((r) => foundry.utils.fromUuid(r.documentUuid)),
+      this.results.filter(r => r.type === "document").map(r => foundry.utils.fromUuid(r.documentUuid)),
     );
     return out.filter(Boolean);
   }
@@ -72,31 +68,24 @@ export default class TeriockRollTable extends mix(
         sound: roll ? CONFIG.sounds.dice : null,
         speaker: TeriockChatMessage.getSpeaker(),
         system: {
-          activations:
-            teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
-              (
-                await Promise.all(results.map((r) => r.getActivations()))
-              ).flat(),
-            ),
-          avatar: TeriockChatMessage.getSpeakerActor(
-            TeriockChatMessage.getSpeaker(),
-          )?.img,
-          panels: await Promise.all(results.map((r) => r.getPanelParts())),
+          activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
+            (await Promise.all(results.map(r => r.getActivations()))).flat(),
+          ),
+          avatar: TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker())?.img,
+          panels: await Promise.all(results.map(r => r.getPanelParts())),
         },
       },
       messageData,
     );
     if (this.displayRoll && roll) messageData.rolls.push(roll);
-    messageData.system.panels.forEach((panel) => {
+    messageData.system.panels.forEach(panel => {
       panel.blocks.push({
         classes: TERIOCK.display.panel.classes.derived,
         text: this.description,
         title: this.name,
       });
     });
-    messageData.system.panels = await TeriockTextEditor.enrichPanels(
-      messageData.system.panels,
-    );
+    messageData.system.panels = await TeriockTextEditor.enrichPanels(messageData.system.panels);
     return TeriockChatMessage.create(messageData, messageOptions);
   }
 

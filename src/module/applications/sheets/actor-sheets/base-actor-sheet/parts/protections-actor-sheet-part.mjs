@@ -6,7 +6,7 @@ import { toCamelCase, toId } from "../../../../../helpers/string.mjs"; //noinspe
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -25,16 +25,14 @@ export default (Base) =>
      * @param {object} context
      */
     _prepareProtectionButtonContext(context) {
-      context.protectionButtons = Object.values(protectionConfig.types).map(
-        (type) => {
-          return {
-            tooltip: type.button,
-            img: getImage("effectTypes", type.rule),
-            action: type.action,
-            label: type.label,
-          };
-        },
-      );
+      context.protectionButtons = Object.values(protectionConfig.types).map(type => {
+        return {
+          tooltip: type.button,
+          img: getImage("effectTypes", type.rule),
+          action: type.action,
+          label: type.label,
+        };
+      });
     }
 
     /**
@@ -45,20 +43,15 @@ export default (Base) =>
       const protectionEntries = [];
       Object.entries(protectionConfig.types).forEach(([tk, tv]) => {
         Object.entries(protectionConfig.categories).forEach(([ck, cv]) => {
-          Array.from(this.document.system.protections[tk][ck]).forEach((s) => {
+          Array.from(this.document.system.protections[tk][ck]).forEach(s => {
             const nsId = toId("Keyword", { hash: false });
             const pnId = toId(tv.rule, { hash: false });
             const uuid = `Compendium.teriock.rules.JournalEntry.${nsId}.JournalEntryPage.${pnId}`;
             const fallbackImg = getImage("effectTypes", tv.rule);
-            const img =
-              ck === "other"
-                ? fallbackImg
-                : getImage(cv.imgCategory, s, fallbackImg);
+            const img = ck === "other" ? fallbackImg : getImage(cv.imgCategory, s, fallbackImg);
             let title = s;
             if (ck !== "other") {
-              title = foundry.utils.getProperty(TERIOCK, cv.choices)[
-                toCamelCase(s)
-              ];
+              title = foundry.utils.getProperty(TERIOCK, cv.choices)[toCamelCase(s)];
             }
             const entry = {
               action: tv.action,

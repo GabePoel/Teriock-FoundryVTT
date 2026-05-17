@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { movementActionField } from "../../fields/helpers/builders.mjs";
@@ -16,14 +16,8 @@ const { fields } = foundry.data;
  * @property {string} movementAction
  * @mixes DisplayAutomation
  */
-export default class MoveAutomation extends mix(
-  BaseAutomation,
-  DisplayAutomationMixin,
-) {
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Move",
-  ];
+export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAutomationMixin) {
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -61,12 +55,7 @@ export default class MoveAutomation extends mix(
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      "distance",
-      ...this._originPaths,
-      "movementAction",
-      ...this._displayPaths,
-    ];
+    return ["distance", ...this._originPaths, "movementAction", ...this._displayPaths];
   }
 
   /**
@@ -114,10 +103,7 @@ export default class MoveAutomation extends mix(
   async getActivations(options = {}) {
     const originToken = await this._getOriginToken(options.execution);
     if (!this.randomDirection && !originToken) return [];
-    const distance = await BaseRoll.getValue(
-      this.distance,
-      options.rollData ?? {},
-    );
+    const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
     return [
       new MoveActivation({
         display: this.display,

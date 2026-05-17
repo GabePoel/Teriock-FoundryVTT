@@ -13,17 +13,10 @@ const { TypeDataModel } = foundry.abstract;
  */
 export default class BaseItemSystem extends ChildSystemMixin(TypeDataModel) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.BaseItem",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseItem"];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = [
-    "effects",
-    "system.disabled",
-    ...super.PRESERVED_PROPERTIES,
-  ];
+  static PRESERVED_PROPERTIES = ["effects", "system.disabled", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static get metadata() {

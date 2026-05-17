@@ -1,4 +1,4 @@
-const act = scope.execution.activations.find((a) => a.type === "addDocuments");
+const act = scope.execution.activations.find(a => a.type === "addDocuments");
 const effectObject = act._source.primary.root.data;
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
 const childChangeId = foundry.utils.randomID();

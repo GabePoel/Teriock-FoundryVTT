@@ -1,10 +1,34 @@
 {{!-- Blatantly stolen from D&D 5E --}}
+{{!-- TODO: Work around core issue with providing undefined name --}}
 {{#each this}}
-  {{#if name}}{{!-- TODO: Work around core issue with providing undefined name --}}
-    {{formGroup field name=name value=value input=input options=options disabled=disabled localize=localize
-                placeholder=placeholder label=label hint=hint classes=classes rootId=@root.partId }}
+  {{#if name}}
+    {{formGroup
+      field
+      name=name
+      value=value
+      input=input
+      options=options
+      disabled=disabled
+      localize=localize
+      placeholder=placeholder
+      label=label
+      hint=hint
+      classes=classes
+      rootId=@root.partId
+    }}
   {{else}}
-    {{formGroup field value=value input=input options=options disabled=disabled localize=localize
-                placeholder=placeholder label=label hint=hint classes=classes rootId=@root.partId }}
+    {{formGroup
+      field
+      value=value
+      input=input
+      options=options
+      disabled=disabled
+      localize=localize
+      placeholder=placeholder
+      label=label
+      hint=hint
+      classes=classes
+      rootId=@root.partId
+    }}
   {{/if}}
 {{/each}}

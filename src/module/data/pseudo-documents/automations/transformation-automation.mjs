@@ -1,10 +1,7 @@
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { automationTransformationFields } from "../../fields/helpers/transformation-fields.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import {
-  CompetenceAutomationMixin,
-  SelectExternalDocumentsAutomationMixin,
-} from "./mixins/_module.mjs";
+import { CompetenceAutomationMixin, SelectExternalDocumentsAutomationMixin } from "./mixins/_module.mjs";
 
 /**
  * @extends {CritAutomation}
@@ -12,7 +9,7 @@ import {
  * @mixes SelectExternalDocumentsAutomation
  * @mixes CompetenceAutomation
  */
-export default class TransformationAutomation extends mix(
+export default class TransformationAutomation extends mixClasses(
   CritAutomation,
   SelectExternalDocumentsAutomationMixin,
   CompetenceAutomationMixin,
@@ -29,10 +26,7 @@ export default class TransformationAutomation extends mix(
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(
-      super.defineSchema(),
-      automationTransformationFields(),
-    );
+    return Object.assign(super.defineSchema(), automationTransformationFields());
   }
 
   /** @inheritDoc */
@@ -54,8 +48,8 @@ export default class TransformationAutomation extends mix(
   /** @inheritDoc */
   async getDocuments(options = {}) {
     let out = await super.getDocuments(options);
-    const actors = out.filter((d) => d.documentName === "Actor");
-    out = out.filter((d) => d.type === "species");
+    const actors = out.filter(d => d.documentName === "Actor");
+    out = out.filter(d => d.type === "species");
     for (const a of actors) {
       out.push(...a.species);
     }

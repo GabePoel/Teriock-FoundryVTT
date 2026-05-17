@@ -1,15 +1,37 @@
-<div class="{{cssClass}} {{#if hideInactive}}hide-inactive{{/if}} character-window
-{{#if (not floatingTabs)}}no-floating-tabs{{/if}}">
+<div
+  class="
+    {{ cssClass }}
+    {{#if hideInactive}}
+      hide-inactive
+    {{/if}}
+    character-window
+    {{#if (not floatingTabs)}}
+      no-floating-tabs
+    {{/if}}
+  "
+>
   <div class="character-tabber-background floating">
     {{> "teriock/sheets/actors/playable/parts/tabs"}}
   </div>
   <div class="character-page">
     {{> "teriock/sheets/actors/playable/parts/sidebar"}}
-    <div class="character-sidebar-tabber-container sidebar-collapser {{#if (not sidebarOpen)}}collapsed{{/if}}">
-      <div class="character-tabber character-sidebar-tabber ui-controls" data-action="toggleSidebar"
-           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Toggle.label"}}" data-tooltip-direction="RIGHT">
-        <i class="{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} hflip expanded-icon"></i>
-        <i class="{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} collapsed-icon"></i>
+    <div
+      class="
+        character-sidebar-tabber-container
+        sidebar-collapser
+        {{#if (not sidebarOpen)}}
+          collapsed
+        {{/if}}
+      "
+    >
+      <div
+        class="character-tabber character-sidebar-tabber ui-controls"
+        data-action="toggleSidebar"
+        data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Toggle.label"}}'
+        data-tooltip-direction="RIGHT"
+      >
+        <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} hflip expanded-icon'></i>
+        <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} collapsed-icon'></i>
       </div>
     </div>
     <div class="character-tab-content">

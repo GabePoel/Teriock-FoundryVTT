@@ -17,10 +17,7 @@ const { fields } = foundry.data;
  */
 export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Attunement",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunement"];
 
   /** @inheritDoc */
   static get metadata() {
@@ -39,9 +36,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
         initial: 0,
       }),
       type: new fields.StringField({
-        choices: localizeChoices(
-          objectMap(attunementConfig.type, (v) => v.label),
-        ),
+        choices: localizeChoices(objectMap(attunementConfig.type, v => v.label)),
         initial: "effect",
       }),
     });
@@ -49,9 +44,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   get color() {
-    return this.target
-      ? TERIOCK.display.colors.green
-      : TERIOCK.display.colors.orange;
+    return this.target ? TERIOCK.display.colors.green : TERIOCK.display.colors.orange;
   }
 
   /** @inheritDoc */
@@ -124,11 +117,10 @@ export default class AttunementSystem extends CleanedEffectSystem {
     const entries = super
       .getCardContextMenuEntries(doc)
       .filter(
-        (e) =>
-          ![
-            _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
-            _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
-          ].includes(e.label),
+        e =>
+          ![_loc("TERIOCK.SYSTEMS.Common.MENU.delete"), _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate")].includes(
+            e.label,
+          ),
       );
     return [
       ...entries,

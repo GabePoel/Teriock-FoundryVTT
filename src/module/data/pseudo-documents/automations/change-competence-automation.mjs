@@ -7,9 +7,7 @@ import { CompetenceAutomationMixin } from "./mixins/_module.mjs";
  * @mixes CompetenceAutomation
  * @property {TypedIdentifier} identifier
  */
-export default class ChangeCompetenceAutomation extends CompetenceAutomationMixin(
-  CritAutomation,
-) {
+export default class ChangeCompetenceAutomation extends CompetenceAutomationMixin(CritAutomation) {
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.ChangeCompetence.LABEL";

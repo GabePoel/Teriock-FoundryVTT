@@ -1,18 +1,14 @@
 import { bindCommonActions } from "../../applications/shared/_module.mjs";
-import {
-  TeriockContextMenu,
-  TeriockTextEditor,
-} from "../../applications/ux/_module.mjs";
+import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { toTitleCase } from "../../helpers/string.mjs";
 
 /**
  * Mixin that provides support for embedding as a card.
- * @param {typeof ClientDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function EmbedCardDocumentMixin(Base) {
   return (
     /**
-     * @extends ClientDocument
      * @mixes BaseDocument
      * @mixin
      */
@@ -67,10 +63,7 @@ export default function EmbedCardDocumentMixin(Base) {
           if (options.relativeTo) {
             embedContext.relative = options.relativeTo.uuid;
           }
-          const html = await TeriockTextEditor.renderTemplate(
-            "teriock/ui/block",
-            embedContext,
-          );
+          const html = await TeriockTextEditor.renderTemplate("teriock/ui/block", embedContext);
           return foundry.utils.parseHTML(html);
         }
       }
@@ -91,29 +84,23 @@ export default function EmbedCardDocumentMixin(Base) {
           element.classList.contains("teriock-block") ||
           !!element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`);
         if (addCallbacks) {
-          const relativeUuid =
-            element.dataset.relative ??
-            element.querySelector("[data-relative]")?.dataset.relative;
-          fromUuid(relativeUuid).then((relative) => {
+          const relativeUuid = element.dataset.relative ?? element.querySelector("[data-relative]")?.dataset.relative;
+          fromUuid(relativeUuid).then(relative => {
             for (const [type, callback] of Object.entries({
               click: "primary",
               contextmenu: "secondary",
             })) {
               // The only callback that always gets added is `openDoc`
-              element.addEventListener(type, async (ev) => {
+              element.addEventListener(type, async ev => {
                 const target = /** @type {HTMLElement} */ ev.target;
-                const el =
-                  /** @type {HTMLElement} */ target.closest("[data-action]");
+                const el = /** @type {HTMLElement} */ target.closest("[data-action]");
                 if (el) {
                   const action = el.dataset.action;
                   const fn = this.embedActions[action][callback];
                   if (!fn || (isEmbedded && action !== "openDoc")) return;
                   ev.stopImmediatePropagation();
                   ev.preventDefault();
-                  if (
-                    ["openDoc", "useDoc"].includes(action) ||
-                    game.teriock.checkEditable(relative)
-                  ) {
+                  if (["openDoc", "useDoc"].includes(action) || game.teriock.checkEditable(relative)) {
                     await fn(ev, relative);
                   }
                 }

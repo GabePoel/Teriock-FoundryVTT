@@ -1,16 +1,16 @@
+import { EmbeddedCollection } from "@common/abstract/_module.mjs";
+
 import { TeriockRollTable, TeriockTableResult } from "../_module.mjs";
-import { DocumentCollection } from "../../../../foundry/client/documents/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
     export interface RollTableInterface {
       _id: ID<TeriockRollTable>;
-      results: DocumentCollection<TeriockTableResult>;
+      // @ts-expect-error Bad extension
+      results: EmbeddedCollection<TeriockTableResult>;
 
       get documentName(): "RollTable";
-
       get id(): ID<TeriockRollTable>;
-
       get uuid(): UUID<TeriockRollTable>;
     }
   }

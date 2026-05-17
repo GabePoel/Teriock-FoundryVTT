@@ -7,14 +7,9 @@ const { fields } = foundry.data;
  * @param {boolean} consumeStatDice
  * @param {boolean} forHarm
  */
-export default class StatAutomation extends TriggerAutomationMixin(
-  BaseAutomation,
-) {
+export default class StatAutomation extends TriggerAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Stat",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Stat"];
 
   /** @inheritDoc */
   static defineSchema() {

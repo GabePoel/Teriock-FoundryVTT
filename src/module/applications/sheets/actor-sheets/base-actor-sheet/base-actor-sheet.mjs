@@ -1,5 +1,5 @@
 import { documentConfig } from "../../../../constants/config/document-config.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -25,7 +25,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @property {TeriockActor} document
  * @property {Teriock.Sheet.BaseActorSheetSettings} settings
  */
-export default class BaseActorSheet extends mix(
+export default class BaseActorSheet extends mixClasses(
   ActorSheetV2,
   HackStatApplicationMixin,
   HandlebarsApplicationMixin,
@@ -72,10 +72,8 @@ export default class BaseActorSheet extends mix(
   async _onRender(context, options) {
     await super._onRender(context, options);
     /** @type {NodeListOf<HTMLButtonElement>} */
-    const toggleSwitches = this.element.querySelectorAll(
-      'button[data-action="toggleSwitch"]',
-    );
-    toggleSwitches.forEach((el) => {
+    const toggleSwitches = this.element.querySelectorAll('button[data-action="toggleSwitch"]');
+    toggleSwitches.forEach(el => {
       // Left-click: forward cycle
       el.addEventListener("click", async () => {
         this.#cycleToggleSwitch(el, 1);
@@ -90,7 +88,7 @@ export default class BaseActorSheet extends mix(
       if (!el.id) return;
       const label = this.element.querySelector(`label[for="${el.id}"]`);
       if (!label) return;
-      label.addEventListener("contextmenu", async (event) => {
+      label.addEventListener("contextmenu", async event => {
         event.preventDefault();
         this.#cycleToggleSwitch(el, 2);
         await this.render();
@@ -103,15 +101,9 @@ export default class BaseActorSheet extends mix(
     const context = await super._prepareContext(options);
     this._prepareDisplayContext(context);
     context.enrichedNotes = await this._enrich(this.document.system.notes);
-    context.enrichedSpecialRules = await this._enrich(
-      this.document.system.wielding.attacker?.system?.specialRules,
-    );
-    context.consumableAbilities = this.document.abilities.filter(
-      (a) => a.system.consumable,
-    );
-    context.consumableProperties = this.document.properties.filter(
-      (a) => a.system.consumable,
-    );
+    context.enrichedSpecialRules = await this._enrich(this.document.system.wielding.attacker?.system?.specialRules);
+    context.consumableAbilities = this.document.abilities.filter(a => a.system.consumable);
+    context.consumableProperties = this.document.properties.filter(a => a.system.consumable);
     return context;
   }
 

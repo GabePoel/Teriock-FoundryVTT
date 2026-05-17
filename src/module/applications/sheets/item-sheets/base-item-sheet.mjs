@@ -1,4 +1,4 @@
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { ItemSheetV2 } = foundry.applications.sheets;
@@ -12,7 +12,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @property {AnyItem} document
  * @property {AnyItem} item
  */
-export default class BaseItemSheet extends mix(
+export default class BaseItemSheet extends mixClasses(
   ItemSheetV2,
   HandlebarsApplicationMixin,
   mixins.CommonSheetMixin,

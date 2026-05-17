@@ -1,61 +1,42 @@
-<div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
+<div
+  class="
+    ab-menu
+    {{#if menuCollapsed}}
+      collapsed
+    {{/if}}
+  "
+>
   <div class="ab-menu-content">
     {{> "teriock/sheets/shared/display-toggles"}}
     <div class="ab-menu-bar">
       <div class="ttable">
-        {{> "teriock/sheets/shared/menu-input" field=systemFields.fightingStyle value=system.fightingStyle}}
+        {{> "teriock/sheets/shared/menu-input"
+          field=systemFields.fightingStyle
+          value=system.fightingStyle
+        }}
       </div>
     </div>
     <div class="ab-menu-bar">
       <div class="ttable">
         {{#if (not (exists system.damage.base))}}
           <div class="tgrid-item">
-            <button
-              class="ab-menu-button ab-damage-button"
-              {{#if (not editable)}}
-              disabled="disabled"
-              {{/if}}
-            >
-              {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label"}}
-            </button>
+            <button class="ab-menu-button ab-damage-button" {{#if (not editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label"}}</button>
           </div>
         {{/if}}
         {{#if (not (exists system.av.raw))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-av-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label"}}
-            </button>
+            <button class="ab-menu-button ab-av-button" {{#if (not editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label"}}</button>
           </div>
         {{/if}}
         {{#if (not (exists system.bv.raw))}}
           <div class="tgrid-item">
-            <button class="ab-menu-button ab-bv-button"
-              {{#if (not editable)}}
-                    disabled="disabled"
-              {{/if}}
-            >
-              {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label"}}
-            </button>
+            <button class="ab-menu-button ab-bv-button" {{#if (not editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label"}}</button>
           </div>
         {{/if}}
         {{#if (exists system.damage.base)}}
           {{#if (not (exists system.hitBonus))}}
             <div class="tgrid-item">
-              <button class="ab-menu-button ab-hit-button"
-                {{#if (not editable)}}
-                      disabled="disabled"
-                {{/if}}
-              >
-                {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-                {{localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label"}}
-              </button>
+              <button class="ab-menu-button ab-hit-button" {{#if (not editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label"}}</button>
             </div>
           {{/if}}
         {{/if}}

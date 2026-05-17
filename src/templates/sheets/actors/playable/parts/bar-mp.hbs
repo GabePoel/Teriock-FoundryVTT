@@ -1,26 +1,12 @@
 <div class="character-mana-bar-container character-bar-container">
   <div class="character-mana-bar character-bar toutline">
-    <div
-      class="character-bar-left"
-      style="width: {{bars.mp.remaining}}%;"
-    ></div>
+    <div class="character-bar-left" style="width: {{ bars.mp.remaining }}%;"></div>
     <div
       class="character-bar-temp"
-      style="width: {{bars.mp.temp}}%; {{barTempHide
-        system.mp.value
-        system.mp.max
-        system.mp.temp
-        system.mp.morganti
-      }}"
+      style="width: {{ bars.mp.temp }}%; {{barTempHide system.mp.value system.mp.max system.mp.temp system.mp.morganti}}"
     ></div>
-    <div
-      class="character-bar-lost"
-      style="width: {{bars.mp.lost}}%;"
-    ></div>
-    <div
-      class="character-bar-morganti"
-      style="width: {{bars.mp.morganti}}%;"
-    ></div>
+    <div class="character-bar-lost" style="width: {{ bars.mp.lost }}%;"></div>
+    <div class="character-bar-morganti" style="width: {{ bars.mp.morganti }}%;"></div>
   </div>
   <div class="character-bar-overlay" data-action="toggleStatDrawer" data-stat="mp">
     <div class="character-bar-overlay-row character-mana-bar-overlay-row">
@@ -32,9 +18,11 @@
         class="thover-soft character-bar-overlay-left character-bar-overlay-label"
         dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.current"))
       }}
-      <div class="character-bar-overlay-max character-bar-overlay-label"
-           data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.max"}}">
-        <span>/ {{system.mp.max}} +</span>
+      <div
+        class="character-bar-overlay-max character-bar-overlay-label"
+        data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.max"}}'
+      >
+        <span>/ {{ system.mp.max }} +</span>
       </div>
       {{formInput
         systemFields.mp.fields.temp
@@ -47,7 +35,7 @@
       <div
         class="take-harm-button thover take-damage-button"
         data-action="takeImpact"
-        data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.take"}}"
+        data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.take"}}'
         data-impact="drain"
       >
         {{makeIcon TERIOCK.display.icons.effect.drain "light"}}

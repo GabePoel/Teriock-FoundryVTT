@@ -1,7 +1,7 @@
 //noinspection JSValidateJSDoc
 
 import { icons } from "../../constants/display/icons.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -17,7 +17,7 @@ const { TokenDocument } = foundry.documents;
  * @mixes BaseDocument
  * @mixes SettingsDocument
  */
-export default class TeriockTokenDocument extends mix(
+export default class TeriockTokenDocument extends mixClasses(
   TokenDocument,
   mixins.BaseDocumentMixin,
   mixins.EmbedCardDocumentMixin,
@@ -103,17 +103,10 @@ export default class TeriockTokenDocument extends mix(
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (
-      this.hasStatusEffect("ethereal") &&
-      this.actor.getSetting("token.autoLighting")
-    ) {
+    if (this.hasStatusEffect("ethereal") && this.actor.getSetting("token.autoLighting")) {
       const lightRange = Math.max(this.light.bright, this.light.dim);
       foundry.utils.setProperty(this, "detectionModes.spectral.enabled", true);
-      foundry.utils.setProperty(
-        this,
-        "detectionModes.spectral.range",
-        lightRange,
-      );
+      foundry.utils.setProperty(this, "detectionModes.spectral.range", lightRange);
       this.sight.range = lightRange;
       this.sight.angle = this.light.angle;
       this.light.bright = 0;

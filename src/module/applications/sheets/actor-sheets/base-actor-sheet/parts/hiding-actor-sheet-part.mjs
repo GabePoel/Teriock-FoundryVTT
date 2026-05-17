@@ -2,7 +2,7 @@
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -14,10 +14,7 @@ export default (Base) =>
 
     constructor(...args) {
       super(...args);
-      this._hideInactive = game.settings.get(
-        "teriock",
-        "hideInactiveDocumentsByDefault",
-      );
+      this._hideInactive = game.settings.get("teriock", "hideInactiveDocumentsByDefault");
     }
 
     /**
@@ -35,9 +32,7 @@ export default (Base) =>
      */
     #setToggleHideButtonAttributes(toggleButton) {
       toggleButton.classList.remove(...["fa-eye", "fa-eye-slash"]);
-      toggleButton.classList.add(
-        ...[this._hideInactive ? "fa-eye-slash" : "fa-eye"],
-      );
+      toggleButton.classList.add(...[this._hideInactive ? "fa-eye-slash" : "fa-eye"]);
       toggleButton.setAttribute(
         "data-tooltip",
         this._hideInactive
@@ -49,9 +44,7 @@ export default (Base) =>
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
-      const toggleButton = this.window.header.querySelector(
-        "[data-action='toggleHideThis']",
-      );
+      const toggleButton = this.window.header.querySelector("[data-action='toggleHideThis']");
       if (toggleButton) this.#setToggleHideButtonAttributes(toggleButton);
     }
 

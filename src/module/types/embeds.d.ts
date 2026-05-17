@@ -6,10 +6,7 @@ declare global {
       clickable?: boolean;
       dataset?: object;
       icon?: Teriock.EmbedData.EmbedIcon;
-      onClick?: (
-        event: PointerEvent,
-        relative: TeriockDocument,
-      ) => Promise<void>;
+      onClick?: (event: PointerEvent, relative: TeriockDocument) => Promise<void>;
       tooltip?: string;
       visible?: boolean;
     };
@@ -40,14 +37,8 @@ declare global {
     };
 
     export type EmbedAction = {
-      primary: (
-        event: PointerEvent,
-        relative: TeriockDocument,
-      ) => Promise<void>;
-      secondary?: (
-        event: PointerEvent,
-        relative: TeriockDocument,
-      ) => Promise<void>;
+      primary: (event: PointerEvent, relative: TeriockDocument) => Promise<void>;
+      secondary?: (event: PointerEvent, relative: TeriockDocument) => Promise<void>;
     };
   }
 }

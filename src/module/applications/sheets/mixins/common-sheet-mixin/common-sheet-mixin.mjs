@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
 import BaseSheetMixin from "../base-sheet-mixin.mjs";
@@ -25,7 +25,7 @@ export default function CommonSheetMixin(Base) {
      * @mixin
      * @property {AnyCommonDocument} document
      */
-    class CommonSheet extends mix(
+    class CommonSheet extends mixClasses(
       Base,
       BaseSheetMixin,
       ConfigButtonSheetMixin,
@@ -43,12 +43,11 @@ export default function CommonSheetMixin(Base) {
       IndexButtonSheetMixin,
     ) {
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS =
-        /** @type {Partial<ApplicationConfiguration>} */ {
-          form: { closeOnSubmit: false, submitOnChange: true },
-          position: { height: 600, width: 560 },
-          window: { resizable: true },
-        };
+      static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
+        form: { closeOnSubmit: false, submitOnChange: true },
+        position: { height: 600, width: 560 },
+        window: { resizable: true },
+      };
 
       /**
        * Creates a new Teriock sheet instance.
@@ -90,8 +89,7 @@ export default function CommonSheetMixin(Base) {
       async _renderFrame(options = {}) {
         const frame = await super._renderFrame(options);
         if (this.document.inCompendium) {
-          this.window.header.style.backgroundColor =
-            "var(--compendium-sheet-header-background-color)";
+          this.window.header.style.backgroundColor = "var(--compendium-sheet-header-background-color)";
         }
         return frame;
       }

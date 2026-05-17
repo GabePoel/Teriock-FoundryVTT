@@ -1,6 +1,4 @@
-const applyActivation = scope.execution.activations.find(
-  (a) => a.type === "addDocuments",
-);
+const applyActivation = scope.execution.activations.find(a => a.type === "addDocuments");
 
 const choices = teriock.helpers.localization.localizeChoices({
   awakening: "TERIOCK.TERMS.EffectTypes.awakening",

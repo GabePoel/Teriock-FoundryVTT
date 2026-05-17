@@ -1,7 +1,4 @@
-import {
-  consolidateWriteOperations,
-  makeIcon,
-} from "../../../../helpers/utils.mjs";
+import { consolidateWriteOperations, makeIcon } from "../../../../helpers/utils.mjs";
 import { effectTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 
 const { fields } = foundry.data;
@@ -18,10 +15,7 @@ export default function TransformationSystemMixin(Base) {
      */
     class TransformationSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SCHEMA.Transformation",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SCHEMA.Transformation"];
 
       /** @inheritDoc */
       static defineSchema() {
@@ -45,21 +39,13 @@ export default function TransformationSystemMixin(Base) {
        * }}
        */
       get #flagMap() {
-        const hasItem = (id) => this.actor.items.has(id);
-        const hasEffect = (id) => this.actor.effects.has(id);
+        const hasItem = id => this.actor.items.has(id);
+        const hasEffect = id => this.actor.effects.has(id);
         return {
-          disabledEffects: (
-            this.parent.getFlag("teriock", "disabledEffects") ?? []
-          ).filter(hasEffect),
-          disabledItems: (
-            this.parent.getFlag("teriock", "disabledItems") ?? []
-          ).filter(hasItem),
-          disabledHpDiceItems: (
-            this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []
-          ).filter(hasItem),
-          disabledMpDiceItems: (
-            this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []
-          ).filter(hasItem),
+          disabledEffects: (this.parent.getFlag("teriock", "disabledEffects") ?? []).filter(hasEffect),
+          disabledItems: (this.parent.getFlag("teriock", "disabledItems") ?? []).filter(hasItem),
+          disabledHpDiceItems: (this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []).filter(hasItem),
+          disabledMpDiceItems: (this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []).filter(hasItem),
         };
       }
 
@@ -70,10 +56,7 @@ export default function TransformationSystemMixin(Base) {
       get #resetUpdateData() {
         const updateData = {};
         for (const r of this.transformation.reset) {
-          Object.assign(
-            updateData,
-            TERIOCK.config.transformation.reset[r].update,
-          );
+          Object.assign(updateData, TERIOCK.config.transformation.reset[r].update);
         }
         return updateData;
       }
@@ -83,9 +66,7 @@ export default function TransformationSystemMixin(Base) {
        * @returns {boolean}
        */
       get _isSuppressedTransformation() {
-        return (
-          this.isTransformation && this.actor && !this.isPrimaryTransformation
-        );
+        return this.isTransformation && this.actor && !this.isPrimaryTransformation;
       }
 
       /**
@@ -94,10 +75,7 @@ export default function TransformationSystemMixin(Base) {
        */
       get isPrimaryTransformation() {
         if (this.actor) {
-          return (
-            this.isTransformation &&
-            this.actor.system.transformation.primary === this.parent
-          );
+          return this.isTransformation && this.actor.system.transformation.primary === this.parent;
         } else {
           return this.isTransformation;
         }
@@ -133,26 +111,18 @@ export default function TransformationSystemMixin(Base) {
         const uuids = this.transformation.uuids;
         const flags = this._buildTransformationFlags();
         this.parent.updateSource({ flags });
-        let species = /** @type {TeriockSpecies[]} */ await Promise.all(
-          uuids.map((uuid) => fromUuid(uuid)),
-        );
-        species = species.filter((s) => s);
+        let species = /** @type {TeriockSpecies[]} */ await Promise.all(uuids.map(uuid => fromUuid(uuid)));
+        species = species.filter(s => s);
         if (!species.length) return;
-        const itemData = /** @type {TeriockSpecies[]} */ species.map((s) =>
-          s.toObject(),
-        );
-        itemData.forEach((s) => {
+        const itemData = /** @type {TeriockSpecies[]} */ species.map(s => s.toObject());
+        itemData.forEach(s => {
           s.system._dep = this.parent.id;
           s.system.transformationLevel = this.transformation.level;
           s.system.statDice.hp.disabled = !this.transformation.reset.has("hp");
           s.system.statDice.mp.disabled = !this.transformation.reset.has("mp");
           s.system.competence.raw = this.transformation.competence.value;
           if (s.system.size.min && s.system.size.max) {
-            s.system.size.value = Math.clamp(
-              this.actor.system.size.number,
-              s.system.size.min,
-              s.system.size.max,
-            );
+            s.system.size.value = Math.clamp(this.actor.system.size.number, s.system.size.min, s.system.size.max);
           }
         });
         this.#batchedOperations.push({
@@ -170,9 +140,7 @@ export default function TransformationSystemMixin(Base) {
        * @param {boolean} value
        */
       #addBatchToggle(collection, id, value) {
-        const toggle =
-          TERIOCK.config.transformation.suppress[collection.get(id)?.type]
-            ?.path;
+        const toggle = TERIOCK.config.transformation.suppress[collection.get(id)?.type]?.path;
         if (!toggle) return;
         this.#addBatchUpdateDocument(collection, id, { [toggle]: value });
       }
@@ -211,14 +179,11 @@ export default function TransformationSystemMixin(Base) {
       #addBatchUpdateDocument(collection, id, data) {
         if (!collection.get(id)) return;
         let operation = this.#batchedOperations.find(
-          (op) =>
-            op.documentName === collection.documentName &&
-            op.action === "update" &&
-            op.ids.includes(id),
+          op => op.documentName === collection.documentName && op.action === "update" && op.ids.includes(id),
         );
         if (operation) {
           if (!operation.updates) operation.updates = [];
-          const update = operation.updates.find((u) => u._id === id);
+          const update = operation.updates.find(u => u._id === id);
           if (update) Object.assign(update, data);
           else operation.updates.push({ _id: id, ...data });
         } else {
@@ -272,11 +237,9 @@ export default function TransformationSystemMixin(Base) {
        */
       #enabledFilter(docs) {
         return docs.filter(
-          (d) =>
-            !foundry.utils.getProperty(
-              d,
-              TERIOCK.config.transformation.suppress[d.type]?.path,
-            ) && d.dependee !== this.parent,
+          d =>
+            !foundry.utils.getProperty(d, TERIOCK.config.transformation.suppress[d.type]?.path) &&
+            d.dependee !== this.parent,
         );
       }
 
@@ -352,7 +315,7 @@ export default function TransformationSystemMixin(Base) {
        * @return {ID<AnyChildDocument>[]}
        */
       #toIds(docs) {
-        return docs.map((d) => d.id);
+        return docs.map(d => d.id);
       }
 
       /**
@@ -360,8 +323,8 @@ export default function TransformationSystemMixin(Base) {
        * @returns {object}
        */
       _buildTransformationFlags() {
-        let disabledEffects = [];
-        let disabledItems = [];
+        const disabledEffects = [];
+        const disabledItems = [];
         const disabledHpDiceItems = [];
         const disabledMpDiceItems = [];
         const typeMap = this.actor.children.documentsByType;
@@ -373,18 +336,12 @@ export default function TransformationSystemMixin(Base) {
             disabledItems.push(...this.#enabledFilter(typeMap[t] || []));
           }
         }
-        const statItems = this.actor.items.contents.filter(
-          (i) => i.system.metadata.stats,
-        );
+        const statItems = this.actor.items.contents.filter(i => i.system.metadata.stats);
         if (this.transformation.reset.has("hp")) {
-          disabledHpDiceItems.push(
-            ...statItems.filter((i) => !i.system.statDice.hp.disabled),
-          );
+          disabledHpDiceItems.push(...statItems.filter(i => !i.system.statDice.hp.disabled));
         }
         if (this.transformation.reset.has("mp")) {
-          disabledMpDiceItems.push(
-            ...statItems.filter((i) => !i.system.statDice.mp.disabled),
-          );
+          disabledMpDiceItems.push(...statItems.filter(i => !i.system.statDice.mp.disabled));
         }
         const preTransform = {};
         for (const r of this.transformation.reset) {
@@ -407,11 +364,7 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        if (
-          this.parent.checkEditor(userId) &&
-          this.isTransformation &&
-          this.actor
-        ) {
+        if (this.parent.checkEditor(userId) && this.isTransformation && this.actor) {
           this.#modifyOnCreate();
         }
       }
@@ -419,11 +372,7 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
-        if (
-          this.parent.checkEditor(userId) &&
-          this.isTransformation &&
-          this.actor
-        ) {
+        if (this.parent.checkEditor(userId) && this.isTransformation && this.actor) {
           this.#modifyOnDelete();
         }
       }
@@ -450,22 +399,11 @@ export default function TransformationSystemMixin(Base) {
         if (foundry.utils.hasProperty(changes, "disabled")) {
           const wasDisabled = changes.disabled === false;
           if (wasDisabled) {
-            const flags = foundry.utils.mergeObject(
-              this.parent.flags,
-              this._buildTransformationFlags(),
-            );
+            const flags = foundry.utils.mergeObject(this.parent.flags, this._buildTransformationFlags());
             foundry.utils.setProperty(changes, "flags", flags);
           } else {
-            foundry.utils.setProperty(
-              changes,
-              "flags.teriock.transformationHp",
-              this.actor.system.hp.value,
-            );
-            foundry.utils.setProperty(
-              changes,
-              "flags.teriock.transformationMp",
-              this.actor.system.mp.value,
-            );
+            foundry.utils.setProperty(changes, "flags.teriock.transformationHp", this.actor.system.hp.value);
+            foundry.utils.setProperty(changes, "flags.teriock.transformationMp", this.actor.system.mp.value);
           }
         }
       }
@@ -475,13 +413,8 @@ export default function TransformationSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            label: _loc(
-              "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
-            ),
-            icon: makeIcon(
-              TERIOCK.display.icons.effect.transform,
-              "contextMenu",
-            ),
+            label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
+            icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
             onClick: this.setPrimaryTransformation.bind(this),
             visible: this.isTransformation && !this.isPrimaryTransformation,
             group: "usage",

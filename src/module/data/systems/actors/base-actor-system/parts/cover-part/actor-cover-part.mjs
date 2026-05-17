@@ -6,7 +6,7 @@ import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
  * Actor data model that handles cover.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}

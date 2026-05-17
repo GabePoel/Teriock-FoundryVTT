@@ -1,7 +1,4 @@
-import {
-  RangeModel,
-  SlowExecutionTimeModel,
-} from "../../../../../models/unit-models/_module.mjs";
+import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {

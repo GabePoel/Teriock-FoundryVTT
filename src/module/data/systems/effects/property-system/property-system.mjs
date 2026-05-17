@@ -1,5 +1,5 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toKebabCase } from "../../../../helpers/string.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
@@ -24,7 +24,7 @@ const { fields } = foundry.data;
  * @mixes RevelationSystem
  * @mixes WikiSystem
  */
-export default class PropertySystem extends mix(
+export default class PropertySystem extends mixClasses(
   CleanedEffectSystem,
   mixins.AdjustableSystemMixin,
   mixins.ConsumableSystemMixin,
@@ -33,10 +33,7 @@ export default class PropertySystem extends mix(
   mixins.WikiSystemMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Property",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Property"];
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -137,10 +134,7 @@ export default class PropertySystem extends mix(
       {
         icon: TERIOCK.config.effect.form[this.form].icon,
         label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
-        wrappers: [
-          TERIOCK.config.effect.form[this.form].label,
-          ...simplifyTags(this._metaphysicsTags),
-        ],
+        wrappers: [TERIOCK.config.effect.form[this.form].label, ...simplifyTags(this._metaphysicsTags)],
       },
     ];
   }

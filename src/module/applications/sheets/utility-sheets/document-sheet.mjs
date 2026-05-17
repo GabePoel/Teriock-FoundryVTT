@@ -1,7 +1,6 @@
 import BaseSheetMixin from "../mixins/base-sheet-mixin.mjs";
 
-const { DocumentSheetV2, HandlebarsApplicationMixin } =
-  foundry.applications.api;
+const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
 //noinspection JSValidateJSDoc
 /**
@@ -9,6 +8,4 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } =
  * @mixes HandlebarsApplication
  * @property {TeriockDocument} document
  */
-export default class TeriockDocumentSheet extends BaseSheetMixin(
-  HandlebarsApplicationMixin(DocumentSheetV2),
-) {}
+export default class TeriockDocumentSheet extends BaseSheetMixin(HandlebarsApplicationMixin(DocumentSheetV2)) {}

@@ -1,5 +1,4 @@
 import { icons } from "../../../../../constants/display/icons.mjs";
-
 //noinspection JSClosureCompilerSyntax
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 
@@ -7,7 +6,7 @@ import { makeIconClass } from "../../../../../helpers/utils.mjs";
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin

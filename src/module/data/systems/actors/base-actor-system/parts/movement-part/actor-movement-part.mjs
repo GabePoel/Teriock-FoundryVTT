@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * Actor data model that handles movement.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {AbstractActorSystem}
@@ -21,9 +21,7 @@ export default (Base) => {
         return Object.assign(super.defineSchema(), {
           movementSpeed: initialNumber(30),
           speedAdjustments: new fields.SchemaField(
-            objectMap(config.character.movement, (e) =>
-              speedField(e.initial, e.label),
-            ),
+            objectMap(config.character.movement, e => speedField(e.initial, e.label)),
           ),
         });
       }

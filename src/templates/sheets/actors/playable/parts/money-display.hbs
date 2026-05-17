@@ -2,8 +2,8 @@
   <div class="money-panels tgrid g3">
     {{#each TERIOCK.config.currency as |currency id|}}
       <div class="money-panel-container">
-        <div class="money-icon tcenter timage" data-src="{{getImage "currency" id}}">
-          <img src="{{getImage "currency" id}}" data-openable="true" alt="">
+        <div class="money-icon tcenter timage" data-src='{{getImage "currency" id}}'>
+          <img src='{{getImage "currency" id}}' data-openable="true" alt="" />
         </div>
         <div class="money-panel tgrid g4">
           {{formInput
@@ -14,19 +14,21 @@
             placeholder="0"
           }}
           <div class="money-info tsubtle tcenter gi3">
-            <div class="money-name">
-              {{currency.label}}
-            </div>
+            <div class="money-name">{{ currency.label }}</div>
             <div class="money-value">
-              {{localize "TERIOCK.SHEETS.Actor.TABS.Inventory.money.value" value=currency.value weight=currency.weight}}
+              {{localize
+                "TERIOCK.SHEETS.Actor.TABS.Inventory.money.value"
+                value=currency.value
+                weight=currency.weight
+              }}
             </div>
           </div>
         </div>
       </div>
     {{/each}}
     <div class="money-panel-container">
-      <div class="money-icon tcenter timage" data-src="{{getImage "currency" "debt"}}">
-        <img src="{{getImage "currency" "debt"}}" data-openable="true" alt="">
+      <div class="money-icon tcenter timage" data-src='{{getImage "currency" "debt"}}'>
+        <img src='{{getImage "currency" "debt"}}' data-openable="true" alt="" />
       </div>
       <div class="money-panel tgrid g4">
         {{formInput
@@ -37,18 +39,29 @@
           placeholder="0"
         }}
         <div class="money-info tsubtle tcenter gi3">
-          <div class="money-name">
-            {{localize "TERIOCK.TERMS.Currency.debt"}}
-          </div>
+          <div class="money-name">{{localize "TERIOCK.TERMS.Currency.debt"}}</div>
           <div class="money-value">
-            {{localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.daily" rate=system.interestRate}}
+            {{localize
+              "TERIOCK.SYSTEMS.BaseActor.FIELDS.interestRate.daily"
+              rate=system.interestRate
+            }}
           </div>
         </div>
       </div>
     </div>
 
   </div>
-  <div class="money-total {{#if (lt system.money.total 0)}}tred{{/if}}">
-    {{system.money.total}} ₲&nbsp;&nbsp;&nbsp;&nbsp;{{system.weight.money}} lb
+  <div
+    class="
+      money-total
+      {{#if (lt system.money.total 0)}}
+        tred
+      {{/if}}
+    "
+  >
+    {{ system.money.total }}
+    ₲&nbsp;&nbsp;&nbsp;&nbsp;
+    {{ system.weight.money }}
+    lb
   </div>
 </div>

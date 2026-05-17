@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Ability flags part.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -43,11 +43,9 @@ export default (Base) => {
         if (this.standard && !this.skill && !this.spell) {
           tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label");
         }
-        if (this.standard && this.skill)
-          tags.push("TERIOCK.TERMS.Common.semblant");
+        if (this.standard && this.skill) tags.push("TERIOCK.TERMS.Common.semblant");
         if (this.skill) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label");
-        if (this.standard && this.spell)
-          tags.push("TERIOCK.TERMS.Common.conjured");
+        if (this.standard && this.spell) tags.push("TERIOCK.TERMS.Common.conjured");
         if (this.spell) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label");
         if (this.invoked) {
           tags.push({
@@ -55,10 +53,8 @@ export default (Base) => {
             tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
           });
         }
-        if (this.ritual)
-          tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
-        if (this.rotator)
-          tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
+        if (this.ritual) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label");
+        if (this.rotator) tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label");
         if (this.guildmaster) {
           tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.guildmaster.label");
         }
@@ -71,10 +67,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       get isBasic() {
-        return (
-          this.basic &&
-          this.parent.parent?.typedIdentifier === "power:basic-abilities"
-        );
+        return this.basic && this.parent.parent?.typedIdentifier === "power:basic-abilities";
       }
 
       /** @inheritDoc */

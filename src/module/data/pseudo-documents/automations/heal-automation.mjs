@@ -8,10 +8,7 @@ const { fields } = foundry.data;
  */
 export default class HealAutomation extends StatAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Heal",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Heal"];
 
   /** @inheritDoc */
   static get LABEL() {

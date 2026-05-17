@@ -13,9 +13,7 @@ const { fields } = foundry.data;
  * @property {boolean} merge
  * @property {number} boosts
  */
-export default class RollActivation extends AutomationActivationFactory(
-  RollAutomation,
-) {
+export default class RollActivation extends AutomationActivationFactory(RollAutomation) {
   /** @inheritDoc */
   static get ICON() {
     return icons.ui.dice;
@@ -34,11 +32,11 @@ export default class RollActivation extends AutomationActivationFactory(
    * @returns {(BaseActivation|RollActivation)[]}
    */
   static mergeRolls(activations) {
-    const toMerge = activations.filter((a) => a.type === this.TYPE && a.merge);
-    const mergeIds = toMerge.map((a) => a.id);
+    const toMerge = activations.filter(a => a.type === this.TYPE && a.merge);
+    const mergeIds = toMerge.map(a => a.id);
 
     // Filter activations to be merged out of the main activation array
-    const out = activations.filter((a) => !mergeIds.includes(a.id));
+    const out = activations.filter(a => !mergeIds.includes(a.id));
 
     // Create aggregate formula from the merged activations
     /** @type {Partial<Record<Teriock.Keys.Impact, RollActivation[]>>} */
@@ -48,15 +46,12 @@ export default class RollActivation extends AutomationActivationFactory(
       if (!activationsByType[impact]) activationsByType[impact] = [];
       activationsByType[impact].push(a);
     }
-    const formulasByType = objectMap(activationsByType, (acts) =>
-      acts.reduce((a, b) => addFormula(a, b.formula), ""),
-    );
+    const formulasByType = objectMap(activationsByType, acts => acts.reduce((a, b) => addFormula(a, b.formula), ""));
 
     // Convert aggregate formulas back into activations
     out.push(
       ...Object.entries(formulasByType).map(
-        ([rollType, formula]) =>
-          new RollActivation({ impact: rollType, formula: formula }),
+        ([rollType, formula]) => new RollActivation({ impact: rollType, formula: formula }),
       ),
     );
     return out;

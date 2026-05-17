@@ -39,9 +39,7 @@ export default class CompetenceModel extends EmbeddedDataModel {
    * @returns {boolean}
    */
   get fluent() {
-    return !!(
-      this.raw >= 2 || this.document?.elder?.system?.competence?.fluent
-    );
+    return !!(this.raw >= 2 || this.document?.elder?.system?.competence?.fluent);
   }
 
   /**
@@ -67,9 +65,7 @@ export default class CompetenceModel extends EmbeddedDataModel {
    * @returns {boolean}
    */
   get proficient() {
-    return !!(
-      this.raw >= 1 || this.document?.elder?.system?.competence?.proficient
-    );
+    return !!(this.raw >= 1 || this.document?.elder?.system?.competence?.proficient);
   }
 
   /**

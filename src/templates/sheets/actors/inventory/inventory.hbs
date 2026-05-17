@@ -1,4 +1,4 @@
-<div class="{{cssClass}} character-window inventory-sheet">
+<div class="{{ cssClass }} character-window inventory-sheet">
   <div class="character-page">
     <div class="character-tab-content">
       {{> "teriock/sheets/shared/header"}}
@@ -48,14 +48,9 @@
             }}
           </div>
           <div class="teriock-block-display character-notes-content">
-            <prose-mirror
-              name="system.notes"
-              value="{{system.notes}}"
-              toggled="true"
-              editable="editable"
-            >
+            <prose-mirror name="system.notes" value="{{ system.notes }}" toggled="true" editable="editable">
               {{#if (exists enrichedNotes)}}
-                {{{enrichedNotes}}}
+                {{{ enrichedNotes }}}
               {{else}}
                 {{localize "TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder"}}
               {{/if}}

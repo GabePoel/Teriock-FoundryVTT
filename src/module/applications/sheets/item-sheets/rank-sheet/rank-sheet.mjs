@@ -1,12 +1,9 @@
 import { documentConfig } from "../../../../constants/config/document-config.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSheet from "../base-item-sheet.mjs";
-import {
-  archetypeContextMenu,
-  classContextMenu,
-} from "./helpers/rank-context-menus.mjs";
+import { archetypeContextMenu, classContextMenu } from "./helpers/rank-context-menus.mjs";
 
 /**
  * Sheet for a {@link TeriockRank}.
@@ -15,10 +12,7 @@ import {
  * @property {TeriockRank} document
  * @property {TeriockRank} item
  */
-export default class RankSheet extends mix(
-  BaseItemSheet,
-  mixins.WikiButtonSheetMixin,
-) {
+export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButtonSheetMixin) {
   /** @inheritDoc */
   static BARS = [
     "teriock/sheets/items/rank/class-bar",

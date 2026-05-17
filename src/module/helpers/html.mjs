@@ -16,12 +16,7 @@ export function elementClass(elements) {
  * @param {number} [max] - The maximum value for the number input.
  * @returns {string} HTML string for the dialog fieldset.
  */
-export function createDialogFieldset(
-  legend,
-  description,
-  name,
-  max = Infinity,
-) {
+export function createDialogFieldset(legend, description, name, max = Infinity) {
   return `
     <fieldset><legend>${legend}</legend>
       <div>${description}</div>
@@ -39,7 +34,7 @@ export function createDialogFieldset(
  */
 export function unpackEffectButton(execution, options = {}) {
   const { useType = "normal" } = options;
-  const button = execution.chatData.system.buttons.find((b) => b.dataset);
+  const button = execution.chatData.system.buttons.find(b => b.dataset);
   if (button) return JSON.parse(button.dataset[useType]);
   return null;
 }
@@ -54,7 +49,7 @@ export function unpackEffectButton(execution, options = {}) {
  */
 export function packEffectButton(execution, consequence, options = {}) {
   const { useTypes = ["normal", "crit"] } = options;
-  const button = execution.chatData.system.buttons.find((b) => b.dataset);
+  const button = execution.chatData.system.buttons.find(b => b.dataset);
   if (button) {
     for (const useType of useTypes) {
       button.dataset[useType] = JSON.stringify(consequence);

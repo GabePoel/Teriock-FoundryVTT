@@ -7,9 +7,6 @@
  */
 export default async function updateDocumentsQuery(queryData, { _timeout }) {
   const Cls = foundry.utils.getDocumentClass(queryData.documentName);
-  const docs = await Cls.updateDocuments(
-    queryData.updates,
-    queryData.operation,
-  );
-  return docs.map((d) => d?.uuid || d);
+  const docs = await Cls.updateDocuments(queryData.updates, queryData.operation);
+  return docs.map(d => d?.uuid || d);
 }

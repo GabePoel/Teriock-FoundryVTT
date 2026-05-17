@@ -1,7 +1,4 @@
-import {
-  formatDynamicSelectOptions,
-  objectMap,
-} from "../../../helpers/utils.mjs";
+import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
@@ -10,10 +7,7 @@ const { fields } = foundry.data;
 
 export default class ChildChangeAutomation extends CritAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ChildChange",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChildChange"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -29,33 +23,25 @@ export default class ChildChangeAutomation extends CritAutomation {
   static defineSchema() {
     const initialTarget = Object.keys(TERIOCK.config.change.child.targets)[0];
     const pathEntries = Object.entries(TERIOCK.config.change.child.paths);
-    const initialPathEntry = pathEntries.find(([_k, v]) =>
-      v.targets.includes(initialTarget),
-    );
+    const initialPathEntry = pathEntries.find(([_k, v]) => v.targets.includes(initialTarget));
     const initialKey = initialPathEntry[0];
-    const changeTypes = TERIOCK.config.change.child.paths[initialKey].types ?? [
-      "override",
-    ];
+    const changeTypes = TERIOCK.config.change.child.paths[initialKey].types ?? ["override"];
     const initialChangeType = changeTypes[0];
     return Object.assign(super.defineSchema(), {
       target: new fields.StringField({
-        choices: objectMap(
-          TERIOCK.config.change.child.targets,
-          (e) => e.label,
-          { localize: true },
-        ),
+        choices: objectMap(TERIOCK.config.change.child.targets, e => e.label, { localize: true }),
         initial: initialTarget,
         required: true,
       }),
       changeType: new fields.StringField({
-        choices: objectMap(ActiveEffect.CHANGE_TYPES, (t) => t.label, {
+        choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, {
           localize: true,
         }),
         initial: initialChangeType,
         required: true,
       }),
       key: new fields.StringField({
-        choices: objectMap(TERIOCK.config.change.child.paths, (e) => e.label, {
+        choices: objectMap(TERIOCK.config.change.child.paths, e => e.label, {
           localize: true,
         }),
         initial: initialKey,
@@ -84,7 +70,7 @@ export default class ChildChangeAutomation extends CritAutomation {
           .sort((a, b) => a[1].localeCompare(b[1])),
       );
     } else {
-      return objectMap(ActiveEffect.CHANGE_TYPES, (t) => t.label, {
+      return objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, {
         localize: true,
       });
     }
@@ -102,8 +88,8 @@ export default class ChildChangeAutomation extends CritAutomation {
 
   /** @returns {Record<string, string>} */
   get _keyChoices() {
-    return objectMap(TERIOCK.config.change.child.paths, (e) => e.label, {
-      filter: (e) => e.targets.includes(this.target),
+    return objectMap(TERIOCK.config.change.child.paths, e => e.label, {
+      filter: e => e.targets.includes(this.target),
     });
   }
 
@@ -113,9 +99,9 @@ export default class ChildChangeAutomation extends CritAutomation {
    */
   get _processedKeyChoices() {
     const groups = {};
-    const pathEntries = Object.entries(
-      TERIOCK.config.change.child.paths,
-    ).filter(([_k, v]) => v.targets.includes(this.target));
+    const pathEntries = Object.entries(TERIOCK.config.change.child.paths).filter(([_k, v]) =>
+      v.targets.includes(this.target),
+    );
     for (const [k, v] of pathEntries) {
       if (!groups[v.group]) {
         groups[v.group] = {
@@ -125,10 +111,7 @@ export default class ChildChangeAutomation extends CritAutomation {
       }
       groups[v.group].choices[k] = v.label;
       if (v.group === "boosts") {
-        groups[v.group].choices[k] = _loc(
-          "TERIOCK.AUTOMATIONS.ChildChange.CHOICES.impact",
-          { impact: v.label },
-        );
+        groups[v.group].choices[k] = _loc("TERIOCK.AUTOMATIONS.ChildChange.CHOICES.impact", { impact: v.label });
       }
     }
     return formatDynamicSelectOptions(groups);

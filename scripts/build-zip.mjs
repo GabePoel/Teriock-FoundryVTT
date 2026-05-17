@@ -31,7 +31,7 @@ for (const asset of ASSETS) {
       dereference: true,
       recursive: true,
       force: true,
-      filter: (src) => {
+      filter: src => {
         const fileName = path.basename(src);
         if (fileName === "macros") return false;
         if (fileName === "en") return false;
@@ -51,9 +51,7 @@ async function removeEmptyDirs(dir) {
   if (!isDir) return;
   let files = await fs.promises.readdir(dir);
   if (files.length > 0) {
-    await Promise.all(
-      files.map((file) => removeEmptyDirs(path.join(dir, file))),
-    );
+    await Promise.all(files.map(file => removeEmptyDirs(path.join(dir, file))));
     files = await fs.promises.readdir(dir);
   }
   if (files.length === 0) {
@@ -68,14 +66,12 @@ async function createZip() {
   const archive = archiver("zip", { zlib: { level: 9 } });
   return new Promise((resolve, reject) => {
     output.on("close", () => {
-      console.log(
-        `Created ${path.basename(ZIP_PATH)} (${archive.pointer()} bytes)`,
-      );
+      console.log(`Created ${path.basename(ZIP_PATH)} (${archive.pointer()} bytes)`);
       resolve();
     });
-    archive.on("error", (err) => reject(err));
+    archive.on("error", err => reject(err));
     archive.pipe(output);
-    archive.directory(SYSTEM_DIR, "", (_) => _);
+    archive.directory(SYSTEM_DIR, "", _ => _);
     archive.finalize();
   });
 }

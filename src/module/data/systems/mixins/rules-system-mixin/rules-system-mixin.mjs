@@ -13,10 +13,7 @@ export default function RulesSystemMixin(Base) {
      */
     class RulesSystem extends BaseSystemMixin(Base) {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Rules",
-      ];
+      static LOCALIZATION_PREFIXES = [super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rules"];
 
       /** @inheritDoc */
       static defineSchema() {

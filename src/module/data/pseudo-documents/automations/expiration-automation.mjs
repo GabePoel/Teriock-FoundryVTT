@@ -13,10 +13,7 @@ const { fields } = foundry.data;
  */
 export default class ExpirationAutomation extends CritAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Expiration",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Expiration"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -62,21 +59,13 @@ export default class ExpirationAutomation extends CritAutomation {
         conditions: new fields.BooleanField(),
         triggers: new fields.BooleanField(),
       }),
-      triggers: new fields.SetField(
-        new fields.StringField({ choices: this._triggerChoices }),
-      ),
+      triggers: new fields.SetField(new fields.StringField({ choices: this._triggerChoices })),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      ...this._overrideCombatPaths,
-      "hr",
-      ...this._overrideConditionsPaths,
-      "hr",
-      ...this._overrideTriggersPaths,
-    ];
+    return [...this._overrideCombatPaths, "hr", ...this._overrideConditionsPaths, "hr", ...this._overrideTriggersPaths];
   }
 
   /** @returns {string[]} */
@@ -88,14 +77,7 @@ export default class ExpirationAutomation extends CritAutomation {
         paths.push(...["combat.what.roll", "combat.what.threshold"]);
       }
       if (this.combat.what.type !== "none") {
-        paths.push(
-          ...[
-            "combat.when.time",
-            "combat.when.trigger",
-            "combat.when.skip",
-            "combat.who.type",
-          ],
-        );
+        paths.push(...["combat.when.time", "combat.when.trigger", "combat.when.skip", "combat.who.type"]);
       }
     }
     return paths;

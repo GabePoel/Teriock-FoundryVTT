@@ -26,8 +26,7 @@ declare global {
 }
 
 declare module "./ability-execution-constructor.mjs" {
-  export default interface AbilityExecutionConstructionPart
-    extends BaseDocumentExecution {
+  export default interface AbilityExecutionConstructionPart extends BaseDocumentExecution {
     armament: TeriockArmament | null;
     attackPenalty: number;
     attackPenaltyFormula: string;
@@ -47,3 +46,5 @@ declare module "./ability-execution-constructor.mjs" {
     warded: boolean;
   }
 }
+
+export {};

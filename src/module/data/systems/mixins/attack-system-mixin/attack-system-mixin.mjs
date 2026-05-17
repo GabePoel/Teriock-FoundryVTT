@@ -15,10 +15,7 @@ export default function AttackSystemMixin(Base) {
      */
     class AttackSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Attack",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attack"];
 
       /** @inheritDoc */
       static defineSchema() {

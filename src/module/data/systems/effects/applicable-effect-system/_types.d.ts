@@ -1,9 +1,9 @@
+import { TeriockActor } from "../../../../documents/_module.mjs";
 import {
   CombatExpirationMethod,
   CombatExpirationSourceType,
   CombatExpirationTiming,
 } from "../../../fields/helpers/_types.js";
-import { TeriockActor } from "../../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {

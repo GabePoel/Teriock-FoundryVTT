@@ -7,5 +7,5 @@
 export default async function deleteDocumentsQuery(queryData, { _timeout }) {
   const Cls = foundry.utils.getDocumentClass(queryData.documentName);
   const docs = await Cls.deleteDocuments(queryData.ids, queryData.operation);
-  return docs.map((_d) => null);
+  return docs.map(_d => null);
 }

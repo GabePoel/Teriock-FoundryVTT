@@ -22,7 +22,7 @@ const imageContextMenuOptions = [
         },
       }).render(true);
     },
-    visible: (target) => {
+    visible: target => {
       const src = target.getAttribute("src");
       return (
         src &&
@@ -38,7 +38,7 @@ const imageContextMenuOptions = [
     onClick: async (_ev, target) => {
       await chatImage(target.getAttribute("src"));
     },
-    visible: (target) => {
+    visible: target => {
       const src = target.getAttribute("src");
       return src && src.length > 0 && target.getAttribute("data-shareable");
     },

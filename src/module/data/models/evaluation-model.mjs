@@ -9,15 +9,7 @@ import EmbeddedDataModel from "./embedded-data-model.mjs";
 export default class EvaluationModel extends EmbeddedDataModel {
   constructor(
     data = {},
-    {
-      floor = true,
-      ceil = false,
-      min = 0,
-      max = Infinity,
-      blank = 0,
-      interval = undefined,
-      ...options
-    } = {},
+    { floor = true, ceil = false, min = 0, max = Infinity, blank = 0, interval = undefined, ...options } = {},
   ) {
     super(data, { ...options });
     this._derivationOptions = { floor, ceil, min, max, blank, interval };
@@ -72,10 +64,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @returns {boolean}
    */
   get nonZero() {
-    return (
-      BaseRoll.minValue(this.formula) !== 0 &&
-      BaseRoll.maxValue(this.formula) !== 0
-    );
+    return BaseRoll.minValue(this.formula) !== 0 && BaseRoll.maxValue(this.formula) !== 0;
   }
 
   /**

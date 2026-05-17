@@ -9,10 +9,7 @@ import BaseItemSheet from "./base-item-sheet.mjs";
  */
 export default class MountSheet extends BaseItemSheet {
   /** @inheritDoc */
-  static BARS = [
-    "teriock/sheets/shared/bars/stat-bar",
-    "teriock/sheets/items/mount/status-bar",
-  ];
+  static BARS = ["teriock/sheets/shared/bars/stat-bar", "teriock/sheets/items/mount/status-bar"];
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {

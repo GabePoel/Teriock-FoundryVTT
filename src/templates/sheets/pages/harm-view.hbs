@@ -3,22 +3,28 @@
     <header class="teriock-harm-header journal-page-header">
       <div
         class="teriock-harm-img"
-        data-src="{{img}}"
-        {{#if (exists system.color)}}style="outline-color: {{{system.color}}};"{{/if}}
+        data-src="{{ img }}"
+        {{#if (exists system.color)}}
+          style="outline-color:{{{ system.color }}};"
+        {{/if}}
       >
         <img
           class="profile-img"
-          src="{{img}}"
-          data-edit="{{imgPath}}"
+          src="{{ img }}"
+          data-edit="{{ imgPath }}"
           alt=""
-          {{#if editable}}data-action="editImage"{{/if}}
-          title="{{name}}"
+          {{#if editable}}
+            data-action="editImage"
+          {{/if}}
+          title="{{ name }}"
         />
       </div>
-      <h{{ title.level }}>{{ name }}</h{{ title.level }}>
+      <h
+        {{ title.level }}
+      >
+        {{ name }}
+      </h>
     </header>
   {{/if}}
-  <section class="journal-page-content">
-    {{{ text.enriched }}}
-  </section>
+  <section class="journal-page-content">{{{ text.enriched }}}</section>
 </div>

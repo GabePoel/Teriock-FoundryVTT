@@ -1,5 +1,5 @@
 import { documentConfig } from "../../../constants/config/document-config.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import BaseItemSheet from "./base-item-sheet.mjs";
@@ -11,10 +11,7 @@ import BaseItemSheet from "./base-item-sheet.mjs";
  * @property {TeriockSpecies} document
  * @property {TeriockSpecies} item
  */
-export default class SpeciesSheet extends mix(
-  BaseItemSheet,
-  mixins.WikiButtonSheetMixin,
-) {
+export default class SpeciesSheet extends mixClasses(BaseItemSheet, mixins.WikiButtonSheetMixin) {
   /** @inheritDoc */
   static BARS = [
     "teriock/sheets/items/species/stats-bar",

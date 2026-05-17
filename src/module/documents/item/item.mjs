@@ -1,4 +1,4 @@
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
@@ -15,7 +15,7 @@ const { Item } = foundry.documents;
  * @mixes ParentDocument
  * @mixes RetrievalDocument
  */
-export default class TeriockItem extends mix(
+export default class TeriockItem extends mixClasses(
   Item,
   mixins.BaseDocumentMixin,
   mixins.CommonDocumentMixin,
@@ -40,7 +40,7 @@ export default class TeriockItem extends mix(
   static async _onCreateOperation(documents, operation, user) {
     const actors = new Set();
     for (const d of documents) if (d.actor) actors.add(d.actor);
-    await Promise.all(actors.map((a) => a._processStagedItemCreations()));
+    await Promise.all(actors.map(a => a._processStagedItemCreations()));
     return super._onCreateOperation(documents, operation, user);
   }
 
@@ -54,7 +54,7 @@ export default class TeriockItem extends mix(
   static async _onDeleteOperation(documents, operation, user) {
     const actors = new Set();
     for (const d of documents) if (d.actor) actors.add(d.actor);
-    await Promise.all(actors.map((a) => a._processStagedItemDeletions()));
+    await Promise.all(actors.map(a => a._processStagedItemDeletions()));
     return super._onDeleteOperation(documents, operation, user);
   }
 
@@ -66,7 +66,7 @@ export default class TeriockItem extends mix(
    * @returns {Promise<boolean|void>}
    */
   static async _preCreateOperation(documents, operation, user) {
-    for (const d of documents.filter((d) => d.actor)) {
+    for (const d of documents.filter(d => d.actor)) {
       d.actor._stagedItemCreations = new Set();
     }
     return super._preCreateOperation(documents, operation, user);
@@ -80,7 +80,7 @@ export default class TeriockItem extends mix(
    * @returns {Promise<boolean|void>}
    */
   static async _preDeleteOperation(documents, operation, user) {
-    for (const d of documents.filter((d) => d.actor)) {
+    for (const d of documents.filter(d => d.actor)) {
       d.actor._stagedItemDeletions = new Set();
     }
     return super._preDeleteOperation(documents, operation, user);
@@ -146,10 +146,7 @@ export default class TeriockItem extends mix(
       });
       if (foundry.utils.isPlainObject(result)) Object.assign(overrides, result);
     }
-    foundry.utils.mergeObject(
-      this.overrides,
-      foundry.utils.expandObject(overrides),
-    );
+    foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
   }
 
   /** @inheritDoc */

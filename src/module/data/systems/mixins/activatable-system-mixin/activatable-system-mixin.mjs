@@ -26,9 +26,7 @@ export default function ActivatableSystemMixin(Base) {
        */
       static get activationTypes() {
         return Object.fromEntries(
-          this._activationTypes
-            .map((a) => [a.TYPE, a])
-            .sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
+          this._activationTypes.map(a => [a.TYPE, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
         );
       }
 
@@ -53,31 +51,28 @@ export default function ActivatableSystemMixin(Base) {
        * @param {HTMLElement} element
        */
       _connectActivationListeners(element) {
-        element
-          .querySelectorAll("button[data-action=activate-activation]")
-          .forEach(
-            /** @param {HTMLButtonElement} btn */ (btn) => {
-              const id = btn.dataset.id;
-              if (!id) return;
-              const activation =
-                /** @type {BaseActivation} */ this.activations.get(id);
-              if (!activation) return;
-              btn.addEventListener("click", (ev) => {
-                ev.stopImmediatePropagation();
-                ev.stopPropagation();
-                ev.preventDefault();
-                activation.event = ev;
-                activation.primaryAction();
-              });
-              btn.addEventListener("contextmenu", (ev) => {
-                ev.stopImmediatePropagation();
-                ev.stopPropagation();
-                ev.preventDefault();
-                activation.event = ev;
-                activation.secondaryAction();
-              });
-            },
-          );
+        element.querySelectorAll("button[data-action=activate-activation]").forEach(
+          /** @param {HTMLButtonElement} btn */ btn => {
+            const id = btn.dataset.id;
+            if (!id) return;
+            const activation = /** @type {BaseActivation} */ this.activations.get(id);
+            if (!activation) return;
+            btn.addEventListener("click", ev => {
+              ev.stopImmediatePropagation();
+              ev.stopPropagation();
+              ev.preventDefault();
+              activation.event = ev;
+              activation.primaryAction();
+            });
+            btn.addEventListener("contextmenu", ev => {
+              ev.stopImmediatePropagation();
+              ev.stopPropagation();
+              ev.preventDefault();
+              activation.event = ev;
+              activation.secondaryAction();
+            });
+          },
+        );
       }
     }
   );

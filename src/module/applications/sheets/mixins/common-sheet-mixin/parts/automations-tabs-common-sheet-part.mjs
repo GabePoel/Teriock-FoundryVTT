@@ -1,7 +1,7 @@
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -32,13 +32,11 @@ export default (Base) => {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        this.element
-          .querySelectorAll("[data-action='toggleAutomations']")
-          .forEach(
-            /** @param {HTMLButtonElement} el */ (el) => {
-              el.disabled = false;
-            },
-          );
+        this.element.querySelectorAll("[data-action='toggleAutomations']").forEach(
+          /** @param {HTMLButtonElement} el */ el => {
+            el.disabled = false;
+          },
+        );
       }
 
       /** @inheritDoc */

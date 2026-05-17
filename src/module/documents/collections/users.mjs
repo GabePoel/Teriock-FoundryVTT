@@ -14,7 +14,7 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
    * @returns {TeriockUser[]}
    */
   get active() {
-    return this.filter((u) => u.active);
+    return this.filter(u => u.active);
   }
 
   /**
@@ -26,11 +26,11 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
    */
   async queryGM(queryName, queryData, queryOptions = {}) {
     let {
-      notifyFailure = true,
       failPrefix = _loc("TERIOCK.SYSTEMS.User.QUERY.failPrefix"),
       failReason = _loc("TERIOCK.SYSTEMS.User.QUERY.failReason"),
       failMessage = "",
     } = queryOptions;
+    const { notifyFailure = true } = queryOptions;
     if (queryOptions.localize) {
       if (queryOptions.format && Object.keys(queryOptions.format).length > 0) {
         failPrefix = _loc(failPrefix, queryOptions.format);

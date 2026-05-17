@@ -34,20 +34,38 @@ class BoosterTerm extends FunctionTerm {
   /**
    * Boost the roll.
    * @param {BaseRoll} roll
+   * @param {object} [options]
+   * @returns {Promise<void>}
    */
-  static _boost(roll) {
-    const die = selectWeightedMaxFaceDie(roll.dice);
-    if (die) die._number += 1;
+  static async _boost(roll, options = {}) {
+    const die = selectWeightedMaxFaceDie(roll);
+    if (die) {
+      if (typeof die._number === "number") die._number += 1;
+      else if (typeof die.number === "number") die._number = die.number + 1;
+      else {
+        await die._evaluateAsync(options);
+        if (typeof die.number === "number") die._number = die.number + 1;
+      }
+    }
     roll.resetFormula();
   }
 
   /**
    * Deboost the roll.
    * @param {BaseRoll} roll
+   * @param {object} [options]
+   * @returns {Promise<void>}
    */
-  static _deboost(roll) {
-    const die = selectWeightedMaxFaceDie(roll.dice);
-    if (die) die._number = Math.max(0, die._number - 1);
+  static async _deboost(roll, options = {}) {
+    const die = selectWeightedMaxFaceDie(roll);
+    if (die) {
+      if (typeof die._number === "number") die._number = Math.max(0, die._number - 1);
+      else if (typeof die.number === "number") die._number = Math.max(0, die.number - 1);
+      else {
+        await die._evaluateAsync(options);
+        if (typeof die.number === "number") die._number = Math.max(0, die.number - 1);
+      }
+    }
     roll.resetFormula();
   }
 
@@ -55,33 +73,23 @@ class BoosterTerm extends FunctionTerm {
    * Apply some number of boosts or deboosts. Positive for boosts. Negative for deboosts.
    * @param {BaseRoll} roll
    * @param {number} number
+   * @param {object} [options]
+   * @returns {Promise<void>}
    */
-  static _setboost(roll, number) {
-    if (number > 0) {
-      for (let i = 0; i < number; i++) {
-        this._boost(roll);
-      }
-    } else if (number < 0) {
-      for (let i = 0; i < Math.abs(number); i++) {
-        this._deboost(roll);
-      }
-    }
+  static async _setboost(roll, number, options = {}) {
+    if (number > 0) for (let i = 0; i < number; i++) await this._boost(roll, options);
+    else if (number < 0) for (let i = 0; i < Math.abs(number); i++) await this._deboost(roll, options);
   }
 
   /** @inheritDoc */
   get function() {
-    if (this.isBooster) {
-      return (n) => n;
-    }
+    if (this.isBooster) return n => n;
     return super.function;
   }
 
   /** @inheritDoc */
   get isBooster() {
-    return Object.prototype.hasOwnProperty.call(
-      this.constructor.BOOST_ALIASES,
-      this.fn,
-    );
+    return Object.prototype.hasOwnProperty.call(this.constructor.BOOST_ALIASES, this.fn);
   }
 
   /** @inheritDoc */
@@ -98,9 +106,9 @@ class BoosterTerm extends FunctionTerm {
         await this.rolls[1].evaluate();
         const number = this.rolls[1].total;
         removedRoll = this.rolls.splice(1, 1)[0];
-        this.constructor._setboost(this.rolls[0], number);
+        await this.constructor._setboost(this.rolls[0], number, options);
       } else {
-        this.constructor.BOOST_FUNCTIONS[boostFunction]?.(this.rolls[0]);
+        await this.constructor.BOOST_FUNCTIONS[boostFunction]?.(this.rolls[0], options);
       }
     }
     const result = await super._evaluateAsync(options);
@@ -112,16 +120,8 @@ class BoosterTerm extends FunctionTerm {
 }
 
 const members = ["function", "isDeterministic", "_evaluateAsync", "isBooster"];
-const staticMembers = [
-  "BOOST_ALIASES",
-  "BOOST_FUNCTIONS",
-  "_boost",
-  "_deboost",
-  "_setboost",
-];
+const staticMembers = ["BOOST_ALIASES", "BOOST_FUNCTIONS", "_boost", "_deboost", "_setboost"];
 
-transplantOverrides(FunctionTerm, BoosterTerm, members, {
-  statics: staticMembers,
-});
+transplantOverrides(FunctionTerm, BoosterTerm, members, { statics: staticMembers });
 
 export default FunctionTerm;

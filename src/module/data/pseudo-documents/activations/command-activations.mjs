@@ -1,7 +1,4 @@
-import {
-  attuneCommand,
-  deattuneCommand,
-} from "../../../helpers/interaction/commands/attunable-commands.mjs";
+import { attuneCommand, deattuneCommand } from "../../../helpers/interaction/commands/attunable-commands.mjs";
 import awakenCommand from "../../../helpers/interaction/commands/awaken-command.mjs";
 import bagCommand from "../../../helpers/interaction/commands/bag-command.mjs";
 import {
@@ -17,10 +14,7 @@ import {
   unglueCommand,
 } from "../../../helpers/interaction/commands/equipment-commands.mjs";
 import featCommand from "../../../helpers/interaction/commands/feat-command.mjs";
-import {
-  hackCommand,
-  unhackCommand,
-} from "../../../helpers/interaction/commands/hack-commands.mjs";
+import { hackCommand, unhackCommand } from "../../../helpers/interaction/commands/hack-commands.mjs";
 import healCommand from "../../../helpers/interaction/commands/heal-command.mjs";
 import resistCommand from "../../../helpers/interaction/commands/resist-command.mjs";
 import revitalizeCommand from "../../../helpers/interaction/commands/revitalize-command.mjs";
@@ -32,10 +26,7 @@ import {
   toggleStatusCommand,
 } from "../../../helpers/interaction/commands/status-commands.mjs";
 import tradecraftCommand from "../../../helpers/interaction/commands/tradecraft-command.mjs";
-import {
-  useExternalCommand,
-  useLocalCommand,
-} from "../../../helpers/interaction/commands/use-commands.mjs";
+import { useExternalCommand, useLocalCommand } from "../../../helpers/interaction/commands/use-commands.mjs";
 import { CommandActivationFactory as Act } from "./abstract/_module.mjs";
 
 export class ApplyStatusActivation extends Act(applyStatusCommand) {}

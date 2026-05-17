@@ -1,5 +1,5 @@
 import { powerConfig } from "../../../../constants/config/power-config.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
@@ -15,15 +15,9 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.PowerSystemData}
  * @mixes CompetenceDisplaySystem
  */
-export default class PowerSystem extends mix(
-  BaseItemSystem,
-  mixins.CompetenceDisplaySystemMixin,
-) {
+export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.CompetenceDisplaySystemMixin) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Power",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Power"];
 
   /** @inheritDoc */
   static get metadata() {
@@ -45,7 +39,7 @@ export default class PowerSystem extends mix(
       }),
       type: new fields.StringField({
         initial: "other",
-        choices: localizeChoices(objectMap(powerConfig.type, (v) => v.label)),
+        choices: localizeChoices(objectMap(powerConfig.type, v => v.label)),
       }),
     });
   }
@@ -101,9 +95,7 @@ export default class PowerSystem extends mix(
     if (yes === false) return false;
 
     if (
-      this.actor?.powers
-        .map((p) => p.system.identifier)
-        .includes(this.identifier) &&
+      this.actor?.powers.map(p => p.system.identifier).includes(this.identifier) &&
       ["warrior", "semi", "mage"].includes(this.identifier)
     ) {
       return false;
@@ -123,11 +115,7 @@ export default class PowerSystem extends mix(
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if (
-      game.teriock.getSetting("armorWeakensRanks") &&
-      this.actor &&
-      this.actor.system.defense.av.base > this.maxAv
-    ) {
+    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv) {
       this.proficient = false;
     }
   }

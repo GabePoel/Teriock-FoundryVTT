@@ -1,5 +1,5 @@
-import { comparisons } from "../dice/functions/_module.mjs";
 import { EvaluationModel } from "../data/models/_module.mjs";
+import { comparisons } from "../dice/functions/_module.mjs";
 
 declare global {
   namespace Teriock.Fields {

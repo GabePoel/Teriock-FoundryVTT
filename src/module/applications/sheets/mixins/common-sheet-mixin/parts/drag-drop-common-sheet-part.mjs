@@ -6,7 +6,7 @@ const DragDrop = foundry.applications.ux.DragDrop.implementation;
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -38,16 +38,12 @@ export default (Base) => {
       _canDropChild(doc) {
         if (!game.teriock.checkEditable(this)) return false;
         const children = TERIOCK.config.document[doc?.type]?.plural ?? "";
-        const parents =
-          TERIOCK.config.document[this.document?.type]?.plural ?? "";
+        const parents = TERIOCK.config.document[this.document?.type]?.plural ?? "";
         if (!this.document.constructor.validateChildType(this.document, doc)) {
-          ui.notifications.error(
-            "TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType",
-            {
-              format: { children: ucFirst(children), parents },
-              localize: true,
-            },
-          );
+          ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType", {
+            format: { children: ucFirst(children), parents },
+            localize: true,
+          });
           return false;
         }
         return !!doc && doc.parent !== this.document && doc !== this.document;
@@ -66,21 +62,16 @@ export default (Base) => {
        */
       _onDragStart(event) {
         if (event.currentTarget.dataset.uuid) {
-          const dragData = foundry.utils.parseUuid(
-            event.currentTarget.dataset.uuid,
-          );
+          const dragData = foundry.utils.parseUuid(event.currentTarget.dataset.uuid);
           if (dragData) {
             dragData.startSheet = this.id;
             event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
           }
-          fromUuid(event.currentTarget.dataset.uuid).then((embedded) => {
+          fromUuid(event.currentTarget.dataset.uuid).then(embedded => {
             const dragData = embedded?.toDragData();
             if (dragData) {
               dragData.startSheet = this.id;
-              event.dataTransfer.setData(
-                "text/plain",
-                JSON.stringify(dragData),
-              );
+              event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
             }
           });
         }
@@ -95,10 +86,7 @@ export default (Base) => {
         const dropData = TeriockTextEditor.getDragEventData(event);
         if (dropData.startSheet === this.id) return false;
         let out;
-        if (
-          dropData.type === "Automation" &&
-          typeof this._onDropAutomation === "function"
-        ) {
+        if (dropData.type === "Automation" && typeof this._onDropAutomation === "function") {
           this._onDropAutomation(event);
         } else if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
           if (this._tab === "automations") return false;
@@ -118,18 +106,14 @@ export default (Base) => {
       async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
-        let doc =
-          /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
+        const doc = /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
         const uuid = doc.uuid;
         const obj = doc.toObject(true);
         if (doc.inCompendium && !doc._stats.compendiumSource) {
           obj["_stats.compendiumSource"] = uuid;
         }
         if (!this._canDropChild(doc)) return;
-        const created = await this.document.createChildDocuments(
-          doc.documentName,
-          [obj],
-        );
+        const created = await this.document.createChildDocuments(doc.documentName, [obj]);
         return created[0];
       }
 

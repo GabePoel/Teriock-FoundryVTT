@@ -1,9 +1,6 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
-import {
-  migrateKey,
-  migrateValue,
-} from "../../../shared/migrations/source-migrations.mjs";
+import { migrateKey, migrateValue } from "../../../shared/migrations/source-migrations.mjs";
 
 /**
  * @param {typeof BaseSystem} Base
@@ -30,9 +27,7 @@ export default function AutomatableSystemMixin(Base) {
        */
       static get automationTypes() {
         return Object.fromEntries(
-          this._automationTypes
-            .map((a) => [a.TYPE, a])
-            .sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
+          this._automationTypes.map(a => [a.TYPE, a]).sort((a, b) => a[1].LABEL.localeCompare(b[1].LABEL)),
         );
       }
 

@@ -4,8 +4,7 @@
       (formInput
         systemFields.quantity
         disabled=(not editable)
-        value=system.quantity
-      )
+        value=system.quantity)
       icon=TERIOCK.display.icons.ui.quantity
       unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity)
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label")
@@ -15,17 +14,14 @@
         systemFields.maxQuantity
         disabled=(not editable)
         value=system._source.maxQuantity.raw
-        placeholder=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-      )
+        placeholder=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax"))
       icon=TERIOCK.display.icons.ui.maximum
       unselected=(ifThen
         system.maxQuantity.raw
         (localize
           "TERIOCK.SYSTEMS.Consumable.PANELS.max"
-          value=system.maxQuantity.value
-        )
-        ""
-      )
+          value=system.maxQuantity.value)
+        "")
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.maxQuantity.raw.label")
     }}
     {{formBox
@@ -33,8 +29,7 @@
         systemFields.consumptionAmount
         disabled=(not editable)
         value=system.consumptionAmount
-        placeholder="0"
-      )
+        placeholder="0")
       icon=TERIOCK.display.icons.ui.amount
       unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system.consumptionAmount)
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.consumptionAmount.label")

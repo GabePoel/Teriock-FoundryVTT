@@ -1,9 +1,19 @@
-<div class="ab-menu {{#if menuCollapsed}}collapsed{{/if}}">
+<div
+  class="
+    ab-menu
+    {{#if menuCollapsed}}
+      collapsed
+    {{/if}}
+  "
+>
   <div class="ab-menu-content">
     {{> "teriock/sheets/shared/display-toggles"}}
     <div class="ab-menu-bar">
       <div class="ttable ab-select-grid menu-large-grid">
-        {{> "teriock/sheets/shared/menu-input" field=systemFields.traits value=system.traits}}
+        {{> "teriock/sheets/shared/menu-input"
+          field=systemFields.traits
+          value=system.traits
+        }}
         {{> "teriock/sheets/shared/menu-input"
           field=systemFields.transformation.fields.img
           value=system.transformation.img
@@ -14,28 +24,12 @@
       <div class="ttable ab-button-grid menu-large-grid">
         {{#if (not (and (exists system.size.min) (exists system.size.max)))}}
           <div class="tgrid-item">
-            <button
-              class="ab-menu-button ab-size-button"
-              {{#if (not editable)}}
-              disabled="disabled"
-              {{/if}}
-            >
-              {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              {{localize "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label"}}
-            </button>
+            <button class="ab-menu-button ab-size-button" {{#if (not editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label"}}</button>
           </div>
         {{/if}}
         {{#if (not (exists system.adult))}}
           <div class="tgrid-item">
-            <button
-              class="ab-menu-button ab-lifespan-button"
-              {{#if (not editable)}}
-              disabled="disabled"
-              {{/if}}
-            >
-              {{makeIcon TERIOCK.display.icons.ui.add "button"}}
-              {{localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label"}}
-            </button>
+            <button class="ab-menu-button ab-lifespan-button" {{#if (not editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label"}}</button>
           </div>
         {{/if}}
         {{> "teriock/sheets/shared/display-field-buttons"}}

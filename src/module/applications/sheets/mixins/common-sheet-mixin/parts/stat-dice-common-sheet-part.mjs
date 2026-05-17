@@ -1,7 +1,7 @@
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -25,8 +25,7 @@ export default (Base) => {
           return;
         }
         const stat = target.dataset.stat;
-        const pool =
-          /** @type {BaseStatPoolModel} */ this.document.system.statDice[stat];
+        const pool = /** @type {BaseStatPoolModel} */ this.document.system.statDice[stat];
         await pool.setStatDice();
       }
     }

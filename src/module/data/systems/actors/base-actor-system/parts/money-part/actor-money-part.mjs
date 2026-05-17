@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Actor data model that handles money.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -24,7 +24,7 @@ export default (Base) => {
             label: "Interest Rate",
           }),
           money: new fields.SchemaField({
-            ...objectMap(currencyConfig, (e) => currencyField(e.label)),
+            ...objectMap(currencyConfig, e => currencyField(e.label)),
             total: currencyField("Total Money", false),
             debt: currencyField("Debt", false),
           }),
@@ -37,8 +37,8 @@ export default (Base) => {
         for (const k of Object.keys(currencyConfig)) {
           rollData[`money.${currencyConfig[k].abbreviation}`] = this.money[k];
         }
-        rollData[`money.debt`] = this.money.debt;
-        rollData[`money`] = this.money.total;
+        rollData["money.debt"] = this.money.debt;
+        rollData["money"] = this.money.total;
         return rollData;
       }
 
@@ -51,14 +51,10 @@ export default (Base) => {
             const value = this.money[key] * TERIOCK.config.currency[key].value;
             return sum + value;
           }, 0) - this.money.debt;
-        const totalWeight = Object.keys(TERIOCK.config.currency).reduce(
-          (sum, key) => {
-            const weight =
-              (this.money[key] || 0) * TERIOCK.config.currency[key].weight;
-            return sum + weight;
-          },
-          0,
-        );
+        const totalWeight = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
+          const weight = (this.money[key] || 0) * TERIOCK.config.currency[key].weight;
+          return sum + weight;
+        }, 0);
         this.money.total = totalValue.toNearest(0.01);
         this.weight.money = totalWeight.toNearest(0.01);
       }
@@ -76,16 +72,9 @@ export default (Base) => {
         const currentMoney = { ...this.money };
 
         // Calculate total available wealth in gold value
-        const totalWealth = Object.keys(TERIOCK.config.currency).reduce(
-          (total, currency) => {
-            return (
-              total +
-              (currentMoney[currency] || 0) *
-                TERIOCK.config.currency[currency].value
-            );
-          },
-          0,
-        );
+        const totalWealth = Object.keys(TERIOCK.config.currency).reduce((total, currency) => {
+          return total + (currentMoney[currency] || 0) * TERIOCK.config.currency[currency].value;
+        }, 0);
 
         // If not enough money, add to debt and exit
         if (totalWealth < amount) {
@@ -114,10 +103,7 @@ export default (Base) => {
             break;
           }
 
-          const canTake = Math.min(
-            currency.current,
-            Math.floor(remainingAmount / currency.value),
-          );
+          const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.value));
           if (canTake > 0) {
             toDeduct[currency.key] = canTake;
             remainingAmount -= canTake * currency.value;
@@ -148,8 +134,7 @@ export default (Base) => {
 
         // Deduct the currencies we're spending
         for (const [currencyKey, amountToDeduct] of Object.entries(toDeduct)) {
-          updateData[`system.money.${currencyKey}`] =
-            currentMoney[currencyKey] - amountToDeduct;
+          updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct;
         }
 
         // Handle change for exact mode
@@ -167,8 +152,7 @@ export default (Base) => {
                   ? updateData[`system.money.${currency.key}`]
                   : currentMoney[currency.key];
 
-              updateData[`system.money.${currency.key}`] =
-                currentAmount + changeAmount;
+              updateData[`system.money.${currency.key}`] = currentAmount + changeAmount;
               changeRemaining -= changeAmount * currency.value;
             }
           }

@@ -12,22 +12,19 @@ export default function bindCommonActions(rootElement) {
     jQuery: false,
     fixed: true,
   });
-  new TeriockContextMenu(
-    rootElement,
-    "[data-wiki-context]",
-    wikiContextMenuOptions,
-    { eventName: "contextmenu", jQuery: false, fixed: true },
-  );
-  queryAll(rootElement, ".content-link[data-uuid]").forEach((el) => {
+  new TeriockContextMenu(rootElement, "[data-wiki-context]", wikiContextMenuOptions, {
+    eventName: "contextmenu",
+    jQuery: false,
+    fixed: true,
+  });
+  queryAll(rootElement, ".content-link[data-uuid]").forEach(el => {
     if (game.teriock.getSetting("contentLinkTooltips")) {
-      const cls = /** @type {TeriockDocument} */ foundry.utils.getDocumentClass(
-        el.dataset.type,
-      );
+      const cls = /** @type {TeriockDocument} */ foundry.utils.getDocumentClass(el.dataset.type);
       if (cls?.documentMetadata?.tooltip) el.dataset.makeTooltip = "true";
     }
   });
   queryAll(rootElement, "[data-teriock-content-link]").forEach(
-    /** @param {HTMLLinkElement} el */ (el) => {
+    /** @param {HTMLLinkElement} el */ el => {
       if (game.teriock.getSetting("systemLinks")) {
         el.dataset.makeTooltip = "true";
         el.classList.add("teriock-content-link");
@@ -57,19 +54,17 @@ export default function bindCommonActions(rootElement) {
     },
   );
   queryAll(rootElement, "[data-make-tooltip], [data-rich-tooltip]").forEach(
-    /** @param {HTMLElement} el */ (el) => {
+    /** @param {HTMLElement} el */ el => {
       if (!(el.dataset.tooltip || el.dataset.tooltipHtml) && el.dataset.uuid) {
         const resolvedUuid = foundry.utils.parseUuid(el.dataset.uuid);
-        const documentClass = foundry.utils.getDocumentClass(
-          resolvedUuid?.type,
-        ).implementation;
+        const documentClass = foundry.utils.getDocumentClass(resolvedUuid?.type).implementation;
         if (documentClass?.documentMetadata?.tooltip) {
           el.dataset.tooltipClass = "teriock-rich-tooltip";
           el.dataset.tooltipHtml = TeriockTextEditor.loadingPanelHTML;
         }
       }
       // Determine tooltip direction and style
-      el.addEventListener("pointerenter", (ev) => {
+      el.addEventListener("pointerenter", ev => {
         const rect = el.getBoundingClientRect();
         const leftSpace = rect.left;
         const rightSpace = window.innerWidth - rect.right;
@@ -77,15 +72,13 @@ export default function bindCommonActions(rootElement) {
           if (leftSpace >= 350) {
             el.dataset.tooltipDirection = "LEFT";
           } else {
-            el.dataset.tooltipDirection =
-              rightSpace > leftSpace ? "RIGHT" : "LEFT";
+            el.dataset.tooltipDirection = rightSpace > leftSpace ? "RIGHT" : "LEFT";
           }
         } else {
           if (rightSpace >= 350) {
             el.dataset.tooltipDirection = "RIGHT";
           } else {
-            el.dataset.tooltipDirection =
-              leftSpace > rightSpace ? "LEFT" : "RIGHT";
+            el.dataset.tooltipDirection = leftSpace > rightSpace ? "LEFT" : "RIGHT";
           }
         }
         const target = /** @type {HTMLElement} */ ev.currentTarget;
@@ -99,9 +92,9 @@ export default function bindCommonActions(rootElement) {
     },
   );
   queryAll(rootElement, "[data-make-tooltip]").forEach(
-    /** @param {HTMLElement} el */ (el) => {
+    /** @param {HTMLElement} el */ el => {
       // Add tooltip listener
-      el.addEventListener("pointerenter", async (ev) => {
+      el.addEventListener("pointerenter", async ev => {
         const target = /** @type {HTMLElement} */ ev.currentTarget;
         const uuid = /** @type {UUID<ChildDocument>} */ target.dataset.uuid;
         const fetched = target.dataset.tooltipFetched;
@@ -118,19 +111,17 @@ export default function bindCommonActions(rootElement) {
       });
     },
   );
-  rootElement
-    .querySelectorAll(".teriock-panel-association-card[data-make-tooltip]")
-    .forEach(
-      /** @param {HTMLElement} el */ (el) => {
-        // Add preview listener
-        el.addEventListener("click", async (event) => {
-          event.stopPropagation();
-          const uuid = /** @type {UUID<ChildDocument>} */ el.dataset.uuid;
-          if (!uuid) return;
-          const doc = await fromUuid(uuid);
-          if (!doc) return;
-          await doc.sheet.render(true);
-        });
-      },
-    );
+  rootElement.querySelectorAll(".teriock-panel-association-card[data-make-tooltip]").forEach(
+    /** @param {HTMLElement} el */ el => {
+      // Add preview listener
+      el.addEventListener("click", async event => {
+        event.stopPropagation();
+        const uuid = /** @type {UUID<ChildDocument>} */ el.dataset.uuid;
+        if (!uuid) return;
+        const doc = await fromUuid(uuid);
+        if (!doc) return;
+        await doc.sheet.render(true);
+      });
+    },
+  );
 }

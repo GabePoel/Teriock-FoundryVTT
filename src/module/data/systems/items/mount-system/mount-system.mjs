@@ -1,11 +1,7 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import {
-  fromIdentifier,
-  inferNameFromIdentifier,
-  makeIcon,
-} from "../../../../helpers/utils.mjs";
+import { fromIdentifier, inferNameFromIdentifier, makeIcon } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -19,16 +15,13 @@ const { fields } = foundry.data;
  * @mixes AttunableSystem
  * @mixes StatGiverSystem
  */
-export default class MountSystem extends mix(
+export default class MountSystem extends mixClasses(
   BaseItemSystem,
   mixins.AttunableSystemMixin,
   mixins.StatGiverSystemMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Mount",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Mount"];
 
   /** @inheritDoc */
   static get metadata() {
@@ -54,9 +47,7 @@ export default class MountSystem extends mix(
   /** @inheritDoc */
   get embedIcons() {
     return [
-      ...super.embedIcons.filter(
-        (i) => !i.action.toLowerCase().includes("disabled"),
-      ),
+      ...super.embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")),
       {
         action: "toggleMountedDoc",
         icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
@@ -76,9 +67,7 @@ export default class MountSystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: this.mountType
-        ? inferNameFromIdentifier(`mount:${this.mountType}`)
-        : "",
+      subtitle: this.mountType ? inferNameFromIdentifier(`mount:${this.mountType}`) : "",
       text: dotJoin([...this._attunableWrappers, parts.text]),
     });
   }
@@ -99,9 +88,7 @@ export default class MountSystem extends mix(
           _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
             value: this.tier.text || "0",
           }),
-          this.mountType
-            ? inferNameFromIdentifier(`mount:${this.mountType}`)
-            : "",
+          this.mountType ? inferNameFromIdentifier(`mount:${this.mountType}`) : "",
         ],
       },
     ];
@@ -116,20 +103,14 @@ export default class MountSystem extends mix(
         icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
         onClick: this.mount.bind(this),
-        visible:
-          !this.mounted &&
-          this.actor &&
-          this.parent._checkValidEditorDocument(doc, { self: false }),
+        visible: !this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
       },
       {
         group: "control",
         icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
         onClick: this.unmount.bind(this),
-        visible:
-          this.mounted &&
-          this.actor &&
-          this.parent._checkValidEditorDocument(doc, { self: false }),
+        visible: this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
       },
     ];
   }

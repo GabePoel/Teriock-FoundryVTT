@@ -28,10 +28,7 @@ export default class RegionActivation extends BaseActivation {
 
   /** @inheritDoc */
   get visible() {
-    return (
-      game.user.hasPermission("REGION_CREATE") &&
-      game.user.hasPermission("QUERY_USER")
-    );
+    return game.user.hasPermission("REGION_CREATE") && game.user.hasPermission("QUERY_USER");
   }
 
   /**
@@ -45,16 +42,14 @@ export default class RegionActivation extends BaseActivation {
       flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
     });
     data.color ??= game.user.color;
-    const toMinimize = Array.from(
-      foundry.applications.instances.values(),
-    ).filter((a) => a.hasFrame && !a.minimized);
-    await Promise.all((toMinimize || []).map((s) => s?.minimize()));
+    const toMinimize = Array.from(foundry.applications.instances.values()).filter(a => a.hasFrame && !a.minimized);
+    await Promise.all((toMinimize || []).map(s => s?.minimize()));
     const region = await canvas.regions.placeRegion(data, {
       allowRotation: true,
       attachToToken: this.attachToToken,
       createOptions: { asGM: true },
     });
-    await Promise.all((toMinimize || []).map((s) => s?.maximize()));
+    await Promise.all((toMinimize || []).map(s => s?.maximize()));
     return region;
   }
 
@@ -65,12 +60,12 @@ export default class RegionActivation extends BaseActivation {
       "Region",
       canvas.scene.regions.contents
         .filter(
-          (r) =>
+          r =>
             r.getFlag("teriock", "createdBy") === this.puuid &&
             r.getFlag("teriock", "placedBy") === this.user.id &&
             r.isOwner,
         )
-        .map((r) => r.id),
+        .map(r => r.id),
     );
   }
 }

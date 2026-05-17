@@ -32,13 +32,10 @@ export default class CharacterSystem extends BaseActorSystem {
     ];
     const items = await Promise.all(
       defaultItemIdentifiers
-        .filter(
-          (identifier) =>
-            !this.parent.items.find((i) => i.typedIdentifier === identifier),
-        )
-        .map((identifier) => fromIdentifier(identifier)),
+        .filter(identifier => !this.parent.items.find(i => i.typedIdentifier === identifier))
+        .map(identifier => fromIdentifier(identifier)),
     );
-    const itemData = items.filter(Boolean).map((item) => {
+    const itemData = items.filter(Boolean).map(item => {
       const obj = item?.toObject(true);
       if (item?.inCompendium) {
         foundry.utils.setProperty(item, "_stats.compendiumSource", item.uuid);

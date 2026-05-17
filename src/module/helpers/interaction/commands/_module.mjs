@@ -22,11 +22,7 @@ import resistCommand from "./resist-command.mjs";
 import revitalizeCommand from "./revitalize-command.mjs";
 import reviveCommand from "./revive-command.mjs";
 import standardDamageCommand from "./standard-damage-command.mjs";
-import {
-  applyStatusCommand,
-  removeStatusCommand,
-  toggleStatusCommand,
-} from "./status-commands.mjs";
+import { applyStatusCommand, removeStatusCommand, toggleStatusCommand } from "./status-commands.mjs";
 import tradecraftCommand from "./tradecraft-command.mjs";
 import { useExternalCommand, useLocalCommand } from "./use-commands.mjs";
 

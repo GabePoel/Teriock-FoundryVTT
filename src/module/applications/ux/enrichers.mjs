@@ -8,12 +8,7 @@ import {
   interpretArguments,
   parseArguments,
 } from "../../helpers/interaction/_module.mjs";
-import {
-  toCamelCase,
-  toKebabCase,
-  toTitleCase,
-  ucFirst,
-} from "../../helpers/string.mjs";
+import { toCamelCase, toKebabCase, toTitleCase, ucFirst } from "../../helpers/string.mjs";
 import { makeIconClass, makeIconElement } from "../../helpers/utils.mjs";
 import { wikiToUuid } from "../../helpers/wiki.mjs";
 
@@ -22,15 +17,13 @@ import { wikiToUuid } from "../../helpers/wiki.mjs";
  * @type {TextEditorEnricherConfig}
  */
 const wikiLinkEnricher = {
-  enricher: async (match) => {
+  enricher: async match => {
     const pageName = match[1];
     let displayText = match[2];
     const namespace = pageName.split(":")[0];
     let name = pageName.split(":")[1];
     if (!displayText) displayText = name;
-    if (
-      Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(name)
-    ) {
+    if (Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(name)) {
       name = TERIOCK.aliases[namespace.toLowerCase()][name];
     }
     const urlPageName = pageName.replace(/ /g, "_");
@@ -59,7 +52,7 @@ const wikiLinkEnricher = {
     link.setAttribute("data-tooltip", `${pageName.replace(":", ": ")}`);
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    let linkText = displayText || pageName;
+    const linkText = displayText || pageName;
     if (icon && uuid) {
       const iconEl = document.createElement("i");
       iconEl.className = makeIconClass(icon, "solid");
@@ -147,20 +140,17 @@ const lookupEnricher = {
 export function registerCommandEnrichers() {
   const stringNames = Object.keys(commands);
   CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(
-      `\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`,
-      "gi",
-    ),
+    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichCommand,
     id: "executeCommand",
-    onRender: (el) => {
+    onRender: el => {
       if (el.dataset.enriched) return;
       el.dataset.enriched = "true";
       const target = /** @type {HTMLLinkElement} */ el.firstElementChild;
-      el.addEventListener("click", async (ev) => {
+      el.addEventListener("click", async ev => {
         await executeCommandFromElement(target, "primary", ev);
       });
-      el.addEventListener("contextmenu", async (ev) => {
+      el.addEventListener("contextmenu", async ev => {
         await executeCommandFromElement(target, "secondary", ev);
       });
     },
@@ -205,7 +195,8 @@ async function executeCommandFromElement(target, operation, event) {
  * @returns {HTMLAnchorElement}
  */
 function enrichCommand(match, options) {
-  let { type, config, label = "" } = match.groups;
+  const { type, config } = match.groups;
+  let { label = "" } = match.groups;
   const command = commands[type];
   let argumentArray;
   if (command.formula) {
@@ -217,33 +208,18 @@ function enrichCommand(match, options) {
   const link = document.createElement("a");
   link.dataset.command = command.id;
   link.dataset.action = "executeCommand";
-  link.dataset.tooltip = getInteractionEntryValue(
-    command,
-    "tooltip",
-    interactionOptions,
-  );
+  link.dataset.tooltip = getInteractionEntryValue(command, "tooltip", interactionOptions);
   if (!link.dataset.tooltip) {
-    link.dataset.tooltip = getInteractionEntryValue(
-      command,
-      "label",
-      interactionOptions,
-    );
+    link.dataset.tooltip = getInteractionEntryValue(command, "label", interactionOptions);
   }
   if (options.relativeTo) link.dataset.relativeTo = options.relativeTo.uuid;
   for (const [key, value] of Object.entries(interactionOptions)) {
     link.dataset[key] = value.toString();
   }
   link.className = "teriock-inline-command";
-  link.prepend(
-    makeIconElement(
-      getInteractionEntryValue(command, "icon", interactionOptions),
-      "inline",
-    ),
-  );
+  link.prepend(makeIconElement(getInteractionEntryValue(command, "icon", interactionOptions), "inline"));
   if (!label) {
-    label = _loc(
-      getInteractionEntryValue(command, "label", interactionOptions),
-    );
+    label = _loc(getInteractionEntryValue(command, "label", interactionOptions));
   }
   link.appendChild(document.createTextNode(_loc(label)));
   return link;

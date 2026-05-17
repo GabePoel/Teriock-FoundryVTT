@@ -37,9 +37,7 @@ export default class SummonActivation extends BaseActivation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      uuids: new fields.SetField(
-        new fields.DocumentUUIDField({ nullable: false, type: "Actor" }),
-      ),
+      uuids: new fields.SetField(new fields.DocumentUUIDField({ nullable: false, type: "Actor" })),
     });
   }
 
@@ -58,10 +56,7 @@ export default class SummonActivation extends BaseActivation {
 
   /** @inheritDoc */
   get visible() {
-    return (
-      game.user.hasPermission("TOKEN_CREATE") &&
-      game.user.hasPermission("QUERY_USER")
-    );
+    return game.user.hasPermission("TOKEN_CREATE") && game.user.hasPermission("QUERY_USER");
   }
 
   /**
@@ -71,10 +66,7 @@ export default class SummonActivation extends BaseActivation {
   async #claimOwnership() {
     const toUpdate = [];
     for (const n of this.#nodes) {
-      if (
-        n.state === "unowned" &&
-        n.actor.folder?.id === this.#summonsFolderId
-      ) {
+      if (n.state === "unowned" && n.actor.folder?.id === this.#summonsFolderId) {
         toUpdate.push({
           _id: n.actor.id,
           [`ownership.${game.user.id}`]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER,
@@ -122,7 +114,7 @@ export default class SummonActivation extends BaseActivation {
    */
   #findBestSummon(uuid) {
     const candidates = this.#findSummons(uuid);
-    const owned = candidates.find((a) => a.isOwner);
+    const owned = candidates.find(a => a.isOwner);
     if (owned) return owned;
     else if (candidates.length) return candidates[0];
     else return null;
@@ -135,7 +127,7 @@ export default class SummonActivation extends BaseActivation {
    */
   #findSummons(uuid) {
     return game.actors.filter(
-      (a) =>
+      a =>
         a.folder?.id === this.#summonsFolderId &&
         a.getFlag("teriock", "summonFor") === uuid &&
         a._stats.compendiumSource === uuid,
@@ -148,7 +140,7 @@ export default class SummonActivation extends BaseActivation {
    */
   async #import() {
     const toCreate = [];
-    const packNodes = this.#nodes.filter((n) => n.state === "packed");
+    const packNodes = this.#nodes.filter(n => n.state === "packed");
     for (const n of packNodes) {
       if (n.state === "packed") {
         const data = foundry.utils.mergeObject(
@@ -177,10 +169,8 @@ export default class SummonActivation extends BaseActivation {
    */
   async #placeTokens() {
     const actors = await this.#prepareActors();
-    const tokenDocuments = await Promise.all(
-      actors.map((a) => a.getTokenDocument()),
-    );
-    const tokenData = tokenDocuments.map((t) =>
+    const tokenDocuments = await Promise.all(actors.map(a => a.getTokenDocument()));
+    const tokenData = tokenDocuments.map(t =>
       foundry.utils.mergeObject(t?.toObject(), {
         ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
         flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
@@ -207,18 +197,15 @@ export default class SummonActivation extends BaseActivation {
       }
     }
     const srcActors = (await Promise.all(srcPromises)).filter(Boolean);
-    const needsSummonFolder =
-      srcActors.some((a) => a?.inCompendium) && !this.#summonsFolder;
+    const needsSummonFolder = srcActors.some(a => a?.inCompendium) && !this.#summonsFolder;
     if (needsSummonFolder) await this.#createSummonsFolder();
-    this.#nodes = srcActors.map((a) => {
+    this.#nodes = srcActors.map(a => {
       return { actor: a, state: "unknown" };
     });
     this.#determineActorStates();
     await this.#claimOwnership();
     await this.#import();
-    const actors = this.#nodes
-      .filter((n) => n.state === "ready" && n.actor?.isOwner)
-      .map((n) => n.actor);
+    const actors = this.#nodes.filter(n => n.state === "ready" && n.actor?.isOwner).map(n => n.actor);
     this.#nodes = [];
     return actors;
   }
@@ -228,12 +215,10 @@ export default class SummonActivation extends BaseActivation {
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async primaryAction() {
-    const toMinimize = Array.from(
-      foundry.applications.instances.values(),
-    ).filter((a) => a.hasFrame && !a.minimized);
-    await Promise.all((toMinimize || []).map((s) => s?.minimize()));
+    const toMinimize = Array.from(foundry.applications.instances.values()).filter(a => a.hasFrame && !a.minimized);
+    await Promise.all((toMinimize || []).map(s => s?.minimize()));
     const tokens = await this.#placeTokens();
-    await Promise.all((toMinimize || []).map((s) => s?.maximize()));
+    await Promise.all((toMinimize || []).map(s => s?.maximize()));
     return tokens;
   }
 
@@ -243,12 +228,12 @@ export default class SummonActivation extends BaseActivation {
       "Token",
       canvas.scene.tokens.contents
         .filter(
-          (t) =>
+          t =>
             t.getFlag("teriock", "createdBy") === this.puuid &&
             t.getFlag("teriock", "placedBy") === game.user.id &&
             t.isOwner,
         )
-        .map((t) => t.id),
+        .map(t => t.id),
       { asGM: true },
     );
   }

@@ -30,9 +30,7 @@ export function speciesTransformationFields() {
 export function actorTransformationConfig() {
   return Object.assign(speciesTransformationFields(), {
     primary: new LocalDocumentField(foundry.documents.BaseActiveEffect, {
-      nullify: (d) =>
-        !["condition", "consequence"].includes(d.type) ||
-        !d.system.transformation.enabled,
+      nullify: d => !["condition", "consequence"].includes(d.type) || !d.system.transformation.enabled,
     }),
   });
 }
@@ -50,45 +48,31 @@ export function automationTransformationFields() {
     }),
     override: new fields.SetField(
       new fields.StringField({
-        choices: localizeChoices(
-          objectMap(transformationConfig.override, (k) => k.label),
-        ),
+        choices: localizeChoices(objectMap(transformationConfig.override, k => k.label)),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.override.hint",
-        initial: Object.keys(transformationConfig.override).filter(
-          (k) => transformationConfig.override[k].initial,
-        ),
+        initial: Object.keys(transformationConfig.override).filter(k => transformationConfig.override[k].initial),
         label: "TERIOCK.SCHEMA.Transformation.override.label",
       },
     ),
     reset: new fields.SetField(
       new fields.StringField({
-        choices: choiceMap(
-          transformationConfig.reset,
-          (k) => TERIOCK.config.cost.primary.keys[k].label,
-        ),
+        choices: choiceMap(transformationConfig.reset, k => TERIOCK.config.cost.primary.keys[k].label),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
-        initial: Object.keys(transformationConfig.reset).filter(
-          (k) => transformationConfig.reset[k].initial,
-        ),
+        initial: Object.keys(transformationConfig.reset).filter(k => transformationConfig.reset[k].initial),
         label: "TERIOCK.SCHEMA.Transformation.reset.label",
       },
     ),
     suppress: new fields.SetField(
       new fields.StringField({
-        choices: choiceMap(
-          transformationConfig.suppress,
-          (k) => documentConfig[k].label,
-        ),
+        choices: choiceMap(transformationConfig.suppress, k => documentConfig[k].label),
       }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
-        initial: Object.keys(transformationConfig.suppress).filter(
-          (k) => transformationConfig.suppress[k].initial,
-        ),
+        initial: Object.keys(transformationConfig.suppress).filter(k => transformationConfig.suppress[k].initial),
         label: "TERIOCK.SCHEMA.Transformation.suppress.label",
       },
     ),

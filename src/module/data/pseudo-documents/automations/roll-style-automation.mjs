@@ -7,10 +7,7 @@ import { BaseAutomation } from "./abstract/_module.mjs";
  */
 export default class RollStyleAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.RollStyle",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.RollStyle"];
 
   /** @inheritDoc */
   static get LABEL() {

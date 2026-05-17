@@ -6,7 +6,7 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
  * Ability panel part.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -53,17 +53,12 @@ export default (Base) => {
           {
             icon: TERIOCK.config.effect.form[this.form].icon,
             label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-            wrappers: [
-              TERIOCK.config.effect.form[this.form].label || "",
-              ...simplifyTags(this._metaphysicsTags),
-            ],
+            wrappers: [TERIOCK.config.effect.form[this.form].label || "", ...simplifyTags(this._metaphysicsTags)],
           },
         ];
         return {
           ...(await super.getPanelParts()),
-          classes: this.elderSorcery
-            ? `elder-sorcery ${elementClass(this.elements)}`
-            : "",
+          classes: this.elderSorcery ? `elder-sorcery ${elementClass(this.elements)}` : "",
           bars: bars,
         };
       }

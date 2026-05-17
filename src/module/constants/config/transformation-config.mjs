@@ -20,9 +20,7 @@ export const transformationConfig = {
   reset: {
     gp: {
       initial: true,
-      update: Object.fromEntries(
-        Object.keys(currencyConfig).map((k) => [`system.money.${k}`, 0]),
-      ),
+      update: Object.fromEntries(Object.keys(currencyConfig).map(k => [`system.money.${k}`, 0])),
     },
     hp: {
       initial: true,

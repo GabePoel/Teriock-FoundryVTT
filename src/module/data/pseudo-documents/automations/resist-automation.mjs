@@ -5,10 +5,7 @@ const { fields } = foundry.data;
 
 export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Resist",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Resist"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -36,8 +33,6 @@ export default class ResistAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   async getActivations() {
-    return [
-      new ResistActivation({ options: { bonus: this.bonus, hex: this.hex } }),
-    ];
+    return [new ResistActivation({ options: { bonus: this.bonus, hex: this.hex } })];
   }
 }

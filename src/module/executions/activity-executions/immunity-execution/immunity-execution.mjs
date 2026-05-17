@@ -11,16 +11,8 @@ export default class ImmunityExecution extends BaseExecution {
     super(options);
     this.hex = options.hex;
     this.wrappers = options.wrappers || [];
-    this.wrappers.push(
-      this.hex
-        ? _loc("TERIOCK.TERMS.Common.chosen")
-        : _loc("TERIOCK.TERMS.Common.automatic"),
-    );
-    this.img =
-      options.img ||
-      (this.hex
-        ? getImage("effect-types", "Hexseal")
-        : getImage("effect-types", "Immunity"));
+    this.wrappers.push(this.hex ? _loc("TERIOCK.TERMS.Common.chosen") : _loc("TERIOCK.TERMS.Common.automatic"));
+    this.img = options.img || (this.hex ? getImage("effect-types", "Hexseal") : getImage("effect-types", "Immunity"));
     this.rule = this.hex ? "hexseal" : "immunity";
     this.LABEL = "Immunity";
   }

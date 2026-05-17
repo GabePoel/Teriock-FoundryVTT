@@ -1,5 +1,5 @@
 import { documentConfig } from "../../constants/config/document-config.mjs";
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -14,7 +14,7 @@ const { JournalEntryPage } = foundry.documents;
  * @mixes BaseDocument
  * @mixes PanelDocument
  */
-export default class TeriockJournalEntryPage extends mix(
+export default class TeriockJournalEntryPage extends mixClasses(
   JournalEntryPage,
   mixins.BaseDocumentMixin,
   mixins.PanelDocumentMixin,
@@ -24,11 +24,7 @@ export default class TeriockJournalEntryPage extends mix(
    * @return {string}
    */
   get img() {
-    return (
-      this.system?.img ||
-      this.getFlag("teriock", "journalImage") ||
-      getImage("powers", "learned-elder-sorceries")
-    );
+    return this.system?.img || this.getFlag("teriock", "journalImage") || getImage("powers", "learned-elder-sorceries");
   }
 
   /** @inheritDoc */
@@ -46,16 +42,14 @@ export default class TeriockJournalEntryPage extends mix(
   async getPanelParts() {
     const div = document.createElement("div");
     div.innerHTML = this.text.content;
-    div.querySelectorAll("table").forEach((t) => t.remove());
+    div.querySelectorAll("table").forEach(t => t.remove());
     const html = div.innerHTML;
     return {
       ...(await super.getPanelParts()),
       blocks: [
         {
           text: html,
-          title:
-            this.getFlag("teriock", "journalTitle") ||
-            _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+          title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         },
       ],
       icon:

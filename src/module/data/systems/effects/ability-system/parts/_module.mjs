@@ -1,12 +1,12 @@
+export { default as AbilityAutomationsPart } from "./ability-automations-part.mjs";
 export { default as AbilityCostsPart } from "./ability-costs-part/ability-costs-part.mjs";
 export { default as AbilityDurationPart } from "./ability-duration-part/ability-duration-part.mjs";
 export { default as AbilityEquipmentPart } from "./ability-equipment-part/ability-equipment-part.mjs";
 export { default as AbilityInfoPart } from "./ability-info-part/ability-info-part.mjs";
-export { default as AbilityUsagePart } from "./ability-usage-part/ability-usage-part.mjs";
-export { default as AbilityOverviewPart } from "./ability-overview-part/ability-overview-part.mjs";
-export { default as AbilityResultsPart } from "./ability-results-part/ability-results-part.mjs";
 export { default as AbilityMetaphysicsPart } from "./ability-metaphysics-part/ability-metaphysics-part.mjs";
-export { default as AbilityAutomationsPart } from "./ability-automations-part.mjs";
-export { default as AbilityImprovementsPart } from "./ability-upgrades-part/ability-upgrades-part.mjs";
+export { default as AbilityOverviewPart } from "./ability-overview-part/ability-overview-part.mjs";
 export { default as AbilityPanelPart } from "./ability-panel-part.mjs";
 export { default as AbilityRankPart } from "./ability-rank-part.mjs";
+export { default as AbilityResultsPart } from "./ability-results-part/ability-results-part.mjs";
+export { default as AbilityImprovementsPart } from "./ability-upgrades-part/ability-upgrades-part.mjs";
+export { default as AbilityUsagePart } from "./ability-usage-part/ability-usage-part.mjs";

@@ -1,11 +1,8 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
-import {
-  AutomatableSystemMixin,
-  RulesSystemMixin,
-} from "../../mixins/_module.mjs";
+import { AutomatableSystemMixin, RulesSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -17,7 +14,7 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes AccessData
  * @mixes AutomatableSystem
  */
-export default class HarmSystem extends mix(
+export default class HarmSystem extends mixClasses(
   TypeDataModel,
   RulesSystemMixin,
   AccessDataMixin,

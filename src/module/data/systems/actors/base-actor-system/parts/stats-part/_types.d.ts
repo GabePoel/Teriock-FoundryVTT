@@ -1,5 +1,6 @@
-import { StatDieModel } from "../../../../../models/_module.mjs";
 import { Collection } from "@common/utils/_module.mjs";
+
+import { StatDieModel } from "../../../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -7,7 +8,7 @@ declare global {
       /** <schema> Hit points (damage) */
       hp: CoreStat;
       /** <schema> Lifespan points (wither) */
-      lp: Teriock.Foundry.BarField;
+      lp: Foundry.BarField;
       /** <schema> Mana points (drain) */
       mp: CoreStat;
       statDice: {
@@ -22,7 +23,7 @@ declare global {
       };
     };
 
-    export type CoreStat = Teriock.Foundry.BarField & {
+    export type CoreStat = Foundry.BarField & {
       /** <special> Dice not in a collection */
       _dice: StatDieModel[];
       /** <base> Base */

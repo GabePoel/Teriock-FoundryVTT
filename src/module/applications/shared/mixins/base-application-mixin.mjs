@@ -20,7 +20,7 @@ export default function BaseApplicationMixin(Base) {
       bindCommonActions(this.element);
       this.element.querySelectorAll("[data-never-disable]").forEach(
         /** @param {HTMLButtonElement|HTMLInputElement} e */
-        (e) => (e.disabled = false),
+        e => (e.disabled = false),
       );
     }
 

@@ -47,28 +47,18 @@ export default abilityContext;
 preLocalize("rollContext.ability");
 Hooks.once("i18nInit", () => {
   Object.entries(abilityConfig.maneuver).forEach(([k, v]) => {
-    abilityContext[`maneuver.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.maneuver",
-      { name: _loc(v) },
-    );
+    abilityContext[`maneuver.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.maneuver", { name: _loc(v) });
   });
   Object.entries(abilityConfig.interaction).forEach(([k, v]) => {
-    abilityContext[`interaction.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.interaction",
-      { name: _loc(v) },
-    );
+    abilityContext[`interaction.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.interaction", { name: _loc(v) });
   });
   Object.entries(abilityConfig.delivery).forEach(([k, v]) => {
-    abilityContext[`delivery.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.delivery",
-      { name: _loc(v) },
-    );
+    abilityContext[`delivery.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.delivery", { name: _loc(v) });
   });
-  Object.keys(abilityConfig.targets).forEach((k) => {
-    abilityContext[`target.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.target",
-      { name: _loc(abilityConfig.targets[k]) },
-    );
+  Object.keys(abilityConfig.targets).forEach(k => {
+    abilityContext[`target.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.target", {
+      name: _loc(abilityConfig.targets[k]),
+    });
   });
   Object.entries(abilityConfig.executionTime).forEach(([_group, values]) => {
     Object.entries(values).forEach(([k, v]) => {
@@ -78,21 +68,12 @@ Hooks.once("i18nInit", () => {
     });
   });
   Object.entries(abilityConfig.expansion).forEach(([k, v]) => {
-    abilityContext[`expansion.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.expansion",
-      { name: _loc(v) },
-    );
+    abilityContext[`expansion.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansion", { name: _loc(v) });
   });
   Object.entries(attributeConfig).forEach(([k, v]) => {
     const name = _loc(v.label);
-    abilityContext[`attr.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.attribute",
-      { name },
-    );
-    abilityContext[`expansion.attr.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.expansionAttribute",
-      { name },
-    );
+    abilityContext[`attr.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.attribute", { name });
+    abilityContext[`expansion.attr.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansionAttribute", { name });
   });
   Object.entries(effectConfig.form).forEach(([k, v]) => {
     abilityContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", {
@@ -100,26 +81,16 @@ Hooks.once("i18nInit", () => {
     });
   });
   Object.entries(TERIOCK.reference.elements).forEach(([k, v]) => {
-    abilityContext[`element.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.element",
-      { name: _loc(v) },
-    );
-    abilityContext[`element.${k.slice(0, 3).toLowerCase()}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.element",
-      { name: _loc(v) },
-    );
+    abilityContext[`element.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.element", { name: _loc(v) });
+    abilityContext[`element.${k.slice(0, 3).toLowerCase()}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.element", {
+      name: _loc(v),
+    });
   });
   Object.entries(TERIOCK.reference.effectTypes).forEach(([k, v]) => {
-    abilityContext[`effect.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.effectType",
-      { name: _loc(v) },
-    );
+    abilityContext[`effect.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.effectType", { name: _loc(v) });
   });
   Object.entries(TERIOCK.reference.powerSources).forEach(([k, v]) => {
-    abilityContext[`power.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.powerSource",
-      { name: _loc(v) },
-    );
+    abilityContext[`power.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.powerSource", { name: _loc(v) });
   });
   Object.entries(costConfig.tweaks).forEach(([k, v]) => {
     abilityContext[`tweaks.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.tweak", {
@@ -127,10 +98,7 @@ Hooks.once("i18nInit", () => {
     });
   });
   Object.entries(costConfig.components.keys).forEach(([k, v]) => {
-    abilityContext[`components.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.component",
-      { name: _loc(v) },
-    );
+    abilityContext[`components.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.component", { name: _loc(v) });
   });
   Object.entries(costConfig.primary.keys).forEach(([k, v]) => {
     abilityContext[`costs.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.cost", {
@@ -141,10 +109,9 @@ Hooks.once("i18nInit", () => {
     abilityContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", {
       name: _loc(v),
     });
-    abilityContext[`class.${k.slice(0, 3).toLowerCase()}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Ability.class",
-      { name: _loc(v) },
-    );
+    abilityContext[`class.${k.slice(0, 3).toLowerCase()}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", {
+      name: _loc(v),
+    });
   });
   abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
 });

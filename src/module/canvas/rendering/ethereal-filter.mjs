@@ -93,11 +93,7 @@ export default class EtherealFilter extends AbstractBaseFilter {
   /** @inheritDoc */
   static create(initialUniforms = {}) {
     const uniforms = { ...this.defaultUniforms, ...initialUniforms };
-    const filter = new this(
-      this._createVertexShader(),
-      this._createFragmentShader(),
-      uniforms,
-    );
+    const filter = new this(this._createVertexShader(), this._createFragmentShader(), uniforms);
     filter.blendMode = PIXI.BLEND_MODES.NORMAL;
     return filter;
   }

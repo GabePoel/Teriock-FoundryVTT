@@ -7,8 +7,7 @@
  */
 export function migrateEvaluationToNumber(data, evaluationPath, options = {}) {
   if (!foundry.utils.hasProperty(data, evaluationPath)) return;
-  if (typeof foundry.utils.getProperty(data, evaluationPath) === "number")
-    return;
+  if (typeof foundry.utils.getProperty(data, evaluationPath) === "number") return;
   if (foundry.utils.getProperty(data, evaluationPath) === null) {
     return options.fallback ?? 0;
   }

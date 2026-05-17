@@ -51,41 +51,24 @@ export default function abilityContextMenus(ability) {
   }
 
   return {
-    active: quickMenu(
-      TERIOCK.config.ability.executionTime.active,
-      "system.executionTime",
-    ),
+    active: quickMenu(TERIOCK.config.ability.executionTime.active, "system.executionTime"),
     delivery: quickMenu(TERIOCK.config.ability.delivery, "system.delivery"),
-    expansion: quickMenu(
-      TERIOCK.config.ability.expansion,
-      "system.expansion.type",
-      true,
-    ),
+    expansion: quickMenu(TERIOCK.config.ability.expansion, "system.expansion.type", true),
     expansionSaveAttribute: [
       {
         label: _loc("TERIOCK.TERMS.Common.none"),
         icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
-        onClick: async () =>
-          await ability.update({ "system.expansion.featSaveAttribute": null }),
+        onClick: async () => await ability.update({ "system.expansion.featSaveAttribute": null }),
       },
-      ...quickMenu(
-        TERIOCK.reference.attributes,
-        "system.expansion.featSaveAttribute",
-      ),
+      ...quickMenu(TERIOCK.reference.attributes, "system.expansion.featSaveAttribute"),
     ],
-    featSaveAttribute: quickMenu(
-      TERIOCK.reference.attributes,
-      "system.featSaveAttribute",
-    ),
+    featSaveAttribute: quickMenu(TERIOCK.reference.attributes, "system.featSaveAttribute"),
     form: Object.entries(TERIOCK.config.effect.form).map(([key, value]) => ({
       label: value.label,
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
       onClick: async () => await ability.update({ "system.form": key }),
     })),
-    interaction: quickMenu(
-      TERIOCK.config.ability.interaction,
-      "system.interaction",
-    ),
+    interaction: quickMenu(TERIOCK.config.ability.interaction, "system.interaction"),
     maneuver: [
       {
         onClick: async () => {
@@ -149,9 +132,6 @@ export default function abilityContextMenus(ability) {
       ],
       { path: "system.piercing.raw" },
     ),
-    reactive: quickMenu(
-      TERIOCK.config.ability.executionTime.reactive,
-      "system.executionTime",
-    ),
+    reactive: quickMenu(TERIOCK.config.ability.executionTime.reactive, "system.executionTime"),
   };
 }

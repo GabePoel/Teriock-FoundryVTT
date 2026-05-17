@@ -9,7 +9,7 @@ const command = {
   icon: icons.effect.revive,
   id: "revive",
   label: "TERIOCK.EFFECTS.Common.revive",
-  primary: simpleCommandFunctionFactory((a) => a.system.takeRevive()),
+  primary: simpleCommandFunctionFactory(a => a.system.takeRevive()),
 };
 
 export default command;

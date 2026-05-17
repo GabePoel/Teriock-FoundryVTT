@@ -1,9 +1,7 @@
-{{#if
-  (or
-    (gt system.costs.tweaks.adept 0)
-    (gt system.costs.tweaks.gifted 0)
-    (gt system.costs.tweaks.inept 0)
-  )
+{{#if (or
+  (gt system.costs.tweaks.adept 0)
+  (gt system.costs.tweaks.gifted 0)
+  (gt system.costs.tweaks.inept 0))
 }}
   <div class="ab-bar">
     {{#each TERIOCK.config.cost.tweaks as |value key|}}
@@ -12,8 +10,7 @@
           (formInput
             (path @root/systemFields.costs.fields.tweaks.fields key)
             value=(path @root/system.costs.tweaks key)
-            disabled=(not @root/editable)
-          )
+            disabled=(not @root/editable))
           icon=value.icon
           label=value.label
           tooltip=value.label

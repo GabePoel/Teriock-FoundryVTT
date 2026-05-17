@@ -23,9 +23,6 @@ export default mountContext;
 preLocalize("rollContext.mount");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.reference.creatures).forEach(([k, v]) => {
-    mountContext[`type.${toCamelCase(k)}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Mount.type",
-      { name: _loc(v) },
-    );
+    mountContext[`type.${toCamelCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Mount.type", { name: _loc(v) });
   });
 });

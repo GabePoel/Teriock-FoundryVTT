@@ -13,15 +13,9 @@ for (const pack of packs) {
   if (pack === ".gitattributes") {
     continue;
   }
-  console.log(
-    "Packing " + toCamelCase(pack) + " from " + "./src/packs/" + pack,
-  );
-  await compilePack(
-    `${MODULE_ID}/src/packs/${pack}`,
-    `${MODULE_ID}/packs/${toCamelCase(pack)}`,
-    {
-      yaml,
-      recursive: folders,
-    },
-  );
+  console.log("Packing " + toCamelCase(pack) + " from " + "./src/packs/" + pack);
+  await compilePack(`${MODULE_ID}/src/packs/${pack}`, `${MODULE_ID}/packs/${toCamelCase(pack)}`, {
+    yaml,
+    recursive: folders,
+  });
 }

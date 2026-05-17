@@ -8,7 +8,6 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
  * @returns {Promise<"linked"|"general">} Type of macro to be made.
  */
 export default async function hotbarDropDialog(doc) {
-  let choice;
   const label = TERIOCK.config.document[doc.type].label.toLowerCase();
   const context = {
     actor: `@UUID[${doc.actor?.uuid}]`,
@@ -17,18 +16,15 @@ export default async function hotbarDropDialog(doc) {
     identifier: doc.lookupKey,
   };
   const content = await TeriockTextEditor.enrichHTML(
-    await TeriockTextEditor.renderTemplate(
-      "teriock/dialogs/hotbar-drop",
-      context,
-    ),
+    await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", context),
   );
-  choice = await TeriockDialog.prompt({
+  const choice = await TeriockDialog.prompt({
     buttons: [
       {
         action: "linked",
         callback: () => "linked",
         icon: makeIconClass(TERIOCK.display.icons.ui.linked),
-        label: _loc(`TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked`),
+        label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
       },
     ],
     content: content,

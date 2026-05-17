@@ -14,14 +14,9 @@ const { fields } = foundry.data;
  * @mixes DisplayAutomation
  * @extends {BaseAutomation}
  */
-export default class TakeAutomation extends DisplayAutomationMixin(
-  BaseAutomation,
-) {
+export default class TakeAutomation extends DisplayAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Take",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Take"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -38,8 +33,8 @@ export default class TakeAutomation extends DisplayAutomationMixin(
     return Object.assign(super.defineSchema(), {
       amount: new fields.NumberField({ nullable: true }),
       impact: new fields.StringField({
-        choices: objectMap(TERIOCK.config.impact, (i) => i.take, {
-          filter: (c) => !c?.hidden,
+        choices: objectMap(TERIOCK.config.impact, i => i.take, {
+          filter: c => !c?.hidden,
           localize: true,
         }),
         initial: "damage",

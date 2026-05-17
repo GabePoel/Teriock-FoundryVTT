@@ -21,9 +21,6 @@ Hooks.once("i18nInit", () => {
   });
 
   Object.entries(TERIOCK.reference.tradecrafts).forEach(([k, v]) => {
-    fluencyContext[`tc.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Fluency.tradecraft",
-      { name: _loc(v) },
-    );
+    fluencyContext[`tc.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Fluency.tradecraft", { name: _loc(v) });
   });
 });

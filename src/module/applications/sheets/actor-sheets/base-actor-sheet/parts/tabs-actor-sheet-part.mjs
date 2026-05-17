@@ -6,7 +6,7 @@ import TeriockTextEditor from "../../../../ux/text-editor.mjs";
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -96,11 +96,7 @@ export default (Base) =>
           await this.setActiveTab("powers");
         } else if (dropData.systemType === "resource") {
           await this.setActiveTab("resources");
-        } else if (
-          ["attunement", "consequence", "condition", "base"].includes(
-            dropData.systemType,
-          )
-        ) {
+        } else if (["attunement", "consequence", "condition", "base"].includes(dropData.systemType)) {
           await this.setActiveTab("effects");
         }
       }

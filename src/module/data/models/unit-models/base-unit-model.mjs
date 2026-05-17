@@ -15,25 +15,21 @@ class UnitDialog extends DialogV2 {
    * @private
    */
   #updateInputs(rawInput, value) {
-    rawInput.disabled = !this.unitModel.constructor.finiteChoiceEntries
-      .map((e) => e.id)
-      .includes(value);
+    rawInput.disabled = !this.unitModel.constructor.finiteChoiceEntries.map(e => e.id).includes(value);
   }
 
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (this.unitModel) {
-      const unitInput =
-        /** @type {HTMLInputElement} */ this.element.querySelector(
-          `[name="${this.unitModel.schema.fieldPath}.unit"]`,
-        );
-      const rawInput =
-        /** @type {HTMLInputElement} */ this.element.querySelector(
-          `[name="${this.unitModel.schema.fieldPath}.raw"]`,
-        );
+      const unitInput = /** @type {HTMLInputElement} */ this.element.querySelector(
+        `[name="${this.unitModel.schema.fieldPath}.unit"]`,
+      );
+      const rawInput = /** @type {HTMLInputElement} */ this.element.querySelector(
+        `[name="${this.unitModel.schema.fieldPath}.raw"]`,
+      );
       this.#updateInputs(rawInput, unitInput.value);
-      unitInput.addEventListener("change", (e) => {
+      unitInput.addEventListener("change", e => {
         this.#updateInputs(rawInput, e.target.value);
       });
     }
@@ -45,18 +41,11 @@ class UnitDialog extends DialogV2 {
  */
 export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.BaseUnit",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseUnit"];
 
   /** @returns {Teriock.Units.UnitEntry[]} */
   static get choiceEntries() {
-    return [
-      ...this.zeroChoiceEntries,
-      ...this.finiteChoiceEntries,
-      ...this.infiniteChoiceEntries,
-    ];
+    return [...this.zeroChoiceEntries, ...this.finiteChoiceEntries, ...this.infiniteChoiceEntries];
   }
 
   /**
@@ -64,9 +53,7 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {Record<string, string>}
    */
   static get choices() {
-    return Object.fromEntries(
-      this.choiceEntries.map((e) => [e.id, _loc(e.label)]),
-    );
+    return Object.fromEntries(this.choiceEntries.map(e => [e.id, _loc(e.label)]));
   }
 
   /** @returns {Teriock.Units.UnitEntry[]} */
@@ -139,10 +126,7 @@ export default class BaseUnitModel extends EvaluationModel {
     if (unitType === "zero") return 0;
     if (unitType === "infinite") return Infinity;
     else {
-      return (
-        this.constructor.finiteChoiceEntries.find((e) => e.id === this.unit)
-          .conversion || 1
-      );
+      return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1;
     }
   }
 
@@ -176,18 +160,13 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {string}
    */
   get symbol() {
-    return (
-      this.constructor.choiceEntries.find((e) => e.id === this.unit).symbol ||
-      this.unit
-    );
+    return this.constructor.choiceEntries.find(e => e.id === this.unit).symbol || this.unit;
   }
 
   /** @inheritDoc */
   get text() {
     if (this.unitType === "finite") {
-      const entry = this.constructor.finiteChoiceEntries.find(
-        (e) => e.id === this.unit,
-      );
+      const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
       return `${this.raw} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
     } else {
       return this.constructor.choices[this.unit];
@@ -199,13 +178,9 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {"zero" | "finite" | "infinite"}
    */
   get unitType() {
-    if (
-      this.constructor.zeroChoiceEntries.map((e) => e.id).includes(this.unit)
-    ) {
+    if (this.constructor.zeroChoiceEntries.map(e => e.id).includes(this.unit)) {
       return "zero";
-    } else if (
-      this.constructor.finiteChoiceEntries.map((e) => e.id).includes(this.unit)
-    ) {
+    } else if (this.constructor.finiteChoiceEntries.map(e => e.id).includes(this.unit)) {
       return "finite";
     } else {
       return "infinite";
@@ -237,10 +212,7 @@ export default class BaseUnitModel extends EvaluationModel {
   convertTo(unit) {
     const unitType = this.unitType;
     if (unitType !== "finite") return this.currentValue;
-    return (
-      (this.constructor.finiteChoiceEntries.find((e) => e.id === unit)
-        .conversion || 1) * this.currentValue
-    );
+    return (this.constructor.finiteChoiceEntries.find(e => e.id === unit).conversion || 1) * this.currentValue;
   }
 
   /**
@@ -259,14 +231,11 @@ export default class BaseUnitModel extends EvaluationModel {
            * @param {HTMLButtonElement} button
            */
           callback: async function (_event, button) {
-            const namedElements = /** @type {HTMLInputElement[]} */ Array.from(
-              button.form.elements,
-            ).filter((el) => el.hasAttribute("name"));
+            const namedElements = /** @type {HTMLInputElement[]} */ Array.from(button.form.elements).filter(el =>
+              el.hasAttribute("name"),
+            );
             const updateData = Object.fromEntries(
-              namedElements.map((el) => [
-                el.getAttribute("name"),
-                el.type === "checkbox" ? el.checked : el.value,
-              ]),
+              namedElements.map(el => [el.getAttribute("name"), el.type === "checkbox" ? el.checked : el.value]),
             );
             await document.update(updateData);
           },

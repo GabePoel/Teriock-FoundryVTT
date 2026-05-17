@@ -1,15 +1,12 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { fromIdentifierLocal } from "../../../helpers/utils.mjs";
 import { IdentifierField } from "../../fields/_module.mjs";
 import { rollableFormulaField } from "../../fields/helpers/builders.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import {
-  ConfirmationDialogAutomationMixin,
-  TriggerAutomationMixin,
-} from "./mixins/_module.mjs";
+import { ConfirmationDialogAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -20,16 +17,13 @@ const { fields } = foundry.data;
  * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
  */
-export default class ChangeQuantityAutomation extends mix(
+export default class ChangeQuantityAutomation extends mixClasses(
   BaseAutomation,
   ConfirmationDialogAutomationMixin,
   TriggerAutomationMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ChangeQuantity",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -144,11 +138,7 @@ export default class ChangeQuantityAutomation extends mix(
     };
     await TeriockChatMessage.create(messageData, { defaultMode: true });
     await consumable.update({
-      "system.quantity": Math.clamp(
-        consumable.system.quantity + roll.total,
-        0,
-        consumable.system.maxQuantity.value,
-      ),
+      "system.quantity": Math.clamp(consumable.system.quantity + roll.total, 0, consumable.system.maxQuantity.value),
     });
   }
 

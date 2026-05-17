@@ -7,9 +7,7 @@ import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 
 class AbstractExecution {}
 
-export default class BaseExecution extends AutomatedDataMixin(
-  AbstractExecution,
-) {
+export default class BaseExecution extends AutomatedDataMixin(AbstractExecution) {
   /**
    * Construct an execution.
    * @param {Partial<Teriock.Execution.BaseExecutionOptions>} options
@@ -80,7 +78,7 @@ export default class BaseExecution extends AutomatedDataMixin(
 
   /** @returns {TypeCollection<ID<Teriock.Automations.Any>, Teriock.Automations.Any>} */
   get automations() {
-    return new TypeCollection(this._automations.map((a) => [a.id, a]));
+    return new TypeCollection(this._automations.map(a => [a.id, a]));
   }
 
   /** @param {TypeCollection | Teriock.Automations.Any[]} automations */
@@ -122,13 +120,10 @@ export default class BaseExecution extends AutomatedDataMixin(
 
   /**
    * Roll options used by this execution.
-   * @returns {Object}
+   * @returns {object}
    */
   get rollOptions() {
-    return foundry.utils.mergeObject(
-      { flavor: this.flavor },
-      this._rollOptions,
-    );
+    return foundry.utils.mergeObject({ flavor: this.flavor }, this._rollOptions);
   }
 
   /**
@@ -136,9 +131,7 @@ export default class BaseExecution extends AutomatedDataMixin(
    * @returns {Teriock.Automations.Any[]}
    */
   get activeAutomations() {
-    return this.automations.contents.filter((a) =>
-      a.competencies.has(this.competence.raw),
-    );
+    return this.automations.contents.filter(a => a.competencies.has(this.competence.raw));
   }
 
   /**
@@ -150,10 +143,7 @@ export default class BaseExecution extends AutomatedDataMixin(
       rolls: this.rolls,
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
-        activations:
-          teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
-            this.activations,
-          ),
+        activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(this.activations),
         avatar: this.actor?.img,
         buttons: this.buttons,
         panels: this.panels,
@@ -201,9 +191,7 @@ export default class BaseExecution extends AutomatedDataMixin(
    */
   async _buildRolls() {
     if (formulaExists(this.formula)) {
-      this.rolls.push(
-        new this._RollClass(this.formula, this.rollData, this.rollOptions),
-      );
+      this.rolls.push(new this._RollClass(this.formula, this.rollData, this.rollOptions));
     }
   }
 
@@ -268,11 +256,7 @@ export default class BaseExecution extends AutomatedDataMixin(
    */
   async _fireAutomationsTrigger(trigger, scope = {}, options = {}) {
     const automations = options.automations ?? this.activeAutomations;
-    await Promise.all(
-      automations.map((a) =>
-        a.fireTrigger(trigger, this.getScope({ ...scope, trigger })),
-      ),
-    );
+    await Promise.all(automations.map(a => a.fireTrigger(trigger, this.getScope({ ...scope, trigger }))));
   }
 
   /**
@@ -301,7 +285,7 @@ export default class BaseExecution extends AutomatedDataMixin(
    */
   async _postExecute() {
     this._fireAutomationsTrigger("execute");
-    this.executionNames.map((n) => this.fireTrigger(`execute${n}`));
+    this.executionNames.map(n => this.fireTrigger(`execute${n}`));
   }
 
   /**
@@ -311,9 +295,7 @@ export default class BaseExecution extends AutomatedDataMixin(
   async _postInput() {
     await this._fireAutomationsTrigger("executeInput", { awaitFire: true });
     const results = await Promise.all(
-      this.executionNames.map((n) =>
-        this.fireTrigger(`executeInput${n}`, { awaitFire: true }),
-      ),
+      this.executionNames.map(n => this.fireTrigger(`executeInput${n}`, { awaitFire: true })),
     );
     if (results.includes(false)) return false;
   }
@@ -325,9 +307,7 @@ export default class BaseExecution extends AutomatedDataMixin(
   async _preExecute() {
     await this._fireAutomationsTrigger("preExecute", { awaitFire: true });
     const results = await Promise.all(
-      this.executionNames.map((n) =>
-        this.fireTrigger(`preExecute${n}`, { awaitFire: true }),
-      ),
+      this.executionNames.map(n => this.fireTrigger(`preExecute${n}`, { awaitFire: true })),
     );
     if (results.includes(false)) return false;
   }
@@ -383,9 +363,7 @@ export default class BaseExecution extends AutomatedDataMixin(
    * @returns {Promise<void|false>}
    */
   async fireTrigger(trigger, scope) {
-    const automations = this.activeAutomations.filter(
-      (a) => a.actor !== this.actor,
-    );
+    const automations = this.activeAutomations.filter(a => a.actor !== this.actor);
     await this._fireAutomationsTrigger(trigger, scope, { automations });
     return await this._fireActorTrigger(trigger, scope);
   }

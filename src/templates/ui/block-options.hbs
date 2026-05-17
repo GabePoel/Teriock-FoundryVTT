@@ -1,21 +1,13 @@
 <div class="teriock-block-options-header">
-  <button
-    class="{{tab}}-options-menu-toggle options-menu-toggle {{toggleButton optionsToggle}}"
-    data-bool="{{optionsToggle}}"
-    data-path="{{optionsPath}}"
-    data-action="sheetToggle"
-    data-tooltip="{{localize "TERIOCK.SHEETS.Common.SEARCH.displayOptions"}}"
-  >
-    {{makeIcon TERIOCK.display.icons.ui.options "button"}}
-  </button>
+  <button class="{{ tab }}-options-menu-toggle options-menu-toggle {{toggleButton optionsToggle}}" data-bool="{{ optionsToggle }}" data-path="{{ optionsPath }}" data-action="sheetToggle" data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.displayOptions"}}'>{{makeIcon TERIOCK.display.icons.ui.options "button"}}</button>
 
   {{#if (defined sortToggle)}}
     <button
-      class="{{tab}}-sort-menu-toggle sort-menu-toggle {{toggleButton sortToggle}}"
-      data-bool="{{sortToggle}}"
-      data-path="{{sortPath}}"
+      class="{{ tab }}-sort-menu-toggle sort-menu-toggle {{toggleButton sortToggle}}"
+      data-bool="{{ sortToggle }}"
+      data-path="{{ sortPath }}"
       data-action="sheetToggle"
-      data-tooltip="{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}"
+      data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
       data-never-disable="true"
     >
       {{makeIcon TERIOCK.display.icons.ui.sort "button"}}
@@ -24,11 +16,11 @@
 
   {{#if (defined filterToggle)}}
     <button
-      class="{{tab}}-filter-menu-toggle filter-menu-toggle {{toggleButton filterToggle}}"
-      data-bool="{{filterToggle}}"
-      data-path="{{filterPath}}"
+      class="{{ tab }}-filter-menu-toggle filter-menu-toggle {{toggleButton filterToggle}}"
+      data-bool="{{ filterToggle }}"
+      data-path="{{ filterPath }}"
       data-action="sheetToggle"
-      data-tooltip="{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}"
+      data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
       data-never-disable="true"
     >
       {{makeIcon TERIOCK.display.icons.ui.filter "button"}}
@@ -36,21 +28,25 @@
   {{/if}}
 
   <input
-    class="{{tab}}-search teriock-block-search"
+    class="{{ tab }}-search teriock-block-search"
     type="search"
-    placeholder="{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}"
-    data-type="{{tab}}"
+    placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
+    data-type="{{ tab }}"
     data-never-disable="true"
-    {{#if searchKey}}data-search-key="{{searchKey}}" {{/if}}
-    {{#if searchValue}}value="{{searchValue}}"{{/if}}
-  >
+    {{#if searchKey}}
+      data-search-key="{{ searchKey }}"
+    {{/if}}
+    {{#if searchValue}}
+      value="{{ searchValue }}"
+    {{/if}}
+  />
 
   {{#if addAction}}
     <button
-      class="toggle-button {{tab}}-add-button add-button"
-      data-tab="{{tab}}"
-      data-action="{{addAction}}"
-      data-tooltip="{{localize "TERIOCK.DIALOGS.NewDocument.title" name=tabDisplay}}"
+      class="toggle-button {{ tab }}-add-button add-button"
+      data-tab="{{ tab }}"
+      data-action="{{ addAction }}"
+      data-tooltip='{{localize "TERIOCK.DIALOGS.NewDocument.title" name=tabDisplay}}'
     >
       {{makeIcon TERIOCK.display.icons.ui.add "button"}}
     </button>
@@ -61,18 +57,21 @@
   <div class="teriock-block-options-content">
     <div class="tgrid g4">
       <div class="tgrid-item">
-        <label for="{{tab}}-gapless">{{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}</label>
+        <label for="{{ tab }}-gapless">{{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}</label>
         <input
-          id="{{tab}}-gapless"
+          id="{{ tab }}-gapless"
           type="checkbox"
-          name="{{gaplessPath}}"
+          name="{{ gaplessPath }}"
           {{checked gaplessValue}}
-        >
+        />
       </div>
       <div class="tgrid-item gi3">
-        <select name="{{sizePath}}" id="{{tab}}-size">
+        <select id="{{ tab }}-size" name="{{ sizePath }}">
           <option value="">{{localize "TERIOCK.SHEETS.Common.SEARCH.cardSize"}}</option>
-          {{selectOptions TERIOCK.config.display.sizes selected=sizeValue}}
+          {{selectOptions
+            TERIOCK.config.display.sizes
+            selected=sizeValue
+          }}
         </select>
       </div>
     </div>
@@ -83,28 +82,26 @@
   <div class="teriock-block-options-content">
     <div class="tgrid g4">
       <div class="tgrid-item">
-        <label for="{{tab}}-ascending">{{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}</label>
+        <label for="{{ tab }}-ascending">{{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}</label>
         <input
-          id="{{tab}}-ascending"
+          id="{{ tab }}-ascending"
           type="checkbox"
           data-action="sheetToggle"
-          data-bool="{{ascendingValue}}"
-          data-path="{{ascendingPath}}"
+          data-bool="{{ ascendingValue }}"
+          data-path="{{ ascendingPath }}"
           data-never-disable="true"
           {{checked ascendingValue}}
-        >
+        />
       </div>
       <div class="tgrid-item gi3">
-        <select
-          data-action="sheetSelect"
-          data-path="{{sortOptionPath}}"
-          data-never-disable="true"
-          id="{{tab}}-sort"
+        <select id="{{ tab }}-sort" data-action="sheetSelect" data-path="{{ sortOptionPath }}" data-never-disable="true"
         >
-          {{selectOptions sortOptions selected=sortValue}}
+          {{selectOptions
+            sortOptions
+            selected=sortValue
+          }}
         </select>
       </div>
     </div>
   </div>
 {{/if}}
-

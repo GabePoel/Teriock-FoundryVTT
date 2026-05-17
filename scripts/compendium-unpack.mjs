@@ -76,17 +76,9 @@ for (const pack of packs) {
     expandAdventures: EXPAND_ADVENTURES,
     folders: FOLDERS,
   };
-  await extractPack(
-    `./packs/${pack}`,
-    `./src/packs/${toKebabCaseFull(pack)}`,
-    extractOptions,
-  );
+  await extractPack(`./packs/${pack}`, `./src/packs/${toKebabCaseFull(pack)}`, extractOptions);
   BUILD_REGISTRY = false;
-  await extractPack(
-    `./packs/${pack}`,
-    `./src/packs/${toKebabCaseFull(pack)}`,
-    extractOptions,
-  );
+  await extractPack(`./packs/${pack}`, `./src/packs/${toKebabCaseFull(pack)}`, extractOptions);
 }
 
 // Transformers
@@ -136,15 +128,9 @@ function transformEntry(doc) {
   }
   cleanEntry(doc);
   if (doc.system) removeEmptyValues(doc.system);
-  [
-    "cards",
-    "categories",
-    "effects",
-    "items",
-    "notes",
-    "pages",
-    "results",
-  ].forEach((key) => doc[key]?.forEach((d) => transformEntry(d)));
+  ["cards", "categories", "effects", "items", "notes", "pages", "results"].forEach(key =>
+    doc[key]?.forEach(d => transformEntry(d)),
+  );
   if (!doc._key.includes("scene")) removeEmptyValues(doc);
 }
 
@@ -239,13 +225,10 @@ function sortAutomations(automations) {
     3: [0, 1],
   };
 
-  const STRING_MAP = Object.entries(COMPETENCY_MAP).reduce(
-    (acc, [key, arr]) => {
-      acc[arr.join("")] = key;
-      return acc;
-    },
-    {},
-  );
+  const STRING_MAP = Object.entries(COMPETENCY_MAP).reduce((acc, [key, arr]) => {
+    acc[arr.join("")] = key;
+    return acc;
+  }, {});
 
   const PAIR_STRING_MAP = Object.entries(PAIR_MAP).reduce((acc, [key, arr]) => {
     acc[arr.join("")] = key;

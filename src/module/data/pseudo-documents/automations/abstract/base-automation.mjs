@@ -12,14 +12,9 @@ const { fields } = foundry.data;
  * @property {ID<BaseAutomation>} _id
  * @property {Teriock.Automations.Type} type
  */
-export default class BaseAutomation extends PropagationDataMixin(
-  TypedPseudoDocument,
-) {
+export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocument) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Base",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Base"];
 
   /** @inheritDoc */
   static get LABEL() {

@@ -4,12 +4,19 @@
       <div class="ab-main">
         {{#if (exists (lookup @root (path @root/TERIOCK.config.document type "getter")))}}
           <div
-            class="teriock-block-container {{@root.document.flags.teriockDocumentSettings.sheet.blockChildSize}} {{#if
-              @root.document.flags.teriockDocumentSettings.sheet.blockChildGapless}}gapless{{/if}}"
+            class="
+              teriock-block-container
+              {{ @root.document.flags.teriockDocumentSettings.sheet.blockChildSize }}
+              {{#if @root.document.flags.teriockDocumentSettings.sheet.blockChildGapless}}
+                gapless
+              {{/if}}
+            "
           >
             {{#each (lookup @root (path @root/TERIOCK.config.document type "getter")) as |doc|}}
-              {{> "teriock/ui/block" (merge doc.embedParts (object
-                relative=@root/document.uuid))}}
+              {{> "teriock/ui/block"
+                (merge doc.embedParts (object
+                  relative=@root/document.uuid))
+              }}
             {{/each}}
           </div>
         {{/if}}

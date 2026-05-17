@@ -142,8 +142,4 @@ mergeObjects(
   triggers,
 );
 
-await fs.promises.writeFile(
-  DST,
-  JSON.stringify(sortObject(LANG), null, 2),
-  "utf-8",
-);
+await fs.promises.writeFile(DST, JSON.stringify(sortObject(LANG), null, 2), "utf-8");

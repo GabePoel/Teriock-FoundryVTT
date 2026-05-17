@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -17,7 +17,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes TradecraftsActorSheetPart
  * @mixes DocumentCreationActorSheetPart
  */
-export default class TeriockPlayableActorSheet extends mix(
+export default class TeriockPlayableActorSheet extends mixClasses(
   BaseActorSheet,
   parts.AvatarImageActorSheetPart,
   parts.CombatActorSheetPart,
@@ -28,7 +28,7 @@ export default class TeriockPlayableActorSheet extends mix(
   parts.RollingActorSheetPart,
   parts.SidebarActorSheetPart,
   parts.TabsActorSheetPart,
-  parts.TakingActorSheetPart,
+  parts.ImpactActorSheetPart,
   parts.TradecraftsActorSheetPart,
 ) {
   /** @inheritDoc */
@@ -41,8 +41,7 @@ export default class TeriockPlayableActorSheet extends mix(
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template:
-        "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
+      template: "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
       scrollable: [".character-sidebar", ".character-tab-content"],
     },
   };

@@ -15,9 +15,7 @@ export default class IdentifierField extends StringField {
   /** @override */
   _validateType(value) {
     if (!identifierValidator(value, { allowType: this.allowType })) {
-      throw new Error(
-        _loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"),
-      );
+      throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
     }
   }
 }

@@ -4,10 +4,7 @@ declare global {
   namespace Teriock.Models {
     export type ActorAutomationPartData = {
       /** <base> Information explaining conditions in place. */
-      conditionInformation: Record<
-        Teriock.Keys.Condition,
-        ConditionInformation
-      >;
+      conditionInformation: Record<Teriock.Keys.Condition, ConditionInformation>;
     };
   }
 }

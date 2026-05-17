@@ -2,7 +2,7 @@
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -41,10 +41,7 @@ export default (Base) =>
 
       const index = game.teriock.packs.player.index;
       context.tradecraftMacros = Object.fromEntries(
-        Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [
-          tc,
-          index.getName(`Make ${name} Check`)?.uuid,
-        ]),
+        Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [tc, index.getName(`Make ${name} Check`)?.uuid]),
       );
       return context;
     }

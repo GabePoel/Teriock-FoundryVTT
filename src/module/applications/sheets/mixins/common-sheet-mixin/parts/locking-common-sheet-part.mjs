@@ -1,7 +1,7 @@
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   //noinspection JSAccessibilityCheck,JSClosureCompilerSyntax
   return (
     /**
@@ -40,9 +40,7 @@ export default (Base) => {
        */
       #setToggleLockButtonAttributes(toggleButton) {
         toggleButton.classList.remove(...["fa-lock-open", "fa-lock"]);
-        toggleButton.classList.add(
-          ...[this.isEditable ? "fa-lock-open" : "fa-lock"],
-        );
+        toggleButton.classList.add(...[this.isEditable ? "fa-lock-open" : "fa-lock"]);
         toggleButton.setAttribute(
           "data-tooltip",
           this.isEditable
@@ -54,9 +52,7 @@ export default (Base) => {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        const toggleButton = this.window.header?.querySelector(
-          "[data-action='toggleLockThis']",
-        );
+        const toggleButton = this.window.header?.querySelector("[data-action='toggleLockThis']");
         if (toggleButton) this.#setToggleLockButtonAttributes(toggleButton);
       }
 
@@ -72,10 +68,7 @@ export default (Base) => {
           toggleButton.classList.add(...["header-control", "icon", "fa-solid"]);
           toggleButton.setAttribute("data-action", "toggleLockThis");
           this.#setToggleLockButtonAttributes(toggleButton);
-          if (
-            !this.document.isOwner ||
-            (this.document.inCompendium && this.document.compendium.locked)
-          ) {
+          if (!this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked)) {
             toggleButton.setAttribute("disabled", "disabled");
           }
           this.window.controls?.before(toggleButton);

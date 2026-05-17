@@ -20,7 +20,7 @@ declare global {
       /** <schema> MP increase */
       mpIncrease: string;
       /** <schema> Size constraints */
-      size: Teriock.Foundry.BarField & {
+      size: Foundry.BarField & {
         /** <schema> Enabled */
         enabled: boolean;
       };

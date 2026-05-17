@@ -13,7 +13,7 @@ export default function AutomatedDataMixin(Base) {
        */
       get activeAutomations() {
         const automations = this.automations.contents;
-        return automations.filter((a) => a.active);
+        return automations.filter(a => a.active);
       }
 
       /**
@@ -27,9 +27,9 @@ export default function AutomatedDataMixin(Base) {
       getAutomations(type, options = {}) {
         const { active } = options;
         if (active) {
-          return this.activeAutomations.filter((a) => a.type === type);
+          return this.activeAutomations.filter(a => a.type === type);
         } else {
-          return this.automations.contents.filter((a) => a.type === type);
+          return this.automations.contents.filter(a => a.type === type);
         }
       }
     }

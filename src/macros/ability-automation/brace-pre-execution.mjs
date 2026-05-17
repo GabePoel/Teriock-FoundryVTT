@@ -7,7 +7,7 @@ if (execution.competence.proficient) {
 if (execution.competence.fluent) {
   formula = `(1 + @f)d${dieSize}`;
 }
-const act = execution.activations.find((a) => a.type === "addDocuments");
+const act = execution.activations.find(a => a.type === "addDocuments");
 const consequenceData = act._source.primary.root.data;
 consequenceData.flags = { teriockEffect: { formula } };
 act._source.primary.root.data = consequenceData;

@@ -5,7 +5,7 @@ import TeriockBaseApplication from "./base-application.mjs";
 const { SearchFilter } = foundry.applications.ux;
 
 /**
- * @property {Function} _finish
+ * @property {function} _finish
  */
 export default class TeriockDocumentSelector extends TeriockBaseApplication {
   /**
@@ -39,13 +39,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    * @param args
    */
   constructor(docs, options = {}, ...args) {
-    const {
-      multi = true,
-      hint = "",
-      tooltip = true,
-      tooltipAsync = false,
-      openable = false,
-    } = options;
+    const { multi = true, hint = "", tooltip = true, tooltipAsync = false, openable = false } = options;
     super(...args);
     this.docs = docs;
     this.multi = multi;
@@ -59,7 +53,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       });
     }
     this._resolve = null;
-    this._result = new Promise((resolve) => (this._resolve = resolve));
+    this._result = new Promise(resolve => (this._resolve = resolve));
   }
 
   /**
@@ -81,9 +75,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     const root = this.element;
     let ids = [];
     if (this.multi) {
-      ids = Array.from(
-        root.querySelectorAll('input[type="checkbox"]:checked'),
-      ).map((el) => el.name);
+      ids = Array.from(root.querySelectorAll('input[type="checkbox"]:checked')).map(el => el.name);
     } else {
       const radio = root.querySelector('input[name="choice"]:checked');
       if (radio) ids = [radio.value];
@@ -108,9 +100,9 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    */
   _initClickLoader() {
     this.element.querySelectorAll("[data-uuid]").forEach(
-      /** @param {HTMLElement} el */ (el) => {
+      /** @param {HTMLElement} el */ el => {
         if (this.openable) {
-          el.addEventListener("dblclick", async (ev) => {
+          el.addEventListener("dblclick", async ev => {
             const target = /** @type {HTMLElement} */ ev.currentTarget;
             const uuid = target.dataset.uuid;
             const doc = /** @type {ChildDocument} */ await fromUuid(uuid);
@@ -136,9 +128,8 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       initial: "",
       callback: (_e, _q, rgx, container) => {
         container.querySelectorAll(".doc-select-item").forEach(
-          /** @param {HTMLLIElement} card */ (card) => {
-            const title =
-              card.querySelector(".doc-name-container")?.textContent ?? "";
+          /** @param {HTMLLIElement} card */ card => {
+            const title = card.querySelector(".doc-name-container")?.textContent ?? "";
             const match = rgx ? rgx.test(title) : true;
             card.style.display = match ? "block" : "none";
           },

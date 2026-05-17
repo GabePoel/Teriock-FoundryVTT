@@ -1,6 +1,6 @@
 export { default as iconManifest } from "../../../icons/icon-manifest.json" with { type: "json" };
-export { displayPanel as panel } from "./panel.mjs";
+export { colors } from "./colors.mjs";
 export { iconStyles } from "./icon-styles.mjs";
 export { icons } from "./icons.mjs";
+export { displayPanel as panel } from "./panel.mjs";
 export { default as tokenMagic } from "./token-magic.mjs";
-export { colors } from "./colors.mjs";

@@ -1,11 +1,11 @@
 /**
  * Document mixin to support using this document.
- * @param {typeof TeriockDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function UsableDocumentMixin(Base) {
   return (
     /**
-     * @extends {BaseDocument}
+     * @mixes BaseDocument
      * @mixin
      */
     class UsableDocument extends Base {

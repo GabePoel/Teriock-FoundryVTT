@@ -28,23 +28,21 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
   });
   if (doIdentify) {
     const unrevealed = [
-      ...item.properties.filter((p) => !p.system.revealed),
-      ...item.abilities.filter((a) => !a.system.revealed),
-      ...item.resources.filter((r) => !r.system.revealed),
-      ...item.fluencies.filter((f) => !f.system.revealed),
+      ...item.properties.filter(p => !p.system.revealed),
+      ...item.abilities.filter(a => !a.system.revealed),
+      ...item.resources.filter(r => !r.system.revealed),
+      ...item.fluencies.filter(f => !f.system.revealed),
     ];
     const toReveal = await selectDocumentsDialog(unrevealed, {
-      checked: unrevealed.map((r) => r.uuid),
+      checked: unrevealed.map(r => r.uuid),
       hint: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.hint"),
-      noDocumentsMessage: _loc(
-        "TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage",
-      ),
+      noDocumentsMessage: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage"),
       silent: true,
       tooltipAsync: false,
     });
     await item.updateEmbeddedDocuments(
       "ActiveEffect",
-      toReveal.map((e) => {
+      toReveal.map(e => {
         return {
           _id: e._id,
           "system.revealed": true,

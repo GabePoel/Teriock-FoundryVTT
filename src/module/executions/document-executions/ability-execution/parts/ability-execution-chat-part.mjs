@@ -24,17 +24,11 @@ export default function AbilityExecutionChatPart(Base) {
        */
       #addAssociationToMap(association, key) {
         const associations = this.#associationMap[key];
-        const existing = associations.find(
-          (a) => a.title === association.title,
-        );
+        const existing = associations.find(a => a.title === association.title);
         if (!existing) {
           associations.push(association);
         } else {
-          existing.cards.push(
-            ...association.cards.filter(
-              (c) => !existing.cards.map((e) => e.uuid).includes(c.uuid),
-            ),
-          );
+          existing.cards.push(...association.cards.filter(c => !existing.cards.map(e => e.uuid).includes(c.uuid)));
         }
       }
 
@@ -43,11 +37,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {string} key
        */
       #addTrackersToMap(trackers, key) {
-        this.#trackerMap[key].push(
-          ...trackers.filter(
-            (t) => !this.#trackerMap[key].map((e) => e.value).includes(t.value),
-          ),
-        );
+        this.#trackerMap[key].push(...trackers.filter(t => !this.#trackerMap[key].map(e => e.value).includes(t.value)));
       }
 
       /**
@@ -57,15 +47,13 @@ export default function AbilityExecutionChatPart(Base) {
       #attachTrackedStatusAutomationUuids(automation, uuids) {
         /** @type {Teriock.Messages.MessageAssociation} */
         const association = {
-          cards: uuids.map((uuid) => this.#generateAssociationCard(uuid)),
+          cards: uuids.map(uuid => this.#generateAssociationCard(uuid)),
           icon: TERIOCK.config.document.creature.icon,
           title: _loc("TERIOCK.SYSTEMS.Ability.PANELS.statusWithRespectTo", {
             status: TERIOCK.reference.conditions[automation.status],
           }),
         };
-        const trackers = uuids.map((uuid) =>
-          this.#generateConditionTracker(automation.status, uuid),
-        );
+        const trackers = uuids.map(uuid => this.#generateConditionTracker(automation.status, uuid));
         if (automation.crit.has(0)) {
           this.#addAssociationToMap(association, "normal");
           this.#addTrackersToMap(trackers, "normal");
@@ -119,15 +107,14 @@ export default function AbilityExecutionChatPart(Base) {
         const statusAutomations = this.getAutomations("status", {
           active: true,
         });
-        const targetAutomations = statusAutomations.filter((a) => a.target);
+        const targetAutomations = statusAutomations.filter(a => a.target);
         for (const a of targetAutomations) {
-          const uuids = (await a.selectVisibleTokens()).map((t) => t.uuid);
+          const uuids = (await a.selectVisibleTokens()).map(t => t.uuid);
           this.#attachTrackedStatusAutomationUuids(a, uuids);
         }
-        const executorAutomations = statusAutomations.filter((a) => a.executor);
+        const executorAutomations = statusAutomations.filter(a => a.executor);
         for (const a of executorAutomations) {
-          const uuid =
-            this.actor?.defaultToken?.document?.uuid || this.actor?.uuid;
+          const uuid = this.actor?.defaultToken?.document?.uuid || this.actor?.uuid;
           if (uuid) this.#attachTrackedStatusAutomationUuids(a, [uuid]);
         }
       }
@@ -141,9 +128,7 @@ export default function AbilityExecutionChatPart(Base) {
           active: true,
           crit,
         });
-        return statusAutomations
-          .filter((a) => a.relation === "include")
-          .map((a) => a.status);
+        return statusAutomations.filter(a => a.relation === "include").map(a => a.status);
       }
 
       /**
@@ -151,10 +136,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<Partial<EffectTransformationConfig>>}
        */
       async #generateConsequenceTransformation(crit = false) {
-        const transformationAutomations = this.getAutomations(
-          "transformation",
-          { active: true, crit },
-        );
+        const transformationAutomations = this.getAutomations("transformation", { active: true, crit });
         const transformation = {
           enabled: !!transformationAutomations.length,
           uuids: [],
@@ -183,8 +165,7 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Record<string, object>}
        */
       #generateEffectAutomations(crit = false) {
-        const types =
-          CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
+        const types = CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
         const out = {};
         for (const Cls of types) {
           const automations = this.getAutomations(Cls.TYPE, {
@@ -195,7 +176,7 @@ export default function AbilityExecutionChatPart(Base) {
             const data = a.toObject();
             data._id = foundry.utils.randomID();
             if (data?.type === "changes") {
-              data?.changes.forEach((c) => {
+              data?.changes.forEach(c => {
                 c.value = this._heightenString(c.value);
               });
             }
@@ -214,19 +195,15 @@ export default function AbilityExecutionChatPart(Base) {
        * @returns {Promise<object>}
        */
       async #generateEffectConsequence(crit = false) {
-        return foundry.utils.mergeObject(
-          await this.#generateEffectImbuement(crit),
-          {
-            showIcon: 1,
-            statuses: this.#generateConsequenceStatuses(crit),
-            system: {
-              associations: [],
-              transformation:
-                await this.#generateConsequenceTransformation(crit),
-            },
-            type: "consequence",
+        return foundry.utils.mergeObject(await this.#generateEffectImbuement(crit), {
+          showIcon: 1,
+          statuses: this.#generateConsequenceStatuses(crit),
+          system: {
+            associations: [],
+            transformation: await this.#generateConsequenceTransformation(crit),
           },
-        );
+          type: "consequence",
+        });
       }
 
       /**
@@ -240,7 +217,7 @@ export default function AbilityExecutionChatPart(Base) {
         });
         let durationFormula = this.source.system.duration.formula;
         const formulaField = new FormulaField({ deterministic: false });
-        durationAutomations.forEach((a) => {
+        durationAutomations.forEach(a => {
           const formula = a.duration.formula;
           const change = {
             effect: this.source,
@@ -250,17 +227,9 @@ export default function AbilityExecutionChatPart(Base) {
             type: a.changeType,
             value: formula,
           };
-          durationFormula = formulaField.applyChange(
-            durationFormula,
-            null,
-            change,
-            { replacementData: this.rollData },
-          );
+          durationFormula = formulaField.applyChange(durationFormula, null, change, { replacementData: this.rollData });
         });
-        let durationValue = await BaseRoll.getValue(
-          durationFormula,
-          this.rollData,
-        );
+        let durationValue = await BaseRoll.getValue(durationFormula, this.rollData);
         if (durationValue > Number("9".repeat(30))) {
           durationValue = undefined;
         }
@@ -286,11 +255,8 @@ export default function AbilityExecutionChatPart(Base) {
           active: true,
           crit,
         });
-        autos.forEach((a) => {
-          Object.assign(
-            expirations,
-            a.getExpirationData({ actor: this.actor }),
-          );
+        autos.forEach(a => {
+          Object.assign(expirations, a.getExpirationData({ actor: this.actor }));
         });
         return expirations;
       }
@@ -314,8 +280,7 @@ export default function AbilityExecutionChatPart(Base) {
           showIcon: 0,
           system: {
             _dep:
-              this.source.system.sustained &&
-              game.teriock.getSetting("trackSustainedConsequences")
+              this.source.system.sustained && game.teriock.getSetting("trackSustainedConsequences")
                 ? this.source.uuid
                 : undefined,
             _src: this.source.uuid,
@@ -335,9 +300,7 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildActivations() {
         const acts = teriock.data.pseudoDocuments.activations;
-        const modifyEffectAutomation = this.activeAutomations.find(
-          (a) => a.type === "modifyEffect",
-        );
+        const modifyEffectAutomation = this.activeAutomations.find(a => a.type === "modifyEffect");
 
         // Add feat save activation
         if (this.isFeat && !modifyEffectAutomation?.preventFeat) {
@@ -379,7 +342,7 @@ export default function AbilityExecutionChatPart(Base) {
           normConData.changes.push(...this.#trackerMap["normal"]);
           critConData.system.associations = this.#associationMap["crit"];
           critConData.changes.push(...this.#trackerMap["crit"]);
-          const normConChildren = this.source.subs.map((s) => {
+          const normConChildren = this.source.subs.map(s => {
             return { uuid: s.uuid };
           });
           const critConChildren = [...normConChildren];
@@ -391,7 +354,7 @@ export default function AbilityExecutionChatPart(Base) {
           const critDocs = [];
           const childAutomations = this.getAutomations("addDocuments", {
             active: true,
-          }).filter((a) => !a.separate);
+          }).filter(a => !a.separate);
           for (const a of childAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
             const grandchildren = [];
@@ -424,10 +387,7 @@ export default function AbilityExecutionChatPart(Base) {
               critGrandchildren.push(...grandchildren);
             }
           }
-          const transformationAutomations = this.getAutomations(
-            "transformation",
-            { active: true },
-          );
+          const transformationAutomations = this.getAutomations("transformation", { active: true });
           for (const a of transformationAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
             if (a.crit.has(0)) {
@@ -440,18 +400,10 @@ export default function AbilityExecutionChatPart(Base) {
           this.getAutomations("modifyEffect", {
             active: true,
             crit: false,
-          }).forEach((a) => {
+          }).forEach(a => {
             if (a?.overrideCompetence) {
-              foundry.utils.setProperty(
-                normConData,
-                "system.competence.raw",
-                a.competence.value,
-              );
-              foundry.utils.setProperty(
-                normImbData,
-                "system.competence.raw",
-                a.competence.value,
-              );
+              foundry.utils.setProperty(normConData, "system.competence.raw", a.competence.value);
+              foundry.utils.setProperty(normImbData, "system.competence.raw", a.competence.value);
             }
             if (a.overrideData && a.data) {
               foundry.utils.mergeObject(normConData, a.data, {
@@ -465,18 +417,10 @@ export default function AbilityExecutionChatPart(Base) {
           this.getAutomations("modifyEffect", {
             active: true,
             crit: true,
-          }).forEach((a) => {
+          }).forEach(a => {
             if (a?.overrideCompetence) {
-              foundry.utils.setProperty(
-                critConData,
-                "system.competence.raw",
-                a.competence.value,
-              );
-              foundry.utils.setProperty(
-                critImbData,
-                "system.competence.raw",
-                a.competence.value,
-              );
+              foundry.utils.setProperty(critConData, "system.competence.raw", a.competence.value);
+              foundry.utils.setProperty(critImbData, "system.competence.raw", a.competence.value);
             }
             if (a.overrideData && a.data) {
               foundry.utils.mergeObject(critConData, a.data, {
@@ -491,9 +435,7 @@ export default function AbilityExecutionChatPart(Base) {
             this.activations.push(
               new acts.AddDocumentsActivation({
                 display: {
-                  label:
-                    modifyEffectAutomation?.display?.label ||
-                    "TERIOCK.COMMANDS.ApplyEffect.label",
+                  label: modifyEffectAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.label",
                 },
                 primary: {
                   children: normConChildren,
@@ -515,9 +457,7 @@ export default function AbilityExecutionChatPart(Base) {
             this.activations.push(
               new acts.AddDocumentsActivation({
                 display: {
-                  label:
-                    modifyEffectAutomation?.display?.label ||
-                    "TERIOCK.COMMANDS.ApplyEffect.armament",
+                  label: modifyEffectAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.armament",
                 },
                 primary: {
                   children: normImbChildren,
@@ -542,8 +482,8 @@ export default function AbilityExecutionChatPart(Base) {
 
         // Replace `@h` with heightening amount in all rolls
         this.activations
-          .filter((a) => a.type === acts.RollActivation.TYPE)
-          .forEach((a) => {
+          .filter(a => a.type === acts.RollActivation.TYPE)
+          .forEach(a => {
             a.formula = this._heightenString(a.formula);
             a.updateSource({ formula: this._heightenString(a.formula) });
           });
@@ -553,9 +493,7 @@ export default function AbilityExecutionChatPart(Base) {
       async _buildSourcePanel() {
         const panel = await super._buildSourcePanel();
         const proficientBlock = panel.blocks.find(
-          (b) =>
-            b.title ===
-            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label"),
+          b => b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label"),
         );
         if (proficientBlock) {
           if (this.competence.proficient) {
@@ -565,9 +503,7 @@ export default function AbilityExecutionChatPart(Base) {
           }
         }
         const fluentBlock = panel.blocks.find(
-          (b) =>
-            b.title ===
-            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label"),
+          b => b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label"),
         );
         if (fluentBlock) {
           if (this.competence.fluent) {
@@ -577,8 +513,7 @@ export default function AbilityExecutionChatPart(Base) {
           }
         }
         const heightenedBlock = panel.blocks.find(
-          (b) =>
-            b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label"),
+          b => b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label"),
         );
         if (heightenedBlock) {
           if (this.heightened) {
@@ -603,9 +538,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
         if (this.heightened > 0) {
           if (this.heightened === 1) {
-            this.tags.push(
-              _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle"),
-            );
+            this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle"));
           } else {
             this.tags.push(
               _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", {
@@ -614,9 +547,7 @@ export default function AbilityExecutionChatPart(Base) {
             );
           }
         }
-        for (const c of Object.keys(this.costs).filter(
-          (c) => this.costs[c] > 0,
-        )) {
+        for (const c of Object.keys(this.costs).filter(c => this.costs[c] > 0)) {
           this.tags.push(
             _loc("TERIOCK.SYSTEMS.Applicable.PANELS.spent", {
               amount: this.costs[c],

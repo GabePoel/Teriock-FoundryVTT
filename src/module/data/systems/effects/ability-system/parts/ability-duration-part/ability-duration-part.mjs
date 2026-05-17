@@ -9,8 +9,7 @@ import { DurationModel } from "../../../../../models/unit-models/_module.mjs";
  *
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}

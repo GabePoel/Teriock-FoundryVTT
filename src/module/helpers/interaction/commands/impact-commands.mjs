@@ -22,7 +22,7 @@ async function abstractImpactCommandOperation(actor, options) {
     else await config.apply(actor, amount);
     return;
   }
-  const rollData = actor?.getRollData() || {};
+  const rollData = Object.assign(options.rollData ?? {}, actor?.getRollData() || {});
   if (options.boost) {
     formula = await boostDialog(formula, {
       boosts: options.boosts,
@@ -68,8 +68,8 @@ const impactCommands = Object.entries(impactConfig).map(([impact, config]) => {
     ...formulaCommand,
     aliases: config?.aliases || [],
     id: impact,
-    label: (options) => options.formula,
-    tooltip: (options) => (options.apply ? config.take : config.deal),
+    label: options => options.formula,
+    tooltip: options => (options.apply ? config.take : config.deal),
     icon: config.icon,
     primary: impactCommandFunctionFactory(impact, "primary"),
     secondary: impactCommandFunctionFactory(impact, "secondary"),

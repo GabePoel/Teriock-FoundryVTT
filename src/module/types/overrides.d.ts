@@ -1,9 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import { TeriockActor, TeriockUser } from "../documents/_module.mjs";
-import { TeriockManager } from "../helpers/_module.mjs";
-import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
 import { Game } from "@client/_module.mjs";
+import { Canvas } from "@client/canvas/_module.mjs";
+import { TokenLayer } from "@client/canvas/layers/_module.mjs";
+import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+import { Collection } from "@common/utils/_module.mjs";
+
+import { TeriockDocumentSheet } from "../applications/sheets/utility-sheets/_module.mjs";
+import { TeriockActorDirectory, TeriockItemDirectory } from "../applications/sidebar/_module.mjs";
+import { TeriockHotbar, TeriockNotifications } from "../applications/ui/_module.mjs";
+import { TeriockActor, TeriockUser } from "../documents/_module.mjs";
 import {
   TeriockActors,
   TeriockChatMessages,
@@ -15,8 +19,7 @@ import {
   TeriockScenes,
   TeriockUsers,
 } from "../documents/collections/_module.mjs";
-import { Canvas } from "@client/canvas/_module.mjs";
-import { TokenLayer } from "@client/canvas/layers/_module.mjs";
+import { TeriockManager } from "../helpers/_module.mjs";
 import { TeriockTooltipManager } from "../helpers/interaction/_module.mjs";
 
 declare global {
@@ -34,6 +37,7 @@ declare global {
     journal: TeriockJournal;
     macros: TeriockMacros;
     messages: TeriockChatMessages;
+    // @ts-expect-error Document extension
     packs: Collection<string, CompendiumCollection<TeriockDocument>>;
     scenes: TeriockScenes;
     tables: TeriockRollTables;
@@ -42,6 +46,7 @@ declare global {
     user: TeriockUser;
     users: TeriockUsers;
   };
+  // @ts-expect-error Doesn't know about global `ui`
   const ui: ui & {
     activeWindow: TeriockDocumentSheet;
     actors: TeriockActorDirectory;
@@ -55,11 +60,8 @@ declare global {
     invalid: boolean;
   };
 
-  function fromUuidSync<T>(uuid: UUID<T>, [options]: FromUuidOptions): T | null;
-  function fromUuid<T>(
-    uuid: UUID<T>,
-    [options]: FromUuidOptions,
-  ): Promise<T> | null;
+  function fromUuidSync<T>(uuid: UUID<T>, options?: FromUuidOptions): T | null;
+  function fromUuid<T>(uuid: UUID<T>, options?: FromUuidOptions): Promise<T> | null;
 }
 
 export {};

@@ -1,5 +1,5 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { RegionActivation } from "../activations/_module.mjs";
@@ -30,7 +30,7 @@ const { fields } = foundry.data;
  * @property {number} visibility
  * @property {{enabled: boolean, type: string, priority: number}} restriction
  */
-export default class RegionAutomation extends mix(
+export default class RegionAutomation extends mixClasses(
   CritAutomation,
   SelectDocumentsAutomationMixin,
   TriggerAutomationMixin,
@@ -113,10 +113,7 @@ export default class RegionAutomation extends mix(
         type: new fields.StringField({
           required: true,
           choices: Object.fromEntries(
-            CONST.EDGE_RESTRICTION_TYPES.map((t) => [
-              t,
-              _loc(`REGION.RESTRICTION_TYPES.${t}.label`),
-            ]),
+            CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
           ),
           initial: "move",
         }),
@@ -131,10 +128,7 @@ export default class RegionAutomation extends mix(
       targeting: new fields.BooleanField({ initial: true }),
       visibility: new fields.NumberField({
         choices: Object.fromEntries(
-          Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [
-            v,
-            _loc(`REGION.VISIBILITY.${k}.label`),
-          ]),
+          Object.entries(CONST.REGION_VISIBILITY).map(([k, v]) => [v, _loc(`REGION.VISIBILITY.${k}.label`)]),
         ),
         initial: CONST.REGION_VISIBILITY.ALWAYS,
         required: true,
@@ -205,10 +199,7 @@ export default class RegionAutomation extends mix(
    * @returns {string[]}
    */
   get _tokenPaths() {
-    return [
-      "attachToToken",
-      this.regionType === "emanation" ? "excludeToken" : "expandWithToken",
-    ];
+    return ["attachToToken", this.regionType === "emanation" ? "excludeToken" : "expandWithToken"];
   }
 
   /**
@@ -227,14 +218,8 @@ export default class RegionAutomation extends mix(
     }
     if (path === "angle") return out;
     out *= canvas.dimensions.distancePixels;
-    if (
-      this.expandWithToken &&
-      this.regionType !== "emanation" &&
-      execution &&
-      execution.actor?.defaultToken
-    ) {
-      out +=
-        (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
+    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
+      out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
     }
     return out;
   }
@@ -250,12 +235,7 @@ export default class RegionAutomation extends mix(
       type: this.regionType,
       x: 0,
       y: 0,
-      ...Object.fromEntries(
-        this._regionTypePaths.map((p) => [
-          p,
-          this.#evaluate(p, rollData, options.execution),
-        ]),
-      ),
+      ...Object.fromEntries(this._regionTypePaths.map(p => [p, this.#evaluate(p, rollData, options.execution)])),
     };
     if (this.regionType === "emanation") {
       data.base = {
@@ -290,9 +270,8 @@ export default class RegionAutomation extends mix(
       if (scope.execution && region.parent === game.scenes.viewed) {
         let releaseOthers = true;
         for (const t of (game.scenes.viewed?.tokens.contents ?? []).filter(
-          (t) =>
-            t.hasStatusEffect("ethereal") ===
-              !!scope.execution?.actor?.statuses.has("ethereal") &&
+          t =>
+            t.hasStatusEffect("ethereal") === !!scope.execution?.actor?.statuses.has("ethereal") &&
             t.testInsideRegion(region),
         )) {
           t?.object.setTarget(true, { releaseOthers });

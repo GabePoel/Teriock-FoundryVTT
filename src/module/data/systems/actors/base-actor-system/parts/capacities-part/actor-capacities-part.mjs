@@ -1,9 +1,6 @@
 import { equipmentConfig } from "../../../../../../constants/config/equipment-config.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
-import {
-  initialNumber,
-  initialString,
-} from "../../../../../fields/helpers/initializers.mjs";
+import { initialNumber, initialString } from "../../../../../fields/helpers/initializers.mjs";
 import { migrateEvaluationToNumber } from "../../../../../shared/migrations/_module.mjs";
 
 const { fields } = foundry.data;
@@ -13,7 +10,7 @@ const { utils } = foundry;
  * Actor capacities part.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -57,9 +54,7 @@ export default (Base) => {
           utils.getType(utils.getProperty(source, "weight")) === "string" &&
           utils.getProperty(source, "weight").includes("lb")
         ) {
-          source.weight = parseFloat(
-            utils.getProperty(source, "weight").replace("lb", "").trim(),
-          );
+          source.weight = parseFloat(utils.getProperty(source, "weight").replace("lb", "").trim());
         }
         migrateEvaluationToNumber(source, "size.number", { fallback: 3 });
         migrateEvaluationToNumber(source, "weight.self", { fallback: null });
@@ -70,11 +65,7 @@ export default (Base) => {
        * Prepare carrying capacity from STR.
        */
       #prepareCarryingCapacity() {
-        const factor =
-          65 +
-          20 *
-            (this.attributes.str.score +
-              Math.pow(Math.max(this.size.number - 4, 0), 2));
+        const factor = 65 + 20 * (this.attributes.str.score + Math.pow(Math.max(this.size.number - 4, 0), 2));
         this.carryingCapacity = {
           factor,
           heavy: factor * 2,
@@ -104,11 +95,8 @@ export default (Base) => {
         }
         this.weight.equipment = equipmentWeight;
         const carried = this.weight.equipment + this.weight.money;
-        this.weight.carried = carried.toNearest(
-          equipmentConfig.weight.interval,
-        );
-        const value =
-          this.weight.equipment + this.weight.money + this.weight.self;
+        this.weight.carried = carried.toNearest(equipmentConfig.weight.interval);
+        const value = this.weight.equipment + this.weight.money + this.weight.self;
         this.weight.value = value.toNearest(equipmentConfig.weight.interval);
       }
 
@@ -119,13 +107,9 @@ export default (Base) => {
         Object.assign(rollData, {
           "carry.factor": this.carryingCapacity.factor,
           "carry.heavy": this.carryingCapacity.heavy,
-          "carry.heavy.hit": Number(
-            weightCarried >= this.carryingCapacity.heavy,
-          ),
+          "carry.heavy.hit": Number(weightCarried >= this.carryingCapacity.heavy),
           "carry.light": this.carryingCapacity.light,
-          "carry.light.hit": Number(
-            weightCarried >= this.carryingCapacity.light,
-          ),
+          "carry.light.hit": Number(weightCarried >= this.carryingCapacity.light),
           "carry.max": this.carryingCapacity.max,
           "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
           size: this.size.number,
@@ -163,42 +147,29 @@ export default (Base) => {
       /** @inheritDoc */
       prepareVirtualEffects() {
         super.prepareVirtualEffects();
-        if (
-          this.encumbranceLevel > 0 &&
-          !this.isProtected("statuses", "encumbered")
-        ) {
+        if (this.encumbranceLevel > 0 && !this.isProtected("statuses", "encumbered")) {
           if (this.encumbranceLevel >= 1) {
             this.movementSpeed = Math.max(this.movementSpeed - 10, 0);
           }
           if (this.encumbranceLevel >= 2) {
             this.parent.statuses.add("slowed");
-            this.parent._addVirtualStatus(
-              "slowed",
-              "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
-              { localize: true },
-            );
+            this.parent._addVirtualStatus("slowed", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2", { localize: true });
           }
           switch (this.encumbranceLevel) {
             case 1:
-              this.parent._addVirtualStatus(
-                "encumbered",
-                "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1",
-                { localize: true },
-              );
+              this.parent._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1", {
+                localize: true,
+              });
               break;
             case 2:
-              this.parent._addVirtualStatus(
-                "encumbered",
-                "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2",
-                { localize: true },
-              );
+              this.parent._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2", {
+                localize: true,
+              });
               break;
             case 3:
-              this.parent._addVirtualStatus(
-                "encumbered",
-                "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
-                { localize: true },
-              );
+              this.parent._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3", {
+                localize: true,
+              });
               break;
           }
         }

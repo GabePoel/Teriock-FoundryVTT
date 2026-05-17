@@ -41,11 +41,7 @@ declare global {
       icon: string;
       label: string;
       morganti?: boolean;
-      reverse: (
-        actor: TeriockActor,
-        amt: number,
-        options: object,
-      ) => Promise<void>;
+      reverse: (actor: TeriockActor, amt: number, options: object) => Promise<void>;
       take: string;
       nullable?: boolean;
     };

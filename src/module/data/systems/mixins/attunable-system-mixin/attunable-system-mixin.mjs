@@ -16,17 +16,10 @@ export default function AttunableSystemMixin(Base) {
      */
     class AttunableSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Attunable",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunable"];
 
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = [
-        "system.needsAttunement",
-        "system.tier",
-        ...super.PRESERVED_PROPERTIES,
-      ];
+      static PRESERVED_PROPERTIES = ["system.needsAttunement", "system.tier", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static defineSchema() {
@@ -42,13 +35,11 @@ export default function AttunableSystemMixin(Base) {
        */
       get _attunableTags() {
         const key = this.needsAttunement.toString();
-        const tags = [
-          { label: `TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.${key}` },
-        ];
+        const tags = [{ label: `TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.${key}` }];
         if (this.isAttuned) {
           tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" });
         }
-        return tags.map((t) => {
+        return tags.map(t => {
           return { label: t.label, tooltip: "TYPES.ActiveEffect.attunement" };
         });
       }
@@ -72,11 +63,7 @@ export default function AttunableSystemMixin(Base) {
        * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
        */
       get attunement() {
-        return (
-          this.actor?.attunements.find(
-            (a) => a.system.target?.uuid === this.parent.uuid,
-          ) ?? null
-        );
+        return this.actor?.attunements.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
       }
 
       /** @inheritDoc */
@@ -89,9 +76,7 @@ export default function AttunableSystemMixin(Base) {
         return [
           {
             action: "toggleAttunedDoc",
-            icon: this.isAttuned
-              ? TERIOCK.display.icons.attunable.attune
-              : TERIOCK.display.icons.attunable.deattune,
+            icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
             onClick: async () => {
               if (this.isAttuned) await this.deattune();
               else await this.attune();
@@ -99,10 +84,7 @@ export default function AttunableSystemMixin(Base) {
             tooltip: this.isAttuned
               ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
               : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-            visible:
-              this.parent.isOwner &&
-              this.actor &&
-              this.actor.type !== "inventory",
+            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
           },
           ...super.embedIcons,
         ];
@@ -163,20 +145,17 @@ export default function AttunableSystemMixin(Base) {
           ],
         };
         if (this.parent.actor && (await this.canAttune())) {
-          attunement = await this.parent.actor.createEmbeddedDocuments(
-            "ActiveEffect",
-            [attunementData],
-          );
-          ui.notifications.success(
-            "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success",
-            { format: { name: this.parent.fullName }, localize: true },
-          );
+          attunement = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
+          ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.success", {
+            format: { name: this.parent.fullName },
+            localize: true,
+          });
           await this.parent.sheet?.render();
         } else {
-          ui.notifications.error(
-            "TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence",
-            { format: { name: this.parent.fullName }, localize: true },
-          );
+          ui.notifications.error("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", {
+            format: { name: this.parent.fullName },
+            localize: true,
+          });
         }
         return attunement;
       }
@@ -188,10 +167,8 @@ export default function AttunableSystemMixin(Base) {
        */
       async canAttune() {
         if (this.parent.actor) {
-          let tierDerived = this.tier.value;
-          const unp =
-            this.parent.actor.system.presence.max -
-            this.parent.actor.system.presence.value;
+          const tierDerived = this.tier.value;
+          const unp = this.parent.actor.system.presence.max - this.parent.actor.system.presence.value;
           return tierDerived <= unp;
         }
         return false;
@@ -206,15 +183,15 @@ export default function AttunableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async deattune() {
-        await this.parent.hookCall(`deattune`, {
+        await this.parent.hookCall("deattune", {
           scope: { attunable: this.parent },
         });
         if (this.attunement) {
           await this.attunement.delete();
-          ui.notifications.success(
-            "TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success",
-            { format: { name: this.parent.fullName }, localize: true },
-          );
+          ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success", {
+            format: { name: this.parent.fullName },
+            localize: true,
+          });
           await this.parent.sheet?.render();
         }
       }
@@ -225,29 +202,17 @@ export default function AttunableSystemMixin(Base) {
           ...super.getCardContextMenuEntries(doc),
           {
             group: "control",
-            icon: makeIcon(
-              TERIOCK.display.icons.attunable.attune,
-              "contextMenu",
-            ),
+            icon: makeIcon(TERIOCK.display.icons.attunable.attune, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
             onClick: this.attune.bind(this),
-            visible:
-              !this.isAttuned &&
-              this.actor &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
+            visible: !this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
           },
           {
             group: "control",
-            icon: makeIcon(
-              TERIOCK.display.icons.attunable.deattune,
-              "contextMenu",
-            ),
+            icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
             onClick: this.deattune.bind(this),
-            visible:
-              this.isAttuned &&
-              this.actor &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
+            visible: this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
           },
         ];
       }

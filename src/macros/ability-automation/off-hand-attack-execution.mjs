@@ -1,8 +1,6 @@
 const options = scope.execution.options;
 const actor = scope.execution.actor;
-const armaments = actor.armaments.filter(
-  (a) => a.active && actor.system.wielding.attacker?.id !== a.id,
-);
+const armaments = actor.armaments.filter(a => a.active && actor.system.wielding.attacker?.id !== a.id);
 if (armaments.length > 0) {
   const selectedArmament = await tm.dialogs.selectDocumentDialog(armaments, {
     hint: _loc("TERIOCK.DIALOGS.Select.Armament.hint"),
@@ -11,7 +9,7 @@ if (armaments.length > 0) {
   let abilities = await actor.allAbilities();
   abilities = abilities
     .filter(
-      (a) =>
+      a =>
         a.system.interaction === "attack" &&
         a.system.maneuver === "active" &&
         a.system.executionTime.base === "a1" &&

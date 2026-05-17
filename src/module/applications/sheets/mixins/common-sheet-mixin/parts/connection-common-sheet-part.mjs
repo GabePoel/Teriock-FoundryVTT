@@ -5,7 +5,7 @@ import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -16,11 +16,11 @@ export default (Base) => {
        * Connects event handlers to elements matching a selector.
        * @param {string} selector - The CSS selector for elements to connect.
        * @param {string} eventType - The event type to listen for.
-       * @param {Function} handler - The event handler function.
+       * @param {function} handler - The event handler function.
        */
       _connect(selector, eventType, handler) {
-        this.element.querySelectorAll(selector).forEach((el) =>
-          el.addEventListener(eventType, (e) => {
+        this.element.querySelectorAll(selector).forEach(el =>
+          el.addEventListener(eventType, e => {
             e.stopPropagation();
             e.preventDefault();
             handler(e);
@@ -60,24 +60,13 @@ export default (Base) => {
        * @param {boolean} [fixed]
        * @returns {ContextMenu} The created context menu.
        */
-      _connectContextMenu(
-        cssClass,
-        menuItems,
-        eventName,
-        direction,
-        fixed = false,
-      ) {
-        return /** @type {ContextMenu} */ new TeriockContextMenu(
-          this.element,
-          cssClass,
-          menuItems,
-          {
-            eventName,
-            jQuery: false,
-            fixed,
-            forceDirection: direction,
-          },
-        );
+      _connectContextMenu(cssClass, menuItems, eventName, direction, fixed = false) {
+        return /** @type {ContextMenu} */ new TeriockContextMenu(this.element, cssClass, menuItems, {
+          eventName,
+          jQuery: false,
+          fixed,
+          forceDirection: direction,
+        });
       }
     }
   );

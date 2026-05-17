@@ -14,10 +14,7 @@ const { fields } = foundry.data;
  */
 export default class ChatStatusAutomation extends CritAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.ChatStatus",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChatStatus"];
 
   /** @inheritDoc */
   static get LABEL() {

@@ -24,15 +24,7 @@ export const equipmentConfig = {
       color: colors.grey,
     },
   },
-  unidentifiedProperties: [
-    "cumbersome",
-    "destroyed",
-    "glowing",
-    "master-crafted",
-    "morganti",
-    "shattered",
-    "small",
-  ],
+  unidentifiedProperties: ["cumbersome", "destroyed", "glowing", "master-crafted", "morganti", "shattered", "small"],
   weight: { interval: 0.01 },
 };
 

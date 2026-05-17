@@ -1,5 +1,5 @@
 import { documentConfig } from "../../../../constants/config/document-config.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toTitleCase } from "../../../../helpers/string.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -13,15 +13,9 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.ArchetypeSystemData}
  * @mixes CompetenceDisplaySystem
  */
-export default class ArchetypeSystem extends mix(
-  BaseItemSystem,
-  mixins.CompetenceDisplaySystemMixin,
-) {
+export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.CompetenceDisplaySystemMixin) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Archetype",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Archetype"];
 
   /** @inheritDoc */
   static get metadata() {
@@ -47,12 +41,8 @@ export default class ArchetypeSystem extends mix(
     return Array.from(
       new Set(
         this.actor?.ranks
-          .filter((r) => r.system.archetype === this.identifier)
-          .map(
-            (r) =>
-              TERIOCK.reference.classes[r.system.className] ??
-              toTitleCase(r.system.className),
-          ),
+          .filter(r => r.system.archetype === this.identifier)
+          .map(r => TERIOCK.reference.classes[r.system.className] ?? toTitleCase(r.system.className)),
       ),
     ).sort((a, b) => a.localeCompare(b));
   }
@@ -75,7 +65,7 @@ export default class ArchetypeSystem extends mix(
     ) {
       suppressed = true;
     }
-    if (this.actor && this.ranks.filter((r) => r.active).length === 0) {
+    if (this.actor && this.ranks.filter(r => r.active).length === 0) {
       suppressed = true;
     }
     return suppressed;
@@ -98,9 +88,7 @@ export default class ArchetypeSystem extends mix(
    */
   get ranks() {
     if (!this.actor) return [];
-    return this.actor.ranks.filter(
-      (r) => r.system.archetype === this.identifier,
-    );
+    return this.actor.ranks.filter(r => r.system.archetype === this.identifier);
   }
 
   /**
@@ -108,9 +96,9 @@ export default class ArchetypeSystem extends mix(
    * @returns {Teriock.System.CompetenceLevel}
    */
   deriveCompetence() {
-    const activeRanks = this.ranks.filter((r) => r.active);
+    const activeRanks = this.ranks.filter(r => r.active);
     if (activeRanks.length === 0) return 0;
-    return Math.max(...activeRanks.map((r) => r.system.competence.value));
+    return Math.max(...activeRanks.map(r => r.system.competence.value));
   }
 
   /** @inheritDoc */

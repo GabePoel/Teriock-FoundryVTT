@@ -15,6 +15,7 @@ import "./scene/_types";
 import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
+
 import { documentConfig } from "../constants/config/document-config.mjs";
 
 declare global {
@@ -35,22 +36,15 @@ declare global {
       | "species";
 
     type ExtractKeysByDocName<T extends string> = {
-      [K in keyof DocumentConfig]: DocumentConfig[K] extends { documentName: T }
-        ? K
-        : never;
+      [K in keyof DocumentConfig]: DocumentConfig[K] extends { documentName: T } ? K : never;
     }[keyof DocumentConfig];
 
     export type ActorType = ExtractKeysByDocName<"Actor">;
     export type ItemType = ExtractKeysByDocName<"Item">;
     export type ActiveEffectType = ExtractKeysByDocName<"ActiveEffect">;
     export type CardType = ExtractKeysByDocName<"Card">;
-    export type ChildType =
-      | Teriock.Documents.ItemType
-      | Teriock.Documents.ActiveEffectType;
-    export type CommonType =
-      | Teriock.Documents.ChildType
-      | Teriock.Documents.ActorType
-      | "base";
+    export type ChildType = Teriock.Documents.ItemType | Teriock.Documents.ActiveEffectType;
+    export type CommonType = Teriock.Documents.ChildType | Teriock.Documents.ActorType | "base";
 
     export type ModelMetadata = {
       armament: boolean;

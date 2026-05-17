@@ -1,8 +1,5 @@
 const { shaders } = foundry.canvas.rendering;
-import {
-  EtherealBackgroundVisionShader,
-  EtherealColorationVisionShader,
-} from "../../rendering/ethereal-shaders.mjs";
+import { EtherealBackgroundVisionShader, EtherealColorationVisionShader } from "../../rendering/ethereal-shaders.mjs";
 import TeriockVisionMode from "./base-vision-mode.mjs";
 
 /**

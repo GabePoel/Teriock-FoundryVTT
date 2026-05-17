@@ -43,7 +43,7 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     return Object.assign(await super._prepareContext(options), {
-      transformation: ["enabled", "level", "img", "ring"].map((p) => {
+      transformation: ["enabled", "level", "img", "ring"].map(p => {
         return {
           field: this.document.system.schema.getField(`transformation.${p}`),
           localize: true,

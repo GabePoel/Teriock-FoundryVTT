@@ -13,7 +13,7 @@ const { fields } = foundry.data;
  *
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -22,17 +22,14 @@ export default (Base) => {
      */
     class AbilityCostsPart extends Base {
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = [
-        "system.costs.tweaks",
-        ...super.PRESERVED_PROPERTIES,
-      ];
+      static PRESERVED_PROPERTIES = ["system.costs.tweaks", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           costs: new fields.SchemaField({
             components: new fields.SchemaField(
-              objectMap(costConfig.components.keys, (v) => {
+              objectMap(costConfig.components.keys, v => {
                 const label = _loc("TERIOCK.COSTS.Long.component", {
                   key: _loc(v),
                 });
@@ -51,7 +48,7 @@ export default (Base) => {
               }),
             ),
             primary: new fields.SchemaField(
-              objectMap(costConfig.primary.keys, (v) => {
+              objectMap(costConfig.primary.keys, v => {
                 const label = _loc("TERIOCK.COSTS.Long.primary", {
                   key: _loc(v.label),
                 });
@@ -73,7 +70,7 @@ export default (Base) => {
             tweaks: new fields.SchemaField(
               objectMap(
                 costConfig.tweaks,
-                (v) =>
+                v =>
                   new fields.NumberField({
                     initial: 0,
                     integer: true,
@@ -103,9 +100,7 @@ export default (Base) => {
               };
             }
             if (typeof source.costs[pointCost] == "string") {
-              const variableCost = String(
-                pointCost === "mp" ? "manaCost" : "hitCost",
-              );
+              const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
               source.costs[pointCost] = {
                 type: "variable",
                 value: {
@@ -168,8 +163,8 @@ export default (Base) => {
                   })
                 : "",
           ),
-          ...Object.entries(TERIOCK.config.cost.components.keys).map(
-            ([k, v]) => (this.costs.components[k].type ? v : ""),
+          ...Object.entries(TERIOCK.config.cost.components.keys).map(([k, v]) =>
+            this.costs.components[k].type ? v : "",
           ),
         ];
       }
@@ -177,26 +172,14 @@ export default (Base) => {
       /** @inheritDoc */
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {
+          ...Object.fromEntries(Object.entries(this.costs.tweaks).map(([k, v]) => [`tweaks.${k}`, v])),
           ...Object.fromEntries(
-            Object.entries(this.costs.tweaks).map(([k, v]) => [
-              `tweaks.${k}`,
-              v,
-            ]),
-          ),
-          ...Object.fromEntries(
-            Object.entries(this.costs.components).map(([k, v]) => [
-              `components.${k}`,
-              Number(v.type),
-            ]),
+            Object.entries(this.costs.components).map(([k, v]) => [`components.${k}`, Number(v.type)]),
           ),
           ...Object.fromEntries(
             Object.entries(this.costs.primary).map(([k, v]) => [
               `costs.${k}`,
-              v.type === "formula"
-                ? v.formula
-                : v.type === "description"
-                  ? "x"
-                  : 0,
+              v.type === "formula" ? v.formula : v.type === "description" ? "x" : 0,
             ]),
           ),
         });

@@ -8,5 +8,5 @@
 export default async function createDocumentsQuery(queryData, { _timeout }) {
   const Cls = foundry.utils.getDocumentClass(queryData.documentName);
   const docs = await Cls.createDocuments(queryData.data, queryData.operation);
-  return docs.map((d) => d?.uuid || d);
+  return docs.map(d => d?.uuid || d);
 }

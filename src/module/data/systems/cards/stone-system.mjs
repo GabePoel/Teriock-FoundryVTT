@@ -22,10 +22,7 @@ export default class StoneSystem extends BaseCardsSystem {
         data,
       ),
     );
-    if (
-      !foundry.utils.hasProperty(copy, "faces") ||
-      Object.keys(copy.faces[0]).length === 0
-    ) {
+    if (!foundry.utils.hasProperty(copy, "faces") || Object.keys(copy.faces[0]).length === 0) {
       this.parent.updateSource({
         faces: [
           {
@@ -43,7 +40,7 @@ export default class StoneSystem extends BaseCardsSystem {
     if (this.parent.parent) {
       let count = 1;
       const cards = this.parent.parent?.cards.contents.filter(
-        (c) => c.type === this.parent.type && c.suit === this.parent.suit,
+        c => c.type === this.parent.type && c.suit === this.parent.suit,
       );
       cards.sort((a, b) => a.sort - b.sort);
       for (const card of cards) {

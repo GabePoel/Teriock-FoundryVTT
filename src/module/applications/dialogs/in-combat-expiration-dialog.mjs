@@ -11,10 +11,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @param {boolean} [forceDialog] - Force a dialog to show up.
  * @returns {Promise<void>}
  */
-export default async function inCombatExpirationDialog(
-  effect,
-  forceDialog = false,
-) {
+export default async function inCombatExpirationDialog(effect, forceDialog = false) {
   if (effect.system.expirations.combat.what.type === "none" && !forceDialog) {
     return;
   }
@@ -34,21 +31,14 @@ export default async function inCombatExpirationDialog(
       },
     });
     if (expire) await effect.system.expire();
-  } else if (
-    effect.system.expirations.combat.what.type === "rolled" ||
-    forceDialog
-  ) {
+  } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
     const contentHtml = document.createElement("div");
     if (effect.system.expirations.description) {
       const descriptionElement = document.createElement("fieldset");
       const descriptionLegend = document.createElement("legend");
-      descriptionLegend.innerText = _loc(
-        "TERIOCK.DIALOGS.InCombatExpiration.endConditionLegend",
-      );
+      descriptionLegend.innerText = _loc("TERIOCK.DIALOGS.InCombatExpiration.endConditionLegend");
       descriptionElement.append(descriptionLegend);
-      const descriptionText = await TextEditor.enrichHTML(
-        effect.system.expirations.description,
-      );
+      const descriptionText = await TextEditor.enrichHTML(effect.system.expirations.description);
       const descriptionDiv = document.createElement("div");
       descriptionDiv.innerHTML = descriptionText;
       descriptionElement.append(descriptionDiv);
@@ -85,9 +75,7 @@ export default async function inCombatExpirationDialog(
                   name: effect.name,
                 }),
                 styles: { dice: { classes: "condition" } },
-                threshold: Number(
-                  button.form.elements.namedItem("threshold").value,
-                ),
+                threshold: Number(button.form.elements.namedItem("threshold").value),
               },
             );
             await expirationRoll.toMessage(
@@ -100,10 +88,7 @@ export default async function inCombatExpirationDialog(
                 messageMode: game.settings.get("core", "messageMode"),
               },
             );
-            if (
-              expirationRoll.total >=
-              Number(button.form.elements.namedItem("threshold").value)
-            ) {
+            if (expirationRoll.total >= Number(button.form.elements.namedItem("threshold").value)) {
               await effect.system.expire();
             }
           },

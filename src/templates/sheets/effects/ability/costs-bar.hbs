@@ -1,10 +1,8 @@
-{{#if
-  (or
-    (eq system.costs.primary.gp.type "formula")
-    (eq system.costs.primary.hp.type "formula")
-    (eq system.costs.primary.lp.type "formula")
-    (eq system.costs.primary.mp.type "formula")
-  )
+{{#if (or
+  (eq system.costs.primary.gp.type "formula")
+  (eq system.costs.primary.hp.type "formula")
+  (eq system.costs.primary.lp.type "formula")
+  (eq system.costs.primary.mp.type "formula"))
 }}
   <div class="ab-bar">
     {{#each TERIOCK.config.cost.primary.keys as |value key|}}
@@ -15,10 +13,8 @@
             (formInput
               (path @root/systemFields.costs.fields.primary.fields key "fields.formula")
               value=(path @root/system.costs.primary key "formula")
-              disabled=(not @root/editable)
-            )
-            @root/TERIOCK.config.cost.primary.types.description
-          )
+              disabled=(not @root/editable))
+            @root/TERIOCK.config.cost.primary.types.description)
           icon=value.icon
           tooltip=(localize "TERIOCK.COSTS.Long.primary" key=value.label)
           label=value.abbreviation

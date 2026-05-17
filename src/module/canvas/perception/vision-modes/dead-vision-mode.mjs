@@ -1,8 +1,5 @@
 const { shaders } = foundry.canvas.rendering;
-import {
-  WoundedBackgroundVisionShader,
-  WoundedColorationVisionShader,
-} from "../../rendering/wounded-shader.mjs";
+import { WoundedBackgroundVisionShader, WoundedColorationVisionShader } from "../../rendering/wounded-shader.mjs";
 import TeriockVisionMode from "./base-vision-mode.mjs";
 
 /**

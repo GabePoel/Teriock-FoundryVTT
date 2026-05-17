@@ -138,7 +138,5 @@ export function secondsToReadable(totalSeconds) {
       remaining -= count * unit.seconds;
     }
   }
-  return parts.length > 0
-    ? parts.join(", ")
-    : _loc("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.short");
+  return parts.length > 0 ? parts.join(", ") : _loc("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.short");
 }

@@ -42,13 +42,7 @@ declare global {
     export type DropData<T> = {
       data?: T;
       systemType?: Teriock.Documents.CommonType;
-      type:
-        | "ActiveEffect"
-        | "Actor"
-        | "Automation"
-        | "Item"
-        | "JournalEntryPage"
-        | "Macro";
+      type: "ActiveEffect" | "Actor" | "Automation" | "Item" | "JournalEntryPage" | "Macro";
       uuid: UUID<T>;
     };
 
@@ -56,12 +50,8 @@ declare global {
       currentTarget: HTMLElement;
     }
 
-    export type EquipmentSorter = (
-      e: TeriockEquipment,
-    ) => number | string | boolean;
+    export type EquipmentSorter = (e: TeriockEquipment) => number | string | boolean;
 
-    export type AbilitySorter = (
-      a: TeriockAbility,
-    ) => number | string | boolean;
+    export type AbilitySorter = (a: TeriockAbility) => number | string | boolean;
   }
 }

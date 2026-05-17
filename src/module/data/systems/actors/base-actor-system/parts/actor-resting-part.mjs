@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -25,9 +25,7 @@ export default (Base) => {
         if (options.hp) actorUpdate["system.hp.value"] = this.hp.max;
         if (options.mp) actorUpdate["system.mp.value"] = this.mp.max;
         if (options.hpDice || options.mpDice) {
-          for (const item of this.parent.items.filter(
-            (i) => i.metadata.stats,
-          )) {
+          for (const item of this.parent.items.filter(i => i.metadata.stats)) {
             const itemUpdate = { _id: item.id };
             if (options.hpDice) itemUpdate["system.statDice.hp.spent"] = [];
             if (options.mpDice) itemUpdate["system.statDice.mp.spent"] = [];
@@ -35,15 +33,13 @@ export default (Base) => {
           }
         }
         if (options.conditions) {
-          statuses.push(
-            ...Object.values(TERIOCK.data.conditions).map((s) => s.id),
-          );
+          statuses.push(...Object.values(TERIOCK.data.conditions).map(s => s.id));
         }
         if (options.hacks) {
-          statuses.push(...Object.values(TERIOCK.data.hacks).map((s) => s.id));
+          statuses.push(...Object.values(TERIOCK.data.hacks).map(s => s.id));
         }
         if (options.cover) {
-          statuses.push(...Object.values(TERIOCK.data.cover).map((s) => s.id));
+          statuses.push(...Object.values(TERIOCK.data.cover).map(s => s.id));
         }
         if (options.combat) {
           actorUpdate["system.combat.attackPenalty"] = 0;
@@ -51,9 +47,7 @@ export default (Base) => {
         }
         await this.parent.updateEmbeddedDocuments("Item", itemUpdates);
         await this.parent.update(actorUpdate);
-        await this.parent.removeStatusEffects(
-          statuses.filter((s) => this.parent.statuses.has(s)),
-        );
+        await this.parent.removeStatusEffects(statuses.filter(s => this.parent.statuses.has(s)));
       }
 
       /**

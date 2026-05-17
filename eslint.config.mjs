@@ -1,5 +1,7 @@
 import js from "@eslint/js";
-import { defineConfig } from "eslint/config";
+import eslintConfigPrettier from "eslint-config-prettier";
+import jsdoc from "eslint-plugin-jsdoc";
+import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -24,7 +26,6 @@ const globalDocuments = {
   JournalEntryCategory: "readonly",
   JournalEntryPage: "readonly",
   Macro: "readonly",
-  MeasuredTemplateDocument: "readonly",
   NoteDocument: "readonly",
   Playlist: "readonly",
   PlaylistSound: "readonly",
@@ -84,10 +85,15 @@ const globalModule = {
   TokenMagic: "readonly",
 };
 
-export default defineConfig([
+export default tseslint.config(
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    extends: ["js/recommended"],
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    files: ["**/*.{mjs,ts}"],
+    plugins: {
+      jsdoc: jsdoc,
+      "simple-import-sort": eslintPluginSimpleImportSort,
+    },
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -98,32 +104,30 @@ export default defineConfig([
         ...globalModule,
       },
     },
-    plugins: { js },
+    settings: {
+      jsdoc: {
+        preferredTypes: {
+          ".<>": "<>",
+          Object: "object",
+          Function: "function",
+        },
+      },
+    },
     rules: {
-      "@typescript-eslint/no-unused-vars": [
-        "warn",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-        },
-      ],
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      eqeqeq: ["error", "smart"],
+      "no-console": "off",
       "no-empty": ["warn", { allowEmptyCatch: true }],
-      "no-unused-vars": [
-        "warn",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-        },
-      ],
+      "no-var": "error",
+      "prefer-const": "warn",
+      "simple-import-sort/imports": "warn",
+      "simple-import-sort/exports": "warn",
+      "jsdoc/check-types": "warn",
     },
   },
   {
     files: ["src/macros/**/*.{js,mjs}"],
-    languageOptions: {
-      globals: {
-        ...globalMacro,
-      },
-    },
+    languageOptions: { globals: { ...globalMacro } },
   },
-  tseslint.configs.recommended,
-]);
+  eslintConfigPrettier,
+);

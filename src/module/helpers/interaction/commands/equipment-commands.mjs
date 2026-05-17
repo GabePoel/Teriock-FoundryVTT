@@ -19,86 +19,86 @@ function equipmentCommandFunctionFactory(filter, onSelect, hint, title) {
       noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
       title,
     });
-    await Promise.all(chosen.map((e) => onSelect(e)));
+    await Promise.all(chosen.map(e => onSelect(e)));
   };
 }
 
 /** @see {EquipmentSuppressionPart.shatter} */
 const takeShatter = equipmentCommandFunctionFactory(
-  (e) => !e.system.shattered,
-  (e) => e.system.shatter(),
+  e => !e.system.shattered,
+  e => e.system.shatter(),
   "TERIOCK.COMMANDS.Shatter.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.shatter",
 );
 
 /** @see {EquipmentSuppressionPart.repair} */
 const takeRepair = equipmentCommandFunctionFactory(
-  (e) => e.system.shattered,
-  (e) => e.system.repair(),
+  e => e.system.shattered,
+  e => e.system.repair(),
   "TERIOCK.COMMANDS.Repair.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.repair",
 );
 
 /** @see {EquipmentSuppressionPart.destroy} */
 const takeDestroy = equipmentCommandFunctionFactory(
-  (e) => !e.system.destroyed,
-  (e) => e.system.destroy(),
+  e => !e.system.destroyed,
+  e => e.system.destroy(),
   "TERIOCK.COMMANDS.Destroy.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.destroy",
 );
 
 /** @see {EquipmentSuppressionPart.reforge} */
 const takeReforge = equipmentCommandFunctionFactory(
-  (e) => e.system.destroyed,
-  (e) => e.system.reforge(),
+  e => e.system.destroyed,
+  e => e.system.reforge(),
   "TERIOCK.COMMANDS.Reforge.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.reforge",
 );
 
 /** @see {EquipmentWieldingPart.glue} */
 const takeGlue = equipmentCommandFunctionFactory(
-  (e) => !e.system.glued,
-  (e) => e.system.glue(),
+  e => !e.system.glued,
+  e => e.system.glue(),
   "TERIOCK.COMMANDS.Glue.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.glue",
 );
 
 /** @see {EquipmentWieldingPart.unglue} */
 const takeUnglue = equipmentCommandFunctionFactory(
-  (e) => e.system.glued,
-  (e) => e.system.unglue(),
+  e => e.system.glued,
+  e => e.system.unglue(),
   "TERIOCK.COMMANDS.Unglue.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
 );
 
 /** @see {EquipmentSuppressionPart.dampen} */
 const takeDampen = equipmentCommandFunctionFactory(
-  (e) => !e.system.dampened,
-  (e) => e.system.dampen(),
+  e => !e.system.dampened,
+  e => e.system.dampen(),
   "TERIOCK.COMMANDS.Dampen.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.dampen",
 );
 
 /** @see {EquipmentSuppressionPart.undampen} */
 const takeUndampen = equipmentCommandFunctionFactory(
-  (e) => e.system.dampened,
-  (e) => e.system.undampen(),
+  e => e.system.dampened,
+  e => e.system.undampen(),
   "TERIOCK.COMMANDS.Undampen.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
 );
 
 /** @see {IdentificationModel.identify} */
 const takeIdentify = equipmentCommandFunctionFactory(
-  (e) => !e.system.identification.identified,
-  (e) => e.system.identification.identify(),
+  e => !e.system.identification.identified,
+  e => e.system.identification.identify(),
   "TERIOCK.COMMANDS.Identify.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.identify",
 );
 
 /** @see {IdentificationModel.readMagic} */
 const takeReadMagic = equipmentCommandFunctionFactory(
-  (e) => !e.system.identification.read,
-  (e) => e.system.identification.readMagic(),
+  e => !e.system.identification.read,
+  e => e.system.identification.readMagic(),
   "TERIOCK.COMMANDS.Glue.hint",
   "TERIOCK.SYSTEMS.Equipment.MENU.glue",
 );

@@ -1,7 +1,4 @@
-import {
-  TeriockJournalEntry,
-  TeriockJournalEntryCategory,
-} from "../_module.mjs";
+import { TeriockJournalEntry, TeriockJournalEntryCategory } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Documents {

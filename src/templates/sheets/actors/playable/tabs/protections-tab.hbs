@@ -4,19 +4,13 @@
     <div class="teriock-block-display">
       <div class="tgrid g4 condition-toggle-container">
         {{#each protectionButtons as |b|}}
-          <div
-            class="condition-toggle"
-            data-action="{{b.action}}"
-            data-tooltip="{{b.tooltip}}"
-          >
+          <div class="condition-toggle" data-action="{{ b.action }}" data-tooltip="{{ b.tooltip }}">
             <div class="condition-image-container">
               <div class="condition-image">
-                <img src="{{b.img}}" alt="">
+                <img src="{{ b.img }}" alt="" />
               </div>
             </div>
-            <div class="condition-label tsubtle">
-              {{b.label}}
-            </div>
+            <div class="condition-label tsubtle">{{ b.label }}</div>
           </div>
         {{/each}}
       </div>
@@ -25,7 +19,9 @@
       <div class="teriock-block-container medium">
         <div class="teriock-block-container-start" style="display: none;"></div>
         {{#each protectionEntries as |p|}}
-          {{> "teriock/ui/block" p}}
+          {{> "teriock/ui/block"
+            p
+          }}
         {{/each}}
         <div class="no-results medium">
           <p>{{localize "TERIOCK.SHEETS.Common.SEARCH.noProtections"}}</p>

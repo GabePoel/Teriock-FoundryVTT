@@ -59,7 +59,7 @@ export default class DependentsRegistry {
     if (this.#disabled) return [];
     doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);
     return Array.from(this.#dependents.get(doc?.uuid) ?? [])
-      .map((uuid) => this.fetchFromUuid(doc, uuid))
+      .map(uuid => this.fetchFromUuid(doc, uuid))
       .filter(Boolean);
   }
 

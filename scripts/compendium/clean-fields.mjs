@@ -42,16 +42,14 @@ function cleanCommon(doc) {
   }
   if (doc.system.qualifiers) {
     if (doc.system.qualifiers.ephemeral?.saved) {
-      doc.system.qualifiers.ephemeral.raw =
-        doc.system.qualifiers.ephemeral.saved;
+      doc.system.qualifiers.ephemeral.raw = doc.system.qualifiers.ephemeral.saved;
       delete doc.system.qualifiers.ephemeral.saved;
     }
     if (isZero(doc.system.qualifiers.ephemeral?.raw)) {
       delete doc.system.qualifiers.ephemeral;
     }
     if (doc.system.qualifiers.suppressed?.saved) {
-      doc.system.qualifiers.suppressed.raw =
-        doc.system.qualifiers.suppressed.saved;
+      doc.system.qualifiers.suppressed.raw = doc.system.qualifiers.suppressed.saved;
       delete doc.system.qualifiers.suppressed.saved;
     }
     if (isZero(doc.system.qualifiers.suppressed?.raw)) {
@@ -316,15 +314,7 @@ function cleanAutomations(automations) {
     if (["addDocuments", "modifyEffect", "region"].includes(v.type)) {
       if (!v?.overrideData) delete v.data;
     }
-    if (
-      [
-        "addDocuments",
-        "modifyEffect",
-        "tradecraft",
-        "transformation",
-        "useDocuments",
-      ].includes(v.type)
-    ) {
+    if (["addDocuments", "modifyEffect", "tradecraft", "transformation", "useDocuments"].includes(v.type)) {
       if (!v?.overrideCompetence) delete v.competence;
     }
   }
@@ -358,10 +348,7 @@ function cleanAutomation(automation) {
  * @param {string|number} formula
  */
 function isZero(formula) {
-  return (
-    (typeof formula === "string" || typeof formula === "number") &&
-    (!formula || formula === "0")
-  );
+  return (typeof formula === "string" || typeof formula === "number") && (!formula || formula === "0");
 }
 
 /** @param {object} obj */

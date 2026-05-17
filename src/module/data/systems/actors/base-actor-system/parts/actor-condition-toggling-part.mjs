@@ -2,7 +2,7 @@
  * Actor data model mixin that handles condition toggling.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -16,9 +16,7 @@ export default (Base) => {
        */
       async removeCondition(status) {
         await this.parent.toggleStatusEffect(status, { active: false });
-        const toRemove = this.parent.consequences
-          .filter((c) => c.statuses.has(status))
-          .map((c) => c.id);
+        const toRemove = this.parent.consequences.filter(c => c.statuses.has(status)).map(c => c.id);
         await this.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
       }
     }

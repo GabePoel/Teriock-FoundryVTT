@@ -5,7 +5,7 @@ import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -16,13 +16,9 @@ export default (Base) =>
      * @param {object} context
      */
     async _prepareConditionContext(context) {
-      const removableConditions = this.actor.conditions.map(
-        (c) => c.system.conditionKey,
-      );
+      const removableConditions = this.actor.conditions.map(c => c.system.conditionKey);
       const liveConditions = conditionSort(
-        Array.from(this.actor.statuses || []).filter((c) =>
-          Object.keys(TERIOCK.index.conditions).includes(c),
-        ),
+        Array.from(this.actor.statuses || []).filter(c => Object.keys(TERIOCK.index.conditions).includes(c)),
       );
       Object.assign(context, {
         conditions: liveConditions,
@@ -52,11 +48,9 @@ export default (Base) =>
           icon: TERIOCK.config.document.condition.icon,
         };
         /** @type {TeriockTokenDocument[]} */
-        const tokenDocs = Array.from(
-          this.document.system.conditionInformation[condition]?.trackers,
-        )
-          .map((uuid) => fromUuidSync(uuid))
-          .filter((t) => t);
+        const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers)
+          .map(uuid => fromUuidSync(uuid))
+          .filter(t => t);
         if (tokenDocs.length > 0) {
           /** @type {Teriock.Messages.MessageAssociation} */
           const association = {
@@ -77,8 +71,7 @@ export default (Base) =>
           }
           panelParts.associations.push(association);
         }
-        context.conditionTooltips[condition] =
-          await TeriockTextEditor.makeTooltip(panelParts);
+        context.conditionTooltips[condition] = await TeriockTextEditor.makeTooltip(panelParts);
       }
     }
 

@@ -1,7 +1,8 @@
-import { TeriockActiveEffect, TeriockTokenDocument } from "../_module.mjs";
-import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
-import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
 import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+
+import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
+import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
+import { TeriockActiveEffect, TeriockTokenDocument } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Data {

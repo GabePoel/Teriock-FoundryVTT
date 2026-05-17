@@ -1,9 +1,6 @@
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { initialString } from "../../fields/helpers/initializers.mjs";
-import {
-  ThresholdDataMixin,
-  UsableDataMixin,
-} from "../../shared/mixins/_module.mjs";
+import { ThresholdDataMixin, UsableDataMixin } from "../../shared/mixins/_module.mjs";
 import EvaluationModel from "../evaluation-model.mjs";
 
 const { fields } = foundry.data;
@@ -13,11 +10,7 @@ const { fields } = foundry.data;
  * @extends {EvaluationModel}
  * @extends {Teriock.Models.BaseModifierModelData}
  */
-export default class BaseModifierModel extends mix(
-  EvaluationModel,
-  UsableDataMixin,
-  ThresholdDataMixin,
-) {
+export default class BaseModifierModel extends mixClasses(EvaluationModel, UsableDataMixin, ThresholdDataMixin) {
   /** @inheritDoc */
   static defineSchema(options = {}) {
     return Object.assign(super.defineSchema(options), {

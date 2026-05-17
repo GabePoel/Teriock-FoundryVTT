@@ -6,10 +6,7 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {string}
    */
   static get loadingPanelHTML() {
-    return TERIOCK.display.panel.loading.replace(
-      "TERIOCK.LOADING",
-      _loc("TERIOCK.TERMS.Common.loading"),
-    );
+    return TERIOCK.display.panel.loading.replace("TERIOCK.LOADING", _loc("TERIOCK.TERMS.Common.loading"));
   }
 
   /**

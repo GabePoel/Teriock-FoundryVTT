@@ -41,7 +41,7 @@ export function toCamelCase(str) {
         .toLowerCase()
         .replace(/[^a-z0-9]+(.)/gi, (_, c) => c.toUpperCase())
         .replace(/[^a-z0-9]/gi, "")
-        .replace(/^[A-Z]/, (c) => c.toLowerCase());
+        .replace(/^[A-Z]/, c => c.toLowerCase());
 }
 
 /**
@@ -50,9 +50,7 @@ export function toCamelCase(str) {
  * @returns {string} The Title Case version of the string.
  */
 export function toTitleCase(str) {
-  return str
-    .toLowerCase()
-    .replace(/(?:^|\s|-)\w/g, (match) => match.toUpperCase());
+  return str.toLowerCase().replace(/(?:^|\s|-)\w/g, match => match.toUpperCase());
 }
 
 /**
@@ -105,7 +103,7 @@ export function toInt(str) {
  * @returns {string}
  */
 export function dotJoin(strings) {
-  return strings.filter((s) => s).join(" · ");
+  return strings.filter(s => s).join(" · ");
 }
 
 /**
@@ -118,11 +116,7 @@ export function dotJoin(strings) {
  * @returns {ID<*>}
  */
 export function toId(str, options = {}) {
-  const {
-    background = "0000000000000000",
-    length = 16,
-    hash = false,
-  } = options;
+  const { background = "0000000000000000", length = 16, hash = false } = options;
   if (hash) {
     const FNV_OFFSET_64 = 0xcbf29ce484222325n;
     const FNV_PRIME_64 = 0x100000001b3n;
@@ -146,12 +140,12 @@ export function toId(str, options = {}) {
 export function dedent(str) {
   const lines = str.split("\n");
   const minIndent = lines
-    .filter((line) => line.trim())
+    .filter(line => line.trim())
     .reduce((min, line) => {
       const match = line.match(/^(\s*)/);
       return Math.min(min, match ? match[1].length : 0);
     }, Infinity);
-  return lines.map((line) => line.slice(minIndent)).join("\n");
+  return lines.map(line => line.slice(minIndent)).join("\n");
 }
 
 /**

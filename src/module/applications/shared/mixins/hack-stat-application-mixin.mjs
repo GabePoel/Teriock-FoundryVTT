@@ -22,7 +22,7 @@ export default function HackStatApplicationMixin(Base) {
        */
       static async _onRollStatDie(_event, target) {
         const statDie = this._getStatDie(target);
-        let criticallyWounded = this.document.statuses.has("criticallyWounded");
+        const criticallyWounded = this.document.statuses.has("criticallyWounded");
         await statDie.use(this._consumeStatDie ?? true);
         if (!criticallyWounded) await this.document.system.takeAwaken();
       }
@@ -71,24 +71,20 @@ export default function HackStatApplicationMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        this.element
-          .querySelectorAll("[data-action=rollStatDie]")
-          .forEach((el) => {
-            el.addEventListener("contextmenu", async (ev) => {
-              ev.preventDefault();
-              await this._unrollStatDie(ev, el);
-              ev.stopPropagation();
-            });
+        this.element.querySelectorAll("[data-action=rollStatDie]").forEach(el => {
+          el.addEventListener("contextmenu", async ev => {
+            ev.preventDefault();
+            await this._unrollStatDie(ev, el);
+            ev.stopPropagation();
           });
-        this.element
-          .querySelectorAll("[data-action=takeHack]")
-          .forEach((el) => {
-            el.addEventListener("contextmenu", async (ev) => {
-              ev.preventDefault();
-              if (this._hackForward) await onTakeUnhack(this.document, ev, el);
-              else await onTakeHack(this.document, ev, el);
-            });
+        });
+        this.element.querySelectorAll("[data-action=takeHack]").forEach(el => {
+          el.addEventListener("contextmenu", async ev => {
+            ev.preventDefault();
+            if (this._hackForward) await onTakeUnhack(this.document, ev, el);
+            else await onTakeHack(this.document, ev, el);
           });
+        });
       }
 
       /** @inheritDoc */

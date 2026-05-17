@@ -47,7 +47,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     canvas.app.view.oncontextmenu = null;
     canvas.app.view.onwheel = null;
     this.#initialLayer.activate();
-    await Promise.all((this.sheets || []).map((s) => s?.maximize()));
+    await Promise.all((this.sheets || []).map(s => s?.maximize()));
   }
 
   /**
@@ -70,10 +70,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       y: this.document.y,
     });
     this.document.updateSource(destination);
-    const templates = await canvas.scene.createEmbeddedDocuments(
-      "MeasuredTemplate",
-      [this.document.toObject()],
-    );
+    const templates = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject()]);
     this.#events.resolve(templates[0]);
   }
 
@@ -154,7 +151,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
       this.layer.preview.addChild(this);
 
       // Hide the sheets that originated the preview
-      await Promise.all((this.sheets || []).map((s) => s?.minimize()));
+      await Promise.all((this.sheets || []).map(s => s?.minimize()));
 
       // Activate interactivity
       return this.activatePreviewListeners(initialLayer);
@@ -164,10 +161,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
         y: this.document.y,
       });
       this.document.updateSource(destination);
-      const templates = await canvas.scene.createEmbeddedDocuments(
-        "MeasuredTemplate",
-        [this.document.toObject()],
-      );
+      const templates = await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [this.document.toObject()]);
       return templates[0];
     }
   }

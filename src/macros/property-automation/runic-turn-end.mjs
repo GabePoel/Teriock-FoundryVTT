@@ -15,20 +15,14 @@ if (
         start: scope.effect.fullName,
         end: scope.item.fullName,
       }),
-      icon: teriock.helpers.utils.makeIconClass(
-        TERIOCK.display.icons.break.repair,
-        "title",
-      ),
+      icon: teriock.helpers.utils.makeIconClass(TERIOCK.display.icons.break.repair, "title"),
     },
     content,
     yes: {
       label: _loc("TERIOCK.ROLLS.Base.name", {
         value: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
       }),
-      icon: teriock.helpers.utils.makeIconClass(
-        TERIOCK.display.icons.ui.dice,
-        "title",
-      ),
+      icon: teriock.helpers.utils.makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
     },
   });
   if (proceed) {

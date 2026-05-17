@@ -7,7 +7,7 @@ const { EmbeddedDataField } = foundry.data.fields;
  * Equipment data model mixin that handles identifying and reading magic.
  * @param {typeof EquipmentSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseItemSystem}
@@ -68,9 +68,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       get isSecret() {
-        return (
-          (!this.identification.identified && !game.user.isGM) || super.isSecret
-        );
+        return (!this.identification.identified && !game.user.isGM) || super.isSecret;
       }
 
       /** @inheritdoc */
@@ -79,39 +77,24 @@ export default (Base) => {
           ...super.getCardContextMenuEntries(doc),
           {
             group: "usage",
-            icon: makeIcon(
-              TERIOCK.display.icons.equipment.identify,
-              "contextMenu",
-            ),
+            icon: makeIcon(TERIOCK.display.icons.equipment.identify, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.identify"),
             onClick: this.identification.identify.bind(this.identification),
             visible: this.parent.isOwner && !this.identification.identified,
           },
           {
             group: "usage",
-            icon: makeIcon(
-              TERIOCK.display.icons.equipment.readMagic,
-              "contextMenu",
-            ),
+            icon: makeIcon(TERIOCK.display.icons.equipment.readMagic, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.readMagic"),
             onClick: this.identification.readMagic.bind(this.identification),
-            visible:
-              this.parent.isOwner &&
-              !this.identification.identified &&
-              !this.identification.read,
+            visible: this.parent.isOwner && !this.identification.identified && !this.identification.read,
           },
           {
             group: "usage",
-            icon: makeIcon(
-              TERIOCK.display.icons.equipment.unidentify,
-              "contextMenu",
-            ),
+            icon: makeIcon(TERIOCK.display.icons.equipment.unidentify, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unidentify"),
             onClick: this.identification.unidentify.bind(this.identification),
-            visible:
-              this.parent.isOwner &&
-              this.identification.identified &&
-              game.user.isGM,
+            visible: this.parent.isOwner && this.identification.identified && game.user.isGM,
           },
         ];
       }

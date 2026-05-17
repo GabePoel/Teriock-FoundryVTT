@@ -12,11 +12,7 @@ export default function HierarchySystemMixin(Base) {
      */
     class HierarchySystem extends Base {
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = [
-        "system._ref",
-        "system._sup",
-        ...super.PRESERVED_PROPERTIES,
-      ];
+      static PRESERVED_PROPERTIES = ["system._ref", "system._sup", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static defineSchema() {

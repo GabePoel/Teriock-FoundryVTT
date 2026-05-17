@@ -15,10 +15,7 @@ export default function SelectAutomationMixin(Base) {
      */
     class SelectAutomation extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.Select",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Select"];
 
       /** @inheritDoc */
       static defineSchema() {

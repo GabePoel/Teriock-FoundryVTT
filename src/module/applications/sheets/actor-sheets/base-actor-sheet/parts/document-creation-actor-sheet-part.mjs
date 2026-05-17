@@ -1,7 +1,7 @@
 import { ucFirst } from "../../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -15,7 +15,7 @@ export default (Base) =>
     #createContextMenu(cssClass, types) {
       this._connectContextMenu(
         cssClass,
-        types.map((t) => this.#createContextMenuEntry(t)),
+        types.map(t => this.#createContextMenuEntry(t)),
         "contextmenu",
         undefined,
         true,
@@ -41,15 +41,8 @@ export default (Base) =>
     async _onRender(context, options) {
       await super._onRender(context, options);
       if (!this.isEditable) return;
-      this.#createContextMenu(".equipment-add-button", [
-        "equipment",
-        "body",
-        "mount",
-      ]);
-      this.#createContextMenu(".consequence-add-button", [
-        "consequence",
-        "attunement",
-      ]);
+      this.#createContextMenu(".equipment-add-button", ["equipment", "body", "mount"]);
+      this.#createContextMenu(".consequence-add-button", ["consequence", "attunement"]);
       this.#createContextMenu(".power-add-button", ["species", "power"]);
     }
   };

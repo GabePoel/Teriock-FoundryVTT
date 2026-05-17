@@ -7,10 +7,8 @@ const speciesContext = {
   species: "TYPES.Item.species",
 
   transformation: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
-  "transformation.primary":
-    "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
-  "transformation.level":
-    "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
+  "transformation.primary": "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
+  "transformation.level": "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
   size: "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label",
   "size.max": "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label",
   "size.min": "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label",

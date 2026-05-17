@@ -1,8 +1,6 @@
 import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
-const use = simpleCommandFunctionFactory((a, o) =>
-  a.useDocument("basic-attack", { ...o, type: "ability" }),
-);
+const use = simpleCommandFunctionFactory((a, o) => a.useDocument("basic-attack", { ...o, type: "ability" }));
 
 /**
  * Attack command

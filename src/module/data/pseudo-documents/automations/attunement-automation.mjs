@@ -6,10 +6,7 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 
 export default class AttunementAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Attunement",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunement"];
 
   /** @inheritDoc */
   static get LABEL() {

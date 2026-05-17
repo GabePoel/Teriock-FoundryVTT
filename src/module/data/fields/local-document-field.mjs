@@ -13,9 +13,7 @@ export default class LocalDocumentField extends DocumentIdField {
    */
   constructor(model, options = {}) {
     if (!foundry.utils.isSubclass(model, foundry.abstract.DataModel)) {
-      throw new Error(
-        "A LocalDocumentField must specify a DataModel subclass as its type",
-      );
+      throw new Error("A LocalDocumentField must specify a DataModel subclass as its type");
     }
     super(options);
     this.model = model;
@@ -41,9 +39,7 @@ export default class LocalDocumentField extends DocumentIdField {
   _cast(value) {
     if (typeof value === "string") return value;
     if (value instanceof this.model) return value._id;
-    throw new Error(
-      `The value provided to a LocalDocumentField must be a ${this.model.name} instance.`,
-    );
+    throw new Error(`The value provided to a LocalDocumentField must be a ${this.model.name} instance.`);
   }
 
   /**
@@ -57,10 +53,7 @@ export default class LocalDocumentField extends DocumentIdField {
     try {
       return model.parent.getEmbeddedCollection(collection);
     } catch {
-      return (
-        model.parent[collection] ??
-        this._findCollection(model.parent, collection)
-      );
+      return model.parent[collection] ?? this._findCollection(model.parent, collection);
     }
   }
 
@@ -71,14 +64,8 @@ export default class LocalDocumentField extends DocumentIdField {
 
   /** @override */
   initialize(value, model, _options = {}) {
-    if (this.idOnly)
-      return this.options?.fallback || foundry.data.validators.isValidId(value)
-        ? value
-        : null;
-    const collection = this._findCollection(
-      model,
-      this.model.metadata.collection,
-    );
+    if (this.idOnly) return this.options?.fallback || foundry.data.validators.isValidId(value) ? value : null;
+    const collection = this._findCollection(model, this.model.metadata.collection);
     return () => {
       const document = collection?.get(value);
       if (!document) return this.options?.fallback ? value : null;

@@ -23,10 +23,7 @@ export default class BaseRoll extends Roll {
    */
   constructor(formula, data, options = {}) {
     super(formula, data, options);
-    this.options = foundry.utils.mergeObject(
-      this.constructor.defaultOptions,
-      options,
-    );
+    this.options = foundry.utils.mergeObject(this.constructor.defaultOptions, options);
 
     // If we don't do this, then the targets will be raw classes instead of JSON parsable objects
     this.targets = this.options.targets;
@@ -127,9 +124,7 @@ export default class BaseRoll extends Roll {
    */
   static parseEvent(event) {
     return {
-      showDialog: game.teriock.getSetting("showRollDialogs")
-        ? event.button !== 2
-        : event.button === 2,
+      showDialog: game.teriock.getSetting("showRollDialogs") ? event.button !== 2 : event.button === 2,
     };
   }
 
@@ -139,7 +134,7 @@ export default class BaseRoll extends Roll {
    */
   static resetFormulas(roll) {
     for (const term of roll.terms) {
-      if (term?.rolls) term.rolls.forEach((r) => this.resetFormulas(r));
+      if (term?.rolls) term.rolls.forEach(r => this.resetFormulas(r));
       if (term?.isBooster) term.result = term.rolls[0].total;
     }
     roll.resetFormula();
@@ -209,9 +204,7 @@ export default class BaseRoll extends Roll {
 
   /** @returns {Teriock.Dice.DieStyles} */
   get styles() {
-    return foundry.utils.deepClone(
-      this.options.styles ?? this.constructor.defaultOptions.styles,
-    );
+    return foundry.utils.deepClone(this.options.styles ?? this.constructor.defaultOptions.styles);
   }
 
   /**
@@ -235,16 +228,13 @@ export default class BaseRoll extends Roll {
 
   /** @param {Teriock.Dice.RawDieTarget[]} targets */
   set targets(targets) {
-    this.options.targets = targets.map((t) => this.#parseTarget(t));
+    this.options.targets = targets.map(t => this.#parseTarget(t));
   }
 
   /** @returns {number|null} */
   get threshold() {
     if (["number"].includes(typeof this.options.threshold)) {
-      if (
-        typeof this.options.threshold === "string" &&
-        !this.options.threshold
-      ) {
+      if (typeof this.options.threshold === "string" && !this.options.threshold) {
         return null;
       }
       const th = Number(this.options.threshold);
@@ -326,9 +316,7 @@ export default class BaseRoll extends Roll {
         onClick: async () => {
           const reroll = this.clone();
           await reroll.evaluate();
-          await reroll.toMessage(
-            options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() },
-          );
+          await reroll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
         },
       },
     ];
@@ -372,24 +360,14 @@ export default class BaseRoll extends Roll {
    * @param {object} [options]
    */
   bindContextMenus(element, options = {}) {
-    new TeriockContextMenu(
-      element,
-      `.dice-formula[data-id="${this.id}"]`,
-      this._getFormulaContextOptions(options),
-      {
-        fixed: false,
-        jQuery: false,
-      },
-    );
-    new TeriockContextMenu(
-      element,
-      `.dice-total[data-id="${this.id}"]`,
-      this._getTotalContextOptions(options),
-      {
-        fixed: false,
-        jQuery: false,
-      },
-    );
+    new TeriockContextMenu(element, `.dice-formula[data-id="${this.id}"]`, this._getFormulaContextOptions(options), {
+      fixed: false,
+      jQuery: false,
+    });
+    new TeriockContextMenu(element, `.dice-total[data-id="${this.id}"]`, this._getTotalContextOptions(options), {
+      fixed: false,
+      jQuery: false,
+    });
   }
 
   /**
@@ -401,8 +379,8 @@ export default class BaseRoll extends Roll {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
     if (!clone._evaluated) await clone.evaluate();
-    const die = selectWeightedMaxFaceDie(clone.dice);
-    die._number += 1;
+    const die = selectWeightedMaxFaceDie(clone);
+    die._number = (die.number ?? 0) + 1;
     const dieRoll = new BaseRoll(die.formula);
     await dieRoll.evaluate();
     die.results.push(dieRoll.dice[0].results.at(-1));
@@ -443,8 +421,8 @@ export default class BaseRoll extends Roll {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
     if (!clone._evaluated) await clone.evaluate();
-    const die = selectWeightedMaxFaceDie(clone.dice);
-    die._number = Math.max(0, die._number - 1);
+    const die = selectWeightedMaxFaceDie(clone);
+    die._number = Math.max(0, (die.number ?? 0) - 1);
     die.results.pop();
     this.constructor.resetFormulas(clone);
     return this.constructor.fromTerms(
@@ -502,10 +480,7 @@ export default class BaseRoll extends Roll {
       {
         system: {
           panels: panels,
-          activations:
-            teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
-              activations,
-            ),
+          activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(activations),
         },
       },
       messageData,

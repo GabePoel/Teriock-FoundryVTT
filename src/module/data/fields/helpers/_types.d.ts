@@ -1,5 +1,5 @@
-import { TeriockActor } from "../../../documents/_module.mjs";
 import { transformationConfig } from "../../../constants/config/transformation-config.mjs";
+import { TeriockActor } from "../../../documents/_module.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
 export type SpeciesTransformationConfig = {

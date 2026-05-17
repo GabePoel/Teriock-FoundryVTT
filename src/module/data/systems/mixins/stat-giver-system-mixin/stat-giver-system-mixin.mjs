@@ -1,9 +1,6 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
-import {
-  HpPoolModel,
-  MpPoolModel,
-} from "../../../models/stat-pool-models/_module.mjs";
+import { HpPoolModel, MpPoolModel } from "../../../models/stat-pool-models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -20,10 +17,7 @@ export default function StatGiverSystemMixin(Base) {
      */
     class StatGiverSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.StatGiver",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.StatGiver"];
 
       /** @inheritDoc */
       static get metadata() {
@@ -92,10 +86,7 @@ export default function StatGiverSystemMixin(Base) {
                 "system.statDice.hp.disabled": false,
               });
             },
-            visible:
-              this.statDice.hp.disabled &&
-              this._canToggleHpDice &&
-              doc !== this.parent,
+            visible: this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
           },
           {
             group: "control",
@@ -104,10 +95,7 @@ export default function StatGiverSystemMixin(Base) {
             onClick: async () => {
               await this.parent.update({ "system.statDice.hp.disabled": true });
             },
-            visible:
-              !this.statDice.hp.disabled &&
-              this._canToggleHpDice &&
-              doc !== this.parent,
+            visible: !this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
           },
           {
             group: "control",

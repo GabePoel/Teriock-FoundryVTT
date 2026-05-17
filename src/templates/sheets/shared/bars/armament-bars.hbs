@@ -1,10 +1,8 @@
-{{#if
-  (or
-    (exists system.attackPenalty)
-    (exists system.damage.base)
-    (exists system.damage.twoHanded)
-    (exists system.hitBonus)
-  )
+{{#if (or
+  (exists system.attackPenalty)
+  (exists system.damage.base)
+  (exists system.damage.twoHanded)
+  (exists system.hitBonus))
 }}
   <div class="ab-bar">
     {{formBox
@@ -14,22 +12,17 @@
           tooltip=(ifThen
             (exists system._source.damage.twoHanded)
             (localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label")
-            ""
-          )
-        )
+            ""))
         disabled=(not editable)
-        value=system._source.damage.base
-      )
+        value=system._source.damage.base)
       secondary=(formInput
         (ifThen
           (exists system._source.damage.twoHanded)
           systemFields.damage.fields.twoHanded
-          systemFields.damage.fields.base
-        )
+          systemFields.damage.fields.base)
         dataset=(object tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label"))
         disabled=(not editable)
-        value=system._source.damage.twoHanded
-      )
+        value=system._source.damage.twoHanded)
       icon=TERIOCK.display.icons.ui.damage
       include=(exists system.damage.base)
       includeSecondary=(exists system._source.damage.twoHanded)
@@ -40,8 +33,7 @@
       (formInput
         systemFields.hitBonus
         disabled=(not editable)
-        value=system._source.hitBonus
-      )
+        value=system._source.hitBonus)
       icon=TERIOCK.display.icons.armament.hitBonus
       include=(exists system.hitBonus)
       label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.abbreviation")
@@ -52,8 +44,7 @@
       (formInput
         systemFields.attackPenalty
         disabled=(not editable)
-        value=system._source.attackPenalty
-      )
+        value=system._source.attackPenalty)
       icon=TERIOCK.display.icons.armament.ap
       label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.abbreviation")
       unselected=system.attackPenalty
@@ -61,19 +52,16 @@
     }}
   </div>
 {{/if}}
-{{#if
-  (or
-    (exists system.av.raw)
-    (exists system.bv.raw)
-  )
+{{#if (or
+  (exists system.av.raw)
+  (exists system.bv.raw))
 }}
   <div class="ab-bar">
     {{formBox
       (formInput
         systemFields.av
         disabled=(not editable)
-        value=system._source.av.raw
-      )
+        value=system._source.av.raw)
       icon=TERIOCK.display.icons.armament.av
       include=(exists system.av.raw)
       label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.abbreviation")
@@ -84,8 +72,7 @@
       (formInput
         systemFields.bv
         disabled=(not editable)
-        value=system._source.bv.raw
-      )
+        value=system._source.bv.raw)
       icon=TERIOCK.display.icons.armament.bv
       include=(exists system.bv.raw)
       label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.abbreviation")

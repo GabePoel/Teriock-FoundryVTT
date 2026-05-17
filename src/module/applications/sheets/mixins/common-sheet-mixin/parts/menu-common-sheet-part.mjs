@@ -1,7 +1,7 @@
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -32,9 +32,7 @@ export default (Base) => {
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         context.menuCollapsed = !this._menuOpen;
-        if (
-          (this.document.system.constructor._automationTypes || []).length > 0
-        ) {
+        if ((this.document.system.constructor._automationTypes || []).length > 0) {
           context.canHaveAutomations = true;
         }
         return context;
@@ -46,12 +44,8 @@ export default (Base) => {
        */
       toggleMenu(state) {
         this._menuOpen = state ?? !this._menuOpen;
-        this.element
-          .querySelector(".ab-menu")
-          ?.classList.toggle("collapsed", !this._menuOpen);
-        this.element
-          .querySelector(".ab-menu-toggle")
-          ?.classList.toggle("ab-menu-toggle-open", this._menuOpen);
+        this.element.querySelector(".ab-menu")?.classList.toggle("collapsed", !this._menuOpen);
+        this.element.querySelector(".ab-menu-toggle")?.classList.toggle("ab-menu-toggle-open", this._menuOpen);
       }
     }
   );

@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
@@ -31,7 +31,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ActorTradecraftsPart
  * @mixes ActorTransformationPart
  */
-export default class BaseActorSystem extends mix(
+export default class BaseActorSystem extends mixClasses(
   AbstractActorSystem,
   parts.ActorStatsPart,
   parts.ActorAutomationPart,
@@ -56,40 +56,16 @@ export default class BaseActorSystem extends mix(
   parts.ActorTokenPart,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.BaseActor",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseActor"];
 
   /** @inheritDoc */
-  static PRESERVED_PROPERTIES = [
-    "effects",
-    "items",
-    ...super.PRESERVED_PROPERTIES,
-  ];
+  static PRESERVED_PROPERTIES = ["effects", "items", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      childEffectTypes: [
-        "attunement",
-        "base",
-        "condition",
-        "consequence",
-        "cover",
-        "fluency",
-        "hack",
-        "resource",
-      ],
-      childItemTypes: [
-        "archetype",
-        "body",
-        "equipment",
-        "mount",
-        "power",
-        "rank",
-        "species",
-      ],
+      childEffectTypes: ["attunement", "base", "condition", "consequence", "cover", "fluency", "hack", "resource"],
+      childItemTypes: ["archetype", "body", "equipment", "mount", "power", "rank", "species"],
       childMacroTypes: [],
       visibleTypes: ["power", "rank", "species"],
     });
@@ -199,20 +175,13 @@ export default class BaseActorSystem extends mix(
    */
   async postUpdate() {
     const conditionExpirationEffects = this.parent.consequences.filter(
-      (c) =>
-        c.system.expirations.conditions.present.size +
-          c.system.expirations.conditions.absent.size >
-        0,
+      c => c.system.expirations.conditions.present.size + c.system.expirations.conditions.absent.size > 0,
     );
-    const shouldExpire = conditionExpirationEffects.filter((c) =>
-      c.system.shouldExpireFromConditions(),
-    );
+    const shouldExpire = conditionExpirationEffects.filter(c => c.system.shouldExpireFromConditions());
     await this.parent.deleteEmbeddedDocuments(
       "ActiveEffect",
-      shouldExpire.map((c) => c.id),
+      shouldExpire.map(c => c.id),
     );
-    await Promise.all([
-      ...this.parent.getDependentTokens().map((t) => t.postActorUpdate()),
-    ]);
+    await Promise.all([...this.parent.getDependentTokens().map(t => t.postActorUpdate())]);
   }
 }

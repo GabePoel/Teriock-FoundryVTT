@@ -1,15 +1,7 @@
 import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
-import {
-  dotJoin,
-  toCamelCase,
-  toKebabCase,
-} from "../../../../helpers/string.mjs";
-import {
-  fromIdentifier,
-  inferNameFromIdentifier,
-  objectMap,
-} from "../../../../helpers/utils.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
+import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
+import { fromIdentifier, inferNameFromIdentifier, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
@@ -38,7 +30,7 @@ const { fields } = foundry.data;
  * @mixes EquipmentWieldingPart
  * @mixes WikiSystem
  */
-export default class EquipmentSystem extends mix(
+export default class EquipmentSystem extends mixClasses(
   BaseItemSystem,
   mixins.ArmamentSystemMixin,
   mixins.AttunableSystemMixin,
@@ -52,10 +44,7 @@ export default class EquipmentSystem extends mix(
   parts.EquipmentWieldingPart,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Equipment",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Equipment"];
 
   /** @inheritDoc */
   static PRESERVED_PROPERTIES = [
@@ -100,7 +89,7 @@ export default class EquipmentSystem extends mix(
       consumable: new fields.BooleanField({ initial: false }),
       equipmentType: new IdentifierField({ initial: "" }),
       powerLevel: new fields.StringField({
-        choices: objectMap(TERIOCK.config.equipment.powerLevel, (e) => e.label),
+        choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
         initial: "mundane",
       }),
       price: new fields.NumberField({ initial: 0 }),
@@ -116,9 +105,7 @@ export default class EquipmentSystem extends mix(
   /** @inheritDoc */
   static parseEvent(event) {
     return Object.assign(super.parseEvent(event), {
-      secret: game.teriock.getSetting("secretEquipment")
-        ? !event.shiftKey
-        : event.shiftKey,
+      secret: game.teriock.getSetting("secretEquipment") ? !event.shiftKey : event.shiftKey,
     });
   }
 
@@ -143,11 +130,7 @@ export default class EquipmentSystem extends mix(
 
   /** @inheritDoc */
   get displayTags() {
-    return [
-      ...super.displayTags,
-      ...this._identificationTags,
-      ...this._attunableTags,
-    ];
+    return [...super.displayTags, ...this._identificationTags, ...this._attunableTags];
   }
 
   /** @inheritDoc */
@@ -225,8 +208,7 @@ export default class EquipmentSystem extends mix(
   prepareDerivedData() {
     super.prepareDerivedData();
     if (this.fightingStyle && this.fightingStyle.length > 0) {
-      this.specialRules =
-        TERIOCK.content.weaponFightingStyles[this.fightingStyle];
+      this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
     }
   }
 }

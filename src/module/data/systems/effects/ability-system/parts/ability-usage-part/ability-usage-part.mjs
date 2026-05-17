@@ -1,12 +1,6 @@
 import { formulaExists } from "../../../../../../helpers/formula.mjs";
-import {
-  EvaluationField,
-  FormulaField,
-} from "../../../../../fields/_module.mjs";
-import {
-  RangeModel,
-  SlowExecutionTimeModel,
-} from "../../../../../models/unit-models/_module.mjs";
+import { EvaluationField, FormulaField } from "../../../../../fields/_module.mjs";
+import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
 import { migrateKey } from "../../../../../shared/migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
@@ -15,7 +9,7 @@ const { fields } = foundry.data;
  * Ability usage part: delivery, timing, interaction, targets, range, expansion.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {AttackSystem}
@@ -70,8 +64,7 @@ export default (Base) => {
       /** @inheritDoc */
       static migrateData(source, options, state) {
         // Range migration
-        if (typeof source.range === "string")
-          source.range = { raw: source.range };
+        if (typeof source.range === "string") source.range = { raw: source.range };
 
         // Expansion migration
         if (typeof source.expansion === "string") {
@@ -81,11 +74,7 @@ export default (Base) => {
           source.expansion = {};
         }
         if (foundry.utils.hasProperty(source, "expansion.cap.raw")) {
-          foundry.utils.setProperty(
-            source,
-            "expansion.cap",
-            foundry.utils.getProperty(source, "expansion.cap.raw"),
-          );
+          foundry.utils.setProperty(source, "expansion.cap", foundry.utils.getProperty(source, "expansion.cap.raw"));
           foundry.utils.deleteProperty(source, "expansion.cap.raw");
         }
         if (typeof source.expansion?.cap === "number") {
@@ -126,10 +115,7 @@ export default (Base) => {
       get _executionWrappers() {
         let time;
         if (this.maneuver !== "slow") {
-          time =
-            TERIOCK.config.ability.executionTime[this.maneuver][
-              this.executionTime.base
-            ];
+          time = TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime.base];
         } else {
           time = this.executionTime.slow.text;
         }
@@ -137,9 +123,7 @@ export default (Base) => {
           time || "",
           this.piercing.label,
           TERIOCK.config.ability.delivery[this.delivery] || "",
-          this.interaction === "feat"
-            ? TERIOCK.reference.attributes[this.featSaveAttribute]
-            : "",
+          this.interaction === "feat" ? TERIOCK.reference.attributes[this.featSaveAttribute] : "",
           TERIOCK.config.ability.interaction[this.interaction] || "",
         ];
       }
@@ -172,11 +156,7 @@ export default (Base) => {
       get _targetingWrappers() {
         return [
           this.isRanged ? this.range.abbreviation : "",
-          ...Array.from(
-            this.targets.map(
-              (target) => TERIOCK.config.ability.targets[target],
-            ),
-          ),
+          ...Array.from(this.targets.map(target => TERIOCK.config.ability.targets[target])),
           this.duration.text || "",
         ];
       }
@@ -186,11 +166,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       get isAoe() {
-        return (
-          this.delivery === "aura" ||
-          this.delivery === "cone" ||
-          this.expansion.type === "detonate"
-        );
+        return this.delivery === "aura" || this.delivery === "cone" || this.expansion.type === "detonate";
       }
 
       /**
@@ -206,9 +182,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       get isContact() {
-        return ["armor", "bite", "hand", "item", "shield", "weapon"].includes(
-          this.delivery,
-        );
+        return ["armor", "bite", "hand", "item", "shield", "weapon"].includes(this.delivery);
       }
 
       /**
@@ -216,9 +190,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       get isRanged() {
-        return ["missile", "aura", "cone", "sight", "area"].includes(
-          this.delivery,
-        );
+        return ["missile", "aura", "cone", "sight", "area"].includes(this.delivery);
       }
 
       /**

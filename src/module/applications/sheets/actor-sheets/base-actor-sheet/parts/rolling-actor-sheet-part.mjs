@@ -4,7 +4,7 @@ import { ThresholdRoll } from "../../../../../dice/rolls/_module.mjs";
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -40,9 +40,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async #onRollHexproof(event, target) {
-      await this.actor.system.rollResistance(
-        Object.assign(protectionOptions(event, target), { hex: true }),
-      );
+      await this.actor.system.rollResistance(Object.assign(protectionOptions(event, target), { hex: true }));
     }
 
     /**
@@ -52,9 +50,7 @@ export default (Base) =>
      * @returns {Promise<void>}
      */
     static async #onRollHexseal(event, target) {
-      await this.actor.system.rollImmunity(
-        Object.assign(protectionOptions(event, target), { hex: true }),
-      );
+      await this.actor.system.rollImmunity(Object.assign(protectionOptions(event, target), { hex: true }));
     }
 
     /**
@@ -82,7 +78,7 @@ export default (Base) =>
       const context = await super._prepareContext(options);
       const index = game.teriock.packs.player.index;
       context.attributeMacros = Object.fromEntries(
-        Object.keys(TERIOCK.index.attributesFull).map((att) => [
+        Object.keys(TERIOCK.index.attributesFull).map(att => [
           att,
           index.getName(`Make ${att.toUpperCase()} Feat Save`)?.uuid,
         ]),

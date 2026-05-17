@@ -1,9 +1,6 @@
 import { protectionConfig } from "../../../../../../constants/config/protection-config.mjs";
 import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
-import {
-  ImmunityExecution,
-  ResistanceExecution,
-} from "../../../../../../executions/activity-executions/_module.mjs";
+import { ImmunityExecution, ResistanceExecution } from "../../../../../../executions/activity-executions/_module.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -12,7 +9,7 @@ const { fields } = foundry.data;
  * Actor data model that handles protections.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -26,11 +23,11 @@ export default (Base) => {
           protections: new fields.SchemaField(
             objectMap(
               protectionConfig.types,
-              (type) =>
+              type =>
                 new fields.SchemaField(
                   objectMap(
                     protectionConfig.categories,
-                    (category) =>
+                    category =>
                       new fields.SetField(new fields.StringField(), {
                         label: category.label,
                       }),

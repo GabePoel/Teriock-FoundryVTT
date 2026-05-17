@@ -27,26 +27,20 @@ export async function resolveDocument(syncDoc) {
  * @returns {Promise<T[]>}
  */
 export async function resolveDocuments(syncDocs, options = {}) {
-  const fetched = await Promise.all(
-    syncDocs.map(async (syncDoc) => resolveDocument(syncDoc, options)),
-  );
-  let out = [...fetched.filter((d) => d?.documentName !== "Folder")];
-  const folders = /** @type {TeriockFolder[]} */ fetched.filter(
-    (d) => d?.documentName === "Folder",
-  );
+  const fetched = await Promise.all(syncDocs.map(async syncDoc => resolveDocument(syncDoc, options)));
+  let out = [...fetched.filter(d => d?.documentName !== "Folder")];
+  const folders = /** @type {TeriockFolder[]} */ fetched.filter(d => d?.documentName === "Folder");
   if (options.expandFolders) {
-    const toAdd = await Promise.all(folders.map((d) => d.getAllContents()));
+    const toAdd = await Promise.all(folders.map(d => d.getAllContents()));
     for (const arr of toAdd) out.push(...arr);
   } else {
     out.push(...folders);
   }
   // Add rollable tables. This includes the tables that were in folders.
-  const tables = /** @type {TeriockRollTable[]} */ out.filter(
-    (d) => d?.documentName === "RollTable",
-  );
-  out = out.filter((d) => d?.documentName !== "RollTable");
+  const tables = /** @type {TeriockRollTable[]} */ out.filter(d => d?.documentName === "RollTable");
+  out = out.filter(d => d?.documentName !== "RollTable");
   if (options.expandTables) {
-    const toAdd = await Promise.all(tables.map((d) => d.getAllContents()));
+    const toAdd = await Promise.all(tables.map(d => d.getAllContents()));
     for (const arr of toAdd) out.push(...arr);
   } else out.push(...tables);
   return out.filter(Boolean);
@@ -59,7 +53,7 @@ export async function resolveDocuments(syncDocs, options = {}) {
  */
 export async function resolveCollection(typeCollection) {
   const syncDocs = await resolveDocuments(typeCollection.contents);
-  return new TypeCollection(syncDocs.map((d) => [d.id, d]));
+  return new TypeCollection(syncDocs.map(d => [d.id, d]));
 }
 
 /**
@@ -72,12 +66,10 @@ export async function ensureChildren(document, identifiers) {
   if (identifiers.length === 0) return [];
   const typed = (await document.getChildren()).documentsByType;
   const candidates = await Promise.all(
-    identifiers.map(async (identifier) => {
+    identifiers.map(async identifier => {
       const parsed = parseIdentifier(identifier);
       if (!(parsed?.type && parsed?.identifier)) return;
-      const existing = (typed[parsed.type] || []).filter(
-        (n) => n?.system?.identifier === parsed.identifier,
-      );
+      const existing = (typed[parsed.type] || []).filter(n => n?.system?.identifier === parsed.identifier);
       if (existing.length) return;
       const doc = await fromIdentifier(identifier);
       if (!doc) return;
@@ -87,14 +79,10 @@ export async function ensureChildren(document, identifiers) {
     }),
   );
   const filtered = candidates.filter(Boolean);
-  const documentNames = new Set(
-    Object.values(filtered).map((v) => v?.documentName),
-  );
+  const documentNames = new Set(Object.values(filtered).map(v => v?.documentName));
   const childPromises = [];
   for (const documentName of documentNames) {
-    const data = filtered
-      .filter((d) => d?.documentName === documentName)
-      .map((d) => d?.data);
+    const data = filtered.filter(d => d?.documentName === documentName).map(d => d?.data);
     childPromises.push(document.createChildDocuments(documentName, data));
   }
   /** @type {AnyChildDocument[][]} */
@@ -114,16 +102,12 @@ export async function ensureChildren(document, identifiers) {
  */
 export async function ensureNoChildren(document, identifiers) {
   if (identifiers.length === 0) return [];
-  const toDelete = (await document.getChildArray()).filter((c) =>
-    identifiers.includes(c.typedIdentifier),
-  );
+  const toDelete = (await document.getChildArray()).filter(c => identifiers.includes(c.typedIdentifier));
   if (toDelete.length === 0) return [];
-  const documentNames = new Set(toDelete.map((c) => c?.documentName));
+  const documentNames = new Set(toDelete.map(c => c?.documentName));
   const deletePromises = [];
   for (const documentName of documentNames) {
-    const ids = toDelete
-      .filter((c) => c?.documentName === documentName)
-      .map((c) => c.id);
+    const ids = toDelete.filter(c => c?.documentName === documentName).map(c => c.id);
     deletePromises.push(document.deleteChildDocuments(documentName, ids));
   }
   /** @type {AnyChildDocument[][]} */
@@ -152,7 +136,7 @@ export async function inferCompendiumSource(document) {
  */
 export async function inferChildCompendiumSources(document) {
   const children = (await document.getChildArray()).map(Boolean);
-  await Promise.all(children.map(async (c) => await inferCompendiumSource(c)));
+  await Promise.all(children.map(async c => await inferCompendiumSource(c)));
 }
 /**
  * Get the UUID for a rule's journal entry page.

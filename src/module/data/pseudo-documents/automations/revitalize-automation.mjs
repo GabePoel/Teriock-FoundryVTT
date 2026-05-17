@@ -3,10 +3,7 @@ import { StatAutomation } from "./abstract/_module.mjs";
 
 export default class RevitalizeAutomation extends StatAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Revitalize",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Revitalize"];
 
   /** @inheritDoc */
   static get LABEL() {

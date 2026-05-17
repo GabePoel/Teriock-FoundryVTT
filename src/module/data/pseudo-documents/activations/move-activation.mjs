@@ -118,20 +118,12 @@ export default class MoveActivation extends BaseActivation {
       let ray;
       if (this.randomDirection) {
         const angle = Math.random() * 2 * Math.PI;
-        ray = Ray.fromAngle(
-          t.x,
-          t.y,
-          angle,
-          distance * scene.dimensions.distancePixels,
-        );
+        ray = Ray.fromAngle(t.x, t.y, angle, distance * scene.dimensions.distancePixels);
       } else {
         const currentRay = Ray.fromArrays([origin.x, origin.y], [t.x, t.y]);
         let fullDistance = -distance * scene.dimensions.distancePixels;
         if (this.originBarrier) {
-          fullDistance = Math.min(
-            fullDistance,
-            currentRay.distance - 5 * scene.dimensions.distancePixels,
-          );
+          fullDistance = Math.min(fullDistance, currentRay.distance - 5 * scene.dimensions.distancePixels);
         }
         ray = Ray.towardsPoint({ x: t.x, y: t.y }, origin, fullDistance);
       }
@@ -168,10 +160,7 @@ export default class MoveActivation extends BaseActivation {
   /** @inheritDoc */
   async secondaryAction() {
     if (this.randomDirection) {
-      ui.notifications.error(
-        "TERIOCK.ACTIVATIONS.Move.NOTIFICATIONS.cantReverseRandom",
-        { localize: true },
-      );
+      ui.notifications.error("TERIOCK.ACTIVATIONS.Move.NOTIFICATIONS.cantReverseRandom", { localize: true });
       return;
     }
     await this.#applyMovements(-this.distance);

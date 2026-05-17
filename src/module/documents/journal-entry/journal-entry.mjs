@@ -1,4 +1,4 @@
-import { mix } from "../../helpers/construction.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { JournalEntry } = foundry.documents;
@@ -12,7 +12,7 @@ const { JournalEntry } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
-export default class TeriockJournalEntry extends mix(
+export default class TeriockJournalEntry extends mixClasses(
   JournalEntry,
   mixins.BaseDocumentMixin,
   mixins.EmbedCardDocumentMixin,

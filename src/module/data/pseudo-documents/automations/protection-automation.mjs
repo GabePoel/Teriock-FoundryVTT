@@ -7,10 +7,7 @@ const { fields } = foundry.data;
 
 export default class ProtectionAutomation extends CritAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Protection",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Protection"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -31,16 +28,12 @@ export default class ProtectionAutomation extends CritAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       category: new fields.StringField({
-        choices: localizeChoices(
-          objectMap(protectionConfig.categories, (c) => c.label),
-        ),
+        choices: localizeChoices(objectMap(protectionConfig.categories, c => c.label)),
         initial: "abilities",
         required: true,
       }),
       relation: new fields.StringField({
-        choices: localizeChoices(
-          objectMap(protectionConfig.types, (t) => t.label),
-        ),
+        choices: localizeChoices(objectMap(protectionConfig.types, t => t.label)),
         initial: "resistances",
         required: true,
       }),
@@ -53,10 +46,7 @@ export default class ProtectionAutomation extends CritAutomation {
    */
   get _choices() {
     if (this.category === "other") return {};
-    return foundry.utils.getProperty(
-      TERIOCK,
-      protectionConfig.categories[this.category]?.choices || {},
-    );
+    return foundry.utils.getProperty(TERIOCK, protectionConfig.categories[this.category]?.choices || {});
   }
 
   /** @inheritDoc */
@@ -74,11 +64,7 @@ export default class ProtectionAutomation extends CritAutomation {
 
   /** @inheritDoc */
   getChanges() {
-    if (
-      !this.value ||
-      (this.category !== "other" && !this._choices[this.value])
-    )
-      return [];
+    if (!this.value || (this.category !== "other" && !this._choices[this.value])) return [];
     return [
       {
         key: `system.protections.${this.relation}.${this.category}`,

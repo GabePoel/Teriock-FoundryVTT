@@ -25,9 +25,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @returns {AnyActor[]}
    */
   get actors() {
-    return Array.from(
-      this.combatants.filter((c) => c.actor).map((c) => c.actor),
-    );
+    return Array.from(this.combatants.filter(c => c.actor).map(c => c.actor));
   }
 
   /**
@@ -45,8 +43,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
       expiration.when.trigger === trigger &&
       expiration.when.time === time &&
       (expiration.who.type === "everyone" ||
-        (expiration.who.type === "executor" &&
-          actorUuid === expiration.who.source) ||
+        (expiration.who.type === "executor" && actorUuid === expiration.who.source) ||
         (expiration.who.type === "target" && actorUuid === effect.actor.uuid))
     ) {
       if (expiration.when.skip <= 0 && effect.actor) {
@@ -92,13 +89,10 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     game.users.queryGM(
       "teriock.turnChange",
       {
-        actorUuids: this.actors
-          .filter((a) => a.system.combat.attackPenalty !== 0)
-          .map((a) => a.uuid),
+        actorUuids: this.actors.filter(a => a.system.combat.attackPenalty !== 0).map(a => a.uuid),
       },
       {
-        failPrefix:
-          "TERIOCK.SYSTEMS.Combat.QUERY.resetAttackPenalties.failPrefix",
+        failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.resetAttackPenalties.failPrefix",
         localize: true,
       },
     );
@@ -125,8 +119,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
       "teriock.massWrite",
       { operations: ops },
       {
-        failPrefix:
-          "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
+        failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
         localize: true,
       },
     );
@@ -134,7 +127,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
 
   /** @inheritDoc */
   async endCombat() {
-    let out = await super.endCombat();
+    const out = await super.endCombat();
     this.#resetAttackPenalties();
     for (const actor of this.actors) {
       this.#tryExpirations(actor, actor, "combat", "end");
@@ -170,7 +163,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
 
   /** @inheritDoc */
   async startCombat() {
-    let out = await super.startCombat();
+    const out = await super.startCombat();
     this.#resetAttackPenalties();
     for (const actor of this.actors) {
       this.#tryExpirations(actor, actor, "combat", "start");

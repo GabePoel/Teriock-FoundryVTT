@@ -38,16 +38,12 @@ const wikiContextMenuOptions = [
     icon: makeIcon(icons.ui.toggle, "contextMenu"),
     label: "TERIOCK.COMMANDS.Status.toggleUnnamed",
     onClick: async (_ev, target) => {
-      const condition = toCamelCase(
-        target.dataset.tooltip.split("Condition: ")[1],
-      );
+      const condition = toCamelCase(target.dataset.tooltip.split("Condition: ")[1]);
       await game.actors.default.toggleStatusEffect(condition);
     },
-    visible: (target) =>
+    visible: target =>
       target.dataset.tooltip?.startsWith("Condition: ") &&
-      Object.keys(TERIOCK.data.conditions).includes(
-        toCamelCase(target.dataset.tooltip.split("Condition: ")[1]),
-      ) &&
+      Object.keys(TERIOCK.data.conditions).includes(toCamelCase(target.dataset.tooltip.split("Condition: ")[1])) &&
       game.actors.default,
   },
   {
@@ -56,9 +52,7 @@ const wikiContextMenuOptions = [
     onClick: async () => {
       await game.actors.default.system.deathBagPull();
     },
-    visible: (target) =>
-      ["Condition: Dead", "Core: Death Bag"].includes(target.dataset.tooltip) &&
-      game.actors.default,
+    visible: target => ["Condition: Dead", "Core: Death Bag"].includes(target.dataset.tooltip) && game.actors.default,
   },
   {
     icon: makeIcon(icons.effect.heal, "contextMenu"),
@@ -66,8 +60,7 @@ const wikiContextMenuOptions = [
     onClick: async () => {
       await game.actors.default.system.takeHeal();
     },
-    visible: (target) =>
-      target.dataset.tooltip === "Core: Healing" && game.actors.default,
+    visible: target => target.dataset.tooltip === "Core: Healing" && game.actors.default,
   },
   {
     icon: makeIcon(icons.effect.heal, "contextMenu"),
@@ -75,8 +68,7 @@ const wikiContextMenuOptions = [
     onClick: async () => {
       await game.actors.default.system.takeRevitalize();
     },
-    visible: (target) =>
-      target.dataset.tooltip === "Core: Revitalizing" && game.actors.default,
+    visible: target => target.dataset.tooltip === "Core: Revitalizing" && game.actors.default,
   },
   {
     icon: makeIcon(icons.effect.awaken, "contextMenu"),
@@ -84,8 +76,7 @@ const wikiContextMenuOptions = [
     onClick: async () => {
       await game.actors.default.system.takeAwaken();
     },
-    visible: (target) =>
-      target.dataset.tooltip === "Keyword: Awaken" && game.actors.default,
+    visible: target => target.dataset.tooltip === "Keyword: Awaken" && game.actors.default,
   },
   {
     icon: makeIcon(icons.effect.resist, "contextMenu"),
@@ -93,10 +84,8 @@ const wikiContextMenuOptions = [
     onClick: async () => {
       await game.actors.default.system.rollResistance();
     },
-    visible: (target) =>
-      ["Keyword: Resistance", "Keyword: Hexproof"].includes(
-        target.dataset.tooltip,
-      ) && game.actors.default,
+    visible: target =>
+      ["Keyword: Resistance", "Keyword: Hexproof"].includes(target.dataset.tooltip) && game.actors.default,
   },
   {
     icon: makeIcon(icons.document.ability, "contextMenu"),
@@ -104,22 +93,17 @@ const wikiContextMenuOptions = [
     onClick: async () => {
       await game.actors.default.useDocument("ability:resist");
     },
-    visible: (target) =>
-      ["Keyword: Resistance", "Keyword: Hexproof"].includes(
-        target.dataset.tooltip,
-      ) && game.actors.default,
+    visible: target =>
+      ["Keyword: Resistance", "Keyword: Hexproof"].includes(target.dataset.tooltip) && game.actors.default,
   },
   {
     icon: makeIcon(icons.document.ability, "contextMenu"),
     label: "TERIOCK.COMMANDS.UseAbility.useUnnamed",
     onClick: async (_ev, target) => {
       const abilityName = target.dataset.tooltip.split("Ability: ")[1];
-      await game.actors.default.useDocument(
-        `ability:${toKebabCase(abilityName)}`,
-      );
+      await game.actors.default.useDocument(`ability:${toKebabCase(abilityName)}`);
     },
-    visible: (target) =>
-      target.dataset.tooltip?.startsWith("Ability: ") && game.actors.default,
+    visible: target => target.dataset.tooltip?.startsWith("Ability: ") && game.actors.default,
   },
 ];
 

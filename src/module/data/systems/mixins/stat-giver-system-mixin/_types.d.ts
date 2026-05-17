@@ -1,7 +1,4 @@
-import {
-  HpPoolModel,
-  MpPoolModel,
-} from "../../../models/stat-pool-models/_module.mjs";
+import { HpPoolModel, MpPoolModel } from "../../../models/stat-pool-models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {

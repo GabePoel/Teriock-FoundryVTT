@@ -6,9 +6,7 @@ import BaseDocumentExecution from "../base-document-execution/base-document-exec
  * @mixes ThresholdExecution
  * @property {TeriockFluency} source
  */
-export default class FluencyExecution extends TradecraftExecutionMixin(
-  BaseDocumentExecution,
-) {
+export default class FluencyExecution extends TradecraftExecutionMixin(BaseDocumentExecution) {
   /** @inheritDoc */
   get tradecraft() {
     return this.source.system.tradecraft;

@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Actor data model that handles senses.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -31,11 +31,7 @@ export default (Base) => {
             }),
           }),
           senses: new fields.SchemaField({
-            ...objectMap(
-              config.character.sense,
-              (c) => senseField(0, c.label),
-              { filter: (c) => !c?.hidden },
-            ),
+            ...objectMap(config.character.sense, c => senseField(0, c.label), { filter: c => !c?.hidden }),
           }),
         });
       }
@@ -55,10 +51,8 @@ export default (Base) => {
       getRollData() {
         const rollData = super.getRollData();
         Object.assign(rollData, {
-          "detection.hiding":
-            this.detection.hiding ?? this.attributes.snk.passive,
-          "detection.perceiving":
-            this.detection.perceiving ?? this.attributes.per.passive,
+          "detection.hiding": this.detection.hiding ?? this.attributes.snk.passive,
+          "detection.perceiving": this.detection.perceiving ?? this.attributes.per.passive,
         });
         return rollData;
       }

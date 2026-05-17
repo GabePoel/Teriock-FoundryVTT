@@ -8,9 +8,7 @@ import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
  * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
-export default class FeatExecution extends ThresholdExecutionMixin(
-  BaseExecution,
-) {
+export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution) {
   /**
    * @param {Partial<Teriock.Execution.FeatExecutionOptions>} options
    */
@@ -18,10 +16,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(
     super(options);
     this.attribute = options.attribute;
     if (this.actor) {
-      this.bonus = addFormula(
-        this.actor.system.attributes[options.attribute].formula,
-        this.bonus,
-      );
+      this.bonus = addFormula(this.actor.system.attributes[options.attribute].formula, this.bonus);
     }
   }
 
@@ -94,8 +89,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(
    */
   _determineCompetence(options) {
     if (this.actor) {
-      this.competence.raw =
-        this.actor.system.attributes[options.attribute].competence.value;
+      this.competence.raw = this.actor.system.attributes[options.attribute].competence.value;
     }
     super._determineCompetence(options);
   }

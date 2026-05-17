@@ -7,7 +7,7 @@ const { fields } = foundry.data;
 /**
  * @param {typeof BaseActorSheet} Base
  */
-export default (Base) =>
+export default Base =>
   /**
    * @extends {BaseActorSheet}
    * @mixin
@@ -28,9 +28,7 @@ export default (Base) =>
      */
     static async _applyMorganti(impact, actor) {
       if (TERIOCK.config.impact[impact]?.morganti) {
-        const cost = Object.entries(TERIOCK.config.cost.primary.keys).find(
-          ([_k, v]) => v.impact === impact,
-        );
+        const cost = Object.entries(TERIOCK.config.cost.primary.keys).find(([_k, v]) => v.impact === impact);
         const stat = cost ? cost[0] : null;
         if (!stat) return;
         const field = new fields.NumberField({
@@ -56,7 +54,7 @@ export default (Base) =>
           ok: {
             label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.ok"),
             callback: async (_event, button) => {
-              let input = button.form.elements.namedItem(impact).value ?? 0;
+              const input = button.form.elements.namedItem(impact).value ?? 0;
               await actor.update({
                 [`system.${stat}.morganti`]: input,
               });

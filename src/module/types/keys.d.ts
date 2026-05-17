@@ -10,34 +10,21 @@ declare global {
 
     // Tradecraft Keys
     export type Field = keyof typeof config.tradecraft;
-    export type ArtisanTradecraft =
-      keyof typeof config.tradecraft.artisan.tradecrafts;
-    export type MediatorTradecraft =
-      keyof typeof config.tradecraft.mediator.tradecrafts;
-    export type ScholarTradecraft =
-      keyof typeof config.tradecraft.scholar.tradecrafts;
-    export type SurvivalistTradecraft =
-      keyof typeof config.tradecraft.survivalist.tradecrafts;
-    export type Tradecraft =
-      | ArtisanTradecraft
-      | MediatorTradecraft
-      | ScholarTradecraft
-      | SurvivalistTradecraft;
+    export type ArtisanTradecraft = keyof typeof config.tradecraft.artisan.tradecrafts;
+    export type MediatorTradecraft = keyof typeof config.tradecraft.mediator.tradecrafts;
+    export type ScholarTradecraft = keyof typeof config.tradecraft.scholar.tradecrafts;
+    export type SurvivalistTradecraft = keyof typeof config.tradecraft.survivalist.tradecrafts;
+    export type Tradecraft = ArtisanTradecraft | MediatorTradecraft | ScholarTradecraft | SurvivalistTradecraft;
 
     // Ability Keys
     export type Maneuver = keyof typeof config.ability.maneuver;
     export type Interaction = keyof typeof config.ability.interaction;
     export type Target = keyof typeof config.ability.targets;
     export type Delivery = keyof typeof config.ability.delivery;
-    export type ActiveExecutionTime =
-      keyof typeof config.ability.executionTime.active;
-    export type ReactiveExecutionTime =
-      keyof typeof config.ability.executionTime.reactive;
-    export type PassiveExecutionTime =
-      keyof typeof config.ability.executionTime.passive;
-    export type SlowExecutionTime =
-      | keyof typeof config.ability.executionTime.slow
-      | string;
+    export type ActiveExecutionTime = keyof typeof config.ability.executionTime.active;
+    export type ReactiveExecutionTime = keyof typeof config.ability.executionTime.reactive;
+    export type PassiveExecutionTime = keyof typeof config.ability.executionTime.passive;
+    export type SlowExecutionTime = keyof typeof config.ability.executionTime.slow | string;
     export type ExecutionTime =
       | Teriock.Keys.ActiveExecutionTime
       | Teriock.Keys.ReactiveExecutionTime
@@ -82,8 +69,7 @@ declare global {
 
     // Effect Keys
     export type Form = keyof typeof config.effect.form;
-    export type ApplicationTarget =
-      keyof typeof config.effect.applicationTargets;
+    export type ApplicationTarget = keyof typeof config.effect.applicationTargets;
     export type IllusionLevel = keyof typeof config.illusion.level;
     export type TransformationLevel = keyof typeof config.transformation.level;
 

@@ -1,5 +1,5 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
@@ -19,7 +19,7 @@ const { fields } = foundry.data;
  * @mixes TransformationSystem
  * @mixes WikiSystem
  */
-export default class ConditionSystem extends mix(
+export default class ConditionSystem extends mixClasses(
   BaseEffectSystem,
   mixins.WikiSystemMixin,
   mixins.TransformationSystemMixin,
@@ -49,12 +49,7 @@ export default class ConditionSystem extends mix(
    * @returns {string}
    */
   get conditionKey() {
-    const idMap = Object.fromEntries(
-      Object.entries(TERIOCK.data.conditions).map(([id, data]) => [
-        data._id,
-        id,
-      ]),
-    );
+    const idMap = Object.fromEntries(Object.entries(TERIOCK.data.conditions).map(([id, data]) => [data._id, id]));
     return idMap[this.parent.id];
   }
 

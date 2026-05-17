@@ -4,7 +4,7 @@ import { migrateEvaluationToNumber } from "../../../../shared/migrations/evaluat
  * Equipment migrate data part.
  * @param {typeof EquipmentSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseItemSystem}

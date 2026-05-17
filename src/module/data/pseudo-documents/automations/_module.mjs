@@ -1,6 +1,5 @@
-export * as abstract from "./abstract/_module.mjs";
-export * as mixins from "./mixins/_module.mjs";
 export { default as AbilityMacroAutomation } from "./ability-macro-automation.mjs";
+export * as abstract from "./abstract/_module.mjs";
 export { default as AddDocumentsAutomation } from "./add-documents-automation.mjs";
 export { default as AttunementAutomation } from "./attunement-automation.mjs";
 export { default as ChangeCompetenceAutomation } from "./change-competence-automation.mjs";
@@ -17,6 +16,7 @@ export { default as ExpirationAutomation } from "./expiration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation.mjs";
 export { default as HealAutomation } from "./heal-automation.mjs";
+export * as mixins from "./mixins/_module.mjs";
 export { default as ModifyEffectAutomation } from "./modify-effect-automation.mjs";
 export { default as MoveAutomation } from "./move-automation.mjs";
 export { default as PropertyMacroAutomation } from "./property-macro-automation.mjs";

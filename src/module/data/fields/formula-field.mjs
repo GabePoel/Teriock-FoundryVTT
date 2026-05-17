@@ -119,8 +119,7 @@ export default class FormulaField extends EnhancedStringField {
     const nestedInput = isInput ? null : element.querySelector("input");
     if (!isInput && !nestedInput) return element;
     config.value ??= this.getInitialValue({}) ?? "";
-    const formulaInput =
-      foundry.applications.elements.HTMLFormulaInputElement.create(config);
+    const formulaInput = foundry.applications.elements.HTMLFormulaInputElement.create(config);
     if (isInput) return formulaInput;
     nestedInput.replaceWith(formulaInput);
     return element;
@@ -131,9 +130,7 @@ export default class FormulaField extends EnhancedStringField {
     if (this.deterministic) {
       const roll = new BaseRoll(value, {});
       if (!roll.isDeterministic) {
-        throw new Error(
-          `Deterministic formula must not contain dice terms: ${value}`,
-        );
+        throw new Error(`Deterministic formula must not contain dice terms: ${value}`);
       }
     }
     super._validateType(value);

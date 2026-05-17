@@ -7,9 +7,7 @@ import { buildWriteOperation, consolidateWriteOperations } from "../utils.mjs";
  * @returns {Promise<void>}
  */
 export default async function massWriteQuery(queryData, { _timeout }) {
-  const indOps = await Promise.all(
-    queryData.operations.map(async (op) => buildWriteOperation(op)),
-  );
+  const indOps = await Promise.all(queryData.operations.map(async op => buildWriteOperation(op)));
   const conOps = consolidateWriteOperations(indOps.filter(Boolean));
   await foundry.documents.modifyBatch(conOps);
 }

@@ -1,4 +1,4 @@
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { SummonActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -16,17 +16,14 @@ const { fields } = foundry.data;
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class SummonAutomation extends mix(
+export default class SummonAutomation extends mixClasses(
   BaseAutomation,
   SelectExternalDocumentsAutomationMixin,
   DisplayAutomationMixin,
   TriggerAutomationMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Summon",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
 
   /** @inheritdoc */
   static get LABEL() {
@@ -57,12 +54,7 @@ export default class SummonAutomation extends mix(
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
-      ...this._selectionPaths,
-      "hr",
-      ...this._triggerPaths,
-      ...this._triggerDisplayPaths,
-    ];
+    return [...this._selectionPaths, "hr", ...this._triggerPaths, ...this._triggerDisplayPaths];
   }
 
   /** @inheritDoc */
@@ -88,8 +80,7 @@ export default class SummonAutomation extends mix(
       for (const uuid of uuids) {
         const doc = await resolveDocument(uuid);
         const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
-          name:
-            doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
+          name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
         });
         const display = foundry.utils.deepClone(this.display);
         display.label ||= label;

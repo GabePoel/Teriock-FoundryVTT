@@ -1,5 +1,27 @@
 // noinspection JSUnusedGlobalSymbols
 
+import { CharacterSheet, CreatureSheet, InventorySheet } from "../applications/sheets/actor-sheets/_module.mjs";
+import {
+  AbilitySheet,
+  AttunementSheet,
+  ConditionSheet,
+  ConsequenceSheet,
+  FluencySheet,
+  ImbuementSheet,
+  PropertySheet,
+  ResourceSheet,
+} from "../applications/sheets/effect-sheets/_module.mjs";
+import {
+  ArchetypeSheet,
+  BodySheet,
+  EquipmentSheet,
+  MountSheet,
+  PowerSheet,
+  RankSheet,
+  SpeciesSheet,
+} from "../applications/sheets/item-sheets/_module.mjs";
+import { HarmSheet } from "../applications/sheets/page-sheets/_module.mjs";
+import { CharacterSystem, CreatureSystem, InventorySystem } from "../data/systems/actors/_module.mjs";
 import {
   AbilitySystem,
   AttunementSystem,
@@ -11,15 +33,15 @@ import {
   ResourceSystem,
 } from "../data/systems/effects/_module.mjs";
 import {
-  AbilitySheet,
-  AttunementSheet,
-  ConditionSheet,
-  ConsequenceSheet,
-  FluencySheet,
-  ImbuementSheet,
-  PropertySheet,
-  ResourceSheet,
-} from "../applications/sheets/effect-sheets/_module.mjs";
+  ArchetypeSystem,
+  BodySystem,
+  EquipmentSystem,
+  MountSystem,
+  PowerSystem,
+  RankSystem,
+  SpeciesSystem,
+} from "../data/systems/items/_module.mjs";
+import { HarmSystem } from "../data/systems/pages/_module.mjs";
 import {
   TeriockActiveEffect,
   TeriockActor,
@@ -36,36 +58,6 @@ import {
   TeriockTokenDocument,
   TeriockUser,
 } from "../documents/_module.mjs";
-import {
-  ArchetypeSheet,
-  BodySheet,
-  EquipmentSheet,
-  MountSheet,
-  PowerSheet,
-  RankSheet,
-  SpeciesSheet,
-} from "../applications/sheets/item-sheets/_module.mjs";
-import {
-  ArchetypeSystem,
-  BodySystem,
-  EquipmentSystem,
-  MountSystem,
-  PowerSystem,
-  RankSystem,
-  SpeciesSystem,
-} from "../data/systems/items/_module.mjs";
-import {
-  CharacterSheet,
-  CreatureSheet,
-  InventorySheet,
-} from "../applications/sheets/actor-sheets/_module.mjs";
-import {
-  CharacterSystem,
-  CreatureSystem,
-  InventorySystem,
-} from "../data/systems/actors/_module.mjs";
-import { HarmSheet } from "../applications/sheets/page-sheets/_module.mjs";
-import { HarmSystem } from "../data/systems/pages/_module.mjs";
 
 // Base Document Classes
 // =====================

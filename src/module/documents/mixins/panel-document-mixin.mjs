@@ -3,12 +3,11 @@ import { systemPath } from "../../helpers/path.mjs";
 import { TeriockChatMessage } from "../_module.mjs";
 
 /**
- * @param {typeof ClientDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function PanelDocumentMixin(Base) {
   return (
     /**
-     * @extends ClientDocument
      * @mixes BaseDocument
      * @mixin
      */
@@ -23,18 +22,15 @@ export default function PanelDocumentMixin(Base) {
        * @param {HTMLElement} element
        */
       static bindPanelListeners(element) {
-        element
-          .querySelectorAll("[data-action='toggle-collapse']")
-          .forEach((el) => {
-            el.addEventListener("click", (e) => {
-              e.stopPropagation();
-              const target = /** @type {HTMLElement} */ e.target;
-              const collapsable =
-                /** @type {HTMLElement} */ target.closest(".collapsable");
-              collapsable.classList.toggle("collapsed");
-              collapsable.dataset.noAutoToggle = "true";
-            });
+        element.querySelectorAll("[data-action='toggle-collapse']").forEach(el => {
+          el.addEventListener("click", e => {
+            e.stopPropagation();
+            const target = /** @type {HTMLElement} */ e.target;
+            const collapsable = /** @type {HTMLElement} */ target.closest(".collapsable");
+            collapsable.classList.toggle("collapsed");
+            collapsable.dataset.noAutoToggle = "true";
           });
+        });
       }
 
       /**
@@ -47,25 +43,19 @@ export default function PanelDocumentMixin(Base) {
        * @param {boolean} [options.collapseAssociation]
        */
       static toggleCollapse(element, options = {}) {
-        const selector = options.autoCollapse
-          ? "collapsable:not([data-no-auto-toggle])"
-          : "collapsable";
+        const selector = options.autoCollapse ? "collapsable:not([data-no-auto-toggle])" : "collapsable";
         if (options.collapsePanel) {
-          element
-            .querySelectorAll(`.teriock-panel.${selector}`)
-            .forEach((el) => {
-              el.classList.toggle("collapsed", true);
-            });
+          element.querySelectorAll(`.teriock-panel.${selector}`).forEach(el => {
+            el.classList.toggle("collapsed", true);
+          });
         }
         if (options.collapseAssociation) {
-          element
-            .querySelectorAll(`.teriock-panel-association.${selector}`)
-            .forEach((el) => {
-              el.classList.toggle("collapsed", true);
-            });
+          element.querySelectorAll(`.teriock-panel-association.${selector}`).forEach(el => {
+            el.classList.toggle("collapsed", true);
+          });
         }
         if (options.collapseAll) {
-          element.querySelectorAll(`.${selector}`).forEach((el) => {
+          element.querySelectorAll(`.${selector}`).forEach(el => {
             el.classList.toggle("collapsed", true);
           });
         }
@@ -108,9 +98,7 @@ export default function PanelDocumentMixin(Base) {
       async toMessage(options = {}) {
         const panel = await this.toPanel();
         const actor =
-          options?.actor ||
-          this.actor ||
-          TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
+          options?.actor || this.actor || TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
         const messageData = {
           speaker: TeriockChatMessage.getSpeaker({
             actor: actor,
@@ -131,7 +119,7 @@ export default function PanelDocumentMixin(Base) {
 
       /** @returns {Promise<Teriock.Messages.MessagePanel>} */
       async toPanel() {
-        let parts = await this.getPanelParts();
+        const parts = await this.getPanelParts();
         return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
       }
 

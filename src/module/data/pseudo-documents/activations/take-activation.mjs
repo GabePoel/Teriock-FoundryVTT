@@ -6,9 +6,7 @@ import { AutomationActivationFactory } from "./abstract/_module.mjs";
  * @property {Teriock.Keys.Impact} impact
  * @property {number} amount
  */
-export default class TakeActivation extends AutomationActivationFactory(
-  TakeAutomation,
-) {
+export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
   /** @inheritDoc */
   static get ICON() {
     return icons.consequence.crit;
@@ -19,11 +17,7 @@ export default class TakeActivation extends AutomationActivationFactory(
    * @returns {number|null}
    */
   get #amount() {
-    return (
-      this.amount ??
-      this.document?.rolls?.find((r) => r.hasImpact)?.total ??
-      null
-    );
+    return this.amount ?? this.document?.rolls?.find(r => r.hasImpact)?.total ?? null;
   }
 
   /**
@@ -40,8 +34,7 @@ export default class TakeActivation extends AutomationActivationFactory(
    */
   get #showDialog() {
     if (typeof this.#amount !== "number") return true;
-    let showDialog =
-      this.showDialog || game.teriock.getSetting("showImpactDialogs");
+    let showDialog = this.showDialog || game.teriock.getSetting("showImpactDialogs");
     if (this.event.ctrlKey) showDialog = !showDialog;
     return showDialog;
   }
@@ -72,17 +65,14 @@ export default class TakeActivation extends AutomationActivationFactory(
         });
       } else {
         await this.#entry.apply(actor, this.#amount);
-        ui.notifications.success(
-          "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied",
-          {
-            format: {
-              actor: actor.fullName,
-              amount: this.#amount,
-              impact: this.label,
-            },
-            localize: true,
+        ui.notifications.success("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied", {
+          format: {
+            actor: actor.fullName,
+            amount: this.#amount,
+            impact: this.label,
           },
-        );
+          localize: true,
+        });
       }
     }
   }
@@ -92,17 +82,14 @@ export default class TakeActivation extends AutomationActivationFactory(
     if (!this.checkActors()) return;
     for (const actor of this.actors) {
       await this.#entry?.reverse(actor, this.#amount);
-      ui.notifications.success(
-        "TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed",
-        {
-          format: {
-            actor: actor.fullName,
-            amount: this.#amount,
-            impact: this.label,
-          },
-          localize: true,
+      ui.notifications.success("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed", {
+        format: {
+          actor: actor.fullName,
+          amount: this.#amount,
+          impact: this.label,
         },
-      );
+        localize: true,
+      });
     }
   }
 }

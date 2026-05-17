@@ -1,6 +1,6 @@
 import { iconManifest } from "../../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { initialText } from "../../../fields/helpers/initializers.mjs";
@@ -25,7 +25,7 @@ const { fields } = foundry.data;
  * @mixes ThresholdData
  * @mixes WikiSystem
  */
-export default class FluencySystem extends mix(
+export default class FluencySystem extends mixClasses(
   CleanedEffectSystem,
   mixins.WikiSystemMixin,
   mixins.RevelationSystemMixin,
@@ -33,10 +33,7 @@ export default class FluencySystem extends mix(
   shared.ThresholdDataMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Fluency",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -87,18 +84,14 @@ export default class FluencySystem extends mix(
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.reference.tradecrafts[this.tradecraft];
-    parts.text = dotJoin([
-      TERIOCK.config.tradecraft[this.field].name,
-      parts.text,
-    ]);
+    parts.text = dotJoin([TERIOCK.config.tradecraft[this.field].name, parts.text]);
     return parts;
   }
 
   /** @inheritDoc */
   get wikiPage() {
     const namespace = this.constructor.metadata.namespace;
-    const pageName =
-      TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name;
+    const pageName = TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name;
     return `${namespace}:${pageName}`;
   }
 
@@ -127,11 +120,7 @@ export default class FluencySystem extends mix(
       if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       }
-      foundry.utils.setProperty(
-        changes,
-        "img",
-        getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
-      );
+      foundry.utils.setProperty(changes, "img", getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]));
     }
   }
 
@@ -159,14 +148,11 @@ export default class FluencySystem extends mix(
       ...(await super.getPanelParts()),
       bars: [
         {
-          icon: TERIOCK.config.tradecraft[this.field].tradecrafts[
-            this.tradecraft
-          ].icon,
+          icon: TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].icon,
           label: _loc("TERIOCK.TERMS.Common.tradecraft"),
           wrappers: [
             TERIOCK.config.tradecraft[this.field].name,
-            TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft]
-              .name,
+            TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name,
           ],
         },
       ],

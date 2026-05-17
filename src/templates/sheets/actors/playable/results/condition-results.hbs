@@ -1,6 +1,13 @@
 <div id="condition-results" class="teriock-block-results">
-  <div class="teriock-block-container {{{document.flags.teriockDocumentSettings.sheet.blockEffectsSize}}} {{#if
-    document.flags.teriockDocumentSettings.sheet.blockEffectsGapless}}gapless{{/if}}">
+  <div
+    class="
+      teriock-block-container
+      {{ document.flags.teriockDocumentSettings.sheet.blockEffectsSize }}
+      {{#if document.flags.teriockDocumentSettings.sheet.blockEffectsGapless}}
+        gapless
+      {{/if}}
+    "
+  >
     {{#each conditions as |condition|}}
       {{#if (not (path ../system.conditionInformation condition "locked"))}}
         {{> "teriock/ui/block"
@@ -12,9 +19,7 @@
               hidden=(rgx (lookup @root.searchStrings ../../searchKey) doc.name)
               openable=false
               relative=@root/document.uuid
-              text=(dotJoin (lookup ../conditionProviders condition))
-            )
-          )
+              text=(dotJoin (lookup ../conditionProviders condition))))
         }}
       {{else}}
         {{> "teriock/ui/block"
@@ -22,19 +27,16 @@
             action=(ifThen
               (eq "dead" condition)
               "deathBagPull"
-              (ifThen (includes ../removableConditions condition) "rollDoc" "")
-            )
+              (ifThen (includes ../removableConditions condition) "rollDoc" ""))
             color=@root/TERIOCK.display.colors.red
             draggable=false
             icons=(object 0=(object
               icon=@root/TERIOCK.display.icons.ui.locked
-              tooltip="Locked"
-            ))
+              tooltip="Locked"))
             id=(ifThen
               (includes ../removableConditions condition)
               (path ../TERIOCK.data.conditions condition "_id")
-              condition
-            )
+              condition)
             img=(path ../TERIOCK.data.conditions condition "img")
             openable=false
             parentId=../id
@@ -44,12 +46,11 @@
             tooltip=(lookup ../conditionTooltips condition)
             tooltipClass="teriock-rich-tooltip"
             type="conditionLocked"
-            usable=(eq "dead" condition)
-          )
+            usable=(eq "dead" condition))
         }}
       {{/if}}
     {{/each}}
-    <div class="no-results {{{document.flags.teriockDocumentSettings.sheet.blockEffectsSize}}}">
+    <div class="no-results {{{ document.flags.teriockDocumentSettings.sheet.blockEffectsSize }}}">
       <p>{{localize "TERIOCK.SHEETS.Common.SEARCH.noConditions"}}</p>
     </div>
   </div>

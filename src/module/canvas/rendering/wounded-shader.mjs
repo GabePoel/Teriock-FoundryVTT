@@ -1,5 +1,4 @@
-const { BackgroundVisionShader, ColorationVisionShader } =
-  foundry.canvas.rendering.shaders;
+const { BackgroundVisionShader, ColorationVisionShader } = foundry.canvas.rendering.shaders;
 
 /**
  * Wounded vision shader - creates red vignette effect for a down/dead {@link TeriockTokenDocument}

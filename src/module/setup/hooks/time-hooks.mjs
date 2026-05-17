@@ -1,9 +1,6 @@
 import triggerConfig from "../../constants/config/trigger-config.mjs";
 import { ucFirst } from "../../helpers/string.mjs";
-import {
-  buildWriteOperation,
-  consolidateWriteOperations,
-} from "../../helpers/utils.mjs";
+import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/utils.mjs";
 
 /**
  * Increase debt for all relevant actors.
@@ -19,9 +16,7 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
   for (const actor of game.actors.relevant) {
     if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {
       const daysElapsed = dt / 86400;
-      const newDebt =
-        actor.system.money.debt *
-        Math.pow(1 + actor.system.interestRate, daysElapsed);
+      const newDebt = actor.system.money.debt * Math.pow(1 + actor.system.interestRate, daysElapsed);
       operations.push({
         action: "update",
         docData: { "system.money.debt": newDebt.toNearest(0.01) },
@@ -29,9 +24,7 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
       });
     }
   }
-  const indOps = await Promise.all(
-    operations.map(async (op) => buildWriteOperation(op)),
-  );
+  const indOps = await Promise.all(operations.map(async op => buildWriteOperation(op)));
   const conOps = consolidateWriteOperations(indOps.filter(Boolean));
   await foundry.documents.modifyBatch(conOps);
 }
@@ -53,10 +46,7 @@ function fireTimeTriggerFactory(trigger) {
 
 const timeHookEntries = [
   ["updateWorldTime", increaseDebt],
-  ...Object.keys(triggerConfig.time.choices).map((t) => [
-    `teriock.force${ucFirst(t)}`,
-    fireTimeTriggerFactory(t),
-  ]),
+  ...Object.keys(triggerConfig.time.choices).map(t => [`teriock.force${ucFirst(t)}`, fireTimeTriggerFactory(t)]),
 ];
 
 export default timeHookEntries;

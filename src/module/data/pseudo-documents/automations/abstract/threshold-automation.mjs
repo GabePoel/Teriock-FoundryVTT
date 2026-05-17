@@ -4,10 +4,7 @@ import BaseAutomation from "./base-automation.mjs";
 
 export default class ThresholdAutomation extends BaseAutomation {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Threshold",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Threshold"];
 
   /** @inheritDoc */
   static defineSchema() {

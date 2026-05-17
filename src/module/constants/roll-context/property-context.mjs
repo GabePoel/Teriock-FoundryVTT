@@ -21,9 +21,6 @@ Hooks.once("i18nInit", () => {
     });
   });
   Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {
-    propertyContext[`damage.type.${k}`] = _loc(
-      "TERIOCK.ROLL_CONTEXT.Property.damageType",
-      { name: _loc(v) },
-    );
+    propertyContext[`damage.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Property.damageType", { name: _loc(v) });
   });
 });

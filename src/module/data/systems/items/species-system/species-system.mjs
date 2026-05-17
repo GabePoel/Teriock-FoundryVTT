@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, makeIconClass } from "../../../../helpers/utils.mjs";
@@ -26,7 +26,7 @@ const { fields } = foundry.data;
  * @mixes StatGiverSystem
  * @mixes WikiSystem
  */
-export default class SpeciesSystem extends mix(
+export default class SpeciesSystem extends mixClasses(
   BaseItemSystem,
   mixins.WikiSystemMixin,
   mixins.StatGiverSystemMixin,
@@ -34,10 +34,7 @@ export default class SpeciesSystem extends mix(
   parts.SpeciesPanelPart,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Species",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Species"];
 
   /** @inheritDoc */
   static get metadata() {
@@ -47,14 +44,7 @@ export default class SpeciesSystem extends mix(
       indexCompendiumKey: "species",
       namespace: "Creature",
       type: "species",
-      visibleTypes: [
-        "ability",
-        "body",
-        "equipment",
-        "fluency",
-        "rank",
-        "resource",
-      ],
+      visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
     });
   }
 
@@ -79,10 +69,9 @@ export default class SpeciesSystem extends mix(
         min: new fields.NumberField(),
         value: new fields.NumberField({ initial: 3 }),
       }),
-      traits: new fields.SetField(
-        new fields.StringField({ choices: TERIOCK.reference.traits }),
-        { initial: ["humanoid"] },
-      ),
+      traits: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.traits }), {
+        initial: ["humanoid"],
+      }),
       transformation: new fields.SchemaField(speciesTransformationFields()),
     });
   }
@@ -102,11 +91,7 @@ export default class SpeciesSystem extends mix(
    * @returns {boolean}
    */
   get _isInactiveTransformation() {
-    return (
-      this.isTransformation &&
-      this.transformationEffect &&
-      !this.transformationEffect.active
-    );
+    return this.isTransformation && this.transformationEffect && !this.transformationEffect.active;
   }
 
   /**
@@ -114,7 +99,7 @@ export default class SpeciesSystem extends mix(
    * @returns {Teriock.Sheet.DisplayTag[]}
    */
   get _traitTags() {
-    const tags = Array.from(this.traits).map((t) => {
+    const tags = Array.from(this.traits).map(t => {
       return {
         label: TERIOCK.reference.traits[t],
         tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
@@ -122,10 +107,7 @@ export default class SpeciesSystem extends mix(
     });
     if (this.transformationEffect?.system.transformation.level) {
       tags.push({
-        label:
-          TERIOCK.config.transformation.level[
-            this.transformationEffect.system.transformation.level
-          ],
+        label: TERIOCK.config.transformation.level[this.transformationEffect.system.transformation.level],
         tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
       });
     }
@@ -167,11 +149,7 @@ export default class SpeciesSystem extends mix(
 
   /** @inheritDoc */
   get displayToggles() {
-    return [
-      "system.size.enabled",
-      "system.transformation.ring",
-      ...super.displayToggles,
-    ];
+    return ["system.size.enabled", "system.transformation.ring", ...super.displayToggles];
   }
 
   /** @inheritDoc */
@@ -189,10 +167,7 @@ export default class SpeciesSystem extends mix(
   get isPrimaryTransformation() {
     if (this.isTransformation) {
       const transformationEffect = this.transformationEffect;
-      if (
-        transformationEffect &&
-        transformationEffect.system.isPrimaryTransformation
-      ) {
+      if (transformationEffect && transformationEffect.system.isPrimaryTransformation) {
         return true;
       }
     }
@@ -204,10 +179,7 @@ export default class SpeciesSystem extends mix(
    * @returns {boolean}
    */
   get isTransformation() {
-    return (
-      !!this.transformationEffect &&
-      this.transformationEffect.system.isTransformation
-    );
+    return !!this.transformationEffect && this.transformationEffect.system.isTransformation;
   }
 
   /** @inheritDoc */
@@ -216,9 +188,7 @@ export default class SpeciesSystem extends mix(
     if (this.isTransformation && this.parent.actor) {
       const transformationEffect = this.transformationEffect;
       suppressed =
-        suppressed ||
-        (transformationEffect && !transformationEffect.active) ||
-        !this.isPrimaryTransformation;
+        suppressed || (transformationEffect && !transformationEffect.active) || !this.isPrimaryTransformation;
     }
     return suppressed;
   }
@@ -280,8 +250,7 @@ export default class SpeciesSystem extends mix(
       "size.max": this.size.enabled ? this.size.max : 0,
       "size.min": this.size.enabled ? this.size.min : 0,
       transformation: Number(this.isTransformation),
-      [`transformation.level`]:
-        this.transformationEffect?.system.transformation.level || 0,
+      ["transformation.level"]: this.transformationEffect?.system.transformation.level || 0,
       "transformation.primary": Number(this.isPrimaryTransformation),
     });
     for (const trait of this.traits) {
@@ -320,11 +289,8 @@ export default class SpeciesSystem extends mix(
    * @returns {object}
    */
   toCreature(data = {}) {
-    const hasTokenImg =
-      !!TERIOCK.index.creatures[toCamelCase(this.parent.name)];
-    const tokenImg = hasTokenImg
-      ? this.parent.img.replace("icons/creatures", "icons/tokens")
-      : this.parent.img;
+    const hasTokenImg = !!TERIOCK.index.creatures[toCamelCase(this.parent.name)];
+    const tokenImg = hasTokenImg ? this.parent.img.replace("icons/creatures", "icons/tokens") : this.parent.img;
     data = foundry.utils.mergeObject(
       {
         img: this.parent.img,

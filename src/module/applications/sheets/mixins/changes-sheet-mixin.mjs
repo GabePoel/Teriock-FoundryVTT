@@ -27,10 +27,7 @@ export default function ChangesSheetMixin(Base) {
           console.error(_loc("TERIOCK.CHANGES.Errors.noAddPath"));
           return;
         }
-        const changes =
-          foundry.utils.deepClone(
-            foundry.utils.getProperty(this.document, valuePath),
-          ) || [];
+        const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document, valuePath)) || [];
         const newChange = {
           key: "",
           phase: "normal",
@@ -62,9 +59,7 @@ export default function ChangesSheetMixin(Base) {
           console.error(_loc("TERIOCK.CHANGES.Errors.noDeletePath"));
           return;
         }
-        const changes = foundry.utils.deepClone(
-          foundry.utils.getProperty(this.document, valuePath),
-        );
+        const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document, valuePath));
         if (!changes || !Array.isArray(changes)) {
           console.error(
             _loc("TERIOCK.CHANGES.Errors.noDeleteArray", {
@@ -84,16 +79,13 @@ export default function ChangesSheetMixin(Base) {
         await super._onRender(context, options);
         if (!this.isEditable) return;
         this.element.querySelectorAll(".teriock-change-input").forEach(
-          /** @param {HTMLInputElement} el */ (el) => {
+          /** @param {HTMLInputElement} el */ el => {
             el.addEventListener("change", () => {
-              const container =
-                /** @type {HTMLLIElement} */ el.closest(".change-container");
+              const container = /** @type {HTMLLIElement} */ el.closest(".change-container");
               const path = container.dataset.path;
               const index = container.dataset.index;
               const property = el.dataset.property;
-              const changes = foundry.utils.deepClone(
-                foundry.utils.getProperty(this.document._source, path),
-              );
+              const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document._source, path));
               let value = el.value;
               if (property === "priority") value = Number(value);
               changes[Number(index)][property] = value;

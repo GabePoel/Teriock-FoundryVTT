@@ -1,10 +1,7 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { lcFirst } from "../../../../helpers/string.mjs";
-import {
-  migrateKey,
-  migrateValue,
-} from "../../../shared/migrations/source-migrations.mjs";
+import { migrateKey, migrateValue } from "../../../shared/migrations/source-migrations.mjs";
 import { MacroActivation } from "../../activations/_module.mjs";
 import DisplayAutomationMixin from "./display-automation-mixin.mjs";
 import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
@@ -24,16 +21,9 @@ export default function MacroAutomationMixin(Base) {
      * @mixin
      * @property {UUID<TeriockMacro>} macro
      */
-    class MacroAutomation extends mix(
-      Base,
-      TriggerAutomationMixin,
-      DisplayAutomationMixin,
-    ) {
+    class MacroAutomation extends mixClasses(Base, TriggerAutomationMixin, DisplayAutomationMixin) {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.Macro",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Macro"];
 
       /** @inheritDoc */
       static get LABEL() {

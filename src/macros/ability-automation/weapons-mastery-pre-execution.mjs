@@ -8,9 +8,7 @@ const consequenceData = {
     })
     .trim(),
   system: {
-    _dep: game.teriock.getSetting("trackSustainedConsequences")
-      ? scope.effect.uuid
-      : undefined,
+    _dep: game.teriock.getSetting("trackSustainedConsequences") ? scope.effect.uuid : undefined,
     automations: {
       [childChangeId]: {
         _id: childChangeId,
@@ -26,8 +24,7 @@ const consequenceData = {
   type: "consequence",
 };
 
-const activation =
-  new teriock.data.pseudoDocuments.activations.AddDocumentsActivation({
-    primary: { root: { data: consequenceData } },
-  });
+const activation = new teriock.data.pseudoDocuments.activations.AddDocumentsActivation({
+  primary: { root: { data: consequenceData } },
+});
 scope.execution.activations.push(activation);

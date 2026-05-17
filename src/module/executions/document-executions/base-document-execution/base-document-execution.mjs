@@ -36,26 +36,18 @@ export default class BaseDocumentExecution extends BaseExecution {
    * @returns {object}
    */
   get rollData() {
-    return Object.assign(
-      this.source.system.getSystemRollData() || {},
-      super.rollData,
-    );
+    return Object.assign(this.source.system.getSystemRollData() || {}, super.rollData);
   }
 
   /** @inheritDoc */
   async _buildActivations() {
     const activationLists = await Promise.all(
-      this.activeAutomations.map((a) =>
-        a.getActivations({ rollData: this.rollData, execution: this }),
-      ),
+      this.activeAutomations.map(a => a.getActivations({ rollData: this.rollData, execution: this })),
     );
     for (const activations of activationLists) {
       this.activations.push(...activations);
     }
-    this.activations =
-      teriock.data.pseudoDocuments.activations.RollActivation.mergeRolls(
-        this.activations,
-      );
+    this.activations = teriock.data.pseudoDocuments.activations.RollActivation.mergeRolls(this.activations);
     for (const a of this.activations) {
       if (a.type === "roll" && this._boostsResolved[a.impact]) {
         const boosts = this._boostsResolved[a.impact];
@@ -71,13 +63,10 @@ export default class BaseDocumentExecution extends BaseExecution {
     for (const [k, v] of Object.entries(this._boostsResolved)) {
       if (this._hasBoostForImpact(k)) {
         this.tags.push(
-          _loc(
-            `TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`,
-            {
-              formula: v,
-              impact: k,
-            },
-          ),
+          _loc(`TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`, {
+            formula: v,
+            impact: k,
+          }),
         );
       }
     }
@@ -130,10 +119,7 @@ export default class BaseDocumentExecution extends BaseExecution {
    * @returns {boolean}
    */
   _hasBoostForImpact(impact) {
-    return (
-      this._boostsResolved[impact] &&
-      this.activations.some((a) => a.type === "roll" && a.impact === impact)
-    );
+    return this._boostsResolved[impact] && this.activations.some(a => a.type === "roll" && a.impact === impact);
   }
 
   /** @inheritDoc */
@@ -148,9 +134,6 @@ export default class BaseDocumentExecution extends BaseExecution {
 
   /** @inheritDoc*/
   getScope(scope = {}) {
-    return Object.assign(
-      this.source?.getScope(scope) || {},
-      super.getScope(scope),
-    );
+    return Object.assign(this.source?.getScope(scope) || {}, super.getScope(scope));
   }
 }

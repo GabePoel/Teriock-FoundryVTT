@@ -1,13 +1,10 @@
 import { bindCommonActions } from "../../../../applications/shared/_module.mjs";
 import { TeriockItem } from "../../../../documents/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { panelsField } from "../../../fields/helpers/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
-import {
-  ActivatableSystemMixin,
-  BaseSystemMixin,
-} from "../../mixins/_module.mjs";
+import { ActivatableSystemMixin, BaseSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -19,15 +16,9 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes BaseSystem
  * @mixes ActivatableSystem
  */
-export default class BaseMessageSystem extends mix(
-  TypeDataModel,
-  BaseSystemMixin,
-  ActivatableSystemMixin,
-) {
+export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSystemMixin, ActivatableSystemMixin) {
   static get _activationTypes() {
-    return Object.values(activations).filter((a) =>
-      foundry.utils.isSubclass(a, BaseActivation),
-    );
+    return Object.values(activations).filter(a => foundry.utils.isSubclass(a, BaseActivation));
   }
 
   /**
@@ -70,21 +61,15 @@ export default class BaseMessageSystem extends mix(
 
     // Remove custom content if it shouldn't be visible
     if (!this.document.isContentVisible) {
-      element
-        .querySelectorAll(".teriock-target-container, .teriock-dice-total-icon")
-        .forEach((el) => el.remove());
-      element
-        .querySelectorAll(".dice-total.teriock-dice-total")
-        .forEach((el) => {
-          el.className = "dice-total teriock-dice-total";
-        });
-      element
-        .querySelectorAll(".dice-formula.teriock-dice-formula")
-        .forEach((el) => {
-          el.className = "dice-formula teriock-dice-formula";
-        });
+      element.querySelectorAll(".teriock-target-container, .teriock-dice-total-icon").forEach(el => el.remove());
+      element.querySelectorAll(".dice-total.teriock-dice-total").forEach(el => {
+        el.className = "dice-total teriock-dice-total";
+      });
+      element.querySelectorAll(".dice-formula.teriock-dice-formula").forEach(el => {
+        el.className = "dice-formula teriock-dice-formula";
+      });
       element.querySelectorAll(".dice-total, .dice-formula").forEach(
-        /** @param {HTMLElement} el */ (el) => {
+        /** @param {HTMLElement} el */ el => {
           delete el.dataset.tooltip;
           delete el.dataset.tooltipHtml;
         },
@@ -93,18 +78,16 @@ export default class BaseMessageSystem extends mix(
 
     // Add target selection listeners
     element.querySelectorAll(".teriock-target-container").forEach(
-      /** @param {HTMLElement} container */ (container) => {
+      /** @param {HTMLElement} container */ container => {
         let clickTimeout = null;
 
-        container.addEventListener("contextmenu", async (event) => {
+        container.addEventListener("contextmenu", async event => {
           event.stopPropagation();
-          const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(
-            container.dataset.tokenUuid,
-          );
+          const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(container.dataset.tokenUuid);
           if (tokenDocument) tokenDocument.object.release();
         });
 
-        container.addEventListener("click", async (event) => {
+        container.addEventListener("click", async event => {
           event.stopPropagation();
           if (clickTimeout) {
             clearTimeout(clickTimeout);
@@ -112,10 +95,7 @@ export default class BaseMessageSystem extends mix(
             return;
           }
           clickTimeout = setTimeout(async () => {
-            const tokenDocument =
-              /** @type {TeriockTokenDocument} */ await fromUuid(
-                container.dataset.tokenUuid,
-              );
+            const tokenDocument = /** @type {TeriockTokenDocument} */ await fromUuid(container.dataset.tokenUuid);
             if (tokenDocument?.isOwner) {
               tokenDocument.object.control({
                 releaseOthers: !event.shiftKey,
@@ -125,15 +105,13 @@ export default class BaseMessageSystem extends mix(
           }, 200);
         });
 
-        container.addEventListener("dblclick", async (event) => {
+        container.addEventListener("dblclick", async event => {
           event.stopPropagation();
           if (clickTimeout) {
             clearTimeout(clickTimeout);
             clickTimeout = null;
           }
-          const actor = /** @type {TeriockActor} */ await fromUuid(
-            container.dataset.actorUuid,
-          );
+          const actor = /** @type {TeriockActor} */ await fromUuid(container.dataset.actorUuid);
           if (actor?.isOwner) await actor.sheet.render(true);
         });
       },
@@ -155,7 +133,7 @@ export default class BaseMessageSystem extends mix(
    */
   async _prepareContext(options = {}) {
     return {
-      activations: this.activations.contents.filter((a) => a.visible),
+      activations: this.activations.contents.filter(a => a.visible),
       isContentVisible: this.document.isContentVisible,
       system: this,
       ...options,
@@ -168,17 +146,12 @@ export default class BaseMessageSystem extends mix(
    */
   collapsePanels(htmlElement) {
     let autoCollapse;
-    const defaultCollapse = game.settings.get(
-      "teriock",
-      "defaultPanelCollapseState",
-    );
+    const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
     if (defaultCollapse === "closed") autoCollapse = true;
     else if (defaultCollapse === "open") autoCollapse = false;
     else {
       autoCollapse =
-        this.document.timestamp <
-        Date.now() -
-          game.teriock.getSetting("autoPanelCollapseTime") * 60 * 1000;
+        this.document.timestamp < Date.now() - game.teriock.getSetting("autoPanelCollapseTime") * 60 * 1000;
     }
     TeriockItem.toggleCollapse(htmlElement, {
       autoCollapse: true,

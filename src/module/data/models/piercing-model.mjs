@@ -11,10 +11,7 @@ const { fields } = foundry.data;
  */
 export default class PiercingModel extends EmbeddedDataModel {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.Piercing",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Piercing"];
 
   /** @inheritDoc */
   static defineSchema() {

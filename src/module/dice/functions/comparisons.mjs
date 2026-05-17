@@ -1,5 +1,4 @@
-//noinspection EqualityComparisonWithCoercionJS,JSUnusedGlobalSymbols
-
+/* eslint-disable eqeqeq */
 const comparisons = {
   eq: (a, b) => +(a == b),
   gt: (a, b) => +(a > b),

@@ -1,5 +1,5 @@
 import { documentConfig } from "../../../constants/config/document-config.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
@@ -11,10 +11,7 @@ import ArmamentSheet from "./armament-sheet.mjs";
  * @property {TeriockEquipment} item
  * @mixes EquipmentDropSheet
  */
-export default class EquipmentSheet extends mix(
-  ArmamentSheet,
-  mixins.EquipmentDropSheetMixin,
-) {
+export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.EquipmentDropSheetMixin) {
   /** @inheritDoc */
   static BARS = [
     "teriock/sheets/items/equipment/status-bar",

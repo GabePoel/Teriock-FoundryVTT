@@ -17,11 +17,7 @@ const { fields } = foundry.data;
  * @returns {Promise<Teriock.System.FormulaString|null>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
-  const {
-    crit = false,
-    label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok"),
-    impact,
-  } = options;
+  const { crit = false, label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok"), impact } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
@@ -46,44 +42,19 @@ export default async function boostDialog(rollFormula, options = {}) {
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
   });
   const contentHtml = document.createElement("div");
-  contentHtml.append(
-    formulaField.toFormGroup(
-      { rootId: foundry.utils.randomID() },
-      { name: "formula" },
-    ),
-  );
-  contentHtml.append(
-    boostsField.toFormGroup(
-      { rootId: foundry.utils.randomID() },
-      { name: "boosts" },
-    ),
-  );
-  contentHtml.append(
-    deboostsField.toFormGroup(
-      { rootId: foundry.utils.randomID() },
-      { name: "deboosts" },
-    ),
-  );
-  contentHtml.append(
-    critField.toFormGroup(
-      { rootId: foundry.utils.randomID() },
-      { name: "crit" },
-    ),
-  );
+  contentHtml.append(formulaField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "formula" }));
+  contentHtml.append(boostsField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "boosts" }));
+  contentHtml.append(deboostsField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "deboosts" }));
+  contentHtml.append(critField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "crit" }));
   return await TeriockDialog.prompt({
     content: contentHtml,
     modal: true,
     ok: {
       callback: (_event, button) => {
-        let updatedFormula = button.form.elements.namedItem("formula").value;
+        const updatedFormula = button.form.elements.namedItem("formula").value;
         const boosts = Number(button.form.elements.namedItem("boosts").value);
-        const deboosts = Number(
-          button.form.elements.namedItem("deboosts").value,
-        );
-        const critButton =
-          /** @type {HTMLInputElement} */ button.form.elements.namedItem(
-            "crit",
-          );
+        const deboosts = Number(button.form.elements.namedItem("deboosts").value);
+        const critButton = /** @type {HTMLInputElement} */ button.form.elements.namedItem("crit");
         const crit = critButton.checked;
         const roll = new BaseRoll(updatedFormula, options.rollData || {});
         if (crit) {

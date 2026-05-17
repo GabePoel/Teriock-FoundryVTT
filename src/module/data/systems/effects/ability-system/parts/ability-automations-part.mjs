@@ -2,8 +2,7 @@
  * Ability automations part.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
-  //noinspection JSClosureCompilerSyntax
+export default Base => {
   return (
     /**
      * @extends {AbilitySystem}

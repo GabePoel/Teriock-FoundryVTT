@@ -2,12 +2,7 @@ import { competenceConfig } from "../../../constants/config/competence-config.mj
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
-import {
-  EnhancedNumberField,
-  EnhancedStringField,
-  EvaluationField,
-  FormulaField,
-} from "../_module.mjs";
+import { EnhancedNumberField, EnhancedStringField, EvaluationField, FormulaField } from "../_module.mjs";
 
 const {
   ArrayField,
@@ -114,7 +109,7 @@ export function combatExpirationTimingField() {
  */
 export function changeTypeField() {
   return new EnhancedStringField({
-    choices: objectMap(ActiveEffect.CHANGE_TYPES, (t) => t.label, {
+    choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, {
       localize: true,
     }),
     initial: "add",
@@ -272,8 +267,7 @@ export function panelsField() {
  * @returns {StringField}
  */
 export function blockSizeField(options = {}) {
-  const { initial = "medium", child = "TERIOCK.SCHEMA.BlockSize.default" } =
-    options;
+  const { initial = "medium", child = "TERIOCK.SCHEMA.BlockSize.default" } = options;
   return new StringField({
     initial,
     choices: TERIOCK.config.display.sizes,
@@ -292,8 +286,7 @@ export function blockSizeField(options = {}) {
  * @returns {BooleanField}
  */
 export function blockGaplessField(options = {}) {
-  const { initial = false, child = "TERIOCK.SCHEMA.BlackGapless.default" } =
-    options;
+  const { initial = false, child = "TERIOCK.SCHEMA.BlackGapless.default" } = options;
   return new BooleanField({
     initial,
     label: _loc("TERIOCK.SCHEMA.BlackGapless.label", { name: _loc(child) }),
@@ -309,7 +302,7 @@ export function blockGaplessField(options = {}) {
  */
 export function competenceField() {
   return new NumberField({
-    choices: objectMap(competenceConfig.levels, (l) => l.label, {
+    choices: objectMap(competenceConfig.levels, l => l.label, {
       localize: true,
       sort: false,
     }),
@@ -332,9 +325,7 @@ export function competenceField() {
  */
 export function attributeField(options = { unp: false, nullable: true }) {
   return new StringField({
-    choices: options.unp
-      ? TERIOCK.reference.attributes
-      : TERIOCK.reference.statAttributes,
+    choices: options.unp ? TERIOCK.reference.attributes : TERIOCK.reference.statAttributes,
     hint: _loc("TERIOCK.SCHEMA.Attribute.hint"),
     initial: options.nullable ? null : "int",
     label: _loc("TERIOCK.SCHEMA.Attribute.label"),
@@ -349,12 +340,8 @@ export function attributeField(options = { unp: false, nullable: true }) {
  */
 export function conditionRequirementsField() {
   return new SchemaField({
-    absent: new SetField(
-      new StringField({ choices: TERIOCK.reference.conditions }),
-    ),
-    present: new SetField(
-      new StringField({ choices: TERIOCK.reference.conditions }),
-    ),
+    absent: new SetField(new StringField({ choices: TERIOCK.reference.conditions })),
+    present: new SetField(new StringField({ choices: TERIOCK.reference.conditions })),
   });
 }
 
@@ -374,7 +361,7 @@ export function movementActionField(options = {}) {
             else return true;
           }),
         ),
-        (t) => t.label,
+        t => t.label,
       ),
     ),
     initial: "walk",

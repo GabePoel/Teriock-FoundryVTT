@@ -8,7 +8,7 @@ const { SchemaField } = foundry.data.fields;
  * Actor data model mixin that handles tradecrafts.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -48,10 +48,7 @@ export default (Base) => {
       getRollData() {
         const rollData = super.getRollData();
         for (const tc of Object.values(this.tradecrafts)) {
-          Object.assign(
-            rollData,
-            prefixObject(tc.getLocalRollData(), `tc.${tc.key}`),
-          );
+          Object.assign(rollData, prefixObject(tc.getLocalRollData(), `tc.${tc.key}`));
         }
         return rollData;
       }

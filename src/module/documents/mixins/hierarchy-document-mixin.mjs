@@ -1,5 +1,3 @@
-//noinspection JSUnusedGlobalSymbols
-
 import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 
@@ -7,19 +5,14 @@ const { Collection } = foundry.utils;
 
 /**
  * Document mixin to support hierarchies of the same document type.
- * @param {typeof CommonDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function HierarchyDocumentMixin(Base) {
   return (
     /**
      * @extends CommonDocument
      * @mixin
-     * @property {string} documentName
      * @property {HierarchySystem} system
-     * @property {(data: Object, context: DocumentConstructionContext & DocumentCloneOptions) =>
-     *  Promise<HierarchyDocument>} clone
-     * @property {Readonly<ID<HierarchyDocument>>} id
-     * @property {Readonly<UUID<HierarchyDocument>>} uuid
      */
     class HierarchyDocument extends Base {
       /** @inheritDoc */
@@ -33,14 +26,12 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<void>}
        */
       static async _cacheDocumentReferenceCompendiums(documents) {
-        const docsWithRefs = documents.filter((d) => d.system?._ref);
+        const docsWithRefs = documents.filter(d => d.system?._ref);
         const cachedDocs = /** @type {TeriockDocument[]} */ await Promise.all(
-          docsWithRefs.map((d) => fromUuid(d.system._ref)),
+          docsWithRefs.map(d => fromUuid(d.system._ref)),
         );
-        const compendiums = new Set(
-          cachedDocs.filter((d) => d?.inCompendium).map((d) => d.compendium),
-        );
-        await Promise.all(Array.from(compendiums).map((c) => c.getIndex()));
+        const compendiums = new Set(cachedDocs.filter(d => d?.inCompendium).map(d => d.compendium));
+        await Promise.all(Array.from(compendiums).map(c => c.getIndex()));
       }
 
       /**
@@ -61,7 +52,7 @@ export default function HierarchyDocumentMixin(Base) {
           const bSup = !!b?.system?._sup;
           return aSup - bSup;
         });
-        const filteredDocuments = documents.filter((d) => {
+        const filteredDocuments = documents.filter(d => {
           const collection = d.siblingCollection;
           if (d?.system?._sup) return collection.has(d.system._sup);
           return true;
@@ -79,10 +70,7 @@ export default function HierarchyDocumentMixin(Base) {
             const ref = await fromUuid(doc.system._ref);
             let create = true;
             if (ref) {
-              if (
-                knownRefs.includes(ref.uuid) &&
-                !operation.allowDuplicateSubs
-              ) {
+              if (knownRefs.includes(ref.uuid) && !operation.allowDuplicateSubs) {
                 create = false;
               } else knownRefs.push(ref.uuid);
             }
@@ -98,10 +86,7 @@ export default function HierarchyDocumentMixin(Base) {
               const clones = [];
               for (const sub of allRefSubs.contents) {
                 knownRefs.push(sub.uuid);
-                const subClone = sub.clone(
-                  { folder: newDoc.folder },
-                  { keepId },
-                );
+                const subClone = sub.clone({ folder: newDoc.folder }, { keepId });
                 if (!subClone._id && !operation.keepSubIds) {
                   subClone.updateSource({ _id: foundry.utils.randomID() });
                 }
@@ -131,7 +116,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (yes === false) return false;
 
         for (const doc of documents) {
-          operation.ids.push(...doc.allSubs.contents.map((s) => s._id));
+          operation.ids.push(...doc.allSubs.contents.map(s => s._id));
         }
       }
 
@@ -148,16 +133,12 @@ export default function HierarchyDocumentMixin(Base) {
 
         for (const doc of documents) {
           const folderUpdate = operation.updates.find(
-            (update) =>
-              update._id === doc._id &&
-              foundry.utils.hasProperty(update, "folder"),
+            update => update._id === doc._id && foundry.utils.hasProperty(update, "folder"),
           );
           if (folderUpdate) {
-            const subIds = doc.allSubs.contents.map((s) => s._id);
+            const subIds = doc.allSubs.contents.map(s => s._id);
             for (const subId of subIds) {
-              const subUpdate = operation.updates.find(
-                (update) => update._id === subId,
-              );
+              const subUpdate = operation.updates.find(update => update._id === subId);
               if (!subUpdate) {
                 operation.updates.push({
                   _id: subId,
@@ -216,8 +197,8 @@ export default function HierarchyDocumentMixin(Base) {
         }
         return new TypeCollection(
           this.findSubs(document, collection)
-            .contents.flatMap((s) => [s, ...this.findAllSubs(s, collection)])
-            .map((s) => [s._id, s]),
+            .contents.flatMap(s => [s, ...this.findAllSubs(s, collection)])
+            .map(s => [s._id, s]),
         );
       }
 
@@ -231,11 +212,8 @@ export default function HierarchyDocumentMixin(Base) {
         if (!this.findSup(document, collection)) return new TypeCollection();
         return new TypeCollection(
           [this.findSup(document, collection)]
-            .concat(
-              this.findAllSups(this.findSup(document, collection))?.contents ||
-                [],
-            )
-            .map((d) => [d._id, d]),
+            .concat(this.findAllSups(this.findSup(document, collection))?.contents || [])
+            .map(d => [d._id, d]),
         );
       }
 
@@ -247,10 +225,8 @@ export default function HierarchyDocumentMixin(Base) {
        */
       static findSubs(document, collection) {
         if (!collection) collection = document.siblingCollection;
-        const subArray = collection.filter(
-          (d) => foundry.utils.getProperty(d, "system._sup") === document._id,
-        );
-        return new TypeCollection(subArray.map((d) => [d._id, d]));
+        const subArray = collection.filter(d => foundry.utils.getProperty(d, "system._sup") === document._id);
+        return new TypeCollection(subArray.map(d => [d._id, d]));
       }
 
       /**
@@ -295,11 +271,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {ChildDocument[]}
        */
       get childArray() {
-        return [
-          ...super.childArray,
-          ...(this.subs.contents || []),
-          ...this.dependents,
-        ];
+        return [...super.childArray, ...(this.subs.contents || []), ...this.dependents];
       }
 
       /**
@@ -308,10 +280,7 @@ export default function HierarchyDocumentMixin(Base) {
        */
       get dependee() {
         if (this.system._dep) {
-          const uuid = game.teriock?.dependentsRegistry.resolveDependentID(
-            this.system._dep,
-            this,
-          );
+          const uuid = game.teriock?.dependentsRegistry.resolveDependentID(this.system._dep, this);
           if (uuid) {
             return game.teriock?.dependentsRegistry.fetchFromUuid(this, uuid);
           }
@@ -387,14 +356,14 @@ export default function HierarchyDocumentMixin(Base) {
        * Render the sheets of all the sups.
        */
       #reloadSups() {
-        this.getAllSups().then((result) => {
-          result.forEach((doc) => {
+        this.getAllSups().then(result => {
+          result.forEach(doc => {
             if (typeof doc.resetChildMaps === "function") doc.resetChildMaps();
             if (doc.isViewer) doc.sheet?.render({ force: false });
           });
         });
         if (this.collection.name === "CompendiumCollection") {
-          this.collection.apps.forEach((app) => {
+          this.collection.apps.forEach(app => {
             if (app.rendered) app.render();
           });
         }
@@ -418,7 +387,7 @@ export default function HierarchyDocumentMixin(Base) {
       _onDelete(options, userId) {
         super._onDelete(options, userId);
         if (game.user.isActiveGM) {
-          this.dependents.forEach((d) => d.delete());
+          this.dependents.forEach(d => d.delete());
         }
         if (this.system._dep && this.uuid) {
           game.teriock.dependentsRegistry.untrack(this.system._dep, this);
@@ -426,7 +395,7 @@ export default function HierarchyDocumentMixin(Base) {
         // If this is deleted as part of a folder it might not call the appropriate operation and descendents need
         // to be deleted separately. This sucks but IDK a better solution.
         this.constructor.deleteDocuments(
-          this.allSubs.contents.map((s) => s._id),
+          this.allSubs.contents.map(s => s._id),
           { parent: this.parent, pack: this.compendium?.collection },
         );
         this.#renderSheets();
@@ -466,9 +435,7 @@ export default function HierarchyDocumentMixin(Base) {
       checkAncestor(doc) {
         if (doc?.uuid === this.uuid) return true;
         else {
-          return this.elder?.checkAncestor
-            ? this.elder?.checkAncestor(doc) || false
-            : false;
+          return this.elder?.checkAncestor ? this.elder?.checkAncestor(doc) || false : false;
         }
       }
 
@@ -495,11 +462,7 @@ export default function HierarchyDocumentMixin(Base) {
         for (const doc of data) {
           foundry.utils.setProperty(doc, "system._dep", this.id);
         }
-        return this.actor.createEmbeddedDocuments(
-          embeddedName,
-          data,
-          operation,
-        );
+        return this.actor.createEmbeddedDocuments(embeddedName, data, operation);
       }
 
       /**
@@ -515,16 +478,10 @@ export default function HierarchyDocumentMixin(Base) {
           foundry.utils.setProperty(doc, "folder", this.folder?.id || null);
         }
         if (this.parent) {
-          return this.parent.createEmbeddedDocuments(
-            this.documentName,
-            data,
-            operation,
-          );
+          return this.parent.createEmbeddedDocuments(this.documentName, data, operation);
         } else {
           if (this.inCompendium) operation.pack = this.collection.collection;
-          return await foundry.utils
-            .getDocumentClass(this.documentName)
-            .createDocuments(data, operation);
+          return await foundry.utils.getDocumentClass(this.documentName).createDocuments(data, operation);
         }
       }
 
@@ -544,18 +501,12 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteSubDocuments(ids = [], operation = {}) {
-        ids = ids.filter((id) => this.subs.map((s) => s._id).includes(id));
+        ids = ids.filter(id => this.subs.map(s => s._id).includes(id));
         if (this.parent) {
-          return this.parent.deleteEmbeddedDocuments(
-            this.documentName,
-            ids,
-            operation,
-          );
+          return this.parent.deleteEmbeddedDocuments(this.documentName, ids, operation);
         } else {
           if (this.inCompendium) operation.pack = this.collection.collection;
-          return await foundry.utils
-            .getDocumentClass(this.documentName)
-            .deleteDocuments(ids, operation);
+          return await foundry.utils.getDocumentClass(this.documentName).deleteDocuments(ids, operation);
         }
       }
 
@@ -638,20 +589,12 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async updateSubDocuments(updates = [], operation = {}) {
-        updates = updates.filter((update) =>
-          this.subs.map((s) => s._id).includes(update._id),
-        );
+        updates = updates.filter(update => this.subs.map(s => s._id).includes(update._id));
         if (this.parent) {
-          return this.parent.updateEmbeddedDocuments(
-            this.documentName,
-            updates,
-            operation,
-          );
+          return this.parent.updateEmbeddedDocuments(this.documentName, updates, operation);
         } else {
           if (this.inCompendium) operation.pack = this.collection.collection;
-          return await foundry.utils
-            .getDocumentClass(this.documentName)
-            .updateDocuments(updates, operation);
+          return await foundry.utils.getDocumentClass(this.documentName).updateDocuments(updates, operation);
         }
       }
     }

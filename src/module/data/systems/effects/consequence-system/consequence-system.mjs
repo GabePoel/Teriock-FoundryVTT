@@ -1,4 +1,4 @@
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { associationsField } from "../../../fields/helpers/builders.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
@@ -9,15 +9,9 @@ import ApplicableEffectSystem from "../applicable-effect-system/applicable-effec
  * @extends {Teriock.Models.ConsequenceSystemData}
  * @mixes TransformationSystem
  */
-export default class ConsequenceSystem extends mix(
-  ApplicableEffectSystem,
-  mixins.TransformationSystemMixin,
-) {
+export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem, mixins.TransformationSystemMixin) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Consequence",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consequence"];
 
   /** @inheritDoc */
   static get metadata() {
@@ -25,16 +19,7 @@ export default class ConsequenceSystem extends mix(
       childEffectTypes: ["ability", "fluency", "resource"],
       childItemTypes: ["body", "equipment", "power", "rank", "species"],
       type: "consequence",
-      visibleTypes: [
-        "ability",
-        "body",
-        "equipment",
-        "fluency",
-        "power",
-        "rank",
-        "resource",
-        "species",
-      ],
+      visibleTypes: ["ability", "body", "equipment", "fluency", "power", "rank", "resource", "species"],
     });
   }
 

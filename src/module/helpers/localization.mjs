@@ -15,9 +15,7 @@ import { sortObject } from "./utils.mjs";
  * @returns {Record<string, string>}
  */
 export function localizeChoices(choices, options = { sort: true }) {
-  const out = Object.fromEntries(
-    Object.entries(choices).map(([k, v]) => [k, _loc(v)]),
-  );
+  const out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _loc(v)]));
   if (options.sort) return sortObject(out, { value: true });
   return out;
 }
@@ -31,13 +29,9 @@ export function localizeChoices(choices, options = { sort: true }) {
 export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
   const sort = (lhs, rhs) =>
-    foundry.utils.getType(lhs) === "string"
-      ? lhs.localeCompare(rhs, game.i18n.lang)
-      : lhs - rhs;
-  if (foundry.utils.getType(sortKey) === "function")
-    sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
-  else if (sortKey)
-    sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
+    foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
+  if (foundry.utils.getType(sortKey) === "function") sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
+  else if (sortKey) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
   else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
   return Object.fromEntries(sorted);
 }
@@ -61,10 +55,7 @@ const _preLocalizationRegistrations = {};
  * @param {TransformKey} [options.transform] - Add a transformation to the value before localizing.
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
  */
-export function preLocalize(
-  configKeyPath,
-  { key, keys = [], sort = false, prefix = "", transform, suffix = "" } = {},
-) {
+export function preLocalize(configKeyPath, { key, keys = [], sort = false, prefix = "", transform, suffix = "" } = {}) {
   if (key) keys.unshift(key);
   _preLocalizationRegistrations[configKeyPath] = {
     keys,
@@ -80,20 +71,13 @@ export function preLocalize(
  * @param {object} config - The `TERIOCK` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization(config) {
-  for (const [keyPath, settings] of Object.entries(
-    _preLocalizationRegistrations,
-  )) {
+  for (const [keyPath, settings] of Object.entries(_preLocalizationRegistrations)) {
     const target = foundry.utils.getProperty(config, keyPath);
     if (!target) continue;
     localizeObject(target, settings);
-    if (settings.sort)
-      foundry.utils.setProperty(
-        config,
-        keyPath,
-        sortObjectEntries(target, settings.keys[0]),
-      );
+    if (settings.sort) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
   }
-  Object.values(CONFIG.statusEffects).forEach((e) => {
+  Object.values(CONFIG.statusEffects).forEach(e => {
     e.name = _loc(e.name);
   });
 }
@@ -107,10 +91,7 @@ export function performPreLocalization(config) {
  * @param {string} [options.suffix] - An optional suffix to add to the value being localized.
  * @param {TransformKey} [options.transform] - An optional transformation to make to the value before localizing.
  */
-export function localizeObject(
-  obj,
-  { keys, prefix = "", transform, suffix = "" } = {},
-) {
+export function localizeObject(obj, { keys, prefix = "", transform, suffix = "" } = {}) {
   for (const [k, v] of Object.entries(obj)) {
     const type = typeof v;
     if (type === "string") {
@@ -120,29 +101,19 @@ export function localizeObject(
 
     if (type !== "object") {
       console.error(
-        new Error(
-          `Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`,
-        ),
+        new Error(`Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`),
       );
       continue;
     }
     if (!keys?.length) {
-      console.error(
-        new Error(
-          "Localization keys must be provided for pre-localizing when target is an object.",
-        ),
-      );
+      console.error(new Error("Localization keys must be provided for pre-localizing when target is an object."));
       continue;
     }
 
     for (const key of keys) {
       const value = foundry.utils.getProperty(v, key);
       if (!value) continue;
-      foundry.utils.setProperty(
-        v,
-        key,
-        _loc(prefix + transformValue(value, transform) + suffix),
-      );
+      foundry.utils.setProperty(v, key, _loc(prefix + transformValue(value, transform) + suffix));
     }
   }
 }

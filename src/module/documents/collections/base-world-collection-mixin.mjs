@@ -15,7 +15,7 @@ export default function BaseWorldCollectionMixin(Base) {
        * @returns {TeriockDocument[]}
        */
       get owned() {
-        return this.contents.filter((d) => d.isOwner);
+        return this.contents.filter(d => d.isOwner);
       }
     }
   );

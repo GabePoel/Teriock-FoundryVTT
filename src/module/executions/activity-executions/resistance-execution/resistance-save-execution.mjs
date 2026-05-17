@@ -7,9 +7,7 @@ import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
  * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
-export default class ResistanceExecution extends ThresholdExecutionMixin(
-  ImmunityExecution,
-) {
+export default class ResistanceExecution extends ThresholdExecutionMixin(ImmunityExecution) {
   /**
    * @param {Teriock.Execution.ResistanceExecutionOptions} options
    */
@@ -17,10 +15,7 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(
     super(options);
     if (options.threshold === undefined) this.threshold = 10;
     this.img =
-      options.img ||
-      (this.hex
-        ? getImage("effect-types", "Hexproof")
-        : getImage("effect-types", "Resistance"));
+      options.img || (this.hex ? getImage("effect-types", "Hexproof") : getImage("effect-types", "Resistance"));
     this.rule = this.hex ? "hexproof" : "resistance";
     this.LABEL = "Resistance";
   }

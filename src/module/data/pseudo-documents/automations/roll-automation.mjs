@@ -1,4 +1,4 @@
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { commands } from "../../../helpers/interaction/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -19,16 +19,13 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  * @mixes DisplayAutomation
  */
-export default class RollAutomation extends mix(
+export default class RollAutomation extends mixClasses(
   BaseAutomation,
   mixins.DisplayAutomationMixin,
   mixins.TriggerAutomationMixin,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.AUTOMATIONS.Roll",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Roll"];
 
   /** @inheritDoc */
   static get LABEL() {
@@ -45,9 +42,7 @@ export default class RollAutomation extends mix(
     return Object.assign(super.defineSchema(), {
       formula: new FormulaField({ deterministic: false, nullable: true }),
       impact: new fields.StringField({
-        choices: localizeChoices(
-          objectMap(TERIOCK.config.impact, (i) => i.deal),
-        ),
+        choices: localizeChoices(objectMap(TERIOCK.config.impact, i => i.deal)),
         initial: "damage",
         nullable: false,
         required: true,
@@ -65,8 +60,8 @@ export default class RollAutomation extends mix(
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "formula"];
-    if (!this.merge) paths.push("display.label");
-    if (!this.trigger) paths.push("merge");
+    if (!this.merge || this.impact === "other") paths.push("display.label");
+    if (!this.trigger && this.impact !== "other") paths.push("merge");
     paths.push(...super._formPaths);
     return paths;
   }
@@ -78,7 +73,7 @@ export default class RollAutomation extends mix(
         new RollActivation({
           display: this.display,
           formula: this.formula,
-          merge: this.merge,
+          merge: this.impact === "other" ? false : this.merge,
           impact: this.impact,
         }),
       ];
@@ -87,12 +82,13 @@ export default class RollAutomation extends mix(
   }
 
   /** @inheritDoc */
-  _onFire() {
+  _onFire(scope) {
     if (!this.document.actor) return;
     const command = commands[this.impact];
     command.primary(this.document.actor, {
       boost: true,
       formula: this.formula,
+      rollData: scope?.execution?.rollData,
     });
   }
 }

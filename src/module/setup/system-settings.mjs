@@ -162,18 +162,14 @@ export const settings = {
       hint: "TERIOCK.SETTINGS.documentDamageSources.hint",
       name: "TERIOCK.SETTINGS.documentDamageSources.name",
       scope: "world",
-      type: new fields.SetField(
-        new fields.DocumentUUIDField({ type: "JournalEntry" }),
-      ),
+      type: new fields.SetField(new fields.DocumentUUIDField({ type: "JournalEntry" })),
     },
     documentDrainSources: {
       default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
       hint: "TERIOCK.SETTINGS.documentDrainSources.hint",
       name: "TERIOCK.SETTINGS.documentDrainSources.name",
       scope: "world",
-      type: new fields.SetField(
-        new fields.DocumentUUIDField({ type: "JournalEntry" }),
-      ),
+      type: new fields.SetField(new fields.DocumentUUIDField({ type: "JournalEntry" })),
     },
   },
   gameMasterControls: {

@@ -92,15 +92,9 @@ export default class BaseDetectionMode extends DetectionMode {
     if (tgt) {
       if (src.hasStatusEffect("ethereal") === tgt.hasStatusEffect("ethereal")) {
         return true;
-      } else if (
-        !src.hasStatusEffect("ethereal") &&
-        tgt.hasStatusEffect("ethereal")
-      ) {
+      } else if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal")) {
         return this.ethereal;
-      } else if (
-        src.hasStatusEffect("ethereal") &&
-        !tgt.hasStatusEffect("ethereal")
-      ) {
+      } else if (src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal")) {
         return this.material;
       }
     }
@@ -117,12 +111,8 @@ export default class BaseDetectionMode extends DetectionMode {
       const srcActor = src.actor;
       const tgtActor = tgt.actor;
       if (srcActor && tgtActor) {
-        const perceive =
-          srcActor.system.detection.perceiving ??
-          srcActor.system.attributes.per.passive;
-        const hide =
-          tgtActor.system.detection.hiding ??
-          tgtActor.system.attributes.snk.passive;
+        const perceive = srcActor.system.detection.perceiving ?? srcActor.system.attributes.per.passive;
+        const hide = tgtActor.system.detection.hiding ?? tgtActor.system.attributes.snk.passive;
         return perceive > hide;
       }
     }

@@ -10,13 +10,9 @@ if (actor) {
     found++;
     if (i >= 5) continue;
     await consequence.delete();
-    await teriock.helpers.resolve.ensureChildren(actor, [
-      `consequence:stage-${i + 1}-black-rot`,
-    ]);
+    await teriock.helpers.resolve.ensureChildren(actor, [`consequence:stage-${i + 1}-black-rot`]);
   }
   if (found === 0) {
-    await teriock.helpers.resolve.ensureChildren(actor, [
-      `consequence:stage-1-black-rot`,
-    ]);
+    await teriock.helpers.resolve.ensureChildren(actor, [`consequence:stage-1-black-rot`]);
   }
 }

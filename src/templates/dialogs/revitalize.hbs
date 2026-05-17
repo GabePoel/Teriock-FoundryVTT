@@ -1,7 +1,7 @@
 <form class="dialog-form standard-form heal-dialog">
   <div class="stat-header">
-    <div class="ab-profile-img timage" data-tooltip="{{name}}">
-      <img src="{{img}}" alt="">
+    <div class="ab-profile-img timage" data-tooltip="{{ name }}">
+      <img src="{{ img }}" alt="" />
     </div>
     <div class="stat-bar">
       {{> "teriock/sheets/actors/playable/parts/bar-mp"}}
@@ -10,9 +10,16 @@
   <p class="hint">{{localize "TERIOCK.DIALOGS.Revitalize.hint"}}</p>
   <fieldset class="heal-dialog-dice">
     <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.mp.label"}}</legend>
-    {{> "teriock/ui/stat-dice" dice=system.mp.dice}}
+    {{> "teriock/ui/stat-dice"
+      dice=system.mp.dice
+    }}
   </fieldset>
-  {{formGroup forHarmField value=forHarm rootId=uuid name="for-harm"}}
+  {{formGroup
+    forHarmField
+    value=forHarm
+    rootId=uuid
+    name="for-harm"
+  }}
   {{formGroup
     consumeStatDiceField
     value=consumeStatDice
@@ -21,7 +28,8 @@
   }}
   <footer class="form-footer" style="margin-top:auto;">
     <button type="submit" data-action="ok" autofocus>
-      {{makeIcon TERIOCK.display.icons.ui.done "button"}}<span>{{localize "TERIOCK.DIALOGS.Revitalize.done"}}</span>
+      {{makeIcon TERIOCK.display.icons.ui.done "button"}}
+      <span>{{localize "TERIOCK.DIALOGS.Revitalize.done"}}</span>
     </button>
   </footer>
 </form>

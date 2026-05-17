@@ -1,8 +1,5 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
-import {
-  ensureChildren,
-  ensureNoChildren,
-} from "../../../../../../helpers/resolve.mjs";
+import { ensureChildren, ensureNoChildren } from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -11,7 +8,7 @@ const { fields } = foundry.data;
  * Equipment data model mixin that handles equipping, gluing, and attunement.
  * @param {typeof EquipmentSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseItemSystem}
@@ -38,11 +35,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       get canEquip() {
-        return (
-          ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-          this.actor &&
-          !this.equipped
-        );
+        return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.actor && !this.equipped;
       }
 
       /**
@@ -50,11 +43,7 @@ export default (Base) => {
        * @returns {boolean}
        */
       get canUnequip() {
-        return (
-          ((this.consumable && this.quantity >= 1) || !this.consumable) &&
-          this.actor &&
-          this.equipped
-        );
+        return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.actor && this.equipped;
       }
 
       /** @inheritDoc */
@@ -70,14 +59,9 @@ export default (Base) => {
             tooltip: this.glued
               ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
               : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-            visible:
-              this.parent.isOwner &&
-              this.actor &&
-              this.actor.type !== "inventory",
+            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
           },
-          ...super.embedIcons.filter(
-            (i) => !i.action?.toLowerCase().includes("disabled"),
-          ),
+          ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
           {
             action: "toggleEquippedDoc",
             icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
@@ -124,41 +108,28 @@ export default (Base) => {
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
             onClick: this.equip.bind(this),
-            visible:
-              this.canEquip &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
+            visible: this.canEquip && this.parent._checkValidEditorDocument(doc, { self: false }),
           },
           {
             group: "control",
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
             onClick: this.unequip.bind(this),
-            visible:
-              this.canUnequip &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
+            visible: this.canUnequip && this.parent._checkValidEditorDocument(doc, { self: false }),
           },
           {
             group: "control",
             icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
             onClick: this.glue.bind(this),
-            visible:
-              !this.glued &&
-              this.actor &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
+            visible: !this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
           },
           {
             group: "control",
-            icon: makeIcon(
-              TERIOCK.display.icons.equipment.unglue,
-              "contextMenu",
-            ),
+            icon: makeIcon(TERIOCK.display.icons.equipment.unglue, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
             onClick: this.unglue.bind(this),
-            visible:
-              this.glued &&
-              this.actor &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
+            visible: this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
           },
         ];
       }

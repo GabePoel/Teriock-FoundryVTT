@@ -1,6 +1,6 @@
 import { costConfig } from "../../../../constants/config/cost-config.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as shared from "../../../shared/mixins/_module.mjs";
@@ -36,7 +36,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ThresholdData
  * @mixes WikiSystem
  */
-export default class AbilitySystem extends mix(
+export default class AbilitySystem extends mixClasses(
   CleanedEffectSystem,
   shared.ThresholdDataMixin,
   mixins.AttackSystemMixin,
@@ -59,10 +59,7 @@ export default class AbilitySystem extends mix(
   parts.AbilityMetaphysicsPart,
 ) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Ability",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Ability"];
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -135,24 +132,19 @@ export default class AbilitySystem extends mix(
   get displayFields() {
     const fields = [
       {
-        button: _loc(
-          "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button",
-        ),
+        button: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
         classes: TERIOCK.display.panel.classes.elderSorcery,
-        label: _loc(
-          "TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements",
-          { elements: this.elementString },
-        ),
+        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements", { elements: this.elementString }),
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
       },
-      ...Object.keys(costConfig.primary.keys).map((k) => {
+      ...Object.keys(costConfig.primary.keys).map(k => {
         return {
           path: `system.costs.primary.${k}.description`,
           visible: this.costs.primary[k].type === "description",
         };
       }),
-      ...Object.keys(costConfig.components.keys).map((k) => {
+      ...Object.keys(costConfig.components.keys).map(k => {
         return {
           path: `system.costs.components.${k}.description`,
           visible: this.costs.components[k].type === "description",
@@ -163,35 +155,21 @@ export default class AbilitySystem extends mix(
       ...this.constructor._adjustableTextFields,
       "system.overview.base",
       {
-        classes: this.competence.proficient
-          ? ""
-          : TERIOCK.display.panel.classes.faded,
+        classes: this.competence.proficient ? "" : TERIOCK.display.panel.classes.faded,
         path: "system.overview.proficient",
       },
       {
-        classes: this.competence.fluent
-          ? ""
-          : TERIOCK.display.panel.classes.faded,
+        classes: this.competence.fluent ? "" : TERIOCK.display.panel.classes.faded,
         path: "system.overview.fluent",
       },
     ];
     if (this.interaction === "attack") {
       fields.push(
-        ...[
-          "system.results.hit",
-          "system.results.critHit",
-          "system.results.miss",
-          "system.results.critMiss",
-        ],
+        ...["system.results.hit", "system.results.critHit", "system.results.miss", "system.results.critMiss"],
       );
     } else if (this.interaction === "feat") {
       fields.push(
-        ...[
-          "system.results.fail",
-          "system.results.critFail",
-          "system.results.save",
-          "system.results.critSave",
-        ],
+        ...["system.results.fail", "system.results.critFail", "system.results.save", "system.results.critSave"],
       );
     } else {
       fields.push(...["system.results.save", "system.results.fail"]);
@@ -216,14 +194,10 @@ export default class AbilitySystem extends mix(
           path: "system.consumeSourceText",
         },
         {
-          classes: [
-            TERIOCK.display.panel.classes.derived,
-            TERIOCK.display.panel.classes.editable,
-          ].join(" "),
+          classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
           dataset: {
             action: "updatePaths",
-            paths:
-              "system.upgrades.score.attribute system.upgrades.score.value",
+            paths: "system.upgrades.score.attribute system.upgrades.score.value",
             title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
             icon: TERIOCK.display.icons.ui.numerical,
           },
@@ -231,17 +205,11 @@ export default class AbilitySystem extends mix(
           path: "system.upgrades.score.text",
         },
         {
-          classes: [
-            TERIOCK.display.panel.classes.derived,
-            TERIOCK.display.panel.classes.editable,
-          ].join(" "),
+          classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
           dataset: {
             action: "updatePaths",
-            paths:
-              "system.upgrades.competence.attribute system.upgrades.competence.value",
-            title: _loc(
-              "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update",
-            ),
+            paths: "system.upgrades.competence.attribute system.upgrades.competence.value",
+            title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update"),
             icon: TERIOCK.display.icons.competence.fluent,
           },
           editable: false,
@@ -282,9 +250,7 @@ export default class AbilitySystem extends mix(
 
   /** @inheritDoc */
   get embedIcons() {
-    let icons = super.embedIcons.filter(
-      (i) => !this.isBasic || !i.action?.toLowerCase().includes("disabled"),
-    );
+    const icons = super.embedIcons.filter(i => !this.isBasic || !i.action?.toLowerCase().includes("disabled"));
     if (this.isBasic) {
       icons.push({
         action: "toggleDisableLocked",
@@ -310,9 +276,7 @@ export default class AbilitySystem extends mix(
     const parts = super.embedParts;
     if (!this.consumable) {
       parts.subtitle =
-        TERIOCK.config.ability.executionTime[this.maneuver]?.[
-          this.executionTime.base
-        ] ?? this.executionTime.slow?.text;
+        TERIOCK.config.ability.executionTime[this.maneuver]?.[this.executionTime.base] ?? this.executionTime.slow?.text;
     }
     return parts;
   }
@@ -327,10 +291,7 @@ export default class AbilitySystem extends mix(
    * @returns {boolean}
    */
   get isVirtual() {
-    return (
-      this.parent.inCompendium &&
-      this.parent.parent?.system.identifier === "basic-abilities"
-    );
+    return this.parent.inCompendium && this.parent.parent?.system.identifier === "basic-abilities";
   }
 
   /**
@@ -339,7 +300,7 @@ export default class AbilitySystem extends mix(
    */
   get targetString() {
     return Array.from(this.targets)
-      .map((t) => TERIOCK.config.ability.targets[t])
+      .map(t => TERIOCK.config.ability.targets[t])
       .sort((a, b) => a.localeCompare(b))
       .join(_loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
   }

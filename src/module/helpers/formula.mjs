@@ -135,7 +135,7 @@ function getTermTypes(term) {
     term.flavor
       .toLowerCase()
       .split(" ")
-      .map((type) => type.trim())
+      .map(type => type.trim())
       .filter(Boolean),
   );
 }
@@ -177,7 +177,7 @@ function addTermTypes(term, types) {
 function processFormula(formula, types, fn) {
   if (["string", "number"].includes(typeof types)) types = [types.toString()];
   if (!formulaExists(formula)) return formula;
-  types = new Set(Array.from(types).filter((t) => isKebabCase(t)));
+  types = new Set(Array.from(types).filter(t => isKebabCase(t)));
   const roll = new BaseRoll(formula);
   for (const term of roll._allTerms) fn(term, types);
   return roll.formula;

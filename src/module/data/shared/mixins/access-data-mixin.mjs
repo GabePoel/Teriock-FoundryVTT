@@ -57,7 +57,7 @@ export default function AccessDataMixin(Base) {
       async _getEditorForms() {
         const group = document.createElement("div");
         group.classList.add("teriock-form-container");
-        this._makeFormGroups(this._formPaths).forEach((fg) => group.append(fg));
+        this._makeFormGroups(this._formPaths).forEach(fg => group.append(fg));
         return group;
       }
 
@@ -86,9 +86,7 @@ export default function AccessDataMixin(Base) {
        * @returns {HTMLElement[]}
        */
       _makeFormGroups(paths) {
-        return paths.map((p) =>
-          p === "hr" ? document.createElement("hr") : this._makeFormGroup(p),
-        );
+        return paths.map(p => (p === "hr" ? document.createElement("hr") : this._makeFormGroup(p)));
       }
 
       /**

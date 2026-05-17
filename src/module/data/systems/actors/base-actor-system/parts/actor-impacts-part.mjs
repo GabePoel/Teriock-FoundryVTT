@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Actor data model mixin that handles rollable takes.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -66,19 +66,9 @@ export default (Base) => {
         });
         const rootId = foundry.utils.randomID();
         const content = document.createElement("div");
-        content.append(
-          amountField.toFormGroup(
-            { rootId },
-            { value: initialAmount, name: "amount" },
-          ),
-        );
+        content.append(amountField.toFormGroup({ rootId }, { value: initialAmount, name: "amount" }));
         if (entry.morganti) {
-          content.append(
-            morgantiField.toFormGroup(
-              { rootId },
-              { value: initialMorganti, name: "morganti" },
-            ),
-          );
+          content.append(morgantiField.toFormGroup({ rootId }, { value: initialMorganti, name: "morganti" }));
         }
         await TeriockDialog.prompt({
           content,
@@ -87,10 +77,7 @@ export default (Base) => {
             callback: async (_event, button) => {
               let morganti;
               const value = button.form.elements.namedItem("amount").value;
-              const amount =
-                typeof value === "string" && value.length > 0
-                  ? Number(value)
-                  : null;
+              const amount = typeof value === "string" && value.length > 0 ? Number(value) : null;
               if (entry.morganti) {
                 morganti = button.form.elements.namedItem("morganti")?.checked;
               }

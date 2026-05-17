@@ -1,7 +1,4 @@
-import {
-  boostDialog,
-  selectDocumentsDialog,
-} from "../../../applications/dialogs/_module.mjs";
+import { boostDialog, selectDocumentsDialog } from "../../../applications/dialogs/_module.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
@@ -18,17 +15,12 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   constructor(options = {}) {
     super(options);
     this.crit = options.crit ?? false;
-    this.impacts = new Set(
-      options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"],
-    );
+    this.impacts = new Set(options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"]);
     this.bonus = options.bonus ?? "";
     this.showDialog = options.showDialog;
     this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
     this.formula =
-      options.formula ??
-      (this.twoHanded
-        ? this.source.system.damage.twoHanded
-        : this.source.system.damage.base);
+      options.formula ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
   }
 
   crit = false;
@@ -40,7 +32,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   get #typedRolls() {
     if (this.rolls.length === 0) return [];
     const roll = this.rolls[0];
-    return Array.from(this.impacts).map((impact) => {
+    return Array.from(this.impacts).map(impact => {
       const impactRoll = roll.clone({ evaluated: true });
       impactRoll.impact = impact;
       return impactRoll;
@@ -58,7 +50,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     for (const p of this.source.properties) {
       automations.push(...p.system.automations.contents);
     }
-    return new TypeCollection(automations.map((a) => [a.id, a]));
+    return new TypeCollection(automations.map(a => [a.id, a]));
   }
 
   /** @inheritDoc */
@@ -129,9 +121,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   _hasBoostForImpact(impact) {
     return (
       super._hasBoostForImpact(impact) ||
-      (this._boostsResolved[impact] &&
-        this.impacts.has(impact) &&
-        formulaExists(this.formula))
+      (this._boostsResolved[impact] && this.impacts.has(impact) && formulaExists(this.formula))
     );
   }
 
@@ -147,11 +137,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       });
       for (const ability of usedAbilities) {
         if (ability.system.consumable && this.source.system.consumable) {
-          if (
-            ability.system.quantity !== 1 &&
-            this.source.isOwner &&
-            !this.source.inCompendium
-          ) {
+          if (ability.system.quantity !== 1 && this.source.isOwner && !this.source.inCompendium) {
             await this.source.setFlag("teriock", "dontConsume", true);
           }
         }

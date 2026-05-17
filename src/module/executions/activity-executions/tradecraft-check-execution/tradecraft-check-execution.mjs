@@ -8,15 +8,11 @@ import { TradecraftExecutionMixin } from "../../mixins/_module.mjs";
  * @mixes TradecraftExecution
  * @property {Teriock.Execution.TradecraftExecutionOptions} options
  */
-export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
-  BaseExecution,
-) {
+export default class TradecraftCheckExecution extends TradecraftExecutionMixin(BaseExecution) {
   /**
    * @param {Teriock.Execution.TradecraftExecutionOptions} options
    */
-  constructor(
-    options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {},
-  ) {
+  constructor(options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {}) {
     super(options);
     this._tradecraft = options.tradecraft;
   }
@@ -25,10 +21,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
       system: {
-        _src: ruleUuid(
-          "Tradecraft",
-          TERIOCK.index.tradecrafts[this.tradecraft],
-        ),
+        _src: ruleUuid("Tradecraft", TERIOCK.index.tradecrafts[this.tradecraft]),
       },
     });
   }
@@ -68,8 +61,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(
    */
   _determineCompetence(options) {
     if (this.actor) {
-      this.competence.raw =
-        this.actor.system.tradecrafts[options.tradecraft].competence.value;
+      this.competence.raw = this.actor.system.tradecrafts[options.tradecraft].competence.value;
     }
     super._determineCompetence(options);
   }

@@ -1,14 +1,19 @@
 <form class="dialog-form standard-form heal-dialog">
   <div class="stat-header">
-    <div class="ab-profile-img timage" data-tooltip="{{name}}">
-      <img src="{{img}}" alt="">
+    <div class="ab-profile-img timage" data-tooltip="{{ name }}">
+      <img src="{{ img }}" alt="" />
     </div>
     <div class="stat-bar">
       {{> "teriock/sheets/actors/playable/parts/bar-hp"}}
     </div>
   </div>
-  <p class="hint">{{#if noDice}}{{localize "TERIOCK.DIALOGS.Heal.hintNoDice"}}{{else}}{{localize
-    "TERIOCK.DIALOGS.Heal.hintWithDice"}}{{/if}}</p>
+  <p class="hint">
+    {{#if noDice}}
+      {{localize "TERIOCK.DIALOGS.Heal.hintNoDice"}}
+    {{else}}
+      {{localize "TERIOCK.DIALOGS.Heal.hintWithDice"}}
+    {{/if}}
+  </p>
   <fieldset class="heal-dialog-hacks">
     <legend>{{localize "TERIOCK.TERMS.Common.hacks"}}</legend>
     {{> "teriock/sheets/actors/playable/parts/hack-box"}}
@@ -16,7 +21,9 @@
   {{#if (not noDice)}}
     <fieldset class="heal-dialog-dice">
       <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label"}}</legend>
-      {{> "teriock/ui/stat-dice" dice=system.hp.dice}}
+      {{> "teriock/ui/stat-dice"
+        dice=system.hp.dice
+      }}
     </fieldset>
   {{/if}}
   {{#if (not noDice)}}
@@ -35,7 +42,8 @@
   {{/if}}
   <footer class="form-footer" style="margin-top:auto;">
     <button type="submit" data-action="ok" autofocus>
-      {{makeIcon TERIOCK.display.icons.ui.done "button"}}<span>{{localize "TERIOCK.DIALOGS.Heal.done"}}</span>
+      {{makeIcon TERIOCK.display.icons.ui.done "button"}}
+      <span>{{localize "TERIOCK.DIALOGS.Heal.done"}}</span>
     </button>
   </footer>
 </form>

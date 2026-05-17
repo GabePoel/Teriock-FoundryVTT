@@ -7,7 +7,7 @@ const { EmbeddedDataField } = foundry.data.fields;
 /**
  * @param {typeof EquipmentSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {ConsumableSystem}
@@ -38,19 +38,14 @@ export default (Base) => {
        */
       get totalWeight() {
         if (this.stashed) return 0;
-        let total =
-          this.weight *
-          (this.consumable ? this.quantity : 1) *
-          this.weightMultiplier;
+        let total = this.weight * (this.consumable ? this.quantity : 1) * this.weightMultiplier;
         if (this.storage.enabled) total += this.storage.carriedWeight;
         return total.toNearest(equipmentConfig.weight.interval);
       }
 
       /** @inheritDoc */
       get visibleTypes() {
-        return this.storage.enabled
-          ? super.visibleTypes
-          : super.visibleTypes.filter((t) => t !== "equipment");
+        return this.storage.enabled ? super.visibleTypes : super.visibleTypes.filter(t => t !== "equipment");
       }
 
       /**
@@ -69,7 +64,7 @@ export default (Base) => {
         super._onUpdate(changed, options, userId);
         if (this.parent.checkEditor(userId)) {
           if (!this.storage.enabled && this.parent.equipment.length > 0) {
-            const updateData = this.parent.equipment.map((e) => {
+            const updateData = this.parent.equipment.map(e => {
               return { _id: e._id, "system._sup": null };
             });
             this.parent.updateChildDocuments("Item", updateData);

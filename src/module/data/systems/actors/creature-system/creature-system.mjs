@@ -25,12 +25,7 @@ export default class CreatureSystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) return false;
 
-    this.parent.updateSource(
-      foundry.utils.mergeObject(
-        { system: { scaling: { brScale: true } } },
-        data,
-      ),
-    );
+    this.parent.updateSource(foundry.utils.mergeObject({ system: { scaling: { brScale: true } } }, data));
   }
 
   /** @inheritDoc */

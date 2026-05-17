@@ -1,9 +1,7 @@
-import {
-  TeriockActor,
-  TeriockTokenDocument,
-} from "../../documents/_module.mjs";
-import { TeriockToken } from "../../canvas/placeables/_module.mjs";
 import { RollOptions } from "@client/dice/_types.mjs";
+
+import { TeriockToken } from "../../canvas/placeables/_module.mjs";
+import { TeriockActor, TeriockTokenDocument } from "../../documents/_module.mjs";
 import { BaseRoll } from "./_module.mjs";
 
 declare global {
@@ -27,11 +25,7 @@ declare global {
       tokenUuid?: UUID<TeriockTokenDocument>;
     };
 
-    type RawDieTarget =
-      | TeriockToken
-      | TeriockActor
-      | TeriockTokenDocument
-      | DieTarget;
+    type RawDieTarget = TeriockToken | TeriockActor | TeriockTokenDocument | DieTarget;
 
     type BaseRollOptions = RollOptions & {
       _id?: ID<BaseRoll>;

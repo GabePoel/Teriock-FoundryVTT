@@ -6,7 +6,7 @@ const { fields } = foundry.data;
  * Ability results part.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}

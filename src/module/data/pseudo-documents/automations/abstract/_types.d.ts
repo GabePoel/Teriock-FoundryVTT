@@ -1,5 +1,5 @@
-import { BaseItemSystem } from "../../../systems/items/_module.mjs";
 import { BaseEffectSystem } from "../../../systems/effects/_module.mjs";
+import { BaseItemSystem } from "../../../systems/items/_module.mjs";
 
 declare global {
   namespace Teriock.Automations {

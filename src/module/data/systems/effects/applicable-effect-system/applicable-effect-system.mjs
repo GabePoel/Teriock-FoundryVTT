@@ -1,6 +1,6 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
-import { mix } from "../../../../helpers/construction.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";
@@ -15,15 +15,9 @@ const { fields } = foundry.data;
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ApplicableEffectSystemData}
  */
-export default class ApplicableEffectSystem extends mix(
-  BaseEffectSystem,
-  ThresholdDataMixin,
-) {
+export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem, ThresholdDataMixin) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.SYSTEMS.Applicable",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -70,9 +64,7 @@ export default class ApplicableEffectSystem extends mix(
         conditions: conditionRequirementsField(),
         description: new fields.StringField(),
         sustained: new fields.BooleanField(),
-        triggers: new fields.SetField(
-          new fields.StringField({ choices: DurationModel._triggerChoices }),
-        ),
+        triggers: new fields.SetField(new fields.StringField({ choices: DurationModel._triggerChoices })),
       }),
       heightened: new fields.NumberField(),
     });
@@ -173,14 +165,8 @@ export default class ApplicableEffectSystem extends mix(
         icon: TERIOCK.display.icons.document.condition,
         label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
         wrappers: [
-          ...Array.from(
-            this.parent.statuses.map(
-              (status) => TERIOCK.reference.conditions[status],
-            ),
-          ),
-          this.critical
-            ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical")
-            : "",
+          ...Array.from(this.parent.statuses.map(status => TERIOCK.reference.conditions[status])),
+          this.critical ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical") : "",
           this.heightened
             ? this.heightened === 1
               ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")

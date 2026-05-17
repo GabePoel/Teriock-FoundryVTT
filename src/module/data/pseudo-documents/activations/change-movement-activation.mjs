@@ -4,9 +4,7 @@ import { AutomationActivationFactory } from "./abstract/_module.mjs";
 /**
  * @property {string} movementAction
  */
-export default class ChangeMovementActivation extends AutomationActivationFactory(
-  ChangeMovementAutomation,
-) {
+export default class ChangeMovementActivation extends AutomationActivationFactory(ChangeMovementAutomation) {
   /** @inheritDoc */
   static get ICON() {
     return "ms-sprint";
@@ -22,20 +20,12 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
 
   /** @inheritDoc */
   get icon() {
-    return (
-      this.symbol ||
-      CONFIG.Token.movement.actions[this.movementAction]?.icon ||
-      this.constructor.ICON
-    );
+    return this.symbol || CONFIG.Token.movement.actions[this.movementAction]?.icon || this.constructor.ICON;
   }
 
   /** @inheritDoc */
   get label() {
-    return (
-      this.display.label ||
-      ChangeMovementActivation.getLabel(this.movementAction) ||
-      this.constructor.LABEL
-    );
+    return this.display.label || ChangeMovementActivation.getLabel(this.movementAction) || this.constructor.LABEL;
   }
 
   /** @inheritDoc */

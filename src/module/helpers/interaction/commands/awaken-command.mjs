@@ -9,7 +9,7 @@ const command = {
   icon: icons.effect.awaken,
   id: "awaken",
   label: "TERIOCK.EFFECTS.Common.awaken",
-  primary: simpleCommandFunctionFactory((a) => a.system.takeAwaken()),
+  primary: simpleCommandFunctionFactory(a => a.system.takeAwaken()),
 };
 
 export default command;

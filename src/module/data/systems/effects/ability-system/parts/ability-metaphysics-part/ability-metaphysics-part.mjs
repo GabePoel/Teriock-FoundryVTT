@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Ability tags part.
  * @param {typeof AbilitySystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -45,29 +45,28 @@ export default (Base) => {
       get _metaphysicsTags() {
         const tags = [];
         tags.push(
-          ...Array.from(this.powerSources).map((t) => {
+          ...Array.from(this.powerSources).map(t => {
             return {
               label: TERIOCK.reference.powerSources[t],
               tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
             };
           }),
-          ...Array.from(this.elements).map((t) => {
+          ...Array.from(this.elements).map(t => {
             return {
               label: TERIOCK.reference.elements[t],
               tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label",
             };
           }),
           ...Array.from(this.effectTypes)
-            .filter((t) => !this.powerSources.has(t))
-            .map((t) => {
+            .filter(t => !this.powerSources.has(t))
+            .map(t => {
               return {
                 label: TERIOCK.reference.effectTypes[t],
                 tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label",
               };
             }),
         );
-        if (this.warded)
-          tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
+        if (this.warded) tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
         if (this.elderSorcery) {
           tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
         }
@@ -90,9 +89,7 @@ export default (Base) => {
         if (this.elements.size === 0) {
           return _loc("TERIOCK.TERMS.Common.celestial");
         }
-        return listFormat(
-          this.elements.map((e) => TERIOCK.reference.elements[e]),
-        );
+        return listFormat(this.elements.map(e => TERIOCK.reference.elements[e]));
       }
 
       /** @inheritDoc */
@@ -124,10 +121,7 @@ export default (Base) => {
 
         // Enforce power sources
         for (const ps of this.powerSources) {
-          if (
-            Object.keys(TERIOCK.reference.effectTypes).includes(ps) &&
-            !this.effectTypes.has(ps)
-          ) {
+          if (Object.keys(TERIOCK.reference.effectTypes).includes(ps) && !this.effectTypes.has(ps)) {
             this.effectTypes.add(ps);
           }
         }

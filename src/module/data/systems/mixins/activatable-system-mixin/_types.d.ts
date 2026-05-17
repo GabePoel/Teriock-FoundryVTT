@@ -4,10 +4,7 @@ declare global {
   namespace Teriock.Models {
     export type ActivatableSystemData = {
       /** <schema> Automations */
-      activations: TypeCollection<
-        ID<Teriock.Activations.Any>,
-        Teriock.Activations.Any
-      >;
+      activations: TypeCollection<ID<Teriock.Activations.Any>, Teriock.Activations.Any>;
     };
   }
 }

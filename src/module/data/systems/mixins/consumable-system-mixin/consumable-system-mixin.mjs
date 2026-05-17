@@ -15,10 +15,7 @@ export default function ConsumableSystemMixin(Base) {
      */
     class ConsumableSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Consumable",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consumable"];
 
       /** @inheritDoc */
       static PRESERVED_PROPERTIES = [
@@ -110,9 +107,7 @@ export default function ConsumableSystemMixin(Base) {
         const parts = super.embedParts;
         if (this.consumable) {
           parts.subtitleAction = "useOneDoc";
-          parts.subtitleTooltip = _loc(
-            "TERIOCK.SYSTEMS.Consumable.EMBED.consumeOne",
-          );
+          parts.subtitleTooltip = _loc("TERIOCK.SYSTEMS.Consumable.EMBED.consumeOne");
           parts.subtitle =
             this.maxQuantity.value === Infinity
               ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
@@ -139,11 +134,7 @@ export default function ConsumableSystemMixin(Base) {
       async gainOne() {
         if (this.consumable) {
           await this.parent.update({
-            "system.quantity": Math.clamp(
-              this.quantity + 1,
-              0,
-              this.maxQuantity.value,
-            ),
+            "system.quantity": Math.clamp(this.quantity + 1, 0, this.maxQuantity.value),
           });
         }
       }
@@ -174,11 +165,7 @@ export default function ConsumableSystemMixin(Base) {
       /** @inheritDoc */
       async use(options = {}) {
         await super.use(options);
-        if (
-          this.parent.isOwner &&
-          this.consumable &&
-          !this.parent.inCompendium
-        ) {
+        if (this.parent.isOwner && this.consumable && !this.parent.inCompendium) {
           if (!this.parent.getFlag("teriock", "dontConsume")) {
             await this.useOne();
           }
@@ -194,10 +181,7 @@ export default function ConsumableSystemMixin(Base) {
       async useOne() {
         if (this.consumable && this.consumptionAmount) {
           await this.parent.update({
-            "system.quantity": Math.max(
-              0,
-              this.quantity - this.consumptionAmount,
-            ),
+            "system.quantity": Math.max(0, this.quantity - this.consumptionAmount),
           });
         }
       }

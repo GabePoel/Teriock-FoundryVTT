@@ -1,5 +1,5 @@
 import { documentConfig } from "../../../constants/config/document-config.mjs";
-import { mix } from "../../../helpers/construction.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -13,7 +13,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @mixes CommonSheet
  * @property {AnyActiveEffect} document
  */
-export default class BaseEffectSheet extends mix(
+export default class BaseEffectSheet extends mixClasses(
   ActiveEffectConfig,
   mixins.CommonSheetMixin,
   mixins.ChildSheetMixin,

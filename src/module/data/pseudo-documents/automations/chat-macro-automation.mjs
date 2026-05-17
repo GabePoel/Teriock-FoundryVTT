@@ -1,9 +1,7 @@
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
-export default class ChatMacroAutomation extends MacroAutomationMixin(
-  BaseAutomation,
-) {
+export default class ChatMacroAutomation extends MacroAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
   static get TYPE() {
     return "chatMacro";

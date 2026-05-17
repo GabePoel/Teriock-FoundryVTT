@@ -6,7 +6,7 @@ const { fields } = foundry.data;
  * Actor data model that handles automation.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}

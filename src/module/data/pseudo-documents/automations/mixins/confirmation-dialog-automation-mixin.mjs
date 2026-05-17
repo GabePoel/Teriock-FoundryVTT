@@ -17,10 +17,7 @@ export default function ConfirmationDialogAutomationMixin(Base) {
      */
     class ConfirmationDialogAutomation extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.AUTOMATIONS.ConfirmationDialog",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ConfirmationDialog"];
 
       /** @inheritDoc */
       static defineSchema() {
@@ -86,13 +83,10 @@ export default function ConfirmationDialogAutomationMixin(Base) {
         );
         if (!this.showConfirmationDialog) return true;
         const contentString = options.content ?? this.#pre("DIALOG.content");
-        const icon =
-          options.icon ?? TERIOCK.display.icons.pseudoDocument.automation;
+        const icon = options.icon ?? TERIOCK.display.icons.pseudoDocument.automation;
         const title = _loc(options.title ?? this.#pre("DIALOG.title"), data);
         const contentText = _loc(contentString, data);
-        const content = await TeriockTextEditor.enrichHTML(
-          `<p>${contentText}</p>`,
-        );
+        const content = await TeriockTextEditor.enrichHTML(`<p>${contentText}</p>`);
         const config = foundry.utils.mergeObject(
           {
             content,

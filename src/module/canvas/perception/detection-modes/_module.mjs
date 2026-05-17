@@ -1,9 +1,9 @@
+export { default as BaseDetectionMode } from "./base-detection-mode.mjs";
 export { default as BlindFightingDetectionMode } from "./blind-fighting-detection-mode.mjs";
+export { default as EtherealDetectionMode } from "./ethereal-detection-mode.mjs";
 export { default as InvisibleDetectionMode } from "./invisible-detection-mode.mjs";
 export { default as LightDetectionMode } from "./light-detection-mode.mjs";
-export { default as EtherealDetectionMode } from "./ethereal-detection-mode.mjs";
 export { default as ScentDetectionMode } from "./scent-detection-mode.mjs";
 export { default as SoundDetectionMode } from "./sound-detection-mode.mjs";
-export { default as TrueSightDetectionMode } from "./true-sight-detection-mode.mjs";
-export { default as BaseDetectionMode } from "./base-detection-mode.mjs";
 export { default as SpectralDetectionMode } from "./spectral-detection-mode.mjs";
+export { default as TrueSightDetectionMode } from "./true-sight-detection-mode.mjs";

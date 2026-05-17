@@ -1,11 +1,13 @@
 /**
  * Mixin for common functions used across document classes that embed children.
- * @param {typeof CommonDocument} Base
+ * @param {typeof BaseDocument} Base
  */
 export default function ParentDocumentMixin(Base) {
   return (
     /**
-     * @extends {ClientDocument}
+     * @mixes BaseDocument
+     * @mixes CommonDocument
+     * @mixes PanelDocument
      * @mixin
      */
     class ParentDocument extends Base {

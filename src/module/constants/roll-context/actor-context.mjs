@@ -56,11 +56,9 @@ const actorContext = {
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
   h: "TERIOCK.ROLL_CONTEXT.Execution.h",
 
-  "db.stones.black":
-    "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.black.label",
+  "db.stones.black": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.black.label",
   "db.stones.red": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.red.label",
-  "db.stones.white":
-    "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.white.label",
+  "db.stones.white": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.white.label",
   "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
 
   "money.debt": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.label",
@@ -116,12 +114,9 @@ Hooks.once("i18nInit", () => {
       }),
     });
   });
-  Object.values(TERIOCK.config.character.movement).forEach((v) => {
+  Object.values(TERIOCK.config.character.movement).forEach(v => {
     Object.assign(actorContext, {
-      [`speed.${v.abbreviation}`]: _loc(
-        "TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment",
-        { type: _loc(v.label) },
-      ),
+      [`speed.${v.abbreviation}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: _loc(v.label) }),
     });
   });
 });

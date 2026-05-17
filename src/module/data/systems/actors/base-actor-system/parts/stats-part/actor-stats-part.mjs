@@ -1,7 +1,4 @@
-import {
-  healDialog,
-  revitalizeDialog,
-} from "../../../../../../applications/dialogs/_module.mjs";
+import { healDialog, revitalizeDialog } from "../../../../../../applications/dialogs/_module.mjs";
 import { docSort, rankSort } from "../../../../../../helpers/sort.mjs";
 import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
@@ -11,7 +8,7 @@ const { fields } = foundry.data;
  * Actor data model that handles stats.
  * @param {typeof BaseActorSystem} Base
  */
-export default (Base) => {
+export default Base => {
   return (
     /**
      * @extends {CommonSystem}
@@ -35,24 +32,15 @@ export default (Base) => {
         super._onUpdate(changed, options, userId);
         if (options.teriock) {
           // The large number catch is used to keep from rendering the stat change upon applying transformations
-          if (
-            options.teriock.mpChange !== 0 &&
-            options.teriock.mpChange < 999999
-          ) {
+          if (options.teriock.mpChange !== 0 && options.teriock.mpChange < 999999) {
             const color = options.teriock.mpChange > 0 ? "#99C1F1" : "#1A5FB4";
             this.animateStatChangeEffect(options.teriock.mpChange, color);
           }
-          if (
-            options.teriock.hpChange !== 0 &&
-            options.teriock.hpChange < 999999
-          ) {
+          if (options.teriock.hpChange !== 0 && options.teriock.hpChange < 999999) {
             const color = options.teriock.hpChange > 0 ? "#F66151" : "#A51D2D";
             this.animateStatChangeEffect(options.teriock.hpChange, color);
           }
-          if (
-            options.teriock.lpChange !== 0 &&
-            options.teriock.lpChange < 999999
-          ) {
+          if (options.teriock.lpChange !== 0 && options.teriock.lpChange < 999999) {
             const color = options.teriock.lpChange > 0 ? "#241F31" : "#5E5C64";
             this.animateStatChangeEffect(options.teriock.lpChange, color);
           }
@@ -100,9 +88,7 @@ export default (Base) => {
         let numRanks = 0;
         for (const item of items) {
           if (
-            (item.type === "rank" &&
-              !item.system.innate &&
-              numRanks >= statData.poolLimit) ||
+            (item.type === "rank" && !item.system.innate && numRanks >= statData.poolLimit) ||
             item.system.statDice[stat].disabled
           ) {
             continue;
@@ -111,7 +97,7 @@ export default (Base) => {
           statData._dice.push(...item.system.statDice[stat]._dice);
           statData.base += item.system.statDice[stat].value;
         }
-        statData.dice = new Collection(statData._dice.map((d) => [d.id, d]));
+        statData.dice = new Collection(statData._dice.map(d => [d.id, d]));
         statData.max = Math.max(1, statData.base);
         statData.min = -Math.floor(statData.max / 2);
         statData.max -= statData.morganti;
@@ -127,8 +113,7 @@ export default (Base) => {
        */
       async animateStatChangeEffect(diff, color = "white") {
         if (!diff || !canvas.scene) return;
-        const tokens =
-          /** @type {TeriockToken[]} */ this.parent.getActiveTokens();
+        const tokens = /** @type {TeriockToken[]} */ this.parent.getActiveTokens();
         const displayedDiff = diff.signedString();
         const displayArgs = {
           direction: diff > 0 ? 2 : 1,
@@ -137,7 +122,7 @@ export default (Base) => {
           stroke: 0x000000,
           strokeThickness: 4,
         };
-        tokens.forEach((token) => {
+        tokens.forEach(token => {
           if (!token.visible || token.document.isSecret) return;
           const scrollingTextArgs = [token.center, displayedDiff, displayArgs];
           canvas.interface.createScrollingText(...scrollingTextArgs);
@@ -178,11 +163,7 @@ export default (Base) => {
 
       /** @inheritDoc */
       prepareStatDice() {
-        const items = [
-          ...docSort(this.parent.species),
-          ...rankSort(this.parent.ranks),
-          ...docSort(this.parent.mounts),
-        ];
+        const items = [...docSort(this.parent.species), ...rankSort(this.parent.ranks), ...docSort(this.parent.mounts)];
         for (const item of items) {
           item.system.prepareStatDice();
         }
@@ -200,10 +181,7 @@ export default (Base) => {
        */
       async takeAwaken() {
         await this.parent.hookCall("takeAwaken");
-        if (
-          this.parent.statuses.has("unconscious") &&
-          !this.parent.statuses.has("dead")
-        ) {
+        if (this.parent.statuses.has("unconscious") && !this.parent.statuses.has("dead")) {
           if (this.hp.value <= 0) {
             await this.parent.update({ "system.hp.value": 1 });
           }
@@ -258,9 +236,7 @@ export default (Base) => {
             await this.takeRevitalizing(1 - this.mp.value);
           }
           await this.parent.toggleStatusEffect("dead", { active: false });
-          const toRemove = this.parent.consequences
-            .filter((c) => c.statuses.has("dead"))
-            .map((c) => c.id);
+          const toRemove = this.parent.consequences.filter(c => c.statuses.has("dead")).map(c => c.id);
           await this.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
         }
       }

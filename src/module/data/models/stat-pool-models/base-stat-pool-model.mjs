@@ -18,10 +18,7 @@ const { Collection } = foundry.utils;
  */
 export default class BaseStatPoolModel extends EmbeddedDataModel {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [
-    ...super.LOCALIZATION_PREFIXES,
-    "TERIOCK.MODELS.BaseStatPool",
-  ];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseStatPool"];
 
   /**
    * The model for the stat dice in this pool.
@@ -40,10 +37,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
 
   /** @inheritDoc */
   static migrateData(source, options, state) {
-    if (
-      foundry.utils.hasProperty(source, "faces") &&
-      !foundry.utils.hasProperty(source, "formula")
-    ) {
+    if (foundry.utils.hasProperty(source, "faces") && !foundry.utils.hasProperty(source, "formula")) {
       let number = source.number.raw || "1";
       if (!Number.isNumeric(Number(number))) number = `(${number})`;
       source.formula = `${number}d${source.faces}`;
@@ -82,7 +76,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
    * @abstract
    */
   get callback() {
-    return (_number) => {};
+    return _number => {};
   }
 
   /**
@@ -157,11 +151,8 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
         }
       }
     }
-    this.dice = new Collection(this._dice.map((d) => [d.id, d]));
-    this.value = this._dice.reduce(
-      (total, die) => ((die.faces + 1) / 2).toNearest(1, "round") + total,
-      0,
-    );
+    this.dice = new Collection(this._dice.map(d => [d.id, d]));
+    this.value = this._dice.reduce((total, die) => ((die.faces + 1) / 2).toNearest(1, "round") + total, 0);
   }
 
   /**

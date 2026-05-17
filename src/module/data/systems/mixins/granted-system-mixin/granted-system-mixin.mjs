@@ -13,10 +13,7 @@ export default function GrantedSystemMixin(Base) {
      */
     class GrantedSystem extends Base {
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [
-        ...super.LOCALIZATION_PREFIXES,
-        "TERIOCK.SYSTEMS.Granted",
-      ];
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Granted"];
 
       /** @inheritDoc */
       static defineSchema() {
