@@ -4,11 +4,19 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.44
+  systemVersion: 0.12.53
 img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
 name: Swift Sleep Aura
 system:
   automations:
+    XcW4SOfd4F6EXygH:
+      _id: XcW4SOfd4F6EXygH
+      category: effectTypes
+      heighten:
+        - 1
+      relation: resistances
+      type: protection
+      value: awakening
     7400b41f20d9f100:
       _id: 7400b41f20d9f100
       angle: '60'
@@ -30,15 +38,9 @@ system:
       updateTargets: true
     e1c7d7174b360e93:
       _id: e1c7d7174b360e93
-      formula: 1d8
-      impact: sleep
-      merge: true
-      type: roll
-    1c16bc58d6a930a0:
-      _id: 1c16bc58d6a930a0
-      formula: (@h)d8
-      heighten:
-        - 1
+      competencies:
+        - 0
+      formula: (1 + @h)d8
       impact: sleep
       merge: true
       type: roll
@@ -46,8 +48,7 @@ system:
       _id: ebd880725105dde4
       competencies:
         - 1
-        - 2
-      formula: (@p)d8
+      formula: (1 + @p + @h)d8
       impact: sleep
       merge: true
       type: roll
@@ -55,7 +56,7 @@ system:
       _id: a394fca7e6444945
       competencies:
         - 2
-      formula: (@f)d8
+      formula: (1 + @f + @h)d8
       impact: sleep
       merge: true
       type: roll

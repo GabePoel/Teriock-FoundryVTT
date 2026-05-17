@@ -89,6 +89,14 @@ export const settings = {
       scope: "world",
       type: Boolean,
     },
+    rollImpactsOnUse: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.rollImpactsOnUse.hint",
+      name: "TERIOCK.SETTINGS.rollImpactsOnUse.name",
+      requiresReload: true,
+      scope: "user",
+      type: Boolean,
+    },
     trackSustainedConsequences: {
       default: true,
       hint: "TERIOCK.SETTINGS.trackSustainedConsequences.hint",

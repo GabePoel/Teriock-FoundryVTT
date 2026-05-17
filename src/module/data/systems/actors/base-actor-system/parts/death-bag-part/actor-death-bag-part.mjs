@@ -38,8 +38,8 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async deathBagPull() {
-        await this.parent.hookCall("deathBagPull");
         await deathBagDialog(this.actor);
+        await this.parent.hookCall("executeDeathBag");
       }
 
       /** @inheritDoc */

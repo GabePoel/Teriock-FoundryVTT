@@ -102,6 +102,14 @@ export default class BaseActivation extends TypedPseudoDocument {
   }
 
   /**
+   * A tooltip for this activation's button to display.
+   * @returns {string}
+   */
+  get tooltip() {
+    return "";
+  }
+
+  /**
    * The user that activated this button.
    * @returns {TeriockUser}
    */

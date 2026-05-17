@@ -1,0 +1,66 @@
+_id: SilMRjySFZHYSCup
+_key: '!effects!SilMRjySFZHYSCup'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.53
+description: >-
+  <p>The next time you pull from the @L[Core:Death Bag]{death bag}, pull 5
+  additional stones.</p>
+folder: vBbs7yzx4yC6fp9V
+img: systems/teriock/src/icons/abilities/golden-dragon-breath.webp
+name: Gold Breath Base Effect
+system:
+  automations:
+    hoJcdSdEirDLESLC:
+      _id: hoJcdSdEirDLESLC
+      changes:
+        - key: system.deathBag.pull
+          phase: normal
+          priority: 75
+          qualifier: '1'
+          target: Actor
+          time: normal
+          type: add
+          value: '5'
+      type: changes
+  competence:
+    raw: 0
+  critical: false
+  expirations:
+    combat:
+      what:
+        roll: 2d4kh1
+        threshold: 4
+        type: none
+      when:
+        skip: 0
+        time: start
+        trigger: turn
+      who:
+        type: target
+    sustained: false
+    triggers:
+      - executeDeathBag
+  identifier: gold-breath-base-effect
+  mundane: false
+  transformation:
+    competence:
+      raw: 0
+    enabled: false
+    override:
+      - art
+      - size
+    reset:
+      - gp
+      - hp
+    ring: false
+    suppress:
+      - body
+      - equipment
+      - fluency
+      - rank
+      - species
+transfer: false
+type: consequence

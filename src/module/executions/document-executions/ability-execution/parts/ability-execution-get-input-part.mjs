@@ -202,7 +202,7 @@ export default function AbilityExecutionGetInputPart(Base) {
               callback: (_event, button) => {
                 for (const k of Object.keys(TERIOCK.config.cost.primary.keys)) {
                   if (this.#shouldShowCostPrompt(k)) {
-                    this.costs[k] = Number(button.form.elements.namedItem(k).value);
+                    this.costs[k] = Number(button.form.elements.namedItem(k).value || "0") || 0;
                   }
                 }
                 if (this.canHeighten) {

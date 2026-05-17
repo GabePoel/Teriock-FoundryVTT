@@ -47,7 +47,6 @@ export default class BaseDocumentExecution extends BaseExecution {
     for (const activations of activationLists) {
       this.activations.push(...activations);
     }
-    this.activations = teriock.data.pseudoDocuments.activations.RollActivation.mergeRolls(this.activations);
     for (const a of this.activations) {
       if (a.type === "roll" && this._boostsResolved[a.impact]) {
         const boosts = this._boostsResolved[a.impact];

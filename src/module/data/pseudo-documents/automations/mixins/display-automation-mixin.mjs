@@ -47,7 +47,7 @@ export default function DisplayAutomationMixin(Base) {
        * @returns {string[]}
        */
       get _triggerDisplayPaths() {
-        return this.trigger ? [] : this._displayPaths;
+        return this._source.trigger ? [] : this._displayPaths;
       }
     }
   );

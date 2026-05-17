@@ -22,7 +22,7 @@ export function createDialogFieldset(legend, description, name, max = Infinity) 
   return `
     <fieldset><legend>${legend}</legend>
       <div>${description}</div>
-      <input type="number" name="${name}" value="0" min="0" max="${max}" step="1">
+      <input placeholder="0" type="number" name="${name}" min="0" max="${max}" step="1">
     </fieldset>`;
 }
 

@@ -46,14 +46,13 @@ export default class HarmRoll extends ImpactRoll {
 
   /** @inheritDoc */
   async getActivations() {
-    let activations = await super.getActivations();
+    const activations = await super.getActivations();
     const harmArray = await this.getHarmArray();
     for (const h of harmArray) {
       const automations = h.system.automations.contents;
       const activationLists = await Promise.all(automations.map(a => a.getActivations()));
       activationLists.forEach(a => activations.push(...a));
     }
-    activations = teriock.data.pseudoDocuments.activations.RollActivation.mergeRolls(activations);
     return activations;
   }
 

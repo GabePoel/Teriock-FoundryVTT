@@ -4,11 +4,41 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.36
+  systemVersion: 0.12.53
 img: systems/teriock/src/icons/abilities/golden-dragon-breath.webp
 name: Golden Dragon Breath
 system:
   automations:
+    k1y3pC8IhCR9FDHM:
+      _id: k1y3pC8IhCR9FDHM
+      all: false
+      attachDocuments: true
+      automatic: true
+      display:
+        label: Apply Attacked Effect
+      multi: false
+      overrideCompetence: false
+      overrideData: false
+      qualifier: '0'
+      separate: true
+      type: addDocuments
+      uuids:
+        - Compendium.teriock.templateEffects.ActiveEffect.Jt6prRJXBGVtrBnu
+    mt7fmoCxey9CzpVG:
+      _id: mt7fmoCxey9CzpVG
+      all: false
+      attachDocuments: true
+      automatic: true
+      display:
+        label: Apply Base Effect
+      multi: false
+      overrideCompetence: false
+      overrideData: false
+      qualifier: '0'
+      separate: true
+      type: addDocuments
+      uuids:
+        - Compendium.teriock.templateEffects.ActiveEffect.SilMRjySFZHYSCup
     7400b41f20d9f100:
       _id: 7400b41f20d9f100
       angle: '@angle.dragon'
@@ -21,12 +51,17 @@ system:
       outerWidth: '0'
       overrideData: false
       qualifier: '0'
+      radius: '@ability.range + 5 * @h'
       regionType: cone
       restriction:
         enabled: true
+        priority: 0
+        type: move
+      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
+      visibility: 2
     800c70e6560525a8:
       _id: 800c70e6560525a8
       formula: (2 * @h)d10[magic spiritual]

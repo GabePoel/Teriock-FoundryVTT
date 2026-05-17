@@ -302,7 +302,6 @@ items:
               _id: 29b275994cf9f5b1
               formula: 1d4[fire]
               impact: damage
-              merge: true
               trigger: turnStart
               type: roll
             b48fe6066c4cf8f1:
@@ -1186,7 +1185,6 @@ items:
               _id: 157afc517847f562
               formula: 1d8[mana]
               impact: drain
-              merge: true
               type: roll
           competence:
             raw: 0
@@ -1375,7 +1373,6 @@ items:
               _id: 29b275994cf9f5b1
               formula: 1d4
               impact: damage
-              merge: true
               type: roll
             5e4d195ed81a10cc:
               _id: 5e4d195ed81a10cc
@@ -1384,7 +1381,6 @@ items:
                 - 2
               formula: 1d6
               impact: damage
-              merge: true
               type: roll
             3f7fa7707643426f:
               _id: 3f7fa7707643426f
@@ -1392,7 +1388,6 @@ items:
                 - 2
               formula: 1d8
               impact: damage
-              merge: true
               type: roll
           competence:
             raw: 0
@@ -1787,19 +1782,10 @@ items:
         name: Fire Ball
         system:
           automations:
-            29b275994cf9f5b1:
-              _id: 29b275994cf9f5b1
-              formula: 1d4[magic fire]
-              impact: damage
-              merge: true
-              type: roll
             800c70e6560525a8:
               _id: 800c70e6560525a8
-              formula: (@h)d4[magic fire]
-              heighten:
-                - 1
+              formula: (1 + @h)d4[magic fire]
               impact: damage
-              merge: true
               type: roll
           class: flameMage
           competence:
@@ -1862,19 +1848,12 @@ items:
         name: Flame Ray
         system:
           automations:
-            29b275994cf9f5b1:
-              _id: 29b275994cf9f5b1
-              formula: 1d8[fire magic]
-              impact: damage
-              merge: true
-              type: roll
             800c70e6560525a8:
               _id: 800c70e6560525a8
-              formula: (@h)d8[fire magic]
+              formula: (1 + @h)d8[fire magic]
               heighten:
                 - 1
               impact: damage
-              merge: true
               type: roll
           class: flameMage
           competence:
@@ -2258,8 +2237,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: OhmeawZKzmCpLbAh
-    _key: '!actors.items!266273a260f3effc.OhmeawZKzmCpLbAh'
+  - _id: OPD0cO8cNm6rgebQ
+    _key: '!actors.items!266273a260f3effc.OPD0cO8cNm6rgebQ'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -2269,7 +2248,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!266273a260f3effc.OhmeawZKzmCpLbAh.NGCuRUaVtXnxAbRe
+          !actors.items.effects!266273a260f3effc.OPD0cO8cNm6rgebQ.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -2280,19 +2259,10 @@ items:
         name: Arcane Ray
         system:
           automations:
-            29b275994cf9f5b1:
-              _id: 29b275994cf9f5b1
-              formula: 1d4[magic]
-              impact: damage
-              merge: true
-              type: roll
             800c70e6560525a8:
               _id: 800c70e6560525a8
-              formula: (@h)d4[magic]
-              heighten:
-                - 1
+              formula: (1 + @h)d4[magic]
               impact: damage
-              merge: true
               type: roll
           competence:
             raw: 0
@@ -2341,7 +2311,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!266273a260f3effc.OhmeawZKzmCpLbAh.aCWLNsvSFjEuLTyl
+          !actors.items.effects!266273a260f3effc.OPD0cO8cNm6rgebQ.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

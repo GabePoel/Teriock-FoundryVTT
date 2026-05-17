@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.36
+  systemVersion: 0.12.53
 img: systems/teriock/src/icons/abilities/red-dragon-breath.webp
 name: Red Dragon Breath
 system:
@@ -21,23 +21,20 @@ system:
       outerWidth: '0'
       overrideData: false
       qualifier: '0'
+      radius: '@ability.range + 5 * @h'
       regionType: cone
       restriction:
         enabled: true
+        priority: 0
+        type: move
+      targeting: true
       trigger: executeInput
       type: region
       updateTargets: true
-    29b275994cf9f5b1:
-      _id: 29b275994cf9f5b1
-      formula: 4d10[magic fire]
-      impact: damage
-      merge: true
-      type: roll
+      visibility: 2
     800c70e6560525a8:
       _id: 800c70e6560525a8
-      formula: (2 * @h)d10[magic fire]
-      heighten:
-        - 1
+      formula: (4 + 2 * @h)d10[magic fire]
       impact: damage
       merge: true
       type: roll

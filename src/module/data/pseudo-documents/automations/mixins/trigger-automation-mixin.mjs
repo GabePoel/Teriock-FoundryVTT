@@ -147,7 +147,7 @@ export default function TriggerAutomationMixin(Base) {
        */
       get _triggerPaths() {
         const paths = ["trigger"];
-        if (this.trigger && this.trigger !== "none") {
+        if (this._source.trigger) {
           if (this.constructor._conditions) {
             paths.push(...["conditions.present", "conditions.absent"]);
           }

@@ -23,23 +23,27 @@ export default async function boostDialog(rollFormula, options = {}) {
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
     initial: rollFormula,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),
+    placeholder: "0",
   });
   const boostsField = new fields.NumberField({
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
-    initial: (options.boosts ?? 0) > 0 ? options.boosts : 0,
+    initial: (options.boosts ?? 0) > 0 ? options.boosts : undefined,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
     min: 0,
+    placeholder: "0",
   });
   const deboostsField = new fields.NumberField({
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
-    initial: (options.boosts ?? 0) < 0 ? -options.boosts : 0,
+    initial: (options.boosts ?? 0) < 0 ? -options.boosts : undefined,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
     min: 0,
+    placeholder: "0",
   });
   const critField = new fields.BooleanField({
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.hint"),
     initial: crit,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
+    placeholder: "0",
   });
   const contentHtml = document.createElement("div");
   contentHtml.append(formulaField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "formula" }));
@@ -51,9 +55,9 @@ export default async function boostDialog(rollFormula, options = {}) {
     modal: true,
     ok: {
       callback: (_event, button) => {
-        const updatedFormula = button.form.elements.namedItem("formula").value;
-        const boosts = Number(button.form.elements.namedItem("boosts").value);
-        const deboosts = Number(button.form.elements.namedItem("deboosts").value);
+        const updatedFormula = button.form.elements.namedItem("formula").value ?? "0";
+        const boosts = Number(button.form.elements.namedItem("boosts").value || "0") || 0;
+        const deboosts = Number(button.form.elements.namedItem("deboosts").value || "0") || 0;
         const critButton = /** @type {HTMLInputElement} */ button.form.elements.namedItem("crit");
         const crit = critButton.checked;
         const roll = new BaseRoll(updatedFormula, options.rollData || {});

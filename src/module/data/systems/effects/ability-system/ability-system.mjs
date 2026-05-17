@@ -153,14 +153,6 @@ export default class AbilitySystem extends mixClasses(
       "system.requirements",
       ...this.constructor._adjustableTextFields,
       "system.overview.base",
-      {
-        classes: this.competence.proficient ? "" : TERIOCK.display.panel.classes.faded,
-        path: "system.overview.proficient",
-      },
-      {
-        classes: this.competence.fluent ? "" : TERIOCK.display.panel.classes.faded,
-        path: "system.overview.fluent",
-      },
     ];
     if (this.interaction === "attack") {
       fields.push(
@@ -173,6 +165,18 @@ export default class AbilitySystem extends mixClasses(
     } else {
       fields.push(...["system.results.save", "system.results.fail"]);
     }
+    fields.push(
+      ...[
+        {
+          classes: this.competence.proficient ? "" : TERIOCK.display.panel.classes.faded,
+          path: "system.overview.proficient",
+        },
+        {
+          classes: this.competence.fluent ? "" : TERIOCK.display.panel.classes.faded,
+          path: "system.overview.fluent",
+        },
+      ],
+    );
     fields.push(
       ...[
         "system.heightened",

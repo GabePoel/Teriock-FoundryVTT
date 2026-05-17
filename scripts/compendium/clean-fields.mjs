@@ -419,10 +419,6 @@ function cleanAutomations(automations) {
         delete v.competence;
       }
     }
-    if (v.type === "region" && v.regionType === "cone") {
-      v.attachToToken = false;
-      v.expandWithToken = false;
-    }
   }
   for (const a of Object.values(automations)) {
     cleanAutomation(a);
