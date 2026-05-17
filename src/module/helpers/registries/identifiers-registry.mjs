@@ -146,7 +146,7 @@ export default class IdentifiersRegistry extends RegistryLifecycle {
    * @returns {Promise<IdentifiableDocument|null>}
    */
   async fromIdentifier(identifier, options = {}) {
-    return foundry.utils.fromUuid(this.get(identifier, options));
+    return foundry.utils.fromUuid(this.get(identifier), options);
   }
 
   /**
@@ -158,7 +158,7 @@ export default class IdentifiersRegistry extends RegistryLifecycle {
    * @returns {IdentifiableDocument|null}
    */
   fromIdentifierSync(identifier, options = {}) {
-    return foundry.utils.fromUuidSync(this.get(identifier, options));
+    return foundry.utils.fromUuidSync(this.get(identifier), options);
   }
 
   /**

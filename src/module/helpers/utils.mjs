@@ -437,13 +437,16 @@ export async function fromQualifier(document, qualifier) {
 /**
  * Get a world document from its identifier.
  * @param {TypedIdentifier} identifier
+ * @param {object} [options]
+ * @param {boolean} [options.strict]
+ * @param {boolean} [options.invalid]
  * @returns {AnyCommonDocument|null}
  */
-export function fromIdentifierSync(identifier) {
+export function fromIdentifierSync(identifier, options = {}) {
   if (!identifier) {
     return null;
   }
-  return game.teriock.registries.identifiers.fromIdentifierSync(identifier);
+  return game.teriock.registries.identifiers.fromIdentifierSync(identifier, options);
 }
 
 /**
@@ -452,6 +455,7 @@ export function fromIdentifierSync(identifier) {
  * @param {object} [options]
  * @param {AnyCommonDocument} [options.localDocument] - An optional local document to compare against.
  * @param {boolean} [options.localOnly] - Only search the local document.
+ * @param {boolean} [options.invalid]
  * @returns {Promise<TeriockDocument|null>}
  */
 export async function fromIdentifier(identifier, options = {}) {
