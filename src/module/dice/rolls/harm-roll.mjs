@@ -1,4 +1,4 @@
-import { fromHarmIdentifier } from "../../helpers/utils.mjs";
+import { fromIdentifier } from "../../helpers/utils.mjs";
 import ImpactRoll from "./impact-roll.mjs";
 
 export default class HarmRoll extends ImpactRoll {
@@ -68,7 +68,7 @@ export default class HarmRoll extends ImpactRoll {
       return this._harms;
     }
     const identifiers = this.harmIdentifiers.map(i => `${this.impact}:${i}`);
-    const harms = await Promise.all(identifiers.map(i => fromHarmIdentifier(i)));
+    const harms = await Promise.all(identifiers.map(i => fromIdentifier(i)));
     this._harms = harms.filter(Boolean);
     return this._harms;
   }

@@ -253,6 +253,17 @@ export default function BaseDocumentMixin(Base) {
         );
       }
 
+      /** @inheritDoc */
+      _onDelete(options, userId) {
+        super._onDelete(options, userId);
+        game.teriock.identifiers.untrackDocument(this);
+        for (const c of Object.values(this.collections)) {
+          for (const d of c) {
+            game.teriock.identifiers.untrackDocument(d);
+          }
+        }
+      }
+
       /**
        * Check whether the provided document or its index is an ancestor of this one.
        * @param {TeriockDocument|Index<TeriockDocument>} doc
@@ -326,6 +337,14 @@ export default function BaseDocumentMixin(Base) {
         return path.startsWith("system")
           ? this.system.schema.getField(path.replace("system.", ""))
           : this.schema.getField(path);
+      }
+
+      /** @inheritDoc */
+      prepareData() {
+        super.prepareData();
+        game.teriock.identifiers.untrack(this._cachedIdentifier, this.uuid);
+        game.teriock.identifiers.trackDocument(this);
+        this._cachedIdentifier = this.typedIdentifier;
       }
     }
   );

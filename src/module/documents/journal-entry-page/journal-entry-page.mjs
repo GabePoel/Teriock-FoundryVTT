@@ -27,6 +27,15 @@ export default class TeriockJournalEntryPage extends mixClasses(
   }
 
   /** @inheritDoc */
+  get typedIdentifier() {
+    if (this.inCompendium && this.compendium.collection === "teriock.rules") {
+      const config = TERIOCK.config.wiki.namespaces[this.parent.name];
+      return `${config?.identifierType ?? "rules"}:${this.forcedIdentifier}`;
+    }
+    return super.typedIdentifier;
+  }
+
+  /** @inheritDoc */
   async _buildEmbedHTML(config, options = {}) {
     const embed = await super._buildEmbedHTML(config, options);
     if (!embed && ["damage", "drain"].includes(this.type)) {

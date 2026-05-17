@@ -20,6 +20,7 @@ export const wikiConfig = {
     Class: {
       collection: "pages",
       icon: documentConfig.rank.icon,
+      identifierType: "class",
       packs: ["teriock.rules"],
       parentKey: "namespace",
       type: "rank",
@@ -27,6 +28,7 @@ export const wikiConfig = {
     Condition: {
       collection: "pages",
       icon: documentConfig.condition.icon,
+      identifierType: "status",
       packs: ["teriock.rules"],
       parentKey: "namespace",
       type: "text",
@@ -34,6 +36,7 @@ export const wikiConfig = {
     Core: {
       collection: "pages",
       icon: icons.document.core,
+      identifierType: "core",
       packs: ["teriock.rules"],
       parentKey: "namespace",
       type: "text",
@@ -48,6 +51,7 @@ export const wikiConfig = {
     Damage: {
       collection: "pages",
       icon: documentConfig.damage.icon,
+      identifierType: "damage",
       packs: ["teriock.rules"],
       parentKey: "namespace",
       type: "damage",
@@ -55,6 +59,7 @@ export const wikiConfig = {
     Drain: {
       collection: "pages",
       icon: documentConfig.drain.icon,
+      identifierType: "drain",
       packs: ["teriock.rules"],
       parentKey: "namespace",
       type: "drain",
@@ -69,6 +74,7 @@ export const wikiConfig = {
     Keyword: {
       collection: "pages",
       icon: icons.document.keyword,
+      identifierType: "keyword",
       packs: ["teriock.rules"],
       parentKey: "namespace",
       type: "text",
@@ -83,6 +89,7 @@ export const wikiConfig = {
     Tradecraft: {
       collection: "pages",
       icon: documentConfig.fluency.icon,
+      identifierType: "tradecraft",
       packs: ["teriock.rules"],
       parentKey: "namespace",
       type: "text",

@@ -1,20 +1,39 @@
-import { DependentsRegistry } from "./_module.mjs";
+import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mjs";
 
 /**
  * Singleton class that manages Teriock-specific states and functionality.
  */
 export default class TeriockManager {
   /**
-   * The singleton dependents registry.
-   * @type {DependentsRegistry}
-   */
-  dependentsRegistry = new DependentsRegistry();
-
-  /**
    * Easy references to system-specific compendium packs.
    * @type {TeriockPacks}
    */
   packs = new TeriockPacks();
+
+  /**
+   * Singleton registries.
+   * @type {{dependents: DependentsRegistry, identifiers: IdentifiersRegistry}}
+   */
+  registries = {
+    dependents: new DependentsRegistry(),
+    identifiers: new IdentifiersRegistry(),
+  };
+
+  /**
+   * The singleton dependents registry.
+   * @returns {DependentsRegistry}
+   */
+  get dependents() {
+    return this.registries.dependents;
+  }
+
+  /**
+   * The singleton identifiers registry.
+   * @returns {IdentifiersRegistry}
+   */
+  get identifiers() {
+    return this.registries.identifiers;
+  }
 
   /**
    * Check if what's provided exists or is an empty array or set.

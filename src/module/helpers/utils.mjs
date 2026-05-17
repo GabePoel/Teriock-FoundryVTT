@@ -1,4 +1,3 @@
-import { costConfig } from "../constants/config/cost-config.mjs";
 import { iconStyles } from "../constants/display/_module.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { formulaExists } from "./formula.mjs";
@@ -437,73 +436,19 @@ export async function fromQualifier(document, qualifier) {
 
 /**
  * Get a world document from its identifier.
- * @param {Identifier|TypedIdentifier} identifier
+ * @param {TypedIdentifier} identifier
  * @returns {AnyCommonDocument|null}
  */
 export function fromIdentifierSync(identifier) {
   if (!identifier) {
     return null;
   }
-  const parsed = parseIdentifier(identifier);
-  if (!parsed?.identifier) {
-    return null;
-  }
-  if (parsed?.type) {
-    const documentName = TERIOCK.config.document[parsed.type]?.documentName;
-    if (!documentName) {
-      return null;
-    }
-    let collection;
-    if (documentName === "Actor") {
-      collection = game.actors;
-    }
-    if (documentName === "Item") {
-      collection = game.items;
-    }
-    if (!collection) {
-      return null;
-    }
-    return collection.find(d => d.type === parsed.type && d.system?.identifier === parsed.identifier) ?? null;
-  }
-  const candidates = [...game.items.contents, ...game.actors.contents];
-  return candidates.find(d => d.system?.identifier === parsed.identifier) ?? null;
-}
-
-/**
- * Get a harm type from its identifier. Can only retrieve if the source of the harm type has been registered in the
- * world settings.
- * @param {TypedIdentifier} identifier
- * @returns {Promise<TeriockHarm|null>}
- */
-export async function fromHarmIdentifier(identifier) {
-  const parsed = parseIdentifier(identifier);
-  if (!parsed?.type) {
-    return null;
-  }
-  let setting;
-  if (parsed.type === "damage") {
-    setting = "documentDamageSources";
-  }
-  if (parsed.type === "drain") {
-    setting = "documentDrainSources";
-  }
-  if (!setting) {
-    return null;
-  }
-  const sourcesUuids = game.teriock.getSetting(setting);
-  const sources = await Promise.all(Array.from(sourcesUuids).map(uuid => foundry.utils.fromUuid(uuid)));
-  for (const source of sources) {
-    const doc = source?.pages?.contents?.find(p => p.type === parsed.type && p.forcedIdentifier === parsed.identifier);
-    if (doc) {
-      return doc;
-    }
-  }
-  return null;
+  return game.teriock.registries.identifiers.fromIdentifierSync(identifier);
 }
 
 /**
  * Get a document from its identifier. Prefers compendium documents over world documents.
- * @param {Identifier|TypedIdentifier} identifier
+ * @param {TypedIdentifier} identifier
  * @param {object} [options]
  * @param {AnyCommonDocument} [options.localDocument] - An optional local document to compare against.
  * @param {boolean} [options.localOnly] - Only search the local document.
@@ -525,43 +470,5 @@ export async function fromIdentifier(identifier, options = {}) {
       return null;
     }
   }
-  const parsed = parseIdentifier(identifier);
-  if (parsed?.type) {
-    if (["damage", "drain"].includes(parsed.type)) {
-      return fromHarmIdentifier(identifier);
-    }
-    const documentName = TERIOCK.config.document[parsed.type]?.documentName;
-    if (!documentName) {
-      return null;
-    }
-    const packs = game.packs.contents
-      .filter(p => p.documentName === documentName)
-      .sort((a, b) => b.collection.startsWith("teriock.") - a.collection.startsWith("teriock."));
-    for (const pack of packs) {
-      const docs = await pack.getDocuments({
-        system: { identifier: parsed.identifier },
-        type: parsed.type,
-      });
-      const filtered = docs.filter(d => {
-        if (d.sup) {
-          return false;
-        }
-        const mutationFields = [
-          "system.improvement",
-          "system.limitation",
-          ...Object.keys(costConfig.tweaks).map(t => `system.costs.tweaks.${t}`),
-        ];
-        for (const field of mutationFields) {
-          if (foundry.utils.getProperty(d, field)) {
-            return false;
-          }
-        }
-        return true;
-      });
-      if (filtered.length > 0) {
-        return filtered[0];
-      }
-    }
-  }
-  return fromIdentifierSync(identifier);
+  return game.teriock.registries.identifiers.fromIdentifier(identifier);
 }

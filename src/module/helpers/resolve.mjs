@@ -1,5 +1,5 @@
 import { TypeCollection } from "../documents/collections/_module.mjs";
-import { toId } from "./string.mjs";
+import { toKebabCase } from "./string.mjs";
 import { fromIdentifier, parseIdentifier } from "./utils.mjs";
 
 const { Document } = foundry.abstract;
@@ -171,7 +171,9 @@ export async function inferChildCompendiumSources(document) {
  * @returns {string}
  */
 export function ruleUuid(namespace, pageName) {
-  const nsId = toId(namespace, { hash: false });
-  const pnId = toId(pageName, { hash: false });
-  return `Compendium.teriock.rules.JournalEntry.${nsId}.JournalEntryPage.${pnId}`;
+  if (namespace === "Condition") {
+    namespace = "status";
+  }
+  const identifier = `${namespace.toLowerCase()}:${toKebabCase(pageName)}`;
+  return game.teriock.registries.identifiers.get(identifier);
 }

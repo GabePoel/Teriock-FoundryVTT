@@ -1,3 +1,5 @@
+import { parseIdentifier } from "../../helpers/utils.mjs";
+
 const { TextEditor } = foundry.applications.ux;
 
 export default class TeriockTextEditor extends TextEditor {
@@ -7,6 +9,39 @@ export default class TeriockTextEditor extends TextEditor {
    */
   static get loadingPanelHTML() {
     return TERIOCK.display.panel.loading.replace("TERIOCK.LOADING", _loc("TERIOCK.TERMS.Common.loading"));
+  }
+
+  /**
+   * Patched to allow for identifiers as well as UUIDs.
+   * @inheritDoc
+   */
+  static async _embedContent(match, options = {}) {
+    for (const part of match.groups.config.match(/(?:[^\s"]+|"[^"]*")+/g)) {
+      const [key] = part.split("=");
+      if (key === "identifier" || parseIdentifier(part)) {
+        await game.teriock.registries.identifiers.ready;
+      }
+    }
+    return super._embedContent(match, options);
+  }
+
+  /**
+   * Patched to allow for identifiers as well as UUIDs.
+   * @inheritDoc
+   */
+  static _parseEmbedConfig(raw, options = {}) {
+    const config = super._parseEmbedConfig(raw, options);
+    if (!config.uuid) {
+      if (config.identifier) {
+        config.uuid = game.teriock.registries.identifiers.get(config.identifier);
+      } else if (config.values.length && parseIdentifier(config.values[0])) {
+        const uuid = game.teriock.registries.identifiers.get(config.values[0]);
+        if (uuid) {
+          config.uuid = uuid;
+        }
+      }
+    }
+    return config;
   }
 
   /**

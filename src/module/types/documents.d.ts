@@ -45,6 +45,7 @@ import { HarmSystem } from "../data/systems/pages/_module.mjs";
 import {
   TeriockActiveEffect,
   TeriockActor,
+  TeriockCard,
   TeriockChatMessage,
   TeriockCombat,
   TeriockFolder,
@@ -65,6 +66,7 @@ import {
 declare global {
   const TeriockActiveEffect: TeriockActiveEffect;
   const TeriockActor: TeriockActor;
+  const TeriockCard: TeriockCard;
   const TeriockChatMessage: TeriockChatMessage;
   const TeriockCombat: TeriockCombat;
   const TeriockFolder: TeriockFolder;

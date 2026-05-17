@@ -310,9 +310,9 @@ export default function HierarchyDocumentMixin(Base) {
        */
       get dependee() {
         if (this.system._dep) {
-          const uuid = game.teriock?.dependentsRegistry.resolveDependentID(this.system._dep, this);
+          const uuid = game.teriock?.dependents.resolveDependentID(this.system._dep, this);
           if (uuid) {
-            return game.teriock?.dependentsRegistry.fetchFromUuid(this, uuid);
+            return game.teriock?.dependents.fetchFromUuid(this, uuid);
           }
         }
         return null;
@@ -323,7 +323,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @return {AnyChildDocument[]}
        */
       get dependents() {
-        return game.teriock.dependentsRegistry.get(this);
+        return game.teriock?.dependents.get(this);
       }
 
       /**
@@ -432,7 +432,7 @@ export default function HierarchyDocumentMixin(Base) {
           this.dependents.forEach(d => d.delete());
         }
         if (this.system._dep && this.uuid) {
-          game.teriock.dependentsRegistry.untrack(this.system._dep, this);
+          game.teriock?.dependents.untrack(this.system._dep, this);
         }
         // If this is deleted as part of a folder it might not call the appropriate operation and descendents need
         // to be deleted separately. This sucks but IDK a better solution.
@@ -611,7 +611,7 @@ export default function HierarchyDocumentMixin(Base) {
       prepareData() {
         super.prepareData();
         if (this.system._dep && this.uuid) {
-          game.teriock.dependentsRegistry.track(this.system._dep, this);
+          game.teriock?.dependents.track(this.system._dep, this);
         }
       }
 

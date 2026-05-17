@@ -1,38 +1,25 @@
+import RegistryLifecycle from "./abstract/registry-lifecycle.mjs";
+
 const { Document } = foundry.abstract;
 
 /**
  * Registry of documents that are dependent on other documents but don't have an elder/child relationship. Based on
  * the implementation in D&D 5E with some Teriock-specific modifications.
+ * @implements {Teriock.Registries.MultiRegistry<
+ *   ID<AnyChildDocument>|UUID<AnyChildDocument>,
+ *   AnyChildDocument,
+ *   AnyChildDocument|UUID<AnyChildDocument>
+ * >}
  */
-export default class DependentsRegistry {
+export default class DependentsRegistry extends RegistryLifecycle {
   /**
    * Registration of documents that are dependent on some other document but don't have an elder/child
    * relationship. The map is keyed by the UUID of the document, which has dependents and contains a set of UUIDs for
    * that document's dependents. All UUIDs are expected to be world UUIDs or UUIDs of documents with the same
    * ancestor document as the one they are dependent on.
-   * @type {Map<any, any>}
+   * @type {Map<ID<AnyChildDocument>|UUID<AnyChildDocument>, Set<UUID<AnyChildDocument>>>}
    */
   #dependents = new Map();
-
-  /**
-   * Whether this registry is currently disabled.
-   * @type {boolean}
-   */
-  #disabled = true;
-
-  /**
-   * Activate this registry.
-   */
-  activate() {
-    this.#disabled = false;
-  }
-
-  /**
-   * Deactivate this registry.
-   */
-  deactivate() {
-    this.#disabled = true;
-  }
 
   /**
    * Safely fetch a document given its UUID and a reference document.
@@ -41,7 +28,7 @@ export default class DependentsRegistry {
    * @return {AnyChildDocument|null}
    */
   fetchFromUuid(ref, uuid) {
-    if (this.#disabled) {
+    if (!this.active) {
       return null;
     }
     // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
@@ -54,11 +41,11 @@ export default class DependentsRegistry {
 
   /**
    * Fetch documents dependent on some other document.
-   * @param {AnyChildDocument|ID<AnyChildDocument>} doc - Document or UUID for which to get dependent documents.
+   * @param {AnyChildDocument|UUID<AnyChildDocument>} doc - Document or UUID for which to get dependent documents.
    * @returns {AnyChildDocument[]}
    */
   get(doc) {
-    if (this.#disabled) {
+    if (!this.active) {
       return [];
     }
     doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);

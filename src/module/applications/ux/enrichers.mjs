@@ -7,8 +7,15 @@ import {
   parseArguments,
 } from "../../helpers/interaction/_module.mjs";
 import { toCamelCase, toKebabCase, toTitleCase, ucFirst } from "../../helpers/string.mjs";
-import { makeIconClass, makeIconElement } from "../../helpers/utils.mjs";
+import { makeIconClass, makeIconElement, parseIdentifier } from "../../helpers/utils.mjs";
 import { wikiToUuid } from "../../helpers/wiki.mjs";
+import { TeriockTextEditor } from "./_module.mjs";
+
+const IDENTIFIER_ICON_MAP = Object.fromEntries(
+  Object.values(wikiConfig.namespaces)
+    .filter(c => c.identifierType && c.icon)
+    .map(c => [c.identifierType, c.icon]),
+);
 
 /**
  * Wiki link enricher. Designed to mimic the `@EMBED` and `@UUID` enrichers as well as the `{{L}}` wiki syntax.
@@ -65,6 +72,28 @@ const wikiLinkEnricher = {
     return link;
   },
   pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
+  replaceParent: false,
+};
+
+/**
+ * Identifier link enriched. Designed to mimic `@UUID` by calling `@I`.
+ * @type {TextEditorEnricherConfig}
+ */
+const identifierEnricher = {
+  enricher: async match => {
+    await game.teriock.registries.identifiers.ready;
+    const contentLinkMatch = [null, "UUID", game.teriock.registries.identifiers.get(match[1]), "", match[2]];
+    const out = await TeriockTextEditor._createContentLink(contentLinkMatch);
+    const parsed = parseIdentifier(match[1]);
+    if (parsed && IDENTIFIER_ICON_MAP[parsed.type]) {
+      const iconClass = makeIconClass(IDENTIFIER_ICON_MAP[parsed.type], "solid");
+      out.querySelectorAll("i").forEach(icon => {
+        icon.className = iconClass;
+      });
+    }
+    return out;
+  },
+  pattern: /@I\[(.+?)\](?:\{(.+?)\})?/g,
   replaceParent: false,
 };
 
@@ -250,4 +279,5 @@ export default function registerEnrichers() {
   registerCommandEnrichers();
   CONFIG.TextEditor.enrichers.push(wikiLinkEnricher);
   CONFIG.TextEditor.enrichers.push(lookupEnricher);
+  CONFIG.TextEditor.enrichers.push(identifierEnricher);
 }

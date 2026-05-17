@@ -43,6 +43,11 @@ foundry.helpers.Hooks.once("init", function () {
     }
   }
 
+  // Register Game Shortcuts
+  // =======================
+
+  game.teriock = new helpers.TeriockManager();
+
   // Configure Time Constants
   // ========================
 
@@ -437,11 +442,6 @@ foundry.helpers.Hooks.once("init", function () {
 
   Object.assign(CONFIG.queries, helpers.queries);
 
-  // Register Game Shortcuts
-  // =======================
-
-  game.teriock = new helpers.TeriockManager();
-
   // Register Settings
   // =================
 
@@ -493,15 +493,8 @@ Hooks.once("i18nInit", () => {
 Hooks.once("ready", () => {
   // Activate Documents Registry
   // ---------------------------
-  game.teriock.dependentsRegistry.activate();
-
-  // Pre-index All Sub-Document Compendium Packs
-  // -------------------------------------------
-  for (const p of game.packs.contents) {
-    if (["Item", "ActiveEffect"].includes(p.documentName)) {
-      p.getIndex();
-    }
-  }
+  game.teriock.dependents.activate();
+  game.teriock.identifiers.activate();
 });
 
 // Register Hook Listeners and Handlebars Helpers

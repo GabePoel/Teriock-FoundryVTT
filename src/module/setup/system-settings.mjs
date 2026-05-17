@@ -165,19 +165,13 @@ export const settings = {
     },
   },
   gameContent: {
-    documentDamageSources: {
-      default: ["Compendium.teriock.rules.JournalEntry.damage0000000000"],
-      hint: "TERIOCK.SETTINGS.documentDamageSources.hint",
-      name: "TERIOCK.SETTINGS.documentDamageSources.name",
+    prioritizeCustomIdentifiers: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.prioritizeCustomIdentifiers.hint",
+      name: "TERIOCK.SETTINGS.prioritizeCustomIdentifiers.name",
       scope: "world",
-      type: new fields.SetField(new fields.DocumentUUIDField({ type: "JournalEntry" })),
-    },
-    documentDrainSources: {
-      default: ["Compendium.teriock.rules.JournalEntry.drain00000000000"],
-      hint: "TERIOCK.SETTINGS.documentDrainSources.hint",
-      name: "TERIOCK.SETTINGS.documentDrainSources.name",
-      scope: "world",
-      type: new fields.SetField(new fields.DocumentUUIDField({ type: "JournalEntry" })),
+      type: Boolean,
+      requiresReload: true,
     },
   },
   gameMasterControls: {
