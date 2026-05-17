@@ -95,7 +95,7 @@ export async function ensureChildren(document, identifiers) {
       }
       const obj = doc.toObject(true);
       foundry.utils.setProperty(obj, "_stats.compendiumSource", doc.uuid);
-      return { documentName: doc.documentName, data: obj };
+      return { data: obj, documentName: doc.documentName };
     }),
   );
   const filtered = candidates.filter(Boolean);

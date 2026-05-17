@@ -6,8 +6,8 @@ declare global {
       label: string;
       plural?: string;
       scale?: number;
-      system?: string;
       symbol?: string;
+      system?: string;
     };
   }
 

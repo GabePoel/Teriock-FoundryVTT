@@ -8,20 +8,20 @@ import { makeIconClass } from "../../helpers/utils.mjs";
  */
 function formBox(input, options) {
   const {
-    secondary = "",
-    icon = "info",
-    iconColor = "",
-    after = true,
-    label = "",
-    include = true,
-    includeSecondary = true,
-    unselected = "",
-    unselectedSecondary = "",
-    tooltip = "",
     action = "",
+    after = true,
     classes = "",
     dataset = {},
+    icon = "info",
+    iconColor = "",
+    include = true,
+    includeSecondary = true,
+    label = "",
     overflow = "",
+    secondary = "",
+    tooltip = "",
+    unselected = "",
+    unselectedSecondary = "",
   } = options.hash;
   let content = input;
   let overflowTooltip = "";

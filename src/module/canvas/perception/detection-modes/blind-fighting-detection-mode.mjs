@@ -9,8 +9,8 @@ export default class BlindFightingDetectionMode extends BaseDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      outlineColor: [1, 0, 1, 1],
       knockout: true,
+      outlineColor: [1, 0, 1, 1],
       wave: true,
     }));
   }

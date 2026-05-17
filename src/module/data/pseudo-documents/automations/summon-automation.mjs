@@ -77,7 +77,7 @@ export default class SummonAutomation extends mixClasses(
     const activations = [];
     const uuids = Array.from(this.uuids).filter(this.#validateUuid);
     if (this.merge) {
-      activations.push(new SummonActivation({ uuids, display: this.display }));
+      activations.push(new SummonActivation({ display: this.display, uuids }));
     } else {
       for (const uuid of uuids) {
         const doc = await resolveDocument(uuid);
@@ -86,7 +86,7 @@ export default class SummonAutomation extends mixClasses(
         });
         const display = foundry.utils.deepClone(this.display);
         display.label ||= label;
-        activations.push(new SummonActivation({ uuids: [uuid], display }));
+        activations.push(new SummonActivation({ display, uuids: [uuid] }));
       }
     }
     return activations;

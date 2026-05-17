@@ -17,7 +17,7 @@ const { fields } = foundry.data;
  * @returns {Promise<Teriock.System.FormulaString|null>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
-  const { crit = false, label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok"), impact } = options;
+  const { crit = false, impact, label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok") } = options;
   let formula = rollFormula;
   const formulaField = new fields.StringField({
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
@@ -54,6 +54,8 @@ export default async function boostDialog(rollFormula, options = {}) {
     content: contentHtml,
     modal: true,
     ok: {
+      icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
+      label: label,
       callback: (_event, button) => {
         const updatedFormula = button.form.elements.namedItem("formula").value ?? "0";
         const boosts = Number(button.form.elements.namedItem("boosts").value || "0") || 0;
@@ -71,8 +73,6 @@ export default async function boostDialog(rollFormula, options = {}) {
         }
         return formula;
       },
-      icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
-      label: label,
     },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),

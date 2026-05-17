@@ -195,9 +195,9 @@ export default class AbilitySystem extends mixClasses(
           classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
           dataset: {
             action: "updatePaths",
+            icon: TERIOCK.display.icons.ui.numerical,
             paths: "system.upgrades.score.attribute system.upgrades.score.value",
             title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
-            icon: TERIOCK.display.icons.ui.numerical,
           },
           editable: false,
           path: "system.upgrades.score.text",
@@ -206,9 +206,9 @@ export default class AbilitySystem extends mixClasses(
           classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
           dataset: {
             action: "updatePaths",
+            icon: TERIOCK.display.icons.competence.fluent,
             paths: "system.upgrades.competence.attribute system.upgrades.competence.value",
             title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update"),
-            icon: TERIOCK.display.icons.competence.fluent,
           },
           editable: false,
           path: "system.upgrades.competence.text",
@@ -253,13 +253,13 @@ export default class AbilitySystem extends mixClasses(
       icons.push({
         action: "toggleDisableLocked",
         icon: TERIOCK.display.icons.ui.locked,
+        tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
+        visible: this.basic,
         onClick: () => {
           ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", {
             localize: true,
           });
         },
-        tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
-        visible: this.basic,
       });
     }
     if (this.isArmamentChild && !this.grantUse) {

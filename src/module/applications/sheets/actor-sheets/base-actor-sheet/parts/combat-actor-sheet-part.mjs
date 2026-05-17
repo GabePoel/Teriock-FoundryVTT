@@ -33,11 +33,11 @@ export default Base =>
       const attacker = await selectDocumentDialog(
         [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
         {
+          checked: this.document.system.wielding.attacker?.uuid,
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint"),
           label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.label"),
           openable: true,
           textKey: "system.summarizedAttack",
-          checked: this.document.system.wielding.attacker?.uuid,
         },
       );
       if (attacker) {
@@ -55,11 +55,11 @@ export default Base =>
       const attacker = await selectDocumentDialog(
         [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
         {
+          checked: this.document.system.wielding.blocker?.uuid,
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint"),
           label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.label"),
           openable: true,
           textKey: "system.summarizedBlock",
-          checked: this.document.system.wielding.blocker?.uuid,
         },
       );
       if (attacker) {
@@ -104,13 +104,13 @@ export default Base =>
 
     static DEFAULT_OPTIONS = {
       actions: {
-        useAbility: { buttons: [0, 2], handler: this.#onUseAbility },
         openPrimaryAttacker: this.#onOpenPrimaryAttacker,
         openPrimaryBlocker: this.#onOpenPrimaryBlocker,
         selectAttacker: this.#onSelectAttacker,
         selectBlocker: this.#onSelectBlocker,
         toggleReaction: this.#onToggleReaction,
         toggleSb: this.#onToggleSb,
+        useAbility: { buttons: [0, 2], handler: this.#onUseAbility },
       },
     };
   };

@@ -6,9 +6,9 @@ declare global {
       clickable?: boolean;
       dataset?: object;
       icon?: Teriock.EmbedData.EmbedIcon;
-      onClick?: (event: PointerEvent, relative: TeriockDocument) => Promise<void>;
       tooltip?: string;
       visible?: boolean;
+      onClick?: (event: PointerEvent, relative: TeriockDocument) => Promise<void>;
     };
 
     export type EmbedParts = {

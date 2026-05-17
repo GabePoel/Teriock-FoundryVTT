@@ -14,21 +14,21 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
   }
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    form: { closeOnSubmit: false, submitOnChange: true },
     actions: { resetIdentifier: this.#resetIdentifier },
+    form: { closeOnSubmit: false, submitOnChange: true },
     position: { width: 650 },
     window: {
       contentClasses: ["standard-form", "teriock-settings"],
-      resizable: true,
       icon: makeIconClass(icons.ui.configure, "title"),
+      resizable: true,
     },
   };
 
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "teriock/sheets/utility/document-config",
       scrollable: [""],
+      template: "teriock/sheets/utility/document-config",
     },
   };
 
@@ -107,8 +107,6 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
       (!!this.document._stats?.compendiumSource || this.document._stats?.compendiumSource === null);
     if (hasCompendiumSource && !this.document.isSecret) {
       context.configs.push({
-        legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend",
-        localize: true,
         fields: [
           this.#quickNormalField("system.identifier", {
             placeholder: this.document.defaultIdentifier,
@@ -118,17 +116,19 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
             label: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
           }),
         ],
+        legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.sources.legend",
+        localize: true,
       });
     }
     const hasQualifiers = !!this.document.system?.qualifiers;
     if (hasQualifiers) {
       context.configs.push({
-        legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.qualifiers.legend",
-        localize: true,
         fields: [
           this.#quickNormalField("system.qualifiers.ephemeral.raw"),
           this.#quickNormalField("system.qualifiers.suppressed.raw"),
         ],
+        legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.qualifiers.legend",
+        localize: true,
       });
     }
     const hasSettings = !!this.document.flags.teriockDocumentSettings;
@@ -137,9 +137,9 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
       for (const field of Object.values(schema.fields)) {
         if (field instanceof foundry.data.fields.SchemaField) {
           context.configs.push({
+            fields: objectMap(field.fields, f => this.#quickSettingsField(f.fieldPath)),
             legend: field.label,
             localize: true,
-            fields: objectMap(field.fields, f => this.#quickSettingsField(f.fieldPath)),
           });
         }
       }

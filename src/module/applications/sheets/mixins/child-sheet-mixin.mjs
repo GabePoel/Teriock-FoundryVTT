@@ -95,11 +95,11 @@ export default function ChildSheetMixin(Base) {
           return {
             ...f,
             ...{
-              schema: this.document.getSchema(f.path),
-              value,
-              label: f?.label || _loc(this.document.getSchema(f.path)?.label),
               button: f?.button,
               editable: f.editable === false ? false : value === sourceValue,
+              label: f?.label || _loc(this.document.getSchema(f.path)?.label),
+              schema: this.document.getSchema(f.path),
+              value,
             },
           };
         });
@@ -179,9 +179,9 @@ export default function ChildSheetMixin(Base) {
           .filter(f => !f.value)
           .map(f => {
             return {
+              editable: f.editable,
               fieldPath: f.path,
               name: f?.button || f?.label || f.schema?.label,
-              editable: f.editable,
             };
           })
           .filter(b => b.editable !== false);

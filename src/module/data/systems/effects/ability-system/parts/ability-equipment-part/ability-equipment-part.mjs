@@ -41,15 +41,15 @@ export default Base => {
         return {
           action: "toggleGrantUseDoc",
           icon: this.grantUse ? TERIOCK.display.icons.ability.onUse : TERIOCK.display.icons.ability.notOnUse,
+          tooltip: this.grantUse
+            ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
+            : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
+          visible: this.parent.isOwner && this.isArmamentChild,
           onClick: async (_ev, doc) => {
             if (doc === this.parent.parent) {
               await this.parent.update({ "system.grantUse": !this.grantUse });
             }
           },
-          tooltip: this.grantUse
-            ? _loc("TERIOCK.SYSTEMS.Ability.USAGE.onlyOnUse")
-            : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
-          visible: this.parent.isOwner && this.isArmamentChild,
         };
       }
 
@@ -81,6 +81,7 @@ export default Base => {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
+          visible: this.parent.parent?.isOwner && this.spell && doc !== this.parent && doc.sheet.isEditable,
           onClick: async () => {
             const data = await this.toScroll();
             const op = { keepEmbeddedIds: true, renderSheet: true };
@@ -90,7 +91,6 @@ export default Base => {
               TeriockItem.create(data, op);
             }
           },
-          visible: this.parent.parent?.isOwner && this.spell && doc !== this.parent && doc.sheet.isEditable,
         });
         return entries;
       }
@@ -133,8 +133,8 @@ export default Base => {
        */
       async toScroll(data = {}, equipmentType = "scroll") {
         const reference = (await fromIdentifier("equipment:scroll"))?.toObject(true) || {
-          type: "equipment",
           system: { equipmentType: "scroll" },
+          type: "equipment",
         };
         let img;
         if (toTitleCase(equipmentType) === "Scroll") {

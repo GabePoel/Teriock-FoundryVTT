@@ -29,12 +29,12 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
       }),
       sheet: new fields.SchemaField({
         blockAbilitiesGapless: new blockGaplessField({
-          initial: true,
           child: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
+          initial: true,
         }),
         blockAbilitiesSize: new blockSizeField({
-          initial: "small",
           child: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
+          initial: "small",
         }),
         blockClassesGapless: new blockGaplessField({
           child: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
@@ -43,20 +43,20 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
           child: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
         }),
         blockEffectsGapless: new blockGaplessField({
-          initial: true,
           child: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
+          initial: true,
         }),
         blockEffectsSize: new blockSizeField({
-          initial: "small",
           child: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
+          initial: "small",
         }),
         blockInventoryGapless: new blockGaplessField({
-          initial: true,
           child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
+          initial: true,
         }),
         blockInventorySize: new blockSizeField({
-          initial: "small",
           child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
+          initial: "small",
         }),
         blockPowersGapless: new blockGaplessField({
           child: "TERIOCK.SHEETS.Actor.TABS.Powers.title",

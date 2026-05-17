@@ -26,10 +26,10 @@ export default Base =>
     _prepareProtectionButtonContext(context) {
       context.protectionButtons = Object.values(protectionConfig.types).map(type => {
         return {
-          tooltip: type.button,
-          img: getImage("effectTypes", type.rule),
           action: type.action,
+          img: getImage("effectTypes", type.rule),
           label: type.label,
+          tooltip: type.button,
         };
       });
     }

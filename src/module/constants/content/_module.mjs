@@ -7,8 +7,8 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { ucFirst } from "../../helpers/string.mjs";
 
 const rawContent = {
-  conditions,
   classes,
+  conditions,
   keywords,
   tradecrafts,
   weaponFightingStyles,

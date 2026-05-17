@@ -90,22 +90,22 @@ export function fancifyFields(displayFields) {
         fancy = f;
       }
       const {
+        button,
         classes = "",
         dataset = {},
         editable = true,
         label = "",
         path = fancy.path,
         visible = true,
-        button,
       } = fancy;
       return {
+        button,
         classes,
         dataset,
         editable,
         label,
         path,
         visible,
-        button,
       };
     })
     .filter(f => f.visible);
@@ -219,9 +219,9 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
       const groupLabel = options.localize ? _loc(group.label) : group.label;
       for (const [choiceValue, choiceLabel] of Object.entries(group.choices)) {
         choiceArray.push({
+          group: groupLabel,
           label: options.localize ? _loc(choiceLabel) : choiceLabel,
           value: choiceValue,
-          group: groupLabel,
         });
       }
     }
@@ -316,6 +316,12 @@ export function consolidateWriteOperations(operations) {
  * @return {string}
  */
 export function inferNameFromIdentifier(identifier) {
+  try {
+    const name = game.teriock.identifiers.fromIdentifierSync(identifier)?.name;
+    if (name) {
+      return name;
+    }
+  } catch {}
   const parsed = parseIdentifier(identifier);
   if (parsed.identifier) {
     identifier = parsed.identifier;
@@ -358,7 +364,7 @@ export function parseIdentifier(identifier) {
     type = parts[0];
     identifier = parts[1];
   }
-  return { type, identifier };
+  return { identifier, type };
 }
 
 /**

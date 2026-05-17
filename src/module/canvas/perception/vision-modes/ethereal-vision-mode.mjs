@@ -15,7 +15,7 @@ export default function etherealVisionMode() {
     {
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
-        uniforms: { contrast: 0, saturation: -1, brightness: 0 },
+        uniforms: { brightness: 0, contrast: 0, saturation: -1 },
       },
       id: "ethereal",
       label: "TERIOCK.PERCEPTION.VisionModes.ethereal",
@@ -24,23 +24,23 @@ export default function etherealVisionMode() {
           postProcessingModes: ["SATURATION"],
           uniforms: { saturation: -1.0, tint: [1, 1, 1] },
         },
+        coloration: {
+          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
+        },
         illumination: {
           postProcessingModes: ["SATURATION"],
           uniforms: { saturation: -1.0, tint: [1, 1, 1] },
         },
-        coloration: {
-          visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
-        },
       },
       vision: {
-        darkness: { adaptive: false },
         background: { shader: EtherealBackgroundVisionShader },
         coloration: { shader: EtherealColorationVisionShader },
+        darkness: { adaptive: false },
         defaults: {
           attenuation: 0,
+          brightness: 0,
           contrast: 0,
           saturation: 0,
-          brightness: 0,
         },
       },
     },

@@ -45,13 +45,13 @@ export default class AddDocumentsAutomation extends mixClasses(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       attachDocuments: new fields.BooleanField({ initial: true }),
-      separate: new fields.BooleanField({ initial: false }),
       children: new fields.SchemaField({
-        enabled: new fields.BooleanField({ initial: false }),
         data: defaultJSONField(),
+        enabled: new fields.BooleanField({ initial: false }),
         overrideData: new fields.BooleanField({ initial: false }),
         uuids: new fields.SetField(new fields.DocumentUUIDField()),
       }),
+      separate: new fields.BooleanField({ initial: false }),
     });
   }
 
@@ -165,7 +165,7 @@ export default class AddDocumentsAutomation extends mixClasses(
       if (this.overrideData && this.data) {
         foundry.utils.mergeObject(data, this.data, { inplace: true });
       }
-      const construction = { uuid, data };
+      const construction = { data, uuid };
       this.#updateConstructionName(construction);
       return construction;
     });
@@ -183,8 +183,8 @@ export default class AddDocumentsAutomation extends mixClasses(
       if (this.children.enabled) {
         activationFamily.children = Array.from(this.children.uuids).map(uuid => {
           return {
-            uuid,
             data: this.children.overrideData ? this.children.data : {},
+            uuid,
           };
         });
       }

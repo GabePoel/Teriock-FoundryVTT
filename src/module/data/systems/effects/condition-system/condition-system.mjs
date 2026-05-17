@@ -64,9 +64,9 @@ export default class ConditionSystem extends mixClasses(
       {
         action: "removeConditionDoc",
         icon: "dice-d4",
-        onClick: async () => this.parent.use(),
         tooltip: _loc("TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove"),
         visible: true,
+        onClick: async () => this.parent.use(),
       },
     ];
   }

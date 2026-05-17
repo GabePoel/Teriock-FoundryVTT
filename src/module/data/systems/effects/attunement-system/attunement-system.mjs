@@ -32,8 +32,8 @@ export default class AttunementSystem extends CleanedEffectSystem {
       inheritTier: new fields.BooleanField({ initial: true }),
       target: new LocalDocumentField(foundry.documents.BaseItem),
       tier: new fields.NumberField({
-        label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
         initial: 0,
+        label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
       }),
       type: new fields.StringField({
         choices: localizeChoices(objectMap(attunementConfig.type, v => v.label)),
@@ -53,9 +53,9 @@ export default class AttunementSystem extends CleanedEffectSystem {
       {
         action: "deattuneDoc",
         icon: TERIOCK.display.icons.attunable.deattune,
-        onClick: async () => await this.deattune(),
         tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
         visible: this.parent.isOwner,
+        onClick: async () => await this.deattune(),
       },
       ...super.embedIcons,
     ];
@@ -138,8 +138,8 @@ export default class AttunementSystem extends CleanedEffectSystem {
     return {
       ...super.getLocalRollData(),
       [`type.${toCamelCase(this.type)}`]: 1,
-      tier: this.tier,
       target: this.target ? 1 : 0,
+      tier: this.tier,
     };
   }
 

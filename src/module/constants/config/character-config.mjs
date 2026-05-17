@@ -6,11 +6,6 @@ export const defaults = {
 };
 
 export const movement = {
-  walk: {
-    abbreviation: "wal",
-    initial: 3,
-    label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
-  },
   climb: {
     abbreviation: "cli",
     initial: 1,
@@ -61,6 +56,11 @@ export const movement = {
     initial: 1,
     label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.swim",
   },
+  walk: {
+    abbreviation: "wal",
+    initial: 3,
+    label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.walk",
+  },
 };
 
 export const sense = {
@@ -100,9 +100,9 @@ export const sense = {
     label: "TERIOCK.TERMS.Senses.smell",
   },
   spectral: {
-    hidden: true,
     detectionMode: "spectral",
     grantsSight: true,
+    hidden: true,
     label: "TERIOCK.TERMS.Senses.spectral",
   },
   truth: {
@@ -115,51 +115,51 @@ export const sense = {
 /** @type {Teriock.Config.SizeEntry[]} */
 export const sizes = [
   {
-    max: 0.5,
-    length: 0.5,
     category: "TERIOCK.TERMS.Sizes.tiny",
+    length: 0.5,
+    max: 0.5,
     reach: 5,
   },
   {
-    max: 2,
-    length: 1,
     category: "TERIOCK.TERMS.Sizes.small",
-    reach: 5,
-  },
-  {
-    max: 4,
     length: 1,
-    category: "TERIOCK.TERMS.Sizes.medium",
+    max: 2,
     reach: 5,
   },
   {
-    max: 9,
-    length: 2,
+    category: "TERIOCK.TERMS.Sizes.medium",
+    length: 1,
+    max: 4,
+    reach: 5,
+  },
+  {
     category: "TERIOCK.TERMS.Sizes.large",
+    length: 2,
+    max: 9,
     reach: 10,
   },
   {
-    max: 14,
-    length: 3,
     category: "TERIOCK.TERMS.Sizes.huge",
+    length: 3,
+    max: 14,
     reach: 15,
   },
   {
-    max: 19,
-    length: 4,
     category: "TERIOCK.TERMS.Sizes.massive",
+    length: 4,
+    max: 19,
     reach: 20,
   },
   {
-    max: 24,
-    length: 5,
     category: "TERIOCK.TERMS.Sizes.gargantuan",
+    length: 5,
+    max: 24,
     reach: 25,
   },
   {
-    max: Infinity,
-    length: 6,
     category: "TERIOCK.TERMS.Sizes.colossal",
+    length: 6,
+    max: Infinity,
     reach: 30,
   },
 ];

@@ -6,9 +6,9 @@ const powerContext = {
   ...usableContext,
   power: "TYPES.Item.power",
 
-  type: "TERIOCK.SYSTEMS.Power.FIELDS.type.label",
-  maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
   av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
+  maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
+  type: "TERIOCK.SYSTEMS.Power.FIELDS.type.label",
 };
 
 export default powerContext;

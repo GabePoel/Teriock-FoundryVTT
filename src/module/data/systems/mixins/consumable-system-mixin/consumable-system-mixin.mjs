@@ -114,8 +114,8 @@ export default function ConsumableSystemMixin(Base) {
                   value: this.quantity,
                 })
               : _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax", {
-                  value: this.quantity,
                   max: this.maxQuantity.value,
+                  value: this.quantity,
                 });
         }
         return parts;

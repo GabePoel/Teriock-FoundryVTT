@@ -115,8 +115,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     }
     if (this.showDialog && formulaExists(this.formula)) {
       this.formula = await boostDialog(this.formula, {
-        crit: this.crit,
         boosts,
+        crit: this.crit,
       });
       if (this.formula === null) {
         return false;

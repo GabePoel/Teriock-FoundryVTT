@@ -20,11 +20,11 @@ const takeUnhack = fnFactory((a, p) => a.system.takeUnhack(p));
  */
 export const hackCommand = {
   args: ["part"],
-  icon: options => TERIOCK.config.hack[options?.part || "arm"].icon,
   id: "hack",
-  label: options => TERIOCK.config.hack[options?.part || "arm"].label,
   primary: takeHack,
   secondary: takeUnhack,
+  icon: options => TERIOCK.config.hack[options?.part || "arm"].icon,
+  label: options => TERIOCK.config.hack[options?.part || "arm"].label,
 };
 
 /**
@@ -33,9 +33,9 @@ export const hackCommand = {
  */
 export const unhackCommand = {
   args: ["part"],
-  icon: options => TERIOCK.config.hack[options?.part || "arm"].icon,
   id: "unhack",
-  label: options => TERIOCK.config.hack[options?.part || "arm"].remove,
   primary: takeUnhack,
   secondary: takeHack,
+  icon: options => TERIOCK.config.hack[options?.part || "arm"].icon,
+  label: options => TERIOCK.config.hack[options?.part || "arm"].remove,
 };

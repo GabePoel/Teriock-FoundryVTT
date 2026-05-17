@@ -5,33 +5,33 @@ import { hackConfig } from "../config/hack-config.mjs";
 import { rankConfig } from "../config/rank-config.mjs";
 
 const actorContext = {
+  f: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.f.label",
   lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
   p: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.p.label",
-  f: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.f.label",
 
-  "hp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.value.label",
   "hp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.max.label",
   "hp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.min.label",
-  "hp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.temp.label",
   "hp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.morganti.label",
+  "hp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.temp.label",
+  "hp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.hp.value.label",
 
-  "mp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.value.label",
   "mp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.max.label",
   "mp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.min.label",
-  "mp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.temp.label",
   "mp.morganti": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.morganti.label",
+  "mp.temp": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.temp.label",
+  "mp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.mp.value.label",
 
-  "lp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.value.label",
   "lp.max": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.max.label",
   "lp.min": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.min.label",
+  "lp.value": "TERIOCK.SYSTEMS.BaseActor.FIELDS.lp.value.label",
 
   pres: "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.max.label",
   "pres.unused": "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.unused.label",
   "pres.used": "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.used.label",
   usp: "TERIOCK.SYSTEMS.BaseActor.FIELDS.presence.used.label",
 
-  speed: "TERIOCK.SYSTEMS.BaseActor.FIELDS.speed.label",
   size: "TERIOCK.SHEETS.Actor.TABS.Details.size.label",
+  speed: "TERIOCK.SYSTEMS.BaseActor.FIELDS.speed.label",
   weight: "TERIOCK.SYSTEMS.BaseActor.FIELDS.weight.label",
 
   "carry.factor": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.factor",
@@ -42,24 +42,24 @@ const actorContext = {
   "carry.max": "TERIOCK.SHEETS.Actor.TABS.Details.carrying.maxCapacity",
   "carry.max.hit": "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3",
 
-  av: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.value.label",
-  "av.worn": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.worn.label",
-  "av.nat": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.nat.label",
   ac: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.ac.label",
+  ap: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
+  av: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.value.label",
+  "av.nat": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.nat.label",
+  "av.worn": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.worn.label",
+  av0: "TERIOCK.TERMS.Properties.armorVoiding",
   bv: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.bv.label",
   cc: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.cc.label",
-  sb: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
-  ap: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
+  h: "TERIOCK.ROLL_CONTEXT.Execution.h",
   hit: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
-  av0: "TERIOCK.TERMS.Properties.armorVoiding",
+  sb: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
   ub: "TERIOCK.TERMS.Properties.unblockable",
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
-  h: "TERIOCK.ROLL_CONTEXT.Execution.h",
 
+  "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
   "db.stones.black": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.black.label",
   "db.stones.red": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.red.label",
   "db.stones.white": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.white.label",
-  "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
 
   "money.debt": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.label",
   "money.total": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.total.label",
@@ -77,20 +77,20 @@ Hooks.once("i18nInit", () => {
   Object.entries(attributeConfig).forEach(([k, v]) => {
     const name = _loc(v.label);
     Object.assign(actorContext, {
-      [`${k}`]: name,
-      [`${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
+      [`${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
       [`${k}.pas`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.passive", { name }),
       [`${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
-      [`${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
+      [`${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
+      [`${k}`]: name,
     });
   });
   Object.entries(TERIOCK.reference.tradecrafts).forEach(([k, v]) => {
     const name = _loc(v);
     Object.assign(actorContext, {
-      [`tc.${k}`]: name,
-      [`tc.${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
-      [`tc.${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
       [`tc.${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
+      [`tc.${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
+      [`tc.${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
+      [`tc.${k}`]: name,
     });
   });
   Object.entries(hackConfig).forEach(([k, v]) => {

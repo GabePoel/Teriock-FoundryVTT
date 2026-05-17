@@ -101,20 +101,20 @@ export default class TeriockMacro extends mixClasses(
     const command = dedent(`
     await Macro.implementation.useDocumentGeneral("${lookup}", { actor, event })`);
     const macroData = {
+      command: command,
+      flags: {
+        teriock: {
+          macroLookupKey: lookup,
+          macroType: "useGeneral",
+          user: game.user.id,
+        },
+      },
+      folder: (await this.ensureHotbarFolder())?.id,
+      img: doc.img,
       name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
         value: doc.name,
       }),
       type: "script",
-      img: doc.img,
-      command: command,
-      folder: (await this.ensureHotbarFolder())?.id,
-      flags: {
-        teriock: {
-          user: game.user.id,
-          macroType: "useGeneral",
-          macroLookupKey: lookup,
-        },
-      },
     };
     return this.create(macroData);
   }
@@ -227,8 +227,8 @@ export default class TeriockMacro extends mixClasses(
     const actor = game.actors.default;
     await this.execute({
       actor,
-      token: actor?.defaultToken,
       event,
+      token: actor?.defaultToken,
     });
   }
 

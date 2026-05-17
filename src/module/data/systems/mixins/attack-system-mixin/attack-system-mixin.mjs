@@ -34,8 +34,8 @@ export default function AttackSystemMixin(Base) {
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {
           ap: this.attackPenalty,
-          hit: this.hitBonus,
           av0: Number(this.piercing.av0),
+          hit: this.hitBonus,
           ub: Number(this.piercing.ub),
           warded: Number(this.warded),
         });

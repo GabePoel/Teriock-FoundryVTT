@@ -48,12 +48,12 @@ export default class CharacterSystem extends BaseActorSystem {
     this.parent.updateSource(
       foundry.utils.mergeObject(
         {
+          items: itemData,
           prototypeToken: {
             actorLink: true,
             disposition: 0,
             sight: { enabled: true },
           },
-          items: itemData,
         },
         data,
       ),

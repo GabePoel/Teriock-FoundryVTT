@@ -89,6 +89,7 @@ export const protectionConfig = {
       label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
     },
   },
+  // no sort
   types: {
     resistances: {
       action: "rollResistance",

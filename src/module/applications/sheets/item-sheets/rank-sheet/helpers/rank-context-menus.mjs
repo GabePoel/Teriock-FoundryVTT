@@ -11,8 +11,8 @@ export function archetypeContextMenu(rank) {
   for (const [aKey, aData] of Object.entries(TERIOCK.config.rank)) {
     const firstClass = Object.keys(aData.classes)[0];
     const option = {
-      label: aData.name,
       icon: makeIcon(aData.icon, "contextMenu"),
+      label: aData.name,
       onClick: async () => {
         await rank.update({
           system: {
@@ -40,13 +40,13 @@ export function classContextMenu(rank) {
   for (const [aKey, aData] of Object.entries(TERIOCK.config.rank)) {
     for (const [cKey, cData] of Object.entries(aData.classes)) {
       const option = {
-        label: cData.name,
         icon: makeIcon(cData.icon, "contextMenu"),
+        label: cData.name,
         onClick: async () => {
           await rank.update({
             system: {
-              className: cKey,
               archetype: aKey,
+              className: cKey,
             },
           });
         },

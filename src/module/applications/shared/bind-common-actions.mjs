@@ -9,13 +9,13 @@ import { imageContextMenuOptions, wikiContextMenuOptions } from "./_module.mjs";
 export default function bindCommonActions(rootElement) {
   new TeriockContextMenu(rootElement, "img", imageContextMenuOptions, {
     eventName: "contextmenu",
-    jQuery: false,
     fixed: true,
+    jQuery: false,
   });
   new TeriockContextMenu(rootElement, "[data-wiki-context]", wikiContextMenuOptions, {
     eventName: "contextmenu",
-    jQuery: false,
     fixed: true,
+    jQuery: false,
   });
   queryAll(rootElement, ".content-link[data-uuid]").forEach(el => {
     if (game.teriock.getSetting("contentLinkTooltips")) {

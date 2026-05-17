@@ -110,19 +110,19 @@ export default class RegionAutomation extends mixClasses(
       }),
       restriction: new fields.SchemaField({
         enabled: new fields.BooleanField(),
-        type: new fields.StringField({
+        priority: new fields.NumberField({
+          initial: 0,
+          integer: true,
+          min: 0,
+          nullable: false,
           required: true,
+        }),
+        type: new fields.StringField({
           choices: Object.fromEntries(
             CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
           ),
           initial: "move",
-        }),
-        priority: new fields.NumberField({
           required: true,
-          nullable: false,
-          integer: true,
-          initial: 0,
-          min: 0,
         }),
       }),
       targeting: new fields.BooleanField({ initial: true }),
@@ -177,8 +177,8 @@ export default class RegionAutomation extends mixClasses(
     if (this.regionType === "emanation") {
       data.base = {
         height: 1,
-        shape: 0,
         hole: this.excludeToken && this.attachToToken,
+        shape: 0,
         type: "token",
         width: 1,
         x: 0,
@@ -300,7 +300,7 @@ export default class RegionAutomation extends mixClasses(
    * @param {{rollData?: object, execution?: BaseExecution}} [options]
    * @returns {Promise<object>}
    */
-  async getRegionData(options = { rollData: {}, execution: null }) {
+  async getRegionData(options = { execution: null, rollData: {} }) {
     const data = Object.assign(
       {
         behaviors: [],
@@ -336,7 +336,7 @@ export default class RegionAutomation extends mixClasses(
    * @param {BaseExecution|null} [options.execution]
    * @returns {Promise<TeriockRegionDocument>}
    */
-  async placeRegion(options = { rollData: {}, execution: null }) {
+  async placeRegion(options = { execution: null, rollData: {} }) {
     const activations = await this._getActivations(options);
     return activations[0]?.primaryAction();
   }

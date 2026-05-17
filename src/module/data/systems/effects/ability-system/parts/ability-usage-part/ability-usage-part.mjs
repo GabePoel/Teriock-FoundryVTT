@@ -104,7 +104,7 @@ export default Base => {
                 raw = lower.trim().split(" ")[0];
               }
             }
-            source.executionTime.slow = { unit, raw };
+            source.executionTime.slow = { raw, unit };
           }
         }
 
@@ -235,13 +235,13 @@ export default Base => {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          maneuver: this.maneuver,
-          [`maneuver.${this.maneuver}`]: 1,
-          interaction: this.interaction,
           [`interaction.${this.interaction}`]: 1,
-          time: this.executionTime.base,
+          [`maneuver.${this.maneuver}`]: 1,
           [`time.${this.executionTime.base}`]: 1,
+          interaction: this.interaction,
+          maneuver: this.maneuver,
           range: this.range.value,
+          time: this.executionTime.base,
         });
         // Add deliveries
         if (this.delivery) {
@@ -257,9 +257,9 @@ export default Base => {
         }
         if (this.expansion.type) {
           Object.assign(data, {
-            expansion: this.expansion,
             [`expansion.${this.expansion.type}`]: 1,
             [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
+            expansion: this.expansion,
             ["expansion.range"]: this.expansion.range.value,
           });
         }

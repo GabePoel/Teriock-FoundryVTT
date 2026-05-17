@@ -22,8 +22,8 @@ export default class TeriockTokenDocument extends mixClasses(
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, {
-      img: this.img,
       icon: icons.document.token,
+      img: this.img,
     });
     if (this.actor && this.actor.fullName !== parts.title) {
       parts.text = this.actor.fullName;
@@ -64,10 +64,10 @@ export default class TeriockTokenDocument extends mixClasses(
   getCardContextMenuEntries(doc) {
     return [
       {
-        label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
         icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
-        visible: () => this.actor && this.actor.isViewer,
+        label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
         onClick: async () => this.actor.sheet.render(true),
+        visible: () => this.actor && this.actor.isViewer,
       },
       ...super.getCardContextMenuEntries(doc),
     ];

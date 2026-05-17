@@ -31,14 +31,15 @@ declare module "./ability-execution-constructor.mjs" {
     attackPenalty: number;
     attackPenaltyFormula: string;
     costs: {
-      hp: number;
-      mp: number;
       gp: number;
+      hp: number;
+      lp: number;
+      mp: number;
     };
     executor: TeriockToken | null;
     flags: {
-      noTemplate: boolean;
       noHeighten: boolean;
+      noTemplate: boolean;
     };
     heightened: number;
     targets: Set<TeriockToken>;

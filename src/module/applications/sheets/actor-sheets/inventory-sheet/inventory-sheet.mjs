@@ -6,14 +6,14 @@ export default class InventorySheet extends BaseActorSheet {
   static DEFAULT_OPTIONS = {
     classes: ["inventory"],
     form: { submitOnChange: true },
-    position: { width: 525, height: 600 },
+    position: { height: 600, width: 525 },
     window: { icon: makeIconClass(documentConfig.inventory.icon, "title") },
   };
 
   static PARTS = {
     all: {
-      template: "teriock/sheets/actors/inventory/inventory",
       scrollable: [""],
+      template: "teriock/sheets/actors/inventory/inventory",
     },
   };
 }

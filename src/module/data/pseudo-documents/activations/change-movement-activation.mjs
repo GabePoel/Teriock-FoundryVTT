@@ -37,8 +37,8 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
       if (t.movementAction !== this.movementAction) {
         const old = t.movementAction;
         await t.update({
-          movementAction: this.movementAction,
           "flags.teriock.previousMovementAction": t.movementAction,
+          movementAction: this.movementAction,
         });
         ui.notifications.success("TERIOCK.COMMANDS.ChangeMovement.changed", {
           format: {
@@ -72,8 +72,8 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
         t.movementAction !== t.getFlag("teriock", "previousMovementAction")
       ) {
         await t.update({
-          movementAction: t.getFlag("teriock", "previousMovementAction"),
           "flags.teriock.previousMovementAction": this.movementAction,
+          movementAction: t.getFlag("teriock", "previousMovementAction"),
         });
         ui.notifications.success("TERIOCK.COMMANDS.ChangeMovement.reverted", {
           format: {

@@ -6,9 +6,9 @@ const mountContext = {
   ...usableContext,
   mount: "TYPES.Item.mount",
 
+  attuned: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
   mounted: "TERIOCK.SYSTEMS.Mount.FIELDS.mounted.label",
   tier: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
-  attuned: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned",
 
   hp: "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label",
   "hp.disabled": "TERIOCK.MODELS.BaseStatPool.FIELDS.disabled.label",

@@ -91,8 +91,8 @@ export default Base => {
           modal: true,
           rejectClose: false,
           window: {
-            title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label"),
             icon: makeIconClass(TERIOCK.display.icons.ui.longRest, "title"),
+            title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label"),
           },
         });
         if (!heal) {

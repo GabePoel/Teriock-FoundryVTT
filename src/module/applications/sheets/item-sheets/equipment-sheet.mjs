@@ -74,13 +74,13 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    classes: ["equipment"],
     actions: {
       toggleDampened: this.#onToggleDampened,
       toggleEquipped: this.#onToggleEquipped,
       toggleGlued: this.#onToggleGlued,
       toggleShattered: this.#onToggleShattered,
     },
+    classes: ["equipment"],
     window: { icon: makeIconClass(documentConfig.equipment.icon, "title") },
   };
 
@@ -95,8 +95,8 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,
-      ".ab-weight-button": { "system.weight": 1 },
       ".ab-tier-button": { "system.tier.raw": "1" },
+      ".ab-weight-button": { "system.weight": 1 },
     };
   }
 

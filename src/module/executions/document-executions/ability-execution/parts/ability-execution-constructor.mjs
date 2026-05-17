@@ -90,7 +90,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       noLp: options.noLp ?? !this.source.getSetting("execution.promptCostLp"),
       noMp: options.noMp ?? !this.source.getSetting("execution.promptCostMp"),
     });
-    this.costs = { hp: 0, mp: 0, gp: 0 };
+    this.costs = { gp: 0, hp: 0, mp: 0 };
   }
 
   /**
@@ -249,9 +249,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /** @inheritDoc */
   get rollData() {
     return Object.assign(super.rollData, {
-      ap: this.existingAttackPenalty,
-      "angle.normal": game.teriock.getSetting("defaultConeAngle"),
       "angle.dragon": game.teriock.getSetting("defaultDragonBreathAngle"),
+      "angle.normal": game.teriock.getSetting("defaultConeAngle"),
+      ap: this.existingAttackPenalty,
     });
   }
 

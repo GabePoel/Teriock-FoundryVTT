@@ -41,19 +41,19 @@ export default Base => {
             hasReaction: new fields.BooleanField({ initial: true }),
           }),
           defense: initialSchema({
+            ac: initialNumber(10),
             av: initialSchema({
               base: initialNumber(),
               natural: initialNumber(),
               value: initialNumber(),
               worn: initialNumber(),
             }),
-            ac: initialNumber(10),
             bv: initialNumber(),
             cc: initialNumber(10),
           }),
           initiative: new FormulaField({
-            initial: config.character.defaults.initiative,
             deterministic: false,
+            initial: config.character.defaults.initiative,
           }),
           offense: new fields.SchemaField({
             piercing: new fields.EmbeddedDataField(PiercingModel),
@@ -77,10 +77,10 @@ export default Base => {
        */
       #getDefenseRollData() {
         return {
-          av: this.defense.av.value,
-          "av.worn": this.defense.av.worn,
-          "av.nat": this.defense.av.natural,
           ac: this.defense.ac,
+          av: this.defense.av.value,
+          "av.nat": this.defense.av.natural,
+          "av.worn": this.defense.av.worn,
           bv: this.defense.bv,
           cc: this.defense.cc,
         };
@@ -115,19 +115,19 @@ export default Base => {
         const hasUb = weaponUb || naturalUb;
         const weaponWarded = !!this.wielding.attacker?.system.warded;
         return {
-          sb: Number(this.offense.sb),
+          ap: this.combat.attackPenalty,
           av0: Number(hasAv0) * 2,
-          "av0.wep": Number(weaponAv0) * 2,
           "av0.abi": 0,
           "av0.nat": Number(naturalAv0) * 2,
+          "av0.wep": Number(weaponAv0) * 2,
+          sb: Number(this.offense.sb),
           ub: Number(hasUb),
-          "ub.wep": Number(weaponUb),
           "ub.abi": 0,
           "ub.nat": Number(naturalUb),
+          "ub.wep": Number(weaponUb),
           ward: Number(weaponWarded),
-          "ward.wep": Number(weaponWarded),
           "ward.abi": 0,
-          ap: this.combat.attackPenalty,
+          "ward.wep": Number(weaponWarded),
         };
       }
 

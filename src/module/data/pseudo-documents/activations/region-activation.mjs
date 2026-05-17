@@ -21,8 +21,8 @@ export default class RegionActivation extends BaseActivation {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      data: new fields.ObjectField(),
       attachToToken: new fields.BooleanField(),
+      data: new fields.ObjectField(),
     });
   }
 
@@ -40,8 +40,8 @@ export default class RegionActivation extends BaseActivation {
       return null;
     }
     const data = foundry.utils.mergeObject(this.data, {
-      ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
       flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
+      ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
     });
     data.color ??= game.user.color;
     const toMinimize = Array.from(foundry.applications.instances.values()).filter(a => a.hasFrame && !a.minimized);

@@ -58,8 +58,8 @@ export default Base => {
         ];
         return {
           ...(await super.getPanelParts()),
-          classes: this.elderSorcery ? `elder-sorcery ${elementClass(this.elements)}` : "",
           bars: bars,
+          classes: this.elderSorcery ? `elder-sorcery ${elementClass(this.elements)}` : "",
         };
       }
     }

@@ -1,6 +1,6 @@
 import BaseRoll from "./base-roll.mjs";
 
-const { setProperty, getProperty } = foundry.utils;
+const { getProperty, setProperty } = foundry.utils;
 
 /** @inheritDoc */
 export default class ThresholdRoll extends BaseRoll {

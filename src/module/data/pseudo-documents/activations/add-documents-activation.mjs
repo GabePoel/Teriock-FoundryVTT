@@ -91,7 +91,7 @@ export default class AddDocumentsActivation extends BaseActivation {
    * @returns {Promise<Partial<ResolvedFamily>>}
    */
   async constructFamily(famConstruct) {
-    const { root, children = [], grandchildren = [], other = [] } = famConstruct;
+    const { children = [], grandchildren = [], other = [], root } = famConstruct;
     const queue = [...(root ? [root] : []), ...children, ...grandchildren, ...other];
     const results = await Promise.all(queue.map(doc => this.constructDocument(doc)));
     let pointer = 0;
@@ -148,8 +148,8 @@ export default class AddDocumentsActivation extends BaseActivation {
         if (this.target === "actor") {
           await this.createFamily(a, family);
           ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {
-            localize: true,
             format: { name: a.name },
+            localize: true,
           });
         } else {
           let choices = [];
@@ -164,8 +164,8 @@ export default class AddDocumentsActivation extends BaseActivation {
             chosen.map(c => {
               this.createFamily(c, family);
               ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {
-                localize: true,
                 format: { name: c.name },
+                localize: true,
               });
             }),
           );
@@ -247,16 +247,16 @@ export default class AddDocumentsActivation extends BaseActivation {
 
 function documentConstructionField() {
   return new fields.SchemaField({
-    uuid: new fields.DocumentUUIDField(),
     data: new fields.ObjectField({}),
+    uuid: new fields.DocumentUUIDField(),
   });
 }
 
 function familyConstructionField() {
   return new fields.SchemaField({
-    root: documentConstructionField(),
     children: new fields.ArrayField(documentConstructionField()),
     grandchildren: new fields.ArrayField(documentConstructionField()),
     other: new fields.ArrayField(documentConstructionField()),
+    root: documentConstructionField(),
   });
 }

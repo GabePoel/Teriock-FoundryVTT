@@ -22,10 +22,10 @@ declare global {
     export type ContextMenuOptions = {
       eventName?: string;
       fixed?: boolean;
+      forceDirection?: "down" | "up";
       jQuery?: boolean;
       onClose?: ContextMenuCallback;
       onOpen?: ContextMenuCallback;
-      forceDirection?: "down" | "up";
     };
   }
 }

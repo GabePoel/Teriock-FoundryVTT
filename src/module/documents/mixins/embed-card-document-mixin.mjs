@@ -118,8 +118,8 @@ export default function EmbedCardDocumentMixin(Base) {
             }
             new TeriockContextMenu(element, ".teriock-block", menuEntries, {
               eventName: "contextmenu",
-              jQuery: false,
               fixed: true,
+              jQuery: false,
             });
           });
         }

@@ -77,6 +77,10 @@ export default function AttunableSystemMixin(Base) {
           {
             action: "toggleAttunedDoc",
             icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
+            tooltip: this.isAttuned
+              ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
+              : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
+            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
             onClick: async () => {
               if (this.isAttuned) {
                 await this.deattune();
@@ -84,10 +88,6 @@ export default function AttunableSystemMixin(Base) {
                 await this.attune();
               }
             },
-            tooltip: this.isAttuned
-              ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
-              : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
           },
           ...super.embedIcons,
         ];
@@ -128,17 +128,6 @@ export default function AttunableSystemMixin(Base) {
           return attunement;
         }
         const attunementData = {
-          type: "attunement",
-          name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", {
-            name: this.parent.name,
-          }),
-          img: this.parent.img,
-          system: {
-            type: this.parent.type,
-            target: this.parent._id,
-            inheritTier: true,
-            tier: this.tier.value,
-          },
           changes: [
             {
               key: "system.attunements",
@@ -148,6 +137,17 @@ export default function AttunableSystemMixin(Base) {
               value: this.parent._id,
             },
           ],
+          img: this.parent.img,
+          name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", {
+            name: this.parent.name,
+          }),
+          system: {
+            inheritTier: true,
+            target: this.parent._id,
+            tier: this.tier.value,
+            type: this.parent.type,
+          },
+          type: "attunement",
         };
         if (this.parent.actor && (await this.canAttune())) {
           attunement = await this.parent.actor.createEmbeddedDocuments("ActiveEffect", [attunementData]);
@@ -226,8 +226,8 @@ export default function AttunableSystemMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          tier: this.tier.value || 0,
           attuned: Number(this.isAttuned),
+          tier: this.tier.value || 0,
         };
       }
 

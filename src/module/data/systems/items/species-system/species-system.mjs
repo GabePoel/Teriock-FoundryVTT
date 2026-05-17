@@ -212,8 +212,8 @@ export default class SpeciesSystem extends mixClasses(
         modal: true,
         rejectClose: false,
         window: {
-          title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
           icon: makeIconClass(TERIOCK.display.icons.effect.transform, "title"),
+          title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
         },
       });
       if (proceed) {

@@ -16,16 +16,16 @@ declare global {
       name: string;
       placeholder?: number | string;
       small: boolean;
-      update: (value: boolean | number | string) => void;
       value: boolean | number | string;
+      update: (value: boolean | number | string) => void;
     };
 
     export type ExecutionDialogButton = {
       action: string;
+      default?: boolean;
       icon?: string;
       label?: string;
       callback?: () => void;
-      default?: boolean;
     };
   }
 }

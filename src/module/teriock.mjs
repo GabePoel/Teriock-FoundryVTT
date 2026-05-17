@@ -174,11 +174,11 @@ foundry.helpers.Hooks.once("init", function () {
       template: "teriock/ui/chat-message",
     },
     Combat: {
+      documentClass: documents.TeriockCombat,
       initiative: {
         decimals: 2,
         formula: TERIOCK.config.character.defaults.initiative,
       },
-      documentClass: documents.TeriockCombat,
     },
     Combatant: {
       documentClass: documents.TeriockCombatant,
@@ -202,8 +202,8 @@ foundry.helpers.Hooks.once("init", function () {
       documentClass: documents.TeriockItem,
     },
     JournalEntry: {
-      documentClass: documents.TeriockJournalEntry,
       collection: documents.collections.TeriockJournal,
+      documentClass: documents.TeriockJournalEntry,
     },
     JournalEntryCategory: {
       documentClass: documents.TeriockJournalEntryCategory,
@@ -216,19 +216,19 @@ foundry.helpers.Hooks.once("init", function () {
       documentClass: documents.TeriockJournalEntryPage,
     },
     Macro: {
-      documentClass: documents.TeriockMacro,
       collection: documents.collections.TeriockMacros,
+      documentClass: documents.TeriockMacro,
     },
     Region: {
       documentClass: documents.TeriockRegionDocument,
     },
     RollTable: {
-      documentClass: documents.TeriockRollTable,
       collection: documents.collections.TeriockRollTables,
+      documentClass: documents.TeriockRollTable,
     },
     Scene: {
-      documentClass: documents.TeriockScene,
       collection: documents.collections.TeriockScenes,
+      documentClass: documents.TeriockScene,
     },
     TableResult: {
       documentClass: documents.TeriockTableResult,
@@ -239,8 +239,8 @@ foundry.helpers.Hooks.once("init", function () {
       objectClass: canvas.placeables.TeriockToken,
     },
     User: {
-      documentClass: documents.TeriockUser,
       collection: documents.collections.TeriockUsers,
+      documentClass: documents.TeriockUser,
     },
   });
 
@@ -408,7 +408,7 @@ foundry.helpers.Hooks.once("init", function () {
       types: ["drain"],
     },
   ];
-  sheetMap.forEach(({ cls, label, types, doc, makeDefault = true }) =>
+  sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>
     DocumentSheetConfig.registerSheet(doc, "teriock", cls, {
       label,
       makeDefault,

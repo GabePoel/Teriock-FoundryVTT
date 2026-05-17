@@ -9,10 +9,10 @@ declare global {
     };
 
     export type ChildChangePathEntry = {
-      targets: (keyof typeof TERIOCK.config.change.child.targets)[];
       forExecution?: boolean;
       group: keyof typeof TERIOCK.config.change.child.groups;
       label: string;
+      targets: (keyof typeof TERIOCK.config.change.child.targets)[];
       types?: Teriock.Changes.Type[];
     };
 
@@ -36,14 +36,14 @@ declare global {
 
     export type ImpactEntry = {
       aliases?: string[];
-      apply: (actor: TeriockActor, amt: number) => Promise<void>;
       deal: string;
       icon: string;
       label: string;
       morganti?: boolean;
-      reverse: (actor: TeriockActor, amt: number, options: object) => Promise<void>;
-      take: string;
       nullable?: boolean;
+      take: string;
+      apply: (actor: TeriockActor, amt: number) => Promise<void>;
+      reverse: (actor: TeriockActor, amt: number, options: object) => Promise<void>;
     };
 
     export type HackEntry = {
@@ -56,20 +56,20 @@ declare global {
     };
 
     export type SizeEntry = {
-      /** Maximum size corresponding to this category */
-      max: number;
-      /** Number of tiles wide this size category is on the battlefield */
-      length: number;
       /** ID for this size category */
       category: string;
+      /** Number of tiles wide this size category is on the battlefield */
+      length: number;
+      /** Maximum size corresponding to this category */
+      max: number;
       /** Number of feet this size category can reach for mêlée attacks */
       reach: number;
     };
 
     export type SubtypeEntry = {
-      label: string;
-      icon: string;
       color: string;
+      icon: string;
+      label: string;
     };
   }
 }

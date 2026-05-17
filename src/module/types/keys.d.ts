@@ -105,6 +105,7 @@ declare global {
     export type ProtectionCategory = keyof typeof config.protection.categories;
 
     // Character Keys
+    export type Currency = keyof typeof config.currency;
     export type Movement = keyof typeof config.character.movement;
     export type Sense = keyof typeof config.character.sense;
     export type Speed = keyof typeof config.character.speed;

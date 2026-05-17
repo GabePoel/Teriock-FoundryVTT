@@ -338,7 +338,7 @@ export default class TeriockActor extends mixClasses(
       }
       for (const token of this.getDependentTokens()) {
         if (token.parent?.grid?.type === 0) {
-          await token.resize({ width: tokenSize, height: tokenSize });
+          await token.resize({ height: tokenSize, width: tokenSize });
         }
       }
     }
@@ -360,7 +360,7 @@ export default class TeriockActor extends mixClasses(
       return [];
     }
     const items = await Promise.all(this._stagedItemCreations.map(uuid => fromUuid(uuid)));
-    const data = items.map(i => game.items.fromCompendium(i, { keepId: true, clearSort: true }));
+    const data = items.map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
     return this.createChildDocuments("Item", Array.from(data));
   }
 
@@ -585,8 +585,8 @@ export default class TeriockActor extends mixClasses(
       ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
         format: {
           actor: this.name,
-          type: TERIOCK.config.document[options.type || "document"].label.toLowerCase(),
           name: lookup,
+          type: TERIOCK.config.document[options.type || "document"].label.toLowerCase(),
         },
         localize: true,
       });

@@ -12,9 +12,9 @@ const command = {
   ...thresholdCommand,
   icon: icons.effect.resist,
   id: "resist",
-  label: options => (options?.hex ? _loc("TERIOCK.ROLLS.Hexproof.button") : _loc("TERIOCK.ROLLS.Resist.button")),
   primary: use,
   secondary: use,
+  label: options => (options?.hex ? _loc("TERIOCK.ROLLS.Hexproof.button") : _loc("TERIOCK.ROLLS.Resist.button")),
 };
 
 export default command;

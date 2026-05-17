@@ -21,48 +21,48 @@ export default Base =>
       primary: {
         tabs: [
           {
-            id: "tradecrafts",
             icon: documentConfig.fluency.icon,
+            id: "tradecrafts",
             label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
           },
           {
-            id: "abilities",
             icon: documentConfig.ability.icon,
+            id: "abilities",
             label: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
           },
           {
-            id: "inventory",
             icon: documentConfig.inventory.icon,
+            id: "inventory",
             label: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
           },
           {
-            id: "classes",
             icon: documentConfig.rank.icon,
+            id: "classes",
             label: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
           },
           {
-            id: "powers",
             icon: documentConfig.power.icon,
+            id: "powers",
             label: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
           },
           {
-            id: "resources",
             icon: documentConfig.resource.icon,
+            id: "resources",
             label: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
           },
           {
-            id: "effects",
             icon: documentConfig.condition.icon,
+            id: "effects",
             label: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
           },
           {
-            id: "protections",
             icon: icons.effect.protection,
+            id: "protections",
             label: "TERIOCK.SHEETS.Actor.TABS.Protections.title",
           },
           {
-            id: "details",
             icon: icons.ui.details,
+            id: "details",
             label: "TERIOCK.SHEETS.Actor.TABS.Details.title",
           },
         ],

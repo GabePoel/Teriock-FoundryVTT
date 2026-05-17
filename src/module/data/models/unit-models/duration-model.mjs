@@ -109,8 +109,8 @@ export default class DurationModel extends TimeUnitModel {
     }
     return game.i18n
       .format("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
-        start: triggerPart,
         end: conditionsPart,
+        start: triggerPart,
       })
       .trim();
   }
@@ -130,8 +130,8 @@ export default class DurationModel extends TimeUnitModel {
         duration = "";
       }
       return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
-        start: duration,
         end: prerequisite,
+        start: duration,
       });
     }
     if (this.unit === "passive") {

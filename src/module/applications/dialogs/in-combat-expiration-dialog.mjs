@@ -26,8 +26,8 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
       position: { width: 550 },
       rejectClose: false,
       window: {
-        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", { name }),
         icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
+        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", { name }),
       },
     });
     if (expire) {
@@ -68,6 +68,9 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
       buttons: [
         {
           action: "roll",
+          default: true,
+          icon: makeIconClass(TERIOCK.display.icons.ui.dice, "button"),
+          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll"),
           callback: async (_event, button) => {
             const expirationRoll = new BaseRoll(
               button.form.elements.namedItem("roll").value,
@@ -94,15 +97,12 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
               await effect.system.expire();
             }
           },
-          default: true,
-          icon: makeIconClass(TERIOCK.display.icons.ui.dice, "button"),
-          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll"),
         },
         {
           action: "remove",
-          callback: async () => await effect.system.expire(),
           icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
           label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove"),
+          callback: async () => await effect.system.expire(),
         },
       ],
       content: contentHtml,

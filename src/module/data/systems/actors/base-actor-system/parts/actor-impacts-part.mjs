@@ -68,9 +68,9 @@ export default Base => {
         });
         const rootId = foundry.utils.randomID();
         const content = document.createElement("div");
-        content.append(amountField.toFormGroup({ rootId }, { value: initialAmount, name: "amount" }));
+        content.append(amountField.toFormGroup({ rootId }, { name: "amount", value: initialAmount }));
         if (entry.morganti) {
-          content.append(morgantiField.toFormGroup({ rootId }, { value: initialMorganti, name: "morganti" }));
+          content.append(morgantiField.toFormGroup({ rootId }, { name: "morganti", value: initialMorganti }));
         }
         await TeriockDialog.prompt({
           content,

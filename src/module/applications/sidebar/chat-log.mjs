@@ -56,6 +56,18 @@ export default class TeriockChatLog extends ChatLog {
       {
         icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
         label: "TERIOCK.SYSTEMS.Common.MENU.openSource",
+        onClick: async (_ev, li) => {
+          const message = game.messages.get(li.dataset.messageId);
+          const doc = await fromUuid(message.system._src);
+          if (!doc) {
+            return;
+          }
+          if (doc.documentName === "JournalEntryPage") {
+            await doc.parent.sheet.render({ force: true, pageId: doc.id });
+          } else {
+            await doc.sheet?.render({ force: true, mode: "view" });
+          }
+        },
         visible: li => {
           const message = game.messages.get(li.dataset.messageId);
           const src = message.system._src;
@@ -78,18 +90,6 @@ export default class TeriockChatLog extends ChatLog {
             return false;
           }
           return game.user.isGM || game.teriock.getSetting("openChatDocuments") || doc.isViewer;
-        },
-        onClick: async (_ev, li) => {
-          const message = game.messages.get(li.dataset.messageId);
-          const doc = await fromUuid(message.system._src);
-          if (!doc) {
-            return;
-          }
-          if (doc.documentName === "JournalEntryPage") {
-            await doc.parent.sheet.render({ force: true, pageId: doc.id });
-          } else {
-            await doc.sheet?.render({ force: true, mode: "view" });
-          }
         },
       },
     ];

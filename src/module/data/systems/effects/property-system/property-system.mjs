@@ -159,11 +159,11 @@ export default class PropertySystem extends mixClasses(
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      form: this.form,
-      [`form.${this.form}`]: 1,
-      "damage.type": this.damageType,
       [`damage.type.${this.damageType}`]: 1,
+      [`form.${this.form}`]: 1,
       "damage.extra": this.extraDamage,
+      "damage.type": this.damageType,
+      form: this.form,
     };
   }
 }

@@ -6,12 +6,12 @@ const rankContext = {
   ...usableContext,
   rank: "TYPES.Item.rank",
 
+  archetype: "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
+  av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
   class: "TERIOCK.SYSTEMS.Rank.FIELDS.className.label",
-  number: "TERIOCK.SYSTEMS.Rank.FIELDS.classRank.label",
   innate: "TERIOCK.SYSTEMS.Rank.FIELDS.innate.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
-  av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
-  archetype: "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
+  number: "TERIOCK.SYSTEMS.Rank.FIELDS.classRank.label",
 };
 
 export default rankContext;

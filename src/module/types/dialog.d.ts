@@ -1,8 +1,8 @@
 declare global {
   namespace Teriock.Dialog {
     export type StatDialogOptions = {
-      forHarm?: boolean;
       consumeStatDice?: boolean;
+      forHarm?: boolean;
       title?: string;
     };
 

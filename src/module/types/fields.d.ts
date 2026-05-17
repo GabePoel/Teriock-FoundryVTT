@@ -23,11 +23,11 @@ declare global {
     };
 
     export type FormulaDerivationOptions = {
-      interval?: number;
       blank?: number | string;
       bool?: boolean;
       ceil?: boolean;
       floor?: boolean;
+      interval?: number;
       max?: number;
       min?: number;
       skipRollData?: boolean;
@@ -48,8 +48,8 @@ declare global {
      * @see {DynamicChoices}
      */
     export type DynamicChoiceGroup = {
-      label: string;
       choices: Record<string, string>;
+      label: string;
     };
 
     /**

@@ -98,8 +98,8 @@ export default Base => {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          form: this.form,
           [`form.${this.form}`]: 1,
+          form: this.form,
         });
         // Add elements
         for (const element of this.elements) {

@@ -52,7 +52,7 @@ export default class TeriockRollTable extends mixClasses(
    * @param {Partial<Teriock.Data.ChatMessageData>} [options.messageData]
    * @param {object} messageOptions
    */
-  async toMessage(results, { roll, messageData = {}, messageOptions = {} }) {
+  async toMessage(results, { messageData = {}, messageOptions = {}, roll }) {
     messageOptions.rollMode ??= game.settings.get("core", "rollMode");
     const flavorKey = `TABLE.DrawFlavor${results.length > 1 ? "Plural" : ""}`;
     messageData = foundry.utils.mergeObject(
@@ -60,8 +60,8 @@ export default class TeriockRollTable extends mixClasses(
         author: game.user.id,
         flags: { "core.RollTable": this.id },
         flavor: _loc(flavorKey, {
-          number: results.length,
           name: foundry.utils.escapeHTML(this.name),
+          number: results.length,
         }),
         rolls: [],
         sound: roll ? CONFIG.sounds.dice : null,

@@ -62,9 +62,9 @@ export default function AbilityExecutionGetInputPart(Base) {
             condition: this.isAttack,
             field: new fields.EmbeddedDataField(PiercingModel).fields.raw,
             hint: "TERIOCK.MODELS.Piercing.FIELDS.raw.hint",
-            value: this.piercing.raw,
             label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
             name: "piercing",
+            value: this.piercing.raw,
             update: v => (this.piercing.raw = v),
           },
           {
@@ -76,8 +76,8 @@ export default function AbilityExecutionGetInputPart(Base) {
             max: 0,
             name: "existing-attack-penalty",
             placeholder: "0",
-            update: v => (this.existingAttackPenalty = v),
             value: this.existingAttackPenalty,
+            update: v => (this.existingAttackPenalty = v),
           },
           {
             condition: this.isAttack && this.actor,
@@ -86,26 +86,26 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.label",
             name: "incurred-attack-penalty",
             placeholder: "0",
-            update: v => (this.incurredAttackPenalty = v),
             value: this.incurredAttackPenalty,
+            update: v => (this.incurredAttackPenalty = v),
           },
           ...endFields,
           {
             condition: this.isAttack,
             field: new fields.BooleanField(),
-            value: !!this.sb,
             label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
             name: "sb",
             small: true,
+            value: !!this.sb,
             update: v => (this.sb = v),
           },
           {
             condition: this.isAttack,
             field: new fields.BooleanField(),
-            value: !!this.vitals,
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
             name: "vitals",
             small: true,
+            value: !!this.vitals,
             update: v => (this.vitals = v),
           },
           {
@@ -114,8 +114,8 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
             name: "warded",
             small: true,
-            update: v => (this.warded = v),
             value: !!this.warded,
+            update: v => (this.warded = v),
           },
           {
             condition: this.source.system.maneuver === "reactive",
@@ -123,16 +123,16 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Ability.EXECUTION.usesReaction.label",
             name: "uses-reaction",
             small: true,
-            update: v => (this.usesReaction = v),
             value: !!this.usesReaction,
+            update: v => (this.usesReaction = v),
           },
           {
             field: new fields.BooleanField(),
             label: "TERIOCK.SYSTEMS.Ability.EXECUTION.payCosts.label",
             name: "pay-costs",
             small: true,
-            update: v => (this.payCosts = v),
             value: !!this.payCosts,
+            update: v => (this.payCosts = v),
           },
         ];
       }
@@ -191,10 +191,6 @@ export default function AbilityExecutionGetInputPart(Base) {
                 name: this.source.name,
               });
           await TeriockDialog.prompt({
-            window: {
-              icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"),
-              title: title,
-            },
             content: dialogs.join(""),
             modal: true,
             ok: {
@@ -210,6 +206,10 @@ export default function AbilityExecutionGetInputPart(Base) {
                   this.costs.mp += this.heightened;
                 }
               },
+            },
+            window: {
+              icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"),
+              title: title,
             },
           });
         }

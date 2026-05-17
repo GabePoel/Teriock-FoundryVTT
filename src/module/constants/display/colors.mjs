@@ -3,11 +3,11 @@
  */
 export const colors = {
   blue: "#1A5FB4",
-  green: "#26A269",
-  yellow: "#E5A50A",
-  orange: "#E66100",
-  red: "#C01C28",
-  purple: "#9141AC",
   brown: "#986A44",
+  green: "#26A269",
   grey: "#77767B",
+  orange: "#E66100",
+  purple: "#9141AC",
+  red: "#C01C28",
+  yellow: "#E5A50A",
 };

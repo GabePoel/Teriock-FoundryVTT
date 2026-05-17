@@ -11,8 +11,8 @@ export default class ChildSettingsModel extends EmbeddedDataModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       sheet: new fields.SchemaField({
-        blockChildSize: blockSizeField(),
         blockChildGapless: blockGaplessField({ initial: false }),
+        blockChildSize: blockSizeField(),
       }),
     });
   }

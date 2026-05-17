@@ -125,12 +125,12 @@ export default Base => {
           )[0];
           await this.document.createChildDocuments("ActiveEffect", [
             {
+              img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
               name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", {
                 tradecraft: TERIOCK.reference.tradecrafts[tc],
               }),
+              system: { field: f, tradecraft: tc },
               type: "fluency",
-              img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-              system: { tradecraft: tc, field: f },
             },
           ]);
         }
@@ -200,8 +200,8 @@ export default Base => {
           teriock.fromIdentifier(`rank:rank-5-${classIdentifier}`),
         ]);
         const referenceRank = /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
-          title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
           openable: true,
+          title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
         });
         const rankNumber = referenceRank.system.classRank;
         const rank = /** @type {TeriockRank} */ referenceRank.clone();
@@ -236,8 +236,8 @@ export default Base => {
         if (availableCombatAbilityNames.size > 1) {
           const availableCombatAbilities = referenceRank.abilities.filter(a => availableCombatAbilityNames.has(a.name));
           const chosenCombatAbility = await selectDocumentDialog(availableCombatAbilities, {
-            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat"),
             openable: true,
+            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat"),
           });
           const chosenCombatAbilityName = chosenCombatAbility.name;
           chosenAbilityNames.push(chosenCombatAbilityName);
@@ -249,8 +249,8 @@ export default Base => {
             availableSupportAbilityNames.has(a.name),
           );
           const chosenSupportAbility = await selectDocumentDialog(availableSupportAbilities, {
-            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport"),
             openable: true,
+            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport"),
           });
           const supportAbilityName = chosenSupportAbility.name;
           chosenAbilityNames.push(supportAbilityName);

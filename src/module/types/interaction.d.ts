@@ -5,9 +5,9 @@ declare global {
     export type InteractionEntry = {
       icon: ((options: object) => string) | string;
       label: ((options: object) => string) | string;
+      tooltip?: ((options: object) => string) | string;
       primary: (actor: TeriockActor, options?: object) => Promise<void>;
       secondary?: (actor: TeriockActor, options?: object) => Promise<void>;
-      tooltip?: ((options: object) => string) | string;
     };
 
     export type CommandEntry = InteractionEntry & {
@@ -66,10 +66,10 @@ declare global {
     export type ImpactOptions = FormulaOptions & {
       apply?: boolean;
       boost?: boolean;
+      boosts?: number;
       crit?: boolean;
       impact?: Teriock.Keys.Impact;
       reverse?: boolean;
-      boosts?: number;
       rollData?: object;
     };
 

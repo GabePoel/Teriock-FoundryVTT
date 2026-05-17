@@ -42,8 +42,8 @@ const globalDocuments = {
 };
 
 const globalHelpers = {
-  Color: "readonly",
   Collection: "readonly",
+  Color: "readonly",
   fromUuid: "readonly",
   fromUuidSync: "readonly",
   getDocumentClass: "readonly",
@@ -54,19 +54,19 @@ const globalHelpers = {
 };
 
 const globalClient = {
+  _del: "readonly",
+  _loc: "readonly",
+  _replace: "readonly",
+  canvas: "readonly",
   CONFIG: "writable",
   CONST: "writable",
-  Handlebars: "readonly",
-  PIXI: "readonly",
-  ProseMirror: "readonly",
-  _del: "readonly",
-  _replace: "readonly",
-  _loc: "readonly",
-  canvas: "readonly",
   foundry: "readonly",
   game: "readonly",
   getDocumentClass: "readonly",
+  Handlebars: "readonly",
   io: "readonly",
+  PIXI: "readonly",
+  ProseMirror: "readonly",
   ui: "readonly",
 };
 
@@ -90,10 +90,6 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   {
     files: ["**/*.{mjs,ts}"],
-    plugins: {
-      jsdoc,
-      perfectionist,
-    },
     languageOptions: {
       globals: {
         ...globals.browser,
@@ -104,81 +100,29 @@ export default tseslint.config(
         ...globalModule,
       },
     },
-    settings: {
-      jsdoc: {
-        preferredTypes: {
-          ".<>": "<>",
-          Object: "object",
-          Function: "function",
-        },
-      },
+    plugins: {
+      jsdoc,
+      perfectionist,
     },
     rules: {
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
       eqeqeq: ["error", "smart"],
+      "jsdoc/check-types": "warn",
       "no-console": "off",
       "no-empty": ["warn", { allowEmptyCatch: true }],
       "no-var": "error",
-      "prefer-const": "warn",
-      "jsdoc/check-types": "warn",
-      "perfectionist/sort-array-includes": ["error", { type: "alphabetical", order: "asc" }],
+      "perfectionist/sort-array-includes": ["error", { order: "asc", type: "alphabetical" }],
       "perfectionist/sort-arrays": [
         "error",
         {
-          type: "alphabetical",
           order: "asc",
+          type: "alphabetical",
           useConfigurationIf: { matchesAstSelector: "TSAsExpression > ArrayExpression" },
-        },
-      ],
-      "perfectionist/sort-import-attributes": ["error", { type: "alphabetical", order: "asc" }],
-      "perfectionist/sort-exports": ["error", { type: "alphabetical", order: "asc" }],
-      "perfectionist/sort-union-types": [
-        "error",
-        {
-          type: "alphabetical",
-          order: "asc",
-          groups: [
-            "conditional",
-            "function",
-            "import",
-            "intersection",
-            "keyword",
-            "literal",
-            "named",
-            "object",
-            "operator",
-            "tuple",
-            "union",
-            "nullish",
-          ],
-        },
-      ],
-      "perfectionist/sort-sets": ["error", { type: "alphabetical", order: "asc" }],
-
-      "perfectionist/sort-imports": [
-        "error",
-        {
-          type: "alphabetical",
-          order: "asc",
-          internalPattern: ["^~/.+", "^@/.+", "^#.+"],
-          newlinesBetween: 1,
-          groups: [
-            "type-import",
-            ["value-builtin", "value-external"],
-            "type-internal",
-            "value-internal",
-            ["type-parent", "type-sibling", "type-index"],
-            ["value-parent", "value-sibling", "value-index"],
-            "ts-equals-import",
-            "unknown",
-          ],
         },
       ],
       "perfectionist/sort-classes": [
         "error",
         {
-          type: "alphabetical",
-          order: "asc",
           groups: [
             "index-signature",
 
@@ -211,8 +155,106 @@ export default tseslint.config(
 
             "unknown",
           ],
+          order: "asc",
+          type: "alphabetical",
         },
       ],
+      "perfectionist/sort-exports": ["error", { order: "asc", type: "alphabetical" }],
+      "perfectionist/sort-import-attributes": ["error", { order: "asc", type: "alphabetical" }],
+      "perfectionist/sort-imports": [
+        "error",
+        {
+          groups: [
+            "type-import",
+            ["value-builtin", "value-external"],
+            "type-internal",
+            "value-internal",
+            ["type-parent", "type-sibling", "type-index"],
+            ["value-parent", "value-sibling", "value-index"],
+            "ts-equals-import",
+            "unknown",
+          ],
+          internalPattern: ["^~/.+", "^@/.+", "^#.+"],
+          newlinesBetween: 1,
+          order: "asc",
+          type: "alphabetical",
+        },
+      ],
+      "perfectionist/sort-object-types": [
+        "error",
+        {
+          fallbackSort: { type: "unsorted" },
+          groups: ["property", "method", "unknown"],
+          ignoreCase: true,
+          newlinesBetween: "ignore",
+          newlinesInside: "ignore",
+          order: "asc",
+          partitionByComment: false,
+          partitionByNewLine: false,
+          sortBy: "name",
+          specialCharacters: "keep",
+          type: "alphabetical",
+        },
+      ],
+      "perfectionist/sort-objects": [
+        "error",
+        {
+          type: "unsorted",
+          useConfigurationIf: {
+            declarationCommentMatchesPattern: "^no sort$",
+          },
+        },
+        {
+          type: "unsorted",
+          useConfigurationIf: {
+            matchesAstSelector: "PropertyDefinition[key.name='PARTS'] > ObjectExpression",
+          },
+        },
+        {
+          type: "unsorted",
+          useConfigurationIf: {
+            declarationMatchesPattern: "^PARTS$",
+          },
+        },
+        {
+          groups: ["property", "method", "unknown"],
+          order: "asc",
+          partitionByNewLine: true,
+          type: "alphabetical",
+        },
+      ],
+      "perfectionist/sort-sets": ["error", { order: "asc", type: "alphabetical" }],
+      "perfectionist/sort-union-types": [
+        "error",
+        {
+          groups: [
+            "conditional",
+            "function",
+            "import",
+            "intersection",
+            "keyword",
+            "literal",
+            "named",
+            "object",
+            "operator",
+            "tuple",
+            "union",
+            "nullish",
+          ],
+          order: "asc",
+          type: "alphabetical",
+        },
+      ],
+      "prefer-const": "warn",
+    },
+    settings: {
+      jsdoc: {
+        preferredTypes: {
+          ".<>": "<>",
+          Function: "function",
+          Object: "object",
+        },
+      },
     },
   },
   {

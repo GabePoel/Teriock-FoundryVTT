@@ -52,6 +52,10 @@ export default Base => {
           {
             action: "toggleGluedDoc",
             icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
+            tooltip: this.glued
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
+            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
             onClick: async () => {
               if (this.glued) {
                 await this.unglue();
@@ -59,15 +63,15 @@ export default Base => {
                 await this.glue();
               }
             },
-            tooltip: this.glued
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
           },
           ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
           {
             action: "toggleEquippedDoc",
             icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
+            tooltip: this.equipped
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
+            visible: this.parent.isOwner,
             onClick: async () => {
               if (this.equipped) {
                 await this.unequip();
@@ -75,10 +79,6 @@ export default Base => {
                 await this.equip();
               }
             },
-            tooltip: this.equipped
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
-            visible: this.parent.isOwner,
           },
         ];
       }

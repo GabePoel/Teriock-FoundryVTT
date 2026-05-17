@@ -34,6 +34,7 @@ export default Base =>
           this.document.system.conditionInformation[condition].reasons,
         );
         const panelParts = {
+          associations: [],
           bars: [],
           blocks: [
             {
@@ -41,10 +42,9 @@ export default Base =>
               title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
             },
           ],
+          icon: TERIOCK.config.document.condition.icon,
           image: TERIOCK.data.conditions[condition].img,
           name: TERIOCK.data.conditions[condition].name,
-          associations: [],
-          icon: TERIOCK.config.document.condition.icon,
         };
         /** @type {TeriockTokenDocument[]} */
         const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers)
@@ -53,19 +53,19 @@ export default Base =>
         if (tokenDocs.length > 0) {
           /** @type {Teriock.Messages.MessageAssociation} */
           const association = {
-            title: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title"),
-            icon: TERIOCK.config.document.creature.icon,
             cards: [],
+            icon: TERIOCK.config.document.creature.icon,
+            title: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.Associations.title"),
           };
           for (const tokenDoc of tokenDocs) {
             association.cards.push({
-              name: tokenDoc.name,
-              uuid: tokenDoc.uuid,
-              img: tokenDoc.texture.src,
               id: tokenDoc.id,
-              type: "TokenDocument",
-              rescale: tokenDoc.rescale,
+              img: tokenDoc.texture.src,
               makeTooltip: false,
+              name: tokenDoc.name,
+              rescale: tokenDoc.rescale,
+              type: "TokenDocument",
+              uuid: tokenDoc.uuid,
             });
           }
           panelParts.associations.push(association);

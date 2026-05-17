@@ -18,36 +18,37 @@ export const effectConfig = {
     },
   },
   cover: ["halfCover", "threeQuartersCover", "fullCover"],
+  // no sort
   form: /** @enum {Teriock.Config.SubtypeEntry} */ {
     special: {
-      label: "TERIOCK.TERMS.EffectForm.special",
-      icon: icons.form.special,
       color: colors.purple,
+      icon: icons.form.special,
+      label: "TERIOCK.TERMS.EffectForm.special",
     },
     normal: {
-      label: "TERIOCK.TERMS.EffectForm.normal",
-      icon: icons.form.normal,
       color: colors.green,
+      icon: icons.form.normal,
+      label: "TERIOCK.TERMS.EffectForm.normal",
     },
     gifted: {
-      label: "TERIOCK.TERMS.EffectForm.gifted",
-      icon: icons.form.gifted,
       color: colors.blue,
+      icon: icons.form.gifted,
+      label: "TERIOCK.TERMS.EffectForm.gifted",
     },
     echo: {
-      label: "TERIOCK.TERMS.EffectForm.echo",
-      icon: icons.form.echo,
       color: colors.orange,
+      icon: icons.form.echo,
+      label: "TERIOCK.TERMS.EffectForm.echo",
     },
     intrinsic: {
-      label: "TERIOCK.TERMS.EffectForm.intrinsic",
-      icon: icons.form.intrinsic,
       color: colors.grey,
+      icon: icons.form.intrinsic,
+      label: "TERIOCK.TERMS.EffectForm.intrinsic",
     },
     flaw: {
-      label: "TERIOCK.TERMS.EffectForm.flaw",
-      icon: icons.form.flaw,
       color: colors.red,
+      icon: icons.form.flaw,
+      label: "TERIOCK.TERMS.EffectForm.flaw",
     },
   },
 };

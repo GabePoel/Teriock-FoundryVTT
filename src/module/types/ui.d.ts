@@ -5,8 +5,8 @@ declare global {
     /** Notification-style messages that appear in application */
     export type FormMessage = {
       icon?: string;
-      text?: string;
       level?: "error" | "info" | "success" | "warning";
+      text?: string;
     };
 
     /** Three-way toggle */

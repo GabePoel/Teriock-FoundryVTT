@@ -7,13 +7,15 @@ export const costConfig = {
       material: "TERIOCK.COSTS.Components.material",
       somatic: "TERIOCK.COSTS.Components.somatic",
       verbal: "TERIOCK.COSTS.Components.verbal",
+
       break: "TERIOCK.COSTS.Components.break",
       hack: "TERIOCK.COSTS.Components.hack",
+
       other: "TERIOCK.COSTS.Components.other",
     },
     types: {
-      tag: "TERIOCK.COSTS.Types.tag",
       description: "TERIOCK.COSTS.Types.description",
+      tag: "TERIOCK.COSTS.Types.tag",
     },
   },
   primary: {
@@ -52,21 +54,21 @@ export const costConfig = {
       },
     },
     types: {
-      formula: "TERIOCK.COSTS.Types.formula",
       description: "TERIOCK.COSTS.Types.description",
+      formula: "TERIOCK.COSTS.Types.formula",
     },
   },
   tweaks: {
     adept: {
-      multiplier: -1,
       icon: icons.form.special,
       label: "TERIOCK.COSTS.Tweaks.adept",
+      multiplier: -1,
       primary: "mp",
     },
     gifted: {
-      multiplier: 1,
       icon: icons.form.gifted,
       label: "TERIOCK.COSTS.Tweaks.gifted",
+      multiplier: 1,
       primary: "mp",
     },
     inept: {

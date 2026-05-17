@@ -66,8 +66,8 @@ export default class ChangeQuantityAutomation extends mixClasses(
       return;
     }
     const shouldChange = await this.getConfirmation({
-      data: { amount: this.formula, name: `@UUID[${consumable.uuid}]` },
       content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
+      data: { amount: this.formula, name: `@UUID[${consumable.uuid}]` },
       icon: TERIOCK.config.document[consumable.type]?.icon ?? undefined,
     });
     if (!shouldChange) {
@@ -80,8 +80,8 @@ export default class ChangeQuantityAutomation extends mixClasses(
     const panelData = {
       bars: [
         {
-          label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
           icon: TERIOCK.display.icons.pseudoDocument.automation,
+          label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
           wrappers: [
             _loc("TERIOCK.AUTOMATIONS.Base.LABEL"),
             this.constructor._processedTriggerChoices[this.trigger].label,

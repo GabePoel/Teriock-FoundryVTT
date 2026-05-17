@@ -35,9 +35,9 @@ export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButt
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
+    actions: { toggleInnate: this.#onToggleInnate },
     classes: ["rank"],
     window: { icon: makeIconClass(documentConfig.rank.icon, "title") },
-    actions: { toggleInnate: this.#onToggleInnate },
   };
 
   /** @inheritDoc */
@@ -48,9 +48,9 @@ export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButt
     }
 
     [
-      { selector: ".class-box", menu: classContextMenu },
-      { selector: ".archetype-box", menu: archetypeContextMenu },
-    ].forEach(({ selector, menu }) => {
+      { menu: classContextMenu, selector: ".class-box" },
+      { menu: archetypeContextMenu, selector: ".archetype-box" },
+    ].forEach(({ menu, selector }) => {
       this._connectContextMenu(selector, menu(this.item), "click");
     });
   }

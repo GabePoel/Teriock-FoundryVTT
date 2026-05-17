@@ -39,22 +39,22 @@ export default Base => {
             group: "edit",
             icon: makeIcon(TERIOCK.display.icons.rank.combatAbility, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.setCombatCategory"),
-            onClick: async () => await this.parent.setFlag("teriock", "category", "combat"),
             visible: this.parent.getFlag("teriock", "category") !== "combat",
+            onClick: async () => await this.parent.setFlag("teriock", "category", "combat"),
           });
           entries.push({
             group: "edit",
             icon: makeIcon(TERIOCK.display.icons.rank.supportAbility, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.setSupportCategory"),
-            onClick: async () => await this.parent.setFlag("teriock", "category", "support"),
             visible: this.parent.getFlag("teriock", "category") !== "support",
+            onClick: async () => await this.parent.setFlag("teriock", "category", "support"),
           });
           entries.push({
             group: "edit",
             icon: makeIcon(TERIOCK.display.icons.ui.unset, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.unsetCategory"),
-            onClick: async () => await this.parent.unsetFlag("teriock", "category"),
             visible: !!this.parent.getFlag("teriock", "category"),
+            onClick: async () => await this.parent.unsetFlag("teriock", "category"),
           });
         }
         return entries;

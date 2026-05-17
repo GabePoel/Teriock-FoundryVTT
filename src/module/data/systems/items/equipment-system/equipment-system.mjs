@@ -202,9 +202,9 @@ export default class EquipmentSystem extends mixClasses(
   /** @inheritDoc */
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), {
-      price: this.price,
-      [`type.${toCamelCase(this.equipmentType)}`]: 1,
       [`power.${toCamelCase(this.powerLevel)}`]: 1,
+      [`type.${toCamelCase(this.equipmentType)}`]: 1,
+      price: this.price,
     });
   }
 

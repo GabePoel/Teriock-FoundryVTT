@@ -25,8 +25,8 @@ export default Base => {
           }),
           money: new fields.SchemaField({
             ...objectMap(currencyConfig, e => currencyField(e.label)),
-            total: currencyField("Total Money", false),
             debt: currencyField("Debt", false),
+            total: currencyField("Total Money", false),
           }),
         });
       }

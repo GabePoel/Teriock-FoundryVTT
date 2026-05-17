@@ -15,8 +15,8 @@ export default class DocumentDialogSheet extends TeriockDocumentSheet {
   /** @inheritDoc */
   get title() {
     return _loc("TERIOCK.DIALOGS.Sheet.TITLE", {
-      prefix: _loc(this._titlePrefix),
       name: this.document.fullName || this.document.name,
+      prefix: _loc(this._titlePrefix),
     });
   }
 

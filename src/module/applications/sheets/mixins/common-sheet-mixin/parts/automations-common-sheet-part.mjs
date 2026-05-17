@@ -188,7 +188,7 @@ export default Base => {
               },
             },
           ],
-          { eventName: "contextmenu", jQuery: false, fixed: true },
+          { eventName: "contextmenu", fixed: true, jQuery: false },
         );
       }
 

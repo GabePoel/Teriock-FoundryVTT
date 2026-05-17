@@ -12,8 +12,8 @@ export default async function hotbarDropDialog(doc) {
   const context = {
     actor: `@UUID[${doc.actor?.uuid}]`,
     child: `@UUID[${doc.uuid}]`,
-    label,
     identifier: doc.lookupKey,
+    label,
   };
   const content = await TeriockTextEditor.enrichHTML(
     await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", context),
@@ -22,17 +22,17 @@ export default async function hotbarDropDialog(doc) {
     buttons: [
       {
         action: "linked",
-        callback: () => "linked",
         icon: makeIconClass(TERIOCK.display.icons.ui.linked),
         label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
+        callback: () => "linked",
       },
     ],
     content: content,
     modal: true,
     ok: {
-      callback: () => "general",
       default: true,
       label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
+      callback: () => "general",
     },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),

@@ -22,6 +22,8 @@ const IDENTIFIER_ICON_MAP = Object.fromEntries(
  * @type {TextEditorEnricherConfig}
  */
 const wikiLinkEnricher = {
+  pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
+  replaceParent: false,
   enricher: async match => {
     const pageName = match[1];
     let displayText = match[2];
@@ -71,8 +73,6 @@ const wikiLinkEnricher = {
     link.appendChild(document.createTextNode(linkText));
     return link;
   },
-  pattern: /@L\[(.+?)\](?:\{(.+?)\})?/g,
-  replaceParent: false,
 };
 
 /**
@@ -80,6 +80,8 @@ const wikiLinkEnricher = {
  * @type {TextEditorEnricherConfig}
  */
 const identifierEnricher = {
+  pattern: /@I\[(.+?)\](?:\{(.+?)\})?/g,
+  replaceParent: false,
   enricher: async match => {
     await game.teriock.registries.identifiers.ready;
     const contentLinkMatch = [null, "UUID", game.teriock.registries.identifiers.get(match[1]), "", match[2]];
@@ -93,8 +95,6 @@ const identifierEnricher = {
     }
     return out;
   },
-  pattern: /@I\[(.+?)\](?:\{(.+?)\})?/g,
-  replaceParent: false,
 };
 
 /**
@@ -103,6 +103,7 @@ const identifierEnricher = {
  */
 const lookupEnricher = {
   pattern: /\[\[lookup\s+([^\]\s]+)(?:\s+((?:[^\]\s=]+=[^\]\s=]+\s*)+))?\]\]/gi,
+  replaceParent: false,
   enricher: async (match, options) => {
     let lookupKey = match[1];
     if (lookupKey.startsWith("@")) {
@@ -166,7 +167,6 @@ const lookupEnricher = {
     span.textContent = text;
     return span;
   },
-  replaceParent: false,
 };
 
 /**
@@ -175,9 +175,9 @@ const lookupEnricher = {
 export function registerCommandEnrichers() {
   const stringNames = Object.keys(commands);
   CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichCommand,
     id: "executeCommand",
+    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
     onRender: el => {
       if (el.dataset.enriched) {
         return;
@@ -240,7 +240,7 @@ async function executeCommandFromElement(target, operation, event) {
  * @returns {HTMLAnchorElement}
  */
 function enrichCommand(match, options) {
-  const { type, config } = match.groups;
+  const { config, type } = match.groups;
   let { label = "" } = match.groups;
   const command = commands[type];
   let argumentArray;

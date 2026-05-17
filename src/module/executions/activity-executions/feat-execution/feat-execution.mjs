@@ -71,8 +71,8 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
     if (impact && Number.isFinite(amount)) {
       this.activations.push(
         new teriock.data.pseudoDocuments.activations.TakeActivation({
-          impact,
           amount,
+          impact,
         }),
       );
     }

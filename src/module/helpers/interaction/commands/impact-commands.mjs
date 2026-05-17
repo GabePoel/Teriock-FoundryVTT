@@ -76,12 +76,12 @@ const impactCommands = Object.entries(impactConfig).map(([impact, config]) => {
   return {
     ...formulaCommand,
     aliases: config?.aliases || [],
-    id: impact,
-    label: options => options.formula,
-    tooltip: options => (options.apply ? config.take : config.deal),
     icon: config.icon,
+    id: impact,
     primary: impactCommandFunctionFactory(impact, "primary"),
     secondary: impactCommandFunctionFactory(impact, "secondary"),
+    label: options => options.formula,
+    tooltip: options => (options.apply ? config.take : config.deal),
   };
 });
 

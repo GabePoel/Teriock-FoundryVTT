@@ -83,9 +83,9 @@ export default class LocalDocumentField extends DocumentIdField {
       }
       if (this.options?.fallback) {
         Object.defineProperty(document, "toString", {
-          value: () => document.name,
           configurable: true,
           enumerable: false,
+          value: () => document.name,
         });
       }
       if (this.options?.nullify && this.options.nullify(document)) {

@@ -3,152 +3,152 @@ import { icons } from "../display/icons.mjs";
 
 export const tradecraftConfig = {
   artisan: {
-    name: "TERIOCK.TERMS.Fields.artisan",
     icon: icons.field.artisan,
+    name: "TERIOCK.TERMS.Fields.artisan",
     tradecrafts: {
       artist: {
-        name: "TERIOCK.TERMS.Tradecrafts.artist",
         icon: icons.tradecraft.artist,
+        name: "TERIOCK.TERMS.Tradecrafts.artist",
       },
       blacksmith: {
-        name: "TERIOCK.TERMS.Tradecrafts.blacksmith",
         icon: icons.tradecraft.blacksmith,
+        name: "TERIOCK.TERMS.Tradecrafts.blacksmith",
       },
       builder: {
-        name: "TERIOCK.TERMS.Tradecrafts.builder",
         icon: icons.tradecraft.builder,
+        name: "TERIOCK.TERMS.Tradecrafts.builder",
       },
       chef: {
-        name: "TERIOCK.TERMS.Tradecrafts.chef",
         icon: icons.tradecraft.chef,
+        name: "TERIOCK.TERMS.Tradecrafts.chef",
       },
       locksmith: {
-        name: "TERIOCK.TERMS.Tradecrafts.locksmith",
         icon: icons.tradecraft.locksmith,
+        name: "TERIOCK.TERMS.Tradecrafts.locksmith",
       },
       mariner: {
-        name: "TERIOCK.TERMS.Tradecrafts.mariner",
         icon: icons.tradecraft.mariner,
+        name: "TERIOCK.TERMS.Tradecrafts.mariner",
       },
       tailor: {
-        name: "TERIOCK.TERMS.Tradecrafts.tailor",
         icon: icons.tradecraft.tailor,
+        name: "TERIOCK.TERMS.Tradecrafts.tailor",
       },
     },
   },
   mediator: {
-    name: "TERIOCK.TERMS.Fields.mediator",
     icon: icons.field.mediator,
+    name: "TERIOCK.TERMS.Fields.mediator",
     tradecrafts: {
       courtier: {
-        name: "TERIOCK.TERMS.Tradecrafts.courtier",
         icon: icons.tradecraft.courtier,
+        name: "TERIOCK.TERMS.Tradecrafts.courtier",
       },
       enforcer: {
-        name: "TERIOCK.TERMS.Tradecrafts.enforcer",
         icon: icons.tradecraft.enforcer,
+        name: "TERIOCK.TERMS.Tradecrafts.enforcer",
       },
       gambler: {
-        name: "TERIOCK.TERMS.Tradecrafts.gambler",
         icon: icons.tradecraft.gambler,
+        name: "TERIOCK.TERMS.Tradecrafts.gambler",
       },
       innkeeper: {
-        name: "TERIOCK.TERMS.Tradecrafts.innkeeper",
         icon: icons.tradecraft.innkeeper,
+        name: "TERIOCK.TERMS.Tradecrafts.innkeeper",
       },
       peacekeeper: {
-        name: "TERIOCK.TERMS.Tradecrafts.peacekeeper",
         icon: icons.tradecraft.peacekeeper,
+        name: "TERIOCK.TERMS.Tradecrafts.peacekeeper",
       },
       performer: {
-        name: "TERIOCK.TERMS.Tradecrafts.performer",
         icon: icons.tradecraft.performer,
+        name: "TERIOCK.TERMS.Tradecrafts.performer",
       },
       trader: {
-        name: "TERIOCK.TERMS.Tradecrafts.trader",
         icon: icons.tradecraft.trader,
-      },
-    },
-  },
-  scholar: {
-    name: "TERIOCK.TERMS.Fields.scholar",
-    icon: icons.field.scholar,
-    tradecrafts: {
-      cartographer: {
-        name: "TERIOCK.TERMS.Tradecrafts.cartographer",
-        icon: icons.tradecraft.cartographer,
-      },
-      diplomat: {
-        name: "TERIOCK.TERMS.Tradecrafts.diplomat",
-        icon: icons.tradecraft.diplomat,
-      },
-      historian: {
-        name: "TERIOCK.TERMS.Tradecrafts.historian",
-        icon: icons.tradecraft.historian,
-      },
-      messenger: {
-        name: "TERIOCK.TERMS.Tradecrafts.messenger",
-        icon: icons.tradecraft.messenger,
-      },
-      priest: {
-        name: "TERIOCK.TERMS.Tradecrafts.priest",
-        icon: icons.tradecraft.priest,
-      },
-      scribe: {
-        name: "TERIOCK.TERMS.Tradecrafts.scribe",
-        icon: icons.tradecraft.scribe,
-      },
-      teacher: {
-        name: "TERIOCK.TERMS.Tradecrafts.teacher",
-        icon: icons.tradecraft.teacher,
-      },
-    },
-  },
-  survivalist: {
-    name: "TERIOCK.TERMS.Fields.survivalist",
-    icon: icons.field.survivalist,
-    tradecrafts: {
-      farmer: {
-        name: "TERIOCK.TERMS.Tradecrafts.farmer",
-        icon: icons.tradecraft.farmer,
-      },
-      herbalist: {
-        name: "TERIOCK.TERMS.Tradecrafts.herbalist",
-        icon: icons.tradecraft.herbalist,
-      },
-      hunter: {
-        name: "TERIOCK.TERMS.Tradecrafts.hunter",
-        icon: icons.tradecraft.hunter,
-      },
-      investigator: {
-        name: "TERIOCK.TERMS.Tradecrafts.investigator",
-        icon: icons.tradecraft.investigator,
-      },
-      miner: {
-        name: "TERIOCK.TERMS.Tradecrafts.miner",
-        icon: icons.tradecraft.miner,
-      },
-      tamer: {
-        name: "TERIOCK.TERMS.Tradecrafts.tamer",
-        icon: icons.tradecraft.tamer,
-      },
-      tracker: {
-        name: "TERIOCK.TERMS.Tradecrafts.tracker",
-        icon: icons.tradecraft.tracker,
+        name: "TERIOCK.TERMS.Tradecrafts.trader",
       },
     },
   },
   prestige: {
-    name: "TERIOCK.TERMS.Fields.prestige",
     icon: icons.field.prestige,
+    name: "TERIOCK.TERMS.Fields.prestige",
     tradecrafts: {
       metaphysicist: {
-        name: "TERIOCK.TERMS.Tradecrafts.metaphysicist",
         icon: icons.tradecraft.metaphysicist,
+        name: "TERIOCK.TERMS.Tradecrafts.metaphysicist",
       },
       tinkerer: {
-        name: "TERIOCK.TERMS.Tradecrafts.tinkerer",
         icon: icons.tradecraft.tinkerer,
+        name: "TERIOCK.TERMS.Tradecrafts.tinkerer",
+      },
+    },
+  },
+  scholar: {
+    icon: icons.field.scholar,
+    name: "TERIOCK.TERMS.Fields.scholar",
+    tradecrafts: {
+      cartographer: {
+        icon: icons.tradecraft.cartographer,
+        name: "TERIOCK.TERMS.Tradecrafts.cartographer",
+      },
+      diplomat: {
+        icon: icons.tradecraft.diplomat,
+        name: "TERIOCK.TERMS.Tradecrafts.diplomat",
+      },
+      historian: {
+        icon: icons.tradecraft.historian,
+        name: "TERIOCK.TERMS.Tradecrafts.historian",
+      },
+      messenger: {
+        icon: icons.tradecraft.messenger,
+        name: "TERIOCK.TERMS.Tradecrafts.messenger",
+      },
+      priest: {
+        icon: icons.tradecraft.priest,
+        name: "TERIOCK.TERMS.Tradecrafts.priest",
+      },
+      scribe: {
+        icon: icons.tradecraft.scribe,
+        name: "TERIOCK.TERMS.Tradecrafts.scribe",
+      },
+      teacher: {
+        icon: icons.tradecraft.teacher,
+        name: "TERIOCK.TERMS.Tradecrafts.teacher",
+      },
+    },
+  },
+  survivalist: {
+    icon: icons.field.survivalist,
+    name: "TERIOCK.TERMS.Fields.survivalist",
+    tradecrafts: {
+      farmer: {
+        icon: icons.tradecraft.farmer,
+        name: "TERIOCK.TERMS.Tradecrafts.farmer",
+      },
+      herbalist: {
+        icon: icons.tradecraft.herbalist,
+        name: "TERIOCK.TERMS.Tradecrafts.herbalist",
+      },
+      hunter: {
+        icon: icons.tradecraft.hunter,
+        name: "TERIOCK.TERMS.Tradecrafts.hunter",
+      },
+      investigator: {
+        icon: icons.tradecraft.investigator,
+        name: "TERIOCK.TERMS.Tradecrafts.investigator",
+      },
+      miner: {
+        icon: icons.tradecraft.miner,
+        name: "TERIOCK.TERMS.Tradecrafts.miner",
+      },
+      tamer: {
+        icon: icons.tradecraft.tamer,
+        name: "TERIOCK.TERMS.Tradecrafts.tamer",
+      },
+      tracker: {
+        icon: icons.tradecraft.tracker,
+        name: "TERIOCK.TERMS.Tradecrafts.tracker",
       },
     },
   },

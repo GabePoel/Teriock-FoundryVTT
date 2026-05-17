@@ -50,8 +50,8 @@ export default class BaseEffectSheet extends mixClasses(
     const context = await super._prepareContext(options);
     Object.assign(context, {
       disabled: this.document.disabled,
-      transfer: this.document.transfer,
       isSuppressed: this.document.isSuppressed,
+      transfer: this.document.transfer,
     });
     return context;
   }

@@ -47,11 +47,11 @@ export default class ExpirationAutomation extends CritAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       combat: new fields.SchemaField({
+        what: builders.combatExpirationMethodField(),
+        when: builders.combatExpirationTimingField(),
         who: new fields.SchemaField({
           type: builders.combatExpirationSourceTypeField(),
         }),
-        what: builders.combatExpirationMethodField(),
-        when: builders.combatExpirationTimingField(),
       }),
       conditions: conditionRequirementsField(),
       override: new fields.SchemaField({

@@ -12,7 +12,7 @@ export default function deadVisionMode() {
     {
       canvas: {
         shader: shaders.ColorAdjustmentsSamplerShader,
-        uniforms: { contrast: 0, saturation: -0.8, exposure: -0.65 },
+        uniforms: { contrast: 0, exposure: -0.65, saturation: -0.8 },
       },
       id: "dead",
       label: "TERIOCK.PERCEPTION.VisionModes.dead",
@@ -20,24 +20,24 @@ export default function deadVisionMode() {
         background: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
         },
-        illumination: {
+        darkness: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
         },
-        darkness: {
+        illumination: {
           visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED,
         },
       },
       vision: {
+        background: { shader: WoundedBackgroundVisionShader },
+        coloration: { shader: WoundedColorationVisionShader },
         darkness: { adaptive: false },
         defaults: {
           attenuation: 0,
-          contrast: 0.2,
-          saturation: -0.3,
           brightness: 1,
           color: "#ff0000",
+          contrast: 0.2,
+          saturation: -0.3,
         },
-        background: { shader: WoundedBackgroundVisionShader },
-        coloration: { shader: WoundedColorationVisionShader },
       },
     },
     { animated: false },

@@ -18,13 +18,13 @@ const typeSubsets = {
 
 /** @enum {Teriock.Config.ChildChangeTargetEntry} */
 const childTargets = {
-  armament: {
-    label: "TERIOCK.CHANGES.Target.armament",
-    types: ["body", "equipment"],
-  },
   ability: {
     label: "TERIOCK.CHANGES.Target.ability",
     types: ["ability"],
+  },
+  armament: {
+    label: "TERIOCK.CHANGES.Target.armament",
+    types: ["body", "equipment"],
   },
 };
 
@@ -104,13 +104,6 @@ const paths = {
     targets: ["ability", "armament"],
     types: typeSubsets.simple,
   },
-  "system.warded": {
-    forExecution: true,
-    group: "offense",
-    label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
-    targets: ["ability", "armament"],
-    types: typeSubsets.boolean,
-  },
   "system.spellTurning": {
     group: "defense",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
@@ -121,6 +114,13 @@ const paths = {
     group: "offense",
     label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
     targets: ["armament"],
+    types: typeSubsets.boolean,
+  },
+  "system.warded": {
+    forExecution: true,
+    group: "offense",
+    label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
+    targets: ["ability", "armament"],
     types: typeSubsets.boolean,
   },
   ...Object.fromEntries(
@@ -141,7 +141,7 @@ const paths = {
   ),
 };
 
-const child = { targets: childTargets, paths, typeSubsets, groups };
+const child = { groups, paths, targets: childTargets, typeSubsets };
 
 const phase = {
   children: {
@@ -166,7 +166,7 @@ const parent = { targets: parentTargets };
 
 const defaultPhase = Object.entries(phase).find(([_k, v]) => v.default)[0];
 
-export default { child, phase, parent, defaultPhase };
+export default { child, defaultPhase, parent, phase };
 
 preLocalize("config.change.child.groups");
 preLocalize("config.change.child.categories", { key: "label", sort: true });

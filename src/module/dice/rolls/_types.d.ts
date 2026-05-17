@@ -8,8 +8,8 @@ declare global {
   namespace Teriock.Dice {
     type DiePartStyle = {
       classes?: string;
-      tooltip?: string;
       icon?: string;
+      tooltip?: string;
     };
 
     type DieStyles = {

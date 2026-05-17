@@ -34,19 +34,19 @@ export default class MoveActivation extends BaseActivation {
     return Object.assign(super.defineSchema(), {
       distance: new fields.NumberField(),
       movementAction: movementActionField({
-        nullable: true,
         initial: null,
+        nullable: true,
         required: false,
       }),
       originBarrier: new fields.BooleanField(),
       randomDirection: new fields.BooleanField(),
       token: new fields.DocumentUUIDField({
-        type: "Token",
-        nullable: true,
         initial: null,
+        nullable: true,
+        type: "Token",
       }),
-      x: new fields.NumberField({ nullable: true, initial: null }),
-      y: new fields.NumberField({ nullable: true, initial: null }),
+      x: new fields.NumberField({ initial: null, nullable: true }),
+      y: new fields.NumberField({ initial: null, nullable: true }),
     });
   }
 

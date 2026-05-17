@@ -29,17 +29,17 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      competence: new fields.EmbeddedDataField(CompetenceModel, {
+        initial: { raw: 1 },
+      }),
       maxAv: new fields.NumberField({
         initial: 4,
         integer: true,
         min: 0,
       }),
-      competence: new fields.EmbeddedDataField(CompetenceModel, {
-        initial: { raw: 1 },
-      }),
       type: new fields.StringField({
-        initial: "other",
         choices: localizeChoices(objectMap(powerConfig.type, v => v.label)),
+        initial: "other",
       }),
     });
   }

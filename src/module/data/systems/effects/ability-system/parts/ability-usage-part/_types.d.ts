@@ -14,12 +14,12 @@ declare global {
       expansion: {
         /** <schema> Maximum number of extra executions */
         cap: Teriock.System.FormulaString;
-        /** <schema> Type of ability's expansion */
-        type: Teriock.Keys.Expansion | null;
-        /** <schema> Range of expansion */
-        range: RangeModel;
         /** <schema> What attribute is used for feat saves against this ability's expansion */
         featSaveAttribute: Teriock.Keys.Attribute;
+        /** <schema> Range of expansion */
+        range: RangeModel;
+        /** <schema> Type of ability's expansion */
+        type: Teriock.Keys.Expansion | null;
       };
       /** <schema> What attribute is used for feat saves against this ability */
       featSaveAttribute: Teriock.Keys.Attribute;

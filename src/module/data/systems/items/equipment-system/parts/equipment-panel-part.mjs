@@ -59,12 +59,12 @@ export default Base => {
             wrappers: this.storage.enabled
               ? [
                   _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedCount", {
-                    value: this.storage.carriedCount,
                     max: (this.storage.maxCount ?? Infinity).toString(),
+                    value: this.storage.carriedCount,
                   }),
                   _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeight", {
-                    value: this.storage.carriedWeight,
                     max: (this.storage.maxWeight ?? Infinity).toString(),
+                    value: this.storage.carriedWeight,
                   }),
                   _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier", {
                     value: this.storage.weightMultiplier,

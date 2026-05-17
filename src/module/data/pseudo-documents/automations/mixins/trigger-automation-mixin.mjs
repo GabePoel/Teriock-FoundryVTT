@@ -162,7 +162,7 @@ export default function TriggerAutomationMixin(Base) {
        * @param {BaseExecution|null} [_options.execution]
        * @returns {BaseActivation[]}
        */
-      async _getActivations(_options = { rollData: {}, execution: null }) {
+      async _getActivations(_options = { execution: null, rollData: {} }) {
         return [];
       }
 

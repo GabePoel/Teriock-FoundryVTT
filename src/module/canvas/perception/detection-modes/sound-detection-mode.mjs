@@ -10,8 +10,8 @@ export default class SoundDetectionMode extends BaseDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      outlineColor: [0.5, 0.5, 0, 1],
       knockout: true,
+      outlineColor: [0.5, 0.5, 0, 1],
       wave: true,
     }));
   }

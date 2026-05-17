@@ -20,7 +20,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
   };
 
   static PARTS = {
-    all: { template: "teriock/dialogs/revitalize", scrollable: [""] },
+    all: { scrollable: [""], template: "teriock/dialogs/revitalize" },
   };
 
   /** @inheritDoc */

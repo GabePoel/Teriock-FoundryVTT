@@ -67,8 +67,8 @@ export default class RollAutomation extends mixClasses(
         new RollActivation({
           display: this.display,
           formula: this.formula,
-          merge: this.impact === "other" ? false : this.merge,
           impact: this.impact,
+          merge: this.impact === "other" ? false : this.merge,
         }),
       ];
     }

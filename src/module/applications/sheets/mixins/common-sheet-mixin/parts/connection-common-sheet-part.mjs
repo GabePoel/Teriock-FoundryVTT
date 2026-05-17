@@ -40,8 +40,8 @@ export default Base => {
           cssClass,
           Object.entries(obj).map(([k, v]) => {
             return {
-              label: v.name || toTitleCase(k),
               icon: makeIcon(v.icon, "contextMenu"),
+              label: v.name || toTitleCase(k),
               onClick: async () => {
                 await this.document.update({ [path]: k });
               },
@@ -63,9 +63,9 @@ export default Base => {
       _connectContextMenu(cssClass, menuItems, eventName, direction, fixed = false) {
         return /** @type {ContextMenu} */ new TeriockContextMenu(this.element, cssClass, menuItems, {
           eventName,
-          jQuery: false,
           fixed,
           forceDirection: direction,
+          jQuery: false,
         });
       }
     }

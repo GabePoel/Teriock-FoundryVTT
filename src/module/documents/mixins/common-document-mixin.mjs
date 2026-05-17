@@ -269,7 +269,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {Promise<void|false>} The mutated data.
        */
       async hookCall(trigger, options = {}) {
-        const { skipCall = false, skipPropagation = false, scope = {} } = options;
+        const { scope = {}, skipCall = false, skipPropagation = false } = options;
         scope.trigger = trigger;
         if (!skipPropagation) {
           await this.actor?.fireTrigger(trigger, scope);

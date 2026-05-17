@@ -25,10 +25,10 @@ export default class MountSheet extends BaseItemSheet {
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["mount"],
     actions: {
       toggleMounted: this.#onToggleMounted,
     },
+    classes: ["mount"],
     window: {
       icon: makeIconClass(documentConfig.mount.icon, "title"),
     },

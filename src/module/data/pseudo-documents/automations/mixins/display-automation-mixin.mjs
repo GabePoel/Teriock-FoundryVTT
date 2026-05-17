@@ -21,8 +21,8 @@ export default function DisplayAutomationMixin(Base) {
         return Object.assign(super.defineSchema(), {
           display: new fields.SchemaField({
             label: new fields.StringField({
-              label: _loc("TERIOCK.AUTOMATIONS.Display.FIELDS.display.label.label"),
               hint: _loc("TERIOCK.AUTOMATIONS.Display.FIELDS.display.label.hint"),
+              label: _loc("TERIOCK.AUTOMATIONS.Display.FIELDS.display.label.label"),
             }),
           }),
         });

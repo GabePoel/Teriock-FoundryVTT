@@ -34,14 +34,14 @@ export default class TeriockPlayableActorSheet extends mixClasses(
   static DEFAULT_OPTIONS = {
     classes: ["character"],
     form: { submitOnChange: true },
-    position: { width: 800, height: 600 },
+    position: { height: 600, width: 800 },
   };
 
   /** @inheritDoc */
   static PARTS = {
     all: {
-      template: "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
       scrollable: [".character-sidebar", ".character-tab-content"],
+      template: "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
     },
   };
 
@@ -51,8 +51,8 @@ export default class TeriockPlayableActorSheet extends mixClasses(
     if (this.document.species.length === 0) {
       ui.notifications.warn("TERIOCK.SHEETS.Actor.NOTIFICATIONS.noSpecies", {
         format: {
-          name: this.document.name,
           compendium: _loc(game.packs.get("teriock.species").title),
+          name: this.document.name,
         },
         localize: true,
       });

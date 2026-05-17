@@ -38,17 +38,17 @@ export default class ApplicableEffectSheet extends mixClasses(
   static PARTS = {
     ...super.PARTS,
     automations: {
-      template: "teriock/sheets/effects/consequence/automations-tab",
       scrollable: [""],
+      template: "teriock/sheets/effects/consequence/automations-tab",
     },
     children: {
-      template: "teriock/sheets/effects/consequence/children-tab",
       scrollable: [""],
+      template: "teriock/sheets/effects/consequence/children-tab",
     },
     duration: {
+      scrollable: [""],
       template: "teriock/sheets/effects/consequence/duration-tab",
       templates: ["templates/sheets/active-effect/duration.hbs"],
-      scrollable: [""],
     },
   };
 

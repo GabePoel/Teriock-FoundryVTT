@@ -120,7 +120,7 @@ export function dotJoin(strings) {
  * @returns {ID<*>}
  */
 export function toId(str, options = {}) {
-  const { background = "0000000000000000", length = 16, hash = false } = options;
+  const { background = "0000000000000000", hash = false, length = 16 } = options;
   if (hash) {
     const FNV_OFFSET_64 = 0xcbf29ce484222325n;
     const FNV_PRIME_64 = 0x100000001b3n;

@@ -11,14 +11,14 @@ declare global {
       encumbranceLevel: number;
       /** <schema> Size */
       size: {
-        /** <schema> Numbered size */
-        number: number;
         /** <derived> Named size category */
         category: string;
         /** <derived> */
-        reach: number;
-        /** <derived> */
         length: number;
+        /** <schema> Numbered size */
+        number: number;
+        /** <derived> */
+        reach: number;
       };
       /** <schema> Weight of the actor and what they carry */
       weight: {

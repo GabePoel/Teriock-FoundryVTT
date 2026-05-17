@@ -20,9 +20,9 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          hp: statField({ temp: true, morganti: true }),
+          hp: statField({ morganti: true, temp: true }),
           lp: statField({ max: 100, value: 20 }),
-          mp: statField({ temp: true, morganti: true }),
+          mp: statField({ morganti: true, temp: true }),
           presence: statField({ max: 1, value: 0 }),
         });
       }

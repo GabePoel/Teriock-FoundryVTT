@@ -32,11 +32,11 @@ export default class RankSystem extends mixClasses(
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
+      indexCategoryKey: "classes",
+      indexCompendiumKey: "classes",
       namespace: "Class",
       pageNameKey: "system.className",
       type: "rank",
-      indexCategoryKey: "classes",
-      indexCompendiumKey: "classes",
     });
   }
 
@@ -181,14 +181,14 @@ export default class RankSystem extends mixClasses(
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      class: this.className,
+      [`archetype.${this.archetype.slice(0, 3).toLowerCase()}`]: 1,
       [`class.${this.className.slice(0, 3).toLowerCase()}`]: 1,
-      number: this.classRank,
+      archetype: this.archetype,
+      av: this.maxAv,
+      class: this.className,
       innate: this.innate ? 1 : 0,
       maxAv: this.maxAv,
-      av: this.maxAv,
-      archetype: this.archetype,
-      [`archetype.${this.archetype.slice(0, 3).toLowerCase()}`]: 1,
+      number: this.classRank,
     };
   }
 

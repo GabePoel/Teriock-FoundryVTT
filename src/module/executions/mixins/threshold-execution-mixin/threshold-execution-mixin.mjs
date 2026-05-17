@@ -25,12 +25,12 @@ export default function ThresholdExecutionMixin(Base) {
       constructor(options = {}) {
         super(options);
         const {
-          threshold,
-          formula = undefined,
-          edge = 0,
           bonus = "",
           comparison = "gte",
+          edge = 0,
+          formula = undefined,
           showDialog = game.teriock.getSetting("showRollDialogs"),
+          threshold,
         } = options;
         this.edge = edge;
         this.threshold = threshold;
@@ -75,22 +75,22 @@ export default function ThresholdExecutionMixin(Base) {
           ? [
               {
                 action: "disadvantage",
-                callback: () => (this.edge = -1),
                 icon: "fa-dice-d20",
                 label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+                callback: () => (this.edge = -1),
               },
               {
                 action: "normal",
-                callback: () => (this.edge = 0),
                 default: true,
                 icon: "fa-dice-d20",
                 label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+                callback: () => (this.edge = 0),
               },
               {
                 action: "advantage",
-                callback: () => (this.edge = 1),
                 icon: "fa-dice-d20",
                 label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+                callback: () => (this.edge = 1),
               },
             ]
           : [
@@ -114,8 +114,8 @@ export default function ThresholdExecutionMixin(Base) {
             hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
             label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
             name: "competence",
-            update: v => (this.competence.raw = Number(v)),
             value: this.competence.raw,
+            update: v => (this.competence.raw = Number(v)),
           },
           {
             condition: this.hasBonus,
@@ -124,8 +124,8 @@ export default function ThresholdExecutionMixin(Base) {
             label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
             name: "bonus",
             placeholder: "0",
-            update: v => (this.bonus = v),
             value: this.bonus,
+            update: v => (this.bonus = v),
           },
         ];
       }
@@ -286,15 +286,15 @@ export default function ThresholdExecutionMixin(Base) {
           buttons: this._dialogButtons.map(b => {
             return {
               action: b.action,
+              default: b.default,
+              icon: makeIconClass(b.icon || this.icon, "button"),
+              label: _loc(b.label),
               callback: (_event, button) => {
                 this.#updateFromRollDialog(button);
                 if (typeof b.callback === "function") {
                   b.callback();
                 }
               },
-              default: b.default,
-              icon: makeIconClass(b.icon || this.icon, "button"),
-              label: _loc(b.label),
             };
           }),
           content: content.outerHTML,

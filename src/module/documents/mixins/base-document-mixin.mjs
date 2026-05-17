@@ -73,8 +73,8 @@ export default function BaseDocumentMixin(Base) {
         if (operation.asGM && !game.user.isGM) {
           this._cleanGMOperation(operation);
           const docs = await game.users.queryGM("teriock.deleteDocuments", {
-            ids,
             documentName: this.documentName,
+            ids,
             operation,
           });
           if (!docs) {
@@ -95,9 +95,9 @@ export default function BaseDocumentMixin(Base) {
         if (operation.asGM && !game.user.isGM) {
           this._cleanGMOperation(operation);
           const docs = await game.users.queryGM("teriock.updateDocuments", {
-            updates,
             documentName: this.documentName,
             operation,
+            updates,
           });
           if (!docs) {
             return updates.map(_d => null);

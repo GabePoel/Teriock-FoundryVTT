@@ -65,16 +65,16 @@ export default class ImpactRoll extends BaseRoll {
   _getFormulaContextOptions(options = {}) {
     return [
       {
-        name: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
         icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
+        name: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
         callback: async () => {
           const boostedRoll = await this.boost(this.options);
           await boostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
         },
       },
       {
-        name: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
         icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
+        name: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
         callback: async () => {
           const deboostedRoll = await this.deboost(this.options);
           await deboostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
@@ -91,9 +91,9 @@ export default class ImpactRoll extends BaseRoll {
         .filter(option => !option?.hidden)
         .map(option => {
           return {
-            callback: async () => game.actors.selected.forEach(a => option.apply(a, this.total)),
             icon: makeIcon(option.icon, "contextMenu"),
             name: option.take,
+            callback: async () => game.actors.selected.forEach(a => option.apply(a, this.total)),
           };
         }),
       ...super._getTotalContextOptions(_options),

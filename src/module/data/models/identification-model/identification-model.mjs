@@ -100,8 +100,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
       });
       const content = await TeriockTextEditor.enrichHTML(
         _loc("TERIOCK.MODELS.Identification.QUERY.ReadMagic.question", {
-          user: `@UUID[${game.user.uuid}]`,
           item: `@UUID[${this.parent.parent.uuid}]{${this.name}}`,
+          user: game.user.link,
         }),
       );
       const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {

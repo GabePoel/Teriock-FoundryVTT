@@ -13,14 +13,14 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    actions: { ok: this._onGetSelected, cancel: this._onCancel },
+    actions: { cancel: this._onCancel, ok: this._onGetSelected },
     classes: ["dynamic-select", "dialog"],
     position: { width: 450 },
     window: {
       contentClasses: ["standard-form"],
       icon: makeIconClass(icons.ui.select, "title"),
-      title: "TERIOCK.DIALOGS.Select.Document.title",
       resizable: true,
+      title: "TERIOCK.DIALOGS.Select.Document.title",
     },
   };
 
@@ -69,7 +69,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    * @param args
    */
   constructor(docs, options = {}, ...args) {
-    const { multi = true, hint = "", tooltip = true, tooltipAsync = false, openable = false } = options;
+    const { hint = "", multi = true, openable = false, tooltip = true, tooltipAsync = false } = options;
     super(...args);
     this.docs = docs;
     this.multi = multi;
@@ -129,9 +129,9 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       return;
     }
     const searchFilter = new SearchFilter({
-      inputSelector: ".search-input",
       contentSelector: ".doc-select",
       initial: "",
+      inputSelector: ".search-input",
       callback: (_e, _q, rgx, container) => {
         container.querySelectorAll(".doc-select-item").forEach(
           /** @param {HTMLLIElement} card */ card => {

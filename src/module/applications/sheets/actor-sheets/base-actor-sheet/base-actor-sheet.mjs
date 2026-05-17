@@ -41,7 +41,7 @@ export default class BaseActorSheet extends mixClasses(
    */
   static DEFAULT_OPTIONS = {
     classes: ["unpadded", "character"],
-    position: { width: 800, height: 600 },
+    position: { height: 600, width: 800 },
     window: { icon: makeIconClass(documentConfig.character.icon, "title") },
   };
 

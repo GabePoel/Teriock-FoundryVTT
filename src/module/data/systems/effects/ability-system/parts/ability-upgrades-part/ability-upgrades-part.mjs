@@ -20,12 +20,12 @@ export default Base => {
         return Object.assign(super.defineSchema(), {
           upgrades: new fields.SchemaField({
             competence: new fields.SchemaField({
-              attribute: attributeField({ unp: true, nullable: true }),
+              attribute: attributeField({ nullable: true, unp: true }),
               text: initialText(),
               value: competenceField(),
             }),
             score: new fields.SchemaField({
-              attribute: attributeField({ unp: false, nullable: true }),
+              attribute: attributeField({ nullable: true, unp: false }),
               text: initialText(),
               value: new fields.NumberField({
                 initial: 0,

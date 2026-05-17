@@ -4,6 +4,7 @@
  * @returns {string}
  */
 export function standardizeLengthUnitName(unit) {
+  // no sort
   const UNIT_ALIASES = {
     in: ["inch", "inches"],
     ft: ["foot", "feet"],

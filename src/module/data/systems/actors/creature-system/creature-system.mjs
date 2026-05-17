@@ -13,9 +13,9 @@ export default class CreatureSystem extends BaseActorSystem {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      type: "creature",
       indexCategoryKey: "creatures",
       indexCompendiumKey: "creatures",
+      type: "creature",
     });
   }
 

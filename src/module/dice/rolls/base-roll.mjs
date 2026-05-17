@@ -22,14 +22,14 @@ export default class BaseRoll extends Roll {
    */
   static get defaultOptions() {
     return {
+      comparison: "gte",
       hideRoll: false,
       styles: {
-        dice: { classes: "", tooltip: "", icon: "" },
-        total: { classes: "", tooltip: "", icon: "" },
+        dice: { classes: "", icon: "", tooltip: "" },
+        total: { classes: "", icon: "", tooltip: "" },
       },
       targets: [],
       threshold: null,
-      comparison: "gte",
     };
   }
 
@@ -323,8 +323,8 @@ export default class BaseRoll extends Roll {
   _getFormulaContextOptions(options = {}) {
     return [
       {
-        label: _loc("TERIOCK.ROLLS.Base.reroll"),
         icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
+        label: _loc("TERIOCK.ROLLS.Base.reroll"),
         onClick: async () => {
           const reroll = this.clone();
           await reroll.evaluate();
@@ -347,12 +347,12 @@ export default class BaseRoll extends Roll {
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
     Object.assign(context, {
-      targets: this.targets,
-      threshold: this.threshold,
       hasThreshold: this.hasThreshold,
-      styles: this.styles,
       hideRoll: this.hideRoll,
       id: this.id,
+      styles: this.styles,
+      targets: this.targets,
+      threshold: this.threshold,
     });
     if (this.success) {
       context.styles.total.classes += " success";
@@ -456,18 +456,18 @@ export default class BaseRoll extends Roll {
 
   /** @inheritDoc */
   async evaluate({
-    minimize = false,
-    maximize = false,
-    allowStrings = false,
     allowInteractive = true,
+    allowStrings = false,
+    maximize = false,
+    minimize = false,
     ...options
   } = {}) {
     await this._applyDiceStyles();
     return super.evaluate({
-      minimize,
-      maximize,
-      allowStrings,
       allowInteractive,
+      allowStrings,
+      maximize,
+      minimize,
       ...options,
     });
   }
@@ -489,18 +489,18 @@ export default class BaseRoll extends Roll {
   }
 
   /** @inheritDoc */
-  async toMessage(messageData = {}, { rollMode, create = true } = {}) {
+  async toMessage(messageData = {}, { create = true, rollMode } = {}) {
     const activations = await this.getActivations();
     const panels = await this.getPanels();
     messageData = foundry.utils.mergeObject(
       {
         system: {
-          panels: panels,
           activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(activations),
+          panels: panels,
         },
       },
       messageData,
     );
-    return super.toMessage(messageData, { rollMode, create });
+    return super.toMessage(messageData, { create, rollMode });
   }
 }

@@ -1,6 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
 /** @enum {Teriock.Config.CurrencyEntry} */
+// no sort
 export const currencyConfig = {
   copper: {
     abbreviation: "cop",

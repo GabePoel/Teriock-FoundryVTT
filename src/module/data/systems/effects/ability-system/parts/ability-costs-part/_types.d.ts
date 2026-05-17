@@ -16,12 +16,12 @@ declare global {
 }
 
 export type CostComponentValue = {
-  type: keyof typeof costConfig.components.types | null;
   description: string;
+  type: keyof typeof costConfig.components.types | null;
 };
 
 export type CostPrimaryValue = {
-  type: keyof typeof costConfig.primary.types | null;
-  formula: Teriock.System.FormulaString;
   description: string;
+  formula: Teriock.System.FormulaString;
+  type: keyof typeof costConfig.primary.types | null;
 };

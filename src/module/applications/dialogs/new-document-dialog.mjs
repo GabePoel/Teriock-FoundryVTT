@@ -12,22 +12,22 @@ export default async function newDocumentDialog(type) {
   return await TeriockDialog.prompt({
     buttons: [
       {
+        icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
         label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
         callback: () => "create",
-        icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
       },
     ],
     content: _loc("TERIOCK.DIALOGS.NewDocument.content", { typeName }),
     modal: true,
     ok: {
-      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
       default: true,
-      callback: () => "import",
       icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
+      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
+      callback: () => "import",
     },
     window: {
-      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: label }),
       icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
+      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: label }),
     },
   });
 }

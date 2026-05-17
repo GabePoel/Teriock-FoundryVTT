@@ -51,15 +51,15 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
       critical: new fields.BooleanField(),
       expirations: new fields.SchemaField({
         combat: new fields.SchemaField({
-          who: new fields.SchemaField({
-            type: builders.combatExpirationSourceTypeField(),
-            source: new fields.DocumentUUIDField({
-              type: "Actor",
-              nullable: true,
-            }),
-          }),
           what: builders.combatExpirationMethodField(),
           when: builders.combatExpirationTimingField(),
+          who: new fields.SchemaField({
+            source: new fields.DocumentUUIDField({
+              nullable: true,
+              type: "Actor",
+            }),
+            type: builders.combatExpirationSourceTypeField(),
+          }),
         }),
         conditions: conditionRequirementsField(),
         description: new fields.StringField(),

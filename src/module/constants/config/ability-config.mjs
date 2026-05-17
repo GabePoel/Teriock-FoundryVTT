@@ -10,8 +10,8 @@ export const abilityConfig = {
     item: "TERIOCK.TERMS.Delivery.item",
     missile: "TERIOCK.TERMS.Delivery.missile",
     self: "TERIOCK.TERMS.Delivery.self",
-    sight: "TERIOCK.TERMS.Delivery.sight",
     shield: "TERIOCK.TERMS.Delivery.shield",
+    sight: "TERIOCK.TERMS.Delivery.sight",
     weapon: "TERIOCK.TERMS.Delivery.weapon",
   },
   deliveryPackage: {
@@ -25,6 +25,7 @@ export const abilityConfig = {
     item: "TERIOCK.TERMS.DeliveryParent.item",
   },
   duration: {
+    // no sort
     unit: {
       instant: "TERIOCK.TERMS.Duration.unit.instant",
       second: "TERIOCK.TERMS.Duration.unit.second",
@@ -38,6 +39,7 @@ export const abilityConfig = {
       untilDawn: "TERIOCK.TERMS.Duration.unit.untilDawn",
     },
   },
+  // no sort
   executionTime: {
     active: {
       a0: "TERIOCK.TERMS.ExecutionTime.active.0",
@@ -52,6 +54,7 @@ export const abilityConfig = {
     passive: {
       passive: "TERIOCK.TERMS.Maneuver.passive",
     },
+    // no sort
     slow: {
       longRest: "TERIOCK.TERMS.ExecutionTime.slow.longRest",
       shortRest: "TERIOCK.TERMS.ExecutionTime.slow.shortRest",
@@ -64,16 +67,13 @@ export const abilityConfig = {
     fork: "TERIOCK.TERMS.Expansion.fork",
     ripple: "TERIOCK.TERMS.Expansion.ripple",
   },
-  featSaveImprovementAmount: {
-    proficiency: "TERIOCK.TERMS.FeatSaveImprovementAmount.proficiency",
-    fluency: "TERIOCK.TERMS.FeatSaveImprovementAmount.fluency",
-  },
   interaction: {
     attack: "TERIOCK.TERMS.Interaction.attack",
     block: "TERIOCK.TERMS.Interaction.block",
     feat: "TERIOCK.TERMS.Interaction.feat",
     manifest: "TERIOCK.TERMS.Interaction.manifest",
   },
+  // no sort
   maneuver: {
     active: "TERIOCK.TERMS.Maneuver.active",
     reactive: "TERIOCK.TERMS.Maneuver.reactive",
@@ -84,6 +84,7 @@ export const abilityConfig = {
     ability: "TERIOCK.TERMS.TargetParent.ability",
     item: "TERIOCK.TERMS.TargetParent.item",
   },
+  // no sort
   targets: {
     ability: "TERIOCK.TERMS.Targets.ability",
     area: "TERIOCK.TERMS.Targets.area",

@@ -56,8 +56,8 @@ declare global {
   };
 
   type FromUuidOptions = {
-    relative: TeriockDocument;
     invalid: boolean;
+    relative: TeriockDocument;
   };
 
   function fromUuidSync<T>(uuid: UUID<T>, options?: FromUuidOptions): T | null;

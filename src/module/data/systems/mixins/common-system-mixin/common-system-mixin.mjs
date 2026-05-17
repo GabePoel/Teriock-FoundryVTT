@@ -144,10 +144,10 @@ export default function CommonSystemMixin(Base) {
           const dstDocs = dstChildren.filter(d => keys.includes(d.lookupKey));
           const docNames = new Set([...srcDocs.map(s => s.documentName), ...dstDocs.map(d => d.documentName)]);
           for (const docName of docNames) {
-            const existing = childMap[docName] || { src: [], dst: [] };
+            const existing = childMap[docName] || { dst: [], src: [] };
             childMap[docName] = {
-              src: [...existing.src, ...srcDocs.filter(s => s.documentName === docName)],
               dst: [...existing.dst, ...dstDocs.filter(d => d.documentName === docName)],
+              src: [...existing.src, ...srcDocs.filter(s => s.documentName === docName)],
             };
           }
         }
@@ -353,12 +353,12 @@ export default function CommonSystemMixin(Base) {
       /** @inheritDoc */
       getLocalRollData() {
         const rollData = {
-          name: this.parent.name,
-          identifier: this.identifier,
           [`identifier.${this.identifier}`]: 1,
-          type: this.parent.type,
           [`type.${this.parent.type}`]: 1,
+          identifier: this.identifier,
+          name: this.parent.name,
           [this.parent.type]: 1,
+          type: this.parent.type,
         };
         if (this.parent.parent?.type) {
           rollData[`parent.${this.parent.parent.type}`] = 1;
@@ -491,12 +491,12 @@ export default function CommonSystemMixin(Base) {
        */
       async refreshFromSource(document, options = {}) {
         const {
-          deleteChildren = true,
           createChildren = true,
-          updateChildren = true,
-          updateDocument = true,
+          deleteChildren = true,
           fullOverride = false,
           recursive = true,
+          updateChildren = true,
+          updateDocument = true,
         } = options;
         if (document) {
           if (updateDocument) {
@@ -548,11 +548,11 @@ export default function CommonSystemMixin(Base) {
           for (const child of fullOverride ? await this.parent.getSubs() : await this.parent.getChildArray()) {
             const childSource = await fromUuid(child._stats.compendiumSource);
             await child.system.refreshFromSource(childSource, {
-              deleteChildren,
               createChildren,
+              deleteChildren,
+              recursive,
               updateChildren,
               updateDocument,
-              recursive,
             });
           }
         }

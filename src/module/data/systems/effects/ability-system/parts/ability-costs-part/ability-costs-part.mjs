@@ -55,7 +55,7 @@ export default Base => {
                 return new fields.SchemaField(
                   {
                     description: new TextField({ label }),
-                    formula: new FormulaField({ label, deterministic: false }),
+                    formula: new FormulaField({ deterministic: false, label }),
                     type: new fields.StringField({
                       choices: localizeChoices(costConfig.primary.types),
                       initial: null,
@@ -154,8 +154,8 @@ export default Base => {
           ...Object.entries(TERIOCK.config.cost.primary.keys).map(([k, v]) =>
             this.costs.primary[k].type === "formula"
               ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-                  value: this.costs.primary[k].formula,
                   cost: v.abbreviation,
+                  value: this.costs.primary[k].formula,
                 })
               : this.costs.primary[k].type === "description"
                 ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.variable", {

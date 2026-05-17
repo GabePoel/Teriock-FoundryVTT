@@ -409,6 +409,6 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    * @returns {Teriock.System.TriggerScope}
    */
   getScope(scope = {}) {
-    return Object.assign({ execution: this, actor: this.actor }, scope);
+    return Object.assign({ actor: this.actor, execution: this }, scope);
   }
 }

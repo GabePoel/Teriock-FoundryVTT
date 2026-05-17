@@ -8,6 +8,7 @@ export const dieConfig = {
     red: "TERIOCK.TERMS.StoneColor.red",
     white: "TERIOCK.TERMS.StoneColor.white",
   },
+  // no sort
   faces: {
     2: "d2",
     4: "d4",
@@ -23,72 +24,11 @@ export const dieConfig = {
     mp: "mana",
   },
   styles: {
-    amonum: {
-      colorset: "bronze",
-    },
-    dirtydark: {
-      colorset: "custom",
-      foreground: "#dddddd",
-      background: "#3d3846",
-      texture: "skulls",
-    },
-    financial: {
-      colorset: "custom",
-      background: "#F6D32D",
-      foreground: "#ffffff",
-      outline: "#000000",
-      texture: "bronze03a",
-      material: "metal",
-    },
-    fire: {
-      colorset: "fire",
-    },
-    holy: {
-      colorset: "radiant",
-    },
     hp: {
       colorset: "red",
     },
-    ice: {
-      colorset: "ice",
-    },
-    mana: {
-      colorset: "force",
-    },
-    morganti: {
-      colorset: "black",
-    },
     mp: {
       colorset: "blue",
-    },
-    psychic: {
-      colorset: "psychic",
-    },
-    silveel: {
-      colorset: "prism",
-      background: "#ffffff",
-      foreground: "#F6F5F4",
-      outline: "#5E5C64",
-      texture: "metal",
-    },
-    silver: {
-      colorset: "custom",
-      background: "#deddda",
-      foreground: "#000000",
-      outline: "#ffffff",
-      texture: "metal",
-    },
-    spiritual: {
-      colorset: "thunder",
-    },
-    terror: {
-      colorset: "poison",
-    },
-    toxic: {
-      colorset: "acid",
-    },
-    vine: {
-      colorset: "earth",
     },
   },
 };

@@ -9,16 +9,16 @@ import { getImage } from "./path.mjs";
  */
 export async function attributePanel(attribute) {
   return TeriockTextEditor.enrichPanel({
-    image: getImage("attributes", TERIOCK.index.attributesFull[attribute]),
-    name: TERIOCK.reference.attributesFull[attribute],
     blocks: [
       {
-        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         text: TERIOCK.data.attributes[attribute],
+        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       },
     ],
     icon: TERIOCK.display.icons.interaction.feat,
+    image: getImage("attributes", TERIOCK.index.attributesFull[attribute]),
     label: _loc("TERIOCK.TERMS.Common.attribute"),
+    name: TERIOCK.reference.attributesFull[attribute],
   });
 }
 
@@ -35,8 +35,6 @@ export async function tradecraftPanel(tradecraft) {
     }
   }
   return TeriockTextEditor.enrichPanel({
-    image: getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
-    name: TERIOCK.reference.tradecrafts[tradecraft],
     bars: [
       {
         icon: TERIOCK.config.tradecraft[field].icon,
@@ -46,12 +44,14 @@ export async function tradecraftPanel(tradecraft) {
     ],
     blocks: [
       {
-        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         text: TERIOCK.content.tradecrafts[tradecraft],
+        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       },
     ],
     icon: documentConfig.fluency.icon,
+    image: getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
     label: _loc("TERIOCK.TERMS.Common.tradecraft"),
+    name: TERIOCK.reference.tradecrafts[tradecraft],
   });
 }
 
@@ -68,8 +68,6 @@ export async function classPanel(className) {
     }
   }
   return await TeriockTextEditor.enrichPanel({
-    image: getImage("classes", TERIOCK.index.classes[className]),
-    name: TERIOCK.reference.classes[className],
     bars: [
       {
         icon: TERIOCK.config.rank[archetype].icon,
@@ -79,12 +77,14 @@ export async function classPanel(className) {
     ],
     blocks: [
       {
-        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         text: TERIOCK.content.classes[className],
+        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       },
     ],
     icon: documentConfig.rank.icon,
+    image: getImage("classes", TERIOCK.index.classes[className]),
     label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
+    name: TERIOCK.reference.classes[className],
   });
 }
 

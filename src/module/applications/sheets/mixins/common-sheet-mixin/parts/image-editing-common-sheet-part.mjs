@@ -27,11 +27,11 @@ export default Base => {
         const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
         const options = {
           current,
-          type: "image",
-          redirectToRoot: defaultImg ? [defaultImg] : [],
-          callback: path => this.document.update({ [attr]: path }),
-          top: this.position.top + 40,
           left: this.position.left + 10,
+          redirectToRoot: defaultImg ? [defaultImg] : [],
+          top: this.position.top + 40,
+          type: "image",
+          callback: path => this.document.update({ [attr]: path }),
         };
         await new foundry.applications.apps.FilePicker(options).browse();
       }

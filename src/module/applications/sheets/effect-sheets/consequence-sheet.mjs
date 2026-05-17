@@ -20,23 +20,23 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
   static PARTS = {
     ...super.PARTS,
     transformation: {
-      template: "teriock/sheets/effects/consequence/transformation-tab",
       scrollable: [""],
+      template: "teriock/sheets/effects/consequence/transformation-tab",
     },
   };
 
   /** @inheritDoc */
   static TABS = {
     sheet: {
+      initial: super.TABS.sheet.initial,
+      labelPrefix: super.TABS.sheet.labelPrefix,
       tabs: [
         ...super.TABS.sheet.tabs,
         {
-          id: "transformation",
           icon: makeIconClass(icons.effect.transform, "solid"),
+          id: "transformation",
         },
       ],
-      initial: super.TABS.sheet.initial,
-      labelPrefix: super.TABS.sheet.labelPrefix,
     },
   };
 

@@ -33,8 +33,6 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          font: new fields.StringField({ initial: "" }),
-          description: new TextField({ initial: "" }),
           boosts: new fields.SchemaField(
             objectMap(
               impactConfig,
@@ -48,6 +46,8 @@ export default function ChildSystemMixin(Base) {
             ),
             { persisted: false },
           ),
+          description: new TextField({ initial: "" }),
+          font: new fields.StringField({ initial: "" }),
           qualifiers: new fields.SchemaField({
             ephemeral: new EvaluationField({
               deterministic: true,
@@ -102,10 +102,10 @@ export default function ChildSystemMixin(Base) {
         return Object.assign(super.embedActions, {
           useDoc: {
             primary: async (event, relative) => {
-              await this.use({ event, actor: relative?.actor });
+              await this.use({ actor: relative?.actor, event });
             },
             secondary: async (event, relative) => {
-              await this.use({ event, actor: relative?.actor });
+              await this.use({ actor: relative?.actor, event });
             },
           },
         });
@@ -118,20 +118,20 @@ export default function ChildSystemMixin(Base) {
           {
             action: "chatDoc",
             icon: TERIOCK.display.icons.ui.chat,
+            tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+            visible: this.parent.isViewer,
             onClick: async () => {
               await this.parent.toMessage();
             },
-            tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
-            visible: this.parent.isViewer,
           },
           {
             action: "toggleDisabledDoc",
             icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
-            onClick: () => this.parent.toggleDisabled(),
             tooltip: this.parent.disabled
               ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
               : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
             visible: this.parent.isOwner,
+            onClick: () => this.parent.toggleDisabled(),
           },
         ];
       }
@@ -195,8 +195,8 @@ export default function ChildSystemMixin(Base) {
               group: "usage",
               icon: makeIcon(this.useIcon, "contextMenu"),
               label: this.useText,
-              onClick: async () => await this.use(),
               visible: this.isUsable,
+              onClick: async () => await this.use(),
             },
             {
               group: "control",
@@ -227,10 +227,10 @@ export default function ChildSystemMixin(Base) {
               group: "open",
               icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
               label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
+              visible: game.user.isGM,
               onClick: async () => {
                 await this.gmNotesOpen();
               },
-              visible: game.user.isGM,
             },
             {
               group: "open",

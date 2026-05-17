@@ -125,10 +125,10 @@ export default class BaseActorSystem extends mixClasses(
   getCardContextMenuEntries(doc) {
     return [
       {
-        label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
         icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
-        visible: () => this.parent.token && this.parent.token.isViewer,
+        label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
         onClick: async () => this.parent.token.sheet.render(true),
+        visible: () => this.parent.token && this.parent.token.isViewer,
       },
       ...super.getCardContextMenuEntries(doc),
     ];
@@ -156,8 +156,8 @@ export default class BaseActorSystem extends mixClasses(
     ];
     parts.blocks = [
       {
-        title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
         text: this.notes,
+        title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes"),
       },
     ];
     return parts;

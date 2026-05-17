@@ -34,8 +34,8 @@ export default class TakeAutomation extends DisplayAutomationMixin(BaseAutomatio
       amount: new fields.NumberField({ nullable: true }),
       impact: new fields.StringField({
         choices: objectMap(TERIOCK.config.impact, i => i.take, {
-          filter: c => !c?.hidden,
           localize: true,
+          filter: c => !c?.hidden,
         }),
         initial: "damage",
         nullable: false,

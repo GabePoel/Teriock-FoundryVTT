@@ -55,7 +55,7 @@ function hackFill(bar) {
  * @returns {number}
  */
 function barLeft(value, max, temp = 0) {
-  const { value: v, max: m, temp: t } = normalizeBarInputs(value, max, temp);
+  const { max: m, temp: t, value: v } = normalizeBarInputs(value, max, temp);
   return Math.floor((v / (m + t)) * 100);
 }
 
@@ -79,7 +79,7 @@ function barTemp(value, max, temp = 0) {
  * @returns {number}
  */
 function barLost(value, max, temp = 0) {
-  const { value: v, max: m, temp: t } = normalizeBarInputs(value, max, temp);
+  const { max: m, temp: t, value: v } = normalizeBarInputs(value, max, temp);
   const left = Math.floor((v / (m + t)) * 100);
   const tempP = Math.ceil((t / (m + t)) * 100);
   return 100 - left - tempP;

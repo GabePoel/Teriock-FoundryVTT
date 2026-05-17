@@ -3,8 +3,8 @@ import { TeriockJournalEntryPage } from "../../../../documents/_module.mjs";
 export type ChildDeltaMap = Record<
   CommonDocumentName,
   {
-    src: CommonDocument[];
     dst: CommonDocument[];
+    src: CommonDocument[];
   }
 >;
 

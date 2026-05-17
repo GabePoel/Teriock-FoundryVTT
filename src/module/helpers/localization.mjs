@@ -61,14 +61,14 @@ const _preLocalizationRegistrations = {};
  * @param {TransformKey} [options.transform] - Add a transformation to the value before localizing.
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
  */
-export function preLocalize(configKeyPath, { key, keys = [], sort = false, prefix = "", transform, suffix = "" } = {}) {
+export function preLocalize(configKeyPath, { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {}) {
   if (key) {
     keys.unshift(key);
   }
   _preLocalizationRegistrations[configKeyPath] = {
     keys,
-    sort,
     prefix,
+    sort,
     suffix,
     transform,
   };
@@ -103,7 +103,7 @@ export function performPreLocalization(config) {
  * @param {string} [options.suffix] - An optional suffix to add to the value being localized.
  * @param {TransformKey} [options.transform] - An optional transformation to make to the value before localizing.
  */
-export function localizeObject(obj, { keys, prefix = "", transform, suffix = "" } = {}) {
+export function localizeObject(obj, { keys, prefix = "", suffix = "", transform } = {}) {
   for (const [k, v] of Object.entries(obj)) {
     const type = typeof v;
     if (type === "string") {
@@ -161,7 +161,7 @@ function transformValue(value, transform) {
  * @returns {string}
  */
 export function listFormat(strings, options) {
-  options = { style: "long", type: "conjunction", sort: true, ...options };
+  options = { sort: true, style: "long", type: "conjunction", ...options };
   const arr = Array.from(strings);
   if (options.sort) {
     arr.sort((a, b) => a.localeCompare(b));

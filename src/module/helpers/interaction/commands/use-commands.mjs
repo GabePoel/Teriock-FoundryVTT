@@ -68,14 +68,14 @@ export const useLocalCommand = {
   ...thresholdCommand,
   aliases: ["use"],
   args: ["lookup"],
-  icon: options => inferIconFromIdentifier(options?.lookup),
   id: "use-local",
+  primary: useLocal,
+  secondary: useLocal,
+  icon: options => inferIconFromIdentifier(options?.lookup),
   label: options =>
     _loc("TERIOCK.COMMANDS.UseDocument.useNamed", {
       name: inferNameFromIdentifier(options?.lookup) || "",
     }),
-  primary: useLocal,
-  secondary: useLocal,
 };
 
 /**
@@ -85,9 +85,9 @@ export const useLocalCommand = {
 export const useExternalCommand = {
   ...thresholdCommand,
   args: ["uuid"],
-  icon: options => options?.icon || icons.ui.document,
   id: "use-external",
-  label: options => options?.label || _loc("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
   primary: useExternal,
   secondary: useExternal,
+  icon: options => options?.icon || icons.ui.document,
+  label: options => options?.label || _loc("TERIOCK.COMMANDS.UseDocument.useUnnamed"),
 };

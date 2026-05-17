@@ -42,7 +42,7 @@ export default class BaseDocumentExecution extends BaseExecution {
   /** @inheritDoc */
   async _buildActivations() {
     const activationLists = await Promise.all(
-      this.activeAutomations.map(a => a.getActivations({ rollData: this.rollData, execution: this })),
+      this.activeAutomations.map(a => a.getActivations({ execution: this, rollData: this.rollData })),
     );
     for (const activations of activationLists) {
       this.activations.push(...activations);

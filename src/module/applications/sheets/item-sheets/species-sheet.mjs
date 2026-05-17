@@ -39,13 +39,13 @@ export default class SpeciesSheet extends mixClasses(BaseItemSheet, mixins.WikiB
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,
-      ".ab-size-button": {
-        "system.size.min": this.item.system.size.value,
-        "system.size.max": this.item.system.size.value,
-      },
       ".ab-lifespan-button": {
         "system.adult": 20,
         "system.lifespan": 100,
+      },
+      ".ab-size-button": {
+        "system.size.max": this.item.system.size.value,
+        "system.size.min": this.item.system.size.value,
       },
     };
   }

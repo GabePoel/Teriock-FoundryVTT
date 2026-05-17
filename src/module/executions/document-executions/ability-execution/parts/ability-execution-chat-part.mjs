@@ -72,12 +72,12 @@ export default function AbilityExecutionChatPart(Base) {
       #generateAssociationCard(uuid) {
         const doc = fromUuidSync(uuid);
         return {
-          name: doc.name,
-          img: doc.img || doc.img,
-          uuid,
-          rescale: doc.rescale,
           id: doc.id,
+          img: doc.img || doc.img,
+          name: doc.name,
+          rescale: doc.rescale,
           type: "base",
+          uuid,
         };
       }
 

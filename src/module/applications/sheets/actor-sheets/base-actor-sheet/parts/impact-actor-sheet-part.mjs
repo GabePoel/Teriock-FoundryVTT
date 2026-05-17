@@ -45,12 +45,6 @@ export default Base =>
           placeholder: "0",
         });
         await TeriockDialog.prompt({
-          window: {
-            title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.title", {
-              effect: TERIOCK.config.impact[impact]?.label,
-            }),
-            icon: makeIconClass(TERIOCK.config.impact[impact].icon, "title"),
-          },
           content: field.toFormGroup({}, { name: impact }).outerHTML,
           ok: {
             label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.ok"),
@@ -60,6 +54,12 @@ export default Base =>
                 [`system.${stat}.morganti`]: input,
               });
             },
+          },
+          window: {
+            icon: makeIconClass(TERIOCK.config.impact[impact].icon, "title"),
+            title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.title", {
+              effect: TERIOCK.config.impact[impact]?.label,
+            }),
           },
         });
       }

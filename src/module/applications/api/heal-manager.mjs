@@ -17,8 +17,8 @@ export default class TeriockHealManager extends TeriockStatManager {
     },
     window: {
       icon: makeIconClass(impactConfig.healing.icon, "title"),
-      title: "TERIOCK.DIALOGS.Heal.title",
       resizable: false,
+      title: "TERIOCK.DIALOGS.Heal.title",
     },
   };
 

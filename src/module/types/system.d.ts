@@ -67,8 +67,8 @@ declare global {
     };
 
     export type AttachmentData<T> = {
-      uuid?: UUID<T>;
       data?: Partial<T>;
+      uuid?: UUID<T>;
     };
 
     export type Attachment<T> = AttachmentData<T> | UUID<T>;
@@ -111,8 +111,8 @@ declare global {
      * A parsed identifier.
      */
     export type ResolvedIdentifier = {
-      type?: Teriock.Documents.CommonType;
       identifier: Identifier;
+      type?: Teriock.Documents.CommonType;
     };
 
     /**
@@ -132,12 +132,13 @@ declare global {
 
     /** Options on how to refresh documents. */
     export type RefreshOptions = {
-      deleteChildren: boolean;
       createChildren: boolean;
-      updateChildren: boolean;
-      updateDocument: boolean;
+      deleteChildren: boolean;
       fullOverride: boolean;
       recursive: boolean;
+
+      updateChildren: boolean;
+      updateDocument: boolean;
     };
   }
 }

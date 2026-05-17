@@ -17,16 +17,16 @@ const command = {
   ...thresholdCommand,
   aliases: ["tc"],
   args: ["tradecraft"],
-  icon: options => `${allOptions[options?.tradecraft || "artist"].icon}`,
   id: "tradecraft",
+  primary: use,
+  secondary: use,
+  icon: options => `${allOptions[options?.tradecraft || "artist"].icon}`,
   label: options =>
     allOptions[options?.tradecraft]?.name
       ? _loc("TERIOCK.ROLLS.Tradecraft.name", {
           value: allOptions[options?.tradecraft].name,
         })
       : _loc("TERIOCK.ROLLS.Tradecraft.label"),
-  primary: use,
-  secondary: use,
 };
 
 export default command;

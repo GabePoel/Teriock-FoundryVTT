@@ -9,14 +9,14 @@ const armamentContext = {
   body: "TYPES.Item.body",
   equipment: "TYPES.Item.equipment",
 
-  "dmg.2h": "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
-  "range.melee": "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
-  "range.ranged": "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
-  "range.short": "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label",
   av: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
   bv: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
   dmg: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
+  "dmg.2h": "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
   range: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
+  "range.melee": "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
+  "range.ranged": "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
+  "range.short": "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label",
   spellTurning: "TERIOCK.SYSTEMS.Armament.FIELDS.spellTurning.label",
   style: "TERIOCK.SYSTEMS.Equipment.FIELDS.fightingStyle.label",
   vitals: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
@@ -33,6 +33,7 @@ const armamentContext = {
   stashed: "TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label",
   str: "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label",
 
+  storage: "TERIOCK.MODELS.Storage.FIELDS.enabled.label",
   "storage.count": "TERIOCK.MODELS.Storage.FIELDS.count.label",
   "storage.count.max": "TERIOCK.MODELS.Storage.FIELDS.maxCount.label",
   "storage.count.over": "TERIOCK.MODELS.Storage.FIELDS.maxCount.over",
@@ -40,7 +41,6 @@ const armamentContext = {
   "storage.weight.max": "TERIOCK.MODELS.Storage.FIELDS.maxWeight.label",
   "storage.weight.mult": "TERIOCK.MODELS.Storage.FIELDS.weightMultiplier.label",
   "storage.weight.over": "TERIOCK.MODELS.Storage.FIELDS.maxWeight.over",
-  storage: "TERIOCK.MODELS.Storage.FIELDS.enabled.label",
   weight: "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label",
 };
 

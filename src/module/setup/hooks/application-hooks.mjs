@@ -104,7 +104,7 @@ function addIdentifierClipboardListener(application) {
       }
       game.clipboard.copyPlainText(id);
       ui.notifications.info("DOCUMENT.IdCopiedClipboard", {
-        format: { label, type, id },
+        format: { id, label, type },
       });
     }),
   );

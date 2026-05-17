@@ -1,23 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
 export const consequenceConfig = {
-  interaction: {
-    attack: {
-      hit: "TERIOCK.SYSTEMS.Ability.FIELDS.results.hit.label",
-      miss: "TERIOCK.SYSTEMS.Ability.FIELDS.results.miss.label",
-    },
-    feat: {
-      fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
-      save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
-    },
-    manifest: {
-      use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label",
-    },
-    block: {
-      save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
-      fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
-    },
-  },
   common: {
     attune: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
     awaken: "TERIOCK.EFFECTS.Common.awaken",
@@ -35,6 +18,23 @@ export const consequenceConfig = {
     standardDamage: "TERIOCK.EFFECTS.Common.standardDamage",
     undampen: "TERIOCK.SYSTEMS.Equipment.MENU.undampen",
     unglue: "TERIOCK.SYSTEMS.Equipment.MENU.unglue",
+  },
+  interaction: {
+    attack: {
+      hit: "TERIOCK.SYSTEMS.Ability.FIELDS.results.hit.label",
+      miss: "TERIOCK.SYSTEMS.Ability.FIELDS.results.miss.label",
+    },
+    block: {
+      fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
+      save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
+    },
+    feat: {
+      fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
+      save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
+    },
+    manifest: {
+      use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label",
+    },
   },
 };
 

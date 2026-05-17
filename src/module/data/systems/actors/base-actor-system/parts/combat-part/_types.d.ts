@@ -12,6 +12,8 @@ declare global {
       };
       /** <base> Defense */
       defense: {
+        /** <derived> Armor class (av + 10) */
+        ac: number;
         /** <base> Armor value */
         av: {
           /** <base> Base worn armor value */
@@ -23,8 +25,6 @@ declare global {
           /** <derived> Worn armor value */
           worn: number;
         };
-        /** <derived> Armor class (av + 10) */
-        ac: number;
         /** <derived> Block value of primary blocker */
         bv: number;
         /** <derived> Combat class (ac + bv) */
@@ -34,10 +34,10 @@ declare global {
       initiative: Teriock.System.FormulaString;
       /** <schema> Offense */
       offense: {
-        /** <schema> Style bonus */
-        sb: boolean;
         /** <schema> Piercing type */
         piercing: PiercingModel;
+        /** <schema> Style bonus */
+        sb: boolean;
       };
       /** <schema> Wielding */
       wielding: {

@@ -143,8 +143,8 @@ export default Base => {
       async _onRender(context, options) {
         new DragDrop({
           callbacks: {
-            dragstart: this._onDragStart.bind(this),
             dragover: this._onDragOver.bind(this),
+            dragstart: this._onDragStart.bind(this),
             drop: this._onDrop.bind(this),
           },
           dragSelector: ".draggable",

@@ -14,6 +14,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     hint: "",
     idKey: "uuid",
     imgKey: "img",
+    localize: true,
     multi: true,
     nameKey: "name",
     noDocumentsMessage: _loc("TERIOCK.DIALOGS.SelectDocument.noOptions"),
@@ -25,7 +26,6 @@ export async function selectDocumentsDialog(documents, options = {}) {
     tooltipAsync: false,
     tooltipKey: null,
     tooltipUUID: "uuid",
-    localize: true,
     ...options,
   };
 
@@ -88,12 +88,12 @@ export async function selectDocumentsDialog(documents, options = {}) {
   }
 
   const sheet = new TeriockDocumentSelector(context.documents, {
-    multi: options.multi,
     hint: options.hint,
-    tooltip: options.tooltip,
-    title: options.title,
-    tooltipAsync: options.tooltipAsync,
+    multi: options.multi,
     openable: options.openable,
+    title: options.title,
+    tooltip: options.tooltip,
+    tooltipAsync: options.tooltipAsync,
   });
 
   const selected = await sheet.select();
@@ -120,8 +120,8 @@ export async function selectDocumentDialog(documents, options = {}) {
   }
   const selected = await selectDocumentsDialog(documents, {
     ...options,
-    multi: false,
     checked: options.checked ? [options.checked] : [],
+    multi: false,
   });
   return selected?.[0] ?? null;
 }

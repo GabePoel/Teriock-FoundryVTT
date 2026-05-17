@@ -28,11 +28,6 @@ export default class ChildChangeAutomation extends CritAutomation {
     const changeTypes = TERIOCK.config.change.child.paths[initialKey].types ?? ["override"];
     const initialChangeType = changeTypes[0];
     return Object.assign(super.defineSchema(), {
-      target: new fields.StringField({
-        choices: objectMap(TERIOCK.config.change.child.targets, e => e.label, { localize: true }),
-        initial: initialTarget,
-        required: true,
-      }),
       changeType: new fields.StringField({
         choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, {
           localize: true,
@@ -49,6 +44,11 @@ export default class ChildChangeAutomation extends CritAutomation {
       }),
       priority: new fields.NumberField(),
       qualifier: new FormulaField({ initial: "0" }),
+      target: new fields.StringField({
+        choices: objectMap(TERIOCK.config.change.child.targets, e => e.label, { localize: true }),
+        initial: initialTarget,
+        required: true,
+      }),
       value: new FormulaField({ deterministic: false, initial: "" }),
     });
   }
@@ -105,8 +105,8 @@ export default class ChildChangeAutomation extends CritAutomation {
     for (const [k, v] of pathEntries) {
       if (!groups[v.group]) {
         groups[v.group] = {
-          label: TERIOCK.config.change.child.groups[v.group],
           choices: {},
+          label: TERIOCK.config.change.child.groups[v.group],
         };
       }
       groups[v.group].choices[k] = v.label;

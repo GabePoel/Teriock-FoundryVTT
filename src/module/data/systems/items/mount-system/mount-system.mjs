@@ -34,8 +34,8 @@ export default class MountSystem extends mixClasses(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      mountType: new IdentifierField({ initial: "" }),
       mounted: new fields.BooleanField({ initial: false, required: false }),
+      mountType: new IdentifierField({ initial: "" }),
     });
   }
 
@@ -65,6 +65,10 @@ export default class MountSystem extends mixClasses(
       {
         action: "toggleMountedDoc",
         icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
+        tooltip: this.mounted
+          ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
+          : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
+        visible: this.parent.isOwner,
         onClick: async () => {
           if (this.mounted) {
             await this.unmount();
@@ -72,10 +76,6 @@ export default class MountSystem extends mixClasses(
             await this.mount();
           }
         },
-        tooltip: this.mounted
-          ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
-          : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
-        visible: this.parent.isOwner,
       },
     ];
   }
@@ -136,8 +136,8 @@ export default class MountSystem extends mixClasses(
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      mounted: Number(this.mounted),
       [`type.${toCamelCase(this.mountType)}`]: 1,
+      mounted: Number(this.mounted),
     };
   }
 

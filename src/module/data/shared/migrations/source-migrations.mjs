@@ -1,4 +1,4 @@
-const { hasProperty, setProperty, deleteProperty, getProperty } = foundry.utils;
+const { deleteProperty, getProperty, hasProperty, setProperty } = foundry.utils;
 
 const PACKS = ["properties", "abilities"];
 const PACK_MAP = Object.fromEntries(

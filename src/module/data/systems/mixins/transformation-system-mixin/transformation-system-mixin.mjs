@@ -43,8 +43,8 @@ export default function TransformationSystemMixin(Base) {
         const hasEffect = id => this.actor.effects.has(id);
         return {
           disabledEffects: (this.parent.getFlag("teriock", "disabledEffects") ?? []).filter(hasEffect),
-          disabledItems: (this.parent.getFlag("teriock", "disabledItems") ?? []).filter(hasItem),
           disabledHpDiceItems: (this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []).filter(hasItem),
+          disabledItems: (this.parent.getFlag("teriock", "disabledItems") ?? []).filter(hasItem),
           disabledMpDiceItems: (this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []).filter(hasItem),
         };
       }
@@ -90,9 +90,9 @@ export default function TransformationSystemMixin(Base) {
         });
         this.#batchedOperations.push({
           action: "create",
-          parent: this.actor,
-          documentName: "Item",
           data: itemData,
+          documentName: "Item",
+          parent: this.actor,
         });
       }
 
@@ -165,9 +165,9 @@ export default function TransformationSystemMixin(Base) {
             action: "update",
             documentName: collection.documentName,
             ids: [id],
-            updates: [{ _id: id, ...data }],
             pack: this.actor.pack,
             parent: this.actor,
+            updates: [{ _id: id, ...data }],
           };
           this.#batchedOperations.push(operation);
         }
@@ -193,11 +193,11 @@ export default function TransformationSystemMixin(Base) {
         this.#addBatchToggleDocuments(false);
         if (this.transformation.reset.size) {
           this.#batchedOperations.push({
-            documentName: "Actor",
-            parent: this.actor.parent,
             action: "update",
-            pack: this.actor.pack,
+            documentName: "Actor",
             ids: [this.actor.id],
+            pack: this.actor.pack,
+            parent: this.actor.parent,
             updates: [
               {
                 _id: this.actor.id,
@@ -437,11 +437,11 @@ export default function TransformationSystemMixin(Base) {
         return [
           ...super.getCardContextMenuEntries(doc),
           {
-            label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
+            group: "usage",
             icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
             onClick: this.setPrimaryTransformation.bind(this),
             visible: this.isTransformation && !this.isPrimaryTransformation,
-            group: "usage",
           },
         ];
       }

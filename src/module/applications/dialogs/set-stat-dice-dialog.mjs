@@ -39,17 +39,17 @@ export default async function setStatDiceDialog(pool) {
     content: contentElement,
     modal: true,
     ok: {
+      icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
+      label: _loc("TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm"),
       callback: async (_event, button) => {
         const formulaInput = /** @type {HTMLInputElement} */ button.form.elements.namedItem("formula");
         const disabledInput = /** @type {HTMLInputElement} */ button.form.elements.namedItem("disabled");
         const formula = formulaInput.value;
         const disabled = disabledInput.checked;
         if (formula !== pool.formula || disabled !== pool.disabled) {
-          await pool.update({ formula, disabled });
+          await pool.update({ disabled, formula });
         }
       },
-      icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-      label: _loc("TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm"),
     },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),

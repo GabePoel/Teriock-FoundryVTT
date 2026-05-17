@@ -11,12 +11,12 @@ class RefreshOptions extends DataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      updateDocument: new BooleanField({ initial: true }),
-      deleteChildren: new BooleanField({ initial: false }),
       createChildren: new BooleanField({ initial: true }),
-      updateChildren: new BooleanField({ initial: true }),
+      deleteChildren: new BooleanField({ initial: false }),
       fullOverride: new BooleanField({ initial: false }),
       recursive: new BooleanField({ initial: true }),
+      updateChildren: new BooleanField({ initial: true }),
+      updateDocument: new BooleanField({ initial: true }),
     };
   }
 }

@@ -28,8 +28,8 @@ export default class FluencySheet extends BaseEffectSheet {
     const options = [];
     for (const [fKey, fData] of Object.entries(TERIOCK.config.tradecraft)) {
       const option = {
-        label: fData.name,
         icon: makeIcon(fData.icon, "contextMenu"),
+        label: fData.name,
         onClick: async () => {
           const updateData = {
             system: {
@@ -54,8 +54,8 @@ export default class FluencySheet extends BaseEffectSheet {
     for (const [fKey, fData] of Object.entries(TERIOCK.config.tradecraft)) {
       for (const [tcKey, tcData] of Object.entries(fData.tradecrafts)) {
         const option = {
-          label: tcData.name,
           icon: makeIcon(tcData.icon, "contextMenu"),
+          label: tcData.name,
           onClick: async () => {
             const updateData = {
               system: {

@@ -438,7 +438,7 @@ export default function HierarchyDocumentMixin(Base) {
         // to be deleted separately. This sucks but IDK a better solution.
         this.constructor.deleteDocuments(
           this.allSubs.contents.map(s => s._id),
-          { parent: this.parent, pack: this.compendium?.collection },
+          { pack: this.compendium?.collection, parent: this.parent },
         );
         this.#renderSheets();
       }

@@ -97,8 +97,8 @@ export default class HarmSystem extends mixClasses(
     this.parent.updateSource(
       foundry.utils.mergeObject(
         {
-          text: { content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description") },
           system: { img: getImage("effect-types", ref) },
+          text: { content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description") },
         },
         data,
       ),

@@ -19,9 +19,9 @@ declare global {
     export type Target = "ability" | "Actor" | "armament" | "Item";
 
     export type QualifiedChangeData = EffectChangeData & {
+      phase: Phase;
       qualifier: Teriock.System.FormulaString;
       target: Target;
-      phase: Phase;
     };
   }
 }

@@ -13,13 +13,13 @@ declare global {
     export type QueryName = keyof typeof queries;
 
     export type QueryOptions = {
-      timeout: number;
-      notifyFailure?: boolean;
       failMessage?: string;
       failPrefix?: string;
       failReason?: string;
-      localize?: boolean;
       format?: Record<string, string>;
+      localize?: boolean;
+      notifyFailure?: boolean;
+      timeout: number;
     };
 
     export type CreateDocuments = {
@@ -29,14 +29,14 @@ declare global {
     };
 
     export type UpdateDocuments = {
-      updates: object[];
       documentName: string;
       operation: Partial<Omit<DatabaseUpdateOperation, "updates">>;
+      updates: object[];
     };
 
     export type DeleteDocuments = {
-      ids: string[];
       documentName: string;
+      ids: string[];
       operation: Partial<Omit<DatabaseDeleteOperation, "ids">>;
     };
 
@@ -45,9 +45,9 @@ declare global {
     };
 
     export type FireTrigger = {
-      uuid: UUID<AnyCommonDocument>;
-      trigger: Teriock.System.Trigger;
       options: object;
+      trigger: Teriock.System.Trigger;
+      uuid: UUID<AnyCommonDocument>;
     };
 
     export type IdentifyItem = {
@@ -59,14 +59,14 @@ declare global {
     };
 
     export type CreateHotbarFolder = {
-      name: string;
       id: ID<TeriockUser>;
+      name: string;
     };
 
     export type Update = {
-      uuid: UUID<TeriockActiveEffect> | UUID<TeriockActor> | UUID<TeriockItem>;
       data: object;
       operation?: object;
+      uuid: UUID<TeriockActiveEffect> | UUID<TeriockActor> | UUID<TeriockItem>;
     };
 
     export type MassWrite = {

@@ -18,7 +18,7 @@ const tokenMagic = {
         val1: 0.8,
         val2: 2,
       },
-      time: { active: true, speed: -0.0024, animType: "move" },
+      time: { active: true, animType: "move", speed: -0.0024 },
     },
     blend: 2,
     color: 0xffffff,
@@ -32,21 +32,21 @@ const tokenMagic = {
     anchorX: 0.5,
     anchorY: 0.5,
     animated: {
-      time: { active: true, animType: "move", speed: 0.0085 },
       anchorX: {
         active: false,
-        val1: 0.15,
-        val2: 0.85,
         animType: "syncChaoticOscillation",
         loopDuration: 20000,
+        val1: 0.15,
+        val2: 0.85,
       },
       anchorY: {
         active: false,
-        val1: 0.15,
-        val2: 0.85,
         animType: "syncSinOscillation",
         loopDuration: 20000,
+        val1: 0.15,
+        val2: 0.85,
       },
+      time: { active: true, animType: "move", speed: 0.0085 },
     },
     color: 0xffffff,
     filterId: "teriockConditionCharmed",
@@ -62,8 +62,8 @@ const tokenMagic = {
     animated: {
       color: {
         active: true,
-        loopDuration: 6000,
         animType: "colorOscillation",
+        loopDuration: 6000,
         val1: 0xffffff,
         val2: 0x000000,
       },
@@ -98,7 +98,7 @@ const tokenMagic = {
   },
   frozen: {
     amplitude: 1,
-    animated: { time: { active: true, speed: -0.002, animType: "move" } },
+    animated: { time: { active: true, animType: "move", speed: -0.002 } },
     blend: 5,
     chromatic: false,
     color: 0xacc5c5,
@@ -114,13 +114,13 @@ const tokenMagic = {
     anchorX: 0,
     anchorY: 0,
     animated: {
-      time: { active: true, animType: "move", speed: 0.0012 },
       anchorX: {
         animType: "syncCosOscillation",
         loopDuration: 6000,
         val1: 0.4,
         val2: 0.6,
       },
+      time: { active: true, animType: "move", speed: 0.0012 },
     },
     blend: 9,
     color: 0xffbb00,
@@ -164,17 +164,17 @@ const tokenMagic = {
   },
   missileDodging: {
     animated: {
-      translationY: {
-        animType: "sinOscillation",
-        val1: -0.125,
-        val2: +0.125,
-        loopDuration: 1200,
-      },
       translationX: {
         animType: "cosOscillation",
         loopDuration: 1200,
         val1: -0.035,
         val2: +0.035,
+      },
+      translationY: {
+        animType: "sinOscillation",
+        loopDuration: 1200,
+        val1: -0.125,
+        val2: +0.125,
       },
     },
     filterId: "teriockConditionMissileDodging",

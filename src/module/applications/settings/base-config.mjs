@@ -45,7 +45,7 @@ export default class BaseConfig extends TeriockBaseApplication {
     form: { closeOnSubmit: true, handler: BaseConfig.#onCommitChanges },
     position: { width: 650 },
     tag: "form",
-    window: { contentClasses: ["standard-form", "teriock-settings"] },
+    window: { contentClasses: ["standard-form", "teriock-settings"], resizable: true },
   };
 
   /** @override */
@@ -58,7 +58,7 @@ export default class BaseConfig extends TeriockBaseApplication {
    * Context to display in the settings which this is registered as a menu.
    * @type {{key: string, label: string, hint: string, restricted: boolean}}
    */
-  static SETTINGS_MENU = { key: "", label: "", hint: "", restricted: false };
+  static SETTINGS_MENU = { hint: "", key: "", label: "", restricted: false };
 
   /**
    * Register this settings config as a setting menu.
@@ -108,16 +108,16 @@ export default class BaseConfig extends TeriockBaseApplication {
       throw new Error("Automatic field generation only available for Boolean, Number, or String types");
     }
     const data = {
-      name,
-      field: isDataField ? setting.type : new Field({ required: true, blank: false }),
+      field: isDataField ? setting.type : new Field({ blank: false, required: true }),
       hint: _loc(setting.hint),
       label: _loc(setting.name),
+      name,
       value: game.settings.get("teriock", name),
     };
     if (setting.choices) {
       data.options = Object.entries(setting.choices).map(([value, label]) => ({
-        value,
         label: _loc(label),
+        value,
       }));
     }
     return data;

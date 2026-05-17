@@ -74,18 +74,18 @@ export default Base =>
         this.actor,
         [
           {
-            label: _loc("TERIOCK.MODELS.Piercing.MENU.0"),
             icon: TERIOCK.display.icons.piercing.none,
+            label: _loc("TERIOCK.MODELS.Piercing.MENU.0"),
             value: 0,
           },
           {
-            label: _loc("TERIOCK.MODELS.Piercing.MENU.1"),
             icon: TERIOCK.display.icons.piercing.av0,
+            label: _loc("TERIOCK.MODELS.Piercing.MENU.1"),
             value: 1,
           },
           {
-            label: _loc("TERIOCK.MODELS.Piercing.MENU.2"),
             icon: TERIOCK.display.icons.piercing.ub,
+            label: _loc("TERIOCK.MODELS.Piercing.MENU.2"),
             value: 2,
           },
         ],
@@ -104,13 +104,13 @@ export default Base =>
         this.actor,
         [
           {
-            label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl"),
             icon: TERIOCK.display.icons.document.rank,
+            label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl"),
             value: false,
           },
           {
-            label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br"),
             icon: TERIOCK.display.icons.species.br,
+            label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br"),
             value: true,
           },
         ],

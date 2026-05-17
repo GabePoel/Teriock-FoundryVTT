@@ -2,6 +2,7 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { currencyConfig } from "./currency-config.mjs";
 
 export const transformationConfig = {
+  // no sort
   level: {
     minor: "TERIOCK.EFFECTS.TransformationLevel.minor",
     full: "TERIOCK.EFFECTS.TransformationLevel.full",

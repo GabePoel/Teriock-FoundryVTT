@@ -10,8 +10,8 @@ export default class TrueSightDetectionMode extends InvisiblePerception {
   /** @inheritDoc */
   static getDetectionFilter() {
     return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      outlineColor: [1, 1, 1, 1],
       knockout: true,
+      outlineColor: [1, 1, 1, 1],
     }));
   }
 }

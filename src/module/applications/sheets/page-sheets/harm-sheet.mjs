@@ -31,15 +31,15 @@ export default class HarmSheet extends mixClasses(
 ) {
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],
-    window: { resizable: true },
     form: { closeOnSubmit: false, submitOnChange: true },
     position: { height: 600, width: 560 },
+    window: { resizable: true },
   };
 
   static EDIT_PARTS = {
     all: {
-      template: "teriock/sheets/pages/harm-config",
       scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
+      template: "teriock/sheets/pages/harm-config",
     },
   };
 
@@ -61,12 +61,12 @@ export default class HarmSheet extends mixClasses(
   /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), {
-      TERIOCK,
       canHaveAutomations: true,
       img: this.document.system.img,
       imgPath: "system.img",
       system: this.document.system,
       systemFields: this.document.system.schema.fields,
+      TERIOCK,
       textEnriched: await TeriockTextEditor.enrichHTML(this.document.text.content, { relativeTo: this.document }),
       textField: new TextField({ label: "Description" }),
       type: this.document.type,

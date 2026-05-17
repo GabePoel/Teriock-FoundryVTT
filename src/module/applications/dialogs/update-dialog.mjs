@@ -22,6 +22,9 @@ export default async function updateDialog(doc, paths, title, icon = "file-pen")
     buttons: [
       {
         action: "update",
+        default: true,
+        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
+        label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         callback: async function (_event, button) {
           const namedElements = /** @type {HTMLInputElement[]} */ Array.from(button.form.elements).filter(el =>
             el.hasAttribute("name"),
@@ -31,14 +34,11 @@ export default async function updateDialog(doc, paths, title, icon = "file-pen")
           );
           await doc.update(updateData);
         },
-        default: true,
-        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-        label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
       },
     ],
     content: content.outerHTML,
     position: { width: 500 },
-    window: { title: resolvedTitle, icon: makeIconClass(icon, "title") },
+    window: { icon: makeIconClass(icon, "title"), title: resolvedTitle },
   });
   await dialog.render(true);
 }

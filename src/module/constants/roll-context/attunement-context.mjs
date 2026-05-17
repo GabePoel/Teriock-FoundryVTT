@@ -6,8 +6,8 @@ const attunementContext = {
   ...usableContext,
   attunement: "TYPES.ActiveEffect.attunement",
 
-  tier: "TERIOCK.SYSTEMS.Attunement.FIELDS.tier.label",
   target: "TERIOCK.SYSTEMS.Attunement.FIELDS.target.label",
+  tier: "TERIOCK.SYSTEMS.Attunement.FIELDS.tier.label",
   type: "TERIOCK.SYSTEMS.Attunement.FIELDS.type.label",
 };
 

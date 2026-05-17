@@ -54,8 +54,8 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    */
   #fireTrigger(actor, trigger) {
     actor?.defaultUser?.query("teriock.fireTrigger", {
-      uuid: actor.uuid,
       trigger,
+      uuid: actor.uuid,
     });
   }
 

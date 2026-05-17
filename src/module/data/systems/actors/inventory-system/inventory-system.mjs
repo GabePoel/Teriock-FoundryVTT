@@ -44,42 +44,40 @@ export default class InventorySystem extends BaseActorSystem {
           effects: [
             {
               name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableDown"),
-              type: "consequence",
               system: {
                 automations: {
                   invImmunity00002: {
                     _id: "invImmunity00002",
-                    type: "protection",
-                    relation: "immunities",
                     category: "statuses",
+                    relation: "immunities",
+                    type: "protection",
                     value: "down",
                   },
                 },
               },
+              type: "consequence",
             },
             {
               name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableEncumbered"),
-              type: "consequence",
               system: {
                 automations: {
                   invImmunity00001: {
                     _id: "invImmunity00001",
-                    type: "protection",
-                    relation: "immunities",
                     category: "statuses",
+                    relation: "immunities",
+                    type: "protection",
                     value: "encumbered",
                   },
                 },
               },
+              type: "consequence",
             },
             {
               name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableLighting"),
-              type: "consequence",
               system: {
                 automations: {
                   invChanges000001: {
                     _id: "invChanges000001",
-                    type: "changes",
                     changes: [
                       {
                         key: "token.light.dim",
@@ -100,9 +98,11 @@ export default class InventorySystem extends BaseActorSystem {
                         value: "0",
                       },
                     ],
+                    type: "changes",
                   },
                 },
               },
+              type: "consequence",
             },
           ],
           flags: {

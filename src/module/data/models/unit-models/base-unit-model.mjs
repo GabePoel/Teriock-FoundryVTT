@@ -242,6 +242,9 @@ export default class BaseUnitModel extends EvaluationModel {
       buttons: [
         {
           action: "update",
+          default: true,
+          icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
+          label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
           /**
            * @param {PointerEvent} _event
            * @param {HTMLButtonElement} button
@@ -255,9 +258,6 @@ export default class BaseUnitModel extends EvaluationModel {
             );
             await document.update(updateData);
           },
-          default: true,
-          icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-          label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
         },
       ],
       content: group.outerHTML,

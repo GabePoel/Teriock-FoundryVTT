@@ -83,47 +83,47 @@ export default function StatGiverSystemMixin(Base) {
             group: "control",
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableHpDice"),
+            visible: this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
             onClick: async () => {
               await this.parent.update({
                 "system.statDice.hp.disabled": false,
               });
             },
-            visible: this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
           },
           {
             group: "control",
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableHpDice"),
+            visible: !this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
             onClick: async () => {
               await this.parent.update({ "system.statDice.hp.disabled": true });
             },
-            visible: !this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
           },
           {
             group: "control",
             icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableMpDice"),
+            visible:
+              this.statDice.mp.disabled &&
+              this._canToggleMpDice &&
+              this.parent._checkValidEditorDocument(doc, { self: false }),
             onClick: async () => {
               await this.parent.update({
                 "system.statDice.mp.disabled": false,
               });
             },
-            visible:
-              this.statDice.mp.disabled &&
-              this._canToggleMpDice &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
           },
           {
             group: "control",
             icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableMpDice"),
-            onClick: async () => {
-              await this.parent.update({ "system.statDice.mp.disabled": true });
-            },
             visible:
               !this.statDice.mp.disabled &&
               this._canToggleMpDice &&
               this.parent._checkValidEditorDocument(doc, { self: false }),
+            onClick: async () => {
+              await this.parent.update({ "system.statDice.mp.disabled": true });
+            },
           },
         );
         return entries;

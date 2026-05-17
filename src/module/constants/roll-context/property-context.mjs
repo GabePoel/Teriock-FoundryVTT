@@ -6,9 +6,9 @@ const propertyContext = {
   ...usableContext,
   property: "TYPES.ActiveEffect.property",
 
-  form: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
-  "damage.type": "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label",
   "damage.extra": "TERIOCK.ROLL_CONTEXT.Property.extraDamage",
+  "damage.type": "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label",
+  form: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
 };
 
 export default propertyContext;

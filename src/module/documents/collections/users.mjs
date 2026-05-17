@@ -25,9 +25,9 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
    */
   async queryGM(queryName, queryData, queryOptions = {}) {
     let {
+      failMessage = "",
       failPrefix = _loc("TERIOCK.SYSTEMS.User.QUERY.failPrefix"),
       failReason = _loc("TERIOCK.SYSTEMS.User.QUERY.failReason"),
-      failMessage = "",
     } = queryOptions;
     const { notifyFailure = true } = queryOptions;
     if (queryOptions.localize) {

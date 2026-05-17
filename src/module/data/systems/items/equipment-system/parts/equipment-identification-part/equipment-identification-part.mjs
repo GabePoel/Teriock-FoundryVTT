@@ -53,14 +53,14 @@ export default Base => {
       get displayFields() {
         return [
           {
+            classes: "faded-display-field",
             path: "system.identification.notes",
             visible: game.user.isGM && !this.identification.identified,
-            classes: "faded-display-field",
           },
           {
+            classes: "faded-display-field",
             path: "system.identification.flaws",
             visible: game.user.isGM && !this.identification.identified,
-            classes: "faded-display-field",
           },
           ...super.displayFields,
         ];

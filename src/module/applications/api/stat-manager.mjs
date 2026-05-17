@@ -35,7 +35,7 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
    * @param {object} [applicationOptions]
    */
   constructor(actor, options, applicationOptions = {}) {
-    const { forHarm = false, consumeStatDice = true, title = "" } = options;
+    const { consumeStatDice = true, forHarm = false, title = "" } = options;
     if (title.length > 0) {
       applicationOptions.title = title;
     }

@@ -1,12 +1,12 @@
 export const thresholdCommand = {
+  alt: "advantage",
   flags: {
     a: "advantage",
-    d: "disadvantage",
     adv: "advantage",
-    dis: "disadvantage",
+    d: "disadvantage",
     dc: "threshold",
+    dis: "disadvantage",
   },
-  alt: "advantage",
   shift: "disadvantage",
 };
 

@@ -192,11 +192,11 @@ export default class PseudoDocument extends EmbeddedDataModel {
       foundry.utils.mergeObject(
         {
           content,
-          yes: { callback: () => this.delete(operation) },
           window: {
             icon: "fa-solid fa-trash",
             title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name ?? this.label}`,
           },
+          yes: { callback: () => this.delete(operation) },
         },
         options,
       ),

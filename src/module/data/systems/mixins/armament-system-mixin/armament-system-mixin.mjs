@@ -54,15 +54,15 @@ export default function ArmamentSystemMixin(Base) {
             }),
           ),
           fightingStyle: new fields.StringField({
+            choices: TERIOCK.reference.weaponFightingStyles,
             initial: null,
             nullable: true,
-            choices: TERIOCK.reference.weaponFightingStyles,
           }),
           impacts: new fields.SetField(
             new fields.StringField({
               choices: objectMap(TERIOCK.config.impact, i => i.take, {
-                filter: c => !c?.hidden,
                 localize: true,
+                filter: c => !c?.hidden,
               }),
             }),
             { initial: ["damage"] },
@@ -70,7 +70,7 @@ export default function ArmamentSystemMixin(Base) {
           notes: new TextField({ initial: "" }),
           range: new MultiChangeField(
             {
-              long: new EvaluationField({ model: RangeModel, label: "Range" }),
+              long: new EvaluationField({ label: "Range", model: RangeModel }),
               melee: new fields.BooleanField({ initial: true }),
               ranged: new fields.BooleanField({ initial: false }),
               short: new EvaluationField({ model: RangeModel }),
@@ -303,11 +303,11 @@ export default function ArmamentSystemMixin(Base) {
       getCardContextMenuEntries(doc) {
         const entries = [
           {
-            label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
+            group: "usage",
             icon: makeIcon(TERIOCK.display.icons.equipment.twoHanded, "contextMenu"),
+            label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
             onClick: this.use.bind(this, { twoHanded: true }),
             visible: this.parent.isOwner && this.hasTwoHandedAttack,
-            group: "usage",
           },
         ];
         return [...entries, ...super.getCardContextMenuEntries(doc)];
@@ -317,18 +317,18 @@ export default function ArmamentSystemMixin(Base) {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
+          [`style.${this.fightingStyle}`]: 1,
           armament: 1,
+          av: this.av.value,
+          bv: this.bv.value,
           dmg: this.damage.base,
           "dmg.2h": this.damage.twoHanded,
           range: this.range.long.formula,
-          "range.short": this.range.short.formula,
           "range.melee": Number(this.range.melee),
           "range.ranged": Number(this.range.ranged),
-          av: this.av.value,
-          bv: this.bv.value,
-          style: this.fightingStyle,
-          [`style.${this.fightingStyle}`]: 1,
+          "range.short": this.range.short.formula,
           spellTurning: Number(this.spellTurning),
+          style: this.fightingStyle,
           vitals: Number(this.vitals),
         });
         for (const type of this.damage.types) {

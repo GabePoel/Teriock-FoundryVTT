@@ -70,8 +70,8 @@ export default class UseDocumentsAutomation extends mixClasses(
     const icon = TERIOCK.config.document[doc.type]?.icon;
     return new UseExternalActivation({
       display: {
-        label: doc.name,
         icon: TERIOCK.config.document[doc.type]?.icon,
+        label: doc.name,
       },
       options: {
         competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
@@ -141,11 +141,11 @@ export default class UseDocumentsAutomation extends mixClasses(
     const actor = scope.execution?.actor ?? this.actor;
     await this.use({
       actor,
-      edge: scope.execution?.edge,
-      event: scope.execution?.options?.event,
       competence: this.overrideCompetence
         ? this.competence.raw
         : (scope.execution?.competence?.raw ?? this.document.system.competence.raw),
+      edge: scope.execution?.edge,
+      event: scope.execution?.options?.event,
     });
   }
 

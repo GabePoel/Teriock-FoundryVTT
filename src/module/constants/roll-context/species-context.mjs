@@ -6,16 +6,16 @@ const speciesContext = {
   ...usableContext,
   species: "TYPES.Item.species",
 
-  transformation: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
-  "transformation.primary": "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
-  "transformation.level": "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
+  adult: "TERIOCK.SYSTEMS.Species.FIELDS.adult.label",
+  br: "TERIOCK.SYSTEMS.Species.FIELDS.br.label",
+  lifespan: "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.label",
   size: "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label",
+  "size.enabled": "TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label",
   "size.max": "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label",
   "size.min": "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label",
-  "size.enabled": "TERIOCK.SYSTEMS.Species.FIELDS.size.enabled.label",
-  adult: "TERIOCK.SYSTEMS.Species.FIELDS.adult.label",
-  lifespan: "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.label",
-  br: "TERIOCK.SYSTEMS.Species.FIELDS.br.label",
+  transformation: "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
+  "transformation.level": "TERIOCK.SYSTEMS.Species.FIELDS.transformationLevel.label",
+  "transformation.primary": "TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation",
 };
 
 export default speciesContext;

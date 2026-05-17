@@ -70,7 +70,7 @@ export default function AccessDataMixin(Base) {
        */
       _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
         return this.schema.getField(path).toFormGroup(
-          { rootId: foundry.utils.randomID(), localize: true, ...groupConfig },
+          { localize: true, rootId: foundry.utils.randomID(), ...groupConfig },
           {
             context: this._inputContextKey,
             name: `${this.localPath}.${path}`,

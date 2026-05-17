@@ -21,8 +21,8 @@ export function speciesTransformationFields() {
     }),
     ring: new fields.BooleanField({
       hint: "TERIOCK.SCHEMA.Transformation.ring.hint",
-      label: "TERIOCK.SCHEMA.Transformation.ring.label",
       initial: false,
+      label: "TERIOCK.SCHEMA.Transformation.ring.label",
     }),
   };
 }

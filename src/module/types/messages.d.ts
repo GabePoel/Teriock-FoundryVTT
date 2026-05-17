@@ -46,12 +46,12 @@ declare global {
 
     /** Pieces of a group of associations within a chat message. */
     export type MessageAssociation = {
-      /** The title of the message association. */
-      title: string;
-      /** Icon for this association. */
-      icon?: string;
       /** Documents this message is associated with. */
       cards: Teriock.Messages.MessageAssociationCard[];
+      /** Icon for this association. */
+      icon?: string;
+      /** The title of the message association. */
+      title: string;
     };
 
     /** Represents the individual rules-parts that make up a message. */

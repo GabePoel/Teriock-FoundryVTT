@@ -18,10 +18,10 @@ export default class EvaluationModel extends EmbeddedDataModel {
 
   constructor(
     data = {},
-    { floor = true, ceil = false, min = 0, max = Infinity, blank = 0, interval = undefined, ...options } = {},
+    { blank = 0, ceil = false, floor = true, interval = undefined, max = Infinity, min = 0, ...options } = {},
   ) {
     super(data, { ...options });
-    this._derivationOptions = { floor, ceil, min, max, blank, interval };
+    this._derivationOptions = { blank, ceil, floor, interval, max, min };
   }
 
   /**

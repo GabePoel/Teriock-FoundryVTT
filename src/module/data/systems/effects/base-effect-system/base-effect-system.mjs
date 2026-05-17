@@ -1,7 +1,7 @@
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
-const { fields, ActiveEffectTypeDataModel } = foundry.data;
+const { ActiveEffectTypeDataModel, fields } = foundry.data;
 
 /**
  * Base effect data model.

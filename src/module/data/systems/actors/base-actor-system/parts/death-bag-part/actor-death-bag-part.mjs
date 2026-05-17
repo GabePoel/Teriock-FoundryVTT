@@ -46,10 +46,10 @@ export default Base => {
       getRollData() {
         const rollData = super.getRollData();
         Object.assign(rollData, {
+          "db.pull": this.deathBag.pull,
           "db.stones.black": this.deathBag.stones.black,
           "db.stones.red": this.deathBag.stones.red,
           "db.stones.white": this.deathBag.stones.white,
-          "db.pull": this.deathBag.pull,
         });
         return rollData;
       }

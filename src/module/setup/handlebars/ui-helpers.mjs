@@ -27,7 +27,7 @@ function makeIconHelper(icon, ...styles) {
  * @returns {Handlebars.SafeString}
  */
 function threeToggle(options) {
-  const { name, disabled, id } = options.hash;
+  const { disabled, id, name } = options.hash;
   let value;
   if (name && typeof name === "string") {
     value = foundry.utils.getProperty(options.data.root, name);

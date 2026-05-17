@@ -26,12 +26,12 @@ export type AutomationTransformationConfig = SpeciesTransformationConfig & {
 };
 
 export type EffectTransformationConfig = AutomationTransformationConfig & {
+  /** <schema> Competence to override with */
+  competence: CompetenceModel;
   /** <schema> Whether transformation is enabled */
   enabled: boolean;
   /** <schema> UUID of specific species to transform into */
   uuids: UUID<TeriockSpecies>[];
-  /** <schema> Competence to override with */
-  competence: CompetenceModel;
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */
@@ -59,15 +59,15 @@ export type CombatExpirationTiming = {
 
 /** <schema> Who is the individual triggers the combat expiration? */
 export type CombatExpirationIndividual = {
-  /** <schema> Relationship to the individual that triggers expirations. */
-  type: CombatExpirationSourceType;
   /** <schema> The specific {@link TeriockActor} that triggers expirations. */
   source?: UUID<TeriockActor>;
+  /** <schema> Relationship to the individual that triggers expirations. */
+  type: CombatExpirationSourceType;
 };
 
 /** Data that defines a combat expiration */
 export type CombatExpiration = {
-  who: CombatExpirationIndividual;
   what: CombatExpirationMethod;
   when: CombatExpirationTiming;
+  who: CombatExpirationIndividual;
 };

@@ -67,22 +67,22 @@ export async function selectDialog(choices, options = {}) {
 
   if (!other) {
     return await TeriockDialog.prompt({
+      content: selectContentHtml,
+      modal: true,
+      ok: {
+        callback: (_event, button) => button.form.elements.namedItem("selected").value,
+      },
       window: {
         icon: makeIconClass(icon, "title"),
         title,
-      },
-      modal: true,
-      content: selectContentHtml,
-      ok: {
-        callback: (_event, button) => button.form.elements.namedItem("selected").value,
       },
     });
   }
 
   const otherContentHtml = document.createElement("div");
   const otherField = new fields.StringField({
-    label,
     hint,
+    label,
   });
   otherContentHtml.append(
     otherField.toFormGroup({ rootId: foundry.utils.randomID(), units: "other" }, { name: "other" }),
@@ -132,8 +132,8 @@ export async function selectDialog(choices, options = {}) {
  */
 export async function selectEquipmentClassDialog() {
   return await selectDialog(TERIOCK.reference.equipmentClasses, {
-    label: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
     hint: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
+    label: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
     title: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
   });
 }
@@ -144,8 +144,8 @@ export async function selectEquipmentClassDialog() {
  */
 export async function selectWeaponClassDialog() {
   return await selectDialog(TERIOCK.reference.weaponClasses, {
-    label: _loc("TERIOCK.DIALOGS.Select.WeaponClass.label"),
     hint: _loc("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
+    label: _loc("TERIOCK.DIALOGS.Select.WeaponClass.label"),
     title: _loc("TERIOCK.DIALOGS.Select.WeaponClass.title"),
   });
 }
@@ -156,8 +156,8 @@ export async function selectWeaponClassDialog() {
  */
 export async function selectConditionDialog() {
   return await selectDialog(TERIOCK.reference.conditions, {
-    label: _loc("TERIOCK.DIALOGS.Select.Condition.label"),
     hint: _loc("TERIOCK.DIALOGS.Select.Condition.hint"),
+    label: _loc("TERIOCK.DIALOGS.Select.Condition.label"),
     title: _loc("TERIOCK.DIALOGS.Select.Condition.title"),
   });
 }
@@ -170,9 +170,9 @@ export async function selectPropertyDialog() {
   return await resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.properties), {
       hint: _loc("TERIOCK.DIALOGS.Select.Property.hint"),
+      openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Property.title"),
       tooltipAsync: true,
-      openable: true,
     }),
   );
 }
@@ -190,10 +190,10 @@ async function _tradecraftChoices(tradecrafts) {
   return Promise.all(
     tradecraftList.map(async tc => {
       return {
-        name: TERIOCK.reference.tradecrafts[tc],
-        uuid: tc,
         img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+        name: TERIOCK.reference.tradecrafts[tc],
         tooltip: await TeriockTextEditor.makeTooltip(await tradecraftPanel(tc)),
+        uuid: tc,
       };
     }),
   );
@@ -224,9 +224,9 @@ export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}
   const chosen = await selectDocumentsDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
     multi,
+    openable: true,
     title: _loc("TERIOCK.DIALOGS.Select.Tradecraft.title"),
     tooltipKey: "tooltip",
-    openable: true,
   });
   if (!chosen) {
     return [];
@@ -242,9 +242,9 @@ export async function selectAbilityDialog() {
   return await resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.abilities), {
       hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
+      openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
       tooltipAsync: true,
-      openable: true,
     }),
   );
 }
@@ -259,18 +259,18 @@ export async function selectCompendiumsDialog(selected = true) {
     .filter(p => !p.locked)
     .map(p => {
       return {
+        img: p.banner || "icons/svg/book.svg",
         name: _loc(p.title),
         uuid: p.collection,
-        img: p.banner || "icons/svg/book.svg",
       };
     });
   packDocs.sort((a, b) => a.name.localeCompare(b.name));
   const chosen = await tm.dialogs.selectDocumentsDialog(packDocs, {
-    tooltip: false,
-    tooltipAsync: false,
+    checked: packDocs.map(p => p.uuid && selected),
     hint: _loc("TERIOCK.DIALOGS.Select.Compendiums.hint"),
     title: _loc("TERIOCK.DIALOGS.Select.Compendiums.title"),
-    checked: packDocs.map(p => p.uuid && selected),
+    tooltip: false,
+    tooltipAsync: false,
   });
   return chosen.map(c => game.packs.get(c.uuid));
 }
@@ -283,9 +283,9 @@ export async function selectEquipmentTypeDialog() {
   return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.equipment), {
       hint: _loc("TERIOCK.DIALOGS.Select.EquipmentType.hint"),
+      openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.EquipmentType.title"),
       tooltipAsync: true,
-      openable: true,
     }),
   );
 }
@@ -298,9 +298,9 @@ export async function selectSpeciesDialog() {
   return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.species), {
       hint: _loc("TERIOCK.DIALOGS.Select.Species.hint"),
+      openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Species.title"),
       tooltipAsync: true,
-      openable: true,
     }),
   );
 }
@@ -313,9 +313,9 @@ export async function selectBodyPartDialog() {
   return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.bodyParts), {
       hint: _loc("TERIOCK.DIALOGS.Select.BodyPart.hint"),
+      openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.BodyPart.title"),
       tooltipAsync: true,
-      openable: true,
     }),
   );
 }
@@ -332,10 +332,10 @@ export async function selectClassDialog() {
       ...Object.keys(TERIOCK.config.rank.warrior.classes),
     ].map(async c => {
       return {
-        name: TERIOCK.reference.classes[c],
-        uuid: c,
         img: getImage("classes", TERIOCK.index.classes[c]),
+        name: TERIOCK.reference.classes[c],
         tooltip: await TeriockTextEditor.makeTooltip(await classPanel(c)),
+        uuid: c,
       };
     }),
   );
@@ -357,8 +357,8 @@ export async function selectClassDialog() {
 async function noSup(pack) {
   if (!pack.indexed) {
     ui.notifications.info("TERIOCK.DIALOGS.NewDocument.loading", {
-      localize: true,
       format: { name: _loc(pack.title) },
+      localize: true,
     });
   }
   const index = await pack.getIndex({ fields: "system._sup" });

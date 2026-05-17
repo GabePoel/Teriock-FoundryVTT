@@ -83,7 +83,7 @@ export default class SummonActivation extends BaseActivation {
         name: _loc("TERIOCK.ACTIVATIONS.Summon.FOLDER"),
         type: "Actor",
       },
-      { keepId: true, asGM: true },
+      { asGM: true, keepId: true },
     );
   }
 
@@ -151,8 +151,8 @@ export default class SummonActivation extends BaseActivation {
       if (n.state === "packed") {
         const data = foundry.utils.mergeObject(
           game.actors.fromCompendium(n.actor, {
-            clearOwnership: true,
             clearFolder: true,
+            clearOwnership: true,
           }),
           {
             flags: { teriock: { summonFor: n.actor.uuid } },
@@ -178,8 +178,8 @@ export default class SummonActivation extends BaseActivation {
     const tokenDocuments = await Promise.all(actors.map(a => a.getTokenDocument()));
     const tokenData = tokenDocuments.map(t =>
       foundry.utils.mergeObject(t?.toObject(), {
-        ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
         flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
+        ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
       }),
     );
     return await canvas.tokens.placeTokens(tokenData, {

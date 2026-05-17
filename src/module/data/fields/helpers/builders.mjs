@@ -9,12 +9,12 @@ const {
   BooleanField,
   DocumentIdField,
   DocumentUUIDField,
+  FilePathField,
+  JSONField,
   NumberField,
   SchemaField,
   SetField,
   StringField,
-  FilePathField,
-  JSONField,
 } = foundry.data.fields;
 
 /**
@@ -57,8 +57,8 @@ export function combatExpirationMethodField() {
     type: new StringField({
       choices: localizeChoices({
         forced: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.forced",
-        rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.rolled",
         none: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.none",
+        rolled: "TERIOCK.SCHEMA.CombatExpiration.what.type.choices.rolled",
       }),
       hint: _loc("TERIOCK.SCHEMA.CombatExpiration.what.type.hint"),
       initial: "none",
@@ -169,7 +169,7 @@ export function associationsField() {
         }),
         { initial: [], required: false },
       ),
-      icon: new StringField({ nullable: true, required: false, initial: null }),
+      icon: new StringField({ initial: null, nullable: true, required: false }),
       title: new StringField({ initial: "Associations", required: false }),
     }),
     { initial: [], required: false },
@@ -183,8 +183,8 @@ export function associationsField() {
 export function blocksField() {
   return new ArrayField(
     new SchemaField({
-      elements: new StringField({ nullable: true }),
       classes: new StringField({ initial: "" }),
+      elements: new StringField({ nullable: true }),
       italic: new BooleanField({ initial: false, required: false }),
       special: new StringField({ nullable: true }),
       text: new StringField({ blank: true, nullable: true }),
@@ -229,7 +229,7 @@ function nullString() {
  * @returns {JSONField}
  */
 export function defaultJSONField() {
-  return new JSONField({ blank: true, nullable: true, initial: "{}" });
+  return new JSONField({ blank: true, initial: "{}", nullable: true });
 }
 
 /**
@@ -267,14 +267,14 @@ export function panelsField() {
  * @returns {StringField}
  */
 export function blockSizeField(options = {}) {
-  const { initial = "medium", child = "TERIOCK.SCHEMA.BlockSize.default" } = options;
+  const { child = "TERIOCK.SCHEMA.BlockSize.default", initial = "medium" } = options;
   return new StringField({
-    initial,
     choices: TERIOCK.config.display.sizes,
-    label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
     hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", {
       name: _loc(child).toLocaleLowerCase(),
     }),
+    initial,
+    label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
   });
 }
 
@@ -286,13 +286,13 @@ export function blockSizeField(options = {}) {
  * @returns {BooleanField}
  */
 export function blockGaplessField(options = {}) {
-  const { initial = false, child = "TERIOCK.SCHEMA.BlackGapless.default" } = options;
+  const { child = "TERIOCK.SCHEMA.BlackGapless.default", initial = false } = options;
   return new BooleanField({
-    initial,
-    label: _loc("TERIOCK.SCHEMA.BlackGapless.label", { name: _loc(child) }),
     hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", {
       name: _loc(child).toLocaleLowerCase(),
     }),
+    initial,
+    label: _loc("TERIOCK.SCHEMA.BlackGapless.label", { name: _loc(child) }),
   });
 }
 
@@ -323,7 +323,7 @@ export function competenceField() {
  * @param {boolean} [options.nullable]
  * @returns {StringField}
  */
-export function attributeField(options = { unp: false, nullable: true }) {
+export function attributeField(options = { nullable: true, unp: false }) {
   return new StringField({
     choices: options.unp ? TERIOCK.reference.attributes : TERIOCK.reference.statAttributes,
     hint: _loc("TERIOCK.SCHEMA.Attribute.hint"),
@@ -382,8 +382,8 @@ export function movementActionField(options = {}) {
  */
 export function rollableFormulaField(options = {}) {
   return new FormulaField({
-    initial: "0",
     deterministic: false,
+    initial: "0",
     nullable: false,
     ...options,
   });

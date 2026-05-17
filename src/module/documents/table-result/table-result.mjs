@@ -82,7 +82,7 @@ export default class TeriockTableResult extends mixClasses(
       const icon = TERIOCK.config.document[doc.type]?.icon;
       activations.push(
         new UseExternalActivation({
-          display: { label, icon },
+          display: { icon, label },
           options: { icon, label, uuid: this.documentUuid },
         }),
       );
@@ -110,10 +110,10 @@ export default class TeriockTableResult extends mixClasses(
   getCardContextMenuEntries(doc) {
     return [
       {
-        onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
-        visible: () => this.documentUuid,
         icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
         label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
+        onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
+        visible: () => this.documentUuid,
       },
       ...super.getCardContextMenuEntries(doc),
     ];
@@ -127,12 +127,12 @@ export default class TeriockTableResult extends mixClasses(
     parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");
     parts.image = this.icon;
     parts.blocks.push({
-      title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       text: this.description,
+      title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
     });
     parts.bars.push({
-      label: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.resultType"),
       icon: TERIOCK.display.icons.ui.info,
+      label: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.resultType"),
       wrappers: [this.type],
     });
     if (this.documentUuid) {
