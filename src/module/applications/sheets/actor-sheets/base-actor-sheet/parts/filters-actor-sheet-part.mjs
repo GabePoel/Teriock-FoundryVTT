@@ -1,6 +1,5 @@
 import { toCamelCase } from "../../../../../helpers/string.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

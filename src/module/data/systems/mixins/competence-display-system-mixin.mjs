@@ -2,7 +2,6 @@
  * @param {typeof ChildSystem} Base
  */
 export default function CompetenceDisplaySystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}

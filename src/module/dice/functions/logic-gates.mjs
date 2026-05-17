@@ -1,5 +1,3 @@
-//noinspection EqualityComparisonWithCoercionJS,JSUnusedGlobalSymbols
-
 const logicGates = {
   and: (...args) => (args.every(Boolean) ? args.at(-1) : 0),
   if: (...args) => (args[0] ? args[1] : args[2] || 0),

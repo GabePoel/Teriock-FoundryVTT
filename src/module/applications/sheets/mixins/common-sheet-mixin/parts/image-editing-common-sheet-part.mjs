@@ -24,7 +24,6 @@ export default Base => {
         event.stopPropagation();
         const attr = target.dataset.edit;
         const current = foundry.utils.getProperty(this.document, attr);
-        //noinspection JSUnresolvedReference
         const defaultImg = this.document.constructor.getDefaultArtwork?.(this.document.toObject())?.img;
         const options = {
           current,

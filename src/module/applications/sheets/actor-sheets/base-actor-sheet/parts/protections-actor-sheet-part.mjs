@@ -1,8 +1,7 @@
 import { protectionConfig } from "../../../../../constants/config/protection-config.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
-import { toCamelCase, toId } from "../../../../../helpers/string.mjs"; //noinspection JSClosureCompilerSyntax
+import { toCamelCase, toId } from "../../../../../helpers/string.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

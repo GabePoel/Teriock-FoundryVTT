@@ -2,7 +2,6 @@ import { documentConfig } from "../../../../../constants/config/document-config.
 import { icons } from "../../../../../constants/display/icons.mjs";
 import TeriockTextEditor from "../../../../ux/text-editor.mjs";
 
-//noinspection JSClosureCompilerSyntax,JSUnresolvedReference,JSUnusedGlobalSymbols
 /**
  * @param {typeof BaseActorSheet} Base
  */

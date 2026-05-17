@@ -1,6 +1,5 @@
 import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

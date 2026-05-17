@@ -1,5 +1,3 @@
-//noinspection JSValidateJSDoc
-
 import { icons } from "../../constants/display/icons.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
@@ -7,7 +5,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { TokenDocument } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock TokenDocument implementation.
  * @implements {Teriock.Documents.TokenDocumentInterface}

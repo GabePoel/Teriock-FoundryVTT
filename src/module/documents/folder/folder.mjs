@@ -3,7 +3,6 @@ import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Folder } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * The Teriock Folder implementation.
  * @implements {Teriock.Documents.FolderInterface}

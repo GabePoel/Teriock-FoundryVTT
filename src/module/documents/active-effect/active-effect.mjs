@@ -4,7 +4,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { ActiveEffect } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * The Teriock ActiveEffect implementation.
  * @extends {Teriock.Documents.ActiveEffectInterface}

@@ -10,7 +10,6 @@ import * as mixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @extends {BaseAutomation}
  * @property {Teriock.Keys.Impact} impact

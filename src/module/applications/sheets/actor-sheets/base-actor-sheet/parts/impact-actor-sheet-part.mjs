@@ -3,7 +3,6 @@ import { TeriockDialog } from "../../../../api/_module.mjs";
 
 const { fields } = foundry.data;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

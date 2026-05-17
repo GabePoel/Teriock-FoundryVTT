@@ -1,5 +1,3 @@
-//noinspection EqualityComparisonWithCoercionJS,JSUnusedGlobalSymbols
-
 /**
  * Map an integer to a polyhedral die.
  * @param {number} n

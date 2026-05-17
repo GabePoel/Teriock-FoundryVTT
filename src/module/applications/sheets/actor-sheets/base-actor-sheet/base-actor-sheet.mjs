@@ -9,7 +9,6 @@ import * as parts from "./parts/_module.mjs";
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Base actor sheet.
  * @extends {ActorSheetV2}

@@ -7,7 +7,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * The Teriock Actor implementation.
  * @implements {Teriock.Documents.ActorInterface}

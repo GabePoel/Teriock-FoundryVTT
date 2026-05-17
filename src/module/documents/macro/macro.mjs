@@ -5,7 +5,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * The Teriock Macro implementation.
  * @implements {Teriock.Documents.MacroInterface}

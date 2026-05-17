@@ -1,5 +1,3 @@
-//noinspection RegExpRedundantEscape
-
 import { wikiConfig } from "../../constants/config/wiki-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
 import {

@@ -3,7 +3,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { Item } = foundry.documents;
 
-//noinspection JSUnresolvedReference,JSClosureCompilerSyntax,JSValidateJSDoc
 /**
  * The Teriock Item implementation.
  * @implements {Teriock.Documents.ItemInterface}

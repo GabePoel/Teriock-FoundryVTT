@@ -1,6 +1,5 @@
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Creature-specific actor data model.
  *

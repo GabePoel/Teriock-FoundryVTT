@@ -2,7 +2,6 @@
  * @param {typeof TeriockDocumentSheet} Base
  */
 export default Base => {
-  //noinspection JSAccessibilityCheck,JSClosureCompilerSyntax
   return (
     /**
      * @extends {TeriockDocumentSheet}

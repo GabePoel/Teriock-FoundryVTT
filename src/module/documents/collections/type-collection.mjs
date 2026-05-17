@@ -1,6 +1,5 @@
 const { Collection } = foundry.utils;
 
-//noinspection JSClosureCompilerSyntax,JSUnresolvedReference
 /**
  * @inheritDoc
  * @template K

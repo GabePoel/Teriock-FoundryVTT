@@ -3,7 +3,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { RegionDocument } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @extends {RegionDocument}
  * @extends {ClientDocument}

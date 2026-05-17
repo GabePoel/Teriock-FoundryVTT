@@ -2,7 +2,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import BaseActorSheet from "./base-actor-sheet.mjs";
 import * as parts from "./parts/_module.mjs";
 
-//noinspection JSUnresolvedReference,JSClosureCompilerSyntax
 /**
  * Playable actor sheet.
  * @extends {BaseActorSheet}

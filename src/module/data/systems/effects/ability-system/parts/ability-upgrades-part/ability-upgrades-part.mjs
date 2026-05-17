@@ -40,9 +40,7 @@ export default Base => {
 
       /** @inheritDoc */
       static migrateData(source, options, state) {
-        //noinspection JSUnresolvedReference
         if (source.improvements) {
-          //noinspection JSUnresolvedReference
           source.upgrades = {
             competence: {
               attribute: source.improvements.featSaveImprovement.attribute,

@@ -5,7 +5,6 @@ import { bindCommonActions } from "../_module.mjs";
  * @param {typeof ApplicationV2} Base
  */
 export default function BaseApplicationMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   /**
    * @extends {ApplicationV2}
    * @mixin

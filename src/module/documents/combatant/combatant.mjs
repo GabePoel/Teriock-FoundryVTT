@@ -4,7 +4,6 @@ import { BaseDocumentMixin, EmbedCardDocumentMixin } from "../mixins/_module.mjs
 
 const { Combatant } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * The Teriock Combatant implementation.
  * @implements {Teriock.Documents.CombatantInterface}

@@ -3,7 +3,6 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Actors } = foundry.documents.collections;
 
-//noinspection JSUnusedGlobalSymbols,JSClosureCompilerSyntax,JSValidateJSDoc
 /**
  * @extends {Actors}
  * @extends {WorldCollection<TeriockActor>}

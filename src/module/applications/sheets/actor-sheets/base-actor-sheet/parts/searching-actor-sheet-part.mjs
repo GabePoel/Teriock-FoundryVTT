@@ -1,6 +1,5 @@
 const { SearchFilter } = foundry.applications.ux;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

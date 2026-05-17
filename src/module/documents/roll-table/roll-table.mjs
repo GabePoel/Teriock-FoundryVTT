@@ -5,7 +5,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { RollTable } = foundry.documents;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * The Teriock RollTable implementation.
  * @extends {RollTable}

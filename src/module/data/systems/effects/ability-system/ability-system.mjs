@@ -8,7 +8,6 @@ import * as mixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Ability-specific effect data model.
  *

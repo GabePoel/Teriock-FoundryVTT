@@ -24,7 +24,6 @@ export function createDialogFieldset(legend, description, name, max = Infinity) 
     </fieldset>`;
 }
 
-//noinspection JSUnusedGlobalSymbols
 /**
  * Unpack the consequence of the "apply effect" button.
  * @param {AbilityExecution} execution
@@ -39,7 +38,6 @@ export function unpackEffectButton(execution, options = {}) {
   return null;
 }
 
-//noinspection JSUnusedGlobalSymbols
 /**
  * Pack the consequence of the "apply effect" button.
  * @param {AbilityExecution} execution

@@ -3,7 +3,6 @@ import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { ChatMessage } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock ChatMessage implementation.
  * @implements {Teriock.Documents.ChatMessageInterface}

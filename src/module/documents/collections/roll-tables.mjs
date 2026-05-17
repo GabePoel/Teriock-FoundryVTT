@@ -2,7 +2,6 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { RollTables } = foundry.documents.collections;
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @implements {TypeCollection<TeriockRollTable, TeriockRollTable>}
  * @implements {DocumentCollection<TeriockRollTable>}

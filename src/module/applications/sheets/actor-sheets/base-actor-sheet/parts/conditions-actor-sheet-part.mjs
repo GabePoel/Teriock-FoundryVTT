@@ -1,7 +1,6 @@
 import { conditionSort } from "../../../../../helpers/sort.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

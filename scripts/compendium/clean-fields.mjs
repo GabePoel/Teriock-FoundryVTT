@@ -1,5 +1,3 @@
-//noinspection JSUnresolvedReference
-
 /**
  * Clean excess terms from a document.
  * @param {AnyCommonDocument} doc

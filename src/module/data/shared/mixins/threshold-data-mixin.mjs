@@ -4,7 +4,6 @@ import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
  * @param {typeof UsableData} Base
  */
 export default function ThresholdDataMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}

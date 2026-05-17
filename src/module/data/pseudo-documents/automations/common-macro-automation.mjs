@@ -1,7 +1,6 @@
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @extends {BaseAutomation}
  * @mixes MacroAutomation

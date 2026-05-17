@@ -1,6 +1,5 @@
 import { ThresholdRoll } from "../../../../../dice/rolls/_module.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

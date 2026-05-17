@@ -2,7 +2,6 @@
  * @param {typeof WorldCollection} Base
  */
 export default function BaseWorldCollectionMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @template TeriockDocument

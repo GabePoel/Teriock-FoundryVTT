@@ -1,6 +1,5 @@
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

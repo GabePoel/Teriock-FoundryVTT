@@ -5,7 +5,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock User implementation.
  * @extends {User}

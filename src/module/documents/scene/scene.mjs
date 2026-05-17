@@ -2,7 +2,6 @@ import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { Scene } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock Scene implementation.
  * @implements {Teriock.Documents.SceneInterface}

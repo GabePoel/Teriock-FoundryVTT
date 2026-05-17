@@ -5,7 +5,6 @@ import { openWikiPage } from "../../../helpers/wiki.mjs";
  * @param {typeof ChildSystem} Base
  */
 export default function WikiSystemMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   return (
     /**
      * @extends {ChildSystem}

@@ -5,7 +5,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock JournalEntryPage implementation.
  * @implements {Teriock.Documents.JournalEntryPageInterface}

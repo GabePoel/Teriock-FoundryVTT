@@ -4,7 +4,6 @@ import { updateDialog } from "../../../../dialogs/_module.mjs";
  * @param {typeof TeriockDocumentSheet} Base
  */
 export default Base => {
-  //noinspection JSUnresolvedReference
   return (
     /**
      * @extends {TeriockDocumentSheet}

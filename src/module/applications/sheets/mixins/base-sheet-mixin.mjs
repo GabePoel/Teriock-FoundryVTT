@@ -4,7 +4,6 @@ import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
  * @param {typeof DocumentSheetV2} Base
  */
 export default function BaseSheetMixin(Base) {
-  //noinspection JSClosureCompilerSyntax
   /**
    * @extends {DocumentSheetV2}
    * @mixin

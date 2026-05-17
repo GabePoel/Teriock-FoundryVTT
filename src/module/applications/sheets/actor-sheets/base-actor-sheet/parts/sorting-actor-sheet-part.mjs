@@ -1,6 +1,5 @@
 import { objectMap } from "../../../../../helpers/utils.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * @param {typeof BaseActorSheet} Base
  */

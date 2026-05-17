@@ -2,7 +2,6 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Users } = foundry.documents.collections;
 
-//noinspection JSClosureCompilerSyntax,JSValidateJSDoc
 /**
  * @extends {WorldCollection<TeriockUser>}
  * @extends {Users}

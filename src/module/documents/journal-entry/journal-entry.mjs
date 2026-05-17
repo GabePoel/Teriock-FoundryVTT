@@ -3,7 +3,6 @@ import * as mixins from "../mixins/_module.mjs";
 
 const { JournalEntry } = foundry.documents;
 
-// noinspection JSClosureCompilerSyntax
 /**
  * The Teriock JournalEntry implementation.
  * @implements {Teriock.Documents.JournalEntryInterface}

@@ -1,7 +1,6 @@
 import { fromIdentifier } from "../../../../helpers/utils.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
-//noinspection JSClosureCompilerSyntax
 /**
  * Character-specific actor data model.
  *
