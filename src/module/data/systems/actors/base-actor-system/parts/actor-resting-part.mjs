@@ -22,13 +22,21 @@ export default Base => {
         const actorUpdate = {};
         const itemUpdates = [];
         const statuses = [];
-        if (options.hp) actorUpdate["system.hp.value"] = this.hp.max;
-        if (options.mp) actorUpdate["system.mp.value"] = this.mp.max;
+        if (options.hp) {
+          actorUpdate["system.hp.value"] = this.hp.max;
+        }
+        if (options.mp) {
+          actorUpdate["system.mp.value"] = this.mp.max;
+        }
         if (options.hpDice || options.mpDice) {
           for (const item of this.parent.items.filter(i => i.metadata.stats)) {
             const itemUpdate = { _id: item.id };
-            if (options.hpDice) itemUpdate["system.statDice.hp.spent"] = [];
-            if (options.mpDice) itemUpdate["system.statDice.mp.spent"] = [];
+            if (options.hpDice) {
+              itemUpdate["system.statDice.hp.spent"] = [];
+            }
+            if (options.mpDice) {
+              itemUpdate["system.statDice.mp.spent"] = [];
+            }
             itemUpdates.push(itemUpdate);
           }
         }
@@ -72,8 +80,12 @@ export default Base => {
        */
       async takeLongRest() {
         await this.parent.hookCall("longRest");
-        if (this.parent.statuses.has("dead")) return;
-        if (!game.teriock.getSetting("showLongRestDialog")) return;
+        if (this.parent.statuses.has("dead")) {
+          return;
+        }
+        if (!game.teriock.getSetting("showLongRestDialog")) {
+          return;
+        }
         const heal = await TeriockDialog.confirm({
           content: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.healText"),
           modal: true,
@@ -83,7 +95,9 @@ export default Base => {
             icon: makeIconClass(TERIOCK.display.icons.ui.longRest, "title"),
           },
         });
-        if (!heal) return;
+        if (!heal) {
+          return;
+        }
         await this.partialReset({
           hp: true,
           hpDice: true,

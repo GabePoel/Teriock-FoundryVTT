@@ -26,7 +26,9 @@ export default Base => {
       static async _onToggleAutomations() {
         this._tab = this._tab === "automations" ? "overview" : "automations";
         await this.render();
-        if (typeof this.toggleMenu === "function") this.toggleMenu(false);
+        if (typeof this.toggleMenu === "function") {
+          this.toggleMenu(false);
+        }
       }
 
       /** @inheritDoc */

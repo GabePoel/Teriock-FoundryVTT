@@ -47,7 +47,9 @@ export default Base => {
         const ids = [];
         for (let i = value; i < max; i++) {
           const id = (hackConfig[part]?.statuses ?? [])[i];
-          if (id) ids.push(id);
+          if (id) {
+            ids.push(id);
+          }
         }
         await this.parent.applyStatusEffects(ids);
       }
@@ -69,7 +71,9 @@ export default Base => {
         const ids = [];
         for (let i = value; i > min; i--) {
           const id = (hackConfig[part]?.statuses ?? [])[i - 1];
-          if (id) ids.push(id);
+          if (id) {
+            ids.push(id);
+          }
         }
         await this.parent.removeStatusEffects(ids);
       }

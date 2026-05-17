@@ -83,7 +83,9 @@ export default Base =>
     static async #onQuickUse(event, target) {
       const id = target.dataset.id;
       const item = this.document.items.get(id);
-      if (item) await item.use({ event });
+      if (item) {
+        await item.use({ event });
+      }
     }
 
     /**

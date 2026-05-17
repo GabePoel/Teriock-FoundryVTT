@@ -59,11 +59,17 @@ export default class AbilityExecution extends mixClasses(
   /** @inheritDoc */
   async _improveFormula() {
     if (this.isAttack) {
-      if (this.piercing.av0) this.formula = addFormula(this.formula, "@av0");
-      if (this.sb) this.formula = addFormula(this.formula, "@sb");
+      if (this.piercing.av0) {
+        this.formula = addFormula(this.formula, "@av0");
+      }
+      if (this.sb) {
+        this.formula = addFormula(this.formula, "@sb");
+      }
     }
     if (this.competenceImprovesFormula) {
-      if (this.heightened > 0) this.formula = addFormula(this.formula, "@h");
+      if (this.heightened > 0) {
+        this.formula = addFormula(this.formula, "@h");
+      }
     }
     await super._improveFormula();
   }

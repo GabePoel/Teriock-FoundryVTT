@@ -221,8 +221,12 @@ export default function CommonSystemMixin(Base) {
        * @param {Teriock.EmbedData.EmbedIcon} icon
        */
       #checkEmbedIcon(icon) {
-        if (typeof icon.visible === "function") return icon.visible();
-        if (typeof icon.visible === "boolean") return icon.visible;
+        if (typeof icon.visible === "function") {
+          return icon.visible();
+        }
+        if (typeof icon.visible === "boolean") {
+          return icon.visible;
+        }
         return true;
       }
 
@@ -248,9 +252,13 @@ export default function CommonSystemMixin(Base) {
             const srcDiffKeys = srcKeys.filter(s => !dstKeys.includes(s));
             const dstDiffKeys = dstKeys.filter(d => !srcKeys.includes(d));
             const diffKeys = [...srcKeys, ...dstKeys];
-            if (mapType === "diffSrc") keys = srcDiffKeys;
-            else if (mapType === "diffDst") keys = dstDiffKeys;
-            else if (mapType === "diff") keys = diffKeys;
+            if (mapType === "diffSrc") {
+              keys = srcDiffKeys;
+            } else if (mapType === "diffDst") {
+              keys = dstDiffKeys;
+            } else if (mapType === "diff") {
+              keys = diffKeys;
+            }
           }
           const srcDocs = srcChildren.filter(s => keys.includes(s.lookupKey));
           const dstDocs = dstChildren.filter(d => keys.includes(d.lookupKey));
@@ -306,8 +314,11 @@ export default function CommonSystemMixin(Base) {
       async _propagateOperation(methodName, isAsync = false, args = []) {
         for (const automation of this.automations.contents) {
           if (typeof automation[methodName] === "function") {
-            if (isAsync) await automation[methodName](...args);
-            else automation[methodName](...args);
+            if (isAsync) {
+              await automation[methodName](...args);
+            } else {
+              automation[methodName](...args);
+            }
           }
         }
         await super._propagateOperation(methodName, isAsync, args);
@@ -353,7 +364,9 @@ export default function CommonSystemMixin(Base) {
           rollData[`parent.${this.parent.parent.type}`] = 1;
         }
         const actor = this.actor;
-        if (actor) Object.assign(rollData, actor.system.getScalingRollData());
+        if (actor) {
+          Object.assign(rollData, actor.system.getScalingRollData());
+        }
         return rollData;
       }
 
@@ -420,7 +433,9 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Promise<void>} */
       async gmNotesOpen() {
         let notesPage;
-        if (this.gmNotes) notesPage = await fromUuid(this.gmNotes);
+        if (this.gmNotes) {
+          notesPage = await fromUuid(this.gmNotes);
+        }
         if (notesPage) {
           const notesJournal = notesPage.parent;
           await notesJournal?.sheet.render(true);

@@ -40,11 +40,15 @@ class BoosterTerm extends FunctionTerm {
   static async _boost(roll, options = {}) {
     const die = selectWeightedMaxFaceDie(roll);
     if (die) {
-      if (typeof die._number === "number") die._number += 1;
-      else if (typeof die.number === "number") die._number = die.number + 1;
-      else {
+      if (typeof die._number === "number") {
+        die._number += 1;
+      } else if (typeof die.number === "number") {
+        die._number = die.number + 1;
+      } else {
         await die._evaluateAsync(options);
-        if (typeof die.number === "number") die._number = die.number + 1;
+        if (typeof die.number === "number") {
+          die._number = die.number + 1;
+        }
       }
     }
     roll.resetFormula();
@@ -59,11 +63,15 @@ class BoosterTerm extends FunctionTerm {
   static async _deboost(roll, options = {}) {
     const die = selectWeightedMaxFaceDie(roll);
     if (die) {
-      if (typeof die._number === "number") die._number = Math.max(0, die._number - 1);
-      else if (typeof die.number === "number") die._number = Math.max(0, die.number - 1);
-      else {
+      if (typeof die._number === "number") {
+        die._number = Math.max(0, die._number - 1);
+      } else if (typeof die.number === "number") {
+        die._number = Math.max(0, die.number - 1);
+      } else {
         await die._evaluateAsync(options);
-        if (typeof die.number === "number") die._number = Math.max(0, die.number - 1);
+        if (typeof die.number === "number") {
+          die._number = Math.max(0, die.number - 1);
+        }
       }
     }
     roll.resetFormula();
@@ -77,13 +85,22 @@ class BoosterTerm extends FunctionTerm {
    * @returns {Promise<void>}
    */
   static async _setboost(roll, number, options = {}) {
-    if (number > 0) for (let i = 0; i < number; i++) await this._boost(roll, options);
-    else if (number < 0) for (let i = 0; i < Math.abs(number); i++) await this._deboost(roll, options);
+    if (number > 0) {
+      for (let i = 0; i < number; i++) {
+        await this._boost(roll, options);
+      }
+    } else if (number < 0) {
+      for (let i = 0; i < Math.abs(number); i++) {
+        await this._deboost(roll, options);
+      }
+    }
   }
 
   /** @inheritDoc */
   get function() {
-    if (this.isBooster) return n => n;
+    if (this.isBooster) {
+      return n => n;
+    }
     return super.function;
   }
 

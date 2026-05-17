@@ -39,7 +39,9 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   static migrateData(source, options, state) {
     if (foundry.utils.hasProperty(source, "faces") && !foundry.utils.hasProperty(source, "formula")) {
       let number = source.number.raw || "1";
-      if (!Number.isNumeric(Number(number))) number = `(${number})`;
+      if (!Number.isNumeric(Number(number))) {
+        number = `(${number})`;
+      }
       source.formula = `${number}d${source.faces}`;
       delete source.faces;
       delete source.number;

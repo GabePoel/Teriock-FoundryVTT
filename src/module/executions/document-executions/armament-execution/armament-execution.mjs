@@ -30,7 +30,9 @@ export default class ArmamentExecution extends BaseDocumentExecution {
    * @returns {HarmRoll[]}
    */
   get #typedRolls() {
-    if (this.rolls.length === 0) return [];
+    if (this.rolls.length === 0) {
+      return [];
+    }
     const roll = this.rolls[0];
     return Array.from(this.impacts).map(impact => {
       const impactRoll = roll.clone({ evaluated: true });
@@ -90,8 +92,11 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     await super._buildRolls();
     if (this.crit) {
       for (const roll of this.rolls) {
-        if (this.impacts.size === 1) roll.impact = Array.from(this.impacts)[0];
-        else roll.impact = undefined;
+        if (this.impacts.size === 1) {
+          roll.impact = Array.from(this.impacts)[0];
+        } else {
+          roll.impact = undefined;
+        }
         roll.alter(2, 0, { multiplyNumeric: false });
       }
     }
@@ -103,7 +108,9 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     for (const impact of this.impacts) {
       if (this._hasBoostForImpact(impact)) {
         const amt = this._boostsResolved[impact];
-        if (amt > boosts) boosts = amt;
+        if (amt > boosts) {
+          boosts = amt;
+        }
       }
     }
     if (this.showDialog && formulaExists(this.formula)) {
@@ -111,7 +118,9 @@ export default class ArmamentExecution extends BaseDocumentExecution {
         crit: this.crit,
         boosts,
       });
-      if (this.formula === null) return false;
+      if (this.formula === null) {
+        return false;
+      }
       this.crit = false;
     }
     await super._getInput();

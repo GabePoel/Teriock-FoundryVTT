@@ -53,8 +53,11 @@ export default Base => {
             action: "toggleGluedDoc",
             icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
             onClick: async () => {
-              if (this.glued) await this.unglue();
-              else await this.glue();
+              if (this.glued) {
+                await this.unglue();
+              } else {
+                await this.glue();
+              }
             },
             tooltip: this.glued
               ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
@@ -66,8 +69,11 @@ export default Base => {
             action: "toggleEquippedDoc",
             icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
             onClick: async () => {
-              if (this.equipped) await this.unequip();
-              else await this.equip();
+              if (this.equipped) {
+                await this.unequip();
+              } else {
+                await this.equip();
+              }
             },
             tooltip: this.equipped
               ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
@@ -167,7 +173,9 @@ export default Base => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.consumable && this.quantity === 0) this.equipped = false;
+        if (this.consumable && this.quantity === 0) {
+          this.equipped = false;
+        }
       }
 
       /**
@@ -190,7 +198,9 @@ export default Base => {
           scope: { equipment: this.parent },
         });
         await ensureNoChildren(this.parent, "property:glued");
-        if (this.glued) await this.parent.update({ "system.glued": false });
+        if (this.glued) {
+          await this.parent.update({ "system.glued": false });
+        }
       }
     }
   );

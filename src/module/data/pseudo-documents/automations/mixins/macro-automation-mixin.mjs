@@ -86,8 +86,11 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       async _preFire(scope) {
-        if (scope.awaitFire) await this.executeMacro(scope);
-        else this.executeMacro(scope);
+        if (scope.awaitFire) {
+          await this.executeMacro(scope);
+        } else {
+          this.executeMacro(scope);
+        }
       }
 
       /** @inheritDoc */
@@ -101,7 +104,9 @@ export default function MacroAutomationMixin(Base) {
        * @return {Promise<void>}
        */
       async executeMacro(scope = {}) {
-        if (!this.hasMacro) return;
+        if (!this.hasMacro) {
+          return;
+        }
         const macro = await fromUuid(this.macro);
         await macro.execute(this.getScope(scope));
       }

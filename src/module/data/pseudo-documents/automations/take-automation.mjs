@@ -55,7 +55,9 @@ export default class TakeAutomation extends DisplayAutomationMixin(BaseAutomatio
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "amount"];
-    if (TERIOCK.config.impact[this.impact]?.morganti) paths.push("morganti");
+    if (TERIOCK.config.impact[this.impact]?.morganti) {
+      paths.push("morganti");
+    }
     paths.push(...["hr", "display.label", "showDialog"]);
     return paths;
   }

@@ -163,11 +163,21 @@ export default class RegionAutomation extends mixClasses(
    * @returns {string[]}
    */
   get _regionTypePaths() {
-    if (this.regionType === "rectangle") return ["width", "height"];
-    if (this.regionType === "circle") return ["radius"];
-    if (this.regionType === "ellipse") return ["radiusX", "radiusY"];
-    if (this.regionType === "emanation") return ["radius"];
-    if (this.regionType === "cone") return ["radius", "angle"];
+    if (this.regionType === "rectangle") {
+      return ["width", "height"];
+    }
+    if (this.regionType === "circle") {
+      return ["radius"];
+    }
+    if (this.regionType === "ellipse") {
+      return ["radiusX", "radiusY"];
+    }
+    if (this.regionType === "emanation") {
+      return ["radius"];
+    }
+    if (this.regionType === "cone") {
+      return ["radius", "angle"];
+    }
     if (this.regionType === "ring") {
       return ["radius", "innerWidth", "outerWidth"];
     }
@@ -216,7 +226,9 @@ export default class RegionAutomation extends mixClasses(
     } else if (this[path]) {
       out = BaseRoll.minValue(this[path], rollData);
     }
-    if (path === "angle") return out;
+    if (path === "angle") {
+      return out;
+    }
     out *= canvas.dimensions.distancePixels;
     if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
       out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
@@ -265,7 +277,9 @@ export default class RegionAutomation extends mixClasses(
   /** @inheritDoc */
   async _preFire(scope) {
     const region = await this.placeRegion({ execution: scope.execution });
-    if (!region) return;
+    if (!region) {
+      return;
+    }
     if (scope.trigger === "executeInput" && this.targeting) {
       if (scope.execution && region.parent === game.scenes.viewed) {
         let releaseOthers = true;

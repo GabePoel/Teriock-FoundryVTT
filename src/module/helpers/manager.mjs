@@ -26,10 +26,18 @@ export default class TeriockManager {
    */
   #check(existable, message, type = "error", options = { localize: true }) {
     let valid = true;
-    if (!existable) valid = false;
-    if (Array.isArray(existable) && !existable.length) valid = false;
-    if (existable instanceof Set && existable.size === 0) valid = false;
-    if (message && !valid) ui.notifications.notify(message, type, options);
+    if (!existable) {
+      valid = false;
+    }
+    if (Array.isArray(existable) && !existable.length) {
+      valid = false;
+    }
+    if (existable instanceof Set && existable.size === 0) {
+      valid = false;
+    }
+    if (message && !valid) {
+      ui.notifications.notify(message, type, options);
+    }
     return valid;
   }
 

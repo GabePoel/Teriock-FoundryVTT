@@ -59,8 +59,12 @@ export default class RollAutomation extends mixClasses(
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "formula"];
-    if (!this.merge || this.impact === "other") paths.push("display.label");
-    if (!this.trigger && this.impact !== "other") paths.push("merge");
+    if (!this.merge || this.impact === "other") {
+      paths.push("display.label");
+    }
+    if (!this.trigger && this.impact !== "other") {
+      paths.push("merge");
+    }
     paths.push(...super._formPaths);
     return paths;
   }
@@ -82,7 +86,9 @@ export default class RollAutomation extends mixClasses(
 
   /** @inheritDoc */
   _onFire(scope) {
-    if (!this.document.actor) return;
+    if (!this.document.actor) {
+      return;
+    }
     const command = commands[this.impact];
     command.primary(this.document.actor, {
       boost: true,

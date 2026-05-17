@@ -165,9 +165,13 @@ export default class EquipmentSystem extends mixClasses(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
-    if (this.parent.isEmbedded) this.updateSource({ equipped: true });
+    if (this.parent.isEmbedded) {
+      this.updateSource({ equipped: true });
+    }
   }
 
   /** @inheritDoc */

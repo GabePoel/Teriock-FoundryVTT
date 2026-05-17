@@ -97,8 +97,11 @@ export async function selectDocumentsDialog(documents, options = {}) {
   });
 
   const selected = await sheet.select();
-  if (selected) return selected.map(id => idToDoc.get(id)).filter(Boolean);
-  else return [];
+  if (selected) {
+    return selected.map(id => idToDoc.get(id)).filter(Boolean);
+  } else {
+    return [];
+  }
 }
 
 /**
@@ -109,8 +112,12 @@ export async function selectDocumentsDialog(documents, options = {}) {
  * @returns {Promise<T|null>}
  */
 export async function selectDocumentDialog(documents, options = {}) {
-  if ((options.auto ?? true) && documents.length === 1) return documents[0];
-  if (options.silent && !documents.length) return null;
+  if ((options.auto ?? true) && documents.length === 1) {
+    return documents[0];
+  }
+  if (options.silent && !documents.length) {
+    return null;
+  }
   const selected = await selectDocumentsDialog(documents, {
     ...options,
     multi: false,

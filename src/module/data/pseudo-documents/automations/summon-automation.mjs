@@ -60,7 +60,9 @@ export default class SummonAutomation extends mixClasses(
   /** @inheritDoc */
   get _selectionPaths() {
     const paths = super._selectionPaths;
-    if (!this.trigger) paths.push("merge");
+    if (!this.trigger) {
+      paths.push("merge");
+    }
     return paths;
   }
 

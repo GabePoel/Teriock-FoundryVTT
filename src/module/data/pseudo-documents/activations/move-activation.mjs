@@ -73,9 +73,15 @@ export default class MoveActivation extends BaseActivation {
         y = token.y;
       }
     }
-    if (typeof this.x === "number") x = this.x;
-    if (typeof this.y === "number") y = this.y;
-    if (typeof x === "number" && typeof y === "number") return { x, y };
+    if (typeof this.x === "number") {
+      x = this.x;
+    }
+    if (typeof this.y === "number") {
+      y = this.y;
+    }
+    if (typeof x === "number" && typeof y === "number") {
+      return { x, y };
+    }
     return null;
   }
 
@@ -85,7 +91,9 @@ export default class MoveActivation extends BaseActivation {
    */
   get scene() {
     const tokenDocument = this.tokenDocument;
-    if (tokenDocument) return tokenDocument.scene;
+    if (tokenDocument) {
+      return tokenDocument.scene;
+    }
     return canvas.scene;
   }
 
@@ -103,15 +111,21 @@ export default class MoveActivation extends BaseActivation {
    * @returns {Promise<void>}
    */
   async #applyMovements(distance) {
-    if (!this.checkTokens()) return;
+    if (!this.checkTokens()) {
+      return;
+    }
     const origin = this.origin;
     const scene = this.scene;
-    if ((!origin && !this.randomDirection) || !scene) return;
+    if ((!origin && !this.randomDirection) || !scene) {
+      return;
+    }
     const instructions = {};
     const setMovementActionData = [];
     const unsetMovementActionData = [];
     for (const t of this.tokenDocuments) {
-      if (t.scene?.uuid !== scene?.uuid) continue;
+      if (t.scene?.uuid !== scene?.uuid) {
+        continue;
+      }
       if (t.x === origin?.x && t.y === origin?.y && !this.randomDirection) {
         continue;
       }
@@ -127,7 +141,9 @@ export default class MoveActivation extends BaseActivation {
         }
         ray = Ray.towardsPoint({ x: t.x, y: t.y }, origin, fullDistance);
       }
-      if (!ray) continue;
+      if (!ray) {
+        continue;
+      }
       instructions[t.id] = {
         destination: canvas.tokens.getSnappedPoint(ray.B),
       };
@@ -142,7 +158,9 @@ export default class MoveActivation extends BaseActivation {
         });
       }
     }
-    if (!Object.keys(instructions).length) return;
+    if (!Object.keys(instructions).length) {
+      return;
+    }
     if (this.movementAction) {
       await scene.updateEmbeddedDocuments("Token", setMovementActionData);
     }

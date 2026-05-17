@@ -66,7 +66,9 @@ export default Base => {
               };
             }),
         );
-        if (this.warded) tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
+        if (this.warded) {
+          tags.push("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label");
+        }
         if (this.elderSorcery) {
           tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
         }

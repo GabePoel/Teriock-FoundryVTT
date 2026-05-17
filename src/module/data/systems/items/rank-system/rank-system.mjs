@@ -69,8 +69,11 @@ export default class RankSystem extends mixClasses(
 
   /** @inheritDoc */
   get color() {
-    if (this.innate) return TERIOCK.display.colors.purple;
-    else return TERIOCK.display.colors.grey;
+    if (this.innate) {
+      return TERIOCK.display.colors.purple;
+    } else {
+      return TERIOCK.display.colors.grey;
+    }
   }
 
   /** @inheritDoc */
@@ -192,7 +195,9 @@ export default class RankSystem extends mixClasses(
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if (this.parent.sup?.type === "species") this.innate = true;
+    if (this.parent.sup?.type === "species") {
+      this.innate = true;
+    }
     if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv) {
       this.proficient = false;
     }
@@ -202,7 +207,9 @@ export default class RankSystem extends mixClasses(
   prepareDerivedData() {
     super.prepareDerivedData();
     for (const pool of Object.values(this.statDice)) {
-      if (this.innate) pool.disabled = true;
+      if (this.innate) {
+        pool.disabled = true;
+      }
     }
   }
 }

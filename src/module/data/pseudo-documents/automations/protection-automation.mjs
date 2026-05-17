@@ -45,7 +45,9 @@ export default class ProtectionAutomation extends CritAutomation {
    * @returns {Record<string, string>}
    */
   get _choices() {
-    if (this.category === "other") return {};
+    if (this.category === "other") {
+      return {};
+    }
     return foundry.utils.getProperty(TERIOCK, protectionConfig.categories[this.category]?.choices || {});
   }
 
@@ -64,7 +66,9 @@ export default class ProtectionAutomation extends CritAutomation {
 
   /** @inheritDoc */
   getChanges() {
-    if (!this.value || (this.category !== "other" && !this._choices[this.value])) return [];
+    if (!this.value || (this.category !== "other" && !this._choices[this.value])) {
+      return [];
+    }
     return [
       {
         key: `system.protections.${this.relation}.${this.category}`,

@@ -11,7 +11,9 @@ import { icons } from "../../../constants/display/icons.mjs";
  */
 function equipmentCommandFunctionFactory(filter, onSelect, hint, title) {
   return async function equipmentCommandFunction(actor) {
-    if (!game.actors.check(actor)) return;
+    if (!game.actors.check(actor)) {
+      return;
+    }
     const choices = actor.equipment.filter(filter);
     const chosen = await selectDocumentsDialog(choices, {
       hint,

@@ -37,7 +37,9 @@ export default function CommandActivationFactory(command) {
 
     /** @inheritDoc */
     async primaryAction() {
-      if (!this.checkActors()) return;
+      if (!this.checkActors()) {
+        return;
+      }
       for (const a of this.actors) {
         await command.primary(a, Object.assign({ event: this.event }, this.options));
       }
@@ -45,7 +47,9 @@ export default function CommandActivationFactory(command) {
 
     /** @inheritDoc */
     async secondaryAction() {
-      if (!this.checkActors()) return;
+      if (!this.checkActors()) {
+        return;
+      }
       for (const a of this.actors) {
         await command.secondary(a, Object.assign({ event: this.event }, this.options));
       }

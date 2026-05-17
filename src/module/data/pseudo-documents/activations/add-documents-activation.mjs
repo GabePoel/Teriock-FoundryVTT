@@ -74,7 +74,9 @@ export default class AddDocumentsActivation extends BaseActivation {
     const data = {};
     if (docConstruct.uuid) {
       const doc = await resolveDocument(docConstruct.uuid);
-      if (doc) Object.assign(data, doc.toObject(true));
+      if (doc) {
+        Object.assign(data, doc.toObject(true));
+      }
     }
     if (docConstruct.data) {
       foundry.utils.mergeObject(data, docConstruct.data, { inplace: true });
@@ -136,7 +138,9 @@ export default class AddDocumentsActivation extends BaseActivation {
 
   /** @inheritDoc */
   async primaryAction() {
-    if (!this.checkActors()) return;
+    if (!this.checkActors()) {
+      return;
+    }
     const familyConstruction = this.event?.altKey ? this.secondary : this.primary;
     const family = await this.constructFamily(familyConstruction);
     await Promise.all(
@@ -149,8 +153,12 @@ export default class AddDocumentsActivation extends BaseActivation {
           });
         } else {
           let choices = [];
-          if (this.target === "armament") choices = a.armaments;
-          if (this.target === "item") choices = a.visibleChildren.filter(c => c.documentName === "Item");
+          if (this.target === "armament") {
+            choices = a.armaments;
+          }
+          if (this.target === "item") {
+            choices = a.visibleChildren.filter(c => c.documentName === "Item");
+          }
           const chosen = await selectDocumentsDialog(choices);
           await Promise.all(
             chosen.map(c => {
@@ -190,13 +198,17 @@ export default class AddDocumentsActivation extends BaseActivation {
     }
     const allChildren = await Promise.all(promises);
     const out = [];
-    for (const children of allChildren) out.push(...children);
+    for (const children of allChildren) {
+      out.push(...children);
+    }
     return out;
   }
 
   /** @inheritDoc */
   async secondaryAction() {
-    if (!this.checkActors()) return;
+    if (!this.checkActors()) {
+      return;
+    }
     await Promise.all(
       this.actors.map(async a => {
         const children = await a.getChildArray();

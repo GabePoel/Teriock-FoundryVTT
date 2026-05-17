@@ -53,7 +53,9 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
    */
   async _onRender(_context, options) {
     const element = options.element;
-    if (!element) return;
+    if (!element) {
+      return;
+    }
     element.classList.add("teriock");
     TeriockItem.bindPanelListeners(element);
     this._connectActivationListeners(element);
@@ -84,7 +86,9 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
         container.addEventListener("contextmenu", async event => {
           event.stopPropagation();
           const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(container.dataset.tokenUuid);
-          if (tokenDocument) tokenDocument.object.release();
+          if (tokenDocument) {
+            tokenDocument.object.release();
+          }
         });
 
         container.addEventListener("click", async event => {
@@ -112,7 +116,9 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
             clickTimeout = null;
           }
           const actor = /** @type {TeriockActor} */ await fromUuid(container.dataset.actorUuid);
-          if (actor?.isOwner) await actor.sheet.render(true);
+          if (actor?.isOwner) {
+            await actor.sheet.render(true);
+          }
         });
       },
     );
@@ -147,9 +153,11 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
   collapsePanels(htmlElement) {
     let autoCollapse;
     const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
-    if (defaultCollapse === "closed") autoCollapse = true;
-    else if (defaultCollapse === "open") autoCollapse = false;
-    else {
+    if (defaultCollapse === "closed") {
+      autoCollapse = true;
+    } else if (defaultCollapse === "open") {
+      autoCollapse = false;
+    } else {
       autoCollapse =
         this.document.timestamp < Date.now() - game.teriock.getSetting("autoPanelCollapseTime") * 60 * 1000;
     }

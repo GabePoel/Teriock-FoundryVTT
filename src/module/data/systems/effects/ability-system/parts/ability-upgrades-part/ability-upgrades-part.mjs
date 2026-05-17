@@ -110,7 +110,9 @@ export default Base => {
             attribute,
             value,
           });
-        } else this.upgrades.score.text = "";
+        } else {
+          this.upgrades.score.text = "";
+        }
         if (this.upgrades.competence.value === 0) {
           this.upgrades.competence.attribute = null;
         }
@@ -127,7 +129,9 @@ export default Base => {
             saves,
             upgrade,
           });
-        } else this.upgrades.competence.text = "";
+        } else {
+          this.upgrades.competence.text = "";
+        }
       }
     }
   );
@@ -139,7 +143,9 @@ export default Base => {
  * @returns {string}
  */
 function attributeLink(attribute) {
-  if (!TERIOCK.config.attribute[attribute]) return "";
+  if (!TERIOCK.config.attribute[attribute]) {
+    return "";
+  }
   const page = TERIOCK.config.attribute[attribute].page;
   const label = TERIOCK.config.attribute[attribute].label;
   return `@L[Core:${page}]{${label}}`;

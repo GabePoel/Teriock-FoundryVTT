@@ -18,8 +18,12 @@ export default class CompetenceModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get bonus() {
-    if (this.fluent) return this.actor?.system.scaling.f || 0;
-    if (this.proficient) return this.actor?.system.scaling.p || 0;
+    if (this.fluent) {
+      return this.actor?.system.scaling.f || 0;
+    }
+    if (this.proficient) {
+      return this.actor?.system.scaling.p || 0;
+    }
     return 0;
   }
 
@@ -29,8 +33,12 @@ export default class CompetenceModel extends EmbeddedDataModel {
    */
   get description() {
     let out = "TERIOCK.SCHEMA.Competence.choices.0";
-    if (this.proficient) out = "TERIOCK.SCHEMA.Competence.choices.1";
-    if (this.fluent) out = "TERIOCK.SCHEMA.Competence.choices.2";
+    if (this.proficient) {
+      out = "TERIOCK.SCHEMA.Competence.choices.1";
+    }
+    if (this.fluent) {
+      out = "TERIOCK.SCHEMA.Competence.choices.2";
+    }
     return _loc(out);
   }
 
@@ -47,8 +55,12 @@ export default class CompetenceModel extends EmbeddedDataModel {
    * @returns {string}
    */
   get icon() {
-    if (this.fluent) return TERIOCK.display.icons.competence.fluent;
-    if (this.proficient) return TERIOCK.display.icons.competence.proficient;
+    if (this.fluent) {
+      return TERIOCK.display.icons.competence.fluent;
+    }
+    if (this.proficient) {
+      return TERIOCK.display.icons.competence.proficient;
+    }
     return TERIOCK.display.icons.competence.none;
   }
 
@@ -73,8 +85,13 @@ export default class CompetenceModel extends EmbeddedDataModel {
    * @returns {Teriock.System.CompetenceLevel}
    */
   get value() {
-    if (this.fluent) return 2;
-    if (this.proficient) return 1;
-    else return 0;
+    if (this.fluent) {
+      return 2;
+    }
+    if (this.proficient) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }

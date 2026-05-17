@@ -119,9 +119,15 @@ export default class ChildChangeAutomation extends CritAutomation {
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-    if (path.endsWith("key")) inputConfig.choices = this._processedKeyChoices;
-    if (path.endsWith("qualifier")) inputConfig.context = this.target;
-    if (path.endsWith("value")) inputConfig.context = "actor";
+    if (path.endsWith("key")) {
+      inputConfig.choices = this._processedKeyChoices;
+    }
+    if (path.endsWith("qualifier")) {
+      inputConfig.context = this.target;
+    }
+    if (path.endsWith("value")) {
+      inputConfig.context = "actor";
+    }
     if (path.endsWith("changeType")) {
       inputConfig.choices = this._changeTypeChoices;
     }
@@ -153,6 +159,8 @@ export default class ChildChangeAutomation extends CritAutomation {
       this.changeType = changeTypeChoices[0];
     }
     const keyChoices = Object.keys(this._keyChoices);
-    if (!keyChoices.includes(this.key)) this.key = keyChoices[0];
+    if (!keyChoices.includes(this.key)) {
+      this.key = keyChoices[0];
+    }
   }
 }

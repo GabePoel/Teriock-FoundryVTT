@@ -49,7 +49,9 @@ export default Base => {
        */
       async impactDialog(impact, options = {}) {
         const entry = TERIOCK.config.impact[impact];
-        if (!entry) return;
+        if (!entry) {
+          return;
+        }
         const initialAmount = options.amount ?? (entry.nullable ? null : 0);
         const amountField = new fields.NumberField({
           initial: initialAmount,

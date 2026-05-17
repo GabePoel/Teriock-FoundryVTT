@@ -41,12 +41,16 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {Promise<PseudoDocument>}
    */
   static async create(data = {}, { parent, ...operation } = {}) {
-    if (!parent) throw new Error("Pseudo-documents must have parents");
+    if (!parent) {
+      throw new Error("Pseudo-documents must have parents");
+    }
     const id = operation.keepId && foundry.data.validators.isValidId(data._id) ? data._id : foundry.utils.randomID();
     /** @type {CommonSystem} */
     const directParent = foundry.utils.isSubclass(parent, foundry.abstract.TypeDataModel) ? parent : parent.system;
     const fieldPath = directParent.metadata?.pseudos?.[this.metadata.documentName];
-    if (!fieldPath) throw new Error("Invalid pseudo-document parent");
+    if (!fieldPath) {
+      throw new Error("Invalid pseudo-document parent");
+    }
     const updateData = { [`${fieldPath}.${id}`]: { ...data, _id: id } };
     await directParent.document.update(updateData, operation);
     return foundry.utils.getProperty(directParent.parent, fieldPath).get(id);
@@ -68,7 +72,9 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   static async fromDropData(data) {
     const pseudo = await fromUuid(data.uuid);
-    if (!pseudo) throw new Error("Failed to resolve PseudoDocument.");
+    if (!pseudo) {
+      throw new Error("Failed to resolve PseudoDocument.");
+    }
     if (pseudo.documentName !== this.metadata.documentName) {
       throw new Error("Invalid type provided.", pseudo);
     }
@@ -109,7 +115,9 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   get fieldPath() {
     let path = this.parent.constructor.metadata.pseudos[this.documentName];
-    if (this.parent instanceof PseudoDocument) path = [this.parent.fieldPath, this.parent.id, path].join(".");
+    if (this.parent instanceof PseudoDocument) {
+      path = [this.parent.fieldPath, this.parent.id, path].join(".");
+    }
     return path;
   }
 

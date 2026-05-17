@@ -78,7 +78,9 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       ids = Array.from(root.querySelectorAll('input[type="checkbox"]:checked')).map(el => el.name);
     } else {
       const radio = root.querySelector('input[name="choice"]:checked');
-      if (radio) ids = [radio.value];
+      if (radio) {
+        ids = [radio.value];
+      }
     }
     this._finish(ids);
     await this.close();
@@ -118,10 +120,14 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    */
   _initSearchFilter() {
     const root = this.element;
-    if (!root) return;
+    if (!root) {
+      return;
+    }
     const input = root.querySelector(".search-input");
     const content = root.querySelector(".doc-select");
-    if (!input || !content) return;
+    if (!input || !content) {
+      return;
+    }
     const searchFilter = new SearchFilter({
       inputSelector: ".search-input",
       contentSelector: ".doc-select",

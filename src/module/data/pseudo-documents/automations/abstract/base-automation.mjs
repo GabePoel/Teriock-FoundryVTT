@@ -100,7 +100,9 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
   get isPassive() {
     if (this.document.type === "ability") {
       return this.parent["maneuver"] === "passive";
-    } else return this.document.type === "property";
+    } else {
+      return this.document.type === "property";
+    }
   }
 
   /**

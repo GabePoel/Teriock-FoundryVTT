@@ -198,7 +198,9 @@ export default class SpeciesSystem extends mixClasses(
    * @returns {TeriockLingering|null}
    */
   get transformationEffect() {
-    if (!this.actor) return null;
+    if (!this.actor) {
+      return null;
+    }
     return this.parent.dependee ?? null;
   }
 
@@ -262,7 +264,9 @@ export default class SpeciesSystem extends mixClasses(
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    if (!this.actor) rollData.size = this.size.enabled ? this.size.value : 0;
+    if (!this.actor) {
+      rollData.size = this.size.enabled ? this.size.value : 0;
+    }
     return rollData;
   }
 

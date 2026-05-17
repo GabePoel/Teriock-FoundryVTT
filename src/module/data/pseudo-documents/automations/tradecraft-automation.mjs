@@ -93,8 +93,11 @@ export default class TradecraftAutomation extends mixClasses(
 
   /** @inheritDoc */
   async _preFire(scope) {
-    if (scope.awaitFire) await this.executeTradecraft(scope);
-    else this.executeTradecraft(scope);
+    if (scope.awaitFire) {
+      await this.executeTradecraft(scope);
+    } else {
+      this.executeTradecraft(scope);
+    }
   }
 
   /**
@@ -103,7 +106,9 @@ export default class TradecraftAutomation extends mixClasses(
    * @returns {Promise<void>}
    */
   async executeTradecraft(scope = {}) {
-    if (this.tradecrafts.size === 0) return;
+    if (this.tradecrafts.size === 0) {
+      return;
+    }
     const choices = Array.from(this.tradecrafts);
     let selected = [];
     if (this.automatic && choices.length === 1) {
@@ -111,15 +116,21 @@ export default class TradecraftAutomation extends mixClasses(
     } else {
       if (this.multi) {
         selected = await selectTradecraftsDialog(choices);
-        if (selected.length === 0) return;
+        if (selected.length === 0) {
+          return;
+        }
       } else {
         const chosen = await selectTradecraftDialog(choices);
-        if (!chosen) return;
+        if (!chosen) {
+          return;
+        }
         selected = [chosen];
       }
     }
     const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
-    if (!actor) return;
+    if (!actor) {
+      return;
+    }
     await Promise.all(
       selected.map(tradecraft =>
         actor.system.rollTradecraft(tradecraft, {

@@ -25,7 +25,9 @@ export default function ChildDocumentMixin(Base) {
 
       /** @inheritDoc */
       static async validateRelationship(sup, sub) {
-        if (!this.validateChildType(sup, sub)) return false;
+        if (!this.validateChildType(sup, sub)) {
+          return false;
+        }
         return super.validateRelationship(sup, sub);
       }
 
@@ -117,7 +119,9 @@ export default function ChildDocumentMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.isTop) this.prepareChangeData();
+        if (this.isTop) {
+          this.prepareChangeData();
+        }
       }
 
       /** @inheritDoc */

@@ -62,7 +62,9 @@ export default class BaseActorSheet extends mixClasses(
    */
   #cycleToggleSwitch(toggleSwitch, change = 1) {
     const name = toggleSwitch.getAttribute("data-name");
-    if (!name) return;
+    if (!name) {
+      return;
+    }
     const val = foundry.utils.getProperty(this, name);
     foundry.utils.setProperty(this, name, ((val + 1 + change) % 3) - 1);
   }
@@ -84,9 +86,13 @@ export default class BaseActorSheet extends mixClasses(
         await this.render();
       });
       // Support right-click on associated labels
-      if (!el.id) return;
+      if (!el.id) {
+        return;
+      }
       const label = this.element.querySelector(`label[for="${el.id}"]`);
-      if (!label) return;
+      if (!label) {
+        return;
+      }
       label.addEventListener("contextmenu", async event => {
         event.preventDefault();
         this.#cycleToggleSwitch(el, 2);

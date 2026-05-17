@@ -63,7 +63,9 @@ export async function tradecraftPanel(tradecraft) {
 export async function classPanel(className) {
   let archetype;
   for (const [key, value] of Object.entries(TERIOCK.config.rank)) {
-    if (Object.keys(value.classes).includes(className)) archetype = key;
+    if (Object.keys(value.classes).includes(className)) {
+      archetype = key;
+    }
   }
   return await TeriockTextEditor.enrichPanel({
     image: getImage("classes", TERIOCK.index.classes[className]),
@@ -125,8 +127,12 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
  * @returns {string}
  */
 export function simplifyTag(tag) {
-  if (typeof tag === "string") return _loc(tag);
-  if (typeof tag.label === "string") return _loc(tag.label);
+  if (typeof tag === "string") {
+    return _loc(tag);
+  }
+  if (typeof tag.label === "string") {
+    return _loc(tag.label);
+  }
   return "";
 }
 

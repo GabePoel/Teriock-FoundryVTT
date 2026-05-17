@@ -37,13 +37,17 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeBoost(value, delta, _model, _change) {
-    if (!delta || this.deterministic) return value;
+    if (!delta || this.deterministic) {
+      return value;
+    }
     return formula.boostFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
-    if (!value) return delta;
+    if (!value) {
+      return delta;
+    }
     return this.deterministic
       ? formula.downgradeDeterministicFormula(value, delta)
       : formula.downgradeIndeterministicFormula(value, delta);
@@ -68,7 +72,9 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeAdd(value, delta, _model, _change) {
-    if (!delta || this.deterministic) return value;
+    if (!delta || this.deterministic) {
+      return value;
+    }
     return formula.addTypesToFormula(value, delta);
   }
 
@@ -81,7 +87,9 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeRemove(value, delta, _model, _change) {
-    if (!delta || this.deterministic) return value;
+    if (!delta || this.deterministic) {
+      return value;
+    }
     return formula.removeTypesFromFormula(value, delta);
   }
 
@@ -94,13 +102,17 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeSet(value, delta, _model, _change) {
-    if (!delta || this.deterministic) return value;
+    if (!delta || this.deterministic) {
+      return value;
+    }
     return formula.setTypesOfFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeUpgrade(value, delta, _model, _change) {
-    if (!value) return delta;
+    if (!value) {
+      return delta;
+    }
     return this.deterministic
       ? formula.upgradeDeterministicFormula(value, delta)
       : formula.upgradeIndeterministicFormula(value, delta);
@@ -117,10 +129,14 @@ export default class FormulaField extends EnhancedStringField {
     const element = super._toInput(config);
     const isInput = element.tagName === "INPUT";
     const nestedInput = isInput ? null : element.querySelector("input");
-    if (!isInput && !nestedInput) return element;
+    if (!isInput && !nestedInput) {
+      return element;
+    }
     config.value ??= this.getInitialValue({}) ?? "";
     const formulaInput = foundry.applications.elements.HTMLFormulaInputElement.create(config);
-    if (isInput) return formulaInput;
+    if (isInput) {
+      return formulaInput;
+    }
     nestedInput.replaceWith(formulaInput);
     return element;
   }

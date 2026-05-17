@@ -90,10 +90,15 @@ export default class StatDieModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async toggle(spent) {
-    if (typeof spent === "undefined") spent = !this.spent;
+    if (typeof spent === "undefined") {
+      spent = !this.spent;
+    }
     const spentCopy = new Set(Array.from(this.parent.spent));
-    if (spent) spentCopy.add(this.index);
-    else spentCopy.delete(this.index);
+    if (spent) {
+      spentCopy.add(this.index);
+    } else {
+      spentCopy.delete(this.index);
+    }
     const updatePath = `system.statDice.${this.parent.stat}.spent`;
     await this.document.update({ [updatePath]: Array.from(spentCopy) });
   }
@@ -143,7 +148,9 @@ export default class StatDieModel extends EmbeddedDataModel {
         system: { avatar: this.parent.parent.parent.actor.img, panels: panels },
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });
-      if (spend) await this.toggle(true);
+      if (spend) {
+        await this.toggle(true);
+      }
     }
   }
 }

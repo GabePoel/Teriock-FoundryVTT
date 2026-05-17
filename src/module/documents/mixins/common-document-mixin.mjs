@@ -79,7 +79,9 @@ export default function CommonDocumentMixin(Base) {
         if (!this._visibleChildrenByType) {
           const typeMap = {};
           for (const c of this.visibleChildren) {
-            if (!typeMap[c.type]) typeMap[c.type] = [];
+            if (!typeMap[c.type]) {
+              typeMap[c.type] = [];
+            }
             typeMap[c.type].push(c);
           }
           this._visibleChildrenByType = typeMap;
@@ -91,9 +93,13 @@ export default function CommonDocumentMixin(Base) {
        * The actor associated with this document if there is one.
        */
       get actor() {
-        if (this instanceof TeriockActor) return this;
-        else if (this.parent) return this.parent.actor;
-        else return null;
+        if (this instanceof TeriockActor) {
+          return this;
+        } else if (this.parent) {
+          return this.parent.actor;
+        } else {
+          return null;
+        }
       }
 
       /**
@@ -157,7 +163,9 @@ export default function CommonDocumentMixin(Base) {
       /** @inheritDoc */
       async _preCreate(data, options, user) {
         const yes = await super._preCreate(data, options, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         if (!data.img && TERIOCK.config.document[this.type]?.documentName === this.documentName) {
           this.updateSource({
@@ -263,7 +271,9 @@ export default function CommonDocumentMixin(Base) {
       async hookCall(trigger, options = {}) {
         const { skipCall = false, skipPropagation = false, scope = {} } = options;
         scope.trigger = trigger;
-        if (!skipPropagation) await this.actor?.fireTrigger(trigger, scope);
+        if (!skipPropagation) {
+          await this.actor?.fireTrigger(trigger, scope);
+        }
         if (!skipCall) {
           return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope));
         }

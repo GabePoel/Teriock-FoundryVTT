@@ -16,14 +16,20 @@ export default function abilityContextMenus(ability) {
    */
   function findIconByKey(key, iconMap = TERIOCK.display.icons) {
     const attributeIcon = TERIOCK.config.attribute?.[key]?.icon;
-    if (attributeIcon) return attributeIcon;
+    if (attributeIcon) {
+      return attributeIcon;
+    }
     for (const value of Object.values(iconMap)) {
       if (value && typeof value === "object") {
         const found = findIconByKey(key, value);
-        if (found) return found;
+        if (found) {
+          return found;
+        }
       }
     }
-    if (Object.prototype.hasOwnProperty.call(iconMap, key)) return iconMap[key];
+    if (Object.prototype.hasOwnProperty.call(iconMap, key)) {
+      return iconMap[key];
+    }
     return null;
   }
 

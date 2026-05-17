@@ -134,8 +134,12 @@ export default class BaseRoll extends Roll {
    */
   static resetFormulas(roll) {
     for (const term of roll.terms) {
-      if (term?.rolls) term.rolls.forEach(r => this.resetFormulas(r));
-      if (term?.isBooster) term.result = term.rolls[0].total;
+      if (term?.rolls) {
+        term.rolls.forEach(r => this.resetFormulas(r));
+      }
+      if (term?.isBooster) {
+        term.result = term.rolls[0].total;
+      }
     }
     roll.resetFormula();
     roll._total = roll._evaluateTotal();
@@ -148,10 +152,14 @@ export default class BaseRoll extends Roll {
   get _allTerms() {
     const terms = [...this.terms];
     for (const t of /** @type {(ParentheticalTerm|Booster)[]} */ this.terms) {
-      if (t.roll && t.roll instanceof Roll) terms.push(...t.roll.terms);
+      if (t.roll && t.roll instanceof Roll) {
+        terms.push(...t.roll.terms);
+      }
       if (t.rolls) {
         for (const r of t.rolls) {
-          if (r instanceof Roll) terms.push(...r.terms);
+          if (r instanceof Roll) {
+            terms.push(...r.terms);
+          }
         }
       }
     }
@@ -238,7 +246,9 @@ export default class BaseRoll extends Roll {
         return null;
       }
       const th = Number(this.options.threshold);
-      if (Number.isNumeric(th)) return th;
+      if (Number.isNumeric(th)) {
+        return th;
+      }
     }
     return null;
   }
@@ -298,7 +308,9 @@ export default class BaseRoll extends Roll {
   async _applyDiceStyles() {
     for (const die of this.dice) {
       for (const [type, options] of Object.entries(TERIOCK.config.die.styles)) {
-        if (die.flavor.includes(type)) die.options.appearance = options;
+        if (die.flavor.includes(type)) {
+          die.options.appearance = options;
+        }
       }
     }
   }
@@ -378,7 +390,9 @@ export default class BaseRoll extends Roll {
   async boost(options = {}) {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
-    if (!clone._evaluated) await clone.evaluate();
+    if (!clone._evaluated) {
+      await clone.evaluate();
+    }
     const die = selectWeightedMaxFaceDie(clone);
     die._number = (die.number ?? 0) + 1;
     const dieRoll = new BaseRoll(die.formula);
@@ -420,7 +434,9 @@ export default class BaseRoll extends Roll {
   async deboost(options = {}) {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
-    if (!clone._evaluated) await clone.evaluate();
+    if (!clone._evaluated) {
+      await clone.evaluate();
+    }
     const die = selectWeightedMaxFaceDie(clone);
     die._number = Math.max(0, (die.number ?? 0) - 1);
     die.results.pop();

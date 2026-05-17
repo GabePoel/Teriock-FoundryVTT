@@ -11,7 +11,9 @@ const { fields } = foundry.data;
  * @param {TeriockArmament} doc
  */
 function nullifyWielded(doc) {
-  if (!["body", "equipment"].includes(doc.type) || !doc.active) return true;
+  if (!["body", "equipment"].includes(doc.type) || !doc.active) {
+    return true;
+  }
   return doc.type === "equipment" && !doc.system.equipped;
 }
 

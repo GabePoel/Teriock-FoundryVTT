@@ -86,17 +86,25 @@ export default class ConditionSystem extends mixClasses(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
-    if (data.disabled === true) return false;
+    if (data.disabled === true) {
+      return false;
+    }
   }
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
     const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
-    if (changes.disabled === true) return false;
+    if (changes.disabled === true) {
+      return false;
+    }
   }
 
   /** @inheritDoc */

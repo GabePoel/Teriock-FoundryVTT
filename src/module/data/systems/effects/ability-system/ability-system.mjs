@@ -266,7 +266,9 @@ export default class AbilitySystem extends mixClasses(
     if (this.isArmamentChild && !this.grantUse) {
       icons.unshift(this.grantUseIcon);
     }
-    if (this.tagIcon) icons.unshift(this.tagIcon);
+    if (this.tagIcon) {
+      icons.unshift(this.tagIcon);
+    }
     return icons;
   }
 

@@ -51,7 +51,9 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
   /** @inheritDoc */
   _initializeApplicationOptions(options = {}) {
     const applicationOptions = super._initializeApplicationOptions(options);
-    if (options.title) applicationOptions.window.title = options.title;
+    if (options.title) {
+      applicationOptions.window.title = options.title;
+    }
     return applicationOptions;
   }
 

@@ -101,8 +101,12 @@ export default class DurationModel extends TimeUnitModel {
     let conditionsPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.ongoing", {
       partial: listFormat(conditions, { sort: false }),
     });
-    if (triggers.length === 0) triggerPart = "";
-    if (conditions.length === 0) conditionsPart = "";
+    if (triggers.length === 0) {
+      triggerPart = "";
+    }
+    if (conditions.length === 0) {
+      conditionsPart = "";
+    }
     return game.i18n
       .format("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
         start: triggerPart,
@@ -113,18 +117,26 @@ export default class DurationModel extends TimeUnitModel {
 
   /** @inheritDoc */
   get text() {
-    if (this.description) return this.description;
+    if (this.description) {
+      return this.description;
+    }
     const prerequisite = this.prerequisiteString;
     let duration = super.text;
     if (prerequisite.length > 1) {
-      if (prerequisite.length > 0 && this.unit === "unlimited") duration = "";
-      if (this.unit === "passive") duration = "";
+      if (prerequisite.length > 0 && this.unit === "unlimited") {
+        duration = "";
+      }
+      if (this.unit === "passive") {
+        duration = "";
+      }
       return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
         start: duration,
         end: prerequisite,
       });
     }
-    if (this.unit === "passive") duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
+    if (this.unit === "passive") {
+      duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
+    }
     return duration;
   }
 }

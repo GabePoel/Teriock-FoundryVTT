@@ -37,8 +37,11 @@ export function interpretArguments(argArr, command) {
       argObj[definedArgs[num]] = key;
       num += 1;
     } else {
-      if (definedFlags[key]) argObj[definedFlags[key]] = value;
-      else argObj[key] = value;
+      if (definedFlags[key]) {
+        argObj[definedFlags[key]] = value;
+      } else {
+        argObj[key] = value;
+      }
     }
   }
   return argObj;
@@ -52,7 +55,12 @@ export function interpretArguments(argArr, command) {
  * @returns {string}
  */
 export function getInteractionEntryValue(interaction, property, options) {
-  if (!interaction[property]) return "";
-  if (typeof interaction[property] === "string") return interaction[property];
-  else return interaction[property](options);
+  if (!interaction[property]) {
+    return "";
+  }
+  if (typeof interaction[property] === "string") {
+    return interaction[property];
+  } else {
+    return interaction[property](options);
+  }
 }

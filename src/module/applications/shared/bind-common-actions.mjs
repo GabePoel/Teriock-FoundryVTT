@@ -20,7 +20,9 @@ export default function bindCommonActions(rootElement) {
   queryAll(rootElement, ".content-link[data-uuid]").forEach(el => {
     if (game.teriock.getSetting("contentLinkTooltips")) {
       const cls = /** @type {TeriockDocument} */ foundry.utils.getDocumentClass(el.dataset.type);
-      if (cls?.documentMetadata?.tooltip) el.dataset.makeTooltip = "true";
+      if (cls?.documentMetadata?.tooltip) {
+        el.dataset.makeTooltip = "true";
+      }
     }
   });
   queryAll(rootElement, "[data-teriock-content-link]").forEach(
@@ -105,7 +107,9 @@ export default function bindCommonActions(rootElement) {
             const tooltip = await doc.toTooltip();
             target.setAttribute("data-tooltip-html", tooltip);
             target.setAttribute("data-tooltip-class", "teriock-rich-tooltip");
-            if (target === game.tooltip.element) game.tooltip.activate(target);
+            if (target === game.tooltip.element) {
+              game.tooltip.activate(target);
+            }
           }
         }
       });
@@ -117,9 +121,13 @@ export default function bindCommonActions(rootElement) {
       el.addEventListener("click", async event => {
         event.stopPropagation();
         const uuid = /** @type {UUID<ChildDocument>} */ el.dataset.uuid;
-        if (!uuid) return;
+        if (!uuid) {
+          return;
+        }
         const doc = await fromUuid(uuid);
-        if (!doc) return;
+        if (!doc) {
+          return;
+        }
         await doc.sheet.render(true);
       });
     },

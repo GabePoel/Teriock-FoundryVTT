@@ -27,7 +27,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     /** @type {TeriockToken[]} */
     const selectedTokens = game.canvas?.tokens.controlled ?? [];
     for (const t of selectedTokens) {
-      if (t.actor?.uuid === this.actor.uuid) this.executor = t;
+      if (t.actor?.uuid === this.actor.uuid) {
+        this.executor = t;
+      }
     }
     // Fall back to default token
     this.executor ??= this.actor?.defaultToken ?? null;
@@ -58,7 +60,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /** @inheritDoc */
   get executionNames() {
     const names = [...super.executionNames, "Ability"];
-    if (this.source.system.spell) names.push("Spell");
+    if (this.source.system.spell) {
+      names.push("Spell");
+    }
     return names;
   }
 
@@ -146,7 +150,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   get targetsActor() {
     const validTargets = ["creature", "vitals", "arm", "leg", "ability", "attack", "self", "other"];
     for (const t of validTargets) {
-      if (this.source.system.targets.has(t)) return true;
+      if (this.source.system.targets.has(t)) {
+        return true;
+      }
     }
     return false;
   }
@@ -158,7 +164,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   get targetsArmament() {
     const validTargets = ["armor", "item", "ship", "weapon"];
     for (const t of validTargets) {
-      if (this.source.system.targets.has(t)) return true;
+      if (this.source.system.targets.has(t)) {
+        return true;
+      }
     }
     return false;
   }
@@ -169,9 +177,15 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @returns {TeriockArmament|null}
    */
   #determineDefaultArmament(interaction) {
-    if (!this.actor) return null;
-    if (interaction === "attack") return this.actor.system.wielding.attacker;
-    if (interaction === "block") return this.actor.system.wielding.blocker;
+    if (!this.actor) {
+      return null;
+    }
+    if (interaction === "attack") {
+      return this.actor.system.wielding.attacker;
+    }
+    if (interaction === "block") {
+      return this.actor.system.wielding.blocker;
+    }
     return null;
   }
 
@@ -189,7 +203,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
         this.actor?.system.offense.piercing.raw || 0,
       );
     }
-    if (options.piercing !== undefined) this.piercing.raw = options.piercing;
+    if (options.piercing !== undefined) {
+      this.piercing.raw = options.piercing;
+    }
   }
 
   /**
@@ -223,8 +239,12 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @returns {string}
    */
   #resolveAttackPenalty(options) {
-    if (options.attackPenalty !== undefined) return options.attackPenalty;
-    if (!this.isAttack) return "0";
+    if (options.attackPenalty !== undefined) {
+      return options.attackPenalty;
+    }
+    if (!this.isAttack) {
+      return "0";
+    }
     return this.isContact && this.armament ? this.armament.system.attackPenalty : this.source.system.attackPenalty;
   }
 
@@ -235,7 +255,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @returns {boolean}
    */
   #resolveLimb(options, sys) {
-    if (options.limb !== undefined) return options.limb;
+    if (options.limb !== undefined) {
+      return options.limb;
+    }
     return sys.isContact && (sys.targets.has("arm") || sys.targets.has("leg") || sys.targets.has("limb"));
   }
 
@@ -246,7 +268,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @returns {boolean}
    */
   #resolveVitals(options, sys) {
-    if (options.vitals !== undefined) return options.vitals;
+    if (options.vitals !== undefined) {
+      return options.vitals;
+    }
     const armamentVitals = this.armament?.system.vitals && sys.interaction === "attack";
     return sys.isContact && armamentVitals ? true : sys.targets.has("vitals");
   }
@@ -258,7 +282,9 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @returns {boolean}
    */
   #resolveWarded(options, sys) {
-    if (options.warded !== undefined) return options.warded;
+    if (options.warded !== undefined) {
+      return options.warded;
+    }
     const armamentWarded =
       (this.armament?.system.warded && ["attack", "block"].includes(sys.interaction)) ||
       this.actor?.system?.combat?.offense?.warded;

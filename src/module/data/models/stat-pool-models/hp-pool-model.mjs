@@ -6,7 +6,9 @@ export default class HpPoolModel extends BaseStatPoolModel {
     return async amount => {
       const criticallyWounded = this.actor?.statuses.has("criticallyWounded");
       await this.actor?.system.takeHealing(amount);
-      if (!criticallyWounded) await this.actor?.system.takeAwaken();
+      if (!criticallyWounded) {
+        await this.actor?.system.takeAwaken();
+      }
     };
   }
 

@@ -52,9 +52,15 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<string>}
    */
   static async makeTooltip(parts, options = {}) {
-    if (options.noBars) delete parts.bars;
-    if (options.noBlocks) delete parts.blocks;
-    if (options.noAssociations) delete parts.associations;
+    if (options.noBars) {
+      delete parts.bars;
+    }
+    if (options.noBlocks) {
+      delete parts.blocks;
+    }
+    if (options.noAssociations) {
+      delete parts.associations;
+    }
     await this.enrichPanel(parts, options);
     return await this.renderTemplate("teriock/ui/panel", parts);
   }

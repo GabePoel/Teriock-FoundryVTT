@@ -184,7 +184,9 @@ export async function selectPropertyDialog() {
  */
 async function _tradecraftChoices(tradecrafts) {
   const tradecraftList = tradecrafts?.length ? tradecrafts : Object.keys(TERIOCK.reference.tradecrafts);
-  if (tradecraftList.length === 0) return [];
+  if (tradecraftList.length === 0) {
+    return [];
+  }
   return Promise.all(
     tradecraftList.map(async tc => {
       return {
@@ -216,7 +218,9 @@ export async function selectTradecraftDialog(tradecrafts) {
  */
 export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}) {
   const choices = await _tradecraftChoices(tradecrafts);
-  if (choices.length === 0) return [];
+  if (choices.length === 0) {
+    return [];
+  }
   const chosen = await selectDocumentsDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
     multi,
@@ -224,7 +228,9 @@ export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}
     tooltipKey: "tooltip",
     openable: true,
   });
-  if (!chosen) return [];
+  if (!chosen) {
+    return [];
+  }
   return chosen.map(c => c.uuid);
 }
 

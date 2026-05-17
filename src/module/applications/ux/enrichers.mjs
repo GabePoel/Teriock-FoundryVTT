@@ -20,7 +20,9 @@ const wikiLinkEnricher = {
     let displayText = match[2];
     const namespace = pageName.split(":")[0];
     let name = pageName.split(":")[1];
-    if (!displayText) displayText = name;
+    if (!displayText) {
+      displayText = name;
+    }
     if (Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(name)) {
       name = TERIOCK.aliases[namespace.toLowerCase()][name];
     }
@@ -82,7 +84,9 @@ const lookupEnricher = {
       .trim()
       .split(/\s+/)
       .reduce((acc, curr) => {
-        if (!curr) return acc;
+        if (!curr) {
+          return acc;
+        }
         const [key, value] = curr.split("=");
         if (key && value) {
           acc[key] = value;
@@ -99,10 +103,14 @@ const lookupEnricher = {
       formatOptions["style"] = "lc";
     } else if (formatOptions["style"] === "embed") {
       const doc = await fromUuid(text);
-      if (doc) return doc.toEmbed({});
+      if (doc) {
+        return doc.toEmbed({});
+      }
     } else if (formatOptions["style"] === "link") {
       const doc = await fromUuid(text);
-      if (doc) return doc.toAnchor();
+      if (doc) {
+        return doc.toAnchor();
+      }
     }
     switch ((formatOptions["style"] || "").toLowerCase()) {
       case "uc":
@@ -142,7 +150,9 @@ export function registerCommandEnrichers() {
     enricher: enrichCommand,
     id: "executeCommand",
     onRender: el => {
-      if (el.dataset.enriched) return;
+      if (el.dataset.enriched) {
+        return;
+      }
       el.dataset.enriched = "true";
       const target = /** @type {HTMLLinkElement} */ el.firstElementChild;
       el.addEventListener("click", async ev => {
@@ -166,15 +176,21 @@ async function executeCommandFromElement(target, operation, event) {
   event.preventDefault();
   event.stopPropagation();
   const command = commands[target.dataset.command];
-  if (!command || !command[operation]) return;
+  if (!command || !command[operation]) {
+    return;
+  }
   const options = {};
   for (const mod of ["alt", "ctrl", "shift"]) {
-    if (command[mod] && event[`${mod}Key`]) options[command[mod]] = true;
+    if (command[mod] && event[`${mod}Key`]) {
+      options[command[mod]] = true;
+    }
   }
   for (const [key, value] of Object.entries(target.dataset)) {
     if (!["action", "command"].includes(key)) {
       options[key] = value;
-      if (value === "true") options[key] = true;
+      if (value === "true") {
+        options[key] = true;
+      }
     }
   }
   let actor;
@@ -182,7 +198,9 @@ async function executeCommandFromElement(target, operation, event) {
     const doc = await fromUuid(target.dataset.relativeTo);
     actor = doc?.actor;
   }
-  if (!actor) actor = game.actors.default;
+  if (!actor) {
+    actor = game.actors.default;
+  }
   await command[operation](actor, options);
 }
 
@@ -210,7 +228,9 @@ function enrichCommand(match, options) {
   if (!link.dataset.tooltip) {
     link.dataset.tooltip = getInteractionEntryValue(command, "label", interactionOptions);
   }
-  if (options.relativeTo) link.dataset.relativeTo = options.relativeTo.uuid;
+  if (options.relativeTo) {
+    link.dataset.relativeTo = options.relativeTo.uuid;
+  }
   for (const [key, value] of Object.entries(interactionOptions)) {
     link.dataset[key] = value.toString();
   }

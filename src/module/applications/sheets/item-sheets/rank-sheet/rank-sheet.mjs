@@ -43,7 +43,9 @@ export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButt
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) return;
+    if (!this.isEditable) {
+      return;
+    }
 
     [
       { selector: ".class-box", menu: classContextMenu },

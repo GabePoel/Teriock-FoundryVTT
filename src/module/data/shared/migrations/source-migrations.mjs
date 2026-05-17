@@ -43,7 +43,9 @@ export function migrateKey(source, oldKey, newKey, transform = val => val) {
  * @param {string} newVal
  */
 export function migrateValue(source, key, oldVal, newVal) {
-  if (getProperty(source, key) === oldVal) setProperty(source, key, newVal);
+  if (getProperty(source, key) === oldVal) {
+    setProperty(source, key, newVal);
+  }
 }
 
 /**

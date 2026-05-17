@@ -39,7 +39,9 @@ export default class BaseEffectSheet extends mixClasses(
 
   /** @inheritDoc */
   async _onDropChild(event, dropData) {
-    if (dropData.type !== "ActiveEffect") return;
+    if (dropData.type !== "ActiveEffect") {
+      return;
+    }
     return super._onDropChild(event, dropData);
   }
 

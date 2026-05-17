@@ -80,7 +80,9 @@ export default function TriggerAutomationMixin(Base) {
             nullable: this._nullableTrigger,
           }),
         });
-        if (this._conditions) schema.conditions = conditionRequirementsField();
+        if (this._conditions) {
+          schema.conditions = conditionRequirementsField();
+        }
         return schema;
       }
 
@@ -105,10 +107,14 @@ export default function TriggerAutomationMixin(Base) {
       get _conditionsActive() {
         if (this.document.actor && this.constructor._conditions) {
           for (const c of this.conditions.present) {
-            if (!this.document.actor.statuses.has(c)) return false;
+            if (!this.document.actor.statuses.has(c)) {
+              return false;
+            }
           }
           for (const c of this.conditions.absent) {
-            if (this.document.actor.statuses.has(c)) return false;
+            if (this.document.actor.statuses.has(c)) {
+              return false;
+            }
           }
         }
         return true;
@@ -185,7 +191,9 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       _onFireTrigger(trigger, scope) {
         super._onFireTrigger(trigger, scope);
-        if (this.canFire(trigger)) this._onFire(scope);
+        if (this.canFire(trigger)) {
+          this._onFire(scope);
+        }
       }
 
       /**
@@ -198,7 +206,9 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       async _preFireTrigger(trigger, scope) {
         await super._preFireTrigger(trigger, scope);
-        if (this.canFire(trigger)) await this._preFire(scope);
+        if (this.canFire(trigger)) {
+          await this._preFire(scope);
+        }
       }
 
       /**
@@ -216,8 +226,11 @@ export default function TriggerAutomationMixin(Base) {
 
       /** @inheritDoc */
       async getActivations(options) {
-        if (this._hasButtons) return this._getActivations(options);
-        else return [];
+        if (this._hasButtons) {
+          return this._getActivations(options);
+        } else {
+          return [];
+        }
       }
 
       /** @inheritDoc */

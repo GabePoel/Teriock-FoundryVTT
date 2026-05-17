@@ -43,7 +43,9 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
     const activationsByType = {};
     for (const a of toMerge) {
       const impact = a.impact;
-      if (!activationsByType[impact]) activationsByType[impact] = [];
+      if (!activationsByType[impact]) {
+        activationsByType[impact] = [];
+      }
       activationsByType[impact].push(a);
     }
     const formulasByType = objectMap(activationsByType, acts => acts.reduce((a, b) => addFormula(a, b.formula), ""));
@@ -75,7 +77,9 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /** @inheritDoc */
   async primaryAction() {
-    if (!this.checkActors()) return;
+    if (!this.checkActors()) {
+      return;
+    }
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
         boost: true,
@@ -88,7 +92,9 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /** @inheritDoc */
   async secondaryAction() {
-    if (!this.checkActors()) return;
+    if (!this.checkActors()) {
+      return;
+    }
     for (const actor of this.actors) {
       await commands[this.impact].primary(actor, {
         boost: true,

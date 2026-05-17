@@ -95,7 +95,9 @@ export default class ExpirationAutomation extends CritAutomation {
   /** @returns {string[]} */
   get _overrideTriggersPaths() {
     const paths = ["override.triggers"];
-    if (this.override.triggers) paths.push("triggers");
+    if (this.override.triggers) {
+      paths.push("triggers");
+    }
     return paths;
   }
 
@@ -120,8 +122,12 @@ export default class ExpirationAutomation extends CritAutomation {
   getExpirationData(options = {}) {
     const obj = this.toObject();
     const out = {};
-    if (this.override.conditions) out.conditions = obj?.conditions;
-    if (this.override.triggers) out.triggers = obj?.triggers;
+    if (this.override.conditions) {
+      out.conditions = obj?.conditions;
+    }
+    if (this.override.triggers) {
+      out.triggers = obj?.triggers;
+    }
     if (this.override.combat) {
       out.combat = obj?.combat;
       if (options.actor) {

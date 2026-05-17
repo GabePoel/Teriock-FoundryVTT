@@ -11,7 +11,9 @@ import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/u
  * @see {updateWorldTime}
  */
 async function increaseDebt(_worldTime, dt, _options, userId) {
-  if (game.user.id !== userId || !game.user.isActiveGM) return;
+  if (game.user.id !== userId || !game.user.isActiveGM) {
+    return;
+  }
   const operations = [];
   for (const actor of game.actors.relevant) {
     if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {

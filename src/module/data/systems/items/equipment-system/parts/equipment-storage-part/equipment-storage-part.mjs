@@ -37,9 +37,13 @@ export default Base => {
        * @returns {number}
        */
       get totalWeight() {
-        if (this.stashed) return 0;
+        if (this.stashed) {
+          return 0;
+        }
         let total = this.weight * (this.consumable ? this.quantity : 1) * this.weightMultiplier;
-        if (this.storage.enabled) total += this.storage.carriedWeight;
+        if (this.storage.enabled) {
+          total += this.storage.carriedWeight;
+        }
         return total.toNearest(equipmentConfig.weight.interval);
       }
 
@@ -75,7 +79,9 @@ export default Base => {
       /** @inheritDoc */
       async _preCreate(data, options, user) {
         const yes = await super._preCreate(data, options, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         const elder = await this.parent.getElder();
         if (elder?.type === "equipment" && !elder.system.storage.enabled) {
@@ -86,7 +92,9 @@ export default Base => {
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
         const yes = await super._preUpdate(changes, options, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         const _sup = foundry.utils.getProperty(changes, "system._sup");
         if (_sup) {

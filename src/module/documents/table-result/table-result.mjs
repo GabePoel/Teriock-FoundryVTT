@@ -45,11 +45,17 @@ export default class TeriockTableResult extends mixClasses(
    * @returns {Promise<Teriock.Activations.Any[]>}
    */
   async getActivations() {
-    if (!this.documentUuid) return [];
+    if (!this.documentUuid) {
+      return [];
+    }
     const parsed = foundry.utils.parseUuid(this.documentUuid);
-    if (!parsed) return [];
+    if (!parsed) {
+      return [];
+    }
     const doc = await fromUuid(this.documentUuid);
-    if (!doc) return [];
+    if (!doc) {
+      return [];
+    }
     const activations = [];
     const name = doc.fullName ?? doc.name ?? "";
     if (doc.documentName === "Actor") {

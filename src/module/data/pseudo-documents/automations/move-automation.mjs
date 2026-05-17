@@ -64,7 +64,9 @@ export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAu
    */
   get _originPaths() {
     const paths = ["origin"];
-    if (this.origin !== "random") paths.push("originBarrier");
+    if (this.origin !== "random") {
+      paths.push("originBarrier");
+    }
     return paths;
   }
 
@@ -96,13 +98,17 @@ export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAu
           name: this.document?.name || "",
         }),
       });
-    } else return null;
+    } else {
+      return null;
+    }
   }
 
   /** @inheritDoc */
   async getActivations(options = {}) {
     const originToken = await this._getOriginToken(options.execution);
-    if (!this.randomDirection && !originToken) return [];
+    if (!this.randomDirection && !originToken) {
+      return [];
+    }
     const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
     return [
       new MoveActivation({

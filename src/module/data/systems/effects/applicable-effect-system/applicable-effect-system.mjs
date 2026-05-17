@@ -123,17 +123,23 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   _onFireTrigger(trigger) {
     super._onFireTrigger(trigger);
-    if (this.expirations.triggers.has(trigger)) this.expire();
+    if (this.expirations.triggers.has(trigger)) {
+      this.expire();
+    }
   }
 
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
     if (this.parent.parent) {
       const start = TeriockActiveEffect.getEffectStart();
       for (const key of Object.keys(start)) {
-        if (data.start?.[key] !== undefined) delete start[key];
+        if (data.start?.[key] !== undefined) {
+          delete start[key];
+        }
       }
       this.parent.updateSource({ start });
     }
@@ -142,7 +148,9 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   async _preDelete(options, user) {
     const yes = await super._preDelete(options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
     this.parent.fireTrigger("expireEffect", this.parent.getScope());
   }
@@ -191,7 +199,9 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   async shouldExpire() {
-    if (this.shouldExpireFromConditions()) return true;
+    if (this.shouldExpireFromConditions()) {
+      return true;
+    }
     return super.shouldExpire();
   }
 
@@ -200,12 +210,18 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
    * @returns {boolean}
    */
   shouldExpireFromConditions() {
-    if (!this.actor) return false;
+    if (!this.actor) {
+      return false;
+    }
     for (const c of this.expirations.conditions.present) {
-      if (!this.actor.statuses.has(c)) return true;
+      if (!this.actor.statuses.has(c)) {
+        return true;
+      }
     }
     for (const c of this.expirations.conditions.absent) {
-      if (this.actor.statuses.has(c)) return true;
+      if (this.actor.statuses.has(c)) {
+        return true;
+      }
     }
     return false;
   }

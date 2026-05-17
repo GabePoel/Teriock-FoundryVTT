@@ -14,8 +14,12 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
       if (foundry.utils.getProperty(fromUuidSync(uuid), "system._sup")) {
         el.remove();
         // Enable tooltips for remaining search results
-      } else if (makeTooltips) el.dataset.makeTooltip = "true";
+      } else if (makeTooltips) {
+        el.dataset.makeTooltip = "true";
+      }
     });
-    if (makeTooltips) bindCommonActions(this.element);
+    if (makeTooltips) {
+      bindCommonActions(this.element);
+    }
   }
 }

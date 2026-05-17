@@ -97,7 +97,9 @@ export default function EmbedCardDocumentMixin(Base) {
                 if (el) {
                   const action = el.dataset.action;
                   const fn = this.embedActions[action][callback];
-                  if (!fn || (isEmbedded && action !== "openDoc")) return;
+                  if (!fn || (isEmbedded && action !== "openDoc")) {
+                    return;
+                  }
                   ev.stopImmediatePropagation();
                   ev.preventDefault();
                   if (["openDoc", "useDoc"].includes(action) || game.teriock.checkEditable(relative)) {
@@ -107,9 +109,13 @@ export default function EmbedCardDocumentMixin(Base) {
               });
             }
             // Only add context menu entries if this is actually in a document and not just an embedded HTML element
-            if (isEmbedded) return;
+            if (isEmbedded) {
+              return;
+            }
             const menuEntries = this.getCardContextMenuEntries(relative);
-            if (!menuEntries) return;
+            if (!menuEntries) {
+              return;
+            }
             new TeriockContextMenu(element, ".teriock-block", menuEntries, {
               eventName: "contextmenu",
               jQuery: false,

@@ -51,7 +51,9 @@ export default Base => {
         let obj = newDocumentObj("ability");
         if (decision === "import") {
           const out = await selectAbilityDialog();
-          if (!out) return;
+          if (!out) {
+            return;
+          }
           obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
@@ -100,7 +102,9 @@ export default Base => {
         let obj = newDocumentObj("equipment");
         if (decision === "import") {
           const out = await selectEquipmentTypeDialog();
-          if (!out) return;
+          if (!out) {
+            return;
+          }
           obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
@@ -165,7 +169,9 @@ export default Base => {
         let obj = newDocumentObj("property");
         if (decision === "import") {
           const out = await selectPropertyDialog();
-          if (!out) return;
+          if (!out) {
+            return;
+          }
           obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
@@ -182,7 +188,9 @@ export default Base => {
       static async _onCreateRank() {
         const rankClass = await selectClassDialog();
         const innate = this.document.documentName !== "Actor";
-        if (!rankClass) return;
+        if (!rankClass) {
+          return;
+        }
         const classIdentifier = toKebabCase(rankClass);
         const possibleRanks = await Promise.all([
           teriock.fromIdentifier(`rank:rank-1-${classIdentifier}`),
@@ -310,7 +318,9 @@ export default Base => {
         children = children.filter(c => {
           if (foundry.utils.hasProperty(c, "system.revealed")) {
             return foundry.utils.getProperty(c, "system.revealed") || game.user.isGM;
-          } else return true;
+          } else {
+            return true;
+          }
         });
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter) {

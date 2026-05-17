@@ -99,11 +99,18 @@ export default class SummonActivation extends BaseActivation {
     for (const n of this.#nodes) {
       if (n.actor.inCompendium) {
         const summon = this.#findBestSummon(n.actor.uuid);
-        if (!summon) n.state = "packed";
-        else if (summon.isOwner) n.state = "ready";
-        else n.state = "unowned";
-      } else if (n.actor.isOwner) n.state = "ready";
-      else n.state = "unowned";
+        if (!summon) {
+          n.state = "packed";
+        } else if (summon.isOwner) {
+          n.state = "ready";
+        } else {
+          n.state = "unowned";
+        }
+      } else if (n.actor.isOwner) {
+        n.state = "ready";
+      } else {
+        n.state = "unowned";
+      }
     }
   }
 
@@ -115,9 +122,13 @@ export default class SummonActivation extends BaseActivation {
   #findBestSummon(uuid) {
     const candidates = this.#findSummons(uuid);
     const owned = candidates.find(a => a.isOwner);
-    if (owned) return owned;
-    else if (candidates.length) return candidates[0];
-    else return null;
+    if (owned) {
+      return owned;
+    } else if (candidates.length) {
+      return candidates[0];
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -189,16 +200,22 @@ export default class SummonActivation extends BaseActivation {
     this.#nodes = [];
     const srcPromises = [];
     for (const uuid of Array.from(this.uuids)) {
-      if (!uuid.startsWith("Compendium")) srcPromises.push(uuid);
-      else {
+      if (!uuid.startsWith("Compendium")) {
+        srcPromises.push(uuid);
+      } else {
         const summon = this.#findBestSummon(uuid);
-        if (summon) srcPromises.push(summon);
-        else srcPromises.push(resolveDocument(uuid));
+        if (summon) {
+          srcPromises.push(summon);
+        } else {
+          srcPromises.push(resolveDocument(uuid));
+        }
       }
     }
     const srcActors = (await Promise.all(srcPromises)).filter(Boolean);
     const needsSummonFolder = srcActors.some(a => a?.inCompendium) && !this.#summonsFolder;
-    if (needsSummonFolder) await this.#createSummonsFolder();
+    if (needsSummonFolder) {
+      await this.#createSummonsFolder();
+    }
     this.#nodes = srcActors.map(a => {
       return { actor: a, state: "unknown" };
     });

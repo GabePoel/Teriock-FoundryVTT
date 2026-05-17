@@ -50,7 +50,9 @@ export default Base => {
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
         const yes = await super._preUpdate(changes, options, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         options.teriock ??= {};
         const newHp = foundry.utils.mergeObject(
@@ -93,7 +95,9 @@ export default Base => {
           ) {
             continue;
           }
-          if (item.type === "rank" && !item.system.innate) numRanks += 1;
+          if (item.type === "rank" && !item.system.innate) {
+            numRanks += 1;
+          }
           statData._dice.push(...item.system.statDice[stat]._dice);
           statData.base += item.system.statDice[stat].value;
         }
@@ -112,7 +116,9 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async animateStatChangeEffect(diff, color = "white") {
-        if (!diff || !canvas.scene) return;
+        if (!diff || !canvas.scene) {
+          return;
+        }
         const tokens = /** @type {TeriockToken[]} */ this.parent.getActiveTokens();
         const displayedDiff = diff.signedString();
         const displayArgs = {
@@ -123,7 +129,9 @@ export default Base => {
           strokeThickness: 4,
         };
         tokens.forEach(token => {
-          if (!token.visible || token.document.isSecret) return;
+          if (!token.visible || token.document.isSecret) {
+            return;
+          }
           const scrollingTextArgs = [token.center, displayedDiff, displayArgs];
           canvas.interface.createScrollingText(...scrollingTextArgs);
         });

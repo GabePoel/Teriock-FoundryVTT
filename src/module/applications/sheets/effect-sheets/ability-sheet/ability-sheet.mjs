@@ -101,7 +101,9 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) return;
+    if (!this.isEditable) {
+      return;
+    }
     this._activateContextMenus();
     this.#resetElderSorceryElements();
   }

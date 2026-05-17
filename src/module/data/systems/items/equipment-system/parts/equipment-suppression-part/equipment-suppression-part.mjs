@@ -43,8 +43,11 @@ export default Base => {
             action: "toggleDampenedDoc",
             icon: this.dampened ? TERIOCK.display.icons.equipment.dampen : TERIOCK.display.icons.equipment.undampen,
             onClick: async () => {
-              if (this.dampened) await this.undampen();
-              else await this.dampen();
+              if (this.dampened) {
+                await this.undampen();
+              } else {
+                await this.dampen();
+              }
             },
             tooltip: this.dampened
               ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
@@ -55,8 +58,11 @@ export default Base => {
             action: "toggleShatteredDoc",
             icon: this.shattered ? TERIOCK.display.icons.break.shatter : TERIOCK.display.icons.break.repair,
             onClick: async () => {
-              if (this.shattered) await this.repair();
-              else await this.shatter();
+              if (this.shattered) {
+                await this.repair();
+              } else {
+                await this.shatter();
+              }
             },
             tooltip: this.shattered
               ? _loc("TERIOCK.TERMS.Properties.shattered")

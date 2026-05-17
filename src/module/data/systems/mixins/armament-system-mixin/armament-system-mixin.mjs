@@ -331,9 +331,15 @@ export default function ArmamentSystemMixin(Base) {
           spellTurning: Number(this.spellTurning),
           vitals: Number(this.vitals),
         });
-        for (const type of this.damage.types) data[`dmg.type.${type}`] = 1;
-        for (const p of this.props || new Set()) data[`prop.${p}`] = 1;
-        for (const impact of this.impacts) data[`impact.${impact}`] = 1;
+        for (const type of this.damage.types) {
+          data[`dmg.type.${type}`] = 1;
+        }
+        for (const p of this.props || new Set()) {
+          data[`prop.${p}`] = 1;
+        }
+        for (const impact of this.impacts) {
+          data[`impact.${impact}`] = 1;
+        }
         for (const equipmentClass of this.equipmentClasses) {
           data[`class.${equipmentClass}`] = 1;
         }
@@ -359,13 +365,17 @@ export default function ArmamentSystemMixin(Base) {
             this.damage.types.add(p.system.damageType.toLowerCase());
           }
         }
-        if (this.powerLevel === "magic") this.damage.types.add("magic");
+        if (this.powerLevel === "magic") {
+          this.damage.types.add("magic");
+        }
         this.damage.base = addTypesToFormula(this.damage.base, this.damage.types);
         this.damage.twoHanded = addTypesToFormula(this.damage.twoHanded, this.damage.types);
 
         // Range
         this.range.description = "";
-        if (this.range.long.unitType === "zero") this.range.melee = true;
+        if (this.range.long.unitType === "zero") {
+          this.range.melee = true;
+        }
         this.range.ranged = this.range.long.unitType !== "zero";
       }
 
@@ -392,7 +402,9 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareSpecialData();
 
         // Range
-        if (!this.hasAttack) this.range.melee = false;
+        if (!this.hasAttack) {
+          this.range.melee = false;
+        }
         this.range.description = this.range.long.abbreviation;
         if (this.range.long.unitType !== "zero") {
           const shortDescription =

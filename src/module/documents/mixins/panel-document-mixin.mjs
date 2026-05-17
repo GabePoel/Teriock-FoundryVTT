@@ -64,7 +64,9 @@ export default function PanelDocumentMixin(Base) {
       /** @inheritDoc */
       async _buildEmbedHTML(config, options = {}) {
         if (config.values.includes("panel")) {
-          if (!config.label) config.caption = false;
+          if (!config.label) {
+            config.caption = false;
+          }
           return foundry.utils.parseHTML(
             await TeriockTextEditor.makeTooltip(await this.getPanelParts(), {
               noAssociations: config.values.includes("noAssociations"),

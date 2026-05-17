@@ -37,8 +37,12 @@ export default class LocalDocumentField extends DocumentIdField {
 
   /** @override */
   _cast(value) {
-    if (typeof value === "string") return value;
-    if (value instanceof this.model) return value._id;
+    if (typeof value === "string") {
+      return value;
+    }
+    if (value instanceof this.model) {
+      return value._id;
+    }
     throw new Error(`The value provided to a LocalDocumentField must be a ${this.model.name} instance.`);
   }
 
@@ -49,7 +53,9 @@ export default class LocalDocumentField extends DocumentIdField {
    * @returns {DocumentCollection|null}
    */
   _findCollection(model, collection) {
-    if (!model.parent) return null;
+    if (!model.parent) {
+      return null;
+    }
     try {
       return model.parent.getEmbeddedCollection(collection);
     } catch {
@@ -59,23 +65,32 @@ export default class LocalDocumentField extends DocumentIdField {
 
   /** @inheritDoc */
   _validateType(value) {
-    if (!this.options?.fallback) super._validateType(value);
+    if (!this.options?.fallback) {
+      super._validateType(value);
+    }
   }
 
   /** @override */
   initialize(value, model, _options = {}) {
-    if (this.idOnly) return this.options?.fallback || foundry.data.validators.isValidId(value) ? value : null;
+    if (this.idOnly) {
+      return this.options?.fallback || foundry.data.validators.isValidId(value) ? value : null;
+    }
     const collection = this._findCollection(model, this.model.metadata.collection);
     return () => {
       const document = collection?.get(value);
-      if (!document) return this.options?.fallback ? value : null;
-      if (this.options?.fallback)
+      if (!document) {
+        return this.options?.fallback ? value : null;
+      }
+      if (this.options?.fallback) {
         Object.defineProperty(document, "toString", {
           value: () => document.name,
           configurable: true,
           enumerable: false,
         });
-      if (this.options?.nullify && this.options.nullify(document)) return null;
+      }
+      if (this.options?.nullify && this.options.nullify(document)) {
+        return null;
+      }
       return document;
     };
   }

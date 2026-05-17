@@ -125,8 +125,11 @@ export default class UseDocumentsAutomation extends mixClasses(
 
   /** @inheritDoc */
   async _preFire(scope) {
-    if (scope.awaitFire) await this.executeDocuments(scope);
-    else this.executeDocuments(scope);
+    if (scope.awaitFire) {
+      await this.executeDocuments(scope);
+    } else {
+      this.executeDocuments(scope);
+    }
   }
 
   /**

@@ -163,8 +163,12 @@ export default function ThresholdExecutionMixin(Base) {
        */
       #updateFromRollDialog(button) {
         for (const f of this._dialogFields) {
-          if (typeof f.condition === "boolean" && !f.condition) continue;
-          if (typeof f.condition === "function" && !f.condition()) continue;
+          if (typeof f.condition === "boolean" && !f.condition) {
+            continue;
+          }
+          if (typeof f.condition === "function" && !f.condition()) {
+            continue;
+          }
           let value;
           const element =
             /** @type {HTMLInputElement} */
@@ -183,7 +187,9 @@ export default function ThresholdExecutionMixin(Base) {
       /** @inheritDoc */
       async _getInput() {
         if (this.showDialog) {
-          if ((await this._showRollDialog()) === false) return false;
+          if ((await this._showRollDialog()) === false) {
+            return false;
+          }
         }
         await super._getInput();
       }
@@ -203,8 +209,12 @@ export default function ThresholdExecutionMixin(Base) {
       async _prepareBaseFormula() {
         if (!this.formula) {
           let suffix = "";
-          if (this.edge > 0) suffix = "kh1";
-          if (this.edge < 0) suffix = "kl1";
+          if (this.edge > 0) {
+            suffix = "kh1";
+          }
+          if (this.edge < 0) {
+            suffix = "kl1";
+          }
           this.formula = `${1 + Math.abs(this.edge)}d20${suffix}`;
         }
       }
@@ -232,14 +242,20 @@ export default function ThresholdExecutionMixin(Base) {
         smallContainer.style.columnGap = "1.5rem";
         let hasSmallFields = false;
         for (const f of this._dialogFields) {
-          if (typeof f.condition === "boolean" && !f.condition) continue;
-          if (typeof f.condition == "function" && !f.condition()) continue;
+          if (typeof f.condition === "boolean" && !f.condition) {
+            continue;
+          }
+          if (typeof f.condition == "function" && !f.condition()) {
+            continue;
+          }
           const groupConfig = {
             classes: ["tgrid-item"],
             label: _loc(f.label),
             rootId,
           };
-          if (f.hint) groupConfig.hint = _loc(f.hint);
+          if (f.hint) {
+            groupConfig.hint = _loc(f.hint);
+          }
           const inputConfig = {
             id: `${rootId}-${f.name}`,
             integer: f.integer,
@@ -260,15 +276,21 @@ export default function ThresholdExecutionMixin(Base) {
           hasFields = true;
         }
         content.append(mainContainer);
-        if (hasSmallFields) content.append(smallContainer);
-        if (!hasFields) return;
+        if (hasSmallFields) {
+          content.append(smallContainer);
+        }
+        if (!hasFields) {
+          return;
+        }
         const out = await TeriockDialog.wait({
           buttons: this._dialogButtons.map(b => {
             return {
               action: b.action,
               callback: (_event, button) => {
                 this.#updateFromRollDialog(button);
-                if (typeof b.callback === "function") b.callback();
+                if (typeof b.callback === "function") {
+                  b.callback();
+                }
               },
               default: b.default,
               icon: makeIconClass(b.icon || this.icon, "button"),
@@ -288,7 +310,9 @@ export default function ThresholdExecutionMixin(Base) {
               .trim(),
           },
         });
-        if (out === null) return false;
+        if (out === null) {
+          return false;
+        }
       }
     }
   );

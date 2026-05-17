@@ -24,7 +24,9 @@ export default function HackStatApplicationMixin(Base) {
         const statDie = this._getStatDie(target);
         const criticallyWounded = this.document.statuses.has("criticallyWounded");
         await statDie.use(this._consumeStatDie ?? true);
-        if (!criticallyWounded) await this.document.system.takeAwaken();
+        if (!criticallyWounded) {
+          await this.document.system.takeAwaken();
+        }
       }
 
       /**
@@ -81,8 +83,11 @@ export default function HackStatApplicationMixin(Base) {
         this.element.querySelectorAll("[data-action=takeHack]").forEach(el => {
           el.addEventListener("contextmenu", async ev => {
             ev.preventDefault();
-            if (this._hackForward) await onTakeUnhack(this.document, ev, el);
-            else await onTakeHack(this.document, ev, el);
+            if (this._hackForward) {
+              await onTakeUnhack(this.document, ev, el);
+            } else {
+              await onTakeHack(this.document, ev, el);
+            }
           });
         });
       }
@@ -138,7 +143,9 @@ async function onTakeHack(actor, event, target) {
   const part = target.dataset.part;
   if (actor.system.hacks[part].value < hackConfig[part].max) {
     await actor.system.takeHack(part);
-  } else await actor.system.takeUnhack(part, hackConfig[part].max);
+  } else {
+    await actor.system.takeUnhack(part, hackConfig[part].max);
+  }
 }
 
 /**
@@ -151,6 +158,9 @@ async function onTakeHack(actor, event, target) {
 async function onTakeUnhack(actor, event, target) {
   event.stopPropagation();
   const part = target.dataset.part;
-  if (actor.system.hacks[part].value > 0) await actor.system.takeUnhack(part);
-  else await actor.system.takeHack(part, hackConfig[part].max);
+  if (actor.system.hacks[part].value > 0) {
+    await actor.system.takeUnhack(part);
+  } else {
+    await actor.system.takeHack(part, hackConfig[part].max);
+  }
 }

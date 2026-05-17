@@ -16,8 +16,11 @@ async function applyTokenMagicFilters(token, statusId, active) {
   ) {
     if (Object.keys(TERIOCK.display.tokenMagic).includes(statusId)) {
       const params = TERIOCK.display.tokenMagic[statusId];
-      if (active) await TokenMagic.addFilters(token, [params]);
-      else await TokenMagic.deleteFilters(token, params.filterId);
+      if (active) {
+        await TokenMagic.addFilters(token, [params]);
+      } else {
+        await TokenMagic.deleteFilters(token, params.filterId);
+      }
     }
   }
 }

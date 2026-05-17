@@ -149,7 +149,9 @@ export default function ChildSheetMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        if (!this.isEditable) return;
+        if (!this.isEditable) {
+          return;
+        }
         for (const [selector, update] of Object.entries(this._buttonUpdates)) {
           this.element.querySelectorAll(selector).forEach(el => {
             el.addEventListener("click", () => this.document.update(update));

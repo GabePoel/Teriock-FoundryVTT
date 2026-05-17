@@ -44,8 +44,12 @@ export default class TeriockActor extends mixClasses(
    * @returns {number}
    */
   static defaultWeight(size, amount = "typical") {
-    if (amount === "min") size -= 0.5;
-    if (amount === "max") size += 0.5;
+    if (amount === "min") {
+      size -= 0.5;
+    }
+    if (amount === "max") {
+      size += 0.5;
+    }
     return Math.max(0.001, Math.pow(3 + size, 3));
   }
 
@@ -90,7 +94,9 @@ export default class TeriockActor extends mixClasses(
    * @returns {TeriockToken|null}
    */
   get defaultToken() {
-    if (this.token) return this.token.object;
+    if (this.token) {
+      return this.token.object;
+    }
     return this.getActiveTokens()[0] || null;
   }
 
@@ -164,7 +170,9 @@ export default class TeriockActor extends mixClasses(
    */
   _addVirtualStatus(condition, reason, options = {}) {
     const { localize = true } = options;
-    if (!reason) reason = TERIOCK.reference.conditions[condition];
+    if (!reason) {
+      reason = TERIOCK.reference.conditions[condition];
+    }
     this.system.conditionInformation[condition]?.reasons?.add(localize ? _loc(reason) : reason);
     this.statuses.add(condition);
   }
@@ -197,7 +205,9 @@ export default class TeriockActor extends mixClasses(
       armament: [],
     };
     for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) continue;
+      if (!effect.active) {
+        continue;
+      }
       for (const change of effect.system.childChanges) {
         if (
           !change.qualifier ||
@@ -227,7 +237,9 @@ export default class TeriockActor extends mixClasses(
    * @internal
    */
   _applyActiveEffectsToItems(phase) {
-    for (const item of this.items) item.applyActiveEffects(phase);
+    for (const item of this.items) {
+      item.applyActiveEffects(phase);
+    }
   }
 
   /**
@@ -288,7 +300,9 @@ export default class TeriockActor extends mixClasses(
    */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
     this.updateSource(
       foundry.utils.mergeObject({
@@ -311,7 +325,9 @@ export default class TeriockActor extends mixClasses(
    */
   async _preUpdate(changes, options, user) {
     const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
     const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
     if (foundry.utils.hasProperty(changes, "system.size.raw")) {
@@ -340,7 +356,9 @@ export default class TeriockActor extends mixClasses(
    * @returns {Promise<AnyItem[]>}
    */
   async _processStagedItemCreations() {
-    if (!this._stagedItemCreations) return [];
+    if (!this._stagedItemCreations) {
+      return [];
+    }
     const items = await Promise.all(this._stagedItemCreations.map(uuid => fromUuid(uuid)));
     const data = items.map(i => game.items.fromCompendium(i, { keepId: true, clearSort: true }));
     return this.createChildDocuments("Item", Array.from(data));
@@ -351,7 +369,9 @@ export default class TeriockActor extends mixClasses(
    * @returns {Promise<CommonDocument[]>}
    */
   async _processStagedItemDeletions() {
-    if (!this._stagedItemDeletions) return [];
+    if (!this._stagedItemDeletions) {
+      return [];
+    }
     return this.deleteChildDocuments("Item", Array.from(this._stagedItemDeletions));
   }
 
@@ -401,7 +421,9 @@ export default class TeriockActor extends mixClasses(
       }
     }
     for (const info of Object.values(this.system.conditionInformation)) {
-      if (info.reasons.size > 0) info.locked = true;
+      if (info.reasons.size > 0) {
+        info.locked = true;
+      }
     }
   }
 
@@ -415,7 +437,9 @@ export default class TeriockActor extends mixClasses(
 
   /** @inheritDoc */
   async getTokenDocument(data = {}, options = {}) {
-    if (game.canvas.scene.grid.type === 0) data.shape ??= 0;
+    if (game.canvas.scene.grid.type === 0) {
+      data.shape ??= 0;
+    }
     return super.getTokenDocument(data, options);
   }
 
@@ -467,7 +491,9 @@ export default class TeriockActor extends mixClasses(
    * Add statuses and explanations for being wounded.
    */
   prepareVirtualWounds() {
-    if (!this.getSetting("automation.wound")) return;
+    if (!this.getSetting("automation.wound")) {
+      return;
+    }
     // Check what states are triggered in normal circumstances
     const hpUncn = this.system.hp.value < 1;
     const hpCrit = this.system.hp.value === (this.system.hp.min < 0 ? this.system.hp.min + 1 : 0);
@@ -553,8 +579,9 @@ export default class TeriockActor extends mixClasses(
    */
   async useDocument(lookup, options = {}) {
     const doc = await findBestDocument(lookup, this);
-    if (doc) await doc.use(Object.assign(options, { actor: this }));
-    else {
+    if (doc) {
+      await doc.use(Object.assign(options, { actor: this }));
+    } else {
       ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
         format: {
           actor: this.name,

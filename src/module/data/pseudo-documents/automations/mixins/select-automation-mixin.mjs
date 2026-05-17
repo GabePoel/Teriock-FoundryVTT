@@ -32,8 +32,12 @@ export default function SelectAutomationMixin(Base) {
        */
       get _selectionOptionPaths() {
         const paths = ["multi"];
-        if (this.multi) paths.push("all");
-        if (!this.multi || !this.all) paths.push("automatic");
+        if (this.multi) {
+          paths.push("all");
+        }
+        if (!this.multi || !this.all) {
+          paths.push("automatic");
+        }
         return paths;
       }
     }

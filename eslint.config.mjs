@@ -130,4 +130,9 @@ export default tseslint.config(
     languageOptions: { globals: { ...globalMacro } },
   },
   eslintConfigPrettier,
+  {
+    rules: {
+      curly: ["warn", "all"],
+    },
+  },
 );

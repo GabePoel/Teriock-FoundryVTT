@@ -4,12 +4,24 @@
  */
 export function conditionSort(conditions) {
   conditions.sort((a, b) => {
-    if (a === "dead") return -1;
-    if (b === "dead") return 1;
-    if (a === "unconscious") return b === "dead" ? 1 : -1;
-    if (b === "unconscious") return a === "dead" ? -1 : 1;
-    if (a === "down") return b === "dead" || b === "unconscious" ? 1 : -1;
-    if (b === "down") return a === "dead" || a === "unconscious" ? -1 : 1;
+    if (a === "dead") {
+      return -1;
+    }
+    if (b === "dead") {
+      return 1;
+    }
+    if (a === "unconscious") {
+      return b === "dead" ? 1 : -1;
+    }
+    if (b === "unconscious") {
+      return a === "dead" ? -1 : 1;
+    }
+    if (a === "down") {
+      return b === "dead" || b === "unconscious" ? 1 : -1;
+    }
+    if (b === "down") {
+      return a === "dead" || a === "unconscious" ? -1 : 1;
+    }
     return a.localeCompare(b);
   });
   return conditions;
@@ -25,7 +37,9 @@ export function conditionSort(conditions) {
  */
 export function docSort(docs, options = { alphabetical: true }) {
   return docs.sort((a, b) => {
-    if (!options.alphabetical && a.sort !== b.sort) return a.sort - b.sort;
+    if (!options.alphabetical && a.sort !== b.sort) {
+      return a.sort - b.sort;
+    }
     return a.name.localeCompare(b.name);
   });
 }
@@ -67,12 +81,16 @@ export function rankSort(ranks) {
 export function effectSort(abilities) {
   const effectFormOrder = Object.keys(TERIOCK.config.effect.form || {});
   return abilities.sort((a, b) => {
-    if (!a.system?.form || !b.system?.form) return a.name.localeCompare(b.name);
+    if (!a.system?.form || !b.system?.form) {
+      return a.name.localeCompare(b.name);
+    }
     const typeA = a.system?.form || "";
     const typeB = b.system?.form || "";
     const indexA = effectFormOrder.indexOf(typeA);
     const indexB = effectFormOrder.indexOf(typeB);
-    if (indexA !== indexB) return indexA - indexB;
+    if (indexA !== indexB) {
+      return indexA - indexB;
+    }
     return (a.name || "").localeCompare(b.name || "");
   });
 }

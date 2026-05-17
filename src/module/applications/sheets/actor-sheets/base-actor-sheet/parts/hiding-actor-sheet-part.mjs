@@ -44,7 +44,9 @@ export default Base =>
     async _onRender(context, options) {
       await super._onRender(context, options);
       const toggleButton = this.window.header.querySelector("[data-action='toggleHideThis']");
-      if (toggleButton) this.#setToggleHideButtonAttributes(toggleButton);
+      if (toggleButton) {
+        this.#setToggleHideButtonAttributes(toggleButton);
+      }
     }
 
     /** @inheritDoc */

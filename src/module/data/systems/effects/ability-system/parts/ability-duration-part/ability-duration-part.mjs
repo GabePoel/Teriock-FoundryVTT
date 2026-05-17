@@ -31,10 +31,14 @@ export default Base => {
       get _isSuppressedConditions() {
         if (this.maneuver === "passive" && this.actor) {
           for (const condition of this.duration.conditions.present) {
-            if (!this.actor.statuses.has(condition)) return true;
+            if (!this.actor.statuses.has(condition)) {
+              return true;
+            }
           }
           for (const condition of this.duration.conditions.absent) {
-            if (this.actor.statuses.has(condition)) return true;
+            if (this.actor.statuses.has(condition)) {
+              return true;
+            }
           }
         }
         return false;

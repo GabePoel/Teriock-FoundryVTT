@@ -37,7 +37,9 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    */
   #checkExpiration(effect, trigger, time, actorUuid, ops = []) {
     const expiration = effect.system.expirations.combat;
-    if (expiration.what.type === "none" || !effect.active) return;
+    if (expiration.what.type === "none" || !effect.active) {
+      return;
+    }
     if (
       expiration.when.trigger === trigger &&
       expiration.when.time === time &&
@@ -113,7 +115,9 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     for (const effect of mightExpire) {
       this.#checkExpiration(effect, trigger, time, timeActor?.uuid, ops);
     }
-    if (ops.length === 0) return;
+    if (ops.length === 0) {
+      return;
+    }
     game.users.queryGM(
       "teriock.massWrite",
       { operations: ops },

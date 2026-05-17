@@ -26,7 +26,9 @@ function formBox(input, options) {
   let content = input;
   let overflowTooltip = "";
   let overflowContent = overflow;
-  if (overflow === true) overflowContent = input;
+  if (overflow === true) {
+    overflowContent = input;
+  }
   if (overflowContent && overflowContent.length > 16) {
     overflowTooltip = `data-tooltip="${overflowContent}"`;
   }

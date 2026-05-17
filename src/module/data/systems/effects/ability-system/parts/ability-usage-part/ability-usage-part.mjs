@@ -64,7 +64,9 @@ export default Base => {
       /** @inheritDoc */
       static migrateData(source, options, state) {
         // Range migration
-        if (typeof source.range === "string") source.range = { raw: source.range };
+        if (typeof source.range === "string") {
+          source.range = { raw: source.range };
+        }
 
         // Expansion migration
         if (typeof source.expansion === "string") {
@@ -89,8 +91,12 @@ export default Base => {
             let unit;
             let raw;
             const lower = source.executionTime.base.toLowerCase();
-            if (lower.includes("short")) unit = "shortRest";
-            if (lower.includes("long")) unit = "longRest";
+            if (lower.includes("short")) {
+              unit = "shortRest";
+            }
+            if (lower.includes("long")) {
+              unit = "longRest";
+            }
             const units = ["second", "minute", "hour", "day", "week", "year"];
             for (const u of units) {
               if (lower.includes(u)) {
@@ -238,7 +244,9 @@ export default Base => {
           range: this.range.value,
         });
         // Add deliveries
-        if (this.delivery) data[`delivery.${this.delivery}`] = 1;
+        if (this.delivery) {
+          data[`delivery.${this.delivery}`] = 1;
+        }
         data["delivery.ball"] = Number(this.isBall);
         data["delivery.ray"] = Number(this.isRay);
         data["delivery.touch"] = Number(this.isTouch);

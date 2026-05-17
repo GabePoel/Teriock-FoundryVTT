@@ -13,7 +13,9 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(Immunit
    */
   constructor(options = {}) {
     super(options);
-    if (options.threshold === undefined) this.threshold = 10;
+    if (options.threshold === undefined) {
+      this.threshold = 10;
+    }
     this.img =
       options.img || (this.hex ? getImage("effect-types", "Hexproof") : getImage("effect-types", "Resistance"));
     this.rule = this.hex ? "hexproof" : "resistance";

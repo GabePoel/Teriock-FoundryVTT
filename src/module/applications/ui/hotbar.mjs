@@ -13,7 +13,9 @@ export default class TeriockHotbar extends Hotbar {
   #getMacroForSlot(element) {
     const slot = element.dataset.slot;
     const macroId = game.user.hotbar[slot];
-    if (!macroId) return null;
+    if (!macroId) {
+      return null;
+    }
     return game.macros.get(macroId) ?? null;
   }
 

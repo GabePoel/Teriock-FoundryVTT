@@ -7,7 +7,9 @@ import { icons } from "../../../constants/display/icons.mjs";
  */
 function fnFactory(operation) {
   return async function statusCommandFunction(a, o) {
-    if (game.actors.check(a) && o?.status) await operation(a, o.status);
+    if (game.actors.check(a) && o?.status) {
+      await operation(a, o.status);
+    }
   };
 }
 

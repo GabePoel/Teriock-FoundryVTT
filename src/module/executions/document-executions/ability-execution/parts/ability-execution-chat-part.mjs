@@ -115,7 +115,9 @@ export default function AbilityExecutionChatPart(Base) {
         const executorAutomations = statusAutomations.filter(a => a.executor);
         for (const a of executorAutomations) {
           const uuid = this.actor?.defaultToken?.document?.uuid || this.actor?.uuid;
-          if (uuid) this.#attachTrackedStatusAutomationUuids(a, [uuid]);
+          if (uuid) {
+            this.#attachTrackedStatusAutomationUuids(a, [uuid]);
+          }
         }
       }
 

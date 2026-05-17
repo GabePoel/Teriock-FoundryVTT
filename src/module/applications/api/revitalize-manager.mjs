@@ -53,7 +53,9 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       });
       rollActivation.event = event;
       await rollActivation.primaryAction();
-      if (this._consumeStatDice) await statDie.toggle(true);
+      if (this._consumeStatDice) {
+        await statDie.toggle(true);
+      }
     } else {
       await super._onRollStatDie(event, target);
     }

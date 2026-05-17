@@ -63,14 +63,20 @@ export default class CommonOutcomesAutomation extends mixClasses(
    */
   async #applyCommonOutcomes(scope = {}) {
     const actor = scope?.actor ?? this.document.actor;
-    if (!actor) return;
+    if (!actor) {
+      return;
+    }
     const outcomes = listFormat(this.common.map(c => TERIOCK.config.consequence.common[c]));
     const shouldApply = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.CommonOutcomes.DIALOG.content",
       data: { outcomes },
     });
-    if (!shouldApply) return;
-    for (const c of this.common) await commands[c].primary(actor);
+    if (!shouldApply) {
+      return;
+    }
+    for (const c of this.common) {
+      await commands[c].primary(actor);
+    }
   }
 
   /** @inheritDoc */
@@ -87,7 +93,9 @@ export default class CommonOutcomesAutomation extends mixClasses(
       .filter(Boolean)
       .map(c => {
         const Act = Object.values(activations).find(A => A.TYPE === c);
-        if (Act) return new Act(foundry.utils.deepClone(activationOptions));
+        if (Act) {
+          return new Act(foundry.utils.deepClone(activationOptions));
+        }
       })
       .filter(Boolean);
   }

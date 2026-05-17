@@ -498,7 +498,9 @@ Hooks.once("ready", () => {
   // Pre-index All Sub-Document Compendium Packs
   // -------------------------------------------
   for (const p of game.packs.contents) {
-    if (["Item", "ActiveEffect"].includes(p.documentName)) p.getIndex();
+    if (["Item", "ActiveEffect"].includes(p.documentName)) {
+      p.getIndex();
+    }
   }
 });
 

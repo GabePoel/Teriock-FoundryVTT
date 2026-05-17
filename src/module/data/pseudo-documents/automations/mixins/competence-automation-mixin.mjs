@@ -30,7 +30,9 @@ export default function CompetenceAutomationMixin(Base) {
        */
       get _competencePaths() {
         const paths = ["overrideCompetence"];
-        if (this.overrideCompetence) paths.push("competence.raw");
+        if (this.overrideCompetence) {
+          paths.push("competence.raw");
+        }
         return paths;
       }
 

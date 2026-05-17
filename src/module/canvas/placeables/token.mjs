@@ -26,7 +26,9 @@ export default class TeriockToken extends Token {
     if (this.document.hasStatusEffect("dead")) {
       overlayImg = "icons/svg/skull.svg";
     }
-    if (overlayImg) promises.push(this._drawOverlay(overlayImg));
+    if (overlayImg) {
+      promises.push(this._drawOverlay(overlayImg));
+    }
     if (promises.length > 0) {
       await Promise.allSettled(promises);
       this.effects.sortChildren();

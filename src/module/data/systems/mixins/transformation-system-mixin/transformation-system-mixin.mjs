@@ -107,13 +107,17 @@ export default function TransformationSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async #addBatchCreateTransformedSpecies() {
-        if (!this.isTransformation || !this.actor) return;
+        if (!this.isTransformation || !this.actor) {
+          return;
+        }
         const uuids = this.transformation.uuids;
         const flags = this._buildTransformationFlags();
         this.parent.updateSource({ flags });
         let species = /** @type {TeriockSpecies[]} */ await Promise.all(uuids.map(uuid => fromUuid(uuid)));
         species = species.filter(s => s);
-        if (!species.length) return;
+        if (!species.length) {
+          return;
+        }
         const itemData = /** @type {TeriockSpecies[]} */ species.map(s => s.toObject());
         itemData.forEach(s => {
           s.system._dep = this.parent.id;
@@ -141,7 +145,9 @@ export default function TransformationSystemMixin(Base) {
        */
       #addBatchToggle(collection, id, value) {
         const toggle = TERIOCK.config.transformation.suppress[collection.get(id)?.type]?.path;
-        if (!toggle) return;
+        if (!toggle) {
+          return;
+        }
         this.#addBatchUpdateDocument(collection, id, { [toggle]: value });
       }
 
@@ -150,7 +156,9 @@ export default function TransformationSystemMixin(Base) {
        * @param value
        */
       #addBatchToggleDocuments(value) {
-        if (!this.actor) return;
+        if (!this.actor) {
+          return;
+        }
         const fm = this.#flagMap;
         for (const id of fm.disabledItems) {
           this.#addBatchToggle(this.actor.items, id, value);
@@ -177,15 +185,22 @@ export default function TransformationSystemMixin(Base) {
        * @param {object} data
        */
       #addBatchUpdateDocument(collection, id, data) {
-        if (!collection.get(id)) return;
+        if (!collection.get(id)) {
+          return;
+        }
         let operation = this.#batchedOperations.find(
           op => op.documentName === collection.documentName && op.action === "update" && op.ids.includes(id),
         );
         if (operation) {
-          if (!operation.updates) operation.updates = [];
+          if (!operation.updates) {
+            operation.updates = [];
+          }
           const update = operation.updates.find(u => u._id === id);
-          if (update) Object.assign(update, data);
-          else operation.updates.push({ _id: id, ...data });
+          if (update) {
+            Object.assign(update, data);
+          } else {
+            operation.updates.push({ _id: id, ...data });
+          }
         } else {
           operation = {
             action: "update",
@@ -203,7 +218,9 @@ export default function TransformationSystemMixin(Base) {
        * Batch all transformation application updates.
        */
       #addBatchUpdatesApplyTransformation() {
-        if (!this.actor) return;
+        if (!this.actor) {
+          return;
+        }
         this.#addBatchToggleDocuments(true);
       }
 
@@ -211,7 +228,9 @@ export default function TransformationSystemMixin(Base) {
        * Batch all transformation removal updates.
        */
       #addBatchUpdatesRemoveTransformation() {
-        if (!this.actor) return;
+        if (!this.actor) {
+          return;
+        }
         this.#addBatchToggleDocuments(false);
         if (this.transformation.reset.size) {
           this.#batchedOperations.push({
@@ -292,8 +311,9 @@ export default function TransformationSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async #modifyOnUpdate() {
-        if (this.parent.disabled) this.#addBatchUpdatesRemoveTransformation();
-        else {
+        if (this.parent.disabled) {
+          this.#addBatchUpdatesRemoveTransformation();
+        } else {
           this.#addBatchUpdatesApplyTransformation();
           if (this.transformation.reset.size) {
             this.#batchedOperations.push({
@@ -393,9 +413,13 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
         const yes = await super._preUpdate(changes, options, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
-        if (!this.actor || !this.isTransformation) return;
+        if (!this.actor || !this.isTransformation) {
+          return;
+        }
         if (foundry.utils.hasProperty(changes, "disabled")) {
           const wasDisabled = changes.disabled === false;
           if (wasDisabled) {

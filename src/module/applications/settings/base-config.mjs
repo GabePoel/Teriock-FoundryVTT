@@ -49,7 +49,9 @@ export default class BaseConfig extends TeriockBaseApplication {
       const updated = await game.settings.set("teriock", key, value, {
         document: true,
       });
-      if (prior === (updated?._source?.value ?? updated)) continue;
+      if (prior === (updated?._source?.value ?? updated)) {
+        continue;
+      }
       requiresClientReload ||= setting.scope !== "world" && setting?.requiresReload;
       requiresWorldReload ||= setting.scope === "world" && setting?.requiresReload;
     }
@@ -93,7 +95,9 @@ export default class BaseConfig extends TeriockBaseApplication {
    */
   createSettingField(name) {
     const setting = game.settings.settings.get(`teriock.${name}`);
-    if (!setting) throw new Error(`Setting \`teriock.${name}\` not registered.`);
+    if (!setting) {
+      throw new Error(`Setting \`teriock.${name}\` not registered.`);
+    }
     const isDataField = setting.type instanceof fields.DataField;
     const Field = {
       [Boolean]: fields.BooleanField,
@@ -110,11 +114,12 @@ export default class BaseConfig extends TeriockBaseApplication {
       label: _loc(setting.name),
       value: game.settings.get("teriock", name),
     };
-    if (setting.choices)
+    if (setting.choices) {
       data.options = Object.entries(setting.choices).map(([value, label]) => ({
         value,
         label: _loc(label),
       }));
+    }
     return data;
   }
 

@@ -17,7 +17,9 @@ export default Base =>
      */
     _getFilteredAbilities(abilities = []) {
       const filters = this.settings.abilityFilters || {};
-      if (!abilities || !Array.isArray(abilities)) return [];
+      if (!abilities || !Array.isArray(abilities)) {
+        return [];
+      }
       return abilities.filter(
         a =>
           !a.isReference &&
@@ -56,7 +58,9 @@ export default Base =>
      */
     _getFilteredEquipment(equipment = []) {
       const filters = this.settings.equipmentFilters || {};
-      if (!equipment || !Array.isArray(equipment)) return [];
+      if (!equipment || !Array.isArray(equipment)) {
+        return [];
+      }
       return equipment.filter(
         e =>
           (!filters.properties || hasProperty(e, filters.properties)) &&

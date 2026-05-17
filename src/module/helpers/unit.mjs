@@ -16,7 +16,9 @@ export function standardizeLengthUnitName(unit) {
     km: ["kilometer", "kilometers"],
   };
   for (const [key, value] of Object.entries(UNIT_ALIASES)) {
-    if (value.includes(unit)) return key;
+    if (value.includes(unit)) {
+      return key;
+    }
   }
   return unit;
 }

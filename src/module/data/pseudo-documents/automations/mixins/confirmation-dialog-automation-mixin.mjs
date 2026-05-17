@@ -81,7 +81,9 @@ export default function ConfirmationDialogAutomationMixin(Base) {
           },
           options.data ?? {},
         );
-        if (!this.showConfirmationDialog) return true;
+        if (!this.showConfirmationDialog) {
+          return true;
+        }
         const contentString = options.content ?? this.#pre("DIALOG.content");
         const icon = options.icon ?? TERIOCK.display.icons.pseudoDocument.automation;
         const title = _loc(options.title ?? this.#pre("DIALOG.title"), data);

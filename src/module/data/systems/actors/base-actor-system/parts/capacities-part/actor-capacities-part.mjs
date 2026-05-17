@@ -79,9 +79,15 @@ export default Base => {
        */
       #prepareEncumbrance() {
         let el = 0;
-        if (this.weight.carried >= this.carryingCapacity.light) el = 1;
-        if (this.weight.carried >= this.carryingCapacity.heavy) el = 2;
-        if (this.weight.carried >= this.carryingCapacity.max) el = 3;
+        if (this.weight.carried >= this.carryingCapacity.light) {
+          el = 1;
+        }
+        if (this.weight.carried >= this.carryingCapacity.heavy) {
+          el = 2;
+        }
+        if (this.weight.carried >= this.carryingCapacity.max) {
+          el = 3;
+        }
         this.encumbranceLevel = Math.clamp(this.encumbranceLevel + el, 0, 3);
       }
 

@@ -22,7 +22,9 @@ export default class CharacterSystem extends BaseActorSystem {
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
     const defaultItemIdentifiers = [
       "power:created-elder-sorceries",

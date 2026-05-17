@@ -113,7 +113,9 @@ export default Base => {
         // If we still need to pay more, take higher denominations for change
         if (remainingAmount > 0) {
           for (const currency of currencies) {
-            if (remainingAmount <= 0) break;
+            if (remainingAmount <= 0) {
+              break;
+            }
 
             const alreadyTaken = toDeduct[currency.key] || 0;
             const stillHave = currency.current - alreadyTaken;
@@ -143,7 +145,9 @@ export default Base => {
 
           // Give change using the largest denominations possible
           for (const currency of currencies) {
-            if (changeRemaining <= 0) break;
+            if (changeRemaining <= 0) {
+              break;
+            }
 
             const changeAmount = Math.floor(changeRemaining / currency.value);
             if (changeAmount > 0) {

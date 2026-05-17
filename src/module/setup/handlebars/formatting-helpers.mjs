@@ -39,8 +39,11 @@ function hackFill(bar) {
   const min = bar?.min || 0;
   const max = bar?.max || 0;
   const value = bar?.value || 0;
-  if (value === min) return "mic fa-solid";
-  else if (value === max) return "mic fa-faint";
+  if (value === min) {
+    return "mic fa-solid";
+  } else if (value === max) {
+    return "mic fa-faint";
+  }
   return "mic fa-intermediate";
 }
 
@@ -91,8 +94,12 @@ function barLost(value, max, temp = 0) {
  * @returns {string}
  */
 function barTempHide(value, max, temp = 0, morganti = 0) {
-  if (!temp) return "display: none;";
-  if (max === value && !morganti) return "border-right: none;";
+  if (!temp) {
+    return "display: none;";
+  }
+  if (max === value && !morganti) {
+    return "border-right: none;";
+  }
   return "";
 }
 

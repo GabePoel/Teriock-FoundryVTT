@@ -32,7 +32,9 @@ export default class HarmRoll extends ImpactRoll {
           const rollStyleAutomations = /** @type {RollStyleAutomation[]} */ harm.system.automations.filter(
             a => a.type === "rollStyle",
           );
-          if (!rollStyleAutomations.length) continue;
+          if (!rollStyleAutomations.length) {
+            continue;
+          }
           for (const a of rollStyleAutomations) {
             die.options.appearance = foundry.utils.mergeObject(die.options.appearance ?? {}, a.style || {});
             die.options.sfx = foundry.utils.mergeObject(die.options.sfx ?? {}, a.sfx || {});
@@ -60,8 +62,12 @@ export default class HarmRoll extends ImpactRoll {
    * @returns {Promise<TeriockHarm[]>}
    */
   async getHarmArray() {
-    if (!["damage", "drain"].includes(this.impact)) return [];
-    if (this._harms) return this._harms;
+    if (!["damage", "drain"].includes(this.impact)) {
+      return [];
+    }
+    if (this._harms) {
+      return this._harms;
+    }
     const identifiers = this.harmIdentifiers.map(i => `${this.impact}:${i}`);
     const harms = await Promise.all(identifiers.map(i => fromHarmIdentifier(i)));
     this._harms = harms.filter(Boolean);

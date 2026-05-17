@@ -41,7 +41,9 @@ export default class DependentsRegistry {
    * @return {AnyChildDocument|null}
    */
   fetchFromUuid(ref, uuid) {
-    if (this.#disabled) return null;
+    if (this.#disabled) {
+      return null;
+    }
     // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
     if (ref.parent?.pack && uuid.includes(ref.parent?.uuid)) {
       const [, embeddedName, id] = uuid.replace(ref.parent.uuid, "").split(".");
@@ -56,7 +58,9 @@ export default class DependentsRegistry {
    * @returns {AnyChildDocument[]}
    */
   get(doc) {
-    if (this.#disabled) return [];
+    if (this.#disabled) {
+      return [];
+    }
     doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);
     return Array.from(this.#dependents.get(doc?.uuid) ?? [])
       .map(uuid => this.fetchFromUuid(doc, uuid))
@@ -89,8 +93,12 @@ export default class DependentsRegistry {
    */
   track(idOrUuid, dependent) {
     const uuid = this.resolveDependentID(idOrUuid, dependent);
-    if (!uuid) return;
-    if (!this.#dependents.has(uuid)) this.#dependents.set(uuid, new Set());
+    if (!uuid) {
+      return;
+    }
+    if (!this.#dependents.has(uuid)) {
+      this.#dependents.set(uuid, new Set());
+    }
     this.#dependents.get(uuid).add(dependent.uuid);
   }
 

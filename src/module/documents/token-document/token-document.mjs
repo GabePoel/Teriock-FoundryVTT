@@ -51,7 +51,9 @@ export default class TeriockTokenDocument extends mixClasses(
   _prepareDetectionModes() {
     super._prepareDetectionModes();
     const basicMode = this.detectionModes.basicSight;
-    if (basicMode) basicMode.enabled = false;
+    if (basicMode) {
+      basicMode.enabled = false;
+    }
     if (this.detectionModes?.lightPerception) {
       this.detectionModes.lightPerception.enabled = true;
       this.detectionModes.lightPerception.range = Infinity;
@@ -113,7 +115,9 @@ export default class TeriockTokenDocument extends mixClasses(
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
-    if (this.isLazyDelta) return;
+    if (this.isLazyDelta) {
+      return;
+    }
     super.prepareEmbeddedDocuments();
     this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
   }

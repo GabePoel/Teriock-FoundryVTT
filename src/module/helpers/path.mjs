@@ -21,8 +21,12 @@ export function systemPath(path) {
 export function getImage(category, name, fallback) {
   const out = fallback || systemPath("icons/documents/uncertainty.svg");
   let l1 = toCamelCase(category);
-  if (!iconManifest[l1]) l1 = indexConfig[category];
-  if (!iconManifest[l1]) return out;
+  if (!iconManifest[l1]) {
+    l1 = indexConfig[category];
+  }
+  if (!iconManifest[l1]) {
+    return out;
+  }
   return iconManifest[l1][toCamelCase(name)] || out;
 }
 

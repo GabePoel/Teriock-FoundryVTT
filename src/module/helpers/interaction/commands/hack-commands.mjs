@@ -5,7 +5,9 @@
  */
 function fnFactory(operation) {
   return async function hackCommandFunction(a, o) {
-    if (game.actors.check(a) && o?.part) await operation(a, o.part);
+    if (game.actors.check(a) && o?.part) {
+      await operation(a, o.part);
+    }
   };
 }
 

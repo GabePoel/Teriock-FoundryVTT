@@ -92,7 +92,9 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
     if (
       this.actor?.powers.map(p => p.system.identifier).includes(this.identifier) &&

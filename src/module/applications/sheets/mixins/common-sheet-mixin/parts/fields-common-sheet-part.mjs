@@ -28,7 +28,9 @@ export default Base => {
        * @returns {Promise<void>}
        */
       static async #onIncrement(event, target, change = 1) {
-        if (event.button === 2) change = change * -1;
+        if (event.button === 2) {
+          change = change * -1;
+        }
         const { path } = target.dataset;
         const value = foundry.utils.getProperty(this.document, path);
         const schema = this.document.getSchema(path);
@@ -63,7 +65,9 @@ export default Base => {
        * @returns {Promise<void>}
        */
       static async #onUpdateUnit(_event, target) {
-        if (!this.isEditable) return;
+        if (!this.isEditable) {
+          return;
+        }
         await foundry.utils.getProperty(this.document, target.dataset.path).updateDialog();
       }
 
@@ -83,7 +87,9 @@ export default Base => {
         this.element.querySelectorAll(".teriock-change-input").forEach(
           /** @param {HTMLElement} el */ el => {
             const { name } = el.attributes;
-            if (!name?.value) return;
+            if (!name?.value) {
+              return;
+            }
             el.addEventListener("change", async e => {
               const existing = foundry.utils.getProperty(this.document, name.value);
               const copy = foundry.utils.deepClone(existing) || [];
@@ -114,7 +120,9 @@ export default Base => {
       _setupUpdateHandlers() {
         this.element.querySelectorAll(".teriock-update-input").forEach(el => {
           const name = el.getAttribute("name");
-          if (!name) return;
+          if (!name) {
+            return;
+          }
           el.addEventListener("change", async e => {
             const target = /** @type {HTMLFormElement} */ e.currentTarget;
             const value = target.value ?? target.getAttribute("data-value");

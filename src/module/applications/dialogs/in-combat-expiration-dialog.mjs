@@ -30,7 +30,9 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
         icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
       },
     });
-    if (expire) await effect.system.expire();
+    if (expire) {
+      await effect.system.expire();
+    }
   } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
     const contentHtml = document.createElement("div");
     if (effect.system.expirations.description) {

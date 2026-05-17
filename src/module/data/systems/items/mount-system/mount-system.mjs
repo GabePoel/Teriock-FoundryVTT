@@ -52,8 +52,11 @@ export default class MountSystem extends mixClasses(
         action: "toggleMountedDoc",
         icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
         onClick: async () => {
-          if (this.mounted) await this.unmount();
-          else await this.mount();
+          if (this.mounted) {
+            await this.unmount();
+          } else {
+            await this.mount();
+          }
         },
         tooltip: this.mounted
           ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")

@@ -6,13 +6,17 @@ import { icons } from "../../../constants/display/icons.mjs";
  * @returns {Promise<void>}
  */
 async function use(actor, options = {}) {
-  if (!game.actors.check(actor)) return;
+  if (!game.actors.check(actor)) {
+    return;
+  }
   let attacker = actor?.system?.wielding.attacker;
   if (options.armament) {
     const newAttacker = await foundry.utils.fromUuid(options.armament, {
       relative: actor,
     });
-    if (newAttacker) attacker = newAttacker;
+    if (newAttacker) {
+      attacker = newAttacker;
+    }
   }
   if (!attacker) {
     ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {

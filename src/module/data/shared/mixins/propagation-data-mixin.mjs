@@ -43,8 +43,11 @@ export default function PropagationDataMixin(Base) {
           if (collection) {
             for (const doc of collection) {
               if (typeof doc[methodName] === "function") {
-                if (isAsync) await doc[methodName](...args);
-                else doc[methodName](...args);
+                if (isAsync) {
+                  await doc[methodName](...args);
+                } else {
+                  doc[methodName](...args);
+                }
               }
             }
           }

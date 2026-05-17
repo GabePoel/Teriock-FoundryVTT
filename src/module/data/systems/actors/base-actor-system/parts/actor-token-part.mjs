@@ -34,7 +34,9 @@ export default Base => {
        * Prepare token detection mode changes.
        */
       _prepareTokenDetectionModes() {
-        if (!this.actor.getSetting("token.autoDetectionModes")) return;
+        if (!this.actor.getSetting("token.autoDetectionModes")) {
+          return;
+        }
         for (const [sense, config] of Object.entries(TERIOCK.config.character.sense)) {
           if (config?.detectionMode) {
             this._tokenChanges.push({

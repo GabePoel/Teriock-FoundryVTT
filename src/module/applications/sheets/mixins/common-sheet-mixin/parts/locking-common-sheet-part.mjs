@@ -52,7 +52,9 @@ export default Base => {
       async _onRender(context, options) {
         await super._onRender(context, options);
         const toggleButton = this.window.header?.querySelector("[data-action='toggleLockThis']");
-        if (toggleButton) this.#setToggleLockButtonAttributes(toggleButton);
+        if (toggleButton) {
+          this.#setToggleLockButtonAttributes(toggleButton);
+        }
       }
 
       /** @inheritDoc */

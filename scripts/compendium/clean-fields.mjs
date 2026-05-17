@@ -3,9 +3,13 @@
  * @param {AnyCommonDocument} doc
  */
 export function cleanDocument(doc) {
-  if (!["damage", "drain", "text"].includes(doc.type)) delete doc.sort;
+  if (!["damage", "drain", "text"].includes(doc.type)) {
+    delete doc.sort;
+  }
   delete doc.ownership;
-  if (!doc.folder) delete doc.folder;
+  if (!doc.folder) {
+    delete doc.folder;
+  }
   if (doc._stats) {
     delete doc._stats.createdTime;
     delete doc._stats.duplicateSource;
@@ -16,14 +20,30 @@ export function cleanDocument(doc) {
   if (doc.system) {
     cleanCommon(doc);
     cleanActiveEffect(doc);
-    if (doc.type === "character" || doc.type === "creature") cleanActor(doc);
-    if (doc.system.automations) cleanAutomations(doc.system.automations);
-    if (doc.type === "ability") cleanAbility(doc);
-    if (doc.type === "body") cleanBody(doc);
-    if (doc.type === "creature") cleanCreature(doc);
-    if (doc.type === "equipment") cleanEquipment(doc);
-    if (doc.type === "power") cleanPower(doc);
-    if (doc.type === "property") cleanProperty(doc);
+    if (doc.type === "character" || doc.type === "creature") {
+      cleanActor(doc);
+    }
+    if (doc.system.automations) {
+      cleanAutomations(doc.system.automations);
+    }
+    if (doc.type === "ability") {
+      cleanAbility(doc);
+    }
+    if (doc.type === "body") {
+      cleanBody(doc);
+    }
+    if (doc.type === "creature") {
+      cleanCreature(doc);
+    }
+    if (doc.type === "equipment") {
+      cleanEquipment(doc);
+    }
+    if (doc.type === "power") {
+      cleanPower(doc);
+    }
+    if (doc.type === "property") {
+      cleanProperty(doc);
+    }
   }
 }
 
@@ -68,13 +88,23 @@ function cleanCommon(doc) {
  * @param {TeriockActiveEffect} doc
  */
 function cleanActiveEffect(doc) {
-  if (doc.tint === "#ffffff") delete doc.tint;
-  if (doc.type === "ability" || doc.type === "property") doc.transfer = true;
+  if (doc.tint === "#ffffff") {
+    delete doc.tint;
+  }
+  if (doc.type === "ability" || doc.type === "property") {
+    doc.transfer = true;
+  }
   delete doc.duration;
   delete doc.start;
-  if (!doc.disabled) delete doc.disabled;
-  if (doc.showIcon) delete doc.showIcon;
-  if (doc.system.revealed) delete doc.system.revealed;
+  if (!doc.disabled) {
+    delete doc.disabled;
+  }
+  if (doc.showIcon) {
+    delete doc.showIcon;
+  }
+  if (doc.system.revealed) {
+    delete doc.system.revealed;
+  }
 }
 
 /**
@@ -126,7 +156,9 @@ function cleanActor(doc) {
   delete doc.system.lp;
   delete doc.system.weight;
   delete doc.system.detection;
-  if (doc.system.scaling) delete doc.system.scaling.lvl;
+  if (doc.system.scaling) {
+    delete doc.system.scaling.lvl;
+  }
 }
 
 /**
@@ -153,11 +185,17 @@ function cleanCreature(doc) {
  */
 function cleanPiercing(piercing) {
   // Clean Legacy Keys
-  if (piercing.av0 === false) delete piercing.av0;
-  if (piercing.ub === false) delete piercing.ub;
+  if (piercing.av0 === false) {
+    delete piercing.av0;
+  }
+  if (piercing.ub === false) {
+    delete piercing.ub;
+  }
 
   // Clean Current Keys
-  if (isZero(piercing.raw)) delete piercing.raw;
+  if (isZero(piercing.raw)) {
+    delete piercing.raw;
+  }
 }
 
 /**
@@ -171,7 +209,9 @@ function cleanPower(doc) {
  * @param {TeriockArmament} doc
  */
 function cleanArmament(doc) {
-  if (doc.system.piercing) cleanPiercing(doc.system.piercing);
+  if (doc.system.piercing) {
+    cleanPiercing(doc.system.piercing);
+  }
   if (typeof doc.system.damage?.base === "object") {
     doc.system.damage.base = doc.system.damage.base.raw;
   }
@@ -184,8 +224,12 @@ function cleanArmament(doc) {
   if (isZero(doc.system.bv?.raw)) {
     delete doc.system.bv;
   }
-  if (!doc.system.spellTurning) delete doc.system.spellTurning;
-  if (!doc.system.warded) delete doc.system.warded;
+  if (!doc.system.spellTurning) {
+    delete doc.system.spellTurning;
+  }
+  if (!doc.system.warded) {
+    delete doc.system.warded;
+  }
 }
 
 /**
@@ -212,8 +256,12 @@ function cleanEquipment(doc) {
   if (doc.system.storage && !doc.system.storage.enabled) {
     delete doc.system.storage;
   }
-  if (!doc.system.price) delete doc.system.price;
-  if (!doc.system.equipped) delete doc.system.equipped;
+  if (!doc.system.price) {
+    delete doc.system.price;
+  }
+  if (!doc.system.equipped) {
+    delete doc.system.equipped;
+  }
 }
 
 /**
@@ -221,10 +269,18 @@ function cleanEquipment(doc) {
  */
 function cleanProperty(doc) {
   delete doc.system.impacts;
-  if (!doc.system.consumable) delete doc.system.consumable;
-  if (!doc.system.applyIfDampened) delete doc.system.applyIfDampened;
-  if (!doc.system.applyIfShattered) delete doc.system.applyIfShattered;
-  if (doc.system.applyIfUnequipped) delete doc.system.applyIfUnequipped;
+  if (!doc.system.consumable) {
+    delete doc.system.consumable;
+  }
+  if (!doc.system.applyIfDampened) {
+    delete doc.system.applyIfDampened;
+  }
+  if (!doc.system.applyIfShattered) {
+    delete doc.system.applyIfShattered;
+  }
+  if (doc.system.applyIfUnequipped) {
+    delete doc.system.applyIfUnequipped;
+  }
 }
 
 /**
@@ -242,8 +298,12 @@ function cleanAbility(doc) {
   }
 
   // Clean Equipment Connections
-  if (!doc.system.consumeSource) delete doc.system.consumeSource;
-  if (!doc.system.grantOnly) delete doc.system.grantOnly;
+  if (!doc.system.consumeSource) {
+    delete doc.system.consumeSource;
+  }
+  if (!doc.system.grantOnly) {
+    delete doc.system.grantOnly;
+  }
 
   // Clean Upgrades
   if (doc.system.upgrades) {
@@ -256,27 +316,61 @@ function cleanAbility(doc) {
   }
 
   // Clean Cost Modifications
-  if (!doc.system.adept?.enabled) delete doc.system.adept;
-  if (!doc.system.gifted?.enabled) delete doc.system.gifted;
+  if (!doc.system.adept?.enabled) {
+    delete doc.system.adept;
+  }
+  if (!doc.system.gifted?.enabled) {
+    delete doc.system.gifted;
+  }
 
   // Clean Tags
-  if (!doc.system.basic) delete doc.system.basic;
-  if (!doc.system.class) delete doc.system.class;
-  if (!doc.system.consumable) delete doc.system.consumable;
-  if (!doc.system.elderSorcery) delete doc.system.elderSorcery;
-  if (!doc.system.guildmaster) delete doc.system.guildmaster;
-  if (!doc.system.invoked) delete doc.system.invoked;
-  if (!doc.system.lore) delete doc.system.lore;
-  if (!doc.system.ritual) delete doc.system.ritual;
-  if (!doc.system.rotator) delete doc.system.rotator;
-  if (!doc.system.skill) delete doc.system.skill;
-  if (!doc.system.spell) delete doc.system.spell;
-  if (!doc.system.standard) delete doc.system.standard;
-  if (!doc.system.sustained) delete doc.system.sustained;
-  if (!doc.system.warded) delete doc.system.warded;
+  if (!doc.system.basic) {
+    delete doc.system.basic;
+  }
+  if (!doc.system.class) {
+    delete doc.system.class;
+  }
+  if (!doc.system.consumable) {
+    delete doc.system.consumable;
+  }
+  if (!doc.system.elderSorcery) {
+    delete doc.system.elderSorcery;
+  }
+  if (!doc.system.guildmaster) {
+    delete doc.system.guildmaster;
+  }
+  if (!doc.system.invoked) {
+    delete doc.system.invoked;
+  }
+  if (!doc.system.lore) {
+    delete doc.system.lore;
+  }
+  if (!doc.system.ritual) {
+    delete doc.system.ritual;
+  }
+  if (!doc.system.rotator) {
+    delete doc.system.rotator;
+  }
+  if (!doc.system.skill) {
+    delete doc.system.skill;
+  }
+  if (!doc.system.spell) {
+    delete doc.system.spell;
+  }
+  if (!doc.system.standard) {
+    delete doc.system.standard;
+  }
+  if (!doc.system.sustained) {
+    delete doc.system.sustained;
+  }
+  if (!doc.system.warded) {
+    delete doc.system.warded;
+  }
 
   // Clean Common Defaults
-  if (doc.system.attackPenalty === "-3") delete doc.system.attackPenalty;
+  if (doc.system.attackPenalty === "-3") {
+    delete doc.system.attackPenalty;
+  }
 
   // Clean Delivery
   if (typeof doc.system.delivery?.base === "string") {
@@ -288,7 +382,9 @@ function cleanAbility(doc) {
   delete doc.system.prepared;
   delete doc.system.duration.dawn;
   delete doc.system.duration.stationary;
-  if (doc.system.effectTypes) delete doc.system.effects;
+  if (doc.system.effectTypes) {
+    delete doc.system.effects;
+  }
 }
 
 /**
@@ -305,18 +401,32 @@ function cleanAutomations(automations) {
     if (Object.keys(TYPE_MIGRATIONS).includes(v.type)) {
       v.type = TYPE_MIGRATIONS[v.type];
     }
-    if (DEPRECATED_TYPES.includes(v.type)) delete automations[k];
+    if (DEPRECATED_TYPES.includes(v.type)) {
+      delete automations[k];
+    }
     if (v.type === "addDocuments") {
-      if (!v?.children?.enabled) delete v.children;
+      if (!v?.children?.enabled) {
+        delete v.children;
+      }
     }
     if (["addDocuments", "modifyEffect", "region"].includes(v.type)) {
-      if (!v?.overrideData) delete v.data;
+      if (!v?.overrideData) {
+        delete v.data;
+      }
     }
     if (["addDocuments", "modifyEffect", "tradecraft", "transformation", "useDocuments"].includes(v.type)) {
-      if (!v?.overrideCompetence) delete v.competence;
+      if (!v?.overrideCompetence) {
+        delete v.competence;
+      }
+    }
+    if (v.type === "region" && v.regionType === "cone") {
+      v.attachToToken = false;
+      v.expandWithToken = false;
     }
   }
-  for (const a of Object.values(automations)) cleanAutomation(a);
+  for (const a of Object.values(automations)) {
+    cleanAutomation(a);
+  }
 }
 
 /**
@@ -351,13 +461,21 @@ function isZero(formula) {
 
 /** @param {object} obj */
 function trimObject(obj) {
-  if (!obj) return;
-  if (typeof obj !== "object") return;
+  if (!obj) {
+    return;
+  }
+  if (typeof obj !== "object") {
+    return;
+  }
   for (const [k, v] of Object.entries(obj)) {
-    if (!v) delete obj[k];
+    if (!v) {
+      delete obj[k];
+    }
     if (typeof v === "object") {
       trimObject(v);
-      if (v && Object.keys(v).length === 0) delete obj[k];
+      if (v && Object.keys(v).length === 0) {
+        delete obj[k];
+      }
     }
   }
 }

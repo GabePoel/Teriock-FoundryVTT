@@ -123,9 +123,12 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   get conversion() {
     const unitType = this.unitType;
-    if (unitType === "zero") return 0;
-    if (unitType === "infinite") return Infinity;
-    else {
+    if (unitType === "zero") {
+      return 0;
+    }
+    if (unitType === "infinite") {
+      return Infinity;
+    } else {
       return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1;
     }
   }
@@ -138,12 +141,18 @@ export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */
   get formula() {
     const unitType = this.unitType;
-    if (unitType === "zero") return "0";
-    if (unitType === "infinite") return "9".repeat(32);
-    else {
+    if (unitType === "zero") {
+      return "0";
+    }
+    if (unitType === "infinite") {
+      return "9".repeat(32);
+    } else {
       const conversion = this.conversion;
-      if (conversion === 1) return super.formula;
-      else return multiplyFormula(super.formula, conversion.toString());
+      if (conversion === 1) {
+        return super.formula;
+      } else {
+        return multiplyFormula(super.formula, conversion.toString());
+      }
     }
   }
 
@@ -199,9 +208,14 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   #convert(value) {
     const unitType = this.unitType;
-    if (unitType === "zero") return 0;
-    if (unitType === "infinite") return Infinity;
-    else return value;
+    if (unitType === "zero") {
+      return 0;
+    }
+    if (unitType === "infinite") {
+      return Infinity;
+    } else {
+      return value;
+    }
   }
 
   /**
@@ -211,7 +225,9 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   convertTo(unit) {
     const unitType = this.unitType;
-    if (unitType !== "finite") return this.currentValue;
+    if (unitType !== "finite") {
+      return this.currentValue;
+    }
     return (this.constructor.finiteChoiceEntries.find(e => e.id === unit).conversion || 1) * this.currentValue;
   }
 

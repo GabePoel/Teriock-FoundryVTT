@@ -144,7 +144,9 @@ export default class PropertySystem extends mixClasses(
    * @returns {"Actor"|"Item"}
    */
   get modifies() {
-    if (this.modifiesActor) return "Actor";
+    if (this.modifiesActor) {
+      return "Actor";
+    }
     return super.modifies;
   }
 

@@ -60,7 +60,9 @@ export default class AddDocumentsAutomation extends mixClasses(
    * @returns {string[]}
    */
   get _attachmentPaths() {
-    if (this.document?.type !== "ability") return ["display.label"];
+    if (this.document?.type !== "ability") {
+      return ["display.label"];
+    }
     return ["separate", this.separate ? "display.label" : "attachDocuments"];
   }
 
@@ -72,7 +74,9 @@ export default class AddDocumentsAutomation extends mixClasses(
     const paths = ["children.enabled"];
     if (this.children.enabled) {
       paths.push(...["children.uuids", "children.overrideData"]);
-      if (this.children.overrideData) paths.push("children.data");
+      if (this.children.overrideData) {
+        paths.push("children.data");
+      }
     }
     return paths;
   }
@@ -127,7 +131,9 @@ export default class AddDocumentsAutomation extends mixClasses(
     let name;
     if (construction.uuid) {
       const index = fromUuidSync(construction.uuid);
-      if (index) uuidName = index.name;
+      if (index) {
+        uuidName = index.name;
+      }
       name = uuidName;
     }
     if (foundry.utils.hasProperty(construction, "data.name")) {
@@ -137,7 +143,9 @@ export default class AddDocumentsAutomation extends mixClasses(
     if (dataName?.includes("{name}")) {
       name = dataName.replace("{name}", uuidName || "");
     }
-    if (name) foundry.utils.setProperty(construction, "data.name", name);
+    if (name) {
+      foundry.utils.setProperty(construction, "data.name", name);
+    }
   }
 
   /**
@@ -165,7 +173,9 @@ export default class AddDocumentsAutomation extends mixClasses(
 
   /** @inheritDoc */
   async getActivations() {
-    if (!this.hasActivations) return [];
+    if (!this.hasActivations) {
+      return [];
+    }
     const choices = await this.choose();
     const activations = [];
     for (const choice of choices) {

@@ -78,8 +78,11 @@ export default function AttunableSystemMixin(Base) {
             action: "toggleAttunedDoc",
             icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
             onClick: async () => {
-              if (this.isAttuned) await this.deattune();
-              else await this.attune();
+              if (this.isAttuned) {
+                await this.deattune();
+              } else {
+                await this.attune();
+              }
             },
             tooltip: this.isAttuned
               ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
@@ -121,7 +124,9 @@ export default function AttunableSystemMixin(Base) {
           scope: { attunable: this.parent },
         });
         let attunement = this.attunement;
-        if (attunement) return attunement;
+        if (attunement) {
+          return attunement;
+        }
         const attunementData = {
           type: "attunement",
           name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", {

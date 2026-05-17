@@ -43,7 +43,9 @@ export default function HierarchyDocumentMixin(Base) {
        */
       static async _preCreateOperation(documents, operation, user) {
         const yes = await super._preCreateOperation(documents, operation, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         operation.cachedKeepId = operation.keepId;
         operation.isKeepIdCached = true;
@@ -54,7 +56,9 @@ export default function HierarchyDocumentMixin(Base) {
         });
         const filteredDocuments = documents.filter(d => {
           const collection = d.siblingCollection;
-          if (d?.system?._sup) return collection.has(d.system._sup);
+          if (d?.system?._sup) {
+            return collection.has(d.system._sup);
+          }
           return true;
         });
         if (!operation.allowDuplicateSubs) {
@@ -72,7 +76,9 @@ export default function HierarchyDocumentMixin(Base) {
             if (ref) {
               if (knownRefs.includes(ref.uuid) && !operation.allowDuplicateSubs) {
                 create = false;
-              } else knownRefs.push(ref.uuid);
+              } else {
+                knownRefs.push(ref.uuid);
+              }
             }
             if (ref && ref.subs.size && create) {
               operation.keepId = true;
@@ -97,8 +103,12 @@ export default function HierarchyDocumentMixin(Base) {
                 clone.updateSource({ "system._sup": idMap[clone.system._sup] });
               }
               toCreate.push(...clones);
-            } else if (create) toCreate.push(doc);
-          } else toCreate.push(doc);
+            } else if (create) {
+              toCreate.push(doc);
+            }
+          } else {
+            toCreate.push(doc);
+          }
         }
         documents.length = 0;
         documents.push(...toCreate);
@@ -113,7 +123,9 @@ export default function HierarchyDocumentMixin(Base) {
        */
       static async _preDeleteOperation(documents, operation, user) {
         const yes = await super._preDeleteOperation(documents, operation, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         for (const doc of documents) {
           operation.ids.push(...doc.allSubs.contents.map(s => s._id));
@@ -129,7 +141,9 @@ export default function HierarchyDocumentMixin(Base) {
        */
       static async _preUpdateOperation(documents, operation, user) {
         const yes = await super._preUpdateOperation(documents, operation, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         for (const doc of documents) {
           const folderUpdate = operation.updates.find(
@@ -158,11 +172,17 @@ export default function HierarchyDocumentMixin(Base) {
        * @param {HierarchyDocument} sub
        */
       static async checkIfCyclic(sup, sub) {
-        if (sup?.documentName !== sub?.documentName) return false;
-        if (sup?.id === sub?.id) return true;
+        if (sup?.documentName !== sub?.documentName) {
+          return false;
+        }
+        if (sup?.id === sub?.id) {
+          return true;
+        }
         if (typeof sup.getAllSups === "function") {
           return (await sup.getAllSups()).has(sub.id);
-        } else return false;
+        } else {
+          return false;
+        }
       }
 
       /**
@@ -179,7 +199,9 @@ export default function HierarchyDocumentMixin(Base) {
             data[i] = doc.toObject(true);
           }
         }
-        if (operation.isKeepIdCached) operation.keepId = operation.cachedKeepId;
+        if (operation.isKeepIdCached) {
+          operation.keepId = operation.cachedKeepId;
+        }
         delete operation.isKeepIdCached;
         delete operation.cachedKeepId;
         return super.createDocuments(data, operation);
@@ -209,7 +231,9 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       static findAllSups(document, collection) {
-        if (!this.findSup(document, collection)) return new TypeCollection();
+        if (!this.findSup(document, collection)) {
+          return new TypeCollection();
+        }
         return new TypeCollection(
           [this.findSup(document, collection)]
             .concat(this.findAllSups(this.findSup(document, collection))?.contents || [])
@@ -224,7 +248,9 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       static findSubs(document, collection) {
-        if (!collection) collection = document.siblingCollection;
+        if (!collection) {
+          collection = document.siblingCollection;
+        }
         const subArray = collection.filter(d => foundry.utils.getProperty(d, "system._sup") === document._id);
         return new TypeCollection(subArray.map(d => [d._id, d]));
       }
@@ -236,8 +262,12 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {CommonDocument|undefined}
        */
       static findSup(document, collection) {
-        if (!collection) collection = document.siblingCollection;
-        if (document.system?._sup) return collection?.get(document.system._sup);
+        if (!collection) {
+          collection = document.siblingCollection;
+        }
+        if (document.system?._sup) {
+          return collection?.get(document.system._sup);
+        }
       }
 
       /**
@@ -347,9 +377,15 @@ export default function HierarchyDocumentMixin(Base) {
        */
       #reloadDependee() {
         const doc = this.dependee;
-        if (!doc) return;
-        if (typeof doc.resetChildMaps === "function") doc.resetChildMaps();
-        if (doc.isViewer) doc?.sheet?.render({ force: false });
+        if (!doc) {
+          return;
+        }
+        if (typeof doc.resetChildMaps === "function") {
+          doc.resetChildMaps();
+        }
+        if (doc.isViewer) {
+          doc?.sheet?.render({ force: false });
+        }
       }
 
       /**
@@ -358,13 +394,19 @@ export default function HierarchyDocumentMixin(Base) {
       #reloadSups() {
         this.getAllSups().then(result => {
           result.forEach(doc => {
-            if (typeof doc.resetChildMaps === "function") doc.resetChildMaps();
-            if (doc.isViewer) doc.sheet?.render({ force: false });
+            if (typeof doc.resetChildMaps === "function") {
+              doc.resetChildMaps();
+            }
+            if (doc.isViewer) {
+              doc.sheet?.render({ force: false });
+            }
           });
         });
         if (this.collection.name === "CompendiumCollection") {
           this.collection.apps.forEach(app => {
-            if (app.rendered) app.render();
+            if (app.rendered) {
+              app.render();
+            }
           });
         }
       }
@@ -410,31 +452,40 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       async _preCreate(data, options, user) {
         const yes = await super._preCreate(data, options, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         const elder = await this.getElder();
         const valid = await this.constructor.validateRelationship(elder, this);
-        if (!valid) return false;
+        if (!valid) {
+          return false;
+        }
       }
 
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
         const yes = await super._preUpdate(changes, options, user);
-        if (yes === false) return false;
+        if (yes === false) {
+          return false;
+        }
 
         const _sup = foundry.utils.getProperty(changes, "system._sup");
         if (_sup) {
           const collection = this.siblingCollection;
           const sup = await resolveDocument(collection?.get(_sup));
           const valid = await this.constructor.validateRelationship(sup, this);
-          if (!valid) return false;
+          if (!valid) {
+            return false;
+          }
         }
       }
 
       /** @inheritDoc */
       checkAncestor(doc) {
-        if (doc?.uuid === this.uuid) return true;
-        else {
+        if (doc?.uuid === this.uuid) {
+          return true;
+        } else {
           return this.elder?.checkAncestor ? this.elder?.checkAncestor(doc) || false : false;
         }
       }
@@ -457,7 +508,9 @@ export default function HierarchyDocumentMixin(Base) {
        * @return {Promise<AnyChildDocument[]>}
        */
       async createDependentDocuments(embeddedName, data = [], operation = {}) {
-        if (!this.actor) return [];
+        if (!this.actor) {
+          return [];
+        }
         data = foundry.utils.deepClone(data);
         for (const doc of data) {
           foundry.utils.setProperty(doc, "system._dep", this.id);
@@ -480,7 +533,9 @@ export default function HierarchyDocumentMixin(Base) {
         if (this.parent) {
           return this.parent.createEmbeddedDocuments(this.documentName, data, operation);
         } else {
-          if (this.inCompendium) operation.pack = this.collection.collection;
+          if (this.inCompendium) {
+            operation.pack = this.collection.collection;
+          }
           return await foundry.utils.getDocumentClass(this.documentName).createDocuments(data, operation);
         }
       }
@@ -505,7 +560,9 @@ export default function HierarchyDocumentMixin(Base) {
         if (this.parent) {
           return this.parent.deleteEmbeddedDocuments(this.documentName, ids, operation);
         } else {
-          if (this.inCompendium) operation.pack = this.collection.collection;
+          if (this.inCompendium) {
+            operation.pack = this.collection.collection;
+          }
           return await foundry.utils.getDocumentClass(this.documentName).deleteDocuments(ids, operation);
         }
       }
@@ -593,7 +650,9 @@ export default function HierarchyDocumentMixin(Base) {
         if (this.parent) {
           return this.parent.updateEmbeddedDocuments(this.documentName, updates, operation);
         } else {
-          if (this.inCompendium) operation.pack = this.collection.collection;
+          if (this.inCompendium) {
+            operation.pack = this.collection.collection;
+          }
           return await foundry.utils.getDocumentClass(this.documentName).updateDocuments(updates, operation);
         }
       }

@@ -186,8 +186,11 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
     if (!this.deleteOnExpire) {
       await this.parent.hookCall("effectExpiration");
     }
-    if (this.deleteOnExpire) await this.parent.delete();
-    else await this.parent.update({ disabled: true });
+    if (this.deleteOnExpire) {
+      await this.parent.delete();
+    } else {
+      await this.parent.update({ disabled: true });
+    }
   }
 
   /** @inheritDoc */
@@ -223,7 +226,9 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {Promise<boolean>} True if the effect should expire, false otherwise.
    */
   async shouldExpire() {
-    if (!this.parent.isTemporary) return false;
+    if (!this.parent.isTemporary) {
+      return false;
+    }
     return this.parent.duration.remaining < 0;
   }
 }

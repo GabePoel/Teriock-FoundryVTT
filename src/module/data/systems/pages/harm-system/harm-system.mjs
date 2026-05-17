@@ -83,11 +83,17 @@ export default class HarmSystem extends mixClasses(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) {
+      return false;
+    }
 
     let ref = "";
-    if (this.parent.type === "damage") ref = "Damaging";
-    if (this.parent.type === "drain") ref = "Draining";
+    if (this.parent.type === "damage") {
+      ref = "Damaging";
+    }
+    if (this.parent.type === "drain") {
+      ref = "Draining";
+    }
     this.parent.updateSource(
       foundry.utils.mergeObject(
         {

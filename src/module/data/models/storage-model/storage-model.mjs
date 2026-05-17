@@ -81,7 +81,9 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {TeriockEquipment[]}
    */
   get storedEquipment() {
-    if (!this.enabled) return [];
+    if (!this.enabled) {
+      return [];
+    }
     return this.document.equipment;
   }
 }

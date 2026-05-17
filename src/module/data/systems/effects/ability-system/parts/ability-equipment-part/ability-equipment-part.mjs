@@ -68,7 +68,9 @@ export default Base => {
 
       /** @inheritDoc */
       get tagIcon() {
-        if (this.isArmamentChild && this.grantUse) return this.grantUseIcon;
+        if (this.isArmamentChild && this.grantUse) {
+          return this.grantUseIcon;
+        }
         return super.tagIcon;
       }
 
@@ -84,7 +86,9 @@ export default Base => {
             const op = { keepEmbeddedIds: true, renderSheet: true };
             if (doc?.actor?.documentName === "Actor" && doc?.actor?.uuid === this.actor?.uuid) {
               await this.actor.createEmbeddedDocuments("Item", [data], op);
-            } else TeriockItem.create(data, op);
+            } else {
+              TeriockItem.create(data, op);
+            }
           },
           visible: this.parent.parent?.isOwner && this.spell && doc !== this.parent && doc.sheet.isEditable,
         });
@@ -153,9 +157,13 @@ export default Base => {
             quantity: 1,
           },
         });
-        if (img) out.img = img;
+        if (img) {
+          out.img = img;
+        }
         out = foundry.utils.mergeObject(out, data);
-        if (!out.effects) out.effects = [];
+        if (!out.effects) {
+          out.effects = [];
+        }
         out.effects.push(
           foundry.utils.mergeObject(this.parent.toObject(true), {
             system: { grantUse: true },
