@@ -98,7 +98,7 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
 
     if (
       this.actor?.powers.map(p => p.system.identifier).includes(this.identifier) &&
-      ["warrior", "semi", "mage"].includes(this.identifier)
+      ["mage", "semi", "warrior"].includes(this.identifier)
     ) {
       return false;
     }

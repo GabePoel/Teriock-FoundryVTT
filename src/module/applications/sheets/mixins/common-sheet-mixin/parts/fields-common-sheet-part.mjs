@@ -11,15 +11,6 @@ export default Base => {
      * @property {CommonDocument} document
      */
     class FieldsCommonSheetPart extends Base {
-      /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: {
-          increment: { buttons: [0, 2], handler: this.#onIncrement },
-          updatePaths: this.#onUpdatePaths,
-          updateUnit: this.#onUpdateUnit,
-        },
-      };
-
       /**
        * Increment forwards.
        * @param {PointerEvent} event
@@ -70,6 +61,15 @@ export default Base => {
         }
         await foundry.utils.getProperty(this.document, target.dataset.path).updateDialog();
       }
+
+      /** @type {Partial<ApplicationConfiguration>} */
+      static DEFAULT_OPTIONS = {
+        actions: {
+          increment: { buttons: [0, 2], handler: this.#onIncrement },
+          updatePaths: this.#onUpdatePaths,
+          updateUnit: this.#onUpdateUnit,
+        },
+      };
 
       /** @inheritDoc */
       async _onRender(context, options) {

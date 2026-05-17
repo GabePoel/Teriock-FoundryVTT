@@ -14,11 +14,6 @@ export default Base => {
         actions: { toggleAutomations: this._onToggleAutomations },
       };
 
-      constructor(...args) {
-        super(...args);
-        this._tab = "overview";
-      }
-
       /**
        * Toggles between overview and impacts tabs.
        * @returns {Promise<void>}
@@ -29,6 +24,11 @@ export default Base => {
         if (typeof this.toggleMenu === "function") {
           this.toggleMenu(false);
         }
+      }
+
+      constructor(...args) {
+        super(...args);
+        this._tab = "overview";
       }
 
       /** @inheritDoc */

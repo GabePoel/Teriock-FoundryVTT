@@ -21,11 +21,6 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
     return "TERIOCK.AUTOMATIONS.Base.LABEL";
   }
 
-  /** @inheritDoc */
-  static get TYPE() {
-    return "base";
-  }
-
   /**
    * @inheritDoc
    * @returns {{ documentName: "Automation", macro: boolean }}
@@ -39,6 +34,11 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
       macro: false,
       trigger: false,
     });
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "base";
   }
 
   /** @inheritDoc */

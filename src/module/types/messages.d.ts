@@ -1,6 +1,6 @@
 declare global {
   namespace Teriock.Messages {
-    export type Mode = "public" | "gm" | "blind" | "self" | "ic";
+    export type Mode = "blind" | "gm" | "ic" | "public" | "self";
 
     /** Pieces of a bar within a chat message. */
     export type MessageBar = {
@@ -21,7 +21,7 @@ declare global {
       /** Make this block italic. */
       italic?: boolean;
       /** Special information for formatting. */
-      special?: "ES" | "embedded-block";
+      special?: "embedded-block" | "ES";
       /** The main text content of the message block. */
       text?: string;
       /** The title of the message block. */

@@ -8,13 +8,6 @@ export default Base =>
    * @mixin
    */
   class AvatarImageActorSheetPart extends Base {
-    static DEFAULT_OPTIONS = {
-      actions: {
-        switchImage: this.#onSwitchImage,
-        toggleRing: this.#onToggleRing,
-      },
-    };
-
     /**
      * Toggle which image is shown.
      * @returns {Promise<void>}
@@ -37,6 +30,13 @@ export default Base =>
         "prototypeToken.ring.enabled": !this.document.prototypeToken.ring.enabled,
       });
     }
+
+    static DEFAULT_OPTIONS = {
+      actions: {
+        switchImage: this.#onSwitchImage,
+        toggleRing: this.#onToggleRing,
+      },
+    };
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {

@@ -197,7 +197,7 @@ function addTermTypes(term, types) {
  * @returns {Teriock.System.FormulaString}
  */
 function processFormula(formula, types, fn) {
-  if (["string", "number"].includes(typeof types)) {
+  if (["number", "string"].includes(typeof types)) {
     types = [types.toString()];
   }
   if (!formulaExists(formula)) {

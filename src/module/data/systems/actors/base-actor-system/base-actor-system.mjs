@@ -72,11 +72,6 @@ export default class BaseActorSystem extends mixClasses(
   }
 
   /** @inheritDoc */
-  get SettingsFlagsDataModel() {
-    return ActorSettingsModel;
-  }
-
-  /** @inheritDoc */
   get displayToggles() {
     return [...super.displayToggles, "disabled"];
   }
@@ -98,6 +93,11 @@ export default class BaseActorSystem extends mixClasses(
     ]);
     parts.makeTooltip = this.parent.isViewer;
     return parts;
+  }
+
+  /** @inheritDoc */
+  get SettingsFlagsDataModel() {
+    return ActorSettingsModel;
   }
 
   /** @inheritDoc */

@@ -4,7 +4,7 @@ import { changeConfigs } from "../setup/_module.mjs";
 
 declare global {
   namespace Teriock.Changes {
-    export type Phase = keyof typeof TERIOCK.config.change.phase | "initial" | "final";
+    export type Phase = "final" | "initial" | keyof typeof TERIOCK.config.change.phase;
 
     export type Type =
       | "add"
@@ -16,7 +16,7 @@ declare global {
       | "upgrade"
       | keyof typeof changeConfigs;
 
-    export type Target = "Actor" | "Item" | "ability" | "armament";
+    export type Target = "ability" | "Actor" | "armament" | "Item";
 
     export type QualifiedChangeData = EffectChangeData & {
       qualifier: Teriock.System.FormulaString;

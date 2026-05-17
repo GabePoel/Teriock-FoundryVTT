@@ -8,6 +8,18 @@ import BaseItemSheet from "./base-item-sheet.mjs";
  * @property {TeriockMount} item
  */
 export default class MountSheet extends BaseItemSheet {
+  /**
+   * Toggles the mounted state of the mount.
+   * @returns {Promise<void>}
+   */
+  static async #onToggleMounted() {
+    if (this.document.system.mounted) {
+      await this.document.system.unmount();
+    } else {
+      await this.document.system.mount();
+    }
+  }
+
   /** @inheritDoc */
   static BARS = ["teriock/sheets/shared/bars/stat-bar", "teriock/sheets/items/mount/status-bar"];
 
@@ -21,16 +33,4 @@ export default class MountSheet extends BaseItemSheet {
       icon: makeIconClass(documentConfig.mount.icon, "title"),
     },
   };
-
-  /**
-   * Toggles the mounted state of the mount.
-   * @returns {Promise<void>}
-   */
-  static async #onToggleMounted() {
-    if (this.document.system.mounted) {
-      await this.document.system.unmount();
-    } else {
-      await this.document.system.mount();
-    }
-  }
 }

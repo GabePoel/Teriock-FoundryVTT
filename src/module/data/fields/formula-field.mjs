@@ -6,6 +6,14 @@ import EnhancedStringField from "./enhanced-string-field.mjs";
  * Special case {@link StringField} which represents a formula.
  */
 export default class FormulaField extends EnhancedStringField {
+  /** @inheritdoc */
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, {
+      deterministic: false,
+      required: false,
+    });
+  }
+
   /**
    * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options] - Options which configure
    * the behavior of the field.
@@ -13,14 +21,6 @@ export default class FormulaField extends EnhancedStringField {
    */
   constructor(options = {}, context = {}) {
     super(options, context);
-  }
-
-  /** @inheritdoc */
-  static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      deterministic: false,
-      required: false,
-    });
   }
 
   /** @inheritDoc */

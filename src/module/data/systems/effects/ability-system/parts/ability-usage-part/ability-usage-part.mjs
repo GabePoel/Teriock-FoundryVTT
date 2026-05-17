@@ -196,7 +196,7 @@ export default Base => {
        * @returns {boolean}
        */
       get isRanged() {
-        return ["missile", "aura", "cone", "sight", "area"].includes(this.delivery);
+        return ["area", "aura", "cone", "missile", "sight"].includes(this.delivery);
       }
 
       /**

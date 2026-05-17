@@ -7,24 +7,6 @@ const { ContextMenu } = foundry.applications.ux;
  */
 export default class TeriockContextMenu extends ContextMenu {
   /**
-   * @inheritDoc
-   * @param {HTMLElement} container
-   * @param {string} selector
-   * @param {ContextMenuEntry[]} menuItems
-   * @param {Foundry.ContextMenuOptions} [options]
-   */
-  constructor(container, selector, menuItems, options = {}) {
-    for (const item of menuItems) {
-      if (item.icon && !item.icon.includes("<i")) {
-        item.icon = makeIcon(item.icon, "contextMenu");
-      }
-    }
-    super(container, selector, menuItems, options);
-    const { forceDirection } = options;
-    this.#forceDirection = forceDirection;
-  }
-
-  /**
    * Helper method to quickly generate context menu entries.
    * @param {TeriockDocument} document - Document to be updated.
    * @param {{label: string; icon: string; value: any; path?: string;}[]} choices - Map to build entries from.
@@ -44,6 +26,24 @@ export default class TeriockContextMenu extends ContextMenu {
         },
       };
     });
+  }
+
+  /**
+   * @inheritDoc
+   * @param {HTMLElement} container
+   * @param {string} selector
+   * @param {ContextMenuEntry[]} menuItems
+   * @param {Foundry.ContextMenuOptions} [options]
+   */
+  constructor(container, selector, menuItems, options = {}) {
+    for (const item of menuItems) {
+      if (item.icon && !item.icon.includes("<i")) {
+        item.icon = makeIcon(item.icon, "contextMenu");
+      }
+    }
+    super(container, selector, menuItems, options);
+    const { forceDirection } = options;
+    this.#forceDirection = forceDirection;
   }
 
   /**

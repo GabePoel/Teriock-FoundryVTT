@@ -15,7 +15,6 @@ import "./scene/_types";
 import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
-
 import { documentConfig } from "../constants/config/document-config.mjs";
 
 declare global {
@@ -26,10 +25,10 @@ declare global {
 
     export type IndexCompendiumKey =
       | "abilities"
+      | "bodyParts"
       | "classes"
       | "creatures"
       | "equipment"
-      | "bodyParts"
       | "magicItems"
       | "powers"
       | "properties"
@@ -43,8 +42,8 @@ declare global {
     export type ItemType = ExtractKeysByDocName<"Item">;
     export type ActiveEffectType = ExtractKeysByDocName<"ActiveEffect">;
     export type CardType = ExtractKeysByDocName<"Card">;
-    export type ChildType = Teriock.Documents.ItemType | Teriock.Documents.ActiveEffectType;
-    export type CommonType = Teriock.Documents.ChildType | Teriock.Documents.ActorType | "base";
+    export type ChildType = Teriock.Documents.ActiveEffectType | Teriock.Documents.ItemType;
+    export type CommonType = "base" | Teriock.Documents.ActorType | Teriock.Documents.ChildType;
 
     export type ModelMetadata = {
       armament: boolean;

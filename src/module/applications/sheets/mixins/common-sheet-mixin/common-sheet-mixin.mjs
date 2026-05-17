@@ -1,6 +1,6 @@
+import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
-import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
 import BaseSheetMixin from "../base-sheet-mixin.mjs";
 import * as parts from "./parts/_module.mjs";
 

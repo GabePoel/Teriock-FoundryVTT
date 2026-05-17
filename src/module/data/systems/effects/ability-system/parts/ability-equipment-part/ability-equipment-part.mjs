@@ -58,7 +58,7 @@ export default Base => {
        * @returns {boolean}
        */
       get isArmamentChild() {
-        return ["equipment", "body"].includes(this.parent.elder?.type);
+        return ["body", "equipment"].includes(this.parent.elder?.type);
       }
 
       /** @inheritDoc */

@@ -5,6 +5,13 @@ import PseudoTypedSchemaField from "./pseudo-typed-schema-field.mjs";
 const { TypedObjectField } = foundry.data.fields;
 
 export default class PseudoCollectionField extends TypedObjectField {
+  /** @inheritDoc */
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, {
+      validateKey: foundry.data.validators.isValidId,
+    });
+  }
+
   /**
    * @param {typeof TypedPseudoDocument} model
    * @param {DataFieldOptions & Partial<{ collection: typeof TypeCollection}>} [options]
@@ -22,13 +29,6 @@ export default class PseudoCollectionField extends TypedObjectField {
     super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;
     this.#collectionClass = options.collection ?? TypeCollection;
-  }
-
-  /** @inheritDoc */
-  static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      validateKey: foundry.data.validators.isValidId,
-    });
   }
 
   /**

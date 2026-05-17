@@ -1,5 +1,5 @@
-import { BaseCardsSystem } from "../../data/systems/cards/_module.mjs";
 import { TeriockCard, TeriockCards } from "../_module.mjs";
+import { BaseCardsSystem } from "../../data/systems/cards/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {

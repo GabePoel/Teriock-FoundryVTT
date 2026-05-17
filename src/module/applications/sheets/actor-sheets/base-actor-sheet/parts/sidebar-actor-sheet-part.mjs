@@ -9,29 +9,6 @@ export default Base =>
    * @mixin
    */
   class SidebarActorSheetPart extends Base {
-    static DEFAULT_OPTIONS = {
-      actions: {
-        resetAttackPenalty: {
-          buttons: [2],
-          handler: this.#onResetAttackPenalty,
-        },
-        toggleSidebar: this.#onToggleSidebar,
-        toggleStatDrawer: {
-          buttons: [2],
-          handler: this.#onToggleStatDrawer,
-        },
-      },
-    };
-
-    /** @inheritDoc */
-    constructor(...args) {
-      super(...args);
-      this._sidebarOpen = true;
-      for (const stat of Object.keys(TERIOCK.config.die.stats)) {
-        this[`_${stat}DrawerOpen`] = true;
-      }
-    }
-
     /**
      * Reset attack penalty to zero.
      * @returns {Promise<void>}
@@ -62,6 +39,29 @@ export default Base =>
         ?.classList.toggle("collapsed");
       const stat = target.dataset.stat;
       this[`_${stat}DrawerOpen`] = !this[`_${stat}DrawerOpen`];
+    }
+
+    static DEFAULT_OPTIONS = {
+      actions: {
+        resetAttackPenalty: {
+          buttons: [2],
+          handler: this.#onResetAttackPenalty,
+        },
+        toggleSidebar: this.#onToggleSidebar,
+        toggleStatDrawer: {
+          buttons: [2],
+          handler: this.#onToggleStatDrawer,
+        },
+      },
+    };
+
+    /** @inheritDoc */
+    constructor(...args) {
+      super(...args);
+      this._sidebarOpen = true;
+      for (const stat of Object.keys(TERIOCK.config.die.stats)) {
+        this[`_${stat}DrawerOpen`] = true;
+      }
     }
 
     /**

@@ -290,8 +290,8 @@ declare global {
   export type AnyItem = ItemTypeMap[keyof ItemTypeMap];
   export type AnyActor = ActorTypeMap[keyof ActorTypeMap];
   export type AnyParent = AnyActor | AnyItem;
-  export type AnyCommonDocument = AnyActor | AnyItem | AnyActiveEffect;
-  export type AnyChildDocument = AnyItem | AnyActiveEffect;
+  export type AnyCommonDocument = AnyActiveEffect | AnyActor | AnyItem;
+  export type AnyChildDocument = AnyActiveEffect | AnyItem;
   export type AnyRules = AnyCommonDocument | TeriockJournalEntryPage;
   export type TeriockArmament = TeriockBody | TeriockEquipment;
   export type TeriockLingering = TeriockCondition | TeriockConsequence;
@@ -303,15 +303,15 @@ declare global {
 declare global {
   export type ParentDocument = TeriockActor | TeriockItem;
   export type ParentDocumentName = "Actor" | "Item";
-  export type ChildDocument = TeriockItem | TeriockActiveEffect;
-  export type ChildDocumentName = "Item" | "ActiveEffect";
-  export type CommonDocument = TeriockActor | TeriockItem | TeriockActiveEffect;
-  export type CommonDocumentName = "Actor" | "Item" | "ActiveEffect";
+  export type ChildDocument = TeriockActiveEffect | TeriockItem;
+  export type ChildDocumentName = "ActiveEffect" | "Item";
+  export type CommonDocument = TeriockActiveEffect | TeriockActor | TeriockItem;
+  export type CommonDocumentName = "ActiveEffect" | "Actor" | "Item";
   export type TeriockDocument =
+    | TeriockActiveEffect
     | TeriockActor
     | TeriockChatMessage
     | TeriockCombat
-    | TeriockActiveEffect
     | TeriockFolder
     | TeriockItem
     | TeriockJournalEntry

@@ -7,8 +7,8 @@ delete allConditions.alive;
 delete allConditions.up;
 
 export { default as abilities } from "../../../index/names/abilities.json" with { type: "json" };
-export { default as attributes } from "../../../index/names/attributes.json" with { type: "json" };
 export { default as attributesFull } from "../../../index/names/attributes-full.json" with { type: "json" };
+export { default as attributes } from "../../../index/names/attributes.json" with { type: "json" };
 export { default as bodyParts } from "../../../index/names/body-parts.json" with { type: "json" };
 export { default as classes } from "../../../index/names/classes.json" with { type: "json" };
 export { default as commonAnimals } from "../../../index/names/common-animals.json" with { type: "json" };
@@ -21,8 +21,8 @@ export { default as deathBag } from "../../../index/names/death-bag.json" with {
 export { default as drainTypes } from "../../../index/names/drain-types.json" with { type: "json" };
 export { default as effectTypes } from "../../../index/names/effect-types.json" with { type: "json" };
 export { default as elements } from "../../../index/names/elements.json" with { type: "json" };
-export { default as equipment } from "../../../index/names/equipment.json" with { type: "json" };
 export { default as equipmentClasses } from "../../../index/names/equipment-classes.json" with { type: "json" };
+export { default as equipment } from "../../../index/names/equipment.json" with { type: "json" };
 export { default as hacks } from "../../../index/names/hacks.json" with { type: "json" };
 export { default as humanoids } from "../../../index/names/humanoids.json" with { type: "json" };
 export { default as keywords } from "../../../index/names/keywords.json" with { type: "json" };

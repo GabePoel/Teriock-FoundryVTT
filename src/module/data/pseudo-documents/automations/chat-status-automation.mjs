@@ -16,16 +16,6 @@ export default class ChatStatusAutomation extends CritAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChatStatus"];
 
-  /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ChatStatus.LABEL";
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "chatStatus";
-  }
-
   /**
    * The available relation options.
    * @type {Record<string, string>}
@@ -44,6 +34,16 @@ export default class ChatStatusAutomation extends CritAutomation {
    */
   static get _relationInitial() {
     return "apply";
+  }
+
+  /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.AUTOMATIONS.ChatStatus.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "chatStatus";
   }
 
   /** @inheritDoc */

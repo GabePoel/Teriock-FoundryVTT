@@ -4,8 +4,9 @@ import type {
   DatabaseUpdateOperation,
 } from "@common/abstract/_types.mjs";
 
-import { TeriockActiveEffect, TeriockActor, TeriockItem, TeriockUser } from "../../documents/_module.mjs";
 import type queries from "./_module.mjs";
+
+import { TeriockActiveEffect, TeriockActor, TeriockItem, TeriockUser } from "../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.QueryData {
@@ -63,7 +64,7 @@ declare global {
     };
 
     export type Update = {
-      uuid: UUID<TeriockActor> | UUID<TeriockItem> | UUID<TeriockActiveEffect>;
+      uuid: UUID<TeriockActiveEffect> | UUID<TeriockActor> | UUID<TeriockItem>;
       data: object;
       operation?: object;
     };

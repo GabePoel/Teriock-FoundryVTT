@@ -54,11 +54,6 @@ export default class SummonActivation extends BaseActivation {
     return toId("Summons Folder", { hash: true });
   }
 
-  /** @inheritDoc */
-  get visible() {
-    return game.user.hasPermission("TOKEN_CREATE") && game.user.hasPermission("QUERY_USER");
-  }
-
   /**
    * Update existing summons that are needed but the current user doesn't have ownership over.
    * @returns {Promise<void>}
@@ -225,6 +220,11 @@ export default class SummonActivation extends BaseActivation {
     const actors = this.#nodes.filter(n => n.state === "ready" && n.actor?.isOwner).map(n => n.actor);
     this.#nodes = [];
     return actors;
+  }
+
+  /** @inheritDoc */
+  get visible() {
+    return game.user.hasPermission("TOKEN_CREATE") && game.user.hasPermission("QUERY_USER");
   }
 
   /**

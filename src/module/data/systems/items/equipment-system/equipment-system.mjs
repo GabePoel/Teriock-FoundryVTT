@@ -118,6 +118,20 @@ export default class EquipmentSystem extends mixClasses(
   }
 
   /** @inheritDoc */
+  get _refreshPromises() {
+    const promises = super._refreshPromises;
+    if (this.equipmentType) {
+      promises.push(
+        this._formatRefreshPromise(
+          fromIdentifier(`equipment:${this.equipmentType}`),
+          "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
+        ),
+      );
+    }
+    return promises;
+  }
+
+  /** @inheritDoc */
   get color() {
     if (this.isOverCapacity) {
       return TERIOCK.display.colors.red;
@@ -172,20 +186,6 @@ export default class EquipmentSystem extends mixClasses(
     if (this.parent.isEmbedded) {
       this.updateSource({ equipped: true });
     }
-  }
-
-  /** @inheritDoc */
-  get _refreshPromises() {
-    const promises = super._refreshPromises;
-    if (this.equipmentType) {
-      promises.push(
-        this._formatRefreshPromise(
-          fromIdentifier(`equipment:${this.equipmentType}`),
-          "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
-        ),
-      );
-    }
-    return promises;
   }
 
   /**

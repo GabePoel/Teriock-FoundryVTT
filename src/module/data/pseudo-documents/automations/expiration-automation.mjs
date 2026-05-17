@@ -15,16 +15,6 @@ export default class ExpirationAutomation extends CritAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Expiration"];
 
-  /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Expiration.LABEL";
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "expiration";
-  }
-
   /**
    * Trigger choices.
    * @returns {Record<string, FormSelectOption>}
@@ -41,6 +31,16 @@ export default class ExpirationAutomation extends CritAutomation {
       },
       { localize: true },
     );
+  }
+
+  /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.AUTOMATIONS.Expiration.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "expiration";
   }
 
   /** @inheritDoc */

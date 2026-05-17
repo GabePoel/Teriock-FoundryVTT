@@ -25,7 +25,7 @@ declare global {
       jQuery?: boolean;
       onClose?: ContextMenuCallback;
       onOpen?: ContextMenuCallback;
-      forceDirection?: "up" | "down";
+      forceDirection?: "down" | "up";
     };
   }
 }

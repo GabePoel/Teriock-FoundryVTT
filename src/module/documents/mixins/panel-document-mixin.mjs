@@ -1,6 +1,6 @@
+import { TeriockChatMessage } from "../_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { TeriockChatMessage } from "../_module.mjs";
 
 /**
  * @param {typeof BaseDocument} Base

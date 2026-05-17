@@ -1,8 +1,8 @@
+import { TeriockActor } from "../_module.mjs";
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { resolveDocuments } from "../../helpers/resolve.mjs";
-import { TeriockActor } from "../_module.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import { EmbedCardDocumentMixin, PanelDocumentMixin, SettingsDocumentMixin } from "./_module.mjs";
 
@@ -49,45 +49,11 @@ export default function CommonDocumentMixin(Base) {
         return childTypes.has(child?.type);
       }
 
-      /** @inheritDoc */
-      get SettingsFlagsDataModel() {
-        return this.system.SettingsFlagsDataModel;
-      }
-
       /** @type {AnyChildDocument[]} */
       _visibleChildren;
 
-      /**
-       * Lazily recomputed array containing all visible children.
-       * @returns {AnyChildDocument[]}
-       */
-      get visibleChildren() {
-        if (!this._visibleChildren) {
-          this._visibleChildren = this.makeVisibleChildrenArray();
-        }
-        return this._visibleChildren;
-      }
-
       /** @type {Record<string, AnyChildDocument[]>} */
       _visibleChildrenByType;
-
-      /**
-       * Lazily recomputed map of all visible children by their types.
-       * @returns {Record<Teriock.Documents.ChildType, AnyChildDocument[]>}
-       */
-      get visibleChildrenByType() {
-        if (!this._visibleChildrenByType) {
-          const typeMap = {};
-          for (const c of this.visibleChildren) {
-            if (!typeMap[c.type]) {
-              typeMap[c.type] = [];
-            }
-            typeMap[c.type].push(c);
-          }
-          this._visibleChildrenByType = typeMap;
-        }
-        return this._visibleChildrenByType;
-      }
 
       /**
        * The actor associated with this document if there is one.
@@ -142,6 +108,40 @@ export default function CommonDocumentMixin(Base) {
        */
       get metadata() {
         return this.system.constructor.metadata;
+      }
+
+      /** @inheritDoc */
+      get SettingsFlagsDataModel() {
+        return this.system.SettingsFlagsDataModel;
+      }
+
+      /**
+       * Lazily recomputed array containing all visible children.
+       * @returns {AnyChildDocument[]}
+       */
+      get visibleChildren() {
+        if (!this._visibleChildren) {
+          this._visibleChildren = this.makeVisibleChildrenArray();
+        }
+        return this._visibleChildren;
+      }
+
+      /**
+       * Lazily recomputed map of all visible children by their types.
+       * @returns {Record<Teriock.Documents.ChildType, AnyChildDocument[]>}
+       */
+      get visibleChildrenByType() {
+        if (!this._visibleChildrenByType) {
+          const typeMap = {};
+          for (const c of this.visibleChildren) {
+            if (!typeMap[c.type]) {
+              typeMap[c.type] = [];
+            }
+            typeMap[c.type].push(c);
+          }
+          this._visibleChildrenByType = typeMap;
+        }
+        return this._visibleChildrenByType;
       }
 
       /**

@@ -8,6 +8,14 @@ import BaseRoll from "./base-roll.mjs";
  */
 export default class ImpactRoll extends BaseRoll {
   /**
+   * @inheritDoc
+   * @returns {Teriock.Dice.ImpactRollOptions}
+   */
+  static get defaultOptions() {
+    return Object.assign(super.defaultOptions, { impact: "other" });
+  }
+
+  /**
    * @param {Teriock.System.FormulaString} formula
    * @param {object} data
    * @param {Partial<Teriock.Dice.ImpactRollOptions>} options
@@ -18,11 +26,14 @@ export default class ImpactRoll extends BaseRoll {
   }
 
   /**
-   * @inheritDoc
-   * @returns {Teriock.Dice.ImpactRollOptions}
+   * Set the flavor if there's not one already defined.
    */
-  static get defaultOptions() {
-    return Object.assign(super.defaultOptions, { impact: "other" });
+  #setImpactFlavor() {
+    if (this.hasImpact) {
+      this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", {
+        value: impactConfig[this.impact]?.label,
+      });
+    }
   }
 
   /**
@@ -48,17 +59,6 @@ export default class ImpactRoll extends BaseRoll {
   set impact(impact) {
     this.options.impact = impact;
     this.#setImpactFlavor();
-  }
-
-  /**
-   * Set the flavor if there's not one already defined.
-   */
-  #setImpactFlavor() {
-    if (this.hasImpact) {
-      this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", {
-        value: impactConfig[this.impact]?.label,
-      });
-    }
   }
 
   /** @inheritDoc */

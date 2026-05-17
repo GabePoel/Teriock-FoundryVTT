@@ -9,18 +9,6 @@ export default Base =>
    * @mixin
    */
   class CombatActorSheetPart extends Base {
-    static DEFAULT_OPTIONS = {
-      actions: {
-        useAbility: { buttons: [0, 2], handler: this.#onUseAbility },
-        openPrimaryAttacker: this.#onOpenPrimaryAttacker,
-        openPrimaryBlocker: this.#onOpenPrimaryBlocker,
-        selectAttacker: this.#onSelectAttacker,
-        selectBlocker: this.#onSelectBlocker,
-        toggleReaction: this.#onToggleReaction,
-        toggleSb: this.#onToggleSb,
-      },
-    };
-
     /**
      * Opens the primary attacker's sheet.
      * @returns {Promise<void>}
@@ -113,4 +101,16 @@ export default Base =>
         type: "ability",
       });
     }
+
+    static DEFAULT_OPTIONS = {
+      actions: {
+        useAbility: { buttons: [0, 2], handler: this.#onUseAbility },
+        openPrimaryAttacker: this.#onOpenPrimaryAttacker,
+        openPrimaryBlocker: this.#onOpenPrimaryBlocker,
+        selectAttacker: this.#onSelectAttacker,
+        selectBlocker: this.#onSelectBlocker,
+        toggleReaction: this.#onToggleReaction,
+        toggleSb: this.#onToggleSb,
+      },
+    };
   };

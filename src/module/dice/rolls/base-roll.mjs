@@ -17,27 +17,6 @@ export default class BaseRoll extends Roll {
   static CHAT_TEMPLATE = "teriock/ui/roll";
 
   /**
-   * @param {Teriock.System.FormulaString} formula
-   * @param {object} data
-   * @param {Partial<Teriock.Dice.BaseRollOptions>} options
-   */
-  constructor(formula, data, options = {}) {
-    super(formula, data, options);
-    this.options = foundry.utils.mergeObject(this.constructor.defaultOptions, options);
-
-    // If we don't do this, then the targets will be raw classes instead of JSON parsable objects
-    this.targets = this.options.targets;
-
-    // Ensure roll has an ID that can be referenced in chat messages
-    if (this.options._id && this.options.keepId) {
-      delete this.options.keepId;
-      this._id = this.options._id;
-    } else {
-      this._id = foundry.utils.randomID();
-    }
-  }
-
-  /**
    * Default roll options.
    * @returns {Partial<Teriock.Dice.BaseRollOptions>}
    */
@@ -143,6 +122,71 @@ export default class BaseRoll extends Roll {
     }
     roll.resetFormula();
     roll._total = roll._evaluateTotal();
+  }
+
+  /**
+   * @param {Teriock.System.FormulaString} formula
+   * @param {object} data
+   * @param {Partial<Teriock.Dice.BaseRollOptions>} options
+   */
+  constructor(formula, data, options = {}) {
+    super(formula, data, options);
+    this.options = foundry.utils.mergeObject(this.constructor.defaultOptions, options);
+
+    // If we don't do this, then the targets will be raw classes instead of JSON parsable objects
+    this.targets = this.options.targets;
+
+    // Ensure roll has an ID that can be referenced in chat messages
+    if (this.options._id && this.options.keepId) {
+      delete this.options.keepId;
+      this._id = this.options._id;
+    } else {
+      this._id = foundry.utils.randomID();
+    }
+  }
+
+  /**
+   * @param {Teriock.Dice.RawDieTarget} target
+   * @returns {Teriock.Dice.DieTarget}
+   */
+  #parseTarget(target) {
+    let img = "";
+    let name = "";
+    let rescale = false;
+    /** @type {TeriockActor} */
+    let actor;
+    /** @type {TeriockTokenDocument} */
+    let token;
+    // Handling for token placeables
+    if (target.document) {
+      token = target.document;
+      actor = target.actor;
+    }
+    // Handling for documents
+    if (target.documentName === "TokenDocument") {
+      token = target;
+      actor = actor || token.actor;
+    } else if (target.documentName === "Actor") {
+      token = target.token;
+      actor = actor || target;
+    }
+    // Prioritize name and image from the token over the actor
+    if (actor) {
+      img = actor.img;
+      name = actor.name;
+    }
+    if (token) {
+      img = token.img;
+      rescale = token.rescale;
+      name = token.name;
+    }
+    return {
+      actorUuid: actor?.uuid || target.actorUuid,
+      img: img || target?.img || systemPath("icons/documents/character.svg"),
+      name: name || target?.name,
+      rescale: rescale || target?.rescale,
+      tokenUuid: token?.uuid || target.tokenUuid,
+    };
   }
 
   /**
@@ -256,50 +300,6 @@ export default class BaseRoll extends Roll {
   /** @param {number} threshold */
   set threshold(threshold) {
     this.options.threshold = threshold;
-  }
-
-  /**
-   * @param {Teriock.Dice.RawDieTarget} target
-   * @returns {Teriock.Dice.DieTarget}
-   */
-  #parseTarget(target) {
-    let img = "";
-    let name = "";
-    let rescale = false;
-    /** @type {TeriockActor} */
-    let actor;
-    /** @type {TeriockTokenDocument} */
-    let token;
-    // Handling for token placeables
-    if (target.document) {
-      token = target.document;
-      actor = target.actor;
-    }
-    // Handling for documents
-    if (target.documentName === "TokenDocument") {
-      token = target;
-      actor = actor || token.actor;
-    } else if (target.documentName === "Actor") {
-      token = target.token;
-      actor = actor || target;
-    }
-    // Prioritize name and image from the token over the actor
-    if (actor) {
-      img = actor.img;
-      name = actor.name;
-    }
-    if (token) {
-      img = token.img;
-      rescale = token.rescale;
-      name = token.name;
-    }
-    return {
-      actorUuid: actor?.uuid || target.actorUuid,
-      img: img || target?.img || systemPath("icons/documents/character.svg"),
-      name: name || target?.name,
-      rescale: rescale || target?.rescale,
-      tokenUuid: token?.uuid || target.tokenUuid,
-    };
   }
 
   /**

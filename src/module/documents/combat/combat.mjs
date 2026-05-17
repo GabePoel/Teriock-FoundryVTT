@@ -12,22 +12,6 @@ const { Combat } = foundry.documents;
  */
 export default class TeriockCombat extends BaseDocumentMixin(Combat) {
   /**
-   * The current acting actor.
-   * @returns {AnyActor|null}
-   */
-  get actor() {
-    return this.combatant ? this.combatant.actor || null : null;
-  }
-
-  /**
-   * The actors in this combat.
-   * @returns {AnyActor[]}
-   */
-  get actors() {
-    return Array.from(this.combatants.filter(c => c.actor).map(c => c.actor));
-  }
-
-  /**
    * Check if the effect might expire and send a dialog to some {@link TeriockUser}.
    * @param {TeriockConsequence} effect - Effect to check expiration for.
    * @param {"turn"|"combat"|"action"} trigger - What might trigger this effect to expire.
@@ -126,6 +110,22 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
         localize: true,
       },
     );
+  }
+
+  /**
+   * The current acting actor.
+   * @returns {AnyActor|null}
+   */
+  get actor() {
+    return this.combatant ? this.combatant.actor || null : null;
+  }
+
+  /**
+   * The actors in this combat.
+   * @returns {AnyActor[]}
+   */
+  get actors() {
+    return Array.from(this.combatants.filter(c => c.actor).map(c => c.actor));
   }
 
   /** @inheritDoc */

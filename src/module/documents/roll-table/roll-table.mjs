@@ -23,9 +23,9 @@ export default class TeriockRollTable extends mixClasses(
    */
   async getAllContents() {
     const out = await this.getContents();
-    const allDocs = [...out.filter(d => !["RollTable", "Folder"].includes(d.documentName))];
+    const allDocs = [...out.filter(d => !["Folder", "RollTable"].includes(d.documentName))];
     for (const d of out) {
-      if (["RollTable", "Folder"].includes(d.documentName)) {
+      if (["Folder", "RollTable"].includes(d.documentName)) {
         const toAdd = await d.getAllContents();
         allDocs.push(...toAdd);
       }

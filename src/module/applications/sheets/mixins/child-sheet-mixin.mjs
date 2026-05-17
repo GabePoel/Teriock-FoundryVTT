@@ -16,6 +16,27 @@ export default function ChildSheetMixin(Base) {
      * @property {ChildDocument} document
      */
     class ChildSheet extends Base {
+      /**
+       * Open the image for this document.
+       * @return {Promise<void>}
+       */
+      static async #onOpenImage() {
+        await new ImagePopout({
+          src: this.document.img,
+          window: {
+            title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
+          },
+        }).render(true);
+      }
+
+      /**
+       * Open this document's elder if it exists.
+       * @returns {Promise<void>}
+       */
+      static async #onOpenSource() {
+        await this.document.master?.sheet.render(true);
+      }
+
       /** @type {string[]} */
       static BARS = [];
 
@@ -51,27 +72,6 @@ export default function ChildSheetMixin(Base) {
       };
 
       /**
-       * Open the image for this document.
-       * @return {Promise<void>}
-       */
-      static async #onOpenImage() {
-        await new ImagePopout({
-          src: this.document.img,
-          window: {
-            title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
-          },
-        }).render(true);
-      }
-
-      /**
-       * Open this document's elder if it exists.
-       * @returns {Promise<void>}
-       */
-      static async #onOpenSource() {
-        await this.document.master?.sheet.render(true);
-      }
-
-      /**
        * Populate a display field.
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
@@ -81,11 +81,6 @@ export default function ChildSheetMixin(Base) {
         await this.document.update({
           [target.dataset.path]: `<p>${_loc("TERIOCK.SHEETS.Child.DEFAULTS.populateField")}</p>`,
         });
-      }
-
-      /** @type {Record<string, object>} */
-      get _buttonUpdates() {
-        return {};
       }
 
       /**
@@ -133,6 +128,11 @@ export default function ChildSheetMixin(Base) {
           }
         });
         return out;
+      }
+
+      /** @type {Record<string, object>} */
+      get _buttonUpdates() {
+        return {};
       }
 
       /**

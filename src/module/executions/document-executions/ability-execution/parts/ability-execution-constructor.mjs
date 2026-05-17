@@ -42,6 +42,126 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     }
   }
 
+  /**
+   * Logic to pick armament based on interaction type.
+   * @param {string} interaction - The interaction type (e.g., 'attack', 'block').
+   * @returns {TeriockArmament|null}
+   */
+  #determineDefaultArmament(interaction) {
+    if (!this.actor) {
+      return null;
+    }
+    if (interaction === "attack") {
+      return this.actor.system.wielding.attacker;
+    }
+    if (interaction === "block") {
+      return this.actor.system.wielding.blocker;
+    }
+    return null;
+  }
+
+  /**
+   * Resolves piercing by comparing source, armament, and actor offense.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @returns {PiercingModel}
+   */
+  #determinePiercing(options) {
+    this.piercing.raw = this.source.system.piercing.raw;
+    if (this.armament && this.source.system.isContact) {
+      this.piercing.raw = Math.max(
+        this.piercing.raw,
+        this.armament.system.piercing.raw,
+        this.actor?.system.offense.piercing.raw || 0,
+      );
+    }
+    if (options.piercing !== undefined) {
+      this.piercing.raw = options.piercing;
+    }
+  }
+
+  /**
+   * Syncs cost options and initializes cost tracking.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   */
+  #initializeCosts(options) {
+    Object.assign(this.options, {
+      noGp: options.noGp ?? !this.source.getSetting("execution.promptCostGp"),
+      noHp: options.noHp ?? !this.source.getSetting("execution.promptCostHp"),
+      noLp: options.noLp ?? !this.source.getSetting("execution.promptCostLp"),
+      noMp: options.noMp ?? !this.source.getSetting("execution.promptCostMp"),
+    });
+    this.costs = { hp: 0, mp: 0, gp: 0 };
+  }
+
+  /**
+   * Handles UI/Prompting flags.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   */
+  #initializeFlags(options) {
+    this.flags = {
+      noHeighten: options.noHeighten ?? !this.source.getSetting("execution.promptHeighten"),
+      noTemplate: options.noTemplate ?? !this.source.getSetting("execution.promptTemplate"),
+    };
+  }
+
+  /**
+   * Determines the formula for attack penalties.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @returns {string}
+   */
+  #resolveAttackPenalty(options) {
+    if (options.attackPenalty !== undefined) {
+      return options.attackPenalty;
+    }
+    if (!this.isAttack) {
+      return "0";
+    }
+    return this.isContact && this.armament ? this.armament.system.attackPenalty : this.source.system.attackPenalty;
+  }
+
+  /**
+   * Determines if limbs are being targeted.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {boolean}
+   */
+  #resolveLimb(options, sys) {
+    if (options.limb !== undefined) {
+      return options.limb;
+    }
+    return sys.isContact && (sys.targets.has("arm") || sys.targets.has("leg") || sys.targets.has("limb"));
+  }
+
+  /**
+   * Determines if vitals are being targeted.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {boolean}
+   */
+  #resolveVitals(options, sys) {
+    if (options.vitals !== undefined) {
+      return options.vitals;
+    }
+    const armamentVitals = this.armament?.system.vitals && sys.interaction === "attack";
+    return sys.isContact && armamentVitals ? true : sys.targets.has("vitals");
+  }
+
+  /**
+   * Determines if the execution is warded.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {AbilitySystem} sys - The source system data.
+   * @returns {boolean}
+   */
+  #resolveWarded(options, sys) {
+    if (options.warded !== undefined) {
+      return options.warded;
+    }
+    const armamentWarded =
+      (this.armament?.system.warded && ["attack", "block"].includes(sys.interaction)) ||
+      this.actor?.system?.combat?.offense?.warded;
+    return sys.isContact && armamentWarded ? true : !!sys.warded;
+  }
+
   /** @type {PiercingModel} */
   piercing = new PiercingModel();
 
@@ -169,126 +289,6 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
       }
     }
     return false;
-  }
-
-  /**
-   * Logic to pick armament based on interaction type.
-   * @param {string} interaction - The interaction type (e.g., 'attack', 'block').
-   * @returns {TeriockArmament|null}
-   */
-  #determineDefaultArmament(interaction) {
-    if (!this.actor) {
-      return null;
-    }
-    if (interaction === "attack") {
-      return this.actor.system.wielding.attacker;
-    }
-    if (interaction === "block") {
-      return this.actor.system.wielding.blocker;
-    }
-    return null;
-  }
-
-  /**
-   * Resolves piercing by comparing source, armament, and actor offense.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {PiercingModel}
-   */
-  #determinePiercing(options) {
-    this.piercing.raw = this.source.system.piercing.raw;
-    if (this.armament && this.source.system.isContact) {
-      this.piercing.raw = Math.max(
-        this.piercing.raw,
-        this.armament.system.piercing.raw,
-        this.actor?.system.offense.piercing.raw || 0,
-      );
-    }
-    if (options.piercing !== undefined) {
-      this.piercing.raw = options.piercing;
-    }
-  }
-
-  /**
-   * Syncs cost options and initializes cost tracking.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   */
-  #initializeCosts(options) {
-    Object.assign(this.options, {
-      noGp: options.noGp ?? !this.source.getSetting("execution.promptCostGp"),
-      noHp: options.noHp ?? !this.source.getSetting("execution.promptCostHp"),
-      noLp: options.noLp ?? !this.source.getSetting("execution.promptCostLp"),
-      noMp: options.noMp ?? !this.source.getSetting("execution.promptCostMp"),
-    });
-    this.costs = { hp: 0, mp: 0, gp: 0 };
-  }
-
-  /**
-   * Handles UI/Prompting flags.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   */
-  #initializeFlags(options) {
-    this.flags = {
-      noHeighten: options.noHeighten ?? !this.source.getSetting("execution.promptHeighten"),
-      noTemplate: options.noTemplate ?? !this.source.getSetting("execution.promptTemplate"),
-    };
-  }
-
-  /**
-   * Determines the formula for attack penalties.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {string}
-   */
-  #resolveAttackPenalty(options) {
-    if (options.attackPenalty !== undefined) {
-      return options.attackPenalty;
-    }
-    if (!this.isAttack) {
-      return "0";
-    }
-    return this.isContact && this.armament ? this.armament.system.attackPenalty : this.source.system.attackPenalty;
-  }
-
-  /**
-   * Determines if limbs are being targeted.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
-   * @returns {boolean}
-   */
-  #resolveLimb(options, sys) {
-    if (options.limb !== undefined) {
-      return options.limb;
-    }
-    return sys.isContact && (sys.targets.has("arm") || sys.targets.has("leg") || sys.targets.has("limb"));
-  }
-
-  /**
-   * Determines if vitals are being targeted.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
-   * @returns {boolean}
-   */
-  #resolveVitals(options, sys) {
-    if (options.vitals !== undefined) {
-      return options.vitals;
-    }
-    const armamentVitals = this.armament?.system.vitals && sys.interaction === "attack";
-    return sys.isContact && armamentVitals ? true : sys.targets.has("vitals");
-  }
-
-  /**
-   * Determines if the execution is warded.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
-   * @returns {boolean}
-   */
-  #resolveWarded(options, sys) {
-    if (options.warded !== undefined) {
-      return options.warded;
-    }
-    const armamentWarded =
-      (this.armament?.system.warded && ["attack", "block"].includes(sys.interaction)) ||
-      this.actor?.system?.combat?.offense?.warded;
-    return sys.isContact && armamentWarded ? true : !!sys.warded;
   }
 
   /**

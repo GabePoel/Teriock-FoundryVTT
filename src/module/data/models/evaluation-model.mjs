@@ -7,14 +7,6 @@ import EmbeddedDataModel from "./embedded-data-model.mjs";
  * @property {Teriock.System.FormulaString} raw - String corresponding to the formula.
  */
 export default class EvaluationModel extends EmbeddedDataModel {
-  constructor(
-    data = {},
-    { floor = true, ceil = false, min = 0, max = Infinity, blank = 0, interval = undefined, ...options } = {},
-  ) {
-    super(data, { ...options });
-    this._derivationOptions = { floor, ceil, min, max, blank, interval };
-  }
-
   /**
    * @inheritDoc
    * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options]
@@ -24,59 +16,12 @@ export default class EvaluationModel extends EmbeddedDataModel {
     return { raw: new FormulaField(options) };
   }
 
-  /** @type {Teriock.Fields.FormulaDerivationOptions} */
-  _derivationOptions;
-
-  /** @type {number} */
-  _value;
-
-  /**
-   * The latest evaluated value.
-   * @returns {number}
-   */
-  get value() {
-    if (typeof this._value === "number") {
-      return this._value;
-    }
-    return this.#evaluate({ skipRollData: true });
-  }
-
-  /**
-   * Value as derived from current roll data.
-   * @returns {number}
-   */
-  get currentValue() {
-    return this.#evaluate();
-  }
-
-  /**
-   * The formula that gets evaluated.
-   * @returns {Teriock.System.FormulaString}
-   */
-  get formula() {
-    if (this.raw) {
-      return this.raw;
-    }
-    if (["number", "string"].includes(typeof this._derivationOptions.blank)) {
-      return `${this._derivationOptions.blank}`;
-    }
-    return "0";
-  }
-
-  /**
-   * If this has a non-zero value. This does not handle `@` values very well.
-   * @returns {boolean}
-   */
-  get nonZero() {
-    return BaseRoll.minValue(this.formula) !== 0 && BaseRoll.maxValue(this.formula) !== 0;
-  }
-
-  /**
-   * Text that represents this formula.
-   * @returns {string}
-   */
-  get text() {
-    return this.nonZero ? this.formula : "";
+  constructor(
+    data = {},
+    { floor = true, ceil = false, min = 0, max = Infinity, blank = 0, interval = undefined, ...options } = {},
+  ) {
+    super(data, { ...options });
+    this._derivationOptions = { floor, ceil, min, max, blank, interval };
   }
 
   /**
@@ -122,6 +67,61 @@ export default class EvaluationModel extends EmbeddedDataModel {
       value = Math.ceil(value);
     }
     return value;
+  }
+
+  /** @type {Teriock.Fields.FormulaDerivationOptions} */
+  _derivationOptions;
+
+  /** @type {number} */
+  _value;
+
+  /**
+   * Value as derived from current roll data.
+   * @returns {number}
+   */
+  get currentValue() {
+    return this.#evaluate();
+  }
+
+  /**
+   * The formula that gets evaluated.
+   * @returns {Teriock.System.FormulaString}
+   */
+  get formula() {
+    if (this.raw) {
+      return this.raw;
+    }
+    if (["number", "string"].includes(typeof this._derivationOptions.blank)) {
+      return `${this._derivationOptions.blank}`;
+    }
+    return "0";
+  }
+
+  /**
+   * If this has a non-zero value. This does not handle `@` values very well.
+   * @returns {boolean}
+   */
+  get nonZero() {
+    return BaseRoll.minValue(this.formula) !== 0 && BaseRoll.maxValue(this.formula) !== 0;
+  }
+
+  /**
+   * Text that represents this formula.
+   * @returns {string}
+   */
+  get text() {
+    return this.nonZero ? this.formula : "";
+  }
+
+  /**
+   * The latest evaluated value.
+   * @returns {number}
+   */
+  get value() {
+    if (typeof this._value === "number") {
+      return this._value;
+    }
+    return this.#evaluate({ skipRollData: true });
   }
 
   /**

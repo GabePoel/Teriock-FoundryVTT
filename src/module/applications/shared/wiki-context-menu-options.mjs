@@ -85,7 +85,7 @@ const wikiContextMenuOptions = [
       await game.actors.default.system.rollResistance();
     },
     visible: target =>
-      ["Keyword: Resistance", "Keyword: Hexproof"].includes(target.dataset.tooltip) && game.actors.default,
+      ["Keyword: Hexproof", "Keyword: Resistance"].includes(target.dataset.tooltip) && game.actors.default,
   },
   {
     icon: makeIcon(icons.document.ability, "contextMenu"),
@@ -94,7 +94,7 @@ const wikiContextMenuOptions = [
       await game.actors.default.useDocument("ability:resist");
     },
     visible: target =>
-      ["Keyword: Resistance", "Keyword: Hexproof"].includes(target.dataset.tooltip) && game.actors.default,
+      ["Keyword: Hexproof", "Keyword: Resistance"].includes(target.dataset.tooltip) && game.actors.default,
   },
   {
     icon: makeIcon(icons.document.ability, "contextMenu"),

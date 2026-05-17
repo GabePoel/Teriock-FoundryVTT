@@ -40,9 +40,31 @@ export default function ThresholdExecutionMixin(Base) {
         this.showDialog = showDialog;
       }
 
-      /** @inheritDoc */
-      get _RollClass() {
-        return ThresholdRoll;
+      /**
+       * Update this given the choices selected in the roll dialog.
+       * @param {HTMLButtonElement} button
+       */
+      #updateFromRollDialog(button) {
+        for (const f of this._dialogFields) {
+          if (typeof f.condition === "boolean" && !f.condition) {
+            continue;
+          }
+          if (typeof f.condition === "function" && !f.condition()) {
+            continue;
+          }
+          let value;
+          const element =
+            /** @type {HTMLInputElement} */
+            button.form.elements.namedItem(f.name);
+          if (f.field instanceof fields.BooleanField) {
+            value = element.checked;
+          } else if (f.field instanceof fields.NumberField) {
+            value = Number(element.value);
+          } else {
+            value = element.value;
+          }
+          f.update(value);
+        }
       }
 
       /**
@@ -108,6 +130,11 @@ export default function ThresholdExecutionMixin(Base) {
         ];
       }
 
+      /** @inheritDoc */
+      get _RollClass() {
+        return ThresholdRoll;
+      }
+
       /**
        * Whether this can have a bonus applied.
        * @return {boolean}
@@ -155,33 +182,6 @@ export default function ThresholdExecutionMixin(Base) {
           flavor: this.flavor,
           threshold: this.threshold,
         };
-      }
-
-      /**
-       * Update this given the choices selected in the roll dialog.
-       * @param {HTMLButtonElement} button
-       */
-      #updateFromRollDialog(button) {
-        for (const f of this._dialogFields) {
-          if (typeof f.condition === "boolean" && !f.condition) {
-            continue;
-          }
-          if (typeof f.condition === "function" && !f.condition()) {
-            continue;
-          }
-          let value;
-          const element =
-            /** @type {HTMLInputElement} */
-            button.form.elements.namedItem(f.name);
-          if (f.field instanceof fields.BooleanField) {
-            value = element.checked;
-          } else if (f.field instanceof fields.NumberField) {
-            value = Number(element.value);
-          } else {
-            value = element.value;
-          }
-          f.update(value);
-        }
       }
 
       /** @inheritDoc */

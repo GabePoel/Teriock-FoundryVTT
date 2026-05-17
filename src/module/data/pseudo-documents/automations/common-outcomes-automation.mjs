@@ -41,21 +41,6 @@ export default class CommonOutcomesAutomation extends mixClasses(
     });
   }
 
-  /** @inheritDoc */
-  get _confirmationPaths() {
-    return this.trigger ? super._confirmationPaths : [];
-  }
-
-  /** @inheritDoc */
-  get _formPaths() {
-    return ["common", ...this._confirmationPaths, ...super._formPaths];
-  }
-
-  /** @inheritDoc */
-  get _showConfirmationWarning() {
-    return !!this.trigger && super._showConfirmationWarning;
-  }
-
   /**
    * Apply common outcomes.
    * @param {Teriock.System.TriggerScope} scope
@@ -77,6 +62,21 @@ export default class CommonOutcomesAutomation extends mixClasses(
     for (const c of this.common) {
       await commands[c].primary(actor);
     }
+  }
+
+  /** @inheritDoc */
+  get _confirmationPaths() {
+    return this.trigger ? super._confirmationPaths : [];
+  }
+
+  /** @inheritDoc */
+  get _formPaths() {
+    return ["common", ...this._confirmationPaths, ...super._formPaths];
+  }
+
+  /** @inheritDoc */
+  get _showConfirmationWarning() {
+    return !!this.trigger && super._showConfirmationWarning;
   }
 
   /** @inheritDoc */

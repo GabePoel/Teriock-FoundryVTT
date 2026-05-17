@@ -109,11 +109,6 @@ export default class AbilitySystem extends mixClasses(
   }
 
   /** @inheritDoc */
-  get SettingsFlagsDataModel() {
-    return AbilitySettingsModel;
-  }
-
-  /** @inheritDoc */
   get _nameTags() {
     const tags = [];
     for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
@@ -299,6 +294,11 @@ export default class AbilitySystem extends mixClasses(
     return this.parent.inCompendium && this.parent.parent?.system.identifier === "basic-abilities";
   }
 
+  /** @inheritDoc */
+  get SettingsFlagsDataModel() {
+    return AbilitySettingsModel;
+  }
+
   /**
    * String that represents all the valid targets.
    * @returns {string}
@@ -368,7 +368,7 @@ export default class AbilitySystem extends mixClasses(
   /** @inheritDoc */
   toRefreshObject(document) {
     const obj = super.toRefreshObject(document);
-    if (!["normal", "special", "flaw"].includes(this.form)) {
+    if (!["flaw", "normal", "special"].includes(this.form)) {
       foundry.utils.deleteProperty(obj, "system.form");
     }
     return obj;

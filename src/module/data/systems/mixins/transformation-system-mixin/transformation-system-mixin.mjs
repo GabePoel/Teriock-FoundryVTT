@@ -62,47 +62,6 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
-       * If this is suppressed due to not being the primary transformation.
-       * @returns {boolean}
-       */
-      get _isSuppressedTransformation() {
-        return this.isTransformation && this.actor && !this.isPrimaryTransformation;
-      }
-
-      /**
-       * Whether this is the primary transformation.
-       * @returns {boolean}
-       */
-      get isPrimaryTransformation() {
-        if (this.actor) {
-          return this.isTransformation && this.actor.system.transformation.primary === this.parent;
-        } else {
-          return this.isTransformation;
-        }
-      }
-
-      /**
-       * Whether this effect is a transformation.
-       * @returns {boolean}
-       */
-      get isTransformation() {
-        return this.transformation.enabled;
-      }
-
-      /** @inheritDoc */
-      get makeSuppressed() {
-        return super.makeSuppressed || this._isSuppressedTransformation;
-      }
-
-      /**
-       * The primary species this transforms the actor into.
-       * @return {TeriockSpecies | null}
-       */
-      get primarySpecies() {
-        return this.isTransformation ? this.parent.species[0] : null;
-      }
-
-      /**
        * Pull species data, configure it, and batch it to be added to the actor.
        * @returns {Promise<void>}
        */
@@ -336,6 +295,47 @@ export default function TransformationSystemMixin(Base) {
        */
       #toIds(docs) {
         return docs.map(d => d.id);
+      }
+
+      /**
+       * If this is suppressed due to not being the primary transformation.
+       * @returns {boolean}
+       */
+      get _isSuppressedTransformation() {
+        return this.isTransformation && this.actor && !this.isPrimaryTransformation;
+      }
+
+      /**
+       * Whether this is the primary transformation.
+       * @returns {boolean}
+       */
+      get isPrimaryTransformation() {
+        if (this.actor) {
+          return this.isTransformation && this.actor.system.transformation.primary === this.parent;
+        } else {
+          return this.isTransformation;
+        }
+      }
+
+      /**
+       * Whether this effect is a transformation.
+       * @returns {boolean}
+       */
+      get isTransformation() {
+        return this.transformation.enabled;
+      }
+
+      /** @inheritDoc */
+      get makeSuppressed() {
+        return super.makeSuppressed || this._isSuppressedTransformation;
+      }
+
+      /**
+       * The primary species this transforms the actor into.
+       * @return {TeriockSpecies | null}
+       */
+      get primarySpecies() {
+        return this.isTransformation ? this.parent.species[0] : null;
       }
 
       /**

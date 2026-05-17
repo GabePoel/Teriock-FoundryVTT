@@ -60,7 +60,7 @@ declare global {
       awaitFire?: boolean;
       effect?: AnyActiveEffect;
       equipment?: TeriockEquipment;
-      execution?: BaseExecution | AbilityExecution | ArmamentExecution;
+      execution?: AbilityExecution | ArmamentExecution | BaseExecution;
       item?: AnyItem;
       tradecraft?: Teriock.Keys.Tradecraft;
       trigger?: string;
@@ -128,7 +128,7 @@ declare global {
     /**
      * Generic type corresponding to something that may or may not exist.
      */
-    export type Existable<T> = T | T[] | Set<T> | null | undefined;
+    export type Existable<T> = Set<T> | T | T[] | null | undefined;
 
     /** Options on how to refresh documents. */
     export type RefreshOptions = {

@@ -25,6 +25,16 @@ export default class SummonAutomation extends mixClasses(
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
 
+  /** @inheritDoc */
+  static get _conditions() {
+    return false;
+  }
+
+  /** @inheritDoc */
+  static get _triggerChoices() {
+    return { execution: TERIOCK.config.trigger.execution };
+  }
+
   /** @inheritdoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.Summon.LABEL";
@@ -36,20 +46,16 @@ export default class SummonAutomation extends mixClasses(
   }
 
   /** @inheritDoc */
-  static get _conditions() {
-    return false;
-  }
-
-  /** @inheritDoc */
-  static get _triggerChoices() {
-    return { execution: TERIOCK.config.trigger.execution };
-  }
-
-  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       merge: new fields.BooleanField({ initial: true }),
     });
+  }
+
+  /** @returns {boolean} */
+  #validateUuid(uuid) {
+    const parsed = foundry.utils.parseUuid(uuid);
+    return parsed?.type === "Actor";
   }
 
   /** @inheritDoc */
@@ -64,12 +70,6 @@ export default class SummonAutomation extends mixClasses(
       paths.push("merge");
     }
     return paths;
-  }
-
-  /** @returns {boolean} */
-  #validateUuid(uuid) {
-    const parsed = foundry.utils.parseUuid(uuid);
-    return parsed?.type === "Actor";
   }
 
   /** @inheritDoc */

@@ -13,6 +13,16 @@ import { archetypeContextMenu, classContextMenu } from "./helpers/rank-context-m
  * @property {TeriockRank} item
  */
 export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButtonSheetMixin) {
+  /**
+   * Toggle whether this is innate.
+   * @returns {Promise<void>}
+   */
+  static async #onToggleInnate() {
+    await this.document.update({
+      "system.innate": !this.document.system.innate,
+    });
+  }
+
   /** @inheritDoc */
   static BARS = [
     "teriock/sheets/items/rank/class-bar",
@@ -29,16 +39,6 @@ export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButt
     window: { icon: makeIconClass(documentConfig.rank.icon, "title") },
     actions: { toggleInnate: this.#onToggleInnate },
   };
-
-  /**
-   * Toggle whether this is innate.
-   * @returns {Promise<void>}
-   */
-  static async #onToggleInnate() {
-    await this.document.update({
-      "system.innate": !this.document.system.innate,
-    });
-  }
 
   /** @inheritDoc */
   async _onRender(context, options) {

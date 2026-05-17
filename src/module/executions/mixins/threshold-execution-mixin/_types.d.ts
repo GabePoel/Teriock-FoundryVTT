@@ -6,7 +6,7 @@ declare global {
       Teriock.Interaction.ThresholdOptions;
 
     export type ExecutionDialogEntry = {
-      condition: boolean | (() => boolean);
+      condition: (() => boolean) | boolean;
       field: DataField;
       hint?: string;
       integer?: number;
@@ -14,10 +14,10 @@ declare global {
       max?: number;
       min?: number;
       name: string;
-      placeholder?: string | number;
+      placeholder?: number | string;
       small: boolean;
-      update: (value: string | number | boolean) => void;
-      value: string | number | boolean;
+      update: (value: boolean | number | string) => void;
+      value: boolean | number | string;
     };
 
     export type ExecutionDialogButton = {

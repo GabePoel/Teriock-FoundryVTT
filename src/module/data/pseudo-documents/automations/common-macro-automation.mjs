@@ -7,12 +7,12 @@ import { MacroAutomationMixin } from "./mixins/_module.mjs";
  */
 export default class CommonMacroAutomation extends MacroAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
-  static get TYPE() {
-    return "commonMacro";
+  static get _triggerChoices() {
+    return { execution: TERIOCK.config.trigger.execution };
   }
 
   /** @inheritDoc */
-  static get _triggerChoices() {
-    return { execution: TERIOCK.config.trigger.execution };
+  static get TYPE() {
+    return "commonMacro";
   }
 }

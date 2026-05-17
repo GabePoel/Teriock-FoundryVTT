@@ -24,11 +24,26 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
     options.competence = this.competence.raw;
   }
 
+  /** @type {AnyActor|null} */
+  _actor;
+
+  /** @type {Teriock.Automations.Any[]} */
+  _automations = [];
+
   /** @type {Record<Teriock.Keys.Impact, Teriock.System.FormulaString>} */
   _boosts;
 
   /** @type {Record<Teriock.Keys.Impact, number>} */
   _boostsResolved;
+
+  /** @type {Teriock.System.FormulaString} */
+  _formula;
+
+  /** @type {object} */
+  _rollData;
+
+  /** @type {object} */
+  _rollOptions = {};
 
   /** @type {Teriock.Activations.Any[]} */
   activations = [];
@@ -59,8 +74,13 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
     return BaseRoll;
   }
 
-  /** @type {AnyActor|null} */
-  _actor;
+  /**
+   * The automations that are active.
+   * @returns {Teriock.Automations.Any[]}
+   */
+  get activeAutomations() {
+    return this.automations.contents.filter(a => a.competencies.has(this.competence.raw));
+  }
 
   /** @returns {AnyActor|null} */
   get actor() {
@@ -75,9 +95,6 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
     this._actor = actor;
   }
 
-  /** @type {Teriock.Automations.Any[]} */
-  _automations = [];
-
   /** @returns {TypeCollection<ID<Teriock.Automations.Any>, Teriock.Automations.Any>} */
   get automations() {
     return new TypeCollection(this._automations.map(a => [a.id, a]));
@@ -91,51 +108,6 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
     if (automations instanceof TypeCollection) {
       this._automations = automations.contents;
     }
-  }
-
-  /** @type {Teriock.System.FormulaString} */
-  _formula;
-
-  /** @returns {Teriock.System.FormulaString} */
-  get formula() {
-    return this._formula;
-  }
-
-  /** @param {Teriock.System.FormulaString} formula */
-  set formula(formula) {
-    this._formula = formula;
-  }
-
-  /** @type {object} */
-  _rollData;
-
-  /**
-   * Roll data used by this execution.
-   * @returns {object}
-   */
-  get rollData() {
-    const rollData = this.actor?.getRollData() || {};
-    Object.assign(rollData, foundry.utils.deepClone(this._rollData));
-    return rollData;
-  }
-
-  /** @type {object} */
-  _rollOptions = {};
-
-  /**
-   * Roll options used by this execution.
-   * @returns {object}
-   */
-  get rollOptions() {
-    return foundry.utils.mergeObject({ flavor: this.flavor }, this._rollOptions);
-  }
-
-  /**
-   * The automations that are active.
-   * @returns {Teriock.Automations.Any[]}
-   */
-  get activeAutomations() {
-    return this.automations.contents.filter(a => a.competencies.has(this.competence.raw));
   }
 
   /**
@@ -175,6 +147,34 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    */
   get flavor() {
     return "";
+  }
+
+  /** @returns {Teriock.System.FormulaString} */
+  get formula() {
+    return this._formula;
+  }
+
+  /** @param {Teriock.System.FormulaString} formula */
+  set formula(formula) {
+    this._formula = formula;
+  }
+
+  /**
+   * Roll data used by this execution.
+   * @returns {object}
+   */
+  get rollData() {
+    const rollData = this.actor?.getRollData() || {};
+    Object.assign(rollData, foundry.utils.deepClone(this._rollData));
+    return rollData;
+  }
+
+  /**
+   * Roll options used by this execution.
+   * @returns {object}
+   */
+  get rollOptions() {
+    return foundry.utils.mergeObject({ flavor: this.flavor }, this._rollOptions);
   }
 
   /**

@@ -1,8 +1,8 @@
 import { ChatSpeakerData } from "@client/documents/_types.mjs";
 
+import { TeriockChatMessage } from "../_module.mjs";
 import { BaseMessageSystem } from "../../data/systems/messages/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { TeriockChatMessage } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Data {

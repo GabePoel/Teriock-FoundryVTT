@@ -9,17 +9,6 @@ export default Base =>
    * @mixin
    */
   class RollingActorSheetPart extends Base {
-    static DEFAULT_OPTIONS = {
-      actions: {
-        rollFeatSave: { buttons: [0, 2], handler: this.#onRollFeatSave },
-        rollHexproof: { buttons: [0, 2], handler: this.#onRollHexproof },
-        rollHexseal: { buttons: [0, 2], handler: this.#onRollHexseal },
-        rollImmunity: { buttons: [0, 2], handler: this.#onRollImmunity },
-        rollResistance: { buttons: [0, 2], handler: this.#onRollResistance },
-        rollStatDie: { buttons: [0], handler: this._onRollStatDie },
-      },
-    };
-
     /**
      * Rolls a feat save with optional advantage/disadvantage.
      * @param {PointerEvent} event - The event object.
@@ -71,6 +60,17 @@ export default Base =>
     static async #onRollResistance(event, target) {
       await this.actor.system.rollResistance(protectionOptions(event, target));
     }
+
+    static DEFAULT_OPTIONS = {
+      actions: {
+        rollFeatSave: { buttons: [0, 2], handler: this.#onRollFeatSave },
+        rollHexproof: { buttons: [0, 2], handler: this.#onRollHexproof },
+        rollHexseal: { buttons: [0, 2], handler: this.#onRollHexseal },
+        rollImmunity: { buttons: [0, 2], handler: this.#onRollImmunity },
+        rollResistance: { buttons: [0, 2], handler: this.#onRollResistance },
+        rollStatDie: { buttons: [0], handler: this._onRollStatDie },
+      },
+    };
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {

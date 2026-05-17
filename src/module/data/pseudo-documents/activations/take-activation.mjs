@@ -28,10 +28,6 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
     return TERIOCK.config.impact[this.impact];
   }
 
-  get tooltip() {
-    return typeof this.#amount === "number" ? this.#amount.toString() : "";
-  }
-
   /**
    * Whether to show a dialog.
    * @returns {boolean}
@@ -60,6 +56,10 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   /** @inheritDoc */
   get label() {
     return this.display.label || this.#entry?.take || this.constructor.LABEL;
+  }
+
+  get tooltip() {
+    return typeof this.#amount === "number" ? this.#amount.toString() : "";
   }
 
   /** @inheritDoc */

@@ -15,13 +15,13 @@ export default class ChangesAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "changes";
+  static get metadata() {
+    return Object.assign(super.metadata, { changes: true });
   }
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { changes: true });
+  static get TYPE() {
+    return "changes";
   }
 
   /** @inheritDoc */

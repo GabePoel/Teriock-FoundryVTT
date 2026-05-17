@@ -16,14 +16,6 @@ export default class BaseDocumentExecution extends BaseExecution {
   /** @type {AnyChildDocument} */
   _source;
 
-  /**
-   * Source document.
-   * @returns {AnyChildDocument}
-   */
-  get source() {
-    return this._source;
-  }
-
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
@@ -37,6 +29,14 @@ export default class BaseDocumentExecution extends BaseExecution {
    */
   get rollData() {
     return Object.assign(this.source.system.getSystemRollData() || {}, super.rollData);
+  }
+
+  /**
+   * Source document.
+   * @returns {AnyChildDocument}
+   */
+  get source() {
+    return this._source;
   }
 
   /** @inheritDoc */

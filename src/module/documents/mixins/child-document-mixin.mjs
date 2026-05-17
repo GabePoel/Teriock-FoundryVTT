@@ -1,5 +1,5 @@
-import { mixClasses } from "../../helpers/construction.mjs";
 import { TeriockChatMessage } from "../_module.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
 import { HierarchyDocumentMixin } from "./_module.mjs";
 import UsableDocumentMixin from "./usable-document-mixin.mjs";
 

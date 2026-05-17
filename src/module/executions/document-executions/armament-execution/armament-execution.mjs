@@ -23,8 +23,6 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       options.formula ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
   }
 
-  crit = false;
-
   /**
    * A copy of the roll for each impact this deals.
    * @returns {HarmRoll[]}
@@ -40,6 +38,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       return impactRoll;
     });
   }
+
+  crit = false;
 
   /** @inheritDoc */
   get _RollClass() {

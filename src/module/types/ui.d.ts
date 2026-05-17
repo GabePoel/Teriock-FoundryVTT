@@ -6,7 +6,7 @@ declare global {
     export type FormMessage = {
       icon?: string;
       text?: string;
-      level?: "success" | "info" | "warning" | "error";
+      level?: "error" | "info" | "success" | "warning";
     };
 
     /** Three-way toggle */

@@ -40,6 +40,20 @@ export default class MountSystem extends mixClasses(
   }
 
   /** @inheritDoc */
+  get _refreshPromises() {
+    const promises = super._refreshPromises;
+    if (this.mountType) {
+      promises.push(
+        this._formatRefreshPromise(
+          fromIdentifier(`mount:${this.mountType}`),
+          "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label",
+        ),
+      );
+    }
+    return promises;
+  }
+
+  /** @inheritDoc */
   get displayTags() {
     return [...super.displayTags, ...this._attunableTags];
   }
@@ -125,20 +139,6 @@ export default class MountSystem extends mixClasses(
       mounted: Number(this.mounted),
       [`type.${toCamelCase(this.mountType)}`]: 1,
     };
-  }
-
-  /** @inheritDoc */
-  get _refreshPromises() {
-    const promises = super._refreshPromises;
-    if (this.mountType) {
-      promises.push(
-        this._formatRefreshPromise(
-          fromIdentifier(`mount:${this.mountType}`),
-          "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label",
-        ),
-      );
-    }
-    return promises;
   }
 
   /**

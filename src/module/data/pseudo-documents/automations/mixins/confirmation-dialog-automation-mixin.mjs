@@ -27,6 +27,15 @@ export default function ConfirmationDialogAutomationMixin(Base) {
       }
 
       /**
+       * Helper method to prefix localization strings.
+       * @param {string} str
+       * @returns {string}
+       */
+      #pre(str) {
+        return `TERIOCK.AUTOMATIONS.ConfirmationDialog.${str}`;
+      }
+
+      /**
        * Confirmation paths.
        * @returns {string[]}
        */
@@ -52,15 +61,6 @@ export default function ConfirmationDialogAutomationMixin(Base) {
           });
         }
         return messages;
-      }
-
-      /**
-       * Helper method to prefix localization strings.
-       * @param {string} str
-       * @returns {string}
-       */
-      #pre(str) {
-        return `TERIOCK.AUTOMATIONS.ConfirmationDialog.${str}`;
       }
 
       /**

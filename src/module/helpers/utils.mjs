@@ -250,7 +250,7 @@ export function barClamp(bar, change) {
  * @returns {DatabaseWriteOperation | null}
  */
 export async function buildWriteOperation(operation) {
-  if (operation.uuid && ["update", "delete"].includes(operation.action)) {
+  if (operation.uuid && ["delete", "update"].includes(operation.action)) {
     const document = await foundry.utils.fromUuid(operation.uuid);
     if (!document) {
       return null;

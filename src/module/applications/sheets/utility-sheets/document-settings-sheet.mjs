@@ -3,6 +3,15 @@ import { makeIconClass, objectMap } from "../../../helpers/utils.mjs";
 import DocumentDialogSheet from "./document-dialog-sheet.mjs";
 
 export default class DocumentSettingsSheet extends DocumentDialogSheet {
+  /**
+   * Reset to the default identifier.
+   * @returns {Promise<void>}
+   */
+  static async #resetIdentifier() {
+    await this.document.update({
+      "system.identifier": this.document.defaultIdentifier,
+    });
+  }
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
@@ -14,6 +23,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
       icon: makeIconClass(icons.ui.configure, "title"),
     },
   };
+
   /** @inheritDoc */
   static PARTS = {
     all: {
@@ -21,21 +31,6 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
       scrollable: [""],
     },
   };
-
-  /**
-   * Reset to the default identifier.
-   * @returns {Promise<void>}
-   */
-  static async #resetIdentifier() {
-    await this.document.update({
-      "system.identifier": this.document.defaultIdentifier,
-    });
-  }
-
-  /** @inheritDoc */
-  get _titlePrefix() {
-    return "TERIOCK.SYSTEMS.Common.MENU.configureDocument";
-  }
 
   /**
    * Configure a normal field.
@@ -76,6 +71,11 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
       placeholder: options?.placeholder,
       value: this.document?.getSetting(path),
     };
+  }
+
+  /** @inheritDoc */
+  get _titlePrefix() {
+    return "TERIOCK.SYSTEMS.Common.MENU.configureDocument";
   }
 
   /** @inheritDoc */

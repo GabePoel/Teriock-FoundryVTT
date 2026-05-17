@@ -19,6 +19,16 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
   };
 
   /**
+   * Close the manager.
+   * @param {PointerEvent} event
+   * @returns {Promise<void>}
+   */
+  static async _onDone(event) {
+    event.preventDefault();
+    await this.close();
+  }
+
+  /**
    * Creates a new stat manager instance.
    * @param {TeriockActor} actor
    * @param {Teriock.Dialog.StatDialogOptions} [options]
@@ -36,16 +46,6 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
     super(applicationOptions);
     this._forHarm = forHarm;
     this._consumeStatDice = consumeStatDice;
-  }
-
-  /**
-   * Close the manager.
-   * @param {PointerEvent} event
-   * @returns {Promise<void>}
-   */
-  static async _onDone(event) {
-    event.preventDefault();
-    await this.close();
   }
 
   /** @inheritDoc */

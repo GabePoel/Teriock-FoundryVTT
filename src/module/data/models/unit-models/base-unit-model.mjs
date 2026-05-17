@@ -6,9 +6,6 @@ const { fields } = foundry.data;
 const { DialogV2 } = foundry.applications.api;
 
 class UnitDialog extends DialogV2 {
-  /** @type {BaseUnitModel} */
-  unitModel;
-
   /**
    * @param {HTMLInputElement} rawInput
    * @param {string} value
@@ -17,6 +14,9 @@ class UnitDialog extends DialogV2 {
   #updateInputs(rawInput, value) {
     rawInput.disabled = !this.unitModel.constructor.finiteChoiceEntries.map(e => e.id).includes(value);
   }
+
+  /** @type {BaseUnitModel} */
+  unitModel;
 
   /** @inheritDoc */
   async _onRender(context, options) {
@@ -89,6 +89,23 @@ export default class BaseUnitModel extends EvaluationModel {
         required: true,
       }),
     });
+  }
+
+  /**
+   * Convert to the base numerical unit.
+   * @param {number} value
+   * @returns {number}
+   */
+  #convert(value) {
+    const unitType = this.unitType;
+    if (unitType === "zero") {
+      return 0;
+    }
+    if (unitType === "infinite") {
+      return Infinity;
+    } else {
+      return value;
+    }
   }
 
   /** @inheritDoc */
@@ -199,23 +216,6 @@ export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */
   get value() {
     return this.#convert(super.value);
-  }
-
-  /**
-   * Convert to the base numerical unit.
-   * @param {number} value
-   * @returns {number}
-   */
-  #convert(value) {
-    const unitType = this.unitType;
-    if (unitType === "zero") {
-      return 0;
-    }
-    if (unitType === "infinite") {
-      return Infinity;
-    } else {
-      return value;
-    }
   }
 
   /**

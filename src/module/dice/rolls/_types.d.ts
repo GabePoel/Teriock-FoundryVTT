@@ -25,7 +25,7 @@ declare global {
       tokenUuid?: UUID<TeriockTokenDocument>;
     };
 
-    type RawDieTarget = TeriockToken | TeriockActor | TeriockTokenDocument | DieTarget;
+    type RawDieTarget = DieTarget | TeriockActor | TeriockToken | TeriockTokenDocument;
 
     type BaseRollOptions = RollOptions & {
       _id?: ID<BaseRoll>;

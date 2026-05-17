@@ -47,37 +47,6 @@ export default Base => {
         }
       }
 
-      /** @inheritDoc */
-      async _preUpdate(changes, options, user) {
-        const yes = await super._preUpdate(changes, options, user);
-        if (yes === false) {
-          return false;
-        }
-
-        options.teriock ??= {};
-        const newHp = foundry.utils.mergeObject(
-          foundry.utils.deepClone(this.hp),
-          foundry.utils.getProperty(changes, "system.hp") || {},
-        );
-        const newMp = foundry.utils.mergeObject(
-          foundry.utils.deepClone(this.mp),
-          foundry.utils.getProperty(changes, "system.mp") || {},
-        );
-        const newWither = foundry.utils.mergeObject(
-          foundry.utils.deepClone(this.lp),
-          foundry.utils.getProperty(changes, "system.lp") || {},
-        );
-        const realHpChange = newHp.value - this.hp.value;
-        const tempHpChange = newHp.temp - this.hp.temp;
-        const realMpChange = newMp.value - this.mp.value;
-        const tempMpChange = newMp.temp - this.mp.temp;
-        Object.assign(options.teriock, {
-          hpChange: realHpChange + tempHpChange,
-          lpChange: newWither.value - this.lp.value,
-          mpChange: realMpChange + tempMpChange,
-        });
-      }
-
       /**
        * Prepare a specific stat.
        * @param {Teriock.Keys.DieStat} stat
@@ -107,6 +76,37 @@ export default Base => {
         statData.max -= statData.morganti;
         statData.value = Math.clamp(statData.value, statData.min, statData.max);
         statData.temp = Math.max(0, statData.temp);
+      }
+
+      /** @inheritDoc */
+      async _preUpdate(changes, options, user) {
+        const yes = await super._preUpdate(changes, options, user);
+        if (yes === false) {
+          return false;
+        }
+
+        options.teriock ??= {};
+        const newHp = foundry.utils.mergeObject(
+          foundry.utils.deepClone(this.hp),
+          foundry.utils.getProperty(changes, "system.hp") || {},
+        );
+        const newMp = foundry.utils.mergeObject(
+          foundry.utils.deepClone(this.mp),
+          foundry.utils.getProperty(changes, "system.mp") || {},
+        );
+        const newWither = foundry.utils.mergeObject(
+          foundry.utils.deepClone(this.lp),
+          foundry.utils.getProperty(changes, "system.lp") || {},
+        );
+        const realHpChange = newHp.value - this.hp.value;
+        const tempHpChange = newHp.temp - this.hp.temp;
+        const realMpChange = newMp.value - this.mp.value;
+        const tempMpChange = newMp.temp - this.mp.temp;
+        Object.assign(options.teriock, {
+          hpChange: realHpChange + tempHpChange,
+          lpChange: newWither.value - this.lp.value,
+          mpChange: realMpChange + tempMpChange,
+        });
       }
 
       /**

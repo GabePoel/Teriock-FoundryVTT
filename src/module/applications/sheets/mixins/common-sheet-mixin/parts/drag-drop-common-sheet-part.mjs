@@ -92,7 +92,7 @@ export default Base => {
         let out;
         if (dropData.type === "Automation" && typeof this._onDropAutomation === "function") {
           this._onDropAutomation(event);
-        } else if (["ActiveEffect", "Item", "Actor"].includes(dropData.type)) {
+        } else if (["ActiveEffect", "Actor", "Item"].includes(dropData.type)) {
           if (this._tab === "automations") {
             return false;
           }

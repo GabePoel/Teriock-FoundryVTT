@@ -1,9 +1,9 @@
+import { LocalDocumentField } from "../_module.mjs";
 import { documentConfig } from "../../../constants/config/document-config.mjs";
 import { transformationConfig } from "../../../constants/config/transformation-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { choiceMap, objectMap } from "../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
-import { LocalDocumentField } from "../_module.mjs";
 
 const { fields } = foundry.data;
 

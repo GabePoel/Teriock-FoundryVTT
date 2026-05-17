@@ -281,6 +281,53 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
+       * Render the sheet of the dependee.
+       */
+      #reloadDependee() {
+        const doc = this.dependee;
+        if (!doc) {
+          return;
+        }
+        if (typeof doc.resetChildMaps === "function") {
+          doc.resetChildMaps();
+        }
+        if (doc.isViewer) {
+          doc?.sheet?.render({ force: false });
+        }
+      }
+
+      /**
+       * Render the sheets of all the sups.
+       */
+      #reloadSups() {
+        this.getAllSups().then(result => {
+          result.forEach(doc => {
+            if (typeof doc.resetChildMaps === "function") {
+              doc.resetChildMaps();
+            }
+            if (doc.isViewer) {
+              doc.sheet?.render({ force: false });
+            }
+          });
+        });
+        if (this.collection.name === "CompendiumCollection") {
+          this.collection.apps.forEach(app => {
+            if (app.rendered) {
+              app.render();
+            }
+          });
+        }
+      }
+
+      /**
+       * Render sheets of documents which have control over this.
+       */
+      #renderSheets() {
+        this.#reloadSups();
+        this.#reloadDependee();
+      }
+
+      /**
        * All the sub descendant of this document or their indexes.
        * @returns {TypeCollection}
        */
@@ -370,53 +417,6 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       get visible() {
         return super.visible && !this.sup;
-      }
-
-      /**
-       * Render the sheet of the dependee.
-       */
-      #reloadDependee() {
-        const doc = this.dependee;
-        if (!doc) {
-          return;
-        }
-        if (typeof doc.resetChildMaps === "function") {
-          doc.resetChildMaps();
-        }
-        if (doc.isViewer) {
-          doc?.sheet?.render({ force: false });
-        }
-      }
-
-      /**
-       * Render the sheets of all the sups.
-       */
-      #reloadSups() {
-        this.getAllSups().then(result => {
-          result.forEach(doc => {
-            if (typeof doc.resetChildMaps === "function") {
-              doc.resetChildMaps();
-            }
-            if (doc.isViewer) {
-              doc.sheet?.render({ force: false });
-            }
-          });
-        });
-        if (this.collection.name === "CompendiumCollection") {
-          this.collection.apps.forEach(app => {
-            if (app.rendered) {
-              app.render();
-            }
-          });
-        }
-      }
-
-      /**
-       * Render sheets of documents which have control over this.
-       */
-      #renderSheets() {
-        this.#reloadSups();
-        this.#reloadDependee();
       }
 
       /** @inheritDoc */

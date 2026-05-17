@@ -50,61 +50,6 @@ export default class MoveActivation extends BaseActivation {
     });
   }
 
-  /** @inheritDoc */
-  get label() {
-    return (
-      this.display.label ||
-      _loc("TERIOCK.ACTIVATIONS.Move.BUTTON", { distance: this.distance }) ||
-      this.constructor.LABEL
-    );
-  }
-
-  /**
-   * The origin for the movement.
-   * @returns {Point|null}
-   */
-  get origin() {
-    let x = null;
-    let y = null;
-    if (this.token) {
-      const token = this.tokenDocument;
-      if (token) {
-        x = token.x;
-        y = token.y;
-      }
-    }
-    if (typeof this.x === "number") {
-      x = this.x;
-    }
-    if (typeof this.y === "number") {
-      y = this.y;
-    }
-    if (typeof x === "number" && typeof y === "number") {
-      return { x, y };
-    }
-    return null;
-  }
-
-  /**
-   * The scene this operation happens in.
-   * @returns {TeriockScene|null}
-   */
-  get scene() {
-    const tokenDocument = this.tokenDocument;
-    if (tokenDocument) {
-      return tokenDocument.scene;
-    }
-    return canvas.scene;
-  }
-
-  /**
-   * The token document this is based on.
-   * @returns {TeriockTokenDocument|null}
-   */
-  get tokenDocument() {
-    return fromUuidSync(this.token);
-  }
-
   /**
    * Apply movement to all selected tokens.
    * @param {number} distance
@@ -168,6 +113,61 @@ export default class MoveActivation extends BaseActivation {
     if (this.movementAction) {
       await scene.updateEmbeddedDocuments("Token", unsetMovementActionData);
     }
+  }
+
+  /** @inheritDoc */
+  get label() {
+    return (
+      this.display.label ||
+      _loc("TERIOCK.ACTIVATIONS.Move.BUTTON", { distance: this.distance }) ||
+      this.constructor.LABEL
+    );
+  }
+
+  /**
+   * The origin for the movement.
+   * @returns {Point|null}
+   */
+  get origin() {
+    let x = null;
+    let y = null;
+    if (this.token) {
+      const token = this.tokenDocument;
+      if (token) {
+        x = token.x;
+        y = token.y;
+      }
+    }
+    if (typeof this.x === "number") {
+      x = this.x;
+    }
+    if (typeof this.y === "number") {
+      y = this.y;
+    }
+    if (typeof x === "number" && typeof y === "number") {
+      return { x, y };
+    }
+    return null;
+  }
+
+  /**
+   * The scene this operation happens in.
+   * @returns {TeriockScene|null}
+   */
+  get scene() {
+    const tokenDocument = this.tokenDocument;
+    if (tokenDocument) {
+      return tokenDocument.scene;
+    }
+    return canvas.scene;
+  }
+
+  /**
+   * The token document this is based on.
+   * @returns {TeriockTokenDocument|null}
+   */
+  get tokenDocument() {
+    return fromUuidSync(this.token);
   }
 
   /** @inheritDoc */

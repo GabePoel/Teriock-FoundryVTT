@@ -11,11 +11,6 @@ export default Base =>
       actions: { toggleHideThis: this._onToggleHideThis },
     };
 
-    constructor(...args) {
-      super(...args);
-      this._hideInactive = game.settings.get("teriock", "hideInactiveDocumentsByDefault");
-    }
-
     /**
      * Toggles the lock state of the current sheet.
      * @returns {Promise<void>}
@@ -24,6 +19,11 @@ export default Base =>
       this._hideInactive = !this._hideInactive;
       await this.render();
       game.tooltip.reactivate();
+    }
+
+    constructor(...args) {
+      super(...args);
+      this._hideInactive = game.settings.get("teriock", "hideInactiveDocumentsByDefault");
     }
 
     /**

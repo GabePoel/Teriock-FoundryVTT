@@ -1,8 +1,8 @@
+import { EnhancedNumberField, EnhancedStringField, EvaluationField, FormulaField } from "../_module.mjs";
 import { competenceConfig } from "../../../constants/config/competence-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
-import { EnhancedNumberField, EnhancedStringField, EvaluationField, FormulaField } from "../_module.mjs";
 
 const {
   ArrayField,

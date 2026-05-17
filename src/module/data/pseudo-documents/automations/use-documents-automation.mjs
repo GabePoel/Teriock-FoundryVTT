@@ -28,16 +28,6 @@ export default class UseDocumentsAutomation extends mixClasses(
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.UseDocuments"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.UseDocuments.LABEL";
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "useDocuments";
-  }
-
-  /** @inheritDoc */
   static get _conditions() {
     return false;
   }
@@ -50,26 +40,21 @@ export default class UseDocumentsAutomation extends mixClasses(
   }
 
   /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.AUTOMATIONS.UseDocuments.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "useDocuments";
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       expandTables: new fields.BooleanField(),
       noHeighten: new fields.BooleanField(),
     });
-  }
-
-  /** @inheritDoc */
-  get _conditions() {
-    return false;
-  }
-
-  /** @inheritDoc */
-  get _formPaths() {
-    return [...this._selectionPaths, "hr", ...this._triggerPaths, "hr", "noHeighten", ...this._competencePaths];
-  }
-
-  /** @inheritDoc */
-  get _selectionPaths() {
-    return [...super._selectionPaths, "expandTables"];
   }
 
   /**
@@ -114,6 +99,21 @@ export default class UseDocumentsAutomation extends mixClasses(
         noHeighten: this.noHeighten,
       },
     });
+  }
+
+  /** @inheritDoc */
+  get _conditions() {
+    return false;
+  }
+
+  /** @inheritDoc */
+  get _formPaths() {
+    return [...this._selectionPaths, "hr", ...this._triggerPaths, "hr", "noHeighten", ...this._competencePaths];
+  }
+
+  /** @inheritDoc */
+  get _selectionPaths() {
+    return [...super._selectionPaths, "expandTables"];
   }
 
   /** @inheritDoc */

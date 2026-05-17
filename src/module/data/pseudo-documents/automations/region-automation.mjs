@@ -37,6 +37,18 @@ export default class RegionAutomation extends mixClasses(
   OverrideDataAutomationMixin,
   DisplayAutomationMixin,
 ) {
+  /**
+   * Make a field with a range placeholder.
+   * @returns {FormulaField}
+   */
+  static #rangeField() {
+    return new FormulaField({
+      deterministic: true,
+      initial: "",
+      placeholder: _loc("TERIOCK.AUTOMATIONS.Region.DATA.placeholder"),
+    });
+  }
+
   static LOCALIZATION_PREFIXES = [
     ...super.LOCALIZATION_PREFIXES,
     "TERIOCK.AUTOMATIONS.Region",
@@ -49,16 +61,6 @@ export default class RegionAutomation extends mixClasses(
     "REGION",
   ];
 
-  /** @inheritdoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Region.LABEL";
-  }
-
-  /** @inheritdoc */
-  static get TYPE() {
-    return "region";
-  }
-
   /** @inheritDoc */
   static get _conditions() {
     return false;
@@ -69,16 +71,14 @@ export default class RegionAutomation extends mixClasses(
     return { execution: TERIOCK.config.trigger.execution };
   }
 
-  /**
-   * Make a field with a range placeholder.
-   * @returns {FormulaField}
-   */
-  static #rangeField() {
-    return new FormulaField({
-      deterministic: true,
-      initial: "",
-      placeholder: _loc("TERIOCK.AUTOMATIONS.Region.DATA.placeholder"),
-    });
+  /** @inheritdoc */
+  static get LABEL() {
+    return "TERIOCK.AUTOMATIONS.Region.LABEL";
+  }
+
+  /** @inheritdoc */
+  static get TYPE() {
+    return "region";
   }
 
   /** @inheritDoc */
@@ -135,6 +135,57 @@ export default class RegionAutomation extends mixClasses(
       }),
       width: this.#rangeField(),
     });
+  }
+
+  /**
+   * Get the numeric value of some region shape path.
+   * @param {string} path
+   * @param {object} rollData
+   * @param {AbilityExecution|null} [execution]
+   * @returns {number}
+   */
+  #evaluate(path, rollData, execution = null) {
+    let out = 0;
+    if (path !== "angle" && !this[path] && execution) {
+      out = execution.source.system.range.currentValue ?? 0;
+    } else if (this[path]) {
+      out = BaseRoll.minValue(this[path], rollData);
+    }
+    if (path === "angle") {
+      return out;
+    }
+    out *= canvas.dimensions.distancePixels;
+    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
+      out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
+    }
+    return out;
+  }
+
+  /**
+   * Get the shape data for this automation's region.
+   * @param {{rollData?: object, execution?: BaseExecution}} [options]
+   * @returns {object}
+   */
+  #getRegionShapeData(options) {
+    const rollData = options.execution?.rollData ?? options.rollData ?? {};
+    const data = {
+      type: this.regionType,
+      x: 0,
+      y: 0,
+      ...Object.fromEntries(this._regionTypePaths.map(p => [p, this.#evaluate(p, rollData, options.execution)])),
+    };
+    if (this.regionType === "emanation") {
+      data.base = {
+        height: 1,
+        shape: 0,
+        hole: this.excludeToken && this.attachToToken,
+        type: "token",
+        width: 1,
+        x: 0,
+        y: 0,
+      };
+    }
+    return [data];
   }
 
   /** @inheritdoc */
@@ -210,57 +261,6 @@ export default class RegionAutomation extends mixClasses(
    */
   get _tokenPaths() {
     return ["attachToToken", this.regionType === "emanation" ? "excludeToken" : "expandWithToken"];
-  }
-
-  /**
-   * Get the numeric value of some region shape path.
-   * @param {string} path
-   * @param {object} rollData
-   * @param {AbilityExecution|null} [execution]
-   * @returns {number}
-   */
-  #evaluate(path, rollData, execution = null) {
-    let out = 0;
-    if (path !== "angle" && !this[path] && execution) {
-      out = execution.source.system.range.currentValue ?? 0;
-    } else if (this[path]) {
-      out = BaseRoll.minValue(this[path], rollData);
-    }
-    if (path === "angle") {
-      return out;
-    }
-    out *= canvas.dimensions.distancePixels;
-    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
-      out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
-    }
-    return out;
-  }
-
-  /**
-   * Get the shape data for this automation's region.
-   * @param {{rollData?: object, execution?: BaseExecution}} [options]
-   * @returns {object}
-   */
-  #getRegionShapeData(options) {
-    const rollData = options.execution?.rollData ?? options.rollData ?? {};
-    const data = {
-      type: this.regionType,
-      x: 0,
-      y: 0,
-      ...Object.fromEntries(this._regionTypePaths.map(p => [p, this.#evaluate(p, rollData, options.execution)])),
-    };
-    if (this.regionType === "emanation") {
-      data.base = {
-        height: 1,
-        shape: 0,
-        hole: this.excludeToken && this.attachToToken,
-        type: "token",
-        width: 1,
-        x: 0,
-        y: 0,
-      };
-    }
-    return [data];
   }
 
   /** @inheritDoc */

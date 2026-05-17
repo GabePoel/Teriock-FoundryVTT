@@ -44,16 +44,6 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
-  constructor(...args) {
-    super(...args);
-    if (!localized) {
-      foundry.helpers.Localization.localizeDataModel(RefreshOptions);
-      localized = true;
-    }
-    this.refreshOptions = new RefreshOptions();
-    this.selected = null;
-  }
-
   /**
    * Close this dialog and activate the refresh.
    * @returns {Promise<void>}
@@ -63,6 +53,16 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     const source = await fromUuid(this.selected);
     await this.close();
     await this.document.system.refreshFromSource(source, this.refreshOptions);
+  }
+
+  constructor(...args) {
+    super(...args);
+    if (!localized) {
+      foundry.helpers.Localization.localizeDataModel(RefreshOptions);
+      localized = true;
+    }
+    this.refreshOptions = new RefreshOptions();
+    this.selected = null;
   }
 
   /** @type {RefreshOptions} */

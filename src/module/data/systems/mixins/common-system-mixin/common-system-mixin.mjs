@@ -96,9 +96,62 @@ export default function CommonSystemMixin(Base) {
         });
       }
 
-      /** @returns {typeof EmbeddedDataModel|null} */
-      get SettingsFlagsDataModel() {
-        return null;
+      /**
+       * Check if an embed icon is visible.
+       * @param {Teriock.EmbedData.EmbedIcon} icon
+       */
+      #checkEmbedIcon(icon) {
+        if (typeof icon.visible === "function") {
+          return icon.visible();
+        }
+        if (typeof icon.visible === "boolean") {
+          return icon.visible;
+        }
+        return true;
+      }
+
+      /**
+       * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} srcTypeMap
+       * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} dstTypeMap
+       * @param {"diff" | "union" | "intersect" | "diffSrc" | "diffDst"} mapType
+       * @returns {ChildDeltaMap}
+       */
+      #makeChildDeltaMap(srcTypeMap, dstTypeMap, mapType) {
+        const childMap = {};
+        for (const type of new Set([...Object.keys(srcTypeMap), ...Object.keys(dstTypeMap)])) {
+          const srcChildren = srcTypeMap[type] || [];
+          const dstChildren = dstTypeMap[type] || [];
+          const srcKeys = srcChildren.map(s => s.lookupKey);
+          const dstKeys = dstChildren.map(d => d.lookupKey);
+          let keys = [];
+          if (mapType === "union") {
+            keys = Array.from(new Set([...srcKeys, ...dstKeys]));
+          } else if (mapType === "intersect") {
+            keys = srcKeys.filter(s => dstKeys.includes(s));
+          } else {
+            const srcDiffKeys = srcKeys.filter(s => !dstKeys.includes(s));
+            const dstDiffKeys = dstKeys.filter(d => !srcKeys.includes(d));
+            const diffKeys = [...srcKeys, ...dstKeys];
+            if (mapType === "diffSrc") {
+              keys = srcDiffKeys;
+            } else if (mapType === "diffDst") {
+              keys = dstDiffKeys;
+            } else if (mapType === "diff") {
+              keys = diffKeys;
+            }
+          }
+          const srcDocs = srcChildren.filter(s => keys.includes(s.lookupKey));
+          const dstDocs = dstChildren.filter(d => keys.includes(d.lookupKey));
+          const docNames = new Set([...srcDocs.map(s => s.documentName), ...dstDocs.map(d => d.documentName)]);
+          for (const docName of docNames) {
+            const existing = childMap[docName] || { src: [], dst: [] };
+            childMap[docName] = {
+              src: [...existing.src, ...srcDocs.filter(s => s.documentName === docName)],
+              dst: [...existing.dst, ...dstDocs.filter(d => d.documentName === docName)],
+            };
+          }
+        }
+        return childMap;
       }
 
       /** @returns {string} */
@@ -206,6 +259,11 @@ export default function CommonSystemMixin(Base) {
         return this.constructor.metadata;
       }
 
+      /** @returns {typeof EmbeddedDataModel|null} */
+      get SettingsFlagsDataModel() {
+        return null;
+      }
+
       /** @returns {Teriock.EmbedData.EmbedIcon|undefined} */
       get tagIcon() {
         return undefined;
@@ -214,64 +272,6 @@ export default function CommonSystemMixin(Base) {
       /** @returns {Teriock.Documents.CommonType[]} */
       get visibleTypes() {
         return this.metadata.visibleTypes;
-      }
-
-      /**
-       * Check if an embed icon is visible.
-       * @param {Teriock.EmbedData.EmbedIcon} icon
-       */
-      #checkEmbedIcon(icon) {
-        if (typeof icon.visible === "function") {
-          return icon.visible();
-        }
-        if (typeof icon.visible === "boolean") {
-          return icon.visible;
-        }
-        return true;
-      }
-
-      /**
-       * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} srcTypeMap
-       * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} dstTypeMap
-       * @param {"diff" | "union" | "intersect" | "diffSrc" | "diffDst"} mapType
-       * @returns {ChildDeltaMap}
-       */
-      #makeChildDeltaMap(srcTypeMap, dstTypeMap, mapType) {
-        const childMap = {};
-        for (const type of new Set([...Object.keys(srcTypeMap), ...Object.keys(dstTypeMap)])) {
-          const srcChildren = srcTypeMap[type] || [];
-          const dstChildren = dstTypeMap[type] || [];
-          const srcKeys = srcChildren.map(s => s.lookupKey);
-          const dstKeys = dstChildren.map(d => d.lookupKey);
-          let keys = [];
-          if (mapType === "union") {
-            keys = Array.from(new Set([...srcKeys, ...dstKeys]));
-          } else if (mapType === "intersect") {
-            keys = srcKeys.filter(s => dstKeys.includes(s));
-          } else {
-            const srcDiffKeys = srcKeys.filter(s => !dstKeys.includes(s));
-            const dstDiffKeys = dstKeys.filter(d => !srcKeys.includes(d));
-            const diffKeys = [...srcKeys, ...dstKeys];
-            if (mapType === "diffSrc") {
-              keys = srcDiffKeys;
-            } else if (mapType === "diffDst") {
-              keys = dstDiffKeys;
-            } else if (mapType === "diff") {
-              keys = diffKeys;
-            }
-          }
-          const srcDocs = srcChildren.filter(s => keys.includes(s.lookupKey));
-          const dstDocs = dstChildren.filter(d => keys.includes(d.lookupKey));
-          const docNames = new Set([...srcDocs.map(s => s.documentName), ...dstDocs.map(d => d.documentName)]);
-          for (const docName of docNames) {
-            const existing = childMap[docName] || { src: [], dst: [] };
-            childMap[docName] = {
-              src: [...existing.src, ...srcDocs.filter(s => s.documentName === docName)],
-              dst: [...existing.dst, ...dstDocs.filter(d => d.documentName === docName)],
-            };
-          }
-        }
-        return childMap;
       }
 
       /**

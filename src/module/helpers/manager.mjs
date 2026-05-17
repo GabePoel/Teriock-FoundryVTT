@@ -5,6 +5,31 @@ import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mj
  */
 export default class TeriockManager {
   /**
+   * Check if what's provided exists or is an empty array or set.
+   * @param {Teriock.System.Existable<*>} existable
+   * @param {string} [message]
+   * @param {string} [type]
+   * @param {object} [options]
+   * @returns {boolean}
+   */
+  #check(existable, message, type = "error", options = { localize: true }) {
+    let valid = true;
+    if (!existable) {
+      valid = false;
+    }
+    if (Array.isArray(existable) && !existable.length) {
+      valid = false;
+    }
+    if (existable instanceof Set && existable.size === 0) {
+      valid = false;
+    }
+    if (message && !valid) {
+      ui.notifications.notify(message, type, options);
+    }
+    return valid;
+  }
+
+  /**
    * Easy references to system-specific compendium packs.
    * @type {TeriockPacks}
    */
@@ -33,31 +58,6 @@ export default class TeriockManager {
    */
   get identifiers() {
     return this.registries.identifiers;
-  }
-
-  /**
-   * Check if what's provided exists or is an empty array or set.
-   * @param {Teriock.System.Existable<*>} existable
-   * @param {string} [message]
-   * @param {string} [type]
-   * @param {object} [options]
-   * @returns {boolean}
-   */
-  #check(existable, message, type = "error", options = { localize: true }) {
-    let valid = true;
-    if (!existable) {
-      valid = false;
-    }
-    if (Array.isArray(existable) && !existable.length) {
-      valid = false;
-    }
-    if (existable instanceof Set && existable.size === 0) {
-      valid = false;
-    }
-    if (message && !valid) {
-      ui.notifications.notify(message, type, options);
-    }
-    return valid;
   }
 
   /**

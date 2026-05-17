@@ -56,6 +56,47 @@ export default class AddDocumentsAutomation extends mixClasses(
   }
 
   /**
+   * Determine the label for an activation from a construction.
+   * @param {DocumentConstruction} construction
+   */
+  #inferLabel(construction) {
+    let name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
+    if (foundry.utils.hasProperty(construction, "data.name")) {
+      name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", {
+        name: construction.data.name,
+      });
+    }
+    return name;
+  }
+
+  /**
+   * Update the name of the document construction.
+   * @param {DocumentConstruction} construction
+   */
+  #updateConstructionName(construction) {
+    let uuidName;
+    let dataName;
+    let name;
+    if (construction.uuid) {
+      const index = fromUuidSync(construction.uuid);
+      if (index) {
+        uuidName = index.name;
+      }
+      name = uuidName;
+    }
+    if (foundry.utils.hasProperty(construction, "data.name")) {
+      dataName = construction.data.name;
+      name = dataName;
+    }
+    if (dataName?.includes("{name}")) {
+      name = dataName.replace("{name}", uuidName || "");
+    }
+    if (name) {
+      foundry.utils.setProperty(construction, "data.name", name);
+    }
+  }
+
+  /**
    * Attachment paths.
    * @returns {string[]}
    */
@@ -105,47 +146,6 @@ export default class AddDocumentsAutomation extends mixClasses(
    */
   get hasActivations() {
     return this.document.type !== "ability" || this.separate;
-  }
-
-  /**
-   * Determine the label for an activation from a construction.
-   * @param {DocumentConstruction} construction
-   */
-  #inferLabel(construction) {
-    let name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
-    if (foundry.utils.hasProperty(construction, "data.name")) {
-      name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", {
-        name: construction.data.name,
-      });
-    }
-    return name;
-  }
-
-  /**
-   * Update the name of the document construction.
-   * @param {DocumentConstruction} construction
-   */
-  #updateConstructionName(construction) {
-    let uuidName;
-    let dataName;
-    let name;
-    if (construction.uuid) {
-      const index = fromUuidSync(construction.uuid);
-      if (index) {
-        uuidName = index.name;
-      }
-      name = uuidName;
-    }
-    if (foundry.utils.hasProperty(construction, "data.name")) {
-      dataName = construction.data.name;
-      name = dataName;
-    }
-    if (dataName?.includes("{name}")) {
-      name = dataName.replace("{name}", uuidName || "");
-    }
-    if (name) {
-      foundry.utils.setProperty(construction, "data.name", name);
-    }
   }
 
   /**

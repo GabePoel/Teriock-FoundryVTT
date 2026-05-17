@@ -3,6 +3,10 @@
  * @implements {Teriock.Registries.Lifecycle}
  */
 export default class RegistryLifecycle {
+  constructor() {
+    this.#initializePromise();
+  }
+
   /**
    * Whether this registry is currently disabled.
    * @type {boolean}
@@ -15,8 +19,13 @@ export default class RegistryLifecycle {
   /** @type {function(): void} */
   #resolveReady;
 
-  constructor() {
-    this.#initializePromise();
+  /**
+   * Initializes or resets the ready promise.
+   */
+  #initializePromise() {
+    this.#readyPromise = new Promise(resolve => {
+      this.#resolveReady = resolve;
+    });
   }
 
   /** @inheritDoc */
@@ -27,15 +36,6 @@ export default class RegistryLifecycle {
   /** @inheritDoc */
   get ready() {
     return this.#readyPromise;
-  }
-
-  /**
-   * Initializes or resets the ready promise.
-   */
-  #initializePromise() {
-    this.#readyPromise = new Promise(resolve => {
-      this.#resolveReady = resolve;
-    });
   }
 
   /** @inheritDoc */

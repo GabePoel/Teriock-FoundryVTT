@@ -6,6 +6,16 @@ const { DocumentIdField } = foundry.data.fields;
  * @property {StringFieldOptions & Teriock.Fields._LocalDocumentFieldOptions} options
  */
 export default class LocalDocumentField extends DocumentIdField {
+  /** @inheritDoc */
+  static get _defaults() {
+    return foundry.utils.mergeObject(super._defaults, {
+      fallback: false,
+      idOnly: false,
+      nullable: true,
+      readonly: false,
+    });
+  }
+
   /**
    * @param {typeof Document} model - The local DataModel class definition which this field should link to.
    * @param {StringFieldOptions & Teriock.Fields._LocalDocumentFieldOptions} [options] - Options which configure the
@@ -17,16 +27,6 @@ export default class LocalDocumentField extends DocumentIdField {
     }
     super(options);
     this.model = model;
-  }
-
-  /** @inheritDoc */
-  static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      fallback: false,
-      idOnly: false,
-      nullable: true,
-      readonly: false,
-    });
   }
 
   /**

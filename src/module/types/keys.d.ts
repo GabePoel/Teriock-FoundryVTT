@@ -24,11 +24,11 @@ declare global {
     export type ActiveExecutionTime = keyof typeof config.ability.executionTime.active;
     export type ReactiveExecutionTime = keyof typeof config.ability.executionTime.reactive;
     export type PassiveExecutionTime = keyof typeof config.ability.executionTime.passive;
-    export type SlowExecutionTime = keyof typeof config.ability.executionTime.slow | string;
+    export type SlowExecutionTime = string | keyof typeof config.ability.executionTime.slow;
     export type ExecutionTime =
       | Teriock.Keys.ActiveExecutionTime
-      | Teriock.Keys.ReactiveExecutionTime
       | Teriock.Keys.PassiveExecutionTime
+      | Teriock.Keys.ReactiveExecutionTime
       | Teriock.Keys.SlowExecutionTime;
     export type Expansion = keyof typeof config.ability.expansion;
     export type EffectType = keyof typeof index.effectTypes;
@@ -93,7 +93,7 @@ declare global {
     export type SemiClass = keyof typeof config.rank.semi.classes;
     export type WarriorClass = keyof typeof config.rank.warrior.classes;
     export type EverymanClass = keyof typeof config.rank.everyman.classes;
-    export type Class = MageClass | SemiClass | WarriorClass | EverymanClass;
+    export type Class = EverymanClass | MageClass | SemiClass | WarriorClass;
 
     // Cost Keys
     export type Component = keyof typeof config.cost.components.keys;

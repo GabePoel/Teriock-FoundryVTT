@@ -41,6 +41,16 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
     ...this.CONTENT_PARTS,
   };
 
+  /**
+   * Reset the elder sorcery elements that this sheet's window has.
+   */
+  #resetElderSorceryElements() {
+    this.window.content.classList.remove(...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi");
+    if (this.document.system.elderSorcery) {
+      this.window.content.classList.add(elementClass(this.document.system.elements));
+    }
+  }
+
   /** @inheritDoc */
   get _buttonUpdates() {
     return {
@@ -61,16 +71,6 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
         ]),
       ),
     };
-  }
-
-  /**
-   * Reset the elder sorcery elements that this sheet's window has.
-   */
-  #resetElderSorceryElements() {
-    this.window.content.classList.remove(...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi");
-    if (this.document.system.elderSorcery) {
-      this.window.content.classList.add(elementClass(this.document.system.elements));
-    }
   }
 
   /**

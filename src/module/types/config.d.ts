@@ -24,7 +24,7 @@ declare global {
     };
 
     export type DocumentEntry = {
-      documentName: CommonDocumentName | "Card" | "JournalEntryPage";
+      documentName: "Card" | "JournalEntryPage" | CommonDocumentName;
       getter: string;
       icon: string;
       index: string;

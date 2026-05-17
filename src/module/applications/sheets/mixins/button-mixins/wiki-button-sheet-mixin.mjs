@@ -9,11 +9,6 @@ export default function WikiButtonSheetMixin(Base) {
      * @mixin
      */
     class WikiButtonSheet extends Base {
-      /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { wikiOpenThis: this.#onWikiOpenThis },
-      };
-
       /**
        * Opens the wiki page for the current document.
        * @returns {Promise<void>}
@@ -21,6 +16,11 @@ export default function WikiButtonSheetMixin(Base) {
       static async #onWikiOpenThis() {
         this.document.system.wikiOpen();
       }
+
+      /** @type {Partial<ApplicationConfiguration>} */
+      static DEFAULT_OPTIONS = {
+        actions: { wikiOpenThis: this.#onWikiOpenThis },
+      };
     }
   );
 }

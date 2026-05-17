@@ -26,16 +26,6 @@ export default class ChangeQuantityAutomation extends mixClasses(
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
 
   /** @inheritDoc */
-  static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL";
-  }
-
-  /** @inheritDoc */
-  static get TYPE() {
-    return "changeQuantity";
-  }
-
-  /** @inheritDoc */
   static get _initialTrigger() {
     return "execute";
   }
@@ -46,6 +36,16 @@ export default class ChangeQuantityAutomation extends mixClasses(
   }
 
   /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "changeQuantity";
+  }
+
+  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       formula: rollableFormulaField(),
@@ -53,38 +53,6 @@ export default class ChangeQuantityAutomation extends mixClasses(
       showDialog: new fields.BooleanField({ initial: true }),
       targetParent: new fields.BooleanField({ initial: true }),
     });
-  }
-
-  /** @inheritDoc */
-  get _canRunPassively() {
-    return this.targetParent || super._canRunPassively;
-  }
-
-  /** @inheritDoc */
-  get _documentActive() {
-    return this.targetParent || super._documentActive;
-  }
-
-  /** @inheritDoc */
-  get _formPaths() {
-    const paths = ["targetParent"];
-    if (!this.targetParent) {
-      paths.push("identifier");
-    }
-    paths.push(...["formula", ...this._confirmationPaths, ...super._formPaths]);
-    return paths;
-  }
-
-  /** @inheritDoc */
-  get formMessages() {
-    const messages = super.formMessages;
-    if (this.targetParent && !this.document?.system?.consumable) {
-      messages.unshift({
-        level: "error",
-        text: "TERIOCK.AUTOMATIONS.ChangeQuantity.NOTIFICATIONS.parentNotConsumable",
-      });
-    }
-    return messages;
   }
 
   /**
@@ -181,6 +149,38 @@ export default class ChangeQuantityAutomation extends mixClasses(
       consumable = await fromIdentifierLocal(this.identifier, actor);
     }
     return consumable ?? null;
+  }
+
+  /** @inheritDoc */
+  get _canRunPassively() {
+    return this.targetParent || super._canRunPassively;
+  }
+
+  /** @inheritDoc */
+  get _documentActive() {
+    return this.targetParent || super._documentActive;
+  }
+
+  /** @inheritDoc */
+  get _formPaths() {
+    const paths = ["targetParent"];
+    if (!this.targetParent) {
+      paths.push("identifier");
+    }
+    paths.push(...["formula", ...this._confirmationPaths, ...super._formPaths]);
+    return paths;
+  }
+
+  /** @inheritDoc */
+  get formMessages() {
+    const messages = super.formMessages;
+    if (this.targetParent && !this.document?.system?.consumable) {
+      messages.unshift({
+        level: "error",
+        text: "TERIOCK.AUTOMATIONS.ChangeQuantity.NOTIFICATIONS.parentNotConsumable",
+      });
+    }
+    return messages;
   }
 
   /** @inheritDoc */

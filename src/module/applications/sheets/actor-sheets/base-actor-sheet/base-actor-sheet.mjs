@@ -52,9 +52,6 @@ export default class BaseActorSheet extends mixClasses(
     this.settings = defaultSheetSettings();
   }
 
-  /** @type {string} */
-  _activeTab;
-
   /**
    * Cycle the value of a three-way switch either forwards or backwards.
    * @param {HTMLButtonElement} toggleSwitch
@@ -68,6 +65,9 @@ export default class BaseActorSheet extends mixClasses(
     const val = foundry.utils.getProperty(this, name);
     foundry.utils.setProperty(this, name, ((val + 1 + change) % 3) - 1);
   }
+
+  /** @type {string} */
+  _activeTab;
 
   /** @inheritDoc */
   async _onRender(context, options) {

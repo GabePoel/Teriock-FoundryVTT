@@ -13,11 +13,6 @@ export default class StatusAutomation extends ChatStatusAutomation {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Status"];
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "status";
-  }
-
-  /** @inheritDoc */
   static get _relationChoices() {
     return {
       ...super._relationChoices,
@@ -28,6 +23,11 @@ export default class StatusAutomation extends ChatStatusAutomation {
   /** @inheritDoc */
   static get _relationInitial() {
     return "include";
+  }
+
+  /** @inheritDoc */
+  static get TYPE() {
+    return "status";
   }
 
   /** @inheritDoc */

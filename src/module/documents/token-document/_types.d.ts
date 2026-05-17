@@ -1,6 +1,6 @@
+import { TeriockCombat, TeriockTokenDocument } from "../_module.mjs";
 import { BaseTokenSheet } from "../../applications/sheets/token-sheets/_module.mjs";
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
-import { TeriockCombat, TeriockTokenDocument } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Documents {

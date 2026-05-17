@@ -12,14 +12,14 @@ declare global {
       visible: boolean;
     };
 
-    export type DisplayField = Partial<FancyDisplayField> | string;
+    export type DisplayField = string | Partial<FancyDisplayField>;
 
     export type FancyDisplayTag = {
       label: string;
       tooltip?: string;
     };
 
-    export type DisplayTag = Partial<FancyDisplayTag> | string;
+    export type DisplayTag = string | Partial<FancyDisplayTag>;
 
     export type EnrichedDisplayField = {
       classes: string;
@@ -50,8 +50,8 @@ declare global {
       currentTarget: HTMLElement;
     }
 
-    export type EquipmentSorter = (e: TeriockEquipment) => number | string | boolean;
+    export type EquipmentSorter = (e: TeriockEquipment) => boolean | number | string;
 
-    export type AbilitySorter = (a: TeriockAbility) => number | string | boolean;
+    export type AbilitySorter = (a: TeriockAbility) => boolean | number | string;
   }
 }

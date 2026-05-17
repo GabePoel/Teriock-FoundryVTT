@@ -33,30 +33,6 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
   };
 
   /**
-   *
-   * @param {Record<string, Teriock.SelectOptions.SelectDocument> }docs
-   * @param {Partial<Teriock.SelectOptions.DocumentsSelect>} options
-   * @param args
-   */
-  constructor(docs, options = {}, ...args) {
-    const { multi = true, hint = "", tooltip = true, tooltipAsync = false, openable = false } = options;
-    super(...args);
-    this.docs = docs;
-    this.multi = multi;
-    this.hint = hint;
-    this.tooltip = tooltip;
-    this.tooltipAsync = tooltipAsync;
-    this.openable = openable;
-    if (options.title) {
-      this.config = foundry.utils.mergeObject(this.options || {}, {
-        window: { title: options.title },
-      });
-    }
-    this._resolve = null;
-    this._result = new Promise(resolve => (this._resolve = resolve));
-  }
-
-  /**
    * @param {PointerEvent} event
    * @returns {Promise<void>}
    */
@@ -84,6 +60,30 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     }
     this._finish(ids);
     await this.close();
+  }
+
+  /**
+   *
+   * @param {Record<string, Teriock.SelectOptions.SelectDocument> }docs
+   * @param {Partial<Teriock.SelectOptions.DocumentsSelect>} options
+   * @param args
+   */
+  constructor(docs, options = {}, ...args) {
+    const { multi = true, hint = "", tooltip = true, tooltipAsync = false, openable = false } = options;
+    super(...args);
+    this.docs = docs;
+    this.multi = multi;
+    this.hint = hint;
+    this.tooltip = tooltip;
+    this.tooltipAsync = tooltipAsync;
+    this.openable = openable;
+    if (options.title) {
+      this.config = foundry.utils.mergeObject(this.options || {}, {
+        window: { title: options.title },
+      });
+    }
+    this._resolve = null;
+    this._result = new Promise(resolve => (this._resolve = resolve));
   }
 
   /**

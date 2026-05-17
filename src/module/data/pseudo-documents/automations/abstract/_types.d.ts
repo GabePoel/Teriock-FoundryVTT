@@ -7,7 +7,7 @@ declare global {
       competencies: Set<number>;
       heighten: Set<number>;
 
-      get parent(): BaseItemSystem | BaseEffectSystem;
+      get parent(): BaseEffectSystem | BaseItemSystem;
     };
   }
 }

@@ -24,12 +24,6 @@ export default Base => {
         },
       };
 
-      /** @inheritDoc */
-      constructor(...args) {
-        super(...args);
-        this._automationCollapsedIds = new Set();
-      }
-
       /**
        * Create an automation.
        * @returns {Promise<void>}
@@ -116,6 +110,12 @@ export default Base => {
           this._automationCollapsedIds.add(id);
           container.classList.add("collapsed");
         }
+      }
+
+      /** @inheritDoc */
+      constructor(...args) {
+        super(...args);
+        this._automationCollapsedIds = new Set();
       }
 
       /**

@@ -10,26 +10,6 @@ const { SettingsConfig } = foundry.applications.settings;
  * Adapted from D&D 5E.
  */
 export default class BaseConfig extends TeriockBaseApplication {
-  /** @override */
-  static DEFAULT_OPTIONS = {
-    form: { closeOnSubmit: true, handler: BaseConfig.#onCommitChanges },
-    position: { width: 650 },
-    tag: "form",
-    window: { contentClasses: ["standard-form", "teriock-settings"] },
-  };
-
-  /** @override */
-  static PARTS = {
-    general: { template: "teriock/settings/base-config" },
-    footer: { template: "templates/generic/form-footer.hbs" },
-  };
-
-  /**
-   * Context to display in the settings which this is registered as a menu.
-   * @type {{key: string, label: string, hint: string, restricted: boolean}}
-   */
-  static SETTINGS_MENU = { key: "", label: "", hint: "", restricted: false };
-
   /**
    * Commit settings changes.
    * This method processes the submitted form data, updates the settings, and determines if a reload is required.
@@ -59,6 +39,26 @@ export default class BaseConfig extends TeriockBaseApplication {
       return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
     }
   }
+
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    form: { closeOnSubmit: true, handler: BaseConfig.#onCommitChanges },
+    position: { width: 650 },
+    tag: "form",
+    window: { contentClasses: ["standard-form", "teriock-settings"] },
+  };
+
+  /** @override */
+  static PARTS = {
+    general: { template: "teriock/settings/base-config" },
+    footer: { template: "templates/generic/form-footer.hbs" },
+  };
+
+  /**
+   * Context to display in the settings which this is registered as a menu.
+   * @type {{key: string, label: string, hint: string, restricted: boolean}}
+   */
+  static SETTINGS_MENU = { key: "", label: "", hint: "", restricted: false };
 
   /**
    * Register this settings config as a setting menu.

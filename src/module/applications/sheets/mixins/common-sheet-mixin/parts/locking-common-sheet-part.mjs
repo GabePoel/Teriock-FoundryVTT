@@ -14,11 +14,6 @@ export default Base => {
         actions: { toggleLockThis: this._onToggleLockThis },
       };
 
-      constructor(...args) {
-        super(...args);
-        this._locked = true;
-      }
-
       /**
        * Toggles the lock state of the current sheet.
        * @returns {Promise<void>}
@@ -29,9 +24,9 @@ export default Base => {
         game.tooltip.reactivate();
       }
 
-      /** @inheritDoc */
-      get isEditable() {
-        return super.isEditable && !this._locked;
+      constructor(...args) {
+        super(...args);
+        this._locked = true;
       }
 
       /**
@@ -46,6 +41,11 @@ export default Base => {
             ? _loc("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.off")
             : _loc("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.on"),
         );
+      }
+
+      /** @inheritDoc */
+      get isEditable() {
+        return super.isEditable && !this._locked;
       }
 
       /** @inheritDoc */

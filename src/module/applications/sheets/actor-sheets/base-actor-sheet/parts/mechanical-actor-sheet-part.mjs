@@ -10,41 +10,6 @@ export default Base =>
    * @mixin
    */
   class MechanicalActorSheetPart extends Base {
-    static DEFAULT_OPTIONS = {
-      actions: {
-        deathBagPull: this.#onDeathBagPull,
-        increaseCover: { buttons: [0, 2], handler: this.#onIncreaseCover },
-        quickUse: { buttons: [0, 2], handler: this.#onQuickUse },
-        takeDawn: this.#onTakeDawn,
-        takeDusk: this.#onTakeDusk,
-        takeLongRest: this.#onTakeLongRest,
-        takeShortRest: this.#onTakeShortRest,
-        toggleCondition: this.#onToggleCondition,
-      },
-      window: {
-        controls: [
-          {
-            action: "deathBagPull",
-            icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
-            label: "TERIOCK.EFFECTS.Common.bag",
-            ownership: "OWNER",
-          },
-          {
-            action: "takeLongRest",
-            icon: makeIconClass(icons.ui.longRest, "contextMenu"),
-            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
-            ownership: "OWNER",
-          },
-          {
-            action: "takeShortRest",
-            icon: makeIconClass(icons.ui.shortRest, "contextMenu"),
-            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
-            ownership: "OWNER",
-          },
-        ],
-      },
-    };
-
     /**
      * Pull from the Death Bag.
      * @returns {Promise<void>}
@@ -130,4 +95,39 @@ export default Base =>
       const conditionKey = target.dataset.condition;
       await this.document.toggleStatusEffect(conditionKey);
     }
+
+    static DEFAULT_OPTIONS = {
+      actions: {
+        deathBagPull: this.#onDeathBagPull,
+        increaseCover: { buttons: [0, 2], handler: this.#onIncreaseCover },
+        quickUse: { buttons: [0, 2], handler: this.#onQuickUse },
+        takeDawn: this.#onTakeDawn,
+        takeDusk: this.#onTakeDusk,
+        takeLongRest: this.#onTakeLongRest,
+        takeShortRest: this.#onTakeShortRest,
+        toggleCondition: this.#onToggleCondition,
+      },
+      window: {
+        controls: [
+          {
+            action: "deathBagPull",
+            icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
+            label: "TERIOCK.EFFECTS.Common.bag",
+            ownership: "OWNER",
+          },
+          {
+            action: "takeLongRest",
+            icon: makeIconClass(icons.ui.longRest, "contextMenu"),
+            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
+            ownership: "OWNER",
+          },
+          {
+            action: "takeShortRest",
+            icon: makeIconClass(icons.ui.shortRest, "contextMenu"),
+            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
+            ownership: "OWNER",
+          },
+        ],
+      },
+    };
   };

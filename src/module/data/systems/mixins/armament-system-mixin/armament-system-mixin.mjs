@@ -1,3 +1,4 @@
+import { AttackSystemMixin } from "../_module.mjs";
 import { ArmamentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
@@ -7,7 +8,6 @@ import { defenseField, rollableFormulaField } from "../../../fields/helpers/buil
 import { initialText } from "../../../fields/helpers/initializers.mjs";
 import { RangeModel } from "../../../models/_module.mjs";
 import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
-import { AttackSystemMixin } from "../_module.mjs";
 
 const { fields } = foundry.data;
 

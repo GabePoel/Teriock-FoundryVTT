@@ -15,13 +15,13 @@ export default class ProtectionAutomation extends CritAutomation {
   }
 
   /** @inheritDoc */
-  static get TYPE() {
-    return "protection";
+  static get metadata() {
+    return Object.assign(super.metadata, { changes: true });
   }
 
   /** @inheritDoc */
-  static get metadata() {
-    return Object.assign(super.metadata, { changes: true });
+  static get TYPE() {
+    return "protection";
   }
 
   /** @inheritDoc */

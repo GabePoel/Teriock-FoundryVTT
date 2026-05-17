@@ -1,7 +1,7 @@
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import jsdoc from "eslint-plugin-jsdoc";
-import eslintPluginSimpleImportSort from "eslint-plugin-simple-import-sort";
+import perfectionist from "eslint-plugin-perfectionist";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
@@ -91,8 +91,8 @@ export default tseslint.config(
   {
     files: ["**/*.{mjs,ts}"],
     plugins: {
-      jsdoc: jsdoc,
-      "simple-import-sort": eslintPluginSimpleImportSort,
+      jsdoc,
+      perfectionist,
     },
     languageOptions: {
       globals: {
@@ -120,9 +120,99 @@ export default tseslint.config(
       "no-empty": ["warn", { allowEmptyCatch: true }],
       "no-var": "error",
       "prefer-const": "warn",
-      "simple-import-sort/imports": "warn",
-      "simple-import-sort/exports": "warn",
       "jsdoc/check-types": "warn",
+      "perfectionist/sort-array-includes": ["error", { type: "alphabetical", order: "asc" }],
+      "perfectionist/sort-arrays": [
+        "error",
+        {
+          type: "alphabetical",
+          order: "asc",
+          useConfigurationIf: { matchesAstSelector: "TSAsExpression > ArrayExpression" },
+        },
+      ],
+      "perfectionist/sort-import-attributes": ["error", { type: "alphabetical", order: "asc" }],
+      "perfectionist/sort-exports": ["error", { type: "alphabetical", order: "asc" }],
+      "perfectionist/sort-union-types": [
+        "error",
+        {
+          type: "alphabetical",
+          order: "asc",
+          groups: [
+            "conditional",
+            "function",
+            "import",
+            "intersection",
+            "keyword",
+            "literal",
+            "named",
+            "object",
+            "operator",
+            "tuple",
+            "union",
+            "nullish",
+          ],
+        },
+      ],
+      "perfectionist/sort-sets": ["error", { type: "alphabetical", order: "asc" }],
+
+      "perfectionist/sort-imports": [
+        "error",
+        {
+          type: "alphabetical",
+          order: "asc",
+          internalPattern: ["^~/.+", "^@/.+", "^#.+"],
+          newlinesBetween: 1,
+          groups: [
+            "type-import",
+            ["value-builtin", "value-external"],
+            "type-internal",
+            "value-internal",
+            ["type-parent", "type-sibling", "type-index"],
+            ["value-parent", "value-sibling", "value-index"],
+            "ts-equals-import",
+            "unknown",
+          ],
+        },
+      ],
+      "perfectionist/sort-classes": [
+        "error",
+        {
+          type: "alphabetical",
+          order: "asc",
+          groups: [
+            "index-signature",
+
+            ["private-static-property", "private-static-accessor-property"],
+            ["private-static-get-method", "private-static-set-method"],
+            ["private-static-method", "private-static-function-property"],
+
+            ["protected-static-property", "protected-static-accessor-property"],
+            ["protected-static-get-method", "protected-static-set-method"],
+            ["protected-static-method", "protected-static-function-property"],
+
+            ["static-property", "static-accessor-property"],
+            ["static-get-method", "static-set-method"],
+            "static-block",
+            ["static-method", "static-function-property"],
+
+            "constructor",
+
+            ["private-property", "private-accessor-property"],
+            ["private-get-method", "private-set-method"],
+            ["private-method", "private-function-property"],
+
+            ["protected-property", "protected-accessor-property"],
+            ["protected-get-method", "protected-set-method"],
+            ["protected-method", "protected-function-property"],
+
+            ["property", "accessor-property"],
+            ["get-method", "set-method"],
+            ["method", "function-property"],
+
+            "unknown",
+          ],
+        },
+      ],
     },
   },
   {
@@ -130,6 +220,7 @@ export default tseslint.config(
     languageOptions: { globals: { ...globalMacro } },
   },
   eslintConfigPrettier,
+
   {
     rules: {
       curly: ["warn", "all"],

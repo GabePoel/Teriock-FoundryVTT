@@ -3,11 +3,11 @@ import { TeriockActor } from "../documents/_module.mjs";
 declare global {
   namespace Teriock.Interaction {
     export type InteractionEntry = {
-      icon: string | ((options: object) => string);
-      label: string | ((options: object) => string);
+      icon: ((options: object) => string) | string;
+      label: ((options: object) => string) | string;
       primary: (actor: TeriockActor, options?: object) => Promise<void>;
       secondary?: (actor: TeriockActor, options?: object) => Promise<void>;
-      tooltip?: string | ((options: object) => string);
+      tooltip?: ((options: object) => string) | string;
     };
 
     export type CommandEntry = InteractionEntry & {

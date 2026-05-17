@@ -61,11 +61,6 @@ export default function ChildSystemMixin(Base) {
         });
       }
 
-      /** @inheritDoc */
-      get SettingsFlagsDataModel() {
-        return ChildSettingsModel;
-      }
-
       /**
        * If this is suppressed due to its parent being inactive.
        * @returns {boolean}
@@ -172,6 +167,11 @@ export default function ChildSystemMixin(Base) {
        */
       get parent() {
         return /** @type {ChildDocument} */ super.parent;
+      }
+
+      /** @inheritDoc */
+      get SettingsFlagsDataModel() {
+        return ChildSettingsModel;
       }
 
       /** @inheritDoc */

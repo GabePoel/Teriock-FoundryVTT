@@ -23,6 +23,15 @@ export default class BaseModifierModel extends mixClasses(EvaluationModel, Usabl
     });
   }
 
+  /**
+   * Modify a value with proficiency and fluency.
+   * @param {number} value
+   * @returns {number}
+   */
+  #modify(value) {
+    return value + this.competence.bonus;
+  }
+
   /** @inheritDoc */
   get currentValue() {
     return this.#modify(super.currentValue);
@@ -47,15 +56,6 @@ export default class BaseModifierModel extends mixClasses(EvaluationModel, Usabl
   /** @inheritDoc */
   get value() {
     return this.#modify(super.value);
-  }
-
-  /**
-   * Modify a value with proficiency and fluency.
-   * @param {number} value
-   * @returns {number}
-   */
-  #modify(value) {
-    return value + this.competence.bonus;
   }
 
   /** @inheritDoc */

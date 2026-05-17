@@ -14,11 +14,6 @@ export default Base => {
         actions: { toggleMenu: this._onToggleMenu },
       };
 
-      constructor(...args) {
-        super(...args);
-        this._menuOpen = false;
-      }
-
       /**
        * Toggle whether the menu is open.
        * @returns {Promise<void>}
@@ -26,6 +21,11 @@ export default Base => {
        */
       static async _onToggleMenu() {
         this.toggleMenu();
+      }
+
+      constructor(...args) {
+        super(...args);
+        this._menuOpen = false;
       }
 
       /** @inheritDoc */

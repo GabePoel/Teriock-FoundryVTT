@@ -17,14 +17,14 @@ const { Collection } = foundry.utils;
  * @implements {Teriock.Functionality.StatProvider}
  */
 export default class BaseStatPoolModel extends EmbeddedDataModel {
-  /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseStatPool"];
-
   /**
    * The model for the stat dice in this pool.
    * @type {typeof StatDieModel}
    */
   static _statDieModel = StatDieModel;
+
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseStatPool"];
 
   /** @inheritDoc */
   static defineSchema() {

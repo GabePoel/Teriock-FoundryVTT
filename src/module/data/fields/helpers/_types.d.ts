@@ -35,7 +35,7 @@ export type EffectTransformationConfig = AutomationTransformationConfig & {
 };
 
 /** <schema> What is the relationship of the {@link TeriockActor} that triggers expirations? */
-export type CombatExpirationSourceType = "target" | "executor" | "everyone";
+export type CombatExpirationSourceType = "everyone" | "executor" | "target";
 
 /**  <schema> What is the method of this expiration? */
 export type CombatExpirationMethod = {
@@ -44,7 +44,7 @@ export type CombatExpirationMethod = {
   /** <schema> What is the minimum value that needs to be rolled in order for this to expire? */
   threshold: number;
   /**  <schema> What is the type of thing that causes this to expire? */
-  type: "forced" | "rolled" | "none";
+  type: "forced" | "none" | "rolled";
 };
 
 /** <schema> When in the combat does this effect expire? */
@@ -52,9 +52,9 @@ export type CombatExpirationTiming = {
   /** <schema> A number of instances of the trigger firing to skip before this effect expires. */
   skip: number;
   /** <schema> What is the timing for the trigger of this effect expiring? */
-  time: "start" | "end";
+  time: "end" | "start";
   /** <schema> What is the trigger for this effect expiring? */
-  trigger: "turn" | "combat" | "action";
+  trigger: "action" | "combat" | "turn";
 };
 
 /** <schema> Who is the individual triggers the combat expiration? */

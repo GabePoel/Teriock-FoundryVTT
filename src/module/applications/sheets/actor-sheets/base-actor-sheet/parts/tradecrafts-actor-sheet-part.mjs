@@ -7,12 +7,6 @@ export default Base =>
    * @mixin
    */
   class TradecraftsActorSheetPart extends Base {
-    static DEFAULT_OPTIONS = {
-      actions: {
-        rollTradecraft: { buttons: [0, 2], handler: this.#onRollTradecraft },
-      },
-    };
-
     /**
      * Rolls a tradecraft check with optional advantage/disadvantage.
      * @param {PointerEvent} event - The event object.
@@ -24,6 +18,12 @@ export default Base =>
         event,
       });
     }
+
+    static DEFAULT_OPTIONS = {
+      actions: {
+        rollTradecraft: { buttons: [0, 2], handler: this.#onRollTradecraft },
+      },
+    };
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {

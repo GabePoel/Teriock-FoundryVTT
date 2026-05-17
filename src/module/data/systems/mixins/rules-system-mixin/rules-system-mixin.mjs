@@ -1,5 +1,5 @@
-import { IdentifierField } from "../../../fields/_module.mjs";
 import { BaseSystemMixin } from "../_module.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 
 /**
  * @param {typeof TypeDataModel} Base

@@ -20,6 +20,38 @@ export default function AbilityExecutionGetInputPart(Base) {
      * @mixin
      */
     class AbilityExecutionGetInput extends Base {
+      /**
+       * @param {string} stat
+       * @returns {Promise<number>}
+       */
+      async #determineCost(stat) {
+        if (this.source.system.costs.primary[stat].type === "formula") {
+          const roll = new BaseRoll(this.source.system.costs.primary[stat].formula, this.rollData);
+          await roll.evaluate();
+          return roll.total;
+        } else {
+          return 0;
+        }
+      }
+
+      /**
+       * Apply constant adept/inept/gifted modifications to default costs.
+       */
+      #modifyCosts() {
+        for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
+          this.costs[v.primary] += v.multiplier * this.source.system.costs.tweaks[k];
+        }
+      }
+
+      /**
+       * Whether the prompt for a given cost should be shown.
+       * @param {string} stat
+       * @returns {boolean}
+       */
+      #shouldShowCostPrompt(stat) {
+        return this.source.system.costs.primary[stat].type === "description" && !this.options[`no${ucFirst(stat)}`];
+      }
+
       get _dialogFields() {
         const oldFields = super._dialogFields;
         const newFields = oldFields.filter(f => f.name === "competence");
@@ -114,38 +146,6 @@ export default function AbilityExecutionGetInputPart(Base) {
           !!this.source.system.overview.fluent ||
           (this.source.system.heightened && !this.flags.noHeighten)
         );
-      }
-
-      /**
-       * @param {string} stat
-       * @returns {Promise<number>}
-       */
-      async #determineCost(stat) {
-        if (this.source.system.costs.primary[stat].type === "formula") {
-          const roll = new BaseRoll(this.source.system.costs.primary[stat].formula, this.rollData);
-          await roll.evaluate();
-          return roll.total;
-        } else {
-          return 0;
-        }
-      }
-
-      /**
-       * Apply constant adept/inept/gifted modifications to default costs.
-       */
-      #modifyCosts() {
-        for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
-          this.costs[v.primary] += v.multiplier * this.source.system.costs.tweaks[k];
-        }
-      }
-
-      /**
-       * Whether the prompt for a given cost should be shown.
-       * @param {string} stat
-       * @returns {boolean}
-       */
-      #shouldShowCostPrompt(stat) {
-        return this.source.system.costs.primary[stat].type === "description" && !this.options[`no${ucFirst(stat)}`];
       }
 
       /**

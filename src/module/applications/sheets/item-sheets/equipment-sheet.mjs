@@ -12,37 +12,6 @@ import ArmamentSheet from "./armament-sheet.mjs";
  * @mixes EquipmentDropSheet
  */
 export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.EquipmentDropSheetMixin) {
-  /** @inheritDoc */
-  static BARS = [
-    "teriock/sheets/items/equipment/status-bar",
-    ...super.BARS,
-    "teriock/sheets/items/equipment/load-bar",
-    "teriock/sheets/shared/bars/consumable-bar",
-    "teriock/sheets/items/equipment/storage-bar",
-  ];
-
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
-  static DEFAULT_OPTIONS = {
-    classes: ["equipment"],
-    actions: {
-      toggleDampened: this.#onToggleDampened,
-      toggleEquipped: this.#onToggleEquipped,
-      toggleGlued: this.#onToggleGlued,
-      toggleShattered: this.#onToggleShattered,
-    },
-    window: { icon: makeIconClass(documentConfig.equipment.icon, "title") },
-  };
-
-  /** @inheritDoc */
-  static PARTS = {
-    ...this.HEADER_PARTS,
-    menu: { template: "teriock/sheets/items/equipment/menu" },
-    ...this.CONTENT_PARTS,
-  };
-
   /**
    * Toggles the dampened state of the equipment.
    * @returns {Promise<void>}
@@ -90,6 +59,37 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
       await this.document.system.shatter();
     }
   }
+
+  /** @inheritDoc */
+  static BARS = [
+    "teriock/sheets/items/equipment/status-bar",
+    ...super.BARS,
+    "teriock/sheets/items/equipment/load-bar",
+    "teriock/sheets/shared/bars/consumable-bar",
+    "teriock/sheets/items/equipment/storage-bar",
+  ];
+
+  /**
+   * @inheritDoc
+   * @type {Partial<ApplicationConfiguration>}
+   */
+  static DEFAULT_OPTIONS = {
+    classes: ["equipment"],
+    actions: {
+      toggleDampened: this.#onToggleDampened,
+      toggleEquipped: this.#onToggleEquipped,
+      toggleGlued: this.#onToggleGlued,
+      toggleShattered: this.#onToggleShattered,
+    },
+    window: { icon: makeIconClass(documentConfig.equipment.icon, "title") },
+  };
+
+  /** @inheritDoc */
+  static PARTS = {
+    ...this.HEADER_PARTS,
+    menu: { template: "teriock/sheets/items/equipment/menu" },
+    ...this.CONTENT_PARTS,
+  };
 
   /** @inheritDoc */
   get _buttonUpdates() {

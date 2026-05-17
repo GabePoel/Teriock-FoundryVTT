@@ -29,7 +29,7 @@ export default class TeriockCompendium extends Compendium {
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    if (["Actor", "Item", "ActiveEffect"].includes(this.collection?.documentName)) {
+    if (["ActiveEffect", "Actor", "Item"].includes(this.collection?.documentName)) {
       context.makeTooltip = true;
     }
     return context;
