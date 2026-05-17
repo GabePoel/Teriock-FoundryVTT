@@ -156,11 +156,7 @@ export default class EquipmentSystem extends mixClasses(
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: !this.consumable
-        ? this.equipmentType
-          ? inferNameFromIdentifier(`equipment:${this.equipmentType}`)
-          : ""
-        : parts.subtitle,
+      subtitle: !this.consumable ? this.equipmentTypeName : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
         _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
@@ -171,9 +167,17 @@ export default class EquipmentSystem extends mixClasses(
     });
   }
 
+  /**
+   * The name of the equipment type.
+   * @returns {string}
+   */
+  get equipmentTypeName() {
+    return this.equipmentType ? inferNameFromIdentifier(`equipment:${this.equipmentType}`) : "";
+  }
+
   /** @inheritDoc */
   get wikiPage() {
-    return `Equipment:${inferNameFromIdentifier(`equipment:${this.equipmentType}`)}`;
+    return `Equipment:${this.equipmentTypeName}`;
   }
 
   /** @inheritDoc */

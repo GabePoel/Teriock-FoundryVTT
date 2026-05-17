@@ -84,7 +84,7 @@ export default class MountSystem extends mixClasses(
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: this.mountType ? inferNameFromIdentifier(`mount:${this.mountType}`) : "",
+      subtitle: this.mountTypeName,
       text: dotJoin([...this._attunableWrappers, parts.text]),
     });
   }
@@ -105,10 +105,18 @@ export default class MountSystem extends mixClasses(
           _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
             value: this.tier.text || "0",
           }),
-          this.mountType ? inferNameFromIdentifier(`mount:${this.mountType}`) : "",
+          this.mountTypeName,
         ],
       },
     ];
+  }
+
+  /**
+   * The name of the mount type.
+   * @returns {string}
+   */
+  get mountTypeName() {
+    return this.mountType ? inferNameFromIdentifier(`mount:${this.mountType}`) : "";
   }
 
   /** @inheritDoc */

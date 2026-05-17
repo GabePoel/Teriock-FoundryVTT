@@ -23,7 +23,7 @@ export default Base => {
             label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"),
             wrappers: [
               TERIOCK.config.equipment.powerLevel[this.powerLevel].label,
-              this.equipmentType ? inferNameFromIdentifier(this.equipmentType, "equipment") : "",
+              this.equipmentTypeName,
               this.range.description,
               ...simplifyTags(this._armamentTags),
             ],

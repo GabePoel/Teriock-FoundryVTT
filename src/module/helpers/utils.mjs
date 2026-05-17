@@ -316,6 +316,9 @@ export function consolidateWriteOperations(operations) {
  * @return {string}
  */
 export function inferNameFromIdentifier(identifier) {
+  if (!identifier) {
+    return "";
+  }
   try {
     const name = game.teriock.identifiers.fromIdentifierSync(identifier)?.name;
     if (name) {

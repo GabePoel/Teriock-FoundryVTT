@@ -174,7 +174,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
       );
       await this.parent.parent.update({
         name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", {
-          type: inferNameFromIdentifier(`equipment:${this.parent.equipmentType}`),
+          type: this.parent.equipmentTypeName,
         }),
         "system.flaws": "",
         "system.identification.flaws": this.parent.flaws,
