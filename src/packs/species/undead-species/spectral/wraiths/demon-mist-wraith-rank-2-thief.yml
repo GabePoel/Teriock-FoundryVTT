@@ -70,10 +70,39 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.57
     img: systems/teriock/src/icons/abilities/disarm.webp
     name: Disarm
     system:
+      automations:
+        dWnCYT88hEWY1U3u:
+          _id: dWnCYT88hEWY1U3u
+          activeQualifier: '@flags.disarmKnockback'
+          distance: '10'
+          movementAction: walk
+          origin: executor
+          originBarrier: true
+          type: move
+        ow9J5qYNcoLGDsL3:
+          _id: ow9J5qYNcoLGDsL3
+          activeQualifier: '@flags.disarmKnockback'
+          distance: '20'
+          movementAction: walk
+          origin: executor
+          originBarrier: true
+          type: move
+        zGqyHWcKnNUWmna8:
+          _id: zGqyHWcKnNUWmna8
+          all: false
+          automatic: true
+          expandTables: false
+          identifiers:
+            - ability:catch-item
+          multi: false
+          noHeighten: false
+          overrideCompetence: false
+          qualifier: '0'
+          type: useDocuments
       class: thief
       competence:
         raw: 0
@@ -303,56 +332,6 @@ effects:
         score:
           attribute: snk
           value: 3
-    transfer: true
-    type: ability
-  - _id: XcymsOpBbseBD6Ux
-    _key: '!items.effects!LzOJRTZYIHEgo7J7.XcymsOpBbseBD6Ux'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6E1L4yHlYGd0QT0l
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.36
-    img: systems/teriock/src/icons/abilities/catch-item.webp
-    name: Catch Item
-    system:
-      _sup: qmInozATjv0fezJv
-      basic: true
-      competence:
-        raw: 0
-      delivery: hand
-      duration:
-        raw: '0'
-        unit: instant
-      executionTime:
-        base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
-      form: intrinsic
-      identifier: catch-item
-      interaction: manifest
-      maneuver: reactive
-      mundane: false
-      overview:
-        base: >-
-          <p>You catch the item. If multiple creatures are all trying to catch
-          the same item, they all roll [[/roll 1d20]]. The creature with the
-          highest roll catches the item.</p>
-        fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-        proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - martial
-      range:
-        unit: contact
-      targets:
-        - item
-      trigger: <p>An item within range is falling or flying by.</p>
     transfer: true
     type: ability
 folder: bd7120d756dc6f4f

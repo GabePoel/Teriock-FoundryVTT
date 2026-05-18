@@ -2810,6 +2810,35 @@ items:
         img: systems/teriock/src/icons/abilities/disarm.webp
         name: Disarm
         system:
+          automations:
+            dWnCYT88hEWY1U3u:
+              _id: dWnCYT88hEWY1U3u
+              activeQualifier: '@flags.disarmKnockback'
+              distance: '10'
+              movementAction: walk
+              origin: executor
+              originBarrier: true
+              type: move
+            ow9J5qYNcoLGDsL3:
+              _id: ow9J5qYNcoLGDsL3
+              activeQualifier: '@flags.disarmKnockback'
+              distance: '20'
+              movementAction: walk
+              origin: executor
+              originBarrier: true
+              type: move
+            zGqyHWcKnNUWmna8:
+              _id: zGqyHWcKnNUWmna8
+              all: false
+              automatic: true
+              expandTables: false
+              identifiers:
+                - ability:catch-item
+              multi: false
+              noHeighten: false
+              overrideCompetence: false
+              qualifier: '0'
+              type: useDocuments
           class: thief
           competence:
             raw: 0
@@ -3046,58 +3075,6 @@ items:
             score:
               attribute: snk
               value: 3
-        transfer: true
-        type: ability
-      - _id: dtGaWcB4vuhvBqpI
-        _key: >-
-          !actors.items.effects!f019c5204f9f9ec7.bNSOwiWUbnV4FgWU.dtGaWcB4vuhvBqpI
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6E1L4yHlYGd0QT0l
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.57
-        img: systems/teriock/src/icons/abilities/catch-item.webp
-        name: Catch Item
-        system:
-          _sup: qmInozATjv0fezJv
-          basic: true
-          competence:
-            raw: 0
-          delivery: hand
-          duration:
-            raw: '0'
-            unit: instant
-          executionTime:
-            base: r1
-            slow:
-              unit: second
-          expansion:
-            range:
-              unit: self
-          featSaveAttribute: mov
-          form: intrinsic
-          grantUse: false
-          identifier: catch-item
-          interaction: manifest
-          maneuver: reactive
-          mundane: false
-          overview:
-            base: >-
-              <p>You catch the item. If multiple creatures are all trying to
-              catch the same item, they all roll [[/roll 1d20]]. The creature
-              with the highest roll catches the item.</p>
-            fluent: <p>You instead roll [[/roll 1d20 + @f]].</p>
-            proficient: <p>You instead roll [[/roll 1d20 + @p]].</p>
-          piercing:
-            raw: 0
-          powerSources:
-            - martial
-          range:
-            unit: contact
-          targets:
-            - item
-          trigger: <p>An item within range is falling or flying by.</p>
         transfer: true
         type: ability
     folder: 997cd433ccad17d7
@@ -4080,20 +4057,15 @@ items:
         name: Disarm Knockback
         system:
           automations:
-            BEkWDEV8o9IPEbLC:
-              _id: BEkWDEV8o9IPEbLC
-              distance: '10'
-              movementAction: walk
-              origin: executor
-              originBarrier: true
-              type: move
-            KeFTvJU5otbDGZGj:
-              _id: KeFTvJU5otbDGZGj
-              distance: '20'
-              movementAction: walk
-              origin: executor
-              originBarrier: true
-              type: move
+            lml8obvQmpiOczg5:
+              _id: lml8obvQmpiOczg5
+              changes:
+                - key: flags.rollData.disarmKnockback
+                  priority: 1
+                  target: Actor
+                  type: override
+                  value: '1'
+              type: changes
           class: thief
           competence:
             raw: 0
@@ -4222,8 +4194,8 @@ items:
           disabled: false
           formula: 1d10
     type: rank
-  - _id: bDQ5S4wXvJC3avHz
-    _key: '!actors.items!f019c5204f9f9ec7.bDQ5S4wXvJC3avHz'
+  - _id: Hx9AMPOzOOWaPUn4
+    _key: '!actors.items!f019c5204f9f9ec7.Hx9AMPOzOOWaPUn4'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
       coreVersion: '14'
@@ -4233,7 +4205,7 @@ items:
     effects:
       - _id: 4XNvcPLM4s2CAFYb
         _key: >-
-          !actors.items.effects!f019c5204f9f9ec7.bDQ5S4wXvJC3avHz.4XNvcPLM4s2CAFYb
+          !actors.items.effects!f019c5204f9f9ec7.Hx9AMPOzOOWaPUn4.4XNvcPLM4s2CAFYb
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
           coreVersion: '14'
