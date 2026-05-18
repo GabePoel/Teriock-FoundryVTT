@@ -225,7 +225,7 @@ export default function CommonSystemMixin(Base) {
           openable: true,
           parentId: this.parent.parent?.id,
           struck: this.parent.disabled,
-          subtitle: TERIOCK.config.document[this.parent.type].label,
+          subtitle: TERIOCK.config.document[this.parent.type]?.label,
           text: this._masterText,
           title: this.parent.fullName,
           uuid: this.parent.uuid,

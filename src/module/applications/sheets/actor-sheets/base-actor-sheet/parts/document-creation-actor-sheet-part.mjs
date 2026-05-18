@@ -50,8 +50,9 @@ export default Base =>
 
     /** @inheritDoc */
     async _prepareContext(options) {
+      const miscTypes = ["base", "condition", "cover", "hack"];
       return Object.assign(await super._prepareContext(options), {
-        hacks: this.document.effects.filter(e => e.type === "hack" && !e.isStatus),
+        miscEffects: this.document.effects.filter(e => miscTypes.includes(e.type) && !e.isStatus),
       });
     }
   };
