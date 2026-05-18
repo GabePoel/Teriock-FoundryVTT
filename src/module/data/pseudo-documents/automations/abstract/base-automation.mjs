@@ -139,6 +139,7 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
     const editor = new foundry.applications.apps.FormulaEditor({
       context: "actor",
       formula: this.activeQualifier,
+      window: { title: this.getFieldForProperty("activeQualifier")?.label },
     });
     editor.addEventListener("close", async () => {
       await this.document?.update({ [`${this.localPath}.activeQualifier`]: editor.formula });
