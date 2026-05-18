@@ -54,6 +54,11 @@ export default class HackSystem extends ApplicableEffectSystem {
   }
 
   /** @inheritDoc */
+  get color() {
+    return TERIOCK.display.colors.red;
+  }
+
+  /** @inheritDoc */
   get embedParts() {
     const textParts = [];
     if (this.part) {
