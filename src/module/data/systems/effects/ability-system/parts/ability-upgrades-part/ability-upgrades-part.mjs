@@ -104,7 +104,7 @@ export default Base => {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.upgrades.score.attribute) {
-          const attribute = attributeLink(this.upgrades.competence.attribute);
+          const attribute = attributeLink(this.upgrades.score.attribute);
           const value = this.upgrades.score.value;
           this.upgrades.score.text = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description", {
             attribute,
