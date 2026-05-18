@@ -68,6 +68,12 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.consequence.plural",
     sorter: docSort,
   },
+  cover: {
+    documentName: "ActiveEffect",
+    icon: icons.cover.full,
+    label: "TYPES.ActiveEffect.cover",
+    plural: "TYPES.ActiveEffect.cover",
+  },
   creature: {
     documentName: "Actor",
     getter: "creatures",

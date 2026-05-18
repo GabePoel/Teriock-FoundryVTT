@@ -25,7 +25,7 @@ export default class HackSystem extends ApplicableEffectSystem {
       part: new fields.StringField({
         blank: true,
         choices: localizeChoices(objectMap(hackConfig, c => c.part)),
-        initial: "arm",
+        initial: null,
         nullable: true,
       }),
       permanent: new fields.BooleanField(),
