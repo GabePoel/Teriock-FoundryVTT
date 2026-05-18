@@ -13,16 +13,11 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.53
+      systemVersion: 0.12.57
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
       automations:
-        c73c482eea0aaf6c:
-          _id: c73c482eea0aaf6c
-          macro: Compendium.teriock.execution.Macro.1389cba93223924f
-          trigger: executeArmament
-          type: abilityMacro
         0KocEo3PeZJ7lNkM:
           _id: 0KocEo3PeZJ7lNkM
           changeType: add
@@ -39,6 +34,26 @@ effects:
           target: armament
           type: childChange
           value: 'true'
+        Jk78bESIavNw6C0h:
+          _id: Jk78bESIavNw6C0h
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: none
+            when:
+              skip: 0
+              time: start
+              trigger: turn
+            who:
+              type: target
+          override:
+            combat: false
+            conditions: false
+            triggers: true
+          triggers:
+            - executeArmament
+          type: expiration
       class: archer
       competence:
         raw: 0
@@ -88,7 +103,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.53
+      systemVersion: 0.12.57
     img: systems/teriock/src/icons/abilities/poison-item.webp
     name: Poison Item
     system:
