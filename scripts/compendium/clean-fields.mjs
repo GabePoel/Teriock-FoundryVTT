@@ -446,6 +446,9 @@ function cleanAutomation(automation) {
     delete automation.when;
     delete automation.who;
   }
+  if (automation.activeQualifier === "1") {
+    delete automation.activeQualifier;
+  }
 }
 
 /**

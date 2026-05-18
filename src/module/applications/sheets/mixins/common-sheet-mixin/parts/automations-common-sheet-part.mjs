@@ -19,6 +19,7 @@ export default Base => {
         actions: {
           createAutomation: this._onCreateAutomation,
           deleteAutomation: this._onDeleteAutomation,
+          editActiveQualifier: this._onEditActiveQualifier,
           setToggle: this._onSetToggle,
           toggleAutomationCollapse: this._onToggleAutomationCollapse,
         },
@@ -63,6 +64,18 @@ export default Base => {
         const id = target.dataset.id;
         const automation = this.document.system.automations.get(id);
         await automation?.deleteDialog({ modal: true });
+      }
+
+      /**
+       * Edit an automations active qualifier.
+       * @param {PointerEvent} _event
+       * @param {HTMLElement} target
+       * @returns {Promise<void>}
+       */
+      static async _onEditActiveQualifier(_event, target) {
+        const id = target.dataset.id;
+        const automation = this.document.system.automations.get(id);
+        await automation?.editActiveQualifier();
       }
 
       /**

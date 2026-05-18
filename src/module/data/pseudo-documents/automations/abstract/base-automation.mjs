@@ -1,4 +1,6 @@
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import { competenceField } from "../../../fields/helpers/builders.mjs";
 import { PropagationDataMixin } from "../../../shared/mixins/_module.mjs";
 import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
@@ -44,6 +46,7 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      activeQualifier: new FormulaField({ deterministic: true, initial: "1" }),
       competencies: new fields.SetField(competenceField(), {
         initial: [0, 1, 2],
       }),
@@ -66,7 +69,7 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
    * @returns {boolean}
    */
   get active() {
-    return this.competent;
+    return this.competent && this.checkIfQualified();
   }
 
   /**
@@ -111,6 +114,36 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
    */
   get requiresCompetence() {
     return this.competencies.size !== 3;
+  }
+
+  /**
+   * Whether this is qualified.
+   * @property {object} [rollData]
+   * @returns {boolean}
+   */
+  checkIfQualified(rollData) {
+    if (this.activeQualifier === "1") {
+      return true;
+    } else if (this.activeQualifier === "0" || !this.activeQualifier) {
+      return false;
+    } else {
+      return !!BaseRoll.minValue(this.activeQualifier, rollData ?? this.getRollData());
+    }
+  }
+
+  /**
+   * Edit this automation's active qualifier.
+   * @returns {Promise<void>}
+   */
+  async editActiveQualifier() {
+    const editor = new foundry.applications.apps.FormulaEditor({
+      context: "actor",
+      formula: this.activeQualifier,
+    });
+    editor.addEventListener("close", async () => {
+      await this.document?.update({ [`${this.localPath}.activeQualifier`]: editor.formula });
+    });
+    await editor.render(true);
   }
 
   /**

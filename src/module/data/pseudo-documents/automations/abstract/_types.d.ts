@@ -5,6 +5,7 @@ import { BaseItemSystem } from "../../../systems/items/_module.mjs";
 declare global {
   namespace Teriock.Automations {
     export type BaseAutomationData = {
+      activeQualifier: Teriock.System.FormulaString;
       competencies: Set<number>;
       heighten: Set<number>;
 

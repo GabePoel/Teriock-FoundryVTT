@@ -74,12 +74,11 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
     return BaseRoll;
   }
 
-  /**
-   * The automations that are active.
-   * @returns {Teriock.Automations.Any[]}
-   */
+  /** @inheritDoc */
   get activeAutomations() {
-    return this.automations.contents.filter(a => a.competencies.has(this.competence.raw));
+    return this.automations.contents.filter(
+      a => a.competencies.has(this.competence.raw) && a.checkIfQualified(this.rollData),
+    );
   }
 
   /** @returns {AnyActor|null} */

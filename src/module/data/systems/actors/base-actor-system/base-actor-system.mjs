@@ -165,7 +165,7 @@ export default class BaseActorSystem extends mixClasses(
 
   /** @inheritDoc */
   getSystemRollData() {
-    return this.getLocalRollData()
+    return this.getLocalRollData();
   }
 
   /**
