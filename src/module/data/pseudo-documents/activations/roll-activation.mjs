@@ -11,6 +11,7 @@ const { fields } = foundry.data;
  * @property {Teriock.System.FormulaString} formula
  * @property {boolean} merge
  * @property {number} boosts
+ * @extends {BaseActivation}
  */
 export default class RollActivation extends AutomationActivationFactory(RollAutomation) {
   /** @inheritDoc */

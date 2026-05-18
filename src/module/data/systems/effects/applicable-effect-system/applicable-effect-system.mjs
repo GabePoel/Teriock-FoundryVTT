@@ -31,6 +31,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
       automations.ProtectionAutomation,
       automations.RevitalizeAutomation,
       automations.RollAutomation,
+      automations.TakeAutomation,
     ];
   }
 

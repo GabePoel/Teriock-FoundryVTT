@@ -360,6 +360,9 @@ export default function CommonSystemMixin(Base) {
           [this.parent.type]: 1,
           type: this.parent.type,
         };
+        if (Object.keys(this.parent.flags.rollData ?? {}).length) {
+          Object.assign(rollData, foundry.utils.flattenObject({ flags: this.parent.flags.rollData }));
+        }
         if (this.parent.parent?.type) {
           rollData[`parent.${this.parent.parent.type}`] = 1;
         }
@@ -417,17 +420,20 @@ export default function CommonSystemMixin(Base) {
       /** @inheritDoc */
       getRollData() {
         let rollData = {};
-        if (this.parent.parent?.getRollData) {
+        if (typeof this.parent.parent?.getRollData === "function") {
           rollData = this.parent.parent.getRollData();
         }
         Object.assign(rollData, this.getSystemRollData());
         return rollData;
       }
 
-      /** @returns {object} */
+      /**
+       * All the roll data that is specific to this document from {@link getLocalRollData} but prefixed by its type.
+       * This gets merged into {@link getRollData} so that all of an Actor's roll data is always available.
+       * @returns {object}
+       */
       getSystemRollData() {
-        const localRollData = this.getLocalRollData();
-        return { ...prefixObject(localRollData, this.parent.type) };
+        return { ...prefixObject(this.getLocalRollData(), this.parent.type) };
       }
 
       /** @returns {Promise<void>} */

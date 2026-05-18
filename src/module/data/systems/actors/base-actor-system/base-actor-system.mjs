@@ -164,11 +164,8 @@ export default class BaseActorSystem extends mixClasses(
   }
 
   /** @inheritDoc */
-  getRollData() {
-    const rollData = super.getRollData();
-    foundry.utils.deleteProperty(rollData, "Actor");
-    foundry.utils.deleteProperty(rollData, this.parent.type);
-    return rollData;
+  getSystemRollData() {
+    return this.getLocalRollData()
   }
 
   /**

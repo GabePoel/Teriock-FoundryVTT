@@ -1,8 +1,9 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { TakeActivation } from "../activations/_module.mjs";
-import { BaseAutomation } from "./abstract/_module.mjs";
-import { DisplayAutomationMixin } from "./mixins/_module.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
+import * as mixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -11,10 +12,15 @@ const { fields } = foundry.data;
  * @property {boolean} morganti
  * @property {boolean} showDialog
  * @property {number | null} amount
+ * @extends {CritAutomation}
  * @mixes DisplayAutomation
- * @extends {BaseAutomation}
+ * @mixes TriggerAutomation
  */
-export default class TakeAutomation extends DisplayAutomationMixin(BaseAutomation) {
+export default class TakeAutomation extends mixClasses(
+  CritAutomation,
+  mixins.DisplayAutomationMixin,
+  mixins.TriggerAutomationMixin,
+) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Take"];
 
@@ -41,8 +47,8 @@ export default class TakeAutomation extends DisplayAutomationMixin(BaseAutomatio
         nullable: false,
         required: true,
       }),
-      morganti: new fields.BooleanField({ initial: false }),
-      showDialog: new fields.BooleanField({ initial: false }),
+      morganti: new fields.BooleanField(),
+      showDialog: new fields.BooleanField(),
     });
   }
 
@@ -53,17 +59,22 @@ export default class TakeAutomation extends DisplayAutomationMixin(BaseAutomatio
   }
 
   /** @inheritDoc */
+  get _displayPaths() {
+    return ["hr", ...super._displayPaths, "showDialog"];
+  }
+
+  /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "amount"];
     if (TERIOCK.config.impact[this.impact]?.morganti) {
       paths.push("morganti");
     }
-    paths.push(...["hr", "display.label", "showDialog"]);
+    paths.push(...[...this._triggerPaths, ...this._triggerDisplayPaths]);
     return paths;
   }
 
   /** @inheritDoc */
-  async getActivations() {
+  async _getActivations() {
     if (this.impact && this.impact !== "other") {
       return [
         new TakeActivation({
@@ -76,5 +87,17 @@ export default class TakeAutomation extends DisplayAutomationMixin(BaseAutomatio
       ];
     }
     return [];
+  }
+
+  /** @inheritDoc */
+  _onFire(scope) {
+    this._activateActivations(scope);
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    if (this.isRepeatable) {
+      this.showDialog = true;
+    }
   }
 }

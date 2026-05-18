@@ -1,4 +1,5 @@
 import { impactConfig } from "../../constants/config/impact-config.mjs";
+import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
@@ -9,17 +10,18 @@ const { fields } = foundry.data;
  * Dialog that allows for modifying a roll with boosts/deboosts.
  * @param {Teriock.System.FormulaString} rollFormula
  * @param {object} [options]
+ * @param {Teriock.Keys.Impact} [options.impact] - The type of impact of the roll
  * @param {boolean} [options.crit] - Go critical?
- * @param {string} [options.label] - Custom button label
- * @param {string} [options.type] - The title of the type of roll being made
  * @param {number} [options.boosts] - The number of boosts to apply
  * @param {object} [options.rollData] - Roll data to use when updating the formula.
+ * @param {string} [options.label] - Custom button label
  * @returns {Promise<Teriock.System.FormulaString|null>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
   const { crit = false, impact, label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok") } = options;
   let formula = rollFormula;
-  const formulaField = new fields.StringField({
+  const formulaField = new FormulaField({
+    deterministic: false,
     hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
     initial: rollFormula,
     label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),

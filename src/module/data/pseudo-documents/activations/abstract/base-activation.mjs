@@ -24,15 +24,29 @@ export default class BaseActivation extends TypedPseudoDocument {
     });
   }
 
+  /** @type {TeriockActor[]} */
+  #actors;
+
   /** @type {PointerEvent} */
-  event;
+  #event;
+
+  /** @type {TeriockActor[]} */
+  #tokens;
 
   /**
    * Actors to affect when this button is activated.
    * @returns {TeriockActor[]}
    */
   get actors() {
-    return this.selectedActors;
+    return this.#actors ?? this.selectedActors;
+  }
+
+  /**
+   * Actors to affect when this button is activated.
+   * @param {TeriockActor[]} actors
+   */
+  set actors(actors) {
+    this.#actors = actors;
   }
 
   /**
@@ -41,6 +55,22 @@ export default class BaseActivation extends TypedPseudoDocument {
    */
   get classes() {
     return Array.from(this.display.classes).join(" ");
+  }
+
+  /**
+   * The event activating this.
+   * @returns {PointerEvent|{}}
+   */
+  get event() {
+    return this.#event ?? {};
+  }
+
+  /**
+   * The event activating this.
+   * @param {PointerEvent} event
+   */
+  set event(event) {
+    this.#event = event;
   }
 
   /** @inheritDoc */
@@ -98,7 +128,15 @@ export default class BaseActivation extends TypedPseudoDocument {
    * @returns {TeriockToken[]}
    */
   get tokens() {
-    return this.selectedTokens;
+    return this.#tokens ?? this.selectedTokens;
+  }
+
+  /**
+   * Tokens to affect when this button is activated.
+   * @param {TeriockToken[]} tokens
+   */
+  set tokens(tokens) {
+    this.#tokens = tokens;
   }
 
   /**

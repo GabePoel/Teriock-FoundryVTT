@@ -5,21 +5,21 @@ import { objectMap } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { RollActivation } from "../activations/_module.mjs";
-import { BaseAutomation } from "./abstract/_module.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 import * as mixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @extends {BaseAutomation}
+ * @extends {CritAutomation}
  * @property {Teriock.Keys.Impact} impact
  * @property {Teriock.System.FormulaString} formula
  * @property {boolean} merge
- * @mixes TriggerAutomation
  * @mixes DisplayAutomation
+ * @mixes TriggerAutomation
  */
 export default class RollAutomation extends mixClasses(
-  BaseAutomation,
+  CritAutomation,
   mixins.DisplayAutomationMixin,
   mixins.TriggerAutomationMixin,
 ) {

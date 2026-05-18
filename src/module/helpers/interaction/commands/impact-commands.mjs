@@ -31,8 +31,8 @@ async function abstractImpactCommandOperation(actor, options) {
   if (options.boost) {
     formula = await boostDialog(formula, {
       boosts: options.boosts,
+      impact,
       rollData,
-      type: TERIOCK.config.impact[impact].label,
     });
   }
   if (!formula) {
