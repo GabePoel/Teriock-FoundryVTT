@@ -175,5 +175,5 @@ export function ruleUuid(namespace, pageName) {
     namespace = "status";
   }
   const identifier = `${namespace.toLowerCase()}:${toKebabCase(pageName)}`;
-  return game.teriock.registries.identifiers.get(identifier);
+  return game.teriock.identifiers.get(identifier);
 }

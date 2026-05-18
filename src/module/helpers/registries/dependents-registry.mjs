@@ -1,4 +1,4 @@
-import RegistryLifecycle from "./abstract/registry-lifecycle.mjs";
+import BaseRegistryLifecycle from "./abstract/base-registry-lifecycle.mjs";
 
 const { Document } = foundry.abstract;
 
@@ -11,7 +11,7 @@ const { Document } = foundry.abstract;
  *   AnyChildDocument|UUID<AnyChildDocument>
  * >}
  */
-export default class DependentsRegistry extends RegistryLifecycle {
+export default class DependentsRegistry extends BaseRegistryLifecycle {
   /**
    * Registration of documents that are dependent on some other document but don't have an elder/child
    * relationship. The map is keyed by the UUID of the document, which has dependents and contains a set of UUIDs for

@@ -141,7 +141,7 @@ foundry.helpers.Hooks.once("init", function () {
         consequence: data.systems.effects.ConsequenceSystem,
         cover: data.systems.effects.BaseEffectSystem,
         fluency: data.systems.effects.FluencySystem,
-        hack: data.systems.effects.BaseEffectSystem,
+        hack: data.systems.effects.HackSystem,
         imbuement: data.systems.effects.ImbuementSystem,
         property: data.systems.effects.PropertySystem,
         resource: data.systems.effects.ResourceSystem,
@@ -379,6 +379,12 @@ foundry.helpers.Hooks.once("init", function () {
       doc: documents.TeriockActiveEffect,
       label: "TYPES.ActiveEffect.imbuement",
       types: ["imbuement"],
+    },
+    {
+      cls: applications.sheets.effect.HackSheet,
+      doc: documents.TeriockActiveEffect,
+      label: "TYPES.ActiveEffect.hack",
+      types: ["hack"],
     },
     // Tokens
     {

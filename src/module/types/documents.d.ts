@@ -7,6 +7,7 @@ import {
   ConditionSheet,
   ConsequenceSheet,
   FluencySheet,
+  HackSheet,
   ImbuementSheet,
   PropertySheet,
   ResourceSheet,
@@ -28,6 +29,7 @@ import {
   ConditionSystem,
   ConsequenceSystem,
   FluencySystem,
+  HackSystem,
   ImbuementSystem,
   PropertySystem,
   ResourceSystem,
@@ -232,6 +234,14 @@ declare global {
     type: "fluency";
     get id(): ID<TeriockFluency>;
     get uuid(): UUID<TeriockFluency>;
+  };
+  export type TeriockHack = TeriockActiveEffect & {
+    _id: ID<TeriockHack>;
+    sheet: HackSheet;
+    system: HackSystem;
+    type: "hack";
+    get id(): ID<TeriockHack>;
+    get uuid(): UUID<TeriockHack>;
   };
   export type TeriockImbuement = TeriockActiveEffect & {
     _id: ID<TeriockImbuement>;

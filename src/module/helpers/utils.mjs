@@ -455,7 +455,7 @@ export function fromIdentifierSync(identifier, options = {}) {
   if (!identifier) {
     return null;
   }
-  return game.teriock.registries.identifiers.fromIdentifierSync(identifier, options);
+  return game.teriock.identifiers.fromIdentifierSync(identifier, options);
 }
 
 /**
@@ -483,5 +483,5 @@ export async function fromIdentifier(identifier, options = {}) {
       return null;
     }
   }
-  return game.teriock.registries.identifiers.fromIdentifier(identifier);
+  return game.teriock.identifiers.fromIdentifier(identifier);
 }

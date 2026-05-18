@@ -66,16 +66,16 @@ export default Base => {
        */
       async takeUnhack(part, amount = 1) {
         await this.parent.hookCall("takeUnhack", { scope: { amount, part } });
-        const value = this.parent.system.hacks[part].value;
-        const min = Math.max(value - amount, 0);
-        const ids = [];
-        for (let i = value; i > min; i--) {
-          const id = (hackConfig[part]?.statuses ?? [])[i - 1];
-          if (id) {
-            ids.push(id);
-          }
-        }
-        await this.parent.removeStatusEffects(ids);
+        /** @type {TeriockHack[]} */
+        const hacks = this.parent.effects.contents.filter(c => c.type === "hack" && c.system.part === part);
+        const removable = hacks
+          .filter(h => !h.system.permanent)
+          .sort((a, b) => b.system.escalation - a.system.escalation);
+        const toRemove = removable.slice(0, amount);
+        await this.parent.deleteEmbeddedDocuments(
+          "ActiveEffect",
+          toRemove.map(e => e.id),
+        );
       }
     }
   );

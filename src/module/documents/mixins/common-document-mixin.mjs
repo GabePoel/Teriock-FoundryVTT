@@ -2,7 +2,8 @@ import { TeriockActor } from "../_module.mjs";
 import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { resolveDocuments } from "../../helpers/resolve.mjs";
+import { ensureChildren, ensureNoChildren, resolveDocuments } from "../../helpers/resolve.mjs";
+import { parseIdentifier } from "../../helpers/utils.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 import { EmbedCardDocumentMixin, PanelDocumentMixin, SettingsDocumentMixin } from "./_module.mjs";
 
@@ -260,6 +261,19 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
+       * Check if this document has a child with the given identifier.
+       * @param {TypedIdentifier} identifier
+       * @returns {Promise<boolean>}
+       */
+      async hasChild(identifier) {
+        const parsed = parseIdentifier(identifier);
+        if (!parsed) {
+          return false;
+        }
+        return !!(await this.getChildArray()).some(c => c.typedIdentifier === identifier);
+      }
+
+      /**
        * Executes all macros for a given trigger and calls a regular hook with the same name.
        * @param {Teriock.System.Trigger} trigger - What trigger to call.
        * @param {object} [options]
@@ -306,6 +320,36 @@ export default function CommonDocumentMixin(Base) {
       /** @inheritDoc */
       toDragData() {
         return Object.assign(super.toDragData(), { systemType: this.type });
+      }
+
+      /**
+       * Toggle a configured child for the Document. Designed to function like {@link Actor.toggleStatusEffect}.
+       * @param {TypedIdentifier} identifier - An identifier existing in the world or a compendium.
+       * @param {object} [options] - Additional options which modify how the child is created.
+       * @param {boolean} [options.active] - Force the child to be active or inactive regardless of its current state.
+       * @returns {Promise<AnyChildDocument|boolean|undefined>} - A promise which resolves to one of the following
+       * values:
+       *  - ChildDocument if new child needs to be created
+       *  - true if was already an existing child
+       *  - false if an existing child needed to be removed
+       *  - undefined if no changes need to be made
+       */
+      async toggleChild(identifier, options = {}) {
+        if (!parseIdentifier(identifier)) {
+          return;
+        }
+        const hasChild = await this.hasChild(identifier);
+        if (hasChild && options.active) {
+          return true;
+        } else if (hasChild && !options.active) {
+          await ensureNoChildren(this, [identifier]);
+          return false;
+        } else if (!hasChild && (options.active === true || typeof options.active !== "boolean")) {
+          const out = await ensureChildren(this, [identifier]);
+          return out[0];
+        } else {
+          return;
+        }
       }
 
       /**

@@ -83,7 +83,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
     await super._onRender(context, options);
     // TODO: Eventually this identifier button logic should be moved into a custom identifier HTML element.
     /** @type {HTMLInputElement} */
-    const identifierInput = document.querySelector('input[name="system.identifier"]');
+    const identifierInput = this.element.querySelector('input[name="system.identifier"]');
     /** @type {HTMLDivElement} */
     const formFields = identifierInput.closest(".form-fields");
     formFields.style.gap = "0.25rem";

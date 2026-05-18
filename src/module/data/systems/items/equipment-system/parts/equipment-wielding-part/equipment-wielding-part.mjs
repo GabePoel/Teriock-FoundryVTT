@@ -1,6 +1,6 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
-import { ensureChildren, ensureNoChildren } from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
+import { initialBoolean } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -21,7 +21,7 @@ export default Base => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           equipped: new fields.BooleanField({ initial: false }),
-          glued: new fields.BooleanField({ initial: false }),
+          glued: initialBoolean(),
           minStr: new fields.NumberField({
             initial: -3,
             integer: true,
@@ -158,7 +158,7 @@ export default Base => {
         await this.parent.hookCall("glue", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, ["property:glued"]);
+        await this.parent.toggleChild("property:glued", { active: true });
       }
 
       /** @inheritDoc */
@@ -197,10 +197,7 @@ export default Base => {
         await this.parent.hookCall("unglue", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property:glued");
-        if (this.glued) {
-          await this.parent.update({ "system.glued": false });
-        }
+        await this.parent.toggleChild("property:glued", { active: false });
       }
     }
   );

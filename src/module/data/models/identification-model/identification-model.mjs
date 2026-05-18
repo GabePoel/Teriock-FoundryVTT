@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
-import { fromIdentifier, inferNameFromIdentifier, makeIconClass, objectMap } from "../../../helpers/utils.mjs";
+import { fromIdentifier, makeIconClass, objectMap } from "../../../helpers/utils.mjs";
 import { TextField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 

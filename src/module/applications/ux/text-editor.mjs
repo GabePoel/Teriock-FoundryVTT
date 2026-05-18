@@ -19,7 +19,7 @@ export default class TeriockTextEditor extends TextEditor {
     for (const part of match.groups.config.match(/(?:[^\s"]+|"[^"]*")+/g)) {
       const [key] = part.split("=");
       if (key === "identifier" || parseIdentifier(part)) {
-        await game.teriock.registries.identifiers.ready;
+        await game.teriock.identifiers.ready;
       }
     }
     return super._embedContent(match, options);
@@ -33,9 +33,9 @@ export default class TeriockTextEditor extends TextEditor {
     const config = super._parseEmbedConfig(raw, options);
     if (!config.uuid) {
       if (config.identifier) {
-        config.uuid = game.teriock.registries.identifiers.get(config.identifier);
+        config.uuid = game.teriock.identifiers.get(config.identifier);
       } else if (config.values.length && parseIdentifier(config.values[0])) {
-        const uuid = game.teriock.registries.identifiers.get(config.values[0]);
+        const uuid = game.teriock.identifiers.get(config.values[0]);
         if (uuid) {
           config.uuid = uuid;
         }

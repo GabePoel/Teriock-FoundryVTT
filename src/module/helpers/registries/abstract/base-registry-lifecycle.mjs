@@ -2,7 +2,7 @@
  * A base registry lifecycle pattern.
  * @implements {Teriock.Registries.Lifecycle}
  */
-export default class RegistryLifecycle {
+export default class BaseRegistryLifecycle {
   constructor() {
     this.#initializePromise();
   }
@@ -47,7 +47,6 @@ export default class RegistryLifecycle {
   /** @inheritDoc */
   deactivate() {
     this.#disabled = true;
-    // Reset the promise so it can be awaited again if the registry is reactivated
     this.#initializePromise();
   }
 }

@@ -1,6 +1,5 @@
 import { formulaExists } from "../../../../../helpers/formula.mjs";
 import { simplifyTags } from "../../../../../helpers/panel.mjs";
-import { inferNameFromIdentifier } from "../../../../../helpers/utils.mjs";
 
 /**
  * Equipment panel part.

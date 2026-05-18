@@ -324,7 +324,7 @@ export default class BaseRoll extends Roll {
     return [
       {
         icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
-        label: _loc("TERIOCK.ROLLS.Base.reroll"),
+        label: "TERIOCK.ROLLS.Base.reroll",
         onClick: async () => {
           const reroll = this.clone();
           await reroll.evaluate();

@@ -91,6 +91,9 @@ function addIdentifierClipboardListener(application) {
   const label = _loc(application.document.constructor.metadata.label);
   application.window.header.querySelectorAll("[data-action=copyUuid]").forEach(el =>
     el.addEventListener("auxclick", e => {
+      if (e.button !== 1) {
+        return;
+      }
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();

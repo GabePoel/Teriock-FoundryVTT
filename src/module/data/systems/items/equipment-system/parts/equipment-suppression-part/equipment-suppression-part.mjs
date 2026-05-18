@@ -1,4 +1,3 @@
-import { ensureChildren, ensureNoChildren } from "../../../../../../helpers/resolve.mjs";
 import { makeIcon } from "../../../../../../helpers/utils.mjs";
 import { initialBoolean } from "../../../../../fields/helpers/initializers.mjs";
 
@@ -97,7 +96,7 @@ export default Base => {
         await this.parent.hookCall("dampen", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, ["property:dampened"]);
+        await this.parent.toggleChild("property:dampened", { active: true });
       }
 
       /**
@@ -112,7 +111,7 @@ export default Base => {
         await this.parent.hookCall("destroy", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, ["property:destroyed"]);
+        await this.parent.toggleChild("property:dampened", { active: true });
       }
 
       /** @inheritdoc */
@@ -202,7 +201,7 @@ export default Base => {
         await this.parent.hookCall("reforge", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property:destroyed");
+        await this.parent.toggleChild("property:dampened", { active: false });
       }
 
       /**
@@ -217,10 +216,7 @@ export default Base => {
         await this.parent.hookCall("repair", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property:shattered");
-        if (this.shattered) {
-          await this.parent.update({ "system.shattered": false });
-        }
+        await this.parent.toggleChild("property:shattered", { active: false });
       }
 
       /**
@@ -235,7 +231,7 @@ export default Base => {
         await this.parent.hookCall("shatter", {
           scope: { equipment: this.parent },
         });
-        await ensureChildren(this.parent, ["property:shattered"]);
+        await this.parent.toggleChild("property:shattered", { active: true });
       }
 
       /**
@@ -258,7 +254,7 @@ export default Base => {
         await this.parent.hookCall("undampen", {
           scope: { equipment: this.parent },
         });
-        await ensureNoChildren(this.parent, "property:dampened");
+        await this.parent.toggleChild("property:dampened", { active: false });
       }
 
       /**

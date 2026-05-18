@@ -379,9 +379,9 @@ export default function CommonSystemMixin(Base) {
           blocks: this.messageBlocks,
           color: this.color || undefined,
           font: this.font,
-          icon: TERIOCK.config.document[this.metadata.type]?.icon || TERIOCK.config.document.document.icon,
+          icon: TERIOCK.config.document[this.parent.type]?.icon || TERIOCK.config.document.document.icon,
           image: this.parent.img,
-          label: TERIOCK.config.document[this.metadata.type]?.label || TERIOCK.config.document.document.label,
+          label: TERIOCK.config.document[this.parent.type]?.label || TERIOCK.config.document.document.label,
           name: this.parent.fullName,
           uuid: this.parent.uuid,
         };

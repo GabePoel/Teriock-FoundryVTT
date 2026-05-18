@@ -47,4 +47,11 @@ export default Base =>
       this.#createContextMenu(".consequence-add-button", ["consequence", "attunement"]);
       this.#createContextMenu(".power-add-button", ["species", "power"]);
     }
+
+    /** @inheritDoc */
+    async _prepareContext(options) {
+      return Object.assign(await super._prepareContext(options), {
+        hacks: this.document.effects.filter(e => e.type === "hack" && !e.isStatus),
+      });
+    }
   };

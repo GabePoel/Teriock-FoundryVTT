@@ -36,10 +36,9 @@ function modifierIconClass(modifier) {
  * @returns {string}
  */
 function hackFill(bar) {
-  const min = bar?.min || 0;
   const max = bar?.max || 0;
   const value = bar?.value || 0;
-  if (value === min) {
+  if (value === 0) {
     return "mic fa-solid";
   } else if (value === max) {
     return "mic fa-faint";

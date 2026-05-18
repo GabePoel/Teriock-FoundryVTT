@@ -34,6 +34,17 @@
         gapless="sheet.blockEffectsGapless"
         size="sheet.blockEffectsSize"
       }}
+      {{#if (exists hacks)}}
+        <div class="teriock-block-display-divider"></div>
+        {{> "teriock/sheets/actors/playable/results/search-results"
+          docs=hacks
+          searchKey="effects"
+          displayKey="consequence"
+          empty=TERIOCK.config.document.hack.plural
+          gapless="sheet.blockEffectsGapless"
+          size="sheet.blockEffectsSize"
+        }}
+      {{/if}}
       <div class="teriock-block-display-divider"></div>
       {{> "teriock/sheets/actors/playable/results/condition-results"}}
     </div>
@@ -52,9 +63,9 @@
               data-condition="{{{ key }}}"
               data-tooltip='
                 {{localize "TERIOCK.SHEETS.Actor.TABS.Effects.toggle" name=condition.name state=(ifThen
-                                  (includes ../removableConditions key)
-                                  (localize "TERIOCK.SHEETS.Actor.TABS.Effects.off")
-                                  (localize "TERIOCK.SHEETS.Actor.TABS.Effects.on"))}}
+                (includes ../removableConditions key)
+                (localize "TERIOCK.SHEETS.Actor.TABS.Effects.off")
+                (localize "TERIOCK.SHEETS.Actor.TABS.Effects.on"))}}
               '
             >
               <div class="condition-image-container">

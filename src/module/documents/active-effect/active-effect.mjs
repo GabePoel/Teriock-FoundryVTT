@@ -43,6 +43,16 @@ export default class TeriockActiveEffect extends mixClasses(
   }
 
   /**
+   * Whether this is a status effect.
+   * @returns {boolean}
+   */
+  get isStatus() {
+    return Object.values(CONFIG.statusEffects)
+      .map(s => s._id)
+      .includes(this.id);
+  }
+
+  /**
    * The time remaining before this effect expires, as a string.
    * @returns {string|null}
    */

@@ -83,8 +83,8 @@ const identifierEnricher = {
   pattern: /@I\[(.+?)\](?:\{(.+?)\})?/g,
   replaceParent: false,
   enricher: async match => {
-    await game.teriock.registries.identifiers.ready;
-    const contentLinkMatch = [null, "UUID", game.teriock.registries.identifiers.get(match[1]), "", match[2]];
+    await game.teriock.identifiers.ready;
+    const contentLinkMatch = [null, "UUID", game.teriock.identifiers.get(match[1]), "", match[2]];
     const out = await TeriockTextEditor._createContentLink(contentLinkMatch);
     const parsed = parseIdentifier(match[1]);
     if (parsed && IDENTIFIER_ICON_MAP[parsed.type]) {

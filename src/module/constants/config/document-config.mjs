@@ -122,6 +122,12 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.fluency.plural",
     sorter: docSort,
   },
+  hack: {
+    documentName: "ActiveEffect",
+    icon: icons.ui.hack,
+    label: "TYPES.ActiveEffect.hack",
+    plural: "TERIOCK.DOCUMENTS.hack.plural",
+  },
   imbuement: {
     documentName: "ActiveEffect",
     getter: "imbuements",

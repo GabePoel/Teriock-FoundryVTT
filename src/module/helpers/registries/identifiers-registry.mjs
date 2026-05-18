@@ -1,4 +1,4 @@
-import RegistryLifecycle from "./abstract/registry-lifecycle.mjs";
+import BaseRegistryLifecycle from "./abstract/base-registry-lifecycle.mjs";
 
 /**
  * @typedef {TeriockActiveEffect|TeriockActor|TeriockItem|TeriockJournalEntryPage} IdentifiableDocument
@@ -10,7 +10,7 @@ import RegistryLifecycle from "./abstract/registry-lifecycle.mjs";
  * for establishing a single source of truth with regards to what identifiers refer to.
  * @implements {Teriock.Registries.SingleRegistry<TypedIdentifier, UUID<IdentifiableDocument>>}
  */
-export default class IdentifiersRegistry extends RegistryLifecycle {
+export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   /**
    * The types of documents which support having identifiers.
    * @type {Set<string>}

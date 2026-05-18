@@ -5,6 +5,14 @@ import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mj
  */
 export default class TeriockManager {
   /**
+   * A private record of registries.
+   * @type {{dependents: DependentsRegistry, identifiers: IdentifiersRegistry}}
+   */
+  #registries = {
+    dependents: new DependentsRegistry(),
+    identifiers: new IdentifiersRegistry(),
+  };
+  /**
    * Check if what's provided exists or is an empty array or set.
    * @param {Teriock.System.Existable<*>} existable
    * @param {string} [message]
@@ -36,20 +44,11 @@ export default class TeriockManager {
   packs = new TeriockPacks();
 
   /**
-   * Singleton registries.
-   * @type {{dependents: DependentsRegistry, identifiers: IdentifiersRegistry}}
-   */
-  registries = {
-    dependents: new DependentsRegistry(),
-    identifiers: new IdentifiersRegistry(),
-  };
-
-  /**
    * The singleton dependents registry.
    * @returns {DependentsRegistry}
    */
   get dependents() {
-    return this.registries.dependents;
+    return this.#registries.dependents;
   }
 
   /**
@@ -57,7 +56,7 @@ export default class TeriockManager {
    * @returns {IdentifiersRegistry}
    */
   get identifiers() {
-    return this.registries.identifiers;
+    return this.#registries.identifiers;
   }
 
   /**

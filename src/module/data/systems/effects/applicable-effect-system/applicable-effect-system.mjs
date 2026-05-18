@@ -70,6 +70,18 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
     });
   }
 
+  /**
+   * A message bar with duration information.
+   * @returns {Teriock.Messages.MessageBar}
+   */
+  get _durationBar() {
+    return {
+      icon: TERIOCK.display.icons.ability.duration,
+      label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.duration"),
+      wrappers: [this.parent.remainingString],
+    };
+  }
+
   /** @inheritDoc */
   get _nameTags() {
     const tags = super._nameTags;
@@ -77,6 +89,28 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
       tags.unshift(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical"));
     }
     return tags;
+  }
+
+  /**
+   * A message bar with status information.
+   * @returns {Teriock.Messages.MessageBar}
+   */
+  get _statusBar() {
+    return {
+      icon: TERIOCK.display.icons.document.condition,
+      label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
+      wrappers: [
+        ...Array.from(this.parent.statuses.map(status => TERIOCK.reference.conditions[status])),
+        this.critical ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical") : "",
+        this.heightened
+          ? this.heightened === 1
+            ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")
+            : _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", {
+                value: this.heightened,
+              })
+          : "",
+      ],
+    };
   }
 
   /** @returns {Teriock.Sheet.DisplayField[]} */
@@ -128,6 +162,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
     }
   }
 
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) {
@@ -163,28 +198,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
-    parts.bars = [
-      {
-        icon: TERIOCK.display.icons.ability.duration,
-        label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.duration"),
-        wrappers: [this.parent.remainingString],
-      },
-      {
-        icon: TERIOCK.display.icons.document.condition,
-        label: _loc("TERIOCK.SYSTEMS.Applicable.PANELS.conditions"),
-        wrappers: [
-          ...Array.from(this.parent.statuses.map(status => TERIOCK.reference.conditions[status])),
-          this.critical ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical") : "",
-          this.heightened
-            ? this.heightened === 1
-              ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")
-              : _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", {
-                  value: this.heightened,
-                })
-            : "",
-        ],
-      },
-    ];
+    parts.bars = [this._durationBar, this._statusBar];
     return parts;
   }
 
