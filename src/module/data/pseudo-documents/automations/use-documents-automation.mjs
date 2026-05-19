@@ -28,20 +28,13 @@ export default class UseDocumentsAutomation extends mixClasses(
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.UseDocuments"];
 
   /** @inheritDoc */
-  static get _conditions() {
-    return false;
-  }
-
-  /** @inheritDoc */
-  static get _triggerChoices() {
-    return {
-      execution: TERIOCK.config.trigger.execution,
-    };
-  }
-
-  /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.UseDocuments.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { executionOnly: true });
   }
 
   /** @inheritDoc */
@@ -102,11 +95,6 @@ export default class UseDocumentsAutomation extends mixClasses(
   }
 
   /** @inheritDoc */
-  get _conditions() {
-    return false;
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
     return [...this._selectionPaths, "hr", ...this._triggerPaths, "hr", "noHeighten", ...this._competencePaths];
   }
@@ -125,11 +113,7 @@ export default class UseDocumentsAutomation extends mixClasses(
 
   /** @inheritDoc */
   async _preFire(scope) {
-    if (scope.awaitFire) {
-      await this.executeDocuments(scope);
-    } else {
-      this.executeDocuments(scope);
-    }
+    await this.executeDocuments(scope);
   }
 
   /**

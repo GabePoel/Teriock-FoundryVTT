@@ -6,7 +6,7 @@ export default Base => {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {CommonDocument} document
+     * @property {AnyCommonDocument} document
      */
     class AutomationsTabsCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */

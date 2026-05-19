@@ -1,3 +1,4 @@
+import { omit } from "../../../helpers/utils.mjs";
 import { ResistActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 
@@ -19,11 +20,12 @@ export default class ResistAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = Object.assign(super.defineSchema(), {
-      hex: new fields.BooleanField({ label: "TERIOCK.TERMS.Common.hexproof" }),
-    });
-    delete schema.threshold;
-    return schema;
+    return omit(
+      Object.assign(super.defineSchema(), {
+        hex: new fields.BooleanField({ label: "TERIOCK.TERMS.Common.hexproof" }),
+      }),
+      ["threshold"],
+    );
   }
 
   /** @inheritDoc */

@@ -6,10 +6,17 @@ const { fields } = foundry.data;
 /**
  * @param {boolean} consumeStatDice
  * @param {boolean} forHarm
+ * @extends {BaseAutomation}
+ * @mixes TriggerAutomation
  */
 export default class StatAutomation extends TriggerAutomationMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Stat"];
+
+  /** @inheritDoc */
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { activationTime: "on" });
+  }
 
   /** @inheritDoc */
   static defineSchema() {

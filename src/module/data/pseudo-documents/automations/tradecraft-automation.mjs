@@ -23,18 +23,13 @@ export default class TradecraftAutomation extends mixClasses(
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Tradecraft"];
 
   /** @inheritDoc */
-  static get _conditions() {
-    return false;
-  }
-
-  /** @inheritDoc */
-  static get _triggerChoices() {
-    return { execution: TERIOCK.config.trigger.execution };
-  }
-
-  /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.ROLLS.Tradecraft.label";
+  }
+
+  /** @inheritDoc */
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { executionOnly: true });
   }
 
   /** @inheritDoc */
@@ -93,11 +88,7 @@ export default class TradecraftAutomation extends mixClasses(
 
   /** @inheritDoc */
   async _preFire(scope) {
-    if (scope.awaitFire) {
-      await this.executeTradecraft(scope);
-    } else {
-      this.executeTradecraft(scope);
-    }
+    await this.executeTradecraft(scope);
   }
 
   /**

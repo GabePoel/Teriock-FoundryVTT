@@ -220,7 +220,7 @@ export default class AbilitySystem extends mixClasses(
 
   /** @inheritDoc */
   get displayTags() {
-    return [...super.displayTags, ...this._infoTags, ...this._metaphysicsTags];
+    return [...super.displayTags, ...this._infoTags];
   }
 
   /** @inheritDoc */
@@ -241,8 +241,8 @@ export default class AbilitySystem extends mixClasses(
       "system.grantOnly",
       "system.grantUse",
       "system.warded",
-      "system.mundane",
       ...super.displayToggles,
+      "system.applyIfDeattuned",
     ];
   }
 

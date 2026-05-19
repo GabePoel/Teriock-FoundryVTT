@@ -1,4 +1,5 @@
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
+import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
 import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;
@@ -28,9 +29,15 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   static defineSchema() {
     return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
       ...super.defineSchema(),
+      applyIfDeattuned: new fields.BooleanField(),
       deleteOnExpire: new fields.BooleanField(),
-      mundane: new fields.BooleanField(),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    migrateKey(source, "mundane", "applyIfDeattuned");
+    return super.migrateData(source, options, state);
   }
 
   /**
@@ -38,7 +45,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedDampened() {
-    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.dampened);
+    return !!(this.parent.parent?.type === "equipment" && this.parent.parent?.system.dampened);
   }
 
   /**
@@ -46,13 +53,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedDeattuned() {
-    return !!(
-      this.actor &&
-      (this.parent.parent?.type === "equipment" || this.parent.parent?.type === "mount") &&
-      this.parent.parent.system.needsAttunement &&
-      !this.mundane &&
-      !this.parent.parent.system.isAttuned
-    );
+    return !!(this.actor && this.needsAttunement && !this.parent.parent?.system.isAttuned);
   }
 
   /**
@@ -60,7 +61,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedDestroyed() {
-    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.destroyed);
+    return !!(this.parent.parent?.type === "equipment" && this.parent.parent?.system.destroyed);
   }
 
   /** @inheritDoc */
@@ -97,6 +98,14 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   }
 
   /**
+   * Metaphysics tags.
+   * @returns {Teriock.Sheet.DisplayTag[]}
+   */
+  get _metaphysicsTags() {
+    return this.needsAttunement ? ["TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true"] : [];
+  }
+
+  /**
    * Whether this can provide qualified changes.
    * @returns {boolean}
    */
@@ -110,6 +119,11 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    */
   get childChanges() {
     return this.getAutomations("childChange", { active: true }).flatMap(a => a.getChanges());
+  }
+
+  /** @inheritDoc */
+  get displayTags() {
+    return [...super.displayTags, ...this._metaphysicsTags];
   }
 
   /** @inheritDoc */
@@ -164,6 +178,18 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    */
   get modifies() {
     return this.metadata.modifies;
+  }
+
+  /**
+   * Whether this needs attunement to be active.
+   * @returns {boolean}
+   */
+  get needsAttunement() {
+    return (
+      !this.applyIfDeattuned &&
+      ["equipment", "mount"].includes(this.parent.parent?.type) &&
+      !!this.parent.parent?.system.needsAttunement
+    );
   }
 
   /**

@@ -38,10 +38,7 @@ export default Base => {
         });
       }
 
-      /**
-       * Metaphysics tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
-       */
+      /** @inheritDoc */
       get _metaphysicsTags() {
         const tags = [];
         tags.push(
@@ -72,9 +69,7 @@ export default Base => {
         if (this.elderSorcery) {
           tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorcery.label");
         }
-        if (this.mundane) {
-          tags.push("TERIOCK.SYSTEMS.BaseEffect.FIELDS.mundane.label");
-        }
+        tags.push(...super._metaphysicsTags);
         return tags;
       }
 

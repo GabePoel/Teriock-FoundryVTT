@@ -47,10 +47,7 @@ export default class HealAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  _onFire(scope) {
-    if (!this.actor.isDamaged && !this.forHarm) {
-      return;
-    }
-    this._activateActivations(scope);
+  canFire(trigger) {
+    return (this.actor?.isDamaged || !this.forHarm) && super.canFire(trigger);
   }
 }

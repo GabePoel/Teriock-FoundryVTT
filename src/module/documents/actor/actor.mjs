@@ -366,7 +366,7 @@ export default class TeriockActor extends mixClasses(
 
   /**
    * Delete all staged items.
-   * @returns {Promise<CommonDocument[]>}
+   * @returns {Promise<AnyCommonDocument[]>}
    */
   async _processStagedItemDeletions() {
     if (!this._stagedItemDeletions) {

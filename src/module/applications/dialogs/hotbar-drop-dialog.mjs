@@ -4,7 +4,7 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
 
 /**
  * Dialog to select what type of macro to make.
- * @param {ChildDocument} doc
+ * @param {AnyChildDocument} doc
  * @returns {Promise<"linked"|"general">} Type of macro to be made.
  */
 export default async function hotbarDropDialog(doc) {
@@ -18,7 +18,7 @@ export default async function hotbarDropDialog(doc) {
   const content = await TeriockTextEditor.enrichHTML(
     await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", context),
   );
-  const choice = await TeriockDialog.prompt({
+  return TeriockDialog.prompt({
     buttons: [
       {
         action: "linked",
@@ -39,5 +39,4 @@ export default async function hotbarDropDialog(doc) {
       title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),
     },
   });
-  return choice;
 }

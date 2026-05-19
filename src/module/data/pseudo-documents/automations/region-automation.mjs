@@ -29,6 +29,10 @@ const { fields } = foundry.data;
  * @property {boolean} targeting
  * @property {number} visibility
  * @property {{enabled: boolean, type: string, priority: number}} restriction
+ * @mixes DisplayAutomation
+ * @mixes OverrideDataAutomation
+ * @mixes SelectDocumentsAutomation
+ * @mixes TriggerAutomation
  */
 export default class RegionAutomation extends mixClasses(
   CritAutomation,
@@ -61,19 +65,14 @@ export default class RegionAutomation extends mixClasses(
     "REGION",
   ];
 
-  /** @inheritDoc */
-  static get _conditions() {
-    return false;
-  }
-
-  /** @inheritDoc */
-  static get _triggerChoices() {
-    return { execution: TERIOCK.config.trigger.execution };
-  }
-
   /** @inheritdoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.Region.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { activationTime: "pre", executionOnly: true });
   }
 
   /** @inheritdoc */
@@ -276,7 +275,8 @@ export default class RegionAutomation extends mixClasses(
 
   /** @inheritDoc */
   async _preFire(scope) {
-    const region = await this.placeRegion({ execution: scope.execution });
+    const out = await super._preFire(scope);
+    const region = Array.isArray(out) && out.length ? out[0] : null;
     if (!region) {
       return;
     }
@@ -327,17 +327,5 @@ export default class RegionAutomation extends mixClasses(
       });
     }
     return data;
-  }
-
-  /**
-   * Place this automation's region.
-   * @param {object} [options]
-   * @param {object} [options.rollData]
-   * @param {BaseExecution|null} [options.execution]
-   * @returns {Promise<TeriockRegionDocument>}
-   */
-  async placeRegion(options = { execution: null, rollData: {} }) {
-    const activations = await this._getActivations(options);
-    return activations[0]?.primaryAction();
   }
 }

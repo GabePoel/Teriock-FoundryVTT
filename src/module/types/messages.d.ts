@@ -33,7 +33,7 @@ declare global {
       color?: string;
       draggable?: boolean;
       icon?: string;
-      id?: ID<CommonDocument>;
+      id?: ID<TeriockDocument>;
       img: string;
       makeTooltip?: boolean;
       name: string;
@@ -41,7 +41,7 @@ declare global {
       rescale?: boolean;
       tooltip?: string;
       type: Teriock.Documents.ChildType;
-      uuid?: UUID<CommonDocument>;
+      uuid?: UUID<TeriockDocument>;
     };
 
     /** Pieces of a group of associations within a chat message. */
@@ -72,7 +72,7 @@ declare global {
       /** The name or title to display in the message. */
       name?: string;
       /** UUID of a document that can be opened */
-      uuid?: UUID<ChildDocument>;
+      uuid?: UUID<TeriockDocument>;
     };
   }
 }

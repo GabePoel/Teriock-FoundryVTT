@@ -1,3 +1,4 @@
+import { omit } from "../../../helpers/utils.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { MacroAutomationMixin } from "./mixins/_module.mjs";
 
@@ -9,10 +10,7 @@ export default class ChatMacroAutomation extends MacroAutomationMixin(BaseAutoma
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = super.defineSchema();
-    delete schema.relation;
-    delete schema.trigger;
-    return schema;
+    return omit(super.defineSchema(), ["relation", "trigger"]);
   }
 
   /** @inheritDoc */

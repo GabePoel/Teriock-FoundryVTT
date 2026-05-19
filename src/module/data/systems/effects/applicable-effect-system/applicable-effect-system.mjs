@@ -14,6 +14,7 @@ const { fields } = foundry.data;
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ApplicableEffectSystemData}
+ * @see {DurationModel}
  */
 export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem, ThresholdDataMixin) {
   /** @inheritDoc */

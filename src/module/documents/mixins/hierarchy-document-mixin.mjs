@@ -10,7 +10,7 @@ const { Collection } = foundry.utils;
 export default function HierarchyDocumentMixin(Base) {
   return (
     /**
-     * @extends CommonDocument
+     * @extends AnyCommonDocument
      * @mixin
      * @property {HierarchySystem} system
      */
@@ -116,7 +116,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * @inheritDoc
-       * @param {CommonDocument[]} documents
+       * @param {AnyCommonDocument[]} documents
        * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
@@ -134,7 +134,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * @inheritDoc
-       * @param {CommonDocument[]} documents
+       * @param {AnyCommonDocument[]} documents
        * @param {DatabaseUpdateOperation & Teriock.System._Operation} operation
        * @param {TeriockUser} user
        * @returns {Promise<boolean|void>}
@@ -189,7 +189,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @inheritDoc
        * @param {object|HierarchyDocument[]} data
        * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
-       * @returns {Promise<void>}
+       * @returns {Promise<AnyCommonDocument[]>}
        */
       static async createDocuments(data = [], operation = {}) {
         // Pre-clean documents so they always have their `_ref` UUID available
@@ -209,7 +209,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get all subs for a given document.
-       * @param {CommonDocument|Index<CommonDocument>} document
+       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -226,7 +226,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get all sups for a given document.
-       * @param {CommonDocument|Index<CommonDocument>} document
+       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -243,7 +243,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get subs for a given document.
-       * @param {CommonDocument|Index<CommonDocument>} document
+       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -257,9 +257,9 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The sup for a given document.
-       * @param {CommonDocument|Index<CommonDocument>} document
+       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
        * @param {Collection} collection
-       * @returns {CommonDocument|undefined}
+       * @returns {AnyCommonDocument|undefined}
        */
       static findSup(document, collection) {
         if (!collection) {
@@ -345,7 +345,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Array containing all children or their indexes.
-       * @returns {ChildDocument[]}
+       * @returns {AnyChildDocument[]}
        */
       get childArray() {
         return [...super.childArray, ...(this.subs.contents || []), ...this.dependents];
@@ -633,7 +633,7 @@ export default function HierarchyDocumentMixin(Base) {
        */
       async updateChildDocuments(embeddedName, updates = [], operation = {}) {
         if (embeddedName === this.documentName) {
-          return await this.updateSubDocuments(updates, operation);
+          return this.updateSubDocuments(updates, operation);
         } else {
           return super.updateChildDocuments(embeddedName, updates, operation);
         }
@@ -651,9 +651,9 @@ export default function HierarchyDocumentMixin(Base) {
           return this.parent.updateEmbeddedDocuments(this.documentName, updates, operation);
         } else {
           if (this.inCompendium) {
-            operation.pack = this.collection.collection;
+            operation.pack = this.collection?.collection;
           }
-          return await foundry.utils.getDocumentClass(this.documentName).updateDocuments(updates, operation);
+          return foundry.utils.getDocumentClass(this.documentName).updateDocuments(updates, operation);
         }
       }
     }

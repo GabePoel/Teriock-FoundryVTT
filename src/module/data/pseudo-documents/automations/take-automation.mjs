@@ -30,6 +30,11 @@ export default class TakeAutomation extends mixClasses(
   }
 
   /** @inheritDoc */
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { activationTime: "on" });
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "take";
   }
@@ -87,11 +92,6 @@ export default class TakeAutomation extends mixClasses(
       ];
     }
     return [];
-  }
-
-  /** @inheritDoc */
-  _onFire(scope) {
-    this._activateActivations(scope);
   }
 
   /** @inheritDoc */

@@ -28,10 +28,7 @@ export default class RevitalizeAutomation extends StatAutomation {
   }
 
   /** @inheritDoc */
-  _onFire(scope) {
-    if (!this.actor.isDrained && !this.forHarm) {
-      return;
-    }
-    this._activateActivations(scope);
+  canFire(trigger) {
+    return (this.actor?.isDrained || !this.forHarm) && super.canFire(trigger);
   }
 }

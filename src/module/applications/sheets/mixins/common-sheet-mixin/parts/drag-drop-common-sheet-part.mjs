@@ -32,7 +32,7 @@ export default Base => {
 
       /**
        * Checks if some other document can be dropped on this document.
-       * @param {CommonDocument} doc
+       * @param {AnyCommonDocument} doc
        * @returns {boolean}
        */
       _canDropChild(doc) {
@@ -106,8 +106,8 @@ export default Base => {
       /**
        * Handles dropping of potential children.
        * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
-       * @param {Teriock.Sheet.DropData<CommonDocument>} dropData - The document drop data.
-       * @returns {Promise<CommonDocument|void>} Promise that resolves to the created document if successful.
+       * @param {Teriock.Sheet.DropData<AnyCommonDocument>} dropData - The document drop data.
+       * @returns {Promise<AnyCommonDocument|void>} Promise that resolves to the created document if successful.
        */
       async _onDropChild(_event, dropData) {
         /** @type {typeof ClientDocument} */

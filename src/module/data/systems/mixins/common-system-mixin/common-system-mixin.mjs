@@ -111,8 +111,8 @@ export default function CommonSystemMixin(Base) {
       }
 
       /**
-       * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} srcTypeMap
-       * @param {Record<Teriock.Documents.CommonType, CommonDocument[]>} dstTypeMap
+       * @param {Record<Teriock.Documents.CommonType, AnyCommonDocument[]>} srcTypeMap
+       * @param {Record<Teriock.Documents.CommonType, AnyCommonDocument[]>} dstTypeMap
        * @param {"diff" | "union" | "intersect" | "diffSrc" | "diffDst"} mapType
        * @returns {ChildDeltaMap}
        */

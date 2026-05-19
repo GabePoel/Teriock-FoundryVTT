@@ -13,24 +13,6 @@ export default class DurationModel extends TimeUnitModel {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Duration"];
 
   /**
-   * Trigger choices.
-   * @returns {Record<string, FormSelectOption>}
-   */
-  static get _triggerChoices() {
-    return formatDynamicSelectOptions(
-      {
-        activity: TERIOCK.config.trigger.activity,
-        combat: TERIOCK.config.trigger.combat,
-        consequence: TERIOCK.config.trigger.consequence,
-        execution: TERIOCK.config.trigger.execution,
-        impact: TERIOCK.config.trigger.impact,
-        time: TERIOCK.config.trigger.time,
-      },
-      { localize: true },
-    );
-  }
-
-  /**
    * @inheritDoc
    * @returns {Teriock.Units.UnitEntry[]}
    */
@@ -42,6 +24,24 @@ export default class DurationModel extends TimeUnitModel {
         label: "TERIOCK.MODELS.Duration.UNITS.passive",
       },
     ];
+  }
+
+  /**
+   * Trigger choices.
+   * @returns {Record<string, FormSelectOption>}
+   */
+  static get triggerChoices() {
+    return formatDynamicSelectOptions(
+      {
+        activity: TERIOCK.config.trigger.activity,
+        combat: TERIOCK.config.trigger.combat,
+        consequence: TERIOCK.config.trigger.consequence,
+        execution: TERIOCK.config.trigger.execution,
+        impact: TERIOCK.config.trigger.impact,
+        time: TERIOCK.config.trigger.time,
+      },
+      { localize: true },
+    );
   }
 
   /**
@@ -62,7 +62,7 @@ export default class DurationModel extends TimeUnitModel {
     return Object.assign(super.defineSchema(), {
       conditions: conditionRequirementsField(),
       description: new fields.StringField(),
-      triggers: new fields.SetField(new fields.StringField({ choices: this._triggerChoices })),
+      triggers: new fields.SetField(new fields.StringField({ choices: this.triggerChoices })),
     });
   }
 
@@ -81,7 +81,7 @@ export default class DurationModel extends TimeUnitModel {
    * @returns {string}
    */
   get prerequisiteString() {
-    const triggers = [...this.triggers.map(t => DurationModel._triggerChoices[t].label)];
+    const triggers = [...this.triggers.map(t => DurationModel.triggerChoices[t].label)];
     const conditions = [
       ...this.conditions.present.map(c => TERIOCK.reference.conditions[c]),
       // TODO: Localize the "Not" replacements.

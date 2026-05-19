@@ -286,6 +286,7 @@ export default function AbilityExecutionChatPart(Base) {
                 ? this.source.uuid
                 : undefined,
             _src: this.source.uuid,
+            applyIfDeattuned: true,
             automations: this.#generateEffectAutomations(crit),
             blocks: (await this.source.system.getPanelParts()).blocks,
             competence: { raw: this.competence.value },

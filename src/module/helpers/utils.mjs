@@ -485,3 +485,19 @@ export async function fromIdentifier(identifier, options = {}) {
   }
   return game.teriock.identifiers.fromIdentifier(identifier);
 }
+
+/**
+ * Construct an object from another object with certain keys removed. Only works for plain objects.
+ * @template T
+ * @template {keyof T} K
+ * @param {T} obj
+ * @param {K[]} keys
+ * @returns {Omit<T, K>}
+ */
+export function omit(obj, keys) {
+  const out = { ...obj };
+  for (const k of keys) {
+    foundry.utils.deleteProperty(out, k);
+  }
+  return out;
+}

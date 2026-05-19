@@ -76,7 +76,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
   /**
    * Add a dependent document to the registry.
    * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
-   * @param {ChildDocument} dependent - Document to track as a dependent.
+   * @param {AnyChildDocument} dependent - Document to track as a dependent.
    */
   track(idOrUuid, dependent) {
     const uuid = this.resolveDependentID(idOrUuid, dependent);

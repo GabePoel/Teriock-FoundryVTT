@@ -152,7 +152,7 @@ export default class AddDocumentsAutomation extends mixClasses(
    * @inheritDoc
    * @param {object} [options]
    * @param {AnyActor} [options.actor]
-   * @return {Promise<Teriock.System.Attachment<ChildDocument>[]>}
+   * @return {Promise<Teriock.System.Attachment<AnyChildDocument>[]>}
    */
   async choose(options = {}) {
     const uuids = await super.choose(options);

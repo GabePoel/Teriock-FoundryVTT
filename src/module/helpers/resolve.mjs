@@ -70,7 +70,7 @@ export async function resolveCollection(typeCollection) {
 
 /**
  * Ensure a document has all the predefined documents named.
- * @param {CommonDocument} document
+ * @param {AnyCommonDocument} document
  * @param {TypedIdentifier[]} identifiers
  * @returns {Promise<AnyChildDocument[]>}
  */
@@ -116,7 +116,7 @@ export async function ensureChildren(document, identifiers) {
 
 /**
  * Ensure a document has none of the predefined documents named.
- * @param {CommonDocument} document
+ * @param {AnyCommonDocument} document
  * @param {TypedIdentifier[]} identifiers
  * @returns {Promise<AnyChildDocument[]>}
  */
@@ -145,7 +145,7 @@ export async function ensureNoChildren(document, identifiers) {
 
 /**
  * Attempt to add a compendium source for some document.
- * @param {CommonDocument} document
+ * @param {AnyCommonDocument} document
  * @returns {Promise<void>}
  */
 export async function inferCompendiumSource(document) {
@@ -157,7 +157,7 @@ export async function inferCompendiumSource(document) {
 
 /**
  * Attempt to add a compendium source for some document's children.
- * @param {CommonDocument} document
+ * @param {AnyCommonDocument} document
  * @returns {Promise<void>}
  */
 export async function inferChildCompendiumSources(document) {

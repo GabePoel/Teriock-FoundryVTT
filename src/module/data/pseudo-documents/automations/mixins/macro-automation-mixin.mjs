@@ -86,11 +86,7 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       async _preFire(scope) {
-        if (scope.awaitFire) {
-          await this.executeMacro(scope);
-        } else {
-          this.executeMacro(scope);
-        }
+        await this.executeMacro(scope);
       }
 
       /** @inheritDoc */

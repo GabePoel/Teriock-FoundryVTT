@@ -188,7 +188,7 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * That document that has the most control over this one.
-       * @return {SyncDoc<CommonDocument>}
+       * @return {SyncDoc<AnyCommonDocument>}
        */
       get master() {
         return this.parent;

@@ -26,18 +26,16 @@ export default class ChangeQuantityAutomation extends mixClasses(
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
 
   /** @inheritDoc */
-  static get _initialTrigger() {
-    return "execute";
-  }
-
-  /** @inheritDoc */
-  static get _nullableTrigger() {
-    return false;
-  }
-
-  /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, {
+      initial: "execute",
+      nullable: false,
+    });
   }
 
   /** @inheritDoc */
@@ -57,11 +55,11 @@ export default class ChangeQuantityAutomation extends mixClasses(
 
   /**
    * Change the quantity of the target consumable.
-   * @param {Teriock.System.TriggerScope} [scope]
+   * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {Promise<void>}
    */
   async #changeQuantity(scope = {}) {
-    const consumable = await this.#findConsumable();
+    const consumable = await this.#findConsumable(scope);
     if (!consumable) {
       return;
     }
@@ -118,7 +116,7 @@ export default class ChangeQuantityAutomation extends mixClasses(
 
   /**
    * Find the best consumable document.
-   * @param {Teriock.System.TriggerScope} scope
+   * @param {Partial<Teriock.System.TriggerScope>} scope
    * @returns {Promise<AnyChildDocument|null>}
    */
   async #findConsumable(scope = {}) {

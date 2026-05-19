@@ -25,19 +25,14 @@ export default class SummonAutomation extends mixClasses(
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
 
-  /** @inheritDoc */
-  static get _conditions() {
-    return false;
-  }
-
-  /** @inheritDoc */
-  static get _triggerChoices() {
-    return { execution: TERIOCK.config.trigger.execution };
-  }
-
   /** @inheritdoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.Summon.LABEL";
+  }
+
+  /** @inheritDoc */
+  static get triggerMetadata() {
+    return Object.assign(super.triggerMetadata, { executionOnly: true });
   }
 
   /** @inheritdoc */

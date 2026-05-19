@@ -5,6 +5,16 @@ import { migrateValue } from "../../../shared/migrations/source-migrations.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @typedef {object} TriggerMetadata
+ * @property {"pre"|"on"|null} activationTime - Default time for to call activations for a simple trigger effect.
+ * @property {Teriock.Fields.DynamicChoices} choices - Available trigger choices to select from.
+ * @property {Teriock.System.Trigger|null} initial - Initial trigger this is set to.
+ * @property {boolean} conditions - Whether trigger has checks for present or absent conditions.
+ * @property {boolean} executionOnly - Force trigger to only have execution trigger choices. Overrides conditions.
+ * @property {boolean} nullable - Whether trigger is nullable.
+ */
+
+/**
  * Automation that hooks this into triggers.
  * @param {typeof BaseAutomation | typeof CritAutomation} Base
  */
@@ -20,54 +30,45 @@ export default function TriggerAutomationMixin(Base) {
       static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Trigger"];
 
       /**
-       * Whether to include condition restrictions on this triggering.
-       * @return {boolean}
-       */
-      static get _conditions() {
-        return true;
-      }
-
-      /** @return {string|null} */
-      static get _initialTrigger() {
-        return null;
-      }
-
-      /** @return {boolean} */
-      static get _nullableTrigger() {
-        return true;
-      }
-
-      /**
        * An intermediate getter to ensure that the allowed triggers are localized and formatted.
        * @returns {Record<string, FormSelectOption>}
        */
       static get _processedTriggerChoices() {
-        return formatDynamicSelectOptions(this._triggerChoices, {
+        const choices =
+          this.triggerMetadata.executionOnly && this.triggerMetadata.choices.execution
+            ? { execution: this.triggerMetadata.choices.execution }
+            : this.triggerMetadata.choices;
+        return formatDynamicSelectOptions(choices, {
           localize: true,
         });
       }
 
-      /**
-       * Allowed triggers.
-       * @returns {Teriock.Fields.DynamicChoices}
-       */
-      static get _triggerChoices() {
-        return {
-          activity: TERIOCK.config.trigger.activity,
-          combat: TERIOCK.config.trigger.combat,
-          consequence: TERIOCK.config.trigger.consequence,
-          execution: TERIOCK.config.trigger.execution,
-          impact: TERIOCK.config.trigger.impact,
-          protection: TERIOCK.config.trigger.protection,
-          time: TERIOCK.config.trigger.time,
-        };
-      }
-
       /** @inheritDoc */
       static get metadata() {
-        return Object.assign(super.metadata, {
-          trigger: true,
-        });
+        return Object.assign(super.metadata, { trigger: true });
+      }
+
+      /**
+       * Metadata that configures this trigger's basic setup.
+       * @returns {TriggerMetadata}
+       */
+      static get triggerMetadata() {
+        return {
+          activationTime: null,
+          choices: {
+            activity: TERIOCK.config.trigger.activity,
+            combat: TERIOCK.config.trigger.combat,
+            consequence: TERIOCK.config.trigger.consequence,
+            execution: TERIOCK.config.trigger.execution,
+            impact: TERIOCK.config.trigger.impact,
+            protection: TERIOCK.config.trigger.protection,
+            time: TERIOCK.config.trigger.time,
+          },
+          conditions: true,
+          executionOnly: false,
+          initial: null,
+          nullable: true,
+        };
       }
 
       /** @inheritDoc */
@@ -76,11 +77,11 @@ export default function TriggerAutomationMixin(Base) {
           trigger: new fields.StringField({
             blank: true,
             choices: this._processedTriggerChoices,
-            initial: this._initialTrigger,
-            nullable: this._nullableTrigger,
+            initial: this.triggerMetadata.initial,
+            nullable: this.triggerMetadata.nullable,
           }),
         });
-        if (this._conditions) {
+        if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
           schema.conditions = conditionRequirementsField();
         }
         return schema;
@@ -105,7 +106,7 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {boolean}
        */
       get _conditionsActive() {
-        if (this.document.actor && this.constructor._conditions) {
+        if (this.document.actor && this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
           for (const c of this.conditions.present) {
             if (!this.document.actor.statuses.has(c)) {
               return false;
@@ -148,7 +149,7 @@ export default function TriggerAutomationMixin(Base) {
       get _triggerPaths() {
         const paths = ["trigger"];
         if (this._source.trigger) {
-          if (this.constructor._conditions) {
+          if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
             paths.push(...["conditions.present", "conditions.absent"]);
           }
         }
@@ -169,11 +170,20 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /**
+       * Instance access to trigger metadata.
+       * @returns {TriggerMetadata}
+       */
+      get triggerMetadata() {
+        return this.constructor.triggerMetadata;
+      }
+
+      /**
        * Activate all the activations that would be generated by this trigger automation.
        * @param {Partial<Teriock.Automations.GetActivationsOptions> & Teriock.System.TriggerScope} [options]
-       * @returns {Promise<void>}
+       * @returns {Promise<any[]>}
        */
       async _activateActivations(options = {}) {
+        const out = [];
         const activations = await this._getActivations(options);
         const actor = options.execution?.actor ?? options.actor ?? this.actor;
         const token = options.execution?.executor ?? actor?.defaultToken;
@@ -184,8 +194,9 @@ export default function TriggerAutomationMixin(Base) {
           if (token) {
             a.tokens = [token];
           }
-          await a.primaryAction();
+          out.push(await a.primaryAction());
         }
+        return out;
       }
 
       /**
@@ -215,9 +226,13 @@ export default function TriggerAutomationMixin(Base) {
 
       /**
        * What happens when this automation is triggered.
-       * @param {Teriock.System.TriggerScope} _scope
+       * @param {Teriock.System.TriggerScope} scope
        */
-      _onFire(_scope) {}
+      _onFire(scope) {
+        if (this.triggerMetadata.activationTime === "on") {
+          this._activateActivations(scope);
+        }
+      }
 
       /** @inheritDoc */
       _onFireTrigger(trigger, scope) {
@@ -229,16 +244,24 @@ export default function TriggerAutomationMixin(Base) {
 
       /**
        * What happens before this automation is triggered.
-       * @param {Teriock.System.TriggerScope} _scope
-       * @returns {Promise<void>}
+       * @param {Teriock.System.TriggerScope} scope
+       * @returns {Promise<void|any[]>}
        */
-      async _preFire(_scope) {}
+      async _preFire(scope) {
+        if (this.triggerMetadata.activationTime === "pre") {
+          return await this._activateActivations(scope);
+        }
+      }
 
       /** @inheritDoc */
       async _preFireTrigger(trigger, scope) {
         await super._preFireTrigger(trigger, scope);
         if (this.canFire(trigger)) {
-          await this._preFire(scope);
+          if (scope.awaitFire) {
+            return this._preFire(scope);
+          } else {
+            this._preFire(scope);
+          }
         }
       }
 

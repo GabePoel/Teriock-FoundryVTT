@@ -100,7 +100,7 @@ declare global {
 
     export type UseExternalOptions = DocumentUseOptions &
       Teriock.System.ResolveDocumentsOptions & {
-        uuid?: UUID<ChildDocument>;
+        uuid?: UUID<TeriockDocument>;
       };
 
     export type TakeHarmOptions = {

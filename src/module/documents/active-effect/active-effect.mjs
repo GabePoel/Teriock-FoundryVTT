@@ -48,7 +48,7 @@ export default class TeriockActiveEffect extends mixClasses(
    */
   get isStatus() {
     return Object.values(CONFIG.statusEffects)
-      .map(s => s._id)
+      .map(s => s?._id)
       .includes(this.id);
   }
 

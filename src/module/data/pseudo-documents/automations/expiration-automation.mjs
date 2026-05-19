@@ -1,11 +1,14 @@
-import { formatDynamicSelectOptions } from "../../../helpers/utils.mjs";
 import * as builders from "../../fields/helpers/builders.mjs";
 import { conditionRequirementsField } from "../../fields/helpers/builders.mjs";
+import { DurationModel } from "../../models/unit-models/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * Automation which adds additional instances in which an effect can expire. This is only used in building effects
+ * and not called directly to see if effects this is present on should expire.
+ * @see {DurationModel}
  * @property {CombatExpiration} combat
  * @property {Set<string>} triggers
  * @property {{absent: Set<Teriock.Keys.Condition>, present: Set<Teriock.Keys.Condition>}} conditions
@@ -14,24 +17,6 @@ const { fields } = foundry.data;
 export default class ExpirationAutomation extends CritAutomation {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Expiration"];
-
-  /**
-   * Trigger choices.
-   * @returns {Record<string, FormSelectOption>}
-   */
-  static get _triggerChoices() {
-    return formatDynamicSelectOptions(
-      {
-        activity: TERIOCK.config.trigger.activity,
-        combat: TERIOCK.config.trigger.combat,
-        consequence: TERIOCK.config.trigger.consequence,
-        execution: TERIOCK.config.trigger.execution,
-        impact: TERIOCK.config.trigger.impact,
-        time: TERIOCK.config.trigger.time,
-      },
-      { localize: true },
-    );
-  }
 
   /** @inheritDoc */
   static get LABEL() {
@@ -59,7 +44,7 @@ export default class ExpirationAutomation extends CritAutomation {
         conditions: new fields.BooleanField(),
         triggers: new fields.BooleanField(),
       }),
-      triggers: new fields.SetField(new fields.StringField({ choices: this._triggerChoices })),
+      triggers: new fields.SetField(new fields.StringField({ choices: DurationModel.triggerChoices })),
     });
   }
 

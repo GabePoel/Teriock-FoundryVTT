@@ -1,12 +1,12 @@
 /**
  * A mixin that can be used by both documents and data models to propagate shared operations.
- * @param {typeof CommonDocument|typeof CommonSystem} Base
+ * @param {typeof AnyCommonDocument|typeof CommonSystem} Base
  */
 export default function PropagationDataMixin(Base) {
   return (
     /**
      * @mixin
-     * @param {CommonDocument|CommonSystem} Base
+     * @param {AnyCommonDocument|CommonSystem} Base
      */
     class PropagationData extends Base {
       /**
@@ -105,7 +105,7 @@ export default function PropagationDataMixin(Base) {
       }
 
       /**
-       * Data preparation that happens after `prepareDerivedData()`. This allows {@link ChildDocument} documents to
+       * Data preparation that happens after `prepareDerivedData()`. This allows {@link AnyChildDocument} documents to
        * apply changes from the parent {@link TeriockActor} and should be primarily used for that purpose.
        * {@link TeriockActor}s are the only documents that call this directly. In all other cases, it is only called
        * if the parent document calls it.

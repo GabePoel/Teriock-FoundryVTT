@@ -48,6 +48,7 @@ import {
   TeriockActiveEffect,
   TeriockActor,
   TeriockCard,
+  TeriockCards,
   TeriockChatMessage,
   TeriockCombat,
   TeriockFolder,
@@ -69,6 +70,7 @@ declare global {
   const TeriockActiveEffect: TeriockActiveEffect;
   const TeriockActor: TeriockActor;
   const TeriockCard: TeriockCard;
+  const TeriockCards: TeriockCards;
   const TeriockChatMessage: TeriockChatMessage;
   const TeriockCombat: TeriockCombat;
   const TeriockFolder: TeriockFolder;
@@ -311,15 +313,14 @@ declare global {
 // ==============
 
 declare global {
-  export type ParentDocument = TeriockActor | TeriockItem;
   export type ParentDocumentName = "Actor" | "Item";
-  export type ChildDocument = TeriockActiveEffect | TeriockItem;
   export type ChildDocumentName = "ActiveEffect" | "Item";
-  export type CommonDocument = TeriockActiveEffect | TeriockActor | TeriockItem;
   export type CommonDocumentName = "ActiveEffect" | "Actor" | "Item";
   export type TeriockDocument =
     | TeriockActiveEffect
     | TeriockActor
+    | TeriockCard
+    | TeriockCards
     | TeriockChatMessage
     | TeriockCombat
     | TeriockFolder
@@ -328,6 +329,7 @@ declare global {
     | TeriockJournalEntryCategory
     | TeriockJournalEntryPage
     | TeriockMacro
+    | TeriockRegionDocument
     | TeriockScene
     | TeriockTokenDocument
     | TeriockUser;

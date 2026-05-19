@@ -38,6 +38,11 @@ export default function GrantedSystemMixin(Base) {
       get _isSuppressedUnequipped() {
         return !this.applyIfUnequipped && super._isSuppressedUnequipped;
       }
+
+      /** @inheritDoc */
+      get needsAttunement() {
+        return !this.applyIfDeattuned;
+      }
     }
   );
 }

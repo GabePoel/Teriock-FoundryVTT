@@ -60,7 +60,7 @@ export default class TeriockMacro extends mixClasses(
 
   /**
    * Create a general use macro from the given document.
-   * @param {ChildDocument} doc
+   * @param {AnyChildDocument} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async getGeneralUseMacro(doc) {
@@ -78,7 +78,7 @@ export default class TeriockMacro extends mixClasses(
 
   /**
    * Create a linked use macro from the given document.
-   * @param {ChildDocument} doc
+   * @param {AnyChildDocument} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async getLinkedUseMacro(doc) {
@@ -93,7 +93,7 @@ export default class TeriockMacro extends mixClasses(
 
   /**
    * Create a general use macro from the given document.
-   * @param {ChildDocument} doc
+   * @param {AnyChildDocument} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async makeGeneralUseMacro(doc) {
@@ -121,7 +121,7 @@ export default class TeriockMacro extends mixClasses(
 
   /**
    * Create a linked use macro from the given document.
-   * @param {ChildDocument} doc
+   * @param {AnyChildDocument} doc
    * @returns {Promise<TeriockMacro>}
    */
   static async makeLinkedUseMacro(doc) {
@@ -176,7 +176,7 @@ export default class TeriockMacro extends mixClasses(
 
   /**
    * Get a document from its UUID and use it.
-   * @param {UUID<ChildDocument>} uuid
+   * @param {UUID<AnyChildDocument>} uuid
    * @param {Teriock.Interaction.UseOptions} [options]
    * @returns {Promise<void>}
    */

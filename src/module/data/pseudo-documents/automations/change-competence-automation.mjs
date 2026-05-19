@@ -1,3 +1,4 @@
+import { omit } from "../../../helpers/utils.mjs";
 import { IdentifierField } from "../../fields/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 import { CompetenceAutomationMixin } from "./mixins/_module.mjs";
@@ -20,11 +21,9 @@ export default class ChangeCompetenceAutomation extends CompetenceAutomationMixi
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = Object.assign(super.defineSchema(), {
-      identifier: new IdentifierField({ allowType: true }),
-    });
-    delete schema.overrideCompetence;
-    return schema;
+    return omit(Object.assign(super.defineSchema(), { identifier: new IdentifierField({ allowType: true }) }), [
+      "overrideCompetence",
+    ]);
   }
 
   /** @inheritDoc */

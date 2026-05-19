@@ -163,10 +163,10 @@ export default function ChildSystemMixin(Base) {
 
       /**
        * @inheritDoc
-       * @returns {ChildDocument}
+       * @returns {AnyChildDocument}
        */
       get parent() {
-        return /** @type {ChildDocument} */ super.parent;
+        return /** @type {AnyChildDocument} */ super.parent;
       }
 
       /** @inheritDoc */

@@ -4,7 +4,7 @@ import { TeriockTextEditor } from "../../ux/_module.mjs";
 const { ImagePopout } = foundry.applications.apps;
 
 /**
- * {@link ChildDocument} sheet mixin.
+ * {@link AnyChildDocument} sheet mixin.
  * @param {typeof CommonSheet} Base
  */
 export default function ChildSheetMixin(Base) {
@@ -13,7 +13,7 @@ export default function ChildSheetMixin(Base) {
      * @extends {CommonSheet}
      * @mixes ConfigButtonSheet
      * @mixin
-     * @property {ChildDocument} document
+     * @property {AnyChildDocument} document
      */
     class ChildSheet extends Base {
       /**

@@ -80,18 +80,6 @@ export default class PropertySystem extends mixClasses(
     return super.migrateData(source, options, state);
   }
 
-  /**
-   * Metaphysics tags.
-   * @returns {Teriock.Sheet.DisplayTag[]}
-   */
-  get _metaphysicsTags() {
-    const tags = [];
-    if (this.mundane) {
-      tags.push("TERIOCK.SYSTEMS.BaseEffect.FIELDS.mundane.label");
-    }
-    return tags;
-  }
-
   /** @inheritDoc */
   get color() {
     return TERIOCK.config.effect.form[this.form].color;
@@ -103,17 +91,12 @@ export default class PropertySystem extends mixClasses(
   }
 
   /** @inheritDoc */
-  get displayTags() {
-    return [...super.displayTags, ...this._metaphysicsTags];
-  }
-
-  /** @inheritDoc */
   get displayToggles() {
     return [
-      "system.applyIfShattered",
       "system.applyIfDampened",
+      "system.applyIfDeattuned",
+      "system.applyIfShattered",
       "system.applyIfUnequipped",
-      "system.mundane",
       "system.consumable",
       ...super.displayToggles,
     ];
@@ -148,6 +131,11 @@ export default class PropertySystem extends mixClasses(
       return "Actor";
     }
     return super.modifies;
+  }
+
+  /** @inheritDoc */
+  get needsAttunement() {
+    return this.form !== "intrinsic" && super.needsAttunement;
   }
 
   /** @inheritDoc */

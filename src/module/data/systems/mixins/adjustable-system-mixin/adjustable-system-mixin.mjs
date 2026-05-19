@@ -41,8 +41,8 @@ export default function AdjustableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      get _isSuppressedDeattuned() {
-        return this.form !== "intrinsic" && super._isSuppressedDeattuned;
+      get _isSuppressedDampened() {
+        return this.form !== "intrinsic" && super._isSuppressedDampened;
       }
 
       /** @inheritDoc */
@@ -60,6 +60,11 @@ export default function AdjustableSystemMixin(Base) {
           tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.improved"));
         }
         return [...tags, ...super._nameTags];
+      }
+
+      /** @inheritDoc */
+      get needsAttunement() {
+        return this.form !== "intrinsic" && super.needsAttunement;
       }
     }
   );

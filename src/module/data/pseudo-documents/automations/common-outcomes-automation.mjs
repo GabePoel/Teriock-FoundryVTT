@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { commands } from "../../../helpers/interaction/_module.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
 import * as activations from "../activations/command-activations.mjs";
 import BaseAutomation from "./abstract/base-automation.mjs";
@@ -59,9 +58,7 @@ export default class CommonOutcomesAutomation extends mixClasses(
     if (!shouldApply) {
       return;
     }
-    for (const c of this.common) {
-      await commands[c].primary(actor);
-    }
+    await this._activateActivations(scope);
   }
 
   /** @inheritDoc */

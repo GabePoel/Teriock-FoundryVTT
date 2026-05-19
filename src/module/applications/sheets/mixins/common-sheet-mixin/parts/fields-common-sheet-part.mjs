@@ -8,7 +8,7 @@ export default Base => {
     /**
      * @extends {TeriockDocumentSheet}
      * @mixin
-     * @property {CommonDocument} document
+     * @property {AnyCommonDocument} document
      */
     class FieldsCommonSheetPart extends Base {
       /**
@@ -25,8 +25,8 @@ export default Base => {
         const { path } = target.dataset;
         const value = foundry.utils.getProperty(this.document, path);
         const schema = this.document.getSchema(path);
-        const min = schema.min ?? 0;
-        const max = schema.max ?? Infinity;
+        const min = schema?.min ?? 0;
+        const max = schema?.max ?? Infinity;
         const delta = max - min + 1;
         const adjusted = ((value + min + change + delta) % delta) - min;
         await this.document.update({ [path]: adjusted });
