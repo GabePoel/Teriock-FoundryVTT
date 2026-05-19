@@ -38,7 +38,7 @@ export default class ChatStatusAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ChatStatus.LABEL";
+    return "TYPES.ActiveEffect.condition";
   }
 
   /** @inheritDoc */

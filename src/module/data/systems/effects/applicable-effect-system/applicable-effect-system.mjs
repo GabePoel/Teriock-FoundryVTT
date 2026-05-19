@@ -137,7 +137,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   get messageBlocks() {
-    return [...super.messageBlocks, this.blocks];
+    return [...super.messageBlocks, ...this.blocks];
   }
 
   /** @inheritDoc */
@@ -198,9 +198,9 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   async getPanelParts() {
-    const parts = await super.getPanelParts();
-    parts.bars = [this._durationBar, this._statusBar];
-    return parts;
+    return Object.assign(await super.getPanelParts(), {
+      bars: [this._durationBar, this._statusBar],
+    });
   }
 
   /**
