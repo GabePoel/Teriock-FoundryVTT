@@ -24,18 +24,16 @@ export default class PropertySheet extends mixClasses(BaseEffectSheet, mixins.Wi
   };
 
   /** @inheritDoc */
-  static PARTS = {
-    ...this.HEADER_PARTS,
-    menu: { template: "teriock/sheets/effects/property/menu" },
-    ...this.CONTENT_PARTS,
-  };
-
-  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.isEditable) {
       return;
     }
     this._connectBuildContextMenu(".form-type-box", TERIOCK.config.effect.form, "system.form", "click");
+  }
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    return Object.assign(await super._prepareContext(options), { wideToggles: true });
   }
 }

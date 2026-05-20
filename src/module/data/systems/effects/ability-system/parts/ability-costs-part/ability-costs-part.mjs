@@ -169,6 +169,22 @@ export default Base => {
         ];
       }
 
+      /**
+       * Cost display inputs.
+       * @returns {Teriock.Sheet.DisplayField[]}
+       */
+      get _displayInputsCosts() {
+        return [
+          ...Object.keys(TERIOCK.config.cost.primary.keys).map(k => `system.costs.primary.${k}.type`),
+          ...Object.keys(TERIOCK.config.cost.components.keys).map(k => `system.costs.components.${k}.type`),
+        ];
+      }
+
+      /** @inheritDoc */
+      get displayInputs() {
+        return [...super.displayInputs, ...this._displayInputsCosts];
+      }
+
       /** @inheritDoc */
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {

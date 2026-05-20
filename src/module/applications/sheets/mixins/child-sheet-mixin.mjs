@@ -163,9 +163,12 @@ export default function ChildSheetMixin(Base) {
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         await this._prepareDisplayFields(context);
-        context.displayToggles = this.#expandFields(this.document.system.displayToggles);
-        context.displayTags = this.#expandTags(this.document.system.displayTags);
-        return context;
+        return Object.assign(context, {
+          displayButtons: this.document.system.displayButtons,
+          displayInputs: this.#expandFields(this.document.system.displayInputs),
+          displayTags: this.#expandTags(this.document.system.displayTags),
+          displayToggles: this.#expandFields(this.document.system.displayToggles),
+        });
       }
 
       /**

@@ -6,9 +6,17 @@
     {{/if}}
   "
 >
-  <div class="ab-menu-content">
+  <div
+    class="
+      ab-menu-content
+      {{#if wideToggles}}
+        wide-toggles
+      {{/if}}
+    "
+  >
     {{> "teriock/sheets/shared/display-toggles"}}
-    {{#if (exists displayFieldButtons)}}
+    {{> "teriock/sheets/shared/display-inputs"}}
+    {{#if (or (exists displayFieldButtons) (exists displayButtons))}}
       <div class="ab-menu-bar">
         <div class="ttable ab-button-grid menu-large-grid">
           {{> "teriock/sheets/shared/display-field-buttons"}}

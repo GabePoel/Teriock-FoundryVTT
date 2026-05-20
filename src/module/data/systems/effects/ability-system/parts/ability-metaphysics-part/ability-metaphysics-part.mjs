@@ -12,6 +12,7 @@ export default Base => {
     /**
      * @extends {BaseEffectSystem}
      * @extends {Teriock.Models.AbilityTagsPartData}
+     * @mixes AdjustableSystem
      * @mixin
      */
     class AbilityMetaphysicsPart extends Base {
@@ -30,24 +31,18 @@ export default Base => {
               choices: TERIOCK.reference.elements,
             }),
           ),
-          powerSources: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.reference.powerSources,
-            }),
-          ),
         });
       }
 
       /** @inheritDoc */
+      get _displayInputsMetaphysics() {
+        return [...super._displayInputsMetaphysics, "system.elements", "system.effectTypes"];
+      }
+
+      /** @inheritDoc */
       get _metaphysicsTags() {
-        const tags = [];
+        const tags = super._metaphysicsTags;
         tags.push(
-          ...Array.from(this.powerSources).map(t => {
-            return {
-              label: TERIOCK.reference.powerSources[t],
-              tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
-            };
-          }),
           ...Array.from(this.elements).map(t => {
             return {
               label: TERIOCK.reference.elements[t],
@@ -73,11 +68,6 @@ export default Base => {
         return tags;
       }
 
-      /** @inheritDoc */
-      get color() {
-        return TERIOCK.config.effect.form[this.form].color;
-      }
-
       /**
        * A string representing the elements for this ability.
        * @returns {string}
@@ -92,10 +82,6 @@ export default Base => {
       /** @inheritDoc */
       getLocalRollData() {
         const data = super.getLocalRollData();
-        Object.assign(data, {
-          [`form.${this.form}`]: 1,
-          form: this.form,
-        });
         // Add elements
         for (const element of this.elements) {
           data[`element.${element}`] = 1;
@@ -104,10 +90,6 @@ export default Base => {
         // Add effect types
         for (const effectType of this.effectTypes) {
           data[`effect.${effectType}`] = 1;
-        }
-        // Add power sources
-        for (const powerSource of this.powerSources) {
-          data[`power.${powerSource}`] = 1;
         }
         return data;
       }

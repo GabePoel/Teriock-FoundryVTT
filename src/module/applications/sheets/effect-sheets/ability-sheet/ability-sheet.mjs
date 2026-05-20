@@ -36,9 +36,7 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
   /** @inheritDoc */
   static PARTS = {
     mask: { template: "teriock/sheets/effects/ability/elder-sorcery-mask" },
-    ...this.HEADER_PARTS,
-    menu: { template: "teriock/sheets/effects/ability/menu" },
-    ...this.CONTENT_PARTS,
+    ...super.PARTS,
   };
 
   /**

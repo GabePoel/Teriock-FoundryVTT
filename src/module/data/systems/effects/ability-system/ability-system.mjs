@@ -123,6 +123,23 @@ export default class AbilitySystem extends mixClasses(
   }
 
   /** @inheritDoc */
+  get displayButtons() {
+    const buttons = super.displayButtons;
+    if (!this.expansion.type) {
+      buttons.push({
+        classes: "ab-expansion-button",
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
+      });
+    } else if (!this.expansion.cap) {
+      buttons.push({
+        classes: "ab-expansion-cap-button",
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label",
+      });
+    }
+    return buttons;
+  }
+
+  /** @inheritDoc */
   get displayFields() {
     const fields = [
       {
@@ -194,7 +211,6 @@ export default class AbilitySystem extends mixClasses(
         {
           classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
           dataset: {
-            action: "updatePaths",
             icon: TERIOCK.display.icons.ui.numerical,
             paths: "system.upgrades.score.attribute system.upgrades.score.value",
             title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
@@ -205,7 +221,6 @@ export default class AbilitySystem extends mixClasses(
         {
           classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
           dataset: {
-            action: "updatePaths",
             icon: TERIOCK.display.icons.competence.fluent,
             paths: "system.upgrades.competence.attribute system.upgrades.competence.value",
             title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update"),

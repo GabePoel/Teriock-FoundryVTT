@@ -9,6 +9,8 @@ declare global {
       improvement: string;
       /** <schema> Limitation description */
       limitation: string;
+      /** <schema> Power sources that must be available in order for this ability to work */
+      powerSources: Set<Teriock.Keys.PowerSource>;
     };
   }
 }

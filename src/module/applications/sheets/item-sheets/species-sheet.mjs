@@ -29,13 +29,6 @@ export default class SpeciesSheet extends mixClasses(BaseItemSheet, mixins.WikiB
   };
 
   /** @inheritDoc */
-  static PARTS = {
-    ...this.HEADER_PARTS,
-    menu: { template: "teriock/sheets/items/species/menu" },
-    ...this.CONTENT_PARTS,
-  };
-
-  /** @inheritDoc */
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,

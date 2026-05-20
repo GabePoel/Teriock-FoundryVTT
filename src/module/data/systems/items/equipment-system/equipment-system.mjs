@@ -143,6 +143,11 @@ export default class EquipmentSystem extends mixClasses(
   }
 
   /** @inheritDoc */
+  get displayInputs() {
+    return ["system.equipmentClasses", ...super.displayInputs];
+  }
+
+  /** @inheritDoc */
   get displayTags() {
     return [...super.displayTags, ...this._identificationTags, ...this._attunableTags];
   }

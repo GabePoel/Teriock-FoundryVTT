@@ -82,14 +82,40 @@ export default function ChildSystemMixin(Base) {
         return this.parent.master?.documentName === "Actor" ? "" : super._masterText;
       }
 
-      /** @returns {Teriock.Sheet.DisplayTag[]} */
-      get displayTags() {
+      /**
+       * Metaphysics tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _metaphysicsTags() {
+        return [];
+      }
+
+      /**
+       * Status tags.
+       * @returns {Teriock.Sheet.DisplayTag[]}
+       */
+      get _statusTags() {
         return [
           {
             label: this.parent.active ? "TERIOCK.SHEETS.Common.TAGS.active" : "TERIOCK.SHEETS.Common.TAGS.inactive",
             tooltip: "TERIOCK.SHEETS.Child.DISPLAY.activeStatus",
           },
         ];
+      }
+
+      /** @returns {Teriock.Sheet.DisplayButton[]} */
+      get displayButtons() {
+        return [];
+      }
+
+      /** @returns {Teriock.Sheet.DisplayField[]} */
+      get displayInputs() {
+        return [];
+      }
+
+      /** @returns {Teriock.Sheet.DisplayTag[]} */
+      get displayTags() {
+        return this._statusTags;
       }
 
       /** @returns {Teriock.Sheet.DisplayField[]} */

@@ -131,6 +131,24 @@ export default class SpeciesSystem extends mixClasses(
   }
 
   /** @inheritDoc */
+  get displayButtons() {
+    const buttons = super.displayButtons;
+    if (typeof this.size.min !== "number" && typeof this.size.min !== "number") {
+      buttons.push({
+        classes: "ab-size-button",
+        label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label",
+      });
+    }
+    if (!this.adult) {
+      buttons.push({
+        classes: "ab-lifespan-button",
+        label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
+      });
+    }
+    return buttons;
+  }
+
+  /** @inheritDoc */
   get displayFields() {
     return [
       "system.hpIncrease",
@@ -140,6 +158,11 @@ export default class SpeciesSystem extends mixClasses(
       "system.appearance",
       "system.description",
     ];
+  }
+
+  /** @inheritDoc */
+  get displayInputs() {
+    return [...super.displayInputs, "system.traits", "system.transformation.img"];
   }
 
   /** @inheritDoc */

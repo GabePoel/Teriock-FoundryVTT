@@ -155,6 +155,14 @@ export default function ArmamentSystemMixin(Base) {
       }
 
       /**
+       * Armament display inputs.
+       * @returns {Teriock.Sheet.DisplayField[]}
+       */
+      get _displayInputsArmament() {
+        return ["system.fightingStyle"];
+      }
+
+      /**
        * Equipment classes tags.
        * @returns {Teriock.Sheet.DisplayTag[]}
        */
@@ -210,6 +218,45 @@ export default function ArmamentSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      get displayButtons() {
+        const buttons = super.displayButtons;
+        if (!formulaExists(this.damage.base)) {
+          buttons.push({
+            classes: "ab-damage-button",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
+          });
+        }
+        if (!formulaExists(this._source.damage.twoHanded)) {
+          buttons.push({
+            classes: "ab-two-handed-damage-button",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
+          });
+        }
+        if (!this.av.raw) {
+          buttons.push({
+            classes: "ab-av-button",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
+          });
+        }
+        if (!this.bv.raw) {
+          buttons.push({
+            classes: "ab-bv-button",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
+          });
+        }
+        if (
+          (formulaExists(this.damage.base) || formulaExists(this.damage.twoHanded)) &&
+          !formulaExists(this.hitBonus)
+        ) {
+          buttons.push({
+            classes: "ab-hit-button",
+            label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
+          });
+        }
+        return buttons;
+      }
+
+      /** @inheritDoc */
       get displayFields() {
         return [
           "system.notes",
@@ -223,6 +270,11 @@ export default function ArmamentSystemMixin(Base) {
             path: "system.specialRules",
           },
         ];
+      }
+
+      /** @inheritDoc */
+      get displayInputs() {
+        return [...super.displayInputs, ...this._displayInputsArmament];
       }
 
       /** @inheritDoc */

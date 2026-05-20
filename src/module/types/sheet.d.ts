@@ -14,6 +14,12 @@ declare global {
 
     export type DisplayField = string | Partial<FancyDisplayField>;
 
+    export type DisplayButton = {
+      action?: string;
+      classes: string;
+      label: string;
+    };
+
     export type FancyDisplayTag = {
       label: string;
       tooltip?: string;

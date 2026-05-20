@@ -12,8 +12,6 @@ declare global {
       elderSorceryIncant: string;
       /** <schema> Elements of this ability */
       elements: Set<Teriock.Keys.Element>;
-      /** <schema> Power sources that must be available in order for this ability to work */
-      powerSources: Set<Teriock.Keys.PowerSource>;
     };
   }
 }

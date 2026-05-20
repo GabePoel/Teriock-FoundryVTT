@@ -85,13 +85,6 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
   };
 
   /** @inheritDoc */
-  static PARTS = {
-    ...this.HEADER_PARTS,
-    menu: { template: "teriock/sheets/items/equipment/menu" },
-    ...this.CONTENT_PARTS,
-  };
-
-  /** @inheritDoc */
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,

@@ -97,12 +97,13 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
     return !!(this.parent.parent?.type === "equipment" && !this.parent.parent.system.equipped);
   }
 
-  /**
-   * Metaphysics tags.
-   * @returns {Teriock.Sheet.DisplayTag[]}
-   */
-  get _metaphysicsTags() {
-    return this.needsAttunement ? ["TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true"] : [];
+  /** @inheritDoc */
+  get _statusTags() {
+    const tags = super._statusTags;
+    if (this.needsAttunement) {
+      tags.push("TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true");
+    }
+    return tags;
   }
 
   /**

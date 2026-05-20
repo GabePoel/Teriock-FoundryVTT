@@ -67,9 +67,31 @@ export default Base => {
         return super.migrateData(source, options, state);
       }
 
+      /**
+       * Upgrades display inputs.
+       * @returns {Teriock.Sheet.DisplayField[]}
+       * @private
+       */
+      get _displayInputsUpgrades() {
+        const inputs = ["system.upgrades.score.attribute"];
+        if (this.upgrades.score.attribute) {
+          inputs.push("system.upgrades.score.value");
+        }
+        inputs.push("system.upgrades.competence.attribute");
+        if (this.upgrades.competence.attribute) {
+          inputs.push("system.upgrades.competence.value");
+        }
+        return inputs;
+      }
+
       /** @inheritDoc */
       get canChange() {
         return super.canChange || !!this.upgrades.score.attribute || !!this.upgrades.competence.attribute;
+      }
+
+      /** @inheritDoc */
+      get displayInputs() {
+        return [...super.displayInputs, ...this._displayInputsUpgrades];
       }
 
       /** @inheritDoc */

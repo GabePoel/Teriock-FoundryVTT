@@ -81,11 +81,6 @@ export default class PropertySystem extends mixClasses(
   }
 
   /** @inheritDoc */
-  get color() {
-    return TERIOCK.config.effect.form[this.form].color;
-  }
-
-  /** @inheritDoc */
   get displayFields() {
     return ["system.description", ...this.constructor._adjustableTextFields];
   }

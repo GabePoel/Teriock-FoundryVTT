@@ -16,11 +16,4 @@ export default class BodySheet extends ArmamentSheet {
     classes: ["body"],
     window: { icon: makeIconClass(documentConfig.body.icon, "title") },
   };
-
-  /** @inheritDoc */
-  static PARTS = {
-    ...this.HEADER_PARTS,
-    menu: { template: "teriock/sheets/items/body/menu" },
-    ...this.CONTENT_PARTS,
-  };
 }
