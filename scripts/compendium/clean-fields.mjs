@@ -80,6 +80,11 @@ function cleanCommon(doc) {
     delete doc.system.consumptionAmount;
   }
 
+  // Clean Combat Tags
+  if (!doc.system.vitals) {
+    delete doc.system.vitals;
+  }
+
   // Clean Retired Tags
   delete doc.system.imports;
 }
@@ -104,6 +109,12 @@ function cleanActiveEffect(doc) {
   }
   if (doc.system.revealed) {
     delete doc.system.revealed;
+  }
+  if (doc.system.mundane) {
+    doc.system.applyIfDeattuned = true;
+  }
+  if (!doc.system.applyIfDeattuned) {
+    delete doc.system.applyIfDeattuned;
   }
 }
 
@@ -384,6 +395,14 @@ function cleanAbility(doc) {
   delete doc.system.duration.stationary;
   if (doc.system.effectTypes) {
     delete doc.system.effects;
+  }
+
+  // Clean Grant Tags
+  if (!doc.system.grantUse) {
+    delete doc.system.grantUse;
+  }
+  if (!doc.system.grantOnly) {
+    delete doc.system.grantOnly;
   }
 }
 

@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     effects:
       - _id: 4357qcXY1lZHIORs
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -45,11 +45,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: beastly-strength
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
@@ -80,7 +78,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/clumsy.webp
         name: Clumsy
         system:
@@ -99,11 +97,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantUse: false
           identifier: clumsy
           interaction: manifest
           maneuver: passive
-          mundane: false
           piercing:
             raw: 0
           powerSources:
@@ -126,7 +122,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -145,11 +141,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantUse: false
           identifier: dense-intelligence
           interaction: manifest
           maneuver: passive
-          mundane: false
           piercing:
             raw: 0
           powerSources:
@@ -172,37 +166,16 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: executor
-              override:
-                combat: true
-                conditions: false
-                triggers: false
-              type: expiration
             sGyei1adB2IsKjZP:
               _id: sGyei1adB2IsKjZP
-              data: '{ "name": "Lighted Duel Effect" }'
-              display:
-                label: Apply Lighted
               overrideCompetence: false
-              overrideData: true
-              preventEffect: false
+              overrideData: false
+              preventEffect: true
               preventFeat: false
               preventThreshold: false
               type: modifyEffect
@@ -218,7 +191,7 @@ items:
               _id: 747b3e9c9b617af6
               executor: true
               multi: false
-              relation: include
+              relation: apply
               status: lighted
               target: false
               type: status
@@ -229,6 +202,9 @@ items:
           duration:
             raw: '0'
             unit: unlimited
+          effectTypes:
+            - duelModifying
+            - spiritual
           executionTime:
             base: a1
             slow:
@@ -238,11 +214,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: duel
           interaction: manifest
           maneuver: active
-          mundane: false
           overview:
             base: >-
               <p>You challenge the target to advance and fight you. They may
@@ -251,8 +225,10 @@ items:
               @L[Condition:Dueling]{dueling} with you. If they choose not to or
               are unable to do so, then they are considered to have "forfeited"
               the [[lookup name style=lc]] (but are not considered to have
-              "lost" it) and become @L[Condition:Lighted]{lighted} to you until
-              the end of your next @L[Core:Turns]{turn}.</p>
+              "lost" it). Any creature that forfeits this [[lookup name
+              style=lc]] becomes @L[Condition:Lighted]{lighted} to each of their
+              would-be opponents in the [[lookup name style=lc]] until the end
+              of that opponent's next @L[Core:Turns]{turn}.</p>
             proficient: >-
               <p>You may also @L[Ability:Move]{Move} or make a
               @L[Category:Single action abilities]{single action}
@@ -283,7 +259,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/enhanced-leaping.webp
         name: Enhanced Leaping
         system:
@@ -323,11 +299,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: enhanced-leaping
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You vertically leap at @L[Core:Movement Speed]{full speed} and
@@ -350,7 +324,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -369,11 +343,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: normal-movement
           interaction: manifest
           maneuver: passive
-          mundane: false
           piercing:
             raw: 0
           powerSources:
@@ -396,7 +368,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -415,11 +387,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: normal-perception
           interaction: manifest
           maneuver: passive
-          mundane: false
           piercing:
             raw: 0
           powerSources:
@@ -442,7 +412,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
         name: Outsider Regenerating
         system:
@@ -483,12 +453,10 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: outsider-regenerating
           interaction: manifest
           limitation: <p>In sunlight only.</p>
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>At the start of each of your @L[Core:Turns]{turns}, you
@@ -520,7 +488,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/poison-strike.webp
         name: Poison Strike
         system:
@@ -573,11 +541,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: poison-strike
           interaction: attack
           maneuver: active
-          mundane: false
           overview:
             fluent: >-
               <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
@@ -640,7 +606,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     effects:
       - _id: T6tkKBbgt98kmWzP
         _key: >-
@@ -650,10 +616,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
+          applyIfDampened: true
+          applyIfDeattuned: true
           competence:
             raw: 0
           description: >-
@@ -661,7 +629,6 @@ items:
             @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
           form: intrinsic
           identifier: handy
-          mundane: true
         transfer: true
         type: property
       - _id: r6y26RRRAVSDlLW4
@@ -672,10 +639,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
+          applyIfDampened: true
+          applyIfDeattuned: true
           competence:
             raw: 0
           description: >-
@@ -683,7 +652,6 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          mundane: true
         transfer: true
         type: property
     folder: 481b13774ffecbdd
@@ -706,7 +674,6 @@ items:
         ranged: false
         short:
           unit: self
-      vitals: false
     type: body
   - _id: sVNo0ssED0uZkewt
     _key: '!actors.items!31ae69b6c87992f5.sVNo0ssED0uZkewt'
@@ -715,7 +682,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     effects:
       - _id: OBxNFBNQbCWu7sqD
         _key: >-
@@ -725,10 +692,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
+          applyIfDampened: true
+          applyIfDeattuned: true
           competence:
             raw: 0
           description: >-
@@ -736,7 +705,6 @@ items:
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
           identifier: biting
-          mundane: true
         transfer: true
         type: property
       - _id: isXEhDoN6le4qII0
@@ -747,10 +715,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
+          applyIfDampened: true
+          applyIfDeattuned: true
           competence:
             raw: 0
           description: >-
@@ -758,7 +728,6 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          mundane: true
         transfer: true
         type: property
     folder: 481b13774ffecbdd
@@ -783,7 +752,6 @@ items:
         ranged: false
         short:
           unit: self
-      vitals: false
     type: body
 name: Cockatrice
 prototypeToken:

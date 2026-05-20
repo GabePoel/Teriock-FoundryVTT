@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     effects:
       - _id: 5mLPbGiWQLB5Ai6f
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -59,12 +59,10 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: animate-dead
           interaction: attack
           invoked: true
           maneuver: active
-          mundane: false
           overview:
             base: >-
               <p>Target is @L[Condition:Alive]{alive} (but still
@@ -101,7 +99,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/bestial-transformation.webp
         name: Bestial Transformation
         system:
@@ -158,7 +156,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the maximum
             @L[Core:BR]{BR} available to you increases by 1.</p>
@@ -166,7 +163,6 @@ items:
           interaction: manifest
           limitation: <p>@L[Creature:Bat]{Bat} and @L[Creature:Wolf]{wolf} only.</p>
           maneuver: active
-          mundane: false
           overview:
             base: >-
               <p>You are @L[Condition:Transformed]{fully transformed} into a
@@ -200,7 +196,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/charm.webp
         name: Charm
         system:
@@ -236,14 +232,12 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: charm
           improvement: >-
             <p>May have up to 2 × @L[Core:Presence]{PRES} creatures
             @L[Condition:Charmed]{charmed} at a time.</p>
           interaction: attack
           maneuver: active
-          mundane: false
           piercing:
             raw: 2
           powerSources:
@@ -267,37 +261,16 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: executor
-              override:
-                combat: true
-                conditions: false
-                triggers: false
-              type: expiration
             sGyei1adB2IsKjZP:
               _id: sGyei1adB2IsKjZP
-              data: '{ "name": "Lighted Duel Effect" }'
-              display:
-                label: Apply Lighted
               overrideCompetence: false
-              overrideData: true
-              preventEffect: false
+              overrideData: false
+              preventEffect: true
               preventFeat: false
               preventThreshold: false
               type: modifyEffect
@@ -313,7 +286,7 @@ items:
               _id: 747b3e9c9b617af6
               executor: true
               multi: false
-              relation: include
+              relation: apply
               status: lighted
               target: false
               type: status
@@ -324,6 +297,9 @@ items:
           duration:
             raw: '0'
             unit: unlimited
+          effectTypes:
+            - duelModifying
+            - spiritual
           executionTime:
             base: a1
             slow:
@@ -333,11 +309,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: duel
           interaction: manifest
           maneuver: active
-          mundane: false
           overview:
             base: >-
               <p>You challenge the target to advance and fight you. They may
@@ -346,8 +320,10 @@ items:
               @L[Condition:Dueling]{dueling} with you. If they choose not to or
               are unable to do so, then they are considered to have "forfeited"
               the [[lookup name style=lc]] (but are not considered to have
-              "lost" it) and become @L[Condition:Lighted]{lighted} to you until
-              the end of your next @L[Core:Turns]{turn}.</p>
+              "lost" it). Any creature that forfeits this [[lookup name
+              style=lc]] becomes @L[Condition:Lighted]{lighted} to each of their
+              would-be opponents in the [[lookup name style=lc]] until the end
+              of that opponent's next @L[Core:Turns]{turn}.</p>
             proficient: >-
               <p>You may also @L[Ability:Move]{Move} or make a
               @L[Category:Single action abilities]{single action}
@@ -378,7 +354,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: icons/skills/social/diplomacy-handshake-blue.webp
         name: Expert Courtier
         system:
@@ -407,11 +383,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: expert-courtier
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You are an @L[Keyword:Expertise]{expert}
@@ -434,7 +408,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -482,11 +456,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: flying
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
             proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
@@ -510,7 +482,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -531,11 +503,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: greater-undead
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You count as being @L[Keyword:Undead]{undead} for the purposes
@@ -565,7 +535,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: >-
           systems/teriock/src/icons/abilities/increased-running-water-sensitivity.webp
         name: Increased Running Water Sensitivity
@@ -587,11 +557,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantUse: false
           identifier: increased-running-water-sensitivity
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>If you end your @L[Core:Turns]{turn} in running water, you roll
@@ -619,7 +587,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: >-
           systems/teriock/src/icons/abilities/increased-sunlight-sensitivity.webp
         name: Increased Sunlight Sensitivity
@@ -641,11 +609,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantUse: false
           identifier: increased-sunlight-sensitivity
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>If you end your @L[Core:Turns]{turn} in direct sunlight, you
@@ -673,7 +639,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/instant-ethereal.webp
         name: Instant Ethereal
         system:
@@ -703,11 +669,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: instant-ethereal
           interaction: manifest
           maneuver: active
-          mundane: false
           overview:
             base: >-
               <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into
@@ -730,7 +694,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/sentient-feeding.webp
         name: Sentient Feeding
         system:
@@ -751,11 +715,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantUse: false
           identifier: sentient-feeding
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You must @L[Drain:Mana]{mana drain} at least 1 creature with
@@ -789,7 +751,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
@@ -837,7 +799,6 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           heightened: >-
             <p>For each additional @L[Core:MP]{MP} spent, the duration of this
             effect increases by 1 hour.</p>
@@ -845,7 +806,6 @@ items:
           interaction: attack
           invoked: true
           maneuver: active
-          mundane: false
           overview:
             proficient: <p>This effect lasts 10 minutes instead of 1. </p>
           piercing:
@@ -872,7 +832,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/vampiric-infect.webp
         name: Vampiric Infect
         system:
@@ -899,11 +859,9 @@ items:
               unit: self
           featSaveAttribute: unp
           form: special
-          grantUse: false
           identifier: vampiric-infect
           interaction: feat
           maneuver: slow
-          mundane: false
           piercing:
             raw: 0
           powerSources:
@@ -938,7 +896,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/very-high-intelligence.webp
         name: Very High Intelligence
         system:
@@ -957,11 +915,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: very-high-intelligence
           interaction: manifest
           maneuver: passive
-          mundane: false
           piercing:
             raw: 0
           powerSources:
@@ -984,7 +940,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -1006,11 +962,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: flaw
-          grantUse: false
           identifier: healing-sensitivity
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>@L[Core:Healing]{Healing} can be used to
@@ -1038,7 +992,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -1072,11 +1026,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: normal
-          grantUse: false
           identifier: ethereal-senses
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You can see and hear spirits and
@@ -1101,7 +1053,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -1130,11 +1082,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: magical-durability
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to
@@ -1157,7 +1107,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -1194,11 +1144,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: undead-mind
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to being
@@ -1223,7 +1171,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -1266,11 +1214,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: undying-durability
           interaction: manifest
           maneuver: passive
-          mundane: false
           overview:
             base: >-
               <p>You are @L[Keyword:Immunity]{immune} to
@@ -1300,7 +1246,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -1334,11 +1280,9 @@ items:
               unit: self
           featSaveAttribute: mov
           form: special
-          grantUse: false
           identifier: mana-drain-touch
           interaction: attack
           maneuver: active
-          mundane: false
           piercing:
             raw: 2
           powerSources:
@@ -1401,7 +1345,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -1411,10 +1355,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
+          applyIfDampened: true
+          applyIfDeattuned: true
           competence:
             raw: 0
           description: >-
@@ -1422,7 +1368,6 @@ items:
             @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
           form: intrinsic
           identifier: biting
-          mundane: true
         transfer: true
         type: property
       - _id: zrtJTRjkmdrLUpVb
@@ -1433,10 +1378,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.57
+          systemVersion: 0.12.58
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
+          applyIfDampened: true
+          applyIfDeattuned: true
           competence:
             raw: 0
           description: >-
@@ -1444,7 +1391,6 @@ items:
             @L[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
-          mundane: true
         transfer: true
         type: property
     folder: 65fbed36e42b583a
@@ -1469,7 +1415,6 @@ items:
         ranged: false
         short:
           unit: self
-      vitals: false
     type: body
 name: Noble Vampire
 prototypeToken:

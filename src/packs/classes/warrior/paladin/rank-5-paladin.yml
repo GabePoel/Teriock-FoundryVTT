@@ -100,7 +100,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     flags:
       teriock:
         category: combat
@@ -155,7 +155,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     flags:
       teriock:
         category: combat
@@ -344,7 +344,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.58
     flags:
       teriock:
         category: support
@@ -352,6 +352,15 @@ effects:
     img: systems/teriock/src/icons/abilities/undead-hunter.webp
     name: Undead Hunter
     system:
+      automations:
+        uAb1xIYOIhf13RGz:
+          _id: uAb1xIYOIhf13RGz
+          executor: false
+          multi: true
+          relation: include
+          status: dueling
+          target: false
+          type: status
       class: paladin
       competence:
         raw: 0
@@ -369,10 +378,11 @@ effects:
       delivery: self
       duration:
         raw: '0'
-        unit: instant
+        unit: unlimited
       effectTypes:
-        - duelModifying
         - displacement
+        - divine
+        - duelModifying
         - longRange
       executionTime: 10 Minutes
       expansion:
@@ -385,27 +395,37 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>The target adds their @L[Core:Fluency Bonus]{fluency bonus} to
-          their @L[Core:Feat Interaction]{feat} roll against you in
-          <i>addition</i> to any @L[Core:Presence]{UNP} bonuses (including
-          @L[Core:Proficiency Bonus]{proficiency} and @L[Core:Fluency
-          Bonus]{fluency}) that they may have. They do not get this bonus if you
-          speak their @L[Core:Elder Sorcery]{true name} as a part of this
-          ritual's incantation. The @L[Core:Game Master]{GM} may also adjust the
-          target's bonus up or down for other reasons at their discretion. If
-          the target is aware that you are hunting them, they make their roll
-          with @L[Core:Advantage]{advantage}.</p><div class="note"><b>Note:</b>
-          The only part of this ability that @L[Category:Duel modifying
-          effects]{modifies duels} is that the battle is a "fight to the death".
-          If @L[Ability:Active Bow Out]{Active Bow Out} is used on [[lookup
-          name]], this merely becomes a normal
-          @L[Condition:Dueling]{duel}.</div>
+          <p>Set up a ritual space no greater than 30 feet wide in any direction
+          that a @L[Condition:Dueling]{duel} will take place in. You must be the
+          only creature within this ritual space. The target then makes their
+          @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat save}. They adds
+          their @L[Core:Fluency Bonus]{fluency bonus} to their @L[Core:Feat
+          Interaction]{feat} roll against you in <i>addition</i> to any
+          @L[Core:Presence]{UNP} bonuses (including @L[Core:Proficiency
+          Bonus]{proficiency} and @L[Core:Fluency Bonus]{fluency}) that they may
+          have. They do not get this bonus if you speak their @L[Core:Elder
+          Sorcery]{true name} as a part of this ritual's incantation. The
+          @L[Core:Game Master]{GM} may also adjust the target's bonus up or down
+          for other reasons at their discretion. If the target is aware that you
+          are hunting them, they make their roll with
+          @L[Core:Advantage]{advantage}.</p>
         fluent: >-
           <p>The range of this ritual becomes 10 × @L[Core:Fluency Bonus]{F}
-          miles.</p>
+          miles and the number of additional creatures you can bring increases
+          to @L[Core:Fluency Bonus]{F}.</p>
         proficient: >-
           <p>The range of this ritual becomes 10 × @L[Core:Proficiency Bonus]{P}
-          miles.</p>
+          miles. You may also have up to @L[Core:Proficiency Bonus]{P}
+          additional creatures be within the ritual space as you use [[lookup
+          name]]. They will be part of the @L[Condition:Dueling]{duel}. However,
+          the target may choose to bring a number of creatures with them equal
+          to the number that you have joining you. The target must select from
+          creatures they have @L[Category:Control effects]{control} over and can
+          only be creatures within their proximity at the moment [[lookup name]]
+          is executed. The @L[Core:Battle Rating]{BR} and @L[Core:Leveling
+          Up]{LVL} of each creature the target brings cannot exceed their own.
+          The @L[Condition:Dueling]{duel} still ends when either you or the
+          target @L[Condition:Dead]{dies}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -415,14 +435,22 @@ effects:
       requirements: <p>Target must be @L[Category:Undead creatures]{undead}.</p>
       results:
         fail: >-
-          <p>Target is summoned to your location and is forced into a
+          <p>Target is summoned to within the ritual and is forced into a
           @L[Condition:Dueling]{duel} with you. This @L[Condition:Dueling]{duel}
-          is @L[Category:Duel modifying effects]{Modified} such that it only
-          ends when one side is @L[Condition:Dead]{dead}. If you lose, the
-          @L[Category:Undead creatures]{undead} can choose to remain or return
-          to where it came from. If you win, the @L[Category:Undead
-          creatures]{undead} is forced to the Material Plane and to the site of
-          this ritual.</p>
+          is @L[Category:Duel modifying effects]{modified} such that nobody can
+          exit or enter the space until the @L[Condition:Dueling]{duel} is
+          complete. Creatures within the space cannot affect creatures outside
+          it or vice versa. The @L[Condition:Dueling]{duel} only ends if either
+          you or the target @L[Condition:Dead]{die}. It cannot be forfeited. If
+          you lose, the @L[Category:Undead creatures]{undead} can choose to
+          remain in the site of the ritual or return to where it came from. If
+          you win, the @L[Category:Undead creatures]{undead} is forced to remain
+          at the ritual site. These are @L[Category:Duel modifying effects]{duel
+          modifying effects}. So, if @L[Ability:Reactive Bow Out]{Reactive Bow
+          Out} is used on [[lookup name]], it becomes an ordinary
+          @L[Condition:Dueling]{duel}. @L[Ability:Duel Swap]{Duel Swap} can be
+          used to change places with a creature within the
+          @L[Condition:Dueling]{duel} from outside it.</p>
         save: >-
           <p>Target is aware that you are hunting them, becomes
           @L[Keyword:Resistance]{resistant} to your @L[Category:Divinely powered
@@ -510,7 +538,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.57
+      systemVersion: 0.12.58
     img: systems/teriock/src/icons/abilities/sense-motive.webp
     name: Sense Motive
     system:
