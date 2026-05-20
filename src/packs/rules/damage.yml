@@ -13,7 +13,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -52,8 +52,12 @@ pages:
               "texture": "skulls"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
       identifier: dirtydark
       img: systems/teriock/src/icons/damage-types/dirtydark.webp
+      powerSources:
+        - material
     text:
       content: >-
         <p>When a creature is @L[Condition:Down]{dropped} with dirtydark damage
@@ -117,15 +121,20 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.43
+      systemVersion: 0.12.61
     flags:
       teriock:
         journalIcon: mdi-heart-off
         journalImage: systems/teriock/src/icons/damage-types/astamori.webp
     name: Astamori
+    sort: 0
     system:
+      effectTypes:
+        - damaging
       identifier: astamori
       img: systems/teriock/src/icons/damage-types/astamori.webp
+      powerSources:
+        - material
     text:
       content: >-
         <p>Astamori damage and the can only be @L[Core:Healing]{healed} with
@@ -147,7 +156,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -175,6 +184,10 @@ pages:
               "colorset": "ice"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+      elements:
+        - storm
       identifier: ice
       img: systems/teriock/src/icons/damage-types/ice.webp
     text:
@@ -198,7 +211,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -226,6 +239,10 @@ pages:
               "colorset": "fire"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+      elements:
+        - flame
       identifier: fire
       img: systems/teriock/src/icons/damage-types/fire.webp
     text:
@@ -248,7 +265,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.43
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -263,6 +280,9 @@ pages:
           take: damage
           title: Take 50 Damage
           type: take
+      effectTypes:
+        - damaging
+        - killing
       identifier: deadly
       img: systems/teriock/src/icons/damage-types/deadly.webp
     text:
@@ -285,7 +305,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.43
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -305,6 +325,8 @@ pages:
             - mouth
             - nose
           type: hacks
+      effectTypes:
+        - damaging
       identifier: hack
       img: systems/teriock/src/icons/damage-types/hack.webp
     text:
@@ -368,7 +390,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -396,6 +418,10 @@ pages:
               "colorset": "radiant"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+      elements:
+        - life
       identifier: holy
       img: systems/teriock/src/icons/damage-types/holy.webp
     text:
@@ -418,7 +444,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.43
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -426,8 +452,13 @@ pages:
     name: Magic
     sort: 9000
     system:
+      effectTypes:
+        - damaging
+        - magical
       identifier: magic
       img: systems/teriock/src/icons/damage-types/magic.webp
+      powerSources:
+        - magical
     text:
       content: >-
         <p>Magic damage has no innate properties. However, it can affect
@@ -448,7 +479,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.26
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -476,6 +507,8 @@ pages:
           morganti: true
           showDialog: true
           type: take
+      effectTypes:
+        - damaging
       identifier: morganti
       img: systems/teriock/src/icons/damage-types/morganti.webp
     text:
@@ -499,7 +532,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.17
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -522,6 +555,10 @@ pages:
                   "colorset": "psychic"
                 }
           type: rollStyle
+      effectTypes:
+        - damaging
+        - mental
+        - draining
       identifier: psychic
       img: systems/teriock/src/icons/damage-types/psychic.webp
     text:
@@ -545,7 +582,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.43
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -560,6 +597,9 @@ pages:
           take: damage
           title: Remove HP
           type: take
+      effectTypes:
+        - damaging
+        - killing
       identifier: lethal
       img: systems/teriock/src/icons/damage-types/lethal.webp
     text:
@@ -585,7 +625,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.43
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -593,6 +633,8 @@ pages:
     name: Mundane
     sort: 11000
     system:
+      effectTypes:
+        - damaging
       identifier: mundane
       img: systems/teriock/src/icons/damage-types/mundane.webp
     text:
@@ -614,7 +656,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.17
+      systemVersion: 0.12.61
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -634,8 +676,12 @@ pages:
               "texture": "metal"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
       identifier: silver
       img: systems/teriock/src/icons/damage-types/silver.webp
+      powerSources:
+        - material
     text:
       content: >-
         <p>Silver damage has no innate properties. However, it can affect
@@ -655,7 +701,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -683,6 +729,10 @@ pages:
               "colorset": "poison"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+      elements:
+        - necromancy
       identifier: terror
       img: systems/teriock/src/icons/damage-types/terror.webp
     text:
@@ -705,7 +755,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.17
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -721,6 +771,9 @@ pages:
               "colorset": "acid"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+        - poison
       identifier: toxic
       img: systems/teriock/src/icons/damage-types/toxic.webp
     text:
@@ -742,7 +795,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.17
+      systemVersion: 0.12.61
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -762,8 +815,12 @@ pages:
               "texture": "metal"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
       identifier: silveel
       img: systems/teriock/src/icons/damage-types/silveel.webp
+      powerSources:
+        - material
     text:
       content: >-
         <p>Silveel damage can @L[Core:Damage]{damage} any creature that could be
@@ -785,7 +842,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -829,6 +886,9 @@ pages:
           overrideCompetence: false
           qualifier: '0'
           type: useDocuments
+      effectTypes:
+        - damaging
+        - financial
       identifier: financial
       img: icons/commodities/stone/stone-nugget-gold.webp
     text:
@@ -856,7 +916,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -884,6 +944,9 @@ pages:
               "colorset": "thunder"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+        - spiritual
       identifier: spiritual
       img: systems/teriock/src/icons/damage-types/spiritual.webp
     text:
@@ -908,7 +971,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.19
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -936,6 +999,10 @@ pages:
               "colorset": "earth"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+      elements:
+        - nature
       identifier: vine
       img: systems/teriock/src/icons/damage-types/vine.webp
     text:
@@ -958,7 +1025,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.17
+      systemVersion: 0.12.61
     flags:
       teriock:
         journalIcon: mdi-heart-off
@@ -990,8 +1057,14 @@ pages:
               "composite": "multiply"
             }
           type: rollStyle
+      effectTypes:
+        - damaging
+        - magical
       identifier: starbright
       img: systems/teriock/src/icons/damage-types/starbright.webp
+      powerSources:
+        - material
+        - magical
     text:
       content: >-
         <p>Starbright damage is a rare @L[Category:Damage types]{damage type}

@@ -13,7 +13,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.46
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: ms-format-color-reset
@@ -26,6 +26,8 @@ pages:
           _id: 8SSA1lPlWHkXYONj
           take: wither
           type: take
+      effectTypes:
+        - draining
       identifier: wither
       img: systems/teriock/src/icons/drain-types/wither.webp
     text:
@@ -48,12 +50,13 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.46
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: ms-format-color-reset
         journalImage: systems/teriock/src/icons/drain-types/lethal.webp
     name: Lethal
+    sort: 0
     system:
       automations:
         O8m8y3CvQbCK9YcG:
@@ -62,6 +65,9 @@ pages:
           take: drain
           title: Remove MP
           type: take
+      effectTypes:
+        - draining
+        - killing
       identifier: lethal
       img: systems/teriock/src/icons/drain-types/lethal.webp
     text:
@@ -87,7 +93,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.26
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: ms-format-color-reset
@@ -115,6 +121,8 @@ pages:
           morganti: true
           showDialog: true
           type: take
+      effectTypes:
+        - draining
       identifier: morganti
       img: systems/teriock/src/icons/drain-types/morganti.webp
     text:
@@ -137,7 +145,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.46
+      systemVersion: 0.12.61
     flags:
       teriock:
         journalIcon: ms-format-color-reset
@@ -145,6 +153,9 @@ pages:
     name: Memory
     sort: 2000
     system:
+      effectTypes:
+        - draining
+        - mental
       identifier: memory
       img: systems/teriock/src/icons/drain-types/memory.webp
     text:
@@ -159,7 +170,12 @@ pages:
         have one additional black stone. Pulling one black stone will give you a
         @L[Keyword:Death Bag]{death scar} and two will make you @L[Keyword:Death
         Bag]{PD}. You always gain a permanent insanity from memory drain deaths
-        determined by the @L[Core:Game Master]{GM}.</p>
+        determined by the @L[Core:Game Master]{GM}.</p><p>Memory drain is
+        considered a @L[Category:Mental effects]{mental effect}, but is only
+        partially stopped by @L[Category:Protection keywords]{protections} such
+        as @L[Ability:Resist Mental Effects]{Resist Mental Effects}. They
+        @L[Keyword:Deboosted]{deboost} memory drain instead of causing it to
+        fully @L[Core:Fizzles]{fizzle}.</p>
       format: 1
     title:
       level: 1
@@ -174,7 +190,7 @@ pages:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.17
+      systemVersion: 0.12.60
     flags:
       teriock:
         journalIcon: ms-format-color-reset
@@ -190,6 +206,8 @@ pages:
                   "colorset": "force"
                 }
           type: rollStyle
+      effectTypes:
+        - draining
       identifier: mana
       img: systems/teriock/src/icons/drain-types/mana.webp
     text:
