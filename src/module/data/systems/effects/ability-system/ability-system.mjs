@@ -28,9 +28,10 @@ import * as parts from "./parts/_module.mjs";
  * @mixes AbilityUpgradesPart
  * @mixes AbilityUsagePart
  * @mixes AdjustableSystem
- * @mixes ConsumableSystem
  * @mixes AttackSystem
  * @mixes CompetenceDisplaySystem
+ * @mixes ConsumableSystem
+ * @mixes MetaphysicsSystem
  * @mixes RevelationSystem
  * @mixes ThresholdData
  * @mixes WikiSystem
@@ -41,6 +42,7 @@ export default class AbilitySystem extends mixClasses(
   mixins.AttackSystemMixin,
   mixins.ConsumableSystemMixin,
   mixins.CompetenceDisplaySystemMixin,
+  mixins.MetaphysicsSystemMixin,
   mixins.RevelationSystemMixin,
   mixins.WikiSystemMixin,
   mixins.AdjustableSystemMixin,

@@ -9,4 +9,3 @@ export { default as LocalDocumentField } from "./local-document-field.mjs";
 export { default as MultiChangeField } from "./multi-change-field.mjs";
 export { default as PseudoCollectionField } from "./pseudo-collection-field.mjs";
 export { default as PseudoTypedSchemaField } from "./pseudo-typed-schema-field.mjs";
-export { default as TextField } from "./text-field.mjs";

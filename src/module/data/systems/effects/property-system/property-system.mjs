@@ -21,6 +21,7 @@ const { fields } = foundry.data;
  * @mixes AdjustableSystem
  * @mixes ConsumableSystem
  * @mixes GrantedSystem
+ * @mixes MetaphysicsSystem
  * @mixes RevelationSystem
  * @mixes WikiSystem
  */
@@ -29,6 +30,7 @@ export default class PropertySystem extends mixClasses(
   mixins.AdjustableSystemMixin,
   mixins.ConsumableSystemMixin,
   mixins.GrantedSystemMixin,
+  mixins.MetaphysicsSystemMixin,
   mixins.RevelationSystemMixin,
   mixins.WikiSystemMixin,
 ) {

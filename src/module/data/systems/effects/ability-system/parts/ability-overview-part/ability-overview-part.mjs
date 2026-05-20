@@ -1,5 +1,3 @@
-import { TextField } from "../../../../../fields/_module.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -17,17 +15,17 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          endCondition: new TextField({ initial: "" }),
-          heightened: new TextField({ initial: "" }),
-          improvement: new TextField({ initial: "" }),
-          limitation: new TextField({ initial: "" }),
+          endCondition: new fields.HTMLField({ initial: "" }),
+          heightened: new fields.HTMLField({ initial: "" }),
+          improvement: new fields.HTMLField({ initial: "" }),
+          limitation: new fields.HTMLField({ initial: "" }),
           overview: new fields.SchemaField({
-            base: new TextField({ initial: "" }),
-            fluent: new TextField({ initial: "" }),
-            proficient: new TextField({ initial: "" }),
+            base: new fields.HTMLField({ initial: "" }),
+            fluent: new fields.HTMLField({ initial: "" }),
+            proficient: new fields.HTMLField({ initial: "" }),
           }),
-          requirements: new TextField({ initial: "" }),
-          trigger: new TextField({ initial: "" }),
+          requirements: new fields.HTMLField({ initial: "" }),
+          trigger: new fields.HTMLField({ initial: "" }),
         });
       }
     }

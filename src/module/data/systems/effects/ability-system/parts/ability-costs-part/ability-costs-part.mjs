@@ -1,7 +1,7 @@
 import { costConfig } from "../../../../../../constants/config/cost-config.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { FormulaField, TextField } from "../../../../../fields/_module.mjs";
+import { FormulaField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -35,7 +35,7 @@ export default Base => {
                 });
                 return new fields.SchemaField(
                   {
-                    description: new TextField({ label }),
+                    description: new fields.HTMLField({ label }),
                     type: new fields.StringField({
                       choices: localizeChoices(costConfig.components.types),
                       initial: null,
@@ -54,7 +54,7 @@ export default Base => {
                 });
                 return new fields.SchemaField(
                   {
-                    description: new TextField({ label }),
+                    description: new fields.HTMLField({ label }),
                     formula: new FormulaField({ deterministic: false, label }),
                     type: new fields.StringField({
                       choices: localizeChoices(costConfig.primary.types),

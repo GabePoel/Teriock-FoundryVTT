@@ -5,7 +5,7 @@
         class="teriock-harm-img"
         data-src="{{ img }}"
         {{#if (exists system.color)}}
-          style="outline-color:{{{ system.color }}};"
+        style="outline-color:{{{ system.color }}};"
         {{/if}}
       >
         <img
@@ -14,7 +14,7 @@
           data-edit="{{ imgPath }}"
           alt=""
           {{#if editable}}
-            data-action="editImage"
+          data-action="editImage"
           {{/if}}
           title="{{ name }}"
         />
@@ -24,5 +24,17 @@
       </h{{ title.level }}>
     </header>
   {{/if}}
+  <div class="teriock-harm-tags">
+    {{#each displayTags as |tag|}}
+      <span
+        class="harm-tag"
+        {{#if (exists tag.tooltip)}}
+        data-tooltip="{{ tag.tooltip }}"
+        {{/if}}
+      >
+        {{ tag.label }}
+      </span>
+    {{/each}}
+  </div>
   <section class="journal-page-content">{{{ text.enriched }}}</section>
 </div>

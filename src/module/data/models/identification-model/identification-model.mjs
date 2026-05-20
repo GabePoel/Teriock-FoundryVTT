@@ -3,7 +3,6 @@ import { selectDocumentsDialog } from "../../../applications/dialogs/select-docu
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { fromIdentifier, makeIconClass, objectMap } from "../../../helpers/utils.mjs";
-import { TextField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -18,14 +17,14 @@ export default class IdentificationModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      flaws: new TextField({
+      flaws: new fields.HTMLField({
         gmOnly: true,
         initial: "",
         required: false,
       }),
       identified: new fields.BooleanField({ initial: true }),
       name: new fields.StringField({ initial: "" }),
-      notes: new TextField({
+      notes: new fields.HTMLField({
         gmOnly: true,
         initial: "",
         required: false,

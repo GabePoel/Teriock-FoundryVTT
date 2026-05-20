@@ -4,7 +4,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, makeIconClass } from "../../../../helpers/utils.mjs";
-import { TextField } from "../../../fields/_module.mjs";
 import { speciesTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -52,17 +51,17 @@ export default class SpeciesSystem extends mixClasses(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       adult: new fields.NumberField({ initial: 0, min: 0 }),
-      appearance: new TextField(),
-      attributeIncrease: new TextField(),
+      appearance: new fields.HTMLField(),
+      attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
       competence: new fields.EmbeddedDataField(CompetenceModel, {
         initial: { raw: 1 },
       }),
-      description: new TextField(),
-      hpIncrease: new TextField(),
-      innateRanks: new TextField(),
+      description: new fields.HTMLField(),
+      hpIncrease: new fields.HTMLField(),
+      innateRanks: new fields.HTMLField(),
       lifespan: new fields.NumberField({ initial: 0, min: 0 }),
-      mpIncrease: new TextField(),
+      mpIncrease: new fields.HTMLField(),
       size: new fields.SchemaField({
         enabled: new fields.BooleanField({ initial: true }),
         max: new fields.NumberField(),

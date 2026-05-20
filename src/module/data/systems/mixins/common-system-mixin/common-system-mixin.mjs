@@ -192,11 +192,6 @@ export default function CommonSystemMixin(Base) {
         return promises;
       }
 
-      /** @returns {Teriock.Sheet.DisplayField[]} */
-      get displayFields() {
-        return ["system.description"];
-      }
-
       /** @returns {AnyCommonDocument} */
       get document() {
         return this.parent;

@@ -1,4 +1,5 @@
-import { TextField } from "../data/fields/_module.mjs";
+// @ts-expect-error Can't find field
+import { HTMLField } from "@common/data/fields";
 
 declare global {
   namespace Teriock.Sheet {
@@ -32,7 +33,7 @@ declare global {
       editable: boolean;
       enriched: string;
       label: string;
-      schema: TextField;
+      schema: HTMLField;
       value: string;
     };
 

@@ -1,5 +1,4 @@
 import { effectConfig } from "../../../../constants/config/effect-config.mjs";
-import { TextField } from "../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -35,40 +34,14 @@ export default function AdjustableSystemMixin(Base) {
             choices: effectConfig.form,
             initial: "normal",
           }),
-          improvement: new TextField({ initial: "" }),
-          limitation: new TextField({ initial: "" }),
-          powerSources: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.reference.powerSources,
-            }),
-          ),
+          improvement: new fields.HTMLField({ initial: "" }),
+          limitation: new fields.HTMLField({ initial: "" }),
         });
-      }
-
-      /**
-       * Metaphysics display inputs.
-       * @returns {Teriock.Sheet.DisplayField[]}
-       */
-      get _displayInputsMetaphysics() {
-        return ["system.powerSources"];
       }
 
       /** @inheritDoc */
       get _isSuppressedDampened() {
         return this.form !== "intrinsic" && super._isSuppressedDampened;
-      }
-
-      /** @inheritDoc */
-      get _metaphysicsTags() {
-        return [
-          ...super._metaphysicsTags,
-          ...Array.from(this.powerSources).map(t => {
-            return {
-              label: TERIOCK.reference.powerSources[t],
-              tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
-            };
-          }),
-        ];
       }
 
       /** @inheritDoc */
@@ -94,25 +67,16 @@ export default function AdjustableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      get displayInputs() {
-        return [...super.displayInputs, ...this._displayInputsMetaphysics];
-      }
-
-      /** @inheritDoc */
       get needsAttunement() {
         return this.form !== "intrinsic" && super.needsAttunement;
       }
 
       /** @inheritDoc */
       getLocalRollData() {
-        const data = Object.assign(super.getLocalRollData(), {
+        return Object.assign(super.getLocalRollData(), {
           [`form.${this.form}`]: 1,
           form: this.form,
         });
-        for (const powerSource of this.powerSources) {
-          data[`power.${powerSource}`] = 1;
-        }
-        return data;
       }
     }
   );

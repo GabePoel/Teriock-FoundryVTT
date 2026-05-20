@@ -1,3 +1,5 @@
+@use "../mixins";
+
 .character-window,
 .tsheet-page,
 .ab-section-container {
@@ -93,3 +95,47 @@ img.interaction-routine {
   margin-block: 2em;
   margin-inline: auto;
 }
+
+.teriock-text-fields {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+
+  .form-group {
+    gap: 0;
+
+    label {
+      @include mixins.text-subtle;
+      display: flex;
+      width: 100%;
+      text-align: left;
+      align-items: center;
+      font-weight: normal;
+      line-height: 1rem;
+
+      &::before,
+      &::after {
+        border-bottom: 1px solid var(--color-text-subtle);
+        content: "";
+      }
+
+      &::before {
+        width: 1em;
+        margin-right: 0.5em;
+      }
+
+      &::after {
+        flex: 1;
+        margin-left: 0.5em;
+      }
+    }
+  }
+}
+
+//@container (max-width: 249px) {
+//  .teriock-text-fields {
+//    .form-group {
+//      label:
+//    }
+//  }
+//}

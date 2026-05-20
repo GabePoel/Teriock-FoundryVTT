@@ -1,8 +1,7 @@
-import { TextField } from "../../../data/fields/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { bindCommonActions } from "../../shared/_module.mjs";
 import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
-import { TeriockTextEditor } from "../../ux/_module.mjs";
+import { DisplaySheetMixin } from "../mixins/_module.mjs";
 import { ConfigButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
 import {
   AutomationsCommonSheetPart,
@@ -17,10 +16,14 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
 
 /**
  * @extends {JournalEntryPageProseMirrorSheet}
+ * @mixes BaseApplication
+ * @mixes DisplaySheet
+ * @mixes ConfigButtonSheet
  */
 export default class HarmSheet extends mixClasses(
   JournalEntryPageProseMirrorSheet,
   BaseApplicationMixin,
+  DisplaySheetMixin,
   AutomationsCommonSheetPart,
   AutomationsTabsCommonSheetPart,
   ConfigButtonSheetMixin,
@@ -36,13 +39,10 @@ export default class HarmSheet extends mixClasses(
     window: { resizable: true },
   };
 
-  static EDIT_PARTS = {
-    all: {
-      scrollable: [".window-content", ".tsheet-page", ".ab-sheet-everything"],
-      template: "teriock/sheets/pages/harm-config",
-    },
-  };
+  /** @type {Record<string, HandlebarsTemplatePart>} */
+  static EDIT_PARTS = { ...this.DISPLAY_PARTS };
 
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static VIEW_PARTS = {
     content: { template: "teriock/sheets/pages/harm-view" },
   };
@@ -67,8 +67,6 @@ export default class HarmSheet extends mixClasses(
       system: this.document.system,
       systemFields: this.document.system.schema.fields,
       TERIOCK,
-      textEnriched: await TeriockTextEditor.enrichHTML(this.document.text.content, { relativeTo: this.document }),
-      textField: new TextField({ label: "Description" }),
       type: this.document.type,
       uuid: this.document.uuid,
     });

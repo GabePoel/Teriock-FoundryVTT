@@ -81,13 +81,17 @@ export default function PanelDocumentMixin(Base) {
 
       /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
       async getPanelParts() {
-        return {
+        const parts = {
           bars: [],
           blocks: [],
           icon: TERIOCK.display.icons.ui.document,
           image: systemPath("icons/documents/uncertainty.svg"),
           name: this.fullName || this.name,
         };
+        if (typeof this.system?.getPanelParts === "function") {
+          Object.assign(parts, await this.system.getPanelParts());
+        }
+        return parts;
       }
 
       /** @inheritDoc */

@@ -1,6 +1,6 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { IdentifierField, TextField } from "../../../fields/_module.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -49,7 +49,7 @@ export default class RankSystem extends mixClasses(
       competence: new fields.EmbeddedDataField(CompetenceModel, {
         initial: { raw: 1 },
       }),
-      description: new TextField({
+      description: new fields.HTMLField({
         initial: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.description.initial"),
       }),
       innate: new fields.BooleanField({ initial: false }),

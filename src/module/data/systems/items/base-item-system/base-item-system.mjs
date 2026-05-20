@@ -1,4 +1,3 @@
-import { TextField } from "../../../fields/_module.mjs";
 import { ChildSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -31,7 +30,7 @@ export default class BaseItemSystem extends ChildSystemMixin(TypeDataModel) {
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       disabled: new fields.BooleanField(),
-      flaws: new TextField({ initial: "" }),
+      flaws: new fields.HTMLField({ initial: "" }),
     });
   }
 

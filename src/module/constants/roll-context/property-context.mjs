@@ -1,5 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { effectConfig } from "../config/effect-config.mjs";
+import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
 const propertyContext = {
@@ -23,4 +24,8 @@ Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {
     propertyContext[`damage.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Property.damageType", { name: _loc(v) });
   });
+});
+
+Hooks.once("teriock.i18nMetaphysicsInit", () => {
+  Object.assign(propertyContext, metaphysicsContext);
 });

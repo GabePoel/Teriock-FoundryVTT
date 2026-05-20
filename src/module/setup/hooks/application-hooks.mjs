@@ -66,7 +66,9 @@ function addDeveloperModeLoggingListener(application) {
       console.log("Application", application);
       if (application.document) {
         console.log("Document", application.document);
-        console.log("Roll Data", application.document.getRollData());
+        if (typeof application.document.getRollData === "function") {
+          console.log("Roll Data", application.document.getRollData());
+        }
       }
       if (typeof application._prepareContext === "function") {
         const context = await application._prepareContext({

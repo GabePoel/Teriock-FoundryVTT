@@ -30,12 +30,11 @@ export default Base => {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        context.menuCollapsed = !this._menuOpen;
-        if ((this.document.system.constructor._automationTypes || []).length > 0) {
-          context.canHaveAutomations = true;
-        }
-        return context;
+        return Object.assign(await super._prepareContext(options), {
+          canHaveAutomations: !!(this.document.system?.constructor._automationTypes || []).length,
+          hasMenu: true,
+          menuCollapsed: !this._menuOpen,
+        });
       }
 
       /**

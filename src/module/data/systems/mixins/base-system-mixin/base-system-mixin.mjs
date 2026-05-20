@@ -31,6 +31,31 @@ export default function BaseSystemMixin(Base) {
         return [];
       }
 
+      /** @returns {Teriock.Sheet.DisplayButton[]} */
+      get displayButtons() {
+        return [];
+      }
+
+      /** @returns {Teriock.Sheet.DisplayField[]} */
+      get displayFields() {
+        return [];
+      }
+
+      /** @returns {Teriock.Sheet.DisplayField[]} */
+      get displayInputs() {
+        return [];
+      }
+
+      /** @returns {Teriock.Sheet.DisplayTag[]} */
+      get displayTags() {
+        return [];
+      }
+
+      /** @returns {Teriock.Sheet.DisplayField[]} */
+      get displayToggles() {
+        return [];
+      }
+
       /** @returns {string} */
       get fullName() {
         let name = this.parent?.name ?? "";

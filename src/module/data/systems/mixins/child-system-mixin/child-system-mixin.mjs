@@ -2,7 +2,7 @@ import { impactConfig } from "../../../../constants/config/impact-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
-import { EvaluationField, FormulaField, TextField } from "../../../fields/_module.mjs";
+import { EvaluationField, FormulaField } from "../../../fields/_module.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
 import { CommonSystemMixin, HierarchySystemMixin } from "../../mixins/_module.mjs";
@@ -46,7 +46,7 @@ export default function ChildSystemMixin(Base) {
             ),
             { persisted: false },
           ),
-          description: new TextField({ initial: "" }),
+          description: new fields.HTMLField({ initial: "" }),
           font: new fields.StringField({ initial: "" }),
           qualifiers: new fields.SchemaField({
             ephemeral: new EvaluationField({
@@ -83,14 +83,6 @@ export default function ChildSystemMixin(Base) {
       }
 
       /**
-       * Metaphysics tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
-       */
-      get _metaphysicsTags() {
-        return [];
-      }
-
-      /**
        * Status tags.
        * @returns {Teriock.Sheet.DisplayTag[]}
        */
@@ -103,24 +95,14 @@ export default function ChildSystemMixin(Base) {
         ];
       }
 
-      /** @returns {Teriock.Sheet.DisplayButton[]} */
-      get displayButtons() {
-        return [];
+      /** @inheritDoc */
+      get displayFields() {
+        return [...super.displayFields, "system.description"];
       }
 
-      /** @returns {Teriock.Sheet.DisplayField[]} */
-      get displayInputs() {
-        return [];
-      }
-
-      /** @returns {Teriock.Sheet.DisplayTag[]} */
+      /** @inheritDoc */
       get displayTags() {
-        return this._statusTags;
-      }
-
-      /** @returns {Teriock.Sheet.DisplayField[]} */
-      get displayToggles() {
-        return [];
+        return [...super.displayTags, ...this._statusTags];
       }
 
       /** @inheritDoc */

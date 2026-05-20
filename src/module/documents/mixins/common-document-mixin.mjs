@@ -239,11 +239,6 @@ export default function CommonDocumentMixin(Base) {
         return this.getVisibleChildren();
       }
 
-      /** @inheritDoc */
-      async getPanelParts() {
-        return this.system.getPanelParts();
-      }
-
       /**
        * Roll data.
        * @returns {object}

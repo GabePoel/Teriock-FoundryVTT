@@ -128,10 +128,10 @@ export default Base => {
         if (this.upgrades.score.attribute) {
           const attribute = attributeLink(this.upgrades.score.attribute);
           const value = this.upgrades.score.value;
-          this.upgrades.score.text = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description", {
+          this.upgrades.score.text = `<p>${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description", {
             attribute,
             value,
-          });
+          })}</p>`;
         } else {
           this.upgrades.score.text = "";
         }
@@ -146,11 +146,11 @@ export default Base => {
           const upgrade = `@L[Core:${page}]{${level.toLowerCase()}}`;
           const savesLabel = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves");
           const saves = `@L[Core:Feat Interaction]{${savesLabel}}`;
-          this.upgrades.competence.text = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description", {
+          this.upgrades.competence.text = `<p>${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description", {
             attribute,
             saves,
             upgrade,
-          });
+          })}</p>`;
         } else {
           this.upgrades.competence.text = "";
         }

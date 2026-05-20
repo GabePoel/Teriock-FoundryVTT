@@ -123,11 +123,6 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   }
 
   /** @inheritDoc */
-  get displayTags() {
-    return [...super.displayTags, ...this._metaphysicsTags];
-  }
-
-  /** @inheritDoc */
   get displayToggles() {
     return [
       ...super.displayToggles,

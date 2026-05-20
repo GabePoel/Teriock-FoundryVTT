@@ -1,5 +1,3 @@
-import { TextField } from "../../../../../fields/_module.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -18,14 +16,14 @@ export default Base => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           results: new fields.SchemaField({
-            critFail: new TextField({ initial: "" }),
-            critHit: new TextField({ initial: "" }),
-            critMiss: new TextField({ initial: "" }),
-            critSave: new TextField({ initial: "" }),
-            fail: new TextField({ initial: "" }),
-            hit: new TextField({ initial: "" }),
-            miss: new TextField({ initial: "" }),
-            save: new TextField({ initial: "" }),
+            critFail: new fields.HTMLField({ initial: "" }),
+            critHit: new fields.HTMLField({ initial: "" }),
+            critMiss: new fields.HTMLField({ initial: "" }),
+            critSave: new fields.HTMLField({ initial: "" }),
+            fail: new fields.HTMLField({ initial: "" }),
+            hit: new fields.HTMLField({ initial: "" }),
+            miss: new fields.HTMLField({ initial: "" }),
+            save: new fields.HTMLField({ initial: "" }),
           }),
         });
       }

@@ -1,5 +1,3 @@
-import { TextField } from "../_module.mjs";
-
 const { fields } = foundry.data;
 
 /**
@@ -41,10 +39,10 @@ export function initialSchema(schema = {}) {
 /**
  * Initialize a non-persisted HTML text block.
  * @param {StringFieldOptions} [options]
- * @returns {TextField}
+ * @returns {HTMLField}
  */
 export function initialText(options = {}) {
-  return new TextField({ initial: "", persisted: false, ...options });
+  return new fields.HTMLField({ initial: "", persisted: false, ...options });
 }
 
 /**

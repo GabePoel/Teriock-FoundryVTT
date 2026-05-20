@@ -8,6 +8,7 @@ export { default as condition } from "./condition-context.mjs";
 export { default as consequence } from "./consequence-context.mjs";
 export { default as fluency } from "./fluency-context.mjs";
 export { default as imbuement } from "./imbuement-context.mjs";
+export { default as metaphysics } from "./metaphysics-context.mjs";
 export { default as mount } from "./mount-context.mjs";
 export { default as power } from "./power-context.mjs";
 export { default as property } from "./property-context.mjs";

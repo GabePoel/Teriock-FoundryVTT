@@ -1,8 +1,10 @@
+import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
-import { AutomatableSystemMixin, RulesSystemMixin } from "../../mixins/_module.mjs";
+import * as mixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -10,15 +12,19 @@ const { TypeDataModel } = foundry.abstract;
 /**
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.HarmSystemData}
- * @mixes RulesSystem
  * @mixes AccessData
  * @mixes AutomatableSystem
+ * @mixes BaseSystem
+ * @mixes MetaphysicsSystem
+ * @mixes RulesSystem
  */
 export default class HarmSystem extends mixClasses(
   TypeDataModel,
-  RulesSystemMixin,
+  mixins.BaseSystemMixin,
+  mixins.RulesSystemMixin,
+  mixins.AutomatableSystemMixin,
+  mixins.MetaphysicsSystemMixin,
   AccessDataMixin,
-  AutomatableSystemMixin,
 ) {
   /** @inheritDoc */
   static get _automationTypes() {
@@ -57,6 +63,17 @@ export default class HarmSystem extends mixClasses(
     return Object.assign(super.defineSchema(), {
       img: new fields.FilePathField({ categories: ["IMAGE"] }),
     });
+  }
+
+  /** @inheritDoc */
+  get displayFields() {
+    return [
+      ...super.displayFields,
+      {
+        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+        path: "text.content",
+      },
+    ];
   }
 
   /** @inheritDoc */
@@ -103,6 +120,19 @@ export default class HarmSystem extends mixClasses(
         data,
       ),
     );
+  }
+
+  /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+  async getPanelParts() {
+    return {
+      bars: [
+        {
+          icon: icons.form.normal,
+          label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
+          wrappers: simplifyTags(this._metaphysicsTags),
+        },
+      ],
+    };
   }
 
   /** @inheritDoc */

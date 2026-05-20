@@ -3,6 +3,7 @@ import { abilityConfig } from "../config/ability-config.mjs";
 import { attributeConfig } from "../config/attribute-config.mjs";
 import { costConfig } from "../config/cost-config.mjs";
 import { effectConfig } from "../config/effect-config.mjs";
+import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
 const abilityContext = {
@@ -80,18 +81,6 @@ Hooks.once("i18nInit", () => {
       name: _loc(v.label),
     });
   });
-  Object.entries(TERIOCK.reference.elements).forEach(([k, v]) => {
-    abilityContext[`element.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.element", { name: _loc(v) });
-    abilityContext[`element.${k.slice(0, 3).toLowerCase()}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.element", {
-      name: _loc(v),
-    });
-  });
-  Object.entries(TERIOCK.reference.effectTypes).forEach(([k, v]) => {
-    abilityContext[`effect.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.effectType", { name: _loc(v) });
-  });
-  Object.entries(TERIOCK.reference.powerSources).forEach(([k, v]) => {
-    abilityContext[`power.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.powerSource", { name: _loc(v) });
-  });
   Object.entries(costConfig.tweaks).forEach(([k, v]) => {
     abilityContext[`tweaks.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.tweak", {
       name: _loc(v.label),
@@ -114,4 +103,8 @@ Hooks.once("i18nInit", () => {
     });
   });
   abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
+});
+
+Hooks.once("teriock.i18nMetaphysicsInit", () => {
+  Object.assign(abilityContext, metaphysicsContext);
 });

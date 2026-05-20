@@ -67,4 +67,16 @@ export default class TeriockJournalEntryPage extends mixClasses(
       image: this.img,
     };
   }
+
+  /**
+   * Roll data.
+   * @returns {object}
+   */
+  getRollData() {
+    if (typeof this.system?.getRollData === "function") {
+      return this.system.getRollData();
+    } else {
+      return {};
+    }
+  }
 }

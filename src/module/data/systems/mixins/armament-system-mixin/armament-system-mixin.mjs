@@ -3,7 +3,7 @@ import { ArmamentExecution } from "../../../../executions/document-executions/_m
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
-import { EvaluationField, IdentifierField, MultiChangeField, TextField } from "../../../fields/_module.mjs";
+import { EvaluationField, IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField } from "../../../fields/helpers/builders.mjs";
 import { initialText } from "../../../fields/helpers/initializers.mjs";
 import { RangeModel } from "../../../models/_module.mjs";
@@ -67,7 +67,7 @@ export default function ArmamentSystemMixin(Base) {
             }),
             { initial: ["damage"] },
           ),
-          notes: new TextField({ initial: "" }),
+          notes: new fields.HTMLField({ initial: "" }),
           range: new MultiChangeField(
             {
               long: new EvaluationField({ label: "Range", model: RangeModel }),

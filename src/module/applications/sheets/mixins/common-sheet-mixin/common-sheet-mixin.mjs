@@ -74,15 +74,12 @@ export default function CommonSheetMixin(Base) {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        Object.assign(context, {
+        return Object.assign(super._prepareContext(options), {
           enriched: {},
-          hasMenu: true,
           imgPath: "img",
           metadata: this.document.metadata,
           settings: this.settings,
         });
-        return context;
       }
 
       /** @inheritDoc */

@@ -1,10 +1,17 @@
-{{#each displayFieldButtons}}
-  <div class="tgrid-item">
-    <button data-action="populateField" data-path="{{ fieldPath }}" {{#if (not ../editable)}}disabled="disabled"{{/if}}>{{makeIcon ../TERIOCK.display.icons.ui.add "button"}} {{ name }}</button>
+{{#if (or (exists displayFieldButtons) (exists displayButtons))}}
+  <div class="ab-menu-bar">
+    <div class="ttable ab-button-grid menu-large-grid">
+      {{#each displayFieldButtons}}
+        <div class="tgrid-item">
+          <button data-action="populateField" data-path="{{ fieldPath }}" {{#if (not ../editable)}}disabled="disabled"{{/if}}>{{makeIcon ../TERIOCK.display.icons.ui.add "button"}} {{ name }}</button>
+        </div>
+      {{/each}}
+      {{#each displayButtons}}
+        <div class="tgrid-item">
+          <button class="{{ classes }}" data-action="{{ action }}">{{makeIcon ../TERIOCK.display.icons.ui.add "button"}} {{localize label}}</button>
+        </div>
+      {{/each}}
+
+    </div>
   </div>
-{{/each}}
-{{#each displayButtons}}
-  <div class="tgrid-item">
-    <button class="{{ classes }}" data-action="{{ action }}">{{makeIcon ../TERIOCK.display.icons.ui.add "button"}} {{localize label}}</button>
-  </div>
-{{/each}}
+{{/if}}

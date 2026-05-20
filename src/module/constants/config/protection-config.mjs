@@ -34,13 +34,13 @@ export const protectionConfig = {
       choices: "reference.effectTypes",
       format: "camel",
       imgCategory: "effectTypes",
-      label: "TERIOCK.SYSTEMS.Ability.FIELDS.effectTypes.label",
+      label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
     },
     elements: {
       choices: "reference.elements",
       format: "camel",
       imgCategory: "elements",
-      label: "TERIOCK.SYSTEMS.Ability.FIELDS.elements.label",
+      label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
     },
     equipment: {
       choices: "reference.equipment",
@@ -59,7 +59,7 @@ export const protectionConfig = {
       choices: "reference.powerSources",
       format: "camel",
       imgCategory: "effectTypes",
-      label: "TERIOCK.SYSTEMS.Ability.FIELDS.powerSources.label",
+      label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
     },
     properties: {
       choices: "reference.properties",
