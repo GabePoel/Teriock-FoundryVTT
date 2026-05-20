@@ -346,6 +346,14 @@ export default function BaseDocumentMixin(Base) {
         game.teriock.identifiers.trackDocument(this);
         this._cachedIdentifier = this.typedIdentifier;
       }
+
+      /** @inheritDoc */
+      toDragData() {
+        return Object.assign(super.toDragData(), {
+          identifier: this.typedIdentifier,
+          systemType: this.type,
+        });
+      }
     }
   );
 }

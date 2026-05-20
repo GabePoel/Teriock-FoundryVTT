@@ -312,11 +312,6 @@ export default function CommonDocumentMixin(Base) {
         delete this._visibleChildrenByType;
       }
 
-      /** @inheritDoc */
-      toDragData() {
-        return Object.assign(super.toDragData(), { systemType: this.type });
-      }
-
       /**
        * Toggle a configured child for the Document. Designed to function like {@link Actor.toggleStatusEffect}.
        * @param {TypedIdentifier} identifier - An identifier existing in the world or a compendium.
@@ -342,8 +337,6 @@ export default function CommonDocumentMixin(Base) {
         } else if (!hasChild && (options.active === true || typeof options.active !== "boolean")) {
           const out = await ensureChildren(this, [identifier]);
           return out[0];
-        } else {
-          return;
         }
       }
 
