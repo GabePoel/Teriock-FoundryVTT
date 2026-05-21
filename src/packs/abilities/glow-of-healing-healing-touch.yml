@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.61
+  systemVersion: 0.12.62
 img: systems/teriock/src/icons/abilities/healing-touch.webp
 name: Healing Touch
 system:
@@ -23,7 +23,7 @@ system:
           time: start
           trigger: turn
         who:
-          type: target
+          type: executor
       override:
         combat: true
         conditions: false
@@ -36,8 +36,15 @@ system:
       consumeStatDice: true
       forHarm: false
       noStatDice: false
-      trigger: turnStart
       type: heal
+    dkyGJcbZt5KR85PK:
+      _id: dkyGJcbZt5KR85PK
+      executor: false
+      multi: false
+      relation: remove
+      status: poisoned
+      target: false
+      type: status
   class: lifeMage
   competence:
     raw: 0
@@ -53,7 +60,7 @@ system:
     unit: second
   elements:
     - life
-  endCondition: <p>The start of the target's next @L[Core:Turns]{turn}.</p>
+  endCondition: <p>The start of your next @L[Core:Turns]{turn}.</p>
   executionTime:
     base: a1
     slow:
@@ -81,7 +88,7 @@ system:
   results:
     hit: >-
       <p>Target is immediately no longer @L[Condition:Poisoned]{poisoned} and is
-      also @L[Core:Healing]{healed} at the start of their next
+      also @L[Core:Healing]{healed} at the start of your next
       @L[Core:Turns]{turn} if they do not take any @L[Core:Damage]{damage}
       before then.</p>
   spell: true
