@@ -77,8 +77,8 @@ declare global {
       undampen: activations.UndampenActivation;
       unglue: activations.UnglueActivation;
       unhack: activations.TakeUnhackActivation;
-      "use-external": activations.UseExternalActivation;
-      "use-local": activations.UseLocalActivation;
+      useExternal: activations.UseExternalActivation;
+      useLocal: activations.UseLocalActivation;
     }
 
     export type Type = keyof TypeMap;

@@ -68,7 +68,7 @@ export const useLocalCommand = {
   ...thresholdCommand,
   aliases: ["use"],
   args: ["lookup"],
-  id: "use-local",
+  id: "useLocal",
   primary: useLocal,
   secondary: useLocal,
   icon: options => inferIconFromIdentifier(options?.lookup),
@@ -85,7 +85,7 @@ export const useLocalCommand = {
 export const useExternalCommand = {
   ...thresholdCommand,
   args: ["uuid"],
-  id: "use-external",
+  id: "useExternal",
   primary: useExternal,
   secondary: useExternal,
   icon: options => options?.icon || icons.ui.document,

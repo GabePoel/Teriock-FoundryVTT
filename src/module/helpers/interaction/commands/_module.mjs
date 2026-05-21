@@ -17,6 +17,7 @@ import {
 import featCommand from "./feat-command.mjs";
 import { hackCommand, unhackCommand } from "./hack-commands.mjs";
 import healCommand from "./heal-command.mjs";
+import helpCommand from "./help-command.mjs";
 import impactCommands from "./impact-commands.mjs";
 import resistCommand from "./resist-command.mjs";
 import revitalizeCommand from "./revitalize-command.mjs";
@@ -57,13 +58,14 @@ const commandArray = [
   unhackCommand,
   useExternalCommand,
   useLocalCommand,
+  helpCommand,
 ];
 
 /** @type {Record<string, Teriock.Interaction.CommandEntry>} */
 const commands = {};
 
 for (const entry of commandArray) {
-  commands[entry.id] = entry;
+  commands[entry.id] = { ...entry, original: true };
   if (entry.aliases) {
     for (const alias of entry.aliases) {
       commands[alias] = entry;
