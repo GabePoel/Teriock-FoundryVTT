@@ -3,7 +3,7 @@ import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { fromIdentifierLocal } from "../../../helpers/utils.mjs";
-import { IdentifierField } from "../../fields/_module.mjs";
+import { TypedIdentifierField } from "../../fields/_module.mjs";
 import { rollableFormulaField } from "../../fields/helpers/builders.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import { ConfirmationDialogAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
@@ -47,7 +47,7 @@ export default class ChangeQuantityAutomation extends mixClasses(
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       formula: rollableFormulaField(),
-      identifier: new IdentifierField({ allowType: true }),
+      identifier: new TypedIdentifierField(),
       showDialog: new fields.BooleanField({ initial: true }),
       targetParent: new fields.BooleanField({ initial: true }),
     });

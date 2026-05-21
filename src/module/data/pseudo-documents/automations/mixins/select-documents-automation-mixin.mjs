@@ -18,7 +18,7 @@ export default function SelectDocumentsAutomationMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          identifiers: new IdentifierSetField({ allowType: true }),
+          identifiers: new IdentifierSetField(),
           qualifier: new FormulaField({ initial: "0" }),
         });
       }

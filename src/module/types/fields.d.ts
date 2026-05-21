@@ -39,10 +39,13 @@ declare global {
       };
 
     export type _IdentifierFieldOptions = {
-      allowType?: boolean;
       reset?: string | null;
-      type?: string;
-    }
+    };
+
+    export type _TypedIdentifierFieldOptions = {
+      single?: boolean;
+      types?: string[];
+    };
 
     /**
      * Valid comparison operations.

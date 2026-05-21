@@ -1,10 +1,9 @@
-import { icons } from "../../constants/display/icons.mjs";
-import { identifierValidator } from "../../data/fields/helpers/validators.mjs";
-import { inferNameFromIdentifier, makeIconClass, parseIdentifier } from "../../helpers/utils.mjs";
+import { typedIdentifierValidator } from "../../data/fields/helpers/validators.mjs";
+import { inferNameFromIdentifier, parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { AbstractFormInputElement, HTMLStringTagsElement } = foundry.applications.elements;
-const { TextEditor } = foundry.applications.ux;
+const { fromUuid } = foundry.utils;
 
 /**
  * @import {FormInputConfig} from "@common/data/_types.mjs";
@@ -12,22 +11,19 @@ const { TextEditor } = foundry.applications.ux;
 
 /**
  * @typedef IdentifierTagsInputConfig
- * @property {string} [type] - A specific document type for a typed identifier.
- * @property {boolean} [allowType] - Allow typed identifiers in the form `type:identifier`
- * @property {boolean} [single] - Only allow referencing a single identifier. In this case the submitted form value will be a single string rather than an array.
- * @property {number} [max] - Only allow attaching a maximum number of identifiers.
- * @property {string|null} [reset] - Identifier applied when the reset button is clicked (single mode only).
+ * @property {string[]} [types] - Allowed Teriock document type prefixes for typed identifiers.
+ * @property {boolean} [single] - Only allow referencing a single identifier. The submitted form value will be a string rather than an array.
+ * @property {number} [max] - Only allow attaching a maximum number of identifiers
  */
 
 /**
  * @typedef HTMLIdentifierTagsOptions
  * @property {string[]} [values] - An array of identifiers to initialize the element with.
- * @property {boolean} [allowType]
  */
 
 /**
- * A custom HTMLElement used to render a set of associated documents names
- * by their identifiers. This is based off of {@link HTMLDocumentTagsElement}.
+ * A custom HTMLElement used to render a set of associated documents referenced by identifier.
+ * Based on {@link HTMLDocumentTagsElement}.
  * @extends {AbstractFormInputElement<string|string[]|null>}
  */
 export default class HTMLIdentifierTagsElement extends AbstractFormInputElement {
@@ -40,7 +36,6 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    * @returns {HTMLIdentifierTagsElement}
    */
   static create(config) {
-    // Coerce value to an array
     let values;
     if (config.value instanceof Set) {
       values = Array.from(config.value);
@@ -50,29 +45,29 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
       values = config.value;
     }
 
-    const tags = new this({ allowType: config.allowType, values });
+    const tags = new this({ values });
     tags.name = config.name;
     tags.setAttribute("value", values.join(","));
-    tags.type = config.type;
+    if (config.types?.length) {
+      tags.types = config.types;
+    }
     tags.max = config.max;
     tags.single = config.single;
-    tags.allowType = config.allowType;
-    tags.reset = config.reset;
     foundry.applications.fields.setInputAttributes(tags, config);
     return tags;
   }
 
   /**
    * Create an HTML element fragment for a single identifier tag.
-   * @param {string} identifier        The document identifier
-   * @param {string} name              The document name
-   * @param {boolean} [editable=true]  Is the tag editable?
+   * @param {string} identifier - The document identifier
+   * @param {string} name - The document name
+   * @param {boolean} [editable=true] - Is the tag editable?
    * @returns {HTMLDivElement}
    */
   static renderTag(identifier, name, editable = true) {
     const div = HTMLStringTagsElement.renderTag(
       identifier,
-      TextEditor.implementation.truncateText(name, { maxLength: 32 }),
+      TeriockTextEditor.truncateText(name, { maxLength: 32 }),
       editable,
     );
     div.classList.add("identifier-tag");
@@ -89,17 +84,14 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   /**
    * @param {HTMLIdentifierTagsOptions} [options]
    */
-  constructor({ allowType, values } = {}) {
+  constructor({ values } = {}) {
     super();
-    if (allowType !== undefined) {
-      this.allowType = allowType;
-    }
     this._initializeTags(values);
   }
 
   /**
-   * The button element to add a new identifier. Omitted in single-value mode.
-   * @type {HTMLButtonElement|undefined}
+   * The button element to add a new identifier.
+   * @type {HTMLButtonElement}
    */
   #button;
 
@@ -110,21 +102,15 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   #input;
 
   /**
-   * The button element to reset to the configured default identifier. Single-value mode only.
-   * @type {HTMLButtonElement|undefined}
-   */
-  #resetButton;
-
-  /**
-   * The list of tagged identifiers. Omitted in single-value mode.
-   * @type {HTMLDivElement|undefined}
+   * The list of tagged identifiers.
+   * @type {HTMLDivElement}
    */
   #tags;
 
   /**
    * Add a new identifier to the tagged set, throwing an error if the identifier is not valid.
-   * @param {string} identifier - The identifier to add.
-   * @throws {Error} - If the identifier is not valid
+   * @param {string} identifier - The identifier to add
+   * @throws {Error}           If the identifier is not valid
    */
   #add(identifier) {
     if (!this.editable) {
@@ -144,38 +130,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
       }
     }
 
-    this._value[identifier] = inferNameFromIdentifier(identifier) ?? identifier ?? "";
-  }
-
-  /**
-   * Commit the current input value in single-value mode.
-   */
-  #commitSingleInput() {
-    if (!this.editable) {
-      return;
-    }
-    const identifier = this.#input.value.trim();
-    this._value = {};
-    if (!identifier) {
-      this._refresh();
-      this.#dispatchValueChange();
-      return;
-    }
-    try {
-      this.#add(identifier);
-      this._refresh();
-      this.#dispatchValueChange();
-    } catch (err) {
-      ui.notifications.error(err.message);
-    }
-  }
-
-  /**
-   * Notify the parent form that this element's value changed.
-   */
-  #dispatchValueChange() {
-    this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
-    this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
+    this._value[identifier] = inferNameFromIdentifier(identifier) ?? identifier;
   }
 
   /**
@@ -202,21 +157,20 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     const dropData = TeriockTextEditor.getDragEventData(event);
     if (dropData.identifier) {
       this.#tryAdd(dropData.identifier);
-    } else {
-      // Fallback for cases like compendium directories where Foundry doesn't use the normal drag-drop
-      if (dropData.uuid) {
-        fromUuid(dropData.uuid).then(d => {
-          const identifier = d?.typedIdentifier;
-          if (identifier) {
-            this.#tryAdd(identifier);
-          } else {
-            ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true });
-          }
-        });
-      } else {
-        ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true });
-      }
+      return;
     }
+    if (dropData.uuid) {
+      fromUuid(dropData.uuid).then(d => {
+        const identifier = d?.typedIdentifier;
+        if (identifier) {
+          this.#tryAdd(identifier);
+        } else {
+          ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true });
+        }
+      });
+      return;
+    }
+    ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true });
   }
 
   /**
@@ -229,34 +183,29 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     }
     event.preventDefault();
     event.stopPropagation();
-    if (this.single) {
-      this.#commitSingleInput();
-    } else {
-      this.#tryAdd(this.#input.value);
-    }
+    this.#tryAdd(this.#input.value);
   }
 
   /**
-   * Reset the identifier to the configured default value.
+   * Resolve a label for the input placeholder from configured type restrictions.
+   * @returns {string}
    */
-  #onReset() {
-    if (!this.reset || !this.editable) {
-      return;
+  #resolvePlaceholderTypeLabel() {
+    const { types } = this;
+    if (!types.length) {
+      return "TERIOCK.TERMS.Common.identifier";
     }
-    this.#input.value = this.reset;
-    this.#commitSingleInput();
+    if (types.length === 1) {
+      return TERIOCK.config.document[types[0]]?.label ?? types[0];
+    }
+    return types.map(t => _loc(TERIOCK.config.document[t]?.label ?? t)).join(", ");
   }
 
   /**
    * Add an identifier using the value of the input field.
-   * @param {string} identifier  The identifier to attempt to add
+   * @param {string} identifier - The identifier to attempt to add
    */
   #tryAdd(identifier) {
-    if (this.single) {
-      this.#input.value = identifier;
-      this.#commitSingleInput();
-      return;
-    }
     try {
       this.#add(identifier);
       this._refresh();
@@ -270,34 +219,30 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /**
    * Validate an identifier, returning the trimmed value.
-   * @param {Identifier|TypedIdentifier} identifier
+   * @param {string} identifier
    * @returns {string}
    * @throws {Error}
-   * @todo Consider making these errors into notifications?
    */
   #validateIdentifier(identifier) {
     identifier = identifier.trim();
     if (!identifier) {
       throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank"));
     }
-
-    const { allowType, type: requiredType } = this;
-
-    if (!identifierValidator(identifier, { allowType })) {
+    const requiredTypes = this.types;
+    if (!typedIdentifierValidator(identifier, requiredTypes)) {
+      const parsed = parseIdentifier(identifier);
+      if (!parsed.type) {
+        throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType"));
+      }
+      if (requiredTypes.length) {
+        throw new Error(
+          _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorWrongType", {
+            provided: parsed.type,
+            required: requiredTypes.join(", "),
+          }),
+        );
+      }
       throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
-    }
-
-    const parsed = parseIdentifier(identifier);
-    if (!allowType && parsed.type) {
-      throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorTypedNotAllowed"));
-    }
-    if (requiredType && parsed.type !== requiredType) {
-      throw new Error(
-        _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorWrongType", {
-          provided: parsed.type ?? identifier,
-          required: requiredType,
-        }),
-      );
     }
     return identifier;
   }
@@ -305,36 +250,20 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   /**
    * @override
    * @type {Record<string, string>}
+   * @protected
    */
   _value = {};
 
   /**
-   * Allow typed identifiers in the form `type:identifier`.
-   * @returns {boolean}
-   */
-  get allowType() {
-    return this.hasAttribute("allow-type");
-  }
-
-  /**
-   * @param {boolean} value
-   */
-  set allowType(value) {
-    this.toggleAttribute("allow-type", value === true);
-  }
-
-  /**
    * Allow a maximum number of identifiers to be tagged to the element.
-   * @returns {number}
+   * @return {number}
    */
   get max() {
     const max = parseInt(this.getAttribute("max"));
     return isNaN(max) ? Infinity : max;
   }
 
-  /**
-   * @param {number} value
-   */
+  /** @param {number} value */
   set max(value) {
     if (Number.isInteger(value) && value > 0) {
       this.setAttribute("max", String(value));
@@ -344,117 +273,84 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   }
 
   /**
-   * The identifier applied when the reset button is clicked.
-   * @type {string|null}
-   */
-  get reset() {
-    return this.getAttribute("reset");
-  }
-
-  /**
-   * @param {string|null} value
-   */
-  set reset(value) {
-    if (value) {
-      this.setAttribute("reset", value);
-    } else {
-      this.removeAttribute("reset");
-    }
-  }
-
-  /**
    * Restrict to only allow referencing a single identifier instead of an array of identifiers.
-   * @returns {boolean}
+   * @return {boolean}
    */
   get single() {
     return this.hasAttribute("single");
   }
 
-  /**
-   * @param {boolean} value
-   */
+  /** @param {boolean} value */
   set single(value) {
     this.toggleAttribute("single", value === true);
   }
 
   /**
-   * Restrict identifiers to a specific Teriock document type prefix.
-   * @returns {string|null}
+   * Restrict identifiers to one or more Teriock document type prefixes.
+   * @return {string[]}
    */
-  get type() {
-    return this.getAttribute("type");
+  get types() {
+    const attr = this.getAttribute("types");
+    if (!attr) {
+      return [];
+    }
+    return attr
+      .split(",")
+      .map(t => t.trim())
+      .filter(Boolean);
   }
 
-  /**
-   * @param {string|null} value
-   */
-  set type(value) {
-    if (!value) {
-      this.removeAttribute("type");
+  /** @param {string[]} value */
+  set types(value) {
+    if (!value?.length) {
+      this.removeAttribute("types");
       return;
     }
-    if (!TERIOCK.config.document[value]) {
-      throw new Error(`"${value}" is not a valid Teriock document type in TERIOCK.config.document`);
+    for (const type of value) {
+      if (!TERIOCK.config.document[type]) {
+        throw new Error(`"${type}" is not a valid Teriock document type in TERIOCK.config.document`);
+      }
     }
-    this.setAttribute("type", value);
+    this.setAttribute("types", value.join(","));
   }
 
   /** @override */
   _activateListeners() {
-    this.#button?.addEventListener("click", () => this.#tryAdd(this.#input.value));
-    this.#resetButton?.addEventListener("click", this.#onReset.bind(this));
-    this.#tags?.addEventListener("click", this.#onClickTag.bind(this));
+    this.#button.addEventListener("click", () => this.#tryAdd(this.#input.value));
+    this.#tags.addEventListener("click", this.#onClickTag.bind(this));
     this.#input.addEventListener("keydown", this.#onKeydown.bind(this));
-    this.#input.addEventListener("change", event => {
-      event.stopPropagation();
-      if (this.single) {
-        this.#commitSingleInput();
-      }
-    });
+    this.#input.addEventListener("change", event => event.stopPropagation());
     this.addEventListener("drop", this.#onDrop.bind(this), { signal: this.abortSignal });
   }
 
   /** @override */
   _buildElements() {
+    this.#tags = document.createElement("div");
+    this.#tags.className = "tags input-element-tags";
+
     this.#input = this._primaryInput = document.createElement("input");
     this.#input.type = "text";
-    const typeLabel = this.type ? TERIOCK.config.document[this.type]?.label : "TERIOCK.TERMS.Common.identifier";
+    const typeLabel = this.#resolvePlaceholderTypeLabel();
     this.#input.placeholder =
       this.getAttribute("placeholder") ||
       _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.placeholder", { type: _loc(typeLabel) });
-
-    const elements = [this.#input];
-    if (this.single) {
-      if (this.reset) {
-        this.#resetButton = document.createElement("button");
-        this.#resetButton.type = "button";
-        this.#resetButton.className = `icon ${makeIconClass(icons.ui.reset, "button")}`;
-        this.#resetButton.dataset.tooltip = "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset";
-        this.#resetButton.setAttribute("aria-label", _loc(this.#resetButton.dataset.tooltip));
-        elements.push(this.#resetButton);
-      }
-      return elements;
-    }
-
-    this.#tags = document.createElement("div");
-    this.#tags.className = "tags input-element-tags";
-    elements.unshift(this.#tags);
 
     this.#button = document.createElement("button");
     this.#button.type = "button";
     this.#button.className = "icon fa-solid fa-magnifying-glass-plus";
     this.#button.dataset.tooltip = "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.add";
     this.#button.setAttribute("aria-label", _loc(this.#button.dataset.tooltip));
-    elements.push(this.#button);
-    return elements;
+
+    return [this.#tags, this.#input, this.#button];
   }
 
   /** @override */
   _getValue() {
+    const identifiers = Object.keys(this._value);
     if (this.single) {
-      return Object.keys(this._value)[0] ?? null;
+      return identifiers[0] ?? null;
     }
-    return Object.keys(this._value);
+    return identifiers;
   }
 
   /**
@@ -488,12 +384,6 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /** @override */
   _refresh() {
-    if (this.single) {
-      if (this.#input) {
-        this.#input.value = Object.keys(this._value)[0] ?? "";
-      }
-      return;
-    }
     if (!this.#tags) {
       return;
     }
@@ -524,11 +414,6 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   /** @override */
   _toggleDisabled(disabled) {
     this.#input.disabled = disabled;
-    if (this.#button) {
-      this.#button.disabled = disabled;
-    }
-    if (this.#resetButton) {
-      this.#resetButton.disabled = disabled;
-    }
+    this.#button.disabled = disabled;
   }
 }
