@@ -3,18 +3,8 @@ import { makeIconClass, objectMap } from "../../../helpers/utils.mjs";
 import DocumentDialogSheet from "./document-dialog-sheet.mjs";
 
 export default class DocumentSettingsSheet extends DocumentDialogSheet {
-  /**
-   * Reset to the default identifier.
-   * @returns {Promise<void>}
-   */
-  static async #resetIdentifier() {
-    await this.document.update({
-      "system.identifier": this.document.defaultIdentifier,
-    });
-  }
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    actions: { resetIdentifier: this.#resetIdentifier },
     form: { closeOnSubmit: false, submitOnChange: true },
     position: { width: 650 },
     window: {
@@ -39,15 +29,18 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
    * @param {string} [options.hint]
    * @param {string} [options.label]
    * @param {string} [options.placeholder]
+   * @param {string|null} [options.reset]
    * @returns {{field: DataField, value: *, localize: boolean}}
    */
   #quickNormalField(path, options = {}) {
+    const { hint, label, localize = true, placeholder, reset } = options;
     return {
       field: this.document.getSchema(path),
-      hint: options?.hint,
-      label: options?.label,
-      localize: true,
-      placeholder: options?.placeholder,
+      hint,
+      label,
+      localize,
+      placeholder,
+      reset,
       value: foundry.utils.getProperty(this.document, path),
     };
   }
@@ -79,26 +72,6 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    // TODO: Eventually this identifier button logic should be moved into a custom identifier HTML element.
-    /** @type {HTMLInputElement} */
-    const identifierInput = this.element.querySelector('input[name="system.identifier"]');
-    /** @type {HTMLDivElement} */
-    const formFields = identifierInput.closest(".form-fields");
-    formFields.style.gap = "0.25rem";
-    if (identifierInput) {
-      const button = document.createElement("button");
-      button.className = "icon";
-      button.style.flexBasis = "36px";
-      button.classList.add(...makeIconClass(TERIOCK.display.icons.ui.reset, "button").split(" "));
-      button.dataset.tooltip = _loc("TERIOCK.SHEETS.DocumentSettings.BUTTONS.resetIdentifier");
-      button.dataset.action = "resetIdentifier";
-      identifierInput.after(button);
-    }
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.configs = [];
@@ -110,6 +83,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
         fields: [
           this.#quickNormalField("system.identifier", {
             placeholder: this.document.defaultIdentifier,
+            reset: this.document.defaultIdentifier,
           }),
           this.#quickNormalField("_stats.compendiumSource", {
             hint: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.hint",

@@ -97,11 +97,13 @@ foundry.helpers.Hooks.once("init", function () {
     },
     ux: {
       ContextMenu: applications.ux.TeriockContextMenu,
+      DragDrop: applications.ux.TeriockDragDrop,
       TextEditor: applications.ux.TeriockTextEditor,
       TooltipManager: helpers.interaction.TeriockTooltipManager,
     },
   });
   applications.ux.registerEnrichers();
+  applications.elements.registerElements();
 
   // Configure Canvas
   // ================

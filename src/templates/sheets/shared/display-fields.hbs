@@ -1,15 +1,19 @@
-{{#each displayFields}}
-  <div class="ab-section-container">
-    {{formGroup
-      schema
-      classes=classes
-      dataset=dataset
-      disabled=(not (and @root/editable editable))
-      enriched=enriched
-      label=label
-      value=value
-      rootId=@root/uuid
-      toggled=true
-    }}
+{{#if (exists displayFields)}}
+  <div class="teriock-text-fields">
+    {{#each displayFields}}
+      <div class="ab-section-container">
+        {{formGroup
+          schema
+          classes=classes
+          dataset=dataset
+          disabled=(not (and @root/editable editable))
+          enriched=enriched
+          label=label
+          value=value
+          rootId=@root/uuid
+          toggled=true
+        }}
+      </div>
+    {{/each}}
   </div>
-{{/each}}
+{{/if}}

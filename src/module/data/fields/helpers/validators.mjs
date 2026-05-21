@@ -7,6 +7,9 @@ import { isKebabCase } from "../../../helpers/string.mjs";
  * @param {boolean} [options.allowType]
  */
 export function identifierValidator(identifier, options = {}) {
+  if (identifier == null || identifier === "") {
+    return true;
+  }
   if (options.allowType) {
     const split = identifier.split(":");
     if (split.length > 2) {

@@ -1,10 +1,8 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { fromIdentifierLocal, fromQualifier } from "../../../../helpers/utils.mjs";
-import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
+import { FormulaField, IdentifierSetField } from "../../../fields/_module.mjs";
 import SelectExternalDocumentsAutomationMixin from "./select-external-documents-automation-mixin.mjs";
-
-const { fields } = foundry.data;
 
 export default function SelectDocumentsAutomationMixin(Base) {
   return (
@@ -20,7 +18,7 @@ export default function SelectDocumentsAutomationMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          identifiers: new fields.SetField(new IdentifierField({ allowType: true })),
+          identifiers: new IdentifierSetField({ allowType: true }),
           qualifier: new FormulaField({ initial: "0" }),
         });
       }

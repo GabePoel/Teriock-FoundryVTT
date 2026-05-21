@@ -38,6 +38,12 @@ declare global {
         model?: typeof EvaluationModel;
       };
 
+    export type _IdentifierFieldOptions = {
+      allowType?: boolean;
+      reset?: string | null;
+      type?: string;
+    }
+
     /**
      * Valid comparison operations.
      */

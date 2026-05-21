@@ -5,6 +5,7 @@ export { default as FormulaField } from "./formula-field.mjs";
 export * as helpers from "./helpers/_module.mjs";
 export { default as IconFieldMixin } from "./icon-field-mixin.mjs";
 export { default as IdentifierField } from "./identifier-field.mjs";
+export { default as IdentifierSetField } from "./identifier-set-field.mjs";
 export { default as LocalDocumentField } from "./local-document-field.mjs";
 export { default as MultiChangeField } from "./multi-change-field.mjs";
 export { default as PseudoCollectionField } from "./pseudo-collection-field.mjs";
