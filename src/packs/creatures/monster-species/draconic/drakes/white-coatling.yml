@@ -1807,7 +1807,7 @@ items:
           elements:
             - life
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
+            <p>At the end of each of the target's @L[Core:Turns]{turns}, they
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           executionTime:
@@ -1921,7 +1921,7 @@ items:
           elements:
             - life
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
+            <p>At the end of each of the target's @L[Core:Turns]{turns}, they
             roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
             ends.</p>
           executionTime:
@@ -2140,6 +2140,34 @@ items:
         name: Healing Touch
         system:
           _sup: aU4ORi1F3CPlF18y
+          automations:
+            oJJEmjlNH83yIZ12:
+              _id: oJJEmjlNH83yIZ12
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+              override:
+                combat: true
+                conditions: false
+                triggers: true
+              triggers:
+                - damage
+              type: expiration
+            qgzpq8KiqEEOCMXJ:
+              _id: qgzpq8KiqEEOCMXJ
+              consumeStatDice: true
+              forHarm: false
+              noStatDice: false
+              trigger: turnStart
+              type: heal
           class: lifeMage
           competence:
             raw: 0
@@ -2151,10 +2179,11 @@ items:
                 type: tag
           delivery: hand
           duration:
-            raw: '0'
-            unit: instant
+            raw: '10'
+            unit: second
           elements:
             - life
+          endCondition: <p>The start of the target's next @L[Core:Turns]{turn}.</p>
           executionTime:
             base: a1
             slow:
@@ -2180,9 +2209,11 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
-              @L[Core:Healing]{healed} at the start of your next
-              @L[Core:Turns]{turn}.</p>
+              <p>Target is immediately no longer
+              @L[Condition:Poisoned]{poisoned} and is also
+              @L[Core:Healing]{healed} at the start of their next
+              @L[Core:Turns]{turn} if they do not take any
+              @L[Core:Damage]{damage} before then.</p>
           spell: true
           standard: true
           targets:
@@ -3226,8 +3257,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: 6jC5Q5mPSH0WQlNQ
-    _key: '!actors.items!f476a374dea0fb71.6jC5Q5mPSH0WQlNQ'
+  - _id: w9xgVJxjMfrRnLFq
+    _key: '!actors.items!f476a374dea0fb71.w9xgVJxjMfrRnLFq'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -3237,7 +3268,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!f476a374dea0fb71.6jC5Q5mPSH0WQlNQ.NGCuRUaVtXnxAbRe
+          !actors.items.effects!f476a374dea0fb71.w9xgVJxjMfrRnLFq.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -3298,7 +3329,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!f476a374dea0fb71.6jC5Q5mPSH0WQlNQ.aCWLNsvSFjEuLTyl
+          !actors.items.effects!f476a374dea0fb71.w9xgVJxjMfrRnLFq.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

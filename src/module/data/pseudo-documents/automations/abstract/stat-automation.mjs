@@ -1,5 +1,5 @@
 import { TriggerAutomationMixin } from "../mixins/_module.mjs";
-import BaseAutomation from "./base-automation.mjs";
+import CritAutomation from "./crit-automation.mjs";
 
 const { fields } = foundry.data;
 
@@ -9,7 +9,7 @@ const { fields } = foundry.data;
  * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  */
-export default class StatAutomation extends TriggerAutomationMixin(BaseAutomation) {
+export default class StatAutomation extends TriggerAutomationMixin(CritAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Stat"];
 

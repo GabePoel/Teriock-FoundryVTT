@@ -4,10 +4,29 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.36
+  systemVersion: 0.12.61
 img: systems/teriock/src/icons/abilities/disengage.webp
 name: Disengage
 system:
+  automations:
+    Jf7lm5O9p6bUY22C:
+      _id: Jf7lm5O9p6bUY22C
+      combat:
+        what:
+          roll: 2d4kh1
+          threshold: 4
+          type: forced
+        when:
+          skip: 0
+          time: end
+          trigger: turn
+        who:
+          type: everyone
+      override:
+        combat: true
+        conditions: false
+        triggers: false
+      type: expiration
   basic: true
   competence:
     raw: 0
@@ -15,6 +34,7 @@ system:
   duration:
     raw: '5'
     unit: second
+  endCondition: <p>The turn ends.</p>
   executionTime:
     base: a1
     slow:

@@ -5,7 +5,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { fromIdentifierLocal } from "../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../fields/_module.mjs";
 import { rollableFormulaField } from "../../fields/helpers/builders.mjs";
-import { BaseAutomation } from "./abstract/_module.mjs";
+import { CritAutomation } from "./abstract/_module.mjs";
 import { ConfirmationDialogAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -14,11 +14,12 @@ const { fields } = foundry.data;
  * @property {Teriock.System.FormulaString} formula
  * @property {TypedIdentifier|Identifier} identifier
  * @property {boolean} targetParent
+ * @extends {CritAutomation}
  * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
  */
 export default class ChangeQuantityAutomation extends mixClasses(
-  BaseAutomation,
+  CritAutomation,
   ConfirmationDialogAutomationMixin,
   TriggerAutomationMixin,
 ) {

@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/bless.webp
     name: Bless
     system:
@@ -150,7 +150,6 @@ effects:
         unit: unlimited
       effectTypes:
         - contract
-        - divine
       executionTime:
         base: Short Rest
         slow:
@@ -213,7 +212,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
     name: Extreme Intelligence
     system:
@@ -331,7 +330,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -444,21 +443,43 @@ effects:
     name: Jumpstart Heal
     system:
       automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
-          common:
-            - null
-          showConfirmationDialog: true
-          type: common
+        mu7Bjc7TUzFrkPCm:
+          _id: mu7Bjc7TUzFrkPCm
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: forced
+            when:
+              skip: 0
+              time: start
+              trigger: turn
+            who:
+              type: target
+          override:
+            combat: true
+            conditions: false
+            triggers: true
+          triggers:
+            - damage
+          type: expiration
+        do0moPMb5BgARhLv:
+          _id: do0moPMb5BgARhLv
+          consumeStatDice: true
+          forHarm: false
+          noStatDice: false
+          trigger: turnStart
+          type: heal
       class: paladin
       competence:
         raw: 0
       delivery: hand
       duration:
-        raw: '0'
-        unit: instant
+        raw: '10'
+        unit: second
       effectTypes:
         - healing
+      endCondition: <p>The start of the target's next @L[Core:Turns]{turn}.</p>
       executionTime:
         base: a1
         slow:
@@ -479,7 +500,9 @@ effects:
       range:
         unit: contact
       results:
-        hit: <p>Target @L[Core:Healing]{heals} at the start of their next turn.</p>
+        hit: >-
+          <p>Target @L[Core:Healing]{heals} at the start of their next turn if
+          they do not take any @L[Core:Damage]{damage} before then.</p>
       skill: true
       standard: true
       targets:
@@ -546,7 +569,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -590,7 +613,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -634,7 +657,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -1056,7 +1079,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -1114,7 +1137,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -1166,7 +1189,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -1220,7 +1243,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:

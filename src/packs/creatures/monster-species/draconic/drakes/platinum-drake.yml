@@ -1136,7 +1136,6 @@ items:
             unit: unlimited
           effectTypes:
             - contract
-            - divine
           executionTime:
             base: Short Rest
             slow:
@@ -1205,21 +1204,43 @@ items:
         name: Jumpstart Heal
         system:
           automations:
-            1728b3a84ea27844:
-              _id: 1728b3a84ea27844
-              common:
-                - null
-              showConfirmationDialog: true
-              type: common
+            mu7Bjc7TUzFrkPCm:
+              _id: mu7Bjc7TUzFrkPCm
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: forced
+                when:
+                  skip: 0
+                  time: start
+                  trigger: turn
+                who:
+                  type: target
+              override:
+                combat: true
+                conditions: false
+                triggers: true
+              triggers:
+                - damage
+              type: expiration
+            do0moPMb5BgARhLv:
+              _id: do0moPMb5BgARhLv
+              consumeStatDice: true
+              forHarm: false
+              noStatDice: false
+              trigger: turnStart
+              type: heal
           class: paladin
           competence:
             raw: 0
           delivery: hand
           duration:
-            raw: '0'
-            unit: instant
+            raw: '10'
+            unit: second
           effectTypes:
             - healing
+          endCondition: <p>The start of the target's next @L[Core:Turns]{turn}.</p>
           executionTime:
             base: a1
             slow:
@@ -1240,8 +1261,8 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target @L[Core:Healing]{heals} at the start of their next
-              turn.</p>
+              <p>Target @L[Core:Healing]{heals} at the start of their next turn
+              if they do not take any @L[Core:Damage]{damage} before then.</p>
           skill: true
           standard: true
           targets:
@@ -1514,8 +1535,8 @@ items:
         short:
           unit: self
     type: body
-  - _id: r6D4KjcWXE1aeCXf
-    _key: '!actors.items!42df0d58e38b42f4.r6D4KjcWXE1aeCXf'
+  - _id: IAbwr6BePjAk2oYe
+    _key: '!actors.items!42df0d58e38b42f4.IAbwr6BePjAk2oYe'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '14'
@@ -1525,7 +1546,7 @@ items:
     effects:
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!42df0d58e38b42f4.r6D4KjcWXE1aeCXf.8e9roKoeCSmTjbbo
+          !actors.items.effects!42df0d58e38b42f4.IAbwr6BePjAk2oYe.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
           coreVersion: '14'
@@ -1574,7 +1595,7 @@ items:
         type: ability
       - _id: aOvOlScH5bn7jX7m
         _key: >-
-          !actors.items.effects!42df0d58e38b42f4.r6D4KjcWXE1aeCXf.aOvOlScH5bn7jX7m
+          !actors.items.effects!42df0d58e38b42f4.IAbwr6BePjAk2oYe.aOvOlScH5bn7jX7m
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
           coreVersion: '14'

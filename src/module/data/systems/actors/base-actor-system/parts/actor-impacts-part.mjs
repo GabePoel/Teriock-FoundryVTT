@@ -105,7 +105,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeDamage(amount, options = {}) {
-        await this.parent.hookCall("takeDamage", { scope: { amount } });
+        await this.parent.hookCall("damage", { scope: { amount } });
         await this.#takeHarm(amount, "hp", options);
       }
 
@@ -121,7 +121,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeDrain(amount, options = {}) {
-        await this.parent.hookCall("takeDrain", { scope: { amount } });
+        await this.parent.hookCall("drain", { scope: { amount } });
         await this.#takeHarm(amount, "mp", options);
       }
 
@@ -135,7 +135,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeGainTempHp(amount) {
-        await this.parent.hookCall("takeGainTempHp", { scope: { amount } });
+        await this.parent.hookCall("gainTempHp", { scope: { amount } });
         await this.parent.update({
           "system.hp.temp": Math.max(this.hp.temp + amount, 0),
         });
@@ -151,7 +151,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeGainTempMp(amount) {
-        await this.parent.hookCall("takeGainTempMp", { scope: { amount } });
+        await this.parent.hookCall("gainTempMp", { scope: { amount } });
         await this.parent.update({
           "system.mp.temp": Math.max(this.mp.temp + amount, 0),
         });
@@ -167,7 +167,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeHealing(amount) {
-        await this.parent.hookCall("takeHealing", { scope: { amount } });
+        await this.parent.hookCall("healing", { scope: { amount } });
         await this.parent.update({
           "system.hp.value": barClamp(this.hp, amount),
         });
@@ -179,7 +179,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeHide(amount) {
-        await this.parent.hookCall("takeHide", { scope: { amount } });
+        await this.parent.hookCall("hide", { scope: { amount } });
         await this.parent.update({
           "system.detection.hiding": amount,
         });
@@ -195,7 +195,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeKill(amount) {
-        await this.parent.hookCall("takeKill", { scope: { amount } });
+        await this.parent.hookCall("kill", { scope: { amount } });
         if (this.hp.value <= amount) {
           await this.parent.toggleStatusEffect("dead", {
             active: true,
@@ -210,7 +210,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takePerceive(amount) {
-        await this.parent.hookCall("takePerceive", { scope: { amount } });
+        await this.parent.hookCall("perceive", { scope: { amount } });
         await this.parent.update({
           "system.detection.perceiving": amount,
         });
@@ -226,7 +226,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeRevitalizing(amount) {
-        await this.parent.hookCall("takeRevitalizing", { scope: { amount } });
+        await this.parent.hookCall("revitalizing", { scope: { amount } });
         await this.parent.update({
           "system.mp.value": barClamp(this.mp, amount),
         });
@@ -242,7 +242,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeSetTempHp(amount) {
-        await this.parent.hookCall("takeSetTempHp", { scope: { amount } });
+        await this.parent.hookCall("setTempHp", { scope: { amount } });
         await this.parent.update({ "system.hp.temp": amount });
       }
 
@@ -256,7 +256,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeSetTempMp(amount) {
-        await this.parent.hookCall("takeSetTempMp", { scope: { amount } });
+        await this.parent.hookCall("setTempMp", { scope: { amount } });
         await this.parent.update({ "system.mp.temp": amount });
       }
 
@@ -270,7 +270,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeSleep(amount) {
-        await this.parent.hookCall("takeSleep", { scope: { amount } });
+        await this.parent.hookCall("sleep", { scope: { amount } });
         if (this.hp.value <= amount) {
           await this.parent.toggleStatusEffect("asleep", {
             active: true,
@@ -290,7 +290,7 @@ export default Base => {
        */
       async takeWither(amount) {
         console.log(amount);
-        await this.parent.hookCall("takeWither", { scope: { amount } });
+        await this.parent.hookCall("wither", { scope: { amount } });
         await this.parent.update({
           "system.lp.value": barClamp(this.lp, amount),
         });

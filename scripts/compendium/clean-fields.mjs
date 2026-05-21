@@ -87,6 +87,10 @@ function cleanCommon(doc) {
 
   // Clean Retired Tags
   delete doc.system.imports;
+
+  if (Array.isArray(doc.system.effectTypes) && Array.isArray(doc.system.powerSources)) {
+    doc.system.effectTypes = doc.system.effectTypes.filter(t => !doc.system.powerSources.includes(t));
+  }
 }
 
 /**
@@ -467,6 +471,13 @@ function cleanAutomation(automation) {
   }
   if (automation.activeQualifier === "1") {
     delete automation.activeQualifier;
+  }
+  if (automation.type === "changes") {
+    for (const c of automation.changes ?? []) {
+      delete c.phase;
+      delete c.qualifier;
+      delete c.time;
+    }
   }
 }
 

@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
     name: Life Elder Sorcery
     system:
@@ -163,7 +163,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -247,7 +247,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
     name: Celestial Elder Sorcery Words
     system:
@@ -385,7 +385,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
     name: Life Elder Sorcery Words
     system:
@@ -815,7 +815,7 @@ effects:
       elements:
         - life
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        <p>At the end of each of the target's @L[Core:Turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
@@ -928,7 +928,7 @@ effects:
       elements:
         - life
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
+        <p>At the end of each of the target's @L[Core:Turns]{turns}, they roll
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
@@ -1075,7 +1075,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/glow-of-healing.webp
     name: Glow of Healing
     system:
@@ -1139,11 +1139,39 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/healing-touch.webp
     name: Healing Touch
     system:
       _sup: CUElIGPRv4CuEOOn
+      automations:
+        oJJEmjlNH83yIZ12:
+          _id: oJJEmjlNH83yIZ12
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: forced
+            when:
+              skip: 0
+              time: start
+              trigger: turn
+            who:
+              type: target
+          override:
+            combat: true
+            conditions: false
+            triggers: true
+          triggers:
+            - damage
+          type: expiration
+        qgzpq8KiqEEOCMXJ:
+          _id: qgzpq8KiqEEOCMXJ
+          consumeStatDice: true
+          forHarm: false
+          noStatDice: false
+          trigger: turnStart
+          type: heal
       class: lifeMage
       competence:
         raw: 0
@@ -1155,10 +1183,11 @@ effects:
             type: tag
       delivery: hand
       duration:
-        raw: '0'
-        unit: instant
+        raw: '10'
+        unit: second
       elements:
         - life
+      endCondition: <p>The start of the target's next @L[Core:Turns]{turn}.</p>
       executionTime:
         base: a1
         slow:
@@ -1185,9 +1214,10 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>Target is no longer @L[Condition:Poisoned]{poisoned} and is
-          @L[Core:Healing]{healed} at the start of your next
-          @L[Core:Turns]{turn}.</p>
+          <p>Target is immediately no longer @L[Condition:Poisoned]{poisoned}
+          and is also @L[Core:Healing]{healed} at the start of their next
+          @L[Core:Turns]{turn} if they do not take any @L[Core:Damage]{damage}
+          before then.</p>
       spell: true
       standard: true
       targets:
@@ -1201,7 +1231,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.36
+      systemVersion: 0.12.61
     img: systems/teriock/src/icons/abilities/cure-illness.webp
     name: Cure Illness
     system:
