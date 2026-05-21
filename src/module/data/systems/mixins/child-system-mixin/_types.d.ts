@@ -5,6 +5,8 @@ declare global {
     export type ChildSystemData = {
       /** <schema> Description */
       description: string;
+      /** <derived> Whether this is forcibly suppressed by something else */
+      forceSuppressed: boolean;
       /** <schema> <base> Qualifier formulas which are resolved before changes are applied */
       qualifiers: {
         ephemeral: EvaluationModel;

@@ -3,6 +3,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { EvaluationField, FormulaField } from "../../../fields/_module.mjs";
+import { initialBoolean } from "../../../fields/helpers/initializers.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
 import { CommonSystemMixin, HierarchySystemMixin } from "../../mixins/_module.mjs";
@@ -47,7 +48,7 @@ export default function ChildSystemMixin(Base) {
             { persisted: false },
           ),
           description: new fields.HTMLField({ initial: "" }),
-          font: new fields.StringField({ initial: "" }),
+          forceSuppressed: new initialBoolean(),
           qualifiers: new fields.SchemaField({
             ephemeral: new EvaluationField({
               deterministic: true,
@@ -67,6 +68,14 @@ export default function ChildSystemMixin(Base) {
        */
       get _isSuppressedElder() {
         return this.parent.elder?.active === false;
+      }
+
+      /**
+       * If this is suppressed due to something explicitly forcing it to be that way.
+       * @returns {boolean}
+       */
+      get _isSuppressedForced() {
+        return this.forceSuppressed;
       }
 
       /**
@@ -166,7 +175,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @returns {boolean} */
       get makeSuppressed() {
-        return this._isSuppressedElder || this._isSuppressedQualifier;
+        return this._isSuppressedForced || this._isSuppressedElder || this._isSuppressedQualifier;
       }
 
       /**

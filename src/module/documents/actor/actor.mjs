@@ -280,13 +280,30 @@ export default class TeriockActor extends mixClasses(
    * @param {Teriock.System.CompetenceLevel} value
    */
   _applyCompetenceAutomations(value) {
-    const autos = this.validEffects.flatMap(e =>
-      e.system.activeAutomations.filter(a => a?.type === "changeCompetence" && a?.competence.value === value),
-    );
+    const autos = this.validEffects
+      .filter(e => e.active)
+      .flatMap(e =>
+        e.system.activeAutomations.filter(a => a?.type === "changeCompetence" && a?.competence.value === value),
+      );
     const identifiers = new Set(autos.map(a => a.identifier));
     for (const c of this.modifiableChildren) {
       if (identifiers.has(c.typedIdentifier) && c.system.competence.raw < value) {
         c.system.competence.raw = value;
+      }
+    }
+  }
+
+  /**
+   * Apply all suppress automations that force certain children of this document to be suppressed.
+   */
+  _applySuppressAutomations() {
+    const autos = this.validEffects
+      .filter(e => e.active)
+      .flatMap(e => e.system.activeAutomations.filter(a => a?.type === "suppress"));
+    const identifiers = new Set(autos.map(a => a.identifier));
+    for (const c of this.modifiableChildren) {
+      if (identifiers.has(c.typedIdentifier)) {
+        c.system.forceSuppressed = true;
       }
     }
   }
@@ -466,6 +483,7 @@ export default class TeriockActor extends mixClasses(
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
+    this._applySuppressAutomations();
     this._applyCompetenceAutomations(1);
     this._applyCompetenceAutomations(2);
     this.prepareChangeData();
