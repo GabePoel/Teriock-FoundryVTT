@@ -1,6 +1,5 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
-import { migrateValue } from "../../../shared/migrations/source-migrations.mjs";
 
 /**
  * @param {typeof BaseSystem} Base
