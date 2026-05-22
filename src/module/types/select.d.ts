@@ -3,6 +3,8 @@ declare global {
     export type BaseDocumentSelect = {
       /** Text to display on the dialog */
       hint?: string;
+      /** Icon class */
+      icon?: string;
       /** Unique key to use that identifies each document */
       idKey?: string;
       /** Path to an image to display for each document */

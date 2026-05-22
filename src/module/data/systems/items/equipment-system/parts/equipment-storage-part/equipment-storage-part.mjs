@@ -184,9 +184,10 @@ export default Base => {
         const chosen = await selectDocumentDialog(candidates, {
           auto: true,
           hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.hint"),
-          label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
+          icon: makeIconClass(TERIOCK.display.icons.equipment.stack, "title"),
           openable: true,
           textKey: "system.remainingString",
+          title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
         });
         if (!chosen) {
           return;

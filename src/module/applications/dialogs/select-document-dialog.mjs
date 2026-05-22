@@ -89,6 +89,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
 
   const sheet = new TeriockDocumentSelector(context.documents, {
     hint: options.hint,
+    icon: options.icon,
     multi: options.multi,
     openable: options.openable,
     title: options.title,

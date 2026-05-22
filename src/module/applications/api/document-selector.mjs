@@ -78,10 +78,12 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     this.tooltipAsync = tooltipAsync;
     this.openable = openable;
     if (options.title) {
-      this.config = foundry.utils.mergeObject(this.options || {}, {
-        window: { title: options.title },
-      });
+      foundry.utils.setProperty(this.options, "window.title", options.title);
     }
+    if (options.icon) {
+      foundry.utils.setProperty(this.options, "window.icon", options.icon);
+    }
+    this.config = foundry.utils.mergeObject(this.config ?? {}, this.options);
     this._resolve = null;
     this._result = new Promise(resolve => (this._resolve = resolve));
   }
