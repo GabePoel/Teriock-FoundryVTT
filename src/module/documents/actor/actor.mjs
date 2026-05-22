@@ -2,7 +2,7 @@ import { config } from "../../constants/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
-import { findBestDocument } from "../../helpers/utils.mjs";
+import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -63,11 +63,11 @@ export default class TeriockActor
     return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
-  /** @type Set<UUID<TeriockItem>> */
-  _stagedItemCreations;
+  /** @type {Set<UUID<TeriockItem>|TypedIdentifier>} */
+  _stagedItemCreations = new Set();
 
-  /** @type Set<ID<TeriockItem>> */
-  _stagedItemDeletions;
+  /** @type {Set<ID<TeriockItem>>} */
+  _stagedItemDeletions = new Set();
 
   /**
    * Is this actor active?
@@ -278,6 +278,40 @@ export default class TeriockActor
   }
 
   /**
+   * Generate an operation for creating staged items.
+   * @returns {Promise<Partial<DatabaseCreateOperation>|null>}
+   */
+  async _getStagedCreateOperation() {
+    if (!this._stagedItemCreations || !this._stagedItemCreations.size) return null;
+    const items = await Promise.all(this._stagedItemCreations.map(uuid => fromKey(uuid)));
+    const data = items.map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
+    return { action: "create", data, documentName: "Item", pack: this.pack, parent: this };
+  }
+
+  /**
+   * Generate an operation for deleting staged items.
+   * @returns {Promise<Partial<DatabaseDeleteOperation>|null>}
+   */
+  async _getStagedDeleteOperation() {
+    if (!this._stagedItemDeletions || !this._stagedItemDeletions.size) return null;
+    const ids = Array.from(this._stagedItemDeletions);
+    return { action: "delete", documentName: "Item", ids, pack: this.pack, parent: this };
+  }
+
+  /**
+   * Generate an array of staged operations. This also resets any operations so they're no longer staged. The operation
+   * returned by this must be immediately used or dismissed.
+   * @returns {Promise<DatabaseWriteOperation[]>}
+   */
+  async _getStagedOperations() {
+    const operations = (await Promise.all([this._getStagedCreateOperation(), this._getStagedDeleteOperation()])).filter(
+      Boolean,
+    );
+    this._resetStagedOperations();
+    return operations;
+  }
+
+  /**
    * @inheritDoc
    * @param {ActorData} data
    * @param {object} options
@@ -329,23 +363,11 @@ export default class TeriockActor
   }
 
   /**
-   * Create all the staged items.
-   * @returns {Promise<AnyItem[]>}
+   * Clear and initialize all staged operations.
    */
-  async _processStagedItemCreations() {
-    if (!this._stagedItemCreations) return [];
-    const items = await Promise.all(this._stagedItemCreations.map(uuid => fromUuid(uuid)));
-    const data = items.map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
-    return this.createChildDocuments("Item", Array.from(data));
-  }
-
-  /**
-   * Delete all staged items.
-   * @returns {Promise<AnyCommonDocument[]>}
-   */
-  async _processStagedItemDeletions() {
-    if (!this._stagedItemDeletions) return [];
-    return this.deleteChildDocuments("Item", Array.from(this._stagedItemDeletions));
+  _resetStagedOperations() {
+    this._stagedItemCreations = new Set();
+    this._stagedItemDeletions = new Set();
   }
 
   /**

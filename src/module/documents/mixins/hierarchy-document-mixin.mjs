@@ -34,6 +34,24 @@ export default function HierarchyDocumentMixin(Base) {
         await Promise.all(Array.from(compendiums).map(c => c.getIndex()));
       }
 
+      /** @inheritDoc */
+      static async _onCreateOperation(documents, operation, user) {
+        // Override normal client document sheet rendering behavior so subs don't have their sheets rendered.
+        const cachedRenderSheet = operation.renderSheet;
+        if (operation.renderSheet && operation.dontRenderSheets && user.id === game.user.id) {
+          operation.renderSheet = false;
+          for (const [i, document] of documents.entries()) {
+            if (operation.dontRenderSheets.includes(document.id)) continue;
+            document.sheet?.render(true, {
+              renderContext: `create${this.documentName}`,
+              renderData: operation.data[i],
+            });
+          }
+        }
+        await super._onCreateOperation(documents, operation, user);
+        operation.renderSheet = cachedRenderSheet;
+      }
+
       /**
        * @inheritDoc
        * @param {AnyCommonDocument[]} documents
@@ -47,6 +65,7 @@ export default function HierarchyDocumentMixin(Base) {
 
         operation.cachedKeepId = operation.keepId;
         operation.isKeepIdCached = true;
+        operation.dontRenderSheets = [];
         documents.sort((a, b) => {
           const aSup = !!a?.system?._sup;
           const bSup = !!b?.system?._sup;
@@ -89,6 +108,7 @@ export default function HierarchyDocumentMixin(Base) {
                 if (!subClone._id && !operation.keepSubIds) subClone.updateSource({ _id: foundry.utils.randomID() });
                 idMap[sub.id] = subClone._id;
                 clones.push(subClone);
+                operation.dontRenderSheets.push(subClone._id);
               }
               for (const clone of clones) clone.updateSource({ "system._sup": idMap[clone.system._sup] });
               toCreate.push(...clones);
@@ -451,13 +471,13 @@ export default function HierarchyDocumentMixin(Base) {
         if (this.parent) return this.parent.createEmbeddedDocuments(this.documentName, data, operation);
         else {
           if (this.inCompendium) operation.pack = this.collection.collection;
-          return await foundry.utils.getDocumentClass(this.documentName).createDocuments(data, operation);
+          return foundry.utils.getDocumentClass(this.documentName).createDocuments(data, operation);
         }
       }
 
       /** @inheritDoc */
       async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
-        if (embeddedName === this.documentName) return await this.deleteSubDocuments(ids, operation);
+        if (embeddedName === this.documentName) return this.deleteSubDocuments(ids, operation);
         else return super.deleteChildDocuments(embeddedName, ids, operation);
       }
 
@@ -472,7 +492,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (this.parent) return this.parent.deleteEmbeddedDocuments(this.documentName, ids, operation);
         else {
           if (this.inCompendium) operation.pack = this.collection.collection;
-          return await foundry.utils.getDocumentClass(this.documentName).deleteDocuments(ids, operation);
+          return foundry.utils.getDocumentClass(this.documentName).deleteDocuments(ids, operation);
         }
       }
 
@@ -481,7 +501,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<TypeCollection>}
        */
       async getAllSubs() {
-        return await resolveCollection(this.allSubs);
+        return resolveCollection(this.allSubs);
       }
 
       /**
@@ -489,7 +509,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<TypeCollection>}
        */
       async getAllSups() {
-        return await resolveCollection(this.allSups);
+        return resolveCollection(this.allSups);
       }
 
       /**
@@ -497,7 +517,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument|void>}
        */
       async getElder() {
-        return await resolveDocument(this.elder);
+        return resolveDocument(this.elder);
       }
 
       /**
@@ -505,7 +525,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<TypeCollection>}
        */
       async getSubs() {
-        return await resolveCollection(this.subs);
+        return resolveCollection(this.subs);
       }
 
       /**
@@ -513,7 +533,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument|void>}
        */
       async getSup() {
-        return await resolveDocument(this.sup);
+        return resolveDocument(this.sup);
       }
 
       /** @inheritDoc */

@@ -55,6 +55,24 @@ export default class RankSystem
     });
   }
 
+  /**
+   * Stage needed archetypes for creation.
+   */
+  #stageArchetypeCreation() {
+    if (
+      this.archetype !== "everyman" && !this.actor.archetypes.map(a => a.system.identifier).includes(this.archetype)
+    ) { this.actor._stagedItemCreations.add(`archetype:${this.archetype}`); }
+  }
+
+  /**
+   * Stage unneeded archetypes for deletion.
+   */
+  #stageArchetypeDeletion() {
+    const neededArchetypes = new Set(this.actor.ranks.map(r => r.system.archetype));
+    for (const a of this.actor.archetypes)
+      if (!neededArchetypes.has(a.system.identifier)) this.actor._stagedItemDeletions.add(a.id);
+  }
+
   /** @inheritDoc */
   get _canToggleHpDice() {
     return super._canToggleHpDice && !this.innate;
@@ -141,25 +159,21 @@ export default class RankSystem
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor && this.classRank === 1) {
-      if (
-        this.archetype !== "everyman" && !this.actor.archetypes.map(a => a.system.identifier).includes(this.archetype)
-      ) {
-        const archetypeName = TERIOCK.config.rank[this.archetype].name;
-        this.actor._stagedItemCreations.add(game.teriock.packs.classes.index.getName(archetypeName).uuid);
-      }
-    }
+    if (this.parent.checkEditor(userId) && this.actor) this.#stageArchetypeCreation();
   }
 
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) {
-      const archetypes = this.actor.archetypes.filter(a => a.system.identifier === this.archetype);
-      const needsArchetype = this.actor.ranks.filter(r => r.system.archetype === this.archetype).length > 0;
-      if (!needsArchetype && archetypes.length > 0) {
-        for (const p of archetypes) this.actor._stagedItemDeletions.add(p.id);
-      }
+    if (this.parent.checkEditor(userId) && this.actor) this.#stageArchetypeDeletion();
+  }
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if (this.parent.checkEditor(userId) && this.actor && foundry.utils.hasProperty(changed, "system.archetype")) {
+      this.#stageArchetypeCreation();
+      this.#stageArchetypeDeletion();
     }
   }
 

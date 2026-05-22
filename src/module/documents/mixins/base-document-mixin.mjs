@@ -43,6 +43,52 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * @inheritDoc
+       * @param {TeriockItem[]} documents
+       * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
+       * @param {TeriockUser} user
+       * @returns {Promise<boolean|void>}
+       */
+      static async _onCreateOperation(documents, operation, user) {
+        await this._onWriteOperation(documents);
+        return super._onCreateOperation(documents, operation, user);
+      }
+
+      /**
+       * @inheritDoc
+       * @param {TeriockItem[]} documents
+       * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
+       * @param {TeriockUser} user
+       * @returns {Promise<void>}
+       */
+      static async _onDeleteOperation(documents, operation, user) {
+        await this._onWriteOperation(documents);
+        return super._onDeleteOperation(documents, operation, user);
+      }
+
+      /**
+       * @inheritDoc
+       * @param {TeriockItem[]} documents
+       * @param {DatabaseUpdateOperation & Teriock.System._Operation} operation
+       * @param {TeriockUser} user
+       * @returns {Promise<void>}
+       */
+      static async _onUpdateOperation(documents, operation, user) {
+        await this._onWriteOperation(documents);
+        return super._onUpdateOperation(documents, operation, user);
+      }
+
+      /**
+       * Post-process any write operation, reacting to database changes which have occurred. Post-operation events
+       * occur for all connected clients. This is up to individual document classes to implement.
+       * @param {TeriockDocument[]} _documents
+       * @param {DatabaseWriteOperation & Teriock.System._Operation} _operation
+       * @param {TeriockUser} _user
+       * @returns {Promise<void>}
+       */
+      static async _onWriteOperation(_documents, _operation, _user) {}
+
+      /**
        * @param {object[]} data
        * @param {Partial<Omit<DatabaseCreateOperation, "data"> & Teriock.System._CreateOperation>} operation
        * @inheritDoc

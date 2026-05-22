@@ -7,7 +7,7 @@ import BaseRegistryLifecycle from "./abstract/base-registry-lifecycle.mjs";
 /**
  * Registry of document UUIDs based on their identifiers. Many documents could have the same identifier, but there is
  * only one canonical document for each identifier. Documents in Compendium packs are preferred over ones in the world
- * for establishing a single source of truth with regards to what identifiers refer to.
+ * for establishing a single source of truth in regard to what identifiers refer to.
  * @implements {Teriock.Registries.SingleRegistry<TypedIdentifier, UUID<IdentifiableDocument>>}
  */
 export default class IdentifiersRegistry extends BaseRegistryLifecycle {
@@ -128,8 +128,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   /**
    * Get a canonical document from its identifier.
    * @param {TypedIdentifier} identifier
-   * @param {object} [options]
-   * @param {boolean} [options.invalid]
+   * @param {Teriock.System.GlobalFetchOptions} [options]
    * @returns {Promise<IdentifiableDocument|null>}
    */
   async fromIdentifier(identifier, options = {}) {
@@ -139,9 +138,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   /**
    * Get a canonical document from its identifier synchronously.
    * @param {TypedIdentifier} identifier
-   * @param {object} [options]
-   * @param {boolean} [options.strict]
-   * @param {boolean} [options.invalid]
+   * @param {Teriock.System.SyncFetchOptions} [options]
    * @returns {IdentifiableDocument|null}
    */
   fromIdentifierSync(identifier, options = {}) {

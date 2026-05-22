@@ -17,13 +17,15 @@ declare global {
        */
       allowDuplicateSubs?: boolean;
       /**
-       * Since {@link HierarchyDocument._preCreateOperation} manipulates the default `keepId` value in creation
-       * operations, subsequent operations using the same operation object can get messed up. This allows us to
-       * reset it in {@link HierarchyDocument.createDocuments}.
+       * Since {@link HierarchyDocument._preCreateOperation} manipulates the default `keepId` value, subsequent
+       * operations using the same options object can get messed up. This allows us to reset it in
+       * {@link HierarchyDocument.createDocuments}.
        */
       cachedKeepId?: boolean;
       /** If true then subs will not be removed prior to document creation */
       dontFilterSubs?: boolean;
+      /** Skip rendering of sheets for documents with these IDs. */
+      dontRenderSheets?: ID<TeriockDocument>[];
       /** Tracker to see if the value of `cachedKeepId` should be read. */
       isKeepIdCached?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
@@ -110,6 +112,17 @@ declare global {
      * A parsed identifier.
      */
     export type ResolvedIdentifier = { identifier: Identifier, type?: Teriock.Documents.CommonType };
+
+    export type GlobalFetchOptions = { invalid?: boolean };
+
+    export type SyncFetchOptions = GlobalFetchOptions & { strict?: boolean };
+
+    export type FetchOptions = GlobalFetchOptions & {
+      /** Whether to only fetch from the relative document's children. */
+      relativeOnly?: boolean;
+      /** An optional document to compare against. */
+      relativeTo?: AnyCommonDocument;
+    };
 
     /**
      * Options that control how multiple documents are resolved.

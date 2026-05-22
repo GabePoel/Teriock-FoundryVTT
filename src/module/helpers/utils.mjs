@@ -311,30 +311,30 @@ export function parseIdentifier(identifier) {
  * Find the best document from a string that describes it. Typed identifiers are preferred over plain identifiers
  * which are preferred over names.
  * @param {TypedIdentifier|Identifier|string} lookup
- * @param {AnyCommonDocument} localDocument
+ * @param {AnyCommonDocument} relativeTo
  * @param {object} [options]
- * @param {boolean} [options.localOnly]
+ * @param {boolean} [options.relativeOnly]
  * @returns {Promise<AnyCommonDocument|null>}
  */
-export async function findBestDocument(lookup, localDocument, options = {}) {
-  if (options.localOnly && typeof localDocument?.getEffectiveChildren !== "function") return null;
+export async function findBestDocument(lookup, relativeTo, options = {}) {
+  if (options.relativeOnly && typeof relativeTo?.getEffectiveChildren !== "function") return null;
   if (!lookup) return null;
-  const doc = await fromIdentifier(lookup, { localDocument, localOnly: !!options.localOnly });
+  const doc = await fromIdentifier(lookup, { relativeOnly: !!options.relativeOnly, relativeTo });
   if (doc) return doc;
-  const children = await localDocument.getEffectiveChildren();
+  const children = await relativeTo.getEffectiveChildren();
   return children.find(c => c.lookupKey === lookup) ?? null;
 }
 
 /**
  * Get a local document from its identifier.
  * @param {Identifier|TypedIdentifier} identifier
- * @param {AnyCommonDocument} localDocument - The document to compare against.
+ * @param {AnyCommonDocument} relativeTo - The document to compare against.
  * @returns {Promise<AnyCommonDocument|null>}
  */
-export async function fromIdentifierLocal(identifier, localDocument) {
-  if (typeof localDocument?.getEffectiveChildren !== "function") return null;
+export async function fromIdentifierLocal(identifier, relativeTo) {
+  if (typeof relativeTo?.getEffectiveChildren !== "function") return null;
   if (!identifier) return null;
-  const children = await localDocument.getEffectiveChildren();
+  const children = await relativeTo.getEffectiveChildren();
   return children.find(c => c?.typedIdentifier === identifier || c?.system?.identifier === identifier) ?? null;
 }
 
@@ -362,9 +362,7 @@ export async function fromQualifier(document, qualifier) {
 /**
  * Get a world document from its identifier.
  * @param {TypedIdentifier} identifier
- * @param {object} [options]
- * @param {boolean} [options.strict]
- * @param {boolean} [options.invalid]
+ * @param {Teriock.System.SyncFetchOptions} [options]
  * @returns {AnyCommonDocument|null}
  */
 export function fromIdentifierSync(identifier, options = {}) {
@@ -375,21 +373,30 @@ export function fromIdentifierSync(identifier, options = {}) {
 /**
  * Get a document from its identifier. Prefers compendium documents over world documents.
  * @param {TypedIdentifier} identifier
- * @param {object} [options]
- * @param {AnyCommonDocument} [options.localDocument] - An optional local document to compare against.
- * @param {boolean} [options.localOnly] - Only search the local document.
- * @param {boolean} [options.invalid]
+ * @param {Teriock.System.FetchOptions} [options]
  * @returns {Promise<TeriockDocument|null>}
  */
 export async function fromIdentifier(identifier, options = {}) {
   if (!identifier) return null;
-  if (options.localOnly && !options.localDocument) return null;
-  if (options.localDocument) {
-    const doc = await fromIdentifierLocal(identifier, options.localDocument);
+  if (options.relativeOnly && !options.relativeTo) return null;
+  if (options.relativeTo) {
+    const doc = await fromIdentifierLocal(identifier, options.relativeTo);
     if (doc) return doc;
-    if (options.localOnly) return null;
+    if (options.relativeOnly) return null;
   }
   return game.teriock.identifiers.fromIdentifier(identifier);
+}
+
+/**
+ * Get a document from some key that specifies it. This could be either a typed identifier or a UUID.
+ * @param {TypedIdentifier|UUID} uuidOrIdentifier
+ * @param {Teriock.System.FetchOptions} options
+ * @returns {Promise<unknown>}
+ */
+export async function fromKey(uuidOrIdentifier, options = {}) {
+  if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes("."))
+    return fromIdentifier(uuidOrIdentifier, options);
+  else return fromUuid(uuidOrIdentifier, options);
 }
 
 /**

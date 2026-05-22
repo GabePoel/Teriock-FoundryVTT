@@ -29,56 +29,13 @@ export default class TeriockItem
     return Object.assign(super.documentMetadata, { types: Object.keys(CONFIG.Item.dataModels) });
   }
 
-  /**
-   * @inheritDoc
-   * @param {TeriockItem[]} documents
-   * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
-   * @param {TeriockUser} user
-   * @returns {Promise<boolean|void>}
-   */
-  static async _onCreateOperation(documents, operation, user) {
+  /** @inheritDoc */
+  static async _onWriteOperation(documents, operation, user) {
     const actors = new Set();
     for (const d of documents) if (d.actor) actors.add(d.actor);
-    await Promise.all(actors.map(a => a._processStagedItemCreations()));
-    return super._onCreateOperation(documents, operation, user);
-  }
-
-  /**
-   * @inheritDoc
-   * @param {TeriockItem[]} documents
-   * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
-   * @param {TeriockUser} user
-   * @returns {Promise<void>}
-   */
-  static async _onDeleteOperation(documents, operation, user) {
-    const actors = new Set();
-    for (const d of documents) if (d.actor) actors.add(d.actor);
-    await Promise.all(actors.map(a => a._processStagedItemDeletions()));
-    return super._onDeleteOperation(documents, operation, user);
-  }
-
-  /**
-   * @inheritDoc
-   * @param {TeriockItem[]} documents
-   * @param {DatabaseCreateOperation & Teriock.System._CreateOperation} operation
-   * @param {TeriockUser} user
-   * @returns {Promise<boolean|void>}
-   */
-  static async _preCreateOperation(documents, operation, user) {
-    for (const d of documents.filter(d => d.actor)) d.actor._stagedItemCreations = new Set();
-    return super._preCreateOperation(documents, operation, user);
-  }
-
-  /**
-   * @inheritDoc
-   * @param {TeriockItem[]} documents
-   * @param {DatabaseDeleteOperation & Teriock.System._Operation} operation
-   * @param {TeriockUser} user
-   * @returns {Promise<boolean|void>}
-   */
-  static async _preDeleteOperation(documents, operation, user) {
-    for (const d of documents.filter(d => d.actor)) d.actor._stagedItemDeletions = new Set();
-    return super._preDeleteOperation(documents, operation, user);
+    const operations = (await Promise.all(actors.map(a => a._getStagedOperations()))).flat();
+    await foundry.documents.modifyBatch(operations);
+    await super._onWriteOperation(documents, operation, user);
   }
 
   /**

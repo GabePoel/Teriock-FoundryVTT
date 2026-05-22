@@ -11,8 +11,8 @@ command: |-
     for (let i = 5; i > 0; i--) {
       const identifier = `consequence:stage-${i}-black-rot`;
       const consequence = await teriock.fromIdentifier(identifier, {
-        localDocument: actor,
-        localOnly: true,
+        relativeOnly: true,
+        relativeTo: actor,
       });
       if (!consequence) continue;
       found++;
