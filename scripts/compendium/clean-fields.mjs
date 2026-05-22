@@ -305,6 +305,8 @@ function cleanAutomations(automations) {
  */
 function cleanAutomation(automation) {
   delete automation.transformation;
+  if (!automation.overrideCompetence) delete automation.overrideCompetence;
+  if (!automation.overrideData) delete automation.overrideData;
   if (automation.type === "combatExpiration") {
     automation.type = "expiration";
     automation.combat = { what: automation.what, when: automation.when, who: automation.who };
@@ -321,6 +323,20 @@ function cleanAutomation(automation) {
       delete c.phase;
       delete c.qualifier;
       delete c.time;
+    }
+  }
+  if (automation.type === "expiration") {
+    if (!automation.override.combat) {
+      delete automation.combat;
+      delete automation.override.combat;
+    }
+    if (!automation.override.conditions) {
+      delete automation.conditions;
+      delete automation.override.conditions;
+    }
+    if (!automation.override.triggers) {
+      delete automation.triggers;
+      delete automation.override.triggers;
     }
   }
 }

@@ -1,19 +1,19 @@
 import { TypeCollection } from "../documents/collections/_module.mjs";
 import { toKebabCase } from "./string.mjs";
-import { fromIdentifier, parseIdentifier } from "./utils.mjs";
+import { fromIdentifier, fromKey, parseIdentifier } from "./utils.mjs";
 
 const { Document } = foundry.abstract;
 
 /**
  * Ensure a document is not an index.
  * @template T
- * @param {Index<T> | UUID<T>} syncDoc
+ * @param {Index<T> | UUID<T> | TypedIdentifier} syncDoc
  * @returns {Promise<T|null>}
  */
 export async function resolveDocument(syncDoc) {
   let out = null;
   if (!syncDoc) return out;
-  if (typeof syncDoc === "string") out = await fromUuid(syncDoc);
+  if (typeof syncDoc === "string") out = await fromKey(syncDoc);
   else if (syncDoc instanceof Document) out = syncDoc;
   else out = await foundry.utils.fromUuid(syncDoc.uuid);
   return out;
@@ -22,7 +22,7 @@ export async function resolveDocument(syncDoc) {
 /**
  * Ensure all documents in an array are not indexes.
  * @template T
- * @param {Index<T>[] | UUID<T>} syncDocs
+ * @param {Index<T>[] | UUID<T> | TypedIdentifier} syncDocs
  * @param {Teriock.System.ResolveDocumentsOptions} [options]
  * @returns {Promise<T[]>}
  */

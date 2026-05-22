@@ -12,7 +12,7 @@ const { fields } = foundry.data;
  * @property {CombatExpiration} combat
  * @property {Set<string>} triggers
  * @property {{absent: Set<Teriock.Keys.Condition>, present: Set<Teriock.Keys.Condition>}} conditions
- * @property {{conditions: boolean, triggers: boolean}} override
+ * @property {{combat: boolean, conditions: boolean, triggers: boolean}} override
  */
 export default class ExpirationAutomation extends CritAutomation {
   /** @inheritDoc */

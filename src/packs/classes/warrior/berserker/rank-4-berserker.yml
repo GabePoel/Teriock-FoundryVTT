@@ -59,7 +59,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.62
     flags:
       teriock:
         category: combat
@@ -67,6 +67,56 @@ effects:
     img: systems/teriock/src/icons/abilities/berserk.webp
     name: Berserk
     system:
+      automations:
+        eUm1UOhkyF3KmU1q:
+          _id: eUm1UOhkyF3KmU1q
+          all: false
+          attachDocuments: true
+          automatic: true
+          competencies:
+            - 1
+          multi: false
+          qualifier: '0'
+          separate: false
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.abilities.ActiveEffect.19e84b851836664f
+        qy0rKWHv0DFoFgqJ:
+          _id: qy0rKWHv0DFoFgqJ
+          all: false
+          attachDocuments: true
+          automatic: true
+          competencies:
+            - 2
+          multi: false
+          qualifier: '0'
+          separate: false
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.abilities.ActiveEffect.63d61d08bd63f538
+        X2DN6pHX8ivuh2kl:
+          _id: X2DN6pHX8ivuh2kl
+          conditions:
+            absent:
+              - dead
+          override:
+            conditions: true
+          type: expiration
+        mmCTbgaQIg38Y0II:
+          _id: mmCTbgaQIg38Y0II
+          executor: false
+          multi: false
+          relation: include
+          status: frenzied
+          target: false
+          type: status
+        mY9vQJGkj2Kf1RTw:
+          _id: mY9vQJGkj2Kf1RTw
+          amount: 15
+          impact: gainTempHp
+          morganti: false
+          showDialog: false
+          type: take
       class: berserker
       competence:
         raw: 0
@@ -431,8 +481,6 @@ effects:
               type: target
           override:
             combat: true
-            conditions: false
-            triggers: false
           type: expiration
         7400b41f20d9f100:
           _id: 7400b41f20d9f100
@@ -446,7 +494,6 @@ effects:
           innerWidth: '0'
           multi: false
           outerWidth: '0'
-          overrideData: false
           qualifier: '0'
           regionType: emanation
           restriction:

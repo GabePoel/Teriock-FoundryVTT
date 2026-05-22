@@ -24,7 +24,7 @@ export default Base => {
             new fields.SchemaField(
               objectMap(
                 protectionConfig.categories,
-                category => new fields.SetField(new fields.StringField(), { label: category.label }),
+                category => new fields.SetField(new fields.StringField(), { label: category.label, persisted: false}),
               ),
               { label: type.label },
             ))),
@@ -42,10 +42,9 @@ export default Base => {
        * @returns {boolean} Whether or not there's some protection against the specified key and value
        */
       isProtected(category, value) {
-        let hasProtection = false;
         for (const protectionData of Object.values(this.protections))
-          if ((protectionData[category] || new Set()).has(value)) hasProtection = true;
-        return hasProtection;
+          if ((protectionData[category] || new Set()).has(value)) return true;
+        return false;
       }
 
       /** @inheritDoc */
@@ -56,9 +55,7 @@ export default Base => {
           this.protections.resistances.effectTypes.add("healing");
           this.protections.resistances.effectTypes.add("revival");
         }
-        if (this.parent.statuses.has("frenzied")) {
-          this.protections.resistances.statuses.add("frightened");
-        }
+        if (this.parent.statuses.has("frenzied")) this.protections.resistances.statuses.add("frightened");
       }
 
       /**
@@ -68,13 +65,12 @@ export default Base => {
        * - [Immunity](https://wiki.teriock.com/index.php/Keyword:Immunity)
        * - [Hexseal](https://wiki.teriock.com/index.php/Keyword:Hexseal)
        *
-       * @param {Teriock.Execution.ImmunityExecutionOptions} [options] - Options for the roll.
+       * @param {Partial<Teriock.Execution.ImmunityExecutionOptions>} [options] - Options for the roll.
        * @returns {Promise<void>}
        */
       async rollImmunity(options = {}) {
         await this.parent.hookCall(options.hex ? "hexseal" : "immune");
-        options.actor = this.parent;
-        await new ImmunityExecution(options).execute();
+        await new ImmunityExecution(Object.assign(options, { actor: this.parent })).execute();
       }
 
       /**
@@ -84,14 +80,13 @@ export default Base => {
        * - [Resistance](https://wiki.teriock.com/index.php/Ability:Resist_Effects)
        * - [Hexproof](https://wiki.teriock.com/index.php/Keyword:Hexproof)
        *
-       * @param {Teriock.Execution.ResistanceExecutionOptions} [options] - Options for the roll.
+       * @param {Partial<Teriock.Execution.ResistanceExecutionOptions>} [options] - Options for the roll.
        * @returns {Promise<void>}
        */
       async rollResistance(options = {}) {
         if (options.event) Object.assign(options, ThresholdRoll.parseEvent(options.event));
         await this.parent.hookCall(options.hex ? "hexproof" : "resist");
-        options.actor = this.parent;
-        await new ResistanceExecution(options).execute();
+        await new ResistanceExecution(Object.assign(options, { actor: this.parent })).execute();
       }
     }
   );
