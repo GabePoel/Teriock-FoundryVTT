@@ -18,6 +18,7 @@ export function cleanDocument(doc) {
     delete doc._stats.ownership;
   }
   if (doc.system) {
+    delete doc.system.forceSuppressed;
     cleanCommon(doc);
     cleanActiveEffect(doc);
     if (doc.type === "character" || doc.type === "creature") {
