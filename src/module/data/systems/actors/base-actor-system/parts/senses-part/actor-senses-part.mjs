@@ -19,16 +19,8 @@ export default Base => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           detection: new fields.SchemaField({
-            hiding: new fields.NumberField({
-              initial: null,
-              integer: true,
-              nullable: true,
-            }),
-            perceiving: new fields.NumberField({
-              initial: null,
-              integer: true,
-              nullable: true,
-            }),
+            hiding: new fields.NumberField({ initial: null, integer: true, nullable: true }),
+            perceiving: new fields.NumberField({ initial: null, integer: true, nullable: true }),
           }),
           senses: new fields.SchemaField({
             ...objectMap(config.character.sense, c => senseField(0, c.label), { filter: c => !c?.hidden }),
@@ -38,12 +30,10 @@ export default Base => {
 
       /** @inheritDoc */
       static migrateData(source, options, state) {
-        if (foundry.utils.hasProperty(source, "detection.hiding.raw")) {
+        if (foundry.utils.hasProperty(source, "detection.hiding.raw"))
           foundry.utils.deleteProperty(source, "detection.hiding");
-        }
-        if (foundry.utils.hasProperty(source, "detection.perceiving.raw")) {
+        if (foundry.utils.hasProperty(source, "detection.perceiving.raw"))
           foundry.utils.deleteProperty(source, "detection.perceiving");
-        }
         return super.migrateData(source, options, state);
       }
 
@@ -66,10 +56,5 @@ export default Base => {
  * @param {string} name
  */
 function senseField(initial, name) {
-  return new fields.NumberField({
-    initial: initial,
-    integer: true,
-    label: name,
-    min: 0,
-  });
+  return new fields.NumberField({ initial: initial, integer: true, label: name, min: 0 });
 }

@@ -6,13 +6,7 @@ import { default as weaponFightingStyles } from "../../../index/content/weapon-f
 import { preLocalize } from "../../helpers/localization.mjs";
 import { ucFirst } from "../../helpers/string.mjs";
 
-const rawContent = {
-  classes,
-  conditions,
-  keywords,
-  tradecrafts,
-  weaponFightingStyles,
-};
+const rawContent = { classes, conditions, keywords, tradecrafts, weaponFightingStyles };
 const content = Object.fromEntries(
   Object.entries(rawContent).map(([category, records]) => {
     const prefixedRecords = Object.fromEntries(

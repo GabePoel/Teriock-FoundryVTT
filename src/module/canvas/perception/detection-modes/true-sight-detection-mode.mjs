@@ -9,9 +9,6 @@ const { OutlineOverlayFilter } = foundry.canvas.rendering.filters;
 export default class TrueSightDetectionMode extends InvisiblePerception {
   /** @inheritDoc */
   static getDetectionFilter() {
-    return (this._detectionFilter ??= OutlineOverlayFilter.create({
-      knockout: true,
-      outlineColor: [1, 1, 1, 1],
-    }));
+    return (this._detectionFilter ??= OutlineOverlayFilter.create({ knockout: true, outlineColor: [1, 1, 1, 1] }));
   }
 }

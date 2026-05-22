@@ -8,10 +8,7 @@ export default class TeriockManager {
    * A private record of registries.
    * @type {{dependents: DependentsRegistry, identifiers: IdentifiersRegistry}}
    */
-  #registries = {
-    dependents: new DependentsRegistry(),
-    identifiers: new IdentifiersRegistry(),
-  };
+  #registries = { dependents: new DependentsRegistry(), identifiers: new IdentifiersRegistry() };
   /**
    * Check if what's provided exists or is an empty array or set.
    * @param {Teriock.System.Existable<*>} existable
@@ -22,18 +19,10 @@ export default class TeriockManager {
    */
   #check(existable, message, type = "error", options = { localize: true }) {
     let valid = true;
-    if (!existable) {
-      valid = false;
-    }
-    if (Array.isArray(existable) && !existable.length) {
-      valid = false;
-    }
-    if (existable instanceof Set && existable.size === 0) {
-      valid = false;
-    }
-    if (message && !valid) {
-      ui.notifications.notify(message, type, options);
-    }
+    if (!existable) valid = false;
+    if (Array.isArray(existable) && !existable.length) valid = false;
+    if (existable instanceof Set && existable.size === 0) valid = false;
+    if (message && !valid) ui.notifications.notify(message, type, options);
     return valid;
   }
 
@@ -76,9 +65,7 @@ export default class TeriockManager {
   checkEditable(obj) {
     const sheet = obj instanceof foundry.abstract.Document ? obj.sheet : obj;
     const valid = !!sheet.isEditable;
-    if (!valid) {
-      ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.notEditable", "error", { localize: true });
-    }
+    if (!valid) ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.notEditable", "error", { localize: true });
     return valid;
   }
 
@@ -88,9 +75,7 @@ export default class TeriockManager {
    */
   checkScene() {
     const valid = !!canvas.scene;
-    if (!valid) {
-      ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.noScene", "error", { localize: true });
-    }
+    if (!valid) ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.noScene", "error", { localize: true });
     return valid;
   }
 

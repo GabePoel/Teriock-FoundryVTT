@@ -6,10 +6,7 @@ import BaseConfig from "./base-config.mjs";
 export default class DisplayConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    window: {
-      icon: makeIconClass(icons.settings.display, "title"),
-      title: "TERIOCK.CONFIGS.Display.name",
-    },
+    window: { icon: makeIconClass(icons.settings.display, "title"), title: "TERIOCK.CONFIGS.Display.name" },
   };
 
   /** @inheritDoc */

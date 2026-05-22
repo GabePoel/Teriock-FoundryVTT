@@ -30,10 +30,7 @@ export default function AdjustableSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           badge: new fields.StringField({ initial: "" }),
-          form: new fields.StringField({
-            choices: effectConfig.form,
-            initial: "normal",
-          }),
+          form: new fields.StringField({ choices: effectConfig.form, initial: "normal" }),
           improvement: new fields.HTMLField({ initial: "" }),
           limitation: new fields.HTMLField({ initial: "" }),
         });
@@ -52,12 +49,9 @@ export default function AdjustableSystemMixin(Base) {
       /** @inheritDoc */
       get _nameTags() {
         const tags = [];
-        if (this.limitation && this.limitation.length > 0) {
-          tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.limited"));
-        }
-        if (this.improvement && this.improvement.length > 0) {
+        if (this.limitation && this.limitation.length > 0) tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.limited"));
+        if (this.improvement && this.improvement.length > 0)
           tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.improved"));
-        }
         return [...tags, ...super._nameTags];
       }
 
@@ -73,10 +67,7 @@ export default function AdjustableSystemMixin(Base) {
 
       /** @inheritDoc */
       getLocalRollData() {
-        return Object.assign(super.getLocalRollData(), {
-          [`form.${this.form}`]: 1,
-          form: this.form,
-        });
+        return Object.assign(super.getLocalRollData(), { [`form.${this.form}`]: 1, form: this.form });
       }
     }
   );

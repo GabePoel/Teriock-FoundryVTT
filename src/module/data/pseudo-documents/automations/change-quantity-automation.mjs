@@ -18,11 +18,9 @@ const { fields } = foundry.data;
  * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
  */
-export default class ChangeQuantityAutomation extends mixClasses(
-  CritAutomation,
-  ConfirmationDialogAutomationMixin,
-  TriggerAutomationMixin,
-) {
+export default class ChangeQuantityAutomation
+  extends mixClasses(CritAutomation, ConfirmationDialogAutomationMixin, TriggerAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];
 
@@ -33,10 +31,7 @@ export default class ChangeQuantityAutomation extends mixClasses(
 
   /** @inheritDoc */
   static get triggerMetadata() {
-    return Object.assign(super.triggerMetadata, {
-      initial: "execute",
-      nullable: false,
-    });
+    return Object.assign(super.triggerMetadata, { initial: "execute", nullable: false });
   }
 
   /** @inheritDoc */
@@ -61,41 +56,33 @@ export default class ChangeQuantityAutomation extends mixClasses(
    */
   async #changeQuantity(scope = {}) {
     const consumable = await this.#findConsumable(scope);
-    if (!consumable) {
-      return;
-    }
+    if (!consumable) return;
     const shouldChange = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
       data: { amount: this.formula, name: `@UUID[${consumable.uuid}]` },
       icon: TERIOCK.config.document[consumable.type]?.icon ?? undefined,
     });
-    if (!shouldChange) {
-      return;
-    }
+    if (!shouldChange) return;
     const roll = new BaseRoll(this.formula, this.getRollData(), {
       flavor: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.roll"),
     });
     await roll.evaluate();
     const panelData = {
-      bars: [
-        {
-          icon: TERIOCK.display.icons.pseudoDocument.automation,
-          label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
-          wrappers: [
-            _loc("TERIOCK.AUTOMATIONS.Base.LABEL"),
-            this.constructor._processedTriggerChoices[this.trigger].label,
-          ],
-        },
-      ],
-      blocks: [
-        {
-          text: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.description", {
-            amount: roll.total.toString(),
-            name: consumable.fullName,
-          }),
-          title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-        },
-      ],
+      bars: [{
+        icon: TERIOCK.display.icons.pseudoDocument.automation,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: [
+          _loc("TERIOCK.AUTOMATIONS.Base.LABEL"),
+          this.constructor._processedTriggerChoices[this.trigger].label,
+        ],
+      }],
+      blocks: [{
+        text: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.description", {
+          amount: roll.total.toString(),
+          name: consumable.fullName,
+        }),
+        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+      }],
       icon: TERIOCK.display.icons.pseudoDocument.automation,
       image: consumable.img,
       label: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.LABEL"),
@@ -104,9 +91,7 @@ export default class ChangeQuantityAutomation extends mixClasses(
     const panel = await TeriockTextEditor.enrichPanel(panelData);
     const messageData = {
       rolls: [roll],
-      speaker: TeriockChatMessage.getSpeaker({
-        actor: scope?.actor || this.actor,
-      }),
+      speaker: TeriockChatMessage.getSpeaker({ actor: scope?.actor || this.actor }),
       system: { panels: [panel] },
     };
     await TeriockChatMessage.create(messageData, { defaultMode: true });
@@ -121,30 +106,19 @@ export default class ChangeQuantityAutomation extends mixClasses(
    * @returns {Promise<AnyChildDocument|null>}
    */
   async #findConsumable(scope = {}) {
-    if (this.targetParent && this.document?.system?.consumable) {
-      return this.document;
-    }
-    if (!this.identifier) {
-      return null;
-    }
+    if (this.targetParent && this.document?.system?.consumable) return this.document;
+    if (!this.identifier) return null;
     let doc = this.document;
     let consumable;
     while (doc && !consumable) {
       const candidate = await fromIdentifierLocal(this.identifier, doc);
-      if (candidate?.system?.consumable) {
-        consumable = candidate;
-      }
-      if (typeof doc.getElder === "function") {
-        doc = await doc.getElder();
-      } else {
-        doc = null;
-      }
+      if (candidate?.system?.consumable) consumable = candidate;
+      if (typeof doc.getElder === "function") doc = await doc.getElder();
+      else doc = null;
     }
     if (!consumable) {
       const actor = scope?.actor ?? this.document.actor;
-      if (!actor) {
-        return null;
-      }
+      if (!actor) return null;
       consumable = await fromIdentifierLocal(this.identifier, actor);
     }
     return consumable ?? null;
@@ -163,9 +137,7 @@ export default class ChangeQuantityAutomation extends mixClasses(
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["targetParent"];
-    if (!this.targetParent) {
-      paths.push("identifier");
-    }
+    if (!this.targetParent) paths.push("identifier");
     paths.push(...["formula", ...this._confirmationPaths, ...super._formPaths]);
     return paths;
   }

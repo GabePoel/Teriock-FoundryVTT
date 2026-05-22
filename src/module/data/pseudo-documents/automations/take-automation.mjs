@@ -16,11 +16,9 @@ const { fields } = foundry.data;
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class TakeAutomation extends mixClasses(
-  CritAutomation,
-  mixins.DisplayAutomationMixin,
-  mixins.TriggerAutomationMixin,
-) {
+export default class TakeAutomation
+  extends mixClasses(CritAutomation, mixins.DisplayAutomationMixin, mixins.TriggerAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Take"];
 
@@ -44,10 +42,7 @@ export default class TakeAutomation extends mixClasses(
     return Object.assign(super.defineSchema(), {
       amount: new fields.NumberField({ nullable: true }),
       impact: new fields.StringField({
-        choices: objectMap(TERIOCK.config.impact, i => i.take, {
-          localize: true,
-          filter: c => !c?.hidden,
-        }),
+        choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
         initial: "damage",
         nullable: false,
         required: true,
@@ -71,9 +66,7 @@ export default class TakeAutomation extends mixClasses(
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "amount"];
-    if (TERIOCK.config.impact[this.impact]?.morganti) {
-      paths.push("morganti");
-    }
+    if (TERIOCK.config.impact[this.impact]?.morganti) paths.push("morganti");
     paths.push(...[...this._triggerPaths, ...this._triggerDisplayPaths]);
     return paths;
   }
@@ -96,8 +89,6 @@ export default class TakeAutomation extends mixClasses(
 
   /** @inheritDoc */
   prepareData() {
-    if (this.isRepeatable) {
-      this.showDialog = true;
-    }
+    if (this.isRepeatable) this.showDialog = true;
   }
 }

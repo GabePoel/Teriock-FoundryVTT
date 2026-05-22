@@ -11,9 +11,7 @@ export default class ArchetypeSheet extends BaseItemSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["archetype"],
-    window: {
-      icon: makeIconClass(documentConfig.archetype.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.archetype.icon, "title") },
   };
 
   /** @inheritDoc */

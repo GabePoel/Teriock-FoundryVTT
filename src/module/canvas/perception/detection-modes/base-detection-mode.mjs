@@ -73,24 +73,12 @@ export default class BaseDetectionMode extends DetectionMode {
   _canDetect(visionSource, target) {
     const src = visionSource.object.document;
     let tgt;
-    if (target instanceof Token) {
-      tgt = target.document;
-    }
-    if (this.isMove && !this._testStatuses("move", src, tgt)) {
-      return false;
-    }
-    if (this.isScent && !this._testStatuses("scent", src, tgt)) {
-      return false;
-    }
-    if (this.isSight && !this._testStatuses("sight", src, tgt)) {
-      return false;
-    }
-    if (this.isSound && !this._testStatuses("sound", src, tgt)) {
-      return false;
-    }
-    if (!this._testEthereal(src, tgt)) {
-      return false;
-    }
+    if (target instanceof Token) tgt = target.document;
+    if (this.isMove && !this._testStatuses("move", src, tgt)) return false;
+    if (this.isScent && !this._testStatuses("scent", src, tgt)) return false;
+    if (this.isSight && !this._testStatuses("sight", src, tgt)) return false;
+    if (this.isSound && !this._testStatuses("sound", src, tgt)) return false;
+    if (!this._testEthereal(src, tgt)) return false;
     return this._testHidden(src, tgt);
   }
 
@@ -102,13 +90,9 @@ export default class BaseDetectionMode extends DetectionMode {
    */
   _testEthereal(src, tgt) {
     if (tgt) {
-      if (src.hasStatusEffect("ethereal") === tgt.hasStatusEffect("ethereal")) {
-        return true;
-      } else if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal")) {
-        return this.ethereal;
-      } else if (src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal")) {
-        return this.material;
-      }
+      if (src.hasStatusEffect("ethereal") === tgt.hasStatusEffect("ethereal")) return true;
+      else if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal")) return this.ethereal;
+      else if (src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal")) return this.material;
     }
     return true;
   }
@@ -141,17 +125,9 @@ export default class BaseDetectionMode extends DetectionMode {
   _testStatuses(type, src, tgt) {
     const blockers = this.constructor.BLOCKING_STATUSES;
     if (Object.keys(blockers).includes(type)) {
-      for (const status of blockers[type].src) {
-        if (src.hasStatusEffect(status)) {
-          return false;
-        }
-      }
+      for (const status of blockers[type].src) if (src.hasStatusEffect(status)) return false;
       if (tgt) {
-        for (const status of blockers[type].tgt) {
-          if (tgt.hasStatusEffect(status)) {
-            return false;
-          }
-        }
+        for (const status of blockers[type].tgt) if (tgt.hasStatusEffect(status)) return false;
       }
     }
     return true;

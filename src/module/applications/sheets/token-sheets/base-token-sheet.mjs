@@ -9,8 +9,6 @@ const { TokenConfig } = foundry.applications.sheets;
  * @extends {TeriockDocumentSheet}
  * @mixes ConfigButtonSheet
  */
-export default class BaseTokenSheet extends mixClasses(
-  TokenConfig,
-  BaseApplicationMixin,
-  mixins.ConfigButtonSheetMixin,
-) {}
+export default class BaseTokenSheet
+  extends mixClasses(TokenConfig, BaseApplicationMixin, mixins.ConfigButtonSheetMixin)
+{}

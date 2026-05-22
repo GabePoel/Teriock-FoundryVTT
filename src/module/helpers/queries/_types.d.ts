@@ -40,28 +40,15 @@ declare global {
       operation: Partial<Omit<DatabaseDeleteOperation, "ids">>;
     };
 
-    export type InCombatExpiration = {
-      uuid: UUID<TeriockConsequence>;
-    };
+    export type InCombatExpiration = { uuid: UUID<TeriockConsequence> };
 
-    export type FireTrigger = {
-      options: object;
-      trigger: Teriock.System.Trigger;
-      uuid: UUID<AnyCommonDocument>;
-    };
+    export type FireTrigger = { options: object, trigger: Teriock.System.Trigger, uuid: UUID<AnyCommonDocument> };
 
-    export type IdentifyItem = {
-      uuid: UUID<TeriockEquipment>;
-    };
+    export type IdentifyItem = { uuid: UUID<TeriockEquipment> };
 
-    export type TurnChange = {
-      actorUuids: UUID<TeriockActor>[];
-    };
+    export type TurnChange = { actorUuids: UUID<TeriockActor>[] };
 
-    export type CreateHotbarFolder = {
-      id: ID<TeriockUser>;
-      name: string;
-    };
+    export type CreateHotbarFolder = { id: ID<TeriockUser>, name: string };
 
     export type Update = {
       data: object;
@@ -69,8 +56,6 @@ declare global {
       uuid: UUID<TeriockActiveEffect> | UUID<TeriockActor> | UUID<TeriockItem>;
     };
 
-    export type MassWrite = {
-      operations: object[];
-    };
+    export type MassWrite = { operations: object[] };
   }
 }

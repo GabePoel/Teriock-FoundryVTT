@@ -12,11 +12,9 @@ const { RollTable } = foundry.documents;
  * @mixes UsableDocument
  * @implements {Teriock.Documents.RollTableInterface}
  */
-export default class TeriockRollTable extends mixClasses(
-  RollTable,
-  mixins.BaseDocumentMixin,
-  mixins.UsableDocumentMixin,
-) {
+export default class TeriockRollTable
+  extends mixClasses(RollTable, mixins.BaseDocumentMixin, mixins.UsableDocumentMixin)
+{
   /**
    * All the documents in the results of this table.
    * @return {Promise<TeriockDocument[]>}
@@ -55,36 +53,24 @@ export default class TeriockRollTable extends mixClasses(
   async toMessage(results, { messageData = {}, messageOptions = {}, roll }) {
     messageOptions.rollMode ??= game.settings.get("core", "rollMode");
     const flavorKey = `TABLE.DrawFlavor${results.length > 1 ? "Plural" : ""}`;
-    messageData = foundry.utils.mergeObject(
-      {
-        author: game.user.id,
-        flags: { "core.RollTable": this.id },
-        flavor: _loc(flavorKey, {
-          name: foundry.utils.escapeHTML(this.name),
-          number: results.length,
-        }),
-        rolls: [],
-        sound: roll ? CONFIG.sounds.dice : null,
-        speaker: TeriockChatMessage.getSpeaker(),
-        system: {
-          activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
-            (await Promise.all(results.map(r => r.getActivations()))).flat(),
-          ),
-          avatar: TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker())?.img,
-          panels: await Promise.all(results.map(r => r.getPanelParts())),
-        },
+    messageData = foundry.utils.mergeObject({
+      author: game.user.id,
+      flags: { "core.RollTable": this.id },
+      flavor: _loc(flavorKey, { name: foundry.utils.escapeHTML(this.name), number: results.length }),
+      rolls: [],
+      sound: roll ? CONFIG.sounds.dice : null,
+      speaker: TeriockChatMessage.getSpeaker(),
+      system: {
+        activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
+          (await Promise.all(results.map(r => r.getActivations()))).flat(),
+        ),
+        avatar: TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker())?.img,
+        panels: await Promise.all(results.map(r => r.getPanelParts())),
       },
-      messageData,
-    );
-    if (this.displayRoll && roll) {
-      messageData.rolls.push(roll);
-    }
+    }, messageData);
+    if (this.displayRoll && roll) messageData.rolls.push(roll);
     messageData.system.panels.forEach(panel => {
-      panel.blocks.push({
-        classes: TERIOCK.display.panel.classes.derived,
-        text: this.description,
-        title: this.name,
-      });
+      panel.blocks.push({ classes: TERIOCK.display.panel.classes.derived, text: this.description, title: this.name });
     });
     messageData.system.panels = await TeriockTextEditor.enrichPanels(messageData.system.panels);
     return TeriockChatMessage.create(messageData, messageOptions);

@@ -43,10 +43,7 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
     await item.updateEmbeddedDocuments(
       "ActiveEffect",
       toReveal.map(e => {
-        return {
-          _id: e._id,
-          "system.revealed": true,
-        };
+        return { _id: e._id, "system.revealed": true };
       }),
     );
     await item.update({

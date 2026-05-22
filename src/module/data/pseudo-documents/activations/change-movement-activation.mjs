@@ -30,9 +30,7 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
 
   /** @inheritDoc */
   async primaryAction() {
-    if (!this.checkTokens()) {
-      return;
-    }
+    if (!this.checkTokens()) return;
     for (const t of this.tokenDocuments) {
       if (t.movementAction !== this.movementAction) {
         const old = t.movementAction;
@@ -50,10 +48,7 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
         });
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ChangeMovement.already", {
-          format: {
-            movement: ChangeMovementActivation.getLabel(this.movementAction),
-            token: t.name,
-          },
+          format: { movement: ChangeMovementActivation.getLabel(this.movementAction), token: t.name },
           localize: true,
         });
       }
@@ -62,14 +57,12 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
 
   /** @inheritDoc */
   async secondaryAction() {
-    if (!this.checkTokens()) {
-      return;
-    }
+    if (!this.checkTokens()) return;
     for (const t of this.tokenDocuments) {
       if (
-        t.movementAction === this.movementAction &&
-        t.getFlag("teriock", "previousMovementAction") &&
-        t.movementAction !== t.getFlag("teriock", "previousMovementAction")
+        t.movementAction === this.movementAction
+        && t.getFlag("teriock", "previousMovementAction")
+        && t.movementAction !== t.getFlag("teriock", "previousMovementAction")
       ) {
         await t.update({
           "flags.teriock.previousMovementAction": this.movementAction,
@@ -85,10 +78,7 @@ export default class ChangeMovementActivation extends AutomationActivationFactor
         });
       } else {
         ui.notifications.warn("TERIOCK.COMMANDS.ChangeMovement.notFount", {
-          format: {
-            movement: ChangeMovementActivation.getLabel(this.movementAction),
-            token: t.name,
-          },
+          format: { movement: ChangeMovementActivation.getLabel(this.movementAction), token: t.name },
           localize: true,
         });
       }

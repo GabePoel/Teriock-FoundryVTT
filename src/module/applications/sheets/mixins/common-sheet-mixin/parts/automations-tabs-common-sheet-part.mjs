@@ -10,9 +10,7 @@ export default Base => {
      */
     class AutomationsTabsCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { toggleAutomations: this._onToggleAutomations },
-      };
+      static DEFAULT_OPTIONS = { actions: { toggleAutomations: this._onToggleAutomations } };
 
       /**
        * Toggles between overview and impacts tabs.
@@ -21,9 +19,7 @@ export default Base => {
       static async _onToggleAutomations() {
         this._tab = this._tab === "automations" ? "overview" : "automations";
         await this.render();
-        if (typeof this.toggleMenu === "function") {
-          this.toggleMenu(false);
-        }
+        if (typeof this.toggleMenu === "function") this.toggleMenu(false);
       }
 
       constructor(...args) {
@@ -43,9 +39,7 @@ export default Base => {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        return Object.assign(await super._prepareContext(options), {
-          tab: this._tab,
-        });
+        return Object.assign(await super._prepareContext(options), { tab: this._tab });
       }
     }
   );

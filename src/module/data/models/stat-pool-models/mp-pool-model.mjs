@@ -20,20 +20,16 @@ export default class MpPoolModel extends BaseStatPoolModel {
 
   /** @inheritDoc */
   get panels() {
-    return [
-      {
-        bars: [],
-        blocks: [
-          {
-            text: _loc("TERIOCK.MODELS.MpPool.PANELS.text"),
-            title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
-          },
-        ],
-        icon: TERIOCK.display.icons.stat.mp,
-        image: getImage("misc", "Mana Die"),
-        name: _loc("TERIOCK.MODELS.MpPool.PANELS.name"),
-      },
-    ];
+    return [{
+      bars: [],
+      blocks: [{
+        text: _loc("TERIOCK.MODELS.MpPool.PANELS.text"),
+        title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
+      }],
+      icon: TERIOCK.display.icons.stat.mp,
+      image: getImage("misc", "Mana Die"),
+      name: _loc("TERIOCK.MODELS.MpPool.PANELS.name"),
+    }];
   }
 
   /** @inheritDoc */

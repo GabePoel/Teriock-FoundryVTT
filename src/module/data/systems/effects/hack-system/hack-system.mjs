@@ -16,12 +16,7 @@ export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      escalation: new fields.NumberField({
-        initial: 1,
-        integer: true,
-        min: 0,
-        required: true,
-      }),
+      escalation: new fields.NumberField({ initial: 1, integer: true, min: 0, required: true }),
       part: new fields.StringField({
         blank: true,
         choices: localizeChoices(objectMap(hackConfig, c => c.part)),
@@ -35,9 +30,7 @@ export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   get _durationBar() {
     const bar = super._durationBar;
-    if (this.permanent) {
-      bar.wrappers.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label"));
-    }
+    if (this.permanent) bar.wrappers.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label"));
     return bar;
   }
 
@@ -61,23 +54,15 @@ export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   get embedParts() {
     const textParts = [];
-    if (this.part) {
-      textParts.push(hackConfig[this.part]?.part);
-    }
-    if (this.permanent) {
-      textParts.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label"));
-    }
-    return Object.assign(super.embedParts, {
-      text: dotJoin(textParts),
-    });
+    if (this.part) textParts.push(hackConfig[this.part]?.part);
+    if (this.permanent) textParts.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label"));
+    return Object.assign(super.embedParts, { text: dotJoin(textParts) });
   }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
     this.parent.updateSource({ statuses: ["hacked"], ...data });
   }

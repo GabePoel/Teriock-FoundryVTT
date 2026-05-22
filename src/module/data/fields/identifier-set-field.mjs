@@ -21,10 +21,7 @@ export default class IdentifierSetField extends SetField {
 
   /** @inheritDoc */
   _toInput(config) {
-    Object.assign(config, {
-      single: false,
-      types: this.element.types,
-    });
+    Object.assign(config, { single: false, types: this.element.types });
     return HTMLIdentifierTagsElement.create(config);
   }
 }

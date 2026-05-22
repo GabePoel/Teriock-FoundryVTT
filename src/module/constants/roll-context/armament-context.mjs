@@ -64,9 +64,7 @@ Hooks.once("i18nInit", () => {
     armamentContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.class", { name: _loc(v) });
   });
   Object.entries(TERIOCK.reference.equipment).forEach(([k, v]) => {
-    armamentContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", {
-      name: _loc(v),
-    });
+    armamentContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name: _loc(v) });
   });
   Object.keys(equipmentConfig.powerLevel).forEach(k => {
     armamentContext[`power.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.power", {

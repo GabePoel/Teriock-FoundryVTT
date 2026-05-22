@@ -20,22 +20,14 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          protections: new fields.SchemaField(
-            objectMap(
-              protectionConfig.types,
-              type =>
-                new fields.SchemaField(
-                  objectMap(
-                    protectionConfig.categories,
-                    category =>
-                      new fields.SetField(new fields.StringField(), {
-                        label: category.label,
-                      }),
-                  ),
-                  { label: type.label },
-                ),
-            ),
-          ),
+          protections: new fields.SchemaField(objectMap(protectionConfig.types, type =>
+            new fields.SchemaField(
+              objectMap(
+                protectionConfig.categories,
+                category => new fields.SetField(new fields.StringField(), { label: category.label }),
+              ),
+              { label: type.label },
+            ))),
         });
       }
 
@@ -51,20 +43,15 @@ export default Base => {
        */
       isProtected(category, value) {
         let hasProtection = false;
-        for (const protectionData of Object.values(this.protections)) {
-          if ((protectionData[category] || new Set()).has(value)) {
-            hasProtection = true;
-          }
-        }
+        for (const protectionData of Object.values(this.protections))
+          if ((protectionData[category] || new Set()).has(value)) hasProtection = true;
         return hasProtection;
       }
 
       /** @inheritDoc */
       prepareVirtualEffects() {
         super.prepareVirtualEffects();
-        if (this.parent.statuses.has("hollied")) {
-          this.protections.resistances.effectTypes.add("reanimation");
-        }
+        if (this.parent.statuses.has("hollied")) this.protections.resistances.effectTypes.add("reanimation");
         if (this.parent.statuses.has("terrored")) {
           this.protections.resistances.effectTypes.add("healing");
           this.protections.resistances.effectTypes.add("revival");
@@ -98,9 +85,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async rollResistance(options = {}) {
-        if (options.event) {
-          Object.assign(options, ThresholdRoll.parseEvent(options.event));
-        }
+        if (options.event) Object.assign(options, ThresholdRoll.parseEvent(options.event));
         await this.parent.hookCall(options.hex ? "hexproof" : "resist");
         options.actor = this.parent;
         await new ResistanceExecution(options).execute();

@@ -18,12 +18,9 @@ const { fields } = foundry.data;
  * @mixes CompetenceAutomation
  * @mixes TriggerAutomation
  */
-export default class UseDocumentsAutomation extends mixClasses(
-  BaseAutomation,
-  SelectDocumentsAutomationMixin,
-  TriggerAutomationMixin,
-  CompetenceAutomationMixin,
-) {
+export default class UseDocumentsAutomation
+  extends mixClasses(BaseAutomation, SelectDocumentsAutomationMixin, TriggerAutomationMixin, CompetenceAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.UseDocuments"];
 
@@ -57,15 +54,10 @@ export default class UseDocumentsAutomation extends mixClasses(
    */
   async #makeExternalActivation(uuid) {
     const doc = await resolveDocument(uuid);
-    const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", {
-      name: doc.name || "",
-    });
+    const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name: doc.name || "" });
     const icon = TERIOCK.config.document[doc.type]?.icon;
     return new UseExternalActivation({
-      display: {
-        icon: TERIOCK.config.document[doc.type]?.icon,
-        label: doc.name,
-      },
+      display: { icon: TERIOCK.config.document[doc.type]?.icon, label: doc.name },
       options: {
         competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
         expandTables: this.expandTables,
@@ -145,18 +137,9 @@ export default class UseDocumentsAutomation extends mixClasses(
    */
   async use(options = {}) {
     options = Object.assign({ noHeighten: this.noHeighten }, options);
-    if (options.actor == null) {
-      options.actor = this.actor ?? this.document?.actor ?? null;
-    }
-    const chosen = await this._choose({
-      actor: options.actor,
-      expandFolders: true,
-      expandTables: this.expandTables,
-    });
-    if (this.automatic && chosen.length === 1) {
-      await chosen[0].use(options);
-    } else {
-      await Promise.all(chosen.map(c => c.use(options)));
-    }
+    if (options.actor == null) options.actor = this.actor ?? this.document?.actor ?? null;
+    const chosen = await this._choose({ actor: options.actor, expandFolders: true, expandTables: this.expandTables });
+    if (this.automatic && chosen.length === 1) await chosen[0].use(options);
+    else await Promise.all(chosen.map(c => c.use(options)));
   }
 }

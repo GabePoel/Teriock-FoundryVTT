@@ -1,12 +1,6 @@
 import { TeriockJournalEntryPage } from "../../../../documents/_module.mjs";
 
-export type ChildDeltaMap = Record<
-  CommonDocumentName,
-  {
-    dst: AnyCommonDocument[];
-    src: AnyCommonDocument[];
-  }
->;
+export type ChildDeltaMap = Record<CommonDocumentName, { dst: AnyCommonDocument[], src: AnyCommonDocument[] }>;
 
 declare global {
   namespace Teriock.Models {

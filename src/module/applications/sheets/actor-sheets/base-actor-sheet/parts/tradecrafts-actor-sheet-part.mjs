@@ -14,16 +14,10 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onRollTradecraft(event, target) {
-      await this.actor.system.rollTradecraft(target.dataset.tradecraft, {
-        event,
-      });
+      await this.actor.system.rollTradecraft(target.dataset.tradecraft, { event });
     }
 
-    static DEFAULT_OPTIONS = {
-      actions: {
-        rollTradecraft: { buttons: [0, 2], handler: this.#onRollTradecraft },
-      },
-    };
+    static DEFAULT_OPTIONS = { actions: { rollTradecraft: { buttons: [0, 2], handler: this.#onRollTradecraft } } };
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {

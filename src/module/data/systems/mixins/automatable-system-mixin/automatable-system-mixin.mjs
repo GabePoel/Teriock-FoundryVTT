@@ -34,9 +34,7 @@ export default function AutomatableSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          automations: new PseudoCollectionField(BaseAutomation, {
-            types: this.automationTypes,
-          }),
+          automations: new PseudoCollectionField(BaseAutomation, { types: this.automationTypes }),
         });
       }
 
@@ -58,9 +56,7 @@ export default function AutomatableSystemMixin(Base) {
 
       /** @inheritDoc */
       get pseudoCollections() {
-        return Object.assign(super.pseudoCollections, {
-          Automation: this.automations,
-        });
+        return Object.assign(super.pseudoCollections, { Automation: this.automations });
       }
     }
   );

@@ -19,17 +19,13 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "archetype",
-    });
+    return foundry.utils.mergeObject(super.metadata, { type: "archetype" });
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      competence: new fields.EmbeddedDataField(CompetenceModel, {
-        initial: { raw: 1 },
-      }),
+      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
     });
   }
 
@@ -40,46 +36,36 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
   get classNames() {
     return Array.from(
       new Set(
-        this.actor?.ranks
-          .filter(r => r.system.archetype === this.identifier)
-          .map(r => TERIOCK.reference.classes[r.system.className] ?? toTitleCase(r.system.className)),
+        this.actor?.ranks.filter(r => r.system.archetype === this.identifier).map(r =>
+          TERIOCK.reference.classes[r.system.className] ?? toTitleCase(r.system.className)
+        ),
       ),
     ).sort((a, b) => a.localeCompare(b));
   }
 
   /** @inheritDoc */
   get embedParts() {
-    return Object.assign(super.embedParts, {
-      text: dotJoin(this.classNames),
-    });
+    return Object.assign(super.embedParts, { text: dotJoin(this.classNames) });
   }
 
   /** @inheritDoc */
   get makeSuppressed() {
     let suppressed = super.makeSuppressed;
     if (
-      game.teriock.getSetting("armorSuppressesRanks") &&
-      this.actor &&
-      !this.innate &&
-      this.actor.system.defense.av.base > this.maxAv
+      game.teriock.getSetting("armorSuppressesRanks")
+      && this.actor
+      && !this.innate
+      && this.actor.system.defense.av.base > this.maxAv
     ) {
       suppressed = true;
     }
-    if (this.actor && this.ranks.filter(r => r.active).length === 0) {
-      suppressed = true;
-    }
+    if (this.actor && this.ranks.filter(r => r.active).length === 0) suppressed = true;
     return suppressed;
   }
 
   /** @inheritDoc */
   get messageBars() {
-    return [
-      {
-        icon: documentConfig.rank.icon,
-        label: documentConfig.rank.plural,
-        wrappers: this.classNames,
-      },
-    ];
+    return [{ icon: documentConfig.rank.icon, label: documentConfig.rank.plural, wrappers: this.classNames }];
   }
 
   /**
@@ -87,9 +73,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
    * @returns {TeriockRank[]}
    */
   get ranks() {
-    if (!this.actor) {
-      return [];
-    }
+    if (!this.actor) return [];
     return this.actor.ranks.filter(r => r.system.archetype === this.identifier);
   }
 
@@ -99,9 +83,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
    */
   deriveCompetence() {
     const activeRanks = this.ranks.filter(r => r.active);
-    if (activeRanks.length === 0) {
-      return 0;
-    }
+    if (activeRanks.length === 0) return 0;
     return Math.max(...activeRanks.map(r => r.system.competence.value));
   }
 

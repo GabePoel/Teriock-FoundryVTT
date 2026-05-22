@@ -10,9 +10,7 @@ export default Base => {
      */
     class MenuCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { toggleMenu: this._onToggleMenu },
-      };
+      static DEFAULT_OPTIONS = { actions: { toggleMenu: this._onToggleMenu } };
 
       /**
        * Toggle whether the menu is open.

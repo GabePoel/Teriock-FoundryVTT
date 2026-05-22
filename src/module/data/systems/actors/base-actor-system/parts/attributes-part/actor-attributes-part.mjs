@@ -19,30 +19,25 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         const attributes = {};
-        Object.entries(TERIOCK.reference.attributes).forEach(
-          ([key, value]) =>
-            (attributes[key] = new EvaluationField({
-              deterministic: false,
-              initial: `2 * @${key}.score`,
-              interval: 1,
-              label: value,
-              min: -Infinity,
-              model: AttributeModel,
-              score: -3,
-            })),
-        );
-        return Object.assign(super.defineSchema(), {
-          attributes: new SchemaField(attributes),
-        });
+        Object.entries(TERIOCK.reference.attributes).forEach((
+          [key, value],
+        ) => (attributes[key] = new EvaluationField({
+          deterministic: false,
+          initial: `2 * @${key}.score`,
+          interval: 1,
+          label: value,
+          min: -Infinity,
+          model: AttributeModel,
+          score: -3,
+        })));
+        return Object.assign(super.defineSchema(), { attributes: new SchemaField(attributes) });
       }
 
       /**
        * Ensure attributes have the correct keys assigned.
        */
       #prepareAttributes() {
-        for (const [k, v] of Object.entries(this.attributes)) {
-          v._key = k;
-        }
+        for (const [k, v] of Object.entries(this.attributes)) v._key = k;
       }
 
       /**
@@ -74,9 +69,7 @@ export default Base => {
       prepareDerivedData() {
         super.prepareDerivedData();
         this.#preparePresence();
-        for (const att of Object.values(this.attributes)) {
-          att.passive = 10 + att.value;
-        }
+        for (const att of Object.values(this.attributes)) att.passive = 10 + att.value;
       }
 
       /**

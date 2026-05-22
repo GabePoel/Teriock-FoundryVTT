@@ -12,9 +12,7 @@ import { wikiToUuid } from "../../helpers/wiki.mjs";
 import { TeriockTextEditor } from "./_module.mjs";
 
 const IDENTIFIER_ICON_MAP = Object.fromEntries(
-  Object.values(wikiConfig.namespaces)
-    .filter(c => c.identifierType && c.icon)
-    .map(c => [c.identifierType, c.icon]),
+  Object.values(wikiConfig.namespaces).filter(c => c.identifierType && c.icon).map(c => [c.identifierType, c.icon]),
 );
 
 /**
@@ -29,12 +27,9 @@ const wikiLinkEnricher = {
     let displayText = match[2];
     const namespace = pageName.split(":")[0];
     let name = pageName.split(":")[1];
-    if (!displayText) {
-      displayText = name;
-    }
-    if (Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(name)) {
+    if (!displayText) displayText = name;
+    if (Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(name))
       name = TERIOCK.aliases[namespace.toLowerCase()][name];
-    }
     const urlPageName = pageName.replace(/ /g, "_");
     const link = document.createElement("a");
     const address = `https://wiki.teriock.com/index.php/${urlPageName}`;
@@ -106,41 +101,26 @@ const lookupEnricher = {
   replaceParent: false,
   enricher: async (match, options) => {
     let lookupKey = match[1];
-    if (lookupKey.startsWith("@")) {
-      lookupKey = lookupKey.slice(1);
-    }
+    if (lookupKey.startsWith("@")) lookupKey = lookupKey.slice(1);
     const optionsString = match[2] || "";
-    const formatOptions = optionsString
-      .trim()
-      .split(/\s+/)
-      .reduce((acc, curr) => {
-        if (!curr) {
-          return acc;
-        }
-        const [key, value] = curr.split("=");
-        if (key && value) {
-          acc[key] = value;
-        }
-        return acc;
-      }, {});
+    const formatOptions = optionsString.trim().split(/\s+/).reduce((acc, curr) => {
+      if (!curr) return acc;
+      const [key, value] = curr.split("=");
+      if (key && value) acc[key] = value;
+      return acc;
+    }, {});
 
     const rawValue = foundry.utils.getProperty(options.relativeTo, lookupKey);
     let text = rawValue !== undefined ? String(rawValue) : "";
 
-    if (formatOptions["style"] === "upper") {
-      formatOptions["style"] = "uc";
-    } else if (formatOptions["style"] === "lower") {
-      formatOptions["style"] = "lc";
-    } else if (formatOptions["style"] === "embed") {
+    if (formatOptions["style"] === "upper") formatOptions["style"] = "uc";
+    else if (formatOptions["style"] === "lower") formatOptions["style"] = "lc";
+    else if (formatOptions["style"] === "embed") {
       const doc = await fromUuid(text);
-      if (doc) {
-        return doc.toEmbed({});
-      }
+      if (doc) return doc.toEmbed({});
     } else if (formatOptions["style"] === "link") {
       const doc = await fromUuid(text);
-      if (doc) {
-        return doc.toAnchor();
-      }
+      if (doc) return doc.toAnchor();
     }
     switch ((formatOptions["style"] || "").toLowerCase()) {
       case "uc":
@@ -179,9 +159,7 @@ export function registerCommandEnrichers() {
     id: "executeCommand",
     pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
     onRender: el => {
-      if (el.dataset.enriched) {
-        return;
-      }
+      if (el.dataset.enriched) return;
       el.dataset.enriched = "true";
       const target = /** @type {HTMLLinkElement} */ el.firstElementChild;
       el.addEventListener("click", async ev => {
@@ -205,21 +183,13 @@ async function executeCommandFromElement(target, operation, event) {
   event.preventDefault();
   event.stopPropagation();
   const command = commands[target.dataset.command];
-  if (!command || !command[operation]) {
-    return;
-  }
+  if (!command || !command[operation]) return;
   const options = {};
-  for (const mod of ["alt", "ctrl", "shift"]) {
-    if (command[mod] && event[`${mod}Key`]) {
-      options[command[mod]] = true;
-    }
-  }
+  for (const mod of ["alt", "ctrl", "shift"]) if (command[mod] && event[`${mod}Key`]) options[command[mod]] = true;
   for (const [key, value] of Object.entries(target.dataset)) {
     if (!["action", "command"].includes(key)) {
       options[key] = value;
-      if (value === "true") {
-        options[key] = true;
-      }
+      if (value === "true") options[key] = true;
     }
   }
   let actor;
@@ -227,9 +197,7 @@ async function executeCommandFromElement(target, operation, event) {
     const doc = await fromUuid(target.dataset.relativeTo);
     actor = doc?.actor;
   }
-  if (!actor) {
-    actor = game.actors.default;
-  }
+  if (!actor) actor = game.actors.default;
   await command[operation](actor, options);
 }
 
@@ -244,30 +212,19 @@ function enrichCommand(match, options) {
   let { label = "" } = match.groups;
   const command = commands[type];
   let argumentArray;
-  if (command.formula) {
-    argumentArray = [["formula", config.trim()]];
-  } else {
-    argumentArray = parseArguments(config);
-  }
+  if (command.formula) argumentArray = [["formula", config.trim()]];
+  else argumentArray = parseArguments(config);
   const interactionOptions = interpretArguments(argumentArray, command);
   const link = document.createElement("a");
   link.dataset.command = command.id;
   link.dataset.action = "executeCommand";
   link.dataset.tooltip = getInteractionEntryValue(command, "tooltip", interactionOptions);
-  if (!link.dataset.tooltip) {
-    link.dataset.tooltip = getInteractionEntryValue(command, "label", interactionOptions);
-  }
-  if (options.relativeTo) {
-    link.dataset.relativeTo = options.relativeTo.uuid;
-  }
-  for (const [key, value] of Object.entries(interactionOptions)) {
-    link.dataset[key] = value.toString();
-  }
+  if (!link.dataset.tooltip) link.dataset.tooltip = getInteractionEntryValue(command, "label", interactionOptions);
+  if (options.relativeTo) link.dataset.relativeTo = options.relativeTo.uuid;
+  for (const [key, value] of Object.entries(interactionOptions)) link.dataset[key] = value.toString();
   link.className = "teriock-inline-command";
   link.prepend(makeIconElement(getInteractionEntryValue(command, "icon", interactionOptions), "inline"));
-  if (!label) {
-    label = _loc(getInteractionEntryValue(command, "label", interactionOptions));
-  }
+  if (!label) label = _loc(getInteractionEntryValue(command, "label", interactionOptions));
   link.appendChild(document.createTextNode(_loc(label)));
   return link;
 }

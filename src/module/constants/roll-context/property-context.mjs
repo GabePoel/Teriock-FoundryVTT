@@ -17,9 +17,7 @@ export default propertyContext;
 preLocalize("rollContext.property");
 Hooks.once("i18nInit", () => {
   Object.entries(effectConfig.form).forEach(([k, v]) => {
-    propertyContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", {
-      name: _loc(v.label),
-    });
+    propertyContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {
     propertyContext[`damage.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Property.damageType", { name: _loc(v) });

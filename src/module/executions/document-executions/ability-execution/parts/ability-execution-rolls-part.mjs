@@ -14,24 +14,12 @@ export default function AbilityExecutionRollsPart(Base) {
       get flavor() {
         if (this.isAttack) {
           let flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.attack");
-          if (this.piercing.ub) {
-            flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.ub", {
-              flavor,
-            });
-          }
-          if (this.warded) {
-            flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.warded", {
-              flavor,
-            });
-          }
+          if (this.piercing.ub) flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.ub", { flavor });
+          if (this.warded) flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.warded", { flavor });
           return flavor;
-        } else if (this.isFeat) {
-          return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat");
-        } else if (this.isBlock) {
-          return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block");
-        } else {
-          return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest");
-        }
+        } else if (this.isFeat) return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat");
+        else if (this.isBlock) return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block");
+        else return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest");
       }
 
       /** @inheritDoc */
@@ -39,19 +27,11 @@ export default function AbilityExecutionRollsPart(Base) {
         const modifyEffectAutomation = this.activeAutomations.find(a => a.type === "modifyEffect");
         const preventThreshold = !!modifyEffectAutomation?.preventThreshold;
         const styles = {
-          dice: {
-            classes: this.source.system.interaction,
-          },
-          total: {
-            classes: this.source.system.interaction,
-          },
+          dice: { classes: this.source.system.interaction },
+          total: { classes: this.source.system.interaction },
         };
         if (this.isAttack) {
-          const generalRollOptions = {
-            flavor: this.flavor,
-            styles: styles,
-            targets: [],
-          };
+          const generalRollOptions = { flavor: this.flavor, styles: styles, targets: [] };
           if (this.piercing.ub) {
             generalRollOptions.styles.dice.classes += " ub";
             generalRollOptions.styles.dice.tooltip = _loc("TERIOCK.TERMS.Properties.unblockable");
@@ -66,17 +46,13 @@ export default function AbilityExecutionRollsPart(Base) {
                 rollOptions.threshold = target.actor.system.defense.ac;
                 rollOptions.comparison = "gt";
               }
-              if (this.limb) {
-                rollOptions.threshold += TERIOCK.config.target.limb;
-              } else if (this.vitals) {
-                rollOptions.threshold += TERIOCK.config.target.vitals;
-              }
+              if (this.limb) rollOptions.threshold += TERIOCK.config.target.limb;
+              else if (this.vitals) rollOptions.threshold += TERIOCK.config.target.vitals;
             }
             this.rolls.push(new ThresholdRoll(this.formula, this.rollData, rollOptions));
           }
-          if (this.rolls.length === 0) {
+          if (this.rolls.length === 0)
             this.rolls.push(new ThresholdRoll(this.formula, this.rollData, generalRollOptions));
-          }
         } else if (this.isFeat) {
           styles.total.icon = "star";
           this.rolls.push(

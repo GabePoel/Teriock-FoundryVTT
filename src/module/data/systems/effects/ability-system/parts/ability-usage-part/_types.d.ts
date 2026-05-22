@@ -6,10 +6,7 @@ declare global {
       /** <schema> This ability's delivery */
       delivery: Teriock.Keys.Delivery;
       /** <schema> This ability's execution time */
-      executionTime: {
-        base: Teriock.Keys.ExecutionTime;
-        slow: SlowExecutionTimeModel;
-      };
+      executionTime: { base: Teriock.Keys.ExecutionTime, slow: SlowExecutionTimeModel };
       /** <schema> This ability's expansion */
       expansion: {
         /** <schema> Maximum number of extra executions */

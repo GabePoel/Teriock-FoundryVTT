@@ -7,10 +7,7 @@ export default function ChangesSheetMixin(Base) {
      */
     class ChangesSheet extends Base {
       static DEFAULT_OPTIONS = {
-        actions: {
-          addQualifiedChange: this._onAddChange,
-          deleteQualifiedChange: this._onDeleteChange,
-        },
+        actions: { addQualifiedChange: this._onAddChange, deleteQualifiedChange: this._onDeleteChange },
       };
 
       /**
@@ -22,9 +19,7 @@ export default function ChangesSheetMixin(Base) {
       static async _onAddChange(_event, target) {
         const path = target.dataset.path;
         let valuePath = target.dataset.valuePath;
-        if (!(typeof valuePath === "string")) {
-          valuePath = path;
-        }
+        if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
           console.error(_loc("TERIOCK.CHANGES.Errors.noAddPath"));
           return;
@@ -50,26 +45,19 @@ export default function ChangesSheetMixin(Base) {
        * @param {PointerEvent} _event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
-
        */
       static async _onDeleteChange(_event, target) {
         const index = parseInt(target.dataset.index, 10);
         const path = target.dataset.path;
         let valuePath = target.dataset.valuePath;
-        if (!(typeof valuePath === "string")) {
-          valuePath = path;
-        }
+        if (!(typeof valuePath === "string")) valuePath = path;
         if (!path) {
           console.error(_loc("TERIOCK.CHANGES.Errors.noDeletePath"));
           return;
         }
         const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document, valuePath));
         if (!changes || !Array.isArray(changes)) {
-          console.error(
-            _loc("TERIOCK.CHANGES.Errors.noDeleteArray", {
-              path: valuePath,
-            }),
-          );
+          console.error(_loc("TERIOCK.CHANGES.Errors.noDeleteArray", { path: valuePath }));
           return;
         }
         if (index >= 0 && index < changes.length) {
@@ -81,26 +69,20 @@ export default function ChangesSheetMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        if (!this.isEditable) {
-          return;
-        }
-        this.element.querySelectorAll(".teriock-change-input").forEach(
-          /** @param {HTMLInputElement} el */ el => {
-            el.addEventListener("change", () => {
-              const container = /** @type {HTMLLIElement} */ el.closest(".change-container");
-              const path = container.dataset.path;
-              const index = container.dataset.index;
-              const property = el.dataset.property;
-              const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document._source, path));
-              let value = el.value;
-              if (property === "priority") {
-                value = Number(value);
-              }
-              changes[Number(index)][property] = value;
-              this.document.update({ [path]: changes });
-            });
-          },
-        );
+        if (!this.isEditable) return;
+        this.element.querySelectorAll(".teriock-change-input").forEach(/** @param {HTMLInputElement} el */ el => {
+          el.addEventListener("change", () => {
+            const container = /** @type {HTMLLIElement} */ el.closest(".change-container");
+            const path = container.dataset.path;
+            const index = container.dataset.index;
+            const property = el.dataset.property;
+            const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document._source, path));
+            let value = el.value;
+            if (property === "priority") value = Number(value);
+            changes[Number(index)][property] = value;
+            this.document.update({ [path]: changes });
+          });
+        });
       }
     }
   );

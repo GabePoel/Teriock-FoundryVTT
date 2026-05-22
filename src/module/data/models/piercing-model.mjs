@@ -56,12 +56,8 @@ export default class PiercingModel extends EmbeddedDataModel {
    * @returns {Teriock.System.PiercingLevel}
    */
   get value() {
-    if (this.ub) {
-      return 2;
-    }
-    if (this.av0) {
-      return 1;
-    }
+    if (this.ub) return 2;
+    if (this.av0) return 1;
     return 0;
   }
 }

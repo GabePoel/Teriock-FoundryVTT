@@ -20,9 +20,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          uuids: new fields.SetField(new fields.DocumentUUIDField()),
-        });
+        return Object.assign(super.defineSchema(), { uuids: new fields.SetField(new fields.DocumentUUIDField()) });
       }
 
       /** @inheritDoc */
@@ -67,15 +65,9 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        */
       async _choose(options = {}) {
         const choices = await this.getDocuments(options);
-        if (choices.length === 0) {
-          return [];
-        }
-        if (this.automatic && choices.length === 1) {
-          return choices;
-        }
-        if (this.multi && this.all) {
-          return choices;
-        }
+        if (choices.length === 0) return [];
+        if (this.automatic && choices.length === 1) return choices;
+        if (this.multi && this.all) return choices;
         return await selectDocumentsDialog(choices, {
           multi: this.multi,
           title: this.document.fullName || this.document.name,
@@ -91,11 +83,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        * @return {Promise<UUID<TeriockDocument>[]>}
        */
       async choose(options = {}) {
-        const docs = await this._choose({
-          expandFolders: true,
-          expandTables: true,
-          ...options,
-        });
+        const docs = await this._choose({ expandFolders: true, expandTables: true, ...options });
         return docs.map(d => d.uuid);
       }
 

@@ -16,37 +16,19 @@ async function abstractImpactCommandOperation(actor, options) {
   const impact = options.impact || "damage";
   const config = TERIOCK.config.impact[impact];
   if (options.apply) {
-    if (!game.actors.check(actor)) {
-      return;
-    }
+    if (!game.actors.check(actor)) return;
     const amount = await BaseRoll.getValue(formula, actor?.getRollData() || {});
-    if (options.reverse) {
-      await config.reverse(actor, amount);
-    } else {
-      await config.apply(actor, amount);
-    }
+    if (options.reverse) await config.reverse(actor, amount);
+    else await config.apply(actor, amount);
     return;
   }
   const rollData = Object.assign(options.rollData ?? {}, actor?.getRollData() || {});
-  if (options.boost) {
-    formula = await boostDialog(formula, {
-      boosts: options.boosts,
-      impact,
-      rollData,
-    });
-  }
-  if (!formula) {
-    return;
-  }
+  if (options.boost) formula = await boostDialog(formula, { boosts: options.boosts, impact, rollData });
+  if (!formula) return;
   const roll = new HarmRoll(formula, rollData, { impact: impact });
-  if (options.crit) {
-    roll.alter(2, 0, { multiplyNumeric: false });
-  }
+  if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
   await roll.evaluate();
-  const messageData = {
-    speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
-    system: { avatar: actor?.img },
-  };
+  const messageData = { speaker: TeriockChatMessage.getSpeaker({ actor: actor }), system: { avatar: actor?.img } };
   await roll.toMessage(messageData);
 }
 
@@ -57,7 +39,7 @@ async function abstractImpactCommandOperation(actor, options) {
  * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.ImpactOptions>}
  */
 function impactCommandFunctionFactory(impact, operation) {
-  return async function (actor, options) {
+  return async function(actor, options) {
     options.impact = impact;
     delete options.boost;
     if (operation === "primary") {

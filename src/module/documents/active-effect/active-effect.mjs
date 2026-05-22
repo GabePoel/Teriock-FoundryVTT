@@ -14,18 +14,18 @@ const { ActiveEffect } = foundry.documents;
  * @mixes CommonDocument
  * @mixes RetrievalDocument
  */
-export default class TeriockActiveEffect extends mixClasses(
-  ActiveEffect,
-  mixins.BaseDocumentMixin,
-  mixins.CommonDocumentMixin,
-  mixins.ChildDocumentMixin,
-  mixins.RetrievalDocumentMixin,
-) {
+export default class TeriockActiveEffect
+  extends mixClasses(
+    ActiveEffect,
+    mixins.BaseDocumentMixin,
+    mixins.CommonDocumentMixin,
+    mixins.ChildDocumentMixin,
+    mixins.RetrievalDocumentMixin,
+  )
+{
   /** @inheritDoc */
   static get documentMetadata() {
-    return Object.assign(super.documentMetadata, {
-      types: Object.keys(CONFIG.ActiveEffect.dataModels),
-    });
+    return Object.assign(super.documentMetadata, { types: Object.keys(CONFIG.ActiveEffect.dataModels) });
   }
 
   /** @inheritDoc */
@@ -47,9 +47,7 @@ export default class TeriockActiveEffect extends mixClasses(
    * @returns {boolean}
    */
   get isStatus() {
-    return Object.values(CONFIG.statusEffects)
-      .map(s => s?._id)
-      .includes(this.id);
+    return Object.values(CONFIG.statusEffects).map(s => s?._id).includes(this.id);
   }
 
   /**
@@ -64,11 +62,8 @@ export default class TeriockActiveEffect extends mixClasses(
 
   /** @inheritDoc */
   async createChildDocuments(embeddedName, data = [], operation = {}) {
-    if (embeddedName === "Item") {
-      return this.createDependentDocuments(embeddedName, data, operation);
-    } else {
-      return super.createChildDocuments(embeddedName, data, operation);
-    }
+    if (embeddedName === "Item") return this.createDependentDocuments(embeddedName, data, operation);
+    else return super.createChildDocuments(embeddedName, data, operation);
   }
 
   /** @inheritDoc */

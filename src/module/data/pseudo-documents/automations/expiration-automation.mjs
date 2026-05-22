@@ -34,9 +34,7 @@ export default class ExpirationAutomation extends CritAutomation {
       combat: new fields.SchemaField({
         what: builders.combatExpirationMethodField(),
         when: builders.combatExpirationTimingField(),
-        who: new fields.SchemaField({
-          type: builders.combatExpirationSourceTypeField(),
-        }),
+        who: new fields.SchemaField({ type: builders.combatExpirationSourceTypeField() }),
       }),
       conditions: conditionRequirementsField(),
       override: new fields.SchemaField({
@@ -58,12 +56,9 @@ export default class ExpirationAutomation extends CritAutomation {
     const paths = ["override.combat"];
     if (this.override.combat) {
       paths.push("combat.what.type");
-      if (this.combat.what.type === "rolled") {
-        paths.push(...["combat.what.roll", "combat.what.threshold"]);
-      }
-      if (this.combat.what.type !== "none") {
+      if (this.combat.what.type === "rolled") paths.push(...["combat.what.roll", "combat.what.threshold"]);
+      if (this.combat.what.type !== "none")
         paths.push(...["combat.when.time", "combat.when.trigger", "combat.when.skip", "combat.who.type"]);
-      }
     }
     return paths;
   }
@@ -71,30 +66,22 @@ export default class ExpirationAutomation extends CritAutomation {
   /** @returns {string[]} */
   get _overrideConditionsPaths() {
     const paths = ["override.conditions"];
-    if (this.override.conditions) {
-      paths.push(...["conditions.present", "conditions.absent"]);
-    }
+    if (this.override.conditions) paths.push(...["conditions.present", "conditions.absent"]);
     return paths;
   }
 
   /** @returns {string[]} */
   get _overrideTriggersPaths() {
     const paths = ["override.triggers"];
-    if (this.override.triggers) {
-      paths.push("triggers");
-    }
+    if (this.override.triggers) paths.push("triggers");
     return paths;
   }
 
   /** @inheritDoc */
   get formMessages() {
     const messages = super.formMessages;
-    if (this.isPassive) {
-      messages.unshift({
-        level: "error",
-        text: "TERIOCK.AUTOMATIONS.Expiration.NOTIFICATIONS.passive",
-      });
-    }
+    if (this.isPassive)
+      messages.unshift({ level: "error", text: "TERIOCK.AUTOMATIONS.Expiration.NOTIFICATIONS.passive" });
     return messages;
   }
 
@@ -107,17 +94,11 @@ export default class ExpirationAutomation extends CritAutomation {
   getExpirationData(options = {}) {
     const obj = this.toObject();
     const out = {};
-    if (this.override.conditions) {
-      out.conditions = obj?.conditions;
-    }
-    if (this.override.triggers) {
-      out.triggers = obj?.triggers;
-    }
+    if (this.override.conditions) out.conditions = obj?.conditions;
+    if (this.override.triggers) out.triggers = obj?.triggers;
     if (this.override.combat) {
       out.combat = obj?.combat;
-      if (options.actor) {
-        foundry.utils.setProperty(out, "combat.who.source", options.actor.uuid);
-      }
+      if (options.actor) foundry.utils.setProperty(out, "combat.who.source", options.actor.uuid);
     }
     return out;
   }

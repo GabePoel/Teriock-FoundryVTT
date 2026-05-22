@@ -12,12 +12,7 @@ export default class PowerSheet extends BaseItemSheet {
   static BARS = ["teriock/sheets/items/power/status-bar"];
 
   /** @inheritDoc */
-  static DEFAULT_OPTIONS = {
-    classes: ["power"],
-    window: {
-      icon: makeIconClass(documentConfig.power.icon, "title"),
-    },
-  };
+  static DEFAULT_OPTIONS = { classes: ["power"], window: { icon: makeIconClass(documentConfig.power.icon, "title") } };
 
   /** @inheritDoc */
   static PARTS = {
@@ -29,9 +24,7 @@ export default class PowerSheet extends BaseItemSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) {
-      return;
-    }
+    if (!this.isEditable) return;
     this._connectBuildContextMenu(".power-box", TERIOCK.config.power.type, "system.type", "click");
   }
 }

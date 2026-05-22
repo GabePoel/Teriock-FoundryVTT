@@ -21,26 +21,20 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    */
   #checkExpiration(effect, trigger, time, actorUuid, ops = []) {
     const expiration = effect.system.expirations.combat;
-    if (expiration.what.type === "none" || !effect.active) {
-      return;
-    }
+    if (expiration.what.type === "none" || !effect.active) return;
     if (
-      expiration.when.trigger === trigger &&
-      expiration.when.time === time &&
-      (expiration.who.type === "everyone" ||
-        (expiration.who.type === "executor" && actorUuid === expiration.who.source) ||
-        (expiration.who.type === "target" && actorUuid === effect.actor.uuid))
+      expiration.when.trigger === trigger
+      && expiration.when.time === time
+      && (expiration.who.type === "everyone"
+        || (expiration.who.type === "executor" && actorUuid === expiration.who.source)
+        || (expiration.who.type === "target" && actorUuid === effect.actor.uuid))
     ) {
-      if (expiration.when.skip <= 0 && effect.actor) {
-        effect.actor.defaultUser?.query("teriock.inCombatExpiration", {
-          uuid: effect.uuid,
-        });
-      } else if (expiration.when.skip > 0) {
+      if (expiration.when.skip <= 0 && effect.actor)
+        effect.actor.defaultUser?.query("teriock.inCombatExpiration", { uuid: effect.uuid });
+      else if (expiration.when.skip > 0) {
         ops.push({
           action: "update",
-          docData: {
-            "system.expirations.combat.when.skip": expiration.when.skip - 1,
-          },
+          docData: { "system.expirations.combat.when.skip": expiration.when.skip - 1 },
           uuid: effect.uuid,
         });
       }
@@ -53,10 +47,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * @param {Teriock.System.Trigger} trigger
    */
   #fireTrigger(actor, trigger) {
-    actor?.defaultUser?.query("teriock.fireTrigger", {
-      trigger,
-      uuid: actor.uuid,
-    });
+    actor?.defaultUser?.query("teriock.fireTrigger", { trigger, uuid: actor.uuid });
   }
 
   /**
@@ -71,16 +62,9 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
    * Reset every actor's attack penalty.
    */
   #resetAttackPenalties() {
-    game.users.queryGM(
-      "teriock.turnChange",
-      {
-        actorUuids: this.actors.filter(a => a.system.combat.attackPenalty !== 0).map(a => a.uuid),
-      },
-      {
-        failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.resetAttackPenalties.failPrefix",
-        localize: true,
-      },
-    );
+    game.users.queryGM("teriock.turnChange", {
+      actorUuids: this.actors.filter(a => a.system.combat.attackPenalty !== 0).map(a => a.uuid),
+    }, { failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.resetAttackPenalties.failPrefix", localize: true });
   }
 
   /**
@@ -96,20 +80,12 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
       mightExpire.push(...effectActor.consequences);
       mightExpire.push(...effectActor.imbuements);
     }
-    for (const effect of mightExpire) {
-      this.#checkExpiration(effect, trigger, time, timeActor?.uuid, ops);
-    }
-    if (ops.length === 0) {
-      return;
-    }
-    game.users.queryGM(
-      "teriock.massWrite",
-      { operations: ops },
-      {
-        failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
-        localize: true,
-      },
-    );
+    for (const effect of mightExpire) this.#checkExpiration(effect, trigger, time, timeActor?.uuid, ops);
+    if (ops.length === 0) return;
+    game.users.queryGM("teriock.massWrite", { operations: ops }, {
+      failPrefix: "TERIOCK.SYSTEMS.Combat.QUERY.tryAllEffectExpirations.failPrefix",
+      localize: true,
+    });
   }
 
   /**
@@ -145,9 +121,7 @@ export default class TeriockCombat extends BaseDocumentMixin(Combat) {
     const previousActor = this.actor;
     const out = await super.nextTurn();
     if (previousActor) {
-      for (const actor of this.actors) {
-        this.#tryExpirations(actor, previousActor, "turn", "end");
-      }
+      for (const actor of this.actors) this.#tryExpirations(actor, previousActor, "turn", "end");
     }
     this.#resetAttackPenalties();
     this.updateCombatantActors();

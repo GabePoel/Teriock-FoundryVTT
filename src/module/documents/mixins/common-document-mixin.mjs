@@ -21,19 +21,12 @@ export default function CommonDocumentMixin(Base) {
      * @mixes SettingsDocument
      * @mixin
      */
-    class CommonDocument extends mixClasses(
-      Base,
-      PropagationDataMixin,
-      EmbedCardDocumentMixin,
-      PanelDocumentMixin,
-      SettingsDocumentMixin,
-    ) {
+    class CommonDocument
+      extends mixClasses(Base, PropagationDataMixin, EmbedCardDocumentMixin, PanelDocumentMixin, SettingsDocumentMixin)
+    {
       /** @inheritDoc */
       static get documentMetadata() {
-        return Object.assign(super.documentMetadata, {
-          common: true,
-          typed: true,
-        });
+        return Object.assign(super.documentMetadata, { common: true, typed: true });
       }
 
       /**
@@ -43,9 +36,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {boolean}
        */
       static validateChildType(parent, child) {
-        if (!parent?.metadata?.childItemTypes || !parent?.metadata?.childEffectTypes) {
-          return true;
-        }
+        if (!parent?.metadata?.childItemTypes || !parent?.metadata?.childEffectTypes) return true;
         const childTypes = new Set([...parent.metadata.childEffectTypes, ...parent.metadata.childItemTypes]);
         return childTypes.has(child?.type);
       }
@@ -60,13 +51,9 @@ export default function CommonDocumentMixin(Base) {
        * The actor associated with this document if there is one.
        */
       get actor() {
-        if (this instanceof TeriockActor) {
-          return this;
-        } else if (this.parent) {
-          return this.parent.actor;
-        } else {
-          return null;
-        }
+        if (this instanceof TeriockActor) return this;
+        else if (this.parent) return this.parent.actor;
+        else return null;
       }
 
       /**
@@ -121,9 +108,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {AnyChildDocument[]}
        */
       get visibleChildren() {
-        if (!this._visibleChildren) {
-          this._visibleChildren = this.makeVisibleChildrenArray();
-        }
+        if (!this._visibleChildren) this._visibleChildren = this.makeVisibleChildrenArray();
         return this._visibleChildren;
       }
 
@@ -135,9 +120,7 @@ export default function CommonDocumentMixin(Base) {
         if (!this._visibleChildrenByType) {
           const typeMap = {};
           for (const c of this.visibleChildren) {
-            if (!typeMap[c.type]) {
-              typeMap[c.type] = [];
-            }
+            if (!typeMap[c.type]) typeMap[c.type] = [];
             typeMap[c.type].push(c);
           }
           this._visibleChildrenByType = typeMap;
@@ -156,23 +139,16 @@ export default function CommonDocumentMixin(Base) {
       /** @inheritDoc */
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
-        if (this.checkEditor(userId) && this.actor) {
-          this.actor.system.postUpdate();
-        }
+        if (this.checkEditor(userId) && this.actor) this.actor.system.postUpdate();
       }
 
       /** @inheritDoc */
       async _preCreate(data, options, user) {
         const yes = await super._preCreate(data, options, user);
-        if (yes === false) {
-          return false;
-        }
+        if (yes === false) return false;
 
-        if (!data.img && TERIOCK.config.document[this.type]?.documentName === this.documentName) {
-          this.updateSource({
-            img: systemPath(`icons/documents/${data.type}.svg`),
-          });
-        }
+        if (!data.img && TERIOCK.config.document[this.type]?.documentName === this.documentName)
+          this.updateSource({ img: systemPath(`icons/documents/${data.type}.svg`) });
         this.updateSource({ sort: game.time.serverTime });
       }
 
@@ -262,9 +238,7 @@ export default function CommonDocumentMixin(Base) {
        */
       async hasChild(identifier) {
         const parsed = parseIdentifier(identifier);
-        if (!parsed) {
-          return false;
-        }
+        if (!parsed) return false;
         return !!(await this.getChildArray()).some(c => c.typedIdentifier === identifier);
       }
 
@@ -280,12 +254,8 @@ export default function CommonDocumentMixin(Base) {
       async hookCall(trigger, options = {}) {
         const { scope = {}, skipCall = false, skipPropagation = false } = options;
         scope.trigger = trigger;
-        if (!skipPropagation) {
-          await this.actor?.fireTrigger(trigger, scope);
-        }
-        if (!skipCall) {
-          return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope));
-        }
+        if (!skipPropagation) await this.actor?.fireTrigger(trigger, scope);
+        if (!skipCall) return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope));
       }
 
       /**
@@ -293,9 +263,9 @@ export default function CommonDocumentMixin(Base) {
        * @returns {AnyChildDocument[]}
        */
       makeVisibleChildrenArray() {
-        return this.childArray
-          .filter(c => !c.isEphemeral)
-          .filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
+        return this.childArray.filter(c => !c.isEphemeral).filter(c =>
+          c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM
+        );
       }
 
       /** @inheritDoc */
@@ -325,13 +295,10 @@ export default function CommonDocumentMixin(Base) {
        *  - undefined if no changes need to be made
        */
       async toggleChild(identifier, options = {}) {
-        if (!parseIdentifier(identifier)) {
-          return;
-        }
+        if (!parseIdentifier(identifier)) return;
         const hasChild = await this.hasChild(identifier);
-        if (hasChild && options.active) {
-          return true;
-        } else if (hasChild && !options.active) {
+        if (hasChild && options.active) return true;
+        else if (hasChild && !options.active) {
           await ensureNoChildren(this, [identifier]);
           return false;
         } else if (!hasChild && (options.active === true || typeof options.active !== "boolean")) {

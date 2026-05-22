@@ -24,17 +24,19 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @property {TeriockActor} document
  * @property {Teriock.Sheet.BaseActorSheetSettings} settings
  */
-export default class BaseActorSheet extends mixClasses(
-  ActorSheetV2,
-  HackStatApplicationMixin,
-  HandlebarsApplicationMixin,
-  mixins.CommonSheetMixin,
-  mixins.EquipmentDropSheetMixin,
-  parts.FiltersActorSheetPart,
-  parts.HidingActorSheetPart,
-  parts.SearchingActorSheetPart,
-  parts.SortingActorSheetPart,
-) {
+export default class BaseActorSheet
+  extends mixClasses(
+    ActorSheetV2,
+    HackStatApplicationMixin,
+    HandlebarsApplicationMixin,
+    mixins.CommonSheetMixin,
+    mixins.EquipmentDropSheetMixin,
+    parts.FiltersActorSheetPart,
+    parts.HidingActorSheetPart,
+    parts.SearchingActorSheetPart,
+    parts.SortingActorSheetPart,
+  )
+{
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -59,9 +61,7 @@ export default class BaseActorSheet extends mixClasses(
    */
   #cycleToggleSwitch(toggleSwitch, change = 1) {
     const name = toggleSwitch.getAttribute("data-name");
-    if (!name) {
-      return;
-    }
+    if (!name) return;
     const val = foundry.utils.getProperty(this, name);
     foundry.utils.setProperty(this, name, ((val + 1 + change) % 3) - 1);
   }
@@ -73,7 +73,7 @@ export default class BaseActorSheet extends mixClasses(
   async _onRender(context, options) {
     await super._onRender(context, options);
     /** @type {NodeListOf<HTMLButtonElement>} */
-    const toggleSwitches = this.element.querySelectorAll('button[data-action="toggleSwitch"]');
+    const toggleSwitches = this.element.querySelectorAll("button[data-action=\"toggleSwitch\"]");
     toggleSwitches.forEach(el => {
       // Left-click: forward cycle
       el.addEventListener("click", async () => {
@@ -86,13 +86,9 @@ export default class BaseActorSheet extends mixClasses(
         await this.render();
       });
       // Support right-click on associated labels
-      if (!el.id) {
-        return;
-      }
+      if (!el.id) return;
       const label = this.element.querySelector(`label[for="${el.id}"]`);
-      if (!label) {
-        return;
-      }
+      if (!label) return;
       label.addEventListener("contextmenu", async event => {
         event.preventDefault();
         this.#cycleToggleSwitch(el, 2);

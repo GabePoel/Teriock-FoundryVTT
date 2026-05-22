@@ -33,17 +33,13 @@ export default function ActivatableSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          activations: new PseudoCollectionField(BaseActivation, {
-            types: this.activationTypes,
-          }),
+          activations: new PseudoCollectionField(BaseActivation, { types: this.activationTypes }),
         });
       }
 
       /** @inheritDoc */
       get pseudoCollections() {
-        return Object.assign(super.pseudoCollections, {
-          Activation: this.activations,
-        });
+        return Object.assign(super.pseudoCollections, { Activation: this.activations });
       }
 
       /**
@@ -54,13 +50,9 @@ export default function ActivatableSystemMixin(Base) {
         element.querySelectorAll("button[data-action=activate-activation]").forEach(
           /** @param {HTMLButtonElement} btn */ btn => {
             const id = btn.dataset.id;
-            if (!id) {
-              return;
-            }
+            if (!id) return;
             const activation = /** @type {BaseActivation} */ this.activations.get(id);
-            if (!activation) {
-              return;
-            }
+            if (!activation) return;
             btn.addEventListener("click", ev => {
               ev.stopImmediatePropagation();
               ev.stopPropagation();

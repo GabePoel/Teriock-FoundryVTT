@@ -39,18 +39,10 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
         failReason = _loc(failReason);
       }
     }
-    if (!failMessage) {
-      failMessage = _loc("TERIOCK.SYSTEMS.User.QUERY.failFormat", {
-        prefix: failPrefix,
-        reason: failReason,
-      });
-    }
-    if (!this.activeGM && notifyFailure) {
-      ui.notifications.warn(failMessage, {
-        format: queryOptions.format,
-        localize: queryOptions.localize,
-      });
-    }
+    if (!failMessage)
+      failMessage = _loc("TERIOCK.SYSTEMS.User.QUERY.failFormat", { prefix: failPrefix, reason: failReason });
+    if (!this.activeGM && notifyFailure)
+      ui.notifications.warn(failMessage, { format: queryOptions.format, localize: queryOptions.localize });
     return await this.activeGM?.query(queryName, queryData, queryOptions);
   }
 }

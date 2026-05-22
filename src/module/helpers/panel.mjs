@@ -9,12 +9,10 @@ import { getImage } from "./path.mjs";
  */
 export async function attributePanel(attribute) {
   return TeriockTextEditor.enrichPanel({
-    blocks: [
-      {
-        text: TERIOCK.data.attributes[attribute],
-        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-      },
-    ],
+    blocks: [{
+      text: TERIOCK.data.attributes[attribute],
+      title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+    }],
     icon: TERIOCK.display.icons.interaction.feat,
     image: getImage("attributes", TERIOCK.index.attributesFull[attribute]),
     label: _loc("TERIOCK.TERMS.Common.attribute"),
@@ -29,25 +27,18 @@ export async function attributePanel(attribute) {
  */
 export async function tradecraftPanel(tradecraft) {
   let field;
-  for (const [key, value] of Object.entries(TERIOCK.config.tradecraft)) {
-    if (Object.keys(value.tradecrafts).includes(tradecraft)) {
-      field = key;
-    }
-  }
+  for (const [key, value] of Object.entries(TERIOCK.config.tradecraft))
+    if (Object.keys(value.tradecrafts).includes(tradecraft)) field = key;
   return TeriockTextEditor.enrichPanel({
-    bars: [
-      {
-        icon: TERIOCK.config.tradecraft[field].icon,
-        label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
-        wrappers: [TERIOCK.config.tradecraft[field].name],
-      },
-    ],
-    blocks: [
-      {
-        text: TERIOCK.content.tradecrafts[tradecraft],
-        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-      },
-    ],
+    bars: [{
+      icon: TERIOCK.config.tradecraft[field].icon,
+      label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
+      wrappers: [TERIOCK.config.tradecraft[field].name],
+    }],
+    blocks: [{
+      text: TERIOCK.content.tradecrafts[tradecraft],
+      title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+    }],
     icon: documentConfig.fluency.icon,
     image: getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]),
     label: _loc("TERIOCK.TERMS.Common.tradecraft"),
@@ -62,25 +53,18 @@ export async function tradecraftPanel(tradecraft) {
  */
 export async function classPanel(className) {
   let archetype;
-  for (const [key, value] of Object.entries(TERIOCK.config.rank)) {
-    if (Object.keys(value.classes).includes(className)) {
-      archetype = key;
-    }
-  }
+  for (const [key, value] of Object.entries(TERIOCK.config.rank))
+    if (Object.keys(value.classes).includes(className)) archetype = key;
   return await TeriockTextEditor.enrichPanel({
-    bars: [
-      {
-        icon: TERIOCK.config.rank[archetype].icon,
-        label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
-        wrappers: [TERIOCK.config.rank[archetype].name],
-      },
-    ],
-    blocks: [
-      {
-        text: TERIOCK.content.classes[className],
-        title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-      },
-    ],
+    bars: [{
+      icon: TERIOCK.config.rank[archetype].icon,
+      label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
+      wrappers: [TERIOCK.config.rank[archetype].name],
+    }],
+    blocks: [{
+      text: TERIOCK.content.classes[className],
+      title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+    }],
     icon: documentConfig.rank.icon,
     image: getImage("classes", TERIOCK.index.classes[className]),
     label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
@@ -127,12 +111,8 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
  * @returns {string}
  */
 export function simplifyTag(tag) {
-  if (typeof tag === "string") {
-    return _loc(tag);
-  }
-  if (typeof tag.label === "string") {
-    return _loc(tag.label);
-  }
+  if (typeof tag === "string") return _loc(tag);
+  if (typeof tag.label === "string") return _loc(tag.label);
   return "";
 }
 

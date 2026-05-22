@@ -42,17 +42,8 @@ export function classContextMenu(rank) {
       const option = {
         icon: makeIcon(cData.icon, "contextMenu"),
         label: cData.name,
-        onClick: async () => {
-          await rank.update({
-            system: {
-              archetype: aKey,
-              className: cKey,
-            },
-          });
-        },
-        visible: () => {
-          return foundry.utils.getProperty(rank.system, "archetype") === aKey;
-        },
+        onClick: async () => await rank.update({ system: { archetype: aKey, className: cKey } }),
+        visible: () => foundry.utils.getProperty(rank.system, "archetype") === aKey,
       };
       options.push(option);
     }

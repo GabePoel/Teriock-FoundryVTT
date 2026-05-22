@@ -7,9 +7,7 @@ const { TypedObjectField } = foundry.data.fields;
 export default class PseudoCollectionField extends TypedObjectField {
   /** @inheritDoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      validateKey: foundry.data.validators.isValidId,
-    });
+    return foundry.utils.mergeObject(super._defaults, { validateKey: foundry.data.validators.isValidId });
   }
 
   /**
@@ -19,13 +17,10 @@ export default class PseudoCollectionField extends TypedObjectField {
    * @param {DataFieldContext} [context]
    */
   constructor(model, options = {}, context = {}) {
-    if (!foundry.utils.isSubclass(model, TypedPseudoDocument)) {
+    if (!foundry.utils.isSubclass(model, TypedPseudoDocument))
       throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.notPseudoDocument"));
-    }
     const types = (options.types ||= model.TYPES);
-    if (!types) {
-      throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes"));
-    }
+    if (!types) throw new Error(_loc("TERIOCK.FIELDS.PseudoCollectionField.noTypes"));
     super(new PseudoTypedSchemaField(types), options, context);
     this.#documentClass = model;
     this.#collectionClass = options.collection ?? TypeCollection;

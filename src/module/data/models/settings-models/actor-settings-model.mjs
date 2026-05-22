@@ -36,20 +36,10 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
           child: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
           initial: "small",
         }),
-        blockClassesGapless: new blockGaplessField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
-        }),
-        blockClassesSize: new blockSizeField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Classes.title",
-        }),
-        blockEffectsGapless: new blockGaplessField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
-          initial: true,
-        }),
-        blockEffectsSize: new blockSizeField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Effects.title",
-          initial: "small",
-        }),
+        blockClassesGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Classes.title" }),
+        blockClassesSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Classes.title" }),
+        blockEffectsGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Effects.title", initial: true }),
+        blockEffectsSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Effects.title", initial: "small" }),
         blockInventoryGapless: new blockGaplessField({
           child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
           initial: true,
@@ -58,24 +48,12 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
           child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
           initial: "small",
         }),
-        blockPowersGapless: new blockGaplessField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
-        }),
-        blockPowersSize: new blockSizeField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Powers.title",
-        }),
-        blockResourcesGapless: new blockGaplessField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
-        }),
-        blockResourcesSize: new blockSizeField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Resources.title",
-        }),
-        blockTradecraftsGapless: new blockGaplessField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
-        }),
-        blockTradecraftsSize: new blockSizeField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
-        }),
+        blockPowersGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Powers.title" }),
+        blockPowersSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Powers.title" }),
+        blockResourcesGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Resources.title" }),
+        blockResourcesSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Resources.title" }),
+        blockTradecraftsGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title" }),
+        blockTradecraftsSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title" }),
       }),
       token: new fields.SchemaField({
         autoColoration: new fields.BooleanField({ initial: true }),

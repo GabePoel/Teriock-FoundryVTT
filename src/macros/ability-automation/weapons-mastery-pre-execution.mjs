@@ -2,11 +2,7 @@ const equipmentClass = await tm.dialogs.selectEquipmentClassDialog();
 const childChangeId = foundry.utils.randomID();
 const consequenceData = {
   img: scope.effect?.img,
-  name: game.i18n
-    .format("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", {
-      name: scope.effect?.name || "",
-    })
-    .trim(),
+  name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", { name: scope.effect?.name || "" }).trim(),
   system: {
     _dep: game.teriock.getSetting("trackSustainedConsequences") ? scope.effect.uuid : undefined,
     automations: {

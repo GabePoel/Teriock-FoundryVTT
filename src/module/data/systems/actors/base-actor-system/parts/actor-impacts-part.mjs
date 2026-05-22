@@ -29,13 +29,8 @@ export default Base => {
         const sp = this[stat];
         const temp = Math.max(0, sp.temp - amount);
         amount = Math.max(0, amount - sp.temp);
-        const updateData = {
-          [`system.${stat}.temp`]: temp,
-          [`system.${stat}.value`]: barClamp(sp, -amount),
-        };
-        if (options.morganti) {
-          updateData[`system.${stat}.morganti`] = sp.morganti + amount;
-        }
+        const updateData = { [`system.${stat}.temp`]: temp, [`system.${stat}.value`]: barClamp(sp, -amount) };
+        if (options.morganti) updateData[`system.${stat}.morganti`] = sp.morganti + amount;
         await this.parent.update(updateData);
       }
 
@@ -49,9 +44,7 @@ export default Base => {
        */
       async impactDialog(impact, options = {}) {
         const entry = TERIOCK.config.impact[impact];
-        if (!entry) {
-          return;
-        }
+        if (!entry) return;
         const initialAmount = options.amount ?? (entry.nullable ? null : 0);
         const amountField = new fields.NumberField({
           initial: initialAmount,
@@ -69,9 +62,8 @@ export default Base => {
         const rootId = foundry.utils.randomID();
         const content = document.createElement("div");
         content.append(amountField.toFormGroup({ rootId }, { name: "amount", value: initialAmount }));
-        if (entry.morganti) {
+        if (entry.morganti)
           content.append(morgantiField.toFormGroup({ rootId }, { name: "morganti", value: initialMorganti }));
-        }
         await TeriockDialog.prompt({
           content,
           modal: true,
@@ -80,16 +72,11 @@ export default Base => {
               let morganti;
               const value = button.form.elements.namedItem("amount").value;
               const amount = typeof value === "string" && value.length > 0 ? Number(value) : null;
-              if (entry.morganti) {
-                morganti = button.form.elements.namedItem("morganti")?.checked;
-              }
+              if (entry.morganti) morganti = button.form.elements.namedItem("morganti")?.checked;
               await entry.apply(this.parent, amount, { morganti });
             },
           },
-          window: {
-            icon: makeIconClass(entry.icon, "title"),
-            title: entry.take,
-          },
+          window: { icon: makeIconClass(entry.icon, "title"), title: entry.take },
         });
       }
 
@@ -136,9 +123,7 @@ export default Base => {
        */
       async takeGainTempHp(amount) {
         await this.parent.hookCall("gainTempHp", { scope: { amount } });
-        await this.parent.update({
-          "system.hp.temp": Math.max(this.hp.temp + amount, 0),
-        });
+        await this.parent.update({ "system.hp.temp": Math.max(this.hp.temp + amount, 0) });
       }
 
       /**
@@ -152,9 +137,7 @@ export default Base => {
        */
       async takeGainTempMp(amount) {
         await this.parent.hookCall("gainTempMp", { scope: { amount } });
-        await this.parent.update({
-          "system.mp.temp": Math.max(this.mp.temp + amount, 0),
-        });
+        await this.parent.update({ "system.mp.temp": Math.max(this.mp.temp + amount, 0) });
       }
 
       /**
@@ -168,9 +151,7 @@ export default Base => {
        */
       async takeHealing(amount) {
         await this.parent.hookCall("healing", { scope: { amount } });
-        await this.parent.update({
-          "system.hp.value": barClamp(this.hp, amount),
-        });
+        await this.parent.update({ "system.hp.value": barClamp(this.hp, amount) });
       }
 
       /**
@@ -180,9 +161,7 @@ export default Base => {
        */
       async takeHide(amount) {
         await this.parent.hookCall("hide", { scope: { amount } });
-        await this.parent.update({
-          "system.detection.hiding": amount,
-        });
+        await this.parent.update({ "system.detection.hiding": amount });
       }
 
       /**
@@ -196,12 +175,7 @@ export default Base => {
        */
       async takeKill(amount) {
         await this.parent.hookCall("kill", { scope: { amount } });
-        if (this.hp.value <= amount) {
-          await this.parent.toggleStatusEffect("dead", {
-            active: true,
-            overlay: true,
-          });
-        }
+        if (this.hp.value <= amount) await this.parent.toggleStatusEffect("dead", { active: true, overlay: true });
       }
 
       /**
@@ -211,9 +185,7 @@ export default Base => {
        */
       async takePerceive(amount) {
         await this.parent.hookCall("perceive", { scope: { amount } });
-        await this.parent.update({
-          "system.detection.perceiving": amount,
-        });
+        await this.parent.update({ "system.detection.perceiving": amount });
       }
 
       /**
@@ -227,9 +199,7 @@ export default Base => {
        */
       async takeRevitalizing(amount) {
         await this.parent.hookCall("revitalizing", { scope: { amount } });
-        await this.parent.update({
-          "system.mp.value": barClamp(this.mp, amount),
-        });
+        await this.parent.update({ "system.mp.value": barClamp(this.mp, amount) });
       }
 
       /**
@@ -271,12 +241,7 @@ export default Base => {
        */
       async takeSleep(amount) {
         await this.parent.hookCall("sleep", { scope: { amount } });
-        if (this.hp.value <= amount) {
-          await this.parent.toggleStatusEffect("asleep", {
-            active: true,
-            overlay: true,
-          });
-        }
+        if (this.hp.value <= amount) await this.parent.toggleStatusEffect("asleep", { active: true, overlay: true });
       }
 
       /**
@@ -291,9 +256,7 @@ export default Base => {
       async takeWither(amount) {
         console.log(amount);
         await this.parent.hookCall("wither", { scope: { amount } });
-        await this.parent.update({
-          "system.lp.value": barClamp(this.lp, amount),
-        });
+        await this.parent.update({ "system.lp.value": barClamp(this.lp, amount) });
       }
     }
   );

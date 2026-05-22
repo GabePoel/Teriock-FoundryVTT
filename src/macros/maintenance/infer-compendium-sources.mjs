@@ -5,17 +5,10 @@ await tm.utils.progressBar(
     if (!p.locked) {
       await p.getIndex();
       const indexes = tm.sort.docSort(p.index.contents.filter(d => !d?.system?._sup));
-      await tm.utils.progressBar(
-        indexes,
-        `Refreshing ${_loc(p.title)} Sources`,
-        async i => {
-          const doc = await tm.resolve.resolveDocument(i);
-          if (doc?.documentMetadata.common) {
-            await tm.resolve.inferChildCompendiumSources(doc);
-          }
-        },
-        { batch: 50 },
-      );
+      await tm.utils.progressBar(indexes, `Refreshing ${_loc(p.title)} Sources`, async i => {
+        const doc = await tm.resolve.resolveDocument(i);
+        if (doc?.documentMetadata.common) await tm.resolve.inferChildCompendiumSources(doc);
+      }, { batch: 50 });
     }
   },
 );

@@ -32,34 +32,16 @@ export default function ConsumableSystemMixin(Base) {
 
       /** @inheritDoc */
       static get metadata() {
-        return foundry.utils.mergeObject(super.metadata, {
-          consumable: true,
-        });
+        return foundry.utils.mergeObject(super.metadata, { consumable: true });
       }
 
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           consumable: new fields.BooleanField({ initial: true }),
-          consumptionAmount: new fields.NumberField({
-            initial: 1,
-            integer: true,
-            nullable: false,
-            placeholder: "1",
-          }),
-          maxQuantity: new EvaluationField({
-            blank: Infinity,
-            deterministic: true,
-            floor: true,
-            min: 0,
-          }),
-          quantity: new fields.NumberField({
-            initial: 1,
-            integer: true,
-            min: 0,
-            nullable: false,
-            placeholder: "0",
-          }),
+          consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
+          maxQuantity: new EvaluationField({ blank: Infinity, deterministic: true, floor: true, min: 0 }),
+          quantity: new fields.NumberField({ initial: 1, integer: true, min: 0, nullable: false, placeholder: "0" }),
         });
       }
 
@@ -69,17 +51,11 @@ export default function ConsumableSystemMixin(Base) {
           icon: TERIOCK.display.icons.ui.quantity,
           label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label"),
           wrappers: [
-            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
-              value: this.quantity,
-            }),
+            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity }),
             this.maxQuantity.value === Infinity
               ? _loc("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-              : _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", {
-                  value: this.maxQuantity.value,
-                }),
-            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.perUse", {
-              value: this.consumptionAmount,
-            }),
+              : _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", { value: this.maxQuantity.value }),
+            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.perUse", { value: this.consumptionAmount }),
           ],
         };
       }
@@ -95,10 +71,7 @@ export default function ConsumableSystemMixin(Base) {
       /** @inheritDoc */
       get embedActions() {
         return Object.assign(super.embedActions, {
-          useOneDoc: {
-            primary: async () => await this.useOne(),
-            secondary: async () => await this.gainOne(),
-          },
+          useOneDoc: { primary: async () => await this.useOne(), secondary: async () => await this.gainOne() },
         });
       }
 
@@ -124,13 +97,11 @@ export default function ConsumableSystemMixin(Base) {
        */
       get remainingString() {
         return this.maxQuantity.value === Infinity
-          ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
-              value: this.quantity,
-            })
+          ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity })
           : _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax", {
-              max: this.maxQuantity.value,
-              value: this.quantity,
-            });
+            max: this.maxQuantity.value,
+            value: this.quantity,
+          });
       }
 
       /**
@@ -139,11 +110,8 @@ export default function ConsumableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async gainOne() {
-        if (this.consumable) {
-          await this.parent.update({
-            "system.quantity": Math.clamp(this.quantity + 1, 0, this.maxQuantity.value),
-          });
-        }
+        if (this.consumable)
+          await this.parent.update({ "system.quantity": Math.clamp(this.quantity + 1, 0, this.maxQuantity.value) });
       }
 
       /** @inheritDoc */
@@ -173,9 +141,7 @@ export default function ConsumableSystemMixin(Base) {
       async use(options = {}) {
         await super.use(options);
         if (this.parent.isOwner && this.consumable && !this.parent.inCompendium) {
-          if (!this.parent.getFlag("teriock", "dontConsume")) {
-            await this.useOne();
-          }
+          if (!this.parent.getFlag("teriock", "dontConsume")) await this.useOne();
           await this.parent.setFlag("teriock", "dontConsume", false);
         }
       }
@@ -186,11 +152,8 @@ export default function ConsumableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async useOne() {
-        if (this.consumable && this.consumptionAmount) {
-          await this.parent.update({
-            "system.quantity": Math.max(0, this.quantity - this.consumptionAmount),
-          });
-        }
+        if (this.consumable && this.consumptionAmount)
+          await this.parent.update({ "system.quantity": Math.max(0, this.quantity - this.consumptionAmount) });
       }
     }
   );

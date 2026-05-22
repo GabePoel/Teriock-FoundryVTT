@@ -12,12 +12,9 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @property {AnyItem} document
  * @property {AnyItem} item
  */
-export default class BaseItemSheet extends mixClasses(
-  ItemSheetV2,
-  HandlebarsApplicationMixin,
-  mixins.CommonSheetMixin,
-  mixins.ChildSheetMixin,
-) {
+export default class BaseItemSheet
+  extends mixClasses(ItemSheetV2, HandlebarsApplicationMixin, mixins.CommonSheetMixin, mixins.ChildSheetMixin)
+{
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -26,8 +23,6 @@ export default class BaseItemSheet extends mixClasses(
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    return Object.assign(await super._prepareContext(options), {
-      item: this.item,
-    });
+    return Object.assign(await super._prepareContext(options), { item: this.item });
   }
 }

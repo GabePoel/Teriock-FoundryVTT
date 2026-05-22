@@ -16,8 +16,6 @@ export default attunementContext;
 preLocalize("rollContext.attunement");
 Hooks.once("i18nInit", () => {
   Object.entries(attunementConfig.type).forEach(([k, v]) => {
-    attunementContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Attunement.type", {
-      name: _loc(v.label),
-    });
+    attunementContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Attunement.type", { name: _loc(v.label) });
   });
 });

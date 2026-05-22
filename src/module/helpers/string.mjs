@@ -22,9 +22,7 @@ export function isKebabCase(str) {
  * @returns {boolean}
  */
 export function isTitleCase(str) {
-  if (!str) {
-    return false;
-  }
+  if (!str) return false;
   return str === toTitleCase(str);
 }
 
@@ -36,14 +34,10 @@ export function isTitleCase(str) {
 export function toCamelCase(str) {
   return isCamelCase(str)
     ? str
-    : str
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/'/g, "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]+(.)/gi, (_, c) => c.toUpperCase())
-        .replace(/[^a-z0-9]/gi, "")
-        .replace(/^[A-Z]/, c => c.toLowerCase());
+    : str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/'/g, "").toLowerCase().replace(
+      /[^a-z0-9]+(.)/gi,
+      (_, c) => c.toUpperCase(),
+    ).replace(/[^a-z0-9]/gi, "").replace(/^[A-Z]/, c => c.toLowerCase());
 }
 
 /**
@@ -63,14 +57,8 @@ export function toTitleCase(str) {
 export function toKebabCase(str) {
   return isKebabCase(str)
     ? str
-    : str
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/'/g, "")
-        .replace(/([a-z])([A-Z])/g, "$1-$2")
-        .replace(/[^a-z0-9]+/gi, "-")
-        .toLowerCase()
-        .replace(/^-+|-+$/g, "");
+    : str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/'/g, "").replace(/([a-z])([A-Z])/g, "$1-$2")
+      .replace(/[^a-z0-9]+/gi, "-").toLowerCase().replace(/^-+|-+$/g, "");
 }
 
 /**
@@ -81,11 +69,8 @@ export function toKebabCase(str) {
 export function toKebabCaseFull(str) {
   return isKebabCase(str)
     ? str
-    : str
-        .replace(/[\s_]+/g, "-")
-        .replace(/([a-z\d])([A-Z])/g, "$1-$2")
-        .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
-        .toLowerCase();
+    : str.replace(/[\s_]+/g, "-").replace(/([a-z\d])([A-Z])/g, "$1-$2").replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+      .toLowerCase();
 }
 
 /**
@@ -95,9 +80,7 @@ export function toKebabCaseFull(str) {
  */
 export function toInt(str) {
   const result = parseInt(str, 10);
-  if (isNaN(result)) {
-    return 0;
-  }
+  if (isNaN(result)) return 0;
   return result;
 }
 
@@ -143,12 +126,10 @@ export function toId(str, options = {}) {
  */
 export function dedent(str) {
   const lines = str.split("\n");
-  const minIndent = lines
-    .filter(line => line.trim())
-    .reduce((min, line) => {
-      const match = line.match(/^(\s*)/);
-      return Math.min(min, match ? match[1].length : 0);
-    }, Infinity);
+  const minIndent = lines.filter(line => line.trim()).reduce((min, line) => {
+    const match = line.match(/^(\s*)/);
+    return Math.min(min, match ? match[1].length : 0);
+  }, Infinity);
   return lines.map(line => line.slice(minIndent)).join("\n");
 }
 

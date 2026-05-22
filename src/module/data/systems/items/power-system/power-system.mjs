@@ -21,22 +21,14 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "power",
-    });
+    return foundry.utils.mergeObject(super.metadata, { type: "power" });
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      competence: new fields.EmbeddedDataField(CompetenceModel, {
-        initial: { raw: 1 },
-      }),
-      maxAv: new fields.NumberField({
-        initial: 4,
-        integer: true,
-        min: 0,
-      }),
+      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
+      maxAv: new fields.NumberField({ initial: 4, integer: true, min: 0 }),
       type: new fields.StringField({
         choices: localizeChoices(objectMap(powerConfig.type, v => v.label)),
         initial: "other",
@@ -61,10 +53,10 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
   get makeSuppressed() {
     let suppressed = super.makeSuppressed;
     if (
-      game.teriock.getSetting("armorSuppressesRanks") &&
-      this.actor &&
-      !this.innate &&
-      this.actor.system.defense.av.base > this.maxAv
+      game.teriock.getSetting("armorSuppressesRanks")
+      && this.actor
+      && !this.innate
+      && this.actor.system.defense.av.base > this.maxAv
     ) {
       suppressed = true;
     }
@@ -73,32 +65,26 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
 
   /** @inheritDoc */
   get messageBars() {
-    return [
-      {
-        icon: powerConfig.type[this.type].icon,
-        label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
-        wrappers: [
-          powerConfig.type[this.type].label,
-          this.maxAv === 0
-            ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-            : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", {
-                value: this.maxAv,
-              }),
-        ],
-      },
-    ];
+    return [{
+      icon: powerConfig.type[this.type].icon,
+      label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
+      wrappers: [
+        powerConfig.type[this.type].label,
+        this.maxAv === 0
+          ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+          : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
+      ],
+    }];
   }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
     if (
-      this.actor?.powers.map(p => p.system.identifier).includes(this.identifier) &&
-      ["mage", "semi", "warrior"].includes(this.identifier)
+      this.actor?.powers.map(p => p.system.identifier).includes(this.identifier)
+      && ["mage", "semi", "warrior"].includes(this.identifier)
     ) {
       return false;
     }
@@ -106,19 +92,13 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
-      ...super.getLocalRollData(),
-      [`type.${toCamelCase(this.type)}`]: 1,
-      av: this.maxAv,
-      maxAv: this.maxAv,
-    };
+    return { ...super.getLocalRollData(), [`type.${toCamelCase(this.type)}`]: 1, av: this.maxAv, maxAv: this.maxAv };
   }
 
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv) {
+    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv)
       this.proficient = false;
-    }
   }
 }

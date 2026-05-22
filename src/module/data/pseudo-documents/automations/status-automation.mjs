@@ -14,10 +14,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
 
   /** @inheritDoc */
   static get _relationChoices() {
-    return {
-      ...super._relationChoices,
-      include: _loc("TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include"),
-    };
+    return { ...super._relationChoices, include: _loc("TERIOCK.AUTOMATIONS.Status.FIELDS.relation.choices.include") };
   }
 
   /** @inheritDoc */
@@ -44,9 +41,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
     const paths = super._formPaths;
     if (this.relation === "include" && !this.isPassive) {
       paths.push(...["hr", "executor", "target"]);
-      if (this.target) {
-        paths.push("multi");
-      }
+      if (this.target) paths.push("multi");
     }
     return paths;
   }

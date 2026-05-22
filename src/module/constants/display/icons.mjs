@@ -21,12 +21,7 @@ export const icons = {
     target: "ms-location-searching",
     unheightened: "ms-equal",
   },
-  archetype: {
-    everyman: "ms-accessibility",
-    mage: "mdi-crystal-ball",
-    semi: "ms-sprint",
-    warrior: "mdi-mace",
-  },
+  archetype: { everyman: "ms-accessibility", mage: "mdi-crystal-ball", semi: "ms-sprint", warrior: "mdi-mace" },
   armament: {
     ap: "ms-expand-circle-down",
     av: "mdi-shield-account",
@@ -42,17 +37,8 @@ export const icons = {
     str: "ms-exercise",
     unp: "ms-self-improvement",
   },
-  attunable: {
-    attune: "ms-approval-delegation",
-    deattune: "ms-approval-delegation-off",
-    tier: "ms-trophy",
-  },
-  break: {
-    destroy: "ms-destruction",
-    reforge: "ms-hardware",
-    repair: "ms-local-bar",
-    shatter: "ms-no-drinks",
-  },
+  attunable: { attune: "ms-approval-delegation", deattune: "ms-approval-delegation-off", tier: "ms-trophy" },
+  break: { destroy: "ms-destruction", reforge: "ms-hardware", repair: "ms-local-bar", shatter: "ms-no-drinks" },
   change: {
     key: "ms-search",
     phase: "ms-nest-clock-farsight-analog",
@@ -80,20 +66,9 @@ export const icons = {
     tradesman: "ms-home-repair-service",
     veteran: "ms-fort",
   },
-  competence: {
-    fluent: "ms-social-leaderboard",
-    none: "ms-brightness-empty",
-    proficient: "ms-license",
-  },
-  consequence: {
-    crit: "ms-my-location",
-    none: "ms-location-searching",
-  },
-  cover: {
-    full: "ms-forest",
-    half: "ms-grass",
-    partial: "ms-park",
-  },
+  competence: { fluent: "ms-social-leaderboard", none: "ms-brightness-empty", proficient: "ms-license" },
+  consequence: { crit: "ms-my-location", none: "ms-location-searching" },
+  cover: { full: "ms-forest", half: "ms-grass", partial: "ms-park" },
   delivery: {
     aura: "ms-flare",
     bite: "ms-dentistry",
@@ -207,23 +182,9 @@ export const icons = {
     mouth: "ms-lips",
     nose: "ms-oxygen-saturation",
   },
-  interaction: {
-    attack: "ms-swords",
-    block: "ms-shield",
-    feat: "ms-star",
-    manifest: "ms-flare",
-  },
-  maneuver: {
-    active: "ms-arrow-right-alt",
-    passive: "ms-cycle",
-    reactive: "ms-redo",
-    slow: "ms-airwave",
-  },
-  piercing: {
-    av0: "ms-line-end-arrow-notch",
-    none: "ms-close",
-    ub: "ms-nat",
-  },
+  interaction: { attack: "ms-swords", block: "ms-shield", feat: "ms-star", manifest: "ms-flare" },
+  maneuver: { active: "ms-arrow-right-alt", passive: "ms-cycle", reactive: "ms-redo", slow: "ms-airwave" },
+  piercing: { av0: "ms-line-end-arrow-notch", none: "ms-close", ub: "ms-nat" },
   power: {
     backstory: "ms-person-book",
     blessing: "ms-folded-hands",
@@ -237,24 +198,10 @@ export const icons = {
     pact: "ms-signature",
     traits: "ms-flag",
   },
-  powerLevel: {
-    enchanted: "ms-wand-shine",
-    magic: "ms-wand-stars",
-    mundane: "ms-candle",
-    unknown: "ms-question-mark",
-  },
-  pseudoDocument: {
-    automation: "ms-settings-b-roll",
-  },
-  rank: {
-    combatAbility: "ms-swords",
-    supportAbility: "ms-shield-with-heart",
-  },
-  roll: {
-    boost: "ms-arrow-warm-up",
-    deboost: "ms-arrow-cool-down",
-    reroll: "ms-replay",
-  },
+  powerLevel: { enchanted: "ms-wand-shine", magic: "ms-wand-stars", mundane: "ms-candle", unknown: "ms-question-mark" },
+  pseudoDocument: { automation: "ms-settings-b-roll" },
+  rank: { combatAbility: "ms-swords", supportAbility: "ms-shield-with-heart" },
+  roll: { boost: "ms-arrow-warm-up", deboost: "ms-arrow-cool-down", reroll: "ms-replay" },
   settings: {
     alternateRules: "mdi-dice-multiple",
     automatedBehavior: "mdi-auto-fix",
@@ -272,12 +219,7 @@ export const icons = {
     size: "ms-accessibility-new",
     traits: "ms-flag",
   },
-  stat: {
-    gp: "ms-poker-chip",
-    hp: "ms-favorite",
-    lp: "ms-hourglass",
-    mp: "ms-water-drop",
-  },
+  stat: { gp: "ms-poker-chip", hp: "ms-favorite", lp: "ms-hourglass", mp: "ms-water-drop" },
   target: {
     armor: "mdi-shield-account",
     item: "ms-candle",

@@ -10,7 +10,5 @@ export default class CreatureSheet extends TeriockPlayableActorSheet {
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
-  static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(documentConfig.creature.icon, "title") },
-  };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(documentConfig.creature.icon, "title") } };
 }

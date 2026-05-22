@@ -24,7 +24,7 @@ export default Base => {
             e.stopPropagation();
             e.preventDefault();
             handler(e);
-          }),
+          })
         );
       }
 

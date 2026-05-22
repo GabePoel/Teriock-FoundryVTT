@@ -30,42 +30,23 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @returns {number}
    */
   #evaluate(options = {}) {
-    options = {
-      ...this._derivationOptions,
-      ...options,
-    };
+    options = { ...this._derivationOptions, ...options };
     const formula = this.formula;
     let needsEval = false;
     let value;
-    if (formula.includes("Infinity")) {
-      value = Infinity;
-    } else if (!isNaN(Number(formula))) {
-      value = Number(formula);
-    } else {
-      needsEval = true;
-    }
+    if (formula.includes("Infinity")) value = Infinity;
+    else if (!isNaN(Number(formula))) value = Number(formula);
+    else needsEval = true;
     if (needsEval) {
       let rollData = options.rollData ?? {};
-      if (needsEval && !options.skipRollData) {
-        rollData = this.getRollData();
-      }
+      if (needsEval && !options.skipRollData) rollData = this.getRollData();
       value = BaseRoll.minValue(formula, rollData);
     }
-    if (typeof options.max === "number") {
-      value = Math.min(value, options.max);
-    }
-    if (typeof options.min === "number") {
-      value = Math.max(value, options.min);
-    }
-    if (typeof options.interval === "number") {
-      value = value.toNearest(options.interval);
-    }
-    if (options.floor) {
-      value = Math.floor(value);
-    }
-    if (options.ceil) {
-      value = Math.ceil(value);
-    }
+    if (typeof options.max === "number") value = Math.min(value, options.max);
+    if (typeof options.min === "number") value = Math.max(value, options.min);
+    if (typeof options.interval === "number") value = value.toNearest(options.interval);
+    if (options.floor) value = Math.floor(value);
+    if (options.ceil) value = Math.ceil(value);
     return value;
   }
 
@@ -88,12 +69,8 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @returns {Teriock.System.FormulaString}
    */
   get formula() {
-    if (this.raw) {
-      return this.raw;
-    }
-    if (["number", "string"].includes(typeof this._derivationOptions.blank)) {
-      return `${this._derivationOptions.blank}`;
-    }
+    if (this.raw) return this.raw;
+    if (["number", "string"].includes(typeof this._derivationOptions.blank)) return `${this._derivationOptions.blank}`;
     return "0";
   }
 
@@ -118,9 +95,7 @@ export default class EvaluationModel extends EmbeddedDataModel {
    * @returns {number}
    */
   get value() {
-    if (typeof this._value === "number") {
-      return this._value;
-    }
+    if (typeof this._value === "number") return this._value;
     return this.#evaluate({ skipRollData: true });
   }
 

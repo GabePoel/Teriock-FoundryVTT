@@ -25,9 +25,7 @@ export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      associations: associationsField(),
-    });
+    return Object.assign(super.defineSchema(), { associations: associationsField() });
   }
 
   /** @inheritDoc */

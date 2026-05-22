@@ -54,12 +54,8 @@ export default function ConfirmationDialogAutomationMixin(Base) {
       /** @inheritDoc */
       get formMessages() {
         const messages = super.formMessages;
-        if (this._showConfirmationWarning) {
-          messages.unshift({
-            level: "warning",
-            text: this.#pre("NOTIFICATIONS.noConfirmation"),
-          });
-        }
+        if (this._showConfirmationWarning)
+          messages.unshift({ level: "warning", text: this.#pre("NOTIFICATIONS.noConfirmation") });
         return messages;
       }
 
@@ -74,26 +70,18 @@ export default function ConfirmationDialogAutomationMixin(Base) {
        * @returns {Promise<boolean>}
        */
       async getConfirmation(options = {}, dialog = {}) {
-        const data = Object.assign(
-          {
-            automation: _loc(this.label) ?? "",
-            document: this.document.fullName ?? this.document.name ?? "",
-          },
-          options.data ?? {},
-        );
-        if (!this.showConfirmationDialog) {
-          return true;
-        }
+        const data = Object.assign({
+          automation: _loc(this.label) ?? "",
+          document: this.document.fullName ?? this.document.name ?? "",
+        }, options.data ?? {});
+        if (!this.showConfirmationDialog) return true;
         const contentString = options.content ?? this.#pre("DIALOG.content");
         const icon = options.icon ?? TERIOCK.display.icons.pseudoDocument.automation;
         const title = _loc(options.title ?? this.#pre("DIALOG.title"), data);
         const contentText = _loc(contentString, data);
         const content = await TeriockTextEditor.enrichHTML(`<p>${contentText}</p>`);
         const config = foundry.utils.mergeObject(
-          {
-            content,
-            window: { icon: makeIconClass(icon, "title"), title },
-          },
+          { content, window: { icon: makeIconClass(icon, "title"), title } },
           dialog,
         );
         return await TeriockDialog.confirm(config);

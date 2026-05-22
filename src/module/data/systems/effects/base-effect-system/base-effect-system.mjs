@@ -20,9 +20,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      modifies: "Actor",
-    });
+    return foundry.utils.mergeObject(super.metadata, { modifies: "Actor" });
   }
 
   /** @inheritDoc */
@@ -66,11 +64,9 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
 
   /** @inheritDoc */
   get _isSuppressedElder() {
-    return (
-      (this.parent.elder?.type !== "equipment" ||
-        (this.parent.elder?.type === "equipment" && this.parent.elder.system._isSuppressedConsumed)) &&
-      super._isSuppressedElder
-    );
+    return ((this.parent.elder?.type !== "equipment"
+      || (this.parent.elder?.type === "equipment" && this.parent.elder.system._isSuppressedConsumed))
+      && super._isSuppressedElder);
   }
 
   /**
@@ -100,9 +96,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   /** @inheritDoc */
   get _statusTags() {
     const tags = super._statusTags;
-    if (this.needsAttunement) {
-      tags.push("TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true");
-    }
+    if (this.needsAttunement) tags.push("TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true");
     return tags;
   }
 
@@ -124,13 +118,10 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
 
   /** @inheritDoc */
   get displayToggles() {
-    return [
-      ...super.displayToggles,
-      {
-        label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
-        path: "disabled",
-      },
-    ];
+    return [...super.displayToggles, {
+      label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
+      path: "disabled",
+    }];
   }
 
   /**
@@ -139,11 +130,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    */
   get isReference() {
     const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
-    for (const sup of sups) {
-      if (sup.type === "ability" && sup.system?.maneuver !== "passive") {
-        return true;
-      }
-    }
+    for (const sup of sups) if (sup.type === "ability" && sup.system?.maneuver !== "passive") return true;
     return super.isReference;
   }
 
@@ -157,15 +144,13 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
 
   /** @inheritDoc */
   get makeSuppressed() {
-    return (
-      super.makeSuppressed ||
-      this._isSuppressedDampened ||
-      this._isSuppressedDeattuned ||
-      this._isSuppressedDestroyed ||
-      this._isSuppressedShattered ||
-      this._isSuppressedStashed ||
-      this._isSuppressedUnequipped
-    );
+    return (super.makeSuppressed
+      || this._isSuppressedDampened
+      || this._isSuppressedDeattuned
+      || this._isSuppressedDestroyed
+      || this._isSuppressedShattered
+      || this._isSuppressedStashed
+      || this._isSuppressedUnequipped);
   }
 
   /**
@@ -181,11 +166,9 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get needsAttunement() {
-    return (
-      !this.applyIfDeattuned &&
-      ["equipment", "mount"].includes(this.parent.parent?.type) &&
-      !!this.parent.parent?.system.needsAttunement
-    );
+    return (!this.applyIfDeattuned
+      && ["equipment", "mount"].includes(this.parent.parent?.type)
+      && !!this.parent.parent?.system.needsAttunement);
   }
 
   /**
@@ -194,9 +177,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    */
   get qualifiedChanges() {
     const changes = [];
-    for (const a of this.activeAutomations.filter(a => a.metadata.changes)) {
-      changes.push(...a.getChanges());
-    }
+    for (const a of this.activeAutomations.filter(a => a.metadata.changes)) changes.push(...a.getChanges());
     return changes;
   }
 
@@ -205,35 +186,26 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {Promise<void>}
    */
   async expire() {
-    if (!this.deleteOnExpire) {
-      await this.parent.hookCall("effectExpiration");
-    }
-    if (this.deleteOnExpire) {
-      await this.parent.delete();
-    } else {
-      await this.parent.update({ disabled: true });
-    }
+    if (!this.deleteOnExpire) await this.parent.hookCall("effectExpiration");
+    if (this.deleteOnExpire) await this.parent.delete();
+    else await this.parent.update({ disabled: true });
   }
 
   /** @inheritDoc */
   getLocalRollData() {
     const data = super.getLocalRollData();
-    for (const status of this.parent.statuses) {
-      data[`condition.${status}`] = 1;
-    }
+    for (const status of this.parent.statuses) data[`condition.${status}`] = 1;
     return data;
   }
 
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    const statusAutomations = /** @type {StatusAutomation[]} */ this.activeAutomations.filter(
-      a => a.type === StatusAutomation.TYPE,
+    const statusAutomations = /** @type {StatusAutomation[]} */ this.activeAutomations.filter(a =>
+      a.type === StatusAutomation.TYPE
     );
     statusAutomations.forEach(a => {
-      if (a.relation === "include") {
-        this.parent.statuses.add(a.status);
-      }
+      if (a.relation === "include") this.parent.statuses.add(a.status);
     });
   }
 
@@ -248,9 +220,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {Promise<boolean>} True if the effect should expire, false otherwise.
    */
   async shouldExpire() {
-    if (!this.parent.isTemporary) {
-      return false;
-    }
+    if (!this.parent.isTemporary) return false;
     return this.parent.duration.remaining < 0;
   }
 }

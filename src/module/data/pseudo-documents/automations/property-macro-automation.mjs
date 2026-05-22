@@ -14,10 +14,7 @@ export default class PropertyMacroAutomation extends MacroAutomationMixin(BaseAu
   /** @inheritDoc */
   get triggerMetadata() {
     return foundry.utils.mergeObject(super.triggerMetadata, {
-      choices: {
-        attunable: TERIOCK.config.trigger.attunable,
-        equipment: TERIOCK.config.trigger.equipment,
-      },
+      choices: { attunable: TERIOCK.config.trigger.attunable, equipment: TERIOCK.config.trigger.equipment },
     });
   }
 }

@@ -36,29 +36,31 @@ import * as parts from "./parts/_module.mjs";
  * @mixes ThresholdData
  * @mixes WikiSystem
  */
-export default class AbilitySystem extends mixClasses(
-  CleanedEffectSystem,
-  shared.ThresholdDataMixin,
-  mixins.AttackSystemMixin,
-  mixins.ConsumableSystemMixin,
-  mixins.CompetenceDisplaySystemMixin,
-  mixins.MetaphysicsSystemMixin,
-  mixins.RevelationSystemMixin,
-  mixins.WikiSystemMixin,
-  mixins.AdjustableSystemMixin,
-  parts.AbilityAutomationsPart,
-  parts.AbilityCostsPart,
-  parts.AbilityDurationPart,
-  parts.AbilityEquipmentPart,
-  parts.AbilityInfoPart,
-  parts.AbilityUsagePart,
-  parts.AbilityImprovementsPart,
-  parts.AbilityOverviewPart,
-  parts.AbilityPanelPart,
-  parts.AbilityRankPart,
-  parts.AbilityResultsPart,
-  parts.AbilityMetaphysicsPart,
-) {
+export default class AbilitySystem
+  extends mixClasses(
+    CleanedEffectSystem,
+    shared.ThresholdDataMixin,
+    mixins.AttackSystemMixin,
+    mixins.ConsumableSystemMixin,
+    mixins.CompetenceDisplaySystemMixin,
+    mixins.MetaphysicsSystemMixin,
+    mixins.RevelationSystemMixin,
+    mixins.WikiSystemMixin,
+    mixins.AdjustableSystemMixin,
+    parts.AbilityAutomationsPart,
+    parts.AbilityCostsPart,
+    parts.AbilityDurationPart,
+    parts.AbilityEquipmentPart,
+    parts.AbilityInfoPart,
+    parts.AbilityUsagePart,
+    parts.AbilityImprovementsPart,
+    parts.AbilityOverviewPart,
+    parts.AbilityPanelPart,
+    parts.AbilityRankPart,
+    parts.AbilityResultsPart,
+    parts.AbilityMetaphysicsPart,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Ability"];
 
@@ -114,31 +116,18 @@ export default class AbilitySystem extends mixClasses(
   /** @inheritDoc */
   get _nameTags() {
     const tags = [];
-    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
-      if (this.costs.tweaks[k]) {
-        tags.push(v.label);
-      }
-    }
-    if (this.grantOnly) {
-      tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted"));
-    }
+    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) if (this.costs.tweaks[k]) tags.push(v.label);
+    if (this.grantOnly) tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted"));
     return [...tags, ...super._nameTags];
   }
 
   /** @inheritDoc */
   get displayButtons() {
     const buttons = super.displayButtons;
-    if (!this.expansion.type) {
-      buttons.push({
-        classes: "ab-expansion-button",
-        label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
-      });
-    } else if (!this.expansion.cap) {
-      buttons.push({
-        classes: "ab-expansion-cap-button",
-        label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label",
-      });
-    }
+    if (!this.expansion.type)
+      buttons.push({ classes: "ab-expansion-button", label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label" });
+    else if (!this.expansion.cap)
+      buttons.push({ classes: "ab-expansion-cap-button", label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label" });
     return buttons;
   }
 
@@ -153,10 +142,7 @@ export default class AbilitySystem extends mixClasses(
         visible: this.elderSorcery,
       },
       ...Object.keys(costConfig.primary.keys).map(k => {
-        return {
-          path: `system.costs.primary.${k}.description`,
-          visible: this.costs.primary[k].type === "description",
-        };
+        return { path: `system.costs.primary.${k}.description`, visible: this.costs.primary[k].type === "description" };
       }),
       ...Object.keys(costConfig.components.keys).map(k => {
         return {
@@ -170,69 +156,53 @@ export default class AbilitySystem extends mixClasses(
       "system.overview.base",
     ];
     if (this.interaction === "attack") {
-      fields.push(
-        ...["system.results.hit", "system.results.critHit", "system.results.miss", "system.results.critMiss"],
-      );
+      fields.push(...[
+        "system.results.hit",
+        "system.results.critHit",
+        "system.results.miss",
+        "system.results.critMiss",
+      ]);
     } else if (this.interaction === "feat") {
-      fields.push(
-        ...["system.results.fail", "system.results.critFail", "system.results.save", "system.results.critSave"],
-      );
+      fields.push(...[
+        "system.results.fail",
+        "system.results.critFail",
+        "system.results.save",
+        "system.results.critSave",
+      ]);
     } else {
       fields.push(...["system.results.save", "system.results.fail"]);
     }
-    fields.push(
-      ...[
-        {
-          classes: this.competence.proficient ? "" : TERIOCK.display.panel.classes.faded,
-          path: "system.overview.proficient",
+    fields.push(...[{
+      classes: this.competence.proficient ? "" : TERIOCK.display.panel.classes.faded,
+      path: "system.overview.proficient",
+    }, { classes: this.competence.fluent ? "" : TERIOCK.display.panel.classes.faded, path: "system.overview.fluent" }]);
+    fields.push(...[
+      "system.heightened",
+      "system.endCondition",
+      { classes: TERIOCK.display.panel.classes.derived, editable: false, path: "system.grantOnlyText" },
+      { classes: TERIOCK.display.panel.classes.derived, editable: false, path: "system.grantUseText" },
+      { classes: TERIOCK.display.panel.classes.derived, editable: false, path: "system.consumeSourceText" },
+      {
+        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
+        dataset: {
+          icon: TERIOCK.display.icons.ui.numerical,
+          paths: "system.upgrades.score.attribute system.upgrades.score.value",
+          title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
         },
-        {
-          classes: this.competence.fluent ? "" : TERIOCK.display.panel.classes.faded,
-          path: "system.overview.fluent",
+        editable: false,
+        path: "system.upgrades.score.text",
+      },
+      {
+        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
+        dataset: {
+          icon: TERIOCK.display.icons.competence.fluent,
+          paths: "system.upgrades.competence.attribute system.upgrades.competence.value",
+          title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update"),
         },
-      ],
-    );
-    fields.push(
-      ...[
-        "system.heightened",
-        "system.endCondition",
-        {
-          classes: TERIOCK.display.panel.classes.derived,
-          editable: false,
-          path: "system.grantOnlyText",
-        },
-        {
-          classes: TERIOCK.display.panel.classes.derived,
-          editable: false,
-          path: "system.grantUseText",
-        },
-        {
-          classes: TERIOCK.display.panel.classes.derived,
-          editable: false,
-          path: "system.consumeSourceText",
-        },
-        {
-          classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
-          dataset: {
-            icon: TERIOCK.display.icons.ui.numerical,
-            paths: "system.upgrades.score.attribute system.upgrades.score.value",
-            title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.update"),
-          },
-          editable: false,
-          path: "system.upgrades.score.text",
-        },
-        {
-          classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
-          dataset: {
-            icon: TERIOCK.display.icons.competence.fluent,
-            paths: "system.upgrades.competence.attribute system.upgrades.competence.value",
-            title: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.update"),
-          },
-          editable: false,
-          path: "system.upgrades.competence.text",
-        },
-      ],
-    );
+        editable: false,
+        path: "system.upgrades.competence.text",
+      },
+    ]);
     return fields;
   }
 
@@ -274,18 +244,12 @@ export default class AbilitySystem extends mixClasses(
         tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
         visible: this.basic,
         onClick: () => {
-          ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", {
-            localize: true,
-          });
+          ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", { localize: true });
         },
       });
     }
-    if (this.isArmamentChild && !this.grantUse) {
-      icons.unshift(this.grantUseIcon);
-    }
-    if (this.tagIcon) {
-      icons.unshift(this.tagIcon);
-    }
+    if (this.isArmamentChild && !this.grantUse) icons.unshift(this.grantUseIcon);
+    if (this.tagIcon) icons.unshift(this.tagIcon);
     return icons;
   }
 
@@ -293,8 +257,8 @@ export default class AbilitySystem extends mixClasses(
   get embedParts() {
     const parts = super.embedParts;
     if (!this.consumable) {
-      parts.subtitle =
-        TERIOCK.config.ability.executionTime[this.maneuver]?.[this.executionTime.base] ?? this.executionTime.slow?.text;
+      parts.subtitle = TERIOCK.config.ability.executionTime[this.maneuver]?.[this.executionTime.base]
+        ?? this.executionTime.slow?.text;
     }
     return parts;
   }
@@ -322,10 +286,9 @@ export default class AbilitySystem extends mixClasses(
    * @returns {string}
    */
   get targetString() {
-    return Array.from(this.targets)
-      .map(t => TERIOCK.config.ability.targets[t])
-      .sort((a, b) => a.localeCompare(b))
-      .join(_loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"));
+    return Array.from(this.targets).map(t => TERIOCK.config.ability.targets[t]).sort((a, b) => a.localeCompare(b)).join(
+      _loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"),
+    );
   }
 
   /** @inheritDoc */
@@ -335,11 +298,7 @@ export default class AbilitySystem extends mixClasses(
 
   /** @inheritDoc */
   get useText() {
-    if (this.spell) {
-      return _loc("TERIOCK.SYSTEMS.Ability.USAGE.cast", {
-        value: this.parent.name,
-      });
-    }
+    if (this.spell) return _loc("TERIOCK.SYSTEMS.Ability.USAGE.cast", { value: this.parent.name });
     return super.useText;
   }
 
@@ -349,46 +308,24 @@ export default class AbilitySystem extends mixClasses(
    */
   async _use(options = {}) {
     options.source = this.parent;
-    if (this.grantOnly && this.parent.parent.metadata.armament) {
+    if (this.grantOnly && this.parent.parent.metadata.armament)
       options.armament = /** @type {TeriockArmament} */ this.parent.parent;
-    }
     await new AbilityExecution(options).execute();
   }
 
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    Object.assign(rollData, {
-      av0: 0,
-      "av0.abi": 0,
-      ub: 0,
-      "ub.abi": 0,
-      warded: 0,
-      "warded.abi": 0,
-    });
-    if (this.piercing === "av0") {
-      Object.assign(rollData, {
-        av0: 2,
-        "av0.abi": 2,
-      });
-    }
-    if (this.piercing === "ub") {
-      Object.assign(rollData, {
-        av0: 2,
-        "av0.abi": 2,
-        ub: 1,
-        "ub.abi": 1,
-      });
-    }
+    Object.assign(rollData, { av0: 0, "av0.abi": 0, ub: 0, "ub.abi": 0, warded: 0, "warded.abi": 0 });
+    if (this.piercing === "av0") Object.assign(rollData, { av0: 2, "av0.abi": 2 });
+    if (this.piercing === "ub") Object.assign(rollData, { av0: 2, "av0.abi": 2, ub: 1, "ub.abi": 1 });
     return rollData;
   }
 
   /** @inheritDoc */
   toRefreshObject(document) {
     const obj = super.toRefreshObject(document);
-    if (!["flaw", "normal", "special"].includes(this.form)) {
-      foundry.utils.deleteProperty(obj, "system.form");
-    }
+    if (!["flaw", "normal", "special"].includes(this.form)) foundry.utils.deleteProperty(obj, "system.form");
     return obj;
   }
 }

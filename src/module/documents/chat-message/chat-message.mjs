@@ -17,9 +17,7 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
    * @param {Partial<DatabaseCreateOperation & { defaultMode: boolean} >} [operation]
    */
   static async create(data = {}, operation = {}) {
-    if (operation.defaultMode) {
-      this.applyMode(data, game.settings.get("core", "messageMode"));
-    }
+    if (operation.defaultMode) this.applyMode(data, game.settings.get("core", "messageMode"));
     return super.create(data, operation);
   }
 
@@ -38,16 +36,10 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
    */
   get speakerImg() {
     const token = this.speakerToken;
-    if (token) {
-      return token.img;
-    }
+    if (token) return token.img;
     const actor = this.speakerActor;
-    if (actor) {
-      return actor.img;
-    }
-    if (this.system.avatar) {
-      return this.system.avatar;
-    }
+    if (actor) return actor.img;
+    if (this.system.avatar) return this.system.avatar;
     return systemPath("icons/documents/character.svg");
   }
 
@@ -67,9 +59,7 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
   async renderHTML(options = {}) {
     // Rolls being hidden when content is not otherwise visible reveals more information than it hides
     if (!this.isContentVisible) {
-      for (const r of this.rolls) {
-        r.hideRoll = false;
-      }
+      for (const r of this.rolls) r.hideRoll = false;
     }
     const context = await this.system._prepareContext(options);
     const element = await super.renderHTML(context);
@@ -82,12 +72,8 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
     const obj = super.toObject(source);
     obj.img = this.speakerImg;
     obj.rescale = this.rescale;
-    if (this.author?.name !== this.alias) {
-      obj.writer = this.author?.name;
-    }
-    if (!this.isContentVisible) {
-      obj.system.panels.length = 0;
-    }
+    if (this.author?.name !== this.alias) obj.writer = this.author?.name;
+    if (!this.isContentVisible) obj.system.panels.length = 0;
     return obj;
   }
 }

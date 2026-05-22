@@ -25,17 +25,11 @@ export default Base =>
      */
     static async #onIncreaseCover(event) {
       if (event.button === 0) {
-        if (this.document.system.cover < 3) {
-          await this.document.system.increaseCover();
-        } else {
-          await this.document.system.decreaseCover(3);
-        }
+        if (this.document.system.cover < 3) await this.document.system.increaseCover();
+        else await this.document.system.decreaseCover(3);
       } else if (event.button === 2) {
-        if (this.document.system.cover > 0) {
-          await this.document.system.decreaseCover();
-        } else {
-          await this.document.system.increaseCover(3);
-        }
+        if (this.document.system.cover > 0) await this.document.system.decreaseCover();
+        else await this.document.system.increaseCover(3);
       }
     }
 
@@ -48,9 +42,7 @@ export default Base =>
     static async #onQuickUse(event, target) {
       const id = target.dataset.id;
       const item = this.document.items.get(id);
-      if (item) {
-        await item.use({ event });
-      }
+      if (item) await item.use({ event });
     }
 
     /**
@@ -108,26 +100,22 @@ export default Base =>
         toggleCondition: this.#onToggleCondition,
       },
       window: {
-        controls: [
-          {
-            action: "deathBagPull",
-            icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
-            label: "TERIOCK.EFFECTS.Common.bag",
-            ownership: "OWNER",
-          },
-          {
-            action: "takeLongRest",
-            icon: makeIconClass(icons.ui.longRest, "contextMenu"),
-            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
-            ownership: "OWNER",
-          },
-          {
-            action: "takeShortRest",
-            icon: makeIconClass(icons.ui.shortRest, "contextMenu"),
-            label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
-            ownership: "OWNER",
-          },
-        ],
+        controls: [{
+          action: "deathBagPull",
+          icon: makeIconClass(icons.ui.deathBag, "contextMenu"),
+          label: "TERIOCK.EFFECTS.Common.bag",
+          ownership: "OWNER",
+        }, {
+          action: "takeLongRest",
+          icon: makeIconClass(icons.ui.longRest, "contextMenu"),
+          label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label",
+          ownership: "OWNER",
+        }, {
+          action: "takeShortRest",
+          icon: makeIconClass(icons.ui.shortRest, "contextMenu"),
+          label: "TERIOCK.SHEETS.Actor.ACTIONS.TakeShortRest.label",
+          ownership: "OWNER",
+        }],
       },
     };
   };

@@ -7,23 +7,23 @@
 }
 
 @mixin warm-image-container-background() {
-  position: relative;
   overflow: hidden;
+  position: relative;
   &::before {
+    content: "";
+    height: 100%;
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    content: "";
     @include warm-image-background;
   }
 }
 
 @mixin image-border($spread: 4px, $opacity: 0.3, $radius: 100%) {
-  box-shadow: 0 0 $spread rgba(0, 0, 0, $opacity);
   border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
   border-radius: $radius;
+  box-shadow: 0 0 $spread rgba(0, 0, 0, $opacity);
   outline: 1px solid var(--color-light-6);
   overflow: hidden;
 }
@@ -43,15 +43,16 @@
 }
 
 @mixin title-text-spacing($right: 0) {
-  text-align: center;
   padding-right: $right;
+  text-align: center;
 }
 
 @mixin title-text-styling() {
   background: none;
   border: none;
   box-shadow: none;
-  font-family: var(--font-h1), serif;
+  font-family:
+    var(--font-h1), serif;
 }
 
 @mixin image-right-border() {
@@ -66,43 +67,43 @@
 
 @mixin text-subtle() {
   color: var(--color-text-subtle);
-  text-transform: uppercase;
   font-size: smaller;
+  text-transform: uppercase;
 }
 
 @mixin tag-container-style() {
+  align-items: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 3px;
-  align-items: center;
 }
 
 @mixin tag-style() {
   @include text-subtle;
+  align-content: center;
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid color-mix(in srgb, var(--color-text-subtle), transparent 75%);
-  white-space: normal;
   border-radius: 3px;
+  break-inside: avoid;
   margin: 0;
   padding-inline: 0.3em;
   text-align: start;
-  align-content: center;
-  break-inside: avoid;
+  white-space: normal;
 }
 
 @mixin roll-style() {
-  border: 1px solid var(--color-panel-associations-border);
-  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
   background: var(--color-panel-associations-background);
+  border: 1px solid var(--color-panel-associations-border);
   border-radius: 4px;
+  box-shadow: 0 0 2px var(--color-panel-associations-shadow-color) inset;
 }
 
 @mixin inverse-roll-style() {
   @include roll-style;
-  box-shadow: none;
   background: var(--color-panel-background);
   border-color: var(--color-panel-edge);
+  box-shadow: none;
 }
 
 @mixin inverse-roll-style-hover() {
@@ -139,12 +140,12 @@
     position: relative;
 
     & + *::before {
-      content: "";
-      position: absolute;
-      top: -($gap / 2);
-      left: 0;
-      right: 0;
       border-top: $divider-width var(--panel-divider-style) $divider-color;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: -($gap / 2);
     }
   }
 }
@@ -154,7 +155,6 @@
     .ab-box-icon {
       opacity: 0.8;
     }
-
     background-color: color-mix(in srgb, var(--color-text-primary), transparent 90%);
   }
 
@@ -162,7 +162,6 @@
     .ab-box-icon {
       opacity: 1;
     }
-
     background-color: color-mix(in srgb, var(--color-text-primary), transparent 80%);
 
     .ab-box-icon {
@@ -230,11 +229,7 @@
 @mixin material-symbol() {
   @include icon-format;
   font-family: "Material Symbols Rounded", sans-serif;
-  font-variation-settings:
-    "FILL" 1,
-    "wght" 700,
-    "GRAD" 200,
-    "opsz" 48;
+  font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 200, "opsz" 48;
 }
 
 @mixin material-design-icon() {
@@ -244,21 +239,21 @@
 
 @mixin shatter-background() {
   &::before {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
     background: url("../src/assets/shattered.png") no-repeat top center;
     background-size: cover;
     content: "";
+    height: 100%;
+    left: 0;
     opacity: 0.2;
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 }
 
 @mixin centralize() {
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: center;
 }
 
@@ -273,7 +268,7 @@
     left: $padding;
     position: absolute;
     right: $padding;
-    top: 0px;
+    top: 0;
   }
 }
 

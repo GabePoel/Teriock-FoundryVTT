@@ -57,10 +57,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
           what: builders.combatExpirationMethodField(),
           when: builders.combatExpirationTimingField(),
           who: new fields.SchemaField({
-            source: new fields.DocumentUUIDField({
-              nullable: true,
-              type: "Actor",
-            }),
+            source: new fields.DocumentUUIDField({ nullable: true, type: "Actor" }),
             type: builders.combatExpirationSourceTypeField(),
           }),
         }),
@@ -88,9 +85,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   get _nameTags() {
     const tags = super._nameTags;
-    if (this.critical) {
-      tags.unshift(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical"));
-    }
+    if (this.critical) tags.unshift(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical"));
     return tags;
   }
 
@@ -108,9 +103,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
         this.heightened
           ? this.heightened === 1
             ? _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")
-            : _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", {
-                value: this.heightened,
-              })
+            : _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", { value: this.heightened })
           : "",
       ],
     };
@@ -123,9 +116,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   get embedParts() {
-    return Object.assign(super.embedParts, {
-      subtitle: this.parent.remainingString,
-    });
+    return Object.assign(super.embedParts, { subtitle: this.parent.remainingString });
   }
 
   /**
@@ -144,41 +135,29 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   get useText() {
-    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
-      value: this.parent.name,
-    });
+    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", { value: this.parent.name });
   }
 
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) {
-      this.parent.fireTrigger("applyEffect", this.parent.getScope());
-    }
+    if (this.parent.checkEditor(userId) && this.actor) this.parent.fireTrigger("applyEffect", this.parent.getScope());
   }
 
   /** @inheritDoc */
   _onFireTrigger(trigger) {
     super._onFireTrigger(trigger);
-    if (this.expirations.triggers.has(trigger)) {
-      this.expire();
-    }
+    if (this.expirations.triggers.has(trigger)) this.expire();
   }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
     if (this.parent.parent) {
       const start = TeriockActiveEffect.getEffectStart();
-      for (const key of Object.keys(start)) {
-        if (data.start?.[key] !== undefined) {
-          delete start[key];
-        }
-      }
+      for (const key of Object.keys(start)) if (data.start?.[key] !== undefined) delete start[key];
       this.parent.updateSource({ start });
     }
   }
@@ -186,9 +165,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   async _preDelete(options, user) {
     const yes = await super._preDelete(options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
     this.parent.fireTrigger("expireEffect", this.parent.getScope());
   }
@@ -200,9 +177,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   async getPanelParts() {
-    return Object.assign(await super.getPanelParts(), {
-      bars: [this._durationBar, this._statusBar],
-    });
+    return Object.assign(await super.getPanelParts(), { bars: [this._durationBar, this._statusBar] });
   }
 
   /**
@@ -216,9 +191,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   async shouldExpire() {
-    if (this.shouldExpireFromConditions()) {
-      return true;
-    }
+    if (this.shouldExpireFromConditions()) return true;
     return super.shouldExpire();
   }
 
@@ -227,19 +200,9 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
    * @returns {boolean}
    */
   shouldExpireFromConditions() {
-    if (!this.actor) {
-      return false;
-    }
-    for (const c of this.expirations.conditions.present) {
-      if (!this.actor.statuses.has(c)) {
-        return true;
-      }
-    }
-    for (const c of this.expirations.conditions.absent) {
-      if (this.actor.statuses.has(c)) {
-        return true;
-      }
-    }
+    if (!this.actor) return false;
+    for (const c of this.expirations.conditions.present) if (!this.actor.statuses.has(c)) return true;
+    for (const c of this.expirations.conditions.absent) if (this.actor.statuses.has(c)) return true;
     return false;
   }
 }

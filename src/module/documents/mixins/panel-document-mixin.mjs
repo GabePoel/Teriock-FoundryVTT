@@ -64,9 +64,7 @@ export default function PanelDocumentMixin(Base) {
       /** @inheritDoc */
       async _buildEmbedHTML(config, options = {}) {
         if (config.values.includes("panel")) {
-          if (!config.label) {
-            config.caption = false;
-          }
+          if (!config.label) config.caption = false;
           return foundry.utils.parseHTML(
             await TeriockTextEditor.makeTooltip(await this.getPanelParts(), {
               noAssociations: config.values.includes("noAssociations"),
@@ -88,9 +86,7 @@ export default function PanelDocumentMixin(Base) {
           image: systemPath("icons/documents/uncertainty.svg"),
           name: this.fullName || this.name,
         };
-        if (typeof this.system?.getPanelParts === "function") {
-          Object.assign(parts, await this.system.getPanelParts());
-        }
+        if (typeof this.system?.getPanelParts === "function") Object.assign(parts, await this.system.getPanelParts());
         return parts;
       }
 
@@ -103,12 +99,10 @@ export default function PanelDocumentMixin(Base) {
       /** @inheritDoc */
       async toMessage(options = {}) {
         const panel = await this.toPanel();
-        const actor =
-          options?.actor || this.actor || TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
+        const actor = options?.actor || this.actor
+          || TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker());
         const messageData = {
-          speaker: TeriockChatMessage.getSpeaker({
-            actor: actor,
-          }),
+          speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
           system: {
             avatar: actor?.img,
             bars: [],
@@ -131,9 +125,7 @@ export default function PanelDocumentMixin(Base) {
 
       /** @inheritDoc */
       async toTooltip() {
-        return await TeriockTextEditor.makeTooltip(await this.getPanelParts(), {
-          relativeTo: this,
-        });
+        return await TeriockTextEditor.makeTooltip(await this.getPanelParts(), { relativeTo: this });
       }
     }
   );

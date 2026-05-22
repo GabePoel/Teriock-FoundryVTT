@@ -13,9 +13,7 @@ export default class TeriockHotbar extends Hotbar {
   #getMacroForSlot(element) {
     const slot = element.dataset.slot;
     const macroId = game.user.hotbar[slot];
-    if (!macroId) {
-      return null;
-    }
+    if (!macroId) return null;
     return game.macros.get(macroId) ?? null;
   }
 
@@ -26,11 +24,8 @@ export default class TeriockHotbar extends Hotbar {
   async _createDocumentSheetToggle(doc) {
     if (doc.documentMetadata.child) {
       const macroType = await hotbarDropDialog(doc);
-      if (macroType === "linked") {
-        return TeriockMacro.getLinkedUseMacro(doc);
-      } else if (macroType === "general") {
-        return TeriockMacro.getGeneralUseMacro(doc);
-      }
+      if (macroType === "linked") return TeriockMacro.getLinkedUseMacro(doc);
+      else if (macroType === "general") return TeriockMacro.getGeneralUseMacro(doc);
     } else {
       return super._createDocumentSheetToggle(doc);
     }

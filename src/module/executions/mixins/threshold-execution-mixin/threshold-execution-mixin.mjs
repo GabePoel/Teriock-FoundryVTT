@@ -46,23 +46,15 @@ export default function ThresholdExecutionMixin(Base) {
        */
       #updateFromRollDialog(button) {
         for (const f of this._dialogFields) {
-          if (typeof f.condition === "boolean" && !f.condition) {
-            continue;
-          }
-          if (typeof f.condition === "function" && !f.condition()) {
-            continue;
-          }
+          if (typeof f.condition === "boolean" && !f.condition) continue;
+          if (typeof f.condition === "function" && !f.condition()) continue;
           let value;
           const element =
             /** @type {HTMLInputElement} */
             button.form.elements.namedItem(f.name);
-          if (f.field instanceof fields.BooleanField) {
-            value = element.checked;
-          } else if (f.field instanceof fields.NumberField) {
-            value = Number(element.value);
-          } else {
-            value = element.value;
-          }
+          if (f.field instanceof fields.BooleanField) value = element.checked;
+          else if (f.field instanceof fields.NumberField) value = Number(element.value);
+          else value = element.value;
           f.update(value);
         }
       }
@@ -72,62 +64,53 @@ export default function ThresholdExecutionMixin(Base) {
        */
       get _dialogButtons() {
         return this.isRoll
-          ? [
-              {
-                action: "disadvantage",
-                icon: "fa-dice-d20",
-                label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
-                callback: () => (this.edge = -1),
-              },
-              {
-                action: "normal",
-                default: true,
-                icon: "fa-dice-d20",
-                label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
-                callback: () => (this.edge = 0),
-              },
-              {
-                action: "advantage",
-                icon: "fa-dice-d20",
-                label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
-                callback: () => (this.edge = 1),
-              },
-            ]
-          : [
-              {
-                action: "ok",
-                default: true,
-                icon: icons.ui.enable,
-                label: "TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm",
-              },
-            ];
+          ? [{
+            action: "disadvantage",
+            icon: "fa-dice-d20",
+            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+            callback: () => (this.edge = -1),
+          }, {
+            action: "normal",
+            default: true,
+            icon: "fa-dice-d20",
+            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+            callback: () => (this.edge = 0),
+          }, {
+            action: "advantage",
+            icon: "fa-dice-d20",
+            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+            callback: () => (this.edge = 1),
+          }]
+          : [{
+            action: "ok",
+            default: true,
+            icon: icons.ui.enable,
+            label: "TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm",
+          }];
       }
 
       /**
        * @returns {Teriock.Execution.ExecutionDialogEntry[]}
        */
       get _dialogFields() {
-        return [
-          {
-            condition: this.requiresCompetence,
-            field: new fields.EmbeddedDataField(CompetenceModel).fields.raw,
-            hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
-            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
-            name: "competence",
-            value: this.competence.raw,
-            update: v => (this.competence.raw = Number(v)),
-          },
-          {
-            condition: this.hasBonus,
-            field: new FormulaField({ deterministic: false }),
-            hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
-            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
-            name: "bonus",
-            placeholder: "0",
-            value: this.bonus,
-            update: v => (this.bonus = v),
-          },
-        ];
+        return [{
+          condition: this.requiresCompetence,
+          field: new fields.EmbeddedDataField(CompetenceModel).fields.raw,
+          hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
+          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
+          name: "competence",
+          value: this.competence.raw,
+          update: v => (this.competence.raw = Number(v)),
+        }, {
+          condition: this.hasBonus,
+          field: new FormulaField({ deterministic: false }),
+          hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
+          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
+          name: "bonus",
+          placeholder: "0",
+          value: this.bonus,
+          update: v => (this.bonus = v),
+        }];
       }
 
       /** @inheritDoc */
@@ -177,19 +160,13 @@ export default function ThresholdExecutionMixin(Base) {
 
       /** @inheritDoc */
       get rollOptions() {
-        return {
-          comparison: this.comparison,
-          flavor: this.flavor,
-          threshold: this.threshold,
-        };
+        return { comparison: this.comparison, flavor: this.flavor, threshold: this.threshold };
       }
 
       /** @inheritDoc */
       async _getInput() {
         if (this.showDialog) {
-          if ((await this._showRollDialog()) === false) {
-            return false;
-          }
+          if ((await this._showRollDialog()) === false) return false;
         }
         await super._getInput();
       }
@@ -197,9 +174,7 @@ export default function ThresholdExecutionMixin(Base) {
       /** @inheritDoc */
       async _improveFormula() {
         await super._improveFormula();
-        if (formulaExists(this.bonus)) {
-          this.formula = addFormula(this.formula, this.bonus);
-        }
+        if (formulaExists(this.bonus)) this.formula = addFormula(this.formula, this.bonus);
       }
 
       /**
@@ -209,12 +184,8 @@ export default function ThresholdExecutionMixin(Base) {
       async _prepareBaseFormula() {
         if (!this.formula) {
           let suffix = "";
-          if (this.edge > 0) {
-            suffix = "kh1";
-          }
-          if (this.edge < 0) {
-            suffix = "kl1";
-          }
+          if (this.edge > 0) suffix = "kh1";
+          if (this.edge < 0) suffix = "kl1";
           this.formula = `${1 + Math.abs(this.edge)}d20${suffix}`;
         }
       }
@@ -242,20 +213,10 @@ export default function ThresholdExecutionMixin(Base) {
         smallContainer.style.columnGap = "1.5rem";
         let hasSmallFields = false;
         for (const f of this._dialogFields) {
-          if (typeof f.condition === "boolean" && !f.condition) {
-            continue;
-          }
-          if (typeof f.condition == "function" && !f.condition()) {
-            continue;
-          }
-          const groupConfig = {
-            classes: ["tgrid-item"],
-            label: _loc(f.label),
-            rootId,
-          };
-          if (f.hint) {
-            groupConfig.hint = _loc(f.hint);
-          }
+          if (typeof f.condition === "boolean" && !f.condition) continue;
+          if (typeof f.condition == "function" && !f.condition()) continue;
+          const groupConfig = { classes: ["tgrid-item"], label: _loc(f.label), rootId };
+          if (f.hint) groupConfig.hint = _loc(f.hint);
           const inputConfig = {
             id: `${rootId}-${f.name}`,
             integer: f.integer,
@@ -276,12 +237,8 @@ export default function ThresholdExecutionMixin(Base) {
           hasFields = true;
         }
         content.append(mainContainer);
-        if (hasSmallFields) {
-          content.append(smallContainer);
-        }
-        if (!hasFields) {
-          return;
-        }
+        if (hasSmallFields) content.append(smallContainer);
+        if (!hasFields) return;
         const out = await TeriockDialog.wait({
           buttons: this._dialogButtons.map(b => {
             return {
@@ -291,9 +248,7 @@ export default function ThresholdExecutionMixin(Base) {
               label: _loc(b.label),
               callback: (_event, button) => {
                 this.#updateFromRollDialog(button);
-                if (typeof b.callback === "function") {
-                  b.callback();
-                }
+                if (typeof b.callback === "function") b.callback();
               },
             };
           }),
@@ -303,16 +258,10 @@ export default function ThresholdExecutionMixin(Base) {
           window: {
             contentClasses: ["wide-toggles"],
             icon: makeIconClass(this.icon, "title"),
-            title: game.i18n
-              .format("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", {
-                name: this.name,
-              })
-              .trim(),
+            title: _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", { name: this.name }).trim(),
           },
         });
-        if (out === null) {
-          return false;
-        }
+        if (out === null) return false;
       }
     }
   );

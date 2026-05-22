@@ -10,13 +10,11 @@ export default async function newDocumentDialog(type) {
   const label = TERIOCK.config.document[type].label;
   const typeName = label.toLowerCase();
   return await TeriockDialog.prompt({
-    buttons: [
-      {
-        icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
-        label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
-        callback: () => "create",
-      },
-    ],
+    buttons: [{
+      icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
+      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
+      callback: () => "create",
+    }],
     content: _loc("TERIOCK.DIALOGS.NewDocument.content", { typeName }),
     modal: true,
     ok: {

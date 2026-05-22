@@ -17,9 +17,7 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, { img: this.avatar });
-    if (this.character) {
-      parts.subtitle = this.character.fullName;
-    }
+    if (this.character) parts.subtitle = this.character.fullName;
     return parts;
   }
 
@@ -33,15 +31,12 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
 
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
-    return [
-      {
-        icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.User.EMBED.openCharacter"),
-        onClick: async () => await this.character.sheet.render(true),
-        visible: () => this.character && this.character.isViewer,
-      },
-      ...super.getCardContextMenuEntries(doc),
-    ];
+    return [{
+      icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.User.EMBED.openCharacter"),
+      onClick: async () => await this.character.sheet.render(true),
+      visible: () => this.character && this.character.isViewer,
+    }, ...super.getCardContextMenuEntries(doc)];
   }
 
   /**
@@ -50,17 +45,14 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
    * @returns {Promise<TeriockTokenDocument|null>}
    */
   async selectTargetedToken(options = {}) {
-    return selectDocumentDialog(
-      Array.from(this.targets).map(t => t.document),
-      {
-        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.hint",
-        imgKey: "texture.src",
-        silent: true,
-        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.title",
-        tooltip: false,
-        ...options,
-      },
-    );
+    return selectDocumentDialog(Array.from(this.targets).map(t => t.document), {
+      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.hint",
+      imgKey: "texture.src",
+      silent: true,
+      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.title",
+      tooltip: false,
+      ...options,
+    });
   }
 
   /**
@@ -69,17 +61,14 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectTargetedTokens(options = {}) {
-    return selectDocumentsDialog(
-      Array.from(this.targets).map(t => t.document),
-      {
-        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.hint",
-        imgKey: "texture.src",
-        silent: true,
-        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.title",
-        tooltip: false,
-        ...options,
-      },
-    );
+    return selectDocumentsDialog(Array.from(this.targets).map(t => t.document), {
+      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.hint",
+      imgKey: "texture.src",
+      silent: true,
+      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.title",
+      tooltip: false,
+      ...options,
+    });
   }
 
   /**
@@ -87,17 +76,14 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
    * @param {Teriock.SelectOptions.DocumentSelect} options
    */
   async selectVisibleToken(options = {}) {
-    return selectDocumentDialog(
-      Array.from(this.visibleTokens).map(t => t.document),
-      {
-        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.hint",
-        imgKey: "texture.src",
-        silent: true,
-        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.title",
-        tooltip: false,
-        ...options,
-      },
-    );
+    return selectDocumentDialog(Array.from(this.visibleTokens).map(t => t.document), {
+      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.hint",
+      imgKey: "texture.src",
+      silent: true,
+      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.title",
+      tooltip: false,
+      ...options,
+    });
   }
 
   /**
@@ -106,16 +92,13 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectVisibleTokens(options = {}) {
-    return selectDocumentsDialog(
-      Array.from(this.visibleTokens).map(t => t.document),
-      {
-        hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.hint",
-        imgKey: "texture.src",
-        silent: true,
-        title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.title",
-        tooltip: false,
-        ...options,
-      },
-    );
+    return selectDocumentsDialog(Array.from(this.visibleTokens).map(t => t.document), {
+      hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.hint",
+      imgKey: "texture.src",
+      silent: true,
+      title: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.title",
+      tooltip: false,
+      ...options,
+    });
   }
 }

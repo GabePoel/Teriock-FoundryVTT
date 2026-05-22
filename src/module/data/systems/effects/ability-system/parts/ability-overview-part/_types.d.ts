@@ -13,11 +13,7 @@ declare global {
       /** <schema> Description of any limitation that makes this ability worse than it would otherwise be */
       limitation: string;
       /** <schema> Description of what this ability does */
-      overview: {
-        base: string;
-        fluent: string;
-        proficient: string;
-      };
+      overview: { base: string, fluent: string, proficient: string };
       /** <schema> Requirements that must be met for this ability to be used */
       requirements: string;
       /** <schema> Description of this ability's trigger */

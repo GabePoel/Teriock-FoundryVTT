@@ -21,9 +21,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      boosts: new fields.NumberField(),
-    });
+    return Object.assign(super.defineSchema(), { boosts: new fields.NumberField() });
   }
 
   /** @inheritDoc */
@@ -33,13 +31,9 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /** @inheritDoc */
   get label() {
-    return (
-      this.display.label ||
-      _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", {
-        impact: TERIOCK.config.impact[this.impact]?.label,
-      }) ||
-      super.label()
-    );
+    return (this.display.label
+      || _loc("TERIOCK.ACTIVATIONS.Roll.BUTTON", { impact: TERIOCK.config.impact[this.impact]?.label })
+      || super.label());
   }
 
   /** @inheritDoc */
@@ -50,9 +44,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
   /** @inheritDoc */
   async primaryAction() {
     let actors = this.actors;
-    if (!this.actors.length) {
-      actors = [null];
-    }
+    if (!this.actors.length) actors = [null];
     for (const actor of actors) {
       await commands[this.impact].primary(actor, {
         boost: true,
@@ -66,9 +58,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
   /** @inheritDoc */
   async secondaryAction() {
     let actors = this.actors;
-    if (!this.actors.length) {
-      actors = [null];
-    }
+    if (!this.actors.length) actors = [null];
     for (const actor of actors) {
       await commands[this.impact].primary(actor, {
         boost: true,

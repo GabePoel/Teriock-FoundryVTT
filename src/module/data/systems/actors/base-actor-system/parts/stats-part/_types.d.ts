@@ -11,16 +11,7 @@ declare global {
       lp: Foundry.BarField;
       /** <schema> Mana points (drain) */
       mp: CoreStat;
-      statDice: {
-        hp: {
-          dice: StatDieModel[];
-          html: string;
-        };
-        mp: {
-          dice: StatDieModel[];
-          html: string;
-        };
-      };
+      statDice: { hp: { dice: StatDieModel[], html: string }, mp: { dice: StatDieModel[], html: string } };
     };
 
     export type CoreStat = Foundry.BarField & {

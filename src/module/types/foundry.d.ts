@@ -3,19 +3,13 @@ import { Document as FoundryDocument } from "@common/abstract/_module.mjs";
 
 declare global {
   namespace Foundry {
-    export type BarField = {
-      max: number;
-      min: number;
-      value: number;
-    };
+    export type BarField = { max: number, min: number, value: number };
 
     export class Document extends FoundryDocument {}
 
-    type ClientDocument = (abstract new (
-      data: object,
-      options: object,
-    ) => InstanceType<ReturnType<typeof ClientDocumentMixin>>) &
-      typeof FoundryDocument;
+    type ClientDocument =
+      & (abstract new(data: object, options: object) => InstanceType<ReturnType<typeof ClientDocumentMixin>>)
+      & typeof FoundryDocument;
 
     export type ContextMenuCallback = (target: HTMLElement) => unknown;
 

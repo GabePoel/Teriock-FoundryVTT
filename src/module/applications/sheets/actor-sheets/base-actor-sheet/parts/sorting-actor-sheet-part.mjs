@@ -13,14 +13,12 @@ export default Base =>
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
-      this.element.querySelectorAll("[data-action='sheetSelect']").forEach(
-        /** @param {HTMLInputElement} el */ el => {
-          el.addEventListener("change", async () => {
-            foundry.utils.setProperty(this, el.dataset.path, el.value);
-            await this.render();
-          });
-        },
-      );
+      this.element.querySelectorAll("[data-action='sheetSelect']").forEach(/** @param {HTMLInputElement} el */ el => {
+        el.addEventListener("change", async () => {
+          foundry.utils.setProperty(this, el.dataset.path, el.value);
+          await this.render();
+        });
+      });
     }
 
     /** @inheritDoc */
@@ -32,85 +30,64 @@ export default Base =>
         abilities: this._getFilteredAbilities(
           this._sortAbilities(context.abilities.filter(a => a.system.revealed || game.user.isGM)),
         ),
-        abilityFilterSelects: [
-          {
-            choices: TERIOCK.config.ability.maneuver,
-            key: "maneuver",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
-            name: "settings.abilityFilters.maneuver",
-            selected: this.settings.abilityFilters.maneuver,
-          },
-          {
-            choices: TERIOCK.config.ability.interaction,
-            key: "interaction",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
-            name: "settings.abilityFilters.interaction",
-            selected: this.settings.abilityFilters.interaction,
-          },
-          {
-            choices: TERIOCK.config.ability.delivery,
-            key: "delivery",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label",
-            name: "settings.abilityFilters.delivery",
-            selected: this.settings.abilityFilters.delivery,
-          },
-          {
-            choices: TERIOCK.config.ability.targets,
-            key: "target",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label",
-            name: "settings.abilityFilters.target",
-            selected: this.settings.abilityFilters.target,
-          },
-          {
-            choices: TERIOCK.reference.powerSources,
-            key: "powerSource",
-            label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
-            name: "settings.abilityFilters.powerSource",
-            selected: this.settings.abilityFilters.powerSource,
-          },
-          {
-            choices: TERIOCK.reference.elements,
-            key: "element",
-            label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
-            name: "settings.abilityFilters.element",
-            selected: this.settings.abilityFilters.element,
-          },
-          {
-            choices: TERIOCK.reference.effectTypes,
-            key: "effectTypes",
-            label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
-            name: "settings.abilityFilters.effectTypes",
-            selected: this.settings.abilityFilters.effectTypes,
-          },
-          {
-            choices: TERIOCK.config.piercing.levels,
-            key: "piercing",
-            label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
-            name: "settings.abilityFilters.piercing",
-            selected: this.settings.abilityFilters.piercing,
-          },
-        ],
+        abilityFilterSelects: [{
+          choices: TERIOCK.config.ability.maneuver,
+          key: "maneuver",
+          label: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
+          name: "settings.abilityFilters.maneuver",
+          selected: this.settings.abilityFilters.maneuver,
+        }, {
+          choices: TERIOCK.config.ability.interaction,
+          key: "interaction",
+          label: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
+          name: "settings.abilityFilters.interaction",
+          selected: this.settings.abilityFilters.interaction,
+        }, {
+          choices: TERIOCK.config.ability.delivery,
+          key: "delivery",
+          label: "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label",
+          name: "settings.abilityFilters.delivery",
+          selected: this.settings.abilityFilters.delivery,
+        }, {
+          choices: TERIOCK.config.ability.targets,
+          key: "target",
+          label: "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label",
+          name: "settings.abilityFilters.target",
+          selected: this.settings.abilityFilters.target,
+        }, {
+          choices: TERIOCK.reference.powerSources,
+          key: "powerSource",
+          label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.powerSources.label",
+          name: "settings.abilityFilters.powerSource",
+          selected: this.settings.abilityFilters.powerSource,
+        }, {
+          choices: TERIOCK.reference.elements,
+          key: "element",
+          label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.elements.label",
+          name: "settings.abilityFilters.element",
+          selected: this.settings.abilityFilters.element,
+        }, {
+          choices: TERIOCK.reference.effectTypes,
+          key: "effectTypes",
+          label: "TERIOCK.SYSTEMS.Metaphysics.FIELDS.effectTypes.label",
+          name: "settings.abilityFilters.effectTypes",
+          selected: this.settings.abilityFilters.effectTypes,
+        }, {
+          choices: TERIOCK.config.piercing.levels,
+          key: "piercing",
+          label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
+          name: "settings.abilityFilters.piercing",
+          selected: this.settings.abilityFilters.piercing,
+        }],
         abilityFilterToggles: [
-          {
-            key: "basic",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.basic.label",
-            name: "settings.abilityFilters.basic",
-          },
+          { key: "basic", label: "TERIOCK.SYSTEMS.Ability.FIELDS.basic.label", name: "settings.abilityFilters.basic" },
           {
             key: "standard",
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.standard.label",
             name: "settings.abilityFilters.standard",
           },
-          {
-            key: "skill",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.skill.label",
-            name: "settings.abilityFilters.skill",
-          },
-          {
-            key: "spell",
-            label: "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label",
-            name: "settings.abilityFilters.spell",
-          },
+          { key: "skill", label: "TERIOCK.SYSTEMS.Ability.FIELDS.skill.label", name: "settings.abilityFilters.skill" },
+          { key: "spell", label: "TERIOCK.SYSTEMS.Ability.FIELDS.spell.label", name: "settings.abilityFilters.spell" },
           {
             key: "ritual",
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label",
@@ -131,26 +108,10 @@ export default Base =>
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
             name: "settings.abilityFilters.expansion",
           },
-          {
-            key: "verbal",
-            label: "TERIOCK.TERMS.Costs.verbal",
-            name: "settings.abilityFilters.verbal",
-          },
-          {
-            key: "somatic",
-            label: "TERIOCK.TERMS.Costs.somatic",
-            name: "settings.abilityFilters.somatic",
-          },
-          {
-            key: "material",
-            label: "TERIOCK.TERMS.Costs.material",
-            name: "settings.abilityFilters.material",
-          },
-          {
-            key: "invoked",
-            label: "TERIOCK.TERMS.Costs.invoked",
-            name: "settings.abilityFilters.invoked",
-          },
+          { key: "verbal", label: "TERIOCK.TERMS.Costs.verbal", name: "settings.abilityFilters.verbal" },
+          { key: "somatic", label: "TERIOCK.TERMS.Costs.somatic", name: "settings.abilityFilters.somatic" },
+          { key: "material", label: "TERIOCK.TERMS.Costs.material", name: "settings.abilityFilters.material" },
+          { key: "invoked", label: "TERIOCK.TERMS.Costs.invoked", name: "settings.abilityFilters.invoked" },
           {
             key: "hp",
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.hp.value.variable.label",
@@ -173,72 +134,60 @@ export default Base =>
           },
         ],
         equipment: this._sortEquipment(this._getFilteredEquipment(context.equipment)),
-        equipmentFilterSelects: [
-          {
-            choices: TERIOCK.reference.equipmentClasses,
-            key: "equipmentClasses",
-            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-            name: "settings.equipmentFilters.equipmentClasses",
-            selected: this.settings.equipmentFilters.equipmentClasses,
-          },
-          {
-            choices: TERIOCK.reference.properties,
-            key: "properties",
-            label: "TERIOCK.PACKS.properties",
-            name: "settings.equipmentFilters.properties",
-            selected: this.settings.equipmentFilters.properties,
-          },
-          {
-            choices: TERIOCK.reference.materialProperties,
-            key: "materialProperties",
-            label: "TERIOCK.SHEETS.Actor.TABS.Inventory.filters.materialProperties",
-            name: "settings.equipmentFilters.materialProperties",
-            selected: this.settings.equipmentFilters.materialProperties,
-          },
-          {
-            choices: TERIOCK.reference.magicalProperties,
-            key: "magicalProperties",
-            label: "TERIOCK.SHEETS.Actor.TABS.Inventory.filters.magicalProperties",
-            name: "settings.equipmentFilters.magicalProperties",
-            selected: this.settings.equipmentFilters.magicalProperties,
-          },
-          {
-            choices: TERIOCK.reference.weaponFightingStyles,
-            key: "weaponFightingStyles",
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label",
-            name: "settings.equipmentFilters.weaponFightingStyles",
-            selected: this.settings.equipmentFilters.weaponFightingStyles,
-          },
-          {
-            choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
-            key: "powerLevel",
-            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label",
-            name: "settings.equipmentFilters.powerLevel",
-            selected: this.settings.equipmentFilters.powerLevel,
-          },
-        ],
-        equipmentFilterToggles: [
-          {
-            key: "equipped",
-            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label",
-            name: "settings.equipmentFilters.equipped",
-          },
-          {
-            key: "shattered",
-            label: "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
-            name: "settings.equipmentFilters.shattered",
-          },
-          {
-            key: "identified",
-            label: "TERIOCK.MODELS.Identification.FIELDS.identified.label",
-            name: "settings.equipmentFilters.identified",
-          },
-          {
-            key: "consumable",
-            label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label",
-            name: "settings.equipmentFilters.consumable",
-          },
-        ],
+        equipmentFilterSelects: [{
+          choices: TERIOCK.reference.equipmentClasses,
+          key: "equipmentClasses",
+          label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+          name: "settings.equipmentFilters.equipmentClasses",
+          selected: this.settings.equipmentFilters.equipmentClasses,
+        }, {
+          choices: TERIOCK.reference.properties,
+          key: "properties",
+          label: "TERIOCK.PACKS.properties",
+          name: "settings.equipmentFilters.properties",
+          selected: this.settings.equipmentFilters.properties,
+        }, {
+          choices: TERIOCK.reference.materialProperties,
+          key: "materialProperties",
+          label: "TERIOCK.SHEETS.Actor.TABS.Inventory.filters.materialProperties",
+          name: "settings.equipmentFilters.materialProperties",
+          selected: this.settings.equipmentFilters.materialProperties,
+        }, {
+          choices: TERIOCK.reference.magicalProperties,
+          key: "magicalProperties",
+          label: "TERIOCK.SHEETS.Actor.TABS.Inventory.filters.magicalProperties",
+          name: "settings.equipmentFilters.magicalProperties",
+          selected: this.settings.equipmentFilters.magicalProperties,
+        }, {
+          choices: TERIOCK.reference.weaponFightingStyles,
+          key: "weaponFightingStyles",
+          label: "TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label",
+          name: "settings.equipmentFilters.weaponFightingStyles",
+          selected: this.settings.equipmentFilters.weaponFightingStyles,
+        }, {
+          choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
+          key: "powerLevel",
+          label: "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label",
+          name: "settings.equipmentFilters.powerLevel",
+          selected: this.settings.equipmentFilters.powerLevel,
+        }],
+        equipmentFilterToggles: [{
+          key: "equipped",
+          label: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label",
+          name: "settings.equipmentFilters.equipped",
+        }, {
+          key: "shattered",
+          label: "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
+          name: "settings.equipmentFilters.shattered",
+        }, {
+          key: "identified",
+          label: "TERIOCK.MODELS.Identification.FIELDS.identified.label",
+          name: "settings.equipmentFilters.identified",
+        }, {
+          key: "consumable",
+          label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label",
+          name: "settings.equipmentFilters.consumable",
+        }],
       });
       return context;
     }
@@ -302,9 +251,7 @@ export default Base =>
  * @returns {TeriockAbility[]|TeriockEquipment[]} A sorted array of items.
  */
 function sortEmbedded(items, sortKey, ascending, sortMap = {}) {
-  if (!items || !Array.isArray(items) || items.length === 0) {
-    return [];
-  }
+  if (!items || !Array.isArray(items) || items.length === 0) return [];
   const accessor = sortMap[sortKey] ?? (i => i.name ?? "");
   const sorted = [...items];
   sorted.sort((a, b) => {

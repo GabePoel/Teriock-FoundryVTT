@@ -69,11 +69,9 @@ export default actorContext;
 
 preLocalize("rollContext.actor");
 Hooks.once("i18nInit", () => {
-  Object.entries(documentConfig)
-    .filter(([_k, v]) => v.documentName === "Actor")
-    .forEach(([k, v]) => {
-      actorContext[k] = _loc(v?.label);
-    });
+  Object.entries(documentConfig).filter(([_k, v]) => v.documentName === "Actor").forEach(([k, v]) => {
+    actorContext[k] = _loc(v?.label);
+  });
   Object.entries(attributeConfig).forEach(([k, v]) => {
     const name = _loc(v.label);
     Object.assign(actorContext, {
@@ -94,24 +92,14 @@ Hooks.once("i18nInit", () => {
     });
   });
   Object.entries(hackConfig).forEach(([k, v]) => {
-    Object.assign(actorContext, {
-      [`hack.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.hack", {
-        part: _loc(v.part),
-      }),
-    });
+    Object.assign(actorContext, { [`hack.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.hack", { part: _loc(v.part) }) });
   });
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    Object.assign(actorContext, {
-      [`rank.${k.slice(0, 3)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", {
-        name: v,
-      }),
-    });
+    Object.assign(actorContext, { [`rank.${k.slice(0, 3)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: v }) });
   });
   Object.entries(rankConfig).forEach(([k, v]) => {
     Object.assign(actorContext, {
-      [`rank.${k.slice(0, 3)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", {
-        name: _loc(v.name),
-      }),
+      [`rank.${k.slice(0, 3)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: _loc(v.name) }),
     });
   });
   Object.values(TERIOCK.config.character.movement).forEach(v => {

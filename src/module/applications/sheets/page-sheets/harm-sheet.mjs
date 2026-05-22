@@ -20,18 +20,20 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  * @mixes DisplaySheet
  * @mixes ConfigButtonSheet
  */
-export default class HarmSheet extends mixClasses(
-  JournalEntryPageProseMirrorSheet,
-  BaseApplicationMixin,
-  DisplaySheetMixin,
-  AutomationsCommonSheetPart,
-  AutomationsTabsCommonSheetPart,
-  ConfigButtonSheetMixin,
-  ConnectionCommonSheetPart,
-  DragDropCommonSheetPart,
-  LockingCommonSheetPart,
-  MenuCommonSheetPart,
-) {
+export default class HarmSheet
+  extends mixClasses(
+    JournalEntryPageProseMirrorSheet,
+    BaseApplicationMixin,
+    DisplaySheetMixin,
+    AutomationsCommonSheetPart,
+    AutomationsTabsCommonSheetPart,
+    ConfigButtonSheetMixin,
+    ConnectionCommonSheetPart,
+    DragDropCommonSheetPart,
+    LockingCommonSheetPart,
+    MenuCommonSheetPart,
+  )
+{
   static DEFAULT_OPTIONS = {
     classes: ["teriock"],
     form: { closeOnSubmit: false, submitOnChange: true },
@@ -43,9 +45,7 @@ export default class HarmSheet extends mixClasses(
   static EDIT_PARTS = { ...this.DISPLAY_PARTS };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
-  static VIEW_PARTS = {
-    content: { template: "teriock/sheets/pages/harm-view" },
-  };
+  static VIEW_PARTS = { content: { template: "teriock/sheets/pages/harm-view" } };
 
   /** @inheritDoc */
   _canRender(_options) {

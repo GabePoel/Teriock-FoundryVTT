@@ -15,16 +15,8 @@ export default class StorageModel extends EmbeddedDataModel {
   static defineSchema() {
     return {
       enabled: new fields.BooleanField({ initial: false, required: false }),
-      maxCount: new fields.NumberField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
-      maxWeight: new fields.NumberField({
-        initial: null,
-        nullable: true,
-        required: false,
-      }),
+      maxCount: new fields.NumberField({ initial: null, nullable: true, required: false }),
+      maxWeight: new fields.NumberField({ initial: null, nullable: true, required: false }),
       weightMultiplier: new fields.NumberField({ initial: 1, min: 0 }),
     };
   }
@@ -35,9 +27,10 @@ export default class StorageModel extends EmbeddedDataModel {
    */
   get carriedCount() {
     // Async stored equipment is assumed to have a quantity of 1
-    return this.storedEquipment
-      .map(e => (e.system?.consumable ? (e.system?.quantity ?? 1) : 1) || 1)
-      .reduce((a, b) => a + b, 0);
+    return this.storedEquipment.map(e => (e.system?.consumable ? (e.system?.quantity ?? 1) : 1) || 1).reduce(
+      (a, b) => a + b,
+      0,
+    );
   }
 
   /**
@@ -46,10 +39,9 @@ export default class StorageModel extends EmbeddedDataModel {
    */
   get carriedWeight() {
     // Async stored equipment is assumed to have a weight of 0
-    return this.storedEquipment
-      .map(e => e.system?.totalWeight ?? 0)
-      .reduce((a, b) => a + b, 0)
-      .toNearest(equipmentConfig.weight.interval);
+    return this.storedEquipment.map(e => e.system?.totalWeight ?? 0).reduce((a, b) => a + b, 0).toNearest(
+      equipmentConfig.weight.interval,
+    );
   }
 
   /**
@@ -81,9 +73,7 @@ export default class StorageModel extends EmbeddedDataModel {
    * @returns {TeriockEquipment[]}
    */
   get storedEquipment() {
-    if (!this.enabled) {
-      return [];
-    }
+    if (!this.enabled) return [];
     return this.document.equipment;
   }
 }

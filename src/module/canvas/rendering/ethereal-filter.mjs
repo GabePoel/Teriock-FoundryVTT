@@ -9,12 +9,7 @@ const { AbstractBaseFilter } = foundry.canvas.rendering.filters;
 export default class EtherealFilter extends AbstractBaseFilter {
   /** @inheritDoc */
   static get defaultUniforms() {
-    return {
-      ...super.defaultUniforms,
-      blur: 1.0,
-      desaturate: 1.0,
-      time: 0,
-    };
+    return { ...super.defaultUniforms, blur: 1.0, desaturate: 1.0, time: 0 };
   }
 
   /** @override */
@@ -104,9 +99,7 @@ export default class EtherealFilter extends AbstractBaseFilter {
 
   /** @inheritDoc */
   apply(filterManager, input, output, clear) {
-    if (this.animated && !game.canvas.photosensitiveMode) {
-      this.uniforms.time = game.canvas.app.ticker.lastTime;
-    }
+    if (this.animated && !game.canvas.photosensitiveMode) this.uniforms.time = game.canvas.app.ticker.lastTime;
     filterManager.applyFilter(this, input, output, clear);
   }
 }

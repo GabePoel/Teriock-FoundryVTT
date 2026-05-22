@@ -47,9 +47,7 @@ export default function SelectDocumentsAutomationMixin(Base) {
         const seen = new Set(out.map(d => d.uuid));
         if (actor) {
           for (const child of await fromQualifier(actor, this.qualifier)) {
-            if (seen.has(child.uuid)) {
-              continue;
-            }
+            if (seen.has(child.uuid)) continue;
             out.push(child);
             seen.add(child.uuid);
           }

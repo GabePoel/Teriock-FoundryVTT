@@ -26,21 +26,16 @@ Object.assign(globalThis, {
     fromIdentifierSync: helpers.utils.fromIdentifierSync,
     helpers,
   },
-  tm: {
-    ...helpers,
-    dialogs: applications.dialogs,
-  },
+  tm: { ...helpers, dialogs: applications.dialogs },
 });
 
-foundry.helpers.Hooks.once("init", function () {
+foundry.helpers.Hooks.once("init", function() {
   /**
    * Helper function to assign configs to `CONFIG` on level deep.
    * @param {object} configs
    */
   function assign(configs) {
-    for (const [key, config] of Object.entries(configs)) {
-      Object.assign(CONFIG[key], config);
-    }
+    for (const [key, config] of Object.entries(configs)) Object.assign(CONFIG[key], config);
   }
 
   // Register Game Shortcuts
@@ -66,21 +61,14 @@ foundry.helpers.Hooks.once("init", function () {
     Object.assign(
       CONFIG.specialStatusEffects,
       Object.fromEntries(
-        Object.keys(constants.display.tokenMagic).map(v => [
-          helpers.string.toKebabCase(v).toUpperCase().replaceAll("-", "_"),
-          v,
-        ]),
+        Object.keys(constants.display.tokenMagic).map(
+          v => [helpers.string.toKebabCase(v).toUpperCase().replaceAll("-", "_"), v]
+        ),
       ),
     );
   }
-  for (const k of Object.keys(CONFIG.statusEffects)) {
-    delete CONFIG.statusEffects[k];
-  }
-  Object.assign(CONFIG.statusEffects, {
-    ...TERIOCK.data.conditions,
-    ...TERIOCK.data.cover,
-    ...TERIOCK.data.hacks,
-  });
+  for (const k of Object.keys(CONFIG.statusEffects)) delete CONFIG.statusEffects[k];
+  Object.assign(CONFIG.statusEffects, { ...TERIOCK.data.conditions, ...TERIOCK.data.cover, ...TERIOCK.data.hacks });
 
   // Configure UI Components
   // =======================
@@ -110,19 +98,11 @@ foundry.helpers.Hooks.once("init", function () {
 
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
     const id = CONFIG.Canvas.detectionModes[key]?.id;
-    if (!["basicSight", "lightPerception"].includes(id)) {
-      delete CONFIG.Canvas.detectionModes[key];
-    }
+    if (!["basicSight", "lightPerception"].includes(id)) delete CONFIG.Canvas.detectionModes[key];
   }
   Object.assign(CONFIG.Canvas, {
-    detectionModes: {
-      ...CONFIG.Canvas.detectionModes,
-      ...canvas.perception.detectionModes,
-    },
-    visionModes: {
-      ...CONFIG.Canvas.visionModes,
-      ...canvas.perception.visionModes,
-    },
+    detectionModes: { ...CONFIG.Canvas.detectionModes, ...canvas.perception.detectionModes },
+    visionModes: { ...CONFIG.Canvas.visionModes, ...canvas.perception.visionModes },
   });
 
   // Configure Documents
@@ -161,34 +141,21 @@ foundry.helpers.Hooks.once("init", function () {
       documentClass: documents.TeriockActor,
     },
     Card: {
-      dataModels: {
-        card: data.systems.cards.BaseCardsSystem,
-        stone: data.systems.cards.StoneSystem,
-      },
+      dataModels: { card: data.systems.cards.BaseCardsSystem, stone: data.systems.cards.StoneSystem },
       documentClass: documents.TeriockCard,
     },
     ChatMessage: {
       collection: documents.collections.TeriockChatMessages,
-      dataModels: {
-        base: data.systems.messages.BaseMessageSystem,
-      },
+      dataModels: { base: data.systems.messages.BaseMessageSystem },
       documentClass: documents.TeriockChatMessage,
       template: "teriock/ui/chat-message",
     },
     Combat: {
       documentClass: documents.TeriockCombat,
-      initiative: {
-        decimals: 2,
-        formula: TERIOCK.config.character.defaults.initiative,
-      },
+      initiative: { decimals: 2, formula: TERIOCK.config.character.defaults.initiative },
     },
-    Combatant: {
-      documentClass: documents.TeriockCombatant,
-    },
-    Folder: {
-      collection: documents.collections.TeriockFolders,
-      documentClass: documents.TeriockFolder,
-    },
+    Combatant: { documentClass: documents.TeriockCombatant },
+    Folder: { collection: documents.collections.TeriockFolders, documentClass: documents.TeriockFolder },
     Item: {
       collection: documents.collections.TeriockItems,
       compendiumIndexFields: ["system._sup"],
@@ -203,57 +170,30 @@ foundry.helpers.Hooks.once("init", function () {
       },
       documentClass: documents.TeriockItem,
     },
-    JournalEntry: {
-      collection: documents.collections.TeriockJournal,
-      documentClass: documents.TeriockJournalEntry,
-    },
-    JournalEntryCategory: {
-      documentClass: documents.TeriockJournalEntryCategory,
-    },
+    JournalEntry: { collection: documents.collections.TeriockJournal, documentClass: documents.TeriockJournalEntry },
+    JournalEntryCategory: { documentClass: documents.TeriockJournalEntryCategory },
     JournalEntryPage: {
-      dataModels: {
-        damage: data.systems.pages.HarmSystem,
-        drain: data.systems.pages.HarmSystem,
-      },
+      dataModels: { damage: data.systems.pages.HarmSystem, drain: data.systems.pages.HarmSystem },
       documentClass: documents.TeriockJournalEntryPage,
     },
-    Macro: {
-      collection: documents.collections.TeriockMacros,
-      documentClass: documents.TeriockMacro,
-    },
-    Region: {
-      documentClass: documents.TeriockRegionDocument,
-    },
-    RollTable: {
-      collection: documents.collections.TeriockRollTables,
-      documentClass: documents.TeriockRollTable,
-    },
-    Scene: {
-      collection: documents.collections.TeriockScenes,
-      documentClass: documents.TeriockScene,
-    },
-    TableResult: {
-      documentClass: documents.TeriockTableResult,
-    },
+    Macro: { collection: documents.collections.TeriockMacros, documentClass: documents.TeriockMacro },
+    Region: { documentClass: documents.TeriockRegionDocument },
+    RollTable: { collection: documents.collections.TeriockRollTables, documentClass: documents.TeriockRollTable },
+    Scene: { collection: documents.collections.TeriockScenes, documentClass: documents.TeriockScene },
+    TableResult: { documentClass: documents.TeriockTableResult },
     Token: {
       documentClass: documents.TeriockTokenDocument,
       hudClass: applications.hud.TeriockTokenHUD,
       objectClass: canvas.placeables.TeriockToken,
     },
-    User: {
-      collection: documents.collections.TeriockUsers,
-      documentClass: documents.TeriockUser,
-    },
+    User: { collection: documents.collections.TeriockUsers, documentClass: documents.TeriockUser },
   });
 
   // Configure Type Icons
   // --------------------
 
-  for (const [k, v] of Object.entries(constants.config.document)) {
-    if (v?.documentName) {
-      CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
-    }
-  }
+  for (const [k, v] of Object.entries(constants.config.document))
+    if (v?.documentName) CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
 
   // Configure Sheets
   // ----------------
@@ -297,12 +237,7 @@ foundry.helpers.Hooks.once("init", function () {
       label: "TYPES.Item.Archetype",
       types: ["archetype"],
     },
-    {
-      cls: applications.sheets.item.BodySheet,
-      doc: documents.TeriockItem,
-      label: "TYPES.Item.body",
-      types: ["body"],
-    },
+    { cls: applications.sheets.item.BodySheet, doc: documents.TeriockItem, label: "TYPES.Item.body", types: ["body"] },
     {
       cls: applications.sheets.item.EquipmentSheet,
       doc: documents.TeriockItem,
@@ -315,12 +250,7 @@ foundry.helpers.Hooks.once("init", function () {
       label: "TYPES.Item.mount",
       types: ["mount"],
     },
-    {
-      cls: applications.sheets.item.RankSheet,
-      doc: documents.TeriockItem,
-      label: "TYPES.Item.rank",
-      types: ["rank"],
-    },
+    { cls: applications.sheets.item.RankSheet, doc: documents.TeriockItem, label: "TYPES.Item.rank", types: ["rank"] },
     {
       cls: applications.sheets.item.PowerSheet,
       doc: documents.TeriockItem,
@@ -417,26 +347,22 @@ foundry.helpers.Hooks.once("init", function () {
     },
   ];
   sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>
-    DocumentSheetConfig.registerSheet(doc, "teriock", cls, {
-      label,
-      makeDefault,
-      types,
-    }),
+    DocumentSheetConfig.registerSheet(doc, "teriock", cls, { label, makeDefault, types })
   );
 
   // Configure Dice
   // ==============
 
   CONFIG.Dice.rolls.length = 0;
-  CONFIG.Dice.rolls.push(
-    ...[dice.rolls.BaseRoll, dice.rolls.ThresholdRoll, dice.rolls.ImpactRoll, dice.rolls.HarmRoll],
-  );
+  CONFIG.Dice.rolls.push(...[
+    dice.rolls.BaseRoll,
+    dice.rolls.ThresholdRoll,
+    dice.rolls.ImpactRoll,
+    dice.rolls.HarmRoll,
+  ]);
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
-  for (const category of Object.values(dice.functions)) {
-    for (const [k, v] of Object.entries(category)) {
-      CONFIG.Dice.functions[k] = v;
-    }
-  }
+  for (const category of Object.values(dice.functions))
+    for (const [k, v] of Object.entries(category)) CONFIG.Dice.functions[k] = v;
 
   // Configure Formula Editor
   // ========================
@@ -464,10 +390,8 @@ foundry.helpers.Hooks.once("init", function () {
 // Override Compendium Applications
 // ================================
 
-foundry.helpers.Hooks.once("setup", function () {
-  for (const pack of game.packs) {
-    pack.applicationClass = applications.sidebar.TeriockCompendium;
-  }
+foundry.helpers.Hooks.once("setup", function() {
+  for (const pack of game.packs) pack.applicationClass = applications.sidebar.TeriockCompendium;
 });
 
 // Perform one-time pre-localization and sorting of some configuration objects

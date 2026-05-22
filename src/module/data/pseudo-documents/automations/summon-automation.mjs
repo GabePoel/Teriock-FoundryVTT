@@ -16,12 +16,14 @@ const { fields } = foundry.data;
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class SummonAutomation extends mixClasses(
-  BaseAutomation,
-  SelectExternalDocumentsAutomationMixin,
-  DisplayAutomationMixin,
-  TriggerAutomationMixin,
-) {
+export default class SummonAutomation
+  extends mixClasses(
+    BaseAutomation,
+    SelectExternalDocumentsAutomationMixin,
+    DisplayAutomationMixin,
+    TriggerAutomationMixin,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Summon"];
 
@@ -42,9 +44,7 @@ export default class SummonAutomation extends mixClasses(
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      merge: new fields.BooleanField({ initial: true }),
-    });
+    return Object.assign(super.defineSchema(), { merge: new fields.BooleanField({ initial: true }) });
   }
 
   /** @returns {boolean} */
@@ -61,9 +61,7 @@ export default class SummonAutomation extends mixClasses(
   /** @inheritDoc */
   get _selectionPaths() {
     const paths = super._selectionPaths;
-    if (!this.trigger) {
-      paths.push("merge");
-    }
+    if (!this.trigger) paths.push("merge");
     return paths;
   }
 
@@ -71,9 +69,8 @@ export default class SummonAutomation extends mixClasses(
   async _getActivations() {
     const activations = [];
     const uuids = Array.from(this.uuids).filter(this.#validateUuid);
-    if (this.merge) {
-      activations.push(new SummonActivation({ display: this.display, uuids }));
-    } else {
+    if (this.merge) activations.push(new SummonActivation({ display: this.display, uuids }));
+    else {
       for (const uuid of uuids) {
         const doc = await resolveDocument(uuid);
         const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {

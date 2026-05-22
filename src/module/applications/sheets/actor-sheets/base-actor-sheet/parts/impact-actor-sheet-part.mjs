@@ -13,10 +13,7 @@ export default Base =>
    */
   class ImpactActorSheetPart extends Base {
     static DEFAULT_OPTIONS = {
-      actions: {
-        takeHack: this._onTakeHack,
-        takeImpact: { buttons: [0, 2], handler: this._onTakeImpact },
-      },
+      actions: { takeHack: this._onTakeHack, takeImpact: { buttons: [0, 2], handler: this._onTakeImpact } },
     };
 
     /**
@@ -29,9 +26,7 @@ export default Base =>
       if (TERIOCK.config.impact[impact]?.morganti) {
         const cost = Object.entries(TERIOCK.config.cost.primary.keys).find(([_k, v]) => v.impact === impact);
         const stat = cost ? cost[0] : null;
-        if (!stat) {
-          return;
-        }
+        if (!stat) return;
         const field = new fields.NumberField({
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.hint", {
             effect: TERIOCK.config.impact[impact]?.label?.toLowerCase(),
@@ -50,9 +45,7 @@ export default Base =>
             label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.ok"),
             callback: async (_event, button) => {
               const input = button.form.elements.namedItem(impact).value ?? 0;
-              await actor.update({
-                [`system.${stat}.morganti`]: input,
-              });
+              await actor.update({ [`system.${stat}.morganti`]: input });
             },
           },
           window: {

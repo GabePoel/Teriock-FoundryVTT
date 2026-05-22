@@ -33,19 +33,13 @@ declare global {
       skipRollData?: boolean;
     };
 
-    export type _EvaluationFieldOptions = _FormulaFieldOptions &
-      FormulaDerivationOptions & {
-        model?: typeof EvaluationModel;
-      };
-
-    export type _IdentifierFieldOptions = {
-      reset?: string | null;
+    export type _EvaluationFieldOptions = _FormulaFieldOptions & FormulaDerivationOptions & {
+      model?: typeof EvaluationModel;
     };
 
-    export type _TypedIdentifierFieldOptions = {
-      single?: boolean;
-      types?: string[];
-    };
+    export type _IdentifierFieldOptions = { reset?: string | null };
+
+    export type _TypedIdentifierFieldOptions = { single?: boolean, types?: string[] };
 
     /**
      * Valid comparison operations.
@@ -56,10 +50,7 @@ declare global {
      * A single group that will be given the corresponding label in a generated `<select>` element.
      * @see {DynamicChoices}
      */
-    export type DynamicChoiceGroup = {
-      choices: Record<string, string>;
-      label: string;
-    };
+    export type DynamicChoiceGroup = { choices: Record<string, string>, label: string };
 
     /**
      * Select options will be built from dynamic choices. The key for each choice group will be used as that group's

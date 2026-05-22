@@ -25,12 +25,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
   }
 
   static get metadata() {
-    return {
-      documentName: "",
-      icon: "",
-      label: "",
-      sheetClass: null,
-    };
+    return { documentName: "", icon: "", label: "", sheetClass: null };
   }
 
   /**
@@ -41,16 +36,12 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {Promise<PseudoDocument>}
    */
   static async create(data = {}, { parent, ...operation } = {}) {
-    if (!parent) {
-      throw new Error("Pseudo-documents must have parents");
-    }
+    if (!parent) throw new Error("Pseudo-documents must have parents");
     const id = operation.keepId && foundry.data.validators.isValidId(data._id) ? data._id : foundry.utils.randomID();
     /** @type {CommonSystem} */
     const directParent = foundry.utils.isSubclass(parent, foundry.abstract.TypeDataModel) ? parent : parent.system;
     const fieldPath = directParent.metadata?.pseudos?.[this.metadata.documentName];
-    if (!fieldPath) {
-      throw new Error("Invalid pseudo-document parent");
-    }
+    if (!fieldPath) throw new Error("Invalid pseudo-document parent");
     const updateData = { [`${fieldPath}.${id}`]: { ...data, _id: id } };
     await directParent.document.update(updateData, operation);
     return foundry.utils.getProperty(directParent.parent, fieldPath).get(id);
@@ -58,11 +49,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /** @inheritDoc */
   static defineSchema() {
-    return {
-      _id: new fields.DocumentIdField({
-        initial: () => foundry.utils.randomID(),
-      }),
-    };
+    return { _id: new fields.DocumentIdField({ initial: () => foundry.utils.randomID() }) };
   }
 
   /**
@@ -72,12 +59,8 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   static async fromDropData(data) {
     const pseudo = await fromUuid(data.uuid);
-    if (!pseudo) {
-      throw new Error("Failed to resolve PseudoDocument.");
-    }
-    if (pseudo.documentName !== this.metadata.documentName) {
-      throw new Error("Invalid type provided.", pseudo);
-    }
+    if (!pseudo) throw new Error("Failed to resolve PseudoDocument.");
+    if (pseudo.documentName !== this.metadata.documentName) throw new Error("Invalid type provided.", pseudo);
     return pseudo;
   }
 
@@ -91,14 +74,12 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {Record<ID<T>, object>}
    */
   static toCollectionObject(docs, options = {}) {
-    return Object.fromEntries(
-      docs.map(d => {
-        const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
-        const data = foundry.utils.isPlainObject(d) ? d : d.toObject(options.source ?? true);
-        data._id = id;
-        return [id, data];
-      }),
-    );
+    return Object.fromEntries(docs.map(d => {
+      const id = options.keepId && d._id ? d._id : foundry.utils.randomID();
+      const data = foundry.utils.isPlainObject(d) ? d : d.toObject(options.source ?? true);
+      data._id = id;
+      return [id, data];
+    }));
   }
 
   /**
@@ -115,9 +96,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   get fieldPath() {
     let path = this.parent.constructor.metadata.pseudos[this.documentName];
-    if (this.parent instanceof PseudoDocument) {
-      path = [this.parent.fieldPath, this.parent.id, path].join(".");
-    }
+    if (this.parent instanceof PseudoDocument) path = [this.parent.fieldPath, this.parent.id, path].join(".");
     return path;
   }
 
@@ -183,23 +162,18 @@ export default class PseudoDocument extends EmbeddedDataModel {
     const type = _loc(this.constructor.metadata.label);
     if (!content) {
       const question = _loc("COMMON.AreYouSure");
-      const warning = _loc("SIDEBAR.DeleteWarning", {
-        type: type.toLowerCase(),
-      });
+      const warning = _loc("SIDEBAR.DeleteWarning", { type: type.toLowerCase() });
       content = `<p><strong>${question}</strong> ${warning}</p>`;
     }
     return foundry.applications.api.DialogV2.confirm(
-      foundry.utils.mergeObject(
-        {
-          content,
-          window: {
-            icon: "fa-solid fa-trash",
-            title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name ?? this.label}`,
-          },
-          yes: { callback: () => this.delete(operation) },
+      foundry.utils.mergeObject({
+        content,
+        window: {
+          icon: "fa-solid fa-trash",
+          title: `${_loc("DOCUMENT.Delete", { type })}: ${this.name ?? this.label}`,
         },
-        options,
-      ),
+        yes: { callback: () => this.delete(operation) },
+      }, options),
     );
   }
 

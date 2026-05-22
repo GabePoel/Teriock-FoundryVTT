@@ -9,10 +9,7 @@ export default class ThresholdRoll extends BaseRoll {
    * @returns {Teriock.Dice.ThresholdRollOptions}
    */
   static get defaultOptions() {
-    return Object.assign(super.defaultOptions, {
-      critFailureThreshold: 1,
-      critSuccessThreshold: 20,
-    });
+    return Object.assign(super.defaultOptions, { critFailureThreshold: 1, critSuccessThreshold: 20 });
   }
 
   /**

@@ -40,7 +40,4 @@ export const attributeConfig = {
   },
 };
 
-preLocalize("config.attribute", {
-  keys: ["label", "name", "passive"],
-  sort: true,
-});
+preLocalize("config.attribute", { keys: ["label", "name", "passive"], sort: true });

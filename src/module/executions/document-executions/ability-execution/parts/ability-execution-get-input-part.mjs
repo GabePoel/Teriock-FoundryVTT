@@ -38,9 +38,8 @@ export default function AbilityExecutionGetInputPart(Base) {
        * Apply constant adept/inept/gifted modifications to default costs.
        */
       #modifyCosts() {
-        for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
+        for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks))
           this.costs[v.primary] += v.multiplier * this.source.system.costs.tweaks[k];
-        }
       }
 
       /**
@@ -139,13 +138,11 @@ export default function AbilityExecutionGetInputPart(Base) {
 
       /** @inheritDoc */
       get requiresCompetence() {
-        return (
-          super.requiresCompetence ||
-          this.automations.filter(a => a.requiresCompetence).length !== 0 ||
-          !!this.source.system.overview.proficient ||
-          !!this.source.system.overview.fluent ||
-          (this.source.system.heightened && !this.flags.noHeighten)
-        );
+        return (super.requiresCompetence
+          || this.automations.filter(a => a.requiresCompetence).length !== 0
+          || !!this.source.system.overview.proficient
+          || !!this.source.system.overview.fluent
+          || (this.source.system.heightened && !this.flags.noHeighten));
       }
 
       /**
@@ -158,9 +155,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           if (this.#shouldShowCostPrompt(k)) {
             dialogs.push(
               createDialogFieldset(
-                _loc("TERIOCK.COSTS.Long.primary", {
-                  key: v.label,
-                }),
+                _loc("TERIOCK.COSTS.Long.primary", { key: v.label }),
                 await TeriockTextEditor.enrichHTML(this.source.system.costs.primary[k].description),
                 k,
               ),
@@ -184,12 +179,8 @@ export default function AbilityExecutionGetInputPart(Base) {
         }
         if (dialogs.length > 0) {
           const title = this.source.system.spell
-            ? _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.casting", {
-                name: this.source.name,
-              })
-            : _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.executing", {
-                name: this.source.name,
-              });
+            ? _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.casting", { name: this.source.name })
+            : _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.executing", { name: this.source.name });
           await TeriockDialog.prompt({
             content: dialogs.join(""),
             modal: true,
@@ -197,9 +188,8 @@ export default function AbilityExecutionGetInputPart(Base) {
               label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.ok"),
               callback: (_event, button) => {
                 for (const k of Object.keys(TERIOCK.config.cost.primary.keys)) {
-                  if (this.#shouldShowCostPrompt(k)) {
+                  if (this.#shouldShowCostPrompt(k))
                     this.costs[k] = Number(button.form.elements.namedItem(k).value || "0") || 0;
-                  }
                 }
                 if (this.canHeighten) {
                   this.heightened = Number(button.form.elements.namedItem("heightened").value);
@@ -207,10 +197,7 @@ export default function AbilityExecutionGetInputPart(Base) {
                 }
               },
             },
-            window: {
-              icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"),
-              title: title,
-            },
+            window: { icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"), title: title },
           });
         }
         this.#modifyCosts();
@@ -228,13 +215,9 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @return {Promise<void>}
        */
       async _getTargets() {
-        if (this.source.system.targets.size === 1 && this.source.system.targets.has("self") && this.executor) {
+        if (this.source.system.targets.size === 1 && this.source.system.targets.has("self") && this.executor)
           this.targets.add(this.executor);
-        } else {
-          for (const target of game.user.targets) {
-            this.targets.add(target);
-          }
-        }
+        else for (const target of game.user.targets) this.targets.add(target);
       }
 
       /** @inheritDoc */

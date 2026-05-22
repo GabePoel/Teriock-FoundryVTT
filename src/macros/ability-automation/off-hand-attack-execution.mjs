@@ -7,15 +7,12 @@ if (armaments.length > 0) {
     title: _loc("TERIOCK.DIALOGS.Select.Armament.title"),
   });
   let abilities = await actor.allAbilities();
-  abilities = abilities
-    .filter(
-      a =>
-        a.system.interaction === "attack" &&
-        a.system.maneuver === "active" &&
-        a.system.executionTime.base === "a1" &&
-        ["weapon", "hand"].includes(a.system.delivery),
-    )
-    .sort((a, b) => a.name.localeCompare(b.name));
+  abilities = abilities.filter(a =>
+    a.system.interaction === "attack"
+    && a.system.maneuver === "active"
+    && a.system.executionTime.base === "a1"
+    && ["hand", "weapon"].includes(a.system.delivery)
+  ).sort((a, b) => a.name.localeCompare(b.name));
   const ability = await tm.dialogs.selectDocumentDialog(abilities, {
     hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
     title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),

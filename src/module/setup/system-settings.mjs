@@ -107,24 +107,18 @@ export const settings = {
   },
   cone: {
     defaultConeAngle: {
-      default: CONFIG.MeasuredTemplate.defaults.angle,
+      default: 60,
       hint: "TERIOCK.SETTINGS.defaultConeAngle.hint",
       name: "TERIOCK.SETTINGS.defaultConeAngle.name",
       scope: "world",
-      type: new fields.NumberField({
-        max: 360,
-        min: 0,
-      }),
+      type: new fields.NumberField({ max: 360, min: 0 }),
     },
     defaultDragonBreathAngle: {
-      default: CONFIG.MeasuredTemplate.defaults.angle,
+      default: 60,
       hint: "TERIOCK.SETTINGS.defaultDragonBreathAngle.hint",
       name: "TERIOCK.SETTINGS.defaultDragonBreathAngle.name",
       scope: "world",
-      type: new fields.NumberField({
-        max: 360,
-        min: 0,
-      }),
+      type: new fields.NumberField({ max: 360, min: 0 }),
     },
   },
   dialog: {
@@ -304,9 +298,6 @@ export function registerSettings() {
   configs.DisplayConfig.registerMenu();
   configs.GameContentConfig.registerMenu();
   configs.GameMasterControlsConfig.registerMenu();
-  for (const s of Object.values(settings)) {
-    for (const [k, d] of Object.entries(s)) {
-      game.settings.register("teriock", k, d);
-    }
-  }
+  for (const s of Object.values(settings))
+    for (const [k, d] of Object.entries(s)) game.settings.register("teriock", k, d);
 }

@@ -19,8 +19,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     this.bonus = options.bonus ?? "";
     this.showDialog = options.showDialog;
     this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
-    this.formula =
-      options.formula ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
+    this.formula = options.formula
+      ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
   }
 
   /**
@@ -28,9 +28,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
    * @returns {HarmRoll[]}
    */
   get #typedRolls() {
-    if (this.rolls.length === 0) {
-      return [];
-    }
+    if (this.rolls.length === 0) return [];
     const roll = this.rolls[0];
     return Array.from(this.impacts).map(impact => {
       const impactRoll = roll.clone({ evaluated: true });
@@ -49,9 +47,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   get automations() {
     const automations = [...this._automations];
-    for (const p of this.source.properties) {
-      automations.push(...p.system.automations.contents);
-    }
+    for (const p of this.source.properties) automations.push(...p.system.automations.contents);
     return new TypeCollection(automations.map(a => [a.id, a]));
   }
 
@@ -62,29 +58,21 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   get flavor() {
-    if (this.impacts.size === 1) {
-      return _loc("TERIOCK.ROLLS.Base.name", {
-        value: TERIOCK.config.impact[Array.from(this.impacts)[0]].label,
-      });
-    } else {
-      return _loc("TERIOCK.ROLLS.Harm.multi");
-    }
+    if (this.impacts.size === 1)
+      return _loc("TERIOCK.ROLLS.Base.name", { value: TERIOCK.config.impact[Array.from(this.impacts)[0]].label });
+    else return _loc("TERIOCK.ROLLS.Harm.multi");
   }
 
   /** @inheritDoc */
   async _buildActivations() {
-    for (const roll of this.#typedRolls) {
-      this.activations.push(...(await roll.getActivations()));
-    }
+    for (const roll of this.#typedRolls) this.activations.push(...(await roll.getActivations()));
     await super._buildActivations();
   }
 
   /** @inheritDoc */
   async _buildPanels() {
     await super._buildPanels();
-    for (const roll of this.#typedRolls) {
-      this.panels.push(...(await roll.getPanels()));
-    }
+    for (const roll of this.#typedRolls) this.panels.push(...(await roll.getPanels()));
   }
 
   /** @inheritDoc */
@@ -92,11 +80,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     await super._buildRolls();
     if (this.crit) {
       for (const roll of this.rolls) {
-        if (this.impacts.size === 1) {
-          roll.impact = Array.from(this.impacts)[0];
-        } else {
-          roll.impact = undefined;
-        }
+        if (this.impacts.size === 1) roll.impact = Array.from(this.impacts)[0];
+        else roll.impact = undefined;
         roll.alter(2, 0, { multiplyNumeric: false });
       }
     }
@@ -108,19 +93,12 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     for (const impact of this.impacts) {
       if (this._hasBoostForImpact(impact)) {
         const amt = this._boostsResolved[impact];
-        if (amt > boosts) {
-          boosts = amt;
-        }
+        if (amt > boosts) boosts = amt;
       }
     }
     if (this.showDialog && formulaExists(this.formula)) {
-      this.formula = await boostDialog(this.formula, {
-        boosts,
-        crit: this.crit,
-      });
-      if (this.formula === null) {
-        return false;
-      }
+      this.formula = await boostDialog(this.formula, { boosts, crit: this.crit });
+      if (this.formula === null) return false;
       this.crit = false;
     }
     await super._getInput();
@@ -128,10 +106,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   _hasBoostForImpact(impact) {
-    return (
-      super._hasBoostForImpact(impact) ||
-      (this._boostsResolved[impact] && this.impacts.has(impact) && formulaExists(this.formula))
-    );
+    return (super._hasBoostForImpact(impact)
+      || (this._boostsResolved[impact] && this.impacts.has(impact) && formulaExists(this.formula)));
   }
 
   /** @inheritDoc */
@@ -139,16 +115,13 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     const onUseAbilities = this.source.system.onUseAbilities;
     if (onUseAbilities.length > 0) {
       const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
-        hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", {
-          name: this.source.name,
-        }),
+        hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", { name: this.source.name }),
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
       });
       for (const ability of usedAbilities) {
         if (ability.system.consumable && this.source.system.consumable) {
-          if (ability.system.quantity !== 1 && this.source.isOwner && !this.source.inCompendium) {
+          if (ability.system.quantity !== 1 && this.source.isOwner && !this.source.inCompendium)
             await this.source.setFlag("teriock", "dontConsume", true);
-          }
         }
         await ability.use({ ...this.options, armament: this.source });
       }
@@ -158,9 +131,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _prepareFormula() {
-    if (formulaExists(this.bonus)) {
-      this.formula = addFormula(this.formula, this.bonus);
-    }
+    if (formulaExists(this.bonus)) this.formula = addFormula(this.formula, this.bonus);
   }
 
   /** @inheritDoc */

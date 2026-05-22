@@ -25,12 +25,7 @@ export default class TypedPseudoDocument extends PseudoDocument {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      type: new fields.StringField({
-        blank: false,
-        initial: this.TYPE,
-        nullable: false,
-        required: true,
-      }),
+      type: new fields.StringField({ blank: false, initial: this.TYPE, nullable: false, required: true }),
     });
   }
 }

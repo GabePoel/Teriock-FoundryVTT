@@ -9,31 +9,20 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
  */
 export default async function hotbarDropDialog(doc) {
   const label = TERIOCK.config.document[doc.type].label.toLowerCase();
-  const context = {
-    actor: `@UUID[${doc.actor?.uuid}]`,
-    child: `@UUID[${doc.uuid}]`,
-    identifier: doc.lookupKey,
-    label,
-  };
+  const context = { actor: `@UUID[${doc.actor?.uuid}]`, child: `@UUID[${doc.uuid}]`, identifier: doc.lookupKey, label };
   const content = await TeriockTextEditor.enrichHTML(
     await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", context),
   );
   return TeriockDialog.prompt({
-    buttons: [
-      {
-        action: "linked",
-        icon: makeIconClass(TERIOCK.display.icons.ui.linked),
-        label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
-        callback: () => "linked",
-      },
-    ],
+    buttons: [{
+      action: "linked",
+      icon: makeIconClass(TERIOCK.display.icons.ui.linked),
+      label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
+      callback: () => "linked",
+    }],
     content: content,
     modal: true,
-    ok: {
-      default: true,
-      label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"),
-      callback: () => "general",
-    },
+    ok: { default: true, label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"), callback: () => "general" },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
       title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),

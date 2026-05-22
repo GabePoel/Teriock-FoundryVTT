@@ -31,12 +31,7 @@ export default class FluencySheet extends BaseEffectSheet {
         icon: makeIcon(fData.icon, "contextMenu"),
         label: fData.name,
         onClick: async () => {
-          const updateData = {
-            system: {
-              field: fKey,
-              tradecraft: Object.keys(fData.tradecrafts)[0],
-            },
-          };
+          const updateData = { system: { field: fKey, tradecraft: Object.keys(fData.tradecrafts)[0] } };
           await this.document.update(updateData);
         },
       };
@@ -57,12 +52,7 @@ export default class FluencySheet extends BaseEffectSheet {
           icon: makeIcon(tcData.icon, "contextMenu"),
           label: tcData.name,
           onClick: async () => {
-            const updateData = {
-              system: {
-                field: fKey,
-                tradecraft: tcKey,
-              },
-            };
+            const updateData = { system: { field: fKey, tradecraft: tcKey } };
             await this.document.update(updateData);
           },
           visible: () => {

@@ -15,9 +15,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
   constructor(options = {}) {
     super(options);
     this.attribute = options.attribute;
-    if (this.actor) {
-      this.bonus = addFormula(this.actor.system.attributes[options.attribute].formula, this.bonus);
-    }
+    if (this.actor) this.bonus = addFormula(this.actor.system.attributes[options.attribute].formula, this.bonus);
   }
 
   /** @type {Teriock.Keys.Attribute} */
@@ -26,9 +24,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
-      system: {
-        _src: ruleUuid("Core", TERIOCK.config.attribute[this.attribute].page),
-      },
+      system: { _src: ruleUuid("Core", TERIOCK.config.attribute[this.attribute].page) },
     });
   }
 
@@ -39,16 +35,9 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
 
   /** @inheritDoc */
   get flavor() {
-    if (this.threshold !== undefined) {
-      return _loc("TERIOCK.ROLLS.Feat.thresholded", {
-        threshold: this.threshold,
-        value: this.attribute.toUpperCase(),
-      });
-    } else {
-      return _loc("TERIOCK.ROLLS.Feat.unthresholded", {
-        value: this.attribute.toUpperCase(),
-      });
-    }
+    if (this.threshold !== undefined)
+      return _loc("TERIOCK.ROLLS.Feat.thresholded", { threshold: this.threshold, value: this.attribute.toUpperCase() });
+    else return _loc("TERIOCK.ROLLS.Feat.unthresholded", { value: this.attribute.toUpperCase() });
   }
 
   /** @inheritDoc */
@@ -58,9 +47,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
 
   /** @inheritDoc */
   get name() {
-    return _loc("TERIOCK.ROLLS.Feat.name", {
-      value: TERIOCK.reference.attributesFull[this.attribute],
-    });
+    return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.reference.attributesFull[this.attribute] });
   }
 
   /** @inheritDoc */
@@ -68,14 +55,8 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
     const impactByAttribute = { per: "perceive", snk: "hide" };
     const impact = impactByAttribute[this.attribute];
     const amount = this.rolls[0]?.total;
-    if (impact && Number.isFinite(amount)) {
-      this.activations.push(
-        new teriock.data.pseudoDocuments.activations.TakeActivation({
-          amount,
-          impact,
-        }),
-      );
-    }
+    if (impact && Number.isFinite(amount))
+      this.activations.push(new teriock.data.pseudoDocuments.activations.TakeActivation({ amount, impact }));
   }
 
   /** @inheritDoc */
@@ -88,9 +69,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
    * @param {Teriock.Execution.FeatExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (this.actor) {
-      this.competence.raw = this.actor.system.attributes[options.attribute].competence.value;
-    }
+    if (this.actor) this.competence.raw = this.actor.system.attributes[options.attribute].competence.value;
     super._determineCompetence(options);
   }
 }

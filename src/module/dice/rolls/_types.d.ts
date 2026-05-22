@@ -6,16 +6,9 @@ import { BaseRoll } from "./_module.mjs";
 
 declare global {
   namespace Teriock.Dice {
-    type DiePartStyle = {
-      classes?: string;
-      icon?: string;
-      tooltip?: string;
-    };
+    type DiePartStyle = { classes?: string, icon?: string, tooltip?: string };
 
-    type DieStyles = {
-      dice: DiePartStyle;
-      total: DiePartStyle;
-    };
+    type DieStyles = { dice: DiePartStyle, total: DiePartStyle };
 
     type DieTarget = {
       actorUuid?: UUID<TeriockActor>;
@@ -37,13 +30,8 @@ declare global {
       threshold?: number | null;
     };
 
-    type ImpactRollOptions = BaseRollOptions & {
-      impact: Teriock.Keys.Impact;
-    };
+    type ImpactRollOptions = BaseRollOptions & { impact: Teriock.Keys.Impact };
 
-    type ThresholdRollOptions = BaseRollOptions & {
-      critFailureThreshold: number;
-      critSuccessThreshold: number;
-    };
+    type ThresholdRollOptions = BaseRollOptions & { critFailureThreshold: number, critSuccessThreshold: number };
   }
 }

@@ -19,37 +19,31 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         const tradecrafts = {};
-        Object.entries(TERIOCK.reference.tradecrafts).forEach(
-          ([key, value]) =>
-            (tradecrafts[key] = new EvaluationField({
-              deterministic: false,
-              initial: `@tc.${key}.score`,
-              interval: 1,
-              label: value,
-              min: -Infinity,
-              model: TradecraftModel,
-            })),
-        );
-        return Object.assign(super.defineSchema(), {
-          tradecrafts: new SchemaField(tradecrafts),
-        });
+        Object.entries(TERIOCK.reference.tradecrafts).forEach((
+          [key, value],
+        ) => (tradecrafts[key] = new EvaluationField({
+          deterministic: false,
+          initial: `@tc.${key}.score`,
+          interval: 1,
+          label: value,
+          min: -Infinity,
+          model: TradecraftModel,
+        })));
+        return Object.assign(super.defineSchema(), { tradecrafts: new SchemaField(tradecrafts) });
       }
 
       /**
        * Ensure tradecrafts have the correct keys assigned.
        */
       #prepareTradecrafts() {
-        for (const [k, v] of Object.entries(this.tradecrafts)) {
-          v._key = k;
-        }
+        for (const [k, v] of Object.entries(this.tradecrafts)) v._key = k;
       }
 
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        for (const tc of Object.values(this.tradecrafts)) {
+        for (const tc of Object.values(this.tradecrafts))
           Object.assign(rollData, prefixObject(tc.getLocalRollData(), `tc.${tc.key}`));
-        }
         return rollData;
       }
 

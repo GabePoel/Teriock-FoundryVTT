@@ -20,9 +20,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(B
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
-      system: {
-        _src: ruleUuid("Tradecraft", TERIOCK.index.tradecrafts[this.tradecraft]),
-      },
+      system: { _src: ruleUuid("Tradecraft", TERIOCK.index.tradecrafts[this.tradecraft]) },
     });
   }
 
@@ -33,16 +31,12 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(B
 
   /** @inheritDoc */
   get name() {
-    return _loc("TERIOCK.ROLLS.Tradecraft.name", {
-      value: TERIOCK.reference.tradecrafts[this.tradecraft],
-    });
+    return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.reference.tradecrafts[this.tradecraft] });
   }
 
   /** @inheritDoc */
   get rollOptions() {
-    return Object.assign(super.rollOptions, {
-      targets: Array.from(game.user.targets),
-    });
+    return Object.assign(super.rollOptions, { targets: Array.from(game.user.targets) });
   }
 
   /** @inheritDoc */
@@ -60,9 +54,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(B
    * @param {Teriock.Execution.TradecraftExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (this.actor) {
-      this.competence.raw = this.actor.system.tradecrafts[options.tradecraft].competence.value;
-    }
+    if (this.actor) this.competence.raw = this.actor.system.tradecrafts[options.tradecraft].competence.value;
     super._determineCompetence(options);
   }
 }

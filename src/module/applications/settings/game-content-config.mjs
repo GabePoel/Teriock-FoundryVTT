@@ -6,10 +6,7 @@ import BaseConfig from "./base-config.mjs";
 export default class GameContentConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    window: {
-      icon: makeIconClass(icons.settings.gameContent, "title"),
-      title: "TERIOCK.CONFIGS.GameContent.name",
-    },
+    window: { icon: makeIconClass(icons.settings.gameContent, "title"), title: "TERIOCK.CONFIGS.GameContent.name" },
   };
 
   /** @inheritDoc */

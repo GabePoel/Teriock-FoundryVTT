@@ -33,25 +33,18 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onToggleStatDrawer(_event, target) {
-      target
-        .closest(".character-status-bar-box")
-        ?.querySelector(".die-drawer:not(.top-drawer)")
-        ?.classList.toggle("collapsed");
+      target.closest(".character-status-bar-box")?.querySelector(".die-drawer:not(.top-drawer)")?.classList.toggle(
+        "collapsed",
+      );
       const stat = target.dataset.stat;
       this[`_${stat}DrawerOpen`] = !this[`_${stat}DrawerOpen`];
     }
 
     static DEFAULT_OPTIONS = {
       actions: {
-        resetAttackPenalty: {
-          buttons: [2],
-          handler: this.#onResetAttackPenalty,
-        },
+        resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty },
         toggleSidebar: this.#onToggleSidebar,
-        toggleStatDrawer: {
-          buttons: [2],
-          handler: this.#onToggleStatDrawer,
-        },
+        toggleStatDrawer: { buttons: [2], handler: this.#onToggleStatDrawer },
       },
     };
 
@@ -59,9 +52,7 @@ export default Base =>
     constructor(...args) {
       super(...args);
       this._sidebarOpen = true;
-      for (const stat of Object.keys(TERIOCK.config.die.stats)) {
-        this[`_${stat}DrawerOpen`] = true;
-      }
+      for (const stat of Object.keys(TERIOCK.config.die.stats)) this[`_${stat}DrawerOpen`] = true;
     }
 
     /**
@@ -70,29 +61,11 @@ export default Base =>
      * @returns {ContextMenuEntry[]}
      */
     #piercingContextMenu() {
-      return TeriockContextMenu.makeUpdateEntries(
-        this.actor,
-        [
-          {
-            icon: TERIOCK.display.icons.piercing.none,
-            label: _loc("TERIOCK.MODELS.Piercing.MENU.0"),
-            value: 0,
-          },
-          {
-            icon: TERIOCK.display.icons.piercing.av0,
-            label: _loc("TERIOCK.MODELS.Piercing.MENU.1"),
-            value: 1,
-          },
-          {
-            icon: TERIOCK.display.icons.piercing.ub,
-            label: _loc("TERIOCK.MODELS.Piercing.MENU.2"),
-            value: 2,
-          },
-        ],
-        {
-          path: "system.offense.piercing.raw",
-        },
-      );
+      return TeriockContextMenu.makeUpdateEntries(this.actor, [
+        { icon: TERIOCK.display.icons.piercing.none, label: _loc("TERIOCK.MODELS.Piercing.MENU.0"), value: 0 },
+        { icon: TERIOCK.display.icons.piercing.av0, label: _loc("TERIOCK.MODELS.Piercing.MENU.1"), value: 1 },
+        { icon: TERIOCK.display.icons.piercing.ub, label: _loc("TERIOCK.MODELS.Piercing.MENU.2"), value: 2 },
+      ], { path: "system.offense.piercing.raw" });
     }
 
     /**
@@ -100,22 +73,15 @@ export default Base =>
      * @returns {ContextMenuEntry[]}
      */
     #scalingContextMenu() {
-      return TeriockContextMenu.makeUpdateEntries(
-        this.actor,
-        [
-          {
-            icon: TERIOCK.display.icons.document.rank,
-            label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl"),
-            value: false,
-          },
-          {
-            icon: TERIOCK.display.icons.species.br,
-            label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br"),
-            value: true,
-          },
-        ],
-        { path: "system.scaling.brScale" },
-      );
+      return TeriockContextMenu.makeUpdateEntries(this.actor, [{
+        icon: TERIOCK.display.icons.document.rank,
+        label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.lvl"),
+        value: false,
+      }, {
+        icon: TERIOCK.display.icons.species.br,
+        label: _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.type.br"),
+        value: true,
+      }], { path: "system.scaling.brScale" });
     }
 
     /** @inheritDoc */
@@ -129,12 +95,8 @@ export default Base =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
-      for (const stat of Object.keys(TERIOCK.config.die.stats)) {
+      for (const stat of Object.keys(TERIOCK.config.die.stats))
         context[`${stat}DrawerCollapsed`] = !this[`_${stat}DrawerOpen`];
-      }
-      return Object.assign(context, {
-        sidebarOpen: this._sidebarOpen,
-        takeStatButtons: true,
-      });
+      return Object.assign(context, { sidebarOpen: this._sidebarOpen, takeStatButtons: true });
     }
   };

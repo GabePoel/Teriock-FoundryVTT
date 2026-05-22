@@ -90,11 +90,7 @@ export const documentConfig = {
     label: "TYPES.JournalEntryPage.damage",
     plural: "TERIOCK.DOCUMENTS.damage.plural",
   },
-  document: {
-    icon: icons.ui.document,
-    label: "TYPES.Base.document",
-    plural: "TERIOCK.DOCUMENTS.document.plural",
-  },
+  document: { icon: icons.ui.document, label: "TYPES.Base.document", plural: "TERIOCK.DOCUMENTS.document.plural" },
   drain: {
     documentName: "JournalEntryPage",
     icon: icons.effect.drain,

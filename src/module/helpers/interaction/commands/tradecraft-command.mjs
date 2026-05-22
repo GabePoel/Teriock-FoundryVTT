@@ -21,12 +21,9 @@ const command = {
   primary: use,
   secondary: use,
   icon: options => `${allOptions[options?.tradecraft || "artist"].icon}`,
-  label: options =>
-    allOptions[options?.tradecraft]?.name
-      ? _loc("TERIOCK.ROLLS.Tradecraft.name", {
-          value: allOptions[options?.tradecraft].name,
-        })
-      : _loc("TERIOCK.ROLLS.Tradecraft.label"),
+  label: options => allOptions[options?.tradecraft]?.name
+    ? _loc("TERIOCK.ROLLS.Tradecraft.name", { value: allOptions[options?.tradecraft].name })
+    : _loc("TERIOCK.ROLLS.Tradecraft.label"),
 };
 
 export default command;

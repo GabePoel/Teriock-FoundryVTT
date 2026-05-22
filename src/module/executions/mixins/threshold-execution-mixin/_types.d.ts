@@ -2,8 +2,9 @@ import type { DataField } from "@common/data/fields.mjs";
 
 declare global {
   namespace Teriock.Execution {
-    export type ThresholdExecutionOptions = Teriock.Execution.BaseExecutionOptions &
-      Teriock.Interaction.ThresholdOptions;
+    export type ThresholdExecutionOptions =
+      & Teriock.Execution.BaseExecutionOptions
+      & Teriock.Interaction.ThresholdOptions;
 
     export type ExecutionDialogEntry = {
       condition: (() => boolean) | boolean;

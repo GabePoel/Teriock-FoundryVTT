@@ -9,11 +9,9 @@ import { CompetenceAutomationMixin, SelectExternalDocumentsAutomationMixin } fro
  * @mixes SelectExternalDocumentsAutomation
  * @mixes CompetenceAutomation
  */
-export default class TransformationAutomation extends mixClasses(
-  CritAutomation,
-  SelectExternalDocumentsAutomationMixin,
-  CompetenceAutomationMixin,
-) {
+export default class TransformationAutomation
+  extends mixClasses(CritAutomation, SelectExternalDocumentsAutomationMixin, CompetenceAutomationMixin)
+{
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.Transformation.LABEL";
@@ -50,9 +48,7 @@ export default class TransformationAutomation extends mixClasses(
     let out = await super.getDocuments(options);
     const actors = out.filter(d => d.documentName === "Actor");
     out = out.filter(d => d.type === "species");
-    for (const a of actors) {
-      out.push(...a.species);
-    }
+    for (const a of actors) out.push(...a.species);
     return out;
   }
 }

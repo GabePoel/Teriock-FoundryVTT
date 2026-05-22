@@ -16,9 +16,7 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onRollFeatSave(event, target) {
-      await this.actor.system.rollFeatSave(target.dataset.attribute, {
-        event,
-      });
+      await this.actor.system.rollFeatSave(target.dataset.attribute, { event });
     }
 
     /**
@@ -77,10 +75,9 @@ export default Base =>
       const context = await super._prepareContext(options);
       const index = game.teriock.packs.player.index;
       context.attributeMacros = Object.fromEntries(
-        Object.keys(TERIOCK.index.attributesFull).map(att => [
-          att,
-          index.getName(`Make ${att.toUpperCase()} Feat Save`)?.uuid,
-        ]),
+        Object.keys(TERIOCK.index.attributesFull).map(
+          att => [att, index.getName(`Make ${att.toUpperCase()} Feat Save`)?.uuid]
+        ),
       );
       return context;
     }
@@ -101,8 +98,6 @@ function protectionOptions(event, target) {
       block?.querySelector(".teriock-block-subtitle")?.textContent || "",
     ],
   };
-  if (img?.src) {
-    options.img = img.src;
-  }
+  if (img?.src) options.img = img.src;
   return Object.assign(options, ThresholdRoll.parseEvent(event));
 }

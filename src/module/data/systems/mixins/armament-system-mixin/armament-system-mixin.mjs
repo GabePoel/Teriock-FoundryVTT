@@ -40,18 +40,13 @@ export default function ArmamentSystemMixin(Base) {
         return foundry.utils.mergeObject(super.defineSchema(), {
           av: defenseField(),
           bv: defenseField(),
-          damage: new MultiChangeField(
-            {
-              base: rollableFormulaField(),
-              twoHanded: rollableFormulaField(),
-              types: new fields.SetField(new IdentifierField()),
-            },
-            { multiChangePaths: ["base", "twoHanded"] },
-          ),
+          damage: new MultiChangeField({
+            base: rollableFormulaField(),
+            twoHanded: rollableFormulaField(),
+            types: new fields.SetField(new IdentifierField()),
+          }, { multiChangePaths: ["base", "twoHanded"] }),
           equipmentClasses: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.reference.equipmentClasses,
-            }),
+            new fields.StringField({ choices: TERIOCK.reference.equipmentClasses }),
           ),
           fightingStyle: new fields.StringField({
             choices: TERIOCK.reference.weaponFightingStyles,
@@ -60,23 +55,17 @@ export default function ArmamentSystemMixin(Base) {
           }),
           impacts: new fields.SetField(
             new fields.StringField({
-              choices: objectMap(TERIOCK.config.impact, i => i.take, {
-                localize: true,
-                filter: c => !c?.hidden,
-              }),
+              choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
             }),
             { initial: ["damage"] },
           ),
           notes: new fields.HTMLField({ initial: "" }),
-          range: new MultiChangeField(
-            {
-              long: new EvaluationField({ label: "Range", model: RangeModel }),
-              melee: new fields.BooleanField({ initial: true }),
-              ranged: new fields.BooleanField({ initial: false }),
-              short: new EvaluationField({ model: RangeModel }),
-            },
-            { multiChangePaths: ["long", "short"] },
-          ),
+          range: new MultiChangeField({
+            long: new EvaluationField({ label: "Range", model: RangeModel }),
+            melee: new fields.BooleanField({ initial: true }),
+            ranged: new fields.BooleanField({ initial: false }),
+            short: new EvaluationField({ model: RangeModel }),
+          }, { multiChangePaths: ["long", "short"] }),
           specialRules: initialText(),
           spellTurning: new fields.BooleanField(),
           vitals: new fields.BooleanField(),
@@ -86,9 +75,7 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       static migrateData(source, options, state) {
         const evaluationMigrations = ["damage.base", "damage.twoHanded", "attackPenalty"];
-        for (const e of evaluationMigrations) {
-          migrateKey(source, `${e}.raw`, e);
-        }
+        for (const e of evaluationMigrations) migrateKey(source, `${e}.raw`, e);
         return super.migrateData(source, options, state);
       }
 
@@ -120,14 +107,10 @@ export default function ArmamentSystemMixin(Base) {
             this.piercing.label,
             ...this._damageWrappers,
             formulaExists(this.hitBonus)
-              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", {
-                  value: this.hitBonus,
-                })
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.hitBonus", { value: this.hitBonus })
               : "",
             this.attackPenalty
-              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.attackPenalty", {
-                  value: this.attackPenalty,
-                })
+              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.attackPenalty", { value: this.attackPenalty })
               : "",
           ],
         };
@@ -144,11 +127,7 @@ export default function ArmamentSystemMixin(Base) {
           icon: TERIOCK.display.icons.interaction.block,
           label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.defense"),
           wrappers: [
-            this.av.value
-              ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.av", {
-                  value: this.av.value,
-                })
-              : "",
+            this.av.value ? _loc("TERIOCK.SYSTEMS.Armament.PANELS.av", { value: this.av.value }) : "",
             this.bv.value ? this.summarizedBlock : "",
           ],
         };
@@ -181,18 +160,9 @@ export default function ArmamentSystemMixin(Base) {
        */
       get _propertyTags() {
         const tags = [];
-        if (this.spellTurning) {
-          tags.push({
-            label: "TERIOCK.TERMS.Properties.spellTurning",
-            tooltip: "TERIOCK.PACKS.properties",
-          });
-        }
-        if (this.warded) {
-          tags.push({
-            label: "TERIOCK.TERMS.Properties.warded",
-            tooltip: "TERIOCK.PACKS.properties",
-          });
-        }
+        if (this.spellTurning)
+          tags.push({ label: "TERIOCK.TERMS.Properties.spellTurning", tooltip: "TERIOCK.PACKS.properties" });
+        if (this.warded) tags.push({ label: "TERIOCK.TERMS.Properties.warded", tooltip: "TERIOCK.PACKS.properties" });
         return tags;
       }
 
@@ -220,56 +190,34 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       get displayButtons() {
         const buttons = super.displayButtons;
-        if (!formulaExists(this.damage.base)) {
-          buttons.push({
-            classes: "ab-damage-button",
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
-          });
-        }
+        if (!formulaExists(this.damage.base))
+          buttons.push({ classes: "ab-damage-button", label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label" });
         if (!formulaExists(this._source.damage.twoHanded)) {
           buttons.push({
             classes: "ab-two-handed-damage-button",
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
           });
         }
-        if (!this.av.raw) {
-          buttons.push({
-            classes: "ab-av-button",
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
-          });
-        }
-        if (!this.bv.raw) {
-          buttons.push({
-            classes: "ab-bv-button",
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
-          });
-        }
+        if (!this.av.raw)
+          buttons.push({ classes: "ab-av-button", label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label" });
+        if (!this.bv.raw)
+          buttons.push({ classes: "ab-bv-button", label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label" });
         if (
-          (formulaExists(this.damage.base) || formulaExists(this.damage.twoHanded)) &&
-          !formulaExists(this.hitBonus)
-        ) {
-          buttons.push({
-            classes: "ab-hit-button",
-            label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
-          });
-        }
+          (formulaExists(this.damage.base) || formulaExists(this.damage.twoHanded)) && !formulaExists(this.hitBonus)
+        ) { buttons.push({ classes: "ab-hit-button", label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label" }); }
         return buttons;
       }
 
       /** @inheritDoc */
       get displayFields() {
-        return [
-          "system.notes",
-          ...super.displayFields,
-          {
-            classes: TERIOCK.display.panel.classes.derived,
-            editable: false,
-            label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {
-              name: TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
-            }),
-            path: "system.specialRules",
-          },
-        ];
+        return ["system.notes", ...super.displayFields, {
+          classes: TERIOCK.display.panel.classes.derived,
+          editable: false,
+          label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {
+            name: TERIOCK.reference.weaponFightingStyles[this.fightingStyle],
+          }),
+          path: "system.specialRules",
+        }];
       }
 
       /** @inheritDoc */
@@ -329,9 +277,7 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {string}
        */
       get summarizedBlock() {
-        return _loc("TERIOCK.SYSTEMS.Armament.PANELS.bv", {
-          value: this.bv.value,
-        });
+        return _loc("TERIOCK.SYSTEMS.Armament.PANELS.bv", { value: this.bv.value });
       }
 
       /** @inheritDoc */
@@ -344,24 +290,21 @@ export default function ArmamentSystemMixin(Base) {
        * @param {Teriock.Execution.ArmamentExecutionOptions} options
        */
       async _use(options = {}) {
-        if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
+        if (game.teriock.getSetting("rollAttackOnArmamentUse"))
           await this.actor?.useDocument("basic-attack", { type: "ability" });
-        }
         options.impacts ??= this.impacts;
         await new ArmamentExecution(options).execute();
       }
 
       /** @inheritDoc */
       getCardContextMenuEntries(doc) {
-        const entries = [
-          {
-            group: "usage",
-            icon: makeIcon(TERIOCK.display.icons.equipment.twoHanded, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
-            onClick: this.use.bind(this, { twoHanded: true }),
-            visible: this.parent.isOwner && this.hasTwoHandedAttack,
-          },
-        ];
+        const entries = [{
+          group: "usage",
+          icon: makeIcon(TERIOCK.display.icons.equipment.twoHanded, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.USAGE.twoHanded"),
+          onClick: this.use.bind(this, { twoHanded: true }),
+          visible: this.parent.isOwner && this.hasTwoHandedAttack,
+        }];
         return [...entries, ...super.getCardContextMenuEntries(doc)];
       }
 
@@ -383,18 +326,10 @@ export default function ArmamentSystemMixin(Base) {
           style: this.fightingStyle,
           vitals: Number(this.vitals),
         });
-        for (const type of this.damage.types) {
-          data[`dmg.type.${type}`] = 1;
-        }
-        for (const p of this.props || new Set()) {
-          data[`prop.${p}`] = 1;
-        }
-        for (const impact of this.impacts) {
-          data[`impact.${impact}`] = 1;
-        }
-        for (const equipmentClass of this.equipmentClasses) {
-          data[`class.${equipmentClass}`] = 1;
-        }
+        for (const type of this.damage.types) data[`dmg.type.${type}`] = 1;
+        for (const p of this.props || new Set()) data[`prop.${p}`] = 1;
+        for (const impact of this.impacts) data[`impact.${impact}`] = 1;
+        for (const equipmentClass of this.equipmentClasses) data[`class.${equipmentClass}`] = 1;
         return data;
       }
 
@@ -403,31 +338,22 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareBaseData();
 
         // Bring two-handed attacks up to parity with base
-        if (!formulaExists(this.damage.twoHanded)) {
-          this.damage.twoHanded = this.damage.base;
-        }
+        if (!formulaExists(this.damage.twoHanded)) this.damage.twoHanded = this.damage.base;
 
         // Properties
         const properties = /** @type {TeriockProperty[]} */ this.parent.effects.filter(e => e.type === "property");
         this.props = new Set(Array.from(properties).map(p => toCamelCase(p.name)));
 
         // Propagate damage types
-        for (const p of properties.filter(p => p.active)) {
-          if (p.system.damageType) {
-            this.damage.types.add(p.system.damageType.toLowerCase());
-          }
-        }
-        if (this.powerLevel === "magic") {
-          this.damage.types.add("magic");
-        }
+        for (const p of properties.filter(p => p.active))
+          if (p.system.damageType) this.damage.types.add(p.system.damageType.toLowerCase());
+        if (this.powerLevel === "magic") this.damage.types.add("magic");
         this.damage.base = addTypesToFormula(this.damage.base, this.damage.types);
         this.damage.twoHanded = addTypesToFormula(this.damage.twoHanded, this.damage.types);
 
         // Range
         this.range.description = "";
-        if (this.range.long.unitType === "zero") {
-          this.range.melee = true;
-        }
+        if (this.range.long.unitType === "zero") this.range.melee = true;
         this.range.ranged = this.range.long.unitType !== "zero";
       }
 
@@ -437,16 +363,15 @@ export default function ArmamentSystemMixin(Base) {
 
         // Range
         if (
-          this.range.long.unitType === "zero" ||
-          (this.range.long.unitType === "finite" && this.range.short.unitType === "finite")
+          this.range.long.unitType === "zero"
+          || (this.range.long.unitType === "finite" && this.range.short.unitType === "finite")
         ) {
           this.range.short.unit = this.range.long.unit;
         }
 
         // Fighting Style
-        if (this.fightingStyle && this.fightingStyle.length > 0) {
+        if (this.fightingStyle && this.fightingStyle.length > 0)
           this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
-        }
       }
 
       /** @inheritDoc */
@@ -454,13 +379,12 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareSpecialData();
 
         // Range
-        if (!this.hasAttack) {
-          this.range.melee = false;
-        }
+        if (!this.hasAttack) this.range.melee = false;
         this.range.description = this.range.long.abbreviation;
         if (this.range.long.unitType !== "zero") {
-          const shortDescription =
-            this.range.short.unitType === "finite" ? this.range.short.formula : this.range.short.text;
+          const shortDescription = this.range.short.unitType === "finite"
+            ? this.range.short.formula
+            : this.range.short.text;
           this.range.description = shortDescription + " / " + this.range.description;
         }
       }

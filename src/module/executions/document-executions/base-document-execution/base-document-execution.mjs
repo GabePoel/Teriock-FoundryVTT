@@ -18,9 +18,7 @@ export default class BaseDocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   get chatData() {
-    return foundry.utils.mergeObject(super.chatData, {
-      system: { _src: this.source.uuid },
-    });
+    return foundry.utils.mergeObject(super.chatData, { system: { _src: this.source.uuid } });
   }
 
   /**
@@ -44,9 +42,7 @@ export default class BaseDocumentExecution extends BaseExecution {
     const activationLists = await Promise.all(
       this.activeAutomations.map(a => a.getActivations({ execution: this, rollData: this.rollData })),
     );
-    for (const activations of activationLists) {
-      this.activations.push(...activations);
-    }
+    for (const activations of activationLists) this.activations.push(...activations);
     for (const a of this.activations) {
       if (a.type === "roll" && this._boostsResolved[a.impact]) {
         const boosts = this._boostsResolved[a.impact];
@@ -62,10 +58,7 @@ export default class BaseDocumentExecution extends BaseExecution {
     for (const [k, v] of Object.entries(this._boostsResolved)) {
       if (this._hasBoostForImpact(k)) {
         this.tags.push(
-          _loc(`TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`, {
-            formula: v,
-            impact: k,
-          }),
+          _loc(`TERIOCK.SYSTEMS.Child.EXECUTION.tags.boost${v === 1 ? "" : "s"}`, { formula: v, impact: k }),
         );
       }
     }
@@ -105,10 +98,9 @@ export default class BaseDocumentExecution extends BaseExecution {
    * @returns {Promise<void>}
    */
   async _evaluateBoosts() {
-    const boostPromises = Object.entries(this._boosts).map(async ([k, v]) => [
-      k,
-      await BaseRoll.getValue(v || "0", this.rollData),
-    ]);
+    const boostPromises = Object.entries(this._boosts).map(async (
+      [k, v],
+    ) => [k, await BaseRoll.getValue(v || "0", this.rollData)]);
     this._boostsResolved = Object.fromEntries(await Promise.all(boostPromises));
   }
 

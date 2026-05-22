@@ -11,12 +11,8 @@ export function addFormula(value, delta) {
   const operator = delta.startsWith("-") ? "-" : "+";
   const minus = operator === "-" ? "-" : "";
   delta = delta.replace(/^[+-]/, "").trim();
-  if (!formulaExists(value)) {
-    return `${minus} ${delta}`.trim();
-  }
-  if (!formulaExists(delta)) {
-    return value;
-  }
+  if (!formulaExists(value)) return `${minus} ${delta}`.trim();
+  if (!formulaExists(delta)) return value;
   return `${value} ${operator} ${delta}`;
 }
 
@@ -30,12 +26,8 @@ export function subtractFormula(value, delta) {
   const operator = delta.startsWith("-") ? "+" : "-";
   const minus = operator === "-" ? "-" : "";
   delta = delta.replace(/^[+-]/, "").trim();
-  if (!formulaExists(value)) {
-    return `${minus} ${delta}`.trim();
-  }
-  if (!formulaExists(delta)) {
-    return value;
-  }
+  if (!formulaExists(value)) return `${minus} ${delta}`.trim();
+  if (!formulaExists(delta)) return value;
   return `${value} ${operator} ${delta}`;
 }
 
@@ -46,9 +38,7 @@ export function subtractFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function boostFormula(value, delta) {
-  if (formulaExists(value) && formulaExists(delta)) {
-    return `sb(${value}, ${delta})`;
-  }
+  if (formulaExists(value) && formulaExists(delta)) return `sb(${value}, ${delta})`;
   return value;
 }
 
@@ -60,9 +50,7 @@ export function boostFormula(value, delta) {
  */
 export function downgradeDeterministicFormula(value, delta) {
   const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
-  if (terms.length === 1 && terms[0]?.fn === "min") {
-    return value.replace(/\)$/, `, ${delta})`);
-  }
+  if (terms.length === 1 && terms[0]?.fn === "min") return value.replace(/\)$/, `, ${delta})`);
   return `min(${value}, ${delta})`;
 }
 
@@ -75,9 +63,7 @@ export function downgradeDeterministicFormula(value, delta) {
 export function downgradeIndeterministicFormula(value, delta) {
   const valueTotal = teriock.dice.rolls.BaseRoll.meanValue(value);
   const deltaTotal = teriock.dice.rolls.BaseRoll.meanValue(delta);
-  if (deltaTotal <= valueTotal) {
-    return delta;
-  }
+  if (deltaTotal <= valueTotal) return delta;
   return value;
 }
 
@@ -88,13 +74,9 @@ export function downgradeIndeterministicFormula(value, delta) {
  * @returns {Teriock.System.FormulaString}
  */
 export function multiplyFormula(value, delta) {
-  if (Number(delta) === 1) {
-    return value;
-  }
+  if (Number(delta) === 1) return value;
   const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
-  if (terms.length > 1) {
-    return `(${value}) * ${delta}`;
-  }
+  if (terms.length > 1) return `(${value}) * ${delta}`;
   return `${value} * ${delta}`;
 }
 
@@ -106,9 +88,7 @@ export function multiplyFormula(value, delta) {
  */
 export function upgradeDeterministicFormula(value, delta) {
   const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
-  if (terms.length === 1 && terms[0]?.fn === "max") {
-    return value.replace(/\)$/, `, ${delta})`);
-  }
+  if (terms.length === 1 && terms[0]?.fn === "max") return value.replace(/\)$/, `, ${delta})`);
   return `max(${value}, ${delta})`;
 }
 
@@ -121,9 +101,7 @@ export function upgradeDeterministicFormula(value, delta) {
 export function upgradeIndeterministicFormula(value, delta) {
   const valueTotal = teriock.dice.rolls.BaseRoll.meanValue(value);
   const deltaTotal = teriock.dice.rolls.BaseRoll.meanValue(delta);
-  if (deltaTotal >= valueTotal) {
-    return delta;
-  }
+  if (deltaTotal >= valueTotal) return delta;
   return value;
 }
 
@@ -133,9 +111,7 @@ export function upgradeIndeterministicFormula(value, delta) {
  * @returns {boolean}
  */
 export function formulaExists(formula) {
-  if (!formula) {
-    return false;
-  }
+  if (!formula) return false;
   if (typeof formula === "string") {
     formula = formula.trim();
     return Boolean(formula.length > 0 && formula !== "0");
@@ -149,13 +125,7 @@ export function formulaExists(formula) {
  * @returns Set<string>
  */
 function getTermTypes(term) {
-  return new Set(
-    term.flavor
-      .toLowerCase()
-      .split(" ")
-      .map(type => type.trim())
-      .filter(Boolean),
-  );
+  return new Set(term.flavor.toLowerCase().split(" ").map(type => type.trim()).filter(Boolean));
 }
 
 /**
@@ -172,9 +142,7 @@ function setTermTypes(term, types) {
  */
 function removeTermTypes(term, types) {
   const existingTypes = getTermTypes(term);
-  for (const type of types) {
-    existingTypes.delete(type);
-  }
+  for (const type of types) existingTypes.delete(type);
   setTermTypes(term, existingTypes);
 }
 
@@ -184,9 +152,7 @@ function removeTermTypes(term, types) {
  */
 function addTermTypes(term, types) {
   const existingTypes = getTermTypes(term);
-  for (const type of types) {
-    existingTypes.add(type);
-  }
+  for (const type of types) existingTypes.add(type);
   setTermTypes(term, existingTypes);
 }
 
@@ -197,17 +163,11 @@ function addTermTypes(term, types) {
  * @returns {Teriock.System.FormulaString}
  */
 function processFormula(formula, types, fn) {
-  if (["number", "string"].includes(typeof types)) {
-    types = [types.toString()];
-  }
-  if (!formulaExists(formula)) {
-    return formula;
-  }
+  if (["number", "string"].includes(typeof types)) types = [types.toString()];
+  if (!formulaExists(formula)) return formula;
   types = new Set(Array.from(types).filter(t => isKebabCase(t)));
   const roll = new BaseRoll(formula);
-  for (const term of roll._allTerms) {
-    fn(term, types);
-  }
+  for (const term of roll._allTerms) fn(term, types);
   return roll.formula;
 }
 

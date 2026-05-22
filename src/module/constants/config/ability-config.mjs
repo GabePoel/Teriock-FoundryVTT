@@ -21,9 +21,7 @@ export const abilityConfig = {
     strike: "TERIOCK.TERMS.DeliveryPackage.strike",
     touch: "TERIOCK.TERMS.DeliveryPackage.touch",
   },
-  deliveryParent: {
-    item: "TERIOCK.TERMS.DeliveryParent.item",
-  },
+  deliveryParent: { item: "TERIOCK.TERMS.DeliveryParent.item" },
   duration: {
     // no sort
     unit: {
@@ -47,13 +45,8 @@ export const abilityConfig = {
       a2: "TERIOCK.TERMS.ExecutionTime.active.2",
       a3: "TERIOCK.TERMS.ExecutionTime.active.3",
     },
-    reactive: {
-      r0: "TERIOCK.TERMS.ExecutionTime.reactive.0",
-      r1: "TERIOCK.TERMS.ExecutionTime.reactive.1",
-    },
-    passive: {
-      passive: "TERIOCK.TERMS.Maneuver.passive",
-    },
+    reactive: { r0: "TERIOCK.TERMS.ExecutionTime.reactive.0", r1: "TERIOCK.TERMS.ExecutionTime.reactive.1" },
+    passive: { passive: "TERIOCK.TERMS.Maneuver.passive" },
     // no sort
     slow: {
       longRest: "TERIOCK.TERMS.ExecutionTime.slow.longRest",
@@ -80,10 +73,7 @@ export const abilityConfig = {
     passive: "TERIOCK.TERMS.Maneuver.passive",
     slow: "TERIOCK.TERMS.Maneuver.slow",
   },
-  targetParent: {
-    ability: "TERIOCK.TERMS.TargetParent.ability",
-    item: "TERIOCK.TERMS.TargetParent.item",
-  },
+  targetParent: { ability: "TERIOCK.TERMS.TargetParent.ability", item: "TERIOCK.TERMS.TargetParent.item" },
   // no sort
   targets: {
     ability: "TERIOCK.TERMS.Targets.ability",

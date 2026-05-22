@@ -12,16 +12,12 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @returns {Promise<void>}
  */
 export default async function inCombatExpirationDialog(effect, forceDialog = false) {
-  if (effect.system.expirations.combat.what.type === "none" && !forceDialog) {
-    return;
-  }
+  if (effect.system.expirations.combat.what.type === "none" && !forceDialog) return;
   let expire = false;
   if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
     const name = effect.system.fullName;
     expire = await TeriockDialog.confirm({
-      content: _loc("TERIOCK.DIALOGS.InCombatExpiration.contentConfirm", {
-        name,
-      }),
+      content: _loc("TERIOCK.DIALOGS.InCombatExpiration.contentConfirm", { name }),
       modal: true,
       position: { width: 550 },
       rejectClose: false,
@@ -30,9 +26,7 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
         title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", { name }),
       },
     });
-    if (expire) {
-      await effect.system.expire();
-    }
+    if (expire) await effect.system.expire();
   } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
     const contentHtml = document.createElement("div");
     if (effect.system.expirations.description) {
@@ -47,71 +41,48 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
       contentHtml.append(descriptionElement);
     }
     contentHtml.append(
-      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.roll.toFormGroup(
-        { rootId: foundry.utils.randomID() },
-        {
-          name: "roll",
-          value: effect.system.expirations.combat.what.roll,
-        },
-      ),
+      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.roll.toFormGroup({
+        rootId: foundry.utils.randomID(),
+      }, { name: "roll", value: effect.system.expirations.combat.what.roll }),
     );
     contentHtml.append(
-      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.threshold.toFormGroup(
-        { rootId: foundry.utils.randomID() },
-        {
-          name: "threshold",
-          value: effect.system.expirations.combat.what.threshold,
-        },
-      ),
+      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.threshold.toFormGroup({
+        rootId: foundry.utils.randomID(),
+      }, { name: "threshold", value: effect.system.expirations.combat.what.threshold }),
     );
     await new TeriockDialog({
-      buttons: [
-        {
-          action: "roll",
-          default: true,
-          icon: makeIconClass(TERIOCK.display.icons.ui.dice, "button"),
-          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll"),
-          callback: async (_event, button) => {
-            const expirationRoll = new BaseRoll(
-              button.form.elements.namedItem("roll").value,
-              effect.actor.getRollData(),
-              {
-                flavor: _loc("TERIOCK.DIALOGS.InCombatExpiration.rollFlavor", {
-                  name: effect.name,
-                }),
-                styles: { dice: { classes: "condition" } },
-                threshold: Number(button.form.elements.namedItem("threshold").value),
-              },
-            );
-            await expirationRoll.toMessage(
-              {
-                speaker: TeriockChatMessage.getSpeaker({
-                  actor: effect.actor,
-                }),
-              },
-              {
-                messageMode: game.settings.get("core", "messageMode"),
-              },
-            );
-            if (expirationRoll.total >= Number(button.form.elements.namedItem("threshold").value)) {
-              await effect.system.expire();
-            }
-          },
+      buttons: [{
+        action: "roll",
+        default: true,
+        icon: makeIconClass(TERIOCK.display.icons.ui.dice, "button"),
+        label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.roll"),
+        callback: async (_event, button) => {
+          const expirationRoll = new BaseRoll(
+            button.form.elements.namedItem("roll").value,
+            effect.actor.getRollData(),
+            {
+              flavor: _loc("TERIOCK.DIALOGS.InCombatExpiration.rollFlavor", { name: effect.name }),
+              styles: { dice: { classes: "condition" } },
+              threshold: Number(button.form.elements.namedItem("threshold").value),
+            },
+          );
+          await expirationRoll.toMessage({ speaker: TeriockChatMessage.getSpeaker({ actor: effect.actor }) }, {
+            messageMode: game.settings.get("core", "messageMode"),
+          });
+          if (expirationRoll.total >= Number(button.form.elements.namedItem("threshold").value))
+            await effect.system.expire();
         },
-        {
-          action: "remove",
-          icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
-          label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove"),
-          callback: async () => await effect.system.expire(),
-        },
-      ],
+      }, {
+        action: "remove",
+        icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
+        label: _loc("TERIOCK.DIALOGS.InCombatExpiration.BUTTONS.remove"),
+        callback: async () => await effect.system.expire(),
+      }],
       content: contentHtml,
       position: { width: 550 },
       window: {
         icon: makeIconClass(TERIOCK.config.document[effect.type].icon, "title"),
-        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", {
-          name: effect.name,
-        }),
+        title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", { name: effect.name }),
       },
     }).render(true);
   }

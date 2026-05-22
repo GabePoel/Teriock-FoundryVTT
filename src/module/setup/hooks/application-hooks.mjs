@@ -9,13 +9,9 @@ import { makeIconClass } from "../../helpers/utils.mjs";
  * @see {getHeaderControlsApplicationV2}
  */
 function addCardContextMenuEntriesToHeader(application, controls) {
-  if (!application.window.header) {
-    return;
-  }
+  if (!application.window.header) return;
   const document = application.document;
-  if (typeof document.getCardContextMenuEntries !== "function") {
-    return;
-  }
+  if (typeof document.getCardContextMenuEntries !== "function") return;
   const entries = document.getCardContextMenuEntries(document);
   const groups = {};
   const ungrouped = [];
@@ -23,28 +19,21 @@ function addCardContextMenuEntriesToHeader(application, controls) {
   // TODO: Fully commit to either grouped or ungrouped
   // We sort entries by group, but this isn't really necessary since we sort alphabetically anyway
   entries.forEach(entry => {
-    if (entry.group && !groups[entry.group]) {
-      groups[entry.group] = [];
-    }
-    if (entry.group) {
-      groups[entry.group].push(entry);
-    } else {
-      ungrouped.push(entry);
-    }
+    if (entry.group && !groups[entry.group]) groups[entry.group] = [];
+    if (entry.group) groups[entry.group].push(entry);
+    else ungrouped.push(entry);
   });
   Object.values(groups).forEach(g => sorted.push(...g));
   sorted.push(...ungrouped);
-  controls.push(
-    ...entries.map(e => {
-      return {
-        group: e.group,
-        icon: e.icon.split('class="')[1].split('">')[0],
-        label: e.label,
-        onClick: e.onClick,
-        visible: e.visible,
-      };
-    }),
-  );
+  controls.push(...entries.map(e => {
+    return {
+      group: e.group,
+      icon: e.icon.split("class=\"")[1].split("\">")[0],
+      label: e.label,
+      onClick: e.onClick,
+      visible: e.visible,
+    };
+  }));
   sortControls(application, controls);
 }
 
@@ -54,9 +43,7 @@ function addCardContextMenuEntriesToHeader(application, controls) {
  * @see {renderApplicationV2}
  */
 function addDeveloperModeLoggingListener(application) {
-  if (!game.teriock.getSetting("developerMode") || !application.window.header) {
-    return;
-  }
+  if (!game.teriock.getSetting("developerMode") || !application.window.header) return;
   application.window.header.querySelectorAll("[data-action=close]").forEach(el => {
     el.addEventListener("contextmenu", async e => {
       e.preventDefault();
@@ -66,15 +53,11 @@ function addDeveloperModeLoggingListener(application) {
       console.log("Application", application);
       if (application.document) {
         console.log("Document", application.document);
-        if (typeof application.document.getRollData === "function") {
+        if (typeof application.document.getRollData === "function")
           console.log("Roll Data", application.document.getRollData());
-        }
       }
       if (typeof application._prepareContext === "function") {
-        const context = await application._prepareContext({
-          force: false,
-          isFirstRender: false,
-        });
+        const context = await application._prepareContext({ force: false, isFirstRender: false });
         console.log("Context", context);
       }
     });
@@ -87,16 +70,12 @@ function addDeveloperModeLoggingListener(application) {
  * @see {renderApplicationV2}
  */
 function addIdentifierClipboardListener(application) {
-  if (!application.window.header) {
-    return;
-  }
+  if (!application.window.header) return;
   const type = _loc("TERIOCK.TERMS.Common.identifier").toLowerCase();
   const label = _loc(application.document.constructor.metadata.label);
   application.window.header.querySelectorAll("[data-action=copyUuid]").forEach(el =>
     el.addEventListener("auxclick", e => {
-      if (e.button !== 1) {
-        return;
-      }
+      if (e.button !== 1) return;
       e.preventDefault();
       e.stopPropagation();
       e.stopImmediatePropagation();
@@ -109,10 +88,8 @@ function addIdentifierClipboardListener(application) {
         return;
       }
       game.clipboard.copyPlainText(id);
-      ui.notifications.info("DOCUMENT.IdCopiedClipboard", {
-        format: { id, label, type },
-      });
-    }),
+      ui.notifications.info("DOCUMENT.IdCopiedClipboard", { format: { id, label, type } });
+    })
   );
 }
 
@@ -123,9 +100,7 @@ function addIdentifierClipboardListener(application) {
  * @see {getHeaderControlsApplicationV2}
  */
 function addShareImageToHeader(application, controls) {
-  if (!application.window.header) {
-    return;
-  }
+  if (!application.window.header) return;
   controls.push({
     action: "shareImageInChat",
     icon: makeIconClass(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
@@ -141,9 +116,7 @@ function addShareImageToHeader(application, controls) {
  * @see {getHeaderControlsApplicationV2}
  */
 function addWikiOpenToHeader(application, controls) {
-  if (!application.window.header) {
-    return;
-  }
+  if (!application.window.header) return;
   if (application.document.metadata?.wiki && application.document.system["isOnWiki"]) {
     controls.push({
       action: "wikiOpenThis",
@@ -168,21 +141,13 @@ function bindCommonActionsToElement(_application, element) {
  * @see {getHeaderControlsApplicationV2}
  */
 function sortControls(_application, controls) {
-  for (const c of controls) {
-    c.label = _loc(c.label);
-  }
+  for (const c of controls) c.label = _loc(c.label);
   controls = game.i18n.sortObjects(controls, "label");
   controls.sort((a, b) => {
     const getOrder = control => {
-      if (control.action === "attach") {
-        return 1;
-      }
-      if (control.action === "detach") {
-        return 2;
-      }
-      if (control.icon?.includes("delete")) {
-        return 4;
-      }
+      if (control.action === "attach") return 1;
+      if (control.action === "detach") return 2;
+      if (control.icon?.includes("delete")) return 4;
       return 3;
     };
     return getOrder(a) - getOrder(b);

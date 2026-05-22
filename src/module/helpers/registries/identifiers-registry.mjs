@@ -61,15 +61,11 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   #getUuidPriority(uuid) {
     const parsed = foundry.utils.parseUuid(uuid);
     // Null value if the UUID is invalid or if the document is a valid type
-    if (!parsed || !this.#documentNames.has(parsed.type)) {
-      return null;
-    }
+    if (!parsed || !this.#documentNames.has(parsed.type)) return null;
     // Document must either be at the top level of a collection or the second level if it is an allowed embedded type
-    const embeddable =
-      parsed.embedded.length === 0 || (parsed.embedded.length === 2 && this.#embeddedDocumentNames.has(parsed.type));
-    if (!embeddable) {
-      return null;
-    }
+    const embeddable = parsed.embedded.length === 0
+      || (parsed.embedded.length === 2 && this.#embeddedDocumentNames.has(parsed.type));
+    if (!embeddable) return null;
     let level = 1;
     // Compendium collections are always prioritized over world collections
     if (parsed.collection?.collection?.startsWith("teriock.")) {
@@ -105,30 +101,21 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    */
   #track(identifier, uuid) {
     const priority = this.#getUuidPriority(uuid);
-    if (priority === null) {
-      return;
-    }
-    if (!this.#identifiers.has(identifier)) {
-      this.#identifiers.set(identifier, new Map());
-    }
+    if (priority === null) return;
+    if (!this.#identifiers.has(identifier)) this.#identifiers.set(identifier, new Map());
     this.#identifiers.get(identifier).set(uuid, priority);
   }
 
   /**
-   *
    * @param {UUID<TeriockJournalEntry>} uuid
    * @returns {Promise<void>}
    */
   async #trackJournalEntry(uuid) {
     const journalEntry = await fromUuid(uuid);
-    if (!journalEntry) {
-      return;
-    }
+    if (!journalEntry) return;
     for (const p of journalEntry.pages) {
       const typedIdentifier = p.typedIdentifier;
-      if (typedIdentifier) {
-        this.#track(typedIdentifier, p.uuid);
-      }
+      if (typedIdentifier) this.#track(typedIdentifier, p.uuid);
     }
   }
 
@@ -167,13 +154,9 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @returns {UUID<IdentifiableDocument>|undefined}
    */
   get(identifier) {
-    if (!this.active) {
-      return undefined;
-    }
+    if (!this.active) return undefined;
     const group = this.#identifiers.get(identifier);
-    if (!group || group.size === 0) {
-      return undefined;
-    }
+    if (!group || group.size === 0) return undefined;
     let highestPriority = -Infinity;
     let canonicalUuid = undefined;
     for (const [uuid, priority] of group.entries()) {
@@ -210,9 +193,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
           const type = d.type;
           const identifier = d.system?.identifier;
           const uuid = d.uuid;
-          if (!type || !identifier || !uuid || d.system?._sup) {
-            continue;
-          }
+          if (!type || !identifier || !uuid || d.system?._sup) continue;
           const typedIdentifier = `${type}:${identifier}`;
           this.#track(typedIdentifier, uuid);
         }
@@ -233,14 +214,10 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @param {IdentifiableDocument} document
    */
   trackDocument(document) {
-    if (!this.#documentNames.has(document.documentName)) {
-      return;
-    }
+    if (!this.#documentNames.has(document.documentName)) return;
     const uuid = document.uuid;
     const identifier = document.typedIdentifier;
-    if (!uuid || !identifier || document.sup) {
-      return;
-    }
+    if (!uuid || !identifier || document.sup) return;
     this.track(identifier, uuid);
   }
 
@@ -251,13 +228,9 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    */
   untrack(identifier, uuid) {
     const group = this.#identifiers.get(identifier);
-    if (!group) {
-      return;
-    }
+    if (!group) return;
     group.delete(uuid);
-    if (group.size === 0) {
-      this.#identifiers.delete(identifier);
-    }
+    if (group.size === 0) this.#identifiers.delete(identifier);
   }
 
   /**
@@ -265,14 +238,10 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @param {IdentifiableDocument} document
    */
   untrackDocument(document) {
-    if (!this.#documentNames.has(document.documentName)) {
-      return;
-    }
+    if (!this.#documentNames.has(document.documentName)) return;
     const uuid = document.uuid;
     const identifier = document.typedIdentifier;
-    if (!uuid || !identifier) {
-      return;
-    }
+    if (!uuid || !identifier) return;
     this.untrack(identifier, uuid);
   }
 }

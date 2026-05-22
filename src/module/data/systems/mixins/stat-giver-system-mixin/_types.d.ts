@@ -2,11 +2,6 @@ import { HpPoolModel, MpPoolModel } from "../../../models/stat-pool-models/_modu
 
 declare global {
   namespace Teriock.Models {
-    export type StatGiverSystemData = {
-      statDice: {
-        hp: HpPoolModel;
-        mp: MpPoolModel;
-      };
-    };
+    export type StatGiverSystemData = { statDice: { hp: HpPoolModel, mp: MpPoolModel } };
   }
 }

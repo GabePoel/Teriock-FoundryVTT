@@ -10,9 +10,7 @@ export default Base => {
      */
     class ImageEditingCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { editImage: this._onEditImage },
-      };
+      static DEFAULT_OPTIONS = { actions: { editImage: this._onEditImage } };
 
       /**
        * Opens image picker for editing document images.

@@ -7,9 +7,7 @@ await tm.utils.progressBar(
       const indexes = tm.sort.docSort(p.index.contents.filter(d => !d?.system?._sup));
       await tm.utils.progressBar(
         indexes,
-        _loc("TERIOCK.DIALOGS.RemoveCompendiumSource.messageNamed", {
-          name: _loc(p.title),
-        }),
+        _loc("TERIOCK.DIALOGS.RemoveCompendiumSource.messageNamed", { name: _loc(p.title) }),
         async i => {
           const doc = await tm.resolve.resolveDocument(i);
           await doc.update({ "_stats.compendiumSource": null });

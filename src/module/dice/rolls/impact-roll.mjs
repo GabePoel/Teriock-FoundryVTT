@@ -29,11 +29,8 @@ export default class ImpactRoll extends BaseRoll {
    * Set the flavor if there's not one already defined.
    */
   #setImpactFlavor() {
-    if (this.hasImpact) {
-      this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", {
-        value: impactConfig[this.impact]?.label,
-      });
-    }
+    if (this.hasImpact)
+      this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", { value: impactConfig[this.impact]?.label });
   }
 
   /**
@@ -63,53 +60,41 @@ export default class ImpactRoll extends BaseRoll {
 
   /** @inheritDoc */
   _getFormulaContextOptions(options = {}) {
-    return [
-      {
-        icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
-        label: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
-        onClick: async () => {
-          const boostedRoll = await this.boost(this.options);
-          await boostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
-        },
+    return [{
+      icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
+      label: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
+      onClick: async () => {
+        const boostedRoll = await this.boost(this.options);
+        await boostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
-      {
-        icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
-        label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
-        onClick: async () => {
-          const deboostedRoll = await this.deboost(this.options);
-          await deboostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
-        },
+    }, {
+      icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
+      label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
+      onClick: async () => {
+        const deboostedRoll = await this.deboost(this.options);
+        await deboostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
-      ...super._getFormulaContextOptions(options),
-    ];
+    }, ...super._getFormulaContextOptions(options)];
   }
 
   /** @inheritDoc */
   _getTotalContextOptions(_options = {}) {
     return [
-      ...Object.values(impactConfig)
-        .filter(option => !option?.hidden)
-        .map(option => {
-          return {
-            icon: makeIcon(option.icon, "contextMenu"),
-            label: option.take,
-            onClick: async () => game.actors.selected.forEach(a => option.apply(a, this.total)),
-          };
-        }),
+      ...Object.values(impactConfig).filter(option => !option?.hidden).map(option => {
+        return {
+          icon: makeIcon(option.icon, "contextMenu"),
+          label: option.take,
+          onClick: async () => game.actors.selected.forEach(a => option.apply(a, this.total)),
+        };
+      }),
       ...super._getTotalContextOptions(_options),
     ];
   }
 
   /** @inheritDoc */
   async getActivations() {
-    if (this.hasImpact) {
-      return [
-        new teriock.data.pseudoDocuments.activations.TakeActivation({
-          amount: this.total,
-          impact: this.impact,
-        }),
-      ];
-    }
+    if (this.hasImpact)
+      return [new teriock.data.pseudoDocuments.activations.TakeActivation({ amount: this.total, impact: this.impact })];
     return [];
   }
 }

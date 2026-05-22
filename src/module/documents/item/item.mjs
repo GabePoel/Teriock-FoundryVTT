@@ -14,19 +14,19 @@ const { Item } = foundry.documents;
  * @mixes ParentDocument
  * @mixes RetrievalDocument
  */
-export default class TeriockItem extends mixClasses(
-  Item,
-  mixins.BaseDocumentMixin,
-  mixins.CommonDocumentMixin,
-  mixins.ChildDocumentMixin,
-  mixins.ParentDocumentMixin,
-  mixins.RetrievalDocumentMixin,
-) {
+export default class TeriockItem
+  extends mixClasses(
+    Item,
+    mixins.BaseDocumentMixin,
+    mixins.CommonDocumentMixin,
+    mixins.ChildDocumentMixin,
+    mixins.ParentDocumentMixin,
+    mixins.RetrievalDocumentMixin,
+  )
+{
   /** @inheritDoc */
   static get documentMetadata() {
-    return Object.assign(super.documentMetadata, {
-      types: Object.keys(CONFIG.Item.dataModels),
-    });
+    return Object.assign(super.documentMetadata, { types: Object.keys(CONFIG.Item.dataModels) });
   }
 
   /**
@@ -38,11 +38,7 @@ export default class TeriockItem extends mixClasses(
    */
   static async _onCreateOperation(documents, operation, user) {
     const actors = new Set();
-    for (const d of documents) {
-      if (d.actor) {
-        actors.add(d.actor);
-      }
-    }
+    for (const d of documents) if (d.actor) actors.add(d.actor);
     await Promise.all(actors.map(a => a._processStagedItemCreations()));
     return super._onCreateOperation(documents, operation, user);
   }
@@ -56,11 +52,7 @@ export default class TeriockItem extends mixClasses(
    */
   static async _onDeleteOperation(documents, operation, user) {
     const actors = new Set();
-    for (const d of documents) {
-      if (d.actor) {
-        actors.add(d.actor);
-      }
-    }
+    for (const d of documents) if (d.actor) actors.add(d.actor);
     await Promise.all(actors.map(a => a._processStagedItemDeletions()));
     return super._onDeleteOperation(documents, operation, user);
   }
@@ -73,9 +65,7 @@ export default class TeriockItem extends mixClasses(
    * @returns {Promise<boolean|void>}
    */
   static async _preCreateOperation(documents, operation, user) {
-    for (const d of documents.filter(d => d.actor)) {
-      d.actor._stagedItemCreations = new Set();
-    }
+    for (const d of documents.filter(d => d.actor)) d.actor._stagedItemCreations = new Set();
     return super._preCreateOperation(documents, operation, user);
   }
 
@@ -87,9 +77,7 @@ export default class TeriockItem extends mixClasses(
    * @returns {Promise<boolean|void>}
    */
   static async _preDeleteOperation(documents, operation, user) {
-    for (const d of documents.filter(d => d.actor)) {
-      d.actor._stagedItemDeletions = new Set();
-    }
+    for (const d of documents.filter(d => d.actor)) d.actor._stagedItemDeletions = new Set();
     return super._preDeleteOperation(documents, operation, user);
   }
 
@@ -123,9 +111,7 @@ export default class TeriockItem extends mixClasses(
    * @returns {Generator<AnyActiveEffect, void, void>}
    */
   *allApplicableEffects() {
-    for (const effect of this.effects) {
-      yield effect;
-    }
+    for (const effect of this.effects) yield effect;
   }
 
   /**
@@ -134,19 +120,13 @@ export default class TeriockItem extends mixClasses(
    */
   applyActiveEffects(phase) {
     const ActiveEffect = foundry.documents.ActiveEffect.implementation;
-    if (!(phase in ActiveEffect.CHANGE_PHASES)) {
-      return;
-    }
+    if (!(phase in ActiveEffect.CHANGE_PHASES)) return;
     /** @type {ActiveEffectChangeData[]} */
     const changes = [];
     for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) {
-        continue;
-      }
+      if (!effect.active) continue;
       for (const change of effect.system.itemChanges) {
-        if (change.key === "" || change.phase !== phase) {
-          continue;
-        }
+        if (change.key === "" || change.phase !== phase) continue;
         const copy = foundry.utils.deepClone(change);
         copy.effect = effect;
         changes.push(copy);
@@ -156,12 +136,8 @@ export default class TeriockItem extends mixClasses(
     const overrides = {};
     const replacementData = this.getRollData();
     for (const change of changes) {
-      const result = ActiveEffect.applyChange(this, change, {
-        replacementData,
-      });
-      if (foundry.utils.isPlainObject(result)) {
-        Object.assign(overrides, result);
-      }
+      const result = ActiveEffect.applyChange(this, change, { replacementData });
+      if (foundry.utils.isPlainObject(result)) Object.assign(overrides, result);
     }
     foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
   }
@@ -175,8 +151,6 @@ export default class TeriockItem extends mixClasses(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.isTop) {
-      this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
-    }
+    if (this.isTop) this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
   }
 }

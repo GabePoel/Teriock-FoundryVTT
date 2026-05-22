@@ -15,9 +15,7 @@ export default function SidebarMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        if (game.teriock.getSetting("sidebarTooltips")) {
-          bindCommonActions(this.element);
-        }
+        if (game.teriock.getSetting("sidebarTooltips")) bindCommonActions(this.element);
       }
     }
   );

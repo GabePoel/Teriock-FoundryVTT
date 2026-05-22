@@ -10,29 +10,23 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
  */
 export default async function changeSizeDialog(actor, species) {
   if (actor.system.size.number !== species.system.size.value) {
-    let content =
-      `<p>@UUID[${actor.uuid}] is size ${actor.system.size.number} and @UUID[${species.uuid}] is size` +
-      ` ${species.system.size.value} by default. Would you like to update the actor's size?</p>`;
+    let content = `<p>@UUID[${actor.uuid}] is size ${actor.system.size.number} and @UUID[${species.uuid}] is size`
+      + ` ${species.system.size.value} by default. Would you like to update the actor's size?</p>`;
     content = await TeriockTextEditor.enrichHTML(content);
     const dialog = new TeriockDialog({
-      buttons: [
-        {
-          action: "changeSize",
-          default: true,
-          icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-          label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.yes"),
-          callback: async () => {
-            await actor.update({
-              "system.size.number": species.system.size.value,
-            });
-          },
+      buttons: [{
+        action: "changeSize",
+        default: true,
+        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
+        label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.yes"),
+        callback: async () => {
+          await actor.update({ "system.size.number": species.system.size.value });
         },
-        {
-          action: "no",
-          icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
-          label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.no"),
-        },
-      ],
+      }, {
+        action: "no",
+        icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
+        label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.no"),
+      }],
       content,
       modal: true,
       window: {

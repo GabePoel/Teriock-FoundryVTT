@@ -29,19 +29,17 @@ export default class MacroActivation extends BaseActivation {
 
   /** @inheritDoc */
   async primaryAction() {
-    const scope = Object.assign(
-      {
-        activation: this,
-        actor:
-          this.actors.length > 0 ? this.actors[0] : TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker()),
-        actors: this.actors,
-        event: this.event,
-        message: this.document,
-        speaker: TeriockChatMessage.getSpeaker(),
-        tokens: this.tokens,
-      },
-      this.scope ?? {},
-    );
+    const scope = Object.assign({
+      activation: this,
+      actor: this.actors.length > 0
+        ? this.actors[0]
+        : TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker()),
+      actors: this.actors,
+      event: this.event,
+      message: this.document,
+      speaker: TeriockChatMessage.getSpeaker(),
+      tokens: this.tokens,
+    }, this.scope ?? {});
     const macro = await fromUuid(this.macro);
     await macro.execute(scope);
   }

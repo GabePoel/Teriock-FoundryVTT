@@ -63,9 +63,7 @@ Hooks.once("i18nInit", () => {
   });
   Object.entries(abilityConfig.executionTime).forEach(([_group, values]) => {
     Object.entries(values).forEach(([k, v]) => {
-      abilityContext[`time.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", {
-        name: _loc(v),
-      });
+      abilityContext[`time.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.time", { name: _loc(v) });
     });
   });
   Object.entries(abilityConfig.expansion).forEach(([k, v]) => {
@@ -77,27 +75,19 @@ Hooks.once("i18nInit", () => {
     abilityContext[`expansion.attr.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansionAttribute", { name });
   });
   Object.entries(effectConfig.form).forEach(([k, v]) => {
-    abilityContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", {
-      name: _loc(v.label),
-    });
+    abilityContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", { name: _loc(v.label) });
   });
   Object.entries(costConfig.tweaks).forEach(([k, v]) => {
-    abilityContext[`tweaks.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.tweak", {
-      name: _loc(v.label),
-    });
+    abilityContext[`tweaks.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.tweak", { name: _loc(v.label) });
   });
   Object.entries(costConfig.components.keys).forEach(([k, v]) => {
     abilityContext[`components.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.component", { name: _loc(v) });
   });
   Object.entries(costConfig.primary.keys).forEach(([k, v]) => {
-    abilityContext[`costs.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.cost", {
-      name: _loc(v.label),
-    });
+    abilityContext[`costs.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.cost", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    abilityContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", {
-      name: _loc(v),
-    });
+    abilityContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: _loc(v) });
     abilityContext[`class.${k.slice(0, 3).toLowerCase()}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", {
       name: _loc(v),
     });

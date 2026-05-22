@@ -66,12 +66,7 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {Teriock.Units.UnitEntry[]}
    */
   static get infiniteChoiceEntries() {
-    return [
-      {
-        id: "unlimited",
-        label: _loc("TERIOCK.MODELS.BaseUnit.UNITS.unlimited"),
-      },
-    ];
+    return [{ id: "unlimited", label: _loc("TERIOCK.MODELS.BaseUnit.UNITS.unlimited") }];
   }
 
   /** @returns {Teriock.Units.UnitEntry[]} */
@@ -98,14 +93,9 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   #convert(value) {
     const unitType = this.unitType;
-    if (unitType === "zero") {
-      return 0;
-    }
-    if (unitType === "infinite") {
-      return Infinity;
-    } else {
-      return value;
-    }
+    if (unitType === "zero") return 0;
+    if (unitType === "infinite") return Infinity;
+    else return value;
   }
 
   /** @inheritDoc */
@@ -118,9 +108,7 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {string}
    */
   get _updateTitle() {
-    return _loc("TERIOCK.MODELS.BaseUnit.UPDATE.basic", {
-      label: this.schema.label,
-    });
+    return _loc("TERIOCK.MODELS.BaseUnit.UPDATE.basic", { label: this.schema.label });
   }
 
   /**
@@ -128,9 +116,7 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {string}
    */
   get abbreviation() {
-    if (this.unitType === "finite") {
-      return `${this.formula} ${this.symbol}`;
-    }
+    if (this.unitType === "finite") return `${this.formula} ${this.symbol}`;
     return this.text;
   }
 
@@ -140,14 +126,9 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   get conversion() {
     const unitType = this.unitType;
-    if (unitType === "zero") {
-      return 0;
-    }
-    if (unitType === "infinite") {
-      return Infinity;
-    } else {
-      return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1;
-    }
+    if (unitType === "zero") return 0;
+    if (unitType === "infinite") return Infinity;
+    else return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1;
   }
 
   /** @inheritDoc */
@@ -158,18 +139,12 @@ export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */
   get formula() {
     const unitType = this.unitType;
-    if (unitType === "zero") {
-      return "0";
-    }
-    if (unitType === "infinite") {
-      return "9".repeat(32);
-    } else {
+    if (unitType === "zero") return "0";
+    if (unitType === "infinite") return "9".repeat(32);
+    else {
       const conversion = this.conversion;
-      if (conversion === 1) {
-        return super.formula;
-      } else {
-        return multiplyFormula(super.formula, conversion.toString());
-      }
+      if (conversion === 1) return super.formula;
+      else return multiplyFormula(super.formula, conversion.toString());
     }
   }
 
@@ -204,13 +179,9 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {"zero" | "finite" | "infinite"}
    */
   get unitType() {
-    if (this.constructor.zeroChoiceEntries.map(e => e.id).includes(this.unit)) {
-      return "zero";
-    } else if (this.constructor.finiteChoiceEntries.map(e => e.id).includes(this.unit)) {
-      return "finite";
-    } else {
-      return "infinite";
-    }
+    if (this.constructor.zeroChoiceEntries.map(e => e.id).includes(this.unit)) return "zero";
+    else if (this.constructor.finiteChoiceEntries.map(e => e.id).includes(this.unit)) return "finite";
+    else return "infinite";
   }
 
   /** @inheritDoc */
@@ -225,9 +196,7 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   convertTo(unit) {
     const unitType = this.unitType;
-    if (unitType !== "finite") {
-      return this.currentValue;
-    }
+    if (unitType !== "finite") return this.currentValue;
     return (this.constructor.finiteChoiceEntries.find(e => e.id === unit).conversion || 1) * this.currentValue;
   }
 
@@ -239,35 +208,28 @@ export default class BaseUnitModel extends EvaluationModel {
     const group = await this.getEditor();
     const document = this.document;
     const dialog = new UnitDialog({
-      buttons: [
-        {
-          action: "update",
-          default: true,
-          icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-          label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
-          /**
-           * @param {PointerEvent} _event
-           * @param {HTMLButtonElement} button
-           */
-          callback: async function (_event, button) {
-            const namedElements = /** @type {HTMLInputElement[]} */ Array.from(button.form.elements).filter(el =>
-              el.hasAttribute("name"),
-            );
-            const updateData = Object.fromEntries(
-              namedElements.map(el => [el.getAttribute("name"), el.type === "checkbox" ? el.checked : el.value]),
-            );
-            await document.update(updateData);
-          },
+      buttons: [{
+        action: "update",
+        default: true,
+        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
+        label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
+        /**
+         * @param {PointerEvent} _event
+         * @param {HTMLButtonElement} button
+         */
+        callback: async function(_event, button) {
+          const namedElements = /** @type {HTMLInputElement[]} */ Array.from(button.form.elements).filter(el =>
+            el.hasAttribute("name")
+          );
+          const updateData = Object.fromEntries(
+            namedElements.map(el => [el.getAttribute("name"), el.type === "checkbox" ? el.checked : el.value]),
+          );
+          await document.update(updateData);
         },
-      ],
+      }],
       content: group.outerHTML,
-      position: {
-        width: 500,
-      },
-      window: {
-        icon: makeIconClass(this.icon, "title"),
-        title: this._updateTitle,
-      },
+      position: { width: 500 },
+      window: { icon: makeIconClass(this.icon, "title"), title: this._updateTitle },
     });
     dialog.unitModel = this;
     await dialog.render(true);

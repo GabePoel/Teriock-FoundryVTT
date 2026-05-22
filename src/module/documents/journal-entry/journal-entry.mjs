@@ -11,11 +11,9 @@ const { JournalEntry } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
-export default class TeriockJournalEntry extends mixClasses(
-  JournalEntry,
-  mixins.BaseDocumentMixin,
-  mixins.EmbedCardDocumentMixin,
-) {
+export default class TeriockJournalEntry
+  extends mixClasses(JournalEntry, mixins.BaseDocumentMixin, mixins.EmbedCardDocumentMixin)
+{
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, { img: "icons/svg/book.svg" });

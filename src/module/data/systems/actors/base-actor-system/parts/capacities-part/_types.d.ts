@@ -1,12 +1,7 @@
 declare global {
   namespace Teriock.Models {
     export type ActorCapacitiesPartData = {
-      carryingCapacity: {
-        factor: number;
-        heavy: number;
-        light: number;
-        max: number;
-      };
+      carryingCapacity: { factor: number, heavy: number, light: number, max: number };
       /** <base> Encumbrance level */
       encumbranceLevel: number;
       /** <schema> Size */

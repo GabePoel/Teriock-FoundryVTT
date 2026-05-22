@@ -49,9 +49,7 @@ export default Base =>
             const fallbackImg = getImage("effectTypes", tv.rule);
             const img = ck === "other" ? fallbackImg : getImage(cv.imgCategory, s, fallbackImg);
             let title = s;
-            if (ck !== "other") {
-              title = foundry.utils.getProperty(TERIOCK, cv.choices)[toCamelCase(s)];
-            }
+            if (ck !== "other") title = foundry.utils.getProperty(TERIOCK, cv.choices)[toCamelCase(s)];
             const entry = {
               action: tv.action,
               img,

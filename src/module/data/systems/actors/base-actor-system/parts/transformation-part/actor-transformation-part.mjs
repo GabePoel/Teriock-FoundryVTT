@@ -33,9 +33,9 @@ export default Base => {
       prepareBaseData() {
         super.prepareBaseData();
         if (
-          this.isTransformed &&
-          this.transformation.primary?.system.transformation.override.has("size") &&
-          this.transformation.primary?.system.primarySpecies?.system.size.value
+          this.isTransformed
+          && this.transformation.primary?.system.transformation.override.has("size")
+          && this.transformation.primary?.system.primarySpecies?.system.size.value
         ) {
           this.size.number = this.transformation.primary?.system.primarySpecies.system.size.value || this.size.number;
         }

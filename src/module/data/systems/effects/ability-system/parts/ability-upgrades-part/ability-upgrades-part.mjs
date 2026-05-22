@@ -27,12 +27,7 @@ export default Base => {
             score: new fields.SchemaField({
               attribute: attributeField({ nullable: true, unp: false }),
               text: initialText(),
-              value: new fields.NumberField({
-                initial: 0,
-                max: 5,
-                min: -3,
-                nullable: false,
-              }),
+              value: new fields.NumberField({ initial: 0, max: 5, min: -3, nullable: false }),
             }),
           }),
         });
@@ -42,10 +37,7 @@ export default Base => {
       static migrateData(source, options, state) {
         if (source.improvements) {
           source.upgrades = {
-            competence: {
-              attribute: source.improvements.featSaveImprovement.attribute,
-              value: 1,
-            },
+            competence: { attribute: source.improvements.featSaveImprovement.attribute, value: 1 },
             score: {
               attribute: source.improvements.attributeImprovement.attribute,
               value: source.improvements.attributeImprovement.minVal,
@@ -74,13 +66,9 @@ export default Base => {
        */
       get _displayInputsUpgrades() {
         const inputs = ["system.upgrades.score.attribute"];
-        if (this.upgrades.score.attribute) {
-          inputs.push("system.upgrades.score.value");
-        }
+        if (this.upgrades.score.attribute) inputs.push("system.upgrades.score.value");
         inputs.push("system.upgrades.competence.attribute");
-        if (this.upgrades.competence.attribute) {
-          inputs.push("system.upgrades.competence.value");
-        }
+        if (this.upgrades.competence.attribute) inputs.push("system.upgrades.competence.value");
         return inputs;
       }
 
@@ -128,16 +116,13 @@ export default Base => {
         if (this.upgrades.score.attribute) {
           const attribute = attributeLink(this.upgrades.score.attribute);
           const value = this.upgrades.score.value;
-          this.upgrades.score.text = `<p>${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description", {
-            attribute,
-            value,
-          })}</p>`;
+          this.upgrades.score.text = `<p>${
+            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.description", { attribute, value })
+          }</p>`;
         } else {
           this.upgrades.score.text = "";
         }
-        if (this.upgrades.competence.value === 0) {
-          this.upgrades.competence.attribute = null;
-        }
+        if (this.upgrades.competence.value === 0) this.upgrades.competence.attribute = null;
         if (this.upgrades.competence.attribute) {
           const attribute = attributeLink(this.upgrades.competence.attribute);
           const amount = this.upgrades.competence.value;
@@ -146,11 +131,9 @@ export default Base => {
           const upgrade = `@L[Core:${page}]{${level.toLowerCase()}}`;
           const savesLabel = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves");
           const saves = `@L[Core:Feat Interaction]{${savesLabel}}`;
-          this.upgrades.competence.text = `<p>${_loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description", {
-            attribute,
-            saves,
-            upgrade,
-          })}</p>`;
+          this.upgrades.competence.text = `<p>${
+            _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description", { attribute, saves, upgrade })
+          }</p>`;
         } else {
           this.upgrades.competence.text = "";
         }
@@ -165,9 +148,7 @@ export default Base => {
  * @returns {string}
  */
 function attributeLink(attribute) {
-  if (!TERIOCK.config.attribute[attribute]) {
-    return "";
-  }
+  if (!TERIOCK.config.attribute[attribute]) return "";
   const page = TERIOCK.config.attribute[attribute].page;
   const label = TERIOCK.config.attribute[attribute].label;
   return `@L[Core:${page}]{${label}}`;

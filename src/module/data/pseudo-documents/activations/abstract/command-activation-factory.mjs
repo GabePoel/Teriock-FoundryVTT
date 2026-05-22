@@ -20,9 +20,7 @@ export default function CommandActivationFactory(command) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.assign(super.defineSchema(), {
-        options: new fields.ObjectField(),
-      });
+      return Object.assign(super.defineSchema(), { options: new fields.ObjectField() });
     }
 
     /** @inheritDoc */
@@ -37,22 +35,14 @@ export default function CommandActivationFactory(command) {
 
     /** @inheritDoc */
     async primaryAction() {
-      if (!this.checkActors()) {
-        return;
-      }
-      for (const a of this.actors) {
-        await command.primary(a, Object.assign({ event: this.event }, this.options));
-      }
+      if (!this.checkActors()) return;
+      for (const a of this.actors) await command.primary(a, Object.assign({ event: this.event }, this.options));
     }
 
     /** @inheritDoc */
     async secondaryAction() {
-      if (!this.checkActors()) {
-        return;
-      }
-      for (const a of this.actors) {
-        await command.secondary(a, Object.assign({ event: this.event }, this.options));
-      }
+      if (!this.checkActors()) return;
+      for (const a of this.actors) await command.secondary(a, Object.assign({ event: this.event }, this.options));
     }
   }
 

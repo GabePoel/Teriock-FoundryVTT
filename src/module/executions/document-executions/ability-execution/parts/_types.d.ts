@@ -3,25 +3,24 @@ import BaseDocumentExecution from "../../base-document-execution/base-document-e
 
 declare global {
   namespace Teriock.Execution {
-    export type AbilityExecutionOptions = DocumentExecutionOptions &
-      ThresholdExecutionOptions & {
-        armament?: TeriockArmament;
-        attackPenalty?: string;
-        av0?: boolean;
-        limb?: boolean;
-        noGp?: boolean;
-        noHeighten?: boolean;
-        noHp?: boolean;
-        noLp?: boolean;
-        noMp?: boolean;
-        noTemplate?: boolean;
-        piercing?: Teriock.System.PiercingLevel;
-        sb?: boolean;
-        source?: TeriockAbility;
-        ub?: boolean;
-        vitals?: boolean;
-        warded?: boolean;
-      };
+    export type AbilityExecutionOptions = DocumentExecutionOptions & ThresholdExecutionOptions & {
+      armament?: TeriockArmament;
+      attackPenalty?: string;
+      av0?: boolean;
+      limb?: boolean;
+      noGp?: boolean;
+      noHeighten?: boolean;
+      noHp?: boolean;
+      noLp?: boolean;
+      noMp?: boolean;
+      noTemplate?: boolean;
+      piercing?: Teriock.System.PiercingLevel;
+      sb?: boolean;
+      source?: TeriockAbility;
+      ub?: boolean;
+      vitals?: boolean;
+      warded?: boolean;
+    };
   }
 }
 
@@ -30,17 +29,9 @@ declare module "./ability-execution-constructor.mjs" {
     armament: TeriockArmament | null;
     attackPenalty: number;
     attackPenaltyFormula: string;
-    costs: {
-      gp: number;
-      hp: number;
-      lp: number;
-      mp: number;
-    };
+    costs: { gp: number, hp: number, lp: number, mp: number };
     executor: TeriockToken | null;
-    flags: {
-      noHeighten: boolean;
-      noTemplate: boolean;
-    };
+    flags: { noHeighten: boolean, noTemplate: boolean };
     heightened: number;
     targets: Set<TeriockToken>;
     vitals: boolean;

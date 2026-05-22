@@ -20,12 +20,9 @@ const { TableResult } = foundry.documents;
  * @mixes PanelDocument
  * @implements {Teriock.Documents.TableResultInterface}
  */
-export default class TeriockTableResult extends mixClasses(
-  TableResult,
-  mixins.BaseDocumentMixin,
-  mixins.PanelDocumentMixin,
-  mixins.EmbedCardDocumentMixin,
-) {
+export default class TeriockTableResult
+  extends mixClasses(TableResult, mixins.BaseDocumentMixin, mixins.PanelDocumentMixin, mixins.EmbedCardDocumentMixin)
+{
   static migrateData(source, options, state) {
     migrateValueTransform(source, "documentUuid", migrateUuid);
     return super.migrateData(source, options, state);
@@ -33,11 +30,7 @@ export default class TeriockTableResult extends mixClasses(
 
   /** @inheritDoc */
   get embedParts() {
-    return Object.assign(super.embedParts, {
-      makeTooltip: true,
-      subtitle: this.type,
-      text: this.parent.name || "",
-    });
+    return Object.assign(super.embedParts, { makeTooltip: true, subtitle: this.type, text: this.parent.name || "" });
   }
 
   /**
@@ -45,53 +38,31 @@ export default class TeriockTableResult extends mixClasses(
    * @returns {Promise<Teriock.Activations.Any[]>}
    */
   async getActivations() {
-    if (!this.documentUuid) {
-      return [];
-    }
+    if (!this.documentUuid) return [];
     const parsed = foundry.utils.parseUuid(this.documentUuid);
-    if (!parsed) {
-      return [];
-    }
+    if (!parsed) return [];
     const doc = await fromUuid(this.documentUuid);
-    if (!doc) {
-      return [];
-    }
+    if (!doc) return [];
     const activations = [];
     const name = doc.fullName ?? doc.name ?? "";
     if (doc.documentName === "Actor") {
       const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
         name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
       });
-      activations.push(
-        new SummonActivation({
-          display: { label },
-          uuids: [this.documentUuid],
-        }),
-      );
+      activations.push(new SummonActivation({ display: { label }, uuids: [this.documentUuid] }));
     }
-    if (doc.documentName === "Macro") {
-      activations.push(
-        new MacroActivation({
-          display: { label: name },
-          macro: this.documentUuid,
-        }),
-      );
-    }
+    if (doc.documentName === "Macro")
+      activations.push(new MacroActivation({ display: { label: name }, macro: this.documentUuid }));
     if (["ActiveEffect", "Item", "RollTable"].includes(doc.documentName)) {
       const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name });
       const icon = TERIOCK.config.document[doc.type]?.icon;
       activations.push(
-        new UseExternalActivation({
-          display: { icon, label },
-          options: { icon, label, uuid: this.documentUuid },
-        }),
+        new UseExternalActivation({ display: { icon, label }, options: { icon, label, uuid: this.documentUuid } }),
       );
     }
     if (["ActiveEffect", "Item"].includes(doc.documentName) && doc.type !== "ability") {
       const label = name
-        ? _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", {
-            name,
-          })
+        ? _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", { name })
         : _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
       const activationFamily = { root: { uuid: this.documentUuid } };
       activations.push(
@@ -108,15 +79,12 @@ export default class TeriockTableResult extends mixClasses(
 
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
-    return [
-      {
-        icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
-        onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
-        visible: () => this.documentUuid,
-      },
-      ...super.getCardContextMenuEntries(doc),
-    ];
+    return [{
+      icon: makeIcon(TERIOCK.display.icons.ui.document, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.TableResult.MENU.open"),
+      onClick: async () => await (await fromUuid(this.documentUuid))?.sheet.render(true),
+      visible: () => this.documentUuid,
+    }, ...super.getCardContextMenuEntries(doc)];
   }
 
   /** @inheritDoc */
@@ -126,10 +94,7 @@ export default class TeriockTableResult extends mixClasses(
     parts.icon = icons.document.tableResult;
     parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");
     parts.image = this.icon;
-    parts.blocks.push({
-      text: this.description,
-      title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-    });
+    parts.blocks.push({ text: this.description, title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label") });
     parts.bars.push({
       icon: TERIOCK.display.icons.ui.info,
       label: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.resultType"),
@@ -137,23 +102,19 @@ export default class TeriockTableResult extends mixClasses(
     });
     if (this.documentUuid) {
       const index = fromUuidSync(this.documentUuid);
-      parts.associations = [
-        {
-          cards: [
-            {
-              draggable: true,
-              id: index._id,
-              img: index.img,
-              makeTooltip: true,
-              name: index.fullName || index.name,
-              type: index.type || "base",
-              uuid: index.uuid,
-            },
-          ],
-          icon: TERIOCK.display.icons.ui.document,
-          title: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.documents"),
-        },
-      ];
+      parts.associations = [{
+        cards: [{
+          draggable: true,
+          id: index._id,
+          img: index.img,
+          makeTooltip: true,
+          name: index.fullName || index.name,
+          type: index.type || "base",
+          uuid: index.uuid,
+        }],
+        icon: TERIOCK.display.icons.ui.document,
+        title: _loc("TERIOCK.SYSTEMS.TableResult.PANELS.documents"),
+      }];
     }
     return parts;
   }

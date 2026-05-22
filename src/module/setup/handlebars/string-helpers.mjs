@@ -10,20 +10,12 @@ function cleanBars(bars) {
   for (const bar of bars) {
     const newBar = { icon: bar?.icon, label: bar?.label };
     const newWrappers = (bar?.wrappers || []).filter(Boolean);
-    if (newWrappers.length > 0) {
-      newBar.wrappers = newWrappers;
-    }
-    if (newBar.wrappers) {
-      newBars.push(newBar);
-    }
+    if (newWrappers.length > 0) newBar.wrappers = newWrappers;
+    if (newBar.wrappers) newBars.push(newBar);
   }
   return newBars;
 }
 
-const stringHelperEntries = [
-  ["cleanBars", cleanBars],
-  ["dotJoin", dotJoin],
-  ["ucFirst", ucFirst],
-];
+const stringHelperEntries = [["cleanBars", cleanBars], ["dotJoin", dotJoin], ["ucFirst", ucFirst]];
 
 export default stringHelperEntries;

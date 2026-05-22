@@ -18,11 +18,9 @@ const { fields } = foundry.data;
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
-export default class RollAutomation extends mixClasses(
-  CritAutomation,
-  mixins.DisplayAutomationMixin,
-  mixins.TriggerAutomationMixin,
-) {
+export default class RollAutomation
+  extends mixClasses(CritAutomation, mixins.DisplayAutomationMixin, mixins.TriggerAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Roll"];
 
@@ -86,8 +84,7 @@ export default class RollAutomation extends mixClasses(
 
   /** @inheritDoc */
   prepareData() {
-    if (this.document?.type === "ability" && game.teriock.getSetting("rollImpactsOnUse") && !this.trigger) {
+    if (this.document?.type === "ability" && game.teriock.getSetting("rollImpactsOnUse") && !this.trigger)
       this.trigger = "execute";
-    }
   }
 }

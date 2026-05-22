@@ -13,10 +13,7 @@ export const costConfig = {
 
       other: "TERIOCK.COSTS.Components.other",
     },
-    types: {
-      description: "TERIOCK.COSTS.Types.description",
-      tag: "TERIOCK.COSTS.Types.tag",
-    },
+    types: { description: "TERIOCK.COSTS.Types.description", tag: "TERIOCK.COSTS.Types.tag" },
   },
   primary: {
     keys: {
@@ -53,30 +50,12 @@ export const costConfig = {
         multiplier: -1,
       },
     },
-    types: {
-      description: "TERIOCK.COSTS.Types.description",
-      formula: "TERIOCK.COSTS.Types.formula",
-    },
+    types: { description: "TERIOCK.COSTS.Types.description", formula: "TERIOCK.COSTS.Types.formula" },
   },
   tweaks: {
-    adept: {
-      icon: icons.form.special,
-      label: "TERIOCK.COSTS.Tweaks.adept",
-      multiplier: -1,
-      primary: "mp",
-    },
-    gifted: {
-      icon: icons.form.gifted,
-      label: "TERIOCK.COSTS.Tweaks.gifted",
-      multiplier: 1,
-      primary: "mp",
-    },
-    inept: {
-      icon: icons.form.flaw,
-      label: "TERIOCK.COSTS.Tweaks.inept",
-      multiplier: 1,
-      primary: "mp",
-    },
+    adept: { icon: icons.form.special, label: "TERIOCK.COSTS.Tweaks.adept", multiplier: -1, primary: "mp" },
+    gifted: { icon: icons.form.gifted, label: "TERIOCK.COSTS.Tweaks.gifted", multiplier: 1, primary: "mp" },
+    inept: { icon: icons.form.flaw, label: "TERIOCK.COSTS.Tweaks.inept", multiplier: 1, primary: "mp" },
   },
 };
 

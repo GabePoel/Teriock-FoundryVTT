@@ -26,12 +26,8 @@ export default class HacksAutomation extends BaseAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       hacks: new fields.SetField(
-        new fields.StringField({
-          choices: localizeChoices(objectMap(TERIOCK.config.hack, h => h.part)),
-        }),
-        {
-          label: "TERIOCK.TERMS.Common.hacks",
-        },
+        new fields.StringField({ choices: localizeChoices(objectMap(TERIOCK.config.hack, h => h.part)) }),
+        { label: "TERIOCK.TERMS.Common.hacks" },
       ),
       reverse: new fields.BooleanField(),
     });
@@ -44,20 +40,7 @@ export default class HacksAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   async getActivations() {
-    if (this.reverse) {
-      return Array.from(this.hacks).map(
-        h =>
-          new TakeUnhackActivation({
-            options: { part: h },
-          }),
-      );
-    } else {
-      return Array.from(this.hacks).map(
-        h =>
-          new TakeHackActivation({
-            options: { part: h },
-          }),
-      );
-    }
+    if (this.reverse) return Array.from(this.hacks).map(h => new TakeUnhackActivation({ options: { part: h } }));
+    else return Array.from(this.hacks).map(h => new TakeHackActivation({ options: { part: h } }));
   }
 }

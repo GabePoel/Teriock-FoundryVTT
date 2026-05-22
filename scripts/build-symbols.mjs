@@ -1,4 +1,5 @@
 import fs from "fs";
+
 import { toKebabCase } from "../src/module/helpers/string.mjs";
 
 const SRC =
@@ -14,9 +15,7 @@ console.log(`Successfully fetched ${lines.length} icons. Generating CSS...`);
 let css = "/* Auto-generated using `build-symbols.mjs` */\n\n";
 lines.forEach(line => {
   const [name, codepoint] = line.split(" ");
-  if (name && codepoint) {
-    css += `.mic.ms-${toKebabCase(name)}::before { content: "\\${codepoint}"; }\n`;
-  }
+  if (name && codepoint) css += `.mic.ms-${toKebabCase(name)}::before { content: "\\${codepoint}"; }\n`;
 });
 fs.writeFileSync(DST, css);
 console.log("CSS generation complete.");

@@ -57,9 +57,7 @@ export default class AddDocumentsActivation extends BaseActivation {
       primary: familyConstructionField(),
       secondary: familyConstructionField(),
       target: new fields.StringField({
-        choices: objectMap(effectConfig.applicationTargets, e => e.label, {
-          localize: true,
-        }),
+        choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
         initial: "actor",
       }),
     });
@@ -74,13 +72,9 @@ export default class AddDocumentsActivation extends BaseActivation {
     const data = {};
     if (docConstruct.uuid) {
       const doc = await resolveDocument(docConstruct.uuid);
-      if (doc) {
-        Object.assign(data, doc.toObject(true));
-      }
+      if (doc) Object.assign(data, doc.toObject(true));
     }
-    if (docConstruct.data) {
-      foundry.utils.mergeObject(data, docConstruct.data, { inplace: true });
-    }
+    if (docConstruct.data) foundry.utils.mergeObject(data, docConstruct.data, { inplace: true });
     foundry.utils.setProperty(data, "flags.teriock.createdBy", this.puuid);
     return data;
   }
@@ -96,18 +90,11 @@ export default class AddDocumentsActivation extends BaseActivation {
     const results = await Promise.all(queue.map(doc => this.constructDocument(doc)));
     let pointer = 0;
     const rootData = root ? results[pointer++] : null;
-    const childrenData = results.slice(pointer, (pointer += children.length));
-    for (const child of childrenData) {
-      foundry.utils.deleteProperty(child, "flags.teriock.createdBy");
-    }
-    const grandchildrenData = results.slice(pointer, (pointer += grandchildren.length));
+    const childrenData = results.slice(pointer, pointer += children.length);
+    for (const child of childrenData) foundry.utils.deleteProperty(child, "flags.teriock.createdBy");
+    const grandchildrenData = results.slice(pointer, pointer += grandchildren.length);
     const otherData = results.slice(pointer);
-    return {
-      children: childrenData,
-      grandchildren: grandchildrenData,
-      other: otherData,
-      root: rootData,
-    };
+    return { children: childrenData, grandchildren: grandchildrenData, other: otherData, root: rootData };
   }
 
   /**
@@ -122,56 +109,44 @@ export default class AddDocumentsActivation extends BaseActivation {
         const root = rootDocs[0];
         if (fam.children && fam.children.length > 0) {
           const children = await this.safeCreate(root, fam.children);
-          if (fam.grandchildren && fam.grandchildren.length > 0) {
+          if (fam.grandchildren && fam.grandchildren.length > 0)
             await Promise.all(children.map(child => this.safeCreate(child, fam.grandchildren)));
-          }
         }
       }
     }
     if (fam.other && fam.other.length > 0) {
       const other = await this.safeCreate(actor, fam.other);
-      if (fam.grandchildren && fam.grandchildren.length > 0) {
+      if (fam.grandchildren && fam.grandchildren.length > 0)
         await Promise.all(other.map(doc => this.safeCreate(doc, fam.grandchildren)));
-      }
     }
   }
 
   /** @inheritDoc */
   async primaryAction() {
-    if (!this.checkActors()) {
-      return;
-    }
+    if (!this.checkActors()) return;
     const familyConstruction = this.event?.altKey ? this.secondary : this.primary;
     const family = await this.constructFamily(familyConstruction);
-    await Promise.all(
-      this.actors.map(async a => {
-        if (this.target === "actor") {
-          await this.createFamily(a, family);
+    await Promise.all(this.actors.map(async a => {
+      if (this.target === "actor") {
+        await this.createFamily(a, family);
+        ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {
+          format: { name: a.name },
+          localize: true,
+        });
+      } else {
+        let choices = [];
+        if (this.target === "armament") choices = a.armaments;
+        if (this.target === "item") choices = a.visibleChildren.filter(c => c.documentName === "Item");
+        const chosen = await selectDocumentsDialog(choices);
+        await Promise.all(chosen.map(c => {
+          this.createFamily(c, family);
           ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {
-            format: { name: a.name },
+            format: { name: c.name },
             localize: true,
           });
-        } else {
-          let choices = [];
-          if (this.target === "armament") {
-            choices = a.armaments;
-          }
-          if (this.target === "item") {
-            choices = a.visibleChildren.filter(c => c.documentName === "Item");
-          }
-          const chosen = await selectDocumentsDialog(choices);
-          await Promise.all(
-            chosen.map(c => {
-              this.createFamily(c, family);
-              ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {
-                format: { name: c.name },
-                localize: true,
-              });
-            }),
-          );
-        }
-      }),
-    );
+        }));
+      }
+    }));
   }
 
   /**
@@ -181,75 +156,51 @@ export default class AddDocumentsActivation extends BaseActivation {
    * @returns {Promise<AnyChildDocument[]>}
    */
   async safeCreate(parent, docs) {
-    const effectTypes = Object.entries(documentConfig)
-      .filter(([_k, v]) => v.documentName === "ActiveEffect")
-      .map(([k, _v]) => k);
-    const itemTypes = Object.entries(documentConfig)
-      .filter(([_k, v]) => v.documentName === "Item")
-      .map(([k, _v]) => k);
+    const effectTypes = Object.entries(documentConfig).filter(([_k, v]) => v.documentName === "ActiveEffect").map((
+      [k, _v],
+    ) => k);
+    const itemTypes = Object.entries(documentConfig).filter(([_k, v]) => v.documentName === "Item").map(([k, _v]) => k);
     const effectData = docs.filter(d => effectTypes.includes(d?.type));
     const itemData = docs.filter(d => itemTypes.includes(d?.type));
     const promises = [];
-    if (effectData.length > 0) {
-      promises.push(parent.createChildDocuments("ActiveEffect", effectData));
-    }
-    if (itemData.length > 0) {
-      promises.push(parent.createChildDocuments("Item", itemData));
-    }
+    if (effectData.length > 0) promises.push(parent.createChildDocuments("ActiveEffect", effectData));
+    if (itemData.length > 0) promises.push(parent.createChildDocuments("Item", itemData));
     const allChildren = await Promise.all(promises);
     const out = [];
-    for (const children of allChildren) {
-      out.push(...children);
-    }
+    for (const children of allChildren) out.push(...children);
     return out;
   }
 
   /** @inheritDoc */
   async secondaryAction() {
-    if (!this.checkActors()) {
-      return;
-    }
-    await Promise.all(
-      this.actors.map(async a => {
-        const children = await a.getChildArray();
-        if (this.target === "armament") {
-          for (const armament of a.armaments) {
-            children.push(...armament.childArray);
-          }
-        }
-        if (this.target === "item") {
-          for (const item of a.items.contents) {
-            children.push(...item.childArray);
-          }
-        }
-        const toDelete = children.filter(c => c.getFlag("teriock", "createdBy") === this.puuid);
-        if (this.target === "armament") {
-          await Promise.all(toDelete.map(d => d.delete()));
-        } else {
-          const effectsToDelete = toDelete.filter(d => d.documentName === "ActiveEffect");
-          const itemsToDelete = toDelete.filter(d => d.documentName === "Item");
-          const promises = [];
-          if (effectsToDelete.length > 0) {
-            promises.push(a.deleteChildDocuments("ActiveEffect", Array.from(new Set(effectsToDelete.map(e => e.id)))));
-          }
-          if (itemsToDelete.length > 0) {
-            promises.push(a.deleteChildDocuments("Item", Array.from(new Set(itemsToDelete.map(i => i.id)))));
-          }
-          await Promise.all(promises);
-        }
-      }),
-    );
-    ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.removed", {
-      localize: true,
-    });
+    if (!this.checkActors()) return;
+    await Promise.all(this.actors.map(async a => {
+      const children = await a.getChildArray();
+      if (this.target === "armament") {
+        for (const armament of a.armaments) children.push(...armament.childArray);
+      }
+      if (this.target === "item") {
+        for (const item of a.items.contents) children.push(...item.childArray);
+      }
+      const toDelete = children.filter(c => c.getFlag("teriock", "createdBy") === this.puuid);
+      if (this.target === "armament") await Promise.all(toDelete.map(d => d.delete()));
+      else {
+        const effectsToDelete = toDelete.filter(d => d.documentName === "ActiveEffect");
+        const itemsToDelete = toDelete.filter(d => d.documentName === "Item");
+        const promises = [];
+        if (effectsToDelete.length > 0)
+          promises.push(a.deleteChildDocuments("ActiveEffect", Array.from(new Set(effectsToDelete.map(e => e.id)))));
+        if (itemsToDelete.length > 0)
+          promises.push(a.deleteChildDocuments("Item", Array.from(new Set(itemsToDelete.map(i => i.id)))));
+        await Promise.all(promises);
+      }
+    }));
+    ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.removed", { localize: true });
   }
 }
 
 function documentConstructionField() {
-  return new fields.SchemaField({
-    data: new fields.ObjectField({}),
-    uuid: new fields.DocumentUUIDField(),
-  });
+  return new fields.SchemaField({ data: new fields.ObjectField({}), uuid: new fields.DocumentUUIDField() });
 }
 
 function familyConstructionField() {

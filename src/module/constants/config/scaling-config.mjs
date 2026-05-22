@@ -1,4 +1,1 @@
-export const scalingConfig = {
-  minF: 1,
-  minP: 0,
-};
+export const scalingConfig = { minF: 1, minP: 0 };

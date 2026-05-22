@@ -24,10 +24,7 @@ export default class BaseRoll extends Roll {
     return {
       comparison: "gte",
       hideRoll: false,
-      styles: {
-        dice: { classes: "", icon: "", tooltip: "" },
-        total: { classes: "", icon: "", tooltip: "" },
-      },
+      styles: { dice: { classes: "", icon: "", tooltip: "" }, total: { classes: "", icon: "", tooltip: "" } },
       targets: [],
       threshold: null,
     };
@@ -60,11 +57,7 @@ export default class BaseRoll extends Roll {
    */
   static maxValue(formula, data = {}, options = {}) {
     const roll = new BaseRoll(formula + " + 0", data, options);
-    return roll.evaluateSync({
-      allowStrings: true,
-      maximize: true,
-      strict: false,
-    }).total;
+    return roll.evaluateSync({ allowStrings: true, maximize: true, strict: false }).total;
   }
 
   /**
@@ -89,11 +82,7 @@ export default class BaseRoll extends Roll {
    */
   static minValue(formula, data = {}, options = {}) {
     const roll = new BaseRoll(formula + " + 0", data, options);
-    return roll.evaluateSync({
-      allowStrings: true,
-      minimize: true,
-      strict: false,
-    }).total;
+    return roll.evaluateSync({ allowStrings: true, minimize: true, strict: false }).total;
   }
 
   /**
@@ -102,9 +91,7 @@ export default class BaseRoll extends Roll {
    * @returns {object}
    */
   static parseEvent(event) {
-    return {
-      showDialog: game.teriock.getSetting("showRollDialogs") ? event.button !== 2 : event.button === 2,
-    };
+    return { showDialog: game.teriock.getSetting("showRollDialogs") ? event.button !== 2 : event.button === 2 };
   }
 
   /**
@@ -113,12 +100,8 @@ export default class BaseRoll extends Roll {
    */
   static resetFormulas(roll) {
     for (const term of roll.terms) {
-      if (term?.rolls) {
-        term.rolls.forEach(r => this.resetFormulas(r));
-      }
-      if (term?.isBooster) {
-        term.result = term.rolls[0].total;
-      }
+      if (term?.rolls) term.rolls.forEach(r => this.resetFormulas(r));
+      if (term?.isBooster) term.result = term.rolls[0].total;
     }
     roll.resetFormula();
     roll._total = roll._evaluateTotal();
@@ -196,15 +179,9 @@ export default class BaseRoll extends Roll {
   get _allTerms() {
     const terms = [...this.terms];
     for (const t of /** @type {(ParentheticalTerm|Booster)[]} */ this.terms) {
-      if (t.roll && t.roll instanceof Roll) {
-        terms.push(...t.roll.terms);
-      }
+      if (t.roll && t.roll instanceof Roll) terms.push(...t.roll.terms);
       if (t.rolls) {
-        for (const r of t.rolls) {
-          if (r instanceof Roll) {
-            terms.push(...r.terms);
-          }
-        }
+        for (const r of t.rolls) if (r instanceof Roll) terms.push(...r.terms);
       }
     }
     return terms;
@@ -286,13 +263,9 @@ export default class BaseRoll extends Roll {
   /** @returns {number|null} */
   get threshold() {
     if (["number"].includes(typeof this.options.threshold)) {
-      if (typeof this.options.threshold === "string" && !this.options.threshold) {
-        return null;
-      }
+      if (typeof this.options.threshold === "string" && !this.options.threshold) return null;
       const th = Number(this.options.threshold);
-      if (Number.isNumeric(th)) {
-        return th;
-      }
+      if (Number.isNumeric(th)) return th;
     }
     return null;
   }
@@ -307,11 +280,8 @@ export default class BaseRoll extends Roll {
    */
   async _applyDiceStyles() {
     for (const die of this.dice) {
-      for (const [type, options] of Object.entries(TERIOCK.config.die.styles)) {
-        if (die.flavor.includes(type)) {
-          die.options.appearance = options;
-        }
-      }
+      for (const [type, options] of Object.entries(TERIOCK.config.die.styles))
+        if (die.flavor.includes(type)) die.options.appearance = options;
     }
   }
 
@@ -321,17 +291,15 @@ export default class BaseRoll extends Roll {
    * @returns {ContextMenuEntry[]}
    */
   _getFormulaContextOptions(options = {}) {
-    return [
-      {
-        icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
-        label: "TERIOCK.ROLLS.Base.reroll",
-        onClick: async () => {
-          const reroll = this.clone();
-          await reroll.evaluate();
-          await reroll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
-        },
+    return [{
+      icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
+      label: "TERIOCK.ROLLS.Base.reroll",
+      onClick: async () => {
+        const reroll = this.clone();
+        await reroll.evaluate();
+        await reroll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
-    ];
+    }];
   }
 
   /**
@@ -390,9 +358,7 @@ export default class BaseRoll extends Roll {
   async boost(options = {}) {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
-    if (!clone._evaluated) {
-      await clone.evaluate();
-    }
+    if (!clone._evaluated) await clone.evaluate();
     const die = selectWeightedMaxFaceDie(clone);
     die._number = (die.number ?? 0) + 1;
     const dieRoll = new BaseRoll(die.formula);
@@ -400,14 +366,7 @@ export default class BaseRoll extends Roll {
     die.results.push(dieRoll.dice[0].results.at(-1));
     BaseRoll.resetFormulas(clone);
     return this.constructor.fromTerms(
-      [
-        new Booster({
-          fn: "b",
-          result: clone.total,
-          rolls: [clone],
-          terms: [formula],
-        }),
-      ],
+      [new Booster({ fn: "b", result: clone.total, rolls: [clone], terms: [formula] })],
       options,
     );
   }
@@ -420,9 +379,7 @@ export default class BaseRoll extends Roll {
    */
   clone(options = {}) {
     const { evaluated } = options;
-    if (evaluated) {
-      return this.constructor.fromData(foundry.utils.deepClone(this.toJSON()));
-    }
+    if (evaluated) return this.constructor.fromData(foundry.utils.deepClone(this.toJSON()));
     return super.clone();
   }
 
@@ -434,42 +391,22 @@ export default class BaseRoll extends Roll {
   async deboost(options = {}) {
     const clone = this.clone({ evaluated: true });
     const formula = clone.formula;
-    if (!clone._evaluated) {
-      await clone.evaluate();
-    }
+    if (!clone._evaluated) await clone.evaluate();
     const die = selectWeightedMaxFaceDie(clone);
     die._number = Math.max(0, (die.number ?? 0) - 1);
     die.results.pop();
     this.constructor.resetFormulas(clone);
-    return this.constructor.fromTerms(
-      [
-        new Booster({
-          fn: "db",
-          result: clone.total,
-          rolls: [clone],
-          terms: [formula],
-        }),
-      ],
-      options,
-    );
+    return this.constructor.fromTerms([
+      new Booster({ fn: "db", result: clone.total, rolls: [clone], terms: [formula] }),
+    ], options);
   }
 
   /** @inheritDoc */
-  async evaluate({
-    allowInteractive = true,
-    allowStrings = false,
-    maximize = false,
-    minimize = false,
-    ...options
-  } = {}) {
+  async evaluate(
+    { allowInteractive = true, allowStrings = false, maximize = false, minimize = false, ...options } = {},
+  ) {
     await this._applyDiceStyles();
-    return super.evaluate({
-      allowInteractive,
-      allowStrings,
-      maximize,
-      minimize,
-      ...options,
-    });
+    return super.evaluate({ allowInteractive, allowStrings, maximize, minimize, ...options });
   }
 
   /**
@@ -492,15 +429,12 @@ export default class BaseRoll extends Roll {
   async toMessage(messageData = {}, { create = true, rollMode } = {}) {
     const activations = await this.getActivations();
     const panels = await this.getPanels();
-    messageData = foundry.utils.mergeObject(
-      {
-        system: {
-          activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(activations),
-          panels: panels,
-        },
+    messageData = foundry.utils.mergeObject({
+      system: {
+        activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(activations),
+        panels: panels,
       },
-      messageData,
-    );
+    }, messageData);
     return super.toMessage(messageData, { create, rollMode });
   }
 }

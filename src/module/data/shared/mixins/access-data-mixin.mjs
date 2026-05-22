@@ -69,15 +69,16 @@ export default function AccessDataMixin(Base) {
        * @returns {HTMLDivElement}
        */
       _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-        return this.schema.getField(path).toFormGroup(
-          { localize: true, rootId: foundry.utils.randomID(), ...groupConfig },
-          {
-            context: this._inputContextKey,
-            name: `${this.localPath}.${path}`,
-            value: foundry.utils.getProperty(this, `_source.${path}`),
-            ...inputConfig,
-          },
-        );
+        return this.schema.getField(path).toFormGroup({
+          localize: true,
+          rootId: foundry.utils.randomID(),
+          ...groupConfig,
+        }, {
+          context: this._inputContextKey,
+          name: `${this.localPath}.${path}`,
+          value: foundry.utils.getProperty(this, `_source.${path}`),
+          ...inputConfig,
+        });
       }
 
       /**

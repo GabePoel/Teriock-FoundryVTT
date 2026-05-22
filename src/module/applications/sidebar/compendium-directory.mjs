@@ -18,8 +18,6 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
         el.dataset.makeTooltip = "true";
       }
     });
-    if (makeTooltips) {
-      bindCommonActions(this.element);
-    }
+    if (makeTooltips) bindCommonActions(this.element);
   }
 }

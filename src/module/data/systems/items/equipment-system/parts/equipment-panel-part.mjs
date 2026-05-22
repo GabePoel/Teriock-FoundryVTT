@@ -38,16 +38,10 @@ export default Base => {
             icon: TERIOCK.display.icons.armament.load,
             label: _loc("TERIOCK.SYSTEMS.Armament.PANELS.load"),
             wrappers: [
-              _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
-                value: this.weight,
-              }),
-              _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", {
-                value: this.minStr,
-              }),
+              _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.weight }),
+              _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", { value: this.minStr }),
               (this.identification.identified || this.isAttuned) && formulaExists(this.tier.text)
-                ? _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-                    value: this.tier.text,
-                  })
+                ? _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text })
                 : "",
               ...simplifyTags(this._identificationTags),
             ],
@@ -57,25 +51,20 @@ export default Base => {
             label: _loc("TERIOCK.MODELS.Storage.FIELDS.enabled.label"),
             wrappers: this.storage.enabled
               ? [
-                  _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedCount", {
-                    max: (this.storage.maxCount ?? Infinity).toString(),
-                    value: this.storage.carriedCount,
-                  }),
-                  _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeight", {
-                    max: (this.storage.maxWeight ?? Infinity).toString(),
-                    value: this.storage.carriedWeight,
-                  }),
-                  _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier", {
-                    value: this.storage.weightMultiplier,
-                  }),
-                ]
+                _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedCount", {
+                  max: (this.storage.maxCount ?? Infinity).toString(),
+                  value: this.storage.carriedCount,
+                }),
+                _loc("TERIOCK.SYSTEMS.Equipment.PANELS.carriedWeight", {
+                  max: (this.storage.maxWeight ?? Infinity).toString(),
+                  value: this.storage.carriedWeight,
+                }),
+                _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weightMultiplier", { value: this.storage.weightMultiplier }),
+              ]
               : [],
           },
         ];
-        return {
-          ...(await super.getPanelParts()),
-          bars,
-        };
+        return { ...(await super.getPanelParts()), bars };
       }
     }
   );

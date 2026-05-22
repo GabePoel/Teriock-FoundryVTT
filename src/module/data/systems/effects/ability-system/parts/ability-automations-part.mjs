@@ -14,9 +14,7 @@ export default Base => {
        * @returns {Teriock.Automations.Any[]}
        */
       get activeAutomations() {
-        if (this.maneuver !== "passive") {
-          return [];
-        }
+        if (this.maneuver !== "passive") return [];
         return super.activeAutomations;
       }
     }

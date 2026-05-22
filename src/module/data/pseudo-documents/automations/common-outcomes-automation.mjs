@@ -12,11 +12,9 @@ const { fields } = foundry.data;
  * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
  */
-export default class CommonOutcomesAutomation extends mixClasses(
-  CritAutomation,
-  ConfirmationDialogAutomationMixin,
-  TriggerAutomationMixin,
-) {
+export default class CommonOutcomesAutomation
+  extends mixClasses(CritAutomation, ConfirmationDialogAutomationMixin, TriggerAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.CommonOutcomes"];
 
@@ -33,11 +31,7 @@ export default class CommonOutcomesAutomation extends mixClasses(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      common: new fields.SetField(
-        new fields.StringField({
-          choices: TERIOCK.config.consequence.common,
-        }),
-      ),
+      common: new fields.SetField(new fields.StringField({ choices: TERIOCK.config.consequence.common })),
     });
   }
 
@@ -48,17 +42,13 @@ export default class CommonOutcomesAutomation extends mixClasses(
    */
   async #applyCommonOutcomes(scope = {}) {
     const actor = scope?.actor ?? this.document.actor;
-    if (!actor) {
-      return;
-    }
+    if (!actor) return;
     const outcomes = listFormat(this.common.map(c => TERIOCK.config.consequence.common[c]));
     const shouldApply = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.CommonOutcomes.DIALOG.content",
       data: { outcomes },
     });
-    if (!shouldApply) {
-      return;
-    }
+    if (!shouldApply) return;
     await this._activateActivations(scope);
   }
 
@@ -81,21 +71,16 @@ export default class CommonOutcomesAutomation extends mixClasses(
   async _getActivations(options) {
     const activationOptions = {};
     if (
-      foundry.utils.hasProperty(options, "execution.armament.uuid") &&
-      foundry.utils.hasProperty(options, "execution.actor.uuid")
+      foundry.utils.hasProperty(options, "execution.armament.uuid")
+      && foundry.utils.hasProperty(options, "execution.actor.uuid")
     ) {
       const uuid = foundry.utils.buildRelativeUuid(options.execution.armament, options.execution.actor);
       foundry.utils.setProperty(activationOptions, "options.armament", uuid);
     }
-    return Array.from(this.common)
-      .filter(Boolean)
-      .map(c => {
-        const Act = Object.values(activations).find(A => A.TYPE === c);
-        if (Act) {
-          return new Act(foundry.utils.deepClone(activationOptions));
-        }
-      })
-      .filter(Boolean);
+    return Array.from(this.common).filter(Boolean).map(c => {
+      const Act = Object.values(activations).find(A => A.TYPE === c);
+      if (Act) return new Act(foundry.utils.deepClone(activationOptions));
+    }).filter(Boolean);
   }
 
   /** @inheritDoc */

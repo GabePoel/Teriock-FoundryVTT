@@ -40,11 +40,7 @@ export default Base =>
           textKey: "system.summarizedAttack",
         },
       );
-      if (attacker) {
-        await this.document.update({
-          "system.wielding.attacker": attacker.id,
-        });
-      }
+      if (attacker) await this.document.update({ "system.wielding.attacker": attacker.id });
     }
 
     /**
@@ -62,11 +58,7 @@ export default Base =>
           textKey: "system.summarizedBlock",
         },
       );
-      if (attacker) {
-        await this.document.update({
-          "system.wielding.blocker": attacker.id,
-        });
-      }
+      if (attacker) await this.document.update({ "system.wielding.blocker": attacker.id });
     }
 
     /**
@@ -74,9 +66,7 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onToggleReaction() {
-      await this.document.update({
-        "system.combat.hasReaction": !this.document.system.combat.hasReaction,
-      });
+      await this.document.update({ "system.combat.hasReaction": !this.document.system.combat.hasReaction });
     }
 
     /**
@@ -84,9 +74,7 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onToggleSb() {
-      await this.document.update({
-        "system.offense.sb": !this.document.system.offense.sb,
-      });
+      await this.document.update({ "system.offense.sb": !this.document.system.offense.sb });
     }
 
     /**
@@ -96,10 +84,7 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onUseAbility(event, target) {
-      await this.document.useDocument(target.dataset.ability, {
-        event,
-        type: "ability",
-      });
+      await this.document.useDocument(target.dataset.ability, { event, type: "ability" });
     }
 
     static DEFAULT_OPTIONS = {

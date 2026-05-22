@@ -14,20 +14,13 @@ const { TokenDocument } = foundry.documents;
  * @mixes BaseDocument
  * @mixes SettingsDocument
  */
-export default class TeriockTokenDocument extends mixClasses(
-  TokenDocument,
-  mixins.BaseDocumentMixin,
-  mixins.EmbedCardDocumentMixin,
-) {
+export default class TeriockTokenDocument
+  extends mixClasses(TokenDocument, mixins.BaseDocumentMixin, mixins.EmbedCardDocumentMixin)
+{
   /** @inheritDoc */
   get embedParts() {
-    const parts = Object.assign(super.embedParts, {
-      icon: icons.document.token,
-      img: this.img,
-    });
-    if (this.actor && this.actor.fullName !== parts.title) {
-      parts.text = this.actor.fullName;
-    }
+    const parts = Object.assign(super.embedParts, { icon: icons.document.token, img: this.img });
+    if (this.actor && this.actor.fullName !== parts.title) parts.text = this.actor.fullName;
     return parts;
   }
 
@@ -51,9 +44,7 @@ export default class TeriockTokenDocument extends mixClasses(
   _prepareDetectionModes() {
     super._prepareDetectionModes();
     const basicMode = this.detectionModes.basicSight;
-    if (basicMode) {
-      basicMode.enabled = false;
-    }
+    if (basicMode) basicMode.enabled = false;
     if (this.detectionModes?.lightPerception) {
       this.detectionModes.lightPerception.enabled = true;
       this.detectionModes.lightPerception.range = Infinity;
@@ -62,15 +53,12 @@ export default class TeriockTokenDocument extends mixClasses(
 
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
-    return [
-      {
-        icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
-        onClick: async () => this.actor.sheet.render(true),
-        visible: () => this.actor && this.actor.isViewer,
-      },
-      ...super.getCardContextMenuEntries(doc),
-    ];
+    return [{
+      icon: makeIcon(TERIOCK.config.document.character.icon, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
+      onClick: async () => this.actor.sheet.render(true),
+      visible: () => this.actor && this.actor.isViewer,
+    }, ...super.getCardContextMenuEntries(doc)];
   }
 
   /**
@@ -82,17 +70,11 @@ export default class TeriockTokenDocument extends mixClasses(
     const updateOptions = {};
     if (this.actor) {
       if (this.actor.getSetting("token.autoScale")) {
-        if (this.width !== this.actor.system.size.length) {
-          updateData["width"] = this.actor.system.size.length;
-        }
-        if (this.height !== this.actor.system.size.length) {
-          updateData["height"] = this.actor.system.size.length;
-        }
+        if (this.width !== this.actor.system.size.length) updateData["width"] = this.actor.system.size.length;
+        if (this.height !== this.actor.system.size.length) updateData["height"] = this.actor.system.size.length;
       }
     }
-    if (Object.keys(updateData).length > 0 && this.id) {
-      await this.update(updateData, updateOptions);
-    }
+    if (Object.keys(updateData).length > 0 && this.id) await this.update(updateData, updateOptions);
   }
 
   /**
@@ -115,9 +97,7 @@ export default class TeriockTokenDocument extends mixClasses(
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
-    if (this.isLazyDelta) {
-      return;
-    }
+    if (this.isLazyDelta) return;
     super.prepareEmbeddedDocuments();
     this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
   }

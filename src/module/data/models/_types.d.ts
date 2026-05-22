@@ -6,14 +6,10 @@ import "./storage-model/_types";
 
 declare global {
   namespace Teriock.Models {
-    export type ScaleModelData = {
-      raw: number;
-    };
+    export type ScaleModelData = { raw: number };
   }
 
   namespace Teriock.Options {
-    export type EvaluationOptions = Teriock.Fields.FormulaDerivationOptions & {
-      rollData?: object;
-    };
+    export type EvaluationOptions = Teriock.Fields.FormulaDerivationOptions & { rollData?: object };
   }
 }

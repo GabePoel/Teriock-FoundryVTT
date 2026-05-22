@@ -8,9 +8,7 @@ import BaseModifierModel from "./base-modifier-model.mjs";
 export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema(options) {
-    return Object.assign(super.defineSchema(options), {
-      passive: initialNumber(4),
-    });
+    return Object.assign(super.defineSchema(options), { passive: initialNumber(4) });
   }
 
   /** @inheritDoc */
@@ -36,9 +34,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async use(options) {
-    await this.actor.hookCall("rollFeatSave", {
-      scope: { attribute: this.key },
-    });
+    await this.actor.hookCall("rollFeatSave", { scope: { attribute: this.key } });
     await super.use(Object.assign(options, { attribute: this.key }));
   }
 }

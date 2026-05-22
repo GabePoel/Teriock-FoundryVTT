@@ -1,5 +1,4 @@
 import js from "@eslint/js";
-import eslintConfigPrettier from "eslint-config-prettier";
 import jsdoc from "eslint-plugin-jsdoc";
 import perfectionist from "eslint-plugin-perfectionist";
 import globals from "globals";
@@ -70,202 +69,127 @@ const globalClient = {
   ui: "readonly",
 };
 
-const globalMacro = {
-  actor: "readonly",
-  scope: "readonly",
-};
+const globalMacro = { actor: "readonly", scope: "readonly" };
 
-const globalTeriock = {
-  TERIOCK: "readonly",
-  teriock: "readonly",
-  tm: "readonly",
-};
+const globalTeriock = { TERIOCK: "readonly", teriock: "readonly", tm: "readonly" };
 
-const globalModule = {
-  TokenMagic: "readonly",
-};
+const globalModule = { TokenMagic: "readonly" };
 
-export default tseslint.config(
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
-  {
-    files: ["**/*.{mjs,ts}"],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globalDocuments,
-        ...globalHelpers,
-        ...globalClient,
-        ...globalTeriock,
-        ...globalModule,
+export default tseslint.config(js.configs.recommended, ...tseslint.configs.recommended, {
+  files: ["**/*.{mjs,ts}"],
+  languageOptions: {
+    globals: {
+      ...globals.browser,
+      ...globalDocuments,
+      ...globalHelpers,
+      ...globalClient,
+      ...globalTeriock,
+      ...globalModule,
+    },
+  },
+  plugins: { jsdoc, perfectionist },
+  rules: {
+    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+    eqeqeq: ["error", "smart"],
+    "jsdoc/check-types": "warn",
+    "no-console": "off",
+    "no-empty": ["warn", { allowEmptyCatch: true }],
+    "no-var": "error",
+    "perfectionist/sort-array-includes": ["error", { order: "asc", type: "alphabetical" }],
+    "perfectionist/sort-arrays": ["error", {
+      order: "asc",
+      type: "alphabetical",
+      useConfigurationIf: { matchesAstSelector: "TSAsExpression > ArrayExpression" },
+    }],
+    "perfectionist/sort-classes": ["error", {
+      groups: [
+        "index-signature",
+        ["private-static-property", "private-static-accessor-property"],
+        ["private-static-get-method", "private-static-set-method"],
+        ["private-static-method", "private-static-function-property"],
+        ["protected-static-property", "protected-static-accessor-property"],
+        ["protected-static-get-method", "protected-static-set-method"],
+        ["protected-static-method", "protected-static-function-property"],
+        ["static-property", "static-accessor-property"],
+        ["static-get-method", "static-set-method"],
+        "static-block",
+        ["static-method", "static-function-property"],
+        "constructor",
+        ["private-property", "private-accessor-property"],
+        ["private-get-method", "private-set-method"],
+        ["private-method", "private-function-property"],
+        ["protected-property", "protected-accessor-property"],
+        ["protected-get-method", "protected-set-method"],
+        ["protected-method", "protected-function-property"],
+        ["property", "accessor-property"],
+        ["get-method", "set-method"],
+        ["method", "function-property"],
+        "unknown",
+      ],
+      order: "asc",
+      type: "alphabetical",
+    }],
+    "perfectionist/sort-exports": ["error", { order: "asc", type: "alphabetical" }],
+    "perfectionist/sort-import-attributes": ["error", { order: "asc", type: "alphabetical" }],
+    "perfectionist/sort-imports": ["error", {
+      groups: [
+        "type-import",
+        ["value-builtin", "value-external"],
+        "type-internal",
+        "value-internal",
+        ["type-parent", "type-sibling", "type-index"],
+        ["value-parent", "value-sibling", "value-index"],
+        "ts-equals-import",
+        "unknown",
+      ],
+      internalPattern: ["^~/.+", "^@/.+", "^#.+"],
+      newlinesBetween: 1,
+      order: "asc",
+      type: "alphabetical",
+    }],
+    "perfectionist/sort-object-types": ["error", {
+      fallbackSort: { type: "unsorted" },
+      groups: ["property", "method", "unknown"],
+      ignoreCase: true,
+      newlinesBetween: "ignore",
+      newlinesInside: "ignore",
+      order: "asc",
+      partitionByComment: false,
+      partitionByNewLine: false,
+      sortBy: "name",
+      specialCharacters: "keep",
+      type: "alphabetical",
+    }],
+    "perfectionist/sort-objects": [
+      "error",
+      { type: "unsorted", useConfigurationIf: { declarationCommentMatchesPattern: "^no sort$" } },
+      {
+        type: "unsorted",
+        useConfigurationIf: { matchesAstSelector: "PropertyDefinition[key.name='PARTS'] > ObjectExpression" },
       },
-    },
-    plugins: {
-      jsdoc,
-      perfectionist,
-    },
-    rules: {
-      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
-      eqeqeq: ["error", "smart"],
-      "jsdoc/check-types": "warn",
-      "no-console": "off",
-      "no-empty": ["warn", { allowEmptyCatch: true }],
-      "no-var": "error",
-      "perfectionist/sort-array-includes": ["error", { order: "asc", type: "alphabetical" }],
-      "perfectionist/sort-arrays": [
-        "error",
-        {
-          order: "asc",
-          type: "alphabetical",
-          useConfigurationIf: { matchesAstSelector: "TSAsExpression > ArrayExpression" },
-        },
+      { type: "unsorted", useConfigurationIf: { declarationMatchesPattern: "^PARTS$" } },
+      { groups: ["property", "method", "unknown"], order: "asc", partitionByNewLine: true, type: "alphabetical" },
+    ],
+    "perfectionist/sort-sets": ["error", { order: "asc", type: "alphabetical" }],
+    "perfectionist/sort-union-types": ["error", {
+      groups: [
+        "conditional",
+        "function",
+        "import",
+        "intersection",
+        "keyword",
+        "literal",
+        "named",
+        "object",
+        "operator",
+        "tuple",
+        "union",
+        "nullish",
       ],
-      "perfectionist/sort-classes": [
-        "error",
-        {
-          groups: [
-            "index-signature",
-
-            ["private-static-property", "private-static-accessor-property"],
-            ["private-static-get-method", "private-static-set-method"],
-            ["private-static-method", "private-static-function-property"],
-
-            ["protected-static-property", "protected-static-accessor-property"],
-            ["protected-static-get-method", "protected-static-set-method"],
-            ["protected-static-method", "protected-static-function-property"],
-
-            ["static-property", "static-accessor-property"],
-            ["static-get-method", "static-set-method"],
-            "static-block",
-            ["static-method", "static-function-property"],
-
-            "constructor",
-
-            ["private-property", "private-accessor-property"],
-            ["private-get-method", "private-set-method"],
-            ["private-method", "private-function-property"],
-
-            ["protected-property", "protected-accessor-property"],
-            ["protected-get-method", "protected-set-method"],
-            ["protected-method", "protected-function-property"],
-
-            ["property", "accessor-property"],
-            ["get-method", "set-method"],
-            ["method", "function-property"],
-
-            "unknown",
-          ],
-          order: "asc",
-          type: "alphabetical",
-        },
-      ],
-      "perfectionist/sort-exports": ["error", { order: "asc", type: "alphabetical" }],
-      "perfectionist/sort-import-attributes": ["error", { order: "asc", type: "alphabetical" }],
-      "perfectionist/sort-imports": [
-        "error",
-        {
-          groups: [
-            "type-import",
-            ["value-builtin", "value-external"],
-            "type-internal",
-            "value-internal",
-            ["type-parent", "type-sibling", "type-index"],
-            ["value-parent", "value-sibling", "value-index"],
-            "ts-equals-import",
-            "unknown",
-          ],
-          internalPattern: ["^~/.+", "^@/.+", "^#.+"],
-          newlinesBetween: 1,
-          order: "asc",
-          type: "alphabetical",
-        },
-      ],
-      "perfectionist/sort-object-types": [
-        "error",
-        {
-          fallbackSort: { type: "unsorted" },
-          groups: ["property", "method", "unknown"],
-          ignoreCase: true,
-          newlinesBetween: "ignore",
-          newlinesInside: "ignore",
-          order: "asc",
-          partitionByComment: false,
-          partitionByNewLine: false,
-          sortBy: "name",
-          specialCharacters: "keep",
-          type: "alphabetical",
-        },
-      ],
-      "perfectionist/sort-objects": [
-        "error",
-        {
-          type: "unsorted",
-          useConfigurationIf: {
-            declarationCommentMatchesPattern: "^no sort$",
-          },
-        },
-        {
-          type: "unsorted",
-          useConfigurationIf: {
-            matchesAstSelector: "PropertyDefinition[key.name='PARTS'] > ObjectExpression",
-          },
-        },
-        {
-          type: "unsorted",
-          useConfigurationIf: {
-            declarationMatchesPattern: "^PARTS$",
-          },
-        },
-        {
-          groups: ["property", "method", "unknown"],
-          order: "asc",
-          partitionByNewLine: true,
-          type: "alphabetical",
-        },
-      ],
-      "perfectionist/sort-sets": ["error", { order: "asc", type: "alphabetical" }],
-      "perfectionist/sort-union-types": [
-        "error",
-        {
-          groups: [
-            "conditional",
-            "function",
-            "import",
-            "intersection",
-            "keyword",
-            "literal",
-            "named",
-            "object",
-            "operator",
-            "tuple",
-            "union",
-            "nullish",
-          ],
-          order: "asc",
-          type: "alphabetical",
-        },
-      ],
-      "prefer-const": "warn",
-    },
-    settings: {
-      jsdoc: {
-        preferredTypes: {
-          ".<>": "<>",
-          Function: "function",
-          Object: "object",
-        },
-      },
-    },
+      order: "asc",
+      type: "alphabetical",
+    }],
+    "prefer-const": "warn",
   },
-  {
-    files: ["src/macros/**/*.{js,mjs}"],
-    languageOptions: { globals: { ...globalMacro } },
-  },
-  eslintConfigPrettier,
-
-  {
-    rules: {
-      curly: ["warn", "all"],
-    },
-  },
-);
+  settings: { jsdoc: { preferredTypes: { ".<>": "<>", Function: "function", Object: "object" } } },
+}, { files: ["src/macros/**/*.{js,mjs}"], languageOptions: { globals: { ...globalMacro } } });

@@ -37,9 +37,7 @@ export default function MacroAutomationMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          macro: new fields.DocumentUUIDField({ type: "Macro" }),
-        });
+        return Object.assign(super.defineSchema(), { macro: new fields.DocumentUUIDField({ type: "Macro" }) });
       }
 
       /** @inheritDoc */
@@ -100,9 +98,7 @@ export default function MacroAutomationMixin(Base) {
        * @return {Promise<void>}
        */
       async executeMacro(scope = {}) {
-        if (!this.hasMacro) {
-          return;
-        }
+        if (!this.hasMacro) return;
         const macro = await fromUuid(this.macro);
         await macro.execute(this.getScope(scope));
       }

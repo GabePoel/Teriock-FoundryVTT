@@ -16,20 +16,14 @@ export default function abilityContextMenus(ability) {
    */
   function findIconByKey(key, iconMap = TERIOCK.display.icons) {
     const attributeIcon = TERIOCK.config.attribute?.[key]?.icon;
-    if (attributeIcon) {
-      return attributeIcon;
-    }
+    if (attributeIcon) return attributeIcon;
     for (const value of Object.values(iconMap)) {
       if (value && typeof value === "object") {
         const found = findIconByKey(key, value);
-        if (found) {
-          return found;
-        }
+        if (found) return found;
       }
     }
-    if (Object.prototype.hasOwnProperty.call(iconMap, key)) {
-      return iconMap[key];
-    }
+    if (Object.prototype.hasOwnProperty.call(iconMap, key)) return iconMap[key];
     return null;
   }
 
@@ -60,14 +54,11 @@ export default function abilityContextMenus(ability) {
     active: quickMenu(TERIOCK.config.ability.executionTime.active, "system.executionTime"),
     delivery: quickMenu(TERIOCK.config.ability.delivery, "system.delivery"),
     expansion: quickMenu(TERIOCK.config.ability.expansion, "system.expansion.type", true),
-    expansionSaveAttribute: [
-      {
-        icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
-        label: _loc("TERIOCK.TERMS.Common.none"),
-        onClick: async () => await ability.update({ "system.expansion.featSaveAttribute": null }),
-      },
-      ...quickMenu(TERIOCK.reference.attributes, "system.expansion.featSaveAttribute"),
-    ],
+    expansionSaveAttribute: [{
+      icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
+      label: _loc("TERIOCK.TERMS.Common.none"),
+      onClick: async () => await ability.update({ "system.expansion.featSaveAttribute": null }),
+    }, ...quickMenu(TERIOCK.reference.attributes, "system.expansion.featSaveAttribute")],
     featSaveAttribute: quickMenu(TERIOCK.reference.attributes, "system.featSaveAttribute"),
     form: Object.entries(TERIOCK.config.effect.form).map(([key, value]) => ({
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
@@ -75,69 +66,39 @@ export default function abilityContextMenus(ability) {
       onClick: async () => await ability.update({ "system.form": key }),
     })),
     interaction: quickMenu(TERIOCK.config.ability.interaction, "system.interaction"),
-    maneuver: [
-      {
-        icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
-        label: _loc("TERIOCK.TERMS.Maneuver.active"),
-        onClick: async () => {
-          await ability.update({
-            "system.executionTime.base": "a1",
-            "system.maneuver": "active",
-          });
-        },
+    maneuver: [{
+      icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
+      label: _loc("TERIOCK.TERMS.Maneuver.active"),
+      onClick: async () => {
+        await ability.update({ "system.executionTime.base": "a1", "system.maneuver": "active" });
       },
-      {
-        icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
-        label: _loc("TERIOCK.TERMS.Maneuver.reactive"),
-        onClick: async () => {
-          await ability.update({
-            "system.executionTime.base": "r1",
-            "system.maneuver": "reactive",
-          });
-        },
+    }, {
+      icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
+      label: _loc("TERIOCK.TERMS.Maneuver.reactive"),
+      onClick: async () => {
+        await ability.update({ "system.executionTime.base": "r1", "system.maneuver": "reactive" });
       },
-      {
-        icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
-        label: _loc("TERIOCK.TERMS.Maneuver.passive"),
-        onClick: async () =>
-          await ability.update({
-            "system.executionTime.base": "passive",
-            "system.maneuver": "passive",
-          }),
+    }, {
+      icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
+      label: _loc("TERIOCK.TERMS.Maneuver.passive"),
+      onClick: async () =>
+        await ability.update({ "system.executionTime.base": "passive", "system.maneuver": "passive" }),
+    }, {
+      icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
+      label: _loc("TERIOCK.TERMS.Maneuver.slow"),
+      onClick: async () => {
+        await ability.update({
+          "system.executionTime.slow.raw": "10",
+          "system.executionTime.slow.unit": "minute",
+          "system.maneuver": "slow",
+        });
       },
-      {
-        icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
-        label: _loc("TERIOCK.TERMS.Maneuver.slow"),
-        onClick: async () => {
-          await ability.update({
-            "system.executionTime.slow.raw": "10",
-            "system.executionTime.slow.unit": "minute",
-            "system.maneuver": "slow",
-          });
-        },
-      },
-    ],
-    piercing: TeriockContextMenu.makeUpdateEntries(
-      ability,
-      [
-        {
-          icon: TERIOCK.display.icons.piercing.none,
-          label: _loc("TERIOCK.MODELS.Piercing.MENU.0"),
-          value: 0,
-        },
-        {
-          icon: TERIOCK.display.icons.piercing.av0,
-          label: _loc("TERIOCK.MODELS.Piercing.MENU.1"),
-          value: 1,
-        },
-        {
-          icon: TERIOCK.display.icons.piercing.ub,
-          label: _loc("TERIOCK.MODELS.Piercing.MENU.2"),
-          value: 2,
-        },
-      ],
-      { path: "system.piercing.raw" },
-    ),
+    }],
+    piercing: TeriockContextMenu.makeUpdateEntries(ability, [
+      { icon: TERIOCK.display.icons.piercing.none, label: _loc("TERIOCK.MODELS.Piercing.MENU.0"), value: 0 },
+      { icon: TERIOCK.display.icons.piercing.av0, label: _loc("TERIOCK.MODELS.Piercing.MENU.1"), value: 1 },
+      { icon: TERIOCK.display.icons.piercing.ub, label: _loc("TERIOCK.MODELS.Piercing.MENU.2"), value: 2 },
+    ], { path: "system.piercing.raw" }),
     reactive: quickMenu(TERIOCK.config.ability.executionTime.reactive, "system.executionTime"),
   };
 }

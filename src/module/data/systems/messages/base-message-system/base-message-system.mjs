@@ -53,9 +53,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
    */
   async _onRender(_context, options) {
     const element = options.element;
-    if (!element) {
-      return;
-    }
+    if (!element) return;
     element.classList.add("teriock");
     TeriockItem.bindPanelListeners(element);
     this._connectActivationListeners(element);
@@ -70,66 +68,52 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
       element.querySelectorAll(".dice-formula.teriock-dice-formula").forEach(el => {
         el.className = "dice-formula teriock-dice-formula";
       });
-      element.querySelectorAll(".dice-total, .dice-formula").forEach(
-        /** @param {HTMLElement} el */ el => {
-          delete el.dataset.tooltip;
-          delete el.dataset.tooltipHtml;
-        },
-      );
+      element.querySelectorAll(".dice-total, .dice-formula").forEach(/** @param {HTMLElement} el */ el => {
+        delete el.dataset.tooltip;
+        delete el.dataset.tooltipHtml;
+      });
     }
 
     // Add target selection listeners
-    element.querySelectorAll(".teriock-target-container").forEach(
-      /** @param {HTMLElement} container */ container => {
-        let clickTimeout = null;
+    element.querySelectorAll(".teriock-target-container").forEach(/** @param {HTMLElement} container */ container => {
+      let clickTimeout = null;
 
-        container.addEventListener("contextmenu", async event => {
-          event.stopPropagation();
-          const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(container.dataset.tokenUuid);
-          if (tokenDocument) {
-            tokenDocument.object.release();
-          }
-        });
+      container.addEventListener("contextmenu", async event => {
+        event.stopPropagation();
+        const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(container.dataset.tokenUuid);
+        if (tokenDocument) tokenDocument.object.release();
+      });
 
-        container.addEventListener("click", async event => {
-          event.stopPropagation();
-          if (clickTimeout) {
-            clearTimeout(clickTimeout);
-            clickTimeout = null;
-            return;
-          }
-          clickTimeout = setTimeout(async () => {
-            const tokenDocument = /** @type {TeriockTokenDocument} */ await fromUuid(container.dataset.tokenUuid);
-            if (tokenDocument?.isOwner) {
-              tokenDocument.object.control({
-                releaseOthers: !event.shiftKey,
-              });
-            }
-            clickTimeout = null;
-          }, 200);
-        });
+      container.addEventListener("click", async event => {
+        event.stopPropagation();
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+          clickTimeout = null;
+          return;
+        }
+        clickTimeout = setTimeout(async () => {
+          const tokenDocument = /** @type {TeriockTokenDocument} */ await fromUuid(container.dataset.tokenUuid);
+          if (tokenDocument?.isOwner) tokenDocument.object.control({ releaseOthers: !event.shiftKey });
+          clickTimeout = null;
+        }, 200);
+      });
 
-        container.addEventListener("dblclick", async event => {
-          event.stopPropagation();
-          if (clickTimeout) {
-            clearTimeout(clickTimeout);
-            clickTimeout = null;
-          }
-          const actor = /** @type {TeriockActor} */ await fromUuid(container.dataset.actorUuid);
-          if (actor?.isOwner) {
-            await actor.sheet.render(true);
-          }
-        });
-      },
-    );
+      container.addEventListener("dblclick", async event => {
+        event.stopPropagation();
+        if (clickTimeout) {
+          clearTimeout(clickTimeout);
+          clickTimeout = null;
+        }
+        const actor = /** @type {TeriockActor} */ await fromUuid(container.dataset.actorUuid);
+        if (actor?.isOwner) await actor.sheet.render(true);
+      });
+    });
 
     // Bind common listeners
     bindCommonActions(element);
 
     // Add roll context menus
-    for (const roll of this.document.rolls) {
-      roll.bindContextMenus(element);
-    }
+    for (const roll of this.document.rolls) roll.bindContextMenus(element);
   }
 
   /**
@@ -153,17 +137,12 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
   collapsePanels(htmlElement) {
     let autoCollapse;
     const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
-    if (defaultCollapse === "closed") {
-      autoCollapse = true;
-    } else if (defaultCollapse === "open") {
-      autoCollapse = false;
-    } else {
+    if (defaultCollapse === "closed") autoCollapse = true;
+    else if (defaultCollapse === "open") autoCollapse = false;
+    else {
       autoCollapse =
         this.document.timestamp < Date.now() - game.teriock.getSetting("autoPanelCollapseTime") * 60 * 1000;
     }
-    TeriockItem.toggleCollapse(htmlElement, {
-      autoCollapse: true,
-      collapseAll: autoCollapse,
-    });
+    TeriockItem.toggleCollapse(htmlElement, { autoCollapse: true, collapseAll: autoCollapse });
   }
 }

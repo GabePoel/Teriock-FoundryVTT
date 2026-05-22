@@ -7,20 +7,11 @@ delete inheritedParts.children;
 
 export default class CustomEffectSheet extends ApplicableEffectSheet {
   /** @inheritDoc */
-  static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(icons.ui.hack, "title") },
-  };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ui.hack, "title") } };
 
   /** @inheritDoc */
-  static PARTS = {
-    ...inheritedParts,
-  };
+  static PARTS = { ...inheritedParts };
 
   /** @inheritDoc */
-  static TABS = {
-    sheet: {
-      ...super.TABS.sheet,
-      tabs: super.TABS.sheet.tabs.filter(tab => tab.id !== "children"),
-    },
-  };
+  static TABS = { sheet: { ...super.TABS.sheet, tabs: super.TABS.sheet.tabs.filter(tab => tab.id !== "children") } };
 }

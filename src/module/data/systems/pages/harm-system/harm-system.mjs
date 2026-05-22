@@ -18,14 +18,16 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes MetaphysicsSystem
  * @mixes RulesSystem
  */
-export default class HarmSystem extends mixClasses(
-  TypeDataModel,
-  mixins.BaseSystemMixin,
-  mixins.RulesSystemMixin,
-  mixins.AutomatableSystemMixin,
-  mixins.MetaphysicsSystemMixin,
-  AccessDataMixin,
-) {
+export default class HarmSystem
+  extends mixClasses(
+    TypeDataModel,
+    mixins.BaseSystemMixin,
+    mixins.RulesSystemMixin,
+    mixins.AutomatableSystemMixin,
+    mixins.MetaphysicsSystemMixin,
+    AccessDataMixin,
+  )
+{
   /** @inheritDoc */
   static get _automationTypes() {
     return [
@@ -60,20 +62,15 @@ export default class HarmSystem extends mixClasses(
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      img: new fields.FilePathField({ categories: ["IMAGE"] }),
-    });
+    return Object.assign(super.defineSchema(), { img: new fields.FilePathField({ categories: ["IMAGE"] }) });
   }
 
   /** @inheritDoc */
   get displayFields() {
-    return [
-      ...super.displayFields,
-      {
-        label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-        path: "text.content",
-      },
-    ];
+    return [...super.displayFields, {
+      label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+      path: "text.content",
+    }];
   }
 
   /** @inheritDoc */
@@ -100,38 +97,27 @@ export default class HarmSystem extends mixClasses(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
     let ref = "";
-    if (this.parent.type === "damage") {
-      ref = "Damaging";
-    }
-    if (this.parent.type === "drain") {
-      ref = "Draining";
-    }
+    if (this.parent.type === "damage") ref = "Damaging";
+    if (this.parent.type === "drain") ref = "Draining";
     this.parent.updateSource(
-      foundry.utils.mergeObject(
-        {
-          system: { img: getImage("effect-types", ref) },
-          text: { content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description") },
-        },
-        data,
-      ),
+      foundry.utils.mergeObject({
+        system: { img: getImage("effect-types", ref) },
+        text: { content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description") },
+      }, data),
     );
   }
 
   /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
   async getPanelParts() {
     return {
-      bars: [
-        {
-          icon: icons.form.normal,
-          label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
-          wrappers: simplifyTags(this._metaphysicsTags),
-        },
-      ],
+      bars: [{
+        icon: icons.form.normal,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
+        wrappers: simplifyTags(this._metaphysicsTags),
+      }],
     };
   }
 

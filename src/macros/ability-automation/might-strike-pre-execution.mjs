@@ -2,11 +2,7 @@ const act = scope.execution.activations.find(a => a.type === "addDocuments");
 const effectObject = act._source.primary.root.data;
 const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
 const childChangeId = foundry.utils.randomID();
-const shared = {
-  category: "armament",
-  qualifier: `@class.${equipmentClass}`,
-  type: "childChange",
-};
+const shared = { category: "armament", qualifier: `@class.${equipmentClass}`, type: "childChange" };
 effectObject.system.automations[childChangeId] = {
   _id: childChangeId,
   changeType: "add",
@@ -32,7 +28,4 @@ if (scope.execution.competence.fluent) {
     ...shared,
   };
 }
-act.updateSource({
-  "primary.root.id": effectObject,
-  "secondary.root.id": effectObject,
-});
+act.updateSource({ "primary.root.id": effectObject, "secondary.root.id": effectObject });

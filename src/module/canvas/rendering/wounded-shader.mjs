@@ -6,10 +6,7 @@ const { BackgroundVisionShader, ColorationVisionShader } = foundry.canvas.render
 export class WoundedBackgroundVisionShader extends BackgroundVisionShader {
   /** @inheritdoc */
   static get defaultUniforms() {
-    return {
-      ...super.defaultUniforms,
-      colorTint: [1.0, 1.0, 1.0],
-    };
+    return { ...super.defaultUniforms, colorTint: [1.0, 1.0, 1.0] };
   }
 
   /** @override */

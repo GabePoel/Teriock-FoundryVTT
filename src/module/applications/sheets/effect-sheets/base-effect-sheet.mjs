@@ -13,12 +13,9 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @mixes CommonSheet
  * @property {AnyActiveEffect} document
  */
-export default class BaseEffectSheet extends mixClasses(
-  ActiveEffectConfig,
-  mixins.CommonSheetMixin,
-  mixins.ChildSheetMixin,
-  mixins.ChangesSheetMixin,
-) {
+export default class BaseEffectSheet
+  extends mixClasses(ActiveEffectConfig, mixins.CommonSheetMixin, mixins.ChildSheetMixin, mixins.ChangesSheetMixin)
+{
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -39,9 +36,7 @@ export default class BaseEffectSheet extends mixClasses(
 
   /** @inheritDoc */
   async _onDropChild(event, dropData) {
-    if (dropData.type !== "ActiveEffect") {
-      return;
-    }
+    if (dropData.type !== "ActiveEffect") return;
     return super._onDropChild(event, dropData);
   }
 

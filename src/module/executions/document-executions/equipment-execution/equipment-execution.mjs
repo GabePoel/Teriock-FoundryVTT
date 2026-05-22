@@ -22,17 +22,13 @@ export default class EquipmentExecution extends ArmamentExecution {
   async _buildSourcePanel() {
     if (this.secret) {
       return {
-        blocks: [
-          {
-            text: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.used"),
-            title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-          },
-        ],
+        blocks: [{
+          text: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.used"),
+          title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+        }],
         icon: TERIOCK.config.document.equipment.icon,
         image: getImage("equipment", this.source.system.equipmentType),
-        name: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", {
-          type: this.source.system.equipmentTypeName,
-        }),
+        name: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", { type: this.source.system.equipmentTypeName }),
       };
     } else {
       return super._buildSourcePanel();

@@ -13,11 +13,9 @@ const { JournalEntryPage } = foundry.documents;
  * @mixes BaseDocument
  * @mixes PanelDocument
  */
-export default class TeriockJournalEntryPage extends mixClasses(
-  JournalEntryPage,
-  mixins.BaseDocumentMixin,
-  mixins.PanelDocumentMixin,
-) {
+export default class TeriockJournalEntryPage
+  extends mixClasses(JournalEntryPage, mixins.BaseDocumentMixin, mixins.PanelDocumentMixin)
+{
   /**
    * An image that represents this.
    * @return {string}
@@ -39,9 +37,7 @@ export default class TeriockJournalEntryPage extends mixClasses(
   async _buildEmbedHTML(config, options = {}) {
     const embed = await super._buildEmbedHTML(config, options);
     if (!embed && ["damage", "drain"].includes(this.type)) {
-      if (["damage", "drain"].includes(this.type)) {
-        return this._embedTextPage(config, options);
-      }
+      if (["damage", "drain"].includes(this.type)) return this._embedTextPage(config, options);
     }
     return embed;
   }
@@ -54,16 +50,13 @@ export default class TeriockJournalEntryPage extends mixClasses(
     const html = div.innerHTML;
     return {
       ...(await super.getPanelParts()),
-      blocks: [
-        {
-          text: html,
-          title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-        },
-      ],
-      icon:
-        documentConfig[this.type]?.icon ||
-        this.getFlag("teriock", "journalIcon") ||
-        TERIOCK.display.icons.document.core,
+      blocks: [{
+        text: html,
+        title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+      }],
+      icon: documentConfig[this.type]?.icon
+        || this.getFlag("teriock", "journalIcon")
+        || TERIOCK.display.icons.document.core,
       image: this.img,
     };
   }
@@ -73,10 +66,7 @@ export default class TeriockJournalEntryPage extends mixClasses(
    * @returns {object}
    */
   getRollData() {
-    if (typeof this.system?.getRollData === "function") {
-      return this.system.getRollData();
-    } else {
-      return {};
-    }
+    if (typeof this.system?.getRollData === "function") return this.system.getRollData();
+    else return {};
   }
 }

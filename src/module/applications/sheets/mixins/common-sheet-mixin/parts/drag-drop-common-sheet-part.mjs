@@ -36,9 +36,7 @@ export default Base => {
        * @returns {boolean}
        */
       _canDropChild(doc) {
-        if (!game.teriock.checkEditable(this)) {
-          return false;
-        }
+        if (!game.teriock.checkEditable(this)) return false;
         const children = TERIOCK.config.document[doc?.type]?.plural ?? "";
         const parents = TERIOCK.config.document[this.document?.type]?.plural ?? "";
         if (!this.document.constructor.validateChildType(this.document, doc)) {
@@ -86,16 +84,12 @@ export default Base => {
        */
       async _onDrop(event) {
         const dropData = TeriockTextEditor.getDragEventData(event);
-        if (dropData.startSheet === this.id) {
-          return false;
-        }
+        if (dropData.startSheet === this.id) return false;
         let out;
-        if (dropData.type === "Automation" && typeof this._onDropAutomation === "function") {
+        if (dropData.type === "Automation" && typeof this._onDropAutomation === "function")
           this._onDropAutomation(event);
-        } else if (["ActiveEffect", "Actor", "Item"].includes(dropData.type)) {
-          if (this._tab === "automations") {
-            return false;
-          }
+        else if (["ActiveEffect", "Actor", "Item"].includes(dropData.type)) {
+          if (this._tab === "automations") return false;
           out = await this._onDropChild(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
           out = await this._onDropJournalEntryPage(event, dropData);
@@ -115,12 +109,8 @@ export default Base => {
         const doc = /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
         const uuid = doc.uuid;
         const obj = doc.toObject(true);
-        if (doc.inCompendium && !doc._stats.compendiumSource) {
-          obj["_stats.compendiumSource"] = uuid;
-        }
-        if (!this._canDropChild(doc)) {
-          return;
-        }
+        if (doc.inCompendium && !doc._stats.compendiumSource) obj["_stats.compendiumSource"] = uuid;
+        if (!this._canDropChild(doc)) return;
         const created = await this.document.createChildDocuments(doc.documentName, [obj]);
         return created[0];
       }
@@ -149,10 +139,7 @@ export default Base => {
           },
           dragSelector: ".draggable",
           dropSelector: null,
-          permissions: {
-            dragstart: this._canDragStart.bind(this),
-            drop: this._canDrop.bind(this),
-          },
+          permissions: { dragstart: this._canDragStart.bind(this), drop: this._canDrop.bind(this) },
         }).bind(this.element);
         await super._onRender(context, options);
       }

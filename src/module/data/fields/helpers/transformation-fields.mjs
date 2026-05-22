@@ -47,9 +47,7 @@ export function automationTransformationFields() {
       required: false,
     }),
     override: new fields.SetField(
-      new fields.StringField({
-        choices: localizeChoices(objectMap(transformationConfig.override, k => k.label)),
-      }),
+      new fields.StringField({ choices: localizeChoices(objectMap(transformationConfig.override, k => k.label)) }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.override.hint",
         initial: Object.keys(transformationConfig.override).filter(k => transformationConfig.override[k].initial),
@@ -67,9 +65,7 @@ export function automationTransformationFields() {
       },
     ),
     suppress: new fields.SetField(
-      new fields.StringField({
-        choices: choiceMap(transformationConfig.suppress, k => documentConfig[k].label),
-      }),
+      new fields.StringField({ choices: choiceMap(transformationConfig.suppress, k => documentConfig[k].label) }),
       {
         hint: "TERIOCK.SCHEMA.Transformation.suppress.hint",
         initial: Object.keys(transformationConfig.suppress).filter(k => transformationConfig.suppress[k].initial),

@@ -16,20 +16,22 @@ import * as parts from "./parts/_module.mjs";
  * @mixes TradecraftsActorSheetPart
  * @mixes DocumentCreationActorSheetPart
  */
-export default class TeriockPlayableActorSheet extends mixClasses(
-  BaseActorSheet,
-  parts.AvatarImageActorSheetPart,
-  parts.CombatActorSheetPart,
-  parts.ConditionsActorSheetPart,
-  parts.DocumentCreationActorSheetPart,
-  parts.MechanicalActorSheetPart,
-  parts.ProtectionsActorSheetPart,
-  parts.RollingActorSheetPart,
-  parts.SidebarActorSheetPart,
-  parts.TabsActorSheetPart,
-  parts.ImpactActorSheetPart,
-  parts.TradecraftsActorSheetPart,
-) {
+export default class TeriockPlayableActorSheet
+  extends mixClasses(
+    BaseActorSheet,
+    parts.AvatarImageActorSheetPart,
+    parts.CombatActorSheetPart,
+    parts.ConditionsActorSheetPart,
+    parts.DocumentCreationActorSheetPart,
+    parts.MechanicalActorSheetPart,
+    parts.ProtectionsActorSheetPart,
+    parts.RollingActorSheetPart,
+    parts.SidebarActorSheetPart,
+    parts.TabsActorSheetPart,
+    parts.ImpactActorSheetPart,
+    parts.TradecraftsActorSheetPart,
+  )
+{
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     classes: ["character"],
@@ -50,10 +52,7 @@ export default class TeriockPlayableActorSheet extends mixClasses(
     await super._onFirstRender(context, options);
     if (this.document.species.length === 0) {
       ui.notifications.warn("TERIOCK.SHEETS.Actor.NOTIFICATIONS.noSpecies", {
-        format: {
-          compendium: _loc(game.packs.get("teriock.species").title),
-          name: this.document.name,
-        },
+        format: { compendium: _loc(game.packs.get("teriock.species").title), name: this.document.name },
         localize: true,
       });
     }

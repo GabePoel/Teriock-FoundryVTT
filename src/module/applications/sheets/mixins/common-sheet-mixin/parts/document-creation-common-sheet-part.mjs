@@ -51,15 +51,11 @@ export default Base => {
         let obj = newDocumentObj("ability");
         if (decision === "import") {
           const out = await selectAbilityDialog();
-          if (!out) {
-            return;
-          }
+          if (!out) return;
           obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
-        if (decision && obj) {
-          await this.document.createChildDocuments("ActiveEffect", [obj]);
-        }
+        if (decision && obj) await this.document.createChildDocuments("ActiveEffect", [obj]);
       }
 
       /**
@@ -77,12 +73,8 @@ export default Base => {
       static async _onCreateBody() {
         const decision = await newDocumentDialog("body");
         let obj = newDocumentObj("body");
-        if (decision === "import") {
-          obj = game.items.fromCompendium(await selectBodyPartDialog());
-        }
-        if (decision && obj) {
-          await this.document.createChildDocuments("Item", [obj]);
-        }
+        if (decision === "import") obj = game.items.fromCompendium(await selectBodyPartDialog());
+        if (decision && obj) await this.document.createChildDocuments("Item", [obj]);
       }
 
       /**
@@ -103,17 +95,13 @@ export default Base => {
         let obj = newDocumentObj("equipment");
         if (decision === "import") {
           const out = await selectEquipmentTypeDialog();
-          if (!out) {
-            return;
-          }
+          if (!out) return;
           obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
           const stack = await this._stackEquipment(obj);
-          if (!stack) {
-            await this.document.createChildDocuments("Item", [obj]);
-          }
+          if (!stack) await this.document.createChildDocuments("Item", [obj]);
         }
       }
 
@@ -125,18 +113,14 @@ export default Base => {
         const tc = await selectTradecraftDialog();
         if (tc) {
           const f = Object.entries(TERIOCK.config.tradecraft).find(([_k, v]) =>
-            Object.keys(v.tradecrafts).includes(tc),
+            Object.keys(v.tradecrafts).includes(tc)
           )[0];
-          await this.document.createChildDocuments("ActiveEffect", [
-            {
-              img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-              name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", {
-                tradecraft: TERIOCK.reference.tradecrafts[tc],
-              }),
-              system: { field: f, tradecraft: tc },
-              type: "fluency",
-            },
-          ]);
+          await this.document.createChildDocuments("ActiveEffect", [{
+            img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+            name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", { tradecraft: TERIOCK.reference.tradecrafts[tc] }),
+            system: { field: f, tradecraft: tc },
+            type: "fluency",
+          }]);
         }
       }
 
@@ -173,15 +157,11 @@ export default Base => {
         let obj = newDocumentObj("property");
         if (decision === "import") {
           const out = await selectPropertyDialog();
-          if (!out) {
-            return;
-          }
+          if (!out) return;
           obj = out.toObject(true);
           obj["_stats.compendiumSource"] = out.uuid;
         }
-        if (decision && obj) {
-          await this.document.createChildDocuments("ActiveEffect", [obj]);
-        }
+        if (decision && obj) await this.document.createChildDocuments("ActiveEffect", [obj]);
       }
 
       /**
@@ -192,9 +172,7 @@ export default Base => {
       static async _onCreateRank() {
         const rankClass = await selectClassDialog();
         const innate = this.document.documentName !== "Actor";
-        if (!rankClass) {
-          return;
-        }
+        if (!rankClass) return;
         const classIdentifier = toKebabCase(rankClass);
         const possibleRanks = await Promise.all([
           teriock.fromIdentifier(`rank:rank-1-${classIdentifier}`),
@@ -211,9 +189,7 @@ export default Base => {
         const rank = /** @type {TeriockRank} */ referenceRank.clone();
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
-          toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
-            innate: innate,
-          });
+          toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate: innate });
           await this.document.createChildDocuments("Item", [toCreate]);
           return;
         }
@@ -250,7 +226,7 @@ export default Base => {
         }
         if (availableSupportAbilityNames.size > 1) {
           const availableSupportAbilities = referenceRank.abilities.filter(a =>
-            availableSupportAbilityNames.has(a.name),
+            availableSupportAbilityNames.has(a.name)
           );
           const chosenSupportAbility = await selectDocumentDialog(availableSupportAbilities, {
             openable: true,
@@ -269,15 +245,9 @@ export default Base => {
           allowedAbilityIds.add(chosenAbility.id);
           chosenAbility.allSubs.map(a => allowedAbilityIds.add(a.id));
         }
-        for (const ability of abilities) {
-          if (!allowedAbilityIds.has(ability?.id)) {
-            abilities.delete(ability?.id);
-          }
-        }
+        for (const ability of abilities) if (!allowedAbilityIds.has(ability?.id)) abilities.delete(ability?.id);
         const toCreate = game.items.fromCompendium(rank);
-        toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, {
-          innate: innate,
-        });
+        toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate: innate });
         await this.document.createChildDocuments("Item", [toCreate]);
       }
 
@@ -296,23 +266,17 @@ export default Base => {
       static async _onCreateSpecies() {
         const decision = await newDocumentDialog("species");
         let obj = newDocumentObj("species");
-        if (decision === "import") {
-          obj = game.items.fromCompendium(await selectSpeciesDialog());
-        }
-        if (decision && obj) {
-          await this.document.createChildDocuments("Item", [obj]);
-        }
+        if (decision === "import") obj = game.items.fromCompendium(await selectSpeciesDialog());
+        if (decision && obj) await this.document.createChildDocuments("Item", [obj]);
       }
 
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(
-          /** @param {HTMLElement} el */ el => {
-            const uuid = el.dataset.uuid;
-            fromUuid(uuid).then(doc => doc?.onEmbed(el));
-          },
-        );
+        this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
+          const uuid = el.dataset.uuid;
+          fromUuid(uuid).then(doc => doc?.onEmbed(el));
+        });
       }
 
       /** @inheritDoc */
@@ -320,16 +284,13 @@ export default Base => {
         const context = await super._prepareContext(options);
         let children = await this.document.getVisibleChildren();
         children = children.filter(c => {
-          if (foundry.utils.hasProperty(c, "system.revealed")) {
+          if (foundry.utils.hasProperty(c, "system.revealed"))
             return foundry.utils.getProperty(c, "system.revealed") || game.user.isGM;
-          } else {
-            return true;
-          }
+          else return true;
         });
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
-          if (options?.getter) {
+          if (options?.getter)
             context[options["getter"]] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
-          }
         }
         return context;
       }
@@ -341,24 +302,21 @@ export default Base => {
        */
       async _stackEquipment(equipment) {
         if (
-          foundry.utils.getProperty(equipment, "system.consumable") &&
-          foundry.utils.getProperty(equipment, "system.quantity") &&
-          equipment?.name
+          foundry.utils.getProperty(equipment, "system.consumable")
+          && foundry.utils.getProperty(equipment, "system.quantity")
+          && equipment?.name
         ) {
-          const stackCandidates = (await this.document.getEquipment()).filter(
-            e =>
-              e.master?.uuid === this.document.uuid &&
-              e.name === equipment.name &&
-              e.system.identifier === foundry.utils.getProperty(equipment, "system.identifier") &&
-              e.system.consumable &&
-              e.system.quantity < e.system.maxQuantity.value,
+          const stackCandidates = (await this.document.getEquipment()).filter(e =>
+            e.master?.uuid === this.document.uuid
+            && e.name === equipment.name
+            && e.system.identifier === foundry.utils.getProperty(equipment, "system.identifier")
+            && e.system.consumable
+            && e.system.quantity < e.system.maxQuantity.value
           );
           if (stackCandidates) {
             const selected = await selectDocumentDialog(stackCandidates, {
               auto: false,
-              hint: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.hint", {
-                name: equipment.name,
-              }),
+              hint: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.hint", { name: equipment.name }),
               openable: true,
               silent: true,
               textKey: "system.remainingString",
@@ -382,9 +340,7 @@ export default Base => {
  */
 function newDocumentObj(type) {
   return {
-    name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", {
-      type: TERIOCK.config.document[type]?.label,
-    }),
+    name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", { type: TERIOCK.config.document[type]?.label }),
     type,
   };
 }

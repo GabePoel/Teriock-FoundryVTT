@@ -15,14 +15,12 @@ export default function IndexButtonSheetMixin(Base) {
     static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
       actions: { sourceRefresh: this._onSourceRefresh },
       window: {
-        controls: [
-          {
-            action: "sourceRefresh",
-            icon: makeIconClass(icons.ui.sourceRefresh, "contextMenu"),
-            label: "TERIOCK.SYSTEMS.Common.MENU.sourceRefresh",
-            ownership: "OWNER",
-          },
-        ],
+        controls: [{
+          action: "sourceRefresh",
+          icon: makeIconClass(icons.ui.sourceRefresh, "contextMenu"),
+          label: "TERIOCK.SYSTEMS.Common.MENU.sourceRefresh",
+          ownership: "OWNER",
+        }],
       },
     };
 

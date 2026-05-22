@@ -10,9 +10,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
  * @returns {void|false}
  */
 function preUse(actor, options = {}) {
-  if (!game.actors.check(actor)) {
-    return false;
-  }
+  if (!game.actors.check(actor)) return false;
   if (["number", "string"].includes(typeof options.competence)) {
     options.proficient = Number(options.competence) >= 1;
     options.fluent = Number(options.competence) >= 2;
@@ -25,13 +23,9 @@ function preUse(actor, options = {}) {
  * @returns {Promise<void>}
  */
 async function useLocal(actor, options = {}) {
-  if (preUse(actor, options) === false) {
-    return;
-  }
+  if (preUse(actor, options) === false) return;
   if (!options.lookup) {
-    ui.notifications.error("TERIOCK.COMMANDS.UseLocal.noLookup", {
-      localize: true,
-    });
+    ui.notifications.error("TERIOCK.COMMANDS.UseLocal.noLookup", { localize: true });
     return;
   }
   await actor.useDocument(options.lookup, options);
@@ -43,19 +37,12 @@ async function useLocal(actor, options = {}) {
  * @returns {Promise<void>}
  */
 async function useExternal(actor, options = {}) {
-  if (preUse(actor, options) === false) {
-    return;
-  }
+  if (preUse(actor, options) === false) return;
   if (!options.uuid) {
-    ui.notifications.error("TERIOCK.COMMANDS.UseExternal.noUuid", {
-      localize: true,
-    });
+    ui.notifications.error("TERIOCK.COMMANDS.UseExternal.noUuid", { localize: true });
     return;
   }
-  const documents = await resolveDocuments([options.uuid], {
-    ...options,
-    expandFolders: true,
-  });
+  const documents = await resolveDocuments([options.uuid], { ...options, expandFolders: true });
   const chosen = documents.length > 1 ? await selectDocumentsDialog(documents) : documents;
   await Promise.all(chosen.map(c => c.use({ ...options, actor })));
 }
@@ -73,9 +60,7 @@ export const useLocalCommand = {
   secondary: useLocal,
   icon: options => inferIconFromIdentifier(options?.lookup),
   label: options =>
-    _loc("TERIOCK.COMMANDS.UseDocument.useNamed", {
-      name: inferNameFromIdentifier(options?.lookup) || "",
-    }),
+    _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name: inferNameFromIdentifier(options?.lookup) || "" }),
 };
 
 /**

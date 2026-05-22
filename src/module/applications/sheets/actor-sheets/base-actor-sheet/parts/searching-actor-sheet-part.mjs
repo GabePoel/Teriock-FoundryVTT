@@ -20,13 +20,9 @@ export default Base =>
       this.element.querySelectorAll(".teriock-block-search[data-search-key]").forEach(
         /** @param {HTMLInputElement} input */ input => {
           const searchKey = input.dataset.searchKey;
-          if (!searchKey) {
-            return;
-          }
+          if (!searchKey) return;
           const resultsContainer = this.element.querySelector(`.teriock-block-results[data-search-key="${searchKey}"]`);
-          if (!resultsContainer) {
-            return;
-          }
+          if (!resultsContainer) return;
           const initial = this._searchStrings[searchKey] || "";
           const searchFilter = new SearchFilter({
             contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,

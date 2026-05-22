@@ -35,6 +35,7 @@ export default function PropagationDataMixin(Base) {
        * @param {Array} [args] - Arguments to pass.
        * @returns {Promise<void>|void}
        */
+      // dprint-ignore
       async _propagateOperation(methodName, isAsync = false, args = []) {
         // Propagate operation to embedded collections
         const collections = this.constructor.metadata?.embedded || {};
@@ -43,11 +44,8 @@ export default function PropagationDataMixin(Base) {
           if (collection) {
             for (const doc of collection) {
               if (typeof doc[methodName] === "function") {
-                if (isAsync) {
-                  await doc[methodName](...args);
-                } else {
-                  doc[methodName](...args);
-                }
+                if (isAsync) await doc[methodName](...args);
+                else doc[methodName](...args);
               }
             }
           }
@@ -91,9 +89,7 @@ export default function PropagationDataMixin(Base) {
             scope.item = /** @type {AnyItem} */ this;
             break;
         }
-        if (this.parent && typeof this.parent.getScope === "function") {
-          Object.assign(scope, this.parent.getScope());
-        }
+        if (this.parent && typeof this.parent.getScope === "function") Object.assign(scope, this.parent.getScope());
         return scope;
       }
 

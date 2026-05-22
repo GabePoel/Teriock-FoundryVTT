@@ -13,13 +13,10 @@ import { TeriockTextEditor } from "../ux/_module.mjs";
 export default async function deathBagDialog(actor) {
   const contentHTML = document.createElement("div");
   contentHTML.append(
-    actor.system.schema.fields.deathBag.fields.pull.toFormGroup(
-      { rootId: foundry.utils.randomID() },
-      {
-        name: "pull",
-        value: actor.system.deathBag.pull,
-      },
-    ),
+    actor.system.schema.fields.deathBag.fields.pull.toFormGroup({ rootId: foundry.utils.randomID() }, {
+      name: "pull",
+      value: actor.system.deathBag.pull,
+    }),
   );
   const stonesHTML = document.createElement("fieldset");
   const stonesLegendHTML = document.createElement("legend");
@@ -29,29 +26,23 @@ export default async function deathBagDialog(actor) {
     stonesHTML.append(
       actor.system.schema.fields.deathBag.fields.stones.fields[color].toFormGroup(
         { rootId: foundry.utils.randomID() },
-        {
-          name: color,
-          value: actor.system.deathBag.stones[color],
-        },
+        { name: color, value: actor.system.deathBag.stones[color] },
       ),
     );
   }
   contentHTML.append(stonesHTML);
   await new TeriockDialog({
-    buttons: [
-      {
-        action: "makePull",
-        default: true,
-        label: _loc("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
-        callback: async (_event, button) => {
-          const stonesFormulas = {};
-          for (const color of ["black", "red", "white"]) {
-            stonesFormulas[color] = button.form.elements.namedItem(color).value;
-          }
-          await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas, actor);
-        },
+    buttons: [{
+      action: "makePull",
+      default: true,
+      label: _loc("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
+      callback: async (_event, button) => {
+        const stonesFormulas = {};
+        for (const color of ["black", "red", "white"])
+          stonesFormulas[color] = button.form.elements.namedItem(color).value;
+        await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas, actor);
       },
-    ],
+    }],
     content: contentHTML,
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.deathBag, "title"),
@@ -68,9 +59,7 @@ export default async function deathBagDialog(actor) {
  */
 async function deathBagPull(pullFormula, stonesFormulas, actor) {
   let rollData = {};
-  if (actor) {
-    rollData = actor.getRollData();
-  }
+  if (actor) rollData = actor.getRollData();
   const toPullCount = Math.floor(Math.max(await BaseRoll.getValue(pullFormula, rollData), 0));
   const startingStones =
     /** @type {Record<Teriock.Keys.DeathBagStoneColor, number>} */
@@ -90,28 +79,15 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
   }
   if (totalStonesCount > 99) {
     ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.maxStones", {
-      format: {
-        count: totalStonesCount,
-      },
+      format: { count: totalStonesCount },
       localize: true,
     });
   } else {
-    for (const color of Object.keys(startingStones)) {
-      for (let i = 0; i < startingStones[color]; i++) {
-        bag.push(color);
-      }
-    }
-    wrappers.push(
-      _loc("TERIOCK.DIALOGS.DeathBag.PANEL.total", {
-        count: bag.length,
-      }),
-    );
+    for (const color of Object.keys(startingStones)) for (let i = 0; i < startingStones[color]; i++) bag.push(color);
+    wrappers.push(_loc("TERIOCK.DIALOGS.DeathBag.PANEL.total", { count: bag.length }));
     if (bag.length < toPullCount) {
       ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.cannotPull", {
-        format: {
-          bagCount: bag.length,
-          toPullCount,
-        },
+        format: { bagCount: bag.length, toPullCount },
         localize: true,
       });
     } else {
@@ -124,26 +100,19 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         const pulledColor = bag.splice(pulledIndex, 1)[0];
         pulledStones[pulledColor] = pulledStones[pulledColor] + 1;
       }
-      const context = {
-        pulledCount,
-        pulledStones,
-      };
+      const context = { pulledCount, pulledStones };
       /** @type {Teriock.Messages.MessagePanel} */
       const panelParts = {
-        bars: [
-          {
-            icon: TERIOCK.config.document.stone.icon,
-            label: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag"),
-            wrappers: wrappers,
-          },
-        ],
-        blocks: [
-          {
-            italic: true,
-            text: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText"),
-            title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.description"),
-          },
-        ],
+        bars: [{
+          icon: TERIOCK.config.document.stone.icon,
+          label: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag"),
+          wrappers: wrappers,
+        }],
+        blocks: [{
+          italic: true,
+          text: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.descriptionText"),
+          title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.description"),
+        }],
         icon: TERIOCK.display.icons.ui.deathBag,
         image: getImage("misc", "Death Bag"),
         name: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
@@ -160,10 +129,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
           outcome = _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome3");
           break;
       }
-      panelParts.blocks.push({
-        text: outcome,
-        title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome"),
-      });
+      panelParts.blocks.push({ text: outcome, title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome") });
       const pullContent = await TeriockTextEditor.renderTemplate("teriock/ui/death-bag", context);
       const panel = await TeriockTextEditor.enrichPanel(panelParts);
       const chatMessageData = {
@@ -171,11 +137,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
         system: {
           panels: [panel],
-          tags: [
-            _loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", {
-              count: toPullCount,
-            }),
-          ],
+          tags: [_loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", { count: toPullCount })],
         },
       };
       await TeriockChatMessage.create(chatMessageData, { defaultMode: true });

@@ -20,9 +20,7 @@ export default class TeriockContextMenu extends ContextMenu {
         icon: c.icon,
         label: c.label,
         onClick: async () => {
-          await document.update({
-            [c.path || options.path]: c.value,
-          });
+          await document.update({ [c.path || options.path]: c.value });
         },
       };
     });
@@ -36,11 +34,8 @@ export default class TeriockContextMenu extends ContextMenu {
    * @param {Foundry.ContextMenuOptions} [options]
    */
   constructor(container, selector, menuItems, options = {}) {
-    for (const item of menuItems) {
-      if (item.icon && !item.icon.includes("<i")) {
-        item.icon = makeIcon(item.icon, "contextMenu");
-      }
-    }
+    for (const item of menuItems)
+      if (item.icon && !item.icon.includes("<i")) item.icon = makeIcon(item.icon, "contextMenu");
     super(container, selector, menuItems, options);
     const { forceDirection } = options;
     this.#forceDirection = forceDirection;
@@ -56,11 +51,8 @@ export default class TeriockContextMenu extends ContextMenu {
    * @returns {boolean}
    */
   get expandUp() {
-    if (!this.#forceDirection) {
-      return super.expandUp;
-    } else {
-      return this.#forceDirection === "up";
-    }
+    if (!this.#forceDirection) return super.expandUp;
+    else return this.#forceDirection === "up";
   }
 
   /** @inheritDoc */

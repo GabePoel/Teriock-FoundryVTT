@@ -8,10 +8,7 @@ import EnhancedStringField from "./enhanced-string-field.mjs";
 export default class FormulaField extends EnhancedStringField {
   /** @inheritdoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      deterministic: false,
-      required: false,
-    });
+    return foundry.utils.mergeObject(super._defaults, { deterministic: false, required: false });
   }
 
   /**
@@ -37,17 +34,13 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeBoost(value, delta, _model, _change) {
-    if (!delta || this.deterministic) {
-      return value;
-    }
+    if (!delta || this.deterministic) return value;
     return formula.boostFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeDowngrade(value, delta, _model, _change) {
-    if (!value) {
-      return delta;
-    }
+    if (!value) return delta;
     return this.deterministic
       ? formula.downgradeDeterministicFormula(value, delta)
       : formula.downgradeIndeterministicFormula(value, delta);
@@ -72,9 +65,7 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeAdd(value, delta, _model, _change) {
-    if (!delta || this.deterministic) {
-      return value;
-    }
+    if (!delta || this.deterministic) return value;
     return formula.addTypesToFormula(value, delta);
   }
 
@@ -87,9 +78,7 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeRemove(value, delta, _model, _change) {
-    if (!delta || this.deterministic) {
-      return value;
-    }
+    if (!delta || this.deterministic) return value;
     return formula.removeTypesFromFormula(value, delta);
   }
 
@@ -102,17 +91,13 @@ export default class FormulaField extends EnhancedStringField {
    * @returns {Teriock.System.FormulaString}
    */
   _applyChangeTypeSet(value, delta, _model, _change) {
-    if (!delta || this.deterministic) {
-      return value;
-    }
+    if (!delta || this.deterministic) return value;
     return formula.setTypesOfFormula(value, delta);
   }
 
   /** @inheritDoc */
   _applyChangeUpgrade(value, delta, _model, _change) {
-    if (!value) {
-      return delta;
-    }
+    if (!value) return delta;
     return this.deterministic
       ? formula.upgradeDeterministicFormula(value, delta)
       : formula.upgradeIndeterministicFormula(value, delta);
@@ -129,14 +114,10 @@ export default class FormulaField extends EnhancedStringField {
     const element = super._toInput(config);
     const isInput = element.tagName === "INPUT";
     const nestedInput = isInput ? null : element.querySelector("input");
-    if (!isInput && !nestedInput) {
-      return element;
-    }
+    if (!isInput && !nestedInput) return element;
     config.value ??= this.getInitialValue({}) ?? "";
     const formulaInput = foundry.applications.elements.HTMLFormulaInputElement.create(config);
-    if (isInput) {
-      return formulaInput;
-    }
+    if (isInput) return formulaInput;
     nestedInput.replaceWith(formulaInput);
     return element;
   }
@@ -145,9 +126,7 @@ export default class FormulaField extends EnhancedStringField {
   _validateType(value) {
     if (this.deterministic) {
       const roll = new BaseRoll(value, {});
-      if (!roll.isDeterministic) {
-        throw new Error(`Deterministic formula must not contain dice terms: ${value}`);
-      }
+      if (!roll.isDeterministic) throw new Error(`Deterministic formula must not contain dice terms: ${value}`);
     }
     super._validateType(value);
   }
@@ -156,17 +135,11 @@ export default class FormulaField extends EnhancedStringField {
   applyChange(value, model, change, { replacementData = {} } = {}) {
     let updated;
     const delta = change.value;
-    if (change.type === "boost") {
-      updated = this._applyChangeBoost(value, delta, model, change);
-    } else if (change.type === "typeAdd") {
-      updated = this._applyChangeTypeAdd(value, delta, model, change);
-    } else if (change.type === "typeRemove") {
-      updated = this._applyChangeTypeRemove(value, delta, model, change);
-    } else if (change.type === "typeSet") {
-      updated = this._applyChangeTypeSet(value, delta, model, change);
-    } else {
-      return super.applyChange(value, model, change, { replacementData });
-    }
+    if (change.type === "boost") updated = this._applyChangeBoost(value, delta, model, change);
+    else if (change.type === "typeAdd") updated = this._applyChangeTypeAdd(value, delta, model, change);
+    else if (change.type === "typeRemove") updated = this._applyChangeTypeRemove(value, delta, model, change);
+    else if (change.type === "typeSet") updated = this._applyChangeTypeSet(value, delta, model, change);
+    else return super.applyChange(value, model, change, { replacementData });
     return this.initialize(updated, model);
   }
 

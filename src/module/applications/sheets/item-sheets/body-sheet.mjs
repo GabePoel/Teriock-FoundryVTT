@@ -12,8 +12,5 @@ export default class BodySheet extends ArmamentSheet {
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
-  static DEFAULT_OPTIONS = {
-    classes: ["body"],
-    window: { icon: makeIconClass(documentConfig.body.icon, "title") },
-  };
+  static DEFAULT_OPTIONS = { classes: ["body"], window: { icon: makeIconClass(documentConfig.body.icon, "title") } };
 }

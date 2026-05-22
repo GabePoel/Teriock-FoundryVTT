@@ -22,33 +22,19 @@ export default Base => {
         const actorUpdate = {};
         const itemUpdates = [];
         const statuses = [];
-        if (options.hp) {
-          actorUpdate["system.hp.value"] = this.hp.max;
-        }
-        if (options.mp) {
-          actorUpdate["system.mp.value"] = this.mp.max;
-        }
+        if (options.hp) actorUpdate["system.hp.value"] = this.hp.max;
+        if (options.mp) actorUpdate["system.mp.value"] = this.mp.max;
         if (options.hpDice || options.mpDice) {
           for (const item of this.parent.items.filter(i => i.metadata.stats)) {
             const itemUpdate = { _id: item.id };
-            if (options.hpDice) {
-              itemUpdate["system.statDice.hp.spent"] = [];
-            }
-            if (options.mpDice) {
-              itemUpdate["system.statDice.mp.spent"] = [];
-            }
+            if (options.hpDice) itemUpdate["system.statDice.hp.spent"] = [];
+            if (options.mpDice) itemUpdate["system.statDice.mp.spent"] = [];
             itemUpdates.push(itemUpdate);
           }
         }
-        if (options.conditions) {
-          statuses.push(...Object.values(TERIOCK.data.conditions).map(s => s.id));
-        }
-        if (options.hacks) {
-          statuses.push(...Object.values(TERIOCK.data.hacks).map(s => s.id));
-        }
-        if (options.cover) {
-          statuses.push(...Object.values(TERIOCK.data.cover).map(s => s.id));
-        }
+        if (options.conditions) statuses.push(...Object.values(TERIOCK.data.conditions).map(s => s.id));
+        if (options.hacks) statuses.push(...Object.values(TERIOCK.data.hacks).map(s => s.id));
+        if (options.cover) statuses.push(...Object.values(TERIOCK.data.cover).map(s => s.id));
         if (options.combat) {
           actorUpdate["system.combat.attackPenalty"] = 0;
           actorUpdate["system.combat.hasReaction"] = true;
@@ -80,12 +66,8 @@ export default Base => {
        */
       async takeLongRest() {
         await this.parent.hookCall("longRest");
-        if (this.parent.statuses.has("dead")) {
-          return;
-        }
-        if (!game.teriock.getSetting("showLongRestDialog")) {
-          return;
-        }
+        if (this.parent.statuses.has("dead")) return;
+        if (!game.teriock.getSetting("showLongRestDialog")) return;
         const heal = await TeriockDialog.confirm({
           content: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.healText"),
           modal: true,
@@ -95,15 +77,8 @@ export default Base => {
             title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label"),
           },
         });
-        if (!heal) {
-          return;
-        }
-        await this.partialReset({
-          hp: true,
-          hpDice: true,
-          mp: true,
-          mpDice: true,
-        });
+        if (!heal) return;
+        await this.partialReset({ hp: true, hpDice: true, mp: true, mpDice: true });
       }
 
       /**

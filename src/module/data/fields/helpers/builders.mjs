@@ -23,14 +23,11 @@ const {
  */
 export function combatExpirationSourceTypeField() {
   return new StringField({
-    choices: localizeChoices(
-      {
-        everyone: "TERIOCK.SCHEMA.CombatExpiration.who.choices.everyone",
-        executor: "TERIOCK.SCHEMA.CombatExpiration.who.choices.executor",
-        target: "TERIOCK.SCHEMA.CombatExpiration.who.choices.target",
-      },
-      { sort: false },
-    ),
+    choices: localizeChoices({
+      everyone: "TERIOCK.SCHEMA.CombatExpiration.who.choices.everyone",
+      executor: "TERIOCK.SCHEMA.CombatExpiration.who.choices.executor",
+      target: "TERIOCK.SCHEMA.CombatExpiration.who.choices.target",
+    }, { sort: false }),
     hint: _loc("TERIOCK.SCHEMA.CombatExpiration.who.hint"),
     initial: "target",
     label: _loc("TERIOCK.SCHEMA.CombatExpiration.who.label"),
@@ -109,9 +106,7 @@ export function combatExpirationTimingField() {
  */
 export function changeTypeField() {
   return new EnhancedStringField({
-    choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, {
-      localize: true,
-    }),
+    choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, { localize: true }),
     initial: "add",
     label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
     required: true,
@@ -124,14 +119,8 @@ export function changeTypeField() {
  */
 export function qualifiedChangeField() {
   return new SchemaField({
-    key: new EnhancedStringField({
-      initial: "",
-      label: "TERIOCK.SCHEMA.QualifiedChange.key.label",
-    }),
-    priority: new EnhancedNumberField({
-      initial: 20,
-      label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
-    }),
+    key: new EnhancedStringField({ initial: "", label: "TERIOCK.SCHEMA.QualifiedChange.key.label" }),
+    priority: new EnhancedNumberField({ initial: 20, label: "TERIOCK.SCHEMA.QualifiedChange.priority.label" }),
     target: new EnhancedStringField({
       choices: localizeChoices(TERIOCK.config.change.parent.targets),
       initial: "Actor",
@@ -140,11 +129,7 @@ export function qualifiedChangeField() {
       required: true,
     }),
     type: changeTypeField(),
-    value: new FormulaField({
-      deterministic: false,
-      initial: "",
-      label: "TERIOCK.SCHEMA.QualifiedChange.value.label",
-    }),
+    value: new FormulaField({ deterministic: false, initial: "", label: "TERIOCK.SCHEMA.QualifiedChange.value.label" }),
   });
 }
 
@@ -202,10 +187,7 @@ export function barsField() {
     new SchemaField({
       icon: new StringField({ initial: "", required: false }),
       label: new StringField({ blank: true, nullable: true, required: false }),
-      wrappers: new ArrayField(new StringField(), {
-        initial: [],
-        required: false,
-      }),
+      wrappers: new ArrayField(new StringField(), { initial: [], required: false }),
     }),
     { initial: [], required: false },
   );
@@ -216,12 +198,7 @@ export function barsField() {
  * @returns {StringField}
  */
 function nullString() {
-  return new StringField({
-    blank: true,
-    initial: null,
-    nullable: true,
-    required: false,
-  });
+  return new StringField({ blank: true, initial: null, nullable: true, required: false });
 }
 
 /**
@@ -249,11 +226,7 @@ export function panelsField() {
       image: nullString(),
       label: nullString(),
       name: nullString(),
-      uuid: new DocumentUUIDField({
-        blank: true,
-        initial: null,
-        nullable: true,
-      }),
+      uuid: new DocumentUUIDField({ blank: true, initial: null, nullable: true }),
     }),
     { initial: [], required: false },
   );
@@ -270,9 +243,7 @@ export function blockSizeField(options = {}) {
   const { child = "TERIOCK.SCHEMA.BlockSize.default", initial = "medium" } = options;
   return new StringField({
     choices: TERIOCK.config.display.sizes,
-    hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", {
-      name: _loc(child).toLocaleLowerCase(),
-    }),
+    hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", { name: _loc(child).toLocaleLowerCase() }),
     initial,
     label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
   });
@@ -288,9 +259,7 @@ export function blockSizeField(options = {}) {
 export function blockGaplessField(options = {}) {
   const { child = "TERIOCK.SCHEMA.BlackGapless.default", initial = false } = options;
   return new BooleanField({
-    hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", {
-      name: _loc(child).toLocaleLowerCase(),
-    }),
+    hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", { name: _loc(child).toLocaleLowerCase() }),
     initial,
     label: _loc("TERIOCK.SCHEMA.BlackGapless.label", { name: _loc(child) }),
   });
@@ -302,10 +271,7 @@ export function blockGaplessField(options = {}) {
  */
 export function competenceField() {
   return new NumberField({
-    choices: objectMap(competenceConfig.levels, l => l.label, {
-      localize: true,
-      sort: false,
-    }),
+    choices: objectMap(competenceConfig.levels, l => l.label, { localize: true, sort: false }),
     hint: _loc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
     label: _loc("TERIOCK.SCHEMA.Competence.label"),
@@ -354,13 +320,9 @@ export function movementActionField(options = {}) {
       objectMap(
         Object.fromEntries(
           Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
-            if (typeof v.canSelect === "function") {
-              return v.canSelect();
-            } else if (typeof v.canSelect === "boolean") {
-              return v.canSelect;
-            } else {
-              return true;
-            }
+            if (typeof v.canSelect === "function") return v.canSelect();
+            else if (typeof v.canSelect === "boolean") return v.canSelect;
+            else return true;
           }),
         ),
         t => t.label,
@@ -379,12 +341,7 @@ export function movementActionField(options = {}) {
  * @returns {FormulaField}
  */
 export function rollableFormulaField(options = {}) {
-  return new FormulaField({
-    deterministic: false,
-    initial: "0",
-    nullable: false,
-    ...options,
-  });
+  return new FormulaField({ deterministic: false, initial: "0", nullable: false, ...options });
 }
 
 /**
@@ -393,11 +350,5 @@ export function rollableFormulaField(options = {}) {
  * @returns {EvaluationField}
  */
 export function defenseField(options = {}) {
-  return new EvaluationField({
-    deterministic: true,
-    floor: true,
-    min: 0,
-    model: DefenseModel,
-    ...options,
-  });
+  return new EvaluationField({ deterministic: true, floor: true, min: 0, model: DefenseModel, ...options });
 }

@@ -15,14 +15,12 @@ export default function ConfigButtonSheetMixin(Base) {
     static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
       actions: { openDocumentSettings: this._onOpenDocumentSettings },
       window: {
-        controls: [
-          {
-            action: "openDocumentSettings",
-            icon: makeIconClass(icons.ui.configure, "contextMenu"),
-            label: "TERIOCK.SYSTEMS.Common.MENU.configureDocument",
-            ownership: "OWNER",
-          },
-        ],
+        controls: [{
+          action: "openDocumentSettings",
+          icon: makeIconClass(icons.ui.configure, "contextMenu"),
+          label: "TERIOCK.SYSTEMS.Common.MENU.configureDocument",
+          ownership: "OWNER",
+        }],
       },
     };
 
@@ -31,10 +29,7 @@ export default function ConfigButtonSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     static async _onOpenDocumentSettings() {
-      const settingsSheet = new DocumentSettingsSheet({
-        document: this.document,
-        sheetConfig: false,
-      });
+      const settingsSheet = new DocumentSettingsSheet({ document: this.document, sheetConfig: false });
       await settingsSheet.render({ force: true });
     }
   };

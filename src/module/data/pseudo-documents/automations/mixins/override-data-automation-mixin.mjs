@@ -31,9 +31,7 @@ export default function OverrideDataAutomationMixin(Base) {
        */
       get _overrideDataPaths() {
         const paths = ["overrideData"];
-        if (this.overrideData) {
-          paths.push("data");
-        }
+        if (this.overrideData) paths.push("data");
         return paths;
       }
     }

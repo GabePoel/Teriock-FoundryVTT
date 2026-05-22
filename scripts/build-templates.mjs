@@ -14,16 +14,13 @@ const FOUNDRY_ROOT = "systems/teriock/src/templates";
  * @returns {string[]}
  */
 function getHandlebarsFiles(dir, fileList = []) {
-  if (!fs.existsSync(dir)) {
-    console.error(`Directory not found: ${dir}`);
-  }
+  if (!fs.existsSync(dir)) console.error(`Directory not found: ${dir}`);
   const files = fs.readdirSync(dir);
   for (const file of files) {
     const fullPath = path.join(dir, file);
     const stat = fs.statSync(fullPath);
-    if (stat.isDirectory()) {
-      getHandlebarsFiles(fullPath, fileList);
-    } else if (file.endsWith(".hbs")) {
+    if (stat.isDirectory()) getHandlebarsFiles(fullPath, fileList);
+    else if (file.endsWith(".hbs")) {
       const relativePath = path.relative(DEV_ROOT, fullPath);
       const virtualPath = `${FOUNDRY_ROOT}/${relativePath}`;
       fileList.push(virtualPath);

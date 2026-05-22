@@ -18,9 +18,7 @@ export default function WikiButtonSheetMixin(Base) {
       }
 
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { wikiOpenThis: this.#onWikiOpenThis },
-      };
+      static DEFAULT_OPTIONS = { actions: { wikiOpenThis: this.#onWikiOpenThis } };
     }
   );
 }

@@ -17,9 +17,7 @@ export default function TradecraftExecutionMixin(Base) {
        */
       constructor(options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {}) {
         super(options);
-        if (this.actor) {
-          this.bonus = addFormula(this.actor.system.tradecrafts[this.tradecraft].formula, this.bonus);
-        }
+        if (this.actor) this.bonus = addFormula(this.actor.system.tradecrafts[this.tradecraft].formula, this.bonus);
       }
 
       /** @inheritDoc */
@@ -35,9 +33,7 @@ export default function TradecraftExecutionMixin(Base) {
             value: TERIOCK.reference.tradecrafts[this.tradecraft],
           });
         }
-        return _loc("TERIOCK.ROLLS.Tradecraft.name", {
-          value: TERIOCK.reference.tradecrafts[this.tradecraft],
-        });
+        return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.reference.tradecrafts[this.tradecraft] });
       }
 
       /**

@@ -15,9 +15,7 @@ export default fluencyContext;
 preLocalize("rollContext.fluency");
 Hooks.once("i18nInit", () => {
   Object.entries(tradecraftConfig).forEach(([k, v]) => {
-    fluencyContext[`field.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Fluency.field", {
-      name: _loc(v.name),
-    });
+    fluencyContext[`field.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Fluency.field", { name: _loc(v.name) });
   });
 
   Object.entries(TERIOCK.reference.tradecrafts).forEach(([k, v]) => {

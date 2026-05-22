@@ -16,9 +16,7 @@ export default function BaseSystemMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return {
-          _src: new fields.DocumentUUIDField({ initial: null, nullable: true }),
-        };
+        return { _src: new fields.DocumentUUIDField({ initial: null, nullable: true }) };
       }
 
       /** @returns {string} */
@@ -59,12 +57,8 @@ export default function BaseSystemMixin(Base) {
       /** @returns {string} */
       get fullName() {
         let name = this.parent?.name ?? "";
-        if (this._nameBadge) {
-          name = _loc("TERIOCK.SYSTEMS.Base.EMBED.valueNameString", {
-            name,
-            value: this._nameBadge.trim(),
-          });
-        }
+        if (this._nameBadge)
+          name = _loc("TERIOCK.SYSTEMS.Base.EMBED.valueNameString", { name, value: this._nameBadge.trim() });
         if (this._nameTags.length > 0) {
           name = _loc("TERIOCK.SYSTEMS.Base.EMBED.taggedNameString", {
             name,

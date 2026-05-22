@@ -25,15 +25,17 @@ const { fields } = foundry.data;
  * @mixes RevelationSystem
  * @mixes WikiSystem
  */
-export default class PropertySystem extends mixClasses(
-  CleanedEffectSystem,
-  mixins.AdjustableSystemMixin,
-  mixins.ConsumableSystemMixin,
-  mixins.GrantedSystemMixin,
-  mixins.MetaphysicsSystemMixin,
-  mixins.RevelationSystemMixin,
-  mixins.WikiSystemMixin,
-) {
+export default class PropertySystem
+  extends mixClasses(
+    CleanedEffectSystem,
+    mixins.AdjustableSystemMixin,
+    mixins.ConsumableSystemMixin,
+    mixins.GrantedSystemMixin,
+    mixins.MetaphysicsSystemMixin,
+    mixins.RevelationSystemMixin,
+    mixins.WikiSystemMixin,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Property"];
 
@@ -102,21 +104,17 @@ export default class PropertySystem extends mixClasses(
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (!this.consumable) {
-      parts.subtitle = TERIOCK.config.effect.form[this.form].label;
-    }
+    if (!this.consumable) parts.subtitle = TERIOCK.config.effect.form[this.form].label;
     return parts;
   }
 
   /** @inheritDoc */
   get messageBars() {
-    return [
-      {
-        icon: TERIOCK.config.effect.form[this.form].icon,
-        label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
-        wrappers: [TERIOCK.config.effect.form[this.form].label, ...simplifyTags(this._metaphysicsTags)],
-      },
-    ];
+    return [{
+      icon: TERIOCK.config.effect.form[this.form].icon,
+      label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
+      wrappers: [TERIOCK.config.effect.form[this.form].label, ...simplifyTags(this._metaphysicsTags)],
+    }];
   }
 
   /**
@@ -124,9 +122,7 @@ export default class PropertySystem extends mixClasses(
    * @returns {"Actor"|"Item"}
    */
   get modifies() {
-    if (this.modifiesActor) {
-      return "Actor";
-    }
+    if (this.modifiesActor) return "Actor";
     return super.modifies;
   }
 

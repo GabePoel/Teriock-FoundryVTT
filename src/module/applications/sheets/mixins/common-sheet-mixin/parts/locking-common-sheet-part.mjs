@@ -10,9 +10,7 @@ export default Base => {
      */
     class LockingCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { toggleLockThis: this._onToggleLockThis },
-      };
+      static DEFAULT_OPTIONS = { actions: { toggleLockThis: this._onToggleLockThis } };
 
       /**
        * Toggles the lock state of the current sheet.
@@ -52,26 +50,23 @@ export default Base => {
       async _onRender(context, options) {
         await super._onRender(context, options);
         const toggleButton = this.window.header?.querySelector("[data-action='toggleLockThis']");
-        if (toggleButton) {
-          this.#setToggleLockButtonAttributes(toggleButton);
-        }
+        if (toggleButton) this.#setToggleLockButtonAttributes(toggleButton);
       }
 
       /** @inheritDoc */
       async _renderFrame(options = {}) {
         const frame = await super._renderFrame(options);
         if (
-          this.document.documentName === "Item" ||
-          this.document.documentName === "ActiveEffect" ||
-          this.document.documentName === "JournalEntryPage"
+          this.document.documentName === "Item"
+          || this.document.documentName === "ActiveEffect"
+          || this.document.documentName === "JournalEntryPage"
         ) {
           const toggleButton = document.createElement("button");
           toggleButton.classList.add(...["header-control", "icon", "fa-solid"]);
           toggleButton.setAttribute("data-action", "toggleLockThis");
           this.#setToggleLockButtonAttributes(toggleButton);
-          if (!this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked)) {
+          if (!this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked))
             toggleButton.setAttribute("disabled", "disabled");
-          }
           this.window.controls?.before(toggleButton);
         }
         return frame;

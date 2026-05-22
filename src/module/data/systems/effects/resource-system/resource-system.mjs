@@ -11,11 +11,9 @@ import CleanedEffectSystem from "../cleaned-effect-system.mjs";
  * @mixes ConsumableSystem
  * @mixes RevelationSystem
  */
-export default class ResourceSystem extends mixClasses(
-  CleanedEffectSystem,
-  mixins.ConsumableSystemMixin,
-  mixins.RevelationSystemMixin,
-) {
+export default class ResourceSystem
+  extends mixClasses(CleanedEffectSystem, mixins.ConsumableSystemMixin, mixins.RevelationSystemMixin)
+{
   /** @inheritDoc */
   static get _automationTypes() {
     return [
@@ -32,10 +30,7 @@ export default class ResourceSystem extends mixClasses(
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "resource",
-      usable: true,
-    });
+    return foundry.utils.mergeObject(super.metadata, { type: "resource", usable: true });
   }
 
   /** @inheritDoc */

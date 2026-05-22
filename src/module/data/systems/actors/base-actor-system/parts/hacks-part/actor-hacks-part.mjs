@@ -24,9 +24,7 @@ export default Base => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        for (const [k, v] of Object.entries(this.hacks || {})) {
-          rollData[`hack.${k}`] = v.value;
-        }
+        for (const [k, v] of Object.entries(this.hacks || {})) rollData[`hack.${k}`] = v.value;
         return rollData;
       }
 
@@ -47,9 +45,7 @@ export default Base => {
         const ids = [];
         for (let i = value; i < max; i++) {
           const id = (hackConfig[part]?.statuses ?? [])[i];
-          if (id) {
-            ids.push(id);
-          }
+          if (id) ids.push(id);
         }
         await this.parent.applyStatusEffects(ids);
       }
@@ -68,14 +64,11 @@ export default Base => {
         await this.parent.hookCall("takeUnhack", { scope: { amount, part } });
         /** @type {TeriockHack[]} */
         const hacks = this.parent.effects.contents.filter(c => c.type === "hack" && c.system.part === part);
-        const removable = hacks
-          .filter(h => !h.system.permanent)
-          .sort((a, b) => b.system.escalation - a.system.escalation);
-        const toRemove = removable.slice(0, amount);
-        await this.parent.deleteEmbeddedDocuments(
-          "ActiveEffect",
-          toRemove.map(e => e.id),
+        const removable = hacks.filter(h => !h.system.permanent).sort((a, b) =>
+          b.system.escalation - a.system.escalation
         );
+        const toRemove = removable.slice(0, amount);
+        await this.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove.map(e => e.id));
       }
     }
   );

@@ -21,9 +21,7 @@ export default class ResistAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static defineSchema() {
     return omit(
-      Object.assign(super.defineSchema(), {
-        hex: new fields.BooleanField({ label: "TERIOCK.TERMS.Common.hexproof" }),
-      }),
+      Object.assign(super.defineSchema(), { hex: new fields.BooleanField({ label: "TERIOCK.TERMS.Common.hexproof" }) }),
       ["threshold"],
     );
   }

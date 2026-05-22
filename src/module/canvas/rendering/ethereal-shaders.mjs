@@ -6,10 +6,7 @@ const { BackgroundVisionShader, ColorationVisionShader } = foundry.canvas.render
 export class EtherealBackgroundVisionShader extends BackgroundVisionShader {
   /** @inheritdoc */
   static get defaultUniforms() {
-    return {
-      ...super.defaultUniforms,
-      colorTint: [0.5, 0.6, 0.8],
-    };
+    return { ...super.defaultUniforms, colorTint: [0.5, 0.6, 0.8] };
   }
 
   /** @override */
@@ -61,10 +58,7 @@ export class EtherealBackgroundVisionShader extends BackgroundVisionShader {
 export class EtherealColorationVisionShader extends ColorationVisionShader {
   /** @inheritdoc */
   static get defaultUniforms() {
-    return {
-      ...super.defaultUniforms,
-      colorEffect: [0.4, 0.5, 0.8],
-    };
+    return { ...super.defaultUniforms, colorEffect: [0.4, 0.5, 0.8] };
   }
 
   /** @override */

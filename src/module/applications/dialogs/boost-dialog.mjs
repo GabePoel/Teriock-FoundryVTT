@@ -65,23 +65,17 @@ export default async function boostDialog(rollFormula, options = {}) {
         const critButton = /** @type {HTMLInputElement} */ button.form.elements.namedItem("crit");
         const crit = critButton.checked;
         const roll = new BaseRoll(updatedFormula, options.rollData || {});
-        if (crit) {
-          roll.alter(2, 0, { multiplyNumeric: false });
-        }
+        if (crit) roll.alter(2, 0, { multiplyNumeric: false });
         formula = roll.formula;
         const setboostNumber = (boosts - deboosts) * (crit ? 2 : 1);
-        if (setboostNumber !== 0) {
-          formula = `sb(${formula}, ${setboostNumber})`;
-        }
+        if (setboostNumber !== 0) formula = `sb(${formula}, ${setboostNumber})`;
         return formula;
       },
     },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
       title: impact
-        ? _loc("TERIOCK.DIALOGS.Boost.typeTitle", {
-            type: impactConfig[impact]?.label,
-          })
+        ? _loc("TERIOCK.DIALOGS.Boost.typeTitle", { type: impactConfig[impact]?.label })
         : _loc("TERIOCK.DIALOGS.Boost.title"),
     },
   });

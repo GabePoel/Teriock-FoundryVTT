@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+
 import { default as activations } from "../src/en/activations.json" with { type: "json" };
 import { default as automations } from "../src/en/automations.json" with { type: "json" };
 import { default as base } from "../src/en/base.json" with { type: "json" };
@@ -40,12 +41,10 @@ import * as index from "../src/module/constants/index/_module.mjs";
  */
 function sortObject(obj) {
   if (typeof obj !== "object") return obj;
-  return Object.keys(obj)
-    .sort()
-    .reduce((acc, key) => {
-      acc[key] = sortObject(obj[key]);
-      return acc;
-    }, {});
+  return Object.keys(obj).sort().reduce((acc, key) => {
+    acc[key] = sortObject(obj[key]);
+    return acc;
+  }, {});
 }
 
 /**

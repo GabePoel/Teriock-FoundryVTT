@@ -4,9 +4,7 @@
  * @returns {string}
  */
 export function elementClass(elements) {
-  if (elements.size !== 1) {
-    return "es-multi";
-  }
+  if (elements.size !== 1) return "es-multi";
   return `es-${Array.from(elements)[0]}`;
 }
 
@@ -36,9 +34,7 @@ export function createDialogFieldset(legend, description, name, max = Infinity) 
 export function unpackEffectButton(execution, options = {}) {
   const { useType = "normal" } = options;
   const button = execution.chatData.system.buttons.find(b => b.dataset);
-  if (button) {
-    return JSON.parse(button.dataset[useType]);
-  }
+  if (button) return JSON.parse(button.dataset[useType]);
   return null;
 }
 
@@ -53,9 +49,7 @@ export function packEffectButton(execution, consequence, options = {}) {
   const { useTypes = ["normal", "crit"] } = options;
   const button = execution.chatData.system.buttons.find(b => b.dataset);
   if (button) {
-    for (const useType of useTypes) {
-      button.dataset[useType] = JSON.stringify(consequence);
-    }
+    for (const useType of useTypes) button.dataset[useType] = JSON.stringify(consequence);
   }
 }
 
@@ -67,13 +61,9 @@ export function packEffectButton(execution, consequence, options = {}) {
 export function cleanDataset(dataset) {
   const options = {};
   for (const [key, value] of Object.entries(dataset)) {
-    if (value === "true") {
-      options[key] = true;
-    } else if (value === "false") {
-      options[key] = false;
-    } else {
-      options[key] = value;
-    }
+    if (value === "true") options[key] = true;
+    else if (value === "false") options[key] = false;
+    else options[key] = value;
   }
   return options;
 }
@@ -86,9 +76,7 @@ export function cleanDataset(dataset) {
  */
 export function queryAll(root, selector) {
   const result = [];
-  if (root.matches(selector)) {
-    result.push(root);
-  }
+  if (root.matches(selector)) result.push(root);
   result.push(...root.querySelectorAll(selector));
   return result;
 }

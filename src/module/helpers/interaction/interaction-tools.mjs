@@ -7,9 +7,7 @@ export function parseArguments(input) {
   const regex = /([^\s"']+)|"([^"]*)"|'([^']*)'/g;
   const args = [];
   let match;
-  while ((match = regex.exec(input)) !== null) {
-    args.push(match[1] || match[2] || match[3]);
-  }
+  while ((match = regex.exec(input)) !== null) args.push(match[1] || match[2] || match[3]);
   return args.reduce((acc, term) => {
     if (term.includes("=")) {
       const [key, ...valParts] = term.split("=");
@@ -37,11 +35,8 @@ export function interpretArguments(argArr, command) {
       argObj[definedArgs[num]] = key;
       num += 1;
     } else {
-      if (definedFlags[key]) {
-        argObj[definedFlags[key]] = value;
-      } else {
-        argObj[key] = value;
-      }
+      if (definedFlags[key]) argObj[definedFlags[key]] = value;
+      else argObj[key] = value;
     }
   }
   return argObj;
@@ -55,12 +50,7 @@ export function interpretArguments(argArr, command) {
  * @returns {string}
  */
 export function getInteractionEntryValue(interaction, property, options) {
-  if (!interaction[property]) {
-    return "";
-  }
-  if (typeof interaction[property] === "string") {
-    return interaction[property];
-  } else {
-    return interaction[property](options);
-  }
+  if (!interaction[property]) return "";
+  if (typeof interaction[property] === "string") return interaction[property];
+  else return interaction[property](options);
 }

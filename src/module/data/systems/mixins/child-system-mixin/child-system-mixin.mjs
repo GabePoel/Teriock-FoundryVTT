@@ -35,29 +35,16 @@ export default function ChildSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           boosts: new fields.SchemaField(
-            objectMap(
-              impactConfig,
-              e =>
-                new FormulaField({
-                  deterministic: false,
-                  initial: "",
-                  label: e.label,
-                }),
-              { filter: e => !e.hidden },
-            ),
+            objectMap(impactConfig, e => new FormulaField({ deterministic: false, initial: "", label: e.label }), {
+              filter: e => !e.hidden,
+            }),
             { persisted: false },
           ),
           description: new fields.HTMLField({ initial: "" }),
           forceSuppressed: new initialBoolean(),
           qualifiers: new fields.SchemaField({
-            ephemeral: new EvaluationField({
-              deterministic: true,
-              initial: "0",
-            }),
-            suppressed: new EvaluationField({
-              deterministic: true,
-              initial: "0",
-            }),
+            ephemeral: new EvaluationField({ deterministic: true, initial: "0" }),
+            suppressed: new EvaluationField({ deterministic: true, initial: "0" }),
           }),
         });
       }
@@ -96,12 +83,10 @@ export default function ChildSystemMixin(Base) {
        * @returns {Teriock.Sheet.DisplayTag[]}
        */
       get _statusTags() {
-        return [
-          {
-            label: this.parent.active ? "TERIOCK.SHEETS.Common.TAGS.active" : "TERIOCK.SHEETS.Common.TAGS.inactive",
-            tooltip: "TERIOCK.SHEETS.Child.DISPLAY.activeStatus",
-          },
-        ];
+        return [{
+          label: this.parent.active ? "TERIOCK.SHEETS.Common.TAGS.active" : "TERIOCK.SHEETS.Common.TAGS.inactive",
+          tooltip: "TERIOCK.SHEETS.Child.DISPLAY.activeStatus",
+        }];
       }
 
       /** @inheritDoc */
@@ -130,27 +115,23 @@ export default function ChildSystemMixin(Base) {
 
       /** @inheritDoc */
       get embedIcons() {
-        return [
-          ...super.embedIcons,
-          {
-            action: "chatDoc",
-            icon: TERIOCK.display.icons.ui.chat,
-            tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
-            visible: this.parent.isViewer,
-            onClick: async () => {
-              await this.parent.toMessage();
-            },
+        return [...super.embedIcons, {
+          action: "chatDoc",
+          icon: TERIOCK.display.icons.ui.chat,
+          tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+          visible: this.parent.isViewer,
+          onClick: async () => {
+            await this.parent.toMessage();
           },
-          {
-            action: "toggleDisabledDoc",
-            icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
-            tooltip: this.parent.disabled
-              ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
-              : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-            visible: this.parent.isOwner,
-            onClick: () => this.parent.toggleDisabled(),
-          },
-        ];
+        }, {
+          action: "toggleDisabledDoc",
+          icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
+          tooltip: this.parent.disabled
+            ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
+            : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
+          visible: this.parent.isOwner,
+          onClick: () => this.parent.toggleDisabled(),
+        }];
       }
 
       /** @inheritDoc */
@@ -193,9 +174,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @inheritDoc */
       get useText() {
-        return _loc("TERIOCK.SYSTEMS.Child.USAGE.use", {
-          value: this.parent.name,
-        });
+        return _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: this.parent.name });
       }
 
       /** @inheritDoc */
@@ -206,82 +185,69 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       getCardContextMenuEntries(doc) {
         const entries = super.getCardContextMenuEntries(doc);
-        entries.push(
-          ...[
-            {
-              group: "usage",
-              icon: makeIcon(this.useIcon, "contextMenu"),
-              label: this.useText,
-              visible: this.isUsable,
-              onClick: async () => await this.use(),
-            },
-            {
-              group: "control",
-              icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
-              onClick: this.parent.enable.bind(this.parent),
-              visible:
-                this.parent.isOwner &&
-                this.parent.disabled &&
-                this.parent.type !== "equipment" &&
-                this.parent.type !== "mount" &&
-                doc !== this.parent,
-            },
-            {
-              group: "control",
-              icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
-              onClick: this.parent.disable.bind(this.parent),
-              visible:
-                this.parent.isOwner &&
-                !this.parent.disabled &&
-                this.parent.type !== "equipment" &&
-                this.parent.type !== "mount" &&
-                !(this.parent.type === "ability" && this.isVirtual) &&
-                doc !== this.parent,
-            },
-            {
-              group: "open",
-              icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
-              visible: game.user.isGM,
-              onClick: async () => {
-                await this.gmNotesOpen();
-              },
-            },
-            {
-              group: "open",
-              icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
-              onClick: async () => {
-                await new ImagePopout({
-                  src: this.parent.img,
-                  uuid: this.parent.uuid,
-                  window: { title: this.parent.fullName },
-                }).render(true);
-              },
-            },
-            {
-              group: "share",
-              icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
-              onClick: this.parent.chatImage.bind(this.parent),
-            },
-            {
-              group: "share",
-              icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
-              onClick: this.parent.toMessage.bind(this.parent),
-            },
-            {
-              group: "document",
-              icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
-              onClick: async () => await this.parent.duplicate(),
-              visible: () => this.parent._checkValidEditorDocument(doc, { self: false }),
-            },
-          ],
-        );
+        entries.push(...[{
+          group: "usage",
+          icon: makeIcon(this.useIcon, "contextMenu"),
+          label: this.useText,
+          visible: this.isUsable,
+          onClick: async () => await this.use(),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
+          onClick: this.parent.enable.bind(this.parent),
+          visible: this.parent.isOwner
+            && this.parent.disabled
+            && this.parent.type !== "equipment"
+            && this.parent.type !== "mount"
+            && doc !== this.parent,
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
+          onClick: this.parent.disable.bind(this.parent),
+          visible: this.parent.isOwner
+            && !this.parent.disabled
+            && this.parent.type !== "equipment"
+            && this.parent.type !== "mount"
+            && !(this.parent.type === "ability" && this.isVirtual)
+            && doc !== this.parent,
+        }, {
+          group: "open",
+          icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
+          visible: game.user.isGM,
+          onClick: async () => {
+            await this.gmNotesOpen();
+          },
+        }, {
+          group: "open",
+          icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
+          onClick: async () => {
+            await new ImagePopout({
+              src: this.parent.img,
+              uuid: this.parent.uuid,
+              window: { title: this.parent.fullName },
+            }).render(true);
+          },
+        }, {
+          group: "share",
+          icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
+          onClick: this.parent.chatImage.bind(this.parent),
+        }, {
+          group: "share",
+          icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+          onClick: this.parent.toMessage.bind(this.parent),
+        }, {
+          group: "document",
+          icon: makeIcon(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+          onClick: async () => await this.parent.duplicate(),
+          visible: () => this.parent._checkValidEditorDocument(doc, { self: false }),
+        }]);
         return entries;
       }
 

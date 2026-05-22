@@ -4,20 +4,8 @@ const tokenMagic = {
   burned: {
     amplitude: 1,
     animated: {
-      amplitude: {
-        active: true,
-        animType: "syncCosOscillation",
-        loopDuration: 4400,
-        val1: 1,
-        val2: 1.4,
-      },
-      intensity: {
-        active: true,
-        animType: "syncCosOscillation",
-        loopDuration: 15000,
-        val1: 0.8,
-        val2: 2,
-      },
+      amplitude: { active: true, animType: "syncCosOscillation", loopDuration: 4400, val1: 1, val2: 1.4 },
+      intensity: { active: true, animType: "syncCosOscillation", loopDuration: 15000, val1: 0.8, val2: 2 },
       time: { active: true, animType: "move", speed: -0.0024 },
     },
     blend: 2,
@@ -32,20 +20,8 @@ const tokenMagic = {
     anchorX: 0.5,
     anchorY: 0.5,
     animated: {
-      anchorX: {
-        active: false,
-        animType: "syncChaoticOscillation",
-        loopDuration: 20000,
-        val1: 0.15,
-        val2: 0.85,
-      },
-      anchorY: {
-        active: false,
-        animType: "syncSinOscillation",
-        loopDuration: 20000,
-        val1: 0.15,
-        val2: 0.85,
-      },
+      anchorX: { active: false, animType: "syncChaoticOscillation", loopDuration: 20000, val1: 0.15, val2: 0.85 },
+      anchorY: { active: false, animType: "syncSinOscillation", loopDuration: 20000, val1: 0.15, val2: 0.85 },
       time: { active: true, animType: "move", speed: 0.0085 },
     },
     color: 0xffffff,
@@ -60,13 +36,7 @@ const tokenMagic = {
   },
   ethereal: {
     animated: {
-      color: {
-        active: true,
-        animType: "colorOscillation",
-        loopDuration: 6000,
-        val1: 0xffffff,
-        val2: 0x000000,
-      },
+      color: { active: true, animType: "colorOscillation", loopDuration: 6000, val1: 0xffffff, val2: 0x000000 },
       time: { active: true, animType: "move", speed: 0.001 },
     },
     blend: 8,
@@ -79,15 +49,7 @@ const tokenMagic = {
     time: 0,
   },
   frenzied: {
-    animated: {
-      thickness: {
-        active: true,
-        animType: "syncCosOscillation",
-        loopDuration: 800,
-        val1: 1,
-        val2: 6,
-      },
-    },
+    animated: { thickness: { active: true, animType: "syncCosOscillation", loopDuration: 800, val1: 1, val2: 6 } },
     color: 0xee6035,
     filterId: "teriockConditionFrenzied",
     filterType: "outline",
@@ -114,12 +76,7 @@ const tokenMagic = {
     anchorX: 0,
     anchorY: 0,
     animated: {
-      anchorX: {
-        animType: "syncCosOscillation",
-        loopDuration: 6000,
-        val1: 0.4,
-        val2: 0.6,
-      },
+      anchorX: { animType: "syncCosOscillation", loopDuration: 6000, val1: 0.4, val2: 0.6 },
       time: { active: true, animType: "move", speed: 0.0012 },
     },
     blend: 9,
@@ -145,18 +102,8 @@ const tokenMagic = {
   },
   meleeDodging: {
     animated: {
-      translationX: {
-        animType: "sinOscillation",
-        loopDuration: 1400,
-        val1: -0.125,
-        val2: +0.125,
-      },
-      translationY: {
-        animType: "cosOscillation",
-        loopDuration: 1400,
-        val1: -0.035,
-        val2: +0.035,
-      },
+      translationX: { animType: "sinOscillation", loopDuration: 1400, val1: -0.125, val2: +0.125 },
+      translationY: { animType: "cosOscillation", loopDuration: 1400, val1: -0.035, val2: +0.035 },
     },
     filterId: "teriockConditionMeleeDodging",
     filterType: "transform",
@@ -164,18 +111,8 @@ const tokenMagic = {
   },
   missileDodging: {
     animated: {
-      translationX: {
-        animType: "cosOscillation",
-        loopDuration: 1200,
-        val1: -0.035,
-        val2: +0.035,
-      },
-      translationY: {
-        animType: "sinOscillation",
-        loopDuration: 1200,
-        val1: -0.125,
-        val2: +0.125,
-      },
+      translationX: { animType: "cosOscillation", loopDuration: 1200, val1: -0.035, val2: +0.035 },
+      translationY: { animType: "sinOscillation", loopDuration: 1200, val1: -0.125, val2: +0.125 },
     },
     filterId: "teriockConditionMissileDodging",
     filterType: "transform",
@@ -183,9 +120,7 @@ const tokenMagic = {
   },
   poisoned: {
     alphaDiscard: false,
-    animated: {
-      time: { active: true, animType: "move", speed: 0.0009 },
-    },
+    animated: { time: { active: true, animType: "move", speed: 0.0009 } },
     color: 0x508000,
     filterId: "teriockConditionPoisoned",
     filterType: "ripples",

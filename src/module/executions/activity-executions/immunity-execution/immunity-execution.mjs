@@ -20,9 +20,7 @@ export default class ImmunityExecution extends BaseExecution {
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
-      system: {
-        _src: ruleUuid("Keyword", this.hex ? "Hexseal" : "Immunity"),
-      },
+      system: { _src: ruleUuid("Keyword", this.hex ? "Hexseal" : "Immunity") },
     });
   }
 
@@ -33,28 +31,19 @@ export default class ImmunityExecution extends BaseExecution {
 
   /** @inheritDoc */
   get name() {
-    if (this.hex) {
-      return _loc("TERIOCK.TERMS.Protections.hexseal.single");
-    }
+    if (this.hex) return _loc("TERIOCK.TERMS.Protections.hexseal.single");
     return _loc("TERIOCK.TERMS.Protections.immunity.single");
   }
 
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push({
-      bars: [
-        {
-          icon: TERIOCK.display.icons.effect.immune,
-          label: _loc("TERIOCK.TERMS.Common.protection"),
-          wrappers: this.wrappers,
-        },
-      ],
-      blocks: [
-        {
-          text: TERIOCK.content.keywords[this.rule],
-          title: this.name,
-        },
-      ],
+      bars: [{
+        icon: TERIOCK.display.icons.effect.immune,
+        label: _loc("TERIOCK.TERMS.Common.protection"),
+        wrappers: this.wrappers,
+      }],
+      blocks: [{ text: TERIOCK.content.keywords[this.rule], title: this.name }],
       icon: TERIOCK.display.icons.effect.protection,
       image: this.img,
       label: _loc("TERIOCK.TERMS.Common.protection"),

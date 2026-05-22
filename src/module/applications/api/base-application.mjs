@@ -8,8 +8,6 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes HandlebarsApplicationMixin
  * @mixes BaseApplication
  */
-export default class TeriockBaseApplication extends mixClasses(
-  ApplicationV2,
-  HandlebarsApplicationMixin,
-  BaseApplicationMixin,
-) {}
+export default class TeriockBaseApplication
+  extends mixClasses(ApplicationV2, HandlebarsApplicationMixin, BaseApplicationMixin)
+{}

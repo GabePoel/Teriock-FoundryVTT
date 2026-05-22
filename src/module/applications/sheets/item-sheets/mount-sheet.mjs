@@ -13,11 +13,8 @@ export default class MountSheet extends BaseItemSheet {
    * @returns {Promise<void>}
    */
   static async #onToggleMounted() {
-    if (this.document.system.mounted) {
-      await this.document.system.unmount();
-    } else {
-      await this.document.system.mount();
-    }
+    if (this.document.system.mounted) await this.document.system.unmount();
+    else await this.document.system.mount();
   }
 
   /** @inheritDoc */
@@ -25,12 +22,8 @@ export default class MountSheet extends BaseItemSheet {
 
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    actions: {
-      toggleMounted: this.#onToggleMounted,
-    },
+    actions: { toggleMounted: this.#onToggleMounted },
     classes: ["mount"],
-    window: {
-      icon: makeIconClass(documentConfig.mount.icon, "title"),
-    },
+    window: { icon: makeIconClass(documentConfig.mount.icon, "title") },
   };
 }

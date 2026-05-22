@@ -7,12 +7,7 @@ export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema(options = {}) {
     return Object.assign(super.defineSchema(options), {
-      score: new fields.NumberField({
-        initial: options.score ?? 0,
-        integer: true,
-        max: 3,
-        min: 0,
-      }),
+      score: new fields.NumberField({ initial: options.score ?? 0, integer: true, max: 3, min: 0 }),
     });
   }
 
@@ -34,9 +29,7 @@ export default class TradecraftModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async use(options) {
-    await this.actor.hookCall("rollTradecraft", {
-      scope: { tradecraft: this.key },
-    });
+    await this.actor.hookCall("rollTradecraft", { scope: { tradecraft: this.key } });
     await super.use(Object.assign(options, { tradecraft: this.key }));
   }
 }

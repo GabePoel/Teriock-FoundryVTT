@@ -16,8 +16,6 @@ export default powerContext;
 preLocalize("rollContext.power");
 Hooks.once("i18nInit", () => {
   Object.entries(powerConfig.type).forEach(([k, v]) => {
-    powerContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Power.type", {
-      name: _loc(v.label),
-    });
+    powerContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Power.type", { name: _loc(v.label) });
   });
 });

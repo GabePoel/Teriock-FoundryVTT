@@ -25,13 +25,15 @@ const { fields } = foundry.data;
  * @mixes ThresholdData
  * @mixes WikiSystem
  */
-export default class FluencySystem extends mixClasses(
-  CleanedEffectSystem,
-  mixins.WikiSystemMixin,
-  mixins.RevelationSystemMixin,
-  mixins.CompetenceDisplaySystemMixin,
-  shared.ThresholdDataMixin,
-) {
+export default class FluencySystem
+  extends mixClasses(
+    CleanedEffectSystem,
+    mixins.WikiSystemMixin,
+    mixins.RevelationSystemMixin,
+    mixins.CompetenceDisplaySystemMixin,
+    shared.ThresholdDataMixin,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 
@@ -53,31 +55,21 @@ export default class FluencySystem extends mixClasses(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      competence: new fields.EmbeddedDataField(CompetenceModel, {
-        initial: { raw: 2 },
-      }),
+      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 2 } }),
       field: new fields.StringField({ initial: "artisan" }),
-      tradecraft: new fields.StringField({
-        initial: "artist",
-        label: "TERIOCK.TERMS.Common.tradecraft",
-      }),
-      tradecraftDescription: initialText({
-        label: "TERIOCK.TERMS.Common.tradecraft",
-      }),
+      tradecraft: new fields.StringField({ initial: "artist", label: "TERIOCK.TERMS.Common.tradecraft" }),
+      tradecraftDescription: initialText({ label: "TERIOCK.TERMS.Common.tradecraft" }),
     });
   }
 
   /** @inheritDoc */
   get displayFields() {
-    return [
-      "system.description",
-      {
-        classes: TERIOCK.display.panel.classes.derived,
-        editable: false,
-        label: TERIOCK.reference.tradecrafts[this.tradecraft],
-        path: "system.tradecraftDescription",
-      },
-    ];
+    return ["system.description", {
+      classes: TERIOCK.display.panel.classes.derived,
+      editable: false,
+      label: TERIOCK.reference.tradecrafts[this.tradecraft],
+      path: "system.tradecraftDescription",
+    }];
   }
 
   /** @inheritDoc */
@@ -98,32 +90,22 @@ export default class FluencySystem extends mixClasses(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
-    if (!foundry.utils.hasProperty(data, "img")) {
-      this.parent.updateSource({
-        img: getImage("tradecrafts", "Artist"),
-      });
-    }
+    if (!foundry.utils.hasProperty(data, "img")) this.parent.updateSource({ img: getImage("tradecrafts", "Artist") });
   }
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
     const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
     if (
-      Object.values(iconManifest.tradecrafts).includes(this.parent.img) &&
-      !foundry.utils.hasProperty(changes, "img")
+      Object.values(iconManifest.tradecrafts).includes(this.parent.img) && !foundry.utils.hasProperty(changes, "img")
     ) {
       let tradecraft = this.tradecraft;
-      if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
+      if (foundry.utils.hasProperty(changes, "system.tradecraft"))
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
-      }
       foundry.utils.setProperty(changes, "img", getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]));
     }
   }
@@ -139,27 +121,21 @@ export default class FluencySystem extends mixClasses(
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
-      ...super.getLocalRollData(),
-      field: this.field,
-      tc: this.tradecraft,
-    };
+    return { ...super.getLocalRollData(), field: this.field, tc: this.tradecraft };
   }
 
   /** @inheritDoc */
   async getPanelParts() {
     return {
       ...(await super.getPanelParts()),
-      bars: [
-        {
-          icon: TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].icon,
-          label: _loc("TERIOCK.TERMS.Common.tradecraft"),
-          wrappers: [
-            TERIOCK.config.tradecraft[this.field].name,
-            TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name,
-          ],
-        },
-      ],
+      bars: [{
+        icon: TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].icon,
+        label: _loc("TERIOCK.TERMS.Common.tradecraft"),
+        wrappers: [
+          TERIOCK.config.tradecraft[this.field].name,
+          TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name,
+        ],
+      }],
     };
   }
 

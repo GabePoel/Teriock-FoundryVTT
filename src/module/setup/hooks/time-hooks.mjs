@@ -11,9 +11,7 @@ import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/u
  * @see {updateWorldTime}
  */
 async function increaseDebt(_worldTime, dt, _options, userId) {
-  if (game.user.id !== userId || !game.user.isActiveGM) {
-    return;
-  }
+  if (game.user.id !== userId || !game.user.isActiveGM) return;
   const operations = [];
   for (const actor of game.actors.relevant) {
     if (actor.system.money.debt > 0 && actor.system.interestRate > 0) {
@@ -38,11 +36,8 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
  */
 function fireTimeTriggerFactory(trigger) {
   return function fireTrigger() {
-    for (const actor of game.actors.visible) {
-      if (game.user.id === actor.defaultUser.id) {
-        actor?.system[`take${ucFirst(trigger)}`]();
-      }
-    }
+    for (const actor of game.actors.visible)
+      if (game.user.id === actor.defaultUser.id) actor?.system[`take${ucFirst(trigger)}`]();
   };
 }
 

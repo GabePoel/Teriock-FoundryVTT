@@ -20,9 +20,7 @@ export default class AttunementAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      tier: new FormulaField({ deterministic: false, initial: "1" }),
-    });
+    return Object.assign(super.defineSchema(), { tier: new FormulaField({ deterministic: false, initial: "1" }) });
   }
 
   /** @inheritDoc */
@@ -36,9 +34,7 @@ export default class AttunementAutomation extends BaseAutomation {
     const tier = await BaseRoll.getValue(this.tier, rollData);
     const attunementData = {
       img: this.document.img,
-      name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", {
-        name: this.document.name,
-      }),
+      name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.document.name }),
       system: { inheritTier: false, tier, type: "effect" },
       type: "attunement",
     };
@@ -46,9 +42,7 @@ export default class AttunementAutomation extends BaseAutomation {
       new AddDocumentsActivation({
         display: {
           icon: icons.attunable.attune,
-          label: _loc("TERIOCK.COMMANDS.Status.applyNamed", {
-            name: _loc("TYPES.ActiveEffect.attunement"),
-          }),
+          label: _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: _loc("TYPES.ActiveEffect.attunement") }),
         },
         primary: { root: { data: attunementData } },
       }),

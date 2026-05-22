@@ -17,9 +17,7 @@ export default function RulesSystemMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          identifier: new IdentifierField(),
-        });
+        return Object.assign(super.defineSchema(), { identifier: new IdentifierField() });
       }
     }
   );

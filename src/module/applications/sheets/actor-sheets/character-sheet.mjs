@@ -7,7 +7,5 @@ import TeriockPlayableActorSheet from "./base-actor-sheet/playable-actor-sheet.m
  */
 export default class CharacterSheet extends TeriockPlayableActorSheet {
   /** @inheritDoc */
-  static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(documentConfig.character.icon, "title") },
-  };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(documentConfig.character.icon, "title") } };
 }

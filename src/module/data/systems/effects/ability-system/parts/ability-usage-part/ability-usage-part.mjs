@@ -21,10 +21,7 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          delivery: new fields.StringField({
-            choices: TERIOCK.config.ability.delivery,
-            initial: "weapon",
-          }),
+          delivery: new fields.StringField({ choices: TERIOCK.config.ability.delivery, initial: "weapon" }),
           executionTime: new fields.SchemaField({
             base: new fields.StringField({ initial: "a1" }),
             slow: new EvaluationField({ model: SlowExecutionTimeModel }),
@@ -39,49 +36,29 @@ export default Base => {
             range: new EvaluationField({ model: RangeModel }),
             type: new fields.StringField({ initial: null, nullable: true }),
           }),
-          featSaveAttribute: new fields.StringField({
-            choices: TERIOCK.reference.attributes,
-            initial: "mov",
-          }),
-          interaction: new fields.StringField({
-            choices: TERIOCK.config.ability.interaction,
-            initial: "attack",
-          }),
-          maneuver: new fields.StringField({
-            choices: TERIOCK.config.ability.maneuver,
-            initial: "active",
-          }),
+          featSaveAttribute: new fields.StringField({ choices: TERIOCK.reference.attributes, initial: "mov" }),
+          interaction: new fields.StringField({ choices: TERIOCK.config.ability.interaction, initial: "attack" }),
+          maneuver: new fields.StringField({ choices: TERIOCK.config.ability.maneuver, initial: "active" }),
           range: new EvaluationField({ model: RangeModel }),
-          targets: new fields.SetField(
-            new fields.StringField({
-              choices: TERIOCK.config.ability.targets,
-            }),
-            { initial: ["creature"] },
-          ),
+          targets: new fields.SetField(new fields.StringField({ choices: TERIOCK.config.ability.targets }), {
+            initial: ["creature"],
+          }),
         });
       }
 
       /** @inheritDoc */
       static migrateData(source, options, state) {
         // Range migration
-        if (typeof source.range === "string") {
-          source.range = { raw: source.range };
-        }
+        if (typeof source.range === "string") source.range = { raw: source.range };
 
         // Expansion migration
-        if (typeof source.expansion === "string") {
-          source.expansion = { type: source.expansion };
-        }
-        if (typeof source.expansion !== "object") {
-          source.expansion = {};
-        }
+        if (typeof source.expansion === "string") source.expansion = { type: source.expansion };
+        if (typeof source.expansion !== "object") source.expansion = {};
         if (foundry.utils.hasProperty(source, "expansion.cap.raw")) {
           foundry.utils.setProperty(source, "expansion.cap", foundry.utils.getProperty(source, "expansion.cap.raw"));
           foundry.utils.deleteProperty(source, "expansion.cap.raw");
         }
-        if (typeof source.expansion?.cap === "number") {
-          source.expansion.cap = `${source.expansion.cap}`;
-        }
+        if (typeof source.expansion?.cap === "number") source.expansion.cap = `${source.expansion.cap}`;
         migrateKey(source, "expansionRange", "source.expansion.range.raw");
 
         // Execution time migration
@@ -91,12 +68,8 @@ export default Base => {
             let unit;
             let raw;
             const lower = source.executionTime.base.toLowerCase();
-            if (lower.includes("short")) {
-              unit = "shortRest";
-            }
-            if (lower.includes("long")) {
-              unit = "longRest";
-            }
+            if (lower.includes("short")) unit = "shortRest";
+            if (lower.includes("long")) unit = "longRest";
             const units = ["second", "minute", "hour", "day", "week", "year"];
             for (const u of units) {
               if (lower.includes(u)) {
@@ -120,11 +93,9 @@ export default Base => {
        */
       get _executionWrappers() {
         let time;
-        if (this.maneuver !== "slow") {
+        if (this.maneuver !== "slow")
           time = TERIOCK.config.ability.executionTime[this.maneuver][this.executionTime.base];
-        } else {
-          time = this.executionTime.slow.text;
-        }
+        else time = this.executionTime.slow.text;
         return [
           time || "",
           this.piercing.label,
@@ -141,17 +112,15 @@ export default Base => {
       get _expansionWrappers() {
         return this.expansion.type
           ? [
-              ["detonate", "ripple"].includes(this.expansion.type)
-                ? TERIOCK.reference.attributes[this.expansion.featSaveAttribute]
-                : "",
-              TERIOCK.config.ability.expansion[this.expansion.type] || "",
-              this.expansion.range.abbreviation,
-              formulaExists(this.expansion.cap)
-                ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", {
-                    value: this.expansion.cap,
-                  })
-                : "",
-            ]
+            ["detonate", "ripple"].includes(this.expansion.type)
+              ? TERIOCK.reference.attributes[this.expansion.featSaveAttribute]
+              : "",
+            TERIOCK.config.ability.expansion[this.expansion.type] || "",
+            this.expansion.range.abbreviation,
+            formulaExists(this.expansion.cap)
+              ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", { value: this.expansion.cap })
+              : "",
+          ]
           : [];
       }
 
@@ -244,17 +213,13 @@ export default Base => {
           time: this.executionTime.base,
         });
         // Add deliveries
-        if (this.delivery) {
-          data[`delivery.${this.delivery}`] = 1;
-        }
+        if (this.delivery) data[`delivery.${this.delivery}`] = 1;
         data["delivery.ball"] = Number(this.isBall);
         data["delivery.ray"] = Number(this.isRay);
         data["delivery.touch"] = Number(this.isTouch);
         data["delivery.strike"] = Number(this.isStrike);
         data["delivery.item"] = Number(this.needsItem);
-        if (this.interaction === "feat") {
-          data[`attr.${this.featSaveAttribute}`] = 1;
-        }
+        if (this.interaction === "feat") data[`attr.${this.featSaveAttribute}`] = 1;
         if (this.expansion.type) {
           Object.assign(data, {
             [`expansion.${this.expansion.type}`]: 1,
@@ -264,9 +229,7 @@ export default Base => {
           });
         }
         // Add targets
-        for (const target of this.targets) {
-          data[`target.${target}`] = 1;
-        }
+        for (const target of this.targets) data[`target.${target}`] = 1;
         return data;
       }
     }

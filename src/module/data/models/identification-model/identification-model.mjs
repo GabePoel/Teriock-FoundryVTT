@@ -17,18 +17,10 @@ export default class IdentificationModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      flaws: new fields.HTMLField({
-        gmOnly: true,
-        initial: "",
-        required: false,
-      }),
+      flaws: new fields.HTMLField({ gmOnly: true, initial: "", required: false }),
       identified: new fields.BooleanField({ initial: true }),
       name: new fields.StringField({ initial: "" }),
-      notes: new fields.HTMLField({
-        gmOnly: true,
-        initial: "",
-        required: false,
-      }),
+      notes: new fields.HTMLField({ gmOnly: true, initial: "", required: false }),
       powerLevel: new fields.StringField({
         choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
         initial: "mundane",
@@ -46,24 +38,16 @@ export default class IdentificationModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async identify() {
-    await this.parent.parent.hookCall("identify", {
-      scope: {
-        equipment: this.parent.parent,
-      },
-    });
+    await this.parent.parent.hookCall("identify", { scope: { equipment: this.parent.parent } });
     if (!this.identified) {
       ui.notifications.info("TERIOCK.MODELS.Identification.QUERY.Identify.ask", {
         format: { name: this.parent.parent.fullName },
         localize: true,
       });
-      const doIdentify = await game.users.queryGM(
-        "teriock.identifyItem",
-        { uuid: this.parent.parent.uuid },
-        {
-          failPrefix: "TERIOCK.MODELS.Identification.QUERY.Identify.failPrefix",
-          localize: true,
-        },
-      );
+      const doIdentify = await game.users.queryGM("teriock.identifyItem", { uuid: this.parent.parent.uuid }, {
+        failPrefix: "TERIOCK.MODELS.Identification.QUERY.Identify.failPrefix",
+        localize: true,
+      });
       if (doIdentify) {
         ui.notifications.success("TERIOCK.MODELS.Identification.QUERY.Identify.success", {
           format: { name: this.parent.parent.fullName },
@@ -88,9 +72,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async readMagic() {
-    await this.parent.parent.hookCall("readMagic", {
-      scope: { equipment: this.parent.parent },
-    });
+    await this.parent.parent.hookCall("readMagic", { scope: { equipment: this.parent.parent } });
     if (!this.identified && !this.read) {
       const activeGM = game.users.activeGM;
       ui.notifications.info("TERIOCK.MODELS.Identification.QUERY.ReadMagic.ask", {
@@ -112,13 +94,9 @@ export default class IdentificationModel extends EmbeddedDataModel {
         },
       });
       if (doReadMagic) {
-        await this.document.update(
-          {
-            "system.identification.read": true,
-            "system.powerLevel": this.powerLevel,
-          },
-          { asGM: true },
-        );
+        await this.document.update({ "system.identification.read": true, "system.powerLevel": this.powerLevel }, {
+          asGM: true,
+        });
         ui.notifications.success("TERIOCK.MODELS.Identification.QUERY.ReadMagic.success", {
           format: { name: this.parent.parent.fullName },
           localize: true,
@@ -145,9 +123,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
       const uncheckedPropertyIdentifiers = [...TERIOCK.config.equipment.unidentifiedProperties];
       if (Object.keys(TERIOCK.index.equipment).includes(toCamelCase(this.parent.equipmentType))) {
         const reference = await fromIdentifier(`equipment:${this.parent.equipmentType}`);
-        if (reference) {
-          uncheckedPropertyIdentifiers.push(...reference.properties.map(p => p.system.identifier));
-        }
+        if (reference) uncheckedPropertyIdentifiers.push(...reference.properties.map(p => p.system.identifier));
       }
       const revealed = [
         ...this.parent.parent.properties.filter(p => p.system.revealed),
@@ -155,9 +131,9 @@ export default class IdentificationModel extends EmbeddedDataModel {
         ...this.parent.parent.resources.filter(r => r.system.revealed),
         ...this.parent.parent.fluencies.filter(f => f.system.revealed),
       ];
-      const checked = revealed
-        .filter(e => e.type !== "property" || !uncheckedPropertyIdentifiers.includes(e.system.identifier))
-        .map(e => e.uuid);
+      const checked = revealed.filter(e =>
+        e.type !== "property" || !uncheckedPropertyIdentifiers.includes(e.system.identifier)
+      ).map(e => e.uuid);
       const toReveal = await selectDocumentsDialog(revealed, {
         checked: checked,
         hint: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.hint"),
@@ -172,9 +148,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
         }),
       );
       await this.parent.parent.update({
-        name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", {
-          type: this.parent.equipmentTypeName,
-        }),
+        name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", { type: this.parent.equipmentTypeName }),
         "system.flaws": "",
         "system.identification.flaws": this.parent.flaws,
         "system.identification.identified": false,

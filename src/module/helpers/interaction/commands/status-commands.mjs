@@ -7,9 +7,7 @@ import { icons } from "../../../constants/display/icons.mjs";
  */
 function fnFactory(operation) {
   return async function statusCommandFunction(a, o) {
-    if (game.actors.check(a) && o?.status) {
-      await operation(a, o.status);
-    }
+    if (game.actors.check(a) && o?.status) await operation(a, o.status);
   };
 }
 
@@ -27,12 +25,9 @@ export const applyStatusCommand = {
   id: "apply",
   primary: apply,
   secondary: remove,
-  label: options =>
-    options?.status
-      ? _loc("TERIOCK.COMMANDS.Status.applyNamed", {
-          name: TERIOCK.reference.conditions[options.status],
-        })
-      : _loc("TERIOCK.COMMANDS.Status.applyUnnamed"),
+  label: options => options?.status
+    ? _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: TERIOCK.reference.conditions[options.status] })
+    : _loc("TERIOCK.COMMANDS.Status.applyUnnamed"),
 };
 
 /**
@@ -45,12 +40,9 @@ export const removeStatusCommand = {
   id: "remove",
   primary: remove,
   secondary: apply,
-  label: options =>
-    options?.status
-      ? _loc("TERIOCK.COMMANDS.Status.removeNamed", {
-          name: TERIOCK.reference.conditions[options.status],
-        })
-      : _loc("TERIOCK.COMMANDS.Status.removeUnnamed"),
+  label: options => options?.status
+    ? _loc("TERIOCK.COMMANDS.Status.removeNamed", { name: TERIOCK.reference.conditions[options.status] })
+    : _loc("TERIOCK.COMMANDS.Status.removeUnnamed"),
 };
 
 /**
@@ -62,10 +54,7 @@ export const toggleStatusCommand = {
   icon: icons.ui.toggle,
   id: "toggle",
   primary: toggle,
-  label: options =>
-    options?.status
-      ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", {
-          name: TERIOCK.index.conditions[options.status],
-        })
-      : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
+  label: options => options?.status
+    ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", { name: TERIOCK.index.conditions[options.status] })
+    : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
 };

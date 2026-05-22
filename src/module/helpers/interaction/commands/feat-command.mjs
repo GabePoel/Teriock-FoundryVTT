@@ -14,12 +14,9 @@ const command = {
   primary: use,
   secondary: use,
   icon: options => TERIOCK.config.attribute[options?.attribute]?.icon || "star",
-  label: options =>
-    TERIOCK.config.attribute[options?.attribute]?.label
-      ? _loc("TERIOCK.ROLLS.Feat.name", {
-          value: TERIOCK.config.attribute[options?.attribute]?.label,
-        })
-      : _loc("TERIOCK.ROLLS.Feat.label"),
+  label: options => TERIOCK.config.attribute[options?.attribute]?.label
+    ? _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.config.attribute[options?.attribute]?.label })
+    : _loc("TERIOCK.ROLLS.Feat.label"),
 };
 
 export default command;

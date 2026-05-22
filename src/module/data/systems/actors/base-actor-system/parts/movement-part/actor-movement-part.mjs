@@ -30,9 +30,8 @@ export default Base => {
       getRollData() {
         const rollData = super.getRollData();
         rollData["speed"] = this.movementSpeed;
-        for (const [k, v] of Object.entries(config.character.movement)) {
+        for (const [k, v] of Object.entries(config.character.movement))
           rollData[`speed.${v.abbreviation}`] = this.speedAdjustments[k] || 0;
-        }
         return rollData;
       }
 
@@ -52,12 +51,8 @@ export default Base => {
       prepareVirtualEffects() {
         super.prepareVirtualEffects();
         for (const key of Object.keys(this.speedAdjustments)) {
-          if (this.parent.statuses.has("slowed")) {
-            this.speedAdjustments[key] -= 1;
-          }
-          if (this.parent.statuses.has("immobilized")) {
-            this.speedAdjustments[key] = 0;
-          }
+          if (this.parent.statuses.has("slowed")) this.speedAdjustments[key] -= 1;
+          if (this.parent.statuses.has("immobilized")) this.speedAdjustments[key] = 0;
           this.speedAdjustments[key] = Math.max(this.speedAdjustments[key], 0);
         }
       }

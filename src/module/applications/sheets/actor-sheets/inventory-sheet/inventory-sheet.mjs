@@ -10,10 +10,5 @@ export default class InventorySheet extends BaseActorSheet {
     window: { icon: makeIconClass(documentConfig.inventory.icon, "title") },
   };
 
-  static PARTS = {
-    all: {
-      scrollable: [""],
-      template: "teriock/sheets/actors/inventory/inventory",
-    },
-  };
+  static PARTS = { all: { scrollable: [""], template: "teriock/sheets/actors/inventory/inventory" } };
 }

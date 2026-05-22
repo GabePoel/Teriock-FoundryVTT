@@ -17,8 +17,8 @@ export default Base => {
        */
       _prepareTokenColor() {
         if (
-          (this.actor.statuses.has("down") || this.actor.statuses.has("dead")) &&
-          this.actor.getSetting("token.autoColoration")
+          (this.actor.statuses.has("down") || this.actor.statuses.has("dead"))
+          && this.actor.getSetting("token.autoColoration")
         ) {
           this._tokenChanges.push({
             key: "texture.tint",
@@ -34,9 +34,7 @@ export default Base => {
        * Prepare token detection mode changes.
        */
       _prepareTokenDetectionModes() {
-        if (!this.actor.getSetting("token.autoDetectionModes")) {
-          return;
-        }
+        if (!this.actor.getSetting("token.autoDetectionModes")) return;
         for (const [sense, config] of Object.entries(TERIOCK.config.character.sense)) {
           if (config?.detectionMode) {
             this._tokenChanges.push({
@@ -74,9 +72,7 @@ export default Base => {
         }
         if (this.actor.statuses.has("ethereal")) {
           visionMode = "ethereal";
-          if (this.actor.statuses.has("invisible")) {
-            visionMode = "invisibleEthereal";
-          }
+          if (this.actor.statuses.has("invisible")) visionMode = "invisibleEthereal";
         }
         if (this.actor.statuses.has("down")) {
           sightColor = "#a36767";
@@ -87,9 +83,9 @@ export default Base => {
           visionMode = "dead";
         }
         const range = Math.max(
-          ...Object.entries(this.senses)
-            .filter(([k, _v]) => TERIOCK.config.character.sense[k]?.grantsSight)
-            .map(([_k, v]) => v),
+          ...Object.entries(this.senses).filter(([k, _v]) => TERIOCK.config.character.sense[k]?.grantsSight).map((
+            [_k, v],
+          ) => v),
         );
         if (this.actor.getSetting("token.autoVisionModes")) {
           this._tokenChanges.push({

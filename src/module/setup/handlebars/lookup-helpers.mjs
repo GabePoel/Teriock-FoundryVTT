@@ -13,10 +13,6 @@ function path(obj, ...pathSegments) {
   return foundry.utils.getProperty(obj, fullPath);
 }
 
-const lookupHelperEntries = [
-  ["getImage", getImage],
-  ["path", path],
-  ["ruleUuid", ruleUuid],
-];
+const lookupHelperEntries = [["getImage", getImage], ["path", path], ["ruleUuid", ruleUuid]];
 
 export default lookupHelperEntries;

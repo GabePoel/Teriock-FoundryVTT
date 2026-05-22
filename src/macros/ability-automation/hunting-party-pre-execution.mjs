@@ -11,9 +11,7 @@ if (refAct) {
     foundry.utils.setProperty(
       flankingData,
       "display.label",
-      _loc("TERIOCK.COMMANDS.Status.applyNamed", {
-        name: flankingSub.name,
-      }),
+      _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: flankingSub.name }),
     );
   }
   if (snareSub) {
@@ -23,9 +21,7 @@ if (refAct) {
     foundry.utils.setProperty(
       snareData,
       "display.label",
-      _loc("TERIOCK.COMMANDS.Status.applyNamed", {
-        name: snareSub.name,
-      }),
+      _loc("TERIOCK.COMMANDS.Status.applyNamed", { name: snareSub.name }),
     );
   }
   const flankingActivation = new teriock.data.pseudoDocuments.activations.AddDocumentsActivation(flankingData);

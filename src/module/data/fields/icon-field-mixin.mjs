@@ -28,9 +28,7 @@ export default function iconFieldMixin(Base, optionsIndex = 0) {
           element.className = "icon-input";
           const iconElement = makeIconElement(icon, style);
           const labelElement = document.createElement("label");
-          if (config.id) {
-            labelElement.htmlFor = config.id;
-          }
+          if (config.id) labelElement.htmlFor = config.id;
           labelElement.dataset.tooltip = this.label || "";
           labelElement.appendChild(iconElement);
           element.appendChild(labelElement);

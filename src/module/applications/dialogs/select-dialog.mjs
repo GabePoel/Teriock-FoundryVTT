@@ -41,13 +41,7 @@ export async function selectDialog(choices, options = {}) {
   } = options;
 
   const selectContentHtml = document.createElement("div");
-  const selectField = new fields.StringField({
-    choices,
-    hint,
-    initial,
-    label,
-    required,
-  });
+  const selectField = new fields.StringField({ choices, hint, initial, label, required });
   selectContentHtml.append(selectField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "selected" }));
   if (hintHtml.length > 0) {
     const appendHtmlString = await TextEditor.enrichHTML(hintHtml);
@@ -69,60 +63,37 @@ export async function selectDialog(choices, options = {}) {
     return await TeriockDialog.prompt({
       content: selectContentHtml,
       modal: true,
-      ok: {
-        callback: (_event, button) => button.form.elements.namedItem("selected").value,
-      },
-      window: {
-        icon: makeIconClass(icon, "title"),
-        title,
-      },
+      ok: { callback: (_event, button) => button.form.elements.namedItem("selected").value },
+      window: { icon: makeIconClass(icon, "title"), title },
     });
   }
 
   const otherContentHtml = document.createElement("div");
-  const otherField = new fields.StringField({
-    hint,
-    label,
-  });
+  const otherField = new fields.StringField({ hint, label });
   otherContentHtml.append(
     otherField.toFormGroup({ rootId: foundry.utils.randomID(), units: "other" }, { name: "other" }),
   );
 
   return await TeriockDialog.prompt({
-    buttons: [
-      {
-        action: "other",
-        label: _loc("TERIOCK.DIALOGS.Select.otherButton"),
-        callback: async (_event, _button, dialog) => {
-          dialog.classList.add("force-hidden");
-          if (genericOther) {
-            return null;
-          }
+    buttons: [{
+      action: "other",
+      label: _loc("TERIOCK.DIALOGS.Select.otherButton"),
+      callback: async (_event, _button, dialog) => {
+        dialog.classList.add("force-hidden");
+        if (genericOther) return null;
 
-          return await TeriockDialog.prompt({
-            content: otherContentHtml,
-            modal: true,
-            ok: {
-              callback: (_event, button) => button.form.elements.namedItem("other").value,
-            },
-            window: {
-              icon: makeIconClass(TERIOCK.display.icons.ui.custom, "title"),
-              title,
-            },
-          });
-        },
+        return await TeriockDialog.prompt({
+          content: otherContentHtml,
+          modal: true,
+          ok: { callback: (_event, button) => button.form.elements.namedItem("other").value },
+          window: { icon: makeIconClass(TERIOCK.display.icons.ui.custom, "title"), title },
+        });
       },
-    ],
+    }],
     content: selectContentHtml,
     modal: true,
-    ok: {
-      default: true,
-      callback: (_event, button) => button.form.elements.namedItem("selected").value,
-    },
-    window: {
-      icon: makeIconClass(TERIOCK.display.icons.ui.select, "title"),
-      title,
-    },
+    ok: { default: true, callback: (_event, button) => button.form.elements.namedItem("selected").value },
+    window: { icon: makeIconClass(TERIOCK.display.icons.ui.select, "title"), title },
   });
 }
 
@@ -184,19 +155,15 @@ export async function selectPropertyDialog() {
  */
 async function _tradecraftChoices(tradecrafts) {
   const tradecraftList = tradecrafts?.length ? tradecrafts : Object.keys(TERIOCK.reference.tradecrafts);
-  if (tradecraftList.length === 0) {
-    return [];
-  }
-  return Promise.all(
-    tradecraftList.map(async tc => {
-      return {
-        img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-        name: TERIOCK.reference.tradecrafts[tc],
-        tooltip: await TeriockTextEditor.makeTooltip(await tradecraftPanel(tc)),
-        uuid: tc,
-      };
-    }),
-  );
+  if (tradecraftList.length === 0) return [];
+  return Promise.all(tradecraftList.map(async tc => {
+    return {
+      img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+      name: TERIOCK.reference.tradecrafts[tc],
+      tooltip: await TeriockTextEditor.makeTooltip(await tradecraftPanel(tc)),
+      uuid: tc,
+    };
+  }));
 }
 
 /**
@@ -218,9 +185,7 @@ export async function selectTradecraftDialog(tradecrafts) {
  */
 export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}) {
   const choices = await _tradecraftChoices(tradecrafts);
-  if (choices.length === 0) {
-    return [];
-  }
+  if (choices.length === 0) return [];
   const chosen = await selectDocumentsDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
     multi,
@@ -228,9 +193,7 @@ export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}
     title: _loc("TERIOCK.DIALOGS.Select.Tradecraft.title"),
     tooltipKey: "tooltip",
   });
-  if (!chosen) {
-    return [];
-  }
+  if (!chosen) return [];
   return chosen.map(c => c.uuid);
 }
 
@@ -255,15 +218,9 @@ export async function selectAbilityDialog() {
  * @returns {Promise<CompendiumCollection<TeriockDocument>[]>}
  */
 export async function selectCompendiumsDialog(selected = true) {
-  const packDocs = game.packs.contents
-    .filter(p => !p.locked)
-    .map(p => {
-      return {
-        img: p.banner || "icons/svg/book.svg",
-        name: _loc(p.title),
-        uuid: p.collection,
-      };
-    });
+  const packDocs = game.packs.contents.filter(p => !p.locked).map(p => {
+    return { img: p.banner || "icons/svg/book.svg", name: _loc(p.title), uuid: p.collection };
+  });
   packDocs.sort((a, b) => a.name.localeCompare(b.name));
   const chosen = await tm.dialogs.selectDocumentsDialog(packDocs, {
     checked: packDocs.map(p => p.uuid && selected),
@@ -344,11 +301,8 @@ export async function selectClassDialog() {
     title: _loc("TERIOCK.DIALOGS.Select.Class.title"),
     tooltipKey: "tooltip",
   });
-  if (chosen) {
-    return chosen.uuid;
-  } else {
-    return null;
-  }
+  if (chosen) return chosen.uuid;
+  else return null;
 }
 
 /**

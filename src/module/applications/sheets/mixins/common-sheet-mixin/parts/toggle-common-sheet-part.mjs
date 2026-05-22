@@ -10,9 +10,7 @@ export default Base => {
      */
     class ToggleCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { sheetToggle: this._onSheetToggle },
-      };
+      static DEFAULT_OPTIONS = { actions: { sheetToggle: this._onSheetToggle } };
 
       /**
        * Toggles a boolean field on the sheet and re-renders.

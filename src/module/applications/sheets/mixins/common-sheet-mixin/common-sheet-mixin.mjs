@@ -25,23 +25,25 @@ export default function CommonSheetMixin(Base) {
      * @mixin
      * @property {AnyCommonDocument} document
      */
-    class CommonSheet extends mixClasses(
-      Base,
-      BaseSheetMixin,
-      ConfigButtonSheetMixin,
-      parts.ConnectionCommonSheetPart,
-      parts.DragDropCommonSheetPart,
-      parts.DocumentCreationCommonSheetPart,
-      parts.FieldsCommonSheetPart,
-      parts.ImageEditingCommonSheetPart,
-      parts.AutomationsTabsCommonSheetPart,
-      parts.LockingCommonSheetPart,
-      parts.MenuCommonSheetPart,
-      parts.StatDiceCommonSheetPart,
-      parts.ToggleCommonSheetPart,
-      parts.AutomationsCommonSheetPart,
-      IndexButtonSheetMixin,
-    ) {
+    class CommonSheet
+      extends mixClasses(
+        Base,
+        BaseSheetMixin,
+        ConfigButtonSheetMixin,
+        parts.ConnectionCommonSheetPart,
+        parts.DragDropCommonSheetPart,
+        parts.DocumentCreationCommonSheetPart,
+        parts.FieldsCommonSheetPart,
+        parts.ImageEditingCommonSheetPart,
+        parts.AutomationsTabsCommonSheetPart,
+        parts.LockingCommonSheetPart,
+        parts.MenuCommonSheetPart,
+        parts.StatDiceCommonSheetPart,
+        parts.ToggleCommonSheetPart,
+        parts.AutomationsCommonSheetPart,
+        IndexButtonSheetMixin,
+      )
+    {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
         form: { closeOnSubmit: false, submitOnChange: true },
@@ -66,9 +68,7 @@ export default function CommonSheetMixin(Base) {
        */
       async _enrich(parameter) {
         return parameter?.length
-          ? await TeriockTextEditor.enrichHTML(parameter, {
-              relativeTo: this.document,
-            })
+          ? await TeriockTextEditor.enrichHTML(parameter, { relativeTo: this.document })
           : undefined;
       }
 
@@ -85,9 +85,8 @@ export default function CommonSheetMixin(Base) {
       /** @inheritDoc */
       async _renderFrame(options = {}) {
         const frame = await super._renderFrame(options);
-        if (this.document.inCompendium) {
+        if (this.document.inCompendium)
           this.window.header.style.backgroundColor = "var(--compendium-sheet-header-background-color)";
-        }
         return frame;
       }
     }

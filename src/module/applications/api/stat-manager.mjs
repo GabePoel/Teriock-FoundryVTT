@@ -12,11 +12,7 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
-  static DEFAULT_OPTIONS = {
-    actions: { ok: this._onDone },
-    classes: ["dialog"],
-    position: { width: 425 },
-  };
+  static DEFAULT_OPTIONS = { actions: { ok: this._onDone }, classes: ["dialog"], position: { width: 425 } };
 
   /**
    * Close the manager.
@@ -36,13 +32,8 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
    */
   constructor(actor, options, applicationOptions = {}) {
     const { consumeStatDice = true, forHarm = false, title = "" } = options;
-    if (title.length > 0) {
-      applicationOptions.title = title;
-    }
-    Object.assign(applicationOptions, {
-      document: actor,
-      sheetConfig: false,
-    });
+    if (title.length > 0) applicationOptions.title = title;
+    Object.assign(applicationOptions, { document: actor, sheetConfig: false });
     super(applicationOptions);
     this._forHarm = forHarm;
     this._consumeStatDice = consumeStatDice;
@@ -51,9 +42,7 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
   /** @inheritDoc */
   _initializeApplicationOptions(options = {}) {
     const applicationOptions = super._initializeApplicationOptions(options);
-    if (options.title) {
-      applicationOptions.window.title = options.title;
-    }
+    if (options.title) applicationOptions.window.title = options.title;
     return applicationOptions;
   }
 

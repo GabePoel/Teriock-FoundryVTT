@@ -47,9 +47,7 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       activeQualifier: new FormulaField({ deterministic: true, initial: "1" }),
-      competencies: new fields.SetField(competenceField(), {
-        initial: [0, 1, 2],
-      }),
+      competencies: new fields.SetField(competenceField(), { initial: [0, 1, 2] }),
       heighten: new fields.SetField(
         new fields.NumberField({
           choices: localizeChoices({
@@ -57,9 +55,7 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
             1: "TERIOCK.AUTOMATIONS.Base.FIELDS.heighten.choices.1",
           }),
         }),
-        {
-          initial: [0, 1],
-        },
+        { initial: [0, 1] },
       ),
     });
   }
@@ -101,11 +97,8 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
    * @returns {boolean}
    */
   get isPassive() {
-    if (this.document.type === "ability") {
-      return this.parent["maneuver"] === "passive";
-    } else {
-      return this.document.type === "property";
-    }
+    if (this.document.type === "ability") return this.parent["maneuver"] === "passive";
+    else return this.document.type === "property";
   }
 
   /**
@@ -122,13 +115,9 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
    * @returns {boolean}
    */
   checkIfQualified(rollData) {
-    if (this.activeQualifier === "1") {
-      return true;
-    } else if (this.activeQualifier === "0" || !this.activeQualifier) {
-      return false;
-    } else {
-      return !!BaseRoll.minValue(this.activeQualifier, rollData ?? this.getRollData());
-    }
+    if (this.activeQualifier === "1") return true;
+    else if (this.activeQualifier === "0" || !this.activeQualifier) return false;
+    else return !!BaseRoll.minValue(this.activeQualifier, rollData ?? this.getRollData());
   }
 
   /**

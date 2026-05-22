@@ -11,37 +11,25 @@ const { createTextInput } = foundry.applications.fields;
 export default class IdentifierField extends StringField {
   /** @inheritDoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      blank: true,
-      nullable: true,
-      reset: null,
-    });
+    return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, reset: null });
   }
 
   /** @inheritDoc */
   _toInput(config) {
     const reset = config.reset ?? this.reset;
-    if (reset) {
-      return HTMLIdentifierInputElement.create({ ...config, reset });
-    }
+    if (reset) return HTMLIdentifierInputElement.create({ ...config, reset });
     return createTextInput(config);
   }
 
   /** @inheritDoc */
   _validateType(value) {
-    if (value == null || value === "") {
-      return true;
-    }
-    if (!identifierValidator(value)) {
-      throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
-    }
+    if (value == null || value === "") return true;
+    if (!identifierValidator(value)) throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
   }
 
   /** @inheritDoc */
   clean(value, options, _state) {
-    if (value === "") {
-      value = null;
-    }
+    if (value === "") value = null;
     return super.clean(value, options, _state);
   }
 }

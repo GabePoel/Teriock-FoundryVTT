@@ -13,11 +13,9 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(Immunit
    */
   constructor(options = {}) {
     super(options);
-    if (options.threshold === undefined) {
-      this.threshold = 10;
-    }
-    this.img =
-      options.img || (this.hex ? getImage("effect-types", "Hexproof") : getImage("effect-types", "Resistance"));
+    if (options.threshold === undefined) this.threshold = 10;
+    this.img = options.img
+      || (this.hex ? getImage("effect-types", "Hexproof") : getImage("effect-types", "Resistance"));
     this.rule = this.hex ? "hexproof" : "resistance";
     this.LABEL = "Resistance";
   }
@@ -25,9 +23,7 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(Immunit
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
-      system: {
-        _src: ruleUuid("Keyword", this.hex ? "Hexproof" : "Resistance"),
-      },
+      system: { _src: ruleUuid("Keyword", this.hex ? "Hexproof" : "Resistance") },
     });
   }
 
@@ -43,18 +39,14 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(Immunit
 
   /** @inheritDoc */
   get name() {
-    if (this.hex) {
-      return _loc("TERIOCK.TERMS.Protections.hexproof.single");
-    }
+    if (this.hex) return _loc("TERIOCK.TERMS.Protections.hexproof.single");
     return _loc("TERIOCK.TERMS.Protections.resistance.single");
   }
 
   /** @inheritDoc */
   async _buildActivations() {
     this.activations.push(
-      new teriock.data.pseudoDocuments.activations.UseLocalActivation({
-        options: { lookup: "ability:resist" },
-      }),
+      new teriock.data.pseudoDocuments.activations.UseLocalActivation({ options: { lookup: "ability:resist" } }),
     );
   }
 

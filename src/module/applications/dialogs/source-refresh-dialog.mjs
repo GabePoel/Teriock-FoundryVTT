@@ -36,10 +36,7 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
   };
 
   static PARTS = {
-    select: {
-      scrollable: [".doc-list-container"],
-      template: "teriock/dialogs/select",
-    },
+    select: { scrollable: [".doc-list-container"], template: "teriock/dialogs/select" },
     options: { template: "teriock/shared/field-list-part" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
@@ -81,17 +78,13 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     await super._onRender(context, options);
     // Remove search since this shouldn't ever have enough documents to warrant it
     this.element.querySelectorAll(".teriock-block-searchbar").forEach(el => el.remove());
-    this.element.querySelectorAll(".dynamic-select .form-group").forEach(
-      /** @param {HTMLElement} el */ el => {
-        el.style.setProperty("--fade", "0");
-      },
-    );
+    this.element.querySelectorAll(".dynamic-select .form-group").forEach(/** @param {HTMLElement} el */ el => {
+      el.style.setProperty("--fade", "0");
+    });
     // Listen for updates from the available refresh source documents
     this.element.querySelectorAll("input[type='radio']").forEach(el => {
       el.addEventListener("change", () => {
-        if (el?.checked) {
-          this.selected = el.value;
-        }
+        if (el?.checked) this.selected = el.value;
       });
     });
     // Listen for refresh option updates
@@ -103,41 +96,31 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     });
     // Listen for double clicks to open refresh sources
     /** @see {TeriockDocumentSelector._initClickLoader} */
-    this.element.querySelectorAll("[data-uuid]").forEach(
-      /** @param {HTMLElement} el */ el => {
-        el.addEventListener("dblclick", async ev => {
-          const target = /** @type {HTMLElement} */ ev.currentTarget;
-          const uuid = target.dataset.uuid;
-          const doc = /** @type {AnyChildDocument} */ await fromUuid(uuid);
-          await doc.sheet.render(true);
-        });
-      },
-    );
+    this.element.querySelectorAll("[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
+      el.addEventListener("dblclick", async ev => {
+        const target = /** @type {HTMLElement} */ ev.currentTarget;
+        const uuid = target.dataset.uuid;
+        const doc = /** @type {AnyChildDocument} */ await fromUuid(uuid);
+        await doc.sheet.render(true);
+      });
+    });
   }
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const documents = await this.document.system.getRefreshSources();
     const documentMap = Object.fromEntries(
-      documents.map(n => [
-        n.document.uuid,
-        {
-          img: n.document.img,
-          name: n.document.name,
-          text: n.label,
-          uuid: n.document.uuid,
-        },
-      ]),
+      documents.map(
+        n => [n.document.uuid, { img: n.document.img, name: n.document.name, text: n.label, uuid: n.document.uuid }]
+      ),
     );
     return Object.assign(await super._prepareContext(options), {
-      buttons: [
-        {
-          action: "ok",
-          icon: makeIconClass(icons.ui.done, "button"),
-          label: "COMMON.Confirm",
-          type: "submit",
-        },
-      ],
+      buttons: [{
+        action: "ok",
+        icon: makeIconClass(icons.ui.done, "button"),
+        label: "COMMON.Confirm",
+        type: "submit",
+      }],
       documents: documentMap,
       hint: _loc(documents.length ? "TERIOCK.DIALOGS.SourceRefresh.hint" : "TERIOCK.DIALOGS.SourceRefresh.noSources"),
       tooltip: true,

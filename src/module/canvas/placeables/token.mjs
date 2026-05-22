@@ -13,22 +13,14 @@ export default class TeriockToken extends Token {
   async _drawEffects() {
     await super._drawEffects();
     const promises = [];
-    if (this.document.hasStatusEffect("encumbered") && this.document?.actor?.system.encumbranceLevel > 0) {
+    if (this.document.hasStatusEffect("encumbered") && this.document?.actor?.system.encumbranceLevel > 0)
       promises.push(this._drawEffect(getImage("conditions", "Encumbered")));
-    }
     let overlayImg;
-    if (this.document.hasStatusEffect("down") || this.document.hasStatusEffect("unconscious")) {
+    if (this.document.hasStatusEffect("down") || this.document.hasStatusEffect("unconscious"))
       overlayImg = "icons/svg/unconscious.svg";
-    }
-    if (this.document.hasStatusEffect("criticallyWounded")) {
-      overlayImg = "icons/svg/blood.svg";
-    }
-    if (this.document.hasStatusEffect("dead")) {
-      overlayImg = "icons/svg/skull.svg";
-    }
-    if (overlayImg) {
-      promises.push(this._drawOverlay(overlayImg));
-    }
+    if (this.document.hasStatusEffect("criticallyWounded")) overlayImg = "icons/svg/blood.svg";
+    if (this.document.hasStatusEffect("dead")) overlayImg = "icons/svg/skull.svg";
+    if (overlayImg) promises.push(this._drawOverlay(overlayImg));
     if (promises.length > 0) {
       await Promise.allSettled(promises);
       this.effects.sortChildren();

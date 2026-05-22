@@ -15,43 +15,24 @@ export default function DisplaySheetMixin(Base) {
        * @return {Promise<void>}
        */
       static async #onOpenImage() {
-        await new ImagePopout({
-          src: this.document.img,
-          window: {
-            title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
-          },
-        }).render(true);
+        await new ImagePopout({ src: this.document.img, window: { title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview" } })
+          .render(true);
       }
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
-      static CONTENT_PARTS = {
-        content: { template: "teriock/sheets/shared/content" },
-      };
+      static CONTENT_PARTS = { content: { template: "teriock/sheets/shared/content" } };
 
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: {
-          openImage: this.#onOpenImage,
-          populateField: this._onPopulateField,
-        },
-      };
+      static DEFAULT_OPTIONS = { actions: { openImage: this.#onOpenImage, populateField: this._onPopulateField } };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
-      static HEADER_PARTS = {
-        header: { template: "teriock/sheets/shared/top" },
-      };
+      static HEADER_PARTS = { header: { template: "teriock/sheets/shared/top" } };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
-      static MENU_PARTS = {
-        menu: { template: "teriock/sheets/shared/simple-menu" },
-      };
+      static MENU_PARTS = { menu: { template: "teriock/sheets/shared/simple-menu" } };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
-      static DISPLAY_PARTS = {
-        ...this.HEADER_PARTS,
-        ...this.MENU_PARTS,
-        ...this.CONTENT_PARTS,
-      };
+      static DISPLAY_PARTS = { ...this.HEADER_PARTS, ...this.MENU_PARTS, ...this.CONTENT_PARTS };
 
       /**
        * Populate a display field.
@@ -97,17 +78,8 @@ export default function DisplaySheetMixin(Base) {
         const out = [];
         const defaultTooltip = _loc("TERIOCK.SHEETS.Child.DISPLAY.defaultTagTooltip");
         tags.forEach(t => {
-          if (typeof t === "string") {
-            out.push({
-              label: _loc(t),
-              tooltip: defaultTooltip,
-            });
-          } else {
-            out.push({
-              label: _loc(t.label),
-              tooltip: _loc(t.tooltip),
-            });
-          }
+          if (typeof t === "string") out.push({ label: _loc(t), tooltip: defaultTooltip });
+          else out.push({ label: _loc(t.label), tooltip: _loc(t.tooltip) });
         });
         return out;
       }
@@ -123,17 +95,13 @@ export default function DisplaySheetMixin(Base) {
        */
       _configureRenderOptions(options) {
         super._configureRenderOptions(options);
-        if (this._tab !== "overview") {
-          this._removeFromArray(options.parts, "menu");
-        }
+        if (this._tab !== "overview") this._removeFromArray(options.parts, "menu");
       }
 
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        if (!this.isEditable) {
-          return;
-        }
+        if (!this.isEditable) return;
         for (const [selector, update] of Object.entries(this._buttonUpdates)) {
           this.element.querySelectorAll(selector).forEach(el => {
             el.addEventListener("click", () => this.document.update(update));
@@ -160,27 +128,13 @@ export default function DisplaySheetMixin(Base) {
        */
       async _prepareDisplayFields(context) {
         const expandedDisplayFields = this.#expandFields(this.document.system.displayFields);
-        context.displayFieldButtons = expandedDisplayFields
-          .filter(f => !f.value)
-          .map(f => {
-            return {
-              editable: f.editable,
-              fieldPath: f.path,
-              name: f?.button || f?.label || f.schema?.label,
-            };
-          })
-          .filter(b => b.editable !== false);
+        context.displayFieldButtons = expandedDisplayFields.filter(f => !f.value).map(f => {
+          return { editable: f.editable, fieldPath: f.path, name: f?.button || f?.label || f.schema?.label };
+        }).filter(b => b.editable !== false);
         context.displayFields = /** @type {Teriock.Sheet.EnrichedDisplayField[]} */ await Promise.all(
-          expandedDisplayFields
-            .filter(f => f.value)
-            .map(async f => {
-              return {
-                ...f,
-                enriched: await TeriockTextEditor.enrichHTML(f.value, {
-                  relativeTo: this.document,
-                }),
-              };
-            }),
+          expandedDisplayFields.filter(f => f.value).map(async f => {
+            return { ...f, enriched: await TeriockTextEditor.enrichHTML(f.value, { relativeTo: this.document }) };
+          }),
         );
         context.bars = this._tab === "overview" ? this.constructor.BARS : [];
       }

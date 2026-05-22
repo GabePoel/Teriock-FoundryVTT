@@ -26,14 +26,10 @@ export default function ChildSheetMixin(Base) {
       static BARS = [];
 
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: { openSource: this.#onOpenSource },
-      };
+      static DEFAULT_OPTIONS = { actions: { openSource: this.#onOpenSource } };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
-      static PARTS = {
-        ...this.DISPLAY_PARTS,
-      };
+      static PARTS = { ...this.DISPLAY_PARTS };
     }
   );
 }

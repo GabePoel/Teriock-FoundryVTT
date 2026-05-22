@@ -6,10 +6,7 @@ import BaseConfig from "./base-config.mjs";
 export default class DialogConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    window: {
-      icon: makeIconClass(icons.settings.dialog, "title"),
-      title: "TERIOCK.CONFIGS.Dialog.name",
-    },
+    window: { icon: makeIconClass(icons.settings.dialog, "title"), title: "TERIOCK.CONFIGS.Dialog.name" },
   };
 
   /** @inheritDoc */

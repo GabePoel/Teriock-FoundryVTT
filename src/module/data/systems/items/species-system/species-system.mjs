@@ -25,13 +25,15 @@ const { fields } = foundry.data;
  * @mixes StatGiverSystem
  * @mixes WikiSystem
  */
-export default class SpeciesSystem extends mixClasses(
-  BaseItemSystem,
-  mixins.WikiSystemMixin,
-  mixins.StatGiverSystemMixin,
-  mixins.CompetenceDisplaySystemMixin,
-  parts.SpeciesPanelPart,
-) {
+export default class SpeciesSystem
+  extends mixClasses(
+    BaseItemSystem,
+    mixins.WikiSystemMixin,
+    mixins.StatGiverSystemMixin,
+    mixins.CompetenceDisplaySystemMixin,
+    parts.SpeciesPanelPart,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Species"];
 
@@ -54,9 +56,7 @@ export default class SpeciesSystem extends mixClasses(
       appearance: new fields.HTMLField(),
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
-      competence: new fields.EmbeddedDataField(CompetenceModel, {
-        initial: { raw: 1 },
-      }),
+      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
       hpIncrease: new fields.HTMLField(),
       innateRanks: new fields.HTMLField(),
@@ -99,10 +99,7 @@ export default class SpeciesSystem extends mixClasses(
    */
   get _traitTags() {
     const tags = Array.from(this.traits).map(t => {
-      return {
-        label: TERIOCK.reference.traits[t],
-        tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label",
-      };
+      return { label: TERIOCK.reference.traits[t], tooltip: "TERIOCK.SYSTEMS.Species.FIELDS.traits.label" };
     });
     if (this.transformationEffect?.system.transformation.level) {
       tags.push({
@@ -116,15 +113,9 @@ export default class SpeciesSystem extends mixClasses(
   /** @inheritDoc */
   get color() {
     if (this.isTransformation) {
-      if (this.transformationEffect.system.transformation.level === "minor") {
-        return TERIOCK.display.colors.blue;
-      }
-      if (this.transformationEffect.system.transformation.level === "full") {
-        return TERIOCK.display.colors.green;
-      }
-      if (this.transformationEffect.system.transformation.level === "greater") {
-        return TERIOCK.display.colors.purple;
-      }
+      if (this.transformationEffect.system.transformation.level === "minor") return TERIOCK.display.colors.blue;
+      if (this.transformationEffect.system.transformation.level === "full") return TERIOCK.display.colors.green;
+      if (this.transformationEffect.system.transformation.level === "greater") return TERIOCK.display.colors.purple;
     }
     return super.color;
   }
@@ -132,18 +123,10 @@ export default class SpeciesSystem extends mixClasses(
   /** @inheritDoc */
   get displayButtons() {
     const buttons = super.displayButtons;
-    if (typeof this.size.min !== "number" && typeof this.size.min !== "number") {
-      buttons.push({
-        classes: "ab-size-button",
-        label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label",
-      });
-    }
-    if (!this.adult) {
-      buttons.push({
-        classes: "ab-lifespan-button",
-        label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
-      });
-    }
+    if (typeof this.size.min !== "number" && typeof this.size.min !== "number")
+      buttons.push({ classes: "ab-size-button", label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label" });
+    if (!this.adult)
+      buttons.push({ classes: "ab-lifespan-button", label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label" });
     return buttons;
   }
 
@@ -189,9 +172,7 @@ export default class SpeciesSystem extends mixClasses(
   get isPrimaryTransformation() {
     if (this.isTransformation) {
       const transformationEffect = this.transformationEffect;
-      if (transformationEffect && transformationEffect.system.isPrimaryTransformation) {
-        return true;
-      }
+      if (transformationEffect && transformationEffect.system.isPrimaryTransformation) return true;
     }
     return false;
   }
@@ -209,8 +190,8 @@ export default class SpeciesSystem extends mixClasses(
     let suppressed = super.makeSuppressed;
     if (this.isTransformation && this.parent.actor) {
       const transformationEffect = this.transformationEffect;
-      suppressed =
-        suppressed || (transformationEffect && !transformationEffect.active) || !this.isPrimaryTransformation;
+      suppressed = suppressed || (transformationEffect && !transformationEffect.active)
+        || !this.isPrimaryTransformation;
     }
     return suppressed;
   }
@@ -220,9 +201,7 @@ export default class SpeciesSystem extends mixClasses(
    * @returns {TeriockLingering|null}
    */
   get transformationEffect() {
-    if (!this.actor) {
-      return null;
-    }
+    if (!this.actor) return null;
     return this.parent.dependee ?? null;
   }
 
@@ -238,11 +217,8 @@ export default class SpeciesSystem extends mixClasses(
           title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
         },
       });
-      if (proceed) {
-        await this.transformationEffect.delete();
-      } else {
-        await super.deleteThis();
-      }
+      if (proceed) await this.transformationEffect.delete();
+      else await super.deleteThis();
     } else {
       await super.deleteThis();
     }
@@ -250,16 +226,13 @@ export default class SpeciesSystem extends mixClasses(
 
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
-    return [
-      ...super.getCardContextMenuEntries(doc),
-      {
-        group: "control",
-        icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
-        onClick: this.setPrimaryTransformation.bind(this),
-        visible: this.isTransformation && !this.isPrimaryTransformation,
-      },
-    ];
+    return [...super.getCardContextMenuEntries(doc), {
+      group: "control",
+      icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
+      onClick: this.setPrimaryTransformation.bind(this),
+      visible: this.isTransformation && !this.isPrimaryTransformation,
+    }];
   }
 
   /** @inheritDoc */
@@ -277,18 +250,14 @@ export default class SpeciesSystem extends mixClasses(
       ["transformation.level"]: this.transformationEffect?.system.transformation.level || 0,
       "transformation.primary": Number(this.isPrimaryTransformation),
     });
-    for (const trait of this.traits) {
-      data[`trait.${toCamelCase(trait)}`] = 1;
-    }
+    for (const trait of this.traits) data[`trait.${toCamelCase(trait)}`] = 1;
     return data;
   }
 
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    if (!this.actor) {
-      rollData.size = this.size.enabled ? this.size.value : 0;
-    }
+    if (!this.actor) rollData.size = this.size.enabled ? this.size.value : 0;
     return rollData;
   }
 
@@ -317,27 +286,20 @@ export default class SpeciesSystem extends mixClasses(
   toCreature(data = {}) {
     const hasTokenImg = !!TERIOCK.index.creatures[toCamelCase(this.parent.name)];
     const tokenImg = hasTokenImg ? this.parent.img.replace("icons/creatures", "icons/tokens") : this.parent.img;
-    data = foundry.utils.mergeObject(
-      {
-        img: this.parent.img,
-        items: [game.items.fromCompendium(this.parent)],
+    data = foundry.utils.mergeObject({
+      img: this.parent.img,
+      items: [game.items.fromCompendium(this.parent)],
+      name: this.parent.name,
+      prototypeToken: {
+        height: TeriockActor.sizeConfig(this.size.value).length,
         name: this.parent.name,
-        prototypeToken: {
-          height: TeriockActor.sizeConfig(this.size.value).length,
-          name: this.parent.name,
-          ring: { enabled: hasTokenImg },
-          texture: { src: tokenImg },
-          width: TeriockActor.sizeConfig(this.size.value).length,
-        },
-        system: {
-          hp: { value: 999999 },
-          mp: { value: 999999 },
-          size: { number: { saved: this.size.value } },
-        },
-        type: "creature",
+        ring: { enabled: hasTokenImg },
+        texture: { src: tokenImg },
+        width: TeriockActor.sizeConfig(this.size.value).length,
       },
-      data,
-    );
+      system: { hp: { value: 999999 }, mp: { value: 999999 }, size: { number: { saved: this.size.value } } },
+      type: "creature",
+    }, data);
     data.items = [game.items.fromCompendium(this.parent)];
     return data;
   }

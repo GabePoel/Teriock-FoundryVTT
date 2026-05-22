@@ -30,19 +30,21 @@ const { fields } = foundry.data;
  * @mixes EquipmentWieldingPart
  * @mixes WikiSystem
  */
-export default class EquipmentSystem extends mixClasses(
-  BaseItemSystem,
-  mixins.ArmamentSystemMixin,
-  mixins.AttunableSystemMixin,
-  mixins.ConsumableSystemMixin,
-  mixins.WikiSystemMixin,
-  parts.EquipmentIdentificationPart,
-  parts.EquipmentMigrationPart,
-  parts.EquipmentPanelPart,
-  parts.EquipmentStoragePart,
-  parts.EquipmentSuppressionPart,
-  parts.EquipmentWieldingPart,
-) {
+export default class EquipmentSystem
+  extends mixClasses(
+    BaseItemSystem,
+    mixins.ArmamentSystemMixin,
+    mixins.AttunableSystemMixin,
+    mixins.ConsumableSystemMixin,
+    mixins.WikiSystemMixin,
+    parts.EquipmentIdentificationPart,
+    parts.EquipmentMigrationPart,
+    parts.EquipmentPanelPart,
+    parts.EquipmentStoragePart,
+    parts.EquipmentSuppressionPart,
+    parts.EquipmentWieldingPart,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Equipment"];
 
@@ -111,9 +113,7 @@ export default class EquipmentSystem extends mixClasses(
 
   /** @inheritDoc */
   get _attunableWrappers() {
-    if (!this.identification.identified && !this.isAttuned) {
-      return [];
-    }
+    if (!this.identification.identified && !this.isAttuned) return [];
     return super._attunableWrappers;
   }
 
@@ -133,12 +133,8 @@ export default class EquipmentSystem extends mixClasses(
 
   /** @inheritDoc */
   get color() {
-    if (this.isOverCapacity) {
-      return TERIOCK.display.colors.red;
-    }
-    if (!this.identification.read) {
-      return TERIOCK.display.colors.grey;
-    }
+    if (this.isOverCapacity) return TERIOCK.display.colors.red;
+    if (!this.identification.read) return TERIOCK.display.colors.grey;
     return TERIOCK.config.equipment.powerLevel[this.powerLevel].color;
   }
 
@@ -164,9 +160,7 @@ export default class EquipmentSystem extends mixClasses(
       subtitle: !this.consumable ? this.equipmentTypeName : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
-        _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", {
-          value: this.totalWeight,
-        }),
+        _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.totalWeight }),
         parts.text,
       ]),
     });
@@ -188,13 +182,9 @@ export default class EquipmentSystem extends mixClasses(
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
-    if (this.parent.isEmbedded) {
-      this.updateSource({ equipped: true });
-    }
+    if (this.parent.isEmbedded) this.updateSource({ equipped: true });
   }
 
   /**
@@ -202,9 +192,8 @@ export default class EquipmentSystem extends mixClasses(
    * @param {Partial<Teriock.Execution.EquipmentExecutionOptions>} options
    */
   async _use(options = {}) {
-    if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
+    if (game.teriock.getSetting("rollAttackOnArmamentUse"))
       await this.actor?.useDocument("basic-attack", { type: "ability" });
-    }
     await new EquipmentExecution(options).execute();
   }
 
@@ -220,8 +209,7 @@ export default class EquipmentSystem extends mixClasses(
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.fightingStyle && this.fightingStyle.length > 0) {
+    if (this.fightingStyle && this.fightingStyle.length > 0)
       this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
-    }
   }
 }

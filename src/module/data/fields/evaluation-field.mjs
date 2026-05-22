@@ -13,9 +13,7 @@ export default class EvaluationField extends EmbeddedDataField {
     delete options.model;
     const evaluationOptions = foundry.utils.deepClone(options);
     delete evaluationOptions.initial;
-    if (typeof options.initial === "number") {
-      options.initial = options.initial.toString();
-    }
+    if (typeof options.initial === "number") options.initial = options.initial.toString();
     super(model, evaluationOptions, context);
     this.fields = this._initialize(model.defineSchema(options));
     this._derivationOptions = options;
@@ -36,10 +34,7 @@ export default class EvaluationField extends EmbeddedDataField {
 
   /** @inheritDoc */
   initialize(value, model, options = {}) {
-    const newOptions = {
-      ...options,
-      ...this._derivationOptions,
-    };
+    const newOptions = { ...options, ...this._derivationOptions };
     return super.initialize(value, model, newOptions);
   }
 

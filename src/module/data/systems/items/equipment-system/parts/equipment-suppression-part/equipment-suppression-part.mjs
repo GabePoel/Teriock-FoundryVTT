@@ -28,55 +28,40 @@ export default Base => {
       /** @inheritDoc */
       get _nameTags() {
         const tags = super._nameTags;
-        if (this.stashed) {
-          tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label"));
-        }
+        if (this.stashed) tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label"));
         return tags;
       }
 
       /** @inheritDoc */
       get embedIcons() {
-        return [
-          super.embedIcons.find(i => i.action?.toLowerCase().includes("attuned")),
-          {
-            action: "toggleDampenedDoc",
-            icon: this.dampened ? TERIOCK.display.icons.equipment.dampen : TERIOCK.display.icons.equipment.undampen,
-            tooltip: this.dampened
-              ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
-            visible: this.parent.isOwner,
-            onClick: async () => {
-              if (this.dampened) {
-                await this.undampen();
-              } else {
-                await this.dampen();
-              }
-            },
+        return [super.embedIcons.find(i => i.action?.toLowerCase().includes("attuned")), {
+          action: "toggleDampenedDoc",
+          icon: this.dampened ? TERIOCK.display.icons.equipment.dampen : TERIOCK.display.icons.equipment.undampen,
+          tooltip: this.dampened
+            ? _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.dampened.label")
+            : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
+          visible: this.parent.isOwner,
+          onClick: async () => {
+            if (this.dampened) await this.undampen();
+            else await this.dampen();
           },
-          {
-            action: "toggleShatteredDoc",
-            icon: this.shattered ? TERIOCK.display.icons.break.shatter : TERIOCK.display.icons.break.repair,
-            tooltip: this.shattered
-              ? _loc("TERIOCK.TERMS.Properties.shattered")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
-            visible: this.parent.isOwner,
-            onClick: async () => {
-              if (this.shattered) {
-                await this.repair();
-              } else {
-                await this.shatter();
-              }
-            },
+        }, {
+          action: "toggleShatteredDoc",
+          icon: this.shattered ? TERIOCK.display.icons.break.shatter : TERIOCK.display.icons.break.repair,
+          tooltip: this.shattered
+            ? _loc("TERIOCK.TERMS.Properties.shattered")
+            : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
+          visible: this.parent.isOwner,
+          onClick: async () => {
+            if (this.shattered) await this.repair();
+            else await this.shatter();
           },
-          ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("attuned")),
-        ];
+        }, ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("attuned"))];
       }
 
       /** @inheritDoc */
       get embedParts() {
-        return Object.assign(super.embedParts, {
-          shattered: this.shattered,
-        });
+        return Object.assign(super.embedParts, { shattered: this.shattered });
       }
 
       /** @inheritDoc */
@@ -93,9 +78,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async dampen() {
-        await this.parent.hookCall("dampen", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("dampen", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:dampened", { active: true });
       }
 
@@ -108,73 +91,61 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async destroy() {
-        await this.parent.hookCall("destroy", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("destroy", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:dampened", { active: true });
       }
 
       /** @inheritdoc */
       getCardContextMenuEntries(doc) {
-        return [
-          ...super.getCardContextMenuEntries(doc),
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
-            onClick: this.shatter.bind(this),
-            visible: !this.shattered && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
-            onClick: this.repair.bind(this),
-            visible: this.shattered && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
-            onClick: this.destroy.bind(this),
-            visible: !this.destroyed && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
-            onClick: this.reforge.bind(this),
-            visible: this.destroyed && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.equipment.dampen, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
-            onClick: this.dampen.bind(this),
-            visible: !this.dampened && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.equipment.undampen, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
-            onClick: this.undampen.bind(this),
-            visible: this.dampened && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.equipment.stash, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
-            onClick: this.stash.bind(this),
-            visible: !this.stashed && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.equipment.unstash, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
-            onClick: this.unstash.bind(this),
-            visible: this.stashed && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-        ];
+        return [...super.getCardContextMenuEntries(doc), {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.break.shatter, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.shatter"),
+          onClick: this.shatter.bind(this),
+          visible: !this.shattered && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.break.repair, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.repair"),
+          onClick: this.repair.bind(this),
+          visible: this.shattered && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.break.destroy, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.destroy"),
+          onClick: this.destroy.bind(this),
+          visible: !this.destroyed && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.break.reforge, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.reforge"),
+          onClick: this.reforge.bind(this),
+          visible: this.destroyed && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.equipment.dampen, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.dampen"),
+          onClick: this.dampen.bind(this),
+          visible: !this.dampened && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.equipment.undampen, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.undampen"),
+          onClick: this.undampen.bind(this),
+          visible: this.dampened && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.equipment.stash, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.stash"),
+          onClick: this.stash.bind(this),
+          visible: !this.stashed && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.equipment.unstash, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unstash"),
+          onClick: this.unstash.bind(this),
+          visible: this.stashed && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }];
       }
 
       /** @inheritDoc */
@@ -198,9 +169,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async reforge() {
-        await this.parent.hookCall("reforge", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("reforge", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:dampened", { active: false });
       }
 
@@ -213,9 +182,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async repair() {
-        await this.parent.hookCall("repair", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("repair", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:shattered", { active: false });
       }
 
@@ -228,9 +195,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async shatter() {
-        await this.parent.hookCall("shatter", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("shatter", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:shattered", { active: true });
       }
 
@@ -251,9 +216,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async undampen() {
-        await this.parent.hookCall("undampen", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("undampen", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:dampened", { active: false });
       }
 

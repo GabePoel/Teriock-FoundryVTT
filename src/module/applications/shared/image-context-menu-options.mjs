@@ -10,40 +10,33 @@ const { ImagePopout } = foundry.applications.apps;
  * Provides options to open images in a dedicated sheet or share them in chat.
  * @type {Array}
  */
-const imageContextMenuOptions = [
-  {
-    icon: makeIcon(icons.ui.image, "contextMenu"),
-    label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
-    onClick: async (_ev, target) => {
-      await new ImagePopout({
-        src: target.getAttribute("src"),
-        window: {
-          title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview",
-        },
-      }).render(true);
-    },
-    visible: target => {
-      const src = target.getAttribute("src");
-      return (
-        src &&
-        src.length > 0 &&
-        target.getAttribute("data-openable") &&
-        (game.user.isGM || game.teriock.getSetting("openChatImages"))
-      );
-    },
+const imageContextMenuOptions = [{
+  icon: makeIcon(icons.ui.image, "contextMenu"),
+  label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
+  onClick: async (_ev, target) => {
+    await new ImagePopout({
+      src: target.getAttribute("src"),
+      window: { title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
+    }).render(true);
   },
-  {
-    icon: makeIcon(icons.ui.shareImage, "contextMenu"),
-    label: "TERIOCK.SYSTEMS.Child.MENU.shareImage",
-    onClick: async (_ev, target) => {
-      await chatImage(target.getAttribute("src"));
-    },
-    visible: target => {
-      const src = target.getAttribute("src");
-      return src && src.length > 0 && target.getAttribute("data-shareable");
-    },
+  visible: target => {
+    const src = target.getAttribute("src");
+    return (src
+      && src.length > 0
+      && target.getAttribute("data-openable")
+      && (game.user.isGM || game.teriock.getSetting("openChatImages")));
   },
-];
+}, {
+  icon: makeIcon(icons.ui.shareImage, "contextMenu"),
+  label: "TERIOCK.SYSTEMS.Child.MENU.shareImage",
+  onClick: async (_ev, target) => {
+    await chatImage(target.getAttribute("src"));
+  },
+  visible: target => {
+    const src = target.getAttribute("src");
+    return src && src.length > 0 && target.getAttribute("data-shareable");
+  },
+}];
 export default imageContextMenuOptions;
 
 /**

@@ -15,10 +15,7 @@ declare global {
   }
 }
 
-export type CostComponentValue = {
-  description: string;
-  type: keyof typeof costConfig.components.types | null;
-};
+export type CostComponentValue = { description: string, type: keyof typeof costConfig.components.types | null };
 
 export type CostPrimaryValue = {
   description: string;

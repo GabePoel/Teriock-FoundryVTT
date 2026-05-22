@@ -18,18 +18,10 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
     const scene = game.scenes.get(speaker.scene);
     const token = scene?.tokens.get(speaker.token);
     let actor = token?.actor;
-    if (!actor) {
-      actor = this.get(speaker.actor);
-    }
-    if (!actor) {
-      actor = game.user.character;
-    }
-    if (!actor) {
-      actor = game.canvas?.tokens?.controlled.find(t => t.actor)?.actor;
-    }
-    if (!actor) {
-      actor = ui?.activeWindow?.document?.actor;
-    }
+    if (!actor) actor = this.get(speaker.actor);
+    if (!actor) actor = game.user.character;
+    if (!actor) actor = game.canvas?.tokens?.controlled.find(t => t.actor)?.actor;
+    if (!actor) actor = ui?.activeWindow?.document?.actor;
     return actor ?? null;
   }
 
@@ -55,9 +47,7 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
    */
   get selected() {
     const controlled = game.canvas.tokens.controlled.map(t => t?.actor).filter(Boolean);
-    if (controlled.length) {
-      return controlled;
-    }
+    if (controlled.length) return controlled;
     return this.default ? [this.default] : [];
   }
 

@@ -30,10 +30,10 @@ export default Base => {
       prepareBaseData() {
         super.prepareBaseData();
         this.curses.value = this.parent.powers.filter(p => p.system.type === "curse" && !p.disabled).length;
-        this.rotators.value = this.parent.abilities.filter(
-          a =>
-            a.active && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type)) && a.system.rotator,
-        ).length;
+        this.rotators.value =
+          this.parent.abilities.filter(a =>
+            a.active && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type)) && a.system.rotator
+          ).length;
       }
     }
   );

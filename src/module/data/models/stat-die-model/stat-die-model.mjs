@@ -90,15 +90,10 @@ export default class StatDieModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async toggle(spent) {
-    if (typeof spent === "undefined") {
-      spent = !this.spent;
-    }
+    if (typeof spent === "undefined") spent = !this.spent;
     const spentCopy = new Set(Array.from(this.parent.spent));
-    if (spent) {
-      spentCopy.add(this.index);
-    } else {
-      spentCopy.delete(this.index);
-    }
+    if (spent) spentCopy.add(this.index);
+    else spentCopy.delete(this.index);
     const updatePath = `system.statDice.${this.parent.stat}.spent`;
     await this.document.update({ [updatePath]: Array.from(spentCopy) });
   }
@@ -111,9 +106,8 @@ export default class StatDieModel extends EmbeddedDataModel {
   async use(spend = true) {
     let proceed = !this.spent;
     if (this.spent) {
-      if (!game.teriock.getSetting("confirmStatDiceRerolls")) {
-        proceed = true;
-      } else {
+      if (!game.teriock.getSetting("confirmStatDiceRerolls")) proceed = true;
+      else {
         proceed = await TeriockDialog.confirm({
           content: _loc("TERIOCK.MODELS.StatDie.DIALOG.Reroll.content"),
           modal: true,
@@ -128,29 +122,19 @@ export default class StatDieModel extends EmbeddedDataModel {
     if (proceed) {
       const panels = this.parent.panels;
       await TeriockTextEditor.enrichPanels(panels);
-      const roll = new BaseRoll(
-        this.formula,
-        {},
-        {
-          flavor: _loc("TERIOCK.ROLLS.Base.name", {
-            value: this.parent.dieName,
-          }),
-        },
-      );
+      const roll = new BaseRoll(this.formula, {}, {
+        flavor: _loc("TERIOCK.ROLLS.Base.name", { value: this.parent.dieName }),
+      });
       await roll.evaluate();
       const callback = this.parent.callback;
       await callback(roll.total);
       const messageData = {
         rolls: [roll],
-        speaker: TeriockChatMessage.getSpeaker({
-          actor: this.parent.parent.parent.actor,
-        }),
+        speaker: TeriockChatMessage.getSpeaker({ actor: this.parent.parent.parent.actor }),
         system: { avatar: this.parent.parent.parent.actor.img, panels: panels },
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });
-      if (spend) {
-        await this.toggle(true);
-      }
+      if (spend) await this.toggle(true);
     }
   }
 }

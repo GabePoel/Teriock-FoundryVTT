@@ -18,9 +18,7 @@ export default class TeriockTextEditor extends TextEditor {
   static async _embedContent(match, options = {}) {
     for (const part of match.groups.config.match(/(?:[^\s"]+|"[^"]*")+/g)) {
       const [key] = part.split("=");
-      if (key === "identifier" || parseIdentifier(part)) {
-        await game.teriock.identifiers.ready;
-      }
+      if (key === "identifier" || parseIdentifier(part)) await game.teriock.identifiers.ready;
     }
     return super._embedContent(match, options);
   }
@@ -32,13 +30,10 @@ export default class TeriockTextEditor extends TextEditor {
   static _parseEmbedConfig(raw, options = {}) {
     const config = super._parseEmbedConfig(raw, options);
     if (!config.uuid) {
-      if (config.identifier) {
-        config.uuid = game.teriock.identifiers.get(config.identifier);
-      } else if (config.values.length && parseIdentifier(config.values[0])) {
+      if (config.identifier) config.uuid = game.teriock.identifiers.get(config.identifier);
+      else if (config.values.length && parseIdentifier(config.values[0])) {
         const uuid = game.teriock.identifiers.get(config.values[0]);
-        if (uuid) {
-          config.uuid = uuid;
-        }
+        if (uuid) config.uuid = uuid;
       }
     }
     return config;
@@ -51,15 +46,10 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<Teriock.Messages.MessagePanel>}
    */
   static async enrichPanel(panel, options = {}) {
-    for (const block of panel.blocks || []) {
-      block.text = await this.enrichHTML(block.text, options);
-    }
+    for (const block of panel.blocks || []) block.text = await this.enrichHTML(block.text, options);
     for (const association of panel.associations || []) {
-      for (const card of association.cards || []) {
-        if (card.uuid && card.makeTooltip) {
-          card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML);
-        }
-      }
+      for (const card of association.cards || [])
+        if (card.uuid && card.makeTooltip) card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML);
     }
     return panel;
   }
@@ -71,9 +61,7 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<Teriock.Messages.MessagePanel[]>}
    */
   static async enrichPanels(panels, options = {}) {
-    for (const panel of panels) {
-      await this.enrichPanel(panel, options);
-    }
+    for (const panel of panels) await this.enrichPanel(panel, options);
     return panels;
   }
 
@@ -87,15 +75,9 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<string>}
    */
   static async makeTooltip(parts, options = {}) {
-    if (options.noBars) {
-      delete parts.bars;
-    }
-    if (options.noBlocks) {
-      delete parts.blocks;
-    }
-    if (options.noAssociations) {
-      delete parts.associations;
-    }
+    if (options.noBars) delete parts.bars;
+    if (options.noBlocks) delete parts.blocks;
+    if (options.noAssociations) delete parts.associations;
     await this.enrichPanel(parts, options);
     return await this.renderTemplate("teriock/ui/panel", parts);
   }
@@ -107,9 +89,6 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<string>}
    */
   static async renderTemplate(path, data) {
-    return await foundry.applications.handlebars.renderTemplate(path, {
-      ...data,
-      TERIOCK,
-    });
+    return await foundry.applications.handlebars.renderTemplate(path, { ...data, TERIOCK });
   }
 }

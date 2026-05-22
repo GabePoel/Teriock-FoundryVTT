@@ -26,21 +26,13 @@ export default class ChangesAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      changes: new fields.ArrayField(qualifiedChangeField()),
-    });
+    return Object.assign(super.defineSchema(), { changes: new fields.ArrayField(qualifiedChangeField()) });
   }
 
   /** @inheritDoc */
   static migrateData(source, options, state) {
-    for (const change of source.changes ?? []) {
-      migrateChange(change);
-    }
-    for (const change of source.changes ?? []) {
-      if (change.target === "parent") {
-        change.target = "Item";
-      }
-    }
+    for (const change of source.changes ?? []) migrateChange(change);
+    for (const change of source.changes ?? []) if (change.target === "parent") change.target = "Item";
     return super.migrateData(source, options, state);
   }
 

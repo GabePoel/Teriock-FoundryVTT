@@ -22,11 +22,7 @@ export default Base => {
         return Object.assign(super.defineSchema(), {
           equipped: new fields.BooleanField({ initial: false }),
           glued: initialBoolean(),
-          minStr: new fields.NumberField({
-            initial: -3,
-            integer: true,
-            min: -3,
-          }),
+          minStr: new fields.NumberField({ initial: -3, integer: true, min: -3 }),
         });
       }
 
@@ -57,11 +53,8 @@ export default Base => {
               : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
             visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
             onClick: async () => {
-              if (this.glued) {
-                await this.unglue();
-              } else {
-                await this.glue();
-              }
+              if (this.glued) await this.unglue();
+              else await this.glue();
             },
           },
           ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
@@ -73,11 +66,8 @@ export default Base => {
               : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
             visible: this.parent.isOwner,
             onClick: async () => {
-              if (this.equipped) {
-                await this.unequip();
-              } else {
-                await this.equip();
-              }
+              if (this.equipped) await this.unequip();
+              else await this.equip();
             },
           },
         ];
@@ -99,45 +89,37 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async equip() {
-        await this.parent.hookCall("equip", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("equip", { scope: { equipment: this.parent } });
         await this.parent.update({ "system.equipped": true });
       }
 
       /** @inheritdoc */
       getCardContextMenuEntries(doc) {
-        return [
-          ...super.getCardContextMenuEntries(doc),
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
-            onClick: this.equip.bind(this),
-            visible: this.canEquip && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
-            onClick: this.unequip.bind(this),
-            visible: this.canUnequip && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
-            onClick: this.glue.bind(this),
-            visible: !this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.equipment.unglue, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
-            onClick: this.unglue.bind(this),
-            visible: this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-        ];
+        return [...super.getCardContextMenuEntries(doc), {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.equip"),
+          onClick: this.equip.bind(this),
+          visible: this.canEquip && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unequip"),
+          onClick: this.unequip.bind(this),
+          visible: this.canUnequip && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.equipment.glue, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.glue"),
+          onClick: this.glue.bind(this),
+          visible: !this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.equipment.unglue, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.MENU.unglue"),
+          onClick: this.unglue.bind(this),
+          visible: this.glued && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }];
       }
 
       /** @inheritDoc */
@@ -155,9 +137,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async glue() {
-        await this.parent.hookCall("glue", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("glue", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:glued", { active: true });
       }
 
@@ -173,9 +153,7 @@ export default Base => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.consumable && this.quantity === 0) {
-          this.equipped = false;
-        }
+        if (this.consumable && this.quantity === 0) this.equipped = false;
       }
 
       /**
@@ -183,9 +161,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async unequip() {
-        await this.parent.hookCall("unequip", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("unequip", { scope: { equipment: this.parent } });
         await this.parent.update({ "system.equipped": false });
       }
 
@@ -194,9 +170,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async unglue() {
-        await this.parent.hookCall("unglue", {
-          scope: { equipment: this.parent },
-        });
+        await this.parent.hookCall("unglue", { scope: { equipment: this.parent } });
         await this.parent.toggleChild("property:glued", { active: false });
       }
     }

@@ -18,9 +18,7 @@ export default class ChangeMovementAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      movementAction: movementActionField(),
-    });
+    return Object.assign(super.defineSchema(), { movementAction: movementActionField() });
   }
 
   /** @inheritDoc */

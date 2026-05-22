@@ -13,35 +13,23 @@ function defined(val) {
  * @returns {boolean}
  */
 function exists(val) {
-  if (Array.isArray(val)) {
-    return val.length > 0;
-  }
-  if (val === undefined || val === null) {
-    return false;
-  }
-  if (typeof val === "object") {
-    return Object.keys(val).length > 0;
-  }
-  if (typeof val === "string") {
-    return !(val.trim() === "" || val === "0" || val === "+0");
-  }
-  if (typeof val === "number") {
-    return val > 0;
-  }
+  if (Array.isArray(val)) return val.length > 0;
+  if (val === undefined || val === null) return false;
+  if (typeof val === "object") return Object.keys(val).length > 0;
+  if (typeof val === "string") return !(val.trim() === "" || val === "0" || val === "+0");
+  if (typeof val === "number") return val > 0;
   return true;
 }
 
 /**
  * Repeat an inner template `n` times.
  * @param {number} n
- * @param {Handlebars.HelperOptions} options
- * @returns {Handlebars.SafeString}
+ * @param {object} options
+ * @returns {string}
  */
 function repeat(n, options) {
   let result = "";
-  for (let i = 0; i < n; i++) {
-    result += options.fn(this);
-  }
+  for (let i = 0; i < n; i++) result += options.fn(this);
   return new Handlebars.SafeString(result);
 }
 
@@ -49,7 +37,7 @@ function repeat(n, options) {
  * Repeat a string `n` times.
  * @param {number} n
  * @param {string} block
- * @returns {Handlebars.SafeString}
+ * @returns {string}
  */
 function repeatStr(n, block) {
   return new Handlebars.SafeString(block.repeat(n));
@@ -65,12 +53,9 @@ function merge(a, b) {
   return foundry.utils.mergeObject(a ?? {}, b ?? {});
 }
 
-const existenceHelperEntries = [
-  ["defined", defined],
-  ["exists", exists],
-  ["merge", merge],
-  ["repeat", repeat],
-  ["repeatStr", repeatStr],
-];
+const existenceHelperEntries = [["defined", defined], ["exists", exists], ["merge", merge], ["repeat", repeat], [
+  "repeatStr",
+  repeatStr,
+]];
 
 export default existenceHelperEntries;

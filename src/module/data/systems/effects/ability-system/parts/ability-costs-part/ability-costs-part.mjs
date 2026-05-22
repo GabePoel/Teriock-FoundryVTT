@@ -28,57 +28,34 @@ export default Base => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           costs: new fields.SchemaField({
-            components: new fields.SchemaField(
-              objectMap(costConfig.components.keys, v => {
-                const label = _loc("TERIOCK.COSTS.Long.component", {
-                  key: _loc(v),
-                });
-                return new fields.SchemaField(
-                  {
-                    description: new fields.HTMLField({ label }),
-                    type: new fields.StringField({
-                      choices: localizeChoices(costConfig.components.types),
-                      initial: null,
-                      label,
-                      nullable: true,
-                    }),
-                  },
-                  { label },
-                );
-              }),
-            ),
-            primary: new fields.SchemaField(
-              objectMap(costConfig.primary.keys, v => {
-                const label = _loc("TERIOCK.COSTS.Long.primary", {
-                  key: _loc(v.label),
-                });
-                return new fields.SchemaField(
-                  {
-                    description: new fields.HTMLField({ label }),
-                    formula: new FormulaField({ deterministic: false, label }),
-                    type: new fields.StringField({
-                      choices: localizeChoices(costConfig.primary.types),
-                      initial: null,
-                      label,
-                      nullable: true,
-                    }),
-                  },
-                  { label },
-                );
-              }),
-            ),
+            components: new fields.SchemaField(objectMap(costConfig.components.keys, v => {
+              const label = _loc("TERIOCK.COSTS.Long.component", { key: _loc(v) });
+              return new fields.SchemaField({
+                description: new fields.HTMLField({ label }),
+                type: new fields.StringField({
+                  choices: localizeChoices(costConfig.components.types),
+                  initial: null,
+                  label,
+                  nullable: true,
+                }),
+              }, { label });
+            })),
+            primary: new fields.SchemaField(objectMap(costConfig.primary.keys, v => {
+              const label = _loc("TERIOCK.COSTS.Long.primary", { key: _loc(v.label) });
+              return new fields.SchemaField({
+                description: new fields.HTMLField({ label }),
+                formula: new FormulaField({ deterministic: false, label }),
+                type: new fields.StringField({
+                  choices: localizeChoices(costConfig.primary.types),
+                  initial: null,
+                  label,
+                  nullable: true,
+                }),
+              }, { label });
+            })),
             tweaks: new fields.SchemaField(
-              objectMap(
-                costConfig.tweaks,
-                v =>
-                  new fields.NumberField({
-                    initial: 0,
-                    integer: true,
-                    label: v.label,
-                    min: 0,
-                    nullable: false,
-                  }),
-              ),
+              objectMap(costConfig.tweaks, v =>
+                new fields.NumberField({ initial: 0, integer: true, label: v.label, min: 0, nullable: false })),
             ),
           }),
         });
@@ -89,55 +66,31 @@ export default Base => {
         // 2025-12-18 HP and MP point cost migration
         for (const pointCost of ["mp", "hp"]) {
           if (source.costs) {
-            if (source.costs[pointCost] === null) {
-              source.costs[pointCost] = {
-                type: "none",
-                value: {
-                  formula: "",
-                  static: 0,
-                  variable: "",
-                },
-              };
-            }
+            if (source.costs[pointCost] === null)
+              source.costs[pointCost] = { type: "none", value: { formula: "", static: 0, variable: "" } };
             if (typeof source.costs[pointCost] == "string") {
               const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
               source.costs[pointCost] = {
                 type: "variable",
-                value: {
-                  formula: "",
-                  static: 0,
-                  variable: variableCost || "",
-                },
+                value: { formula: "", static: 0, variable: variableCost || "" },
               };
             }
             if (typeof source.costs[pointCost] == "number") {
               source.costs[pointCost] = {
                 type: "static",
-                value: {
-                  formula: "",
-                  static: Number(source.costs[pointCost]),
-                  variable: "",
-                },
+                value: { formula: "", static: Number(source.costs[pointCost]), variable: "" },
               };
             }
             if (typeof source.costs[pointCost]?.value == "number") {
               source.costs[pointCost] = {
                 type: "static",
-                value: {
-                  formula: "",
-                  static: source.costs[pointCost].value,
-                  variable: "",
-                },
+                value: { formula: "", static: source.costs[pointCost].value, variable: "" },
               };
             }
             if (typeof source.costs[pointCost]?.value == "string") {
               source.costs[pointCost] = {
                 type: "variable",
-                value: {
-                  formula: "",
-                  static: 0,
-                  variable: String(source.costs[pointCost].value),
-                },
+                value: { formula: "", static: 0, variable: String(source.costs[pointCost].value) },
               };
             }
           }
@@ -154,17 +107,15 @@ export default Base => {
           ...Object.entries(TERIOCK.config.cost.primary.keys).map(([k, v]) =>
             this.costs.primary[k].type === "formula"
               ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
-                  cost: v.abbreviation,
-                  value: this.costs.primary[k].formula,
-                })
+                cost: v.abbreviation,
+                value: this.costs.primary[k].formula,
+              })
               : this.costs.primary[k].type === "description"
-                ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.variable", {
-                    cost: v.abbreviation,
-                  })
-                : "",
+              ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.variable", { cost: v.abbreviation })
+              : ""
           ),
           ...Object.entries(TERIOCK.config.cost.components.keys).map(([k, v]) =>
-            this.costs.components[k].type ? v : "",
+            this.costs.components[k].type ? v : ""
           ),
         ];
       }
@@ -193,10 +144,9 @@ export default Base => {
             Object.entries(this.costs.components).map(([k, v]) => [`components.${k}`, Number(v.type)]),
           ),
           ...Object.fromEntries(
-            Object.entries(this.costs.primary).map(([k, v]) => [
-              `costs.${k}`,
-              v.type === "formula" ? v.formula : v.type === "description" ? "x" : 0,
-            ]),
+            Object.entries(this.costs.primary).map((
+              [k, v],
+            ) => [`costs.${k}`, v.type === "formula" ? v.formula : v.type === "description" ? "x" : 0]),
           ),
         });
       }
@@ -207,12 +157,8 @@ export default Base => {
 
         // Enforce invoked costs
         if (this.invoked) {
-          if (!this.costs.components.somatic.type) {
-            this.costs.components.somatic.type = "tag";
-          }
-          if (!this.costs.components.verbal.type) {
-            this.costs.components.verbal.type = "tag";
-          }
+          if (!this.costs.components.somatic.type) this.costs.components.somatic.type = "tag";
+          if (!this.costs.components.verbal.type) this.costs.components.verbal.type = "tag";
         }
       }
     }

@@ -1,19 +1,10 @@
 export const thresholdCommand = {
   alt: "advantage",
-  flags: {
-    a: "advantage",
-    adv: "advantage",
-    d: "disadvantage",
-    dc: "threshold",
-    dis: "disadvantage",
-  },
+  flags: { a: "advantage", adv: "advantage", d: "disadvantage", dc: "threshold", dis: "disadvantage" },
   shift: "disadvantage",
 };
 
-export const formulaCommand = {
-  args: ["formula"],
-  formula: true,
-};
+export const formulaCommand = { args: ["formula"], formula: true };
 
 /**
  * Make a simple command function.
@@ -22,9 +13,7 @@ export const formulaCommand = {
  */
 export function simpleCommandFunctionFactory(operation) {
   return async function simpleCommandFunction(actor, options = {}) {
-    if (!game.actors.check(actor)) {
-      return;
-    }
+    if (!game.actors.check(actor)) return;
     await operation(actor, options);
   };
 }

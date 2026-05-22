@@ -6,9 +6,7 @@ export default class HpPoolModel extends BaseStatPoolModel {
     return async amount => {
       const criticallyWounded = this.actor?.statuses.has("criticallyWounded");
       await this.actor?.system.takeHealing(amount);
-      if (!criticallyWounded) {
-        await this.actor?.system.takeAwaken();
-      }
+      if (!criticallyWounded) await this.actor?.system.takeAwaken();
     };
   }
 
@@ -24,29 +22,23 @@ export default class HpPoolModel extends BaseStatPoolModel {
 
   /** @inheritDoc */
   get panels() {
-    const panels = [
-      {
-        bars: [],
-        blocks: [
-          {
-            text: _loc("TERIOCK.MODELS.HpPool.PANELS.text"),
-            title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
-          },
-        ],
-        icon: TERIOCK.display.icons.stat.hp,
-        image: getImage("misc", "Hit Die"),
-        name: _loc("TERIOCK.MODELS.HpPool.PANELS.name"),
-      },
-    ];
+    const panels = [{
+      bars: [],
+      blocks: [{
+        text: _loc("TERIOCK.MODELS.HpPool.PANELS.text"),
+        title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
+      }],
+      icon: TERIOCK.display.icons.stat.hp,
+      image: getImage("misc", "Hit Die"),
+      name: _loc("TERIOCK.MODELS.HpPool.PANELS.name"),
+    }];
     if (this.actor?.statuses.has("criticallyWounded")) {
       panels.push({
         bars: [],
-        blocks: [
-          {
-            text: TERIOCK.data.conditions.criticallyWounded.description,
-            title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
-          },
-        ],
+        blocks: [{
+          text: TERIOCK.data.conditions.criticallyWounded.description,
+          title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
+        }],
         icon: TERIOCK.config.document.condition.icon,
         image: TERIOCK.data.conditions.criticallyWounded.img,
         name: TERIOCK.data.conditions.criticallyWounded.name,
@@ -54,12 +46,7 @@ export default class HpPoolModel extends BaseStatPoolModel {
     } else if (this.actor?.statuses.has("unconscious")) {
       panels.push({
         bars: [],
-        blocks: [
-          {
-            text: TERIOCK.content.keywords.awaken,
-            title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
-          },
-        ],
+        blocks: [{ text: TERIOCK.content.keywords.awaken, title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title") }],
         icon: TERIOCK.display.icons.effect.awaken,
         image: getImage("effect-types", "Awakening"),
         name: _loc("TERIOCK.EFFECTS.Common.awaken"),

@@ -21,9 +21,7 @@ export default function StatGiverSystemMixin(Base) {
 
       /** @inheritDoc */
       static get metadata() {
-        return foundry.utils.mergeObject(super.metadata, {
-          stats: true,
-        });
+        return foundry.utils.mergeObject(super.metadata, { stats: true });
       }
 
       /** @inheritDoc */
@@ -58,12 +56,8 @@ export default function StatGiverSystemMixin(Base) {
           icon: icons.ui.dice,
           label: _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.statDice"),
           wrappers: [
-            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.hp", {
-              value: this.statDice.hp.formula,
-            }),
-            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.mp", {
-              value: this.statDice.mp.formula,
-            }),
+            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.hp", { value: this.statDice.hp.formula }),
+            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.mp", { value: this.statDice.mp.formula }),
           ],
         };
       }
@@ -75,57 +69,44 @@ export default function StatGiverSystemMixin(Base) {
        */
       getCardContextMenuEntries(doc) {
         const entries = super.getCardContextMenuEntries(doc);
-        if (!doc?.isOwner) {
-          return entries;
-        }
-        entries.push(
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableHpDice"),
-            visible: this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
-            onClick: async () => {
-              await this.parent.update({
-                "system.statDice.hp.disabled": false,
-              });
-            },
+        if (!doc?.isOwner) return entries;
+        entries.push({
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableHpDice"),
+          visible: this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
+          onClick: async () => {
+            await this.parent.update({ "system.statDice.hp.disabled": false });
           },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableHpDice"),
-            visible: !this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
-            onClick: async () => {
-              await this.parent.update({ "system.statDice.hp.disabled": true });
-            },
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableHpDice"),
+          visible: !this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
+          onClick: async () => {
+            await this.parent.update({ "system.statDice.hp.disabled": true });
           },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableMpDice"),
-            visible:
-              this.statDice.mp.disabled &&
-              this._canToggleMpDice &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
-            onClick: async () => {
-              await this.parent.update({
-                "system.statDice.mp.disabled": false,
-              });
-            },
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableMpDice"),
+          visible: this.statDice.mp.disabled
+            && this._canToggleMpDice
+            && this.parent._checkValidEditorDocument(doc, { self: false }),
+          onClick: async () => {
+            await this.parent.update({ "system.statDice.mp.disabled": false });
           },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableMpDice"),
-            visible:
-              !this.statDice.mp.disabled &&
-              this._canToggleMpDice &&
-              this.parent._checkValidEditorDocument(doc, { self: false }),
-            onClick: async () => {
-              await this.parent.update({ "system.statDice.mp.disabled": true });
-            },
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableMpDice"),
+          visible: !this.statDice.mp.disabled
+            && this._canToggleMpDice
+            && this.parent._checkValidEditorDocument(doc, { self: false }),
+          onClick: async () => {
+            await this.parent.update({ "system.statDice.mp.disabled": true });
           },
-        );
+        });
         return entries;
       }
 
@@ -145,9 +126,7 @@ export default function StatGiverSystemMixin(Base) {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        if (!this.actor) {
-          this.prepareStatDice();
-        }
+        if (!this.actor) this.prepareStatDice();
       }
 
       /** @inheritDoc */

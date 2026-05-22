@@ -29,14 +29,12 @@ function makeIconHelper(icon, ...styles) {
 function threeToggle(options) {
   const { disabled, id, name } = options.hash;
   let value;
-  if (name && typeof name === "string") {
-    value = foundry.utils.getProperty(options.data.root, name);
-  }
+  if (name && typeof name === "string") value = foundry.utils.getProperty(options.data.root, name);
   const attrs = [
     id ? `id="${id}"` : "",
     name ? `data-name="${name}"` : "",
     name ? `data-value="${value}"` : "",
-    disabled ? "" : name ? 'data-action="toggleSwitch"' : "",
+    disabled ? "" : name ? "data-action=\"toggleSwitch\"" : "",
     disabled ? "disabled" : "",
   ];
   return new Handlebars.SafeString(`
@@ -57,12 +55,9 @@ function toggleButton(bool) {
   return `toggle-button${bool ? " toggled" : ""}`;
 }
 
-const uiHelperEntries = [
-  ["makeIcon", makeIconHelper],
-  ["makeIconClass", makeIconClass],
-  ["tabActive", tabActive],
-  ["threeToggle", threeToggle],
-  ["toggleButton", toggleButton],
-];
+const uiHelperEntries = [["makeIcon", makeIconHelper], ["makeIconClass", makeIconClass], ["tabActive", tabActive], [
+  "threeToggle",
+  threeToggle,
+], ["toggleButton", toggleButton]];
 
 export default uiHelperEntries;

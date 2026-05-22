@@ -15,9 +15,8 @@ export default class TypeCollection extends Collection {
   get documentsByType() {
     const documentTypeMap = {};
     const documentTypes = new Set(this.contents.map(d => d.type));
-    for (const documentType of documentTypes) {
+    for (const documentType of documentTypes)
       documentTypeMap[documentType] = this.contents.filter(d => d.type === documentType);
-    }
     return documentTypeMap;
   }
 }

@@ -15,11 +15,9 @@ const { fields } = foundry.data;
  * @mixes AttunableSystem
  * @mixes StatGiverSystem
  */
-export default class MountSystem extends mixClasses(
-  BaseItemSystem,
-  mixins.AttunableSystemMixin,
-  mixins.StatGiverSystemMixin,
-) {
+export default class MountSystem
+  extends mixClasses(BaseItemSystem, mixins.AttunableSystemMixin, mixins.StatGiverSystemMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Mount"];
 
@@ -60,24 +58,18 @@ export default class MountSystem extends mixClasses(
 
   /** @inheritDoc */
   get embedIcons() {
-    return [
-      ...super.embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")),
-      {
-        action: "toggleMountedDoc",
-        icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
-        tooltip: this.mounted
-          ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
-          : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
-        visible: this.parent.isOwner,
-        onClick: async () => {
-          if (this.mounted) {
-            await this.unmount();
-          } else {
-            await this.mount();
-          }
-        },
+    return [...super.embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")), {
+      action: "toggleMountedDoc",
+      icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
+      tooltip: this.mounted
+        ? _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted")
+        : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
+      visible: this.parent.isOwner,
+      onClick: async () => {
+        if (this.mounted) await this.unmount();
+        else await this.mount();
       },
-    ];
+    }];
   }
 
   /** @inheritDoc */
@@ -96,19 +88,11 @@ export default class MountSystem extends mixClasses(
 
   /** @inheritDoc */
   get messageBars() {
-    return [
-      this._statBar,
-      {
-        icon: TERIOCK.display.icons.armament.load,
-        label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
-        wrappers: [
-          _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-            value: this.tier.text || "0",
-          }),
-          this.mountTypeName,
-        ],
-      },
-    ];
+    return [this._statBar, {
+      icon: TERIOCK.display.icons.armament.load,
+      label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
+      wrappers: [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text || "0" }), this.mountTypeName],
+    }];
   }
 
   /**
@@ -121,32 +105,24 @@ export default class MountSystem extends mixClasses(
 
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
-    return [
-      ...super.getCardContextMenuEntries(doc),
-      {
-        group: "control",
-        icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
-        onClick: this.mount.bind(this),
-        visible: !this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-      },
-      {
-        group: "control",
-        icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
-        onClick: this.unmount.bind(this),
-        visible: this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-      },
-    ];
+    return [...super.getCardContextMenuEntries(doc), {
+      group: "control",
+      icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.Mount.MENU.mount"),
+      onClick: this.mount.bind(this),
+      visible: !this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+    }, {
+      group: "control",
+      icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.Mount.MENU.unmount"),
+      onClick: this.unmount.bind(this),
+      visible: this.mounted && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+    }];
   }
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
-      ...super.getLocalRollData(),
-      [`type.${toCamelCase(this.mountType)}`]: 1,
-      mounted: Number(this.mounted),
-    };
+    return { ...super.getLocalRollData(), [`type.${toCamelCase(this.mountType)}`]: 1, mounted: Number(this.mounted) };
   }
 
   /**

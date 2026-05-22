@@ -1,7 +1,6 @@
 import BaseActivation from "./base-activation.mjs";
 
 /**
- *
  * @param {typeof BaseAutomation} Automation
  * @returns {typeof BaseActivation}
  */

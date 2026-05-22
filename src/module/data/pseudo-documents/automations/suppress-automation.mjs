@@ -17,9 +17,7 @@ export default class SuppressAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      identifier: new TypedIdentifierField(),
-    });
+    return Object.assign(super.defineSchema(), { identifier: new TypedIdentifierField() });
   }
 
   /** @inheritDoc */

@@ -49,12 +49,7 @@ export const protectionConfig = {
       label: "TYPES.Item.equipment",
       type: "equipment",
     },
-    other: {
-      choices: "none",
-      format: "none",
-      imgCategory: "none",
-      label: "TERIOCK.DIALOGS.Select.otherButton",
-    },
+    other: { choices: "none", format: "none", imgCategory: "none", label: "TERIOCK.DIALOGS.Select.otherButton" },
     powerSources: {
       choices: "reference.powerSources",
       format: "camel",

@@ -39,9 +39,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   static migrateData(source, options, state) {
     if (foundry.utils.hasProperty(source, "faces") && !foundry.utils.hasProperty(source, "formula")) {
       let number = source.number.raw || "1";
-      if (!Number.isNumeric(Number(number))) {
-        number = `(${number})`;
-      }
+      if (!Number.isNumeric(Number(number))) number = `(${number})`;
       source.formula = `${number}d${source.faces}`;
       delete source.faces;
       delete source.number;
@@ -101,20 +99,16 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
    * @returns {Teriock.Messages.MessagePanel[]}
    */
   get panels() {
-    return [
-      {
-        bars: [],
-        blocks: [
-          {
-            text: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.text"),
-            title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
-          },
-        ],
-        icon: getRollIcon(this.formula),
-        image: getImage("equipment", "Die"),
-        name: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.name"),
-      },
-    ];
+    return [{
+      bars: [],
+      blocks: [{
+        text: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.text"),
+        title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
+      }],
+      icon: getRollIcon(this.formula),
+      image: getImage("equipment", "Die"),
+      name: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.name"),
+    }];
   }
 
   /**
@@ -144,10 +138,11 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
       let index = 0;
       for (const term of this._terms) {
         for (let i = 0; i < term.number; i++) {
-          const statDie = new this.constructor._statDieModel(
-            { _id: foundry.utils.randomID(), faces: term.faces, index },
-            { parent: this },
-          );
+          const statDie = new this.constructor._statDieModel({
+            _id: foundry.utils.randomID(),
+            faces: term.faces,
+            index,
+          }, { parent: this });
           this._dice.push(statDie);
           index++;
         }

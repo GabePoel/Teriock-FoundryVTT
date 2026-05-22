@@ -36,9 +36,7 @@ export default function AttunableSystemMixin(Base) {
       get _attunableTags() {
         const key = this.needsAttunement.toString();
         const tags = [{ label: `TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.${key}` }];
-        if (this.isAttuned) {
-          tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" });
-        }
+        if (this.isAttuned) tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" });
         return tags.map(t => {
           return { label: t.label, tooltip: "TYPES.ActiveEffect.attunement" };
         });
@@ -50,11 +48,7 @@ export default function AttunableSystemMixin(Base) {
        */
       get _attunableWrappers() {
         return formulaExists(this.tier.text)
-          ? [
-              _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-                value: this.tier.text,
-              }),
-            ]
+          ? [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text })]
           : [];
       }
 
@@ -73,24 +67,18 @@ export default function AttunableSystemMixin(Base) {
 
       /** @inheritDoc */
       get embedIcons() {
-        return [
-          {
-            action: "toggleAttunedDoc",
-            icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
-            tooltip: this.isAttuned
-              ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
-              : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
-            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
-            onClick: async () => {
-              if (this.isAttuned) {
-                await this.deattune();
-              } else {
-                await this.attune();
-              }
-            },
+        return [{
+          action: "toggleAttunedDoc",
+          icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
+          tooltip: this.isAttuned
+            ? _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned")
+            : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
+          visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
+          onClick: async () => {
+            if (this.isAttuned) await this.deattune();
+            else await this.attune();
           },
-          ...super.embedIcons,
-        ];
+        }, ...super.embedIcons];
       }
 
       /**
@@ -105,9 +93,7 @@ export default function AttunableSystemMixin(Base) {
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
         if (this.parent.checkEditor(userId)) {
-          if (this.attunement) {
-            this.attunement.update({ "system.tier": this.tier.value });
-          }
+          if (this.attunement) this.attunement.update({ "system.tier": this.tier.value });
         }
       }
 
@@ -120,33 +106,14 @@ export default function AttunableSystemMixin(Base) {
        * @returns {Promise<TeriockAttunement | null>} Promise that resolves to the attunement effect or null.
        */
       async attune() {
-        await this.parent.hookCall("attune", {
-          scope: { attunable: this.parent },
-        });
+        await this.parent.hookCall("attune", { scope: { attunable: this.parent } });
         let attunement = this.attunement;
-        if (attunement) {
-          return attunement;
-        }
+        if (attunement) return attunement;
         const attunementData = {
-          changes: [
-            {
-              key: "system.attunements",
-              phase: "initial",
-              priority: 10,
-              type: "add",
-              value: this.parent._id,
-            },
-          ],
+          changes: [{ key: "system.attunements", phase: "initial", priority: 10, type: "add", value: this.parent._id }],
           img: this.parent.img,
-          name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", {
-            name: this.parent.name,
-          }),
-          system: {
-            inheritTier: true,
-            target: this.parent._id,
-            tier: this.tier.value,
-            type: this.parent.type,
-          },
+          name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.parent.name }),
+          system: { inheritTier: true, target: this.parent._id, tier: this.tier.value, type: this.parent.type },
           type: "attunement",
         };
         if (this.parent.actor && (await this.canAttune())) {
@@ -188,9 +155,7 @@ export default function AttunableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async deattune() {
-        await this.parent.hookCall("deattune", {
-          scope: { attunable: this.parent },
-        });
+        await this.parent.hookCall("deattune", { scope: { attunable: this.parent } });
         if (this.attunement) {
           await this.attunement.delete();
           ui.notifications.success("TERIOCK.SYSTEMS.Attunable.USAGE.Deattune.success", {
@@ -203,32 +168,24 @@ export default function AttunableSystemMixin(Base) {
 
       /** @inheritDoc */
       getCardContextMenuEntries(doc) {
-        return [
-          ...super.getCardContextMenuEntries(doc),
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.attunable.attune, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
-            onClick: this.attune.bind(this),
-            visible: !this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-          {
-            group: "control",
-            icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
-            onClick: this.deattune.bind(this),
-            visible: this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
-          },
-        ];
+        return [...super.getCardContextMenuEntries(doc), {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.attunable.attune, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.attune"),
+          onClick: this.attune.bind(this),
+          visible: !this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }, {
+          group: "control",
+          icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+          onClick: this.deattune.bind(this),
+          visible: this.isAttuned && this.actor && this.parent._checkValidEditorDocument(doc, { self: false }),
+        }];
       }
 
       /** @inheritDoc */
       getLocalRollData() {
-        return {
-          ...super.getLocalRollData(),
-          attuned: Number(this.isAttuned),
-          tier: this.tier.value || 0,
-        };
+        return { ...super.getLocalRollData(), attuned: Number(this.isAttuned), tier: this.tier.value || 0 };
       }
 
       /** @inheritDoc */

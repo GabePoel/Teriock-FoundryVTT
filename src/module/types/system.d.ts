@@ -68,10 +68,7 @@ declare global {
       trigger?: string;
     };
 
-    export type AttachmentData<T> = {
-      data?: Partial<T>;
-      uuid?: UUID<T>;
-    };
+    export type AttachmentData<T> = { data?: Partial<T>, uuid?: UUID<T> };
 
     export type Attachment<T> = AttachmentData<T> | UUID<T>;
 
@@ -112,10 +109,7 @@ declare global {
     /**
      * A parsed identifier.
      */
-    export type ResolvedIdentifier = {
-      identifier: Identifier;
-      type?: Teriock.Documents.CommonType;
-    };
+    export type ResolvedIdentifier = { identifier: Identifier, type?: Teriock.Documents.CommonType };
 
     /**
      * Options that control how multiple documents are resolved.

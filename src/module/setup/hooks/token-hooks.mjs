@@ -8,19 +8,16 @@
  */
 async function applyTokenMagicFilters(token, statusId, active) {
   if (
-    game.release.generation === 13 &&
-    token.document.baseActor?.getSetting("token.autoMagic") &&
-    game.modules.get("tokenmagic")?.active &&
-    game.teriock.getSetting("autoTokenMagicConditionEffects") &&
-    token.isOwner
+    game.release.generation === 13
+    && token.document.baseActor?.getSetting("token.autoMagic")
+    && game.modules.get("tokenmagic")?.active
+    && game.teriock.getSetting("autoTokenMagicConditionEffects")
+    && token.isOwner
   ) {
     if (Object.keys(TERIOCK.display.tokenMagic).includes(statusId)) {
       const params = TERIOCK.display.tokenMagic[statusId];
-      if (active) {
-        await TokenMagic.addFilters(token, [params]);
-      } else {
-        await TokenMagic.deleteFilters(token, params.filterId);
-      }
+      if (active) await TokenMagic.addFilters(token, [params]);
+      else await TokenMagic.deleteFilters(token, params.filterId);
     }
   }
 }
@@ -34,14 +31,9 @@ async function applyTokenMagicFilters(token, statusId, active) {
  * @see {moveToken}
  */
 async function fireMovementTrigger(document, _movement, _operation, user) {
-  if (document.checkEditor(user) && document.actor) {
-    await document.actor.hookCall("movement");
-  }
+  if (document.checkEditor(user) && document.actor) await document.actor.hookCall("movement");
 }
 
-const tokenHookEntries = [
-  ["applyTokenStatusEffect", applyTokenMagicFilters],
-  ["moveToken", fireMovementTrigger],
-];
+const tokenHookEntries = [["applyTokenStatusEffect", applyTokenMagicFilters], ["moveToken", fireMovementTrigger]];
 
 export default tokenHookEntries;

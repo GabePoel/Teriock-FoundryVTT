@@ -30,37 +30,29 @@ export default class BodySystem extends mixClasses(BaseItemSystem, mixins.WikiSy
 
   /** @inheritDoc */
   get embedParts() {
-    return Object.assign(super.embedParts, {
-      subtitle: _loc("TYPES.Item.body"),
-    });
+    return Object.assign(super.embedParts, { subtitle: _loc("TYPES.Item.body") });
   }
 
   /** @inheritDoc */
   async getPanelParts() {
     return {
       ...(await super.getPanelParts()),
-      bars: [
-        this._attackBar,
-        this._defenseBar,
-        {
-          icon: TERIOCK.display.icons.equipment.equipmentClasses,
-          label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
-          wrappers: [
-            this.range.description,
-            ...simplifyTags(this._equipmentClassesTags),
-            ...simplifyTags(this._armamentTags),
-          ],
-        },
-      ],
+      bars: [this._attackBar, this._defenseBar, {
+        icon: TERIOCK.display.icons.equipment.equipmentClasses,
+        label: _loc("TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label"),
+        wrappers: [
+          this.range.description,
+          ...simplifyTags(this._equipmentClassesTags),
+          ...simplifyTags(this._armamentTags),
+        ],
+      }],
     };
   }
 
   /** @inheritDoc */
   prepareSpecialData() {
     this.equipmentClasses.add("bodyParts");
-    if (this.av.value) {
-      this.equipmentClasses.add("armor");
-    }
+    if (this.av.value) this.equipmentClasses.add("armor");
     super.prepareSpecialData();
   }
 }

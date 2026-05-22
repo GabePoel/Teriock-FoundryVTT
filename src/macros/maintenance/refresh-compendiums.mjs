@@ -1,10 +1,7 @@
 const packIds = scope?.packIds ?? [];
-let packs = [];
-if (packIds.length) {
-  packs = packIds.map(p => game.packs.get(p));
-} else {
-  packs = await tm.dialogs.selectCompendiumsDialog();
-}
+let packs;
+if (packIds.length) packs = packIds.map(p => game.packs.get(p));
+else packs = await tm.dialogs.selectCompendiumsDialog();
 await tm.utils.progressBar(
   packs,
   _loc("TERIOCK.DIALOGS.RefreshCompendium.messageUnnamed"),
@@ -14,9 +11,7 @@ await tm.utils.progressBar(
       const indexes = tm.sort.docSort(p.index.contents.filter(d => !d?.system?._sup));
       await tm.utils.progressBar(
         indexes,
-        _loc("TERIOCK.DIALOGS.RefreshCompendium.messageNamed", {
-          name: _loc(p.title),
-        }),
+        _loc("TERIOCK.DIALOGS.RefreshCompendium.messageNamed", { name: _loc(p.title) }),
         async i => {
           const doc = await tm.resolve.resolveDocument(i);
           if (doc?.defaultIdentifier) {

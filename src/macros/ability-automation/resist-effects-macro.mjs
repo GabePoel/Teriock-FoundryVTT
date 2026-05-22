@@ -28,21 +28,19 @@ const documents = Object.entries(choices).map(([uuid, name]) => {
   return { img, name, uuid };
 });
 
-const choice = await tm.dialogs.selectDocumentDialog(documents, {
-  hint: "Select an effect type to resist.",
-});
+const choice = await tm.dialogs.selectDocumentDialog(documents, { hint: "Select an effect type to resist." });
 
 const id = "resistEffects000";
 
 if (choice) {
   const auto = {
     _id: id,
-    type: "protection",
     category: "effectTypes",
     competencies: [0, 1, 2],
     crit: [0, 1],
     heighten: [0, 1],
     relation: "resistances",
+    type: "protection",
     value: choice.uuid,
   };
 

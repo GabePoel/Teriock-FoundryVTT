@@ -19,28 +19,18 @@ const { fields } = foundry.data;
  * @mixes TransformationSystem
  * @mixes WikiSystem
  */
-export default class ConditionSystem extends mixClasses(
-  BaseEffectSystem,
-  mixins.WikiSystemMixin,
-  mixins.TransformationSystemMixin,
-  ThresholdDataMixin,
-) {
+export default class ConditionSystem
+  extends mixClasses(BaseEffectSystem, mixins.WikiSystemMixin, mixins.TransformationSystemMixin, ThresholdDataMixin)
+{
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      namespace: "Condition",
-      type: "condition",
-    });
+    return foundry.utils.mergeObject(super.metadata, { namespace: "Condition", type: "condition" });
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
-      expirations: new fields.SchemaField({
-        combat: new fields.SchemaField({
-          what: combatExpirationMethodField(),
-        }),
-      }),
+      expirations: new fields.SchemaField({ combat: new fields.SchemaField({ what: combatExpirationMethodField() }) }),
     });
   }
 
@@ -60,15 +50,13 @@ export default class ConditionSystem extends mixClasses(
 
   /** @inheritDoc */
   get embedIcons() {
-    return [
-      {
-        action: "removeConditionDoc",
-        icon: "dice-d4",
-        tooltip: _loc("TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove"),
-        visible: true,
-        onClick: async () => this.parent.use(),
-      },
-    ];
+    return [{
+      action: "removeConditionDoc",
+      icon: "dice-d4",
+      tooltip: _loc("TERIOCK.SYSTEMS.Condition.EMBED.rollToRemove"),
+      visible: true,
+      onClick: async () => this.parent.use(),
+    }];
   }
 
   /** @inheritDoc */
@@ -78,42 +66,29 @@ export default class ConditionSystem extends mixClasses(
 
   /** @inheritDoc */
   get useText() {
-    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", {
-      value: this.parent.name,
-    });
+    return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", { value: this.parent.name });
   }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
-    if (data.disabled === true) {
-      return false;
-    }
+    if (data.disabled === true) return false;
   }
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
     const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) {
-      return false;
-    }
+    if (yes === false) return false;
 
-    if (changes.disabled === true) {
-      return false;
-    }
+    if (changes.disabled === true) return false;
   }
 
   /** @inheritDoc */
   async _use(_options = {}) {
-    if (this.parent.id.includes("dead") && this.parent.actor) {
-      await this.parent.actor.system.deathBagPull();
-    } else {
-      await this.inCombatExpiration(true);
-    }
+    if (this.parent.id.includes("dead") && this.parent.actor) await this.parent.actor.system.deathBagPull();
+    else await this.inCombatExpiration(true);
   }
 
   /** @inheritDoc */
@@ -128,15 +103,13 @@ export default class ConditionSystem extends mixClasses(
    * @inheritDoc
    */
   getCardContextMenuEntries(_doc) {
-    return [
-      {
-        group: "usage",
-        icon: makeIcon(this.useIcon, "contextMenu"),
-        label: this.useText,
-        onClick: this.use.bind(this),
-        visible: this.parent.isOwner,
-      },
-    ];
+    return [{
+      group: "usage",
+      icon: makeIcon(this.useIcon, "contextMenu"),
+      label: this.useText,
+      onClick: this.use.bind(this),
+      visible: this.parent.isOwner,
+    }];
   }
 
   /**

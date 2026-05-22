@@ -62,10 +62,7 @@ export default class SummonActivation extends BaseActivation {
     const toUpdate = [];
     for (const n of this.#nodes) {
       if (n.state === "unowned" && n.actor.folder?.id === this.#summonsFolderId) {
-        toUpdate.push({
-          _id: n.actor.id,
-          [`ownership.${game.user.id}`]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER,
-        });
+        toUpdate.push({ _id: n.actor.id, [`ownership.${game.user.id}`]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER });
         n.state = "ready";
       }
     }
@@ -77,14 +74,11 @@ export default class SummonActivation extends BaseActivation {
    * @returns {Promise<TeriockFolder>}
    */
   async #createSummonsFolder() {
-    return TeriockFolder.create(
-      {
-        _id: this.#summonsFolderId,
-        name: _loc("TERIOCK.ACTIVATIONS.Summon.FOLDER"),
-        type: "Actor",
-      },
-      { asGM: true, keepId: true },
-    );
+    return TeriockFolder.create({
+      _id: this.#summonsFolderId,
+      name: _loc("TERIOCK.ACTIVATIONS.Summon.FOLDER"),
+      type: "Actor",
+    }, { asGM: true, keepId: true });
   }
 
   /**
@@ -94,18 +88,11 @@ export default class SummonActivation extends BaseActivation {
     for (const n of this.#nodes) {
       if (n.actor.inCompendium) {
         const summon = this.#findBestSummon(n.actor.uuid);
-        if (!summon) {
-          n.state = "packed";
-        } else if (summon.isOwner) {
-          n.state = "ready";
-        } else {
-          n.state = "unowned";
-        }
-      } else if (n.actor.isOwner) {
-        n.state = "ready";
-      } else {
-        n.state = "unowned";
-      }
+        if (!summon) n.state = "packed";
+        else if (summon.isOwner) n.state = "ready";
+        else n.state = "unowned";
+      } else if (n.actor.isOwner) n.state = "ready";
+      else n.state = "unowned";
     }
   }
 
@@ -117,13 +104,9 @@ export default class SummonActivation extends BaseActivation {
   #findBestSummon(uuid) {
     const candidates = this.#findSummons(uuid);
     const owned = candidates.find(a => a.isOwner);
-    if (owned) {
-      return owned;
-    } else if (candidates.length) {
-      return candidates[0];
-    } else {
-      return null;
-    }
+    if (owned) return owned;
+    else if (candidates.length) return candidates[0];
+    else return null;
   }
 
   /**
@@ -132,11 +115,10 @@ export default class SummonActivation extends BaseActivation {
    * @returns {TeriockActor[]}
    */
   #findSummons(uuid) {
-    return game.actors.filter(
-      a =>
-        a.folder?.id === this.#summonsFolderId &&
-        a.getFlag("teriock", "summonFor") === uuid &&
-        a._stats.compendiumSource === uuid,
+    return game.actors.filter(a =>
+      a.folder?.id === this.#summonsFolderId
+      && a.getFlag("teriock", "summonFor") === uuid
+      && a._stats.compendiumSource === uuid
     );
   }
 
@@ -150,14 +132,8 @@ export default class SummonActivation extends BaseActivation {
     for (const n of packNodes) {
       if (n.state === "packed") {
         const data = foundry.utils.mergeObject(
-          game.actors.fromCompendium(n.actor, {
-            clearFolder: true,
-            clearOwnership: true,
-          }),
-          {
-            flags: { teriock: { summonFor: n.actor.uuid } },
-            folder: this.#summonsFolderId,
-          },
+          game.actors.fromCompendium(n.actor, { clearFolder: true, clearOwnership: true }),
+          { flags: { teriock: { summonFor: n.actor.uuid } }, folder: this.#summonsFolderId },
         );
         toCreate.push(data);
       }
@@ -180,11 +156,9 @@ export default class SummonActivation extends BaseActivation {
       foundry.utils.mergeObject(t?.toObject(), {
         flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
         ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
-      }),
+      })
     );
-    return await canvas.tokens.placeTokens(tokenData, {
-      createOptions: { asGM: true },
-    });
+    return await canvas.tokens.placeTokens(tokenData, { createOptions: { asGM: true } });
   }
 
   /**
@@ -195,22 +169,16 @@ export default class SummonActivation extends BaseActivation {
     this.#nodes = [];
     const srcPromises = [];
     for (const uuid of Array.from(this.uuids)) {
-      if (!uuid.startsWith("Compendium")) {
-        srcPromises.push(uuid);
-      } else {
+      if (!uuid.startsWith("Compendium")) srcPromises.push(uuid);
+      else {
         const summon = this.#findBestSummon(uuid);
-        if (summon) {
-          srcPromises.push(summon);
-        } else {
-          srcPromises.push(resolveDocument(uuid));
-        }
+        if (summon) srcPromises.push(summon);
+        else srcPromises.push(resolveDocument(uuid));
       }
     }
     const srcActors = (await Promise.all(srcPromises)).filter(Boolean);
     const needsSummonFolder = srcActors.some(a => a?.inCompendium) && !this.#summonsFolder;
-    if (needsSummonFolder) {
-      await this.#createSummonsFolder();
-    }
+    if (needsSummonFolder) await this.#createSummonsFolder();
     this.#nodes = srcActors.map(a => {
       return { actor: a, state: "unknown" };
     });
@@ -243,14 +211,11 @@ export default class SummonActivation extends BaseActivation {
   async secondaryAction() {
     await canvas.scene.deleteEmbeddedDocuments(
       "Token",
-      canvas.scene.tokens.contents
-        .filter(
-          t =>
-            t.getFlag("teriock", "createdBy") === this.puuid &&
-            t.getFlag("teriock", "placedBy") === game.user.id &&
-            t.isOwner,
-        )
-        .map(t => t.id),
+      canvas.scene.tokens.contents.filter(t =>
+        t.getFlag("teriock", "createdBy") === this.puuid
+        && t.getFlag("teriock", "placedBy") === game.user.id
+        && t.isOwner
+      ).map(t => t.id),
       { asGM: true },
     );
   }

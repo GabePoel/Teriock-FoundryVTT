@@ -19,14 +19,9 @@ export default Base =>
       const liveConditions = conditionSort(
         Array.from(this.actor.statuses || []).filter(c => Object.keys(TERIOCK.index.conditions).includes(c)),
       );
-      Object.assign(context, {
-        conditions: liveConditions,
-        removableConditions,
-      });
+      Object.assign(context, { conditions: liveConditions, removableConditions });
       context.conditionsMap = {};
-      for (const c of this.actor.conditions) {
-        context.conditionsMap[c.system.conditionKey] = c;
-      }
+      for (const c of this.actor.conditions) context.conditionsMap[c.system.conditionKey] = c;
       context.conditionProviders = {};
       context.conditionTooltips = {};
       for (const condition of Object.keys(TERIOCK.index.conditions)) {
@@ -36,20 +31,18 @@ export default Base =>
         const panelParts = {
           associations: [],
           bars: [],
-          blocks: [
-            {
-              text: TERIOCK.data.conditions[condition].description,
-              title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-            },
-          ],
+          blocks: [{
+            text: TERIOCK.data.conditions[condition].description,
+            title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+          }],
           icon: TERIOCK.config.document.condition.icon,
           image: TERIOCK.data.conditions[condition].img,
           name: TERIOCK.data.conditions[condition].name,
         };
         /** @type {TeriockTokenDocument[]} */
-        const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers)
-          .map(uuid => fromUuidSync(uuid))
-          .filter(t => t);
+        const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers).map(uuid =>
+          fromUuidSync(uuid)
+        ).filter(t => t);
         if (tokenDocs.length > 0) {
           /** @type {Teriock.Messages.MessageAssociation} */
           const association = {

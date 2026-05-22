@@ -29,9 +29,7 @@ declare global {
 
   const game: Game & {
     actors: TeriockActors;
-    canvas: Canvas & {
-      tokens: TokenLayer;
-    };
+    canvas: Canvas & { tokens: TokenLayer };
     folders: TeriockFolders;
     items: TeriockItems;
     journal: TeriockJournal;
@@ -55,10 +53,7 @@ declare global {
     notifications: TeriockNotifications;
   };
 
-  type FromUuidOptions = {
-    invalid: boolean;
-    relative: TeriockDocument;
-  };
+  type FromUuidOptions = { invalid: boolean, relative: TeriockDocument };
 
   function fromUuidSync<T>(uuid: UUID<T>, options?: FromUuidOptions): T | null;
   function fromUuid<T>(uuid: UUID<T>, options?: FromUuidOptions): Promise<T> | null;

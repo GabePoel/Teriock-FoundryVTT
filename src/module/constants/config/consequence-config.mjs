@@ -32,9 +32,7 @@ export const consequenceConfig = {
       fail: "TERIOCK.SYSTEMS.Ability.FIELDS.results.fail.label",
       save: "TERIOCK.SYSTEMS.Ability.FIELDS.results.save.label",
     },
-    manifest: {
-      use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label",
-    },
+    manifest: { use: "TERIOCK.SYSTEMS.Ability.FIELDS.results.use.label" },
   },
 };
 

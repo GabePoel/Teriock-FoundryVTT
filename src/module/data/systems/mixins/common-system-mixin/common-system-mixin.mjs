@@ -27,14 +27,17 @@ export default function CommonSystemMixin(Base) {
      * @mixes AutomatedData
      * @mixin
      */
-    class CommonSystem extends mixClasses(
-      Base,
-      RulesSystemMixin,
-      PropagationDataMixin,
-      AccessDataMixin,
-      AutomatableSystemMixin,
-      AutomatedDataMixin,
-    ) {
+    // dprint-ignore
+    class CommonSystem
+      extends mixClasses(
+        Base,
+        RulesSystemMixin,
+        PropagationDataMixin,
+        AccessDataMixin,
+        AutomatableSystemMixin,
+        AutomatedDataMixin,
+      )
+    {
       /** @type {string[]} */
       static DEFAULT_PRESERVED_PROPERTIES = [
         "_id",
@@ -132,13 +135,9 @@ export default function CommonSystemMixin(Base) {
             const srcDiffKeys = srcKeys.filter(s => !dstKeys.includes(s));
             const dstDiffKeys = dstKeys.filter(d => !srcKeys.includes(d));
             const diffKeys = [...srcKeys, ...dstKeys];
-            if (mapType === "diffSrc") {
-              keys = srcDiffKeys;
-            } else if (mapType === "diffDst") {
-              keys = dstDiffKeys;
-            } else if (mapType === "diff") {
-              keys = diffKeys;
-            }
+            if (mapType === "diffSrc") keys = srcDiffKeys;
+            else if (mapType === "diffDst") keys = dstDiffKeys;
+            else if (mapType === "diff") keys = diffKeys;
           }
           const srcDocs = srcChildren.filter(s => keys.includes(s.lookupKey));
           const dstDocs = dstChildren.filter(d => keys.includes(d.lookupKey));
@@ -234,19 +233,11 @@ export default function CommonSystemMixin(Base) {
 
       /** @returns {Teriock.Messages.MessageBlock[]} */
       get messageBlocks() {
-        return fancifyFields(this.displayFields)
-          .map(f => {
-            const schema = this.parent.getSchema(f.path);
-            const value = foundry.utils.getProperty(this.parent, f.path);
-            if (value && !schema.gmOnly) {
-              return {
-                classes: f.classes,
-                text: value,
-                title: f.label || schema.label,
-              };
-            }
-          })
-          .filter(f => f);
+        return fancifyFields(this.displayFields).map(f => {
+          const schema = this.parent.getSchema(f.path);
+          const value = foundry.utils.getProperty(this.parent, f.path);
+          if (value && !schema.gmOnly) return { classes: f.classes, text: value, title: f.label || schema.label };
+        }).filter(f => f);
       }
 
       /** @returns {Teriock.Documents.ModelMetadata} */
@@ -275,10 +266,7 @@ export default function CommonSystemMixin(Base) {
        */
       async _createFromChildDeltaMap(createMap) {
         for (const [docName, children] of Object.entries(createMap)) {
-          await this.parent.createChildDocuments(
-            docName,
-            children.src.map(s => s.toObject(true)),
-          );
+          await this.parent.createChildDocuments(docName, children.src.map(s => s.toObject(true)));
         }
       }
 
@@ -288,10 +276,7 @@ export default function CommonSystemMixin(Base) {
        */
       async _deleteFromChildDeltaMap(deleteMap) {
         for (const [docName, children] of Object.entries(deleteMap)) {
-          await this.parent.deleteChildDocuments(
-            docName,
-            children.dst.map(d => d.id),
-          );
+          await this.parent.deleteChildDocuments(docName, children.dst.map(d => d.id));
         }
       }
 
@@ -325,14 +310,12 @@ export default function CommonSystemMixin(Base) {
        */
       async _updateFromChildDeltaMap(updateMap) {
         for (const [docName, children] of Object.entries(updateMap)) {
-          const updateArray = await Promise.all(
-            children.dst.map(async d => {
-              const refreshDocument = await fromUuid(d._stats.compendiumSource);
-              const obj = refreshDocument ? d.system.toRefreshObject(refreshDocument) : {};
-              obj._id = d.id;
-              return obj;
-            }),
-          );
+          const updateArray = await Promise.all(children.dst.map(async d => {
+            const refreshDocument = await fromUuid(d._stats.compendiumSource);
+            const obj = refreshDocument ? d.system.toRefreshObject(refreshDocument) : {};
+            obj._id = d.id;
+            return obj;
+          }));
           await this.parent.updateChildDocuments(docName, updateArray);
         }
       }
@@ -445,33 +428,28 @@ export default function CommonSystemMixin(Base) {
           const journalEntryName = game.settings.get("teriock", "gmDocumentNotesJournalName");
           let notesJournal = game.journal.getName(journalEntryName);
           if (!notesJournal) {
-            notesJournal = await TeriockJournalEntry.create({
-              name: journalEntryName,
-            });
+            notesJournal = await TeriockJournalEntry.create({ name: journalEntryName });
           }
           if (notesJournal) {
-            const notesCategoryName =
-              TERIOCK.config.document[this.parent.type]?.label ||
-              _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
-            notesPage = notesJournal.pages.find(
-              p => p.name === this.parent.name && notesJournal?.categories.get(p.category)?.name === notesCategoryName,
+            const notesCategoryName = TERIOCK.config.document[this.parent.type]?.label
+              || _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
+            notesPage = notesJournal.pages.find(p =>
+              p.name === this.parent.name && notesJournal?.categories.get(p.category)?.name === notesCategoryName
             );
             if (!notesPage) {
               let notesCategory = notesJournal.categories.getName(notesCategoryName);
               if (!notesCategory) {
-                const categories = await notesJournal.createEmbeddedDocuments("JournalEntryCategory", [
-                  { name: notesCategoryName },
-                ]);
+                const categories = await notesJournal.createEmbeddedDocuments("JournalEntryCategory", [{
+                  name: notesCategoryName,
+                }]);
                 notesCategory = categories[0];
               }
-              const pages = await notesJournal.createEmbeddedDocuments("JournalEntryPage", [
-                {
-                  category: notesCategory.id,
-                  name: this.parent.name,
-                  text: { content: `<p>@Embed[${this.parent.uuid}]</p>` },
-                  type: "text",
-                },
-              ]);
+              const pages = await notesJournal.createEmbeddedDocuments("JournalEntryPage", [{
+                category: notesCategory.id,
+                name: this.parent.name,
+                text: { content: `<p>@Embed[${this.parent.uuid}]</p>` },
+                type: "text",
+              }]);
               notesPage = pages[0];
             }
             if (notesPage) {

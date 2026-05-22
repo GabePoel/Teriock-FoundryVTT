@@ -15,12 +15,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
   };
 
   /** @inheritDoc */
-  static PARTS = {
-    all: {
-      scrollable: [""],
-      template: "teriock/sheets/utility/document-config",
-    },
-  };
+  static PARTS = { all: { scrollable: [""], template: "teriock/sheets/utility/document-config" } };
 
   /**
    * Configure a normal field.
@@ -75,9 +70,8 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.configs = [];
-    const hasCompendiumSource =
-      !!this.document._stats &&
-      (!!this.document._stats?.compendiumSource || this.document._stats?.compendiumSource === null);
+    const hasCompendiumSource = !!this.document._stats
+      && (!!this.document._stats?.compendiumSource || this.document._stats?.compendiumSource === null);
     if (hasCompendiumSource && !this.document.isSecret) {
       context.configs.push({
         fields: [

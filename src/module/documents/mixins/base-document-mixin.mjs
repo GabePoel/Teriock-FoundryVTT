@@ -55,9 +55,7 @@ export default function BaseDocumentMixin(Base) {
             documentName: this.documentName,
             operation,
           });
-          if (!docs) {
-            return data.map(_d => null);
-          }
+          if (!docs) return data.map(_d => null);
           return Promise.all(docs.map(d => fromUuid(d)));
         } else {
           return super.createDocuments(data, operation);
@@ -77,9 +75,7 @@ export default function BaseDocumentMixin(Base) {
             ids,
             operation,
           });
-          if (!docs) {
-            return ids.map(_d => null);
-          }
+          if (!docs) return ids.map(_d => null);
           return docs;
         } else {
           return super.deleteDocuments(ids, operation);
@@ -99,9 +95,7 @@ export default function BaseDocumentMixin(Base) {
             operation,
             updates,
           });
-          if (!docs) {
-            return updates.map(_d => null);
-          }
+          if (!docs) return updates.map(_d => null);
           return Promise.all(docs.map(d => fromUuid(d)));
         } else {
           return super.updateDocuments(updates, operation);
@@ -150,9 +144,7 @@ export default function BaseDocumentMixin(Base) {
        * @return {boolean}
        */
       get isSecret() {
-        if (this.system) {
-          return this.system.isSecret;
-        }
+        if (this.system) return this.system.isSecret;
         return false;
       }
 
@@ -177,12 +169,8 @@ export default function BaseDocumentMixin(Base) {
        * @returns {string}
        */
       get lookupKey() {
-        if (this.typedIdentifier) {
-          return this.typedIdentifier;
-        }
-        if (this.type) {
-          return `${this.type}:${this.forcedIdentifier}`;
-        }
+        if (this.typedIdentifier) return this.typedIdentifier;
+        if (this.type) return `${this.type}:${this.forcedIdentifier}`;
         return `${toKebabCase(this.documentName)}:${this.forcedIdentifier}`;
       }
 
@@ -240,28 +228,18 @@ export default function BaseDocumentMixin(Base) {
        */
       _checkValidEditorDocument(doc, options = {}) {
         const { editable = true, self = undefined } = options;
-        if (self === false && doc === this) {
-          return false;
-        }
-        if (self === true && doc !== this) {
-          return false;
-        }
-        return (
-          this.isOwner &&
-          (this.checkAncestor(doc) || this.master === doc || this === doc) &&
-          (doc?.sheet.isEditable || !editable || ["consequence", "imbuement"].includes(this.type))
-        );
+        if (self === false && doc === this) return false;
+        if (self === true && doc !== this) return false;
+        return (this.isOwner
+          && (this.checkAncestor(doc) || this.master === doc || this === doc)
+          && (doc?.sheet.isEditable || !editable || ["consequence", "imbuement"].includes(this.type)));
       }
 
       /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
         game.teriock.identifiers.untrackDocument(this);
-        for (const c of Object.values(this.collections)) {
-          for (const d of c) {
-            game.teriock.identifiers.untrackDocument(d);
-          }
-        }
+        for (const c of Object.values(this.collections)) for (const d of c) game.teriock.identifiers.untrackDocument(d);
       }
 
       /**
@@ -269,9 +247,7 @@ export default function BaseDocumentMixin(Base) {
        * @param {TeriockDocument|Index<TeriockDocument>} doc
        */
       checkAncestor(doc) {
-        if (doc?.uuid === this.uuid) {
-          return true;
-        }
+        if (doc?.uuid === this.uuid) return true;
         return this.parent?.checkAncestor(doc) || false;
       }
 
@@ -292,34 +268,25 @@ export default function BaseDocumentMixin(Base) {
       getCardContextMenuEntries(doc) {
         /** @type {ContextMenuEntry[]} */
         const entries = [];
-        if (this.system?.getCardContextMenuEntries) {
-          entries.push(...this.system.getCardContextMenuEntries(doc));
-        }
-        entries.push(
-          ...[
-            {
-              group: "open",
-              icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
-              onClick: async () => {
-                const resolved = await resolveDocument(this.master);
-                if (resolved) {
-                  await resolved.sheet?.render(true);
-                }
-              },
-              visible: () => this.master?.isViewer && doc?.uuid !== this.master?.uuid,
-            },
-            {
-              group: "document",
-              icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
-              label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
-              onClick: async () => await this.deleteDialog({ modal: true }),
-              visible: () =>
-                this._checkValidEditorDocument(doc) ||
-                (this.inCompendium && !this.compendium.locked && !this.parent && this.sup?.uuid === doc?.uuid),
-            },
-          ],
-        );
+        if (this.system?.getCardContextMenuEntries) entries.push(...this.system.getCardContextMenuEntries(doc));
+        entries.push(...[{
+          group: "open",
+          icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Common.MENU.openSource"),
+          onClick: async () => {
+            const resolved = await resolveDocument(this.master);
+            if (resolved) await resolved.sheet?.render(true);
+          },
+          visible: () => this.master?.isViewer && doc?.uuid !== this.master?.uuid,
+        }, {
+          group: "document",
+          icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
+          label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
+          onClick: async () => await this.deleteDialog({ modal: true }),
+          visible: () =>
+            this._checkValidEditorDocument(doc)
+            || (this.inCompendium && !this.compendium.locked && !this.parent && this.sup?.uuid === doc?.uuid),
+        }]);
         return entries;
       }
 
@@ -349,10 +316,7 @@ export default function BaseDocumentMixin(Base) {
 
       /** @inheritDoc */
       toDragData() {
-        return Object.assign(super.toDragData(), {
-          identifier: this.typedIdentifier,
-          systemType: this.type,
-        });
+        return Object.assign(super.toDragData(), { identifier: this.typedIdentifier, systemType: this.type });
       }
     }
   );

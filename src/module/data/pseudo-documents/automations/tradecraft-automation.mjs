@@ -13,12 +13,9 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  * @mixes CompetenceAutomation
  */
-export default class TradecraftAutomation extends mixClasses(
-  ThresholdAutomation,
-  SelectAutomationMixin,
-  TriggerAutomationMixin,
-  CompetenceAutomationMixin,
-) {
+export default class TradecraftAutomation
+  extends mixClasses(ThresholdAutomation, SelectAutomationMixin, TriggerAutomationMixin, CompetenceAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Tradecraft"];
 
@@ -40,11 +37,7 @@ export default class TradecraftAutomation extends mixClasses(
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      tradecrafts: new fields.SetField(
-        new fields.StringField({
-          choices: TERIOCK.reference.tradecrafts,
-        }),
-      ),
+      tradecrafts: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.tradecrafts })),
     });
   }
 
@@ -71,19 +64,16 @@ export default class TradecraftAutomation extends mixClasses(
 
   /** @inheritDoc */
   async _getActivations() {
-    return Array.from(this.tradecrafts)
-      .filter(Boolean)
-      .map(
-        tradecraft =>
-          new TradecraftActivation({
-            options: {
-              bonus: this.bonus,
-              competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
-              threshold: this.threshold,
-              tradecraft,
-            },
-          }),
-      );
+    return Array.from(this.tradecrafts).filter(Boolean).map(tradecraft =>
+      new TradecraftActivation({
+        options: {
+          bonus: this.bonus,
+          competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
+          threshold: this.threshold,
+          tradecraft,
+        },
+      })
+    );
   }
 
   /** @inheritDoc */
@@ -97,38 +87,29 @@ export default class TradecraftAutomation extends mixClasses(
    * @returns {Promise<void>}
    */
   async executeTradecraft(scope = {}) {
-    if (this.tradecrafts.size === 0) {
-      return;
-    }
+    if (this.tradecrafts.size === 0) return;
     const choices = Array.from(this.tradecrafts);
     let selected = [];
-    if (this.automatic && choices.length === 1) {
-      selected = choices;
-    } else {
+    if (this.automatic && choices.length === 1) selected = choices;
+    else {
       if (this.multi) {
         selected = await selectTradecraftsDialog(choices);
-        if (selected.length === 0) {
-          return;
-        }
+        if (selected.length === 0) return;
       } else {
         const chosen = await selectTradecraftDialog(choices);
-        if (!chosen) {
-          return;
-        }
+        if (!chosen) return;
         selected = [chosen];
       }
     }
     const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
-    if (!actor) {
-      return;
-    }
+    if (!actor) return;
     await Promise.all(
       selected.map(tradecraft =>
         actor.system.rollTradecraft(tradecraft, {
           bonus: this.bonus,
           competence: this.overrideCompetence ? this.competence.raw : this.document.system.competence.raw,
           threshold: this.threshold,
-        }),
+        })
       ),
     );
   }

@@ -15,11 +15,7 @@ export default class BaseModifierModel extends mixClasses(EvaluationModel, Usabl
   static defineSchema(options = {}) {
     return Object.assign(super.defineSchema(options), {
       _key: initialString(),
-      score: new fields.NumberField({
-        initial: options.score ?? 0,
-        integer: true,
-        nullable: false,
-      }),
+      score: new fields.NumberField({ initial: options.score ?? 0, integer: true, nullable: false }),
     });
   }
 
@@ -60,9 +56,6 @@ export default class BaseModifierModel extends mixClasses(EvaluationModel, Usabl
 
   /** @inheritDoc */
   getLocalRollData() {
-    return foundry.utils.mergeObject(super.getLocalRollData(), {
-      "": this.value,
-      score: this.score,
-    });
+    return foundry.utils.mergeObject(super.getLocalRollData(), { "": this.value, score: this.score });
   }
 }

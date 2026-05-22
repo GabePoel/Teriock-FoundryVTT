@@ -18,14 +18,8 @@ const typeSubsets = {
 
 /** @enum {Teriock.Config.ChildChangeTargetEntry} */
 const childTargets = {
-  ability: {
-    label: "TERIOCK.CHANGES.Target.ability",
-    types: ["ability"],
-  },
-  armament: {
-    label: "TERIOCK.CHANGES.Target.armament",
-    types: ["body", "equipment"],
-  },
+  ability: { label: "TERIOCK.CHANGES.Target.ability", types: ["ability"] },
+  armament: { label: "TERIOCK.CHANGES.Target.armament", types: ["body", "equipment"] },
 };
 
 const groups = {
@@ -124,20 +118,15 @@ const paths = {
     types: typeSubsets.boolean,
   },
   ...Object.fromEntries(
-    Object.entries(impactConfig)
-      .filter(([_k, v]) => !v.hidden)
-      .map(([k, v]) => {
-        return [
-          `system.boosts.${k}`,
-          {
-            forExecution: true,
-            group: "boosts",
-            label: v.label,
-            targets: ["ability", "armament"],
-            types: typeSubsets.formula,
-          },
-        ];
-      }),
+    Object.entries(impactConfig).filter(([_k, v]) => !v.hidden).map(([k, v]) => {
+      return [`system.boosts.${k}`, {
+        forExecution: true,
+        group: "boosts",
+        label: v.label,
+        targets: ["ability", "armament"],
+        types: typeSubsets.formula,
+      }];
+    }),
   ),
 };
 
@@ -157,10 +146,7 @@ const phase = {
   },
 };
 
-const parentTargets = {
-  Actor: "TERIOCK.CHANGES.Target.Actor",
-  Item: "TERIOCK.CHANGES.Target.Item",
-};
+const parentTargets = { Actor: "TERIOCK.CHANGES.Target.Actor", Item: "TERIOCK.CHANGES.Target.Item" };
 
 const parent = { targets: parentTargets };
 

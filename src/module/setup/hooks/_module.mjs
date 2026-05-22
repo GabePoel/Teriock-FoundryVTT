@@ -7,6 +7,6 @@ import tokenHookEntries from "./token-hooks.mjs";
  */
 export default function registerHookListeners() {
   [...timeHookEntries, ...tokenHookEntries, ...applicationHookEntries].forEach(([hook, handler]) =>
-    foundry.helpers.Hooks.on(hook, handler),
+    foundry.helpers.Hooks.on(hook, handler)
   );
 }

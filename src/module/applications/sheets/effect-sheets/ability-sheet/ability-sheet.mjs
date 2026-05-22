@@ -34,28 +34,22 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
   };
 
   /** @inheritDoc */
-  static PARTS = {
-    mask: { template: "teriock/sheets/effects/ability/elder-sorcery-mask" },
-    ...super.PARTS,
-  };
+  static PARTS = { mask: { template: "teriock/sheets/effects/ability/elder-sorcery-mask" }, ...super.PARTS };
 
   /**
    * Reset the elder sorcery elements that this sheet's window has.
    */
   #resetElderSorceryElements() {
     this.window.content.classList.remove(...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi");
-    if (this.document.system.elderSorcery) {
+    if (this.document.system.elderSorcery)
       this.window.content.classList.add(elementClass(this.document.system.elements));
-    }
   }
 
   /** @inheritDoc */
   get _buttonUpdates() {
     return {
       ...super._buttonUpdates,
-      ".ab-attribute-improvement-button": {
-        "system.upgrades.score.attribute": "int",
-      },
+      ".ab-attribute-improvement-button": { "system.upgrades.score.attribute": "int" },
       ".ab-expansion-button": { "system.expansion": "detonate" },
       ".ab-expansion-cap-button": { "system.expansion.cap": "1" },
       ".ab-feat-save-improvement-button": {
@@ -63,10 +57,9 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
         "system.upgrades.competence.value": 1,
       },
       ...Object.fromEntries(
-        Object.keys(TERIOCK.config.cost.tweaks).map(k => [
-          `.ab-tweak-${k}-button`,
-          { [`system.costs.tweaks.${k}`]: 1 },
-        ]),
+        Object.keys(TERIOCK.config.cost.tweaks).map(
+          k => [`.ab-tweak-${k}-button`, { [`system.costs.tweaks.${k}`]: 1 }]
+        ),
       ),
     };
   }
@@ -81,8 +74,8 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
       [".delivery-box", cm.delivery, "click"],
       [".delivery-box", cm.piercing, "contextmenu"],
       [".execution-box", cm.maneuver, "contextmenu"],
-      ['.execution-box[data-maneuver="Active"]', cm.active, "click"],
-      ['.execution-box[data-maneuver="Reactive"]', cm.reactive, "click"],
+      [".execution-box[data-maneuver=\"Active\"]", cm.active, "click"],
+      [".execution-box[data-maneuver=\"Reactive\"]", cm.reactive, "click"],
       [".interaction-box", cm.interaction, "click"],
       [".interaction-box-feat", cm.featSaveAttribute, "contextmenu"],
       [".expansion-box", cm.expansion, "click"],
@@ -91,17 +84,13 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
       [".form-type-box", cm.form, "click"],
     ];
 
-    for (const [selector, opts, evt] of contextMap) {
-      this._connectContextMenu(selector, opts, evt);
-    }
+    for (const [selector, opts, evt] of contextMap) this._connectContextMenu(selector, opts, evt);
   }
 
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) {
-      return;
-    }
+    if (!this.isEditable) return;
     this._activateContextMenus();
     this.#resetElderSorceryElements();
   }
@@ -112,15 +101,10 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
     let time;
     const maneuver = this.document.system.maneuver;
     const executionTime = this.document.system.executionTime;
-    if (maneuver === "active") {
-      time = TERIOCK.config.ability.executionTime.active[executionTime.base];
-    } else if (maneuver === "reactive") {
-      time = TERIOCK.config.ability.executionTime.reactive[executionTime.base];
-    } else if (maneuver === "passive") {
-      time = TERIOCK.config.ability.executionTime.passive.passive;
-    } else {
-      time = executionTime.slow.text;
-    }
+    if (maneuver === "active") time = TERIOCK.config.ability.executionTime.active[executionTime.base];
+    else if (maneuver === "reactive") time = TERIOCK.config.ability.executionTime.reactive[executionTime.base];
+    else if (maneuver === "passive") time = TERIOCK.config.ability.executionTime.passive.passive;
+    else time = executionTime.slow.text;
     return Object.assign(context, { executionTime: time });
   }
 

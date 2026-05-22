@@ -17,13 +17,7 @@ export default class DurationModel extends TimeUnitModel {
    * @returns {Teriock.Units.UnitEntry[]}
    */
   static get infiniteChoiceEntries() {
-    return [
-      ...super.infiniteChoiceEntries,
-      {
-        id: "passive",
-        label: "TERIOCK.MODELS.Duration.UNITS.passive",
-      },
-    ];
+    return [...super.infiniteChoiceEntries, { id: "passive", label: "TERIOCK.MODELS.Duration.UNITS.passive" }];
   }
 
   /**
@@ -31,17 +25,14 @@ export default class DurationModel extends TimeUnitModel {
    * @returns {Record<string, FormSelectOption>}
    */
   static get triggerChoices() {
-    return formatDynamicSelectOptions(
-      {
-        activity: TERIOCK.config.trigger.activity,
-        combat: TERIOCK.config.trigger.combat,
-        consequence: TERIOCK.config.trigger.consequence,
-        execution: TERIOCK.config.trigger.execution,
-        impact: TERIOCK.config.trigger.impact,
-        time: TERIOCK.config.trigger.time,
-      },
-      { localize: true },
-    );
+    return formatDynamicSelectOptions({
+      activity: TERIOCK.config.trigger.activity,
+      combat: TERIOCK.config.trigger.combat,
+      consequence: TERIOCK.config.trigger.consequence,
+      execution: TERIOCK.config.trigger.execution,
+      impact: TERIOCK.config.trigger.impact,
+      time: TERIOCK.config.trigger.time,
+    }, { localize: true });
   }
 
   /**
@@ -49,12 +40,7 @@ export default class DurationModel extends TimeUnitModel {
    * @returns {Teriock.Units.UnitEntry[]}
    */
   static get zeroChoiceEntries() {
-    return [
-      {
-        id: "instant",
-        label: "TERIOCK.MODELS.Duration.UNITS.instant",
-      },
-    ];
+    return [{ id: "instant", label: "TERIOCK.MODELS.Duration.UNITS.instant" }];
   }
 
   /** @inheritDoc */
@@ -86,13 +72,10 @@ export default class DurationModel extends TimeUnitModel {
       ...this.conditions.present.map(c => TERIOCK.reference.conditions[c]),
       // TODO: Localize the "Not" replacements.
       ...this.conditions.absent.map(c =>
-        game.i18n
-          .format("TERIOCK.MODELS.Duration.PREREQUISITES.notStatus", {
-            status: TERIOCK.reference.conditions[c],
-          })
-          .replace("Not Down", "Up")
-          .replace("Not Dead", "Alive")
-          .replace("Not Unconscious", "Conscious"),
+        _loc("TERIOCK.MODELS.Duration.PREREQUISITES.notStatus", { status: TERIOCK.reference.conditions[c] }).replace(
+          "Not Down",
+          "Up",
+        ).replace("Not Dead", "Alive").replace("Not Unconscious", "Conscious")
       ),
     ];
     let triggerPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.untilTriggers", {
@@ -101,42 +84,22 @@ export default class DurationModel extends TimeUnitModel {
     let conditionsPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.ongoing", {
       partial: listFormat(conditions, { sort: false }),
     });
-    if (triggers.length === 0) {
-      triggerPart = "";
-    }
-    if (conditions.length === 0) {
-      conditionsPart = "";
-    }
-    return game.i18n
-      .format("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
-        end: conditionsPart,
-        start: triggerPart,
-      })
-      .trim();
+    if (triggers.length === 0) triggerPart = "";
+    if (conditions.length === 0) conditionsPart = "";
+    return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", { end: conditionsPart, start: triggerPart }).trim();
   }
 
   /** @inheritDoc */
   get text() {
-    if (this.description) {
-      return this.description;
-    }
+    if (this.description) return this.description;
     const prerequisite = this.prerequisiteString;
     let duration = super.text;
     if (prerequisite.length > 1) {
-      if (prerequisite.length > 0 && this.unit === "unlimited") {
-        duration = "";
-      }
-      if (this.unit === "passive") {
-        duration = "";
-      }
-      return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", {
-        end: prerequisite,
-        start: duration,
-      });
+      if (prerequisite.length > 0 && this.unit === "unlimited") duration = "";
+      if (this.unit === "passive") duration = "";
+      return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", { end: prerequisite, start: duration });
     }
-    if (this.unit === "passive") {
-      duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
-    }
+    if (this.unit === "passive") duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
     return duration;
   }
 }

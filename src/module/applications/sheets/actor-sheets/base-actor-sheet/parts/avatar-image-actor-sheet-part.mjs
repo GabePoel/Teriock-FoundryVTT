@@ -13,11 +13,8 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onSwitchImage() {
-      if (this.settings.avatarImagePath === "img") {
-        this.settings.avatarImagePath = "prototypeToken.texture.src";
-      } else {
-        this.settings.avatarImagePath = "img";
-      }
+      if (this.settings.avatarImagePath === "img") this.settings.avatarImagePath = "prototypeToken.texture.src";
+      else this.settings.avatarImagePath = "img";
       await this.render();
     }
 
@@ -26,17 +23,10 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onToggleRing() {
-      await this.document.update({
-        "prototypeToken.ring.enabled": !this.document.prototypeToken.ring.enabled,
-      });
+      await this.document.update({ "prototypeToken.ring.enabled": !this.document.prototypeToken.ring.enabled });
     }
 
-    static DEFAULT_OPTIONS = {
-      actions: {
-        switchImage: this.#onSwitchImage,
-        toggleRing: this.#onToggleRing,
-      },
-    };
+    static DEFAULT_OPTIONS = { actions: { switchImage: this.#onSwitchImage, toggleRing: this.#onToggleRing } };
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {

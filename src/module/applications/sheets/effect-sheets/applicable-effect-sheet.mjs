@@ -18,16 +18,18 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @extends {ActiveEffectConfig}
  * @mixes AutomationsCommonSheetPart
  */
-export default class ApplicableEffectSheet extends mixClasses(
-  ActiveEffectConfig,
-  BaseSheetMixin,
-  ConfigButtonSheetMixin,
-  ChangesSheetMixin,
-  AutomationsCommonSheetPart,
-  DocumentCreationCommonSheetPart,
-  DragDropCommonSheetPart,
-  LockingCommonSheetPart,
-) {
+export default class ApplicableEffectSheet
+  extends mixClasses(
+    ActiveEffectConfig,
+    BaseSheetMixin,
+    ConfigButtonSheetMixin,
+    ChangesSheetMixin,
+    AutomationsCommonSheetPart,
+    DocumentCreationCommonSheetPart,
+    DragDropCommonSheetPart,
+    LockingCommonSheetPart,
+  )
+{
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
@@ -37,14 +39,8 @@ export default class ApplicableEffectSheet extends mixClasses(
   /** @inheritDoc */
   static PARTS = {
     ...super.PARTS,
-    automations: {
-      scrollable: [""],
-      template: "teriock/sheets/effects/consequence/automations-tab",
-    },
-    children: {
-      scrollable: [""],
-      template: "teriock/sheets/effects/consequence/children-tab",
-    },
+    automations: { scrollable: [""], template: "teriock/sheets/effects/consequence/automations-tab" },
+    children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
     duration: {
       scrollable: [""],
       template: "teriock/sheets/effects/consequence/duration-tab",
@@ -57,17 +53,10 @@ export default class ApplicableEffectSheet extends mixClasses(
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
-      tabs: [
-        ...super.TABS.sheet.tabs,
-        {
-          icon: makeIconClass(icons.pseudoDocument.automation, "solid"),
-          id: "automations",
-        },
-        {
-          icon: makeIconClass(icons.ui.document, "solid"),
-          id: "children",
-        },
-      ],
+      tabs: [...super.TABS.sheet.tabs, {
+        icon: makeIconClass(icons.pseudoDocument.automation, "solid"),
+        id: "automations",
+      }, { icon: makeIconClass(icons.ui.document, "solid"), id: "children" }],
     },
   };
 

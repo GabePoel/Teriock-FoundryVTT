@@ -11,12 +11,9 @@ const { fields } = foundry.data;
  * @mixes DisplayAutomation
  * @mixes OverrideDataAutomation
  */
-export default class ModifyEffectAutomation extends mixClasses(
-  CritAutomation,
-  DisplayAutomationMixin,
-  OverrideDataAutomationMixin,
-  CompetenceAutomationMixin,
-) {
+export default class ModifyEffectAutomation
+  extends mixClasses(CritAutomation, DisplayAutomationMixin, OverrideDataAutomationMixin, CompetenceAutomationMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ModifyEffect"];
 

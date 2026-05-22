@@ -17,13 +17,15 @@ import {
  * @mixes AbilityExecutionRolls
  * @mixes ThresholdExecution
  */
-export default class AbilityExecution extends mixClasses(
-  AbilityExecutionConstructor,
-  AbilityExecutionGetInputPart,
-  AbilityExecutionActorUpdatePart,
-  AbilityExecutionRollsPart,
-  AbilityExecutionChatPart,
-) {
+export default class AbilityExecution
+  extends mixClasses(
+    AbilityExecutionConstructor,
+    AbilityExecutionGetInputPart,
+    AbilityExecutionActorUpdatePart,
+    AbilityExecutionRollsPart,
+    AbilityExecutionChatPart,
+  )
+{
   /** @inheritDoc */
   get competenceImprovesFormula() {
     return this.isAttack || this.isFeat;
@@ -59,17 +61,11 @@ export default class AbilityExecution extends mixClasses(
   /** @inheritDoc */
   async _improveFormula() {
     if (this.isAttack) {
-      if (this.piercing.av0) {
-        this.formula = addFormula(this.formula, "@av0");
-      }
-      if (this.sb) {
-        this.formula = addFormula(this.formula, "@sb");
-      }
+      if (this.piercing.av0) this.formula = addFormula(this.formula, "@av0");
+      if (this.sb) this.formula = addFormula(this.formula, "@sb");
     }
     if (this.competenceImprovesFormula) {
-      if (this.heightened > 0) {
-        this.formula = addFormula(this.formula, "@h");
-      }
+      if (this.heightened > 0) this.formula = addFormula(this.formula, "@h");
     }
     await super._improveFormula();
   }
@@ -79,11 +75,8 @@ export default class AbilityExecution extends mixClasses(
     if (this.isAttack) {
       await super._prepareBaseFormula();
       this.formula = addFormula(this.formula, "@ap");
-    } else if (this.isFeat) {
-      this.formula = "10";
-    } else if (this.isBlock) {
-      this.formula = "10 + @av + @bv";
-    }
+    } else if (this.isFeat) this.formula = "10";
+    else if (this.isBlock) this.formula = "10 + @av + @bv";
   }
 
   /** @inheritDoc */

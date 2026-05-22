@@ -22,9 +22,7 @@ export default class HealAutomation extends StatAutomation {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      noStatDice: new fields.BooleanField({ initial: false }),
-    });
+    return Object.assign(super.defineSchema(), { noStatDice: new fields.BooleanField({ initial: false }) });
   }
 
   /** @inheritDoc */
@@ -37,11 +35,7 @@ export default class HealAutomation extends StatAutomation {
   async _getActivations() {
     return [
       new HealActivation({
-        options: {
-          consumeStatDice: this.consumeStatDice,
-          forHarm: this.forHarm,
-          noStatDice: this.noStatDice,
-        },
+        options: { consumeStatDice: this.consumeStatDice, forHarm: this.forHarm, noStatDice: this.noStatDice },
       }),
     ];
   }

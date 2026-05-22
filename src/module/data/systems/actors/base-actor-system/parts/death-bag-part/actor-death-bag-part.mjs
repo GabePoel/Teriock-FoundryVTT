@@ -19,11 +19,7 @@ export default Base => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           deathBag: new fields.SchemaField({
-            pull: new FormulaField({
-              deterministic: false,
-              initial: "10",
-              nullable: false,
-            }),
+            pull: new FormulaField({ deterministic: false, initial: "10", nullable: false }),
             stones: new fields.SchemaField({
               black: stoneField("black", 3),
               red: stoneField("red", 10),

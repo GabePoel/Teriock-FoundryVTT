@@ -18,14 +18,9 @@ export default function EmbedCardDocumentMixin(Base) {
        * @returns {Record<string, Partial<Teriock.EmbedData.EmbedAction>>}
        */
       get embedActions() {
-        const actions = {
-          openDoc: { primary: async () => this.sheet.render(true) },
-        };
-        for (const embedIcon of this.embedIcons) {
-          if (embedIcon.action && embedIcon.onClick) {
-            actions[embedIcon.action] = { primary: embedIcon.onClick };
-          }
-        }
+        const actions = { openDoc: { primary: async () => this.sheet.render(true) } };
+        for (const embedIcon of this.embedIcons)
+          if (embedIcon.action && embedIcon.onClick) actions[embedIcon.action] = { primary: embedIcon.onClick };
         return actions;
       }
 
@@ -56,13 +51,10 @@ export default function EmbedCardDocumentMixin(Base) {
       /** @inheritDoc */
       async _buildEmbedHTML(config, options = {}) {
         const content = await super._buildEmbedHTML(config, options);
-        if (content) {
-          return content;
-        } else {
+        if (content) return content;
+        else {
           const embedContext = this.embedParts;
-          if (options.relativeTo) {
-            embedContext.relative = options.relativeTo.uuid;
-          }
+          if (options.relativeTo) embedContext.relative = options.relativeTo.uuid;
           const html = await TeriockTextEditor.renderTemplate("teriock/ui/block", embedContext);
           return foundry.utils.parseHTML(html);
         }
@@ -80,16 +72,12 @@ export default function EmbedCardDocumentMixin(Base) {
             blockImage.classList.remove("usable");
           }
         }
-        const addCallbacks =
-          element.classList.contains("teriock-block") ||
-          !!element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`);
+        const addCallbacks = element.classList.contains("teriock-block")
+          || !!element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`);
         if (addCallbacks) {
           const relativeUuid = element.dataset.relative ?? element.querySelector("[data-relative]")?.dataset.relative;
           fromUuid(relativeUuid).then(relative => {
-            for (const [type, callback] of Object.entries({
-              click: "primary",
-              contextmenu: "secondary",
-            })) {
+            for (const [type, callback] of Object.entries({ click: "primary", contextmenu: "secondary" })) {
               // The only callback that always gets added is `openDoc`
               element.addEventListener(type, async ev => {
                 const target = /** @type {HTMLElement} */ ev.target;
@@ -97,25 +85,18 @@ export default function EmbedCardDocumentMixin(Base) {
                 if (el) {
                   const action = el.dataset.action;
                   const fn = this.embedActions[action][callback];
-                  if (!fn || (isEmbedded && action !== "openDoc")) {
-                    return;
-                  }
+                  if (!fn || (isEmbedded && action !== "openDoc")) return;
                   ev.stopImmediatePropagation();
                   ev.preventDefault();
-                  if (["openDoc", "useDoc"].includes(action) || game.teriock.checkEditable(relative)) {
+                  if (["openDoc", "useDoc"].includes(action) || game.teriock.checkEditable(relative))
                     await fn(ev, relative);
-                  }
                 }
               });
             }
             // Only add context menu entries if this is actually in a document and not just an embedded HTML element
-            if (isEmbedded) {
-              return;
-            }
+            if (isEmbedded) return;
             const menuEntries = this.getCardContextMenuEntries(relative);
-            if (!menuEntries) {
-              return;
-            }
+            if (!menuEntries) return;
             new TeriockContextMenu(element, ".teriock-block", menuEntries, {
               eventName: "contextmenu",
               fixed: true,

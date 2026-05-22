@@ -21,9 +21,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      type: "attunement",
-    });
+    return foundry.utils.mergeObject(super.metadata, { type: "attunement" });
   }
 
   /** @inheritDoc */
@@ -31,10 +29,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
     return foundry.utils.mergeObject(super.defineSchema(), {
       inheritTier: new fields.BooleanField({ initial: true }),
       target: new LocalDocumentField(foundry.documents.BaseItem),
-      tier: new fields.NumberField({
-        initial: 0,
-        label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",
-      }),
+      tier: new fields.NumberField({ initial: 0, label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label" }),
       type: new fields.StringField({
         choices: localizeChoices(objectMap(attunementConfig.type, v => v.label)),
         initial: "effect",
@@ -49,24 +44,19 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   get embedIcons() {
-    return [
-      {
-        action: "deattuneDoc",
-        icon: TERIOCK.display.icons.attunable.deattune,
-        tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
-        visible: this.parent.isOwner,
-        onClick: async () => await this.deattune(),
-      },
-      ...super.embedIcons,
-    ];
+    return [{
+      action: "deattuneDoc",
+      icon: TERIOCK.display.icons.attunable.deattune,
+      tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+      visible: this.parent.isOwner,
+      onClick: async () => await this.deattune(),
+    }, ...super.embedIcons];
   }
 
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", {
-      tier: this.tier || 0,
-    });
+    parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", { tier: this.tier || 0 });
     parts.text = dotJoin([attunementConfig.type[this.type].label, this.usage]);
     return parts;
   }
@@ -83,25 +73,16 @@ export default class AttunementSystem extends CleanedEffectSystem {
   get usage() {
     if (this.target) {
       if (this.target.type === "equipment") {
-        if (this.target.system.equipped) {
-          return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped");
-        } else {
-          return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped");
-        }
+        if (this.target.system.equipped) return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped");
+        else return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped");
       } else if (this.target.type === "mount") {
-        if (this.target.system.mounted) {
-          return _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted");
-        } else {
-          return _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted");
-        }
+        if (this.target.system.mounted) return _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted");
+        else return _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted");
       } else {
         return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned");
       }
-    } else if (this._source.target) {
-      return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.missing");
-    } else {
-      return "";
-    }
+    } else if (this._source.target) return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.missing");
+    else return "";
   }
 
   /**
@@ -114,23 +95,15 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
-    const entries = super
-      .getCardContextMenuEntries(doc)
-      .filter(
-        e =>
-          ![_loc("TERIOCK.SYSTEMS.Common.MENU.delete"), _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate")].includes(
-            e.label,
-          ),
-      );
-    return [
-      ...entries,
-      {
-        group: "attunement",
-        icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
-        label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
-        onClick: async () => await this.deattune(),
-      },
-    ];
+    const entries = super.getCardContextMenuEntries(doc).filter(e =>
+      ![_loc("TERIOCK.SYSTEMS.Common.MENU.delete"), _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate")].includes(e.label)
+    );
+    return [...entries, {
+      group: "attunement",
+      icon: makeIcon(TERIOCK.display.icons.attunable.deattune, "contextMenu"),
+      label: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
+      onClick: async () => await this.deattune(),
+    }];
   }
 
   /** @inheritDoc */
@@ -146,50 +119,34 @@ export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
   async getPanelParts() {
     const parts = await super.getPanelParts();
-    parts.bars = [
-      {
-        icon: TERIOCK.display.icons.attunable.tier,
-        label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
-        wrappers: [
-          attunementConfig.type[this.type].label,
-          _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", {
-            value: this.tier || 0,
-          }),
-        ],
-      },
-    ];
+    parts.bars = [{
+      icon: TERIOCK.display.icons.attunable.tier,
+      label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
+      wrappers: [
+        attunementConfig.type[this.type].label,
+        _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier || 0 }),
+      ],
+    }];
     if (this.target) {
-      parts.associations = [
-        {
-          cards: [
-            {
-              color: this.target.system.color,
-              img: this.target.img,
-              makeTooltip: true,
-              name: this.target.fullName,
-              type: this.target.type,
-              uuid: this.target.uuid,
-            },
-          ],
-          icon: TERIOCK.config.document.attunement.icon,
-          title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
-        },
-      ];
+      parts.associations = [{
+        cards: [{
+          color: this.target.system.color,
+          img: this.target.img,
+          makeTooltip: true,
+          name: this.target.fullName,
+          type: this.target.type,
+          uuid: this.target.uuid,
+        }],
+        icon: TERIOCK.config.document.attunement.icon,
+        title: _loc("TERIOCK.SYSTEMS.Attunement.PANELS.for"),
+      }];
     }
     return parts;
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
-    if (this.inheritTier && this.target) {
-      this.tier = this.target.system.tier.currentValue;
-    }
-    this.changes.push({
-      key: "system.presence.value",
-      phase: "initial",
-      priority: 10,
-      type: "add",
-      value: this.tier,
-    });
+    if (this.inheritTier && this.target) this.tier = this.target.system.tier.currentValue;
+    this.changes.push({ key: "system.presence.value", phase: "initial", priority: 10, type: "add", value: this.tier });
   }
 }

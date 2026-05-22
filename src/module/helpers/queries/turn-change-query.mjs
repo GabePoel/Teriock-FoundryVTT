@@ -11,21 +11,14 @@ import { buildWriteOperation, consolidateWriteOperations } from "../utils.mjs";
 export default async function turnChangeQuery(queryData, { _timeout }) {
   const indOps = await Promise.all(
     queryData.actorUuids.map(async uuid =>
-      buildWriteOperation({
-        action: "update",
-        docData: { "system.combat.attackPenalty": 0 },
-        uuid,
-      }),
+      buildWriteOperation({ action: "update", docData: { "system.combat.attackPenalty": 0 }, uuid })
     ),
   );
   const conOps = consolidateWriteOperations(indOps.filter(Boolean));
-  await foundry.documents.modifyBatch([
-    {
-      action: "delete",
-      documentName: "Region",
-      ids: canvas.scene?.regions.filter(t => t.getFlag("teriock", "deleteOnTurnChange")).map(t => t.id) ?? [],
-      parent: canvas.scene,
-    },
-    ...conOps,
-  ]);
+  await foundry.documents.modifyBatch([{
+    action: "delete",
+    documentName: "Region",
+    ids: canvas.scene?.regions.filter(t => t.getFlag("teriock", "deleteOnTurnChange")).map(t => t.id) ?? [],
+    parent: canvas.scene,
+  }, ...conOps]);
 }

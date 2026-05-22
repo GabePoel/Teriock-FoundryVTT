@@ -4,7 +4,5 @@ import HarmSheet from "./harm-sheet.mjs";
 
 export default class DrainSheet extends HarmSheet {
   /** @inheritDoc */
-  static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(icons.effect.drain, "title") },
-  };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.effect.drain, "title") } };
 }

@@ -16,12 +16,7 @@ declare global {
       types?: Teriock.Changes.Type[];
     };
 
-    export type CurrencyEntry = {
-      abbreviation: string;
-      label: string;
-      value: number;
-      weight: number;
-    };
+    export type CurrencyEntry = { abbreviation: string, label: string, value: number, weight: number };
 
     export type DocumentEntry = {
       documentName: "Card" | "JournalEntryPage" | CommonDocumentName;
@@ -66,11 +61,7 @@ declare global {
       reach: number;
     };
 
-    export type SubtypeEntry = {
-      color: string;
-      icon: string;
-      label: string;
-    };
+    export type SubtypeEntry = { color: string, icon: string, label: string };
   }
 }
 

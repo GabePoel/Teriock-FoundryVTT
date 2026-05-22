@@ -34,13 +34,15 @@ const { fields } = foundry.data;
  * @mixes SelectDocumentsAutomation
  * @mixes TriggerAutomation
  */
-export default class RegionAutomation extends mixClasses(
-  CritAutomation,
-  SelectDocumentsAutomationMixin,
-  TriggerAutomationMixin,
-  OverrideDataAutomationMixin,
-  DisplayAutomationMixin,
-) {
+export default class RegionAutomation
+  extends mixClasses(
+    CritAutomation,
+    SelectDocumentsAutomationMixin,
+    TriggerAutomationMixin,
+    OverrideDataAutomationMixin,
+    DisplayAutomationMixin,
+  )
+{
   /**
    * Make a field with a range placeholder.
    * @returns {FormulaField}
@@ -109,13 +111,7 @@ export default class RegionAutomation extends mixClasses(
       }),
       restriction: new fields.SchemaField({
         enabled: new fields.BooleanField(),
-        priority: new fields.NumberField({
-          initial: 0,
-          integer: true,
-          min: 0,
-          nullable: false,
-          required: true,
-        }),
+        priority: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false, required: true }),
         type: new fields.StringField({
           choices: Object.fromEntries(
             CONST.EDGE_RESTRICTION_TYPES.map(t => [t, _loc(`REGION.RESTRICTION_TYPES.${t}.label`)]),
@@ -145,18 +141,12 @@ export default class RegionAutomation extends mixClasses(
    */
   #evaluate(path, rollData, execution = null) {
     let out = 0;
-    if (path !== "angle" && !this[path] && execution) {
-      out = execution.source.system.range.currentValue ?? 0;
-    } else if (this[path]) {
-      out = BaseRoll.minValue(this[path], rollData);
-    }
-    if (path === "angle") {
-      return out;
-    }
+    if (path !== "angle" && !this[path] && execution) out = execution.source.system.range.currentValue ?? 0;
+    else if (this[path]) out = BaseRoll.minValue(this[path], rollData);
+    if (path === "angle") return out;
     out *= canvas.dimensions.distancePixels;
-    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
+    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken)
       out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
-    }
     return out;
   }
 
@@ -213,24 +203,12 @@ export default class RegionAutomation extends mixClasses(
    * @returns {string[]}
    */
   get _regionTypePaths() {
-    if (this.regionType === "rectangle") {
-      return ["width", "height"];
-    }
-    if (this.regionType === "circle") {
-      return ["radius"];
-    }
-    if (this.regionType === "ellipse") {
-      return ["radiusX", "radiusY"];
-    }
-    if (this.regionType === "emanation") {
-      return ["radius"];
-    }
-    if (this.regionType === "cone") {
-      return ["radius", "angle"];
-    }
-    if (this.regionType === "ring") {
-      return ["radius", "innerWidth", "outerWidth"];
-    }
+    if (this.regionType === "rectangle") return ["width", "height"];
+    if (this.regionType === "circle") return ["radius"];
+    if (this.regionType === "ellipse") return ["radiusX", "radiusY"];
+    if (this.regionType === "emanation") return ["radius"];
+    if (this.regionType === "cone") return ["radius", "angle"];
+    if (this.regionType === "ring") return ["radius", "innerWidth", "outerWidth"];
     return [];
   }
 
@@ -240,9 +218,7 @@ export default class RegionAutomation extends mixClasses(
    */
   get _restrictionPaths() {
     const paths = ["restriction.enabled"];
-    if (this.restriction.enabled) {
-      paths.push(...["restriction.type", "restriction.priority"]);
-    }
+    if (this.restriction.enabled) paths.push(...["restriction.type", "restriction.priority"]);
     return paths;
   }
 
@@ -277,17 +253,16 @@ export default class RegionAutomation extends mixClasses(
   async _preFire(scope) {
     const out = await super._preFire(scope);
     const region = Array.isArray(out) && out.length ? out[0] : null;
-    if (!region) {
-      return;
-    }
+    if (!region) return;
     if (scope.trigger === "executeInput" && this.targeting) {
       if (scope.execution && region.parent === game.scenes.viewed) {
         let releaseOthers = true;
-        for (const t of (game.scenes.viewed?.tokens.contents ?? []).filter(
-          t =>
-            t.hasStatusEffect("ethereal") === !!scope.execution?.actor?.statuses.has("ethereal") &&
-            t.testInsideRegion(region),
-        )) {
+        for (
+          const t of (game.scenes.viewed?.tokens.contents ?? []).filter(t =>
+            t.hasStatusEffect("ethereal") === !!scope.execution?.actor?.statuses.has("ethereal")
+            && t.testInsideRegion(region)
+          )
+        ) {
           t?.object.setTarget(true, { releaseOthers });
           releaseOthers = false;
         }
@@ -301,23 +276,20 @@ export default class RegionAutomation extends mixClasses(
    * @returns {Promise<object>}
    */
   async getRegionData(options = { execution: null, rollData: {} }) {
-    const data = Object.assign(
-      {
-        behaviors: [],
-        displayMeasurements: false,
-        flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
-        highlightMode: this.targeting ? "coverage" : "shapes",
-        levels: [canvas.level.id],
-        name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
-          name: options.execution?.source.name ?? this.document.name,
-        }),
-        ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER },
-        restriction: this.restriction,
-        shapes: this.#getRegionShapeData(options),
-        visibility: this.visibility,
-      },
-      this.overrideData ? this.data : {},
-    );
+    const data = Object.assign({
+      behaviors: [],
+      displayMeasurements: false,
+      flags: { teriock: { deleteOnTurnChange: this.deleteOnTurnChange } },
+      highlightMode: this.targeting ? "coverage" : "shapes",
+      levels: [canvas.level.id],
+      name: _loc("TERIOCK.AUTOMATIONS.Region.DATA.name", {
+        name: options.execution?.source.name ?? this.document.name,
+      }),
+      ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER },
+      restriction: this.restriction,
+      shapes: this.#getRegionShapeData(options),
+      visibility: this.visibility,
+    }, this.overrideData ? this.data : {});
     const uuids = await this.choose({ actor: options.execution?.actor });
     if (uuids.length) {
       data.behaviors.push({

@@ -21,9 +21,7 @@ declare global {
       shift?: string;
     };
 
-    export type UseOptions = {
-      event?: PointerEvent;
-    };
+    export type UseOptions = { event?: PointerEvent };
 
     /**
      * Options for generic threshold rolls.
@@ -47,21 +45,13 @@ declare global {
 
     export type SimpleCommandFunction<O> = (actor: TeriockActor, options: O) => Promise<void>;
 
-    export type TradecraftOptions = ThresholdOptions & {
-      tradecraft?: Teriock.Keys.Tradecraft;
-    };
+    export type TradecraftOptions = ThresholdOptions & { tradecraft?: Teriock.Keys.Tradecraft };
 
-    export type FeatOptions = ThresholdOptions & {
-      attribute?: Teriock.Keys.Attribute;
-    };
+    export type FeatOptions = ThresholdOptions & { attribute?: Teriock.Keys.Attribute };
 
-    export type HackOptions = {
-      part?: Teriock.Keys.HackableBodyPart;
-    };
+    export type HackOptions = { part?: Teriock.Keys.HackableBodyPart };
 
-    export type FormulaOptions = {
-      formula?: string;
-    };
+    export type FormulaOptions = { formula?: string };
 
     export type ImpactOptions = FormulaOptions & {
       apply?: boolean;
@@ -73,35 +63,22 @@ declare global {
       rollData?: object;
     };
 
-    export type StatusOptions = {
-      status?: Teriock.Keys.Condition;
+    export type StatusOptions = { status?: Teriock.Keys.Condition };
+
+    export type StandardDamageOptions = { armament?: UUID<TeriockArmament>, crit?: boolean, twoHanded?: boolean };
+
+    export type ResistOptions = ThresholdOptions & { hex?: boolean };
+
+    export type DocumentUseOptions = ThresholdOptions & Teriock.Execution.DocumentExecutionOptions & {
+      competence?: number;
+      noHeighten?: boolean;
     };
 
-    export type StandardDamageOptions = {
-      armament?: UUID<TeriockArmament>;
-      crit?: boolean;
-      twoHanded?: boolean;
+    export type UseLocalOptions = DocumentUseOptions & { lookup?: string, type?: Teriock.Documents.ChildType };
+
+    export type UseExternalOptions = DocumentUseOptions & Teriock.System.ResolveDocumentsOptions & {
+      uuid?: UUID<TeriockDocument>;
     };
-
-    export type ResistOptions = ThresholdOptions & {
-      hex?: boolean;
-    };
-
-    export type DocumentUseOptions = ThresholdOptions &
-      Teriock.Execution.DocumentExecutionOptions & {
-        competence?: number;
-        noHeighten?: boolean;
-      };
-
-    export type UseLocalOptions = DocumentUseOptions & {
-      lookup?: string;
-      type?: Teriock.Documents.ChildType;
-    };
-
-    export type UseExternalOptions = DocumentUseOptions &
-      Teriock.System.ResolveDocumentsOptions & {
-        uuid?: UUID<TeriockDocument>;
-      };
 
     export type TakeHarmOptions = {
       /** Make the non-temporary impact morganti */

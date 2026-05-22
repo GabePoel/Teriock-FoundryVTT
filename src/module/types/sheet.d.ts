@@ -15,16 +15,9 @@ declare global {
 
     export type DisplayField = string | Partial<FancyDisplayField>;
 
-    export type DisplayButton = {
-      action?: string;
-      classes: string;
-      label: string;
-    };
+    export type DisplayButton = { action?: string, classes: string, label: string };
 
-    export type FancyDisplayTag = {
-      label: string;
-      tooltip?: string;
-    };
+    export type FancyDisplayTag = { label: string, tooltip?: string };
 
     export type DisplayTag = string | Partial<FancyDisplayTag>;
 
@@ -37,14 +30,9 @@ declare global {
       value: string;
     };
 
-    export type DragDropSelector = {
-      dragSelector: string | null;
-      dropSelector: string | null;
-    };
+    export type DragDropSelector = { dragSelector: string | null, dropSelector: string | null };
 
-    export type DragDropConfiguration = {
-      dragDrop: Teriock.Sheet.DragDropSelector[];
-    };
+    export type DragDropConfiguration = { dragDrop: Teriock.Sheet.DragDropSelector[] };
 
     export type DropData<T> = {
       data?: T;

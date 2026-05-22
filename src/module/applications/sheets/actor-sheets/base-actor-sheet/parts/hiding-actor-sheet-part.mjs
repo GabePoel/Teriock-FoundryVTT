@@ -7,9 +7,7 @@ export default Base =>
    * @mixin
    */
   class HidingActorSheetPart extends Base {
-    static DEFAULT_OPTIONS = {
-      actions: { toggleHideThis: this._onToggleHideThis },
-    };
+    static DEFAULT_OPTIONS = { actions: { toggleHideThis: this._onToggleHideThis } };
 
     /**
      * Toggles the lock state of the current sheet.
@@ -44,16 +42,12 @@ export default Base =>
     async _onRender(context, options) {
       await super._onRender(context, options);
       const toggleButton = this.window.header.querySelector("[data-action='toggleHideThis']");
-      if (toggleButton) {
-        this.#setToggleHideButtonAttributes(toggleButton);
-      }
+      if (toggleButton) this.#setToggleHideButtonAttributes(toggleButton);
     }
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      return Object.assign(await super._prepareContext(options), {
-        hideInactive: this._hideInactive,
-      });
+      return Object.assign(await super._prepareContext(options), { hideInactive: this._hideInactive });
     }
 
     /** @inheritDoc */
