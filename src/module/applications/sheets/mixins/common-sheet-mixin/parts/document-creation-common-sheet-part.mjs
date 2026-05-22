@@ -96,6 +96,7 @@ export default Base => {
       /**
        * Adds a new {@link TeriockEquipment} to the current document.
        * @returns {Promise<void>}
+       * @this {DocumentCreationCommonSheetPart}
        */
       static async _onCreateEquipment() {
         const decision = await newDocumentDialog("equipment");
@@ -109,7 +110,10 @@ export default Base => {
           obj["_stats.compendiumSource"] = out.uuid;
         }
         if (decision && obj) {
-          await this.document.createChildDocuments("Item", [obj]);
+          const stack = await this._stackEquipment(obj);
+          if (!stack) {
+            await this.document.createChildDocuments("Item", [obj]);
+          }
         }
       }
 
@@ -328,6 +332,45 @@ export default Base => {
           }
         }
         return context;
+      }
+
+      /**
+       * Attempt to stack a piece of equipment that would otherwise be created.
+       * @param {TeriockEquipment|object} equipment
+       * @returns {Promise<TeriockEquipment|false>} - Either the equipment this was stacked with or `false` if not stacked.
+       */
+      async _stackEquipment(equipment) {
+        if (
+          foundry.utils.getProperty(equipment, "system.consumable") &&
+          foundry.utils.getProperty(equipment, "system.quantity") &&
+          equipment?.name
+        ) {
+          const stackCandidates = (await this.document.getEquipment()).filter(
+            e =>
+              e.master?.uuid === this.document.uuid &&
+              e.name === equipment.name &&
+              e.system.identifier === foundry.utils.getProperty(equipment, "system.identifier") &&
+              e.system.consumable &&
+              e.system.quantity < e.system.maxQuantity.value,
+          );
+          if (stackCandidates) {
+            const selected = await selectDocumentDialog(stackCandidates, {
+              auto: false,
+              hint: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.hint", {
+                name: equipment.name,
+              }),
+              openable: true,
+              silent: true,
+              textKey: "system.remainingString",
+              title: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.title"),
+            });
+            if (selected) {
+              await selected.update({ "system.quantity": selected.system.quantity + equipment.system.quantity });
+              return selected;
+            }
+          }
+        }
+        return false;
       }
     }
   );

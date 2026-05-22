@@ -22,6 +22,8 @@ declare global {
        * reset it in {@link HierarchyDocument.createDocuments}.
        */
       cachedKeepId?: boolean;
+      /** If true then subs will not be removed prior to document creation */
+      dontFilterSubs?: boolean;
       /** Tracker to see if the value of `cachedKeepId` should be read. */
       isKeepIdCached?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */

@@ -29,8 +29,18 @@ export default function EquipmentDropSheetMixin(Base) {
           return;
         }
 
+        if (doc.type === "equipment" && doc.actor && !doc.isOwner) {
+          return;
+        }
+
         // Create reference to old elder
         const _elder = doc.elder;
+
+        // Optionally stack equipment
+        let stack = false;
+        if (doc.type === "equipment") {
+          stack = await this._stackEquipment(doc);
+        }
 
         // Handle moving equipment around within inventory instead of duplicating it
         if (
@@ -41,7 +51,13 @@ export default function EquipmentDropSheetMixin(Base) {
           doc.checkAncestor(this.document.actor)
         ) {
           const oldElder = await resolveDocument(_elder);
-          if (this.document.type === "equipment" && this.document.system.storage.enabled) {
+          if (stack) {
+            await doc.delete();
+            if (oldElder) {
+              await oldElder.sheet?.render();
+            }
+            return stack;
+          } else if (this.document.type === "equipment" && this.document.system.storage.enabled) {
             await doc.update({ "system._sup": this.document.id });
             if (oldElder) {
               await oldElder.sheet?.render();
@@ -54,6 +70,13 @@ export default function EquipmentDropSheetMixin(Base) {
             }
             return doc;
           }
+        }
+
+        if (stack) {
+          if (doc.isOwner) {
+            await doc.delete();
+          }
+          return stack;
         }
 
         // Run normal drop routine

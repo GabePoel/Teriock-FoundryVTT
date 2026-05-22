@@ -56,7 +56,7 @@ export default function HierarchyDocumentMixin(Base) {
         });
         const filteredDocuments = documents.filter(d => {
           const collection = d.siblingCollection;
-          if (d?.system?._sup) {
+          if (d?.system?._sup && !operation.dontFilterSubs) {
             return collection.has(d.system._sup);
           }
           return true;

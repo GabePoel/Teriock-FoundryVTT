@@ -98,10 +98,11 @@ export default function ChildDocumentMixin(Base) {
 
       /**
        * Duplicates the document within its parent.
+       * @property {object} [data]
        * @returns {Promise<ChildDocument>}
        */
-      async duplicate() {
-        const copy = foundry.utils.duplicate(this.toObject(true));
+      async duplicate(data = {}) {
+        const copy = foundry.utils.mergeObject(this.toObject(true), data);
         copy._stats.duplicateSource = this.uuid;
         let copyDocument;
         if (this.isEmbedded) {

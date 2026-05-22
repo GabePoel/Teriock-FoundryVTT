@@ -1,8 +1,11 @@
+import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
+import { selectDocumentDialog } from "../../../../../../applications/dialogs/select-document-dialog.mjs";
 import { equipmentConfig } from "../../../../../../constants/config/equipment-config.mjs";
 import { resolveDocument } from "../../../../../../helpers/resolve.mjs";
+import { makeIcon, makeIconClass } from "../../../../../../helpers/utils.mjs";
 import { StorageModel } from "../../../../../models/_module.mjs";
 
-const { EmbeddedDataField } = foundry.data.fields;
+const { EmbeddedDataField, NumberField } = foundry.data.fields;
 
 /**
  * @param {typeof EquipmentSystem} Base
@@ -25,6 +28,22 @@ export default Base => {
             nullable: false,
           }),
         };
+      }
+
+      /**
+       * Whether this can stack.
+       * @returns {TeriockEquipment[]}
+       */
+      get _stackingCandidates() {
+        return (this.parent.elder?.equipment ?? []).filter(
+          e =>
+            e.name === this.parent.name &&
+            e.typedIdentifier === this.parent.typedIdentifier &&
+            e.elder?.uuid === this.parent.elder?.uuid &&
+            e.uuid !== this.parent.uuid &&
+            e.system.consumable === this.consumable &&
+            e.system.quantity + this.quantity <= e.system.maxQuantity.value,
+        );
       }
 
       /** @inheritDoc */
@@ -107,6 +126,35 @@ export default Base => {
       }
 
       /** @inheritDoc */
+      getCardContextMenuEntries(doc) {
+        const entries = super.getCardContextMenuEntries(doc);
+        entries.push(
+          ...[
+            {
+              group: "document",
+              icon: makeIconClass(TERIOCK.display.icons.equipment.stack, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
+              onClick: async () => await this.groupStackDialog(),
+              visible: () =>
+                this.consumable &&
+                this.quantity < this.maxQuantity.value &&
+                this._stackingCandidates.length &&
+                this.parent._checkValidEditorDocument(doc, { self: false }),
+            },
+            {
+              group: "document",
+              icon: makeIcon(TERIOCK.display.icons.equipment.unstack, "contextMenu"),
+              label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
+              onClick: async () => await this.groupUnstackDialog(),
+              visible: () =>
+                this.consumable && this.quantity > 1 && this.parent._checkValidEditorDocument(doc, { self: false }),
+            },
+          ],
+        );
+        return entries;
+      }
+
+      /** @inheritDoc */
       getLocalRollData() {
         return Object.assign(super.getLocalRollData(), {
           storage: Number(this.storage.enabled),
@@ -118,6 +166,116 @@ export default Base => {
           "storage.weight.mult": this.storage.weightMultiplier,
           "storage.weight.over": Number(this.storage.isOverWeightCapacity),
           weight: this.totalWeight,
+        });
+      }
+
+      /**
+       * Merge this into another group if it's consumable.
+       * @returns {Promise<void>}
+       */
+      async groupStackDialog() {
+        if (!this.consumable) {
+          return;
+        }
+        const candidates = this._stackingCandidates;
+        if (!candidates.length) {
+          return;
+        }
+        const chosen = await selectDocumentDialog(candidates, {
+          auto: true,
+          hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.hint"),
+          label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
+          openable: true,
+          textKey: "system.remainingString",
+        });
+        if (!chosen) {
+          return;
+        }
+        const operations = [
+          {
+            action: "update",
+            documentName: "Item",
+            ids: [chosen.id],
+            pack: chosen.pack,
+            parent: chosen.parent,
+            updates: [{ _id: chosen.id, system: { quantity: chosen.system.quantity + this.quantity } }],
+          },
+          {
+            action: "delete",
+            documentName: "Item",
+            ids: [this.parent.id],
+            pack: this.parent.pack,
+            parent: this.parent.parent,
+          },
+        ];
+        await foundry.documents.modifyBatch(operations);
+      }
+
+      /**
+       * Split this equipment into multiple groups if it's consumable.
+       * @param {number} amount
+       * @returns {Promise<void>}
+       */
+      async groupUnstack(amount = 0) {
+        if (!this.consumable || !amount || amount >= this.quantity) {
+          return;
+        }
+        const operations = [
+          {
+            action: "create",
+            data: [
+              foundry.utils.mergeObject(this.parent.toObject(), {
+                _id: foundry.utils.randomID(),
+                system: { quantity: amount },
+              }),
+            ],
+            documentName: "Item",
+            pack: this.parent.pack,
+            parent: this.parent.parent,
+          },
+          {
+            action: "update",
+            documentName: "Item",
+            ids: [this.document.id],
+            pack: this.parent.pack,
+            parent: this.parent.parent,
+            updates: [{ _id: this.document.id, system: { quantity: this.quantity - amount } }],
+          },
+        ];
+        await foundry.documents.modifyBatch(operations);
+      }
+
+      /**
+       * Open a dialog to split this equipment into multiple groups if it's consumable.
+       * @returns {Promise<void>}
+       */
+      async groupUnstackDialog() {
+        if (!this.consumable || !this.quantity) {
+          return;
+        }
+        const content = document.createElement("div");
+        const amountField = new NumberField({
+          hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.amount.hint"),
+          initial: 1,
+          integer: true,
+          label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.amount.label"),
+          max: this.quantity,
+          min: 0,
+          nullable: false,
+        });
+        content.append(amountField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "amount", value: 1 }));
+        await TeriockDialog.prompt({
+          content,
+          ok: {
+            callback: async (_event, button) => {
+              const amount = button.form.elements.amount.value ?? 0;
+              await this.groupUnstack(amount);
+            },
+          },
+          window: {
+            icon: makeIconClass(TERIOCK.display.icons.equipment.unstack, "title"),
+            title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
+          },
         });
       }
 

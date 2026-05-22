@@ -108,15 +108,7 @@ export default function ConsumableSystemMixin(Base) {
         if (this.consumable) {
           parts.subtitleAction = "useOneDoc";
           parts.subtitleTooltip = _loc("TERIOCK.SYSTEMS.Consumable.EMBED.consumeOne");
-          parts.subtitle =
-            this.maxQuantity.value === Infinity
-              ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
-                  value: this.quantity,
-                })
-              : _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax", {
-                  max: this.maxQuantity.value,
-                  value: this.quantity,
-                });
+          parts.subtitle = this.remainingString;
         }
         return parts;
       }
@@ -124,6 +116,21 @@ export default function ConsumableSystemMixin(Base) {
       /** @inheritDoc */
       get makeSuppressed() {
         return this._isSuppressedConsumed || super.makeSuppressed;
+      }
+
+      /**
+       * A string representing how many of these are remaining.
+       * @returns {string}
+       */
+      get remainingString() {
+        return this.maxQuantity.value === Infinity
+          ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", {
+              value: this.quantity,
+            })
+          : _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax", {
+              max: this.maxQuantity.value,
+              value: this.quantity,
+            });
       }
 
       /**
