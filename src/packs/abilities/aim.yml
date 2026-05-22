@@ -1,0 +1,71 @@
+_id: f9a3e0199ffcbd16
+_key: '!effects!f9a3e0199ffcbd16'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.63
+img: systems/teriock/src/icons/abilities/aim.webp
+name: Aim
+system:
+  automations:
+    im4atrn7Ogi2RhVV:
+      _id: im4atrn7Ogi2RhVV
+      changes:
+        - key: system.offense.sb
+          priority: 5
+          target: Actor
+          type: upgrade
+          value: 'true'
+      type: changes
+    dgUF4Tk711Y3VvaA:
+      _id: dgUF4Tk711Y3VvaA
+      combat:
+        what:
+          roll: 2d4kh1
+          threshold: 4
+          type: forced
+        when:
+          skip: 0
+          time: start
+          trigger: turn
+        who:
+          type: executor
+      override:
+        combat: true
+      type: expiration
+  basic: true
+  competence:
+    raw: 0
+  delivery: self
+  duration:
+    raw: '10'
+    unit: second
+  endCondition: <p>The start of your next @L[Core:Turns]{turn}.</p>
+  executionTime:
+    base: a1
+    slow:
+      unit: second
+  expansion:
+    range:
+      unit: self
+  featSaveAttribute: mov
+  form: intrinsic
+  identifier: aim
+  interaction: manifest
+  maneuver: active
+  overview:
+    base: >-
+      <p>You gain @L[Core:Style Bonus]{SB} with all your
+      @L[Category:Weapons]{weapons} until the start of your next turn.</p>
+  piercing:
+    raw: 0
+  powerSources:
+    - martial
+  range:
+    unit: self
+  sustained: true
+  targets:
+    - self
+transfer: true
+type: ability

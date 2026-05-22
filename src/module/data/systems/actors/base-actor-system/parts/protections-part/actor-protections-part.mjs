@@ -24,7 +24,7 @@ export default Base => {
             new fields.SchemaField(
               objectMap(
                 protectionConfig.categories,
-                category => new fields.SetField(new fields.StringField(), { label: category.label, persisted: false}),
+                category => new fields.SetField(new fields.StringField(), { label: category.label, persisted: false }),
               ),
               { label: type.label },
             ))),

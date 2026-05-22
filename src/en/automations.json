@@ -24,8 +24,12 @@
               "label": "Override Child Data"
             },
             "uuids": {
-              "hint": "Documents to create as grandchildren on each created child or other document. They will all be added with no selection or prompt.",
-              "label": "Child Documents"
+              "hint": "UUIDs for external documents to create as grandchildren on each created child or other document. They will all be added with no selection or prompt.",
+              "label": "Child UUIDs"
+            },
+            "identifiers": {
+              "hint": "Identifiers for external documents to create as grandchildren on each created child or other document. They will all be added with no selection or prompt.",
+              "label": "Child Identifiers"
             }
           },
           "separate": {
@@ -301,12 +305,12 @@
       "ExternalDocuments": {
         "FIELDS": {
           "uuids": {
-            "label": "External Documents UUIDs",
-            "hint": "External documents can be specified by UUIDs or identifiers. UUIDs refer to specific identifiers."
+            "label": "External UUIDs",
+            "hint": "External documents can be specified by UUIDs or identifiers. UUIDs refer to specific documents. Tables and folders are allowed."
           },
           "identifiers": {
-            "label": "External Document Identifiers",
-            "hint": "External documents can be specified by UUIDs or identifiers. Identifiers refer to whatever the canonical document for a given piece of rules text."
+            "label": "External Identifiers",
+            "hint": "External documents can be specified by UUIDs or identifiers. Identifiers refer to whatever the canonical document for a given piece of rules text. Does not support tables or folders."
           }
         }
       },
@@ -662,17 +666,19 @@
             "hint": "If checked, select from the documents within tables instead of rolling the table itself.",
             "label": "Expand Tables"
           },
-          "identifiers": {
-            "hint": "Typed identifiers for the documents to be used. Identifiers are kebab-case and have no special characters. They should be of the format {type}:{identifier}.",
-            "label": "Local Documents"
+          "local": {
+            "identifiers": {
+              "hint": "Typed identifiers for the local documents to be used. Identifiers are kebab-case and have no special characters. They should be of the format {type}:{identifier}.",
+              "label": "Local Identifiers"
+            },
+            "qualifier": {
+              "hint": "Include all documents in the actor that meet the qualifier above. If this is non-zero, all documents that are children of of the actor executing this will be considered for selection. If the formula entered above evaluates to a truthy value given that document's roll data, it will be included.",
+              "label": "Local Qualifier"
+            }
           },
           "noHeighten": {
             "hint": "If checked, abilities this executes cannot be heightened.",
             "label": "No Heightening"
-          },
-          "qualifier": {
-            "hint": "Include all documents in the actor that meet the qualifier above. If this is non-zero, all documents that are children of of the actor executing this will be considered for selection. If the formula entered above evaluates to a truthy value given that document's roll data, it will be included.",
-            "label": "Qualifier"
           }
         },
         "LABEL": "Use Documents"

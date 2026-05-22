@@ -28,7 +28,7 @@ function addCardContextMenuEntriesToHeader(application, controls) {
   controls.push(...entries.map(e => {
     return {
       group: e.group,
-      icon: e.icon.split("class=\"")[1].split("\">")[0],
+      icon: e.icon?.split("class=\"")[1]?.split("\">")[0] ?? e.icon,
       label: e.label,
       onClick: e.onClick,
       visible: e.visible,

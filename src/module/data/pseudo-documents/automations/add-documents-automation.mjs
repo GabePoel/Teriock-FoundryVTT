@@ -1,4 +1,5 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { IdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/helpers/builders.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
@@ -50,6 +51,7 @@ export default class AddDocumentsAutomation
       children: new fields.SchemaField({
         data: defaultJSONField(),
         enabled: new fields.BooleanField({ initial: false }),
+        identifiers: new IdentifierSetField(),
         overrideData: new fields.BooleanField({ initial: false }),
         uuids: new fields.SetField(new fields.DocumentUUIDField()),
       }),
@@ -105,7 +107,7 @@ export default class AddDocumentsAutomation
   get _childrenPaths() {
     const paths = ["children.enabled"];
     if (this.children.enabled) {
-      paths.push(...["children.uuids", "children.overrideData"]);
+      paths.push(...["children.identifiers", "children.uuids", "children.overrideData"]);
       if (this.children.overrideData) paths.push("children.data");
     }
     return paths;
@@ -166,7 +168,11 @@ export default class AddDocumentsAutomation
     for (const choice of choices) {
       const activationFamily = { root: choice };
       if (this.children.enabled) {
-        activationFamily.children = Array.from(this.children.uuids).map(uuid => {
+        const uuids = [
+          ...Array.from(this.children.uuids),
+          ...Array.from(this.children.identifiers).map(i => game.teriock.identifiers.get(i)).filter(Boolean),
+        ];
+        activationFamily.children = uuids.map(uuid => {
           return { data: this.children.overrideData ? this.children.data : {}, uuid };
         });
       }

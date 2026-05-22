@@ -65,7 +65,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.62
+      systemVersion: 0.12.63
     flags:
       teriock:
         category: support
@@ -173,7 +173,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.62
+      systemVersion: 0.12.63
     img: systems/teriock/src/icons/abilities/cremate.webp
     name: Cremate
     system:
@@ -262,7 +262,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.62
+      systemVersion: 0.12.63
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
     name: Minor Weapon Enchantment
     system:
@@ -273,23 +273,21 @@ effects:
           all: false
           attachDocuments: true
           automatic: true
+          identifiers:
+            - property:magelore
           multi: false
-          qualifier: '0'
           separate: false
           type: addDocuments
-          uuids:
-            - Compendium.teriock.properties.ActiveEffect.f1f52f7e8ae3eaab
         TUjBJXUmGzXEFt79:
           _id: TUjBJXUmGzXEFt79
           all: false
           attachDocuments: true
           automatic: true
+          identifiers:
+            - property:magic
           multi: false
-          qualifier: '0'
           separate: false
           type: addDocuments
-          uuids:
-            - Compendium.teriock.properties.ActiveEffect.f35cbf0baf87ac8c
         WDPfYxMp2lWJxkW4:
           _id: WDPfYxMp2lWJxkW4
           all: false
@@ -311,9 +309,10 @@ effects:
                 }
               }
             }
+          local:
+            qualifier: and(@ability, @spell, not(@es), @delivery.ray)
           multi: false
           overrideData: true
-          qualifier: and(@ability, @spell, not(@es), @delivery.ray)
           separate: false
           type: addDocuments
         Tu4qrPot571fIQao:

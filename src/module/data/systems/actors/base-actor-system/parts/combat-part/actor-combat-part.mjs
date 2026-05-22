@@ -1,4 +1,5 @@
 import { config } from "../../../../../../constants/_module.mjs";
+import { scalingConfig } from "../../../../../../constants/config/scaling-config.mjs";
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { FormulaField, LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
@@ -35,7 +36,7 @@ export default Base => {
             hasReaction: new fields.BooleanField({ initial: true }),
           }),
           defense: initialSchema({
-            ac: initialNumber(10),
+            ac: initialNumber(scalingConfig.baseValues.ac),
             av: initialSchema({
               base: initialNumber(),
               natural: initialNumber(),
@@ -43,7 +44,7 @@ export default Base => {
               worn: initialNumber(),
             }),
             bv: initialNumber(),
-            cc: initialNumber(10),
+            cc: initialNumber(scalingConfig.baseValues.ac),
           }),
           initiative: new FormulaField({ deterministic: false, initial: config.character.defaults.initiative }),
           offense: new fields.SchemaField({
@@ -103,7 +104,7 @@ export default Base => {
           "av0.abi": 0,
           "av0.nat": Number(naturalAv0) * 2,
           "av0.wep": Number(weaponAv0) * 2,
-          sb: Number(this.offense.sb),
+          sb: this.offense.sb ? this.scaling.p : 0,
           ub: Number(hasUb),
           "ub.abi": 0,
           "ub.nat": Number(naturalUb),

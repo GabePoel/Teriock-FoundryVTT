@@ -71,7 +71,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.62
+      systemVersion: 0.12.63
     img: systems/teriock/src/icons/abilities/skill-share.webp
     name: Skill Share
     system:
@@ -83,10 +83,11 @@ effects:
           automatic: true
           competencies:
             - 0
+          local:
+            qualifier: >-
+              and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+              lte(@class.rank, 1))
           multi: false
-          qualifier: >-
-            and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-            lte(@class.rank, 1))
           separate: false
           type: addDocuments
         DKrkwLcllE5f9bjQ:
@@ -96,10 +97,11 @@ effects:
           automatic: true
           competencies:
             - 1
+          local:
+            qualifier: >-
+              and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+              lte(@class.rank, 1 + @p))
           multi: false
-          qualifier: >-
-            and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-            lte(@class.rank, 1 + @p))
           separate: false
           type: addDocuments
         LTtFZkqLk2QnwOfK:
@@ -109,10 +111,11 @@ effects:
           automatic: true
           competencies:
             - 2
+          local:
+            qualifier: >-
+              and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+              lte(@class.rank, 1 + @f))
           multi: false
-          qualifier: >-
-            and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-            lte(@class.rank, 1 + @f))
           separate: false
           type: addDocuments
         XdlHsYQu4RHDULLu:

@@ -112,7 +112,7 @@ export default Base => {
         const entries = super.getCardContextMenuEntries(doc);
         entries.push(...[{
           group: "document",
-          icon: makeIconClass(TERIOCK.display.icons.equipment.stack, "contextMenu"),
+          icon: makeIcon(TERIOCK.display.icons.equipment.stack, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
           onClick: async () => await this.groupStackDialog(),
           visible: () =>

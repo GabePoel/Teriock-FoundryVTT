@@ -43,7 +43,7 @@ export default class AbilityExecution
       av0: Number(this.piercing.av0) * 2,
       "av0.wep": Number(this.armament?.system.piercing.av0) * 2,
       h: this.heightened,
-      sb: Number(this.sb),
+      sb: this.sb ? this.actor?.system.scaling.p ?? 0 : 0,
       ub: Number(this.piercing.ub),
       "ub.wep": Number(this.armament?.system.piercing.ub),
       warded: Number(this.warded),

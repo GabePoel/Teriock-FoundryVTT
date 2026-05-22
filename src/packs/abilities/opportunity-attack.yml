@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.61
+  systemVersion: 0.12.63
 img: systems/teriock/src/icons/abilities/opportunity-attack.webp
 name: Opportunity Attack
 system:
@@ -13,11 +13,12 @@ system:
       _id: ptx3hlPsPF9jHgFO
       automatic: true
       expandTables: false
+      local:
+        qualifier: >-
+          and(@ability, @interaction.attack, @time.a1, or(@delivery.weapon,
+          @delivery.hand))
       multi: false
       noHeighten: false
-      qualifier: >-
-        and(@ability, @interaction.attack, @time.a1, or(@delivery.weapon,
-        @delivery.hand))
       trigger: execute
       type: useDocuments
   basic: true

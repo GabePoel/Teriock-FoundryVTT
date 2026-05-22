@@ -13,6 +13,7 @@ export function cleanDocument(doc) {
     delete doc._stats.modifiedTime;
     delete doc._stats.ownership;
   }
+  if (doc.flags && doc.name !== "Basic Abilities") delete doc.flags.teriockDocumentSettings;
   if (doc.system) {
     delete doc.system.forceSuppressed;
     cleanCommon(doc);
@@ -307,6 +308,7 @@ function cleanAutomation(automation) {
   delete automation.transformation;
   if (!automation.overrideCompetence) delete automation.overrideCompetence;
   if (!automation.overrideData) delete automation.overrideData;
+
   if (automation.type === "combatExpiration") {
     automation.type = "expiration";
     automation.combat = { what: automation.what, when: automation.when, who: automation.who };
@@ -337,6 +339,27 @@ function cleanAutomation(automation) {
     if (!automation.override.triggers) {
       delete automation.triggers;
       delete automation.override.triggers;
+    }
+  }
+  if (["addDocuments", "region", "summon", "transformation", "useDocuments"].includes(automation.type)) {
+    if (automation.qualifier) automation.localQualifier = automation.qualifier;
+    delete automation.qualifier;
+    if (automation.localQualifier === "0") delete automation.localQualifier;
+    delete automation.documents;
+    if (automation.localIdentifiers || automation.localQualifier && !automation.local) automation.local = {};
+    if (automation.localIdentifiers) {
+      automation.local.identifiers = automation.localIdentifiers;
+      delete automation.localIdentifiers;
+    }
+    if (automation.localQualifier) {
+      automation.local.qualifier = automation.localQualifier;
+      delete automation.localQualifier;
+    }
+    if (automation.local?.qualifier === "0") delete automation.local.qualifier;
+  } else {
+    if (automation.localQualifier) {
+      automation.qualifier = automation.localQualifier;
+      delete automation.localQualifier;
     }
   }
 }

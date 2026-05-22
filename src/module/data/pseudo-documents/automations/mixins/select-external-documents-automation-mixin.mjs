@@ -1,6 +1,7 @@
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
+import { IdentifierSetField } from "../../../fields/_module.mjs";
 import { migrateKey, migrateUuid } from "../../../shared/migrations/source-migrations.mjs";
 import SelectAutomationMixin from "./select-automation-mixin.mjs";
 
@@ -13,6 +14,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
      * @property {boolean} automatic
      * @property {boolean} multi
      * @property {Set<UUID<TeriockDocument>>} uuids
+     * @property {Set<TypedIdentifier>} identifiers
      */
     class SelectExternalDocumentsAutomation extends mixClasses(Base, SelectAutomationMixin) {
       /** @inheritDoc */
@@ -20,7 +22,10 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), { uuids: new fields.SetField(new fields.DocumentUUIDField()) });
+        return Object.assign(super.defineSchema(), {
+          identifiers: new IdentifierSetField(),
+          uuids: new fields.SetField(new fields.DocumentUUIDField()),
+        });
       }
 
       /** @inheritDoc */
@@ -39,7 +44,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        * @return {string[]}
        */
       get _selectionPaths() {
-        return ["uuids", "hr", ...this._selectionOptionPaths];
+        return ["identifiers", "uuids", "hr", ...this._selectionOptionPaths];
       }
 
       /**
@@ -47,7 +52,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        * @returns {boolean}
        */
       get hasDocuments() {
-        return this.uuids.size > 0;
+        return this.uuids.size > 0 || this.identifiers.size > 0;
       }
 
       /** @inheritDoc */
@@ -83,13 +88,14 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        * @return {Promise<UUID<TeriockDocument>[]>}
        */
       async choose(options = {}) {
+        if (!this.hasDocuments) return [];
         const docs = await this._choose({ expandFolders: true, expandTables: true, ...options });
         return docs.map(d => d.uuid);
       }
 
       /** @inheritDoc */
       async getDocuments(options = {}) {
-        return resolveDocuments(this.uuids, options);
+        return resolveDocuments([...Array.from(this.uuids), ...Array.from(this.identifiers)], options);
       }
     }
   );

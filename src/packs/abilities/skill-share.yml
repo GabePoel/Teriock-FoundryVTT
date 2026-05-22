@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.61
+  systemVersion: 0.12.63
 img: systems/teriock/src/icons/abilities/skill-share.webp
 name: Skill Share
 system:
@@ -15,10 +15,11 @@ system:
       automatic: true
       competencies:
         - 0
+      local:
+        qualifier: >-
+          and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+          lte(@class.rank, 1))
       multi: false
-      qualifier: >-
-        and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-        lte(@class.rank, 1))
       type: addDocuments
     DKrkwLcllE5f9bjQ:
       _id: DKrkwLcllE5f9bjQ
@@ -26,10 +27,11 @@ system:
       automatic: true
       competencies:
         - 1
+      local:
+        qualifier: >-
+          and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+          lte(@class.rank, 1 + @p))
       multi: false
-      qualifier: >-
-        and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-        lte(@class.rank, 1 + @p))
       type: addDocuments
     LTtFZkqLk2QnwOfK:
       _id: LTtFZkqLk2QnwOfK
@@ -37,10 +39,11 @@ system:
       automatic: true
       competencies:
         - 2
+      local:
+        qualifier: >-
+          and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+          lte(@class.rank, 1 + @f))
       multi: false
-      qualifier: >-
-        and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-        lte(@class.rank, 1 + @f))
       type: addDocuments
     XdlHsYQu4RHDULLu:
       _id: XdlHsYQu4RHDULLu
@@ -48,6 +51,9 @@ system:
         raw: 0
       overrideCompetence: true
       prevent: false
+      preventEffect: false
+      preventFeat: false
+      preventThreshold: false
       type: modifyEffect
   class: corsair
   competence:
