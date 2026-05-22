@@ -56,6 +56,9 @@ export default Base => {
           this.protections.resistances.effectTypes.add("healing");
           this.protections.resistances.effectTypes.add("revival");
         }
+        if (this.parent.statuses.has("frenzied")) {
+          this.protections.resistances.statuses.add("frightened");
+        }
       }
 
       /**

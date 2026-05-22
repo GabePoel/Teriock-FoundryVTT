@@ -1,35 +1,36 @@
 @use "mixins";
 
-@import "themes";
-@import "page-sizing";
-@import "ui/panel";
-@import "components/compendium";
-@import "ui/editor";
-@import "ui/content-link";
-@import "components/chat";
-@import "components/common";
-@import "ui/tooltip";
-@import "components/fields";
-@import "components/identifier-tags";
-@import "components/elder-sorcery";
-@import "components/changes";
-@import "components/character";
-@import "ui/automation";
-@import "dialogs/stat-dialogs";
-@import "utils/fonts";
-@import "components/base-effect";
-@import "components/harm";
+@use "sass:meta";
+@use "themes";
+@use "page-sizing";
+@use "ui/panel";
+@use "components/compendium";
+@use "ui/editor";
+@use "ui/content-link";
+@use "components/chat";
+@use "components/common";
+@use "ui/tooltip";
+@use "components/fields";
+@use "components/identifier-tags";
+@use "components/elder-sorcery";
+@use "components/changes";
+@use "components/character";
+@use "ui/automation";
+@use "dialogs/stat-dialogs";
+@use "utils/fonts";
+@use "components/base-effect";
+@use "components/harm";
 
 .teriock {
-  @import "ui/forms";
-  @import "dialogs/token-select";
-  @import "dialogs/settings";
-  @import "utils/interactive";
-  @import "components/common";
-  @import "components/child";
-  @import "components/death-bag";
-  @import "components/hud";
-  @import "actor/condition-toggle";
+  @include meta.load-css("ui/forms");
+  @include meta.load-css("dialogs/token-select");
+  @include meta.load-css("dialogs/settings");
+  @include meta.load-css("utils/interactive");
+  @include meta.load-css("components/common");
+  @include meta.load-css("components/child");
+  @include meta.load-css("components/death-bag");
+  @include meta.load-css("components/hud");
+  @include meta.load-css("actor/condition-toggle");
 }
 
 .chat-message .message-content {

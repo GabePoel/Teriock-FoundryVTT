@@ -14,17 +14,19 @@
     .editor-content {
       > p {
         margin-inline: 0.25em;
+
+        &:first-child {
+          margin-top: 0.25em;
+        }
+
+        &:last-child {
+          margin-bottom: 0.25em;
+        }
       }
     }
 
     .editor-content {
-      > :first-child {
-        margin-top: 0;
-      }
-
-      > :last-child {
-        margin-bottom: 0;
-      }
+      @include mixins.strip-edge-margins;
     }
   }
 

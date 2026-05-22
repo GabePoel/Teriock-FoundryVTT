@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "./components/colors" as colors;
 
 :root,
@@ -11,9 +12,9 @@
   --color-block-hover-inset: color-mix(in srgb, var(--color-warm-2), transparent 50%);
   --color-block-shadow: rgba(0, 0, 0, 0.15);
   --panel-divider-style: solid;
-  --color-input-blue-bg: #{lighten(colors.$mp-blue, 35%)};
-  --color-input-grey-bg: #{darken(white, 10%)};
-  --color-input-red-bg: #{lighten(colors.$hp-red, 35%)};
+  --color-input-blue-bg: #{color.adjust(colors.$mp-blue, $lightness: 35%)};
+  --color-input-grey-bg: #{color.adjust(white, $lightness: -10%)};
+  --color-input-red-bg: #{color.adjust(colors.$hp-red, $lightness: 35%)};
   --content-link-icon-color: var(--color-dark-6);
   --content-link-text-color: var(--color-dark-2);
   --color-panel-associations-background: rgba(0 0 0 / 5%);
@@ -46,7 +47,7 @@
   --color-block-shadow: rgba(0, 0, 0, 0.4);
   --panel-divider-style: dotted;
   --color-input-blue-bg: #{colors.$mp-blue-drawer};
-  --color-input-grey-bg: #{transparentize(black, 0.25)};
+  --color-input-grey-bg: #{color.change(black, $alpha: 0.75)};
   --color-input-red-bg: #{colors.$hp-red-drawer};
   --content-link-icon-color: var(--color-light-4);
   --content-link-text-color: var(--color-light-2);

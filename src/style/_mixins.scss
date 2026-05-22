@@ -1,3 +1,6 @@
+@use "sass:math";
+@use "sass:string";
+
 @mixin warm-drop-shadow($spread: 3px, $color: var(--color-cool-4), $fade: 60%) {
   filter: drop-shadow(0 0 $spread color-mix(in srgb, $color, transparent $fade));
 }
@@ -145,7 +148,7 @@
       left: 0;
       position: absolute;
       right: 0;
-      top: -($gap / 2);
+      top: -(math.div($gap, 2));
     }
   }
 }
@@ -273,8 +276,8 @@
 }
 
 @mixin strip-edge-margins($depth: 3) {
-  $first-selector: unquote("> *:first-child");
-  $last-selector: unquote("> *:last-child");
+  $first-selector: string.unquote("> *:first-child");
+  $last-selector: string.unquote("> *:last-child");
 
   $current-first: $first-selector;
   $current-last: $last-selector;
