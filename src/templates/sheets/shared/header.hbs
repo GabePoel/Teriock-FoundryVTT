@@ -32,15 +32,20 @@
     />
   </div>
   <div class="ab-title affix">
-    {{#if (not (eq source.name system.fullName))}}
-      <span class="ab-title-text tfont unselected">
-        {{ system.fullName }}
-      </span>
+    {{#if (exists system.fullName)}}
+      {{formInput
+        fields.name
+        value=system.fullName
+        classes="tfont unselected"
+        placeholder=(localize "TERIOCK.SHEETS.Common.HEADER.name")
+        name="fullName"
+        editable=false
+      }}
     {{/if}}
     {{formInput
       fields.name
       value=source.name
-      classes="tfont selected"
+      classes=(ifThen (exists system.fullName) "tfont selected" "tfont")
       placeholder=(localize "TERIOCK.SHEETS.Common.HEADER.name")
     }}
   </div>
