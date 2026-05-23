@@ -1,6 +1,7 @@
 import { iconStyles } from "../constants/display/_module.mjs";
 import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { formulaExists } from "./formula.mjs";
+import { createElement } from "./html.mjs";
 import { localizeChoices } from "./localization.mjs";
 import { toCamelCase, toTitleCase } from "./string.mjs";
 
@@ -22,9 +23,7 @@ export function makeIcon(icon, ...styles) {
  * @returns {HTMLElement}
  */
 export function makeIconElement(icon, ...styles) {
-  const iconElement = document.createElement("i");
-  iconElement.className = makeIconClass(icon, ...styles);
-  return iconElement;
+  return createElement("i", { className: makeIconClass(icon, ...styles) });
 }
 
 /**

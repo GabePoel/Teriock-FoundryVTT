@@ -3,7 +3,7 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { createDialogFieldset } from "../../../../helpers/html.mjs";
+import { createDialogInput } from "../../../../helpers/html.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
@@ -139,7 +139,7 @@ export default function AbilityExecutionGetInputPart(Base) {
       /** @inheritDoc */
       get requiresCompetence() {
         return (super.requiresCompetence
-          || this.automations.filter(a => a.requiresCompetence).length !== 0
+          || this.automations.filter(a => a?.requiresCompetence).length !== 0
           || !!this.source.system.overview.proficient
           || !!this.source.system.overview.fluent
           || (this.source.system.heightened && !this.flags.noHeighten));
@@ -154,7 +154,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         for (const [k, v] of Object.entries(TERIOCK.config.cost.primary.keys)) {
           if (this.#shouldShowCostPrompt(k)) {
             dialogs.push(
-              createDialogFieldset(
+              createDialogInput(
                 _loc("TERIOCK.COSTS.Long.primary", { key: v.label }),
                 await TeriockTextEditor.enrichHTML(this.source.system.costs.primary[k].description),
                 k,
@@ -169,7 +169,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             relativeTo: this.source,
           });
           dialogs.push(
-            createDialogFieldset(
+            createDialogInput(
               _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened"),
               heightenDescription,
               "heightened",

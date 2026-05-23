@@ -16,41 +16,24 @@ export function elementClass(elements) {
  * @param {number} [max] - The maximum value for the number input.
  * @returns {string} HTML string for the dialog fieldset.
  */
-export function createDialogFieldset(legend, description, name, max = Infinity) {
-  return `
-    <fieldset><legend>${legend}</legend>
-      <div>${description}</div>
-      <input placeholder="0" type="number" name="${name}" min="0" max="${max}" step="1">
-    </fieldset>`;
-}
-
-/**
- * Unpack the consequence of the "apply effect" button.
- * @param {AbilityExecution} execution
- * @param {object} [options]
- * @param {"normal"|"crit"} [options.useType]
- * @returns {TeriockConsequence | null}
- */
-export function unpackEffectButton(execution, options = {}) {
-  const { useType = "normal" } = options;
-  const button = execution.chatData.system.buttons.find(b => b.dataset);
-  if (button) return JSON.parse(button.dataset[useType]);
-  return null;
-}
-
-/**
- * Pack the consequence of the "apply effect" button.
- * @param {AbilityExecution} execution
- * @param {TeriockConsequence} consequence
- * @param {object} [options]
- * @param {string[]} [options.useTypes]
- */
-export function packEffectButton(execution, consequence, options = {}) {
-  const { useTypes = ["normal", "crit"] } = options;
-  const button = execution.chatData.system.buttons.find(b => b.dataset);
-  if (button) {
-    for (const useType of useTypes) button.dataset[useType] = JSON.stringify(consequence);
-  }
+export function createDialogInput(legend, description, name, max = Infinity) {
+  const field = new foundry.data.fields.NumberField({
+    integer: true,
+    max,
+    min: 0,
+    nullable: false,
+    placeholder: "0",
+    step: 1,
+  });
+  const formGroup = field.toFormGroup({ hint: "TEMP", label: legend }, {
+    name,
+    rootId: foundry.utils.randomID(),
+    value: 0,
+  });
+  formGroup.querySelectorAll(".hint").forEach(hint =>
+    hint.replaceWith(createElement("div", { className: "hint", innerHTML: description }))
+  );
+  return formGroup.outerHTML;
 }
 
 /**
@@ -79,4 +62,20 @@ export function queryAll(root, selector) {
   if (root.matches(selector)) result.push(root);
   result.push(...root.querySelectorAll(selector));
   return result;
+}
+
+/**
+ * Create an element with pre-defined attributes. These can use the normal foundry "." notation.
+ * @template {keyof HTMLElementTagNameMap} K
+ * @param {K} tagName
+ * @param {Partial<HTMLElementTagNameMap[K]> & object} attributes
+ * @returns {HTMLElementTagNameMap[K]}
+ */
+export function createElement(tagName, attributes) {
+  const element = document.createElement(tagName);
+  for (const [k, v] of Object.entries(foundry.utils.flattenObject(attributes))) {
+    if (k.includes(".")) foundry.utils.setProperty(element, k, v);
+    else element[k] = v;
+  }
+  return element;
 }

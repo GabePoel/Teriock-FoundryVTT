@@ -1,4 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
+import { createElement } from "../../helpers/html.mjs";
 import { classPanel, tradecraftPanel } from "../../helpers/panel.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
@@ -44,13 +45,10 @@ export async function selectDialog(choices, options = {}) {
   const selectField = new fields.StringField({ choices, hint, initial, label, required });
   selectContentHtml.append(selectField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "selected" }));
   if (hintHtml.length > 0) {
-    const appendHtmlString = await TextEditor.enrichHTML(hintHtml);
-    const appendHtmlElement = document.createElement("div");
-    appendHtmlElement.innerHTML = appendHtmlString;
+    const appendHtmlElement = createElement("div", { innerHTML: await TextEditor.enrichHTML(hintHtml) });
     if (hintTitle.length > 0) {
       const fieldsetElement = document.createElement("fieldset");
-      const fieldsetLegend = document.createElement("legend");
-      fieldsetLegend.innerText = hintTitle;
+      const fieldsetLegend = createElement("legend", { innerText: hintTitle });
       fieldsetElement.append(fieldsetLegend);
       fieldsetElement.append(appendHtmlElement);
       selectContentHtml.append(fieldsetElement);

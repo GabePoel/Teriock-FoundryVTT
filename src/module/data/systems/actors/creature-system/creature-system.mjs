@@ -12,11 +12,7 @@ import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 export default class CreatureSystem extends BaseActorSystem {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      indexCategoryKey: "creatures",
-      indexCompendiumKey: "creatures",
-      type: "creature",
-    });
+    return foundry.utils.mergeObject(super.metadata, { type: "creature" });
   }
 
   /** @inheritDoc */

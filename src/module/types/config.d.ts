@@ -18,6 +18,15 @@ declare global {
 
     export type CurrencyEntry = { abbreviation: string, label: string, value: number, weight: number };
 
+    export type WikiNamespaceEntry = {
+      collection?: string;
+      icon: string;
+      identifierType?: string;
+      packs: string[];
+      parentKey: string;
+      type: string;
+    };
+
     export type DocumentEntry = {
       documentName: "Card" | "JournalEntryPage" | CommonDocumentName;
       getter: string;

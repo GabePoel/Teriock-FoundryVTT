@@ -103,8 +103,6 @@ export default class AbilitySystem
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability", "fluency"],
       hierarchy: true,
-      indexCategoryKey: "abilities",
-      indexCompendiumKey: "abilities",
       namespace: "Ability",
       passive: true,
       type: "ability",

@@ -7,7 +7,7 @@ declare global {
       dataset?: object;
       icon?: Teriock.EmbedData.EmbedIcon;
       tooltip?: string;
-      visible?: boolean;
+      visible?: (() => boolean) | boolean;
       onClick?: (event: PointerEvent, relative: TeriockDocument) => Promise<void>;
     };
 

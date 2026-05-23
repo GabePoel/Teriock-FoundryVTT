@@ -51,9 +51,6 @@ declare global {
       childItemTypes: Teriock.Documents.ItemType[];
       consumable: boolean;
       hierarchy: boolean;
-      indexCategoryKey?: IndexCategoryKey;
-      indexCompendiumKey?: IndexCompendiumKey;
-      modifies: ParentDocumentName;
       namespace?: string;
       pageNameKey: string;
       passive: boolean;
@@ -75,8 +72,6 @@ declare global {
       model?: ModelMetadata;
       parent: boolean;
       tooltip: boolean;
-      typed: boolean;
-      types: Teriock.Documents.CommonType[];
     };
   }
 }

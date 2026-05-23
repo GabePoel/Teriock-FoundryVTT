@@ -26,8 +26,10 @@ export default class TeriockTextEditor extends TextEditor {
   /**
    * Patched to allow for identifiers as well as UUIDs.
    * @inheritDoc
+   * @returns {DocumentHTMLEmbedConfig & { identifier?: TypedIdentifier }}
    */
   static _parseEmbedConfig(raw, options = {}) {
+    /** @type {DocumentHTMLEmbedConfig & { identifier?: TypedIdentifier }} */
     const config = super._parseEmbedConfig(raw, options);
     if (!config.uuid) {
       if (config.identifier) config.uuid = game.teriock.identifiers.get(config.identifier);
@@ -46,9 +48,9 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<Teriock.Messages.MessagePanel>}
    */
   static async enrichPanel(panel, options = {}) {
-    for (const block of panel.blocks || []) block.text = await this.enrichHTML(block.text, options);
-    for (const association of panel.associations || []) {
-      for (const card of association.cards || [])
+    await Promise.all((panel.blocks ?? []).map(async (b) => b.text = await this.enrichHTML(b.text, options)));
+    for (const association of panel.associations ?? []) {
+      for (const card of association.cards ?? [])
         if (card.uuid && card.makeTooltip) card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML);
     }
     return panel;
@@ -61,8 +63,7 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<Teriock.Messages.MessagePanel[]>}
    */
   static async enrichPanels(panels, options = {}) {
-    for (const panel of panels) await this.enrichPanel(panel, options);
-    return panels;
+    return Promise.all(panels.map(p => this.enrichPanel(p, options)));
   }
 
   /**
@@ -79,7 +80,7 @@ export default class TeriockTextEditor extends TextEditor {
     if (options.noBlocks) delete parts.blocks;
     if (options.noAssociations) delete parts.associations;
     await this.enrichPanel(parts, options);
-    return await this.renderTemplate("teriock/ui/panel", parts);
+    return this.renderTemplate("teriock/ui/panel", parts);
   }
 
   /**
@@ -89,6 +90,6 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<string>}
    */
   static async renderTemplate(path, data) {
-    return await foundry.applications.handlebars.renderTemplate(path, { ...data, TERIOCK });
+    return foundry.applications.handlebars.renderTemplate(path, { ...data, TERIOCK });
   }
 }

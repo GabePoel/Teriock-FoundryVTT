@@ -75,8 +75,6 @@ export default class EquipmentSystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["equipment"],
-      indexCategoryKey: "equipment",
-      indexCompendiumKey: "equipment",
       namespace: "Equipment",
       pageNameKey: "system.equipmentType",
       type: "equipment",

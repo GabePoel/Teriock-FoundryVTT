@@ -6,12 +6,24 @@
   gap: 8px;
 }
 
-[role="tooltip"] {
+[role="tooltip"]:not(.teriock-rich-tooltip) {
+  .teriock-panel {
+    padding: 0;
+    --panel-padding: 0;
+  }
+}
+
+[role="tooltip"]:not(.teriock-rich-tooltip), .teriock-rich-tooltip {
   max-height: calc(100% - 200px);
 
   .teriock-panel {
     background: transparent;
     border: none;
+  }
+}
+
+.teriock-rich-tooltip {
+  .teriock-panel {
     --panel-padding: 4px;
     padding: 4px;
     width: 300px;
@@ -70,6 +82,12 @@
 
   &:not(:has(*)) {
     display: none;
+  }
+}
+
+.teriock-description-panel {
+  .teriock-panel-body {
+    margin: 0;
   }
 }
 

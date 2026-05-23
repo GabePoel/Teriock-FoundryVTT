@@ -2,21 +2,9 @@ import { icons } from "../display/icons.mjs";
 import { documentConfig } from "./document-config.mjs";
 
 export const wikiConfig = {
-  namespaces: {
-    Ability: {
-      collection: null,
-      icon: documentConfig.ability.icon,
-      packs: ["teriock.abilities"],
-      parentKey: "name",
-      type: "ability",
-    },
-    Body: {
-      collection: null,
-      icon: documentConfig.body.icon,
-      packs: ["teriock.bodyParts"],
-      parentKey: "name",
-      type: "body",
-    },
+  namespaces: /** @type {Record<string,Teriock.Config.WikiNamespaceEntry>} */ {
+    Ability: { icon: documentConfig.ability.icon, packs: ["teriock.abilities"], parentKey: "name", type: "ability" },
+    Body: { icon: documentConfig.body.icon, packs: ["teriock.bodyParts"], parentKey: "name", type: "body" },
     Class: {
       collection: "pages",
       icon: documentConfig.rank.icon,
@@ -65,7 +53,6 @@ export const wikiConfig = {
       type: "drain",
     },
     Equipment: {
-      collection: null,
       icon: documentConfig.equipment.icon,
       packs: ["teriock.equipment"],
       parentKey: "name",
@@ -80,7 +67,6 @@ export const wikiConfig = {
       type: "text",
     },
     Property: {
-      collection: null,
       icon: documentConfig.property.icon,
       packs: ["teriock.properties"],
       parentKey: "name",

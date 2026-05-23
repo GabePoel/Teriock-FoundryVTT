@@ -1,5 +1,6 @@
 import { documentConfig } from "../../constants/config/document-config.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
+import { createElement } from "../../helpers/html.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
@@ -44,14 +45,12 @@ export default class TeriockJournalEntryPage
 
   /** @inheritDoc */
   async getPanelParts() {
-    const div = document.createElement("div");
-    div.innerHTML = this.text.content;
+    const div = createElement("div", { innerHTML: this.text.content });
     div.querySelectorAll("table").forEach(t => t.remove());
-    const html = div.innerHTML;
     return {
       ...(await super.getPanelParts()),
       blocks: [{
-        text: html,
+        text: div.innerHTML,
         title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
       icon: documentConfig[this.type]?.icon

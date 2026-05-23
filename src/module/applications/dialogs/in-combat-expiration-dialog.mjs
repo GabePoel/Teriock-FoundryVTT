@@ -1,5 +1,6 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
@@ -29,26 +30,26 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
     if (expire) await effect.system.expire();
   } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
     const contentHtml = document.createElement("div");
+    const rootId = foundry.utils.randomID();
     if (effect.system.expirations.description) {
       const descriptionElement = document.createElement("fieldset");
-      const descriptionLegend = document.createElement("legend");
-      descriptionLegend.innerText = _loc("TERIOCK.DIALOGS.InCombatExpiration.endConditionLegend");
-      descriptionElement.append(descriptionLegend);
-      const descriptionText = await TextEditor.enrichHTML(effect.system.expirations.description);
-      const descriptionDiv = document.createElement("div");
-      descriptionDiv.innerHTML = descriptionText;
-      descriptionElement.append(descriptionDiv);
+      descriptionElement.append(
+        createElement("legend", { innerText: _loc("TERIOCK.DIALOGS.InCombatExpiration.endConditionLegend") }),
+      );
+      descriptionElement.append(
+        createElement("div", { innerText: await TextEditor.enrichHTML(effect.system.expirations.description) }),
+      );
       contentHtml.append(descriptionElement);
     }
     contentHtml.append(
-      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.roll.toFormGroup({
-        rootId: foundry.utils.randomID(),
-      }, { name: "roll", value: effect.system.expirations.combat.what.roll }),
-    );
-    contentHtml.append(
-      effect.system.schema.fields.expirations.fields.combat.fields.what.fields.threshold.toFormGroup({
-        rootId: foundry.utils.randomID(),
-      }, { name: "threshold", value: effect.system.expirations.combat.what.threshold }),
+      effect.getFieldForProperty("system.expirations.combat.what.roll").toFormGroup({ rootId }, {
+        name: "roll",
+        value: effect.system.expirations.combat.what.roll,
+      }),
+      effect.getFieldForProperty("system.expirations.combat.what.threshold").toFormGroup({ rootId }, {
+        name: "threshold",
+        value: effect.system.expirations.combat.what.threshold,
+      }),
     );
     await new TeriockDialog({
       buttons: [{

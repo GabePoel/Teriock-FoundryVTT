@@ -20,38 +20,37 @@ const { fields } = foundry.data;
 export default async function boostDialog(rollFormula, options = {}) {
   const { crit = false, impact, label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok") } = options;
   let formula = rollFormula;
-  const formulaField = new FormulaField({
-    deterministic: false,
-    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
-    initial: rollFormula,
-    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),
-    placeholder: "0",
-  });
-  const boostsField = new fields.NumberField({
-    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
-    initial: (options.boosts ?? 0) > 0 ? options.boosts : undefined,
-    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
-    min: 0,
-    placeholder: "0",
-  });
-  const deboostsField = new fields.NumberField({
-    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
-    initial: (options.boosts ?? 0) < 0 ? -options.boosts : undefined,
-    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
-    min: 0,
-    placeholder: "0",
-  });
-  const critField = new fields.BooleanField({
-    hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.hint"),
-    initial: crit,
-    label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
-    placeholder: "0",
-  });
   const contentHtml = document.createElement("div");
-  contentHtml.append(formulaField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "formula" }));
-  contentHtml.append(boostsField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "boosts" }));
-  contentHtml.append(deboostsField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "deboosts" }));
-  contentHtml.append(critField.toFormGroup({ rootId: foundry.utils.randomID() }, { name: "crit" }));
+  const rootId = foundry.utils.randomID();
+  contentHtml.append(
+    new FormulaField({
+      deterministic: false,
+      hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.hint"),
+      initial: rollFormula,
+      label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.formula.label"),
+      placeholder: "0",
+    }).toFormGroup({ rootId }, { name: "formula" }),
+    new fields.NumberField({
+      hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint"),
+      initial: (options.boosts ?? 0) > 0 ? options.boosts : undefined,
+      label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.boosts.label"),
+      min: 0,
+      placeholder: "0",
+    }).toFormGroup({ rootId }, { name: "boosts" }),
+    new fields.NumberField({
+      hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint"),
+      initial: (options.boosts ?? 0) < 0 ? -options.boosts : undefined,
+      label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label"),
+      min: 0,
+      placeholder: "0",
+    }).toFormGroup({ rootId }, { name: "deboosts" }),
+    new fields.BooleanField({
+      hint: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.hint"),
+      initial: crit,
+      label: _loc("TERIOCK.DIALOGS.Boost.FIELDS.crit.label"),
+      placeholder: "0",
+    }).toFormGroup({ rootId }, { name: "crit" }),
+  );
   return await TeriockDialog.prompt({
     content: contentHtml,
     modal: true,

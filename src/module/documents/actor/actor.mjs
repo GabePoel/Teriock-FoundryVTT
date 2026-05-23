@@ -28,11 +28,6 @@ export default class TeriockActor
     mixins.RetrievalDocumentMixin,
   )
 {
-  /** @inheritDoc */
-  static get documentMetadata() {
-    return Object.assign(super.documentMetadata, { types: Object.keys(CONFIG.Actor.dataModels) });
-  }
-
   /**
    * The default weight for a given size.
    *

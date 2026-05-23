@@ -75,6 +75,7 @@ export default class AddDocumentsActivation extends BaseActivation {
       if (doc) Object.assign(data, doc.toObject(true));
     }
     if (docConstruct.data) foundry.utils.mergeObject(data, docConstruct.data, { inplace: true });
+    if (!data.origin) data.origin = this.document?.system._src;
     foundry.utils.setProperty(data, "flags.teriock.createdBy", this.puuid);
     return data;
   }

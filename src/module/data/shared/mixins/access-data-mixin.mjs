@@ -1,3 +1,5 @@
+import { createElement } from "../../../helpers/html.mjs";
+
 /**
  * Mixin to ensure data models have access to the data they need.
  * @param {typeof DataModel | typeof TypeDataModel} Base
@@ -55,8 +57,7 @@ export default function AccessDataMixin(Base) {
        * @returns {Promise<HTMLDivElement>}
        */
       async _getEditorForms() {
-        const group = document.createElement("div");
-        group.classList.add("teriock-form-container");
+        const group = createElement("div", { className: "teriock-form-container" });
         this._makeFormGroups(this._formPaths).forEach(fg => group.append(fg));
         return group;
       }

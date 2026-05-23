@@ -58,9 +58,6 @@ export default class PropertySystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["property"],
-      indexCategoryKey: "properties",
-      indexCompendiumKey: "properties",
-      modifies: "Item",
       namespace: "Property",
       passive: true,
       type: "property",
@@ -115,15 +112,6 @@ export default class PropertySystem
       label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
       wrappers: [TERIOCK.config.effect.form[this.form].label, ...simplifyTags(this._metaphysicsTags)],
     }];
-  }
-
-  /**
-   * @inheritDoc
-   * @returns {"Actor"|"Item"}
-   */
-  get modifies() {
-    if (this.modifiesActor) return "Actor";
-    return super.modifies;
   }
 
   /** @inheritDoc */

@@ -64,7 +64,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
         conditions: conditionRequirementsField(),
         description: new fields.StringField(),
         sustained: new fields.BooleanField(),
-        triggers: new fields.SetField(new fields.StringField({ choices: DurationModel._triggerChoices })),
+        triggers: new fields.SetField(new fields.StringField({ choices: DurationModel.triggerChoices })),
       }),
       heightened: new fields.NumberField(),
     });
@@ -119,6 +119,13 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
     return Object.assign(super.embedParts, { subtitle: this.parent.remainingString });
   }
 
+  /** @inheritDoc */
+  get isTemporary() {
+    return super.isTemporary || this.expirations.combat.what.type !== "none" || !!this.expirations.triggers.size
+      || !!this.expirations.description || !!this.expirations.conditions.absent.size
+      || !!this.expirations.conditions.present.size;
+  }
+
   /**
    * Gets the maneuver type for this effect.
    * Effects are always passive maneuvers.
@@ -126,6 +133,11 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
    */
   get maneuver() {
     return "passive";
+  }
+
+  /** @inheritDoc */
+  get messageBars() {
+    return [this._durationBar, this._statusBar];
   }
 
   /** @inheritDoc */
@@ -175,11 +187,6 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
     await this.inCombatExpiration(true);
   }
 
-  /** @inheritDoc */
-  async getPanelParts() {
-    return Object.assign(await super.getPanelParts(), { bars: [this._durationBar, this._statusBar] });
-  }
-
   /**
    * Trigger in-combat expiration.
    * @param {boolean} [forceDialog] - Force a dialog to show up.
@@ -187,6 +194,29 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
    */
   async inCombatExpiration(forceDialog = false) {
     await inCombatExpirationDialog(this.parent, forceDialog);
+  }
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    super.prepareDerivedData();
+    const blocks = this.messageBlocks;
+    if (!blocks?.length) return;
+    const blocksHTML = blocks.reduce((acc, block) => {
+      if (!block.text) return acc;
+      const safeTitle = foundry.utils.escapeHTML(block.title || "");
+      const extraClasses = block.classes ? ` ${block.classes}` : "";
+      return acc + `
+      <div class="teriock-panel-block${extraClasses}">
+        <div class="teriock-panel-block-title">${safeTitle}</div>
+        <div class="teriock-panel-block-text">${block.text}</div>
+      </div>`;
+    }, "");
+    if (blocksHTML) {
+      this.parent.description = `
+      <div class="teriock-panel teriock-description-panel">
+        <div class="teriock-panel-body">${blocksHTML}</div>
+      </div>`;
+    }
   }
 
   /** @inheritDoc */

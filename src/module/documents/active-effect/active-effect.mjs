@@ -24,11 +24,6 @@ export default class TeriockActiveEffect
   )
 {
   /** @inheritDoc */
-  static get documentMetadata() {
-    return Object.assign(super.documentMetadata, { types: Object.keys(CONFIG.ActiveEffect.dataModels) });
-  }
-
-  /** @inheritDoc */
   static migrateData(source, options, state) {
     migrateValueTransform(source, "_stats.compendiumSource", migrateUuid);
     return super.migrateData(source, options, state);
@@ -48,6 +43,11 @@ export default class TeriockActiveEffect
    */
   get isStatus() {
     return Object.values(CONFIG.statusEffects).map(s => s?._id).includes(this.id);
+  }
+
+  /** @inheritDoc */
+  get isTemporary() {
+    return super.isTemporary || !!this.system.isTemporary;
   }
 
   /**

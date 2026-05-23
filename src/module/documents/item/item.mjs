@@ -25,11 +25,6 @@ export default class TeriockItem
   )
 {
   /** @inheritDoc */
-  static get documentMetadata() {
-    return Object.assign(super.documentMetadata, { types: Object.keys(CONFIG.Item.dataModels) });
-  }
-
-  /** @inheritDoc */
   static async _onWriteOperation(documents, operation, user) {
     const actors = new Set();
     for (const d of documents) if (d.actor) actors.add(d.actor);

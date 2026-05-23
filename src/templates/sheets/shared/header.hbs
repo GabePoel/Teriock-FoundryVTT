@@ -32,28 +32,17 @@
     />
   </div>
   <div class="ab-title affix">
-    <label data-debug="true">
-      {{#if (not (eq name system.fullName))}}
-        <span class="ab-title-text tfont unselected">
-          {{ system.fullName }}
-        </span>
-      {{/if}}
-      <input
-        class="
-          tfont
-          {{#if (not (eq name system.fullName))}}
-            selected
-          {{/if}}
-        "
-        type="text"
-        name="name"
-        value="{{ name }}"
-        placeholder='{{ "TERIOCK.SHEETS.Common.HEADER.name" }}'
-        {{#if (not editable)}}
-          readonly="readonly"
-        {{/if}}
-      />
-    </label>
+    {{#if (not (eq source.name system.fullName))}}
+      <span class="ab-title-text tfont unselected">
+        {{ system.fullName }}
+      </span>
+    {{/if}}
+    {{formInput
+      fields.name
+      value=source.name
+      classes="tfont selected"
+      placeholder=(localize "TERIOCK.SHEETS.Common.HEADER.name")
+    }}
   </div>
   {{#if system.competence}}
     <div

@@ -19,8 +19,6 @@ export default class BodySystem extends mixClasses(BaseItemSystem, mixins.WikiSy
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      indexCategoryKey: "bodyParts",
-      indexCompendiumKey: "bodyParts",
       namespace: "Body",
       pageNameKey: "name",
       type: "body",

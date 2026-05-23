@@ -41,8 +41,6 @@ export default class SpeciesSystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["body", "equipment", "rank"],
-      indexCategoryKey: "creatures",
-      indexCompendiumKey: "species",
       namespace: "Creature",
       type: "species",
       visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],

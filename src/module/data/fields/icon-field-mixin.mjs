@@ -1,3 +1,4 @@
+import { createElement } from "../../helpers/html.mjs";
 import { makeIconElement } from "../../helpers/utils.mjs";
 
 /**
@@ -24,12 +25,9 @@ export default function iconFieldMixin(Base, optionsIndex = 0) {
         const style = config.style || "light";
         const inputElement = super._toInput(config);
         if (icon) {
-          const element = document.createElement("div");
-          element.className = "icon-input";
+          const element = createElement("div", { className: "icon-input" });
           const iconElement = makeIconElement(icon, style);
-          const labelElement = document.createElement("label");
-          if (config.id) labelElement.htmlFor = config.id;
-          labelElement.dataset.tooltip = this.label || "";
+          const labelElement = createElement("label", { "dataset.tooltip": this.label || "", htmlFor: config.id });
           labelElement.appendChild(iconElement);
           element.appendChild(labelElement);
           element.appendChild(inputElement);

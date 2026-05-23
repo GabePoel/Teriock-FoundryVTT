@@ -7,7 +7,7 @@ import { icons } from "../display/icons.mjs";
  * @satisfies {Record<string, Partial<Teriock.Config.DocumentEntry>>}
  */
 export const documentConfig = {
-  ability: {
+  ability: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "abilities",
     icon: icons.document.ability,
@@ -17,7 +17,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.ability.plural",
     sorter: effectSort,
   },
-  archetype: {
+  archetype: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "archetypes",
     icon: icons.document.archetype,
@@ -25,7 +25,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.archetype.plural",
     sorter: docSort,
   },
-  attunement: {
+  attunement: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "attunements",
     icon: icons.document.attunement,
@@ -33,7 +33,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.attunement.plural",
     sorter: docSort,
   },
-  body: {
+  body: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "bodyParts",
     icon: icons.document.body,
@@ -43,7 +43,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.body.plural",
     sorter: docSort,
   },
-  character: {
+  character: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
     getter: "characters",
     icon: icons.document.character,
@@ -51,7 +51,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.character.plural",
     sorter: docSort,
   },
-  condition: {
+  condition: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "conditions",
     icon: icons.document.condition,
@@ -60,7 +60,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.condition.plural",
     sorter: docSort,
   },
-  consequence: {
+  consequence: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "consequences",
     icon: icons.document.consequence,
@@ -68,13 +68,13 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.consequence.plural",
     sorter: docSort,
   },
-  cover: {
+  cover: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     icon: icons.cover.full,
     label: "TYPES.ActiveEffect.cover",
     plural: "TYPES.ActiveEffect.cover",
   },
-  creature: {
+  creature: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
     getter: "creatures",
     icon: icons.document.creature,
@@ -83,22 +83,26 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.creature.plural",
     sorter: docSort,
   },
-  damage: {
+  damage: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
     icon: icons.effect.damage,
     index: "damageTypes",
     label: "TYPES.JournalEntryPage.damage",
     plural: "TERIOCK.DOCUMENTS.damage.plural",
   },
-  document: { icon: icons.ui.document, label: "TYPES.Base.document", plural: "TERIOCK.DOCUMENTS.document.plural" },
-  drain: {
+  document: /** @type {Teriock.Config.DocumentEntry} */ {
+    icon: icons.ui.document,
+    label: "TYPES.Base.document",
+    plural: "TERIOCK.DOCUMENTS.document.plural",
+  },
+  drain: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
     icon: icons.effect.drain,
     index: "drainTypes",
     label: "TYPES.JournalEntryPage.drain",
     plural: "TERIOCK.DOCUMENTS.drain.plural",
   },
-  effect: {
+  effect: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "effects",
     icon: icons.document.effect,
@@ -106,7 +110,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.effect.plural",
     sorter: docSort,
   },
-  equipment: {
+  equipment: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "equipment",
     icon: icons.document.equipment,
@@ -116,7 +120,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.equipment.plural",
     sorter: docSort,
   },
-  fluency: {
+  fluency: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "fluencies",
     icon: icons.document.fluency,
@@ -124,13 +128,13 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.fluency.plural",
     sorter: docSort,
   },
-  hack: {
+  hack: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     icon: icons.ui.hack,
     label: "TYPES.ActiveEffect.hack",
     plural: "TERIOCK.DOCUMENTS.hack.plural",
   },
-  imbuement: {
+  imbuement: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "imbuements",
     icon: icons.document.imbuement,
@@ -138,7 +142,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.imbuement.plural",
     sorter: docSort,
   },
-  inventory: {
+  inventory: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
     getter: "inventories",
     icon: icons.document.inventory,
@@ -146,7 +150,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.inventory.plural",
     sorter: docSort,
   },
-  mount: {
+  mount: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "mounts",
     icon: icons.document.mount,
@@ -154,7 +158,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.mount.plural",
     sorter: docSort,
   },
-  power: {
+  power: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "powers",
     icon: icons.document.power,
@@ -162,7 +166,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.power.plural",
     sorter: docSort,
   },
-  property: {
+  property: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "properties",
     icon: icons.document.property,
@@ -172,7 +176,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.property.plural",
     sorter: effectSort,
   },
-  rank: {
+  rank: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "ranks",
     icon: icons.document.rank,
@@ -182,7 +186,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.rank.plural",
     sorter: rankSort,
   },
-  resource: {
+  resource: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "resources",
     icon: icons.document.resource,
@@ -190,7 +194,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.resource.plural",
     sorter: docSort,
   },
-  species: {
+  species: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "species",
     icon: icons.document.species,
@@ -200,7 +204,7 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.species.plural",
     sorter: docSort,
   },
-  stone: {
+  stone: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Card",
     icon: icons.document.stone,
     label: "TYPES.Card.stone",

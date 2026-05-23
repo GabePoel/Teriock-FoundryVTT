@@ -1,5 +1,6 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { createElement } from "../../helpers/html.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
@@ -19,8 +20,7 @@ export default async function deathBagDialog(actor) {
     }),
   );
   const stonesHTML = document.createElement("fieldset");
-  const stonesLegendHTML = document.createElement("legend");
-  stonesLegendHTML.innerText = _loc("TERIOCK.DIALOGS.DeathBag.legend");
+  const stonesLegendHTML = createElement("legend", { innerText: _loc("TERIOCK.DIALOGS.DeathBag.legend") });
   stonesHTML.append(stonesLegendHTML);
   for (const color of ["black", "red", "white"]) {
     stonesHTML.append(

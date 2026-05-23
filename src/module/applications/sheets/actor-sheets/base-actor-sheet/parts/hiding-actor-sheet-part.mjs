@@ -1,3 +1,5 @@
+import { createElement } from "../../../../../helpers/html.mjs";
+
 /**
  * @param {typeof BaseActorSheet} Base
  */
@@ -10,7 +12,7 @@ export default Base =>
     static DEFAULT_OPTIONS = { actions: { toggleHideThis: this._onToggleHideThis } };
 
     /**
-     * Toggles the lock state of the current sheet.
+     * Toggles the hiding state of the current sheet.
      * @returns {Promise<void>}
      */
     static async _onToggleHideThis() {
@@ -30,12 +32,9 @@ export default Base =>
     #setToggleHideButtonAttributes(toggleButton) {
       toggleButton.classList.remove(...["fa-eye", "fa-eye-slash"]);
       toggleButton.classList.add(...[this._hideInactive ? "fa-eye-slash" : "fa-eye"]);
-      toggleButton.setAttribute(
-        "data-tooltip",
-        this._hideInactive
-          ? _loc("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.on")
-          : _loc("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.off"),
-      );
+      toggleButton.dataset.tooltip = this._hideInactive
+        ? _loc("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.on")
+        : _loc("TERIOCK.SHEETS.Actor.ACTIONS.HideInactive.off");
     }
 
     /** @inheritDoc */
@@ -53,9 +52,10 @@ export default Base =>
     /** @inheritDoc */
     async _renderFrame(options = {}) {
       const frame = await super._renderFrame(options);
-      const toggleButton = document.createElement("button");
-      toggleButton.classList.add(...["header-control", "icon", "fa-solid"]);
-      toggleButton.setAttribute("data-action", "toggleHideThis");
+      const toggleButton = createElement("button", {
+        className: "header-control icon fa-solid",
+        dataset: { action: "toggleHideThis" },
+      });
       this.#setToggleHideButtonAttributes(toggleButton);
       this.window.controls.before(toggleButton);
       return frame;

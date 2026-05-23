@@ -19,11 +19,6 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   static PRESERVED_PROPERTIES = ["disabled", "duration", "tint", "transfer", ...super.PRESERVED_PROPERTIES];
 
   /** @inheritDoc */
-  static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { modifies: "Actor" });
-  }
-
-  /** @inheritDoc */
   static defineSchema() {
     return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
       ...super.defineSchema(),
@@ -135,6 +130,14 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   }
 
   /**
+   * Whether this is temporary due to type-specific behavior.
+   * @returns {boolean}
+   */
+  get isTemporary() {
+    return false;
+  }
+
+  /**
    * Changes to apply to the parent item.
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
@@ -151,14 +154,6 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
       || this._isSuppressedShattered
       || this._isSuppressedStashed
       || this._isSuppressedUnequipped);
-  }
-
-  /**
-   * What this modifies.
-   * @returns {ParentDocumentName}
-   */
-  get modifies() {
-    return this.metadata.modifies;
   }
 
   /**

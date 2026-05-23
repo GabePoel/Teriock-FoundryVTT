@@ -1,5 +1,6 @@
 import { typedIdentifierValidator } from "../../data/fields/helpers/validators.mjs";
-import { inferNameFromIdentifier, parseIdentifier } from "../../helpers/utils.mjs";
+import { createElement } from "../../helpers/html.mjs";
+import { inferNameFromIdentifier, makeIconClass, parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { AbstractFormInputElement, HTMLStringTagsElement } = foundry.applications.elements;
@@ -290,21 +291,19 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /** @override */
   _buildElements() {
-    this.#tags = document.createElement("div");
-    this.#tags.className = "tags input-element-tags";
-
-    this.#input = this._primaryInput = document.createElement("input");
-    this.#input.type = "text";
-    const typeLabel = this.#resolvePlaceholderTypeLabel();
-    this.#input.placeholder = this.getAttribute("placeholder")
-      || _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.placeholder", { type: _loc(typeLabel) });
-
-    this.#button = document.createElement("button");
+    this.#tags = createElement("div", { className: "tags input-element-tags" });
+    this.#input = this._primaryInput = createElement("input", {
+      placeholder: this.getAttribute("placeholder")
+        || _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.placeholder", { type: _loc(this.#resolvePlaceholderTypeLabel()) }),
+      type: "text",
+    });
+    this.#button = createElement("button", {
+      ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.add"),
+      className: "icon " + makeIconClass("fa-magnifying-glass-plus", "button"),
+      dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.add" },
+      type: "button",
+    });
     this.#button.type = "button";
-    this.#button.className = "icon fa-solid fa-magnifying-glass-plus";
-    this.#button.dataset.tooltip = "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.add";
-    this.#button.setAttribute("aria-label", _loc(this.#button.dataset.tooltip));
-
     return [this.#tags, this.#input, this.#button];
   }
 

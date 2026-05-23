@@ -34,8 +34,6 @@ export default class RankSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      indexCategoryKey: "classes",
-      indexCompendiumKey: "classes",
       namespace: "Class",
       pageNameKey: "system.className",
       type: "rank",

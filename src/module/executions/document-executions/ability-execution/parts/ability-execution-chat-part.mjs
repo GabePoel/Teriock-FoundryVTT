@@ -34,7 +34,9 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {string} key
        */
       #addTrackersToMap(trackers, key) {
-        this.#trackerMap[key].push(...trackers.filter(t => !this.#trackerMap[key].map(e => e.value).includes(t.value)));
+        this.#trackerMap[key].push(
+          ...trackers.filter(t => !this.#trackerMap[key].map(e => e?.value).includes(t?.value)),
+        );
       }
 
       /**
@@ -68,7 +70,13 @@ export default function AbilityExecutionChatPart(Base) {
        */
       #generateAssociationCard(uuid) {
         const doc = fromUuidSync(uuid);
-        return { id: doc.id, img: doc.img || doc.img, name: doc.name, rescale: doc.rescale, type: "base", uuid };
+        return {
+          id: /** @type {ID<TeriockDocument>} */ doc.id,
+          img: doc.img || doc.img,
+          name: doc.name,
+          rescale: doc.rescale,
+          uuid,
+        };
       }
 
       /**
@@ -236,6 +244,7 @@ export default function AbilityExecutionChatPart(Base) {
           duration: { expiry: null, seconds: await this.#generateEffectDuration(crit) },
           img: this.source.img,
           name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", { name: this.source.name }),
+          origin: this.source.uuid,
           showIcon: 0,
           system: {
             _dep: this.source.system.sustained && game.teriock.getSetting("trackSustainedConsequences")
@@ -402,9 +411,9 @@ export default function AbilityExecutionChatPart(Base) {
         await super._buildActivations();
 
         // Replace `@h` with heightening amount in all rolls
-        this.activations.filter(a => a.type === acts.RollActivation.TYPE).forEach(a => {
+        this.activations.filter(a => a?.type === acts.RollActivation.TYPE).forEach(a => {
           a.formula = this._heightenString(a.formula);
-          a.updateSource({ formula: this._heightenString(a.formula) });
+          a?.updateSource({ formula: this._heightenString(a.formula) });
         });
       }
 

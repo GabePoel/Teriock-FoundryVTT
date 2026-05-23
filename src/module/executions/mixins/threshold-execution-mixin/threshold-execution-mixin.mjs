@@ -4,6 +4,7 @@ import { FormulaField } from "../../../data/fields/_module.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { createElement } from "../../../helpers/html.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -202,15 +203,14 @@ export default function ThresholdExecutionMixin(Base) {
        */
       async _showRollDialog() {
         const rootId = foundry.utils.randomID();
-        const content = document.createElement("div");
-        content.classList.add("teriock-form-container");
+        const content = createElement("div", { className: "teriock-form-container" });
         let hasFields = false;
-        const mainContainer = document.createElement("div");
-        mainContainer.classList.add("teriock-form-container");
-        const smallContainer = document.createElement("div");
-        smallContainer.classList.add("ttable");
-        smallContainer.style.rowGap = "0.75rem";
-        smallContainer.style.columnGap = "1.5rem";
+        const mainContainer = createElement("div", { className: "teriock-form-container" });
+        const smallContainer = createElement("div", {
+          className: "ttable",
+          "style.columnGap": "1.5rem",
+          "style.rowGap": "0.75rem",
+        });
         let hasSmallFields = false;
         for (const f of this._dialogFields) {
           if (typeof f.condition === "boolean" && !f.condition) continue;

@@ -1,3 +1,4 @@
+import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
@@ -10,8 +11,7 @@ import { TeriockDialog } from "../api/_module.mjs";
  */
 export default async function updateDialog(doc, paths, title, icon = "file-pen") {
   const resolvedTitle = title ?? _loc("TERIOCK.DIALOGS.Update.defaults.title");
-  const content = document.createElement("div");
-  content.classList.add("teriock-form-container");
+  const content = createElement("div", { className: "teriock-form-container" });
   for (const path of paths) {
     const schema = doc.getSchema(path);
     const value = foundry.utils.getProperty(doc, `_source.${path}`);

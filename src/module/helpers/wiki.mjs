@@ -19,6 +19,7 @@ export function openWikiPage(title) {
 export async function wikiToUuid(namespace, name) {
   const config = TERIOCK.config.wiki.namespaces[namespace];
   if (!config) return null;
+  /** @type {CompendiumCollection[]} */
   const packs = config.packs.map(p => game.packs.get(p)).filter(Boolean);
   const parentName = config.parentKey === "name" ? name : namespace;
   const candidates = [];
@@ -32,6 +33,5 @@ export async function wikiToUuid(namespace, name) {
       candidates.push(parentIndex.uuid);
     }
   }
-  if (candidates.length) return candidates[0];
-  return null;
+  return candidates.length ? candidates[0] : null;
 }

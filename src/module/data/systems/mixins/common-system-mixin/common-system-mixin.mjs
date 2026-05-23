@@ -65,10 +65,8 @@ export default function CommonSystemMixin(Base) {
           armament: false,
           childEffectTypes: [],
           childItemTypes: [],
-          childMacroTypes: [],
           consumable: false,
           hierarchy: false,
-          modifies: "Actor",
           namespace: "",
           pageNameKey: "name",
           passive: false,
@@ -104,12 +102,8 @@ export default function CommonSystemMixin(Base) {
        * @param {Teriock.EmbedData.EmbedIcon} icon
        */
       #checkEmbedIcon(icon) {
-        if (typeof icon.visible === "function") {
-          return icon.visible();
-        }
-        if (typeof icon.visible === "boolean") {
-          return icon.visible;
-        }
+        if (typeof icon.visible === "function") return icon.visible();
+        if (typeof icon.visible === "boolean") return icon.visible;
         return true;
       }
 
@@ -212,12 +206,12 @@ export default function CommonSystemMixin(Base) {
           color: this.color,
           draggable: true,
           icons: this.embedIcons.filter(i => this.#checkEmbedIcon(i)),
-          id: this.parent.id,
+          id: /** @type {ID<AnyCommonDocument>} */ this.parent.id,
           img: this.parent.img,
           inactive: !this.parent.active,
           makeTooltip: false,
           openable: true,
-          parentId: this.parent.parent?.id,
+          parentId: /** @type {ID<AnyCommonDocument>} */ this.parent.parent?.id,
           struck: this.parent.disabled,
           subtitle: TERIOCK.config.document[this.parent.type]?.label,
           text: this._masterText,
@@ -235,7 +229,7 @@ export default function CommonSystemMixin(Base) {
       get messageBlocks() {
         return fancifyFields(this.displayFields).map(f => {
           const schema = this.parent.getSchema(f.path);
-          const value = foundry.utils.getProperty(this.parent, f.path);
+          const value = foundry.utils.getProperty(this.parent._source, f.path);
           if (value && !schema.gmOnly) return { classes: f.classes, text: value, title: f.label || schema.label };
         }).filter(f => f);
       }
@@ -341,13 +335,9 @@ export default function CommonSystemMixin(Base) {
         if (Object.keys(this.parent.flags.rollData ?? {}).length) {
           Object.assign(rollData, foundry.utils.flattenObject({ flags: this.parent.flags.rollData }));
         }
-        if (this.parent.parent?.type) {
-          rollData[`parent.${this.parent.parent.type}`] = 1;
-        }
+        if (this.parent.parent?.type) rollData[`parent.${this.parent.parent.type}`] = 1;
         const actor = this.actor;
-        if (actor) {
-          Object.assign(rollData, actor.system.getScalingRollData());
-        }
+        if (actor) Object.assign(rollData, actor.system.getScalingRollData());
         return rollData;
       }
 
@@ -359,7 +349,6 @@ export default function CommonSystemMixin(Base) {
           bars: this.messageBars,
           blocks: this.messageBlocks,
           color: this.color || undefined,
-          font: this.font,
           icon: TERIOCK.config.document[this.parent.type]?.icon || TERIOCK.config.document.document.icon,
           image: this.parent.img,
           label: TERIOCK.config.document[this.parent.type]?.label || TERIOCK.config.document.document.label,
@@ -548,9 +537,7 @@ export default function CommonSystemMixin(Base) {
         const preservedProperties = options.fullOverride
           ? this.constructor.DEFAULT_PRESERVED_PROPERTIES
           : this.metadata.preservedProperties;
-        for (const p of preservedProperties || []) {
-          foundry.utils.deleteProperty(obj, p);
-        }
+        for (const p of preservedProperties || []) foundry.utils.deleteProperty(obj, p);
         return obj;
       }
     }

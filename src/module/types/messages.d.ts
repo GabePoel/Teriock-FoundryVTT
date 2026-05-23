@@ -40,7 +40,7 @@ declare global {
       pack?: string;
       rescale?: boolean;
       tooltip?: string;
-      type: Teriock.Documents.ChildType;
+      type?: Teriock.Documents.ChildType;
       uuid?: UUID<TeriockDocument>;
     };
 

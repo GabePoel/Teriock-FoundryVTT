@@ -19,15 +19,7 @@ export default function BaseDocumentMixin(Base) {
        * @returns {Teriock.Documents.DocumentMetadata}
        */
       static get documentMetadata() {
-        return {
-          child: false,
-          common: false,
-          hierarchy: false,
-          parent: false,
-          tooltip: false,
-          typed: false,
-          types: /** @type {Teriock.Documents.CommonType[]} */ [],
-        };
+        return { child: false, common: false, hierarchy: false, parent: false, tooltip: false };
       }
 
       /**

@@ -1,5 +1,6 @@
 import { wikiConfig } from "../../constants/config/wiki-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
+import { createElement } from "../../helpers/html.mjs";
 import {
   commands,
   getInteractionEntryValue,
@@ -7,7 +8,7 @@ import {
   parseArguments,
 } from "../../helpers/interaction/_module.mjs";
 import { toCamelCase, toKebabCase, toTitleCase, ucFirst } from "../../helpers/string.mjs";
-import { makeIconClass, makeIconElement, parseIdentifier } from "../../helpers/utils.mjs";
+import { makeIconClass, makeIconElement, objectMap, parseIdentifier } from "../../helpers/utils.mjs";
 import { wikiToUuid } from "../../helpers/wiki.mjs";
 import { TeriockTextEditor } from "./_module.mjs";
 
@@ -27,45 +28,55 @@ const wikiLinkEnricher = {
     let displayText = match[2];
     const namespace = pageName.split(":")[0];
     let name = pageName.split(":")[1];
+
     if (!displayText) displayText = name;
     if (Object.keys(TERIOCK.aliases[namespace.toLowerCase()] || {}).includes(name))
       name = TERIOCK.aliases[namespace.toLowerCase()][name];
+
     const urlPageName = pageName.replace(/ /g, "_");
-    const link = document.createElement("a");
     const address = `https://wiki.teriock.com/index.php/${urlPageName}`;
     const uuid = await wikiToUuid(namespace, name);
     const icon = wikiConfig.namespaces[namespace]?.icon || icons.ui.wiki;
+
+    const linkAttributes = {
+      dataset: { tooltip: pageName.replace(":", ": ") },
+      rel: "noopener noreferrer",
+      target: "_blank",
+    };
+
     if (uuid) {
       const parsed = foundry.utils.parseUuid(uuid);
-      Object.assign(link.dataset, {
-        id: parsed.id,
-        link: "",
-        makeTooltip: "true",
-        pack: parsed.collection?.collection,
-        teriockContentLink: "true",
-        type: parsed.type,
-        uuid,
-        wikiAddress: address,
-        wikiContext: "true",
+      foundry.utils.mergeObject(linkAttributes, {
+        className: "teriock-content-link",
+        dataset: {
+          id: parsed.id,
+          link: "",
+          makeTooltip: "true",
+          pack: parsed.collection?.collection,
+          teriockContentLink: "true",
+          type: parsed.type,
+          uuid,
+          wikiAddress: address,
+          wikiContext: "true",
+        },
+        draggable: true,
+      }, { inplace: true });
+    } else {
+      foundry.utils.mergeObject(linkAttributes, { className: "teriock-not-content-link", href: address }, {
+        inplace: true,
       });
-      link.className = "teriock-content-link";
-      link.draggable = true;
-    } else {
-      link.href = address;
     }
-    link.setAttribute("data-tooltip", `${pageName.replace(":", ": ")}`);
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
+
+    const link = createElement("a", linkAttributes);
     const linkText = displayText || pageName;
+
     if (icon && uuid) {
-      const iconEl = document.createElement("i");
-      iconEl.className = makeIconClass(icon, "solid");
-      iconEl.classList.remove("fa-fw");
-      link.prepend(iconEl);
+      const iconEl = createElement("i", { className: makeIconClass(icon, "solid").replace(/\bfa-fw\b/g, "").trim() });
+      link.append(iconEl, linkText);
     } else {
-      link.className = "teriock-not-content-link";
+      link.append(linkText);
     }
-    link.appendChild(document.createTextNode(linkText));
+
     return link;
   },
 };
@@ -143,9 +154,7 @@ const lookupEnricher = {
         break;
     }
 
-    const span = document.createElement("span");
-    span.textContent = text;
-    return span;
+    return createElement("span", { textContent: text });
   },
 };
 
@@ -207,7 +216,7 @@ async function executeCommandFromElement(target, operation, event) {
  * @param {EnrichmentOptions} options
  * @returns {HTMLAnchorElement}
  */
-function enrichCommand(match, options) {
+function enrichCommand(match, options = {}) {
   const { config, type } = match.groups;
   let { label = "" } = match.groups;
   const command = commands[type];
@@ -215,14 +224,17 @@ function enrichCommand(match, options) {
   if (command.formula) argumentArray = [["formula", config.trim()]];
   else argumentArray = parseArguments(config);
   const interactionOptions = interpretArguments(argumentArray, command);
-  const link = document.createElement("a");
-  link.dataset.command = command.id;
-  link.dataset.action = "executeCommand";
-  link.dataset.tooltip = getInteractionEntryValue(command, "tooltip", interactionOptions);
-  if (!link.dataset.tooltip) link.dataset.tooltip = getInteractionEntryValue(command, "label", interactionOptions);
-  if (options.relativeTo) link.dataset.relativeTo = options.relativeTo.uuid;
-  for (const [key, value] of Object.entries(interactionOptions)) link.dataset[key] = value.toString();
-  link.className = "teriock-inline-command";
+  const link = createElement("a", {
+    className: "teriock-inline-command",
+    dataset: {
+      action: "executeCommand",
+      command: command.id,
+      relativeTo: options.relativeTo?.uuid,
+      tooltip: getInteractionEntryValue(command, "tooltip", interactionOptions)
+        || getInteractionEntryValue(command, "label", interactionOptions),
+      ...objectMap(interactionOptions, v => v.toString()),
+    },
+  });
   link.prepend(makeIconElement(getInteractionEntryValue(command, "icon", interactionOptions), "inline"));
   if (!label) label = _loc(getInteractionEntryValue(command, "label", interactionOptions));
   link.appendChild(document.createTextNode(_loc(label)));

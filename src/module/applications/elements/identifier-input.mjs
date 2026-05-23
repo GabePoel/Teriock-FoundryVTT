@@ -1,4 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
+import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 
 const { AbstractFormInputElement } = foundry.applications.elements;
@@ -76,17 +77,17 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
 
   /** @override */
   _buildElements() {
-    this.#input = this._primaryInput = document.createElement("input");
-    this.#input.type = "text";
-    if (this.getAttribute("placeholder")) this.#input.placeholder = this.getAttribute("placeholder");
+    this.#input = this._primaryInput = createElement("input", {
+      placeholder: this.getAttribute("placeholder"),
+      type: "text",
+    });
     this._applyInputAttributes(this.#input);
-
-    this.#resetButton = document.createElement("button");
-    this.#resetButton.type = "button";
-    this.#resetButton.className = `icon ${makeIconClass(icons.ui.reset, "button")}`;
-    this.#resetButton.dataset.tooltip = "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset";
-    this.#resetButton.setAttribute("aria-label", _loc(this.#resetButton.dataset.tooltip));
-
+    this.#resetButton = createElement("button", {
+      ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
+      className: "icon " + makeIconClass(icons.ui.reset, "button"),
+      dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
+      type: "button",
+    });
     return [this.#input, this.#resetButton];
   }
 
