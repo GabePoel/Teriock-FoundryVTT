@@ -37,8 +37,8 @@ export default class TeriockJournalEntryPage
   /** @inheritDoc */
   async _buildEmbedHTML(config, options = {}) {
     const embed = await super._buildEmbedHTML(config, options);
-    if (!embed && ["damage", "drain"].includes(this.type)) {
-      if (["damage", "drain"].includes(this.type)) return this._embedTextPage(config, options);
+    if (!embed && this.system?.metadata?.isTextPage) {
+      if (this.system?.metadata?.isTextPage) return this._embedTextPage(config, options);
     }
     return embed;
   }

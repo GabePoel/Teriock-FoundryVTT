@@ -1,6 +1,4 @@
 import { addFormula } from "../../../helpers/formula.mjs";
-import { attributePanel } from "../../../helpers/panel.mjs";
-import { ruleUuid } from "../../../helpers/resolve.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
 
@@ -24,7 +22,7 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
-      system: { _src: ruleUuid("Core", TERIOCK.config.attribute[this.attribute].page) },
+      system: { _src: game.teriock.identifiers.get(TERIOCK.config.attribute[this.attribute]?.identifier) },
     });
   }
 
@@ -61,7 +59,9 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels = [await attributePanel(this.attribute)];
+    this.panels = [
+      await (await teriock.fromIdentifier(TERIOCK.config.attribute[this.attribute]?.identifier)).toPanel(),
+    ];
   }
 
   /**

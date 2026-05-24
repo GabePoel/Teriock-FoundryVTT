@@ -23,12 +23,12 @@ declare global {
       title?: string;
       /** Whether a tooltip should be displayed for each document option */
       tooltip?: boolean;
-      /** Whether a tooltip should be asynchronously fetched for each document */
-      tooltipAsync?: boolean;
+      /** Path to an identifier used for fetching the tooltip */
+      tooltipIdentifier?: string;
       /** Path to HTML to use for the tooltip for each document */
       tooltipKey?: string | null;
       /** Path to a UUID used for fetching the tooltip */
-      tooltipUUID?: string;
+      tooltipUuid?: string;
     };
 
     export type DocumentSelect = Teriock.SelectOptions.BaseDocumentSelect & {

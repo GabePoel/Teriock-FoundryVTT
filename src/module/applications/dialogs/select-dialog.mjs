@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { createElement } from "../../helpers/html.mjs";
-import { classPanel, tradecraftPanel } from "../../helpers/panel.mjs";
+import { classPanel } from "../../helpers/panel.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
@@ -141,7 +141,6 @@ export async function selectPropertyDialog() {
       hint: _loc("TERIOCK.DIALOGS.Select.Property.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Property.title"),
-      tooltipAsync: true,
     }),
   );
 }
@@ -149,19 +148,19 @@ export async function selectPropertyDialog() {
 /**
  * Internal helper to build tradecraft dialog choices.
  * @param {Teriock.Keys.Tradecraft[]} [tradecrafts]
- * @returns {Promise<Index<TeriockDocument>[]>}
+ * @returns {{identifier: string, img: string, name: string, uuid: string}[]}
  */
-async function _tradecraftChoices(tradecrafts) {
+function _tradecraftChoices(tradecrafts) {
   const tradecraftList = tradecrafts?.length ? tradecrafts : Object.keys(TERIOCK.reference.tradecrafts);
   if (tradecraftList.length === 0) return [];
-  return Promise.all(tradecraftList.map(async tc => {
+  return tradecraftList.map(tc => {
     return {
+      identifier: `tradecraft:${tc}`,
       img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
       name: TERIOCK.reference.tradecrafts[tc],
-      tooltip: await TeriockTextEditor.makeTooltip(await tradecraftPanel(tc)),
       uuid: tc,
     };
-  }));
+  });
 }
 
 /**
@@ -182,14 +181,15 @@ export async function selectTradecraftDialog(tradecrafts) {
  * @returns {Promise<Teriock.Keys.Tradecraft[]>}
  */
 export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}) {
-  const choices = await _tradecraftChoices(tradecrafts);
+  const choices = _tradecraftChoices(tradecrafts);
   if (choices.length === 0) return [];
   const chosen = await selectDocumentsDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
     multi,
     openable: true,
     title: _loc("TERIOCK.DIALOGS.Select.Tradecraft.title"),
-    tooltipKey: "tooltip",
+    tooltipIdentifier: "identifier",
+    tooltipUuid: null,
   });
   if (!chosen) return [];
   return chosen.map(c => c.uuid);
@@ -205,7 +205,6 @@ export async function selectAbilityDialog() {
       hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
-      tooltipAsync: true,
     }),
   );
 }
@@ -225,7 +224,6 @@ export async function selectCompendiumsDialog(selected = true) {
     hint: _loc("TERIOCK.DIALOGS.Select.Compendiums.hint"),
     title: _loc("TERIOCK.DIALOGS.Select.Compendiums.title"),
     tooltip: false,
-    tooltipAsync: false,
   });
   return chosen.map(c => game.packs.get(c.uuid));
 }
@@ -240,7 +238,6 @@ export async function selectEquipmentTypeDialog() {
       hint: _loc("TERIOCK.DIALOGS.Select.EquipmentType.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.EquipmentType.title"),
-      tooltipAsync: true,
     }),
   );
 }
@@ -255,7 +252,6 @@ export async function selectSpeciesDialog() {
       hint: _loc("TERIOCK.DIALOGS.Select.Species.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Species.title"),
-      tooltipAsync: true,
     }),
   );
 }
@@ -270,7 +266,6 @@ export async function selectBodyPartDialog() {
       hint: _loc("TERIOCK.DIALOGS.Select.BodyPart.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.BodyPart.title"),
-      tooltipAsync: true,
     }),
   );
 }

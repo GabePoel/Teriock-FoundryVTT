@@ -77,7 +77,7 @@ export default class DurationModel extends TimeUnitModel {
           "Up",
         ).replace("Not Dead", "Alive").replace("Not Unconscious", "Conscious")
       ),
-    ];
+    ].filter(Boolean);
     let triggerPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.untilTriggers", {
       partial: listFormat(triggers, { type: "disjunction" }),
     });

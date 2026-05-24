@@ -24,14 +24,12 @@
     {{#each field.tradecrafts as |tradecraft name|}}
       <div
         class="tradecraft-container tgrid gi6"
-        {{#if (and (not (eq ../name "Artisan")) (not (eq ../name "Scholar")))}}
+        {{#if (and (not (eq ../index "artisan")) (not (eq ../index "scholar")) (not (eq ../index "p1")))}}
           data-tooltip-direction="RIGHT"
         {{else}}
           data-tooltip-direction="LEFT"
-          data-tooltip-left="true"
         {{/if}}
-        data-make-tooltip="true"
-        data-uuid='{{ruleUuid "Tradecraft" name}}'
+        data-tooltip-identifier="tradecraft:{{ name }}"
       >
         <div
           class="tradecraft-panel-symbol ch-tradecraft-pro-box grid-fill"

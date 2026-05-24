@@ -1,5 +1,7 @@
+import { rankConfig } from "../../../../constants/config/rank-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -43,7 +45,10 @@ export default class RankSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      archetype: new IdentifierField({ initial: "everyman" }),
+      archetype: new IdentifierField({
+        choices: objectMap(rankConfig, a => a.name, { localize: true }),
+        initial: "everyman",
+      }),
       className: new fields.StringField({ initial: "journeyman" }),
       classRank: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),

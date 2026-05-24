@@ -1,3 +1,5 @@
+import { fancifyFields } from "../../../../helpers/utils.mjs";
+
 const { fields } = foundry.data;
 
 /**
@@ -13,6 +15,11 @@ export default function BaseSystemMixin(Base) {
     class BaseSystem extends Base {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [];
+
+      /** @returns {Partial<Teriock.Documents.ModelMetadata>} */
+      static get metadata() {
+        return {};
+      }
 
       /** @inheritDoc */
       static defineSchema() {
@@ -73,12 +80,40 @@ export default function BaseSystemMixin(Base) {
         return false;
       }
 
+      /** @returns {Teriock.Messages.MessageBar[]} */
+      get messageBars() {
+        return [];
+      }
+
+      /** @returns {Teriock.Messages.MessageBlock[]} */
+      get messageBlocks() {
+        return fancifyFields(this.displayFields).map(f => {
+          const schema = this.parent.getSchema(f.path);
+          const value = foundry.utils.getProperty(this.parent._source, f.path);
+          if (value && !schema.gmOnly) return { classes: f.classes, text: value, title: f.label || schema.label };
+        }).filter(f => f);
+      }
+
+      /** @returns {Partial<Teriock.Documents.ModelMetadata>} */
+      get metadata() {
+        return this.constructor.metadata;
+      }
+
       /**
        * The pseudo-document collections.
        * @returns {Record<string, TypeCollection>}
        */
       get pseudoCollections() {
         return {};
+      }
+
+      /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+      async getPanelParts() {
+        return {
+          associations: /** @type {Teriock.Messages.MessageAssociation[]} */ [],
+          bars: this.messageBars,
+          blocks: this.messageBlocks,
+        };
       }
     }
   );

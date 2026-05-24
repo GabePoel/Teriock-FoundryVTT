@@ -36,9 +36,8 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
     if (parent && uuid.startsWith(parent.uuid)) {
       const embeddedPath = uuid.substring(parent.uuid.length + 1);
       const parts = embeddedPath.split(".");
-      if (parts.length === 2) {
-        return parent.getEmbeddedDocument(parts[0], parts[1]);
-      } else if (parts.length === 4) {
+      if (parts.length === 2) return parent.getEmbeddedDocument(parts[0], parts[1]);
+      else if (parts.length === 4) {
         const intermediateDocument = parent.getEmbeddedDocument(parts[0], parts[1]);
         return intermediateDocument?.getEmbeddedDocument(parts[2], parts[3]);
       }

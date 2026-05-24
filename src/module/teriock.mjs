@@ -173,7 +173,11 @@ foundry.helpers.Hooks.once("init", function() {
     JournalEntry: { collection: documents.collections.TeriockJournal, documentClass: documents.TeriockJournalEntry },
     JournalEntryCategory: { documentClass: documents.TeriockJournalEntryCategory },
     JournalEntryPage: {
-      dataModels: { damage: data.systems.pages.HarmSystem, drain: data.systems.pages.HarmSystem },
+      dataModels: {
+        damage: data.systems.pages.HarmSystem,
+        drain: data.systems.pages.HarmSystem,
+        tradecraft: data.systems.pages.TradecraftSystem,
+      },
       documentClass: documents.TeriockJournalEntryPage,
     },
     Macro: { collection: documents.collections.TeriockMacros, documentClass: documents.TeriockMacro },
@@ -343,7 +347,13 @@ foundry.helpers.Hooks.once("init", function() {
       cls: applications.sheets.page.DrainSheet,
       doc: documents.TeriockJournalEntryPage,
       label: "TYPES.JournalEntryPage.drain",
-      types: ["drain"],
+      types: ["drain", "tradecraft"],
+    },
+    {
+      cls: applications.sheets.page.TradecraftSheet,
+      doc: documents.TeriockJournalEntryPage,
+      label: "TYPES.JournalEntryPage.tradecraft",
+      types: ["tradecraft"],
     },
   ];
   sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>

@@ -45,7 +45,7 @@ export default Base => {
               nullable: true,
             }),
             value: initialNumber(),
-          })
+          }),
         });
       }
 

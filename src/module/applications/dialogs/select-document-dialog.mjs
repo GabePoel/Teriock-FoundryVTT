@@ -1,5 +1,4 @@
 import { TeriockDocumentSelector } from "../api/_module.mjs";
-import { TeriockTextEditor } from "../ux/_module.mjs";
 
 /**
  * Select any number of documents.
@@ -23,9 +22,9 @@ export async function selectDocumentsDialog(documents, options = {}) {
     textKey: null,
     title: _loc("TERIOCK.DIALOGS.SelectDocument.defaults.title"),
     tooltip: true,
-    tooltipAsync: false,
+    tooltipIdentifier: null,
     tooltipKey: null,
-    tooltipUUID: "uuid",
+    tooltipUuid: "uuid",
     ...options,
   };
 
@@ -61,8 +60,11 @@ export async function selectDocumentsDialog(documents, options = {}) {
       name: foundry.utils.getProperty(doc, options.nameKey),
       rescale: doc.rescale || false,
       text: "",
-      tooltip: options.tooltipAsync ? TeriockTextEditor.loadingPanelHTML : undefined,
-      uuid: options.tooltipAsync || options.openable ? foundry.utils.getProperty(doc, options.tooltipUUID) : undefined,
+      tooltipHtml: options.tooltipKey ? foundry.utils.getProperty(doc, options.tooltipKey) : undefined,
+      tooltipIdentifier: options.tooltipIdentifier
+        ? foundry.utils.getProperty(doc, options.tooltipIdentifier)
+        : undefined,
+      tooltipUuid: options.tooltipUuid ? foundry.utils.getProperty(doc, options.tooltipUuid) : undefined,
     };
     if (options.textKey) context.documents[id].text = foundry.utils.getProperty(doc, options.textKey) || "";
     if (options.tooltipKey && options.tooltip && !options.tooltipAsync)
@@ -83,7 +85,6 @@ export async function selectDocumentsDialog(documents, options = {}) {
     openable: options.openable,
     title: options.title,
     tooltip: options.tooltip,
-    tooltipAsync: options.tooltipAsync,
   });
 
   const selected = await sheet.select();

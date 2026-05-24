@@ -1,7 +1,7 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { fancifyFields, fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
+import { fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
 import { AccessDataMixin, AutomatedDataMixin, PropagationDataMixin } from "../../../shared/mixins/_module.mjs";
 import { AutomatableSystemMixin, RulesSystemMixin } from "../../mixins/_module.mjs";
 
@@ -220,25 +220,6 @@ export default function CommonSystemMixin(Base) {
         };
       }
 
-      /** @returns {Teriock.Messages.MessageBar[]} */
-      get messageBars() {
-        return [];
-      }
-
-      /** @returns {Teriock.Messages.MessageBlock[]} */
-      get messageBlocks() {
-        return fancifyFields(this.displayFields).map(f => {
-          const schema = this.parent.getSchema(f.path);
-          const value = foundry.utils.getProperty(this.parent._source, f.path);
-          if (value && !schema.gmOnly) return { classes: f.classes, text: value, title: f.label || schema.label };
-        }).filter(f => f);
-      }
-
-      /** @returns {Teriock.Documents.ModelMetadata} */
-      get metadata() {
-        return this.constructor.metadata;
-      }
-
       /** @returns {typeof EmbeddedDataModel|null} */
       get SettingsFlagsDataModel() {
         return null;
@@ -343,18 +324,14 @@ export default function CommonSystemMixin(Base) {
 
       /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
       async getPanelParts() {
-        /** @type {Partial<Teriock.Messages.MessagePanel>} */
-        const parts = {
-          associations: /** @type {Teriock.Messages.MessageAssociation[]} */ [],
-          bars: this.messageBars,
-          blocks: this.messageBlocks,
+        const parts = Object.assign(await super.getPanelParts(), {
           color: this.color || undefined,
           icon: TERIOCK.config.document[this.parent.type]?.icon || TERIOCK.config.document.document.icon,
           image: this.parent.img,
           label: TERIOCK.config.document[this.parent.type]?.label || TERIOCK.config.document.document.label,
           name: this.parent.fullName,
           uuid: this.parent.uuid,
-        };
+        });
         const typeMap = (await this.parent.getChildren()).documentsByType;
         for (const type of this.metadata.visibleTypes) {
           if (typeMap[type]) {

@@ -41,6 +41,12 @@ export default class TeriockTextEditor extends TextEditor {
     return config;
   }
 
+  /** @inheritdoc */
+  static createAnchor({ attrs = {}, classes = [], dataset = {}, icon, name } = {}) {
+    if (dataset.uuid) dataset.tooltipUuid = dataset.uuid;
+    return super.createAnchor({ attrs, classes, dataset, icon, name });
+  }
+
   /**
    * Enrich all the blocks within a panel.
    * @param {Teriock.Messages.MessagePanel} panel

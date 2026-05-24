@@ -210,6 +210,13 @@ export const documentConfig = {
     label: "TYPES.Card.stone",
     plural: "TERIOCK.DOCUMENTS.stone.plural",
   },
+  tradecraft: /** @type {Teriock.Config.DocumentEntry} */ {
+    documentName: "JournalEntryPage",
+    icon: icons.document.fluency,
+    index: "tradecrafts",
+    label: "TYPES.JournalEntryPage.tradecraft",
+    plural: "TERIOCK.DOCUMENTS.tradecraft.plural",
+  },
 };
 
 preLocalize("config.document", { keys: ["label", "plural"] });

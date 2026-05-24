@@ -16,9 +16,12 @@ export default class IdentifierField extends StringField {
 
   /** @inheritDoc */
   _toInput(config) {
-    const reset = config.reset ?? this.reset;
-    if (reset) return HTMLIdentifierInputElement.create({ ...config, reset });
-    return createTextInput(config);
+    if (!config.choices && !this.choices) {
+      const reset = config.reset ?? this.reset;
+      if (reset) return HTMLIdentifierInputElement.create({ ...config, reset });
+      return createTextInput(config);
+    }
+    return super._toInput(config);
   }
 
   /** @inheritDoc */

@@ -51,9 +51,9 @@ const wikiLinkEnricher = {
         dataset: {
           id: parsed.id,
           link: "",
-          makeTooltip: "true",
           pack: parsed.collection?.collection,
           teriockContentLink: "true",
+          tooltipUuid: uuid,
           type: parsed.type,
           uuid,
           wikiAddress: address,
