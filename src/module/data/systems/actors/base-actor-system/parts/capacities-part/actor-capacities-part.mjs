@@ -21,6 +21,12 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          carryingCapacity: new fields.SchemaField({
+            factor: initialNumber(),
+            heavy: initialNumber(),
+            light: initialNumber(),
+            max: initialNumber(),
+          }, { persisted: false }),
           encumbranceLevel: initialNumber(),
           size: new fields.SchemaField({
             category: initialString(),
@@ -39,7 +45,7 @@ export default Base => {
               nullable: true,
             }),
             value: initialNumber(),
-          }),
+          })
         });
       }
 

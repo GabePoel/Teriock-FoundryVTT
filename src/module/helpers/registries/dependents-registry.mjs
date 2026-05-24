@@ -29,6 +29,21 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    */
   fetchFromUuid(ref, uuid) {
     if (!this.active) return null;
+
+    // Special handling for documents that share a parent with the reference document. We only need two levels for
+    // active effects embedded within items.
+    const parent = ref.parent || ref.actor;
+    if (parent && uuid.startsWith(parent.uuid)) {
+      const embeddedPath = uuid.substring(parent.uuid.length + 1);
+      const parts = embeddedPath.split(".");
+      if (parts.length === 2) {
+        return parent.getEmbeddedDocument(parts[0], parts[1]);
+      } else if (parts.length === 4) {
+        const intermediateDocument = parent.getEmbeddedDocument(parts[0], parts[1]);
+        return intermediateDocument?.getEmbeddedDocument(parts[2], parts[3]);
+      }
+    }
+
     // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
     if (ref.parent?.pack && uuid.includes(ref.parent?.uuid)) {
       const [, embeddedName, id] = uuid.replace(ref.parent.uuid, "").split(".");
