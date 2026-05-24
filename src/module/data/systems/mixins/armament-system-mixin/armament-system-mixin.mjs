@@ -118,7 +118,13 @@ export default function ArmamentSystemMixin(Base) {
 
       /** @returns {string[]} */
       get _damageWrappers() {
-        return this.hasAttack ? [this.summarizedAttack] : [];
+        return this.hasAttack
+          ? [
+            _loc("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
+              value: this.hasTwoHandedAttack ? `${this.damage.base} / ${this.damage.twoHanded}` : this.damage.base,
+            }),
+          ]
+          : [];
       }
 
       /** @returns {Teriock.Messages.MessageBar} */
@@ -267,9 +273,7 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {string}
        */
       get summarizedAttack() {
-        return _loc("TERIOCK.SYSTEMS.Armament.PANELS.damage", {
-          value: this.hasTwoHandedAttack ? `${this.damage.base} / ${this.damage.twoHanded}` : this.damage.base,
-        });
+        return dotJoin(this._attackBar.wrappers.filter(Boolean));
       }
 
       /**

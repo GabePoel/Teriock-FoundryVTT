@@ -12,7 +12,7 @@ export default function SelectDocumentsAutomationMixin(Base) {
     /**
      * @extends {BaseAutomation}
      * @mixes SelectExternalDocumentsAutomation
-     * @property {{identifiers: Set<TypedIdentifier|Identifier>, qualifier: Teriock.System.FormulaString}} local
+     * @property {{identifiers: Set<TypedIdentifier>, qualifier: Teriock.System.FormulaString}} local
      */
     class SelectDocumentsAutomation extends mixClasses(Base, SelectExternalDocumentsAutomationMixin) {
       /** @inheritDoc */

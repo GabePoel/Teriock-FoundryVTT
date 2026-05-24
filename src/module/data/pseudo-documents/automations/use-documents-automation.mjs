@@ -99,7 +99,7 @@ export default class UseDocumentsAutomation
   /** @inheritDoc */
   async _getActivations() {
     const external = Promise.all(Array.from(this.uuids).map(d => this.#makeExternalActivation(d)));
-    const local = this.identifiers.map(i => this.#makeLocalActivation(i));
+    const local = this.local.identifiers.map(i => this.#makeLocalActivation(i));
     return [...(await external), ...local];
   }
 

@@ -27,7 +27,7 @@ export default async function boostDialog(rollFormula, options = {}) {
   if (options.document) {
     const documentElement = createElement("div");
     documentElement.innerHTML = await TeriockTextEditor.enrichHTML(
-      `<p>@EMBED[${options.document.uuid} cite=false caption=false]</p>`,
+      `<p>@EMBED[${options.document.uuid} cite=false caption=false text=""]</p>`,
     );
     contentHtml.append(documentElement);
   }
@@ -80,6 +80,7 @@ export default async function boostDialog(rollFormula, options = {}) {
         return formula;
       },
     },
+    position: { width: 550 },
     window: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
       title: impact

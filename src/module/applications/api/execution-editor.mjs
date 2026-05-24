@@ -53,8 +53,15 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
     if (!entry?.editable || typeof entry.getChoices !== "function") return;
     const choices = await entry.getChoices();
     const selected = await selectDocumentDialog(choices, {
+      auto: false,
       checked: entry.document?.uuid,
       hint: _loc(entry.selectHint ?? "TERIOCK.DIALOGS.Select.Armament.hint"),
+      openable: true,
+      textKey: this.execution?.source?.system?.interaction === "attack"
+        ? "system.summarizedAttack"
+        : this.execution?.source?.system?.interaction === "block"
+        ? "system.summarizedBlock"
+        : null,
       title: _loc(entry.selectTitle ?? "TERIOCK.DIALOGS.Select.Armament.title"),
     });
     if (selected === null) return;
@@ -78,7 +85,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
   }
 
   /**
-   * @param {object} execution
+   * @param {AbilityExecution|ThresholdExecution} execution
    * @param {Partial<ApplicationConfiguration>} [options]
    */
   constructor(execution, options = {}) {

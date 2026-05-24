@@ -24,6 +24,15 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   }
 
   /**
+   * A single impact if this only has one.
+   * @returns {Teriock.Keys.Impact|null}
+   */
+  get #singleImpact() {
+    if (this.impacts.size === 1) return Array.from(this.impacts)[0];
+    else return null;
+  }
+
+  /**
    * A copy of the roll for each impact this deals.
    * @returns {HarmRoll[]}
    */
@@ -80,8 +89,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     await super._buildRolls();
     if (this.crit) {
       for (const roll of this.rolls) {
-        if (this.impacts.size === 1) roll.impact = Array.from(this.impacts)[0];
-        else roll.impact = undefined;
+        roll.impact = this.#singleImpact;
         roll.alter(2, 0, { multiplyNumeric: false });
       }
     }
@@ -97,7 +105,12 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       }
     }
     if (this.showDialog && formulaExists(this.formula)) {
-      this.formula = await boostDialog(this.formula, { boosts, crit: this.crit, document: this.source });
+      this.formula = await boostDialog(this.formula, {
+        boosts,
+        crit: this.crit,
+        document: this.source,
+        impact: this.#singleImpact,
+      });
       if (this.formula === null) return false;
       this.crit = false;
     }

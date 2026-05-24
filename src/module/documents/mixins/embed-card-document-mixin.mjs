@@ -53,7 +53,7 @@ export default function EmbedCardDocumentMixin(Base) {
         const content = await super._buildEmbedHTML(config, options);
         if (content) return content;
         else {
-          const embedContext = this.embedParts;
+          const embedContext = foundry.utils.mergeObject(this.embedParts, config);
           if (options.relativeTo) embedContext.relative = options.relativeTo.uuid;
           const html = await TeriockTextEditor.renderTemplate("teriock/ui/block", embedContext);
           return foundry.utils.parseHTML(html);
