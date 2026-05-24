@@ -89,19 +89,15 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
   }
 
   /**
-   * Initialize the tooltip loader.
+   * Initialize double-click handling on the document list.
    */
   _initClickLoader() {
-    this.element.querySelectorAll("[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
-      if (this.openable) {
-        el.addEventListener("dblclick", async ev => {
-          const target = /** @type {HTMLElement} */ ev.currentTarget;
-          const uuid = target.dataset.uuid;
-          const doc = /** @type {AnyChildDocument} */ await fromUuid(uuid);
-          await doc.sheet.render(true);
-        });
-      }
-    });
+    if (!this.openable) return;
+    const list = this.element.querySelector(".doc-list-container");
+    if (!list) return;
+    this._boundDblClickOpen ??= this._onDblClickOpen.bind(this);
+    list.removeEventListener("dblclick", this._boundDblClickOpen);
+    list.addEventListener("dblclick", this._boundDblClickOpen);
   }
 
   /**
@@ -130,7 +126,20 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
 
   /** @inheritDoc */
   _onClose() {
+    const list = this.element?.querySelector(".doc-list-container");
+    if (list && this._boundDblClickOpen) list.removeEventListener("dblclick", this._boundDblClickOpen);
     this._finish(this.multi ? [] : null);
+  }
+
+  /**
+   * Open a document sheet when a row is double-clicked.
+   * @param {MouseEvent} event
+   */
+  async _onDblClickOpen(event) {
+    const row = /** @type {HTMLElement|null} */ event.target.closest("[data-uuid]");
+    if (!row?.dataset.uuid) return;
+    const doc = /** @type {AnyChildDocument} */ await fromUuid(row.dataset.uuid);
+    await doc?.sheet?.render(true);
   }
 
   /** @inheritDoc */

@@ -15,9 +15,9 @@ async function use(actor, options = {}) {
     if (newAttacker) attacker = newAttacker;
   }
   if (options.select) {
-    attacker = await selectDocumentDialog(actor.armaments.filter(a => a.active), {
-      noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
-    });
+    const selOpts = { noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems" };
+    if (attacker?.uuid) selOpts.checked = attacker.uuid;
+    attacker = await selectDocumentDialog(actor.armaments.filter(a => a.active), selOpts);
   }
   if (!attacker) {
     ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {

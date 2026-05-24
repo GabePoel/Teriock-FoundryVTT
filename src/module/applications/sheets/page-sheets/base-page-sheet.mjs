@@ -8,6 +8,7 @@ import {
   AutomationsTabsCommonSheetPart,
   ConnectionCommonSheetPart,
   DragDropCommonSheetPart,
+  FrameCommonSheetPart,
   LockingCommonSheetPart,
   MenuCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
@@ -19,6 +20,7 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  * @mixes BaseApplication
  * @mixes DisplaySheet
  * @mixes ConfigButtonSheet
+ * @mixes FrameCommonSheetPart
  */
 export default class BasePageSheet
   extends mixClasses(
@@ -32,6 +34,7 @@ export default class BasePageSheet
     MenuCommonSheetPart,
     AutomationsCommonSheetPart,
     AutomationsTabsCommonSheetPart,
+    FrameCommonSheetPart,
   )
 {
   static DEFAULT_OPTIONS = {

@@ -65,17 +65,11 @@ export async function selectDocumentsDialog(documents, options = {}) {
         ? foundry.utils.getProperty(doc, options.tooltipIdentifier)
         : undefined,
       tooltipUuid: options.tooltipUuid ? foundry.utils.getProperty(doc, options.tooltipUuid) : undefined,
+      uuid: doc.uuid,
     };
     if (options.textKey) context.documents[id].text = foundry.utils.getProperty(doc, options.textKey) || "";
     if (options.tooltipKey && options.tooltip && !options.tooltipAsync)
       context.documents[id].tooltip = foundry.utils.getProperty(doc, options.tooltipKey);
-  }
-
-  if (options.tooltip && !options.tooltipKey && !options.tooltipAsync) {
-    await Promise.all(documents.map(async doc => {
-      const id = foundry.utils.getProperty(doc, options.idKey);
-      context.documents[id].tooltip = await doc.toTooltip?.();
-    }));
   }
 
   const sheet = new TeriockDocumentSelector(context.documents, {

@@ -7,6 +7,7 @@ import {
   AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
+  FrameCommonSheetPart,
   LockingCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
@@ -17,6 +18,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
  * @mixes AutomationsCommonSheetPart
+ * @mixes FrameCommonSheetPart
  */
 export default class ApplicableEffectSheet
   extends mixClasses(
@@ -28,6 +30,7 @@ export default class ApplicableEffectSheet
     DocumentCreationCommonSheetPart,
     DragDropCommonSheetPart,
     LockingCommonSheetPart,
+    FrameCommonSheetPart,
   )
 {
   /** @inheritDoc */

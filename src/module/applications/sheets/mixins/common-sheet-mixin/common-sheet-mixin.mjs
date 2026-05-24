@@ -16,6 +16,7 @@ export default function CommonSheetMixin(Base) {
      * @mixes DocumentCreationCommonSheetPart
      * @mixes DragDropCommonSheetPart
      * @mixes FieldsCommonSheetPart
+     * @mixes FrameCommonSheetPart
      * @mixes ImageEditingCommonSheetPart
      * @mixes AutomationsTabsCommonSheetPart
      * @mixes LockingCommonSheetPart
@@ -41,6 +42,7 @@ export default function CommonSheetMixin(Base) {
         parts.StatDiceCommonSheetPart,
         parts.ToggleCommonSheetPart,
         parts.AutomationsCommonSheetPart,
+        parts.FrameCommonSheetPart,
         IndexButtonSheetMixin,
       )
     {
@@ -80,14 +82,6 @@ export default function CommonSheetMixin(Base) {
           metadata: this.document.metadata,
           settings: this.settings,
         });
-      }
-
-      /** @inheritDoc */
-      async _renderFrame(options = {}) {
-        const frame = await super._renderFrame(options);
-        if (this.document.inCompendium)
-          this.window.header.style.backgroundColor = "var(--compendium-sheet-header-background-color)";
-        return frame;
       }
     }
   );

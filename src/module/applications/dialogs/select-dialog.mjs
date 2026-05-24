@@ -278,6 +278,6 @@ async function noSup(pack) {
       localize: true,
     });
   }
-  const index = await pack.getIndex({ fields: "system._sup" });
+  const index = await pack.getIndex();
   return index.contents.filter(i => !i.system._sup);
 }

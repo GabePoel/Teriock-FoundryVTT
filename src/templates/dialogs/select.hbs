@@ -40,11 +40,18 @@
                 class="doc-select-row teriock-block"
                 data-rich-tooltip="true"
                 data-tooltip-direction="RIGHT"
+                data-tooltip-class="teriock teriock-rich-tooltip"
                 {{#if (exists doc.uuid)}}
                   data-uuid="{{{ doc.uuid }}}"
                 {{/if}}
-                {{#if ../tooltip}}
-                  {{#if (exists doc.tooltipUuid)}}data-tooltip-uuid="{{{ doc.tooltipUuid }}}"{{/if}}{{#if (exists doc.tooltipIdentifier)}}data-tooltip-identifier="{{{ doc.tooltipIdentifier }}}"{{/if}}{{#if (exists doc.tooltipHtml)}}data-tooltip-html="{{ doc.tooltipHtml }}"{{/if}}data-tooltip-class="teriock teriock-rich-tooltip"
+                {{#if (and ../tooltip (exists doc.tooltipUuid))}}
+                  data-tooltip-uuid="{{{ doc.tooltipUuid }}}"
+                {{/if}}
+                {{#if (and ../tooltip (exists doc.tooltipIdentifier))}}
+                  data-tooltip-identifier="{{{ doc.tooltipIdentifier }}}"
+                {{/if}}
+                {{#if (and ../tooltip (exists doc.tooltipHtml))}}
+                  data-tooltip-html="{{ doc.tooltipHtml }}"
                 {{/if}}
               >
                 <div class="doc-checkbox-container">
@@ -65,8 +72,9 @@
                 </div>
                 <div class="doc-image-container">
                   <img
-                    src="{{ doc.img }}"
                     alt=""
+                    loading="lazy"
+                    src="{{ doc.img }}"
                     {{#if doc.rescale}}
                       class="rescale"
                     {{/if}}

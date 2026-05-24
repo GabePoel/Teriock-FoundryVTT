@@ -4,6 +4,7 @@ export { default as ConnectionCommonSheetPart } from "./connection-common-sheet-
 export { default as DocumentCreationCommonSheetPart } from "./document-creation-common-sheet-part.mjs";
 export { default as DragDropCommonSheetPart } from "./drag-drop-common-sheet-part.mjs";
 export { default as FieldsCommonSheetPart } from "./fields-common-sheet-part.mjs";
+export { default as FrameCommonSheetPart } from "./frame-common-sheet-part.mjs";
 export { default as ImageEditingCommonSheetPart } from "./image-editing-common-sheet-part.mjs";
 export { default as LockingCommonSheetPart } from "./locking-common-sheet-part.mjs";
 export { default as MenuCommonSheetPart } from "./menu-common-sheet-part.mjs";
