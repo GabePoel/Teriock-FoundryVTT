@@ -10,28 +10,18 @@ export function elementClass(elements) {
 
 /**
  * Creates a dialog fieldset for user input.
- * @param {string} legend - The legend text for the fieldset.
- * @param {string} description - The description text for the field.
- * @param {string} name - The name attribute for the input field.
- * @param {number} [max] - The maximum value for the number input.
+ * @param {NumberFieldOptions & { name?: string }} [options]
  * @returns {string} HTML string for the dialog fieldset.
  */
-export function createDialogInput(legend, description, name, max = Infinity) {
-  const field = new foundry.data.fields.NumberField({
-    integer: true,
-    max,
-    min: 0,
-    nullable: false,
-    placeholder: "0",
-    step: 1,
-  });
-  const formGroup = field.toFormGroup({ hint: "TEMP", label: legend }, {
-    name,
+export function createDialogInput(options = {}) {
+  const field = new foundry.data.fields.NumberField({ min: 0, nullable: false, placeholder: "0", ...options });
+  const formGroup = field.toFormGroup({ hint: "TEMP", label: options.label }, {
+    name: options.name,
     rootId: foundry.utils.randomID(),
     value: 0,
   });
   formGroup.querySelectorAll(".hint").forEach(hint =>
-    hint.replaceWith(createElement("div", { className: "hint", innerHTML: description }))
+    hint.replaceWith(createElement("div", { className: "hint", innerHTML: options.hint }))
   );
   return formGroup.outerHTML;
 }
@@ -68,10 +58,10 @@ export function queryAll(root, selector) {
  * Create an element with pre-defined attributes. These can use the normal foundry "." notation.
  * @template {keyof HTMLElementTagNameMap} K
  * @param {K} tagName
- * @param {Partial<HTMLElementTagNameMap[K]> & object} attributes
+ * @param {Partial<HTMLElementTagNameMap[K]> & object} [attributes]
  * @returns {HTMLElementTagNameMap[K]}
  */
-export function createElement(tagName, attributes) {
+export function createElement(tagName, attributes = {}) {
   const element = document.createElement(tagName);
   for (const [k, v] of Object.entries(foundry.utils.flattenObject(attributes))) {
     if (k.includes(".")) foundry.utils.setProperty(element, k, v);

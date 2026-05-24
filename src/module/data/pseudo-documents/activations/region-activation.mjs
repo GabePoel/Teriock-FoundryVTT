@@ -38,7 +38,7 @@ export default class RegionActivation extends BaseActivation {
   async primaryAction() {
     if (!game.teriock.checkScene()) return null;
     const data = foundry.utils.mergeObject(this.data, {
-      flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
+      flags: { teriock: { createdBy: this.uuid, placedBy: game.user.id } },
       ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
     });
     data.color ??= game.user.color;
@@ -59,7 +59,7 @@ export default class RegionActivation extends BaseActivation {
     await canvas.scene.deleteEmbeddedDocuments(
       "Region",
       canvas.scene.regions.contents.filter(r =>
-        r.getFlag("teriock", "createdBy") === this.puuid
+        r.getFlag("teriock", "createdBy") === this.uuid
         && r.getFlag("teriock", "placedBy") === this.user.id
         && r.isOwner
       ).map(r => r.id),

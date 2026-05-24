@@ -49,6 +49,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
       await commands[this.impact].primary(actor, {
         boost: true,
         boosts: this.boosts,
+        document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
         formula: this.formula,
         type: this.impact,
       });
@@ -60,9 +61,10 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
     let actors = this.actors;
     if (!this.actors.length) actors = [null];
     for (const actor of actors) {
-      await commands[this.impact].primary(actor, {
+      await commands[this.impact].secondary(actor, {
         boost: true,
         boosts: this.boosts,
+        document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
         formula: this.formula,
         type: this.impact,
       });

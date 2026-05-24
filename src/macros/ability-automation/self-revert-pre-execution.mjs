@@ -1,7 +1,9 @@
 const transformationLevels = TERIOCK.config.transformation.level;
 const chosenTransformationLevel = await tm.dialogs.selectDialog(transformationLevels, {
   hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
-  hintHtml: TERIOCK.content.conditions.transformed,
+  hintHtml: await TextEditor.implementation.enrichHTML(
+    (await teriock.fromIdentifier("status:transformed")).text.content,
+  ),
   hintTitle: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle"),
   initial: "minor",
   label: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.label"),

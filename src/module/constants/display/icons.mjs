@@ -281,7 +281,7 @@ export const icons = {
     document: "ms-description",
     done: "ms-check",
     duplicate: "ms-file-copy",
-    edit: "ms-history-edu",
+    edit: "ms-edit",
     enable: "ms-check",
     enabled: "ms-check-circle",
     expand: "ms-expand-all",

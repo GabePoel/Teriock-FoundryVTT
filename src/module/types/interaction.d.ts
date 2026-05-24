@@ -58,6 +58,7 @@ declare global {
       boost?: boolean;
       boosts?: number;
       crit?: boolean;
+      document?: AnyChildDocument;
       impact?: Teriock.Keys.Impact;
       reverse?: boolean;
       rollData?: object;

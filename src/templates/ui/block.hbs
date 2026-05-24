@@ -20,7 +20,7 @@
       hidden
     {{/if}}
   "
-  data-img="{{ img }}"
+  data-img="{{#if (exists img)}}img{{else}}systems/teriock/src/icons/documents/uncertainty.svg{{/if}}"
   {{#if openable}}
     data-action="openDoc"
   {{/if}}
@@ -69,7 +69,10 @@
     {{/if}}
     data-shareable="true"
   >
-    <img src="{{ img }}" alt="" />
+    <img
+      src="{{#if (exists img)}}{{ img }}{{else}}systems/teriock/src/icons/documents/uncertainty.svg{{/if}}"
+      alt=""
+    />
   </div>
   <div class="teriock-block-body" data-tooltip-class="">
     <div class="teriock-block-titles">

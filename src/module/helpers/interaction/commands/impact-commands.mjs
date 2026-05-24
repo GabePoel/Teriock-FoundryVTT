@@ -23,7 +23,8 @@ async function abstractImpactCommandOperation(actor, options) {
     return;
   }
   const rollData = Object.assign(options.rollData ?? {}, actor?.getRollData() || {});
-  if (options.boost) formula = await boostDialog(formula, { boosts: options.boosts, impact, rollData });
+  if (options.boost)
+    formula = await boostDialog(formula, { boosts: options.boosts, document: options.document, impact, rollData });
   if (!formula) return;
   const roll = new HarmRoll(formula, rollData, { impact: impact });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });

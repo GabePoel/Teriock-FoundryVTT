@@ -3,7 +3,9 @@ const chosenIllusionLevel = /** @type {Teriock.Keys.IllusionLevel | null} */ awa
   illusionLevels,
   {
     hint: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
-    hintHtml: TERIOCK.content.keywords.illusionary,
+    hintHtml: await TextEditor.implementation.enrichHTML(
+      (await teriock.fromIdentifier("keyword:illusionary")).text.content,
+    ),
     hintTitle: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.hintTitle"),
     initial: "minor",
     label: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.label"),

@@ -1,8 +1,10 @@
 import { impactConfig } from "../../constants/config/impact-config.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
+import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -13,14 +15,22 @@ const { fields } = foundry.data;
  * @param {Teriock.Keys.Impact} [options.impact] - The type of impact of the roll
  * @param {boolean} [options.crit] - Go critical?
  * @param {number} [options.boosts] - The number of boosts to apply
- * @param {object} [options.rollData] - Roll data to use when updating the formula.
+ * @param {object} [options.rollData] - Roll data to use when updating the formula
  * @param {string} [options.label] - Custom button label
+ * @param {AnyChildDocument} [options.document] - Optional document
  * @returns {Promise<Teriock.System.FormulaString|null>} The roll formula with boost changes applied.
  */
 export default async function boostDialog(rollFormula, options = {}) {
   const { crit = false, impact, label = _loc("TERIOCK.DIALOGS.Boost.BUTTONS.ok") } = options;
   let formula = rollFormula;
   const contentHtml = document.createElement("div");
+  if (options.document) {
+    const documentElement = createElement("div");
+    documentElement.innerHTML = await TeriockTextEditor.enrichHTML(
+      `<p>@EMBED[${options.document.uuid} cite=false caption=false]</p>`,
+    );
+    contentHtml.append(documentElement);
+  }
   const rootId = foundry.utils.randomID();
   contentHtml.append(
     new FormulaField({
@@ -53,7 +63,6 @@ export default async function boostDialog(rollFormula, options = {}) {
   );
   return await TeriockDialog.prompt({
     content: contentHtml,
-    modal: true,
     ok: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
       label: label,

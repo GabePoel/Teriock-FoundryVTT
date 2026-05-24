@@ -13,40 +13,31 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   constructor(options = {}) {
     super(options);
-    const sys = this.source.system;
-    this.armament = options.armament ?? this.#determineDefaultArmament(sys.interaction);
-    this.#initializeFlags(options);
-    this.#initializeCosts(options);
-    this.sb = options.sb ?? !!(this.armament && this.source.system.isContact) * (this.actor?.system.offense.sb ?? 0);
-    this.#determinePiercing(options);
-    this.warded = this.#resolveWarded(options, sys);
-    this.vitals = this.#resolveVitals(options, sys);
-    this.limb = this.#resolveLimb(options, sys);
-    this.incurredAttackPenalty = this.#resolveAttackPenalty(options);
-    // Try and find a specific token that this is being executed by
-    /** @type {TeriockToken[]} */
-    const selectedTokens = game.canvas?.tokens.controlled ?? [];
-    for (const t of selectedTokens) if (t.actor?.uuid === this.actor.uuid) this.executor = t;
-    // Fall back to default token
-    this.executor ??= this.actor?.defaultToken ?? null;
-    this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
-    this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
-    this.payCosts = this.actor?.getSetting("automation.payAbilityCosts") ?? true;
-    this.targets = new Set();
-    if (this.isAttack && formulaExists(this.armament?.system.hitBonus) && this.source.system.isContact)
-      this.bonus = addFormula(this.bonus, this.armament.system.hitBonus);
+    this.rootBonus = this.bonus;
+    this.armament = options.armament ?? this.#determineDefaultArmament();
+    this.initializeExecution(options);
   }
 
   /**
    * Logic to pick armament based on interaction type.
-   * @param {string} interaction - The interaction type (e.g., 'attack', 'block').
    * @returns {TeriockArmament|null}
    */
-  #determineDefaultArmament(interaction) {
+  #determineDefaultArmament() {
     if (!this.actor) return null;
-    if (interaction === "attack") return this.actor.system.wielding.attacker;
-    if (interaction === "block") return this.actor.system.wielding.blocker;
-    return null;
+    let armament;
+    if (this.source.system.interaction === "attack") armament = this.actor.system.wielding.attacker;
+    if (this.source.system.interaction === "block") armament = this.actor.system.wielding.blocker;
+    if (this.source.system.delivery === "bite" && !armament?.properties.some((p) => p.system.identifier === "biting"))
+      armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "biting"));
+    if (
+      this.source.system.delivery === "hand"
+      && !armament?.properties.some((p) => ["handy", "magelore"].includes(p.system.identifier))
+    ) {
+      armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "handy"));
+    }
+    if (this.source.system.delivery === "bite" && !armament?.properties.some((p) => p.system.identifier === "biting"))
+      armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "biting"));
+    return armament;
   }
 
   /**
@@ -54,7 +45,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    * @returns {PiercingModel}
    */
-  #determinePiercing(options) {
+  #determinePiercing(options = {}) {
     this.piercing.raw = this.source.system.piercing.raw;
     if (this.armament && this.source.system.isContact) {
       this.piercing.raw = Math.max(
@@ -70,7 +61,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * Syncs cost options and initializes cost tracking.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
-  #initializeCosts(options) {
+  #initializeCosts(options = {}) {
     Object.assign(this.options, {
       noGp: options.noGp ?? !this.source.getSetting("execution.promptCostGp"),
       noHp: options.noHp ?? !this.source.getSetting("execution.promptCostHp"),
@@ -84,7 +75,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * Handles UI/Prompting flags.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
-  #initializeFlags(options) {
+  #initializeFlags(options = {}) {
     this.flags = {
       noHeighten: options.noHeighten ?? !this.source.getSetting("execution.promptHeighten"),
       noTemplate: options.noTemplate ?? !this.source.getSetting("execution.promptTemplate"),
@@ -96,7 +87,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    * @returns {string}
    */
-  #resolveAttackPenalty(options) {
+  #resolveAttackPenalty(options = {}) {
     if (options.attackPenalty !== undefined) return options.attackPenalty;
     if (!this.isAttack) return "0";
     return this.isContact && this.armament ? this.armament.system.attackPenalty : this.source.system.attackPenalty;
@@ -105,10 +96,10 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /**
    * Determines if limbs are being targeted.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
    * @returns {boolean}
    */
-  #resolveLimb(options, sys) {
+  #resolveLimb(options = {}) {
+    const sys = this.source.system;
     if (options.limb !== undefined) return options.limb;
     return sys.isContact && (sys.targets.has("arm") || sys.targets.has("leg") || sys.targets.has("limb"));
   }
@@ -116,26 +107,25 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   /**
    * Determines if vitals are being targeted.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
    * @returns {boolean}
    */
-  #resolveVitals(options, sys) {
+  #resolveVitals(options = {}) {
     if (options.vitals !== undefined) return options.vitals;
-    const armamentVitals = this.armament?.system.vitals && sys.interaction === "attack";
-    return sys.isContact && armamentVitals ? true : sys.targets.has("vitals");
+    const armamentVitals = this.armament?.system.vitals && this.source.system.interaction === "attack";
+    return this.source.system.isContact && armamentVitals ? true : this.source.system.targets.has("vitals");
   }
 
   /**
    * Determines if the execution is warded.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @param {AbilitySystem} sys - The source system data.
    * @returns {boolean}
    */
-  #resolveWarded(options, sys) {
+  #resolveWarded(options = {}) {
     if (options.warded !== undefined) return options.warded;
-    const armamentWarded = (this.armament?.system.warded && ["attack", "block"].includes(sys.interaction))
+    const armamentWarded =
+      (this.armament?.system.warded && ["attack", "block"].includes(this.source.system.interaction))
       || this.actor?.system?.combat?.offense?.warded;
-    return sys.isContact && armamentWarded ? true : !!sys.warded;
+    return this.source.system.isContact && armamentWarded ? true : !!this.source.system.warded;
   }
 
   /** @type {PiercingModel} */
@@ -269,6 +259,30 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   }
 
   /**
+   * Update armament and re-derive dependent execution values.
+   * @param {TeriockArmament|null} armament
+   * @param {Teriock.Execution.AbilityExecutionOptions} [options]
+   */
+  _updateArmament(armament, options = {}) {
+    this.armament = armament;
+    const sys = this.source.system;
+    this.#determinePiercing();
+    this.sb = options.sb ?? !!(this.armament && sys.isContact) * (this.actor?.system.offense.sb ?? 0);
+    this.vitals = this.#resolveVitals();
+    this.warded = this.#resolveWarded();
+    this.incurredAttackPenalty = this.#resolveAttackPenalty();
+    if (this.isAttack && sys.isContact) {
+      this.bonus = formulaExists(this.rootBonus) && formulaExists(armament.system.hitBonus)
+        ? addFormula(this.rootBonus, armament.system.hitBonus)
+        : formulaExists(armament.system.hitBonus)
+        ? armament.system.hitBonus
+        : formulaExists(this.rootBonus)
+        ? this.rootBonus
+        : "0";
+    }
+  }
+
+  /**
    * @inheritDoc
    * @template {Teriock.Automations.Type} T
    * @param {T} type
@@ -282,5 +296,26 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     if (typeof options.crit === "boolean")
       return autos.filter(a => (options.crit && a.crit?.has(1)) || (!options.crit && a.crit?.has(0)));
     return autos;
+  }
+
+  /**
+   * Initialize this execution from a set of options.
+   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   */
+  initializeExecution(options = {}) {
+    this.#initializeFlags(options);
+    this.#initializeCosts(options);
+    this._updateArmament(this.armament, options);
+    this.limb = this.#resolveLimb(options);
+    // Try and find a specific token that this is being executed by
+    /** @type {TeriockToken[]} */
+    const selectedTokens = game.canvas?.tokens.controlled ?? [];
+    for (const t of selectedTokens) if (t.actor?.uuid === this.actor.uuid) this.executor = t;
+    // Fall back to default token
+    this.executor ??= this.actor?.defaultToken ?? null;
+    this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
+    this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
+    this.payCosts = this.actor?.getSetting("automation.payAbilityCosts") ?? true;
+    this.targets = new Set();
   }
 }

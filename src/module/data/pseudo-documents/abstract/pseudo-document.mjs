@@ -137,8 +137,8 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * The UUID of this pseudo-document.
    * @returns {UUID<PseudoDocument> | null}
    */
-  get puuid() {
-    return [this.document?.uuid || "", this.documentName, this.id].join(".");
+  get uuid() {
+    return this.document?.uuid ? [this.document.uuid, this.document, this.id].join(".") : null;
   }
 
   /**
@@ -190,6 +190,6 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {Teriock.Sheet.DropData<PseudoDocument>}
    */
   toDragData() {
-    return { type: this.documentName, uuid: this.puuid };
+    return { type: this.documentName, uuid: this.uuid };
   }
 }

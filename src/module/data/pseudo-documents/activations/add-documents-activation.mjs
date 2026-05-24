@@ -76,7 +76,7 @@ export default class AddDocumentsActivation extends BaseActivation {
     }
     if (docConstruct.data) foundry.utils.mergeObject(data, docConstruct.data, { inplace: true });
     if (!data.origin) data.origin = this.document?.system._src;
-    foundry.utils.setProperty(data, "flags.teriock.createdBy", this.puuid);
+    foundry.utils.setProperty(data, "flags.teriock.createdBy", this.uuid);
     return data;
   }
 
@@ -183,7 +183,7 @@ export default class AddDocumentsActivation extends BaseActivation {
       if (this.target === "item") {
         for (const item of a.items.contents) children.push(...item.childArray);
       }
-      const toDelete = children.filter(c => c.getFlag("teriock", "createdBy") === this.puuid);
+      const toDelete = children.filter(c => c.getFlag("teriock", "createdBy") === this.uuid);
       if (this.target === "armament") await Promise.all(toDelete.map(d => d.delete()));
       else {
         const effectsToDelete = toDelete.filter(d => d.documentName === "ActiveEffect");

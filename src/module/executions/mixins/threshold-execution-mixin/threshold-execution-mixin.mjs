@@ -1,11 +1,9 @@
-import { TeriockDialog } from "../../../applications/api/_module.mjs";
+import { TeriockExecutionEditor } from "../../../applications/api/_module.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
-import { createElement } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -41,28 +39,14 @@ export default function ThresholdExecutionMixin(Base) {
         this.showDialog = showDialog;
       }
 
-      /**
-       * Update this given the choices selected in the roll dialog.
-       * @param {HTMLButtonElement} button
-       */
-      #updateFromRollDialog(button) {
-        for (const f of this._dialogFields) {
-          if (typeof f.condition === "boolean" && !f.condition) continue;
-          if (typeof f.condition === "function" && !f.condition()) continue;
-          let value;
-          const element =
-            /** @type {HTMLInputElement} */
-            button.form.elements.namedItem(f.name);
-          if (f.field instanceof fields.BooleanField) value = element.checked;
-          else if (f.field instanceof fields.NumberField) value = Number(element.value);
-          else value = element.value;
-          f.update(value);
-        }
+      /** @returns {Teriock.Execution.ExecutionDialogEntry[]} */
+      get _activeDialogFields() {
+        return this._dialogFields.filter(f => {
+          return typeof f.condition === "function" ? f.condition() : !!f.condition;
+        });
       }
 
-      /**
-       * @returns {Teriock.Execution.ExecutionDialogButton[]}
-       */
+      /** @returns {Teriock.Execution.ExecutionDialogButton[]} */
       get _dialogButtons() {
         return this.isRoll
           ? [{
@@ -90,9 +74,12 @@ export default function ThresholdExecutionMixin(Base) {
           }];
       }
 
-      /**
-       * @returns {Teriock.Execution.ExecutionDialogEntry[]}
-       */
+      /** @returns {Teriock.Execution.ExecutionDialogDocument[]} */
+      get _dialogDocuments() {
+        return [];
+      }
+
+      /**  @returns {Teriock.Execution.ExecutionDialogEntry[]} */
       get _dialogFields() {
         return [{
           condition: this.requiresCompetence,
@@ -202,66 +189,10 @@ export default function ThresholdExecutionMixin(Base) {
        * @returns {Promise<false|void>}
        */
       async _showRollDialog() {
-        const rootId = foundry.utils.randomID();
-        const content = createElement("div", { className: "teriock-form-container" });
-        let hasFields = false;
-        const mainContainer = createElement("div", { className: "teriock-form-container" });
-        const smallContainer = createElement("div", {
-          className: "ttable",
-          "style.columnGap": "1.5rem",
-          "style.rowGap": "0.75rem",
-        });
-        let hasSmallFields = false;
-        for (const f of this._dialogFields) {
-          if (typeof f.condition === "boolean" && !f.condition) continue;
-          if (typeof f.condition == "function" && !f.condition()) continue;
-          const groupConfig = { classes: ["tgrid-item"], label: _loc(f.label), rootId };
-          if (f.hint) groupConfig.hint = _loc(f.hint);
-          const inputConfig = {
-            id: `${rootId}-${f.name}`,
-            integer: f.integer,
-            max: f.max,
-            min: f.min,
-            name: f.name,
-            placeholder: f.placeholder,
-            rootId,
-            value: f.value,
-          };
-          let container = mainContainer;
-          const formGroup = f.field.toFormGroup(groupConfig, inputConfig);
-          if (f.small) {
-            container = smallContainer;
-            hasSmallFields = true;
-          }
-          container.append(formGroup);
-          hasFields = true;
-        }
-        content.append(mainContainer);
-        if (hasSmallFields) content.append(smallContainer);
-        if (!hasFields) return;
-        const out = await TeriockDialog.wait({
-          buttons: this._dialogButtons.map(b => {
-            return {
-              action: b.action,
-              default: b.default,
-              icon: makeIconClass(b.icon || this.icon, "button"),
-              label: _loc(b.label),
-              callback: (_event, button) => {
-                this.#updateFromRollDialog(button);
-                if (typeof b.callback === "function") b.callback();
-              },
-            };
-          }),
-          content: content.outerHTML,
-          modal: true,
-          position: { width: 550 },
-          window: {
-            contentClasses: ["wide-toggles"],
-            icon: makeIconClass(this.icon, "title"),
-            title: _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", { name: this.name }).trim(),
-          },
-        });
-        if (out === null) return false;
+        if (!this._activeDialogFields.length && !this._dialogDocuments.length) return;
+        const editor = new TeriockExecutionEditor(this);
+        const result = await editor.prompt();
+        if (result === null) return false;
       }
     }
   );

@@ -154,7 +154,7 @@ export default class SummonActivation extends BaseActivation {
     const tokenDocuments = await Promise.all(actors.map(a => a.getTokenDocument()));
     const tokenData = tokenDocuments.map(t =>
       foundry.utils.mergeObject(t?.toObject(), {
-        flags: { teriock: { createdBy: this.puuid, placedBy: game.user.id } },
+        flags: { teriock: { createdBy: this.uuid, placedBy: game.user.id } },
         ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
       })
     );
@@ -212,7 +212,7 @@ export default class SummonActivation extends BaseActivation {
     await canvas.scene.deleteEmbeddedDocuments(
       "Token",
       canvas.scene.tokens.contents.filter(t =>
-        t.getFlag("teriock", "createdBy") === this.puuid
+        t.getFlag("teriock", "createdBy") === this.uuid
         && t.getFlag("teriock", "placedBy") === game.user.id
         && t.isOwner
       ).map(t => t.id),

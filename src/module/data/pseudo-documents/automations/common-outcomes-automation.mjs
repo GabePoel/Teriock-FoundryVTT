@@ -59,7 +59,7 @@ export default class CommonOutcomesAutomation
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["common", ...this._confirmationPaths, ...super._formPaths];
+    return ["common", ...super._formPaths, ...this._confirmationPaths];
   }
 
   /** @inheritDoc */

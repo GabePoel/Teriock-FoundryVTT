@@ -51,6 +51,23 @@ export default function AbilityExecutionGetInputPart(Base) {
         return this.source.system.costs.primary[stat].type === "description" && !this.options[`no${ucFirst(stat)}`];
       }
 
+      /** @inheritDoc */
+      get _dialogDocuments() {
+        const docs = super._dialogDocuments;
+        docs.push({ document: this.source, label: _loc("TYPES.ActiveEffect.ability") });
+        if (this.isContact) {
+          docs.push({
+            document: this.armament,
+            editable: true,
+            label: _loc("TYPES.Item.armament"),
+            getChoices: () => this.actor?.armaments.filter(a => a.active) ?? [],
+            update: armament => this._updateArmament(armament),
+          });
+        }
+        return docs;
+      }
+
+      /** @inheritDoc */
       get _dialogFields() {
         const oldFields = super._dialogFields;
         const newFields = oldFields.filter(f => f.name === "competence");
@@ -154,11 +171,12 @@ export default function AbilityExecutionGetInputPart(Base) {
         for (const [k, v] of Object.entries(TERIOCK.config.cost.primary.keys)) {
           if (this.#shouldShowCostPrompt(k)) {
             dialogs.push(
-              createDialogInput(
-                _loc("TERIOCK.COSTS.Long.primary", { key: v.label }),
-                await TeriockTextEditor.enrichHTML(this.source.system.costs.primary[k].description),
-                k,
-              ),
+              createDialogInput({
+                hint: await TeriockTextEditor.enrichHTML(this.source.system.costs.primary[k].description),
+                integer: k !== "gp",
+                label: _loc("TERIOCK.COSTS.Long.primary", { key: v.label }),
+                name: k,
+              }),
             );
           } else {
             this.costs[k] = await this.#determineCost(k);
@@ -169,12 +187,13 @@ export default function AbilityExecutionGetInputPart(Base) {
             relativeTo: this.source,
           });
           dialogs.push(
-            createDialogInput(
-              _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened"),
-              heightenDescription,
-              "heightened",
-              this.actor?.system.scaling.p || Infinity,
-            ),
+            createDialogInput({
+              hint: heightenDescription,
+              integer: true,
+              label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened"),
+              max: this.actor?.system.scaling.p,
+              name: "heightened",
+            }),
           );
         }
         if (dialogs.length > 0) {

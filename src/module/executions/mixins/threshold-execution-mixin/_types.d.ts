@@ -16,7 +16,7 @@ declare global {
       min?: number;
       name: string;
       placeholder?: number | string;
-      small: boolean;
+      small?: boolean;
       value: boolean | number | string;
       update: (value: boolean | number | string) => void;
     };
@@ -27,6 +27,16 @@ declare global {
       icon?: string;
       label?: string;
       callback?: () => void;
+    };
+
+    export type ExecutionDialogDocument = {
+      document: AnyChildDocument | null | undefined;
+      editable?: boolean;
+      label?: string;
+      selectHint?: string;
+      selectTitle?: string;
+      getChoices?: () => AnyChildDocument[] | Promise<AnyChildDocument[]>;
+      update?: (document: AnyChildDocument | null) => Promise<void> | void;
     };
   }
 }
