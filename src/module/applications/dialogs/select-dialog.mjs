@@ -1,11 +1,8 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { createElement } from "../../helpers/html.mjs";
-import { classPanel } from "../../helpers/panel.mjs";
-import { getImage } from "../../helpers/path.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
-import { TeriockTextEditor } from "../ux/_module.mjs";
 import { selectDocumentDialog, selectDocumentsDialog } from "./select-document-dialog.mjs";
 
 const { fields } = foundry.data;
@@ -146,24 +143,6 @@ export async function selectPropertyDialog() {
 }
 
 /**
- * Internal helper to build tradecraft dialog choices.
- * @param {Teriock.Keys.Tradecraft[]} [tradecrafts]
- * @returns {{identifier: string, img: string, name: string, uuid: string}[]}
- */
-function _tradecraftChoices(tradecrafts) {
-  const tradecraftList = tradecrafts?.length ? tradecrafts : Object.keys(TERIOCK.reference.tradecrafts);
-  if (tradecraftList.length === 0) return [];
-  return tradecraftList.map(tc => {
-    return {
-      identifier: `tradecraft:${tc}`,
-      img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-      name: TERIOCK.reference.tradecrafts[tc],
-      uuid: tc,
-    };
-  });
-}
-
-/**
  * Dialog to select a tradecraft.
  * @param {Teriock.Keys.Tradecraft[]} [tradecrafts]
  * @returns {Promise<Teriock.Keys.Tradecraft|null>}
@@ -181,18 +160,18 @@ export async function selectTradecraftDialog(tradecrafts) {
  * @returns {Promise<Teriock.Keys.Tradecraft[]>}
  */
 export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}) {
-  const choices = _tradecraftChoices(tradecrafts);
+  const tradecraftJournal = await resolveDocument(game.teriock.packs.rules.getName("Tradecraft"));
+  let choices = tradecraftJournal?.pages.contents;
+  if (tradecrafts) choices = choices.filter(t => tradecrafts.includes(t.system.identifier));
   if (choices.length === 0) return [];
   const chosen = await selectDocumentsDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
     multi,
     openable: true,
     title: _loc("TERIOCK.DIALOGS.Select.Tradecraft.title"),
-    tooltipIdentifier: "identifier",
-    tooltipUuid: null,
   });
   if (!chosen) return [];
-  return chosen.map(c => c.uuid);
+  return chosen.map(c => c.system.identifier);
 }
 
 /**
@@ -272,29 +251,20 @@ export async function selectBodyPartDialog() {
 
 /**
  * Dialog to select a class.
- * @returns {Promise<string|null>}
+ * @param {Teriock.Keys.Class[]} [classes]
+ * @returns {Promise<Teriock.Keys.Class|null>}
  */
-export async function selectClassDialog() {
-  const choices = await Promise.all(
-    [
-      ...Object.keys(TERIOCK.config.rank.mage.classes),
-      ...Object.keys(TERIOCK.config.rank.semi.classes),
-      ...Object.keys(TERIOCK.config.rank.warrior.classes),
-    ].map(async c => {
-      return {
-        img: getImage("classes", TERIOCK.index.classes[c]),
-        name: TERIOCK.reference.classes[c],
-        tooltip: await TeriockTextEditor.makeTooltip(await classPanel(c)),
-        uuid: c,
-      };
-    }),
-  );
+export async function selectClassDialog(classes = null) {
+  const classJournal = await resolveDocument(game.teriock.packs.rules.getName("Class"));
+  let choices = classJournal?.pages.contents;
+  if (classes) choices = choices.filter(c => classes.includes(c.system.identifier));
+  if (choices.length === 0) return null;
   const chosen = await selectDocumentDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Class.hint"),
+    openable: true,
     title: _loc("TERIOCK.DIALOGS.Select.Class.title"),
-    tooltipKey: "tooltip",
   });
-  if (chosen) return chosen.uuid;
+  if (chosen) return chosen.system.identifier;
   else return null;
 }
 

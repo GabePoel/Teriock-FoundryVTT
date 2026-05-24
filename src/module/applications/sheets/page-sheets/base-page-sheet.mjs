@@ -35,7 +35,7 @@ export default class BasePageSheet
   )
 {
   static DEFAULT_OPTIONS = {
-    classes: ["teriock"],
+    classes: ["teriock", "unpadded"],
     form: { closeOnSubmit: false, submitOnChange: true },
     position: { height: 600, width: 560 },
     window: { resizable: true },

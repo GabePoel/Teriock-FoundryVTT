@@ -51,6 +51,13 @@ export const documentConfig = {
     plural: "TERIOCK.DOCUMENTS.character.plural",
     sorter: docSort,
   },
+  class: /** @type {Teriock.Config.DocumentEntry} */ {
+    documentName: "JournalEntryPage",
+    icon: icons.document.rank,
+    index: "classes",
+    label: "TYPES.JournalEntryPage.class",
+    plural: "TERIOCK.DOCUMENTS.class.plural",
+  },
   condition: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "conditions",

@@ -174,6 +174,7 @@ foundry.helpers.Hooks.once("init", function() {
     JournalEntryCategory: { documentClass: documents.TeriockJournalEntryCategory },
     JournalEntryPage: {
       dataModels: {
+        class: data.systems.pages.ClassSystem,
         damage: data.systems.pages.HarmSystem,
         drain: data.systems.pages.HarmSystem,
         tradecraft: data.systems.pages.TradecraftSystem,
@@ -354,6 +355,12 @@ foundry.helpers.Hooks.once("init", function() {
       doc: documents.TeriockJournalEntryPage,
       label: "TYPES.JournalEntryPage.tradecraft",
       types: ["tradecraft"],
+    },
+    {
+      cls: applications.sheets.page.ClassSheet,
+      doc: documents.TeriockJournalEntryPage,
+      label: "TYPES.JournalEntryPage.class",
+      types: ["class"],
     },
   ];
   sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>
