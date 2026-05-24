@@ -270,7 +270,7 @@ export default function BaseDocumentMixin(Base) {
         if (self === true && doc !== this) return false;
         return (this.isOwner
           && (this.checkAncestor(doc) || this.master === doc || this === doc)
-          && (doc?.sheet.isEditable || !editable || ["consequence", "imbuement"].includes(this.type)));
+          && (doc?.sheet?.isEditable || !editable || ["consequence", "imbuement"].includes(this.type)));
       }
 
       /** @inheritDoc */

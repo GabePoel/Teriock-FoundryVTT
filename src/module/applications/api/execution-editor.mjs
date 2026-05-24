@@ -10,14 +10,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    actions: {
-      advantage: this._onConfirm,
-      cancel: this._onCancel,
-      changeDocument: this._onChangeDocument,
-      disadvantage: this._onConfirm,
-      normal: this._onConfirm,
-      ok: this._onConfirm,
-    },
+    actions: { cancel: this._onCancel, changeDocument: this._onChangeDocument, confirm: this._onConfirm },
     classes: ["dialog", "execution-editor"],
     position: { width: 550 },
     window: { contentClasses: ["wide-toggles", "standard-form"], resizable: false },
@@ -71,14 +64,14 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
 
   /**
    * @param {PointerEvent} event
-   * @param {HTMLElement} target
+   * @param {HTMLButtonElement} target
    * @returns {Promise<void>}
    * @this {TeriockExecutionEditor}
    */
   static async _onConfirm(event, target) {
     event?.preventDefault();
-    const action = target?.dataset?.action;
-    const button = this.execution._dialogButtons.find(b => b.action === action);
+    const name = target?.name;
+    const button = this.execution._dialogButtons.find(b => b.name === name);
     if (button?.callback) button.callback();
     this._finish(true);
     await this.close();
@@ -174,6 +167,17 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
   }
 
   /** @inheritDoc */
+  async _onFirstRender(context, options = {}) {
+    await super._onFirstRender(context, options);
+    const btn = this.execution._dialogButtons.find(d => d.default);
+    if (btn && btn.name) {
+      /** @type {HTMLButtonElement} */
+      const btnEl = this.element.querySelector(`.form-footer button[name=${btn.name}]`);
+      if (btnEl) btnEl.focus();
+    }
+  }
+
+  /** @inheritDoc */
   async _onRender(context, options = {}) {
     await super._onRender(context, options);
     this.#bindBlockListeners();
@@ -201,8 +205,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
     });
     return Object.assign(await super._prepareContext(options), {
       buttons: this.execution._dialogButtons.map(button => ({
-        action: button.action,
-        default: button.default,
+        ...button,
         icon: makeIconClass(button.icon || this.execution.icon, "button"),
         label: _loc(button.label),
         type: "submit",

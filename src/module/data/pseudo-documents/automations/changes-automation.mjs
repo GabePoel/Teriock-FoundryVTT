@@ -48,7 +48,7 @@ export default class ChangesAutomation extends CritAutomation {
     const html = await TeriockTextEditor.renderTemplate("teriock/sheets/shared/changes", {
       changesData: this.changes,
       changesPath: `${this.localPath}.changes`,
-      editable: this.document.sheet.isEditable,
+      editable: this.document?.sheet?.isEditable,
       fieldDefs: this.schema.fields.changes.element.fields,
       valuePath: `_source.${this.localPath}.changes`,
     });

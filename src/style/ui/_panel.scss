@@ -69,10 +69,6 @@
       width: 100%;
     }
   }
-
-  .teriock-panel-image {
-    border-radius: 2px !important;
-  }
 }
 
 .teriock-panel-body {
@@ -182,19 +178,7 @@
     }
 
     .teriock-panel-image {
-      align-items: center;
-      cursor: pointer;
-      display: flex;
-      height: 2em;
-      width: 2em;
-      @include mixins.image-border(4px, 0.3, 2px);
-      @include mixins.warm-image-container-background;
-
-      img {
-        @include mixins.warm-drop-shadow;
-        @include mixins.image-position;
-        border: none;
-      }
+      @include mixins.simple-two-layer-image(2em, 4px, 0.3, 2px);
     }
 
     .teriock-panel-header-name {
@@ -392,16 +376,8 @@
       }
 
       .teriock-panel-association-row-image {
-        @include mixins.image-border;
-        height: 1.5em;
+        @include mixins.simple-two-layer-image(1.5em);
         margin: 0.25em;
-        min-height: 1.5em;
-        min-width: 1.5em;
-        width: 1.5em;
-
-        img {
-          @include mixins.warm-image-background;
-        }
       }
 
       .teriock-panel-association-row-icon {

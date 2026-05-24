@@ -28,7 +28,7 @@ export default class ThresholdRoll extends BaseRoll {
    * @returns {boolean}
    */
   get critFailure() {
-    return this.dice.some(d => d.total <= this.options.critFailureThreshold);
+    return !!this.dice.length && this.dice[0].total <= this.options.critFailureThreshold;
   }
 
   /**
@@ -36,7 +36,7 @@ export default class ThresholdRoll extends BaseRoll {
    * @returns {boolean}
    */
   get critSuccess() {
-    return this.dice.some(d => d.total >= this.options.critSuccessThreshold);
+    return !!this.dice.length && this.dice[0].total >= this.options.critSuccessThreshold;
   }
 
   /** @inheritDoc */

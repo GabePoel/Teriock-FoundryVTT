@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
-import { ruleUuid } from "../../../helpers/resolve.mjs";
+import { fromIdentifier } from "../../../helpers/utils.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 
 export default class ImmunityExecution extends BaseExecution {
@@ -13,20 +13,23 @@ export default class ImmunityExecution extends BaseExecution {
     this.wrappers = options.wrappers || [];
     this.wrappers.push(this.hex ? _loc("TERIOCK.TERMS.Common.chosen") : _loc("TERIOCK.TERMS.Common.automatic"));
     this.img = options.img || (this.hex ? getImage("effect-types", "Hexseal") : getImage("effect-types", "Immunity"));
-    this.rule = this.hex ? "hexseal" : "immunity";
-    this.LABEL = "Immunity";
   }
 
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, {
-      system: { _src: ruleUuid("Keyword", this.hex ? "Hexseal" : "Immunity") },
+      system: { _src: game.teriock.identifiers.get(this.identifier) },
     });
   }
 
   /** @inheritDoc */
   get flavor() {
     return this.name;
+  }
+
+  /** @returns {TypedIdentifier} */
+  get identifier() {
+    return this.hex ? "keyword:hexseal" : "keyword:immunity";
   }
 
   /** @inheritDoc */
@@ -43,7 +46,7 @@ export default class ImmunityExecution extends BaseExecution {
         label: _loc("TERIOCK.TERMS.Common.protection"),
         wrappers: this.wrappers,
       }],
-      blocks: [{ text: TERIOCK.content.keywords[this.rule], title: this.name }],
+      blocks: [{ text: (await fromIdentifier(this.identifier))?.text?.content, title: this.name }],
       icon: TERIOCK.display.icons.effect.protection,
       image: this.img,
       label: _loc("TERIOCK.TERMS.Common.protection"),

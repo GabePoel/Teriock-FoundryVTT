@@ -16,6 +16,7 @@
     content: "";
     height: 100%;
     left: 0;
+    pointer-events: none;
     position: absolute;
     top: 0;
     width: 100%;
@@ -23,11 +24,17 @@
   }
 }
 
-@mixin image-border($spread: 4px, $opacity: 0.3, $radius: 100%) {
-  border: 1px solid color-mix(in srgb, var(--color-dark-5), transparent 25%);
+@mixin image-border(
+  $spread: 4px,
+  $opacity: 0.3,
+  $radius: 100%,
+  $outline-color: var(--color-light-6),
+  $border-color: color-mix(in srgb, var(--color-dark-5), transparent 25%),
+) {
+  border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: 0 0 $spread rgba(0, 0, 0, $opacity);
-  outline: 1px solid var(--color-light-6);
+  outline: 1px solid $outline-color;
   overflow: hidden;
 }
 
@@ -66,6 +73,38 @@
 @mixin image-position() {
   object-fit: cover;
   object-position: 50% 0;
+}
+
+@mixin simple-two-layer-image(
+  $size,
+  $spread: 4px,
+  $opacity: 0.3,
+  $radius: 100%,
+  $outline-color: var(--color-light-6),
+  $border-color: color-mix(in srgb, var(--color-dark-5), transparent 25%),
+) {
+  align-items: center;
+  display: block;
+  flex: 0 0 auto;
+  height: $size;
+  max-height: $size;
+  max-width: $size;
+  min-height: $size;
+  min-width: $size;
+  overflow: hidden;
+  width: $size;
+  @include image-border($spread, $opacity, $radius, $outline-color, $border-color);
+  @include warm-image-container-background;
+
+  img {
+    @if $spread > 0 {
+      @include warm-drop-shadow;
+    }
+    @include image-position;
+    border: none;
+    height: $size;
+    width: $size;
+  }
 }
 
 @mixin text-subtle() {

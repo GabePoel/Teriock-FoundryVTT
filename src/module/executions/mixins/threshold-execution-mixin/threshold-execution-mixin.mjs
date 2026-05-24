@@ -50,27 +50,33 @@ export default function ThresholdExecutionMixin(Base) {
       get _dialogButtons() {
         return this.isRoll
           ? [{
-            action: "disadvantage",
+            action: "confirm",
+            default: this.edge < 0,
             icon: "fa-dice-d20",
             label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+            name: "disadvantage",
             callback: () => (this.edge = -1),
           }, {
-            action: "normal",
-            default: true,
+            action: "confirm",
+            default: this.edge === 0,
             icon: "fa-dice-d20",
             label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+            name: "normal",
             callback: () => (this.edge = 0),
           }, {
-            action: "advantage",
+            action: "confirm",
+            default: this.edge > 0,
             icon: "fa-dice-d20",
             label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+            name: "advantage",
             callback: () => (this.edge = 1),
           }]
           : [{
-            action: "ok",
+            action: "confirm",
             default: true,
             icon: icons.ui.enable,
             label: "TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm",
+            name: "ok",
           }];
       }
 

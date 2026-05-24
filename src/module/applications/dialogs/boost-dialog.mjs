@@ -27,7 +27,7 @@ export default async function boostDialog(rollFormula, options = {}) {
   if (options.document) {
     const documentElement = createElement("div");
     documentElement.innerHTML = await TeriockTextEditor.enrichHTML(
-      `<p>@EMBED[${options.document.uuid} cite=false caption=false text=""]</p>`,
+      `<p>@EMBED[${options.document.uuid} cite=false caption=false text="" icons=""]</p>`,
     );
     contentHtml.append(documentElement);
   }

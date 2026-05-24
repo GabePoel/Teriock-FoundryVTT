@@ -22,10 +22,11 @@ declare global {
     };
 
     export type ExecutionDialogButton = {
-      action: string;
+      action?: string;
       default?: boolean;
       icon?: string;
-      label?: string;
+      label: string;
+      name: string;
       callback?: () => void;
     };
 

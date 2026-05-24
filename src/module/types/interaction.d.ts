@@ -26,7 +26,7 @@ declare global {
     /**
      * Options for generic threshold rolls.
      */
-    export type ThresholdOptions = {
+    export type ThresholdOptions = UseOptions & {
       /** Some bonus to add to the roll */
       bonus?: Teriock.System.FormulaString;
       /** The comparison operation `c(roll, threshold)` */
@@ -49,9 +49,9 @@ declare global {
 
     export type FeatOptions = ThresholdOptions & { attribute?: Teriock.Keys.Attribute };
 
-    export type HackOptions = { part?: Teriock.Keys.HackableBodyPart };
+    export type HackOptions = UseOptions & { part?: Teriock.Keys.HackableBodyPart };
 
-    export type FormulaOptions = { formula?: string };
+    export type FormulaOptions = UseOptions & { formula?: string };
 
     export type ImpactOptions = FormulaOptions & {
       apply?: boolean;
@@ -64,9 +64,14 @@ declare global {
       rollData?: object;
     };
 
-    export type StatusOptions = { status?: Teriock.Keys.Condition };
+    export type StatusOptions = UseOptions & { status?: Teriock.Keys.Condition };
 
-    export type StandardDamageOptions = { armament?: UUID<TeriockArmament>, crit?: boolean, twoHanded?: boolean };
+    export type StandardDamageOptions = UseOptions & {
+      armament?: UUID<TeriockArmament>;
+      crit?: boolean;
+      select?: boolean;
+      twoHanded?: boolean;
+    };
 
     export type ResistOptions = ThresholdOptions & { hex?: boolean };
 

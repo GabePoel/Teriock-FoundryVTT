@@ -77,7 +77,7 @@ export default Base => {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
-          visible: this.parent.parent?.isOwner && this.spell && doc !== this.parent && doc.sheet.isEditable,
+          visible: this.parent.parent?.isOwner && this.spell && doc !== this.parent && doc?.sheet?.isEditable,
           onClick: async () => {
             const data = await this.toScroll();
             const op = { keepEmbeddedIds: true, renderSheet: true };

@@ -1,6 +1,30 @@
 @use "../mixins";
 
+@mixin chat-color($color, $transparency: 90%, $emph: false) {
+  @if ($emph) {
+    border-color: color-mix(in srgb, $color, transparent, $transparency);
+    color: $color;
+    .teriock-dice-total-icon, .teriock-dice-formula-icon {
+      color: $color;
+    }
+  } @else {
+    background-color: color-mix(in srgb, $color, transparent $transparency);
+  }
+}
+
 .teriock.chat-message {
+  --color-chat-block: #986a44;
+  --color-chat-crit-failure: #6e0100;
+  --color-chat-crit-success: #134209;
+  --color-chat-damage: #a51d2d;
+  --color-chat-drain: #1a5fb4;
+  --color-chat-failure: #a51d2d;
+  --color-chat-feat: #f6d32d;
+  --color-chat-pay: #e5a50a;
+  --color-chat-success: #26a269;
+  --color-chat-ub: #c64600;
+  --color-chat-wither: #613583;
+
   footer {
     display: flex;
     flex-direction: column;
@@ -26,19 +50,19 @@
 
     &:not(:hover) {
       &.damage-button {
-        background-color: color-mix(in srgb, #a51d2d, transparent 90%);
+        @include chat-color(var(--color-chat-damage));
       }
 
       &.drain-button {
-        background-color: color-mix(in srgb, #1a5fb4, transparent 90%);
+        @include chat-color(var(--color-chat-drain));
       }
 
       &.wither-button {
-        background-color: color-mix(in srgb, #613583, transparent 90%);
+        @include chat-color(var(--color-chat-wither));
       }
 
       &.pay-button {
-        background-color: color-mix(in srgb, #e5a50a, transparent 90%);
+        @include chat-color(var(--color-chat-pay));
       }
     }
   }
@@ -52,7 +76,11 @@
 
 .teriock-target-container {
   @include mixins.centralize;
+  align-items: center;
+  display: flex;
   flex-direction: row;
+  height: 26px;
+  justify-content: flex-start;
   overflow: hidden;
   position: relative;
   user-select: none;
@@ -60,23 +88,19 @@
   @include mixins.inverse-roll-style-hover;
 
   .teriock-target-img {
+    @include mixins.simple-two-layer-image(18px);
     filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
-    height: calc(100% - 6px);
-    left: 0;
-    margin: 3px;
-    position: absolute;
-    @include mixins.image-border;
-    top: 0;
-
-    img {
-      height: 100%;
-      width: 100%;
-    }
+    flex: 0;
+    margin-inline: 4px;
   }
 
   .teriock-target-name {
-    margin: 0;
     margin-block: 2px;
+    margin-right: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    width: 100%;
   }
 }
 
@@ -85,11 +109,7 @@
   word-break: break-word;
 
   &.ub {
-    background-color: color-mix(in srgb, #c64600, transparent 90%);
-  }
-
-  &.feat {
-    background-color: color-mix(in srgb, #f6d32d, transparent 90%);
+    @include chat-color(var(--color-chat-ub));
   }
 }
 
@@ -102,52 +122,47 @@
   }
 
   &.success {
-    background-color: color-mix(in srgb, #26a269, transparent 90%);
+    @include chat-color(var(--color-chat-success));
   }
 
   &.failure {
-    background-color: color-mix(in srgb, #a51d2d, transparent 90%);
-    position: relative;
+    @include chat-color(var(--color-chat-failure));
   }
 
   &.crit-success {
-    border-color: color-mix(in srgb, #134209, transparent 70%);
-    color: #134209;
-
-    .teriock-dice-total-icon {
-      color: #134209;
-    }
+    @include chat-color(var(--color-chat-crit-success), 70%, true);
   }
 
   &.crit-failure {
-    border-color: color-mix(in srgb, #6e0100, transparent 80%);
-    color: #6e0100;
-
-    .teriock-dice-total-icon {
-      color: #6e0100;
-    }
+    @include chat-color(var(--color-chat-crit-failure), 80%, true);
   }
+}
 
+.teriock-dice-total, .teriock-dice-formula {
   &.feat {
-    background-color: color-mix(in srgb, #f6d32d, transparent 90%);
+    @include chat-color(var(--color-chat-feat));
   }
 
-  .teriock-dice-total-icon {
-    @include mixins.centralize;
-    bottom: 0;
-    color: var(--color-text-subtle);
-    font-size: small;
-    opacity: 0.5;
-    position: absolute;
-    top: 0;
+  &.block {
+    @include chat-color(var(--color-chat-block));
+  }
+}
 
-    &.left {
-      left: 4px;
-    }
+.teriock-dice-total .teriock-dice-total-icon, .teriock-dice-formula .teriock-dice-formula-icon {
+  @include mixins.centralize;
+  bottom: 0;
+  color: var(--color-text-subtle);
+  font-size: small;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
 
-    &.right {
-      right: 4px;
-    }
+  &.left {
+    left: 4px;
+  }
+
+  &.right {
+    right: 4px;
   }
 }
 
@@ -173,7 +188,9 @@
   padding-top: 6px !important;
 }
 
-.teriock-bottom-tags + .teriock-buttons {
+.teriock-bottom-tags + .teriock-buttons,
+.teriock-panels + .teriock.dice-roll,
+.message-content + .teriock-message-footer {
   margin-top: 6px;
 }
 
@@ -181,17 +198,9 @@
   grid-column: 1 / -1;
 }
 
-.teriock-panels + .teriock.dice-roll {
-  margin-top: 6px;
-}
-
 .teriock-message-footer {
   display: flex;
   flex-direction: column;
-}
-
-.message-content + .teriock-message-footer {
-  margin-top: 6px;
 }
 
 .teriock-chat-message-content .table-results img {
@@ -217,16 +226,7 @@
   margin-bottom: 8px;
 
   .message-avatar {
-    @include mixins.image-border;
-    height: 30px;
-    max-height: 30px;
-    max-width: 30px;
-    outline-color: var(--color-dark-6);
-    width: 30px;
-
-    img {
-      @include mixins.warm-image-background;
-    }
+    @include mixins.simple-two-layer-image(30px, 4px, 0.3, 100%, var(--color-dark-6));
   }
 
   .message-author {

@@ -76,7 +76,13 @@
   </div>
   <div class="teriock-block-body" data-tooltip-class="">
     <div class="teriock-block-titles">
-      <div class="teriock-block-title">{{ title }}</div>
+      <div class="teriock-block-title">
+        {{#if (exists title)}}
+          {{ title }}
+        {{else}}
+          {{localize "TERIOCK.TERMS.Common.undefined"}}
+        {{/if}}
+      </div>
       <div
         class="
           teriock-block-subtitle

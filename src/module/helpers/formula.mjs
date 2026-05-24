@@ -111,13 +111,7 @@ export function upgradeIndeterministicFormula(value, delta) {
  * @returns {boolean}
  */
 export function formulaExists(formula) {
-  if (!formula) return false;
-  if (typeof formula === "string") {
-    formula = formula.trim();
-    return Boolean(formula.length > 0 && formula !== "0");
-  } else {
-    return Boolean(formula);
-  }
+  return Boolean(formula) && (typeof formula === "string" && formula.trim() !== "0");
 }
 
 /**

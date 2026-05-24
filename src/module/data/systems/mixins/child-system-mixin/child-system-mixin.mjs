@@ -103,12 +103,8 @@ export default function ChildSystemMixin(Base) {
       get embedActions() {
         return Object.assign(super.embedActions, {
           useDoc: {
-            primary: async (event, relative) => {
-              await this.use({ actor: relative?.actor, event });
-            },
-            secondary: async (event, relative) => {
-              await this.use({ actor: relative?.actor, event });
-            },
+            primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+            secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
           },
         });
       }

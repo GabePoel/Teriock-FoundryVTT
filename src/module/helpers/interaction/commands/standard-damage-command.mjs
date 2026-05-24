@@ -1,3 +1,4 @@
+import { selectDocumentDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 
 /**
@@ -7,10 +8,16 @@ import { icons } from "../../../constants/display/icons.mjs";
  */
 async function use(actor, options = {}) {
   if (!game.actors.check(actor)) return;
+  if (options.event?.shiftKey) options.select = true;
   let attacker = actor?.system?.wielding.attacker;
   if (options.armament) {
     const newAttacker = await foundry.utils.fromUuid(options.armament, { relative: actor });
     if (newAttacker) attacker = newAttacker;
+  }
+  if (options.select) {
+    attacker = await selectDocumentDialog(actor.armaments.filter(a => a.active), {
+      noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
+    });
   }
   if (!attacker) {
     ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {

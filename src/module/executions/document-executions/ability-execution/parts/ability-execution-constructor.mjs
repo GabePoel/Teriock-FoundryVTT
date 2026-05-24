@@ -140,7 +140,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
 
   /** @returns {boolean} */
   get canHeighten() {
-    return this.competence.proficient && !!this.source.system.heightened && !this.flags.noHeighten;
+    return this.competence.proficient && !!this.source.system.heightened && !this.flags.noHeighten
+      && (this.actor?.system.scaling.p ?? 0 > 0);
   }
 
   /** @inheritDoc */
@@ -272,13 +273,11 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.warded = this.#resolveWarded();
     this.incurredAttackPenalty = this.#resolveAttackPenalty();
     if (this.isAttack && sys.isContact) {
-      this.bonus = formulaExists(this.rootBonus) && formulaExists(armament.system.hitBonus)
+      this.bonus = formulaExists(this.rootBonus) && formulaExists(armament?.system.hitBonus)
         ? addFormula(this.rootBonus, armament.system.hitBonus)
-        : formulaExists(armament.system.hitBonus)
-        ? armament.system.hitBonus
-        : formulaExists(this.rootBonus)
-        ? this.rootBonus
-        : "0";
+        : (formulaExists(armament?.system.hitBonus)
+          ? armament.system.hitBonus
+          : (formulaExists(this.rootBonus) ? this.rootBonus : "0"));
     }
   }
 
@@ -306,6 +305,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.#initializeFlags(options);
     this.#initializeCosts(options);
     this._updateArmament(this.armament, options);
+    if (!this.bonus) this.bonus = "0";
     this.limb = this.#resolveLimb(options);
     // Try and find a specific token that this is being executed by
     /** @type {TeriockToken[]} */

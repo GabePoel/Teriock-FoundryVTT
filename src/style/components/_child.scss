@@ -29,26 +29,16 @@
   }
 
   .ab-profile-img {
-    display: block;
     flex: 0 0 auto;
-    height: 64px;
+    @include mixins.simple-two-layer-image(64px, 12px, 0.5, 5px);
     left: 0;
     margin: 1rem;
-    overflow: hidden;
     position: relative;
-    @include mixins.warm-image-container-background;
-    @include mixins.image-border(12px, 0.5, 5px);
     top: 0;
-    width: 64px;
 
     img {
-      @include mixins.warm-drop-shadow;
-      @include mixins.image-position;
-      border: none;
       cursor: pointer;
-      height: inherit;
       max-width: 100%;
-      width: inherit;
     }
 
     &::after {

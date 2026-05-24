@@ -33,6 +33,7 @@ export default function AbilityExecutionRollsPart(Base) {
         if (this.isAttack) {
           const generalRollOptions = { flavor: this.flavor, styles: styles, targets: [] };
           if (this.piercing.ub) {
+            generalRollOptions.styles.dice.icon = TERIOCK.display.icons.piercing.ub;
             generalRollOptions.styles.dice.classes += " ub";
             generalRollOptions.styles.dice.tooltip = _loc("TERIOCK.TERMS.Properties.unblockable");
           }
@@ -53,10 +54,10 @@ export default function AbilityExecutionRollsPart(Base) {
           }
           if (this.rolls.length === 0)
             this.rolls.push(new ThresholdRoll(this.formula, this.rollData, generalRollOptions));
-        } else if (this.isFeat) {
-          styles.total.icon = "star";
+        } else if (this.isFeat && !preventThreshold) {
+          styles.total.icon = TERIOCK.display.icons.interaction.feat;
           this.rolls.push(
-            new BaseRoll(preventThreshold ? "0" : this.formula, this.rollData, {
+            new BaseRoll(this.formula, this.rollData, {
               flavor: this.flavor,
               hideRoll: preventThreshold,
               styles: styles,
@@ -64,6 +65,7 @@ export default function AbilityExecutionRollsPart(Base) {
             }),
           );
         } else if (this.isBlock) {
+          styles.total.icon = TERIOCK.display.icons.interaction.block;
           this.rolls.push(
             new BaseRoll(this.formula, this.rollData, {
               flavor: this.flavor,
