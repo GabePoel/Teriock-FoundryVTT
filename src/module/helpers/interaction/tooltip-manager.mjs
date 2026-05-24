@@ -4,6 +4,12 @@ const { TooltipManager } = foundry.helpers.interaction;
 
 /** @inheritDoc */
 export default class TeriockTooltipManager extends TooltipManager {
+  /** @type {{allowed: Set<string>, disallowed: Set<string>}} */
+  #KNOWN_DOCUMENT_NAMES = {
+    allowed: new Set(),
+    disallowed: new Set(),
+  }
+
   #RICH_TOOLTIP_WIDTH = 350;
 
   /**
@@ -12,7 +18,7 @@ export default class TeriockTooltipManager extends TooltipManager {
    */
   async #fetchRichTooltip(element) {
     const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
-    if (!["ActiveEffect", "Actor", "Item", "JournalEntryPage"].includes(foundry.utils.parseUuid(uuid)?.type)) return;
+    if (!this.#validateUuid(uuid)) return;
     const doc = await fromUuid(uuid);
     if (doc && typeof doc.toTooltip === "function") {
       element.dataset.tooltipHtml = await doc.toTooltip();
@@ -26,11 +32,35 @@ export default class TeriockTooltipManager extends TooltipManager {
    * @param {PointerEvent} event
    */
   #onActivateRich(event) {
+    /** @type {HTMLElement} */
     const element = event.target;
     if ((element.dataset.tooltipUuid || element.dataset.tooltipIdentifier) && !element.dataset.tooltipFetched) {
+      const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
+      if (!this.#validateUuid(uuid)) return;
       element.dataset.tooltipClass = "teriock-rich-tooltip";
       element.dataset.tooltipHtml = TeriockTextEditor.loadingPanelHTML;
       this.#fetchRichTooltip(element);
+    }
+  }
+
+  /**
+   * Check if a UUID can have a rich tooltip. Only certain documents allow them.
+   * @param {UUID<TeriockDocument>} uuid
+   * @returns {boolean}
+   */
+  #validateUuid(uuid) {
+    if (!uuid) return false;
+    const documentName = foundry.utils.parseUuid(uuid)?.type;
+    if (!documentName) return false;
+    if (this.#KNOWN_DOCUMENT_NAMES.allowed.has(documentName)) return true;
+    if (this.#KNOWN_DOCUMENT_NAMES.disallowed.has(documentName)) return false;
+    const Cls = foundry.utils.getDocumentClass(documentName);
+    if (Cls?.documentMetadata.tooltip) {
+      this.#KNOWN_DOCUMENT_NAMES.allowed.add(documentName);
+      return true;
+    } else {
+      this.#KNOWN_DOCUMENT_NAMES.disallowed.add(documentName);
+      return false;
     }
   }
 

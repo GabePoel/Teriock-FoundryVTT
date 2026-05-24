@@ -15,7 +15,7 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
         el.remove();
         // Enable tooltips for remaining search results
       } else if (makeTooltips) {
-        el.dataset.makeTooltip = "true";
+        el.dataset.tooltipUuid = uuid;
       }
     });
     if (makeTooltips) bindCommonActions(this.element);
