@@ -23,7 +23,13 @@ export default function DisplaySheetMixin(Base) {
       static CONTENT_PARTS = { content: { template: "teriock/sheets/shared/content" } };
 
       /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = { actions: { openImage: this.#onOpenImage, populateField: this._onPopulateField } };
+      static DEFAULT_OPTIONS = {
+        actions: {
+          applyButtonUpdate: this._onApplyButtonUpdate,
+          openImage: this.#onOpenImage,
+          populateField: this._onPopulateField,
+        },
+      };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
       static HEADER_PARTS = { header: { template: "teriock/sheets/shared/top" } };
@@ -33,6 +39,19 @@ export default function DisplaySheetMixin(Base) {
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
       static DISPLAY_PARTS = { ...this.HEADER_PARTS, ...this.MENU_PARTS, ...this.CONTENT_PARTS };
+
+      /**
+       * Apply a prepared document update from a display button.
+       * @param {PointerEvent} _event
+       * @param {HTMLElement} target
+       * @returns {Promise<void>}
+       * @this {DisplaySheet}
+       */
+      static async _onApplyButtonUpdate(_event, target) {
+        if (!this.isEditable || !target.dataset.update) return;
+        const entry = this.document.system.displayButtons.find(b => b.button === target.dataset.update);
+        if (entry?.update) await this.document.update(entry.update);
+      }
 
       /**
        * Populate a display field.
@@ -84,11 +103,6 @@ export default function DisplaySheetMixin(Base) {
         return out;
       }
 
-      /** @type {Record<string, object>} */
-      get _buttonUpdates() {
-        return {};
-      }
-
       /**
        * @inheritDoc
        * @param {ApplicationRenderOptions} options
@@ -96,17 +110,6 @@ export default function DisplaySheetMixin(Base) {
       _configureRenderOptions(options) {
         super._configureRenderOptions(options);
         if (this._tab !== "overview") this._removeFromArray(options.parts, "menu");
-      }
-
-      /** @inheritDoc */
-      async _onRender(context, options) {
-        await super._onRender(context, options);
-        if (!this.isEditable) return;
-        for (const [selector, update] of Object.entries(this._buttonUpdates)) {
-          this.element.querySelectorAll(selector).forEach(el => {
-            el.addEventListener("click", () => this.document.update(update));
-          });
-        }
       }
 
       /** @inheritDoc */

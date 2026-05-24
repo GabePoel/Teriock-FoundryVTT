@@ -1,31 +1,34 @@
 <div class="ab-bar">
-  {{formBox
-    (formInput
-      systemFields.size.fields.value
-      value=system.size.value
-      disabled=(not editable))
-    unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.value" value=system.size.value)
-    icon=TERIOCK.display.icons.species.size
-    tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label")
-  }}
-  {{#if (and (exists system.size.min) (exists system.size.max))}}
+  {{#if system.size.enabled}}
     {{formBox
       (formInput
-        systemFields.size.fields.min
-        value=system.size.min
+        systemFields.size.fields.value
+        value=system.size.value
+        placeholder="3"
         disabled=(not editable))
-      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.min" value=system.size.min)
-      icon=TERIOCK.display.icons.species.minSize
-      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label")
+      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.value" value=system.size.value)
+      icon=TERIOCK.display.icons.species.size
+      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label")
     }}
-    {{formBox
-      (formInput
-        systemFields.size.fields.max
-        value=system.size.max
-        disabled=(not editable))
-      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.max" value=system.size.max)
-      icon=TERIOCK.display.icons.species.maxSize
-      tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label")
-    }}
+    {{#if (and (exists system.size.min) (exists system.size.max))}}
+      {{formBox
+        (formInput
+          systemFields.size.fields.min
+          value=system.size.min
+          disabled=(not editable))
+        unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.min" value=system.size.min)
+        icon=TERIOCK.display.icons.species.minSize
+        tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label")
+      }}
+      {{formBox
+        (formInput
+          systemFields.size.fields.max
+          value=system.size.max
+          disabled=(not editable))
+        unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.max" value=system.size.max)
+        icon=TERIOCK.display.icons.species.maxSize
+        tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label")
+      }}
+    {{/if}}
   {{/if}}
 </div>

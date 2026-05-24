@@ -121,10 +121,20 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get displayButtons() {
     const buttons = super.displayButtons;
-    if (typeof this.size.min !== "number" && typeof this.size.min !== "number")
-      buttons.push({ classes: "ab-size-button", label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label" });
-    if (!this.adult)
-      buttons.push({ classes: "ab-lifespan-button", label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label" });
+    if (!this.size.min || !this.size.max) {
+      buttons.push({
+        button: "sizeRange",
+        label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label",
+        update: { "system.size.max": this.size.value, "system.size.min": this.size.value },
+      });
+    }
+    if (!this.adult) {
+      buttons.push({
+        button: "lifespan",
+        label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
+        update: { "system.adult": 20, "system.lifespan": 100 },
+      });
+    }
     return buttons;
   }
 
@@ -257,6 +267,12 @@ export default class SpeciesSystem
     const rollData = super.getRollData();
     if (!this.actor) rollData.size = this.size.enabled ? this.size.value : 0;
     return rollData;
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    if (this.size.enabled && !this.size.value) this.size.value = 3;
+    super.prepareBaseData();
   }
 
   /** @inheritDoc */

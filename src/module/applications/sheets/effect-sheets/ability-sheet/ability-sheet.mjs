@@ -45,25 +45,6 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
       this.window.content.classList.add(elementClass(this.document.system.elements));
   }
 
-  /** @inheritDoc */
-  get _buttonUpdates() {
-    return {
-      ...super._buttonUpdates,
-      ".ab-attribute-improvement-button": { "system.upgrades.score.attribute": "int" },
-      ".ab-expansion-button": { "system.expansion": "detonate" },
-      ".ab-expansion-cap-button": { "system.expansion.cap": "1" },
-      ".ab-feat-save-improvement-button": {
-        "system.upgrades.competence.attribute": "int",
-        "system.upgrades.competence.value": 1,
-      },
-      ...Object.fromEntries(
-        Object.keys(TERIOCK.config.cost.tweaks).map(
-          k => [`.ab-tweak-${k}-button`, { [`system.costs.tweaks.${k}`]: 1 }]
-        ),
-      ),
-    };
-  }
-
   /**
    * Activates context menus for various ability components.
    * Sets up context menus for delivery, execution, interaction, targets, costs, and improvements.

@@ -122,10 +122,42 @@ export default class AbilitySystem
   /** @inheritDoc */
   get displayButtons() {
     const buttons = super.displayButtons;
-    if (!this.expansion.type)
-      buttons.push({ classes: "ab-expansion-button", label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label" });
-    else if (!this.expansion.cap)
-      buttons.push({ classes: "ab-expansion-cap-button", label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label" });
+    if (!this.expansion.type) {
+      buttons.push({
+        button: "expansion",
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label",
+        update: { "system.expansion": "detonate" },
+      });
+    } else if (!this.expansion.cap) {
+      buttons.push({
+        button: "expansionCap",
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.cap.label",
+        update: { "system.expansion.cap": "1" },
+      });
+    }
+    if (!this.upgrades.score.attribute) {
+      buttons.push({
+        button: "attributeImprovement",
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.score.button",
+        update: { "system.upgrades.score.attribute": "int" },
+      });
+    }
+    if (!this.upgrades.competence.attribute) {
+      buttons.push({
+        button: "featSaveImprovement",
+        label: "TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.button",
+        update: { "system.upgrades.competence.attribute": "int", "system.upgrades.competence.value": 1 },
+      });
+    }
+    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
+      if (!this.costs.tweaks[k]) {
+        buttons.push({
+          button: `tweak${k.charAt(0).toUpperCase()}${k.slice(1)}`,
+          label: v.label,
+          update: { [`system.costs.tweaks.${k}`]: 1 },
+        });
+      }
+    }
     return buttons;
   }
 

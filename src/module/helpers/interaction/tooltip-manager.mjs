@@ -5,11 +5,9 @@ const { TooltipManager } = foundry.helpers.interaction;
 /** @inheritDoc */
 export default class TeriockTooltipManager extends TooltipManager {
   /** @type {{allowed: Set<string>, disallowed: Set<string>}} */
-  #KNOWN_DOCUMENT_NAMES = {
-    allowed: new Set(),
-    disallowed: new Set(),
-  }
+  #KNOWN_DOCUMENT_NAMES = { allowed: new Set(), disallowed: new Set() };
 
+  /** @type {number} */
   #RICH_TOOLTIP_WIDTH = 350;
 
   /**

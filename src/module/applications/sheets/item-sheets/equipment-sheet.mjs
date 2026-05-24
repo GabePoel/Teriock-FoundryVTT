@@ -73,15 +73,6 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
   };
 
   /** @inheritDoc */
-  get _buttonUpdates() {
-    return {
-      ...super._buttonUpdates,
-      ".ab-tier-button": { "system.tier.raw": "1" },
-      ".ab-weight-button": { "system.weight": 1 },
-    };
-  }
-
-  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if (!this.isEditable) return;

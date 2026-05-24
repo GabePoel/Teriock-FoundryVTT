@@ -15,7 +15,7 @@ declare global {
 
     export type DisplayField = string | Partial<FancyDisplayField>;
 
-    export type DisplayButton = { action?: string, classes: string, label: string };
+    export type DisplayButton = { button: string, label: string, update: Record<string, unknown> };
 
     export type FancyDisplayTag = { label: string, tooltip?: string };
 

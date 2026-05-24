@@ -11,18 +11,4 @@ import BaseItemSheet from "./base-item-sheet.mjs";
 export default class ArmamentSheet extends mixClasses(BaseItemSheet, mixins.WikiButtonSheetMixin) {
   /** @inheritDoc */
   static BARS = ["teriock/sheets/shared/bars/armament-bars"];
-
-  /** @inheritDoc */
-  get _buttonUpdates() {
-    return {
-      ...super._buttonUpdates,
-      ".ab-av-button": { "system.av.raw": "1" },
-      ".ab-bv-button": { "system.bv.raw": "1" },
-      ".ab-damage-button": { "system.damage.base": "1" },
-      ".ab-hit-button": { "system.hitBonus": "1" },
-      ".ab-range-button": { "system.range.long.raw": "5" },
-      ".ab-short-range-button": { "system.range.short.raw": "5" },
-      ".ab-two-handed-damage-button": { "system.damage.twoHanded": "1" },
-    };
-  }
 }

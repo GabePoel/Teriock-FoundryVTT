@@ -27,16 +27,4 @@ export default class SpeciesSheet extends mixClasses(BaseItemSheet, mixins.WikiB
     classes: ["species"],
     window: { icon: makeIconClass(documentConfig.species.icon, "title") },
   };
-
-  /** @inheritDoc */
-  get _buttonUpdates() {
-    return {
-      ...super._buttonUpdates,
-      ".ab-lifespan-button": { "system.adult": 20, "system.lifespan": 100 },
-      ".ab-size-button": {
-        "system.size.max": this.item.system.size.value,
-        "system.size.min": this.item.system.size.value,
-      },
-    };
-  }
 }

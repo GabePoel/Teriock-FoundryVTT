@@ -196,21 +196,57 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       get displayButtons() {
         const buttons = super.displayButtons;
-        if (!formulaExists(this.damage.base))
-          buttons.push({ classes: "ab-damage-button", label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label" });
-        if (!formulaExists(this._source.damage.twoHanded)) {
+        if (!formulaExists(this.damage.base)) {
           buttons.push({
-            classes: "ab-two-handed-damage-button",
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
+            button: "damage",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",
+            update: { "system.damage.base": "1" },
           });
         }
-        if (!this.av.raw)
-          buttons.push({ classes: "ab-av-button", label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label" });
-        if (!this.bv.raw)
-          buttons.push({ classes: "ab-bv-button", label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label" });
+        if (!formulaExists(this._source.damage.twoHanded)) {
+          buttons.push({
+            button: "twoHandedDamage",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
+            update: { "system.damage.twoHanded": "1" },
+          });
+        }
+        if (!this.av.raw) {
+          buttons.push({
+            button: "av",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label",
+            update: { "system.av.raw": "1" },
+          });
+        }
+        if (!this.bv.raw) {
+          buttons.push({
+            button: "bv",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
+            update: { "system.bv.raw": "1" },
+          });
+        }
         if (
           (formulaExists(this.damage.base) || formulaExists(this.damage.twoHanded)) && !formulaExists(this.hitBonus)
-        ) { buttons.push({ classes: "ab-hit-button", label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label" }); }
+        ) {
+          buttons.push({
+            button: "hit",
+            label: "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label",
+            update: { "system.hitBonus": "1" },
+          });
+        }
+        if (this.range.ranged && !formulaExists(this.range.long.raw)) {
+          buttons.push({
+            button: "range",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
+            update: { "system.range.long.raw": "5" },
+          });
+        }
+        if (this.range.ranged && !formulaExists(this.range.short.raw)) {
+          buttons.push({
+            button: "shortRange",
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label",
+            update: { "system.range.short.raw": "5" },
+          });
+        }
         return buttons;
       }
 
