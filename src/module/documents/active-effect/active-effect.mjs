@@ -24,6 +24,13 @@ export default class TeriockActiveEffect
   )
 {
   /** @inheritDoc */
+  static _applyChangeUnguided(targetDoc, change, changes, options = {}) {
+    // Restrict changes to just structured data fields, flags, and token properties. Yoinked from Ryuutama.
+    if (!change.key || !(change.key.startsWith?.("flags.") || (targetDoc.documentName === "Token"))) return;
+    return super._applyChangeUnguided(targetDoc, change, changes, options);
+  }
+
+  /** @inheritDoc */
   static migrateData(source, options, state) {
     migrateValueTransform(source, "_stats.compendiumSource", migrateUuid);
     return super.migrateData(source, options, state);
@@ -34,7 +41,7 @@ export default class TeriockActiveEffect
    * @returns {boolean}
    */
   get isReference() {
-    return this.system.isReference;
+    return !!this.system.isReference;
   }
 
   /**
