@@ -1,7 +1,7 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, inferNameFromIdentifier, makeIcon } from "../../../../helpers/utils.mjs";
+import { fromIdentifier, makeIcon } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -100,7 +100,7 @@ export default class MountSystem
    * @returns {string}
    */
   get mountTypeName() {
-    return this.mountType ? inferNameFromIdentifier(`mount:${this.mountType}`) : "";
+    return this.mountType ? game.teriock.identifiers.getName(`mount:${this.mountType}`, { forced: true }) : "";
   }
 
   /** @inheritDoc */

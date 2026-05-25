@@ -1,6 +1,6 @@
 import { typedIdentifierValidator } from "../../data/fields/helpers/validators.mjs";
 import { createElement } from "../../helpers/html.mjs";
-import { inferNameFromIdentifier, makeIconClass, parseIdentifier } from "../../helpers/utils.mjs";
+import { makeIconClass, parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { AbstractFormInputElement, HTMLStringTagsElement } = foundry.applications.elements;
@@ -120,7 +120,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
       for (const k of Object.keys(this._value)) delete this._value[k];
     }
 
-    this._value[identifier] = inferNameFromIdentifier(identifier) ?? identifier;
+    this._value[identifier] = game.teriock.identifiers.getName(identifier) ?? identifier;
   }
 
   /**

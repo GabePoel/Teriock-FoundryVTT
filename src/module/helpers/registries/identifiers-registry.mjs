@@ -1,7 +1,12 @@
+import { parseIdentifier } from "../utils.mjs";
 import BaseRegistryLifecycle from "./abstract/base-registry-lifecycle.mjs";
 
 /**
  * @typedef {TeriockActiveEffect|TeriockActor|TeriockItem|TeriockJournalEntryPage} IdentifiableDocument
+ */
+
+/**
+ * @typedef {{ priority: number, name?: string }} TrackedUuid
  */
 
 /**
@@ -24,8 +29,9 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   #embeddedDocumentNames = new Set(["JournalEntryPage"]);
 
   /**
-   * Registration of document UUIDs. Keys are the identifier, and the value is a Map of UUIDs to their priority score.
-   * @type {Map<TypedIdentifier, Map<UUID<IdentifiableDocument>, number>>}
+   * Registration of document UUIDs keyed by type, then by untyped identifier. Values are Maps of UUIDs to their
+   * priority score and name.
+   * @type {Map<Teriock.Documents.CommonType|null, Map<Identifier, Map<UUID<IdentifiableDocument>, TrackedUuid>>>}
    */
   #identifiers = new Map();
 
@@ -53,6 +59,24 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   #parentDocumentNames = new Set(["JournalEntry"]);
 
   /**
+   * Pick the highest-priority tracked UUID from a group.
+   * @param {Map<UUID<IdentifiableDocument>, TrackedUuid>} group
+   * @returns {{ uuid: UUID<IdentifiableDocument>, entry: TrackedUuid }|undefined}
+   */
+  #getCanonical(group) {
+    let highestPriority = -Infinity;
+    /** @type {{ uuid: UUID<IdentifiableDocument>, entry: TrackedUuid }|undefined} */
+    let canonical = undefined;
+    for (const [uuid, entry] of group.entries()) {
+      if (entry.priority > highestPriority) {
+        highestPriority = entry.priority;
+        canonical = { entry, uuid };
+      }
+    }
+    return canonical;
+  }
+
+  /**
    * Get a priority for a given UUID. Higher priority UUIDs are preferred over lower priority ones. If this returns null
    * then the provided UUID cannot be tracked.
    * @param {UUID<IdentifiableDocument>} uuid
@@ -74,7 +98,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     } else if (parsed.collection?.collection) {
       level = game.teriock.getSetting("prioritizeCustomIdentifiers") ? 10 : 2;
     }
-    // IDs are used as tie breakers within a level
+    // IDs are used as tiebreakers within a level
     const tieBreaker = this.#hashStringToInt(parsed.id);
     return level * 10_000_000_000 + tieBreaker;
   }
@@ -96,14 +120,20 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
 
   /**
    * Internally associate an identifier with a document UUID.
-   * @param identifier
-   * @param uuid
+   * @param {TypedIdentifier} identifier
+   * @param {UUID<IdentifiableDocument>} uuid
+   * @param {string} [name]
    */
-  #track(identifier, uuid) {
+  #track(identifier, uuid, name) {
     const priority = this.#getUuidPriority(uuid);
     if (priority === null) return;
-    if (!this.#identifiers.has(identifier)) this.#identifiers.set(identifier, new Map());
-    this.#identifiers.get(identifier).set(uuid, priority);
+    const { identifier: id, type } = parseIdentifier(identifier);
+    if (!this.#identifiers.has(type)) this.#identifiers.set(type, new Map());
+    const typeMap = this.#identifiers.get(type);
+    if (!typeMap.has(id)) typeMap.set(id, new Map());
+    const group = typeMap.get(id);
+    const existing = group.get(uuid);
+    group.set(uuid, { name: name ?? existing?.name, priority });
   }
 
   /**
@@ -114,8 +144,8 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const journalEntry = await fromUuid(uuid);
     if (!journalEntry) return;
     for (const p of journalEntry.pages) {
-      const typedIdentifier = p.typedIdentifier;
-      if (typedIdentifier) this.#track(typedIdentifier, p.uuid);
+      const typedIdentifier = p?.typedIdentifier;
+      if (typedIdentifier) this.#track(typedIdentifier, p?.uuid, p?.name);
     }
   }
 
@@ -152,26 +182,66 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    */
   get(identifier) {
     if (!this.active) return undefined;
-    const group = this.#identifiers.get(identifier);
+    const { identifier: id, type } = parseIdentifier(identifier);
+    const group = this.#identifiers.get(type)?.get(id);
     if (!group || group.size === 0) return undefined;
-    let highestPriority = -Infinity;
-    let canonicalUuid = undefined;
-    for (const [uuid, priority] of group.entries()) {
-      if (priority > highestPriority) {
-        highestPriority = priority;
-        canonicalUuid = uuid;
-      }
-    }
-    return canonicalUuid;
+    return this.#getCanonical(group)?.uuid;
   }
 
   /**
-   * Associate an identifer with a document UUID.
+   * Get the name of the canonical document associated with an identifier.
+   * @param {TypedIdentifier} identifier
+   * @param {object} [options]
+   * @param {boolean} [options.forced] - Force a string to be provided. This will be either the provided identifier or
+   * a blank string if the identifier is formatted incorrectly.
+   * @returns {string|undefined}
+   */
+  getName(identifier, options = {}) {
+    let out;
+    const parsed = parseIdentifier(identifier);
+    if (this.active) {
+      const { identifier: id, type } = parsed;
+      const group = this.#identifiers.get(type)?.get(id);
+      if (group && group.size) out = this.#getCanonical(group)?.entry.name;
+    }
+    return options.forced ? (parsed.identifier ?? "") : out;
+  }
+
+  /**
+   * Get the names of all identifiers of a given type. This is useful for displaying options in menus.
+   * @param {string} type
+   * @returns {Record<Identifier, string>}
+   */
+  getNames(type) {
+    const typeMap = this.#identifiers.get(type);
+    if (!typeMap) return {};
+    return Object.fromEntries(
+      [...typeMap.entries()].map(([id, group]) => {
+        const name = this.#getCanonical(group)?.entry.name;
+        return name ? [id, name] : null;
+      }).filter(Boolean),
+    );
+  }
+
+  /**
+   * Get the UUIDs of all identifiers of a given type.
+   * @param {string} type
+   * @returns {Record<Identifier, UUID<TeriockDocument>>}
+   */
+  getUuids(type) {
+    const identifiers = this.#identifiers.get(type);
+    if (!identifiers) return {};
+    return Object.fromEntries(identifiers.keys().map(k => [k, this.get(`${type}:${k}`)]));
+  }
+
+  /**
+   * Associate an identifier with a document UUID.
    * @param {TypedIdentifier} identifier
    * @param {UUID<IdentifiableDocument>} uuid
+   * @param {string} [name]
    */
-  track(identifier, uuid) {
-    this.#track(identifier, uuid);
+  track(identifier, uuid, name) {
+    this.#track(identifier, uuid, name);
   }
 
   /**
@@ -181,7 +251,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    */
   async trackCompendium(pack) {
     if (this.#documentNames.has(pack.documentName) || this.#parentDocumentNames.has(pack.documentName)) {
-      const index = await pack.getIndex({ fields: ["system.identifier", "system._sup"] });
+      const index = await pack.getIndex({ fields: ["name", "system.identifier", "system._sup"] });
       if (pack.documentName === "JournalEntry") {
         const promises = index.contents.map(d => this.#trackJournalEntry(d.uuid));
         await Promise.all(promises);
@@ -192,7 +262,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
           const uuid = d.uuid;
           if (!type || !identifier || !uuid || d.system?._sup) continue;
           const typedIdentifier = `${type}:${identifier}`;
-          this.#track(typedIdentifier, uuid);
+          this.#track(typedIdentifier, uuid, d.name);
         }
       }
     }
@@ -215,7 +285,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const uuid = document.uuid;
     const identifier = document.typedIdentifier;
     if (!uuid || !identifier || document.sup) return;
-    this.track(identifier, uuid);
+    this.track(identifier, uuid, document.name);
   }
 
   /**
@@ -224,10 +294,16 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @param {UUID<IdentifiableDocument>} uuid
    */
   untrack(identifier, uuid) {
-    const group = this.#identifiers.get(identifier);
+    const { identifier: id, type } = parseIdentifier(identifier);
+    const typeMap = this.#identifiers.get(type);
+    if (!typeMap) return;
+    const group = typeMap.get(id);
     if (!group) return;
     group.delete(uuid);
-    if (group.size === 0) this.#identifiers.delete(identifier);
+    if (group.size === 0) {
+      typeMap.delete(id);
+      if (typeMap.size === 0) this.#identifiers.delete(type);
+    }
   }
 
   /**

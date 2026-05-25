@@ -31,7 +31,7 @@ Object.assign(globalThis, {
 
 foundry.helpers.Hooks.once("init", function() {
   /**
-   * Helper function to assign configs to `CONFIG` on level deep.
+   * Helper function to assign configs to `CONFIG` one level deep.
    * @param {object} configs
    */
   function assign(configs) {

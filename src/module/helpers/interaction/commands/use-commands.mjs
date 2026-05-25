@@ -1,7 +1,7 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { resolveDocuments } from "../../resolve.mjs";
-import { inferIconFromIdentifier, inferNameFromIdentifier } from "../../utils.mjs";
+import { inferIconFromIdentifier } from "../../utils.mjs";
 import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
@@ -60,7 +60,9 @@ export const useLocalCommand = {
   secondary: useLocal,
   icon: options => inferIconFromIdentifier(options?.lookup),
   label: options =>
-    _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name: inferNameFromIdentifier(options?.lookup) || "" }),
+    _loc("TERIOCK.COMMANDS.UseDocument.useNamed", {
+      name: game.teriock.identifiers.getName(options?.lookup, { forced: true }) || "",
+    }),
 };
 
 /**

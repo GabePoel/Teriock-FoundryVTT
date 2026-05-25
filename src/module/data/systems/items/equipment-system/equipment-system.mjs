@@ -1,7 +1,7 @@
 import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, inferNameFromIdentifier, objectMap } from "../../../../helpers/utils.mjs";
+import { fromIdentifier, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
@@ -169,7 +169,9 @@ export default class EquipmentSystem
    * @returns {string}
    */
   get equipmentTypeName() {
-    return this.equipmentType ? inferNameFromIdentifier(`equipment:${this.equipmentType}`) : "";
+    return this.equipmentType
+      ? game.teriock.identifiers.getName(`equipment:${this.equipmentType}`, { forced: true, format: true })
+      : "";
   }
 
   /** @inheritDoc */

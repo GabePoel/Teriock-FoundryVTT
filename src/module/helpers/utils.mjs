@@ -3,7 +3,6 @@ import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { formulaExists } from "./formula.mjs";
 import { createElement } from "./html.mjs";
 import { localizeChoices } from "./localization.mjs";
-import { toCamelCase, toTitleCase } from "./string.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome classes.
@@ -256,27 +255,6 @@ export function consolidateWriteOperations(operations) {
     }
   }
   return consolidated;
-}
-
-/**
- * See if the document has a specified name.
- * @param {string} identifier
- * @return {string}
- */
-export function inferNameFromIdentifier(identifier) {
-  if (!identifier) return "";
-  try {
-    const name = game.teriock.identifiers.fromIdentifierSync(identifier)?.name;
-    if (name) return name;
-  } catch {}
-  const parsed = parseIdentifier(identifier);
-  if (parsed.identifier) identifier = parsed.identifier;
-  const type = parsed?.type;
-  let out = toTitleCase(identifier.replaceAll("-", " "));
-  if (!type) return out;
-  const reference = TERIOCK.reference[TERIOCK.config.document[type]?.index];
-  if (reference) out = reference[toCamelCase(identifier)] || out;
-  return out;
 }
 
 /**

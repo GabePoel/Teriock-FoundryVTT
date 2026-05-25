@@ -4,7 +4,7 @@
  */
 export function cleanDocument(doc) {
   if (doc.type) delete doc.sort;
-  if (["damage", "drain", "tradecraft"].includes(doc.type)) delete doc.flags
+  if (["damage", "drain", "tradecraft"].includes(doc.type)) delete doc.flags;
   if (doc.sort === 0) delete doc.sort;
   delete doc.ownership;
   if (!doc.folder) delete doc.folder;
