@@ -1,5 +1,4 @@
-import { bindCommonActions } from "../../applications/shared/_module.mjs";
-import { chatImage } from "../../applications/shared/image-context-menu-options.mjs";
+import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 
 /**
@@ -105,7 +104,7 @@ function addShareImageToHeader(application, controls) {
     action: "shareImageInChat",
     icon: makeIconClass(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
     label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareInChat"),
-    onClick: () => chatImage(application.options.src),
+    onClick: () => TeriockChatMessage.fromImage(application.options.src),
   });
 }
 
@@ -124,15 +123,6 @@ function addWikiOpenToHeader(application, controls) {
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewOnWiki"),
     });
   }
-}
-
-/**
- * @param {TeriockDocumentSheet} _application
- * @param {HTMLElement} element
- * @see {renderApplicationV2}
- */
-function bindCommonActionsToElement(_application, element) {
-  bindCommonActions(element);
 }
 
 /**
@@ -161,8 +151,6 @@ const applicationHookEntries = [
   ["getHeaderControlsWikiButtonSheet", addWikiOpenToHeader],
   ["renderApplicationV2", addDeveloperModeLoggingListener],
   ["renderDocumentSheetV2", addIdentifierClipboardListener],
-  ["renderJournalEntrySheet", bindCommonActionsToElement],
-  ["renderRollTableSheet", bindCommonActionsToElement],
 ];
 
 export default applicationHookEntries;

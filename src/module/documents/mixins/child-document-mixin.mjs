@@ -1,4 +1,3 @@
-import { TeriockChatMessage } from "../_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { HierarchyDocumentMixin } from "./_module.mjs";
 import UsableDocumentMixin from "./usable-document-mixin.mjs";
@@ -65,23 +64,6 @@ export default function ChildDocumentMixin(Base) {
       *allApplicableEffects() {
         if (this.actor) {
           for (const effect of this.actor.allApplicableEffects()) yield effect;
-        }
-      }
-
-      /**
-       * Sends a chat message with the document's image.
-       * @returns {Promise<void>}
-       */
-      async chatImage() {
-        const img = this.img;
-        if (img) {
-          await TeriockChatMessage.create({
-            content: `
-            <div class="timage" data-src="${img}" style="display: flex; justify-content: center;">
-              <img src="${img}" alt="${this.name}" class="teriock-image">
-            </div>`,
-            speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
-          }, { defaultMode: true });
         }
       }
 

@@ -1,5 +1,4 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { bindCommonActions } from "../../shared/_module.mjs";
 import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 import { DisplaySheetMixin } from "../mixins/_module.mjs";
 import { ConfigButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
@@ -21,6 +20,7 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  * @mixes DisplaySheet
  * @mixes ConfigButtonSheet
  * @mixes FrameCommonSheetPart
+ * @property {TeriockJournalEntryPage} document
  */
 export default class BasePageSheet
   extends mixClasses(
@@ -56,16 +56,10 @@ export default class BasePageSheet
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    bindCommonActions(this.element);
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), {
       canHaveAutomations: false,
-      img: this.document.system.img,
+      img: this.document.img,
       imgPath: "system.img",
       system: this.document.system,
       systemFields: this.document.system.schema.fields,

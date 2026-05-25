@@ -1,4 +1,5 @@
 import { impactConfig } from "../../../../constants/config/impact-config.mjs";
+import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
@@ -231,7 +232,7 @@ export default function ChildSystemMixin(Base) {
           group: "share",
           icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
-          onClick: this.parent.chatImage.bind(this.parent),
+          onClick: async () => TeriockChatMessage.fromImage(this.parent.img, { actor: this.actor }),
         }, {
           group: "share",
           icon: makeIcon(TERIOCK.display.icons.ui.shareText, "contextMenu"),

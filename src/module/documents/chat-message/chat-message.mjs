@@ -1,4 +1,5 @@
 import { systemPath } from "../../helpers/path.mjs";
+import { dedent } from "../../helpers/string.mjs";
 import { BaseDocumentMixin } from "../mixins/_module.mjs";
 
 const { ChatMessage } = foundry.documents;
@@ -19,6 +20,25 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
   static async create(data = {}, operation = {}) {
     if (operation.defaultMode) this.applyMode(data, game.settings.get("core", "messageMode"));
     return super.create(data, operation);
+  }
+
+  /**
+   * Share an image to the chat.
+   * @param {string} img
+   * @param {object} [options]
+   * @param {TeriockActor} [options.actor]
+   * @param {string} [options.name]
+   * @returns {Promise<void>}
+   */
+  static async fromImage(img, options = {}) {
+    if (!img) return;
+    await this.create({
+      content: dedent(`
+      <div class="timage" data-src="${img}" style="display: flex; justify-content: center;" data-openable="true">
+        <img src="${img}" alt="${options.name || ""}" class="teriock-image" data-openable="true">
+      </div>`),
+      speaker: this.getSpeaker({ actor: options.actor }, { defaultMode: true }),
+    });
   }
 
   /**

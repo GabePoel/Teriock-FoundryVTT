@@ -1,5 +1,3 @@
-import { bindCommonActions } from "../shared/_module.mjs";
-
 const { Compendium } = foundry.applications.sidebar.apps;
 
 export default class TeriockCompendium extends Compendium {
@@ -18,7 +16,6 @@ export default class TeriockCompendium extends Compendium {
           this.element?.querySelector(`[data-entry-id="${doc?._id}"]`)?.remove();
       }
     }
-    if (game.teriock.getSetting("compendiumTooltips")) bindCommonActions(this.element);
   }
 
   /** @inheritDoc */

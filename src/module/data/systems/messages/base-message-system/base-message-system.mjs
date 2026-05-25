@@ -1,6 +1,7 @@
-import { bindCommonActions } from "../../../../applications/shared/_module.mjs";
+import { TeriockContextMenu } from "../../../../applications/ux/_module.mjs";
 import { TeriockItem } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { makeIcon } from "../../../../helpers/utils.mjs";
 import { panelsField } from "../../../fields/helpers/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
@@ -8,6 +9,7 @@ import { ActivatableSystemMixin, BaseSystemMixin } from "../../mixins/_module.mj
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
+const { ImagePopout } = foundry.applications.apps;
 
 /**
  * @extends {TypeDataModel}
@@ -109,8 +111,23 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
       });
     });
 
-    // Bind common listeners
-    bindCommonActions(element);
+    new TeriockContextMenu(element, "img", [{
+      icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
+      label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
+      onClick: async (_ev, target) => {
+        await new ImagePopout({
+          src: target.getAttribute("src"),
+          window: { title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
+        }).render(true);
+      },
+      visible: target => {
+        const src = target.getAttribute("src");
+        return src
+          && src.length
+          && target.getAttribute("data-openable")
+          && (game.user.isGM || game.teriock.getSetting("openChatImages"));
+      },
+    }], { eventName: "contextmenu", fixed: true, jQuery: false });
 
     // Add roll context menus
     for (const roll of this.document.rolls) roll.bindContextMenus(element);

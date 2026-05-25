@@ -416,8 +416,6 @@ foundry.helpers.Hooks.once("setup", function() {
 
 Hooks.once("i18nInit", () => {
   helpers.localization.performPreLocalization(TERIOCK);
-  helpers.localization.localizeObject(teriock.applications.shared.imageContextMenuOptions, { keys: ["name"] });
-  helpers.localization.localizeObject(teriock.applications.shared.wikiContextMenuOptions, { keys: ["name"] });
   Object.assign(CONFIG.formulaEditor.contexts.child.labels, {
     ...TERIOCK.rollContext.ability,
     ...TERIOCK.rollContext.archetype,

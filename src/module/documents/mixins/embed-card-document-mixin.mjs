@@ -1,4 +1,3 @@
-import { bindCommonActions } from "../../applications/shared/_module.mjs";
 import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { toTitleCase } from "../../helpers/string.mjs";
 
@@ -62,7 +61,6 @@ export default function EmbedCardDocumentMixin(Base) {
 
       /** @inheritDoc */
       onEmbed(element) {
-        bindCommonActions(element);
         const isEmbedded = element.tagName === "DOCUMENT-EMBED";
         // Mutate block image to remove signs that this could be usable
         if (isEmbedded) {

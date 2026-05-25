@@ -1,5 +1,3 @@
-import { bindCommonActions } from "../_module.mjs";
-
 /**
  * Mixin to ensure that `TERIOCK` values are always available.
  * @param {typeof ApplicationV2} Base
@@ -16,7 +14,6 @@ export default function BaseApplicationMixin(Base) {
     /** @inheritDoc */
     async _onRender(context, options = {}) {
       await super._onRender(context, options);
-      bindCommonActions(this.element);
       this.element.querySelectorAll("[data-never-disable]").forEach(
         /** @param {HTMLButtonElement|HTMLInputElement} e */
         e => (e.disabled = false),
