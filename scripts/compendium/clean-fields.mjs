@@ -3,7 +3,9 @@
  * @param {AnyCommonDocument} doc
  */
 export function cleanDocument(doc) {
-  if (!["damage", "drain", "text"].includes(doc.type)) delete doc.sort;
+  if (doc.type) delete doc.sort;
+  if (["damage", "drain", "tradecraft"].includes(doc.type)) delete doc.flags
+  if (doc.sort === 0) delete doc.sort;
   delete doc.ownership;
   if (!doc.folder) delete doc.folder;
   if (doc._stats) {
@@ -26,6 +28,10 @@ export function cleanDocument(doc) {
     if (doc.type === "equipment") cleanEquipment(doc);
     if (doc.type === "power") cleanPower(doc);
     if (doc.type === "property") cleanProperty(doc);
+  }
+  if (doc.text?.content && doc.type === "class") {
+    doc.text.content = doc.text.content.replaceAll("\n", "");
+    console.log(doc.text.content);
   }
 }
 
