@@ -11,7 +11,7 @@ const { createTextInput } = foundry.applications.fields;
 export default class IdentifierField extends StringField {
   /** @inheritDoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, reset: null });
+    return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, reset: null, type: null });
   }
 
   /** @inheritDoc */
@@ -34,5 +34,12 @@ export default class IdentifierField extends StringField {
   clean(value, options, _state) {
     if (value === "") value = null;
     return super.clean(value, options, _state);
+  }
+
+  /** @inheritDoc */
+  initialize(value, model, options = {}) {
+    const identifier = super.initialize(value, model, options);
+    if (typeof this.type === "string" && typeof identifier === "string") return `${this.type}:${identifier}`;
+    return identifier;
   }
 }

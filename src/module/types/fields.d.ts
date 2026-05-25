@@ -37,7 +37,7 @@ declare global {
       model?: typeof EvaluationModel;
     };
 
-    export type _IdentifierFieldOptions = { reset?: string | null };
+    export type _IdentifierFieldOptions = { reset?: string | null, type?: string | null };
 
     export type _TypedIdentifierFieldOptions = { single?: boolean, types?: string[] };
 

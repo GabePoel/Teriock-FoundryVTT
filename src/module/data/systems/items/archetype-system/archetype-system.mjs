@@ -1,6 +1,6 @@
 import { documentConfig } from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin, toTitleCase } from "../../../../helpers/string.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -36,8 +36,8 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
   get classNames() {
     return Array.from(
       new Set(
-        this.actor?.ranks.filter(r => r.system.archetype === this.identifier).map(r =>
-          TERIOCK.reference.classes[r.system.className] ?? toTitleCase(r.system.className)
+        this.actor?.ranks.filter(r => r.system.archetype === this.parent.typedIdentifier).map(r =>
+          game.teriock.identifiers.getName(r.system.class)
         ),
       ),
     ).sort((a, b) => a.localeCompare(b));

@@ -3,6 +3,7 @@ import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { formulaExists } from "./formula.mjs";
 import { createElement } from "./html.mjs";
 import { localizeChoices } from "./localization.mjs";
+import { toCamelCase } from "./string.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome classes.
@@ -262,11 +263,34 @@ export function consolidateWriteOperations(operations) {
  * @param {TypedIdentifier|Identifier} identifier
  * @returns {string}
  */
-export function inferIconFromIdentifier(identifier) {
+export function getIdentifierIcon(identifier) {
   let icon = TERIOCK.config.document.document.icon;
   const parsed = parseIdentifier(identifier);
-  if (parsed?.type) icon = TERIOCK.config.document[parsed.type]?.icon ?? icon;
+  if (parsed?.type) {
+    icon = TERIOCK.config.document[parsed.type]?.icon ?? icon;
+    if (parsed.type === "archetype") icon = TERIOCK.config.rank[parsed.identifier]?.icon ?? icon;
+    if (parsed.type === "class") {
+      icon = Object.values(TERIOCK.config.rank).find((v) =>
+        Object.keys(v.classes).includes(toCamelCase(parsed.identifier))
+      )?.classes[toCamelCase(parsed.identifier)]?.icon ?? icon;
+    }
+    if (parsed.type === "field") icon = TERIOCK.config.tradecraft[parsed.identifier]?.icon ?? icon;
+    if (parsed.type === "tradecraft") {
+      icon = Object.values(TERIOCK.config.tradecraft).find((v) =>
+        Object.keys(v.tradecrafts).includes(toCamelCase(parsed.identifier))
+      )?.tradecrafts[toCamelCase(parsed.identifier)]?.icon ?? icon;
+    }
+  }
   return icon;
+}
+
+/**
+ * Infer a document's name from an identifier.
+ * @param {TypedIdentifier} identifier
+ * @returns {string|undefined}
+ */
+export function getIdentifierName(identifier) {
+  return game.teriock.identifiers.getName(identifier, { forced: true });
 }
 
 /**

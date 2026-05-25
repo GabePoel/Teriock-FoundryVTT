@@ -1,4 +1,4 @@
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { getIdentifierIcon, getIdentifierName, makeIconClass } from "../../helpers/utils.mjs";
 
 /**
  * Clamp bar inputs to non-negative numbers for percentage helpers.
@@ -87,22 +87,14 @@ function barTempHide(value, max, temp = 0, morganti = 0) {
   return "";
 }
 
-/**
- * Infer a name from an identifier.
- * @param {Identifier} identifier
- * @returns {string}
- */
-function inferName(identifier) {
-  return game.teriock.identifiers.getName(identifier, { forced: true });
-}
-
 const formattingHelperEntries = [
   ["barLeft", barLeft],
   ["barLost", barLost],
   ["barTemp", barTemp],
   ["barTempHide", barTempHide],
   ["hackFill", hackFill],
-  ["inferName", inferName],
+  ["inferName", getIdentifierName],
+  ["inferIcon", getIdentifierIcon],
   ["modifierIconClass", modifierIconClass],
 ];
 

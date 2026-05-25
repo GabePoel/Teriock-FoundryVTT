@@ -4,7 +4,7 @@ import { FluencyExecution } from "../../../../executions/document-executions/_mo
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { getIdentifierIcon, getIdentifierName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { initialText } from "../../../fields/helpers/initializers.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -64,8 +64,13 @@ export default class FluencySystem
         initial: "artisan",
         nullable: false,
         required: true,
+        type: "field",
       }),
-      tradecraft: new fields.StringField({ initial: "artist", label: "TERIOCK.TERMS.Common.tradecraft" }),
+      tradecraft: new IdentifierField({
+        initial: "artist",
+        label: "TERIOCK.TERMS.Common.tradecraft",
+        type: "tradecraft",
+      }),
       tradecraftDescription: initialText({ label: "TERIOCK.TERMS.Common.tradecraft" }),
     });
   }
@@ -75,7 +80,7 @@ export default class FluencySystem
     return ["system.description", {
       classes: TERIOCK.display.panel.classes.derived,
       editable: false,
-      label: TERIOCK.reference.tradecrafts[this.tradecraft],
+      label: getIdentifierName(this.tradecraft),
       path: "system.tradecraftDescription",
     }];
   }
@@ -83,15 +88,15 @@ export default class FluencySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.reference.tradecrafts[this.tradecraft];
-    parts.text = dotJoin([TERIOCK.config.tradecraft[this.field].name, parts.text]);
+    parts.subtitle = getIdentifierName(this.tradecraft);
+    parts.text = dotJoin([TERIOCK.config.tradecraft[this._source.field].name, parts.text]);
     return parts;
   }
 
   /** @inheritDoc */
   get wikiPage() {
     const namespace = this.constructor.metadata.namespace;
-    const pageName = TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name;
+    const pageName = getIdentifierName(this.tradecraft);
     return `${namespace}:${pageName}`;
   }
 
@@ -111,7 +116,7 @@ export default class FluencySystem
     if (
       Object.values(iconManifest.tradecrafts).includes(this.parent.img) && !foundry.utils.hasProperty(changes, "img")
     ) {
-      let tradecraft = this.tradecraft;
+      let tradecraft = this._source.tradecraft;
       if (foundry.utils.hasProperty(changes, "system.tradecraft"))
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       foundry.utils.setProperty(changes, "img", getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]));
@@ -129,7 +134,7 @@ export default class FluencySystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return { ...super.getLocalRollData(), field: this.field, tc: this.tradecraft };
+    return { ...super.getLocalRollData(), field: this._source.field, tc: this._source.tradecraft };
   }
 
   /** @inheritDoc */
@@ -137,18 +142,15 @@ export default class FluencySystem
     return {
       ...(await super.getPanelParts()),
       bars: [{
-        icon: TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].icon,
+        icon: getIdentifierIcon(this.tradecraft),
         label: _loc("TERIOCK.TERMS.Common.tradecraft"),
-        wrappers: [
-          TERIOCK.config.tradecraft[this.field].name,
-          TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name,
-        ],
+        wrappers: [TERIOCK.config.tradecraft[this._source.field].name, getIdentifierName(this.tradecraft)],
       }],
     };
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
-    this.tradecraftDescription = TERIOCK.content.tradecrafts[this.tradecraft];
+    this.tradecraftDescription = TERIOCK.content.tradecrafts[this._source.tradecraft];
   }
 }

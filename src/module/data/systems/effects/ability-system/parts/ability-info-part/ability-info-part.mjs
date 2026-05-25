@@ -16,7 +16,7 @@ export default Base => {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           basic: new fields.BooleanField({ initial: false }),
-          class: new fields.StringField({ choices: TERIOCK.reference.classes }),
+          // class: new fields.StringField({ choices: TERIOCK.reference.classes }),
           consumable: new fields.BooleanField({ initial: false }),
           guildmaster: new fields.BooleanField({ initial: false }),
           invoked: new fields.BooleanField({ initial: false }),

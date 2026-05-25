@@ -279,7 +279,7 @@ export default class TeriockActor
   async _getStagedCreateOperation() {
     if (!this._stagedItemCreations || !this._stagedItemCreations.size) return null;
     const items = await Promise.all(this._stagedItemCreations.map(uuid => fromKey(uuid)));
-    const data = items.map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
+    const data = items.filter(Boolean).map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
     return { action: "create", data, documentName: "Item", pack: this.pack, parent: this };
   }
 

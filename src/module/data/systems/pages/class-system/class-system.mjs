@@ -19,6 +19,7 @@ export default class ClassSystem extends BasePageSystem {
         initial: "everyman",
         nullable: false,
         required: true,
+        type: "archetype",
       }),
     });
   }
@@ -38,7 +39,7 @@ export default class ClassSystem extends BasePageSystem {
     return [{
       icon: TERIOCK.config.rank[this.archetype]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
-      wrappers: [TERIOCK.config.rank[this.archetype]?.name],
+      wrappers: [TERIOCK.config.rank[this._source.archetype]?.name],
     }];
   }
 }

@@ -8,10 +8,10 @@ const rankContext = {
 
   archetype: "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label",
   av: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
-  class: "TERIOCK.SYSTEMS.Rank.FIELDS.className.label",
+  class: "TERIOCK.SYSTEMS.Rank.FIELDS.class.label",
   innate: "TERIOCK.SYSTEMS.Rank.FIELDS.innate.label",
   maxAv: "TERIOCK.SYSTEMS.BaseItem.FIELDS.maxAv.label",
-  number: "TERIOCK.SYSTEMS.Rank.FIELDS.classRank.label",
+  number: "TERIOCK.SYSTEMS.Rank.FIELDS.number.label",
 };
 
 export default rankContext;

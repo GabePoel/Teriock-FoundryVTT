@@ -1,5 +1,5 @@
 import { tradecraftConfig } from "../../../../constants/config/tradecraft-config.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { getIdentifierIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
@@ -19,6 +19,7 @@ export default class TradecraftSystem extends BasePageSystem {
         initial: "artisan",
         nullable: false,
         required: true,
+        type: "field",
       }),
     });
   }
@@ -30,15 +31,15 @@ export default class TradecraftSystem extends BasePageSystem {
 
   /** @inheritDoc */
   get displayTags() {
-    return [...super.displayTags, TERIOCK.config.tradecraft[this.field]?.name];
+    return [...super.displayTags, TERIOCK.config.tradecraft[this._source.field]?.name];
   }
 
   /** @inheritDoc */
   get messageBars() {
     return [{
-      icon: TERIOCK.config.tradecraft[this.field]?.icon,
+      icon: getIdentifierIcon(this.field),
       label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
-      wrappers: [TERIOCK.config.tradecraft[this.field]?.name],
+      wrappers: [TERIOCK.config.tradecraft[this._source.field]?.name],
     }];
   }
 }

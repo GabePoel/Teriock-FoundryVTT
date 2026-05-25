@@ -70,7 +70,7 @@ export default class PropertySystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
-      damageType: new IdentifierField({ initial: "" }),
+      damageType: new IdentifierField({ initial: "", type: "damage" }),
       extraDamage: new FormulaField({ deterministic: false }),
     });
   }
@@ -128,10 +128,10 @@ export default class PropertySystem
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      [`damage.type.${this.damageType}`]: 1,
+      [`damage.type.${this._source.damageType}`]: 1,
       [`form.${this.form}`]: 1,
       "damage.extra": this.extraDamage,
-      "damage.type": this.damageType,
+      "damage.type": this._source.damageType,
       form: this.form,
     };
   }

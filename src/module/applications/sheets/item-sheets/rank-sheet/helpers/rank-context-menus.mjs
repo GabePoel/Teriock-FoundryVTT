@@ -1,3 +1,4 @@
+import { toKebabCase } from "../../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../../helpers/utils.mjs";
 
 /**
@@ -17,7 +18,7 @@ export function archetypeContextMenu(rank) {
         await rank.update({
           system: {
             archetype: aKey,
-            className: firstClass,
+            class: toKebabCase(firstClass),
             "statDice.hp.formula": `1d${aData.hp}`,
             "statDice.mp.formula": `1d${aData.mp}`,
           },
@@ -42,8 +43,8 @@ export function classContextMenu(rank) {
       const option = {
         icon: makeIcon(cData.icon, "contextMenu"),
         label: cData.name,
-        onClick: async () => await rank.update({ system: { archetype: aKey, className: cKey } }),
-        visible: () => foundry.utils.getProperty(rank.system, "archetype") === aKey,
+        onClick: async () => await rank.update({ system: { archetype: aKey, class: toKebabCase(cKey) } }),
+        visible: () => rank.system._source.archetype === aKey,
       };
       options.push(option);
     }

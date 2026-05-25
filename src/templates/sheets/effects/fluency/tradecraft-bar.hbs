@@ -1,13 +1,13 @@
 <div class="ab-bar">
   {{formBox
-    (path TERIOCK.config.tradecraft system.field "name")
-    icon=(path TERIOCK.config.tradecraft system.field "icon")
+    (path TERIOCK.config.tradecraft system._source.field "name")
+    icon=(inferIcon system.field)
     classes=(ifThen editable "field-box" "")
     tooltip=(localize "TERIOCK.SYSTEMS.Fluency.FIELDS.field.label")
   }}
   {{formBox
-    (path TERIOCK.reference.tradecrafts system.tradecraft)
-    icon=(path TERIOCK.config.tradecraft system.field "tradecrafts" system.tradecraft "icon")
+    (inferName system.tradecraft)
+    icon=(inferIcon system.tradecraft)
     classes=(ifThen editable "tradecraft-box" "")
     tooltip=(localize "TERIOCK.TERMS.Common.tradecraft")
   }}

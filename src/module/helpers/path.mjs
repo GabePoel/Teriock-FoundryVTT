@@ -34,5 +34,5 @@ export function getImage(category, name, fallback) {
  */
 export function getRankImage(className, rankNumber) {
   if (rankNumber <= 10) return systemPath(`icons/ranks/rank-${rankNumber}-${toKebabCase(className)}.webp`);
-  else return systemPath(`icons/classes/${className}.webp`);
+  else return systemPath(`icons/classes/${toKebabCase(className)}.webp`);
 }

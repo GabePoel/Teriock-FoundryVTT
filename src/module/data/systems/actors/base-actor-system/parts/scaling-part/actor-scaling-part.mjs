@@ -1,4 +1,5 @@
 import { config } from "../../../../../../constants/_module.mjs";
+import { toCamelCase } from "../../../../../../helpers/string.mjs";
 import { initialBoolean, initialNumber, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -44,7 +45,7 @@ export default Base => {
         const data = {};
         const ranks = this.parent.ranks;
         for (const c of Object.keys(TERIOCK.index.classes)) {
-          const count = ranks.filter(r => r.system.className === c).length;
+          const count = ranks.filter(r => toCamelCase(r.system.class) === c).length;
           data[`rank.${c}`] = count;
           data[`rank.${c.slice(0, 3).toLowerCase()}`] = count;
         }

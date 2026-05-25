@@ -92,7 +92,7 @@ Hooks.once("i18nInit", () => {
       name: _loc(v),
     });
   });
-  abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
+  abilityContext["class.number"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classNumber");
 });
 
 Hooks.once("teriock.i18nMetaphysicsInit", () => {

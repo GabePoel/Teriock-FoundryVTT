@@ -1,7 +1,7 @@
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, makeIcon } from "../../../../helpers/utils.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
+import { fromIdentifier, getIdentifierName, makeIcon } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -33,7 +33,7 @@ export default class MountSystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       mounted: new fields.BooleanField({ initial: false, required: false }),
-      mountType: new IdentifierField({ initial: "" }),
+      mountType: new IdentifierField({ initial: "", type: "mount" }),
     });
   }
 
@@ -76,7 +76,7 @@ export default class MountSystem
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: this.mountTypeName,
+      subtitle: getIdentifierName(this.mountType),
       text: dotJoin([...this._attunableWrappers, parts.text]),
     });
   }
@@ -91,16 +91,11 @@ export default class MountSystem
     return [this._statBar, {
       icon: TERIOCK.display.icons.armament.load,
       label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
-      wrappers: [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text || "0" }), this.mountTypeName],
+      wrappers: [
+        _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text || "0" }),
+        getIdentifierName(this.mountType),
+      ],
     }];
-  }
-
-  /**
-   * The name of the mount type.
-   * @returns {string}
-   */
-  get mountTypeName() {
-    return this.mountType ? game.teriock.identifiers.getName(`mount:${this.mountType}`, { forced: true }) : "";
   }
 
   /** @inheritDoc */
@@ -122,7 +117,7 @@ export default class MountSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return { ...super.getLocalRollData(), [`type.${toCamelCase(this.mountType)}`]: 1, mounted: Number(this.mounted) };
+    return { ...super.getLocalRollData(), [`type.${this._source.mountType}`]: 1, mounted: Number(this.mounted) };
   }
 
   /**

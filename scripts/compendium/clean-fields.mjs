@@ -1,3 +1,5 @@
+import { toKebabCase } from "../../src/module/helpers/string.mjs";
+
 /**
  * Clean excess terms from a document.
  * @param {AnyCommonDocument} doc
@@ -28,6 +30,7 @@ export function cleanDocument(doc) {
     if (doc.type === "equipment") cleanEquipment(doc);
     if (doc.type === "power") cleanPower(doc);
     if (doc.type === "property") cleanProperty(doc);
+    if (doc.type === "rank") cleanRank(doc);
   }
   if (doc.text?.content && doc.type === "class") {
     doc.text.content = doc.text.content.replaceAll("\n", "");
@@ -228,6 +231,22 @@ function cleanProperty(doc) {
 }
 
 /**
+ * @param {TeriockRank} doc
+ */
+function cleanRank(doc) {
+  if (doc.system?.className != null) {
+    doc.system.class = toKebabCase(doc.system.className);
+    delete doc.system.className;
+  } else if (doc.system?.class != null) {
+    doc.system.class = toKebabCase(doc.system.class);
+  }
+  if (doc.system?.classRank != null) {
+    doc.system.number = doc.system.classRank;
+    delete doc.system.classRank;
+  }
+}
+
+/**
  * @param {TeriockAbility} doc
  */
 function cleanAbility(doc) {
@@ -253,7 +272,8 @@ function cleanAbility(doc) {
 
   // Clean Tags
   if (!doc.system.basic) delete doc.system.basic;
-  if (!doc.system.class) delete doc.system.class;
+  if (doc.system.class) doc.system.class = toKebabCase(doc.system.class);
+  else delete doc.system.class;
   if (!doc.system.consumable) delete doc.system.consumable;
   if (!doc.system.elderSorcery) delete doc.system.elderSorcery;
   if (!doc.system.guildmaster) delete doc.system.guildmaster;

@@ -185,7 +185,7 @@ export default Base => {
           openable: true,
           title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
         });
-        const rankNumber = referenceRank.system.classRank;
+        const rankNumber = referenceRank.system.number;
         const rank = /** @type {TeriockRank} */ referenceRank.clone();
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
@@ -194,7 +194,7 @@ export default Base => {
           return;
         }
         /** @type {TeriockRank[]} */
-        const existingRanks = (await this.document.getRanks()).filter(r => r.system.className === rankClass);
+        const existingRanks = (await this.document.getRanks()).filter(r => r.system.class === rankClass);
         const combatAbilityNames = new Set(
           referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === "combat").map(a => a.name),
         );
