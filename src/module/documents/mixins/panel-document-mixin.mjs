@@ -104,6 +104,7 @@ export default function PanelDocumentMixin(Base) {
         const messageData = {
           speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
           system: {
+            _src: this.uuid,
             avatar: actor?.img,
             bars: [],
             blocks: [],

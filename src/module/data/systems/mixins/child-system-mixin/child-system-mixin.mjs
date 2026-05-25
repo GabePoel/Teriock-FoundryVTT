@@ -117,9 +117,7 @@ export default function ChildSystemMixin(Base) {
           icon: TERIOCK.display.icons.ui.chat,
           tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
           visible: this.parent.isViewer,
-          onClick: async () => {
-            await this.parent.toMessage();
-          },
+          onClick: async () => await this.parent.toMessage(),
         }, {
           action: "toggleDisabledDoc",
           icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
@@ -214,9 +212,7 @@ export default function ChildSystemMixin(Base) {
           icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
           visible: game.user.isGM,
-          onClick: async () => {
-            await this.gmNotesOpen();
-          },
+          onClick: async () => await this.gmNotesOpen(),
         }, {
           group: "open",
           icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
