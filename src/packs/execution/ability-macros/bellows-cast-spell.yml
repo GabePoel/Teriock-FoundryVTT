@@ -4,14 +4,10 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.12.69
 command: |-
-  const dealsDamage = scope.execution.activations.some(
-    (a) => a.type === "roll" && a.impact === "damage",
-  );
-  if (scope.execution.source.system.spell && dealsDamage) {
-    scope.effect?.delete();
-  }
+  const dealsDamage = scope.execution.activations.some((a) => a.type === "roll" && a.impact === "damage");
+  if (scope.execution.source.system.spell && dealsDamage) scope.effect?.delete();
 folder: SsB1D27Gn6q9lTTV
 img: icons/svg/dice-target.svg
 name: Bellows - Cast Spell

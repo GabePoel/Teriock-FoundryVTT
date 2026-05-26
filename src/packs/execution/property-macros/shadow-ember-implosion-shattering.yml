@@ -4,11 +4,10 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.12.69
 command: |-
-  const actor = scope.actor;
-  const infernoAura = await tm.fetch.getAbility("Inferno Aura");
-  const spiritBury = await tm.fetch.getAbility("Spirit Bury");
+  const infernoAura = await teriock.fromIdentifier("ability:inferno-aura");
+  const spiritBury = await teriock.fromIdentifier("ability:spirit-bury");
   await infernoAura.system.use({ actor, noMp: true });
   await spiritBury.system.use({ actor, noMp: true });
 folder: a59c22b1fd66fda7

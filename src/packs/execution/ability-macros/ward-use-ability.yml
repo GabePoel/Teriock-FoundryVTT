@@ -4,16 +4,11 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.1
-command: >-
+  systemVersion: 0.12.69
+command: |-
   const isAttack = !!scope?.execution?.isAttack;
-
-  const thisArmament = !!(scope?.execution?.armament?.uuid ===
-  scope?.item?.uuid);
-
-  if (isAttack && thisArmament) {
-    scope.effect?.delete();
-  }
+  const thisArmament = (scope?.execution?.armament?.uuid === scope?.item?.uuid);
+  if (isAttack && thisArmament) scope.effect?.delete();
 folder: SsB1D27Gn6q9lTTV
 img: icons/svg/dice-target.svg
 name: Ward - Use Ability

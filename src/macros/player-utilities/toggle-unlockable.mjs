@@ -1,9 +1,0 @@
-if (actor) {
-  if (actor.system.offense.piercing.value === 2) await actor.update({ "system.offense.piercing.raw": 0 });
-  else await actor.update({ "system.offense.piercing.raw": 2 });
-  if (actor.system.offense.piercing.value === 2)
-    ui.notifications.success("TERIOCK.MACROS.ToggleUb.enabled", { format: { name: actor.name }, localize: true });
-  else ui.notifications.info("TERIOCK.MACROS.ToggleUb.disabled", { format: { name: actor.name }, localize: true });
-} else {
-  ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", { localize: true });
-}

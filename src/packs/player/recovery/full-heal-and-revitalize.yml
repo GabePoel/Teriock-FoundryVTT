@@ -4,26 +4,14 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.12.69
 command: |-
   if (actor) {
     // Set HP and MP to max.
-    await actor.system.partialReset({
-      hp: true,
-      hpDice: true,
-      mp: true,
-      mpDice: true,
-      hacks: true,
-      combat: true,
-    });
-    ui.notifications.success("TERIOCK.MACROS.FullHeal.success", {
-      localize: true,
-      format: { name: actor.name },
-    });
+    await actor.system.partialReset({ hp: true, hpDice: true, mp: true, mpDice: true, hacks: true, combat: true });
+    ui.notifications.success("TERIOCK.MACROS.FullHeal.success", { localize: true, format: { name: actor.name } });
   } else {
-    ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
-      localize: true,
-    });
+    ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", { localize: true });
   }
 folder: 6ac670086eb137c6
 img: systems/teriock/src/icons/abilities/auto-rebirth.webp

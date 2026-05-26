@@ -4,11 +4,9 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.12.69
 command: |-
-  const applyActivation = scope.execution.activations.find(
-    (a) => a.type === "addDocuments",
-  );
+  const applyActivation = scope.execution.activations.find((a) => a.type === "addDocuments");
 
   const choices = teriock.helpers.localization.localizeChoices({
     awakening: "TERIOCK.TERMS.EffectTypes.awakening",
@@ -38,21 +36,19 @@ command: |-
     return { img, name, uuid };
   });
 
-  const choice = await tm.dialogs.selectDocumentDialog(documents, {
-    hint: "Select an effect type to resist.",
-  });
+  const choice = await tm.dialogs.selectDocumentDialog(documents, { hint: "Select an effect type to resist." });
 
   const id = "resistEffects000";
 
   if (choice) {
     const auto = {
       _id: id,
-      type: "protection",
       category: "effectTypes",
       competencies: [0, 1, 2],
       crit: [0, 1],
       heighten: [0, 1],
       relation: "resistances",
+      type: "protection",
       value: choice.uuid,
     };
 

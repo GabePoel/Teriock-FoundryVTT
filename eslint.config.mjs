@@ -69,7 +69,7 @@ const globalClient = {
   ui: "readonly",
 };
 
-const globalMacro = { actor: "readonly", scope: "readonly" };
+const globalMacro = { actor: "readonly", event: "readonly", scope: "readonly" };
 
 const globalTeriock = { TERIOCK: "readonly", teriock: "readonly", tm: "readonly" };
 
@@ -192,4 +192,4 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
     "prefer-const": "warn",
   },
   settings: { jsdoc: { preferredTypes: { ".<>": "<>", Function: "function", Object: "object" } } },
-}, { files: ["src/macros/**/*.{js,mjs}"], languageOptions: { globals: { ...globalMacro } } });
+}, { files: ["macros/**/*.mjs"], languageOptions: { globals: { ...globalMacro } } });

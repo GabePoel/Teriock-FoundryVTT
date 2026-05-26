@@ -4,29 +4,20 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.19
+  systemVersion: 0.12.69
 command: |-
   if (actor) {
     let found = 0;
     for (let i = 5; i > 0; i--) {
       const identifier = `consequence:stage-${i}-black-rot`;
-      const consequence = await teriock.fromIdentifier(identifier, {
-        relativeOnly: true,
-        relativeTo: actor,
-      });
+      const consequence = await teriock.fromIdentifier(identifier, { relativeOnly: true, relativeTo: actor });
       if (!consequence) continue;
       found++;
       if (i >= 5) continue;
       await consequence.delete();
-      await teriock.helpers.resolve.ensureChildren(actor, [
-        `consequence:stage-${i + 1}-black-rot`,
-      ]);
+      await actor.toggleChild(`consequence:stage-${i + 1}-black-rot`, { active: true });
     }
-    if (found === 0) {
-      await teriock.helpers.resolve.ensureChildren(actor, [
-        `consequence:stage-1-black-rot`,
-      ]);
-    }
+    if (found === 0) await actor.toggleChild("consequence:stage-1-black-rot", { active: true });
   }
 folder: KDIQAjqFbSAKvi05
 img: icons/svg/dice-target.svg

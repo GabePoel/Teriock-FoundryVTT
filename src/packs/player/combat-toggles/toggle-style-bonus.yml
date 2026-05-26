@@ -4,27 +4,15 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.9.17
+  systemVersion: 0.12.69
 command: |-
   if (actor) {
-    await actor.update({
-      "system.offense.sb": !actor.system.offense.sb,
-    });
-    if (actor.system.offense.sb) {
-      ui.notifications.success("TERIOCK.MACROS.ToggleSb.enabled", {
-        localize: true,
-        format: { name: actor.name },
-      });
-    } else {
-      ui.notifications.info("TERIOCK.MACROS.ToggleSb.disabled", {
-        localize: true,
-        format: { name: actor.name },
-      });
-    }
+    await actor.update({ "system.offense.sb": !actor.system.offense.sb });
+    if (actor.system.offense.sb)
+      ui.notifications.success("TERIOCK.MACROS.ToggleSb.enabled", { format: { name: actor.name }, localize: true });
+    else ui.notifications.info("TERIOCK.MACROS.ToggleSb.disabled", { format: { name: actor.name }, localize: true });
   } else {
-    ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", {
-      localize: true,
-    });
+    ui.notifications.warn("TERIOCK.DIALOGS.Common.ERRORS.noActor", { localize: true });
   }
 folder: 6956c7c4fd7c34ac
 img: systems/teriock/src/icons/properties/weapon.webp
