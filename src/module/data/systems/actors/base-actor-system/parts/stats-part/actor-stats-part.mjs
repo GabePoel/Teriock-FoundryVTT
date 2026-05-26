@@ -32,17 +32,23 @@ export default Base => {
         super._onUpdate(changed, options, userId);
         if (options.teriock) {
           // The large number catch is used to keep from rendering the stat change upon applying transformations
-          if (options.teriock.mpChange !== 0 && options.teriock.mpChange < 999999) {
-            const color = options.teriock.mpChange > 0 ? "#99C1F1" : "#1A5FB4";
-            this.animateStatChangeEffect(options.teriock.mpChange, color);
-          }
-          if (options.teriock.hpChange !== 0 && options.teriock.hpChange < 999999) {
-            const color = options.teriock.hpChange > 0 ? "#F66151" : "#A51D2D";
+          if (options.teriock.hpChange !== 0 && options.teriock.hpChange < TERIOCK.config.scaling.inf) {
+            const color = options.teriock.hpChange > 0
+              ? TERIOCK.display.colors.hp.light
+              : TERIOCK.display.colors.hp.dark;
             this.animateStatChangeEffect(options.teriock.hpChange, color);
           }
-          if (options.teriock.lpChange !== 0 && options.teriock.lpChange < 999999) {
-            const color = options.teriock.lpChange > 0 ? "#241F31" : "#5E5C64";
+          if (options.teriock.lpChange !== 0 && options.teriock.lpChange < TERIOCK.config.scaling.inf) {
+            const color = options.teriock.lpChange > 0
+              ? TERIOCK.display.colors.lp.light
+              : TERIOCK.display.colors.lp.dark;
             this.animateStatChangeEffect(options.teriock.lpChange, color);
+          }
+          if (options.teriock.mpChange !== 0 && options.teriock.mpChange < TERIOCK.config.scaling.inf) {
+            const color = options.teriock.mpChange > 0
+              ? TERIOCK.display.colors.mp.light
+              : TERIOCK.display.colors.mp.dark;
+            this.animateStatChangeEffect(options.teriock.mpChange, color);
           }
         }
       }

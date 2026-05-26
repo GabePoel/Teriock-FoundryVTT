@@ -111,9 +111,15 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get color() {
     if (this.isTransformation) {
-      if (this.transformationEffect.system.transformation.level === "minor") { return TERIOCK.display.colors.blue; }
-      if (this.transformationEffect.system.transformation.level === "full") { return TERIOCK.display.colors.green; }
-      if (this.transformationEffect.system.transformation.level === "greater") { return TERIOCK.display.colors.purple; }
+      if (this.transformationEffect.system.transformation.level === "minor") {
+        return TERIOCK.display.colors.palette.blue;
+      }
+      if (this.transformationEffect.system.transformation.level === "full") {
+        return TERIOCK.display.colors.palette.green;
+      }
+      if (this.transformationEffect.system.transformation.level === "greater") {
+        return TERIOCK.display.colors.palette.purple;
+      }
     }
     return super.color;
   }
@@ -294,26 +300,31 @@ export default class SpeciesSystem
   /**
    * Data that represents this species as a creature.
    * @param {object} [data] Optional data to mutate the created creature.
-   * @returns {object}
+   * @returns {Promise<ActorData>}
    */
-  toCreature(data = {}) {
-    const hasTokenImg = Boolean(TERIOCK.index.creatures[toCamelCase(this.parent.name)]);
-    const tokenImg = hasTokenImg ? this.parent.img.replace("icons/creatures", "icons/tokens") : this.parent.img;
-    data = foundry.utils.mergeObject({
+  async toCreature(data = {}) {
+    return foundry.utils.mergeObject({
+      _id: this.parent.id,
       img: this.parent.img,
-      items: [game.items.fromCompendium(this.parent)],
+      items: await this.parent.toObjects(),
       name: this.parent.name,
       prototypeToken: {
         height: TeriockActor.sizeConfig(this.size.value).length,
         name: this.parent.name,
-        ring: { enabled: hasTokenImg },
-        texture: { src: tokenImg },
+        ring: {
+          enabled: this.transformation.ring,
+          subject: { texture: this.transformation.ring ? this.transformation.img : undefined },
+        },
+        texture: { src: this.parent.img },
         width: TeriockActor.sizeConfig(this.size.value).length,
       },
-      system: { hp: { value: 999999 }, mp: { value: 999999 }, size: { number: { saved: this.size.value } } },
+      system: {
+        _src: this.parent.uuid,
+        hp: { value: TERIOCK.config.scaling.inf },
+        mp: { value: TERIOCK.config.scaling.inf },
+        size: { number: this.size.value },
+      },
       type: "creature",
     }, data);
-    data.items = [game.items.fromCompendium(this.parent)];
-    return data;
   }
 }

@@ -39,7 +39,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   get color() {
-    return this.target ? TERIOCK.display.colors.green : TERIOCK.display.colors.orange;
+    return this.target ? TERIOCK.display.colors.palette.green : TERIOCK.display.colors.palette.orange;
   }
 
   /** @inheritDoc */

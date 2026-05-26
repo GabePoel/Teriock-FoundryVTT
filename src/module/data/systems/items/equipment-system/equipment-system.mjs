@@ -131,8 +131,8 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get color() {
-    if (this.isOverCapacity) { return TERIOCK.display.colors.red; }
-    if (!this.identification.read) { return TERIOCK.display.colors.grey; }
+    if (this.isOverCapacity) { return TERIOCK.display.colors.palette.red; }
+    if (!this.identification.read) { return TERIOCK.display.colors.palette.grey; }
     return TERIOCK.config.equipment.powerLevel[this.powerLevel].color;
   }
 
