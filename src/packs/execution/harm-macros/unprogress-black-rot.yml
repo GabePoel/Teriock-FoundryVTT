@@ -1,0 +1,23 @@
+_id: e6r2iwOurCKiqwdN
+_key: '!macros!e6r2iwOurCKiqwdN'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.69
+command: |-
+  if (actor) {
+    for (let i = 1; i <= 5; i++) {
+      const identifier = `consequence:stage-${i}-black-rot`;
+      const consequence = await teriock.fromIdentifier(identifier, { relativeOnly: true, relativeTo: actor });
+      if (!consequence) continue;
+      await consequence.delete();
+      if (i > 1) await actor.toggleChild(`consequence:stage-${i - 1}-black-rot`, { active: true });
+      break;
+    }
+  }
+folder: KDIQAjqFbSAKvi05
+img: icons/svg/dice-target.svg
+name: Unprogress Black Rot
+scope: global
+type: script

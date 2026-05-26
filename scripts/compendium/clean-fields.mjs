@@ -29,10 +29,7 @@ export function cleanDocument(doc) {
     if (doc.type === "power") cleanPower(doc);
     if (doc.type === "property") cleanProperty(doc);
   }
-  if (doc.text?.content && doc.type === "class") {
-    doc.text.content = doc.text.content.replaceAll("\n", "");
-    console.log(doc.text.content);
-  }
+  if (doc.text?.content && doc.type === "class") doc.text.content = doc.text.content.replaceAll("\n", "");
 }
 
 /**
