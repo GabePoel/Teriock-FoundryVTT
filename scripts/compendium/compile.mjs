@@ -2,8 +2,8 @@ import { promises as fs } from "fs";
 import yaml from "js-yaml";
 import path from "path";
 
-import { toId } from "../src/module/helpers/string.mjs";
-import { default as system } from "../system.json" with { type: "json" };
+import { toId } from "../../src/module/helpers/string.mjs";
+import { BASIC_STATS, SYSTEM_VERSION } from "./constants.mjs";
 
 const SRC_DIR = "./macros/";
 const DST_DIR = "./src/packs/";
@@ -54,12 +54,7 @@ async function buildYmlFile(fp) {
     Object.assign(yamlObj, {
       _id: yamlObj._id ?? generatedId,
       _key: yamlObj._key ?? `!macros!${generatedId}`,
-      _stats: {
-        coreVersion: system.compatibility.minimum.toString(),
-        lastModifiedBy: "teriockBuilder00",
-        systemId: "teriock",
-        systemVersion: system.version,
-      },
+      _stats: { ...BASIC_STATS, systemVersion: SYSTEM_VERSION },
       command,
       scope: "global",
       type: "script",

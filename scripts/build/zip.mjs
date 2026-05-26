@@ -2,7 +2,7 @@ import archiver from "archiver";
 import fs from "fs";
 import path from "path";
 
-import { default as manifest } from "../system.json" with { type: "json" };
+import { default as manifest } from "../../system.json" with { type: "json" };
 
 const VERSION = manifest.version;
 const ROOT = ".";

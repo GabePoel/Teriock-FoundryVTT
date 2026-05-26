@@ -2,14 +2,9 @@ import { extractPack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 import path from "path";
 
-import { toKebabCase, toKebabCaseFull } from "../src/module/helpers/string.mjs";
-import { default as system } from "../system.json" with { type: "json" };
-import { cleanDocument } from "./compendium/clean-fields.mjs";
-
-const BUILDER_NAME = "teriockBuilder00";
-const EXPAND_ADVENTURES = true;
-const FOLDERS = true;
-const YAML = true;
+import { toKebabCase, toKebabCaseFull } from "../../src/module/helpers/string.mjs";
+import { cleanDocument } from "./clean-fields.mjs";
+import { BASIC_STATS, EXPAND_ADVENTURES, FOLDERS, YAML } from "./constants.mjs";
 
 /**
  * @typedef {object} CompendiumNode
@@ -20,8 +15,7 @@ const YAML = true;
 /** @type {Record<string, Record<string, CompendiumNode>>} */
 const PACK_REGISTRY = {};
 
-let CURRENT_PACK;
-let BUILD_REGISTRY = true;
+const state = { buildRegistry: true, pack: null };
 
 /**
  * Register a document to the pack registry.
@@ -69,7 +63,6 @@ async function unpackPack(pack, buildRegistry) {
   } catch (error) {
     if (error.code !== "ENOENT") console.log(error);
   }
-  CURRENT_PACK = pack;
   const extractOptions = {
     expandAdventures: EXPAND_ADVENTURES,
     folders: FOLDERS,
@@ -78,7 +71,8 @@ async function unpackPack(pack, buildRegistry) {
     transformName,
     yaml: YAML,
   };
-  BUILD_REGISTRY = buildRegistry;
+  state.pack = pack;
+  state.buildRegistry = buildRegistry;
   await extractPack(`./packs/${pack}`, `./src/packs/${toKebabCaseFull(pack)}`, extractOptions);
 }
 
@@ -96,7 +90,7 @@ for (const pack of packs) await unpackPack(pack, false);
  */
 function transformName(doc, context) {
   let name = toKebabCase(doc.name);
-  if (!BUILD_REGISTRY) name = deriveName(CURRENT_PACK, doc._id);
+  if (!state.buildRegistry) name = deriveName(state.pack, doc._id);
   name = `${name}.${YAML ? "yml" : "json"}`;
   if (context.folder) name = path.join(context.folder, name);
   return name;
@@ -114,10 +108,7 @@ function cleanEntry(doc) {
   cleanDocument(doc);
   delete doc.author;
   delete doc.ownership;
-  if (doc._stats) {
-    doc._stats.coreVersion = system.compatibility.verified.toString();
-    doc._stats.lastModifiedBy = BUILDER_NAME;
-  }
+  doc._stats = { ...doc._stats ?? {}, ...BASIC_STATS };
   sortKeys(doc);
   if (doc.system?.automations) sortAutomations(doc.system.automations);
 }
@@ -127,8 +118,8 @@ function cleanEntry(doc) {
  * @returns {boolean|void}
  */
 function transformEntry(doc) {
-  if (BUILD_REGISTRY) {
-    registerDocument(CURRENT_PACK, doc);
+  if (state.buildRegistry) {
+    registerDocument(state.pack, doc);
     return false;
   }
   cleanEntry(doc);
