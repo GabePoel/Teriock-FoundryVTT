@@ -1,8 +1,7 @@
-import { rankConfig } from "../../../../constants/config/rank-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { getIdentifierName, objectMap } from "../../../../helpers/utils.mjs";
+import { toKebabCase } from "../../../../helpers/string.mjs";
+import { getIdentifierIcon, getIdentifierName } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { migrateKey, migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
@@ -10,13 +9,6 @@ import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
-
-const classChoices = Object.assign(
-  {},
-  ...Object.values(rankConfig).map(({ classes }) =>
-    Object.fromEntries(Object.entries(classes).map(([key, value]) => [toKebabCase(key), value]))
-  ),
-);
 
 /**
  * Rank-specific item data model.
@@ -50,16 +42,8 @@ export default class RankSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      archetype: new IdentifierField({
-        choices: objectMap(rankConfig, a => a.name, { localize: true }),
-        initial: "everyman",
-        type: "archetype",
-      }),
-      class: new IdentifierField({
-        choices: objectMap(classChoices, c => c.name, { localize: true }),
-        initial: "journeyman",
-        type: "class",
-      }),
+      archetype: new IdentifierField({ initial: "everyman", type: "archetype" }),
+      class: new IdentifierField({ initial: "journeyman", type: "class" }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField({ initial: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.description.initial") }),
       innate: new fields.BooleanField({ initial: false }),
@@ -143,7 +127,7 @@ export default class RankSystem
   get messageBars() {
     return [
       {
-        icon: TERIOCK.config.rank[this._source.archetype].classes[toCamelCase(this._source.class)].icon,
+        icon: getIdentifierIcon(this.class),
         label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
         wrappers: [
           getIdentifierName(this.archetype),
@@ -167,10 +151,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   get wikiPage() {
-    const prefix = this.constructor.metadata.namespace;
-    const pageName =
-      TERIOCK.index.classes[toCamelCase(foundry.utils.getProperty(this.parent, this.constructor.metadata.pageNameKey))];
-    return `${prefix}:${pageName}`;
+    return `Class:${getIdentifierName(this.class)}`;
   }
 
   /** @inheritDoc */
@@ -201,10 +182,8 @@ export default class RankSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
+    const data = {
       ...super.getLocalRollData(),
-      [`archetype.${this._source.archetype.slice(0, 3).toLowerCase()}`]: 1,
-      [`class.${this._source.class.slice(0, 3).toLowerCase()}`]: 1,
       archetype: this._source.archetype,
       av: this.maxAv,
       class: this._source.class,
@@ -212,14 +191,17 @@ export default class RankSystem
       maxAv: this.maxAv,
       number: this.number,
     };
+    if (this.archetype) data[`archetype.${this._source.archetype.slice(0, 3).toLowerCase()}`] = 1;
+    if (this.class) data[`class.${this._source.class.slice(0, 3).toLowerCase()}`] = 1;
+    return data;
   }
 
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
     if (this.parent.sup?.type === "species") this.innate = true;
-    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv)
-      this.proficient = false;
+    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.worn > this.maxAv)
+      this.competence.raw = 0;
   }
 
   /** @inheritDoc */

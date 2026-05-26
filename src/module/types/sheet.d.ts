@@ -5,11 +5,13 @@ declare global {
   namespace Teriock.Sheet {
     export type FancyDisplayField = {
       button?: string;
+      choices?: Record<string, string>;
       classes: string;
       dataset: Record<string, string>;
       editable: boolean;
       label: string;
       path: string;
+      value: never;
       visible: boolean;
     };
 

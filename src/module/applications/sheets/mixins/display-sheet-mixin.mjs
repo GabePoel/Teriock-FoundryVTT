@@ -78,10 +78,11 @@ export default function DisplaySheetMixin(Base) {
             ...f,
             ...{
               button: f?.button,
-              editable: f.editable === false ? false : value === sourceValue,
+              choices: f.choices || this.document.getSchema(f.path)?.choices,
+              editable: f.editable === false ? false : (f?.value ?? value) === sourceValue,
               label: f?.label || _loc(this.document.getSchema(f.path)?.label),
               schema: this.document.getSchema(f.path),
-              value,
+              value: f?.value ?? value,
             },
           };
         });

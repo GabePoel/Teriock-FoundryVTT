@@ -74,9 +74,18 @@ export function fancifyFields(displayFields) {
     let fancy;
     if (typeof f === "string") fancy = { path: f };
     else fancy = f;
-    const { button, classes = "", dataset = {}, editable = true, label = "", path = fancy.path, visible = true } =
-      fancy;
-    return { button, classes, dataset, editable, label, path, visible };
+    const {
+      button,
+      choices,
+      classes = "",
+      dataset = {},
+      editable = true,
+      label = "",
+      path = fancy.path,
+      value,
+      visible = true,
+    } = fancy;
+    return { button, choices, classes, dataset, editable, label, path, value, visible };
   }).filter(f => f.visible);
 }
 
@@ -290,6 +299,12 @@ export function getIdentifierIcon(identifier) {
  * @returns {string|undefined}
  */
 export function getIdentifierName(identifier) {
+  if (!identifier) return "";
+  // Hard coded values for tradecraft fields.
+  if (identifier.startsWith("field")) {
+    const parsed = parseIdentifier(identifier);
+    if (TERIOCK.config.tradecraft[parsed.identifier]) return TERIOCK.config.tradecraft[parsed.identifier].name;
+  }
   return game.teriock.identifiers.getName(identifier, { forced: true });
 }
 
