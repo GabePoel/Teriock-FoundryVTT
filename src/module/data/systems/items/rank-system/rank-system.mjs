@@ -107,8 +107,8 @@ export default class RankSystem
 
   /** @inheritDoc */
   get color() {
-    if (this.innate) return TERIOCK.display.colors.purple;
-    else return TERIOCK.display.colors.grey;
+    if (this.innate) return TERIOCK.display.colors.palette.purple;
+    else return TERIOCK.display.colors.palette.grey;
   }
 
   /** @inheritDoc */

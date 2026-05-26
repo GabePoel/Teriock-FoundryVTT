@@ -48,7 +48,7 @@ export default class HackSystem extends ApplicableEffectSystem {
 
   /** @inheritDoc */
   get color() {
-    return TERIOCK.display.colors.red;
+    return TERIOCK.display.colors.palette.red;
   }
 
   /** @inheritDoc */

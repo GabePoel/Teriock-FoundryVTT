@@ -550,6 +550,19 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
+       * Copy and transform the data model of this and all its subs into an array of plain objects.
+       * Refs are stripped from the array so that children aren't created multiple times.
+       * @param {boolean} source=true
+       * @returns {Promise<object[]>}
+       */
+      async toObjects(source = true) {
+        const data = [this.toObject(source)];
+        for (const s of (await this.getAllSubs()).contents) data.push(s?.toObject(source));
+        for (const d of data) foundry.utils.deleteProperty(d, "system._ref");
+        return data;
+      }
+
+      /**
        * Update multiple child Document instances descendant from a Document using provided differential data.
        * @param {ChildDocumentName} embeddedName
        * @param {object[]} updates

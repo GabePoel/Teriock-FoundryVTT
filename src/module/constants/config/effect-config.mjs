@@ -11,12 +11,12 @@ export const effectConfig = {
   cover: ["halfCover", "threeQuartersCover", "fullCover"],
   // no sort
   form: /** @enum {Teriock.Config.SubtypeEntry} */ {
-    special: { color: colors.purple, icon: icons.form.special, label: "TERIOCK.TERMS.EffectForm.special" },
-    normal: { color: colors.green, icon: icons.form.normal, label: "TERIOCK.TERMS.EffectForm.normal" },
-    gifted: { color: colors.blue, icon: icons.form.gifted, label: "TERIOCK.TERMS.EffectForm.gifted" },
-    echo: { color: colors.orange, icon: icons.form.echo, label: "TERIOCK.TERMS.EffectForm.echo" },
-    intrinsic: { color: colors.grey, icon: icons.form.intrinsic, label: "TERIOCK.TERMS.EffectForm.intrinsic" },
-    flaw: { color: colors.red, icon: icons.form.flaw, label: "TERIOCK.TERMS.EffectForm.flaw" },
+    special: { color: colors.palette.purple, icon: icons.form.special, label: "TERIOCK.TERMS.EffectForm.special" },
+    normal: { color: colors.palette.green, icon: icons.form.normal, label: "TERIOCK.TERMS.EffectForm.normal" },
+    gifted: { color: colors.palette.blue, icon: icons.form.gifted, label: "TERIOCK.TERMS.EffectForm.gifted" },
+    echo: { color: colors.palette.orange, icon: icons.form.echo, label: "TERIOCK.TERMS.EffectForm.echo" },
+    intrinsic: { color: colors.palette.grey, icon: icons.form.intrinsic, label: "TERIOCK.TERMS.EffectForm.intrinsic" },
+    flaw: { color: colors.palette.red, icon: icons.form.flaw, label: "TERIOCK.TERMS.EffectForm.flaw" },
   },
 };
 

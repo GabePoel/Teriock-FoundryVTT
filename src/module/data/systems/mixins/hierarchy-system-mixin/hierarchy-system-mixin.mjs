@@ -26,6 +26,14 @@ export default function HierarchySystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        // Enforcing the `_ref` to be the uuid during data prep is not strictly necessary. But it enforces the standard
+        // of what it should be referring to and discourages anyone from setting it to something even though they can.
+        this._ref = this.parent.uuid;
+      }
+
+      /** @inheritDoc */
       toObject(source = true) {
         return Object.assign(super.toObject(source), { _ref: this.parent.uuid });
       }
