@@ -6,7 +6,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.UseExternalOptions} options
+ * @param {Teriock.Command.UseExternalOptions} options
  * @returns {void|false}
  */
 function preUse(actor, options = {}) {
@@ -19,7 +19,7 @@ function preUse(actor, options = {}) {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.UseLocalOptions} options
+ * @param {Teriock.Command.UseLocalOptions} options
  * @returns {Promise<void>}
  */
 async function useLocal(actor, options = {}) {
@@ -33,7 +33,7 @@ async function useLocal(actor, options = {}) {
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.UseExternalOptions} options
+ * @param {Teriock.Command.UseExternalOptions} options
  * @returns {Promise<void>}
  */
 async function useExternal(actor, options = {}) {
@@ -49,7 +49,7 @@ async function useExternal(actor, options = {}) {
 
 /**
  * Use local document command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const useLocalCommand = {
   ...thresholdCommand,
@@ -67,7 +67,7 @@ export const useLocalCommand = {
 
 /**
  * Use external document command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const useExternalCommand = {
   ...thresholdCommand,

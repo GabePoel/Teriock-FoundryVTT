@@ -1,11 +1,11 @@
-import { getInteractionEntryValue } from "../../../../helpers/interaction/interaction-tools.mjs";
+import { getCommandEntryValue } from "../../../../helpers/interaction/command-helpers.mjs";
 import BaseActivation from "./base-activation.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * A factory function to build a simple activation from a command entry.
- * @param {Teriock.Interaction.CommandEntry} command
+ * @param {Teriock.Command.CommandEntry} command
  * @returns {typeof CommandActivation}
  */
 export default function CommandActivationFactory(command) {
@@ -25,12 +25,12 @@ export default function CommandActivationFactory(command) {
 
     /** @inheritDoc */
     get icon() {
-      return this.symbol || getInteractionEntryValue(command, "icon", this.options);
+      return this.symbol || getCommandEntryValue(command, "icon", this.options);
     }
 
     /** @inheritDoc */
     get label() {
-      return this.title || getInteractionEntryValue(command, "label", this.options);
+      return this.title || getCommandEntryValue(command, "label", this.options);
     }
 
     /** @inheritDoc */

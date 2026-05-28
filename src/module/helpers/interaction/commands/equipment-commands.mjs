@@ -105,7 +105,7 @@ const takeReadMagic = equipmentCommandFunctionFactory(
 
 /**
  * Shatter command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const shatterCommand = {
   icon: icons.break.shatter,
@@ -117,7 +117,7 @@ export const shatterCommand = {
 
 /**
  * Repair command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const repairCommand = {
   icon: icons.break.repair,
@@ -129,7 +129,7 @@ export const repairCommand = {
 
 /**
  * Destroy command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const destroyCommand = {
   icon: icons.break.destroy,
@@ -141,7 +141,7 @@ export const destroyCommand = {
 
 /**
  * Reforge command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const reforgeCommand = {
   icon: icons.break.reforge,
@@ -153,7 +153,7 @@ export const reforgeCommand = {
 
 /**
  * Glue command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const glueCommand = {
   icon: icons.equipment.glue,
@@ -165,7 +165,7 @@ export const glueCommand = {
 
 /**
  * Unglue command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const unglueCommand = {
   icon: icons.equipment.unglue,
@@ -177,7 +177,7 @@ export const unglueCommand = {
 
 /**
  * Dampen command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const dampenCommand = {
   icon: icons.equipment.dampen,
@@ -189,7 +189,7 @@ export const dampenCommand = {
 
 /**
  * Undampen command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const undampenCommand = {
   icon: icons.equipment.undampen,
@@ -201,7 +201,7 @@ export const undampenCommand = {
 
 /**
  * Identify command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const identifyCommand = {
   icon: icons.equipment.identify,
@@ -212,7 +212,7 @@ export const identifyCommand = {
 
 /**
  * Read magic command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const readMagicCommand = {
   icon: icons.equipment.readMagic,

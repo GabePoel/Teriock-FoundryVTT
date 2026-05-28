@@ -61,7 +61,7 @@ const commandArray = [
   helpCommand,
 ];
 
-/** @type {Record<string, Teriock.Interaction.CommandEntry>} */
+/** @type {Record<string, Teriock.Command.CommandEntry>} */
 const commands = {};
 
 for (const entry of commandArray) {

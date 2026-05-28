@@ -15,7 +15,7 @@ export default class ThresholdRoll extends BaseRoll {
   /**
    * @inheritDoc
    * @param {PointerEvent} event
-   * @returns {Teriock.Interaction.ThresholdOptions}
+   * @returns {Teriock.Command.ThresholdOptions}
    */
   static parseEvent(event) {
     return Object.assign(super.parseEvent(event), {

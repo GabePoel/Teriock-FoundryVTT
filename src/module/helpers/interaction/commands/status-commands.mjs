@@ -3,7 +3,7 @@ import { icons } from "../../../constants/display/icons.mjs";
 /**
  * Make a status command function.
  * @param {(actor: TeriockActor, status: Teriock.Keys.Status) => Promise<*>} operation
- * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.StatusOptions>}
+ * @returns {Teriock.Command.SimpleCommandFunction<Teriock.Command.StatusOptions>}
  */
 function fnFactory(operation) {
   return async function statusCommandFunction(a, o) {
@@ -17,7 +17,7 @@ const toggle = fnFactory((a, s) => a.toggleStatusEffect(s));
 
 /**
  * Apply status command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const applyStatusCommand = {
   args: ["status"],
@@ -32,7 +32,7 @@ export const applyStatusCommand = {
 
 /**
  * Remove status command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const removeStatusCommand = {
   args: ["status"],
@@ -47,7 +47,7 @@ export const removeStatusCommand = {
 
 /**
  * Toggle status command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const toggleStatusCommand = {
   args: ["status"],

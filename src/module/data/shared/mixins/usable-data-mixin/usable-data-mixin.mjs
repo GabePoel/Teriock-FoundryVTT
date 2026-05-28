@@ -66,7 +66,7 @@ export default function UsableDataMixin(Base) {
 
       /**
        * Uses this, including all hook and trigger calls.
-       * @param {Teriock.Interaction.UseOptions} options
+       * @param {Teriock.Command.UseOptions} options
        * @returns {Promise<void>}
        */
       async use(options = {}) {

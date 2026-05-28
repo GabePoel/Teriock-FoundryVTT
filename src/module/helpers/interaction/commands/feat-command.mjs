@@ -1,11 +1,11 @@
 import { simpleCommandFunctionFactory, thresholdCommand } from "./abstract-command.mjs";
 
-/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.FeatOptions>} */
+/** @type {Teriock.Command.SimpleCommandFunction<Teriock.Command.FeatOptions>} */
 const use = simpleCommandFunctionFactory((a, o) => a.system.rollFeatSave(o.attribute ?? "mov", o));
 
 /**
  * Feat command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 const command = {
   ...thresholdCommand,

@@ -4,7 +4,7 @@ const use = simpleCommandFunctionFactory((a, o) => a.useDocument("basic-attack",
 
 /**
  * Attack command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 const command = {
   id: "attack",

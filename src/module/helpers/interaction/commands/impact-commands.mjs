@@ -8,7 +8,7 @@ import { formulaCommand } from "./abstract-command.mjs";
 /**
  * An abstract primary take function.
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.ImpactOptions} options
+ * @param {Teriock.Command.ImpactOptions} options
  */
 async function abstractImpactCommandOperation(actor, options) {
   options = cleanDataset(options);
@@ -37,7 +37,7 @@ async function abstractImpactCommandOperation(actor, options) {
  * Build an impact function.
  * @param {Teriock.Keys.Impact} impact
  * @param {"primary" | "secondary"} operation
- * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.ImpactOptions>}
+ * @returns {Teriock.Command.SimpleCommandFunction<Teriock.Command.ImpactOptions>}
  */
 function impactCommandFunctionFactory(impact, operation) {
   return async function(actor, options) {

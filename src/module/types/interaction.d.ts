@@ -1,24 +1,21 @@
 import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
-  namespace Teriock.Interaction {
-    export type InteractionEntry = {
-      icon: ((options: object) => string) | string;
-      label: ((options: object) => string) | string;
-      tooltip?: ((options: object) => string) | string;
-      primary: (actor: TeriockActor, options?: object) => Promise<void>;
-      secondary?: (actor: TeriockActor, options?: object) => Promise<void>;
-    };
-
-    export type CommandEntry = InteractionEntry & {
+  namespace Teriock.Command {
+    export type CommandEntry = {
       aliases?: string[];
       alt?: string;
       args?: string[];
       ctrl?: string;
       flags?: Record<string, string>;
       formula?: boolean;
+      icon: ((options: object) => string) | string;
       id: string;
+      label: ((options: object) => string) | string;
       shift?: string;
+      tooltip?: ((options: object) => string) | string;
+      primary: (actor: TeriockActor, options?: object) => Promise<void>;
+      secondary?: (actor: TeriockActor, options?: object) => Promise<void>;
     };
 
     export type UseOptions = { event?: PointerEvent };

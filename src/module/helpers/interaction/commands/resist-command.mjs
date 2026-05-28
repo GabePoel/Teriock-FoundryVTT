@@ -1,12 +1,12 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { simpleCommandFunctionFactory, thresholdCommand } from "./abstract-command.mjs";
 
-/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.ResistOptions>} */
+/** @type {Teriock.Command.SimpleCommandFunction<Teriock.Command.ResistOptions>} */
 const use = simpleCommandFunctionFactory((a, o) => a.system.rollResistance(o));
 
 /**
  * Resist command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 const command = {
   ...thresholdCommand,

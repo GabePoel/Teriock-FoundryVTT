@@ -3,7 +3,7 @@ import { icons } from "../../../constants/display/icons.mjs";
 
 /**
  * @param {TeriockActor} actor
- * @param {Teriock.Interaction.StandardDamageOptions} options
+ * @param {Teriock.Command.StandardDamageOptions} options
  * @returns {Promise<void>}
  */
 async function use(actor, options = {}) {
@@ -31,7 +31,7 @@ async function use(actor, options = {}) {
 
 /**
  * Standard damage command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 const command = {
   aliases: ["sd", "standard"],

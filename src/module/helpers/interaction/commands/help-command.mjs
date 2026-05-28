@@ -9,14 +9,12 @@ async function use() {
     original: true,
   }].filter(c => c.original).sort((a, b) => a.id.localeCompare(b.id));
   let code = `<h6>${_loc("TERIOCK.COMMANDS.Help.name")}</h6><p>${_loc("TERIOCK.COMMANDS.Help.format")}</p>`;
-  console.log(code);
   for (const c of commands) {
     code += `<p><code>/${c.id}`;
     if (c.args?.length) code += ` [${c.args.join(", ")}]`;
     if (c.aliases?.length) code += ` (${c.aliases.map(a => `/${a}`).join(", ")})`;
     code += "</code></p>";
   }
-  console.log(code);
   const chatData = { content: code, speaker: TeriockChatMessage.getSpeaker() };
   TeriockChatMessage.applyMode(chatData, "self");
   await TeriockChatMessage.create(chatData);

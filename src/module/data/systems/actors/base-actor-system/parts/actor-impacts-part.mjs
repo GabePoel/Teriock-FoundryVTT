@@ -22,7 +22,7 @@ export default Base => {
        *
        * @param {number} amount
        * @param {Teriock.Keys.DieStat} stat - The stat to apply the harm to.
-       * @param {Teriock.Interaction.TakeHarmOptions} [options]
+       * @param {Teriock.Command.TakeHarmOptions} [options]
        * @returns {Promise<void>}
        */
       async #takeHarm(amount, stat, options = {}) {
@@ -88,7 +88,7 @@ export default Base => {
        * - [Morganti Damage](https://wiki.teriock.com/index.php/Damage:Morganti)
        *
        * @param {number} amount - The amount of damage to apply.
-       * @param {Teriock.Interaction.TakeHarmOptions} [options]
+       * @param {Teriock.Command.TakeHarmOptions} [options]
        * @returns {Promise<void>}
        */
       async takeDamage(amount, options = {}) {
@@ -104,7 +104,7 @@ export default Base => {
        * - [Morganti Drain](https://wiki.teriock.com/index.php/Damage:Morganti)
        *
        * @param {number} amount - The amount of drain to apply.
-       * @param {Teriock.Interaction.TakeHarmOptions} [options]
+       * @param {Teriock.Command.TakeHarmOptions} [options]
        * @returns {Promise<void>}
        */
       async takeDrain(amount, options = {}) {

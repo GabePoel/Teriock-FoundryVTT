@@ -139,7 +139,7 @@ export default class TeriockMacro
   /**
    * Get a document from its UUID and use it.
    * @param {UUID<AnyChildDocument>} uuid
-   * @param {Teriock.Interaction.UseOptions} [options]
+   * @param {Teriock.Command.UseOptions} [options]
    * @returns {Promise<void>}
    */
   static async useDocumentLinked(uuid, options = {}) {

@@ -11,7 +11,7 @@ export default function UsableDocumentMixin(Base) {
     class UsableDocument extends Base {
       /**
        * Does whatever the default roll/execution for this document is.
-       * @param {Partial<Teriock.Interaction.UseOptions>} _options
+       * @param {Partial<Teriock.Command.UseOptions>} _options
        * @returns {Promise<void>}
        * @abstract
        */

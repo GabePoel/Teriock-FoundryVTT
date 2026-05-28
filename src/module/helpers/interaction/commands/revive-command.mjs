@@ -3,7 +3,7 @@ import { simpleCommandFunctionFactory } from "./abstract-command.mjs";
 
 /**
  * Awaken command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 const command = {
   icon: icons.effect.revive,

@@ -1,7 +1,7 @@
 /**
  * Make a hack command function.
  * @param {(actor: TeriockActor, part: Teriock.Keys.HackableBodyPart) => Promise<*>} operation
- * @returns {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.HackOptions>}
+ * @returns {Teriock.Command.SimpleCommandFunction<Teriock.Command.HackOptions>}
  */
 function fnFactory(operation) {
   return async function hackCommandFunction(a, o) {
@@ -14,7 +14,7 @@ const takeUnhack = fnFactory((a, p) => a.system.takeUnhack(p));
 
 /**
  * Hack command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const hackCommand = {
   args: ["part"],
@@ -27,7 +27,7 @@ export const hackCommand = {
 
 /**
  * Unhack command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const unhackCommand = {
   args: ["part"],

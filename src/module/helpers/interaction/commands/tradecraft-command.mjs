@@ -6,12 +6,12 @@ Object.values(tradecraftConfig).forEach(fieldOption => {
   Object.assign(allOptions, fieldOption.tradecrafts);
 });
 
-/** @type {Teriock.Interaction.SimpleCommandFunction<Teriock.Interaction.TradecraftOptions>} */
+/** @type {Teriock.Command.SimpleCommandFunction<Teriock.Command.TradecraftOptions>} */
 const use = simpleCommandFunctionFactory((a, o) => a.system.rollTradecraft(o.tradecraft ?? "artist", o));
 
 /**
  * Tradecraft command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 const command = {
   ...thresholdCommand,

@@ -37,7 +37,7 @@ async function takeDeattune(actor) {
 
 /**
  * Attune command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const attuneCommand = {
   icon: icons.attunable.attune,
@@ -49,7 +49,7 @@ export const attuneCommand = {
 
 /**
  * Deattune command
- * @type {Teriock.Interaction.CommandEntry}
+ * @type {Teriock.Command.CommandEntry}
  */
 export const deattuneCommand = {
   icon: icons.attunable.deattune,

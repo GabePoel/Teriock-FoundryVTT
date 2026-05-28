@@ -90,7 +90,7 @@ foundry.helpers.Hooks.once("init", function() {
       TooltipManager: helpers.interaction.TeriockTooltipManager,
     },
   });
-  applications.ux.registerEnrichers();
+  applications.ux.enrichment.registerEnrichers();
   applications.elements.registerElements();
 
   // Configure Canvas
