@@ -25,7 +25,7 @@ export function interpretCommandInput(input, command) {
 export function getCommandEntryValue(interaction, property, options) {
   if (!interaction[property]) { return ""; }
   if (typeof interaction[property] === "string") { return interaction[property]; }
-  else { return interaction[property](options); }
+  return interaction[property](options);
 }
 
 /**

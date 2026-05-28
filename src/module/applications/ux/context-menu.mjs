@@ -53,7 +53,7 @@ export default class TeriockContextMenu extends ContextMenu {
    */
   get expandUp() {
     if (!this.#forceDirection) { return super.expandUp; }
-    else { return this.#forceDirection === "up"; }
+    return this.#forceDirection === "up";
   }
 
   /** @inheritDoc */

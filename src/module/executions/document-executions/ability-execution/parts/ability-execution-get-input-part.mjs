@@ -29,9 +29,8 @@ export default function AbilityExecutionGetInputPart(Base) {
           const roll = new BaseRoll(this.source.system.costs.primary[stat].formula, this.rollData);
           await roll.evaluate();
           return roll.total;
-        } else {
-          return 0;
         }
+        return 0;
       }
 
       /**

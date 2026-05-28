@@ -35,7 +35,8 @@ export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution
   get flavor() {
     if (this.threshold !== undefined) {
       return _loc("TERIOCK.ROLLS.Feat.thresholded", { threshold: this.threshold, value: this.attribute.toUpperCase() });
-    } else { return _loc("TERIOCK.ROLLS.Feat.unthresholded", { value: this.attribute.toUpperCase() }); }
+    }
+    return _loc("TERIOCK.ROLLS.Feat.unthresholded", { value: this.attribute.toUpperCase() });
   }
 
   /** @inheritDoc */

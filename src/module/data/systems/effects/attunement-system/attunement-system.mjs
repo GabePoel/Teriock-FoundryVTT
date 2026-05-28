@@ -74,15 +74,14 @@ export default class AttunementSystem extends CleanedEffectSystem {
     if (this.target) {
       if (this.target.type === "equipment") {
         if (this.target.system.equipped) { return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped"); }
-        else { return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"); }
+        return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped");
       } else if (this.target.type === "mount") {
         if (this.target.system.mounted) { return _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted"); }
-        else { return _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"); }
-      } else {
-        return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned");
+        return _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted");
       }
+      return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned");
     } else if (this._source.target) { return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.missing"); }
-    else { return ""; }
+    return "";
   }
 
   /**

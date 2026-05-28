@@ -30,8 +30,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         image: getImage("equipment", this.source.system.equipmentType),
         name: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", { type: this.source.system.equipmentTypeName }),
       };
-    } else {
-      return super._buildSourcePanel();
     }
+    return super._buildSourcePanel();
   }
 }

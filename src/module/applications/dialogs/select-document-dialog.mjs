@@ -84,7 +84,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
 
   const selected = await sheet.select();
   if (selected) { return selected.map(id => idToDoc.get(id)).filter(Boolean); }
-  else { return []; }
+  return [];
 }
 
 /**

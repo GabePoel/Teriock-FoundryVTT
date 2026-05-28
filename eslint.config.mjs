@@ -92,6 +92,7 @@ export default tseslint.config(
       "jsdoc/require-jsdoc": "warn",
       "jsdoc/require-param": "warn",
       "no-console": "off",
+      "no-else-return": "error",
       "no-empty": ["warn", { allowEmptyCatch: true }],
       "no-var": "error",
       "object-shorthand": "error",

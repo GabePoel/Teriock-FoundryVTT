@@ -28,7 +28,7 @@ export default function AutomatedDataMixin(Base) {
       getAutomations(type, options = {}) {
         const { active } = options;
         if (active) { return this.activeAutomations.filter(a => a.type === type); }
-        else { return this.automations.contents.filter(a => a.type === type); }
+        return this.automations.contents.filter(a => a.type === type);
       }
     }
   );

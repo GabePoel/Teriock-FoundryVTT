@@ -237,7 +237,7 @@ export default function TriggerAutomationMixin(Base) {
         await super._preFireTrigger(trigger, scope);
         if (this.canFire(trigger)) {
           if (scope.awaitFire) { return this._preFire(scope); }
-          else { this._preFire(scope); }
+          this._preFire(scope);
         }
       }
 
@@ -255,7 +255,7 @@ export default function TriggerAutomationMixin(Base) {
       /** @inheritDoc */
       async getActivations(options) {
         if (this._hasButtons) { return this._getActivations(options); }
-        else { return []; }
+        return [];
       }
 
       /** @inheritDoc */

@@ -106,7 +106,7 @@ export default class SummonActivation extends BaseActivation {
     const owned = candidates.find(a => a.isOwner);
     if (owned) { return owned; }
     else if (candidates.length) { return candidates[0]; }
-    else { return null; }
+    return null;
   }
 
   /**

@@ -75,6 +75,6 @@ export default class CompetenceModel extends EmbeddedDataModel {
   get value() {
     if (this.fluent) { return 2; }
     if (this.proficient) { return 1; }
-    else { return 0; }
+    return 0;
   }
 }

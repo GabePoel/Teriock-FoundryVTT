@@ -86,9 +86,8 @@ export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAu
       return game.user.selectVisibleToken({
         title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", { name: this.document?.name || "" }),
       });
-    } else {
-      return null;
     }
+    return null;
   }
 
   /** @inheritDoc */

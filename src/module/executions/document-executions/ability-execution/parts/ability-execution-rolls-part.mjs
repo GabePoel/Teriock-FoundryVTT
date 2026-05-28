@@ -19,7 +19,7 @@ export default function AbilityExecutionRollsPart(Base) {
           return flavor;
         } else if (this.isFeat) { return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat"); }
         else if (this.isBlock) { return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block"); }
-        else { return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest"); }
+        return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest");
       }
 
       /** @inheritDoc */

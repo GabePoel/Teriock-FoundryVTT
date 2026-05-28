@@ -56,10 +56,9 @@ export default class TeriockTooltipManager extends TooltipManager {
     if (Cls?.documentMetadata.tooltip) {
       this.#KNOWN_DOCUMENT_NAMES.allowed.add(documentName);
       return true;
-    } else {
-      this.#KNOWN_DOCUMENT_NAMES.disallowed.add(documentName);
-      return false;
     }
+    this.#KNOWN_DOCUMENT_NAMES.disallowed.add(documentName);
+    return false;
   }
 
   /** @inheritdoc */

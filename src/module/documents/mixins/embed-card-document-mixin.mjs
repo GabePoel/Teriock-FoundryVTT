@@ -52,12 +52,11 @@ export default function EmbedCardDocumentMixin(Base) {
       async _buildEmbedHTML(config, options = {}) {
         const content = await super._buildEmbedHTML(config, options);
         if (content) { return content; }
-        else {
-          const embedContext = foundry.utils.mergeObject(this.embedParts, config);
-          if (options.relativeTo) { embedContext.relative = options.relativeTo.uuid; }
-          const html = await TeriockTextEditor.renderTemplate("teriock/ui/block", embedContext);
-          return foundry.utils.parseHTML(html);
-        }
+
+        const embedContext = foundry.utils.mergeObject(this.embedParts, config);
+        if (options.relativeTo) { embedContext.relative = options.relativeTo.uuid; }
+        const html = await TeriockTextEditor.renderTemplate("teriock/ui/block", embedContext);
+        return foundry.utils.parseHTML(html);
       }
 
       /** @inheritDoc */

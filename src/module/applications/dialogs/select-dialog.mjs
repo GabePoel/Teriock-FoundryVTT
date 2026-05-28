@@ -265,7 +265,7 @@ export async function selectClassDialog(classes = null) {
     title: _loc("TERIOCK.DIALOGS.Select.Class.title"),
   });
   if (chosen) { return chosen.system.identifier; }
-  else { return null; }
+  return null;
 }
 
 /**

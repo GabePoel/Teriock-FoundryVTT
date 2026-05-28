@@ -64,6 +64,6 @@ export default class TeriockJournalEntryPage
    */
   getRollData() {
     if (typeof this.system?.getRollData === "function") { return this.system.getRollData(); }
-    else { return {}; }
+    return {};
   }
 }

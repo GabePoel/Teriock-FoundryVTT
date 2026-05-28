@@ -174,7 +174,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (sup?.documentName !== sub?.documentName) { return false; }
         if (sup?.id === sub?.id) { return true; }
         if (typeof sup.getAllSups === "function") { return (await sup.getAllSups()).has(sub.id); }
-        else { return false; }
+        return false;
       }
 
       /**
@@ -434,13 +434,13 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       checkAncestor(doc) {
         if (doc?.uuid === this.uuid) { return true; }
-        else { return this.elder?.checkAncestor ? this.elder?.checkAncestor(doc) || false : false; }
+        return this.elder?.checkAncestor ? this.elder?.checkAncestor(doc) || false : false;
       }
 
       /** @inheritDoc */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
         if (embeddedName === this.documentName) { return await this.createSubDocuments(data, operation); }
-        else { return super.createChildDocuments(embeddedName, data, operation); }
+        return super.createChildDocuments(embeddedName, data, operation);
       }
 
       /**
@@ -471,16 +471,15 @@ export default function HierarchyDocumentMixin(Base) {
           foundry.utils.setProperty(doc, "folder", this.folder?.id || null);
         }
         if (this.parent) { return this.parent.createEmbeddedDocuments(this.documentName, data, operation); }
-        else {
-          if (this.inCompendium) { operation.pack = this.collection.collection; }
-          return foundry.utils.getDocumentClass(this.documentName).createDocuments(data, operation);
-        }
+
+        if (this.inCompendium) { operation.pack = this.collection.collection; }
+        return foundry.utils.getDocumentClass(this.documentName).createDocuments(data, operation);
       }
 
       /** @inheritDoc */
       async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
         if (embeddedName === this.documentName) { return this.deleteSubDocuments(ids, operation); }
-        else { return super.deleteChildDocuments(embeddedName, ids, operation); }
+        return super.deleteChildDocuments(embeddedName, ids, operation);
       }
 
       /**
@@ -492,10 +491,9 @@ export default function HierarchyDocumentMixin(Base) {
       async deleteSubDocuments(ids = [], operation = {}) {
         ids = ids.filter(id => this.subs.map(s => s._id).includes(id));
         if (this.parent) { return this.parent.deleteEmbeddedDocuments(this.documentName, ids, operation); }
-        else {
-          if (this.inCompendium) { operation.pack = this.collection.collection; }
-          return foundry.utils.getDocumentClass(this.documentName).deleteDocuments(ids, operation);
-        }
+
+        if (this.inCompendium) { operation.pack = this.collection.collection; }
+        return foundry.utils.getDocumentClass(this.documentName).deleteDocuments(ids, operation);
       }
 
       /**
@@ -560,7 +558,7 @@ export default function HierarchyDocumentMixin(Base) {
        */
       async updateChildDocuments(embeddedName, updates = [], operation = {}) {
         if (embeddedName === this.documentName) { return this.updateSubDocuments(updates, operation); }
-        else { return super.updateChildDocuments(embeddedName, updates, operation); }
+        return super.updateChildDocuments(embeddedName, updates, operation);
       }
 
       /**
@@ -572,10 +570,9 @@ export default function HierarchyDocumentMixin(Base) {
       async updateSubDocuments(updates = [], operation = {}) {
         updates = updates.filter(update => this.subs.map(s => s._id).includes(update._id));
         if (this.parent) { return this.parent.updateEmbeddedDocuments(this.documentName, updates, operation); }
-        else {
-          if (this.inCompendium) { operation.pack = this.collection?.collection; }
-          return foundry.utils.getDocumentClass(this.documentName).updateDocuments(updates, operation);
-        }
+
+        if (this.inCompendium) { operation.pack = this.collection?.collection; }
+        return foundry.utils.getDocumentClass(this.documentName).updateDocuments(updates, operation);
       }
     }
   );

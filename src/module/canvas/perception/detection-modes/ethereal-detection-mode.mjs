@@ -16,8 +16,8 @@ export default class EtherealDetectionMode extends LightDetectionMode {
   static getDetectionFilter() {
     if (
       !game.modules.get("tokenmagic")?.active || !game.teriock.getSetting("autoTokenMagicConditionEffects")
-    ) { return (this._detectionFilter ??= EtherealFilter.create({ blur: 10 })); } else {return super
-        .getDetectionFilter();}
+    ) { return (this._detectionFilter ??= EtherealFilter.create({ blur: 10 })); }
+    return super.getDetectionFilter();
   }
 
   _canDetect(visionSource, target) {

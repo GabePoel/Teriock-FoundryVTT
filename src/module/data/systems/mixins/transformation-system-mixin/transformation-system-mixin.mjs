@@ -270,7 +270,7 @@ export default function TransformationSystemMixin(Base) {
        */
       get isPrimaryTransformation() {
         if (this.actor) { return this.isTransformation && this.actor.system.transformation.primary === this.parent; }
-        else { return this.isTransformation; }
+        return this.isTransformation;
       }
 
       /**

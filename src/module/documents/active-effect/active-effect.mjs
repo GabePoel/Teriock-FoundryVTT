@@ -70,7 +70,7 @@ export default class TeriockActiveEffect
   /** @inheritDoc */
   async createChildDocuments(embeddedName, data = [], operation = {}) {
     if (embeddedName === "Item") { return this.createDependentDocuments(embeddedName, data, operation); }
-    else { return super.createChildDocuments(embeddedName, data, operation); }
+    return super.createChildDocuments(embeddedName, data, operation);
   }
 
   /** @inheritDoc */

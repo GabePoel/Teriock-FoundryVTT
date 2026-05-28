@@ -53,7 +53,7 @@ export default function CommonDocumentMixin(Base) {
       get actor() {
         if (this instanceof TeriockActor) { return this; }
         else if (this.parent) { return this.parent.actor; }
-        else { return null; }
+        return null;
       }
 
       /**

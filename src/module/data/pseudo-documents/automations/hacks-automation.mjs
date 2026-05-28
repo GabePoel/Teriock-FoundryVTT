@@ -41,6 +41,6 @@ export default class HacksAutomation extends BaseAutomation {
   /** @inheritDoc */
   async getActivations() {
     if (this.reverse) { return Array.from(this.hacks).map(h => new TakeUnhackActivation({ options: { part: h } })); }
-    else { return Array.from(this.hacks).map(h => new TakeHackActivation({ options: { part: h } })); }
+    return Array.from(this.hacks).map(h => new TakeHackActivation({ options: { part: h } }));
   }
 }

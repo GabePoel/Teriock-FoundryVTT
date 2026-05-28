@@ -322,7 +322,7 @@ export function movementActionField(options = {}) {
           Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
             if (typeof v.canSelect === "function") { return v.canSelect(); }
             else if (typeof v.canSelect === "boolean") { return v.canSelect; }
-            else { return true; }
+            return true;
           }),
         ),
         t => t.label,

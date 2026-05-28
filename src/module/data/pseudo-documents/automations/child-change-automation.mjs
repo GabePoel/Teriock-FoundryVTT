@@ -64,9 +64,8 @@ export default class ChildChangeAutomation extends CritAutomation {
           [_k, v],
         ) => [_k, _loc(v.label)]).sort((a, b) => a[1].localeCompare(b[1])),
       );
-    } else {
-      return objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, { localize: true });
     }
+    return objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, { localize: true });
   }
 
   /** @returns {number} */

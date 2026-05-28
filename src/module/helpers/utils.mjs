@@ -373,7 +373,8 @@ export async function fromIdentifier(identifier, options = {}) {
 export async function fromKey(uuidOrIdentifier, options = {}) {
   if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {
     return fromIdentifier(uuidOrIdentifier, options);
-  } else { return fromUuid(uuidOrIdentifier, options); }
+  }
+  return fromUuid(uuidOrIdentifier, options);
 }
 
 /**

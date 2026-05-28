@@ -286,7 +286,8 @@ export default Base => {
         children = children.filter(c => {
           if (foundry.utils.hasProperty(c, "system.revealed")) {
             return foundry.utils.getProperty(c, "system.revealed") || game.user.isGM;
-          } else { return true; }
+          }
+          return true;
         });
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter) {

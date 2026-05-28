@@ -95,7 +95,7 @@ export default class BaseUnitModel extends EvaluationModel {
     const unitType = this.unitType;
     if (unitType === "zero") { return 0; }
     if (unitType === "infinite") { return Infinity; }
-    else { return value; }
+    return value;
   }
 
   /** @inheritDoc */
@@ -128,7 +128,7 @@ export default class BaseUnitModel extends EvaluationModel {
     const unitType = this.unitType;
     if (unitType === "zero") { return 0; }
     if (unitType === "infinite") { return Infinity; }
-    else { return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1; }
+    return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1;
   }
 
   /** @inheritDoc */
@@ -141,11 +141,10 @@ export default class BaseUnitModel extends EvaluationModel {
     const unitType = this.unitType;
     if (unitType === "zero") { return "0"; }
     if (unitType === "infinite") { return "9".repeat(32); }
-    else {
-      const conversion = this.conversion;
-      if (conversion === 1) { return super.formula; }
-      else { return multiplyFormula(super.formula, conversion.toString()); }
-    }
+
+    const conversion = this.conversion;
+    if (conversion === 1) { return super.formula; }
+    return multiplyFormula(super.formula, conversion.toString());
   }
 
   /**
@@ -169,9 +168,8 @@ export default class BaseUnitModel extends EvaluationModel {
     if (this.unitType === "finite") {
       const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
       return `${this.raw} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
-    } else {
-      return this.constructor.choices[this.unit];
     }
+    return this.constructor.choices[this.unit];
   }
 
   /**
@@ -181,7 +179,7 @@ export default class BaseUnitModel extends EvaluationModel {
   get unitType() {
     if (this.constructor.zeroChoiceEntries.map(e => e.id).includes(this.unit)) { return "zero"; }
     else if (this.constructor.finiteChoiceEntries.map(e => e.id).includes(this.unit)) { return "finite"; }
-    else { return "infinite"; }
+    return "infinite";
   }
 
   /** @inheritDoc */

@@ -95,9 +95,8 @@ export default function BaseDocumentMixin(Base) {
           });
           if (!docs) { return data.map(_d => null); }
           return Promise.all(docs.map(d => fromUuid(d)));
-        } else {
-          return super.createDocuments(data, operation);
         }
+        return super.createDocuments(data, operation);
       }
 
       /**
@@ -115,9 +114,8 @@ export default function BaseDocumentMixin(Base) {
           });
           if (!docs) { return ids.map(_d => null); }
           return docs;
-        } else {
-          return super.deleteDocuments(ids, operation);
         }
+        return super.deleteDocuments(ids, operation);
       }
 
       /**
@@ -135,9 +133,8 @@ export default function BaseDocumentMixin(Base) {
           });
           if (!docs) { return updates.map(_d => null); }
           return Promise.all(docs.map(d => fromUuid(d)));
-        } else {
-          return super.updateDocuments(updates, operation);
         }
+        return super.updateDocuments(updates, operation);
       }
 
       /**

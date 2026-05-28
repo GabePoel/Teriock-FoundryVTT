@@ -258,7 +258,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
   _heightenString(s) {
     const regex = /@h(?![a-zA-Z])/g;
     if (regex.test(s)) { return s.replace(regex, (this.heightened || 0).toString()); }
-    else { return s; }
+    return s;
   }
 
   /**

@@ -75,6 +75,6 @@ export default class ChatStatusAutomation extends CritAutomation {
     if (this.relation === "apply") { return [new ApplyStatusActivation({ options: { status: this.status } })]; }
     else if (this.relation === "remove") { return [new RemoveStatusActivation({ options: { status: this.status } })]; }
     else if (this.relation === "toggle") { return [new ToggleStatusActivation({ options: { status: this.status } })]; }
-    else { return []; }
+    return [];
   }
 }

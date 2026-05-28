@@ -72,9 +72,8 @@ function formBox(input, options) {
         </div>
       `;
     return new Handlebars.SafeString(out);
-  } else {
-    return new Handlebars.SafeString("");
   }
+  return new Handlebars.SafeString("");
 }
 
 const fieldHelperEntries = [["formBox", formBox]];
