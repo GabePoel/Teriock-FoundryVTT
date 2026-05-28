@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/bodyguard-training.webp
     name: Bodyguard Training
     system:
@@ -35,8 +35,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @L[Ability:Bodyguard Backup]{Bodyguard Backup} and
-          @L[Ability:Bodyguard Taunt]{Bodyguard Taunt}.</p>
+          <p>You gain @Identifier[ability:bodyguard-backup]{Bodyguard Backup}
+          and @Identifier[ability:bodyguard-taunt]{Bodyguard Taunt}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -56,7 +56,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/fortify-area.webp
     name: Fortify Area
     system:
@@ -120,19 +120,20 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>You may spend a @L[Core:Short Rest]{short rest} building defensive
-          fortifications around the area you are resting in. The area must not
-          be greater than 30 feet wide in any direction. You and your allies
-          that are in this are when @L[Core:Combat]{combat} begins gain
-          [[/gainTempHp 1d10]] @L[Core:Temporary Hit Points]{temporary HP} for
-          the duration of that @L[Core:Combat]{combat}. This area counts as
-          having been "fortified".</p>
+          <p>You may spend a @Identifier[core:short-rest]{short rest} building
+          defensive fortifications around the area you are resting in. The area
+          must not be greater than 30 feet wide in any direction. You and your
+          allies that are in this are when @Identifier[core:combat]{combat}
+          begins gain [[/gainTempHp 1d10]]
+          @Identifier[core:temporary-hit-points]{temporary HP} for the duration
+          of that @Identifier[core:combat]{combat}. This area counts as having
+          been "fortified".</p>
         fluent: >-
           <p>You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.</p>
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
         proficient: >-
           <p>You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
-          @L[Core:Temporary Hit Points]{temporary HP}.</p>
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -153,7 +154,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/tumble.webp
     name: Tumble
     system:
@@ -210,8 +211,8 @@ effects:
       effectTypes:
         - movement
       endCondition: >-
-        <p>At the start of each of your @L[Core:Turns]{turns}, you roll [[/roll
-        2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the start of each of your @Identifier[core:turns]{turns}, you roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime: r1
       expansion:
         range:
@@ -224,13 +225,15 @@ effects:
       overview:
         base: >-
           <p>You are moved 5 feet in the direction opposite the source of the
-          damage and become @L[Condition:Snared]{snared}. If there is no
-          direction associated with the source of the @L[Core:Damage]{damage},
-          you move in a random direction instead. This movement does not count
-          as a trigger for @L[Ability:Opportunity Attack]{Opportunity Attack}.
-          If this all completes without interruption, you take only half the
-          triggering @L[Core:Damage]{damage}. If the @L[Core:Damage]{damage} has
-          multiple types, each type is rounded down independently.</p>
+          damage and become @Identifier[status:snared]{snared}. If there is no
+          direction associated with the source of the
+          @Identifier[core:damage]{damage}, you move in a random direction
+          instead. This movement does not count as a trigger for
+          @Identifier[ability:opportunity-attack]{Opportunity Attack}. If this
+          all completes without interruption, you take only half the triggering
+          @Identifier[core:damage]{damage}. If the
+          @Identifier[core:damage]{damage} has multiple types, each type is
+          rounded down independently.</p>
       piercing:
         raw: 0
       powerSources:
@@ -241,7 +244,7 @@ effects:
       standard: true
       targets:
         - self
-      trigger: <p>You would take @L[Core:Damage]{damage}.</p>
+      trigger: <p>You would take @Identifier[core:damage]{damage}.</p>
     transfer: true
     type: ability
   - _id: QTwygiNnoFgmLtLQ
@@ -251,7 +254,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -281,7 +284,9 @@ effects:
       interaction: manifest
       maneuver: passive
       overview:
-        base: <p>Armor you wear is @L[Property:Unbreachable]{unbreachable}.</p>
+        base: >-
+          <p>Armor you wear is
+          @Identifier[property:unbreachable]{unbreachable}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -301,7 +306,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
     name: Bodyguard Backup
     system:
@@ -335,9 +340,9 @@ effects:
       overview:
         base: >-
           <p>Pick another creature within range. They gain
-          @L[Core:Advantage]{advantage} on the next @L[Core:Movement]{MOV} or
-          @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save} they
-          make.</p>
+          @Identifier[core:advantage]{advantage} on the next
+          @Identifier[core:movement]{MOV} or @Identifier[core:strength]{STR}
+          @Identifier[core:feat-interaction]{feat save} they make.</p>
       piercing:
         raw: 0
       powerSources:
@@ -346,15 +351,15 @@ effects:
         raw: '5'
         unit: ft
       requirements: >-
-        <p>You are not also using @L[Ability:Bodyguard Taunt]{Bodyguard
+        <p>You are not also using @Identifier[ability:bodyguard-taunt]{Bodyguard
         Taunt}.</p>
       skill: true
       standard: true
       targets:
         - creature
       trigger: >-
-        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
-        creature.</p>
+        <p>You attempt an @Identifier[core:attack-interaction]{attack} against
+        another creature.</p>
     transfer: true
     type: ability
   - _id: RfLB2uvMBBZcwctE
@@ -364,7 +369,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     name: Bodyguard Taunt
     system:
@@ -417,8 +422,8 @@ effects:
       overview:
         base: >-
           <p>Pick another creature within range. They are
-          @L[Condition:Goaded]{goaded} until the start of your next
-          @L[Core:Turns]{turn}.</p>
+          @Identifier[status:goaded]{goaded} until the start of your next
+          @Identifier[core:turns]{turn}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -427,15 +432,15 @@ effects:
         raw: '5'
         unit: ft
       requirements: >-
-        <p>You are not also using @L[Ability:Bodyguard Backup]{Bodyguard
-        Backup}.</p>
+        <p>You are not also using
+        @Identifier[ability:bodyguard-backup]{Bodyguard Backup}.</p>
       skill: true
       standard: true
       targets:
         - creature
       trigger: >-
-        <p>You attempt an @L[Core:Attack Interaction]{attack} against another
-        creature.</p>
+        <p>You attempt an @Identifier[core:attack-interaction]{attack} against
+        another creature.</p>
     transfer: true
     type: ability
 folder: a32988faf943d834

@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     name: Disable Ray
     system:
@@ -42,18 +42,20 @@ effects:
         primary:
           mp:
             description: >-
-              <p>This costs 0 @L[Core:Hit Points and Mana Points]{MP} if the
-              triggering @L[Category:Abilities]{ability} was used on you or some
-              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
-              It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+              <p>This costs 0 @Identifier[core:hit-points-and-mana-points]{MP}
+              if the triggering @Pack[teriock.abilities]{ability} was used on
+              you or some @Pack[teriock.equipment]{equipment} you
+              @Identifier[keyword:bearing]{bear}. It costs 1
+              @Identifier[core:hit-points-and-mana-points]{MP} otherwise.</p>
             type: description
       delivery: missile
       duration:
         raw: '1'
         unit: minute
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: r1
         slow:
@@ -69,8 +71,9 @@ effects:
       mundane: false
       overview:
         proficient: >-
-          <p>This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.</p>
+          <p>This also makes the effect of that
+          @Pack[teriock.abilities]{ability}
+          @Identifier[core:fizzles]{fizzle}.</p>
       piercing:
         raw: 1
       powerSources:
@@ -81,18 +84,18 @@ effects:
       requirements: <p>You may only target the triggering creature.</p>
       results:
         hit: >-
-          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.</p>
+          <p>Target becomes @Identifier[keyword:incapable]{incapable} of the
+          @Pack[teriock.abilities]{ability} they were using.</p>
       skill: true
       standard: true
       targets:
         - creature
       trigger: >-
-        <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
-        @L[Category:Active abilities]{active} or @L[Category:Reactive
-        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
-        against a different creature or some @L[Category:Equipment]{equipment}
-        that different creature @L[Keyword:Bearing]{bares}.</p>
+        <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic}
+        @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive
+        abilities]{reactive ability} that isn't a @Wiki[Category:Spells]{spell}
+        against a different creature or some @Pack[teriock.equipment]{equipment}
+        that different creature @Identifier[keyword:bearing]{bares}.</p>
     transfer: true
     type: ability
   - _id: B57L4hOAEP7S1PZt
@@ -102,7 +105,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/glue.webp
     name: Glue
     system:
@@ -138,8 +141,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target is @L[Property:Glued]{glued} to the creature
-          @L[Keyword:Bearing]{bearing} it.</p>
+          <p>Target is @Identifier[property:glued]{glued} to the creature
+          @Identifier[keyword:bearing]{bearing} it.</p>
       piercing:
         raw: 0
       powerSources:
@@ -147,7 +150,9 @@ effects:
       range:
         raw: '5'
         unit: ft
-      requirements: <p>Target item must be @L[Keyword:Bearing]{beared} by a creature.</p>
+      requirements: >-
+        <p>Target item must be @Identifier[keyword:bearing]{beared} by a
+        creature.</p>
       ritual: true
       skill: true
       standard: true
@@ -162,7 +167,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -203,12 +208,13 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You become @L[Condition:Hidden]{hidden}. If the result of your
-          @L[Core:Sneak]{SNK} @L[Core:Feat Interaction]{save} is greater than
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 +
-          2 × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
-          use your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}.</p>
+          <p>You become @Identifier[status:hidden]{hidden}. If the result of
+          your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your
+          @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}
+          (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your
+          hidden DC. If not, use your @Wiki[Core:Passive Attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -217,10 +223,11 @@ effects:
         unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:Game Master]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+        @Identifier[core:cover]{three-quarters cover}, or some other feature
+        which the @Identifier[core:game-master]{GM} determines is appropriate
+        for being @Identifier[status:hidden]{hidden}. You must remain in areas
+        that maintain these conditions to stay
+        @Identifier[status:hidden]{hidden}.</p>
       skill: true
       standard: true
       targets:
@@ -241,7 +248,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: icons/skills/trades/security-locksmith-key-gray.webp
     name: Talented Locksmith
     system:
@@ -277,8 +284,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are a @L[Keyword:Talented]{talented}
-          @L[Tradecraft:Locksmith]{locksmith}.</p>
+          <p>You are a @Identifier[keyword:talented]{talented}
+          @Identifier[tradecraft:locksmith]{locksmith}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -298,7 +305,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/unglue.webp
     name: Unglue
     system:
@@ -337,7 +344,9 @@ effects:
       maneuver: active
       mundane: false
       overview:
-        base: <p>Target is no longer @L[Property:Glued]{glued} and you take it.</p>
+        base: >-
+          <p>Target is no longer @Identifier[property:glued]{glued} and you take
+          it.</p>
       piercing:
         raw: 0
       powerSources:
@@ -345,8 +354,8 @@ effects:
       range:
         unit: contact
       requirements: >-
-        <p>Target's bearer is @L[Condition:Down]{down} or target it
-        @L[Property:Searchable]{searchable}.</p>
+        <p>Target's bearer is @Identifier[status:down]{down} or target it
+        @Identifier[property:searchable]{searchable}.</p>
       skill: true
       standard: true
       targets:

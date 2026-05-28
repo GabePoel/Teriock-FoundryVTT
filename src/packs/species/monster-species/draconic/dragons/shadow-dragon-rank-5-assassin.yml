@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: support
@@ -49,13 +49,13 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You spend a @L[Core:Short Rest]{short rest} preparing a vial of
-          poison for your own uses. Once the vial is prepared, you may either
-          apply it to a @L[Category:Weapons]{weapon}, which can then be used for
-          a single @L[Ability:Poison Strike]{Poison Strike}, or get it ready to
-          put on some other item, which can in turn be applied with
-          @L[Ability:Poison Item]{Poison Item}. Once prepared, the poison only
-          lasts 24 hours before it expires.</p>
+          <p>You spend a @Identifier[core:short-rest]{short rest} preparing a
+          vial of poison for your own uses. Once the vial is prepared, you may
+          either apply it to a @Wiki[Category:Weapons]{weapon}, which can then
+          be used for a single @Identifier[ability:poison-strike]{Poison
+          Strike}, or get it ready to put on some other item, which can in turn
+          be applied with @Identifier[ability:poison-item]{Poison Item}. Once
+          prepared, the poison only lasts 24 hours before it expires.</p>
       piercing:
         raw: 0
       powerSources:
@@ -75,7 +75,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: combat
@@ -116,8 +116,9 @@ effects:
         raw: '0'
         unit: instant
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turns]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: a1
         slow:
@@ -138,7 +139,7 @@ effects:
       range:
         unit: contact
       results:
-        hit: <p>Target is @L[Condition:Silenced]{silenced}.</p>
+        hit: <p>Target is @Identifier[status:silenced]{silenced}.</p>
       skill: true
       standard: true
       targets:
@@ -152,7 +153,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     name: Poison Strike
     system:
@@ -196,7 +197,7 @@ effects:
         unit: hour
       effectTypes:
         - poison
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
       executionTime:
         base: a1
         slow:
@@ -212,11 +213,11 @@ effects:
       mundane: false
       overview:
         fluent: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -225,9 +226,9 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @L[Core:Damage]{damage}.</p>
+          <p>Target is @Identifier[status:poisoned]{poisoned}. The
+          @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @Identifier[core:damage]{damage}.</p>
       skill: true
       targets:
         - creature
@@ -240,7 +241,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/poison-item.webp
     name: Poison Item
     system:
@@ -281,7 +282,7 @@ effects:
       duration:
         raw: '24'
         unit: hour
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
       executionTime:
         base: a1
         slow:
@@ -297,19 +298,20 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}.
-          The @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @L[Core:Damage]{damage}. The way the item delivers this to its user
-          depends on the nature of the item. If it's food or drink, it's when
-          the item is consumed. The @L[Core:Game Master]{GM} may approve other
-          cases as well. The item only delivers the
-          @L[Condition:Poisoned]{poison} effect once.</p>
+          <p>Target makes a creature become
+          @Identifier[status:poisoned]{poisoned}. The
+          @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @Identifier[core:damage]{damage}. The way the item delivers this to
+          its user depends on the nature of the item. If it's food or drink,
+          it's when the item is consumed. The @Identifier[core:game-master]{GM}
+          may approve other cases as well. The item only delivers the
+          @Identifier[status:poisoned]{poison} effect once.</p>
         fluent: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
       piercing:
         raw: 0
       powerSources:

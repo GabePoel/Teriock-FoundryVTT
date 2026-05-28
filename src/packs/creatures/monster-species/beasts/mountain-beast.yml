@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: lbbvp5hLNkA2RMvg
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/battle-charge.webp
         name: Battle Charge
         system:
@@ -51,13 +51,14 @@ items:
           overview:
             base: >-
               <div class="note"><b>Note:</b> A target moving due to [[lookup
-              name]] can still provoke reactions like @L[Ability:Opportunity
-              Attack]{Opportunity Attack}.</div><div class="note"><b>Note:</b>
-              This ability can trigger in the middle of
-              @L[Ability:Move]{moving}. You could approach an enemy, trigger
-              this ability, take an @L[Ability:Opportunity Attack]{Opportunity
-              Attack} against them, keep moving towards them, and trigger this
-              ability again.</div>
+              name]] can still provoke reactions like
+              @Identifier[ability:opportunity-attack]{Opportunity
+              Attack}.</div><div class="note"><b>Note:</b> This ability can
+              trigger in the middle of @Identifier[ability:move]{moving}. You
+              could approach an enemy, trigger this ability, take an
+              @Identifier[ability:opportunity-attack]{Opportunity Attack}
+              against them, keep moving towards them, and trigger this ability
+              again.</div>
           piercing:
             raw: 2
           powerSources:
@@ -84,7 +85,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -112,13 +113,14 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
-              1, it is reduced to 0.</p>
+              <p>Target is @Identifier[status:dead]{dead},
+              @Identifier[status:ruined]{ruined}, and their
+              @Identifier[core:size]{SIZE} is reduced by 1. If their
+              @Identifier[core:size]{SIZE} was already less than 1, it is
+              reduced to 0.</p>
           targets:
             - creature
         transfer: true
@@ -131,7 +133,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
@@ -168,7 +170,7 @@ items:
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is bright
-              light and up to 120 feet as though it is dim light.</p>
+              light and up to 120 feet as though it is dim light.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -187,7 +189,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -231,7 +233,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -275,7 +277,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -319,7 +321,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -363,7 +365,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/trample.webp
         name: Trample
         system:
@@ -400,10 +402,11 @@ items:
           overview:
             base: >-
               <p>If you use [[lookup name]] on a
-              @L[Category:Creatures]{creature} at least one @L[Core:Size]{size
-              category} smaller than you, add [[/damage 1d6]]
-              @L[Core:Damage]{damage} to its @L[Core:Standard and Critical
-              Damage]{standard damage}.</p>
+              @Pack[teriock.creatures]{creature} at least one
+              @Identifier[core:size]{size category} smaller than you, add
+              [[/damage 1d6]] @Identifier[core:damage]{damage} to its
+              @Identifier[core:standard-and-critical-damage]{standard
+              damage}.</p>
           piercing:
             raw: 2
           powerSources:
@@ -412,10 +415,10 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>Deal @L[Core:Standard and Critical Damage]{critical
+              <p>Deal @Identifier[core:standard-and-critical-damage]{critical
               damage}.</p>
             hit: >-
-              <p>Deal @L[Core:Standard and Critical Damage]{standard
+              <p>Deal @Identifier[core:standard-and-critical-damage]{standard
               damage}.</p>
           targets:
             - creature
@@ -428,13 +431,11 @@ items:
     img: systems/teriock/src/icons/creatures/mountain-beast.webp
     name: Mountain Beast
     system:
-      adult: 0
       appearance: <p>Usually muscular and covered in shaggy fur. Ram-like horns.</p>
       br: 8
       competence:
         raw: 1
       identifier: mountain-beast
-      lifespan: 0
       size:
         enabled: true
         value: 4
@@ -459,7 +460,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: vgYp2OlY2QgragN9
         _key: >-
@@ -469,7 +470,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -479,7 +480,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -494,7 +496,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -504,7 +506,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -539,7 +541,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -549,7 +551,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -559,7 +561,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -574,7 +577,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -584,7 +587,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -619,7 +622,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     folder: f58e0946f732c09d
     img: systems/teriock/src/icons/body-parts/hardened-hide.webp
     name: Hardened Hide

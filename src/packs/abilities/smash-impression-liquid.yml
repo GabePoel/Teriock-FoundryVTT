@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/smash-impression-liquid.webp
 name: Smash Impression Liquid
 system:
@@ -28,7 +28,13 @@ system:
       type: region
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '1'
@@ -51,9 +57,9 @@ system:
   overview:
     base: >-
       <p>Smash the source of this ability on the ground to cause an
-      @L[Category:Alchemically powered abilities]{alchemical} effect determined
-      by the @L[Core:Game Master]{GM} based on what's within the
-      @L[Core:Expansions]{expansion} range.</p>
+      @Wiki[Category:Alchemically powered abilities]{alchemical} effect
+      determined by the @Identifier[core:game-master]{GM} based on what's within
+      the @Identifier[core:expansions]{expansion} range.</p>
   piercing:
     raw: 0
   powerSources:
@@ -63,9 +69,9 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - area
 transfer: true

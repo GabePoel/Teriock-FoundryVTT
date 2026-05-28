@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: Oe0lPYQ5dsW78GFf
     _key: '!items.effects!0ca358117eba858e.Oe0lPYQ5dsW78GFf'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     name: Acrobatics
     system:
@@ -37,8 +37,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @L[Ability:Climbing]{Climbing} and
-          @L[Ability:Leaping]{Leaping}.</p>
+          <p>You gain @Identifier[ability:climbing]{Climbing} and
+          @Identifier[ability:leaping]{Leaping}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -61,13 +61,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Cat Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Cat]{cat}.</p>
+      description: <p>You know the way of the @Identifier[creature:cat]{cat}.</p>
       field: survivalist
       identifier: cat-tamer
       tradecraft: tamer
@@ -80,7 +80,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spirit-guide.webp
     name: Spirit Guide
     system:
@@ -118,25 +118,25 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional creature.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, you may target an additional creature.</p>
       identifier: spirit-guide
       interaction: manifest
       maneuver: slow
       overview:
         base: >-
           <p>You can see, hear, and speak to spirits and
-          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+          @Identifier[status:ethereal]{Ethereal} creatures within 120 feet.</p>
         fluent: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Spiritually powered abilities]{spiritual}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+          <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+          with @Wiki[Category:Spiritually powered abilities]{spiritual}
+          @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
         proficient: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
+          <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+          with @Wiki[Category:Necromancy element abilities]{necromancy}
+          @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -145,8 +145,8 @@ effects:
         raw: '5'
         unit: ft
       requirements: >-
-        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
-        yourself.</p>
+        <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may only
+        target yourself.</p>
       ritual: true
       spell: true
       standard: true
@@ -162,7 +162,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -215,8 +215,10 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead climb at @Identifier[core:movement-speed]{normal
+          speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -234,7 +236,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
@@ -299,11 +301,13 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
-          horizontally leap at @L[Core:Movement Speed]{half speed}.</p>
+          <p>You vertically leap at @Identifier[core:movement-speed]{quarter
+          speed} and horizontally leap at @Identifier[core:movement-speed]{half
+          speed}.</p>
         proficient: >-
-          <p>You instead vertically leap at @L[Core:Movement Speed]{half speed}
-          and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
+          <p>You instead vertically leap at
+          @Identifier[core:movement-speed]{half speed} and horizontally leap at
+          @Identifier[core:movement-speed]{full speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -323,10 +327,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.0bec2719aa9daf87
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:cat inline]</p>
   identifier: cat-familiar
   maxAv: 0
   type: familiar

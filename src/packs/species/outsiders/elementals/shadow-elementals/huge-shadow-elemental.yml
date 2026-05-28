@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: rG4hMhb1peZ9RMsv
     _key: '!items.effects!8587730bab2f72c7.rG4hMhb1peZ9RMsv'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -51,7 +51,7 @@ effects:
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is dim
-          light.</p>
+          light.</p><p></p>
       piercing:
         raw: 0
       powerSources:
@@ -69,7 +69,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
@@ -103,8 +103,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
-          @L[Core:Damage]{damage}.</p>
+          <p>You are @Identifier[keyword:immunity]{immune} to
+          @Identifier[damage:mundane]{mundane}
+          @Identifier[core:damage]{damage}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -122,7 +123,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/mana-regenerating.webp
     name: Mana Regenerating
     system:
@@ -165,22 +166,25 @@ effects:
       identifier: mana-regenerating
       interaction: manifest
       limitation: >-
-        <p>Can only @L[Core:Revitalizing]{revitalize} @L[Core:Hit Points and
-        Mana Points]{MP} spent on @L[Category:Necromancy element
-        abilities]{necromancy element abilities}.</p>
+        <p>Can only @Identifier[core:revitalizing]{revitalize}
+        @Identifier[core:hit-points-and-mana-points]{MP} spent on
+        @Wiki[Category:Necromancy element abilities]{necromancy element
+        abilities}.</p>
       maneuver: passive
       mundane: false
       overview:
         base: >-
-          <p>At the start of each of your @L[Core:Turns]{turns}, you 
-          @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
-          Points and Mana Points]{MP}. This does <i>not</i> consume your
-          @L[Core:MP]{mana die}. If you were @L[Condition:Dead]{dead} due to
-          @L[Core:Hit Points and Mana Points]{MP} loss, this brings you
-          @L[Condition:Alive]{back to life}. You only @L[Condition:Dead]{die}
-          due to @L[Core:Hit Points and Mana Points]{MP} loss if you start your
-          @L[Core:Turns]{turn} without successfully regenerating @L[Core:Hit
-          Points and Mana Points]{MP}.</p>
+          <p>At the start of each of your @Identifier[core:turns]{turns}, you 
+          @Identifier[core:revitalizing]{revitalize} and regain that many
+          @Identifier[core:hit-points-and-mana-points]{MP}. This does <i>not</i>
+          consume your @Wiki[Core:MP]{mana die}. If you were
+          @Identifier[status:dead]{dead} due to
+          @Identifier[core:hit-points-and-mana-points]{MP} loss, this brings you
+          @Identifier[status:alive]{back to life}. You only
+          @Identifier[status:dead]{die} due to
+          @Identifier[core:hit-points-and-mana-points]{MP} loss if you start
+          your @Identifier[core:turns]{turn} without successfully regenerating
+          @Identifier[core:hit-points-and-mana-points]{MP}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -198,7 +202,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -219,8 +223,13 @@ effects:
           target: armament
           type: childChange
           value: '1'
+      class: knight
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -240,10 +249,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
-          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
-          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
-          and they are @L[Keyword:AV0]{AV0} for you.</p>
+          <p>You gain @Identifier[ability:supernatural-strength]{Supernatural
+          Strength}. In addition, you deal @Identifier[keyword:boosted]{boosted}
+          with all melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+          abilities]{attacks} and they are @Identifier[keyword:av0]{AV0} for
+          you.</p>
       piercing:
         raw: 0
       powerSources:
@@ -265,7 +275,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/necromancy-magic-hexseal.webp
     name: Necromancy Magic Hexseal
     system:
@@ -302,9 +312,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
-          powered abilities]{magical} @L[Category:Necromancy element
-          abilities]{necromancy abilities}.</p>
+          <p>You are @Identifier[keyword:hexseal]{hexseal} to
+          @Wiki[Category:Magically powered abilities]{magical}
+          @Wiki[Category:Necromancy element abilities]{necromancy
+          abilities}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -322,7 +333,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -366,7 +377,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -410,7 +421,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -454,7 +465,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/take-amorphous-elemental-form.webp
     name: Take Amorphous Elemental Form
     system:
@@ -482,12 +493,13 @@ effects:
       overview:
         base: >-
           <p>You take on an amorphous form of pure elemental magic. While in
-          this state you have all the innate @L[Category:Abilities]{abilities}
-          and @L[Category:Classes]{ranks} of your @L[Category:Elemental
-          creatures]{creature type}. However, you have no @L[Body:Hand]{hands},
-          @L[Body:Foot]{feet}, @L[Body:Mouth]{mouth}, nor any other
-          @L[Category:Body parts]{body parts}. The one exception to this are the
-          @L[Category:Tendrils]{tendrils} of your @L[Category:Elemental
+          this state you have all the innate @Pack[teriock.abilities]{abilities}
+          and @Wiki[Category:Classes]{ranks} of your @Wiki[Category:Elemental
+          creatures]{creature type}. However, you have no
+          @Identifier[body:hand]{hands}, @Identifier[body:foot]{feet},
+          @Identifier[body:mouth]{mouth}, nor any other @Wiki[Category:Body
+          parts]{body parts}. The one exception to this are the
+          @Wiki[Category:Tendrils]{tendrils} of your @Wiki[Category:Elemental
           creatures]{creature type}.</p>
       piercing:
         raw: 0
@@ -496,8 +508,9 @@ effects:
       range:
         unit: self
       requirements: >-
-        <p>You are in a @L[Ability:Take Humanoid Elemental Form]{humanoid
-        elemental form}.</p>
+        <p>You are in a
+        @Identifier[ability:take-humanoid-elemental-form]{humanoid elemental
+        form}.</p>
       targets:
         - self
     transfer: true
@@ -509,7 +522,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/take-humanoid-elemental-form.webp
     name: Take Humanoid Elemental Form
     system:
@@ -536,12 +549,13 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You take on a @L[Category:Humanoid creatures]{humanoid} form. While
-          in this state you have @L[Body:Hand]{hands}, @L[Body:Foot]{feet}, and
-          a @L[Body:Mouth]{mouth}. You keep all the innate
-          @L[Category:Abilities]{abilities} of your @L[Ability:Take Amorphous
-          Elemental Form]{amorphous elemental form}, but lose all innate
-          @L[Category:Classes]{ranks} that you gain from it.</p>
+          <p>You take on a @Wiki[Category:Humanoid creatures]{humanoid} form.
+          While in this state you have @Identifier[body:hand]{hands},
+          @Identifier[body:foot]{feet}, and a @Identifier[body:mouth]{mouth}.
+          You keep all the innate @Pack[teriock.abilities]{abilities} of your
+          @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental
+          form}, but lose all innate @Wiki[Category:Classes]{ranks} that you
+          gain from it.</p>
       piercing:
         raw: 0
       powerSources:
@@ -549,8 +563,9 @@ effects:
       range:
         unit: self
       requirements: >-
-        <p>You are in an @L[Ability:Take Amorphous Elemental Form]{amorphous
-        elemental form}.</p>
+        <p>You are in an
+        @Identifier[ability:take-amorphous-elemental-form]{amorphous elemental
+        form}.</p>
       targets:
         - self
     transfer: true
@@ -562,7 +577,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
     name: Unconsciousness Immunity
     system:
@@ -596,8 +611,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to falling
-          @L[Condition:Unconscious]{unconscious}.</p>
+          <p>You are @Identifier[keyword:immunity]{immune} to falling
+          @Identifier[status:unconscious]{unconscious}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -615,13 +630,18 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/supernatural-strength.webp
     name: Supernatural Strength
     system:
       _sup: dyxT3vT1WjFkGCsO
+      class: knight
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -641,11 +661,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
-          @L[Category:Attack abilities]{attack} to make it
-          @L[Keyword:AV0]{AV0}.</p>
+          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
+          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition,
+          you may @Identifier[keyword:deboosted]{deboost} any melee
+          @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+          abilities]{attack} to make it @Identifier[keyword:av0]{AV0}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -667,7 +687,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -694,10 +714,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
+          <p>You gain @Identifier[ability:improved-strength]{Improved Strength}
+          and @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In
+          addition, you are no longer suffer the consequences of
+          @Identifier[property:cumbersome]{cumbersome} items.</p>
       piercing:
         raw: 0
       powerSources:
@@ -721,7 +741,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -748,8 +768,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength}
+          and @Identifier[ability:improved-armor-piercing]{Improved Armor
+          Piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -773,7 +794,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -800,10 +821,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><div class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</div>
       piercing:
         raw: 0
       powerSources:
@@ -827,7 +849,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -854,8 +876,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
+          <p>Melee weapons you use are
+          @Identifier[property:armor-piercing]{armor piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -875,7 +897,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -904,12 +926,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+          <p>You may spend an unused @Identifier[core:active-maneuvers]{action}
+          to @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
+          <p>You may spend an additional unused
+          @Identifier[core:active-maneuvers]{action} to
+          @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage} again.</p>
       piercing:
         raw: 0
       powerSources:
@@ -921,9 +945,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
+        <p>You have hit a creature with a @Wiki[Category:Damaging
+        effects]{damaging} melee @Wiki[Category:Weapon delivery
+        abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
     transfer: true
     type: ability
   - _id: GmSAYEI0PYeoC6CK
@@ -933,7 +957,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/shattering-grip.webp
     name: Shattering Grip
     system:
@@ -972,7 +996,7 @@ effects:
       maneuver: active
       mundane: false
       overview:
-        base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+        base: <p>Target is @Identifier[property:shattered]{shattered}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -998,8 +1022,8 @@ system:
   hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
   identifier: huge-shadow-elemental
   innateRanks: >-
-    <p>Innately @L[Category:Classes]{rank} 5
-    @L[Class:Necromancer]{Necromancer}.</p>
+    <p>Innately @Wiki[Category:Classes]{rank} 5
+    @Identifier[class:necromancer]{Necromancer}.</p>
   size:
     enabled: true
     max: 10

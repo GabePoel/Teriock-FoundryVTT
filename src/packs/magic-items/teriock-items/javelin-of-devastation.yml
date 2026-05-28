@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/amplify-storm-spells.webp
     name: Amplify Storm Spells
     system:
@@ -39,15 +39,16 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>When you @L[Core:Attack Interaction]{attack} with
-          @L[Ability:Lightning Ray]{Lightning Ray} or @L[Ability:Ice Ball]{Ice
-          Ball}, you may target an additional creature or the same creature
-          twice. Any costs you pay must be paid twice and be the same for both
-          @L[Core:Attack Interaction]{attacks}. These incur @L[Core:Attack
-          Interaction]{attack penalties} as though they were two separate
-          @L[Category:Attack abilities]{attacks}.</p>
+          <p>When you @Identifier[core:attack-interaction]{attack} with
+          @Identifier[ability:lightning-ray]{Lightning Ray} or
+          @Identifier[ability:ice-ball]{Ice Ball}, you may target an additional
+          creature or the same creature twice. Any costs you pay must be paid
+          twice and be the same for both
+          @Identifier[core:attack-interaction]{attacks}. These incur
+          @Identifier[core:attack-interaction]{attack penalties} as though they
+          were two separate @Wiki[Category:Attack abilities]{attacks}.</p>
         fluent: >-
-          <p>You may instead choose up to 1 + @L[Core:Fluency Bonus]{F}
+          <p>You may instead choose up to 1 + @Identifier[core:fluency-bonus]{F}
           additional or repeated targets.</p>
       piercing:
         raw: 0
@@ -112,7 +113,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/lightning-ray.webp
     name: Lightning Ray
     system:
@@ -141,8 +142,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d6[magic]]]
+        @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
       interaction: attack
       maneuver: active
@@ -155,9 +157,11 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
+          target.</p>
       spell: true
       standard: true
       targets:
@@ -171,7 +175,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
@@ -201,10 +205,11 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
+          <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
+          delivery spells]{missile spell} that you are
+          @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
+          hit was a critical hit, then the target takes the "on critical hit"
+          effect instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -216,10 +221,10 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
+        abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
+        @Wiki[Category:Attack abilities]{attack} on another creature and the
+        effect has successfully applied.</p>
     transfer: true
     type: ability
   - _id: 2dXH2jxURSr7hRYp
@@ -229,17 +234,27 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/thrown.webp
     name: Thrown
     system:
       applyIfDampened: true
       applyIfDeattuned: true
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.range.ranged
+              priority: 10
+              target: Item
+              type: override
+              value: 'true'
+          type: changes
       competence:
         raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack.</p>
+        @Identifier[property:ranged]{ranged} attack.</p>
       form: intrinsic
       identifier: thrown
       mundane: true
@@ -252,7 +267,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/thunderbolt.webp
     name: Thunderbolt
     system:
@@ -282,8 +297,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d10[magic]]] @L[Core:Damage]{damage}.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d10[magic]]]
+        @Identifier[core:damage]{damage}.</p>
       identifier: thunderbolt
       interaction: attack
       maneuver: active
@@ -296,9 +312,9 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: <p>Deal [[/damage 1d10[magic]]] @L[Core:Damage]{damage}.</p>
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}.</p>
+        hit: <p>Deal [[/damage 1d10[magic]]] @Identifier[core:damage]{damage}.</p>
       spell: true
       standard: true
       targets:
@@ -312,7 +328,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -322,7 +338,7 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
+        @Wiki[Category:Attack abilities]{attack}.</p>
       form: intrinsic
       identifier: weapon
       mundane: true
@@ -335,7 +351,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -358,13 +374,13 @@ effects:
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
         in parentheses after specifying if it requires
-        @L[Property:Ammunition]{ammunition} or if is
-        @L[Property:Thrown]{thrown}. The range lists two numbers. The first is
-        the weapon's normal range in feet, and the second indicates the weapon's
-        long range. When attacking a target beyond normal range, you have
-        @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
-        Interaction]{attack roll}. You can't attack a target beyond the weapon's
-        long range.</p>
+        @Identifier[property:ammunition]{ammunition} or if is
+        @Identifier[property:thrown]{thrown}. The range lists two numbers. The
+        first is the weapon's normal range in feet, and the second indicates the
+        weapon's long range. When attacking a target beyond normal range, you
+        have @Identifier[core:disadvantage]{disadvantage} on the
+        @Identifier[core:attack-interaction]{attack roll}. You can't attack a
+        target beyond the weapon's long range.</p>
       form: intrinsic
       identifier: ranged
       mundane: true

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: TFSEibrhiVlK7V19
     _key: '!items.effects!743c1d15aaf27e5d.TFSEibrhiVlK7V19'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -57,7 +57,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/devour.webp
     name: Devour
     system:
@@ -86,12 +86,14 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      requirements: <p>Target is @Identifier[status:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
-          and their @L[Core:Size]{SIZE} is reduced by 1. If their
-          @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
+          <p>Target is @Identifier[status:dead]{dead},
+          @Identifier[status:ruined]{ruined}, and their
+          @Identifier[core:size]{SIZE} is reduced by 1. If their
+          @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
+          0.</p>
       targets:
         - creature
     transfer: true
@@ -103,7 +105,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -129,10 +131,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
+          <p>You gain @Identifier[ability:improved-strength]{Improved Strength}
+          and @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In
+          addition, you are no longer suffer the consequences of
+          @Identifier[property:cumbersome]{cumbersome} items.</p>
       piercing:
         raw: 0
       powerSources:
@@ -156,7 +158,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/lumbering.webp
     name: Lumbering
     system:
@@ -200,7 +202,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -244,7 +246,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/poor-perception.webp
     name: Poor Perception
     system:
@@ -288,7 +290,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/trample.webp
     name: Trample
     system:
@@ -325,10 +327,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>If you use [[lookup name]] on a @L[Category:Creatures]{creature} at
-          least one @L[Core:Size]{size category} smaller than you, add [[/damage
-          1d6]] @L[Core:Damage]{damage} to its @L[Core:Standard and Critical
-          Damage]{standard damage}.</p>
+          <p>If you use [[lookup name]] on a @Pack[teriock.creatures]{creature}
+          at least one @Identifier[core:size]{size category} smaller than you,
+          add [[/damage 1d6]] @Identifier[core:damage]{damage} to its
+          @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
       piercing:
         raw: 2
       powerSources:
@@ -336,8 +338,12 @@ effects:
       range:
         unit: contact
       results:
-        critHit: <p>Deal @L[Core:Standard and Critical Damage]{critical damage}.</p>
-        hit: <p>Deal @L[Core:Standard and Critical Damage]{standard damage}.</p>
+        critHit: >-
+          <p>Deal @Identifier[core:standard-and-critical-damage]{critical
+          damage}.</p>
+        hit: >-
+          <p>Deal @Identifier[core:standard-and-critical-damage]{standard
+          damage}.</p>
       targets:
         - creature
       trigger: >-
@@ -352,7 +358,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -381,12 +387,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+          <p>You may spend an unused @Identifier[core:active-maneuvers]{action}
+          to @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
+          <p>You may spend an additional unused
+          @Identifier[core:active-maneuvers]{action} to
+          @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage} again.</p>
       piercing:
         raw: 0
       powerSources:
@@ -398,9 +406,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
+        <p>You have hit a creature with a @Wiki[Category:Damaging
+        effects]{damaging} melee @Wiki[Category:Weapon delivery
+        abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
     transfer: true
     type: ability
   - _id: V9lWp5iEZaPtXoF9
@@ -410,7 +418,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -437,8 +445,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength}
+          and @Identifier[ability:improved-armor-piercing]{Improved Armor
+          Piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -462,7 +471,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -489,10 +498,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><div class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</div>
       piercing:
         raw: 0
       powerSources:
@@ -516,7 +526,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -543,8 +553,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
+          <p>Melee weapons you use are
+          @Identifier[property:armor-piercing]{armor piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -565,7 +575,7 @@ system:
   br: 18
   competence:
     raw: 1
-  description: <p>[[lookup name]]s are found lumbering deep in the Teriock deserts.</p>
+  description: <p>Centibeasts are found lumbering deep in the Teriock deserts.</p>
   hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
   identifier: centibeast
   size:

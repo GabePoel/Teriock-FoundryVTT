@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/smash-reflector-salve.webp
 name: Smash Reflector Salve
 system:
@@ -28,7 +28,13 @@ system:
       type: region
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '0'
@@ -51,9 +57,11 @@ system:
   overview:
     base: >-
       <p>Smash the source of this ability on the ground to make target
-      @L[Category:Spells]{spell} within @L[Core:Expansions]{expansion} range
-      @L[Core:Fizzles]{fizzle} as well as any others cast simultaneously within
-      range. Their casters take the spells' effects instead.</p>
+      @Wiki[Category:Spells]{spell} within
+      @Identifier[core:expansions]{expansion} range
+      @Identifier[core:fizzles]{fizzle} as well as any others cast
+      simultaneously within range. Their casters take the spells' effects
+      instead.</p>
   piercing:
     raw: 0
   powerSources:
@@ -62,9 +70,10 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability. Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability. Target is a
+    @Wiki[Category:Conjured spells]{conjured spell}.</p>
   targets:
     - area
     - spell

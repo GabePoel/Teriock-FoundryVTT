@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/improved-devour.webp
 name: Improved Devour
 system:
@@ -33,12 +33,13 @@ system:
     - martial
   range:
     unit: contact
-  requirements: <p>Target is @L[Condition:Down]{down}.</p>
+  requirements: <p>Target is @Identifier[status:down]{down}.</p>
   results:
     hit: >-
-      <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined}, and
-      their @L[Core:Size]{SIZE} is reduced by 2. If their @L[Core:Size]{SIZE}
-      was already 2 or less, their body is completely consumed.</p>
+      <p>Target is @Identifier[status:dead]{dead},
+      @Identifier[status:ruined]{ruined}, and their @Identifier[core:size]{SIZE}
+      is reduced by 2. If their @Identifier[core:size]{SIZE} was already 2 or
+      less, their body is completely consumed.</p>
   targets:
     - creature
 transfer: true

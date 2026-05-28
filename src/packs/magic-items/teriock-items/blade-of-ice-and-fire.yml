@@ -13,19 +13,16 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/burning.webp
     name: Burning
     system:
       competence:
         raw: 0
-      damageType: Fire
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b>, deals
-        @L[Damage:Fire]{fire damage} and can be used to deliver
-        @L[Ability:Burn]{Burn}. </p>
-      elements:
-        - flame
+        @Identifier[damage:fire]{fire damage} and can be used to deliver
+        @Identifier[ability:burn]{Burn}.</p>
       form: intrinsic
       identifier: burning
     transfer: true
@@ -79,7 +76,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
@@ -110,8 +107,9 @@ effects:
         amount: 1
         enabled: true
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage}.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic fire]]]
+        @Identifier[core:damage]{damage}.</p>
       identifier: fire-ball
       interaction: attack
       maneuver: active
@@ -124,11 +122,11 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}.</p>
         hit: >-
-          <p>Deal [[/damage 1d4[magic fire]]] @L[Core:Damage]{damage} to
-          target.</p>
+          <p>Deal [[/damage 1d4[magic fire]]] @Identifier[core:damage]{damage}
+          to target.</p>
       spell: true
       standard: true
       targets:
@@ -142,7 +140,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/ice-ball.webp
     name: Ice Ball
     system:
@@ -222,8 +220,9 @@ effects:
         amount: 1
         enabled: true
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic ice]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: ice-ball
       interaction: attack
       maneuver: active
@@ -236,7 +235,7 @@ effects:
         unit: ft
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+        hit: <p>Target is @Identifier[status:frozen]{frozen}.</p>
       spell: true
       standard: true
       targets:
@@ -250,7 +249,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
     name: Spell Turning Weapons
     system:
@@ -292,8 +291,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>@L[Category:Weapons]{Weapons} you use are @L[Property:Spell
-          Turning]{spell turning}.</p>
+          <p>@Wiki[Category:Weapons]{Weapons} you use are
+          @Identifier[property:spell-turning]{spell turning}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -313,7 +312,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -323,7 +322,7 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
+        @Wiki[Category:Attack abilities]{attack}.</p>
       form: intrinsic
       identifier: weapon
       mundane: true

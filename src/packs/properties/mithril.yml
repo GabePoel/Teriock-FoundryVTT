@@ -4,32 +4,29 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.59
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/properties/mithril.webp
 name: Mithril
 system:
+  applyIfDampened: true
+  applyIfDeattuned: true
   automations:
     parameterChanges:
       _id: parameterChanges
       changes:
-        - key: system.weight
+        - key: system.av.bonus
           priority: 10
-          target: parent
-          type: multiply
-          value: '0.5'
-        - key: system.minStr
-          priority: 10
-          target: parent
-          type: subtract
-          value: '-1'
+          target: Item
+          type: upgrade
+          value: '1'
       type: changes
   competence:
     raw: 0
   description: >-
-    <p><b>[[lookup name]]</b> items are @L[Property:Durable]{durable}, weigh
-    half as much, have their minimum @L[Core:Strength]{STR} decreased by 1, and
-    are @L[Property:Unbreachable]{unbreachable} if they are
-    @L[Category:Armor]{armor}.</p>
+    <p><b>[[lookup name]]</b> items are @Identifier[property:durable]{durable},
+    weigh half as much, have their minimum @Identifier[core:strength]{STR}
+    decreased by 1, and are @Identifier[property:unbreachable]{unbreachable} if
+    they are @Wiki[Category:Armor]{armor}.</p>
   form: intrinsic
   identifier: mithril
   mundane: false

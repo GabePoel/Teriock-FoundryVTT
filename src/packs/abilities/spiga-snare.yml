@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: icons/creatures/webs/webthin-blue.webp
 name: Spiga Snare
 system:
@@ -23,12 +23,13 @@ system:
     raw: '0'
     unit: unlimited
   endCondition: >-
-    <p>The @L[Condition:Snared]{snare} caused by this ability does not end on
-    its own. It can be escaped by @L[Ability:Interact]{interacting} with the web
-    making a DC 25 @L[Core:Strength]{STR} @L[Core:Feat Interaction]{feat save}.
-    This can be done either by the creature that is @L[Condition:Snared]{snared}
-    or by another that attempts to free them. The DC is reduced by 1 for every
-    additional creature of @L[Core:Size]{SIZE} 1 or larger that is assisting the
+    <p>The @Identifier[status:snared]{snare} caused by this ability does not end
+    on its own. It can be escaped by @Identifier[ability:interact]{interacting}
+    with the web making a DC 25 @Identifier[core:strength]{STR}
+    @Identifier[core:feat-interaction]{feat save}. This can be done either by
+    the creature that is @Identifier[status:snared]{snared} or by another that
+    attempts to free them. The DC is reduced by 1 for every additional creature
+    of @Identifier[core:size]{SIZE} 1 or larger that is assisting the
     target.</p>
   executionTime:
     base: a1
@@ -50,7 +51,7 @@ system:
   range:
     unit: contact
   results:
-    hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+    hit: <p>Target is @Identifier[status:snared]{snared}.</p>
   targets:
     - creature
 transfer: true

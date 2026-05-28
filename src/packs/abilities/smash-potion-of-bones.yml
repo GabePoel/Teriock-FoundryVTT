@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/smash-potion-of-bones.webp
 name: Smash Potion of Bones
 system:
@@ -54,7 +54,13 @@ system:
       type: transformation
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '1'
@@ -63,9 +69,9 @@ system:
     - illusion
     - mental
   endCondition: >-
-    <p>The @L[Keyword:Illusionary]{illusion} is successfully
-    @L[Ability:Disbelieve]{disbelieved}. The target only needs to succeed once,
-    not once for each other target.</p>
+    <p>The @Identifier[keyword:illusionary]{illusion} is successfully
+    @Identifier[ability:disbelieve]{disbelieved}. The target only needs to
+    succeed once, not once for each other target.</p>
   executionTime:
     base: a1
     slow:
@@ -91,14 +97,15 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability.</p>
   results:
     fail: >-
-      <p>Target becomes @L[Condition:Frightened]{frightened} of you and every
-      other target. You all appear as @L[Creature:Skeleton]{skeletons} to each
-      other instead of your true forms. This is a @L[Keyword:Illusionary]{minor
+      <p>Target becomes @Identifier[status:frightened]{frightened} of you and
+      every other target. You all appear as
+      @Identifier[creature:skeleton]{skeletons} to each other instead of your
+      true forms. This is a @Identifier[keyword:illusionary]{minor
       illusion}.</p>
   targets:
     - area

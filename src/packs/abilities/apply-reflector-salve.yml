@@ -4,13 +4,19 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/apply-reflector-salve.webp
 name: Apply Reflector Salve
 system:
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '1'
@@ -32,7 +38,7 @@ system:
   overview:
     base: >-
       <p>Cover a surface no greater than 25 square feet with the source of this
-      ability to make it @L[Property:Spell Turning]{spell turning}.</p>
+      ability to make it @Identifier[property:spell-turning]{spell turning}.</p>
   piercing:
     raw: 0
   powerSources:
@@ -41,7 +47,7 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it.</p>
+    @Pack[teriock.equipment]{equipment} that provides it.</p>
   targets:
     - area
     - item

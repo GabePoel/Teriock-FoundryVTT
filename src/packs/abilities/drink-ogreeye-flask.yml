@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/drink-ogreeye-flask.webp
 name: Drink Ogreeye Flask
 system:
@@ -23,9 +23,16 @@ system:
           type: add
           value: '-1'
       type: changes
+  class: knight
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '1'
@@ -45,9 +52,9 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>You gain @L[Ability:Improved Strength]{Improved Strength}, have your
-      @L[Core:Strength]{STR} set to 2, and have your @L[Core:Intelligence]{INT}
-      decreased by 1.</p>
+      <p>You gain @Identifier[ability:improved-strength]{Improved Strength},
+      have your @Identifier[core:strength]{STR} set to 2, and have your
+      @Identifier[core:intelligence]{INT} decreased by 1.</p>
   piercing:
     raw: 0
   powerSources:
@@ -56,9 +63,9 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - self
 transfer: true

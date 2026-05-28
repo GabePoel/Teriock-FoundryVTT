@@ -13,13 +13,19 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/apply-reflector-salve.webp
     name: Apply Reflector Salve
     system:
       competence:
         raw: 0
-      consumeSource: true
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Using this ability consumes the
+              @Pack[teriock.equipment]{equipment} that provides it.</p>
+            type: description
       delivery: item
       duration:
         raw: '1'
@@ -37,7 +43,8 @@ effects:
       overview:
         base: >-
           <p>Cover a surface no greater than 25 square feet with the source of
-          this ability to make it @L[Property:Spell Turning]{spell turning}.</p>
+          this ability to make it @Identifier[property:spell-turning]{spell
+          turning}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -46,7 +53,7 @@ effects:
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it.</p>
+        @Pack[teriock.equipment]{equipment} that provides it.</p>
       targets:
         - area
         - item
@@ -59,7 +66,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -69,13 +76,13 @@ effects:
         raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
+        becomes @Identifier[property:shattered]{shattered} if it is used to
+        @Identifier[core:block-interaction]{block} or if it is the
+        @Wiki[Category:Item target abilities]{target of an ability} that deals
+        it @Wiki[Category:Damaging effects]{damage}. If it would become
+        @Identifier[property:shattered]{shattered} through some other means, it
+        is instead @Identifier[property:destroyed]{destroyed}.</p>
+      form: intrinsic
       identifier: fragile
       mundane: true
     transfer: true
@@ -87,7 +94,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -97,9 +104,9 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
+        steal through @Pack[teriock.abilities]{abilities} like
+        @Identifier[ability:search]{Search}.</p>
+      form: intrinsic
       identifier: searchable
     transfer: true
     type: property
@@ -110,7 +117,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -120,7 +127,7 @@ effects:
         raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
+        in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
       mundane: true
@@ -133,7 +140,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/smash-reflector-salve.webp
     name: Smash Reflector Salve
     system:
@@ -162,7 +169,13 @@ effects:
           visibility: 2
       competence:
         raw: 0
-      consumeSource: true
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Using this ability consumes the
+              @Pack[teriock.equipment]{equipment} that provides it.</p>
+            type: description
       delivery: item
       duration:
         raw: '0'
@@ -182,9 +195,11 @@ effects:
       overview:
         base: >-
           <p>Smash the source of this ability on the ground to make target
-          @L[Category:Spells]{spell} within @L[Core:Expansions]{expansion} range
-          @L[Core:Fizzles]{fizzle} as well as any others cast simultaneously
-          within range. Their casters take the spells' effects instead.</p>
+          @Wiki[Category:Spells]{spell} within
+          @Identifier[core:expansions]{expansion} range
+          @Identifier[core:fizzles]{fizzle} as well as any others cast
+          simultaneously within range. Their casters take the spells' effects
+          instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -193,10 +208,10 @@ effects:
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability. Target is a @L[Category:Conjured spells]{conjured
-        spell}.</p>
+        @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+        @Identifier[core:maneuvers]{maneuver} and
+        @Identifier[core:abilities]{execution time} for the ability. Target is a
+        @Wiki[Category:Conjured spells]{conjured spell}.</p>
       targets:
         - area
         - spell

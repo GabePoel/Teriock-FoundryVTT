@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: combat
@@ -25,6 +25,10 @@ effects:
       class: stormMage
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -44,9 +48,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Add @L[Ability:Reflect Magic]{Reflect Magic} and
-          @L[Ability:Teleport]{Teleport} to your list of possible
-          @L[Category:Rotator spells]{rotator spells}.</p>
+          <p>Add @Identifier[ability:reflect-magic]{Reflect Magic} and
+          @Identifier[ability:teleport]{Teleport} to your list of possible
+          @Wiki[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -65,7 +69,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: support
@@ -127,27 +131,31 @@ effects:
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
-          @L[Category:Rotator spells]{spells} created by others. When you come
-          across a fully created spell using only words you are @L[Core:Fluency
-          Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
-          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
-          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
-          it to your rotator spell list. If you fail, you are
-          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
-          again. The @L[Core:Game Master]{GM} may modify the DC based on the
-          spell's complexity, your knowledge of the spell, any special training
-          you receive, if the spell's creator is there to assist you, or for any
-          other factors they see fit. You may also attempt to learn words that
-          you come across as long as they are of elements you are
-          @L[Core:Fluency Bonus]{fluent} in. The @L[Core:Game Master]{GM} may
-          adjust the DC for these as they see fit as well, but the default is DC
-          15 + OP @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
-          save}.</p>
+          @Wiki[Category:Rotator spells]{spells} created by others. When you
+          come across a fully created spell using only words you are
+          @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + OP
+          @Wiki[Core:INT]{INT} @Identifier[core:feat-interaction]{feat save} to
+          attempt to learn it over the course of a
+          @Identifier[core:long-rest]{long rest}. If you succeed, you can add it
+          to your rotator spell list. If you fail, you are
+          @Identifier[keyword:incapable]{incapable} of attempting to learn that
+          spell again. The @Identifier[core:game-master]{GM} may modify the DC
+          based on the spell's complexity, your knowledge of the spell, any
+          special training you receive, if the spell's creator is there to
+          assist you, or for any other factors they see fit. You may also
+          attempt to learn words that you come across as long as they are of
+          elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+          @Identifier[core:game-master]{GM} may adjust the DC for these as they
+          see fit as well, but the default is DC 15 + OP
+          @Identifier[core:intelligence]{INT}
+          @Identifier[core:feat-interaction]{feat save}.</p>
         proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder Sorcery
-          Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
-          Words]{Celestial Elder Sorcery Words}, and @L[Ability:Storm Elder
-          Sorcery Words]{Storm Elder Sorcery Words}.</p>
+          <p>You are @Identifier[core:fluency-bonus]{fluent} in
+          @Identifier[ability:elder-sorcery-creation]{Elder Sorcery Creation},
+          @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+          Sorcery Words}, and
+          @Identifier[ability:storm-elder-sorcery-words]{Storm Elder Sorcery
+          Words}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -156,8 +164,8 @@ effects:
         unit: self
       results:
         fail: >-
-          <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
-          that spell or word again.</p>
+          <p>You are @Identifier[keyword:incapable]{incapable} of attempting to
+          learn that spell or word again.</p>
         save: <p>You learn the spell or word.</p>
       skill: true
       standard: true
@@ -172,7 +180,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/reflect-magic.webp
     name: Reflect Magic
     system:
@@ -229,8 +237,8 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 15 feet.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the range of [[lookup name]] increases by 15 feet.</p>
       identifier: reflect-magic
       interaction: manifest
       invoked: true
@@ -238,9 +246,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}, as do any others cast simultaneously within
-          range. Their casters take the spells' effects instead.</p>
+          <p>Target @Wiki[Category:Conjured spells]{spell}
+          @Identifier[core:fizzles]{fizzles}, as do any others cast
+          simultaneously within range. Their casters take the spells' effects
+          instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -248,14 +257,14 @@ effects:
       range:
         raw: '10'
         unit: ft
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      requirements: <p>Target is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
       rotator: true
       spell: true
       standard: true
       targets:
         - spell
       trigger: >-
-        <p>A @L[Category:Conjured spells]{conjured spell} is used within
+        <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within
         range.</p>
     transfer: true
     type: ability
@@ -266,7 +275,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/teleport.webp
     name: Teleport
     system:
@@ -304,8 +313,9 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, your maximum [[lookup name
-        style=lc]] distance increases by your level in miles.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, your maximum [[lookup name style=lc]] distance increases by your
+        level in miles.</p>
       identifier: teleport
       interaction: manifest
       invoked: true
@@ -315,19 +325,20 @@ effects:
         base: >-
           <p>Target creature is moved to a location you have studied within your
           level in miles. You can study locations by performing this ritual on
-          an area you are in over the course of a @L[Core:Long Rest]{long rest}.
-          This location must be a static part of the environment, not a moving
-          location like a wagon or ship. If the location substantially changes
-          beyond recognition, your ritual will fail to transport creatures
-          there. You can only have 2 location studied at a time.</p>
+          an area you are in over the course of a
+          @Identifier[core:long-rest]{long rest}. This location must be a static
+          part of the environment, not a moving location like a wagon or ship.
+          If the location substantially changes beyond recognition, your ritual
+          will fail to transport creatures there. You can only have 2 location
+          studied at a time.</p>
         fluent: >-
-          <p>You may now have 2 × @L[Core:Fluency Bonus]{F} locations studied
-          and can [[lookup name style=lc]] a distance of up to @L[Core:Fluency
-          Bonus]{F} × your level in miles.</p>
-        proficient: >-
-          <p>You may now have 2 × @L[Core:Proficiency Bonus]{P} locations
+          <p>You may now have 2 × @Identifier[core:fluency-bonus]{F} locations
           studied and can [[lookup name style=lc]] a distance of up to
-          @L[Core:Proficiency Bonus]{P} × your level in miles.</p>
+          @Identifier[core:fluency-bonus]{F} × your level in miles.</p>
+        proficient: >-
+          <p>You may now have 2 × @Identifier[core:proficiency-bonus]{P}
+          locations studied and can [[lookup name style=lc]] a distance of up to
+          @Identifier[core:proficiency-bonus]{P} × your level in miles.</p>
       piercing:
         raw: 0
       powerSources:

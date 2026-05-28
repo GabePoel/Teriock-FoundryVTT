@@ -4,19 +4,30 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.59
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/properties/silveel.webp
 name: Silveel
 system:
+  applyIfDampened: true
+  applyIfDeattuned: true
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.av.bonus
+          priority: 10
+          target: Item
+          type: upgrade
+          value: '1'
+      type: changes
   competence:
     raw: 0
-  damageType: silveel
   description: >-
     <p>An item that is <b>[[lookup name style=lc]]</b> has all the same traits
-    as one that is @L[Property:Silver]{silver} and
-    @L[Property:Mithril]{mithril}, except that it deals
-    @L[Damage:Silveel]{silveel damage} instead of @L[Damage:Silver]{silver
-    damage}.</p>
+    as one that is @Identifier[property:silver]{silver} and
+    @Identifier[property:mithril]{mithril}, except that it deals
+    @Identifier[damage:silveel]{silveel damage} instead of
+    @Identifier[damage:silver]{silver damage}.</p>
   form: intrinsic
   identifier: silveel
   mundane: false

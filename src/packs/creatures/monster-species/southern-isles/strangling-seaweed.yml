@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: IuPZFYF10PsmALGp
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/constrict.webp
         name: Constrict
         system:
@@ -54,7 +54,7 @@ items:
             triggers:
               - movement
             unit: unlimited
-          endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
+          endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
           executionTime:
             base: a1
             slow:
@@ -73,11 +73,11 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is your @L[Core:Size]{SIZE} or smaller.</p>
+          requirements: <p>Target is your @Identifier[core:size]{SIZE} or smaller.</p>
           results:
             fail: >-
-              <p>Target is @L[Condition:Suffocating]{suffocating} and
-              @L[Condition:Snared]{snared}.</p>
+              <p>Target is @Identifier[status:suffocating]{suffocating} and
+              @Identifier[status:snared]{snared}.</p>
           sustained: true
           targets:
             - creature
@@ -91,7 +91,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -116,10 +116,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
+              <p>You gain @Identifier[ability:improved-strength]{Improved
+              Strength} and @Identifier[ability:melee-damage-boost]{Melee Damage
+              Boost}. In addition, you are no longer suffer the consequences of
+              @Identifier[property:cumbersome]{cumbersome} items.</p>
           piercing:
             raw: 0
           powerSources:
@@ -144,7 +144,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -188,7 +188,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/regenerating.webp
         name: Regenerating
         system:
@@ -236,17 +236,20 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>At the start of each of your @L[Core:Turns]{turns}, you 
-              @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
-              Mana Points]{HP}. This does <i>not</i> consume your
-              @L[Core:HP]{hit die}. If you were @L[Condition:Dead]{dead} due to
-              @L[Core:Hit Points and Mana Points]{HP} loss, this brings you
-              @L[Condition:Alive]{back to life}. If you take
-              @L[Damage:Fire]{fire damage}, this effect doesn't apply on your
-              next @L[Core:Turns]{turn}. You only @L[Condition:Dead]{die} due to
-              @L[Core:Hit Points and Mana Points]{HP} loss if you start your
-              @L[Core:Turns]{turn} without successfully [[lookup name style=lc]]
-              @L[Core:Hit Points and Mana Points]{HP}.</p>
+              <p>At the start of each of your @Identifier[core:turns]{turns},
+              you  @Identifier[core:healing]{heal} and regain that many
+              @Identifier[core:hit-points-and-mana-points]{HP}. This does
+              <i>not</i> consume your @Wiki[Core:HP]{hit die}. If you were
+              @Identifier[status:dead]{dead} due to
+              @Identifier[core:hit-points-and-mana-points]{HP} loss, this brings
+              you @Identifier[status:alive]{back to life}. If you take
+              @Identifier[damage:fire]{fire damage}, this effect doesn't apply
+              on your next @Identifier[core:turns]{turn}. You only
+              @Identifier[status:dead]{die} due to
+              @Identifier[core:hit-points-and-mana-points]{HP} loss if you start
+              your @Identifier[core:turns]{turn} without successfully [[lookup
+              name style=lc]]
+              @Identifier[core:hit-points-and-mana-points]{HP}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -265,7 +268,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
@@ -322,9 +325,9 @@ items:
             raw: '0'
             unit: unlimited
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turns]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -347,7 +350,7 @@ items:
             critHit: >-
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
-            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+            hit: <p>Target is @Identifier[status:snared]{snared}.</p>
           skill: true
           standard: true
           targets:
@@ -362,7 +365,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/sneaky.webp
         name: Sneaky
         system:
@@ -406,7 +409,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
         name: Stupid Intelligence
         system:
@@ -450,7 +453,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/swimming.webp
         name: Swimming
         system:
@@ -488,7 +491,7 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+            base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -509,7 +512,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
@@ -542,8 +545,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to falling
-              @L[Condition:Unconscious]{unconscious}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to falling
+              @Identifier[status:unconscious]{unconscious}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -562,7 +565,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/unobservant.webp
         name: Unobservant
         system:
@@ -606,10 +609,11 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/water-native.webp
         name: Water Native
         system:
+          class: corsair
           competence:
             raw: 0
           delivery: self
@@ -630,9 +634,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You have @L[Ability:Swimming]{Swimming} and
-              @L[Ability:Diving]{Diving} but are @L[Condition:Slow]{slow} on
-              land.</p>
+              <p>You have @Identifier[ability:swimming]{Swimming} and
+              @Identifier[ability:diving]{Diving} but are
+              @Identifier[status:slow]{slow} on land.</p>
           piercing:
             raw: 0
           powerSources:
@@ -651,7 +655,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -679,13 +683,15 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
+              <p>You may spend an unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
+              <p>You may spend an additional unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage} again.</p>
           piercing:
             raw: 0
           powerSources:
@@ -697,9 +703,9 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
+            <p>You have hit a creature with a @Wiki[Category:Damaging
+            effects]{damaging} melee @Wiki[Category:Weapon delivery
+            abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
         transfer: true
         type: ability
       - _id: 8Fkftx4UNzi0UVXb
@@ -710,7 +716,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -736,8 +742,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+              <p>You gain @Identifier[ability:beastly-strength]{Beastly
+              Strength} and
+              @Identifier[ability:improved-armor-piercing]{Improved Armor
+              Piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -762,7 +770,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -788,10 +796,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons
+              in one hand.</p><div class="note"><b>Note:</b>
+              @Identifier[property:armor-piercing]{Armor piercing} weapons must
+              still be wielded in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</div>
           piercing:
             raw: 0
           powerSources:
@@ -816,7 +825,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -842,8 +851,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
+              <p>Melee weapons you use are
+              @Identifier[property:armor-piercing]{armor piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -864,7 +873,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/swimming.webp
         name: Swimming
         system:
@@ -903,7 +912,7 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+            base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -924,7 +933,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/diving.webp
         name: Diving
         system:
@@ -951,7 +960,7 @@ items:
           overview:
             base: >-
               <p>You no longer have to stay on the surface of water while
-              @L[Ability:Swimming]{Swimming}.</p>
+              @Identifier[ability:swimming]{Swimming}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -968,13 +977,11 @@ items:
     img: systems/teriock/src/icons/creatures/strangling-seaweed.webp
     name: Strangling Seaweed
     system:
-      adult: 0
       appearance: <p>Large clumps of animated seaweed.</p>
       br: 7
       competence:
         raw: 1
       identifier: strangling-seaweed
-      lifespan: 0
       size:
         enabled: true
         value: 6
@@ -998,7 +1005,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/hardened-bark.webp
     name: Hardened Bark
@@ -1028,7 +1035,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: P2NBun61bqKdYpZP
         _key: >-
@@ -1038,18 +1045,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/entangling.webp
         name: Entangling
         system:
           competence:
             raw: 0
-          damageType: vine
           description: >-
             <p>An item that is <b>[[lookup name style=lc]]</b>, deals
-            @L[Damage:Vine]{vine damage}. </p>
-          elements:
-            - nature
+            @Identifier[damage:vine]{vine damage}.</p>
           form: intrinsic
           identifier: entangling
         transfer: true
@@ -1062,7 +1066,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1072,7 +1076,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -1087,7 +1092,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1097,7 +1102,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true

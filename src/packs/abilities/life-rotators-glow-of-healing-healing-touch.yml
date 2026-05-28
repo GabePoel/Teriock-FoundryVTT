@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/healing-touch.webp
 name: Healing Touch
 system:
@@ -59,7 +59,7 @@ system:
     unit: second
   elements:
     - life
-  endCondition: <p>The start of your next @L[Core:Turns]{turn}.</p>
+  endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
   executionTime:
     base: a1
     slow:
@@ -70,9 +70,9 @@ system:
   featSaveAttribute: mov
   form: normal
   heightened: >-
-    <p>For each additional @L[Core:MP]{MP} spent, target is
-    @L[Core:Healing]{healed} again at the start of your next
-    @L[Core:Turns]{turn}.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+    spent, target is @Identifier[core:healing]{healed} again at the start of
+    your next @Identifier[core:turns]{turn}.</p>
   identifier: healing-touch
   interaction: attack
   invoked: true
@@ -86,10 +86,10 @@ system:
     unit: contact
   results:
     hit: >-
-      <p>Target is immediately no longer @L[Condition:Poisoned]{poisoned} and is
-      also @L[Core:Healing]{healed} at the start of your next
-      @L[Core:Turns]{turn} if they do not take any @L[Core:Damage]{damage}
-      before then.</p>
+      <p>Target is immediately no longer @Identifier[status:poisoned]{poisoned}
+      and is also @Identifier[core:healing]{healed} at the start of your next
+      @Identifier[core:turns]{turn} if they do not take any
+      @Identifier[core:damage]{damage} before then.</p>
   spell: true
   standard: true
   targets:

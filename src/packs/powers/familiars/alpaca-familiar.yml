@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: alpacaTamer00000
     _key: '!items.effects!8430bebad15ec25a.alpacaTamer00000'
@@ -12,13 +12,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Alpaca Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Alpaca]{alpaca}.</p>
+      description: <p>You know the way of the @Identifier[creature:alpaca]{alpaca}.</p>
       field: survivalist
       identifier: alpaca-tamer
       tradecraft: tamer
@@ -31,7 +31,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     name: Disable Ray
     system:
@@ -59,18 +59,20 @@ effects:
         primary:
           mp:
             description: >-
-              <p>This costs 0 @L[Core:Hit Points and Mana Points]{MP} if the
-              triggering @L[Category:Abilities]{ability} was used on you or some
-              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
-              It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+              <p>This costs 0 @Identifier[core:hit-points-and-mana-points]{MP}
+              if the triggering @Pack[teriock.abilities]{ability} was used on
+              you or some @Pack[teriock.equipment]{equipment} you
+              @Identifier[keyword:bearing]{bear}. It costs 1
+              @Identifier[core:hit-points-and-mana-points]{MP} otherwise.</p>
             type: description
       delivery: missile
       duration:
         raw: '1'
         unit: minute
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime: r1
       expansion:
         range:
@@ -82,8 +84,9 @@ effects:
       maneuver: reactive
       overview:
         proficient: >-
-          <p>This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.</p>
+          <p>This also makes the effect of that
+          @Pack[teriock.abilities]{ability}
+          @Identifier[core:fizzles]{fizzle}.</p>
       piercing:
         raw: 1
       powerSources:
@@ -94,18 +97,18 @@ effects:
       requirements: <p>You may only target the triggering creature.</p>
       results:
         hit: >-
-          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.</p>
+          <p>Target becomes @Identifier[keyword:incapable]{incapable} of the
+          @Pack[teriock.abilities]{ability} they were using.</p>
       skill: true
       standard: true
       targets:
         - creature
       trigger: >-
-        <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
-        @L[Category:Active abilities]{active} or @L[Category:Reactive
-        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
-        against a different creature or some @L[Category:Equipment]{equipment}
-        that different creature @L[Keyword:Bearing]{bares}.</p>
+        <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic}
+        @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive
+        abilities]{reactive ability} that isn't a @Wiki[Category:Spells]{spell}
+        against a different creature or some @Pack[teriock.equipment]{equipment}
+        that different creature @Identifier[keyword:bearing]{bares}.</p>
     transfer: true
     type: ability
   - _id: e8k4c1n3etWPCBWy
@@ -115,7 +118,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/endure.webp
     name: Endure
     system:
@@ -151,18 +154,20 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
+          <p>You take the triggering @Identifier[core:damage]{damage} as a
+          @Identifier[damage:hack]{limb hack} instead. All @Wiki[Category:Damage
           types]{damage types} still apply. If the hit was critical, you instead
-          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
-          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
-          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
-          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
-          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
-          @L[Core:Damage]{damage} was dealt by a creature, they choose which
-          limb is affected. If not, it is random. Only an
-          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
-          possible, you take the @L[Core:Damage]{damage} normally.</p>
+          take it as <i>two</i> @Identifier[damage:hack]{limb hacks}. If you
+          attempted to @Identifier[core:block-interaction]{block} the triggering
+          @Wiki[Category:Attack abilities]{attack}, then a limb that
+          @Identifier[keyword:using]{used} whatever @Wiki[Category:Items]{item}
+          you @Identifier[core:block-interaction]{blocked} with is the one
+          that's @Identifier[damage:hack]{hacked}. Otherwise, if the
+          @Identifier[core:damage]{damage} was dealt by a creature, they choose
+          which limb is affected. If not, it is random. Only an
+          un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+          that's not possible, you take the @Identifier[core:damage]{damage}
+          normally.</p>
       piercing:
         raw: 0
       powerSources:
@@ -174,8 +179,8 @@ effects:
       targets:
         - self
       trigger: >-
-        <p>You are hit by an @L[Category:Attack abilities]{attack} that would
-        @L[Core:Damage]{damage} you.</p>
+        <p>You are hit by an @Wiki[Category:Attack abilities]{attack} that would
+        @Identifier[core:damage]{damage} you.</p>
     transfer: true
     type: ability
 folder: 31fe961f0b485187
@@ -185,10 +190,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.b7cddd3af9a15033
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:alpaca inline]</p>
   identifier: alpaca-familiar
   maxAv: 0
   type: familiar

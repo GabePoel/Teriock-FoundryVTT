@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: foxTamer00000000
     _key: '!items.effects!854fe3b997d5691d.foxTamer00000000'
@@ -12,13 +12,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Fox Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Fox]{fox}.</p>
+      description: <p>You know the way of the @Identifier[creature:fox]{fox}.</p>
       field: survivalist
       identifier: fox-tamer
       tradecraft: tamer
@@ -31,7 +31,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -68,12 +68,13 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You become @L[Condition:Hidden]{hidden}. If the result of your
-          @L[Core:Sneak]{SNK} @L[Core:Feat Interaction]{save} is greater than
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 +
-          2 × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
-          use your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}.</p>
+          <p>You become @Identifier[status:hidden]{hidden}. If the result of
+          your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your
+          @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}
+          (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your
+          hidden DC. If not, use your @Wiki[Core:Passive Attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -82,10 +83,11 @@ effects:
         unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:Game Master]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+        @Identifier[core:cover]{three-quarters cover}, or some other feature
+        which the @Identifier[core:game-master]{GM} determines is appropriate
+        for being @Identifier[status:hidden]{hidden}. You must remain in areas
+        that maintain these conditions to stay
+        @Identifier[status:hidden]{hidden}.</p>
       skill: true
       standard: true
       targets:
@@ -106,7 +108,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/scouting.webp
     name: Scouting
     system:
@@ -130,8 +132,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You have @L[Core:Advantage]{advantage} on checks made with
-          @L[Ability:Perceive]{Perceive}.</p>
+          <p>You have @Identifier[core:advantage]{advantage} on checks made with
+          @Identifier[ability:perceive]{Perceive}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -158,10 +160,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.f2bba2199c92f7ee
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:fox inline]</p>
   identifier: fox-familiar
   maxAv: 0
   type: familiar

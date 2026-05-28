@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/defy-death.webp
     name: Defy Death
     system:
@@ -48,7 +48,7 @@ effects:
       maneuver: reactive
       mundane: false
       overview:
-        base: <p>You begin @L[Condition:Defying Death]{defying death}.</p>
+        base: <p>You begin @Identifier[status:defying-death]{defying death}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -60,7 +60,7 @@ effects:
       sustained: true
       targets:
         - self
-      trigger: <p>You would @L[Condition:Down]{drop}.</p>
+      trigger: <p>You would @Identifier[status:down]{drop}.</p>
     transfer: true
     type: ability
   - _id: A4WZCzLVp8Jq9ykR
@@ -70,7 +70,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/duel.webp
     name: Duel
     system:
@@ -122,20 +122,21 @@ effects:
       overview:
         base: >-
           <p>You challenge the target to advance and fight you. They may
-          immediately @L[Ability:Move]{Move} towards you as a @L[Core:Reactive
-          Maneuvers]{free reaction} to this and begin
-          @L[Condition:Dueling]{dueling} with you. If they choose not to or are
-          unable to do so, then they are considered to have "forfeited" the
-          [[lookup name style=lc]] (but are not considered to have "lost" it).
-          Any creature that forfeits this [[lookup name style=lc]] becomes
-          @L[Condition:Lighted]{lighted} to each of their would-be opponents in
-          the [[lookup name style=lc]] until the end of that opponent's next
-          @L[Core:Turns]{turn}.</p>
+          immediately @Identifier[ability:move]{Move} towards you as a
+          @Identifier[core:reactive-maneuvers]{free reaction} to this and begin
+          @Identifier[status:dueling]{dueling} with you. If they choose not to
+          or are unable to do so, then they are considered to have "forfeited"
+          the [[lookup name style=lc]] (but are not considered to have "lost"
+          it). Any creature that forfeits this [[lookup name style=lc]] becomes
+          @Identifier[status:lighted]{lighted} to each of their would-be
+          opponents in the [[lookup name style=lc]] until the end of that
+          opponent's next @Identifier[core:turns]{turn}.</p>
         proficient: >-
-          <p>You may also @L[Ability:Move]{Move} or make a @L[Category:Single
-          action abilities]{single action} @L[Category:Duelist class
-          abilities]{Duelist ability} as a @L[Core:Reactive Maneuvers]{free
-          reaction} to the target's decision and subsequent movement.</p>
+          <p>You may also @Identifier[ability:move]{Move} or make a
+          @Wiki[Category:Single action abilities]{single action}
+          @Wiki[Category:Duelist class abilities]{Duelist ability} as a
+          @Identifier[core:reactive-maneuvers]{free reaction} to the target's
+          decision and subsequent movement.</p>
       piercing:
         raw: 0
       powerSources:
@@ -144,8 +145,8 @@ effects:
         raw: '30'
         unit: ft
       requirements: >-
-        <p>You are not @L[Condition:Dueling]{dueling} and can only use this on
-        an opponent.</p>
+        <p>You are not @Identifier[status:dueling]{dueling} and can only use
+        this on an opponent.</p>
       skill: true
       standard: true
       targets:
@@ -159,7 +160,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/resolve-conflict.webp
     name: Resolve Conflict
     system:
@@ -176,6 +177,10 @@ effects:
       class: duelist
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -195,9 +200,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
-          @L[Ability:Detect Lie]{Detect Lie}.</p>
+          <p>You are an @Identifier[keyword:expertise]{expert}
+          @Identifier[tradecraft:peacekeeper]{peacekeeper}. In addition, you
+          gain @Identifier[ability:detect-lie]{Detect Lie}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -217,7 +222,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/detect-lie.webp
     name: Detect Lie
     system:
@@ -263,8 +268,8 @@ effects:
         save: >-
           <p>You detect that the statement is true, regardless of what the
           target actually believes. This also applies if [[lookup name]] is
-          @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for some
-          other reason.</p>
+          @Identifier[keyword:resistance]{resisted} or
+          @Identifier[core:fizzles]{fizzles} for some other reason.</p>
       skill: true
       standard: true
       targets:

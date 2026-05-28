@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: Mi0nKd0FhidAmd3W
     _key: '!items.effects!86b73303ad261b89.Mi0nKd0FhidAmd3W'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
     name: Advanced Smell
     system:
@@ -47,15 +47,16 @@ effects:
           <p>You can passively smell the types of all living creatures within 30
           feet. You can detect dead and undead creatures as well, but you cannot
           distinguish within or between them. They all smell like death. You
-          also gain @L[Ability:Scent Seeing]{Scent Seeing}. You can not detect
-          @L[Condition:Odorless]{odorless} creatures in this way.</p>
+          also gain @Identifier[ability:scent-seeing]{Scent Seeing}. You can not
+          detect @Identifier[status:odorless]{odorless} creatures in this
+          way.</p>
       piercing:
         raw: 0
       powerSources:
         - martial
       range:
         unit: self
-      requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
+      requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
       skill: true
       standard: true
       targets:
@@ -73,7 +74,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -125,8 +126,10 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead climb at @Identifier[core:movement-speed]{normal
+          speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -144,7 +147,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/constrict.webp
     name: Constrict
     system:
@@ -173,7 +176,7 @@ effects:
         triggers:
           - movement
         unit: unlimited
-      endCondition: <p>The start of your next @L[Core:Turn]{turn}.</p>
+      endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
       executionTime:
         base: a1
         slow:
@@ -193,11 +196,11 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is your @L[Core:Size]{SIZE} or smaller.</p>
+      requirements: <p>Target is your @Identifier[core:size]{SIZE} or smaller.</p>
       results:
         fail: >-
-          <p>Target is @L[Condition:Suffocating]{suffocating} and
-          @L[Condition:Snared]{snared}.</p>
+          <p>Target is @Identifier[status:suffocating]{suffocating} and
+          @Identifier[status:snared]{snared}.</p>
       sustained: true
       targets:
         - creature
@@ -210,7 +213,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -254,7 +257,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/hack.webp
     name: Hack
     system:
@@ -284,7 +287,7 @@ effects:
       form: normal
       identifier: hack
       interaction: attack
-      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+      limitation: <p>@Wiki[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
       mundane: false
       overview:
@@ -299,11 +302,11 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
+          <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either
+          arms or legs, depending on what you chose.</p>
         hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
+          <p>The target takes 1 @Identifier[damage:hack]{hack damage} on either
+          an arm or leg, depending on what you chose.</p>
       skill: true
       standard: true
       targets:
@@ -318,7 +321,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -359,12 +362,13 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You become @L[Condition:Hidden]{hidden}. If the result of your
-          @L[Core:Sneak]{SNK} @L[Core:Feat Interaction]{save} is greater than
-          your @L[Core:Passive Attributes]{passive} @L[Core:Sneak]{sneak} (10 +
-          2 × @L[Core:Sneak]{SNK}), then you use it as your hidden DC. If not,
-          use your @L[Core:Passive Attributes]{passive}
-          @L[Core:Sneak]{sneak}.</p>
+          <p>You become @Identifier[status:hidden]{hidden}. If the result of
+          your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your
+          @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}
+          (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your
+          hidden DC. If not, use your @Wiki[Core:Passive Attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -373,10 +377,11 @@ effects:
         unit: self
       requirements: >-
         <p>You are in a location with shadows, dim light,
-        @L[Core:Cover]{three-quarters cover}, or some other feature which the
-        @L[Core:Game Master]{GM} determines is appropriate for being
-        @L[Condition:Hidden]{hidden}. You must remain in areas that maintain
-        these conditions to stay @L[Condition:Hidden]{hidden}.</p>
+        @Identifier[core:cover]{three-quarters cover}, or some other feature
+        which the @Identifier[core:game-master]{GM} determines is appropriate
+        for being @Identifier[status:hidden]{hidden}. You must remain in areas
+        that maintain these conditions to stay
+        @Identifier[status:hidden]{hidden}.</p>
       skill: true
       standard: true
       targets:
@@ -397,7 +402,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/impale.webp
     name: Impale
     system:
@@ -432,7 +437,7 @@ effects:
       form: normal
       identifier: impale
       interaction: attack
-      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+      limitation: <p>@Wiki[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
       mundane: false
       piercing:
@@ -443,9 +448,10 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>If you want, target takes @L[Core:Standard and Critical
-          Damage]{standard damage} as well.</p>
-        hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+          <p>If you want, target takes
+          @Identifier[core:standard-and-critical-damage]{standard damage} as
+          well.</p>
+        hit: <p>Target takes a @Identifier[damage:hack]{body hack}.</p>
       skill: true
       standard: true
       targets:
@@ -459,7 +465,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/no-hands.webp
     name: No Hands
     system:
@@ -483,7 +489,9 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+        base: >-
+          <p>You cannot use items in your
+          @Identifier[equipment:hand]{hands}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -501,7 +509,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -545,7 +553,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -589,7 +597,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -633,7 +641,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-strength.webp
     name: Normal Strength
     system:
@@ -680,7 +688,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/vitals-hack.webp
     name: Vitals Hack
     system:
@@ -719,7 +727,7 @@ effects:
       form: normal
       identifier: vitals-hack
       interaction: attack
-      limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+      limitation: <p>@Wiki[Category:Biting equipment]{Biting items} only.</p>
       maneuver: active
       mundane: false
       piercing:
@@ -730,9 +738,12 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>If you want, target takes @L[Core:Standard and Critical
-          Damage]{standard damage} as well.</p>
-        hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
+          <p>If you want, target takes
+          @Identifier[core:standard-and-critical-damage]{standard damage} as
+          well.</p>
+        hit: >-
+          <p>Target takes a @Identifier[damage:hack]{vitals hack} of your
+          choice.</p>
       skill: true
       standard: true
       targets:
@@ -746,7 +757,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -772,10 +783,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><div class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</div>
       piercing:
         raw: 0
       powerSources:
@@ -802,7 +814,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -828,8 +840,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength}
+          and @Identifier[ability:improved-armor-piercing]{Improved Armor
+          Piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -856,7 +869,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -882,10 +895,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
+          <p>You gain @Identifier[ability:improved-strength]{Improved Strength}
+          and @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In
+          addition, you are no longer suffer the consequences of
+          @Identifier[property:cumbersome]{cumbersome} items.</p>
       piercing:
         raw: 0
       powerSources:
@@ -912,7 +925,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     name: Scent Seeing
     system:
@@ -957,7 +970,7 @@ effects:
           <p>You know the exact location of all target creatures. You continue
           to know the location of all targets within 10 feet, whether they are
           or you are moving or not, so long as they are still within 10 feet of
-          you.</p>
+          you.</p><p></p>
       piercing:
         raw: 0
       powerSources:
@@ -966,8 +979,8 @@ effects:
         raw: '10'
         unit: ft
       requirements: >-
-        <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is not
-        @L[Condition:Odorless]{odorless}.</p>
+        <p>You are not @Identifier[status:anosmatic]{anosmatic} and the target
+        is not @Identifier[status:odorless]{odorless}.</p>
       skill: true
       standard: true
       targets:
@@ -981,7 +994,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -1008,10 +1021,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><div class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</div>
       piercing:
         raw: 0
       powerSources:
@@ -1035,7 +1049,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -1062,8 +1076,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
+          <p>Melee weapons you use are
+          @Identifier[property:armor-piercing]{armor piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1083,7 +1097,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -1112,12 +1126,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+          <p>You may spend an unused @Identifier[core:active-maneuvers]{action}
+          to @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
+          <p>You may spend an additional unused
+          @Identifier[core:active-maneuvers]{action} to
+          @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage} again.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1129,9 +1145,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
+        <p>You have hit a creature with a @Wiki[Category:Damaging
+        effects]{damaging} melee @Wiki[Category:Weapon delivery
+        abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
     transfer: true
     type: ability
   - _id: 3oOu9dLv311OTZ7V
@@ -1141,7 +1157,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -1168,8 +1184,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength}
+          and @Identifier[ability:improved-armor-piercing]{Improved Armor
+          Piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1193,7 +1210,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -1220,10 +1237,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><div class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</div>
       piercing:
         raw: 0
       powerSources:
@@ -1247,7 +1265,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -1274,8 +1292,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
+          <p>Melee weapons you use are
+          @Identifier[property:armor-piercing]{armor piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1292,11 +1310,6 @@ folder: 30f4d11e5e53d332
 img: systems/teriock/src/icons/creatures/boa-constrictor.webp
 name: Boa Constrictor
 system:
-  attributeIncrease: >-
-    <p>@L[Ability:Beastly Strength]{Beastly Strength} if at least
-    @L[Core:Size]{size} 3. @L[Ability:Improved Strength]{Improved Strength} if
-    at least @L[Core:Size]{size} 4. @L[Ability:Giant Strength]{Giant Strength}
-    if at least @L[Core:Size]{size} 5.</p>
   br: 4
   competence:
     raw: 1

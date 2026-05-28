@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -23,7 +23,7 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
+        @Wiki[Category:Attack abilities]{attack}.</p>
       form: intrinsic
       identifier: weapon
       mundane: true
@@ -36,7 +36,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
     name: Spell Store
     system:
@@ -67,13 +67,15 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>You "store" a @L[Category:Missile delivery spells]{missile attack
-          spell} that you can cast and are @L[Core:Proficiency
-          Bonus]{proficient} in in the target @L[Category:Weapons]{weapon}. For
-          the duration of [[lookup name]], you gain @L[Keyword:Limited]{Limited}
-          @L[Keyword:Improved]{Improved} @L[Ability:Spell Strike]{Spell Strike}.
-          Only one @L[Category:Missile delivery spells]{spell} can be stored in
-          the target @L[Category:Weapons]{weapon} at a time.</p>
+          <p>You "store" a @Wiki[Category:Missile delivery spells]{missile
+          attack spell} that you can cast and are
+          @Identifier[core:proficiency-bonus]{proficient} in in the target
+          @Wiki[Category:Weapons]{weapon}. For the duration of [[lookup name]],
+          you gain @Identifier[keyword:limited]{Limited}
+          @Identifier[keyword:improved]{Improved}
+          @Identifier[ability:spell-strike]{Spell Strike}. Only one
+          @Wiki[Category:Missile delivery spells]{spell} can be stored in the
+          target @Wiki[Category:Weapons]{weapon} at a time.</p>
       piercing:
         raw: 0
       powerSources:
@@ -93,12 +95,16 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
     name: Spell Catch
     system:
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: weapon
       duration:
         raw: '1'
@@ -123,18 +129,21 @@ effects:
       range:
         unit: contact
       requirements: >-
-        <p>Target is a @L[Category:Missile delivery spells]{missile attack
+        <p>Target is a @Wiki[Category:Missile delivery spells]{missile attack
         spell} being cast by an opponent.</p>
       results:
         save: >-
-          <p>The target @L[Core:Interactions]{attack} @L[Category:Missile
-          delivery spells]{spell} @L[Core:Fizzles]{fizzles} and gets "stored" in
-          the @L[Category:Weapons]{weapon} used to deliver [[lookup name]]. For
-          the duration of [[lookup name]], you gain @L[Keyword:Adept]{Adept}
-          @L[Keyword:Limited]{Limited} @L[Keyword:Improved]{Improved}
-          @L[Ability:Spell Strike]{Spell Strike}. Only one @L[Category:Missile
-          delivery spells]{spell} can be stored in the
-          @L[Category:Weapons]{weapon} at a time.</p>
+          <p>The target @Identifier[core:interactions]{attack}
+          @Wiki[Category:Missile delivery spells]{spell}
+          @Identifier[core:fizzles]{fizzles} and gets "stored" in the
+          @Wiki[Category:Weapons]{weapon} used to deliver [[lookup name]]. For
+          the duration of [[lookup name]], you gain
+          @Identifier[keyword:adept]{Adept}
+          @Identifier[keyword:limited]{Limited}
+          @Identifier[keyword:improved]{Improved}
+          @Identifier[ability:spell-strike]{Spell Strike}. Only one
+          @Wiki[Category:Missile delivery spells]{spell} can be stored in the
+          @Wiki[Category:Weapons]{weapon} at a time.</p>
       targets:
         - spell
     transfer: true
@@ -146,7 +155,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
@@ -183,10 +192,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
+          <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
+          delivery spells]{missile spell} that you are
+          @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
+          hit was a critical hit, then the target takes the "on critical hit"
+          effect instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -198,10 +208,10 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
+        abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
+        @Wiki[Category:Attack abilities]{attack} on another creature and the
+        effect has successfully applied.</p>
     transfer: true
     type: ability
   - _id: h2oGvjYCVbav80lU
@@ -211,7 +221,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
@@ -250,10 +260,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target takes the "on hit" effect of a @L[Category:Missile delivery
-          spells]{missile spell} that you are @L[Core:Proficiency
-          Bonus]{proficient} in. If the triggering hit was a critical hit, then
-          the target takes the "on critical hit" effect instead.</p>
+          <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
+          delivery spells]{missile spell} that you are
+          @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
+          hit was a critical hit, then the target takes the "on critical hit"
+          effect instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -265,10 +276,10 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just landed a hit with a @L[Category:Weapon delivery
-        abilities]{weapon} or @L[Category:Bite delivery abilities]{bite}
-        @L[Category:Attack abilities]{attack} on another creature and the effect
-        has successfully applied.</p>
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
+        abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
+        @Wiki[Category:Attack abilities]{attack} on another creature and the
+        effect has successfully applied.</p>
     transfer: true
     type: ability
 folder: 9e47cf966e0cd702

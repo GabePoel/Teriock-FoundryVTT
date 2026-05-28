@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/drink-potion-of-hunger.webp
 name: Drink Potion of Hunger
 system:
@@ -18,7 +18,13 @@ system:
       type: status
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '1'
@@ -38,12 +44,12 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>You gain @L[Ability:Devour]{Devour} and can eat to 2 ×
-      @L[Core:Size]{SIZE} @L[Core:Size]{sizes} of
-      @L[Category:Creatures]{creatures}. If you eat more than this, you
-      @L[Condition:Dead]{die}. But your hunger is insatiable. You are
-      @L[Keyword:Incapable]{incapable} of stopping eating any
-      @L[Category:Creatures]{creature} you start eating.</p>
+      <p>You gain @Identifier[ability:devour]{Devour} and can eat to 2 ×
+      @Identifier[core:size]{SIZE} @Identifier[core:size]{sizes} of
+      @Pack[teriock.creatures]{creatures}. If you eat more than this, you
+      @Identifier[status:dead]{die}. But your hunger is insatiable. You are
+      @Identifier[keyword:incapable]{incapable} of stopping eating any
+      @Pack[teriock.creatures]{creature} you start eating.</p>
   piercing:
     raw: 0
   powerSources:
@@ -52,9 +58,9 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - self
 transfer: true

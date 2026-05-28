@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: tH9XK6BlZrnbJDsg
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/adrenaline.webp
         name: Adrenaline
         system:
@@ -69,12 +69,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You @L[Keyword:Resistance]{resist}
-              @L[Condition:Unconscious]{unconsciousness} and
-              @L[Condition:Down]{dropping} due to being at negative @L[Core:Hit
-              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
-              when you reach half your maximum @L[Core:Hit Points and Mana
-              Points]{HP} below zero.</p>
+              <p>You @Identifier[keyword:resistance]{resist}
+              @Identifier[status:unconscious]{unconsciousness} and
+              @Identifier[status:down]{dropping} due to being at negative
+              @Identifier[core:hit-points-and-mana-points]{HP}. You still
+              @Identifier[status:dead]{die} when you reach half your maximum
+              @Identifier[core:hit-points-and-mana-points]{HP} below zero.</p>
           piercing:
             raw: 0
           powerSources:
@@ -93,7 +93,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -137,7 +137,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -181,7 +181,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -225,7 +225,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -269,7 +269,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/passive-endure.webp
         name: Passive Endure
         system:
@@ -308,21 +308,24 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Whenever you are hit by an @L[Category:Attack
-              abilities]{attack} that would @L[Core:Damage]{damage} you, you
-              take that @L[Core:Damage]{damage} as a @L[Damage:Hack]{limb hack}
-              instead. All @L[Category:Damage types]{damage types} still apply.
-              If the hit was critical, you instead take it as <i>two</i>
-              @L[Damage:Hack]{limb hacks}. If you attempted to @L[Core:Block
-              Interaction]{block} the triggering @L[Category:Attack
-              abilities]{attack}, then a limb that @L[Keyword:Using]{used}
-              whatever @L[Category:Items]{item} you @L[Core:Block
-              Interaction]{blocked} with is the one that's
-              @L[Damage:Hack]{hacked}. Otherwise, if the @L[Core:Damage]{damage}
-              was dealt by a creature, they choose which limb is affected. If
-              not, it is random. Only an un-@L[Damage:Hack]{hacked} limb can be
-              used for this. If that's not possible, you take the
-              @L[Core:Damage]{damage} normally.</p>
+              <p>Whenever you are hit by an @Wiki[Category:Attack
+              abilities]{attack} that would @Identifier[core:damage]{damage}
+              you, you take that @Identifier[core:damage]{damage} as a
+              @Identifier[damage:hack]{limb hack} instead. All
+              @Wiki[Category:Damage types]{damage types} still apply. If the hit
+              was critical, you instead take it as <i>two</i>
+              @Identifier[damage:hack]{limb hacks}. If you attempted to
+              @Identifier[core:block-interaction]{block} the triggering
+              @Wiki[Category:Attack abilities]{attack}, then a limb that
+              @Identifier[keyword:using]{used} whatever
+              @Wiki[Category:Items]{item} you
+              @Identifier[core:block-interaction]{blocked} with is the one
+              that's @Identifier[damage:hack]{hacked}. Otherwise, if the
+              @Identifier[core:damage]{damage} was dealt by a creature, they
+              choose which limb is affected. If not, it is random. Only an
+              un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+              that's not possible, you take the @Identifier[core:damage]{damage}
+              normally.</p>
           piercing:
             raw: 0
           powerSources:
@@ -332,7 +335,7 @@ items:
           targets:
             - self
           trigger: >-
-            <p> This triggers automatically. You cannot choose to not use it if
+            <p>This triggers automatically. You cannot choose to not use it if
             you are able to.</p>
         transfer: true
         type: ability
@@ -340,9 +343,8 @@ items:
     img: systems/teriock/src/icons/creatures/brittleman.webp
     name: Brittleman
     system:
-      adult: 0
       appearance: >-
-        <p>Strangely elongated and carnivorous @L[Category:Goblins]{goblins}
+        <p>Strangely elongated and carnivorous @Wiki[Category:Goblins]{goblins}
         that almost appear to be on stilts.</p>
       br: 5
       competence:
@@ -351,9 +353,8 @@ items:
         <p>The origin of brittlemen is unknown. They are often said to be some
         sort of drakespawn or some sort of failed species creation attempt.
         Brittlemen tend to attack in hordes, eating whatever they can find. They
-        use @L[Category:Weapons]{weapons} if they can find them.</p>
+        use @Wiki[Category:Weapons]{weapons} if they can find them.</p>
       identifier: brittleman
-      lifespan: 0
       size:
         enabled: true
         value: 2
@@ -377,7 +378,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -387,7 +388,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -397,8 +398,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -411,7 +412,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -421,7 +422,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -453,7 +454,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -463,7 +464,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -473,7 +474,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -488,7 +490,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -498,7 +500,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -533,7 +535,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: HVkT9rIkTVbfdXWn
         _key: >-
@@ -543,7 +545,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -553,7 +555,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -568,7 +571,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -578,7 +581,7 @@ items:
             raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
+            as while using @Identifier[ability:interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
           powerSources:
@@ -593,7 +596,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -603,7 +606,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true

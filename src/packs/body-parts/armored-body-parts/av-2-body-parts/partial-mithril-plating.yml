@@ -13,32 +13,30 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/mithril.webp
     name: Mithril
     system:
+      applyIfDampened: true
+      applyIfDeattuned: true
       automations:
         parameterChanges:
           _id: parameterChanges
           changes:
-            - key: system.weight
+            - key: system.av.bonus
               priority: 10
               target: Item
-              type: multiply
-              value: '0.5'
-            - key: system.minStr
-              priority: 10
-              target: Item
-              type: subtract
-              value: '-1'
+              type: upgrade
+              value: '1'
           type: changes
       competence:
         raw: 0
       description: >-
-        <p><b>[[lookup name]]</b> items are @L[Property:Durable]{durable}, weigh
-        half as much, have their minimum @L[Core:Strength]{STR} decreased by 1,
-        and are @L[Property:Unbreachable]{unbreachable} if they are
-        @L[Category:Armor]{armor}.</p>
+        <p><b>[[lookup name]]</b> items are
+        @Identifier[property:durable]{durable}, weigh half as much, have their
+        minimum @Identifier[core:strength]{STR} decreased by 1, and are
+        @Identifier[property:unbreachable]{unbreachable} if they are
+        @Wiki[Category:Armor]{armor}.</p>
       form: intrinsic
       identifier: mithril
       material: true
@@ -53,7 +51,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/unbreachable.webp
     name: Unbreachable
     system:
@@ -73,8 +71,8 @@ effects:
       competence:
         raw: 0
       description: >-
-        <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b> has
-        its @L[Core:Armor Class]{AV} increased by 1.</p>
+        <p>@Wiki[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b>
+        has its @Identifier[core:armor-class]{AV} increased by 1.</p>
       form: intrinsic
       identifier: unbreachable
       mundane: true
@@ -87,7 +85,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.30
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/durable.webp
     name: Durable
     system:
@@ -96,10 +94,10 @@ effects:
         raw: 0
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b> is
-        @L[Keyword:Resistance]{resistant} to becoming
-        @L[Property:Shattered]{shattered} and effects that would render it
-        @L[Property:Destroyed]{destroyed} cause it to be
-        @L[Property:Shattered]{shattered} instead.</p>
+        @Identifier[keyword:resistance]{resistant} to becoming
+        @Identifier[property:shattered]{shattered} and effects that would render
+        it @Identifier[property:destroyed]{destroyed} cause it to be
+        @Identifier[property:shattered]{shattered} instead.</p>
       form: intrinsic
       identifier: durable
       mundane: false

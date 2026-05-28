@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: vEfLSU1IU4xukXWp
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -69,7 +69,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/digging.webp
         name: Digging
         system:
@@ -108,7 +108,7 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
+            base: <p>You dig at @Identifier[core:movement-speed]{quarter speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -127,7 +127,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/fearless.webp
         name: Fearless
         system:
@@ -158,8 +158,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:frightened]{frightened}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -178,7 +178,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -222,7 +222,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
@@ -259,7 +259,7 @@ items:
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is bright
-              light and up to 120 feet as though it is dim light.</p>
+              light and up to 120 feet as though it is dim light.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -278,7 +278,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -301,7 +301,9 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+            base: >-
+              <p>You cannot use items in your
+              @Identifier[equipment:hand]{hands}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -320,7 +322,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -364,7 +366,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -408,7 +410,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -452,7 +454,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/poison-strike.webp
         name: Poison Strike
         system:
@@ -495,7 +497,7 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+          endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
           executionTime:
             base: a1
             slow:
@@ -507,15 +509,15 @@ items:
           form: normal
           identifier: poison-strike
           interaction: attack
-          limitation: <p>@L[Category:Biting equipment]{Biting equipment} only.</p>
+          limitation: <p>@Wiki[Category:Biting equipment]{Biting equipment} only.</p>
           maneuver: active
           overview:
             fluent: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+              <p>The @Identifier[status:poisoned]{poison} instead deals
+              [[/damage 1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+              <p>The @Identifier[status:poisoned]{poison} instead deals
+              [[/damage 1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -524,9 +526,9 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @L[Condition:Poisoned]{poisoned}. The
-              @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-              @L[Core:Damage]{damage}.</p>
+              <p>Target is @Identifier[status:poisoned]{poisoned}. The
+              @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+              @Identifier[core:damage]{damage}.</p>
           skill: true
           targets:
             - creature
@@ -540,7 +542,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/stink-packet.webp
         name: Stink Packet
         system:
@@ -578,9 +580,9 @@ items:
           effectTypes:
             - sensory
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turns]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -600,15 +602,16 @@ items:
           range:
             raw: '20'
             unit: ft
-          requirements: <p>Target must not be @L[Condition:Anosmatic]{anosmatic}.</p>
+          requirements: <p>Target must not be @Identifier[status:anosmatic]{anosmatic}.</p>
           results:
             hit: >-
-              <p>Target is @L[Condition:Blind]{blinded}, loses their largest
-              remaining @L[Core:Hit Points and Mana Points]{hit die}, and loses
-              their largest remaining @L[Core:Hit Points and Mana Points]{mana
-              die}. It is though those dice are spent, but without providing any
-              @L[Core:Healing]{healing} or @L[Category:Revitalization
-              effects]{revitalization}. </p>
+              <p>Target is @Identifier[status:blind]{blinded}, loses their
+              largest remaining @Identifier[core:hit-points-and-mana-points]{hit
+              die}, and loses their largest remaining
+              @Identifier[core:hit-points-and-mana-points]{mana die}. It is
+              though those dice are spent, but without providing any
+              @Identifier[core:healing]{healing} or
+              @Wiki[Category:Revitalization effects]{revitalization}.</p>
           targets:
             - creature
         transfer: true
@@ -617,12 +620,10 @@ items:
     img: systems/teriock/src/icons/creatures/skunk.webp
     name: Skunk
     system:
-      adult: 0
       br: 3
       competence:
         raw: 1
       identifier: skunk
-      lifespan: 0
       size:
         enabled: true
         value: 1
@@ -646,7 +647,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: RPhAUSwovZYktIQm
         _key: >-
@@ -656,7 +657,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -666,7 +667,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -681,7 +683,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -691,7 +693,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true

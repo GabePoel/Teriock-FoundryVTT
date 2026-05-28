@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: Gf5Zh0r2cawcWwZr
     _key: '!items.effects!a4daf5ac5cdd1db5.Gf5Zh0r2cawcWwZr'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/carrying.webp
     name: Carrying
     system:
@@ -39,8 +39,8 @@ effects:
       overview:
         base: >-
           <p>You can drag and carry other creatures and
-          @L[Category:Equipment]{items} around even if you don't have
-          @L[Category:Prehensile equipment]{prehensile body parts}.</p>
+          @Pack[teriock.equipment]{items} around even if you don't have
+          @Wiki[Category:Prehensile equipment]{prehensile body parts}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -58,7 +58,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -102,7 +102,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/devour.webp
     name: Devour
     system:
@@ -131,12 +131,14 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      requirements: <p>Target is @Identifier[status:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
-          and their @L[Core:Size]{SIZE} is reduced by 1. If their
-          @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
+          <p>Target is @Identifier[status:dead]{dead},
+          @Identifier[status:ruined]{ruined}, and their
+          @Identifier[core:size]{SIZE} is reduced by 1. If their
+          @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
+          0.</p>
       targets:
         - creature
     transfer: true
@@ -148,7 +150,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -192,7 +194,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -236,7 +238,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -280,7 +282,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-strength.webp
     name: Normal Strength
     system:
@@ -324,7 +326,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/pince.webp
     name: Pince
     system:
@@ -367,11 +369,11 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
+          <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either
+          arms or legs, depending on what you chose.</p>
         hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
+          <p>The target takes 1 @Identifier[damage:hack]{hack damage} on either
+          an arm or leg, depending on what you chose.</p>
       targets:
         - arm
         - leg
@@ -384,7 +386,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     name: Poison Strike
     system:
@@ -430,7 +432,7 @@ effects:
         unit: hour
       effectTypes:
         - poison
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
       executionTime:
         base: a1
         slow:
@@ -442,16 +444,16 @@ effects:
       form: normal
       identifier: poison-strike
       interaction: attack
-      limitation: <p>@L[Category:Stingers]{Stingers} only.</p>
+      limitation: <p>@Wiki[Category:Stingers]{Stingers} only.</p>
       maneuver: active
       mundane: false
       overview:
         fluent: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -460,9 +462,9 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @L[Core:Damage]{damage}.</p>
+          <p>Target is @Identifier[status:poisoned]{poisoned}. The
+          @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @Identifier[core:damage]{damage}.</p>
       skill: true
       targets:
         - creature
@@ -475,7 +477,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/swimming.webp
     name: Swimming
     system:
@@ -514,7 +516,7 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+        base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -531,7 +533,7 @@ folder: 8185a98b7551093c
 img: systems/teriock/src/icons/creatures/red-scorpion.webp
 name: Red Scorpion
 system:
-  appearance: <p>Huge [[lookup name style=lc]]s with razor sharp claws.</p>
+  appearance: <p>Huge red scorpions with razor sharp claws.</p>
   br: 5
   competence:
     raw: 1

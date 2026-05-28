@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: k5RRLm93LppLi6BX
     _key: '!items.effects!d3f88e17342546ef.k5RRLm93LppLi6BX'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/charm.webp
     name: Charm
     system:
@@ -60,10 +60,10 @@ effects:
       range:
         unit: contact
       requirements: >-
-        <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
-        @L[Condition:Charmed]{charmed} at a time.</p>
+        <p>A creature may only have up to @Identifier[core:presence]{PRES}
+        creatures @Identifier[status:charmed]{charmed} at a time.</p>
       results:
-        hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
+        hit: <p>Target is @Identifier[status:charmed]{charmed}.</p>
       targets:
         - creature
     transfer: true
@@ -75,7 +75,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/ethereal-full-plate.webp
     name: Ethereal Full Plate
     system:
@@ -113,10 +113,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>While @L[Condition:Ethereal]{Ethereal}, have at least 4
-          @L[Core:AV]{AV} and appear to be wearing @L[Category:Equipment]{full
-          plate}. This is the case even when you are not actually wearing
-          @L[Category:Armor]{armor}. </p>
+          <p>While @Identifier[status:ethereal]{Ethereal}, have at least 4
+          @Wiki[Core:AV]{AV} and appear to be wearing
+          @Pack[teriock.equipment]{full plate}. This is the case even when you
+          are not actually wearing @Wiki[Category:Armor]{armor}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -134,7 +134,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/feeding.webp
     name: Feeding
     system:
@@ -161,18 +161,19 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You must @L[Drain:Mana]{mana drain} at least 3 creatures to
-          @L[Condition:Dead]{death} every day 24 hours or you start taking
-          penalties. If 24 hours pass and you have not fed, you lose your your
-          largest @L[Core:HP]{hit die} and @L[Core:MP]{mana die}. Your
-          @L[Core:Hit Points and Mana Points]{HP} and @L[Core:Hit Points and
-          Mana Points]{MP} maximums decrease by the value of those dice. For
-          each additional 24 hours you go without [[lookup name style=lc]], you
-          lose your next largest @L[Core:HP]{hit die} and @L[Core:MP]{mana die}.
-          To restore lost @L[Core:HP]{hit dice} and @L[Core:MP]{mana dice}, you
-          must feed more than normal. If you feed on at least 6 creatures within
-          a 24 hour period, you restore 1 lost @L[Core:HP]{hit die} and
-          @L[Core:MP]{mana die}.</p>
+          <p>You must @Identifier[drain:mana]{mana drain} at least 3 creatures
+          to @Identifier[status:dead]{death} every day 24 hours or you start
+          taking penalties. If 24 hours pass and you have not fed, you lose your
+          your largest @Wiki[Core:HP]{hit die} and @Wiki[Core:MP]{mana die}.
+          Your @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} maximums decrease by
+          the value of those dice. For each additional 24 hours you go without
+          [[lookup name style=lc]], you lose your next largest
+          @Wiki[Core:HP]{hit die} and @Wiki[Core:MP]{mana die}. To restore lost
+          @Wiki[Core:HP]{hit dice} and @Wiki[Core:MP]{mana dice}, you must feed
+          more than normal. If you feed on at least 6 creatures within a 24 hour
+          period, you restore 1 lost @Wiki[Core:HP]{hit die} and
+          @Wiki[Core:MP]{mana die}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -190,7 +191,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
@@ -243,8 +244,10 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+        base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead fly at @Identifier[core:movement-speed]{full
+          speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -264,7 +267,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/ghostlike.webp
     name: Ghostlike
     system:
@@ -308,7 +311,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/greater-undead.webp
     name: Greater Undead
     system:
@@ -335,14 +338,16 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You count as being @L[Keyword:Undead]{undead} for the purposes of
-          @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage},
-          and other @L[Category:Effects]{effects}. You also gain
-          @L[Ability:Ethereal Senses]{Ethereal Senses}, @L[Ability:Healing
-          Sensitivity]{Healing Sensitivity}, @L[Ability:Magical
-          Durability]{Magical Durability}, @L[Ability:Mana Drain Touch]{Mana
-          Drain Touch}, @L[Ability:Undead Mind]{Undead Mind}, and
-          @L[Ability:Undying Durability]{Undying Durability}.</p>
+          <p>You count as being @Identifier[keyword:undead]{undead} for the
+          purposes of @Pack[teriock.abilities]{abilities}, @Wiki[Category:Damage
+          types]{damage}, and other @Wiki[Category:Effects]{effects}. You also
+          gain @Identifier[ability:ethereal-senses]{Ethereal Senses},
+          @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
+          @Identifier[ability:magical-durability]{Magical Durability},
+          @Identifier[ability:mana-drain-touch]{Mana Drain Touch},
+          @Identifier[ability:undead-mind]{Undead Mind}, and
+          @Identifier[ability:undying-durability]{Undying Durability}.</p><div
+          class="expandable-table"></div>
       piercing:
         raw: 0
       powerSources:
@@ -360,7 +365,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/high-intelligence.webp
     name: High Intelligence
     system:
@@ -404,7 +409,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/incorporeal.webp
     name: Incorporeal
     system:
@@ -441,11 +446,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You cannot wear @L[Category:Armor]{armor} and you may pass through
-          non-@L[Property:Silver]{silver} walls while
-          @L[Condition:Ethereal]{Ethereal}. You are also
-          @L[Keyword:Immunity]{immune} to being @L[Condition:Snared]{snared} and
-          have no weight.</p>
+          <p>You cannot wear @Wiki[Category:Armor]{armor} and you may pass
+          through non-@Identifier[property:silver]{silver} walls while
+          @Identifier[status:ethereal]{Ethereal}. You are also
+          @Identifier[keyword:immunity]{immune} to being
+          @Identifier[status:snared]{snared} and have no weight.</p>
       piercing:
         raw: 0
       powerSources:
@@ -463,7 +468,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/instant-ethereal.webp
     name: Instant Ethereal
     system:
@@ -499,8 +504,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into the
-          Material Realm.</p>
+          <p>You go @Identifier[status:ethereal]{Ethereal} or manifest back into
+          the Material Realm.</p>
       piercing:
         raw: 0
       powerSources:
@@ -518,7 +523,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -562,7 +567,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -606,7 +611,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-strength.webp
     name: Normal Strength
     system:
@@ -650,7 +655,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -706,11 +711,11 @@ effects:
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
+          @Identifier[core:damage]{damage}. This also has all
+          @Wiki[Category:Damage types]{damage types} of the triggering
+          @Wiki[Category:Attack abilities]{attack}. If the triggering
+          @Wiki[Category:Attack abilities]{attack} was a critical hit, this
+          deals 10 @Identifier[core:damage]{damage} instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -722,8 +727,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+        <p>You have just hit a creature with an @Wiki[Category:Attack
+        abilities]{attack} that dealt them @Identifier[core:damage]{damage} from
+        it.</p>
     transfer: true
     type: ability
   - _id: uC5s8qx85OgIrcLG
@@ -733,7 +739,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
     name: Healing Sensitivity
     system:
@@ -761,13 +767,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>@L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage}
-          you. If the creature providing you @L[Core:Healing]{healing} specifies
-          that they are doing so "for damage" then you roll your <i>largest</i>
-          @L[Core:HP]{hit die} and take that much @L[Damage:Holy]{holy}
-          @L[Damage:Magic]{magic damage} instead of the normal
-          @L[Core:Healing]{healing} effect. This does not consume any of your
-          @L[Core:HP]{hit dice}.</p>
+          <p>@Identifier[core:healing]{Healing} can be used to
+          @Identifier[core:damage]{damage} you. If the creature providing you
+          @Identifier[core:healing]{healing} specifies that they are doing so
+          "for damage" then you roll your <i>largest</i> @Wiki[Core:HP]{hit die}
+          and take that much @Identifier[damage:holy]{holy}
+          @Identifier[damage:magic]{magic damage} instead of the normal
+          @Identifier[core:healing]{healing} effect. This does not consume any
+          of your @Wiki[Core:HP]{hit dice}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -785,7 +792,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/undead-mind.webp
     name: Undead Mind
     system:
@@ -828,10 +835,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to being
-          @L[Condition:Frightened]{frightened} and
-          @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
-          maintained even if @L[Condition:Transformed]{transformed}.</p>
+          <p>You are @Identifier[keyword:immunity]{immune} to being
+          @Identifier[status:frightened]{frightened} and
+          @Identifier[status:charmed]{charmed}. The effects of [[lookup name]]
+          are maintained even if
+          @Identifier[status:transformed]{transformed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -849,7 +857,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
@@ -889,8 +897,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You can see and hear spirits and @L[Condition:Ethereal]{Ethereal}
-          creatures within 120 feet.</p>
+          <p>You can see and hear spirits and
+          @Identifier[status:ethereal]{Ethereal} creatures within 120 feet.</p>
       piercing:
         raw: 0
       powerSources:
@@ -910,7 +918,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/undying-durability.webp
     name: Undying Durability
     system:
@@ -959,14 +967,15 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to
-          @L[Condition:Unconscious]{unconsciousness},
-          @L[Condition:Suffocating]{suffocating}, and being
-          @L[Condition:Poisoned]{poisoned}. You do not @L[Condition:Down]{drop}
-          due to being at negative @L[Core:Hit Points and Mana Points]{HP}. You
-          still @L[Condition:Dead]{die} when you reach half your maximum
-          @L[Core:Hit Points and Mana Points]{HP} below zero. You also do not
-          have to @L[Core:Drowning]{breathe}.</p>
+          <p>You are @Identifier[keyword:immunity]{immune} to
+          @Identifier[status:unconscious]{unconsciousness},
+          @Identifier[status:suffocating]{suffocating}, and being
+          @Identifier[status:poisoned]{poisoned}. You do not
+          @Identifier[status:down]{drop} due to being at negative
+          @Identifier[core:hit-points-and-mana-points]{HP}. You still
+          @Identifier[status:dead]{die} when you reach half your maximum
+          @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also
+          do not have to @Identifier[core:drowning]{breathe}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -984,7 +993,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
     name: Mana Drain Touch
     system:
@@ -1030,17 +1039,19 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize} twice. This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
+          <p>Deal [[/drain 2d8[mana]]] @Wiki[Category:Drain types]{drain} to the
+          target. If this @Identifier[status:dead]{kills} the target, you
+          @Identifier[core:revitalizing]{revitalize} twice. This
+          @Identifier[core:revitalizing]{revitalization} is the only part of
+          this that is a @Wiki[Category:Revitalization effects]{revitalization
+          effect}.</p>
         hit: >-
-          <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to the
-          target. If this @L[Condition:Dead]{kills} the target, you
-          @L[Core:Revitalizing]{revitalize}.  This
-          @L[Core:Revitalizing]{revitalization} is the only part of this that is
-          a @L[Category:Revitalization effects]{revitalization effect}.</p>
+          <p>Deal [[/drain 1d8[mana]]] @Wiki[Category:Drain types]{drain} to the
+          target. If this @Identifier[status:dead]{kills} the target, you
+          @Identifier[core:revitalizing]{revitalize}.  This
+          @Identifier[core:revitalizing]{revitalization} is the only part of
+          this that is a @Wiki[Category:Revitalization effects]{revitalization
+          effect}.</p>
       targets:
         - creature
     transfer: true
@@ -1052,7 +1063,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
@@ -1087,8 +1098,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to @L[Damage:Mundane]{mundane}
-          @L[Core:Damage]{damage}.</p>
+          <p>You are @Identifier[keyword:immunity]{immune} to
+          @Identifier[damage:mundane]{mundane}
+          @Identifier[core:damage]{damage}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1105,16 +1117,17 @@ name: Knight Wraith
 system:
   appearance: >-
     <p>Appearing black and empty in the Material plane, these creatures become
-    @L[Creature:Death Knight]{death knights} in the
-    @L[Condition:Ethereal]{Ethereal plane}.</p>
+    @Identifier[creature:death-knight]{death knights} in the
+    @Identifier[status:ethereal]{Ethereal plane}.</p>
   br: 26
   competence:
     raw: 1
   description: <p>These odd beings are also called "black wraiths".</p>
   identifier: knight-wraith
   innateRanks: >-
-    <p>Innately @L[Category:Classes]{rank} 1 @L[Class:Knight]{Knight}. Innately
-    @L[Category:Classes]{rank} 2 @L[Class:Necromancer]{Necromancer}.</p>
+    <p>Innately @Wiki[Category:Classes]{rank} 1
+    @Identifier[class:knight]{Knight}. Innately @Wiki[Category:Classes]{rank} 2
+    @Identifier[class:necromancer]{Necromancer}.</p>
   size:
     enabled: true
     value: 3

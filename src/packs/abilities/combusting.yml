@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/combusting.webp
 name: Combusting
 system:
@@ -70,8 +70,8 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>You @L[Condition:Dead]{die} and become
-      @L[Condition:Ruined]{ruined}.</p>
+      <p>You @Identifier[status:dead]{die} and become
+      @Identifier[status:ruined]{ruined}.</p>
   piercing:
     raw: 0
   powerSources:
@@ -81,16 +81,17 @@ system:
     unit: ft
   results:
     fail: >-
-      <p>Target creatures take [[/damage 1d10[fire]]] @L[Core:Damage]{damage}
-      and @L[Category:Equipment]{equipment} they @L[Keyword:Bearing]{bare}
-      becomes @L[Property:Shattered]{shattered}. Target items that are not
-      @L[Keyword:Bearing]{bared} by a creature are
-      @L[Property:Shattered]{shattered}.</p>
+      <p>Target creatures take [[/damage 1d10[fire]]]
+      @Identifier[core:damage]{damage} and @Pack[teriock.equipment]{equipment}
+      they @Identifier[keyword:bearing]{bare} becomes
+      @Identifier[property:shattered]{shattered}. Target items that are not
+      @Identifier[keyword:bearing]{bared} by a creature are
+      @Identifier[property:shattered]{shattered}.</p>
   targets:
     - creature
     - item
   trigger: >-
-    <p>You @L[Condition:Down]{drop}. This triggers automatically. You cannot
-    choose to not use it if you are able to.</p>
+    <p>You @Identifier[status:down]{drop}. This triggers automatically. You
+    cannot choose to not use it if you are able to.</p>
 transfer: true
 type: ability

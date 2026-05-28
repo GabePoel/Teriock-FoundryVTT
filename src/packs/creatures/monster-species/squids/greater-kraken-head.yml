@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: UumfKHxGTMStaKX7
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -53,13 +53,14 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
-              1, it is reduced to 0.</p>
+              <p>Target is @Identifier[status:dead]{dead},
+              @Identifier[status:ruined]{ruined}, and their
+              @Identifier[core:size]{SIZE} is reduced by 1. If their
+              @Identifier[core:size]{SIZE} was already less than 1, it is
+              reduced to 0.</p>
           targets:
             - creature
         transfer: true
@@ -72,7 +73,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -97,10 +98,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
+              <p>You gain @Identifier[ability:improved-strength]{Improved
+              Strength} and @Identifier[ability:melee-damage-boost]{Melee Damage
+              Boost}. In addition, you are no longer suffer the consequences of
+              @Identifier[property:cumbersome]{cumbersome} items.</p>
           piercing:
             raw: 0
           powerSources:
@@ -125,7 +126,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/lumbering.webp
         name: Lumbering
         system:
@@ -169,7 +170,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -213,7 +214,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -257,7 +258,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -301,7 +302,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/shattering-armor.webp
         name: Shattering Armor
         system:
@@ -334,11 +335,12 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may @L[Core:Block Interaction]{block} with a @L[Core:Block
-              Interaction]{BV} equal to your @L[Core:Armor Class]{AV} for the
-              purpose of [[lookup name]]. </p><div class="note"><b>Note:</b>
-              This does not allow you to delivery other @L[Core:Block
-              Interaction]{blocks} in this way.</div>
+              <p>You may @Identifier[core:block-interaction]{block} with a
+              @Identifier[core:block-interaction]{BV} equal to your
+              @Identifier[core:armor-class]{AV} for the purpose of [[lookup
+              name]].</p><div class="note"><b>Note:</b> This does not allow you
+              to delivery other @Identifier[core:block-interaction]{blocks} in
+              this way.</div>
           piercing:
             raw: 0
           powerSources:
@@ -347,9 +349,10 @@ items:
             unit: contact
           results:
             save: >-
-              <p>@L[Category:Equipment]{Equipment} that delivers
-              @L[Category:Attack abilities]{attack} you @L[Core:Block
-              Interaction]{block} becomes @L[Property:Shattered]{shattered}.</p>
+              <p>@Pack[teriock.equipment]{Equipment} that delivers
+              @Wiki[Category:Attack abilities]{attack} you
+              @Identifier[core:block-interaction]{block} becomes
+              @Identifier[property:shattered]{shattered}.</p>
           targets:
             - item
         transfer: true
@@ -362,10 +365,11 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/water-native.webp
         name: Water Native
         system:
+          class: corsair
           competence:
             raw: 0
           delivery: self
@@ -386,9 +390,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You have @L[Ability:Swimming]{Swimming} and
-              @L[Ability:Diving]{Diving} but are @L[Condition:Slow]{slow} on
-              land.</p>
+              <p>You have @Identifier[ability:swimming]{Swimming} and
+              @Identifier[ability:diving]{Diving} but are
+              @Identifier[status:slow]{slow} on land.</p>
           piercing:
             raw: 0
           powerSources:
@@ -407,7 +411,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -435,13 +439,15 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
+              <p>You may spend an unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
+              <p>You may spend an additional unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage} again.</p>
           piercing:
             raw: 0
           powerSources:
@@ -453,9 +459,9 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
+            <p>You have hit a creature with a @Wiki[Category:Damaging
+            effects]{damaging} melee @Wiki[Category:Weapon delivery
+            abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
         transfer: true
         type: ability
       - _id: YE8g2B1jTDjYkNK5
@@ -466,7 +472,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -492,8 +498,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+              <p>You gain @Identifier[ability:beastly-strength]{Beastly
+              Strength} and
+              @Identifier[ability:improved-armor-piercing]{Improved Armor
+              Piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -518,7 +526,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -544,10 +552,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons
+              in one hand.</p><div class="note"><b>Note:</b>
+              @Identifier[property:armor-piercing]{Armor piercing} weapons must
+              still be wielded in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</div>
           piercing:
             raw: 0
           powerSources:
@@ -572,7 +581,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -598,8 +607,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
+              <p>Melee weapons you use are
+              @Identifier[property:armor-piercing]{armor piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -620,7 +629,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/swimming.webp
         name: Swimming
         system:
@@ -659,7 +668,7 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You swim at @L[Core:Movement Speed]{full speed}.</p>
+            base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -680,7 +689,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/diving.webp
         name: Diving
         system:
@@ -707,7 +716,7 @@ items:
           overview:
             base: >-
               <p>You no longer have to stay on the surface of water while
-              @L[Ability:Swimming]{Swimming}.</p>
+              @Identifier[ability:swimming]{Swimming}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -724,7 +733,6 @@ items:
     img: systems/teriock/src/icons/creatures/greater-kraken-head.webp
     name: Greater Kraken Head
     system:
-      adult: 0
       appearance: <p>An enormous squid covered in scaly armor.</p>
       br: 23
       competence:
@@ -732,20 +740,21 @@ items:
       description: >-
         <p>A single greater kraken is represented by multiple different
         creatures at once. There is one <a class="mw-selflink selflink">greater
-        kraken head</a> and at least one @L[Creature:Greater Kraken Arm]{greater
-        kraken arm}. If the <a class="mw-selflink selflink">greater kraken
-        head</a> @L[Condition:Dead]{dies} then each @L[Creature:Greater Kraken
-        Arm]{greater kraken arm} does as well. Otherwise, each
-        @L[Creature:Greater Kraken Arm]{greater kraken arm} acts independently.
-        No @L[Category:Conditions]{conditions} other than
-        @L[Condition:Dead]{death} are shared. However, each @L[Creature:Greater
-        Kraken Arm]{greater kraken arm} cannot go more than the <a
-        class="mw-selflink selflink">greater kraken head's</a>
-        @L[Core:Size]{SIZE} × 5 feet away from the <a class="mw-selflink
-        selflink">greater kraken head</a>.</p>
+        kraken head</a> and at least one
+        @Identifier[creature:greater-kraken-arm]{greater kraken arm}. If the <a
+        class="mw-selflink selflink">greater kraken head</a>
+        @Identifier[status:dead]{dies} then each
+        @Identifier[creature:greater-kraken-arm]{greater kraken arm} does as
+        well. Otherwise, each @Identifier[creature:greater-kraken-arm]{greater
+        kraken arm} acts independently. No
+        @Wiki[Category:Conditions]{conditions} other than
+        @Identifier[status:dead]{death} are shared. However, each
+        @Identifier[creature:greater-kraken-arm]{greater kraken arm} cannot go
+        more than the <a class="mw-selflink selflink">greater kraken head's</a>
+        @Identifier[core:size]{SIZE} × 5 feet away from the <a
+        class="mw-selflink selflink">greater kraken head</a>.</p>
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
       identifier: greater-kraken-head
-      lifespan: 0
       size:
         enabled: true
         max: 15
@@ -773,7 +782,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     folder: aa772458d708a91e
     img: systems/teriock/src/icons/body-parts/hardened-scales.webp
     name: Hardened Scales
@@ -803,7 +812,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: oZz463pwrrMp6c8D
         _key: >-
@@ -813,7 +822,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -823,7 +832,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -838,7 +848,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/unblockable.webp
         name: Unblockable
         system:
@@ -856,7 +866,9 @@ items:
               type: changes
           competence:
             raw: 0
-          description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
+          description: >-
+            <p>An item with this property is always
+            @Identifier[keyword:ub]{UB}.</p>
           form: intrinsic
           identifier: unblockable
         transfer: true
@@ -869,7 +881,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -879,7 +891,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true

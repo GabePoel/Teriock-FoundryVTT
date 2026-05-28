@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/cumbersome.webp
     name: Cumbersome
     system:
@@ -33,16 +33,17 @@ effects:
       competence:
         raw: 0
       description: >-
-        <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
-        <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
-        regardless of how much they are @L[Core:Carrying Capacity]{carrying}. If
-        the user would have not been @L[Condition:Encumbered]{encumbered}
-        otherwise, they are @L[Condition:Encumbered]{lightly encumbered}. If
-        they would have been @L[Condition:Encumbered]{lightly encumbered}
-        otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
-        they would have been @L[Condition:Encumbered]{heavily encumbered}
-        otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
-      form: flaw
+        <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item}
+        <i>always</i> makes its user @Identifier[status:encumbered]{encumbered},
+        regardless of how much they are
+        @Identifier[core:carrying-capacity]{carrying}. If the user would have
+        not been @Identifier[status:encumbered]{encumbered} otherwise, they are
+        @Identifier[status:encumbered]{lightly encumbered}. If they would have
+        been @Identifier[status:encumbered]{lightly encumbered} otherwise, they
+        are @Identifier[status:encumbered]{heavily encumbered}. And if they
+        would have been @Identifier[status:encumbered]{heavily encumbered}
+        otherwise, they are rendered @Identifier[status:immobile]{immobile}.</p>
+      form: intrinsic
       identifier: cumbersome
       modifiesActor: true
     transfer: true
@@ -54,7 +55,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -64,13 +65,13 @@ effects:
         raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
+        becomes @Identifier[property:shattered]{shattered} if it is used to
+        @Identifier[core:block-interaction]{block} or if it is the
+        @Wiki[Category:Item target abilities]{target of an ability} that deals
+        it @Wiki[Category:Damaging effects]{damage}. If it would become
+        @Identifier[property:shattered]{shattered} through some other means, it
+        is instead @Identifier[property:destroyed]{destroyed}.</p>
+      form: intrinsic
       identifier: fragile
       mundane: true
     transfer: true

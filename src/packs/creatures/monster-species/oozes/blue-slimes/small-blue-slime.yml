@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: lLBpxwMGy93GsBoS
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
         name: Acidic Blood
         system:
@@ -51,10 +51,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Any @L[Category:Weapons]{weapon} that deals
-              @L[Core:Damage]{damage} to you becomes
-              @L[Property:Shattered]{shattered} at the start of your next
-              @L[Core:Turns]{turn}.</p>
+              <p>Any @Wiki[Category:Weapons]{weapon} that deals
+              @Identifier[core:damage]{damage} to you becomes
+              @Identifier[property:shattered]{shattered} at the start of your
+              next @Identifier[core:turns]{turn}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -64,7 +64,7 @@ items:
           targets:
             - self
           trigger: >-
-            <p> This triggers automatically. You cannot choose to not use it if
+            <p>This triggers automatically. You cannot choose to not use it if
             you are able to.</p>
         transfer: true
         type: ability
@@ -76,7 +76,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -109,16 +109,16 @@ items:
               <p>You can passively smell the types of all living creatures
               within 30 feet. You can detect dead and undead creatures as well,
               but you cannot distinguish within or between them. They all smell
-              like death. You also gain @L[Ability:Scent Seeing]{Scent Seeing}.
-              You can not detect @L[Condition:Odorless]{odorless} creatures in
-              this way.</p>
+              like death. You also gain @Identifier[ability:scent-seeing]{Scent
+              Seeing}. You can not detect @Identifier[status:odorless]{odorless}
+              creatures in this way.</p>
           piercing:
             raw: 0
           powerSources:
             - martial
           range:
             unit: self
-          requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
+          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
           skill: true
           standard: true
           targets:
@@ -137,7 +137,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/slimes/slime-giant-face-eyes.webp
         name: Blind Fighting
         system:
@@ -174,11 +174,11 @@ items:
           overview:
             base: >-
               <p>You can sense up to 60 feet around you even when you are
-              @L[Condition:Blind]{blind}. This lets you detect
-              @L[Category:Movement effects]{moving creatures}, but has no color
-              nor depth. Even subtle movements like breathing are sufficient for
-              this purpose. This does not detect any color nor depth, such as
-              pictures or words on a page.</p>
+              @Identifier[status:blind]{blind}. This lets you detect
+              @Wiki[Category:Movement effects]{moving creatures}, but has no
+              color nor depth. Even subtle movements like breathing are
+              sufficient for this purpose. This does not detect any color nor
+              depth, such as pictures or words on a page.</p>
           piercing:
             raw: 0
           powerSources:
@@ -202,7 +202,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/bumbling.webp
         name: Bumbling
         system:
@@ -246,7 +246,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -283,7 +283,7 @@ items:
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is dim
-              light.</p>
+              light.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -302,7 +302,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -330,13 +330,14 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
-              1, it is reduced to 0.</p>
+              <p>Target is @Identifier[status:dead]{dead},
+              @Identifier[status:ruined]{ruined}, and their
+              @Identifier[core:size]{SIZE} is reduced by 1. If their
+              @Identifier[core:size]{SIZE} was already less than 1, it is
+              reduced to 0.</p>
           targets:
             - creature
         transfer: true
@@ -349,7 +350,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
         name: Gooey Damage Reduction
         system:
@@ -373,8 +374,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>All @L[Core:Damage]{damage} you take is
-              @L[Keyword:Deboosted]{deboosted}.</p>
+              <p>All @Identifier[core:damage]{damage} you take is
+              @Identifier[keyword:deboosted]{deboosted}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -393,7 +394,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -437,7 +438,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
         name: Ooze Mind
         system:
@@ -488,10 +489,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened},
-              @L[Condition:Goaded]{goaded}, @L[Condition:Frenzied]{frenzied},
-              and @L[Condition:Allured]{allured}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:frightened]{frightened},
+              @Identifier[status:goaded]{goaded},
+              @Identifier[status:frenzied]{frenzied}, and
+              @Identifier[status:allured]{allured}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -510,7 +512,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/resist-effects.webp
         name: Resist Effects
         system:
@@ -555,29 +557,55 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Pick one of the following @L[Category:Effects]{effect types}.
-              You @L[Keyword:Resistance]{resist} @L[Category:Effects]{effects}
-              of that type.</p><ol><li>@L[Category:Awakening effects]{Awakening
-              effects}</li><li>@L[Category:Control effects]{Control
-              effects}</li><li>@L[Category:Displacement effects]{Displacement
-              effects}</li><li>@L[Category:Duel modifying effects]{Duel
-              modifying effects}</li><li>@L[Category:Financial
-              effects]{Financial effects}</li><li>@L[Category:Healing
-              effects]{Healing effects}</li><li>@L[Category:Killing
-              effects]{Killing effects}</li><li>@L[Category:Knockout
-              effects]{Knockout effects}</li><li>@L[Category:Loud effects]{Loud
-              effects}</li><li>@L[Category:Mental effects]{Mental
-              effects}</li><li>@L[Category:Poison effects]{Poison
-              effects}</li><li>@L[Category:Reanimation effects]{Reanimation
-              effects}</li><li>@L[Category:Regeneration effects]{Regeneration
-              effects}</li><li>@L[Category:Revitalization
-              effects]{Revitalization effects}</li><li>@L[Category:Revival
-              effects]{Revival effects}</li><li>@L[Category:Stealing
-              effects]{Stealing effects}</li><li>@L[Category:Summoning
-              effects]{Summoning effects}</li><li>@L[Category:Temporal
-              effects]{Temporal effects}</li><li>@L[Category:Transformation
-              effects]{Transformation effects}</li><li>@L[Category:Truth
-              detecting effects]{Truth detecting effects}</li></ol>
+              <p>Pick one of the following @Wiki[Category:Effects]{effect
+              types}. You @Identifier[keyword:resistance]{resist}
+              @Wiki[Category:Effects]{effects} of that
+              type.</p><ol><li>@Wiki[Category:Awakening effects]{Awakening
+              effects}</li>
+
+              <li>@Wiki[Category:Control effects]{Control effects}</li>
+
+              <li>@Wiki[Category:Displacement effects]{Displacement
+              effects}</li>
+
+              <li>@Wiki[Category:Duel modifying effects]{Duel modifying
+              effects}</li>
+
+              <li>@Wiki[Category:Financial effects]{Financial effects}</li>
+
+              <li>@Wiki[Category:Healing effects]{Healing effects}</li>
+
+              <li>@Wiki[Category:Killing effects]{Killing effects}</li>
+
+              <li>@Wiki[Category:Knockout effects]{Knockout effects}</li>
+
+              <li>@Wiki[Category:Loud effects]{Loud effects}</li>
+
+              <li>@Wiki[Category:Mental effects]{Mental effects}</li>
+
+              <li>@Wiki[Category:Poison effects]{Poison effects}</li>
+
+              <li>@Wiki[Category:Reanimation effects]{Reanimation effects}</li>
+
+              <li>@Wiki[Category:Regeneration effects]{Regeneration
+              effects}</li>
+
+              <li>@Wiki[Category:Revitalization effects]{Revitalization
+              effects}</li>
+
+              <li>@Wiki[Category:Revival effects]{Revival effects}</li>
+
+              <li>@Wiki[Category:Stealing effects]{Stealing effects}</li>
+
+              <li>@Wiki[Category:Summoning effects]{Summoning effects}</li>
+
+              <li>@Wiki[Category:Temporal effects]{Temporal effects}</li>
+
+              <li>@Wiki[Category:Transformation effects]{Transformation
+              effects}</li>
+
+              <li>@Wiki[Category:Truth detecting effects]{Truth detecting
+              effects}</li></ol>
           piercing:
             raw: 0
           powerSources:
@@ -600,7 +628,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/slow.webp
         name: Slow
         system:
@@ -644,7 +672,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
@@ -677,8 +705,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to falling
-              @L[Condition:Unconscious]{unconscious}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to falling
+              @Identifier[status:unconscious]{unconscious}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -697,7 +725,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/vitals-durability.webp
         name: Vitals Durability
         system:
@@ -736,8 +764,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Category:Bows]{arrows} and @L[Category:Vitals target
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Wiki[Category:Bows]{arrows} and @Wiki[Category:Vitals target
               abilities]{vitals target abilities}.</p>
           piercing:
             raw: 0
@@ -757,7 +785,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -801,7 +829,7 @@ items:
               <p>You know the exact location of all target creatures. You
               continue to know the location of all targets within 10 feet,
               whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              still within 10 feet of you.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -810,8 +838,8 @@ items:
             raw: '10'
             unit: ft
           requirements: >-
-            <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
-            not @L[Condition:Odorless]{odorless}.</p>
+            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
+            target is not @Identifier[status:odorless]{odorless}.</p>
           skill: true
           standard: true
           targets:
@@ -822,7 +850,6 @@ items:
     img: systems/teriock/src/icons/creatures/small-blue-slime.webp
     name: Small Blue Slime
     system:
-      adult: 0
       appearance: <p>A pool of thick opaque blue liquid.</p>
       br: 7
       competence:
@@ -831,9 +858,8 @@ items:
       hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
       identifier: small-blue-slime
       innateRanks: >-
-        <p>Innately @L[Category:Classes]{rank} 1 @L[Class:Storm Mage]{Storm
-        Mage}.</p>
-      lifespan: 0
+        <p>Innately @Wiki[Category:Classes]{rank} 1
+        @Identifier[class:storm-mage]{Storm Mage}.</p>
       mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
       size:
         enabled: true
@@ -860,7 +886,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: UTE4vX4qQBQ5SaJA
         _key: >-
@@ -870,7 +896,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/ice-ball.webp
         name: Ice Ball
         system:
@@ -950,8 +976,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic ice]]]
+            @Identifier[core:damage]{damage}  as well.</p>
           identifier: ice-ball
           interaction: attack
           maneuver: active
@@ -966,7 +994,7 @@ items:
             critHit: >-
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
-            hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+            hit: <p>Target is @Identifier[status:frozen]{frozen}.</p>
           spell: true
           standard: true
           targets:
@@ -981,7 +1009,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/identify.webp
         name: Identify
         system:
@@ -1014,20 +1042,21 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, you may target an
-            additional item.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
+            target an additional item.</p>
           identifier: identify
           interaction: manifest
           maneuver: slow
           overview:
             base: >-
               <p>If the target is an item, you know if it is
-              @L[Property:Magic]{magical} and what its
-              @L[Category:Properties]{properties} or
-              @L[Category:Abilities]{abilities} are, as well as any ongoing
+              @Identifier[property:magic]{magical} and what its
+              @Pack[teriock.properties]{properties} or
+              @Pack[teriock.abilities]{abilities} are, as well as any ongoing
               spells that are affecting the item. You also learn the name of the
               object, if it has one. If the target is a creature, you learn what
-              ongoing or @L[Category:Sustained spells]{sustained spells}, if
+              ongoing or @Wiki[Category:Sustained spells]{sustained spells}, if
               any, are affecting it.</p>
           piercing:
             raw: 0
@@ -1052,7 +1081,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/illusionary-arts.webp
         name: Illusionary Arts
         system:
@@ -1077,8 +1106,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Simple Illusion Creation]{Simple Illusion
-              Creation} and @L[Ability:Detect Illusion]{Detect Illusion}.</p>
+              <p>You gain @Identifier[ability:simple-illusion-creation]{Simple
+              Illusion Creation} and @Identifier[ability:detect-illusion]{Detect
+              Illusion}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1099,7 +1129,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/lightning-ray.webp
         name: Lightning Ray
         system:
@@ -1131,8 +1161,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d6[magic]]]
+            @Identifier[core:damage]{damage}.</p>
           identifier: lightning-ray
           interaction: attack
           maneuver: active
@@ -1145,10 +1177,10 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to
+              <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
               target.</p>
           spell: true
           standard: true
@@ -1164,7 +1196,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/detect-illusion.webp
         name: Detect Illusion
         system:
@@ -1195,9 +1227,10 @@ items:
           overview:
             proficient: >-
               <p>You also know what <i>type</i> of
-              @L[Keyword:Illusionary]{illusion} it is (Minor, Full, or Greater)
-              as well as the DC needed to @L[Ability:Disbelieve]{Disbelieve} it.
-              This does not count as "disbelieving" the illusion.</p>
+              @Identifier[keyword:illusionary]{illusion} it is (Minor, Full, or
+              Greater) as well as the DC needed to
+              @Identifier[ability:disbelieve]{Disbelieve} it. This does not
+              count as "disbelieving" the illusion.</p>
           piercing:
             raw: 2
           powerSources:
@@ -1207,7 +1240,7 @@ items:
           results:
             hit: >-
               <p>You know if the target is
-              @L[Keyword:Illusionary]{illusionary}.</p>
+              @Identifier[keyword:illusionary]{illusionary}.</p>
           spell: true
           standard: true
           targets:
@@ -1224,7 +1257,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
         name: Simple Illusion Creation
         system:
@@ -1260,16 +1293,17 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
+            of this effect increases by 1 hour.</p>
           identifier: simple-illusion-creation
           interaction: manifest
           maneuver: active
           overview:
             base: >-
-              <p>You create a @L[Keyword:Illusionary]{minor illusion} of a
-              simple object or effect that fits within your hand. As soon as it
-              leaves your hand, the illusion fades.</p>
+              <p>You create a @Identifier[keyword:illusionary]{minor illusion}
+              of a simple object or effect that fits within your hand. As soon
+              as it leaves your hand, the illusion fades.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1318,7 +1352,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ycpaNkX8sIbCk6Lt
         _key: >-
@@ -1328,7 +1362,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1338,8 +1372,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1352,7 +1386,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1362,7 +1396,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -1377,7 +1412,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1387,7 +1422,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1412,24 +1447,24 @@ items:
         short:
           unit: self
     type: body
-  - _id: ULx3vmMLci2pEA9P
-    _key: '!actors.items!841ddaa7691dffc0.ULx3vmMLci2pEA9P'
+  - _id: pnyKhwZcbPAUN7vh
+    _key: '!actors.items!841ddaa7691dffc0.pnyKhwZcbPAUN7vh'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!841ddaa7691dffc0.ULx3vmMLci2pEA9P.NGCuRUaVtXnxAbRe
+          !actors.items.effects!841ddaa7691dffc0.pnyKhwZcbPAUN7vh.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1457,8 +1492,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic]]]
+            @Identifier[core:damage]{damage}.</p>
           identifier: arcane-ray
           interaction: attack
           maneuver: active
@@ -1471,10 +1508,10 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
+              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
               target.</p>
           spell: true
           standard: true
@@ -1484,13 +1521,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!841ddaa7691dffc0.ULx3vmMLci2pEA9P.aCWLNsvSFjEuLTyl
+          !actors.items.effects!841ddaa7691dffc0.pnyKhwZcbPAUN7vh.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:
@@ -1514,25 +1551,26 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You may use your @L[Property:Magelore]{magelore} items as
-              though they were your @L[Body:Hand]{hand}. This makes them
-              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
-              You are not @L[Core:Proficiency Bonus]{proficient} nor
-              @L[Core:Fluency Bonus]{fluent} with
-              @L[Category:Abilities]{abilities} you use through your
-              @L[Property:Magelore]{magelore} items.</p>
+              <p>You may use your @Identifier[property:magelore]{magelore} items
+              as though they were your @Identifier[body:hand]{hand}. This makes
+              them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not
+              @Identifier[core:proficiency-bonus]{proficient} nor
+              @Identifier[core:fluency-bonus]{fluent} with
+              @Pack[teriock.abilities]{abilities} you use through your
+              @Identifier[property:magelore]{magelore} items.</p>
             fluent: >-
-              <p>If you are @L[Core:Fluency Bonus]{fluent} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Fluency Bonus]{fluency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
+              @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
             proficient: >-
-              <p>If you are @L[Core:Proficiency Bonus]{proficient} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Proficiency Bonus]{proficiency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
+              an @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
           piercing:
             raw: 0
           powerSources:

@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/poison-item.webp
 name: Poison Item
 system:
@@ -46,7 +46,7 @@ system:
   duration:
     raw: '24'
     unit: hour
-  endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+  endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
   executionTime:
     base: a1
     slow:
@@ -62,19 +62,19 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}. The
-      @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-      @L[Core:Damage]{damage}. The way the item delivers this to its user
-      depends on the nature of the item. If it's food or drink, it's when the
-      item is consumed. The @L[Core:Game Master]{GM} may approve other cases as
-      well. The item only delivers the @L[Condition:Poisoned]{poison} effect
-      once.</p>
+      <p>Target makes a creature become @Identifier[status:poisoned]{poisoned}.
+      The @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+      @Identifier[core:damage]{damage}. The way the item delivers this to its
+      user depends on the nature of the item. If it's food or drink, it's when
+      the item is consumed. The @Identifier[core:game-master]{GM} may approve
+      other cases as well. The item only delivers the
+      @Identifier[status:poisoned]{poison} effect once.</p>
     fluent: >-
-      <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-      1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+      <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+      1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
     proficient: >-
-      <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage 1d8[toxic]]]
-      @L[Core:Damage]{damage}.</p>
+      <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+      1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
   piercing:
     raw: 0
   powerSources:

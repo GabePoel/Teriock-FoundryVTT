@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: awMHydLddRNhTAG3
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-devour.webp
         name: Improved Devour
         system:
@@ -53,13 +53,14 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 2. If their @L[Core:Size]{SIZE} was already 2 or less,
-              their body is completely consumed.</p>
+              <p>Target is @Identifier[status:dead]{dead},
+              @Identifier[status:ruined]{ruined}, and their
+              @Identifier[core:size]{SIZE} is reduced by 2. If their
+              @Identifier[core:size]{SIZE} was already 2 or less, their body is
+              completely consumed.</p>
           targets:
             - creature
         transfer: true
@@ -72,7 +73,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
         name: Improved Healing Factor
         system:
@@ -116,11 +117,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>At the start of each of your @L[Core:Turns]{turns}, you 
-              @L[Core:Healing]{heal} and regain that many @L[Core:Hit Points and
-              Mana Points]{HP}. This does <i>not</i> consume your
-              @L[Core:HP]{hit die}. If you take @L[Damage:Fire]{fire damage},
-              this effect doesn't apply on your next @L[Core:Turns]{turn}.</p>
+              <p>At the start of each of your @Identifier[core:turns]{turns},
+              you  @Identifier[core:healing]{heal} and regain that many
+              @Identifier[core:hit-points-and-mana-points]{HP}. This does
+              <i>not</i> consume your @Wiki[Core:HP]{hit die}. If you take
+              @Identifier[damage:fire]{fire damage}, this effect doesn't apply
+              on your next @Identifier[core:turns]{turn}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -139,7 +141,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-revitalizing-factor.webp
         name: Improved Revitalizing Factor
         system:
@@ -181,10 +183,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>At the start of each of your @L[Core:Turns]{turns}, you 
-              @L[Core:Revitalizing]{revitalize} and regain that many @L[Core:Hit
-              Points and Mana Points]{MP}. This does <i>not</i> consume your
-              @L[Core:MP]{mana die}.</p>
+              <p>At the start of each of your @Identifier[core:turns]{turns},
+              you  @Identifier[core:revitalizing]{revitalize} and regain that
+              many @Identifier[core:hit-points-and-mana-points]{MP}. This does
+              <i>not</i> consume your @Wiki[Core:MP]{mana die}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -203,7 +205,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/lumbering.webp
         name: Lumbering
         system:
@@ -247,7 +249,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
@@ -268,8 +270,13 @@ items:
               target: armament
               type: childChange
               value: '1'
+          class: knight
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -288,10 +295,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Supernatural Strength]{Supernatural
-              Strength}. In addition, you deal @L[Keyword:Boosted]{boosted} with
-              all melee @L[Category:Weapons]{weapon} @L[Category:Attack
-              abilities]{attacks} and they are @L[Keyword:AV0]{AV0} for you.</p>
+              <p>You gain
+              @Identifier[ability:supernatural-strength]{Supernatural Strength}.
+              In addition, you deal @Identifier[keyword:boosted]{boosted} with
+              all melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+              abilities]{attacks} and they are @Identifier[keyword:av0]{AV0} for
+              you.</p>
           piercing:
             raw: 0
           powerSources:
@@ -314,7 +323,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -358,7 +367,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -402,7 +411,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/battle-roar.webp
         name: Battle Roar
         system:
@@ -415,6 +424,7 @@ items:
               target: ability
               type: childChange
               value: '1'
+          class: berserker
           competence:
             raw: 0
           delivery: self
@@ -435,9 +445,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Battle Roar Aura]{Battle Roar Aura} and
-              @L[Keyword:Improved]{Improved} @L[Ability:Battle Cry]{Battle
-              Cry}.</p>
+              <p>You gain @Identifier[ability:battle-roar-aura]{Battle Roar
+              Aura} and @Identifier[keyword:improved]{Improved}
+              @Identifier[ability:battle-cry]{Battle Cry}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -456,13 +466,18 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
           _sup: w9XmG7nFYE1gHvdv
+          class: knight
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -481,11 +496,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-              @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-              @L[Keyword:Deboosted]{deboost} any melee
-              @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attack}
-              to make it @L[Keyword:AV0]{AV0}.</p>
+              <p>You gain @Identifier[ability:giant-strength]{Giant Strength}
+              and @Identifier[ability:shattering-grip]{Shattering Grip}. In
+              addition, you may @Identifier[keyword:deboosted]{deboost} any
+              melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+              abilities]{attack} to make it @Identifier[keyword:av0]{AV0}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -508,7 +523,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -534,10 +549,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
+              <p>You gain @Identifier[ability:improved-strength]{Improved
+              Strength} and @Identifier[ability:melee-damage-boost]{Melee Damage
+              Boost}. In addition, you are no longer suffer the consequences of
+              @Identifier[property:cumbersome]{cumbersome} items.</p>
           piercing:
             raw: 0
           powerSources:
@@ -562,7 +577,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -588,8 +603,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+              <p>You gain @Identifier[ability:beastly-strength]{Beastly
+              Strength} and
+              @Identifier[ability:improved-armor-piercing]{Improved Armor
+              Piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -614,7 +631,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -640,10 +657,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons
+              in one hand.</p><div class="note"><b>Note:</b>
+              @Identifier[property:armor-piercing]{Armor piercing} weapons must
+              still be wielded in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</div>
           piercing:
             raw: 0
           powerSources:
@@ -668,7 +686,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -694,8 +712,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
+              <p>Melee weapons you use are
+              @Identifier[property:armor-piercing]{armor piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -716,7 +734,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -744,13 +762,15 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
+              <p>You may spend an unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
+              <p>You may spend an additional unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage} again.</p>
           piercing:
             raw: 0
           powerSources:
@@ -762,9 +782,9 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
+            <p>You have hit a creature with a @Wiki[Category:Damaging
+            effects]{damaging} melee @Wiki[Category:Weapon delivery
+            abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
         transfer: true
         type: ability
       - _id: LQETlEhhiD0YItJX
@@ -775,7 +795,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -813,7 +833,7 @@ items:
           interaction: manifest
           maneuver: active
           overview:
-            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+            base: <p>Target is @Identifier[property:shattered]{shattered}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -833,7 +853,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -862,8 +882,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
-              @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
+              <p>You gain @Identifier[ability:battle-cry-aura]{Battle Cry Aura}
+              and @Identifier[ability:battle-cry-resistance]{Battle Cry
+              Resistance}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -884,7 +905,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
@@ -925,8 +946,8 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>You @L[Keyword:Resistance]{resist} being
-              @L[Condition:Frightened]{frightened}.</p>
+              <p>You @Identifier[keyword:resistance]{resist} being
+              @Identifier[status:frightened]{frightened}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -947,7 +968,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
@@ -1012,9 +1033,9 @@ items:
           effectTypes:
             - loud
           endCondition: >-
-            <p>At the start of each of the targets' @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the start of each of the targets'
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -1029,7 +1050,7 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>This ability cannot affect @L[Condition:Deaf]{deaf}
+              <p>This ability cannot affect @Identifier[status:deaf]{deaf}
               creatures.</p>
           piercing:
             raw: 0
@@ -1039,7 +1060,7 @@ items:
             raw: '10'
             unit: ft
           results:
-            fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+            fail: <p>Targets become @Identifier[status:frightened]{frightened}.</p>
           skill: true
           standard: true
           targets:
@@ -1054,7 +1075,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
         name: Battle Roar Aura
         system:
@@ -1118,9 +1139,9 @@ items:
           effectTypes:
             - loud
           endCondition: >-
-            <p>At the start of each of the targets' @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the start of each of the targets'
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -1135,7 +1156,7 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>This ability cannot affect @L[Condition:Deaf]{deaf}
+              <p>This ability cannot affect @Identifier[status:deaf]{deaf}
               creatures.</p>
           piercing:
             raw: 0
@@ -1145,7 +1166,7 @@ items:
             raw: '150'
             unit: ft
           results:
-            fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+            fail: <p>Targets become @Identifier[status:frightened]{frightened}.</p>
           targets:
             - creature
         transfer: true
@@ -1154,19 +1175,17 @@ items:
     img: systems/teriock/src/icons/creatures/wyrm.webp
     name: Wyrm
     system:
-      adult: 0
       appearance: >-
-        <p>Like a smaller, longish @L[Category:Dragons]{dragon} without
+        <p>Like a smaller, longish @Wiki[Category:Dragons]{dragon} without
         wings.</p>
       br: 21
       competence:
         raw: 1
       description: >-
-        <p>[[lookup name]]s are the @L[Creature:Sea Serpent]{sea serpents} of
-        the land.</p>
+        <p>Wyrms are the @Identifier[creature:sea-serpent]{sea serpents} of the
+        land.</p>
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
       identifier: wyrm
-      lifespan: 0
       size:
         enabled: true
         max: 15
@@ -1193,7 +1212,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: vgYp2OlY2QgragN9
         _key: >-
@@ -1203,7 +1222,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1213,7 +1232,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -1228,7 +1248,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1238,7 +1258,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -1273,7 +1293,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: EhvdlFzRoc0PdUuV
         _key: >-
@@ -1283,7 +1303,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/dragon-scale.webp
         name: Dragon Scale
         system:
@@ -1302,8 +1322,9 @@ items:
           competence:
             raw: 0
           description: >-
-            <p>@L[Category:Armor]{Armor} that's <b>[[lookup name style=lc]]</b>
-            has its @L[Core:Armor Class]{AV} increased by 2.</p>
+            <p>@Wiki[Category:Armor]{Armor} that's <b>[[lookup name
+            style=lc]]</b> has its @Identifier[core:armor-class]{AV} increased
+            by 2.</p>
           form: intrinsic
           identifier: dragon-scale
         transfer: true
@@ -1337,7 +1358,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1347,7 +1368,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1357,8 +1378,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1371,7 +1392,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1381,7 +1402,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1413,7 +1434,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: NKoDQFexITllA4Nt
         _key: >-
@@ -1423,7 +1444,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1433,7 +1454,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -1448,7 +1470,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1458,7 +1480,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -1471,7 +1493,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -1490,8 +1512,8 @@ items:
           competence:
             raw: 0
           description: >-
-            <p>An item with this property is always @L[Keyword:Armor
-            Voiding]{AV0}.</p>
+            <p>An item with this property is always
+            @Identifier[keyword:armor-voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
         transfer: true

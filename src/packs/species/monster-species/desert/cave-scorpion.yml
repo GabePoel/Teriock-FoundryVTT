@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: VBW7wUxAbUrDlrKX
     _key: '!items.effects!b40d7cb1055c8351.VBW7wUxAbUrDlrKX'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/clumsy.webp
     name: Clumsy
     system:
@@ -57,7 +57,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -83,10 +83,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
+          <p>You gain @Identifier[ability:improved-strength]{Improved Strength}
+          and @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In
+          addition, you are no longer suffer the consequences of
+          @Identifier[property:cumbersome]{cumbersome} items.</p>
       piercing:
         raw: 0
       powerSources:
@@ -110,7 +110,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/low-intelligence.webp
     name: Low Intelligence
     system:
@@ -154,7 +154,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -198,7 +198,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -242,7 +242,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/paralysis-poison-strike.webp
     name: Paralysis Poison Strike
     system:
@@ -274,7 +274,7 @@ effects:
       form: normal
       identifier: paralysis-poison-strike
       interaction: attack
-      limitation: <p>@L[Category:Stingers]{Stingers} only.</p>
+      limitation: <p>@Wiki[Category:Stingers]{Stingers} only.</p>
       maneuver: active
       mundane: false
       piercing:
@@ -285,9 +285,9 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>Target is @L[Condition:Poisoned]{poisoned}. The
-          @L[Condition:Poisoned]{poison} causes the target to become
-          @L[Condition:Paralyzed]{paralyzed}.</p>
+          <p>Target is @Identifier[status:poisoned]{poisoned}. The
+          @Identifier[status:poisoned]{poison} causes the target to become
+          @Identifier[status:paralyzed]{paralyzed}.</p>
       targets:
         - creature
     transfer: true
@@ -299,7 +299,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
@@ -356,8 +356,9 @@ effects:
         raw: '0'
         unit: unlimited
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turns]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: a1
         slow:
@@ -369,7 +370,7 @@ effects:
       form: normal
       identifier: snare
       interaction: attack
-      limitation: <p>@L[Category:Pincers]{Pincers} only.</p>
+      limitation: <p>@Wiki[Category:Pincers]{Pincers} only.</p>
       maneuver: active
       mundane: false
       piercing:
@@ -380,7 +381,7 @@ effects:
         unit: contact
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
       skill: true
       standard: true
       targets:
@@ -394,7 +395,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -423,12 +424,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+          <p>You may spend an unused @Identifier[core:active-maneuvers]{action}
+          to @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
+          <p>You may spend an additional unused
+          @Identifier[core:active-maneuvers]{action} to
+          @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage} again.</p>
       piercing:
         raw: 0
       powerSources:
@@ -440,9 +443,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
+        <p>You have hit a creature with a @Wiki[Category:Damaging
+        effects]{damaging} melee @Wiki[Category:Weapon delivery
+        abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
     transfer: true
     type: ability
   - _id: uWiZIoGJoaE5J2rW
@@ -452,7 +455,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -479,8 +482,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength}
+          and @Identifier[ability:improved-armor-piercing]{Improved Armor
+          Piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -504,7 +508,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -531,10 +535,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><div class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</div>
       piercing:
         raw: 0
       powerSources:
@@ -558,7 +563,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -585,8 +590,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
+          <p>Melee weapons you use are
+          @Identifier[property:armor-piercing]{armor piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -604,8 +609,8 @@ img: systems/teriock/src/icons/creatures/cave-scorpion.webp
 name: Cave Scorpion
 system:
   appearance: >-
-    <p>Giant brown and grey @L[Creature:Scorpion]{scorpions} with dark speckled
-    backs.</p>
+    <p>Giant brown and grey @Identifier[creature:scorpion]{scorpions} with dark
+    speckled backs.</p>
   br: 16
   competence:
     raw: 1

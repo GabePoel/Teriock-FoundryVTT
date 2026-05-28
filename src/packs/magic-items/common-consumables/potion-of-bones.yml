@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/drink-potion-of-bones.webp
     name: Drink Potion of Bones
     system:
@@ -48,7 +48,13 @@ effects:
           type: transformation
       competence:
         raw: 0
-      consumeSource: true
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Using this ability consumes the
+              @Pack[teriock.equipment]{equipment} that provides it.</p>
+            type: description
       delivery: item
       duration:
         raw: '1'
@@ -67,8 +73,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You appear as a @L[Creature:Skeleton]{skeleton}. This is a
-          @L[Keyword:Illusionary]{minor illusion}.</p>
+          <p>You appear as a @Identifier[creature:skeleton]{skeleton}. This is a
+          @Identifier[keyword:illusionary]{minor illusion}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -77,9 +83,9 @@ effects:
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
+        @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+        @Identifier[core:maneuvers]{maneuver} and
+        @Identifier[core:abilities]{execution time} for the ability.</p>
       targets:
         - self
     transfer: true
@@ -91,7 +97,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -101,13 +107,13 @@ effects:
         raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
+        becomes @Identifier[property:shattered]{shattered} if it is used to
+        @Identifier[core:block-interaction]{block} or if it is the
+        @Wiki[Category:Item target abilities]{target of an ability} that deals
+        it @Wiki[Category:Damaging effects]{damage}. If it would become
+        @Identifier[property:shattered]{shattered} through some other means, it
+        is instead @Identifier[property:destroyed]{destroyed}.</p>
+      form: intrinsic
       identifier: fragile
       mundane: true
     transfer: true
@@ -119,7 +125,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -129,9 +135,9 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
+        steal through @Pack[teriock.abilities]{abilities} like
+        @Identifier[ability:search]{Search}.</p>
+      form: intrinsic
       identifier: searchable
     transfer: true
     type: property
@@ -142,7 +148,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -152,7 +158,7 @@ effects:
         raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
+        in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
       mundane: true
@@ -165,7 +171,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     flags:
       teriock:
         dontConsume: false
@@ -224,7 +230,13 @@ effects:
           type: transformation
       competence:
         raw: 0
-      consumeSource: true
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Using this ability consumes the
+              @Pack[teriock.equipment]{equipment} that provides it.</p>
+            type: description
       delivery: item
       duration:
         raw: '1'
@@ -233,9 +245,9 @@ effects:
         - illusion
         - mental
       endCondition: >-
-        <p>The @L[Keyword:Illusionary]{illusion} is successfully
-        @L[Ability:Disbelieve]{disbelieved}. The target only needs to succeed
-        once, not once for each other target.</p>
+        <p>The @Identifier[keyword:illusionary]{illusion} is successfully
+        @Identifier[ability:disbelieve]{disbelieved}. The target only needs to
+        succeed once, not once for each other target.</p>
       executionTime: a1
       expansion:
         featSaveAttribute: int
@@ -258,15 +270,16 @@ effects:
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
+        @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+        @Identifier[core:maneuvers]{maneuver} and
+        @Identifier[core:abilities]{execution time} for the ability.</p>
       results:
         fail: >-
-          <p>Target becomes @L[Condition:Frightened]{frightened} of you and
-          every other target. You all appear as @L[Creature:Skeleton]{skeletons}
-          to each other instead of your true forms. This is a
-          @L[Keyword:Illusionary]{minor illusion}.</p>
+          <p>Target becomes @Identifier[status:frightened]{frightened} of you
+          and every other target. You all appear as
+          @Identifier[creature:skeleton]{skeletons} to each other instead of
+          your true forms. This is a @Identifier[keyword:illusionary]{minor
+          illusion}.</p>
       targets:
         - area
         - creature

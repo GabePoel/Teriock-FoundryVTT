@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/pour-instant-rope-on-ground.webp
 name: Pour Instant Rope on Ground
 system:
@@ -20,7 +20,13 @@ system:
       type: addDocuments
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '10'
@@ -40,8 +46,8 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>Create a 30 foot @L[Category:Equipment]{rope} that lasts for the
-      @L[Core:Duration]{duration} of this effect.</p>
+      <p>Create a 30 foot @Pack[teriock.equipment]{rope} that lasts for the
+      @Identifier[core:duration]{duration} of this effect.</p>
   piercing:
     raw: 0
   powerSources:
@@ -50,9 +56,9 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - area
 transfer: true

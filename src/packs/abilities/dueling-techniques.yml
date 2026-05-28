@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/dueling-techniques.webp
 name: Dueling Techniques
 system:
@@ -15,6 +15,9 @@ system:
     components:
       somatic:
         type: tag
+    primary:
+      mp:
+        formula: '1'
   delivery: self
   duration:
     conditions:
@@ -22,7 +25,7 @@ system:
         - dueling
     raw: '0'
     unit: unlimited
-  endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
+  endCondition: <p>You are no longer @Identifier[status:dueling]{dueling}.</p>
   executionTime:
     base: a1
     slow:
@@ -38,10 +41,12 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using} of your
-      choice becomes @L[Property:Armor Voiding]{AV0} against creatures you are
-      @L[Condition:Dueling]{dueling} and you gain @L[Keyword:Limited]{Limited}
-      @L[Ability:Chi Strike]{Chi Strike}.</p>
+      <p>A @Wiki[Category:Weapons]{weapon} you are
+      @Identifier[keyword:using]{using} of your choice becomes
+      @Identifier[property:armor-voiding]{AV0} against creatures you are
+      @Identifier[status:dueling]{dueling} and you gain
+      @Identifier[keyword:limited]{Limited} @Identifier[ability:chi-strike]{Chi
+      Strike}.</p>
   piercing:
     raw: 0
   powerSources:
@@ -49,8 +54,8 @@ system:
   range:
     unit: self
   requirements: >-
-    <p>You must be @L[Condition:Dueling]{dueling} and wielding the targeted
-    weapon.</p>
+    <p>You must be @Identifier[status:dueling]{dueling} and wielding the
+    targeted weapon.</p>
   skill: true
   standard: true
   targets:

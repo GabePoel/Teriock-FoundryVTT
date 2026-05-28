@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ES0wZ6Bf5brHsqAe
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -66,17 +66,18 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Target is @L[Condition:Alive]{alive} (but still
-              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
-              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
-              Points]{HP} is halved (minimum of 1) until it completes a
-              @L[Core:Short Rest]{short rest}. This does not count as a
-              @L[Category:Revival effects]{revival effect}.</p>
-            fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+              <p>Target is @Identifier[status:alive]{alive} (but still
+              @Wiki[Category:Undead creatures]{undead}) at 1
+              @Identifier[core:hit-points-and-mana-points]{HP}, although its
+              maximum @Identifier[core:hit-points-and-mana-points]{HP} is halved
+              (minimum of 1) until it completes a
+              @Identifier[core:short-rest]{short rest}. This does not count as a
+              @Wiki[Category:Revival effects]{revival effect}.</p>
+            fluent: <p>Target's @Wiki[Core:HP]{HP} is no longer halved.</p>
             proficient: >-
-              <p>Target has all @L[Core:HP]{HP} restored, but its maximum
-              @L[Core:HP]{HP} is still halved. This does not count as a
-              @L[Category:Healing effects]{healing effect}.</p>
+              <p>Target has all @Wiki[Core:HP]{HP} restored, but its maximum
+              @Wiki[Core:HP]{HP} is still halved. This does not count as a
+              @Wiki[Category:Healing effects]{healing effect}.</p>
           piercing:
             raw: 2
           powerSources:
@@ -84,8 +85,8 @@ items:
           range:
             unit: contact
           requirements: >-
-            <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-            creatures]{undead}.</p>
+            <p>Target is @Identifier[status:dead]{dead} and
+            @Wiki[Category:Undead creatures]{undead}.</p>
           spell: true
           standard: true
           targets:
@@ -100,7 +101,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/constructed-body.webp
         name: Constructed Body
         system:
@@ -130,34 +131,38 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You count as an @L[Category:Equipment]{item} for the purposes
-              of certain @L[Category:Item target abilities]{abilities that
-              target them}. The relevant @L[Category:Item target
+              <p>You count as an @Pack[teriock.equipment]{item} for the purposes
+              of certain @Wiki[Category:Item target abilities]{abilities that
+              target them}. The relevant @Wiki[Category:Item target
               abilities]{abilities} are those would apply one of the following
-              @L[Category:Properties]{properties} to a piece of
-              @L[Category:Equipment]{equipment}. You take the effect listed
-              below instead. If the @L[Category:Item target abilities]{ability}
-              was @L[Category:Magically powered abilities]{magically powered},
-              then any @L[Core:Damage]{damage} dealt is @L[Damage:Magic]{magic}
-              in addition to its other @L[Category:Damage types]{types}. If the
-              @L[Category:Item target abilities]{ability} was delivered by a
-              @L[Category:Weapon delivery abilities]{weapon}, then the
-              @L[Core:Damage]{damage} has all the @L[Category:Damage
-              types]{damage types} that @L[Category:Weapons]{weapon} would deal
-              in addition to its other @L[Category:Damage
-              types]{types}.</p><ul><li>@L[Property:Destroyed]{Destroyed}: Take
-              [[/damage 1d10]]
-              @L[Core:Damage]{damage}.</li><li>@L[Property:Shattered]{Shattered}:
-              Take a @L[Damage:Hack]{hack} of your
-              choice.</li><li>@L[Property:Warded]{Warded}: The next
-              @L[Category:Self delivery abilities]{self delivery ability} you
-              use is @L[Keyword:Warded]{warded}.</li></ul><p>For any other
-              passive @L[Category:Properties]{properties} that the
-              @L[Category:Equipment]{equipment} may gain, your @L[Category:Body
-              parts]{body parts} gain those @L[Category:Properties]{properties}.
-              Additionally, any @L[Category:AV granting abilities]{natural AV}
-              you may have counts as @L[Category:Equipment]{armor} for these
-              purposes.</p>
+              @Pack[teriock.properties]{properties} to a piece of
+              @Pack[teriock.equipment]{equipment}. You take the effect listed
+              below instead. If the @Wiki[Category:Item target
+              abilities]{ability} was @Wiki[Category:Magically powered
+              abilities]{magically powered}, then any
+              @Identifier[core:damage]{damage} dealt is
+              @Identifier[damage:magic]{magic} in addition to its other
+              @Wiki[Category:Damage types]{types}. If the @Wiki[Category:Item
+              target abilities]{ability} was delivered by a
+              @Wiki[Category:Weapon delivery abilities]{weapon}, then the
+              @Identifier[core:damage]{damage} has all the @Wiki[Category:Damage
+              types]{damage types} that @Wiki[Category:Weapons]{weapon} would
+              deal in addition to its other @Wiki[Category:Damage
+              types]{types}.</p><ul><li>@Identifier[property:destroyed]{Destroyed}:
+              Take [[/damage 1d10]] @Identifier[core:damage]{damage}.</li>
+
+              <li>@Identifier[property:shattered]{Shattered}: Take a
+              @Identifier[damage:hack]{hack} of your choice.</li>
+
+              <li>@Identifier[property:warded]{Warded}: The next
+              @Wiki[Category:Self delivery abilities]{self delivery ability} you
+              use is @Identifier[keyword:warded]{warded}.</li></ul><p>For any
+              other passive @Pack[teriock.properties]{properties} that the
+              @Pack[teriock.equipment]{equipment} may gain, your
+              @Wiki[Category:Body parts]{body parts} gain those
+              @Pack[teriock.properties]{properties}. Additionally, any
+              @Wiki[Category:AV granting abilities]{natural AV} you may have
+              counts as @Pack[teriock.equipment]{armor} for these purposes.</p>
           piercing:
             raw: 0
           powerSources:
@@ -176,7 +181,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/death-rattle.webp
         name: Death Rattle
         system:
@@ -219,11 +224,11 @@ items:
           identifier: death-rattle
           interaction: manifest
           invoked: true
-          limitation: <p>@L[Ability:Animate Dead]{Animate Dead} only.</p>
+          limitation: <p>@Identifier[ability:animate-dead]{Animate Dead} only.</p>
           maneuver: reactive
           overview:
             base: >-
-              <p>You execute one @L[Category:Single action abilities]{single
+              <p>You execute one @Wiki[Category:Single action abilities]{single
               action ability} you have.</p>
           piercing:
             raw: 0
@@ -236,7 +241,7 @@ items:
           standard: true
           targets:
             - self
-          trigger: <p>You @L[Condition:Dead]{die}.</p>
+          trigger: <p>You @Identifier[status:dead]{die}.</p>
         transfer: true
         type: ability
       - _id: YsKUz73XcQGVQ1p5
@@ -247,7 +252,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -273,15 +278,17 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
-              of @L[Category:Abilities]{abilities}, @L[Category:Damage
-              types]{damage}, and other @L[Category:Effects]{effects}. You also
-              gain @L[Ability:Ethereal Senses]{Ethereal Senses},
-              @L[Ability:Healing Sensitivity]{Healing Sensitivity},
-              @L[Ability:Magical Durability]{Magical Durability},
-              @L[Ability:Mana Drain Touch]{Mana Drain Touch}, @L[Ability:Undead
-              Mind]{Undead Mind}, and @L[Ability:Undying Durability]{Undying
-              Durability}.</p>
+              <p>You count as being @Identifier[keyword:undead]{undead} for the
+              purposes of @Pack[teriock.abilities]{abilities},
+              @Wiki[Category:Damage types]{damage}, and other
+              @Wiki[Category:Effects]{effects}. You also gain
+              @Identifier[ability:ethereal-senses]{Ethereal Senses},
+              @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
+              @Identifier[ability:magical-durability]{Magical Durability},
+              @Identifier[ability:mana-drain-touch]{Mana Drain Touch},
+              @Identifier[ability:undead-mind]{Undead Mind}, and
+              @Identifier[ability:undying-durability]{Undying
+              Durability}.</p><div class="expandable-table"></div>
           piercing:
             raw: 0
           powerSources:
@@ -300,7 +307,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -344,7 +351,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -388,7 +395,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -432,7 +439,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -476,7 +483,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -520,7 +527,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -547,13 +554,15 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>@L[Core:Healing]{Healing} can be used to
-              @L[Core:Damage]{damage} you. If the creature providing you
-              @L[Core:Healing]{healing} specifies that they are doing so "for
-              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
-              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
-              damage} instead of the normal @L[Core:Healing]{healing} effect.
-              This does not consume any of your @L[Core:HP]{hit dice}.</p>
+              <p>@Identifier[core:healing]{Healing} can be used to
+              @Identifier[core:damage]{damage} you. If the creature providing
+              you @Identifier[core:healing]{healing} specifies that they are
+              doing so "for damage" then you roll your <i>largest</i>
+              @Wiki[Core:HP]{hit die} and take that much
+              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
+              damage} instead of the normal @Identifier[core:healing]{healing}
+              effect. This does not consume any of your @Wiki[Core:HP]{hit
+              dice}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -572,7 +581,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -606,8 +615,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Identifier[damage:mundane]{mundane}
+              @Identifier[core:damage]{damage}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -626,7 +636,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -668,10 +678,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened} and
-              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
-              maintained even if @L[Condition:Transformed]{transformed}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:frightened]{frightened} and
+              @Identifier[status:charmed]{charmed}. The effects of [[lookup
+              name]] are maintained even if
+              @Identifier[status:transformed]{transformed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -690,7 +701,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -730,7 +741,8 @@ items:
           overview:
             base: >-
               <p>You can see and hear spirits and
-              @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+              @Identifier[status:ethereal]{Ethereal} creatures within 120
+              feet.</p>
           piercing:
             raw: 0
           powerSources:
@@ -751,7 +763,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -796,19 +808,19 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize} twice. This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
+              <p>Deal [[/drain 2d8[mana]]] @Wiki[Category:Drain types]{drain} to
+              the target. If this @Identifier[status:dead]{kills} the target,
+              you @Identifier[core:revitalizing]{revitalize} twice. This
+              @Identifier[core:revitalizing]{revitalization} is the only part of
+              this that is a @Wiki[Category:Revitalization
+              effects]{revitalization effect}.</p>
             hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize}.  This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
+              <p>Deal [[/drain 1d8[mana]]] @Wiki[Category:Drain types]{drain} to
+              the target. If this @Identifier[status:dead]{kills} the target,
+              you @Identifier[core:revitalizing]{revitalize}.  This
+              @Identifier[core:revitalizing]{revitalization} is the only part of
+              this that is a @Wiki[Category:Revitalization
+              effects]{revitalization effect}.</p>
           targets:
             - creature
         transfer: true
@@ -821,7 +833,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -869,15 +881,15 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Condition:Unconscious]{unconsciousness},
-              @L[Condition:Suffocating]{suffocating}, and being
-              @L[Condition:Poisoned]{poisoned}. You do not
-              @L[Condition:Down]{drop} due to being at negative @L[Core:Hit
-              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
-              when you reach half your maximum @L[Core:Hit Points and Mana
-              Points]{HP} below zero. You also do not have to
-              @L[Core:Drowning]{breathe}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Identifier[status:unconscious]{unconsciousness},
+              @Identifier[status:suffocating]{suffocating}, and being
+              @Identifier[status:poisoned]{poisoned}. You do not
+              @Identifier[status:down]{drop} due to being at negative
+              @Identifier[core:hit-points-and-mana-points]{HP}. You still
+              @Identifier[status:dead]{die} when you reach half your maximum
+              @Identifier[core:hit-points-and-mana-points]{HP} below zero. You
+              also do not have to @Identifier[core:drowning]{breathe}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -892,7 +904,6 @@ items:
     img: systems/teriock/src/icons/creatures/lesser-cemerai.webp
     name: Lesser Cemerai
     system:
-      adult: 0
       appearance: >-
         <p>Complete suits of armor with full helm, walking around, with empty
         black voids where a face should be.</p>
@@ -902,11 +913,12 @@ items:
       description: >-
         <p>Usually used as military commanders or guardians, these dangerous
         creatures are believed to be a form of haunt or haunted armor that is
-        created when a @L[Class:Duelist]{Duelist} is killed in a particular
-        way.</p>
+        created when a @Identifier[class:duelist]{Duelist} is killed in a
+        particular way.</p>
       identifier: lesser-cemerai
-      innateRanks: <p>Innately @L[Category:Classes]{rank} 1 @L[Class:Duelist]{Duelist}.</p>
-      lifespan: 0
+      innateRanks: >-
+        <p>Innately @Wiki[Category:Classes]{rank} 1
+        @Identifier[class:duelist]{Duelist}.</p>
       size:
         enabled: true
         value: 3
@@ -931,7 +943,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: Uz1hvRPju7UkGtEK
         _key: >-
@@ -941,7 +953,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/defy-death.webp
         name: Defy Death
         system:
@@ -974,7 +986,7 @@ items:
           interaction: manifest
           maneuver: reactive
           overview:
-            base: <p>You begin @L[Condition:Defying Death]{defying death}.</p>
+            base: <p>You begin @Identifier[status:defying-death]{defying death}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -986,7 +998,7 @@ items:
           sustained: true
           targets:
             - self
-          trigger: <p>You would @L[Condition:Down]{drop}.</p>
+          trigger: <p>You would @Identifier[status:down]{drop}.</p>
         transfer: true
         type: ability
       - _id: A4WZCzLVp8Jq9ykR
@@ -997,7 +1009,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
@@ -1048,21 +1060,22 @@ items:
           overview:
             base: >-
               <p>You challenge the target to advance and fight you. They may
-              immediately @L[Ability:Move]{Move} towards you as a
-              @L[Core:Reactive Maneuvers]{free reaction} to this and begin
-              @L[Condition:Dueling]{dueling} with you. If they choose not to or
-              are unable to do so, then they are considered to have "forfeited"
-              the [[lookup name style=lc]] (but are not considered to have
-              "lost" it). Any creature that forfeits this [[lookup name
-              style=lc]] becomes @L[Condition:Lighted]{lighted} to each of their
-              would-be opponents in the [[lookup name style=lc]] until the end
-              of that opponent's next @L[Core:Turns]{turn}.</p>
+              immediately @Identifier[ability:move]{Move} towards you as a
+              @Identifier[core:reactive-maneuvers]{free reaction} to this and
+              begin @Identifier[status:dueling]{dueling} with you. If they
+              choose not to or are unable to do so, then they are considered to
+              have "forfeited" the [[lookup name style=lc]] (but are not
+              considered to have "lost" it). Any creature that forfeits this
+              [[lookup name style=lc]] becomes
+              @Identifier[status:lighted]{lighted} to each of their would-be
+              opponents in the [[lookup name style=lc]] until the end of that
+              opponent's next @Identifier[core:turns]{turn}.</p>
             proficient: >-
-              <p>You may also @L[Ability:Move]{Move} or make a
-              @L[Category:Single action abilities]{single action}
-              @L[Category:Duelist class abilities]{Duelist ability} as a
-              @L[Core:Reactive Maneuvers]{free reaction} to the target's
-              decision and subsequent movement.</p>
+              <p>You may also @Identifier[ability:move]{Move} or make a
+              @Wiki[Category:Single action abilities]{single action}
+              @Wiki[Category:Duelist class abilities]{Duelist ability} as a
+              @Identifier[core:reactive-maneuvers]{free reaction} to the
+              target's decision and subsequent movement.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1071,8 +1084,8 @@ items:
             raw: '30'
             unit: ft
           requirements: >-
-            <p>You are not @L[Condition:Dueling]{dueling} and can only use this
-            on an opponent.</p>
+            <p>You are not @Identifier[status:dueling]{dueling} and can only use
+            this on an opponent.</p>
           skill: true
           standard: true
           targets:
@@ -1087,7 +1100,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/resolve-conflict.webp
         name: Resolve Conflict
         system:
@@ -1104,6 +1117,10 @@ items:
           class: duelist
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -1122,9 +1139,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are an @L[Keyword:Expertise]{expert}
-              @L[Tradecraft:Peacekeeper]{peacekeeper}. In addition, you gain
-              @L[Ability:Detect Lie]{Detect Lie}.</p>
+              <p>You are an @Identifier[keyword:expertise]{expert}
+              @Identifier[tradecraft:peacekeeper]{peacekeeper}. In addition, you
+              gain @Identifier[ability:detect-lie]{Detect Lie}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1145,7 +1162,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/detect-lie.webp
         name: Detect Lie
         system:
@@ -1190,8 +1207,8 @@ items:
             save: >-
               <p>You detect that the statement is true, regardless of what the
               target actually believes. This also applies if [[lookup name]] is
-              @L[Keyword:Resistance]{resisted} or @L[Core:Fizzles]{fizzles} for
-              some other reason.</p>
+              @Identifier[keyword:resistance]{resisted} or
+              @Identifier[core:fizzles]{fizzles} for some other reason.</p>
           skill: true
           standard: true
           targets:
@@ -1238,7 +1255,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -1248,7 +1265,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1258,8 +1275,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1272,7 +1289,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1282,7 +1299,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -1297,7 +1315,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1307,7 +1325,7 @@ items:
             raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
+            as while using @Identifier[ability:interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
           powerSources:
@@ -1322,7 +1340,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1332,7 +1350,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1364,7 +1382,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     folder: 0b00935e53673daa
     img: systems/teriock/src/icons/equipment/half-plate.webp
     name: Half Plate
@@ -1403,7 +1421,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1413,7 +1431,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1423,8 +1441,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1437,7 +1455,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1447,7 +1465,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1472,24 +1490,24 @@ items:
         short:
           unit: self
     type: body
-  - _id: uBJcl6RDDbMbB7j2
-    _key: '!actors.items!cc923cf5e6bd82b1.uBJcl6RDDbMbB7j2'
+  - _id: pGJ36KVgTVgWMqew
+    _key: '!actors.items!cc923cf5e6bd82b1.pGJ36KVgTVgWMqew'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!cc923cf5e6bd82b1.uBJcl6RDDbMbB7j2.8e9roKoeCSmTjbbo
+          !actors.items.effects!cc923cf5e6bd82b1.pGJ36KVgTVgWMqew.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/warrior-techniques.webp
         name: Warrior Techniques
         system:
@@ -1513,11 +1531,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>For every 2 ranks you train in @L[Category:Warrior
-              classes]{warrior classes}, you gain a @L[Category:Warrior
+              <p>For every 2 ranks you train in @Wiki[Category:Warrior
+              classes]{warrior classes}, you gain a @Wiki[Category:Warrior
               guildmaster abilities]{warrior guildmaster ability} of your
-              choice. You also gain @L[Keyword:Limited]{Limited}
-              @L[Ability:Defensive Martial Arts]{Defensive Martial Arts}.</p>
+              choice. You also gain @Identifier[keyword:limited]{Limited}
+              @Identifier[ability:defensive-martial-arts]{Defensive Martial
+              Arts}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1532,13 +1551,13 @@ items:
         type: ability
       - _id: aOvOlScH5bn7jX7m
         _key: >-
-          !actors.items.effects!cc923cf5e6bd82b1.uBJcl6RDDbMbB7j2.aOvOlScH5bn7jX7m
+          !actors.items.effects!cc923cf5e6bd82b1.pGJ36KVgTVgWMqew.aOvOlScH5bn7jX7m
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:
@@ -1595,16 +1614,17 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Your @L[Body:Hand]{hands} and other @L[Category:Handy
-              equipment]{handy body parts} count as
-              @L[Category:Shields]{shields} for the purposes of
-              @L[Category:Weapon target abilities]{abilities that target them}
-              (although they cannot be @L[Property:Shattered]{shattered} or
-              @L[Property:Destroyed]{destroyed}). You may @L[Core:Block
-              Interaction]{block} with them and their @L[Core:Block Value]{BV}
-              is +1.</p>
-            fluent: <p>The @L[Core:Block Interaction]{BV} is now +3.</p>
-            proficient: <p>The @L[Core:Block Interaction]{BV} is now +2.</p>
+              <p>Your @Identifier[body:hand]{hands} and other
+              @Wiki[Category:Handy equipment]{handy body parts} count as
+              @Wiki[Category:Shields]{shields} for the purposes of
+              @Wiki[Category:Weapon target abilities]{abilities that target
+              them} (although they cannot be
+              @Identifier[property:shattered]{shattered} or
+              @Identifier[property:destroyed]{destroyed}). You may
+              @Identifier[core:block-interaction]{block} with them and their
+              @Wiki[Core:Block Value]{BV} is +1.</p>
+            fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+            proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
           piercing:
             raw: 0
           powerSources:

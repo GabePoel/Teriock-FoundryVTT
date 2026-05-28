@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/gladiator-skills.webp
     name: Gladiator Skills
     system:
@@ -53,15 +53,16 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>While @L[Condition:Dueling]{dueling} or in a staged battle
+          <p>While @Identifier[status:dueling]{dueling} or in a staged battle
           (gladiator fights, ceremonial battles, etc.) you gain an extra
-          @L[Core:Hit Die]{warrior hit die} (+7 HP, [[/roll 1d12]]).
-          Additionally, any allies @L[Condition:Dueling]{dueled} with you or
-          with you in a staged fight may pay 1 @L[Core:Hit Points and Mana
-          Points]{MP} at the beginning of the fight to gain
-          @L[Ability:Hack]{Hack} for that fight. @L[Category:Gladiator fighting
-          style weapons]{Weapons you use with the gladiator fighting style} are
-          @L[Property:Armor Voiding]{AV0} as well.</p>
+          @Wiki[Core:Hit Die]{warrior hit die} (+7 HP, [[/roll 1d12]]).
+          Additionally, any allies @Identifier[status:dueling]{dueled} with you
+          or with you in a staged fight may pay 1
+          @Identifier[core:hit-points-and-mana-points]{MP} at the beginning of
+          the fight to gain @Identifier[ability:hack]{Hack} for that fight.
+          @Wiki[Category:Gladiator fighting style weapons]{Weapons you use with
+          the gladiator fighting style} are
+          @Identifier[property:armor-voiding]{AV0} as well.</p>
       piercing:
         raw: 0
       powerSources:
@@ -81,7 +82,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/hack.webp
     name: Hack
     system:
@@ -125,11 +126,11 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms or
-          legs, depending on what you chose.</p>
+          <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either
+          arms or legs, depending on what you chose.</p>
         hit: >-
-          <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an arm or
-          leg, depending on what you chose.</p>
+          <p>The target takes 1 @Identifier[damage:hack]{hack damage} on either
+          an arm or leg, depending on what you chose.</p>
       skill: true
       standard: true
       targets:
@@ -144,7 +145,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/threat.webp
     name: Threat
     system:
@@ -201,8 +202,9 @@ effects:
         raw: '1'
         unit: minute
       endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turns]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the start of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: a1
         slow:
@@ -224,7 +226,9 @@ effects:
         unit: contact
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Targeted creature is @L[Condition:Frightened]{frightened}.</p>
+        hit: >-
+          <p>Targeted creature is
+          @Identifier[status:frightened]{frightened}.</p>
       skill: true
       standard: true
       targets:

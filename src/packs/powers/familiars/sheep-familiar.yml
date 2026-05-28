@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: o2tcmLVNxf3uZeQ4
     _key: '!items.effects!a93bdbae091d56c7.o2tcmLVNxf3uZeQ4'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
     name: Dispel Magic
     system:
@@ -63,27 +63,28 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 10 feet.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the range of [[lookup name]] increases by 10 feet.</p>
       identifier: dispel-magic
       interaction: manifest
       invoked: true
-      limitation: <p>@L[Category:Storm element spells]{Storm element spells} only.</p>
+      limitation: <p>@Wiki[Category:Storm element spells]{Storm element spells} only.</p>
       maneuver: reactive
       overview:
         base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}.</p>
+          <p>Target @Wiki[Category:Conjured spells]{spell}
+          @Identifier[core:fizzles]{fizzles}.</p>
         fluent: >-
-          <p>You may now use [[lookup name]] @L[Core:Fluency Bonus]{F}
-          additional times as a @L[Category:Free reaction abilities]{free
+          <p>You may now use [[lookup name]] @Identifier[core:fluency-bonus]{F}
+          additional times as a @Wiki[Category:Free reaction abilities]{free
           reaction} before the start of your next turn. These additional uses do
           not in turn allow for additional uses.</p>
         proficient: >-
-          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
-          additional times as a @L[Category:Free reaction abilities]{free
-          reaction} before the start of your next turn. These additional uses do
-          not in turn allow for additional uses.</p>
+          <p>You may now use [[lookup name]]
+          @Identifier[core:proficiency-bonus]{P} additional times as a
+          @Wiki[Category:Free reaction abilities]{free reaction} before the
+          start of your next turn. These additional uses do not in turn allow
+          for additional uses.</p>
       piercing:
         raw: 0
       powerSources:
@@ -91,14 +92,14 @@ effects:
       range:
         raw: '30'
         unit: ft
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      requirements: <p>Target is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
       rotator: true
       spell: true
       standard: true
       targets:
         - spell
       trigger: >-
-        <p>A @L[Category:Conjured spells]{conjured spell} is used within
+        <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within
         range.</p>
     transfer: true
     type: ability
@@ -108,13 +109,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Sheep Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Sheep]{sheep}.</p>
+      description: <p>You know the way of the @Identifier[creature:sheep]{sheep}.</p>
       field: survivalist
       identifier: sheep-tamer
       tradecraft: tamer
@@ -127,7 +128,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/weather-resilience.webp
     name: Weather Resilience
     system:
@@ -148,8 +149,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You @L[Keyword:Deboosted]{deboost} @L[Core:Damage]{damage} caused
-          by  weather.</p>
+          <p>You @Identifier[keyword:deboosted]{deboost}
+          @Identifier[core:damage]{damage} caused by  weather.</p>
       piercing:
         raw: 0
       powerSources:
@@ -167,10 +168,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.0cc9e4af9a860294
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:sheep inline]</p>
   identifier: sheep-familiar
   maxAv: 0
   type: familiar

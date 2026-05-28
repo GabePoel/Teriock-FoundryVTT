@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/hibernation-shield.webp
 name: Hibernation Shield
 system:
@@ -22,7 +22,7 @@ system:
     unit: unlimited
   elements:
     - life
-  endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
+  endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
   executionTime:
     base: r1
     slow:
@@ -38,10 +38,12 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
-      yourself with this as you go @L[Condition:Down]{down}.</p>
-    fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
-    proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
+      <p>Target gains @Identifier[ability:hibernation]{Hibernation}. You may
+      target yourself with this as you go @Identifier[status:down]{down}.</p>
+    fluent: <p>You may target up to @Identifier[core:fluency-bonus]{F} creatures.</p>
+    proficient: >-
+      <p>You may target up to @Identifier[core:proficiency-bonus]{P}
+      creatures.</p>
   piercing:
     raw: 0
   powerSources:
@@ -49,11 +51,11 @@ system:
   range:
     raw: '10'
     unit: ft
-  requirements: <p>Target must be @L[Condition:Down]{down}.</p>
+  requirements: <p>Target must be @Identifier[status:down]{down}.</p>
   spell: true
   standard: true
   targets:
     - creature
-  trigger: <p>You go @L[Condition:Down]{down}.</p>
+  trigger: <p>You go @Identifier[status:down]{down}.</p>
 transfer: true
 type: ability

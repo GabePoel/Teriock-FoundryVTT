@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: 5mLPbGiWQLB5Ai6f
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -65,17 +65,18 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Target is @L[Condition:Alive]{alive} (but still
-              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
-              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
-              Points]{HP} is halved (minimum of 1) until it completes a
-              @L[Core:Short Rest]{short rest}. This does not count as a
-              @L[Category:Revival effects]{revival effect}.</p>
-            fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+              <p>Target is @Identifier[status:alive]{alive} (but still
+              @Wiki[Category:Undead creatures]{undead}) at 1
+              @Identifier[core:hit-points-and-mana-points]{HP}, although its
+              maximum @Identifier[core:hit-points-and-mana-points]{HP} is halved
+              (minimum of 1) until it completes a
+              @Identifier[core:short-rest]{short rest}. This does not count as a
+              @Wiki[Category:Revival effects]{revival effect}.</p>
+            fluent: <p>Target's @Wiki[Core:HP]{HP} is no longer halved.</p>
             proficient: >-
-              <p>Target has all @L[Core:HP]{HP} restored, but its maximum
-              @L[Core:HP]{HP} is still halved. This does not count as a
-              @L[Category:Healing effects]{healing effect}.</p>
+              <p>Target has all @Wiki[Core:HP]{HP} restored, but its maximum
+              @Wiki[Core:HP]{HP} is still halved. This does not count as a
+              @Wiki[Category:Healing effects]{healing effect}.</p>
           piercing:
             raw: 2
           powerSources:
@@ -83,8 +84,8 @@ items:
           range:
             unit: contact
           requirements: >-
-            <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-            creatures]{undead}.</p>
+            <p>Target is @Identifier[status:dead]{dead} and
+            @Wiki[Category:Undead creatures]{undead}.</p>
           spell: true
           standard: true
           targets:
@@ -99,7 +100,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/bestial-transformation.webp
         name: Bestial Transformation
         system:
@@ -157,24 +158,27 @@ items:
           featSaveAttribute: mov
           form: special
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the maximum
-            @L[Core:BR]{BR} available to you increases by 1.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the maximum
+            @Wiki[Core:BR]{BR} available to you increases by 1.</p>
           identifier: bestial-transformation
           interaction: manifest
-          limitation: <p>@L[Creature:Bat]{Bat} and @L[Creature:Wolf]{wolf} only.</p>
+          limitation: >-
+            <p>@Identifier[creature:bat]{Bat} and
+            @Identifier[creature:wolf]{wolf} only.</p>
           maneuver: active
           overview:
             base: >-
-              <p>You are @L[Condition:Transformed]{fully transformed} into a
-              @L[Category:Common animal creatures]{common animal}. The maximum
-              @L[Core:BR]{BR} of @L[Category:Common animal creatures]{animals}
-              you can choose is 1.</p>
+              <p>You are @Identifier[status:transformed]{fully transformed} into
+              a @Wiki[Category:Common animal creatures]{common animal}. The
+              maximum @Wiki[Core:BR]{BR} of @Wiki[Category:Common animal
+              creatures]{animals} you can choose is 1.</p>
             fluent: >-
-              <p>The maximum @L[Core:BR]{BR} available to you is now
-              @L[Core:Fluency Bonus]{F}.</p>
+              <p>The maximum @Wiki[Core:BR]{BR} available to you is now
+              @Identifier[core:fluency-bonus]{F}.</p>
             proficient: >-
-              <p>The maximum @L[Core:BR]{BR} available to you is now
-              @L[Core:Proficiency Bonus]{P}.</p>
+              <p>The maximum @Wiki[Core:BR]{BR} available to you is now
+              @Identifier[core:proficiency-bonus]{P}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -196,7 +200,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/charm.webp
         name: Charm
         system:
@@ -234,8 +238,8 @@ items:
           form: normal
           identifier: charm
           improvement: >-
-            <p>May have up to 2 × @L[Core:Presence]{PRES} creatures
-            @L[Condition:Charmed]{charmed} at a time.</p>
+            <p>May have up to 2 × @Identifier[core:presence]{PRES} creatures
+            @Identifier[status:charmed]{charmed} at a time.</p>
           interaction: attack
           maneuver: active
           piercing:
@@ -245,10 +249,10 @@ items:
           range:
             unit: contact
           requirements: >-
-            <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
-            @L[Condition:Charmed]{charmed} at a time.</p>
+            <p>A creature may only have up to @Identifier[core:presence]{PRES}
+            creatures @Identifier[status:charmed]{charmed} at a time.</p>
           results:
-            hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
+            hit: <p>Target is @Identifier[status:charmed]{charmed}.</p>
           targets:
             - creature
         transfer: true
@@ -261,7 +265,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
@@ -312,21 +316,22 @@ items:
           overview:
             base: >-
               <p>You challenge the target to advance and fight you. They may
-              immediately @L[Ability:Move]{Move} towards you as a
-              @L[Core:Reactive Maneuvers]{free reaction} to this and begin
-              @L[Condition:Dueling]{dueling} with you. If they choose not to or
-              are unable to do so, then they are considered to have "forfeited"
-              the [[lookup name style=lc]] (but are not considered to have
-              "lost" it). Any creature that forfeits this [[lookup name
-              style=lc]] becomes @L[Condition:Lighted]{lighted} to each of their
-              would-be opponents in the [[lookup name style=lc]] until the end
-              of that opponent's next @L[Core:Turns]{turn}.</p>
+              immediately @Identifier[ability:move]{Move} towards you as a
+              @Identifier[core:reactive-maneuvers]{free reaction} to this and
+              begin @Identifier[status:dueling]{dueling} with you. If they
+              choose not to or are unable to do so, then they are considered to
+              have "forfeited" the [[lookup name style=lc]] (but are not
+              considered to have "lost" it). Any creature that forfeits this
+              [[lookup name style=lc]] becomes
+              @Identifier[status:lighted]{lighted} to each of their would-be
+              opponents in the [[lookup name style=lc]] until the end of that
+              opponent's next @Identifier[core:turns]{turn}.</p>
             proficient: >-
-              <p>You may also @L[Ability:Move]{Move} or make a
-              @L[Category:Single action abilities]{single action}
-              @L[Category:Duelist class abilities]{Duelist ability} as a
-              @L[Core:Reactive Maneuvers]{free reaction} to the target's
-              decision and subsequent movement.</p>
+              <p>You may also @Identifier[ability:move]{Move} or make a
+              @Wiki[Category:Single action abilities]{single action}
+              @Wiki[Category:Duelist class abilities]{Duelist ability} as a
+              @Identifier[core:reactive-maneuvers]{free reaction} to the
+              target's decision and subsequent movement.</p>
           piercing:
             raw: 0
           powerSources:
@@ -335,8 +340,8 @@ items:
             raw: '30'
             unit: ft
           requirements: >-
-            <p>You are not @L[Condition:Dueling]{dueling} and can only use this
-            on an opponent.</p>
+            <p>You are not @Identifier[status:dueling]{dueling} and can only use
+            this on an opponent.</p>
           skill: true
           standard: true
           targets:
@@ -351,7 +356,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/skills/social/diplomacy-handshake-blue.webp
         name: Expert Courtier
         system:
@@ -385,8 +390,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are an @L[Keyword:Expertise]{expert}
-              @L[Tradecraft:Courtier]{courtier}.</p>
+              <p>You are an @Identifier[keyword:expertise]{expert}
+              @Identifier[tradecraft:courtier]{courtier}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -405,7 +410,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -457,8 +462,10 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+            base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: >-
+              <p>You instead fly at @Identifier[core:movement-speed]{full
+              speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -479,7 +486,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -505,15 +512,17 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You count as being @L[Keyword:Undead]{undead} for the purposes
-              of @L[Category:Abilities]{abilities}, @L[Category:Damage
-              types]{damage}, and other @L[Category:Effects]{effects}. You also
-              gain @L[Ability:Ethereal Senses]{Ethereal Senses},
-              @L[Ability:Healing Sensitivity]{Healing Sensitivity},
-              @L[Ability:Magical Durability]{Magical Durability},
-              @L[Ability:Mana Drain Touch]{Mana Drain Touch}, @L[Ability:Undead
-              Mind]{Undead Mind}, and @L[Ability:Undying Durability]{Undying
-              Durability}.</p>
+              <p>You count as being @Identifier[keyword:undead]{undead} for the
+              purposes of @Pack[teriock.abilities]{abilities},
+              @Wiki[Category:Damage types]{damage}, and other
+              @Wiki[Category:Effects]{effects}. You also gain
+              @Identifier[ability:ethereal-senses]{Ethereal Senses},
+              @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
+              @Identifier[ability:magical-durability]{Magical Durability},
+              @Identifier[ability:mana-drain-touch]{Mana Drain Touch},
+              @Identifier[ability:undead-mind]{Undead Mind}, and
+              @Identifier[ability:undying-durability]{Undying
+              Durability}.</p><div class="expandable-table"></div>
           piercing:
             raw: 0
           powerSources:
@@ -532,7 +541,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: >-
           systems/teriock/src/icons/abilities/increased-running-water-sensitivity.webp
         name: Increased Running Water Sensitivity
@@ -559,12 +568,13 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>If you end your @L[Core:Turns]{turn} in running water, you roll
-              your <i>largest</i> @L[Core:HP]{hit die} and take that much
-              @L[Keyword:Warded]{warded} @L[Damage:Holy]{holy}
-              @L[Damage:Magic]{magic damage} instead of the normal
-              @L[Core:Healing]{healing} effect. This does not consume any of
-              your @L[Core:HP]{hit dice}.</p>
+              <p>If you end your @Identifier[core:turns]{turn} in running water,
+              you roll your <i>largest</i> @Wiki[Core:HP]{hit die} and take that
+              much @Identifier[keyword:warded]{warded}
+              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
+              damage} instead of the normal @Identifier[core:healing]{healing}
+              effect. This does not consume any of your @Wiki[Core:HP]{hit
+              dice}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -584,7 +594,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: >-
           systems/teriock/src/icons/abilities/increased-sunlight-sensitivity.webp
         name: Increased Sunlight Sensitivity
@@ -611,12 +621,13 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>If you end your @L[Core:Turns]{turn} in direct sunlight, you
-              roll your <i>largest</i> @L[Core:HP]{hit die} and take that much
-              @L[Keyword:Warded]{warded} @L[Damage:Holy]{holy}
-              @L[Damage:Magic]{magic damage} instead of the normal
-              @L[Core:Healing]{healing} effect. This does not consume any of
-              your @L[Core:HP]{hit dice}.</p>
+              <p>If you end your @Identifier[core:turns]{turn} in direct
+              sunlight, you roll your <i>largest</i> @Wiki[Core:HP]{hit die} and
+              take that much @Identifier[keyword:warded]{warded}
+              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
+              damage} instead of the normal @Identifier[core:healing]{healing}
+              effect. This does not consume any of your @Wiki[Core:HP]{hit
+              dice}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -636,7 +647,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/instant-ethereal.webp
         name: Instant Ethereal
         system:
@@ -671,8 +682,8 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into
-              the Material Realm.</p>
+              <p>You go @Identifier[status:ethereal]{Ethereal} or manifest back
+              into the Material Realm.</p>
           piercing:
             raw: 0
           powerSources:
@@ -691,7 +702,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/sentient-feeding.webp
         name: Sentient Feeding
         system:
@@ -717,19 +728,20 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You must @L[Drain:Mana]{mana drain} at least 1 creature with
-              @L[Core:Intelligence]{INT} of 0 or greater to
-              @L[Condition:Dead]{death} every day 24 hours or you start taking
-              penalties. If 24 hours pass and you have not fed, you lose your
-              your largest @L[Core:HP]{hit die} and @L[Core:MP]{mana die}. Your
-              @L[Core:Hit Points and Mana Points]{HP} and @L[Core:Hit Points and
-              Mana Points]{MP} maximums decrease by the value of those dice. For
-              each additional 24 hours you go without feeding, you lose your
-              next largest @L[Core:HP]{hit die} and @L[Core:MP]{mana die}. To
-              restore lost @L[Core:HP]{hit dice} and @L[Core:MP]{mana dice}, you
-              must feed more than normal. If you feed on at least 2 creatures
-              within a 24 hour period, you restore 1 lost @L[Core:HP]{hit die}
-              and @L[Core:MP]{mana die}.</p>
+              <p>You must @Identifier[drain:mana]{mana drain} at least 1
+              creature with @Identifier[core:intelligence]{INT} of 0 or greater
+              to @Identifier[status:dead]{death} every day 24 hours or you start
+              taking penalties. If 24 hours pass and you have not fed, you lose
+              your your largest @Wiki[Core:HP]{hit die} and @Wiki[Core:MP]{mana
+              die}. Your @Identifier[core:hit-points-and-mana-points]{HP} and
+              @Identifier[core:hit-points-and-mana-points]{MP} maximums decrease
+              by the value of those dice. For each additional 24 hours you go
+              without feeding, you lose your next largest @Wiki[Core:HP]{hit
+              die} and @Wiki[Core:MP]{mana die}. To restore lost
+              @Wiki[Core:HP]{hit dice} and @Wiki[Core:MP]{mana dice}, you must
+              feed more than normal. If you feed on at least 2 creatures within
+              a 24 hour period, you restore 1 lost @Wiki[Core:HP]{hit die} and
+              @Wiki[Core:MP]{mana die}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -748,7 +760,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
@@ -797,23 +809,24 @@ items:
           featSaveAttribute: mov
           form: special
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
+            of this effect increases by 1 hour.</p>
           identifier: spirit-bury
           interaction: attack
           invoked: true
           maneuver: active
           overview:
-            proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+            proficient: <p>This effect lasts 10 minutes instead of 1.</p>
           piercing:
             raw: 0
           powerSources:
             - magical
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+          requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
           results:
-            hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+            hit: <p>Target cannot become @Identifier[status:wisping]{wisping}.</p>
           rotator: true
           spell: true
           standard: true
@@ -829,7 +842,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/vampiric-infect.webp
         name: Vampiric Infect
         system:
@@ -867,20 +880,21 @@ items:
             unit: contact
           results:
             fail: >-
-              <p>Target is @L[Condition:Allured]{allured} to you. This effect
-              <i>cannot</i> be removed with @L[Ability:Remove Charm]{Remove
-              Charm}, but it <i>can</i> be removed with
-              @L[Ability:Exorcism]{Exorcism} or @L[Ability:Cure Illness]{Cure
-              Illness}. Over the coming month, the target will become
-              @L[Category:Vampires]{vampiric}. The DC for @L[Ability:Cure
-              Illness]{Cure Illness} starts at 1, immediately following the
-              bite. But with every day that passes, the DC increases by 1. After
-              2 weeks, the target gain @L[Ability:Sunlight Sensitivity]{Sunlight
-              Sensitivity}. After 30 days, they become a
-              @L[Category:Vampires]{vampire}. Roll [[/roll 1d100]] to determine
-              what type of @L[Category:Vampires]{vampire} they
+              <p>Target is @Identifier[status:allured]{allured} to you. This
+              effect <i>cannot</i> be removed with
+              @Identifier[ability:remove-charm]{Remove Charm}, but it <i>can</i>
+              be removed with @Identifier[ability:exorcism]{Exorcism} or
+              @Identifier[ability:cure-illness]{Cure Illness}. Over the coming
+              month, the target will become @Wiki[Category:Vampires]{vampiric}.
+              The DC for @Identifier[ability:cure-illness]{Cure Illness} starts
+              at 1, immediately following the bite. But with every day that
+              passes, the DC increases by 1. After 2 weeks, the target gain
+              @Identifier[ability:sunlight-sensitivity]{Sunlight Sensitivity}.
+              After 30 days, they become a @Wiki[Category:Vampires]{vampire}.
+              Roll [[/roll 1d100]] to determine what type of
+              @Wiki[Category:Vampires]{vampire} they
               become.</p><p>@Embed[Compendium.teriock.tables.RollTable.9dadf089bd2103c8
-              rollable]</p>
+              rollable]</p><p></p>
           targets:
             - creature
         transfer: true
@@ -893,7 +907,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/very-high-intelligence.webp
         name: Very High Intelligence
         system:
@@ -937,7 +951,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -964,13 +978,15 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>@L[Core:Healing]{Healing} can be used to
-              @L[Core:Damage]{damage} you. If the creature providing you
-              @L[Core:Healing]{healing} specifies that they are doing so "for
-              damage" then you roll your <i>largest</i> @L[Core:HP]{hit die} and
-              take that much @L[Damage:Holy]{holy} @L[Damage:Magic]{magic
-              damage} instead of the normal @L[Core:Healing]{healing} effect.
-              This does not consume any of your @L[Core:HP]{hit dice}.</p>
+              <p>@Identifier[core:healing]{Healing} can be used to
+              @Identifier[core:damage]{damage} you. If the creature providing
+              you @Identifier[core:healing]{healing} specifies that they are
+              doing so "for damage" then you roll your <i>largest</i>
+              @Wiki[Core:HP]{hit die} and take that much
+              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
+              damage} instead of the normal @Identifier[core:healing]{healing}
+              effect. This does not consume any of your @Wiki[Core:HP]{hit
+              dice}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -989,7 +1005,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -1029,7 +1045,8 @@ items:
           overview:
             base: >-
               <p>You can see and hear spirits and
-              @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+              @Identifier[status:ethereal]{Ethereal} creatures within 120
+              feet.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1050,7 +1067,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -1084,8 +1101,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Identifier[damage:mundane]{mundane}
+              @Identifier[core:damage]{damage}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1104,7 +1122,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -1146,10 +1164,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened} and
-              @L[Condition:Charmed]{charmed}. The effects of [[lookup name]] are
-              maintained even if @L[Condition:Transformed]{transformed}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:frightened]{frightened} and
+              @Identifier[status:charmed]{charmed}. The effects of [[lookup
+              name]] are maintained even if
+              @Identifier[status:transformed]{transformed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1168,7 +1187,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -1216,15 +1235,15 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Condition:Unconscious]{unconsciousness},
-              @L[Condition:Suffocating]{suffocating}, and being
-              @L[Condition:Poisoned]{poisoned}. You do not
-              @L[Condition:Down]{drop} due to being at negative @L[Core:Hit
-              Points and Mana Points]{HP}. You still @L[Condition:Dead]{die}
-              when you reach half your maximum @L[Core:Hit Points and Mana
-              Points]{HP} below zero. You also do not have to
-              @L[Core:Drowning]{breathe}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Identifier[status:unconscious]{unconsciousness},
+              @Identifier[status:suffocating]{suffocating}, and being
+              @Identifier[status:poisoned]{poisoned}. You do not
+              @Identifier[status:down]{drop} due to being at negative
+              @Identifier[core:hit-points-and-mana-points]{HP}. You still
+              @Identifier[status:dead]{die} when you reach half your maximum
+              @Identifier[core:hit-points-and-mana-points]{HP} below zero. You
+              also do not have to @Identifier[core:drowning]{breathe}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1243,7 +1262,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -1288,19 +1307,19 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize} twice. This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
+              <p>Deal [[/drain 2d8[mana]]] @Wiki[Category:Drain types]{drain} to
+              the target. If this @Identifier[status:dead]{kills} the target,
+              you @Identifier[core:revitalizing]{revitalize} twice. This
+              @Identifier[core:revitalizing]{revitalization} is the only part of
+              this that is a @Wiki[Category:Revitalization
+              effects]{revitalization effect}.</p>
             hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @L[Category:Drain types]{drain} to
-              the target. If this @L[Condition:Dead]{kills} the target, you
-              @L[Core:Revitalizing]{revitalize}.  This
-              @L[Core:Revitalizing]{revitalization} is the only part of this
-              that is a @L[Category:Revitalization effects]{revitalization
-              effect}.</p>
+              <p>Deal [[/drain 1d8[mana]]] @Wiki[Category:Drain types]{drain} to
+              the target. If this @Identifier[status:dead]{kills} the target,
+              you @Identifier[core:revitalizing]{revitalize}.  This
+              @Identifier[core:revitalizing]{revitalization} is the only part of
+              this that is a @Wiki[Category:Revitalization
+              effects]{revitalization effect}.</p>
           targets:
             - creature
         transfer: true
@@ -1309,16 +1328,14 @@ items:
     img: systems/teriock/src/icons/creatures/noble-vampire.webp
     name: Noble Vampire
     system:
-      adult: 0
       appearance: >-
         <p>Look exactly like their original species and may not even seem
-        @L[Category:Undead creatures]{undead}! Usually have pale skin and
+        @Wiki[Category:Undead creatures]{undead}! Usually have pale skin and
         pronounced fangs.</p>
       br: 20
       competence:
         raw: 1
       identifier: noble-vampire
-      lifespan: 0
       size:
         enabled: false
         value: 3
@@ -1342,7 +1359,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -1352,7 +1369,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1362,7 +1379,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -1377,7 +1395,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1387,7 +1405,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true

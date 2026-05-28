@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/pour-human-strength-potion.webp
 name: Pour Human Strength Potion
 system:
@@ -20,7 +20,13 @@ system:
       type: changes
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '1'
@@ -42,8 +48,8 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>Target's @L[Core:Strength]{STR} is set to 0. This applies regardless of
-      what it was prior.</p>
+      <p>Target's @Identifier[core:strength]{STR} is set to 0. This applies
+      regardless of what it was prior.</p>
   piercing:
     raw: 0
   powerSources:
@@ -52,9 +58,9 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - creature
 transfer: true

@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/cumbersome.webp
     name: Cumbersome
     system:
@@ -33,16 +33,17 @@ effects:
       competence:
         raw: 0
       description: >-
-        <p>A <b>[[lookup name style=lc]]</b> @L[Category:Equipment]{item}
-        <i>always</i> makes its user @L[Condition:Encumbered]{encumbered},
-        regardless of how much they are @L[Core:Carrying Capacity]{carrying}. If
-        the user would have not been @L[Condition:Encumbered]{encumbered}
-        otherwise, they are @L[Condition:Encumbered]{lightly encumbered}. If
-        they would have been @L[Condition:Encumbered]{lightly encumbered}
-        otherwise, they are @L[Condition:Encumbered]{heavily encumbered}. And if
-        they would have been @L[Condition:Encumbered]{heavily encumbered}
-        otherwise, they are rendered @L[Condition:Immobile]{immobile}.</p>
-      form: flaw
+        <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item}
+        <i>always</i> makes its user @Identifier[status:encumbered]{encumbered},
+        regardless of how much they are
+        @Identifier[core:carrying-capacity]{carrying}. If the user would have
+        not been @Identifier[status:encumbered]{encumbered} otherwise, they are
+        @Identifier[status:encumbered]{lightly encumbered}. If they would have
+        been @Identifier[status:encumbered]{lightly encumbered} otherwise, they
+        are @Identifier[status:encumbered]{heavily encumbered}. And if they
+        would have been @Identifier[status:encumbered]{heavily encumbered}
+        otherwise, they are rendered @Identifier[status:immobile]{immobile}.</p>
+      form: intrinsic
       identifier: cumbersome
       modifiesActor: true
     transfer: true
@@ -54,7 +55,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/missile.webp
     name: Missile
     system:
@@ -74,8 +75,8 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item cannot be used to make melee
-        @L[Category:Attack abilities]{attacks}.</p>
-      form: flaw
+        @Wiki[Category:Attack abilities]{attacks}.</p>
+      form: intrinsic
       identifier: missile
       mundane: true
     transfer: true
@@ -87,17 +88,27 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/thrown.webp
     name: Thrown
     system:
       applyIfDampened: true
       applyIfDeattuned: true
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.range.ranged
+              priority: 10
+              target: Item
+              type: override
+              value: 'true'
+          type: changes
       competence:
         raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack.</p>
+        @Identifier[property:ranged]{ranged} attack.</p>
       form: intrinsic
       identifier: thrown
       mundane: true
@@ -110,7 +121,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/unblockable.webp
     name: Unblockable
     system:
@@ -128,7 +139,7 @@ effects:
           type: changes
       competence:
         raw: 0
-      description: <p>An item with this property is always @L[Keyword:UB]{UB}.</p>
+      description: <p>An item with this property is always @Identifier[keyword:ub]{UB}.</p>
       form: intrinsic
       identifier: unblockable
       mundane: true
@@ -141,7 +152,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -151,7 +162,7 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
+        @Wiki[Category:Attack abilities]{attack}.</p>
       form: intrinsic
       identifier: weapon
       mundane: true
@@ -164,7 +175,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -187,13 +198,13 @@ effects:
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
         in parentheses after specifying if it requires
-        @L[Property:Ammunition]{ammunition} or if is
-        @L[Property:Thrown]{thrown}. The range lists two numbers. The first is
-        the weapon's normal range in feet, and the second indicates the weapon's
-        long range. When attacking a target beyond normal range, you have
-        @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
-        Interaction]{attack roll}. You can't attack a target beyond the weapon's
-        long range.</p>
+        @Identifier[property:ammunition]{ammunition} or if is
+        @Identifier[property:thrown]{thrown}. The range lists two numbers. The
+        first is the weapon's normal range in feet, and the second indicates the
+        weapon's long range. When attacking a target beyond normal range, you
+        have @Identifier[core:disadvantage]{disadvantage} on the
+        @Identifier[core:attack-interaction]{attack roll}. You can't attack a
+        target beyond the weapon's long range.</p>
       form: intrinsic
       identifier: ranged
       mundane: true

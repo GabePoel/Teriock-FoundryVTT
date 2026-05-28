@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/blue-dragonfly-breath.webp
 name: Blue Dragonfly Breath
 system:
@@ -77,8 +77,8 @@ system:
   elements:
     - storm
   endCondition: >-
-    <p>At the end of each of the target's @L[Core:Turns]{turns}, they roll
-    [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+    <p>At the end of each of the target's @Identifier[core:turns]{turns}, they
+    roll [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
   executionTime:
     base: a1
     slow:
@@ -89,9 +89,10 @@ system:
   featSaveAttribute: mov
   form: special
   heightened: >-
-    <p>For each additional @L[Core:MP]{MP} spent, deal an additional [[/damage
-    2d10[magic ice]]] @L[Core:Damage]{damage}. Additionally, the
-    @L[Core:Range]{range} of this increases by 5 feet.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+    spent, deal an additional [[/damage 2d10[magic ice]]]
+    @Identifier[core:damage]{damage}. Additionally, the
+    @Identifier[core:range]{range} of this increases by 5 feet.</p>
   identifier: blue-dragonfly-breath
   interaction: feat
   maneuver: active
@@ -104,13 +105,14 @@ system:
     raw: '15'
     unit: ft
   results:
-    fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+    fail: <p>Target is @Identifier[status:frozen]{frozen}.</p>
     save: >-
-      <p>Target is @L[Condition:Frozen]{frozen}. At the end of each of the
+      <p>Target is @Identifier[status:frozen]{frozen}. At the end of each of the
       target's actions, they roll [[/roll 2d4]]. If either of these dice roll a
-      4, this effect ends. Target takes half as much @L[Core:Damage]{damage}
-      from this as they would otherwise. This is calculated after any
-      @L[Keyword:Boosted]{boosts} or @L[Keyword:Deboosted]{deboosts}.</p>
+      4, this effect ends. Target takes half as much
+      @Identifier[core:damage]{damage} from this as they would otherwise. This
+      is calculated after any @Identifier[keyword:boosted]{boosts} or
+      @Identifier[keyword:deboosted]{deboosts}.</p>
   targets:
     - creature
 transfer: true

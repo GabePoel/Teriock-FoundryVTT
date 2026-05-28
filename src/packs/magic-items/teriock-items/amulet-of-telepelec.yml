@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/circle-of-protection.webp
     name: Circle of Protection
     system:
@@ -69,8 +69,8 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 24 hours.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the duration of this effect increases by 24 hours.</p>
       identifier: circle-of-protection
       interaction: manifest
       maneuver: slow
@@ -79,26 +79,28 @@ effects:
           <p>You enchant an area no larger than 30 feet in any direction. This
           area is surrounded by a barrier of light that creatures cannot easily
           pass into or out of this area by any means, including
-          @L[Category:Displacement effects]{displacement effects}. However,
-          @L[Category:Ranged equipment]{items} can move in and out.
-          @L[Category:Missile delivery abilities]{missile abilities} and other
-          ones with a sufficiently large range can cross this barrier so long as
-          their executor remains on one side and makes a @L[Core:Strength]{STR}
-          @L[Core:Feat Interaction]{feat save}. A creature that's higher
-          @L[Core:Leveling Up]{level} than you may pass across this barrier
-          without issue. Any other creature may attempt to pass by making a
-          @L[Tradecraft:Priest]{priest check} with a DC equal to the difference
-          between @L[Core:Leveling Up]{your level} and theirs.</p>
+          @Wiki[Category:Displacement effects]{displacement effects}. However,
+          @Wiki[Category:Ranged equipment]{items} can move in and out.
+          @Wiki[Category:Missile delivery abilities]{missile abilities} and
+          other ones with a sufficiently large range can cross this barrier so
+          long as their executor remains on one side and makes a
+          @Identifier[core:strength]{STR}
+          @Identifier[core:feat-interaction]{feat save}. A creature that's
+          higher @Identifier[core:leveling-up]{level} than you may pass across
+          this barrier without issue. Any other creature may attempt to pass by
+          making a @Identifier[tradecraft:priest]{priest check} with a DC equal
+          to the difference between @Identifier[core:leveling-up]{your level}
+          and theirs.</p>
         fluent: >-
-          <p>You may select up to 2 × @L[Core:Fluency Bonus]{F} creatures that
-          can pass through this barrier without issue. You may also select up to
-          2 × @L[Core:Fluency Bonus]{F} creatures that cannot pass through this
-          barrier at all.</p>
+          <p>You may select up to 2 × @Identifier[core:fluency-bonus]{F}
+          creatures that can pass through this barrier without issue. You may
+          also select up to 2 × @Identifier[core:fluency-bonus]{F} creatures
+          that cannot pass through this barrier at all.</p>
         proficient: >-
-          <p>You may select up to 2 × @L[Core:Proficiency Bonus]{P} creatures
-          that can pass through this barrier without issue. You may also select
-          up to 2 × @L[Core:Proficiency Bonus]{P} creatures that cannot pass
-          through this barrier at all.</p>
+          <p>You may select up to 2 × @Identifier[core:proficiency-bonus]{P}
+          creatures that can pass through this barrier without issue. You may
+          also select up to 2 × @Identifier[core:proficiency-bonus]{P} creatures
+          that cannot pass through this barrier at all.</p>
       piercing:
         raw: 0
       powerSources:
@@ -174,7 +176,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/mana-storing.webp
     name: Mana Storing
     system:
@@ -203,16 +205,17 @@ effects:
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
         within it that creatures can use to power their own
-        @L[Category:Abilities]{abilities}. Mana storing items will always have a
-        number N associated with them (1, by default, if no number is listed).
+        @Pack[teriock.abilities]{abilities}. Mana storing items will always have
+        a number N associated with them (1, by default, if no number is listed).
         This number refers to a "mana die" analogous to those that creatures
         have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
-        maximum of N × 4 @L[Core:MP]{MP}. At dawn, if
-        @L[Ability:Attune]{attuned} to the [[lookup name style=lc]] item, roll
-        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
-        dawn comes and nobody is @L[Ability:Attune]{attuned} to a [[lookup
-        name]] item, it releases all @L[Core:MP]{MP} it had stored.</p>
-      form: normal
+        maximum of N × 4 @Wiki[Core:MP]{MP}. At dawn, if
+        @Identifier[ability:attune]{attuned} to the [[lookup name style=lc]]
+        item, roll [[/roll d4]]. The item regains up to this much spent
+        @Wiki[Core:MP]{MP}. If dawn comes and nobody is
+        @Identifier[ability:attune]{attuned} to a [[lookup name]] item, it
+        releases all @Wiki[Core:MP]{MP} it had stored.</p>
+      form: intrinsic
       identifier: mana-storing
       maxQuantity:
         raw: '4'
@@ -302,7 +305,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -312,9 +315,9 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
+        steal through @Pack[teriock.abilities]{abilities} like
+        @Identifier[ability:search]{Search}.</p>
+      form: intrinsic
       identifier: searchable
     transfer: true
     type: property
@@ -325,7 +328,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -335,7 +338,7 @@ effects:
         raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
+        in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
       mundane: true
@@ -348,7 +351,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spirit-bury.webp
     name: Spirit Bury
     system:
@@ -394,23 +397,23 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the duration of this effect increases by 1 hour.</p>
       identifier: spirit-bury
       interaction: attack
       invoked: true
       maneuver: active
       overview:
-        proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+        proficient: <p>This effect lasts 10 minutes instead of 1.</p>
       piercing:
         raw: 0
       powerSources:
         - magical
       range:
         unit: contact
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+      requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
       results:
-        hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+        hit: <p>Target cannot become @Identifier[status:wisping]{wisping}.</p>
       rotator: true
       spell: true
       standard: true

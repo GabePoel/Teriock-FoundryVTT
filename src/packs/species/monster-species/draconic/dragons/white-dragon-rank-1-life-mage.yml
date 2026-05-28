@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/hibernation-shield.webp
     name: Hibernation Shield
     system:
@@ -32,7 +32,7 @@ effects:
         unit: unlimited
       elements:
         - life
-      endCondition: <p>Target is no longer @L[Condition:Down]{down}.</p>
+      endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
       executionTime:
         base: r1
         slow:
@@ -48,10 +48,15 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target gains @L[Ability:Hibernation]{Hibernation}. You may target
-          yourself with this as you go @L[Condition:Down]{down}.</p>
-        fluent: <p>You may target up to @L[Core:Fluency Bonus]{F} creatures.</p>
-        proficient: <p>You may target up to @L[Core:Proficiency Bonus]{P} creatures.</p>
+          <p>Target gains @Identifier[ability:hibernation]{Hibernation}. You may
+          target yourself with this as you go
+          @Identifier[status:down]{down}.</p>
+        fluent: >-
+          <p>You may target up to @Identifier[core:fluency-bonus]{F}
+          creatures.</p>
+        proficient: >-
+          <p>You may target up to @Identifier[core:proficiency-bonus]{P}
+          creatures.</p>
       piercing:
         raw: 0
       powerSources:
@@ -59,12 +64,12 @@ effects:
       range:
         raw: '10'
         unit: ft
-      requirements: <p>Target must be @L[Condition:Down]{down}.</p>
+      requirements: <p>Target must be @Identifier[status:down]{down}.</p>
       spell: true
       standard: true
       targets:
         - creature
-      trigger: <p>You go @L[Condition:Down]{down}.</p>
+      trigger: <p>You go @Identifier[status:down]{down}.</p>
     transfer: true
     type: ability
   - _id: JhNbjfOBP4vq6fDO
@@ -74,7 +79,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     flags:
       teriock:
         dontConsume: false
@@ -152,8 +157,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic holy]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: light-ray
       interaction: attack
       maneuver: active
@@ -167,11 +173,12 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>If you want, target is @L[Condition:Lighted]{lighted} until the end
-          of your next @L[Core:Turns]{turn}.</p>
+          <p>If you want, target is @Identifier[status:lighted]{lighted} until
+          the end of your next @Identifier[core:turns]{turn}.</p>
         hit: >-
-          <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
-          choice until the end of their next @L[Core:Turns]{turn}.</p>
+          <p>Target is @Identifier[status:lighted]{lighted} to a creature of
+          your choice until the end of their next
+          @Identifier[core:turns]{turn}.</p>
       spell: true
       standard: true
       targets:
@@ -185,7 +192,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/medicine-ball.webp
     name: Medicine Ball
     system:
@@ -227,10 +234,11 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, @L[Core:Healing]{heal} the
-        target again. This does not consume their @L[Core:Hit Dice]{hit dice}
-        (including the @L[Core:Hit Dice]{hit dice} for the initial
-        @L[Core:Healing]{healing}).</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, @Identifier[core:healing]{heal} the target again. This does not
+        consume their @Wiki[Core:Hit Dice]{hit dice} (including the
+        @Wiki[Core:Hit Dice]{hit dice} for the initial
+        @Identifier[core:healing]{healing}).</p>
       identifier: medicine-ball
       interaction: attack
       maneuver: active
@@ -243,8 +251,10 @@ effects:
         raw: '30'
         unit: ft
       results:
-        critHit: <p>Double the amount of times target @L[Core:Healing]{heals}.</p>
-        hit: <p>Target @L[Core:Healing]{heals}.</p>
+        critHit: >-
+          <p>Double the amount of times target
+          @Identifier[core:healing]{heals}.</p>
+        hit: <p>Target @Identifier[core:healing]{heals}.</p>
       spell: true
       standard: true
       targets:
@@ -258,7 +268,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/resurrect.webp
     name: Resurrect
     system:
@@ -299,30 +309,32 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, target can have been
-        @L[Condition:Dead]{dead} for an additional 24 hours. If target is
-        @L[Category:Undead creatures]{undead}, they are @L[Core:Healing]{healed}
-        an additional time.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, target can have been @Identifier[status:dead]{dead} for an
+        additional 24 hours. If target is @Wiki[Category:Undead
+        creatures]{undead}, they are @Identifier[core:healing]{healed} an
+        additional time.</p>
       identifier: resurrect
       interaction: manifest
       maneuver: slow
       mundane: false
       overview:
         base: >-
-          <p>If target is @L[Condition:Dead]{dead}, they are brought back to
-          life with 1 @L[Core:Hit Points and Mana Points]{HP}. If target is
-          @L[Category:Undead creatures]{undead}, you can choose to have them be
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}. [[lookup name]]
-          does not count as a @L[Category:Healing effects]{healing effect}
-          unless you choose to @L[Core:Healing]{heal} with it.</p>
+          <p>If target is @Identifier[status:dead]{dead}, they are brought back
+          to life with 1 @Identifier[core:hit-points-and-mana-points]{HP}. If
+          target is @Wiki[Category:Undead creatures]{undead}, you can choose to
+          have them be @Identifier[core:healing]{healed} for
+          @Identifier[core:damage]{damage}. [[lookup name]] does not count as a
+          @Wiki[Category:Healing effects]{healing effect} unless you choose to
+          @Identifier[core:healing]{heal} with it.</p>
         fluent: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage} @L[Core:Fluency
-          Bonus]{F} times.</p>
+          <p>If target is @Wiki[Category:Undead creatures]{undead}, they are
+          @Identifier[core:healing]{healed} for @Identifier[core:damage]{damage}
+          @Identifier[core:fluency-bonus]{F} times.</p>
         proficient: >-
-          <p>If target is @L[Category:Undead creatures]{undead}, they are
-          @L[Core:Healing]{healed} for @L[Core:Damage]{damage}
-          @L[Core:Proficiency Bonus]{P} times.</p>
+          <p>If target is @Wiki[Category:Undead creatures]{undead}, they are
+          @Identifier[core:healing]{healed} for @Identifier[core:damage]{damage}
+          @Identifier[core:proficiency-bonus]{P} times.</p>
       piercing:
         raw: 0
       powerSources:
@@ -331,8 +343,8 @@ effects:
         raw: '5'
         unit: ft
       requirements: >-
-        <p>Target is @L[Category:Undead creatures]{undead} or has
-        @L[Condition:Dead]{died} within the last 24 hours.</p>
+        <p>Target is @Wiki[Category:Undead creatures]{undead} or has
+        @Identifier[status:dead]{died} within the last 24 hours.</p>
       ritual: true
       spell: true
       standard: true
@@ -347,7 +359,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/hibernation.webp
     name: Hibernation
     system:
@@ -376,7 +388,9 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>All damage is @L[Keyword:Deboosted]{deboosted} against you.</p>
+        base: >-
+          <p>All damage is @Identifier[keyword:deboosted]{deboosted} against
+          you.</p>
       piercing:
         raw: 0
       powerSources:

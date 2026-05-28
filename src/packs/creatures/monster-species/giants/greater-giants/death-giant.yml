@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: YDk3sa2CjhAMNk3f
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/crown-of-fear.webp
         name: Crown of Fear
         system:
@@ -78,8 +78,8 @@ items:
           overview:
             base: >-
               <p>A small circle of glowing purple mist circles above your head.
-              You gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear
-              Aura]{Fear Aura}.</p>
+              You gain @Identifier[ability:fear-touch]{Fear Touch} and
+              @Identifier[ability:fear-aura]{Fear Aura}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -102,7 +102,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
@@ -123,8 +123,13 @@ items:
               target: armament
               type: childChange
               value: '1'
+          class: knight
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -143,10 +148,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Supernatural Strength]{Supernatural
-              Strength}. In addition, you deal @L[Keyword:Boosted]{boosted} with
-              all melee @L[Category:Weapons]{weapon} @L[Category:Attack
-              abilities]{attacks} and they are @L[Keyword:AV0]{AV0} for you.</p>
+              <p>You gain
+              @Identifier[ability:supernatural-strength]{Supernatural Strength}.
+              In addition, you deal @Identifier[keyword:boosted]{boosted} with
+              all melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+              abilities]{attacks} and they are @Identifier[keyword:av0]{AV0} for
+              you.</p>
           piercing:
             raw: 0
           powerSources:
@@ -169,7 +176,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -213,7 +220,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -257,7 +264,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -301,7 +308,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -345,7 +352,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/fear-touch.webp
         name: Fear Touch
         system:
@@ -414,9 +421,9 @@ items:
           elements:
             - necromancy
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -427,8 +434,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic terror]]]
+            @Identifier[core:damage]{damage}  as well.</p>
           identifier: fear-touch
           interaction: attack
           maneuver: active
@@ -442,7 +451,7 @@ items:
             critHit: >-
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
-            hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+            hit: <p>Target is @Identifier[status:frightened]{frightened}.</p>
           spell: true
           standard: true
           targets:
@@ -457,7 +466,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/fear-aura.webp
         name: Fear Aura
         system:
@@ -532,9 +541,9 @@ items:
           elements:
             - necromancy
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -545,8 +554,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic terror]]]
+            @Identifier[core:damage]{damage}  as well.</p>
           identifier: fear-aura
           interaction: feat
           maneuver: active
@@ -558,7 +569,7 @@ items:
             raw: '10'
             unit: ft
           results:
-            fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+            fail: <p>Target is @Identifier[status:frightened]{frightened}.</p>
           spell: true
           standard: true
           targets:
@@ -573,13 +584,18 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
           _sup: TofQgvhz6k2OOS5v
+          class: knight
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -598,11 +614,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-              @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-              @L[Keyword:Deboosted]{deboost} any melee
-              @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attack}
-              to make it @L[Keyword:AV0]{AV0}.</p>
+              <p>You gain @Identifier[ability:giant-strength]{Giant Strength}
+              and @Identifier[ability:shattering-grip]{Shattering Grip}. In
+              addition, you may @Identifier[keyword:deboosted]{deboost} any
+              melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+              abilities]{attack} to make it @Identifier[keyword:av0]{AV0}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -625,7 +641,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -651,10 +667,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
+              <p>You gain @Identifier[ability:improved-strength]{Improved
+              Strength} and @Identifier[ability:melee-damage-boost]{Melee Damage
+              Boost}. In addition, you are no longer suffer the consequences of
+              @Identifier[property:cumbersome]{cumbersome} items.</p>
           piercing:
             raw: 0
           powerSources:
@@ -679,7 +695,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -705,8 +721,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+              <p>You gain @Identifier[ability:beastly-strength]{Beastly
+              Strength} and
+              @Identifier[ability:improved-armor-piercing]{Improved Armor
+              Piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -731,7 +749,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -757,10 +775,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons
+              in one hand.</p><div class="note"><b>Note:</b>
+              @Identifier[property:armor-piercing]{Armor piercing} weapons must
+              still be wielded in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</div>
           piercing:
             raw: 0
           powerSources:
@@ -785,7 +804,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -811,8 +830,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
+              <p>Melee weapons you use are
+              @Identifier[property:armor-piercing]{armor piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -833,7 +852,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -861,13 +880,15 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
+              <p>You may spend an unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
+              <p>You may spend an additional unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage} again.</p>
           piercing:
             raw: 0
           powerSources:
@@ -879,9 +900,9 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
+            <p>You have hit a creature with a @Wiki[Category:Damaging
+            effects]{damaging} melee @Wiki[Category:Weapon delivery
+            abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
         transfer: true
         type: ability
       - _id: MYKDgQjfPlOz6u2C
@@ -892,7 +913,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -930,7 +951,7 @@ items:
           interaction: manifest
           maneuver: active
           overview:
-            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+            base: <p>Target is @Identifier[property:shattered]{shattered}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -946,23 +967,21 @@ items:
     img: systems/teriock/src/icons/creatures/death-giant.webp
     name: Death Giant
     system:
-      adult: 0
       appearance: >-
         <p>Humanoid, though of great size and build. Skil colors and features
-        varying by their natural @L[Category:Mage classes]{mage} type.</p>
+        varying by their natural @Wiki[Category:Mage classes]{mage} type.</p>
       br: 21
       competence:
         raw: 1
       description: >-
-        <p>@L[Category:Giants]{Giants} are solitary and prefer fighting alone
+        <p>@Wiki[Category:Giants]{Giants} are solitary and prefer fighting alone
         (though they will come to each others aid). They are arrogant and will
         only attack if they see a large group worthy of battle or are attacked
         themselves.</p>
       identifier: death-giant
       innateRanks: >-
-        <p>Innately @L[Category:Classes]{rank} 1
-        @L[Class:Necromancer]{Necromancer}.</p>
-      lifespan: 0
+        <p>Innately @Wiki[Category:Classes]{rank} 1
+        @Identifier[class:necromancer]{Necromancer}.</p>
       size:
         enabled: true
         value: 8
@@ -986,7 +1005,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -996,7 +1015,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1006,8 +1025,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1020,7 +1039,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1030,7 +1049,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1062,7 +1081,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: Q3bElOKJWjw3DI9t
         _key: >-
@@ -1072,7 +1091,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -1109,8 +1128,9 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, roll an additional
-            [[/kill 1d6]].</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an
+            additional [[/kill 1d6]].</p>
           identifier: death-ray
           interaction: attack
           maneuver: active
@@ -1122,15 +1142,15 @@ items:
             raw: '60'
             unit: ft
           requirements: >-
-            <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
-            creatures]{undead}.</p>
+            <p>Target is neither @Identifier[status:dead]{dead} nor
+            @Wiki[Category:Undead creatures]{undead}.</p>
           results:
             critHit: <p>Double the number of dice rolled.</p>
             hit: >-
               <p>Roll [[/kill 2d6]] if this is greater than or equal to the
-              number of @L[Core:HP]{HP} the target has, they
-              @L[Condition:Dead]{die}. This does not deal
-              @L[Core:Damage]{damage}.</p>
+              number of @Wiki[Core:HP]{HP} the target has, they
+              @Identifier[status:dead]{die}. This does not deal
+              @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
           targets:
@@ -1145,7 +1165,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/spirit-guide.webp
         name: Spirit Guide
         system:
@@ -1187,25 +1207,27 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, you may target an
-            additional creature.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
+            target an additional creature.</p>
           identifier: spirit-guide
           interaction: manifest
           maneuver: slow
           overview:
             base: >-
               <p>You can see, hear, and speak to spirits and
-              @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+              @Identifier[status:ethereal]{Ethereal} creatures within 120
+              feet.</p>
             fluent: >-
-              <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-              @L[Category:Spiritually powered abilities]{spiritual}
-              @L[Category:Ritual delivery spells]{ritual spells} such as
-              @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+              <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+              with @Wiki[Category:Spiritually powered abilities]{spiritual}
+              @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+              @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
             proficient: >-
-              <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-              @L[Category:Necromancy element abilities]{necromancy}
-              @L[Category:Ritual delivery spells]{ritual spells} such as
-              @L[Ability:Summon the Dead]{Summon the Dead}.</p>
+              <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+              with @Wiki[Category:Necromancy element abilities]{necromancy}
+              @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+              @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1214,8 +1236,8 @@ items:
             raw: '5'
             unit: ft
           requirements: >-
-            <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only
-            target yourself.</p>
+            <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may
+            only target yourself.</p>
           ritual: true
           spell: true
           standard: true
@@ -1232,7 +1254,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/summon-the-dead.webp
         name: Summon the Dead
         system:
@@ -1243,17 +1265,19 @@ items:
             primary:
               hp:
                 description: >-
-                  <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana
-                  Points]{HP} if the body is in your possession. Otherwise, it
-                  costs 3 @L[Core:Hit Points and Mana Points]{HP} per
-                  @L[Core:Size]{size} of the body.</p>
+                  <p>[[lookup name]] costs 0
+                  @Identifier[core:hit-points-and-mana-points]{HP} if the body
+                  is in your possession. Otherwise, it costs 3
+                  @Identifier[core:hit-points-and-mana-points]{HP} per
+                  @Identifier[core:size]{size} of the body.</p>
                 type: description
               mp:
                 description: >-
-                  <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana
-                  Points]{MP} if the body is in your possession. Otherwise, it
-                  costs 2 @L[Core:Hit Points and Mana Points]{MP} per
-                  @L[Core:Size]{size} of the body.</p>
+                  <p>[[lookup name]] costs 0
+                  @Identifier[core:hit-points-and-mana-points]{MP} if the body
+                  is in your possession. Otherwise, it costs 2
+                  @Identifier[core:hit-points-and-mana-points]{MP} per
+                  @Identifier[core:size]{size} of the body.</p>
                 type: description
           delivery: sight
           duration:
@@ -1280,15 +1304,16 @@ items:
             base: >-
               <p>If you have the body of the target in your possession, you can
               put the spirit back into its body such that it is no longer
-              @L[Condition:Wisping]{wisping}. The body maintains all damage it
-              had when it died.</p>
+              @Identifier[status:wisping]{wisping}. The body maintains all
+              damage it had when it died.</p>
             proficient: >-
               <p>If the body is thoroughly damaged (such as if it's
-              @L[Condition:Ruined]{ruined}) or missing entirely, you can expend
-              some of your own life force to recreate the body from the spirit
-              for additional @L[Core:Hit Points and Mana Points]{MP} and
-              @L[Core:Hit Points and Mana Points]{HP}. The creature is still
-              dead, but the body is now intact.</p>
+              @Identifier[status:ruined]{ruined}) or missing entirely, you can
+              expend some of your own life force to recreate the body from the
+              spirit for additional
+              @Identifier[core:hit-points-and-mana-points]{MP} and
+              @Identifier[core:hit-points-and-mana-points]{HP}. The creature is
+              still dead, but the body is now intact.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1298,7 +1323,7 @@ items:
           range:
             raw: '5'
             unit: ft
-          requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
+          requirements: <p>Target must be @Identifier[status:wisping]{wisping}.</p>
           ritual: true
           spell: true
           standard: true
@@ -1314,7 +1339,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/terror-ball.webp
         name: Terror Ball
         system:
@@ -1345,8 +1370,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic terror]]]
+            @Identifier[core:damage]{damage}.</p>
           identifier: terror-ball
           interaction: attack
           maneuver: active
@@ -1359,11 +1386,11 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
-              target.</p>
+              <p>Deal [[/damage 1d4[terror magic]]]
+              @Identifier[core:damage]{damage} to target.</p>
           spell: true
           standard: true
           targets:
@@ -1406,7 +1433,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -1416,7 +1443,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1426,8 +1453,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1440,7 +1467,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1450,7 +1477,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -1465,7 +1493,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1475,7 +1503,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1508,7 +1536,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -1518,7 +1546,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1528,8 +1556,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1542,7 +1570,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1552,7 +1580,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -1567,7 +1596,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1577,7 +1606,7 @@ items:
             raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
+            as while using @Identifier[ability:interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
           powerSources:
@@ -1592,7 +1621,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1602,7 +1631,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1627,24 +1656,24 @@ items:
         short:
           unit: self
     type: body
-  - _id: id0OeUrmu1k6OTMT
-    _key: '!actors.items!908f92bcd0dc093c.id0OeUrmu1k6OTMT'
+  - _id: OeaieB8kc2bNlSfI
+    _key: '!actors.items!908f92bcd0dc093c.OeaieB8kc2bNlSfI'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!908f92bcd0dc093c.id0OeUrmu1k6OTMT.NGCuRUaVtXnxAbRe
+          !actors.items.effects!908f92bcd0dc093c.OeaieB8kc2bNlSfI.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1672,8 +1701,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic]]]
+            @Identifier[core:damage]{damage}.</p>
           identifier: arcane-ray
           interaction: attack
           maneuver: active
@@ -1686,10 +1717,10 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
+              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
               target.</p>
           spell: true
           standard: true
@@ -1699,13 +1730,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!908f92bcd0dc093c.id0OeUrmu1k6OTMT.aCWLNsvSFjEuLTyl
+          !actors.items.effects!908f92bcd0dc093c.OeaieB8kc2bNlSfI.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:
@@ -1729,25 +1760,26 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You may use your @L[Property:Magelore]{magelore} items as
-              though they were your @L[Body:Hand]{hand}. This makes them
-              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
-              You are not @L[Core:Proficiency Bonus]{proficient} nor
-              @L[Core:Fluency Bonus]{fluent} with
-              @L[Category:Abilities]{abilities} you use through your
-              @L[Property:Magelore]{magelore} items.</p>
+              <p>You may use your @Identifier[property:magelore]{magelore} items
+              as though they were your @Identifier[body:hand]{hand}. This makes
+              them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not
+              @Identifier[core:proficiency-bonus]{proficient} nor
+              @Identifier[core:fluency-bonus]{fluent} with
+              @Pack[teriock.abilities]{abilities} you use through your
+              @Identifier[property:magelore]{magelore} items.</p>
             fluent: >-
-              <p>If you are @L[Core:Fluency Bonus]{fluent} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Fluency Bonus]{fluency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
+              @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
             proficient: >-
-              <p>If you are @L[Core:Proficiency Bonus]{proficient} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Proficiency Bonus]{proficiency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
+              an @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
           piercing:
             raw: 0
           powerSources:

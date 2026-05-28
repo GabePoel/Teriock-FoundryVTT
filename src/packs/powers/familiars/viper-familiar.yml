@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: RIjjI14Xxv1gBQNT
     _key: '!items.effects!22cda12fb70a082e.RIjjI14Xxv1gBQNT'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
@@ -61,21 +61,24 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You aim with deadly precision, causing the next @L[Category:Attack
-          abilities]{attack} you make with an item to be
-          @L[Keyword:Boosted]{boosted}. This @L[Category:Attack
-          abilities]{attack} must hit the target's @L[Core:Vitals
-          Target]{vitals} (@L[Core:Armor Class]{AC} + 3) or the
-          @L[Category:Attack abilities]{attack} does nothing. Only the
-          @L[Core:Damage]{damage} from the item itself can be
-          @L[Keyword:Boosted]{boosted} in this way.</p>
+          <p>You aim with deadly precision, causing the next
+          @Wiki[Category:Attack abilities]{attack} you make with an item to be
+          @Identifier[keyword:boosted]{boosted}. This @Wiki[Category:Attack
+          abilities]{attack} must hit the target's
+          @Identifier[core:vitals-target]{vitals}
+          (@Identifier[core:armor-class]{AC} + 3) or the @Wiki[Category:Attack
+          abilities]{attack} does nothing. Only the
+          @Identifier[core:damage]{damage} from the item itself can be
+          @Identifier[keyword:boosted]{boosted} in this way.</p>
       piercing:
         raw: 0
       powerSources:
         - martial
       range:
         unit: self
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+      requirements: >-
+        <p>You are not @Identifier[core:sustained]{sustaining} [[lookup
+        name]].</p>
       skill: true
       standard: true
       sustained: true
@@ -90,7 +93,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/poison-item.webp
     name: Poison Item
     system:
@@ -130,7 +133,7 @@ effects:
       duration:
         raw: '24'
         unit: hour
-      endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+      endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
       executionTime: a1
       expansion:
         range:
@@ -142,19 +145,20 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Target makes a creature become @L[Condition:Poisoned]{poisoned}.
-          The @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @L[Core:Damage]{damage}. The way the item delivers this to its user
-          depends on the nature of the item. If it's food or drink, it's when
-          the item is consumed. The @L[Core:Game Master]{GM} may approve other
-          cases as well. The item only delivers the
-          @L[Condition:Poisoned]{poison} effect once.</p>
+          <p>Target makes a creature become
+          @Identifier[status:poisoned]{poisoned}. The
+          @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @Identifier[core:damage]{damage}. The way the item delivers this to
+          its user depends on the nature of the item. If it's food or drink,
+          it's when the item is consumed. The @Identifier[core:game-master]{GM}
+          may approve other cases as well. The item only delivers the
+          @Identifier[status:poisoned]{poison} effect once.</p>
         fluent: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -174,13 +178,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Viper Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Viper]{viper}.</p>
+      description: <p>You know the way of the @Identifier[creature:viper]{viper}.</p>
       field: survivalist
       identifier: viper-tamer
       tradecraft: tamer
@@ -193,10 +197,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.edff73621c862c67
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:viper inline]</p>
   identifier: viper-familiar
   maxAv: 0
   type: familiar

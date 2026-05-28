@@ -51,6 +51,7 @@ export default Base => {
         await super._onRender(context, options);
         const toggleButton = this.window.header?.querySelector("[data-action='toggleLockThis']");
         if (toggleButton) this.#setToggleLockButtonAttributes(toggleButton);
+        this.element.querySelectorAll("button[data-action='rollTable']").forEach((btn) => btn.disabled = false);
       }
 
       /** @inheritDoc */

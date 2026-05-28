@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: GTYbl8YubhuhksSj
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/climbing.webp
         name: Climbing
         system:
@@ -76,8 +76,10 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+            base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: >-
+              <p>You instead climb at @Identifier[core:movement-speed]{normal
+              speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -96,7 +98,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -140,7 +142,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/digging.webp
         name: Digging
         system:
@@ -179,7 +181,7 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You dig at @L[Core:Movement Speed]{quarter speed}.</p>
+            base: <p>You dig at @Identifier[core:movement-speed]{quarter speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -198,7 +200,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/elusive.webp
         name: Elusive
         system:
@@ -242,7 +244,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -294,8 +296,10 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+            base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: >-
+              <p>You instead fly at @Identifier[core:movement-speed]{full
+              speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -316,7 +320,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
@@ -353,7 +357,7 @@ items:
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is bright
-              light and up to 120 feet as though it is dim light.</p>
+              light and up to 120 feet as though it is dim light.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -372,7 +376,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -395,7 +399,9 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+            base: >-
+              <p>You cannot use items in your
+              @Identifier[equipment:hand]{hands}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -414,7 +420,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/no-strength.webp
         name: No Strength
         system:
@@ -458,7 +464,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -502,7 +508,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/poison-strike.webp
         name: Poison Strike
         system:
@@ -545,7 +551,7 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @L[Condition:Dead]{dies}.</p>
+          endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
           executionTime:
             base: a1
             slow:
@@ -560,11 +566,11 @@ items:
           maneuver: active
           overview:
             fluent: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d10[toxic]]] @L[Core:Damage]{damage}.</p>
+              <p>The @Identifier[status:poisoned]{poison} instead deals
+              [[/damage 1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>The @L[Condition:Poisoned]{poison} instead deals [[/damage
-              1d8[toxic]]] @L[Core:Damage]{damage}.</p>
+              <p>The @Identifier[status:poisoned]{poison} instead deals
+              [[/damage 1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -573,9 +579,9 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @L[Condition:Poisoned]{poisoned}. The
-              @L[Condition:Poisoned]{poison} deals [[/damage 1d6[toxic]]]
-              @L[Core:Damage]{damage}.</p>
+              <p>Target is @Identifier[status:poisoned]{poisoned}. The
+              @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+              @Identifier[core:damage]{damage}.</p>
           skill: true
           targets:
             - creature
@@ -589,7 +595,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/scouting.webp
         name: Scouting
         system:
@@ -616,8 +622,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You have @L[Core:Advantage]{advantage} on checks made with
-              @L[Ability:Perceive]{Perceive}.</p>
+              <p>You have @Identifier[core:advantage]{advantage} on checks made
+              with @Identifier[ability:perceive]{Perceive}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -641,12 +647,10 @@ items:
     img: systems/teriock/src/icons/creatures/insect.webp
     name: Insect
     system:
-      adult: 0
       br: 1
       competence:
         raw: 1
       identifier: insect
-      lifespan: 0
       size:
         enabled: true
         value: 0.25
@@ -670,7 +674,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -680,7 +684,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -690,8 +694,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -704,7 +708,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -714,7 +718,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -729,7 +734,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -739,7 +744,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true

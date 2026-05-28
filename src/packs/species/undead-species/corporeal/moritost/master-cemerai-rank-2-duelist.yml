@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/bow-out.webp
     name: Bow Out
     system:
@@ -40,8 +40,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Active Bow Out]{Active Bow Out} and
-          @L[Ability:Reactive Bow Out]{Reactive Bow Out}.</p>
+          <p>You gain @Identifier[ability:active-bow-out]{Active Bow Out} and
+          @Identifier[ability:reactive-bow-out]{Reactive Bow Out}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -61,7 +61,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dueling-techniques.webp
     name: Dueling Techniques
     system:
@@ -72,6 +72,9 @@ effects:
         components:
           somatic:
             type: tag
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         conditions:
@@ -79,7 +82,7 @@ effects:
             - dueling
         raw: '0'
         unit: unlimited
-      endCondition: <p>You are no longer @L[Condition:Dueling]{dueling}.</p>
+      endCondition: <p>You are no longer @Identifier[status:dueling]{dueling}.</p>
       executionTime:
         base: a1
         slow:
@@ -95,10 +98,12 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>A @L[Category:Weapons]{weapon} you are @L[Keyword:Using]{using} of
-          your choice becomes @L[Property:Armor Voiding]{AV0} against creatures
-          you are @L[Condition:Dueling]{dueling} and you gain
-          @L[Keyword:Limited]{Limited} @L[Ability:Chi Strike]{Chi Strike}.</p>
+          <p>A @Wiki[Category:Weapons]{weapon} you are
+          @Identifier[keyword:using]{using} of your choice becomes
+          @Identifier[property:armor-voiding]{AV0} against creatures you are
+          @Identifier[status:dueling]{dueling} and you gain
+          @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:chi-strike]{Chi Strike}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -106,8 +111,8 @@ effects:
       range:
         unit: self
       requirements: >-
-        <p>You must be @L[Condition:Dueling]{dueling} and wielding the targeted
-        weapon.</p>
+        <p>You must be @Identifier[status:dueling]{dueling} and wielding the
+        targeted weapon.</p>
       skill: true
       standard: true
       targets:
@@ -121,7 +126,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/tea-ceremony.webp
     name: Tea Ceremony
     system:
@@ -167,26 +172,28 @@ effects:
           asked one at a time, and each participant must answer before the next
           question is asked. If anyone refuses to answer truthfully, the
           [[lookup name]] fails and all participants are
-          @L[Keyword:Vulnerable]{vulnerable} to @L[Drain:Mana]{mana drain} and
-          @L[Drain:Mana]{mana drain} is @L[Keyword:Boosted]{boosted} against
-          them for 24 hours. This occurs once everyone has answered the latest
-          question or immediately if someone refuses to answer whatsoever. If
-          the [[lookup name]] is successful, all participants are
-          @L[Keyword:Resistance]{resistant} to @L[Drain:Mana]{mana drain} for 24
-          hours and suffer no negative effects of @L[Core:MP]{mana loss} other
-          than @L[Condition:Dead]{death} and
-          @L[Condition:Unconscious]{unconsciousness}. [[lookup name]] can only
-          be performed once per @L[Core:Long Rest]{long rest}.</p><div
-          class="note"><b>Note:</b> [[lookup name]] detects only whether the
-          participants believe their answers to be true, not whether or not they
-          are.</div><div class="note"><b>Note:</b> If an effect such as
-          @L[Ability:Lie]{Lie} is used to deceive the [[lookup name]], it
-          continues as if the lie were true.</div>
+          @Identifier[keyword:vulnerable]{vulnerable} to
+          @Identifier[drain:mana]{mana drain} and @Identifier[drain:mana]{mana
+          drain} is @Identifier[keyword:boosted]{boosted} against them for 24
+          hours. This occurs once everyone has answered the latest question or
+          immediately if someone refuses to answer whatsoever. If the [[lookup
+          name]] is successful, all participants are
+          @Identifier[keyword:resistance]{resistant} to
+          @Identifier[drain:mana]{mana drain} for 24 hours and suffer no
+          negative effects of @Wiki[Core:MP]{mana loss} other than
+          @Identifier[status:dead]{death} and
+          @Identifier[status:unconscious]{unconsciousness}. [[lookup name]] can
+          only be performed once per @Identifier[core:long-rest]{long
+          rest}.</p><div class="note"><b>Note:</b> [[lookup name]] detects only
+          whether the participants believe their answers to be true, not whether
+          or not they are.</div><div class="note"><b>Note:</b> If an effect such
+          as @Identifier[ability:lie]{Lie} is used to deceive the [[lookup
+          name]], it continues as if the lie were true.</div>
         fluent: >-
-          <p>You may now target up to 2 × @L[Core:Fluency Bonus]{F} creatures
-          (including yourself) with [[lookup name]].</p>
+          <p>You may now target up to 2 × @Identifier[core:fluency-bonus]{F}
+          creatures (including yourself) with [[lookup name]].</p>
         proficient: >-
-          <p>You may now target up to 2 × @L[Core:Proficiency Bonus]{P}
+          <p>You may now target up to 2 × @Identifier[core:proficiency-bonus]{P}
           creatures (including yourself) with [[lookup name]].</p>
       piercing:
         raw: 0
@@ -209,7 +216,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
     name: Reactive Bow Out
     system:
@@ -236,11 +243,12 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>The effect causing you to enter a @L[Condition:Dueling]{duel} or
-          that would @L[Category:Duel modifying effects]{modify} a
-          @L[Condition:Dueling]{duel} you are in @L[Core:Fizzles]{fizzles}. You
-          do not count as "forfeiting" or "losing" if you use [[lookup name]] to
-          stop @L[Condition:Dueling]{dueling}.</p>
+          <p>The effect causing you to enter a @Identifier[status:dueling]{duel}
+          or that would @Wiki[Category:Duel modifying effects]{modify} a
+          @Identifier[status:dueling]{duel} you are in
+          @Identifier[core:fizzles]{fizzles}. You do not count as "forfeiting"
+          or "losing" if you use [[lookup name]] to stop
+          @Identifier[status:dueling]{dueling}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -252,9 +260,9 @@ effects:
       targets:
         - self
       trigger: >-
-        <p>Some effect would cause you to start @L[Condition:Dueling]{dueling}
-        or @L[Category:Duel modifying effects]{modify} a
-        @L[Condition:Dueling]{duel} you are in.</p>
+        <p>Some effect would cause you to start
+        @Identifier[status:dueling]{dueling} or @Wiki[Category:Duel modifying
+        effects]{modify} a @Identifier[status:dueling]{duel} you are in.</p>
     transfer: true
     type: ability
   - _id: H2liXrq37pw63qEv
@@ -264,7 +272,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     name: Active Bow Out
     system:
@@ -302,13 +310,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You end a @L[Condition:Dueling]{duel} you are currently in. You do
-          not count as "forfeiting" or "losing" if you use [[lookup name]] to
-          stop @L[Condition:Dueling]{dueling}.</p>
+          <p>You end a @Identifier[status:dueling]{duel} you are currently in.
+          You do not count as "forfeiting" or "losing" if you use [[lookup
+          name]] to stop @Identifier[status:dueling]{dueling}.</p>
         proficient: >-
-          <p>If you want, everyone in the @L[Condition:Dueling]{duel} returns to
-          the number of @L[Core:Hit Points and Mana Points]{HP} they had prior
-          to @L[Condition:Dueling]{dueling}.</p>
+          <p>If you want, everyone in the @Identifier[status:dueling]{duel}
+          returns to the number of
+          @Identifier[core:hit-points-and-mana-points]{HP} they had prior to
+          @Identifier[status:dueling]{dueling}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -328,7 +337,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/chi-strike.webp
     name: Chi Strike
     system:
@@ -373,13 +382,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>This strike deals @L[Drain:Mana]{mana drain} instead of
-          @L[Core:Damage]{damage}. It has no @L[Category:Damage types]{damage
-          types}, but is otherwise treated as any other @L[Category:Attack
-          abilities]{attack} <i>prior</i> to hitting. So, @L[Ability:Triumphant
-          Damage Boost]{Triumphant Damage Boost} would
-          @L[Keyword:Boosted]{boost} it, but @L[Ability:Improved Brace]{Improved
-          Brace} would not @L[Keyword:Deboosted]{deboost} it.</p>
+          <p>This strike deals @Identifier[drain:mana]{mana drain} instead of
+          @Identifier[core:damage]{damage}. It has no @Wiki[Category:Damage
+          types]{damage types}, but is otherwise treated as any other
+          @Wiki[Category:Attack abilities]{attack} <i>prior</i> to hitting. So,
+          @Identifier[ability:triumphant-damage-boost]{Triumphant Damage Boost}
+          would @Identifier[keyword:boosted]{boost} it, but
+          @Identifier[ability:improved-brace]{Improved Brace} would not
+          @Identifier[keyword:deboosted]{deboost} it.</p>
       piercing:
         raw: 0
       powerSources:
@@ -388,13 +398,13 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the amount of
-          @L[Core:Standard and Critical Damage]{critical damage} you would
-          otherwise deal.</p>
+          <p>Deal an amount of @Identifier[drain:mana]{mana drain} equal to the
+          amount of @Identifier[core:standard-and-critical-damage]{critical
+          damage} you would otherwise deal.</p>
         hit: >-
-          <p>Deal an amount of @L[Drain:Mana]{mana drain} equal to the
-          @L[Core:Standard and Critical Damage]{standard damage} you would
-          otherwise deal.</p>
+          <p>Deal an amount of @Identifier[drain:mana]{mana drain} equal to the
+          @Identifier[core:standard-and-critical-damage]{standard damage} you
+          would otherwise deal.</p>
       skill: true
       standard: true
       targets:

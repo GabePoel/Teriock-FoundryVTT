@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/abilities/pour-minor-revitalizing-potion.webp
 name: Pour Minor Revitalizing Potion
 system:
@@ -16,7 +16,13 @@ system:
       type: revitalize
   competence:
     raw: 0
-  consumeSource: true
+  costs:
+    components:
+      material:
+        description: >-
+          <p>Using this ability consumes the @Pack[teriock.equipment]{equipment}
+          that provides it.</p>
+        type: description
   delivery: item
   duration:
     raw: '0'
@@ -38,8 +44,8 @@ system:
   mundane: false
   overview:
     base: >-
-      <p>The target @L[Core:Revitalizing]{revitalizes} without consuming
-      @L[Core:Hit Points and Mana Points]{mana dice}.</p>
+      <p>The target @Identifier[core:revitalizing]{revitalizes} without
+      consuming @Identifier[core:hit-points-and-mana-points]{mana dice}.</p>
   piercing:
     raw: 0
   powerSources:
@@ -48,9 +54,9 @@ system:
     unit: contact
   requirements: >-
     <p>Use [[lookup name]] by interacting with the
-    @L[Category:Equipment]{equipment} that provides it. That counts as the
-    @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for the
-    ability.</p>
+    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+    @Identifier[core:maneuvers]{maneuver} and
+    @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - self
 transfer: true

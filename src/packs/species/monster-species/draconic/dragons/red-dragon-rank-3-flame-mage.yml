@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: combat
@@ -25,6 +25,10 @@ effects:
       class: flameMage
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -44,9 +48,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Add @L[Ability:Cremate]{Cremate} and @L[Ability:Minor Weapon
-          Enchantment]{Minor Weapon Enchantment} to your list of possible
-          @L[Category:Rotator spells]{rotator spells}.</p>
+          <p>Add @Identifier[ability:cremate]{Cremate} and
+          @Identifier[ability:minor-weapon-enchantment]{Minor Weapon
+          Enchantment} to your list of possible @Wiki[Category:Rotator
+          spells]{rotator spells}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -65,7 +70,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: support
@@ -128,27 +133,31 @@ effects:
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
-          @L[Category:Rotator spells]{spells} created by others. When you come
-          across a fully created spell using only words you are @L[Core:Fluency
-          Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
-          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
-          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
-          it to your rotator spell list. If you fail, you are
-          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
-          again. The @L[Core:Game Master]{GM} may modify the DC based on the
-          spell's complexity, your knowledge of the spell, any special training
-          you receive, if the spell's creator is there to assist you, or for any
-          other factors they see fit. You may also attempt to learn words that
-          you come across as long as they are of elements you are
-          @L[Core:Fluency Bonus]{fluent} in. The @L[Core:Game Master]{GM} may
-          adjust the DC for these as they see fit as well, but the default is DC
-          15 + OP @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
-          save}.</p>
+          @Wiki[Category:Rotator spells]{spells} created by others. When you
+          come across a fully created spell using only words you are
+          @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + OP
+          @Wiki[Core:INT]{INT} @Identifier[core:feat-interaction]{feat save} to
+          attempt to learn it over the course of a
+          @Identifier[core:long-rest]{long rest}. If you succeed, you can add it
+          to your rotator spell list. If you fail, you are
+          @Identifier[keyword:incapable]{incapable} of attempting to learn that
+          spell again. The @Identifier[core:game-master]{GM} may modify the DC
+          based on the spell's complexity, your knowledge of the spell, any
+          special training you receive, if the spell's creator is there to
+          assist you, or for any other factors they see fit. You may also
+          attempt to learn words that you come across as long as they are of
+          elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+          @Identifier[core:game-master]{GM} may adjust the DC for these as they
+          see fit as well, but the default is DC 15 + OP
+          @Identifier[core:intelligence]{INT}
+          @Identifier[core:feat-interaction]{feat save}.</p>
         proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder Sorcery
-          Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
-          Words]{Celestial Elder Sorcery Words}, and @L[Ability:Flame Elder
-          Sorcery Words]{Flame Elder Sorcery Words}.</p>
+          <p>You are @Identifier[core:fluency-bonus]{fluent} in
+          @Identifier[ability:elder-sorcery-creation]{Elder Sorcery Creation},
+          @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+          Sorcery Words}, and
+          @Identifier[ability:flame-elder-sorcery-words]{Flame Elder Sorcery
+          Words}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -157,8 +166,8 @@ effects:
         unit: self
       results:
         fail: >-
-          <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
-          that spell or word again.</p>
+          <p>You are @Identifier[keyword:incapable]{incapable} of attempting to
+          learn that spell or word again.</p>
         save: <p>You learn the spell or word.</p>
       skill: true
       standard: true
@@ -173,7 +182,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
     name: Minor Weapon Enchantment
     system:
@@ -279,8 +288,8 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the duration of this effect increases by 1 hour.</p>
       identifier: minor-weapon-enchantment
       interaction: manifest
       invoked: true
@@ -288,14 +297,16 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target weapon is enchanted to deal @L[Damage:Magic]{magic damage}
-          and @L[Property:Granting]{grant} a @L[Category:Conjured
-          spells]{conjured} @L[Category:Ray delivery spells]{ray spell} that you
-          know. Except, the spell has the @L[Category:AV0 spells]{AV0}
-          @L[Category:Weapon delivery spells]{weapon delivery} instead, is
-          @L[Keyword:Gifted]{gifted}, and can only be delivered with the
-          enchanted weapon. The enchanted weapon is @L[Core:Presence]{tier 1}.
-          If the weapon is @L[Property:Shattered]{shattered}, this enchantment
+          <p>Target weapon is enchanted to deal @Identifier[damage:magic]{magic
+          damage} and @Identifier[property:granting]{grant} a
+          @Wiki[Category:Conjured spells]{conjured} @Wiki[Category:Ray delivery
+          spells]{ray spell} that you know. Except, the spell has the
+          @Wiki[Category:AV0 spells]{AV0} @Wiki[Category:Weapon delivery
+          spells]{weapon delivery} instead, is
+          @Identifier[keyword:gifted]{gifted}, and can only be delivered with
+          the enchanted weapon. The enchanted weapon is
+          @Identifier[core:presence]{tier 1}. If the weapon is
+          @Identifier[property:shattered]{shattered}, this enchantment
           fades.</p>
       piercing:
         raw: 0
@@ -319,7 +330,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/cremate.webp
     name: Cremate
     system:
@@ -389,11 +400,11 @@ effects:
         - magical
       range:
         unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      requirements: <p>Target is @Identifier[status:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @L[Condition:Burned]{burned}, and
-          @L[Condition:Ruined]{ruined}.</p>
+          <p>Target is @Identifier[status:burned]{burned}, and
+          @Identifier[status:ruined]{ruined}.</p>
       rotator: true
       spell: true
       standard: true

@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/storm-elder-sorcery.webp
     name: Storm Elder Sorcery
     system:
@@ -28,7 +28,7 @@ effects:
       executionTime:
         base: passive
         slow:
-          unit: second
+          unit: longRest
       expansion:
         range:
           unit: self
@@ -40,10 +40,12 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
-          Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial Elder
-          Sorcery Words}, and @L[Ability:Storm Elder Sorcery Words]{Storm Elder
-          Sorcery Words}.</p>
+          <p>You gain @Identifier[ability:elder-sorcery-creation]{Elder Sorcery
+          Creation},
+          @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+          Sorcery Words}, and
+          @Identifier[ability:storm-elder-sorcery-words]{Storm Elder Sorcery
+          Words}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -62,7 +64,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/storm-rotators.webp
     name: Storm Rotators
     system:
@@ -102,6 +104,10 @@ effects:
       class: stormMage
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -122,30 +128,34 @@ effects:
       overview:
         base: >-
           <p>Having mastered the basic techniques in this field of magic, you
-          are able to cast more advanced @L[Category:Spells]{spells}. If you
-          create any @L[Core:Elder Sorcery]{Elder Sorcery}
-          @L[Category:Spells]{spells} of your own, they get added to this list.
-          However, just because you "know" how to cast these spells, doesn't
-          mean you are always prepared to. Although all @L[Category:Mage
-          classes]{mage classes} grant their own @L[Core:Elder Sorcery]{Elder
-          Sorcery} and @L[Category:Rotator spells]{rotator spells}, you may only
-          have a maximum of @L[Category:Mage classes]{MR} - 1 of these spells
+          are able to cast more advanced @Wiki[Category:Spells]{spells}. If you
+          create any @Identifier[core:elder-sorcery]{Elder Sorcery}
+          @Wiki[Category:Spells]{spells} of your own, they get added to this
+          list. However, just because you "know" how to cast these spells,
+          doesn't mean you are always prepared to. Although all
+          @Wiki[Category:Mage classes]{mage classes} grant their own
+          @Identifier[core:elder-sorcery]{Elder Sorcery} and
+          @Wiki[Category:Rotator spells]{rotator spells}, you may only have a
+          maximum of @Wiki[Category:Mage classes]{MR} - 1 of these spells
           rotated into your spell list at any given time across <i>all</i>
-          classes. @L[Category:Mage classes]{MR} refers to the number of
-          @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage classes]{mage
-          classes}. During a @L[Core:Long Rest]{long rest}, you can "rotate"
-          which spells you have prepared. The @L[Category:Rotator
-          spells]{rotator spells} automatically available to you are
-          @L[Ability:Crown of Ice]{Crown of Ice}, @L[Ability:Dispel
-          Magic]{Dispel Magic}, @L[Ability:Displace]{Displace},
-          @L[Ability:Resist Effects]{Resist Effects}, and @L[Ability:Spell
-          Trigger]{Spell Trigger}.</p>
+          classes. @Wiki[Category:Mage classes]{MR} refers to the number of
+          @Identifier[core:leveling-up]{ranks} you have in @Wiki[Category:Mage
+          classes]{mage classes}. During a @Identifier[core:long-rest]{long
+          rest}, you can "rotate" which spells you have prepared. The
+          @Wiki[Category:Rotator spells]{rotator spells} automatically available
+          to you are @Identifier[ability:crown-of-ice]{Crown of Ice},
+          @Identifier[ability:dispel-magic]{Dispel Magic},
+          @Identifier[ability:displace]{Displace},
+          @Identifier[ability:resist-effects]{Resist Effects}, and
+          @Identifier[ability:spell-trigger]{Spell Trigger}.</p><div
+          class="expandable-table"></div>
         fluent: >-
-          <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-          Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+          <p>You may instead prepare 2 × (MR - 1) +
+          @Identifier[core:proficiency-bonus]{P} of these
+          @Wiki[Category:Spells]{spells}.</p>
         proficient: >-
           <p>You may instead prepare 2 × (MR - 1) of these
-          @L[Category:Spells]{spells}.</p>
+          @Wiki[Category:Spells]{spells}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -164,7 +174,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -181,14 +191,14 @@ effects:
         primary:
           hp:
             description: >-
-              <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
+              <p>Creation cost is at least 3 × @Wiki[Core:HP]{HP} of the spell
               itself.</p>
             type: description
           mp:
             description: >-
-              <p>Creation cost is at least 1 @L[Core:MP]{MP} per @L[Core:Elder
-              Sorcery]{OP} of <i>each</i> word in the spell plus 3 ×
-              @L[Core:MP]{MP} of the spell itself.</p>
+              <p>Creation cost is at least 1 @Wiki[Core:MP]{MP} per
+              @Identifier[core:elder-sorcery]{OP} of <i>each</i> word in the
+              spell plus 3 × @Wiki[Core:MP]{MP} of the spell itself.</p>
             type: description
       delivery: sight
       duration:
@@ -210,25 +220,29 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You may create 1 custom "rotator" @L[Category:Spells]{spells} using
-          @L[Core:Elder Sorcery]{Elder Sorcery} words that you know using
-          whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation rules are
-          dictated to you by your @L[Core:Game Master]{GM}. As with other
-          rotators, this spell is not always available to you. You have to
-          "rotate" into having it prepared. This spell may have a maximum number
-          of words equal to your @L[Core:Leveling Up]{level}. Your @L[Core:Game
-          Master]{GM} may allow you to "improvise" @L[Category:Spells]{spells}
-          as well, using whatever rules they wish.</p>
+          <p>You may create 1 custom "rotator" @Wiki[Category:Spells]{spells}
+          using @Identifier[core:elder-sorcery]{Elder Sorcery} words that you
+          know using whatever @Identifier[core:elder-sorcery]{Elder Sorcery}
+          creation rules are dictated to you by your
+          @Identifier[core:game-master]{GM}. As with other rotators, this spell
+          is not always available to you. You have to "rotate" into having it
+          prepared. This spell may have a maximum number of words equal to your
+          @Identifier[core:leveling-up]{level}. Your
+          @Identifier[core:game-master]{GM} may allow you to "improvise"
+          @Wiki[Category:Spells]{spells} as well, using whatever rules they
+          wish.</p>
         fluent: >-
           <p>In addition to the spells that you crate, you can learn
-          @L[Core:Proficiency Bonus]{P} additional spells from other
-          @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-          Sorcery]{Elder Sorcery} for more information.</p>
+          @Identifier[core:proficiency-bonus]{P} additional spells from other
+          @Identifier[core:elder-sorcery]{Elder Sorcery} users. See
+          @Identifier[core:elder-sorcery]{Elder Sorcery} for more
+          information.</p>
         proficient: >-
-          <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1) custom
-          "rotator" @L[Category:Spells]{spells} where @L[Category:Mage
-          classes]{MR} is the number of @L[Core:Leveling Up]{ranks} you have in
-          @L[Category:Mage classes]{mage classes}.</p>
+          <p>You may now create 2 × (@Wiki[Category:Mage classes]{MR} - 1)
+          custom "rotator" @Wiki[Category:Spells]{spells} where
+          @Wiki[Category:Mage classes]{MR} is the number of
+          @Identifier[core:leveling-up]{ranks} you have in @Wiki[Category:Mage
+          classes]{mage classes}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -248,7 +262,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
     name: Celestial Elder Sorcery Words
     system:
@@ -275,99 +289,352 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
-          Sorcery Words]{Celestial Elder Sorcery words}.</p><table
-          class="wikitable sortable"><caption style="white-space:nowrap">OP 1
-          Celestial @L[Core:Elder Sorcery Words]{Elder Sorcery
-          Words}</caption><tbody><tr><th
-          style="background-color:#e5a50a1A">OP</th><th
-          style="background-color:#6135831A">Celestial Adjectives</th><th
-          style="background-color:#6135831A">Celestial Adverbs</th><th
-          style="background-color:#6135831A">Celestial Articles</th><th
-          style="background-color:#6135831A">Celestial Conjunctions</th><th
-          style="background-color:#6135831A">Celestial Nouns</th><th
-          style="background-color:#6135831A">Celestial Prepositions</th><th
-          style="background-color:#6135831A">Celestial Pronouns</th><th
-          style="background-color:#6135831A">Celestial Verbs</th></tr><tr><td
-          rowspan="9" style="background-color:#f9f06b1A">1</td><td
-          style="background-color:#dc8add1A">bad</td><td
-          style="background-color:#dc8add1A">as</td><td
-          style="background-color:#dc8add1A">an</td><td
-          style="background-color:#dc8add1A">as</td><td
-          style="background-color:#dc8add1A">color</td><td
-          style="background-color:#dc8add1A">by</td><td
-          style="background-color:#dc8add1A">me</td><td
-          style="background-color:#dc8add1A">are</td></tr> <tr><td
-          style="background-color:#6135831A">big</td><td
-          style="background-color:#6135831A">carefully</td><td
-          style="background-color:#6135831A">one</td><td
-          style="background-color:#6135831A">but</td><td
-          style="background-color:#6135831A">cup</td><td
-          style="background-color:#6135831A">for</td><td
-          style="background-color:#6135831A">my</td><td
-          style="background-color:#6135831A">be</td></tr> <tr><td
-          style="background-color:#dc8add1A">bright</td><td
-          style="background-color:#dc8add1A">here</td><td
-          style="background-color:#dc8add1A">the</td><td
-          style="background-color:#dc8add1A">or</td><td
-          style="background-color:#dc8add1A">dagger</td><td
-          style="background-color:#dc8add1A">in</td><td
-          style="background-color:#dc8add1A">that</td><td
-          style="background-color:#dc8add1A">begin</td></tr> <tr><td
-          style="background-color:#6135831A">clean</td><td
-          style="background-color:#6135831A">pretty</td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A">so</td><td
-          style="background-color:#6135831A">foot</td><td
-          style="background-color:#6135831A">of</td><td
-          style="background-color:#6135831A">this</td><td
-          style="background-color:#6135831A">did</td></tr> <tr><td
-          style="background-color:#dc8add1A">little</td><td
-          style="background-color:#dc8add1A">then</td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A">hand</td><td
-          style="background-color:#dc8add1A">off</td><td
-          style="background-color:#dc8add1A">you</td><td
-          style="background-color:#dc8add1A">may</td></tr> <tr><td
-          style="background-color:#6135831A">long</td><td
-          style="background-color:#6135831A">there</td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A">hat</td><td
-          style="background-color:#6135831A">on</td><td
-          style="background-color:#6135831A">your</td><td
-          style="background-color:#6135831A">might</td></tr> <tr><td
-          style="background-color:#dc8add1A">short</td><td
-          style="background-color:#dc8add1A">today</td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A">skin</td><td
-          style="background-color:#dc8add1A">to</td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A">stand</td></tr> <tr><td
-          style="background-color:#6135831A">small</td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A">torch</td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A"></td><td
-          style="background-color:#6135831A">tend</td></tr> <tr><td
-          style="background-color:#dc8add1A">this</td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A">wand</td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A"></td><td
-          style="background-color:#dc8add1A">use</td></tr></tbody></table>
+          <p>You know @Identifier[core:elder-sorcery]{OP} 1 @Wiki[Core:Celestial
+          Elder Sorcery Words]{Celestial Elder Sorcery words}.</p><table
+          class="wikitable sortable">
+
+          <caption style="white-space:nowrap">OP 1 Celestial @Wiki[Core:Elder
+          Sorcery Words]{Elder Sorcery Words}
+
+          </caption>
+
+          <tbody><tr>
+
+          <th style="background-color:#e5a50a1A">OP</th>
+
+          <th style="background-color:#6135831A">Celestial Adjectives</th>
+
+          <th style="background-color:#6135831A">Celestial Adverbs</th>
+
+          <th style="background-color:#6135831A">Celestial Articles</th>
+
+          <th style="background-color:#6135831A">Celestial Conjunctions</th>
+
+          <th style="background-color:#6135831A">Celestial Nouns</th>
+
+          <th style="background-color:#6135831A">Celestial Prepositions</th>
+
+          <th style="background-color:#6135831A">Celestial Pronouns</th>
+
+          <th style="background-color:#6135831A">Celestial Verbs
+
+          </th></tr>
+
+          <tr>
+
+          <td rowspan="9" style="background-color:#f9f06b1A">1
+
+          </td>
+
+          <td style="background-color:#dc8add1A">bad
+
+          </td>
+
+          <td style="background-color:#dc8add1A">as
+
+          </td>
+
+          <td style="background-color:#dc8add1A">an
+
+          </td>
+
+          <td style="background-color:#dc8add1A">as
+
+          </td>
+
+          <td style="background-color:#dc8add1A">color
+
+          </td>
+
+          <td style="background-color:#dc8add1A">by
+
+          </td>
+
+          <td style="background-color:#dc8add1A">me
+
+          </td>
+
+          <td style="background-color:#dc8add1A">are
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">big
+
+          </td>
+
+          <td style="background-color:#6135831A">carefully
+
+          </td>
+
+          <td style="background-color:#6135831A">one
+
+          </td>
+
+          <td style="background-color:#6135831A">but
+
+          </td>
+
+          <td style="background-color:#6135831A">cup
+
+          </td>
+
+          <td style="background-color:#6135831A">for
+
+          </td>
+
+          <td style="background-color:#6135831A">my
+
+          </td>
+
+          <td style="background-color:#6135831A">be
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">bright
+
+          </td>
+
+          <td style="background-color:#dc8add1A">here
+
+          </td>
+
+          <td style="background-color:#dc8add1A">the
+
+          </td>
+
+          <td style="background-color:#dc8add1A">or
+
+          </td>
+
+          <td style="background-color:#dc8add1A">dagger
+
+          </td>
+
+          <td style="background-color:#dc8add1A">in
+
+          </td>
+
+          <td style="background-color:#dc8add1A">that
+
+          </td>
+
+          <td style="background-color:#dc8add1A">begin
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">clean
+
+          </td>
+
+          <td style="background-color:#6135831A">pretty
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">so
+
+          </td>
+
+          <td style="background-color:#6135831A">foot
+
+          </td>
+
+          <td style="background-color:#6135831A">of
+
+          </td>
+
+          <td style="background-color:#6135831A">this
+
+          </td>
+
+          <td style="background-color:#6135831A">did
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">little
+
+          </td>
+
+          <td style="background-color:#dc8add1A">then
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">hand
+
+          </td>
+
+          <td style="background-color:#dc8add1A">off
+
+          </td>
+
+          <td style="background-color:#dc8add1A">you
+
+          </td>
+
+          <td style="background-color:#dc8add1A">may
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">long
+
+          </td>
+
+          <td style="background-color:#6135831A">there
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">hat
+
+          </td>
+
+          <td style="background-color:#6135831A">on
+
+          </td>
+
+          <td style="background-color:#6135831A">your
+
+          </td>
+
+          <td style="background-color:#6135831A">might
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">short
+
+          </td>
+
+          <td style="background-color:#dc8add1A">today
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">skin
+
+          </td>
+
+          <td style="background-color:#dc8add1A">to
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">stand
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">small
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">torch
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">tend
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">this
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">wand
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">use
+
+          </td></tr></tbody></table>
         fluent: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Fluency Bonus]{F}).</p>
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:fluency-bonus]{F}).</p>
         proficient: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Proficiency Bonus]{P}).</p>
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:proficiency-bonus]{P}).</p>
       piercing:
         raw: 0
       powerSources:
@@ -386,7 +653,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/storm-elder-sorcery-words.webp
     name: Storm Elder Sorcery Words
     system:
@@ -416,39 +683,128 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Storm Elder Sorcery
-          Words]{Storm Elder Sorcery words}.</p><table class="wikitable
-          sortable"><caption style="white-space:nowrap">OP 1 Storm @L[Core:Elder
-          Sorcery Words]{Elder Sorcery Words}</caption><tbody><tr><th
-          style="background-color:#e5a50a1A">OP</th><th
-          style="background-color:#1a5fb41A">@L[Class:Storm Mage]{Storm
-          Nouns}</th><th style="background-color:#1a5fb41A">@L[Class:Storm
-          Mage]{Storm Verbs}</th></tr><tr><td rowspan="9"
-          style="background-color:#f9f06b1A">1</td><td
-          style="background-color:#99c1f11A">attention</td><td
-          style="background-color:#99c1f11A">cool</td></tr> <tr><td
-          style="background-color:#1a5fb41A">breeze</td><td
-          style="background-color:#1a5fb41A">distract</td></tr> <tr><td
-          style="background-color:#99c1f11A">cloud</td><td
-          style="background-color:#99c1f11A">float</td></tr> <tr><td
-          style="background-color:#1a5fb41A">drop</td><td
-          style="background-color:#1a5fb41A">identify</td></tr> <tr><td
-          style="background-color:#99c1f11A">mind</td><td
-          style="background-color:#99c1f11A">look</td></tr> <tr><td
-          style="background-color:#1a5fb41A">mist</td><td
-          style="background-color:#1a5fb41A">read</td></tr> <tr><td
-          style="background-color:#99c1f11A">sand</td><td
-          style="background-color:#99c1f11A">slow</td></tr> <tr><td
-          style="background-color:#1a5fb41A">study</td><td
-          style="background-color:#1a5fb41A">speed</td></tr> <tr><td
-          style="background-color:#99c1f11A">vision</td><td
-          style="background-color:#99c1f11A">stun</td></tr></tbody></table>
+          <p>You know @Identifier[core:elder-sorcery]{OP} 1 @Wiki[Core:Storm
+          Elder Sorcery Words]{Storm Elder Sorcery words}.</p><table
+          class="wikitable sortable">
+
+          <caption style="white-space:nowrap">OP 1 Storm @Wiki[Core:Elder
+          Sorcery Words]{Elder Sorcery Words}
+
+          </caption>
+
+          <tbody><tr>
+
+          <th style="background-color:#e5a50a1A">OP</th>
+
+          <th
+          style="background-color:#1a5fb41A">@Identifier[class:storm-mage]{Storm
+          Nouns}</th>
+
+          <th
+          style="background-color:#1a5fb41A">@Identifier[class:storm-mage]{Storm
+          Verbs}
+
+          </th></tr>
+
+          <tr>
+
+          <td rowspan="9" style="background-color:#f9f06b1A">1
+
+          </td>
+
+          <td style="background-color:#99c1f11A">attention
+
+          </td>
+
+          <td style="background-color:#99c1f11A">cool
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#1a5fb41A">breeze
+
+          </td>
+
+          <td style="background-color:#1a5fb41A">distract
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#99c1f11A">cloud
+
+          </td>
+
+          <td style="background-color:#99c1f11A">float
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#1a5fb41A">drop
+
+          </td>
+
+          <td style="background-color:#1a5fb41A">identify
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#99c1f11A">mind
+
+          </td>
+
+          <td style="background-color:#99c1f11A">look
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#1a5fb41A">mist
+
+          </td>
+
+          <td style="background-color:#1a5fb41A">read
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#99c1f11A">sand
+
+          </td>
+
+          <td style="background-color:#99c1f11A">slow
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#1a5fb41A">study
+
+          </td>
+
+          <td style="background-color:#1a5fb41A">speed
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#99c1f11A">vision
+
+          </td>
+
+          <td style="background-color:#99c1f11A">stun
+
+          </td></tr></tbody></table>
         fluent: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Fluency Bonus]{F}).</p>
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:fluency-bonus]{F}).</p>
         proficient: >-
-          <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-          @L[Core:Proficiency Bonus]{P}).</p>
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:proficiency-bonus]{P}).</p>
       piercing:
         raw: 0
       powerSources:
@@ -467,7 +823,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
     name: Dispel Magic
     system:
@@ -521,8 +877,8 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range of [[lookup
-        name]] increases by 10 feet.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the range of [[lookup name]] increases by 10 feet.</p>
       identifier: dispel-magic
       interaction: manifest
       invoked: true
@@ -530,18 +886,19 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Target @L[Category:Conjured spells]{spell}
-          @L[Core:Fizzles]{fizzles}.</p>
+          <p>Target @Wiki[Category:Conjured spells]{spell}
+          @Identifier[core:fizzles]{fizzles}.</p>
         fluent: >-
-          <p>You may now use [[lookup name]] @L[Core:Fluency Bonus]{F}
-          additional times as a @L[Category:Free reaction abilities]{free
+          <p>You may now use [[lookup name]] @Identifier[core:fluency-bonus]{F}
+          additional times as a @Wiki[Category:Free reaction abilities]{free
           reaction} before the start of your next turn. These additional uses do
           not in turn allow for additional uses.</p>
         proficient: >-
-          <p>You may now use [[lookup name]] @L[Core:Proficiency Bonus]{P}
-          additional times as a @L[Category:Free reaction abilities]{free
-          reaction} before the start of your next turn. These additional uses do
-          not in turn allow for additional uses.</p>
+          <p>You may now use [[lookup name]]
+          @Identifier[core:proficiency-bonus]{P} additional times as a
+          @Wiki[Category:Free reaction abilities]{free reaction} before the
+          start of your next turn. These additional uses do not in turn allow
+          for additional uses.</p>
       piercing:
         raw: 0
       powerSources:
@@ -549,14 +906,14 @@ effects:
       range:
         raw: '30'
         unit: ft
-      requirements: <p>Target is a @L[Category:Conjured spells]{conjured spell}.</p>
+      requirements: <p>Target is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
       rotator: true
       spell: true
       standard: true
       targets:
         - spell
       trigger: >-
-        <p>A @L[Category:Conjured spells]{conjured spell} is used within
+        <p>A @Wiki[Category:Conjured spells]{conjured spell} is used within
         range.</p>
     transfer: true
     type: ability
@@ -567,7 +924,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/resist-effects.webp
     name: Resist Effects
     system:
@@ -614,28 +971,52 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Pick one of the following @L[Category:Effects]{effect types}. You
-          @L[Keyword:Resistance]{resist} @L[Category:Effects]{effects} of that
-          type.</p><ol><li>@L[Category:Awakening effects]{Awakening
-          effects}</li><li>@L[Category:Control effects]{Control
-          effects}</li><li>@L[Category:Displacement effects]{Displacement
-          effects}</li><li>@L[Category:Duel modifying effects]{Duel modifying
-          effects}</li><li>@L[Category:Financial effects]{Financial
-          effects}</li><li>@L[Category:Healing effects]{Healing
-          effects}</li><li>@L[Category:Killing effects]{Killing
-          effects}</li><li>@L[Category:Knockout effects]{Knockout
-          effects}</li><li>@L[Category:Loud effects]{Loud
-          effects}</li><li>@L[Category:Mental effects]{Mental
-          effects}</li><li>@L[Category:Poison effects]{Poison
-          effects}</li><li>@L[Category:Reanimation effects]{Reanimation
-          effects}</li><li>@L[Category:Regeneration effects]{Regeneration
-          effects}</li><li>@L[Category:Revitalization effects]{Revitalization
-          effects}</li><li>@L[Category:Revival effects]{Revival
-          effects}</li><li>@L[Category:Stealing effects]{Stealing
-          effects}</li><li>@L[Category:Summoning effects]{Summoning
-          effects}</li><li>@L[Category:Temporal effects]{Temporal
-          effects}</li><li>@L[Category:Transformation effects]{Transformation
-          effects}</li><li>@L[Category:Truth detecting effects]{Truth detecting
+          <p>Pick one of the following @Wiki[Category:Effects]{effect types}.
+          You @Identifier[keyword:resistance]{resist}
+          @Wiki[Category:Effects]{effects} of that
+          type.</p><ol><li>@Wiki[Category:Awakening effects]{Awakening
+          effects}</li>
+
+          <li>@Wiki[Category:Control effects]{Control effects}</li>
+
+          <li>@Wiki[Category:Displacement effects]{Displacement effects}</li>
+
+          <li>@Wiki[Category:Duel modifying effects]{Duel modifying
+          effects}</li>
+
+          <li>@Wiki[Category:Financial effects]{Financial effects}</li>
+
+          <li>@Wiki[Category:Healing effects]{Healing effects}</li>
+
+          <li>@Wiki[Category:Killing effects]{Killing effects}</li>
+
+          <li>@Wiki[Category:Knockout effects]{Knockout effects}</li>
+
+          <li>@Wiki[Category:Loud effects]{Loud effects}</li>
+
+          <li>@Wiki[Category:Mental effects]{Mental effects}</li>
+
+          <li>@Wiki[Category:Poison effects]{Poison effects}</li>
+
+          <li>@Wiki[Category:Reanimation effects]{Reanimation effects}</li>
+
+          <li>@Wiki[Category:Regeneration effects]{Regeneration effects}</li>
+
+          <li>@Wiki[Category:Revitalization effects]{Revitalization
+          effects}</li>
+
+          <li>@Wiki[Category:Revival effects]{Revival effects}</li>
+
+          <li>@Wiki[Category:Stealing effects]{Stealing effects}</li>
+
+          <li>@Wiki[Category:Summoning effects]{Summoning effects}</li>
+
+          <li>@Wiki[Category:Temporal effects]{Temporal effects}</li>
+
+          <li>@Wiki[Category:Transformation effects]{Transformation
+          effects}</li>
+
+          <li>@Wiki[Category:Truth detecting effects]{Truth detecting
           effects}</li></ol>
       piercing:
         raw: 0
@@ -658,7 +1039,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/displace.webp
     name: Displace
     system:
@@ -689,8 +1070,8 @@ effects:
       featSaveAttribute: mov
       form: special
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the range increases by 10
-        feet.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the range increases by 10 feet.</p>
       identifier: displace
       interaction: manifest
       maneuver: reactive
@@ -699,8 +1080,10 @@ effects:
         base: >-
           <p>You are instantly transported to a location you can see within
           range.</p>
-        fluent: <p>The range becomes 10 × @L[Core:Fluency Bonus]{F} feet.</p>
-        proficient: <p>The range becomes 10 × @L[Core:Proficiency Bonus]{P} feet.</p>
+        fluent: <p>The range becomes 10 × @Identifier[core:fluency-bonus]{F} feet.</p>
+        proficient: >-
+          <p>The range becomes 10 × @Identifier[core:proficiency-bonus]{P}
+          feet.</p>
       piercing:
         raw: 0
       powerSources:
@@ -714,8 +1097,8 @@ effects:
       targets:
         - area
       trigger: >-
-        <p>You cast a @L[Category:Missile delivery spells]{missile} or
-        @L[Category:Weapon delivery spells]{weapon delivery spell}.</p>
+        <p>You cast a @Wiki[Category:Missile delivery spells]{missile} or
+        @Wiki[Category:Weapon delivery spells]{weapon delivery spell}.</p>
     transfer: true
     type: ability
   - _id: wAXXWH1CXQh6RbbI
@@ -725,7 +1108,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spell-trigger.webp
     name: Spell Trigger
     system:
@@ -761,9 +1144,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You cast one @L[Category:Single action spells]{single action spell}
-          you have that is not @L[Category:Item delivery spells]{delivered by an
-          item}.</p>
+          <p>You cast one @Wiki[Category:Single action spells]{single action
+          spell} you have that is not @Wiki[Category:Item delivery
+          spells]{delivered by an item}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -775,7 +1158,7 @@ effects:
       standard: true
       targets:
         - self
-      trigger: <p>You @L[Condition:Down]{drop}.</p>
+      trigger: <p>You @Identifier[status:down]{drop}.</p>
     transfer: true
     type: ability
   - _id: krlJZhDUTIef8vsx
@@ -785,7 +1168,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/crown-of-ice.webp
     name: Crown of Ice
     system:
@@ -846,8 +1229,8 @@ effects:
       overview:
         base: >-
           <p>A small circle of glowing frost circles above your head. You gain
-          @L[Ability:Shock Touch]{Shock Touch} and @L[Ability:Blizzard
-          Aura]{Blizzard Aura}.</p>
+          @Identifier[ability:shock-touch]{Shock Touch} and
+          @Identifier[ability:blizzard-aura]{Blizzard Aura}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -869,7 +1252,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/blizzard-aura.webp
     name: Blizzard Aura
     system:
@@ -961,8 +1344,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic ice]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: blizzard-aura
       interaction: feat
       invoked: true
@@ -976,7 +1360,7 @@ effects:
         raw: '10'
         unit: ft
       results:
-        fail: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+        fail: <p>Target is @Identifier[status:frozen]{frozen}.</p>
       spell: true
       standard: true
       targets:
@@ -990,7 +1374,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     name: Shock Touch
     system:
@@ -1077,8 +1461,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic ice]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: shock-touch
       interaction: attack
       invoked: true
@@ -1092,7 +1477,7 @@ effects:
         unit: contact
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+        hit: <p>Target is @Identifier[status:frozen]{frozen}.</p>
       spell: true
       standard: true
       targets:

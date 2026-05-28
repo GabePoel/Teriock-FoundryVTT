@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: nhtXlf0P8MUN69hX
     _key: '!items.effects!65abf191497d73fc.nhtXlf0P8MUN69hX'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
@@ -70,15 +70,15 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Lose all @L[Core:Temporary Hit Points]{temporary HP} and gain
-          [[/roll 1d6]] @L[Core:Temporary Hit Points]{temporary HP} as long as
-          you remain stationary.</p>
+          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and
+          gain [[/roll 1d6]] @Identifier[core:temporary-hit-points]{temporary
+          HP} as long as you remain stationary.</p>
         fluent: >-
-          <p>Instead gain [[/roll 1d6 + (@f)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.</p>
+          <p>Instead gain [[/roll 1d6 + (@f)d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
         proficient: >-
-          <p>Instead gain [[/roll 1d6 + (@p)d6]] @L[Core:Temporary Hit
-          Points]{temporary HP}.</p>
+          <p>Instead gain [[/roll 1d6 + (@p)d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -99,7 +99,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     name: Earthbind Touch
     system:
@@ -153,8 +153,9 @@ effects:
       elements:
         - nature
       endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the start of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime: a1
       expansion:
         range:
@@ -162,8 +163,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic vine]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic vine]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: earthbind-touch
       interaction: attack
       maneuver: active
@@ -176,8 +178,8 @@ effects:
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
         hit: >-
-          <p>Target is @L[Condition:Grounded]{grounded} and
-          @L[Condition:Immobile]{immobilized}.</p>
+          <p>Target is @Identifier[status:grounded]{grounded} and
+          @Identifier[status:immobile]{immobilized}.</p>
       spell: true
       standard: true
       targets:
@@ -190,13 +192,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Toad Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Toad]{toad}.</p>
+      description: <p>You know the way of the @Identifier[creature:toad]{toad}.</p>
       field: survivalist
       identifier: toad-tamer
       tradecraft: tamer
@@ -209,10 +211,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.5a5dfdfb3a023201
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:toad inline]</p>
   identifier: toad-familiar
   maxAv: 0
   type: familiar

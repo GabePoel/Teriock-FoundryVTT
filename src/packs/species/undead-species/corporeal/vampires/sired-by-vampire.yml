@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: 6ctq0MCutbfkTAbX
     _key: '!items.effects!9168673883a5dcc0.6ctq0MCutbfkTAbX'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/charm.webp
     name: Charm
     system:
@@ -60,10 +60,10 @@ effects:
       range:
         unit: contact
       requirements: >-
-        <p>A creature may only have up to @L[Core:Presence]{PRES} creatures
-        @L[Condition:Charmed]{charmed} at a time.</p>
+        <p>A creature may only have up to @Identifier[core:presence]{PRES}
+        creatures @Identifier[status:charmed]{charmed} at a time.</p>
       results:
-        hit: <p>Target is @L[Condition:Charmed]{charmed}.</p>
+        hit: <p>Target is @Identifier[status:charmed]{charmed}.</p>
       targets:
         - creature
     transfer: true
@@ -75,7 +75,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/feeding.webp
     name: Feeding
     system:
@@ -102,18 +102,19 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You must @L[Drain:Mana]{mana drain} at least 3 creatures to
-          @L[Condition:Dead]{death} every day 24 hours or you start taking
-          penalties. If 24 hours pass and you have not fed, you lose your your
-          largest @L[Core:HP]{hit die} and @L[Core:MP]{mana die}. Your
-          @L[Core:Hit Points and Mana Points]{HP} and @L[Core:Hit Points and
-          Mana Points]{MP} maximums decrease by the value of those dice. For
-          each additional 24 hours you go without [[lookup name style=lc]], you
-          lose your next largest @L[Core:HP]{hit die} and @L[Core:MP]{mana die}.
-          To restore lost @L[Core:HP]{hit dice} and @L[Core:MP]{mana dice}, you
-          must feed more than normal. If you feed on at least 6 creatures within
-          a 24 hour period, you restore 1 lost @L[Core:HP]{hit die} and
-          @L[Core:MP]{mana die}.</p>
+          <p>You must @Identifier[drain:mana]{mana drain} at least 3 creatures
+          to @Identifier[status:dead]{death} every day 24 hours or you start
+          taking penalties. If 24 hours pass and you have not fed, you lose your
+          your largest @Wiki[Core:HP]{hit die} and @Wiki[Core:MP]{mana die}.
+          Your @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} maximums decrease by
+          the value of those dice. For each additional 24 hours you go without
+          [[lookup name style=lc]], you lose your next largest
+          @Wiki[Core:HP]{hit die} and @Wiki[Core:MP]{mana die}. To restore lost
+          @Wiki[Core:HP]{hit dice} and @Wiki[Core:MP]{mana dice}, you must feed
+          more than normal. If you feed on at least 6 creatures within a 24 hour
+          period, you restore 1 lost @Wiki[Core:HP]{hit die} and
+          @Wiki[Core:MP]{mana die}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -131,7 +132,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/partial-undead.webp
     name: Partial Undead
     system:
@@ -158,10 +159,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You count as being @L[Keyword:Undead]{undead} for the purposes of
-          @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage},
-          and other @L[Category:Effects]{effects}. You also gain
-          @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
+          <p>You count as being @Identifier[keyword:undead]{undead} for the
+          purposes of @Pack[teriock.abilities]{abilities}, @Wiki[Category:Damage
+          types]{damage}, and other @Wiki[Category:Effects]{effects}. You also
+          gain @Identifier[ability:healing-sensitivity]{Healing
+          Sensitivity}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -179,7 +181,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/sunlight-sensitivity.webp
     name: Sunlight Sensitivity
     system:
@@ -206,11 +208,12 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>If you end your @L[Core:Turns]{turn} in direct sunlight, you roll
-          your <i>largest</i> @L[Core:HP]{hit die} and take that much
-          @L[Damage:Holy]{holy} @L[Damage:Magic]{magic damage} instead of the
-          normal @L[Core:Healing]{healing} effect. This does not consume any of
-          your @L[Core:HP]{hit dice}.</p>
+          <p>If you end your @Identifier[core:turns]{turn} in direct sunlight,
+          you roll your <i>largest</i> @Wiki[Core:HP]{hit die} and take that
+          much @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
+          damage} instead of the normal @Identifier[core:healing]{healing}
+          effect. This does not consume any of your @Wiki[Core:HP]{hit
+          dice}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -228,7 +231,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: icons/skills/social/diplomacy-handshake-blue.webp
     name: Talented Courtier
     system:
@@ -263,8 +266,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are a @L[Keyword:Talented]{talented}
-          @L[Tradecraft:Courtier]{courtier}.</p>
+          <p>You are a @Identifier[keyword:talented]{talented}
+          @Identifier[tradecraft:courtier]{courtier}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -282,7 +285,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
     name: Healing Sensitivity
     system:
@@ -310,13 +313,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>@L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage}
-          you. If the creature providing you @L[Core:Healing]{healing} specifies
-          that they are doing so "for damage" then you roll your <i>largest</i>
-          @L[Core:HP]{hit die} and take that much @L[Damage:Holy]{holy}
-          @L[Damage:Magic]{magic damage} instead of the normal
-          @L[Core:Healing]{healing} effect. This does not consume any of your
-          @L[Core:HP]{hit dice}.</p>
+          <p>@Identifier[core:healing]{Healing} can be used to
+          @Identifier[core:damage]{damage} you. If the creature providing you
+          @Identifier[core:healing]{healing} specifies that they are doing so
+          "for damage" then you roll your <i>largest</i> @Wiki[Core:HP]{hit die}
+          and take that much @Identifier[damage:holy]{holy}
+          @Identifier[damage:magic]{magic damage} instead of the normal
+          @Identifier[core:healing]{healing} effect. This does not consume any
+          of your @Wiki[Core:HP]{hit dice}.</p>
       piercing:
         raw: 0
       powerSources:

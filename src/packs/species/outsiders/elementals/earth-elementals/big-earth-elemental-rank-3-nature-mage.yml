@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: combat
@@ -25,6 +25,10 @@ effects:
       class: natureMage
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -44,9 +48,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Add @L[Ability:Advanced Hack Healing]{Advanced Hack Healing} and
-          @L[Ability:Transmute]{Transmute} to your list of possible
-          @L[Category:Rotator spells]{rotator spells}.</p>
+          <p>Add @Identifier[ability:advanced-hack-healing]{Advanced Hack
+          Healing} and @Identifier[ability:transmute]{Transmute} to your list of
+          possible @Wiki[Category:Rotator spells]{rotator spells}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -65,7 +69,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     flags:
       teriock:
         category: support
@@ -127,27 +131,31 @@ effects:
       overview:
         base: >-
           <p>In addition to the custom rotator spells you create, you can learn
-          @L[Category:Rotator spells]{spells} created by others. When you come
-          across a fully created spell using only words you are @L[Core:Fluency
-          Bonus]{fluent} in, can make a DC 12 + OP @L[Core:INT]{INT}
-          @L[Core:Feat Interaction]{feat save} to attempt to learn it over the
-          course of a @L[Core:Long Rest]{long rest}. If you succeed, you can add
-          it to your rotator spell list. If you fail, you are
-          @L[Keyword:Incapable]{incapable} of attempting to learn that spell
-          again. The @L[Core:Game Master]{GM} may modify the DC based on the
-          spell's complexity, your knowledge of the spell, any special training
-          you receive, if the spell's creator is there to assist you, or for any
-          other factors they see fit. You may also attempt to learn words that
-          you come across as long as they are of elements you are
-          @L[Core:Fluency Bonus]{fluent} in. The @L[Core:Game Master]{GM} may
-          adjust the DC for these as they see fit as well, but the default is DC
-          15 + OP @L[Core:Intelligence]{INT} @L[Core:Feat Interaction]{feat
-          save}.</p>
+          @Wiki[Category:Rotator spells]{spells} created by others. When you
+          come across a fully created spell using only words you are
+          @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + OP
+          @Wiki[Core:INT]{INT} @Identifier[core:feat-interaction]{feat save} to
+          attempt to learn it over the course of a
+          @Identifier[core:long-rest]{long rest}. If you succeed, you can add it
+          to your rotator spell list. If you fail, you are
+          @Identifier[keyword:incapable]{incapable} of attempting to learn that
+          spell again. The @Identifier[core:game-master]{GM} may modify the DC
+          based on the spell's complexity, your knowledge of the spell, any
+          special training you receive, if the spell's creator is there to
+          assist you, or for any other factors they see fit. You may also
+          attempt to learn words that you come across as long as they are of
+          elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+          @Identifier[core:game-master]{GM} may adjust the DC for these as they
+          see fit as well, but the default is DC 15 + OP
+          @Identifier[core:intelligence]{INT}
+          @Identifier[core:feat-interaction]{feat save}.</p>
         proficient: >-
-          <p>You are @L[Core:Fluency Bonus]{fluent} in @L[Ability:Elder Sorcery
-          Creation]{Elder Sorcery Creation}, @L[Ability:Celestial Elder Sorcery
-          Words]{Celestial Elder Sorcery Words}, and @L[Ability:Nature Elder
-          Sorcery Words]{Nature Elder Sorcery Words}.</p>
+          <p>You are @Identifier[core:fluency-bonus]{fluent} in
+          @Identifier[ability:elder-sorcery-creation]{Elder Sorcery Creation},
+          @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+          Sorcery Words}, and
+          @Identifier[ability:nature-elder-sorcery-words]{Nature Elder Sorcery
+          Words}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -156,8 +164,8 @@ effects:
         unit: self
       results:
         fail: >-
-          <p>You are @L[Keyword:Incapable]{incapable} of attempting to learn
-          that spell or word again.</p>
+          <p>You are @Identifier[keyword:incapable]{incapable} of attempting to
+          learn that spell or word again.</p>
         save: <p>You learn the spell or word.</p>
       skill: true
       standard: true
@@ -172,7 +180,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
     name: Advanced Hack Healing
     system:
@@ -222,8 +230,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Whenever you @L[Core:Healing]{heal}, you may @L[Core:Healing]{heal}
-          a @L[Damage:Hack]{hack} as well.</p>
+          <p>Whenever you @Identifier[core:healing]{heal}, you may
+          @Identifier[core:healing]{heal} a @Identifier[damage:hack]{hack} as
+          well.</p>
       piercing:
         raw: 0
       powerSources:
@@ -245,7 +254,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/transmute.webp
     name: Transmute
     system:
@@ -297,23 +306,37 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>The triggering @L[Category:Standard abilities]{ability} is
-          "transformed" into a @L[Damage:Hack]{hack} instead of its normal
-          effect. The type of the @L[Damage:Hack]{hack} is determined by the
-          target of the triggering ability.</p><dl><dt>@L[Category:Creature
-          target abilities]{Creature target abilities}</dt><dd>Transformed into
-          a body hack.</dd><dt>@L[Category:Vitals target abilities]{Vitals
-          target abilities}</dt><dd>Transformed into a vitals hack of your
-          choice.</dd><dt>@L[Category:Arm target abilities]{Arm target
-          abilities}</dt><dd>Transformed into an arm
-          hack.</dd><dt>@L[Category:Leg target abilities]{Leg target
-          abilities}</dt><dd>Transformed into a leg
-          hack.</dd><dt>@L[Category:Limb target abilities]{Limb target
-          abilities}</dt><dd>If no limb is specified in either the target or the
-          effect, it is transformed into a limb hack of your
-          choice.</dd></dl><p>If the triggering @L[Category:Standard
-          abilities]{ability} was @L[Keyword:UB]{UB}, but you otherwise would
-          have been able to @L[Ability:Basic Block]{Block} it, you may treat it
+          <p>The triggering
+          @UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{ability}
+          is "transformed" into a @Identifier[damage:hack]{hack} instead of its
+          normal effect. The type of the @Identifier[damage:hack]{hack} is
+          determined by the target of the triggering
+          ability.</p><dl><dt>@Wiki[Category:Creature target abilities]{Creature
+          target abilities}</dt>
+
+          <dd>Transformed into a body hack.</dd>
+
+          <dt>@Wiki[Category:Vitals target abilities]{Vitals target
+          abilities}</dt>
+
+          <dd>Transformed into a vitals hack of your choice.</dd>
+
+          <dt>@Wiki[Category:Arm target abilities]{Arm target abilities}</dt>
+
+          <dd>Transformed into an arm hack.</dd>
+
+          <dt>@Wiki[Category:Leg target abilities]{Leg target abilities}</dt>
+
+          <dd>Transformed into a leg hack.</dd>
+
+          <dt>@Wiki[Category:Limb target abilities]{Limb target abilities}</dt>
+
+          <dd>If no limb is specified in either the target or the effect, it is
+          transformed into a limb hack of your choice.</dd></dl><p>If the
+          triggering
+          @UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{ability}
+          was @Identifier[keyword:ub]{UB}, but you otherwise would have been
+          able to @Identifier[ability:basic-block]{Block} it, you may treat it
           as though it targeted your arm. </p>
       piercing:
         raw: 0
@@ -328,7 +351,8 @@ effects:
       targets:
         - self
       trigger: >-
-        <p>You would take a @L[Category:Standard abilities]{standard
+        <p>You would take a
+        @UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{standard
         ability}.</p>
     transfer: true
     type: ability

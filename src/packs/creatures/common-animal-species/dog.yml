@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: KtfmSsQCLiE0LIM9
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/advanced-hearing.webp
         name: Advanced Hearing
         system:
@@ -66,8 +66,8 @@ items:
             base: >-
               <p>You can hear all moving creatures within 30 feet. If the
               creature is breathing, you can hear it even if it is not moving.
-              You can not detect @L[Condition:Silent]{silent} creatures in this
-              way.</p>
+              You can not detect @Identifier[status:silent]{silent} creatures in
+              this way.</p>
           piercing:
             raw: 0
           powerSources:
@@ -90,7 +90,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -123,16 +123,16 @@ items:
               <p>You can passively smell the types of all living creatures
               within 30 feet. You can detect dead and undead creatures as well,
               but you cannot distinguish within or between them. They all smell
-              like death. You also gain @L[Ability:Scent Seeing]{Scent Seeing}.
-              You can not detect @L[Condition:Odorless]{odorless} creatures in
-              this way.</p>
+              like death. You also gain @Identifier[ability:scent-seeing]{Scent
+              Seeing}. You can not detect @Identifier[status:odorless]{odorless}
+              creatures in this way.</p>
           piercing:
             raw: 0
           powerSources:
             - martial
           range:
             unit: self
-          requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
+          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
           skill: true
           standard: true
           targets:
@@ -151,7 +151,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -195,7 +195,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/paw-print-tan.webp
         name: Expert Tracker
         system:
@@ -229,8 +229,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are an @L[Keyword:Expertise]{expert}
-              @L[Tradecraft:Tracker]{tracker}.</p>
+              <p>You are an @Identifier[keyword:expertise]{expert}
+              @Identifier[tradecraft:tracker]{tracker}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -249,7 +249,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/hack.webp
         name: Hack
         system:
@@ -279,7 +279,7 @@ items:
           form: normal
           identifier: hack
           interaction: attack
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          limitation: <p>@Wiki[Category:Biting equipment]{Biting items} only.</p>
           maneuver: active
           overview:
             base: >-
@@ -293,11 +293,11 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>The target takes 2 @L[Damage:Hack]{hack damage} on either arms
-              or legs, depending on what you chose.</p>
+              <p>The target takes 2 @Identifier[damage:hack]{hack damage} on
+              either arms or legs, depending on what you chose.</p>
             hit: >-
-              <p>The target takes 1 @L[Damage:Hack]{hack damage} on either an
-              arm or leg, depending on what you chose.</p>
+              <p>The target takes 1 @Identifier[damage:hack]{hack damage} on
+              either an arm or leg, depending on what you chose.</p>
           skill: true
           standard: true
           targets:
@@ -313,7 +313,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/impale.webp
         name: Impale
         system:
@@ -348,7 +348,7 @@ items:
           form: normal
           identifier: impale
           interaction: attack
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          limitation: <p>@Wiki[Category:Biting equipment]{Biting items} only.</p>
           maneuver: active
           piercing:
             raw: 0
@@ -358,9 +358,10 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>If you want, target takes @L[Core:Standard and Critical
-              Damage]{standard damage} as well.</p>
-            hit: <p>Target takes a @L[Damage:Hack]{body hack}.</p>
+              <p>If you want, target takes
+              @Identifier[core:standard-and-critical-damage]{standard damage} as
+              well.</p>
+            hit: <p>Target takes a @Identifier[damage:hack]{body hack}.</p>
           skill: true
           standard: true
           targets:
@@ -375,7 +376,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -398,7 +399,9 @@ items:
           interaction: manifest
           maneuver: passive
           overview:
-            base: <p>You cannot use items in your @L[Equipment:Hand]{hands}.</p>
+            base: >-
+              <p>You cannot use items in your
+              @Identifier[equipment:hand]{hands}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -417,7 +420,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -461,7 +464,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -505,7 +508,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -549,7 +552,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/vitals-hack.webp
         name: Vitals Hack
         system:
@@ -588,7 +591,7 @@ items:
           form: normal
           identifier: vitals-hack
           interaction: attack
-          limitation: <p>@L[Category:Biting equipment]{Biting items} only.</p>
+          limitation: <p>@Wiki[Category:Biting equipment]{Biting items} only.</p>
           maneuver: active
           piercing:
             raw: 0
@@ -598,9 +601,12 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>If you want, target takes @L[Core:Standard and Critical
-              Damage]{standard damage} as well.</p>
-            hit: <p>Target takes a @L[Damage:Hack]{vitals hack} of your choice.</p>
+              <p>If you want, target takes
+              @Identifier[core:standard-and-critical-damage]{standard damage} as
+              well.</p>
+            hit: >-
+              <p>Target takes a @Identifier[damage:hack]{vitals hack} of your
+              choice.</p>
           skill: true
           standard: true
           targets:
@@ -615,7 +621,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -659,7 +665,7 @@ items:
               <p>You know the exact location of all target creatures. You
               continue to know the location of all targets within 10 feet,
               whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              still within 10 feet of you.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -668,8 +674,8 @@ items:
             raw: '10'
             unit: ft
           requirements: >-
-            <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
-            not @L[Condition:Odorless]{odorless}.</p>
+            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
+            target is not @Identifier[status:odorless]{odorless}.</p>
           skill: true
           standard: true
           targets:
@@ -680,12 +686,10 @@ items:
     img: systems/teriock/src/icons/creatures/dog.webp
     name: Dog
     system:
-      adult: 0
       br: 1
       competence:
         raw: 1
       identifier: dog
-      lifespan: 0
       size:
         enabled: true
         value: 2
@@ -709,7 +713,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -719,7 +723,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -729,8 +733,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -743,7 +747,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -753,7 +757,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -785,7 +789,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: T6tkKBbgt98kmWzP
         _key: >-
@@ -795,7 +799,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -805,7 +809,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -820,7 +825,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -830,7 +835,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -863,7 +868,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -873,7 +878,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -883,7 +888,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -898,7 +904,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -908,7 +914,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true

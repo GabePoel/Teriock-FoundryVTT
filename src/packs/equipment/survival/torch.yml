@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/bashing.webp
     name: Bashing
     system:
@@ -23,8 +23,8 @@ effects:
         raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property is not a
-        weapon, but can still be used to make a @L[Ability:Basic Attack]{Basic
-        Attack}.</p>
+        weapon, but can still be used to make a
+        @Identifier[ability:basic-attack]{Basic Attack}.</p>
       form: intrinsic
       identifier: bashing
       mundane: true
@@ -37,18 +37,36 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/flaming.webp
     name: Flaming
     system:
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: token.light.dim
+              priority: 5
+              target: Actor
+              type: upgrade
+              value: '10'
+            - key: token.light.color
+              priority: 5
+              target: Actor
+              type: override
+              value: '#C64600'
+            - key: token.light.animation.type
+              priority: 5
+              target: Actor
+              type: override
+              value: torch
+          type: changes
       competence:
         raw: 0
       description: >-
         <p>If an item is <b>[[lookup name style=lc]]</b> (on fire), it is
-        @L[Property:Glowing]{glowing} (10 feet) and
-        @L[Property:Burning]{burning}.</p>
-      elements:
-        - flame
+        @Identifier[property:glowing]{glowing} (10 feet) and
+        @Identifier[property:burning]{burning}.</p>
       form: intrinsic
       identifier: flaming
     transfer: true
@@ -60,7 +78,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/glowing.webp
     name: Glowing
     system:
@@ -109,20 +127,17 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/burning.webp
     name: Burning
     system:
       _sup: W7zBwBVrBOlOAAnp
       competence:
         raw: 0
-      damageType: fire
       description: >-
         <p>An item that is <b>[[lookup name style=lc]]</b>, deals
-        @L[Damage:Fire]{fire damage} and can be used to deliver
-        @L[Ability:Burn]{Burn}. </p>
-      elements:
-        - flame
+        @Identifier[damage:fire]{fire damage} and can be used to deliver
+        @Identifier[ability:burn]{Burn}.</p>
       form: intrinsic
       identifier: burning
       mundane: false

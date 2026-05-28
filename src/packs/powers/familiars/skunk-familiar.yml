@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: JMtK1yCnqAhbEEZV
     _key: '!items.effects!c64018675b6990f0.JMtK1yCnqAhbEEZV'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     name: Disable Ray
     system:
@@ -41,18 +41,20 @@ effects:
         primary:
           mp:
             description: >-
-              <p>This costs 0 @L[Core:Hit Points and Mana Points]{MP} if the
-              triggering @L[Category:Abilities]{ability} was used on you or some
-              @L[Category:Equipment]{equipment} you @L[Keyword:Bearing]{bear}.
-              It costs 1 @L[Core:Hit Points and Mana Points]{MP} otherwise.</p>
+              <p>This costs 0 @Identifier[core:hit-points-and-mana-points]{MP}
+              if the triggering @Pack[teriock.abilities]{ability} was used on
+              you or some @Pack[teriock.equipment]{equipment} you
+              @Identifier[keyword:bearing]{bear}. It costs 1
+              @Identifier[core:hit-points-and-mana-points]{MP} otherwise.</p>
             type: description
       delivery: missile
       duration:
         raw: '1'
         unit: minute
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime: r1
       expansion:
         range:
@@ -64,8 +66,9 @@ effects:
       maneuver: reactive
       overview:
         proficient: >-
-          <p>This also makes the effect of that @L[Category:Abilities]{ability}
-          @L[Core:Fizzles]{fizzle}.</p>
+          <p>This also makes the effect of that
+          @Pack[teriock.abilities]{ability}
+          @Identifier[core:fizzles]{fizzle}.</p>
       piercing:
         raw: 1
       powerSources:
@@ -76,18 +79,18 @@ effects:
       requirements: <p>You may only target the triggering creature.</p>
       results:
         hit: >-
-          <p>Target becomes @L[Keyword:Incapable]{incapable} of the
-          @L[Category:Abilities]{ability} they were using.</p>
+          <p>Target becomes @Identifier[keyword:incapable]{incapable} of the
+          @Pack[teriock.abilities]{ability} they were using.</p>
       skill: true
       standard: true
       targets:
         - creature
       trigger: >-
-        <p>Another creature uses a non-@L[Category:Basic abilities]{basic}
-        @L[Category:Active abilities]{active} or @L[Category:Reactive
-        abilities]{reactive ability} that isn't a @L[Category:Spells]{spell}
-        against a different creature or some @L[Category:Equipment]{equipment}
-        that different creature @L[Keyword:Bearing]{bares}.</p>
+        <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic}
+        @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive
+        abilities]{reactive ability} that isn't a @Wiki[Category:Spells]{spell}
+        against a different creature or some @Pack[teriock.equipment]{equipment}
+        that different creature @Identifier[keyword:bearing]{bares}.</p>
     transfer: true
     type: ability
   - _id: WzJUOYpyjt2Hr9w7
@@ -97,7 +100,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/inedible.webp
     name: Inedible
     system:
@@ -126,13 +129,13 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You are @L[Keyword:Resistance]{resistant} to being @L[Category:Bite
-          delivery abilities]{bite delivery abilities}.</p><div
-          class="note"><b>Note:</b> This does not make you
-          @L[Keyword:Resistance]{resistant} to all @L[Category:Weapon delivery
-          abilities]{weapon delivery abilities} where a
-          @L[Category:Equipment]{mouth} is the @L[Category:Weapons]{weapon}
-          being used.</div>
+          <p>You are @Identifier[keyword:resistance]{resistant} to being
+          @Wiki[Category:Bite delivery abilities]{bite delivery
+          abilities}.</p><div class="note"><b>Note:</b> This does not make you
+          @Identifier[keyword:resistance]{resistant} to all
+          @Wiki[Category:Weapon delivery abilities]{weapon delivery abilities}
+          where a @Pack[teriock.equipment]{mouth} is the
+          @Wiki[Category:Weapons]{weapon} being used.</div>
       piercing:
         raw: 0
       powerSources:
@@ -149,13 +152,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Skunk Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Skunk]{skunk}.</p>
+      description: <p>You know the way of the @Identifier[creature:skunk]{skunk}.</p>
       field: survivalist
       identifier: skunk-tamer
       tradecraft: tamer
@@ -168,10 +171,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.a9985fa3fffca995
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:skunk inline]</p>
   identifier: skunk-familiar
   maxAv: 0
   type: familiar

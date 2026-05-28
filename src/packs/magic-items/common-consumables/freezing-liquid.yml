@@ -13,10 +13,11 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
     name: Drink Freezing Liquid
     system:
+      class: stormMage
       competence:
         raw: 0
       delivery: self
@@ -35,8 +36,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You gain @L[Keyword:Gifted]{Gifted} @L[Ability:Shock Touch]{Shock
-          Touch}.</p>
+          <p>You gain @Identifier[keyword:gifted]{Gifted}
+          @Identifier[ability:shock-touch]{Shock Touch}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -54,7 +55,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -64,13 +65,13 @@ effects:
         raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
+        becomes @Identifier[property:shattered]{shattered} if it is used to
+        @Identifier[core:block-interaction]{block} or if it is the
+        @Wiki[Category:Item target abilities]{target of an ability} that deals
+        it @Wiki[Category:Damaging effects]{damage}. If it would become
+        @Identifier[property:shattered]{shattered} through some other means, it
+        is instead @Identifier[property:destroyed]{destroyed}.</p>
+      form: intrinsic
       identifier: fragile
       mundane: true
     transfer: true
@@ -82,7 +83,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/pour-freezing-liquid.webp
     name: Pour Freezing Liquid
     system:
@@ -113,7 +114,13 @@ effects:
           type: status
       competence:
         raw: 0
-      consumeSource: true
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Using this ability consumes the
+              @Pack[teriock.equipment]{equipment} that provides it.</p>
+            type: description
       delivery: item
       duration:
         raw: '1'
@@ -139,11 +146,12 @@ effects:
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability. Target must be @L[Condition:Down]{down}.</p>
+        @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+        @Identifier[core:maneuvers]{maneuver} and
+        @Identifier[core:abilities]{execution time} for the ability. Target must
+        be @Identifier[status:down]{down}.</p>
       results:
-        hit: <p>Target becomes @L[Condition:Frozen]{frozen}.</p>
+        hit: <p>Target becomes @Identifier[status:frozen]{frozen}.</p>
       targets:
         - creature
     transfer: true
@@ -155,7 +163,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -165,9 +173,9 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
+        steal through @Pack[teriock.abilities]{abilities} like
+        @Identifier[ability:search]{Search}.</p>
+      form: intrinsic
       identifier: searchable
     transfer: true
     type: property
@@ -178,7 +186,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -188,7 +196,7 @@ effects:
         raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
+        in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
       mundane: true
@@ -201,7 +209,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     name: Shock Touch
     system:
@@ -290,8 +298,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic ice]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic ice]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: shock-touch
       interaction: attack
       invoked: true
@@ -305,7 +314,7 @@ effects:
         unit: contact
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Frozen]{frozen}.</p>
+        hit: <p>Target is @Identifier[status:frozen]{frozen}.</p>
       spell: true
       standard: true
       targets:

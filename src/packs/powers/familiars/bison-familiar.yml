@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: bisonTamer000000
     _key: '!items.effects!f6f8b91281216f53.bisonTamer000000'
@@ -12,13 +12,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Bison Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Bison]{bison}.</p>
+      description: <p>You know the way of the @Identifier[creature:bison]{bison}.</p>
       field: survivalist
       identifier: bison-tamer
       tradecraft: tamer
@@ -31,7 +31,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/skill-share.webp
     name: Skill Share
     system:
@@ -108,23 +108,24 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Target gains one @L[Category:Abilities]{ability} of your choice
-          that you have from your first rank in a @L[Category:Classes]{class}.
-          The @L[Category:Abilities]{ability} must not be @L[Category:Elder
-          Sorcery abilities]{Elder Sorcery}, must not be a @L[Category:Contract
-          effects]{contract effect}, must be one you are @L[Core:Proficiency
-          Bonus]{proficient} in, and must be one you aren't
-          @L[Keyword:Incapable]{incapable} of. The target also becomes
-          @L[Keyword:Incapable]{incapable} of [[lookup name]]. You may only have
-          this active on one creature at a time.</p>
+          <p>Target gains one @Pack[teriock.abilities]{ability} of your choice
+          that you have from your first rank in a
+          @Wiki[Category:Classes]{class}. The @Pack[teriock.abilities]{ability}
+          must not be @Wiki[Category:Elder Sorcery abilities]{Elder Sorcery},
+          must not be a @Wiki[Category:Contract effects]{contract effect}, must
+          be one you are @Identifier[core:proficiency-bonus]{proficient} in, and
+          must be one you aren't @Identifier[keyword:incapable]{incapable} of.
+          The target also becomes @Identifier[keyword:incapable]{incapable} of
+          [[lookup name]]. You may only have this active on one creature at a
+          time.</p>
         fluent: >-
-          <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first 1 + @L[Core:Fluency Bonus]{F} ranks in a
-          @L[Category:Classes]{class}.</p>
+          <p>You can now share @Pack[teriock.abilities]{abilities} you have from
+          any of your first 1 + @Identifier[core:fluency-bonus]{F} ranks in a
+          @Wiki[Category:Classes]{class}.</p>
         proficient: >-
-          <p>You can now share @L[Category:Abilities]{abilities} you have from
-          any of your first 1 + @L[Core:Proficiency Bonus]{P} ranks in a
-          @L[Category:Classes]{class}.</p>
+          <p>You can now share @Pack[teriock.abilities]{abilities} you have from
+          any of your first 1 + @Identifier[core:proficiency-bonus]{P} ranks in
+          a @Wiki[Category:Classes]{class}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -146,7 +147,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
     name: Partner Awaken
     system:
@@ -172,11 +173,12 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You and the target gain @L[Keyword:Limited]{Limited}
-          @L[Ability:Instant Awaken]{Instant Awaken} and
-          @L[Keyword:Limited]{Limited} @L[Ability:Reactive Awaken]{Reactive
-          Awaken} (only usable on each other). You may only have this active on
-          one creature at a time.</p>
+          <p>You and the target gain @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:instant-awaken]{Instant Awaken} and
+          @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:reactive-awaken]{Reactive Awaken} (only usable on
+          each other). You may only have this active on one creature at a
+          time.</p>
       piercing:
         raw: 0
       powerSources:
@@ -197,7 +199,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/reactive-awaken.webp
     name: Reactive Awaken
     system:
@@ -232,7 +234,7 @@ effects:
       maneuver: reactive
       mundane: false
       overview:
-        base: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+        base: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -252,7 +254,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/instant-awaken.webp
     name: Instant Awaken
     system:
@@ -293,7 +295,7 @@ effects:
       range:
         unit: contact
       results:
-        hit: <p>Target is @L[Keyword:Awaken]{awakened}.</p>
+        hit: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
       skill: true
       standard: true
       targets:
@@ -307,10 +309,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.6c4da92a57e5b600
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:bison inline]</p>
   identifier: bison-familiar
   maxAv: 0
   type: familiar

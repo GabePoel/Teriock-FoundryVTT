@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: E7ygQy1GHf1koVLZ
     _key: '!items.effects!42eaff563cd42b62.E7ygQy1GHf1koVLZ'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/construct-mind.webp
     name: Construct Mind
     system:
@@ -65,10 +65,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to being
-          @L[Condition:Frightened]{frightened},
-          @L[Condition:Frenzied]{frenzied}, @L[Condition:Charmed]{charmed}, and
-          @L[Condition:Allured]{allured}.</p>
+          <p>You are @Identifier[keyword:immunity]{immune} to being
+          @Identifier[status:frightened]{frightened},
+          @Identifier[status:frenzied]{frenzied},
+          @Identifier[status:charmed]{charmed}, and
+          @Identifier[status:allured]{allured}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -86,7 +87,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/constructed-body.webp
     name: Constructed Body
     system:
@@ -113,42 +114,45 @@ effects:
       form: normal
       identifier: constructed-body
       improvement: >-
-        <p>Your @L[Equipment:Rope]{rope} counts as part of your body, it has no
-        minimum @L[Core:Strength]{strength} requirement, and you may
-        @L[Category:Attack abilities]{attack} with it as though it were a
-        @L[Category:Weapons]{weapon}.</p>
+        <p>Your @Identifier[equipment:rope]{rope} counts as part of your body,
+        it has no minimum @Identifier[core:strength]{strength} requirement, and
+        you may @Wiki[Category:Attack abilities]{attack} with it as though it
+        were a @Wiki[Category:Weapons]{weapon}.</p>
       interaction: manifest
       maneuver: passive
       mundane: false
       overview:
         base: >-
-          <p>You count as an @L[Category:Equipment]{item} for the purposes of
-          certain @L[Category:Item target abilities]{abilities that target
-          them}. The relevant @L[Category:Item target abilities]{abilities} are
-          those would apply one of the following
-          @L[Category:Properties]{properties} to a piece of
-          @L[Category:Equipment]{equipment}. You take the effect listed below
-          instead. If the @L[Category:Item target abilities]{ability} was
-          @L[Category:Magically powered abilities]{magically powered}, then any
-          @L[Core:Damage]{damage} dealt is @L[Damage:Magic]{magic} in addition
-          to its other @L[Category:Damage types]{types}. If the @L[Category:Item
-          target abilities]{ability} was delivered by a @L[Category:Weapon
-          delivery abilities]{weapon}, then the @L[Core:Damage]{damage} has all
-          the @L[Category:Damage types]{damage types} that
-          @L[Category:Weapons]{weapon} would deal in addition to its other
-          @L[Category:Damage
-          types]{types}.</p><ul><li>@L[Property:Destroyed]{Destroyed}: Take
-          [[/damage 1d10]]
-          @L[Core:Damage]{damage}.</li><li>@L[Property:Shattered]{Shattered}:
-          Take a @L[Damage:Hack]{hack} of your
-          choice.</li><li>@L[Property:Warded]{Warded}: The next @L[Category:Self
+          <p>You count as an @Pack[teriock.equipment]{item} for the purposes of
+          certain @Wiki[Category:Item target abilities]{abilities that target
+          them}. The relevant @Wiki[Category:Item target abilities]{abilities}
+          are those would apply one of the following
+          @Pack[teriock.properties]{properties} to a piece of
+          @Pack[teriock.equipment]{equipment}. You take the effect listed below
+          instead. If the @Wiki[Category:Item target abilities]{ability} was
+          @Wiki[Category:Magically powered abilities]{magically powered}, then
+          any @Identifier[core:damage]{damage} dealt is
+          @Identifier[damage:magic]{magic} in addition to its other
+          @Wiki[Category:Damage types]{types}. If the @Wiki[Category:Item target
+          abilities]{ability} was delivered by a @Wiki[Category:Weapon delivery
+          abilities]{weapon}, then the @Identifier[core:damage]{damage} has all
+          the @Wiki[Category:Damage types]{damage types} that
+          @Wiki[Category:Weapons]{weapon} would deal in addition to its other
+          @Wiki[Category:Damage
+          types]{types}.</p><ul><li>@Identifier[property:destroyed]{Destroyed}:
+          Take [[/damage 1d10]] @Identifier[core:damage]{damage}.</li>
+
+          <li>@Identifier[property:shattered]{Shattered}: Take a
+          @Identifier[damage:hack]{hack} of your choice.</li>
+
+          <li>@Identifier[property:warded]{Warded}: The next @Wiki[Category:Self
           delivery abilities]{self delivery ability} you use is
-          @L[Keyword:Warded]{warded}.</li></ul><p>For any other passive
-          @L[Category:Properties]{properties} that the
-          @L[Category:Equipment]{equipment} may gain, your @L[Category:Body
-          parts]{body parts} gain those @L[Category:Properties]{properties}.
-          Additionally, any @L[Category:AV granting abilities]{natural AV} you
-          may have counts as @L[Category:Equipment]{armor} for these
+          @Identifier[keyword:warded]{warded}.</li></ul><p>For any other passive
+          @Pack[teriock.properties]{properties} that the
+          @Pack[teriock.equipment]{equipment} may gain, your @Wiki[Category:Body
+          parts]{body parts} gain those @Pack[teriock.properties]{properties}.
+          Additionally, any @Wiki[Category:AV granting abilities]{natural AV}
+          you may have counts as @Pack[teriock.equipment]{armor} for these
           purposes.</p>
       piercing:
         raw: 0
@@ -167,7 +171,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/disarm.webp
     name: Disarm
     system:
@@ -222,7 +226,7 @@ effects:
       overview:
         base: >-
           <p>Anything held in the targeted arm is knocked out of their hand.
-          This triggers @L[Ability:Catch Item]{Catch Item}.</p>
+          This triggers @Identifier[ability:catch-item]{Catch Item}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -242,7 +246,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: icons/skills/trades/profession-sailing-ship.webp
     name: Expert Mariner
     system:
@@ -277,8 +281,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are an @L[Keyword:Expertise]{expert}
-          @L[Tradecraft:Mariner]{mariner}.</p>
+          <p>You are an @Identifier[keyword:expertise]{expert}
+          @Identifier[tradecraft:mariner]{mariner}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -296,7 +300,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/gliding.webp
     name: Gliding
     system:
@@ -337,11 +341,12 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You @L[Core:MOV]{fly} at @L[Core:Movement Speed]{quarter speed} and
-          can glide over terrain and other obstacles at @L[Core:Movement
-          Speed]{normal speed}. However, you cannot move more than a couple feet
-          above the ground. You fall at the rate of 30 feet per round (30 feet
-          per 5 seconds).</p>
+          <p>You @Wiki[Core:MOV]{fly} at
+          @Identifier[core:movement-speed]{quarter speed} and can glide over
+          terrain and other obstacles at @Identifier[core:movement-speed]{normal
+          speed}. However, you cannot move more than a couple feet above the
+          ground. You fall at the rate of 30 feet per round (30 feet per 5
+          seconds).</p>
       piercing:
         raw: 0
       powerSources:
@@ -359,7 +364,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/low-intelligence.webp
     name: Low Intelligence
     system:
@@ -403,7 +408,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/natural-hide.webp
     name: Natural Hide
     system:
@@ -438,8 +443,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You always have at least 1 @L[Core:AV]{AV}. This is the case even
-          when you are not wearing @L[Category:Armor]{armor}.</p>
+          <p>You always have at least 1 @Wiki[Core:AV]{AV}. This is the case
+          even when you are not wearing @Wiki[Category:Armor]{armor}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -457,7 +462,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -501,7 +506,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -545,7 +550,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-strength.webp
     name: Normal Strength
     system:
@@ -589,7 +594,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/partial-undead.webp
     name: Partial Undead
     system:
@@ -616,10 +621,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You count as being @L[Keyword:Undead]{undead} for the purposes of
-          @L[Category:Abilities]{abilities}, @L[Category:Damage types]{damage},
-          and other @L[Category:Effects]{effects}. You also gain
-          @L[Ability:Healing Sensitivity]{Healing Sensitivity}.</p>
+          <p>You count as being @Identifier[keyword:undead]{undead} for the
+          purposes of @Pack[teriock.abilities]{abilities}, @Wiki[Category:Damage
+          types]{damage}, and other @Wiki[Category:Effects]{effects}. You also
+          gain @Identifier[ability:healing-sensitivity]{Healing
+          Sensitivity}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -637,7 +643,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/prehensile-appendage.webp
     name: Prehensile Appendage
     system:
@@ -663,9 +669,9 @@ effects:
       overview:
         base: >-
           <p>You have another body part (tail, tentacle, etc.) that can be used
-          as an additional @L[Category:Equipment]{hand}. When used to make a
-          @L[Category:Hand delivery abilities]{hand} @L[Category:Attack
-          abilities]{attack}, this body part has the @L[Property:Wraparound
+          as an additional @Pack[teriock.equipment]{hand}. When used to make a
+          @Wiki[Category:Hand delivery abilities]{hand} @Wiki[Category:Attack
+          abilities]{attack}, this body part has the @Wiki[Property:Wraparound
           Fighting Style]{wraparound fighting style}.</p>
       piercing:
         raw: 0
@@ -684,7 +690,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/reach.webp
     name: Reach
     system:
@@ -709,8 +715,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>The range of your melee @L[Category:Weapons]{weapons} and
-          @L[Category:Attack abilities]{attacks} increases by 5 feet.</p>
+          <p>The range of your melee @Wiki[Category:Weapons]{weapons} and
+          @Wiki[Category:Attack abilities]{attacks} increases by 5 feet.</p>
       piercing:
         raw: 0
       powerSources:
@@ -728,7 +734,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/reflexes.webp
     name: Reflexes
     system:
@@ -768,10 +774,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You @L[Keyword:Resistance]{resist} @L[Ability:Disarm]{Disarm}, have
-          @L[Core:Advantage]{advantage} on the roll made for @L[Ability:Catch
-          Item]{Catch Item}, and gain @L[Ability:Missile Reflexes]{Missile
-          Reflexes}.</p>
+          <p>You @Identifier[keyword:resistance]{resist}
+          @Identifier[ability:disarm]{Disarm}, have
+          @Identifier[core:advantage]{advantage} on the roll made for
+          @Identifier[ability:catch-item]{Catch Item}, and gain
+          @Identifier[ability:missile-reflexes]{Missile Reflexes}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -795,7 +802,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
@@ -852,8 +859,9 @@ effects:
         raw: '0'
         unit: unlimited
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turns]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: a1
         slow:
@@ -875,7 +883,7 @@ effects:
         unit: contact
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
       skill: true
       standard: true
       targets:
@@ -889,7 +897,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/sneaky.webp
     name: Sneaky
     system:
@@ -933,7 +941,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spell-immunity.webp
     name: Spell Immunity
     system:
@@ -970,8 +978,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You are @L[Keyword:Immunity]{immune} to
-          @L[Category:Spells]{spells}.</p>
+          <p>You are @Identifier[keyword:immunity]{immune} to
+          @Wiki[Category:Spells]{spells}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -989,7 +997,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
     name: Healing Sensitivity
     system:
@@ -1017,13 +1025,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>@L[Core:Healing]{Healing} can be used to @L[Core:Damage]{damage}
-          you. If the creature providing you @L[Core:Healing]{healing} specifies
-          that they are doing so "for damage" then you roll your <i>largest</i>
-          @L[Core:HP]{hit die} and take that much @L[Damage:Holy]{holy}
-          @L[Damage:Magic]{magic damage} instead of the normal
-          @L[Core:Healing]{healing} effect. This does not consume any of your
-          @L[Core:HP]{hit dice}.</p>
+          <p>@Identifier[core:healing]{Healing} can be used to
+          @Identifier[core:damage]{damage} you. If the creature providing you
+          @Identifier[core:healing]{healing} specifies that they are doing so
+          "for damage" then you roll your <i>largest</i> @Wiki[Core:HP]{hit die}
+          and take that much @Identifier[damage:holy]{holy}
+          @Identifier[damage:magic]{magic damage} instead of the normal
+          @Identifier[core:healing]{healing} effect. This does not consume any
+          of your @Wiki[Core:HP]{hit dice}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1041,7 +1050,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/missile-reflexes.webp
     name: Missile Reflexes
     system:
@@ -1076,8 +1085,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You @L[Keyword:Resistance]{resist} the @L[Core:Attack
-          Interaction]{attack}.</p>
+          <p>You @Identifier[keyword:resistance]{resist} the
+          @Identifier[core:attack-interaction]{attack}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -1090,21 +1099,21 @@ effects:
         - attack
         - item
       trigger: >-
-        <p>You would be hit by a @L[Property:Ranged]{ranged weapon} or
-        @L[Category:Missile delivery abilities]{missile delivery} @L[Core:Attack
-        Interaction]{attack}.</p>
+        <p>You would be hit by a @Identifier[property:ranged]{ranged weapon} or
+        @Wiki[Category:Missile delivery abilities]{missile delivery}
+        @Identifier[core:attack-interaction]{attack}.</p>
     transfer: true
     type: ability
 folder: b7395e9186081f19
 img: systems/teriock/src/icons/creatures/ghost-ship-rope.webp
 name: Ghost Ship Rope
 system:
-  appearance: <p>Animated pieces of old ships that.</p>
+  appearance: <p>Animated pieces of old ships.</p>
   br: 7
   competence:
     raw: 1
   description: >-
-    <p>These usually travel as a party with other @L[Category:Ghost ship
+    <p>These usually travel as a party with other @Wiki[Category:Ghost ship
     pieces]{ghost ship pieces} that collectively make up a complete ship.</p>
   identifier: ghost-ship-rope
   size:

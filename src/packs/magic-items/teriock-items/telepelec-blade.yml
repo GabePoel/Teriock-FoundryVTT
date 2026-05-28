@@ -29,7 +29,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/flame-ray.webp
     name: Flame Ray
     system:
@@ -59,8 +59,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage}.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d8[fire magic]]]
+        @Identifier[core:damage]{damage}.</p>
       identifier: flame-ray
       interaction: attack
       maneuver: active
@@ -73,11 +74,11 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}.</p>
         hit: >-
-          <p>Deal [[/damage 1d8[fire magic]]] @L[Core:Damage]{damage} to
-          target.</p>
+          <p>Deal [[/damage 1d8[fire magic]]] @Identifier[core:damage]{damage}
+          to target.</p>
       spell: true
       standard: true
       targets:
@@ -91,7 +92,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/lightning-ray.webp
     name: Lightning Ray
     system:
@@ -120,8 +121,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d6[magic]]]
+        @Identifier[core:damage]{damage}.</p>
       identifier: lightning-ray
       interaction: attack
       maneuver: active
@@ -134,9 +136,11 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
-        hit: <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target.</p>
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
+          target.</p>
       spell: true
       standard: true
       targets:
@@ -150,18 +154,18 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.59
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/magelore.webp
     name: Magelore
     system:
       competence:
         raw: 0
       description: >-
-        <p>An item with this property can be used to cast @L[Category:Invoked
+        <p>An item with this property can be used to cast @Wiki[Category:Invoked
         spells]{invoked spells}. It can also be used as its user's
-        @L[Category:Hand delivery abilities]{hand} if they have @L[Ability:Staff
-        Touch]{Staff Touch}.</p>
-      form: normal
+        @Wiki[Category:Hand delivery abilities]{hand} if they have
+        @Identifier[ability:staff-touch]{Staff Touch}.</p>
+      form: intrinsic
       identifier: magelore
       powerSources:
         - magical
@@ -174,7 +178,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/mana-storing.webp
     name: Mana Storing
     system:
@@ -203,16 +207,17 @@ effects:
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
         within it that creatures can use to power their own
-        @L[Category:Abilities]{abilities}. Mana storing items will always have a
-        number N associated with them (1, by default, if no number is listed).
+        @Pack[teriock.abilities]{abilities}. Mana storing items will always have
+        a number N associated with them (1, by default, if no number is listed).
         This number refers to a "mana die" analogous to those that creatures
         have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
-        maximum of N × 4 @L[Core:MP]{MP}. At dawn, if
-        @L[Ability:Attune]{attuned} to the [[lookup name style=lc]] item, roll
-        [[/roll d4]]. The item regains up to this much spent @L[Core:MP]{MP}. If
-        dawn comes and nobody is @L[Ability:Attune]{attuned} to a [[lookup
-        name]] item, it releases all @L[Core:MP]{MP} it had stored.</p>
-      form: normal
+        maximum of N × 4 @Wiki[Core:MP]{MP}. At dawn, if
+        @Identifier[ability:attune]{attuned} to the [[lookup name style=lc]]
+        item, roll [[/roll d4]]. The item regains up to this much spent
+        @Wiki[Core:MP]{MP}. If dawn comes and nobody is
+        @Identifier[ability:attune]{attuned} to a [[lookup name]] item, it
+        releases all @Wiki[Core:MP]{MP} it had stored.</p>
+      form: intrinsic
       identifier: mana-storing
       maxQuantity:
         raw: '8'
@@ -229,7 +234,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -239,7 +244,7 @@ effects:
         raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
+        in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
       mundane: true
@@ -252,17 +257,27 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/thrown.webp
     name: Thrown
     system:
       applyIfDampened: true
       applyIfDeattuned: true
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.range.ranged
+              priority: 10
+              target: Item
+              type: override
+              value: 'true'
+          type: changes
       competence:
         raw: 0
       description: >-
         <p>A weapon with this property can be tossed to make a
-        @L[Property:Ranged]{ranged} attack.</p>
+        @Identifier[property:ranged]{ranged} attack.</p>
       form: intrinsic
       identifier: thrown
       mundane: true
@@ -275,7 +290,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -285,7 +300,7 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-        @L[Category:Attack abilities]{attack}.</p>
+        @Wiki[Category:Attack abilities]{attack}.</p>
       form: intrinsic
       identifier: weapon
       mundane: true
@@ -298,7 +313,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -321,13 +336,13 @@ effects:
         <p>Weapons with this property can hit targets at a distance. A weapon
         that can be used to make a [[lookup name style=lc]] attack has a range
         in parentheses after specifying if it requires
-        @L[Property:Ammunition]{ammunition} or if is
-        @L[Property:Thrown]{thrown}. The range lists two numbers. The first is
-        the weapon's normal range in feet, and the second indicates the weapon's
-        long range. When attacking a target beyond normal range, you have
-        @L[Core:Disadvantage]{disadvantage} on the @L[Core:Attack
-        Interaction]{attack roll}. You can't attack a target beyond the weapon's
-        long range.</p>
+        @Identifier[property:ammunition]{ammunition} or if is
+        @Identifier[property:thrown]{thrown}. The range lists two numbers. The
+        first is the weapon's normal range in feet, and the second indicates the
+        weapon's long range. When attacking a target beyond normal range, you
+        have @Identifier[core:disadvantage]{disadvantage} on the
+        @Identifier[core:attack-interaction]{attack roll}. You can't attack a
+        target beyond the weapon's long range.</p>
       form: intrinsic
       identifier: ranged
       mundane: true

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: jWKiBcN0s7OV8omr
     _key: '!items.effects!7fb7fbccafdec14b.jWKiBcN0s7OV8omr'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -47,7 +47,7 @@ effects:
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is bright light
-          and up to 120 feet as though it is dim light.</p>
+          and up to 120 feet as though it is dim light.</p><p></p>
       piercing:
         raw: 0
       powerSources:
@@ -64,13 +64,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Scorpion Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Scorpion]{scorpion}.</p>
+      description: <p>You know the way of the @Identifier[creature:scorpion]{scorpion}.</p>
       field: survivalist
       identifier: scorpion-tamer
       tradecraft: tamer
@@ -83,7 +83,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -137,11 +137,11 @@ effects:
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
+          @Identifier[core:damage]{damage}. This also has all
+          @Wiki[Category:Damage types]{damage types} of the triggering
+          @Wiki[Category:Attack abilities]{attack}. If the triggering
+          @Wiki[Category:Attack abilities]{attack} was a critical hit, this
+          deals 10 @Identifier[core:damage]{damage} instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -153,8 +153,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+        <p>You have just hit a creature with an @Wiki[Category:Attack
+        abilities]{attack} that dealt them @Identifier[core:damage]{damage} from
+        it.</p>
     transfer: true
     type: ability
 folder: 31fe961f0b485187
@@ -164,10 +165,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.ce2ae113ef5369a8
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:scorpion inline]</p>
   identifier: scorpion-familiar
   maxAv: 0
   type: familiar

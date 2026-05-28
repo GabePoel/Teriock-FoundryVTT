@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/drink-overslow-potion.webp
     name: Drink Overslow Potion
     system:
@@ -37,7 +37,13 @@ effects:
           type: status
       competence:
         raw: 0
-      consumeSource: true
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Using this ability consumes the
+              @Pack[teriock.equipment]{equipment} that provides it.</p>
+            type: description
       delivery: item
       duration:
         raw: '1'
@@ -54,9 +60,9 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You gain @L[Ability:Overslow Blood]{Overslow Blood}, become
-          @L[Condition:Slowed]{slowed}, and have your @L[Core:Intelligence]{INT}
-          decreased by 2.</p>
+          <p>You gain @Identifier[ability:overslow-blood]{Overslow Blood},
+          become @Identifier[status:slowed]{slowed}, and have your
+          @Identifier[core:intelligence]{INT} decreased by 2.</p>
       piercing:
         raw: 0
       powerSources:
@@ -65,9 +71,9 @@ effects:
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
+        @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+        @Identifier[core:maneuvers]{maneuver} and
+        @Identifier[core:abilities]{execution time} for the ability.</p>
       targets:
         - self
     transfer: true
@@ -79,7 +85,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -89,13 +95,13 @@ effects:
         raw: 0
       description: >-
         <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @L[Property:Shattered]{shattered} if it is used to @L[Core:Block
-        Interaction]{block} or if it is the @L[Category:Item target
-        abilities]{target of an ability} that deals it @L[Category:Damaging
-        effects]{damage}. If it would become @L[Property:Shattered]{shattered}
-        through some other means, it is instead
-        @L[Property:Destroyed]{destroyed}.</p>
-      form: flaw
+        becomes @Identifier[property:shattered]{shattered} if it is used to
+        @Identifier[core:block-interaction]{block} or if it is the
+        @Wiki[Category:Item target abilities]{target of an ability} that deals
+        it @Wiki[Category:Damaging effects]{damage}. If it would become
+        @Identifier[property:shattered]{shattered} through some other means, it
+        is instead @Identifier[property:destroyed]{destroyed}.</p>
+      form: intrinsic
       identifier: fragile
       mundane: true
     transfer: true
@@ -107,7 +113,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -117,9 +123,9 @@ effects:
         raw: 0
       description: >-
         <p>A <b>[[lookup name style=lc]]</b> item is something that is easy to
-        steal through @L[Category:Abilities]{abilities} like
-        @L[Ability:Search]{Search}.</p>
-      form: flaw
+        steal through @Pack[teriock.abilities]{abilities} like
+        @Identifier[ability:search]{Search}.</p>
+      form: intrinsic
       identifier: searchable
     transfer: true
     type: property
@@ -130,7 +136,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.58
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -140,7 +146,7 @@ effects:
         raw: 0
       description: >-
         <p>An item with this property is easily concealed and can often be used
-        in the same hand as a @L[Category:Shields]{shield}.</p>
+        in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
       mundane: true
@@ -153,7 +159,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
     name: Smash Overslow Potion
     system:
@@ -206,14 +212,21 @@ effects:
           type: status
       competence:
         raw: 0
-      consumeSource: true
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Using this ability consumes the
+              @Pack[teriock.equipment]{equipment} that provides it.</p>
+            type: description
       delivery: item
       duration:
         raw: '1'
         unit: minute
       endCondition: >-
-        <p>At the start of each of the target's @L[Core:Turns]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the start of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime: a1
       expansion:
         featSaveAttribute: unp
@@ -236,11 +249,11 @@ effects:
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
-        @L[Category:Equipment]{equipment} that provides it. That counts as the
-        @L[Core:Maneuvers]{maneuver} and @L[Core:Abilities]{execution time} for
-        the ability.</p>
+        @Pack[teriock.equipment]{equipment} that provides it. That counts as the
+        @Identifier[core:maneuvers]{maneuver} and
+        @Identifier[core:abilities]{execution time} for the ability.</p>
       results:
-        fail: <p>Target becomes @L[Condition:Slowed]{slowed}.</p>
+        fail: <p>Target becomes @Identifier[status:slowed]{slowed}.</p>
       targets:
         - area
         - creature
@@ -253,7 +266,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/overslow-blood.webp
     name: Overslow Blood
     system:
@@ -292,8 +305,9 @@ effects:
       effectTypes:
         - automatic
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turns]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: r0
         slow:
@@ -314,13 +328,14 @@ effects:
       range:
         unit: self
       results:
-        fail: <p>Target creature becomes @L[Condition:Slowed]{slowed}.</p>
+        fail: <p>Target creature becomes @Identifier[status:slowed]{slowed}.</p>
       targets:
         - creature
       trigger: >-
-        <p>You are hit with a melee @L[Category:Weapon delivery
-        abilities]{weapon} @L[Category:Attack abilities]{attack}. This triggers
-        automatically. You cannot choose to not use it if you are able to.</p>
+        <p>You are hit with a melee @Wiki[Category:Weapon delivery
+        abilities]{weapon} @Wiki[Category:Attack abilities]{attack}. This
+        triggers automatically. You cannot choose to not use it if you are able
+        to.</p>
     transfer: true
     type: ability
 folder: 64a9d9ba60f26294

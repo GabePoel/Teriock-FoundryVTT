@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: Mngk8rX8lJ2lg7z5
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/carrying.webp
         name: Carrying
         system:
@@ -50,8 +50,8 @@ items:
           overview:
             base: >-
               <p>You can drag and carry other creatures and
-              @L[Category:Equipment]{items} around even if you don't have
-              @L[Category:Prehensile equipment]{prehensile body parts}.</p>
+              @Pack[teriock.equipment]{items} around even if you don't have
+              @Wiki[Category:Prehensile equipment]{prehensile body parts}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -70,7 +70,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -98,13 +98,14 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
-              1, it is reduced to 0.</p>
+              <p>Target is @Identifier[status:dead]{dead},
+              @Identifier[status:ruined]{ruined}, and their
+              @Identifier[core:size]{SIZE} is reduced by 1. If their
+              @Identifier[core:size]{SIZE} was already less than 1, it is
+              reduced to 0.</p>
           targets:
             - creature
         transfer: true
@@ -117,7 +118,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -161,7 +162,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -205,7 +206,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -249,7 +250,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
@@ -306,9 +307,9 @@ items:
             raw: '0'
             unit: unlimited
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turns]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -331,7 +332,7 @@ items:
             critHit: >-
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
-            hit: <p>Target is @L[Condition:Snared]{snared}.</p>
+            hit: <p>Target is @Identifier[status:snared]{snared}.</p>
           skill: true
           standard: true
           targets:
@@ -342,7 +343,6 @@ items:
     img: systems/teriock/src/icons/creatures/koolasoka-head.webp
     name: Koolasoka Head
     system:
-      adult: 0
       appearance: >-
         <p>Koolasokas look like giant sea-faring amphibians with striking
         tongues and limbs.</p>
@@ -353,18 +353,19 @@ items:
         <p>Koolasokas are found throughout the seas of Teriock in coastal caves
         they always have four legs. A single koolasoka is represented by
         multiple different creatures at once. There is one <a class="mw-selflink
-        selflink">koolasoka head</a> and at least one @L[Creature:Koolasoka
-        Leg]{koolasoka leg}. If the <a class="mw-selflink selflink">koolasoka
-        head</a> @L[Condition:Dead]{dies} then each @L[Creature:Koolasoka
-        Leg]{koolasoka leg} does as well. Otherwise, each @L[Creature:Koolasoka
-        Leg]{koolasoka leg} acts independently. No
-        @L[Category:Conditions]{conditions} other than @L[Condition:Dead]{death}
-        are shared. However, each @L[Creature:Koolasoka Leg]{koolasoka leg}
-        cannot go more than the <a class="mw-selflink selflink">koolasoka
-        head's</a> @L[Core:Size]{SIZE} × 5 feet away from the <a
+        selflink">koolasoka head</a> and at least one
+        @Identifier[creature:koolasoka-leg]{koolasoka leg}. If the <a
+        class="mw-selflink selflink">koolasoka head</a>
+        @Identifier[status:dead]{dies} then each
+        @Identifier[creature:koolasoka-leg]{koolasoka leg} does as well.
+        Otherwise, each @Identifier[creature:koolasoka-leg]{koolasoka leg} acts
+        independently. No @Wiki[Category:Conditions]{conditions} other than
+        @Identifier[status:dead]{death} are shared. However, each
+        @Identifier[creature:koolasoka-leg]{koolasoka leg} cannot go more than
+        the <a class="mw-selflink selflink">koolasoka head's</a>
+        @Identifier[core:size]{SIZE} × 5 feet away from the <a
         class="mw-selflink selflink">koolasoka head</a>.</p>
       identifier: koolasoka-head
-      lifespan: 0
       size:
         enabled: true
         value: 7
@@ -389,7 +390,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -399,7 +400,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -409,7 +410,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -424,7 +426,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -434,7 +436,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -469,7 +471,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/hide.webp
     name: Hide

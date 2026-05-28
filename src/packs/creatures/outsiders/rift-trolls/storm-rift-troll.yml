@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: kyUysLK4wIMQr85X
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
         name: Acidic Blood
         system:
@@ -51,10 +51,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Any @L[Category:Weapons]{weapon} that deals
-              @L[Core:Damage]{damage} to you becomes
-              @L[Property:Shattered]{shattered} at the start of your next
-              @L[Core:Turns]{turn}.</p>
+              <p>Any @Wiki[Category:Weapons]{weapon} that deals
+              @Identifier[core:damage]{damage} to you becomes
+              @Identifier[property:shattered]{shattered} at the start of your
+              next @Identifier[core:turns]{turn}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -64,7 +64,7 @@ items:
           targets:
             - self
           trigger: >-
-            <p> This triggers automatically. You cannot choose to not use it if
+            <p>This triggers automatically. You cannot choose to not use it if
             you are able to.</p>
         transfer: true
         type: ability
@@ -76,7 +76,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -113,7 +113,7 @@ items:
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is dim
-              light.</p>
+              light.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -132,7 +132,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/high-intelligence.webp
         name: High Intelligence
         system:
@@ -176,7 +176,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -209,8 +209,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Damage:Mundane]{mundane} @L[Core:Damage]{damage}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Identifier[damage:mundane]{mundane}
+              @Identifier[core:damage]{damage}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -229,7 +230,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
@@ -250,8 +251,13 @@ items:
               target: armament
               type: childChange
               value: '1'
+          class: knight
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -270,10 +276,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Supernatural Strength]{Supernatural
-              Strength}. In addition, you deal @L[Keyword:Boosted]{boosted} with
-              all melee @L[Category:Weapons]{weapon} @L[Category:Attack
-              abilities]{attacks} and they are @L[Keyword:AV0]{AV0} for you.</p>
+              <p>You gain
+              @Identifier[ability:supernatural-strength]{Supernatural Strength}.
+              In addition, you deal @Identifier[keyword:boosted]{boosted} with
+              all melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+              abilities]{attacks} and they are @Identifier[keyword:av0]{AV0} for
+              you.</p>
           piercing:
             raw: 0
           powerSources:
@@ -296,7 +304,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -340,7 +348,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -384,7 +392,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -428,7 +436,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
         name: Outsider Regenerating
         system:
@@ -474,17 +482,20 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>At the start of each of your @L[Core:Turns]{turns}, you
-              @L[Keyword:Warded]{warded} @L[Core:Healing]{heal} and regain that
-              many @L[Core:Hit Points and Mana Points]{HP}. This does <i>not</i>
-              consume your @L[Core:HP]{hit die}. If you were
-              @L[Condition:Dead]{dead} due to @L[Core:Hit Points and Mana
-              Points]{HP} loss, this brings you @L[Condition:Alive]{back to
-              life}. You only @L[Condition:Dead]{die} due to @L[Core:Hit Points
-              and Mana Points]{HP} loss if you start your @L[Core:Turns]{turn}
-              without successfully regenerating @L[Core:Hit Points and Mana
-              Points]{HP}. You may do this <i>even if you are
-              @L[Condition:Burned]{burned}</i>.</p>
+              <p>At the start of each of your @Identifier[core:turns]{turns},
+              you @Identifier[keyword:warded]{warded}
+              @Identifier[core:healing]{heal} and regain that many
+              @Identifier[core:hit-points-and-mana-points]{HP}. This does
+              <i>not</i> consume your @Wiki[Core:HP]{hit die}. If you were
+              @Identifier[status:dead]{dead} due to
+              @Identifier[core:hit-points-and-mana-points]{HP} loss, this brings
+              you @Identifier[status:alive]{back to life}. You only
+              @Identifier[status:dead]{die} due to
+              @Identifier[core:hit-points-and-mana-points]{HP} loss if you start
+              your @Identifier[core:turns]{turn} without successfully
+              regenerating @Identifier[core:hit-points-and-mana-points]{HP}. You
+              may do this <i>even if you are
+              @Identifier[status:burned]{burned}</i>.</p>
           piercing:
             raw: 0
           powerSources:
@@ -503,7 +514,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/storm-element-shaping.webp
         name: Storm Element Shaping
         system:
@@ -579,6 +590,10 @@ items:
               visibility: 2
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '3'
           delivery: self
           duration:
             raw: '0'
@@ -601,39 +616,46 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You have immense control over @L[Category:Storm element
+              <p>You have immense control over @Wiki[Category:Storm element
               abilities]{elemental storm} around you. Any time a
-              @L[Category:Storm element abilities]{storm element ability} is
+              @Wiki[Category:Storm element abilities]{storm element ability} is
               executed within range, you and the creature that executed it may
-              both make @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat
-              saves}. If you roll at least as high as the creature that executed
-              the @L[Category:Storm element abilities]{ability}, you take
-              control over it. This lets you choose a new valid target with its
-              range determined from a point of your choosing within the area
-              affected by [[lookup name]]. You may also choose to
-              @L[Core:Heightening]{heighten} the @L[Category:Storm element
-              abilities]{ability} up to @L[Core:Proficiency Bonus]{P} additional
-              times, so long as you pay the additional @L[Core:Hit Points and
-              Mana Points]{MP} to do so. Alternatively, you may choose to have
-              the @L[Category:Storm element abilities]{ability} fizzle. If there
-              was no creature that executed the @L[Category:Storm element
-              abilities]{ability} or you were the one that did so, you take
-              control over it without needing to make any @L[Core:Presence]{UNP}
-              @L[Core:Feat Interaction]{feat save}. You also gain
-              @L[Keyword:Limited]{Limited} @L[Ability:Command Elite]{Command
-              Elite}.</p>
+              both make @Identifier[core:presence]{UNP}
+              @Identifier[core:feat-interaction]{feat saves}. If you roll at
+              least as high as the creature that executed the
+              @Wiki[Category:Storm element abilities]{ability}, you take control
+              over it. This lets you choose a new valid target with its range
+              determined from a point of your choosing within the area affected
+              by [[lookup name]]. You may also choose to
+              @Identifier[core:heightening]{heighten} the @Wiki[Category:Storm
+              element abilities]{ability} up to
+              @Identifier[core:proficiency-bonus]{P} additional times, so long
+              as you pay the additional
+              @Identifier[core:hit-points-and-mana-points]{MP} to do so.
+              Alternatively, you may choose to have the @Wiki[Category:Storm
+              element abilities]{ability} fizzle. If there was no creature that
+              executed the @Wiki[Category:Storm element abilities]{ability} or
+              you were the one that did so, you take control over it without
+              needing to make any @Identifier[core:presence]{UNP}
+              @Identifier[core:feat-interaction]{feat save}. You also gain
+              @Identifier[keyword:limited]{Limited}
+              @Identifier[ability:command-elite]{Command Elite}.</p>
             fluent: >-
-              <p>The range of this ability increases by 10 × @L[Core:Fluency
-              Bonus]{F} feet and you may add @L[Core:Fluency Bonus]{F} to the
-              @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat saves} you
-              make to take take control of @L[Category:Storm element
-              abilities]{storm element abilities} if you wouldn't otherwise.</p>
+              <p>The range of this ability increases by 10 ×
+              @Identifier[core:fluency-bonus]{F} feet and you may add
+              @Identifier[core:fluency-bonus]{F} to the
+              @Identifier[core:presence]{UNP}
+              @Identifier[core:feat-interaction]{feat saves} you make to take
+              take control of @Wiki[Category:Storm element abilities]{storm
+              element abilities} if you wouldn't otherwise.</p>
             proficient: >-
-              <p>The range of this ability increases by 10 × @L[Core:Proficiency
-              Bonus]{P} feet and you may add @L[Core:Proficiency Bonus]{P} to
-              the @L[Core:Presence]{UNP} @L[Core:Feat Interaction]{feat saves}
-              you make to take take control of @L[Category:Storm element
-              abilities]{storm element abilities} if you wouldn't otherwise.</p>
+              <p>The range of this ability increases by 10 ×
+              @Identifier[core:proficiency-bonus]{P} feet and you may add
+              @Identifier[core:proficiency-bonus]{P} to the
+              @Identifier[core:presence]{UNP}
+              @Identifier[core:feat-interaction]{feat saves} you make to take
+              take control of @Wiki[Category:Storm element abilities]{storm
+              element abilities} if you wouldn't otherwise.</p>
           piercing:
             raw: 0
           powerSources:
@@ -652,7 +674,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/storm-magic-hexseal.webp
         name: Storm Magic Hexseal
         system:
@@ -688,9 +710,9 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Hexseal]{hexseal} to @L[Category:Magically
-              powered abilities]{magical} @L[Category:Storm element
-              abilities]{storm abilities}.</p>
+              <p>You are @Identifier[keyword:hexseal]{hexseal} to
+              @Wiki[Category:Magically powered abilities]{magical}
+              @Wiki[Category:Storm element abilities]{storm abilities}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -709,7 +731,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
@@ -742,8 +764,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to falling
-              @L[Condition:Unconscious]{unconscious}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to falling
+              @Identifier[status:unconscious]{unconscious}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -762,13 +784,18 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
           _sup: 9XiSebX1vyf4fGnH
+          class: knight
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -787,11 +814,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-              @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-              @L[Keyword:Deboosted]{deboost} any melee
-              @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attack}
-              to make it @L[Keyword:AV0]{AV0}.</p>
+              <p>You gain @Identifier[ability:giant-strength]{Giant Strength}
+              and @Identifier[ability:shattering-grip]{Shattering Grip}. In
+              addition, you may @Identifier[keyword:deboosted]{deboost} any
+              melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+              abilities]{attack} to make it @Identifier[keyword:av0]{AV0}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -814,7 +841,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -840,10 +867,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-              @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition,
-              you are no longer suffer the consequences of
-              @L[Property:Cumbersome]{cumbersome} items.</p>
+              <p>You gain @Identifier[ability:improved-strength]{Improved
+              Strength} and @Identifier[ability:melee-damage-boost]{Melee Damage
+              Boost}. In addition, you are no longer suffer the consequences of
+              @Identifier[property:cumbersome]{cumbersome} items.</p>
           piercing:
             raw: 0
           powerSources:
@@ -868,7 +895,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -894,8 +921,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-              @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+              <p>You gain @Identifier[ability:beastly-strength]{Beastly
+              Strength} and
+              @Identifier[ability:improved-armor-piercing]{Improved Armor
+              Piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -920,7 +949,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -946,10 +975,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-              hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-              Piercing]{Armor piercing} weapons must still be wielded in two
-              hands to be @L[Keyword:Armor Voiding]{AV0}.</div>
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons
+              in one hand.</p><div class="note"><b>Note:</b>
+              @Identifier[property:armor-piercing]{Armor piercing} weapons must
+              still be wielded in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</div>
           piercing:
             raw: 0
           powerSources:
@@ -974,7 +1004,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -1000,8 +1030,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-              piercing}.</p>
+              <p>Melee weapons you use are
+              @Identifier[property:armor-piercing]{armor piercing}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1022,7 +1052,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -1050,13 +1080,15 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-              @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage}.</p>
+              <p>You may spend an unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>You may spend an additional unused @L[Core:Active
-              Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-              @L[Core:Damage]{damage} again.</p>
+              <p>You may spend an additional unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage} again.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1068,9 +1100,9 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>You have hit a creature with a @L[Category:Damaging
-            effects]{damaging} melee @L[Category:Weapon delivery
-            abilities]{weapon} @L[Category:Attack abilities]{attack}.</p>
+            <p>You have hit a creature with a @Wiki[Category:Damaging
+            effects]{damaging} melee @Wiki[Category:Weapon delivery
+            abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
         transfer: true
         type: ability
       - _id: ctCu2W2vDYrnq4Bk
@@ -1081,7 +1113,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -1119,7 +1151,7 @@ items:
           interaction: manifest
           maneuver: active
           overview:
-            base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+            base: <p>Target is @Identifier[property:shattered]{shattered}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1139,7 +1171,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/command-elite.webp
         name: Command Elite
         system:
@@ -1178,11 +1210,11 @@ items:
           maneuver: active
           overview:
             fluent: >-
-              <p>The command may be up to 3 × (1 + @L[Core:Fluency Bonus]{F})
-              words in length.</p>
+              <p>The command may be up to 3 × (1 +
+              @Identifier[core:fluency-bonus]{F}) words in length.</p>
             proficient: >-
-              <p>The command may be up to 3 × (1 + @L[Core:Proficiency
-              Bonus]{P}) words in length.</p>
+              <p>The command may be up to 3 × (1 +
+              @Identifier[core:proficiency-bonus]{P}) words in length.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1202,7 +1234,6 @@ items:
     img: systems/teriock/src/icons/creatures/storm-rift-troll.webp
     name: Storm Rift Troll
     system:
-      adult: 0
       appearance: >-
         <p>Ugly, and hunched with a lanky build and dark blue, thick, leathery
         skin.</p>
@@ -1210,14 +1241,13 @@ items:
       competence:
         raw: 1
       description: >-
-        <p>Rift trolls are @L[Category:Elemental creatures]{elemental}
-        @L[Category:Trolls]{trolls} that have come to this plane. They are
-        partial @L[Category:Elemental creatures]{elementals} themselves and have
-        the same protections. They also have an uncanny power to shape their
-        element to their will and may have other abilities as well that aren't
-        listed here.</p>
+        <p>Rift trolls are @Wiki[Category:Elemental creatures]{elemental}
+        @Wiki[Category:Trolls]{trolls} that have come to this plane. They are
+        partial @Wiki[Category:Elemental creatures]{elementals} themselves and
+        have the same protections. They also have an uncanny power to shape
+        their element to their will and may have other abilities as well that
+        aren't listed here.</p>
       identifier: storm-rift-troll
-      lifespan: 0
       size:
         enabled: true
         value: 7
@@ -1244,7 +1274,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: Sp0ZJRJdCTJSSn9m
         _key: >-
@@ -1254,7 +1284,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1264,7 +1294,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -1279,7 +1310,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1289,7 +1320,7 @@ items:
             raw: 0
           description: >-
             <p>An item can be used to grasp, hold, or manipulate objects, such
-            as while using @L[Ability:Interact]{Interact}.</p>
+            as while using @Identifier[ability:interact]{Interact}.</p>
           form: intrinsic
           identifier: prehensile
           powerSources:
@@ -1304,7 +1335,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1314,7 +1345,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -1327,7 +1358,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -1346,8 +1377,8 @@ items:
           competence:
             raw: 0
           description: >-
-            <p>An item with this property is always @L[Keyword:Armor
-            Voiding]{AV0}.</p>
+            <p>An item with this property is always
+            @Identifier[keyword:armor-voiding]{AV0}.</p>
           form: intrinsic
           identifier: armor-voiding
         transfer: true
@@ -1382,7 +1413,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -1392,7 +1423,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1402,8 +1433,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1416,7 +1447,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1426,7 +1457,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Bite delivery abilities]{bite delivery abilities}.</p>
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
           form: intrinsic
           identifier: biting
           powerSources:
@@ -1441,7 +1473,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1451,7 +1483,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1484,7 +1516,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     folder: 4a7a806a79c3098a
     img: systems/teriock/src/icons/body-parts/hide.webp
     name: Hide
@@ -1514,7 +1546,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1524,7 +1556,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1534,8 +1566,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -1548,7 +1580,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1558,7 +1590,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true

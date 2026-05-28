@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/empathic-ray.webp
     name: Empathic Ray
     system:
@@ -58,9 +58,10 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d6[magic]]] or @L[Core:Healing]{heal} the target again
-        (depending on what you chose).</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d6[magic]]] or
+        @Identifier[core:healing]{heal} the target again (depending on what you
+        chose).</p>
       identifier: empathic-ray
       interaction: attack
       maneuver: active
@@ -69,15 +70,16 @@ effects:
         base: >-
           <p>As you cast [[lookup name]], choose either "damage" or "healing".
           The effect varies depending on what you choose. [[lookup name]] only
-          counts as a @L[Category:Damaging effects]{damaging effect} if you
-          choose "damage" and only as a @L[Category:Healing effects]{healing
-          effect} if you choose "healing". <br>If you do not take any damage
-          before the start of your next @L[Core:Turns]{turn}, you regain the
-          @L[Core:Hit Points and Mana Points]{HP} you spent on [[lookup name]].
-          This counts as a @L[Category:Regeneration effects]{regeneration
-          effect} and a @L[Category:Healing effects]{healing effect}. This is
-          the only part of [[lookup name]] that counts as a
-          @L[Category:Regeneration effects]{regeneration effect}.</p>
+          counts as a @Wiki[Category:Damaging effects]{damaging effect} if you
+          choose "damage" and only as a @Wiki[Category:Healing effects]{healing
+          effect} if you choose "healing".</p><p>If you do not take any damage
+          before the start of your next @Identifier[core:turns]{turn}, you
+          regain the @Identifier[core:hit-points-and-mana-points]{HP} you spent
+          on [[lookup name]]. This counts as a @Wiki[Category:Regeneration
+          effects]{regeneration effect} and a @Wiki[Category:Healing
+          effects]{healing effect}. This is the only part of [[lookup name]]
+          that counts as a @Wiki[Category:Regeneration effects]{regeneration
+          effect}.</p>
       piercing:
         raw: 1
       powerSources:
@@ -87,12 +89,13 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}. Or, if you chose "healing", double
-          the number of times that target @L[Core:Healing]{heals}.</p>
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}. Or, if you chose "healing", double
+          the number of times that target @Identifier[core:healing]{heals}.</p>
         hit: >-
-          <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to target or
-          @L[Core:Healing]{heal} them (depending on what you chose).</p>
+          <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
+          target or @Identifier[core:healing]{heal} them (depending on what you
+          chose).</p>
       spell: true
       standard: true
       targets:
@@ -106,7 +109,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/familiar-bond.webp
     name: Familiar Bond
     system:
@@ -162,21 +165,23 @@ effects:
           <p>[[lookup name]] is a ritual that allows you to bond with an animal
           companion. As part of this ritual, you call an animal to you and it
           chooses whether or not to become your <b>familiar</b>. If it chooses
-          to be your familiar, you and it are @L[Category:Spiritual
+          to be your familiar, you and it are @Wiki[Category:Spiritual
           effects]{spiritually} bonded. You can sense feelings and emotions from
           your familiar and speak to other animals of the same species. Your
           familiar can sense your feelings and emotions as well. You also gain
-          an @L[Tradecraft:Animal Tamer]{animal tamer} @L[Core:Fluency
-          Bonus]{fluency} for your familiar's species. This does not grant you
-          @L[Core:Proficiency Bonus]{proficiency} with @L[Tradecraft:Animal
-          Tamer]{animal tamer} in general. If your familiar is in combat with
-          you, treat it as a @L[Core:Minions]{minion} under your command.</p>
+          an @Identifier[tradecraft:animal-tamer]{animal tamer}
+          @Identifier[core:fluency-bonus]{fluency} for your familiar's species.
+          This does not grant you
+          @Identifier[core:proficiency-bonus]{proficiency} with
+          @Identifier[tradecraft:animal-tamer]{animal tamer} in general. If your
+          familiar is in combat with you, treat it as a
+          @Identifier[core:minions]{minion} under your command.</p>
         proficient: >-
-          <p>You also gain an @L[Category:Abilities]{ability} chosen by the
-          @L[Core:Game Master]{GM} when your familiar is within 100 feet of you.
-          The @L[Category:Abilities]{ability} is something your familiar can do
-          naturally, is symbolic of, or that is related to your relationship
-          with it.</p>
+          <p>You also gain an @Pack[teriock.abilities]{ability} chosen by the
+          @Identifier[core:game-master]{GM} when your familiar is within 100
+          feet of you. The @Pack[teriock.abilities]{ability} is something your
+          familiar can do naturally, is symbolic of, or that is related to your
+          relationship with it.</p>
       piercing:
         raw: 0
       powerSources:
@@ -202,7 +207,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/oracle.webp
     name: Oracle
     system:
@@ -237,26 +242,28 @@ effects:
       overview:
         base: >-
           <p>You may ask a question to a deity or other supernatural being with
-          which you have a connection and receive a @L[Keyword:Visions]{vision}
-          in response. There are limitations on how often you can do this and
-          the strength of the answer you receive. Once per @L[Core:Short
-          Rest]{short rest}, you may ask a question and get a
-          @L[Keyword:Visions]{minor vision} in response. If you are at a place
-          of great power or significance to the deity or entity you are asking,
-          you will receive a @L[Keyword:Visions]{full vision} instead.</p>
+          which you have a connection and receive a
+          @Identifier[keyword:visions]{vision} in response. There are
+          limitations on how often you can do this and the strength of the
+          answer you receive. Once per @Identifier[core:short-rest]{short rest},
+          you may ask a question and get a @Identifier[keyword:visions]{minor
+          vision} in response. If you are at a place of great power or
+          significance to the deity or entity you are asking, you will receive a
+          @Identifier[keyword:visions]{full vision} instead.</p>
         fluent: >-
-          <p>Your @L[Core:Short Rest]{short rest} questions receive a
-          @L[Keyword:Visions]{full vision} and your @L[Core:Long Rest]{long
-          rest} questions receive a @L[Keyword:Visions]{greater vision}. If you
-          are at a place of great power or significance to the deity or entity
-          you are asking, your visions are made even more powerful at
-          @L[Core:Game Master]{GM} discretion.</p>
+          <p>Your @Identifier[core:short-rest]{short rest} questions receive a
+          @Identifier[keyword:visions]{full vision} and your
+          @Identifier[core:long-rest]{long rest} questions receive a
+          @Identifier[keyword:visions]{greater vision}. If you are at a place of
+          great power or significance to the deity or entity you are asking,
+          your visions are made even more powerful at
+          @Identifier[core:game-master]{GM} discretion.</p>
         proficient: >-
-          <p>Once per @L[Core:Long Rest]{long rest}, you may ask a question and
-          get a @L[Keyword:Visions]{full vision} in response. If you are at a
-          place of great power or significance to the deity or entity you are
-          asking, you will receive a @L[Keyword:Visions]{greater vision}
-          instead.</p>
+          <p>Once per @Identifier[core:long-rest]{long rest}, you may ask a
+          question and get a @Identifier[keyword:visions]{full vision} in
+          response. If you are at a place of great power or significance to the
+          deity or entity you are asking, you will receive a
+          @Identifier[keyword:visions]{greater vision} instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -278,7 +285,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
     name: Treeform Ball
     system:
@@ -338,9 +345,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, this effect lasts an
-        addition turn without the target being able to @L[Ability:Self
-        Revert]{Self Revert}.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, this effect lasts an addition turn without the target being able
+        to @Identifier[ability:self-revert]{Self Revert}.</p>
       identifier: treeform-ball
       interaction: attack
       maneuver: active
@@ -354,17 +361,18 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>If you want, the target must spend 1 @L[Core:MP]{MP} to be able to
-          @L[Ability:Self Revert]{Self Revert}.</p>
+          <p>If you want, the target must spend 1 @Wiki[Core:MP]{MP} to be able
+          to @Identifier[ability:self-revert]{Self Revert}.</p>
         hit: >-
-          <p>Target is @L[Condition:Transformed]{minorly transformed} into a
-          @L[Creature:Tree]{tree} or revert a @L[Condition:Transformed]{minor
-          transformation}. The @L[Core:Size]{size} of the tree is equal to the
-          target's @L[Core:Size]{SIZE} prior to being
-          @L[Condition:Transformed]{transformed}. If a treeformed creature is
-          reduced to 0 @L[Core:Hit Points and Mana Points]{HP}, then they revert
-          and any remaining @L[Core:Damage]{damage} carries over to their
-          reverted state. </p>
+          <p>Target is @Identifier[status:transformed]{minorly transformed} into
+          a @Identifier[creature:tree]{tree} or revert a
+          @Identifier[status:transformed]{minor transformation}. The
+          @Identifier[core:size]{size} of the tree is equal to the target's
+          @Identifier[core:size]{SIZE} prior to being
+          @Identifier[status:transformed]{transformed}. If a treeformed creature
+          is reduced to 0 @Identifier[core:hit-points-and-mana-points]{HP}, then
+          they revert and any remaining @Identifier[core:damage]{damage} carries
+          over to their reverted state.</p>
       spell: true
       standard: true
       targets:

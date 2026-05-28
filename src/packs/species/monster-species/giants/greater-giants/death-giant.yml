@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: YDk3sa2CjhAMNk3f
     _key: '!items.effects!908f92bcd0dc093c.YDk3sa2CjhAMNk3f'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/crown-of-fear.webp
     name: Crown of Fear
     system:
@@ -67,8 +67,8 @@ effects:
       overview:
         base: >-
           <p>A small circle of glowing purple mist circles above your head. You
-          gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear Aura]{Fear
-          Aura}.</p>
+          gain @Identifier[ability:fear-touch]{Fear Touch} and
+          @Identifier[ability:fear-aura]{Fear Aura}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -90,7 +90,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -111,8 +111,13 @@ effects:
           target: armament
           type: childChange
           value: '1'
+      class: knight
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -132,10 +137,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Supernatural Strength]{Supernatural Strength}.
-          In addition, you deal @L[Keyword:Boosted]{boosted} with all melee
-          @L[Category:Weapons]{weapon} @L[Category:Attack abilities]{attacks}
-          and they are @L[Keyword:AV0]{AV0} for you.</p>
+          <p>You gain @Identifier[ability:supernatural-strength]{Supernatural
+          Strength}. In addition, you deal @Identifier[keyword:boosted]{boosted}
+          with all melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+          abilities]{attacks} and they are @Identifier[keyword:av0]{AV0} for
+          you.</p>
       piercing:
         raw: 0
       powerSources:
@@ -157,7 +163,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-intelligence.webp
     name: Normal Intelligence
     system:
@@ -201,7 +207,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -245,7 +251,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -289,7 +295,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -333,7 +339,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/fear-touch.webp
     name: Fear Touch
     system:
@@ -402,8 +408,9 @@ effects:
       elements:
         - necromancy
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: a1
         slow:
@@ -414,8 +421,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic terror]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: fear-touch
       interaction: attack
       maneuver: active
@@ -428,7 +436,7 @@ effects:
         unit: contact
       results:
         critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+        hit: <p>Target is @Identifier[status:frightened]{frightened}.</p>
       spell: true
       standard: true
       targets:
@@ -442,7 +450,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/fear-aura.webp
     name: Fear Aura
     system:
@@ -517,8 +525,9 @@ effects:
       elements:
         - necromancy
       endCondition: >-
-        <p>At the end of each of the target's @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: a1
         slow:
@@ -529,8 +538,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic terror]]]
+        @Identifier[core:damage]{damage}  as well.</p>
       identifier: fear-aura
       interaction: feat
       maneuver: active
@@ -543,7 +553,7 @@ effects:
         raw: '10'
         unit: ft
       results:
-        fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+        fail: <p>Target is @Identifier[status:frightened]{frightened}.</p>
       spell: true
       standard: true
       targets:
@@ -557,13 +567,18 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/supernatural-strength.webp
     name: Supernatural Strength
     system:
       _sup: TofQgvhz6k2OOS5v
+      class: knight
       competence:
         raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
       delivery: self
       duration:
         raw: '0'
@@ -583,11 +598,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Giant Strength]{Giant Strength} and
-          @L[Ability:Shattering Grip]{Shattering Grip}. In addition, you may
-          @L[Keyword:Deboosted]{deboost} any melee @L[Category:Weapons]{weapon}
-          @L[Category:Attack abilities]{attack} to make it
-          @L[Keyword:AV0]{AV0}.</p>
+          <p>You gain @Identifier[ability:giant-strength]{Giant Strength} and
+          @Identifier[ability:shattering-grip]{Shattering Grip}. In addition,
+          you may @Identifier[keyword:deboosted]{deboost} any melee
+          @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
+          abilities]{attack} to make it @Identifier[keyword:av0]{AV0}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -609,7 +624,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -636,10 +651,10 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Improved Strength]{Improved Strength} and
-          @L[Ability:Melee Damage Boost]{Melee Damage Boost}. In addition, you
-          are no longer suffer the consequences of
-          @L[Property:Cumbersome]{cumbersome} items.</p>
+          <p>You gain @Identifier[ability:improved-strength]{Improved Strength}
+          and @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In
+          addition, you are no longer suffer the consequences of
+          @Identifier[property:cumbersome]{cumbersome} items.</p>
       piercing:
         raw: 0
       powerSources:
@@ -663,7 +678,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -690,8 +705,9 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You gain @L[Ability:Beastly Strength]{Beastly Strength} and
-          @L[Ability:Improved Armor Piercing]{Improved Armor Piercing}.</p>
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength}
+          and @Identifier[ability:improved-armor-piercing]{Improved Armor
+          Piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -715,7 +731,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -742,10 +758,11 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Can wield @L[Property:Two-Handed]{two-handed} weapons in one
-          hand.</p><div class="note"><b>Note:</b> @L[Property:Armor
-          Piercing]{Armor piercing} weapons must still be wielded in two hands
-          to be @L[Keyword:Armor Voiding]{AV0}.</div>
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><div class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</div>
       piercing:
         raw: 0
       powerSources:
@@ -769,7 +786,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -796,8 +813,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>Melee weapons you use are @L[Property:Armor Piercing]{armor
-          piercing}.</p>
+          <p>Melee weapons you use are
+          @Identifier[property:armor-piercing]{armor piercing}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -817,7 +834,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -846,12 +863,14 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You may spend an unused @L[Core:Active Maneuvers]{action} to
-          @L[Keyword:Boosted]{boost} the triggering @L[Core:Damage]{damage}.</p>
+          <p>You may spend an unused @Identifier[core:active-maneuvers]{action}
+          to @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>You may spend an additional unused @L[Core:Active
-          Maneuvers]{action} to @L[Keyword:Boosted]{boost} the triggering
-          @L[Core:Damage]{damage} again.</p>
+          <p>You may spend an additional unused
+          @Identifier[core:active-maneuvers]{action} to
+          @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage} again.</p>
       piercing:
         raw: 0
       powerSources:
@@ -863,9 +882,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have hit a creature with a @L[Category:Damaging
-        effects]{damaging} melee @L[Category:Weapon delivery abilities]{weapon}
-        @L[Category:Attack abilities]{attack}.</p>
+        <p>You have hit a creature with a @Wiki[Category:Damaging
+        effects]{damaging} melee @Wiki[Category:Weapon delivery
+        abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
     transfer: true
     type: ability
   - _id: MYKDgQjfPlOz6u2C
@@ -875,7 +894,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/shattering-grip.webp
     name: Shattering Grip
     system:
@@ -914,7 +933,7 @@ effects:
       maneuver: active
       mundane: false
       overview:
-        base: <p>Target is @L[Property:Shattered]{shattered}.</p>
+        base: <p>Target is @Identifier[property:shattered]{shattered}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -932,19 +951,19 @@ name: Death Giant
 system:
   appearance: >-
     <p>Humanoid, though of great size and build. Skil colors and features
-    varying by their natural @L[Category:Mage classes]{mage} type.</p>
+    varying by their natural @Wiki[Category:Mage classes]{mage} type.</p>
   br: 21
   competence:
     raw: 1
   description: >-
-    <p>@L[Category:Giants]{Giants} are solitary and prefer fighting alone
+    <p>@Wiki[Category:Giants]{Giants} are solitary and prefer fighting alone
     (though they will come to each others aid). They are arrogant and will only
     attack if they see a large group worthy of battle or are attacked
     themselves.</p>
   identifier: death-giant
   innateRanks: >-
-    <p>Innately @L[Category:Classes]{rank} 1
-    @L[Class:Necromancer]{Necromancer}.</p>
+    <p>Innately @Wiki[Category:Classes]{rank} 1
+    @Identifier[class:necromancer]{Necromancer}.</p>
   size:
     enabled: true
     value: 8

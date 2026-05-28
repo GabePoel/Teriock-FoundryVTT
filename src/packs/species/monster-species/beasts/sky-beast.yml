@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.16
+  systemVersion: 0.12.69
 effects:
   - _id: 6LJrbPtot5QioPyY
     _key: '!items.effects!0b6f4e18632863ad.6LJrbPtot5QioPyY'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -57,7 +57,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/devour.webp
     name: Devour
     system:
@@ -86,12 +86,14 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @L[Condition:Down]{down}.</p>
+      requirements: <p>Target is @Identifier[status:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @L[Condition:Dead]{dead}, @L[Condition:Ruined]{ruined},
-          and their @L[Core:Size]{SIZE} is reduced by 1. If their
-          @L[Core:Size]{SIZE} was already less than 1, it is reduced to 0.</p>
+          <p>Target is @Identifier[status:dead]{dead},
+          @Identifier[status:ruined]{ruined}, and their
+          @Identifier[core:size]{SIZE} is reduced by 1. If their
+          @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
+          0.</p>
       targets:
         - creature
     transfer: true
@@ -103,7 +105,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
@@ -156,8 +158,10 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+        base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead fly at @Identifier[core:movement-speed]{full
+          speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -177,7 +181,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -215,7 +219,7 @@ effects:
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is bright light
-          and up to 120 feet as though it is dim light.</p>
+          and up to 120 feet as though it is dim light.</p><p></p>
       piercing:
         raw: 0
       powerSources:
@@ -233,7 +237,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -277,7 +281,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -321,7 +325,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -365,7 +369,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/normal-strength.webp
     name: Normal Strength
     system:
@@ -409,7 +413,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/partial-hands.webp
     name: Partial Hands
     system:
@@ -435,7 +439,7 @@ effects:
       overview:
         base: >-
           <p>You do not have real opposable thumbs. All items are
-          @L[Property:Two-Handed]{two-handed} for you.</p>
+          @Identifier[property:two-handed]{two-handed} for you.</p>
       piercing:
         raw: 0
       powerSources:

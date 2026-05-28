@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: 0y9MNplvqPMxBU5l
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -78,8 +78,10 @@ items:
           limitation: <p>Cannot go more than 5 feet above the ground.</p>
           maneuver: passive
           overview:
-            base: <p>You fly at @L[Core:Movement Speed]{half speed}.</p>
-            proficient: <p>You instead fly at @L[Core:Movement Speed]{full speed}.</p>
+            base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+            proficient: >-
+              <p>You instead fly at @Identifier[core:movement-speed]{full
+              speed}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -100,7 +102,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/light-ray.webp
         name: Light Ray
         system:
@@ -175,8 +177,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic holy]]] @L[Core:Damage]{damage}  as well.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic holy]]]
+            @Identifier[core:damage]{damage}  as well.</p>
           identifier: light-ray
           interaction: attack
           maneuver: active
@@ -189,11 +193,12 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>If you want, target is @L[Condition:Lighted]{lighted} until the
-              end of your next @L[Core:Turns]{turn}.</p>
+              <p>If you want, target is @Identifier[status:lighted]{lighted}
+              until the end of your next @Identifier[core:turns]{turn}.</p>
             hit: >-
-              <p>Target is @L[Condition:Lighted]{lighted} to a creature of your
-              choice until the end of their next @L[Core:Turns]{turn}.</p>
+              <p>Target is @Identifier[status:lighted]{lighted} to a creature of
+              your choice until the end of their next
+              @Identifier[core:turns]{turn}.</p>
           spell: true
           standard: true
           targets:
@@ -208,7 +213,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/lightning-ray.webp
         name: Lightning Ray
         system:
@@ -240,8 +245,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d6[magic]]] @L[Core:Damage]{damage}.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d6[magic]]]
+            @Identifier[core:damage]{damage}.</p>
           identifier: lightning-ray
           interaction: attack
           maneuver: active
@@ -254,10 +261,10 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d6[magic]]] @L[Core:Damage]{damage} to
+              <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
               target.</p>
           spell: true
           standard: true
@@ -273,7 +280,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/low-intelligence.webp
         name: Low Intelligence
         system:
@@ -317,7 +324,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -361,7 +368,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -405,7 +412,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -449,7 +456,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/passive-self-detonate.webp
         name: Passive Self Detonate
         system:
@@ -475,20 +482,24 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>@L[Category:Conjured spells]{Conjured} @L[Category:Missile
-              delivery spells]{missile spells} cast on you @L[Core:Detonate
-              Expansion]{detonate} (emanate in a 10 foot radius @L[Core:Aura
-              Delivery]{aura} from you). This is a @L[Core:Movement]{MOV}
-              @L[Core:Feat Interaction]{feat save} using <i>your</i> DC. Do not
-              add your @L[Core:Proficiency Bonus]{proficiency bonus} to the DC.
-              This detonating @L[Core:Aura Delivery]{aura delivery} is
-              @L[Category:Loud effects]{loud}.</p>
+              <p>@Wiki[Category:Conjured spells]{Conjured}
+              @Wiki[Category:Missile delivery spells]{missile spells} cast on
+              you @Identifier[core:detonate-expansion]{detonate} (emanate in a
+              10 foot radius @Identifier[core:aura-delivery]{aura} from you).
+              This is a @Identifier[core:movement]{MOV}
+              @Identifier[core:feat-interaction]{feat save} using <i>your</i>
+              DC. Do not add your
+              @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC.
+              This detonating @Identifier[core:aura-delivery]{aura delivery} is
+              @Wiki[Category:Loud effects]{loud}.</p>
             fluent: >-
-              <p>Your @L[Core:Fluency Bonus]{fluency bonus} is now included in
-              the @L[Core:Feat Interaction]{feat save DC}.</p>
+              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now
+              included in the @Identifier[core:feat-interaction]{feat save
+              DC}.</p>
             proficient: >-
-              <p>Your @L[Core:Proficiency Bonus]{proficiency bonus} is now
-              included in the @L[Core:Feat Interaction]{feat save DC}.</p>
+              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is
+              now included in the @Identifier[core:feat-interaction]{feat save
+              DC}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -507,7 +518,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/sneaky.webp
         name: Sneaky
         system:
@@ -547,7 +558,6 @@ items:
     img: systems/teriock/src/icons/creatures/tecnicalamari.webp
     name: Tecnicalamari
     system:
-      adult: 0
       appearance: <p>Flying rainbow squid that swim through the air.</p>
       br: 3
       competence:
@@ -558,7 +568,6 @@ items:
         throwing spells at each other to activate their detonation, thus taking
         out competition and prey simultaneously.</p>
       identifier: tecnicalamari
-      lifespan: 0
       size:
         enabled: true
         value: 1
@@ -582,7 +591,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: OSGutQn4dKlL3p0R
         _key: >-
@@ -592,7 +601,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -602,7 +611,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -617,7 +627,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -627,7 +637,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @L[Category:Attack abilities]{attack}.</p>
+            @Wiki[Category:Attack abilities]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true

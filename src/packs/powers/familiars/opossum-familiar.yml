@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: JaShmZEdTQvQsx4l
     _key: '!items.effects!c8dbb79bc421731e.JaShmZEdTQvQsx4l'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
@@ -47,7 +47,7 @@ effects:
       overview:
         base: >-
           <p>You can see in the dark up to 60 feet as though it is bright light
-          and up to 120 feet as though it is dim light.</p>
+          and up to 120 feet as though it is dim light.</p><p></p>
       piercing:
         raw: 0
       powerSources:
@@ -64,13 +64,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Opossum Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Opossum]{opossum}.</p>
+      description: <p>You know the way of the @Identifier[creature:opossum]{opossum}.</p>
       field: survivalist
       identifier: opossum-tamer
       tradecraft: tamer
@@ -83,7 +83,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/zombify.webp
     name: Zombify
     system:
@@ -155,8 +155,8 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-        effect increases by 1 hour.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the duration of this effect increases by 1 hour.</p>
       identifier: zombify
       interaction: attack
       invoked: true
@@ -164,25 +164,25 @@ effects:
       overview:
         fluent: >-
           <p>The base duration of this effect is 1 hour and the
-          @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under your
-          command.</p>
-        proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+          @Identifier[creature:zombie]{zombie} is a
+          @Identifier[core:minions]{minion} under your command.</p>
+        proficient: <p>[[lookup name]] is @Identifier[keyword:warded]{warded}.</p>
       piercing:
         raw: 2
       powerSources:
         - magical
       range:
         unit: contact
-      requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+      requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
       results:
         hit: >-
-          <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is not
-          under your command, but is hostile to everyone other than you that is
-          not @L[Category:Zombies]{another zombie}. The
-          @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
-          before, but loses all other traits and abilities. If the target was
-          already @L[Category:Zombies]{some kind of zombie}, then it is
-          reanimated as that type.</p>
+          <p>Target is reanimated as a @Identifier[creature:zombie]{zombie}. It
+          is not under your command, but is hostile to everyone other than you
+          that is not @Wiki[Category:Zombies]{another zombie}. The
+          @Identifier[creature:zombie]{zombie} keeps the
+          @Identifier[core:size]{SIZE} it had before, but loses all other traits
+          and abilities. If the target was already @Wiki[Category:Zombies]{some
+          kind of zombie}, then it is reanimated as that type.</p>
       spell: true
       standard: true
       targets:
@@ -196,10 +196,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.1d2fdec37cc5c357
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:opossum inline]</p>
   identifier: opossum-familiar
   maxAv: 0
   type: familiar

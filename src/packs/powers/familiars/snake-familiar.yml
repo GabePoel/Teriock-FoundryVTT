@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: iaIlHIRvPyhxJuQV
     _key: '!items.effects!177f14009521cab2.iaIlHIRvPyhxJuQV'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
@@ -61,21 +61,24 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You aim with deadly precision, causing the next @L[Category:Attack
-          abilities]{attack} you make with an item to be
-          @L[Keyword:Boosted]{boosted}. This @L[Category:Attack
-          abilities]{attack} must hit the target's @L[Core:Vitals
-          Target]{vitals} (@L[Core:Armor Class]{AC} + 3) or the
-          @L[Category:Attack abilities]{attack} does nothing. Only the
-          @L[Core:Damage]{damage} from the item itself can be
-          @L[Keyword:Boosted]{boosted} in this way.</p>
+          <p>You aim with deadly precision, causing the next
+          @Wiki[Category:Attack abilities]{attack} you make with an item to be
+          @Identifier[keyword:boosted]{boosted}. This @Wiki[Category:Attack
+          abilities]{attack} must hit the target's
+          @Identifier[core:vitals-target]{vitals}
+          (@Identifier[core:armor-class]{AC} + 3) or the @Wiki[Category:Attack
+          abilities]{attack} does nothing. Only the
+          @Identifier[core:damage]{damage} from the item itself can be
+          @Identifier[keyword:boosted]{boosted} in this way.</p>
       piercing:
         raw: 0
       powerSources:
         - martial
       range:
         unit: self
-      requirements: <p>You are not @L[Core:Sustained]{sustaining} [[lookup name]].</p>
+      requirements: >-
+        <p>You are not @Identifier[core:sustained]{sustaining} [[lookup
+        name]].</p>
       skill: true
       standard: true
       sustained: true
@@ -90,7 +93,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -144,11 +147,11 @@ effects:
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
-          @L[Core:Damage]{damage}. This also has all @L[Category:Damage
-          types]{damage types} of the triggering @L[Category:Attack
-          abilities]{attack}. If the triggering @L[Category:Attack
-          abilities]{attack} was a critical hit, this deals 10
-          @L[Core:Damage]{damage} instead.</p>
+          @Identifier[core:damage]{damage}. This also has all
+          @Wiki[Category:Damage types]{damage types} of the triggering
+          @Wiki[Category:Attack abilities]{attack}. If the triggering
+          @Wiki[Category:Attack abilities]{attack} was a critical hit, this
+          deals 10 @Identifier[core:damage]{damage} instead.</p>
       piercing:
         raw: 0
       powerSources:
@@ -160,8 +163,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just hit a creature with an @L[Category:Attack
-        abilities]{attack} that dealt them @L[Core:Damage]{damage} from it.</p>
+        <p>You have just hit a creature with an @Wiki[Category:Attack
+        abilities]{attack} that dealt them @Identifier[core:damage]{damage} from
+        it.</p>
     transfer: true
     type: ability
   - _id: snakeTamer000000
@@ -170,13 +174,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Snake Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Snake]{snake}.</p>
+      description: <p>You know the way of the @Identifier[creature:snake]{snake}.</p>
       field: survivalist
       identifier: snake-tamer
       tradecraft: tamer
@@ -189,10 +193,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.6f3641c05a6a301b
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:snake inline]</p>
   identifier: snake-familiar
   maxAv: 0
   type: familiar

@@ -4,18 +4,28 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.58
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/properties/ammunition.webp
 name: Ammunition
 system:
   applyIfDampened: true
   applyIfDeattuned: true
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.range.ranged
+          priority: 10
+          target: Item
+          type: override
+          value: 'true'
+      type: changes
   competence:
     raw: 0
   description: >-
-    <p>A weapon with this property is @L[Property:Ranged]{ranged} and requires
-    some sort of [[lookup name style=lc]] (arrows, rocks, darts, etc.) to
-    @L[Category:Attack abilities]{attack} with.</p>
+    <p>A weapon with this property is @Identifier[property:ranged]{ranged} and
+    requires some sort of [[lookup name style=lc]] (arrows, rocks, darts, etc.)
+    to @Wiki[Category:Attack abilities]{attack} with.</p>
   form: intrinsic
   identifier: ammunition
   mundane: true

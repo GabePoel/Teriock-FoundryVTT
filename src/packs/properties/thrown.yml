@@ -4,17 +4,27 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.58
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/properties/thrown.webp
 name: Thrown
 system:
   applyIfDampened: true
   applyIfDeattuned: true
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: system.range.ranged
+          priority: 10
+          target: Item
+          type: override
+          value: 'true'
+      type: changes
   competence:
     raw: 0
   description: >-
     <p>A weapon with this property can be tossed to make a
-    @L[Property:Ranged]{ranged} attack.</p>
+    @Identifier[property:ranged]{ranged} attack.</p>
   form: intrinsic
   identifier: thrown
   mundane: true

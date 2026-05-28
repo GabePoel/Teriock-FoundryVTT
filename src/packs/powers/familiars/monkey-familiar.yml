@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: Qrf6FGMpwCgTXRQs
     _key: '!items.effects!42a6a2108231f6cb.Qrf6FGMpwCgTXRQs'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     name: Acrobatics
     system:
@@ -37,8 +37,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @L[Ability:Climbing]{Climbing} and
-          @L[Ability:Leaping]{Leaping}.</p>
+          <p>You gain @Identifier[ability:climbing]{Climbing} and
+          @Identifier[ability:leaping]{Leaping}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -62,7 +62,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/improvised-weapons.webp
     name: Improvised Weapons
     system:
@@ -112,15 +112,17 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>During a @L[Core:Short Rest]{short rest}, you may scavenge
-          materials and make 1 melee @L[Category:Weapons]{weapon}. It is
-          @L[Property:Improvised]{improvised}. Only common
-          @L[Damage:Mundane]{mundane} items can typically be made in this way,
-          but the @L[Core:Game Master]{GM} may specify if other options are
-          available to you.</p>
-        fluent: <p>You can instead make up to @L[Core:Fluency Bonus]{F} weapons.</p>
+          <p>During a @Identifier[core:short-rest]{short rest}, you may scavenge
+          materials and make 1 melee @Wiki[Category:Weapons]{weapon}. It is
+          @Identifier[property:improvised]{improvised}. Only common
+          @Identifier[damage:mundane]{mundane} items can typically be made in
+          this way, but the @Identifier[core:game-master]{GM} may specify if
+          other options are available to you.</p>
+        fluent: >-
+          <p>You can instead make up to @Identifier[core:fluency-bonus]{F}
+          weapons.</p>
         proficient: >-
-          <p>You can instead make up to @L[Core:Proficiency Bonus]{P}
+          <p>You can instead make up to @Identifier[core:proficiency-bonus]{P}
           weapons.</p>
       piercing:
         raw: 0
@@ -140,13 +142,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Monkey Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Monkey]{monkey}.</p>
+      description: <p>You know the way of the @Identifier[creature:monkey]{monkey}.</p>
       field: survivalist
       identifier: monkey-tamer
       tradecraft: tamer
@@ -159,7 +161,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -212,8 +214,10 @@ effects:
       maneuver: passive
       mundane: false
       overview:
-        base: <p>You climb at @L[Core:Movement Speed]{half speed}.</p>
-        proficient: <p>You instead climb at @L[Core:Movement Speed]{normal speed}.</p>
+        base: <p>You climb at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead climb at @Identifier[core:movement-speed]{normal
+          speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -231,7 +235,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
@@ -296,11 +300,13 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You vertically leap at @L[Core:Movement Speed]{quarter speed} and
-          horizontally leap at @L[Core:Movement Speed]{half speed}.</p>
+          <p>You vertically leap at @Identifier[core:movement-speed]{quarter
+          speed} and horizontally leap at @Identifier[core:movement-speed]{half
+          speed}.</p>
         proficient: >-
-          <p>You instead vertically leap at @L[Core:Movement Speed]{half speed}
-          and horizontally leap at @L[Core:Movement Speed]{full speed}.</p>
+          <p>You instead vertically leap at
+          @Identifier[core:movement-speed]{half speed} and horizontally leap at
+          @Identifier[core:movement-speed]{full speed}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -320,10 +326,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.1548379a69d00e28
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:monkey inline]</p>
   identifier: monkey-familiar
   maxAv: 0
   type: familiar

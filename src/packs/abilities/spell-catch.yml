@@ -4,12 +4,16 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.63
+  systemVersion: 0.12.69
 img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
 name: Spell Catch
 system:
   competence:
     raw: 0
+  costs:
+    primary:
+      mp:
+        formula: '1'
   delivery: weapon
   duration:
     raw: '1'
@@ -34,18 +38,20 @@ system:
   range:
     unit: contact
   requirements: >-
-    <p>Target is a @L[Category:Missile delivery spells]{missile attack spell}
+    <p>Target is a @Wiki[Category:Missile delivery spells]{missile attack spell}
     being cast by an opponent.</p>
   results:
     save: >-
-      <p>The target @L[Core:Interactions]{attack} @L[Category:Missile delivery
-      spells]{spell} @L[Core:Fizzles]{fizzles} and gets "stored" in the
-      @L[Category:Weapons]{weapon} used to deliver [[lookup name]]. For the
-      duration of [[lookup name]], you gain @L[Keyword:Adept]{Adept}
-      @L[Keyword:Limited]{Limited} @L[Keyword:Improved]{Improved}
-      @L[Ability:Spell Strike]{Spell Strike}. Only one @L[Category:Missile
-      delivery spells]{spell} can be stored in the @L[Category:Weapons]{weapon}
-      at a time.</p>
+      <p>The target @Identifier[core:interactions]{attack}
+      @Wiki[Category:Missile delivery spells]{spell}
+      @Identifier[core:fizzles]{fizzles} and gets "stored" in the
+      @Wiki[Category:Weapons]{weapon} used to deliver [[lookup name]]. For the
+      duration of [[lookup name]], you gain @Identifier[keyword:adept]{Adept}
+      @Identifier[keyword:limited]{Limited}
+      @Identifier[keyword:improved]{Improved}
+      @Identifier[ability:spell-strike]{Spell Strike}. Only one
+      @Wiki[Category:Missile delivery spells]{spell} can be stored in the
+      @Wiki[Category:Weapons]{weapon} at a time.</p>
   targets:
     - spell
 transfer: true

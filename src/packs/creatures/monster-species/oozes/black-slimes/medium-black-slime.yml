@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: S5AO1uPtKBY1TszD
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
         name: Acidic Blood
         system:
@@ -51,10 +51,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>Any @L[Category:Weapons]{weapon} that deals
-              @L[Core:Damage]{damage} to you becomes
-              @L[Property:Shattered]{shattered} at the start of your next
-              @L[Core:Turns]{turn}.</p>
+              <p>Any @Wiki[Category:Weapons]{weapon} that deals
+              @Identifier[core:damage]{damage} to you becomes
+              @Identifier[property:shattered]{shattered} at the start of your
+              next @Identifier[core:turns]{turn}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -64,7 +64,7 @@ items:
           targets:
             - self
           trigger: >-
-            <p> This triggers automatically. You cannot choose to not use it if
+            <p>This triggers automatically. You cannot choose to not use it if
             you are able to.</p>
         transfer: true
         type: ability
@@ -76,7 +76,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -109,16 +109,16 @@ items:
               <p>You can passively smell the types of all living creatures
               within 30 feet. You can detect dead and undead creatures as well,
               but you cannot distinguish within or between them. They all smell
-              like death. You also gain @L[Ability:Scent Seeing]{Scent Seeing}.
-              You can not detect @L[Condition:Odorless]{odorless} creatures in
-              this way.</p>
+              like death. You also gain @Identifier[ability:scent-seeing]{Scent
+              Seeing}. You can not detect @Identifier[status:odorless]{odorless}
+              creatures in this way.</p>
           piercing:
             raw: 0
           powerSources:
             - martial
           range:
             unit: self
-          requirements: <p>You are not @L[Condition:Anosmatic]{anosmatic}.</p>
+          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
           skill: true
           standard: true
           targets:
@@ -137,7 +137,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/slimes/slime-giant-face-eyes.webp
         name: Blind Fighting
         system:
@@ -174,11 +174,11 @@ items:
           overview:
             base: >-
               <p>You can sense up to 60 feet around you even when you are
-              @L[Condition:Blind]{blind}. This lets you detect
-              @L[Category:Movement effects]{moving creatures}, but has no color
-              nor depth. Even subtle movements like breathing are sufficient for
-              this purpose. This does not detect any color nor depth, such as
-              pictures or words on a page.</p>
+              @Identifier[status:blind]{blind}. This lets you detect
+              @Wiki[Category:Movement effects]{moving creatures}, but has no
+              color nor depth. Even subtle movements like breathing are
+              sufficient for this purpose. This does not detect any color nor
+              depth, such as pictures or words on a page.</p>
           piercing:
             raw: 0
           powerSources:
@@ -202,7 +202,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/bumbling.webp
         name: Bumbling
         system:
@@ -246,7 +246,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -283,7 +283,7 @@ items:
           overview:
             base: >-
               <p>You can see in the dark up to 60 feet as though it is dim
-              light.</p>
+              light.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -302,7 +302,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -330,13 +330,14 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Down]{down}.</p>
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @L[Condition:Dead]{dead},
-              @L[Condition:Ruined]{ruined}, and their @L[Core:Size]{SIZE} is
-              reduced by 1. If their @L[Core:Size]{SIZE} was already less than
-              1, it is reduced to 0.</p>
+              <p>Target is @Identifier[status:dead]{dead},
+              @Identifier[status:ruined]{ruined}, and their
+              @Identifier[core:size]{SIZE} is reduced by 1. If their
+              @Identifier[core:size]{SIZE} was already less than 1, it is
+              reduced to 0.</p>
           targets:
             - creature
         transfer: true
@@ -349,7 +350,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
         name: Gooey Damage Reduction
         system:
@@ -373,8 +374,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>All @L[Core:Damage]{damage} you take is
-              @L[Keyword:Deboosted]{deboosted}.</p>
+              <p>All @Identifier[core:damage]{damage} you take is
+              @Identifier[keyword:deboosted]{deboosted}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -393,7 +394,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -437,7 +438,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -481,7 +482,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
         name: Ooze Mind
         system:
@@ -532,10 +533,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to being
-              @L[Condition:Frightened]{frightened},
-              @L[Condition:Goaded]{goaded}, @L[Condition:Frenzied]{frenzied},
-              and @L[Condition:Allured]{allured}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:frightened]{frightened},
+              @Identifier[status:goaded]{goaded},
+              @Identifier[status:frenzied]{frenzied}, and
+              @Identifier[status:allured]{allured}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -554,7 +556,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/resist-effects.webp
         name: Resist Effects
         system:
@@ -599,29 +601,55 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Pick one of the following @L[Category:Effects]{effect types}.
-              You @L[Keyword:Resistance]{resist} @L[Category:Effects]{effects}
-              of that type.</p><ol><li>@L[Category:Awakening effects]{Awakening
-              effects}</li><li>@L[Category:Control effects]{Control
-              effects}</li><li>@L[Category:Displacement effects]{Displacement
-              effects}</li><li>@L[Category:Duel modifying effects]{Duel
-              modifying effects}</li><li>@L[Category:Financial
-              effects]{Financial effects}</li><li>@L[Category:Healing
-              effects]{Healing effects}</li><li>@L[Category:Killing
-              effects]{Killing effects}</li><li>@L[Category:Knockout
-              effects]{Knockout effects}</li><li>@L[Category:Loud effects]{Loud
-              effects}</li><li>@L[Category:Mental effects]{Mental
-              effects}</li><li>@L[Category:Poison effects]{Poison
-              effects}</li><li>@L[Category:Reanimation effects]{Reanimation
-              effects}</li><li>@L[Category:Regeneration effects]{Regeneration
-              effects}</li><li>@L[Category:Revitalization
-              effects]{Revitalization effects}</li><li>@L[Category:Revival
-              effects]{Revival effects}</li><li>@L[Category:Stealing
-              effects]{Stealing effects}</li><li>@L[Category:Summoning
-              effects]{Summoning effects}</li><li>@L[Category:Temporal
-              effects]{Temporal effects}</li><li>@L[Category:Transformation
-              effects]{Transformation effects}</li><li>@L[Category:Truth
-              detecting effects]{Truth detecting effects}</li></ol>
+              <p>Pick one of the following @Wiki[Category:Effects]{effect
+              types}. You @Identifier[keyword:resistance]{resist}
+              @Wiki[Category:Effects]{effects} of that
+              type.</p><ol><li>@Wiki[Category:Awakening effects]{Awakening
+              effects}</li>
+
+              <li>@Wiki[Category:Control effects]{Control effects}</li>
+
+              <li>@Wiki[Category:Displacement effects]{Displacement
+              effects}</li>
+
+              <li>@Wiki[Category:Duel modifying effects]{Duel modifying
+              effects}</li>
+
+              <li>@Wiki[Category:Financial effects]{Financial effects}</li>
+
+              <li>@Wiki[Category:Healing effects]{Healing effects}</li>
+
+              <li>@Wiki[Category:Killing effects]{Killing effects}</li>
+
+              <li>@Wiki[Category:Knockout effects]{Knockout effects}</li>
+
+              <li>@Wiki[Category:Loud effects]{Loud effects}</li>
+
+              <li>@Wiki[Category:Mental effects]{Mental effects}</li>
+
+              <li>@Wiki[Category:Poison effects]{Poison effects}</li>
+
+              <li>@Wiki[Category:Reanimation effects]{Reanimation effects}</li>
+
+              <li>@Wiki[Category:Regeneration effects]{Regeneration
+              effects}</li>
+
+              <li>@Wiki[Category:Revitalization effects]{Revitalization
+              effects}</li>
+
+              <li>@Wiki[Category:Revival effects]{Revival effects}</li>
+
+              <li>@Wiki[Category:Stealing effects]{Stealing effects}</li>
+
+              <li>@Wiki[Category:Summoning effects]{Summoning effects}</li>
+
+              <li>@Wiki[Category:Temporal effects]{Temporal effects}</li>
+
+              <li>@Wiki[Category:Transformation effects]{Transformation
+              effects}</li>
+
+              <li>@Wiki[Category:Truth detecting effects]{Truth detecting
+              effects}</li></ol>
           piercing:
             raw: 0
           powerSources:
@@ -644,7 +672,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/slow.webp
         name: Slow
         system:
@@ -688,7 +716,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
@@ -721,8 +749,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to falling
-              @L[Condition:Unconscious]{unconscious}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to falling
+              @Identifier[status:unconscious]{unconscious}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -741,7 +769,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/vitals-durability.webp
         name: Vitals Durability
         system:
@@ -780,8 +808,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @L[Keyword:Immunity]{immune} to
-              @L[Category:Bows]{arrows} and @L[Category:Vitals target
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Wiki[Category:Bows]{arrows} and @Wiki[Category:Vitals target
               abilities]{vitals target abilities}.</p>
           piercing:
             raw: 0
@@ -801,7 +829,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -845,7 +873,7 @@ items:
               <p>You know the exact location of all target creatures. You
               continue to know the location of all targets within 10 feet,
               whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              still within 10 feet of you.</p><p></p>
           piercing:
             raw: 0
           powerSources:
@@ -854,8 +882,8 @@ items:
             raw: '10'
             unit: ft
           requirements: >-
-            <p>You are not @L[Condition:Anosmatic]{anosmatic} and the target is
-            not @L[Condition:Odorless]{odorless}.</p>
+            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
+            target is not @Identifier[status:odorless]{odorless}.</p>
           skill: true
           standard: true
           targets:
@@ -866,7 +894,6 @@ items:
     img: systems/teriock/src/icons/creatures/medium-black-slime.webp
     name: Medium Black Slime
     system:
-      adult: 0
       appearance: <p>A pool of thick opaque black liquid.</p>
       br: 11
       competence:
@@ -875,9 +902,8 @@ items:
       hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
       identifier: medium-black-slime
       innateRanks: >-
-        <p>Innately @L[Category:Classes]{rank} 2
-        @L[Class:Necromancer]{Necromancer}.</p>
-      lifespan: 0
+        <p>Innately @Wiki[Category:Classes]{rank} 2
+        @Identifier[class:necromancer]{Necromancer}.</p>
       mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
       size:
         enabled: true
@@ -904,7 +930,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: ycpaNkX8sIbCk6Lt
         _key: >-
@@ -914,7 +940,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -924,8 +950,8 @@ items:
             raw: 0
           description: >-
             <p>An item with the <b>[[lookup name style=lc]]</b> property is not
-            a weapon, but can still be used to make a @L[Ability:Basic
-            Attack]{Basic Attack}.</p>
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
           form: intrinsic
           identifier: bashing
         transfer: true
@@ -938,7 +964,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -948,7 +974,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property can be used to deliver
-            @L[Category:Hand delivery abilities]{hand delivery abilities}.</p>
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
           form: intrinsic
           identifier: handy
           powerSources:
@@ -963,7 +990,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -973,7 +1000,7 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @L[Category:Shields]{shield}.</p>
+            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1005,7 +1032,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: Q3bElOKJWjw3DI9t
         _key: >-
@@ -1015,7 +1042,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -1052,8 +1079,9 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, roll an additional
-            [[/kill 1d6]].</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an
+            additional [[/kill 1d6]].</p>
           identifier: death-ray
           interaction: attack
           maneuver: active
@@ -1065,15 +1093,15 @@ items:
             raw: '60'
             unit: ft
           requirements: >-
-            <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
-            creatures]{undead}.</p>
+            <p>Target is neither @Identifier[status:dead]{dead} nor
+            @Wiki[Category:Undead creatures]{undead}.</p>
           results:
             critHit: <p>Double the number of dice rolled.</p>
             hit: >-
               <p>Roll [[/kill 2d6]] if this is greater than or equal to the
-              number of @L[Core:HP]{HP} the target has, they
-              @L[Condition:Dead]{die}. This does not deal
-              @L[Core:Damage]{damage}.</p>
+              number of @Wiki[Core:HP]{HP} the target has, they
+              @Identifier[status:dead]{die}. This does not deal
+              @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
           targets:
@@ -1088,7 +1116,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/spirit-guide.webp
         name: Spirit Guide
         system:
@@ -1130,25 +1158,27 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, you may target an
-            additional creature.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
+            target an additional creature.</p>
           identifier: spirit-guide
           interaction: manifest
           maneuver: slow
           overview:
             base: >-
               <p>You can see, hear, and speak to spirits and
-              @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+              @Identifier[status:ethereal]{Ethereal} creatures within 120
+              feet.</p>
             fluent: >-
-              <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-              @L[Category:Spiritually powered abilities]{spiritual}
-              @L[Category:Ritual delivery spells]{ritual spells} such as
-              @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+              <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+              with @Wiki[Category:Spiritually powered abilities]{spiritual}
+              @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+              @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
             proficient: >-
-              <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-              @L[Category:Necromancy element abilities]{necromancy}
-              @L[Category:Ritual delivery spells]{ritual spells} such as
-              @L[Ability:Summon the Dead]{Summon the Dead}.</p>
+              <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+              with @Wiki[Category:Necromancy element abilities]{necromancy}
+              @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+              @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1157,8 +1187,8 @@ items:
             raw: '5'
             unit: ft
           requirements: >-
-            <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only
-            target yourself.</p>
+            <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may
+            only target yourself.</p>
           ritual: true
           spell: true
           standard: true
@@ -1175,7 +1205,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/summon-the-dead.webp
         name: Summon the Dead
         system:
@@ -1186,17 +1216,19 @@ items:
             primary:
               hp:
                 description: >-
-                  <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana
-                  Points]{HP} if the body is in your possession. Otherwise, it
-                  costs 3 @L[Core:Hit Points and Mana Points]{HP} per
-                  @L[Core:Size]{size} of the body.</p>
+                  <p>[[lookup name]] costs 0
+                  @Identifier[core:hit-points-and-mana-points]{HP} if the body
+                  is in your possession. Otherwise, it costs 3
+                  @Identifier[core:hit-points-and-mana-points]{HP} per
+                  @Identifier[core:size]{size} of the body.</p>
                 type: description
               mp:
                 description: >-
-                  <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana
-                  Points]{MP} if the body is in your possession. Otherwise, it
-                  costs 2 @L[Core:Hit Points and Mana Points]{MP} per
-                  @L[Core:Size]{size} of the body.</p>
+                  <p>[[lookup name]] costs 0
+                  @Identifier[core:hit-points-and-mana-points]{MP} if the body
+                  is in your possession. Otherwise, it costs 2
+                  @Identifier[core:hit-points-and-mana-points]{MP} per
+                  @Identifier[core:size]{size} of the body.</p>
                 type: description
           delivery: sight
           duration:
@@ -1223,15 +1255,16 @@ items:
             base: >-
               <p>If you have the body of the target in your possession, you can
               put the spirit back into its body such that it is no longer
-              @L[Condition:Wisping]{wisping}. The body maintains all damage it
-              had when it died.</p>
+              @Identifier[status:wisping]{wisping}. The body maintains all
+              damage it had when it died.</p>
             proficient: >-
               <p>If the body is thoroughly damaged (such as if it's
-              @L[Condition:Ruined]{ruined}) or missing entirely, you can expend
-              some of your own life force to recreate the body from the spirit
-              for additional @L[Core:Hit Points and Mana Points]{MP} and
-              @L[Core:Hit Points and Mana Points]{HP}. The creature is still
-              dead, but the body is now intact.</p>
+              @Identifier[status:ruined]{ruined}) or missing entirely, you can
+              expend some of your own life force to recreate the body from the
+              spirit for additional
+              @Identifier[core:hit-points-and-mana-points]{MP} and
+              @Identifier[core:hit-points-and-mana-points]{HP}. The creature is
+              still dead, but the body is now intact.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1241,7 +1274,7 @@ items:
           range:
             raw: '5'
             unit: ft
-          requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
+          requirements: <p>Target must be @Identifier[status:wisping]{wisping}.</p>
           ritual: true
           spell: true
           standard: true
@@ -1257,7 +1290,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/terror-ball.webp
         name: Terror Ball
         system:
@@ -1288,8 +1321,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic terror]]]
+            @Identifier[core:damage]{damage}.</p>
           identifier: terror-ball
           interaction: attack
           maneuver: active
@@ -1302,11 +1337,11 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
-              target.</p>
+              <p>Deal [[/damage 1d4[terror magic]]]
+              @Identifier[core:damage]{damage} to target.</p>
           spell: true
           standard: true
           targets:
@@ -1349,7 +1384,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: JFQwPusSGXNlFxzg
         _key: >-
@@ -1359,7 +1394,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
         name: Necromancy Elder Sorcery
         system:
@@ -1373,7 +1408,7 @@ items:
           executionTime:
             base: passive
             slow:
-              unit: second
+              unit: longRest
           expansion:
             range:
               unit: self
@@ -1384,10 +1419,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You gain @L[Ability:Elder Sorcery Creation]{Elder Sorcery
-              Creation}, @L[Ability:Celestial Elder Sorcery Words]{Celestial
-              Elder Sorcery Words}, and @L[Ability:Necromancy Elder Sorcery
-              Words]{Necromancy Elder Sorcery Words}.</p>
+              <p>You gain @Identifier[ability:elder-sorcery-creation]{Elder
+              Sorcery Creation},
+              @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+              Sorcery Words}, and
+              @Identifier[ability:necromancy-elder-sorcery-words]{Necromancy
+              Elder Sorcery Words}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1407,7 +1444,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
         name: Necromancy Rotators
         system:
@@ -1447,6 +1484,10 @@ items:
           class: necromancer
           competence:
             raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '0'
@@ -1466,31 +1507,35 @@ items:
           overview:
             base: >-
               <p>Having mastered the basic techniques in this field of magic,
-              you are able to cast more advanced @L[Category:Spells]{spells}. If
-              you create any @L[Core:Elder Sorcery]{Elder Sorcery}
-              @L[Category:Spells]{spells} of your own, they get added to this
+              you are able to cast more advanced @Wiki[Category:Spells]{spells}.
+              If you create any @Identifier[core:elder-sorcery]{Elder Sorcery}
+              @Wiki[Category:Spells]{spells} of your own, they get added to this
               list. However, just because you "know" how to cast these spells,
               doesn't mean you are always prepared to. Although all
-              @L[Category:Mage classes]{mage classes} grant their own
-              @L[Core:Elder Sorcery]{Elder Sorcery} and @L[Category:Rotator
-              spells]{rotator spells}, you may only have a maximum of
-              @L[Category:Mage classes]{MR} - 1 of these spells rotated into
-              your spell list at any given time across <i>all</i> classes.
-              @L[Category:Mage classes]{MR} refers to the number of
-              @L[Core:Leveling Up]{ranks} you have in @L[Category:Mage
-              classes]{mage classes}. During a @L[Core:Long Rest]{long rest},
-              you can "rotate" which spells you have prepared. The
-              @L[Category:Rotator spells]{rotator spells} automatically
-              available to you are @L[Ability:Crown of Fear]{Crown of Fear},
-              @L[Ability:Death Rattle]{Death Rattle}, @L[Ability:Ethereal
-              Shift]{Ethereal Shift}, @L[Ability:Spirit Bury]{Spirit Bury}, and
-              @L[Ability:Undead Reanimation]{Undead Reanimation}.</p>
+              @Wiki[Category:Mage classes]{mage classes} grant their own
+              @Identifier[core:elder-sorcery]{Elder Sorcery} and
+              @Wiki[Category:Rotator spells]{rotator spells}, you may only have
+              a maximum of @Wiki[Category:Mage classes]{MR} - 1 of these spells
+              rotated into your spell list at any given time across <i>all</i>
+              classes. @Wiki[Category:Mage classes]{MR} refers to the number of
+              @Identifier[core:leveling-up]{ranks} you have in
+              @Wiki[Category:Mage classes]{mage classes}. During a
+              @Identifier[core:long-rest]{long rest}, you can "rotate" which
+              spells you have prepared. The @Wiki[Category:Rotator
+              spells]{rotator spells} automatically available to you are
+              @Identifier[ability:crown-of-fear]{Crown of Fear},
+              @Identifier[ability:death-rattle]{Death Rattle},
+              @Identifier[ability:ethereal-shift]{Ethereal Shift},
+              @Identifier[ability:spirit-bury]{Spirit Bury}, and
+              @Identifier[ability:undead-reanimation]{Undead
+              Reanimation}.</p><div class="expandable-table"></div>
             fluent: >-
-              <p>You may instead prepare 2 × (MR - 1) + @L[Core:Proficiency
-              Bonus]{P} of these @L[Category:Spells]{spells}.</p>
+              <p>You may instead prepare 2 × (MR - 1) +
+              @Identifier[core:proficiency-bonus]{P} of these
+              @Wiki[Category:Spells]{spells}.</p>
             proficient: >-
               <p>You may instead prepare 2 × (MR - 1) of these
-              @L[Category:Spells]{spells}.</p>
+              @Wiki[Category:Spells]{spells}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1510,7 +1555,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         name: Elder Sorcery Creation
         system:
@@ -1527,14 +1572,14 @@ items:
             primary:
               hp:
                 description: >-
-                  <p>Creation cost is at least 3 × @L[Core:HP]{HP} of the spell
-                  itself.</p>
+                  <p>Creation cost is at least 3 × @Wiki[Core:HP]{HP} of the
+                  spell itself.</p>
                 type: description
               mp:
                 description: >-
-                  <p>Creation cost is at least 1 @L[Core:MP]{MP} per
-                  @L[Core:Elder Sorcery]{OP} of <i>each</i> word in the spell
-                  plus 3 × @L[Core:MP]{MP} of the spell itself.</p>
+                  <p>Creation cost is at least 1 @Wiki[Core:MP]{MP} per
+                  @Identifier[core:elder-sorcery]{OP} of <i>each</i> word in the
+                  spell plus 3 × @Wiki[Core:MP]{MP} of the spell itself.</p>
                 type: description
           delivery: sight
           duration:
@@ -1555,27 +1600,30 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>You may create 1 custom "rotator" @L[Category:Spells]{spells}
-              using @L[Core:Elder Sorcery]{Elder Sorcery} words that you know
-              using whatever @L[Core:Elder Sorcery]{Elder Sorcery} creation
-              rules are dictated to you by your @L[Core:Game Master]{GM}. As
-              with other rotators, this spell is not always available to you.
-              You have to "rotate" into having it prepared. This spell may have
-              a maximum number of words equal to your @L[Core:Leveling
-              Up]{level}. Your @L[Core:Game Master]{GM} may allow you to
-              "improvise" @L[Category:Spells]{spells} as well, using whatever
-              rules they wish.</p>
+              <p>You may create 1 custom "rotator"
+              @Wiki[Category:Spells]{spells} using
+              @Identifier[core:elder-sorcery]{Elder Sorcery} words that you know
+              using whatever @Identifier[core:elder-sorcery]{Elder Sorcery}
+              creation rules are dictated to you by your
+              @Identifier[core:game-master]{GM}. As with other rotators, this
+              spell is not always available to you. You have to "rotate" into
+              having it prepared. This spell may have a maximum number of words
+              equal to your @Identifier[core:leveling-up]{level}. Your
+              @Identifier[core:game-master]{GM} may allow you to "improvise"
+              @Wiki[Category:Spells]{spells} as well, using whatever rules they
+              wish.</p>
             fluent: >-
               <p>In addition to the spells that you crate, you can learn
-              @L[Core:Proficiency Bonus]{P} additional spells from other
-              @L[Core:Elder Sorcery]{Elder Sorcery} users. See @L[Core:Elder
-              Sorcery]{Elder Sorcery} for more information.</p>
+              @Identifier[core:proficiency-bonus]{P} additional spells from
+              other @Identifier[core:elder-sorcery]{Elder Sorcery} users. See
+              @Identifier[core:elder-sorcery]{Elder Sorcery} for more
+              information.</p>
             proficient: >-
-              <p>You may now create 2 × (@L[Category:Mage classes]{MR} - 1)
-              custom "rotator" @L[Category:Spells]{spells} where
-              @L[Category:Mage classes]{MR} is the number of @L[Core:Leveling
-              Up]{ranks} you have in @L[Category:Mage classes]{mage
-              classes}.</p>
+              <p>You may now create 2 × (@Wiki[Category:Mage classes]{MR} - 1)
+              custom "rotator" @Wiki[Category:Spells]{spells} where
+              @Wiki[Category:Mage classes]{MR} is the number of
+              @Identifier[core:leveling-up]{ranks} you have in
+              @Wiki[Category:Mage classes]{mage classes}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1596,7 +1644,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: >-
           systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
         name: Necromancy Elder Sorcery Words
@@ -1626,41 +1674,128 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Necromancy Elder
-              Sorcery Words]{Necromancy Elder Sorcery words}.</p><table
-              class="wikitable sortable"><caption style="white-space:nowrap">OP
-              1 Necromancy @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
-              Nouns}</th><th
-              style="background-color:#0000001A">@L[Class:Necromancer]{Necromancy
-              Verbs}</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#77767b1A">blemish</td><td
-              style="background-color:#77767b1A">force</td></tr> <tr><td
-              style="background-color:#0000001A">darkness</td><td
-              style="background-color:#0000001A">intimidate</td></tr> <tr><td
-              style="background-color:#77767b1A">filth</td><td
-              style="background-color:#77767b1A">shame</td></tr> <tr><td
-              style="background-color:#0000001A">grave</td><td
-              style="background-color:#0000001A">sicken</td></tr> <tr><td
-              style="background-color:#77767b1A">pain</td><td
-              style="background-color:#77767b1A">spoil</td></tr> <tr><td
-              style="background-color:#0000001A">seizure</td><td
-              style="background-color:#0000001A">summon</td></tr> <tr><td
-              style="background-color:#77767b1A">stench</td><td
-              style="background-color:#77767b1A">taint</td></tr> <tr><td
-              style="background-color:#0000001A">tears</td><td
-              style="background-color:#0000001A">twist</td></tr> <tr><td
-              style="background-color:#77767b1A">woe</td><td
-              style="background-color:#77767b1A">wrench</td></tr></tbody></table>
+              <p>You know @Identifier[core:elder-sorcery]{OP} 1
+              @Wiki[Core:Necromancy Elder Sorcery Words]{Necromancy Elder
+              Sorcery words}.</p><table class="wikitable sortable">
+
+              <caption style="white-space:nowrap">OP 1 Necromancy
+              @Wiki[Core:Elder Sorcery Words]{Elder Sorcery Words}
+
+              </caption>
+
+              <tbody><tr>
+
+              <th style="background-color:#e5a50a1A">OP</th>
+
+              <th
+              style="background-color:#0000001A">@Identifier[class:necromancer]{Necromancy
+              Nouns}</th>
+
+              <th
+              style="background-color:#0000001A">@Identifier[class:necromancer]{Necromancy
+              Verbs}
+
+              </th></tr>
+
+              <tr>
+
+              <td rowspan="9" style="background-color:#f9f06b1A">1
+
+              </td>
+
+              <td style="background-color:#77767b1A">blemish
+
+              </td>
+
+              <td style="background-color:#77767b1A">force
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#0000001A">darkness
+
+              </td>
+
+              <td style="background-color:#0000001A">intimidate
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#77767b1A">filth
+
+              </td>
+
+              <td style="background-color:#77767b1A">shame
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#0000001A">grave
+
+              </td>
+
+              <td style="background-color:#0000001A">sicken
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#77767b1A">pain
+
+              </td>
+
+              <td style="background-color:#77767b1A">spoil
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#0000001A">seizure
+
+              </td>
+
+              <td style="background-color:#0000001A">summon
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#77767b1A">stench
+
+              </td>
+
+              <td style="background-color:#77767b1A">taint
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#0000001A">tears
+
+              </td>
+
+              <td style="background-color:#0000001A">twist
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#77767b1A">woe
+
+              </td>
+
+              <td style="background-color:#77767b1A">wrench
+
+              </td></tr></tbody></table>
             fluent: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Fluency Bonus]{F}).</p>
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:fluency-bonus]{F}).</p>
             proficient: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Proficiency Bonus]{P}).</p>
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:proficiency-bonus]{P}).</p>
           piercing:
             raw: 0
           powerSources:
@@ -1680,7 +1815,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
         name: Celestial Elder Sorcery Words
         system:
@@ -1706,100 +1841,352 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know @L[Core:Elder Sorcery]{OP} 1 @L[Core:Celestial Elder
-              Sorcery Words]{Celestial Elder Sorcery words}.</p><table
-              class="wikitable sortable"><caption style="white-space:nowrap">OP
-              1 Celestial @L[Core:Elder Sorcery Words]{Elder Sorcery
-              Words}</caption><tbody><tr><th
-              style="background-color:#e5a50a1A">OP</th><th
-              style="background-color:#6135831A">Celestial Adjectives</th><th
-              style="background-color:#6135831A">Celestial Adverbs</th><th
-              style="background-color:#6135831A">Celestial Articles</th><th
-              style="background-color:#6135831A">Celestial Conjunctions</th><th
-              style="background-color:#6135831A">Celestial Nouns</th><th
-              style="background-color:#6135831A">Celestial Prepositions</th><th
-              style="background-color:#6135831A">Celestial Pronouns</th><th
-              style="background-color:#6135831A">Celestial
-              Verbs</th></tr><tr><td rowspan="9"
-              style="background-color:#f9f06b1A">1</td><td
-              style="background-color:#dc8add1A">bad</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">an</td><td
-              style="background-color:#dc8add1A">as</td><td
-              style="background-color:#dc8add1A">color</td><td
-              style="background-color:#dc8add1A">by</td><td
-              style="background-color:#dc8add1A">me</td><td
-              style="background-color:#dc8add1A">are</td></tr> <tr><td
-              style="background-color:#6135831A">big</td><td
-              style="background-color:#6135831A">carefully</td><td
-              style="background-color:#6135831A">one</td><td
-              style="background-color:#6135831A">but</td><td
-              style="background-color:#6135831A">cup</td><td
-              style="background-color:#6135831A">for</td><td
-              style="background-color:#6135831A">my</td><td
-              style="background-color:#6135831A">be</td></tr> <tr><td
-              style="background-color:#dc8add1A">bright</td><td
-              style="background-color:#dc8add1A">here</td><td
-              style="background-color:#dc8add1A">the</td><td
-              style="background-color:#dc8add1A">or</td><td
-              style="background-color:#dc8add1A">dagger</td><td
-              style="background-color:#dc8add1A">in</td><td
-              style="background-color:#dc8add1A">that</td><td
-              style="background-color:#dc8add1A">begin</td></tr> <tr><td
-              style="background-color:#6135831A">clean</td><td
-              style="background-color:#6135831A">pretty</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">so</td><td
-              style="background-color:#6135831A">foot</td><td
-              style="background-color:#6135831A">of</td><td
-              style="background-color:#6135831A">this</td><td
-              style="background-color:#6135831A">did</td></tr> <tr><td
-              style="background-color:#dc8add1A">little</td><td
-              style="background-color:#dc8add1A">then</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">hand</td><td
-              style="background-color:#dc8add1A">off</td><td
-              style="background-color:#dc8add1A">you</td><td
-              style="background-color:#dc8add1A">may</td></tr> <tr><td
-              style="background-color:#6135831A">long</td><td
-              style="background-color:#6135831A">there</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">hat</td><td
-              style="background-color:#6135831A">on</td><td
-              style="background-color:#6135831A">your</td><td
-              style="background-color:#6135831A">might</td></tr> <tr><td
-              style="background-color:#dc8add1A">short</td><td
-              style="background-color:#dc8add1A">today</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">skin</td><td
-              style="background-color:#dc8add1A">to</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">stand</td></tr> <tr><td
-              style="background-color:#6135831A">small</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">torch</td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A"></td><td
-              style="background-color:#6135831A">tend</td></tr> <tr><td
-              style="background-color:#dc8add1A">this</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">wand</td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A"></td><td
-              style="background-color:#dc8add1A">use</td></tr></tbody></table>
+              <p>You know @Identifier[core:elder-sorcery]{OP} 1
+              @Wiki[Core:Celestial Elder Sorcery Words]{Celestial Elder Sorcery
+              words}.</p><table class="wikitable sortable">
+
+              <caption style="white-space:nowrap">OP 1 Celestial
+              @Wiki[Core:Elder Sorcery Words]{Elder Sorcery Words}
+
+              </caption>
+
+              <tbody><tr>
+
+              <th style="background-color:#e5a50a1A">OP</th>
+
+              <th style="background-color:#6135831A">Celestial Adjectives</th>
+
+              <th style="background-color:#6135831A">Celestial Adverbs</th>
+
+              <th style="background-color:#6135831A">Celestial Articles</th>
+
+              <th style="background-color:#6135831A">Celestial Conjunctions</th>
+
+              <th style="background-color:#6135831A">Celestial Nouns</th>
+
+              <th style="background-color:#6135831A">Celestial Prepositions</th>
+
+              <th style="background-color:#6135831A">Celestial Pronouns</th>
+
+              <th style="background-color:#6135831A">Celestial Verbs
+
+              </th></tr>
+
+              <tr>
+
+              <td rowspan="9" style="background-color:#f9f06b1A">1
+
+              </td>
+
+              <td style="background-color:#dc8add1A">bad
+
+              </td>
+
+              <td style="background-color:#dc8add1A">as
+
+              </td>
+
+              <td style="background-color:#dc8add1A">an
+
+              </td>
+
+              <td style="background-color:#dc8add1A">as
+
+              </td>
+
+              <td style="background-color:#dc8add1A">color
+
+              </td>
+
+              <td style="background-color:#dc8add1A">by
+
+              </td>
+
+              <td style="background-color:#dc8add1A">me
+
+              </td>
+
+              <td style="background-color:#dc8add1A">are
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">big
+
+              </td>
+
+              <td style="background-color:#6135831A">carefully
+
+              </td>
+
+              <td style="background-color:#6135831A">one
+
+              </td>
+
+              <td style="background-color:#6135831A">but
+
+              </td>
+
+              <td style="background-color:#6135831A">cup
+
+              </td>
+
+              <td style="background-color:#6135831A">for
+
+              </td>
+
+              <td style="background-color:#6135831A">my
+
+              </td>
+
+              <td style="background-color:#6135831A">be
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">bright
+
+              </td>
+
+              <td style="background-color:#dc8add1A">here
+
+              </td>
+
+              <td style="background-color:#dc8add1A">the
+
+              </td>
+
+              <td style="background-color:#dc8add1A">or
+
+              </td>
+
+              <td style="background-color:#dc8add1A">dagger
+
+              </td>
+
+              <td style="background-color:#dc8add1A">in
+
+              </td>
+
+              <td style="background-color:#dc8add1A">that
+
+              </td>
+
+              <td style="background-color:#dc8add1A">begin
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">clean
+
+              </td>
+
+              <td style="background-color:#6135831A">pretty
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">so
+
+              </td>
+
+              <td style="background-color:#6135831A">foot
+
+              </td>
+
+              <td style="background-color:#6135831A">of
+
+              </td>
+
+              <td style="background-color:#6135831A">this
+
+              </td>
+
+              <td style="background-color:#6135831A">did
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">little
+
+              </td>
+
+              <td style="background-color:#dc8add1A">then
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">hand
+
+              </td>
+
+              <td style="background-color:#dc8add1A">off
+
+              </td>
+
+              <td style="background-color:#dc8add1A">you
+
+              </td>
+
+              <td style="background-color:#dc8add1A">may
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">long
+
+              </td>
+
+              <td style="background-color:#6135831A">there
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">hat
+
+              </td>
+
+              <td style="background-color:#6135831A">on
+
+              </td>
+
+              <td style="background-color:#6135831A">your
+
+              </td>
+
+              <td style="background-color:#6135831A">might
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">short
+
+              </td>
+
+              <td style="background-color:#dc8add1A">today
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">skin
+
+              </td>
+
+              <td style="background-color:#dc8add1A">to
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">stand
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">small
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">torch
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">tend
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">this
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">wand
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">use
+
+              </td></tr></tbody></table>
             fluent: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Fluency Bonus]{F}).</p>
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:fluency-bonus]{F}).</p>
             proficient: >-
-              <p>The @L[Core:Elder Sorcery]{OP} of words you know is 1 + (3 ×
-              @L[Core:Proficiency Bonus]{P}).</p>
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:proficiency-bonus]{P}).</p>
           piercing:
             raw: 0
           powerSources:
@@ -1819,7 +2206,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
@@ -1861,8 +2248,8 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>You go @L[Condition:Ethereal]{Ethereal} or manifest back into
-              the Material Realm.</p>
+              <p>You go @Identifier[status:ethereal]{Ethereal} or manifest back
+              into the Material Realm.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1884,7 +2271,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/undead-reanimation.webp
         name: Undead Reanimation
         system:
@@ -1898,6 +2285,9 @@ items:
                 type: tag
               verbal:
                 type: tag
+            primary:
+              mp:
+                formula: '1'
           delivery: self
           duration:
             raw: '8'
@@ -1919,8 +2309,8 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>You gain @L[Ability:Zombify]{Zombify} and @L[Ability:Animate
-              Dead]{Animate Dead}.</p>
+              <p>You gain @Identifier[ability:zombify]{Zombify} and
+              @Identifier[ability:animate-dead]{Animate Dead}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -1942,7 +2332,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -1983,17 +2373,18 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Target is @L[Condition:Alive]{alive} (but still
-              @L[Category:Undead creatures]{undead}) at 1 @L[Core:Hit Points and
-              Mana Points]{HP}, although its maximum @L[Core:Hit Points and Mana
-              Points]{HP} is halved (minimum of 1) until it completes a
-              @L[Core:Short Rest]{short rest}. This does not count as a
-              @L[Category:Revival effects]{revival effect}.</p>
-            fluent: <p>Target's @L[Core:HP]{HP} is no longer halved.</p>
+              <p>Target is @Identifier[status:alive]{alive} (but still
+              @Wiki[Category:Undead creatures]{undead}) at 1
+              @Identifier[core:hit-points-and-mana-points]{HP}, although its
+              maximum @Identifier[core:hit-points-and-mana-points]{HP} is halved
+              (minimum of 1) until it completes a
+              @Identifier[core:short-rest]{short rest}. This does not count as a
+              @Wiki[Category:Revival effects]{revival effect}.</p>
+            fluent: <p>Target's @Wiki[Core:HP]{HP} is no longer halved.</p>
             proficient: >-
-              <p>Target has all @L[Core:HP]{HP} restored, but its maximum
-              @L[Core:HP]{HP} is still halved. This does not count as a
-              @L[Category:Healing effects]{healing effect}.</p>
+              <p>Target has all @Wiki[Core:HP]{HP} restored, but its maximum
+              @Wiki[Core:HP]{HP} is still halved. This does not count as a
+              @Wiki[Category:Healing effects]{healing effect}.</p>
           piercing:
             raw: 2
           powerSources:
@@ -2001,8 +2392,8 @@ items:
           range:
             unit: contact
           requirements: >-
-            <p>Target is @L[Condition:Dead]{dead} and @L[Category:Undead
-            creatures]{undead}.</p>
+            <p>Target is @Identifier[status:dead]{dead} and
+            @Wiki[Category:Undead creatures]{undead}.</p>
           spell: true
           standard: true
           targets:
@@ -2017,7 +2408,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/zombify.webp
         name: Zombify
         system:
@@ -2091,8 +2482,9 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
+            of this effect increases by 1 hour.</p>
           identifier: zombify
           interaction: attack
           invoked: true
@@ -2100,24 +2492,25 @@ items:
           overview:
             fluent: >-
               <p>The base duration of this effect is 1 hour and the
-              @L[Creature:Zombie]{zombie} is a @L[Core:Minions]{minion} under
-              your command.</p>
-            proficient: <p>[[lookup name]] is @L[Keyword:Warded]{warded}.</p>
+              @Identifier[creature:zombie]{zombie} is a
+              @Identifier[core:minions]{minion} under your command.</p>
+            proficient: <p>[[lookup name]] is @Identifier[keyword:warded]{warded}.</p>
           piercing:
             raw: 2
           powerSources:
             - magical
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+          requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
           results:
             hit: >-
-              <p>Target is reanimated as a @L[Creature:Zombie]{zombie}. It is
-              not under your command, but is hostile to everyone other than you
-              that is not @L[Category:Zombies]{another zombie}. The
-              @L[Creature:Zombie]{zombie} keeps the @L[Core:Size]{SIZE} it had
-              before, but loses all other traits and abilities. If the target
-              was already @L[Category:Zombies]{some kind of zombie}, then it is
+              <p>Target is reanimated as a @Identifier[creature:zombie]{zombie}.
+              It is not under your command, but is hostile to everyone other
+              than you that is not @Wiki[Category:Zombies]{another zombie}. The
+              @Identifier[creature:zombie]{zombie} keeps the
+              @Identifier[core:size]{SIZE} it had before, but loses all other
+              traits and abilities. If the target was already
+              @Wiki[Category:Zombies]{some kind of zombie}, then it is
               reanimated as that type.</p>
           spell: true
           standard: true
@@ -2133,7 +2526,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
@@ -2183,23 +2576,24 @@ items:
           featSaveAttribute: mov
           form: special
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, the duration of this
-            effect increases by 1 hour.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
+            of this effect increases by 1 hour.</p>
           identifier: spirit-bury
           interaction: attack
           invoked: true
           maneuver: active
           overview:
-            proficient: <p>This effect lasts 10 minutes instead of 1. </p>
+            proficient: <p>This effect lasts 10 minutes instead of 1.</p>
           piercing:
             raw: 0
           powerSources:
             - magical
           range:
             unit: contact
-          requirements: <p>Target is @L[Condition:Dead]{dead}.</p>
+          requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
           results:
-            hit: <p>Target cannot become @L[Condition:Wisping]{wisping}.</p>
+            hit: <p>Target cannot become @Identifier[status:wisping]{wisping}.</p>
           rotator: true
           spell: true
           standard: true
@@ -2215,7 +2609,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/death-rattle.webp
         name: Death Rattle
         system:
@@ -2262,7 +2656,7 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You execute one @L[Category:Single action abilities]{single
+              <p>You execute one @Wiki[Category:Single action abilities]{single
               action ability} you have.</p>
           piercing:
             raw: 0
@@ -2275,7 +2669,7 @@ items:
           standard: true
           targets:
             - self
-          trigger: <p>You @L[Condition:Dead]{die}.</p>
+          trigger: <p>You @Identifier[status:dead]{die}.</p>
         transfer: true
         type: ability
       - _id: e0pocPKAruFnvDgW
@@ -2286,7 +2680,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/crown-of-fear.webp
         name: Crown of Fear
         system:
@@ -2340,8 +2734,8 @@ items:
           overview:
             base: >-
               <p>A small circle of glowing purple mist circles above your head.
-              You gain @L[Ability:Fear Touch]{Fear Touch} and @L[Ability:Fear
-              Aura]{Fear Aura}.</p>
+              You gain @Identifier[ability:fear-touch]{Fear Touch} and
+              @Identifier[ability:fear-aura]{Fear Aura}.</p>
           piercing:
             raw: 0
           powerSources:
@@ -2364,7 +2758,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/fear-touch.webp
         name: Fear Touch
         system:
@@ -2433,9 +2827,9 @@ items:
           elements:
             - necromancy
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -2446,8 +2840,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic terror]]]
+            @Identifier[core:damage]{damage}  as well.</p>
           identifier: fear-touch
           interaction: attack
           maneuver: active
@@ -2461,7 +2857,7 @@ items:
             critHit: >-
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
-            hit: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+            hit: <p>Target is @Identifier[status:frightened]{frightened}.</p>
           spell: true
           standard: true
           targets:
@@ -2476,7 +2872,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/fear-aura.webp
         name: Fear Aura
         system:
@@ -2551,9 +2947,9 @@ items:
           elements:
             - necromancy
           endCondition: >-
-            <p>At the end of each of the target's @L[Core:Turn]{turns}, they
-            roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-            ends.</p>
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
             slow:
@@ -2564,8 +2960,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}  as well.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic terror]]]
+            @Identifier[core:damage]{damage}  as well.</p>
           identifier: fear-aura
           interaction: feat
           maneuver: active
@@ -2577,7 +2975,7 @@ items:
             raw: '10'
             unit: ft
           results:
-            fail: <p>Target is @L[Condition:Frightened]{frightened}.</p>
+            fail: <p>Target is @Identifier[status:frightened]{frightened}.</p>
           spell: true
           standard: true
           targets:
@@ -2613,24 +3011,24 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: t9qnzOCtEL0TRCgc
-    _key: '!actors.items!7654fa309eafdc35.t9qnzOCtEL0TRCgc'
+  - _id: A2XEGqkN2DhLjjOR
+    _key: '!actors.items!7654fa309eafdc35.A2XEGqkN2DhLjjOR'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!7654fa309eafdc35.t9qnzOCtEL0TRCgc.NGCuRUaVtXnxAbRe
+          !actors.items.effects!7654fa309eafdc35.A2XEGqkN2DhLjjOR.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -2658,8 +3056,10 @@ items:
           featSaveAttribute: mov
           form: normal
           heightened: >-
-            <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-            [[/damage 1d4[magic]]] @L[Core:Damage]{damage}.</p>
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic]]]
+            @Identifier[core:damage]{damage}.</p>
           identifier: arcane-ray
           interaction: attack
           maneuver: active
@@ -2672,10 +3072,10 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>Double the @L[Core:Damage]{damage dice} dealt by this
-              @L[Category:Abilities]{ability}.</p>
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d4[magic]]] @L[Core:Damage]{damage} to
+              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
               target.</p>
           spell: true
           standard: true
@@ -2685,13 +3085,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!7654fa309eafdc35.t9qnzOCtEL0TRCgc.aCWLNsvSFjEuLTyl
+          !actors.items.effects!7654fa309eafdc35.A2XEGqkN2DhLjjOR.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.63
+          systemVersion: 0.12.69
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:
@@ -2715,25 +3115,26 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You may use your @L[Property:Magelore]{magelore} items as
-              though they were your @L[Body:Hand]{hand}. This makes them
-              @L[Property:Handy]{handy} and @L[Property:Prehensile]{prehensile}.
-              You are not @L[Core:Proficiency Bonus]{proficient} nor
-              @L[Core:Fluency Bonus]{fluent} with
-              @L[Category:Abilities]{abilities} you use through your
-              @L[Property:Magelore]{magelore} items.</p>
+              <p>You may use your @Identifier[property:magelore]{magelore} items
+              as though they were your @Identifier[body:hand]{hand}. This makes
+              them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not
+              @Identifier[core:proficiency-bonus]{proficient} nor
+              @Identifier[core:fluency-bonus]{fluent} with
+              @Pack[teriock.abilities]{abilities} you use through your
+              @Identifier[property:magelore]{magelore} items.</p>
             fluent: >-
-              <p>If you are @L[Core:Fluency Bonus]{fluent} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Fluency Bonus]{fluency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
+              @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
             proficient: >-
-              <p>If you are @L[Core:Proficiency Bonus]{proficient} with an
-              @L[Category:Abilities]{ability} you use through your
-              @L[Property:Magelore]{magelore} items, you regain the
-              @L[Core:Proficiency Bonus]{proficiency bonus} for that
-              @L[Category:Abilities]{ability}.</p>
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
+              an @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
           piercing:
             raw: 0
           powerSources:

@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/death-ray.webp
     name: Death Ray
     system:
@@ -51,8 +51,8 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, roll an additional [[/kill
-        1d6]].</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, roll an additional [[/kill 1d6]].</p>
       identifier: death-ray
       interaction: attack
       maneuver: active
@@ -65,14 +65,15 @@ effects:
         raw: '60'
         unit: ft
       requirements: >-
-        <p>Target is neither @L[Condition:Dead]{dead} nor @L[Category:Undead
-        creatures]{undead}.</p>
+        <p>Target is neither @Identifier[status:dead]{dead} nor
+        @Wiki[Category:Undead creatures]{undead}.</p>
       results:
         critHit: <p>Double the number of dice rolled.</p>
         hit: >-
           <p>Roll [[/kill 2d6]] if this is greater than or equal to the number
-          of @L[Core:HP]{HP} the target has, they @L[Condition:Dead]{die}. This
-          does not deal @L[Core:Damage]{damage}.</p>
+          of @Wiki[Core:HP]{HP} the target has, they
+          @Identifier[status:dead]{die}. This does not deal
+          @Identifier[core:damage]{damage}.</p>
       spell: true
       standard: true
       targets:
@@ -86,7 +87,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/spirit-guide.webp
     name: Spirit Guide
     system:
@@ -128,8 +129,8 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, you may target an
-        additional creature.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, you may target an additional creature.</p>
       identifier: spirit-guide
       interaction: manifest
       maneuver: slow
@@ -137,17 +138,17 @@ effects:
       overview:
         base: >-
           <p>You can see, hear, and speak to spirits and
-          @L[Condition:Ethereal]{Ethereal} creatures within 120 feet.</p>
+          @Identifier[status:ethereal]{Ethereal} creatures within 120 feet.</p>
         fluent: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Spiritually powered abilities]{spiritual}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Tea Ceremony]{Tea Ceremony}.</p>
+          <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+          with @Wiki[Category:Spiritually powered abilities]{spiritual}
+          @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
         proficient: >-
-          <p>You can target @L[Condition:Ethereal]{Ethereal} creatures with
-          @L[Category:Necromancy element abilities]{necromancy}
-          @L[Category:Ritual delivery spells]{ritual spells} such as
-          @L[Ability:Summon the Dead]{Summon the Dead}.</p>
+          <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+          with @Wiki[Category:Necromancy element abilities]{necromancy}
+          @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -156,8 +157,8 @@ effects:
         raw: '5'
         unit: ft
       requirements: >-
-        <p>Unless @L[Core:Proficiency Bonus]{proficient}, you may only target
-        yourself.</p>
+        <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may only
+        target yourself.</p>
       ritual: true
       spell: true
       standard: true
@@ -173,7 +174,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/summon-the-dead.webp
     name: Summon the Dead
     system:
@@ -184,17 +185,19 @@ effects:
         primary:
           hp:
             description: >-
-              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{HP}
-              if the body is in your possession. Otherwise, it costs 3
-              @L[Core:Hit Points and Mana Points]{HP} per @L[Core:Size]{size} of
-              the body.</p>
+              <p>[[lookup name]] costs 0
+              @Identifier[core:hit-points-and-mana-points]{HP} if the body is in
+              your possession. Otherwise, it costs 3
+              @Identifier[core:hit-points-and-mana-points]{HP} per
+              @Identifier[core:size]{size} of the body.</p>
             type: description
           mp:
             description: >-
-              <p>[[lookup name]] costs 0 @L[Core:Hit Points and Mana Points]{MP}
-              if the body is in your possession. Otherwise, it costs 2
-              @L[Core:Hit Points and Mana Points]{MP} per @L[Core:Size]{size} of
-              the body.</p>
+              <p>[[lookup name]] costs 0
+              @Identifier[core:hit-points-and-mana-points]{MP} if the body is in
+              your possession. Otherwise, it costs 2
+              @Identifier[core:hit-points-and-mana-points]{MP} per
+              @Identifier[core:size]{size} of the body.</p>
             type: description
       delivery: sight
       duration:
@@ -222,15 +225,15 @@ effects:
         base: >-
           <p>If you have the body of the target in your possession, you can put
           the spirit back into its body such that it is no longer
-          @L[Condition:Wisping]{wisping}. The body maintains all damage it had
-          when it died.</p>
+          @Identifier[status:wisping]{wisping}. The body maintains all damage it
+          had when it died.</p>
         proficient: >-
           <p>If the body is thoroughly damaged (such as if it's
-          @L[Condition:Ruined]{ruined}) or missing entirely, you can expend some
-          of your own life force to recreate the body from the spirit for
-          additional @L[Core:Hit Points and Mana Points]{MP} and @L[Core:Hit
-          Points and Mana Points]{HP}. The creature is still dead, but the body
-          is now intact.</p>
+          @Identifier[status:ruined]{ruined}) or missing entirely, you can
+          expend some of your own life force to recreate the body from the
+          spirit for additional @Identifier[core:hit-points-and-mana-points]{MP}
+          and @Identifier[core:hit-points-and-mana-points]{HP}. The creature is
+          still dead, but the body is now intact.</p>
       piercing:
         raw: 0
       powerSources:
@@ -240,7 +243,7 @@ effects:
       range:
         raw: '5'
         unit: ft
-      requirements: <p>Target must be @L[Condition:Wisping]{wisping}.</p>
+      requirements: <p>Target must be @Identifier[status:wisping]{wisping}.</p>
       ritual: true
       spell: true
       standard: true
@@ -255,7 +258,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/terror-ball.webp
     name: Terror Ball
     system:
@@ -286,8 +289,9 @@ effects:
       featSaveAttribute: mov
       form: normal
       heightened: >-
-        <p>For each additional @L[Core:MP]{MP} spent, deal an additional
-        [[/damage 1d4[magic terror]]] @L[Core:Damage]{damage}.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic terror]]]
+        @Identifier[core:damage]{damage}.</p>
       identifier: terror-ball
       interaction: attack
       maneuver: active
@@ -301,11 +305,11 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>Double the @L[Core:Damage]{damage dice} dealt by this
-          @L[Category:Abilities]{ability}.</p>
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}.</p>
         hit: >-
-          <p>Deal [[/damage 1d4[terror magic]]] @L[Core:Damage]{damage} to
-          target.</p>
+          <p>Deal [[/damage 1d4[terror magic]]] @Identifier[core:damage]{damage}
+          to target.</p>
       spell: true
       standard: true
       targets:

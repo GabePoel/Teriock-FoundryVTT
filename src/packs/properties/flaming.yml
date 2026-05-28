@@ -4,18 +4,36 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.60
+  systemVersion: 0.12.69
 img: systems/teriock/src/icons/properties/flaming.webp
 name: Flaming
 system:
+  automations:
+    parameterChanges:
+      _id: parameterChanges
+      changes:
+        - key: token.light.dim
+          priority: 5
+          target: Actor
+          type: upgrade
+          value: '10'
+        - key: token.light.color
+          priority: 5
+          target: Actor
+          type: override
+          value: '#C64600'
+        - key: token.light.animation.type
+          priority: 5
+          target: Actor
+          type: override
+          value: torch
+      type: changes
   competence:
     raw: 0
   description: >-
     <p>If an item is <b>[[lookup name style=lc]]</b> (on fire), it is
-    @L[Property:Glowing]{glowing} (10 feet) and
-    @L[Property:Burning]{burning}.</p>
-  elements:
-    - flame
+    @Identifier[property:glowing]{glowing} (10 feet) and
+    @Identifier[property:burning]{burning}.</p>
   form: intrinsic
   identifier: flaming
   mundane: false

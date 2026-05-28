@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.42
+  systemVersion: 0.12.69
 effects:
   - _id: uV5wvALPRvXonQRj
     _key: '!items.effects!385a4b1db6fcf5da.uV5wvALPRvXonQRj'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.61
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     name: Battle Cry
     system:
@@ -35,8 +35,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You gain @L[Ability:Battle Cry Aura]{Battle Cry Aura} and
-          @L[Ability:Battle Cry Resistance]{Battle Cry Resistance}.</p>
+          <p>You gain @Identifier[ability:battle-cry-aura]{Battle Cry Aura} and
+          @Identifier[ability:battle-cry-resistance]{Battle Cry Resistance}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -55,13 +55,13 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.10.23
+      systemVersion: 0.12.69
     img: icons/environment/settlement/stables-logo.webp
     name: Bear Tamer
     system:
       competence:
         raw: 2
-      description: <p>You know the way of the @L[Creature:Bear]{bear}.</p>
+      description: <p>You know the way of the @Identifier[creature:bear]{bear}.</p>
       field: survivalist
       identifier: bear-tamer
       tradecraft: tamer
@@ -74,7 +74,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/endure.webp
     name: Endure
     system:
@@ -110,18 +110,20 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>You take the triggering @L[Core:Damage]{damage} as a
-          @L[Damage:Hack]{limb hack} instead. All @L[Category:Damage
+          <p>You take the triggering @Identifier[core:damage]{damage} as a
+          @Identifier[damage:hack]{limb hack} instead. All @Wiki[Category:Damage
           types]{damage types} still apply. If the hit was critical, you instead
-          take it as <i>two</i> @L[Damage:Hack]{limb hacks}. If you attempted to
-          @L[Core:Block Interaction]{block} the triggering @L[Category:Attack
-          abilities]{attack}, then a limb that @L[Keyword:Using]{used} whatever
-          @L[Category:Items]{item} you @L[Core:Block Interaction]{blocked} with
-          is the one that's @L[Damage:Hack]{hacked}. Otherwise, if the
-          @L[Core:Damage]{damage} was dealt by a creature, they choose which
-          limb is affected. If not, it is random. Only an
-          un-@L[Damage:Hack]{hacked} limb can be used for this. If that's not
-          possible, you take the @L[Core:Damage]{damage} normally.</p>
+          take it as <i>two</i> @Identifier[damage:hack]{limb hacks}. If you
+          attempted to @Identifier[core:block-interaction]{block} the triggering
+          @Wiki[Category:Attack abilities]{attack}, then a limb that
+          @Identifier[keyword:using]{used} whatever @Wiki[Category:Items]{item}
+          you @Identifier[core:block-interaction]{blocked} with is the one
+          that's @Identifier[damage:hack]{hacked}. Otherwise, if the
+          @Identifier[core:damage]{damage} was dealt by a creature, they choose
+          which limb is affected. If not, it is random. Only an
+          un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+          that's not possible, you take the @Identifier[core:damage]{damage}
+          normally.</p>
       piercing:
         raw: 0
       powerSources:
@@ -133,8 +135,8 @@ effects:
       targets:
         - self
       trigger: >-
-        <p>You are hit by an @L[Category:Attack abilities]{attack} that would
-        @L[Core:Damage]{damage} you.</p>
+        <p>You are hit by an @Wiki[Category:Attack abilities]{attack} that would
+        @Identifier[core:damage]{damage} you.</p>
     transfer: true
     type: ability
   - _id: 2VyV17pZry0Ofbrs
@@ -144,7 +146,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -186,8 +188,8 @@ effects:
       mundane: false
       overview:
         base: >-
-          <p>You @L[Keyword:Resistance]{resist} being
-          @L[Condition:Frightened]{frightened}.</p>
+          <p>You @Identifier[keyword:resistance]{resist} being
+          @Identifier[status:frightened]{frightened}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -207,7 +209,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.63
+      systemVersion: 0.12.69
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -272,8 +274,9 @@ effects:
       effectTypes:
         - loud
       endCondition: >-
-        <p>At the start of each of the targets' @L[Core:Turn]{turns}, they roll
-        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+        <p>At the start of each of the targets' @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
       executionTime:
         base: a1
         slow:
@@ -288,7 +291,9 @@ effects:
       maneuver: active
       mundane: false
       overview:
-        base: <p>This ability cannot affect @L[Condition:Deaf]{deaf} creatures.</p>
+        base: >-
+          <p>This ability cannot affect @Identifier[status:deaf]{deaf}
+          creatures.</p>
       piercing:
         raw: 0
       powerSources:
@@ -297,7 +302,7 @@ effects:
         raw: '10'
         unit: ft
       results:
-        fail: <p>Targets become @L[Condition:Frightened]{frightened}.</p>
+        fail: <p>Targets become @Identifier[status:frightened]{frightened}.</p>
       skill: true
       standard: true
       targets:
@@ -311,10 +316,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Select one @L[Category:Abilities]{ability} from [[lookup name]] to gain
-    and delete the other
-    one.</p><p>@Embed[Compendium.teriock.creatures.Actor.a0743da7967ebeb3
-    inline]</p>
+    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
+    and delete the other one.</p><p>@Embed[creature:bear inline]</p>
   identifier: bear-familiar
   maxAv: 0
   type: familiar

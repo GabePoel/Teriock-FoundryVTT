@@ -5,12 +5,19 @@ _stats:
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.12.69
-command: |-
-  const act = scope.execution.activations.find((a) => a.type === "addDocuments");
+command: >-
+  const act = scope.execution.activations.find((a) => a.type ===
+  "addDocuments");
+
   const effectObject = act._source.primary.root.data;
+
   const equipmentClass = await tm.dialogs.selectWeaponClassDialog();
+
   const childChangeId = foundry.utils.randomID();
-  const shared = { category: "armament", qualifier: `@class.${equipmentClass}`, type: "childChange" };
+
+  const shared = { category: "armament", qualifier: `@class.${equipmentClass}`,
+  type: "childChange" };
+
   effectObject.system.automations[childChangeId] = {
     _id: childChangeId,
     changeType: "add",
@@ -18,6 +25,7 @@ command: |-
     value: "1d4[holy]",
     ...shared,
   };
+
   if (scope.execution.competence.fluent) {
     const av0Id = foundry.utils.randomID();
     const boostedId = foundry.utils.randomID();
@@ -36,7 +44,9 @@ command: |-
       ...shared,
     };
   }
-  act.updateSource({ "primary.root.id": effectObject, "secondary.root.id": effectObject });
+
+  act.updateSource({ "primary.root.id": effectObject, "secondary.root.id":
+  effectObject });
 folder: SsB1D27Gn6q9lTTV
 img: icons/svg/dice-target.svg
 name: Might Strike - Pre-execution
