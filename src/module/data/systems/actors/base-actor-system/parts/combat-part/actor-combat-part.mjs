@@ -91,13 +91,13 @@ export default Base => {
        * @returns {object}
        */
       #getOffenseRollData() {
-        const weaponAv0 = !!this.wielding.attacker?.system.piercing.av0;
+        const weaponAv0 = Boolean(this.wielding.attacker?.system.piercing.av0);
         const naturalAv0 = this.offense.piercing.av0;
         const hasAv0 = weaponAv0 || naturalAv0;
-        const weaponUb = !!this.wielding.attacker?.system.piercing.ub;
+        const weaponUb = Boolean(this.wielding.attacker?.system.piercing.ub);
         const naturalUb = this.offense.piercing.ub;
         const hasUb = weaponUb || naturalUb;
-        const weaponWarded = !!this.wielding.attacker?.system.warded;
+        const weaponWarded = Boolean(this.wielding.attacker?.system.warded);
         return {
           ap: this.combat.attackPenalty,
           av0: Number(hasAv0) * 2,

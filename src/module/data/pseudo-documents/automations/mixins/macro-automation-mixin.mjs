@@ -68,7 +68,7 @@ export default function MacroAutomationMixin(Base) {
        * @returns {boolean}
        */
       get hasMacro() {
-        return this.macro && !!fromUuidSync(this.macro);
+        return this.macro && Boolean(fromUuidSync(this.macro));
       }
 
       /** @inheritDoc */

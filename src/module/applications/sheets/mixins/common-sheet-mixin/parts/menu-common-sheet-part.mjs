@@ -29,7 +29,7 @@ export default Base => {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         return Object.assign(await super._prepareContext(options), {
-          canHaveAutomations: !!(this.document.system?.constructor._automationTypes || []).length,
+          canHaveAutomations: Boolean((this.document.system?.constructor._automationTypes || []).length),
           hasMenu: true,
           menuCollapsed: !this._menuOpen,
         });

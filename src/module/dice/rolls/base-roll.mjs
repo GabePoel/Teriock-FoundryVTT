@@ -220,7 +220,7 @@ export default class BaseRoll extends Roll {
 
   /** @param {boolean} hideRoll */
   set hideRoll(hideRoll) {
-    this.options.hideRoll = !!hideRoll;
+    this.options.hideRoll = Boolean(hideRoll);
   }
 
   /**

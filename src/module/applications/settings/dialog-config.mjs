@@ -23,6 +23,8 @@ export default class DialogConfig extends BaseConfig {
       case "general":
         context.fields = this.createSettingFields(settings.dialog);
         break;
+      default:
+        break;
     }
     return context;
   }

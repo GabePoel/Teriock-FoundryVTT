@@ -74,7 +74,7 @@ export default Base => {
 
       /** @inheritDoc */
       get canChange() {
-        return super.canChange || !!this.upgrades.score.attribute || !!this.upgrades.competence.attribute;
+        return super.canChange || Boolean(this.upgrades.score.attribute) || Boolean(this.upgrades.competence.attribute);
       }
 
       /** @inheritDoc */

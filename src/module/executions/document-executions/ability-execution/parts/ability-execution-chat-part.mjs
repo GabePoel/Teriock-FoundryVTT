@@ -132,7 +132,7 @@ export default function AbilityExecutionChatPart(Base) {
        */
       async #generateConsequenceTransformation(crit = false) {
         const transformationAutomations = this.getAutomations("transformation", { active: true, crit });
-        const transformation = { enabled: !!transformationAutomations.length, uuids: [] };
+        const transformation = { enabled: Boolean(transformationAutomations.length), uuids: [] };
         if (transformation.enabled) {
           const a = transformationAutomations[0];
           const competence = a.competence.toObject();

@@ -133,6 +133,8 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         case 3:
           outcome = _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome3");
           break;
+        default:
+          break;
       }
       panelParts.blocks.push({ text: outcome, title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome") });
       const pullContent = await TeriockTextEditor.renderTemplate("teriock/ui/death-bag", context);

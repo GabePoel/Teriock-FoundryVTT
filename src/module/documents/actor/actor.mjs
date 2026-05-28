@@ -237,7 +237,7 @@ export default class TeriockActor
             qualifierData = d.system.getLocalRollData();
             qualifierDataComputed = true;
           }
-          shouldApply = !!BaseRoll.minValue(c.qualifier, qualifierData);
+          shouldApply = Boolean(BaseRoll.minValue(c.qualifier, qualifierData));
         }
         if (shouldApply) {
           const result = ActiveEffect.applyChange(d, c, { replacementData });

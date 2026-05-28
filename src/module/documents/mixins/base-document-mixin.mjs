@@ -232,7 +232,7 @@ export default function BaseDocumentMixin(Base) {
       get typedIdentifier() {
         const type = this.type;
         const identifier = this.system?.identifier;
-        return !!type && !!identifier ? `${type}:${identifier}` : null;
+        return Boolean(type) && Boolean(identifier) ? `${type}:${identifier}` : null;
       }
 
       /**

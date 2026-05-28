@@ -64,7 +64,7 @@ export default class CommonOutcomesAutomation
 
   /** @inheritDoc */
   get _showConfirmationWarning() {
-    return !!this.trigger && super._showConfirmationWarning;
+    return Boolean(this.trigger) && super._showConfirmationWarning;
   }
 
   /** @inheritDoc */

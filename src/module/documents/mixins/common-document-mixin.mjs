@@ -240,7 +240,7 @@ export default function CommonDocumentMixin(Base) {
       async hasChild(identifier) {
         const parsed = parseIdentifier(identifier);
         if (!parsed) { return false; }
-        return !!(await this.getChildArray()).some(c => c.typedIdentifier === identifier);
+        return Boolean((await this.getChildArray()).some(c => c.typedIdentifier === identifier));
       }
 
       /**

@@ -42,7 +42,7 @@ export default function ThresholdExecutionMixin(Base) {
       /** @returns {Teriock.Execution.ExecutionDialogEntry[]} */
       get _activeDialogFields() {
         return this._dialogFields.filter(f => {
-          return typeof f.condition === "function" ? f.condition() : !!f.condition;
+          return typeof f.condition === "function" ? f.condition() : Boolean(f.condition);
         });
       }
 

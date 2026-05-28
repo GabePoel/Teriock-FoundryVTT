@@ -190,7 +190,7 @@ export default class SpeciesSystem
    * @returns {boolean}
    */
   get isTransformation() {
-    return !!this.transformationEffect && this.transformationEffect.system.isTransformation;
+    return Boolean(this.transformationEffect) && this.transformationEffect.system.isTransformation;
   }
 
   /** @inheritDoc */
@@ -298,7 +298,7 @@ export default class SpeciesSystem
    * @returns {object}
    */
   toCreature(data = {}) {
-    const hasTokenImg = !!TERIOCK.index.creatures[toCamelCase(this.parent.name)];
+    const hasTokenImg = Boolean(TERIOCK.index.creatures[toCamelCase(this.parent.name)]);
     const tokenImg = hasTokenImg ? this.parent.img.replace("icons/creatures", "icons/tokens") : this.parent.img;
     data = foundry.utils.mergeObject({
       img: this.parent.img,

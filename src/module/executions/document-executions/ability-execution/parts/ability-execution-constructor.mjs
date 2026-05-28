@@ -127,7 +127,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     const armamentWarded =
       (this.armament?.system.warded && ["attack", "block"].includes(this.source.system.interaction))
       || this.actor?.system?.combat?.offense?.warded;
-    return this.source.system.isContact && armamentWarded ? true : !!this.source.system.warded;
+    return this.source.system.isContact && armamentWarded ? true : Boolean(this.source.system.warded);
   }
 
   /** @type {PiercingModel} */
@@ -142,7 +142,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
 
   /** @returns {boolean} */
   get canHeighten() {
-    return this.competence.proficient && !!this.source.system.heightened && !this.flags.noHeighten
+    return this.competence.proficient && Boolean(this.source.system.heightened) && !this.flags.noHeighten
       && (this.actor?.system.scaling.p ?? 0 > 0);
   }
 
@@ -270,7 +270,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.armament = armament;
     const sys = this.source.system;
     this.#determinePiercing();
-    this.sb = options.sb ?? !!(this.armament && sys.isContact) * (this.actor?.system.offense.sb ?? 0);
+    this.sb = options.sb ?? Boolean(this.armament && sys.isContact) * (this.actor?.system.offense.sb ?? 0);
     this.vitals = this.#resolveVitals();
     this.warded = this.#resolveWarded();
     this.incurredAttackPenalty = this.#resolveAttackPenalty();

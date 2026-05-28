@@ -71,7 +71,7 @@ export default function ChildSystemMixin(Base) {
        * @returns {boolean}
        */
       get _isSuppressedQualifier() {
-        return !!this.qualifiers.suppressed.value || !!this.parent.isEphemeral;
+        return Boolean(this.qualifiers.suppressed.value) || Boolean(this.parent.isEphemeral);
       }
 
       /** @inheritDoc */
@@ -146,7 +146,7 @@ export default function ChildSystemMixin(Base) {
 
       /** @returns {boolean} */
       get makeEphemeral() {
-        return !!this.parent.elder?.isEphemeral || !!this.qualifiers.ephemeral.value;
+        return Boolean(this.parent.elder?.isEphemeral) || Boolean(this.qualifiers.ephemeral.value);
       }
 
       /** @returns {boolean} */

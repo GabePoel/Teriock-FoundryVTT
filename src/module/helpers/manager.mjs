@@ -65,7 +65,7 @@ export default class TeriockManager {
    */
   checkEditable(obj) {
     const sheet = obj instanceof foundry.abstract.Document ? obj.sheet : obj;
-    const valid = !!sheet.isEditable;
+    const valid = Boolean(sheet.isEditable);
     if (!valid) { ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.notEditable", "error", { localize: true }); }
     return valid;
   }
@@ -75,7 +75,7 @@ export default class TeriockManager {
    * @returns {boolean}
    */
   checkScene() {
-    const valid = !!canvas.scene;
+    const valid = Boolean(canvas.scene);
     if (!valid) { ui.notifications.notify("TERIOCK.DIALOGS.Common.ERRORS.noScene", "error", { localize: true }); }
     return valid;
   }

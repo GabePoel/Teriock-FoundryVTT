@@ -161,6 +161,8 @@ export default Base => {
                 localize: true,
               });
               break;
+            default:
+              break;
           }
         }
       }

@@ -38,7 +38,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedDampened() {
-    return !!(this.parent.parent?.type === "equipment" && this.parent.parent?.system.dampened);
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent?.system.dampened);
   }
 
   /**
@@ -46,7 +46,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedDeattuned() {
-    return !!(this.actor && this.needsAttunement && !this.parent.parent?.system.isAttuned);
+    return Boolean(this.actor && this.needsAttunement && !this.parent.parent?.system.isAttuned);
   }
 
   /**
@@ -54,7 +54,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedDestroyed() {
-    return !!(this.parent.parent?.type === "equipment" && this.parent.parent?.system.destroyed);
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent?.system.destroyed);
   }
 
   /** @inheritDoc */
@@ -69,7 +69,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedShattered() {
-    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.shattered);
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent.system.shattered);
   }
 
   /**
@@ -77,7 +77,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedStashed() {
-    return !!(this.parent.parent?.type === "equipment" && this.parent.parent.system.stashed);
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent.system.stashed);
   }
 
   /**
@@ -85,7 +85,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {boolean}
    */
   get _isSuppressedUnequipped() {
-    return !!(this.parent.parent?.type === "equipment" && !this.parent.parent.system.equipped);
+    return Boolean(this.parent.parent?.type === "equipment" && !this.parent.parent.system.equipped);
   }
 
   /** @inheritDoc */
@@ -163,7 +163,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   get needsAttunement() {
     return (!this.applyIfDeattuned
       && ["equipment", "mount"].includes(this.parent.parent?.type)
-      && !!this.parent.parent?.system.needsAttunement);
+      && Boolean(this.parent.parent?.system.needsAttunement));
   }
 
   /**

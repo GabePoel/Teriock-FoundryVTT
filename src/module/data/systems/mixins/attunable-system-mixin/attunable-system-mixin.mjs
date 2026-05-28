@@ -86,7 +86,7 @@ export default function AttunableSystemMixin(Base) {
        * @returns {boolean} True if the item is attuned, false otherwise.
        */
       get isAttuned() {
-        return !!this.attunement;
+        return Boolean(this.attunement);
       }
 
       /** @inheritDoc */

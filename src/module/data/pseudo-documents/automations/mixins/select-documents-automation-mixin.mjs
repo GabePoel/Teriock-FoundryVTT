@@ -63,7 +63,7 @@ export default function SelectDocumentsAutomationMixin(Base) {
           this.local.identifiers.map(identifier => fromIdentifierLocal(identifier, actor)),
         );
         const external = await super.getDocuments(options);
-        const out = [...external, ...local].filter(d => !!d);
+        const out = [...external, ...local].filter(d => Boolean(d));
         const seen = new Set(out.map(d => d.uuid));
         if (actor) {
           for (const child of await fromQualifier(actor, this.local.qualifier)) {

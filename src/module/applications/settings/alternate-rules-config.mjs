@@ -39,6 +39,8 @@ export default class AlternateRulesConfig extends BaseConfig {
         context.fields = this.createSettingFields(settings.cone);
         context.legend = "TERIOCK.CONFIGS.AlternateRules.parts.cones";
         break;
+      default:
+        break;
     }
     return context;
   }

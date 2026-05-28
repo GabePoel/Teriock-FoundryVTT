@@ -26,7 +26,7 @@ export default Base => {
        * @returns {boolean}
        */
       get isTransformed() {
-        return !!this.transformation.primary?.active;
+        return Boolean(this.transformation.primary?.active);
       }
 
       /** @inheritDoc */

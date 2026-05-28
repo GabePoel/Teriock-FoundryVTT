@@ -87,6 +87,7 @@ export default tseslint.config(
     plugins: { jsdoc, perfectionist },
     rules: {
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      "default-case": "error",
       eqeqeq: ["error", "smart"],
       "jsdoc/check-types": "warn",
       "jsdoc/require-jsdoc": "warn",
@@ -94,6 +95,7 @@ export default tseslint.config(
       "no-console": "off",
       "no-else-return": "error",
       "no-empty": ["warn", { allowEmptyCatch: true }],
+      "no-implicit-coercion": "error",
       "no-var": "error",
       "object-shorthand": "error",
       "perfectionist/sort-array-includes": ["error", { order: "asc", type: "alphabetical" }],

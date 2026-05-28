@@ -37,6 +37,8 @@ const lookupEnricher = {
         case "ucf":
           textContent = ucFirst(textContent);
           break;
+        default:
+          break;
       }
     }
     return createElement("span", { textContent });

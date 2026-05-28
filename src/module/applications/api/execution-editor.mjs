@@ -199,7 +199,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
         editable: entry.editable,
         index,
         label: entry.label,
-        showFooter: entry.editable || (multipleDocuments && !!entry.label),
+        showFooter: entry.editable || (multipleDocuments && Boolean(entry.label)),
         showLabel: multipleDocuments,
       };
     });

@@ -147,7 +147,7 @@ export default function TriggerAutomationMixin(Base) {
 
       /** @inheritDoc */
       get canCrit() {
-        return this.isRepeatable && !!super.canCrit;
+        return this.isRepeatable && Boolean(super.canCrit);
       }
 
       /**
@@ -155,7 +155,7 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {number}
        */
       get isRepeatable() {
-        return !!this.trigger & !Object.keys(TERIOCK.config.trigger.execution.choices).includes(this.trigger);
+        return Boolean(this.trigger) & !Object.keys(TERIOCK.config.trigger.execution.choices).includes(this.trigger);
       }
 
       /**

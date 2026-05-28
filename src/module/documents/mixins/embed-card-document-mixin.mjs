@@ -71,7 +71,7 @@ export default function EmbedCardDocumentMixin(Base) {
           }
         }
         const addCallbacks = element.classList.contains("teriock-block")
-          || !!element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`);
+          || Boolean(element.querySelector(`.teriock-block[data-uuid="${this.uuid}"]`));
         if (addCallbacks) {
           const relativeUuid = element.dataset.relative ?? element.querySelector("[data-relative]")?.dataset.relative;
           fromUuid(relativeUuid).then(relative => {

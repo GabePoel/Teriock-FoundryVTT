@@ -138,6 +138,8 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
           return { field: f };
         });
         break;
+      default:
+        break;
     }
     return context;
   }

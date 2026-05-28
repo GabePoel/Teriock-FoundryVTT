@@ -88,6 +88,8 @@ export default function PropagationDataMixin(Base) {
           case "Item":
             scope.item = /** @type {AnyItem} */ this;
             break;
+          default:
+            break;
         }
         if (this.parent && typeof this.parent.getScope === "function") { Object.assign(scope, this.parent.getScope()); }
         return scope;

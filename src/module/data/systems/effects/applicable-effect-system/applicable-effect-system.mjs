@@ -121,9 +121,9 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   get isTemporary() {
-    return super.isTemporary || this.expirations.combat.what.type !== "none" || !!this.expirations.triggers.size
-      || !!this.expirations.description || !!this.expirations.conditions.absent.size
-      || !!this.expirations.conditions.present.size;
+    return super.isTemporary || this.expirations.combat.what.type !== "none" || Boolean(this.expirations.triggers.size)
+      || Boolean(this.expirations.description) || Boolean(this.expirations.conditions.absent.size)
+      || Boolean(this.expirations.conditions.present.size);
   }
 
   /**

@@ -53,7 +53,7 @@ export default Base => {
             group: "edit",
             icon: makeIcon(TERIOCK.display.icons.ui.unset, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.unsetCategory"),
-            visible: !!this.parent.getFlag("teriock", "category"),
+            visible: Boolean(this.parent.getFlag("teriock", "category")),
             onClick: async () => await this.parent.unsetFlag("teriock", "category"),
           });
         }

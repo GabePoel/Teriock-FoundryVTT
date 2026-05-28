@@ -112,7 +112,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
             name: "sb",
             small: true,
-            value: !!this.sb,
+            value: Boolean(this.sb),
             update: v => (this.sb = v),
           },
           {
@@ -121,7 +121,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
             name: "vitals",
             small: true,
-            value: !!this.vitals,
+            value: Boolean(this.vitals),
             update: v => (this.vitals = v),
           },
           {
@@ -130,7 +130,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
             name: "warded",
             small: true,
-            value: !!this.warded,
+            value: Boolean(this.warded),
             update: v => (this.warded = v),
           },
           {
@@ -139,7 +139,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Ability.EXECUTION.usesReaction.label",
             name: "uses-reaction",
             small: true,
-            value: !!this.usesReaction,
+            value: Boolean(this.usesReaction),
             update: v => (this.usesReaction = v),
           },
           {
@@ -147,7 +147,7 @@ export default function AbilityExecutionGetInputPart(Base) {
             label: "TERIOCK.SYSTEMS.Ability.EXECUTION.payCosts.label",
             name: "pay-costs",
             small: true,
-            value: !!this.payCosts,
+            value: Boolean(this.payCosts),
             update: v => (this.payCosts = v),
           },
         ];
@@ -157,8 +157,8 @@ export default function AbilityExecutionGetInputPart(Base) {
       get requiresCompetence() {
         return (super.requiresCompetence
           || this.automations.filter(a => a?.requiresCompetence).length !== 0
-          || !!this.source.system.overview.proficient
-          || !!this.source.system.overview.fluent
+          || Boolean(this.source.system.overview.proficient)
+          || Boolean(this.source.system.overview.fluent)
           || (this.source.system.heightened && !this.flags.noHeighten));
       }
 

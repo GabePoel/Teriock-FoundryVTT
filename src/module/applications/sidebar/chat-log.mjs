@@ -34,7 +34,7 @@ export default class TeriockChatLog extends ChatLog {
           el.classList.toggle("collapsed", false);
         });
       },
-      visible: li => !!li.querySelector(".collapsable.collapsed"),
+      visible: li => Boolean(li.querySelector(".collapsable.collapsed")),
     }, {
       icon: makeIcon(TERIOCK.display.icons.ui.collapse, "contextMenu"),
       label: "TERIOCK.MESSAGE.Menu.collapseAll",
@@ -43,7 +43,7 @@ export default class TeriockChatLog extends ChatLog {
           el.classList.toggle("collapsed", true);
         });
       },
-      visible: li => !!li.querySelector(".collapsable:not(.collapsed)"),
+      visible: li => Boolean(li.querySelector(".collapsable:not(.collapsed)")),
     }, {
       icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
       label: "TERIOCK.SYSTEMS.Common.MENU.openSource",

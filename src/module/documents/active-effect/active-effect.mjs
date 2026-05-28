@@ -41,7 +41,7 @@ export default class TeriockActiveEffect
    * @returns {boolean}
    */
   get isReference() {
-    return !!this.system.isReference;
+    return Boolean(this.system.isReference);
   }
 
   /**
@@ -54,7 +54,7 @@ export default class TeriockActiveEffect
 
   /** @inheritDoc */
   get isTemporary() {
-    return super.isTemporary || !!this.system.isTemporary;
+    return super.isTemporary || Boolean(this.system.isTemporary);
   }
 
   /**

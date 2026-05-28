@@ -46,7 +46,7 @@ export default Base => {
           });
           return false;
         }
-        return !!doc && doc.parent !== this.document && doc !== this.document;
+        return Boolean(doc) && doc.parent !== this.document && doc !== this.document;
       }
 
       /**

@@ -51,10 +51,10 @@ export default Base => {
           integer: true,
           label: _loc("TERIOCK.AUTOMATIONS.Take.FIELDS.amount.label"),
           min: 0,
-          nullable: !!entry.nullable,
+          nullable: Boolean(entry.nullable),
           placeholder: entry.nullable ? "" : "0",
         });
-        const initialMorganti = !!options.morganti;
+        const initialMorganti = Boolean(options.morganti);
         const morgantiField = new fields.BooleanField({
           initial: initialMorganti,
           label: _loc("TERIOCK.TERMS.DamageTypes.morganti"),

@@ -37,7 +37,7 @@ export default class TeriockTokenDocument
    * @returns {boolean}
    */
   get rescale() {
-    return !!this.ring.enabled;
+    return Boolean(this.ring.enabled);
   }
 
   /** @inheritDoc */

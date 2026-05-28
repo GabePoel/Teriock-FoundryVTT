@@ -24,6 +24,8 @@ export default class GameContentConfig extends BaseConfig {
       case "general":
         context.fields = this.createSettingFields(settings.gameContent);
         break;
+      default:
+        break;
     }
     return context;
   }

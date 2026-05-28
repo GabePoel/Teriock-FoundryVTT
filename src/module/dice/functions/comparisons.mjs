@@ -1,11 +1,11 @@
 /* eslint-disable eqeqeq */
 const comparisons = {
-  eq: (a, b) => +(a == b),
-  gt: (a, b) => +(a > b),
-  gte: (a, b) => +(a >= b),
-  lt: (a, b) => +(a < b),
-  lte: (a, b) => +(a <= b),
-  neq: (a, b) => +(a != b),
+  eq: (a, b) => Number(a == b),
+  gt: (a, b) => Number(a > b),
+  gte: (a, b) => Number(a >= b),
+  lt: (a, b) => Number(a < b),
+  lte: (a, b) => Number(a <= b),
+  neq: (a, b) => Number(a != b),
 };
 
 export default comparisons;

@@ -40,6 +40,8 @@ export default class TeriockToken extends Token {
       case CONFIG.specialStatusEffects.HIDDEN:
         canvas.perception.update({ refreshVision: true });
         break;
+      default:
+        break;
     }
     super._onApplyStatusEffect(statusId, active);
   }

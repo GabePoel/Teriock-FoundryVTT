@@ -18,7 +18,7 @@ function includes(list, item) {
  * @returns {boolean}
  */
 function rgx(reference, test) {
-  return !!reference && !new RegExp(reference, "i").test(test);
+  return Boolean(reference) && !new RegExp(reference, "i").test(test);
 }
 
 const comparisonHelperEntries = [...Object.entries(comparisons), ["includes", includes], ["rgx", rgx]];

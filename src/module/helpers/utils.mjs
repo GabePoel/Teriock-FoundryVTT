@@ -296,7 +296,7 @@ export function parseIdentifier(identifier) {
 export async function findBestDocument(lookup, relativeTo, options = {}) {
   if (options.relativeOnly && typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
   if (!lookup) { return null; }
-  const doc = await fromIdentifier(lookup, { relativeOnly: !!options.relativeOnly, relativeTo });
+  const doc = await fromIdentifier(lookup, { relativeOnly: Boolean(options.relativeOnly), relativeTo });
   if (doc) { return doc; }
   const children = await relativeTo.getEffectiveChildren();
   return children.find(c => c.lookupKey === lookup) ?? null;

@@ -47,7 +47,7 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
    */
   get rescale() {
     const token = this.speakerToken;
-    return !!(token && token.ring.enabled);
+    return Boolean(token && token.ring.enabled);
   }
 
   /**

@@ -33,11 +33,15 @@ export default class GameContentConfig extends BaseConfig {
       case "general":
         context.fields = this.createSettingFields(settings.automatedBehavior);
         break;
+      default:
+        break;
     }
     switch (partId) {
       case "armaments":
         context.fields = this.createSettingFields(settings.armament);
         context.legend = "TERIOCK.CONFIGS.AutomatedBehavior.parts.armaments";
+        break;
+      default:
         break;
     }
     return context;

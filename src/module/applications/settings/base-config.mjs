@@ -65,7 +65,7 @@ export default class BaseConfig extends TeriockBaseApplication {
       icon: this.DEFAULT_OPTIONS.window.icon,
       label: this.SETTINGS_MENU.label,
       name: this.DEFAULT_OPTIONS.window.title,
-      restricted: !!this.SETTINGS_MENU.restricted,
+      restricted: Boolean(this.SETTINGS_MENU.restricted),
       type: this,
     });
   }

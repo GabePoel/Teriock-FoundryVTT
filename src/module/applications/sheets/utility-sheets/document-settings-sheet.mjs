@@ -70,8 +70,8 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     context.configs = [];
-    const hasCompendiumSource = !!this.document._stats
-      && (!!this.document._stats?.compendiumSource || this.document._stats?.compendiumSource === null);
+    const hasCompendiumSource = Boolean(this.document._stats)
+      && (Boolean(this.document._stats?.compendiumSource) || this.document._stats?.compendiumSource === null);
     if (hasCompendiumSource && !this.document.isSecret) {
       context.configs.push({
         fields: [
@@ -88,7 +88,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
         localize: true,
       });
     }
-    const hasQualifiers = !!this.document.system?.qualifiers;
+    const hasQualifiers = Boolean(this.document.system?.qualifiers);
     if (hasQualifiers) {
       context.configs.push({
         fields: [
@@ -99,7 +99,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
         localize: true,
       });
     }
-    const hasSettings = !!this.document.flags.teriockDocumentSettings;
+    const hasSettings = Boolean(this.document.flags.teriockDocumentSettings);
     if (hasSettings) {
       const schema = this.document.flags.teriockDocumentSettings.schema;
       for (const field of Object.values(schema.fields)) {

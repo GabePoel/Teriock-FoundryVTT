@@ -67,8 +67,8 @@ export default function HierarchyDocumentMixin(Base) {
         operation.isKeepIdCached = true;
         operation.dontRenderSheets = [];
         documents.sort((a, b) => {
-          const aSup = !!a?.system?._sup;
-          const bSup = !!b?.system?._sup;
+          const aSup = Boolean(a?.system?._sup);
+          const bSup = Boolean(b?.system?._sup);
           return aSup - bSup;
         });
         const filteredDocuments = documents.filter(d => {

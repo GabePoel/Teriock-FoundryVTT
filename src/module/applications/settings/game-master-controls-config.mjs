@@ -27,6 +27,8 @@ export default class GameMasterControlsConfig extends BaseConfig {
       case "general":
         context.fields = this.createSettingFields(settings.gameMasterControls);
         break;
+      default:
+        break;
     }
     return context;
   }

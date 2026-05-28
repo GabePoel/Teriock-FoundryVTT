@@ -44,6 +44,8 @@ export default class DisplayConfig extends BaseConfig {
         context.fields = this.createSettingFields(settings.actorSheet);
         context.legend = "TERIOCK.CONFIGS.Display.parts.actorSheets";
         break;
+      default:
+        break;
     }
     return context;
   }
