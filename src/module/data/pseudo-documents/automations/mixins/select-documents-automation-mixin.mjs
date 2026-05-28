@@ -7,6 +7,10 @@ import SelectExternalDocumentsAutomationMixin from "./select-external-documents-
 
 const { fields } = foundry.data;
 
+/**
+ * Mixin to enable selecting documents.
+ * @param {typeof BaseAutomation} Base
+ */
 export default function SelectDocumentsAutomationMixin(Base) {
   return (
     /**

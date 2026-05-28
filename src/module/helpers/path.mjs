@@ -8,7 +8,7 @@ import { toCamelCase, toKebabCase } from "./string.mjs";
  * @returns {string}
  */
 export function systemPath(path) {
-  return "systems/teriock/src/" + path;
+  return `systems/teriock/src/${path}`;
 }
 
 /**

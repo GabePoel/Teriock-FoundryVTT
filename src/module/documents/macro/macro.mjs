@@ -80,7 +80,7 @@ export default class TeriockMacro
     const command = dedent(`
     await Macro.implementation.useDocumentGeneral("${lookup}", { actor, event })`);
     const macroData = {
-      command: command,
+      command,
       flags: { teriock: { macroLookupKey: lookup, macroType: "useGeneral", user: game.user.id } },
       folder: (await this.ensureHotbarFolder())?.id,
       img: doc.img,
@@ -99,7 +99,7 @@ export default class TeriockMacro
     const command = dedent(`
     await Macro.implementation.useDocumentLinked("${doc.uuid}", { event: event })`);
     const macroData = {
-      command: command,
+      command,
       flags: { teriock: { macroDocumentUuid: doc.uuid, macroType: "useLinked", user: game.user.id } },
       folder: (await this.ensureHotbarFolder())?.id,
       img: doc.img,

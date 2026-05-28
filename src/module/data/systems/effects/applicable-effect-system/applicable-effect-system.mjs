@@ -205,7 +205,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
       if (!block.text) return acc;
       const safeTitle = foundry.utils.escapeHTML(block.title || "");
       const extraClasses = block.classes ? ` ${block.classes}` : "";
-      return acc + `
+      return `${acc}
       <div class="teriock-panel-block${extraClasses}">
         <div class="teriock-panel-block-title">${safeTitle}</div>
         <div class="teriock-panel-block-text">${block.text}</div>

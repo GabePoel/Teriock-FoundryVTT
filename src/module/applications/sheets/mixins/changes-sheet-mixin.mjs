@@ -1,3 +1,7 @@
+/**
+ * Mixin to support manipulating changes arrays in automations.
+ * @param {typeof BaseSheet} Base
+ */
 export default function ChangesSheetMixin(Base) {
   return (
     /**

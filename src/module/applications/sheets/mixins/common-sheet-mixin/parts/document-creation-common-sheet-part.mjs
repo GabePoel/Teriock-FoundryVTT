@@ -189,7 +189,7 @@ export default Base => {
         const rank = /** @type {TeriockRank} */ referenceRank.clone();
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
-          toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate: innate });
+          toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate });
           await this.document.createChildDocuments("Item", [toCreate]);
           return;
         }
@@ -247,7 +247,7 @@ export default Base => {
         }
         for (const ability of abilities) if (!allowedAbilityIds.has(ability?.id)) abilities.delete(ability?.id);
         const toCreate = game.items.fromCompendium(rank);
-        toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate: innate });
+        toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate });
         await this.document.createChildDocuments("Item", [toCreate]);
       }
 

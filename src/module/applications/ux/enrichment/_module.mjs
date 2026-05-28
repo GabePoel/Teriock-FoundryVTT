@@ -5,6 +5,9 @@ import { default as lookupEnricher } from "./lookup-enricher.mjs";
 import { default as packEnricher } from "./pack-enricher.mjs";
 import { default as wikiEnricher } from "./wiki-enricher.mjs";
 
+/**
+ * Register all enrichers.
+ */
 export function registerEnrichers() {
   registerEnricher(commandEnricher);
   registerEnricher(identifierEnricher);

@@ -26,7 +26,7 @@ export default Base =>
           const initial = this._searchStrings[searchKey] || "";
           const searchFilter = new SearchFilter({
             contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,
-            initial: initial,
+            initial,
             inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
             callback: (_event, query, rgx, container) => {
               this._searchStrings[searchKey] = query;

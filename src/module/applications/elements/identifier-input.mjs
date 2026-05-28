@@ -84,7 +84,7 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
     this._applyInputAttributes(this.#input);
     this.#resetButton = createElement("button", {
       ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset"),
-      className: "icon " + makeIconClass(icons.ui.reset, "button"),
+      className: `icon ${makeIconClass(icons.ui.reset, "button")}`,
       dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
       type: "button",
     });

@@ -217,7 +217,7 @@ export default class BaseUnitModel extends EvaluationModel {
          * @param {PointerEvent} _event
          * @param {HTMLButtonElement} button
          */
-        callback: async function(_event, button) {
+        async callback(_event, button) {
           const namedElements = /** @type {HTMLInputElement[]} */ Array.from(button.form.elements).filter(el =>
             el.hasAttribute("name")
           );

@@ -425,7 +425,7 @@ export default function ArmamentSystemMixin(Base) {
           const shortDescription = this.range.short.unitType === "finite"
             ? this.range.short.formula
             : this.range.short.text;
-          this.range.description = shortDescription + " / " + this.range.description;
+          this.range.description = `${shortDescription} / ${this.range.description}`;
         }
       }
     }

@@ -216,7 +216,7 @@ export default function AbilityExecutionGetInputPart(Base) {
                 }
               },
             },
-            window: { icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"), title: title },
+            window: { icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"), title },
           });
         }
         this.#modifyCosts();

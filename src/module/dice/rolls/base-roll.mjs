@@ -56,7 +56,7 @@ export default class BaseRoll extends Roll {
    * @returns {number}
    */
   static maxValue(formula, data = {}, options = {}) {
-    const roll = new BaseRoll(formula + " + 0", data, options);
+    const roll = new BaseRoll(`${formula} + 0`, data, options);
     return roll.evaluateSync({ allowStrings: true, maximize: true, strict: false }).total;
   }
 
@@ -81,7 +81,7 @@ export default class BaseRoll extends Roll {
    * @returns {number}
    */
   static minValue(formula, data = {}, options = {}) {
-    const roll = new BaseRoll(formula + " + 0", data, options);
+    const roll = new BaseRoll(`${formula} + 0`, data, options);
     return roll.evaluateSync({ allowStrings: true, minimize: true, strict: false }).total;
   }
 
@@ -432,7 +432,7 @@ export default class BaseRoll extends Roll {
     messageData = foundry.utils.mergeObject({
       system: {
         activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(activations),
-        panels: panels,
+        panels,
       },
     }, messageData);
     return super.toMessage(messageData, { create, rollMode });

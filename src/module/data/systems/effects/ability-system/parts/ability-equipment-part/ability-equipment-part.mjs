@@ -125,7 +125,7 @@ export default Base => {
         let img;
         if (toTitleCase(equipmentType) === "Scroll") {
           if (this.elements.size === 1)
-            img = getImage("consumables", toTitleCase(Array.from(this.elements)[0]) + " Spell Scroll");
+            img = getImage("consumables", `${toTitleCase(Array.from(this.elements)[0])} Spell Scroll`);
           else img = getImage("consumables", "Celestial Spell Scroll");
         }
         let out = foundry.utils.mergeObject(reference, {

@@ -7,6 +7,10 @@ import { CompetenceModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * Species transformation fields.
+ * @returns {{img: FilePathField, ring: BooleanField}}
+ */
 export function speciesTransformationFields() {
   return {
     img: new fields.FilePathField({
@@ -27,6 +31,10 @@ export function speciesTransformationFields() {
   };
 }
 
+/**
+ * Actor transformation fields.
+ * @returns {{img: FilePathField, ring: BooleanField} & {primary: LocalDocumentField}}
+ */
 export function actorTransformationConfig() {
   return Object.assign(speciesTransformationFields(), {
     primary: new LocalDocumentField(foundry.documents.BaseActiveEffect, {
@@ -35,6 +43,10 @@ export function actorTransformationConfig() {
   });
 }
 
+/**
+ * Automation transformation fields.
+ * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, reset: SetField, suppress: SetField}}
+ */
 export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {
     level: new fields.StringField({
@@ -75,6 +87,10 @@ export function automationTransformationFields() {
   });
 }
 
+/**
+ * Effect transformation fields.
+ * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, reset: SetField, suppress: SetField} & {competence: EmbeddedDataField, enabled: BooleanField, uuids: SetField}}
+ */
 export function effectTransformationFields() {
   return Object.assign(automationTransformationFields(), {
     competence: new fields.EmbeddedDataField(CompetenceModel),

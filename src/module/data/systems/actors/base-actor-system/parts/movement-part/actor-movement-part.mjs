@@ -71,7 +71,7 @@ export default Base => {
  */
 function speedField(initial, name) {
   return new fields.NumberField({
-    initial: initial,
+    initial,
     integer: true,
     label: `${name} Speed Adjustment`,
     max: 4,

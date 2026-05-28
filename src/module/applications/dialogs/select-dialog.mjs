@@ -190,7 +190,7 @@ export async function selectAbilityDialog() {
 
 /**
  * Dialog to select compendiums.
- * @property {boolean} selected
+ * @param {boolean} [selected=true]
  * @returns {Promise<CompendiumCollection<TeriockDocument>[]>}
  */
 export async function selectCompendiumsDialog(selected = true) {

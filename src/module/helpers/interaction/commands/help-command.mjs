@@ -1,6 +1,10 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 
+/**
+ * Use the help command.
+ * @returns {Promise<void>}
+ */
 async function use() {
   const commands = [...Object.values(teriock.helpers.interaction.commands), {
     aliases: ["r"],

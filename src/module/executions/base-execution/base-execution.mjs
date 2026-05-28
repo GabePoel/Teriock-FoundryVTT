@@ -357,6 +357,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
 
   /**
    * A scope that can be used when executing macros from a fired trigger.
+   * @param {Teriock.System.TriggerScope} [scope]
    * @returns {Teriock.System.TriggerScope}
    */
   getScope(scope = {}) {

@@ -11,7 +11,7 @@ export default class TeriockChatLog extends ChatLog {
     for (const [id, command] of Object.entries(commands)) {
       registry[id] = {
         rgx: new RegExp(`^(/${id}(?:\\s+)?)([^]*)`, "i"),
-        fn: function(_commandString, match) {
+        fn(_commandString, match) {
           const payload = match[2] ? match[2].trim() : "";
           const commandOptions = buildCommandOptions(payload, command);
           const actors = game.actors.selected;

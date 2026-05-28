@@ -254,7 +254,7 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       async use(options = {}) {
         await this.parent.hookCall("use");
-        Hooks.callAll("teriock.use" + ucFirst(this.parent.type) + this.parent.type.slice(1), [this.parent]);
+        Hooks.callAll(`teriock.use${ucFirst(this.parent.type)}${this.parent.type.slice(1)}`, [this.parent]);
         await super.use(options);
       }
     }

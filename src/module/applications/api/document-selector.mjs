@@ -79,6 +79,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
 
   /**
    * Finish the document selection.
+   * @param {Array|null} value
    */
   _finish(value) {
     if (this._resolve) {

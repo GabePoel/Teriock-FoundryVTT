@@ -69,7 +69,7 @@ export default function ChildDocumentMixin(Base) {
 
       /**
        * Duplicates the document within its parent.
-       * @property {object} [data]
+       * @param {object} [data]
        * @returns {Promise<ChildDocument>}
        */
       async duplicate(data = {}) {

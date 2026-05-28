@@ -56,5 +56,5 @@ export default Base => {
  * @param {string} name
  */
 function senseField(initial, name) {
-  return new fields.NumberField({ initial: initial, integer: true, label: name, min: 0 });
+  return new fields.NumberField({ initial, integer: true, label: name, min: 0 });
 }

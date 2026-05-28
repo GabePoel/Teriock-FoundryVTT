@@ -54,12 +54,12 @@ export default class ThresholdRoll extends BaseRoll {
     const context = await super._prepareChatRenderContext(options);
     if (this.critSuccess) {
       const classes = getProperty(context, "styles.total.classes") ?? "";
-      setProperty(context, "styles.total.classes", classes + " crit-success");
+      setProperty(context, "styles.total.classes", `${classes} crit-success`);
       setProperty(context, "styles.total.tooltip", _loc("TERIOCK.ROLLS.Base.critSuccess"));
     }
     if (this.critFailure) {
       const classes = getProperty(context, "styles.total.classes") ?? "";
-      setProperty(context, "styles.total.classes", classes + " crit-failure");
+      setProperty(context, "styles.total.classes", `${classes} crit-failure`);
       setProperty(context, "styles.total.tooltip", _loc("TERIOCK.ROLLS.Base.critFailure"));
     }
     return context;

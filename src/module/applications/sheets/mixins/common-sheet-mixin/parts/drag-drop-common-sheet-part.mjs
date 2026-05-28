@@ -58,6 +58,7 @@ export default Base => {
 
       /**
        * Handles drag start events.
+       * @param {Teriock.Sheet.EmbedDragEvent} event
        * @returns {Promise<void>}
        */
       _onDragStart(event) {

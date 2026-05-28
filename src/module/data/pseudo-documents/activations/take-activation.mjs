@@ -41,7 +41,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   get classes() {
-    return [super.classes, this.impact + "-button"].join(" ");
+    return [super.classes, `${this.impact}-button`].join(" ");
   }
 
   /** @inheritDoc */

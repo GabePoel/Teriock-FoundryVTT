@@ -200,10 +200,18 @@ export default class AddDocumentsActivation extends BaseActivation {
   }
 }
 
+/**
+ * Schema field for {@link DocumentConstruction}.
+ * @returns {SchemaField}
+ */
 function documentConstructionField() {
   return new fields.SchemaField({ data: new fields.ObjectField({}), uuid: new fields.DocumentUUIDField() });
 }
 
+/**
+ * Schema field for {@link FamilyConstruction}.
+ * @returns {SchemaField}
+ */
 function familyConstructionField() {
   return new fields.SchemaField({
     children: new fields.ArrayField(documentConstructionField()),

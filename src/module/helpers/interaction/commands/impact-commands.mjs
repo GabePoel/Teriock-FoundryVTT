@@ -26,10 +26,10 @@ async function abstractImpactCommandOperation(actor, options) {
   if (options.boost)
     formula = await boostDialog(formula, { boosts: options.boosts, document: options.document, impact, rollData });
   if (!formula) return;
-  const roll = new HarmRoll(formula, rollData, { impact: impact });
+  const roll = new HarmRoll(formula, rollData, { impact });
   if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
   await roll.evaluate();
-  const messageData = { speaker: TeriockChatMessage.getSpeaker({ actor: actor }), system: { avatar: actor?.img } };
+  const messageData = { speaker: TeriockChatMessage.getSpeaker({ actor }), system: { avatar: actor?.img } };
   await roll.toMessage(messageData);
 }
 

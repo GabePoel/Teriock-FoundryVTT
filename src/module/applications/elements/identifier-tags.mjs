@@ -299,7 +299,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     });
     this.#button = createElement("button", {
       ariaLabel: _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.add"),
-      className: "icon " + makeIconClass("fa-magnifying-glass-plus", "button"),
+      className: `icon ${makeIconClass("fa-magnifying-glass-plus", "button")}`,
       dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.add" },
       type: "button",
     });

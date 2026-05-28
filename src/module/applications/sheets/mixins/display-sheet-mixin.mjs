@@ -3,6 +3,10 @@ import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;
 
+/**
+ * Mixin that displays the parts of sheets configured in document systems.
+ * @param {typeof BaseSheet} Base
+ */
 export default function DisplaySheetMixin(Base) {
   return (
     /**

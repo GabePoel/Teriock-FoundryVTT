@@ -47,7 +47,10 @@ export default class SummonAutomation
     return Object.assign(super.defineSchema(), { merge: new fields.BooleanField({ initial: true }) });
   }
 
-  /** @returns {boolean} */
+  /**
+   * @param {UUID<TeriockDocument>} uuid
+   * @returns {boolean}
+   */
   #validateUuid(uuid) {
     const parsed = foundry.utils.parseUuid(uuid);
     return parsed?.type === "Actor";

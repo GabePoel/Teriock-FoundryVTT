@@ -86,7 +86,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
         }),
       );
       const doReadMagic = await TeriockDialog.query(activeGM, "confirm", {
-        content: content,
+        content,
         modal: false,
         window: {
           icon: makeIconClass(TERIOCK.display.icons.equipment.readMagic, "title"),
@@ -135,7 +135,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
         e.type !== "property" || !uncheckedPropertyIdentifiers.includes(e.system.identifier)
       ).map(e => e.uuid);
       const toReveal = await selectDocumentsDialog(revealed, {
-        checked: checked,
+        checked,
         hint: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.hint"),
         noDocumentsMessage: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.noDocumentsMessage"),
         silent: true,

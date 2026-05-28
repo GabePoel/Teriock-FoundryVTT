@@ -20,7 +20,7 @@ export default async function hotbarDropDialog(doc) {
       label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
       callback: () => "linked",
     }],
-    content: content,
+    content,
     modal: true,
     ok: { default: true, label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"), callback: () => "general" },
     window: {

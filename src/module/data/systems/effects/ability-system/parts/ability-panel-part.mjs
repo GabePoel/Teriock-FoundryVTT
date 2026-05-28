@@ -51,7 +51,7 @@ export default Base => {
         }];
         return {
           ...(await super.getPanelParts()),
-          bars: bars,
+          bars,
           classes: this.elderSorcery ? `elder-sorcery ${elementClass(this.elements)}` : "",
         };
       }

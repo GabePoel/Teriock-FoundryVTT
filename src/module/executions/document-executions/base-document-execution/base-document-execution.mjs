@@ -46,7 +46,7 @@ export default class BaseDocumentExecution extends BaseExecution {
     for (const a of this.activations) {
       if (a?.type === "roll" && this._boostsResolved[a.impact]) {
         const boosts = this._boostsResolved[a.impact];
-        a?.updateSource({ boosts: boosts });
+        a?.updateSource({ boosts });
       }
     }
   }

@@ -111,10 +111,10 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
 
   /**
    * Whether this is qualified.
-   * @property {object} [rollData]
+   * @param {object} [rollData]
    * @returns {boolean}
    */
-  checkIfQualified(rollData) {
+  checkIfQualified(rollData = {}) {
     if (this.activeQualifier === "1") return true;
     else if (this.activeQualifier === "0" || !this.activeQualifier) return false;
     else return !!BaseRoll.minValue(this.activeQualifier, rollData ?? this.getRollData());

@@ -24,8 +24,8 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
           uuid: d.uuid,
         };
       }),
-      icon: icon,
-      title: title,
+      icon,
+      title,
     };
     associations.push(association);
   }

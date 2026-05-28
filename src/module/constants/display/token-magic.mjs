@@ -175,7 +175,7 @@ for (const hack of Object.values(hacks)) {
     cut: false,
     dimX: 1,
     dimY: 1,
-    filterId: "teriockCondition" + hack.id.at(0).toUpperCase() + hack.id.slice(1),
+    filterId: `teriockCondition${hack.id.at(0).toUpperCase()}${hack.id.slice(1)}`,
     filterType: "splash",
     padding: 80,
     rank: 5,

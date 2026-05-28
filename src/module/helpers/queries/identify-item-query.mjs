@@ -19,7 +19,7 @@ export default async function identifyItemQuery(queryData, { _timeout }) {
     }),
   );
   const doIdentify = await TeriockDialog.confirm({
-    content: content,
+    content,
     modal: false,
     window: {
       icon: makeIconClass(TERIOCK.display.icons.equipment.identify, "title"),

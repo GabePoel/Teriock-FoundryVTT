@@ -106,7 +106,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         bars: [{
           icon: TERIOCK.config.document.stone.icon,
           label: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.initialStonesInBag"),
-          wrappers: wrappers,
+          wrappers,
         }],
         blocks: [{
           italic: true,
@@ -134,7 +134,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       const panel = await TeriockTextEditor.enrichPanel(panelParts);
       const chatMessageData = {
         content: pullContent,
-        speaker: TeriockChatMessage.getSpeaker({ actor: actor }),
+        speaker: TeriockChatMessage.getSpeaker({ actor }),
         system: {
           panels: [panel],
           tags: [_loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", { count: toPullCount })],

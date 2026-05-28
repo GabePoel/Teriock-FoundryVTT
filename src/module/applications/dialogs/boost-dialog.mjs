@@ -65,7 +65,7 @@ export default async function boostDialog(rollFormula, options = {}) {
     content: contentHtml,
     ok: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),
-      label: label,
+      label,
       callback: (_event, button) => {
         const updatedFormula = button.form.elements.namedItem("formula").value ?? "0";
         const boosts = Number(button.form.elements.namedItem("boosts").value || "0") || 0;

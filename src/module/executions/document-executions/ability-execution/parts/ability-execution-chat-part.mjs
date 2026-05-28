@@ -259,7 +259,7 @@ export default function AbilityExecutionChatPart(Base) {
             deleteOnExpire: true,
             expirations: this.#generateEffectExpirations(crit),
             heightened: this.heightened,
-            identifier: this.source.forcedIdentifier + "-effect",
+            identifier: `${this.source.forcedIdentifier}-effect`,
           },
           type: "imbuement",
         };

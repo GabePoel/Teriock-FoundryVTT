@@ -131,7 +131,7 @@ export default class StatDieModel extends EmbeddedDataModel {
       const messageData = {
         rolls: [roll],
         speaker: TeriockChatMessage.getSpeaker({ actor: this.parent.parent.parent.actor }),
-        system: { avatar: this.parent.parent.parent.actor.img, panels: panels },
+        system: { avatar: this.parent.parent.parent.actor.img, panels },
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });
       if (spend) await this.toggle(true);

@@ -31,7 +31,7 @@ export default function AbilityExecutionRollsPart(Base) {
           total: { classes: this.source.system.interaction },
         };
         if (this.isAttack) {
-          const generalRollOptions = { flavor: this.flavor, styles: styles, targets: [] };
+          const generalRollOptions = { flavor: this.flavor, styles, targets: [] };
           if (this.piercing.ub) {
             generalRollOptions.styles.dice.icon = TERIOCK.display.icons.piercing.ub;
             generalRollOptions.styles.dice.classes += " ub";
@@ -60,7 +60,7 @@ export default function AbilityExecutionRollsPart(Base) {
             new BaseRoll(this.formula, this.rollData, {
               flavor: this.flavor,
               hideRoll: preventThreshold,
-              styles: styles,
+              styles,
               targets: Array.from(this.targets),
             }),
           );
@@ -69,7 +69,7 @@ export default function AbilityExecutionRollsPart(Base) {
           this.rolls.push(
             new BaseRoll(this.formula, this.rollData, {
               flavor: this.flavor,
-              styles: styles,
+              styles,
               targets: Array.from(this.targets),
             }),
           );
@@ -79,7 +79,7 @@ export default function AbilityExecutionRollsPart(Base) {
               new BaseRoll("0", this.rollData, {
                 flavor: this.flavor,
                 hideRoll: true,
-                styles: styles,
+                styles,
                 targets: Array.from(this.targets),
               }),
             );

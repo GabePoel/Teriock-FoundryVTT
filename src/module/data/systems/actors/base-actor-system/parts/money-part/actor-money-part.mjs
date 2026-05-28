@@ -157,8 +157,8 @@ export default Base => {
 function currencyField(label, integer = true) {
   return new fields.NumberField({
     initial: 0,
-    integer: integer,
-    label: label,
+    integer,
+    label,
     min: 0,
     nullable: false,
     placeholder: "0",
