@@ -9,6 +9,7 @@ export default class TeriockManager {
    * @type {{dependents: DependentsRegistry, identifiers: IdentifiersRegistry}}
    */
   #registries = { dependents: new DependentsRegistry(), identifiers: new IdentifiersRegistry() };
+
   /**
    * Check if what's provided exists or is an empty array or set.
    * @param {Teriock.System.Existable<*>} existable
@@ -95,6 +96,14 @@ export default class TeriockManager {
    */
   getSetting(setting) {
     return game.settings.get("teriock", setting);
+  }
+
+  /**
+   * Initialize registries.
+   */
+  initializeRegistries() {
+    this.#registries.dependents._initialize();
+    this.#registries.identifiers._initialize();
   }
 }
 

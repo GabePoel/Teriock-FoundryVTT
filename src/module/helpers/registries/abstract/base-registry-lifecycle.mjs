@@ -1,52 +1,53 @@
 /**
  * A base registry lifecycle pattern.
- * @implements {Teriock.Registries.Lifecycle}
  */
 export default class BaseRegistryLifecycle {
   constructor() {
-    this.#initializePromise();
+    this.#setInitialization();
   }
 
   /**
-   * Whether this registry is currently disabled.
+   * Whether this registry's initialization is complete.
    * @type {boolean}
    */
-  #disabled = true;
+  #initialized = false;
 
   /** @type {Promise<void>} */
-  #readyPromise;
+  #initializing;
 
-  /** @type {function(): void} */
-  #resolveReady;
+  /** @type {(value?: PromiseLike<void> | void) => void} */
+  #resolveInitialization;
 
   /**
-   * Initializes or resets the ready promise.
+   * Initializes or resets the initialization promise.
    */
-  #initializePromise() {
-    this.#readyPromise = new Promise(resolve => {
-      this.#resolveReady = resolve;
+  #setInitialization() {
+    this.#initializing = new Promise(resolve => {
+      this.#resolveInitialization = resolve;
     });
   }
 
-  /** @inheritDoc */
-  get active() {
-    return !this.#disabled;
+  /**
+   * Whether this registry's initialization is complete.
+   */
+  get initialized() {
+    return this.#initialized;
   }
 
-  /** @inheritDoc */
-  get ready() {
-    return this.#readyPromise;
+  /**
+   * A promise that resolves when the registry is first initialized and ready.
+   * @returns {Promise<void>}
+   */
+  get initializing() {
+    return this.#initializing;
   }
 
-  /** @inheritDoc */
-  async activate() {
-    this.#disabled = false;
-    this.#resolveReady();
-  }
-
-  /** @inheritDoc */
-  deactivate() {
-    this.#disabled = true;
-    this.#initializePromise();
+  /**
+   * Populate the registry for the first time.
+   */
+  _initialize() {
+    if (!game._documentsReady || this.#initialized) return;
+    this.#resolveInitialization();
+    this.#initialized = true;
   }
 }

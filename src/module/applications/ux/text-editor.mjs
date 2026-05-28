@@ -18,7 +18,7 @@ export default class TeriockTextEditor extends TextEditor {
   static async _embedContent(match, options = {}) {
     for (const part of match.groups.config.match(/(?:[^\s"]+|"[^"]*")+/g)) {
       const [key] = part.split("=");
-      if (key === "identifier" || parseIdentifier(part)) await game.teriock.identifiers.ready;
+      if (key === "identifier" || parseIdentifier(part)) await game.teriock.identifiers.initializing;
     }
     return super._embedContent(match, options);
   }

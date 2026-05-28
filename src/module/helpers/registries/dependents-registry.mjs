@@ -28,7 +28,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * @return {AnyChildDocument|null}
    */
   fetchFromUuid(ref, uuid) {
-    if (!this.active) return null;
+    if (!this.initialized) return null;
 
     // Special handling for documents that share a parent with the reference document. We only need two levels for
     // active effects embedded within items.
@@ -57,7 +57,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * @returns {AnyChildDocument[]}
    */
   get(doc) {
-    if (!this.active) return [];
+    if (!this.initialized) return [];
     doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);
     return Array.from(this.#dependents.get(doc?.uuid) ?? []).map(uuid => this.fetchFromUuid(doc, uuid)).filter(Boolean);
   }

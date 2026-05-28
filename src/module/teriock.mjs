@@ -438,10 +438,9 @@ Hooks.once("i18nInit", () => {
 // ===========
 
 Hooks.once("ready", () => {
-  // Activate Documents Registry
-  // ---------------------------
-  game.teriock.dependents.activate();
-  game.teriock.identifiers.activate();
+  // Initialize Registries
+  // ---------------------
+  game.teriock.initializeRegistries();
 });
 
 // Register Hook Listeners and Handlebars Helpers

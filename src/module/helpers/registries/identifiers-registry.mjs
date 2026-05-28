@@ -150,9 +150,8 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   }
 
   /** @inheritDoc */
-  async activate() {
-    await this.trackCompendiums();
-    return super.activate();
+  _initialize() {
+    this.trackCompendiums().then(() => super._initialize());
   }
 
   /**
@@ -181,7 +180,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @returns {UUID<IdentifiableDocument>|undefined}
    */
   get(identifier) {
-    if (!this.active) return undefined;
+    if (!this.initialized) return undefined;
     const { identifier: id, type } = parseIdentifier(identifier);
     const group = this.#identifiers.get(type)?.get(id);
     if (!group || group.size === 0) return undefined;
@@ -197,13 +196,12 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @returns {string|undefined}
    */
   getName(identifier, options = {}) {
+    if (!this.initialized) return undefined;
     let out;
     const parsed = parseIdentifier(identifier);
-    if (this.active) {
-      const { identifier: id, type } = parsed;
-      const group = this.#identifiers.get(type)?.get(id);
-      if (group && group.size) out = this.#getCanonical(group)?.entry.name;
-    }
+    const { identifier: id, type } = parsed;
+    const group = this.#identifiers.get(type)?.get(id);
+    if (group && group.size) out = this.#getCanonical(group)?.entry.name;
     return options.forced ? (parsed.identifier ?? "") : out;
   }
 
@@ -213,6 +211,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @returns {Record<Identifier, string>}
    */
   getNames(type) {
+    if (!this.initialized) return {};
     const typeMap = this.#identifiers.get(type);
     if (!typeMap) return {};
     return Object.fromEntries(
@@ -229,6 +228,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
    * @returns {Record<Identifier, UUID<TeriockDocument>>}
    */
   getUuids(type) {
+    if (!this.initialized) return {};
     const identifiers = this.#identifiers.get(type);
     if (!identifiers) return {};
     return Object.fromEntries(identifiers.keys().map(k => [k, this.get(`${type}:${k}`)]));
