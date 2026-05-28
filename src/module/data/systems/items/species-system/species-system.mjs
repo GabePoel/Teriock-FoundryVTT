@@ -198,8 +198,7 @@ export default class SpeciesSystem
     let suppressed = super.makeSuppressed;
     if (this.isTransformation && this.parent.actor) {
       const transformationEffect = this.transformationEffect;
-      suppressed ||= (transformationEffect && !transformationEffect.active)
-        || !this.isPrimaryTransformation;
+      suppressed ||= (transformationEffect && !transformationEffect.active) || !this.isPrimaryTransformation;
     }
     return suppressed;
   }

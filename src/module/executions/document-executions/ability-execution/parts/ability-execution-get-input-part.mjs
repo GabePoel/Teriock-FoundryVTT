@@ -3,11 +3,29 @@ import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { createDialogInput } from "../../../../helpers/html.mjs";
+import { createElement } from "../../../../helpers/html.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
+
+/**
+ * Creates a dialog fieldset for user input.
+ * @param {NumberFieldOptions & { name?: string }} [options]
+ * @returns {string} HTML string for the dialog fieldset.
+ */
+export function createDialogInput(options = {}) {
+  const field = new foundry.data.fields.NumberField({ min: 0, nullable: false, placeholder: "0", ...options });
+  const formGroup = field.toFormGroup({ hint: "TEMP", label: options.label }, {
+    name: options.name,
+    rootId: foundry.utils.randomID(),
+    value: 0,
+  });
+  formGroup.querySelectorAll(".hint").forEach(hint =>
+    hint.replaceWith(createElement("div", { className: "hint", innerHTML: options.hint }))
+  );
+  return formGroup.outerHTML;
+}
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base

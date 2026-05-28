@@ -1,5 +1,4 @@
 import { toCamelCase } from "../../../helpers/string.mjs";
-import { openWikiPage } from "../../../helpers/wiki.mjs";
 
 /**
  * @param {typeof ChildSystem} Base
@@ -17,19 +16,20 @@ export default function WikiSystemMixin(Base) {
       }
 
       /**
-       * Whether this document is on the wiki.
+       * Whether this document is on the [wiki](https://wiki.teriock.com).
        * @returns {boolean}
        */
       get isOnWiki() {
         const index = TERIOCK.index[TERIOCK.config.document[this.parent.type].index];
-        if (index) { return Boolean(index[toCamelCase(foundry.utils.getProperty(this.parent, this.metadata.pageNameKey))]); }
+        if (index) {
+          return Boolean(index[toCamelCase(foundry.utils.getProperty(this.parent, this.metadata.pageNameKey))]);
+        }
         return false;
       }
 
       /**
-       * Gets the full wiki page path including namespace.
-       * Constructs the wiki page identifier from namespace and parent name.
-       * @returns {string} The complete wiki page path with namespace prefix.
+       * Gets the full name of this document's [wiki](https://wiki.teriock.com) page.
+       * @returns {string}
        */
       get wikiPage() {
         const prefix = this.metadata.namespace;
@@ -38,8 +38,7 @@ export default function WikiSystemMixin(Base) {
       }
 
       /**
-       * Opens the wiki page in the default browser.
-       * Navigates to the wiki page URL for manual viewing and editing.
+       * Opens the [wiki](https://wiki.teriock.com) page in the default browser.
        */
       wikiOpen() {
         const title = this.wikiPage;
@@ -48,7 +47,8 @@ export default function WikiSystemMixin(Base) {
             format: { value: title },
             localize: true,
           });
-          openWikiPage(title);
+          const pageUrl = `${TERIOCK.config.wiki.address}/${encodeURIComponent(title)}`;
+          window.open(pageUrl, "_blank");
         } else {
           ui.notifications.error("TERIOCK.SYSTEMS.Wiki.DIALOG.open.error", {
             format: { value: title },

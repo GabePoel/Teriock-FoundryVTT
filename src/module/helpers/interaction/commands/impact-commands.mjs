@@ -2,7 +2,6 @@ import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import { impactConfig } from "../../../constants/config/impact-config.mjs";
 import { BaseRoll, HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { cleanDataset } from "../../html.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
 
 /**
@@ -11,7 +10,6 @@ import { formulaCommand } from "./abstract-command.mjs";
  * @param {Teriock.Command.ImpactOptions} options
  */
 async function abstractImpactCommandOperation(actor, options) {
-  options = cleanDataset(options);
   let formula = options.formula || "0";
   const impact = options.impact || "damage";
   const config = TERIOCK.config.impact[impact];
