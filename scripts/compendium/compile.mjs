@@ -17,8 +17,8 @@ async function buildAllYmlFiles(dir) {
     const entries = await fs.readdir(dir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(dir, entry.name);
-      if (entry.isDirectory()) await buildAllYmlFiles(fullPath);
-      else if (entry.isFile() && fullPath.endsWith(".mjs")) await buildYmlFile(fullPath);
+      if (entry.isDirectory()) { await buildAllYmlFiles(fullPath); }
+      else if (entry.isFile() && fullPath.endsWith(".mjs")) { await buildYmlFile(fullPath); }
     }
   } catch (e) {
     console.error("Error reading directory:", e);

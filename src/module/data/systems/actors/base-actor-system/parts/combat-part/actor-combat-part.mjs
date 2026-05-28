@@ -12,7 +12,7 @@ const { fields } = foundry.data;
  * @param {TeriockArmament} doc
  */
 function nullifyWielded(doc) {
-  if (!["body", "equipment"].includes(doc.type) || !doc.active) return true;
+  if (!["body", "equipment"].includes(doc.type) || !doc.active) { return true; }
   return doc.type === "equipment" && !doc.system.equipped;
 }
 
@@ -81,8 +81,8 @@ export default Base => {
       #getEquipmentRollData() {
         const data = {};
         const { attacker, blocker } = this.wielding;
-        if (attacker) Object.assign(data, prefixObject(attacker.system.getLocalRollData(), "atk"));
-        if (blocker) Object.assign(data, prefixObject(blocker.system.getLocalRollData(), "blk"));
+        if (attacker) { Object.assign(data, prefixObject(attacker.system.getLocalRollData(), "atk")); }
+        if (blocker) { Object.assign(data, prefixObject(blocker.system.getLocalRollData(), "blk")); }
         return data;
       }
 

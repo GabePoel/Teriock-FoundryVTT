@@ -31,8 +31,8 @@ export default class ChangesAutomation extends CritAutomation {
 
   /** @inheritDoc */
   static migrateData(source, options, state) {
-    for (const change of source.changes ?? []) migrateChange(change);
-    for (const change of source.changes ?? []) if (change.target === "parent") change.target = "Item";
+    for (const change of source.changes ?? []) { migrateChange(change); }
+    for (const change of source.changes ?? []) { if (change.target === "parent") { change.target = "Item"; } }
     return super.migrateData(source, options, state);
   }
 

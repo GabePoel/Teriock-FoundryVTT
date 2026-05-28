@@ -12,7 +12,7 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(Immunit
    */
   constructor(options = {}) {
     super(options);
-    if (options.threshold === undefined) this.threshold = 10;
+    if (options.threshold === undefined) { this.threshold = 10; }
     this.img = options.img
       || (this.hex ? getImage("effect-types", "Hexproof") : getImage("effect-types", "Resistance"));
   }
@@ -33,7 +33,7 @@ export default class ResistanceExecution extends ThresholdExecutionMixin(Immunit
 
   /** @inheritDoc */
   get name() {
-    if (this.hex) return _loc("TERIOCK.TERMS.Protections.hexproof.single");
+    if (this.hex) { return _loc("TERIOCK.TERMS.Protections.hexproof.single"); }
     return _loc("TERIOCK.TERMS.Protections.resistance.single");
   }
 

@@ -16,18 +16,19 @@ async function abstractImpactCommandOperation(actor, options) {
   const impact = options.impact || "damage";
   const config = TERIOCK.config.impact[impact];
   if (options.apply) {
-    if (!game.actors.check(actor)) return;
+    if (!game.actors.check(actor)) { return; }
     const amount = await BaseRoll.getValue(formula, actor?.getRollData() || {});
-    if (options.reverse) await config.reverse(actor, amount);
-    else await config.apply(actor, amount);
+    if (options.reverse) { await config.reverse(actor, amount); }
+    else { await config.apply(actor, amount); }
     return;
   }
   const rollData = Object.assign(options.rollData ?? {}, actor?.getRollData() || {});
-  if (options.boost)
+  if (options.boost) {
     formula = await boostDialog(formula, { boosts: options.boosts, document: options.document, impact, rollData });
-  if (!formula) return;
+  }
+  if (!formula) { return; }
   const roll = new HarmRoll(formula, rollData, { impact });
-  if (options.crit) roll.alter(2, 0, { multiplyNumeric: false });
+  if (options.crit) { roll.alter(2, 0, { multiplyNumeric: false }); }
   await roll.evaluate();
   const messageData = { speaker: TeriockChatMessage.getSpeaker({ actor }), system: { avatar: actor?.img } };
   await roll.toMessage(messageData);

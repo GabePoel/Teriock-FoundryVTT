@@ -41,8 +41,9 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
    */
   #resetElderSorceryElements() {
     this.window.content.classList.remove(...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi");
-    if (this.document.system.elderSorcery)
+    if (this.document.system.elderSorcery) {
       this.window.content.classList.add(elementClass(this.document.system.elements));
+    }
   }
 
   /**
@@ -65,13 +66,13 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
       [".form-type-box", cm.form, "click"],
     ];
 
-    for (const [selector, opts, evt] of contextMap) this._connectContextMenu(selector, opts, evt);
+    for (const [selector, opts, evt] of contextMap) { this._connectContextMenu(selector, opts, evt); }
   }
 
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) return;
+    if (!this.isEditable) { return; }
     this._activateContextMenus();
     this.#resetElderSorceryElements();
   }
@@ -82,10 +83,10 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
     let time;
     const maneuver = this.document.system.maneuver;
     const executionTime = this.document.system.executionTime;
-    if (maneuver === "active") time = TERIOCK.config.ability.executionTime.active[executionTime.base];
-    else if (maneuver === "reactive") time = TERIOCK.config.ability.executionTime.reactive[executionTime.base];
-    else if (maneuver === "passive") time = TERIOCK.config.ability.executionTime.passive.passive;
-    else time = executionTime.slow.text;
+    if (maneuver === "active") { time = TERIOCK.config.ability.executionTime.active[executionTime.base]; }
+    else if (maneuver === "reactive") { time = TERIOCK.config.ability.executionTime.reactive[executionTime.base]; }
+    else if (maneuver === "passive") { time = TERIOCK.config.ability.executionTime.passive.passive; }
+    else { time = executionTime.slow.text; }
     return Object.assign(context, { executionTime: time });
   }
 

@@ -15,8 +15,8 @@ async function use() {
   let code = `<h6>${_loc("TERIOCK.COMMANDS.Help.name")}</h6><p>${_loc("TERIOCK.COMMANDS.Help.format")}</p>`;
   for (const c of commands) {
     code += `<p><code>/${c.id}`;
-    if (c.args?.length) code += ` [${c.args.join(", ")}]`;
-    if (c.aliases?.length) code += ` (${c.aliases.map(a => `/${a}`).join(", ")})`;
+    if (c.args?.length) { code += ` [${c.args.join(", ")}]`; }
+    if (c.aliases?.length) { code += ` (${c.aliases.map(a => `/${a}`).join(", ")})`; }
     code += "</code></p>";
   }
   const chatData = { content: code, speaker: TeriockChatMessage.getSpeaker() };

@@ -5,7 +5,7 @@ import { objectMap } from "../../../../../helpers/utils.mjs";
  */
 export default Base =>
   /**
-   * @extends {BaseActorSheet}
+   * @extends {BaseSheet}
    * @property {Teriock.Sheet.BaseActorSheetSettings} settings
    * @mixin
    */
@@ -251,7 +251,7 @@ export default Base =>
  * @returns {TeriockAbility[]|TeriockEquipment[]} A sorted array of items.
  */
 function sortEmbedded(items, sortKey, ascending, sortMap = {}) {
-  if (!items || !Array.isArray(items) || items.length === 0) return [];
+  if (!items || !Array.isArray(items) || items.length === 0) { return []; }
   const accessor = sortMap[sortKey] ?? (i => i.name ?? "");
   const sorted = [...items];
   sorted.sort((a, b) => {

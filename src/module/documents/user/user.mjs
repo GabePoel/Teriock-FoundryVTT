@@ -17,7 +17,7 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, { img: this.avatar });
-    if (this.character) parts.subtitle = this.character.fullName;
+    if (this.character) { parts.subtitle = this.character.fullName; }
     return parts;
   }
 

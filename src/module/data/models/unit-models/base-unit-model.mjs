@@ -93,9 +93,9 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   #convert(value) {
     const unitType = this.unitType;
-    if (unitType === "zero") return 0;
-    if (unitType === "infinite") return Infinity;
-    else return value;
+    if (unitType === "zero") { return 0; }
+    if (unitType === "infinite") { return Infinity; }
+    else { return value; }
   }
 
   /** @inheritDoc */
@@ -116,7 +116,7 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {string}
    */
   get abbreviation() {
-    if (this.unitType === "finite") return `${this.formula} ${this.symbol}`;
+    if (this.unitType === "finite") { return `${this.formula} ${this.symbol}`; }
     return this.text;
   }
 
@@ -126,9 +126,9 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   get conversion() {
     const unitType = this.unitType;
-    if (unitType === "zero") return 0;
-    if (unitType === "infinite") return Infinity;
-    else return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1;
+    if (unitType === "zero") { return 0; }
+    if (unitType === "infinite") { return Infinity; }
+    else { return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1; }
   }
 
   /** @inheritDoc */
@@ -139,12 +139,12 @@ export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */
   get formula() {
     const unitType = this.unitType;
-    if (unitType === "zero") return "0";
-    if (unitType === "infinite") return "9".repeat(32);
+    if (unitType === "zero") { return "0"; }
+    if (unitType === "infinite") { return "9".repeat(32); }
     else {
       const conversion = this.conversion;
-      if (conversion === 1) return super.formula;
-      else return multiplyFormula(super.formula, conversion.toString());
+      if (conversion === 1) { return super.formula; }
+      else { return multiplyFormula(super.formula, conversion.toString()); }
     }
   }
 
@@ -179,9 +179,9 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {"zero" | "finite" | "infinite"}
    */
   get unitType() {
-    if (this.constructor.zeroChoiceEntries.map(e => e.id).includes(this.unit)) return "zero";
-    else if (this.constructor.finiteChoiceEntries.map(e => e.id).includes(this.unit)) return "finite";
-    else return "infinite";
+    if (this.constructor.zeroChoiceEntries.map(e => e.id).includes(this.unit)) { return "zero"; }
+    else if (this.constructor.finiteChoiceEntries.map(e => e.id).includes(this.unit)) { return "finite"; }
+    else { return "infinite"; }
   }
 
   /** @inheritDoc */
@@ -196,7 +196,7 @@ export default class BaseUnitModel extends EvaluationModel {
    */
   convertTo(unit) {
     const unitType = this.unitType;
-    if (unitType !== "finite") return this.currentValue;
+    if (unitType !== "finite") { return this.currentValue; }
     return (this.constructor.finiteChoiceEntries.find(e => e.id === unit).conversion || 1) * this.currentValue;
   }
 

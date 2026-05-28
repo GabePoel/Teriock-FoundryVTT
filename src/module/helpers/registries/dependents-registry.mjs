@@ -28,7 +28,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * @return {AnyChildDocument|null}
    */
   fetchFromUuid(ref, uuid) {
-    if (!this.initialized) return null;
+    if (!this.initialized) { return null; }
 
     // Special handling for documents that share a parent with the reference document. We only need two levels for
     // active effects embedded within items.
@@ -36,7 +36,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
     if (parent && uuid.startsWith(parent.uuid)) {
       const embeddedPath = uuid.substring(parent.uuid.length + 1);
       const parts = embeddedPath.split(".");
-      if (parts.length === 2) return parent.getEmbeddedDocument(parts[0], parts[1]);
+      if (parts.length === 2) { return parent.getEmbeddedDocument(parts[0], parts[1]); }
       else if (parts.length === 4) {
         const intermediateDocument = parent.getEmbeddedDocument(parts[0], parts[1]);
         return intermediateDocument?.getEmbeddedDocument(parts[2], parts[3]);
@@ -57,7 +57,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * @returns {AnyChildDocument[]}
    */
   get(doc) {
-    if (!this.initialized) return [];
+    if (!this.initialized) { return []; }
     doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);
     return Array.from(this.#dependents.get(doc?.uuid) ?? []).map(uuid => this.fetchFromUuid(doc, uuid)).filter(Boolean);
   }
@@ -69,7 +69,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * @returns {UUID<AnyChildDocument>}
    */
   resolveDependentID(idOrUuid, dependent) {
-    if (idOrUuid.length > 16) return foundry.utils.parseUuid(idOrUuid, { relative: dependent })?.uuid;
+    if (idOrUuid.length > 16) { return foundry.utils.parseUuid(idOrUuid, { relative: dependent })?.uuid; }
     if (dependent.parent) {
       return (dependent.parent.effects.get(idOrUuid)
         || dependent.actor?.effects.get(idOrUuid)
@@ -84,8 +84,8 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    */
   track(idOrUuid, dependent) {
     const uuid = this.resolveDependentID(idOrUuid, dependent);
-    if (!uuid) return;
-    if (!this.#dependents.has(uuid)) this.#dependents.set(uuid, new Set());
+    if (!uuid) { return; }
+    if (!this.#dependents.has(uuid)) { this.#dependents.set(uuid, new Set()); }
     this.#dependents.get(uuid).add(dependent.uuid);
   }
 

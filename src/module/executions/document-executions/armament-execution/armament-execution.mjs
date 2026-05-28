@@ -28,8 +28,8 @@ export default class ArmamentExecution extends BaseDocumentExecution {
    * @returns {Teriock.Keys.Impact|null}
    */
   get #singleImpact() {
-    if (this.impacts.size === 1) return Array.from(this.impacts)[0];
-    else return null;
+    if (this.impacts.size === 1) { return Array.from(this.impacts)[0]; }
+    else { return null; }
   }
 
   /**
@@ -37,7 +37,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
    * @returns {HarmRoll[]}
    */
   get #typedRolls() {
-    if (this.rolls.length === 0) return [];
+    if (this.rolls.length === 0) { return []; }
     const roll = this.rolls[0];
     return Array.from(this.impacts).map(impact => {
       const impactRoll = roll.clone({ evaluated: true });
@@ -56,7 +56,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   get automations() {
     const automations = [...this._automations];
-    for (const p of this.source.properties) automations.push(...p.system.automations.contents);
+    for (const p of this.source.properties) { automations.push(...p.system.automations.contents); }
     return new TypeCollection(automations.map(a => [a.id, a]));
   }
 
@@ -67,21 +67,21 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   get flavor() {
-    if (this.impacts.size === 1)
+    if (this.impacts.size === 1) {
       return _loc("TERIOCK.ROLLS.Base.name", { value: TERIOCK.config.impact[Array.from(this.impacts)[0]].label });
-    else return _loc("TERIOCK.ROLLS.Harm.multi");
+    } else { return _loc("TERIOCK.ROLLS.Harm.multi"); }
   }
 
   /** @inheritDoc */
   async _buildActivations() {
-    for (const roll of this.#typedRolls) this.activations.push(...(await roll.getActivations()));
+    for (const roll of this.#typedRolls) { this.activations.push(...(await roll.getActivations())); }
     await super._buildActivations();
   }
 
   /** @inheritDoc */
   async _buildPanels() {
     await super._buildPanels();
-    for (const roll of this.#typedRolls) this.panels.push(...(await roll.getPanels()));
+    for (const roll of this.#typedRolls) { this.panels.push(...(await roll.getPanels())); }
   }
 
   /** @inheritDoc */
@@ -101,7 +101,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
     for (const impact of this.impacts) {
       if (this._hasBoostForImpact(impact)) {
         const amt = this._boostsResolved[impact];
-        if (amt > boosts) boosts = amt;
+        if (amt > boosts) { boosts = amt; }
       }
     }
     if (this.showDialog && formulaExists(this.formula)) {
@@ -111,7 +111,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
         document: this.source,
         impact: this.#singleImpact,
       });
-      if (this.formula === null) return false;
+      if (this.formula === null) { return false; }
       this.crit = false;
     }
     await super._getInput();
@@ -133,8 +133,9 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       });
       for (const ability of usedAbilities) {
         if (ability.system.consumable && this.source.system.consumable) {
-          if (ability.system.quantity !== 1 && this.source.isOwner && !this.source.inCompendium)
+          if (ability.system.quantity !== 1 && this.source.isOwner && !this.source.inCompendium) {
             await this.source.setFlag("teriock", "dontConsume", true);
+          }
         }
         await ability.use({ ...this.options, armament: this.source });
       }
@@ -144,7 +145,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _prepareFormula() {
-    if (formulaExists(this.bonus)) this.formula = addFormula(this.formula, this.bonus);
+    if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
   }
 
   /** @inheritDoc */

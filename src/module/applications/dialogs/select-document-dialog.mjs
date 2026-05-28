@@ -49,7 +49,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     foundry.utils.getProperty(a, options.nameKey).localeCompare(foundry.utils.getProperty(b, options.nameKey))
   );
 
-  if (!options.multi && options.checked && options.checked.length > 0) options.checked.length = 1;
+  if (!options.multi && options.checked && options.checked.length > 0) { options.checked.length = 1; }
 
   for (const doc of documents) {
     const id = foundry.utils.getProperty(doc, options.idKey);
@@ -67,9 +67,10 @@ export async function selectDocumentsDialog(documents, options = {}) {
       tooltipUuid: options.tooltipUuid ? foundry.utils.getProperty(doc, options.tooltipUuid) : undefined,
       uuid: doc.uuid,
     };
-    if (options.textKey) context.documents[id].text = foundry.utils.getProperty(doc, options.textKey) || "";
-    if (options.tooltipKey && options.tooltip && !options.tooltipAsync)
+    if (options.textKey) { context.documents[id].text = foundry.utils.getProperty(doc, options.textKey) || ""; }
+    if (options.tooltipKey && options.tooltip && !options.tooltipAsync) {
       context.documents[id].tooltip = foundry.utils.getProperty(doc, options.tooltipKey);
+    }
   }
 
   const sheet = new TeriockDocumentSelector(context.documents, {
@@ -82,8 +83,8 @@ export async function selectDocumentsDialog(documents, options = {}) {
   });
 
   const selected = await sheet.select();
-  if (selected) return selected.map(id => idToDoc.get(id)).filter(Boolean);
-  else return [];
+  if (selected) { return selected.map(id => idToDoc.get(id)).filter(Boolean); }
+  else { return []; }
 }
 
 /**
@@ -94,8 +95,8 @@ export async function selectDocumentsDialog(documents, options = {}) {
  * @returns {Promise<T|null>}
  */
 export async function selectDocumentDialog(documents, options = {}) {
-  if ((options.auto ?? true) && documents.length === 1) return documents[0];
-  if (options.silent && !documents.length) return null;
+  if ((options.auto ?? true) && documents.length === 1) { return documents[0]; }
+  if (options.silent && !documents.length) { return null; }
   const selected = await selectDocumentsDialog(documents, {
     ...options,
     checked: options.checked ? [options.checked] : [],

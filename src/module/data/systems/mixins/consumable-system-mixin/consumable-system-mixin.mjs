@@ -110,8 +110,9 @@ export default function ConsumableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async gainOne() {
-        if (this.consumable)
+        if (this.consumable) {
           await this.parent.update({ "system.quantity": Math.clamp(this.quantity + 1, 0, this.maxQuantity.value) });
+        }
       }
 
       /** @inheritDoc */
@@ -141,7 +142,7 @@ export default function ConsumableSystemMixin(Base) {
       async use(options = {}) {
         await super.use(options);
         if (this.parent.isOwner && this.consumable && !this.parent.inCompendium) {
-          if (!this.parent.getFlag("teriock", "dontConsume")) await this.useOne();
+          if (!this.parent.getFlag("teriock", "dontConsume")) { await this.useOne(); }
           await this.parent.setFlag("teriock", "dontConsume", false);
         }
       }
@@ -152,8 +153,9 @@ export default function ConsumableSystemMixin(Base) {
        * @returns {Promise<void>}
        */
       async useOne() {
-        if (this.consumable && this.consumptionAmount)
+        if (this.consumable && this.consumptionAmount) {
           await this.parent.update({ "system.quantity": Math.max(0, this.quantity - this.consumptionAmount) });
+        }
       }
     }
   );

@@ -26,7 +26,7 @@ export default class TeriockActiveEffect
   /** @inheritDoc */
   static _applyChangeUnguided(targetDoc, change, changes, options = {}) {
     // Restrict changes to just structured data fields, flags, and token properties. Yoinked from Ryuutama.
-    if (!change.key || !(change.key.startsWith?.("flags.") || (targetDoc.documentName === "Token"))) return;
+    if (!change.key || !(change.key.startsWith?.("flags.") || (targetDoc.documentName === "Token"))) { return; }
     return super._applyChangeUnguided(targetDoc, change, changes, options);
   }
 
@@ -69,8 +69,8 @@ export default class TeriockActiveEffect
 
   /** @inheritDoc */
   async createChildDocuments(embeddedName, data = [], operation = {}) {
-    if (embeddedName === "Item") return this.createDependentDocuments(embeddedName, data, operation);
-    else return super.createChildDocuments(embeddedName, data, operation);
+    if (embeddedName === "Item") { return this.createDependentDocuments(embeddedName, data, operation); }
+    else { return super.createChildDocuments(embeddedName, data, operation); }
   }
 
   /** @inheritDoc */

@@ -66,9 +66,9 @@ export default Base => {
        */
       get _displayInputsUpgrades() {
         const inputs = ["system.upgrades.score.attribute"];
-        if (this.upgrades.score.attribute) inputs.push("system.upgrades.score.value");
+        if (this.upgrades.score.attribute) { inputs.push("system.upgrades.score.value"); }
         inputs.push("system.upgrades.competence.attribute");
-        if (this.upgrades.competence.attribute) inputs.push("system.upgrades.competence.value");
+        if (this.upgrades.competence.attribute) { inputs.push("system.upgrades.competence.value"); }
         return inputs;
       }
 
@@ -122,7 +122,7 @@ export default Base => {
         } else {
           this.upgrades.score.text = "";
         }
-        if (this.upgrades.competence.value === 0) this.upgrades.competence.attribute = null;
+        if (this.upgrades.competence.value === 0) { this.upgrades.competence.attribute = null; }
         if (this.upgrades.competence.attribute) {
           const attribute = attributeLink(this.upgrades.competence.attribute);
           const amount = this.upgrades.competence.value;
@@ -148,7 +148,7 @@ export default Base => {
  * @returns {string}
  */
 function attributeLink(attribute) {
-  if (!TERIOCK.config.attribute[attribute]) return "";
+  if (!TERIOCK.config.attribute[attribute]) { return ""; }
   const page = TERIOCK.config.attribute[attribute].page;
   const label = TERIOCK.config.attribute[attribute].label;
   return `@L[Core:${page}]{${label}}`;

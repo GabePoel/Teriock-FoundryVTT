@@ -72,8 +72,9 @@ export default class RankSystem
    */
   #stageArchetypeDeletion() {
     const neededArchetypes = new Set(this.actor.ranks.map(r => r.system.archetype));
-    for (const a of this.actor.archetypes)
-      if (!neededArchetypes.has(a.system.identifier)) this.actor._stagedItemDeletions.add(a.id);
+    for (const a of this.actor.archetypes) {
+      if (!neededArchetypes.has(a.system.identifier)) { this.actor._stagedItemDeletions.add(a.id); }
+    }
   }
 
   /** @inheritDoc */
@@ -88,8 +89,8 @@ export default class RankSystem
 
   /** @inheritDoc */
   get color() {
-    if (this.innate) return TERIOCK.display.colors.purple;
-    else return TERIOCK.display.colors.grey;
+    if (this.innate) { return TERIOCK.display.colors.purple; }
+    else { return TERIOCK.display.colors.grey; }
   }
 
   /** @inheritDoc */
@@ -156,19 +157,19 @@ export default class RankSystem
 
   /** @inheritDoc */
   async _createFromChildDeltaMap(createMap) {
-    if (this.classRank < 3 || this.parent.abilities.length !== 2) await super._createFromChildDeltaMap(createMap);
+    if (this.classRank < 3 || this.parent.abilities.length !== 2) { await super._createFromChildDeltaMap(createMap); }
   }
 
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) this.#stageArchetypeCreation();
+    if (this.parent.checkEditor(userId) && this.actor) { this.#stageArchetypeCreation(); }
   }
 
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) this.#stageArchetypeDeletion();
+    if (this.parent.checkEditor(userId) && this.actor) { this.#stageArchetypeDeletion(); }
   }
 
   /** @inheritDoc */
@@ -198,14 +199,15 @@ export default class RankSystem
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if (this.parent.sup?.type === "species") this.innate = true;
-    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv)
-      this.proficient = false;
+    if (this.parent.sup?.type === "species") { this.innate = true; }
+    if (
+      game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
+    ) { this.proficient = false; }
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    for (const pool of Object.values(this.statDice)) if (this.innate) pool.disabled = true;
+    for (const pool of Object.values(this.statDice)) { if (this.innate) { pool.disabled = true; } }
   }
 }

@@ -24,7 +24,7 @@ export default function ChildDocumentMixin(Base) {
 
       /** @inheritDoc */
       static async validateRelationship(sup, sub) {
-        if (!this.validateChildType(sup, sub)) return false;
+        if (!this.validateChildType(sup, sub)) { return false; }
         return super.validateRelationship(sup, sub);
       }
 
@@ -47,13 +47,13 @@ export default function ChildDocumentMixin(Base) {
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        if (this.checkEditor(userId) && this.actor) this.actor.system.postUpdate();
+        if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
       }
 
       /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
-        if (this.checkEditor(userId) && this.actor) this.actor.system.postUpdate();
+        if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
       }
 
       /**
@@ -63,7 +63,7 @@ export default function ChildDocumentMixin(Base) {
        */
       *allApplicableEffects() {
         if (this.actor) {
-          for (const effect of this.actor.allApplicableEffects()) yield effect;
+          for (const effect of this.actor.allApplicableEffects()) { yield effect; }
         }
       }
 
@@ -76,17 +76,17 @@ export default function ChildDocumentMixin(Base) {
         const copy = foundry.utils.mergeObject(this.toObject(true), data);
         copy._stats.duplicateSource = this.uuid;
         let copyDocument;
-        if (this.isEmbedded) copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]);
-        else if (this.inCompendium)
+        if (this.isEmbedded) { copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]); }
+        else if (this.inCompendium) {
           copyDocument = await this.constructor.create(copy, { pack: this.compendium.collection });
-        else copyDocument = await this.constructor.create(copy);
+        } else { copyDocument = await this.constructor.create(copy); }
         return copyDocument[0];
       }
 
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.isTop) this.prepareChangeData();
+        if (this.isTop) { this.prepareChangeData(); }
       }
 
       /** @inheritDoc */

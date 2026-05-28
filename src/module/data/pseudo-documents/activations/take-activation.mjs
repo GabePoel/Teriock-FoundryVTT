@@ -33,9 +33,9 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
    * @returns {boolean}
    */
   get #showDialog() {
-    if (typeof this.#amount !== "number") return true;
+    if (typeof this.#amount !== "number") { return true; }
     let showDialog = this.showDialog || game.teriock.getSetting("showImpactDialogs");
-    if (this.event.ctrlKey) showDialog = !showDialog;
+    if (this.event.ctrlKey) { showDialog = !showDialog; }
     return showDialog;
   }
 
@@ -60,11 +60,11 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   async primaryAction() {
-    if (!this.checkActors()) return;
+    if (!this.checkActors()) { return; }
     for (const actor of this.actors) {
-      if (this.#showDialog)
+      if (this.#showDialog) {
         await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti: this.morganti });
-      else {
+      } else {
         await this.#entry.apply(actor, this.#amount);
         ui.notifications.success("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied", {
           format: { actor: actor.fullName, amount: this.#amount, impact: this.label },
@@ -76,7 +76,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
 
   /** @inheritDoc */
   async secondaryAction() {
-    if (!this.checkActors()) return;
+    if (!this.checkActors()) { return; }
     for (const actor of this.actors) {
       await this.#entry?.reverse(actor, this.#amount);
       ui.notifications.success("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed", {

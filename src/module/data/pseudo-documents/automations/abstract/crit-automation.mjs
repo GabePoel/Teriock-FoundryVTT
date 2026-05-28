@@ -24,7 +24,7 @@ export default class CritAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   get canCrit() {
-    if (this.document.type === "ability") return true;
+    if (this.document.type === "ability") { return true; }
     return super.canCrit;
   }
 }

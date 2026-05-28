@@ -59,7 +59,7 @@ export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAu
    */
   get _originPaths() {
     const paths = ["origin"];
-    if (this.origin !== "random") paths.push("originBarrier");
+    if (this.origin !== "random") { paths.push("originBarrier"); }
     return paths;
   }
 
@@ -77,7 +77,7 @@ export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAu
    * @returns {Promise<TeriockTokenDocument|null>}
    */
   async _getOriginToken(execution) {
-    if (this.origin === "executor" && execution?.executor?.document?.uuid) return execution.executor.document;
+    if (this.origin === "executor" && execution?.executor?.document?.uuid) { return execution.executor.document; }
     else if (this.origin === "target") {
       return game.user.selectTargetedToken({
         title: _loc("TERIOCK.AUTOMATIONS.Move.DIALOGS.SelectToken.title", { name: this.document?.name || "" }),
@@ -94,7 +94,7 @@ export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAu
   /** @inheritDoc */
   async getActivations(options = {}) {
     const originToken = await this._getOriginToken(options.execution);
-    if (!this.randomDirection && !originToken) return [];
+    if (!this.randomDirection && !originToken) { return []; }
     const distance = await BaseRoll.getValue(this.distance, options.rollData ?? {});
     return [
       new MoveActivation({

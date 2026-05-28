@@ -46,7 +46,7 @@ export default Base => {
             : _loc("TERIOCK.SYSTEMS.Ability.USAGE.alwaysActive"),
           visible: this.parent.isOwner && this.isArmamentChild,
           onClick: async (_ev, doc) => {
-            if (doc === this.parent.parent) await this.parent.update({ "system.grantUse": !this.grantUse });
+            if (doc === this.parent.parent) { await this.parent.update({ "system.grantUse": !this.grantUse }); }
           },
         };
       }
@@ -66,7 +66,7 @@ export default Base => {
 
       /** @inheritDoc */
       get tagIcon() {
-        if (this.isArmamentChild && this.grantUse) return this.grantUseIcon;
+        if (this.isArmamentChild && this.grantUse) { return this.grantUseIcon; }
         return super.tagIcon;
       }
 
@@ -81,9 +81,9 @@ export default Base => {
           onClick: async () => {
             const data = await this.toScroll();
             const op = { keepEmbeddedIds: true, renderSheet: true };
-            if (doc?.actor?.documentName === "Actor" && doc?.actor?.uuid === this.actor?.uuid)
+            if (doc?.actor?.documentName === "Actor" && doc?.actor?.uuid === this.actor?.uuid) {
               await this.actor.createEmbeddedDocuments("Item", [data], op);
-            else TeriockItem.create(data, op);
+            } else { TeriockItem.create(data, op); }
           },
         });
         return entries;
@@ -124,9 +124,9 @@ export default Base => {
           || { system: { equipmentType: "scroll" }, type: "equipment" };
         let img;
         if (toTitleCase(equipmentType) === "Scroll") {
-          if (this.elements.size === 1)
+          if (this.elements.size === 1) {
             img = getImage("consumables", `${toTitleCase(Array.from(this.elements)[0])} Spell Scroll`);
-          else img = getImage("consumables", "Celestial Spell Scroll");
+          } else { img = getImage("consumables", "Celestial Spell Scroll"); }
         }
         let out = foundry.utils.mergeObject(reference, {
           name: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName", { name: this.parent.fullName }),
@@ -139,9 +139,9 @@ export default Base => {
             quantity: 1,
           },
         });
-        if (img) out.img = img;
+        if (img) { out.img = img; }
         out = foundry.utils.mergeObject(out, data);
-        if (!out.effects) out.effects = [];
+        if (!out.effects) { out.effects = []; }
         out.effects.push(foundry.utils.mergeObject(this.parent.toObject(true), { system: { grantUse: true } }));
         return out;
       }

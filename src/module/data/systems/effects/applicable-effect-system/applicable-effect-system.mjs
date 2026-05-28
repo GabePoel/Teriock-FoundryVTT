@@ -85,7 +85,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   get _nameTags() {
     const tags = super._nameTags;
-    if (this.critical) tags.unshift(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical"));
+    if (this.critical) { tags.unshift(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.critical")); }
     return tags;
   }
 
@@ -153,23 +153,26 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) this.parent.fireTrigger("applyEffect", this.parent.getScope());
+    if (this.parent.checkEditor(userId) && this.actor) { this.parent.fireTrigger(
+        "applyEffect",
+        this.parent.getScope(),
+      ); }
   }
 
   /** @inheritDoc */
   _onFireTrigger(trigger) {
     super._onFireTrigger(trigger);
-    if (this.expirations.triggers.has(trigger)) this.expire();
+    if (this.expirations.triggers.has(trigger)) { this.expire(); }
   }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
     if (this.parent.parent) {
       const start = TeriockActiveEffect.getEffectStart();
-      for (const key of Object.keys(start)) if (data.start?.[key] !== undefined) delete start[key];
+      for (const key of Object.keys(start)) { if (data.start?.[key] !== undefined) { delete start[key]; } }
       this.parent.updateSource({ start });
     }
   }
@@ -177,7 +180,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   async _preDelete(options, user) {
     const yes = await super._preDelete(options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
     this.parent.fireTrigger("expireEffect", this.parent.getScope());
   }
@@ -200,9 +203,9 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   prepareDerivedData() {
     super.prepareDerivedData();
     const blocks = this.messageBlocks;
-    if (!blocks?.length) return;
+    if (!blocks?.length) { return; }
     const blocksHTML = blocks.reduce((acc, block) => {
-      if (!block.text) return acc;
+      if (!block.text) { return acc; }
       const safeTitle = foundry.utils.escapeHTML(block.title || "");
       const extraClasses = block.classes ? ` ${block.classes}` : "";
       return `${acc}
@@ -221,7 +224,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   async shouldExpire() {
-    if (this.shouldExpireFromConditions()) return true;
+    if (this.shouldExpireFromConditions()) { return true; }
     return super.shouldExpire();
   }
 
@@ -230,9 +233,9 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
    * @returns {boolean}
    */
   shouldExpireFromConditions() {
-    if (!this.actor) return false;
-    for (const c of this.expirations.conditions.present) if (!this.actor.statuses.has(c)) return true;
-    for (const c of this.expirations.conditions.absent) if (this.actor.statuses.has(c)) return true;
+    if (!this.actor) { return false; }
+    for (const c of this.expirations.conditions.present) { if (!this.actor.statuses.has(c)) { return true; } }
+    for (const c of this.expirations.conditions.absent) { if (this.actor.statuses.has(c)) { return true; } }
     return false;
   }
 }

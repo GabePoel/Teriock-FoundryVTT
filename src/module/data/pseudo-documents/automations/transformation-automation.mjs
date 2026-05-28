@@ -48,7 +48,7 @@ export default class TransformationAutomation
     let out = await super.getDocuments(options);
     const actors = out.filter(d => d.documentName === "Actor");
     out = out.filter(d => d.type === "species");
-    for (const a of actors) out.push(...a.species);
+    for (const a of actors) { out.push(...a.species); }
     return out;
   }
 }

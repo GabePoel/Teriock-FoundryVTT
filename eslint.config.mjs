@@ -75,11 +75,15 @@ const globalTeriock = { TERIOCK: "readonly", teriock: "readonly", tm: "readonly"
 
 const globalModule = { TokenMagic: "readonly" };
 
+const files = ["{src,scripts,macros}/**/*.{mjs,ts}", "eslint.config.mjs"];
+
 export default tseslint.config(
-  js.configs.recommended,
-  ...tseslint.configs.recommended,
+  { files, ...js.configs.recommended },
+  ...tseslint.configs.recommended.map(c => {
+    return { ...c, files };
+  }),
   {
-    files: ["{src,scripts,macros}/**/*.{mjs,ts}", "eslint.config.mjs"],
+    files,
     plugins: { jsdoc, perfectionist },
     rules: {
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
@@ -187,7 +191,7 @@ export default tseslint.config(
       }],
       "prefer-const": "warn",
       "prefer-template": "error",
-      "template-curly-spacing": ["error", "never"]
+      "template-curly-spacing": ["error", "never"],
     },
     settings: { jsdoc: { preferredTypes: { ".<>": "<>", Function: "function", Object: "object" } } },
   },

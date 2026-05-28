@@ -54,8 +54,9 @@ export default function ConfirmationDialogAutomationMixin(Base) {
       /** @inheritDoc */
       get formMessages() {
         const messages = super.formMessages;
-        if (this._showConfirmationWarning)
+        if (this._showConfirmationWarning) {
           messages.unshift({ level: "warning", text: this.#pre("NOTIFICATIONS.noConfirmation") });
+        }
         return messages;
       }
 
@@ -74,7 +75,7 @@ export default function ConfirmationDialogAutomationMixin(Base) {
           automation: _loc(this.label) ?? "",
           document: this.document.fullName ?? this.document.name ?? "",
         }, options.data ?? {});
-        if (!this.showConfirmationDialog) return true;
+        if (!this.showConfirmationDialog) { return true; }
         const contentString = options.content ?? this.#pre("DIALOG.content");
         const icon = options.icon ?? TERIOCK.display.icons.pseudoDocument.automation;
         const title = _loc(options.title ?? this.#pre("DIALOG.title"), data);

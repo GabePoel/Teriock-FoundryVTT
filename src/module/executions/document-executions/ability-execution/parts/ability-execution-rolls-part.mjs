@@ -14,12 +14,12 @@ export default function AbilityExecutionRollsPart(Base) {
       get flavor() {
         if (this.isAttack) {
           let flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.attack");
-          if (this.piercing.ub) flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.ub", { flavor });
-          if (this.warded) flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.warded", { flavor });
+          if (this.piercing.ub) { flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.ub", { flavor }); }
+          if (this.warded) { flavor = _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.warded", { flavor }); }
           return flavor;
-        } else if (this.isFeat) return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat");
-        else if (this.isBlock) return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block");
-        else return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest");
+        } else if (this.isFeat) { return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.feat"); }
+        else if (this.isBlock) { return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.block"); }
+        else { return _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.flavor.manifest"); }
       }
 
       /** @inheritDoc */
@@ -47,13 +47,14 @@ export default function AbilityExecutionRollsPart(Base) {
                 rollOptions.threshold = target.actor.system.defense.ac;
                 rollOptions.comparison = "gt";
               }
-              if (this.limb) rollOptions.threshold += TERIOCK.config.target.limb;
-              else if (this.vitals) rollOptions.threshold += TERIOCK.config.target.vitals;
+              if (this.limb) { rollOptions.threshold += TERIOCK.config.target.limb; }
+              else if (this.vitals) { rollOptions.threshold += TERIOCK.config.target.vitals; }
             }
             this.rolls.push(new ThresholdRoll(this.formula, this.rollData, rollOptions));
           }
-          if (this.rolls.length === 0)
+          if (this.rolls.length === 0) {
             this.rolls.push(new ThresholdRoll(this.formula, this.rollData, generalRollOptions));
+          }
         } else if (this.isFeat && !preventThreshold) {
           styles.total.icon = TERIOCK.display.icons.interaction.feat;
           this.rolls.push(

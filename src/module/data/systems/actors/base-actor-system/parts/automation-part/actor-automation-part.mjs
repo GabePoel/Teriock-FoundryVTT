@@ -32,8 +32,9 @@ export default Base => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        for (const uuid of this.conditionInformation.allured.trackers)
+        for (const uuid of this.conditionInformation.allured.trackers) {
           this.conditionInformation.bound.trackers.add(uuid);
+        }
       }
     }
   );

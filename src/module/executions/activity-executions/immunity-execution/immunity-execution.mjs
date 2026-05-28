@@ -34,7 +34,7 @@ export default class ImmunityExecution extends BaseExecution {
 
   /** @inheritDoc */
   get name() {
-    if (this.hex) return _loc("TERIOCK.TERMS.Protections.hexseal.single");
+    if (this.hex) { return _loc("TERIOCK.TERMS.Protections.hexseal.single"); }
     return _loc("TERIOCK.TERMS.Protections.immunity.single");
   }
 

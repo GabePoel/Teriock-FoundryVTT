@@ -27,12 +27,13 @@ export default class BaseConfig extends TeriockBaseApplication {
       const current = game.settings.get("teriock", key, { document: true });
       const prior = current?._source?.value ?? current;
       const updated = await game.settings.set("teriock", key, value, { document: true });
-      if (prior === (updated?._source?.value ?? updated)) continue;
+      if (prior === (updated?._source?.value ?? updated)) { continue; }
       requiresClientReload ||= setting.scope !== "world" && setting?.requiresReload;
       requiresWorldReload ||= setting.scope === "world" && setting?.requiresReload;
     }
-    if (requiresClientReload || requiresWorldReload)
+    if (requiresClientReload || requiresWorldReload) {
       return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+    }
   }
 
   /** @override */
@@ -84,12 +85,13 @@ export default class BaseConfig extends TeriockBaseApplication {
    */
   createSettingField(name) {
     const setting = game.settings.settings.get(`teriock.${name}`);
-    if (!setting) throw new Error(`Setting \`teriock.${name}\` not registered.`);
+    if (!setting) { throw new Error(`Setting \`teriock.${name}\` not registered.`); }
     const isDataField = setting.type instanceof fields.DataField;
     const Field =
       { [Boolean]: fields.BooleanField, [Number]: fields.NumberField, [String]: fields.StringField }[setting.type];
-    if (!isDataField && !Field)
+    if (!isDataField && !Field) {
       throw new Error("Automatic field generation only available for Boolean, Number, or String types");
+    }
     const data = {
       field: isDataField ? setting.type : new Field({ blank: false, required: true }),
       hint: _loc(setting.hint),
@@ -97,8 +99,9 @@ export default class BaseConfig extends TeriockBaseApplication {
       name,
       value: game.settings.get("teriock", name),
     };
-    if (setting.choices)
+    if (setting.choices) {
       data.options = Object.entries(setting.choices).map(([value, label]) => ({ label: _loc(label), value }));
+    }
     return data;
   }
 
@@ -109,8 +112,9 @@ export default class BaseConfig extends TeriockBaseApplication {
    */
   createSettingFields(settings) {
     if (typeof settings === "object") {
-      if (!game.user.isGM)
+      if (!game.user.isGM) {
         settings = Object.fromEntries(Object.entries(settings).filter(([_k, v]) => v.scope !== "world"));
+      }
       settings = Object.keys(settings);
     }
     return settings.map(s => this.createSettingField(s));

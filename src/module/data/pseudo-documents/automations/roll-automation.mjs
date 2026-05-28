@@ -84,7 +84,8 @@ export default class RollAutomation
 
   /** @inheritDoc */
   prepareData() {
-    if (this.document?.type === "ability" && game.teriock.getSetting("rollImpactsOnUse") && !this.trigger)
+    if (this.document?.type === "ability" && game.teriock.getSetting("rollImpactsOnUse") && !this.trigger) {
       this.trigger = "execute";
+    }
   }
 }

@@ -26,7 +26,7 @@ export default class PropertySheet extends mixClasses(BaseEffectSheet, mixins.Wi
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) return;
+    if (!this.isEditable) { return; }
     this._connectBuildContextMenu(".form-type-box", TERIOCK.config.effect.form, "system.form", "click");
   }
 

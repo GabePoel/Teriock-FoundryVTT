@@ -29,8 +29,9 @@ export function migrateUuid(uuid) {
  * @param {(val) => *} [transform]
  */
 export function migrateKey(source, oldKey, newKey, transform = val => val) {
-  if (hasProperty(source, oldKey) && !hasProperty(source, newKey))
+  if (hasProperty(source, oldKey) && !hasProperty(source, newKey)) {
     setProperty(source, transform(newKey), getProperty(source, oldKey));
+  }
   deleteProperty(source, oldKey);
 }
 
@@ -42,7 +43,7 @@ export function migrateKey(source, oldKey, newKey, transform = val => val) {
  * @param {string} newVal
  */
 export function migrateValue(source, key, oldVal, newVal) {
-  if (getProperty(source, key) === oldVal) setProperty(source, key, newVal);
+  if (getProperty(source, key) === oldVal) { setProperty(source, key, newVal); }
 }
 
 /**
@@ -52,5 +53,5 @@ export function migrateValue(source, key, oldVal, newVal) {
  * @param {(val) => *} transform
  */
 export function migrateValueTransform(source, key, transform) {
-  if (getProperty(source, key)) setProperty(source, key, transform(getProperty(source, key)));
+  if (getProperty(source, key)) { setProperty(source, key, transform(getProperty(source, key))); }
 }

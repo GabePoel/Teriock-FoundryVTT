@@ -90,10 +90,10 @@ export default class StatDieModel extends EmbeddedDataModel {
    * @returns {Promise<void>}
    */
   async toggle(spent) {
-    if (typeof spent === "undefined") spent = !this.spent;
+    if (typeof spent === "undefined") { spent = !this.spent; }
     const spentCopy = new Set(Array.from(this.parent.spent));
-    if (spent) spentCopy.add(this.index);
-    else spentCopy.delete(this.index);
+    if (spent) { spentCopy.add(this.index); }
+    else { spentCopy.delete(this.index); }
     const updatePath = `system.statDice.${this.parent.stat}.spent`;
     await this.document.update({ [updatePath]: Array.from(spentCopy) });
   }
@@ -106,7 +106,7 @@ export default class StatDieModel extends EmbeddedDataModel {
   async use(spend = true) {
     let proceed = !this.spent;
     if (this.spent) {
-      if (!game.teriock.getSetting("confirmStatDiceRerolls")) proceed = true;
+      if (!game.teriock.getSetting("confirmStatDiceRerolls")) { proceed = true; }
       else {
         proceed = await TeriockDialog.confirm({
           content: _loc("TERIOCK.MODELS.StatDie.DIALOG.Reroll.content"),
@@ -134,7 +134,7 @@ export default class StatDieModel extends EmbeddedDataModel {
         system: { avatar: this.parent.parent.parent.actor.img, panels },
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });
-      if (spend) await this.toggle(true);
+      if (spend) { await this.toggle(true); }
     }
   }
 }

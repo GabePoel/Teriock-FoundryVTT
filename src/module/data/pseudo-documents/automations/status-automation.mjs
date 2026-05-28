@@ -41,7 +41,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
     const paths = super._formPaths;
     if (this.relation === "include" && !this.isPassive) {
       paths.push(...["hr", "executor", "target"]);
-      if (this.target) paths.push("multi");
+      if (this.target) { paths.push("multi"); }
     }
     return paths;
   }

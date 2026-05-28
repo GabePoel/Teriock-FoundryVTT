@@ -42,13 +42,13 @@ export default class CommonOutcomesAutomation
    */
   async #applyCommonOutcomes(scope = {}) {
     const actor = scope?.actor ?? this.document.actor;
-    if (!actor) return;
+    if (!actor) { return; }
     const outcomes = listFormat(this.common.map(c => TERIOCK.config.consequence.common[c]));
     const shouldApply = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.CommonOutcomes.DIALOG.content",
       data: { outcomes },
     });
-    if (!shouldApply) return;
+    if (!shouldApply) { return; }
     await this._activateActivations(scope);
   }
 
@@ -79,7 +79,7 @@ export default class CommonOutcomesAutomation
     }
     return Array.from(this.common).filter(Boolean).map(c => {
       const Act = Object.values(activations).find(A => A.TYPE === c);
-      if (Act) return new Act(foundry.utils.deepClone(activationOptions));
+      if (Act) { return new Act(foundry.utils.deepClone(activationOptions)); }
     }).filter(Boolean);
   }
 

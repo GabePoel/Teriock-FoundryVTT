@@ -19,7 +19,7 @@ export default class DefenseModel extends EmbeddedDataModel {
 
   /** @inheritDoc */
   static migrateData(source, options, state) {
-    if (typeof source.raw === "string") source.raw = toInt(source.raw);
+    if (typeof source.raw === "string") { source.raw = toInt(source.raw); }
     return super.migrateData(source, options, state);
   }
 

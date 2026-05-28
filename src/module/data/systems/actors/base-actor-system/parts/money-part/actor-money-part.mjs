@@ -30,8 +30,9 @@ export default Base => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        for (const k of Object.keys(currencyConfig))
+        for (const k of Object.keys(currencyConfig)) {
           rollData[`money.${currencyConfig[k].abbreviation}`] = this.money[k];
+        }
         rollData["money.debt"] = this.money.debt;
         rollData["money"] = this.money.total;
         return rollData;
@@ -87,7 +88,7 @@ export default Base => {
 
         // First pass: Deduct currencies starting from the highest value
         for (const currency of currencies) {
-          if (remainingAmount <= 0) break;
+          if (remainingAmount <= 0) { break; }
 
           const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.value));
           if (canTake > 0) {
@@ -99,7 +100,7 @@ export default Base => {
         // If we still need to pay more, take higher denominations for change
         if (remainingAmount > 0) {
           for (const currency of currencies) {
-            if (remainingAmount <= 0) break;
+            if (remainingAmount <= 0) { break; }
 
             const alreadyTaken = toDeduct[currency.key] || 0;
             const stillHave = currency.current - alreadyTaken;
@@ -119,8 +120,9 @@ export default Base => {
         const updateData = {};
 
         // Deduct the currencies we're spending
-        for (const [currencyKey, amountToDeduct] of Object.entries(toDeduct))
-          updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct;
+        for (
+          const [currencyKey, amountToDeduct] of Object.entries(toDeduct)
+        ) { updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct; }
 
         // Handle change for exact mode
         if (mode === "exact" && changeNeeded > 0) {
@@ -128,7 +130,7 @@ export default Base => {
 
           // Give change using the largest denominations possible
           for (const currency of currencies) {
-            if (changeRemaining <= 0) break;
+            if (changeRemaining <= 0) { break; }
 
             const changeAmount = Math.floor(changeRemaining / currency.value);
             if (changeAmount > 0) {
@@ -155,12 +157,5 @@ export default Base => {
  * @param {boolean} [integer] - If value must be an integer.
  */
 function currencyField(label, integer = true) {
-  return new fields.NumberField({
-    initial: 0,
-    integer,
-    label,
-    min: 0,
-    nullable: false,
-    placeholder: "0",
-  });
+  return new fields.NumberField({ initial: 0, integer, label, min: 0, nullable: false, placeholder: "0" });
 }

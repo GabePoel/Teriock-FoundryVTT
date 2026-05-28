@@ -97,8 +97,8 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
    * @returns {boolean}
    */
   get isPassive() {
-    if (this.document.type === "ability") return this.parent["maneuver"] === "passive";
-    else return this.document.type === "property";
+    if (this.document.type === "ability") { return this.parent["maneuver"] === "passive"; }
+    else { return this.document.type === "property"; }
   }
 
   /**
@@ -115,9 +115,9 @@ export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocu
    * @returns {boolean}
    */
   checkIfQualified(rollData = {}) {
-    if (this.activeQualifier === "1") return true;
-    else if (this.activeQualifier === "0" || !this.activeQualifier) return false;
-    else return !!BaseRoll.minValue(this.activeQualifier, rollData ?? this.getRollData());
+    if (this.activeQualifier === "1") { return true; }
+    else if (this.activeQualifier === "0" || !this.activeQualifier) { return false; }
+    else { return !!BaseRoll.minValue(this.activeQualifier, rollData ?? this.getRollData()); }
   }
 
   /**

@@ -7,7 +7,7 @@ import { icons } from "../../../constants/display/icons.mjs";
  * @returns {Promise<void>}
  */
 async function takeAttune(actor) {
-  if (!game.actors.check(actor)) return;
+  if (!game.actors.check(actor)) { return; }
   const choices = [...actor.equipment, ...actor.mounts].filter(a => !a.system.isAttuned);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Attune.hint",
@@ -24,7 +24,7 @@ async function takeAttune(actor) {
  * @returns {Promise<void>}
  */
 async function takeDeattune(actor) {
-  if (!game.actors.check(actor)) return;
+  if (!game.actors.check(actor)) { return; }
   const choices = [...actor.equipment, ...actor.mounts].filter(a => a.system.isAttuned);
   const chosen = await selectDocumentsDialog(choices, {
     hint: "TERIOCK.COMMANDS.Deattune.hint",

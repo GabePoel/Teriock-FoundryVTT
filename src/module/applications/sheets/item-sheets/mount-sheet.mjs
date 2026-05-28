@@ -13,8 +13,8 @@ export default class MountSheet extends BaseItemSheet {
    * @returns {Promise<void>}
    */
   static async #onToggleMounted() {
-    if (this.document.system.mounted) await this.document.system.unmount();
-    else await this.document.system.mount();
+    if (this.document.system.mounted) { await this.document.system.unmount(); }
+    else { await this.document.system.mount(); }
   }
 
   /** @inheritDoc */

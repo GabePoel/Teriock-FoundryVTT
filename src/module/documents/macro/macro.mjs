@@ -21,7 +21,7 @@ export default class TeriockMacro
    * @returns {TeriockFolder|null}
    */
   static get hotbarFolder() {
-    if (!game.teriock.getSetting("sortNewPlayerMacros")) return null;
+    if (!game.teriock.getSetting("sortNewPlayerMacros")) { return null; }
     return game.folders.find(f =>
       f.getFlag("teriock", "user") === game.user.id && f.getFlag("teriock", "hotbarFolder") && f.type === "Macro"
     );
@@ -32,9 +32,9 @@ export default class TeriockMacro
    * @returns {Promise<TeriockFolder>|null}
    */
   static async ensureHotbarFolder() {
-    if (!game.teriock.getSetting("sortNewPlayerMacros")) return null;
+    if (!game.teriock.getSetting("sortNewPlayerMacros")) { return null; }
     const hotbarFolder = this.hotbarFolder;
-    if (hotbarFolder) return hotbarFolder;
+    if (hotbarFolder) { return hotbarFolder; }
     await game.users.queryGM("teriock.createHotbarFolder", { id: game.user.id, name: game.user.name }, {
       failPrefix: "TERIOCK.SYSTEMS.Macro.QUERY.createHotbarFolder.failPrefix",
       localize: true,
@@ -53,7 +53,7 @@ export default class TeriockMacro
       && m.getFlag("teriock", "macroType") === "useGeneral"
       && m.getFlag("teriock", "macroLookupKey") === doc.lookupKey
     );
-    if (macro) return macro;
+    if (macro) { return macro; }
     return this.makeGeneralUseMacro(doc);
   }
 
@@ -66,7 +66,7 @@ export default class TeriockMacro
     const macro = game.macros.find(m =>
       m.getFlag("teriock", "macroType" === "useLinked") && m.getFlag("teriock", "macroUuid" === doc.uuid)
     );
-    if (macro) return macro;
+    if (macro) { return macro; }
     return this.makeLinkedUseMacro(doc);
   }
 
@@ -122,11 +122,11 @@ export default class TeriockMacro
     const { actor, event } = options;
     const tokens = /** @type {TeriockToken[]} */ game.canvas?.tokens.controlled ?? [];
     const actors = tokens.map(t => t.actor).filter(Boolean);
-    if (actors.length === 0 && options.actor) actors.push(actor);
+    if (actors.length === 0 && options.actor) { actors.push(actor); }
     game.actors.check(actors);
     for (const a of actors) {
       const doc = await findBestDocument(lookup, a);
-      if (doc) await doc.system.use({ actor: a, event });
+      if (doc) { await doc.system.use({ actor: a, event }); }
       else {
         ui.notifications.warn("TERIOCK.SYSTEMS.Macro.EXECUTION.noDocument", {
           format: { actor: a.name, lookup },
@@ -144,7 +144,7 @@ export default class TeriockMacro
    */
   static async useDocumentLinked(uuid, options = {}) {
     const doc = await fromUuid(uuid);
-    if (doc) await doc.system.use(Object.assign(options, { actor: doc.actor }));
+    if (doc) { await doc.system.use(Object.assign(options, { actor: doc.actor })); }
   }
 
   /** @inheritDoc */
@@ -160,11 +160,12 @@ export default class TeriockMacro
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
     if (game.teriock.getSetting("sortNewPlayerMacros") && !this.folder) {
-      if ((!game.user.isGM && this.constructor.hotbarFolder) || game.users.activeGM)
+      if ((!game.user.isGM && this.constructor.hotbarFolder) || game.users.activeGM) {
         this.updateSource({ folder: (await this.constructor.ensureHotbarFolder())?.id });
+      }
     }
   }
 

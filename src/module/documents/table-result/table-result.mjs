@@ -38,11 +38,11 @@ export default class TeriockTableResult
    * @returns {Promise<Teriock.Activations.Any[]>}
    */
   async getActivations() {
-    if (!this.documentUuid) return [];
+    if (!this.documentUuid) { return []; }
     const parsed = foundry.utils.parseUuid(this.documentUuid);
-    if (!parsed) return [];
+    if (!parsed) { return []; }
     const doc = await fromUuid(this.documentUuid);
-    if (!doc) return [];
+    if (!doc) { return []; }
     const activations = [];
     const name = doc.fullName ?? doc.name ?? "";
     if (doc.documentName === "Actor") {
@@ -51,8 +51,9 @@ export default class TeriockTableResult
       });
       activations.push(new SummonActivation({ display: { label }, uuids: [this.documentUuid] }));
     }
-    if (doc.documentName === "Macro")
+    if (doc.documentName === "Macro") {
       activations.push(new MacroActivation({ display: { label: name }, macro: this.documentUuid }));
+    }
     if (["ActiveEffect", "Item", "RollTable"].includes(doc.documentName)) {
       const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name });
       const icon = TERIOCK.config.document[doc.type]?.icon;

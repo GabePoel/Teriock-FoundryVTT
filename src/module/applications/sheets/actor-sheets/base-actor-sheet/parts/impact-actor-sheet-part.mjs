@@ -26,7 +26,7 @@ export default Base =>
       if (TERIOCK.config.impact[impact]?.morganti) {
         const cost = Object.entries(TERIOCK.config.cost.primary.keys).find(([_k, v]) => v.impact === impact);
         const stat = cost ? cost[0] : null;
-        if (!stat) return;
+        if (!stat) { return; }
         const field = new fields.NumberField({
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.ApplyMorganti.hint", {
             effect: TERIOCK.config.impact[impact]?.label?.toLowerCase(),

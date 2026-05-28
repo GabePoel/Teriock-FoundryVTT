@@ -84,7 +84,7 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     // Listen for updates from the available refresh source documents
     this.element.querySelectorAll("input[type='radio']").forEach(el => {
       el.addEventListener("change", () => {
-        if (el?.checked) this.selected = el.value;
+        if (el?.checked) { this.selected = el.value; }
       });
     });
     // Listen for refresh option updates

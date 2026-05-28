@@ -83,7 +83,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
 
   /** @returns {AnyActor|null} */
   get actor() {
-    if (this._actor) return this._actor;
+    if (this._actor) { return this._actor; }
     return game.actors.default;
   }
 
@@ -99,8 +99,8 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
 
   /** @param {TypeCollection | Teriock.Automations.Any[]} automations */
   set automations(automations) {
-    if (Array.isArray(automations)) this._automations = automations;
-    if (automations instanceof TypeCollection) this._automations = automations.contents;
+    if (Array.isArray(automations)) { this._automations = automations; }
+    if (automations instanceof TypeCollection) { this._automations = automations.contents; }
   }
 
   /**
@@ -187,8 +187,9 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    * @returns {Promise<false|void>}
    */
   async _buildRolls() {
-    if (formulaExists(this.formula))
+    if (formulaExists(this.formula)) {
       this.rolls.push(new this._RollClass(this.formula, this.rollData, this.rollOptions));
+    }
   }
 
   /**
@@ -215,7 +216,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    * @param {Teriock.Execution.BaseExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (options.competence !== undefined) this.competence.raw = options.competence;
+    if (options.competence !== undefined) { this.competence.raw = options.competence; }
   }
 
   /**
@@ -224,7 +225,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    */
   async _evaluateRolls() {
     const rollPromises = [];
-    for (const roll of this.rolls) rollPromises.push(roll.evaluate());
+    for (const roll of this.rolls) { rollPromises.push(roll.evaluate()); }
     await Promise.all(rollPromises);
   }
 
@@ -263,8 +264,8 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    */
   async _improveFormula() {
     if (this.competenceImprovesFormula) {
-      if (this.competence.fluent) this.formula = addFormula(this.formula, "@f");
-      else if (this.competence.proficient) this.formula = addFormula(this.formula, "@p");
+      if (this.competence.fluent) { this.formula = addFormula(this.formula, "@f"); }
+      else if (this.competence.proficient) { this.formula = addFormula(this.formula, "@p"); }
     }
   }
 
@@ -286,7 +287,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
     const results = await Promise.all(
       this.executionNames.map(n => this.fireTrigger(`executeInput${n}`, { awaitFire: true })),
     );
-    if (results.includes(false)) return false;
+    if (results.includes(false)) { return false; }
   }
 
   /**
@@ -298,7 +299,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
     const results = await Promise.all(
       this.executionNames.map(n => this.fireTrigger(`preExecute${n}`, { awaitFire: true })),
     );
-    if (results.includes(false)) return false;
+    if (results.includes(false)) { return false; }
   }
 
   /**
@@ -320,7 +321,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    * @returns {Promise<false|void>}
    */
   async _updateActor() {
-    if (this.actor && Object.keys(this.updates).length > 0) await this.actor.update(this.updates);
+    if (this.actor && Object.keys(this.updates).length > 0) { await this.actor.update(this.updates); }
   }
 
   /**
@@ -328,19 +329,19 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
    * @returns {Promise<false|void>}
    */
   async execute() {
-    if ((await this._getInput()) === false) return false;
-    if ((await this._postInput()) === false) return false;
-    if ((await this._prepareFormula()) === false) return false;
-    if ((await this._buildRolls()) === false) return false;
-    if ((await this._evaluateRolls()) === false) return false;
-    if ((await this._buildPanels()) === false) return false;
-    if ((await this._buildActivations()) === false) return false;
-    if ((await this._buildTags()) === false) return false;
-    if ((await this._preExecute()) === false) return false;
-    if ((await this._createChatMessage()) === false) return false;
-    if ((await this._prepareUpdates()) === false) return false;
-    if ((await this._updateActor()) === false) return false;
-    if ((await this._postExecute()) === false) return false;
+    if ((await this._getInput()) === false) { return false; }
+    if ((await this._postInput()) === false) { return false; }
+    if ((await this._prepareFormula()) === false) { return false; }
+    if ((await this._buildRolls()) === false) { return false; }
+    if ((await this._evaluateRolls()) === false) { return false; }
+    if ((await this._buildPanels()) === false) { return false; }
+    if ((await this._buildActivations()) === false) { return false; }
+    if ((await this._buildTags()) === false) { return false; }
+    if ((await this._preExecute()) === false) { return false; }
+    if ((await this._createChatMessage()) === false) { return false; }
+    if ((await this._prepareUpdates()) === false) { return false; }
+    if ((await this._updateActor()) === false) { return false; }
+    if ((await this._postExecute()) === false) { return false; }
   }
 
   /**

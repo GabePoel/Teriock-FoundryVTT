@@ -38,7 +38,7 @@ export default Base =>
     /** @inheritDoc */
     async _onRender(context, options) {
       await super._onRender(context, options);
-      if (!this.isEditable) return;
+      if (!this.isEditable) { return; }
       this.#createContextMenu(".equipment-add-button", ["equipment", "body", "mount"]);
       this.#createContextMenu(".consequence-add-button", ["consequence", "attunement"]);
       this.#createContextMenu(".power-add-button", ["species", "power"]);

@@ -15,11 +15,12 @@ const ASSETS = ["css", "src", "packs", "lang", "system.json", "README.md"];
 
 console.log(`--- Starting Build v${VERSION} ---`);
 
-if (fs.existsSync(DIST_DIR)) fs.rmSync(DIST_DIR, { force: true, recursive: true });
+if (fs.existsSync(DIST_DIR)) { fs.rmSync(DIST_DIR, { force: true, recursive: true }); }
 fs.mkdirSync(SYSTEM_DIR, { recursive: true });
 
-for (const dst of [MANIFEST_DST, MANIFEST_VERSIONED_DST])
+for (const dst of [MANIFEST_DST, MANIFEST_VERSIONED_DST]) {
   await fs.promises.writeFile(dst, JSON.stringify(manifest, null, 2), "utf8");
+}
 
 for (const asset of ASSETS) {
   const srcPath = path.join(ROOT, asset);
@@ -31,32 +32,41 @@ for (const asset of ASSETS) {
       recursive: true,
       filter: src => {
         const fileName = path.basename(src);
-        if (fileName === "macros") return false;
-        if (fileName === "en") return false;
-        if (fileName === "categories") return false;
-        if (fileName.endsWith(".d.ts")) return false;
-        if (fileName.endsWith(".scss")) return false;
-        if (fileName.endsWith(".yml")) return false;
-        if (fileName.startsWith("_")) return fileName === "_module.mjs";
+        if (fileName === "macros") { return false; }
+        if (fileName === "en") { return false; }
+        if (fileName === "categories") { return false; }
+        if (fileName.endsWith(".d.ts")) { return false; }
+        if (fileName.endsWith(".scss")) { return false; }
+        if (fileName.endsWith(".yml")) { return false; }
+        if (fileName.startsWith("_")) { return fileName === "_module.mjs"; }
         return true;
       },
     });
   }
 }
 
+/**
+ * Remove empty directories.
+ * @param {PathLike} dir
+ * @returns {Promise<void>}
+ */
 async function removeEmptyDirs(dir) {
   const isDir = (await fs.promises.lstat(dir)).isDirectory();
-  if (!isDir) return;
+  if (!isDir) { return; }
   let files = await fs.promises.readdir(dir);
   if (files.length > 0) {
     await Promise.all(files.map(file => removeEmptyDirs(path.join(dir, file))));
     files = await fs.promises.readdir(dir);
   }
-  if (files.length === 0) await fs.promises.rmdir(dir);
+  if (files.length === 0) { await fs.promises.rmdir(dir); }
 }
 
 await removeEmptyDirs(SYSTEM_DIR);
 
+/**
+ * Create a ZIP.
+ * @returns {Promise<unknown>}
+ */
 async function createZip() {
   const output = fs.createWriteStream(ZIP_PATH);
   const archive = archiver("zip", { zlib: { level: 9 } });

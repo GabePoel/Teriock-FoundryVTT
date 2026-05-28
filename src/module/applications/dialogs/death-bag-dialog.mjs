@@ -38,8 +38,9 @@ export default async function deathBagDialog(actor) {
       label: _loc("TERIOCK.DIALOGS.DeathBag.BUTTONS.makePull"),
       callback: async (_event, button) => {
         const stonesFormulas = {};
-        for (const color of ["black", "red", "white"])
+        for (const color of ["black", "red", "white"]) {
           stonesFormulas[color] = button.form.elements.namedItem(color).value;
+        }
         await deathBagPull(button.form.elements.namedItem("pull").value, stonesFormulas, actor);
       },
     }],
@@ -59,7 +60,7 @@ export default async function deathBagDialog(actor) {
  */
 async function deathBagPull(pullFormula, stonesFormulas, actor) {
   let rollData = {};
-  if (actor) rollData = actor.getRollData();
+  if (actor) { rollData = actor.getRollData(); }
   const toPullCount = Math.floor(Math.max(await BaseRoll.getValue(pullFormula, rollData), 0));
   const startingStones =
     /** @type {Record<Teriock.Keys.DeathBagStoneColor, number>} */
@@ -83,7 +84,11 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
       localize: true,
     });
   } else {
-    for (const color of Object.keys(startingStones)) for (let i = 0; i < startingStones[color]; i++) bag.push(color);
+    for (const color of Object.keys(startingStones)) {
+      for (let i = 0; i < startingStones[color]; i++) {
+        bag.push(color);
+      }
+    }
     wrappers.push(_loc("TERIOCK.DIALOGS.DeathBag.PANEL.total", { count: bag.length }));
     if (bag.length < toPullCount) {
       ui.notifications.error("TERIOCK.DIALOGS.DeathBag.ERRORS.cannotPull", {

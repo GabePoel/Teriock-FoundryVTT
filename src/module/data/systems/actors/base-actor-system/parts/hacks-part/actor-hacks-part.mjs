@@ -24,7 +24,7 @@ export default Base => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        for (const [k, v] of Object.entries(this.hacks || {})) rollData[`hack.${k}`] = v.value;
+        for (const [k, v] of Object.entries(this.hacks || {})) { rollData[`hack.${k}`] = v.value; }
         return rollData;
       }
 
@@ -45,7 +45,7 @@ export default Base => {
         const ids = [];
         for (let i = value; i < max; i++) {
           const id = (hackConfig[part]?.statuses ?? [])[i];
-          if (id) ids.push(id);
+          if (id) { ids.push(id); }
         }
         await this.parent.applyStatusEffects(ids);
       }

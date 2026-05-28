@@ -15,7 +15,7 @@ function tabActive(active, tab) {
  * @see {@link makeIcon}
  * @param {string} icon
  * @param {...string} styles
- * @returns {Handlebars.SafeString}
+ * @returns {string}
  */
 function makeIconHelper(icon, ...styles) {
   return new Handlebars.SafeString(makeIcon(icon, ...styles));
@@ -24,12 +24,12 @@ function makeIconHelper(icon, ...styles) {
 /**
  * Three-state toggle control markup.
  * @param {import("handlebars").HelperOptions} options
- * @returns {Handlebars.SafeString}
+ * @returns {string}
  */
 function threeToggle(options) {
   const { disabled, id, name } = options.hash;
   let value;
-  if (name && typeof name === "string") value = foundry.utils.getProperty(options.data.root, name);
+  if (name && typeof name === "string") { value = foundry.utils.getProperty(options.data.root, name); }
   const attrs = [
     id ? `id="${id}"` : "",
     name ? `data-name="${name}"` : "",

@@ -16,7 +16,7 @@ import { sortObject } from "./utils.mjs";
  */
 export function localizeChoices(choices, options = { sort: true }) {
   const out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _loc(v)]));
-  if (options.sort) return sortObject(out, { value: true });
+  if (options.sort) { return sortObject(out, { value: true }); }
   return out;
 }
 
@@ -30,9 +30,9 @@ export function sortObjectEntries(obj, sortKey) {
   let sorted = Object.entries(obj);
   const sort = (lhs, rhs) =>
     foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
-  if (foundry.utils.getType(sortKey) === "function") sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
-  else if (sortKey) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
-  else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
+  if (foundry.utils.getType(sortKey) === "function") { sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1])); }
+  else if (sortKey) { sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey])); }
+  else { sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1])); }
   return Object.fromEntries(sorted);
 }
 
@@ -56,7 +56,7 @@ const _preLocalizationRegistrations = {};
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
  */
 export function preLocalize(configKeyPath, { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {}) {
-  if (key) keys.unshift(key);
+  if (key) { keys.unshift(key); }
   _preLocalizationRegistrations[configKeyPath] = { keys, prefix, sort, suffix, transform };
 }
 
@@ -67,9 +67,9 @@ export function preLocalize(configKeyPath, { key, keys = [], prefix = "", sort =
 export function performPreLocalization(config) {
   for (const [keyPath, settings] of Object.entries(_preLocalizationRegistrations)) {
     const target = foundry.utils.getProperty(config, keyPath);
-    if (!target) continue;
+    if (!target) { continue; }
     localizeObject(target, settings);
-    if (settings.sort) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
+    if (settings.sort) { foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0])); }
   }
   Object.values(CONFIG.statusEffects).forEach(e => {
     e.name = _loc(e.name);
@@ -106,7 +106,7 @@ export function localizeObject(obj, { keys, prefix = "", suffix = "", transform 
 
     for (const key of keys) {
       const value = foundry.utils.getProperty(v, key);
-      if (!value) continue;
+      if (!value) { continue; }
       foundry.utils.setProperty(v, key, _loc(prefix + transformValue(value, transform) + suffix));
     }
   }
@@ -118,10 +118,10 @@ export function localizeObject(obj, { keys, prefix = "", suffix = "", transform 
  * @returns {string}
  */
 function transformValue(value, transform) {
-  if (transform === "lc") return value.toLowerCase();
-  if (transform === "uc") return value.toUpperCase();
-  if (transform === "cc") return toCamelCase(value);
-  if (transform === "kc") return toKebabCase(value);
+  if (transform === "lc") { return value.toLowerCase(); }
+  if (transform === "uc") { return value.toUpperCase(); }
+  if (transform === "cc") { return toCamelCase(value); }
+  if (transform === "kc") { return toKebabCase(value); }
   return value;
 }
 
@@ -134,6 +134,6 @@ function transformValue(value, transform) {
 export function listFormat(strings, options) {
   options = { sort: true, style: "long", type: "conjunction", ...options };
   const arr = Array.from(strings);
-  if (options.sort) arr.sort((a, b) => a.localeCompare(b));
+  if (options.sort) { arr.sort((a, b) => a.localeCompare(b)); }
   return game.i18n.getListFormatter(options).format(arr);
 }

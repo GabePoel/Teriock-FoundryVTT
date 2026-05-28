@@ -64,7 +64,7 @@ export default class SummonAutomation
   /** @inheritDoc */
   get _selectionPaths() {
     const paths = super._selectionPaths;
-    if (!this.trigger) paths.push("merge");
+    if (!this.trigger) { paths.push("merge"); }
     return paths;
   }
 
@@ -72,7 +72,7 @@ export default class SummonAutomation
   async _getActivations() {
     const activations = [];
     const uuids = Array.from(this.uuids).filter(this.#validateUuid);
-    if (this.merge) activations.push(new SummonActivation({ display: this.display, uuids }));
+    if (this.merge) { activations.push(new SummonActivation({ display: this.display, uuids })); }
     else {
       for (const uuid of uuids) {
         const doc = await resolveDocument(uuid);

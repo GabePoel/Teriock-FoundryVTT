@@ -52,9 +52,9 @@ export default Base => {
        * @returns {number}
        */
       get totalWeight() {
-        if (this.stashed) return 0;
+        if (this.stashed) { return 0; }
         let total = this.weight * (this.consumable ? this.quantity : 1) * this.weightMultiplier;
-        if (this.storage.enabled) total += this.storage.carriedWeight;
+        if (this.storage.enabled) { total += this.storage.carriedWeight; }
         return total.toNearest(equipmentConfig.weight.interval);
       }
 
@@ -68,7 +68,8 @@ export default Base => {
        * @returns {number}
        */
       get weightMultiplier() {
-        if (this.parent.elder?.type === "equipment") return this.parent.elder?.system?.storage?.weightMultiplier ?? 1;
+        if (this.parent.elder?.type === "equipment") { return this.parent.elder?.system?.storage?.weightMultiplier
+            ?? 1; }
         return 1;
       }
 
@@ -88,22 +89,22 @@ export default Base => {
       /** @inheritDoc */
       async _preCreate(data, options, user) {
         const yes = await super._preCreate(data, options, user);
-        if (yes === false) return false;
+        if (yes === false) { return false; }
 
         const elder = await this.parent.getElder();
-        if (elder?.type === "equipment" && !elder.system.storage.enabled) return false;
+        if (elder?.type === "equipment" && !elder.system.storage.enabled) { return false; }
       }
 
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
         const yes = await super._preUpdate(changes, options, user);
-        if (yes === false) return false;
+        if (yes === false) { return false; }
 
         const _sup = foundry.utils.getProperty(changes, "system._sup");
         if (_sup) {
           const collection = this.siblingCollection;
           const sup = await resolveDocument(collection?.get(_sup));
-          if (sup?.type === "equipment" && !sup.system.storage.enabled) return false;
+          if (sup?.type === "equipment" && !sup.system.storage.enabled) { return false; }
         }
       }
 
@@ -151,9 +152,9 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async groupStackDialog() {
-        if (!this.consumable) return;
+        if (!this.consumable) { return; }
         const candidates = this._stackingCandidates;
-        if (!candidates.length) return;
+        if (!candidates.length) { return; }
         const chosen = await selectDocumentDialog(candidates, {
           auto: true,
           hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.hint"),
@@ -162,7 +163,7 @@ export default Base => {
           textKey: "system.remainingString",
           title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.title"),
         });
-        if (!chosen) return;
+        if (!chosen) { return; }
         const operations = [{
           action: "update",
           documentName: "Item",
@@ -186,7 +187,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async groupUnstack(amount = 0) {
-        if (!this.consumable || !amount || amount >= this.quantity) return;
+        if (!this.consumable || !amount || amount >= this.quantity) { return; }
         const operations = [{
           action: "create",
           data: [
@@ -214,7 +215,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async groupUnstackDialog() {
-        if (!this.consumable || !this.quantity) return;
+        if (!this.consumable || !this.quantity) { return; }
         const content = document.createElement("div");
         const amountField = new NumberField({
           hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.amount.hint"),

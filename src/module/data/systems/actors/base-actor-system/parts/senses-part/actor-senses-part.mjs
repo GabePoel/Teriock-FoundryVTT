@@ -30,10 +30,12 @@ export default Base => {
 
       /** @inheritDoc */
       static migrateData(source, options, state) {
-        if (foundry.utils.hasProperty(source, "detection.hiding.raw"))
+        if (foundry.utils.hasProperty(source, "detection.hiding.raw")) {
           foundry.utils.deleteProperty(source, "detection.hiding");
-        if (foundry.utils.hasProperty(source, "detection.perceiving.raw"))
+        }
+        if (foundry.utils.hasProperty(source, "detection.perceiving.raw")) {
           foundry.utils.deleteProperty(source, "detection.perceiving");
+        }
         return super.migrateData(source, options, state);
       }
 

@@ -1,11 +1,11 @@
 /**
  * Ability automations part.
- * @param {typeof AbilitySystem} Base
+ * @param {typeof BaseEffectSystem} Base
  */
 export default Base => {
   return (
     /**
-     * @extends {AbilitySystem}
+     * @extends {BaseEffectSystem}
      * @mixin
      */
     class AbilityAutomationsPart extends Base {
@@ -14,7 +14,7 @@ export default Base => {
        * @returns {Teriock.Automations.Any[]}
        */
       get activeAutomations() {
-        if (this.maneuver !== "passive") return [];
+        if (this.maneuver !== "passive") { return []; }
         return super.activeAutomations;
       }
     }

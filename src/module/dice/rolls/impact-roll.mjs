@@ -29,8 +29,9 @@ export default class ImpactRoll extends BaseRoll {
    * Set the flavor if there's not one already defined.
    */
   #setImpactFlavor() {
-    if (this.hasImpact)
+    if (this.hasImpact) {
       this.options.flavor ??= _loc("TERIOCK.ROLLS.Base.name", { value: impactConfig[this.impact]?.label });
+    }
   }
 
   /**
@@ -93,8 +94,9 @@ export default class ImpactRoll extends BaseRoll {
 
   /** @inheritDoc */
   async getActivations() {
-    if (this.hasImpact)
+    if (this.hasImpact) {
       return [new teriock.data.pseudoDocuments.activations.TakeActivation({ amount: this.total, impact: this.impact })];
+    }
     return [];
   }
 }

@@ -42,20 +42,21 @@ export default Base => {
        * @returns {boolean} Whether or not there's some protection against the specified key and value
        */
       isProtected(category, value) {
-        for (const protectionData of Object.values(this.protections))
-          if ((protectionData[category] || new Set()).has(value)) return true;
+        for (
+          const protectionData of Object.values(this.protections)
+        ) { if ((protectionData[category] || new Set()).has(value)) { return true; } }
         return false;
       }
 
       /** @inheritDoc */
       prepareVirtualEffects() {
         super.prepareVirtualEffects();
-        if (this.parent.statuses.has("hollied")) this.protections.resistances.effectTypes.add("reanimation");
+        if (this.parent.statuses.has("hollied")) { this.protections.resistances.effectTypes.add("reanimation"); }
         if (this.parent.statuses.has("terrored")) {
           this.protections.resistances.effectTypes.add("healing");
           this.protections.resistances.effectTypes.add("revival");
         }
-        if (this.parent.statuses.has("frenzied")) this.protections.resistances.statuses.add("frightened");
+        if (this.parent.statuses.has("frenzied")) { this.protections.resistances.statuses.add("frightened"); }
       }
 
       /**
@@ -84,7 +85,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async rollResistance(options = {}) {
-        if (options.event) Object.assign(options, ThresholdRoll.parseEvent(options.event));
+        if (options.event) { Object.assign(options, ThresholdRoll.parseEvent(options.event)); }
         await this.parent.hookCall(options.hex ? "hexproof" : "resist");
         await new ResistanceExecution(Object.assign(options, { actor: this.parent })).execute();
       }

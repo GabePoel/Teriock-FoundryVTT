@@ -22,10 +22,10 @@ export default class TypedIdentifierField extends StringField {
 
   /** @inheritDoc */
   _validateType(value) {
-    if (value == null || value === "") return true;
+    if (value == null || value === "") { return true; }
     if (!typedIdentifierValidator(value, this.types)) {
       const parsed = value.includes(":") ? value.split(":")[0] : null;
-      if (!parsed) throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType"));
+      if (!parsed) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
       if (this.types?.length) {
         throw new Error(
           _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorWrongType", {
@@ -40,7 +40,7 @@ export default class TypedIdentifierField extends StringField {
 
   /** @inheritDoc */
   clean(value, options, _state) {
-    if (value === "") value = null;
+    if (value === "") { value = null; }
     return super.clean(value, options, _state);
   }
 }

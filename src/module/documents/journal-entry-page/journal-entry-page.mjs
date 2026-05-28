@@ -37,7 +37,7 @@ export default class TeriockJournalEntryPage
   /** @inheritDoc */
   async _buildEmbedHTML(config, options = {}) {
     const embed = await super._buildEmbedHTML(config, options);
-    if (!embed && this.system?.metadata?.isTextPage) return this._embedTextPage(config, options);
+    if (!embed && this.system?.metadata?.isTextPage) { return this._embedTextPage(config, options); }
     return embed;
   }
 
@@ -63,7 +63,7 @@ export default class TeriockJournalEntryPage
    * @returns {object}
    */
   getRollData() {
-    if (typeof this.system?.getRollData === "function") return this.system.getRollData();
-    else return {};
+    if (typeof this.system?.getRollData === "function") { return this.system.getRollData(); }
+    else { return {}; }
   }
 }

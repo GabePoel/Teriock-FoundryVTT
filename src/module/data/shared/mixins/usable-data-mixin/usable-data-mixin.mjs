@@ -71,7 +71,7 @@ export default function UsableDataMixin(Base) {
        */
       async use(options = {}) {
         options.source ??= this.parent;
-        if (options.event) Object.assign(options, this.constructor.parseEvent(options.event));
+        if (options.event) { Object.assign(options, this.constructor.parseEvent(options.event)); }
         await this._use(options);
       }
     }

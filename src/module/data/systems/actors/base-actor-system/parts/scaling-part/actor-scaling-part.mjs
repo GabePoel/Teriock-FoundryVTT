@@ -62,8 +62,9 @@ export default Base => {
        */
       #getSpeciesRollData() {
         const data = {};
-        for (const s of this.parent.species.filter(s => s.active && s.system.identifier))
-          data[`species.${s.system.identifier}`] = 1;
+        for (
+          const s of this.parent.species.filter(s => s.active && s.system.identifier)
+        ) { data[`species.${s.system.identifier}`] = 1; }
         return data;
       }
 

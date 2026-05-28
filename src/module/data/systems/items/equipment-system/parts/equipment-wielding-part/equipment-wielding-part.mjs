@@ -53,8 +53,8 @@ export default Base => {
               : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
             visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
             onClick: async () => {
-              if (this.glued) await this.unglue();
-              else await this.glue();
+              if (this.glued) {await this.unglue();}
+              else { await this.glue(); }
             },
           },
           ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
@@ -66,8 +66,8 @@ export default Base => {
               : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
             visible: this.parent.isOwner,
             onClick: async () => {
-              if (this.equipped) await this.unequip();
-              else await this.equip();
+              if (this.equipped) {await this.unequip();}
+              else { await this.equip(); }
             },
           },
         ];
@@ -153,7 +153,7 @@ export default Base => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.consumable && this.quantity === 0) this.equipped = false;
+        if (this.consumable && this.quantity === 0) { this.equipped = false; }
       }
 
       /**

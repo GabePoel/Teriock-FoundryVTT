@@ -5,7 +5,7 @@ import { toCamelCase } from "../../../../../helpers/string.mjs";
  */
 export default Base =>
   /**
-   * @extends {BaseActorSheet}
+   * @extends {BaseSheet}
    * @mixin
    */
   class FiltersActorSheetPart extends Base {
@@ -17,7 +17,7 @@ export default Base =>
      */
     _getFilteredAbilities(abilities = []) {
       const filters = this.settings.abilityFilters || {};
-      if (!abilities || !Array.isArray(abilities)) return [];
+      if (!abilities || !Array.isArray(abilities)) { return []; }
       return abilities.filter(a =>
         !a.isReference
         && binaryFilter(filters.basic, a.system.isBasic)
@@ -55,7 +55,7 @@ export default Base =>
      */
     _getFilteredEquipment(equipment = []) {
       const filters = this.settings.equipmentFilters || {};
-      if (!equipment || !Array.isArray(equipment)) return [];
+      if (!equipment || !Array.isArray(equipment)) { return []; }
       return equipment.filter(e =>
         (!filters.properties || hasProperty(e, filters.properties))
         && (!filters.materialProperties || hasProperty(e, filters.materialProperties))
@@ -97,8 +97,8 @@ export default Base =>
  */
 function binaryFilter(filterVal, actualVal) {
   let out = true;
-  if (typeof filterVal === "boolean") out = !filterVal || actualVal;
-  else if (typeof filterVal === "number") out = filterVal === 1 ? actualVal : filterVal === -1 ? !actualVal : true;
+  if (typeof filterVal === "boolean") { out = !filterVal || actualVal; }
+  else if (typeof filterVal === "number") { out = filterVal === 1 ? actualVal : filterVal === -1 ? !actualVal : true; }
   return out;
 }
 

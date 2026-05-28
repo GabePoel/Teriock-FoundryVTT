@@ -91,7 +91,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
   /** @inheritDoc */
   get _statusTags() {
     const tags = super._statusTags;
-    if (this.needsAttunement) tags.push("TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true");
+    if (this.needsAttunement) { tags.push("TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.true"); }
     return tags;
   }
 
@@ -125,7 +125,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    */
   get isReference() {
     const sups = /** @type {TeriockAbility[]} */ this.parent.allSups.contents;
-    for (const sup of sups) if (sup.type === "ability" && sup.system?.maneuver !== "passive") return true;
+    for (const sup of sups) { if (sup.type === "ability" && sup.system?.maneuver !== "passive") { return true; } }
     return super.isReference;
   }
 
@@ -172,7 +172,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    */
   get qualifiedChanges() {
     const changes = [];
-    for (const a of this.activeAutomations.filter(a => a.metadata.changes)) changes.push(...a.getChanges());
+    for (const a of this.activeAutomations.filter(a => a.metadata.changes)) { changes.push(...a.getChanges()); }
     return changes;
   }
 
@@ -181,15 +181,15 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {Promise<void>}
    */
   async expire() {
-    if (!this.deleteOnExpire) await this.parent.hookCall("effectExpiration");
-    if (this.deleteOnExpire) await this.parent.delete();
-    else await this.parent.update({ disabled: true });
+    if (!this.deleteOnExpire) { await this.parent.hookCall("effectExpiration"); }
+    if (this.deleteOnExpire) { await this.parent.delete(); }
+    else { await this.parent.update({ disabled: true }); }
   }
 
   /** @inheritDoc */
   getLocalRollData() {
     const data = super.getLocalRollData();
-    for (const status of this.parent.statuses) data[`condition.${status}`] = 1;
+    for (const status of this.parent.statuses) { data[`condition.${status}`] = 1; }
     return data;
   }
 
@@ -200,7 +200,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
       a.type === StatusAutomation.TYPE
     );
     statusAutomations.forEach(a => {
-      if (a.relation === "include") this.parent.statuses.add(a.status);
+      if (a.relation === "include") { this.parent.statuses.add(a.status); }
     });
   }
 
@@ -215,7 +215,7 @@ export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeD
    * @returns {Promise<boolean>} True if the effect should expire, false otherwise.
    */
   async shouldExpire() {
-    if (!this.parent.isTemporary) return false;
+    if (!this.parent.isTemporary) { return false; }
     return this.parent.duration.remaining < 0;
   }
 }

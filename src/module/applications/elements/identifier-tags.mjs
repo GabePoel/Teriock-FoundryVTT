@@ -38,14 +38,14 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    */
   static create(config) {
     let values;
-    if (config.value instanceof Set) values = Array.from(config.value);
-    else if (!Array.isArray(config.value)) values = config.value ? [config.value] : [];
-    else values = config.value;
+    if (config.value instanceof Set) { values = Array.from(config.value); }
+    else if (!Array.isArray(config.value)) { values = config.value ? [config.value] : []; }
+    else { values = config.value; }
 
     const tags = new this({ values });
     tags.name = config.name;
     tags.setAttribute("value", values.join(","));
-    if (config.types?.length) tags.types = config.types;
+    if (config.types?.length) { tags.types = config.types; }
     tags.max = config.max;
     tags.single = config.single;
     foundry.applications.fields.setInputAttributes(tags, config);
@@ -108,16 +108,17 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    * @throws {Error}           If the identifier is not valid
    */
   #add(identifier) {
-    if (!this.editable) return;
+    if (!this.editable) { return; }
     identifier = this.#validateIdentifier(identifier);
 
     const { max, single } = this;
 
-    if (max && Object.keys(this._value).length >= max)
+    if (max && Object.keys(this._value).length >= max) {
       throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorMax", { max, name: this.name }));
+    }
 
     if (single) {
-      for (const k of Object.keys(this._value)) delete this._value[k];
+      for (const k of Object.keys(this._value)) { delete this._value[k]; }
     }
 
     this._value[identifier] = game.teriock.identifiers.getName(identifier) ?? identifier;
@@ -128,7 +129,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    * @param {PointerEvent} event
    */
   #onClickTag(event) {
-    if (!event.target.classList.contains("remove") || !this.editable) return;
+    if (!event.target.classList.contains("remove") || !this.editable) { return; }
     const tag = event.target.closest(".tag");
     delete this._value[tag.dataset.key];
     this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
@@ -150,8 +151,8 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     if (dropData.uuid) {
       fromUuid(dropData.uuid).then(d => {
         const identifier = d?.typedIdentifier;
-        if (identifier) this.#tryAdd(identifier);
-        else ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true });
+        if (identifier) { this.#tryAdd(identifier); }
+        else { ui.notifications.error("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.noIdentifier", { localize: true }); }
       });
       return;
     }
@@ -163,7 +164,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    * @param {KeyboardEvent} event
    */
   #onKeydown(event) {
-    if (event.key !== "Enter") return;
+    if (event.key !== "Enter") { return; }
     event.preventDefault();
     event.stopPropagation();
     this.#tryAdd(this.#input.value);
@@ -175,8 +176,8 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    */
   #resolvePlaceholderTypeLabel() {
     const { types } = this;
-    if (!types.length) return "TERIOCK.TERMS.Common.identifier";
-    if (types.length === 1) return TERIOCK.config.document[types[0]]?.label ?? types[0];
+    if (!types.length) { return "TERIOCK.TERMS.Common.identifier"; }
+    if (types.length === 1) { return TERIOCK.config.document[types[0]]?.label ?? types[0]; }
     return types.map(t => _loc(TERIOCK.config.document[t]?.label ?? t)).join(", ");
   }
 
@@ -204,11 +205,11 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    */
   #validateIdentifier(identifier) {
     identifier = identifier.trim();
-    if (!identifier) throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank"));
+    if (!identifier) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank")); }
     const requiredTypes = this.types;
     if (!typedIdentifierValidator(identifier, requiredTypes)) {
       const parsed = parseIdentifier(identifier);
-      if (!parsed.type) throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType"));
+      if (!parsed.type) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
       if (requiredTypes.length) {
         throw new Error(
           _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorWrongType", {
@@ -240,8 +241,8 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /** @param {number} value */
   set max(value) {
-    if (Number.isInteger(value) && value > 0) this.setAttribute("max", String(value));
-    else this.removeAttribute("max");
+    if (Number.isInteger(value) && value > 0) { this.setAttribute("max", String(value)); }
+    else { this.removeAttribute("max"); }
   }
 
   /**
@@ -263,7 +264,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    */
   get types() {
     const attr = this.getAttribute("types");
-    if (!attr) return [];
+    if (!attr) { return []; }
     return attr.split(",").map(t => t.trim()).filter(Boolean);
   }
 
@@ -274,8 +275,9 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
       return;
     }
     for (const type of value) {
-      if (!TERIOCK.config.document[type])
+      if (!TERIOCK.config.document[type]) {
         throw new Error(`"${type}" is not a valid Teriock document type in TERIOCK.config.document`);
+      }
     }
     this.setAttribute("types", value.join(","));
   }
@@ -310,7 +312,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   /** @override */
   _getValue() {
     const identifiers = Object.keys(this._value);
-    if (this.single) return identifiers[0] ?? null;
+    if (this.single) { return identifiers[0] ?? null; }
     return identifiers;
   }
 
@@ -320,14 +322,14 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    */
   _initializeTags(values) {
     let tags = [];
-    if (Array.isArray(values)) tags = values;
+    if (Array.isArray(values)) { tags = values; }
     else {
       const initial = this.getAttribute("value") || this.innerText || "";
-      if (initial) tags = initial.split(",");
+      if (initial) { tags = initial.split(","); }
     }
     for (const t of tags) {
       const identifier = t.trim();
-      if (!identifier) continue;
+      if (!identifier) { continue; }
       try {
         this.#add(identifier);
       } catch {
@@ -340,7 +342,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
 
   /** @override */
   _refresh() {
-    if (!this.#tags) return;
+    if (!this.#tags) { return; }
     const tags = Object.entries(this._value).map(([k, v]) => this.constructor.renderTag(k, v, this.editable));
     this.#tags.replaceChildren(...tags);
   }
@@ -352,7 +354,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
       this._refresh();
       return;
     }
-    if (typeof value === "string") value = [value];
+    if (typeof value === "string") { value = [value]; }
     for (const identifier of value) {
       try {
         this.#add(identifier);

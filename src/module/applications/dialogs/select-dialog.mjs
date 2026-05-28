@@ -75,7 +75,7 @@ export async function selectDialog(choices, options = {}) {
       label: _loc("TERIOCK.DIALOGS.Select.otherButton"),
       callback: async (_event, _button, dialog) => {
         dialog.classList.add("force-hidden");
-        if (genericOther) return null;
+        if (genericOther) { return null; }
 
         return await TeriockDialog.prompt({
           content: otherContentHtml,
@@ -162,15 +162,15 @@ export async function selectTradecraftDialog(tradecrafts) {
 export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}) {
   const tradecraftJournal = await resolveDocument(game.teriock.packs.rules.getName("Tradecraft"));
   let choices = tradecraftJournal?.pages.contents;
-  if (tradecrafts) choices = choices.filter(t => tradecrafts.includes(t.system.identifier));
-  if (choices.length === 0) return [];
+  if (tradecrafts) { choices = choices.filter(t => tradecrafts.includes(t.system.identifier)); }
+  if (choices.length === 0) { return []; }
   const chosen = await selectDocumentsDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Tradecraft.hint"),
     multi,
     openable: true,
     title: _loc("TERIOCK.DIALOGS.Select.Tradecraft.title"),
   });
-  if (!chosen) return [];
+  if (!chosen) { return []; }
   return chosen.map(c => c.system.identifier);
 }
 
@@ -257,15 +257,15 @@ export async function selectBodyPartDialog() {
 export async function selectClassDialog(classes = null) {
   const classJournal = await resolveDocument(game.teriock.packs.rules.getName("Class"));
   let choices = classJournal?.pages.contents;
-  if (classes) choices = choices.filter(c => classes.includes(c.system.identifier));
-  if (choices.length === 0) return null;
+  if (classes) { choices = choices.filter(c => classes.includes(c.system.identifier)); }
+  if (choices.length === 0) { return null; }
   const chosen = await selectDocumentDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Class.hint"),
     openable: true,
     title: _loc("TERIOCK.DIALOGS.Select.Class.title"),
   });
-  if (chosen) return chosen.system.identifier;
-  else return null;
+  if (chosen) { return chosen.system.identifier; }
+  else { return null; }
 }
 
 /**

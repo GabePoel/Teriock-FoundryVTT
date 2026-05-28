@@ -46,7 +46,7 @@ export default class BaseRegistryLifecycle {
    * Populate the registry for the first time.
    */
   _initialize() {
-    if (!game._documentsReady || this.#initialized) return;
+    if (!game._documentsReady || this.#initialized) { return; }
     this.#resolveInitialization();
     this.#initialized = true;
   }

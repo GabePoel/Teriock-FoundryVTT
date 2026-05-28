@@ -7,16 +7,16 @@ import { icons } from "../../../constants/display/icons.mjs";
  * @returns {Promise<void>}
  */
 async function use(actor, options = {}) {
-  if (!game.actors.check(actor)) return;
-  if (options.event?.shiftKey) options.select = true;
+  if (!game.actors.check(actor)) { return; }
+  if (options.event?.shiftKey) { options.select = true; }
   let attacker = actor?.system?.wielding.attacker;
   if (options.armament) {
     const newAttacker = await foundry.utils.fromUuid(options.armament, { relative: actor });
-    if (newAttacker) attacker = newAttacker;
+    if (newAttacker) { attacker = newAttacker; }
   }
   if (options.select) {
     const selOpts = { noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems" };
-    if (attacker?.uuid) selOpts.checked = attacker.uuid;
+    if (attacker?.uuid) { selOpts.checked = attacker.uuid; }
     attacker = await selectDocumentDialog(actor.armaments.filter(a => a.active), selOpts);
   }
   if (!attacker) {

@@ -141,12 +141,13 @@ export default class RegionAutomation
    */
   #evaluate(path, rollData, execution = null) {
     let out = 0;
-    if (path !== "angle" && !this[path] && execution) out = execution.source.system.range.currentValue ?? 0;
-    else if (this[path]) out = BaseRoll.minValue(this[path], rollData);
-    if (path === "angle") return out;
+    if (path !== "angle" && !this[path] && execution) { out = execution.source.system.range.currentValue ?? 0; }
+    else if (this[path]) { out = BaseRoll.minValue(this[path], rollData); }
+    if (path === "angle") { return out; }
     out *= canvas.dimensions.distancePixels;
-    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken)
+    if (this.expandWithToken && this.regionType !== "emanation" && execution && execution.actor?.defaultToken) {
       out += (execution.actor.defaultToken.w + execution.actor.defaultToken.h) / 4;
+    }
     return out;
   }
 
@@ -203,12 +204,12 @@ export default class RegionAutomation
    * @returns {string[]}
    */
   get _regionTypePaths() {
-    if (this.regionType === "rectangle") return ["width", "height"];
-    if (this.regionType === "circle") return ["radius"];
-    if (this.regionType === "ellipse") return ["radiusX", "radiusY"];
-    if (this.regionType === "emanation") return ["radius"];
-    if (this.regionType === "cone") return ["radius", "angle"];
-    if (this.regionType === "ring") return ["radius", "innerWidth", "outerWidth"];
+    if (this.regionType === "rectangle") { return ["width", "height"]; }
+    if (this.regionType === "circle") { return ["radius"]; }
+    if (this.regionType === "ellipse") { return ["radiusX", "radiusY"]; }
+    if (this.regionType === "emanation") { return ["radius"]; }
+    if (this.regionType === "cone") { return ["radius", "angle"]; }
+    if (this.regionType === "ring") { return ["radius", "innerWidth", "outerWidth"]; }
     return [];
   }
 
@@ -218,7 +219,7 @@ export default class RegionAutomation
    */
   get _restrictionPaths() {
     const paths = ["restriction.enabled"];
-    if (this.restriction.enabled) paths.push(...["restriction.type", "restriction.priority"]);
+    if (this.restriction.enabled) { paths.push(...["restriction.type", "restriction.priority"]); }
     return paths;
   }
 
@@ -253,7 +254,7 @@ export default class RegionAutomation
   async _preFire(scope) {
     const out = await super._preFire(scope);
     const region = Array.isArray(out) && out.length ? out[0] : null;
-    if (!region) return;
+    if (!region) { return; }
     if (scope.trigger === "executeInput" && this.targeting) {
       if (scope.execution && region.parent === game.scenes.viewed) {
         let releaseOthers = true;

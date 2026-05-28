@@ -32,14 +32,14 @@ export function makeIconElement(icon, ...styles) {
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIconClass(icon, ...styles) {
-  if (!icon) return "";
+  if (!icon) { return ""; }
   const prefix = "fa-";
   let start = "fa-fw";
   const styleClasses = styles.map(s => iconStyles[s] || s).filter(s => typeof s === "string");
-  if (icon.startsWith("ms-")) start += " mic";
+  if (icon.startsWith("ms-")) { start += " mic"; }
   if (icon.startsWith("mdi-")) {
     start += " mdi";
-    if (styleClasses.includes("light") || styleClasses.includes("regular")) icon = `${icon} ${icon}-outline`;
+    if (styleClasses.includes("light") || styleClasses.includes("regular")) { icon = `${icon} ${icon}-outline`; }
   }
   const classString = styleClasses.map(s => `${prefix}${s}`).join(" ");
   return `${start} ${classString} ${icon}`;
@@ -56,9 +56,9 @@ export function getRollIcon(rollFormula) {
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {
-    if (polyhedralDice.includes(die.faces)) return `fa-dice-d${die.faces}`;
-    else if (die.faces === 2) return "fa-coins";
-    else if (die.faces === 100) return "fa-percent";
+    if (polyhedralDice.includes(die.faces)) { return `fa-dice-d${die.faces}`; }
+    else if (die.faces === 2) { return "fa-coins"; }
+    else if (die.faces === 100) { return "fa-percent"; }
   }
   return "fa-dice";
 }
@@ -71,8 +71,8 @@ export function getRollIcon(rollFormula) {
 export function fancifyFields(displayFields) {
   return displayFields.map(f => {
     let fancy;
-    if (typeof f === "string") fancy = { path: f };
-    else fancy = f;
+    if (typeof f === "string") { fancy = { path: f }; }
+    else { fancy = f; }
     const { button, classes = "", dataset = {}, editable = true, label = "", path = fancy.path, visible = true } =
       fancy;
     return { button, classes, dataset, editable, label, path, visible };
@@ -155,7 +155,7 @@ export function objectMap(obj, fn, options = {}) {
  */
 export function choiceMap(obj, fn, options = { localize: true }) {
   const out = Object.fromEntries(Object.keys(obj).map(k => [k, fn(k)]));
-  if (options.localize) return localizeChoices(out);
+  if (options.localize) { return localizeChoices(out); }
   return out;
 }
 
@@ -169,7 +169,7 @@ export function choiceMap(obj, fn, options = { localize: true }) {
 export function formatDynamicSelectOptions(choices = {}, options = {}) {
   const out = {};
   const choiceArray = [];
-  if (Array.isArray(choices)) choiceArray.push(...choices);
+  if (Array.isArray(choices)) { choiceArray.push(...choices); }
   else {
     for (const group of Object.values(choices)) {
       const groupLabel = options.localize ? _loc(group.label) : group.label;
@@ -208,11 +208,11 @@ export function barClamp(bar, change) {
 export async function buildWriteOperation(operation) {
   if (operation.uuid && ["delete", "update"].includes(operation.action)) {
     const document = await foundry.utils.fromUuid(operation.uuid);
-    if (!document) return null;
+    if (!document) { return null; }
     if (operation.docData) {
       const data = [{ ...operation.docData, _id: document.id }];
-      if (operation.action === "update") operation.updates = data;
-      else if (operation.action === "create") operation.data = data;
+      if (operation.action === "update") { operation.updates = data; }
+      else if (operation.action === "create") { operation.data = data; }
       delete operation.docData;
     }
     if (document) {
@@ -239,10 +239,10 @@ export function consolidateWriteOperations(operations) {
   const consolidated = [];
   for (const op of operations) {
     const opMini = { ...op };
-    for (const exclusion of exclusions) delete opMini[exclusion];
+    for (const exclusion of exclusions) { delete opMini[exclusion]; }
     const comOp = consolidated.find(co => {
       const coMini = { ...co };
-      for (const exclusion of exclusions) delete coMini[exclusion];
+      for (const exclusion of exclusions) { delete coMini[exclusion]; }
       return foundry.utils.equals(opMini, coMini);
     });
     if (comOp) {
@@ -265,7 +265,7 @@ export function consolidateWriteOperations(operations) {
 export function inferIconFromIdentifier(identifier) {
   let icon = TERIOCK.config.document.document.icon;
   const parsed = parseIdentifier(identifier);
-  if (parsed?.type) icon = TERIOCK.config.document[parsed.type]?.icon ?? icon;
+  if (parsed?.type) { icon = TERIOCK.config.document[parsed.type]?.icon ?? icon; }
   return icon;
 }
 
@@ -294,10 +294,10 @@ export function parseIdentifier(identifier) {
  * @returns {Promise<AnyCommonDocument|null>}
  */
 export async function findBestDocument(lookup, relativeTo, options = {}) {
-  if (options.relativeOnly && typeof relativeTo?.getEffectiveChildren !== "function") return null;
-  if (!lookup) return null;
+  if (options.relativeOnly && typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
+  if (!lookup) { return null; }
   const doc = await fromIdentifier(lookup, { relativeOnly: !!options.relativeOnly, relativeTo });
-  if (doc) return doc;
+  if (doc) { return doc; }
   const children = await relativeTo.getEffectiveChildren();
   return children.find(c => c.lookupKey === lookup) ?? null;
 }
@@ -309,8 +309,8 @@ export async function findBestDocument(lookup, relativeTo, options = {}) {
  * @returns {Promise<AnyCommonDocument|null>}
  */
 export async function fromIdentifierLocal(identifier, relativeTo) {
-  if (typeof relativeTo?.getEffectiveChildren !== "function") return null;
-  if (!identifier) return null;
+  if (typeof relativeTo?.getEffectiveChildren !== "function") { return null; }
+  if (!identifier) { return null; }
   const children = await relativeTo.getEffectiveChildren();
   return children.find(c => c?.typedIdentifier === identifier || c?.system?.identifier === identifier) ?? null;
 }
@@ -323,15 +323,15 @@ export async function fromIdentifierLocal(identifier, relativeTo) {
  * @returns {Promise<AnyCommonDocument[]>}
  */
 export async function fromQualifier(document, qualifier) {
-  if (!document || !formulaExists(qualifier)) return [];
-  if (typeof document.getEffectiveChildren !== "function") return [];
+  if (!document || !formulaExists(qualifier)) { return []; }
+  if (typeof document.getEffectiveChildren !== "function") { return []; }
   const children = await document.getEffectiveChildren();
   const matched = [];
   for (const child of children) {
     const rollData = child.system?.getLocalRollData?.();
-    if (rollData === undefined) continue;
+    if (rollData === undefined) { continue; }
     const value = BaseRoll.minValue(qualifier, rollData, {});
-    if (value) matched.push(child);
+    if (value) { matched.push(child); }
   }
   return matched;
 }
@@ -343,7 +343,7 @@ export async function fromQualifier(document, qualifier) {
  * @returns {AnyCommonDocument|null}
  */
 export function fromIdentifierSync(identifier, options = {}) {
-  if (!identifier) return null;
+  if (!identifier) { return null; }
   return game.teriock.identifiers.fromIdentifierSync(identifier, options);
 }
 
@@ -354,12 +354,12 @@ export function fromIdentifierSync(identifier, options = {}) {
  * @returns {Promise<TeriockDocument|null>}
  */
 export async function fromIdentifier(identifier, options = {}) {
-  if (!identifier) return null;
-  if (options.relativeOnly && !options.relativeTo) return null;
+  if (!identifier) { return null; }
+  if (options.relativeOnly && !options.relativeTo) { return null; }
   if (options.relativeTo) {
     const doc = await fromIdentifierLocal(identifier, options.relativeTo);
-    if (doc) return doc;
-    if (options.relativeOnly) return null;
+    if (doc) { return doc; }
+    if (options.relativeOnly) { return null; }
   }
   return game.teriock.identifiers.fromIdentifier(identifier);
 }
@@ -371,9 +371,9 @@ export async function fromIdentifier(identifier, options = {}) {
  * @returns {Promise<unknown>}
  */
 export async function fromKey(uuidOrIdentifier, options = {}) {
-  if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes("."))
+  if (uuidOrIdentifier.includes(":") && !uuidOrIdentifier.includes(".")) {
     return fromIdentifier(uuidOrIdentifier, options);
-  else return fromUuid(uuidOrIdentifier, options);
+  } else { return fromUuid(uuidOrIdentifier, options); }
 }
 
 /**
@@ -386,6 +386,6 @@ export async function fromKey(uuidOrIdentifier, options = {}) {
  */
 export function omit(obj, keys) {
   const out = { ...obj };
-  for (const k of keys) foundry.utils.deleteProperty(out, k);
+  for (const k of keys) { foundry.utils.deleteProperty(out, k); }
   return out;
 }

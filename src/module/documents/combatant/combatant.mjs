@@ -36,9 +36,9 @@ export default class TeriockCombatant extends mixClasses(Combatant, BaseDocument
    */
   _getInitiativeFormula() {
     let formula = super._getInitiativeFormula();
-    if (this.actor) formula = this.actor.system.initiative || formula;
-    if (this._advantage) formula = formula.replace("1d20", "2d20kh1");
-    else if (this._disadvantage) formula = formula.replace("1d20", "2d20kl1");
+    if (this.actor) { formula = this.actor.system.initiative || formula; }
+    if (this._advantage) { formula = formula.replace("1d20", "2d20kh1"); }
+    else if (this._disadvantage) { formula = formula.replace("1d20", "2d20kl1"); }
     delete this._advantage;
     delete this._disadvantage;
     return formula;

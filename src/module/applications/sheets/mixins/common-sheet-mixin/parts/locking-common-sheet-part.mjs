@@ -50,7 +50,7 @@ export default Base => {
       async _onRender(context, options) {
         await super._onRender(context, options);
         const toggleButton = this.window.header?.querySelector("[data-action='toggleLockThis']");
-        if (toggleButton) this.#setToggleLockButtonAttributes(toggleButton);
+        if (toggleButton) { this.#setToggleLockButtonAttributes(toggleButton); }
         this.element.querySelectorAll("button[data-action='rollTable']").forEach((btn) => btn.disabled = false);
       }
 
@@ -66,8 +66,9 @@ export default Base => {
           toggleButton.classList.add(...["header-control", "icon", "fa-solid"]);
           toggleButton.setAttribute("data-action", "toggleLockThis");
           this.#setToggleLockButtonAttributes(toggleButton);
-          if (!this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked))
+          if (!this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked)) {
             toggleButton.setAttribute("disabled", "disabled");
+          }
           this.window.controls?.before(toggleButton);
         }
         return frame;

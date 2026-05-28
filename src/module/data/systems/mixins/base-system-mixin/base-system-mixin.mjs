@@ -64,8 +64,9 @@ export default function BaseSystemMixin(Base) {
       /** @returns {string} */
       get fullName() {
         let name = this.parent?.name ?? "";
-        if (this._nameBadge)
+        if (this._nameBadge) {
           name = _loc("TERIOCK.SYSTEMS.Base.EMBED.valueNameString", { name, value: this._nameBadge.trim() });
+        }
         if (this._nameTags.length > 0) {
           name = _loc("TERIOCK.SYSTEMS.Base.EMBED.taggedNameString", {
             name,
@@ -90,7 +91,7 @@ export default function BaseSystemMixin(Base) {
         return fancifyFields(this.displayFields).map(f => {
           const schema = this.parent.getSchema(f.path);
           const value = foundry.utils.getProperty(this.parent._source, f.path);
-          if (value && !schema.gmOnly) return { classes: f.classes, text: value, title: f.label || schema.label };
+          if (value && !schema.gmOnly) { return { classes: f.classes, text: value, title: f.label || schema.label }; }
         }).filter(f => f);
       }
 

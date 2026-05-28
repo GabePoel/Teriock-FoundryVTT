@@ -75,9 +75,9 @@ export default Base => {
        */
       #prepareEncumbrance() {
         let el = 0;
-        if (this.weight.carried >= this.carryingCapacity.light) el = 1;
-        if (this.weight.carried >= this.carryingCapacity.heavy) el = 2;
-        if (this.weight.carried >= this.carryingCapacity.max) el = 3;
+        if (this.weight.carried >= this.carryingCapacity.light) { el = 1; }
+        if (this.weight.carried >= this.carryingCapacity.heavy) { el = 2; }
+        if (this.weight.carried >= this.carryingCapacity.max) { el = 3; }
         this.encumbranceLevel = Math.clamp(this.encumbranceLevel + el, 0, 3);
       }
 
@@ -86,7 +86,7 @@ export default Base => {
        */
       #prepareWeightCarried() {
         let equipmentWeight = 0;
-        for (const e of this.parent.equipment) equipmentWeight += e.system.totalWeight;
+        for (const e of this.parent.equipment) { equipmentWeight += e.system.totalWeight; }
         this.weight.equipment = equipmentWeight;
         const carried = this.weight.equipment + this.weight.money;
         this.weight.carried = carried.toNearest(equipmentConfig.weight.interval);
@@ -125,7 +125,7 @@ export default Base => {
         this.size.category = sizeDefinition.category;
         this.size.length = sizeDefinition.length;
         this.size.reach = sizeDefinition.reach;
-        if (this.weight.self === null) this.weight.self = Math.pow(3 + this.size.number, 3);
+        if (this.weight.self === null) { this.weight.self = Math.pow(3 + this.size.number, 3); }
       }
 
       /** @inheritDoc */
@@ -140,7 +140,7 @@ export default Base => {
       prepareVirtualEffects() {
         super.prepareVirtualEffects();
         if (this.encumbranceLevel > 0 && !this.isProtected("statuses", "encumbered")) {
-          if (this.encumbranceLevel >= 1) this.movementSpeed = Math.max(this.movementSpeed - 10, 0);
+          if (this.encumbranceLevel >= 1) { this.movementSpeed = Math.max(this.movementSpeed - 10, 0); }
           if (this.encumbranceLevel >= 2) {
             this.parent.statuses.add("slowed");
             this.parent._addVirtualStatus("slowed", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2", { localize: true });

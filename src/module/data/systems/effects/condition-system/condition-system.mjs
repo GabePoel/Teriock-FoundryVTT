@@ -72,23 +72,23 @@ export default class ConditionSystem
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
-    if (data.disabled === true) return false;
+    if (data.disabled === true) { return false; }
   }
 
   /** @inheritDoc */
   async _preUpdate(changes, options, user) {
     const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
-    if (changes.disabled === true) return false;
+    if (changes.disabled === true) { return false; }
   }
 
   /** @inheritDoc */
   async _use(_options = {}) {
-    if (this.parent.id.includes("dead") && this.parent.actor) await this.parent.actor.system.deathBagPull();
-    else await this.inCombatExpiration(true);
+    if (this.parent.id.includes("dead") && this.parent.actor) { await this.parent.actor.system.deathBagPull(); }
+    else { await this.inCombatExpiration(true); }
   }
 
   /** @inheritDoc */

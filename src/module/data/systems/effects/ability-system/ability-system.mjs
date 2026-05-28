@@ -114,8 +114,10 @@ export default class AbilitySystem
   /** @inheritDoc */
   get _nameTags() {
     const tags = [];
-    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) if (this.costs.tweaks[k]) tags.push(v.label);
-    if (this.grantOnly) tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted"));
+    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
+      if (this.costs.tweaks[k]) { tags.push(v.label); }
+    }
+    if (this.grantOnly) { tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted")); }
     return [...tags, ...super._nameTags];
   }
 
@@ -278,8 +280,8 @@ export default class AbilitySystem
         },
       });
     }
-    if (this.isArmamentChild && !this.grantUse) icons.unshift(this.grantUseIcon);
-    if (this.tagIcon) icons.unshift(this.tagIcon);
+    if (this.isArmamentChild && !this.grantUse) { icons.unshift(this.grantUseIcon); }
+    if (this.tagIcon) { icons.unshift(this.tagIcon); }
     return icons;
   }
 
@@ -328,7 +330,7 @@ export default class AbilitySystem
 
   /** @inheritDoc */
   get useText() {
-    if (this.spell) return _loc("TERIOCK.SYSTEMS.Ability.USAGE.cast", { value: this.parent.name });
+    if (this.spell) { return _loc("TERIOCK.SYSTEMS.Ability.USAGE.cast", { value: this.parent.name }); }
     return super.useText;
   }
 
@@ -338,8 +340,9 @@ export default class AbilitySystem
    */
   async _use(options = {}) {
     options.source = this.parent;
-    if (this.grantOnly && this.parent.parent.metadata.armament)
+    if (this.grantOnly && this.parent.parent.metadata.armament) {
       options.armament = /** @type {TeriockArmament} */ this.parent.parent;
+    }
     await new AbilityExecution(options).execute();
   }
 
@@ -347,15 +350,15 @@ export default class AbilitySystem
   getRollData() {
     const rollData = super.getRollData();
     Object.assign(rollData, { av0: 0, "av0.abi": 0, ub: 0, "ub.abi": 0, warded: 0, "warded.abi": 0 });
-    if (this.piercing === "av0") Object.assign(rollData, { av0: 2, "av0.abi": 2 });
-    if (this.piercing === "ub") Object.assign(rollData, { av0: 2, "av0.abi": 2, ub: 1, "ub.abi": 1 });
+    if (this.piercing === "av0") { Object.assign(rollData, { av0: 2, "av0.abi": 2 }); }
+    if (this.piercing === "ub") { Object.assign(rollData, { av0: 2, "av0.abi": 2, ub: 1, "ub.abi": 1 }); }
     return rollData;
   }
 
   /** @inheritDoc */
   toRefreshObject(document) {
     const obj = super.toRefreshObject(document);
-    if (!["flaw", "normal", "special"].includes(this.form)) foundry.utils.deleteProperty(obj, "system.form");
+    if (!["flaw", "normal", "special"].includes(this.form)) { foundry.utils.deleteProperty(obj, "system.form"); }
     return obj;
   }
 }

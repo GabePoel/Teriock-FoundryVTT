@@ -27,7 +27,7 @@ export default class TeriockItem
   /** @inheritDoc */
   static async _onWriteOperation(documents, operation, user) {
     const actors = new Set();
-    for (const d of documents) if (d.actor) actors.add(d.actor);
+    for (const d of documents) { if (d.actor) { actors.add(d.actor); } }
     const operations = (await Promise.all(actors.map(a => a._getStagedOperations()))).flat();
     await foundry.documents.modifyBatch(operations);
     await super._onWriteOperation(documents, operation, user);
@@ -63,7 +63,7 @@ export default class TeriockItem
    * @returns {Generator<AnyActiveEffect, void, void>}
    */
   *allApplicableEffects() {
-    for (const effect of this.effects) yield effect;
+    for (const effect of this.effects) { yield effect; }
   }
 
   /**
@@ -72,13 +72,13 @@ export default class TeriockItem
    */
   applyActiveEffects(phase) {
     const ActiveEffect = foundry.documents.ActiveEffect.implementation;
-    if (!(phase in ActiveEffect.CHANGE_PHASES)) return;
+    if (!(phase in ActiveEffect.CHANGE_PHASES)) { return; }
     /** @type {ActiveEffectChangeData[]} */
     const changes = [];
     for (const effect of this.allApplicableEffects()) {
-      if (!effect.active) continue;
+      if (!effect.active) { continue; }
       for (const change of effect.system.itemChanges) {
-        if (change.key === "" || change.phase !== phase) continue;
+        if (change.key === "" || change.phase !== phase) { continue; }
         const copy = foundry.utils.deepClone(change);
         copy.effect = effect;
         changes.push(copy);
@@ -89,7 +89,7 @@ export default class TeriockItem
     const replacementData = this.getRollData();
     for (const change of changes) {
       const result = ActiveEffect.applyChange(this, change, { replacementData });
-      if (foundry.utils.isPlainObject(result)) Object.assign(overrides, result);
+      if (foundry.utils.isPlainObject(result)) { Object.assign(overrides, result); }
     }
     foundry.utils.mergeObject(this.overrides, foundry.utils.expandObject(overrides));
   }
@@ -103,6 +103,6 @@ export default class TeriockItem
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.isTop) this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
+    if (this.isTop) { this.applyActiveEffects(TERIOCK.config.change.defaultPhase); }
   }
 }

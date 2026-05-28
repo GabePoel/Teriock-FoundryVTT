@@ -25,8 +25,10 @@ export default function AbilityExecutionChatPart(Base) {
       #addAssociationToMap(association, key) {
         const associations = this.#associationMap[key];
         const existing = associations.find(a => a.title === association.title);
-        if (!existing) associations.push(association);
-        else existing.cards.push(...association.cards.filter(c => !existing.cards.map(e => e.uuid).includes(c.uuid)));
+        if (!existing) { associations.push(association); }
+        else {
+          existing.cards.push(...association.cards.filter(c => !existing.cards.map(e => e.uuid).includes(c.uuid)));
+        }
       }
 
       /**
@@ -111,7 +113,7 @@ export default function AbilityExecutionChatPart(Base) {
         const executorAutomations = statusAutomations.filter(a => a.executor);
         for (const a of executorAutomations) {
           const uuid = this.actor?.defaultToken?.document?.uuid || this.actor?.uuid;
-          if (uuid) this.#attachTrackedStatusAutomationUuids(a, [uuid]);
+          if (uuid) { this.#attachTrackedStatusAutomationUuids(a, [uuid]); }
         }
       }
 
@@ -134,7 +136,7 @@ export default function AbilityExecutionChatPart(Base) {
         if (transformation.enabled) {
           const a = transformationAutomations[0];
           const competence = a.competence.toObject();
-          if (!a.overrideCompetence) competence.raw = this.competence.value;
+          if (!a.overrideCompetence) { competence.raw = this.competence.value; }
           Object.assign(transformation, {
             competence,
             img: a.img,
@@ -165,7 +167,7 @@ export default function AbilityExecutionChatPart(Base) {
                 c.value = this._heightenString(c.value);
               });
             }
-            if (data?.type === "childChange") data.value = this._heightenString(data.value);
+            if (data?.type === "childChange") { data.value = this._heightenString(data.value); }
             out[data._id] = data;
           }
         }
@@ -207,7 +209,7 @@ export default function AbilityExecutionChatPart(Base) {
           durationFormula = formulaField.applyChange(durationFormula, null, change, { replacementData: this.rollData });
         });
         let durationValue = await BaseRoll.getValue(durationFormula, this.rollData);
-        if (durationValue > Number("9".repeat(30))) durationValue = undefined;
+        if (durationValue > Number("9".repeat(30))) { durationValue = undefined; }
         return durationValue;
       }
 
@@ -273,13 +275,14 @@ export default function AbilityExecutionChatPart(Base) {
         // Add feat save activation
         if (this.isFeat && !modifyEffectAutomation?.preventFeat) {
           const featOptions = { attribute: this.source.system.featSaveAttribute };
-          if (!modifyEffectAutomation?.preventThreshold) featOptions.threshold = this.rolls[0].total;
+          if (!modifyEffectAutomation?.preventThreshold) { featOptions.threshold = this.rolls[0].total; }
           this.activations.push(new acts.FeatActivation({ options: featOptions }));
         }
 
         // Add block cone activation
-        if (this.source.system.delivery === "cone" && !this.flags.noTemplate)
+        if (this.source.system.delivery === "cone" && !this.flags.noTemplate) {
           this.activations.push(new acts.UseLocalActivation({ options: { lookup: "ability:block-cone" } }));
+        }
 
         if (
           this.source.system.duration.unit !== "instant"
@@ -315,8 +318,9 @@ export default function AbilityExecutionChatPart(Base) {
               const uuids = Array.from(a.children.uuids ?? []);
               for (const uuid of uuids) {
                 const grandchild = { uuid };
-                if (a.children.overrideData && a.children.data)
+                if (a.children.overrideData && a.children.data) {
                   grandchild.data = foundry.utils.deepClone(a.children.data);
+                }
                 grandchildren.push(grandchild);
               }
             }
@@ -342,8 +346,8 @@ export default function AbilityExecutionChatPart(Base) {
           const transformationAutomations = this.getAutomations("transformation", { active: true });
           for (const a of transformationAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
-            if (a.crit.has(0)) normConData.system.transformation.uuids.push(...toAdd);
-            if (a.crit.has(1)) critConData.system.transformation.uuids.push(...toAdd);
+            if (a.crit.has(0)) { normConData.system.transformation.uuids.push(...toAdd); }
+            if (a.crit.has(1)) { critConData.system.transformation.uuids.push(...toAdd); }
           }
           this.getAutomations("modifyEffect", { active: true, crit: false }).forEach(a => {
             if (a?.overrideCompetence) {
@@ -424,35 +428,38 @@ export default function AbilityExecutionChatPart(Base) {
           b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label")
         );
         if (proficientBlock) {
-          if (this.competence.proficient) delete proficientBlock.classes;
-          else proficientBlock.classes = [TERIOCK.display.panel.classes.faded];
+          if (this.competence.proficient) { delete proficientBlock.classes; }
+          else { proficientBlock.classes = [TERIOCK.display.panel.classes.faded]; }
         }
         const fluentBlock = panel.blocks.find(b =>
           b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label")
         );
         if (fluentBlock) {
-          if (this.competence.fluent) delete fluentBlock.classes;
-          else fluentBlock.classes = [TERIOCK.display.panel.classes.faded];
+          if (this.competence.fluent) { delete fluentBlock.classes; }
+          else { fluentBlock.classes = [TERIOCK.display.panel.classes.faded]; }
         }
         const heightenedBlock = panel.blocks.find(b =>
           b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label")
         );
         if (heightenedBlock) {
-          if (this.heightened) delete heightenedBlock.classes;
-          else heightenedBlock.classes = [TERIOCK.display.panel.classes.faded];
+          if (this.heightened) { delete heightenedBlock.classes; }
+          else { heightenedBlock.classes = [TERIOCK.display.panel.classes.faded]; }
         }
         return panel;
       }
 
       /** @inheritDoc */
       async _buildTags() {
-        if (this.source.system.interaction === "attack" && this.ub)
+        if (this.source.system.interaction === "attack" && this.ub) {
           this.tags.push(_loc("TERIOCK.TERMS.Properties.unblockable"));
-        if (this.warded) this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label"));
-        if (this.vitals) this.tags.push(_loc("TERIOCK.TERMS.Targets.vitals"));
+        }
+        if (this.warded) { this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label")); }
+        if (this.vitals) { this.tags.push(_loc("TERIOCK.TERMS.Targets.vitals")); }
         if (this.heightened > 0) {
-          if (this.heightened === 1) this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle"));
-          else this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", { value: this.heightened }));
+          if (this.heightened === 1) { this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")); }
+          else { this.tags.push(
+              _loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedPlural", { value: this.heightened }),
+            ); }
         }
         for (const c of Object.keys(this.costs).filter(c => this.costs[c] > 0)) {
           this.tags.push(

@@ -73,16 +73,16 @@ export default class AttunementSystem extends CleanedEffectSystem {
   get usage() {
     if (this.target) {
       if (this.target.type === "equipment") {
-        if (this.target.system.equipped) return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped");
-        else return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped");
+        if (this.target.system.equipped) { return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped"); }
+        else { return _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"); }
       } else if (this.target.type === "mount") {
-        if (this.target.system.mounted) return _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted");
-        else return _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted");
+        if (this.target.system.mounted) { return _loc("TERIOCK.SYSTEMS.Mount.EMBED.mounted"); }
+        else { return _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"); }
       } else {
         return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned");
       }
-    } else if (this._source.target) return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.missing");
-    else return "";
+    } else if (this._source.target) { return _loc("TERIOCK.SYSTEMS.Attunement.USAGE.missing"); }
+    else { return ""; }
   }
 
   /**
@@ -146,7 +146,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   prepareDerivedData() {
-    if (this.inheritTier && this.target) this.tier = this.target.system.tier.currentValue;
+    if (this.inheritTier && this.target) { this.tier = this.target.system.tier.currentValue; }
     this.changes.push({ key: "system.presence.value", phase: "initial", priority: 10, type: "add", value: this.tier });
   }
 }

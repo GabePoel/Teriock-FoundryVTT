@@ -6,10 +6,10 @@ const lookupEnricher = {
   format: { aliases: ["lookup"], hasConfig: true, hasMultipleArguments: true, type: "display" },
   process: async (inputs, options) => {
     let lookupKey = inputs.arguments[0];
-    if (lookupKey.startsWith("@")) lookupKey = lookupKey.slice(1);
+    if (lookupKey.startsWith("@")) { lookupKey = lookupKey.slice(1); }
     const raw = foundry.utils.getProperty(options?.relativeTo, lookupKey);
     let textContent = "";
-    if (["boolean", "number", "string"].includes(typeof raw)) textContent = raw.toString();
+    if (["boolean", "number", "string"].includes(typeof raw)) { textContent = raw.toString(); }
     const style = inputs.config["style"];
     if (style) {
       switch (style) {

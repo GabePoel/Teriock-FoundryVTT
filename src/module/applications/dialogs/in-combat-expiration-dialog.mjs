@@ -13,7 +13,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
  * @returns {Promise<void>}
  */
 export default async function inCombatExpirationDialog(effect, forceDialog = false) {
-  if (effect.system.expirations.combat.what.type === "none" && !forceDialog) return;
+  if (effect.system.expirations.combat.what.type === "none" && !forceDialog) { return; }
   let expire = false;
   if (effect.system.expirations.combat.what.type === "forced" && !forceDialog) {
     const name = effect.system.fullName;
@@ -27,7 +27,7 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
         title: _loc("TERIOCK.DIALOGS.InCombatExpiration.title", { name }),
       },
     });
-    if (expire) await effect.system.expire();
+    if (expire) { await effect.system.expire(); }
   } else if (effect.system.expirations.combat.what.type === "rolled" || forceDialog) {
     const contentHtml = document.createElement("div");
     const rootId = foundry.utils.randomID();
@@ -70,8 +70,9 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
           await expirationRoll.toMessage({ speaker: TeriockChatMessage.getSpeaker({ actor: effect.actor }) }, {
             messageMode: game.settings.get("core", "messageMode"),
           });
-          if (expirationRoll.total >= Number(button.form.elements.namedItem("threshold").value))
+          if (expirationRoll.total >= Number(button.form.elements.namedItem("threshold").value)) {
             await effect.system.expire();
+          }
         },
       }, {
         action: "remove",

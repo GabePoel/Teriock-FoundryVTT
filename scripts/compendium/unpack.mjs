@@ -25,8 +25,8 @@ const state = { buildRegistry: true, pack: null };
 function registerDocument(pack, doc) {
   /** @type {CompendiumNode} */
   const node = { name: toKebabCase(doc.name), sup: null };
-  if (doc.system?._sup) node.sup = doc.system._sup;
-  if (!PACK_REGISTRY[pack]) PACK_REGISTRY[pack] = {};
+  if (doc.system?._sup) { node.sup = doc.system._sup; }
+  if (!PACK_REGISTRY[pack]) { PACK_REGISTRY[pack] = {}; }
   PACK_REGISTRY[pack][doc._id] = node;
 }
 
@@ -38,7 +38,7 @@ function registerDocument(pack, doc) {
  */
 function deriveName(pack, id) {
   const node = PACK_REGISTRY[pack][id];
-  if (node.sup) return `${deriveName(pack, node.sup)}-${node.name}`;
+  if (node.sup) { return `${deriveName(pack, node.sup)}-${node.name}`; }
   return node.name;
 }
 
@@ -52,16 +52,16 @@ function deriveName(pack, id) {
  */
 async function unpackPack(pack, buildRegistry) {
   const directory = `./src/packs/${toKebabCaseFull(pack)}`;
-  if (buildRegistry) console.log(`Building registry for ${pack}`);
-  else console.log(`Unpacking ${pack} to ${directory}`);
+  if (buildRegistry) { console.log(`Building registry for ${pack}`); }
+  else { console.log(`Unpacking ${pack} to ${directory}`); }
   try {
     for (const file of await fs.readdir(directory)) {
       const filePath = path.join(directory, file);
-      if (file.endsWith(YAML ? ".yml" : ".json")) await fs.unlink(filePath);
-      else await fs.rm(filePath, { recursive: true });
+      if (file.endsWith(YAML ? ".yml" : ".json")) { await fs.unlink(filePath); }
+      else { await fs.rm(filePath, { recursive: true }); }
     }
   } catch (error) {
-    if (error.code !== "ENOENT") console.log(error);
+    if (error.code !== "ENOENT") { console.log(error); }
   }
   const extractOptions = {
     expandAdventures: EXPAND_ADVENTURES,
@@ -77,8 +77,8 @@ async function unpackPack(pack, buildRegistry) {
 }
 
 const packs = await fs.readdir("./packs");
-for (const pack of packs) await unpackPack(pack, true);
-for (const pack of packs) await unpackPack(pack, false);
+for (const pack of packs) { await unpackPack(pack, true); }
+for (const pack of packs) { await unpackPack(pack, false); }
 
 // Transformers
 // ============
@@ -90,9 +90,9 @@ for (const pack of packs) await unpackPack(pack, false);
  */
 function transformName(doc, context) {
   let name = toKebabCase(doc.name);
-  if (!state.buildRegistry) name = deriveName(state.pack, doc._id);
+  if (!state.buildRegistry) { name = deriveName(state.pack, doc._id); }
   name = `${name}.${YAML ? "yml" : "json"}`;
-  if (context.folder) name = path.join(context.folder, name);
+  if (context.folder) { name = path.join(context.folder, name); }
   return name;
 }
 
@@ -104,13 +104,15 @@ function transformFolderName(doc) {
   return toKebabCase(doc.name);
 }
 
+/**
+ * Clean a document.
+ * @param {object} doc
+ */
 function cleanEntry(doc) {
   cleanDocument(doc);
-  delete doc.author;
-  delete doc.ownership;
   doc._stats = { ...doc._stats ?? {}, ...BASIC_STATS };
   sortKeys(doc);
-  if (doc.system?.automations) sortAutomations(doc.system.automations);
+  if (doc.system?.automations) { sortAutomations(doc.system.automations); }
 }
 
 /**
@@ -123,11 +125,11 @@ function transformEntry(doc) {
     return false;
   }
   cleanEntry(doc);
-  if (doc.system) conformDataValues(doc.system);
+  if (doc.system) { conformDataValues(doc.system); }
   ["cards", "categories", "effects", "items", "notes", "pages", "results"].forEach(key =>
     doc[key]?.forEach(d => transformEntry(d))
   );
-  if (!doc._key.includes("scene")) conformDataValues(doc);
+  if (!doc._key.includes("scene")) { conformDataValues(doc); }
 }
 
 /**
@@ -135,15 +137,15 @@ function transformEntry(doc) {
  * @param {object} obj
  */
 function sortKeys(obj) {
-  if (typeof obj !== "object" || !obj) return;
+  if (typeof obj !== "object" || !obj) { return; }
   const keys = Object.keys(obj).sort();
   const cache = { ...obj };
-  for (const key in obj) delete obj[key];
+  for (const key in obj) { delete obj[key]; }
   for (const key of keys) {
     obj[key] = cache[key];
-    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) sortKeys(obj[key]);
+    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) { sortKeys(obj[key]); }
     if (typeof obj[key] === "object" && Array.isArray(obj[key])) {
-      for (const i of obj[key]) sortKeys(i);
+      for (const i of obj[key]) { sortKeys(i); }
     }
   }
 }
@@ -155,16 +157,16 @@ function sortKeys(obj) {
 function conformDataValues(obj) {
   if (Array.isArray(obj)) {
     for (let i = obj.length - 1; i >= 0; i--) {
-      if (obj[i] === "") obj.splice(i, 1);
-      else if (typeof obj[i] === "object" && obj[i] !== null) conformDataValues(obj[i]);
+      if (obj[i] === "") { obj.splice(i, 1); }
+      else if (typeof obj[i] === "object" && obj[i] !== null) { conformDataValues(obj[i]); }
     }
   } else {
     for (const key in obj) {
-      if (obj[key] === "") delete obj[key];
-      if (obj[key] === "{}") delete obj[key];
-      else if (obj[key] === null) delete obj[key];
+      if (obj[key] === "") { delete obj[key]; }
+      if (obj[key] === "{}") { delete obj[key]; }
+      else if (obj[key] === null) { delete obj[key]; }
       else if (Array.isArray(obj[key])) {
-        if (obj[key].length === 0) delete obj[key];
+        if (obj[key].length === 0) { delete obj[key]; }
         else if (typeof obj[key][0] === "string" && obj[key].length > 1) {
           {
             obj[key].sort((a, b) => toPackName(a).localeCompare(toPackName(b)));
@@ -173,8 +175,8 @@ function conformDataValues(obj) {
           obj[key].sort((a, b) => a - b);
         }
       } else if (typeof obj[key] === "object" && obj[key] !== null) {
-        if (Object.keys(obj[key]).length === 0) delete obj[key];
-        else conformDataValues(obj[key]);
+        if (Object.keys(obj[key]).length === 0) { delete obj[key]; }
+        else { conformDataValues(obj[key]); }
       }
     }
   }
@@ -248,16 +250,16 @@ function sortAutomations(automations) {
   });
 
   sortableArray.sort((a, b) => {
-    if (a.sortKey < b.sortKey) return -1;
-    if (a.sortKey > b.sortKey) return 1;
+    if (a.sortKey < b.sortKey) { return -1; }
+    if (a.sortKey > b.sortKey) { return 1; }
     return 0;
   });
 
-  for (const key of Object.keys(automations)) delete automations[key];
+  for (const key of Object.keys(automations)) { delete automations[key]; }
   for (const item of sortableArray) {
-    if (item.data.competencies.length === 3) delete item.data.competencies;
-    if (item.data.heighten.length === 2) delete item.data.heighten;
-    if (item.data.crit?.length === 2) delete item.data.crit;
+    if (item.data.competencies.length === 3) { delete item.data.competencies; }
+    if (item.data.heighten.length === 2) { delete item.data.heighten; }
+    if (item.data.crit?.length === 2) { delete item.data.crit; }
     automations[item.key] = item.data;
   }
   return automations;
@@ -275,7 +277,7 @@ function toPackName(uuid) {
     if (parts.length === 5) {
       const packId = parts[2];
       const docId = parts[4];
-      if (PACK_REGISTRY[packId] && PACK_REGISTRY[packId][docId]) name = PACK_REGISTRY[packId][docId]?.name ?? name;
+      if (PACK_REGISTRY[packId] && PACK_REGISTRY[packId][docId]) { name = PACK_REGISTRY[packId][docId]?.name ?? name; }
     }
   }
   return name;

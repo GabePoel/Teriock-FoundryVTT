@@ -94,21 +94,22 @@ export default class ChildChangeAutomation extends CritAutomation {
       v.targets.includes(this.target)
     );
     for (const [k, v] of pathEntries) {
-      if (!groups[v.group]) groups[v.group] = { choices: {}, label: TERIOCK.config.change.child.groups[v.group] };
+      if (!groups[v.group]) { groups[v.group] = { choices: {}, label: TERIOCK.config.change.child.groups[v.group] }; }
       groups[v.group].choices[k] = v.label;
-      if (v.group === "boosts")
+      if (v.group === "boosts") {
         groups[v.group].choices[k] = _loc("TERIOCK.AUTOMATIONS.ChildChange.CHOICES.impact", { impact: v.label });
+      }
     }
     return formatDynamicSelectOptions(groups);
   }
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-    if (path.endsWith("key")) inputConfig.choices = this._processedKeyChoices;
-    if (path.endsWith("qualifier")) inputConfig.context = this.target;
-    if (path.endsWith("value")) inputConfig.context = "actor";
-    if (path.endsWith("changeType")) inputConfig.choices = this._changeTypeChoices;
-    if (path.endsWith("priority")) inputConfig.placeholder = this._defaultPriority.toString() ?? "0";
+    if (path.endsWith("key")) { inputConfig.choices = this._processedKeyChoices; }
+    if (path.endsWith("qualifier")) { inputConfig.context = this.target; }
+    if (path.endsWith("value")) { inputConfig.context = "actor"; }
+    if (path.endsWith("changeType")) { inputConfig.choices = this._changeTypeChoices; }
+    if (path.endsWith("priority")) { inputConfig.placeholder = this._defaultPriority.toString() ?? "0"; }
     return super._makeFormGroup(path, groupConfig, inputConfig);
   }
 
@@ -128,8 +129,8 @@ export default class ChildChangeAutomation extends CritAutomation {
   /** @inheritDoc */
   prepareData() {
     const changeTypeChoices = Object.keys(this._changeTypeChoices);
-    if (!changeTypeChoices.includes(this.changeType)) this.changeType = changeTypeChoices[0];
+    if (!changeTypeChoices.includes(this.changeType)) { this.changeType = changeTypeChoices[0]; }
     const keyChoices = Object.keys(this._keyChoices);
-    if (!keyChoices.includes(this.key)) this.key = keyChoices[0];
+    if (!keyChoices.includes(this.key)) { this.key = keyChoices[0]; }
   }
 }

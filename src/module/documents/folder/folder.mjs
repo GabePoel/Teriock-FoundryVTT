@@ -18,7 +18,7 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
    */
   static getAllEntries(node) {
     const entries = node.entries;
-    for (const child of node.children) entries.push(...this.getAllEntries(child));
+    for (const child of node.children) { entries.push(...this.getAllEntries(child)); }
     return entries;
   }
 
@@ -32,13 +32,13 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
    */
   static async getContents(folder, options = {}) {
     const { types, uuids = true } = options;
-    if (typeof folder === "string") folder = await fromUuid(folder);
+    if (typeof folder === "string") { folder = await fromUuid(folder); }
     let out = [];
     if (folder) {
       out = folder.allContents;
-      if (types) out = out.filter(d => types.includes(d.type));
-      if (uuids) out = out.map(d => d.uuid);
-      else if (folder.inCompendium) out = Promise.all(out.map(d => fromUuid(d.uuid)));
+      if (types) { out = out.filter(d => types.includes(d.type)); }
+      if (uuids) { out = out.map(d => d.uuid); }
+      else if (folder.inCompendium) { out = Promise.all(out.map(d => fromUuid(d.uuid))); }
     }
     return out;
   }
@@ -49,7 +49,7 @@ export default class TeriockFolder extends BaseDocumentMixin(Folder) {
    */
   get allContents() {
     const contents = [...this.contents];
-    for (const child of this.children) contents.push(...this.constructor.getAllEntries(child));
+    for (const child of this.children) { contents.push(...this.constructor.getAllEntries(child)); }
     return contents;
   }
 

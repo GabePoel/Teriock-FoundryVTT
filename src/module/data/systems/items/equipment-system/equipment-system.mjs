@@ -111,7 +111,7 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get _attunableWrappers() {
-    if (!this.identification.identified && !this.isAttuned) return [];
+    if (!this.identification.identified && !this.isAttuned) { return []; }
     return super._attunableWrappers;
   }
 
@@ -131,8 +131,8 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   get color() {
-    if (this.isOverCapacity) return TERIOCK.display.colors.red;
-    if (!this.identification.read) return TERIOCK.display.colors.grey;
+    if (this.isOverCapacity) { return TERIOCK.display.colors.red; }
+    if (!this.identification.read) { return TERIOCK.display.colors.grey; }
     return TERIOCK.config.equipment.powerLevel[this.powerLevel].color;
   }
 
@@ -182,9 +182,9 @@ export default class EquipmentSystem
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
-    if (this.parent.isEmbedded) this.updateSource({ equipped: true });
+    if (this.parent.isEmbedded) { this.updateSource({ equipped: true }); }
   }
 
   /**
@@ -192,8 +192,9 @@ export default class EquipmentSystem
    * @param {Partial<Teriock.Execution.EquipmentExecutionOptions>} options
    */
   async _use(options = {}) {
-    if (game.teriock.getSetting("rollAttackOnArmamentUse"))
+    if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
       await this.actor?.useDocument("basic-attack", { type: "ability" });
+    }
     await new EquipmentExecution(options).execute();
   }
 
@@ -209,7 +210,8 @@ export default class EquipmentSystem
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.fightingStyle && this.fightingStyle.length > 0)
+    if (this.fightingStyle && this.fightingStyle.length > 0) {
       this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
+    }
   }
 }

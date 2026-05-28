@@ -76,7 +76,7 @@ export default function MetaphysicsSystemMixin(Base) {
        * @returns {string}
        */
       get elementString() {
-        if (this.elements.size === 0) return _loc("TERIOCK.TERMS.Common.celestial");
+        if (this.elements.size === 0) { return _loc("TERIOCK.TERMS.Common.celestial"); }
         return listFormat(this.elements.map(e => TERIOCK.reference.elements[e]));
       }
 
@@ -84,14 +84,14 @@ export default function MetaphysicsSystemMixin(Base) {
       getLocalRollData() {
         const data = super.getLocalRollData();
         // Add power sources
-        for (const powerSource of this.powerSources) data[`power.${powerSource}`] = 1;
+        for (const powerSource of this.powerSources) { data[`power.${powerSource}`] = 1; }
         // Add elements
         for (const element of this.elements) {
           data[`element.${element}`] = 1;
           data[`element.${element.slice(0, 3).toLowerCase()}`] = 1;
         }
         // Add effect types
-        for (const effectType of this.effectTypes) data[`effect.${effectType}`] = 1;
+        for (const effectType of this.effectTypes) { data[`effect.${effectType}`] = 1; }
         return data;
       }
 
@@ -101,8 +101,9 @@ export default function MetaphysicsSystemMixin(Base) {
 
         // Enforce power sources
         for (const ps of this.powerSources) {
-          if (Object.keys(TERIOCK.reference.effectTypes).includes(ps) && !this.effectTypes.has(ps))
+          if (Object.keys(TERIOCK.reference.effectTypes).includes(ps) && !this.effectTypes.has(ps)) {
             this.effectTypes.add(ps);
+          }
         }
       }
     }

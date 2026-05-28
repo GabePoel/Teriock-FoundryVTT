@@ -16,7 +16,7 @@ export function standardizeLengthUnitName(unit) {
     m: ["meter", "meters"],
     km: ["kilometer", "kilometers"],
   };
-  for (const [key, value] of Object.entries(UNIT_ALIASES)) if (value.includes(unit)) return key;
+  for (const [key, value] of Object.entries(UNIT_ALIASES)) { if (value.includes(unit)) { return key; } }
   return unit;
 }
 
@@ -99,7 +99,7 @@ export function convertUnits(range, fromUnits, toUnits) {
  * @returns {string} A human-readable time string.
  */
 export function secondsToReadable(totalSeconds) {
-  if (totalSeconds < 0) return _loc("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.label");
+  if (totalSeconds < 0) { return _loc("TERIOCK.MODELS.TimeUnit.UNITS.zeroSeconds.label"); }
   const units = [
     { name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.year.short"), seconds: 365.25 * 24 * 60 * 60 },
     { name: _loc("TERIOCK.MODELS.TimeUnit.UNITS.week.short"), seconds: 7 * 24 * 60 * 60 },

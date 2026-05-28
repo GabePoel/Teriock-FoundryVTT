@@ -80,7 +80,7 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
     if (
       this.actor?.powers.map(p => p.system.identifier).includes(this.identifier)
@@ -98,7 +98,8 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.Compe
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if (game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv)
-      this.proficient = false;
+    if (
+      game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
+    ) { this.proficient = false; }
   }
 }

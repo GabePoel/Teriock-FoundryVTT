@@ -17,8 +17,8 @@ function normalizeBarInputs(value, max, temp = 0) {
  * @returns {string}
  */
 function modifierIconClass(modifier) {
-  if (modifier.competence.fluent) return makeIconClass(TERIOCK.display.icons.ui.filled2, "solid");
-  if (modifier.competence.proficient) return makeIconClass(TERIOCK.display.icons.ui.filled1, "light");
+  if (modifier.competence.fluent) { return makeIconClass(TERIOCK.display.icons.ui.filled2, "solid"); }
+  if (modifier.competence.proficient) { return makeIconClass(TERIOCK.display.icons.ui.filled1, "light"); }
   return makeIconClass(TERIOCK.display.icons.ui.filled0, "light");
 }
 
@@ -30,8 +30,8 @@ function modifierIconClass(modifier) {
 function hackFill(bar) {
   const max = bar?.max || 0;
   const value = bar?.value || 0;
-  if (value === 0) return "mic fa-solid";
-  else if (value === max) return "mic fa-faint";
+  if (value === 0) { return "mic fa-solid"; }
+  else if (value === max) { return "mic fa-faint"; }
   return "mic fa-intermediate";
 }
 
@@ -82,8 +82,8 @@ function barLost(value, max, temp = 0) {
  * @returns {string}
  */
 function barTempHide(value, max, temp = 0, morganti = 0) {
-  if (!temp) return "display: none;";
-  if (max === value && !morganti) return "border-right: none;";
+  if (!temp) { return "display: none;"; }
+  if (max === value && !morganti) { return "border-right: none;"; }
   return "";
 }
 

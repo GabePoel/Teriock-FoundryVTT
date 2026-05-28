@@ -59,7 +59,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
     ) {
       suppressed = true;
     }
-    if (this.actor && this.ranks.filter(r => r.active).length === 0) suppressed = true;
+    if (this.actor && this.ranks.filter(r => r.active).length === 0) { suppressed = true; }
     return suppressed;
   }
 
@@ -73,7 +73,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
    * @returns {TeriockRank[]}
    */
   get ranks() {
-    if (!this.actor) return [];
+    if (!this.actor) { return []; }
     return this.actor.ranks.filter(r => r.system.archetype === this.identifier);
   }
 
@@ -83,7 +83,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
    */
   deriveCompetence() {
     const activeRanks = this.ranks.filter(r => r.active);
-    if (activeRanks.length === 0) return 0;
+    if (activeRanks.length === 0) { return 0; }
     return Math.max(...activeRanks.map(r => r.system.competence.value));
   }
 

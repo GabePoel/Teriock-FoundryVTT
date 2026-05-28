@@ -40,7 +40,7 @@ import * as index from "../../src/module/constants/index/_module.mjs";
  * @returns {object}
  */
 function sortObject(obj) {
-  if (typeof obj !== "object") return obj;
+  if (typeof obj !== "object") { return obj; }
   return Object.keys(obj).sort().reduce((acc, key) => {
     acc[key] = sortObject(obj[key]);
     return acc;
@@ -56,11 +56,11 @@ function sortObject(obj) {
  */
 function mergeObjects(target, ...sources) {
   for (const source of sources) {
-    if (!source) continue;
+    if (!source) { continue; }
     for (const key in source) {
       if (Object.prototype.hasOwnProperty.call(source, key)) {
         if (source[key] !== null && typeof source[key] === "object") {
-          if (!target[key]) target[key] = {};
+          if (!target[key]) { target[key] = {}; }
           mergeObjects(target[key], source[key]);
         } else {
           target[key] = source[key];
@@ -75,7 +75,7 @@ const DIR = path.join(".", "lang");
 const DST = path.join(DIR, "en.json");
 const LANG = base;
 
-if (!fs.existsSync(DIR)) fs.mkdirSync(DIR);
+if (!fs.existsSync(DIR)) { fs.mkdirSync(DIR); }
 
 const content = {
   TERIOCK: {

@@ -30,8 +30,8 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
    */
   static create(config) {
     const el = document.createElement(this.tagName);
-    if (config.reset) el.setAttribute("reset", config.reset);
-    if (config.value != null) el.setAttribute("value", String(config.value));
+    if (config.reset) { el.setAttribute("reset", config.reset); }
+    if (config.value != null) { el.setAttribute("value", String(config.value)); }
     setInputAttributes(el, config);
     return el;
   }
@@ -52,7 +52,7 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
    * Reset the identifier to the configured default value.
    */
   #onReset() {
-    if (!this.reset || !this.editable) return;
+    if (!this.reset || !this.editable) { return; }
     this.#input.value = this.reset;
     this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
     this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
@@ -99,15 +99,15 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
 
   /** @override */
   _refresh() {
-    if (!this.#input) return;
+    if (!this.#input) { return; }
     const initial = this.getAttribute("value");
-    if (initial != null) this.#input.value = initial;
+    if (initial != null) { this.#input.value = initial; }
     this.removeAttribute("value");
   }
 
   /** @override */
   _setValue(value) {
-    if (this.#input) this.#input.value = value ?? "";
+    if (this.#input) { this.#input.value = value ?? ""; }
   }
 
   /** @override */

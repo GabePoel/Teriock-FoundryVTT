@@ -101,7 +101,7 @@ export default class PropertySystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    if (!this.consumable) parts.subtitle = TERIOCK.config.effect.form[this.form].label;
+    if (!this.consumable) { parts.subtitle = TERIOCK.config.effect.form[this.form].label; }
     return parts;
   }
 

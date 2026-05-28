@@ -33,9 +33,9 @@ export default Base => {
         const choices = localizeChoices(objectMap(this.document.system.constructor.automationTypes, a => a.LABEL), {
           sort: true,
         });
-        if (Object.keys(choices).length === 0) return;
+        if (Object.keys(choices).length === 0) { return; }
         let choice;
-        if (Object.keys(choices).length === 1) choice = Object.keys(choices)[0];
+        if (Object.keys(choices).length === 1) { choice = Object.keys(choices)[0]; }
         else {
           choice = await selectDialog(choices, {
             hint: _loc("TERIOCK.DIALOGS.Select.AddAutomation.hint"),
@@ -44,7 +44,7 @@ export default Base => {
             title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
           });
         }
-        if (!choice) return;
+        if (!choice) { return; }
         await BaseAutomation.create({ type: choice }, { parent: this.document });
       }
 
@@ -83,10 +83,10 @@ export default Base => {
         const present = target.dataset.present;
         const path = target.dataset.path;
         const name = target.getAttribute("name");
-        if (target.dataset.type === "number") term = Number(term);
+        if (target.dataset.type === "number") { term = Number(term); }
         const set = new Set(Array.from(foundry.utils.getProperty(this.document, name)));
-        if (present) set.delete(term);
-        else set.add(term);
+        if (present) { set.delete(term); }
+        else { set.add(term); }
         await this.document.update({ [path]: Array.from(set) });
       }
 
@@ -97,10 +97,10 @@ export default Base => {
        * @this {AutomationsCommonSheetPart}
        */
       static _onToggleAutomationCollapse(event, target) {
-        if (event.target.closest(".teriock-automation-header-buttons")) return;
+        if (event.target.closest(".teriock-automation-header-buttons")) { return; }
         const container = target.closest(".teriock-automation-container");
         const id = container?.dataset.automationId;
-        if (!id || !container) return;
+        if (!id || !container) { return; }
         if (this._automationCollapsedIds.has(id)) {
           this._automationCollapsedIds.delete(id);
           container.classList.remove("collapsed");
@@ -130,27 +130,27 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async _onDropAutomation(event) {
-        if (!this._canDropAutomations) return;
+        if (!this._canDropAutomations) { return; }
         const dropData = TeriockTextEditor.getDragEventData(event);
-        if (dropData.startSheet === this.id) return;
-        if (dropData.type !== "Automation") return;
+        if (dropData.startSheet === this.id) { return; }
+        if (dropData.type !== "Automation") { return; }
         const auto = await BaseAutomation.fromDropData(dropData);
-        if (!auto) return;
+        if (!auto) { return; }
         const data = auto.toObject();
-        if (!Object.keys(this.document.system.constructor.automationTypes).includes(data.type)) return;
+        if (!Object.keys(this.document.system.constructor.automationTypes).includes(data.type)) { return; }
         await BaseAutomation.create(data, { parent: this.document });
       }
 
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        if (!this.isEditable) return;
+        if (!this.isEditable) { return; }
         new TeriockContextMenu(this.element, ".teriock-automation-header", [{
           icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
           label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;
-            if (!uuid) return;
+            if (!uuid) { return; }
             const auto = await fromUuid(uuid);
             await auto?.duplicate();
           },
@@ -159,7 +159,7 @@ export default Base => {
           label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;
-            if (!uuid) return;
+            if (!uuid) { return; }
             const auto = await fromUuid(uuid);
             await auto?.deleteDialog({ modal: true });
           },

@@ -74,9 +74,9 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        */
       async _choose(options = {}) {
         const choices = await this.getDocuments(options);
-        if (choices.length === 0) return [];
-        if (this.automatic && choices.length === 1) return choices;
-        if (this.multi && this.all) return choices;
+        if (choices.length === 0) { return []; }
+        if (this.automatic && choices.length === 1) { return choices; }
+        if (this.multi && this.all) { return choices; }
         return await selectDocumentsDialog(choices, {
           multi: this.multi,
           title: this.document.fullName || this.document.name,
@@ -92,7 +92,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
        * @return {Promise<UUID<TeriockDocument>[]>}
        */
       async choose(options = {}) {
-        if (!this.hasDocuments) return [];
+        if (!this.hasDocuments) { return []; }
         const docs = await this._choose({ expandFolders: true, expandTables: true, ...options });
         return docs.map(d => d.uuid);
       }

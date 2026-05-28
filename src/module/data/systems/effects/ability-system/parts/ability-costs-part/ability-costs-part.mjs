@@ -66,8 +66,9 @@ export default Base => {
         // 2025-12-18 HP and MP point cost migration
         for (const pointCost of ["mp", "hp"]) {
           if (source.costs) {
-            if (source.costs[pointCost] === null)
+            if (source.costs[pointCost] === null) {
               source.costs[pointCost] = { type: "none", value: { formula: "", static: 0, variable: "" } };
+            }
             if (typeof source.costs[pointCost] == "string") {
               const variableCost = String(pointCost === "mp" ? "manaCost" : "hitCost");
               source.costs[pointCost] = {
@@ -157,8 +158,8 @@ export default Base => {
 
         // Enforce invoked costs
         if (this.invoked) {
-          if (!this.costs.components.somatic.type) this.costs.components.somatic.type = "tag";
-          if (!this.costs.components.verbal.type) this.costs.components.verbal.type = "tag";
+          if (!this.costs.components.somatic.type) { this.costs.components.somatic.type = "tag"; }
+          if (!this.costs.components.verbal.type) { this.costs.components.verbal.type = "tag"; }
         }
       }
     }

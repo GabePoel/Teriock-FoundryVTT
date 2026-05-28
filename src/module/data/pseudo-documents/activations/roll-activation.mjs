@@ -44,7 +44,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
   /** @inheritDoc */
   async primaryAction() {
     let actors = this.actors;
-    if (!this.actors.length) actors = [null];
+    if (!this.actors.length) { actors = [null]; }
     for (const actor of actors) {
       await commands[this.impact].primary(actor, {
         boost: true,
@@ -59,7 +59,7 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
   /** @inheritDoc */
   async secondaryAction() {
     let actors = this.actors;
-    if (!this.actors.length) actors = [null];
+    if (!this.actors.length) { actors = [null]; }
     for (const actor of actors) {
       await commands[this.impact].secondary(actor, {
         boost: true,

@@ -13,8 +13,8 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onSwitchImage() {
-      if (this.settings.avatarImagePath === "img") this.settings.avatarImagePath = "prototypeToken.texture.src";
-      else this.settings.avatarImagePath = "img";
+      if (this.settings.avatarImagePath === "img") { this.settings.avatarImagePath = "prototypeToken.texture.src"; }
+      else { this.settings.avatarImagePath = "img"; }
       await this.render();
     }
 

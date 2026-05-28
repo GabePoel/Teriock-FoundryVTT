@@ -35,7 +35,7 @@ foundry.helpers.Hooks.once("init", function() {
    * @param {object} configs
    */
   function assign(configs) {
-    for (const [key, config] of Object.entries(configs)) Object.assign(CONFIG[key], config);
+    for (const [key, config] of Object.entries(configs)) { Object.assign(CONFIG[key], config); }
   }
 
   // Register Game Shortcuts
@@ -67,7 +67,7 @@ foundry.helpers.Hooks.once("init", function() {
       ),
     );
   }
-  for (const k of Object.keys(CONFIG.statusEffects)) delete CONFIG.statusEffects[k];
+  for (const k of Object.keys(CONFIG.statusEffects)) { delete CONFIG.statusEffects[k]; }
   Object.assign(CONFIG.statusEffects, { ...TERIOCK.data.conditions, ...TERIOCK.data.cover, ...TERIOCK.data.hacks });
 
   // Configure UI Components
@@ -98,7 +98,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   for (const key of Object.keys(CONFIG.Canvas.detectionModes)) {
     const id = CONFIG.Canvas.detectionModes[key]?.id;
-    if (!["basicSight", "lightPerception"].includes(id)) delete CONFIG.Canvas.detectionModes[key];
+    if (!["basicSight", "lightPerception"].includes(id)) { delete CONFIG.Canvas.detectionModes[key]; }
   }
   Object.assign(CONFIG.Canvas, {
     detectionModes: { ...CONFIG.Canvas.detectionModes, ...canvas.perception.detectionModes },
@@ -197,8 +197,9 @@ foundry.helpers.Hooks.once("init", function() {
   // Configure Type Icons
   // --------------------
 
-  for (const [k, v] of Object.entries(constants.config.document))
-    if (v?.documentName) CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
+  for (const [k, v] of Object.entries(constants.config.document)) {
+    if (v?.documentName) { CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title"); }
+  }
 
   // Configure Sheets
   // ----------------
@@ -378,8 +379,9 @@ foundry.helpers.Hooks.once("init", function() {
     dice.rolls.HarmRoll,
   ]);
   CONFIG.Dice.termTypes.FunctionTerm = dice.FunctionTerm;
-  for (const category of Object.values(dice.functions))
-    for (const [k, v] of Object.entries(category)) CONFIG.Dice.functions[k] = v;
+  for (const category of Object.values(dice.functions)) {
+    for (const [k, v] of Object.entries(category)) { CONFIG.Dice.functions[k] = v; }
+  }
 
   // Configure Formula Editor
   // ========================
@@ -408,7 +410,7 @@ foundry.helpers.Hooks.once("init", function() {
 // ================================
 
 foundry.helpers.Hooks.once("setup", function() {
-  for (const pack of game.packs) pack.applicationClass = applications.sidebar.TeriockCompendium;
+  for (const pack of game.packs) { pack.applicationClass = applications.sidebar.TeriockCompendium; }
 });
 
 // Perform one-time pre-localization and sorting of some configuration objects

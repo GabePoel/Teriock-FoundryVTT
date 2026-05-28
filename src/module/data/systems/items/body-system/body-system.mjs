@@ -50,7 +50,7 @@ export default class BodySystem extends mixClasses(BaseItemSystem, mixins.WikiSy
   /** @inheritDoc */
   prepareSpecialData() {
     this.equipmentClasses.add("bodyParts");
-    if (this.av.value) this.equipmentClasses.add("armor");
+    if (this.av.value) { this.equipmentClasses.add("armor"); }
     super.prepareSpecialData();
   }
 }

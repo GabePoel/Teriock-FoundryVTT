@@ -28,9 +28,12 @@ export default Base => {
        */
       get _isSuppressedConditions() {
         if (this.maneuver === "passive" && this.actor) {
-          for (const condition of this.duration.conditions.present)
-            if (!this.actor.statuses.has(condition)) return true;
-          for (const condition of this.duration.conditions.absent) if (this.actor.statuses.has(condition)) return true;
+          for (
+            const condition of this.duration.conditions.present
+          ) { if (!this.actor.statuses.has(condition)) { return true; } }
+          for (
+            const condition of this.duration.conditions.absent
+          ) { if (this.actor.statuses.has(condition)) { return true; } }
         }
         return false;
       }
@@ -45,7 +48,7 @@ export default Base => {
         super.prepareDerivedData();
 
         // Clean passive durations
-        if (this.maneuver === "passive") this.duration.unit = "passive";
+        if (this.maneuver === "passive") { this.duration.unit = "passive"; }
 
         // Gifted modifications
         if (this.costs.tweaks.gifted) {

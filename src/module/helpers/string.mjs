@@ -22,7 +22,7 @@ export function isKebabCase(str) {
  * @returns {boolean}
  */
 export function isTitleCase(str) {
-  if (!str) return false;
+  if (!str) { return false; }
   return str === toTitleCase(str);
 }
 
@@ -80,7 +80,7 @@ export function toKebabCaseFull(str) {
  */
 export function toInt(str) {
   const result = parseInt(str, 10);
-  if (isNaN(result)) return 0;
+  if (isNaN(result)) { return 0; }
   return result;
 }
 

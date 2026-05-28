@@ -9,9 +9,9 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
       const uuid = el.getAttribute("data-uuid");
       // Remove sub-documents. This requires pre-indexing the compendium packs.
       // The packs are pre-indexed in the "ready" hook.
-      if (foundry.utils.getProperty(fromUuidSync(uuid), "system._sup")) el.remove();
+      if (foundry.utils.getProperty(fromUuidSync(uuid), "system._sup")) { el.remove(); }
       // Enable tooltips for remaining search results
-      else if (makeTooltips) el.dataset.tooltipUuid = uuid;
+      else if (makeTooltips) { el.dataset.tooltipUuid = uuid; }
     });
   }
 }

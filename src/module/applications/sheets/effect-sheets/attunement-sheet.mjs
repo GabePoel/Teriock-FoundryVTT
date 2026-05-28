@@ -26,7 +26,7 @@ export default class AttunementSheet extends BaseEffectSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) return;
+    if (!this.isEditable) { return; }
     this._connectBuildContextMenu(".attunement-box", TERIOCK.config.attunement.type, "system.type", "click");
   }
 }

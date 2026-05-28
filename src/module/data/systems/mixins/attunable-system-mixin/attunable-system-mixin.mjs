@@ -36,7 +36,7 @@ export default function AttunableSystemMixin(Base) {
       get _attunableTags() {
         const key = this.needsAttunement.toString();
         const tags = [{ label: `TERIOCK.SYSTEMS.Attunable.FIELDS.needsAttunement.${key}` }];
-        if (this.isAttuned) tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" });
+        if (this.isAttuned) { tags.push({ label: "TERIOCK.SYSTEMS.Attunement.USAGE.attuned" }); }
         return tags.map(t => {
           return { label: t.label, tooltip: "TYPES.ActiveEffect.attunement" };
         });
@@ -75,8 +75,8 @@ export default function AttunableSystemMixin(Base) {
             : _loc("TERIOCK.SYSTEMS.Attunement.USAGE.deattuned"),
           visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
           onClick: async () => {
-            if (this.isAttuned) await this.deattune();
-            else await this.attune();
+            if (this.isAttuned) { await this.deattune(); }
+            else { await this.attune(); }
           },
         }, ...super.embedIcons];
       }
@@ -93,7 +93,7 @@ export default function AttunableSystemMixin(Base) {
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
         if (this.parent.checkEditor(userId)) {
-          if (this.attunement) this.attunement.update({ "system.tier": this.tier.value });
+          if (this.attunement) { this.attunement.update({ "system.tier": this.tier.value }); }
         }
       }
 
@@ -108,7 +108,7 @@ export default function AttunableSystemMixin(Base) {
       async attune() {
         await this.parent.hookCall("attune", { scope: { attunable: this.parent } });
         let attunement = this.attunement;
-        if (attunement) return attunement;
+        if (attunement) { return attunement; }
         const attunementData = {
           changes: [{ key: "system.attunements", phase: "initial", priority: 10, type: "add", value: this.parent._id }],
           img: this.parent.img,

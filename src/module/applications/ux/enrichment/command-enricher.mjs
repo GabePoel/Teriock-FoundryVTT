@@ -14,13 +14,14 @@ async function executeCommand(target, operation, event) {
   event.preventDefault();
   event.stopPropagation();
   const command = commands[target.dataset.command];
-  if (!command || !command[operation]) return;
+  if (!command || !command[operation]) { return; }
   const options = {};
-  for (const mod of ["alt", "ctrl", "shift"]) if (command[mod] && event[`${mod}Key`]) options[command[mod]] = true;
+  for (const mod of ["alt", "ctrl", "shift"]) { if (command[mod] && event[`${mod}Key`]) { options[command[mod]] =
+        true; } }
   for (const [key, value] of Object.entries(target.dataset)) {
     if (!["action", "command"].includes(key)) {
       options[key] = interpretTerm(value);
-      if (value === "true") options[key] = true;
+      if (value === "true") { options[key] = true; }
     }
   }
   let actor;
@@ -28,7 +29,7 @@ async function executeCommand(target, operation, event) {
     const doc = await fromUuid(target.dataset.relativeTo);
     actor = doc?.actor;
   }
-  if (!actor) actor = game.actors.default;
+  if (!actor) { actor = game.actors.default; }
   await command[operation](actor, options);
 }
 
@@ -37,7 +38,7 @@ const commandEnricher = {
   format: { aliases: Object.keys(commands), hasConfig: true, hasMultipleArguments: false, type: "roll" },
   id: "executeCommand",
   onRender: el => {
-    if (el.dataset.enriched) return;
+    if (el.dataset.enriched) { return; }
     el.dataset.enriched = "true";
     const target = el.firstElementChild;
     el.addEventListener("click", async ev => {

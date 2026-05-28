@@ -64,7 +64,7 @@ export default Base => {
           ) {
             continue;
           }
-          if (item.type === "rank" && !item.system.innate) numRanks += 1;
+          if (item.type === "rank" && !item.system.innate) { numRanks += 1; }
           statData._dice.push(...item.system.statDice[stat]._dice);
           statData.base += item.system.statDice[stat].value;
         }
@@ -79,7 +79,7 @@ export default Base => {
       /** @inheritDoc */
       async _preUpdate(changes, options, user) {
         const yes = await super._preUpdate(changes, options, user);
-        if (yes === false) return false;
+        if (yes === false) { return false; }
 
         options.teriock ??= {};
         const newHp = foundry.utils.mergeObject(
@@ -112,7 +112,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async animateStatChangeEffect(diff, color = "white") {
-        if (!diff || !canvas.scene) return;
+        if (!diff || !canvas.scene) { return; }
         const tokens = /** @type {TeriockToken[]} */ this.parent.getActiveTokens();
         const displayedDiff = diff.signedString();
         const displayArgs = {
@@ -123,7 +123,7 @@ export default Base => {
           strokeThickness: 4,
         };
         tokens.forEach(token => {
-          if (!token.visible || token.document.isSecret) return;
+          if (!token.visible || token.document.isSecret) { return; }
           const scrollingTextArgs = [token.center, displayedDiff, displayArgs];
           canvas.interface.createScrollingText(...scrollingTextArgs);
         });
@@ -172,7 +172,7 @@ export default Base => {
       /** @inheritDoc */
       prepareStatDice() {
         const items = [...docSort(this.parent.species), ...rankSort(this.parent.ranks), ...docSort(this.parent.mounts)];
-        for (const item of items) item.system.prepareStatDice();
+        for (const item of items) { item.system.prepareStatDice(); }
         this._prepareStat("hp", items);
         this._prepareStat("mp", items);
       }
@@ -188,10 +188,11 @@ export default Base => {
       async takeAwaken() {
         await this.parent.hookCall("takeAwaken");
         if (this.parent.statuses.has("unconscious") && !this.parent.statuses.has("dead")) {
-          if (this.hp.value <= 0) await this.parent.update({ "system.hp.value": 1 });
-          if (this.parent.statuses.has("asleep")) await this.parent.toggleStatusEffect("asleep", { active: false });
-          if (this.parent.statuses.has("unconscious"))
+          if (this.hp.value <= 0) { await this.parent.update({ "system.hp.value": 1 }); }
+          if (this.parent.statuses.has("asleep")) { await this.parent.toggleStatusEffect("asleep", { active: false }); }
+          if (this.parent.statuses.has("unconscious")) {
             await this.parent.toggleStatusEffect("unconscious", { active: false });
+          }
         }
       }
 
@@ -226,8 +227,8 @@ export default Base => {
       async takeRevive() {
         await this.parent.hookCall("takeRevive");
         if (this.parent.statuses.has("dead")) {
-          if (this.hp.value <= 0) await this.takeHealing(1 - this.hp.value);
-          if (this.mp.value <= 0) await this.takeRevitalizing(1 - this.mp.value);
+          if (this.hp.value <= 0) { await this.takeHealing(1 - this.hp.value); }
+          if (this.mp.value <= 0) { await this.takeRevitalizing(1 - this.mp.value); }
           await this.parent.toggleStatusEffect("dead", { active: false });
           const toRemove = this.parent.consequences.filter(c => c.statuses.has("dead")).map(c => c.id);
           await this.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
@@ -257,6 +258,6 @@ function statField(options = {}) {
     schema.temp = new fields.NumberField({ initial: 0, integer: true, min: 0 });
     schema.poolLimit = initialNumber();
   }
-  if (options.morganti) schema.morganti = new fields.NumberField({ initial: 0, integer: true, min: 0 });
+  if (options.morganti) { schema.morganti = new fields.NumberField({ initial: 0, integer: true, min: 0 }); }
   return new fields.SchemaField(schema);
 }

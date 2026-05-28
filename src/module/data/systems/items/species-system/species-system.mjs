@@ -111,9 +111,9 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get color() {
     if (this.isTransformation) {
-      if (this.transformationEffect.system.transformation.level === "minor") return TERIOCK.display.colors.blue;
-      if (this.transformationEffect.system.transformation.level === "full") return TERIOCK.display.colors.green;
-      if (this.transformationEffect.system.transformation.level === "greater") return TERIOCK.display.colors.purple;
+      if (this.transformationEffect.system.transformation.level === "minor") { return TERIOCK.display.colors.blue; }
+      if (this.transformationEffect.system.transformation.level === "full") { return TERIOCK.display.colors.green; }
+      if (this.transformationEffect.system.transformation.level === "greater") { return TERIOCK.display.colors.purple; }
     }
     return super.color;
   }
@@ -180,7 +180,7 @@ export default class SpeciesSystem
   get isPrimaryTransformation() {
     if (this.isTransformation) {
       const transformationEffect = this.transformationEffect;
-      if (transformationEffect && transformationEffect.system.isPrimaryTransformation) return true;
+      if (transformationEffect && transformationEffect.system.isPrimaryTransformation) { return true; }
     }
     return false;
   }
@@ -209,7 +209,7 @@ export default class SpeciesSystem
    * @returns {TeriockLingering|null}
    */
   get transformationEffect() {
-    if (!this.actor) return null;
+    if (!this.actor) { return null; }
     return this.parent.dependee ?? null;
   }
 
@@ -225,8 +225,8 @@ export default class SpeciesSystem
           title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
         },
       });
-      if (proceed) await this.transformationEffect.delete();
-      else await super.deleteThis();
+      if (proceed) { await this.transformationEffect.delete(); }
+      else { await super.deleteThis(); }
     } else {
       await super.deleteThis();
     }
@@ -258,20 +258,20 @@ export default class SpeciesSystem
       ["transformation.level"]: this.transformationEffect?.system.transformation.level || 0,
       "transformation.primary": Number(this.isPrimaryTransformation),
     });
-    for (const trait of this.traits) data[`trait.${toCamelCase(trait)}`] = 1;
+    for (const trait of this.traits) { data[`trait.${toCamelCase(trait)}`] = 1; }
     return data;
   }
 
   /** @inheritDoc */
   getRollData() {
     const rollData = super.getRollData();
-    if (!this.actor) rollData.size = this.size.enabled ? this.size.value : 0;
+    if (!this.actor) { rollData.size = this.size.enabled ? this.size.value : 0; }
     return rollData;
   }
 
   /** @inheritDoc */
   prepareBaseData() {
-    if (this.size.enabled && !this.size.value) this.size.value = 3;
+    if (this.size.enabled && !this.size.value) { this.size.value = 3; }
     super.prepareBaseData();
   }
 

@@ -52,7 +52,7 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(B
    * @param {Teriock.Execution.TradecraftExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (this.actor) this.competence.raw = this.actor.system.tradecrafts[options.tradecraft].competence.value;
+    if (this.actor) { this.competence.raw = this.actor.system.tradecrafts[options.tradecraft].competence.value; }
     super._determineCompetence(options);
   }
 }

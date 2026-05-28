@@ -4,7 +4,7 @@
  * @returns {string}
  */
 export function elementClass(elements) {
-  if (elements.size !== 1) return "es-multi";
+  if (elements.size !== 1) { return "es-multi"; }
   return `es-${Array.from(elements)[0]}`;
 }
 
@@ -34,9 +34,9 @@ export function createDialogInput(options = {}) {
 export function cleanDataset(dataset) {
   const options = {};
   for (const [key, value] of Object.entries(dataset)) {
-    if (value === "true") options[key] = true;
-    else if (value === "false") options[key] = false;
-    else options[key] = value;
+    if (value === "true") { options[key] = true; }
+    else if (value === "false") { options[key] = false; }
+    else { options[key] = value; }
   }
   return options;
 }
@@ -49,7 +49,7 @@ export function cleanDataset(dataset) {
  */
 export function queryAll(root, selector) {
   const result = [];
-  if (root.matches(selector)) result.push(root);
+  if (root.matches(selector)) { result.push(root); }
   result.push(...root.querySelectorAll(selector));
   return result;
 }
@@ -64,8 +64,8 @@ export function queryAll(root, selector) {
 export function createElement(tagName, attributes = {}) {
   const element = document.createElement(tagName);
   for (const [k, v] of Object.entries(foundry.utils.flattenObject(attributes))) {
-    if (k.includes(".")) foundry.utils.setProperty(element, k, v);
-    else element[k] = v;
+    if (k.includes(".")) { foundry.utils.setProperty(element, k, v); }
+    else { element[k] = v; }
   }
   return element;
 }

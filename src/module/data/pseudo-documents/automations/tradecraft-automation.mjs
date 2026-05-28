@@ -87,22 +87,22 @@ export default class TradecraftAutomation
    * @returns {Promise<void>}
    */
   async executeTradecraft(scope = {}) {
-    if (this.tradecrafts.size === 0) return;
+    if (this.tradecrafts.size === 0) { return; }
     const choices = Array.from(this.tradecrafts);
     let selected = [];
-    if (this.automatic && choices.length === 1) selected = choices;
+    if (this.automatic && choices.length === 1) { selected = choices; }
     else {
       if (this.multi) {
         selected = await selectTradecraftsDialog(choices);
-        if (selected.length === 0) return;
+        if (selected.length === 0) { return; }
       } else {
         const chosen = await selectTradecraftDialog(choices);
-        if (!chosen) return;
+        if (!chosen) { return; }
         selected = [chosen];
       }
     }
     const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
-    if (!actor) return;
+    if (!actor) { return; }
     await Promise.all(
       selected.map(tradecraft =>
         actor.system.rollTradecraft(tradecraft, {

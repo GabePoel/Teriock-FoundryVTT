@@ -37,8 +37,8 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
  * @returns {string}
  */
 export function simplifyTag(tag) {
-  if (typeof tag === "string") return _loc(tag);
-  if (typeof tag.label === "string") return _loc(tag.label);
+  if (typeof tag === "string") { return _loc(tag); }
+  if (typeof tag.label === "string") { return _loc(tag.label); }
   return "";
 }
 

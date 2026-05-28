@@ -66,8 +66,8 @@ export default class MountSystem
         : _loc("TERIOCK.SYSTEMS.Mount.EMBED.unmounted"),
       visible: this.parent.isOwner,
       onClick: async () => {
-        if (this.mounted) await this.unmount();
-        else await this.mount();
+        if (this.mounted) { await this.unmount(); }
+        else { await this.mount(); }
       },
     }];
   }

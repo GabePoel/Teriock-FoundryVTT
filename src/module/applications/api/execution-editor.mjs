@@ -43,7 +43,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
     const index = Number(control?.dataset.documentIndex);
     /** @type {Teriock.Execution.ExecutionDialogDocument} */
     const entry = this.execution._dialogDocuments[index];
-    if (!entry?.editable || typeof entry.getChoices !== "function") return;
+    if (!entry?.editable || typeof entry.getChoices !== "function") { return; }
     const choices = await entry.getChoices();
     const selected = await selectDocumentDialog(choices, {
       auto: false,
@@ -57,8 +57,8 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
         : null,
       title: _loc(entry.selectTitle ?? "TERIOCK.DIALOGS.Select.Armament.title"),
     });
-    if (selected === null) return;
-    if (typeof entry.update === "function") await entry.update(selected);
+    if (selected === null) { return; }
+    if (typeof entry.update === "function") { await entry.update(selected); }
     await this.render(false);
   }
 
@@ -72,7 +72,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
     event?.preventDefault();
     const name = target?.name;
     const button = this.execution._dialogButtons.find(b => b.name === name);
-    if (button?.callback) button.callback();
+    if (button?.callback) { button.callback(); }
     this._finish(true);
     await this.close();
   }
@@ -111,7 +111,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
   #bindFieldListeners() {
     for (const field of this.execution._activeDialogFields) {
       const element = /** @type {HTMLInputElement} */ (this.element.querySelector(`[name="${field.name}"]`));
-      if (!element) continue;
+      if (!element) { continue; }
       element.addEventListener("change", () => {
         field.update(this.#readFieldValue(field, element));
       });
@@ -144,8 +144,8 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
    * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} element
    */
   #readFieldValue(field, element) {
-    if (field.field instanceof fields.BooleanField) return element.checked;
-    if (field.field instanceof fields.NumberField) return Number(element.value);
+    if (field.field instanceof fields.BooleanField) { return element.checked; }
+    if (field.field instanceof fields.NumberField) { return Number(element.value); }
     return element.value;
   }
 
@@ -173,7 +173,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
     if (btn && btn.name) {
       /** @type {HTMLButtonElement} */
       const btnEl = this.element.querySelector(`.form-footer button[name=${btn.name}]`);
-      if (btnEl) btnEl.focus();
+      if (btnEl) { btnEl.focus(); }
     }
   }
 
@@ -189,8 +189,8 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
     const mainFields = [];
     const smallFields = [];
     for (const field of this.execution._activeDialogFields) {
-      if (field.small) smallFields.push(this.#prepareFieldContext(field, { small: true }));
-      else mainFields.push(this.#prepareFieldContext(field));
+      if (field.small) { smallFields.push(this.#prepareFieldContext(field, { small: true })); }
+      else { mainFields.push(this.#prepareFieldContext(field)); }
     }
     const multipleDocuments = this.execution._dialogDocuments.length > 1;
     const documents = this.execution._dialogDocuments.map((entry, index) => {
@@ -220,7 +220,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    if (partId === "content") context.partId = this.rootId;
+    if (partId === "content") { context.partId = this.rootId; }
     return context;
   }
 

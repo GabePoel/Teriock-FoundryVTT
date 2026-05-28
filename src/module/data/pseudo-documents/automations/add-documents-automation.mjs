@@ -65,8 +65,9 @@ export default class AddDocumentsAutomation
    */
   #inferLabel(construction) {
     let name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
-    if (foundry.utils.hasProperty(construction, "data.name"))
+    if (foundry.utils.hasProperty(construction, "data.name")) {
       name = _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.inferred", { name: construction.data.name });
+    }
     return name;
   }
 
@@ -80,15 +81,15 @@ export default class AddDocumentsAutomation
     let name;
     if (construction.uuid) {
       const index = fromUuidSync(construction.uuid);
-      if (index) uuidName = index.name;
+      if (index) { uuidName = index.name; }
       name = uuidName;
     }
     if (foundry.utils.hasProperty(construction, "data.name")) {
       dataName = construction.data.name;
       name = dataName;
     }
-    if (dataName?.includes("{name}")) name = dataName.replace("{name}", uuidName || "");
-    if (name) foundry.utils.setProperty(construction, "data.name", name);
+    if (dataName?.includes("{name}")) { name = dataName.replace("{name}", uuidName || ""); }
+    if (name) { foundry.utils.setProperty(construction, "data.name", name); }
   }
 
   /**
@@ -96,7 +97,7 @@ export default class AddDocumentsAutomation
    * @returns {string[]}
    */
   get _attachmentPaths() {
-    if (this.document?.type !== "ability") return ["display.label"];
+    if (this.document?.type !== "ability") { return ["display.label"]; }
     return ["separate", this.separate ? "display.label" : "attachDocuments"];
   }
 
@@ -108,7 +109,7 @@ export default class AddDocumentsAutomation
     const paths = ["children.enabled"];
     if (this.children.enabled) {
       paths.push(...["children.identifiers", "children.uuids", "children.overrideData"]);
-      if (this.children.overrideData) paths.push("children.data");
+      if (this.children.overrideData) { paths.push("children.data"); }
     }
     return paths;
   }
@@ -153,7 +154,7 @@ export default class AddDocumentsAutomation
           ? this.competence.raw
           : this.document?.system?.competence?.value,
       });
-      if (this.overrideData && this.data) foundry.utils.mergeObject(data, this.data, { inplace: true });
+      if (this.overrideData && this.data) { foundry.utils.mergeObject(data, this.data, { inplace: true }); }
       const construction = { data, uuid };
       this.#updateConstructionName(construction);
       return construction;
@@ -162,7 +163,7 @@ export default class AddDocumentsAutomation
 
   /** @inheritDoc */
   async getActivations() {
-    if (!this.hasActivations) return [];
+    if (!this.hasActivations) { return []; }
     const choices = await this.choose();
     const activations = [];
     for (const choice of choices) {

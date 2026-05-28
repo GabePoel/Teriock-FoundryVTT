@@ -45,7 +45,7 @@ export default class ProtectionAutomation extends CritAutomation {
    * @returns {Record<string, string>}
    */
   get _choices() {
-    if (this.category === "other") return {};
+    if (this.category === "other") { return {}; }
     return foundry.utils.getProperty(TERIOCK, protectionConfig.categories[this.category]?.choices || {});
   }
 
@@ -56,13 +56,13 @@ export default class ProtectionAutomation extends CritAutomation {
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-    if (this.category !== "other" && path.endsWith("value")) inputConfig.choices = this._choices;
+    if (this.category !== "other" && path.endsWith("value")) { inputConfig.choices = this._choices; }
     return super._makeFormGroup(path, groupConfig, inputConfig);
   }
 
   /** @inheritDoc */
   getChanges() {
-    if (!this.value || (this.category !== "other" && !this._choices[this.value])) return [];
+    if (!this.value || (this.category !== "other" && !this._choices[this.value])) { return []; }
     return [{
       key: `system.protections.${this.relation}.${this.category}`,
       phase: TERIOCK.config.change.defaultPhase,

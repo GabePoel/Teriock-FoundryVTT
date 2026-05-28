@@ -8,7 +8,7 @@ export default class StoneSystem extends BaseCardsSystem {
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
     const copy = foundry.utils.deepClone(data);
     this.parent.updateSource(
@@ -33,7 +33,7 @@ export default class StoneSystem extends BaseCardsSystem {
       );
       cards.sort((a, b) => a.sort - b.sort);
       for (const card of cards) {
-        if (card.id === this.parent.id) break;
+        if (card.id === this.parent.id) { break; }
         count++;
       }
       this.parent.value = count;

@@ -15,7 +15,7 @@ export default class TeriockChatLog extends ChatLog {
           const payload = match[2] ? match[2].trim() : "";
           const commandOptions = buildCommandOptions(payload, command);
           const actors = game.actors.selected;
-          if (!actors.length) actors.push(null);
+          if (!actors.length) { actors.push(null); }
           actors.forEach(actor => command.primary(actor, commandOptions));
           return false;
         },
@@ -50,22 +50,22 @@ export default class TeriockChatLog extends ChatLog {
       onClick: async (_ev, li) => {
         const message = game.messages.get(li.dataset.messageId);
         const doc = await fromUuid(message.system._src);
-        if (!doc) return;
-        if (doc.documentName === "JournalEntryPage") await doc.parent.sheet.render({ force: true, pageId: doc.id });
-        else await doc.sheet?.render({ force: true, mode: "view" });
+        if (!doc) { return; }
+        if (doc.documentName === "JournalEntryPage") { await doc.parent.sheet.render({ force: true, pageId: doc.id }); }
+        else { await doc.sheet?.render({ force: true, mode: "view" }); }
       },
       visible: li => {
         const message = game.messages.get(li.dataset.messageId);
         const src = message.system._src;
-        if (!src) return false;
+        if (!src) { return false; }
         let doc;
-        if (!src.startsWith("Compendium")) doc = fromUuidSync(src);
+        if (!src.startsWith("Compendium")) { doc = fromUuidSync(src); }
         else {
           const parsed = foundry.utils.parseUuid(src);
-          if (parsed.embedded.length === 0) doc = fromUuidSync(src);
-          if (parsed.collection.visible) return true;
+          if (parsed.embedded.length === 0) { doc = fromUuidSync(src); }
+          if (parsed.collection.visible) { return true; }
         }
-        if (!doc) return false;
+        if (!doc) { return false; }
         return game.user.isGM || game.teriock.getSetting("openChatDocuments") || doc.isViewer;
       },
     }];

@@ -17,8 +17,8 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
    * @returns {Promise<void>}
    */
   static async #onToggleDampened() {
-    if (this.document.system.dampened) await this.document.system.undampen();
-    else await this.document.system.dampen();
+    if (this.document.system.dampened) { await this.document.system.undampen(); }
+    else { await this.document.system.dampen(); }
   }
 
   /**
@@ -26,8 +26,8 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
    * @returns {Promise<void>}
    */
   static async #onToggleEquipped() {
-    if (this.document.system.equipped) await this.document.system.unequip();
-    else await this.document.system.equip();
+    if (this.document.system.equipped) { await this.document.system.unequip(); }
+    else { await this.document.system.equip(); }
   }
 
   /**
@@ -35,8 +35,8 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
    * @returns {Promise<void>}
    */
   static async #onToggleGlued() {
-    if (this.document.system.glued) await this.document.system.unglue();
-    else await this.document.system.glue();
+    if (this.document.system.glued) { await this.document.system.unglue(); }
+    else { await this.document.system.glue(); }
   }
 
   /**
@@ -44,8 +44,8 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
    * @returns {Promise<void>}
    */
   static async #onToggleShattered() {
-    if (this.document.system.shattered) await this.document.system.repair();
-    else await this.document.system.shatter();
+    if (this.document.system.shattered) { await this.document.system.repair(); }
+    else { await this.document.system.shatter(); }
   }
 
   /** @inheritDoc */
@@ -75,7 +75,7 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if (!this.isEditable) return;
+    if (!this.isEditable) { return; }
     this._connectBuildContextMenu(
       ".power-level-box",
       TERIOCK.config.equipment.powerLevel,

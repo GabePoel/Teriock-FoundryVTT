@@ -16,12 +16,12 @@ export default class TeriockTooltipManager extends TooltipManager {
    */
   async #fetchRichTooltip(element) {
     const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
-    if (!this.#validateUuid(uuid)) return;
+    if (!this.#validateUuid(uuid)) { return; }
     const doc = await fromUuid(uuid);
     if (doc && typeof doc.toTooltip === "function") {
       element.dataset.tooltipHtml = await doc.toTooltip();
       element.dataset.tooltipFetched = "true";
-      if (element === this.element) this.activate(element);
+      if (element === this.element) { this.activate(element); }
     }
   }
 
@@ -34,7 +34,7 @@ export default class TeriockTooltipManager extends TooltipManager {
     const element = event.target;
     if ((element.dataset.tooltipUuid || element.dataset.tooltipIdentifier) && !element.dataset.tooltipFetched) {
       const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
-      if (!this.#validateUuid(uuid)) return;
+      if (!this.#validateUuid(uuid)) { return; }
       element.dataset.tooltipClass = "teriock-rich-tooltip";
       element.dataset.tooltipHtml = TeriockTextEditor.loadingPanelHTML;
       this.#fetchRichTooltip(element);
@@ -47,11 +47,11 @@ export default class TeriockTooltipManager extends TooltipManager {
    * @returns {boolean}
    */
   #validateUuid(uuid) {
-    if (!uuid) return false;
+    if (!uuid) { return false; }
     const documentName = foundry.utils.parseUuid(uuid)?.type;
-    if (!documentName) return false;
-    if (this.#KNOWN_DOCUMENT_NAMES.allowed.has(documentName)) return true;
-    if (this.#KNOWN_DOCUMENT_NAMES.disallowed.has(documentName)) return false;
+    if (!documentName) { return false; }
+    if (this.#KNOWN_DOCUMENT_NAMES.allowed.has(documentName)) { return true; }
+    if (this.#KNOWN_DOCUMENT_NAMES.disallowed.has(documentName)) { return false; }
     const Cls = foundry.utils.getDocumentClass(documentName);
     if (Cls?.documentMetadata.tooltip) {
       this.#KNOWN_DOCUMENT_NAMES.allowed.add(documentName);
@@ -65,12 +65,12 @@ export default class TeriockTooltipManager extends TooltipManager {
   /** @inheritdoc */
   _setAnchor(direction) {
     if (this.element.dataset.tooltipClass === "teriock-rich-tooltip") {
-      if (!["LEFT", "RIGHT"].includes(direction)) direction = "RIGHT";
+      if (!["LEFT", "RIGHT"].includes(direction)) { direction = "RIGHT"; }
       const rect = this.element.getBoundingClientRect();
       const leftSpace = rect.left;
       const rightSpace = window.innerWidth - rect.right;
-      if (direction === "LEFT" && leftSpace < this.#RICH_TOOLTIP_WIDTH) direction = "RIGHT";
-      else if (direction === "RIGHT" && rightSpace < this.#RICH_TOOLTIP_WIDTH) direction = "LEFT";
+      if (direction === "LEFT" && leftSpace < this.#RICH_TOOLTIP_WIDTH) { direction = "RIGHT"; }
+      else if (direction === "RIGHT" && rightSpace < this.#RICH_TOOLTIP_WIDTH) { direction = "LEFT"; }
     }
     super._setAnchor(direction);
   }
@@ -87,6 +87,6 @@ export default class TeriockTooltipManager extends TooltipManager {
    * @param options
    */
   reactivate(options = {}) {
-    if (this.element) this.activate(this.element, options);
+    if (this.element) { this.activate(this.element, options); }
   }
 }

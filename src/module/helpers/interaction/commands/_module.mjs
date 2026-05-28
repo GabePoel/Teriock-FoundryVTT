@@ -67,7 +67,7 @@ const commands = {};
 for (const entry of commandArray) {
   commands[entry.id] = { ...entry, original: true };
   if (entry.aliases) {
-    for (const alias of entry.aliases) commands[alias] = entry;
+    for (const alias of entry.aliases) { commands[alias] = entry; }
   }
 }
 

@@ -137,9 +137,9 @@ export default class UseDocumentsAutomation
    */
   async use(options = {}) {
     options = Object.assign({ noHeighten: this.noHeighten }, options);
-    if (options.actor == null) options.actor = this.actor ?? this.document?.actor ?? null;
+    if (options.actor == null) { options.actor = this.actor ?? this.document?.actor ?? null; }
     const chosen = await this._choose({ actor: options.actor, expandFolders: true, expandTables: this.expandTables });
-    if (this.automatic && chosen.length === 1) await chosen[0].use(options);
-    else await Promise.all(chosen.map(c => c.use(options)));
+    if (this.automatic && chosen.length === 1) { await chosen[0].use(options); }
+    else { await Promise.all(chosen.map(c => c.use(options))); }
   }
 }

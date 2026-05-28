@@ -10,7 +10,7 @@ import { thresholdCommand } from "./abstract-command.mjs";
  * @returns {void|false}
  */
 function preUse(actor, options = {}) {
-  if (!game.actors.check(actor)) return false;
+  if (!game.actors.check(actor)) { return false; }
   if (["number", "string"].includes(typeof options.competence)) {
     options.proficient = Number(options.competence) >= 1;
     options.fluent = Number(options.competence) >= 2;
@@ -23,7 +23,7 @@ function preUse(actor, options = {}) {
  * @returns {Promise<void>}
  */
 async function useLocal(actor, options = {}) {
-  if (preUse(actor, options) === false) return;
+  if (preUse(actor, options) === false) { return; }
   if (!options.lookup) {
     ui.notifications.error("TERIOCK.COMMANDS.UseLocal.noLookup", { localize: true });
     return;
@@ -37,7 +37,7 @@ async function useLocal(actor, options = {}) {
  * @returns {Promise<void>}
  */
 async function useExternal(actor, options = {}) {
-  if (preUse(actor, options) === false) return;
+  if (preUse(actor, options) === false) { return; }
   if (!options.uuid) {
     ui.notifications.error("TERIOCK.COMMANDS.UseExternal.noUuid", { localize: true });
     return;

@@ -6,7 +6,7 @@ const packEnricher = {
   format: { aliases: ["Pack"], hasConfig: false, hasMultipleArguments: false, type: "link" },
   id: "openPack",
   onRender: el => {
-    if (el.dataset.enriched) return;
+    if (el.dataset.enriched) { return; }
     el.dataset.enriched = "true";
     const target = el.firstElementChild;
     el.addEventListener("click", async () => {

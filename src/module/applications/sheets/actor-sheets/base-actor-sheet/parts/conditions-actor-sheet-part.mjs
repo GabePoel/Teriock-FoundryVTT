@@ -21,7 +21,7 @@ export default Base =>
       );
       Object.assign(context, { conditions: liveConditions, removableConditions });
       context.conditionsMap = {};
-      for (const c of this.actor.conditions) context.conditionsMap[c.system.conditionKey] = c;
+      for (const c of this.actor.conditions) { context.conditionsMap[c.system.conditionKey] = c; }
       context.conditionProviders = {};
       context.conditionTooltips = {};
       for (const condition of Object.keys(TERIOCK.index.conditions)) {

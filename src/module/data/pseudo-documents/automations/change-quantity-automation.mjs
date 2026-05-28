@@ -56,13 +56,13 @@ export default class ChangeQuantityAutomation
    */
   async #changeQuantity(scope = {}) {
     const consumable = await this.#findConsumable(scope);
-    if (!consumable) return;
+    if (!consumable) { return; }
     const shouldChange = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
       data: { amount: this.formula, name: `@UUID[${consumable.uuid}]` },
       icon: TERIOCK.config.document[consumable.type]?.icon ?? undefined,
     });
-    if (!shouldChange) return;
+    if (!shouldChange) { return; }
     const roll = new BaseRoll(this.formula, this.getRollData(), {
       flavor: _loc("TERIOCK.AUTOMATIONS.ChangeQuantity.USAGE.roll"),
     });
@@ -106,19 +106,19 @@ export default class ChangeQuantityAutomation
    * @returns {Promise<AnyChildDocument|null>}
    */
   async #findConsumable(scope = {}) {
-    if (this.targetParent && this.document?.system?.consumable) return this.document;
-    if (!this.identifier) return null;
+    if (this.targetParent && this.document?.system?.consumable) { return this.document; }
+    if (!this.identifier) { return null; }
     let doc = this.document;
     let consumable;
     while (doc && !consumable) {
       const candidate = await fromIdentifierLocal(this.identifier, doc);
-      if (candidate?.system?.consumable) consumable = candidate;
-      if (typeof doc.getElder === "function") doc = await doc.getElder();
-      else doc = null;
+      if (candidate?.system?.consumable) { consumable = candidate; }
+      if (typeof doc.getElder === "function") { doc = await doc.getElder(); }
+      else { doc = null; }
     }
     if (!consumable) {
       const actor = scope?.actor ?? this.document.actor;
-      if (!actor) return null;
+      if (!actor) { return null; }
       consumable = await fromIdentifierLocal(this.identifier, actor);
     }
     return consumable ?? null;
@@ -137,7 +137,7 @@ export default class ChangeQuantityAutomation
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["targetParent"];
-    if (!this.targetParent) paths.push("identifier");
+    if (!this.targetParent) { paths.push("identifier"); }
     paths.push(...["formula", ...this._confirmationPaths, ...super._formPaths]);
     return paths;
   }

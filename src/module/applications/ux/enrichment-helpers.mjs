@@ -55,7 +55,7 @@ export function parsePayload(payload, options = {}) {
     }
   };
   if (!options.hasMultipleArguments) {
-    if (payload) processTerm(payload.trim());
+    if (payload) { processTerm(payload.trim()); }
   } else {
     const regex = /([^\s"']+)|"([^"]*)"|'([^']*)'/g;
     let match;

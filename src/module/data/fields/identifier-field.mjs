@@ -18,7 +18,7 @@ export default class IdentifierField extends StringField {
   _toInput(config) {
     if (!config.choices && !this.choices) {
       const reset = config.reset ?? this.reset;
-      if (reset) return HTMLIdentifierInputElement.create({ ...config, reset });
+      if (reset) { return HTMLIdentifierInputElement.create({ ...config, reset }); }
       return createTextInput(config);
     }
     return super._toInput(config);
@@ -26,13 +26,15 @@ export default class IdentifierField extends StringField {
 
   /** @inheritDoc */
   _validateType(value) {
-    if (value == null || value === "") return true;
-    if (!identifierValidator(value)) throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
+    if (value == null || value === "") { return true; }
+    if (!identifierValidator(value)) { throw new Error(
+        _loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"),
+      ); }
   }
 
   /** @inheritDoc */
   clean(value, options, _state) {
-    if (value === "") value = null;
+    if (value === "") { value = null; }
     return super.clean(value, options, _state);
   }
 }

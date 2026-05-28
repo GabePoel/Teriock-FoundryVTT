@@ -28,7 +28,7 @@ export default Base => {
       /** @inheritDoc */
       get _nameTags() {
         const tags = super._nameTags;
-        if (this.stashed) tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label"));
+        if (this.stashed) { tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label")); }
         return tags;
       }
 
@@ -42,8 +42,8 @@ export default Base => {
             : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.undampened"),
           visible: this.parent.isOwner,
           onClick: async () => {
-            if (this.dampened) await this.undampen();
-            else await this.dampen();
+            if (this.dampened) { await this.undampen(); }
+            else { await this.dampen(); }
           },
         }, {
           action: "toggleShatteredDoc",
@@ -53,8 +53,8 @@ export default Base => {
             : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unshatterd"),
           visible: this.parent.isOwner,
           onClick: async () => {
-            if (this.shattered) await this.repair();
-            else await this.shatter();
+            if (this.shattered) { await this.repair(); }
+            else { await this.shatter(); }
           },
         }, ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("attuned"))];
       }

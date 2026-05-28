@@ -47,10 +47,10 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     event?.preventDefault();
     const root = this.element;
     let ids = [];
-    if (this.multi) ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map(el => el.name);
+    if (this.multi) { ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map(el => el.name); }
     else {
       const radio = root.querySelector("input[name=\"choice\"]:checked");
-      if (radio) ids = [radio.value];
+      if (radio) { ids = [radio.value]; }
     }
     this._finish(ids);
     await this.close();
@@ -70,8 +70,8 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     this.tooltip = tooltip;
     this.tooltipAsync = tooltipAsync;
     this.openable = openable;
-    if (options.title) foundry.utils.setProperty(this.options, "window.title", options.title);
-    if (options.icon) foundry.utils.setProperty(this.options, "window.icon", options.icon);
+    if (options.title) { foundry.utils.setProperty(this.options, "window.title", options.title); }
+    if (options.icon) { foundry.utils.setProperty(this.options, "window.icon", options.icon); }
     this.config = foundry.utils.mergeObject(this.config ?? {}, this.options);
     this._resolve = null;
     this._result = new Promise(resolve => (this._resolve = resolve));
@@ -93,9 +93,9 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    * Initialize double-click handling on the document list.
    */
   _initClickLoader() {
-    if (!this.openable) return;
+    if (!this.openable) { return; }
     const list = this.element.querySelector(".doc-list-container");
-    if (!list) return;
+    if (!list) { return; }
     this._boundDblClickOpen ??= this._onDblClickOpen.bind(this);
     list.removeEventListener("dblclick", this._boundDblClickOpen);
     list.addEventListener("dblclick", this._boundDblClickOpen);
@@ -106,10 +106,10 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    */
   _initSearchFilter() {
     const root = this.element;
-    if (!root) return;
+    if (!root) { return; }
     const input = root.querySelector(".search-input");
     const content = root.querySelector(".doc-select");
-    if (!input || !content) return;
+    if (!input || !content) { return; }
     const searchFilter = new SearchFilter({
       contentSelector: ".doc-select",
       initial: "",
@@ -128,7 +128,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
   /** @inheritDoc */
   _onClose() {
     const list = this.element?.querySelector(".doc-list-container");
-    if (list && this._boundDblClickOpen) list.removeEventListener("dblclick", this._boundDblClickOpen);
+    if (list && this._boundDblClickOpen) { list.removeEventListener("dblclick", this._boundDblClickOpen); }
     this._finish(this.multi ? [] : null);
   }
 
@@ -138,7 +138,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
    */
   async _onDblClickOpen(event) {
     const row = /** @type {HTMLElement|null} */ event.target.closest("[data-uuid]");
-    if (!row?.dataset.uuid) return;
+    if (!row?.dataset.uuid) { return; }
     const doc = /** @type {AnyChildDocument} */ await fromUuid(row.dataset.uuid);
     await doc?.sheet?.render(true);
   }

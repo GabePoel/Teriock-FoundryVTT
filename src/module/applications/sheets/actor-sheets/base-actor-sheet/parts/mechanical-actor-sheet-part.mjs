@@ -25,11 +25,11 @@ export default Base =>
      */
     static async #onIncreaseCover(event) {
       if (event.button === 0) {
-        if (this.document.system.cover < 3) await this.document.system.increaseCover();
-        else await this.document.system.decreaseCover(3);
+        if (this.document.system.cover < 3) { await this.document.system.increaseCover(); }
+        else { await this.document.system.decreaseCover(3); }
       } else if (event.button === 2) {
-        if (this.document.system.cover > 0) await this.document.system.decreaseCover();
-        else await this.document.system.increaseCover(3);
+        if (this.document.system.cover > 0) { await this.document.system.decreaseCover(); }
+        else { await this.document.system.increaseCover(3); }
       }
     }
 
@@ -42,7 +42,7 @@ export default Base =>
     static async #onQuickUse(event, target) {
       const id = target.dataset.id;
       const item = this.document.items.get(id);
-      if (item) await item.use({ event });
+      if (item) { await item.use({ event }); }
     }
 
     /**

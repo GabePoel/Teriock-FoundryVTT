@@ -49,9 +49,12 @@ export default function AdjustableSystemMixin(Base) {
       /** @inheritDoc */
       get _nameTags() {
         const tags = [];
-        if (this.limitation && this.limitation.length > 0) tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.limited"));
-        if (this.improvement && this.improvement.length > 0)
+        if (this.limitation && this.limitation.length > 0) {
+          tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.limited"));
+        }
+        if (this.improvement && this.improvement.length > 0) {
           tags.push(_loc("TERIOCK.SYSTEMS.Adjustable.NAME.improved"));
+        }
         return [...tags, ...super._nameTags];
       }
 

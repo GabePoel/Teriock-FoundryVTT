@@ -75,7 +75,7 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       static migrateData(source, options, state) {
         const evaluationMigrations = ["damage.base", "damage.twoHanded", "attackPenalty"];
-        for (const e of evaluationMigrations) migrateKey(source, `${e}.raw`, e);
+        for (const e of evaluationMigrations) { migrateKey(source, `${e}.raw`, e); }
         return super.migrateData(source, options, state);
       }
 
@@ -166,9 +166,13 @@ export default function ArmamentSystemMixin(Base) {
        */
       get _propertyTags() {
         const tags = [];
-        if (this.spellTurning)
+        if (this.spellTurning) {
           tags.push({ label: "TERIOCK.TERMS.Properties.spellTurning", tooltip: "TERIOCK.PACKS.properties" });
-        if (this.warded) tags.push({ label: "TERIOCK.TERMS.Properties.warded", tooltip: "TERIOCK.PACKS.properties" });
+        }
+        if (this.warded) { tags.push({
+            label: "TERIOCK.TERMS.Properties.warded",
+            tooltip: "TERIOCK.PACKS.properties",
+          }); }
         return tags;
       }
 
@@ -330,8 +334,9 @@ export default function ArmamentSystemMixin(Base) {
        * @param {Teriock.Execution.ArmamentExecutionOptions} options
        */
       async _use(options = {}) {
-        if (game.teriock.getSetting("rollAttackOnArmamentUse"))
+        if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
+        }
         options.impacts ??= this.impacts;
         await new ArmamentExecution(options).execute();
       }
@@ -366,10 +371,10 @@ export default function ArmamentSystemMixin(Base) {
           style: this.fightingStyle,
           vitals: Number(this.vitals),
         });
-        for (const type of this.damage.types) data[`dmg.type.${type}`] = 1;
-        for (const p of this.props || new Set()) data[`prop.${p}`] = 1;
-        for (const impact of this.impacts) data[`impact.${impact}`] = 1;
-        for (const equipmentClass of this.equipmentClasses) data[`class.${equipmentClass}`] = 1;
+        for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
+        for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
+        for (const impact of this.impacts) { data[`impact.${impact}`] = 1; }
+        for (const equipmentClass of this.equipmentClasses) { data[`class.${equipmentClass}`] = 1; }
         return data;
       }
 
@@ -378,22 +383,23 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareBaseData();
 
         // Bring two-handed attacks up to parity with base
-        if (!formulaExists(this.damage.twoHanded)) this.damage.twoHanded = this.damage.base;
+        if (!formulaExists(this.damage.twoHanded)) { this.damage.twoHanded = this.damage.base; }
 
         // Properties
         const properties = /** @type {TeriockProperty[]} */ this.parent.effects.filter(e => e.type === "property");
         this.props = new Set(Array.from(properties).map(p => toCamelCase(p.name)));
 
         // Propagate damage types
-        for (const p of properties.filter(p => p.active))
-          if (p.system.damageType) this.damage.types.add(p.system.damageType.toLowerCase());
-        if (this.powerLevel === "magic") this.damage.types.add("magic");
+        for (const p of properties.filter(p => p.active)) {
+          if (p.system.damageType) { this.damage.types.add(p.system.damageType.toLowerCase()); }
+        }
+        if (this.powerLevel === "magic") { this.damage.types.add("magic"); }
         this.damage.base = addTypesToFormula(this.damage.base, this.damage.types);
         this.damage.twoHanded = addTypesToFormula(this.damage.twoHanded, this.damage.types);
 
         // Range
         this.range.description = "";
-        if (this.range.long.unitType === "zero") this.range.melee = true;
+        if (this.range.long.unitType === "zero") { this.range.melee = true; }
         this.range.ranged = this.range.long.unitType !== "zero";
       }
 
@@ -410,8 +416,9 @@ export default function ArmamentSystemMixin(Base) {
         }
 
         // Fighting Style
-        if (this.fightingStyle && this.fightingStyle.length > 0)
+        if (this.fightingStyle && this.fightingStyle.length > 0) {
           this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
+        }
       }
 
       /** @inheritDoc */
@@ -419,7 +426,7 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareSpecialData();
 
         // Range
-        if (!this.hasAttack) this.range.melee = false;
+        if (!this.hasAttack) { this.range.melee = false; }
         this.range.description = this.range.long.abbreviation;
         if (this.range.long.unitType !== "zero") {
           const shortDescription = this.range.short.unitType === "finite"

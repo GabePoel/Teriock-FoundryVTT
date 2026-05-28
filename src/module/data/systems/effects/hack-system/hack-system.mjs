@@ -30,7 +30,7 @@ export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   get _durationBar() {
     const bar = super._durationBar;
-    if (this.permanent) bar.wrappers.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label"));
+    if (this.permanent) { bar.wrappers.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label")); }
     return bar;
   }
 
@@ -54,15 +54,15 @@ export default class HackSystem extends ApplicableEffectSystem {
   /** @inheritDoc */
   get embedParts() {
     const textParts = [];
-    if (this.part) textParts.push(hackConfig[this.part]?.part);
-    if (this.permanent) textParts.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label"));
+    if (this.part) { textParts.push(hackConfig[this.part]?.part); }
+    if (this.permanent) { textParts.push(_loc("TERIOCK.SYSTEMS.Hack.FIELDS.permanent.label")); }
     return Object.assign(super.embedParts, { text: dotJoin(textParts) });
   }
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
-    if (yes === false) return false;
+    if (yes === false) { return false; }
 
     this.parent.updateSource({ statuses: ["hacked"], ...data });
   }

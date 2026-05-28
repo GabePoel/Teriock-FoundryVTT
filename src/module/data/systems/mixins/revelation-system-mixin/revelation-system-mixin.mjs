@@ -31,7 +31,7 @@ export default function RevelationSystemMixin(Base) {
       /** @inheritDoc */
       get _nameTags() {
         const tags = super._nameTags;
-        if (!this.revealed) tags.unshift(_loc("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed"));
+        if (!this.revealed) { tags.unshift(_loc("TERIOCK.SYSTEMS.Revelation.NAME.unrevealed")); }
         return tags;
       }
 
@@ -60,8 +60,9 @@ export default function RevelationSystemMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.parent.elder && this.parent.elder?.metadata?.revealable)
+        if (this.parent.elder && this.parent.elder?.metadata?.revealable) {
           this.revealed = this.revealed && this.parent.elder?.system.revealed;
+        }
       }
     }
   );

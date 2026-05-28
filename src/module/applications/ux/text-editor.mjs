@@ -18,7 +18,7 @@ export default class TeriockTextEditor extends TextEditor {
   static async _embedContent(match, options = {}) {
     for (const part of match.groups.config.match(/(?:[^\s"]+|"[^"]*")+/g)) {
       const [key] = part.split("=");
-      if (key === "identifier" || parseIdentifier(part)) await game.teriock.identifiers.initializing;
+      if (key === "identifier" || parseIdentifier(part)) { await game.teriock.identifiers.initializing; }
     }
     return super._embedContent(match, options);
   }
@@ -32,10 +32,10 @@ export default class TeriockTextEditor extends TextEditor {
     /** @type {DocumentHTMLEmbedConfig & { identifier?: TypedIdentifier }} */
     const config = super._parseEmbedConfig(raw, options);
     if (!config.uuid) {
-      if (config.identifier) config.uuid = game.teriock.identifiers.get(config.identifier);
+      if (config.identifier) { config.uuid = game.teriock.identifiers.get(config.identifier); }
       else if (config.values.length && parseIdentifier(config.values[0])) {
         const uuid = game.teriock.identifiers.get(config.values[0]);
-        if (uuid) config.uuid = uuid;
+        if (uuid) { config.uuid = uuid; }
       }
     }
     return config;
@@ -43,7 +43,7 @@ export default class TeriockTextEditor extends TextEditor {
 
   /** @inheritdoc */
   static createAnchor({ attrs = {}, classes = [], dataset = {}, icon, name } = {}) {
-    if (dataset.uuid) dataset.tooltipUuid = dataset.uuid;
+    if (dataset.uuid) { dataset.tooltipUuid = dataset.uuid; }
     return super.createAnchor({ attrs, classes, dataset, icon, name });
   }
 
@@ -56,8 +56,9 @@ export default class TeriockTextEditor extends TextEditor {
   static async enrichPanel(panel, options = {}) {
     await Promise.all((panel.blocks ?? []).map(async (b) => b.text = await this.enrichHTML(b.text, options)));
     for (const association of panel.associations ?? []) {
-      for (const card of association.cards ?? [])
-        if (card.uuid && card.makeTooltip) card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML);
+      for (const card of association.cards ?? []) {
+        if (card.uuid && card.makeTooltip) { card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML); }
+      }
     }
     return panel;
   }
@@ -82,9 +83,9 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<string>}
    */
   static async makeTooltip(parts, options = {}) {
-    if (options.noBars) delete parts.bars;
-    if (options.noBlocks) delete parts.blocks;
-    if (options.noAssociations) delete parts.associations;
+    if (options.noBars) { delete parts.bars; }
+    if (options.noBlocks) { delete parts.blocks; }
+    if (options.noAssociations) { delete parts.associations; }
     await this.enrichPanel(parts, options);
     return this.renderTemplate("teriock/ui/panel", parts);
   }

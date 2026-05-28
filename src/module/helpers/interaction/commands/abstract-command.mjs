@@ -13,7 +13,7 @@ export const formulaCommand = { args: ["formula"], formula: true };
  */
 export function simpleCommandFunctionFactory(operation) {
   return async function simpleCommandFunction(actor, options = {}) {
-    if (!game.actors.check(actor)) return;
+    if (!game.actors.check(actor)) { return; }
     await operation(actor, options);
   };
 }

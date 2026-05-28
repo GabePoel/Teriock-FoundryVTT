@@ -69,7 +69,7 @@ export default function StatGiverSystemMixin(Base) {
        */
       getCardContextMenuEntries(doc) {
         const entries = super.getCardContextMenuEntries(doc);
-        if (!doc?.isOwner) return entries;
+        if (!doc?.isOwner) { return entries; }
         entries.push({
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
@@ -126,7 +126,7 @@ export default function StatGiverSystemMixin(Base) {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        if (!this.actor) this.prepareStatDice();
+        if (!this.actor) { this.prepareStatDice(); }
       }
 
       /** @inheritDoc */

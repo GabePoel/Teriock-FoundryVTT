@@ -84,22 +84,22 @@ export default class DurationModel extends TimeUnitModel {
     let conditionsPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.ongoing", {
       partial: listFormat(conditions, { sort: false }),
     });
-    if (triggers.length === 0) triggerPart = "";
-    if (conditions.length === 0) conditionsPart = "";
+    if (triggers.length === 0) { triggerPart = ""; }
+    if (conditions.length === 0) { conditionsPart = ""; }
     return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", { end: conditionsPart, start: triggerPart }).trim();
   }
 
   /** @inheritDoc */
   get text() {
-    if (this.description) return this.description;
+    if (this.description) { return this.description; }
     const prerequisite = this.prerequisiteString;
     let duration = super.text;
     if (prerequisite.length > 1) {
-      if (prerequisite.length > 0 && this.unit === "unlimited") duration = "";
-      if (this.unit === "passive") duration = "";
+      if (prerequisite.length > 0 && this.unit === "unlimited") { duration = ""; }
+      if (this.unit === "passive") { duration = ""; }
       return _loc("TERIOCK.MODELS.Duration.PREREQUISITES.text", { end: prerequisite, start: duration });
     }
-    if (this.unit === "passive") duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive");
+    if (this.unit === "passive") { duration = _loc("TERIOCK.MODELS.Duration.UNITS.alwaysActive"); }
     return duration;
   }
 }

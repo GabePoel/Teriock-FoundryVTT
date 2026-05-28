@@ -9,8 +9,9 @@ import { parsePayload } from "../../applications/ux/enrichment-helpers.mjs";
 export function interpretCommandInput(input, command) {
   const definedArguments = command.args || [];
   const argumentOptions = {};
-  for (let i = 0; i < Math.min(input.arguments.length, definedArguments.length); i++)
-    argumentOptions[definedArguments[i]] = input.arguments[i];
+  for (
+    let i = 0; i < Math.min(input.arguments.length, definedArguments.length); i++
+  ) { argumentOptions[definedArguments[i]] = input.arguments[i]; }
   return { ...input.config, ...argumentOptions };
 }
 
@@ -22,9 +23,9 @@ export function interpretCommandInput(input, command) {
  * @returns {string}
  */
 export function getCommandEntryValue(interaction, property, options) {
-  if (!interaction[property]) return "";
-  if (typeof interaction[property] === "string") return interaction[property];
-  else return interaction[property](options);
+  if (!interaction[property]) { return ""; }
+  if (typeof interaction[property] === "string") { return interaction[property]; }
+  else { return interaction[property](options); }
 }
 
 /**
@@ -35,7 +36,7 @@ export function getCommandEntryValue(interaction, property, options) {
  */
 export function buildCommandOptions(payload, command) {
   const commandOptions = {};
-  if (command.formula) commandOptions.formula = payload;
+  if (command.formula) { commandOptions.formula = payload; }
   else {
     Object.assign(
       commandOptions,

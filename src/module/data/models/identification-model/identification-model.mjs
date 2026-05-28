@@ -123,7 +123,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
       const uncheckedPropertyIdentifiers = [...TERIOCK.config.equipment.unidentifiedProperties];
       if (Object.keys(TERIOCK.index.equipment).includes(toCamelCase(this.parent.equipmentType))) {
         const reference = await fromIdentifier(`equipment:${this.parent.equipmentType}`);
-        if (reference) uncheckedPropertyIdentifiers.push(...reference.properties.map(p => p.system.identifier));
+        if (reference) { uncheckedPropertyIdentifiers.push(...reference.properties.map(p => p.system.identifier)); }
       }
       const revealed = [
         ...this.parent.parent.properties.filter(p => p.system.revealed),

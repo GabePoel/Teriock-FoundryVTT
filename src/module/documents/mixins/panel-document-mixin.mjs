@@ -64,7 +64,7 @@ export default function PanelDocumentMixin(Base) {
       /** @inheritDoc */
       async _buildEmbedHTML(config, options = {}) {
         if (config.values.includes("panel")) {
-          if (!config.label) config.caption = false;
+          if (!config.label) { config.caption = false; }
           return foundry.utils.parseHTML(
             await TeriockTextEditor.makeTooltip(await this.getPanelParts(), {
               noAssociations: config.values.includes("noAssociations"),
@@ -86,7 +86,10 @@ export default function PanelDocumentMixin(Base) {
           image: systemPath("icons/documents/uncertainty.svg"),
           name: this.fullName || this.name,
         };
-        if (typeof this.system?.getPanelParts === "function") Object.assign(parts, await this.system.getPanelParts());
+        if (typeof this.system?.getPanelParts === "function") { Object.assign(
+            parts,
+            await this.system.getPanelParts(),
+          ); }
         return parts;
       }
 

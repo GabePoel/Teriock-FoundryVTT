@@ -55,7 +55,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
    */
   async _onRender(_context, options) {
     const element = options.element;
-    if (!element) return;
+    if (!element) { return; }
     element.classList.add("teriock");
     TeriockItem.bindPanelListeners(element);
     this._connectActivationListeners(element);
@@ -83,7 +83,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
       container.addEventListener("contextmenu", async event => {
         event.stopPropagation();
         const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(container.dataset.tokenUuid);
-        if (tokenDocument) tokenDocument.object.release();
+        if (tokenDocument) { tokenDocument.object.release(); }
       });
 
       container.addEventListener("click", async event => {
@@ -95,7 +95,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
         }
         clickTimeout = setTimeout(async () => {
           const tokenDocument = /** @type {TeriockTokenDocument} */ await fromUuid(container.dataset.tokenUuid);
-          if (tokenDocument?.isOwner) tokenDocument.object.control({ releaseOthers: !event.shiftKey });
+          if (tokenDocument?.isOwner) { tokenDocument.object.control({ releaseOthers: !event.shiftKey }); }
           clickTimeout = null;
         }, 200);
       });
@@ -107,7 +107,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
           clickTimeout = null;
         }
         const actor = /** @type {TeriockActor} */ await fromUuid(container.dataset.actorUuid);
-        if (actor?.isOwner) await actor.sheet.render(true);
+        if (actor?.isOwner) { await actor.sheet.render(true); }
       });
     });
 
@@ -130,7 +130,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
     }], { eventName: "contextmenu", fixed: true, jQuery: false });
 
     // Add roll context menus
-    for (const roll of this.document.rolls) roll.bindContextMenus(element);
+    for (const roll of this.document.rolls) { roll.bindContextMenus(element); }
   }
 
   /**
@@ -154,8 +154,8 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
   collapsePanels(htmlElement) {
     let autoCollapse;
     const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
-    if (defaultCollapse === "closed") autoCollapse = true;
-    else if (defaultCollapse === "open") autoCollapse = false;
+    if (defaultCollapse === "closed") { autoCollapse = true; }
+    else if (defaultCollapse === "open") { autoCollapse = false; }
     else {
       autoCollapse =
         this.document.timestamp < Date.now() - game.teriock.getSetting("autoPanelCollapseTime") * 60 * 1000;

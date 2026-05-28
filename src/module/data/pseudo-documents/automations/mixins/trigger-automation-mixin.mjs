@@ -78,8 +78,9 @@ export default function TriggerAutomationMixin(Base) {
             nullable: this.triggerMetadata.nullable,
           }),
         });
-        if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly)
+        if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
           schema.conditions = conditionRequirementsField();
+        }
         return schema;
       }
 
@@ -103,8 +104,8 @@ export default function TriggerAutomationMixin(Base) {
        */
       get _conditionsActive() {
         if (this.document.actor && this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
-          for (const c of this.conditions.present) if (!this.document.actor.statuses.has(c)) return false;
-          for (const c of this.conditions.absent) if (this.document.actor.statuses.has(c)) return false;
+          for (const c of this.conditions.present) { if (!this.document.actor.statuses.has(c)) { return false; } }
+          for (const c of this.conditions.absent) { if (this.document.actor.statuses.has(c)) { return false; } }
         }
         return true;
       }
@@ -137,8 +138,9 @@ export default function TriggerAutomationMixin(Base) {
       get _triggerPaths() {
         const paths = ["trigger"];
         if (this._source.trigger) {
-          if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly)
+          if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
             paths.push(...["conditions.present", "conditions.absent"]);
+          }
         }
         return paths;
       }
@@ -175,8 +177,8 @@ export default function TriggerAutomationMixin(Base) {
         const actor = options.execution?.actor ?? options.actor ?? this.actor;
         const token = options.execution?.executor ?? actor?.defaultToken;
         for (const a of activations) {
-          if (actor) a.actors = [actor];
-          if (token) a.tokens = [token];
+          if (actor) { a.actors = [actor]; }
+          if (token) { a.tokens = [token]; }
           out.push(await a.primaryAction());
         }
         return out;
@@ -201,8 +203,9 @@ export default function TriggerAutomationMixin(Base) {
 
       /** @inheritDoc */
       _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-        if (this._triggerPaths.includes(path) && this.document?.documentName === "JournalEntryPage")
+        if (this._triggerPaths.includes(path) && this.document?.documentName === "JournalEntryPage") {
           inputConfig.disabled = true;
+        }
         return super._makeFormGroup(path, groupConfig, inputConfig);
       }
 
@@ -211,13 +214,13 @@ export default function TriggerAutomationMixin(Base) {
        * @param {Teriock.System.TriggerScope} scope
        */
       _onFire(scope) {
-        if (this.triggerMetadata.activationTime === "on") this._activateActivations(scope);
+        if (this.triggerMetadata.activationTime === "on") { this._activateActivations(scope); }
       }
 
       /** @inheritDoc */
       _onFireTrigger(trigger, scope) {
         super._onFireTrigger(trigger, scope);
-        if (this.canFire(trigger)) this._onFire(scope);
+        if (this.canFire(trigger)) { this._onFire(scope); }
       }
 
       /**
@@ -226,15 +229,15 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {Promise<void|any[]>}
        */
       async _preFire(scope) {
-        if (this.triggerMetadata.activationTime === "pre") return await this._activateActivations(scope);
+        if (this.triggerMetadata.activationTime === "pre") { return await this._activateActivations(scope); }
       }
 
       /** @inheritDoc */
       async _preFireTrigger(trigger, scope) {
         await super._preFireTrigger(trigger, scope);
         if (this.canFire(trigger)) {
-          if (scope.awaitFire) return this._preFire(scope);
-          else this._preFire(scope);
+          if (scope.awaitFire) { return this._preFire(scope); }
+          else { this._preFire(scope); }
         }
       }
 
@@ -251,13 +254,13 @@ export default function TriggerAutomationMixin(Base) {
 
       /** @inheritDoc */
       async getActivations(options) {
-        if (this._hasButtons) return this._getActivations(options);
-        else return [];
+        if (this._hasButtons) { return this._getActivations(options); }
+        else { return []; }
       }
 
       /** @inheritDoc */
       prepareData() {
-        if (this.document?.documentName === "JournalEntryPage") this.trigger = null;
+        if (this.document?.documentName === "JournalEntryPage") { this.trigger = null; }
       }
     }
   );

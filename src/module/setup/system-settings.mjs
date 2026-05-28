@@ -298,6 +298,7 @@ export function registerSettings() {
   configs.DisplayConfig.registerMenu();
   configs.GameContentConfig.registerMenu();
   configs.GameMasterControlsConfig.registerMenu();
-  for (const s of Object.values(settings))
-    for (const [k, d] of Object.entries(s)) game.settings.register("teriock", k, d);
+  for (const s of Object.values(settings)) {
+    for (const [k, d] of Object.entries(s)) { game.settings.register("teriock", k, d); }
+  }
 }

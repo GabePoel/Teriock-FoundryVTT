@@ -66,7 +66,7 @@ export default class TakeAutomation
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["impact", "amount"];
-    if (TERIOCK.config.impact[this.impact]?.morganti) paths.push("morganti");
+    if (TERIOCK.config.impact[this.impact]?.morganti) { paths.push("morganti"); }
     paths.push(...[...this._triggerPaths, ...this._triggerDisplayPaths]);
     return paths;
   }
@@ -89,6 +89,6 @@ export default class TakeAutomation
 
   /** @inheritDoc */
   prepareData() {
-    if (this.isRepeatable) this.showDialog = true;
+    if (this.isRepeatable) { this.showDialog = true; }
   }
 }

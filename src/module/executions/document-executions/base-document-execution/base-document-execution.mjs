@@ -42,7 +42,7 @@ export default class BaseDocumentExecution extends BaseExecution {
     const activationLists = await Promise.all(
       this.activeAutomations.map(a => a.getActivations({ execution: this, rollData: this.rollData })),
     );
-    for (const activations of activationLists) this.activations.push(...activations);
+    for (const activations of activationLists) { this.activations.push(...activations); }
     for (const a of this.activations) {
       if (a?.type === "roll" && this._boostsResolved[a.impact]) {
         const boosts = this._boostsResolved[a.impact];

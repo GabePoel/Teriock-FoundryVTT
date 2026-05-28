@@ -51,13 +51,14 @@ export default Base =>
       const dropData = TeriockTextEditor.getDragEventData(event);
       const out = await super._onDrop(event);
       if (out) {
-        if (["body", "equipment", "mount"].includes(dropData.systemType)) await this.setActiveTab("inventory");
-        else if (dropData.systemType === "fluency") await this.setActiveTab("tradecrafts");
-        else if (dropData.systemType === "rank") await this.setActiveTab("classes");
-        else if (["power", "species"].includes(dropData.systemType)) await this.setActiveTab("powers");
-        else if (dropData.systemType === "resource") await this.setActiveTab("resources");
-        else if (["attunement", "base", "condition", "consequence"].includes(dropData.systemType))
+        if (["body", "equipment", "mount"].includes(dropData.systemType)) { await this.setActiveTab("inventory"); }
+        else if (dropData.systemType === "fluency") { await this.setActiveTab("tradecrafts"); }
+        else if (dropData.systemType === "rank") { await this.setActiveTab("classes"); }
+        else if (["power", "species"].includes(dropData.systemType)) { await this.setActiveTab("powers"); }
+        else if (dropData.systemType === "resource") { await this.setActiveTab("resources"); }
+        else if (["attunement", "base", "condition", "consequence"].includes(dropData.systemType)) {
           await this.setActiveTab("effects");
+        }
       }
     }
 

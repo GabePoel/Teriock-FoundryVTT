@@ -28,7 +28,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       const rollActivation = new RollActivation({ formula: statDie.formula.replace("mp", "mana"), roll: "drain" });
       rollActivation.event = event;
       await rollActivation.primaryAction();
-      if (this._consumeStatDice) await statDie.toggle(true);
+      if (this._consumeStatDice) { await statDie.toggle(true); }
     } else {
       await super._onRollStatDie(event, target);
     }

@@ -19,7 +19,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       static async _onSetStatDice(_event, target) {
-        if (!this.isEditable) return;
+        if (!this.isEditable) { return; }
         const stat = target.dataset.stat;
         const pool = /** @type {BaseStatPoolModel} */ this.document.system.statDice[stat];
         await pool.setStatDice();

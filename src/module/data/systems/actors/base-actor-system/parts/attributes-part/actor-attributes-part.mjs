@@ -37,7 +37,7 @@ export default Base => {
        * Ensure attributes have the correct keys assigned.
        */
       #prepareAttributes() {
-        for (const [k, v] of Object.entries(this.attributes)) v._key = k;
+        for (const [k, v] of Object.entries(this.attributes)) { v._key = k; }
       }
 
       /**
@@ -69,7 +69,7 @@ export default Base => {
       prepareDerivedData() {
         super.prepareDerivedData();
         this.#preparePresence();
-        for (const att of Object.values(this.attributes)) att.passive = 10 + att.value;
+        for (const att of Object.values(this.attributes)) { att.passive = 10 + att.value; }
       }
 
       /**

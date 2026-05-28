@@ -52,9 +52,9 @@ export default function DisplaySheetMixin(Base) {
        * @this {DisplaySheet}
        */
       static async _onApplyButtonUpdate(_event, target) {
-        if (!this.isEditable || !target.dataset.update) return;
+        if (!this.isEditable || !target.dataset.update) { return; }
         const entry = this.document.system.displayButtons.find(b => b.button === target.dataset.update);
-        if (entry?.update) await this.document.update(entry.update);
+        if (entry?.update) { await this.document.update(entry.update); }
       }
 
       /**
@@ -101,8 +101,8 @@ export default function DisplaySheetMixin(Base) {
         const out = [];
         const defaultTooltip = _loc("TERIOCK.SHEETS.Child.DISPLAY.defaultTagTooltip");
         tags.forEach(t => {
-          if (typeof t === "string") out.push({ label: _loc(t), tooltip: defaultTooltip });
-          else out.push({ label: _loc(t.label), tooltip: _loc(t.tooltip) });
+          if (typeof t === "string") { out.push({ label: _loc(t), tooltip: defaultTooltip }); }
+          else { out.push({ label: _loc(t.label), tooltip: _loc(t.tooltip) }); }
         });
         return out;
       }
@@ -113,7 +113,7 @@ export default function DisplaySheetMixin(Base) {
        */
       _configureRenderOptions(options) {
         super._configureRenderOptions(options);
-        if (this._tab !== "overview") this._removeFromArray(options.parts, "menu");
+        if (this._tab !== "overview") { this._removeFromArray(options.parts, "menu"); }
       }
 
       /** @inheritDoc */
