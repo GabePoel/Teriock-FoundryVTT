@@ -88,10 +88,12 @@ export default tseslint.config(
     rules: {
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
       "default-case": "error",
+      "dot-notation": "error",
       eqeqeq: ["error", "smart"],
       "jsdoc/check-types": "warn",
       "jsdoc/require-jsdoc": "warn",
       "jsdoc/require-param": "warn",
+      "logical-assignment-operators": ["error", "always"],
       "no-console": "off",
       "no-else-return": "error",
       "no-empty": ["warn", { allowEmptyCatch: true }],

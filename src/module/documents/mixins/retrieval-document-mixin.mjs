@@ -16,7 +16,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockAbility[]}
        */
       get abilities() {
-        return this.visibleChildrenByType["ability"] ?? [];
+        return this.visibleChildrenByType.ability ?? [];
       }
 
       /**
@@ -24,7 +24,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockArchetype[]}
        */
       get archetypes() {
-        return this.visibleChildrenByType["archetype"] ?? [];
+        return this.visibleChildrenByType.archetype ?? [];
       }
 
       /**
@@ -32,7 +32,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockAttunement[]}
        */
       get attunements() {
-        return this.visibleChildrenByType["attunement"] ?? [];
+        return this.visibleChildrenByType.attunement ?? [];
       }
 
       /**
@@ -40,7 +40,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockBody[]}
        */
       get bodyParts() {
-        return this.visibleChildrenByType["body"] ?? [];
+        return this.visibleChildrenByType.body ?? [];
       }
 
       /**
@@ -48,7 +48,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockCondition[]}
        */
       get conditions() {
-        return this.visibleChildrenByType["condition"] ?? [];
+        return this.visibleChildrenByType.condition ?? [];
       }
 
       /**
@@ -56,7 +56,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockConsequence[]}
        */
       get consequences() {
-        return this.visibleChildrenByType["consequence"] ?? [];
+        return this.visibleChildrenByType.consequence ?? [];
       }
 
       /**
@@ -64,7 +64,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockEquipment[]}
        */
       get equipment() {
-        return this.visibleChildrenByType["equipment"] ?? [];
+        return this.visibleChildrenByType.equipment ?? [];
       }
 
       /**
@@ -72,7 +72,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockFluency[]}
        */
       get fluencies() {
-        return this.visibleChildrenByType["fluency"] ?? [];
+        return this.visibleChildrenByType.fluency ?? [];
       }
 
       /**
@@ -80,7 +80,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockImbuement[]}
        */
       get imbuements() {
-        return this.visibleChildrenByType["imbuement"] ?? [];
+        return this.visibleChildrenByType.imbuement ?? [];
       }
 
       /**
@@ -88,7 +88,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockMount[]}
        */
       get mounts() {
-        return this.visibleChildrenByType["mount"] ?? [];
+        return this.visibleChildrenByType.mount ?? [];
       }
 
       /**
@@ -96,7 +96,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockPower[]}
        */
       get powers() {
-        return this.visibleChildrenByType["power"] ?? [];
+        return this.visibleChildrenByType.power ?? [];
       }
 
       /**
@@ -104,7 +104,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockProperty[]}
        */
       get properties() {
-        return this.visibleChildrenByType["property"] ?? [];
+        return this.visibleChildrenByType.property ?? [];
       }
 
       /**
@@ -112,7 +112,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockRank[]}
        */
       get ranks() {
-        return this.visibleChildrenByType["rank"] ?? [];
+        return this.visibleChildrenByType.rank ?? [];
       }
 
       /**
@@ -120,7 +120,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockResource[]}
        */
       get resources() {
-        return this.visibleChildrenByType["resource"] ?? [];
+        return this.visibleChildrenByType.resource ?? [];
       }
 
       /**
@@ -128,7 +128,7 @@ export default function RetrievalDocumentMixin(Base) {
        * @returns {TeriockSpecies[]}
        */
       get species() {
-        return this.visibleChildrenByType["species"] ?? [];
+        return this.visibleChildrenByType.species ?? [];
       }
 
       /**

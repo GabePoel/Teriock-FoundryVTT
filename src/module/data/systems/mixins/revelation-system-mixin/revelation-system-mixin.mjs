@@ -61,7 +61,7 @@ export default function RevelationSystemMixin(Base) {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.parent.elder && this.parent.elder?.metadata?.revealable) {
-          this.revealed = this.revealed && this.parent.elder?.system.revealed;
+          this.revealed &&= this.parent.elder?.system.revealed;
         }
       }
     }

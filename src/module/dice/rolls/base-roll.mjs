@@ -148,10 +148,10 @@ export default class BaseRoll extends Roll {
     // Handling for documents
     if (target.documentName === "TokenDocument") {
       token = target;
-      actor = actor || token.actor;
+      actor ||= token.actor;
     } else if (target.documentName === "Actor") {
       token = target.token;
-      actor = actor || target;
+      actor ||= target;
     }
     // Prioritize name and image from the token over the actor
     if (actor) {

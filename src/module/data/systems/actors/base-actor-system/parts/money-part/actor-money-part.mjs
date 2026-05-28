@@ -34,7 +34,7 @@ export default Base => {
           rollData[`money.${currencyConfig[k].abbreviation}`] = this.money[k];
         }
         rollData["money.debt"] = this.money.debt;
-        rollData["money"] = this.money.total;
+        rollData.money = this.money.total;
         return rollData;
       }
 

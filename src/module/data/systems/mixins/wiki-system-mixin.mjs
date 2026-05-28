@@ -21,7 +21,7 @@ export default function WikiSystemMixin(Base) {
        * @returns {boolean}
        */
       get isOnWiki() {
-        const index = TERIOCK.index[TERIOCK.config.document[this.parent.type]["index"]];
+        const index = TERIOCK.index[TERIOCK.config.document[this.parent.type].index];
         if (index) { return Boolean(index[toCamelCase(foundry.utils.getProperty(this.parent, this.metadata.pageNameKey))]); }
         return false;
       }

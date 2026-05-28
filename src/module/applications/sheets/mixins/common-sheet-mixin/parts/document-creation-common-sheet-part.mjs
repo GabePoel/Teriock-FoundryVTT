@@ -291,7 +291,7 @@ export default Base => {
         });
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter) {
-            context[options["getter"]] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
+            context[options.getter] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
           }
         }
         return context;

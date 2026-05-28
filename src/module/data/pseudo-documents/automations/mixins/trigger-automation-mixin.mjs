@@ -95,7 +95,7 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {boolean}
        */
       get _canRunPassively() {
-        return this.document.type !== "ability" || this.document.system["maneuver"] === "passive";
+        return this.document.type !== "ability" || this.document.system.maneuver === "passive";
       }
 
       /**

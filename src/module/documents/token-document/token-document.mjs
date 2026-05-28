@@ -70,8 +70,8 @@ export default class TeriockTokenDocument
     const updateOptions = {};
     if (this.actor) {
       if (this.actor.getSetting("token.autoScale")) {
-        if (this.width !== this.actor.system.size.length) { updateData["width"] = this.actor.system.size.length; }
-        if (this.height !== this.actor.system.size.length) { updateData["height"] = this.actor.system.size.length; }
+        if (this.width !== this.actor.system.size.length) { updateData.width = this.actor.system.size.length; }
+        if (this.height !== this.actor.system.size.length) { updateData.height = this.actor.system.size.length; }
       }
     }
     if (Object.keys(updateData).length > 0 && this.id) { await this.update(updateData, updateOptions); }

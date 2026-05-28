@@ -29,7 +29,7 @@ export default Base => {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        rollData["speed"] = this.movementSpeed;
+        rollData.speed = this.movementSpeed;
         for (const [k, v] of Object.entries(config.character.movement)) {
           rollData[`speed.${v.abbreviation}`] = this.speedAdjustments[k] || 0;
         }

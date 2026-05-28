@@ -10,7 +10,7 @@ const lookupEnricher = {
     const raw = foundry.utils.getProperty(options?.relativeTo, lookupKey);
     let textContent = "";
     if (["boolean", "number", "string"].includes(typeof raw)) { textContent = raw.toString(); }
-    const style = inputs.config["style"];
+    const style = inputs.config.style;
     if (style) {
       switch (style) {
         case "upper":

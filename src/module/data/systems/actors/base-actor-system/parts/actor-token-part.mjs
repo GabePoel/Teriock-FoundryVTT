@@ -142,7 +142,7 @@ export default Base => {
         super.prepareVirtualEffects();
         this._prepareTokenColor();
         this._prepareTokenVision();
-        this.actor.tokenActiveEffectChanges["initial"].push(...this._tokenChanges);
+        this.actor.tokenActiveEffectChanges.initial.push(...this._tokenChanges);
       }
     }
   );

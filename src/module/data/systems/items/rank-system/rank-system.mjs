@@ -97,8 +97,7 @@ export default class RankSystem
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.config.rank[this.archetype].name;
-    parts.text = parts.text
-      || (this.innate ? _loc("TERIOCK.TERMS.PowerType.innate") : _loc("TERIOCK.TERMS.PowerType.learned"));
+    parts.text ||= (this.innate ? _loc("TERIOCK.TERMS.PowerType.innate") : _loc("TERIOCK.TERMS.PowerType.learned"));
     return parts;
   }
 

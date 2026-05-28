@@ -12,10 +12,10 @@ export default function AbilityExecutionChatPart(Base) {
      * @mixin
      */
     class AbilityExecutionChat extends Base {
-      /** @type {Record<string, Teriock.Messages.MessageAssociation[]>} */
+      /** @type {Record<"normal"|"crit", Teriock.Messages.MessageAssociation[]>} */
       #associationMap;
 
-      /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
+      /** @type {Record<"normal"|"crit", Teriock.Changes.QualifiedChangeData[]>} */
       #trackerMap;
 
       /**
@@ -296,10 +296,10 @@ export default function AbilityExecutionChatPart(Base) {
           const normImbData = await this.#generateEffectImbuement(false);
           const critImbData = await this.#generateEffectImbuement(true);
           await this.#generateConsequenceAssociations();
-          normConData.system.associations = this.#associationMap["normal"];
-          normConData.changes.push(...this.#trackerMap["normal"]);
-          critConData.system.associations = this.#associationMap["crit"];
-          critConData.changes.push(...this.#trackerMap["crit"]);
+          normConData.system.associations = this.#associationMap.normal;
+          normConData.changes.push(...this.#trackerMap.normal);
+          critConData.system.associations = this.#associationMap.crit;
+          critConData.changes.push(...this.#trackerMap.crit);
           const normConChildren = this.source.subs.map(s => {
             return { uuid: s.uuid };
           });
@@ -345,16 +345,16 @@ export default function AbilityExecutionChatPart(Base) {
           }
           const transformationAutomations = this.getAutomations("transformation", { active: true });
           for (const a of transformationAutomations) {
-            const toAdd = await a.choose({ actor: this.actor });
-            if (a.crit.has(0)) { normConData.system.transformation.uuids.push(...toAdd); }
-            if (a.crit.has(1)) { critConData.system.transformation.uuids.push(...toAdd); }
+            const toAdd = await a?.choose({ actor: this.actor });
+            if (a?.crit.has(0)) { normConData.system.transformation.uuids.push(...toAdd); }
+            if (a?.crit.has(1)) { critConData.system.transformation.uuids.push(...toAdd); }
           }
           this.getAutomations("modifyEffect", { active: true, crit: false }).forEach(a => {
             if (a?.overrideCompetence) {
               foundry.utils.setProperty(normConData, "system.competence.raw", a.competence.value);
               foundry.utils.setProperty(normImbData, "system.competence.raw", a.competence.value);
             }
-            if (a.overrideData && a.data) {
+            if (a?.overrideData && a.data) {
               foundry.utils.mergeObject(normConData, a.data, { inplace: true });
               foundry.utils.mergeObject(normImbData, a.data, { inplace: true });
             }
@@ -364,7 +364,7 @@ export default function AbilityExecutionChatPart(Base) {
               foundry.utils.setProperty(critConData, "system.competence.raw", a.competence.value);
               foundry.utils.setProperty(critImbData, "system.competence.raw", a.competence.value);
             }
-            if (a.overrideData && a.data) {
+            if (a?.overrideData && a.data) {
               foundry.utils.mergeObject(critConData, a.data, { inplace: true });
               foundry.utils.mergeObject(critImbData, a.data, { inplace: true });
             }
