@@ -5,7 +5,7 @@ const { SearchFilter } = foundry.applications.ux;
  */
 export default Base =>
   /**
-   * @extends {BaseActorSheet}
+   * @extends {BaseSheet}
    * @mixin
    */
   class SearchingActorSheetPart extends Base {
