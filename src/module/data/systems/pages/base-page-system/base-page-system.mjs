@@ -31,6 +31,14 @@ export default class BasePageSystem extends mixClasses(TypeDataModel, mixins.Rul
   }
 
   /** @inheritDoc */
+  get displayInputs() {
+    return [...super.displayInputs, {
+      choices: this.parent ? Object.fromEntries(this.parent.parent?.categories.contents.map(c => [c.id, c.name])) : {},
+      path: "category",
+    }];
+  }
+
+  /** @inheritDoc */
   get document() {
     return this.parent;
   }

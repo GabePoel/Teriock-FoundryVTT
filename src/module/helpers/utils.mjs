@@ -73,9 +73,18 @@ export function fancifyFields(displayFields) {
     let fancy;
     if (typeof f === "string") { fancy = { path: f }; }
     else { fancy = f; }
-    const { button, classes = "", dataset = {}, editable = true, label = "", path = fancy.path, visible = true } =
-      fancy;
-    return { button, classes, dataset, editable, label, path, visible };
+    const {
+      button,
+      choices,
+      classes = "",
+      dataset = {},
+      editable = true,
+      label = "",
+      path = fancy.path,
+      value,
+      visible = true,
+    } = fancy;
+    return { button, choices, classes, dataset, editable, label, path, value, visible };
   }).filter(f => f.visible);
 }
 
