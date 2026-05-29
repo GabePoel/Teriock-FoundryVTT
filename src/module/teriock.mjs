@@ -170,7 +170,7 @@ foundry.helpers.Hooks.once("init", function() {
         rank: data.systems.items.RankSystem,
         species: data.systems.items.SpeciesSystem,
       },
-      defaultType: "equipment",
+      defaultType: "power",
       documentClass: documents.TeriockItem,
     },
     JournalEntry: { collection: documents.collections.TeriockJournal, documentClass: documents.TeriockJournalEntry },
