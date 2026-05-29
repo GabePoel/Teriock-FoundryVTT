@@ -10,6 +10,7 @@ export const documentConfig = {
   ability: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "abilities",
+    hint: "TERIOCK.DOCUMENTS.ability.hint",
     icon: icons.document.ability,
     index: "abilities",
     label: "TYPES.ActiveEffect.ability",
@@ -20,6 +21,7 @@ export const documentConfig = {
   archetype: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "archetypes",
+    hint: "TERIOCK.DOCUMENTS.archetype.hint",
     icon: icons.document.archetype,
     label: "TYPES.Item.archetype",
     plural: "TERIOCK.DOCUMENTS.archetype.plural",
@@ -28,14 +30,22 @@ export const documentConfig = {
   attunement: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "attunements",
+    hint: "TERIOCK.DOCUMENTS.attunement.hint",
     icon: icons.document.attunement,
     label: "TYPES.ActiveEffect.attunement",
     plural: "TERIOCK.DOCUMENTS.attunement.plural",
     sorter: docSort,
   },
+  base: /** @type {Teriock.Config.DocumentEntry} */ {
+    documentName: "ActiveEffect",
+    hint: "TERIOCK.DOCUMENTS.base.hint",
+    icon: icons.ability.effectType,
+    label: "TYPES.ActiveEffect.base",
+  },
   body: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "bodyParts",
+    hint: "TERIOCK.DOCUMENTS.body.hint",
     icon: icons.document.body,
     index: "bodyParts",
     label: "TYPES.Item.body",
@@ -46,6 +56,7 @@ export const documentConfig = {
   character: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
     getter: "characters",
+    hint: "TERIOCK.DOCUMENTS.character.hint",
     icon: icons.document.character,
     label: "TYPES.Actor.character",
     plural: "TERIOCK.DOCUMENTS.character.plural",
@@ -53,6 +64,7 @@ export const documentConfig = {
   },
   class: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
+    hint: "TERIOCK.DOCUMENTS.class.hint",
     icon: icons.document.rank,
     index: "classes",
     label: "TYPES.JournalEntryPage.class",
@@ -61,6 +73,7 @@ export const documentConfig = {
   condition: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "conditions",
+    hint: "TERIOCK.DOCUMENTS.condition.hint",
     icon: icons.document.condition,
     index: "conditions",
     label: "TYPES.ActiveEffect.condition",
@@ -70,6 +83,7 @@ export const documentConfig = {
   consequence: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "consequences",
+    hint: "TERIOCK.DOCUMENTS.consequence.hint",
     icon: icons.document.consequence,
     label: "TYPES.ActiveEffect.consequence",
     plural: "TERIOCK.DOCUMENTS.consequence.plural",
@@ -77,13 +91,15 @@ export const documentConfig = {
   },
   cover: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
+    hint: "TERIOCK.DOCUMENTS.cover.hint",
     icon: icons.cover.full,
     label: "TYPES.ActiveEffect.cover",
-    plural: "TYPES.ActiveEffect.cover",
+    plural: "TERIOCK.DOCUMENTS.cover.plural",
   },
   creature: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
     getter: "creatures",
+    hint: "TERIOCK.DOCUMENTS.creature.hint",
     icon: icons.document.creature,
     label: "TYPES.Actor.creature",
     pack: "creatures",
@@ -92,6 +108,7 @@ export const documentConfig = {
   },
   damage: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
+    hint: "TERIOCK.DOCUMENTS.damage.hint",
     icon: icons.effect.damage,
     index: "damageTypes",
     label: "TYPES.JournalEntryPage.damage",
@@ -99,11 +116,12 @@ export const documentConfig = {
   },
   document: /** @type {Teriock.Config.DocumentEntry} */ {
     icon: icons.ui.document,
-    label: "TYPES.Base.document",
+    label: "TYPES.Document.base",
     plural: "TERIOCK.DOCUMENTS.document.plural",
   },
   drain: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
+    hint: "TERIOCK.DOCUMENTS.drain.hint",
     icon: icons.effect.drain,
     index: "drainTypes",
     label: "TYPES.JournalEntryPage.drain",
@@ -120,6 +138,7 @@ export const documentConfig = {
   equipment: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "equipment",
+    hint: "TERIOCK.DOCUMENTS.equipment.hint",
     icon: icons.document.equipment,
     index: "equipment",
     label: "TYPES.Item.equipment",
@@ -130,6 +149,7 @@ export const documentConfig = {
   fluency: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "fluencies",
+    hint: "TERIOCK.DOCUMENTS.fluency.hint",
     icon: icons.document.fluency,
     label: "TYPES.ActiveEffect.fluency",
     plural: "TERIOCK.DOCUMENTS.fluency.plural",
@@ -137,6 +157,7 @@ export const documentConfig = {
   },
   hack: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
+    hint: "TERIOCK.DOCUMENTS.hack.hint",
     icon: icons.ui.hack,
     label: "TYPES.ActiveEffect.hack",
     plural: "TERIOCK.DOCUMENTS.hack.plural",
@@ -144,6 +165,7 @@ export const documentConfig = {
   imbuement: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "imbuements",
+    hint: "TERIOCK.DOCUMENTS.imbuement.hint",
     icon: icons.document.imbuement,
     label: "TYPES.ActiveEffect.imbuement",
     plural: "TERIOCK.DOCUMENTS.imbuement.plural",
@@ -152,6 +174,7 @@ export const documentConfig = {
   inventory: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Actor",
     getter: "inventories",
+    hint: "TERIOCK.DOCUMENTS.inventory.hint",
     icon: icons.document.inventory,
     label: "TYPES.Actor.inventory",
     plural: "TERIOCK.DOCUMENTS.inventory.plural",
@@ -160,6 +183,7 @@ export const documentConfig = {
   mount: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "mounts",
+    hint: "TERIOCK.DOCUMENTS.mount.hint",
     icon: icons.document.mount,
     label: "TYPES.Item.mount",
     plural: "TERIOCK.DOCUMENTS.mount.plural",
@@ -168,6 +192,7 @@ export const documentConfig = {
   power: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "powers",
+    hint: "TERIOCK.DOCUMENTS.power.hint",
     icon: icons.document.power,
     label: "TYPES.Item.power",
     plural: "TERIOCK.DOCUMENTS.power.plural",
@@ -176,6 +201,7 @@ export const documentConfig = {
   property: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "properties",
+    hint: "TERIOCK.DOCUMENTS.property.hint",
     icon: icons.document.property,
     index: "properties",
     label: "TYPES.ActiveEffect.property",
@@ -186,6 +212,7 @@ export const documentConfig = {
   rank: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "ranks",
+    hint: "TERIOCK.DOCUMENTS.rank.hint",
     icon: icons.document.rank,
     index: "classes",
     label: "TYPES.Item.rank",
@@ -196,6 +223,7 @@ export const documentConfig = {
   resource: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "resources",
+    hint: "TERIOCK.DOCUMENTS.resource.hint",
     icon: icons.document.resource,
     label: "TYPES.ActiveEffect.resource",
     plural: "TERIOCK.DOCUMENTS.resource.plural",
@@ -204,6 +232,7 @@ export const documentConfig = {
   species: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "species",
+    hint: "TERIOCK.DOCUMENTS.species.hint",
     icon: icons.document.species,
     index: "creatures",
     label: "TYPES.Item.species",
@@ -213,12 +242,14 @@ export const documentConfig = {
   },
   stone: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Card",
+    hint: "TERIOCK.DOCUMENTS.stone.hint",
     icon: icons.document.stone,
     label: "TYPES.Card.stone",
     plural: "TERIOCK.DOCUMENTS.stone.plural",
   },
   tradecraft: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "JournalEntryPage",
+    hint: "TERIOCK.DOCUMENTS.tradecraft.hint",
     icon: icons.document.fluency,
     index: "tradecrafts",
     label: "TYPES.JournalEntryPage.tradecraft",
@@ -226,4 +257,4 @@ export const documentConfig = {
   },
 };
 
-preLocalize("config.document", { keys: ["label", "plural"] });
+preLocalize("config.document", { keys: ["hint", "label", "plural"] });

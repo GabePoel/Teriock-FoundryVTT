@@ -128,6 +128,7 @@ foundry.helpers.Hooks.once("init", function() {
         property: data.systems.effects.PropertySystem,
         resource: data.systems.effects.ResourceSystem,
       },
+      defaultType: "consequence",
       documentClass: documents.TeriockActiveEffect,
       phases: constants.config.change.phase,
     },
@@ -138,6 +139,7 @@ foundry.helpers.Hooks.once("init", function() {
         creature: data.systems.actors.CreatureSystem,
         inventory: data.systems.actors.InventorySystem,
       },
+      defaultType: "character",
       documentClass: documents.TeriockActor,
     },
     Card: {
@@ -168,6 +170,7 @@ foundry.helpers.Hooks.once("init", function() {
         rank: data.systems.items.RankSystem,
         species: data.systems.items.SpeciesSystem,
       },
+      defaultType: "equipment",
       documentClass: documents.TeriockItem,
     },
     JournalEntry: { collection: documents.collections.TeriockJournal, documentClass: documents.TeriockJournalEntry },
@@ -181,7 +184,11 @@ foundry.helpers.Hooks.once("init", function() {
       },
       documentClass: documents.TeriockJournalEntryPage,
     },
-    Macro: { collection: documents.collections.TeriockMacros, documentClass: documents.TeriockMacro },
+    Macro: {
+      collection: documents.collections.TeriockMacros,
+      defaultType: "script",
+      documentClass: documents.TeriockMacro,
+    },
     Region: { documentClass: documents.TeriockRegionDocument },
     RollTable: { collection: documents.collections.TeriockRollTables, documentClass: documents.TeriockRollTable },
     Scene: { collection: documents.collections.TeriockScenes, documentClass: documents.TeriockScene },
@@ -194,11 +201,14 @@ foundry.helpers.Hooks.once("init", function() {
     User: { collection: documents.collections.TeriockUsers, documentClass: documents.TeriockUser },
   });
 
-  // Configure Type Icons
-  // --------------------
+  // Configure Type Icons and Hints
+  // ------------------------------
 
   for (const [k, v] of Object.entries(constants.config.document)) {
-    if (v?.documentName) { CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title"); }
+    if (v?.documentName) {
+      CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
+      CONFIG[v.documentName].typeHints[k] = v.hint;
+    }
   }
 
   // Configure Sheets

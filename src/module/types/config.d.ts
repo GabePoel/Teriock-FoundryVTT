@@ -30,6 +30,7 @@ declare global {
     export type DocumentEntry = {
       documentName: "Card" | "JournalEntryPage" | CommonDocumentName;
       getter: string;
+      hint: string;
       icon: string;
       index: string;
       label: string;
