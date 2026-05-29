@@ -37,7 +37,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.C
     return Array.from(
       new Set(
         this.actor?.ranks.filter(r => r.system.archetype === this.identifier).map(r =>
-          TERIOCK.reference.classes[r.system.className] ?? toTitleCase(r.system.className)
+          TERIOCK.reference.classes[r.system.class] ?? toTitleCase(r.system.class)
         ),
       ),
     ).sort((a, b) => a.localeCompare(b));

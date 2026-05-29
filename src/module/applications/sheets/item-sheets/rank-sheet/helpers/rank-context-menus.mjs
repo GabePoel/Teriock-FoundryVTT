@@ -8,18 +8,20 @@ import { makeIcon } from "../../../../../helpers/utils.mjs";
  */
 export function archetypeContextMenu(rank) {
   const options = [];
-  for (const [aKey, aData] of Object.entries(TERIOCK.config.rank)) {
-    const firstClass = Object.keys(aData.classes)[0];
+  for (const [aKey, aData] of Object.entries(TERIOCK.config.class.archetypes)) {
+    const firstClass = Object.keys(TERIOCK.config.class.classes).find(cKey =>
+      TERIOCK.config.class.classes[cKey].archetype === aKey
+    );
     const option = {
       icon: makeIcon(aData.icon, "contextMenu"),
-      label: aData.name,
+      label: aData.label,
       onClick: async () => {
         await rank.update({
           system: {
             archetype: aKey,
-            className: firstClass,
-            "statDice.hp.formula": `1d${aData.hp}`,
-            "statDice.mp.formula": `1d${aData.mp}`,
+            class: firstClass,
+            "statDice.hp.formula": `1d${aData.stats.hp}`,
+            "statDice.mp.formula": `1d${aData.stats.mp}`,
           },
         });
       },
@@ -37,16 +39,15 @@ export function archetypeContextMenu(rank) {
  */
 export function classContextMenu(rank) {
   const options = [];
-  for (const [aKey, aData] of Object.entries(TERIOCK.config.rank)) {
-    for (const [cKey, cData] of Object.entries(aData.classes)) {
-      const option = {
-        icon: makeIcon(cData.icon, "contextMenu"),
-        label: cData.name,
-        onClick: async () => await rank.update({ system: { archetype: aKey, className: cKey } }),
-        visible: () => foundry.utils.getProperty(rank.system, "archetype") === aKey,
-      };
-      options.push(option);
-    }
+  for (const [cKey, cData] of Object.entries(TERIOCK.config.class.classes)) {
+    const aKey = cData.archetype;
+    const option = {
+      icon: makeIcon(cData.icon, "contextMenu"),
+      label: cData.label,
+      onClick: async () => await rank.update({ system: { archetype: aKey, class: cKey } }),
+      visible: () => foundry.utils.getProperty(rank.system, "archetype") === aKey,
+    };
+    options.push(option);
   }
   return options;
 }

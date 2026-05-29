@@ -9,12 +9,8 @@ declare global {
     }[keyof typeof settings];
 
     // Tradecraft Keys
-    export type Field = keyof typeof config.tradecraft;
-    export type ArtisanTradecraft = keyof typeof config.tradecraft.artisan.tradecrafts;
-    export type MediatorTradecraft = keyof typeof config.tradecraft.mediator.tradecrafts;
-    export type ScholarTradecraft = keyof typeof config.tradecraft.scholar.tradecrafts;
-    export type SurvivalistTradecraft = keyof typeof config.tradecraft.survivalist.tradecrafts;
-    export type Tradecraft = ArtisanTradecraft | MediatorTradecraft | ScholarTradecraft | SurvivalistTradecraft;
+    export type Field = keyof typeof config.tradecraft.fields;
+    export type Tradecraft = keyof typeof config.tradecraft.tradecrafts;
 
     // Ability Keys
     export type Maneuver = keyof typeof config.ability.maneuver;
@@ -88,12 +84,8 @@ declare global {
     export type AttunementType = keyof typeof config.attunement.type;
 
     // Rank Keys
-    export type Archetype = keyof typeof config.rank;
-    export type MageClass = keyof typeof config.rank.mage.classes;
-    export type SemiClass = keyof typeof config.rank.semi.classes;
-    export type WarriorClass = keyof typeof config.rank.warrior.classes;
-    export type EverymanClass = keyof typeof config.rank.everyman.classes;
-    export type Class = EverymanClass | MageClass | SemiClass | WarriorClass;
+    export type Archetype = keyof typeof config.class.archetypes;
+    export type Class = keyof typeof config.class.classes;
 
     // Cost Keys
     export type Component = keyof typeof config.cost.components.keys;

@@ -202,7 +202,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const { identifier: id, type } = parsed;
     const group = this.#identifiers.get(type)?.get(id);
     if (group && group.size) { out = this.#getCanonical(group)?.entry.name; }
-    return options.forced ? (parsed.identifier ?? "") : out;
+    return options.forced ? (out || parsed.identifier || "") : out;
   }
 
   /**

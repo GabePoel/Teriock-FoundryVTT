@@ -22,12 +22,29 @@ export default Base =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
-      const tcFields = foundry.utils.deepClone(TERIOCK.config.tradecraft);
-      delete tcFields.prestige;
+
+      /**
+       * Builds a field entry with its tradecrafts nested underneath it.
+       * @param {Teriock.Keys.Field} fieldKey
+       * @returns {object}
+       */
+      const buildField = fieldKey => {
+        const field = foundry.utils.deepClone(TERIOCK.config.tradecraft.fields[fieldKey]);
+        field.tradecrafts = Object.fromEntries(
+          Object.entries(TERIOCK.config.tradecraft.tradecrafts).filter(([_tcKey, tcData]) => tcData.field === fieldKey)
+            .map(([tcKey, tcData]) => [tcKey, foundry.utils.deepClone(tcData)]),
+        );
+        return field;
+      };
+
+      const tcFields = {};
+      for (const fieldKey of Object.keys(TERIOCK.config.tradecraft.fields)) {
+        if (fieldKey !== "prestige") { tcFields[fieldKey] = buildField(fieldKey); }
+      }
       context.tradecraftFields = tcFields;
 
-      const p1 = foundry.utils.deepClone(TERIOCK.config.tradecraft.prestige);
-      const p2 = foundry.utils.deepClone(TERIOCK.config.tradecraft.prestige);
+      const p1 = buildField("prestige");
+      const p2 = buildField("prestige");
       delete p1.tradecrafts.tinkerer;
       delete p2.tradecrafts.metaphysicist;
       context.prestigeFields = { p1, p2 };

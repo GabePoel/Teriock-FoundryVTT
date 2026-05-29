@@ -14,9 +14,20 @@ export default class IdentifierField extends StringField {
     return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, reset: null });
   }
 
-  /** @inheritDoc */
+  /**
+   * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+   * @param {DataFieldContext} [context]
+   */
+  constructor(options = {}, context = {}) {
+    super(options, context);
+  }
+
+  /**
+   * @inheritDoc
+   * @param {FormInputConfig & StringFieldInputConfig & StringFieldOptions &  Teriock.Fields._IdentifierFieldOptions} config
+   */
   _toInput(config) {
-    if (!config.choices && !this.choices) {
+    if (config.reset && !config.choices && !config.type && !this.choices && !this.type) {
       const reset = config.reset ?? this.reset;
       if (reset) { return HTMLIdentifierInputElement.create({ ...config, reset }); }
       return createTextInput(config);
@@ -36,5 +47,12 @@ export default class IdentifierField extends StringField {
   clean(value, options, _state) {
     if (value === "") { value = null; }
     return super.clean(value, options, _state);
+  }
+
+  /** @inheritDoc */
+  initialize(value, model, options = {}) {
+    const out = super.initialize(value, model, options);
+    if (typeof out === "string" && this.type) { return `${this.type}:${out}`; }
+    return out;
   }
 }

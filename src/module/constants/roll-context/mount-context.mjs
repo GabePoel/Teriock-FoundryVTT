@@ -1,5 +1,4 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { toCamelCase } from "../../helpers/string.mjs";
 import usableContext from "./usable-context.mjs";
 
 const mountContext = {
@@ -21,8 +20,3 @@ const mountContext = {
 export default mountContext;
 
 preLocalize("rollContext.mount");
-Hooks.once("i18nInit", () => {
-  Object.entries(TERIOCK.reference.creatures).forEach(([k, v]) => {
-    mountContext[`type.${toCamelCase(k)}`] = _loc("TERIOCK.ROLL_CONTEXT.Mount.type", { name: _loc(v) });
-  });
-});

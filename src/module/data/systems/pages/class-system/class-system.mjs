@@ -1,4 +1,4 @@
-import { rankConfig } from "../../../../constants/config/rank-config.mjs";
+import classConfig from "../../../../constants/config/class-config.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
@@ -15,7 +15,7 @@ export default class ClassSystem extends BasePageSystem {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       archetype: new IdentifierField({
-        choices: objectMap(rankConfig, a => a.name, { localize: true }),
+        choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
         initial: "everyman",
         nullable: false,
         required: true,
@@ -30,15 +30,15 @@ export default class ClassSystem extends BasePageSystem {
 
   /** @inheritDoc */
   get displayTags() {
-    return [...super.displayTags, TERIOCK.config.rank[this.archetype]?.name];
+    return [...super.displayTags, TERIOCK.config.class.archetypes[this.archetype]?.label];
   }
 
   /** @inheritDoc */
   get messageBars() {
     return [{
-      icon: TERIOCK.config.rank[this.archetype]?.icon,
+      icon: TERIOCK.config.class.archetypes[this.archetype]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
-      wrappers: [TERIOCK.config.rank[this.archetype]?.name],
+      wrappers: [TERIOCK.config.class.archetypes[this.archetype]?.label],
     }];
   }
 }

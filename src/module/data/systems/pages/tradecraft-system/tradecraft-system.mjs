@@ -1,4 +1,4 @@
-import { tradecraftConfig } from "../../../../constants/config/tradecraft-config.mjs";
+import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
@@ -15,7 +15,7 @@ export default class TradecraftSystem extends BasePageSystem {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       field: new IdentifierField({
-        choices: objectMap(tradecraftConfig, f => f.name, { localize: true }),
+        choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
         initial: "artisan",
         nullable: false,
         required: true,
@@ -30,15 +30,15 @@ export default class TradecraftSystem extends BasePageSystem {
 
   /** @inheritDoc */
   get displayTags() {
-    return [...super.displayTags, TERIOCK.config.tradecraft[this.field]?.name];
+    return [...super.displayTags, TERIOCK.config.tradecraft.fields[this.field]?.label];
   }
 
   /** @inheritDoc */
   get messageBars() {
     return [{
-      icon: TERIOCK.config.tradecraft[this.field]?.icon,
+      icon: TERIOCK.config.tradecraft.fields[this.field]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
-      wrappers: [TERIOCK.config.tradecraft[this.field]?.name],
+      wrappers: [TERIOCK.config.tradecraft.fields[this.field]?.label],
     }];
   }
 }

@@ -1,9 +1,10 @@
-import { rankConfig } from "../../../../constants/config/rank-config.mjs";
+import { default as classConfig } from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
+import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -35,36 +36,44 @@ export default class RankSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      namespace: "Class",
-      pageNameKey: "system.className",
-      type: "rank",
-    });
+    return foundry.utils.mergeObject(super.metadata, { namespace: "Class", pageNameKey: "system.class", type: "rank" });
   }
 
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       archetype: new IdentifierField({
-        choices: objectMap(rankConfig, a => a.name, { localize: true }),
+        choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
         initial: "everyman",
       }),
-      className: new fields.StringField({ initial: "journeyman" }),
-      classRank: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
+      class: new fields.StringField({
+        choices: objectMap(classConfig.classes, a => a.label, { localize: true }),
+        initial: "journeyman",
+      }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
-      description: new fields.HTMLField({ initial: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.description.initial") }),
+      description: new fields.HTMLField(),
       innate: new fields.BooleanField({ initial: false }),
       maxAv: new fields.NumberField({ initial: 2, integer: true, min: 0 }),
+      number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    migrateKey(source, "className", "class");
+    migrateKey(source, "classRank", "number");
+    return super.migrateData(source, options, state);
   }
 
   /**
    * Stage needed archetypes for creation.
    */
   #stageArchetypeCreation() {
+    const archetypeConfig = TERIOCK.config.class.archetypes[this._source.archetype];
     if (
-      this.archetype !== "everyman" && !this.actor.archetypes.map(a => a.system.identifier).includes(this.archetype)
-    ) { this.actor._stagedItemCreations.add(`archetype:${this.archetype}`); }
+      !archetypeConfig?.dontStage
+      && !this.actor.archetypes.map(a => a.system.identifier).includes(this._source.archetype)
+    ) { this.actor._stagedItemCreations.add(`archetype:${this._source.archetype}`); }
   }
 
   /**
@@ -96,14 +105,14 @@ export default class RankSystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.config.rank[this.archetype].name;
+    parts.subtitle = TERIOCK.config.class.archetypes[this.archetype].label;
     parts.text ||= this.innate ? _loc("TERIOCK.TERMS.PowerType.innate") : _loc("TERIOCK.TERMS.PowerType.learned");
     return parts;
   }
 
   /** @inheritDoc */
   get isOnWiki() {
-    return this.classRank > 0 && this.classRank <= 5;
+    return this.number > 0 && this.number <= 5;
   }
 
   /** @inheritDoc */
@@ -124,12 +133,12 @@ export default class RankSystem
   get messageBars() {
     return [
       {
-        icon: TERIOCK.config.rank[this.archetype].classes[this.className].icon,
+        icon: TERIOCK.config.class.classes[this.class].icon,
         label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
         wrappers: [
-          TERIOCK.config.rank[this.archetype].name,
-          TERIOCK.config.rank[this.archetype].classes[this.className].name,
-          _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: this.classRank }),
+          TERIOCK.config.class.archetypes[this.archetype].label,
+          TERIOCK.config.class.classes[this.class].label,
+          _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: this.number }),
         ],
       },
       this._statBar,
@@ -156,7 +165,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   async _createFromChildDeltaMap(createMap) {
-    if (this.classRank < 3 || this.parent.abilities.length !== 2) { await super._createFromChildDeltaMap(createMap); }
+    if (this.number < 3 || this.parent.abilities.length !== 2) { await super._createFromChildDeltaMap(createMap); }
   }
 
   /** @inheritDoc */
@@ -185,13 +194,13 @@ export default class RankSystem
     return {
       ...super.getLocalRollData(),
       [`archetype.${this.archetype.slice(0, 3).toLowerCase()}`]: 1,
-      [`class.${this.className.slice(0, 3).toLowerCase()}`]: 1,
+      [`class.${this.class.slice(0, 3).toLowerCase()}`]: 1,
       archetype: this.archetype,
       av: this.maxAv,
-      class: this.className,
+      class: this.class,
       innate: this.innate ? 1 : 0,
       maxAv: this.maxAv,
-      number: this.classRank,
+      number: this.number,
     };
   }
 

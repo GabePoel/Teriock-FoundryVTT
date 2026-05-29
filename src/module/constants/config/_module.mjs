@@ -1,8 +1,9 @@
 import { abilityConfig } from "./ability-config.mjs";
 import { attributeConfig } from "./attribute-config.mjs";
 import { attunementConfig } from "./attunement-config.mjs";
-import { default as change } from "./change-config.mjs";
-import * as character from "./character-config.mjs";
+import { default as changeConfig } from "./change-config.mjs";
+import * as characterConfig from "./character-config.mjs";
+import { default as classConfig } from "./class-config.mjs";
 import { competenceConfig } from "./competence-config.mjs";
 import { consequenceConfig } from "./consequence-config.mjs";
 import { costConfig } from "./cost-config.mjs";
@@ -20,10 +21,9 @@ import { indexConfig } from "./index-config.mjs";
 import { piercingConfig } from "./piercing-config.mjs";
 import { powerConfig } from "./power-config.mjs";
 import { protectionConfig } from "./protection-config.mjs";
-import { rankConfig } from "./rank-config.mjs";
 import { scalingConfig } from "./scaling-config.mjs";
 import { targetConfig } from "./target-config.mjs";
-import { tradecraftConfig } from "./tradecraft-config.mjs";
+import { default as tradecraftConfig } from "./tradecraft-config.mjs";
 import { transformationConfig } from "./transformation-config.mjs";
 import { default as trigger } from "./trigger-config.mjs";
 import { wikiConfig } from "./wiki-config.mjs";
@@ -32,8 +32,9 @@ const config = {
   ability: abilityConfig,
   attribute: attributeConfig,
   attunement: attunementConfig,
-  change,
-  character,
+  change: changeConfig,
+  character: characterConfig,
+  class: classConfig,
   competence: competenceConfig,
   consequence: consequenceConfig,
   cost: costConfig,
@@ -51,7 +52,6 @@ const config = {
   piercing: piercingConfig,
   power: powerConfig,
   protection: protectionConfig,
-  rank: rankConfig,
   scaling: scalingConfig,
   target: targetConfig,
   tradecraft: tradecraftConfig,

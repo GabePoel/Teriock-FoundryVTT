@@ -170,7 +170,7 @@ export default class EquipmentSystem
    */
   get equipmentTypeName() {
     return this.equipmentType
-      ? game.teriock.identifiers.getName(`equipment:${this.equipmentType}`, { forced: true, format: true })
+      ? game.teriock.identifiers.getName(`equipment:${this.equipmentType}`, { forced: true })
       : "";
   }
 

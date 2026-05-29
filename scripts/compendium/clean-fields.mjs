@@ -29,6 +29,7 @@ export function cleanDocument(doc) {
     if (doc.type === "equipment") { cleanEquipment(doc); }
     if (doc.type === "power") { cleanPower(doc); }
     if (doc.type === "property") { cleanProperty(doc); }
+    if (doc.type === "rank") { cleanRank(doc); }
   }
   if (doc.text?.content && doc.type === "class") { doc.text.content = doc.text.content.replaceAll("\n", ""); }
 }
@@ -214,6 +215,21 @@ function cleanEquipment(doc) {
   if (doc.system.storage && !doc.system.storage.enabled) { delete doc.system.storage; }
   if (!doc.system.price) { delete doc.system.price; }
   if (!doc.system.equipped) { delete doc.system.equipped; }
+}
+
+/**
+ * @param {TeriockRank} doc
+ */
+function cleanRank(doc) {
+  // Migrate legacy field names.
+  if (doc.system.className) {
+    doc.system.class = doc.system.className;
+    delete doc.system.className;
+  }
+  if (doc.system.classRank) {
+    doc.system.number = doc.system.classRank;
+    delete doc.system.classRank;
+  }
 }
 
 /**

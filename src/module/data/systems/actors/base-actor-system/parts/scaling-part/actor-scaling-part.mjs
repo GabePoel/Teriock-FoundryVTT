@@ -44,11 +44,11 @@ export default Base => {
         const data = {};
         const ranks = this.parent.ranks;
         for (const c of Object.keys(TERIOCK.index.classes)) {
-          const count = ranks.filter(r => r.system.className === c).length;
+          const count = ranks.filter(r => r.system.class === c).length;
           data[`rank.${c}`] = count;
           data[`rank.${c.slice(0, 3).toLowerCase()}`] = count;
         }
-        for (const a of Object.keys(TERIOCK.config.rank)) {
+        for (const a of Object.keys(TERIOCK.config.class.archetypes)) {
           const count = ranks.filter(r => r.system.archetype === a).length;
           data[`rank.${a}`] = count;
           data[`rank.${a.slice(0, 3).toLowerCase()}`] = count;

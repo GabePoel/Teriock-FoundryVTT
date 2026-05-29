@@ -26,12 +26,15 @@ export default class FluencySheet extends BaseEffectSheet {
    */
   #fieldContextMenuEntries() {
     const options = [];
-    for (const [fKey, fData] of Object.entries(TERIOCK.config.tradecraft)) {
+    for (const [fKey, fData] of Object.entries(TERIOCK.config.tradecraft.fields)) {
+      const firstTradecraft = Object.keys(TERIOCK.config.tradecraft.tradecrafts).find(tcKey =>
+        TERIOCK.config.tradecraft.tradecrafts[tcKey].field === fKey
+      );
       const option = {
         icon: makeIcon(fData.icon, "contextMenu"),
-        label: fData.name,
+        label: fData.label,
         onClick: async () => {
-          const updateData = { system: { field: fKey, tradecraft: Object.keys(fData.tradecrafts)[0] } };
+          const updateData = { system: { field: fKey, tradecraft: firstTradecraft } };
           await this.document.update(updateData);
         },
       };
@@ -46,21 +49,20 @@ export default class FluencySheet extends BaseEffectSheet {
    */
   #tradecraftContextMenuEntries() {
     const options = [];
-    for (const [fKey, fData] of Object.entries(TERIOCK.config.tradecraft)) {
-      for (const [tcKey, tcData] of Object.entries(fData.tradecrafts)) {
-        const option = {
-          icon: makeIcon(tcData.icon, "contextMenu"),
-          label: tcData.name,
-          onClick: async () => {
-            const updateData = { system: { field: fKey, tradecraft: tcKey } };
-            await this.document.update(updateData);
-          },
-          visible: () => {
-            return foundry.utils.getProperty(this.document.system, "field") === fKey;
-          },
-        };
-        options.push(option);
-      }
+    for (const [tcKey, tcData] of Object.entries(TERIOCK.config.tradecraft.tradecrafts)) {
+      const fKey = tcData.field;
+      const option = {
+        icon: makeIcon(tcData.icon, "contextMenu"),
+        label: tcData.label,
+        onClick: async () => {
+          const updateData = { system: { field: fKey, tradecraft: tcKey } };
+          await this.document.update(updateData);
+        },
+        visible: () => {
+          return foundry.utils.getProperty(this.document.system, "field") === fKey;
+        },
+      };
+      options.push(option);
     }
     return options;
   }

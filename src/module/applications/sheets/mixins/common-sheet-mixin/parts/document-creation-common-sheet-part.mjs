@@ -112,9 +112,7 @@ export default Base => {
       static async _onCreateFluency() {
         const tc = await selectTradecraftDialog();
         if (tc) {
-          const f = Object.entries(TERIOCK.config.tradecraft).find(([_k, v]) =>
-            Object.keys(v.tradecrafts).includes(tc)
-          )[0];
+          const f = TERIOCK.config.tradecraft.tradecrafts[tc].field;
           await this.document.createChildDocuments("ActiveEffect", [{
             img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
             name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", { tradecraft: TERIOCK.reference.tradecrafts[tc] }),
@@ -185,7 +183,7 @@ export default Base => {
           openable: true,
           title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
         });
-        const rankNumber = referenceRank.system.classRank;
+        const rankNumber = referenceRank.system.number;
         const rank = /** @type {TeriockRank} */ referenceRank.clone();
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
@@ -194,7 +192,7 @@ export default Base => {
           return;
         }
         /** @type {TeriockRank[]} */
-        const existingRanks = (await this.document.getRanks()).filter(r => r.system.className === rankClass);
+        const existingRanks = (await this.document.getRanks()).filter(r => r.system.class === rankClass);
         const combatAbilityNames = new Set(
           referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === "combat").map(a => a.name),
         );

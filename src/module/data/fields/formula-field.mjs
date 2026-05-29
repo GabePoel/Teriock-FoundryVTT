@@ -4,6 +4,7 @@ import EnhancedStringField from "./enhanced-string-field.mjs";
 
 /**
  * Special case {@link StringField} which represents a formula.
+ * @extends {Teriock.Fields._FormulaFieldOptions}
  */
 export default class FormulaField extends EnhancedStringField {
   /** @inheritdoc */
@@ -12,9 +13,8 @@ export default class FormulaField extends EnhancedStringField {
   }
 
   /**
-   * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options] - Options which configure
-   * the behavior of the field.
-   * @param {DataFieldContext} [context] - Additional context which describes the field.
+   * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options]
+   * @param {DataFieldContext} [context]
    */
   constructor(options = {}, context = {}) {
     super(options, context);

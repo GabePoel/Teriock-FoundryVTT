@@ -1,4 +1,4 @@
-import { tradecraftConfig } from "../../../../constants/config/tradecraft-config.mjs";
+import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
 import { iconManifest } from "../../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
@@ -60,7 +60,7 @@ export default class FluencySystem
     return Object.assign(super.defineSchema(), {
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 2 } }),
       field: new IdentifierField({
-        choices: objectMap(tradecraftConfig, f => f.name, { localize: true }),
+        choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
         initial: "artisan",
         nullable: false,
         required: true,
@@ -84,14 +84,14 @@ export default class FluencySystem
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = TERIOCK.reference.tradecrafts[this.tradecraft];
-    parts.text = dotJoin([TERIOCK.config.tradecraft[this.field].name, parts.text]);
+    parts.text = dotJoin([TERIOCK.config.tradecraft.fields[this.field].label, parts.text]);
     return parts;
   }
 
   /** @inheritDoc */
   get wikiPage() {
     const namespace = this.constructor.metadata.namespace;
-    const pageName = TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name;
+    const pageName = TERIOCK.config.tradecraft.tradecrafts[this.tradecraft].label;
     return `${namespace}:${pageName}`;
   }
 
@@ -140,11 +140,11 @@ export default class FluencySystem
     return {
       ...(await super.getPanelParts()),
       bars: [{
-        icon: TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].icon,
+        icon: TERIOCK.config.tradecraft.tradecrafts[this.tradecraft].icon,
         label: _loc("TERIOCK.TERMS.Common.tradecraft"),
         wrappers: [
-          TERIOCK.config.tradecraft[this.field].name,
-          TERIOCK.config.tradecraft[this.field].tradecrafts[this.tradecraft].name,
+          TERIOCK.config.tradecraft.fields[this.field].label,
+          TERIOCK.config.tradecraft.tradecrafts[this.tradecraft].label,
         ],
       }],
     };

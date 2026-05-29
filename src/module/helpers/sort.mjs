@@ -37,12 +37,12 @@ export function docSort(docs, options = { alphabetical: true }) {
  */
 export function rankSort(ranks) {
   return ranks.sort((a, b) => {
-    if (!a.system?.className || !b.system?.className) { return a.name.localeCompare(b.name); }
+    if (!a.system?.class || !b.system?.class) { return a.name.localeCompare(b.name); }
     if (a.system.innate !== b.system.innate) { return a.system.innate ? -1 : 1; }
     if (a.system.archetype === "everyman" && b.system.archetype !== "everyman") { return -1; }
     if (a.system.archetype !== "everyman" && b.system.archetype === "everyman") { return 1; }
-    if (a.system.className !== b.system.className) { return a.system.className.localeCompare(b.system.className); }
-    if (a.system.classRank !== b.system.classRank) { return a.system.classRank - b.system.classRank; }
+    if (a.system.class !== b.system.class) { return a.system.class.localeCompare(b.system.class); }
+    if (a.system.number !== b.system.number) { return a.system.number - b.system.number; }
     return a.sort - b.sort;
   });
 }

@@ -1,6 +1,4 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { equipmentConfig } from "../config/equipment-config.mjs";
-import { impactConfig } from "../config/impact-config.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {
@@ -57,7 +55,7 @@ Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.reference.properties).forEach(([k, v]) => {
     armamentContext[`prop.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.property", { name: _loc(v) });
   });
-  Object.entries(impactConfig).forEach(([k, v]) => {
+  Object.entries(TERIOCK.config.impact).forEach(([k, v]) => {
     armamentContext[`impact.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.impact", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.equipmentClasses).forEach(([k, v]) => {
@@ -66,9 +64,9 @@ Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.reference.equipment).forEach(([k, v]) => {
     armamentContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.type", { name: _loc(v) });
   });
-  Object.keys(equipmentConfig.powerLevel).forEach(k => {
+  Object.keys(TERIOCK.config.equipment.powerLevel).forEach(k => {
     armamentContext[`power.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.power", {
-      name: _loc(equipmentConfig.powerLevel[k].label),
+      name: _loc(TERIOCK.config.equipment.powerLevel[k].label),
     });
   });
 });
