@@ -5,9 +5,11 @@ _stats:
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.12.71
-command: |-
+command: >-
   const transformationLevels = TERIOCK.config.transformation.level;
-  const chosenTransformationLevel = await tm.dialogs.selectDialog(transformationLevels, {
+
+  const chosenTransformationLevel = await
+  tm.dialogs.selectDialog(transformationLevels, {
     hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
     hintHtml: await TextEditor.implementation.enrichHTML(
       (await teriock.fromIdentifier("status:transformed")).text.content,
@@ -18,14 +20,22 @@ command: |-
     other: true,
     title: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.title"),
   });
+
   let dc = "none";
+
   if (chosenTransformationLevel === "minor") dc = 6;
+
   if (chosenTransformationLevel === "full") dc = 12;
+
   if (chosenTransformationLevel === "greater") dc = 18;
-  const activations = scope.execution.activations.filter(a => a?.type === "feat" && a?.options.attribute === "int");
+
+  const activations = scope.execution.activations.filter(a => a?.type === "feat"
+  && a?.options.attribute === "int");
+
   if (typeof dc === "number") {
     for (const a of activations) a?.updateSource({ "options.threshold": `${dc - 2 * scope.execution.heightened}` });
   }
+
   for (let i = 0; i < scope.execution.rolls.length; i++) {
     const r = scope.execution.rolls[i];
     if (r.styles.dice.classes === "feat") {

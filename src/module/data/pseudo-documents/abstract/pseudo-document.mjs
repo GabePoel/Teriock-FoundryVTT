@@ -138,7 +138,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @returns {UUID<PseudoDocument> | null}
    */
   get uuid() {
-    return this.document?.uuid ? [this.document.uuid, this.document, this.id].join(".") : null;
+    return this.document?.uuid ? [this.document.uuid, this.documentName, this.id].join(".") : null;
   }
 
   /**

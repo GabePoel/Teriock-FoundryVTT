@@ -5,10 +5,12 @@ _stats:
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.12.71
-command: |-
-  const baseActivation = /** @type {AddDocumentsActivation} */ scope.execution.activations.find((a) =>
+command: >-
+  const baseActivation = /** @type {AddDocumentsActivation} */
+  scope.execution.activations.find((a) =>
     a.type === "addDocuments"
   );
+
   if (baseActivation) {
     const flankingData = baseActivation.toObject();
     const snareData = baseActivation.toObject();

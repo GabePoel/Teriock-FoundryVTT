@@ -5,9 +5,11 @@ _stats:
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.12.71
-command: |-
+command: >-
   const illusionLevels = TERIOCK.config.illusion.level;
-  const chosenIllusionLevel = /** @type {Teriock.Keys.IllusionLevel | null} */ await tm.dialogs.selectDialog(
+
+  const chosenIllusionLevel = /** @type {Teriock.Keys.IllusionLevel | null} */
+  await tm.dialogs.selectDialog(
     illusionLevels,
     {
       hint: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
@@ -21,14 +23,22 @@ command: |-
       title: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
     },
   );
+
   let dc = "none";
+
   if (chosenIllusionLevel === "minor") dc = 6;
+
   if (chosenIllusionLevel === "full") dc = 12;
+
   if (chosenIllusionLevel === "greater") dc = 18;
-  const activations = scope.execution.activations.filter(a => a.type === "feat" && a.options.attribute === "int");
+
+  const activations = scope.execution.activations.filter(a => a.type === "feat"
+  && a.options.attribute === "int");
+
   if (typeof dc === "number") {
     for (const a of activations) a._source.options.threshold = `${dc - 2 * scope.execution.heightened}`;
   }
+
   for (let i = 0; i < scope.execution.rolls.length; i++) {
     const r = scope.execution.rolls[i];
     if (r.styles.dice.classes === "feat") {

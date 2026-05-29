@@ -18,6 +18,7 @@ export default class BaseActivation extends TypedPseudoDocument {
         classes: new fields.SetField(new fields.StringField()),
         icon: new fields.StringField(),
         label: new fields.StringField(),
+        tooltip: new fields.StringField(),
       }),
     });
   }
@@ -142,7 +143,7 @@ export default class BaseActivation extends TypedPseudoDocument {
    * @returns {string}
    */
   get tooltip() {
-    return "";
+    return this.display.tooltip || "";
   }
 
   /**

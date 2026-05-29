@@ -5,6 +5,7 @@ import { hackConfig } from "../config/hack-config.mjs";
 import { rankConfig } from "../config/rank-config.mjs";
 
 const actorContext = {
+  c: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.c.label",
   f: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.f.label",
   lvl: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.lvl.label",
   p: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.p.label",

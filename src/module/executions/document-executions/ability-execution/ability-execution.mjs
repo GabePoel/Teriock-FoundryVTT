@@ -42,6 +42,9 @@ export default class AbilityExecution
     const rollAdditions = {
       av0: Number(this.piercing.av0) * 2,
       "av0.wep": Number(this.armament?.system.piercing.av0) * 2,
+      c: this.competence.fluent
+        ? this.actor.system.scaling.f
+        : (this.competence.proficient ? this.actor.system.scaling.p : 0),
       h: this.heightened,
       sb: this.sb ? this.actor?.system.scaling.p ?? 0 : 0,
       ub: Number(this.piercing.ub),

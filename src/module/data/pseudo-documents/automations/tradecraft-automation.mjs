@@ -63,13 +63,15 @@ export default class TradecraftAutomation
   }
 
   /** @inheritDoc */
-  async _getActivations() {
+  async _getActivations(options) {
+    const threshold = await this.getThreshold(options?.rollData ?? {});
     return Array.from(this.tradecrafts).filter(Boolean).map(tradecraft =>
       new TradecraftActivation({
+        display: this.getDisplayData(threshold),
         options: {
           bonus: this.bonus,
           competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
-          threshold: this.threshold,
+          threshold,
           tradecraft,
         },
       })
@@ -103,14 +105,13 @@ export default class TradecraftAutomation
     }
     const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
     if (!actor) { return; }
-    await Promise.all(
-      selected.map(tradecraft =>
-        actor.system.rollTradecraft(tradecraft, {
-          bonus: this.bonus,
-          competence: this.overrideCompetence ? this.competence.raw : this.document.system.competence.raw,
-          threshold: this.threshold,
-        })
-      ),
-    );
+    await Promise.all(selected.map(async tradecraft => {
+      const threshold = await this.getThreshold(options?.rollData ?? {});
+      return actor.system.rollTradecraft(tradecraft, {
+        bonus: this.bonus,
+        competence: this.overrideCompetence ? this.competence.raw : this.document.system.competence.raw,
+        threshold,
+      });
+    }));
   }
 }

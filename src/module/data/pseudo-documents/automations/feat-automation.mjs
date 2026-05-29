@@ -32,9 +32,13 @@ export default class FeatAutomation extends ThresholdAutomation {
   }
 
   /** @inheritDoc */
-  async getActivations() {
+  async getActivations(options) {
+    const threshold = await this.getThreshold(options?.rollData ?? {});
     return [
-      new FeatActivation({ options: { attribute: this.attribute, bonus: this.bonus, threshold: this.threshold } }),
+      new FeatActivation({
+        display: this.getDisplayData(threshold),
+        options: { attribute: this.attribute, bonus: this.bonus, threshold },
+      }),
     ];
   }
 }
