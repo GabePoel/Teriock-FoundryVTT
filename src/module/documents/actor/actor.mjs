@@ -58,11 +58,17 @@ export default class TeriockActor
     return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
+  /** @type {AnyActiveEffect[]} */
+  _modifiableChildren;
+
   /** @type {Set<UUID<TeriockItem>|TypedIdentifier>} */
   _stagedItemCreations = new Set();
 
   /** @type {Set<ID<TeriockItem>>} */
   _stagedItemDeletions = new Set();
+
+  /** @type {AnyActiveEffect[]} */
+  _validEffects;
 
   /**
    * Is this actor active?
@@ -139,7 +145,12 @@ export default class TeriockActor
    * @returns {AnyActiveEffect[]}
    */
   get modifiableChildren() {
-    return [...this.validEffects, ...this.items.contents].filter(c => !c.isEphemeral && !c.isReference);
+    if (!this._modifiableChildren) {
+      this._modifiableChildren = [...this.validEffects, ...this.items.contents].filter(c =>
+        !c.isEphemeral && !c.isReference
+      );
+    }
+    return this._modifiableChildren;
   }
 
   /**
@@ -147,7 +158,8 @@ export default class TeriockActor
    * @returns {AnyActiveEffect[]}
    */
   get validEffects() {
-    return Array.from(this.allApplicableEffects());
+    if (!this._validEffects) { this._validEffects = Array.from(this.allApplicableEffects()); }
+    return this._validEffects;
   }
 
   /**
@@ -555,6 +567,13 @@ export default class TeriockActor
     const candidates = statusIds.map(id => CONFIG.statusEffects[id]).filter(Boolean);
     const toRemove = candidates.filter(e => this.effects.get(e?._id)).map(e => e?._id);
     await this.deleteEmbeddedDocuments("ActiveEffect", toRemove);
+  }
+
+  /** @inheritDoc */
+  resetChildMaps() {
+    super.resetChildMaps();
+    delete this._validEffects;
+    delete this._modifiableChildren;
   }
 
   /**
