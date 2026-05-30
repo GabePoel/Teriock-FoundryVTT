@@ -1,36 +1,25 @@
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { selectDocumentDialog } from "../dialogs/_module.mjs";
-import TeriockBaseApplication from "./base-application.mjs";
+import TeriockResolvableDialog from "./resolvable-dialog.mjs";
 
 const { fields } = foundry.data;
 
-export default class TeriockExecutionEditor extends TeriockBaseApplication {
+export default class TeriockExecutionEditor extends TeriockResolvableDialog {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    actions: { cancel: this._onCancel, changeDocument: this._onChangeDocument, confirm: this._onConfirm },
-    classes: ["dialog", "execution-editor"],
+    actions: { changeDocument: this._onChangeDocument, confirm: this._onConfirm },
+    classes: ["execution-editor"],
     position: { width: 550 },
-    window: { contentClasses: ["wide-toggles", "standard-form"], resizable: false },
+    window: { contentClasses: ["wide-toggles"] },
   };
 
   static PARTS = {
     content: { template: "teriock/dialogs/execution-editor" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
-
-  /**
-   * @param {PointerEvent} event
-   * @returns {Promise<void>}
-   * @this {TeriockExecutionEditor}
-   */
-  static async _onCancel(event) {
-    event?.preventDefault();
-    this._finish(null);
-    await this.close();
-  }
 
   /**
    * @param {PointerEvent} event
@@ -79,20 +68,17 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
 
   /**
    * @param {AbilityExecution|ThresholdExecution} execution
-   * @param {Partial<ApplicationConfiguration>} [options]
+   * @param {Partial<ApplicationConfiguration>} [config]
    */
-  constructor(execution, options = {}) {
-    super(options);
+  constructor(execution, config = {}) {
+    super(config);
     this.execution = execution;
-    this.rootId = foundry.utils.randomID();
     foundry.utils.setProperty(
       this.options,
       "window.title",
       _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", { name: execution.name }).trim(),
     );
     foundry.utils.setProperty(this.options, "window.icon", makeIconClass(execution.icon, "title"));
-    this._resolve = null;
-    this._result = new Promise(resolve => (this._resolve = resolve));
   }
 
   /**
@@ -149,23 +135,6 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
     return element.value;
   }
 
-  /**
-   * Resolve the prompt promise.
-   * @param {boolean|null} value
-   */
-  _finish(value) {
-    if (this._resolve) {
-      const resolve = this._resolve;
-      this._resolve = null;
-      resolve(value);
-    }
-  }
-
-  /** @inheritDoc */
-  _onClose() {
-    this._finish(null);
-  }
-
   /** @inheritDoc */
   async _onFirstRender(context, options = {}) {
     await super._onFirstRender(context, options);
@@ -212,24 +181,7 @@ export default class TeriockExecutionEditor extends TeriockBaseApplication {
       })),
       documents,
       mainFields,
-      rootId: this.rootId,
       smallFields,
     });
-  }
-
-  /** @inheritDoc */
-  async _preparePartContext(partId, context, options) {
-    context = await super._preparePartContext(partId, context, options);
-    if (partId === "content") { context.partId = this.rootId; }
-    return context;
-  }
-
-  /**
-   * Show the execution editor and wait for confirmation.
-   * @returns {Promise<boolean|null>}
-   */
-  async prompt() {
-    await this.render(true);
-    return this._result;
   }
 }

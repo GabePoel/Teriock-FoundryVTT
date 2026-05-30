@@ -1,47 +1,30 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
-import TeriockBaseApplication from "./base-application.mjs";
+import TeriockResolvableDialog from "./resolvable-dialog.mjs";
 
 const { SearchFilter } = foundry.applications.ux;
 
-/**
- * @property {function} _finish
- */
-export default class TeriockDocumentSelector extends TeriockBaseApplication {
+export default class TeriockDocumentSelector extends TeriockResolvableDialog {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    actions: { cancel: this._onCancel, ok: this._onGetSelected },
-    classes: ["dynamic-select", "dialog"],
+    actions: { ok: this._onGetSelected },
+    classes: ["dynamic-select"],
     position: { width: 450 },
-    window: {
-      contentClasses: ["standard-form"],
-      icon: makeIconClass(icons.ui.select, "title"),
-      resizable: true,
-      title: "TERIOCK.DIALOGS.Select.Document.title",
-    },
+    window: { icon: makeIconClass(icons.ui.select, "title"), title: "TERIOCK.DIALOGS.Select.Document.title" },
   };
 
   static PARTS = {
-    all: { scrollable: [".doc-list-container"], template: "teriock/dialogs/select" },
+    all: { scrollable: [".doc-list-container"], template: "teriock/dialogs/document-selector" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
   /**
    * @param {PointerEvent} event
    * @returns {Promise<void>}
-   */
-  static async _onCancel(event) {
-    event?.preventDefault();
-    this._finish(this.multi ? [] : null);
-    await this.close();
-  }
-
-  /**
-   * @param {PointerEvent} event
-   * @returns {Promise<void>}
+   * @this {TeriockDocumentSelector}
    */
   static async _onGetSelected(event) {
     event?.preventDefault();
@@ -50,21 +33,21 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     if (this.multi) { ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map(el => el.name); }
     else {
       const radio = root.querySelector(`input[name="choice-${this.id}"]:checked`);
-      if (radio) { ids = [radio.value]; }
+      if (radio) { ids = [radio?.value]; }
     }
     this._finish(ids);
     await this.close();
   }
 
   /**
-   * @param {Record<string, Teriock.Select.DocumentSelectionEntry>} docs
+   * @param {Record<string, Teriock.Select.DocumentSelectionEntry>} documents
    * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} options
-   * @param args
+   * @param {Partial<ApplicationConfiguration>} [config]
    */
-  constructor(docs, options = {}, ...args) {
+  constructor(documents, options = {}, config = {}) {
     const { hint = "", multi = true, openable = false, tooltip = true, tooltipAsync = false } = options;
-    super(...args);
-    this.docs = docs;
+    super(config);
+    this.docs = documents;
     this.multi = multi;
     this.hint = hint;
     this.tooltip = tooltip;
@@ -73,20 +56,11 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     if (options.title) { foundry.utils.setProperty(this.options, "window.title", options.title); }
     if (options.icon) { foundry.utils.setProperty(this.options, "window.icon", options.icon); }
     this.config = foundry.utils.mergeObject(this.config ?? {}, this.options);
-    this._resolve = null;
-    this._result = new Promise(resolve => (this._resolve = resolve));
   }
 
-  /**
-   * Finish the document selection.
-   * @param {Array|null} value
-   */
-  _finish(value) {
-    if (this._resolve) {
-      const r = this._resolve;
-      this._resolve = null;
-      r(value);
-    }
+  /** @inheritDoc */
+  get _fallbackFinishValue() {
+    return this.multi ? [] : super._fallbackFinishValue;
   }
 
   /**
@@ -95,18 +69,15 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
   _initClickLoader() {
     if (!this.openable) { return; }
     const list = this.element.querySelector(".doc-list-container");
-    if (!list) { return; }
-    list.addEventListener("dblclick", this._onDblClickOpen.bind(this));
+    list?.addEventListener("dblclick", this._onDblClickOpen.bind(this));
   }
 
   /**
    * Initialize the search filter.
    */
   _initSearchFilter() {
-    const root = this.element;
-    if (!root) { return; }
-    const input = root.querySelector(".search-input");
-    const content = root.querySelector(".doc-select");
+    const input = this.element.querySelector(".search-input");
+    const content = this.element.querySelector(".doc-select");
     if (!input || !content) { return; }
     const searchFilter = new SearchFilter({
       contentSelector: ".doc-select",
@@ -120,14 +91,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
         });
       },
     });
-    searchFilter.bind(root);
-  }
-
-  /** @inheritDoc */
-  _onClose() {
-    const list = this.element?.querySelector(".doc-list-container");
-    if (list && this._boundDblClickOpen) { list.removeEventListener("dblclick", this._boundDblClickOpen); }
-    this._finish(this.multi ? [] : null);
+    searchFilter.bind(this.element);
   }
 
   /**
@@ -163,13 +127,5 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
       tooltip: this.tooltip,
       tooltipAsync: this.tooltipAsync,
     });
-  }
-
-  /**
-   * @returns {Promise<object>}
-   */
-  async select() {
-    await this.render(true);
-    return this._result;
   }
 }

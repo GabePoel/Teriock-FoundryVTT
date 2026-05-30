@@ -191,7 +191,7 @@ export default function ThresholdExecutionMixin(Base) {
       async _showRollDialog() {
         if (!this._activeDialogFields.length && !this._dialogDocuments.length) { return; }
         const editor = new TeriockExecutionEditor(this);
-        const result = await editor.prompt();
+        const result = await editor.activate();
         if (result === null) { return false; }
       }
     }

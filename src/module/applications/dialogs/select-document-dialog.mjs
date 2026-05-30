@@ -82,7 +82,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     tooltip: options.tooltip,
   });
 
-  const selected = await sheet.select();
+  const selected = await sheet.activate();
   if (selected) { return selected.map(id => idToDoc.get(id)).filter(Boolean); }
   return [];
 }
