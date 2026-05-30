@@ -29,7 +29,7 @@ export default async function setStatDiceDialog(pool) {
     modal: true,
     ok: {
       icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-      label: _loc("TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm"),
+      label: _loc("COMMON.Confirm"),
       callback: async (_event, button) => {
         const formulaInput = /** @type {HTMLInputElement} */ button.form.elements.namedItem("formula");
         const disabledInput = /** @type {HTMLInputElement} */ button.form.elements.namedItem("disabled");

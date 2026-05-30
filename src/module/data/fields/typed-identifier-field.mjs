@@ -23,7 +23,7 @@ export default class TypedIdentifierField extends StringField {
   /** @inheritDoc */
   _validateType(value) {
     if (value == null || value === "") { return true; }
-    if (!typedIdentifierValidator(value, this.types)) {
+    if (!typedIdentifierValidator(value, { types: this.types })) {
       const parsed = value.includes(":") ? value.split(":")[0] : null;
       if (!parsed) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
       if (this.types?.length) {

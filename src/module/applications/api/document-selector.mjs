@@ -57,8 +57,8 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
   }
 
   /**
-   * @param {Record<string, Teriock.SelectOptions.SelectDocument> }docs
-   * @param {Partial<Teriock.SelectOptions.DocumentsSelect>} options
+   * @param {Record<string, Teriock.Select.DocumentSelectionEntry>} docs
+   * @param {Partial<Teriock.Select.SelectDocumentsDialogOptions>} options
    * @param args
    */
   constructor(docs, options = {}, ...args) {

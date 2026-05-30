@@ -1,6 +1,7 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
+import { changeSizeDialog } from "../../../dialogs/_module.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import defaultSheetSettings from "./helpers/default-sheet-settings.mjs";
@@ -68,6 +69,18 @@ export default class BaseActorSheet
 
   /** @type {string} */
   _activeTab;
+
+  /** @inheritDoc */
+  async _onDropChild(event, dropData) {
+    const out = await super._onDropChild(event, dropData);
+    if (
+      out?.type === "species" && out.system.size.enabled
+      && out.system.size.value !== this.document.system._source.size.number
+    ) {
+      changeSizeDialog(this.actor, out);
+    }
+    return out;
+  }
 
   /** @inheritDoc */
   async _onRender(context, options) {

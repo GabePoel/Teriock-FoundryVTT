@@ -48,7 +48,7 @@ export default class StatusAutomation extends ChatStatusAutomation {
 
   /**
    * Select visible tokens to associate this status with.
-   * @param {Teriock.SelectOptions.DocumentsSelect} options
+   * @param {Teriock.Select.SelectDocumentsDialogOptions} options
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectVisibleTokens(options = {}) {

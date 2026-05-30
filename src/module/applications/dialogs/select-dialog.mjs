@@ -11,17 +11,7 @@ const TextEditor = foundry.applications.ux.TextEditor.implementation;
 /**
  * Dialog that lets you select something.
  * @param {Record<string, string>} choices - Key/value pairs to select from.
- * @param {object} [options] - Dialog options.
- * @param {string|null} [options.initial=null] - The initially selected choice.
- * @param {boolean} [options.genericOther=true] - If true, "Other" returns `null` instead of prompting again.
- * @param {boolean} [options.other=false] - Whether to include an "Other" button.
- * @param {boolean} [options.required=false] - If true, no blank choice will be offered.
- * @param {string} [options.hint="Please select an option above."] - Hint text.
- * @param {string} [options.hintHtml=""] - Additional hint with more complex HTML.
- * @param {string} [options.hintTitle=""] - Title for the additional hint.
- * @param {string} [options.icon] - Icon to use for the select window.
- * @param {string} [options.label="Select"] - Label for the select field.
- * @param {string} [options.title="Select"] - Dialog title.
+ * @param {Teriock.Select.SelectDialogOptions} [options] - Dialog options.
  * @returns {Promise<string|null>} The chosen value, or `null` if canceled or genericOther.
  */
 export async function selectDialog(choices, options = {}) {

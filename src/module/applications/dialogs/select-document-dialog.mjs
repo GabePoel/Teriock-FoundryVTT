@@ -4,7 +4,7 @@ import { TeriockDocumentSelector } from "../api/_module.mjs";
  * Select any number of documents.
  * @template T
  * @param {T[]} documents
- * @param {Teriock.SelectOptions.DocumentsSelect} [options]
+ * @param {Teriock.Select.SelectDocumentsDialogOptions} [options]
  * @returns {Promise<T[]>}
  */
 export async function selectDocumentsDialog(documents, options = {}) {
@@ -41,7 +41,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
 
   const idToDoc = new Map();
   /**
-   * @type {Teriock.SelectOptions.DocumentSelectContext}
+   * @type {Teriock.Select.DocumentSelectContext}
    */
   const context = { documents: {}, hint: options.hint, tooltip: options.tooltip };
 
@@ -91,7 +91,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
  * Select one document.
  * @template T
  * @param {T[]} documents
- * @param {Teriock.SelectOptions.DocumentSelect} [options]
+ * @param {Teriock.Select.SelectDocumentDialogOptions} [options]
  * @returns {Promise<T|null>}
  */
 export async function selectDocumentDialog(documents, options = {}) {

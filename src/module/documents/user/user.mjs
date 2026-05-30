@@ -41,7 +41,7 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
 
   /**
    * Select one targeted token document.
-   * @param {Teriock.SelectOptions.DocumentSelect} options
+   * @param {Teriock.Select.SelectDocumentDialogOptions} options
    * @returns {Promise<TeriockTokenDocument|null>}
    */
   async selectTargetedToken(options = {}) {
@@ -57,7 +57,7 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
 
   /**
    * Select any number of targeted token documents.
-   * @param {Teriock.SelectOptions.DocumentsSelect} options
+   * @param {Teriock.Select.SelectDocumentsDialogOptions} options
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectTargetedTokens(options = {}) {
@@ -73,7 +73,7 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
 
   /**
    * Select one visible token document.
-   * @param {Teriock.SelectOptions.DocumentSelect} options
+   * @param {Teriock.Select.SelectDocumentDialogOptions} options
    */
   async selectVisibleToken(options = {}) {
     return selectDocumentDialog(Array.from(this.visibleTokens).map(t => t.document), {
@@ -88,7 +88,7 @@ export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMix
 
   /**
    * Select any number of the visible token documents.
-   * @param {Teriock.SelectOptions.DocumentsSelect} options
+   * @param {Teriock.Select.SelectDocumentsDialogOptions} options
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectVisibleTokens(options = {}) {

@@ -12,6 +12,7 @@ import { default as dialogs } from "../../src/en/dialogs.json" with { type: "jso
 import { default as documents } from "../../src/en/documents.json" with { type: "json" };
 import { default as effects } from "../../src/en/effects.json" with { type: "json" };
 import { default as fields } from "../../src/en/fields.json" with { type: "json" };
+import { default as format } from "../../src/en/format.json" with { type: "json" };
 import { default as macros } from "../../src/en/macros.json" with { type: "json" };
 import { default as message } from "../../src/en/message.json" with { type: "json" };
 import { default as models } from "../../src/en/models.json" with { type: "json" };
@@ -32,6 +33,7 @@ import { default as conditionsContent } from "../../src/index/content/conditions
 import { default as keywordsContent } from "../../src/index/content/keywords.json" with { type: "json" };
 import { default as tradecraftsContent } from "../../src/index/content/tradecrafts.json" with { type: "json" };
 import { default as weaponFightingStylesContent } from "../../src/index/content/weapon-fighting-styles.json" with { type: "json" };
+import { default as conditions } from "../../src/index/names/conditions.json" with { type: "json" };
 import * as index from "../../src/module/constants/index/_module.mjs";
 
 /**
@@ -89,7 +91,7 @@ const content = {
   },
 };
 
-statuses.TERIOCK.STATUSES.Conditions = index.conditions;
+statuses.TERIOCK.STATUSES.Conditions = conditions;
 
 Object.assign(terms.TERIOCK.TERMS, {
   Abilities: index.abilities,
@@ -124,13 +126,14 @@ mergeObjects(
   documents,
   effects,
   fields,
+  format,
   macros,
   message,
   models,
   packs,
   perception,
-  rolls,
   rollContext,
+  rolls,
   schema,
   settings,
   sheets,

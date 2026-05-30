@@ -18,6 +18,7 @@ export default class TeriockItemDirectory extends SidebarMixin(ItemDirectory) {
         const data = await this._getDocumentFromLi(li)?.system.toCreature();
         if (!data) { return; }
         Actor.implementation.create(data, { renderSheet: true });
+        foundry.ui.actors?.activate();
       },
       visible: li => this._getDocumentFromLi(li)?.type === "species" && game.user.hasPermission("ACTOR_CREATE"),
     }, ...super._getEntryContextOptions()];

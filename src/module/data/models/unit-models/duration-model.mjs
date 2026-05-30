@@ -68,14 +68,19 @@ export default class DurationModel extends TimeUnitModel {
    */
   get prerequisiteString() {
     const triggers = [...this.triggers.map(t => DurationModel.triggerChoices[t].label)];
+    const notDead = _loc("TERIOCK.FORMAT.invert", { value: TERIOCK.reference.conditions.dead });
+    const notDown = _loc("TERIOCK.FORMAT.invert", { value: TERIOCK.reference.conditions.down });
+    const notUnconscious = _loc("TERIOCK.FORMAT.invert", { value: TERIOCK.reference.conditions.unconscious });
     const conditions = [
       ...this.conditions.present.map(c => TERIOCK.reference.conditions[c]),
-      // TODO: Localize the "Not" replacements.
       ...this.conditions.absent.map(c =>
-        _loc("TERIOCK.MODELS.Duration.PREREQUISITES.notStatus", { status: TERIOCK.reference.conditions[c] }).replace(
-          "Not Down",
-          "Up",
-        ).replace("Not Dead", "Alive").replace("Not Unconscious", "Conscious")
+        _loc("TERIOCK.FORMAT.invert", { value: TERIOCK.reference.conditions[c] }).replace(
+          notDead,
+          _loc("TERIOCK.STATUSES.Conditions.alive"),
+        ).replace(notDown, _loc("TERIOCK.STATUSES.Conditions.up")).replace(
+          notUnconscious,
+          _loc("TERIOCK.STATUSES.Conditions.conscious"),
+        )
       ),
     ].filter(Boolean);
     let triggerPart = _loc("TERIOCK.MODELS.Duration.PREREQUISITES.untilTriggers", {

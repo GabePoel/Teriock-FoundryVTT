@@ -95,7 +95,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
     const entries = super.getCardContextMenuEntries(doc).filter(e =>
-      ![_loc("TERIOCK.SYSTEMS.Common.MENU.delete"), _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate")].includes(e.label)
+      ![_loc("COMMON.Delete"), _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate")].includes(e.label)
     );
     return [...entries, {
       group: "attunement",

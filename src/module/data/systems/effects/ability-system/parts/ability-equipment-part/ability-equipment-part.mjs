@@ -1,7 +1,7 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
 import { toTitleCase } from "../../../../../../helpers/string.mjs";
-import { fromIdentifier, makeIcon } from "../../../../../../helpers/utils.mjs";
+import { fromIdentifier, getName, makeIcon } from "../../../../../../helpers/utils.mjs";
 import { initialText } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -77,13 +77,23 @@ export default Base => {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.ability.scroll, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Ability.EMBED.makeScroll"),
-          visible: Boolean(this.parent.parent?.isOwner && this.spell && doc !== this.parent && doc?.sheet?.isEditable),
+          visible: Boolean(
+            this.parent.parent?.isOwner && this.spell && doc !== this.parent
+              && (!doc?.actor || doc?.actor?.sheet?.isEditable),
+          ),
           onClick: async () => {
             const data = await this.toScroll();
             const op = { keepEmbeddedIds: true, renderSheet: true };
             if (doc?.actor?.documentName === "Actor" && doc?.actor?.uuid === this.actor?.uuid) {
-              await this.actor.createEmbeddedDocuments("Item", [data], op);
-            } else { TeriockItem.create(data, op); }
+              this.actor.createEmbeddedDocuments("Item", [data], op);
+              if (this.actor.sheet?.rendered) {
+                this.actor.sheet._activeTab = "inventory";
+                this.actor.sheet.render();
+              }
+            } else {
+              TeriockItem.create(data, op);
+              foundry.ui.items?.activate();
+            }
           },
         });
         return entries;
@@ -129,10 +139,14 @@ export default Base => {
           } else { img = getImage("consumables", "Celestial Spell Scroll"); }
         }
         let out = foundry.utils.mergeObject(reference, {
-          name: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.scrollName", { name: this.parent.fullName }),
+          name: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.name", {
+            spell: this.parent.fullName,
+            type: getName(`equipment:${equipmentType}`),
+          }),
           system: {
             _src: this.parent.uuid,
             consumable: true,
+            description: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.description", { id: this.parent.id }),
             identifier: `${equipmentType}-of-${this.parent.forcedIdentifier}`,
             needsAttunement: false,
             powerLevel: "enchanted",

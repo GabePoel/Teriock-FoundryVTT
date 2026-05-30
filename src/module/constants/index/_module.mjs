@@ -3,8 +3,10 @@
 
 import { default as allConditions } from "../../../index/names/conditions.json" with { type: "json" };
 
-delete allConditions.alive;
-delete allConditions.up;
+const conditionsCopy = { ...allConditions };
+delete conditionsCopy.alive;
+delete conditionsCopy.up;
+delete conditionsCopy.conscious;
 
 export { default as abilities } from "../../../index/names/abilities.json" with { type: "json" };
 export { default as attributesFull } from "../../../index/names/attributes-full.json" with { type: "json" };
@@ -12,7 +14,7 @@ export { default as attributes } from "../../../index/names/attributes.json" wit
 export { default as bodyParts } from "../../../index/names/body-parts.json" with { type: "json" };
 export { default as classes } from "../../../index/names/classes.json" with { type: "json" };
 export { default as commonAnimals } from "../../../index/names/common-animals.json" with { type: "json" };
-export { allConditions as conditions };
+export { conditionsCopy as conditions };
 export { default as coreRules } from "../../../index/names/core-rules.json" with { type: "json" };
 export { default as creatures } from "../../../index/names/creatures.json" with { type: "json" };
 export { default as currency } from "../../../index/names/currency.json" with { type: "json" };

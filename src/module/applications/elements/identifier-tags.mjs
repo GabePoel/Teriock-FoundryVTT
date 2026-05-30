@@ -206,15 +206,15 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   #validateIdentifier(identifier) {
     identifier = identifier.trim();
     if (!identifier) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank")); }
-    const requiredTypes = this.types;
-    if (!typedIdentifierValidator(identifier, requiredTypes)) {
+    const types = this.types;
+    if (!typedIdentifierValidator(identifier, { types })) {
       const parsed = parseIdentifier(identifier);
       if (!parsed.type) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
-      if (requiredTypes.length) {
+      if (types.length) {
         throw new Error(
           _loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorWrongType", {
             provided: parsed.type,
-            required: requiredTypes.join(", "),
+            required: types.join(", "),
           }),
         );
       }

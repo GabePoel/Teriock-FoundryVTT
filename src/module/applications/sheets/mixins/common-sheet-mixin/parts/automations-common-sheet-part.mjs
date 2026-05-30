@@ -156,7 +156,7 @@ export default Base => {
           },
         }, {
           icon: makeIcon(TERIOCK.display.icons.ui.delete),
-          label: _loc("TERIOCK.SYSTEMS.Common.MENU.delete"),
+          label: _loc("COMMON.Delete"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;
             if (!uuid) { return; }

@@ -71,13 +71,7 @@ export default function ThresholdExecutionMixin(Base) {
             name: "advantage",
             callback: () => (this.edge = 1),
           }]
-          : [{
-            action: "confirm",
-            default: true,
-            icon: icons.ui.enable,
-            label: "TERIOCK.DIALOGS.SetStatDice.BUTTONS.confirm",
-            name: "ok",
-          }];
+          : [{ action: "confirm", default: true, icon: icons.ui.enable, label: "COMMON.Confirm", name: "ok" }];
       }
 
       /** @returns {Teriock.Execution.ExecutionDialogDocument[]} */

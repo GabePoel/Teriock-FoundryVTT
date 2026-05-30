@@ -18,17 +18,14 @@ export default async function changeSizeDialog(actor, species) {
         action: "changeSize",
         default: true,
         icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-        label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.yes"),
+        label: _loc("COMMON.Yes"),
         callback: async () => {
           await actor.update({ "system.size.number": species.system.size.value });
         },
-      }, {
-        action: "no",
-        icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"),
-        label: _loc("TERIOCK.DIALOGS.ChangeSize.BUTTONS.no"),
-      }],
+      }, { action: "no", icon: makeIconClass(TERIOCK.display.icons.ui.remove, "button"), label: _loc("COMMON.No") }],
       content,
       modal: true,
+      position: { width: 400 },
       window: {
         icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
         title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
