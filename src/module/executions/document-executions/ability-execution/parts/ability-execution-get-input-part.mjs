@@ -16,8 +16,7 @@ const { fields } = foundry.data;
  */
 export function createDialogInput(options = {}) {
   const field = new foundry.data.fields.NumberField({ min: 0, nullable: false, placeholder: "0", ...options });
-  const formGroup = field.toFormGroup({ hint: "TEMP", label: options.label }, {
-    classes: "stacked",
+  const formGroup = field.toFormGroup({ classes: ["stacked"], hint: "TEMP", label: options.label }, {
     name: options.name,
     rootId: foundry.utils.randomID(),
     value: 0,
