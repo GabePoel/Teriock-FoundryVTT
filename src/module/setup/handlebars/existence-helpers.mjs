@@ -9,16 +9,13 @@ function defined(val) {
 
 /**
  * Flexible helper to check if something exists.
- * @param {object|string|number} val
+ * @param {*} value
  * @returns {boolean}
  */
-function exists(val) {
-  if (Array.isArray(val)) { return val.length > 0; }
-  if (val === undefined || val === null) { return false; }
-  if (typeof val === "object") { return Object.keys(val).length > 0; }
-  if (typeof val === "string") { return !(val.trim() === "" || val === "0" || val === "+0"); }
-  if (typeof val === "number") { return val > 0; }
-  return true;
+function exists(value) {
+  if (typeof value === "string") { return !(value.trim() === "" || value === "0" || value === "+0"); }
+  if (typeof value === "number") { return value > 0; }
+  return !foundry.utils.isEmpty(value);
 }
 
 /**

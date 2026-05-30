@@ -1,6 +1,6 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
 import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -39,8 +39,7 @@ export default class ConditionSystem
    * @returns {string}
    */
   get conditionKey() {
-    const idMap = Object.fromEntries(Object.entries(TERIOCK.data.conditions).map(([id, data]) => [data._id, id]));
-    return idMap[this.parent.id];
+    return foundry.utils.invertObject(objectMap(TERIOCK.data.conditions, (c) => c._id))[this.parent.id];
   }
 
   /** @inheritDoc */

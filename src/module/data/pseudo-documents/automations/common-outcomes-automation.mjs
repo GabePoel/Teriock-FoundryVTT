@@ -77,8 +77,9 @@ export default class CommonOutcomesAutomation
       const uuid = foundry.utils.buildRelativeUuid(options.execution.armament, options.execution.actor);
       foundry.utils.setProperty(activationOptions, "options.armament", uuid);
     }
+    const activationClasses = Object.values(activations);
     return Array.from(this.common).filter(Boolean).map(c => {
-      const Act = Object.values(activations).find(A => A.TYPE === c);
+      const Act = activationClasses.find(A => A.TYPE === c);
       if (Act) { return new Act(foundry.utils.deepClone(activationOptions)); }
     }).filter(Boolean);
   }

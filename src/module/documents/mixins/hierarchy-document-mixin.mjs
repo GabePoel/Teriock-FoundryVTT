@@ -202,9 +202,10 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       static findAllSubs(document, collection) {
-        if (this.findSubs(document, collection).size === 0) { return new TypeCollection(); }
+        const subs = this.findSubs(document, collection);
+        if (subs.size === 0) { return new TypeCollection(); }
         return new TypeCollection(
-          this.findSubs(document, collection).contents.flatMap(s => [s, ...this.findAllSubs(s, collection)]).map(
+          subs.contents.flatMap(s => [s, ...this.findAllSubs(s, collection)]).map(
             s => [s._id, s]
           ),
         );
@@ -217,10 +218,11 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       static findAllSups(document, collection) {
-        if (!this.findSup(document, collection)) { return new TypeCollection(); }
+        const sup = this.findSup(document, collection);
+        if (!sup) { return new TypeCollection(); }
         return new TypeCollection(
-          [this.findSup(document, collection)].concat(
-            this.findAllSups(this.findSup(document, collection))?.contents || [],
+          [sup].concat(
+            this.findAllSups(sup)?.contents || [],
           ).map(d => [d._id, d]),
         );
       }
