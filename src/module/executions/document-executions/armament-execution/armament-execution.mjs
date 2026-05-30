@@ -61,6 +61,11 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   }
 
   /** @inheritDoc */
+  get chatData() {
+    return { ...super.chatData, rolls: this.#typedRolls };
+  }
+
+  /** @inheritDoc */
   get executionNames() {
     return [...super.executionNames, "Armament"];
   }
