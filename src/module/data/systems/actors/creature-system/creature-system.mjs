@@ -1,3 +1,5 @@
+import { toCamelCase } from "../../../../helpers/string.mjs";
+import { WikiSystemMixin } from "../../mixins/_module.mjs";
 import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
 
 /**
@@ -9,10 +11,15 @@ import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
  *
  * @implements {Teriock.Models.CreatureSystemData}
  */
-export default class CreatureSystem extends BaseActorSystem {
+export default class CreatureSystem extends WikiSystemMixin(BaseActorSystem) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, { type: "creature" });
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    return `Creature:${TERIOCK.index.creatures[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 
   /** @inheritDoc */

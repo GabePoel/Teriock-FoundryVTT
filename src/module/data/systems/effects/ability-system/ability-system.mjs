@@ -1,6 +1,7 @@
 import { costConfig } from "../../../../constants/config/cost-config.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as shared from "../../../shared/mixins/_module.mjs";
@@ -103,7 +104,6 @@ export default class AbilitySystem
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability", "fluency"],
       hierarchy: true,
-      namespace: "Ability",
       passive: true,
       type: "ability",
       usable: true,
@@ -332,6 +332,11 @@ export default class AbilitySystem
   get useText() {
     if (this.spell) { return _loc("TERIOCK.SYSTEMS.Ability.USAGE.cast", { value: this.parent.name }); }
     return super.useText;
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    return `Ability:${TERIOCK.index.abilities[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 
   /**

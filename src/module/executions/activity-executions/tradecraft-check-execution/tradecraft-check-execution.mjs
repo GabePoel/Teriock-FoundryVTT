@@ -23,11 +23,6 @@ export default class TradecraftCheckExecution extends TradecraftExecutionMixin(B
   }
 
   /** @inheritDoc */
-  get icon() {
-    return TERIOCK.display.icons.tradecraft[this.tradecraft];
-  }
-
-  /** @inheritDoc */
   get name() {
     return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.reference.tradecrafts[this.tradecraft] });
   }

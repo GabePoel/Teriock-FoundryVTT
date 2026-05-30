@@ -6,12 +6,12 @@ const { createTextInput } = foundry.applications.fields;
 
 /**
  * {@link StringField} for untyped identifiers.
- * @extends {Teriock.Fields._IdentifierFieldOptions}
+ * @property {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} options
  */
 export default class IdentifierField extends StringField {
   /** @inheritDoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, reset: null });
+    return foundry.utils.mergeObject(super._defaults, { blank: true, nullable: true, reset: null, type: null });
   }
 
   /**
@@ -27,7 +27,7 @@ export default class IdentifierField extends StringField {
    * @param {FormInputConfig & StringFieldInputConfig & StringFieldOptions &  Teriock.Fields._IdentifierFieldOptions} config
    */
   _toInput(config) {
-    if (config.reset && !config.choices && !config.type && !this.choices && !this.type) {
+    if (config.reset && !config.choices && !config.type && !this.choices && !this.options?.type) {
       const reset = config.reset ?? this.reset;
       if (reset) { return HTMLIdentifierInputElement.create({ ...config, reset }); }
       return createTextInput(config);
@@ -52,7 +52,7 @@ export default class IdentifierField extends StringField {
   /** @inheritDoc */
   initialize(value, model, options = {}) {
     const out = super.initialize(value, model, options);
-    if (typeof out === "string" && this.type) { return `${this.type}:${out}`; }
+    if (typeof out === "string" && this.options?.type) { return `${this.options?.type}:${out}`; }
     return out;
   }
 }

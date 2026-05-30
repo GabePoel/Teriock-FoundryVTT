@@ -41,7 +41,6 @@ export default class SpeciesSystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["body", "equipment", "rank"],
-      namespace: "Creature",
       type: "species",
       visibleTypes: ["ability", "body", "equipment", "fluency", "rank", "resource"],
     });
@@ -216,6 +215,11 @@ export default class SpeciesSystem
   get transformationEffect() {
     if (!this.actor) { return null; }
     return this.parent.dependee ?? null;
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    return `Creature:${TERIOCK.index.creatures[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 
   /** @inheritDoc */

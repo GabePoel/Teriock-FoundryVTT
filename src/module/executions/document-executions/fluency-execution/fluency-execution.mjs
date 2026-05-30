@@ -9,6 +9,6 @@ import BaseDocumentExecution from "../base-document-execution/base-document-exec
 export default class FluencyExecution extends TradecraftExecutionMixin(BaseDocumentExecution) {
   /** @inheritDoc */
   get tradecraft() {
-    return this.source.system.tradecraft;
+    return this.source.system._source.tradecraft;
   }
 }

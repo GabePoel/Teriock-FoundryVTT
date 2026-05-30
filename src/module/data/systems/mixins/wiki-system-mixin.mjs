@@ -1,5 +1,3 @@
-import { toCamelCase } from "../../../helpers/string.mjs";
-
 /**
  * @param {typeof ChildSystem} Base
  */
@@ -20,11 +18,7 @@ export default function WikiSystemMixin(Base) {
        * @returns {boolean}
        */
       get isOnWiki() {
-        const index = TERIOCK.index[TERIOCK.config.document[this.parent.type].index];
-        if (index) {
-          return Boolean(index[toCamelCase(foundry.utils.getProperty(this.parent, this.metadata.pageNameKey))]);
-        }
-        return false;
+        return Boolean(this.wikiPage) && !this.wikiPage.endsWith(":");
       }
 
       /**
@@ -32,9 +26,7 @@ export default function WikiSystemMixin(Base) {
        * @returns {string}
        */
       get wikiPage() {
-        const prefix = this.metadata.namespace;
-        const pageName = foundry.utils.getProperty(this.parent, this.metadata.pageNameKey);
-        return `${prefix}:${pageName}`;
+        return "";
       }
 
       /**

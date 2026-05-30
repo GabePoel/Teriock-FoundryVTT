@@ -58,9 +58,7 @@ export default class FluencySheet extends BaseEffectSheet {
           const updateData = { system: { field: fKey, tradecraft: tcKey } };
           await this.document.update(updateData);
         },
-        visible: () => {
-          return foundry.utils.getProperty(this.document.system, "field") === fKey;
-        },
+        visible: () => this.document.system._source.field === fKey,
       };
       options.push(option);
     }

@@ -1,8 +1,7 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { toCamelCase } from "../../../helpers/string.mjs";
-import { fromIdentifier, makeIconClass, objectMap } from "../../../helpers/utils.mjs";
+import { fromIdentifier, getName, makeIconClass, objectMap } from "../../../helpers/utils.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -121,10 +120,8 @@ export default class IdentificationModel extends EmbeddedDataModel {
   async unidentify() {
     if (this.identified && game.user.isGM) {
       const uncheckedPropertyIdentifiers = [...TERIOCK.config.equipment.unidentifiedProperties];
-      if (Object.keys(TERIOCK.index.equipment).includes(toCamelCase(this.parent.equipmentType))) {
-        const reference = await fromIdentifier(`equipment:${this.parent.equipmentType}`);
-        if (reference) { uncheckedPropertyIdentifiers.push(...reference.properties.map(p => p.system.identifier)); }
-      }
+      const reference = await fromIdentifier(this.parent.equipmentType);
+      if (reference) { uncheckedPropertyIdentifiers.push(...reference.properties.map(p => p.system.identifier)); }
       const revealed = [
         ...this.parent.parent.properties.filter(p => p.system.revealed),
         ...this.parent.parent.abilities.filter(a => a.system.revealed),
@@ -148,7 +145,7 @@ export default class IdentificationModel extends EmbeddedDataModel {
         }),
       );
       await this.parent.parent.update({
-        name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", { type: this.parent.equipmentTypeName }),
+        name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", { type: getName(this.parent.equipmentType) }),
         "system.flaws": "",
         "system.identification.flaws": this.parent.flaws,
         "system.identification.identified": false,

@@ -1,5 +1,4 @@
 import { TypeCollection } from "../documents/collections/_module.mjs";
-import { toKebabCase } from "./string.mjs";
 import { fromIdentifier, fromKey, parseIdentifier } from "./utils.mjs";
 
 const { Document } = foundry.abstract;
@@ -133,15 +132,4 @@ export async function inferCompendiumSource(document) {
 export async function inferChildCompendiumSources(document) {
   const children = (await document.getChildArray()).map(Boolean);
   await Promise.all(children.map(async c => await inferCompendiumSource(c)));
-}
-/**
- * Get the UUID for a rule's journal entry page.
- * @param {string} namespace
- * @param {string} pageName
- * @returns {string}
- */
-export function ruleUuid(namespace, pageName) {
-  if (namespace === "Condition") { namespace = "status"; }
-  const identifier = `${namespace.toLowerCase()}:${toKebabCase(pageName)}`;
-  return game.teriock.identifiers.get(identifier);
 }

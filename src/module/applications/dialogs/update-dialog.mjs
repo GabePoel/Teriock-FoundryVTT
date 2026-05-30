@@ -13,9 +13,9 @@ export default async function updateDialog(doc, paths, title, icon = "file-pen")
   const resolvedTitle = title ?? _loc("TERIOCK.DIALOGS.Update.defaults.title");
   const content = createElement("div", { className: "teriock-form-container" });
   for (const path of paths) {
-    const schema = doc.getSchema(path);
+    const field = doc.getFieldForProperty(path);
     const value = foundry.utils.getProperty(doc, `_source.${path}`);
-    const formGroup = schema.toFormGroup({ rootId: foundry.utils.randomID() }, { name: path, value });
+    const formGroup = field.toFormGroup({ rootId: foundry.utils.randomID() }, { name: path, value });
     content.append(formGroup);
   }
   const dialog = new TeriockDialog({

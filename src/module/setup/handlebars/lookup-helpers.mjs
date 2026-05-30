@@ -1,5 +1,4 @@
 import { getImage } from "../../helpers/path.mjs";
-import { ruleUuid } from "../../helpers/resolve.mjs";
 
 /**
  * Read a nested property from an object using a dotted notation built from arguments.
@@ -13,6 +12,6 @@ function path(obj, ...pathSegments) {
   return foundry.utils.getProperty(obj, fullPath);
 }
 
-const lookupHelperEntries = [["getImage", getImage], ["path", path], ["ruleUuid", ruleUuid]];
+const lookupHelperEntries = [["getImage", getImage], ["path", path]];
 
 export default lookupHelperEntries;

@@ -19,6 +19,7 @@ export default class TradecraftSystem extends BasePageSystem {
         initial: "artisan",
         nullable: false,
         required: true,
+        type: "field",
       }),
     });
   }
@@ -30,15 +31,15 @@ export default class TradecraftSystem extends BasePageSystem {
 
   /** @inheritDoc */
   get displayTags() {
-    return [...super.displayTags, TERIOCK.config.tradecraft.fields[this.field]?.label];
+    return [...super.displayTags, TERIOCK.config.tradecraft.fields[this._source.field]?.label];
   }
 
   /** @inheritDoc */
   get messageBars() {
     return [{
-      icon: TERIOCK.config.tradecraft.fields[this.field]?.icon,
+      icon: TERIOCK.config.tradecraft.fields[this._source.field]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
-      wrappers: [TERIOCK.config.tradecraft.fields[this.field]?.label],
+      wrappers: [TERIOCK.config.tradecraft.fields[this._source.field]?.label],
     }];
   }
 }

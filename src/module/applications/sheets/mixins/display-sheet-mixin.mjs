@@ -82,11 +82,11 @@ export default function DisplaySheetMixin(Base) {
             ...f,
             ...{
               button: f?.button,
-              choices: f.choices || this.document.getSchema(f.path)?.choices,
+              choices: f.choices || this.document?.getFieldForProperty(f.path)?.choices,
               editable: f.editable === false ? false : (f?.value ?? value) === sourceValue,
-              label: f?.label || _loc(this.document.getSchema(f.path)?.label),
-              schema: this.document.getSchema(f.path),
-              value: f?.value ?? value,
+              label: f?.label || _loc(this.document?.getFieldForProperty(f.path)?.label),
+              schema: this.document?.getFieldForProperty(f.path),
+              value: sourceValue || value,
             },
           };
         });

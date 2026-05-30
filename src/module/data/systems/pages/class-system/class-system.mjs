@@ -1,5 +1,5 @@
 import classConfig from "../../../../constants/config/class-config.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
@@ -19,6 +19,7 @@ export default class ClassSystem extends BasePageSystem {
         initial: "everyman",
         nullable: false,
         required: true,
+        type: "archetype",
       }),
     });
   }
@@ -30,15 +31,15 @@ export default class ClassSystem extends BasePageSystem {
 
   /** @inheritDoc */
   get displayTags() {
-    return [...super.displayTags, TERIOCK.config.class.archetypes[this.archetype]?.label];
+    return [...super.displayTags, getName(this.archetype)];
   }
 
   /** @inheritDoc */
   get messageBars() {
     return [{
-      icon: TERIOCK.config.class.archetypes[this.archetype]?.icon,
+      icon: TERIOCK.config.class.archetypes[this._source.archetype]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
-      wrappers: [TERIOCK.config.class.archetypes[this.archetype]?.label],
+      wrappers: [getName(this.archetype)],
     }];
   }
 }

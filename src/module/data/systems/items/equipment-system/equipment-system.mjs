@@ -1,7 +1,7 @@
 import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { fromIdentifier, objectMap } from "../../../../helpers/utils.mjs";
+import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
@@ -75,8 +75,6 @@ export default class EquipmentSystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childItemTypes: ["equipment"],
-      namespace: "Equipment",
-      pageNameKey: "system.equipmentType",
       type: "equipment",
       usable: true,
       visibleTypes: ["equipment", ...super.metadata.visibleTypes],
@@ -87,7 +85,7 @@ export default class EquipmentSystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
-      equipmentType: new IdentifierField({ initial: "" }),
+      equipmentType: new IdentifierField({ type: "equipment" }),
       powerLevel: new fields.StringField({
         choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
         initial: "mundane",
@@ -121,7 +119,7 @@ export default class EquipmentSystem
     if (this.equipmentType) {
       promises.push(
         this._formatRefreshPromise(
-          fromIdentifier(`equipment:${this.equipmentType}`),
+          fromIdentifier(this.equipmentType),
           "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
         ),
       );
@@ -155,7 +153,7 @@ export default class EquipmentSystem
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
-      subtitle: !this.consumable ? this.equipmentTypeName : parts.subtitle,
+      subtitle: !this.consumable ? getName(this.equipmentType) : parts.subtitle,
       text: dotJoin([
         ...this._attunableWrappers,
         _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.totalWeight }),
@@ -164,19 +162,9 @@ export default class EquipmentSystem
     });
   }
 
-  /**
-   * The name of the equipment type.
-   * @returns {string}
-   */
-  get equipmentTypeName() {
-    return this.equipmentType
-      ? game.teriock.identifiers.getName(`equipment:${this.equipmentType}`, { forced: true })
-      : "";
-  }
-
   /** @inheritDoc */
   get wikiPage() {
-    return `Equipment:${this.equipmentTypeName}`;
+    return `Equipment:${TERIOCK.index.equipment[toCamelCase(this._source.equipmentType ?? "")] ?? ""}`;
   }
 
   /** @inheritDoc */
@@ -202,7 +190,7 @@ export default class EquipmentSystem
   getLocalRollData() {
     return Object.assign(super.getLocalRollData(), {
       [`power.${toCamelCase(this.powerLevel)}`]: 1,
-      [`type.${toCamelCase(this.equipmentType)}`]: 1,
+      [`type.${toCamelCase(this._source.equipmentType)}`]: 1,
       price: this.price,
     });
   }

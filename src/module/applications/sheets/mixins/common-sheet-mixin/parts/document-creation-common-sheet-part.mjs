@@ -192,7 +192,7 @@ export default Base => {
           return;
         }
         /** @type {TeriockRank[]} */
-        const existingRanks = (await this.document.getRanks()).filter(r => r.system.class === rankClass);
+        const existingRanks = (await this.document.getRanks()).filter(r => r.system._source.class === classIdentifier);
         const combatAbilityNames = new Set(
           referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === "combat").map(a => a.name),
         );

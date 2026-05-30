@@ -2,7 +2,7 @@ declare global {
   namespace Teriock.Models {
     export type PropertySystemData = {
       /** <schema> Damage type */
-      damageType: Identifier;
+      damageType: TypedIdentifier<"damage">;
       /** <schema> Extra damage dealt by the parent {@link TeriockEquipment} */
       extraDamage: Teriock.System.FormulaString;
       /** <schema> Power sources */

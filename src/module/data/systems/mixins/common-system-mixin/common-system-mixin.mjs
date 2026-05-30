@@ -67,8 +67,6 @@ export default function CommonSystemMixin(Base) {
           childItemTypes: [],
           consumable: false,
           hierarchy: false,
-          namespace: "",
-          pageNameKey: "name",
           passive: false,
           preservedProperties: this.PRESERVED_PROPERTIES,
           pseudos: { Automation: "system.automations" },

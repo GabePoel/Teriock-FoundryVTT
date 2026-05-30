@@ -1,5 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -18,17 +19,17 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 export default class BodySystem extends mixClasses(BaseItemSystem, mixins.WikiSystemMixin, mixins.ArmamentSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, {
-      namespace: "Body",
-      pageNameKey: "name",
-      type: "body",
-      usable: true,
-    });
+    return foundry.utils.mergeObject(super.metadata, { type: "body", usable: true });
   }
 
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, { subtitle: _loc("TYPES.Item.body") });
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    return `Body:${TERIOCK.index.bodyParts[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 
   /** @inheritDoc */

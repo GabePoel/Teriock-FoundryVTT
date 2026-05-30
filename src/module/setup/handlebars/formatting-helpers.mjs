@@ -92,7 +92,7 @@ function barTempHide(value, max, temp = 0, morganti = 0) {
  * @param {Identifier} identifier
  * @returns {string}
  */
-function inferName(identifier) {
+function getName(identifier) {
   return game.teriock.identifiers.getName(identifier, { forced: true });
 }
 
@@ -101,8 +101,8 @@ const formattingHelperEntries = [
   ["barLost", barLost],
   ["barTemp", barTemp],
   ["barTempHide", barTempHide],
+  ["getName", getName],
   ["hackFill", hackFill],
-  ["inferName", inferName],
   ["modifierIconClass", modifierIconClass],
 ];
 

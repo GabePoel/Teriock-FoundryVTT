@@ -1,15 +1,13 @@
 <div class="ab-bar">
   {{formBox
-    (path TERIOCK.config.class.archetypes system.archetype "label")
-    icon=(path TERIOCK.config.class.archetypes system.archetype "icon")
+    (getName system.archetype)
+    icon=(path TERIOCK.config.class.archetypes system._source.archetype "icon")
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label")
     classes=(ifThen editable "archetype-box" "")
   }}
   {{formBox
-    (path
-      TERIOCK.config.class.classes system.class "label")
-    icon=(path
-      TERIOCK.config.class.classes system.class "icon")
+    (getName system.class)
+    icon=system.classIcon
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.class.label")
     classes=(ifThen editable "class-box" "")
   }}

@@ -271,11 +271,20 @@ export function consolidateWriteOperations(operations) {
  * @param {TypedIdentifier|Identifier} identifier
  * @returns {string}
  */
-export function inferIconFromIdentifier(identifier) {
+export function getIcon(identifier) {
   let icon = TERIOCK.config.document.document.icon;
   const parsed = parseIdentifier(identifier);
   if (parsed?.type) { icon = TERIOCK.config.document[parsed.type]?.icon ?? icon; }
   return icon;
+}
+
+/**
+ * Get a document's name from an identifier.
+ * @param {TypedIdentifier} identifier
+ * @returns {string}
+ */
+export function getName(identifier) {
+  return game.teriock.identifiers.getName(identifier, { forced: true });
 }
 
 /**

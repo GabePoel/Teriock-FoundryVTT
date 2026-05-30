@@ -52,8 +52,6 @@ declare global {
       consumable: boolean;
       hierarchy: boolean;
       isTextPage?: boolean;
-      namespace?: string;
-      pageNameKey: string;
       passive: boolean;
       preservedProperties: string[];
       pseudos: Record<string, string>;

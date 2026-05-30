@@ -65,8 +65,8 @@ export default Base => {
         const data = super.getLocalRollData();
         if (this.parent.parent?.type === "rank") {
           const rank = /** @type {TeriockRank} */ this.parent.parent;
-          data[`class.${rank.system.class.slice(0, 3).toLowerCase()}`] = 1;
-          data[`class.${rank.system.class}`] = 1;
+          data[`class.${rank.system._source.class.slice(0, 3).toLowerCase()}`] = 1;
+          data[`class.${rank.system._source.class}`] = 1;
           data["class.rank"] = rank.system.number;
         }
         return data;

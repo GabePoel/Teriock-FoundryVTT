@@ -1,10 +1,11 @@
 import { default as classConfig } from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
+import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
-import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
+import { migrateKey, migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
@@ -36,7 +37,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { namespace: "Class", pageNameKey: "system.class", type: "rank" });
+    return foundry.utils.mergeObject(super.metadata, { type: "rank" });
   }
 
   /** @inheritDoc */
@@ -45,10 +46,14 @@ export default class RankSystem
       archetype: new IdentifierField({
         choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
         initial: "everyman",
+        type: "archetype",
       }),
-      class: new fields.StringField({
-        choices: objectMap(classConfig.classes, a => a.label, { localize: true }),
+      class: new IdentifierField({
+        choices: Object.fromEntries(
+          Object.entries(classConfig.classes).map(([k, v]) => [toKebabCase(k), _loc(v.label)]),
+        ),
         initial: "journeyman",
+        type: "class",
       }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
@@ -62,6 +67,7 @@ export default class RankSystem
   static migrateData(source, options, state) {
     migrateKey(source, "className", "class");
     migrateKey(source, "classRank", "number");
+    migrateValueTransform(source, "class", toKebabCase);
     return super.migrateData(source, options, state);
   }
 
@@ -71,9 +77,8 @@ export default class RankSystem
   #stageArchetypeCreation() {
     const archetypeConfig = TERIOCK.config.class.archetypes[this._source.archetype];
     if (
-      !archetypeConfig?.dontStage
-      && !this.actor.archetypes.map(a => a.system.identifier).includes(this._source.archetype)
-    ) { this.actor._stagedItemCreations.add(`archetype:${this._source.archetype}`); }
+      !archetypeConfig?.dontStage && !this.actor.archetypes.map(a => a.typedIdentifier).includes(this.archetype)
+    ) { this.actor._stagedItemCreations.add(this.archetype); }
   }
 
   /**
@@ -82,7 +87,7 @@ export default class RankSystem
   #stageArchetypeDeletion() {
     const neededArchetypes = new Set(this.actor.ranks.map(r => r.system.archetype));
     for (const a of this.actor.archetypes) {
-      if (!neededArchetypes.has(a.system.identifier)) { this.actor._stagedItemDeletions.add(a.id); }
+      if (!neededArchetypes.has(a.typedIdentifier)) { this.actor._stagedItemDeletions.add(a.id); }
     }
   }
 
@@ -96,6 +101,14 @@ export default class RankSystem
     return super._canToggleMpDice && !this.innate;
   }
 
+  /**
+   * The icon for this rank's class.
+   * @returns {string}
+   */
+  get classIcon() {
+    return TERIOCK.config.class.classes[toCamelCase(this._source.class)]?.icon;
+  }
+
   /** @inheritDoc */
   get color() {
     if (this.innate) { return TERIOCK.display.colors.palette.purple; }
@@ -105,7 +118,7 @@ export default class RankSystem
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
-    parts.subtitle = TERIOCK.config.class.archetypes[this.archetype].label;
+    parts.subtitle = getName(this.archetype);
     parts.text ||= this.innate ? _loc("TERIOCK.TERMS.PowerType.innate") : _loc("TERIOCK.TERMS.PowerType.learned");
     return parts;
   }
@@ -133,11 +146,11 @@ export default class RankSystem
   get messageBars() {
     return [
       {
-        icon: TERIOCK.config.class.classes[this.class].icon,
+        icon: this.classIcon,
         label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
         wrappers: [
-          TERIOCK.config.class.archetypes[this.archetype].label,
-          TERIOCK.config.class.classes[this.class].label,
+          getName(this.archetype),
+          getName(this.class),
           _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: this.number }),
         ],
       },
@@ -157,10 +170,7 @@ export default class RankSystem
 
   /** @inheritDoc */
   get wikiPage() {
-    const prefix = this.constructor.metadata.namespace;
-    const pageName =
-      TERIOCK.index.classes[foundry.utils.getProperty(this.parent, this.constructor.metadata.pageNameKey)];
-    return `${prefix}:${pageName}`;
+    return `Class:${TERIOCK.index.classes[toCamelCase(this._source.class ?? "")] ?? ""}`;
   }
 
   /** @inheritDoc */
@@ -193,11 +203,10 @@ export default class RankSystem
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      [`archetype.${this.archetype.slice(0, 3).toLowerCase()}`]: 1,
-      [`class.${this.class.slice(0, 3).toLowerCase()}`]: 1,
-      archetype: this.archetype,
-      av: this.maxAv,
-      class: this.class,
+      [`archetype.${this._source.archetype.slice(0, 3).toLowerCase()}`]: 1,
+      [`class.${this._source.class.slice(0, 3).toLowerCase()}`]: 1,
+      archetype: this._source.archetype,
+      class: this._source.class,
       innate: this.innate ? 1 : 0,
       maxAv: this.maxAv,
       number: this.number,

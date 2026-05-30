@@ -116,12 +116,12 @@ export default Base => {
       /**
        * Data that represents this ability as a scroll.
        * @param {object} [data] - Optional data to mutate the created scroll.
-       * @param {string} [equipmentType="scroll"] - A chosen equipment type to make.
+       * @param {Identifier} [equipmentType="scroll"] - A chosen equipment type to make.
        * @returns {Promise<object>}
        */
       async toScroll(data = {}, equipmentType = "scroll") {
-        const reference = (await fromIdentifier("equipment:scroll"))?.toObject(true)
-          || { system: { equipmentType: "scroll" }, type: "equipment" };
+        const reference = (await fromIdentifier(`equipment:${equipmentType}`))?.toObject(true)
+          || { system: { equipmentType }, type: "equipment" };
         let img;
         if (toTitleCase(equipmentType) === "Scroll") {
           if (this.elements.size === 1) {
@@ -133,7 +133,7 @@ export default Base => {
           system: {
             _src: this.parent.uuid,
             consumable: true,
-            identifier: `scroll-of-${this.parent.forcedIdentifier}`,
+            identifier: `${equipmentType}-of-${this.parent.forcedIdentifier}`,
             needsAttunement: false,
             powerLevel: "enchanted",
             quantity: 1,
@@ -141,8 +141,13 @@ export default Base => {
         });
         if (img) { out.img = img; }
         out = foundry.utils.mergeObject(out, data);
+        const effects = await this.parent.toObjects();
+        if (effects.length) {
+          const root = effects.find((e) => e._id === this.parent.id);
+          if (root) { root.system.grantUse = true; }
+        }
         if (!out.effects) { out.effects = []; }
-        out.effects.push(foundry.utils.mergeObject(this.parent.toObject(true), { system: { grantUse: true } }));
+        out.effects.push(...effects);
         return out;
       }
     }

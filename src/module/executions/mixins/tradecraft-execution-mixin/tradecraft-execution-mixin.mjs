@@ -36,6 +36,11 @@ export default function TradecraftExecutionMixin(Base) {
         return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.reference.tradecrafts[this.tradecraft] });
       }
 
+      /** @inheritDoc */
+      get icon() {
+        return TERIOCK.display.icons.tradecraft[this.tradecraft];
+      }
+
       /**
        * Tradecraft this execution corresponds to.
        * @returns {Teriock.Keys.Tradecraft}

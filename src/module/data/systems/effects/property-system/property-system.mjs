@@ -1,7 +1,7 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
-import { toKebabCase } from "../../../../helpers/string.mjs";
+import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
@@ -58,7 +58,6 @@ export default class PropertySystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["property"],
-      namespace: "Property",
       passive: true,
       type: "property",
       usable: true,
@@ -70,7 +69,7 @@ export default class PropertySystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
-      damageType: new IdentifierField({ initial: "" }),
+      damageType: new IdentifierField({ type: "damage" }),
       extraDamage: new FormulaField({ deterministic: false }),
     });
   }
@@ -120,6 +119,11 @@ export default class PropertySystem
   }
 
   /** @inheritDoc */
+  get wikiPage() {
+    return `Property:${TERIOCK.index.properties[toCamelCase(this.identifier ?? "")] ?? ""}`;
+  }
+
+  /** @inheritDoc */
   async _use(options = {}) {
     await new BaseDocumentExecution(options).execute();
   }
@@ -128,10 +132,10 @@ export default class PropertySystem
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      [`damage.type.${this.damageType}`]: 1,
+      [`damage.type.${this._source.damageType}`]: 1,
       [`form.${this.form}`]: 1,
       "damage.extra": this.extraDamage,
-      "damage.type": this.damageType,
+      "damage.type": this._source.damageType,
       form: this.form,
     };
   }

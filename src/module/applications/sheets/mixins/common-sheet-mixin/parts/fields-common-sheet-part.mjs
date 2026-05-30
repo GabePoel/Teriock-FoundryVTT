@@ -22,7 +22,7 @@ export default Base => {
         if (event.button === 2) { change = change * -1; }
         const { path } = target.dataset;
         const value = foundry.utils.getProperty(this.document, path);
-        const schema = this.document.getSchema(path);
+        const schema = this.document.getFieldForProperty(path);
         const min = schema?.min ?? 0;
         const max = schema?.max ?? Infinity;
         const delta = max - min + 1;

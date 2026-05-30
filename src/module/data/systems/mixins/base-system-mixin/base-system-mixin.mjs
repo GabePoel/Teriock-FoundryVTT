@@ -89,8 +89,9 @@ export default function BaseSystemMixin(Base) {
       /** @returns {Teriock.Messages.MessageBlock[]} */
       get messageBlocks() {
         return fancifyFields(this.displayFields).map(f => {
-          const schema = this.parent.getSchema(f.path);
-          const value = foundry.utils.getProperty(this.parent._source, f.path);
+          const schema = this.parent.getFieldForProperty(f.path);
+          let value = foundry.utils.getProperty(this.parent._source, f.path);
+          if (!value) { value = foundry.utils.getProperty(this.parent, f.path); }
           if (value && !schema.gmOnly) { return { classes: f.classes, text: value, title: f.label || schema.label }; }
         }).filter(f => f);
       }

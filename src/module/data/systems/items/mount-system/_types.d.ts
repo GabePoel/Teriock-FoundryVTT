@@ -4,7 +4,7 @@ declare global {
       /** <schema> If mount is mounted */
       mounted: boolean;
       /** <schema> Mount species or type */
-      mountType: string;
+      mountType: TypedIdentifier<"mount">;
 
       get parent(): TeriockMount;
     };

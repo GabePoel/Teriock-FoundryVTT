@@ -332,17 +332,6 @@ export default function BaseDocumentMixin(Base) {
         return this.pseudoCollections[embeddedName] ?? super.getEmbeddedCollection(embeddedName);
       }
 
-      /**
-       * Get a specific schema field.
-       * @param {string} path
-       * @returns {DataField}
-       */
-      getSchema(path) {
-        return path.startsWith("system")
-          ? this.system.schema.getField(path.replace("system.", ""))
-          : this.schema.getField(path);
-      }
-
       /** @inheritDoc */
       prepareData() {
         super.prepareData();

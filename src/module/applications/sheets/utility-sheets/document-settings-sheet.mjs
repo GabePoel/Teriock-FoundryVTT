@@ -30,7 +30,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
   #quickNormalField(path, options = {}) {
     const { hint, label, localize = true, placeholder, reset } = options;
     return {
-      field: this.document.getSchema(path),
+      field: this.document.getFieldForProperty(path),
       hint,
       label,
       localize,
