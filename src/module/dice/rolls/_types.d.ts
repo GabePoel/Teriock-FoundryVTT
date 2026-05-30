@@ -14,7 +14,6 @@ declare global {
       actorUuid?: UUID<TeriockActor>;
       img?: Teriock.System.ImageString;
       name?: string;
-      rescale?: boolean;
       tokenUuid?: UUID<TeriockTokenDocument>;
     };
 

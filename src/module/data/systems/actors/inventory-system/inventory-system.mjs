@@ -88,12 +88,8 @@ export default class InventorySystem extends BaseActorSystem {
           },
           type: "consequence",
         }],
-        flags: {
-          teriockDocumentSettings: {
-            automation: { nonHierarchicalChanges: false, payAbilityCosts: false, wound: false },
-          },
-        },
         prototypeToken: { actorLink: true, displayBars: 0 },
+        system: { settings: { automation: { nonHierarchicalChanges: false, payAbilityCosts: false, wound: false } } },
       }, data),
     );
   }

@@ -1,6 +1,7 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { elementClass } from "../../../../helpers/html.mjs";
+import { listFormat } from "../../../../helpers/localization.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import BaseEffectSheet from "../base-effect-sheet.mjs";
@@ -87,7 +88,10 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
     else if (maneuver === "reactive") { time = TERIOCK.config.ability.executionTime.reactive[executionTime.base]; }
     else if (maneuver === "passive") { time = TERIOCK.config.ability.executionTime.passive.passive; }
     else { time = executionTime.slow.text; }
-    return Object.assign(context, { executionTime: time });
+    const targetString = listFormat(this.document.system.targets.map(t => TERIOCK.config.ability.targets[t]), {
+      type: "unit",
+    });
+    return Object.assign(context, { executionTime: time, targetString });
   }
 
   /** @inheritDoc */

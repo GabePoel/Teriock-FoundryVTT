@@ -1,4 +1,4 @@
-import { EvaluationModel } from "../../../models/_module.mjs";
+import { ChildSettingsModel, EvaluationModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -9,6 +9,8 @@ declare global {
       forceSuppressed: boolean;
       /** <schema> <base> Qualifier formulas which are resolved before changes are applied */
       qualifiers: { ephemeral: EvaluationModel, suppressed: EvaluationModel };
+      /** <schema> Per-document behavior and display settings */
+      settings: ChildSettingsModel;
 
       get parent(): AnyChildDocument;
     };

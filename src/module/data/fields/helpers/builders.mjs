@@ -148,7 +148,6 @@ export function associationsField() {
           img: new FilePathField({ categories: ["IMAGE"] }),
           makeTooltip: new BooleanField({ initial: false, required: false }),
           name: new StringField(),
-          rescale: new BooleanField({ initial: false, required: false }),
           type: new StringField({ initial: "base", required: false }),
           uuid: new DocumentUUIDField(),
         }),
@@ -242,10 +241,13 @@ export function panelsField() {
 export function blockSizeField(options = {}) {
   const { child = "TERIOCK.SCHEMA.BlockSize.default", initial = "medium" } = options;
   return new StringField({
+    blank: initial === null,
     choices: TERIOCK.config.display.sizes,
     hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", { name: _loc(child).toLocaleLowerCase() }),
     initial,
     label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
+    nullable: initial === null,
+    required: true,
   });
 }
 

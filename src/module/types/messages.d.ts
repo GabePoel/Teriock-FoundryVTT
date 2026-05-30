@@ -38,7 +38,6 @@ declare global {
       makeTooltip?: boolean;
       name: string;
       pack?: string;
-      rescale?: boolean;
       tooltip?: string;
       type?: Teriock.Documents.ChildType;
       uuid?: UUID<TeriockDocument>;

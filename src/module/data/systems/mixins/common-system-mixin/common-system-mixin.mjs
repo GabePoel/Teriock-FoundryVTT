@@ -218,11 +218,6 @@ export default function CommonSystemMixin(Base) {
         };
       }
 
-      /** @returns {typeof EmbeddedDataModel|null} */
-      get SettingsFlagsDataModel() {
-        return null;
-      }
-
       /** @returns {Teriock.EmbedData.EmbedIcon|undefined} */
       get tagIcon() {
         return undefined;

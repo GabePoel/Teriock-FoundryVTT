@@ -12,7 +12,6 @@ const { TokenDocument } = foundry.documents;
  * @extends {ClientDocument}
  * @mixes EmbedCardDocument
  * @mixes BaseDocument
- * @mixes SettingsDocument
  */
 export default class TeriockTokenDocument
   extends mixClasses(TokenDocument, mixins.BaseDocumentMixin, mixins.EmbedCardDocumentMixin)
@@ -30,14 +29,6 @@ export default class TeriockTokenDocument
    */
   get img() {
     return this.texture.src;
-  }
-
-  /**
-   * Rescale the src if this has a token ring.
-   * @returns {boolean}
-   */
-  get rescale() {
-    return Boolean(this.ring.enabled);
   }
 
   /** @inheritDoc */
@@ -69,7 +60,7 @@ export default class TeriockTokenDocument
     const updateData = {};
     const updateOptions = {};
     if (this.actor) {
-      if (this.actor.getSetting("token.autoScale")) {
+      if (this.actor.system.settings.token.autoScale) {
         if (this.width !== this.actor.system.size.length) { updateData.width = this.actor.system.size.length; }
         if (this.height !== this.actor.system.size.length) { updateData.height = this.actor.system.size.length; }
       }
@@ -84,7 +75,7 @@ export default class TeriockTokenDocument
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.hasStatusEffect("ethereal") && this.actor.getSetting("token.autoLighting")) {
+    if (this.hasStatusEffect("ethereal") && this.actor.system.settings.token.autoLighting) {
       const lightRange = Math.max(this.light.bright, this.light.dim);
       foundry.utils.setProperty(this, "detectionModes.spectral.enabled", true);
       foundry.utils.setProperty(this, "detectionModes.spectral.range", lightRange);

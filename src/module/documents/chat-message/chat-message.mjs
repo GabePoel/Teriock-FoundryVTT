@@ -42,15 +42,6 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
   }
 
   /**
-   * Whether the avatar image should be rescaled.
-   * @returns {boolean}
-   */
-  get rescale() {
-    const token = this.speakerToken;
-    return Boolean(token && token.ring.enabled);
-  }
-
-  /**
    * An image representing the speaker of this message.
    * @returns {string}
    */
@@ -89,7 +80,6 @@ export default class TeriockChatMessage extends BaseDocumentMixin(ChatMessage) {
   toObject(source = true) {
     const obj = super.toObject(source);
     obj.img = this.speakerImg;
-    obj.rescale = this.rescale;
     if (this.author?.name !== this.alias) { obj.writer = this.author?.name; }
     if (!this.isContentVisible) { obj.system.panels.length = 0; }
     return obj;

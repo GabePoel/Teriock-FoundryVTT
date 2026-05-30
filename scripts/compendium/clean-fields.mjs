@@ -18,7 +18,7 @@ export function cleanDocument(doc) {
     delete doc._stats.modifiedTime;
     delete doc._stats.ownership;
   }
-  if (doc.flags && doc.name !== "Basic Abilities") { delete doc.flags.teriockDocumentSettings; }
+  if (doc.flags) { delete doc.flags.teriockDocumentSettings; }
   if (doc.system) {
     delete doc.system.forceSuppressed;
     cleanCommon(doc);

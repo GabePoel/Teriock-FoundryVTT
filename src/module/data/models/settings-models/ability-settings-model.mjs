@@ -2,6 +2,10 @@ import ChildSettingsModel from "./child-settings-model.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * Per-ability document behavior and display settings.
+ * @extends {Teriock.Models.AbilitySettingsModelData}
+ */
 export default class AbilitySettingsModel extends ChildSettingsModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.AbilitySettings"];

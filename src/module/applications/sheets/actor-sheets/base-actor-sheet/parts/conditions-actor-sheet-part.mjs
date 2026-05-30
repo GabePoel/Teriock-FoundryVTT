@@ -56,7 +56,6 @@ export default Base =>
               img: tokenDoc.texture.src,
               makeTooltip: false,
               name: tokenDoc.name,
-              rescale: tokenDoc.rescale,
               type: "TokenDocument",
               uuid: tokenDoc.uuid,
             });

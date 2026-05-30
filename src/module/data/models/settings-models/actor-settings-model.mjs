@@ -3,6 +3,10 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * Per-actor document behavior and display settings.
+ * @extends {Teriock.Models.ActorSettingsModelData}
+ */
 export default class ActorSettingsModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [

@@ -5,7 +5,7 @@ import { systemPath } from "../../helpers/path.mjs";
 import { ensureChildren, ensureNoChildren, resolveDocuments } from "../../helpers/resolve.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
-import { EmbedCardDocumentMixin, PanelDocumentMixin, SettingsDocumentMixin } from "./_module.mjs";
+import { EmbedCardDocumentMixin, PanelDocumentMixin } from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes.
@@ -18,12 +18,9 @@ export default function CommonDocumentMixin(Base) {
      * @mixes EmbedCardDocument
      * @mixes PanelDocument
      * @mixes PropagationData
-     * @mixes SettingsDocument
      * @mixin
      */
-    class CommonDocument
-      extends mixClasses(Base, PropagationDataMixin, EmbedCardDocumentMixin, PanelDocumentMixin, SettingsDocumentMixin)
-    {
+    class CommonDocument extends mixClasses(Base, PropagationDataMixin, EmbedCardDocumentMixin, PanelDocumentMixin) {
       /** @inheritDoc */
       static get documentMetadata() {
         return Object.assign(super.documentMetadata, { common: true, typed: true });
@@ -96,11 +93,6 @@ export default function CommonDocumentMixin(Base) {
        */
       get metadata() {
         return this.system.constructor.metadata;
-      }
-
-      /** @inheritDoc */
-      get SettingsFlagsDataModel() {
-        return this.system.SettingsFlagsDataModel;
       }
 
       /**

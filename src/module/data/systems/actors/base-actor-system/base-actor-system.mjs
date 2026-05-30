@@ -5,6 +5,8 @@ import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs"
 import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * Base {@link TeriockActor} data model.
  * @extends {AbstractActorSystem}
@@ -74,6 +76,11 @@ export default class BaseActorSystem
   }
 
   /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), { settings: new fields.EmbeddedDataField(ActorSettingsModel) });
+  }
+
+  /** @inheritDoc */
   get displayToggles() {
     return [...super.displayToggles, "disabled"];
   }
@@ -89,11 +96,6 @@ export default class BaseActorSystem
     ]);
     parts.makeTooltip = this.parent.isViewer;
     return parts;
-  }
-
-  /** @inheritDoc */
-  get SettingsFlagsDataModel() {
-    return ActorSettingsModel;
   }
 
   /** @inheritDoc */

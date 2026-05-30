@@ -135,7 +135,6 @@ export default class BaseRoll extends Roll {
   #parseTarget(target) {
     let img = "";
     let name = "";
-    let rescale = false;
     /** @type {TeriockActor} */
     let actor;
     /** @type {TeriockTokenDocument} */
@@ -160,14 +159,12 @@ export default class BaseRoll extends Roll {
     }
     if (token) {
       img = token.img;
-      rescale = token.rescale;
       name = token.name;
     }
     return {
       actorUuid: actor?.uuid || target.actorUuid,
       img: img || target?.img || systemPath("icons/documents/character.svg"),
       name: name || target?.name,
-      rescale: rescale || target?.rescale,
       tokenUuid: token?.uuid || target.tokenUuid,
     };
   }

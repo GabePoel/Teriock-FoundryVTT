@@ -9,6 +9,8 @@ import * as mixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * Ability-specific effect data model.
  *
@@ -109,6 +111,11 @@ export default class AbilitySystem
       usable: true,
       visibleTypes: ["ability", "fluency"],
     });
+  }
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), { settings: new fields.EmbeddedDataField(AbilitySettingsModel) });
   }
 
   /** @inheritDoc */
@@ -306,21 +313,6 @@ export default class AbilitySystem
    */
   get isVirtual() {
     return this.parent.inCompendium && this.parent.parent?.system.identifier === "basic-abilities";
-  }
-
-  /** @inheritDoc */
-  get SettingsFlagsDataModel() {
-    return AbilitySettingsModel;
-  }
-
-  /**
-   * String that represents all the valid targets.
-   * @returns {string}
-   */
-  get targetString() {
-    return Array.from(this.targets).map(t => TERIOCK.config.ability.targets[t]).sort((a, b) => a.localeCompare(b)).join(
-      _loc("TERIOCK.SYSTEMS.Base.EMBED.valueSeparator"),
-    );
   }
 
   /** @inheritDoc */

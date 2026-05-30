@@ -7,8 +7,6 @@ declare global {
       img: string;
       /** Name to display */
       name: string;
-      /** Size the image up for dynamic rings */
-      rescale?: boolean;
       /** Text to display */
       text?: string;
       /** HTML to include in tooltip */

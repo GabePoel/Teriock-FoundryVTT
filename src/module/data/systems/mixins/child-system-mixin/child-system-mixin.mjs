@@ -47,6 +47,7 @@ export default function ChildSystemMixin(Base) {
             ephemeral: new EvaluationField({ deterministic: true, initial: "0" }),
             suppressed: new EvaluationField({ deterministic: true, initial: "0" }),
           }),
+          settings: new fields.EmbeddedDataField(ChildSettingsModel),
         });
       }
 
@@ -160,11 +161,6 @@ export default function ChildSystemMixin(Base) {
        */
       get parent() {
         return /** @type {AnyChildDocument} */ super.parent;
-      }
-
-      /** @inheritDoc */
-      get SettingsFlagsDataModel() {
-        return ChildSettingsModel;
       }
 
       /** @inheritDoc */

@@ -65,10 +65,10 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #initializeCosts(options = {}) {
     Object.assign(this.options, {
-      noGp: options.noGp ?? !this.source.getSetting("execution.promptCostGp"),
-      noHp: options.noHp ?? !this.source.getSetting("execution.promptCostHp"),
-      noLp: options.noLp ?? !this.source.getSetting("execution.promptCostLp"),
-      noMp: options.noMp ?? !this.source.getSetting("execution.promptCostMp"),
+      noGp: options.noGp ?? !this.source.system.settings.execution.promptCostGp,
+      noHp: options.noHp ?? !this.source.system.settings.execution.promptCostHp,
+      noLp: options.noLp ?? !this.source.system.settings.execution.promptCostLp,
+      noMp: options.noMp ?? !this.source.system.settings.execution.promptCostMp,
     });
     this.costs = { gp: 0, hp: 0, mp: 0 };
   }
@@ -79,8 +79,8 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
    */
   #initializeFlags(options = {}) {
     this.flags = {
-      noHeighten: options.noHeighten ?? !this.source.getSetting("execution.promptHeighten"),
-      noTemplate: options.noTemplate ?? !this.source.getSetting("execution.promptTemplate"),
+      noHeighten: options.noHeighten ?? !this.source.system.settings.execution.promptHeighten,
+      noTemplate: options.noTemplate ?? !this.source.system.settings.execution.promptTemplate,
     };
   }
 
@@ -318,7 +318,7 @@ export default class AbilityExecutionConstructor extends ThresholdExecutionMixin
     this.executor ??= this.actor?.defaultToken ?? null;
     this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
     this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
-    this.payCosts = this.actor?.getSetting("automation.payAbilityCosts") ?? true;
+    this.payCosts = this.actor?.system.settings.automation.payAbilityCosts ?? true;
     this.targets = new Set();
   }
 }

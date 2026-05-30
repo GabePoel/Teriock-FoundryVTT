@@ -416,7 +416,8 @@ export default function TransformationSystemMixin(Base) {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (
-          this.isPrimaryTransformation && this.actor?.getSetting("token.autoTransformation") && this.transformation.img
+          this.isPrimaryTransformation && this.actor?.system.settings.token.autoTransformation
+          && this.transformation.img
         ) {
           this.changes.push(...[{
             key: "token.texture.src",

@@ -3,6 +3,10 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * Per-child-document display settings.
+ * @extends {Teriock.Models.ChildSettingsModelData}
+ */
 export default class ChildSettingsModel extends EmbeddedDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.CommonSettings"];

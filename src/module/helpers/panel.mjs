@@ -19,7 +19,6 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
           makeTooltip: options.makeTooltip,
           name: d.system.fullName || d.name,
           pack: d.pack,
-          rescale: false,
           type: d.documentName,
           uuid: d.uuid,
         };

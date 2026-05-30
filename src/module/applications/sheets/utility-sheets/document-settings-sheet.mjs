@@ -18,7 +18,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
   static PARTS = { all: { scrollable: [""], template: "teriock/sheets/utility/document-config" } };
 
   /**
-   * Configure a normal field.
+   * Configure a field.
    * @param {string} path
    * @param {object} [options]
    * @param {string} [options.hint]
@@ -27,7 +27,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
    * @param {string|null} [options.reset]
    * @returns {{field: DataField, value: *, localize: boolean}}
    */
-  #quickNormalField(path, options = {}) {
+  #quickField(path, options = {}) {
     const { hint, label, localize = true, placeholder, reset } = options;
     return {
       field: this.document.getFieldForProperty(path),
@@ -37,27 +37,6 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
       placeholder,
       reset,
       value: foundry.utils.getProperty(this.document, path),
-    };
-  }
-
-  /**
-   * Configure a setting field.
-   * @param {string} path
-   * @param {object} [options]
-   * @param {string} [options.hint]
-   * @param {string} [options.label]
-   * @param {string} [options.placeholder]
-   * @returns {{field: DataField, value: *, localize: boolean}}
-   */
-  #quickSettingsField(path, options = {}) {
-    return {
-      field: this.document.flags?.teriockDocumentSettings?.schema?.getField(path),
-      hint: options?.hint,
-      label: options?.label,
-      localize: true,
-      name: `flags.teriockDocumentSettings.${path}`,
-      placeholder: options?.placeholder,
-      value: this.document?.getSetting(path),
     };
   }
 
@@ -75,11 +54,11 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
     if (hasCompendiumSource && !this.document.isSecret) {
       context.configs.push({
         fields: [
-          this.#quickNormalField("system.identifier", {
+          this.#quickField("system.identifier", {
             placeholder: this.document.defaultIdentifier,
             reset: this.document.defaultIdentifier,
           }),
-          this.#quickNormalField("_stats.compendiumSource", {
+          this.#quickField("_stats.compendiumSource", {
             hint: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.hint",
             label: "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
           }),
@@ -88,24 +67,22 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
         localize: true,
       });
     }
-    const hasQualifiers = Boolean(this.document.system?.qualifiers);
-    if (hasQualifiers) {
+    if (this.document.system?.qualifiers) {
       context.configs.push({
         fields: [
-          this.#quickNormalField("system.qualifiers.ephemeral.raw"),
-          this.#quickNormalField("system.qualifiers.suppressed.raw"),
+          this.#quickField("system.qualifiers.ephemeral.raw"),
+          this.#quickField("system.qualifiers.suppressed.raw"),
         ],
         legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.qualifiers.legend",
         localize: true,
       });
     }
-    const hasSettings = Boolean(this.document.flags.teriockDocumentSettings);
-    if (hasSettings) {
-      const schema = this.document.flags.teriockDocumentSettings.schema;
+    if (this.document.system?.settings) {
+      const schema = this.document.system.settings.schema;
       for (const field of Object.values(schema.fields)) {
         if (field instanceof foundry.data.fields.SchemaField) {
           context.configs.push({
-            fields: objectMap(field.fields, f => this.#quickSettingsField(f.fieldPath)),
+            fields: objectMap(field.fields, f => this.#quickField(f.fieldPath)),
             legend: field.label,
             localize: true,
           });
