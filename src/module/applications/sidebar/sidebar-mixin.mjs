@@ -20,6 +20,13 @@ export default function SidebarMixin(Base) {
         const entryElement = li.closest("[data-entry-id]");
         return this.collection.get(entryElement?.dataset.entryId);
       }
+
+      /** @inheritDoc */
+      async _prepareContext(options = {}) {
+        return Object.assign(await super._prepareContext(options), {
+          makeTooltips: game.teriock.getSetting("sidebarTooltips"),
+        });
+      }
     }
   );
 }
