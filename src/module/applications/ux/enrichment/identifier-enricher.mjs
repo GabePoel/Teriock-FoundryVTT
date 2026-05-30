@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../_module.mjs";
-import { wikiConfig } from "../../../constants/config/wiki-config.mjs";
+import wikiConfig from "../../../constants/config/wiki-config.mjs";
 import { makeIconClass, parseIdentifier } from "../../../helpers/utils.mjs";
 
 const IDENTIFIER_ICON_MAP = Object.fromEntries(

@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { colors, icons } from "../display/_module.mjs";
 
-export const equipmentConfig = {
+export default {
   powerLevel: /** @enum {Teriock.Config.SubtypeEntry} */ {
     enchanted: {
       color: colors.palette.blue,

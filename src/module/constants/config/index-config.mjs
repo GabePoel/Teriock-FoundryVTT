@@ -1,4 +1,4 @@
-export const indexConfig = {
+export default {
   ability: "abilities",
   body: "bodyParts",
   condition: "conditions",

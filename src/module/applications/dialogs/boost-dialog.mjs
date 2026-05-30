@@ -1,4 +1,4 @@
-import { impactConfig } from "../../constants/config/impact-config.mjs";
+import impactConfig from "../../constants/config/impact-config.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { createElement } from "../../helpers/html.mjs";

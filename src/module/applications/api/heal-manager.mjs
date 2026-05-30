@@ -1,4 +1,4 @@
-import { impactConfig } from "../../constants/config/impact-config.mjs";
+import impactConfig from "../../constants/config/impact-config.mjs";
 import { RollActivation } from "../../data/pseudo-documents/activations/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockStatManager from "./stat-manager.mjs";

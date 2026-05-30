@@ -1,4 +1,4 @@
-import { documentConfig } from "../../../../constants/config/document-config.mjs";
+import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";

@@ -1,5 +1,5 @@
 import { boostDialog } from "../../../applications/dialogs/_module.mjs";
-import { impactConfig } from "../../../constants/config/impact-config.mjs";
+import impactConfig from "../../../constants/config/impact-config.mjs";
 import { BaseRoll, HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { formulaCommand } from "./abstract-command.mjs";

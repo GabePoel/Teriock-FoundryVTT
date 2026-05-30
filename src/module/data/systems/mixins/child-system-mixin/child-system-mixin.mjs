@@ -1,4 +1,4 @@
-import { impactConfig } from "../../../../constants/config/impact-config.mjs";
+import impactConfig from "../../../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";

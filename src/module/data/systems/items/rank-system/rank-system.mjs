@@ -1,4 +1,4 @@
-import { default as classConfig } from "../../../../constants/config/class-config.mjs";
+import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
@@ -203,8 +203,8 @@ export default class RankSystem
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      [`archetype.${this._source.archetype.slice(0, 3).toLowerCase()}`]: 1,
-      [`class.${this._source.class.slice(0, 3).toLowerCase()}`]: 1,
+      [`archetype.${this._source.archetype}`]: 1,
+      [`class.${this._source.class}`]: 1,
       archetype: this._source.archetype,
       class: this._source.class,
       innate: this.innate ? 1 : 0,

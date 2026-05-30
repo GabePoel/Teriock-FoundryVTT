@@ -1,4 +1,4 @@
-import { piercingConfig } from "../../constants/config/piercing-config.mjs";
+import piercingConfig from "../../constants/config/piercing-config.mjs";
 import { localizeChoices } from "../../helpers/localization.mjs";
 import EmbeddedDataModel from "./embedded-data-model.mjs";
 

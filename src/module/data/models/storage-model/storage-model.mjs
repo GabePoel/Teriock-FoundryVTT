@@ -1,4 +1,4 @@
-import { equipmentConfig } from "../../../constants/config/equipment-config.mjs";
+import equipmentConfig from "../../../constants/config/equipment-config.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;

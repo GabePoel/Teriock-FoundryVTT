@@ -1,5 +1,5 @@
 import { ApplicableEffectSystem } from "../_module.mjs";
-import { hackConfig } from "../../../../constants/config/hack-config.mjs";
+import hackConfig from "../../../../constants/config/hack-config.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";

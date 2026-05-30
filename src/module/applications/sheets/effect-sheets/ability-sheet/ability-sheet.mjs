@@ -1,4 +1,4 @@
-import { documentConfig } from "../../../../constants/config/document-config.mjs";
+import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { elementClass } from "../../../../helpers/html.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";

@@ -1,7 +1,7 @@
 import { icons } from "../display/icons.mjs";
-import { documentConfig } from "./document-config.mjs";
+import documentConfig from "./document-config.mjs";
 
-export const wikiConfig = {
+export default {
   address: "https://wiki.teriock.com/index.php",
   namespaces: /** @type {Record<string,Teriock.Config.WikiNamespaceEntry>} */ {
     Ability: { icon: documentConfig.ability.icon, packs: ["teriock.abilities"], parentKey: "name", type: "ability" },

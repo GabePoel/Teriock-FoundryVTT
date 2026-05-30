@@ -1,4 +1,4 @@
-import { wikiConfig } from "../../../constants/config/wiki-config.mjs";
+import wikiConfig from "../../../constants/config/wiki-config.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 
 /** @type {Teriock.Enrichment.EnricherConfig} */

@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const piercingConfig = {
+export default {
   levels: {
     0: "TERIOCK.MODELS.Piercing.MENU.0",
     1: "TERIOCK.MODELS.Piercing.MENU.1",

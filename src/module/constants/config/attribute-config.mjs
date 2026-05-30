@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const attributeConfig = {
+export default {
   int: {
     abbreviation: "TERIOCK.TERMS.Attributes.int.abbreviation",
     icon: icons.attribute.int,

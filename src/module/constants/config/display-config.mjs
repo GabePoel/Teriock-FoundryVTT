@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const displayConfig = {
+export default {
   abilitySortOrders: {
     enabled: "TERIOCK.SHEETS.Common.SORT.enabled",
     name: "TERIOCK.SHEETS.Common.SORT.name",

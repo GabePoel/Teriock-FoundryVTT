@@ -92,16 +92,16 @@ Hooks.once("i18nInit", () => {
     Object.assign(actorContext, { [`hack.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.hack", { part: _loc(v.part) }) });
   });
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    Object.assign(actorContext, { [`rank.${k.slice(0, 3)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: v }) });
+    Object.assign(actorContext, { [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.rank", { name: v }) });
   });
   Object.entries(TERIOCK.config.class.archetypes).forEach(([k, v]) => {
     Object.assign(actorContext, {
-      [`rank.${k.slice(0, 3)}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: _loc(v.label) }),
+      [`rank.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.archetype", { name: _loc(v.label) }),
     });
   });
-  Object.values(TERIOCK.config.character.movement).forEach(v => {
+  Object.entries(TERIOCK.config.character.movement).forEach(([k, v]) => {
     Object.assign(actorContext, {
-      [`speed.${v.abbreviation}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: _loc(v.label) }),
+      [`speed.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: _loc(v.label) }),
     });
   });
 });

@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const consequenceConfig = {
+export default {
   common: {
     attune: "TERIOCK.SYSTEMS.Attunable.MENU.attune",
     awaken: "TERIOCK.EFFECTS.Common.awaken",

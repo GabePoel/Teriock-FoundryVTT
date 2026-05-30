@@ -16,7 +16,7 @@ declare global {
       types?: Teriock.Changes.Type[];
     };
 
-    export type CurrencyEntry = { abbreviation: string, label: string, value: number, weight: number };
+    export type CurrencyEntry = { conversion: number, label: string, weight: number };
 
     export type WikiNamespaceEntry = {
       collection?: string;

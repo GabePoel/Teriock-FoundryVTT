@@ -1,4 +1,4 @@
-import { equipmentConfig } from "../../../../../../constants/config/equipment-config.mjs";
+import equipmentConfig from "../../../../../../constants/config/equipment-config.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
 import { initialNumber, initialString } from "../../../../../fields/helpers/initializers.mjs";
 import { migrateEvaluationToNumber } from "../../../../../shared/migrations/_module.mjs";

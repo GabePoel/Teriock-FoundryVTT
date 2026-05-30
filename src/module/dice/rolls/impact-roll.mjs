@@ -1,4 +1,4 @@
-import { impactConfig } from "../../constants/config/impact-config.mjs";
+import impactConfig from "../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
 import BaseRoll from "./base-roll.mjs";

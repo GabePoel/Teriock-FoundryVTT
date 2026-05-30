@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const attunementConfig = {
+export default {
   type: {
     effect: { icon: icons.document.consequence, label: "TYPES.ActiveEffect.effect" },
     equipment: { icon: icons.document.equipment, label: "TYPES.Item.equipment" },

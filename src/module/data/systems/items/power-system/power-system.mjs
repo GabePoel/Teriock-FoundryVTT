@@ -1,4 +1,4 @@
-import { powerConfig } from "../../../../constants/config/power-config.mjs";
+import powerConfig from "../../../../constants/config/power-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";

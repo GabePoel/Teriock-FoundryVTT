@@ -1,4 +1,4 @@
-import { protectionConfig } from "../../../constants/config/protection-config.mjs";
+import protectionConfig from "../../../constants/config/protection-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";

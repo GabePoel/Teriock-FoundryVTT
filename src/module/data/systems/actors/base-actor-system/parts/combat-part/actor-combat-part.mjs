@@ -1,5 +1,5 @@
 import { config } from "../../../../../../constants/_module.mjs";
-import { scalingConfig } from "../../../../../../constants/config/scaling-config.mjs";
+import scalingConfig from "../../../../../../constants/config/scaling-config.mjs";
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { FormulaField, LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/helpers/initializers.mjs";

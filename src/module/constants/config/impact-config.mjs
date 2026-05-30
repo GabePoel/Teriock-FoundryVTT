@@ -2,7 +2,7 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
 /** @enum {Teriock.Config.ImpactEntry} */
-export const impactConfig = {
+export default {
   damage: {
     aliases: ["dmg"],
     deal: "TERIOCK.EFFECTS.Impacts.damage.deal",

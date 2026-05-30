@@ -2,7 +2,7 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { colors } from "../display/colors.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const effectConfig = {
+export default {
   applicationTargets: {
     actor: { effectType: "consequence", label: "TYPES.Actor.actor" },
     armament: { effectType: "imbuement", label: "TERIOCK.CHANGES.Targets.armament" },

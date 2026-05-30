@@ -1,4 +1,4 @@
-import { documentConfig } from "../../../../constants/config/document-config.mjs";
+import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";

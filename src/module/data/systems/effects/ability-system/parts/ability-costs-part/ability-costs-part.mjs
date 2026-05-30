@@ -1,4 +1,4 @@
-import { costConfig } from "../../../../../../constants/config/cost-config.mjs";
+import costConfig from "../../../../../../constants/config/cost-config.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../../../fields/_module.mjs";

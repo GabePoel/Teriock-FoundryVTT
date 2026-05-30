@@ -1,4 +1,4 @@
-import { costConfig } from "../../../../constants/config/cost-config.mjs";
+import costConfig from "../../../../constants/config/cost-config.mjs";
 import { AbilityExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";

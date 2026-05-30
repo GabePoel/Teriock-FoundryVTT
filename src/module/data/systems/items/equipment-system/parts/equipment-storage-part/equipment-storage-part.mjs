@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { selectDocumentDialog } from "../../../../../../applications/dialogs/select-document-dialog.mjs";
-import { equipmentConfig } from "../../../../../../constants/config/equipment-config.mjs";
+import equipmentConfig from "../../../../../../constants/config/equipment-config.mjs";
 import { resolveDocument } from "../../../../../../helpers/resolve.mjs";
 import { makeIcon, makeIconClass } from "../../../../../../helpers/utils.mjs";
 import { StorageModel } from "../../../../../models/_module.mjs";

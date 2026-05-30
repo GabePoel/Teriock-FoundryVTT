@@ -1,7 +1,7 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const costConfig = {
+export default {
   components: {
     keys: {
       material: "TERIOCK.COSTS.Components.material",

@@ -1,4 +1,4 @@
-import { default as tc } from "../constants/config/trigger-config.mjs";
+import tc from "../constants/config/trigger-config.mjs";
 import { BaseAutomation } from "../data/pseudo-documents/automations/abstract/_module.mjs";
 import BaseExecution from "../executions/base-execution/base-execution.mjs";
 import { AbilityExecution, ArmamentExecution } from "../executions/document-executions/_module.mjs";

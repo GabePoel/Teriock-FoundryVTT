@@ -1,6 +1,6 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
-import { documentConfig } from "../../../constants/config/document-config.mjs";
-import { effectConfig } from "../../../constants/config/effect-config.mjs";
+import documentConfig from "../../../constants/config/document-config.mjs";
+import effectConfig from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";

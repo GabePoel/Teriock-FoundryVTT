@@ -1,4 +1,4 @@
-import { documentConfig } from "../../../constants/config/document-config.mjs";
+import documentConfig from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
 

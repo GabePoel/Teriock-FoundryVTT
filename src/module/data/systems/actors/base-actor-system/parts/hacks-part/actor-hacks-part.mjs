@@ -1,4 +1,4 @@
-import { hackConfig } from "../../../../../../constants/config/hack-config.mjs";
+import hackConfig from "../../../../../../constants/config/hack-config.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { initialBar, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
 

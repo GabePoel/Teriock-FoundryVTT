@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const protectionConfig = {
+export default {
   categories: {
     abilities: {
       choices: "reference.abilities",

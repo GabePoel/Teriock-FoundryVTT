@@ -1,4 +1,4 @@
-import { documentConfig } from "../../constants/config/document-config.mjs";
+import documentConfig from "../../constants/config/document-config.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { createElement } from "../../helpers/html.mjs";
 import { getImage } from "../../helpers/path.mjs";

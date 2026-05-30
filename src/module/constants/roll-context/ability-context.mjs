@@ -84,9 +84,6 @@ Hooks.once("i18nInit", () => {
   });
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
     abilityContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", { name: _loc(v) });
-    abilityContext[`class.${k.slice(0, 3).toLowerCase()}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.class", {
-      name: _loc(v),
-    });
   });
   abilityContext["class.rank"] = _loc("TERIOCK.ROLL_CONTEXT.Ability.classRank");
 });

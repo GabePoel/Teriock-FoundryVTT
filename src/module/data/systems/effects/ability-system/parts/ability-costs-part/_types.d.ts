@@ -1,4 +1,4 @@
-import type { costConfig } from "../../../../../../constants/config/cost-config.mjs";
+import type costConfig from "../../../../../../constants/config/cost-config.mjs";
 
 declare global {
   namespace Teriock.Models {

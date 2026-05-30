@@ -15,7 +15,7 @@ import "./scene/_types";
 import "./table-result/_types";
 import "./token-document/_types";
 import "./user/_types";
-import { documentConfig } from "../constants/config/document-config.mjs";
+import documentConfig from "../constants/config/document-config.mjs";
 
 declare global {
   namespace Teriock.Documents {

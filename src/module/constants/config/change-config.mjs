@@ -1,5 +1,5 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { impactConfig } from "./impact-config.mjs";
+import impactConfig from "./impact-config.mjs";
 
 const booleanTypes = ["upgrade", "downgrade", "override"];
 const simpleTypes = ["add", "subtract", ...booleanTypes];

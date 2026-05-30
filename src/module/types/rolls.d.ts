@@ -1,4 +1,4 @@
-import { dieConfig } from "../constants/config/die-config.mjs";
+import dieConfig from "../constants/config/die-config.mjs";
 
 declare global {
   namespace Teriock.Rolls {

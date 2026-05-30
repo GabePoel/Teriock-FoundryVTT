@@ -2,7 +2,7 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { colors } from "../display/colors.mjs";
 import { icons } from "../display/icons.mjs";
 
-export const powerConfig = {
+export default {
   type: /** @enum {Teriock.Config.SubtypeEntry} */ {
     backstory: { color: colors.palette.green, icon: icons.power.backstory, label: "TERIOCK.TERMS.PowerType.backstory" },
     blessing: { color: colors.palette.yellow, icon: icons.power.blessing, label: "TERIOCK.TERMS.PowerType.blessing" },

@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const competenceConfig = {
+export default {
   levels: {
     0: { identifier: "core:competency-bonus", label: "TERIOCK.SCHEMA.Competence.choices.0" },
     1: { identifier: "core:proficiency-bonus", label: "TERIOCK.SCHEMA.Competence.choices.1" },

@@ -17,9 +17,9 @@ export default rankContext;
 preLocalize("rollContext.rank");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {
-    rankContext[`class.${k.slice(0, 3).toLowerCase()}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v) });
+    rankContext[`class.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v) });
   });
   Object.entries(TERIOCK.config.class.archetypes).forEach(([k, v]) => {
-    rankContext[`archetype.${k.slice(0, 3)}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v.label) });
+    rankContext[`archetype.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Rank.class", { name: _loc(v.label) });
   });
 });

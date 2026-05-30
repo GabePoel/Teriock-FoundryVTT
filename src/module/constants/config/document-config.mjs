@@ -6,7 +6,7 @@ import { icons } from "../display/icons.mjs";
  * Options that describe document types.
  * @satisfies {Record<string, Partial<Teriock.Config.DocumentEntry>>}
  */
-export const documentConfig = {
+export default {
   ability: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "ActiveEffect",
     getter: "abilities",

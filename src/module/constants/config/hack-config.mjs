@@ -2,7 +2,7 @@ import { preLocalize } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
 /** @enum {Teriock.Config.HackEntry} */
-export const hackConfig = {
+export default {
   arm: {
     icon: icons.hack.arm,
     label: "TERIOCK.EFFECTS.Hacks.arm.apply",

@@ -1,4 +1,4 @@
-import { effectConfig } from "../../../../constants/config/effect-config.mjs";
+import effectConfig from "../../../../constants/config/effect-config.mjs";
 
 const { fields } = foundry.data;
 

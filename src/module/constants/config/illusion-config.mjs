@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const illusionConfig = {
+export default {
   // no sort
   level: {
     minor: "TERIOCK.EFFECTS.IllusionLevel.minor",

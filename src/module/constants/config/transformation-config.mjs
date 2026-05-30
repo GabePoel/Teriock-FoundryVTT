@@ -1,8 +1,8 @@
 import { preLocalize } from "../../helpers/localization.mjs";
-import { currencyConfig } from "./currency-config.mjs";
-import { scalingConfig } from "./scaling-config.mjs";
+import currencyConfig from "./currency-config.mjs";
+import scalingConfig from "./scaling-config.mjs";
 
-export const transformationConfig = {
+export default {
   // no sort
   level: {
     minor: "TERIOCK.EFFECTS.TransformationLevel.minor",

@@ -1,4 +1,4 @@
-import { attunementConfig } from "../../../../constants/config/attunement-config.mjs";
+import attunementConfig from "../../../../constants/config/attunement-config.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";

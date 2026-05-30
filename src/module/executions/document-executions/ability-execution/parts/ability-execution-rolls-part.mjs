@@ -47,8 +47,8 @@ export default function AbilityExecutionRollsPart(Base) {
                 rollOptions.threshold = target.actor.system.defense.ac;
                 rollOptions.comparison = "gt";
               }
-              if (this.limb) { rollOptions.threshold += TERIOCK.config.target.limb; }
-              else if (this.vitals) { rollOptions.threshold += TERIOCK.config.target.vitals; }
+              if (this.limb) { rollOptions.threshold += TERIOCK.config.scaling.target.limb; }
+              else if (this.vitals) { rollOptions.threshold += TERIOCK.config.scaling.target.vitals; }
             }
             this.rolls.push(new ThresholdRoll(this.formula, this.rollData, rollOptions));
           }

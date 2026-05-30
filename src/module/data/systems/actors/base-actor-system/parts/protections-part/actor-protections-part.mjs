@@ -1,4 +1,4 @@
-import { protectionConfig } from "../../../../../../constants/config/protection-config.mjs";
+import protectionConfig from "../../../../../../constants/config/protection-config.mjs";
 import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import { ImmunityExecution, ResistanceExecution } from "../../../../../../executions/activity-executions/_module.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";

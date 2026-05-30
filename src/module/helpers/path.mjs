@@ -1,5 +1,5 @@
 import { default as iconManifest } from "../../icons/icon-manifest.json" with { type: "json" };
-import { indexConfig } from "../constants/config/index-config.mjs";
+import indexConfig from "../constants/config/index-config.mjs";
 import { toCamelCase, toKebabCase } from "./string.mjs";
 
 /**

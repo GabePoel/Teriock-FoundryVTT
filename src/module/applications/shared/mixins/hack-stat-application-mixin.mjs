@@ -1,4 +1,4 @@
-import { hackConfig } from "../../../constants/config/hack-config.mjs";
+import hackConfig from "../../../constants/config/hack-config.mjs";
 
 /**
  * Mixin allowing hacks and spending dice stats.

@@ -1,4 +1,4 @@
-import { protectionConfig } from "../../../../../constants/config/protection-config.mjs";
+import protectionConfig from "../../../../../constants/config/protection-config.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toCamelCase, toId } from "../../../../../helpers/string.mjs";
 

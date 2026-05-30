@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
-export const abilityConfig = {
+export default {
   delivery: {
     armor: "TERIOCK.TERMS.Delivery.armor",
     aura: "TERIOCK.TERMS.Delivery.aura",

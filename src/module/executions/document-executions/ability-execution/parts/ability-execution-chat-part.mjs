@@ -1,4 +1,4 @@
-import { costConfig } from "../../../../constants/config/cost-config.mjs";
+import costConfig from "../../../../constants/config/cost-config.mjs";
 import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 

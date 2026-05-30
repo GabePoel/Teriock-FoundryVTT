@@ -1,5 +1,5 @@
-import { costConfig } from "../../../../constants/config/cost-config.mjs";
-import { impactConfig } from "../../../../constants/config/impact-config.mjs";
+import costConfig from "../../../../constants/config/cost-config.mjs";
+import impactConfig from "../../../../constants/config/impact-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { toTitleCase } from "../../../../helpers/string.mjs";
