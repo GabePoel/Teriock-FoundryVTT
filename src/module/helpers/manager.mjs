@@ -4,6 +4,9 @@ import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mj
  * Singleton class that manages Teriock-specific states and functionality.
  */
 export default class TeriockManager {
+  /** @type {ApplicationV2[]} */
+  #minimizedApplications = [];
+
   /**
    * A private record of registries.
    * @type {{dependents: DependentsRegistry, identifiers: IdentifiersRegistry}}
@@ -104,6 +107,27 @@ export default class TeriockManager {
   initializeRegistries() {
     this.#registries.dependents._initialize();
     this.#registries.identifiers._initialize();
+  }
+
+  /**
+   * Remove undo {@link minimizeStart}.
+   * @returns {Promise<void>}
+   */
+  async minimizeEnd() {
+    if (!this.#minimizedApplications.length) { return; }
+    await Promise.all((this.#minimizedApplications || []).map(s => s?.maximize()));
+    this.#minimizedApplications = [];
+  }
+
+  /**
+   * Minimize all applications.
+   * @returns {Promise<void>}
+   */
+  async minimizeStart() {
+    this.#minimizedApplications = Array.from(foundry.applications.instances.values()).filter(a =>
+      a.hasFrame && !a.minimized
+    );
+    await Promise.all((this.#minimizedApplications || []).map(s => s?.minimize()));
   }
 }
 

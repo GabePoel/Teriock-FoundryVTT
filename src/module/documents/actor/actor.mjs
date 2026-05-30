@@ -1,8 +1,7 @@
 import { config } from "../../constants/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { resolveDocument } from "../../helpers/resolve.mjs";
-import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
+import { findBestDocument, fromIdentifier, fromKey } from "../../helpers/utils.mjs";
 import * as mixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -388,7 +387,7 @@ export default class TeriockActor
    * @returns {Promise<TeriockAbility[]>}
    */
   async allAbilities() {
-    const basicAbilitiesItem = await resolveDocument(game.teriock.packs.essentials.index.getName("Basic Abilities"));
+    const basicAbilitiesItem = await fromIdentifier("power:basic-abilities");
     return [...this.abilities, ...(basicAbilitiesItem?.abilities || [])];
   }
 

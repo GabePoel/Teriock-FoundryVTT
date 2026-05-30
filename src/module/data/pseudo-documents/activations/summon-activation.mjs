@@ -200,10 +200,9 @@ export default class SummonActivation extends BaseActivation {
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async primaryAction() {
-    const toMinimize = Array.from(foundry.applications.instances.values()).filter(a => a.hasFrame && !a.minimized);
-    await Promise.all((toMinimize || []).map(s => s?.minimize()));
+    await game.teriock.minimizeStart();
     const tokens = await this.#placeTokens();
-    await Promise.all((toMinimize || []).map(s => s?.maximize()));
+    await game.teriock.minimizeEnd();
     return tokens;
   }
 

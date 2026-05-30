@@ -37,7 +37,7 @@ const lookupEnricher = {
       const field = doc.getFieldForProperty(lookupKey);
       // If there's a data field that defines the property, we try to format our output from the field's choices.
       if (field) {
-        if (field instanceof fields.BooleanField) {
+        if (field instanceof fields.BooleanField && field.label) {
           // Just display the label or its inversion for a `BooleanField`
           if (raw) { textContent = _loc(field.label); }
           else { textContent = _loc("TERIOCK.FORMAT.invert", { value: _loc(field.label) }); }

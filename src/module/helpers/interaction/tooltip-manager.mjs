@@ -63,13 +63,17 @@ export default class TeriockTooltipManager extends TooltipManager {
 
   /** @inheritdoc */
   _setAnchor(direction) {
+    const DIRECTIONS = TeriockTooltipManager.TOOLTIP_DIRECTIONS;
     if (this.element.dataset.tooltipClass === "teriock-rich-tooltip") {
-      if (!["LEFT", "RIGHT"].includes(direction)) { direction = "RIGHT"; }
+      if (![DIRECTIONS.LEFT, DIRECTIONS.RIGHT].includes(direction)) { direction = DIRECTIONS.RIGHT; }
       const rect = this.element.getBoundingClientRect();
       const leftSpace = rect.left;
       const rightSpace = window.innerWidth - rect.right;
-      if (direction === "LEFT" && leftSpace < this.#RICH_TOOLTIP_WIDTH) { direction = "RIGHT"; }
-      else if (direction === "RIGHT" && rightSpace < this.#RICH_TOOLTIP_WIDTH) { direction = "LEFT"; }
+      if (direction === DIRECTIONS.LEFT && leftSpace < this.#RICH_TOOLTIP_WIDTH) {
+        direction = DIRECTIONS.RIGHT;
+      } else if (direction === DIRECTIONS.RIGHT && rightSpace < this.#RICH_TOOLTIP_WIDTH) {
+        direction = DIRECTIONS.LEFT;
+      }
     }
     super._setAnchor(direction);
   }

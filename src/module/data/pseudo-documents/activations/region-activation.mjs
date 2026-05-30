@@ -42,14 +42,13 @@ export default class RegionActivation extends BaseActivation {
       ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
     });
     data.color ??= game.user.color;
-    const toMinimize = Array.from(foundry.applications.instances.values()).filter(a => a.hasFrame && !a.minimized);
-    await Promise.all((toMinimize || []).map(s => s?.minimize()));
+    await game.teriock.minimizeStart();
     const region = await canvas.regions.placeRegion(data, {
       allowRotation: true,
       attachToToken: this.attachToToken,
       createOptions: { asGM: true },
     });
-    await Promise.all((toMinimize || []).map(s => s?.maximize()));
+    await game.teriock.minimizeEnd();
     return region;
   }
 
