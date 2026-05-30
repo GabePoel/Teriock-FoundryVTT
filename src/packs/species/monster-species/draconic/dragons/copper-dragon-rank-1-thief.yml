@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.15
+  systemVersion: 0.12.72
 effects:
   - _id: pLl3eyOVyPolHKkX
     _key: '!items.effects!jp3evWHNlehr6oFe.pLl3eyOVyPolHKkX'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/disable-ray.webp
     name: Disable Ray
     system:
@@ -35,7 +35,6 @@ effects:
           override:
             combat: true
           type: expiration
-      class: thief
       competence:
         raw: 0
       costs:
@@ -58,17 +57,10 @@ effects:
         ends.</p>
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: disable-ray
       interaction: attack
       maneuver: reactive
-      mundane: false
       overview:
         proficient: >-
           <p>This also makes the effect of that
@@ -105,7 +97,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/glue.webp
     name: Glue
     system:
@@ -116,7 +108,6 @@ effects:
             - glue
           showConfirmationDialog: true
           type: common
-      class: thief
       competence:
         raw: 0
       delivery: sight
@@ -130,21 +121,14 @@ effects:
         slow:
           raw: '10'
           unit: minute
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: glue
       interaction: manifest
       maneuver: slow
-      mundane: false
       overview:
         base: >-
           <p>Target is @Identifier[property:glued]{glued} to the creature
           @Identifier[keyword:bearing]{bearing} it.</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -167,7 +151,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/hide.webp
     name: Hide
     system:
@@ -186,26 +170,18 @@ effects:
           status: hidden
           target: false
           type: status
-      class: thief
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
       featSaveAttribute: snk
       form: normal
       identifier: hide
       interaction: feat
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You become @Identifier[status:hidden]{hidden}. If the result of
@@ -215,8 +191,6 @@ effects:
           (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your
           hidden DC. If not, use your @Wiki[Core:Passive Attributes]{passive}
           @Identifier[core:sneak]{sneak}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -248,7 +222,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: icons/skills/trades/security-locksmith-key-gray.webp
     name: Talented Locksmith
     system:
@@ -262,32 +236,21 @@ effects:
               type: upgrade
               value: '1'
           type: changes
-      class: thief
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: talented-locksmith
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You are a @Identifier[keyword:talented]{talented}
           @Identifier[tradecraft:locksmith]{locksmith}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -305,7 +268,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/unglue.webp
     name: Unglue
     system:
@@ -316,7 +279,6 @@ effects:
             - unglue
           showConfirmationDialog: true
           type: common
-      class: thief
       competence:
         raw: 0
       costs:
@@ -326,29 +288,19 @@ effects:
             type: formula
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - stealing
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: unglue
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>Target is no longer @Identifier[property:glued]{glued} and you take
           it.</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -372,14 +324,15 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Almost as shady as the @L[Class:Assassin]{Assassin}, a Thief is a bit
-    more socially oriented and has a much greater care for her own life. Thieves
-    are the flip side of the @L[Class:Duelist]{Duelist} and tend to follow laws
-    and tell the truth only if it serves their purpose. Always trying to make a
-    profit, thieves are the businessmen of the world and will cheat you without
-    blinking an eyelash, that is their job. If you are playing a thief, lie and
-    make up stories, be ever watchful for a chance to search or loot and look
-    for the profit angle, never doing anything for free.</p>
+    <p>Almost as shady as the @Identifier[class:assassin]{Assassin}, a Thief is
+    a bit more socially oriented and has a much greater care for her own life.
+    Thieves are the flip side of the @Identifier[class:duelist]{Duelist} and
+    tend to follow laws and tell the truth only if it serves their purpose.
+    Always trying to make a profit, thieves are the businessmen of the world and
+    will cheat you without blinking an eyelash, that is their job. If you are
+    playing a thief, lie and make up stories, be ever watchful for a chance to
+    search or loot and look for the profit angle, never doing anything for
+    free.</p>
   identifier: rank-1-thief
   innate: false
   maxAv: 2

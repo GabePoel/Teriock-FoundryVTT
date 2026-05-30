@@ -8,7 +8,6 @@ _stats:
 img: systems/teriock/src/icons/abilities/hibernation-shield.webp
 name: Hibernation Shield
 system:
-  class: lifeMage
   competence:
     raw: 0
   delivery: sight
@@ -16,7 +15,6 @@ system:
     conditions:
       present:
         - down
-    raw: '0'
     triggers:
       - dawn
     unit: unlimited
@@ -25,17 +23,10 @@ system:
   endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
   executionTime:
     base: r1
-    slow:
-      unit: second
-  expansion:
-    range:
-      unit: self
-  featSaveAttribute: mov
   form: normal
   identifier: hibernation-shield
   interaction: manifest
   maneuver: reactive
-  mundane: false
   overview:
     base: >-
       <p>Target gains @Identifier[ability:hibernation]{Hibernation}. You may
@@ -44,8 +35,6 @@ system:
     proficient: >-
       <p>You may target up to @Identifier[core:proficiency-bonus]{P}
       creatures.</p>
-  piercing:
-    raw: 0
   powerSources:
     - magical
   range:

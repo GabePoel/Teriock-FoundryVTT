@@ -20,18 +20,13 @@ effects:
     img: systems/teriock/src/icons/abilities/hunter.webp
     name: Hunter
     system:
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: hunter
       interaction: manifest
@@ -48,8 +43,6 @@ effects:
         proficient: >-
           <p>You may choose @Identifier[core:proficiency-bonus]{P} additional
           species.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -67,7 +60,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -82,7 +75,6 @@ effects:
             - shatter
           showConfirmationDialog: true
           type: common
-      class: ranger
       competence:
         raw: 0
       costs:
@@ -92,15 +84,11 @@ effects:
             type: formula
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - destruction
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: shatter
       interaction: attack
@@ -133,20 +121,15 @@ effects:
     img: systems/teriock/src/icons/abilities/storytelling.webp
     name: Storytelling
     system:
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         triggers:
           - dawn
         unit: unlimited
-      executionTime: Short Rest
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: Short Rest
       form: normal
       identifier: storytelling
       interaction: manifest
@@ -161,8 +144,6 @@ effects:
           @UUID[Compendium.teriock.rules.JournalEntry.tradecraft000000]{tradecraft}
           and @Identifier[core:fluency-bonus]{fluency} for the duration of this
           ability.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -188,18 +169,13 @@ effects:
     img: systems/teriock/src/icons/abilities/wild-mana.webp
     name: Wild Mana
     system:
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: wild-mana
       interaction: manifest
@@ -217,8 +193,6 @@ effects:
         proficient: >-
           <p>The wilderness is instead @Identifier[property:mana-storing]{mana
           storing}: @Identifier[core:proficiency-bonus]{P}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -243,18 +217,13 @@ effects:
     img: systems/teriock/src/icons/abilities/wild-tenacity.webp
     name: Wild Tenacity
     system:
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: wild-tenacity
       interaction: manifest
@@ -263,8 +232,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:hibernation]{Hibernation} and
           @Identifier[ability:stamina]{Stamina}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -282,7 +249,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -303,7 +270,6 @@ effects:
           forHarm: false
           noStatDice: false
           type: heal
-      class: ranger
       competence:
         raw: 0
       delivery: self
@@ -311,17 +277,13 @@ effects:
         conditions:
           present:
             - down
-        raw: '0'
         unit: unlimited
       effectTypes:
         - healing
         - regeneration
         - revival
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: wilderness-healing
       interaction: manifest
@@ -330,8 +292,6 @@ effects:
         base: >-
           <p>While @Identifier[status:down]{down}, you have
           @Identifier[ability:slow-regenerating]{Slow Regenerating}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -354,7 +314,6 @@ effects:
     name: Hibernation
     system:
       _sup: lc4wrsuX5oNCNedU
-      class: ranger
       competence:
         raw: 0
       delivery: self
@@ -362,27 +321,17 @@ effects:
         conditions:
           present:
             - down
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: hibernation
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>All damage is @Identifier[keyword:deboosted]{deboosted} against
           you.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -400,7 +349,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/stamina.webp
     name: Stamina
     system:
@@ -423,7 +372,6 @@ effects:
           bonus: '0'
           hex: false
           type: resist
-      class: ranger
       competence:
         raw: 0
       delivery: self
@@ -431,23 +379,15 @@ effects:
         conditions:
           absent:
             - down
-        raw: '0'
         unit: unlimited
       effectTypes:
         - resistance
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: stamina
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You @Identifier[keyword:resistance]{resist}
@@ -457,8 +397,6 @@ effects:
           @Identifier[core:hit-points-and-mana-points]{MP} below zero and suffer
           other consequences from negative
           @Identifier[core:hit-points-and-mana-points]{MP}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -476,7 +414,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/slow-regenerating.webp
     name: Slow Regenerating
     system:
@@ -499,7 +437,6 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - healing
@@ -507,17 +444,10 @@ effects:
         - revival
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: slow-regenerating
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>Once every 10 minutes, you @Identifier[core:healing]{heal} and
@@ -526,8 +456,6 @@ effects:
           were @Identifier[status:dead]{dead}, this brings you back to live with
           the number of @Identifier[core:hit-points-and-mana-points]{HP} you
           rolled.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

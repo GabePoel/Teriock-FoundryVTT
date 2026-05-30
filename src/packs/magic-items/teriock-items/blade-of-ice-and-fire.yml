@@ -42,14 +42,9 @@ effects:
       delivery: self
       duration:
         description: Always Active
-        raw: '1'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: flaw
       interaction: manifest
       maneuver: passive
@@ -59,8 +54,6 @@ effects:
           additional [[/damage 1d10[vine]]] @L[Core:Damage]{damage} and
           @L[Category:Life element spells]{life spells} deal you an additional
           [[/damage 1d10[holy]]] @L[Core:Damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -76,7 +69,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
@@ -86,22 +79,17 @@ effects:
           formula: (1 + @h)d4[magic fire]
           impact: damage
           type: roll
-      class: flameMage
       competence:
         raw: 0
       delivery: missile
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       gifted:
         amount: 1
@@ -140,7 +128,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/ice-ball.webp
     name: Ice Ball
     system:
@@ -196,7 +184,6 @@ effects:
           status: frozen
           target: false
           type: status
-      class: stormMage
       competence:
         raw: 0
       delivery: missile
@@ -210,11 +197,8 @@ effects:
       endCondition: >-
         <p>At the start of each of the target's actions, they roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       gifted:
         amount: 1
@@ -249,7 +233,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
     name: Spell Turning Weapons
     system:
@@ -267,20 +251,15 @@ effects:
           bonus: '0'
           hex: false
           type: resist
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - resistance
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       grantOnly: true
       identifier: spell-turning-weapons
@@ -293,8 +272,6 @@ effects:
         base: >-
           <p>@Wiki[Category:Weapons]{Weapons} you use are
           @Identifier[property:spell-turning]{spell turning}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -325,7 +302,6 @@ effects:
         @Wiki[Category:Attack abilities]{attack}.</p>
       form: intrinsic
       identifier: weapon
-      mundane: true
     transfer: true
     type: property
 flags:

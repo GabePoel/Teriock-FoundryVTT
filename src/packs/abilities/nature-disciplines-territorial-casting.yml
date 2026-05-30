@@ -5,12 +5,23 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.69
+  systemVersion: 0.12.72
 img: systems/teriock/src/icons/abilities/territorial-casting.webp
 name: Territorial Casting
 system:
   _sup: 8075c6a940fbfef1
-  class: natureMage
+  automations:
+    4ReYeDgqGQpnJFk3:
+      _id: 4ReYeDgqGQpnJFk3
+      all: false
+      automatic: true
+      expandTables: false
+      local:
+        qualifier: and(@ability, @spell, @time.a1)
+      multi: false
+      noHeighten: false
+      trigger: execute
+      type: useDocuments
   competence:
     raw: 0
   costs:
@@ -20,27 +31,17 @@ system:
         type: formula
   delivery: self
   duration:
-    raw: '0'
     unit: instant
   executionTime:
     base: r1
-    slow:
-      unit: second
-  expansion:
-    range:
-      unit: self
-  featSaveAttribute: mov
   form: normal
   identifier: territorial-casting
   interaction: manifest
   maneuver: reactive
-  mundane: false
   overview:
     base: >-
       <p>You cast a @Wiki[Category:Single action spells]{single action spell} at
       the triggering creature.</p>
-  piercing:
-    raw: 0
   powerSources:
     - magical
   range:

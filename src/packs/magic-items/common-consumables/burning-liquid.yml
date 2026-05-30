@@ -17,18 +17,14 @@ effects:
     img: systems/teriock/src/icons/abilities/drink-burning-liquid.webp
     name: Drink Burning Liquid
     system:
-      class: flameMage
       competence:
         raw: 0
       delivery: self
       duration:
         raw: '1'
         unit: minute
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       grantUse: true
       identifier: drink-burning-liquid
@@ -38,8 +34,6 @@ effects:
         base: >-
           <p>You gain @Identifier[keyword:gifted]{Gifted}
           @Identifier[ability:burning-touch]{Burning Touch}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:
@@ -73,7 +67,6 @@ effects:
         is instead @Identifier[property:destroyed]{destroyed}.</p>
       form: intrinsic
       identifier: fragile
-      mundane: true
     transfer: true
     type: property
   - _id: isFF2aDAzacYhDBF
@@ -83,7 +76,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/pour-burning-liquid.webp
     name: Pour Burning Liquid
     system:
@@ -109,11 +102,8 @@ effects:
       duration:
         raw: '1'
         unit: minute
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       grantUse: true
       identifier: pour-burning-liquid
@@ -180,7 +170,6 @@ effects:
         in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
-      mundane: true
     transfer: true
     type: property
   - _id: oQLD7XK66UlfoC3T
@@ -190,7 +179,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/burning-touch.webp
     name: Burning Touch
     system:
@@ -201,7 +190,6 @@ effects:
           formula: (1 + @h)d6[magic fire]
           impact: damage
           type: roll
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -214,7 +202,6 @@ effects:
           gifted: 1
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
@@ -222,12 +209,6 @@ effects:
         - flame
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -237,7 +218,6 @@ effects:
       interaction: attack
       invoked: true
       maneuver: active
-      mundane: false
       piercing:
         raw: 2
       powerSources:

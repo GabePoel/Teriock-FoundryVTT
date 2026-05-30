@@ -17,7 +17,6 @@ effects:
     img: systems/teriock/src/icons/abilities/accuracy.webp
     name: Accuracy
     system:
-      class: archer
       competence:
         raw: 0
       costs:
@@ -25,16 +24,12 @@ effects:
           gifted: 1
       delivery: self
       duration:
-        raw: '0'
         triggers:
           - movement
         unit: unlimited
       endCondition: <p>You move or are moved.</p>
-      executionTime: a2
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a2
       form: normal
       identifier: accuracy
       interaction: manifest
@@ -52,8 +47,6 @@ effects:
           <p>If the @Wiki[Category:Weapon delivery abilities]{weapon attack} is
           a @Wiki[Category:Ranged equipment]{ranged attack}, then its range is
           doubled.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -98,20 +91,15 @@ effects:
     img: systems/teriock/src/icons/abilities/scouting.webp
     name: Scouting
     system:
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - sensory
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: scouting
       interaction: manifest
@@ -120,8 +108,6 @@ effects:
         base: >-
           <p>You have @Identifier[core:advantage]{advantage} on checks made with
           @Identifier[ability:perceive]{Perceive}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

@@ -17,18 +17,13 @@ effects:
     img: systems/teriock/src/icons/abilities/amplify-storm-spells.webp
     name: Amplify Storm Spells
     system:
-      class: stormMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: amplify-storm-spells
       improvement: <p>This applies to @L[Ability:Thunderbolt] as well.</p>
@@ -50,8 +45,6 @@ effects:
         fluent: >-
           <p>You may instead choose up to 1 + @Identifier[core:fluency-bonus]{F}
           additional or repeated targets.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -77,18 +70,13 @@ effects:
       delivery: self
       duration:
         description: Always Active
-        raw: '1'
         unit: unlimited
       effectTypes:
         - damaging
       elements:
         - storm
-      executionTime: passive
-      expansion:
-        featSaveAttribute: mov
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: flaw
       interaction: manifest
       maneuver: passive
@@ -96,8 +84,6 @@ effects:
         base: >-
           <p>@L[Core:Damage] dealt to you by storms is @L[Damage:Lethal]{lethal}
           and @L[Core:Boosted]{boosted}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -113,7 +99,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/lightning-ray.webp
     name: Lightning Ray
     system:
@@ -123,23 +109,18 @@ effects:
           formula: (1 + @h)d6[magic]
           impact: damage
           type: roll
-      class: stormMage
       competence:
         raw: 0
       delivery: missile
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
         - lightning
       elements:
         - storm
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -188,13 +169,9 @@ effects:
             type: formula
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
-      executionTime: r0
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r0
       form: normal
       grantOnly: true
       identifier: spell-strike
@@ -210,8 +187,6 @@ effects:
           @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
           hit was a critical hit, then the target takes the "on critical hit"
           effect instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -234,7 +209,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/properties/thrown.webp
     name: Thrown
     system:
@@ -257,7 +232,6 @@ effects:
         @Identifier[property:ranged]{ranged} attack.</p>
       form: intrinsic
       identifier: thrown
-      mundane: true
     transfer: true
     type: property
   - _id: usdaWXZ6v1ZwnioY
@@ -267,7 +241,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/thunderbolt.webp
     name: Thunderbolt
     system:
@@ -281,7 +255,6 @@ effects:
         raw: 0
       delivery: missile
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
@@ -290,11 +263,8 @@ effects:
         - loud
       elements:
         - storm
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -341,7 +311,6 @@ effects:
         @Wiki[Category:Attack abilities]{attack}.</p>
       form: intrinsic
       identifier: weapon
-      mundane: true
     transfer: true
     type: property
   - _id: ZSVoMIgNN6l32Rey
@@ -351,7 +320,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -383,7 +352,6 @@ effects:
         target beyond the weapon's long range.</p>
       form: intrinsic
       identifier: ranged
-      mundane: true
     transfer: true
     type: property
 folder: 9e47cf966e0cd702

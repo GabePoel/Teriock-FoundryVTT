@@ -32,11 +32,8 @@ effects:
         unit: hour
       effectTypes:
         - temporal
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       grantUse: true
       identifier: drink-time-freeze-potion
@@ -46,8 +43,6 @@ effects:
         base: >-
           <p>You become @Identifier[status:frozen]{frozen} and gain
           @Identifier[ability:prethaw]{Prethaw}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:
@@ -86,7 +81,6 @@ effects:
         is instead @Identifier[property:destroyed]{destroyed}.</p>
       form: intrinsic
       identifier: fragile
-      mundane: true
     transfer: true
     type: property
   - _id: x6sjcsIVaOkVZOFD
@@ -132,7 +126,6 @@ effects:
         in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
-      mundane: true
     transfer: true
     type: property
   - _id: t5nyBwyQW8qnlVYV
@@ -142,7 +135,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/smash-time-freeze-potion.webp
     name: Smash Time Freeze Potion
     system:
@@ -201,25 +194,22 @@ effects:
       endCondition: >-
         <p>At the start of each of the target's actions, they roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
       expansion:
         featSaveAttribute: unp
         range:
           raw: '50'
           unit: ft
         type: detonate
-      featSaveAttribute: mov
       form: normal
       grantUse: true
       identifier: smash-time-freeze-potion
       interaction: manifest
       maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:
-        raw: '30'
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the
@@ -240,7 +230,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/prethaw.webp
     name: Prethaw
     system:
@@ -266,25 +256,16 @@ effects:
         - storm
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: prethaw
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You immediately stop being @Identifier[status:frozen]{frozen}. You
           may use this ability even while @Identifier[status:frozen]{frozen}.
           However, you also gain @Identifier[ability:temporal-lethargy]{Temporal
           Lethargy}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -309,7 +290,6 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - temporal
@@ -317,17 +297,10 @@ effects:
         - storm
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: flaw
       identifier: temporal-lethargy
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>Negative effects tend to linger on you longer than they would
@@ -335,8 +308,6 @@ effects:
           doubled. Additionally, if you would roll some number of [[/roll d4]]s
           to end effects placed on you by opponents, you roll one less [[/roll
           d4]] than you would otherwise.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:

@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/drink-potion-of-bones.webp
     name: Drink Potion of Bones
     system:
@@ -61,11 +61,8 @@ effects:
         unit: hour
       effectTypes:
         - illusion
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       grantUse: true
       identifier: drink-potion-of-bones
@@ -75,8 +72,6 @@ effects:
         base: >-
           <p>You appear as a @Identifier[creature:skeleton]{skeleton}. This is a
           @Identifier[keyword:illusionary]{minor illusion}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:
@@ -115,7 +110,6 @@ effects:
         is instead @Identifier[property:destroyed]{destroyed}.</p>
       form: intrinsic
       identifier: fragile
-      mundane: true
     transfer: true
     type: property
   - _id: x6sjcsIVaOkVZOFD
@@ -161,7 +155,6 @@ effects:
         in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
-      mundane: true
     transfer: true
     type: property
   - _id: Nl2gxxiMGRFN4rez
@@ -171,7 +164,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         dontConsume: false
@@ -248,25 +241,22 @@ effects:
         <p>The @Identifier[keyword:illusionary]{illusion} is successfully
         @Identifier[ability:disbelieve]{disbelieved}. The target only needs to
         succeed once, not once for each other target.</p>
-      executionTime: a1
+      executionTime:
+        base: a1
       expansion:
         featSaveAttribute: int
         range:
           raw: '10'
           unit: ft
         type: detonate
-      featSaveAttribute: mov
       form: normal
       grantUse: true
       identifier: smash-potion-of-bones
       interaction: manifest
       maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:
-        raw: '30'
         unit: contact
       requirements: >-
         <p>Use [[lookup name]] by interacting with the

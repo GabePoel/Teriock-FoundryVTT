@@ -20,18 +20,13 @@ effects:
     img: systems/teriock/src/icons/abilities/battle-charge.webp
     name: Battle Charge
     system:
-      class: knight
       competence:
         raw: 0
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
-      executionTime: r0
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r0
       form: normal
       identifier: battle-charge
       interaction: attack
@@ -71,7 +66,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -96,7 +91,6 @@ effects:
             - repair
           showConfirmationDialog: true
           type: common
-      class: knight
       competence:
         raw: 0
       costs:
@@ -111,11 +105,8 @@ effects:
       duration:
         raw: '8'
         unit: hour
-      executionTime: 10 Minutes
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: 10 Minutes
       form: normal
       identifier: mystic-weapon-repair
       interaction: manifest
@@ -127,8 +118,6 @@ effects:
           targeted weapon, it is @Identifier[property:runic]{runic} and effects
           that would render it @Identifier[property:destroyed]{destroyed} cause
           it to be @Identifier[property:shattered]{shattered} instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -148,7 +137,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -191,7 +180,6 @@ effects:
           status: frightened
           target: false
           type: status
-      class: knight
       competence:
         raw: 0
       costs:
@@ -215,10 +203,8 @@ effects:
       endCondition: >-
         <p>At the start of each of the enemy target's turns, they roll [[/roll
         2d4]]. On a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
+      executionTime:
+        base: a1
       featSaveAttribute: int
       form: normal
       identifier: rallying-cry
@@ -233,8 +219,6 @@ effects:
           @Wiki[Category:Instant duration abilities]{instant}.</p><div
           class="note"><b>Note:</b> People may choose to fail
           @Wiki[Category:Feat abilities]{feat saves}.</div>
-      piercing:
-        raw: 0
       powerSources:
         - magical
         - martial
@@ -260,7 +244,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -285,7 +269,6 @@ effects:
           override:
             combat: true
           type: expiration
-      class: knight
       competence:
         raw: 0
       delivery: sight
@@ -296,17 +279,13 @@ effects:
         <p>At the start of each of the target's @Identifier[core:turns]{turns},
         they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
         ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
+      executionTime:
+        base: a1
       featSaveAttribute: int
       form: normal
       identifier: taunt
       interaction: feat
       maneuver: active
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -337,18 +316,13 @@ effects:
     img: systems/teriock/src/icons/abilities/warrior-stance.webp
     name: Warrior Stance
     system:
-      class: knight
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: warrior-stance
       interaction: manifest
@@ -357,8 +331,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:triumphant-healing-surge]{Triumphant
           Healing Surge} and @Identifier[ability:withstand]{Withstand}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -388,7 +360,6 @@ effects:
     img: systems/teriock/src/icons/abilities/weapon-master.webp
     name: Weapon Master
     system:
-      class: knight
       competence:
         raw: 0
       costs:
@@ -397,13 +368,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: weapon-master
       interaction: manifest
@@ -412,8 +379,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:master-weapon-smith]{Master Weapon
           Smith} and @Identifier[ability:runic-weapons]{Runic Weapons}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -431,7 +396,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/triumphant-healing-surge.webp
     name: Triumphant Healing Surge
     system:
@@ -443,32 +408,21 @@ effects:
           forHarm: false
           noStatDice: false
           type: heal
-      class: knight
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - healing
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: triumphant-healing-surge
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: <p>You @Identifier[core:healing]{heal}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -487,7 +441,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/withstand.webp
     name: Withstand
     system:
@@ -499,7 +453,6 @@ effects:
             - body
           reverse: false
           type: hacks
-      class: knight
       competence:
         raw: 0
       costs:
@@ -508,30 +461,20 @@ effects:
             type: tag
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: withstand
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>You take the triggering @Identifier[core:damage]{damage} as a
           @Identifier[damage:hack]{body hack} instead. All @Wiki[Category:Damage
           types]{damage types} still apply.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -551,7 +494,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/runic-weapons.webp
     name: Runic Weapons
     system:
@@ -567,7 +510,6 @@ effects:
           multi: false
           separate: false
           type: addDocuments
-      class: knight
       competence:
         raw: 0
       costs:
@@ -584,21 +526,14 @@ effects:
         slow:
           raw: '10'
           unit: minute
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: runic-weapons
       interaction: manifest
       maneuver: slow
-      mundane: false
       overview:
         base: >-
           <p>The targeted @Wiki[Category:Weapons]{weapon} becomes
           @Identifier[property:runic]{runic}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -618,7 +553,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
     name: Master Weapon Smith
     system:
@@ -633,34 +568,23 @@ effects:
               type: upgrade
               value: '2'
           type: changes
-      class: knight
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: master-weapon-smith
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You are an @Identifier[keyword:expertise]{expert}
           @Identifier[tradecraft:blacksmith]{blacksmith}. In addition, you gain
           the ability to create @Identifier[property:master-crafted]{Master
           Crafted} weapons.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

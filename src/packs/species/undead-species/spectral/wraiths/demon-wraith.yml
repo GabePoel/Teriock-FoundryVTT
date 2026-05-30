@@ -17,7 +17,6 @@ effects:
     img: systems/teriock/src/icons/abilities/animate-dead.webp
     name: Animate Dead
     system:
-      class: necromancer
       competence:
         raw: 0
       costs:
@@ -32,7 +31,6 @@ effects:
             type: formula
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - reanimation
@@ -40,18 +38,11 @@ effects:
         - necromancy
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: animate-dead
       interaction: attack
       invoked: true
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>Target is @Identifier[status:alive]{alive} (but still
@@ -88,7 +79,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/charm.webp
     name: Charm
     system:
@@ -117,17 +108,10 @@ effects:
         - mental
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: charm
       interaction: attack
       maneuver: active
-      mundane: false
       piercing:
         raw: 2
       powerSources:
@@ -158,21 +142,13 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: encroaching-touch
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You may use your melee items as though they were your
@@ -190,8 +166,6 @@ effects:
           @Pack[teriock.abilities]{ability} you use through your melee items,
           you regain the @Identifier[core:proficiency-bonus]{proficiency bonus}
           for that @Pack[teriock.abilities]{ability}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -215,23 +189,15 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       elements:
         - necromancy
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: flaw
       identifier: feeding
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You must @Identifier[drain:mana]{mana drain} at least 3 creatures
@@ -247,8 +213,6 @@ effects:
           more than normal. If you feed on at least 6 creatures within a 24 hour
           period, you restore 1 lost @Wiki[Core:HP]{hit die} and
           @Wiki[Core:MP]{mana die}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -264,7 +228,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/flying.webp
     name: Flying
     system:
@@ -294,35 +258,24 @@ effects:
             - 1
             - 2
           type: changes
-      class: corsair
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - movement
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: flying
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
         proficient: >-
           <p>You instead fly at @Identifier[core:movement-speed]{full
           speed}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -348,23 +301,13 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: ghostlike
       interaction: manifest
       maneuver: passive
-      mundane: false
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -392,23 +335,15 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       elements:
         - necromancy
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: greater-undead
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You count as being @Identifier[keyword:undead]{undead} for the
@@ -421,8 +356,6 @@ effects:
           @Identifier[ability:undead-mind]{Undead Mind}, and
           @Identifier[ability:undying-durability]{Undying Durability}.</p><div
           class="expandable-table"></div>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -438,7 +371,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/hack.webp
     name: Hack
     system:
@@ -450,27 +383,18 @@ effects:
             - leg
           reverse: false
           type: hacks
-      class: berserker
       competence:
         raw: 0
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: hack
       interaction: attack
       limitation: <p>Melee @Wiki[Category:Weapons]{weapons} only.</p>
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
@@ -502,7 +426,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/incorporeal.webp
     name: Incorporeal
     system:
@@ -520,23 +444,15 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - immunity
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: incorporeal
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You cannot wear @Wiki[Category:Armor]{armor} and you may pass
@@ -544,8 +460,6 @@ effects:
           @Identifier[status:ethereal]{Ethereal}. You are also
           @Identifier[keyword:immunity]{immune} to being
           @Identifier[status:snared]{snared} and have no weight.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -561,7 +475,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/instant-ethereal.webp
     name: Instant Ethereal
     system:
@@ -584,23 +498,14 @@ effects:
         - necromancy
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: instant-ethereal
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You go @Identifier[status:ethereal]{Ethereal} or manifest back into
           the Material Realm.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -624,23 +529,13 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: normal-movement
       interaction: manifest
       maneuver: passive
-      mundane: false
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -668,23 +563,13 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: normal-perception
       interaction: manifest
       maneuver: passive
-      mundane: false
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -704,7 +589,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -729,7 +614,6 @@ effects:
           formula: 10[lethal]
           impact: damage
           type: roll
-      class: assassin
       competence:
         raw: 0
       costs:
@@ -739,24 +623,16 @@ effects:
             type: formula
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: slay
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -765,8 +641,6 @@ effects:
           @Wiki[Category:Attack abilities]{attack}. If the triggering
           @Wiki[Category:Attack abilities]{attack} was a critical hit, this
           deals 10 @Identifier[core:damage]{damage} instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -796,23 +670,13 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: very-high-intelligence
       interaction: manifest
       maneuver: passive
-      mundane: false
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -841,23 +705,15 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       elements:
         - necromancy
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: flaw
       identifier: healing-sensitivity
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>@Identifier[core:healing]{Healing} can be used to
@@ -868,8 +724,6 @@ effects:
           @Identifier[damage:magic]{magic damage} instead of the normal
           @Identifier[core:healing]{healing} effect. This does not consume any
           of your @Wiki[Core:HP]{hit dice}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -885,7 +739,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
@@ -904,7 +758,6 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - sensory
@@ -912,23 +765,14 @@ effects:
         - necromancy
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: ethereal-senses
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You can see and hear spirits and
           @Identifier[status:ethereal]{Ethereal} creatures within 120 feet.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
         - primal
@@ -946,7 +790,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/undead-mind.webp
     name: Undead Mind
     system:
@@ -968,7 +812,6 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - immunity
@@ -976,17 +819,10 @@ effects:
         - necromancy
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: undead-mind
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You are @Identifier[keyword:immunity]{immune} to being
@@ -994,8 +830,6 @@ effects:
           @Identifier[status:charmed]{charmed}. The effects of [[lookup name]]
           are maintained even if
           @Identifier[status:transformed]{transformed}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -1011,7 +845,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
     name: Mana Drain Touch
     system:
@@ -1031,24 +865,16 @@ effects:
         raw: 0
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - draining
         - revitalization
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: mana-drain-touch
       interaction: attack
       maneuver: active
-      mundane: false
       piercing:
         raw: 2
       powerSources:
@@ -1081,7 +907,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
@@ -1097,30 +923,20 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - immunity
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: magical-durability
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You are @Identifier[keyword:immunity]{immune} to
           @Identifier[damage:mundane]{mundane}
           @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -1136,7 +952,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/undying-durability.webp
     name: Undying Durability
     system:
@@ -1164,7 +980,6 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - immunity
@@ -1172,17 +987,10 @@ effects:
         - necromancy
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: undying-durability
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You are @Identifier[keyword:immunity]{immune} to
@@ -1194,8 +1002,6 @@ effects:
           @Identifier[status:dead]{die} when you reach half your maximum
           @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also
           do not have to @Identifier[core:drowning]{breathe}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:

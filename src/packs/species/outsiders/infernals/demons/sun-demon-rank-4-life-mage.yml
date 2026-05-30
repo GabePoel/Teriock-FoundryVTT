@@ -22,26 +22,17 @@ effects:
     img: systems/teriock/src/icons/abilities/amplify-life-spells.webp
     name: Amplify Life Spells
     system:
-      class: lifeMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: amplify-life-spells
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>When you @Identifier[core:attack-interaction]{attack} with
@@ -55,8 +46,6 @@ effects:
         fluent: >-
           <p>You may instead choose up to 1 + @Identifier[core:fluency-bonus]{F}
           additional or repeated targets.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -82,7 +71,6 @@ effects:
     img: systems/teriock/src/icons/abilities/life-disciplines.webp
     name: Life Disciplines
     system:
-      class: lifeMage
       competence:
         raw: 0
       costs:
@@ -91,21 +79,13 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: life-disciplines
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a
@@ -124,8 +104,6 @@ effects:
           <p>You may now use the benefits from [[lookup name]]
           @Identifier[core:proficiency-bonus]{P} times per
           @Identifier[core:long-rest]{long rest}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -152,7 +130,6 @@ effects:
     name: Sheltered Casting
     system:
       _sup: rOcOIi3HSAQOJwRg
-      class: lifeMage
       competence:
         raw: 0
       costs:
@@ -162,28 +139,18 @@ effects:
             type: formula
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: sheltered-casting
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>You may keep the triggering @Wiki[Category:Spells]{spell} from
           targeting up to @Identifier[core:proficiency-bonus]{P} targets of your
           choice that it would otherwise target.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -202,12 +169,23 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/emergency-casting.webp
     name: Emergency Casting
     system:
       _sup: rOcOIi3HSAQOJwRg
-      class: lifeMage
+      automations:
+        HeyBF3KxuHVI6712:
+          _id: HeyBF3KxuHVI6712
+          all: false
+          automatic: true
+          expandTables: false
+          local:
+            qualifier: and(@ability, @spell, @time.a1)
+          multi: false
+          noHeighten: false
+          trigger: execute
+          type: useDocuments
       competence:
         raw: 0
       costs:
@@ -217,27 +195,17 @@ effects:
             type: formula
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: emergency-casting
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>You cast a @Wiki[Category:Single action spells]{single action
           spell} at the triggering creature.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:

@@ -20,7 +20,6 @@ effects:
     img: systems/teriock/src/icons/abilities/additional-flame-rotators.webp
     name: Additional Flame Rotators
     system:
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -29,13 +28,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: additional-flame-rotators
       interaction: manifest
@@ -46,8 +41,6 @@ effects:
           @Identifier[ability:minor-weapon-enchantment]{Minor Weapon
           Enchantment} to your list of possible @Wiki[Category:Rotator
           spells]{rotator spells}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -72,18 +65,13 @@ effects:
     img: systems/teriock/src/icons/abilities/amplify-flame-spells.webp
     name: Amplify Flame Spells
     system:
-      class: flameMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: amplify-flame-spells
       interaction: manifest
@@ -101,8 +89,6 @@ effects:
         fluent: >-
           <p>You may instead choose up to 1 + @Identifier[core:fluency-bonus]{F}
           additional or repeated targets.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -120,7 +106,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -156,20 +142,16 @@ effects:
             - 2
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
-      class: flameMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       elderSorcery: true
       elements:
         - flame
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
+      executionTime:
+        base: passive
       featSaveAttribute: int
       form: special
       identifier: expanded-flame-elder-sorcery
@@ -203,8 +185,6 @@ effects:
           Sorcery Words}, and
           @Identifier[ability:flame-elder-sorcery-words]{Flame Elder Sorcery
           Words}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -235,7 +215,6 @@ effects:
     img: systems/teriock/src/icons/abilities/flame-disciplines.webp
     name: Flame Disciplines
     system:
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -244,13 +223,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: flame-disciplines
       interaction: manifest
@@ -273,8 +248,6 @@ effects:
           <p>You may now use the benefits from [[lookup name]]
           @Identifier[core:proficiency-bonus]{P} times per
           @Identifier[core:long-rest]{long rest}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -296,7 +269,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -313,18 +286,13 @@ effects:
             - 2
           identifier: ability:flame-rotators
           type: changeCompetence
-      class: flameMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: flame-rotator-fluency
       interaction: manifest
@@ -340,8 +308,6 @@ effects:
           @Identifier[ability:flame-rotators]{Flame Rotators}. (This does not
           make you @Identifier[core:fluency-bonus]{fluent} in the
           @Wiki[Category:Spells]{spells} themselves.)</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -359,7 +325,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -379,7 +345,6 @@ effects:
           multi: false
           noHeighten: false
           type: useDocuments
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -388,13 +353,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: flame-spell-strikes
       interaction: manifest
@@ -403,8 +364,6 @@ effects:
         base: >-
           <p>You gain @Identifier[keyword:limited]{Limited}
           @Identifier[ability:spell-strike]{Spell Strike}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -422,7 +381,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
     name: Minor Weapon Enchantment
     system:
@@ -498,7 +457,6 @@ effects:
           heighten:
             - 1
           type: duration
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -522,10 +480,6 @@ effects:
         slow:
           raw: '10'
           unit: minute
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -534,7 +488,6 @@ effects:
       interaction: manifest
       invoked: true
       maneuver: slow
-      mundane: false
       overview:
         base: >-
           <p>Target weapon is enchanted to deal @Identifier[damage:magic]{magic
@@ -548,8 +501,6 @@ effects:
           @Identifier[core:presence]{tier 1}. If the weapon is
           @Identifier[property:shattered]{shattered}, this enchantment
           fades.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -570,7 +521,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/cremate.webp
     name: Cremate
     system:
@@ -598,7 +549,6 @@ effects:
           status: ruined
           target: false
           type: status
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -613,7 +563,6 @@ effects:
             type: formula
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
@@ -622,18 +571,11 @@ effects:
         - flame
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       identifier: cremate
       interaction: attack
       invoked: true
       maneuver: active
-      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -659,12 +601,23 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/sudden-casting.webp
     name: Sudden Casting
     system:
       _sup: ZmjFFlMRQIBtml1N
-      class: flameMage
+      automations:
+        VX8HRH0mBRK2ACXr:
+          _id: VX8HRH0mBRK2ACXr
+          all: false
+          automatic: true
+          expandTables: false
+          local:
+            qualifier: and(@ability, @spell, @time.a1)
+          multi: false
+          noHeighten: false
+          trigger: execute
+          type: useDocuments
       competence:
         raw: 0
       costs:
@@ -674,23 +627,15 @@ effects:
             type: formula
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - sensory
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: sudden-casting
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>You cast a @Wiki[Category:Single action spells]{single action
@@ -698,8 +643,6 @@ effects:
           range of. The triggering creature must be within range of the spell
           when it triggers and at least one of the targets of the
           @Wiki[Category:Single action spells]{spell} you cast.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -726,7 +669,6 @@ effects:
     name: Bombastic Casting
     system:
       _sup: ZmjFFlMRQIBtml1N
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -736,31 +678,21 @@ effects:
             type: formula
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - loud
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: bombastic-casting
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>The triggering @Wiki[Category:Spells]{spell} becomes extremely
           visible and loud. Visually the @Wiki[Category:Spells]{spell} extends
           10 feet in all directions from a line between the caster and each of
           its targets. The spell can be heard up to 600 feet away.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -793,16 +725,9 @@ effects:
             type: formula
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: spell-strike
       interaction: manifest
@@ -810,7 +735,6 @@ effects:
         <p>Only usable with @L[Ability:Flame Ray]{Flame Ray} and @L[Ability:Fire
         Ball]{Fire Ball}.</p>
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
@@ -818,8 +742,6 @@ effects:
           @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
           hit was a critical hit, then the target takes the "on critical hit"
           effect instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:

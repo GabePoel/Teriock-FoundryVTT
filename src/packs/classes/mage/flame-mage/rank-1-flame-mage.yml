@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
@@ -23,22 +23,17 @@ effects:
           formula: (1 + @h)d4[magic fire]
           impact: damage
           type: roll
-      class: flameMage
       competence:
         raw: 0
       delivery: missile
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -74,7 +69,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/flame-ray.webp
     name: Flame Ray
     system:
@@ -86,22 +81,17 @@ effects:
             - 1
           impact: damage
           type: roll
-      class: flameMage
       competence:
         raw: 0
       delivery: missile
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
       elements:
         - flame
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -141,18 +131,13 @@ effects:
     img: systems/teriock/src/icons/abilities/mage-light.webp
     name: Mage Light
     system:
-      class: flameMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: mage-light
       interaction: manifest
@@ -161,8 +146,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:light]{Light} and
           @Identifier[ability:ignite]{Ignite}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -184,7 +167,6 @@ effects:
     img: systems/teriock/src/icons/abilities/self-detonate.webp
     name: Self Detonate
     system:
-      class: flameMage
       competence:
         raw: 0
       costs:
@@ -203,11 +185,8 @@ effects:
         unit: hour
       elements:
         - flame
-      executionTime: 10 Minutes
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: 10 Minutes
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -232,8 +211,6 @@ effects:
         proficient: >-
           <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now
           included in the @Identifier[core:feat-interaction]{feat save DC}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -257,7 +234,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/ignite.webp
     name: Ignite
     system:
@@ -291,7 +268,6 @@ effects:
           heighten:
             - 1
           type: duration
-      class: flameMage
       competence:
         raw: 0
       delivery: hand
@@ -302,12 +278,6 @@ effects:
         - flame
       executionTime:
         base: a0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -315,7 +285,6 @@ effects:
       identifier: ignite
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>Target is set @Identifier[property:on-fire]{on fire} or put out.
@@ -323,8 +292,6 @@ effects:
           @Wiki[Category:Spells]{spell}. When @Identifier[property:on-fire]{on
           fire}, your hand produces no smoke and being set
           @Identifier[property:on-fire]{on fire} does not harm it.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -344,7 +311,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/light.webp
     name: Light
     system:
@@ -379,7 +346,6 @@ effects:
               type: override
               value: '60'
           type: changes
-      class: flameMage
       competence:
         raw: 0
       delivery: cone
@@ -390,24 +356,15 @@ effects:
         - flame
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: light
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>The area is illuminated. This [[lookup name style=lc]] emanates
           from your hand and moves with you. You may change its direction at
           will.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:

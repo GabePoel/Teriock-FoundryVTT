@@ -20,18 +20,13 @@ effects:
     img: systems/teriock/src/icons/abilities/armor-master.webp
     name: Armor Master
     system:
-      class: veteran
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: armor-master
       interaction: manifest
@@ -40,8 +35,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:master-armor-smith]{Master Armor
           Smith} and @Identifier[ability:runic-armor]{Runic Armor}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -59,7 +52,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -73,7 +66,6 @@ effects:
             - shatter
           showConfirmationDialog: true
           type: common
-      class: veteran
       competence:
         raw: 0
       costs:
@@ -85,13 +77,9 @@ effects:
             type: description
       delivery: armor
       duration:
-        raw: '0'
         unit: instant
-      executionTime: r1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r1
       form: normal
       identifier: armor-wound
       interaction: manifest
@@ -103,8 +91,6 @@ effects:
           requires that you are wearing the armor. If you have
           @Identifier[core:armor-class]{AV} from some other source, it cannot be
           used for [[lookup name]].</div>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -123,7 +109,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -141,7 +127,6 @@ effects:
               type: override
               value: '10'
           type: changes
-      class: veteran
       competence:
         raw: 0
       delivery: self
@@ -149,13 +134,9 @@ effects:
         conditions:
           absent:
             - down
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: improved-brace
       interaction: manifest
@@ -174,8 +155,6 @@ effects:
           rolled due to a @Identifier[keyword:boosted]{boost} or critical hit
           are added before the @Identifier[keyword:deboosted]{deboost} from
           [[lookup name]] takes them away.</div>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -200,7 +179,6 @@ effects:
     img: systems/teriock/src/icons/abilities/intercept.webp
     name: Intercept
     system:
-      class: veteran
       competence:
         raw: 0
       costs:
@@ -210,13 +188,9 @@ effects:
             type: formula
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
-      executionTime: r1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r1
       form: normal
       identifier: intercept
       interaction: attack
@@ -256,7 +230,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -282,7 +256,6 @@ effects:
             - repair
           showConfirmationDialog: true
           type: common
-      class: veteran
       competence:
         raw: 0
       costs:
@@ -297,11 +270,8 @@ effects:
       duration:
         raw: '8'
         unit: hour
-      executionTime: 10 Minutes
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: 10 Minutes
       form: normal
       identifier: mystic-item-repair
       interaction: manifest
@@ -313,8 +283,6 @@ effects:
           targeted item, it is @Identifier[property:runic]{runic} and effects
           that would render it @Identifier[property:destroyed]{destroyed} cause
           it to be @Identifier[property:shattered]{shattered} instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -335,7 +303,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -366,7 +334,6 @@ effects:
           bonus: '0'
           hex: false
           type: resist
-      class: veteran
       competence:
         raw: 0
       delivery: self
@@ -374,15 +341,11 @@ effects:
         conditions:
           absent:
             - down
-        raw: '0'
         unit: unlimited
       effectTypes:
         - resistance
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: sentry
       interaction: manifest
@@ -409,8 +372,6 @@ effects:
           <li>Standing guard while a @Wiki[Category:Mage classes]{mage}
           completes a @Wiki[Category:Ritual delivery
           abilities]{ritual}.</li></ul>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -428,7 +389,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/runic-armor.webp
     name: Runic Armor
     system:
@@ -444,7 +405,6 @@ effects:
           multi: false
           separate: false
           type: addDocuments
-      class: veteran
       competence:
         raw: 0
       costs:
@@ -463,21 +423,14 @@ effects:
         slow:
           raw: '10'
           unit: minute
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: runic-armor
       interaction: manifest
       maneuver: slow
-      mundane: false
       overview:
         base: >-
           <p>The targeted @Wiki[Category:Armor]{armor} becomes
           @Identifier[property:runic]{runic}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -497,7 +450,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/master-armor-smith.webp
     name: Master Armor Smith
     system:
@@ -512,34 +465,23 @@ effects:
               type: upgrade
               value: '2'
           type: changes
-      class: veteran
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: master-armor-smith
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You are an @Identifier[keyword:expertise]{expert}
           @Identifier[tradecraft:blacksmith]{blacksmith}. In addition, you gain
           the ability to create @Identifier[property:master-crafted]{master
           crafted} armor.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

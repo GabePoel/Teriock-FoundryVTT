@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/avoid.webp
     name: Avoid
     system:
@@ -50,20 +50,15 @@ effects:
           noHeighten: false
           trigger: execute
           type: useDocuments
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - movement
-      executionTime: r1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r1
       form: normal
       identifier: avoid
       interaction: manifest
@@ -84,8 +79,6 @@ effects:
           @Identifier[core:proficiency-bonus]{P} feet. This also does not
           trigger @Identifier[ability:opportunity-attack]{Opportunity
           Attack}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -109,7 +102,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/hunting-party.webp
     name: Hunting Party
     system:
@@ -119,18 +112,14 @@ effects:
           macro: Compendium.teriock.execution.Macro.UqkWyQDB563ezNf8
           trigger: preExecute
           type: abilityMacro
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
         raw: '8'
         unit: hour
-      executionTime: Short Rest
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: Short Rest
       form: normal
       identifier: hunting-party
       interaction: manifest
@@ -149,8 +138,6 @@ effects:
         proficient: >-
           <p>You may instead pick up to @Identifier[core:proficiency-bonus]{P}
           species you're familiar with.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -172,7 +159,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/species-lore.webp
     name: Species Lore
     system:
@@ -186,7 +173,6 @@ effects:
           tradecrafts:
             - hunter
           type: tradecraft
-      class: ranger
       competence:
         raw: 0
       costs:
@@ -196,15 +182,11 @@ effects:
             type: formula
       delivery: sight
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - truthDetecting
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: species-lore
       interaction: manifest
@@ -232,8 +214,6 @@ effects:
           @Identifier[core:game-master]{GM} discretion, you can also spend 10
           minutes studying a creature up close to get additional
           information.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -252,7 +232,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/spell-turning-weapons.webp
     name: Spell Turning Weapons
     system:
@@ -270,20 +250,15 @@ effects:
           bonus: '0'
           hex: false
           type: resist
-      class: ranger
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       effectTypes:
         - resistance
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: spell-turning-weapons
       interaction: manifest
@@ -292,8 +267,6 @@ effects:
         base: >-
           <p>@Wiki[Category:Weapons]{Weapons} you use are
           @Identifier[property:spell-turning]{spell turning}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -320,16 +293,9 @@ effects:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: flanking
       interaction: manifest
@@ -337,15 +303,12 @@ effects:
         <p>You only get the benefits of [[lookup name]] against creatures of the
         chosen species.</p>
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You have @Identifier[core:advantage]{advantage} on
           @Identifier[core:attack-interaction]{attack rolls} against creatures
           that are within 5 feet of an ally of yours that isn't incapacitated
           and that you can see.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -361,7 +324,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
@@ -411,7 +374,6 @@ effects:
           status: snared
           target: false
           type: status
-      class: ranger
       competence:
         raw: 0
       costs:
@@ -419,7 +381,6 @@ effects:
           gifted: 1
       delivery: weapon
       duration:
-        raw: '0'
         unit: unlimited
       endCondition: >-
         <p>At the end of each of the target's @Identifier[core:turns]{turns},
@@ -427,18 +388,11 @@ effects:
         ends.</p>
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: snare
       interaction: attack
       limitation: <p>You can only use [[lookup name]] against the chosen species.</p>
       maneuver: active
-      mundane: false
       piercing:
         raw: 0
       powerSources:

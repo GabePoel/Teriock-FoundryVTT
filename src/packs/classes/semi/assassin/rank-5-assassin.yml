@@ -20,18 +20,14 @@ effects:
     img: systems/teriock/src/icons/abilities/disguise.webp
     name: Disguise
     system:
-      class: assassin
       competence:
         raw: 0
       delivery: self
       duration:
         raw: '24'
         unit: hour
-      executionTime: Short Rest
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: Short Rest
       form: normal
       identifier: disguise
       interaction: manifest
@@ -44,8 +40,6 @@ effects:
           @Identifier[core:size]{size}.</p><div class="note"><b>Note:</b> Any
           creature can attempt to @Identifier[ability:check-disguise]{Check
           Disguise} to discover this.</div>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -70,18 +64,13 @@ effects:
     img: systems/teriock/src/icons/abilities/escape.webp
     name: Escape
     system:
-      class: assassin
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
-      executionTime: r1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r1
       form: normal
       identifier: escape
       interaction: manifest
@@ -94,8 +83,6 @@ effects:
           @Identifier[core:movement-speed]{swim speed} then you may move in the
           air or in water accordingly. This movement doesn't trigger
           @Wiki[Category:Reactive abilities]{reactive abilities}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -118,7 +105,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -135,18 +122,13 @@ effects:
               type: upgrade
               value: '2'
           type: changes
-      class: assassin
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: informant
       interaction: manifest
@@ -169,8 +151,6 @@ effects:
           <li>Places the creature frequents.</li>
 
           <li>Where the creature is likely to go next.</li></ul>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -195,20 +175,15 @@ effects:
     img: systems/teriock/src/icons/abilities/ninja-duel.webp
     name: Ninja Duel
     system:
-      class: assassin
       competence:
         raw: 0
       delivery: sight
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - duelModifying
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: ninja-duel
       interaction: manifest
@@ -218,8 +193,6 @@ effects:
           <p>You and the target begin @Identifier[status:dueling]{dueling} each
           other. You gain @Identifier[ability:active-bow-out]{Active Bow Out}
           while in this @Identifier[status:dueling]{duel}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -249,7 +222,6 @@ effects:
     img: systems/teriock/src/icons/abilities/prepare-poison.webp
     name: Prepare Poison
     system:
-      class: assassin
       competence:
         raw: 0
       costs:
@@ -261,11 +233,8 @@ effects:
       duration:
         raw: '24'
         unit: hour
-      executionTime: Short Rest
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: Short Rest
       form: normal
       identifier: prepare-poison
       interaction: manifest
@@ -279,8 +248,6 @@ effects:
           Strike}, or get it ready to put on some other item, which can in turn
           be applied with @Identifier[ability:poison-item]{Poison Item}. Once
           prepared, the poison only lasts 24 hours before it expires.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -298,7 +265,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -331,22 +298,17 @@ effects:
           status: silenced
           target: false
           type: status
-      class: assassin
       competence:
         raw: 0
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       endCondition: >-
         <p>At the end of each of the target's @Identifier[core:turns]{turns},
         they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
         ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: vitals-silence
       interaction: attack
@@ -372,7 +334,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     name: Active Bow Out
     system:
@@ -386,28 +348,19 @@ effects:
           status: dueling
           target: false
           type: status
-      class: duelist
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - duelModifying
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: active-bow-out
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You end a @Identifier[status:dueling]{duel} you are currently in.
@@ -418,8 +371,6 @@ effects:
           returns to the number of
           @Identifier[core:hit-points-and-mana-points]{HP} they had prior to
           @Identifier[status:dueling]{dueling}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -437,7 +388,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     name: Poison Strike
     system:
@@ -472,7 +423,6 @@ effects:
           status: poisoned
           target: false
           type: status
-      class: assassin
       competence:
         raw: 0
       delivery: weapon
@@ -484,17 +434,10 @@ effects:
       endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: poison-strike
       interaction: attack
       maneuver: active
-      mundane: false
       overview:
         fluent: >-
           <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
@@ -525,7 +468,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/poison-item.webp
     name: Poison Item
     system:
@@ -559,7 +502,6 @@ effects:
           status: poisoned
           target: false
           type: status
-      class: assassin
       competence:
         raw: 0
       delivery: hand
@@ -569,17 +511,10 @@ effects:
       endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: poison-item
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>Target makes a creature become
@@ -596,8 +531,6 @@ effects:
         proficient: >-
           <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
           1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:

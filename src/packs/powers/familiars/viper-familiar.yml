@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
@@ -41,20 +41,15 @@ effects:
           triggers:
             - executeArmament
           type: expiration
-      class: archer
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         triggers:
           - movement
         unit: unlimited
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: crit-elite
       interaction: manifest
@@ -70,8 +65,6 @@ effects:
           abilities]{attack} does nothing. Only the
           @Identifier[core:damage]{damage} from the item itself can be
           @Identifier[keyword:boosted]{boosted} in this way.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -93,7 +86,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/poison-item.webp
     name: Poison Item
     system:
@@ -126,7 +119,6 @@ effects:
           status: poisoned
           target: false
           type: status
-      class: assassin
       competence:
         raw: 0
       delivery: hand
@@ -134,11 +126,8 @@ effects:
         raw: '24'
         unit: hour
       endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: poison-item
       interaction: manifest
@@ -159,8 +148,6 @@ effects:
         proficient: >-
           <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
           1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:

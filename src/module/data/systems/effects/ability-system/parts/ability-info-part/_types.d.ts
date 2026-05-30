@@ -1,10 +1,12 @@
 declare global {
   namespace Teriock.Models {
+    // Current logic is to leave the class commented out because that's not intrinsic to the ability,
+    // but instead is actually determined by the rank that provides it.
     export type AbilityFlagsPartData = {
       /** <schema> If this is a basic ability */
       basic: boolean;
-      /** <schema> What class this ability is associated with */
-      class: Teriock.Keys.Class;
+      // /** <schema> What class this ability is associated with */
+      // class: Teriock.Keys.Class;
       /** <schema> If this ability is consumable */
       consumable: boolean;
       /** <schema> If this ability is a guildmaster ability */

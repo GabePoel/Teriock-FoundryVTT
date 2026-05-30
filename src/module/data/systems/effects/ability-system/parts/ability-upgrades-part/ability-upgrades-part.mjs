@@ -126,11 +126,11 @@ export default Base => {
         if (this.upgrades.competence.attribute) {
           const attribute = attributeLink(this.upgrades.competence.attribute);
           const amount = this.upgrades.competence.value;
-          const page = TERIOCK.config.competence.levels[amount].page;
+          const identifier = TERIOCK.config.competence.levels[amount].identifier;
           const level = TERIOCK.config.competence.levels[amount].label;
-          const upgrade = `@L[Core:${page}]{${level.toLowerCase()}}`;
+          const upgrade = `@Identifier[${identifier}]{${level.toLowerCase()}}`;
           const savesLabel = _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.saves");
-          const saves = `@L[Core:Feat Interaction]{${savesLabel}}`;
+          const saves = `@Identifier[core:feat-interaction]{${savesLabel}}`;
           this.upgrades.competence.text = `<p>${
             _loc("TERIOCK.SYSTEMS.Ability.FIELDS.upgrades.competence.description", { attribute, saves, upgrade })
           }</p>`;
@@ -149,7 +149,7 @@ export default Base => {
  */
 function attributeLink(attribute) {
   if (!TERIOCK.config.attribute[attribute]) { return ""; }
-  const page = TERIOCK.config.attribute[attribute].page;
+  const identifier = TERIOCK.config.attribute[attribute].identifier;
   const label = TERIOCK.config.attribute[attribute].label;
-  return `@L[Core:${page}]{${label}}`;
+  return `@Identifier[${identifier}]{${label}}`;
 }

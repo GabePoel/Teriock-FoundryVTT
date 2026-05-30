@@ -17,18 +17,14 @@ effects:
     img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
     name: Drink Freezing Liquid
     system:
-      class: stormMage
       competence:
         raw: 0
       delivery: self
       duration:
         raw: '1'
         unit: minute
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       grantUse: true
       identifier: drink-freezing-liquid
@@ -38,8 +34,6 @@ effects:
         base: >-
           <p>You gain @Identifier[keyword:gifted]{Gifted}
           @Identifier[ability:shock-touch]{Shock Touch}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - alchemical
       range:
@@ -73,7 +67,6 @@ effects:
         is instead @Identifier[property:destroyed]{destroyed}.</p>
       form: intrinsic
       identifier: fragile
-      mundane: true
     transfer: true
     type: property
   - _id: VpMWvn5pbQRYM67N
@@ -83,7 +76,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/pour-freezing-liquid.webp
     name: Pour Freezing Liquid
     system:
@@ -128,11 +121,8 @@ effects:
       endCondition: >-
         <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
         If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       grantUse: true
       identifier: pour-freezing-liquid
@@ -199,7 +189,6 @@ effects:
         in the same hand as a @Wiki[Category:Shields]{shield}.</p>
       form: intrinsic
       identifier: small
-      mundane: true
     transfer: true
     type: property
   - _id: apBxp2fY1ZC3n916
@@ -209,7 +198,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     name: Shock Touch
     system:
@@ -266,7 +255,6 @@ effects:
           status: frozen
           target: false
           type: status
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -290,12 +278,6 @@ effects:
         If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -305,7 +287,6 @@ effects:
       interaction: attack
       invoked: true
       maneuver: active
-      mundane: false
       piercing:
         raw: 2
       powerSources:

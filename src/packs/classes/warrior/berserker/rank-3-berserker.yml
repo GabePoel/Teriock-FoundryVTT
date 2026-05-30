@@ -21,18 +21,13 @@ effects:
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     name: Battle Cry
     system:
-      class: berserker
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: battle-cry
       interaction: manifest
@@ -41,8 +36,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:battle-cry-aura]{Battle Cry Aura} and
           @Identifier[ability:battle-cry-resistance]{Battle Cry Resistance}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -60,7 +53,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -115,7 +108,6 @@ effects:
           morganti: false
           showDialog: false
           type: take
-      class: berserker
       competence:
         raw: 0
       delivery: self
@@ -123,11 +115,8 @@ effects:
         raw: '5'
         unit: minute
       endCondition: <p>You die or 1 minute passes without combat.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: berserk
       interaction: manifest
@@ -145,8 +134,6 @@ effects:
           <p>You gain an additional 5 × @Identifier[core:proficiency-bonus]{P}
           @Identifier[core:temporary-hit-points]{temporary HP} and gain
           @Identifier[ability:fast]{Fast}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -164,7 +151,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -187,7 +174,6 @@ effects:
           noStatDice: true
           trigger: turnStart
           type: heal
-      class: berserker
       competence:
         raw: 0
       delivery: self
@@ -195,16 +181,12 @@ effects:
         conditions:
           absent:
             - dead
-        raw: '0'
         unit: unlimited
       effectTypes:
         - healing
         - regeneration
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: berserker-healing-factor
       interaction: manifest
@@ -214,8 +196,6 @@ effects:
           <p>At the start of each of your @Wiki[Core:Turn]{turns}, you
           @Identifier[core:healing]{heal}. You cannot restore
           @Identifier[core:hit-points-and-mana-points]{HP} in this way.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -233,7 +213,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -252,7 +232,6 @@ effects:
           bonus: '0'
           hex: false
           type: resist
-      class: berserker
       competence:
         raw: 0
       delivery: self
@@ -260,15 +239,11 @@ effects:
         conditions:
           absent:
             - dead
-        raw: '0'
         unit: unlimited
       effectTypes:
         - resistance
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: called-magic-resistance
       interaction: manifest
@@ -278,8 +253,6 @@ effects:
           <p>You @Identifier[keyword:resistance]{resist} all
           @Wiki[Category:Conjured spells]{Conjured spells} that aren't
           @Wiki[Category:Self target spells]{self targeted}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -304,18 +277,13 @@ effects:
     img: systems/teriock/src/icons/abilities/intimidate.webp
     name: Intimidate
     system:
-      class: berserker
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: intimidate
       interaction: manifest
@@ -324,8 +292,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:intimidating-presence]{Intimidating
           Presence} and @Identifier[ability:terrify]{Terrify}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -350,7 +316,6 @@ effects:
     img: systems/teriock/src/icons/abilities/throw-the-bones.webp
     name: Throw the Bones
     system:
-      class: berserker
       competence:
         raw: 0
       delivery: sight
@@ -362,11 +327,8 @@ effects:
       endCondition: >-
         <p>Once the @Identifier[keyword:immune]{immunity} provided by [[lookup
         name]] is used, this effect ends.</p>
-      executionTime: 10 Minutes
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: 10 Minutes
       form: normal
       identifier: throw-the-bones
       interaction: manifest
@@ -375,8 +337,6 @@ effects:
         base: >-
           <p>Target is @Identifier[keyword:immune]{immune} to the next use of a
           @Wiki[Category:Spells]{spells} that would affect them.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:
@@ -396,7 +356,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -413,7 +373,6 @@ effects:
           bonus: '0'
           hex: false
           type: resist
-      class: berserker
       competence:
         raw: 0
       delivery: self
@@ -425,23 +384,14 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: battle-cry-resistance
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You @Identifier[keyword:resistance]{resist} being
           @Identifier[status:frightened]{frightened}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -459,7 +409,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -510,7 +460,6 @@ effects:
           status: frightened
           target: false
           type: status
-      class: berserker
       competence:
         raw: 0
       costs:
@@ -529,23 +478,15 @@ effects:
         ends.</p>
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
       featSaveAttribute: int
       form: normal
       identifier: battle-cry-aura
       interaction: feat
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>This ability cannot affect @Identifier[status:deaf]{deaf}
           creatures.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -566,7 +507,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/terrify.webp
     name: Terrify
     system:
@@ -585,7 +526,6 @@ effects:
           status: frightened
           target: false
           type: status
-      class: berserker
       competence:
         raw: 0
       delivery: sight
@@ -596,19 +536,11 @@ effects:
         - mental
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
       featSaveAttribute: int
       form: normal
       identifier: terrify
       interaction: feat
       maneuver: active
-      mundane: false
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -635,7 +567,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/intimidating-presence.webp
     name: Intimidating Presence
     system:
@@ -650,32 +582,21 @@ effects:
               type: upgrade
               value: '2'
           type: changes
-      class: berserker
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: intimidating-presence
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You are an @Identifier[keyword:expertise]{expert}
           @Identifier[tradecraft:enforcer]{enforcer}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

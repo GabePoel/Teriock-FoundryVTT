@@ -17,18 +17,13 @@ effects:
     img: systems/teriock/src/icons/abilities/bow-out.webp
     name: Bow Out
     system:
-      class: duelist
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: bow-out
       interaction: manifest
@@ -37,8 +32,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:active-bow-out]{Active Bow Out} and
           @Identifier[ability:reactive-bow-out]{Reactive Bow Out}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -60,7 +53,6 @@ effects:
     img: systems/teriock/src/icons/abilities/dueling-techniques.webp
     name: Dueling Techniques
     system:
-      class: duelist
       competence:
         raw: 0
       costs:
@@ -75,14 +67,10 @@ effects:
         conditions:
           present:
             - dueling
-        raw: '0'
         unit: unlimited
       endCondition: <p>You are no longer @Identifier[status:dueling]{dueling}.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: dueling-techniques
       interaction: manifest
@@ -95,8 +83,6 @@ effects:
           @Identifier[status:dueling]{dueling} and you gain
           @Identifier[keyword:limited]{Limited}
           @Identifier[ability:chi-strike]{Chi Strike}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -121,7 +107,6 @@ effects:
     img: systems/teriock/src/icons/abilities/tea-ceremony.webp
     name: Tea Ceremony
     system:
-      class: duelist
       competence:
         raw: 0
       costs:
@@ -138,11 +123,8 @@ effects:
         unit: hour
       effectTypes:
         - truthDetecting
-      executionTime: 10 Minutes
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: 10 Minutes
       form: normal
       identifier: tea-ceremony
       interaction: manifest
@@ -181,8 +163,6 @@ effects:
         proficient: >-
           <p>You may now target up to 2 × @Identifier[core:proficiency-bonus]{P}
           creatures (including yourself) with [[lookup name]].</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -202,7 +182,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     name: Active Bow Out
     system:
@@ -216,28 +196,19 @@ effects:
           status: dueling
           target: false
           type: status
-      class: duelist
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - duelModifying
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: active-bow-out
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You end a @Identifier[status:dueling]{duel} you are currently in.
@@ -248,8 +219,6 @@ effects:
           returns to the number of
           @Identifier[core:hit-points-and-mana-points]{HP} they had prior to
           @Identifier[status:dueling]{dueling}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -272,26 +241,17 @@ effects:
     name: Reactive Bow Out
     system:
       _sup: vU4DiB0u1DAfzrs5
-      class: duelist
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: reactive-bow-out
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>The effect causing you to enter a @Identifier[status:dueling]{duel}
@@ -300,8 +260,6 @@ effects:
           @Identifier[core:fizzles]{fizzles}. You do not count as "forfeiting"
           or "losing" if you use [[lookup name]] to stop
           @Identifier[status:dueling]{dueling}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - spiritual
       range:
@@ -323,7 +281,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/chi-strike.webp
     name: Chi Strike
     system:
@@ -335,7 +293,6 @@ effects:
             - standardDamage
           showConfirmationDialog: true
           type: common
-      class: duelist
       competence:
         raw: 0
       costs:
@@ -345,18 +302,11 @@ effects:
             type: formula
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - draining
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: chi-strike
       interaction: attack
@@ -365,7 +315,6 @@ effects:
         @L[Property:Armor Voiding]{AV0} and only against creatures you are
         @L[Condition:Dueling]{dueling}.</p>
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>This strike deals @Identifier[drain:mana]{mana drain} instead of

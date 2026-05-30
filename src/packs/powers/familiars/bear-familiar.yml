@@ -17,18 +17,13 @@ effects:
     img: systems/teriock/src/icons/abilities/battle-cry.webp
     name: Battle Cry
     system:
-      class: berserker
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: battle-cry
       interaction: manifest
@@ -37,8 +32,6 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:battle-cry-aura]{Battle Cry Aura} and
           @Identifier[ability:battle-cry-resistance]{Battle Cry Resistance}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -74,7 +67,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/endure.webp
     name: Endure
     system:
@@ -86,7 +79,6 @@ effects:
             - leg
           reverse: false
           type: hacks
-      class: ranger
       competence:
         raw: 0
       costs:
@@ -95,15 +87,11 @@ effects:
             type: tag
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
-      executionTime: r1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r1
       form: normal
       identifier: endure
       interaction: manifest
@@ -124,8 +112,6 @@ effects:
           un-@Identifier[damage:hack]{hacked} limb can be used for this. If
           that's not possible, you take the @Identifier[core:damage]{damage}
           normally.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -146,7 +132,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -163,7 +149,6 @@ effects:
           bonus: '0'
           hex: false
           type: resist
-      class: berserker
       competence:
         raw: 0
       delivery: self
@@ -175,23 +160,14 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: battle-cry-resistance
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You @Identifier[keyword:resistance]{resist} being
           @Identifier[status:frightened]{frightened}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -209,7 +185,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -260,7 +236,6 @@ effects:
           status: frightened
           target: false
           type: status
-      class: berserker
       competence:
         raw: 0
       costs:
@@ -279,23 +254,15 @@ effects:
         ends.</p>
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
       featSaveAttribute: int
       form: normal
       identifier: battle-cry-aura
       interaction: feat
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>This ability cannot affect @Identifier[status:deaf]{deaf}
           creatures.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

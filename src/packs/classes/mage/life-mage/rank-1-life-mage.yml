@@ -17,7 +17,6 @@ effects:
     img: systems/teriock/src/icons/abilities/hibernation-shield.webp
     name: Hibernation Shield
     system:
-      class: lifeMage
       competence:
         raw: 0
       delivery: sight
@@ -25,18 +24,14 @@ effects:
         conditions:
           present:
             - down
-        raw: '0'
         triggers:
           - dawn
         unit: unlimited
       elements:
         - life
       endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
-      executionTime: r1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r1
       form: normal
       identifier: hibernation-shield
       interaction: manifest
@@ -52,8 +47,6 @@ effects:
         proficient: >-
           <p>You may target up to @Identifier[core:proficiency-bonus]{P}
           creatures.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -74,7 +67,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         dontConsume: false
@@ -133,7 +126,6 @@ effects:
           status: lighted
           target: true
           type: status
-      class: lifeMage
       competence:
         raw: 0
       delivery: missile
@@ -142,11 +134,8 @@ effects:
         unit: minute
       elements:
         - life
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -183,7 +172,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/medicine-ball.webp
     name: Medicine Ball
     system:
@@ -204,22 +193,17 @@ effects:
             - 1
           noStatDice: false
           type: heal
-      class: lifeMage
       competence:
         raw: 0
       delivery: missile
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - healing
       elements:
         - life
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -255,7 +239,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/resurrect.webp
     name: Resurrect
     system:
@@ -273,23 +257,18 @@ effects:
           forHarm: true
           noStatDice: false
           type: heal
-      class: lifeMage
       competence:
         raw: 0
       delivery: sight
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - healing
         - revival
       elements:
         - life
-      executionTime: 10 Minutes
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: 10 Minutes
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -317,8 +296,6 @@ effects:
           <p>If target is @Wiki[Category:Undead creatures]{undead}, they are
           @Identifier[core:healing]{healed} for @Identifier[core:damage]{damage}
           @Identifier[core:proficiency-bonus]{P} times.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -346,7 +323,6 @@ effects:
     name: Hibernation
     system:
       _sup: 06z0wz68hsmApPL9
-      class: ranger
       competence:
         raw: 0
       delivery: self
@@ -354,27 +330,17 @@ effects:
         conditions:
           present:
             - down
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: hibernation
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>All damage is @Identifier[keyword:deboosted]{deboosted} against
           you.</p>
-      piercing:
-        raw: 0
       powerSources:
         - primal
       range:

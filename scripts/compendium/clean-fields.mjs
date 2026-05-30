@@ -32,6 +32,7 @@ export function cleanDocument(doc) {
     if (doc.type === "power") { cleanPower(doc); }
     if (doc.type === "property") { cleanProperty(doc); }
     if (doc.type === "rank") { cleanRank(doc); }
+    if (doc.type === "species") { cleanSpecies(doc); }
   }
   if (doc.text?.content && doc.type === "class") { doc.text.content = doc.text.content.replaceAll("\n", ""); }
 }
@@ -85,7 +86,10 @@ function cleanActiveEffect(doc) {
   if (!doc.disabled) { delete doc.disabled; }
   if (doc.showIcon) { delete doc.showIcon; }
   if (doc.system.revealed) { delete doc.system.revealed; }
-  if (doc.system.mundane) { doc.system.applyIfDeattuned = true; }
+  if (typeof doc.system.mundane === "boolean") {
+    doc.system.applyIfDeattuned = doc.system.mundane;
+    delete doc.system.mundane;
+  }
   if (!doc.system.applyIfDeattuned) { delete doc.system.applyIfDeattuned; }
 }
 
@@ -235,6 +239,14 @@ function cleanRank(doc) {
 }
 
 /**
+ * @param {TeriockSpecies} doc
+ */
+function cleanSpecies(doc) {
+  if (!doc.system.adult) { delete doc.system.adult; }
+  if (!doc.system.lifespan) { delete doc.system.lifespan; }
+}
+
+/**
  * @param {TeriockProperty} doc
  */
 function cleanProperty(doc) {
@@ -251,6 +263,24 @@ function cleanProperty(doc) {
 function cleanAbility(doc) {
   // Clean Impacts
   if (doc.system.impacts) { delete doc.system.impacts; }
+
+  // Clean Execution
+  if (doc.system.interaction !== "feat") { delete doc.system.featSaveAttribute; }
+  if (doc.system.interaction !== "attack") { delete doc.system.piercing; }
+  if (!doc.system.expansion?.type) { delete doc.system.expansion; }
+  if (doc.system.executionTime) {
+    if (typeof doc.system.executionTime === "string") {
+      doc.system.executionTime = { base: doc.system.executionTime };
+    }
+    if (doc.system.maneuver !== "slow") { delete doc.system.executionTime.slow; }
+    if (doc.system.maneuver === "passive") { doc.system.executionTime.base = "passive"; }
+  }
+  if (["instant", "unlimited"].includes(doc.system.duration.unit)) {
+    delete doc.system.duration.raw;
+  }
+  if (["contact", "melee", "self"].includes(doc.system.range.unit)) {
+    delete doc.system.range.raw;
+  }
 
   // Clean Costs
   if (doc.system.costs) { trimObject(doc.system.costs); }
@@ -271,7 +301,8 @@ function cleanAbility(doc) {
 
   // Clean Tags
   if (!doc.system.basic) { delete doc.system.basic; }
-  if (!doc.system.class) { delete doc.system.class; }
+  // if (!doc.system.class) { delete doc.system.class; }
+  delete doc.system.class;
   if (!doc.system.consumable) { delete doc.system.consumable; }
   if (!doc.system.elderSorcery) { delete doc.system.elderSorcery; }
   if (!doc.system.guildmaster) { delete doc.system.guildmaster; }

@@ -18,7 +18,6 @@ effects:
     img: systems/teriock/src/icons/abilities/bodyguard-training.webp
     name: Bodyguard Training
     system:
-      class: veteran
       competence:
         raw: 0
       delivery: self
@@ -27,23 +26,14 @@ effects:
         unit: minute
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: bodyguard-training
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>You gain @Identifier[ability:bodyguard-backup]{Bodyguard Backup}
           and @Identifier[ability:bodyguard-taunt]{Bodyguard Taunt}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -61,7 +51,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/fortify-area.webp
     name: Fortify Area
     system:
@@ -107,7 +97,6 @@ effects:
           formula: 1d10 + (@f)d10
           impact: gainTempHp
           type: roll
-      class: veteran
       competence:
         raw: 0
       delivery: self
@@ -118,15 +107,10 @@ effects:
         base: Short Rest
         slow:
           unit: shortRest
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: fortify-area
       interaction: manifest
       maneuver: slow
-      mundane: false
       overview:
         base: >-
           <p>You may spend a @Identifier[core:short-rest]{short rest} building
@@ -143,8 +127,6 @@ effects:
         proficient: >-
           <p>You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
           @Identifier[core:temporary-hit-points]{temporary HP}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -163,7 +145,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/tumble.webp
     name: Tumble
     system:
@@ -210,7 +192,6 @@ effects:
           status: snared
           target: false
           type: status
-      class: veteran
       competence:
         raw: 0
       delivery: self
@@ -224,17 +205,10 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: tumble
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>You are moved 5 feet in the direction opposite the source of the
@@ -247,8 +221,6 @@ effects:
           @Identifier[core:damage]{damage}. If the
           @Identifier[core:damage]{damage} has multiple types, each type is
           rounded down independently.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -267,7 +239,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -280,32 +252,21 @@ effects:
           target: armament
           type: childChange
           value: '1'
-      class: veteran
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
       executionTime:
         base: passive
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: unbreachability
       interaction: manifest
       maneuver: passive
-      mundane: false
       overview:
         base: >-
           <p>Armor you wear is
           @Identifier[property:unbreachable]{unbreachable}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -323,7 +284,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     name: Bodyguard Taunt
     system:
@@ -353,7 +314,6 @@ effects:
           status: goaded
           target: true
           type: status
-      class: veteran
       competence:
         raw: 0
       delivery: weapon
@@ -362,24 +322,15 @@ effects:
         unit: second
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: bodyguard-taunt
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>Pick another creature within range. They are
           @Identifier[status:goaded]{goaded} until the start of your next
           @Identifier[core:turns]{turn}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -404,7 +355,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
     name: Bodyguard Backup
     system:
@@ -415,7 +366,6 @@ effects:
           macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
           trigger: executeFeat
           type: abilityMacro
-      class: veteran
       competence:
         raw: 0
       delivery: weapon
@@ -424,25 +374,16 @@ effects:
         unit: minute
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: bodyguard-backup
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>Pick another creature within range. They gain
           @Identifier[core:advantage]{advantage} on the next
           @Identifier[core:movement]{MOV} or @Identifier[core:strength]{STR}
           @Identifier[core:feat-interaction]{feat save} they make.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

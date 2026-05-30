@@ -17,7 +17,6 @@ effects:
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
     name: Partner Awaken
     system:
-      class: veteran
       competence:
         raw: 0
       delivery: sight
@@ -25,11 +24,8 @@ effects:
         raw: '1'
         unit: hour
       endCondition: <p>You use [[lookup name]] again.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: partner-awaken
       interaction: manifest
@@ -42,8 +38,6 @@ effects:
           @Identifier[ability:reactive-awaken]{Reactive Awaken} (only usable on
           each other). You may only have this active on one creature at a
           time.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -62,7 +56,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/instant-awaken.webp
     name: Instant Awaken
     system:
@@ -78,24 +72,16 @@ effects:
         raw: 0
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - awakening
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: instant-awaken
       interaction: attack
       limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
       maneuver: active
-      mundane: false
       piercing:
         raw: 0
       powerSources:
@@ -117,7 +103,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/reactive-awaken.webp
     name: Reactive Awaken
     system:
@@ -133,24 +119,16 @@ effects:
         raw: 0
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - awakening
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: reactive-awaken
       interaction: attack
       limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
       maneuver: reactive
-      mundane: false
       overview:
         base: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
       piercing:

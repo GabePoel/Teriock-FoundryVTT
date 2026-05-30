@@ -31,7 +31,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/knockback.webp
     name: Knockback
     system:
@@ -50,18 +50,13 @@ effects:
           origin: executor
           originBarrier: true
           type: move
-      class: knight
       competence:
         raw: 0
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: knockback
       interaction: attack
@@ -97,7 +92,6 @@ effects:
     img: systems/teriock/src/icons/abilities/triumphant-damage-boost.webp
     name: Triumphant Damage Boost
     system:
-      class: knight
       competence:
         raw: 0
       costs:
@@ -108,11 +102,8 @@ effects:
         raw: '1'
         unit: minute
       endCondition: <p>You make another @Wiki[Category:Attack abilities]{attack}.</p>
-      executionTime: r0
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r0
       form: normal
       identifier: triumphant-damage-boost
       interaction: manifest
@@ -121,8 +112,6 @@ effects:
         base: >-
           <p>Your next @Wiki[Category:Attack abilities]{attack} is
           @Identifier[keyword:boosted]{boosted}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

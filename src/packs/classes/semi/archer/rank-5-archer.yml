@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -33,7 +33,6 @@ effects:
           uuids:
             - Compendium.teriock.tables.RollTable.3b1c5fce9a12eb06
             - Compendium.teriock.tables.RollTable.412794b2cb657a29
-      class: archer
       competence:
         raw: 0
       costs:
@@ -47,13 +46,9 @@ effects:
             type: formula
       delivery: self
       duration:
-        raw: '0'
         unit: instant
-      executionTime: a0
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a0
       form: normal
       identifier: arcane-archery
       interaction: manifest
@@ -78,8 +73,6 @@ effects:
           <p>You are now @Identifier[core:proficiency-bonus]{proficient} with
           the @Wiki[Category:Spells]{spells} you arrows turn into. You still
           cannot @Identifier[core:heightening]{heighten} them.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -104,18 +97,13 @@ effects:
     img: systems/teriock/src/icons/abilities/archery-brigade.webp
     name: Archery Brigade
     system:
-      class: archer
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: archery-brigade
       interaction: manifest
@@ -125,8 +113,6 @@ effects:
           <p>The extra @Wiki[Category:Attack abilities]{attacks} you make with
           @Identifier[ability:multi-shot]{Multi-Shot} can target the same
           creature.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -144,7 +130,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -161,7 +147,6 @@ effects:
               type: upgrade
               value: '2'
           type: changes
-      class: archer
       competence:
         raw: 0
       costs:
@@ -170,13 +155,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: gamesman
       interaction: manifest
@@ -188,8 +169,6 @@ effects:
           @Identifier[keyword:adept]{adept} @Identifier[ability:slay]{Slay} for
           one species of your choice. You can change the species once per a
           @Identifier[core:short-rest]{short rest}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -207,7 +186,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -231,28 +210,21 @@ effects:
           override:
             combat: true
           type: expiration
-      class: archer
       competence:
         raw: 0
       delivery: item
       duration:
-        raw: '0'
         unit: instant
       endCondition: >-
         <p>At the end of each of the target's @Identifier[core:turns]{turns},
         they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
         ends.</p>
-      executionTime: r1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: r1
       form: normal
       identifier: misdirect
       interaction: block
       maneuver: reactive
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -287,18 +259,13 @@ effects:
     img: systems/teriock/src/icons/abilities/precision-shooting.webp
     name: Precision Shooting
     system:
-      class: archer
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: precision-shooting
       interaction: manifest
@@ -308,8 +275,6 @@ effects:
           <p>Any @Identifier[keyword:warded]{warded} @Wiki[Category:Attack
           abilities]{attacks} you make with @Wiki[Category:Bows]{bows} or arrows
           are @Identifier[keyword:boosted]{boosted}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -327,7 +292,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -350,20 +315,15 @@ effects:
             - nose
           reverse: false
           type: hacks
-      class: archer
       competence:
         raw: 0
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       identifier: vitals-hack
       interaction: attack
@@ -395,7 +355,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -421,7 +381,6 @@ effects:
           formula: 10[lethal]
           impact: damage
           type: roll
-      class: assassin
       competence:
         raw: 0
       costs:
@@ -433,19 +392,12 @@ effects:
           adept: 1
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
         - killing
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: slay
       interaction: manifest
@@ -453,7 +405,6 @@ effects:
         <p>Only usable against one species, as specified when you use <a
         class="mw-selflink selflink">Gamesman</a>.</p>
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>Target takes an additional [[/damage 5[lethal]]]
@@ -462,8 +413,6 @@ effects:
           @Wiki[Category:Attack abilities]{attack}. If the triggering
           @Wiki[Category:Attack abilities]{attack} was a critical hit, this
           deals 10 @Identifier[core:damage]{damage} instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:

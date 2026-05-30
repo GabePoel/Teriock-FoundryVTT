@@ -20,7 +20,6 @@ effects:
     img: systems/teriock/src/icons/abilities/additional-storm-rotators.webp
     name: Additional Storm Rotators
     system:
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -29,13 +28,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: additional-storm-rotators
       interaction: manifest
@@ -45,8 +40,6 @@ effects:
           <p>Add @Identifier[ability:reflect-magic]{Reflect Magic} and
           @Identifier[ability:teleport]{Teleport} to your list of possible
           @Wiki[Category:Rotator spells]{rotator spells}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -70,18 +63,13 @@ effects:
     img: systems/teriock/src/icons/abilities/amplify-storm-spells.webp
     name: Amplify Storm Spells
     system:
-      class: stormMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: amplify-storm-spells
       interaction: manifest
@@ -99,8 +87,6 @@ effects:
         fluent: >-
           <p>You may instead choose up to 1 + @Identifier[core:fluency-bonus]{F}
           additional or repeated targets.</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -118,7 +104,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -153,20 +139,16 @@ effects:
             - 2
           identifier: ability:elder-sorcery-creation
           type: changeCompetence
-      class: stormMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       elderSorcery: true
       elements:
         - storm
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
+      executionTime:
+        base: passive
       featSaveAttribute: int
       form: special
       identifier: expanded-storm-elder-sorcery
@@ -200,8 +182,6 @@ effects:
           Sorcery Words}, and
           @Identifier[ability:storm-elder-sorcery-words]{Storm Elder Sorcery
           Words}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -231,7 +211,6 @@ effects:
     img: systems/teriock/src/icons/abilities/storm-disciplines.webp
     name: Storm Disciplines
     system:
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -240,13 +219,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: storm-disciplines
       interaction: manifest
@@ -269,8 +244,6 @@ effects:
           <p>You may now use the benefits from [[lookup name]]
           @Identifier[core:proficiency-bonus]{P} times per
           @Identifier[core:long-rest]{long rest}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -292,7 +265,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: combat
@@ -310,18 +283,13 @@ effects:
             - 2
           identifier: ability:storm-rotators
           type: changeCompetence
-      class: stormMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: storm-rotator-fluency
       interaction: manifest
@@ -337,8 +305,6 @@ effects:
           @Identifier[ability:storm-rotators]{Storm Rotators}. (This does not
           make you @Identifier[core:fluency-bonus]{fluent} in the
           @Wiki[Category:Spells]{spells} themselves.)</p>
-      piercing:
-        raw: 0
       powerSources:
         - martial
       range:
@@ -356,7 +322,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     flags:
       teriock:
         category: support
@@ -377,7 +343,6 @@ effects:
           multi: false
           noHeighten: false
           type: useDocuments
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -386,13 +351,9 @@ effects:
             formula: '1'
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: storm-spell-strikes
       interaction: manifest
@@ -401,8 +362,6 @@ effects:
         base: >-
           <p>You gain @Identifier[keyword:limited]{Limited}
           @Identifier[ability:spell-strike]{Spell Strike}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -425,7 +384,6 @@ effects:
     name: Teleport
     system:
       _sup: NsJ8jXC941tUnRzb
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -440,7 +398,6 @@ effects:
             type: formula
       delivery: sight
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - displacement
@@ -452,10 +409,6 @@ effects:
         slow:
           raw: '10'
           unit: minute
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -465,7 +418,6 @@ effects:
       interaction: manifest
       invoked: true
       maneuver: slow
-      mundane: false
       overview:
         base: >-
           <p>Target creature is moved to a location you have studied within your
@@ -484,8 +436,6 @@ effects:
           <p>You may now have 2 × @Identifier[core:proficiency-bonus]{P}
           locations studied and can [[lookup name style=lc]] a distance of up to
           @Identifier[core:proficiency-bonus]{P} × your level in miles.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -507,7 +457,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/reflect-magic.webp
     name: Reflect Magic
     system:
@@ -535,7 +485,6 @@ effects:
           trigger: executeInput
           type: region
           visibility: 2
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -550,18 +499,11 @@ effects:
             type: formula
       delivery: aura
       duration:
-        raw: '0'
         unit: instant
       elements:
         - storm
       executionTime:
         base: r1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -570,15 +512,12 @@ effects:
       interaction: manifest
       invoked: true
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>Target @Wiki[Category:Conjured spells]{spell}
           @Identifier[core:fizzles]{fizzles}, as do any others cast
           simultaneously within range. Their casters take the spells' effects
           instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -607,7 +546,6 @@ effects:
     name: Bouncy Casting
     system:
       _sup: 4q5c1jkk9JJuVuOG
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -617,23 +555,15 @@ effects:
             type: formula
       delivery: self
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - displacement
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: bouncy-casting
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>You may choose a new target for the @Wiki[Category:Spells]{spell}.
@@ -648,8 +578,6 @@ effects:
           @Wiki[Category:Cost spells]{costs} on the
           @Wiki[Category:Spells]{spell}, those remain unchanged and do not need
           to be re-spent.</div>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -670,12 +598,11 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/illusive-casting.webp
     name: Illusive Casting
     system:
       _sup: 4q5c1jkk9JJuVuOG
-      class: stormMage
       competence:
         raw: 0
       costs:
@@ -688,31 +615,23 @@ effects:
         raw: '24'
         unit: hour
       effectTypes:
+        - illusion
         - mental
       endCondition: >-
-        <p>You ar no longer casting the triggering
+        <p>You are no longer casting the triggering
         @Wiki[Category:Spells]{spell}.</p>
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: illusive-casting
       interaction: manifest
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>The triggering @Wiki[Category:Spells]{spell} appears to be a
           different @Pack[teriock.abilities]{ability} of the same
           @Wiki[Category:Delivery abilities]{delivery}. This is a
           @Identifier[keyword:illusionary]{minor illusion}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -745,16 +664,9 @@ effects:
             type: formula
       delivery: weapon
       duration:
-        raw: '0'
         unit: instant
       executionTime:
         base: r0
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: spell-strike
       interaction: manifest
@@ -762,7 +674,6 @@ effects:
         <p>Only usable with @L[Ability:Lightning Ray]{Lightning Ray} and
         @L[Ability:Ice Ball]{Ice Ball}.</p>
       maneuver: reactive
-      mundane: false
       overview:
         base: >-
           <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
@@ -770,8 +681,6 @@ effects:
           @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
           hit was a critical hit, then the target takes the "on critical hit"
           effect instead.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:

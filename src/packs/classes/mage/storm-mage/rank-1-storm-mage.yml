@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/ice-ball.webp
     name: Ice Ball
     system:
@@ -69,7 +69,6 @@ effects:
           status: frozen
           target: false
           type: status
-      class: stormMage
       competence:
         raw: 0
       delivery: missile
@@ -83,11 +82,8 @@ effects:
       endCondition: >-
         <p>At the start of each of the target's actions, they roll [[/roll
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -119,7 +115,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/identify.webp
     name: Identify
     system:
@@ -130,22 +126,17 @@ effects:
             - identify
           showConfirmationDialog: true
           type: common
-      class: stormMage
       competence:
         raw: 0
       delivery: sight
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - truthDetecting
       elements:
         - storm
-      executionTime: 10 Minutes
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: 10 Minutes
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -163,8 +154,6 @@ effects:
           it has one. If the target is a creature, you learn what ongoing or
           @Wiki[Category:Sustained spells]{sustained spells}, if any, are
           affecting it.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -189,18 +178,13 @@ effects:
     img: systems/teriock/src/icons/abilities/illusionary-arts.webp
     name: Illusionary Arts
     system:
-      class: stormMage
       competence:
         raw: 0
       delivery: self
       duration:
-        raw: '0'
         unit: unlimited
-      executionTime: passive
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: passive
       form: normal
       identifier: illusionary-arts
       interaction: manifest
@@ -210,8 +194,6 @@ effects:
           <p>You gain @Identifier[ability:simple-illusion-creation]{Simple
           Illusion Creation} and @Identifier[ability:detect-illusion]{Detect
           Illusion}.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
@@ -229,7 +211,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/lightning-ray.webp
     name: Lightning Ray
     system:
@@ -239,23 +221,18 @@ effects:
           formula: (1 + @h)d6[magic]
           impact: damage
           type: roll
-      class: stormMage
       competence:
         raw: 0
       delivery: missile
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - damaging
         - lightning
       elements:
         - storm
-      executionTime: a1
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
+      executionTime:
+        base: a1
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -296,12 +273,10 @@ effects:
     name: Detect Illusion
     system:
       _sup: XGWcDOE95PgdyWli
-      class: stormMage
       competence:
         raw: 0
       delivery: hand
       duration:
-        raw: '0'
         unit: instant
       effectTypes:
         - mental
@@ -309,17 +284,10 @@ effects:
         - storm
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       identifier: detect-illusion
       interaction: attack
       maneuver: active
-      mundane: false
       overview:
         proficient: >-
           <p>You also know what <i>type</i> of
@@ -352,7 +320,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.72
     img: systems/teriock/src/icons/abilities/simple-illusion-creation.webp
     name: Simple Illusion Creation
     system:
@@ -367,7 +335,6 @@ effects:
           heighten:
             - 1
           type: duration
-      class: stormMage
       competence:
         raw: 0
       delivery: self
@@ -380,12 +347,6 @@ effects:
         - storm
       executionTime:
         base: a1
-        slow:
-          unit: second
-      expansion:
-        range:
-          unit: self
-      featSaveAttribute: mov
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -393,14 +354,11 @@ effects:
       identifier: simple-illusion-creation
       interaction: manifest
       maneuver: active
-      mundane: false
       overview:
         base: >-
           <p>You create a @Identifier[keyword:illusionary]{minor illusion} of a
           simple object or effect that fits within your hand. As soon as it
           leaves your hand, the illusion fades.</p>
-      piercing:
-        raw: 0
       powerSources:
         - magical
       range:
