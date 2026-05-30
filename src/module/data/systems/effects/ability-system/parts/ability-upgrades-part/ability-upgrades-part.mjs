@@ -150,6 +150,6 @@ export default Base => {
 function attributeLink(attribute) {
   if (!TERIOCK.config.attribute[attribute]) { return ""; }
   const identifier = TERIOCK.config.attribute[attribute].identifier;
-  const label = TERIOCK.config.attribute[attribute].label;
+  const label = TERIOCK.config.attribute[attribute].abbreviation;
   return `@Identifier[${identifier}]{${label}}`;
 }

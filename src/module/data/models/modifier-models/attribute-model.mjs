@@ -13,7 +13,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   get name() {
-    return TERIOCK.config.attribute[this.key].name;
+    return TERIOCK.config.attribute[this.key].label;
   }
 
   /** @inheritDoc */
@@ -23,8 +23,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async _use(options) {
-    options = { actor: this.actor, attribute: this.key, ...options };
-    await new FeatExecution(options).execute();
+    await new FeatExecution({ actor: this.actor, attribute: this.key, ...options }).execute();
   }
 
   /** @inheritDoc */

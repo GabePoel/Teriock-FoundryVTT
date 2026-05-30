@@ -55,8 +55,8 @@ const reference = {
 export default reference;
 
 preLocalize("reference.abilities", { prefix: "TERIOCK.TERMS.Abilities.", transform: "cc" });
-preLocalize("reference.attributes", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".label", transform: "lc" });
-preLocalize("reference.attributesFull", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".name", transform: "lc" });
+preLocalize("reference.attributes", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".abbreviation", transform: "lc" });
+preLocalize("reference.attributesFull", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".label", transform: "lc" });
 preLocalize("reference.bodyParts", { prefix: "TERIOCK.TERMS.BodyParts.", transform: "cc" });
 preLocalize("reference.classes", { prefix: "TERIOCK.TERMS.Classes.", transform: "cc" });
 preLocalize("reference.conditions", { prefix: "TERIOCK.STATUSES.Conditions.", transform: "cc" });
@@ -70,7 +70,11 @@ preLocalize("reference.equipment", { prefix: "TERIOCK.TERMS.Equipment.", transfo
 preLocalize("reference.equipmentClasses", { prefix: "TERIOCK.TERMS.EquipmentClasses.", transform: "cc" });
 preLocalize("reference.powerSources", { prefix: "TERIOCK.TERMS.PowerSources.", transform: "cc" });
 preLocalize("reference.properties", { prefix: "TERIOCK.TERMS.Properties.", transform: "cc" });
-preLocalize("reference.statAttributes", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".label", transform: "lc" });
+preLocalize("reference.statAttributes", {
+  prefix: "TERIOCK.TERMS.Attributes.",
+  suffix: ".abbreviation",
+  transform: "lc",
+});
 preLocalize("reference.traits", { prefix: "TERIOCK.TERMS.Traits.", transform: "cc" });
 preLocalize("reference.tradecrafts", { prefix: "TERIOCK.TERMS.Tradecrafts.", transform: "cc" });
 preLocalize("reference.traits", { prefix: "TERIOCK.TERMS.Traits.", transform: "cc" });

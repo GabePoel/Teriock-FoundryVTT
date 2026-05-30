@@ -3,41 +3,41 @@ import { icons } from "../display/icons.mjs";
 
 export const attributeConfig = {
   int: {
+    abbreviation: "TERIOCK.TERMS.Attributes.int.abbreviation",
     icon: icons.attribute.int,
     identifier: "core:intelligence",
     label: "TERIOCK.TERMS.Attributes.int.label",
-    name: "TERIOCK.TERMS.Attributes.int.name",
   },
   mov: {
+    abbreviation: "TERIOCK.TERMS.Attributes.mov.abbreviation",
     icon: icons.attribute.mov,
     identifier: "core:movement",
     label: "TERIOCK.TERMS.Attributes.mov.label",
-    name: "TERIOCK.TERMS.Attributes.mov.name",
   },
   per: {
+    abbreviation: "TERIOCK.TERMS.Attributes.per.abbreviation",
     icon: icons.attribute.per,
     identifier: "core:perception",
     label: "TERIOCK.TERMS.Attributes.per.label",
-    name: "TERIOCK.TERMS.Attributes.per.name",
   },
   snk: {
+    abbreviation: "TERIOCK.TERMS.Attributes.snk.abbreviation",
     icon: icons.attribute.snk,
     identifier: "core:sneak",
     label: "TERIOCK.TERMS.Attributes.snk.label",
-    name: "TERIOCK.TERMS.Attributes.snk.name",
   },
   str: {
+    abbreviation: "TERIOCK.TERMS.Attributes.str.abbreviation",
     icon: icons.attribute.str,
     identifier: "core:strength",
     label: "TERIOCK.TERMS.Attributes.str.label",
-    name: "TERIOCK.TERMS.Attributes.str.name",
   },
   unp: {
+    abbreviation: "TERIOCK.TERMS.Attributes.unp.abbreviation",
     icon: icons.attribute.unp,
     identifier: "core:presence",
     label: "TERIOCK.TERMS.Attributes.unp.label",
-    name: "TERIOCK.TERMS.Attributes.unp.name",
   },
 };
 
-preLocalize("config.attribute", { keys: ["label", "name", "passive"], sort: true });
+preLocalize("config.attribute", { keys: ["label", "abbreviation"], sort: true });

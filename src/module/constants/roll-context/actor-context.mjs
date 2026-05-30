@@ -70,7 +70,7 @@ Hooks.once("i18nInit", () => {
     actorContext[k] = _loc(v?.label);
   });
   Object.entries(TERIOCK.config.attribute).forEach(([k, v]) => {
-    const name = _loc(v.label);
+    const name = _loc(v.abbreviation);
     Object.assign(actorContext, {
       [`${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
       [`${k}.pas`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.passive", { name }),

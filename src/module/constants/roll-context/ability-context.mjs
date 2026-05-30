@@ -66,7 +66,7 @@ Hooks.once("i18nInit", () => {
     abilityContext[`expansion.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansion", { name: _loc(v) });
   });
   Object.entries(TERIOCK.config.attribute).forEach(([k, v]) => {
-    const name = _loc(v.label);
+    const name = _loc(v.abbreviation);
     abilityContext[`attr.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.attribute", { name });
     abilityContext[`expansion.attr.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansionAttribute", { name });
   });
