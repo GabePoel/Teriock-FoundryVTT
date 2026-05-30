@@ -239,8 +239,9 @@ items:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: '@status.ethereal'
               changes:
-                - key: system.naturalAv
+                - key: system.defense.av.natural
                   priority: 10
                   target: Actor
                   type: upgrade
@@ -2063,7 +2064,9 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: '@rank.mag - 1'
+                  value: '@rank.mage - 1'
+              competencies:
+                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -2072,19 +2075,18 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1)
+                  value: 2 * (@rank.mage - 1)
               competencies:
                 - 1
-                - 2
               type: changes
             f7da3b5e1992a724:
               _id: f7da3b5e1992a724
               changes:
-                - key: system.{{{key}}}
+                - key: system.rotators.max
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1) + @p
+                  value: 2 * (@rank.mage - 1) + @p
               competencies:
                 - 2
               type: changes
@@ -3508,8 +3510,142 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: 9Rwj4hTDQLPQgc2j
-    _key: '!actors.items!073355c8b877b782.9Rwj4hTDQLPQgc2j'
+  - _id: jc3Ob9Wwmv4nxjbK
+    _key: '!actors.items!073355c8b877b782.jc3Ob9Wwmv4nxjbK'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.72
+    effects:
+      - _id: NGCuRUaVtXnxAbRe
+        _key: >-
+          !actors.items.effects!073355c8b877b782.jc3Ob9Wwmv4nxjbK.NGCuRUaVtXnxAbRe
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.72
+        img: systems/teriock/src/icons/abilities/arcane-ray.webp
+        name: Arcane Ray
+        system:
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d4[magic]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: arcane-ray
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
+              target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: aCWLNsvSFjEuLTyl
+        _key: >-
+          !actors.items.effects!073355c8b877b782.jc3Ob9Wwmv4nxjbK.aCWLNsvSFjEuLTyl
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.72
+        img: systems/teriock/src/icons/abilities/staff-touch.webp
+        name: Staff Touch
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: staff-touch
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You may use your @Identifier[property:magelore]{magelore} items
+              as though they were your @Identifier[body:hand]{hand}. This makes
+              them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not
+              @Identifier[core:proficiency-bonus]{proficient} nor
+              @Identifier[core:fluency-bonus]{fluent} with
+              @Pack[teriock.abilities]{abilities} you use through your
+              @Identifier[property:magelore]{magelore} items.</p>
+            fluent: >-
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
+              @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
+            proficient: >-
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
+              an @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 4a095aaed0254ec3
+    img: systems/teriock/src/icons/archetypes/mage.webp
+    name: Mage
+    system:
+      competence:
+        raw: 1
+      description: >-
+        <p>Mages wield powerful @L[Magically powered spells]{magical spells} and
+        each class has a different approach, but are generally all quite
+        vulnerable in direct @L[Core:Combat]{combat}. Thus most mages prefer to
+        hang back and cast at their enemies from afar or use their magic to
+        control the flow of a battle while avoiding messy melees.</p>
+      identifier: mage
+    type: archetype
+  - _id: mLnzPWpLO3ZCGCUS
+    _key: '!actors.items!073355c8b877b782.mLnzPWpLO3ZCGCUS'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '14'
@@ -3519,7 +3655,7 @@ items:
     effects:
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!073355c8b877b782.9Rwj4hTDQLPQgc2j.8e9roKoeCSmTjbbo
+          !actors.items.effects!073355c8b877b782.mLnzPWpLO3ZCGCUS.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
           coreVersion: '14'
@@ -3560,7 +3696,7 @@ items:
         type: ability
       - _id: aOvOlScH5bn7jX7m
         _key: >-
-          !actors.items.effects!073355c8b877b782.9Rwj4hTDQLPQgc2j.aOvOlScH5bn7jX7m
+          !actors.items.effects!073355c8b877b782.mLnzPWpLO3ZCGCUS.aOvOlScH5bn7jX7m
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
           coreVersion: '14'
@@ -3649,140 +3785,6 @@ items:
         strength, they achieve different goals in battle in order to win their
         objective.</p>
       identifier: warrior
-    type: archetype
-  - _id: KdOfR5UqPr9LUGXS
-    _key: '!actors.items!073355c8b877b782.KdOfR5UqPr9LUGXS'
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.72
-    effects:
-      - _id: NGCuRUaVtXnxAbRe
-        _key: >-
-          !actors.items.effects!073355c8b877b782.KdOfR5UqPr9LUGXS.NGCuRUaVtXnxAbRe
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.72
-        img: systems/teriock/src/icons/abilities/arcane-ray.webp
-        name: Arcane Ray
-        system:
-          automations:
-            800c70e6560525a8:
-              _id: 800c70e6560525a8
-              formula: (1 + @h)d4[magic]
-              impact: damage
-              type: roll
-          competence:
-            raw: 0
-          delivery: missile
-          duration:
-            unit: instant
-          effectTypes:
-            - damaging
-          executionTime:
-            base: a1
-          form: normal
-          heightened: >-
-            <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
-            additional [[/damage 1d4[magic]]]
-            @Identifier[core:damage]{damage}.</p>
-          identifier: arcane-ray
-          interaction: attack
-          maneuver: active
-          piercing:
-            raw: 1
-          powerSources:
-            - magical
-          range:
-            raw: '60'
-            unit: ft
-          results:
-            critHit: >-
-              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
-              @Pack[teriock.abilities]{ability}.</p>
-            hit: >-
-              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
-              target.</p>
-          spell: true
-          standard: true
-          targets:
-            - creature
-        transfer: true
-        type: ability
-      - _id: aCWLNsvSFjEuLTyl
-        _key: >-
-          !actors.items.effects!073355c8b877b782.KdOfR5UqPr9LUGXS.aCWLNsvSFjEuLTyl
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.72
-        img: systems/teriock/src/icons/abilities/staff-touch.webp
-        name: Staff Touch
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          form: normal
-          identifier: staff-touch
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>You may use your @Identifier[property:magelore]{magelore} items
-              as though they were your @Identifier[body:hand]{hand}. This makes
-              them @Identifier[property:handy]{handy} and
-              @Identifier[property:prehensile]{prehensile}. You are not
-              @Identifier[core:proficiency-bonus]{proficient} nor
-              @Identifier[core:fluency-bonus]{fluent} with
-              @Pack[teriock.abilities]{abilities} you use through your
-              @Identifier[property:magelore]{magelore} items.</p>
-            fluent: >-
-              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
-              @Pack[teriock.abilities]{ability} you use through your
-              @Identifier[property:magelore]{magelore} items, you regain the
-              @Identifier[core:fluency-bonus]{fluency bonus} for that
-              @Pack[teriock.abilities]{ability}.</p>
-            proficient: >-
-              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
-              an @Pack[teriock.abilities]{ability} you use through your
-              @Identifier[property:magelore]{magelore} items, you regain the
-              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
-              @Pack[teriock.abilities]{ability}.</p>
-          powerSources:
-            - magical
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-    folder: 4a095aaed0254ec3
-    img: systems/teriock/src/icons/archetypes/mage.webp
-    name: Mage
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Mages wield powerful @L[Magically powered spells]{magical spells} and
-        each class has a different approach, but are generally all quite
-        vulnerable in direct @L[Core:Combat]{combat}. Thus most mages prefer to
-        hang back and cast at their enemies from afar or use their magic to
-        control the flow of a battle while avoiding messy melees.</p>
-      identifier: mage
     type: archetype
 name: White Mist Wraith
 prototypeToken:

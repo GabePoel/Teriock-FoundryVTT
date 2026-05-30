@@ -232,18 +232,22 @@ function sortAutomations(automations) {
 
   const sortableArray = Object.entries(automations).map(([key, a]) => {
     a.competencies ??= [0, 1, 2];
+    a.competencies.sort();
     a.heighten ??= [0, 1];
+    a.heighten.sort();
+    a.crit ??= [0, 1];
+    a.crit.sort();
 
     const comps = a.competencies || [];
-    const compStr = `${+comps.includes(0)}${+comps.includes(1)}${+comps.includes(2)}`;
+    const compStr = `${Number(comps.includes(0))}${Number(comps.includes(1))}${Number(comps.includes(2))}`;
     const compSort = STRING_MAP[compStr] || "0";
 
     const h = a.heighten || [];
-    const hStr = `${+h.includes(0)}${+h.includes(1)}`;
+    const hStr = `${Number(h.includes(0))}${Number(h.includes(1))}`;
     const hSort = PAIR_STRING_MAP[hStr] || "0";
 
     const c = a.crit || [];
-    const cStr = `${+c.includes(0)}${+c.includes(1)}`;
+    const cStr = `${Number(c.includes(0))}${Number(c.includes(1))}`;
     const cSort = PAIR_STRING_MAP[cStr] || "0";
 
     return { data: a, key, sortKey: a.type + compSort + hSort + cSort };

@@ -1133,6 +1133,7 @@ items:
         img: systems/teriock/src/icons/properties/entangling.webp
         name: Entangling
         system:
+          applyIfDampened: true
           competence:
             raw: 0
           damageType: vine
@@ -1284,7 +1285,9 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: '@rank.mag - 1'
+                  value: '@rank.mage - 1'
+              competencies:
+                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -1293,19 +1296,18 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1)
+                  value: 2 * (@rank.mage - 1)
               competencies:
                 - 1
-                - 2
               type: changes
             f7da3b5e1992a724:
               _id: f7da3b5e1992a724
               changes:
-                - key: system.{{{key}}}
+                - key: system.rotators.max
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1) + @p
+                  value: 2 * (@rank.mage - 1) + @p
               competencies:
                 - 2
               type: changes
@@ -3312,8 +3314,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: PMMB1qfQIG2VZfIZ
-    _key: '!actors.items!eaec74360ee70abd.PMMB1qfQIG2VZfIZ'
+  - _id: IumWgTdA4u2TTYsn
+    _key: '!actors.items!eaec74360ee70abd.IumWgTdA4u2TTYsn'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -3323,7 +3325,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!eaec74360ee70abd.PMMB1qfQIG2VZfIZ.NGCuRUaVtXnxAbRe
+          !actors.items.effects!eaec74360ee70abd.IumWgTdA4u2TTYsn.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -3379,7 +3381,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!eaec74360ee70abd.PMMB1qfQIG2VZfIZ.aCWLNsvSFjEuLTyl
+          !actors.items.effects!eaec74360ee70abd.IumWgTdA4u2TTYsn.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

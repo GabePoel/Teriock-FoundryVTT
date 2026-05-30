@@ -104,4 +104,7 @@ Hooks.once("i18nInit", () => {
       [`speed.${k}`]: _loc("TERIOCK.ROLL_CONTEXT.Actor.speedAdjustment", { type: _loc(v.label) }),
     });
   });
+  Object.entries(TERIOCK.data.conditions).forEach(([k, v]) => {
+    Object.assign(actorContext, { [`status.${k}`]: _loc(v.name) });
+  });
 });

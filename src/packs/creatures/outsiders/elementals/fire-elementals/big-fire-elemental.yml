@@ -702,7 +702,9 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: '@rank.mag - 1'
+                  value: '@rank.mage - 1'
+              competencies:
+                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -711,19 +713,18 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1)
+                  value: 2 * (@rank.mage - 1)
               competencies:
                 - 1
-                - 2
               type: changes
             f7da3b5e1992a724:
               _id: f7da3b5e1992a724
               changes:
-                - key: system.{{{key}}}
+                - key: system.rotators.max
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1) + @p
+                  value: 2 * (@rank.mage - 1) + @p
               competencies:
                 - 2
               type: changes
@@ -1949,6 +1950,8 @@ items:
         img: systems/teriock/src/icons/properties/burning.webp
         name: Burning
         system:
+          applyIfDampened: true
+          applyIfDeattuned: true
           competence:
             raw: 0
           description: >-
@@ -2867,8 +2870,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: 76PKVfhGtW33CJzE
-    _key: '!actors.items!881d728bfc39fe1a.76PKVfhGtW33CJzE'
+  - _id: Y1LhcD89ZMCwH3PT
+    _key: '!actors.items!881d728bfc39fe1a.Y1LhcD89ZMCwH3PT'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -2878,7 +2881,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!881d728bfc39fe1a.76PKVfhGtW33CJzE.NGCuRUaVtXnxAbRe
+          !actors.items.effects!881d728bfc39fe1a.Y1LhcD89ZMCwH3PT.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -2934,7 +2937,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!881d728bfc39fe1a.76PKVfhGtW33CJzE.aCWLNsvSFjEuLTyl
+          !actors.items.effects!881d728bfc39fe1a.Y1LhcD89ZMCwH3PT.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

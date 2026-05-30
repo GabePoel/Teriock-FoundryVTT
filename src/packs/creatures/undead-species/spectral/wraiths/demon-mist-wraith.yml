@@ -336,8 +336,9 @@ items:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: '@status.ethereal'
               changes:
-                - key: system.naturalAv
+                - key: system.defense.av.natural
                   priority: 10
                   target: Actor
                   type: upgrade
@@ -1429,7 +1430,9 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: '@rank.mag - 1'
+                  value: '@rank.mage - 1'
+              competencies:
+                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -1438,19 +1441,18 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1)
+                  value: 2 * (@rank.mage - 1)
               competencies:
                 - 1
-                - 2
               type: changes
             f7da3b5e1992a724:
               _id: f7da3b5e1992a724
               changes:
-                - key: system.{{{key}}}
+                - key: system.rotators.max
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1) + @p
+                  value: 2 * (@rank.mage - 1) + @p
               competencies:
                 - 2
               type: changes
@@ -4129,7 +4131,9 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: '@rank.mag - 1'
+                  value: '@rank.mage - 1'
+              competencies:
+                - 0
               type: changes
             f025905e157ac261:
               _id: f025905e157ac261
@@ -4138,19 +4142,18 @@ items:
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1)
+                  value: 2 * (@rank.mage - 1)
               competencies:
                 - 1
-                - 2
               type: changes
             f7da3b5e1992a724:
               _id: f7da3b5e1992a724
               changes:
-                - key: system.{{{key}}}
+                - key: system.rotators.max
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: 2 * (@rank.mag - 1) + @p
+                  value: 2 * (@rank.mage - 1) + @p
               competencies:
                 - 2
               type: changes
@@ -5716,15 +5719,15 @@ items:
         name: Throwing Training
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: system.equipmentChanges.upgrades.properties.thrown.av0
-                  priority: 10
-                  target: Actor
-                  type: upgrade
-                  value: 'true'
-              type: changes
+            TmSIHG2yJMoWRmZG:
+              _id: TmSIHG2yJMoWRmZG
+              changeType: upgrade
+              key: system.piercing.raw
+              priority: 10
+              qualifier: '@prop.thrown'
+              target: armament
+              type: childChange
+              value: '1'
           competence:
             raw: 0
           delivery: self
@@ -5740,7 +5743,7 @@ items:
             base: >-
               <p>All @Wiki[Category:Thrown equipment]{thrown}
               @Wiki[Category:Weapons]{weapons} are
-              @Identifier[property:av0]{AV0} for you.</p>
+              @Identifier[property:armor-voiding]{AV0} for you.</p>
             fluent: >-
               <p>Instead, the range of all @Wiki[Category:Thrown
               equipment]{thrown} @Wiki[Category:Weapons]{weapons} you use is
@@ -7220,8 +7223,71 @@ items:
           disabled: false
           formula: 1d10
     type: rank
-  - _id: eBgrjPFVzD12wn3Z
-    _key: '!actors.items!fdec3f206b747460.eBgrjPFVzD12wn3Z'
+  - _id: xpRZkl8T92oRiqKt
+    _key: '!actors.items!fdec3f206b747460.xpRZkl8T92oRiqKt'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.72
+    effects:
+      - _id: 4XNvcPLM4s2CAFYb
+        _key: >-
+          !actors.items.effects!fdec3f206b747460.xpRZkl8T92oRiqKt.4XNvcPLM4s2CAFYb
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.72
+        img: systems/teriock/src/icons/abilities/semi-techniques.webp
+        name: Semi Techniques
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: semi-techniques
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>For every 2 ranks you train in @Wiki[Category:Semi
+              classes]{semi classes}, you gain a @Wiki[Category:Semi guildmaster
+              abilities]{semi guildmaster ability} of your choice.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 57a3f724d5743aa3
+    img: systems/teriock/src/icons/archetypes/semi.webp
+    name: Semi
+    system:
+      competence:
+        raw: 1
+      description: >-
+        <p>Semis are classes that fill tactical or support roles in
+        @L[Core:Combat]{combat}. Some are very skilled in close combat and have
+        a variety of @L[Category:Semi archetype skills]{skills} to achieve their
+        aim, and others are more suited to fighting at range. All are classes
+        that combine well with either @L[Category:Warrior classes]{warriors} or
+        @L[Category:Mage classes]{Mages}, making semis the most versatile class
+        archetype.</p>
+      identifier: semi
+    type: archetype
+  - _id: e4tiWwI2Oqa3GGF8
+    _key: '!actors.items!fdec3f206b747460.e4tiWwI2Oqa3GGF8'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -7231,7 +7297,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!fdec3f206b747460.eBgrjPFVzD12wn3Z.NGCuRUaVtXnxAbRe
+          !actors.items.effects!fdec3f206b747460.e4tiWwI2Oqa3GGF8.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -7287,7 +7353,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!fdec3f206b747460.eBgrjPFVzD12wn3Z.aCWLNsvSFjEuLTyl
+          !actors.items.effects!fdec3f206b747460.e4tiWwI2Oqa3GGF8.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
@@ -7354,8 +7420,8 @@ items:
         control the flow of a battle while avoiding messy melees.</p>
       identifier: mage
     type: archetype
-  - _id: gAppAHwuSr8TwDS4
-    _key: '!actors.items!fdec3f206b747460.gAppAHwuSr8TwDS4'
+  - _id: vCUIINTWI6mRt7EK
+    _key: '!actors.items!fdec3f206b747460.vCUIINTWI6mRt7EK'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '14'
@@ -7365,7 +7431,7 @@ items:
     effects:
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!fdec3f206b747460.gAppAHwuSr8TwDS4.8e9roKoeCSmTjbbo
+          !actors.items.effects!fdec3f206b747460.vCUIINTWI6mRt7EK.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
           coreVersion: '14'
@@ -7406,7 +7472,7 @@ items:
         type: ability
       - _id: aOvOlScH5bn7jX7m
         _key: >-
-          !actors.items.effects!fdec3f206b747460.gAppAHwuSr8TwDS4.aOvOlScH5bn7jX7m
+          !actors.items.effects!fdec3f206b747460.vCUIINTWI6mRt7EK.aOvOlScH5bn7jX7m
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
           coreVersion: '14'
@@ -7495,69 +7561,6 @@ items:
         strength, they achieve different goals in battle in order to win their
         objective.</p>
       identifier: warrior
-    type: archetype
-  - _id: y4uAISww4BCdNDid
-    _key: '!actors.items!fdec3f206b747460.y4uAISww4BCdNDid'
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.72
-    effects:
-      - _id: 4XNvcPLM4s2CAFYb
-        _key: >-
-          !actors.items.effects!fdec3f206b747460.y4uAISww4BCdNDid.4XNvcPLM4s2CAFYb
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.72
-        img: systems/teriock/src/icons/abilities/semi-techniques.webp
-        name: Semi Techniques
-        system:
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          form: normal
-          identifier: semi-techniques
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>For every 2 ranks you train in @Wiki[Category:Semi
-              classes]{semi classes}, you gain a @Wiki[Category:Semi guildmaster
-              abilities]{semi guildmaster ability} of your choice.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-    folder: 57a3f724d5743aa3
-    img: systems/teriock/src/icons/archetypes/semi.webp
-    name: Semi
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Semis are classes that fill tactical or support roles in
-        @L[Core:Combat]{combat}. Some are very skilled in close combat and have
-        a variety of @L[Category:Semi archetype skills]{skills} to achieve their
-        aim, and others are more suited to fighting at range. All are classes
-        that combine well with either @L[Category:Warrior classes]{warriors} or
-        @L[Category:Mage classes]{Mages}, making semis the most versatile class
-        archetype.</p>
-      identifier: semi
     type: archetype
 name: Demon Mist Wraith
 prototypeToken:
