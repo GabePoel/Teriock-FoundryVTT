@@ -1,3 +1,5 @@
+import { toKebabCase } from "../../src/module/helpers/string.mjs";
+
 /**
  * Clean excess terms from a document.
  * @param {AnyCommonDocument} doc
@@ -223,7 +225,7 @@ function cleanEquipment(doc) {
 function cleanRank(doc) {
   // Migrate legacy field names.
   if (doc.system.className) {
-    doc.system.class = doc.system.className;
+    doc.system.class = toKebabCase(doc.system.className);
     delete doc.system.className;
   }
   if (doc.system.classRank) {
