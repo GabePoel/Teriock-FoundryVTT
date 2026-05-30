@@ -1,14 +1,8 @@
 @use "../mixins";
 
-.doc-list-container {
-  --fade: 6px;
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0,
-    #000000 var(--fade),
-    #000000 calc(100% - var(--fade)),
-    transparent 100%
-  );
+.doc-list-outer-container {
+  --fade: 10px;
+  display: block;
   mask-image: linear-gradient(
     to bottom,
     transparent 0,
@@ -17,8 +11,12 @@
     transparent 100%
   );
   overflow: auto;
-  padding-block: var(--fade);
-  padding-inline: 6px;
+
+  .doc-list-container {
+    overflow: auto;
+    padding-block: var(--fade);
+    padding-inline: 6px;
+  }
 }
 
 .doc-select {
@@ -27,12 +25,16 @@
 
   .doc-select-row {
     align-items: center;
-    background-color: var(--color-block-display-background) !important;
+    background-color: var(--color-block-display-background);
     cursor: pointer !important;
     display: flex;
     flex-direction: row;
     gap: 11px;
     height: 14px;
+
+    * {
+      pointer-events: none;
+    }
 
     .doc-checkbox-container {
       @include mixins.centralize;

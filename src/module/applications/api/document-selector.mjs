@@ -49,7 +49,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     let ids = [];
     if (this.multi) { ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map(el => el.name); }
     else {
-      const radio = root.querySelector("input[name=\"choice\"]:checked");
+      const radio = root.querySelector(`input[name="choice-${this.id}"]:checked`);
       if (radio) { ids = [radio.value]; }
     }
     this._finish(ids);
@@ -96,9 +96,7 @@ export default class TeriockDocumentSelector extends TeriockBaseApplication {
     if (!this.openable) { return; }
     const list = this.element.querySelector(".doc-list-container");
     if (!list) { return; }
-    this._boundDblClickOpen ??= this._onDblClickOpen.bind(this);
-    list.removeEventListener("dblclick", this._boundDblClickOpen);
-    list.addEventListener("dblclick", this._boundDblClickOpen);
+    list.addEventListener("dblclick", this._onDblClickOpen.bind(this));
   }
 
   /**
