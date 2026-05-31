@@ -18,10 +18,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
     return {
       flaws: new fields.HTMLField({ gmOnly: true, initial: "", required: false }),
       identified: new fields.BooleanField({ initial: true }),
-      name: new fields.StringField({ initial: "" }),
+      name: new fields.StringField({ gmOnly: true, initial: "" }),
       notes: new fields.HTMLField({ gmOnly: true, initial: "", required: false }),
       powerLevel: new fields.StringField({
         choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
+        gmOnly: true,
         initial: "mundane",
       }),
       read: new fields.BooleanField({ initial: true }),

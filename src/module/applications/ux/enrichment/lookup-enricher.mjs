@@ -24,6 +24,7 @@ const lookupEnricher = {
     // We don't have any special handling for roll data. But since lots of other systems do, we accomodate "@" prefixes.
     if (lookupKey.startsWith("@")) { lookupKey = lookupKey.slice(1); }
     let textContent = "";
+    let fetched = false;
 
     const doc = options?.relativeTo;
 
@@ -32,31 +33,42 @@ const lookupEnricher = {
     const sort = Boolean(inputs.config.sort ?? true);
     const type = ["disjunction", "unit"].includes(inputs.config.list) ? inputs.config.list : "conjunction";
 
-    if (doc) {
+    if (doc && !fetched) {
       const raw = foundry.utils.getProperty(options?.relativeTo, lookupKey);
       const field = doc.getFieldForProperty(lookupKey);
       // If there's a data field that defines the property, we try to format our output from the field's choices.
       if (field) {
+        if (field.gmOnly) {
+          // Exclude any fields that only the GM is allowed to edit
+          fetched = true;
+        }
+        if (field instanceof fields.HTMLField) {
+          // Exclude any `HTMLField` so we don't have recursive lookups
+          fetched = true;
+        }
         if (field instanceof fields.BooleanField && field.label) {
           // Just display the label or its inversion for a `BooleanField`
           if (raw) { textContent = _loc(field.label); }
           else { textContent = _loc("TERIOCK.FORMAT.invert", { value: _loc(field.label) }); }
         }
-        if (field?.choices) {
+        if (!fetched && field?.choices) {
           // Handling for single-value fields like `NumberField` and `StringField`
           const config = { choices: field?.choices, value: raw };
           fields.StringField._prepareChoiceConfig(config);
           textContent = getOptionLabel(config, config.value);
-        } else if (["Array", "Set"].includes(foundry.utils.getType(raw)) && field?.element?.choices) {
+          fetched = true;
+        } else if (!fetched && ["Array", "Set"].includes(foundry.utils.getType(raw)) && field?.element?.choices) {
           // Handling for multi-value fields like `SetField` and `ArrayField` as long as their element is single-valued
           const config = { choices: field.element.choices, value: raw };
           fields.StringField._prepareChoiceConfig(config);
           const values = config.value.map((v) => getOptionLabel(config, v));
           textContent = listFormat(values, { sort, type });
+          fetched = true;
         }
       }
-      if (!textContent && ["boolean", "number", "string"].includes(typeof raw)) { textContent = raw.toString(); }
-      if (name && validateTypedIdentifier(raw, { strict: true })) { textContent = getName(raw); }
+      if (!fetched && !textContent && ["boolean", "number", "string"].includes(typeof raw)) {textContent = raw
+          .toString();}
+      if (!fetched && name && validateTypedIdentifier(raw, { strict: true })) { textContent = getName(raw); }
       const style = inputs.config.style;
       if (style) {
         switch (style) {
