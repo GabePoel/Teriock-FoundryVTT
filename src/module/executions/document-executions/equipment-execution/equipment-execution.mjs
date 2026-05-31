@@ -28,7 +28,7 @@ export default class EquipmentExecution extends ArmamentExecution {
           title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
         }],
         icon: TERIOCK.config.document.equipment.icon,
-        image: getImage("equipment", this.source.system.equipmentType),
+        image: getImage("equipment", this.source.system._source.equipmentType),
         name: _loc("TERIOCK.SYSTEMS.Equipment.PANELS.unknown", { type: getName(this.source.system.equipmentType) }),
       };
     }
