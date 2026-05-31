@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import { CompetenceAutomationMixin, DisplayAutomationMixin, OverrideDataAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,7 +12,12 @@ const { fields } = foundry.data;
  * @mixes OverrideDataAutomation
  */
 export default class ModifyEffectAutomation
-  extends mixClasses(CritAutomation, DisplayAutomationMixin, OverrideDataAutomationMixin, CompetenceAutomationMixin)
+  extends mixClasses(
+    CritAutomation,
+    automationMixins.DisplayAutomationMixin,
+    automationMixins.OverrideDataAutomationMixin,
+    automationMixins.CompetenceAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ModifyEffect"];

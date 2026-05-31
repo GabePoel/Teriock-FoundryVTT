@@ -4,12 +4,7 @@ import { localizeChoices } from "../../../helpers/localization.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { RegionActivation } from "../activations/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import {
-  DisplayAutomationMixin,
-  OverrideDataAutomationMixin,
-  SelectDocumentsAutomationMixin,
-  TriggerAutomationMixin,
-} from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -37,10 +32,10 @@ const { fields } = foundry.data;
 export default class RegionAutomation
   extends mixClasses(
     CritAutomation,
-    SelectDocumentsAutomationMixin,
-    TriggerAutomationMixin,
-    OverrideDataAutomationMixin,
-    DisplayAutomationMixin,
+    automationMixins.SelectDocumentsAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+    automationMixins.OverrideDataAutomationMixin,
+    automationMixins.DisplayAutomationMixin,
   )
 {
   /**

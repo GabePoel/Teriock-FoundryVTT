@@ -6,8 +6,8 @@ import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { EvaluationField, FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/helpers/initializers.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
-import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
-import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from "../../mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;
@@ -27,7 +27,13 @@ export default function ChildSystemMixin(Base) {
      * @mixin
      */
     class ChildSystem
-      extends mixClasses(Base, CommonSystemMixin, AutomatableSystemMixin, UsableDataMixin, HierarchySystemMixin)
+      extends mixClasses(
+        Base,
+        systemMixins.CommonSystemMixin,
+        systemMixins.AutomatableSystemMixin,
+        dataMixins.UsableDataMixin,
+        systemMixins.HierarchySystemMixin,
+      )
     {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");

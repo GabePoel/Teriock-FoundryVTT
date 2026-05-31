@@ -1,11 +1,11 @@
 import { CritAutomation } from "./abstract/_module.mjs";
-import { MacroAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {CritAutomation}
  * @mixes MacroAutomation
  */
-export default class AbilityMacroAutomation extends MacroAutomationMixin(CritAutomation) {
+export default class AbilityMacroAutomation extends automationMixins.MacroAutomationMixin(CritAutomation) {
   /** @inheritDoc */
   static get TYPE() {
     return "abilityMacro";

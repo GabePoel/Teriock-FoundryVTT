@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { automationTransformationFields } from "../../fields/helpers/transformation-fields.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import { CompetenceAutomationMixin, SelectExternalDocumentsAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {CritAutomation}
@@ -10,7 +10,11 @@ import { CompetenceAutomationMixin, SelectExternalDocumentsAutomationMixin } fro
  * @mixes CompetenceAutomation
  */
 export default class TransformationAutomation
-  extends mixClasses(CritAutomation, SelectExternalDocumentsAutomationMixin, CompetenceAutomationMixin)
+  extends mixClasses(
+    CritAutomation,
+    automationMixins.SelectExternalDocumentsAutomationMixin,
+    automationMixins.CompetenceAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static get LABEL() {

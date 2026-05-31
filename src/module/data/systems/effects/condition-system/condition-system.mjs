@@ -1,9 +1,8 @@
-import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
-import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -16,11 +15,18 @@ const { fields } = foundry.data;
  *
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ConditionSystemData}
+ * @mixes CombatExpirableSystem
  * @mixes TransformationSystem
  * @mixes WikiSystem
  */
 export default class ConditionSystem
-  extends mixClasses(BaseEffectSystem, mixins.WikiSystemMixin, mixins.TransformationSystemMixin, ThresholdDataMixin)
+  extends mixClasses(
+    BaseEffectSystem,
+    systemMixins.CombatExpirableSystemMixin,
+    systemMixins.WikiSystemMixin,
+    systemMixins.TransformationSystemMixin,
+    dataMixins.ThresholdDataMixin,
+  )
 {
   /** @inheritDoc */
   static get metadata() {
@@ -109,15 +115,6 @@ export default class ConditionSystem
       onClick: this.use.bind(this),
       visible: this.parent.isOwner,
     }];
-  }
-
-  /**
-   * Trigger in-combat expiration.
-   * @param {boolean} [forceDialog] - Force a dialog to show up.
-   * @returns {Promise<void>}
-   */
-  async inCombatExpiration(forceDialog = false) {
-    await inCombatExpirationDialog(this.parent, forceDialog);
   }
 
   /** @inheritDoc */

@@ -1,16 +1,15 @@
 /**
  * A mixin that can be used by both documents and data models to propagate shared operations.
- * @param {typeof AnyCommonDocument|typeof CommonSystem} Base
+ * @param {typeof BaseDocument|typeof TypeDataModel} Base
  */
 export default function PropagationDataMixin(Base) {
   return (
     /**
      * @mixin
-     * @param {AnyCommonDocument|CommonSystem} Base
      */
     class PropagationData extends Base {
       /**
-       * Stuff that happens when a trigger is fired.
+       * Stuff that happens when a trigger event is fired.
        * @param {string} trigger
        * @param {Teriock.System.TriggerScope} [scope]
        */
@@ -19,7 +18,7 @@ export default function PropagationDataMixin(Base) {
       }
 
       /**
-       * Stuff that happens before a trigger is fired.
+       * Stuff that happens before a trigger event is fired.
        * @param {string} trigger
        * @param {Teriock.System.TriggerScope} [scope]
        * @returns {Promise<void>}
@@ -58,7 +57,7 @@ export default function PropagationDataMixin(Base) {
       }
 
       /**
-       * Fire a designated trigger.
+       * Fire a designated trigger event.
        * @param {string} trigger
        * @param {Teriock.System.TriggerScope} [scope]
        * @returns {Promise<void>}
@@ -69,7 +68,7 @@ export default function PropagationDataMixin(Base) {
       }
 
       /**
-       * A scope that can be used when executing macros from a fired trigger.
+       * A scope that can be used when executing macros from a fired trigger event.
        * @param {Partial<Teriock.System.TriggerScope>} [scope]
        * @returns {Teriock.System.TriggerScope}
        */

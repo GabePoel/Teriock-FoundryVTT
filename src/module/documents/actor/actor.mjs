@@ -2,7 +2,7 @@ import { config } from "../../constants/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { findBestDocument, fromIdentifier, fromKey } from "../../helpers/utils.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
 
@@ -21,10 +21,10 @@ const { Actor } = foundry.documents;
 export default class TeriockActor
   extends mixClasses(
     Actor,
-    mixins.BaseDocumentMixin,
-    mixins.CommonDocumentMixin,
-    mixins.ParentDocumentMixin,
-    mixins.RetrievalDocumentMixin,
+    documentMixins.BaseDocumentMixin,
+    documentMixins.CommonDocumentMixin,
+    documentMixins.ParentDocumentMixin,
+    documentMixins.RetrievalDocumentMixin,
   )
 {
   /**

@@ -5,7 +5,7 @@ import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -28,12 +28,12 @@ const { fields } = foundry.data;
 export default class PropertySystem
   extends mixClasses(
     CleanedEffectSystem,
-    mixins.AdjustableSystemMixin,
-    mixins.ConsumableSystemMixin,
-    mixins.GrantedSystemMixin,
-    mixins.MetaphysicsSystemMixin,
-    mixins.RevelationSystemMixin,
-    mixins.WikiSystemMixin,
+    systemMixins.AdjustableSystemMixin,
+    systemMixins.ConsumableSystemMixin,
+    systemMixins.GrantedSystemMixin,
+    systemMixins.MetaphysicsSystemMixin,
+    systemMixins.RevelationSystemMixin,
+    systemMixins.WikiSystemMixin,
   )
 {
   /** @inheritDoc */

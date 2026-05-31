@@ -6,56 +6,53 @@ import type {
 
 import type queries from "./_module.mjs";
 
-import { TeriockActiveEffect, TeriockActor, TeriockItem, TeriockUser } from "../../documents/_module.mjs";
+import { ApplicableEffectSystem } from "../../data/systems/effects/_module.mjs";
+import { TeriockActiveEffect, TeriockActor, TeriockUser } from "../../documents/_module.mjs";
 
 declare global {
-  namespace Teriock.QueryData {
+  namespace Teriock.Queries {
     export type QueryName = keyof typeof queries;
 
-    export type QueryOptions = {
+    export type QueryOptions = { timeout: number };
+
+    export type QueryGMOptions = QueryOptions & {
       failMessage?: string;
       failPrefix?: string;
       failReason?: string;
+      fallback?: Teriock.System.Serializable;
       format?: Record<string, string>;
       localize?: boolean;
       notifyFailure?: boolean;
-      timeout: number;
     };
 
-    export type CreateDocuments = {
+    export type CreateDocumentsData = {
       data: object;
       documentName: string;
       operation: Partial<Omit<DatabaseCreateOperation, "data">>;
     };
 
-    export type UpdateDocuments = {
+    export type UpdateDocumentsData = {
       documentName: string;
       operation: Partial<Omit<DatabaseUpdateOperation, "updates">>;
       updates: object[];
     };
 
-    export type DeleteDocuments = {
+    export type DeleteDocumentsData = {
       documentName: string;
       ids: string[];
       operation: Partial<Omit<DatabaseDeleteOperation, "ids">>;
     };
 
-    export type InCombatExpiration = { uuid: UUID<TeriockConsequence> };
+    export type InCombatExpirationData = { uuid: UUID<TeriockActiveEffect & { system: ApplicableEffectSystem }> };
 
-    export type FireTrigger = { options: object, trigger: Teriock.System.Trigger, uuid: UUID<AnyCommonDocument> };
+    export type FireTriggerData = { options: object, trigger: Teriock.System.Trigger, uuid: UUID<AnyCommonDocument> };
 
-    export type IdentifyItem = { uuid: UUID<TeriockEquipment> };
+    export type IdentifyItemData = { uuid: UUID<TeriockEquipment> };
 
-    export type TurnChange = { actorUuids: UUID<TeriockActor>[] };
+    export type TurnChangeData = { actorUuids: UUID<TeriockActor>[] };
 
-    export type CreateHotbarFolder = { id: ID<TeriockUser>, name: string };
+    export type CreateHotbarFolderData = { id: ID<TeriockUser>, name: string };
 
-    export type Update = {
-      data: object;
-      operation?: object;
-      uuid: UUID<TeriockActiveEffect> | UUID<TeriockActor> | UUID<TeriockItem>;
-    };
-
-    export type MassWrite = { operations: object[] };
+    export type MassWriteData = { operations: object[] };
   }
 }

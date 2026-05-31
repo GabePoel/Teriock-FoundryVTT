@@ -1,5 +1,5 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { JournalEntryCategory } = foundry.documents;
 
@@ -10,4 +10,6 @@ const { JournalEntryCategory } = foundry.documents;
  * @extends {JournalEntryCategory}
  * @mixes BaseDocument
  */
-export default class TeriockJournalEntryCategory extends mixClasses(JournalEntryCategory, mixins.BaseDocumentMixin) {}
+export default class TeriockJournalEntryCategory
+  extends mixClasses(JournalEntryCategory, documentMixins.BaseDocumentMixin)
+{}

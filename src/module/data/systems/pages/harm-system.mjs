@@ -3,7 +3,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../helpers/panel.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as systemMixins from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
 
 /**
@@ -12,7 +12,7 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
  * @mixes RulesSystem
  */
 export default class HarmSystem
-  extends mixClasses(BasePageSystem, mixins.AutomatableSystemMixin, mixins.MetaphysicsSystemMixin)
+  extends mixClasses(BasePageSystem, systemMixins.AutomatableSystemMixin, systemMixins.MetaphysicsSystemMixin)
 {
   /** @inheritDoc */
   static get _automationTypes() {

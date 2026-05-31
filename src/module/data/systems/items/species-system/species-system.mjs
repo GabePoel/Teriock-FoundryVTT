@@ -6,7 +6,7 @@ import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, makeIconClass } from "../../../../helpers/utils.mjs";
 import { speciesTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -28,9 +28,9 @@ const { fields } = foundry.data;
 export default class SpeciesSystem
   extends mixClasses(
     BaseItemSystem,
-    mixins.WikiSystemMixin,
-    mixins.StatGiverSystemMixin,
-    mixins.CompetenceDisplaySystemMixin,
+    systemMixins.WikiSystemMixin,
+    systemMixins.StatGiverSystemMixin,
+    systemMixins.CompetenceDisplaySystemMixin,
     parts.SpeciesPanelPart,
   )
 {
@@ -324,8 +324,8 @@ export default class SpeciesSystem
       },
       system: {
         _src: this.parent.uuid,
-        hp: { value: TERIOCK.config.scaling.inf },
-        mp: { value: TERIOCK.config.scaling.inf },
+        hp: { value: TERIOCK.config.system.inf },
+        mp: { value: TERIOCK.config.system.inf },
         size: { number: this.size.value },
       },
       type: "creature",

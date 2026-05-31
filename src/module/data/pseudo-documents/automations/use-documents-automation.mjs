@@ -2,11 +2,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { UseExternalActivation, UseLocalActivation } from "../activations/command-activations.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import {
-  CompetenceAutomationMixin,
-  SelectDocumentsAutomationMixin,
-  TriggerAutomationMixin,
-} from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,7 +15,12 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class UseDocumentsAutomation
-  extends mixClasses(BaseAutomation, SelectDocumentsAutomationMixin, TriggerAutomationMixin, CompetenceAutomationMixin)
+  extends mixClasses(
+    BaseAutomation,
+    automationMixins.SelectDocumentsAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+    automationMixins.CompetenceAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.UseDocuments"];

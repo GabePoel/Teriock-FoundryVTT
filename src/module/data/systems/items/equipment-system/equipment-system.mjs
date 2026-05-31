@@ -5,7 +5,7 @@ import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mj
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -33,10 +33,10 @@ const { fields } = foundry.data;
 export default class EquipmentSystem
   extends mixClasses(
     BaseItemSystem,
-    mixins.ArmamentSystemMixin,
-    mixins.AttunableSystemMixin,
-    mixins.ConsumableSystemMixin,
-    mixins.WikiSystemMixin,
+    systemMixins.ArmamentSystemMixin,
+    systemMixins.AttunableSystemMixin,
+    systemMixins.ConsumableSystemMixin,
+    systemMixins.WikiSystemMixin,
     parts.EquipmentIdentificationPart,
     parts.EquipmentMigrationPart,
     parts.EquipmentPanelPart,

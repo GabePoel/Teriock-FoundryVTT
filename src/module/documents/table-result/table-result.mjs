@@ -8,7 +8,7 @@ import {
 import { migrateUuid, migrateValueTransform } from "../../data/shared/migrations/source-migrations.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
 
@@ -21,7 +21,12 @@ const { TableResult } = foundry.documents;
  * @implements {Teriock.Documents.TableResultInterface}
  */
 export default class TeriockTableResult
-  extends mixClasses(TableResult, mixins.BaseDocumentMixin, mixins.PanelDocumentMixin, mixins.EmbedCardDocumentMixin)
+  extends mixClasses(
+    TableResult,
+    documentMixins.BaseDocumentMixin,
+    documentMixins.PanelDocumentMixin,
+    documentMixins.EmbedCardDocumentMixin,
+  )
 {
   static migrateData(source, options, state) {
     migrateValueTransform(source, "documentUuid", migrateUuid);

@@ -2,8 +2,8 @@ import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
-import { AccessDataMixin, AutomatedDataMixin, PropagationDataMixin } from "../../../shared/mixins/_module.mjs";
-import { RulesSystemMixin } from "../../mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -30,10 +30,10 @@ export default function CommonSystemMixin(Base) {
     class CommonSystem
       extends mixClasses(
         Base,
-        RulesSystemMixin,
-        PropagationDataMixin,
-        AccessDataMixin,
-        AutomatedDataMixin,
+        systemMixins.RulesSystemMixin,
+        dataMixins.PropagationDataMixin,
+        dataMixins.AccessDataMixin,
+        dataMixins.AutomatedDataMixin,
       )
     {
       /** @type {string[]} */

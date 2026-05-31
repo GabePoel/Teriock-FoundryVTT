@@ -1,5 +1,5 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
 
 /**
@@ -8,7 +8,7 @@ import ApplicableEffectSystem from "../applicable-effect-system/applicable-effec
  * @extends {Teriock.Models.ImbuementSystemData}
  * @mixes GrantedSystem
  */
-export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, mixins.GrantedSystemMixin) {
+export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, systemMixins.GrantedSystemMixin) {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, { type: "imbuement" });

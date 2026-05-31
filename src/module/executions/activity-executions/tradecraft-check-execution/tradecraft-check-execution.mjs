@@ -1,12 +1,12 @@
 import BaseExecution from "../../base-execution/base-execution.mjs";
-import { TradecraftExecutionMixin } from "../../mixins/_module.mjs";
+import * as executionMixins from "../../mixins/_module.mjs";
 
 /**
  * @extends {BaseExecution}
  * @mixes TradecraftExecution
  * @property {Teriock.Execution.TradecraftExecutionOptions} options
  */
-export default class TradecraftCheckExecution extends TradecraftExecutionMixin(BaseExecution) {
+export default class TradecraftCheckExecution extends executionMixins.TradecraftExecutionMixin(BaseExecution) {
   /**
    * @param {Teriock.Execution.TradecraftExecutionOptions} options
    */

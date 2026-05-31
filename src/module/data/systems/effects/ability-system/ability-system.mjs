@@ -4,8 +4,8 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as shared from "../../../shared/mixins/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -42,14 +42,14 @@ const { fields } = foundry.data;
 export default class AbilitySystem
   extends mixClasses(
     CleanedEffectSystem,
-    shared.ThresholdDataMixin,
-    mixins.AttackSystemMixin,
-    mixins.ConsumableSystemMixin,
-    mixins.CompetenceDisplaySystemMixin,
-    mixins.MetaphysicsSystemMixin,
-    mixins.RevelationSystemMixin,
-    mixins.WikiSystemMixin,
-    mixins.AdjustableSystemMixin,
+    dataMixins.ThresholdDataMixin,
+    systemMixins.AttackSystemMixin,
+    systemMixins.ConsumableSystemMixin,
+    systemMixins.CompetenceDisplaySystemMixin,
+    systemMixins.MetaphysicsSystemMixin,
+    systemMixins.RevelationSystemMixin,
+    systemMixins.WikiSystemMixin,
+    systemMixins.AdjustableSystemMixin,
     parts.AbilityAutomationsPart,
     parts.AbilityCostsPart,
     parts.AbilityDurationPart,

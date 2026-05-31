@@ -1,4 +1,4 @@
-import { AccessDataMixin } from "../shared/mixins/_module.mjs";
+import * as dataMixins from "../shared/mixins/_module.mjs";
 
 const { DataModel } = foundry.abstract;
 
@@ -7,7 +7,7 @@ const { DataModel } = foundry.abstract;
  * @mixes AccessData
  * @extends {DataModel}
  */
-export default class EmbeddedDataModel extends AccessDataMixin(DataModel) {
+export default class EmbeddedDataModel extends dataMixins.AccessDataMixin(DataModel) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [];
 

@@ -1,7 +1,7 @@
 import { mixClasses } from "../../helpers/construction.mjs";
 import { dedent } from "../../helpers/string.mjs";
 import { findBestDocument } from "../../helpers/utils.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { Macro } = foundry.documents;
 
@@ -14,7 +14,12 @@ const { Macro } = foundry.documents;
  * @mixes EmbedCardDocument
  */
 export default class TeriockMacro
-  extends mixClasses(Macro, mixins.BaseDocumentMixin, mixins.EmbedCardDocumentMixin, mixins.UsableDocumentMixin)
+  extends mixClasses(
+    Macro,
+    documentMixins.BaseDocumentMixin,
+    documentMixins.EmbedCardDocumentMixin,
+    documentMixins.UsableDocumentMixin,
+  )
 {
   /**
    * Hotbar folder for the current user.
@@ -24,7 +29,7 @@ export default class TeriockMacro
     if (!game.teriock.getSetting("sortNewPlayerMacros")) { return null; }
     return game.folders.find(f =>
       f.getFlag("teriock", "user") === game.user.id && f.getFlag("teriock", "hotbarFolder") && f.type === "Macro"
-    );
+    ) ?? null;
   }
 
   /**
@@ -38,6 +43,7 @@ export default class TeriockMacro
     await game.users.queryGM("teriock.createHotbarFolder", { id: game.user.id, name: game.user.name }, {
       failPrefix: "TERIOCK.SYSTEMS.Macro.QUERY.createHotbarFolder.failPrefix",
       localize: true,
+      timeout: TERIOCK.config.system.timeout.writeOperation,
     });
     return this.hotbarFolder;
   }

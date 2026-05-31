@@ -21,7 +21,7 @@ function buildPattern(format) {
 /**
  * Interpret a JSON term.
  * @param {string} term
- * @returns {boolean|number|string|null}
+ * @returns {Teriock.System.Serializable}
  */
 export function interpretTerm(term) {
   let value;

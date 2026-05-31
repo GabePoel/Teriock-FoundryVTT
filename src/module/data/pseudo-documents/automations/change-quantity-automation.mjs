@@ -6,7 +6,7 @@ import { fromIdentifierLocal } from "../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../fields/_module.mjs";
 import { rollableFormulaField } from "../../fields/helpers/builders.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import { ConfirmationDialogAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -19,7 +19,11 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class ChangeQuantityAutomation
-  extends mixClasses(CritAutomation, ConfirmationDialogAutomationMixin, TriggerAutomationMixin)
+  extends mixClasses(
+    CritAutomation,
+    automationMixins.ConfirmationDialogAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeQuantity"];

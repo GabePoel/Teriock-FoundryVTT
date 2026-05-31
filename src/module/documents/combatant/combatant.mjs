@@ -1,6 +1,6 @@
 import { mixClasses } from "../../helpers/construction.mjs";
 import { dotJoin } from "../../helpers/string.mjs";
-import { BaseDocumentMixin, EmbedCardDocumentMixin } from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { Combatant } = foundry.documents;
 
@@ -12,7 +12,9 @@ const { Combatant } = foundry.documents;
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
  */
-export default class TeriockCombatant extends mixClasses(Combatant, BaseDocumentMixin, EmbedCardDocumentMixin) {
+export default class TeriockCombatant
+  extends mixClasses(Combatant, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)
+{
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;

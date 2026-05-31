@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { associationsField } from "../../../fields/helpers/builders.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
 
 /**
@@ -9,7 +9,9 @@ import ApplicableEffectSystem from "../applicable-effect-system/applicable-effec
  * @extends {Teriock.Models.ConsequenceSystemData}
  * @mixes TransformationSystem
  */
-export default class ConsequenceSystem extends mixClasses(ApplicableEffectSystem, mixins.TransformationSystemMixin) {
+export default class ConsequenceSystem
+  extends mixClasses(ApplicableEffectSystem, systemMixins.TransformationSystemMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consequence"];
 

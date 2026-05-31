@@ -1,7 +1,7 @@
 import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 /**
@@ -12,7 +12,7 @@ import CleanedEffectSystem from "../cleaned-effect-system.mjs";
  * @mixes RevelationSystem
  */
 export default class ResourceSystem
-  extends mixClasses(CleanedEffectSystem, mixins.ConsumableSystemMixin, mixins.RevelationSystemMixin)
+  extends mixClasses(CleanedEffectSystem, systemMixins.ConsumableSystemMixin, systemMixins.RevelationSystemMixin)
 {
   /** @inheritDoc */
   static get _automationTypes() {

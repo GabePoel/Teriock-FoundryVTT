@@ -2,7 +2,7 @@ import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { competenceField } from "../../../fields/helpers/builders.mjs";
-import { PropagationDataMixin } from "../../../shared/mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
 
 const { fields } = foundry.data;
@@ -14,7 +14,7 @@ const { fields } = foundry.data;
  * @property {ID<BaseAutomation>} _id
  * @property {Teriock.Automations.Type} type
  */
-export default class BaseAutomation extends PropagationDataMixin(TypedPseudoDocument) {
+export default class BaseAutomation extends dataMixins.PropagationDataMixin(TypedPseudoDocument) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Base"];
 

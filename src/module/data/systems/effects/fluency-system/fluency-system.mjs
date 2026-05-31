@@ -9,8 +9,8 @@ import { IdentifierField } from "../../../fields/_module.mjs";
 import { initialText } from "../../../fields/helpers/initializers.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
-import * as shared from "../../../shared/mixins/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -31,10 +31,10 @@ const { fields } = foundry.data;
 export default class FluencySystem
   extends mixClasses(
     CleanedEffectSystem,
-    mixins.WikiSystemMixin,
-    mixins.RevelationSystemMixin,
-    mixins.CompetenceDisplaySystemMixin,
-    shared.ThresholdDataMixin,
+    systemMixins.WikiSystemMixin,
+    systemMixins.RevelationSystemMixin,
+    systemMixins.CompetenceDisplaySystemMixin,
+    dataMixins.ThresholdDataMixin,
   )
 {
   /** @inheritDoc */

@@ -1,7 +1,7 @@
 import { selectDocumentDialog, selectDocumentsDialog } from "../../applications/dialogs/select-document-dialog.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/utils.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
 
@@ -13,7 +13,9 @@ const { User } = foundry.documents;
  * @implements {Teriock.Documents.UserInterface}
  * @property {Readonly<Set<TeriockToken>>} targets
  */
-export default class TeriockUser extends mixClasses(User, mixins.BaseDocumentMixin, mixins.EmbedCardDocumentMixin) {
+export default class TeriockUser
+  extends mixClasses(User, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)
+{
   /** @inheritDoc */
   get embedParts() {
     const parts = Object.assign(super.embedParts, { img: this.avatar });

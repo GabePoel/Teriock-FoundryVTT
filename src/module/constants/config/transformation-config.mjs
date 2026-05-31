@@ -1,6 +1,6 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 import currencyConfig from "./currency-config.mjs";
-import scalingConfig from "./scaling-config.mjs";
+import systemConfig from "./system-config.mjs";
 
 export default {
   // no sort
@@ -15,9 +15,9 @@ export default {
   },
   reset: {
     gp: { initial: true, update: Object.fromEntries(Object.keys(currencyConfig).map(k => [`system.money.${k}`, 0])) },
-    hp: { initial: true, update: { "system.hp.value": scalingConfig.inf } },
+    hp: { initial: true, update: { "system.hp.value": systemConfig.inf } },
     lp: { initial: false, update: { "system.lp.value": 20 } },
-    mp: { initial: false, update: { "system.mp.value": scalingConfig.inf } },
+    mp: { initial: false, update: { "system.mp.value": systemConfig.inf } },
   },
   suppress: {
     attunement: { initial: false, path: "disabled" },

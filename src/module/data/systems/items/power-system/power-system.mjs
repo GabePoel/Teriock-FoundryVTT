@@ -4,7 +4,7 @@ import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
@@ -15,7 +15,7 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.PowerSystemData}
  * @mixes CompetenceDisplaySystem
  */
-export default class PowerSystem extends mixClasses(BaseItemSystem, mixins.CompetenceDisplaySystemMixin) {
+export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins.CompetenceDisplaySystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Power"];
 

@@ -2,7 +2,7 @@ import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
@@ -13,7 +13,7 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.ArchetypeSystemData}
  * @mixes CompetenceDisplaySystem
  */
-export default class ArchetypeSystem extends mixClasses(BaseItemSystem, mixins.CompetenceDisplaySystemMixin) {
+export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMixins.CompetenceDisplaySystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Archetype"];
 

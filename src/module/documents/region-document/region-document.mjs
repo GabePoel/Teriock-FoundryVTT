@@ -1,5 +1,5 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { RegionDocument } = foundry.documents;
 
@@ -9,4 +9,4 @@ const { RegionDocument } = foundry.documents;
  * @mixes BaseDocument
  * @implements {Teriock.Documents.RegionDocumentInterface}
  */
-export default class TeriockRegionDocument extends mixClasses(RegionDocument, mixins.BaseDocumentMixin) {}
+export default class TeriockRegionDocument extends mixClasses(RegionDocument, documentMixins.BaseDocumentMixin) {}

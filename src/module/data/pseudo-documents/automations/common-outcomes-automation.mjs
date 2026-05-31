@@ -2,7 +2,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
 import * as activations from "../activations/command-activations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import { ConfirmationDialogAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -13,7 +13,11 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class CommonOutcomesAutomation
-  extends mixClasses(CritAutomation, ConfirmationDialogAutomationMixin, TriggerAutomationMixin)
+  extends mixClasses(
+    CritAutomation,
+    automationMixins.ConfirmationDialogAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.CommonOutcomes"];

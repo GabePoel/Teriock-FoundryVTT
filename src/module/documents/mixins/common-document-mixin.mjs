@@ -1,11 +1,11 @@
 import { TeriockActor } from "../_module.mjs";
-import PropagationDataMixin from "../../data/shared/mixins/propagation-data-mixin.mjs";
+import * as dataMixins from "../../data/shared/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { ensureChildren, ensureNoChildren, resolveDocuments } from "../../helpers/resolve.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
-import { EmbedCardDocumentMixin, PanelDocumentMixin } from "./_module.mjs";
+import * as documentMixins from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes.
@@ -20,7 +20,14 @@ export default function CommonDocumentMixin(Base) {
      * @mixes PropagationData
      * @mixin
      */
-    class CommonDocument extends mixClasses(Base, PropagationDataMixin, EmbedCardDocumentMixin, PanelDocumentMixin) {
+    class CommonDocument
+      extends mixClasses(
+        Base,
+        dataMixins.PropagationDataMixin,
+        documentMixins.EmbedCardDocumentMixin,
+        documentMixins.PanelDocumentMixin,
+      )
+    {
       /** @inheritDoc */
       static get documentMetadata() {
         return Object.assign(super.documentMetadata, { common: true, typed: true });

@@ -1,5 +1,5 @@
 import { config } from "../../../../../../constants/_module.mjs";
-import scalingConfig from "../../../../../../constants/config/scaling-config.mjs";
+import systemConfig from "../../../../../../constants/config/system-config.mjs";
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { FormulaField, LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
@@ -36,7 +36,7 @@ export default Base => {
             hasReaction: new fields.BooleanField({ initial: true }),
           }),
           defense: initialSchema({
-            ac: initialNumber(scalingConfig.baseValues.ac),
+            ac: initialNumber(systemConfig.baseValues.ac),
             av: initialSchema({
               base: initialNumber(),
               natural: initialNumber(),
@@ -44,7 +44,7 @@ export default Base => {
               worn: initialNumber(),
             }),
             bv: initialNumber(),
-            cc: initialNumber(scalingConfig.baseValues.ac),
+            cc: initialNumber(systemConfig.baseValues.ac),
           }),
           initiative: new FormulaField({ deterministic: false, initial: config.character.defaults.initiative }),
           offense: new fields.SchemaField({

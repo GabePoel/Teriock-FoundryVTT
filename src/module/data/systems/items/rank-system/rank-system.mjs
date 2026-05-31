@@ -6,7 +6,7 @@ import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { migrateKey, migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 
 const { fields } = foundry.data;
@@ -27,9 +27,9 @@ const { fields } = foundry.data;
 export default class RankSystem
   extends mixClasses(
     BaseItemSystem,
-    mixins.CompetenceDisplaySystemMixin,
-    mixins.WikiSystemMixin,
-    mixins.StatGiverSystemMixin,
+    systemMixins.CompetenceDisplaySystemMixin,
+    systemMixins.WikiSystemMixin,
+    systemMixins.StatGiverSystemMixin,
   )
 {
   /** @inheritDoc */

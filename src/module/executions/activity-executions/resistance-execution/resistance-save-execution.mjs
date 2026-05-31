@@ -1,12 +1,12 @@
 import { getImage } from "../../../helpers/path.mjs";
-import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
+import * as executionMixins from "../../mixins/_module.mjs";
 import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
 
 /**
  * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
-export default class ResistanceExecution extends ThresholdExecutionMixin(ImmunityExecution) {
+export default class ResistanceExecution extends executionMixins.ThresholdExecutionMixin(ImmunityExecution) {
   /**
    * @param {Teriock.Execution.ResistanceExecutionOptions} options
    */

@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { AccessDataMixin } from "../../../shared/mixins/_module.mjs";
-import * as mixins from "../../mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -11,7 +11,9 @@ const { TypeDataModel } = foundry.abstract;
  * @mixes AccessData
  * @mixes RulesSystem
  */
-export default class BasePageSystem extends mixClasses(TypeDataModel, mixins.RulesSystemMixin, AccessDataMixin) {
+export default class BasePageSystem
+  extends mixClasses(TypeDataModel, systemMixins.RulesSystemMixin, dataMixins.AccessDataMixin)
+{
   /** @inheritDoc */
   static get metadata() {
     return Object.assign(super.metadata, { isTextPage: true });

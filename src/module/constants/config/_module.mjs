@@ -21,7 +21,7 @@ import indexConfig from "./index-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
 import powerConfig from "./power-config.mjs";
 import protectionConfig from "./protection-config.mjs";
-import scalingConfig from "./scaling-config.mjs";
+import systemConfig from "./system-config.mjs";
 import tradecraftConfig from "./tradecraft-config.mjs";
 import transformationConfig from "./transformation-config.mjs";
 import triggerConfig from "./trigger-config.mjs";
@@ -51,7 +51,7 @@ const config = {
   piercing: piercingConfig,
   power: powerConfig,
   protection: protectionConfig,
-  scaling: scalingConfig,
+  system: systemConfig,
   tradecraft: tradecraftConfig,
   transformation: transformationConfig,
   trigger: triggerConfig,

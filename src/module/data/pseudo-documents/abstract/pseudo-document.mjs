@@ -1,5 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { EmbeddedDataModel } from "../../models/_module.mjs";
+import EmbeddedDataModel from "../../models/embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 

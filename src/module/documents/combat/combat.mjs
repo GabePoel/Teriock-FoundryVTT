@@ -1,4 +1,4 @@
-import { BaseDocumentMixin } from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
 
@@ -10,7 +10,7 @@ const { Combat } = foundry.documents;
  * @mixes BaseDocument
  * @property {DocumentCollection<TeriockCombatant>} combatants
  */
-export default class TeriockCombat extends BaseDocumentMixin(Combat) {
+export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Combat) {
   /**
    * Check if the effect might expire and send a dialog to some {@link TeriockUser}.
    * @param {TeriockConsequence} effect - Effect to check expiration for.

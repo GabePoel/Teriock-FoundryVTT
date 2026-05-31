@@ -5,11 +5,10 @@ import { makeIconClass } from "../utils.mjs";
 
 /**
  * Query that asks the GM to identify the item.
- * @param {Teriock.QueryData.IdentifyItem} queryData
- * @param {{_timeout?: number}} timeout
+ * @param {Teriock.Queries.IdentifyItemData} queryData
  * @returns {Promise<boolean>}
  */
-export default async function identifyItemQuery(queryData, { _timeout }) {
+export default async function identifyItemQuery(queryData) {
   const uuid = queryData.uuid;
   const item = await fromUuid(uuid);
   const content = await TeriockTextEditor.enrichHTML(

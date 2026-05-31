@@ -3,7 +3,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { TradecraftActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
-import { CompetenceAutomationMixin, SelectAutomationMixin, TriggerAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,7 +14,12 @@ const { fields } = foundry.data;
  * @mixes CompetenceAutomation
  */
 export default class TradecraftAutomation
-  extends mixClasses(ThresholdAutomation, SelectAutomationMixin, TriggerAutomationMixin, CompetenceAutomationMixin)
+  extends mixClasses(
+    ThresholdAutomation,
+    automationMixins.SelectAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+    automationMixins.CompetenceAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Tradecraft"];
@@ -106,7 +111,7 @@ export default class TradecraftAutomation
     const actor = scope.actor ?? scope.execution?.actor ?? this.actor;
     if (!actor) { return; }
     await Promise.all(selected.map(async tradecraft => {
-      const threshold = await this.getThreshold(options?.rollData ?? {});
+      const threshold = await this.getThreshold(scope?.execution?.rollData ?? {});
       return actor.system.rollTradecraft(tradecraft, {
         bonus: this.bonus,
         competence: this.overrideCompetence ? this.competence.raw : this.document.system.competence.raw,

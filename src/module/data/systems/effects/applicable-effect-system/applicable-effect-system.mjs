@@ -1,4 +1,3 @@
-import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
@@ -6,7 +5,8 @@ import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
-import { ThresholdDataMixin } from "../../../shared/mixins/_module.mjs";
+import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -15,9 +15,13 @@ const { fields } = foundry.data;
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ApplicableEffectSystemData}
+ * @mixes CombatExpirableSystem
+ * @mixes ThresholdData
  * @see {DurationModel}
  */
-export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem, ThresholdDataMixin) {
+export default class ApplicableEffectSystem
+  extends mixClasses(BaseEffectSystem, systemMixins.CombatExpirableSystemMixin, dataMixins.ThresholdDataMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
 
@@ -190,15 +194,6 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   /** @inheritDoc */
   async _use(_options = {}) {
     await this.inCombatExpiration(true);
-  }
-
-  /**
-   * Trigger in-combat expiration.
-   * @param {boolean} [forceDialog] - Force a dialog to show up.
-   * @returns {Promise<void>}
-   */
-  async inCombatExpiration(forceDialog = false) {
-    await inCombatExpirationDialog(this.parent, forceDialog);
   }
 
   /** @inheritDoc */

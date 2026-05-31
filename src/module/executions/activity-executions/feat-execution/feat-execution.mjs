@@ -1,12 +1,12 @@
 import { addFormula } from "../../../helpers/formula.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
-import { ThresholdExecutionMixin } from "../../mixins/_module.mjs";
+import * as executionMixins from "../../mixins/_module.mjs";
 
 /**
  * @extends {BaseExecution}
  * @mixes ThresholdExecution
  */
-export default class FeatExecution extends ThresholdExecutionMixin(BaseExecution) {
+export default class FeatExecution extends executionMixins.ThresholdExecutionMixin(BaseExecution) {
   /**
    * @param {Partial<Teriock.Execution.FeatExecutionOptions>} options
    */

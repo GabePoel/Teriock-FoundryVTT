@@ -5,7 +5,7 @@ import { makeIcon } from "../../../../helpers/utils.mjs";
 import { panelsField } from "../../../fields/helpers/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
-import { ActivatableSystemMixin, BaseSystemMixin } from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -18,7 +18,9 @@ const { ImagePopout } = foundry.applications.apps;
  * @mixes BaseSystem
  * @mixes ActivatableSystem
  */
-export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSystemMixin, ActivatableSystemMixin) {
+export default class BaseMessageSystem
+  extends mixClasses(TypeDataModel, systemMixins.BaseSystemMixin, systemMixins.ActivatableSystemMixin)
+{
   /** @inheritDoc */
   static get _activationTypes() {
     return Object.values(activations).filter(a => foundry.utils.isSubclass(a, BaseActivation));

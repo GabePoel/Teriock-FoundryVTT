@@ -149,5 +149,9 @@ declare global {
       updateChildren: boolean;
       updateDocument: boolean;
     };
+
+    type SerializablePrimitive = boolean | number | object | string | null;
+
+    export type Serializable = SerializablePrimitive | SerializablePrimitive[];
   }
 }

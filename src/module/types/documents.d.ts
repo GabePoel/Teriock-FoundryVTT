@@ -306,7 +306,7 @@ declare global {
   export type AnyChildDocument = AnyActiveEffect | AnyItem;
   export type AnyRules = AnyCommonDocument | TeriockJournalEntryPage;
   export type TeriockArmament = TeriockBody | TeriockEquipment;
-  export type TeriockLingering = TeriockCondition | TeriockConsequence;
+  export type TeriockLingering = TeriockCondition | TeriockConsequence | TeriockImbuement;
 }
 
 // General Unions

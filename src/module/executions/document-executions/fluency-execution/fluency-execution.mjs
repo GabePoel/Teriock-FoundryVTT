@@ -1,4 +1,4 @@
-import { TradecraftExecutionMixin } from "../../mixins/_module.mjs";
+import * as executionMixins from "../../mixins/_module.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 /**
@@ -6,7 +6,7 @@ import BaseDocumentExecution from "../base-document-execution/base-document-exec
  * @mixes ThresholdExecution
  * @property {TeriockFluency} source
  */
-export default class FluencyExecution extends TradecraftExecutionMixin(BaseDocumentExecution) {
+export default class FluencyExecution extends executionMixins.TradecraftExecutionMixin(BaseDocumentExecution) {
   /** @inheritDoc */
   get tradecraft() {
     return this.source.system._source.tradecraft;

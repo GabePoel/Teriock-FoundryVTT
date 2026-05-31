@@ -1,5 +1,5 @@
-import { BaseSystemMixin } from "../mixins/_module.mjs";
+import * as systemMixins from "../mixins/_module.mjs";
 
 const { TypeDataModel } = foundry.abstract;
 
-export default class BaseCardsSystem extends BaseSystemMixin(TypeDataModel) {}
+export default class BaseCardsSystem extends systemMixins.BaseSystemMixin(TypeDataModel) {}

@@ -1,7 +1,7 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { RollTable } = foundry.documents;
 
@@ -13,7 +13,7 @@ const { RollTable } = foundry.documents;
  * @implements {Teriock.Documents.RollTableInterface}
  */
 export default class TeriockRollTable
-  extends mixClasses(RollTable, mixins.BaseDocumentMixin, mixins.UsableDocumentMixin)
+  extends mixClasses(RollTable, documentMixins.BaseDocumentMixin, documentMixins.UsableDocumentMixin)
 {
   /**
    * All the documents in the results of this table.

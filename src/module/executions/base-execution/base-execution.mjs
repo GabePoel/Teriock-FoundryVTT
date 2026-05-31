@@ -1,5 +1,5 @@
 import { CompetenceModel } from "../../data/models/_module.mjs";
-import { AutomatedDataMixin } from "../../data/shared/mixins/_module.mjs";
+import * as dataMixins from "../../data/shared/mixins/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { TypeCollection } from "../../documents/collections/_module.mjs";
@@ -7,7 +7,7 @@ import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 
 class AbstractExecution {}
 
-export default class BaseExecution extends AutomatedDataMixin(AbstractExecution) {
+export default class BaseExecution extends dataMixins.AutomatedDataMixin(AbstractExecution) {
   /**
    * Construct an execution.
    * @param {Partial<Teriock.Execution.BaseExecutionOptions>} options
@@ -345,7 +345,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
   }
 
   /**
-   * Propagate trigger.
+   * Propagate a trigger event.
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @returns {Promise<void|false>}
@@ -357,7 +357,7 @@ export default class BaseExecution extends AutomatedDataMixin(AbstractExecution)
   }
 
   /**
-   * A scope that can be used when executing macros from a fired trigger.
+   * A scope that can be used when executing macros from a fired trigger event.
    * @param {Teriock.System.TriggerScope} [scope]
    * @returns {Teriock.System.TriggerScope}
    */

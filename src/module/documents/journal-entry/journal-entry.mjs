@@ -1,5 +1,5 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import * as mixins from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { JournalEntry } = foundry.documents;
 
@@ -12,7 +12,7 @@ const { JournalEntry } = foundry.documents;
  * @mixes EmbedCardDocument
  */
 export default class TeriockJournalEntry
-  extends mixClasses(JournalEntry, mixins.BaseDocumentMixin, mixins.EmbedCardDocumentMixin)
+  extends mixClasses(JournalEntry, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)
 {
   /** @inheritDoc */
   get embedParts() {

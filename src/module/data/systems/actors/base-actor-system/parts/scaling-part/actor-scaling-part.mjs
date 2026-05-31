@@ -91,12 +91,12 @@ export default Base => {
         this.scaling.scale = this.scaling.brScale ? this.scaling.br : this.scaling.lvl;
         this.scaling.rank = Math.max(0, Math.floor((this.scaling.lvl - 1) / 5));
         this.scaling.p = Math.max(
-          TERIOCK.config.scaling.baseValues.p,
-          Math.floor(TERIOCK.config.scaling.baseValues.p + 1 + (this.scaling.scale - 7) / 10),
+          TERIOCK.config.system.baseValues.p,
+          Math.floor(TERIOCK.config.system.baseValues.p + 1 + (this.scaling.scale - 7) / 10),
         );
         this.scaling.f = Math.max(
-          TERIOCK.config.scaling.baseValues.f,
-          Math.floor(TERIOCK.config.scaling.baseValues.f + (this.scaling.scale - 2) / 5),
+          TERIOCK.config.system.baseValues.f,
+          Math.floor(TERIOCK.config.system.baseValues.f + (this.scaling.scale - 2) / 5),
         );
         super.prepareBaseData();
       }

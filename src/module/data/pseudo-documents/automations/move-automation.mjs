@@ -5,7 +5,7 @@ import { FormulaField } from "../../fields/_module.mjs";
 import { movementActionField } from "../../fields/helpers/builders.mjs";
 import { MoveActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
-import { DisplayAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -16,7 +16,7 @@ const { fields } = foundry.data;
  * @property {string} movementAction
  * @mixes DisplayAutomation
  */
-export default class MoveAutomation extends mixClasses(BaseAutomation, DisplayAutomationMixin) {
+export default class MoveAutomation extends mixClasses(BaseAutomation, automationMixins.DisplayAutomationMixin) {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 
   /** @inheritDoc */

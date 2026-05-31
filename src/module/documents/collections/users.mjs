@@ -18,9 +18,9 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
 
   /**
    * Helper function to send a query to the active GM if there is one.
-   * @param {Teriock.QueryData.QueryName} queryName
+   * @param {Teriock.Queries.QueryName} queryName
    * @param {object} queryData
-   * @param {Partial<Teriock.QueryData.QueryOptions>} [queryOptions]
+   * @param {Partial<Teriock.Queries.QueryGMOptions>} [queryOptions]
    * @returns {Promise<any>}
    */
   async queryGM(queryName, queryData, queryOptions = {}) {
@@ -45,6 +45,11 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
     if (!this.activeGM && notifyFailure) {
       ui.notifications.warn(failMessage, { format: queryOptions.format, localize: queryOptions.localize });
     }
-    return await this.activeGM?.query(queryName, queryData, queryOptions);
+    try {
+      return await this.activeGM?.query(queryName, queryData, queryOptions);
+    } catch (e) {
+      console.error(e, queryName, queryData, queryOptions);
+      if (queryOptions.fallback) { return queryOptions.fallback; }
+    }
   }
 }

@@ -4,7 +4,7 @@ import { parsePayload } from "../../applications/ux/enrichment-helpers.mjs";
  * Reformat arguments from interaction entries into an object.
  * @param {Teriock.Enrichment.Input} input
  * @param {Teriock.Command.CommandEntry} command
- * @returns {Record<string, boolean|number|string|null>}
+ * @returns {Record<string, Teriock.System.Serializable>}
  */
 export function interpretCommandInput(input, command) {
   const definedArguments = command.args || [];
@@ -32,7 +32,7 @@ export function getCommandEntryValue(interaction, property, options) {
  * Build an object of options for a command from a payload string.
  * @param {string} payload
  * @param {Teriock.Command.CommandEntry} command
- * @returns {Record<string, boolean|number|string|null>}
+ * @returns {Record<string, Teriock.System.Serializable>}
  */
 export function buildCommandOptions(payload, command) {
   const commandOptions = {};

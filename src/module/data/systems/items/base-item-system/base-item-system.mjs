@@ -1,4 +1,4 @@
-import { ChildSystemMixin } from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { TypeDataModel } = foundry.abstract;
@@ -10,7 +10,7 @@ const { TypeDataModel } = foundry.abstract;
  * @extends {Teriock.Models.BaseItemSystemData}
  * @mixes ChildSystem
  */
-export default class BaseItemSystem extends ChildSystemMixin(TypeDataModel) {
+export default class BaseItemSystem extends systemMixins.ChildSystemMixin(TypeDataModel) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseItem"];
 

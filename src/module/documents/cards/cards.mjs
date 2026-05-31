@@ -1,4 +1,4 @@
-import { BaseDocumentMixin } from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { Card } = foundry.documents;
 
@@ -10,4 +10,4 @@ const { Card } = foundry.documents;
  * @mixes BaseDocument
  * @property {DocumentCollection<TeriockCard>} cards
  */
-export default class TeriockCards extends BaseDocumentMixin(Card) {}
+export default class TeriockCards extends documentMixins.BaseDocumentMixin(Card) {}

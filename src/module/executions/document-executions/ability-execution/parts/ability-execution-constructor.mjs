@@ -1,13 +1,15 @@
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
-import { ThresholdExecutionMixin } from "../../../mixins/_module.mjs";
+import * as executionMixins from "../../../mixins/_module.mjs";
 import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
 
 /**
  * @extends {BaseDocumentExecution}
  * @mixes ThresholdExecution
  */
-export default class AbilityExecutionConstructor extends ThresholdExecutionMixin(BaseDocumentExecution) {
+export default class AbilityExecutionConstructor
+  extends executionMixins.ThresholdExecutionMixin(BaseDocumentExecution)
+{
   /**
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */

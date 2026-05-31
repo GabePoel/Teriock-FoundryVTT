@@ -1,5 +1,5 @@
 import { resolveDocuments } from "../../helpers/resolve.mjs";
-import { BaseDocumentMixin } from "../mixins/_module.mjs";
+import * as documentMixins from "../mixins/_module.mjs";
 
 const { Folder } = foundry.documents;
 
@@ -10,7 +10,7 @@ const { Folder } = foundry.documents;
  * @extends {Folder}
  * @mixes BaseDocument
  */
-export default class TeriockFolder extends BaseDocumentMixin(Folder) {
+export default class TeriockFolder extends documentMixins.BaseDocumentMixin(Folder) {
   /**
    * Get all the entries recursively from a child node.
    * @param {FolderChildNode} node

@@ -1,6 +1,6 @@
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
-import { ChildSystemMixin } from "../../mixins/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;
 
@@ -11,7 +11,7 @@ const { ActiveEffectTypeDataModel, fields } = foundry.data;
  * @mixes ChildSystem
  * @mixes AutomatedData
  */
-export default class BaseEffectSystem extends ChildSystemMixin(ActiveEffectTypeDataModel) {
+export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(ActiveEffectTypeDataModel) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseEffect"];
 

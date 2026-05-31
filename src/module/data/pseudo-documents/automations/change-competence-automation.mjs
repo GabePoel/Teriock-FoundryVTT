@@ -1,14 +1,14 @@
 import { omit } from "../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../fields/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
-import { CompetenceAutomationMixin } from "./mixins/_module.mjs";
+import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {CritAutomation}
  * @mixes CompetenceAutomation
  * @property {TypedIdentifier} identifier
  */
-export default class ChangeCompetenceAutomation extends CompetenceAutomationMixin(CritAutomation) {
+export default class ChangeCompetenceAutomation extends automationMixins.CompetenceAutomationMixin(CritAutomation) {
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.ChangeCompetence.LABEL";

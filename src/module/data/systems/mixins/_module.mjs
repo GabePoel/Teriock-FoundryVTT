@@ -6,6 +6,7 @@ export { default as AttunableSystemMixin } from "./attunable-system-mixin/attuna
 export { default as AutomatableSystemMixin } from "./automatable-system-mixin/automatable-system-mixin.mjs";
 export { default as BaseSystemMixin } from "./base-system-mixin/base-system-mixin.mjs";
 export { default as ChildSystemMixin } from "./child-system-mixin/child-system-mixin.mjs";
+export { default as CombatExpirableSystemMixin } from "./combat-expirable-system-mixin/combat-expirable-system-mixin.mjs";
 export { default as CommonSystemMixin } from "./common-system-mixin/common-system-mixin.mjs";
 export { default as CompetenceDisplaySystemMixin } from "./competence-display-system-mixin.mjs";
 export { default as ConsumableSystemMixin } from "./consumable-system-mixin/consumable-system-mixin.mjs";
