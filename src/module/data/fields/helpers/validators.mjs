@@ -3,9 +3,12 @@ import { isKebabCase } from "../../../helpers/string.mjs";
 /**
  * Validates that a string is a valid untyped identifier.
  * @param {string} identifier
+ * @param {object} [options]
+ * @param {boolean} [options.strict=false] - Nullish values are rejected.
  */
-export function identifierValidator(identifier) {
-  if (identifier == null || identifier === "") { return true; }
+export function validateIdentifier(identifier, options = {}) {
+  if (["", null, undefined].includes(identifier)) { return !options.strict; }
+  if (typeof identifier !== "string") { return false; }
   if (identifier.includes(":")) { return false; }
   return isKebabCase(identifier);
 }
@@ -17,7 +20,7 @@ export function identifierValidator(identifier) {
  * @param {string[]} [options.types] - Allowed document type prefixes. When omitted, any type is accepted.
  * @param {boolean} [options.strict=false] - Identifier must be fully formatted. Nullish values are rejected.
  */
-export function typedIdentifierValidator(identifier, options = {}) {
+export function validateTypedIdentifier(identifier, options = {}) {
   if (["", null, undefined].includes(identifier)) { return !options.strict; }
   if (typeof identifier !== "string") { return false; }
   const parts = identifier.split(":");

@@ -1,5 +1,5 @@
 import { HTMLIdentifierInputElement } from "../../applications/elements/_module.mjs";
-import { identifierValidator } from "./helpers/validators.mjs";
+import { validateIdentifier } from "./helpers/validators.mjs";
 
 const { StringField } = foundry.data.fields;
 const { createTextInput } = foundry.applications.fields;
@@ -37,10 +37,10 @@ export default class IdentifierField extends StringField {
 
   /** @inheritDoc */
   _validateType(value) {
-    if (value == null || value === "") { return true; }
-    if (!identifierValidator(value)) { throw new Error(
-        _loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"),
-      ); }
+    if (!validateIdentifier(value, { strict: !this.nullable })) {
+      throw new Error(_loc("TERIOCK.SYSTEMS.Rules.FIELDS.identifier.validationError"));
+    }
+    return super._validateType(value);
   }
 
   /** @inheritDoc */

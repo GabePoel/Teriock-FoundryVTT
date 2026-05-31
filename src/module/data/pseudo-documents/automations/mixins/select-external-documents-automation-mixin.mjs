@@ -1,7 +1,7 @@
 import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
-import { IdentifierSetField } from "../../../fields/_module.mjs";
+import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
 import { migrateKey, migrateUuid } from "../../../shared/migrations/source-migrations.mjs";
 import SelectAutomationMixin from "./select-automation-mixin.mjs";
 
@@ -27,7 +27,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          identifiers: new IdentifierSetField(),
+          identifiers: new TypedIdentifierSetField(),
           uuids: new fields.SetField(new fields.DocumentUUIDField()),
         });
       }

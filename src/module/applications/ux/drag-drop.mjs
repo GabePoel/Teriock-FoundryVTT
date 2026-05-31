@@ -2,12 +2,11 @@ import TeriockTextEditor from "./text-editor.mjs";
 
 const { DragDrop } = foundry.applications.ux;
 
+/** @inheritDoc */
 export default class TeriockDragDrop extends DragDrop {
-  /**
-   * Add a document's typed identifier to a drag event.
-   * @param {DragEvent} event
-   */
-  static addIdentifierToDragEvent(event) {
+  /** @inheritDoc */
+  _handleDragStart(event) {
+    super._handleDragStart(event);
     const data = TeriockTextEditor.getDragEventData(event);
     if (data.uuid && !data.identifier) {
       fromUuid(data.uuid).then(d => {
@@ -15,11 +14,5 @@ export default class TeriockDragDrop extends DragDrop {
         event.dataTransfer.setData("text/plain", JSON.stringify(data));
       });
     }
-  }
-
-  /** @inheritDoc */
-  _handleDragStart(event) {
-    super._handleDragStart(event);
-    TeriockDragDrop.addIdentifierToDragEvent(event);
   }
 }

@@ -31,8 +31,7 @@ export default {
     spectral: { detectionMode: "spectral", grantsSight: true, hidden: true, label: "TERIOCK.TERMS.Senses.spectral" },
     truth: { detectionMode: "trueSight", grantsSight: true, label: "TERIOCK.TERMS.Senses.truth" },
   },
-  /** @type {Teriock.Config.SizeEntry[]} */
-  sizes: [
+  sizes: /** @type {Teriock.Config.SizeEntry[]} */ [
     { category: "TERIOCK.TERMS.Sizes.tiny", length: 0.5, max: 0.5, reach: 5 },
     { category: "TERIOCK.TERMS.Sizes.small", length: 1, max: 2, reach: 5 },
     { category: "TERIOCK.TERMS.Sizes.medium", length: 1, max: 4, reach: 5 },
@@ -49,6 +48,15 @@ export default {
     3: { label: "TERIOCK.TERMS.SpeedAdjustments.3", multiplier: 1 },
     4: { label: "TERIOCK.TERMS.SpeedAdjustments.4", multiplier: 2 },
   },
+  tabs: [
+    { gapless: true, key: "Abilities", size: "small" },
+    { key: "Classes" },
+    { gapless: true, key: "Effects", size: "small" },
+    { gapless: true, key: "Inventory", size: "small" },
+    { key: "Powers" },
+    { key: "Resources" },
+    { key: "Tradecrafts" },
+  ],
 };
 
 preLocalize("config.character.movement", { key: "label" });

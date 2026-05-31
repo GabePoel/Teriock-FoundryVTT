@@ -1,4 +1,5 @@
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { createElement } from "../../helpers/html.mjs";
+import { makeIconClass, makeIconElement } from "../../helpers/utils.mjs";
 
 /**
  * Renders a labeled form box.
@@ -76,6 +77,19 @@ function formBox(input, options) {
   return new Handlebars.SafeString("");
 }
 
-const fieldHelperEntries = [["formBox", formBox]];
+/**
+ * @param {DataField} field
+ * @param {{ hash: FormInputConfig & { icon: string } }} options
+ */
+function formIcon(field, options = {}) {
+  const group = createElement("label", { className: "teriock-icon-input-group" });
+  const input = field.toInput(options.hash);
+  const icon = makeIconElement(options.hash.icon, "solid");
+  icon.dataset.tooltip = _loc(field.label);
+  group.append(...[icon, input]);
+  return new Handlebars.SafeString(group.outerHTML);
+}
+
+const fieldHelperEntries = [["formBox", formBox], ["formIcon", formIcon]];
 
 export default fieldHelperEntries;

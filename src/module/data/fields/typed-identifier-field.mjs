@@ -1,10 +1,11 @@
 import { HTMLIdentifierTagsElement } from "../../applications/elements/_module.mjs";
-import { typedIdentifierValidator } from "./helpers/validators.mjs";
+import { validateTypedIdentifier } from "./helpers/validators.mjs";
 
 const { StringField } = foundry.data.fields;
 
 /**
- * {@link StringField} for typed identifiers in the form `type:identifier`, rendered with {@link HTMLIdentifierTagsElement}.
+ * A special {@link StringField} for typed identifiers in the form `type:identifier`, rendered with an
+ * {@link HTMLIdentifierTagsElement}.
  * @property {string[]} [types] Allowed document type prefixes.
  * @property {boolean} [single] When true, only one identifier may be attached.
  */
@@ -23,7 +24,7 @@ export default class TypedIdentifierField extends StringField {
   /** @inheritDoc */
   _validateType(value) {
     if (value == null || value === "") { return true; }
-    if (!typedIdentifierValidator(value, { types: this.types })) {
+    if (!validateTypedIdentifier(value, { types: this.types })) {
       const parsed = value.includes(":") ? value.split(":")[0] : null;
       if (!parsed) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
       if (this.types?.length) {

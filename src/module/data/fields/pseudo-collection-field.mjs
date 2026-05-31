@@ -1,8 +1,15 @@
 import { TypeCollection } from "../../documents/collections/_module.mjs";
 import { TypedPseudoDocument } from "../pseudo-documents/abstract/_module.mjs";
-import PseudoTypedSchemaField from "./pseudo-typed-schema-field.mjs";
 
-const { TypedObjectField } = foundry.data.fields;
+const { TypedObjectField, TypedSchemaField } = foundry.data.fields;
+
+class PseudoTypedSchemaField extends TypedSchemaField {
+  /** @inheritdoc */
+  _validateSpecial(value) {
+    if (!value || value.type in this.types) { return super._validateSpecial(value); }
+    return true;
+  }
+}
 
 export default class PseudoCollectionField extends TypedObjectField {
   /** @inheritDoc */

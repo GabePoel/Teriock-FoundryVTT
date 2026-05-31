@@ -1,12 +1,13 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import * as formula from "../../helpers/formula.mjs";
-import EnhancedStringField from "./enhanced-string-field.mjs";
+
+const { StringField } = foundry.data.fields;
 
 /**
  * Special case {@link StringField} which represents a formula.
  * @extends {Teriock.Fields._FormulaFieldOptions}
  */
-export default class FormulaField extends EnhancedStringField {
+export default class FormulaField extends StringField {
   /** @inheritdoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, { deterministic: false, required: false });
@@ -111,15 +112,10 @@ export default class FormulaField extends EnhancedStringField {
   /** @inheritDoc */
   _toInput(config) {
     config.context ??= "actor";
-    const element = super._toInput(config);
-    const isInput = element.tagName === "INPUT";
-    const nestedInput = isInput ? null : element.querySelector("input");
-    if (!isInput && !nestedInput) { return element; }
+    const input = super._toInput(config);
+    if (input.tagName !== "INPUT") { return input; }
     config.value ??= this.getInitialValue({}) ?? "";
-    const formulaInput = foundry.applications.elements.HTMLFormulaInputElement.create(config);
-    if (isInput) { return formulaInput; }
-    nestedInput.replaceWith(formulaInput);
-    return element;
+    return foundry.applications.elements.HTMLFormulaInputElement.create(config);
   }
 
   /** @inheritdoc */

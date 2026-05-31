@@ -1,3 +1,4 @@
+import characterConfig from "../../../constants/config/character-config.mjs";
 import { blockGaplessField, blockSizeField } from "../../fields/helpers/builders.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
@@ -31,34 +32,18 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
         }),
         wound: new fields.BooleanField({ initial: true }),
       }),
-      sheet: new fields.SchemaField({
-        blockAbilitiesGapless: new blockGaplessField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
-          initial: true,
-        }),
-        blockAbilitiesSize: new blockSizeField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Abilities.title",
-          initial: "small",
-        }),
-        blockClassesGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Classes.title" }),
-        blockClassesSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Classes.title" }),
-        blockEffectsGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Effects.title", initial: true }),
-        blockEffectsSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Effects.title", initial: "small" }),
-        blockInventoryGapless: new blockGaplessField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
-          initial: true,
-        }),
-        blockInventorySize: new blockSizeField({
-          child: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
-          initial: "small",
-        }),
-        blockPowersGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Powers.title" }),
-        blockPowersSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Powers.title" }),
-        blockResourcesGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Resources.title" }),
-        blockResourcesSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Resources.title" }),
-        blockTradecraftsGapless: new blockGaplessField({ child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title" }),
-        blockTradecraftsSize: new blockSizeField({ child: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title" }),
-      }),
+      sheet: new fields.SchemaField(characterConfig.tabs.reduce((fields, { gapless, key, size }) => {
+        const childPath = `TERIOCK.SHEETS.Actor.TABS.${key}.title`;
+        fields[`block${key}Gapless`] = new blockGaplessField({
+          child: childPath,
+          ...(gapless !== undefined && { initial: gapless }),
+        });
+        fields[`block${key}Size`] = new blockSizeField({
+          child: childPath,
+          ...(size !== undefined && { initial: size }),
+        });
+        return fields;
+      }, {})),
       token: new fields.SchemaField({
         autoColoration: new fields.BooleanField({ initial: true }),
         autoDetectionModes: new fields.BooleanField({ initial: true }),

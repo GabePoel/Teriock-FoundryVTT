@@ -13,16 +13,16 @@ export default class MultiChangeField extends SchemaField {
    */
   constructor(fields, options, context = {}) {
     super(fields, options, context);
-    this.multiChangePaths = options.multiChangePaths;
+    this.#multiChangePaths = options.multiChangePaths;
   }
 
   /** @type {string[] | undefined} */
-  multiChangePaths;
+  #multiChangePaths;
 
   /** @inheritDoc */
   applyChange(value, model, change, options = { replacementData: {} }) {
-    const entries = this.multiChangePaths
-      ? this.multiChangePaths.map(p => [p, this.getField(p)])
+    const entries = this.#multiChangePaths
+      ? this.#multiChangePaths.map(p => [p, this.getField(p)])
       : Object.entries(this.fields);
     for (const [path, field] of entries) {
       if (!field) { continue; }

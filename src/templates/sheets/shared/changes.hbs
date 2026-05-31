@@ -3,8 +3,8 @@
   custom arrays that have the same basic format.
 
   Parameters (and default values for normal `ActiveEffect` changes):
-  - changesPath: "changes"
-  - changesData: (path document "changes")
+  - changesPath: "system.changes"
+  - changesData: (path document.system "changes")
   - fieldDefs: (path fields "changes.element.fields")
   - additionalAttrs: Not actually needed for default changes. This is for abilities mainly.
 --}}
@@ -14,7 +14,7 @@
     {{#with ../fieldDefs as |changeFields|}}
       <li class="change-container" data-index="{{ i }}" data-path="{{ ../../changesPath }}">
         <div class="change-entry">
-          {{formInput
+          {{formIcon
             changeFields.key
             name=""
             value=change.key
@@ -26,7 +26,7 @@
               tooltip=change.key
               property="key")
           }}
-          {{formInput
+          {{formIcon
             changeFields.value
             name=""
             value=change.value
@@ -41,7 +41,7 @@
         </div>
         <div class="change-config">
           <div class="change-activation">
-            {{formInput
+            {{formIcon
               changeFields.priority
               name=""
               value=change.priority
@@ -56,7 +56,7 @@
             }}
           </div>
           <div class="change-assignment">
-            {{formInput
+            {{formIcon
               changeFields.type
               name=""
               value=change.type
@@ -67,7 +67,7 @@
               dataset=(object
                 property="type")
             }}
-            {{formInput
+            {{formIcon
               changeFields.target
               name=""
               value=change.target

@@ -1,4 +1,4 @@
-import { typedIdentifierValidator } from "../../../data/fields/helpers/validators.mjs";
+import { validateTypedIdentifier } from "../../../data/fields/helpers/validators.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
 import { toCamelCase, toKebabCase, toTitleCase, ucFirst } from "../../../helpers/string.mjs";
@@ -56,7 +56,7 @@ const lookupEnricher = {
         }
       }
       if (!textContent && ["boolean", "number", "string"].includes(typeof raw)) { textContent = raw.toString(); }
-      if (name && typedIdentifierValidator(raw, { strict: true })) { textContent = getName(raw); }
+      if (name && validateTypedIdentifier(raw, { strict: true })) { textContent = getName(raw); }
       const style = inputs.config.style;
       if (style) {
         switch (style) {

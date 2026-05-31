@@ -5,11 +5,11 @@ import TypedIdentifierField from "./typed-identifier-field.mjs";
 const { SetField } = foundry.data.fields;
 
 /**
- * {@link SetField} for a set of {@link TypedIdentifierField} values.
+ * A special {@link SetField} for a set of {@link TypedIdentifierField} values.
  * @property {HTMLIdentifierTagsElement} element
  * @property {string[]} types
  */
-export default class IdentifierSetField extends SetField {
+export default class TypedIdentifierSetField extends SetField {
   /**
    * @param {StringFieldOptions & Teriock.Fields._TypedIdentifierFieldOptions} [options]
    * @param {DataFieldContext} [context]

@@ -1,5 +1,5 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { IdentifierSetField } from "../../fields/_module.mjs";
+import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/helpers/builders.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
@@ -51,7 +51,7 @@ export default class AddDocumentsAutomation
       children: new fields.SchemaField({
         data: defaultJSONField(),
         enabled: new fields.BooleanField({ initial: false }),
-        identifiers: new IdentifierSetField(),
+        identifiers: new TypedIdentifierSetField(),
         overrideData: new fields.BooleanField({ initial: false }),
         uuids: new fields.SetField(new fields.DocumentUUIDField()),
       }),

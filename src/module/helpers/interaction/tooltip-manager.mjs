@@ -4,11 +4,23 @@ const { TooltipManager } = foundry.helpers.interaction;
 
 /** @inheritDoc */
 export default class TeriockTooltipManager extends TooltipManager {
-  /** @type {{allowed: Set<string>, disallowed: Set<string>}} */
-  #KNOWN_DOCUMENT_NAMES = { allowed: new Set(), disallowed: new Set() };
+  /**
+   * A custom CSS class which has different padding and other styling for rich document tooltips.
+   * @type {string}
+   */
+  static RICH_TOOLTIP_CLASS = "teriock-rich-tooltip";
 
-  /** @type {number} */
-  #RICH_TOOLTIP_WIDTH = 350;
+  /**
+   * All rich document tooltips have the same specified width to fit with reasonable panel dimensions.
+   * @type {number}
+   */
+  static RICH_TOOLTIP_WIDTH = 350;
+
+  /**
+   * Cache of documents' `documentName` and whether they allow rich tooltips.
+   * @type {{allowed: Set<string>, disallowed: Set<string>}}
+   */
+  #KNOWN_DOCUMENT_NAMES = { allowed: new Set(), disallowed: new Set() };
 
   /**
    * Fetch a rich tooltip.
@@ -35,7 +47,7 @@ export default class TeriockTooltipManager extends TooltipManager {
     if ((element.dataset.tooltipUuid || element.dataset.tooltipIdentifier) && !element.dataset.tooltipFetched) {
       const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
       if (!this.#validateUuid(uuid)) { return; }
-      element.dataset.tooltipClass = "teriock-rich-tooltip";
+      element.dataset.tooltipClass = TeriockTooltipManager.RICH_TOOLTIP_CLASS;
       element.dataset.tooltipHtml = TeriockTextEditor.loadingPanelHTML;
       this.#fetchRichTooltip(element);
     }
@@ -64,14 +76,14 @@ export default class TeriockTooltipManager extends TooltipManager {
   /** @inheritdoc */
   _setAnchor(direction) {
     const DIRECTIONS = TeriockTooltipManager.TOOLTIP_DIRECTIONS;
-    if (this.element.dataset.tooltipClass === "teriock-rich-tooltip") {
+    if (this.element.dataset.tooltipClass === TeriockTooltipManager.RICH_TOOLTIP_CLASS) {
       if (![DIRECTIONS.LEFT, DIRECTIONS.RIGHT].includes(direction)) { direction = DIRECTIONS.RIGHT; }
       const rect = this.element.getBoundingClientRect();
       const leftSpace = rect.left;
       const rightSpace = window.innerWidth - rect.right;
-      if (direction === DIRECTIONS.LEFT && leftSpace < this.#RICH_TOOLTIP_WIDTH) {
+      if (direction === DIRECTIONS.LEFT && leftSpace < TeriockTooltipManager.RICH_TOOLTIP_WIDTH) {
         direction = DIRECTIONS.RIGHT;
-      } else if (direction === DIRECTIONS.RIGHT && rightSpace < this.#RICH_TOOLTIP_WIDTH) {
+      } else if (direction === DIRECTIONS.RIGHT && rightSpace < TeriockTooltipManager.RICH_TOOLTIP_WIDTH) {
         direction = DIRECTIONS.LEFT;
       }
     }

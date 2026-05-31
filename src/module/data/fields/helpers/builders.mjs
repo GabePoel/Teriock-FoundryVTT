@@ -1,4 +1,4 @@
-import { EnhancedNumberField, EnhancedStringField, EvaluationField, FormulaField } from "../_module.mjs";
+import { EvaluationField, FormulaField } from "../_module.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -102,10 +102,10 @@ export function combatExpirationTimingField() {
 
 /**
  * A change type field.
- * @returns {EnhancedStringField}
+ * @returns {StringField}
  */
 export function changeTypeField() {
-  return new EnhancedStringField({
+  return new StringField({
     choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, { localize: true }),
     initial: "add",
     label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
@@ -119,9 +119,9 @@ export function changeTypeField() {
  */
 export function qualifiedChangeField() {
   return new SchemaField({
-    key: new EnhancedStringField({ initial: "", label: "TERIOCK.SCHEMA.QualifiedChange.key.label" }),
-    priority: new EnhancedNumberField({ initial: 20, label: "TERIOCK.SCHEMA.QualifiedChange.priority.label" }),
-    target: new EnhancedStringField({
+    key: new StringField({ initial: "", label: "TERIOCK.SCHEMA.QualifiedChange.key.label" }),
+    priority: new NumberField({ initial: 20, label: "TERIOCK.SCHEMA.QualifiedChange.priority.label" }),
+    target: new StringField({
       choices: localizeChoices(TERIOCK.config.change.parent.targets),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",

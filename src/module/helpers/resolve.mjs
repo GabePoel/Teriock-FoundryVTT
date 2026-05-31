@@ -1,3 +1,4 @@
+import { validateTypedIdentifier } from "../data/fields/helpers/validators.mjs";
 import { TypeCollection } from "../documents/collections/_module.mjs";
 import { fromIdentifier, fromKey, parseIdentifier } from "./utils.mjs";
 
@@ -68,7 +69,7 @@ export async function ensureChildren(document, identifiers) {
   const typed = (await document.getChildren()).documentsByType;
   const candidates = await Promise.all(identifiers.map(async identifier => {
     const parsed = parseIdentifier(identifier);
-    if (!(parsed?.type && parsed?.identifier)) { return; }
+    if (!(validateTypedIdentifier(identifier, { strict: true }))) { return; }
     const existing = (typed[parsed.type] || []).filter(n => n?.system?.identifier === parsed.identifier);
     if (existing.length) { return; }
     const doc = await fromIdentifier(identifier);

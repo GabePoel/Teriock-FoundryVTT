@@ -1,4 +1,4 @@
-import { typedIdentifierValidator } from "../../data/fields/helpers/validators.mjs";
+import { validateTypedIdentifier } from "../../data/fields/helpers/validators.mjs";
 import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass, parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -207,7 +207,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     identifier = identifier.trim();
     if (!identifier) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorBlank")); }
     const types = this.types;
-    if (!typedIdentifierValidator(identifier, { types })) {
+    if (!validateTypedIdentifier(identifier, { types })) {
       const parsed = parseIdentifier(identifier);
       if (!parsed.type) { throw new Error(_loc("TERIOCK.ELEMENTS.IDENTIFIER_TAGS.errorRequireType")); }
       if (types.length) {

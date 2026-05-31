@@ -23,7 +23,7 @@ export default class LocalDocumentField extends DocumentIdField {
    */
   constructor(model, options = {}) {
     if (!foundry.utils.isSubclass(model, foundry.abstract.DataModel)) {
-      throw new Error("A LocalDocumentField must specify a DataModel subclass as its type");
+      throw new Error("A LocalDocumentField must specify a DataModel subclass as its type.");
     }
     super(options);
     this.model = model;
@@ -35,7 +35,7 @@ export default class LocalDocumentField extends DocumentIdField {
    */
   model;
 
-  /** @override */
+  /** @inheritDoc */
   _cast(value) {
     if (typeof value === "string") { return value; }
     if (value instanceof this.model) { return value._id; }
@@ -44,7 +44,7 @@ export default class LocalDocumentField extends DocumentIdField {
 
   /**
    * Step up through model's parents to find the specified collection.
-   * @param {TeriockDocument} model
+   * @param {TeriockActiveEffect|TeriockActor|TeriockItem} model
    * @param {string} collection
    * @returns {DocumentCollection|null}
    */
@@ -62,7 +62,7 @@ export default class LocalDocumentField extends DocumentIdField {
     if (!this.options?.fallback) { super._validateType(value); }
   }
 
-  /** @override */
+  /** @inheritDoc */
   initialize(value, model, _options = {}) {
     if (this.idOnly) { return this.options?.fallback || foundry.data.validators.isValidId(value) ? value : null; }
     const collection = this._findCollection(model, this.model.metadata.collection);

@@ -1,6 +1,6 @@
+import characterConfig from "../../../constants/config/character-config.mjs";
 import { BaseActorSystem } from "../../systems/actors/_module.mjs";
-import { AbilitySystem } from "../../systems/effects/_module.mjs";
-import { BaseEffectSystem } from "../../systems/effects/_module.mjs";
+import { AbilitySystem, BaseEffectSystem } from "../../systems/effects/_module.mjs";
 import { BaseItemSystem } from "../../systems/items/_module.mjs";
 
 declare global {
@@ -12,36 +12,17 @@ declare global {
       blockChildSize: Teriock.Keys.CardDisplaySize;
     };
 
-    export type ActorSettingsSheetData = {
-      /** <schema> Whether ability blocks render without gaps */
-      blockAbilitiesGapless: boolean;
-      /** <schema> Display size for ability blocks */
-      blockAbilitiesSize: Teriock.Keys.CardDisplaySize;
-      /** <schema> Whether class blocks render without gaps */
-      blockClassesGapless: boolean;
-      /** <schema> Display size for class blocks */
-      blockClassesSize: Teriock.Keys.CardDisplaySize;
-      /** <schema> Whether effect blocks render without gaps */
-      blockEffectsGapless: boolean;
-      /** <schema> Display size for effect blocks */
-      blockEffectsSize: Teriock.Keys.CardDisplaySize;
-      /** <schema> Whether inventory blocks render without gaps */
-      blockInventoryGapless: boolean;
-      /** <schema> Display size for inventory blocks */
-      blockInventorySize: Teriock.Keys.CardDisplaySize;
-      /** <schema> Whether power blocks render without gaps */
-      blockPowersGapless: boolean;
-      /** <schema> Display size for power blocks */
-      blockPowersSize: Teriock.Keys.CardDisplaySize;
-      /** <schema> Whether resource blocks render without gaps */
-      blockResourcesGapless: boolean;
-      /** <schema> Display size for resource blocks */
-      blockResourcesSize: Teriock.Keys.CardDisplaySize;
-      /** <schema> Whether tradecraft blocks render without gaps */
-      blockTradecraftsGapless: boolean;
-      /** <schema> Display size for tradecraft blocks */
-      blockTradecraftsSize: Teriock.Keys.CardDisplaySize;
-    };
+    type TabNames = typeof characterConfig.tabs[number]["key"];
+
+    export type ActorSettingsSheetData =
+      & {
+        /** <schema> Whether these blocks render without gaps */
+        [K in TabNames as `block${K}Gapless`]: boolean;
+      }
+      & {
+        /** <schema> Display size for these blocks */
+        [K in TabNames as `block${K}Size`]: Teriock.Keys.CardDisplaySize;
+      };
 
     export type ActorSettingsAutomationData = {
       /** <schema> Whether non-hierarchical changes apply to children */
