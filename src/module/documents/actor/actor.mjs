@@ -78,6 +78,14 @@ export default class TeriockActor
   }
 
   /**
+   * Consequences and imbuements.
+   * @returns {(TeriockConsequence|TeriockImbuement)[]}
+   */
+  get applicables() {
+    return [...this.consequences, ...this.imbuements];
+  }
+
+  /**
    * Body parts and equipment.
    * @returns {TeriockArmament[]}
    */

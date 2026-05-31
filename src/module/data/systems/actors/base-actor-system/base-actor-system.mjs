@@ -70,7 +70,6 @@ export default class BaseActorSystem
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["attunement", "base", "condition", "consequence", "cover", "fluency", "hack", "resource"],
       childItemTypes: ["archetype", "body", "equipment", "mount", "power", "rank", "species"],
-      childMacroTypes: [],
       visibleTypes: ["power", "rank", "species"],
     });
   }
@@ -80,6 +79,18 @@ export default class BaseActorSystem
     return Object.assign(super.defineSchema(), { settings: new fields.EmbeddedDataField(ActorSettingsModel) });
   }
 
+  /**
+   * Labeled tags that represent how this scales.
+   * @returns {string[]}
+   */
+  get _scalingTags() {
+    return [
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", { number: this.scaling.lvl }),
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", { number: this.scaling.br }),
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", { number: this.size.number }),
+    ];
+  }
+
   /** @inheritDoc */
   get displayToggles() {
     return [...super.displayToggles, "disabled"];
@@ -87,15 +98,11 @@ export default class BaseActorSystem
 
   /** @inheritDoc */
   get embedParts() {
-    const parts = super.embedParts;
-    parts.subtitle = this.metadata.type;
-    parts.text = dotJoin([
-      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", { number: this.scaling.lvl }),
-      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", { number: this.scaling.br }),
-      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", { number: this.size.number }),
-    ]);
-    parts.makeTooltip = this.parent.isViewer;
-    return parts;
+    return Object.assign(super.embedParts, {
+      makeTooltip: this.parent.isViewer,
+      subtitle: TERIOCK.config.document[this.parent.type]?.label,
+      text: dotJoin(this._scalingTags),
+    });
   }
 
   /** @inheritDoc */
@@ -122,18 +129,14 @@ export default class BaseActorSystem
 
   /** @inheritDoc */
   async getPanelParts() {
-    const parts = await super.getPanelParts();
-    parts.bars = [{
-      icon: TERIOCK.display.icons.ui.info,
-      label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
-      wrappers: [
-        _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", { number: this.scaling.lvl }),
-        _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", { number: this.scaling.br }),
-        _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", { number: this.size.number }),
-      ],
-    }];
-    parts.blocks = [{ text: this.notes, title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes") }];
-    return parts;
+    return Object.assign(await super.getPanelParts(), {
+      bars: [{
+        icon: TERIOCK.display.icons.ui.info,
+        label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
+        wrappers: this._scalingTags,
+      }],
+      blocks: [{ text: this.notes, title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes") }],
+    });
   }
 
   /** @inheritDoc */
@@ -146,11 +149,8 @@ export default class BaseActorSystem
    * @returns {Promise<void>}
    */
   async postUpdate() {
-    const conditionExpirationEffects = this.parent.consequences.filter(c =>
-      c.system.expirations.conditions.present.size + c.system.expirations.conditions.absent.size > 0
-    );
-    const shouldExpire = conditionExpirationEffects.filter(c => c.system.shouldExpireFromConditions());
-    await this.parent.deleteEmbeddedDocuments("ActiveEffect", shouldExpire.map(c => c.id));
+    const toDelete = this.parent.applicables.filter(e => e.system.shouldExpireFromConditions()).map(e => e.id);
+    await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
     await Promise.all([...this.parent.getDependentTokens().map(t => t.postActorUpdate())]);
   }
 }

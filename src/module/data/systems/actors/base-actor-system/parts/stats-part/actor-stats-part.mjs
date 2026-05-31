@@ -236,8 +236,8 @@ export default Base => {
           if (this.hp.value <= 0) { await this.takeHealing(1 - this.hp.value); }
           if (this.mp.value <= 0) { await this.takeRevitalizing(1 - this.mp.value); }
           await this.parent.toggleStatusEffect("dead", { active: false });
-          const toRemove = this.parent.consequences.filter(c => c.statuses.has("dead")).map(c => c.id);
-          await this.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
+          const toDelete = this.parent.applicables.filter(c => c.statuses.has("dead")).map(c => c.id);
+          await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
         }
       }
     }

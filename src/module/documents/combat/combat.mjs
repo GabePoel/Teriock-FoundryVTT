@@ -76,10 +76,7 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
   #tryExpirations(effectActor, timeActor, trigger, time) {
     const ops = [];
     const mightExpire = [];
-    if (effectActor) {
-      mightExpire.push(...effectActor.consequences);
-      mightExpire.push(...effectActor.imbuements);
-    }
+    if (effectActor) { mightExpire.push(...effectActor.applicables); }
     for (const effect of mightExpire) { this.#checkExpiration(effect, trigger, time, timeActor?.uuid, ops); }
     if (ops.length === 0) { return; }
     game.users.queryGM("teriock.massWrite", { operations: ops }, {

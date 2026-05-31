@@ -23,8 +23,8 @@ export default Base => {
        */
       async removeCondition(status) {
         await this.parent.toggleStatusEffect(status, { active: false });
-        const toRemove = this.parent.consequences.filter(c => c.statuses.has(status)).map(c => c.id);
-        await this.parent.deleteEmbeddedDocuments("ActiveEffect", toRemove);
+        const toDelete = this.parent.applicables.filter(c => c.statuses.has(status)).map(c => c.id);
+        await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
       }
     }
   );
