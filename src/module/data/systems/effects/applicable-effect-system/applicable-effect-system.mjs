@@ -1,6 +1,7 @@
 import { inCombatExpirationDialog } from "../../../../applications/dialogs/_module.mjs";
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { dedent } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";
@@ -142,7 +143,8 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
 
   /** @inheritDoc */
   get messageBlocks() {
-    return [...super.messageBlocks, ...this.blocks];
+    if (this.parent._source.description) { return super.messageBlocks; }
+    return this.blocks;
   }
 
   /** @inheritDoc */
@@ -203,7 +205,7 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
   prepareDerivedData() {
     super.prepareDerivedData();
     const blocks = this.messageBlocks;
-    if (!blocks?.length) { return; }
+    if (this.parent._source.description || !blocks?.length) { return; }
     const blocksHTML = blocks.reduce((acc, block) => {
       if (!block.text) { return acc; }
       const safeTitle = foundry.utils.escapeHTML(block.title || "");
@@ -215,10 +217,10 @@ export default class ApplicableEffectSystem extends mixClasses(BaseEffectSystem,
       </div>`;
     }, "");
     if (blocksHTML) {
-      this.parent.description = `
+      this.parent.description = dedent(`
       <div class="teriock-panel teriock-description-panel">
         <div class="teriock-panel-body">${blocksHTML}</div>
-      </div>`;
+      </div>`).trim();
     }
   }
 

@@ -142,7 +142,7 @@ export default Base => {
         return Object.assign(super.getLocalRollData(), {
           ...Object.fromEntries(Object.entries(this.costs.tweaks).map(([k, v]) => [`tweaks.${k}`, v])),
           ...Object.fromEntries(
-            Object.entries(this.costs.components).map(([k, v]) => [`components.${k}`, Number(v.type)]),
+            Object.entries(this.costs.components).map(([k, v]) => [`components.${k}`, Number(Boolean(v.type))]),
           ),
           ...Object.fromEntries(
             Object.entries(this.costs.primary).map((

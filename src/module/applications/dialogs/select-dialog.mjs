@@ -248,6 +248,7 @@ export async function selectClassDialog(classes = null) {
   const classJournal = await resolveDocument(game.teriock.packs.rules.getName("Class"));
   let choices = classJournal?.pages.contents;
   if (classes) { choices = choices.filter(c => classes.includes(c.system.identifier)); }
+  choices = choices.filter((c) => c.system.archetype !== "archetype:everyman");
   if (choices.length === 0) { return null; }
   const chosen = await selectDocumentDialog(choices, {
     hint: _loc("TERIOCK.DIALOGS.Select.Class.hint"),
