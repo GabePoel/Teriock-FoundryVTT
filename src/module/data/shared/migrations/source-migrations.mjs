@@ -2,7 +2,7 @@ const { deleteProperty, getProperty, hasProperty, setProperty } = foundry.utils;
 
 const PACKS = ["properties", "abilities"];
 const PACK_MAP = Object.fromEntries(
-  PACKS.map(id => [`Compendium.teriock.${id}.Item.`, `Compendium.teriock.${id}.ActiveEffect.`]),
+  PACKS.map(pack => [`Compendium.teriock.${pack}.Item.`, `Compendium.teriock.${pack}.ActiveEffect.`]),
 );
 
 /**
@@ -27,6 +27,7 @@ export function migrateUuid(uuid) {
  * @param {string} oldKey
  * @param {string} newKey
  * @param {(val) => *} [transform]
+ * @todo Maybe replace this with {@link foundry.abstract.Document._addDataFieldMigration}?
  */
 export function migrateKey(source, oldKey, newKey, transform = val => val) {
   if (hasProperty(source, oldKey) && !hasProperty(source, newKey)) {

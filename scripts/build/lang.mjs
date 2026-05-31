@@ -6,11 +6,13 @@ import { default as automations } from "../../src/en/automations.json" with { ty
 import { default as base } from "../../src/en/base.json" with { type: "json" };
 import { default as changes } from "../../src/en/changes.json" with { type: "json" };
 import { default as commands } from "../../src/en/commands.json" with { type: "json" };
+import { default as compendium } from "../../src/en/compendium.json" with { type: "json" };
 import { default as configs } from "../../src/en/configs.json" with { type: "json" };
 import { default as costs } from "../../src/en/costs.json" with { type: "json" };
 import { default as dialogs } from "../../src/en/dialogs.json" with { type: "json" };
 import { default as documents } from "../../src/en/documents.json" with { type: "json" };
 import { default as effects } from "../../src/en/effects.json" with { type: "json" };
+import { default as elements } from "../../src/en/elements.json" with { type: "json" };
 import { default as fields } from "../../src/en/fields.json" with { type: "json" };
 import { default as format } from "../../src/en/format.json" with { type: "json" };
 import { default as macros } from "../../src/en/macros.json" with { type: "json" };
@@ -119,12 +121,14 @@ mergeObjects(
   automations,
   changes,
   commands,
+  compendium,
   configs,
   content,
   costs,
   dialogs,
   documents,
   effects,
+  elements,
   fields,
   format,
   macros,
