@@ -31,6 +31,11 @@ export default function ActivatableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, { pseudos: { Activation: "system.activations" } });
+      }
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           activations: new PseudoCollectionField(BaseActivation, { types: this.activationTypes }),

@@ -105,7 +105,6 @@ export default class AbilitySystem
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability", "fluency"],
-      hierarchy: true,
       passive: true,
       type: "ability",
       usable: true,

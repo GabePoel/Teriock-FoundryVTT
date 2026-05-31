@@ -7,7 +7,7 @@ import { EvaluationField, FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/helpers/initializers.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { UsableDataMixin } from "../../../shared/mixins/_module.mjs";
-import { CommonSystemMixin, HierarchySystemMixin } from "../../mixins/_module.mjs";
+import { AutomatableSystemMixin, CommonSystemMixin, HierarchySystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;
@@ -21,11 +21,14 @@ export default function ChildSystemMixin(Base) {
      * @extends {TypeDataModel}
      * @extends {Teriock.Models.ChildSystemData}
      * @mixes CommonSystem
+     * @mixes AutomatableSystem
      * @mixes UsableData
      * @mixes HierarchySystem
      * @mixin
      */
-    class ChildSystem extends mixClasses(Base, CommonSystemMixin, UsableDataMixin, HierarchySystemMixin) {
+    class ChildSystem
+      extends mixClasses(Base, CommonSystemMixin, AutomatableSystemMixin, UsableDataMixin, HierarchySystemMixin)
+    {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
 
@@ -37,7 +40,7 @@ export default function ChildSystemMixin(Base) {
         return Object.assign(super.defineSchema(), {
           boosts: new fields.SchemaField(
             objectMap(impactConfig, e => new FormulaField({ deterministic: false, initial: "", label: e.label }), {
-              filter: e => !e.hidden,
+              filter: e => !e?.hidden,
             }),
             { persisted: false },
           ),
@@ -125,7 +128,7 @@ export default function ChildSystemMixin(Base) {
           tooltip: this.parent.disabled
             ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
             : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-          visible: this.parent.isOwner,
+          visible: this.parent?.isOwner,
           onClick: () => this.parent.toggleDisabled(),
         }];
       }
@@ -187,7 +190,7 @@ export default function ChildSystemMixin(Base) {
           icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.enable"),
           onClick: this.parent.enable.bind(this.parent),
-          visible: this.parent.isOwner
+          visible: this.parent?.isOwner
             && this.parent.disabled
             && this.parent.type !== "equipment"
             && this.parent.type !== "mount"
@@ -197,7 +200,7 @@ export default function ChildSystemMixin(Base) {
           icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Child.MENU.disable"),
           onClick: this.parent.disable.bind(this.parent),
-          visible: this.parent.isOwner
+          visible: this.parent?.isOwner
             && !this.parent.disabled
             && this.parent.type !== "equipment"
             && this.parent.type !== "mount"

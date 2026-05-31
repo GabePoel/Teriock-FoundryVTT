@@ -15,6 +15,11 @@ export default function HierarchySystemMixin(Base) {
       static PRESERVED_PROPERTIES = ["system._ref", "system._sup", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
+      static get metadata() {
+        return Object.assign(super.metadata, { hierarchy: true });
+      }
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           _dep: new fields.StringField({ blank: true, nullable: true, required: false }),

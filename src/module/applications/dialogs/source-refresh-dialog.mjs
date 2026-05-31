@@ -36,7 +36,7 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
   };
 
   static PARTS = {
-    select: { scrollable: [".doc-list-container"], template: "teriock/dialogs/select" },
+    select: { scrollable: [".doc-list-container"], template: "teriock/dialogs/document-selector" },
     options: { template: "teriock/shared/field-list-part" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };

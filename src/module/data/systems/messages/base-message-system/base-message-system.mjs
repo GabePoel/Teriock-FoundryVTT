@@ -19,6 +19,7 @@ const { ImagePopout } = foundry.applications.apps;
  * @mixes ActivatableSystem
  */
 export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSystemMixin, ActivatableSystemMixin) {
+  /** @inheritDoc */
   static get _activationTypes() {
     return Object.values(activations).filter(a => foundry.utils.isSubclass(a, BaseActivation));
   }
@@ -107,7 +108,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
           clickTimeout = null;
         }
         const actor = /** @type {TeriockActor} */ await fromUuid(container.dataset.actorUuid);
-        if (actor?.isOwner) { await actor.sheet.render(true); }
+        if (actor.isOwner) { await actor.sheet.render(true); }
       });
     });
 
@@ -140,9 +141,10 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
    */
   async _prepareContext(options = {}) {
     return {
-      activations: this.activations.contents.filter(a => a.visible),
+      activations: this.activations.contents.filter(a => a?.visible),
       isContentVisible: this.document.isContentVisible,
       system: this,
+      TERIOCK,
       ...options,
     };
   }

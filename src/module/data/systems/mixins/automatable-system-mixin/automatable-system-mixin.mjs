@@ -32,6 +32,11 @@ export default function AutomatableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      static get metadata() {
+        return foundry.utils.mergeObject(super.metadata, { pseudos: { Automation: "system.automations" } });
+      }
+
+      /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           automations: new PseudoCollectionField(BaseAutomation, { types: this.automationTypes }),

@@ -39,11 +39,6 @@ export default class HarmSystem
   }
 
   /** @inheritDoc */
-  static get metadata() {
-    return { pseudos: { Automation: "system.automations" } };
-  }
-
-  /** @inheritDoc */
   get fullName() {
     return _loc("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
       name: super.fullName,

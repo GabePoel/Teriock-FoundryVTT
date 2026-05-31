@@ -3,7 +3,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
 import { AccessDataMixin, AutomatedDataMixin, PropagationDataMixin } from "../../../shared/mixins/_module.mjs";
-import { AutomatableSystemMixin, RulesSystemMixin } from "../../mixins/_module.mjs";
+import { RulesSystemMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -23,7 +23,6 @@ export default function CommonSystemMixin(Base) {
      * @mixes RulesSystem
      * @mixes PropagationData
      * @mixes AccessData
-     * @mixes AutomatableSystem
      * @mixes AutomatedData
      * @mixin
      */
@@ -34,7 +33,6 @@ export default function CommonSystemMixin(Base) {
         RulesSystemMixin,
         PropagationDataMixin,
         AccessDataMixin,
-        AutomatableSystemMixin,
         AutomatedDataMixin,
       )
     {
@@ -69,7 +67,7 @@ export default function CommonSystemMixin(Base) {
           hierarchy: false,
           passive: false,
           preservedProperties: this.PRESERVED_PROPERTIES,
-          pseudos: { Automation: "system.automations" },
+          pseudos: {},
           revealable: false,
           stats: false,
           tooltip: true,
@@ -260,12 +258,11 @@ export default function CommonSystemMixin(Base) {
 
       /** @inheritDoc */
       async _propagateOperation(methodName, isAsync = false, args = []) {
-        for (const automation of this.automations.contents) {
-          if (typeof automation[methodName] === "function") {
-            if (isAsync) {
-              await automation[methodName](...args);
-            } else {
-              automation[methodName](...args);
+        for (const collection of Object.values(this.pseudoCollections)) {
+          for (const pseudo of collection.contents) {
+            if (typeof pseudo[methodName] === "function") {
+              if (isAsync) { await pseudo[methodName](...args); }
+              else { pseudo[methodName](...args); }
             }
           }
         }
@@ -483,7 +480,7 @@ export default function CommonSystemMixin(Base) {
           }
         }
         if (recursive) {
-          for (const child of fullOverride ? await this.parent.getSubs() : await this.parent.getChildArray()) {
+          for (const child of ((fullOverride && this.metadata.hierarchy) ? await this.parent.getSubs() : await this.parent.getChildArray())) {
             const childSource = await fromUuid(child._stats.compendiumSource);
             await child.system.refreshFromSource(childSource, {
               createChildren,
