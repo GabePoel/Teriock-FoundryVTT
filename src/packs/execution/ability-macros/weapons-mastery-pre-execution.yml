@@ -5,9 +5,11 @@ _stats:
   lastModifiedBy: teriockBuilder00
   systemId: teriock
   systemVersion: 0.12.72
-command: |-
+command: >-
   const equipmentClass = await tm.dialogs.selectEquipmentClassDialog();
+
   const childChangeId = foundry.utils.randomID();
+
   const consequenceData = {
     img: scope.effect?.img,
     name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", { name: scope.effect?.name || "" }).trim(),
@@ -28,9 +30,12 @@ command: |-
     type: "consequence",
   };
 
-  const activation = new teriock.data.pseudoDocuments.activations.AddDocumentsActivation({
+
+  const activation = new
+  teriock.data.pseudoDocuments.activations.AddDocumentsActivation({
     primary: { root: { data: consequenceData } },
   });
+
   scope.execution.activations.push(activation);
 folder: SsB1D27Gn6q9lTTV
 img: icons/svg/dice-target.svg

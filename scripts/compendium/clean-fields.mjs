@@ -20,6 +20,7 @@ export function cleanDocument(doc) {
   }
   if (doc.flags) { delete doc.flags.teriockDocumentSettings; }
   if (doc.system) {
+    if (doc.name !== "Basic Abilities") { delete doc.system.settings; }
     delete doc.system.forceSuppressed;
     cleanCommon(doc);
     cleanActiveEffect(doc);
@@ -111,7 +112,9 @@ function cleanActor(doc) {
     if (doc.prototypeToken.ring) {
       delete doc.prototypeToken.ring.colors;
       delete doc.prototypeToken.ring.effects;
-      delete doc.prototypeToken.ring.subject;
+      if (doc.prototypeToken.ring.subject) {
+        delete doc.prototypeToken.ring.subject.scale;
+      }
     }
     if (doc.prototypeToken.texture) {
       delete doc.prototypeToken.texture.alphaThreshold;
