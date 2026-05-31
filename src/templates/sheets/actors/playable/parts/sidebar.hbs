@@ -11,56 +11,56 @@
   <div class="character-sidebar-container">
     <div class="character-intro-box">
       <div
-        class='
+        class="
           character-avatar
           timage
-          {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
+          {{#if displayedImgRing}}
             ring
           {{/if}}
-        '
+        "
         data-src="{{ img }}"
       >
         <div class="character-avatar-shadow">
           <div class="character-avatar-buttons take-harm-button">
-            {{#if (eq avatarImagePath "prototypeToken.texture.src")}}
+            {{#if (eq displayedImgDocument "token")}}
               <div
                 class="thover"
-                {{#if document.prototypeToken.ring.enabled}}
+                {{#if displayedImgRing}}
                   data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringEnabled"}}"
                 {{else}}
                   data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringDisabled"}}"
                 {{/if}}
                 data-action="toggleRing"
               >
-                {{makeIcon (lookup TERIOCK.display.icons.ui (ifThen document.prototypeToken.ring.enabled "enabled" "disabled")) "light"}}
+                {{makeIcon (lookup TERIOCK.display.icons.ui (ifThen displayedImgRing "enabled" "disabled")) "light"}}
               </div>
             {{/if}}
-            <div class="thover" data-tooltip="{{ avatarTooltip }}" data-action="switchImage">
-              {{makeIcon avatarIcon "light"}}
+            <div class="thover" data-tooltip="{{ displayedImgTooltip }}" data-action="switchImage">
+              {{makeIcon displayedImgIcon "light"}}
             </div>
           </div>
         </div>
         <img
           class="character-avatar-img"
-          src="{{path document avatarImagePath}}"
-          data-edit="{{ avatarImagePath }}"
+          src="{{ displayedImg }}"
+          data-edit="{{ editableImgPath }}"
           data-action="editImage"
           alt="{{ name }}"
         />
         <div class="character-avatar-background">
-          {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
+          {{#if displayedImgRing}}
             <div class="character-avatar-token-circle inner"></div>
             <div class="character-avatar-token-circle outer"></div>
           {{/if}}
         </div>
       </div>
       <div
-        class='
+        class="
           character-name
-          {{#if (and (eq avatarImagePath "prototypeToken.texture.src") document.prototypeToken.ring.enabled)}}
+          {{#if displayedImgRing}}
             ring
           {{/if}}
-        '
+        "
         data-debug="true"
       >
         {{formInput
