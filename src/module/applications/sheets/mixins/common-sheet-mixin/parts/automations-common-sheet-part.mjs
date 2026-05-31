@@ -147,7 +147,7 @@ export default Base => {
         if (!this.isEditable) { return; }
         new TeriockContextMenu(this.element, ".teriock-automation-header", [{
           icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
-          label: _loc("TERIOCK.SYSTEMS.Common.MENU.duplicate"),
+          label: _loc("SIDEBAR.Duplicate"),
           onClick: async (_ev, el) => {
             const uuid = el.dataset.uuid;
             if (!uuid) { return; }

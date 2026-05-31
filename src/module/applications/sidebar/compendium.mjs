@@ -1,7 +1,22 @@
+import { makeIconClass } from "../../helpers/utils.mjs";
+
 const { Compendium } = foundry.applications.sidebar.apps;
 
 export default class TeriockCompendium extends Compendium {
   static _entryPartial = "teriock/sidebar/index-partial";
+
+  /** @inheritDoc */
+  _getEntryContextOptions() {
+    return [...super._getEntryContextOptions(), {
+      icon: makeIconClass(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
+      label: "TERIOCK.COMPENDIUM.DuplicateEntry",
+      visible: game.user.isGM && !this.collection?.locked,
+      onClick: async (_ev, li) => {
+        const document = await this.collection?.getDocument(li.dataset.entryId);
+        await document?.duplicate();
+      },
+    }];
+  }
 
   /** @inheritDoc */
   async _onRender(context, options) {

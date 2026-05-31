@@ -73,7 +73,10 @@ export default function ChildDocumentMixin(Base) {
        * @returns {Promise<ChildDocument>}
        */
       async duplicate(data = {}) {
-        const copy = foundry.utils.mergeObject(this.toObject(true), data);
+        const copy = foundry.utils.mergeObject(this.toObject(true), {
+          name: _loc("DOCUMENT.CopyOf", { name: this._source.name }),
+          ...data,
+        });
         copy._stats.duplicateSource = this.uuid;
         let copyDocument;
         if (this.isEmbedded) { copyDocument = await this.parent.createEmbeddedDocuments(this.documentName, [copy]); }
