@@ -51,7 +51,7 @@ export default class TeriockRollTable
    * @param {object} messageOptions
    */
   async toMessage(results, { messageData = {}, messageOptions = {}, roll }) {
-    messageOptions.rollMode ??= game.settings.get("core", "rollMode");
+    messageOptions.messageMode ??= game.settings.get("core", "messageMode");
     const flavorKey = `TABLE.DrawFlavor${results.length > 1 ? "Plural" : ""}`;
     messageData = foundry.utils.mergeObject({
       author: game.user.id,

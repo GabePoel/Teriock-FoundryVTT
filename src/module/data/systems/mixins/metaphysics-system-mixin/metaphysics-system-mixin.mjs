@@ -26,17 +26,27 @@ export default function MetaphysicsSystemMixin(Base) {
         });
       }
 
+      /** @inheritDoc */
+      get _displayInputs() {
+        return [...super._displayInputs, ...this._displayInputsMetaphysics];
+      }
+
       /**
        * Metaphysics display inputs.
-       * @returns {Teriock.Sheet.DisplayField[]}
+       * @returns {Teriock.Display.DisplayField[]}
        */
       get _displayInputsMetaphysics() {
         return ["system.powerSources", "system.elements", "system.effectTypes"];
       }
 
+      /** @inheritDoc */
+      get _displayTags() {
+        return [...super._displayTags, ...this._metaphysicsTags];
+      }
+
       /**
        * Metaphysics tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
+       * @returns {Teriock.Display.DisplayTag[]}
        */
       get _metaphysicsTags() {
         return [
@@ -59,16 +69,6 @@ export default function MetaphysicsSystemMixin(Base) {
             };
           }),
         ];
-      }
-
-      /** @inheritDoc */
-      get displayInputs() {
-        return [...super.displayInputs, ...this._displayInputsMetaphysics];
-      }
-
-      /** @inheritDoc */
-      get displayTags() {
-        return [...super.displayTags, ...this._metaphysicsTags];
       }
 
       /**

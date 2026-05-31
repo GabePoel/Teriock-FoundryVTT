@@ -79,6 +79,11 @@ export default class BaseActorSystem
     return Object.assign(super.defineSchema(), { settings: new fields.EmbeddedDataField(ActorSettingsModel) });
   }
 
+  /** @inheritDoc */
+  get _displayToggles() {
+    return [...super._displayToggles, "disabled"];
+  }
+
   /**
    * Labeled tags that represent how this scales.
    * @returns {string[]}
@@ -89,11 +94,6 @@ export default class BaseActorSystem
       _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", { number: this.scaling.br }),
       _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", { number: this.size.number }),
     ];
-  }
-
-  /** @inheritDoc */
-  get displayToggles() {
-    return [...super.displayToggles, "disabled"];
   }
 
   /** @inheritDoc */

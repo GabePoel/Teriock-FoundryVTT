@@ -11,7 +11,7 @@ declare global {
       /** <schema> UUID of the document this is sourced from */
       _src: UUID<TeriockAbility> | null;
       /** <schema> Blocks representing the source */
-      blocks: Teriock.Messages.MessageBlock[];
+      blocks: Teriock.Panels.PanelBlock[];
       /** <schema> If this was the result of an effect that went critical */
       critical: boolean;
       /** <schema> Circumstances in which this effect is active or expires */

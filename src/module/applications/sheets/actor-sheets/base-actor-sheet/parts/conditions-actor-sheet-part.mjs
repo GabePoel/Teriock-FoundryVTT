@@ -44,7 +44,7 @@ export default Base =>
           fromUuidSync(uuid)
         ).filter(t => t);
         if (tokenDocs.length > 0) {
-          /** @type {Teriock.Messages.MessageAssociation} */
+          /** @type {Teriock.Panels.PanelAssociation} */
           const association = {
             cards: [],
             icon: TERIOCK.config.document.creature.icon,

@@ -54,7 +54,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   /** @type {TeriockChatMessage|undefined} */
   message;
 
-  /** @type {Teriock.Messages.MessagePanel[]} */
+  /** @type {Teriock.Panels.PanelParts[]} */
   panels = [];
 
   /** @type {BaseRoll[]} */

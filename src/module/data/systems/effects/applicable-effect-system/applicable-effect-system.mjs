@@ -75,9 +75,14 @@ export default class ApplicableEffectSystem
     });
   }
 
+  /** @inheritDoc */
+  get _displayFields() {
+    return ["description"];
+  }
+
   /**
    * A message bar with duration information.
-   * @returns {Teriock.Messages.MessageBar}
+   * @returns {Teriock.Panels.PanelBar}
    */
   get _durationBar() {
     return {
@@ -94,9 +99,20 @@ export default class ApplicableEffectSystem
     return tags;
   }
 
+  /** @inheritDoc */
+  get _panelBars() {
+    return [this._durationBar, this._statusBar];
+  }
+
+  /** @inheritDoc */
+  get _panelBlocks() {
+    if (this.parent._source.description) { return super._panelBlocks; }
+    return this.blocks;
+  }
+
   /**
    * A message bar with status information.
-   * @returns {Teriock.Messages.MessageBar}
+   * @returns {Teriock.Panels.PanelBar}
    */
   get _statusBar() {
     return {
@@ -112,11 +128,6 @@ export default class ApplicableEffectSystem
           : "",
       ],
     };
-  }
-
-  /** @returns {Teriock.Sheet.DisplayField[]} */
-  get displayFields() {
-    return ["description"];
   }
 
   /** @inheritDoc */
@@ -138,17 +149,6 @@ export default class ApplicableEffectSystem
    */
   get maneuver() {
     return "passive";
-  }
-
-  /** @inheritDoc */
-  get messageBars() {
-    return [this._durationBar, this._statusBar];
-  }
-
-  /** @inheritDoc */
-  get messageBlocks() {
-    if (this.parent._source.description) { return super.messageBlocks; }
-    return this.blocks;
   }
 
   /** @inheritDoc */
@@ -199,7 +199,7 @@ export default class ApplicableEffectSystem
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    const blocks = this.messageBlocks;
+    const blocks = this._panelBlocks;
     if (this.parent._source.description || !blocks?.length) { return; }
     const blocksHTML = blocks.reduce((acc, block) => {
       if (!block.text) { return acc; }

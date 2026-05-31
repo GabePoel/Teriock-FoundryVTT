@@ -33,6 +33,14 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     return super.migrateData(source, options, state);
   }
 
+  /** @inheritDoc */
+  get _displayToggles() {
+    return [...super._displayToggles, {
+      label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
+      path: "disabled",
+    }];
+  }
+
   /**
    * If this is suppressed due to its parent being dampened.
    * @returns {boolean}
@@ -109,14 +117,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
    */
   get childChanges() {
     return this.getAutomations("childChange", { active: true }).flatMap(a => a.getChanges());
-  }
-
-  /** @inheritDoc */
-  get displayToggles() {
-    return [...super.displayToggles, {
-      label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
-      path: "disabled",
-    }];
   }
 
   /**

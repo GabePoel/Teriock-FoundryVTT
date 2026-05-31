@@ -143,6 +143,16 @@ export default function CommonSystemMixin(Base) {
         return childMap;
       }
 
+      /** @returns {Record<string, Teriock.EmbedData.EmbedAction>} */
+      get _embedActions() {
+        return {};
+      }
+
+      /** @returns {Teriock.EmbedData.EmbedIcon[]} */
+      get _embedIcons() {
+        return [];
+      }
+
       /** @returns {string} */
       get _masterText() {
         return this.parent.master?.fullName || this.parent.master?.name || "";
@@ -186,22 +196,12 @@ export default function CommonSystemMixin(Base) {
         return this.parent;
       }
 
-      /** @returns {Record<string, Teriock.EmbedData.EmbedAction>} */
-      get embedActions() {
-        return {};
-      }
-
-      /** @returns {Teriock.EmbedData.EmbedIcon[]} */
-      get embedIcons() {
-        return [];
-      }
-
       /** @returns {Partial<Teriock.EmbedData.EmbedParts>} */
       get embedParts() {
         return {
           color: this.color,
           draggable: true,
-          icons: this.embedIcons.filter(i => this.#checkEmbedIcon(i)),
+          icons: this._embedIcons.filter(i => this.#checkEmbedIcon(i)),
           id: /** @type {ID<AnyCommonDocument>} */ this.parent.id,
           img: this.parent.img,
           inactive: !this.parent.active,
@@ -216,12 +216,18 @@ export default function CommonSystemMixin(Base) {
         };
       }
 
-      /** @returns {Teriock.EmbedData.EmbedIcon|undefined} */
+      /**
+       * A single icon which denotes something about this document.
+       * @returns {Teriock.EmbedData.EmbedIcon|null}
+       */
       get tagIcon() {
-        return undefined;
+        return null;
       }
 
-      /** @returns {Teriock.Documents.CommonType[]} */
+      /**
+       * Special handling for the types of this document's children that are visible.
+       * @returns {Teriock.Documents.CommonType[]}
+       */
       get visibleTypes() {
         return this.metadata.visibleTypes;
       }
@@ -312,7 +318,7 @@ export default function CommonSystemMixin(Base) {
         return rollData;
       }
 
-      /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+      /** @returns {Promise<Partial<Teriock.Panels.PanelParts>>} */
       async getPanelParts() {
         const parts = Object.assign(await super.getPanelParts(), {
           color: this.color || undefined,

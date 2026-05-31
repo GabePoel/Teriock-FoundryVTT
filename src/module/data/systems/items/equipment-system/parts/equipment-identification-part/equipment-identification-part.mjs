@@ -20,9 +20,22 @@ export default Base => {
         return { ...super.defineSchema(), identification: new EmbeddedDataField(IdentificationModel) };
       }
 
+      /** @inheritDoc */
+      get _displayFields() {
+        return [{
+          classes: "faded-display-field",
+          path: "system.identification.notes",
+          visible: game.user.isGM && !this.identification.identified,
+        }, {
+          classes: "faded-display-field",
+          path: "system.identification.flaws",
+          visible: game.user.isGM && !this.identification.identified,
+        }, ...super._displayFields];
+      }
+
       /**
        * Identification tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
+       * @returns {Teriock.Display.DisplayTag[]}
        */
       get _identificationTags() {
         const tags = [];
@@ -44,19 +57,6 @@ export default Base => {
           }
         }
         return tags;
-      }
-
-      /** @inheritDoc */
-      get displayFields() {
-        return [{
-          classes: "faded-display-field",
-          path: "system.identification.notes",
-          visible: game.user.isGM && !this.identification.identified,
-        }, {
-          classes: "faded-display-field",
-          path: "system.identification.flaws",
-          visible: game.user.isGM && !this.identification.identified,
-        }, ...super.displayFields];
       }
 
       /** @inheritDoc */

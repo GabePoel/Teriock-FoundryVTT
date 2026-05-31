@@ -26,42 +26,97 @@ export default function BaseSystemMixin(Base) {
         return { _src: new fields.DocumentUUIDField({ initial: null, nullable: true }) };
       }
 
-      /** @returns {string} */
+      /**
+       * Custom buttons to activate things from sheet menus. Should not toggle HTML fields.
+       * @returns {Teriock.Display.DisplayButton[]}
+       */
+      get _displayButtons() {
+        return [];
+      }
+
+      /**
+       * HTML fields to display on sheets and in panels.
+       * @returns {Teriock.Display.DisplayField[]}
+       */
+      get _displayFields() {
+        return [];
+      }
+
+      /**
+       * Inputs to display in sheet menus.
+       * @returns {Teriock.Display.DisplayField[]}
+       */
+      get _displayInputs() {
+        return [];
+      }
+
+      /**
+       * Tags to display on sheets below the menu.
+       * @returns {Teriock.Display.DisplayTag[]}
+       */
+      get _displayTags() {
+        return [];
+      }
+
+      /**
+       * Toggles to display in sheet menus.
+       * @returns {Teriock.Display.DisplayField[]}
+       */
+      get _displayToggles() {
+        return [];
+      }
+
+      /**
+       * A string to display following a colon after a document's name. Used for documents where there's one key scaling
+       * parameter that is always important to see with the document.
+       * @returns {string}
+       */
       get _nameBadge() {
         return "";
       }
 
-      /** @returns {string[]} */
+      /**
+       * Tags to display in parentheses after a document's name. Used for things that distinguish variations on some
+       * modified document.
+       * @returns {string[]}
+       */
       get _nameTags() {
         return [];
       }
 
-      /** @returns {Teriock.Sheet.DisplayButton[]} */
-      get displayButtons() {
+      /**
+       * Bars to show in a panel.
+       * @returns {Teriock.Panels.PanelBar[]}
+       */
+      get _panelBars() {
         return [];
       }
 
-      /** @returns {Teriock.Sheet.DisplayField[]} */
-      get displayFields() {
-        return [];
+      /**
+       * Blocks to show in a panel.
+       * @returns {Teriock.Panels.PanelBlock[]}
+       */
+      get _panelBlocks() {
+        return fancifyFields(this._displayFields).map(f => {
+          const schema = this.parent.getFieldForProperty(f.path);
+          let value = foundry.utils.getProperty(this.parent._source, f.path);
+          if (!value) { value = foundry.utils.getProperty(this.parent, f.path); }
+          if (value && !schema.gmOnly) { return { classes: f.classes, text: value, title: f.label || schema.label }; }
+        }).filter(f => f);
       }
 
-      /** @returns {Teriock.Sheet.DisplayField[]} */
-      get displayInputs() {
-        return [];
+      /**
+       * A color to display around the icon for this document.
+       * @returns {string|null}
+       */
+      get color() {
+        return null;
       }
 
-      /** @returns {Teriock.Sheet.DisplayTag[]} */
-      get displayTags() {
-        return [];
-      }
-
-      /** @returns {Teriock.Sheet.DisplayField[]} */
-      get displayToggles() {
-        return [];
-      }
-
-      /** @returns {string} */
+      /**
+       * A string containing the document's name and any other additional adjustments that go along with it.
+       * @returns {string}
+       */
       get fullName() {
         let name = this.parent?.name ?? "";
         if (this._nameBadge) {
@@ -76,24 +131,12 @@ export default function BaseSystemMixin(Base) {
         return name.trim();
       }
 
-      /** @return {boolean} */
+      /**
+       * Whether this document shouldn't have basic information about where it came from visible.
+       * @return {boolean}
+       */
       get isSecret() {
         return false;
-      }
-
-      /** @returns {Teriock.Messages.MessageBar[]} */
-      get messageBars() {
-        return [];
-      }
-
-      /** @returns {Teriock.Messages.MessageBlock[]} */
-      get messageBlocks() {
-        return fancifyFields(this.displayFields).map(f => {
-          const schema = this.parent.getFieldForProperty(f.path);
-          let value = foundry.utils.getProperty(this.parent._source, f.path);
-          if (!value) { value = foundry.utils.getProperty(this.parent, f.path); }
-          if (value && !schema.gmOnly) { return { classes: f.classes, text: value, title: f.label || schema.label }; }
-        }).filter(f => f);
       }
 
       /** @returns {Partial<Teriock.Documents.ModelMetadata>} */
@@ -109,12 +152,15 @@ export default function BaseSystemMixin(Base) {
         return {};
       }
 
-      /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+      /**
+       * Parts of a panel.
+       * @returns {Promise<Partial<Teriock.Panels.PanelParts>>}
+       */
       async getPanelParts() {
         return {
-          associations: /** @type {Teriock.Messages.MessageAssociation[]} */ [],
-          bars: this.messageBars,
-          blocks: this.messageBlocks,
+          associations: /** @type {Teriock.Panels.PanelAssociation[]} */ [],
+          bars: this._panelBars,
+          blocks: this._panelBlocks,
         };
       }
     }

@@ -417,14 +417,14 @@ export default class BaseRoll extends Roll {
 
   /**
    * Panels that are created by this roll.
-   * @returns {Promise<Teriock.Messages.MessagePanel[]>}
+   * @returns {Promise<Teriock.Panels.PanelParts[]>}
    */
   async getPanels() {
     return [];
   }
 
   /** @inheritDoc */
-  async toMessage(messageData = {}, { create = true, rollMode } = {}) {
+  async toMessage(messageData = {}, { create = true, messageMode } = {}) {
     const activations = await this.getActivations();
     const panels = await this.getPanels();
     messageData = foundry.utils.mergeObject({
@@ -433,6 +433,6 @@ export default class BaseRoll extends Roll {
         panels,
       },
     }, messageData);
-    return super.toMessage(messageData, { create, rollMode });
+    return super.toMessage(messageData, { create, messageMode });
   }
 }

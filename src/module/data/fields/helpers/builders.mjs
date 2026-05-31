@@ -168,9 +168,6 @@ export function blocksField() {
   return new ArrayField(
     new SchemaField({
       classes: new StringField({ initial: "" }),
-      elements: new StringField({ nullable: true }),
-      italic: new BooleanField({ initial: false, required: false }),
-      special: new StringField({ nullable: true }),
       text: new StringField({ blank: true, nullable: true }),
       title: new StringField(),
     }),

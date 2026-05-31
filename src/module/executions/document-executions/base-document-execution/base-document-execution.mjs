@@ -73,7 +73,7 @@ export default class BaseDocumentExecution extends BaseExecution {
 
   /**
    * Makes a panel representing the source document.
-   * @returns {Promise<Teriock.Messages.MessagePanel>}
+   * @returns {Promise<Teriock.Panels.PanelParts>}
    */
   async _buildSourcePanel() {
     return this.source.toPanel();

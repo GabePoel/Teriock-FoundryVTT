@@ -92,13 +92,13 @@ export default function ArmamentSystemMixin(Base) {
 
       /**
        * Armament tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
+       * @returns {Teriock.Display.DisplayTag[]}
        */
       get _armamentTags() {
         return [...this._propertyTags, ...this._rangeTags];
       }
 
-      /** @returns {Teriock.Messages.MessageBar} */
+      /** @returns {Teriock.Panels.PanelBar} */
       get _attackBar() {
         return {
           icon: TERIOCK.display.icons.interaction.attack,
@@ -127,7 +127,7 @@ export default function ArmamentSystemMixin(Base) {
           : [];
       }
 
-      /** @returns {Teriock.Messages.MessageBar} */
+      /** @returns {Teriock.Panels.PanelBar} */
       get _defenseBar() {
         return {
           icon: TERIOCK.display.icons.interaction.block,
@@ -139,67 +139,9 @@ export default function ArmamentSystemMixin(Base) {
         };
       }
 
-      /**
-       * Armament display inputs.
-       * @returns {Teriock.Sheet.DisplayField[]}
-       */
-      get _displayInputsArmament() {
-        return ["system.fightingStyle"];
-      }
-
-      /**
-       * Equipment classes tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
-       */
-      get _equipmentClassesTags() {
-        return Array.from(this.equipmentClasses).map(t => {
-          return {
-            label: TERIOCK.reference.equipmentClasses[t],
-            tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
-          };
-        });
-      }
-
-      /**
-       * Property tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
-       */
-      get _propertyTags() {
-        const tags = [];
-        if (this.spellTurning) {
-          tags.push({ label: "TERIOCK.TERMS.Properties.spellTurning", tooltip: "TERIOCK.PACKS.properties" });
-        }
-        if (this.warded) { tags.push({
-            label: "TERIOCK.TERMS.Properties.warded",
-            tooltip: "TERIOCK.PACKS.properties",
-          }); }
-        return tags;
-      }
-
-      /**
-       * Range tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
-       */
-      get _rangeTags() {
-        const tags = [];
-        if (this.range.melee && this.range.long.unitType !== "zero") {
-          tags.push({
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
-            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-          });
-        }
-        if (this.range.ranged) {
-          tags.push({
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
-            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-          });
-        }
-        return tags;
-      }
-
       /** @inheritDoc */
-      get displayButtons() {
-        const buttons = super.displayButtons;
+      get _displayButtons() {
+        const buttons = super._displayButtons;
         if (!formulaExists(this.damage.base)) {
           buttons.push({
             button: "damage",
@@ -255,8 +197,8 @@ export default function ArmamentSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      get displayFields() {
-        return ["system.notes", ...super.displayFields, {
+      get _displayFields() {
+        return ["system.notes", ...super._displayFields, {
           classes: TERIOCK.display.panel.classes.derived,
           editable: false,
           label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {
@@ -267,13 +209,71 @@ export default function ArmamentSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      get displayInputs() {
-        return [...super.displayInputs, ...this._displayInputsArmament];
+      get _displayInputs() {
+        return [...super._displayInputs, ...this._displayInputsArmament];
+      }
+
+      /**
+       * Armament display inputs.
+       * @returns {Teriock.Display.DisplayField[]}
+       */
+      get _displayInputsArmament() {
+        return ["system.fightingStyle"];
       }
 
       /** @inheritDoc */
-      get displayTags() {
-        return [...super.displayTags, ...this._equipmentClassesTags, ...this._armamentTags];
+      get _displayTags() {
+        return [...super._displayTags, ...this._equipmentClassesTags, ...this._armamentTags];
+      }
+
+      /**
+       * Equipment classes tags.
+       * @returns {Teriock.Display.DisplayTag[]}
+       */
+      get _equipmentClassesTags() {
+        return Array.from(this.equipmentClasses).map(t => {
+          return {
+            label: TERIOCK.reference.equipmentClasses[t],
+            tooltip: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentClasses.label",
+          };
+        });
+      }
+
+      /**
+       * Property tags.
+       * @returns {Teriock.Display.DisplayTag[]}
+       */
+      get _propertyTags() {
+        const tags = [];
+        if (this.spellTurning) {
+          tags.push({ label: "TERIOCK.TERMS.Properties.spellTurning", tooltip: "TERIOCK.PACKS.properties" });
+        }
+        if (this.warded) { tags.push({
+            label: "TERIOCK.TERMS.Properties.warded",
+            tooltip: "TERIOCK.PACKS.properties",
+          }); }
+        return tags;
+      }
+
+      /**
+       * Range tags.
+       * @returns {Teriock.Display.DisplayTag[]}
+       */
+      get _rangeTags() {
+        const tags = [];
+        if (this.range.melee && this.range.long.unitType !== "zero") {
+          tags.push({
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.melee.label",
+            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
+          });
+        }
+        if (this.range.ranged) {
+          tags.push({
+            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.ranged.label",
+            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
+          });
+        }
+        return tags;
       }
 
       /** @inheritDoc */

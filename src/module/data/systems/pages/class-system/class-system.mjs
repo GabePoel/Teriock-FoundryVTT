@@ -25,17 +25,17 @@ export default class ClassSystem extends BasePageSystem {
   }
 
   /** @inheritDoc */
-  get displayInputs() {
-    return [...super.displayInputs, "system.archetype"];
+  get _displayInputs() {
+    return [...super._displayInputs, "system.archetype"];
   }
 
   /** @inheritDoc */
-  get displayTags() {
-    return [...super.displayTags, getName(this.archetype)];
+  get _displayTags() {
+    return [...super._displayTags, getName(this.archetype)];
   }
 
   /** @inheritDoc */
-  get messageBars() {
+  get _panelBars() {
     return [{
       icon: TERIOCK.config.class.archetypes[this._source.archetype]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),

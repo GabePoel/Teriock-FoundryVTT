@@ -96,7 +96,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   }
 
   /**
-   * @returns {Teriock.Messages.MessagePanel[]}
+   * @returns {Teriock.Panels.PanelParts[]}
    */
   get panels() {
     return [{

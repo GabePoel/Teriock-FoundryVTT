@@ -27,6 +27,11 @@ export default Base => {
         };
       }
 
+      /** @inheritDoc */
+      get _displayToggles() {
+        return ["system.storage.enabled", ...super._displayToggles];
+      }
+
       /**
        * Whether this can stack.
        * @returns {TeriockEquipment[]}
@@ -40,11 +45,6 @@ export default Base => {
           && e.system.consumable === this.consumable
           && e.system.quantity + this.quantity <= e.system.maxQuantity.value
         );
-      }
-
-      /** @inheritDoc */
-      get displayToggles() {
-        return ["system.storage.enabled", ...super.displayToggles];
       }
 
       /**

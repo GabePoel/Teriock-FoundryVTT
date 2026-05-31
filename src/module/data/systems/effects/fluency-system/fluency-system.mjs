@@ -71,7 +71,7 @@ export default class FluencySystem
   }
 
   /** @inheritDoc */
-  get displayFields() {
+  get _displayFields() {
     return ["system.description", {
       classes: TERIOCK.display.panel.classes.derived,
       editable: false,

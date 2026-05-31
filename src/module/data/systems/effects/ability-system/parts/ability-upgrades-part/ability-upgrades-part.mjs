@@ -59,10 +59,14 @@ export default Base => {
         return super.migrateData(source, options, state);
       }
 
+      /** @inheritDoc */
+      get _displayInputs() {
+        return [...super._displayInputs, ...this._displayInputsUpgrades];
+      }
+
       /**
        * Upgrades display inputs.
-       * @returns {Teriock.Sheet.DisplayField[]}
-       * @private
+       * @returns {Teriock.Display.DisplayField[]}
        */
       get _displayInputsUpgrades() {
         const inputs = ["system.upgrades.score.attribute"];
@@ -75,11 +79,6 @@ export default Base => {
       /** @inheritDoc */
       get canChange() {
         return super.canChange || Boolean(this.upgrades.score.attribute) || Boolean(this.upgrades.competence.attribute);
-      }
-
-      /** @inheritDoc */
-      get displayInputs() {
-        return [...super.displayInputs, ...this._displayInputsUpgrades];
       }
 
       /** @inheritDoc */

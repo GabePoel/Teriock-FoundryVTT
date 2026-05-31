@@ -118,18 +118,8 @@ export default class AbilitySystem
   }
 
   /** @inheritDoc */
-  get _nameTags() {
-    const tags = [];
-    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
-      if (this.costs.tweaks[k]) { tags.push(v.label); }
-    }
-    if (this.grantOnly) { tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted")); }
-    return [...tags, ...super._nameTags];
-  }
-
-  /** @inheritDoc */
-  get displayButtons() {
-    const buttons = super.displayButtons;
+  get _displayButtons() {
+    const buttons = super._displayButtons;
     if (!this.expansion.type) {
       buttons.push({
         button: "expansion",
@@ -170,7 +160,7 @@ export default class AbilitySystem
   }
 
   /** @inheritDoc */
-  get displayFields() {
+  get _displayFields() {
     const fields = [
       {
         button: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
@@ -245,12 +235,12 @@ export default class AbilitySystem
   }
 
   /** @inheritDoc */
-  get displayTags() {
-    return [...super.displayTags, ...this._infoTags];
+  get _displayTags() {
+    return [...super._displayTags, ...this._infoTags];
   }
 
   /** @inheritDoc */
-  get displayToggles() {
+  get _displayToggles() {
     return [
       "system.basic",
       "system.standard",
@@ -267,14 +257,14 @@ export default class AbilitySystem
       "system.grantOnly",
       "system.grantUse",
       "system.warded",
-      ...super.displayToggles,
+      ...super._displayToggles,
       "system.applyIfDeattuned",
     ];
   }
 
   /** @inheritDoc */
-  get embedIcons() {
-    const icons = super.embedIcons.filter(i => !this.isBasic || !i.action?.toLowerCase().includes("disabled"));
+  get _embedIcons() {
+    const icons = super._embedIcons.filter(i => !this.isBasic || !i.action?.toLowerCase().includes("disabled"));
     if (this.isBasic) {
       icons.push({
         action: "toggleDisableLocked",
@@ -289,6 +279,16 @@ export default class AbilitySystem
     if (this.isArmamentChild && !this.grantUse) { icons.unshift(this.grantUseIcon); }
     if (this.tagIcon) { icons.unshift(this.tagIcon); }
     return icons;
+  }
+
+  /** @inheritDoc */
+  get _nameTags() {
+    const tags = [];
+    for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
+      if (this.costs.tweaks[k]) { tags.push(v.label); }
+    }
+    if (this.grantOnly) { tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted")); }
+    return [...tags, ...super._nameTags];
   }
 
   /** @inheritDoc */

@@ -45,7 +45,7 @@ export default function ConsumableSystemMixin(Base) {
         });
       }
 
-      /** @returns {Teriock.Messages.MessageBar} */
+      /** @returns {Teriock.Panels.PanelBar} */
       get _consumableBar() {
         return {
           icon: TERIOCK.display.icons.ui.quantity,
@@ -60,19 +60,19 @@ export default function ConsumableSystemMixin(Base) {
         };
       }
 
+      /** @inheritDoc */
+      get _embedActions() {
+        return Object.assign(super._embedActions, {
+          useOneDoc: { primary: async () => await this.useOne(), secondary: async () => await this.gainOne() },
+        });
+      }
+
       /**
        * If this is suppressed due to being consumed.
        * @returns {boolean}
        */
       get _isSuppressedConsumed() {
         return this.consumable && this.quantity === 0;
-      }
-
-      /** @inheritDoc */
-      get embedActions() {
-        return Object.assign(super.embedActions, {
-          useOneDoc: { primary: async () => await this.useOne(), secondary: async () => await this.gainOne() },
-        });
       }
 
       /** @inheritDoc */

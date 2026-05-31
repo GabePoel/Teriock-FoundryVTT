@@ -37,6 +37,20 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
   }
 
   /** @inheritDoc */
+  get _panelBars() {
+    return [{
+      icon: powerConfig.type[this.type].icon,
+      label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
+      wrappers: [
+        powerConfig.type[this.type].label,
+        this.maxAv === 0
+          ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+          : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
+      ],
+    }];
+  }
+
+  /** @inheritDoc */
   get color() {
     return powerConfig.type[this.type].color;
   }
@@ -61,20 +75,6 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
       suppressed = true;
     }
     return suppressed;
-  }
-
-  /** @inheritDoc */
-  get messageBars() {
-    return [{
-      icon: powerConfig.type[this.type].icon,
-      label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
-      wrappers: [
-        powerConfig.type[this.type].label,
-        this.maxAv === 0
-          ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-          : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
-      ],
-    }];
   }
 
   /** @inheritDoc */

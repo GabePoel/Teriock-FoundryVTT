@@ -29,6 +29,11 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
     });
   }
 
+  /** @inheritDoc */
+  get _panelBars() {
+    return [{ icon: documentConfig.rank.icon, label: documentConfig.rank.plural, wrappers: this.classNames }];
+  }
+
   /**
    * The localized names of all the classes that provide this.
    * @returns {string[]}
@@ -61,11 +66,6 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
     }
     if (this.actor && this.ranks.filter(r => r.active).length === 0) { suppressed = true; }
     return suppressed;
-  }
-
-  /** @inheritDoc */
-  get messageBars() {
-    return [{ icon: documentConfig.rank.icon, label: documentConfig.rank.plural, wrappers: this.classNames }];
   }
 
   /**

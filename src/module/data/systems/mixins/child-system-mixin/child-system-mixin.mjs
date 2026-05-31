@@ -60,6 +60,45 @@ export default function ChildSystemMixin(Base) {
         });
       }
 
+      /** @inheritDoc */
+      get _displayFields() {
+        return [...super._displayFields, "system.description"];
+      }
+
+      /** @inheritDoc */
+      get _displayTags() {
+        return [...super._displayTags, ...this._statusTags];
+      }
+
+      /** @inheritDoc */
+      get _embedActions() {
+        return Object.assign(super._embedActions, {
+          useDoc: {
+            primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+            secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
+          },
+        });
+      }
+
+      /** @inheritDoc */
+      get _embedIcons() {
+        return [...super._embedIcons, {
+          action: "chatDoc",
+          icon: TERIOCK.display.icons.ui.chat,
+          tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
+          visible: this.parent.isViewer,
+          onClick: async () => await this.parent.toMessage(),
+        }, {
+          action: "toggleDisabledDoc",
+          icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
+          tooltip: this.parent.disabled
+            ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
+            : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
+          visible: this.parent?.isOwner,
+          onClick: () => this.parent.toggleDisabled(),
+        }];
+      }
+
       /**
        * If this is suppressed due to its parent being inactive.
        * @returns {boolean}
@@ -91,51 +130,12 @@ export default function ChildSystemMixin(Base) {
 
       /**
        * Status tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
+       * @returns {Teriock.Display.DisplayTag[]}
        */
       get _statusTags() {
         return [{
           label: this.parent.active ? "TERIOCK.SHEETS.Common.TAGS.active" : "TERIOCK.SHEETS.Common.TAGS.inactive",
           tooltip: "TERIOCK.SHEETS.Child.DISPLAY.activeStatus",
-        }];
-      }
-
-      /** @inheritDoc */
-      get displayFields() {
-        return [...super.displayFields, "system.description"];
-      }
-
-      /** @inheritDoc */
-      get displayTags() {
-        return [...super.displayTags, ...this._statusTags];
-      }
-
-      /** @inheritDoc */
-      get embedActions() {
-        return Object.assign(super.embedActions, {
-          useDoc: {
-            primary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-            secondary: async (event, relative) => await this.use({ actor: relative?.actor, event }),
-          },
-        });
-      }
-
-      /** @inheritDoc */
-      get embedIcons() {
-        return [...super.embedIcons, {
-          action: "chatDoc",
-          icon: TERIOCK.display.icons.ui.chat,
-          tooltip: _loc("TERIOCK.SYSTEMS.Child.MENU.shareWriteup"),
-          visible: this.parent.isViewer,
-          onClick: async () => await this.parent.toMessage(),
-        }, {
-          action: "toggleDisabledDoc",
-          icon: this.parent.disabled ? TERIOCK.display.icons.ui.disabled : TERIOCK.display.icons.ui.enabled,
-          tooltip: this.parent.disabled
-            ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
-            : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-          visible: this.parent?.isOwner,
-          onClick: () => this.parent.toggleDisabled(),
         }];
       }
 

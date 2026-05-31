@@ -32,7 +32,7 @@ export default Base => {
 
       /**
        * Information tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
+       * @returns {Teriock.Display.DisplayTag[]}
        */
       get _infoTags() {
         const tags = [];

@@ -81,20 +81,29 @@ export default class PropertySystem
   }
 
   /** @inheritDoc */
-  get displayFields() {
+  get _displayFields() {
     return ["system.description", ...this.constructor._adjustableTextFields];
   }
 
   /** @inheritDoc */
-  get displayToggles() {
+  get _displayToggles() {
     return [
       "system.applyIfDampened",
       "system.applyIfDeattuned",
       "system.applyIfShattered",
       "system.applyIfUnequipped",
       "system.consumable",
-      ...super.displayToggles,
+      ...super._displayToggles,
     ];
+  }
+
+  /** @inheritDoc */
+  get _panelBars() {
+    return [{
+      icon: TERIOCK.config.effect.form[this.form].icon,
+      label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
+      wrappers: [TERIOCK.config.effect.form[this.form].label, ...simplifyTags(this._metaphysicsTags)],
+    }];
   }
 
   /** @inheritDoc */
@@ -102,15 +111,6 @@ export default class PropertySystem
     const parts = super.embedParts;
     if (!this.consumable) { parts.subtitle = TERIOCK.config.effect.form[this.form].label; }
     return parts;
-  }
-
-  /** @inheritDoc */
-  get messageBars() {
-    return [{
-      icon: TERIOCK.config.effect.form[this.form].icon,
-      label: _loc("TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label"),
-      wrappers: [TERIOCK.config.effect.form[this.form].label, ...simplifyTags(this._metaphysicsTags)],
-    }];
   }
 
   /** @inheritDoc */

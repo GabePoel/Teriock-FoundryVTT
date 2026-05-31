@@ -82,6 +82,53 @@ export default class SpeciesSystem
     return super._canToggleMpDice && !this._isInactiveTransformation;
   }
 
+  /** @inheritDoc */
+  get _displayButtons() {
+    const buttons = super._displayButtons;
+    if (!this.size.min || !this.size.max) {
+      buttons.push({
+        button: "sizeRange",
+        label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label",
+        update: { "system.size.max": this.size.value, "system.size.min": this.size.value },
+      });
+    }
+    if (!this.adult) {
+      buttons.push({
+        button: "lifespan",
+        label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
+        update: { "system.adult": 20, "system.lifespan": 100 },
+      });
+    }
+    return buttons;
+  }
+
+  /** @inheritDoc */
+  get _displayFields() {
+    return [
+      "system.hpIncrease",
+      "system.mpIncrease",
+      "system.attributeIncrease",
+      "system.innateRanks",
+      "system.appearance",
+      "system.description",
+    ];
+  }
+
+  /** @inheritDoc */
+  get _displayInputs() {
+    return [...super._displayInputs, "system.traits", "system.transformation.img"];
+  }
+
+  /** @inheritDoc */
+  get _displayTags() {
+    return [...super._displayTags, ...this._traitTags];
+  }
+
+  /** @inheritDoc */
+  get _displayToggles() {
+    return ["system.size.enabled", "system.transformation.ring", ...super._displayToggles];
+  }
+
   /**
    * Whether this is part of an inactive transformation.
    * @returns {boolean}
@@ -92,7 +139,7 @@ export default class SpeciesSystem
 
   /**
    * Trait tags.
-   * @returns {Teriock.Sheet.DisplayTag[]}
+   * @returns {Teriock.Display.DisplayTag[]}
    */
   get _traitTags() {
     const tags = Array.from(this.traits).map(t => {
@@ -121,53 +168,6 @@ export default class SpeciesSystem
       }
     }
     return super.color;
-  }
-
-  /** @inheritDoc */
-  get displayButtons() {
-    const buttons = super.displayButtons;
-    if (!this.size.min || !this.size.max) {
-      buttons.push({
-        button: "sizeRange",
-        label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label",
-        update: { "system.size.max": this.size.value, "system.size.min": this.size.value },
-      });
-    }
-    if (!this.adult) {
-      buttons.push({
-        button: "lifespan",
-        label: "TERIOCK.SYSTEMS.Species.PANELS.lifespan.label",
-        update: { "system.adult": 20, "system.lifespan": 100 },
-      });
-    }
-    return buttons;
-  }
-
-  /** @inheritDoc */
-  get displayFields() {
-    return [
-      "system.hpIncrease",
-      "system.mpIncrease",
-      "system.attributeIncrease",
-      "system.innateRanks",
-      "system.appearance",
-      "system.description",
-    ];
-  }
-
-  /** @inheritDoc */
-  get displayInputs() {
-    return [...super.displayInputs, "system.traits", "system.transformation.img"];
-  }
-
-  /** @inheritDoc */
-  get displayTags() {
-    return [...super.displayTags, ...this._traitTags];
-  }
-
-  /** @inheritDoc */
-  get displayToggles() {
-    return ["system.size.enabled", "system.transformation.ring", ...super.displayToggles];
   }
 
   /** @inheritDoc */

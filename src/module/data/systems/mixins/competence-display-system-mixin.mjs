@@ -9,8 +9,8 @@ export default function CompetenceDisplaySystemMixin(Base) {
      */
     class CompetenceDisplaySystem extends Base {
       /** @inheritDoc */
-      get embedIcons() {
-        return [{ icon: this.competence.icon, tooltip: this.competence.description }, ...super.embedIcons];
+      get _embedIcons() {
+        return [{ icon: this.competence.icon, tooltip: this.competence.description }, ...super._embedIcons];
       }
     }
   );

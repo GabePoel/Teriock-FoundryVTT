@@ -50,7 +50,7 @@ export default function StatGiverSystemMixin(Base) {
         return true;
       }
 
-      /** @returns {Teriock.Messages.MessageBar} */
+      /** @returns {Teriock.Panels.PanelBar} */
       get _statBar() {
         return {
           icon: icons.ui.dice,

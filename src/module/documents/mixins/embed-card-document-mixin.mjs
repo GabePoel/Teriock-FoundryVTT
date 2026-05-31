@@ -16,10 +16,10 @@ export default function EmbedCardDocumentMixin(Base) {
        * Actions that can fire from an embedded element representing this.
        * @returns {Record<string, Partial<Teriock.EmbedData.EmbedAction>>}
        */
-      get embedActions() {
+      get _embedActions() {
         const actions = { openDoc: { primary: async () => this.sheet.render(true) } };
         for (
-          const embedIcon of this.embedIcons
+          const embedIcon of this._embedIcons
         ) { if (embedIcon.action && embedIcon.onClick) { actions[embedIcon.action] = { primary: embedIcon.onClick }; } }
         return actions;
       }
@@ -28,7 +28,7 @@ export default function EmbedCardDocumentMixin(Base) {
        * Interactive icons to display in embedded elements.
        * @returns {Partial<Teriock.EmbedData.EmbedIcon>[]}
        */
-      get embedIcons() {
+      get _embedIcons() {
         return [];
       }
 
@@ -82,7 +82,7 @@ export default function EmbedCardDocumentMixin(Base) {
                 const el = /** @type {HTMLElement} */ target.closest("[data-action]");
                 if (el) {
                   const action = el.dataset.action;
-                  const fn = this.embedActions[action][callback];
+                  const fn = this._embedActions[action][callback];
                   if (!fn || (isEmbedded && action !== "openDoc")) { return; }
                   ev.stopImmediatePropagation();
                   ev.preventDefault();

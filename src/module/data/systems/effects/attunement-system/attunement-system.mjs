@@ -38,19 +38,24 @@ export default class AttunementSystem extends CleanedEffectSystem {
   }
 
   /** @inheritDoc */
-  get color() {
-    return this.target ? TERIOCK.display.colors.palette.green : TERIOCK.display.colors.palette.orange;
-  }
-
-  /** @inheritDoc */
-  get embedIcons() {
+  get _embedIcons() {
     return [{
       action: "deattuneDoc",
       icon: TERIOCK.display.icons.attunable.deattune,
       tooltip: _loc("TERIOCK.SYSTEMS.Attunable.MENU.deattune"),
       visible: this.parent.isOwner,
       onClick: async () => await this.deattune(),
-    }, ...super.embedIcons];
+    }, ...super._embedIcons];
+  }
+
+  /** @inheritDoc */
+  get _panelBlocks() {
+    return [];
+  }
+
+  /** @inheritDoc */
+  get color() {
+    return this.target ? TERIOCK.display.colors.palette.green : TERIOCK.display.colors.palette.orange;
   }
 
   /** @inheritDoc */
@@ -59,11 +64,6 @@ export default class AttunementSystem extends CleanedEffectSystem {
     parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", { tier: this.tier || 0 });
     parts.text = dotJoin([attunementConfig.type[this.type].label, this.usage]);
     return parts;
-  }
-
-  /** @inheritDoc */
-  get messageBlocks() {
-    return [];
   }
 
   /**

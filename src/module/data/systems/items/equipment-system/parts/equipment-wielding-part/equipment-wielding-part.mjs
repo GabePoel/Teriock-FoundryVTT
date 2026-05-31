@@ -26,6 +26,37 @@ export default Base => {
         });
       }
 
+      /** @inheritDoc */
+      get _embedIcons() {
+        return [
+          {
+            action: "toggleGluedDoc",
+            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
+            tooltip: this.glued
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
+            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
+            onClick: async () => {
+              if (this.glued) {await this.unglue();}
+              else { await this.glue(); }
+            },
+          },
+          ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
+          {
+            action: "toggleEquippedDoc",
+            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
+            tooltip: this.equipped
+              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
+              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
+            visible: this.parent.isOwner,
+            onClick: async () => {
+              if (this.equipped) {await this.unequip();}
+              else { await this.equip(); }
+            },
+          },
+        ];
+      }
+
       /**
        * Checks if equipping is a valid operation.
        * @returns {boolean}
@@ -40,37 +71,6 @@ export default Base => {
        */
       get canUnequip() {
         return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.actor && this.equipped;
-      }
-
-      /** @inheritDoc */
-      get embedIcons() {
-        return [
-          {
-            action: "toggleGluedDoc",
-            icon: this.glued ? icons.equipment.glue : icons.equipment.unglue,
-            tooltip: this.glued
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.glued")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unglued"),
-            visible: this.parent.isOwner && this.actor && this.actor.type !== "inventory",
-            onClick: async () => {
-              if (this.glued) {await this.unglue();}
-              else { await this.glue(); }
-            },
-          },
-          ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("disabled")),
-          {
-            action: "toggleEquippedDoc",
-            icon: this.equipped ? icons.ui.enabled : icons.ui.disabled,
-            tooltip: this.equipped
-              ? _loc("TERIOCK.SYSTEMS.Equipment.EMBED.equipped")
-              : _loc("TERIOCK.SYSTEMS.Equipment.EMBED.unequipped"),
-            visible: this.parent.isOwner,
-            onClick: async () => {
-              if (this.equipped) {await this.unequip();}
-              else { await this.equip(); }
-            },
-          },
-        ];
       }
 
       /** @inheritDoc */

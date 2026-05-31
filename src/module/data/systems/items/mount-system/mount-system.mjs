@@ -38,24 +38,13 @@ export default class MountSystem
   }
 
   /** @inheritDoc */
-  get _refreshPromises() {
-    const promises = super._refreshPromises;
-    if (this.mountType) {
-      promises.push(
-        this._formatRefreshPromise(fromIdentifier(this.mountType), "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label"),
-      );
-    }
-    return promises;
+  get _displayTags() {
+    return [...super._displayTags, ...this._attunableTags];
   }
 
   /** @inheritDoc */
-  get displayTags() {
-    return [...super.displayTags, ...this._attunableTags];
-  }
-
-  /** @inheritDoc */
-  get embedIcons() {
-    return [...super.embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")), {
+  get _embedIcons() {
+    return [...super._embedIcons.filter(i => !i.action.toLowerCase().includes("disabled")), {
       action: "toggleMountedDoc",
       icon: this.mounted ? icons.ui.enabled : icons.ui.disabled,
       tooltip: this.mounted
@@ -70,6 +59,29 @@ export default class MountSystem
   }
 
   /** @inheritDoc */
+  get _panelBars() {
+    return [this._statBar, {
+      icon: TERIOCK.display.icons.armament.load,
+      label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
+      wrappers: [
+        _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text || "0" }),
+        getName(this.mountType),
+      ],
+    }];
+  }
+
+  /** @inheritDoc */
+  get _refreshPromises() {
+    const promises = super._refreshPromises;
+    if (this.mountType) {
+      promises.push(
+        this._formatRefreshPromise(fromIdentifier(this.mountType), "TERIOCK.SYSTEMS.Mount.FIELDS.mountType.label"),
+      );
+    }
+    return promises;
+  }
+
+  /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     return Object.assign(parts, {
@@ -81,18 +93,6 @@ export default class MountSystem
   /** @inheritDoc */
   get makeSuppressed() {
     return super.makeSuppressed || !this.mounted;
-  }
-
-  /** @inheritDoc */
-  get messageBars() {
-    return [this._statBar, {
-      icon: TERIOCK.display.icons.armament.load,
-      label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
-      wrappers: [
-        _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text || "0" }),
-        getName(this.mountType),
-      ],
-    }];
   }
 
   /** @inheritDoc */

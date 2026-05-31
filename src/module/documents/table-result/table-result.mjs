@@ -95,7 +95,7 @@ export default class TeriockTableResult
 
   /** @inheritDoc */
   async getPanelParts() {
-    /** @type {Teriock.Messages.MessagePanel} */
+    /** @type {Teriock.Panels.PanelParts} */
     const parts = await super.getPanelParts();
     parts.icon = icons.document.tableResult;
     parts.label = _loc("TERIOCK.SYSTEMS.TableResult.PANELS.tableResult");

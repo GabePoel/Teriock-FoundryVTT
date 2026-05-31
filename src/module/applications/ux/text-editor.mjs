@@ -49,9 +49,9 @@ export default class TeriockTextEditor extends TextEditor {
 
   /**
    * Enrich all the blocks within a panel.
-   * @param {Teriock.Messages.MessagePanel} panel
+   * @param {Teriock.Panels.PanelParts} panel
    * @param {object} [options]
-   * @returns {Promise<Teriock.Messages.MessagePanel>}
+   * @returns {Promise<Teriock.Panels.PanelParts>}
    */
   static async enrichPanel(panel, options = {}) {
     await Promise.all((panel.blocks ?? []).map(async (b) => b.text = await this.enrichHTML(b.text, options)));
@@ -65,9 +65,9 @@ export default class TeriockTextEditor extends TextEditor {
 
   /**
    * Enrich an array of panels.
-   * @param {Teriock.Messages.MessagePanel[]} panels
+   * @param {Teriock.Panels.PanelParts[]} panels
    * @param {object} [options]
-   * @returns {Promise<Teriock.Messages.MessagePanel[]>}
+   * @returns {Promise<Teriock.Panels.PanelParts[]>}
    */
   static async enrichPanels(panels, options = {}) {
     return Promise.all(panels.map(p => this.enrichPanel(p, options)));
@@ -75,7 +75,7 @@ export default class TeriockTextEditor extends TextEditor {
 
   /**
    * Convert the panel to an HTML string.
-   * @param {Teriock.Messages.MessagePanel} parts
+   * @param {Teriock.Panels.PanelParts} parts
    * @param {object} [options]
    * @param {boolean} [options.noBars]
    * @param {boolean} [options.noBlocks]

@@ -53,7 +53,7 @@ export default function DisplaySheetMixin(Base) {
        */
       static async _onApplyButtonUpdate(_event, target) {
         if (!this.isEditable || !target.dataset.update) { return; }
-        const entry = this.document.system.displayButtons.find(b => b.button === target.dataset.update);
+        const entry = this.document.system._displayButtons.find(b => b.button === target.dataset.update);
         if (entry?.update) { await this.document.update(entry.update); }
       }
 
@@ -71,8 +71,8 @@ export default function DisplaySheetMixin(Base) {
 
       /**
        * Expand fancy display fields into their schema and value.
-       * @param {Teriock.Sheet.DisplayField[]} fields
-       * @returns {(Teriock.Sheet.FancyDisplayField & { schema: DataSchema; value: any })[]}
+       * @param {Teriock.Display.DisplayField[]} fields
+       * @returns {(Teriock.Display.FancyDisplayField & { schema: DataSchema; value: any })[]}
        */
       #expandFields(fields) {
         return fancifyFields(fields).map(f => {
@@ -94,11 +94,11 @@ export default function DisplaySheetMixin(Base) {
 
       /**
        * Prepare display tags.
-       * @param {Teriock.Sheet.DisplayTag[]} tags
-       * @returns {Teriock.Sheet.FancyDisplayTag[]}
+       * @param {Teriock.Display.DisplayTag[]} tags
+       * @returns {Teriock.Display.FancyDisplayTag[]}
        */
       #expandTags(tags) {
-        /** @type {Teriock.Sheet.FancyDisplayTag[]} */
+        /** @type {Teriock.Display.FancyDisplayTag[]} */
         const out = [];
         const defaultTooltip = _loc("TERIOCK.SHEETS.Child.DISPLAY.defaultTagTooltip");
         tags.forEach(t => {
@@ -122,10 +122,10 @@ export default function DisplaySheetMixin(Base) {
         const context = await super._prepareContext(options);
         await this._prepareDisplayFields(context);
         return Object.assign(context, {
-          displayButtons: this.document.system.displayButtons,
-          displayInputs: this.#expandFields(this.document.system.displayInputs),
-          displayTags: this.#expandTags(this.document.system.displayTags),
-          displayToggles: this.#expandFields(this.document.system.displayToggles),
+          displayButtons: this.document.system._displayButtons,
+          displayInputs: this.#expandFields(this.document.system._displayInputs),
+          displayTags: this.#expandTags(this.document.system._displayTags),
+          displayToggles: this.#expandFields(this.document.system._displayToggles),
         });
       }
 
@@ -135,11 +135,11 @@ export default function DisplaySheetMixin(Base) {
        * @returns {Promise<void>}
        */
       async _prepareDisplayFields(context) {
-        const expandedDisplayFields = this.#expandFields(this.document.system.displayFields);
+        const expandedDisplayFields = this.#expandFields(this.document.system._displayFields);
         context.displayFieldButtons = expandedDisplayFields.filter(f => !f.value).map(f => {
           return { editable: f.editable, fieldPath: f.path, name: f?.button || f?.label || f.schema?.label };
         }).filter(b => b.editable !== false);
-        context.displayFields = /** @type {Teriock.Sheet.EnrichedDisplayField[]} */ await Promise.all(
+        context.displayFields = /** @type {Teriock.Display.EnrichedDisplayField[]} */ await Promise.all(
           expandedDisplayFields.filter(f => f.value).map(async f => {
             return { ...f, enriched: await TeriockTextEditor.enrichHTML(f.value, { relativeTo: this.document }) };
           }),

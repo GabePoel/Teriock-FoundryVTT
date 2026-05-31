@@ -101,6 +101,32 @@ export default class RankSystem
     return super._canToggleMpDice && !this.innate;
   }
 
+  /** @inheritDoc */
+  get _panelBars() {
+    return [
+      {
+        icon: this.classIcon,
+        label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
+        wrappers: [
+          getName(this.archetype),
+          getName(this.class),
+          _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: this.number }),
+        ],
+      },
+      this._statBar,
+      {
+        icon: icons.armament.av,
+        label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.details"),
+        wrappers: [
+          this.maxAv === 0
+            ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+            : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
+          this.innate ? _loc("TERIOCK.SYSTEMS.Rank.PANELS.innate") : _loc("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
+        ],
+      },
+    ];
+  }
+
   /**
    * The icon for this rank's class.
    * @returns {string}
@@ -140,32 +166,6 @@ export default class RankSystem
       suppressed = true;
     }
     return suppressed;
-  }
-
-  /** @inheritDoc */
-  get messageBars() {
-    return [
-      {
-        icon: this.classIcon,
-        label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.class"),
-        wrappers: [
-          getName(this.archetype),
-          getName(this.class),
-          _loc("TERIOCK.SYSTEMS.Rank.PANELS.rank", { value: this.number }),
-        ],
-      },
-      this._statBar,
-      {
-        icon: icons.armament.av,
-        label: _loc("TERIOCK.SYSTEMS.Rank.PANELS.details"),
-        wrappers: [
-          this.maxAv === 0
-            ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-            : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
-          this.innate ? _loc("TERIOCK.SYSTEMS.Rank.PANELS.innate") : _loc("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
-        ],
-      },
-    ];
   }
 
   /** @inheritDoc */

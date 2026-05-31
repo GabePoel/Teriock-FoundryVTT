@@ -39,20 +39,20 @@ export default class HarmSystem
   }
 
   /** @inheritDoc */
-  get fullName() {
-    return _loc("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
-      name: super.fullName,
-      type: TERIOCK.config.impact[this.parent.type]?.label || "",
-    });
-  }
-
-  /** @inheritDoc */
-  get messageBars() {
+  get _panelBars() {
     return [{
       icon: icons.form.normal,
       label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.metaphysics"),
       wrappers: simplifyTags(this._metaphysicsTags),
     }];
+  }
+
+  /** @inheritDoc */
+  get fullName() {
+    return _loc("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
+      name: super.fullName,
+      type: TERIOCK.config.impact[this.parent.type]?.label || "",
+    });
   }
 
   /** @inheritDoc */

@@ -2,8 +2,8 @@ import { dotJoin, ucFirst } from "../../helpers/string.mjs";
 
 /**
  * Strip message bars to just the ones that have content.
- * @param {Teriock.Messages.MessageBar[]} bars
- * @returns {Teriock.Messages.MessageBar[]}
+ * @param {Teriock.Panels.PanelBar[]} bars
+ * @returns {Teriock.Panels.PanelBar[]}
  */
 function cleanBars(bars) {
   const newBars = [];

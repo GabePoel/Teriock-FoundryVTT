@@ -12,7 +12,7 @@ declare global {
       /** <schema> Content to be displayed in addition to and above {@link BaseRoll} results */
       content: string;
       /** <schema> Panels to render */
-      panels: Teriock.Messages.MessagePanel[];
+      panels: Teriock.Panels.PanelParts[];
       /** <schema> Strings to be wrapped as tags at the bottom of the message */
       tags: string[];
     };

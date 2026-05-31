@@ -31,7 +31,7 @@ export default function AttunableSystemMixin(Base) {
 
       /**
        * Attunable tags.
-       * @returns {Teriock.Sheet.DisplayTag[]}
+       * @returns {Teriock.Display.DisplayTag[]}
        */
       get _attunableTags() {
         const key = this.needsAttunement.toString();
@@ -52,21 +52,13 @@ export default function AttunableSystemMixin(Base) {
           : [];
       }
 
-      /**
-       * Gets the current attunement data for this item.
-       * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
-       */
-      get attunement() {
-        return this.actor?.attunements.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
+      /** @inheritDoc */
+      get _displayToggles() {
+        return ["system.needsAttunement", ...super._displayToggles];
       }
 
       /** @inheritDoc */
-      get displayToggles() {
-        return ["system.needsAttunement", ...super.displayToggles];
-      }
-
-      /** @inheritDoc */
-      get embedIcons() {
+      get _embedIcons() {
         return [{
           action: "toggleAttunedDoc",
           icon: this.isAttuned ? TERIOCK.display.icons.attunable.attune : TERIOCK.display.icons.attunable.deattune,
@@ -78,7 +70,15 @@ export default function AttunableSystemMixin(Base) {
             if (this.isAttuned) { await this.deattune(); }
             else { await this.attune(); }
           },
-        }, ...super.embedIcons];
+        }, ...super._embedIcons];
+      }
+
+      /**
+       * Gets the current attunement data for this item.
+       * @returns {TeriockAttunement|null} The attunement data or null if not attuned.
+       */
+      get attunement() {
+        return this.actor?.attunements.find(a => a.system.target?.uuid === this.parent.uuid) ?? null;
       }
 
       /**

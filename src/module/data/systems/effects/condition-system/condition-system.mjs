@@ -40,21 +40,13 @@ export default class ConditionSystem
     });
   }
 
-  /**
-   * A key corresponding to this condition.
-   * @returns {string}
-   */
-  get conditionKey() {
-    return foundry.utils.invertObject(objectMap(TERIOCK.data.conditions, (c) => c._id))[this.parent.id];
-  }
-
   /** @inheritDoc */
-  get displayFields() {
+  get _displayFields() {
     return ["description"];
   }
 
   /** @inheritDoc */
-  get embedIcons() {
+  get _embedIcons() {
     return [{
       action: "removeConditionDoc",
       icon: "dice-d4",
@@ -62,6 +54,14 @@ export default class ConditionSystem
       visible: true,
       onClick: async () => this.parent.use(),
     }];
+  }
+
+  /**
+   * A key corresponding to this condition.
+   * @returns {string}
+   */
+  get conditionKey() {
+    return foundry.utils.invertObject(objectMap(TERIOCK.data.conditions, (c) => c._id))[this.parent.id];
   }
 
   /** @inheritDoc */

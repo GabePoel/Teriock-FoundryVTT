@@ -25,17 +25,17 @@ export default class TradecraftSystem extends BasePageSystem {
   }
 
   /** @inheritDoc */
-  get displayInputs() {
-    return [...super.displayInputs, "system.field"];
+  get _displayInputs() {
+    return [...super._displayInputs, "system.field"];
   }
 
   /** @inheritDoc */
-  get displayTags() {
-    return [...super.displayTags, TERIOCK.config.tradecraft.fields[this._source.field]?.label];
+  get _displayTags() {
+    return [...super._displayTags, TERIOCK.config.tradecraft.fields[this._source.field]?.label];
   }
 
   /** @inheritDoc */
-  get messageBars() {
+  get _panelBars() {
     return [{
       icon: TERIOCK.config.tradecraft.fields[this._source.field]?.icon,
       label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),

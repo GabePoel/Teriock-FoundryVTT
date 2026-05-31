@@ -154,8 +154,8 @@ export default class TeriockMacro
   }
 
   /** @inheritDoc */
-  get embedActions() {
-    return { ...super.embedActions, execute: { primary: async event => await this.scopedExecute(event) } };
+  get _embedActions() {
+    return { ...super._embedActions, execute: { primary: async event => await this.scopedExecute(event) } };
   }
 
   /** @inheritDoc */

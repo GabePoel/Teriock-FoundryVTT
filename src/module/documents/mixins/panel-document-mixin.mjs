@@ -77,7 +77,10 @@ export default function PanelDocumentMixin(Base) {
         return super._buildEmbedHTML(config, options);
       }
 
-      /** @returns {Promise<Partial<Teriock.Messages.MessagePanel>>} */
+      /**
+       * Parts of a panel.
+       * @returns {Promise<Partial<Teriock.Panels.PanelParts>>}
+       */
       async getPanelParts() {
         const parts = {
           bars: [],
@@ -121,7 +124,7 @@ export default function PanelDocumentMixin(Base) {
         return TeriockChatMessage.create(messageData, { defaultMode: true });
       }
 
-      /** @returns {Promise<Teriock.Messages.MessagePanel>} */
+      /** @returns {Promise<Teriock.Panels.PanelParts>} */
       async toPanel() {
         const parts = await this.getPanelParts();
         return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });

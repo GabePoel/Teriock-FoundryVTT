@@ -25,16 +25,16 @@ export default class BasePageSystem
   }
 
   /** @inheritDoc */
-  get displayFields() {
-    return [...super.displayFields, {
+  get _displayFields() {
+    return [...super._displayFields, {
       label: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       path: "text.content",
     }];
   }
 
   /** @inheritDoc */
-  get displayInputs() {
-    return [...super.displayInputs, {
+  get _displayInputs() {
+    return [...super._displayInputs, {
       choices: this.parent ? Object.fromEntries(this.parent.parent?.categories.contents.map(c => [c.id, c.name])) : {},
       path: "category",
     }];

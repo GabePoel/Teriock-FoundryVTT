@@ -106,7 +106,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
         pulledStones[pulledColor] = pulledStones[pulledColor] + 1;
       }
       const context = { pulledCount, pulledStones };
-      /** @type {Teriock.Messages.MessagePanel} */
+      /** @type {Teriock.Panels.PanelParts} */
       const panelParts = {
         bars: [{
           icon: TERIOCK.config.document.stone.icon,
@@ -147,7 +147,7 @@ async function deathBagPull(pullFormula, stonesFormulas, actor) {
           tags: [_loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", { count: toPullCount })],
         },
       };
-      await TeriockChatMessage.create(chatMessageData, { defaultMode: true });
+      await TeriockChatMessage.create(chatMessageData, { chatBubble: false, defaultMode: true });
     }
   }
 }

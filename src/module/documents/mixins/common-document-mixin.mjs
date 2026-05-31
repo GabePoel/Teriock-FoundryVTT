@@ -51,6 +51,16 @@ export default function CommonDocumentMixin(Base) {
       /** @type {Record<string, AnyChildDocument[]>} */
       _visibleChildrenByType;
 
+      /** @inheritDoc */
+      get _embedActions() {
+        return { ...super._embedActions, ...this.system._embedActions };
+      }
+
+      /** @inheritDoc */
+      get _embedIcons() {
+        return [...super._embedIcons, ...this.system._embedIcons];
+      }
+
       /**
        * The actor associated with this document if there is one.
        */
@@ -77,16 +87,6 @@ export default function CommonDocumentMixin(Base) {
        */
       get children() {
         return new TypeCollection(this.childArray.map(c => [c._id, c]));
-      }
-
-      /** @inheritDoc */
-      get embedActions() {
-        return { ...super.embedActions, ...this.system.embedActions };
-      }
-
-      /** @inheritDoc */
-      get embedIcons() {
-        return [...super.embedIcons, ...this.system.embedIcons];
       }
 
       /** @inheritDoc */

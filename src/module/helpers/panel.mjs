@@ -5,7 +5,7 @@
  * @param {string} icon
  * @param {Array} associations
  * @param {object} options
- * @param {boolean} [options.makeTooltip]
+ * @param {boolean} [options.makeTooltip=true]
  */
 export function quickAddAssociation(docs, title, icon, associations, options = { makeTooltip: true }) {
   if (docs.length > 0) {
@@ -32,7 +32,7 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
 
 /**
  * Simplify a tag.
- * @param {Teriock.Sheet.DisplayTag} tag
+ * @param {Teriock.Display.DisplayTag} tag
  * @returns {string}
  */
 export function simplifyTag(tag) {
@@ -43,7 +43,7 @@ export function simplifyTag(tag) {
 
 /**
  * Simplify multiple tags.
- * @param {Teriock.Sheet.DisplayTag[]} tags
+ * @param {Teriock.Display.DisplayTag[]} tags
  * @returns {string[]}
  */
 export function simplifyTags(tags) {

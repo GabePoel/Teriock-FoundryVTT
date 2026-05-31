@@ -26,15 +26,8 @@ export default Base => {
       }
 
       /** @inheritDoc */
-      get _nameTags() {
-        const tags = super._nameTags;
-        if (this.stashed) { tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label")); }
-        return tags;
-      }
-
-      /** @inheritDoc */
-      get embedIcons() {
-        return [super.embedIcons.find(i => i.action?.toLowerCase().includes("attuned")), {
+      get _embedIcons() {
+        return [super._embedIcons.find(i => i.action?.toLowerCase().includes("attuned")), {
           action: "toggleDampenedDoc",
           icon: this.dampened ? TERIOCK.display.icons.equipment.dampen : TERIOCK.display.icons.equipment.undampen,
           tooltip: this.dampened
@@ -56,7 +49,14 @@ export default Base => {
             if (this.shattered) { await this.repair(); }
             else { await this.shatter(); }
           },
-        }, ...super.embedIcons.filter(i => !i.action?.toLowerCase().includes("attuned"))];
+        }, ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("attuned"))];
+      }
+
+      /** @inheritDoc */
+      get _nameTags() {
+        const tags = super._nameTags;
+        if (this.stashed) { tags.push(_loc("TERIOCK.SYSTEMS.Equipment.FIELDS.stashed.label")); }
+        return tags;
       }
 
       /** @inheritDoc */

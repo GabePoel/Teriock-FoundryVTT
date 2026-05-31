@@ -65,8 +65,8 @@ export function getRollIcon(rollFormula) {
 
 /**
  * Make fields fancy.
- * @param {Teriock.Sheet.DisplayField[]} displayFields
- * @returns {Teriock.Sheet.FancyDisplayField[]}
+ * @param {Teriock.Display.DisplayField[]} displayFields
+ * @returns {Teriock.Display.FancyDisplayField[]}
  */
 export function fancifyFields(displayFields) {
   return displayFields.map(f => {
