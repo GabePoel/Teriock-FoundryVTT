@@ -1,4 +1,5 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { systemPath } from "../../../../helpers/path.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
@@ -43,6 +44,17 @@ export default class BasePageSystem
   /** @inheritDoc */
   get document() {
     return this.parent;
+  }
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) { return false; }
+
+    this.parent.updateSource(
+      foundry.utils.mergeObject({ system: { img: systemPath(`icons/documents/${this.parent.type}.svg`) } }),
+      data,
+    );
   }
 
   /** @inheritDoc */

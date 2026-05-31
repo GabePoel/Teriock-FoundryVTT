@@ -1,7 +1,6 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../helpers/panel.mjs";
-import { getImage } from "../../../helpers/path.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
@@ -48,26 +47,15 @@ export default class HarmSystem
   }
 
   /** @inheritDoc */
-  get fullName() {
-    return _loc("TERIOCK.SYSTEMS.Harm.EMBED.fullName", {
-      name: super.fullName,
-      type: TERIOCK.config.impact[this.parent.type]?.label || "",
-    });
-  }
-
-  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    let ref = "";
-    if (this.parent.type === "damage") { ref = "Damaging"; }
-    if (this.parent.type === "drain") { ref = "Draining"; }
     this.parent.updateSource(
-      foundry.utils.mergeObject({
-        system: { img: getImage("effect-types", ref) },
-        text: { content: _loc("TERIOCK.SYSTEMS.Harm.DATA.description") },
-      }, data),
+      foundry.utils.mergeObject(
+        { system: { effectTypes: [this.parent.type === "damage" ? "damaging" : "draining"] } },
+        data,
+      ),
     );
   }
 }
