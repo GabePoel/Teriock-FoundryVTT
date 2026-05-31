@@ -117,7 +117,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, BaseSys
       onClick: async (_ev, target) => {
         await new ImagePopout({
           src: target.getAttribute("src"),
-          window: { title: "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
+          window: { title: target.getAttribute("alt") || "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
         }).render(true);
       },
       visible: target => {
