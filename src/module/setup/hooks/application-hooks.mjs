@@ -117,7 +117,7 @@ function addShareImageToHeader(application, controls) {
  */
 function addWikiOpenToHeader(application, controls) {
   if (!application.window.header) { return; }
-  if (application.document.metadata?.wiki && application.document.system.isOnWiki) {
+  if (application.document.system?.metadata?.wiki && application.document.system.isOnWiki) {
     controls.push({
       action: "wikiOpenThis",
       icon: makeIconClass(TERIOCK.display.icons.ui.wiki, "contextMenu"),

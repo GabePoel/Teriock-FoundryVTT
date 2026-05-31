@@ -348,6 +348,13 @@ foundry.helpers.Hooks.once("init", function() {
       label: "TYPES.Card.card",
       types: ["card", "stone"],
     },
+    // Journal Entries
+    {
+      cls: applications.sheets.journal.BaseJournalSheet,
+      doc: documents.TeriockJournalEntry,
+      label: "TYPES.JournalEntry.journal",
+      types: [],
+    },
     // Pages
     {
       cls: applications.sheets.page.DamageSheet,

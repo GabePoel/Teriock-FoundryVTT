@@ -1,13 +1,17 @@
 import classConfig from "../../../../constants/config/class-config.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
 /**
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.ClassSystemData}
+ * @mixes WikiSystem
  */
-export default class ClassSystem extends BasePageSystem {
+export default class ClassSystem extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rank"];
 
@@ -41,5 +45,10 @@ export default class ClassSystem extends BasePageSystem {
       label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
       wrappers: [getName(this.archetype)],
     }];
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    return `Class:${TERIOCK.index.classes[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 }

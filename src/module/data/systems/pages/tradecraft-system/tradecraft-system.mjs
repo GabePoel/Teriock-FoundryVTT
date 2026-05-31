@@ -1,13 +1,17 @@
 import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
+import { mixClasses } from "../../../../helpers/construction.mjs";
+import { toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
+import * as systemMixins from "../../mixins/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
 /**
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.TradecraftSystemData}
+ * @mixes WikiSystem
  */
-export default class TradecraftSystem extends BasePageSystem {
+export default class TradecraftSystem extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 
@@ -41,5 +45,10 @@ export default class TradecraftSystem extends BasePageSystem {
       label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
       wrappers: [TERIOCK.config.tradecraft.fields[this._source.field]?.label],
     }];
+  }
+
+  /** @inheritDoc */
+  get wikiPage() {
+    return `${toTitleCase(this.parent.type)}:${TERIOCK.index.tradecrafts[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 }
