@@ -1,3 +1,4 @@
+import { TeriockTextEditor } from "../_module.mjs";
 import { validateTypedIdentifier } from "../../../data/fields/helpers/validators.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
@@ -31,6 +32,7 @@ const lookupEnricher = {
     // Assume certain formatting happens by default
     const name = Boolean(inputs.config.name ?? true);
     const sort = Boolean(inputs.config.sort ?? true);
+    const link = Boolean(inputs.config.link ?? false);
     const type = ["disjunction", "unit"].includes(inputs.config.list) ? inputs.config.list : "conjunction";
 
     if (doc && !fetched) {
@@ -68,7 +70,16 @@ const lookupEnricher = {
       }
       if (!fetched && !textContent && ["boolean", "number", "string"].includes(typeof raw)) {textContent = raw
           .toString();}
-      if (!fetched && name && validateTypedIdentifier(raw, { strict: true })) { textContent = getName(raw); }
+      if (!fetched && name && !link && validateTypedIdentifier(raw, { strict: true })) { textContent = getName(raw); }
+      if (!fetched && link) {
+        // Display a content link
+        let linkKey = raw;
+        if (validateTypedIdentifier(raw, { strict: true })) {
+          await game.teriock.identifiers.initializing;
+          linkKey = game.teriock.identifiers.get(linkKey);
+        }
+        if (raw) { return TeriockTextEditor._createContentLink([null, "UUID", linkKey, ""]); }
+      }
       const style = inputs.config.style;
       if (style) {
         switch (style) {
