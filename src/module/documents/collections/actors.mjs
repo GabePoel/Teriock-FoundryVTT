@@ -1,4 +1,4 @@
-import { TeriockChatMessage } from "../_module.mjs";
+import { TeriockActor, TeriockChatMessage } from "../_module.mjs";
 import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 
 const { Actors } = foundry.documents.collections;
@@ -22,6 +22,9 @@ export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {
     if (!actor) { actor = game.user.character; }
     if (!actor) { actor = game.canvas?.tokens?.controlled.find(t => t.actor)?.actor; }
     if (!actor) { actor = ui?.activeWindow?.document?.actor; }
+    if (!actor) {
+      actor = foundry.applications.instances.values().find(app => app?.document instanceof TeriockActor)?.actor;
+    }
     return actor ?? null;
   }
 
