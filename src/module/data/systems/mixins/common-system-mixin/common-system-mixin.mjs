@@ -336,7 +336,6 @@ export default function CommonSystemMixin(Base) {
               docs = docs.filter(e => !foundry.utils.hasProperty(e, "system.revealed") || e.system.revealed);
             }
             docs = TERIOCK.config.document[type].sorter(docs);
-            docs = docs.filter(d => !d.isEphemeral);
             quickAddAssociation(
               docs,
               TERIOCK.config.document[type].plural,

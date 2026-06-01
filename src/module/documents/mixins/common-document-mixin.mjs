@@ -264,9 +264,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {AnyChildDocument[]}
        */
       makeVisibleChildrenArray() {
-        return this.childArray.filter(c => !c.isEphemeral).filter(c =>
-          c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM
-        );
+        return this.childArray.filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
       }
 
       /** @inheritDoc */

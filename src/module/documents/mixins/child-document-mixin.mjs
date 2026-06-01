@@ -30,14 +30,6 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /**
-       * Treat this document as if it doesn't exist.
-       * @returns {boolean}
-       */
-      get isEphemeral() {
-        return this.system.makeEphemeral;
-      }
-
-      /**
        * Checks if the document is suppressed.
        * @returns {boolean}
        */

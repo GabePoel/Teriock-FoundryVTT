@@ -79,6 +79,14 @@ export default class BaseActorSystem
     return Object.assign(super.defineSchema(), { settings: new fields.EmbeddedDataField(ActorSettingsModel) });
   }
 
+  /**
+   * Labeled tags that represent this actor's attributes.
+   * @returns {string[]}
+   */
+  get _attributeTags() {
+    return Object.entries(TERIOCK.config.attribute).map(([k, v]) => `${this.attributes[k].score} ${v.abbreviation}`);
+  }
+
   /** @inheritDoc */
   get _displayToggles() {
     return [...super._displayToggles, "disabled"];
@@ -134,6 +142,10 @@ export default class BaseActorSystem
         icon: TERIOCK.display.icons.ui.info,
         label: _loc("TERIOCK.SYSTEMS.Ability.PANELS.info"),
         wrappers: this._scalingTags,
+      }, {
+        icon: TERIOCK.display.icons.interaction.feat,
+        label: _loc("TERIOCK.TERMS.Common.attributes"),
+        wrappers: this._attributeTags,
       }],
       blocks: [{ text: this.notes, title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes") }],
     });

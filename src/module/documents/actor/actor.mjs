@@ -153,9 +153,7 @@ export default class TeriockActor
    */
   get modifiableChildren() {
     if (!this._modifiableChildren) {
-      this._modifiableChildren = [...this.validEffects, ...this.items.contents].filter(c =>
-        !c.isEphemeral && !c.isReference
-      );
+      this._modifiableChildren = [...this.validEffects, ...this.items.contents].filter(c => !c.isReference);
     }
     return this._modifiableChildren;
   }

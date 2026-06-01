@@ -3,7 +3,7 @@ import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
-import { EvaluationField, FormulaField } from "../../../fields/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/helpers/initializers.mjs";
 import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
@@ -39,7 +39,7 @@ export default function ChildSystemMixin(Base) {
       static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
 
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = ["system.competence", "system.qualifiers", ...super.PRESERVED_PROPERTIES];
+      static PRESERVED_PROPERTIES = ["system.competence", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static defineSchema() {
@@ -52,10 +52,6 @@ export default function ChildSystemMixin(Base) {
           ),
           description: new fields.HTMLField({ initial: "" }),
           forceSuppressed: new initialBoolean(),
-          qualifiers: new fields.SchemaField({
-            ephemeral: new EvaluationField({ deterministic: true, initial: "0" }),
-            suppressed: new EvaluationField({ deterministic: true, initial: "0" }),
-          }),
           settings: new fields.EmbeddedDataField(ChildSettingsModel),
         });
       }
@@ -115,14 +111,6 @@ export default function ChildSystemMixin(Base) {
         return this.forceSuppressed;
       }
 
-      /**
-       * If this is suppressed due to qualifiers.
-       * @returns {boolean}
-       */
-      get _isSuppressedQualifier() {
-        return Boolean(this.qualifiers.suppressed.value) || Boolean(this.parent.isEphemeral);
-      }
-
       /** @inheritDoc */
       get _masterText() {
         return this.parent.master?.documentName === "Actor" ? "" : super._masterText;
@@ -155,13 +143,8 @@ export default function ChildSystemMixin(Base) {
       }
 
       /** @returns {boolean} */
-      get makeEphemeral() {
-        return Boolean(this.parent.elder?.isEphemeral) || Boolean(this.qualifiers.ephemeral.value);
-      }
-
-      /** @returns {boolean} */
       get makeSuppressed() {
-        return this._isSuppressedForced || this._isSuppressedElder || this._isSuppressedQualifier;
+        return this._isSuppressedForced || this._isSuppressedElder;
       }
 
       /**
@@ -247,13 +230,6 @@ export default function ChildSystemMixin(Base) {
           visible: () => this.parent._checkValidEditorDocument(doc, { self: false }),
         }]);
         return entries;
-      }
-
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.qualifiers.suppressed.evaluate();
-        this.qualifiers.ephemeral.evaluate();
       }
 
       /** @inheritDoc */

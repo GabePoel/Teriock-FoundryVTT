@@ -47,18 +47,7 @@ function cleanCommon(doc) {
   delete doc.system.disabled;
   delete doc.system.gmNotes;
   if (typeof doc.system.attackPenalty === "object") { doc.system.attackPenalty = doc.system.attackPenalty.raw; }
-  if (doc.system.qualifiers) {
-    if (doc.system.qualifiers.ephemeral?.saved) {
-      doc.system.qualifiers.ephemeral.raw = doc.system.qualifiers.ephemeral.saved;
-      delete doc.system.qualifiers.ephemeral.saved;
-    }
-    if (isZero(doc.system.qualifiers.ephemeral?.raw)) { delete doc.system.qualifiers.ephemeral; }
-    if (doc.system.qualifiers.suppressed?.saved) {
-      doc.system.qualifiers.suppressed.raw = doc.system.qualifiers.suppressed.saved;
-      delete doc.system.qualifiers.suppressed.saved;
-    }
-    if (isZero(doc.system.qualifiers.suppressed?.raw)) { delete doc.system.qualifiers.suppressed; }
-  }
+  delete doc.system.qualifiers;
   if (!doc.system.consumable) {
     delete doc.system.quantity;
     delete doc.system.maxQuantity;

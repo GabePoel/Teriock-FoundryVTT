@@ -67,16 +67,6 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
         localize: true,
       });
     }
-    if (this.document.system?.qualifiers) {
-      context.configs.push({
-        fields: [
-          this.#quickField("system.qualifiers.ephemeral.raw"),
-          this.#quickField("system.qualifiers.suppressed.raw"),
-        ],
-        legend: "TERIOCK.SHEETS.DocumentSettings.FIELDS.qualifiers.legend",
-        localize: true,
-      });
-    }
     if (this.document.system?.settings) {
       const schema = this.document.system.settings.schema;
       for (const field of Object.values(schema.fields)) {
