@@ -7,6 +7,7 @@ export const displayPanel = {
     editable: "editable-display-field",
     elderSorcery: "elder-sorcery-display-field",
     faded: "faded-display-field",
+    instructions: "instructions-display-field",
   },
   loading: dedent(`
     <div class="teriock-panel">

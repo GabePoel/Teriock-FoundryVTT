@@ -185,6 +185,7 @@ export default Base => {
         });
         const rankNumber = referenceRank.system.number;
         const rank = /** @type {TeriockRank} */ referenceRank.clone();
+        rank.updateSource({ "system.instructions": "" });
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
           toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate });

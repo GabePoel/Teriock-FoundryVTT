@@ -50,10 +50,11 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   static PRESERVED_PROPERTIES = [
-    "name",
     "img",
+    "name",
     "system.description",
     "system.flaws",
+    "system.instructions",
     "system.notes",
     "system.powerLevel",
     ...super.PRESERVED_PROPERTIES,

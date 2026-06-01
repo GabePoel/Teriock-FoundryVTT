@@ -22,7 +22,7 @@ export default Base => {
 
       /** @inheritDoc */
       get _displayFields() {
-        return [{
+        return [this._displayFieldInstructions, {
           classes: "faded-display-field",
           path: "system.identification.notes",
           visible: game.user.isGM && !this.identification.identified,
@@ -30,7 +30,7 @@ export default Base => {
           classes: "faded-display-field",
           path: "system.identification.flaws",
           visible: game.user.isGM && !this.identification.identified,
-        }, ...super._displayFields];
+        }, ...super._displayFields.filter(f => !this.isInstructionsField(f))];
       }
 
       /**

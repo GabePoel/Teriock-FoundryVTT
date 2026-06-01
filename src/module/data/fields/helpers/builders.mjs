@@ -217,7 +217,6 @@ export function panelsField() {
       blocks: blocksField(),
       classes: nullString(),
       color: nullString(),
-      font: nullString(),
       icon: nullString(),
       image: nullString(),
       label: nullString(),

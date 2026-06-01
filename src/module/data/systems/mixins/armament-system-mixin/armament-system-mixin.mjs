@@ -198,7 +198,7 @@ export default function ArmamentSystemMixin(Base) {
 
       /** @inheritDoc */
       get _displayFields() {
-        return ["system.notes", ...super._displayFields, {
+        return [this._displayFieldInstructions, "system.notes", "system.description", {
           classes: TERIOCK.display.panel.classes.derived,
           editable: false,
           label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.named", {

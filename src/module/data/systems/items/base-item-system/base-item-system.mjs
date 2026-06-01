@@ -36,7 +36,7 @@ export default class BaseItemSystem extends systemMixins.ChildSystemMixin(TypeDa
 
   /** @inheritDoc */
   get _displayFields() {
-    return ["system.description", "system.flaws"];
+    return [this._displayFieldInstructions, "system.description", "system.flaws"];
   }
 
   /** @inheritDoc */

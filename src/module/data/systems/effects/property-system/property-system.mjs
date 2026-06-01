@@ -82,7 +82,7 @@ export default class PropertySystem
 
   /** @inheritDoc */
   get _displayFields() {
-    return ["system.description", ...this.constructor._adjustableTextFields];
+    return [this._displayFieldInstructions, "system.description", ...this.constructor._adjustableTextFields];
   }
 
   /** @inheritDoc */

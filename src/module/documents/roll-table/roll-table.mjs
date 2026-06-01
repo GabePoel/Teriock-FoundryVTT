@@ -61,6 +61,7 @@ export default class TeriockRollTable
       sound: roll ? CONFIG.sounds.dice : null,
       speaker: TeriockChatMessage.getSpeaker(),
       system: {
+        _src: this.uuid,
         activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
           (await Promise.all(results.map(r => r.getActivations()))).flat(),
         ),

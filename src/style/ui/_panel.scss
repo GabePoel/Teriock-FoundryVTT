@@ -287,7 +287,7 @@
 
       $headings: h1, h2, h3, h4, h5, h6;
 
-      #{$headings} {
+      > :is(#{$headings}) {
         @include mixins.text-subtle;
         border-top: 1px var(--panel-divider-style) var(--color-panel-divider);
         font-family: unset;
@@ -316,6 +316,8 @@
         margin-bottom: 0;
       }
 
+      // I might swap back to having roll tables visible in panels in the future do do a comment swap then.
+      //table:not(.roll-table-embed) {
       table {
         display: none;
       }
