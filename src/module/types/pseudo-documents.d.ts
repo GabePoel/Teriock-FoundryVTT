@@ -33,6 +33,7 @@ declare global {
       status: automations.StatusAutomation;
       summon: automations.SummonAutomation;
       take: automations.TakeAutomation;
+      toggleChildren: automations.ToggleChildrenAutomation;
       tradecraft: automations.TradecraftAutomation;
       transformation: automations.TransformationAutomation;
       useDocuments: automations.UseDocumentsAutomation;

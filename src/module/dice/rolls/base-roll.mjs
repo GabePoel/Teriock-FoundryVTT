@@ -95,6 +95,18 @@ export default class BaseRoll extends Roll {
   }
 
   /**
+   * Check if a formula evaluates to a truthy or falsy value.
+   * @param {Teriock.System.FormulaString} formula
+   * @param {object} data
+   * @returns {boolean}
+   */
+  static qualify(formula, data = {}) {
+    if (formula === "1") { return true; }
+    if (formula === "0") { return false; }
+    return Boolean(this.minValue(formula, data));
+  }
+
+  /**
    * Reset all rolls recursively.
    * @param {BaseRoll} roll
    */

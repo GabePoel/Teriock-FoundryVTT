@@ -6,6 +6,7 @@ import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, makeIconClass } from "../../../../helpers/utils.mjs";
 import { speciesTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
+import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -36,6 +37,11 @@ export default class SpeciesSystem
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Species"];
+
+  /** @inheritDoc */
+  static get _automationTypes() {
+    return [...super._automationTypes, automations.ToggleChildrenAutomation];
+  }
 
   /** @inheritDoc */
   static get metadata() {

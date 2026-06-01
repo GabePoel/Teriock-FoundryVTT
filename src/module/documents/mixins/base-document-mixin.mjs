@@ -336,7 +336,7 @@ export default function BaseDocumentMixin(Base) {
       prepareData() {
         super.prepareData();
         game.teriock.identifiers.untrack(this._cachedIdentifier, this.uuid);
-        game.teriock.identifiers.trackDocument(this);
+        if (this.persisted) { game.teriock.identifiers.trackDocument(this); }
         this._cachedIdentifier = this.typedIdentifier;
       }
 

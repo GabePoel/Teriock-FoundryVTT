@@ -87,6 +87,13 @@ const triggerConfig = {
     },
     label: "TERIOCK.TRIGGERS.Time.label",
   },
+  update: {
+    choices: {
+      updateActor: "TERIOCK.TRIGGERS.Update.choices.updateActor",
+      updateDocument: "TERIOCK.TRIGGERS.Update.choices.updateDocument",
+    },
+    label: "TERIOCK.TRIGGERS.Update.label",
+  },
 };
 
 preLocalize("config.trigger", { keys: ["label"] });
@@ -100,5 +107,6 @@ preLocalize("config.trigger.impact.choices");
 preLocalize("config.trigger.mount.choices");
 preLocalize("config.trigger.protection.choices");
 preLocalize("config.trigger.time.choices");
+preLocalize("config.trigger.update.choices");
 
 export default triggerConfig;

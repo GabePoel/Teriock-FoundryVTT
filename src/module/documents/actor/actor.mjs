@@ -461,6 +461,7 @@ export default class TeriockActor
    */
   async postUpdate() {
     await this.system.postUpdate();
+    this.parent.fireTrigger("updateActor", this.parent.getScope());
   }
 
   /** @inheritDoc */
