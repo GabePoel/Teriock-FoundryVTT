@@ -27,6 +27,7 @@ Links to the original pages with the authors can be found below.
 - [`./documents/property.svg`](https://game-icons.net/1x1/lorc/atomic-slashes.html)
 - [`./documents/rank.svg`](https://game-icons.net/1x1/delapouite/ribbon-medal.html)
 - [`./documents/resource.svg`](https://game-icons.net/1x1/delapouite/convergence-target.html)
+- [`./documents/rule.svg`](https://game-icons.net/1x1/lorc/scroll-unfurled.html)
 - [`./documents/species.svg`](https://game-icons.net/1x1/lorc/dna1.html)
 - [`./documents/tradecraft.svg`](https://game-icons.net/1x1/delapouite/swiss-army-knife.html)
 - [`./documents/uncertainty.svg`](https://game-icons.net/1x1/lorc/uncertainty.html)
