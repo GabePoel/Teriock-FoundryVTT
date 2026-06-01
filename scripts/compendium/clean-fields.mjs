@@ -34,6 +34,7 @@ export function cleanDocument(doc) {
     if (doc.type === "property") { cleanProperty(doc); }
     if (doc.type === "rank") { cleanRank(doc); }
     if (doc.type === "species") { cleanSpecies(doc); }
+    if (doc.type === "stone") { cleanStone(doc); }
   }
   if (doc.text?.content && doc.type === "class") { doc.text.content = doc.text.content.replaceAll("\n", ""); }
 }
@@ -236,6 +237,19 @@ function cleanRank(doc) {
 function cleanSpecies(doc) {
   if (!doc.system.adult) { delete doc.system.adult; }
   if (!doc.system.lifespan) { delete doc.system.lifespan; }
+}
+
+/**
+ * @param {TeriockCard} doc
+ */
+function cleanStone(doc) {
+  delete doc.origin;
+  delete doc.rotation;
+  doc.drawn = false;
+  for (const face of doc.faces || []) {
+    delete face.text;
+    face.name = doc.name;
+  }
 }
 
 /**

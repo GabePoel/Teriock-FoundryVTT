@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.10.23
+  systemVersion: 0.12.79
 effects:
   - _id: 5IOuO1uIHpljLfnP
     _key: '!items.effects!92b0bad64c0e4250.5IOuO1uIHpljLfnP'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     flags:
       teriock:
         category: combat
@@ -57,7 +57,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     flags:
       teriock:
         category: combat
@@ -105,7 +105,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     flags:
       teriock:
         category: support
@@ -204,7 +204,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     flags:
       teriock:
         category: support
@@ -265,7 +265,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     flags:
       teriock:
         category: combat
@@ -322,7 +322,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     flags:
       teriock:
         category: support
@@ -379,7 +379,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
     name: Swift Sleep Aura
     system:
@@ -507,7 +507,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
     name: Minor Item Enchantment
     system:
@@ -631,7 +631,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/emergency-casting.webp
     name: Emergency Casting
     system:
@@ -688,7 +688,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/sheltered-casting.webp
     name: Sheltered Casting
     system:
@@ -732,7 +732,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
@@ -753,8 +753,8 @@ effects:
       identifier: spell-strike
       interaction: manifest
       limitation: >-
-        <p>Only usable with @L[Ability:Light Ray]{Light Ray} and
-        @L[Ability:Medicine Ball]{Medicine Ball}.</p>
+        <p>Only usable with @Identifier[ability:light-ray]{Light Ray} and
+        @Identifier[ability:medicine-ball]{Medicine Ball}.</p>
       maneuver: reactive
       overview:
         base: >-
@@ -788,26 +788,33 @@ system:
     raw: 1
   description: >-
     <p>The true healers of the world, they are committed to sustaining all life.
-    The truly altruistic characters, Life Mages are known to enter battles on
-    neither side, healing anyone and everyone who they can. Obsessed with
-    keeping people alive and conquering death, Life Mages are not as righteous
-    as the Paladin but much more humble and kind. Shying away from combat, they
-    prefer to stand behind the troops, healing when needed. If you are playing a
-    Life Mage be helpful, kind and loving, protective but committed to saving
-    lives and fighting death.</p>
+    The truly altruistic characters, @Identifier[class:life-mage]{Life Mages}
+    are known to enter battles on neither side, healing anyone and everyone who
+    they can. Obsessed with keeping people alive and conquering death,
+    @Identifier[class:life-mage]{Life Mages} are not as righteous as the Paladin
+    but much more humble and kind. Shying away from combat, they prefer to stand
+    behind the troops, healing when needed. If you are playing a
+    @Identifier[class:life-mage]{Life Mage} be helpful, kind and loving,
+    protective but committed to saving lives and fighting death.</p>
   identifier: rank-5-life-mage
   innate: false
+  instructions: >-
+    <p>Choose one combat @Pack[teriock.abilities]{ability} and one support
+    @Pack[teriock.abilities]{ability} to gain from [[lookup name]]. Delete the
+    other @Pack[teriock.abilities]{abilities}.</p>
   maxAv: 0
   number: 5
   statDice:
     hp:
       disabled: false
       faces: 8
+      formula: 1d8
       number:
         raw: '1'
     mp:
       disabled: false
       faces: 12
+      formula: 1d12
       number:
         raw: '1'
 type: rank

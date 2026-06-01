@@ -4,52 +4,19 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.69
+  systemVersion: 0.12.79
 effects:
   - _id: 4yCtwLews0lfzqxu
     _key: '!items.effects!f4124a087ca5c5ea.4yCtwLews0lfzqxu'
     _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
+      compendiumSource: Compendium.world.idk-effects.ActiveEffect.PkFfdBDJHbEfiwlx
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
-      automations:
-        0BLOMYrODY3bzx8I:
-          _id: 0BLOMYrODY3bzx8I
-          competencies:
-            - 0
-          formula: 1d(max(6, @flags.braceDieSize))
-          impact: setTempHp
-          trigger: execute
-          type: roll
-        dQvjSj38Nt3dcuZF:
-          _id: dQvjSj38Nt3dcuZF
-          competencies:
-            - 1
-          formula: (1 + @p)d(max(6, @flags.braceDieSize))
-          impact: setTempHp
-          trigger: execute
-          type: roll
-        Eg4Omt9YhPTjNEEW:
-          _id: Eg4Omt9YhPTjNEEW
-          competencies:
-            - 2
-          formula: (1 + @f)d(max(6, @flags.braceDieSize))
-          impact: setTempHp
-          trigger: execute
-          type: roll
-        Rid5p1TlO90isbp4:
-          _id: Rid5p1TlO90isbp4
-          amount: 0
-          impact: setTempHp
-          morganti: false
-          showDialog: false
-          trigger: movement
-          type: take
       competence:
         raw: 0
       delivery: self
@@ -92,7 +59,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -126,7 +93,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/low-strength.webp
     name: Low Strength
     system:
@@ -160,7 +127,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/no-hands.webp
     name: No Hands
     system:
@@ -194,7 +161,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -228,7 +195,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.69
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -262,7 +229,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.12.79
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -298,6 +265,94 @@ effects:
       standard: true
       targets:
         - self
+    transfer: true
+    type: ability
+  - _id: eDGxKxGWtBA079z5
+    _key: '!items.effects!f4124a087ca5c5ea.eDGxKxGWtBA079z5'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b0056a7a1a2931f1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.79
+    img: systems/teriock/src/icons/abilities/avoid-aura.webp
+    name: Avoid Aura
+    system:
+      _sup: 4yCtwLews0lfzqxu
+      automations:
+        7400b41f20d9f100:
+          _id: 7400b41f20d9f100
+          all: false
+          angle: '60'
+          attachToToken: true
+          automatic: true
+          deleteOnTurnChange: true
+          excludeToken: true
+          expandWithToken: true
+          innerWidth: '0'
+          multi: false
+          outerWidth: '0'
+          regionType: emanation
+          restriction:
+            enabled: false
+            priority: 0
+            type: move
+          targeting: true
+          trigger: executeInput
+          type: region
+          visibility: 2
+        u9QnKhzwEZ3zTwBn:
+          _id: u9QnKhzwEZ3zTwBn
+          all: false
+          automatic: true
+          expandTables: false
+          local:
+            identifiers:
+              - ability:drop-prone
+              - ability:stand-up
+          multi: false
+          noHeighten: false
+          type: useDocuments
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: aura
+      duration:
+        unit: instant
+      executionTime:
+        base: r1
+      form: normal
+      identifier: avoid-aura
+      interaction: manifest
+      maneuver: reactive
+      powerSources:
+        - divine
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: >-
+          <p>Target may @Identifier[ability:stand-up]{Stand Up} or
+          @Identifier[ability:drop-prone]{Drop Prone}. If, after doing this,
+          they would no longer be able to be hit by the triggering
+          @Pack[teriock.abilities]{ability}, it
+          @Identifier[core:fizzles]{fizzles} against them and any
+          @Pack[teriock.equipment]{equipment} they bear.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>One or more creature within range or some
+        @Pack[teriock.equipment]{equipment} they
+        @Identifier[keyword:bearing]{bear} would be hit by an
+        @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive
+        abilities]{reactive} @Wiki[Category:Attack abilities]{attack} you can
+        see.</p>
     transfer: true
     type: ability
 folder: 30f4d11e5e53d332
