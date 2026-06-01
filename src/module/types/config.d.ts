@@ -22,6 +22,7 @@ declare global {
       collection?: string;
       icon: string;
       identifierType?: string;
+      index?: keyof typeof TERIOCK.index;
       packs: string[];
       parentKey: string;
       type: string;

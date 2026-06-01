@@ -229,6 +229,13 @@ export default {
     plural: "TERIOCK.DOCUMENTS.resource.plural",
     sorter: docSort,
   },
+  rule: /** @type {Teriock.Config.DocumentEntry} */ {
+    documentName: "JournalEntryPage",
+    hint: "TERIOCK.DOCUMENTS.rule.hint",
+    icon: icons.document.core,
+    label: "TYPES.JournalEntryPage.rule",
+    plural: "TERIOCK.DOCUMENTS.rule.plural",
+  },
   species: /** @type {Teriock.Config.DocumentEntry} */ {
     documentName: "Item",
     getter: "species",

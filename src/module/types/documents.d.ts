@@ -21,7 +21,7 @@ import {
   RankSheet,
   SpeciesSheet,
 } from "../applications/sheets/item-sheets/_module.mjs";
-import { HarmSheet } from "../applications/sheets/page-sheets/_module.mjs";
+import { HarmSheet, RuleSheet } from "../applications/sheets/page-sheets/_module.mjs";
 import { CharacterSystem, CreatureSystem, InventorySystem } from "../data/systems/actors/_module.mjs";
 import {
   AbilitySystem,
@@ -43,7 +43,7 @@ import {
   RankSystem,
   SpeciesSystem,
 } from "../data/systems/items/_module.mjs";
-import { HarmSystem } from "../data/systems/pages/_module.mjs";
+import { HarmSystem, RuleSystem } from "../data/systems/pages/_module.mjs";
 import {
   TeriockActiveEffect,
   TeriockActor,
@@ -291,6 +291,15 @@ declare global {
     type: "damage" | "drain";
     get id(): ID<TeriockHarm>;
     get uuid(): UUID<TeriockHarm>;
+  };
+
+  export type TeriockRule = TeriockJournalEntryPage & {
+    _id: ID<TeriockRule>;
+    sheet: RuleSheet;
+    system: RuleSystem;
+    type: "rule";
+    get id(): ID<TeriockRule>;
+    get uuid(): UUID<TeriockRule>;
   };
 }
 

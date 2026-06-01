@@ -180,6 +180,7 @@ foundry.helpers.Hooks.once("init", function() {
         class: data.systems.pages.ClassSystem,
         damage: data.systems.pages.HarmSystem,
         drain: data.systems.pages.HarmSystem,
+        rule: data.systems.pages.RuleSystem,
         tradecraft: data.systems.pages.TradecraftSystem,
       },
       documentClass: documents.TeriockJournalEntryPage,
@@ -379,6 +380,12 @@ foundry.helpers.Hooks.once("init", function() {
       doc: documents.TeriockJournalEntryPage,
       label: "TYPES.JournalEntryPage.class",
       types: ["class"],
+    },
+    {
+      cls: applications.sheets.page.RuleSheet,
+      doc: documents.TeriockJournalEntryPage,
+      label: "TYPES.JournalEntryPage.rule",
+      types: ["rule"],
     },
   ];
   sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>
