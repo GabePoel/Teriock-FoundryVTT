@@ -10,6 +10,9 @@ import * as automationMixins from "./mixins/_module.mjs";
  */
 export default class ChangeCompetenceAutomation extends automationMixins.CompetenceAutomationMixin(CritAutomation) {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeCompetence"];
+
+  /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.ChangeCompetence.LABEL";
   }

@@ -113,7 +113,8 @@ items:
             <p>Your @Identifier[equipment:rope]{rope} counts as part of your
             body, it has no minimum @Identifier[core:strength]{strength}
             requirement, and you may @Wiki[Category:Attack abilities]{attack}
-            with it as though it were a @Wiki[Category:Weapons]{weapon}.</p>
+            with it as though it were a
+            @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
           interaction: manifest
           maneuver: passive
           overview:
@@ -129,13 +130,15 @@ items:
               abilities]{magically powered}, then any
               @Identifier[core:damage]{damage} dealt is
               @Identifier[damage:magic]{magic} in addition to its other
-              @Wiki[Category:Damage types]{types}. If the @Wiki[Category:Item
-              target abilities]{ability} was delivered by a
-              @Wiki[Category:Weapon delivery abilities]{weapon}, then the
-              @Identifier[core:damage]{damage} has all the @Wiki[Category:Damage
-              types]{damage types} that @Wiki[Category:Weapons]{weapon} would
-              deal in addition to its other @Wiki[Category:Damage
-              types]{types}.</p><ul><li>@Identifier[property:destroyed]{Destroyed}:
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}.
+              If the @Wiki[Category:Item target abilities]{ability} was
+              delivered by a @Wiki[Category:Weapon delivery abilities]{weapon},
+              then the @Identifier[core:damage]{damage} has all the
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
+              types} that
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+              would deal in addition to its other
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}.</p><ul><li>@Identifier[property:destroyed]{Destroyed}:
               Take [[/damage 1d10]] @Identifier[core:damage]{damage}.</li>
 
               <li>@Identifier[property:shattered]{Shattered}: Take a
@@ -162,7 +165,7 @@ items:
         _key: >-
           !actors.items.effects!42eaff563cd42b62.42eaff563cd42b62.xyj7NRlGsaSsRBDR
         _stats:
-          compendiumSource: Compendium.world.idk-effects.ActiveEffect.9zT1VuSKn3nGxm96
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.63b8c75f371412f7
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
@@ -170,6 +173,34 @@ items:
         img: systems/teriock/src/icons/abilities/disarm.webp
         name: Disarm
         system:
+          automations:
+            dWnCYT88hEWY1U3u:
+              _id: dWnCYT88hEWY1U3u
+              activeQualifier: '@flags.disarmKnockback'
+              distance: '10'
+              movementAction: walk
+              origin: executor
+              originBarrier: true
+              type: move
+            ow9J5qYNcoLGDsL3:
+              _id: ow9J5qYNcoLGDsL3
+              activeQualifier: '@flags.disarmKnockback'
+              distance: '20'
+              movementAction: walk
+              origin: executor
+              originBarrier: true
+              type: move
+            zGqyHWcKnNUWmna8:
+              _id: zGqyHWcKnNUWmna8
+              all: false
+              automatic: true
+              expandTables: false
+              local:
+                identifiers:
+                  - ability:catch-item
+              multi: false
+              noHeighten: false
+              type: useDocuments
           competence:
             raw: 0
           delivery: weapon
@@ -368,7 +399,8 @@ items:
           overview:
             base: >-
               <p>You always have at least 1 @Wiki[Core:AV]{AV}. This is the case
-              even when you are not wearing @Wiki[Category:Armor]{armor}.</p>
+              even when you are not wearing
+              @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}.</p>
           powerSources:
             - martial
           range:
@@ -511,8 +543,8 @@ items:
             base: >-
               <p>You count as being @Identifier[keyword:undead]{undead} for the
               purposes of @Pack[teriock.abilities]{abilities},
-              @Wiki[Category:Damage types]{damage}, and other
-              @Wiki[Category:Effects]{effects}. You also gain
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage},
+              and other @Wiki[Category:Effects]{effects}. You also gain
               @Identifier[ability:healing-sensitivity]{Healing Sensitivity}.</p>
           powerSources:
             - magical
@@ -586,8 +618,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>The range of your melee @Wiki[Category:Weapons]{weapons} and
-              @Wiki[Category:Attack abilities]{attacks} increases by 5 feet.</p>
+              <p>The range of your melee
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
+              and @Wiki[Category:Attack abilities]{attacks} increases by 5
+              feet.</p>
           powerSources:
             - martial
           range:

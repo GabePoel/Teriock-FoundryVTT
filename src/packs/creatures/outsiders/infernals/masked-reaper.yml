@@ -174,7 +174,7 @@ items:
         _key: >-
           !actors.items.effects!e5859ab03f3eb16f.e5859ab03f3eb16f.lRvfjp5QxNNyOM2d
         _stats:
-          compendiumSource: Compendium.world.idk-effects.ActiveEffect.9zT1VuSKn3nGxm96
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.63b8c75f371412f7
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
@@ -182,6 +182,34 @@ items:
         img: systems/teriock/src/icons/abilities/disarm.webp
         name: Disarm
         system:
+          automations:
+            dWnCYT88hEWY1U3u:
+              _id: dWnCYT88hEWY1U3u
+              activeQualifier: '@flags.disarmKnockback'
+              distance: '10'
+              movementAction: walk
+              origin: executor
+              originBarrier: true
+              type: move
+            ow9J5qYNcoLGDsL3:
+              _id: ow9J5qYNcoLGDsL3
+              activeQualifier: '@flags.disarmKnockback'
+              distance: '20'
+              movementAction: walk
+              origin: executor
+              originBarrier: true
+              type: move
+            zGqyHWcKnNUWmna8:
+              _id: zGqyHWcKnNUWmna8
+              all: false
+              automatic: true
+              expandTables: false
+              local:
+                identifiers:
+                  - ability:catch-item
+              multi: false
+              noHeighten: false
+              type: useDocuments
           competence:
             raw: 0
           delivery: weapon
@@ -236,7 +264,7 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>For every @Wiki[Category:Classes]{rank} you gain by
+              <p>For every @Pack[teriock.classes]{rank} you gain by
               @Identifier[core:leveling-up]{leveling up}, you gain a
               @Identifier[class:nature-mage]{rank in Nature Mage} as well.</p>
           powerSources:
@@ -509,8 +537,8 @@ items:
             base: >-
               <p>You count as being @Identifier[keyword:undead]{undead} for the
               purposes of @Pack[teriock.abilities]{abilities},
-              @Wiki[Category:Damage types]{damage}, and other
-              @Wiki[Category:Effects]{effects}. You also gain
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage},
+              and other @Wiki[Category:Effects]{effects}. You also gain
               @Identifier[ability:ethereal-senses]{Ethereal Senses},
               @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
               @Identifier[ability:magical-durability]{Magical Durability},
@@ -685,14 +713,14 @@ items:
               @Wiki[Category:Spells]{spells} of your own, they get added to this
               list. However, just because you "know" how to cast these spells,
               doesn't mean you are always prepared to. Although all
-              @Wiki[Category:Mage classes]{mage classes} grant their own
+              @Identifier[archetype:mage]{mage classes} grant their own
               @Identifier[core:elder-sorcery]{Elder Sorcery} and
               @Wiki[Category:Rotator spells]{rotator spells}, you may only have
-              a maximum of @Wiki[Category:Mage classes]{MR} - 1 of these spells
+              a maximum of @Identifier[archetype:mage]{MR} - 1 of these spells
               rotated into your spell list at any given time across <i>all</i>
-              classes. @Wiki[Category:Mage classes]{MR} refers to the number of
+              classes. @Identifier[archetype:mage]{MR} refers to the number of
               @Identifier[core:leveling-up]{ranks} you have in
-              @Wiki[Category:Mage classes]{mage classes}. During a
+              @Identifier[archetype:mage]{mage classes}. During a
               @Identifier[core:long-rest]{long rest}, you can "rotate" which
               spells you have prepared. The @Wiki[Category:Rotator
               spells]{rotator spells} automatically available to you are
@@ -787,14 +815,14 @@ items:
               @Wiki[Category:Spells]{spells} of your own, they get added to this
               list. However, just because you "know" how to cast these spells,
               doesn't mean you are always prepared to. Although all
-              @Wiki[Category:Mage classes]{mage classes} grant their own
+              @Identifier[archetype:mage]{mage classes} grant their own
               @Identifier[core:elder-sorcery]{Elder Sorcery} and
               @Wiki[Category:Rotator spells]{rotator spells}, you may only have
-              a maximum of @Wiki[Category:Mage classes]{MR} - 1 of these spells
+              a maximum of @Identifier[archetype:mage]{MR} - 1 of these spells
               rotated into your spell list at any given time across <i>all</i>
-              classes. @Wiki[Category:Mage classes]{MR} refers to the number of
+              classes. @Identifier[archetype:mage]{MR} refers to the number of
               @Identifier[core:leveling-up]{ranks} you have in
-              @Wiki[Category:Mage classes]{mage classes}. During a
+              @Identifier[archetype:mage]{mage classes}. During a
               @Identifier[core:long-rest]{long rest}, you can "rotate" which
               spells you have prepared. The @Wiki[Category:Rotator
               spells]{rotator spells} automatically available to you are
@@ -931,7 +959,7 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>For every @Wiki[Category:Classes]{rank} you gain by
+              <p>For every @Pack[teriock.classes]{rank} you gain by
               @Identifier[core:leveling-up]{leveling up}, you gain a
               @Identifier[class:necromancer]{rank in Necromancer} as well.</p>
           powerSources:
@@ -1695,15 +1723,17 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @Wiki[Category:Drain types]{drain} to
-              the target. If this @Identifier[status:dead]{kills} the target,
+              <p>Deal [[/drain 2d8[mana]]]
+              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+              to the target. If this @Identifier[status:dead]{kills} the target,
               you @Identifier[core:revitalizing]{revitalize} twice. This
               @Identifier[core:revitalizing]{revitalization} is the only part of
               this that is a @Wiki[Category:Revitalization
               effects]{revitalization effect}.</p>
             hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @Wiki[Category:Drain types]{drain} to
-              the target. If this @Identifier[status:dead]{kills} the target,
+              <p>Deal [[/drain 1d8[mana]]]
+              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+              to the target. If this @Identifier[status:dead]{kills} the target,
               you @Identifier[core:revitalizing]{revitalize}.  This
               @Identifier[core:revitalizing]{revitalization} is the only part of
               this that is a @Wiki[Category:Revitalization
@@ -3254,7 +3284,7 @@ items:
       description: <p>These creatures speak in weird broken chattery sounds.</p>
       identifier: masked-reaper
       innateRanks: >-
-        <p>Innately @Wiki[Category:Classes]{rank} 1
+        <p>Innately @Pack[teriock.classes]{rank} 1
         @Identifier[class:necromancer]{Necromancer}.</p>
       size:
         enabled: true
@@ -4066,8 +4096,8 @@ items:
           unit: self
       weight: 0.5
     type: equipment
-  - _id: 6P4W2a2a4uuXYKhm
-    _key: '!actors.items!e5859ab03f3eb16f.6P4W2a2a4uuXYKhm'
+  - _id: X8cyShNnIxi315vD
+    _key: '!actors.items!e5859ab03f3eb16f.X8cyShNnIxi315vD'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -4077,7 +4107,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!e5859ab03f3eb16f.6P4W2a2a4uuXYKhm.NGCuRUaVtXnxAbRe
+          !actors.items.effects!e5859ab03f3eb16f.X8cyShNnIxi315vD.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -4133,7 +4163,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!e5859ab03f3eb16f.6P4W2a2a4uuXYKhm.aCWLNsvSFjEuLTyl
+          !actors.items.effects!e5859ab03f3eb16f.X8cyShNnIxi315vD.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

@@ -10,7 +10,7 @@ export default class ResistAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.ROLLS.Resist.label";
+    return "TERIOCK.TERMS.EffectTypes.resistance";
   }
 
   /** @inheritDoc */

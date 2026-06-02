@@ -174,8 +174,8 @@ items:
             base: >-
               <p>You count as being @Identifier[keyword:undead]{undead} for the
               purposes of @Pack[teriock.abilities]{abilities},
-              @Wiki[Category:Damage types]{damage}, and other
-              @Wiki[Category:Effects]{effects}. You also gain
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage},
+              and other @Wiki[Category:Effects]{effects}. You also gain
               @Identifier[ability:ethereal-senses]{Ethereal Senses},
               @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
               @Identifier[ability:impure-durability]{Impure Durability},
@@ -996,15 +996,17 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>Deal [[/drain 2d8[mana]]] @Wiki[Category:Drain types]{drain} to
-              the target. If this @Identifier[status:dead]{kills} the target,
+              <p>Deal [[/drain 2d8[mana]]]
+              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+              to the target. If this @Identifier[status:dead]{kills} the target,
               you @Identifier[core:revitalizing]{revitalize} twice. This
               @Identifier[core:revitalizing]{revitalization} is the only part of
               this that is a @Wiki[Category:Revitalization
               effects]{revitalization effect}.</p>
             hit: >-
-              <p>Deal [[/drain 1d8[mana]]] @Wiki[Category:Drain types]{drain} to
-              the target. If this @Identifier[status:dead]{kills} the target,
+              <p>Deal [[/drain 1d8[mana]]]
+              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+              to the target. If this @Identifier[status:dead]{kills} the target,
               you @Identifier[core:revitalizing]{revitalize}.  This
               @Identifier[core:revitalizing]{revitalization} is the only part of
               this that is a @Wiki[Category:Revitalization
@@ -1071,7 +1073,7 @@ items:
           overview:
             base: >-
               <p>Your @Identifier[body:hand]{hands} and other
-              @Wiki[Category:Handy equipment]{handy body parts} count as
+              @Identifier[property:handy]{handy body parts} count as
               @Wiki[Category:Shields]{shields} for the purposes of
               @Wiki[Category:Weapon target abilities]{abilities that target
               them} (although they cannot be
@@ -1172,11 +1174,11 @@ items:
           overview:
             base: >-
               <p>Your @Identifier[body:hand]{hands} and other
-              @Wiki[Category:Handy equipment]{handy items} count as
-              @Wiki[Category:Weapons]{weapons} for the purposes of
-              @Wiki[Category:Weapon target abilities]{abilities that target} or
-              are @Wiki[Category:Weapon delivery abilities]{delivered by} them
-              (although they cannot be
+              @Identifier[property:handy]{handy items} count as
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
+              for the purposes of @Wiki[Category:Weapon target
+              abilities]{abilities that target} or are @Wiki[Category:Weapon
+              delivery abilities]{delivered by} them (although they cannot be
               @Identifier[property:shattered]{shattered} or
               @Identifier[property:destroyed]{destroyed}). You may
               @Identifier[core:attack-interaction]{attack} with them and their
@@ -1206,7 +1208,7 @@ items:
         additional @Identifier[keyword:blessing]{blessings} on them.</p>
       identifier: sand-mummy
       innateRanks: >-
-        <p>Innately @Wiki[Category:Classes]{rank} 1
+        <p>Innately @Pack[teriock.classes]{rank} 1
         @Identifier[class:flame-mage]{Flame Mage}.</p>
       size:
         enabled: true
@@ -1707,6 +1709,32 @@ items:
         img: systems/teriock/src/icons/abilities/self-detonate.webp
         name: Self Detonate
         system:
+          automations:
+            32BRYYbao0OafqCz:
+              _id: 32BRYYbao0OafqCz
+              attribute: mov
+              threshold: 10 + @c
+              type: feat
+            YxFIjavyUBnxf6OV:
+              _id: YxFIjavyUBnxf6OV
+              all: false
+              angle: '60'
+              attachToToken: true
+              automatic: true
+              deleteOnTurnChange: true
+              excludeToken: true
+              expandWithToken: true
+              innerWidth: '0'
+              multi: false
+              outerWidth: '0'
+              regionType: emanation
+              restriction:
+                enabled: false
+                priority: 0
+                type: move
+              targeting: true
+              type: region
+              visibility: 2
           competence:
             raw: 0
           costs:
@@ -1744,7 +1772,7 @@ items:
               @Wiki[Category:Missile delivery spells]{missile spell} cast on the
               target @Identifier[core:detonate-expansion]{detonates} (emanates
               in a 10 foot radius @Identifier[core:aura-delivery]{aura} from the
-              target). This is a @Wiki[Core:MOV]{MOV}
+              target). This is a @Identifier[core:movement]{MOV}
               @Identifier[core:feat-interaction]{feat save} using <i>your</i>
               DC. Do not add your
               @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC.
@@ -1957,8 +1985,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: Sjh9BdhXMkCIb8BB
-    _key: '!actors.items!266273a260f3effc.Sjh9BdhXMkCIb8BB'
+  - _id: 5DWWMoq4IVhTFatC
+    _key: '!actors.items!266273a260f3effc.5DWWMoq4IVhTFatC'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -1968,7 +1996,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!266273a260f3effc.Sjh9BdhXMkCIb8BB.NGCuRUaVtXnxAbRe
+          !actors.items.effects!266273a260f3effc.5DWWMoq4IVhTFatC.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -2024,7 +2052,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!266273a260f3effc.Sjh9BdhXMkCIb8BB.aCWLNsvSFjEuLTyl
+          !actors.items.effects!266273a260f3effc.5DWWMoq4IVhTFatC.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

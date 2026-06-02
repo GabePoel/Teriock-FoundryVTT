@@ -482,9 +482,10 @@ items:
               <p>You gain
               @Identifier[ability:supernatural-strength]{Supernatural Strength}.
               In addition, you deal @Identifier[keyword:boosted]{boosted} with
-              all melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
-              abilities]{attacks} and they are @Identifier[keyword:av0]{AV0} for
-              you.</p>
+              all melee
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+              @Wiki[Category:Attack abilities]{attacks} and they are
+              @Identifier[keyword:av0]{AV0} for you.</p>
           powerSources:
             - martial
           range:
@@ -1829,11 +1830,11 @@ items:
               @Identifier[core:elder-sorcery]{Elder Sorcery} for more
               information.</p>
             proficient: >-
-              <p>You may now create 2 × (@Wiki[Category:Mage classes]{MR} - 1)
+              <p>You may now create 2 × (@Identifier[archetype:mage]{MR} - 1)
               custom "rotator" @Wiki[Category:Spells]{spells} where
-              @Wiki[Category:Mage classes]{MR} is the number of
+              @Identifier[archetype:mage]{MR} is the number of
               @Identifier[core:leveling-up]{ranks} you have in
-              @Wiki[Category:Mage classes]{mage classes}.</p>
+              @Identifier[archetype:mage]{mage classes}.</p>
           powerSources:
             - magical
           range:
@@ -2091,8 +2092,10 @@ items:
               <p>You gain @Identifier[ability:giant-strength]{Giant Strength}
               and @Identifier[ability:shattering-grip]{Shattering Grip}. In
               addition, you may @Identifier[keyword:deboosted]{deboost} any
-              melee @Wiki[Category:Weapons]{weapon} @Wiki[Category:Attack
-              abilities]{attack} to make it @Identifier[keyword:av0]{AV0}.</p>
+              melee
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+              @Wiki[Category:Attack abilities]{attack} to make it
+              @Identifier[keyword:av0]{AV0}.</p>
           powerSources:
             - martial
           range:
@@ -2683,7 +2686,7 @@ items:
       hpIncrease: <p>Gain another hit die for every 1 additional size.</p>
       identifier: red-dragon
       innateRanks: >-
-        <p>Innately @Wiki[Category:Classes]{rank} 5
+        <p>Innately @Pack[teriock.classes]{rank} 5
         @Identifier[class:flame-mage]{Flame Mage}.</p>
       mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
       size:
@@ -3027,14 +3030,14 @@ items:
               @Wiki[Category:Spells]{spells} of your own, they get added to this
               list. However, just because you "know" how to cast these spells,
               doesn't mean you are always prepared to. Although all
-              @Wiki[Category:Mage classes]{mage classes} grant their own
+              @Identifier[archetype:mage]{mage classes} grant their own
               @Identifier[core:elder-sorcery]{Elder Sorcery} and
               @Wiki[Category:Rotator spells]{rotator spells}, you may only have
-              a maximum of @Wiki[Category:Mage classes]{MR} - 1 of these spells
+              a maximum of @Identifier[archetype:mage]{MR} - 1 of these spells
               rotated into your spell list at any given time across <i>all</i>
-              classes. @Wiki[Category:Mage classes]{MR} refers to the number of
+              classes. @Identifier[archetype:mage]{MR} refers to the number of
               @Identifier[core:leveling-up]{ranks} you have in
-              @Wiki[Category:Mage classes]{mage classes}. During a
+              @Identifier[archetype:mage]{mage classes}. During a
               @Identifier[core:long-rest]{long rest}, you can "rotate" which
               spells you have prepared. The @Wiki[Category:Rotator
               spells]{rotator spells} automatically available to you are
@@ -3509,11 +3512,11 @@ items:
               @Identifier[core:elder-sorcery]{Elder Sorcery} for more
               information.</p>
             proficient: >-
-              <p>You may now create 2 × (@Wiki[Category:Mage classes]{MR} - 1)
+              <p>You may now create 2 × (@Identifier[archetype:mage]{MR} - 1)
               custom "rotator" @Wiki[Category:Spells]{spells} where
-              @Wiki[Category:Mage classes]{MR} is the number of
+              @Identifier[archetype:mage]{MR} is the number of
               @Identifier[core:leveling-up]{ranks} you have in
-              @Wiki[Category:Mage classes]{mage classes}.</p>
+              @Identifier[archetype:mage]{mage classes}.</p>
           powerSources:
             - magical
           range:
@@ -4382,6 +4385,32 @@ items:
         img: systems/teriock/src/icons/abilities/self-detonate.webp
         name: Self Detonate
         system:
+          automations:
+            32BRYYbao0OafqCz:
+              _id: 32BRYYbao0OafqCz
+              attribute: mov
+              threshold: 10 + @c
+              type: feat
+            YxFIjavyUBnxf6OV:
+              _id: YxFIjavyUBnxf6OV
+              all: false
+              angle: '60'
+              attachToToken: true
+              automatic: true
+              deleteOnTurnChange: true
+              excludeToken: true
+              expandWithToken: true
+              innerWidth: '0'
+              multi: false
+              outerWidth: '0'
+              regionType: emanation
+              restriction:
+                enabled: false
+                priority: 0
+                type: move
+              targeting: true
+              type: region
+              visibility: 2
           competence:
             raw: 0
           costs:
@@ -4419,7 +4448,7 @@ items:
               @Wiki[Category:Missile delivery spells]{missile spell} cast on the
               target @Identifier[core:detonate-expansion]{detonates} (emanates
               in a 10 foot radius @Identifier[core:aura-delivery]{aura} from the
-              target). This is a @Wiki[Core:MOV]{MOV}
+              target). This is a @Identifier[core:movement]{MOV}
               @Identifier[core:feat-interaction]{feat save} using <i>your</i>
               DC. Do not add your
               @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC.
@@ -5708,8 +5737,8 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: 4jqzB5v1EhOZyxB2
-    _key: '!actors.items!f5d366c9fb78831f.4jqzB5v1EhOZyxB2'
+  - _id: k97nwGnXB6LCkFp1
+    _key: '!actors.items!f5d366c9fb78831f.k97nwGnXB6LCkFp1'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -5719,7 +5748,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!f5d366c9fb78831f.4jqzB5v1EhOZyxB2.NGCuRUaVtXnxAbRe
+          !actors.items.effects!f5d366c9fb78831f.k97nwGnXB6LCkFp1.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -5775,7 +5804,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!f5d366c9fb78831f.4jqzB5v1EhOZyxB2.aCWLNsvSFjEuLTyl
+          !actors.items.effects!f5d366c9fb78831f.k97nwGnXB6LCkFp1.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'

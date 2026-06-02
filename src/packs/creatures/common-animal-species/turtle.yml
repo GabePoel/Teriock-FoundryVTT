@@ -21,7 +21,7 @@ items:
         _key: >-
           !actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.VKmRZE0lHU6m4kIf
         _stats:
-          compendiumSource: Compendium.world.idk-effects.ActiveEffect.PkFfdBDJHbEfiwlx
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
@@ -29,6 +29,39 @@ items:
         img: systems/teriock/src/icons/abilities/brace.webp
         name: Brace
         system:
+          automations:
+            0BLOMYrODY3bzx8I:
+              _id: 0BLOMYrODY3bzx8I
+              competencies:
+                - 0
+              formula: 1d(max(6, @flags.braceDieSize))
+              impact: setTempHp
+              trigger: execute
+              type: roll
+            dQvjSj38Nt3dcuZF:
+              _id: dQvjSj38Nt3dcuZF
+              competencies:
+                - 1
+              formula: (1 + @p)d(max(6, @flags.braceDieSize))
+              impact: setTempHp
+              trigger: execute
+              type: roll
+            Eg4Omt9YhPTjNEEW:
+              _id: Eg4Omt9YhPTjNEEW
+              competencies:
+                - 2
+              formula: (1 + @f)d(max(6, @flags.braceDieSize))
+              impact: setTempHp
+              trigger: execute
+              type: roll
+            Rid5p1TlO90isbp4:
+              _id: Rid5p1TlO90isbp4
+              amount: 0
+              impact: setTempHp
+              morganti: false
+              showDialog: false
+              trigger: movement
+              type: take
           competence:
             raw: 0
           delivery: self
@@ -370,95 +403,6 @@ items:
           standard: true
           targets:
             - self
-        transfer: true
-        type: ability
-      - _id: hAJQP83dAWT0NH4c
-        _key: >-
-          !actors.items.effects!47f36cc34b81e6df.47f36cc34b81e6df.hAJQP83dAWT0NH4c
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.b0056a7a1a2931f1
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.12.79
-        img: systems/teriock/src/icons/abilities/avoid-aura.webp
-        name: Avoid Aura
-        system:
-          _sup: VKmRZE0lHU6m4kIf
-          automations:
-            7400b41f20d9f100:
-              _id: 7400b41f20d9f100
-              all: false
-              angle: '60'
-              attachToToken: true
-              automatic: true
-              deleteOnTurnChange: true
-              excludeToken: true
-              expandWithToken: true
-              innerWidth: '0'
-              multi: false
-              outerWidth: '0'
-              regionType: emanation
-              restriction:
-                enabled: false
-                priority: 0
-                type: move
-              targeting: true
-              trigger: executeInput
-              type: region
-              visibility: 2
-            u9QnKhzwEZ3zTwBn:
-              _id: u9QnKhzwEZ3zTwBn
-              all: false
-              automatic: true
-              expandTables: false
-              local:
-                identifiers:
-                  - ability:drop-prone
-                  - ability:stand-up
-              multi: false
-              noHeighten: false
-              type: useDocuments
-          competence:
-            raw: 0
-          costs:
-            primary:
-              mp:
-                formula: '1'
-                type: formula
-          delivery: aura
-          duration:
-            unit: instant
-          executionTime:
-            base: r1
-          form: normal
-          identifier: avoid-aura
-          interaction: manifest
-          maneuver: reactive
-          powerSources:
-            - divine
-          range:
-            raw: '10'
-            unit: ft
-          results:
-            fail: >-
-              <p>Target may @Identifier[ability:stand-up]{Stand Up} or
-              @Identifier[ability:drop-prone]{Drop Prone}. If, after doing this,
-              they would no longer be able to be hit by the triggering
-              @Pack[teriock.abilities]{ability}, it
-              @Identifier[core:fizzles]{fizzles} against them and any
-              @Pack[teriock.equipment]{equipment} they bear.</p>
-          skill: true
-          standard: true
-          targets:
-            - creature
-          trigger: >-
-            <p>One or more creature within range or some
-            @Pack[teriock.equipment]{equipment} they
-            @Identifier[keyword:bearing]{bear} would be hit by an
-            @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive
-            abilities]{reactive} @Wiki[Category:Attack abilities]{attack} you
-            can see.</p>
         transfer: true
         type: ability
     folder: 30f4d11e5e53d332
