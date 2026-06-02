@@ -159,13 +159,26 @@ export const settings = {
     },
   },
   gameContent: {
-    prioritizeCustomIdentifiers: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.prioritizeCustomIdentifiers.hint",
-      name: "TERIOCK.SETTINGS.prioritizeCustomIdentifiers.name",
+    identifierSourcePriority: {
+      default: {
+        "teriock.abilities": 11,
+        "teriock.bodyParts": 9,
+        "teriock.classes": 7,
+        "teriock.creatures": 5,
+        "teriock.equipment": 8,
+        "teriock.essentials": 3,
+        "teriock.magicItems": 1,
+        "teriock.powers": 2,
+        "teriock.properties": 10,
+        "teriock.rules": 12,
+        "teriock.species": 6,
+        "teriock.templateEffects": 4,
+      },
+      hint: "TERIOCK.SETTINGS.identifierSourcePriority.hint",
+      name: "TERIOCK.SETTINGS.identifierSourcePriority.name",
       requiresReload: true,
       scope: "world",
-      type: Boolean,
+      type: new fields.TypedObjectField(new fields.NumberField(), { expandKeys: false }),
     },
   },
   gameMasterControls: {

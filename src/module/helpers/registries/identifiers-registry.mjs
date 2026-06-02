@@ -36,23 +36,6 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
   #identifiers = new Map();
 
   /**
-   * Hard-coded priorities for the system's built-in compendiums.
-   * @type {Record<string, number>}
-   */
-  #packPriorities = {
-    "teriock.abilities": 6,
-    "teriock.bodyParts": 5,
-    "teriock.classes": 4,
-    "teriock.creatures": 2,
-    "teriock.equipment": 5,
-    "teriock.essentials": 1,
-    "teriock.magicItems": 1,
-    "teriock.properties": 6,
-    "teriock.species": 3,
-    "teriock.templateEffects": 1,
-  };
-
-  /**
    * The types of documents which can support children with indexed identifiers.
    * @type {Set<string>}
    */
@@ -90,13 +73,14 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const embeddable = parsed.embedded.length === 0
       || (parsed.embedded.length === 2 && this.#embeddedDocumentNames.has(parsed.type));
     if (!embeddable) { return null; }
-    let level = 1;
-    // Compendium collections are always prioritized over world collections
-    if (parsed.collection?.collection?.startsWith("teriock.")) {
-      const rootLevel = this.#packPriorities[parsed.collection.collection] ?? 0;
-      level = rootLevel + 3;
-    } else if (parsed.collection?.collection) {
-      level = game.teriock.getSetting("prioritizeCustomIdentifiers") ? 10 : 2;
+    // By default, world collections are prioritized
+    // This is a setting that can be changed
+    let level = 0;
+    if (parsed.collection?.collection) {
+      const collection = parsed.collection.collection;
+      const configuredPackPriorities = game.teriock.getSetting("identifierSourcePriority") ?? {};
+      const configuredLevel = Number(configuredPackPriorities[collection]);
+      if (Number.isFinite(configuredLevel)) { level = configuredLevel; }
     }
     // IDs are used as tiebreakers within a level
     const tieBreaker = this.#hashStringToInt(parsed.id);
@@ -147,6 +131,14 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
       const typedIdentifier = p?.typedIdentifier;
       if (typedIdentifier) { this.#track(typedIdentifier, p?.uuid, p?.name); }
     }
+  }
+
+  /**
+   * The types of documents which support having identifiers.
+   * @returns {Set<string>}
+   */
+  get documentNames() {
+    return this.#documentNames;
   }
 
   /** @inheritDoc */

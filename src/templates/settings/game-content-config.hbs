@@ -1,0 +1,26 @@
+<div class="teriock-game-content-settings teriock-form-container">
+  <p class="hint">{{localize "TERIOCK.SETTINGS.identifierSourcePriority.hint"}}</p>
+  <div class="form-fields">
+    <ul class="identifier-source-priority-list">
+      {{#each identifierSourcePriority}}
+        <li
+          class="identifier-source-priority-row"
+          data-identifier-priority-row
+          data-identifier-priority-label="{{ label }}"
+          data-identifier-priority-collection="{{ collection }}"
+        >
+          <span class="identifier-source-priority-number" data-identifier-priority-number>{{ priority }}</span>
+          <div class="identifier-source-priority-controls">
+            <button id="{{ @root.partId }}-identifier-priority-up-{{ collection }}" class="identifier-source-priority-button" type="button" data-action="moveIdentifierPriority" data-identifier-priority-move="up">{{makeIcon "ms-arrow-drop-up" "solid"}}</button>
+            <button id="{{ @root.partId }}-identifier-priority-down-{{ collection }}" class="identifier-source-priority-button" type="button" data-action="moveIdentifierPriority" data-identifier-priority-move="down">{{makeIcon "ms-arrow-drop-down" "solid"}}</button>
+          </div>
+          <label class="identifier-source-priority-label">
+            <i class="{{ icon }}"></i>
+            {{ label }}
+            <span class="hint">({{ collection }})</span>
+          </label>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

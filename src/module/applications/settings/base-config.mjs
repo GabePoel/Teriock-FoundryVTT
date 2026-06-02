@@ -10,35 +10,9 @@ const { SettingsConfig } = foundry.applications.settings;
  * Adapted from D&D 5E.
  */
 export default class BaseConfig extends TeriockBaseApplication {
-  /**
-   * Commit settings changes.
-   * This method processes the submitted form data, updates the settings, and determines if a reload is required.
-   * @this {BaseConfig}
-   * @param {SubmitEvent} _event - The submission event.
-   * @param {HTMLFormElement} _form - The submitted form element.
-   * @param {FormDataExtended} formData - The submitted form data.
-   * @returns {Promise<void>} Resolves once the settings are updated, or prompts for a reload if required.
-   */
-  static async #onCommitChanges(_event, _form, formData) {
-    let requiresClientReload = false;
-    let requiresWorldReload = false;
-    for (const [key, value] of Object.entries(foundry.utils.expandObject(formData.object))) {
-      const setting = game.settings.settings.get(`teriock.${key}`);
-      const current = game.settings.get("teriock", key, { document: true });
-      const prior = current?._source?.value ?? current;
-      const updated = await game.settings.set("teriock", key, value, { document: true });
-      if (prior === (updated?._source?.value ?? updated)) { continue; }
-      requiresClientReload ||= setting.scope !== "world" && setting?.requiresReload;
-      requiresWorldReload ||= setting.scope === "world" && setting?.requiresReload;
-    }
-    if (requiresClientReload || requiresWorldReload) {
-      return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
-    }
-  }
-
   /** @override */
   static DEFAULT_OPTIONS = {
-    form: { closeOnSubmit: true, handler: BaseConfig.#onCommitChanges },
+    form: { closeOnSubmit: true, handler: BaseConfig._onCommitChanges },
     position: { width: 650 },
     tag: "form",
     window: { contentClasses: ["standard-form", "teriock-settings"], resizable: true },
@@ -57,6 +31,32 @@ export default class BaseConfig extends TeriockBaseApplication {
   static SETTINGS_MENU = { hint: "", key: "", label: "", restricted: false };
 
   /**
+   * Commit settings changes.
+   * This method processes the submitted form data, updates the settings, and determines if a reload is required.
+   * @this {BaseConfig}
+   * @param {SubmitEvent} _event - The submission event.
+   * @param {HTMLFormElement} _form - The submitted form element.
+   * @param {FormDataExtended} formData - The submitted form data.
+   * @returns {Promise<void>} Resolves once the settings are updated, or prompts for a reload if required.
+   */
+  static async _onCommitChanges(_event, _form, formData) {
+    let requiresClientReload = false;
+    let requiresWorldReload = false;
+    for (const [key, value] of Object.entries(this._prepareCommitData(_event, _form, formData))) {
+      const setting = game.settings.settings.get(`teriock.${key}`);
+      const current = game.settings.get("teriock", key, { document: true });
+      const prior = current?._source?.value ?? current;
+      const updated = await game.settings.set("teriock", key, value, { document: true });
+      if (prior === (updated?._source?.value ?? updated)) { continue; }
+      requiresClientReload ||= setting.scope !== "world" && setting?.requiresReload;
+      requiresWorldReload ||= setting.scope === "world" && setting?.requiresReload;
+    }
+    if (requiresClientReload || requiresWorldReload) {
+      return SettingsConfig.reloadConfirm({ world: requiresWorldReload });
+    }
+  }
+
+  /**
    * Register this settings config as a setting menu.
    */
   static registerMenu() {
@@ -68,6 +68,17 @@ export default class BaseConfig extends TeriockBaseApplication {
       restricted: Boolean(this.SETTINGS_MENU.restricted),
       type: this,
     });
+  }
+
+  /**
+   * Prepare expanded settings data for commit.
+   * @param {SubmitEvent} _event
+   * @param {HTMLFormElement} _form
+   * @param {FormDataExtended} formData
+   * @returns {Record<string, *>}
+   */
+  _prepareCommitData(_event, _form, formData) {
+    return foundry.utils.expandObject(formData.object);
   }
 
   /** @inheritDoc */

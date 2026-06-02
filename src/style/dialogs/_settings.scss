@@ -1,7 +1,60 @@
+@use "../mixins";
+
 .teriock-settings {
   overflow: auto;
 
   .form-fields {
     flex: 1;
+  }
+}
+
+.identifier-source-priority-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .identifier-source-priority-row {
+    align-items: center;
+    column-gap: 0.75rem;
+    display: grid;
+    grid-template-columns: 1rem auto minmax(0, 1fr);
+    min-height: 2rem;
+    width: 100%;
+
+    .identifier-source-priority-number {
+      font-weight: 700;
+      text-align: right;
+      width: 100%;
+      @include mixins.centralize;
+    }
+
+    .identifier-source-priority-controls {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      gap: 0.35rem;
+      justify-content: center;
+
+      .identifier-source-priority-button {
+        height: 1.5rem;
+        max-height: 1.5rem;
+        min-height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+
+    .identifier-source-priority-label {
+      line-height: 1.2;
+      margin-bottom: 0;
+      min-width: 0;
+      text-align: left;
+
+      .hint {
+        margin-left: 0.125rem;
+      }
+    }
   }
 }
