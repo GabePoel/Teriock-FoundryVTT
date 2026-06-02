@@ -4,7 +4,6 @@
 @use "themes";
 @use "page-sizing";
 @use "ui/panel";
-@use "components/compendium";
 @use "ui/editor";
 @use "ui/content-link";
 @use "components/chat";
@@ -141,9 +140,20 @@ dl:not(:first-child) {
   }
 }
 
+// Custom sizing so that they scale the same as Font Awesome icons.
+// If this scope ends up being too broad we can assign an additional class prefix in `makeIconClass` at some point.
+.mdi,
+.mic {
+  font-size: 125%;
+  width: 1em;
+}
+
 #context-menu {
   overflow: hidden;
   text-align: start;
+  .mdi, .mic {
+    width: 1.25em;
+  }
 
   li.context-item {
     border-left-width: 0;
@@ -158,9 +168,4 @@ dl:not(:first-child) {
       border-bottom-width: 0;
     }
   }
-}
-
-// Override core Foundry bug where ordered lists with more than 100 items get padding added to them.
-ol.plain:has(> li:nth-of-type(100)) {
-  padding: 0;
 }

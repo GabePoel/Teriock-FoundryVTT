@@ -17,7 +17,7 @@ export default function IndexButtonSheetMixin(Base) {
       window: {
         controls: [{
           action: "sourceRefresh",
-          icon: makeIconClass(icons.ui.sourceRefresh, "contextMenu"),
+          icon: makeIconClass(icons.ui.compendium, "contextMenu"),
           label: "TERIOCK.SYSTEMS.Common.MENU.sourceRefresh",
           ownership: "OWNER",
         }],

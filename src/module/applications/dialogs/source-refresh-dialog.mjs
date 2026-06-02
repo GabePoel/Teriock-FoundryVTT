@@ -28,11 +28,7 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
     actions: { ok: this._onRefresh },
     classes: ["dynamic-select", "dialog"],
     position: { width: 450 },
-    window: {
-      contentClasses: ["standard-form"],
-      icon: makeIconClass(icons.ui.sourceRefresh, "title"),
-      resizable: false,
-    },
+    window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.ui.compendium, "title"), resizable: false },
   };
 
   static PARTS = {

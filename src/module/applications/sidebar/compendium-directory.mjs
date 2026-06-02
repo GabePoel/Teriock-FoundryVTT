@@ -1,3 +1,6 @@
+import { getPackIcon } from "../../helpers/html.mjs";
+import { makeIconClass } from "../../helpers/utils.mjs";
+
 const { CompendiumDirectory } = foundry.applications.sidebar.tabs;
 
 export default class TeriockCompendiumDirectory extends CompendiumDirectory {
@@ -13,5 +16,11 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
       // Enable tooltips for remaining search results
       else if (makeTooltips) { el.dataset.tooltipUuid = uuid; }
     });
+  }
+
+  /** @inheritDoc */
+  _preparePackContext(pack) {
+    // Allow use of custom compendium icons
+    return Object.assign(super._preparePackContext(pack), { icon: makeIconClass(getPackIcon(pack), "solid") });
   }
 }

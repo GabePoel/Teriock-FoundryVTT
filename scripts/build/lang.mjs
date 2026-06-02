@@ -37,19 +37,7 @@ import { default as tradecraftsContent } from "../../src/index/content/tradecraf
 import { default as weaponFightingStylesContent } from "../../src/index/content/weapon-fighting-styles.json" with { type: "json" };
 import { default as conditions } from "../../src/index/names/conditions.json" with { type: "json" };
 import * as index from "../../src/module/constants/index/_module.mjs";
-
-/**
- * A simple object with its keys sorted. Does not support arrays.
- * @param {object} obj
- * @returns {object}
- */
-function sortObject(obj) {
-  if (typeof obj !== "object") { return obj; }
-  return Object.keys(obj).sort().reduce((acc, key) => {
-    acc[key] = sortObject(obj[key]);
-    return acc;
-  }, {});
-}
+import { sortObject } from "../script-utils.mjs";
 
 /**
  * Recursively merge any number objects. This is simpler than Foundry's `mergeObject` and does not support arrays. It

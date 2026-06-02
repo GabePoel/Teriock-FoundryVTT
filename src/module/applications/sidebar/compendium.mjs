@@ -1,3 +1,4 @@
+import { getPackIcon } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 
 const { Compendium } = foundry.applications.sidebar.apps;
@@ -37,7 +38,15 @@ export default class TeriockCompendium extends Compendium {
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    if (["ActiveEffect", "Actor", "Item"].includes(this.collection?.documentName)) { context.makeTooltip = true; }
+    if (game.teriock.getSetting("compendiumTooltips")) { context.makeTooltip = true; }
     return context;
+  }
+
+  /** @inheritDoc */
+  async _prepareHeaderContext(context, options) {
+    await super._prepareHeaderContext(context, options);
+    // Allow use of custom compendium icons. This has the added quirk of changing the journal entry icons and not just
+    // the header. But maybe that's not a bad thing?
+    context.sidebarIcon = makeIconClass(getPackIcon(this.collection), "solid");
   }
 }

@@ -23,3 +23,13 @@ export function createElement(tagName, attributes = {}) {
   }
   return element;
 }
+
+/**
+ * Get the icon associated with some compendium pack.
+ * @param {CompendiumCollection} pack
+ * @returns {string}
+ */
+export function getPackIcon(pack) {
+  return foundry.utils.getProperty(pack, "metadata.flags.teriock.icon") ?? CONFIG[pack.documentName]?.sidebarIcon
+    ?? TERIOCK.display.icons.ui.compendium;
+}

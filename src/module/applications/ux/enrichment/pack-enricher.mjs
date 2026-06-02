@@ -8,10 +8,9 @@ const packEnricher = {
   onRender: el => {
     if (el.dataset.enriched) { return; }
     el.dataset.enriched = "true";
+    /** @type {HTMLElement} */
     const target = el.firstElementChild;
-    el.addEventListener("click", async () => {
-      await game.packs.get(target.dataset.pack)?.render(true);
-    });
+    el.addEventListener("click", () => game.packs.get(target.dataset.pack)?.render(true));
   },
   process: (parsed) => {
     const pack = game.packs.get(parsed.arguments[0]);
@@ -23,7 +22,7 @@ const packEnricher = {
         tooltip: _loc("TERIOCK.COMMANDS.OpenPack", { title: pack?.title }),
       },
     });
-    anchor.prepend(makeIconElement("fa-book-atlas", "inline"));
+    anchor.prepend(makeIconElement(TERIOCK.display.icons.ui.compendium, "inline"));
     anchor.appendChild(document.createTextNode(_loc(parsed.label ?? pack?.title)));
     return anchor;
   },
