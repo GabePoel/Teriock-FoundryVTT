@@ -2,9 +2,10 @@ import { makeIconClass } from "../../../helpers/utils.mjs";
 
 const { JournalEntrySheet } = foundry.applications.sheets.journal;
 
-console.log(JournalEntrySheet);
-
 export default class BaseJournalSheet extends JournalEntrySheet {
+  /** @inheritDoc */
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(CONFIG.JournalEntry.sidebarIcon, "title") } };
+
   /**
    * Get a journal entry page from some list item.
    * @param {HTMLLIElement} li

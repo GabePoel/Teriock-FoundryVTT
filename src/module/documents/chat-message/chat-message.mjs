@@ -67,6 +67,16 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
   }
 
   /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) { return false; }
+
+    if (!foundry.utils.hasProperty(data, "flags.core.canPopout")) {
+      this.updateSource({ "flags.core.canPopout": true });
+    }
+  }
+
+  /** @inheritDoc */
   async renderHTML(options = {}) {
     // Rolls being hidden when content is not otherwise visible reveals more information than it hides
     if (!this.isContentVisible) { for (const r of this.rolls) { r.hideRoll = false; } }

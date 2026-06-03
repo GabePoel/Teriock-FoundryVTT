@@ -150,6 +150,7 @@ foundry.helpers.Hooks.once("init", function() {
       collection: documents.collections.TeriockChatMessages,
       dataModels: { base: data.systems.messages.BaseMessageSystem },
       documentClass: documents.TeriockChatMessage,
+      popoutClass: applications.sidebar.TeriockChatPopout,
       template: "teriock/ui/chat-message",
     },
     Combat: {
