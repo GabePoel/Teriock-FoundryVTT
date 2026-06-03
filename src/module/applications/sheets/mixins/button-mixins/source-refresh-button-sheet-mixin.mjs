@@ -5,14 +5,14 @@ import { SourceRefreshDialog } from "../../../dialogs/_module.mjs";
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default function IndexButtonSheetMixin(Base) {
+export default function SourceRefreshButtonSheetMixin(Base) {
   /**
    * @extends {TeriockDocumentSheet}
    * @mixin
    */
-  return class IndexButtonSheet extends Base {
-    /** @type {Partial<ApplicationConfiguration>} */
-    static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
+  return class SourceRefreshButtonSheet extends Base {
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+    static DEFAULT_OPTIONS = {
       actions: { sourceRefresh: this._onSourceRefresh },
       window: {
         controls: [{

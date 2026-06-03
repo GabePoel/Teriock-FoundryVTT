@@ -13,22 +13,6 @@ export default Base => {
      */
     class ConnectionCommonSheetPart extends Base {
       /**
-       * Connects event handlers to elements matching a selector.
-       * @param {string} selector - The CSS selector for elements to connect.
-       * @param {string} eventType - The event type to listen for.
-       * @param {function} handler - The event handler function.
-       */
-      _connect(selector, eventType, handler) {
-        this.element.querySelectorAll(selector).forEach(el =>
-          el.addEventListener(eventType, e => {
-            e.stopPropagation();
-            e.preventDefault();
-            handler(e);
-          })
-        );
-      }
-
-      /**
        * Build and connect context menu entries that update this document from some object.
        * @param {string} cssClass - The CSS class for elements to attach the menu to.
        * @param {object} obj - Object with keys, labels, and icons.

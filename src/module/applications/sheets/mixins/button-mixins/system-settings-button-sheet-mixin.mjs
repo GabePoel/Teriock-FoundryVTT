@@ -5,14 +5,14 @@ import { DocumentSettingsSheet } from "../../utility-sheets/_module.mjs";
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default function ConfigButtonSheetMixin(Base) {
+export default function SystemSettingsButtonSheetMixin(Base) {
   /**
    * @extends {TeriockDocumentSheet}
    * @mixin
    */
-  return class ConfigButtonSheet extends Base {
-    /** @type {Partial<ApplicationConfiguration>} */
-    static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
+  return class SystemSettingsButtonSheet extends Base {
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+    static DEFAULT_OPTIONS = {
       actions: { openDocumentSettings: this._onOpenDocumentSettings },
       window: {
         controls: [{

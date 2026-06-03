@@ -10,6 +10,7 @@ export default function ChangesSheetMixin(Base) {
      * @mixin
      */
     class ChangesSheet extends Base {
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: { addQualifiedChange: this._onAddChange, deleteQualifiedChange: this._onDeleteChange },
       };

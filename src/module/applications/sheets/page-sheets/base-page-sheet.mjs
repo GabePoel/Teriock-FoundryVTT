@@ -1,13 +1,11 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
-import { DisplaySheetMixin } from "../mixins/_module.mjs";
-import { ConfigButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
+import { BaseSheetMixin, DisplaySheetMixin } from "../mixins/_module.mjs";
+import { SystemSettingsButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
 import {
   AutomationsCommonSheetPart,
   AutomationsTabsCommonSheetPart,
   ConnectionCommonSheetPart,
   DragDropCommonSheetPart,
-  FrameCommonSheetPart,
   LockingCommonSheetPart,
   MenuCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
@@ -18,25 +16,24 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  * @extends {JournalEntryPageProseMirrorSheet}
  * @mixes BaseApplication
  * @mixes DisplaySheet
- * @mixes ConfigButtonSheet
- * @mixes FrameCommonSheetPart
+ * @mixes SystemSettingsButtonSheet
  * @property {TeriockJournalEntryPage} document
  */
 export default class BasePageSheet
   extends mixClasses(
     JournalEntryPageProseMirrorSheet,
-    BaseApplicationMixin,
+    BaseSheetMixin,
     DisplaySheetMixin,
-    ConfigButtonSheetMixin,
+    SystemSettingsButtonSheetMixin,
     ConnectionCommonSheetPart,
     DragDropCommonSheetPart,
     LockingCommonSheetPart,
     MenuCommonSheetPart,
     AutomationsCommonSheetPart,
     AutomationsTabsCommonSheetPart,
-    FrameCommonSheetPart,
   )
 {
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     classes: ["teriock", "unpadded"],
     form: { closeOnSubmit: false, submitOnChange: true },
@@ -57,15 +54,6 @@ export default class BasePageSheet
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    return Object.assign(await super._prepareContext(options), {
-      canHaveAutomations: false,
-      img: this.document.img,
-      imgPath: "system.img",
-      system: this.document.system,
-      systemFields: this.document.system.schema.fields,
-      TERIOCK,
-      type: this.document.type,
-      uuid: this.document.uuid,
-    });
+    return Object.assign(await super._prepareContext(options), { imgPath: "system.img" });
   }
 }

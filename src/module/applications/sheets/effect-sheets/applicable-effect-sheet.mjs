@@ -1,13 +1,11 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
-import { BaseSheetMixin, ChangesSheetMixin, ConfigButtonSheetMixin } from "../mixins/_module.mjs";
+import { BaseSheetMixin, SystemSettingsButtonSheetMixin } from "../mixins/_module.mjs";
 import {
   AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
-  FrameCommonSheetPart,
   LockingCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
@@ -18,28 +16,22 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
  * @mixes AutomationsCommonSheetPart
- * @mixes FrameCommonSheetPart
  */
 export default class ApplicableEffectSheet
   extends mixClasses(
     ActiveEffectConfig,
     BaseSheetMixin,
-    ConfigButtonSheetMixin,
-    ChangesSheetMixin,
+    SystemSettingsButtonSheetMixin,
     AutomationsCommonSheetPart,
     DocumentCreationCommonSheetPart,
     DragDropCommonSheetPart,
     LockingCommonSheetPart,
-    FrameCommonSheetPart,
   )
 {
-  /** @inheritDoc */
-  static DEFAULT_OPTIONS = {
-    form: { closeOnSubmit: false, submitOnChange: true },
-    window: { icon: makeIconClass(documentConfig.imbuement.icon, "title") },
-  };
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = { form: { closeOnSubmit: false, submitOnChange: true } };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     ...super.PARTS,
     automations: { scrollable: [""], template: "teriock/sheets/effects/consequence/automations-tab" },
@@ -51,7 +43,7 @@ export default class ApplicableEffectSheet
     },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
   static TABS = {
     sheet: {
       initial: super.TABS.sheet.initial,

@@ -65,7 +65,7 @@ export default class TeriockTooltipManager extends TooltipManager {
     if (this.#KNOWN_DOCUMENT_NAMES.allowed.has(documentName)) { return true; }
     if (this.#KNOWN_DOCUMENT_NAMES.disallowed.has(documentName)) { return false; }
     const Cls = foundry.utils.getDocumentClass(documentName);
-    if (Cls?.documentMetadata.tooltip) {
+    if (Cls?.documentMetadata?.tooltip) {
       this.#KNOWN_DOCUMENT_NAMES.allowed.add(documentName);
       return true;
     }

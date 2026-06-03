@@ -1,24 +1,14 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
-import { makeIcon, makeIconClass } from "../../../helpers/utils.mjs";
-import BaseEffectSheet from "./base-effect-sheet.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
+import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
  * {@link TeriockFluency} sheet.
- * @extends {BaseEffectSheet}
+ * @extends {ChildSheet}
  * @property {TeriockFluency} document
  */
-export default class FluencySheet extends BaseEffectSheet {
-  /** @inheritDoc */
+export default class FluencySheet extends ChildSheet {
+  /** @type {string[]} */
   static BARS = ["teriock/sheets/effects/fluency/tradecraft-bar"];
-
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
-  static DEFAULT_OPTIONS = {
-    classes: ["fluency"],
-    window: { icon: makeIconClass(documentConfig.fluency.icon, "title") },
-  };
 
   /**
    * Context menu for selecting a field.

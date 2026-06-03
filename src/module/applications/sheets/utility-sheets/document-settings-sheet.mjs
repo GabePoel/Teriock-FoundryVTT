@@ -3,7 +3,7 @@ import { makeIconClass, objectMap } from "../../../helpers/utils.mjs";
 import DocumentDialogSheet from "./document-dialog-sheet.mjs";
 
 export default class DocumentSettingsSheet extends DocumentDialogSheet {
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },
     position: { width: 650 },
@@ -14,7 +14,7 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
     },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = { all: { scrollable: [""], template: "teriock/sheets/utility/document-config" } };
 
   /**

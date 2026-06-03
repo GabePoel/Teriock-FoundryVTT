@@ -88,6 +88,7 @@ export default Base =>
       await this.document.toggleStatusEffect(conditionKey);
     }
 
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         deathBagPull: this.#onDeathBagPull,

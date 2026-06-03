@@ -100,6 +100,17 @@ function addIdentifierClipboardListener(application) {
 }
 
 /**
+ * Change the color of headers for documents in compendiums.
+ * @param {DocumentSheetV2} application
+ */
+function recolorCompendiumDocumentHeader(application) {
+  if (!application.window.header) { return; }
+  if (application.document?.inCompendium) {
+    application.window.header.style.backgroundColor = "var(--compendium-sheet-header-background-color)";
+  }
+}
+
+/**
  * Add a button to share image in chat to the header.
  * @param {ImagePopout & {options: ApplicationConfiguration & ImagePopoutConfiguration}} application
  * @param {ApplicationHeaderControlsEntry[]} controls
@@ -117,7 +128,7 @@ function addShareImageToHeader(application, controls) {
 
 /**
  * Add a wiki open button to the sheet header.
- * @param {BaseItemSheet|BaseEffectSheet} application
+ * @param {ChildSheet} application
  * @param {ApplicationHeaderControlsEntry[]} controls
  * @see {getHeaderControlsApplicationV2}
  */
@@ -128,6 +139,7 @@ function addWikiOpenToHeader(application, controls) {
       action: "wikiOpenThis",
       icon: makeIconClass(TERIOCK.display.icons.ui.wiki, "contextMenu"),
       label: _loc("TERIOCK.SYSTEMS.Common.MENU.viewOnWiki"),
+      onClick: () => application.document.system.wikiOpen(),
     });
   }
 }
@@ -154,8 +166,9 @@ function sortControls(_application, controls) {
 const applicationHookEntries = [
   ["getHeaderControlsBaseApplication", sortControls],
   ["getHeaderControlsDocumentSheetV2", addCardContextMenuEntriesToHeader],
+  ["getHeaderControlsDocumentSheetV2", addWikiOpenToHeader],
+  ["getHeaderControlsDocumentSheetV2", recolorCompendiumDocumentHeader],
   ["getHeaderControlsImagePopout", addShareImageToHeader],
-  ["getHeaderControlsWikiButtonSheet", addWikiOpenToHeader],
   ["renderApplicationV2", addDeveloperModeLoggingListener],
   ["renderDocumentSheetV2", addIdentifierClipboardListener],
 ];

@@ -4,6 +4,9 @@ import TeriockDocumentSheet from "./document-sheet.mjs";
  * A minimal document sheet with some edits to make it better resemble a dialog.
  */
 export default class DocumentDialogSheet extends TeriockDocumentSheet {
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = { teriock: { autoIcon: false } };
+
   /**
    * A prefix to use in sheet titles.
    * @returns {string}

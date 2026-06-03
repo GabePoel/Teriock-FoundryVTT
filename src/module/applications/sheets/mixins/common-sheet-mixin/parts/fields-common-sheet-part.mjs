@@ -58,7 +58,7 @@ export default Base => {
         await foundry.utils.getProperty(this.document, target.dataset.path).updateDialog();
       }
 
-      /** @type {Partial<ApplicationConfiguration>} */
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           increment: { buttons: [0, 2], handler: this.#onIncrement },

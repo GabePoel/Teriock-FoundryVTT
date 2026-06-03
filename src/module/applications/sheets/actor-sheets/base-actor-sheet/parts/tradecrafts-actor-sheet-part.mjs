@@ -17,6 +17,7 @@ export default Base =>
       await this.actor.system.rollTradecraft(target.dataset.tradecraft, { event });
     }
 
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = { actions: { rollTradecraft: { buttons: [0, 2], handler: this.#onRollTradecraft } } };
 
     /** @inheritDoc */

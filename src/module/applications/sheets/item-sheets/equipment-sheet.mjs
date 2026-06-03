@@ -7,9 +7,8 @@ import ArmamentSheet from "./armament-sheet.mjs";
 /**
  * Sheet for a {@link TeriockEquipment}.
  * @extends {ArmamentSheet}
- * @property {TeriockEquipment} document
- * @property {TeriockEquipment} item
  * @mixes EquipmentDropSheet
+ * @property {TeriockEquipment} document
  */
 export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.EquipmentDropSheetMixin) {
   /**
@@ -48,7 +47,7 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
     else { await this.document.system.shatter(); }
   }
 
-  /** @inheritDoc */
+  /** @type {string[]} */
   static BARS = [
     "teriock/sheets/items/equipment/status-bar",
     ...super.BARS,
@@ -57,10 +56,7 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
     "teriock/sheets/items/equipment/storage-bar",
   ];
 
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: {
       toggleDampened: this.#onToggleDampened,

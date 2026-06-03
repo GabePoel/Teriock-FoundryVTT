@@ -18,6 +18,8 @@ declare global {
     export type EquipmentSorter = (e: TeriockEquipment) => boolean | number | string;
 
     export type AbilitySorter = (a: TeriockAbility) => boolean | number | string;
+
+    export type _SheetConfiguration = { teriock: { autoIcon?: boolean } };
   }
 }
 

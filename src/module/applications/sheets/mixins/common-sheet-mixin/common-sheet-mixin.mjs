@@ -1,4 +1,4 @@
-import { ConfigButtonSheetMixin, IndexButtonSheetMixin } from "../_module.mjs";
+import { SourceRefreshButtonSheetMixin, SystemSettingsButtonSheetMixin } from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import BaseSheetMixin from "../base-sheet-mixin.mjs";
@@ -16,7 +16,6 @@ export default function CommonSheetMixin(Base) {
      * @mixes DocumentCreationCommonSheetPart
      * @mixes DragDropCommonSheetPart
      * @mixes FieldsCommonSheetPart
-     * @mixes FrameCommonSheetPart
      * @mixes ImageEditingCommonSheetPart
      * @mixes AutomationsTabsCommonSheetPart
      * @mixes LockingCommonSheetPart
@@ -30,7 +29,7 @@ export default function CommonSheetMixin(Base) {
       extends mixClasses(
         Base,
         BaseSheetMixin,
-        ConfigButtonSheetMixin,
+        SystemSettingsButtonSheetMixin,
         parts.ConnectionCommonSheetPart,
         parts.DragDropCommonSheetPart,
         parts.DocumentCreationCommonSheetPart,
@@ -42,12 +41,11 @@ export default function CommonSheetMixin(Base) {
         parts.StatDiceCommonSheetPart,
         parts.ToggleCommonSheetPart,
         parts.AutomationsCommonSheetPart,
-        parts.FrameCommonSheetPart,
-        IndexButtonSheetMixin,
+        SourceRefreshButtonSheetMixin,
       )
     {
-      /** @type {Partial<ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = /** @type {Partial<ApplicationConfiguration>} */ {
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+      static DEFAULT_OPTIONS = {
         form: { closeOnSubmit: false, submitOnChange: true },
         position: { height: 600, width: 560 },
         window: { resizable: true },
@@ -78,7 +76,6 @@ export default function CommonSheetMixin(Base) {
       async _prepareContext(options = {}) {
         return Object.assign(await super._prepareContext(options), {
           enriched: {},
-          imgPath: "img",
           metadata: this.document.metadata,
           settings: this.settings,
         });

@@ -1,4 +1,3 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
@@ -10,19 +9,13 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
  * @mixes AutomationsCommonSheetPart
  */
 export default class ConsequenceSheet extends ApplicableEffectSheet {
-  /** @inheritDoc */
-  static DEFAULT_OPTIONS = {
-    form: { closeOnSubmit: false, submitOnChange: true },
-    window: { icon: makeIconClass(documentConfig.consequence.icon, "title") },
-  };
-
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     ...super.PARTS,
     transformation: { scrollable: [""], template: "teriock/sheets/effects/consequence/transformation-tab" },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
   static TABS = {
     sheet: {
       initial: super.TABS.sheet.initial,

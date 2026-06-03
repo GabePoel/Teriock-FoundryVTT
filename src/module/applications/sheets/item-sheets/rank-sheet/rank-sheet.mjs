@@ -1,18 +1,14 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import * as mixins from "../../mixins/_module.mjs";
-import BaseItemSheet from "../base-item-sheet.mjs";
+import { ChildSheet } from "../../utility-sheets/_module.mjs";
 import { archetypeContextMenu, classContextMenu } from "./helpers/rank-context-menus.mjs";
 
 /**
  * Sheet for a {@link TeriockRank}.
- * @extends {BaseItemSheet}
- * @mixes WikiButtonSheet
+ * @extends {ChildSheet}
  * @property {TeriockRank} document
- * @property {TeriockRank} item
  */
-export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButtonSheetMixin) {
+export default class RankSheet extends ChildSheet {
   /**
    * Toggle whether this is innate.
    * @returns {Promise<void>}
@@ -21,17 +17,14 @@ export default class RankSheet extends mixClasses(BaseItemSheet, mixins.WikiButt
     await this.document.update({ "system.innate": !this.document.system.innate });
   }
 
-  /** @inheritDoc */
+  /** @type {string[]} */
   static BARS = [
     "teriock/sheets/items/rank/class-bar",
     "teriock/sheets/shared/bars/stat-bar",
     "teriock/sheets/items/rank/restrictions-bar",
   ];
 
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { toggleInnate: this.#onToggleInnate },
     classes: ["rank"],

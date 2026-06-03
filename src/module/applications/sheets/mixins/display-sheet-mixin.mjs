@@ -26,13 +26,14 @@ export default function DisplaySheetMixin(Base) {
       /** @type {Record<string, HandlebarsTemplatePart>} */
       static CONTENT_PARTS = { content: { template: "teriock/sheets/shared/content" } };
 
-      /** @type {Partial<ApplicationConfiguration>} */
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           applyButtonUpdate: this._onApplyButtonUpdate,
           openImage: this.#onOpenImage,
           populateField: this._onPopulateField,
         },
+        classes: ["unpadded"],
       };
 
       /** @type {Record<string, HandlebarsTemplatePart>} */

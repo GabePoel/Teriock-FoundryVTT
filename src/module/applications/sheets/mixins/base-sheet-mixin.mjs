@@ -1,3 +1,4 @@
+import { makeIconClass } from "../../../helpers/utils.mjs";
 import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 
 /**
@@ -6,9 +7,24 @@ import { BaseApplicationMixin } from "../../shared/mixins/_module.mjs";
 export default function BaseSheetMixin(Base) {
   /**
    * @extends {DocumentSheetV2}
+   * @property {ApplicationConfiguration & Teriock.Sheet._SheetConfiguration} options
    * @mixin
    */
   class BaseSheet extends BaseApplicationMixin(Base) {
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+    static DEFAULT_OPTIONS = { teriock: { autoIcon: true } };
+
+    /** @inheritDoc */
+    async _onFirstRender(context, options) {
+      await super._onFirstRender(context, options);
+      if (!this.options.teriock?.autoIcon || !this.window.header) { return; }
+      const typeIcons = CONFIG[this.document.documentName]?.typeIcons;
+      const typeIcon = typeIcons ? typeIcons[this.document.type] : null;
+      const sidebarIcon = CONFIG[this.document.documentName]?.sidebarIcon;
+      const icon = typeIcon ?? sidebarIcon ?? TERIOCK.config.document.document.icon;
+      this.window.icon.className = makeIconClass(icon, "title");
+    }
+
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       return Object.assign(await super._prepareContext(options), {
@@ -17,13 +33,15 @@ export default function BaseSheetMixin(Base) {
         flags: this.document.flags,
         id: this.document.id,
         img: this.document?.img,
+        imgPath: "img",
         isGM: game.user.isGM,
-        limited: this.document.limited,
+        limited: this.document?.limited,
         name: this.document.name,
-        owner: this.document.isOwner,
+        owner: this.document?.isOwner,
         source: this.document?._source,
         system: this.document.system,
         systemFields: this.document.system?.schema.fields,
+        type: this.document.type,
         uuid: this.document.uuid,
       });
     }

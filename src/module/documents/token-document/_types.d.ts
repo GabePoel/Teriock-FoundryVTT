@@ -1,12 +1,10 @@
 import { TeriockCombat, TeriockTokenDocument } from "../_module.mjs";
-import { BaseTokenSheet } from "../../applications/sheets/token-sheets/_module.mjs";
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
     export interface TokenDocumentInterface {
       _id: ID<TeriockTokenDocument>;
-      sheet: BaseTokenSheet;
 
       get actor(): AnyActor | null;
       get combat(): TeriockCombat | null;

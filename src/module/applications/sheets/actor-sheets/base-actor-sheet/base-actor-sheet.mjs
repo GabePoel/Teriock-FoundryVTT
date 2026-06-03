@@ -1,6 +1,4 @@
-import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
 import { changeSizeDialog } from "../../../dialogs/_module.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -38,15 +36,8 @@ export default class BaseActorSheet
     parts.SortingActorSheetPart,
   )
 {
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
-  static DEFAULT_OPTIONS = {
-    classes: ["unpadded", "character"],
-    position: { height: 600, width: 800 },
-    window: { icon: makeIconClass(documentConfig.character.icon, "title") },
-  };
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = { classes: ["unpadded", "character"], form: { submitOnChange: true } };
 
   constructor(...args) {
     super(...args);

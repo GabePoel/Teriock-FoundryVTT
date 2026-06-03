@@ -6,6 +6,6 @@ import TeriockPlayableActorSheet from "./base-actor-sheet/playable-actor-sheet.m
  * Sheet for a {@link TeriockCharacter}.
  */
 export default class CharacterSheet extends TeriockPlayableActorSheet {
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(documentConfig.character.icon, "title") } };
 }

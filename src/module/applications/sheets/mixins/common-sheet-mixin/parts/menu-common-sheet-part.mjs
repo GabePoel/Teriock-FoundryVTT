@@ -9,7 +9,7 @@ export default Base => {
      * @property {AnyCommonDocument} document
      */
     class MenuCommonSheetPart extends Base {
-      /** @type {Partial<ApplicationConfiguration>} */
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = { actions: { toggleMenu: this._onToggleMenu } };
 
       /**

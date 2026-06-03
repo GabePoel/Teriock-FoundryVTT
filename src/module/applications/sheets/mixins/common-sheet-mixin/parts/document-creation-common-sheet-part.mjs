@@ -23,7 +23,7 @@ export default Base => {
      * @property {AnyCommonDocument} document
      */
     class DocumentCreationCommonSheetPart extends Base {
-      /** @type {Partial<ApplicationConfiguration>} */
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           createAbility: this._onCreateAbility,

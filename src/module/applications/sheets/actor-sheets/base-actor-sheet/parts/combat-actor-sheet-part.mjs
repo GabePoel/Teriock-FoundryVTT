@@ -87,6 +87,7 @@ export default Base =>
       await this.document.useDocument(target.dataset.ability, { event, type: "ability" });
     }
 
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         openPrimaryAttacker: this.#onOpenPrimaryAttacker,

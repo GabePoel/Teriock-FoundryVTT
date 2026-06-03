@@ -9,6 +9,7 @@ export default Base =>
    * @mixin
    */
   class HidingActorSheetPart extends Base {
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = { actions: { toggleHideThis: this._onToggleHideThis } };
 
     /**

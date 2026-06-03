@@ -35,6 +35,7 @@ export default Base =>
       }
     }
 
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = { actions: { switchImage: this.#onSwitchImage, toggleRing: this.#onToggleRing } };
 
     /** @type {"actor"|"token"} */

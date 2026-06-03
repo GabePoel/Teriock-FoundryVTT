@@ -1,4 +1,3 @@
-import { BaseEffectSheet } from "../../applications/sheets/effect-sheets/_module.mjs";
 import { BaseEffectSystem } from "../../data/systems/effects/_module.mjs";
 
 declare global {
@@ -6,7 +5,6 @@ declare global {
     export interface ActiveEffectInterface {
       _id: ID<AnyActiveEffect>;
       parent: AnyParent;
-      sheet: BaseEffectSheet;
       system: BaseEffectSystem;
       type: Teriock.Documents.ActiveEffectType;
 

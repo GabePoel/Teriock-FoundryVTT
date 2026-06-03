@@ -1,14 +1,14 @@
-import documentConfig from "../../../../constants/config/document-config.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
 import BaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
 
+/**
+ * Sheet for a {@link TeriockInventory}.
+ * @property {TeriockInventory} actor
+ * @property {TeriockInventory} document
+ */
 export default class InventorySheet extends BaseActorSheet {
-  static DEFAULT_OPTIONS = {
-    classes: ["inventory"],
-    form: { submitOnChange: true },
-    position: { height: 600, width: 525 },
-    window: { icon: makeIconClass(documentConfig.inventory.icon, "title") },
-  };
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = { classes: ["inventory"], position: { height: 600, width: 525 } };
 
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = { all: { scrollable: [""], template: "teriock/sheets/actors/inventory/inventory" } };
 }

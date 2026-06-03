@@ -1,27 +1,25 @@
-// noinspection JSUnusedGlobalSymbols
-
 import { CharacterSheet, CreatureSheet, InventorySheet } from "../applications/sheets/actor-sheets/_module.mjs";
 import {
   AbilitySheet,
+  ApplicableEffectSheet,
   AttunementSheet,
   ConditionSheet,
   ConsequenceSheet,
   FluencySheet,
   HackSheet,
-  ImbuementSheet,
   PropertySheet,
   ResourceSheet,
 } from "../applications/sheets/effect-sheets/_module.mjs";
 import {
-  ArchetypeSheet,
-  BodySheet,
+  ArmamentSheet,
   EquipmentSheet,
   MountSheet,
   PowerSheet,
   RankSheet,
   SpeciesSheet,
 } from "../applications/sheets/item-sheets/_module.mjs";
-import { HarmSheet, RuleSheet } from "../applications/sheets/page-sheets/_module.mjs";
+import { BasePageSheet } from "../applications/sheets/page-sheets/_module.mjs";
+import { ChildSheet } from "../applications/sheets/utility-sheets/_module.mjs";
 import { CharacterSystem, CreatureSystem, InventorySystem } from "../data/systems/actors/_module.mjs";
 import {
   AbilitySystem,
@@ -43,7 +41,7 @@ import {
   RankSystem,
   SpeciesSystem,
 } from "../data/systems/items/_module.mjs";
-import { HarmSystem, RuleSystem } from "../data/systems/pages/_module.mjs";
+import { HarmSystem } from "../data/systems/pages/_module.mjs";
 import {
   TeriockActiveEffect,
   TeriockActor,
@@ -127,7 +125,7 @@ declare global {
 declare global {
   export type TeriockArchetype = TeriockItem & {
     _id: ID<TeriockArchetype>;
-    sheet: ArchetypeSheet;
+    sheet: ChildSheet;
     system: ArchetypeSystem;
     type: "archetype";
     get id(): ID<TeriockArchetype>;
@@ -135,7 +133,7 @@ declare global {
   };
   export type TeriockBody = TeriockItem & {
     _id: ID<TeriockBody>;
-    sheet: BodySheet;
+    sheet: ArmamentSheet;
     system: BodySystem;
     type: "body";
     get id(): ID<TeriockBody>;
@@ -247,7 +245,7 @@ declare global {
   };
   export type TeriockImbuement = TeriockActiveEffect & {
     _id: ID<TeriockImbuement>;
-    sheet: ImbuementSheet;
+    sheet: ApplicableEffectSheet;
     system: ImbuementSystem;
     type: "imbuement";
     get id(): ID<TeriockImbuement>;
@@ -286,20 +284,11 @@ declare global {
 declare global {
   export type TeriockHarm = TeriockJournalEntryPage & {
     _id: ID<TeriockHarm>;
-    sheet: HarmSheet;
+    sheet: BasePageSheet;
     system: HarmSystem;
     type: "damage" | "drain";
     get id(): ID<TeriockHarm>;
     get uuid(): UUID<TeriockHarm>;
-  };
-
-  export type TeriockRule = TeriockJournalEntryPage & {
-    _id: ID<TeriockRule>;
-    sheet: RuleSheet;
-    system: RuleSystem;
-    type: "rule";
-    get id(): ID<TeriockRule>;
-    get uuid(): UUID<TeriockRule>;
   };
 }
 

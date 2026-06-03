@@ -1,20 +1,16 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
-import { mixClasses } from "../../../../helpers/construction.mjs";
 import { elementClass } from "../../../../helpers/html.mjs";
 import { listFormat } from "../../../../helpers/localization.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
-import * as mixins from "../../mixins/_module.mjs";
-import BaseEffectSheet from "../base-effect-sheet.mjs";
+import { ChildSheet } from "../../utility-sheets/_module.mjs";
 import abilityContextMenus from "./helpers/ability-context-menus.mjs";
 
 /**
  * Sheet for a {@link TeriockAbility}.
  * @property {TeriockAbility} document
- * @extends {BaseEffectSheet}
- * @mixes WikiButtonSheet
  */
-export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.WikiButtonSheetMixin) {
-  /** @inheritDoc */
+export default class AbilitySheet extends ChildSheet {
+  /** @type {string[]} */
   static BARS = [
     "teriock/sheets/effects/ability/status-bar",
     "teriock/sheets/effects/ability/delivery-bar",
@@ -25,16 +21,13 @@ export default class AbilitySheet extends mixClasses(BaseEffectSheet, mixins.Wik
     "teriock/sheets/shared/bars/consumable-bar",
   ];
 
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     classes: ["ability"],
     window: { icon: makeIconClass(documentConfig.ability.icon, "title") },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = { mask: { template: "teriock/sheets/effects/ability/elder-sorcery-mask" }, ...super.PARTS };
 
   /**

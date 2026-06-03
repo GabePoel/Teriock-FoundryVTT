@@ -59,6 +59,7 @@ export default Base =>
       await this.actor.system.rollResistance(protectionOptions(event, target));
     }
 
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         rollFeatSave: { buttons: [0, 2], handler: this.#onRollFeatSave },

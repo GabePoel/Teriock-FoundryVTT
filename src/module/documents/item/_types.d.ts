@@ -1,6 +1,5 @@
 import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
 
-import { BaseItemSheet } from "../../applications/sheets/item-sheets/_module.mjs";
 import { BaseItemSystem } from "../../data/systems/items/_module.mjs";
 
 declare global {
@@ -10,7 +9,6 @@ declare global {
       // @ts-expect-error Not a document
       effects: DocumentCollection<AnyActiveEffect>;
       parent?: AnyActor;
-      sheet: BaseItemSheet;
       system: BaseItemSystem;
       type: Teriock.Documents.ItemType;
 

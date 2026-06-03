@@ -42,7 +42,7 @@ foundry.helpers.Hooks.once("init", function() {
    * Make a panel sheet for a given document class.
    * @template T
    * @param {T} doc
-   * @returns {{cls: TeriockPanelSheet, doc: T, makeDefault: boolean, types: Record<string, TypedPseudoDocument>|string[]|Record<string, string>|Readonly<{rectangle: foundry.data.RectangleShapeData, circle: foundry.data.CircleShapeData, ellipse: foundry.data.EllipseShapeData, emanation: foundry.data.EmanationShapeData, cone: foundry.data.ConeShapeData, ring: foundry.data.RingShapeData, line: foundry.data.LineShapeData, polygon: foundry.data.PolygonShapeData, token: foundry.data.TokenShapeData, grid: foundry.data.GridShapeData}>|*}}
+   * @returns {{ cls: typeof TeriockPanelSheet, doc: T, makeDefault: boolean, types: string[] }}
    */
   function makePanelSheet(doc) {
     return {
@@ -240,175 +240,132 @@ foundry.helpers.Hooks.once("init", function() {
   const sheetMap = [
     // Actors
     {
-      cls: applications.sheets.actor.CharacterSheet,
+      cls: applications.sheets.actor.PlayableActorSheet,
       doc: documents.TeriockActor,
-      label: "TYPES.Actor.character",
-      types: ["character"],
-    },
-    {
-      cls: applications.sheets.actor.CreatureSheet,
-      doc: documents.TeriockActor,
-      label: "TYPES.Actor.creature",
-      types: ["creature"],
+      label: "TERIOCK.SHEETS.Playable.LABEL",
+      types: ["character", "creature", "inventory"],
     },
     {
       cls: applications.sheets.actor.InventorySheet,
       doc: documents.TeriockActor,
-      label: "TYPES.Actor.inventory",
-      types: ["inventory"],
-    },
-    {
-      cls: applications.sheets.actor.PlayableActorSheet,
-      doc: documents.TeriockActor,
-      label: "TYPES.Actor.actor",
-      makeDefault: false,
+      label: "TERIOCK.SHEETS.Inventory.LABEL",
       types: ["inventory"],
     },
     // Items
     {
-      cls: applications.sheets.item.ArchetypeSheet,
+      cls: applications.sheets.utility.ChildSheet,
       doc: documents.TeriockItem,
-      label: "TYPES.Item.archetype",
+      label: "TERIOCK.SHEETS.Child.LABEL",
       types: ["archetype"],
     },
-    { cls: applications.sheets.item.BodySheet, doc: documents.TeriockItem, label: "TYPES.Item.body", types: ["body"] },
+    {
+      cls: applications.sheets.item.ArmamentSheet,
+      doc: documents.TeriockItem,
+      label: "TERIOCK.SHEETS.Armament.LABEL",
+      types: ["body"],
+    },
     {
       cls: applications.sheets.item.EquipmentSheet,
       doc: documents.TeriockItem,
-      label: "TYPES.Item.equipment",
+      label: "TERIOCK.SHEETS.Equipment.LABEL",
       types: ["equipment"],
     },
     {
       cls: applications.sheets.item.MountSheet,
       doc: documents.TeriockItem,
-      label: "TYPES.Item.mount",
+      label: "TERIOCK.SHEETS.Mount.LABEL",
       types: ["mount"],
     },
-    { cls: applications.sheets.item.RankSheet, doc: documents.TeriockItem, label: "TYPES.Item.rank", types: ["rank"] },
+    {
+      cls: applications.sheets.item.RankSheet,
+      doc: documents.TeriockItem,
+      label: "TERIOCK.SHEETS.Rank.LABEL",
+      types: ["rank"],
+    },
     {
       cls: applications.sheets.item.PowerSheet,
       doc: documents.TeriockItem,
-      label: "TYPES.Item.power",
+      label: "TERIOCK.SHEETS.Power.LABEL",
       types: ["power"],
     },
     {
       cls: applications.sheets.item.SpeciesSheet,
       doc: documents.TeriockItem,
-      label: "TYPES.Item.species",
+      label: "TERIOCK.SHEETS.Species.LABEL",
       types: ["species"],
     },
     // Effects
     {
       cls: applications.sheets.effect.AbilitySheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.ability",
+      label: "TERIOCK.SHEETS.Ability.LABEL",
       types: ["ability"],
     },
     {
       cls: applications.sheets.effect.FluencySheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.fluency",
+      label: "TERIOCK.SHEETS.Fluency.LABEL",
       types: ["fluency"],
     },
     {
       cls: applications.sheets.effect.ResourceSheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.resource",
+      label: "TERIOCK.SHEETS.Resource.LABEL",
       types: ["resource"],
     },
     {
       cls: applications.sheets.effect.PropertySheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.property",
+      label: "TERIOCK.SHEETS.Property.LABEL",
       types: ["property"],
     },
     {
       cls: applications.sheets.effect.ConsequenceSheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.consequence",
+      label: "TERIOCK.SHEETS.Consequence.LABEL",
       types: ["consequence"],
     },
     {
       cls: applications.sheets.effect.ConditionSheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.condition",
+      label: "TERIOCK.SHEETS.Condition.LABEL",
       types: ["condition"],
     },
     {
       cls: applications.sheets.effect.AttunementSheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.attunement",
+      label: "TERIOCK.SHEETS.Attune.LABEL",
       types: ["attunement"],
     },
     {
-      cls: applications.sheets.effect.ImbuementSheet,
+      cls: applications.sheets.effect.ApplicableEffectSheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.imbuement",
+      label: "TERIOCK.SHEETS.ApplicableEffect.LABEL",
       types: ["imbuement"],
     },
     {
       cls: applications.sheets.effect.HackSheet,
       doc: documents.TeriockActiveEffect,
-      label: "TYPES.ActiveEffect.hack",
+      label: "TERIOCK.SHEETS.Hack.LABEL",
       types: ["hack"],
-    },
-    // Tokens
-    {
-      cls: applications.sheets.token.BaseTokenSheet,
-      doc: documents.TeriockTokenDocument,
-      label: "TYPES.TokenDocument.token",
-      types: [],
-    },
-    // Cards
-    {
-      cls: foundry.applications.sheets.CardConfig,
-      doc: documents.TeriockCard,
-      label: "TYPES.Card.card",
-      types: ["card", "stone"],
     },
     // Journal Entries
     {
       cls: applications.sheets.journal.BaseJournalSheet,
       doc: documents.TeriockJournalEntry,
-      label: "TYPES.JournalEntry.journal",
-      types: [],
+      label: "TERIOCK.SHEETS.Journal.LABEL",
     },
     // Pages
     {
-      cls: applications.sheets.page.DamageSheet,
+      cls: applications.sheets.page.BasePageSheet,
       doc: documents.TeriockJournalEntryPage,
-      label: "TYPES.JournalEntryPage.damage",
-      types: ["damage"],
+      label: "TYPES.SHEETS.Page.LABEL",
+      types: ["class", "damage", "drain", "rule", "tradecraft"],
     },
-    {
-      cls: applications.sheets.page.DrainSheet,
-      doc: documents.TeriockJournalEntryPage,
-      label: "TYPES.JournalEntryPage.drain",
-      types: ["drain", "tradecraft"],
-    },
-    {
-      cls: applications.sheets.page.TradecraftSheet,
-      doc: documents.TeriockJournalEntryPage,
-      label: "TYPES.JournalEntryPage.tradecraft",
-      types: ["tradecraft"],
-    },
-    {
-      cls: applications.sheets.page.ClassSheet,
-      doc: documents.TeriockJournalEntryPage,
-      label: "TYPES.JournalEntryPage.class",
-      types: ["class"],
-    },
-    {
-      cls: applications.sheets.page.RuleSheet,
-      doc: documents.TeriockJournalEntryPage,
-      label: "TYPES.JournalEntryPage.rule",
-      types: ["rule"],
-    },
-    // General
+    // Anything that can have panels other than journal entry pages
     makePanelSheet(documents.TeriockActiveEffect),
     makePanelSheet(documents.TeriockItem),
     makePanelSheet(documents.TeriockActor),
-    makePanelSheet(documents.TeriockTableResult),
   ];
   sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>
     DocumentSheetConfig.registerSheet(doc, "teriock", cls, { label, makeDefault, types })

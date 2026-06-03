@@ -9,7 +9,7 @@ export default Base => {
      * @property {AnyCommonDocument} document
      */
     class AutomationsTabsCommonSheetPart extends Base {
-      /** @type {Partial<ApplicationConfiguration>} */
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = { actions: { toggleAutomations: this._onToggleAutomations } };
 
       /**

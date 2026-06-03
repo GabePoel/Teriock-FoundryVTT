@@ -32,14 +32,10 @@ export default class TeriockPlayableActorSheet
     parts.TradecraftsActorSheetPart,
   )
 {
-  /** @inheritDoc */
-  static DEFAULT_OPTIONS = {
-    classes: ["character"],
-    form: { submitOnChange: true },
-    position: { height: 600, width: 800 },
-  };
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = { position: { height: 600, width: 800 } };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     all: {
       scrollable: [".character-sidebar", ".character-tab-content"],

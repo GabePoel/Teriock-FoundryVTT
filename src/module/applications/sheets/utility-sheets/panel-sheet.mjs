@@ -11,11 +11,12 @@ export default class TeriockPanelSheet extends TeriockDocumentSheet {
     await this.document.sheet.render(true);
   }
 
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { openSheet: this.#onOpenSheet },
     classes: ["panel-application"],
     position: { width: 300 },
+    teriock: { autoIcon: false },
     window: {
       controls: [{
         action: "openSheet",
@@ -23,25 +24,17 @@ export default class TeriockPanelSheet extends TeriockDocumentSheet {
         label: "TERIOCK.SHEETS.Panel.OPEN_SHEET",
         ownership: "VIEWER",
       }],
+      icon: makeIconClass(icons.ui.panel, "title"),
       resizable: false,
     },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = { panel: { scrollable: [""], template: "teriock/ui/panel" } };
 
   /** @inheritDoc */
   get isEditable() {
     return true;
-  }
-
-  /** @inheritDoc */
-  async _onFirstRender(context, options) {
-    const out = await super._onFirstRender(context, options);
-    const icon = CONFIG[this.document.documentName]?.typeIcons[this.document.type]
-      ?? CONFIG[this.document.documentName].sidebarIcon ?? TERIOCK.config.document.document.icon;
-    this.window.icon.className = makeIconClass(icon, "title");
-    return out;
   }
 
   /** @inheritDoc */

@@ -11,7 +11,7 @@ export default Base =>
    * @mixin
    */
   class TabsActorSheetPart extends Base {
-    /** @type {Partial<ApplicationConfiguration>} */
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = { actions: { changeTab: this._onChangeTab } };
 
     /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */

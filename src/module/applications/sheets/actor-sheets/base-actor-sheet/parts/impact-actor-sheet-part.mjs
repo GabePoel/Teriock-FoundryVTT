@@ -12,6 +12,7 @@ export default Base =>
    * @mixin
    */
   class ImpactActorSheetPart extends Base {
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: { takeHack: this._onTakeHack, takeImpact: { buttons: [0, 2], handler: this._onTakeImpact } },
     };

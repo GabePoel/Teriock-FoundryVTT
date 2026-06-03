@@ -1,3 +1,4 @@
+import { ChangesSheetMixin } from "../../_module.mjs";
 import { BaseAutomation } from "../../../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { makeIcon, objectMap } from "../../../../../helpers/utils.mjs";
@@ -11,10 +12,12 @@ export default Base => {
   return (
     /**
      * @extends {TeriockDocumentSheet}
+     * @mixes ChangesSheet
      * @mixin
      * @property {AnyCommonDocument} document
      */
-    class AutomationsCommonSheetPart extends Base {
+    class AutomationsCommonSheetPart extends ChangesSheetMixin(Base) {
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
           createAutomation: this._onCreateAutomation,

@@ -40,6 +40,7 @@ export default Base =>
       this[`_${stat}DrawerOpen`] = !this[`_${stat}DrawerOpen`];
     }
 
+    /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
         resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty },
