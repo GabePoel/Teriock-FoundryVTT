@@ -127,12 +127,16 @@ export default class BaseActorSystem
 
   /** @inheritDoc */
   getCardContextMenuEntries(doc) {
-    return [{
-      icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
-      label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
-      onClick: async () => this.parent.token.sheet.render(true),
-      visible: () => this.parent.token && this.parent.token.isViewer,
-    }, ...super.getCardContextMenuEntries(doc)];
+    return [
+      {
+        icon: makeIcon(TERIOCK.display.icons.document.token, "contextMenu"),
+        label: _loc("TERIOCK.SYSTEMS.BaseActor.MENU.openToken"),
+        onClick: async () => this.parent.token.sheet.render(true),
+        visible: () => this.parent.token && this.parent.token.isViewer,
+      },
+      ...super.getCardContextMenuEntries(doc),
+      this._getPanelCardContextMenuEntry(),
+    ];
   }
 
   /** @inheritDoc */

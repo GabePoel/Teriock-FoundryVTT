@@ -38,6 +38,22 @@ foundry.helpers.Hooks.once("init", function() {
     for (const [key, config] of Object.entries(configs)) { Object.assign(CONFIG[key], config); }
   }
 
+  /**
+   * Make a panel sheet for a given document class.
+   * @template T
+   * @param {T} doc
+   * @returns {{cls: TeriockPanelSheet, doc: T, makeDefault: boolean, types: Record<string, TypedPseudoDocument>|string[]|Record<string, string>|Readonly<{rectangle: foundry.data.RectangleShapeData, circle: foundry.data.CircleShapeData, ellipse: foundry.data.EllipseShapeData, emanation: foundry.data.EmanationShapeData, cone: foundry.data.ConeShapeData, ring: foundry.data.RingShapeData, line: foundry.data.LineShapeData, polygon: foundry.data.PolygonShapeData, token: foundry.data.TokenShapeData, grid: foundry.data.GridShapeData}>|*}}
+   */
+  function makePanelSheet(doc) {
+    return {
+      cls: applications.sheets.utility.TeriockPanelSheet,
+      doc,
+      label: "TERIOCK.SHEETS.Panel.LABEL",
+      makeDefault: false,
+      types: doc.TYPES,
+    };
+  }
+
   // Register Game Shortcuts
   // =======================
 
@@ -252,7 +268,7 @@ foundry.helpers.Hooks.once("init", function() {
     {
       cls: applications.sheets.item.ArchetypeSheet,
       doc: documents.TeriockItem,
-      label: "TYPES.Item.Archetype",
+      label: "TYPES.Item.archetype",
       types: ["archetype"],
     },
     { cls: applications.sheets.item.BodySheet, doc: documents.TeriockItem, label: "TYPES.Item.body", types: ["body"] },
@@ -388,6 +404,11 @@ foundry.helpers.Hooks.once("init", function() {
       label: "TYPES.JournalEntryPage.rule",
       types: ["rule"],
     },
+    // General
+    makePanelSheet(documents.TeriockActiveEffect),
+    makePanelSheet(documents.TeriockItem),
+    makePanelSheet(documents.TeriockActor),
+    makePanelSheet(documents.TeriockTableResult),
   ];
   sheetMap.forEach(({ cls, doc, label, makeDefault = true, types }) =>
     DocumentSheetConfig.registerSheet(doc, "teriock", cls, { label, makeDefault, types })

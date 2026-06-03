@@ -1,7 +1,7 @@
 import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
+import { fromIdentifier, makeIcon, prefixObject } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
@@ -262,6 +262,20 @@ export default function CommonSystemMixin(Base) {
         return { document: await document, label: _loc(label) };
       }
 
+      /**
+       * A context menu entry which lets you open this as a panel.
+       * @returns {ContextMenuEntry}
+       */
+      _getPanelCardContextMenuEntry() {
+        return {
+          group: "share",
+          icon: makeIcon(TERIOCK.display.icons.ui.panel),
+          label: _loc("TERIOCK.SHEETS.Panel.OPEN"),
+          onClick: async () => await this.document.openPanelSheet(),
+          visible: () => game.teriock.getSetting("openPanelContextMenuEntry") && this.document.isViewer,
+        }
+      }
+
       /** @inheritDoc */
       async _propagateOperation(methodName, isAsync = false, args = []) {
         for (const collection of Object.values(this.pseudoCollections)) {
@@ -292,6 +306,7 @@ export default function CommonSystemMixin(Base) {
       }
 
       /**
+       * Open a panel instead of a full editable sheet.
        * @param {TeriockDocument} _doc
        * @returns {ContextMenuEntry[]}
        */

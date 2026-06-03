@@ -8,15 +8,29 @@ export default class TeriockCompendium extends Compendium {
 
   /** @inheritDoc */
   _getEntryContextOptions() {
-    return [...super._getEntryContextOptions(), {
-      icon: makeIconClass(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
-      label: "TERIOCK.COMPENDIUM.DuplicateEntry",
-      visible: game.user.isGM && !this.collection?.locked,
-      onClick: async (_ev, li) => {
-        const document = await this.collection?.getDocument(li.dataset.entryId);
-        await document?.duplicate();
+    return [
+      {
+        icon: makeIconClass(TERIOCK.display.icons.ui.panel),
+        label: "TERIOCK.SHEETS.Panel.OPEN",
+        onClick: async (_ev, li) => {
+          const document = await this.collection?.getDocument(li.dataset.entryId);
+          await document?.openPanelSheet();
+        },
+        visible: () =>
+          game.teriock.getSetting("openPanelContextMenuEntry")
+          && ["ActiveEffect", "Actor", "Item"].includes(this.documentName),
       },
-    }];
+      ...super._getEntryContextOptions(),
+      {
+        icon: makeIconClass(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
+        label: "TERIOCK.COMPENDIUM.DuplicateEntry",
+        visible: game.user.isGM && !this.collection?.locked,
+        onClick: async (_ev, li) => {
+          const document = await this.collection?.getDocument(li.dataset.entryId);
+          await document?.duplicate();
+        },
+      },
+    ];
   }
 
   /** @inheritDoc */

@@ -1,4 +1,5 @@
 import { TeriockChatMessage } from "../_module.mjs";
+import { TeriockPanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 
@@ -100,6 +101,16 @@ export default function PanelDocumentMixin(Base) {
       onEmbed(element) {
         PanelDocument.bindPanelListeners(element);
         super.onEmbed(element);
+      }
+
+      /**
+       * Open this document as a panel sheet.
+       * @returns {Promise<void>}
+       */
+      async openPanelSheet() {
+        let panelSheet = Object.values(this.apps).find((a) => a instanceof TeriockPanelSheet);
+        if (!panelSheet) { panelSheet = new TeriockPanelSheet({ document: this }); }
+        await panelSheet.render(true);
       }
 
       /** @inheritDoc */

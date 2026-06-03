@@ -261,6 +261,13 @@ export const settings = {
       scope: "client",
       type: String,
     },
+    openPanelContextMenuEntry: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.openPanelContextMenuEntry.hint",
+      name: "TERIOCK.SETTINGS.openPanelContextMenuEntry.name",
+      scope: "client",
+      type: Boolean,
+    },
   },
   tooltip: {
     compendiumTooltips: {

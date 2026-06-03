@@ -1,3 +1,4 @@
+import { TeriockPanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 
@@ -24,15 +25,20 @@ function addCardContextMenuEntriesToHeader(application, controls) {
   });
   Object.values(groups).forEach(g => sorted.push(...g));
   sorted.push(...ungrouped);
-  controls.push(...entries.map(e => {
-    return {
-      group: e.group,
-      icon: e.icon?.split("class=\"")[1]?.split("\">")[0] ?? e.icon,
-      label: e.label,
-      onClick: e.onClick,
-      visible: e.visible,
-    };
-  }));
+  controls.push(
+    ...entries.filter(e =>
+      e.label !== _loc("SIDEBAR.DUPLICATE")
+      && ((e.label !== _loc("TERIOCK.SHEETS.Panel.OPEN")) || !(application instanceof TeriockPanelSheet))
+    ).map(e => {
+      return {
+        group: e.group,
+        icon: e.icon?.split("class=\"")[1]?.split("\">")[0] ?? e.icon,
+        label: e.label,
+        onClick: e.onClick,
+        visible: e.visible,
+      };
+    }),
+  );
   sortControls(application, controls);
 }
 
