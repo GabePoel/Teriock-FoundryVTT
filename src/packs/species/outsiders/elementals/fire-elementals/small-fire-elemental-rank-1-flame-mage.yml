@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.79
+      systemVersion: 0.12.82
     img: systems/teriock/src/icons/abilities/fire-ball.webp
     name: Fire Ball
     system:
@@ -70,7 +70,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.79
+      systemVersion: 0.12.82
     img: systems/teriock/src/icons/abilities/flame-ray.webp
     name: Flame Ray
     system:
@@ -164,7 +164,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.79
+      systemVersion: 0.12.82
     img: systems/teriock/src/icons/abilities/self-detonate.webp
     name: Self Detonate
     system:
@@ -172,6 +172,7 @@ effects:
         32BRYYbao0OafqCz:
           _id: 32BRYYbao0OafqCz
           attribute: mov
+          bonus: '0'
           threshold: 10 + @c
           type: feat
         YxFIjavyUBnxf6OV:
@@ -264,31 +265,22 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.79
+      systemVersion: 0.12.82
     img: systems/teriock/src/icons/abilities/ignite.webp
     name: Ignite
     system:
       _sup: LbLjjWiopqGfltmW
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
-          changes:
-            - key: token.light.dim
-              priority: 5
-              target: Actor
-              type: upgrade
-              value: '10'
-            - key: token.light.color
-              priority: 5
-              target: Actor
-              type: override
-              value: '#C64600'
-            - key: token.light.animation.type
-              priority: 5
-              target: Actor
-              type: override
-              value: torch
-          type: changes
+        HzyxPJ30wjiQSRG4:
+          _id: HzyxPJ30wjiQSRG4
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - property:flaming
+          multi: false
+          separate: false
+          type: addDocuments
         72ce567009179bea:
           _id: 72ce567009179bea
           changeType: add
@@ -317,16 +309,20 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Target is set @Identifier[property:on-fire]{on fire} or put out.
-          Your hand counts as a torch for the purpose of this
-          @Wiki[Category:Spells]{spell}. When @Identifier[property:on-fire]{on
-          fire}, your hand produces no smoke and being set
-          @Identifier[property:on-fire]{on fire} does not harm it.</p>
+          <p>Target is set on fire or is put out. If the target is on fire, it
+          is considered to be @Identifier[property:flaming]{flaming}. Your
+          @Identifier[property:handy]{handy} items count as a
+          @Identifier[equipment:torch]{torch} for the purpose of [[lookup
+          name]]. The fire produced by [[lookup name]] does not harm you while
+          it is burning.</p>
       powerSources:
         - magical
       range:
         unit: contact
-      requirements: <p>Target must be a torch.</p>
+      requirements: >-
+        <p>Target must be a @Identifier[equipment:torch]{torch},
+        @Identifier[equipment:candle]{candle}, or some other item that designed
+        to be lit on fire.</p>
       spell: true
       standard: true
       sustained: true
@@ -341,7 +337,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.79
+      systemVersion: 0.12.82
     img: systems/teriock/src/icons/abilities/light.webp
     name: Light
     system:
@@ -405,6 +401,7 @@ effects:
       sustained: true
       targets:
         - area
+        - self
     transfer: true
     type: ability
 folder: da5b8437ae291af1
