@@ -121,7 +121,7 @@ export default Base => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        const sizeDefinition = TeriockActor.sizeConfig(this.size.number);
+        const sizeDefinition = TeriockActor.getSizeConfig(this.size.number);
         this.size.category = sizeDefinition.category;
         this.size.length = sizeDefinition.length;
         this.size.reach = sizeDefinition.reach;

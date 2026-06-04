@@ -319,14 +319,14 @@ export default class SpeciesSystem
       items: await this.parent.toObjects(),
       name: this.parent.name,
       prototypeToken: {
-        height: TeriockActor.sizeConfig(this.size.value).length,
+        height: TeriockActor.getSizeConfig(this.size.value).length,
         name: this.parent.name,
         ring: {
           enabled: this.transformation.ring,
           subject: { texture: this.transformation.ring ? this.transformation.img : undefined },
         },
         texture: { src: this.parent.img },
-        width: TeriockActor.sizeConfig(this.size.value).length,
+        width: TeriockActor.getSizeConfig(this.size.value).length,
       },
       system: {
         _src: this.parent.uuid,

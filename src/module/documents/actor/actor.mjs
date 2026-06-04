@@ -27,6 +27,12 @@ export default class TeriockActor
     documentMixins.RetrievalDocumentMixin,
   )
 {
+  /** @inheritDoc */
+  static getDefaultArtwork(actorData) {
+    const img = this.getDefaultImageForType(actorData?.type);
+    return { img, texture: { src: img } };
+  }
+
   /**
    * The default weight for a given size.
    *
@@ -37,7 +43,7 @@ export default class TeriockActor
    * @param {"min"|"typical"|"max"} [amount]
    * @returns {number}
    */
-  static defaultWeight(size, amount = "typical") {
+  static getDefaultWeight(size, amount = "typical") {
     if (amount === "min") { size -= 0.5; }
     if (amount === "max") { size += 0.5; }
     return Math.max(0.001, Math.pow(3 + size, 3));
@@ -49,11 +55,11 @@ export default class TeriockActor
    * Relevant wiki pages:
    * - [Size](https://wiki.teriock.com/index.php/Core:Size)
    *
-   * @param {number} value
+   * @param {number} size
    * @returns {Teriock.Config.SizeEntry}
    */
-  static sizeConfig(value) {
-    const minCategoryMaxSize = Math.min(...config.character.sizes.map(d => d.max).filter(m => m >= value));
+  static getSizeConfig(size) {
+    const minCategoryMaxSize = Math.min(...config.character.sizes.map(d => d.max).filter(m => m >= size));
     return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
@@ -364,7 +370,7 @@ export default class TeriockActor
 
     const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
     if (foundry.utils.hasProperty(changes, "system.size.raw")) {
-      const tokenSize = this.constructor.sizeConfig(changes.size.raw).length;
+      const tokenSize = this.constructor.getSizeConfig(changes.size.raw).length;
       if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
         tokenUpdates["prototypeToken.width"] = tokenSize;
         tokenUpdates["prototypeToken.height"] = tokenSize;

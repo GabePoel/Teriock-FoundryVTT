@@ -10,7 +10,8 @@ import {
   TeriockChatLog,
   TeriockCombatTracker,
   TeriockCompendiumDirectory,
-  TeriockItemDirectory, TeriockRollTableDirectory,
+  TeriockItemDirectory,
+  TeriockRollTableDirectory,
 } from "../applications/sidebar/tabs/_module.mjs";
 import { TeriockHotbar, TeriockNotifications } from "../applications/ui/_module.mjs";
 import { TeriockActor, TeriockUser } from "../documents/_module.mjs";

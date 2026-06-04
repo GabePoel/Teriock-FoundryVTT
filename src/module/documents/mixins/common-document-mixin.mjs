@@ -34,6 +34,17 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
+       * Get the default image for some type of this document.
+       * @param {string} type
+       * @returns {string}
+       */
+      static getDefaultImageForType(type) {
+        if (type && TERIOCK.config.document[this.type]?.documentName === this.documentName) {
+          return systemPath(`icons/documents/${type}.svg`);
+        }
+      }
+
+      /**
        * Validate whether a document supports a certain child type.
        * @param {AnyCommonDocument} parent
        * @param {AnyChildDocument} child
@@ -147,10 +158,9 @@ export default function CommonDocumentMixin(Base) {
         const yes = await super._preCreate(data, options, user);
         if (yes === false) { return false; }
 
-        if (!data.img && TERIOCK.config.document[this.type]?.documentName === this.documentName) {
-          this.updateSource({ img: systemPath(`icons/documents/${data.type}.svg`) });
+        if (foundry.utils.hasProperty(data, "img")) {
+          this.updateSource({ img: this.constructor.getDefaultImageForType(data?.type) });
         }
-        this.updateSource({ sort: game.time.serverTime });
       }
 
       /**

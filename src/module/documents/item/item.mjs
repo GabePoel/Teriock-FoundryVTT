@@ -33,6 +33,11 @@ export default class TeriockItem
     await super._onWriteOperation(documents, operation, user);
   }
 
+  /** @inheritDoc */
+  static getDefaultArtwork(itemData) {
+    return { img: this.getDefaultImageForType(itemData?.type) };
+  }
+
   /**
    * Checks if the item is active.
    * @returns {boolean}
