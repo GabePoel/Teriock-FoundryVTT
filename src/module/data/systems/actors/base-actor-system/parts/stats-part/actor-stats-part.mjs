@@ -32,19 +32,19 @@ export default Base => {
         super._onUpdate(changed, options, userId);
         if (options.teriock) {
           // The large number catch is used to keep from rendering the stat change upon applying transformations
-          if (options.teriock.hpChange !== 0 && options.teriock.hpChange < TERIOCK.config.system.inf) {
+          if (options.teriock.hpChange !== 0 && options.teriock.hpChange < TERIOCK.config.system.inf / 2) {
             const color = options.teriock.hpChange > 0
               ? TERIOCK.display.colors.hp.light
               : TERIOCK.display.colors.hp.dark;
             this.animateStatChangeEffect(options.teriock.hpChange, color);
           }
-          if (options.teriock.lpChange !== 0 && options.teriock.lpChange < TERIOCK.config.system.inf) {
+          if (options.teriock.lpChange !== 0 && options.teriock.lpChange < TERIOCK.config.system.inf / 2) {
             const color = options.teriock.lpChange > 0
               ? TERIOCK.display.colors.lp.light
               : TERIOCK.display.colors.lp.dark;
             this.animateStatChangeEffect(options.teriock.lpChange, color);
           }
-          if (options.teriock.mpChange !== 0 && options.teriock.mpChange < TERIOCK.config.system.inf) {
+          if (options.teriock.mpChange !== 0 && options.teriock.mpChange < TERIOCK.config.system.inf / 2) {
             const color = options.teriock.mpChange > 0
               ? TERIOCK.display.colors.mp.light
               : TERIOCK.display.colors.mp.dark;
