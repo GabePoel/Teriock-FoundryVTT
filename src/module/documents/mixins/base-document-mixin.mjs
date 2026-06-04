@@ -196,7 +196,7 @@ export default function BaseDocumentMixin(Base) {
        * @returns {boolean}
        */
       get isViewer() {
-        return this.permission >= 2;
+        return this.testUserPermission(game.user, "LIMITED");
       }
 
       /**
