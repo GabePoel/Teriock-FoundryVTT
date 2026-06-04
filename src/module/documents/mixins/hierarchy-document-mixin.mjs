@@ -380,7 +380,7 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        this.#renderSheets();
+        if (options.render !== false) { this.#renderSheets(); }
       }
 
       /** @inheritDoc */
@@ -394,13 +394,13 @@ export default function HierarchyDocumentMixin(Base) {
           pack: this.compendium?.collection,
           parent: this.parent,
         });
-        this.#renderSheets();
+        if (options.render !== false) { this.#renderSheets(); }
       }
 
       /** @inheritDoc */
       _onUpdate(data, options, userId) {
         super._onUpdate(data, options, userId);
-        this.#renderSheets();
+        if (options.render !== false) { this.#renderSheets(); }
       }
 
       /** @inheritDoc */
