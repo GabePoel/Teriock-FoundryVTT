@@ -46,6 +46,10 @@ export default Base => {
           });
           return false;
         }
+        if (!doc.isViewer) {
+          ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropPermission");
+          return false;
+        }
         return Boolean(doc) && doc.parent !== this.document && doc !== this.document;
       }
 
@@ -86,16 +90,15 @@ export default Base => {
       async _onDrop(event) {
         const dropData = TeriockTextEditor.getDragEventData(event);
         if (dropData.startSheet === this.id) { return false; }
-        let out;
         if (dropData.type === "Automation" && typeof this._onDropAutomation === "function") {
           this._onDropAutomation(event);
         } else if (["ActiveEffect", "Actor", "Item"].includes(dropData.type)) {
           if (this._tab === "automations") { return false; }
-          out = await this._onDropChild(event, dropData);
+          return await this._onDropChild(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
-          out = await this._onDropJournalEntryPage(event, dropData);
+          return await this._onDropJournalEntryPage(event, dropData);
         }
-        return !(!out && Object.keys(dropData).length === 0);
+        return false;
       }
 
       /**

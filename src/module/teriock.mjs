@@ -91,13 +91,14 @@ foundry.helpers.Hooks.once("init", function() {
 
   assign({
     ui: {
-      actors: applications.sidebar.TeriockActorDirectory,
-      chat: applications.sidebar.TeriockChatLog,
-      combat: applications.sidebar.TeriockCombatTracker,
-      compendium: applications.sidebar.TeriockCompendiumDirectory,
+      actors: applications.sidebar.tabs.TeriockActorDirectory,
+      chat: applications.sidebar.tabs.TeriockChatLog,
+      combat: applications.sidebar.tabs.TeriockCombatTracker,
+      compendium: applications.sidebar.tabs.TeriockCompendiumDirectory,
       hotbar: applications.ui.TeriockHotbar,
-      items: applications.sidebar.TeriockItemDirectory,
+      items: applications.sidebar.tabs.TeriockItemDirectory,
       notifications: applications.ui.TeriockNotifications,
+      tables: applications.sidebar.tabs.TeriockRollTableDirectory,
     },
     ux: {
       ContextMenu: applications.ux.TeriockContextMenu,
@@ -166,7 +167,7 @@ foundry.helpers.Hooks.once("init", function() {
       collection: documents.collections.TeriockChatMessages,
       dataModels: { base: data.systems.messages.BaseMessageSystem },
       documentClass: documents.TeriockChatMessage,
-      popoutClass: applications.sidebar.TeriockChatPopout,
+      popoutClass: applications.sidebar.apps.TeriockChatPopout,
       template: "teriock/ui/chat-message",
     },
     Combat: {
@@ -413,7 +414,7 @@ foundry.helpers.Hooks.once("init", function() {
 // ================================
 
 foundry.helpers.Hooks.once("setup", function() {
-  for (const pack of game.packs) { pack.applicationClass = applications.sidebar.TeriockCompendium; }
+  for (const pack of game.packs) { pack.applicationClass = applications.sidebar.apps.TeriockCompendium; }
 });
 
 // Perform one-time pre-localization and sorting of some configuration objects

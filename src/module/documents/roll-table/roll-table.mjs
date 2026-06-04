@@ -1,5 +1,6 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
+import { quickAddAssociation } from "../../helpers/panel.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
@@ -10,10 +11,16 @@ const { RollTable } = foundry.documents;
  * @extends {RollTable}
  * @mixes BaseDocument
  * @mixes UsableDocument
+ * @mixes PanelDocument
  * @implements {Teriock.Documents.RollTableInterface}
  */
 export default class TeriockRollTable
-  extends mixClasses(RollTable, documentMixins.BaseDocumentMixin, documentMixins.UsableDocumentMixin)
+  extends mixClasses(
+    RollTable,
+    documentMixins.BaseDocumentMixin,
+    documentMixins.UsableDocumentMixin,
+    documentMixins.PanelDocumentMixin,
+  )
 {
   /**
    * All the documents in the results of this table.
@@ -40,6 +47,26 @@ export default class TeriockRollTable
       this.results.filter(r => r.type === "document").map(r => foundry.utils.fromUuid(r.documentUuid)),
     );
     return out.filter(Boolean);
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    return Object.assign(await super.getPanelParts(), {
+      associations: quickAddAssociation(
+        this.results.contents,
+        _loc("TERIOCK.DOCUMENTS.result.plural"),
+        TERIOCK.display.icons.document.tableResult,
+        [],
+        { makeTooltip: true },
+      ),
+      bars: [{
+        icon: TERIOCK.display.icons.ui.formula,
+        label: _loc("TERIOCK.TERMS.Common.formula"),
+        wrappers: [this.formula ?? ""],
+      }],
+      blocks: [{ text: this.description, title: this.getFieldForProperty("description").label }],
+      icon: TERIOCK.display.icons.document.table,
+    });
   }
 
   /**

@@ -1,14 +1,14 @@
-import documentConfig from "../../constants/config/document-config.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
-import SidebarMixin from "./sidebar-mixin.mjs";
+import documentConfig from "../../../constants/config/document-config.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
+import DocumentDirectoryMixin from "./document-directory-mixin.mjs";
 
 const { ItemDirectory } = foundry.applications.sidebar.tabs;
 
 /**
  * @extends {ItemDirectory}
- * @mixes Sidebar
+ * @mixes TeriockDocumentDirectory
  */
-export default class TeriockItemDirectory extends SidebarMixin(ItemDirectory) {
+export default class TeriockItemDirectory extends DocumentDirectoryMixin(ItemDirectory) {
   /** @inheritDoc */
   _getEntryContextOptions() {
     return [{

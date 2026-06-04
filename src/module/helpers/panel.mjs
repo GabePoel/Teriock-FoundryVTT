@@ -6,18 +6,19 @@
  * @param {Array} associations
  * @param {object} options
  * @param {boolean} [options.makeTooltip=true]
+ * @returns {Teriock.Panels.PanelAssociation[]}
  */
 export function quickAddAssociation(docs, title, icon, associations, options = { makeTooltip: true }) {
   if (docs.length > 0) {
     const association = {
       cards: docs.map(d => {
         return {
-          color: d.system.color,
-          icon: d.system.tagIcon,
+          color: d.system?.color,
+          icon: d.system?.tagIcon,
           id: d._id,
           img: d.img,
           makeTooltip: options.makeTooltip,
-          name: d.system.fullName || d.name,
+          name: d.system?.fullName || d.name,
           pack: d.pack,
           type: d.documentName,
           uuid: d.uuid,
@@ -28,6 +29,7 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
     };
     associations.push(association);
   }
+  return associations;
 }
 
 /**

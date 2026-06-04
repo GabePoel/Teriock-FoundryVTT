@@ -35,7 +35,7 @@
     .teriock-panel-header {
       background: none;
       cursor: unset;
-      padding: var(--panel-padding) var(--panel-padding) 8px;
+      padding: var(--panel-padding) var(--panel-padding) 4px;
 
       .teriock-panel-image {
         //border-radius: 100%;
@@ -90,6 +90,7 @@
 
   &:not(:has(*)) {
     display: none;
+    margin: 0;
   }
 }
 
@@ -101,9 +102,10 @@
 
 .teriock-panel-content {
   @include mixins.pseudo-top-border(var(--panel-padding));
-
+  margin-top: 4px;
   &:has(.teriock-panel-spacer .teriock-panel-body):not(:has(.teriock-panel-body *)) {
     display: none;
+    margin-top: 0;
   }
 }
 

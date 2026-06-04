@@ -1,15 +1,15 @@
-import { makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../../helpers/utils.mjs";
 
 /**
  * @param {typeof DocumentDirectory} Base
  */
-export default function SidebarMixin(Base) {
+export default function DocumentDirectoryMixin(Base) {
   return (
     /**
      * @extends {DocumentDirectory}
      * @mixin
      */
-    class Sidebar extends Base {
+    class TeriockDocumentDirectory extends Base {
       static _entryPartial = "teriock/sidebar/document-partial";
 
       /**

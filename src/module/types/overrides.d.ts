@@ -5,7 +5,13 @@ import { CompendiumCollection } from "@client/documents/collections/_module.mjs"
 import { Collection } from "@common/utils/_module.mjs";
 
 import { TeriockDocumentSheet } from "../applications/sheets/utility-sheets/_module.mjs";
-import { TeriockActorDirectory, TeriockItemDirectory } from "../applications/sidebar/_module.mjs";
+import {
+  TeriockActorDirectory,
+  TeriockChatLog,
+  TeriockCombatTracker,
+  TeriockCompendiumDirectory,
+  TeriockItemDirectory, TeriockRollTableDirectory,
+} from "../applications/sidebar/tabs/_module.mjs";
 import { TeriockHotbar, TeriockNotifications } from "../applications/ui/_module.mjs";
 import { TeriockActor, TeriockUser } from "../documents/_module.mjs";
 import {
@@ -48,9 +54,13 @@ declare global {
   const ui: ui & {
     activeWindow: TeriockDocumentSheet;
     actors: TeriockActorDirectory;
+    chat: TeriockChatLog;
+    combat: TeriockCombatTracker;
+    compendium: TeriockCompendiumDirectory;
     hotbar: TeriockHotbar;
     items: TeriockItemDirectory;
     notifications: TeriockNotifications;
+    tables: TeriockRollTableDirectory;
   };
 
   type FromUuidOptions = { invalid: boolean, relative: TeriockDocument };

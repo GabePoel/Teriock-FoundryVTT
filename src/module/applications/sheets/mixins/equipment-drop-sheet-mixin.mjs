@@ -63,7 +63,7 @@ export default function EquipmentDropSheetMixin(Base) {
         }
 
         if (stack) {
-          if (doc.isOwner) { await doc.delete(); }
+          if (doc.isOwner && doc.actor) { await doc.delete(); }
           return stack;
         }
 
