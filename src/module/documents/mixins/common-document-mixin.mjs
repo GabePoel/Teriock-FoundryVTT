@@ -39,7 +39,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {string}
        */
       static getDefaultImageForType(type) {
-        if (type && TERIOCK.config.document[this.type]?.documentName === this.documentName) {
+        if (type && TERIOCK.config.document[type]?.documentName === this.documentName) {
           return systemPath(`icons/documents/${type}.svg`);
         }
       }
@@ -158,7 +158,7 @@ export default function CommonDocumentMixin(Base) {
         const yes = await super._preCreate(data, options, user);
         if (yes === false) { return false; }
 
-        if (foundry.utils.hasProperty(data, "img")) {
+        if (!foundry.utils.hasProperty(data, "img")) {
           this.updateSource({ img: this.constructor.getDefaultImageForType(data?.type) });
         }
       }
