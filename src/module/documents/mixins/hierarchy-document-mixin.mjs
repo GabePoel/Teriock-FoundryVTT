@@ -4,7 +4,18 @@ import { TypeCollection } from "../collections/_module.mjs";
 const { Collection } = foundry.utils;
 
 /**
- * Document mixin to support hierarchies of the same document type.
+ * Document mixin to support hierarchies of the same document type as well as dependencies. This requires infastructure
+ * in lots of other parts of the codebase. Dependencies are typically active effects that have some sort of ownership
+ * over items or documents on other creatures. These are handled by the {@link DependentsRegistry}.
+ *
+ * Hierarchies of documents of the same type are for cases like "items in items" or "active effects in active effects".
+ * They take the form of documents that share the same collection (and, where possible, the same folder) and have some
+ * magic controlling when they are/aren't visible. This is integrated with {@link HierarchySystemMixin} and requires
+ * both {@link TeriockCompendiumDirectory} and {@link TeriockCompendium} in order to have compendium information
+ * displayed properly.
+ *
+ * This mixin is not related to pseudo-documents in any way.
+ *
  * @param {typeof BaseDocument} Base
  */
 export default function HierarchyDocumentMixin(Base) {
