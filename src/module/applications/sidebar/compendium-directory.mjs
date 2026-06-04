@@ -1,9 +1,25 @@
 import { getPackIcon } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
+import TeriockCompendium from "./compendium.mjs";
 
 const { CompendiumDirectory } = foundry.applications.sidebar.tabs;
 
 export default class TeriockCompendiumDirectory extends CompendiumDirectory {
+  /** @inheritDoc */
+  async _onCreateEntry(event, target) {
+    await super._onCreateEntry(event, target);
+    // Force newly created compendiums to have the correct application class.
+    for (const pack of game.packs) {
+      if (!foundry.utils.isSubclass(pack.applicationClass, TeriockCompendium)) {
+        pack.applicationClass = TeriockCompendium;
+        // Foundry adds an initial application as part of the pack's creation before we can set the class. So, we need
+        // to remove that starting class and add our own.
+        pack.apps.length = 0;
+        pack.apps.push(new pack.applicationClass({ collection: pack }));
+      }
+    }
+  }
+
   /** @inheritDoc */
   _onMatchSearchDocuments(indexEntries, listEl) {
     super._onMatchSearchDocuments(indexEntries, listEl);
