@@ -28,7 +28,6 @@ export default {
     invisible: { detectionMode: "seeInvisible", grantsSight: false, label: "TERIOCK.TERMS.Senses.invisible" },
     sight: { grantsSight: true, label: "TERIOCK.TERMS.Senses.sight" },
     smell: { detectionMode: "scentPerception", grantsSight: false, label: "TERIOCK.TERMS.Senses.smell" },
-    spectral: { detectionMode: "spectral", grantsSight: true, hidden: true, label: "TERIOCK.TERMS.Senses.spectral" },
     truth: { detectionMode: "trueSight", grantsSight: true, label: "TERIOCK.TERMS.Senses.truth" },
   },
   sizes: /** @type {Teriock.Config.SizeEntry[]} */ [

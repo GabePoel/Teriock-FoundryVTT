@@ -34,12 +34,17 @@ export default class TeriockTokenDocument
   /** @inheritDoc */
   _prepareDetectionModes() {
     super._prepareDetectionModes();
-    const basicMode = this.detectionModes.basicSight;
-    if (basicMode) { basicMode.enabled = false; }
-    if (this.detectionModes?.lightPerception) {
-      this.detectionModes.lightPerception.enabled = true;
-      this.detectionModes.lightPerception.range = Infinity;
+    if (this.actor?.system.settings.token.autoDetectionModes) {
+      for (const senseEntry of Object.values(TERIOCK.config.character.sense)) {
+        const mode = senseEntry?.detectionMode;
+        if (mode) {
+          this.detectionModes[mode] ??= {};
+          this.detectionModes[mode].enabled ??= false;
+          this.detectionModes[mode].range ??= 0;
+        }
+      }
     }
+    if (this.detectionModes.basicSight) { this.detectionModes.basicSight.enabled = false; }
   }
 
   /** @inheritDoc */
