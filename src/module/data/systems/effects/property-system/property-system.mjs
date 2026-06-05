@@ -46,6 +46,7 @@ export default class PropertySystem
       automations.ChangesAutomation,
       automations.TradecraftAutomation,
       automations.CommonOutcomesAutomation,
+      automations.CoverAutomation,
       automations.HacksAutomation,
       automations.PropertyMacroAutomation,
       automations.RollAutomation,

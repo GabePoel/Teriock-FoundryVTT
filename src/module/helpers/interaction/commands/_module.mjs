@@ -2,6 +2,7 @@ import attackCommand from "./attack-command.mjs";
 import { attuneCommand, deattuneCommand } from "./attunable-commands.mjs";
 import awakenCommand from "./awaken-command.mjs";
 import bagCommand from "./bag-command.mjs";
+import { coverCommand, uncoverCommand } from "./cover-commands.mjs";
 import {
   dampenCommand,
   destroyCommand,
@@ -34,6 +35,7 @@ const commandArray = [
   attuneCommand,
   awakenCommand,
   bagCommand,
+  coverCommand,
   dampenCommand,
   deattuneCommand,
   destroyCommand,
@@ -53,6 +55,7 @@ const commandArray = [
   standardDamageCommand,
   toggleStatusCommand,
   tradecraftCommand,
+  uncoverCommand,
   undampenCommand,
   unglueCommand,
   unhackCommand,

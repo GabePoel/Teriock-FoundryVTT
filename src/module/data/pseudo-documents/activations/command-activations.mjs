@@ -1,6 +1,7 @@
 import { attuneCommand, deattuneCommand } from "../../../helpers/interaction/commands/attunable-commands.mjs";
 import awakenCommand from "../../../helpers/interaction/commands/awaken-command.mjs";
 import bagCommand from "../../../helpers/interaction/commands/bag-command.mjs";
+import { coverCommand, uncoverCommand } from "../../../helpers/interaction/commands/cover-commands.mjs";
 import {
   dampenCommand,
   destroyCommand,
@@ -49,7 +50,9 @@ export class RevitalizeActivation extends Act(revitalizeCommand) {}
 export class ReviveActivation extends Act(reviveCommand) {}
 export class ShatterActivation extends Act(shatterCommand) {}
 export class StandardDamageActivation extends Act(standardDamageCommand) {}
+export class TakeCoverActivation extends Act(coverCommand) {}
 export class TakeHackActivation extends Act(hackCommand) {}
+export class TakeUncoverActivation extends Act(uncoverCommand) {}
 export class TakeUnhackActivation extends Act(unhackCommand) {}
 export class ToggleStatusActivation extends Act(toggleStatusCommand) {}
 export class TradecraftActivation extends Act(tradecraftCommand) {}

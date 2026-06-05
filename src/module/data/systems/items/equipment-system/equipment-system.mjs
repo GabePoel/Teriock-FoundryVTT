@@ -65,6 +65,7 @@ export default class EquipmentSystem
       ...super._automationTypes,
       automations.ChatMacroAutomation,
       automations.CommonOutcomesAutomation,
+      automations.CoverAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
       automations.TakeAutomation,

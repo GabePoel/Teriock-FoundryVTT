@@ -21,6 +21,7 @@ export default class ResourceSystem
       automations.TradecraftAutomation,
       automations.CommonOutcomesAutomation,
       automations.CommonMacroAutomation,
+      automations.CoverAutomation,
       automations.HacksAutomation,
       automations.RollAutomation,
       automations.TakeAutomation,

@@ -79,6 +79,7 @@ export default class AbilitySystem
       automations.ChangesAutomation,
       automations.ChildChangeAutomation,
       automations.CommonOutcomesAutomation,
+      automations.CoverAutomation,
       automations.DurationAutomation,
       automations.ExpirationAutomation,
       automations.FeatAutomation,

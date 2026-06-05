@@ -29,6 +29,7 @@ export default class HarmSystem
       automations.ChatMacroAutomation,
       automations.ChatStatusAutomation,
       automations.CommonOutcomesAutomation,
+      automations.CoverAutomation,
       automations.FeatAutomation,
       automations.HacksAutomation,
       automations.HealAutomation,

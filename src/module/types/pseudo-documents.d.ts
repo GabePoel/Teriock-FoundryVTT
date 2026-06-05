@@ -16,6 +16,7 @@ declare global {
       childChange: automations.ChildChangeAutomation;
       common: automations.CommonOutcomesAutomation;
       commonMacro: automations.CommonMacroAutomation;
+      cover: automations.CoverAutomation;
       duration: automations.DurationAutomation;
       expiration: automations.ExpirationAutomation;
       feat: automations.FeatAutomation;
@@ -51,6 +52,7 @@ declare global {
       awaken: activations.AwakenActivation;
       bag: activations.DeathBagActivation;
       changeMovement: activations.ChangeMovementActivation;
+      cover: activations.TakeCoverActivation;
       dampen: activations.DampenActivation;
       deattune: activations.DeattuneActivation;
       destroy: activations.DestroyActivation;
@@ -77,6 +79,7 @@ declare global {
       tradecraft: activations.TradecraftActivation;
       undampen: activations.UndampenActivation;
       unglue: activations.UnglueActivation;
+      uncover: activations.TakeUncoverActivation;
       unhack: activations.TakeUnhackActivation;
       useExternal: activations.UseExternalActivation;
       useLocal: activations.UseLocalActivation;
