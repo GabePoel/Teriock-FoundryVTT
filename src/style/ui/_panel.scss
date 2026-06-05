@@ -19,11 +19,20 @@
   .teriock-panel {
     background: transparent;
     border: none;
+
+    .teriock-panel-content {
+      margin-top: 4px;
+
+      &:has(.teriock-panel-spacer .teriock-panel-body):not(:has(.teriock-panel-body *)) {
+        margin-top: 0;
+      }
+    }
   }
 }
 
 .teriock.panel-application .window-content {
   padding: 0;
+
   .teriock-panel {
     border: none;
     overflow: auto;
@@ -35,7 +44,7 @@
     .teriock-panel-header {
       background: none;
       cursor: unset;
-      padding: var(--panel-padding) var(--panel-padding) 4px;
+      padding: var(--panel-padding);
 
       .teriock-panel-image {
         //border-radius: 100%;
@@ -102,10 +111,9 @@
 
 .teriock-panel-content {
   @include mixins.pseudo-top-border(var(--panel-padding));
-  margin-top: 4px;
+
   &:has(.teriock-panel-spacer .teriock-panel-body):not(:has(.teriock-panel-body *)) {
     display: none;
-    margin-top: 0;
   }
 }
 
