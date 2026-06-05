@@ -18,6 +18,7 @@ import featCommand from "../../../helpers/interaction/commands/feat-command.mjs"
 import { hackCommand, unhackCommand } from "../../../helpers/interaction/commands/hack-commands.mjs";
 import healCommand from "../../../helpers/interaction/commands/heal-command.mjs";
 import resistCommand from "../../../helpers/interaction/commands/resist-command.mjs";
+import { longRestCommand, shortRestCommand } from "../../../helpers/interaction/commands/rest-commands.mjs";
 import revitalizeCommand from "../../../helpers/interaction/commands/revitalize-command.mjs";
 import reviveCommand from "../../../helpers/interaction/commands/revive-command.mjs";
 import standardDamageCommand from "../../../helpers/interaction/commands/standard-damage-command.mjs";
@@ -41,6 +42,7 @@ export class FeatActivation extends Act(featCommand) {}
 export class GlueActivation extends Act(glueCommand) {}
 export class HealActivation extends Act(healCommand) {}
 export class IdentifyActivation extends Act(identifyCommand) {}
+export class LongRestActivation extends Act(longRestCommand) {}
 export class ReadMagicActivation extends Act(readMagicCommand) {}
 export class ReforgeActivation extends Act(reforgeCommand) {}
 export class RemoveStatusActivation extends Act(removeStatusCommand) {}
@@ -49,6 +51,7 @@ export class ResistActivation extends Act(resistCommand) {}
 export class RevitalizeActivation extends Act(revitalizeCommand) {}
 export class ReviveActivation extends Act(reviveCommand) {}
 export class ShatterActivation extends Act(shatterCommand) {}
+export class ShortRestActivation extends Act(shortRestCommand) {}
 export class StandardDamageActivation extends Act(standardDamageCommand) {}
 export class TakeCoverActivation extends Act(coverCommand) {}
 export class TakeHackActivation extends Act(hackCommand) {}

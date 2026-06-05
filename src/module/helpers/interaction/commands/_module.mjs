@@ -21,6 +21,7 @@ import healCommand from "./heal-command.mjs";
 import helpCommand from "./help-command.mjs";
 import impactCommands from "./impact-commands.mjs";
 import resistCommand from "./resist-command.mjs";
+import { longRestCommand, shortRestCommand } from "./rest-commands.mjs";
 import revitalizeCommand from "./revitalize-command.mjs";
 import reviveCommand from "./revive-command.mjs";
 import standardDamageCommand from "./standard-damage-command.mjs";
@@ -44,6 +45,7 @@ const commandArray = [
   hackCommand,
   healCommand,
   identifyCommand,
+  longRestCommand,
   readMagicCommand,
   reforgeCommand,
   removeStatusCommand,
@@ -52,6 +54,7 @@ const commandArray = [
   revitalizeCommand,
   reviveCommand,
   shatterCommand,
+  shortRestCommand,
   standardDamageCommand,
   toggleStatusCommand,
   tradecraftCommand,

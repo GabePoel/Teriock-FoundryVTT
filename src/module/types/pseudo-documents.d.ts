@@ -61,6 +61,7 @@ declare global {
       hack: activations.TakeHackActivation;
       heal: activations.HealActivation;
       identify: activations.IdentifyActivation;
+      longRest: activations.LongRestActivation;
       macro: activations.MacroActivation;
       move: activations.MoveActivation;
       readMagic: activations.ReadMagicActivation;
@@ -72,6 +73,7 @@ declare global {
       revive: activations.ReviveActivation;
       roll: activations.RollActivation;
       shatter: activations.ShatterActivation;
+      shortRest: activations.ShortRestActivation;
       standardDamage: activations.StandardDamageActivation;
       summon: activations.SummonActivation;
       take: activations.TakeActivation;

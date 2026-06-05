@@ -1,4 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
+import { validateTypedIdentifier } from "../../../data/fields/helpers/validators.mjs";
 
 /**
  * Make a status command function.
@@ -11,9 +12,17 @@ function fnFactory(operation) {
   };
 }
 
-const apply = fnFactory((a, s) => a.toggleStatusEffect(s, { active: true }));
-const remove = fnFactory((a, s) => a.system.removeCondition(s));
-const toggle = fnFactory((a, s) => a.toggleStatusEffect(s));
+const apply = fnFactory((a, s) =>
+  validateTypedIdentifier(s, { strict: true })
+    ? a.toggleChild(s, { active: true })
+    : a.toggleStatusEffect(s, { active: true })
+);
+const remove = fnFactory((a, s) =>
+  validateTypedIdentifier(s, { strict: true }) ? a.toggleChild(s, { active: false }) : a.system.removeCondition(s)
+);
+const toggle = fnFactory((a, s) =>
+  validateTypedIdentifier(s, { strict: true }) ? a.toggleChild(s) : a.toggleStatusEffect(s)
+);
 
 /**
  * Apply status command
