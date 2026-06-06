@@ -1,0 +1,118 @@
+_id: hJSXLO97R50PYdIe
+_key: '!items!hJSXLO97R50PYdIe'
+_stats:
+  compendiumSource: Compendium.teriock.essentials.Item.X23W51ou22mRravx
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.84
+effects:
+  - _id: J0PObMcxptPRetle
+    _key: '!items.effects!hJSXLO97R50PYdIe.J0PObMcxptPRetle'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.f1f52f7e8ae3eaab
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/magelore.webp
+    name: Magelore
+    system:
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property can be used to cast @Wiki[Category:Invoked
+        spells]{invoked spells}. It can also be used as its user's
+        @Identifier[property:handy]{hand} if they have
+        @Identifier[ability:staff-touch]{Staff Touch}.</p>
+      form: normal
+      identifier: magelore
+      powerSources:
+        - magical
+    transfer: true
+    type: property
+  - _id: 848bT4OWXadUrE2T
+    _key: '!items.effects!hJSXLO97R50PYdIe.848bT4OWXadUrE2T'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.faf4afc8f41e5518
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/mana-storing.webp
+    name: Mana Storing
+    system:
+      automations:
+        l4rM5VwfWLCUKVDc:
+          _id: l4rM5VwfWLCUKVDc
+          formula: (@property.max / 4)d4
+          showConfirmationDialog: true
+          showDialog: true
+          targetParent: true
+          trigger: dawn
+          type: changeQuantity
+        q7NnSZ2OIzRup4jF:
+          _id: q7NnSZ2OIzRup4jF
+          amount: 1
+          display:
+            label: Restore 1 MP
+          impact: revitalizing
+          morganti: false
+          showDialog: false
+          type: take
+      badge: 1 + F
+      competence:
+        raw: 0
+      consumable: true
+      consumptionAmount: 1
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held
+        within it that creatures can use to power their own
+        @Pack[teriock.abilities]{abilities}. Mana storing items will always have
+        a number N associated with them (1, by default, if no number is listed).
+        This number refers to a "mana die" analogous to those that creatures
+        have. It is always [[/roll 1d4]] (3 MP), which means the item stores a
+        maximum of N × 4 @Identifier[core:hit-points-and-mana-points]{MP}. At
+        dawn, if @Identifier[ability:attune]{attuned} to the [[lookup name
+        style=lc]] item, roll [[/roll d4]]. The item regains up to this much
+        spent @Identifier[core:hit-points-and-mana-points]{MP}. If dawn comes
+        and nobody is @Identifier[ability:attune]{attuned} to a [[lookup name]]
+        item, it releases all @Identifier[core:hit-points-and-mana-points]{MP}
+        it had stored.</p>
+      form: normal
+      identifier: mana-storing
+      maxQuantity:
+        raw: 4 * (1 + @f)
+      powerSources:
+        - magical
+      quantity: 0
+    transfer: true
+    type: property
+folder: GwoD4CVh4GXKmtiG
+img: systems/teriock/src/icons/abilities/altar-of-power.webp
+name: Fluent Altar of Power
+system:
+  attackPenalty: '-3'
+  competence:
+    raw: 2
+  consumable: false
+  damage:
+    base: '0'
+    twoHanded: '0'
+  equipmentType: altar
+  identifier: fluent-altar-of-power
+  instructions: >-
+    <p>This equipment is not the physical @Identifier[ability:altar-of-power]
+    itself. Rather, it exists to track its current state.</p>
+  minStr: -3
+  needsAttunement: true
+  powerLevel: magic
+  range:
+    long:
+      unit: contact
+    melee: true
+    ranged: false
+    short:
+      unit: contact
+  weight: 0
+type: equipment

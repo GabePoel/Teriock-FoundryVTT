@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: PoF5hACOoy2IkHRx
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -91,10 +91,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
+          automations:
+            tS17fIFj24KkwiGX:
+              _id: tS17fIFj24KkwiGX
+              identifier: property:cumbersome
+              type: suppress
           competence:
             raw: 0
           delivery: self
@@ -134,7 +139,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -180,7 +185,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/hack.webp
         name: Hack
         system:
@@ -236,7 +241,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/high-intelligence.webp
         name: High Intelligence
         system:
@@ -271,7 +276,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -306,7 +311,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -341,7 +346,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -376,7 +381,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
         name: Outsider Regenerating
         system:
@@ -445,7 +450,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/shattering-armor.webp
         name: Shattering Armor
         system:
@@ -484,7 +489,7 @@ items:
           results:
             save: >-
               <p>@Pack[teriock.equipment]{Equipment} that delivers
-              @Wiki[Category:Attack abilities]{attack} you
+              @Identifier[core:attack-interaction]{attack} you
               @Identifier[core:block-interaction]{block} becomes
               @Identifier[property:shattered]{shattered}.</p>
           targets:
@@ -499,7 +504,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/slay.webp
         name: Slay
         system:
@@ -548,10 +553,10 @@ items:
               <p>Target takes an additional [[/damage 5[lethal]]]
               @Identifier[core:damage]{damage}. This also has all
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
-              types} of the triggering @Wiki[Category:Attack abilities]{attack}.
-              If the triggering @Wiki[Category:Attack abilities]{attack} was a
-              critical hit, this deals 10 @Identifier[core:damage]{damage}
-              instead.</p>
+              types} of the triggering
+              @Identifier[core:attack-interaction]{attack}. If the triggering
+              @Identifier[core:attack-interaction]{attack} was a critical hit,
+              this deals 10 @Identifier[core:damage]{damage} instead.</p>
           powerSources:
             - martial
           range:
@@ -561,9 +566,9 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>You have just hit a creature with an @Wiki[Category:Attack
-            abilities]{attack} that dealt them @Identifier[core:damage]{damage}
-            from it.</p>
+            <p>You have just hit a creature with an
+            @Identifier[core:attack-interaction]{attack} that dealt them
+            @Identifier[core:damage]{damage} from it.</p>
         transfer: true
         type: ability
       - _id: HYOL5MnjdNszPhaF
@@ -574,7 +579,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -614,7 +619,7 @@ items:
           trigger: >-
             <p>You have hit a creature with a @Wiki[Category:Damaging
             effects]{damaging} melee @Wiki[Category:Weapon delivery
-            abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
+            abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
         transfer: true
         type: ability
       - _id: O1JRvaMxo7bJ6CBo
@@ -625,7 +630,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -669,7 +674,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -714,7 +719,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -752,7 +757,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -797,7 +802,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -850,7 +855,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -896,7 +901,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -952,7 +957,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -1017,7 +1022,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -1123,7 +1128,8 @@ items:
       competence:
         raw: 1
       description: >-
-        <p>[[lookup name]]s are @Wiki[Category:Outsider creatures]{outsiders}
+        <p>[[lookup name]]s are
+        @UUID[Compendium.teriock.tables.RollTable.79f4002c872a73c3]{outsiders}
         and thus they may have many other @Pack[teriock.abilities]{abilities}
         not listed here. Unlike other demons, [[lookup name style=lc]]s become
         sidetracked more easily and can be distracted.</p>
@@ -1157,7 +1163,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -1167,7 +1173,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1193,7 +1199,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1203,7 +1209,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @Wiki[Category:Attack abilities]{attack}.</p>
+            @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -1238,7 +1244,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: WLaRPIZxodAAGnbq
         _key: >-
@@ -1248,7 +1254,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1274,7 +1280,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1284,7 +1290,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @Wiki[Category:Attack abilities]{attack}.</p>
+            @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -1297,7 +1303,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -1352,7 +1358,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1362,7 +1368,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1386,7 +1392,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1396,7 +1402,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
+            used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true

@@ -1,0 +1,239 @@
+_id: lPfamDG9DSR3tzuM
+_key: '!items!lPfamDG9DSR3tzuM'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.3354c8b0f0bfee1d
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: Sl0nzLp79MCyqwfT
+    _key: '!items.effects!lPfamDG9DSR3tzuM.Sl0nzLp79MCyqwfT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.69c4f40fef4f6344
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/gladiator-skills.webp
+    name: Gladiator Skills
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.hp.base
+              priority: 10
+              target: Actor
+              type: add
+              value: '7'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          present:
+            - dueling
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: gladiator-skills
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>While @Identifier[status:dueling]{dueling} or in a staged battle
+          (gladiator fights, ceremonial battles, etc.) you gain an extra
+          @Wiki[Core:Hit Die]{warrior hit die} (+7 HP, [[/roll 1d12]]).
+          Additionally, any allies @Identifier[status:dueling]{dueled} with you
+          or with you in a staged fight may pay 1
+          @Identifier[core:hit-points-and-mana-points]{MP} at the beginning of
+          the fight to gain @Identifier[ability:hack]{Hack} for that fight.
+          @Wiki[Category:Gladiator fighting style weapons]{Weapons you use with
+          the gladiator fighting style} are
+          @Identifier[property:armor-voiding]{AV0} as well.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: svSDVD3jJiukQGTO
+    _key: '!items.effects!lPfamDG9DSR3tzuM.svSDVD3jJiukQGTO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5894bcd8755bdac8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/hack.webp
+    name: Hack
+    system:
+      automations:
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          hacks:
+            - arm
+            - leg
+          reverse: false
+          type: hacks
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: a1
+      form: normal
+      identifier: hack
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
+          gets dealt accordingly.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: >-
+          <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either
+          arms or legs, depending on what you chose.</p>
+        hit: >-
+          <p>The target takes 1 @Identifier[damage:hack]{hack damage} on either
+          an arm or leg, depending on what you chose.</p>
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    transfer: true
+    type: ability
+  - _id: OOiK94kwZWhClKjl
+    _key: '!items.effects!lPfamDG9DSR3tzuM.OOiK94kwZWhClKjl'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9843feda70d00cc1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/threat.webp
+    name: Threat
+    system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: start
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 0
+          override:
+            combat: true
+          type: expiration
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 1
+              time: start
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 1
+          override:
+            combat: true
+          type: expiration
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          executor: true
+          multi: false
+          relation: include
+          status: frightened
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        raw: '1'
+        unit: minute
+      endCondition: >-
+        <p>At the start of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: threat
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: >-
+          <p>Targeted creature is
+          @Identifier[status:frightened]{frightened}.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    transfer: true
+    type: ability
+folder: c2095fb63315614f
+img: systems/teriock/src/icons/ranks/rank-1-berserker.webp
+name: Rank 1 Berserker
+system:
+  _sup: f89940a2591acf2a
+  archetype: warrior
+  class: berserker
+  competence:
+    raw: 1
+  description: >-
+    <p>Wild and savage. They distrust @Wiki[Category:Magical effects]{magic} of
+    all kinds and put their faith in themselves before others. Always at the
+    front of a battle, @Identifier[class:berserker]{Berserkers} love the sport
+    of @Identifier[core:combat]{combat} and don't like
+    @Identifier[property:ranged]{missile weapons}. Not reliable as guards as
+    they are too distracted and are rarely very intelligent. If you are a
+    @Identifier[class:berserker]{Berserker} be larger than life, brash, not too
+    bright and stupidly brave.</p>
+  identifier: rank-1-berserker
+  innate: false
+  maxAv: 2
+  number: 1
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d12
+    mp:
+      disabled: false
+      formula: 1d8
+type: rank

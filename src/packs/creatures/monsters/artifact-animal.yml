@@ -1,0 +1,169 @@
+_id: 84f4744c0bf02229
+_key: '!actors!84f4744c0bf02229'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.10.23
+folder: 13ef6e80a087d7cf
+img: systems/teriock/src/icons/creatures/artifact-animal.webp
+items:
+  - _id: 84f4744c0bf02229
+    _key: '!actors.items!84f4744c0bf02229.84f4744c0bf02229'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.84f4744c0bf02229
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: 3HNWCY0dBNPbCSw7
+        _key: >-
+          !actors.items.effects!84f4744c0bf02229.84f4744c0bf02229.3HNWCY0dBNPbCSw7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.235923981d1ebd09
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/constructed-body.webp
+        name: Constructed Body
+        system:
+          automations:
+            29b275994cf9f5b1:
+              _id: 29b275994cf9f5b1
+              formula: 1d10
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: constructed-body
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You count as an @Pack[teriock.equipment]{item} for the purposes
+              of certain @Wiki[Category:Item target abilities]{abilities that
+              target them}. The relevant @Wiki[Category:Item target
+              abilities]{abilities} are those would apply one of the following
+              @Pack[teriock.properties]{properties} to a piece of
+              @Pack[teriock.equipment]{equipment}. You take the effect listed
+              below instead. If the @Wiki[Category:Item target
+              abilities]{ability} was @Wiki[Category:Magically powered
+              abilities]{magically powered}, then any
+              @Identifier[core:damage]{damage} dealt is
+              @Identifier[damage:magic]{magic} in addition to its other
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}.
+              If the @Wiki[Category:Item target abilities]{ability} was
+              delivered by a @Wiki[Category:Weapon delivery abilities]{weapon},
+              then the @Identifier[core:damage]{damage} has all the
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
+              types} that
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+              would deal in addition to its other
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{types}.</p><ul><li>@Identifier[property:destroyed]{Destroyed}:
+              Take [[/damage 1d10]] @Identifier[core:damage]{damage}.</li>
+
+              <li>@Identifier[property:shattered]{Shattered}: Take a
+              @Identifier[damage:hack]{hack} of your choice.</li>
+
+              <li>@Identifier[property:warded]{Warded}: The next
+              @Wiki[Category:Self delivery abilities]{self delivery ability} you
+              use is @Identifier[keyword:warded]{warded}.</li></ul><p>For any
+              other passive @Pack[teriock.properties]{properties} that the
+              @Pack[teriock.equipment]{equipment} may gain, your
+              @Pack[teriock.bodyParts]{body parts} gain those
+              @Pack[teriock.properties]{properties}. Additionally, any
+              @Wiki[Category:AV granting abilities]{natural AV} you may have
+              counts as <a
+              href="/index.php?title=Equipment:Armor&amp;action=edit&amp;redlink=1"
+              class="new" title="Equipment:Armor (page does not
+              exist)">armor</a> for these purposes.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 13ef6e80a087d7cf
+    img: systems/teriock/src/icons/creatures/artifact-animal.webp
+    name: Artifact Animal
+    system:
+      br: 6
+      competence:
+        raw: 1
+      description: >-
+        <p>@UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{Common
+        animals} (or Teriock animals) with the spirit and some of the form of a
+        Teriock magic item embedded in it. Most (but not all) of them are items
+        that had spirited prior to the Misting. The items must be present as a
+        @Pack[teriock.bodyParts]{part} of the @Wiki[Category:Animal
+        creatures]{animal}. For example,
+        @Identifier[creature:yellow-crab]{yellow crabs} can have magic axes
+        embedded in them. If defeated, a @Identifier[tradecraft:hunter]{hunter}
+        check can be used to harvest the item with a DC of 5 per
+        @Identifier[core:presence]{item tier}. It exists as a temporary item
+        with powers that fade after 24 hours. Once the powers fade, the body
+        part crumbles away.</p>
+      identifier: artifact-animal
+      size:
+        enabled: false
+        value: 3
+      statDice:
+        hp:
+          disabled: true
+          formula: 1d10
+        mp:
+          disabled: true
+          formula: 1d10
+      transformation:
+        img: systems/teriock/src/icons/tokens/artifact-animal.webp
+        ring: true
+    type: species
+name: Artifact Animal
+prototypeToken:
+  actorLink: false
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  name: Artifact Animal
+  ring:
+    enabled: true
+    subject:
+      texture: systems/teriock/src/icons/tokens/artifact-animal.webp
+  texture:
+    src: systems/teriock/src/icons/creatures/artifact-animal.webp
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
+system:
+  hp:
+    value: 1
+  identifier: artifact-animal
+  initiative: 1d20 + @mov
+  mp:
+    value: 1
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+  size:
+    number:
+      raw: '3'
+type: creature

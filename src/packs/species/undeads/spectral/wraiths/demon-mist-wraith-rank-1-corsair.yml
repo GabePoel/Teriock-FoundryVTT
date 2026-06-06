@@ -1,0 +1,380 @@
+_id: T7Hf3IGiqOOKPzEu
+_key: '!items!T7Hf3IGiqOOKPzEu'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.c75d69b0b61fb1b7
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: scaVOzWMaud5etIU
+    _key: '!items.effects!T7Hf3IGiqOOKPzEu.scaVOzWMaud5etIU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c17c6e40cc866b53
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/impale.webp
+    name: Impale
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - standardDamage
+          showConfirmationDialog: true
+          type: common
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          hacks:
+            - body
+          reverse: false
+          type: hacks
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: a1
+      form: normal
+      identifier: impale
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: >-
+          <p>If you want, target takes
+          @Identifier[core:standard-and-critical-damage]{standard damage} as
+          well.</p>
+        hit: <p>Target takes a @Identifier[damage:hack]{body hack}.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    transfer: true
+    type: ability
+  - _id: nzAe45xz0SRaadH9
+    _key: '!items.effects!T7Hf3IGiqOOKPzEu.nzAe45xz0SRaadH9'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.784d022aa6b16299
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/skill-share.webp
+    name: Skill Share
+    system:
+      automations:
+        pZTzCOb2arggrQQw:
+          _id: pZTzCOb2arggrQQw
+          all: false
+          attachDocuments: true
+          automatic: false
+          competencies:
+            - 0
+          local:
+            qualifier: >-
+              and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+              lte(@class.rank, 1))
+          multi: false
+          separate: false
+          type: addDocuments
+        DKrkwLcllE5f9bjQ:
+          _id: DKrkwLcllE5f9bjQ
+          all: false
+          attachDocuments: true
+          automatic: false
+          competencies:
+            - 1
+          local:
+            qualifier: >-
+              and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+              lte(@class.rank, 1 + @p))
+          multi: false
+          separate: false
+          type: addDocuments
+        LTtFZkqLk2QnwOfK:
+          _id: LTtFZkqLk2QnwOfK
+          all: false
+          attachDocuments: true
+          automatic: false
+          competencies:
+            - 2
+          local:
+            qualifier: >-
+              and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
+              lte(@class.rank, 1 + @f))
+          multi: false
+          separate: false
+          type: addDocuments
+        XdlHsYQu4RHDULLu:
+          _id: XdlHsYQu4RHDULLu
+          competence:
+            raw: 0
+          overrideCompetence: true
+          preventEffect: false
+          preventFeat: false
+          preventThreshold: false
+          type: modifyEffect
+      competence:
+        raw: 0
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: hour
+      effectTypes:
+        - contract
+      endCondition: <p>You use [[lookup name]] again.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: skill-share
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target gains one @Pack[teriock.abilities]{ability} of your choice
+          that you have from your first rank in a @Pack[teriock.classes]{class}.
+          The @Pack[teriock.abilities]{ability} must not be @Wiki[Category:Elder
+          Sorcery abilities]{Elder Sorcery}, must not be a
+          @Wiki[Category:Contract effects]{contract effect}, must be one you are
+          @Identifier[core:proficiency-bonus]{proficient} in, and must be one
+          you aren't @Identifier[keyword:incapable]{incapable} of. The target
+          also becomes @Identifier[keyword:incapable]{incapable} of [[lookup
+          name]]. You may only have this active on one creature at a time.</p>
+        fluent: >-
+          <p>You can now share @Pack[teriock.abilities]{abilities} you have from
+          any of your first 1 + @Identifier[core:fluency-bonus]{F} ranks in a
+          @Pack[teriock.classes]{class}.</p>
+        proficient: >-
+          <p>You can now share @Pack[teriock.abilities]{abilities} you have from
+          any of your first 1 + @Identifier[core:proficiency-bonus]{P} ranks in
+          a @Pack[teriock.classes]{class}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: ej0nV0N8AIv6Di9W
+    _key: '!items.effects!T7Hf3IGiqOOKPzEu.ej0nV0N8AIv6Di9W'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1b64c8a7cc5847a8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/swimming.webp
+    name: Swimming
+    system:
+      automations:
+        3MU324Tac2hBbZe2:
+          _id: 3MU324Tac2hBbZe2
+          movementAction: swim
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.swim
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '3'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: swimming
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You swim at @Identifier[core:movement-speed]{full speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: ftTSlyY9ltUAbZor
+    _key: '!items.effects!T7Hf3IGiqOOKPzEu.ftTSlyY9ltUAbZor'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e3d01d3859cf7b5d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/throwing-training.webp
+    name: Throwing Training
+    system:
+      automations:
+        TmSIHG2yJMoWRmZG:
+          _id: TmSIHG2yJMoWRmZG
+          changeType: upgrade
+          key: system.piercing.raw
+          priority: 10
+          qualifier: '@prop.thrown'
+          target: armament
+          type: childChange
+          value: '1'
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: throwing-training
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>All @Identifier[property:thrown]{thrown}
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
+          are @Identifier[property:av0]{AV0} for you.</p>
+        fluent: >-
+          <p>Instead, the range of all @Identifier[property:thrown]{thrown}
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
+          you use is tripled.</p>
+        proficient: >-
+          <p>The range of all @Identifier[property:thrown]{thrown}
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
+          you use is doubled.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: TghrjNoOWxDv9x4I
+    _key: '!items.effects!T7Hf3IGiqOOKPzEu.TghrjNoOWxDv9x4I'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f63ae9581ed77486
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/wind-shuriken.webp
+    name: Wind Shuriken
+    system:
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+          formula: 1d8
+          impact: damage
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+          formula: 1d10
+          impact: damage
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d12
+          impact: damage
+          type: roll
+      competence:
+        raw: 0
+      delivery: missile
+      duration:
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime:
+        base: a1
+      form: normal
+      identifier: wind-shuriken
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p>[[lookup name]] counts as a
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} in
+          the @Wiki[Category:Daggers]{dagger weapon class}.</p><p
+          class="note"><b>Note:</b> Although [[lookup name]] does not deal
+          @Identifier[damage:magic]{magic damage}, it can be made to using
+          @Identifier[ability:might-strike]{Might Strike}.</p>
+        fluent: >-
+          <p>Instead, deal [[/damage 1d12]] @Identifier[core:damage]{damage} to
+          target.</p>
+        proficient: >-
+          <p>Instead, deal [[/damage 1d10]] @Identifier[core:damage]{damage} to
+          target.</p>
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '300'
+        unit: ft
+      results:
+        critHit: <p>Double @Identifier[core:damage]{damage dice}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d8]] @Identifier[core:damage]{damage} to
+          target.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: bd7120d756dc6f4f
+img: systems/teriock/src/icons/ranks/rank-1-corsair.webp
+name: Rank 1 Corsair
+system:
+  _sup: fdec3f206b747460
+  archetype: semi
+  class: corsair
+  competence:
+    raw: 1
+  description: >-
+    <p>People of the sea, they are never very comfortable far from a large body
+    of water. @Identifier[class:corsair]{Corsairs} are wanderers and like to be
+    on the move. @Identifier[class:corsair]{Corsairs} tend to be humble in that
+    they understand that nature is greater than they are and respect it for
+    that. If you are an @Identifier[class:corsair]{Corsair}, crave water and
+    sailing, go with the flow, keep on the move, and keep things ship shape.</p>
+  identifier: rank-1-corsair
+  innate: false
+  maxAv: 3
+  number: 1
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d10
+    mp:
+      disabled: false
+      formula: 1d10
+type: rank

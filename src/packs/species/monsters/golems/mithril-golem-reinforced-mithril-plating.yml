@@ -1,0 +1,126 @@
+_id: PH5kqht3a36ojvFS
+_key: '!items!PH5kqht3a36ojvFS'
+_stats:
+  compendiumSource: Compendium.teriock.bodyParts.Item.45a7794fb181560c
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.15
+effects:
+  - _id: k1kdbn6dX7zSRgwb
+    _key: '!items.effects!PH5kqht3a36ojvFS.k1kdbn6dX7zSRgwb'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.c7e6ac1b9d2cc5ba
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/mithril.webp
+    name: Mithril
+    system:
+      applyIfDampened: true
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.av.bonus
+              priority: 10
+              target: Item
+              type: upgrade
+              value: '1'
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p><b>[[lookup name]]</b> items are
+        @Identifier[property:durable]{durable}, weigh half as much, have their
+        minimum @Identifier[core:strength]{STR} decreased by 1, and are
+        @Identifier[property:unbreachable]{unbreachable} if they are
+        @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}.</p>
+      form: intrinsic
+      identifier: mithril
+      powerSources:
+        - material
+    transfer: true
+    type: property
+  - _id: EYOuPQoBfv1d1ARh
+    _key: '!items.effects!PH5kqht3a36ojvFS.EYOuPQoBfv1d1ARh'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.1b0ae28f7a0a0448
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.72
+    img: systems/teriock/src/icons/properties/durable.webp
+    name: Durable
+    system:
+      _sup: k1kdbn6dX7zSRgwb
+      applyIfDampened: true
+      applyIfDeattuned: true
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that is <b>[[lookup name style=lc]]</b> is
+        @Identifier[keyword:resistance]{resistant} to becoming
+        @Identifier[property:shattered]{shattered} and effects that would render
+        it @Identifier[property:destroyed]{destroyed} cause it to be
+        @Identifier[property:shattered]{shattered} instead.</p>
+      form: intrinsic
+      identifier: durable
+    transfer: true
+    type: property
+  - _id: DWrgpOmG2hEXshVh
+    _key: '!items.effects!PH5kqht3a36ojvFS.DWrgpOmG2hEXshVh'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.752e9d67325b0faf
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/unbreachable.webp
+    name: Unbreachable
+    system:
+      _sup: k1kdbn6dX7zSRgwb
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.av.bonus
+              priority: 10
+              target: Item
+              type: upgrade
+              value: '1'
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{Armor}
+        that's <b>[[lookup name style=lc]]</b> has its
+        @Identifier[core:armor-class]{AV} increased by 1.</p>
+      form: intrinsic
+      identifier: unbreachable
+    transfer: true
+    type: property
+folder: 68067747b6a57d8c
+img: systems/teriock/src/icons/body-parts/reinforced-mithril-plating.webp
+name: Reinforced Mithril Plating
+system:
+  _sup: e242284f908e8396
+  attackPenalty: '-3'
+  av:
+    raw: 4
+  competence:
+    raw: 0
+  damage:
+    base: '0'
+  identifier: reinforced-mithril-plating
+  range:
+    long:
+      unit: self
+    melee: true
+    ranged: false
+    short:
+      unit: self
+type: body

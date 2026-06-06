@@ -1,0 +1,85 @@
+_id: 7qIFqpUHC7DkJCXg
+_key: '!items!7qIFqpUHC7DkJCXg'
+_stats:
+  compendiumSource: Compendium.teriock.bodyParts.Item.61ad84a08f250b8f
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.15
+effects:
+  - _id: RG8ePeH9TmQYeC9u
+    _key: '!items.effects!7qIFqpUHC7DkJCXg.RG8ePeH9TmQYeC9u'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/weapon.webp
+    name: Weapon
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+        @Identifier[core:attack-interaction]{attack}.</p>
+      form: intrinsic
+      identifier: weapon
+    transfer: true
+    type: property
+  - _id: 1G7rcqbTObsjbCFZ
+    _key: '!items.effects!7qIFqpUHC7DkJCXg.1G7rcqbTObsjbCFZ'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/armor-voiding.webp
+    name: Armor Voiding
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.piercing.raw
+              priority: 10
+              target: Item
+              type: upgrade
+              value: '1'
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>An item with this property is always
+        @Identifier[keyword:armor-voiding]{AV0}.</p>
+      form: intrinsic
+      identifier: armor-voiding
+    transfer: true
+    type: property
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/icons/body-parts/piercing-horn.webp
+name: Piercing Horn
+system:
+  _sup: 5da3f21b54f8e124
+  attackPenalty: '-3'
+  bv:
+    raw: 1
+  competence:
+    raw: 0
+  damage:
+    base: 1d8
+  fightingStyle: charging
+  identifier: piercing-horn
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: self
+type: body

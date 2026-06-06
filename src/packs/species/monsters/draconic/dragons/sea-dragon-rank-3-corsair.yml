@@ -1,0 +1,171 @@
+_id: ARfxPG6f8T9VRsu2
+_key: '!items!ARfxPG6f8T9VRsu2'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.e3a6cb7723204211
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: sirF8AgKotgf1kF7
+    _key: '!items.effects!ARfxPG6f8T9VRsu2.sirF8AgKotgf1kF7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1fc80110821d979e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/amplify-wind-shuriken.webp
+    name: Amplify Wind Shuriken
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: amplify-wind-shuriken
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>When you @Identifier[core:attack-interaction]{attack} with
+          @Identifier[ability:wind-shuriken]{Wind Shuriken}, you may target an
+          additional creature or the same creature twice. Any costs you pay must
+          be paid twice and be the same for both
+          @Identifier[core:attack-interaction]{attacks}. These incur
+          @Identifier[core:attack-interaction]{attack penalties} as though they
+          were two separate @Identifier[core:attack-interaction]{attacks}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 6bpE8JOjYvNzN5Sd
+    _key: '!items.effects!ARfxPG6f8T9VRsu2.6bpE8JOjYvNzN5Sd'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0edf94bf33b8d05a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/captain-morale-awaken.webp
+    name: Captain Morale Awaken
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: captain-morale-awaken
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:instant-awaken]{Instant Awaken} for allies aboard
+          the ship you are captaining.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are captaining a ship.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: skZPwbfAIcl9fC5o
+    _key: '!items.effects!ARfxPG6f8T9VRsu2.skZPwbfAIcl9fC5o'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.GTwa9EG1h2n986ZO
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+    name: Instant Awaken
+    system:
+      _sup: 6bpE8JOjYvNzN5Sd
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          showConfirmationDialog: true
+          type: common
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime:
+        base: a1
+      form: normal
+      identifier: instant-awaken
+      interaction: attack
+      limitation: <p>Target must be an ally aboard the ship you are captaining.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        hit: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-3-corsair.webp
+name: Rank 3 Corsair
+system:
+  _sup: a999d31d0bd961cf
+  archetype: semi
+  class: corsair
+  competence:
+    raw: 1
+  description: >-
+    <p>People of the sea, they are never very comfortable far from a large body
+    of water. @Identifier[class:corsair]{Corsairs} are wanderers and like to be
+    on the move. @Identifier[class:corsair]{Corsairs} tend to be humble in that
+    they understand that nature is greater than they are and respect it for
+    that. If you are an @Identifier[class:corsair]{Corsair}, crave water and
+    sailing, go with the flow, keep on the move, and keep things ship shape.</p>
+  identifier: rank-3-corsair
+  innate: false
+  maxAv: 3
+  number: 3
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d10
+    mp:
+      disabled: false
+      formula: 1d10
+type: rank

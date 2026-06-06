@@ -1,0 +1,258 @@
+_id: GdVIsC6M3H3OhQLi
+_key: '!items!GdVIsC6M3H3OhQLi'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.23f54898abcb8eed
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: p6uxscnoyCy8JtwB
+    _key: '!items.effects!GdVIsC6M3H3OhQLi.p6uxscnoyCy8JtwB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b58996906c5c62e3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/taunt.webp
+    name: Taunt
+    system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: start
+              trigger: turn
+            who:
+              type: target
+          override:
+            combat: true
+          type: expiration
+      competence:
+        raw: 0
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: minute
+      endCondition: >-
+        <p>At the start of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      featSaveAttribute: int
+      form: normal
+      identifier: taunt
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - martial
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        fail: >-
+          <p>You and the target are @Identifier[keyword:vulnerable]{vulnerable}
+          to each other.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: 3g1a1LvEjlpO8mii
+    _key: '!items.effects!GdVIsC6M3H3OhQLi.3g1a1LvEjlpO8mii'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1ea706273a40abd1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/weapon-master.webp
+    name: Weapon Master
+    system:
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: weapon-master
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:master-weapon-smith]{Master Weapon
+          Smith} and @Identifier[ability:runic-weapons]{Runic Weapons}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: zWvNyliUR5izM9WU
+    _key: '!items.effects!GdVIsC6M3H3OhQLi.zWvNyliUR5izM9WU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f48c3fc32a01ac3b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/runic-weapons.webp
+    name: Runic Weapons
+    system:
+      _sup: 3g1a1LvEjlpO8mii
+      automations:
+        cA34hJRKJud2tWev:
+          _id: cA34hJRKJud2tWev
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - property:runic
+          multi: false
+          separate: false
+          type: addDocuments
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: sight
+      duration:
+        raw: '24'
+        unit: hour
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      form: normal
+      identifier: runic-weapons
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The targeted
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          becomes @Identifier[property:runic]{runic}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - weapon
+    transfer: true
+    type: ability
+  - _id: OpizkzgBUNhVfLNp
+    _key: '!items.effects!GdVIsC6M3H3OhQLi.OpizkzgBUNhVfLNp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.29d83a03609fbb9a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/master-weapon-smith.webp
+    name: Master Weapon Smith
+    system:
+      _sup: 3g1a1LvEjlpO8mii
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.blacksmith.score
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '2'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: master-weapon-smith
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @Identifier[keyword:expertise]{expert}
+          @Identifier[tradecraft:blacksmith]{blacksmith}. In addition, you gain
+          the ability to create @Identifier[property:master-crafted]{Master
+          Crafted} weapons.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-5-knight.webp
+name: Rank 5 Knight
+system:
+  _sup: b1ca5e2d15299df7
+  archetype: warrior
+  class: knight
+  competence:
+    raw: 1
+  description: >-
+    <p>The true glory seekers, @Identifier[class:knight]{Knights} are chivalrous
+    to a point but have none of the @Identifier[class:duelist]{Duelist's}
+    respect for battles. @Identifier[class:knight]{Knights} are the weapon
+    masters, well-armored but relying on their swift, powerful attacks and
+    powerful strength to destroy their enemy before they can counter-attack.
+    @Identifier[class:knight]{Knights} are the real behemoths of the
+    battlefield, leading troops into the fray and slaughtering all they can. If
+    you are a @Identifier[class:knight]{Knight}, be looking for glory, looking
+    for the next powerful
+    @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
+  identifier: rank-5-knight
+  innate: false
+  maxAv: 4
+  number: 5
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d12
+    mp:
+      disabled: false
+      formula: 1d8
+type: rank

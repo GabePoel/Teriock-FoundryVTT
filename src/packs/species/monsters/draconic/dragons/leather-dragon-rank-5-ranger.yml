@@ -1,0 +1,301 @@
+_id: fTlBIMR2FitwnudV
+_key: '!items!fTlBIMR2FitwnudV'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.de7378f6b2257ab5
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: 8RRx8dARLkx6GKLI
+    _key: '!items.effects!fTlBIMR2FitwnudV.8RRx8dARLkx6GKLI'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e23dda0361ca8742
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/wild-tenacity.webp
+    name: Wild Tenacity
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: wild-tenacity
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:hibernation]{Hibernation} and
+          @Identifier[ability:stamina]{Stamina}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: EwqiwbgycqxMuWho
+    _key: '!items.effects!fTlBIMR2FitwnudV.EwqiwbgycqxMuWho'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f2650bc0be1c495b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/wilderness-healing.webp
+    name: Wilderness Healing
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+            - revive
+          showConfirmationDialog: true
+          type: common
+        2aMxINqwqega0QYr:
+          _id: 2aMxINqwqega0QYr
+          consumeStatDice: false
+          forHarm: false
+          noStatDice: false
+          type: heal
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          present:
+            - down
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+        - revival
+      executionTime:
+        base: passive
+      form: normal
+      identifier: wilderness-healing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>While @Identifier[status:down]{down}, you have
+          @Identifier[ability:slow-regenerating]{Slow Regenerating}.</p>
+      powerSources:
+        - primal
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: aHQDom2ZGKwB6LGw
+    _key: '!items.effects!fTlBIMR2FitwnudV.aHQDom2ZGKwB6LGw'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c77fd6fd5cfe2b8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/hibernation.webp
+    name: Hibernation
+    system:
+      _sup: 8RRx8dARLkx6GKLI
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          present:
+            - down
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: hibernation
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>All damage is @Identifier[keyword:deboosted]{deboosted} against
+          you.</p>
+      powerSources:
+        - primal
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: hk9310LNeIEyynWO
+    _key: '!items.effects!fTlBIMR2FitwnudV.hk9310LNeIEyynWO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5f951de778479e56
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/stamina.webp
+    name: Stamina
+    system:
+      _sup: 8RRx8dARLkx6GKLI
+      automations:
+        OcOpa5UjB3iZQsAH:
+          _id: OcOpa5UjB3iZQsAH
+          category: statuses
+          relation: resistances
+          type: protection
+          value: unconscious
+        suLYYH4S6R39pqk6:
+          _id: suLYYH4S6R39pqk6
+          category: other
+          relation: resistances
+          type: protection
+          value: Dropping From Negative MP
+        8f623097f9f2a087:
+          _id: 8f623097f9f2a087
+          bonus: '0'
+          hex: false
+          type: resist
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          absent:
+            - down
+        unit: unlimited
+      effectTypes:
+        - resistance
+      executionTime:
+        base: passive
+      form: normal
+      identifier: stamina
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You @Identifier[keyword:resistance]{resist}
+          @Identifier[status:down]{dropping} due to being at negative
+          @Identifier[core:hit-points-and-mana-points]{MP}. You still
+          @Identifier[status:dead]{die} when you reach half your maximum
+          @Identifier[core:hit-points-and-mana-points]{MP} below zero and suffer
+          other consequences from negative
+          @Identifier[core:hit-points-and-mana-points]{MP}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: oPdySVxrQNVz08Wa
+    _key: '!items.effects!fTlBIMR2FitwnudV.oPdySVxrQNVz08Wa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3f51dd55670cbe99
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/slow-regenerating.webp
+    name: Slow Regenerating
+    system:
+      _sup: EwqiwbgycqxMuWho
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+            - revive
+          showConfirmationDialog: true
+          type: common
+        fssE9eYY29PbhNon:
+          _id: fssE9eYY29PbhNon
+          consumeStatDice: false
+          forHarm: false
+          noStatDice: false
+          type: heal
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+        - revival
+      executionTime:
+        base: passive
+      form: normal
+      identifier: slow-regenerating
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Once every 10 minutes, you @Identifier[core:healing]{heal} and
+          regain that many @Identifier[core:hit-points-and-mana-points]{HP}.
+          This does <i>not</i> consume the @Wiki[Core:Hit Die]{hit die}. If you
+          were @Identifier[status:dead]{dead}, this brings you back to live with
+          the number of @Identifier[core:hit-points-and-mana-points]{HP} you
+          rolled.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-5-ranger.webp
+name: Rank 5 Ranger
+system:
+  _sup: 473f20c17be52eb5
+  archetype: semi
+  class: ranger
+  competence:
+    raw: 1
+  description: >-
+    <p>The true wanderer, they are a bit like
+    @Identifier[class:corsair]{Corsairs} of the land. Always on the move and
+    scouting about, rangers never like to have much responsibility if they can
+    help it and prefer to be on their own. Gritty and worn like old leather,
+    these characters are unflinching and realistic at all times. If you are
+    playing a @Identifier[class:ranger]{Ranger}, keep watch, seek solitude, long
+    for the woods and be introspective.</p>
+  identifier: rank-5-ranger
+  innate: false
+  maxAv: 4
+  number: 5
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d10
+    mp:
+      disabled: false
+      formula: 1d10
+type: rank

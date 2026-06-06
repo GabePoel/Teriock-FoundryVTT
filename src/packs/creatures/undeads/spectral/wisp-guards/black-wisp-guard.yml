@@ -1,0 +1,1443 @@
+_id: 2506d7d80f953612
+_key: '!actors!2506d7d80f953612'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.10.23
+folder: 6c73074fd40cac00
+img: systems/teriock/src/icons/creatures/black-wisp-guard.webp
+items:
+  - _id: 2506d7d80f953612
+    _key: '!actors.items!2506d7d80f953612.2506d7d80f953612'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.2506d7d80f953612
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: jl3x2oduKNWEYZoW
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.jl3x2oduKNWEYZoW
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.OJa7qEXpvUsuQzvQ
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/animate-dead.webp
+        name: Animate Dead
+        system:
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: hand
+          duration:
+            unit: instant
+          effectTypes:
+            - reanimation
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+          form: normal
+          identifier: animate-dead
+          interaction: attack
+          invoked: true
+          maneuver: active
+          overview:
+            base: >-
+              <p>Target is @Identifier[status:alive]{alive} (but still
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead})
+              at 1 @Identifier[core:hit-points-and-mana-points]{HP}, although
+              its maximum @Identifier[core:hit-points-and-mana-points]{HP} is
+              halved (minimum of 1) until it completes a
+              @Identifier[core:short-rest]{short rest}. This does not count as a
+              @Wiki[Category:Revival effects]{revival effect}.</p>
+            fluent: <p>Target's @Wiki[Core:HP]{HP} is no longer halved.</p>
+            proficient: >-
+              <p>Target has all @Wiki[Core:HP]{HP} restored, but its maximum
+              @Wiki[Core:HP]{HP} is still halved. This does not count as a
+              @Wiki[Category:Healing effects]{healing effect}.</p>
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          requirements: >-
+            <p>Target is @Identifier[status:dead]{dead} and
+            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: dz2EdGV1nmE3ZRQL
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.dz2EdGV1nmE3ZRQL
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0ab65ceea762bb46
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/attack-resistance.webp
+        name: Attack Resistance
+        system:
+          automations:
+            VYVCQh90IYJBSK1s:
+              _id: VYVCQh90IYJBSK1s
+              category: other
+              relation: resistances
+              type: protection
+              value: Non-Critical Attacks
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              hex: false
+              type: resist
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - resistance
+          executionTime:
+            base: passive
+          form: special
+          identifier: attack-resistance
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:resistance]{resistant} to being hit
+              by non-critical @Identifier[core:attack-interaction]{attacks} when
+              the @Identifier[core:attack-interaction]{attack roll} is less than
+              your @Identifier[core:armor-class]{AC} + 2. If you
+              @Identifier[core:block-interaction]{block} the
+              @Identifier[core:attack-interaction]{attack}, you
+              @Identifier[keyword:resistance]{resist} it if it is less than or
+              equal to your @Identifier[core:armor-class]{AC} +
+              @Identifier[core:block-interaction]{BV} + 2.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: eODHA8d9jIRFS1Se
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.eODHA8d9jIRFS1Se
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2f4f5e357e9b92c7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/ethereal-shift.webp
+        name: Ethereal Shift
+        system:
+          automations:
+            067cb526e2f9e98f:
+              _id: 067cb526e2f9e98f
+              executor: false
+              multi: false
+              relation: include
+              status: ethereal
+              target: false
+              type: status
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: self
+          duration:
+            raw: '1'
+            unit: hour
+          elements:
+            - necromancy
+          executionTime:
+            base: a3
+          form: special
+          identifier: ethereal-shift
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>You go @Identifier[status:ethereal]{Ethereal} or manifest back
+              into the Material Realm.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: 9MKCl1G8Oz3wIiuM
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.9MKCl1G8Oz3wIiuM
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.a609aa9a4e997d71
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/full-undead.webp
+        name: Full Undead
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          form: special
+          identifier: full-undead
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You count as being @Identifier[keyword:undead]{undead} for the
+              purposes of @Pack[teriock.abilities]{abilities},
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage},
+              and other @Wiki[Category:Effects]{effects}. You also gain
+              @Identifier[ability:ethereal-senses]{Ethereal Senses},
+              @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
+              @Identifier[ability:impure-durability]{Impure Durability},
+              @Identifier[ability:mana-drain-grasp]{Mana Drain Grasp},
+              @Identifier[ability:undead-mind]{Undead Mind}, and
+              @Identifier[ability:undying-durability]{Undying
+              Durability}.</p><div class="expandable-table"></div>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: CucaRM6QX6UBTOoC
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.CucaRM6QX6UBTOoC
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a18ca3d154552f3
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/ghostlike.webp
+        name: Ghostlike
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: special
+          identifier: ghostlike
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 5
+        transfer: true
+        type: ability
+      - _id: QboDFbI5s7C3N9F8
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.QboDFbI5s7C3N9F8
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9a5b331aeeff5b
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/incorporeal.webp
+        name: Incorporeal
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.weight.self
+                  priority: 10
+                  target: Actor
+                  type: override
+                  value: '0'
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          form: normal
+          identifier: incorporeal
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You cannot wear
+              @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}
+              and you may pass through non-@Identifier[property:silver]{silver}
+              walls while @Identifier[status:ethereal]{Ethereal}. You are also
+              @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:snared]{snared} and have no weight.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: zlcuh6tf06SXEZQ5
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.zlcuh6tf06SXEZQ5
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-intelligence.webp
+        name: Normal Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-intelligence
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: 0
+        transfer: true
+        type: ability
+      - _id: As9j34MD0wyyX7Kr
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.As9j34MD0wyyX7Kr
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        transfer: true
+        type: ability
+      - _id: KUc3Vc3IypVRKE64
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.KUc3Vc3IypVRKE64
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        transfer: true
+        type: ability
+      - _id: e5gEYrg4K0uchwbS
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.e5gEYrg4K0uchwbS
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1a9a7ab79b2dc14
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/tiny-strength.webp
+        name: Tiny Strength
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: tiny-strength
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -2
+        transfer: true
+        type: ability
+      - _id: ZEZUbeUvfWx4SiXN
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.ZEZUbeUvfWx4SiXN
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/zombify.webp
+        name: Zombify
+        system:
+          automations:
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              changeType: add
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              type: duration
+            838ba57012685987:
+              _id: 838ba57012685987
+              changeType: add
+              competencies:
+                - 2
+              duration:
+                raw: '3600'
+                unit: second
+              type: duration
+            ngQVntiCQ8Ruot8n:
+              _id: ngQVntiCQ8Ruot8n
+              all: false
+              automatic: true
+              competence:
+                raw: 0
+              identifiers:
+                - species:zombie
+              multi: false
+              override:
+                - art
+              overrideCompetence: true
+              reset:
+                - hp
+                - mp
+              ring: false
+              suppress:
+                - body
+                - fluency
+                - rank
+                - species
+              type: transformation
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+          delivery: hand
+          duration:
+            raw: '1'
+            unit: minute
+          effectTypes:
+            - control
+            - reanimation
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
+            of this effect increases by 1 hour.</p>
+          identifier: zombify
+          interaction: attack
+          invoked: true
+          maneuver: active
+          overview:
+            fluent: >-
+              <p>The base duration of this effect is 1 hour and the
+              @Identifier[creature:zombie]{zombie} is a
+              @Identifier[core:minions]{minion} under your command.</p>
+            proficient: <p>[[lookup name]] is @Identifier[keyword:warded]{warded}.</p>
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
+          results:
+            hit: >-
+              <p>Target is reanimated as a @Identifier[creature:zombie]{zombie}.
+              It is not under your command, but is hostile to everyone other
+              than you that is not
+              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{another
+              zombie}. The @Identifier[creature:zombie]{zombie} keeps the
+              @Identifier[core:size]{SIZE} it had before, but loses all other
+              traits and abilities. If the target was already
+              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{some
+              kind of zombie}, then it is reanimated as that type.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: MUSlpIAS46g4a15r
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.MUSlpIAS46g4a15r
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/undying-durability.webp
+        name: Undying Durability
+        system:
+          _sup: 9MKCl1G8Oz3wIiuM
+          automations:
+            HaVjAr78BgQGd92W:
+              _id: HaVjAr78BgQGd92W
+              category: statuses
+              relation: immunities
+              type: protection
+              value: poisoned
+            OlGtbdaImhaj6OiM:
+              _id: OlGtbdaImhaj6OiM
+              category: statuses
+              relation: immunities
+              type: protection
+              value: suffocating
+            W3eMyYlHd3WnCnAm:
+              _id: W3eMyYlHd3WnCnAm
+              category: statuses
+              relation: immunities
+              type: protection
+              value: unconscious
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          form: special
+          identifier: undying-durability
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Identifier[status:unconscious]{unconsciousness},
+              @Identifier[status:suffocating]{suffocating}, and being
+              @Identifier[status:poisoned]{poisoned}. You do not
+              @Identifier[status:down]{drop} due to being at negative
+              @Identifier[core:hit-points-and-mana-points]{HP}. You still
+              @Identifier[status:dead]{die} when you reach half your maximum
+              @Identifier[core:hit-points-and-mana-points]{HP} below zero. You
+              also do not have to @Identifier[core:drowning]{breathe}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: uSUq63nV0hvZIe2o
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.uSUq63nV0hvZIe2o
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+        name: Healing Sensitivity
+        system:
+          _sup: 9MKCl1G8Oz3wIiuM
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: healing-sensitivity
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>@Identifier[core:healing]{Healing} can be used to
+              @Identifier[core:damage]{damage} you. If the creature providing
+              you @Identifier[core:healing]{healing} specifies that they are
+              doing so "for damage" then you roll your <i>largest</i>
+              @Wiki[Core:HP]{hit die} and take that much
+              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
+              damage} instead of the normal @Identifier[core:healing]{healing}
+              effect. This does not consume any of your @Wiki[Core:HP]{hit
+              dice}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: tvtVQL8E6z4YSM9O
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.tvtVQL8E6z4YSM9O
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/impure-durability.webp
+        name: Impure Durability
+        system:
+          _sup: 9MKCl1G8Oz3wIiuM
+          automations:
+            uevhIJEJYaY0sz5X:
+              _id: uevhIJEJYaY0sz5X
+              category: other
+              relation: immunities
+              type: protection
+              value: Non-Magical Non-Silver Damage
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          form: special
+          identifier: impure-durability
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              non-@Identifier[damage:magic]{magic}
+              non-@Identifier[damage:silver]{silver}
+              @Identifier[core:damage]{damage}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: P8zdYbHe8MVTQdDz
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.P8zdYbHe8MVTQdDz
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/undead-mind.webp
+        name: Undead Mind
+        system:
+          _sup: 9MKCl1G8Oz3wIiuM
+          automations:
+            EEiHRIyCxZhUuw07:
+              _id: EEiHRIyCxZhUuw07
+              category: statuses
+              relation: immunities
+              type: protection
+              value: charmed
+            Glnnr440sVehTfZ5:
+              _id: Glnnr440sVehTfZ5
+              category: statuses
+              relation: immunities
+              type: protection
+              value: frightened
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          form: special
+          identifier: undead-mind
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:frightened]{frightened} and
+              @Identifier[status:charmed]{charmed}. The effects of [[lookup
+              name]] are maintained even if
+              @Identifier[status:transformed]{transformed}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: xFkFRbbEb8MFFkPk
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.xFkFRbbEb8MFFkPk
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+        name: Ethereal Senses
+        system:
+          _sup: 9MKCl1G8Oz3wIiuM
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '120'
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - sensory
+          elements:
+            - necromancy
+          executionTime:
+            base: passive
+          form: normal
+          identifier: ethereal-senses
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see and hear spirits and
+              @Identifier[status:ethereal]{Ethereal} creatures within 120
+              feet.</p>
+          powerSources:
+            - magical
+            - primal
+            - spiritual
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: AQlfq5dmKnQpfXJj
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.2506d7d80f953612.AQlfq5dmKnQpfXJj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
+        name: Mana Drain Grasp
+        system:
+          _sup: 9MKCl1G8Oz3wIiuM
+          automations:
+            iAyFzPzJgTNeDbbH:
+              _id: iAyFzPzJgTNeDbbH
+              consumeStatDice: true
+              forHarm: false
+              type: revitalize
+            157afc517847f562:
+              _id: 157afc517847f562
+              formula: 1d8[mana]
+              impact: drain
+              type: roll
+          competence:
+            raw: 0
+          delivery: hand
+          duration:
+            unit: instant
+          effectTypes:
+            - draining
+            - revitalization
+          executionTime:
+            base: a2
+          form: special
+          identifier: mana-drain-grasp
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          results:
+            critHit: >-
+              <p>Deal [[/drain 2d8[mana]]]
+              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+              to the target. If this @Identifier[status:dead]{kills} the target,
+              you @Identifier[core:revitalizing]{revitalize} twice. This
+              @Identifier[core:revitalizing]{revitalization} is the only part of
+              this that is a @Wiki[Category:Revitalization
+              effects]{revitalization effect}.</p>
+            hit: >-
+              <p>Deal [[/drain 1d8[mana]]]
+              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+              to the target. If this @Identifier[status:dead]{kills} the target,
+              you @Identifier[core:revitalizing]{revitalize}.  This
+              @Identifier[core:revitalizing]{revitalization} is the only part of
+              this that is a @Wiki[Category:Revitalization
+              effects]{revitalization effect}.</p>
+          targets:
+            - creature
+        transfer: true
+        type: ability
+    folder: 6c73074fd40cac00
+    img: systems/teriock/src/icons/creatures/black-wisp-guard.webp
+    name: Black Wisp Guard
+    system:
+      appearance: <p>Floating black lights.</p>
+      br: 10
+      competence:
+        raw: 1
+      description: >-
+        <p>These lights are used to keep
+        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}
+        armies up and running. They have no attacks except
+        @Wiki[Category:Spells]{spells}, but are very hard to deal with.</p>
+      identifier: black-wisp-guard
+      innateRanks: >-
+        <p>Innately @Pack[teriock.classes]{rank} 1
+        @Identifier[class:necromancer]{Necromancer}.</p>
+      size:
+        enabled: true
+        value: 0.25
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d6
+        mp:
+          disabled: false
+          formula: 1d10
+      traits:
+        - undead
+      transformation:
+        img: systems/teriock/src/icons/tokens/black-wisp-guard.webp
+        ring: true
+    type: species
+  - _id: uUpnw73Rc4H79W4a
+    _key: '!actors.items!2506d7d80f953612.uUpnw73Rc4H79W4a'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.2bd7d6c9b89adbcf
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: Q3bElOKJWjw3DI9t
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.uUpnw73Rc4H79W4a.Q3bElOKJWjw3DI9t
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.b231c43502dd9d39
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/death-ray.webp
+        name: Death Ray
+        system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - bag
+              showConfirmationDialog: true
+              type: common
+            71e51b18552837f1:
+              _id: 71e51b18552837f1
+              formula: (2 + @h)d6
+              impact: kill
+              type: roll
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            unit: instant
+          effectTypes:
+            - killing
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an
+            additional [[/kill 1d6]].</p>
+          identifier: death-ray
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          requirements: >-
+            <p>Target is neither @Identifier[status:dead]{dead} nor
+            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
+          results:
+            critHit: <p>Double the number of dice rolled.</p>
+            hit: >-
+              <p>Roll [[/kill 2d6]] if this is greater than or equal to the
+              number of @Wiki[Core:HP]{HP} the target has, they
+              @Identifier[status:dead]{die}. This does not deal
+              @Identifier[core:damage]{damage}.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: 15t1ifTnUgXbHDY7
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.uUpnw73Rc4H79W4a.15t1ifTnUgXbHDY7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.cb297af126bd9530
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/spirit-guide.webp
+        name: Spirit Guide
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.ethereal
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '120'
+              type: changes
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+          delivery: sight
+          duration:
+            raw: '24'
+            unit: hour
+          effectTypes:
+            - sensory
+          elements:
+            - necromancy
+          executionTime:
+            base: 10 Minutes
+            slow:
+              raw: '10'
+              unit: minute
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
+            target an additional creature.</p>
+          identifier: spirit-guide
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>You can see, hear, and speak to spirits and
+              @Identifier[status:ethereal]{Ethereal} creatures within 120
+              feet.</p>
+            fluent: >-
+              <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+              with @Wiki[Category:Spiritually powered abilities]{spiritual}
+              @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+              @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
+            proficient: >-
+              <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+              with @Wiki[Category:Necromancy element abilities]{necromancy}
+              @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+              @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
+          powerSources:
+            - magical
+          range:
+            raw: '5'
+            unit: ft
+          requirements: >-
+            <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may
+            only target yourself.</p>
+          ritual: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: 6ouKT638ARM4Cphm
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.uUpnw73Rc4H79W4a.6ouKT638ARM4Cphm
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e03c8211ae426819
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/summon-the-dead.webp
+        name: Summon the Dead
+        system:
+          competence:
+            raw: 0
+          costs:
+            primary:
+              hp:
+                description: >-
+                  <p>[[lookup name]] costs 0
+                  @Identifier[core:hit-points-and-mana-points]{HP} if the body
+                  is in your possession. Otherwise, it costs 3
+                  @Identifier[core:hit-points-and-mana-points]{HP} per
+                  @Identifier[core:size]{size} of the body.</p>
+                type: description
+              mp:
+                description: >-
+                  <p>[[lookup name]] costs 0
+                  @Identifier[core:hit-points-and-mana-points]{MP} if the body
+                  is in your possession. Otherwise, it costs 2
+                  @Identifier[core:hit-points-and-mana-points]{MP} per
+                  @Identifier[core:size]{size} of the body.</p>
+                type: description
+          delivery: sight
+          duration:
+            unit: instant
+          effectTypes:
+            - summoning
+          elements:
+            - necromancy
+          executionTime:
+            base: 10 Minutes
+            slow:
+              raw: '10'
+              unit: minute
+          form: normal
+          identifier: summon-the-dead
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>If you have the body of the target in your possession, you can
+              put the spirit back into its body such that it is no longer
+              @Identifier[status:wisping]{wisping}. The body maintains all
+              damage it had when it died.</p>
+            proficient: >-
+              <p>If the body is thoroughly damaged (such as if it's
+              @Identifier[status:ruined]{ruined}) or missing entirely, you can
+              expend some of your own life force to recreate the body from the
+              spirit for additional
+              @Identifier[core:hit-points-and-mana-points]{MP} and
+              @Identifier[core:hit-points-and-mana-points]{HP}. The creature is
+              still dead, but the body is now intact.</p>
+          powerSources:
+            - magical
+            - primal
+            - spiritual
+          range:
+            raw: '5'
+            unit: ft
+          requirements: <p>Target must be @Identifier[status:wisping]{wisping}.</p>
+          ritual: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: epbHgxy8x6bO3jkQ
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.uUpnw73Rc4H79W4a.epbHgxy8x6bO3jkQ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c86ef5877a48d710
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/terror-ball.webp
+        name: Terror Ball
+        system:
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d4[magic terror]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          elements:
+            - necromancy
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic terror]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: terror-ball
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: '30'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[terror magic]]]
+              @Identifier[core:damage]{damage} to target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+    folder: 6c73074fd40cac00
+    img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
+    name: Rank 1 Necromancer
+    system:
+      _sup: 2506d7d80f953612
+      archetype: mage
+      class: necromancer
+      competence:
+        raw: 1
+      description: >-
+        <p>The true dealer of death,
+        @Identifier[class:necromancer]{Necromancers} are most at home in the
+        cemetery digging up future minions. Shunned by most of society, these
+        dark mages are not necessarily evil, they simply see death as full of
+        potential energy while others see it as the end of life.
+        @Identifier[class:necromancer]{Necromancers} fear nothing, as they are
+        always facing death. If you are playing a
+        @Identifier[class:necromancer]{Necromancer} be unafraid, kill without
+        remorse and be interested in @Identifier[status:dead]{dead} bodies,
+        close to death yourself, almost in another world.</p>
+      identifier: rank-1-necromancer
+      innate: false
+      maxAv: 0
+      number: 1
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d8
+        mp:
+          disabled: false
+          formula: 1d12
+    type: rank
+  - _id: wr9TINDsAQIKoDsy
+    _key: '!actors.items!2506d7d80f953612.wr9TINDsAQIKoDsy'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: NGCuRUaVtXnxAbRe
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.wr9TINDsAQIKoDsy.NGCuRUaVtXnxAbRe
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/arcane-ray.webp
+        name: Arcane Ray
+        system:
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d4[magic]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: arcane-ray
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
+              target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: aCWLNsvSFjEuLTyl
+        _key: >-
+          !actors.items.effects!2506d7d80f953612.wr9TINDsAQIKoDsy.aCWLNsvSFjEuLTyl
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/staff-touch.webp
+        name: Staff Touch
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: staff-touch
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You may use your @Identifier[property:magelore]{magelore} items
+              as though they were your @Identifier[body:hand]{hand}. This makes
+              them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not
+              @Identifier[core:proficiency-bonus]{proficient} nor
+              @Identifier[core:fluency-bonus]{fluent} with
+              @Pack[teriock.abilities]{abilities} you use through your
+              @Identifier[property:magelore]{magelore} items.</p>
+            fluent: >-
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
+              @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
+            proficient: >-
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
+              an @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 4a095aaed0254ec3
+    img: systems/teriock/src/icons/archetypes/mage.webp
+    name: Mage
+    system:
+      competence:
+        raw: 1
+      description: >-
+        <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical
+        spells} and each class has a different approach, but are generally all
+        quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most
+        mages prefer to hang back and cast at their enemies from afar or use
+        their magic to control the flow of a battle while avoiding messy
+        melees.</p>
+      identifier: mage
+    type: archetype
+name: Black Wisp Guard
+prototypeToken:
+  actorLink: false
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 0.5
+  name: Black Wisp Guard
+  ring:
+    enabled: true
+    subject:
+      texture: systems/teriock/src/icons/tokens/black-wisp-guard.webp
+  texture:
+    src: systems/teriock/src/icons/creatures/black-wisp-guard.webp
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 0.5
+system:
+  hp:
+    value: 4
+  identifier: black-wisp-guard
+  initiative: 1d20 + @mov
+  mp:
+    value: 6
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+  size:
+    number:
+      raw: '0.25'
+type: creature

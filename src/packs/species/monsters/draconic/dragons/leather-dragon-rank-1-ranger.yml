@@ -1,0 +1,336 @@
+_id: N92gKyLMFokW3Z8z
+_key: '!items!N92gKyLMFokW3Z8z'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.de2a1bad3473cd31
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: r2w21pFuh00q2GxO
+    _key: '!items.effects!N92gKyLMFokW3Z8z.r2w21pFuh00q2GxO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.eae89799c230fd18
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/endure.webp
+    name: Endure
+    system:
+      automations:
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          hacks:
+            - arm
+            - leg
+          reverse: false
+          type: hacks
+      competence:
+        raw: 0
+      costs:
+        components:
+          hack:
+            type: tag
+      delivery: self
+      duration:
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime:
+        base: r1
+      form: normal
+      identifier: endure
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You take the triggering @Identifier[core:damage]{damage} as a
+          @Identifier[damage:hack]{limb hack} instead. All
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
+          types} still apply. If the hit was critical, you instead take it as
+          <i>two</i> @Identifier[damage:hack]{limb hacks}. If you attempted to
+          @Identifier[core:block-interaction]{block} the triggering
+          @Identifier[core:attack-interaction]{attack}, then a limb that
+          @Identifier[keyword:using]{used} whatever @Wiki[Category:Items]{item}
+          you @Identifier[core:block-interaction]{blocked} with is the one
+          that's @Identifier[damage:hack]{hacked}. Otherwise, if the
+          @Identifier[core:damage]{damage} was dealt by a creature, they choose
+          which limb is affected. If not, it is random. Only an
+          un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+          that's not possible, you take the @Identifier[core:damage]{damage}
+          normally.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: >-
+        <p>You are hit by an @Identifier[core:attack-interaction]{attack} that
+        would @Identifier[core:damage]{damage} you.</p>
+    transfer: true
+    type: ability
+  - _id: vYfWfB2gqCDhVYD9
+    _key: '!items.effects!N92gKyLMFokW3Z8z.vYfWfB2gqCDhVYD9'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3RmQZ2V83ob5T8p7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/scouting.webp
+    name: Scouting
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      form: normal
+      identifier: scouting
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You have @Identifier[core:advantage]{advantage} on checks made with
+          @Identifier[ability:perceive]{Perceive}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: per
+          value: 1
+        score:
+          attribute: per
+          value: 2
+    transfer: true
+    type: ability
+  - _id: z25LqcqD6c28mo5v
+    _key: '!items.effects!N92gKyLMFokW3Z8z.z25LqcqD6c28mo5v'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/snare.webp
+    name: Snare
+    system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: end
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 0
+          override:
+            combat: true
+          type: expiration
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 1
+              time: end
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 1
+          override:
+            combat: true
+          type: expiration
+        5d57231066693cee:
+          _id: 5d57231066693cee
+          executor: false
+          multi: false
+          relation: include
+          status: snared
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: unlimited
+      endCondition: >-
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: snare
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+      skill: true
+      standard: true
+      targets:
+        - leg
+    transfer: true
+    type: ability
+  - _id: 73XTtMsKQjCbNICt
+    _key: '!items.effects!N92gKyLMFokW3Z8z.73XTtMsKQjCbNICt'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9e85800d3700e31c
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/track.webp
+    name: Track
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.tracker.score
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '2'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      form: normal
+      identifier: track
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @Identifier[keyword:expertise]{expert}
+          @Identifier[tradecraft:tracker]{tracker}. In addition, you gain
+          @Identifier[ability:agile]{Agile} outside towns and other urban
+          areas.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 1
+    transfer: true
+    type: ability
+  - _id: aEhW7IFLQxhx1QHK
+    _key: '!items.effects!N92gKyLMFokW3Z8z.aEhW7IFLQxhx1QHK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0S4l1JqVpE7OUDZL
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/agile.webp
+    name: Agile
+    system:
+      _sup: 73XTtMsKQjCbNICt
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.difficultTerrain
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '3'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      form: normal
+      identifier: agile
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You walk through difficult terrain at
+          @Identifier[core:movement-speed]{normal speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-1-ranger.webp
+name: Rank 1 Ranger
+system:
+  _sup: 473f20c17be52eb5
+  archetype: semi
+  class: ranger
+  competence:
+    raw: 1
+  description: >-
+    <p>The true wanderer, they are a bit like
+    @Identifier[class:corsair]{Corsairs} of the land. Always on the move and
+    scouting about, rangers never like to have much responsibility if they can
+    help it and prefer to be on their own. Gritty and worn like old leather,
+    these characters are unflinching and realistic at all times. If you are
+    playing a @Identifier[class:ranger]{Ranger}, keep watch, seek solitude, long
+    for the woods and be introspective.</p>
+  identifier: rank-1-ranger
+  innate: false
+  maxAv: 4
+  number: 1
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d10
+    mp:
+      disabled: false
+      formula: 1d10
+type: rank

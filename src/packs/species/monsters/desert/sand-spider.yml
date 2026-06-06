@@ -1,0 +1,569 @@
+_id: 51b2335d4c46567c
+_key: '!items!51b2335d4c46567c'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.84
+effects:
+  - _id: pBaBf8K790AmQL4M
+    _key: '!items.effects!51b2335d4c46567c.pBaBf8K790AmQL4M'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.bc223260c6f1bc70
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/acidic-blood.webp
+    name: Acidic Blood
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - automatic
+      executionTime:
+        base: passive
+      form: normal
+      identifier: acidic-blood
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Any
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          that deals @Identifier[core:damage]{damage} to you becomes
+          @Identifier[property:shattered]{shattered} at the start of your next
+          @Identifier[core:turns]{turn}.</p>
+      powerSources:
+        - alchemical
+      range:
+        unit: self
+      targets:
+        - self
+      trigger: >-
+        <p>This triggers automatically. You cannot choose to not use it if you
+        are able to.</p>
+    transfer: true
+    type: ability
+  - _id: 9aabqe1mzCvxjhkj
+    _key: '!items.effects!51b2335d4c46567c.9aabqe1mzCvxjhkj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6009ce878b1e6034
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/digging.webp
+    name: Digging
+    system:
+      automations:
+        FOlLD1aYRsK1avAw:
+          _id: FOlLD1aYRsK1avAw
+          movementAction: burrow
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.dig
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '1'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      form: normal
+      identifier: digging
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You dig at @Identifier[core:movement-speed]{quarter speed}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 40zFeJ022vFppA1t
+    _key: '!items.effects!51b2335d4c46567c.40zFeJ022vFppA1t'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9df212d89cab196d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/hide.webp
+    name: Hide
+    system:
+      automations:
+        Hd5o6s1SdA8C7IfT:
+          _id: Hd5o6s1SdA8C7IfT
+          preventEffect: false
+          preventFeat: false
+          preventThreshold: true
+          type: modifyEffect
+        0b0d1426453abb55:
+          _id: 0b0d1426453abb55
+          executor: false
+          multi: false
+          relation: apply
+          status: hidden
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: instant
+      executionTime:
+        base: a1
+      featSaveAttribute: snk
+      form: normal
+      identifier: hide
+      interaction: feat
+      limitation: <p>In sand only.</p>
+      maneuver: active
+      overview:
+        base: >-
+          <p>You become @Identifier[status:hidden]{hidden}. If the result of
+          your @Identifier[core:sneak]{SNK}
+          @Identifier[core:feat-interaction]{save} is greater than your
+          @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}
+          (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your
+          hidden DC. If not, use your @Wiki[Core:Passive Attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: >-
+        <p>You are in a location with shadows, dim light,
+        @Identifier[core:cover]{three-quarters cover}, or some other feature
+        which the @Identifier[core:game-master]{GM} determines is appropriate
+        for being @Identifier[status:hidden]{hidden}. You must remain in areas
+        that maintain these conditions to stay
+        @Identifier[status:hidden]{hidden}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: snk
+          value: 1
+        score:
+          attribute: snk
+          value: 2
+    transfer: true
+    type: ability
+  - _id: bL4keZFsrwq0qCUD
+    _key: '!items.effects!51b2335d4c46567c.bL4keZFsrwq0qCUD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.49da45aecffdba52
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/maul.webp
+    name: Maul
+    system:
+      automations:
+        a8f16680cc9e1162:
+          _id: a8f16680cc9e1162
+          executor: false
+          multi: false
+          relation: include
+          status: terrored
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        conditions:
+          present:
+            - down
+        unit: unlimited
+      endCondition: <p>Target is @Identifier[status:up]{up}.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: maul
+      interaction: attack
+      maneuver: active
+      overview:
+        base: <p>Target is @Identifier[status:terrored]{terrored}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      requirements: <p>Target is @Identifier[status:down]{down}.</p>
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: ue4XoPL29vCPXLeD
+    _key: '!items.effects!51b2335d4c46567c.ue4XoPL29vCPXLeD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: normal-movement
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    transfer: true
+    type: ability
+  - _id: kT2kVEepjMHgkguE
+    _key: '!items.effects!51b2335d4c46567c.kT2kVEepjMHgkguE'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: normal-perception
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    transfer: true
+    type: ability
+  - _id: PPBlx5vD9f3M4S6f
+    _key: '!items.effects!51b2335d4c46567c.PPBlx5vD9f3M4S6f'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.14d28d6322eec2ff
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/normal-strength.webp
+    name: Normal Strength
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: normal-strength
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 0
+    transfer: true
+    type: ability
+  - _id: 83l4waK24YTc8UGb
+    _key: '!items.effects!51b2335d4c46567c.83l4waK24YTc8UGb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/snare.webp
+    name: Snare
+    system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: end
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 0
+          override:
+            combat: true
+          type: expiration
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 1
+              time: end
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 1
+          override:
+            combat: true
+          type: expiration
+        5d57231066693cee:
+          _id: 5d57231066693cee
+          executor: false
+          multi: false
+          relation: include
+          status: snared
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: unlimited
+      endCondition: >-
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: snare
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+      skill: true
+      standard: true
+      targets:
+        - leg
+    transfer: true
+    type: ability
+  - _id: Yns9mBwJ1NXW8zNR
+    _key: '!items.effects!51b2335d4c46567c.Yns9mBwJ1NXW8zNR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e2ede5b6049bda5a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/sneaky.webp
+    name: Sneaky
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: sneaky
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 1
+    transfer: true
+    type: ability
+  - _id: aWgHHVGGOWf2cvcv
+    _key: '!items.effects!51b2335d4c46567c.aWgHHVGGOWf2cvcv'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8264868fae988d5b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/web-capture.webp
+    name: Web Capture
+    system:
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        conditions:
+          present:
+            - down
+        unit: unlimited
+      executionTime:
+        base: a2
+      form: normal
+      identifier: web-capture
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target is @Identifier[status:snared]{snared} and
+          @Identifier[status:terrored]{terrored}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: Jv3afWuzEXuvlNXX
+    _key: '!items.effects!51b2335d4c46567c.Jv3afWuzEXuvlNXX'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.f38bdb084e8eed6f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/web-packet.webp
+    name: Web Packet
+    system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: end
+              trigger: turn
+            who:
+              type: target
+          override:
+            combat: true
+          type: expiration
+        5d57231066693cee:
+          _id: 5d57231066693cee
+          executor: false
+          multi: false
+          relation: include
+          status: snared
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: missile
+      duration:
+        unit: instant
+      endCondition: >-
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: web-packet
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - martial
+      range:
+        raw: '60'
+        unit: ft
+      results:
+        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: 8185a98b7551093c
+img: systems/teriock/src/icons/creatures/sand-spider.webp
+name: Sand Spider
+system:
+  appearance: <p>Large yellow sand-colored @Wiki[Category:Spiders]{spiders}.</p>
+  br: 6
+  competence:
+    raw: 1
+  description: <p>Sand spiders are usually found in large colonies.</p>
+  identifier: sand-spider
+  size:
+    enabled: true
+    value: 2
+  statDice:
+    hp:
+      disabled: false
+      faces: 8
+      number:
+        raw: '2'
+    mp:
+      disabled: false
+      faces: 4
+      number:
+        raw: '1'
+  transformation:
+    img: systems/teriock/src/icons/tokens/sand-spider.webp
+    ring: true
+type: species

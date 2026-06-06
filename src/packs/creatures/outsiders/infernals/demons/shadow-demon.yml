@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: PZjRo1jllLNhl9aO
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/encroaching-touch.webp
         name: Encroaching Touch
         system:
@@ -43,7 +43,7 @@ items:
           overview:
             base: >-
               <p>You may use your melee items as though they were your
-              @Pack[teriock.equipment]{hand}. You are not
+              @Identifier[equipment:hand]{hand}. You are not
               @Identifier[core:proficiency-bonus]{proficient} nor
               @Identifier[core:fluency-bonus]{fluent} with
               @Pack[teriock.abilities]{abilities} you use through your
@@ -75,7 +75,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -141,10 +141,15 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
+          automations:
+            tS17fIFj24KkwiGX:
+              _id: tS17fIFj24KkwiGX
+              identifier: property:cumbersome
+              type: suppress
           competence:
             raw: 0
           delivery: self
@@ -184,7 +189,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -230,7 +235,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/hack.webp
         name: Hack
         system:
@@ -289,7 +294,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/necromancy-magic-adept.webp
         name: Necromancy Magic Adept
         system:
@@ -337,7 +342,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -372,7 +377,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -407,7 +412,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
         name: Outsider Regenerating
         system:
@@ -476,7 +481,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/shattering-armor.webp
         name: Shattering Armor
         system:
@@ -515,7 +520,7 @@ items:
           results:
             save: >-
               <p>@Pack[teriock.equipment]{Equipment} that delivers
-              @Wiki[Category:Attack abilities]{attack} you
+              @Identifier[core:attack-interaction]{attack} you
               @Identifier[core:block-interaction]{block} becomes
               @Identifier[property:shattered]{shattered}.</p>
           targets:
@@ -530,7 +535,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/slay.webp
         name: Slay
         system:
@@ -579,10 +584,10 @@ items:
               <p>Target takes an additional [[/damage 5[lethal]]]
               @Identifier[core:damage]{damage}. This also has all
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
-              types} of the triggering @Wiki[Category:Attack abilities]{attack}.
-              If the triggering @Wiki[Category:Attack abilities]{attack} was a
-              critical hit, this deals 10 @Identifier[core:damage]{damage}
-              instead.</p>
+              types} of the triggering
+              @Identifier[core:attack-interaction]{attack}. If the triggering
+              @Identifier[core:attack-interaction]{attack} was a critical hit,
+              this deals 10 @Identifier[core:damage]{damage} instead.</p>
           powerSources:
             - martial
           range:
@@ -592,9 +597,9 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>You have just hit a creature with an @Wiki[Category:Attack
-            abilities]{attack} that dealt them @Identifier[core:damage]{damage}
-            from it.</p>
+            <p>You have just hit a creature with an
+            @Identifier[core:attack-interaction]{attack} that dealt them
+            @Identifier[core:damage]{damage} from it.</p>
         transfer: true
         type: ability
       - _id: 5ZRLUNywFx0bMc09
@@ -605,7 +610,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/very-high-intelligence.webp
         name: Very High Intelligence
         system:
@@ -640,7 +645,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -680,7 +685,7 @@ items:
           trigger: >-
             <p>You have hit a creature with a @Wiki[Category:Damaging
             effects]{damaging} melee @Wiki[Category:Weapon delivery
-            abilities]{weapon} @Wiki[Category:Attack abilities]{attack}.</p>
+            abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
         transfer: true
         type: ability
       - _id: cHIHf1T40EWitI52
@@ -691,7 +696,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -735,7 +740,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -780,7 +785,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -818,7 +823,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -863,7 +868,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -916,7 +921,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -962,7 +967,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -1018,7 +1023,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -1083,7 +1088,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -1186,7 +1191,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: pNwuDfcrz8c1MBq1
         _key: >-
@@ -1196,7 +1201,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1222,7 +1227,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1247,7 +1252,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1257,7 +1262,7 @@ items:
             raw: 0
           description: >-
             <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
-            @Wiki[Category:Attack abilities]{attack}.</p>
+            @Identifier[core:attack-interaction]{attack}.</p>
           form: intrinsic
           identifier: weapon
         transfer: true
@@ -1270,7 +1275,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -1325,7 +1330,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -1335,7 +1340,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1359,7 +1364,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1385,7 +1390,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1395,7 +1400,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
+            used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1428,7 +1434,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1438,7 +1444,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1462,7 +1468,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1472,7 +1478,8 @@ items:
             raw: 0
           description: >-
             <p>An item with this property is easily concealed and can often be
-            used in the same hand as a @Wiki[Category:Shields]{shield}.</p>
+            used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
           form: intrinsic
           identifier: small
         transfer: true
@@ -1504,7 +1511,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     folder: c602ce7a824494c1
     img: systems/teriock/src/icons/body-parts/hardened-hide.webp
     name: Hardened Hide
@@ -1534,7 +1541,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: Q3bElOKJWjw3DI9t
         _key: >-
@@ -1544,7 +1551,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -1588,7 +1595,7 @@ items:
             unit: ft
           requirements: >-
             <p>Target is neither @Identifier[status:dead]{dead} nor
-            @Wiki[Category:Undead creatures]{undead}.</p>
+            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           results:
             critHit: <p>Double the number of dice rolled.</p>
             hit: >-
@@ -1610,7 +1617,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/spirit-guide.webp
         name: Spirit Guide
         system:
@@ -1692,7 +1699,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/summon-the-dead.webp
         name: Summon the Dead
         system:
@@ -1769,7 +1776,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/terror-ball.webp
         name: Terror Ball
         system:
@@ -1858,7 +1865,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: cCxUqjkZ41n5NbD3
         _key: >-
@@ -1868,7 +1875,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         flags:
           teriock:
             category: combat
@@ -1926,7 +1933,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         flags:
           teriock:
             category: support
@@ -1984,7 +1991,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/spell-strike.webp
         name: Spell Strike
         system:
@@ -2026,8 +2033,8 @@ items:
           trigger: >-
             <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
             abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
-            @Wiki[Category:Attack abilities]{attack} on another creature and the
-            effect has successfully applied.</p>
+            @Identifier[core:attack-interaction]{attack} on another creature and
+            the effect has successfully applied.</p>
         transfer: true
         type: ability
     folder: c602ce7a824494c1
@@ -2069,7 +2076,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: Tn5EQuAwOZUq3KZv
         _key: >-
@@ -2079,7 +2086,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         flags:
           teriock:
             category: combat
@@ -2127,7 +2134,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         flags:
           teriock:
             category: support
@@ -2185,18 +2192,19 @@ items:
               learn @Wiki[Category:Rotator spells]{spells} created by others.
               When you come across a fully created spell using only words you
               are @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 +
-              OP @Wiki[Core:INT]{INT} @Identifier[core:feat-interaction]{feat
-              save} to attempt to learn it over the course of a
-              @Identifier[core:long-rest]{long rest}. If you succeed, you can
-              add it to your rotator spell list. If you fail, you are
-              @Identifier[keyword:incapable]{incapable} of attempting to learn
-              that spell again. The @Identifier[core:game-master]{GM} may modify
-              the DC based on the spell's complexity, your knowledge of the
-              spell, any special training you receive, if the spell's creator is
-              there to assist you, or for any other factors they see fit. You
-              may also attempt to learn words that you come across as long as
-              they are of elements you are
-              @Identifier[core:fluency-bonus]{fluent} in. The
+              @Identifier[core:elder-sorcery]{OP}
+              @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save} to attempt to learn
+              it over the course of a @Identifier[core:long-rest]{long rest}. If
+              you succeed, you can add it to your rotator spell list. If you
+              fail, you are @Identifier[keyword:incapable]{incapable} of
+              attempting to learn that spell again. The
+              @Identifier[core:game-master]{GM} may modify the DC based on the
+              spell's complexity, your knowledge of the spell, any special
+              training you receive, if the spell's creator is there to assist
+              you, or for any other factors they see fit. You may also attempt
+              to learn words that you come across as long as they are of
+              elements you are @Identifier[core:fluency-bonus]{fluent} in. The
               @Identifier[core:game-master]{GM} may adjust the DC for these as
               they see fit as well, but the default is DC 15 + OP
               @Identifier[core:intelligence]{INT}
@@ -2232,7 +2240,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/augment-undead.webp
         name: Augment Undead
         system:
@@ -2266,7 +2274,9 @@ items:
             unit: hour
           elements:
             - necromancy
-          endCondition: <p>Target is no longer @Wiki[Category:Undead creatures]{undead}.</p>
+          endCondition: >-
+            <p>Target is no longer
+            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           executionTime:
             base: 10 Minutes
             slow:
@@ -2279,7 +2289,8 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>Target gains 1 @Wiki[Core:Common Undead Abilities]{common
+              <p>Target gains 1
+              @UUID[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f]{common
               undead ability} of your
               choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
               rollable]</p>
@@ -2288,7 +2299,9 @@ items:
           range:
             raw: '5'
             unit: ft
-          requirements: <p>Target is @Wiki[Category:Undead creatures]{undead}.</p>
+          requirements: >-
+            <p>Target is
+            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           ritual: true
           rotator: true
           spell: true
@@ -2305,7 +2318,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/spirit-pact.webp
         name: Spirit Pact
         system:
@@ -2355,20 +2368,21 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>You make a pact with some spirit, @Wiki[Category:Elemental
-              creatures]{elemental}, @Wiki[Category:Demons]{demon},
-              @Wiki[Category:Outsider creatures]{outsider}, or other
-              supernatural being. In doing this, you are free to offer some sort
-              of vow or sacrifice to the entity in question, but you do not have
-              to. If the entity is interested in making a pact with you, they
-              will offer you one that you can choose to either accept or reject.
-              If you accept, you gain the benefits of the pact, but you must
-              also fulfill its terms and live with the consequences of your
-              choice. If you reject the pact, then you may not attempt to make
-              another pact for at least 24 hours. The entity that you rejected
-              is aware that you have rejected their offer and may not offer you
-              another pact. Rather, they have likely taken offense to your
-              rejection and may seek to punish you for it. When the pact is
+              <p>You make a pact with some spirit,
+              @UUID[Compendium.teriock.tables.RollTable.515508e582a2a4db]{elemental},
+              @UUID[Compendium.teriock.tables.RollTable.c602ce7a824494c1]{demon},
+              @UUID[Compendium.teriock.tables.RollTable.79f4002c872a73c3]{outsider},
+              or other supernatural being. In doing this, you are free to offer
+              some sort of vow or sacrifice to the entity in question, but you
+              do not have to. If the entity is interested in making a pact with
+              you, they will offer you one that you can choose to either accept
+              or reject. If you accept, you gain the benefits of the pact, but
+              you must also fulfill its terms and live with the consequences of
+              your choice. If you reject the pact, then you may not attempt to
+              make another pact for at least 24 hours. The entity that you
+              rejected is aware that you have rejected their offer and may not
+              offer you another pact. Rather, they have likely taken offense to
+              your rejection and may seek to punish you for it. When the pact is
               offered, you may not ask any clarifying questions, and you must
               accept or reject the pact as it is offered.</p>
             fluent: >-
@@ -2435,7 +2449,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: JFQwPusSGXNlFxzg
         _key: >-
@@ -2445,7 +2459,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
         name: Necromancy Elder Sorcery
         system:
@@ -2485,7 +2499,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
         name: Necromancy Rotators
         system:
@@ -2587,7 +2601,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
         name: Celestial Elder Sorcery Words
         system:
@@ -2969,7 +2983,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: >-
           systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
         name: Necromancy Elder Sorcery Words
@@ -3130,7 +3144,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         name: Elder Sorcery Creation
         system:
@@ -3147,14 +3161,18 @@ items:
             primary:
               hp:
                 description: >-
-                  <p>Creation cost is at least 3 × @Wiki[Core:HP]{HP} of the
-                  spell itself.</p>
+                  <p>Creation cost is at least 3 ×
+                  @Identifier[core:hit-points-and-mana-points]{HP} of the spell
+                  itself.</p>
                 type: description
               mp:
                 description: >-
-                  <p>Creation cost is at least 1 @Wiki[Core:MP]{MP} per
+                  <p>Creation cost is at least 1
+                  @Identifier[core:hit-points-and-mana-points]{MP} per
                   @Identifier[core:elder-sorcery]{OP} of <i>each</i> word in the
-                  spell plus 3 × @Wiki[Core:MP]{MP} of the spell itself.</p>
+                  spell plus 3 ×
+                  @Identifier[core:hit-points-and-mana-points]{MP} of the spell
+                  itself.</p>
                 type: description
           delivery: sight
           duration:
@@ -3212,7 +3230,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
@@ -3268,7 +3286,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/undead-reanimation.webp
         name: Undead Reanimation
         system:
@@ -3320,7 +3338,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -3354,10 +3372,10 @@ items:
           overview:
             base: >-
               <p>Target is @Identifier[status:alive]{alive} (but still
-              @Wiki[Category:Undead creatures]{undead}) at 1
-              @Identifier[core:hit-points-and-mana-points]{HP}, although its
-              maximum @Identifier[core:hit-points-and-mana-points]{HP} is halved
-              (minimum of 1) until it completes a
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead})
+              at 1 @Identifier[core:hit-points-and-mana-points]{HP}, although
+              its maximum @Identifier[core:hit-points-and-mana-points]{HP} is
+              halved (minimum of 1) until it completes a
               @Identifier[core:short-rest]{short rest}. This does not count as a
               @Wiki[Category:Revival effects]{revival effect}.</p>
             fluent: <p>Target's @Wiki[Core:HP]{HP} is no longer halved.</p>
@@ -3373,7 +3391,7 @@ items:
             unit: contact
           requirements: >-
             <p>Target is @Identifier[status:dead]{dead} and
-            @Wiki[Category:Undead creatures]{undead}.</p>
+            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           spell: true
           standard: true
           targets:
@@ -3388,7 +3406,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/zombify.webp
         name: Zombify
         system:
@@ -3479,12 +3497,13 @@ items:
             hit: >-
               <p>Target is reanimated as a @Identifier[creature:zombie]{zombie}.
               It is not under your command, but is hostile to everyone other
-              than you that is not @Wiki[Category:Zombies]{another zombie}. The
-              @Identifier[creature:zombie]{zombie} keeps the
+              than you that is not
+              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{another
+              zombie}. The @Identifier[creature:zombie]{zombie} keeps the
               @Identifier[core:size]{SIZE} it had before, but loses all other
               traits and abilities. If the target was already
-              @Wiki[Category:Zombies]{some kind of zombie}, then it is
-              reanimated as that type.</p>
+              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{some
+              kind of zombie}, then it is reanimated as that type.</p>
           spell: true
           standard: true
           targets:
@@ -3499,7 +3518,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
@@ -3575,7 +3594,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/death-rattle.webp
         name: Death Rattle
         system:
@@ -3636,7 +3655,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/crown-of-fear.webp
         name: Crown of Fear
         system:
@@ -3705,7 +3724,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/fear-touch.webp
         name: Fear Touch
         system:
@@ -3812,7 +3831,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/fear-aura.webp
         name: Fear Aura
         system:
@@ -3953,7 +3972,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: 0J9CrQq9kLFUU4Iu
         _key: >-
@@ -3963,7 +3982,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         flags:
           teriock:
             category: combat
@@ -3991,8 +4010,8 @@ items:
               must be paid twice and be the same for both
               @Identifier[core:attack-interaction]{attacks}. These incur
               @Identifier[core:attack-interaction]{attack penalties} as though
-              they were two separate @Wiki[Category:Attack
-              abilities]{attacks}.</p>
+              they were two separate
+              @Identifier[core:attack-interaction]{attacks}.</p>
             fluent: >-
               <p>You may instead choose up to 1 +
               @Identifier[core:fluency-bonus]{F} additional or repeated
@@ -4015,7 +4034,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         flags:
           teriock:
             category: support
@@ -4080,7 +4099,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/intrusive-casting.webp
         name: Intrusive Casting
         system:
@@ -4126,7 +4145,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/oppressive-casting.webp
         name: Oppressive Casting
         system:
@@ -4201,24 +4220,24 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: VYcJEaSSLuCEYS6c
-    _key: '!actors.items!6bdf88e06086c102.VYcJEaSSLuCEYS6c'
+  - _id: kzoLkIJzYeO5yvPq
+    _key: '!actors.items!6bdf88e06086c102.kzoLkIJzYeO5yvPq'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!6bdf88e06086c102.VYcJEaSSLuCEYS6c.NGCuRUaVtXnxAbRe
+          !actors.items.effects!6bdf88e06086c102.kzoLkIJzYeO5yvPq.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -4268,13 +4287,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!6bdf88e06086c102.VYcJEaSSLuCEYS6c.aCWLNsvSFjEuLTyl
+          !actors.items.effects!6bdf88e06086c102.kzoLkIJzYeO5yvPq.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.82
+          systemVersion: 0.12.84
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

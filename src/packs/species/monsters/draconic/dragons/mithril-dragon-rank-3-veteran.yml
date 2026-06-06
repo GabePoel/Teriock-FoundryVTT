@@ -1,0 +1,250 @@
+_id: hKf8GDcXF4Ft5Z28
+_key: '!items!hKf8GDcXF4Ft5Z28'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.296ddd5ebb48aebd
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: PioQvKwJDZKIYNi3
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.PioQvKwJDZKIYNi3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b0c96045f72875ba
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/armor-master.webp
+    name: Armor Master
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: armor-master
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:master-armor-smith]{Master Armor
+          Smith} and @Identifier[ability:runic-armor]{Runic Armor}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: vLlgfZ2tZq02juSg
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.vLlgfZ2tZq02juSg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0787d6514c191157
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/armor-wound.webp
+    name: Armor Wound
+    system:
+      automations:
+        1I4BfpzqPQUuLx5h:
+          _id: 1I4BfpzqPQUuLx5h
+          common:
+            - shatter
+          showConfirmationDialog: true
+          type: common
+      competence:
+        raw: 0
+      costs:
+        components:
+          break:
+            description: >-
+              <p>When [[lookup name]] is used, the item that delivers it becomes
+              @Identifier[property:shattered]{shattered}.</p>
+            type: description
+      delivery: armor
+      duration:
+        unit: instant
+      executionTime:
+        base: r1
+      form: normal
+      identifier: armor-wound
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The triggering effect @Identifier[core:fizzles]{fizzles} against
+          you (and only you).</p><p class="note"><b>Note:</b> [[lookup name]]
+          requires that you are wearing the armor. If you have
+          @Identifier[core:armor-class]{AV} from some other source, it cannot be
+          used for [[lookup name]].</p>
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You would take damage.</p>
+    transfer: true
+    type: ability
+  - _id: 7qwAiZLxVh8oW8mL
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.7qwAiZLxVh8oW8mL'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1FOF5FOKhsdzaKby
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/master-armor-smith.webp
+    name: Master Armor Smith
+    system:
+      _sup: PioQvKwJDZKIYNi3
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.tradecrafts.blacksmith.score
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '2'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: master-armor-smith
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are an @Identifier[keyword:expertise]{expert}
+          @Identifier[tradecraft:blacksmith]{blacksmith}. In addition, you gain
+          the ability to create @Identifier[property:master-crafted]{master
+          crafted} armor.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: DreKYWZOOFiAvgjR
+    _key: '!items.effects!hKf8GDcXF4Ft5Z28.DreKYWZOOFiAvgjR'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.Y7MbOSBjwwdMPo90
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/runic-armor.webp
+    name: Runic Armor
+    system:
+      _sup: PioQvKwJDZKIYNi3
+      automations:
+        wOu1pTEuGkdY4mjh:
+          _id: wOu1pTEuGkdY4mjh
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - property:runic
+          multi: false
+          separate: false
+          type: addDocuments
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            description: >-
+              <p>[[lookup name]] costs an amount of @Wiki[Core:MP]{MP} equal to
+              the armor's @Wiki[Core:AV]{AV}.</p>
+            type: description
+      delivery: sight
+      duration:
+        raw: '24'
+        unit: hour
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      form: normal
+      identifier: runic-armor
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The targeted
+          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}
+          becomes @Identifier[property:runic]{runic}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - armor
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-3-veteran.webp
+name: Rank 3 Veteran
+system:
+  _sup: 0d8ec10b181b8f31
+  archetype: warrior
+  class: veteran
+  competence:
+    raw: 1
+  description: >-
+    <p>Jaded and tough, these warriors act as if they have seen it all.
+    Obviously they are not all seasoned warriors, but the training of a
+    @Identifier[class:veteran]{Veteran} involves a great deal of time in battle,
+    so even a first rank @Identifier[class:veteran]{Veteran} has seen more
+    action than other first rank warriors. The strategy of the
+    @Identifier[class:veteran]{Veteran} is to be an immovable wall, and hold the
+    line. @Identifier[class:veteran]{Veterans} rely on defense in battle, always
+    working to better ensure their protection, which is why they survive to be
+    veterans. If you are a @Identifier[class:veteran]{Veteran} be jaded,
+    unimpressed, hard, and pessimistic.</p>
+  identifier: rank-3-veteran
+  innate: false
+  maxAv: 4
+  number: 3
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d12
+    mp:
+      disabled: false
+      formula: 1d8
+type: rank

@@ -1,0 +1,104 @@
+_id: OnKgf59A07uGUlkh
+_key: '!items!OnKgf59A07uGUlkh'
+_stats:
+  compendiumSource: Compendium.teriock.equipment.Item.33fb5624c0f81694
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.58
+effects:
+  - _id: E6q5xsR0sa3T35PJ
+    _key: '!items.effects!OnKgf59A07uGUlkh.E6q5xsR0sa3T35PJ'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.eac47e503515cd7d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/cumbersome.webp
+    name: Cumbersome
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      applyIfUnequipped: false
+      automations:
+        parameterChanges:
+          _id: parameterChanges
+          changes:
+            - key: system.encumbranceLevel
+              priority: 10
+              target: Actor
+              type: add
+              value: '1'
+          type: changes
+      competence:
+        raw: 0
+      description: >-
+        <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item}
+        <i>always</i> makes its user @Identifier[status:encumbered]{encumbered},
+        regardless of how much they are
+        @Identifier[core:carrying-capacity]{carrying}. If the user would have
+        not been @Identifier[status:encumbered]{encumbered} otherwise, they are
+        @Identifier[status:encumbered]{lightly encumbered}. If they would have
+        been @Identifier[status:encumbered]{lightly encumbered} otherwise, they
+        are @Identifier[status:encumbered]{heavily encumbered}. And if they
+        would have been @Identifier[status:encumbered]{heavily encumbered}
+        otherwise, they are rendered @Identifier[status:immobile]{immobile}.</p>
+      form: flaw
+      identifier: cumbersome
+    transfer: true
+    type: property
+  - _id: NKQQW0NzGozHZneH
+    _key: '!items.effects!OnKgf59A07uGUlkh.NKQQW0NzGozHZneH'
+    _stats:
+      compendiumSource: Compendium.teriock.properties.ActiveEffect.7b3e6d546e3b26f7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/properties/fragile.webp
+    name: Fragile
+    system:
+      applyIfDampened: true
+      applyIfDeattuned: true
+      competence:
+        raw: 0
+      description: >-
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
+        becomes @Identifier[property:shattered]{shattered} if it is used to
+        @Identifier[core:block-interaction]{block} or if it is the
+        @Wiki[Category:Item target abilities]{target of an ability} that deals
+        it @Wiki[Category:Damaging effects]{damage}. If it would become
+        @Identifier[property:shattered]{shattered} through some other means, it
+        is instead @Identifier[property:destroyed]{destroyed}.</p>
+      form: flaw
+      identifier: fragile
+    transfer: true
+    type: property
+folder: b7395e9186081f19
+img: systems/teriock/src/icons/equipment/sail.webp
+name: Sail
+system:
+  _sup: 1de4d2621aca6827
+  attackPenalty: '-4'
+  competence:
+    raw: 0
+  consumable: false
+  damage:
+    base: '0'
+  equipmentClasses:
+    - supplies
+  equipmentType: sail
+  fightingStyle: wraparound
+  identifier: sail
+  minStr: -3
+  powerLevel: mundane
+  range:
+    long:
+      unit: melee
+    melee: true
+    ranged: false
+    short:
+      unit: melee
+  weight: 30
+type: equipment

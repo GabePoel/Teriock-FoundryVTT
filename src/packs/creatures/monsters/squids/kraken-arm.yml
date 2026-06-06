@@ -1,0 +1,932 @@
+_id: 3cf8861dbabd5bd9
+_key: '!actors!3cf8861dbabd5bd9'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.16
+folder: aa772458d708a91e
+img: systems/teriock/src/icons/creatures/kraken-arm.webp
+items:
+  - _id: 3cf8861dbabd5bd9
+    _key: '!actors.items!3cf8861dbabd5bd9.3cf8861dbabd5bd9'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.3cf8861dbabd5bd9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: HpBK2Qv94ErYtxFx
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.HpBK2Qv94ErYtxFx
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d26327dc37e7de5
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/boat-smashing.webp
+        name: Boat Smashing
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: boat-smashing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Your @Identifier[core:attack-interaction]{attacks} against
+              boats are @Identifier[keyword:ub]{UB} and
+              @Identifier[core:damage]{damage} you deal to boats is
+              @Identifier[keyword:boosted-damage]{boosted}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: 0iP9IC8BADhk6bek
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.0iP9IC8BADhk6bek
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c71fdb57374ade38
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/carrying.webp
+        name: Carrying
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: carrying
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can drag and carry other creatures and
+              @Pack[teriock.equipment]{items} around even if you don't have
+              @Identifier[property:prehensile]{prehensile body parts}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: KdAGZSfmS2Fm3lDV
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.KdAGZSfmS2Fm3lDV
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: dense-intelligence
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        transfer: true
+        type: ability
+      - _id: oMh3IoVa0AC2PO7q
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.oMh3IoVa0AC2PO7q
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.eae89799c230fd18
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/endure.webp
+        name: Endure
+        system:
+          automations:
+            d873eb939c3b5951:
+              _id: d873eb939c3b5951
+              hacks:
+                - arm
+                - leg
+              reverse: false
+              type: hacks
+          competence:
+            raw: 0
+          costs:
+            components:
+              hack:
+                type: tag
+          delivery: self
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime:
+            base: r1
+          form: normal
+          identifier: endure
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You take the triggering @Identifier[core:damage]{damage} as a
+              @Identifier[damage:hack]{limb hack} instead. All
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
+              types} still apply. If the hit was critical, you instead take it
+              as <i>two</i> @Identifier[damage:hack]{limb hacks}. If you
+              attempted to @Identifier[core:block-interaction]{block} the
+              triggering @Identifier[core:attack-interaction]{attack}, then a
+              limb that @Identifier[keyword:using]{used} whatever
+              @Wiki[Category:Items]{item} you
+              @Identifier[core:block-interaction]{blocked} with is the one
+              that's @Identifier[damage:hack]{hacked}. Otherwise, if the
+              @Identifier[core:damage]{damage} was dealt by a creature, they
+              choose which limb is affected. If not, it is random. Only an
+              un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+              that's not possible, you take the @Identifier[core:damage]{damage}
+              normally.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          trigger: >-
+            <p>You are hit by an @Identifier[core:attack-interaction]{attack}
+            that would @Identifier[core:damage]{damage} you.</p>
+        transfer: true
+        type: ability
+      - _id: 4QgRdKBtJ1iEAHu5
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.4QgRdKBtJ1iEAHu5
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/giant-strength.webp
+        name: Giant Strength
+        system:
+          automations:
+            tS17fIFj24KkwiGX:
+              _id: tS17fIFj24KkwiGX
+              identifier: property:cumbersome
+              type: suppress
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: giant-strength
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @Identifier[ability:improved-strength]{Improved
+              Strength} and @Identifier[ability:melee-damage-boost]{Melee Damage
+              Boost}. In addition, you are no longer suffer the consequences of
+              @Identifier[property:cumbersome]{cumbersome} items.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 3
+        transfer: true
+        type: ability
+      - _id: B7yzmBMOo9YaZitj
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.B7yzmBMOo9YaZitj
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e138089ee679e115
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/gliding.webp
+        name: Gliding
+        system:
+          automations:
+            17K8dGUXzbAizT95:
+              _id: 17K8dGUXzbAizT95
+              movementAction: fly
+              type: changeMovement
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.fly
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '1'
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          form: normal
+          identifier: gliding
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You @Wiki[Core:MOV]{fly} at
+              @Identifier[core:movement-speed]{quarter speed} and can glide over
+              terrain and other obstacles at
+              @Identifier[core:movement-speed]{normal speed}. However, you
+              cannot move more than a couple feet above the ground. You fall at
+              the rate of 30 feet per round (30 feet per 5 seconds).</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: JxUV37Eafuv1YRnz
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.JxUV37Eafuv1YRnz
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        transfer: true
+        type: ability
+      - _id: ZvHRMaWzrc6vxxr7
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.ZvHRMaWzrc6vxxr7
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        transfer: true
+        type: ability
+      - _id: SuxUPPuZYLF9yEiw
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.SuxUPPuZYLF9yEiw
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-sneak.webp
+        name: Normal Sneak
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-sneak
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: 0
+        transfer: true
+        type: ability
+      - _id: aXPPuZzCYVUibpKs
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.aXPPuZzCYVUibpKs
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9bfc89548d1236b8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/reach.webp
+        name: Reach
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: reach
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>The range of your melee
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
+              and @Identifier[core:attack-interaction]{attacks} increases by 5
+              feet.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: KVN0LTfelAO5YeCf
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.KVN0LTfelAO5YeCf
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/snare.webp
+        name: Snare
+        system:
+          automations:
+            d635eb44dba086dd:
+              _id: d635eb44dba086dd
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 0
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+              crit:
+                - 0
+              override:
+                combat: true
+              type: expiration
+            d5717000e99ee582:
+              _id: d5717000e99ee582
+              combat:
+                what:
+                  roll: 2d4kh1
+                  threshold: 4
+                  type: rolled
+                when:
+                  skip: 1
+                  time: end
+                  trigger: turn
+                who:
+                  type: target
+              crit:
+                - 1
+              override:
+                combat: true
+              type: expiration
+            5d57231066693cee:
+              _id: 5d57231066693cee
+              executor: false
+              multi: false
+              relation: include
+              status: snared
+              target: false
+              type: status
+          competence:
+            raw: 0
+          delivery: weapon
+          duration:
+            unit: unlimited
+          endCondition: >-
+            <p>At the end of each of the target's
+            @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
+            of these dice roll a 4, this effect ends.</p>
+          executionTime:
+            base: a1
+          form: normal
+          identifier: snare
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: contact
+          results:
+            critHit: >-
+              <p>The target automatically fails the first [[/roll 2d4]]
+              roll.</p>
+            hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+          skill: true
+          standard: true
+          targets:
+            - leg
+        transfer: true
+        type: ability
+      - _id: HYOL5MnjdNszPhaF
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.HYOL5MnjdNszPhaF
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+        name: Melee Damage Boost
+        system:
+          _sup: 4QgRdKBtJ1iEAHu5
+          competence:
+            raw: 0
+          delivery: weapon
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime:
+            base: r0
+          form: normal
+          identifier: melee-damage-boost
+          interaction: manifest
+          maneuver: reactive
+          overview:
+            base: >-
+              <p>You may spend an unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage}.</p>
+            proficient: >-
+              <p>You may spend an additional unused
+              @Identifier[core:active-maneuvers]{action} to
+              @Identifier[keyword:boosted]{boost} the triggering
+              @Identifier[core:damage]{damage} again.</p>
+          powerSources:
+            - martial
+          range:
+            unit: contact
+          skill: true
+          standard: true
+          targets:
+            - creature
+          trigger: >-
+            <p>You have hit a creature with a @Wiki[Category:Damaging
+            effects]{damaging} melee @Wiki[Category:Weapon delivery
+            abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
+        transfer: true
+        type: ability
+      - _id: 5yN8dTP5ExwlnLN1
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.5yN8dTP5ExwlnLN1
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/improved-strength.webp
+        name: Improved Strength
+        system:
+          _sup: 4QgRdKBtJ1iEAHu5
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: improved-strength
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @Identifier[ability:beastly-strength]{Beastly
+              Strength} and
+              @Identifier[ability:improved-armor-piercing]{Improved Armor
+              Piercing}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 2
+        transfer: true
+        type: ability
+      - _id: zBi5rb0dPIve8H8c
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.zBi5rb0dPIve8H8c
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          _sup: 5yN8dTP5ExwlnLN1
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: beastly-strength
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons
+              in one hand.</p><p class="note"><b>Note:</b>
+              @Identifier[property:armor-piercing]{Armor piercing} weapons must
+              still be wielded in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        transfer: true
+        type: ability
+      - _id: yobTdZGnLH5LoYkl
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.3cf8861dbabd5bd9.yobTdZGnLH5LoYkl
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+        name: Improved Armor Piercing
+        system:
+          _sup: 5yN8dTP5ExwlnLN1
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: improved-armor-piercing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Melee weapons you use are
+              @Identifier[property:armor-piercing]{armor piercing}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: aa772458d708a91e
+    img: systems/teriock/src/icons/creatures/kraken-arm.webp
+    name: Kraken Arm
+    system:
+      appearance: <p>A huge scaly tentacle.</p>
+      br: 7
+      competence:
+        raw: 1
+      description: >-
+        <p>A single kraken is represented by multiple different creatures at
+        once. There is one @Identifier[creature:kraken-head]{kraken head} and at
+        least one kraken arm. If the @Identifier[creature:kraken-head]{kraken
+        head} @Identifier[status:dead]{dies} then each kraken arm does as well.
+        Otherwise, each kraken arm acts independently. No
+        @UUID[Compendium.teriock.rules.JournalEntry.condition0000000]{conditions}
+        other than @Identifier[status:dead]{death} are shared. However, each
+        kraken arm cannot go more than the
+        @Identifier[creature:kraken-head]{kraken head's}
+        @Identifier[core:size]{SIZE} × 5 feet away from the
+        @Identifier[creature:kraken-head]{kraken head}.</p>
+      identifier: kraken-arm
+      size:
+        enabled: true
+        value: 3
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d10
+        mp:
+          disabled: false
+          formula: 1d6
+      traits:
+        - animal
+        - aquatic
+        - monstrous
+      transformation:
+        img: systems/teriock/src/icons/tokens/kraken-arm.webp
+        ring: true
+    type: species
+  - _id: eTjDRdqUEdWC9zh2
+    _key: '!actors.items!3cf8861dbabd5bd9.eTjDRdqUEdWC9zh2'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.9c8abbc7139bcee6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    folder: aa772458d708a91e
+    img: systems/teriock/src/icons/body-parts/scales.webp
+    name: Scales
+    system:
+      _sup: 3cf8861dbabd5bd9
+      attackPenalty: '-3'
+      av:
+        raw: 2
+      competence:
+        raw: 0
+      damage:
+        base: '0'
+        twoHanded: '0'
+      identifier: scales
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+    type: body
+  - _id: rqunLWiNirQMdxh0
+    _key: '!actors.items!3cf8861dbabd5bd9.rqunLWiNirQMdxh0'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.b1e691cf6d5d88ba
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: Y1lFpTxewxRN4iDS
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.rqunLWiNirQMdxh0.Y1lFpTxewxRN4iDS
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          powerSources:
+            - martial
+        transfer: true
+        type: property
+      - _id: T6YcgxtqwEjrmluV
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.rqunLWiNirQMdxh0.T6YcgxtqwEjrmluV
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @Identifier[core:attack-interaction]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
+        transfer: true
+        type: property
+      - _id: WrqyRSRNLmRnjPbS
+        _key: >-
+          !actors.items.effects!3cf8861dbabd5bd9.rqunLWiNirQMdxh0.WrqyRSRNLmRnjPbS
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.12e9b70930bc7182
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/armor-voiding.webp
+        name: Armor Voiding
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          automations:
+            parameterChanges:
+              _id: parameterChanges
+              changes:
+                - key: system.piercing.raw
+                  priority: 10
+                  target: Item
+                  type: upgrade
+                  value: '1'
+              type: changes
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is always
+            @Identifier[keyword:armor-voiding]{AV0}.</p>
+          form: intrinsic
+          identifier: armor-voiding
+        transfer: true
+        type: property
+    folder: aa772458d708a91e
+    img: systems/teriock/src/icons/body-parts/crushing-tentacle.webp
+    name: Crushing Tentacle
+    system:
+      _sup: 3cf8861dbabd5bd9
+      attackPenalty: '-3'
+      bv:
+        raw: 2
+      competence:
+        raw: 0
+      damage:
+        base: 1d10
+        twoHanded: '0'
+      fightingStyle: wraparound
+      identifier: crushing-tentacle
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+    type: body
+name: Kraken Arm
+prototypeToken:
+  actorLink: false
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  name: Kraken Arm
+  ring:
+    enabled: true
+    subject:
+      texture: systems/teriock/src/icons/tokens/kraken-arm.webp
+  texture:
+    src: systems/teriock/src/icons/creatures/kraken-arm.webp
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
+system:
+  hp:
+    value: 6
+  identifier: kraken-arm
+  initiative: 1d20 + @mov
+  mp:
+    value: 4
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+  size:
+    number:
+      raw: '3'
+  wielding:
+    attacker: rqunLWiNirQMdxh0
+    blocker: rqunLWiNirQMdxh0
+type: creature

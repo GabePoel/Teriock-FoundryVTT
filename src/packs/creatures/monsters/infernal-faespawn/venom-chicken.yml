@@ -1,0 +1,691 @@
+_id: 95725e5a1ebc75a1
+_key: '!actors!95725e5a1ebc75a1'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.15
+folder: 481b13774ffecbdd
+img: systems/teriock/src/icons/creatures/venom-chicken.webp
+items:
+  - _id: 95725e5a1ebc75a1
+    _key: '!actors.items!95725e5a1ebc75a1.95725e5a1ebc75a1'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.95725e5a1ebc75a1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: mE1oeIx5bSEafbKA
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.mE1oeIx5bSEafbKA
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.081dc5b1f20835fe
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/blinding-poison-strike.webp
+        name: Blinding Poison Strike
+        system:
+          automations:
+            18537e76761a45dc:
+              _id: 18537e76761a45dc
+              executor: false
+              multi: false
+              relation: include
+              status: blind
+              target: false
+              type: status
+          competence:
+            raw: 0
+          delivery: weapon
+          duration:
+            raw: '24'
+            unit: hour
+          effectTypes:
+            - poison
+          executionTime:
+            base: a1
+          form: normal
+          identifier: blinding-poison-strike
+          interaction: attack
+          limitation: <p>@Identifier[property:biting]{Biting items} only.</p>
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - alchemical
+          range:
+            unit: contact
+          results:
+            hit: >-
+              <p>Target is @Identifier[status:poisoned]{poisoned}. The
+              @Identifier[status:poisoned]{poison} causes the target to become
+              @Identifier[status:blind]{blind}.</p>
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: lMEbIZEdCUwQ5eu0
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.lMEbIZEdCUwQ5eu0
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.789f432f72edb7c0
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/clumsy.webp
+        name: Clumsy
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: clumsy
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: -1
+        transfer: true
+        type: ability
+      - _id: U81A8yZFEA54hgNx
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.U81A8yZFEA54hgNx
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+        name: Dense Intelligence
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: dense-intelligence
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: int
+              value: -2
+        transfer: true
+        type: ability
+      - _id: F4sFXa8jJkAfnThK
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.F4sFXa8jJkAfnThK
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0f5fe78fc7536055
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/enhanced-leaping.webp
+        name: Enhanced Leaping
+        system:
+          automations:
+            utH7ye1fj3DrwlzW:
+              _id: utH7ye1fj3DrwlzW
+              movementAction: jump
+              type: changeMovement
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.speedAdjustments.leapVertical
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '3'
+                - key: system.speedAdjustments.leapHorizontal
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '4'
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - movement
+          executionTime:
+            base: passive
+          form: special
+          identifier: enhanced-leaping
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You vertically leap at @Identifier[core:movement-speed]{full
+              speed} and horizontally leap at
+              @Identifier[core:movement-speed]{double speed}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: Zbii6H9LDb8fXuZF
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.Zbii6H9LDb8fXuZF
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.072c1d93bd5ee956
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/low-strength.webp
+        name: Low Strength
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: low-strength
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: -1
+        transfer: true
+        type: ability
+      - _id: fWGkm23EYLOTVbOz
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.fWGkm23EYLOTVbOz
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-movement.webp
+        name: Normal Movement
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-movement
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: 0
+        transfer: true
+        type: ability
+      - _id: JFdQ7GLxkEjMsQq9
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.JFdQ7GLxkEjMsQq9
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/normal-perception.webp
+        name: Normal Perception
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: normal-perception
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 0
+        transfer: true
+        type: ability
+      - _id: NYGnA3baNrmL7MwW
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.NYGnA3baNrmL7MwW
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.b0cc43ffe9a249c7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/outsider-regenerating.webp
+        name: Outsider Regenerating
+        system:
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - bag
+                - revive
+              showConfirmationDialog: true
+              type: common
+            HMVJizUXvyQ9mtt9:
+              _id: HMVJizUXvyQ9mtt9
+              conditions:
+                absent:
+                  - frozen
+              consumeStatDice: false
+              forHarm: false
+              noStatDice: false
+              trigger: turnStart
+              type: heal
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - healing
+            - regeneration
+            - revival
+          executionTime:
+            base: passive
+          form: special
+          identifier: outsider-regenerating
+          interaction: manifest
+          limitation: <p>In sunlight only.</p>
+          maneuver: passive
+          overview:
+            base: >-
+              <p>At the start of each of your @Identifier[core:turns]{turns},
+              you @Identifier[keyword:warded]{warded}
+              @Identifier[core:healing]{heal} and regain that many
+              @Identifier[core:hit-points-and-mana-points]{HP}. This does
+              <i>not</i> consume your @Wiki[Core:HP]{hit die}. If you were
+              @Identifier[status:dead]{dead} due to
+              @Identifier[core:hit-points-and-mana-points]{HP} loss, this brings
+              you @Identifier[status:alive]{back to life}. You only
+              @Identifier[status:dead]{die} due to
+              @Identifier[core:hit-points-and-mana-points]{HP} loss if you start
+              your @Identifier[core:turns]{turn} without successfully
+              regenerating @Identifier[core:hit-points-and-mana-points]{HP}. You
+              may do this <i>even if you are
+              @Identifier[status:burned]{burned}</i>.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: wKN9bXUpUqJNiC51
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.95725e5a1ebc75a1.wKN9bXUpUqJNiC51
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.47774661e781e960
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/partial-hands.webp
+        name: Partial Hands
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: partial-hands
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You do not have real opposable thumbs. All items are
+              @Identifier[property:two-handed]{two-handed} for you.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 481b13774ffecbdd
+    img: systems/teriock/src/icons/creatures/venom-chicken.webp
+    name: Venom Chicken
+    system:
+      appearance: <p>Terrifying chickens.</p>
+      br: 6
+      competence:
+        raw: 1
+      description: >-
+        <p>These creatures are believed to been created by
+        @UUID[Compendium.teriock.tables.RollTable.c602ce7a824494c1]{demon}-@UUID[Compendium.teriock.tables.RollTable.f2c29b199c990ab7]{fae}
+        crossbreeds.</p>
+      identifier: venom-chicken
+      size:
+        enabled: true
+        value: 1
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d8
+        mp:
+          disabled: false
+          formula: 1d10
+      traits:
+        - animal
+      transformation:
+        img: systems/teriock/src/icons/tokens/venom-chicken.webp
+        ring: true
+    type: species
+  - _id: Do41lHRX89XClKoH
+    _key: '!actors.items!95725e5a1ebc75a1.Do41lHRX89XClKoH'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.9df212d89cab196d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    folder: 481b13774ffecbdd
+    img: systems/teriock/src/icons/body-parts/hide.webp
+    name: Hide
+    system:
+      _sup: 95725e5a1ebc75a1
+      attackPenalty: '-3'
+      av:
+        raw: 1
+      competence:
+        raw: 0
+      damage:
+        base: '0'
+        twoHanded: '0'
+      identifier: hide
+      range:
+        long:
+          unit: self
+        melee: true
+        ranged: false
+        short:
+          unit: self
+    type: body
+  - _id: GRb94QvsEZd91q9h
+    _key: '!actors.items!95725e5a1ebc75a1.GRb94QvsEZd91q9h'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.a07454a7967ee5c8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: r6fdMsFOOlL211Ri
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.GRb94QvsEZd91q9h.r6fdMsFOOlL211Ri
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.870df3b7da4ce4b8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: icons/creatures/abilities/mouth-teeth-long-red.webp
+        name: Biting
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @Wiki[Category:Bite delivery abilities]{bite delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: biting
+          powerSources:
+            - martial
+        transfer: true
+        type: property
+      - _id: 3Ecp5HfmBmb6NOX0
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.GRb94QvsEZd91q9h.3Ecp5HfmBmb6NOX0
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @Identifier[core:attack-interaction]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
+        transfer: true
+        type: property
+    folder: 481b13774ffecbdd
+    img: icons/commodities/bones/beak-hooked-red.webp
+    name: Beak
+    system:
+      _sup: 95725e5a1ebc75a1
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: 1d4
+        twoHanded: '0'
+      fightingStyle: savage
+      identifier: beak
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+    type: body
+  - _id: wED1fwwCW0ySwq98
+    _key: '!actors.items!95725e5a1ebc75a1.wED1fwwCW0ySwq98'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.f0b97b50691eb465
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: zKcEkEMqYfiHs5YB
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.wED1fwwCW0ySwq98.zKcEkEMqYfiHs5YB
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          powerSources:
+            - martial
+        transfer: true
+        type: property
+      - _id: 6gU6Z7OIqwjy0wSf
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.wED1fwwCW0ySwq98.6gU6Z7OIqwjy0wSf
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.9e0c23ad80fe566a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/prehensile.webp
+        name: Prehensile
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>An item can be used to grasp, hold, or manipulate objects, such
+            as while using @Identifier[ability:interact]{Interact}.</p>
+          form: intrinsic
+          identifier: prehensile
+          powerSources:
+            - martial
+        transfer: true
+        type: property
+      - _id: 8rOxZzqEJ1L8IrHx
+        _key: >-
+          !actors.items.effects!95725e5a1ebc75a1.wED1fwwCW0ySwq98.8rOxZzqEJ1L8IrHx
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/weapon.webp
+        name: Weapon
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>A <b>[[lookup name style=lc]]</b> is an item that can be used to
+            @Identifier[core:attack-interaction]{attack}.</p>
+          form: intrinsic
+          identifier: weapon
+        transfer: true
+        type: property
+    folder: 481b13774ffecbdd
+    img: systems/teriock/src/icons/body-parts/prehensile-claw.webp
+    name: Prehensile Claw
+    system:
+      _sup: 95725e5a1ebc75a1
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: 1d4
+        twoHanded: '0'
+      fightingStyle: savage
+      identifier: prehensile-claw
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+    type: body
+name: Venom Chicken
+prototypeToken:
+  actorLink: false
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 1
+  name: Venom Chicken
+  ring:
+    enabled: true
+    subject:
+      texture: systems/teriock/src/icons/tokens/venom-chicken.webp
+  texture:
+    src: systems/teriock/src/icons/creatures/venom-chicken.webp
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 1
+system:
+  hp:
+    value: 5
+  identifier: venom-chicken
+  initiative: 1d20 + @mov
+  mp:
+    value: 6
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+  size:
+    number:
+      raw: '1'
+  wielding:
+    attacker: wED1fwwCW0ySwq98
+    blocker: wED1fwwCW0ySwq98
+type: creature

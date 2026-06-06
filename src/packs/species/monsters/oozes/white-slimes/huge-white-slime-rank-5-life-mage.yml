@@ -1,0 +1,207 @@
+_id: 4JJQSHG7pQdYEG4Q
+_key: '!items!4JJQSHG7pQdYEG4Q'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.92b0bad64c0e4250
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: fh4suOlumlxkn3jC
+    _key: '!items.effects!4JJQSHG7pQdYEG4Q.fh4suOlumlxkn3jC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b5265322d0a11dd4
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/life-rotator-fluency.webp
+    name: Life Rotator Fluency
+    system:
+      automations:
+        ofqV75hAbinXvq3U:
+          _id: ofqV75hAbinXvq3U
+          competence:
+            raw: 2
+          competencies:
+            - 1
+            - 2
+          identifier: ability:life-rotators
+          type: changeCompetence
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: life-rotator-fluency
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @Wiki[Category:Life element spells]{life}
+          rotator @Wiki[Category:Spells]{spells} during a
+          @Identifier[core:short-rest]{short rest} instead of a
+          @Identifier[core:long-rest]{long rest}.</p>
+        proficient: >-
+          <p>You are @Identifier[core:fluency-bonus]{fluent} in
+          @Identifier[ability:life-rotators]{Life Rotators}. (This does not make
+          you @Identifier[core:fluency-bonus]{fluent} in the
+          @Wiki[Category:Spells]{spells} themselves.)</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: ARunLguXJBf7xHwi
+    _key: '!items.effects!4JJQSHG7pQdYEG4Q.ARunLguXJBf7xHwi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.86481876d5cfc84e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/life-spell-strikes.webp
+    name: Life Spell Strikes
+    system:
+      automations:
+        X1yoOCJGcyr8gR2X:
+          _id: X1yoOCJGcyr8gR2X
+          all: false
+          automatic: true
+          expandTables: false
+          local:
+            identifiers:
+              - ability:light-ray
+              - ability:medicine-ball
+          multi: false
+          noHeighten: false
+          type: useDocuments
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: life-spell-strikes
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:spell-strike]{Spell Strike}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: tPUxR6xxwbgm2oGB
+    _key: '!items.effects!4JJQSHG7pQdYEG4Q.tPUxR6xxwbgm2oGB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: ARunLguXJBf7xHwi
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: r0
+      form: normal
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @Identifier[ability:light-ray]{Light Ray} and
+        @Identifier[ability:medicine-ball]{Medicine Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
+          delivery spells]{missile spell} that you are
+          @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
+          hit was a critical hit, then the target takes the "on critical hit"
+          effect instead.</p>
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
+        abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
+        @Identifier[core:attack-interaction]{attack} on another creature and the
+        effect has successfully applied.</p>
+    transfer: true
+    type: ability
+folder: ab73d338653acde3
+img: systems/teriock/src/icons/ranks/rank-5-life-mage.webp
+name: Rank 5 Life Mage
+system:
+  _sup: 7d2f7287eb26ac9f
+  archetype: mage
+  class: life-mage
+  competence:
+    raw: 1
+  description: >-
+    <p>The true healers of the world, they are committed to sustaining all life.
+    The truly altruistic characters, @Identifier[class:life-mage]{Life Mages}
+    are known to enter battles on neither side, healing anyone and everyone who
+    they can. Obsessed with keeping people alive and conquering death,
+    @Identifier[class:life-mage]{Life Mages} are not as righteous as the Paladin
+    but much more humble and kind. Shying away from combat, they prefer to stand
+    behind the troops, healing when needed. If you are playing a
+    @Identifier[class:life-mage]{Life Mage} be helpful, kind and loving,
+    protective but committed to saving lives and fighting death.</p>
+  identifier: rank-5-life-mage
+  innate: false
+  maxAv: 0
+  number: 5
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d8
+    mp:
+      disabled: false
+      formula: 1d12
+type: rank

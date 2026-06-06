@@ -1,0 +1,247 @@
+_id: i73bvUTGp7K8CDLh
+_key: '!items!i73bvUTGp7K8CDLh'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.deec37fc79f62f14
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: 0J9CrQq9kLFUU4Iu
+    _key: '!items.effects!i73bvUTGp7K8CDLh.0J9CrQq9kLFUU4Iu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4e84d0efca8837f5
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/amplify-necromancy-spells.webp
+    name: Amplify Necromancy Spells
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: amplify-necromancy-spells
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>When you @Identifier[core:attack-interaction]{attack} with
+          @Identifier[ability:death-ray]{Death Ray} or
+          @Identifier[ability:terror-ball]{Terror Ball}, you may target an
+          additional creature or the same creature twice. Any costs you pay must
+          be paid twice and be the same for both
+          @Identifier[core:attack-interaction]{attacks}. These incur
+          @Identifier[core:attack-interaction]{attack penalties} as though they
+          were two separate @Identifier[core:attack-interaction]{attacks}.</p>
+        fluent: >-
+          <p>You may instead choose up to 1 + @Identifier[core:fluency-bonus]{F}
+          additional or repeated targets.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: c03uQvPFAXLocKls
+    _key: '!items.effects!i73bvUTGp7K8CDLh.c03uQvPFAXLocKls'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.82f855db7bb879dd
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/necromancy-disciplines.webp
+    name: Necromancy Disciplines
+    system:
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: necromancy-disciplines
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Once per @Identifier[core:short-rest]{short rest}, you may cast a
+          @Wiki[Category:Ritual delivery spells]{ritual}
+          @Wiki[Category:Necromancy element spells]{necromancy spell} in half
+          the time it would normally take. Additionally, once per long rest, you
+          may cast a @Wiki[Category:Necromancy element spells]{necromancy spell}
+          as though you were @Identifier[keyword:adept]{adept} at it.</p><p>You
+          also gain the @Identifier[ability:intrusive-casting]{Intrusive} and
+          @Identifier[ability:oppressive-casting]{Oppressive} casting
+          styles.</p>
+        fluent: >-
+          <p>You may now use the benefits from [[lookup name]]
+          @Identifier[core:fluency-bonus]{F} times per
+          @Identifier[core:short-rest]{short rest}.</p>
+        proficient: >-
+          <p>You may now use the benefits from [[lookup name]]
+          @Identifier[core:proficiency-bonus]{P} times per
+          @Identifier[core:long-rest]{long rest}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        competence:
+          attribute: int
+          value: 1
+    transfer: true
+    type: ability
+  - _id: PAd6NlUZvihIP2sT
+    _key: '!items.effects!i73bvUTGp7K8CDLh.PAd6NlUZvihIP2sT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.YCSGNa0EM2gEFOhu
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/intrusive-casting.webp
+    name: Intrusive Casting
+    system:
+      _sup: c03uQvPFAXLocKls
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        unit: instant
+      executionTime:
+        base: r0
+      form: normal
+      identifier: intrusive-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The range of the triggering @Wiki[Category:Spells]{spell} is
+          doubled.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You are casting a @Wiki[Category:Spells]{spell} with a range other
+        than @Wiki[Category:Self target spells]{self}.</p>
+    transfer: true
+    type: ability
+  - _id: hn2WxabhyGPZCEwa
+    _key: '!items.effects!i73bvUTGp7K8CDLh.hn2WxabhyGPZCEwa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4269f3e018a6c618
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/oppressive-casting.webp
+    name: Oppressive Casting
+    system:
+      _sup: c03uQvPFAXLocKls
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        unit: instant
+      executionTime:
+        base: r0
+      form: normal
+      identifier: oppressive-casting
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>If the triggering @Wiki[Category:Spells]{spell} is an
+          @Wiki[Category:Attack spells]{attack spell}, you make the
+          @Identifier[core:attack-interaction]{attack roll} with
+          @Identifier[core:advantage]{advantage}. If it is a @Wiki[Category:Feat
+          spells]{feat spell}, its targets make their
+          @Identifier[core:feat-interaction]{feat save} with
+          @Identifier[core:disadvantage]{disadvantage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - spell
+      trigger: >-
+        <p>You cast an @Wiki[Category:Attack spells]{attack} or
+        @Wiki[Category:Feat spells]{feat interaction spell}.</p>
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-4-necromancer.webp
+name: Rank 4 Necromancer
+system:
+  _sup: 5e9017ca021bc2d7
+  archetype: mage
+  class: necromancer
+  competence:
+    raw: 1
+  description: >-
+    <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers}
+    are most at home in the cemetery digging up future minions. Shunned by most
+    of society, these dark mages are not necessarily evil, they simply see death
+    as full of potential energy while others see it as the end of life.
+    @Identifier[class:necromancer]{Necromancers} fear nothing, as they are
+    always facing death. If you are playing a
+    @Identifier[class:necromancer]{Necromancer} be unafraid, kill without
+    remorse and be interested in @Identifier[status:dead]{dead} bodies, close to
+    death yourself, almost in another world.</p>
+  identifier: rank-4-necromancer
+  innate: false
+  maxAv: 0
+  number: 4
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d8
+    mp:
+      disabled: false
+      formula: 1d12
+type: rank

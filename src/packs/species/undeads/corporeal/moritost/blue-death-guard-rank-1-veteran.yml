@@ -1,0 +1,340 @@
+_id: lwtLDRF3JhuYR2Mh
+_key: '!items!lwtLDRF3JhuYR2Mh'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.ce7640052630fc9b
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: j5OCoQExiifYlXXK
+    _key: '!items.effects!lwtLDRF3JhuYR2Mh.j5OCoQExiifYlXXK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/brace.webp
+    name: Brace
+    system:
+      automations:
+        0BLOMYrODY3bzx8I:
+          _id: 0BLOMYrODY3bzx8I
+          competencies:
+            - 0
+          formula: 1d(max(6, @flags.braceDieSize))
+          impact: setTempHp
+          trigger: execute
+          type: roll
+        dQvjSj38Nt3dcuZF:
+          _id: dQvjSj38Nt3dcuZF
+          competencies:
+            - 1
+          formula: (1 + @p)d(max(6, @flags.braceDieSize))
+          impact: setTempHp
+          trigger: execute
+          type: roll
+        Eg4Omt9YhPTjNEEW:
+          _id: Eg4Omt9YhPTjNEEW
+          competencies:
+            - 2
+          formula: (1 + @f)d(max(6, @flags.braceDieSize))
+          impact: setTempHp
+          trigger: execute
+          type: roll
+        Rid5p1TlO90isbp4:
+          _id: Rid5p1TlO90isbp4
+          amount: 0
+          impact: setTempHp
+          morganti: false
+          showDialog: false
+          trigger: movement
+          type: take
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        triggers:
+          - movement
+        unit: unlimited
+      executionTime:
+        base: a1
+      form: normal
+      identifier: brace
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and
+          gain [[/roll 1d6]] @Identifier[core:temporary-hit-points]{temporary
+          HP} as long as you remain stationary.</p>
+        fluent: >-
+          <p>Instead gain [[/roll 1d6 + (@f)d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+        proficient: >-
+          <p>Instead gain [[/roll 1d6 + (@p)d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: Nel4kQU109RUj1k2
+    _key: '!items.effects!lwtLDRF3JhuYR2Mh.Nel4kQU109RUj1k2'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.612719b68991bdad
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/improvised-armor-and-shields.webp
+    name: Improvised Armor and Shields
+    system:
+      automations:
+        DH9D04yber5kvwnW:
+          _id: DH9D04yber5kvwnW
+          all: false
+          attachDocuments: true
+          automatic: true
+          children:
+            enabled: true
+            identifiers:
+              - property:improvised
+            overrideData: false
+          data: |-
+            {
+              "name": "Improvised {name}"
+            }
+          multi: true
+          overrideData: true
+          separate: true
+          type: addDocuments
+          uuids:
+            - Compendium.teriock.equipment.Folder.ed3267c1d2c3a7f4
+            - Compendium.teriock.equipment.Folder.f596232e51f64ef9
+        FKc997ohmjSZ7IvR:
+          _id: FKc997ohmjSZ7IvR
+          preventEffect: true
+          preventFeat: false
+          preventThreshold: false
+          type: modifyEffect
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '8'
+        unit: hour
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      form: normal
+      identifier: improvised-armor-and-shields
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>During a @Identifier[core:short-rest]{short rest}, you may scavenge
+          materials and make 1 piece of
+          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} or
+          a @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.
+          It is @Identifier[property:improvised]{improvised}. Any
+          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} you
+          make in this way counts as a number of items equal to the
+          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor's}
+          @Identifier[core:armor-class]{AV} for the purpose of this ability.
+          Only common @Identifier[damage:mundane]{mundane} items can typically
+          be made in this way, but the @Identifier[core:game-master]{GM} may
+          specify if other options are available to you.</p>
+        fluent: >-
+          <p>You can instead make up to @Identifier[core:fluency-bonus]{F}
+          items.</p>
+        proficient: >-
+          <p>You can instead make up to @Identifier[core:proficiency-bonus]{P}
+          items.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - other
+    transfer: true
+    type: ability
+  - _id: shn8qx3LbBe4ktYg
+    _key: '!items.effects!lwtLDRF3JhuYR2Mh.shn8qx3LbBe4ktYg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5451b5caee0b5380
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/partner-awaken.webp
+    name: Partner Awaken
+    system:
+      competence:
+        raw: 0
+      delivery: sight
+      duration:
+        raw: '1'
+        unit: hour
+      endCondition: <p>You use [[lookup name]] again.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: partner-awaken
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You and the target gain @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:instant-awaken]{Instant Awaken} and
+          @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:reactive-awaken]{Reactive Awaken} (only usable on
+          each other). You may only have this active on one creature at a
+          time.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '30'
+        unit: ft
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: SDOyYxlALjm1rQnZ
+    _key: '!items.effects!lwtLDRF3JhuYR2Mh.SDOyYxlALjm1rQnZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.GTwa9EG1h2n986ZO
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/instant-awaken.webp
+    name: Instant Awaken
+    system:
+      _sup: shn8qx3LbBe4ktYg
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          showConfirmationDialog: true
+          type: common
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime:
+        base: a1
+      form: normal
+      identifier: instant-awaken
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        hit: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: w1wE2uzrU5lDq09z
+    _key: '!items.effects!lwtLDRF3JhuYR2Mh.w1wE2uzrU5lDq09z'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8d55640ef65f1e81
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/reactive-awaken.webp
+    name: Reactive Awaken
+    system:
+      _sup: shn8qx3LbBe4ktYg
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - awaken
+          showConfirmationDialog: true
+          type: common
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        unit: instant
+      effectTypes:
+        - awakening
+      executionTime:
+        base: r1
+      form: normal
+      identifier: reactive-awaken
+      interaction: attack
+      limitation: <p>Only usable on the other participant in the Partner Awaken.</p>
+      maneuver: reactive
+      overview:
+        base: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: 0b00935e53673daa
+img: systems/teriock/src/icons/ranks/rank-1-veteran.webp
+name: Rank 1 Veteran
+system:
+  _sup: 39e03df04fb17eda
+  archetype: warrior
+  class: veteran
+  competence:
+    raw: 1
+  description: >-
+    <p>Jaded and tough, these warriors act as if they have seen it all.
+    Obviously they are not all seasoned warriors, but the training of a
+    @Identifier[class:veteran]{Veteran} involves a great deal of time in battle,
+    so even a first rank @Identifier[class:veteran]{Veteran} has seen more
+    action than other first rank warriors. The strategy of the
+    @Identifier[class:veteran]{Veteran} is to be an immovable wall, and hold the
+    line. @Identifier[class:veteran]{Veterans} rely on defense in battle, always
+    working to better ensure their protection, which is why they survive to be
+    veterans. If you are a @Identifier[class:veteran]{Veteran} be jaded,
+    unimpressed, hard, and pessimistic.</p>
+  identifier: rank-1-veteran
+  innate: false
+  maxAv: 4
+  number: 1
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d12
+    mp:
+      disabled: false
+      formula: 1d8
+type: rank

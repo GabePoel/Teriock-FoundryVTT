@@ -1,0 +1,868 @@
+_id: 8e30941541fc2583
+_key: '!items!8e30941541fc2583'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.84
+effects:
+  - _id: xzqRmz32Tqa6m3oH
+    _key: '!items.effects!8e30941541fc2583.xzqRmz32Tqa6m3oH'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4b64f37f4f6bc9e7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/advanced-hearing.webp
+    name: Advanced Hearing
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.hearing
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '30'
+          type: changes
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          absent:
+            - down
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      form: normal
+      identifier: advanced-hearing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can hear all moving creatures within 30 feet. If the creature
+          is breathing, you can hear it even if it is not moving. You can not
+          detect @Identifier[status:silent]{silent} creatures in this way.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+    transfer: true
+    type: ability
+  - _id: plQWgQJodxJW3Tms
+    _key: '!items.effects!8e30941541fc2583.plQWgQJodxJW3Tms'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f6aa56d2e5c27c4
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/advanced-smell.webp
+    name: Advanced Smell
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        conditions:
+          absent:
+            - down
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      form: normal
+      identifier: advanced-smell
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can passively smell the types of all living creatures within 30
+          feet. You can detect dead and undead creatures as well, but you cannot
+          distinguish within or between them. They all smell like death. You
+          also gain @Identifier[ability:scent-seeing]{Scent Seeing}. You can not
+          detect @Identifier[status:odorless]{odorless} creatures in this
+          way.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 2
+    transfer: true
+    type: ability
+  - _id: FeEINb2QosimbuCg
+    _key: '!items.effects!8e30941541fc2583.FeEINb2QosimbuCg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3bf50ff94a38d2e1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/battle-charge.webp
+    name: Battle Charge
+    system:
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: r0
+      form: normal
+      identifier: battle-charge
+      interaction: attack
+      maneuver: reactive
+      overview:
+        base: >-
+          <p class="note"><b>Note:</b> A target moving due to [[lookup name]]
+          can still provoke reactions like
+          @Identifier[ability:opportunity-attack]{Opportunity Attack}.</p><p
+          class="note"><b>Note:</b> This ability can trigger in the middle of
+          @Identifier[ability:move]{moving}. You could approach an enemy,
+          trigger this ability, take an
+          @Identifier[ability:opportunity-attack]{Opportunity Attack} against
+          them, keep moving towards them, and trigger this ability again.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: <p>Target moves 20 feet away from you.</p>
+        hit: <p>Target moves 10 feet away from you.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>Moving at least 10 feet in a straight line towards the target and
+        becoming adjacent to them.</p>
+    transfer: true
+    type: ability
+  - _id: hyA9Q47fI57AkDJ8
+    _key: '!items.effects!8e30941541fc2583.hyA9Q47fI57AkDJ8'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5c693a8ba90502ed
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/berserk.webp
+    name: Berserk
+    system:
+      automations:
+        eUm1UOhkyF3KmU1q:
+          _id: eUm1UOhkyF3KmU1q
+          all: false
+          attachDocuments: true
+          automatic: true
+          competencies:
+            - 1
+          identifiers:
+            - ability:fast
+          multi: false
+          separate: false
+          type: addDocuments
+        qy0rKWHv0DFoFgqJ:
+          _id: qy0rKWHv0DFoFgqJ
+          all: false
+          attachDocuments: true
+          automatic: true
+          competencies:
+            - 2
+          identifiers:
+            - ability:swift
+          multi: false
+          separate: false
+          type: addDocuments
+        X2DN6pHX8ivuh2kl:
+          _id: X2DN6pHX8ivuh2kl
+          conditions:
+            absent:
+              - dead
+          override:
+            conditions: true
+          type: expiration
+        mmCTbgaQIg38Y0II:
+          _id: mmCTbgaQIg38Y0II
+          executor: false
+          multi: false
+          relation: include
+          status: frenzied
+          target: false
+          type: status
+        mY9vQJGkj2Kf1RTw:
+          _id: mY9vQJGkj2Kf1RTw
+          amount: 15
+          impact: gainTempHp
+          morganti: false
+          showDialog: false
+          type: take
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '5'
+        unit: minute
+      endCondition: <p>You die or 1 minute passes without combat.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: berserk
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You gain 15 @Identifier[core:temporary-hit-points]{temporary HP}
+          and become @Identifier[status:frenzied]{frenzied}.</p>
+        fluent: >-
+          <p>You instead gain an additional 5 ×
+          @Identifier[core:fluency-bonus]{F}
+          @Identifier[core:temporary-hit-points]{temporary HP} and gain
+          @Identifier[ability:swift]{Swift}.</p>
+        proficient: >-
+          <p>You gain an additional 5 × @Identifier[core:proficiency-bonus]{P}
+          @Identifier[core:temporary-hit-points]{temporary HP} and gain
+          @Identifier[ability:fast]{Fast}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: yzuCj0S1ANFG1Dmf
+    _key: '!items.effects!8e30941541fc2583.yzuCj0S1ANFG1Dmf'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2463fd01df79572f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/dense-intelligence.webp
+    name: Dense Intelligence
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: dense-intelligence
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: -2
+    transfer: true
+    type: ability
+  - _id: ZpmDpRTc0goeu9zU
+    _key: '!items.effects!8e30941541fc2583.ZpmDpRTc0goeu9zU'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.ElgNURrH9OTECkbk
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/giant-strength.webp
+    name: Giant Strength
+    system:
+      automations:
+        tS17fIFj24KkwiGX:
+          _id: tS17fIFj24KkwiGX
+          identifier: property:cumbersome
+          type: suppress
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: giant-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:improved-strength]{Improved Strength}
+          and @Identifier[ability:melee-damage-boost]{Melee Damage Boost}. In
+          addition, you are no longer suffer the consequences of
+          @Identifier[property:cumbersome]{cumbersome} items.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 3
+    transfer: true
+    type: ability
+  - _id: 9isixcuyUoxGWdIc
+    _key: '!items.effects!8e30941541fc2583.9isixcuyUoxGWdIc'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c17c6e40cc866b53
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/impale.webp
+    name: Impale
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - standardDamage
+          showConfirmationDialog: true
+          type: common
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          hacks:
+            - body
+          reverse: false
+          type: hacks
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: a1
+      form: normal
+      identifier: impale
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: >-
+          <p>If you want, target takes
+          @Identifier[core:standard-and-critical-damage]{standard damage} as
+          well.</p>
+        hit: <p>Target takes a @Identifier[damage:hack]{body hack}.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    transfer: true
+    type: ability
+  - _id: QS8qO6bTN3kPECot
+    _key: '!items.effects!8e30941541fc2583.QS8qO6bTN3kPECot'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3af18a0eefea2af8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/knockback.webp
+    name: Knockback
+    system:
+      automations:
+        6CT5NSb2WmH7cNNn:
+          _id: 6CT5NSb2WmH7cNNn
+          distance: '10'
+          movementAction: walk
+          origin: executor
+          originBarrier: true
+          type: move
+        XHbIO38NtGB9Mcad:
+          _id: XHbIO38NtGB9Mcad
+          distance: '20'
+          movementAction: walk
+          origin: executor
+          originBarrier: true
+          type: move
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: a1
+      form: normal
+      identifier: knockback
+      interaction: attack
+      maneuver: active
+      overview:
+        base: >-
+          <p class="note"><b>Note:</b> A target moving due to [[lookup name]]
+          can still provoke reactions like
+          @Identifier[ability:opportunity-attack]{Opportunity Attack}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: <p>Target moves 20 feet away from you.</p>
+        hit: <p>Target moves 10 feet away from you.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: uIOIuSStlJSEpE1y
+    _key: '!items.effects!8e30941541fc2583.uIOIuSStlJSEpE1y'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9ba7e67dd8d160
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/no-hands.webp
+    name: No Hands
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: no-hands
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You cannot use items in your
+          @Identifier[equipment:hand]{hands}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 2IlnhxkwBjF4dPA6
+    _key: '!items.effects!8e30941541fc2583.2IlnhxkwBjF4dPA6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: normal-movement
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    transfer: true
+    type: ability
+  - _id: lhhWYgaUMY3LNTKi
+    _key: '!items.effects!8e30941541fc2583.lhhWYgaUMY3LNTKi'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1d13190e5b38bda6
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/normal-sneak.webp
+    name: Normal Sneak
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: normal-sneak
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 0
+    transfer: true
+    type: ability
+  - _id: itApRkR6OlFMcMFd
+    _key: '!items.effects!8e30941541fc2583.itApRkR6OlFMcMFd'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.091ad414d8b0e678
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/trample.webp
+    name: Trample
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - standardDamage
+          showConfirmationDialog: true
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          formula: 1d6
+          impact: damage
+          type: roll
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: r0
+      form: normal
+      identifier: trample
+      interaction: attack
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>If you use [[lookup name]] on a @Pack[teriock.creatures]{creature}
+          at least one @Identifier[core:size]{size category} smaller than you,
+          add [[/damage 1d6]] @Identifier[core:damage]{damage} to its
+          @Identifier[core:standard-and-critical-damage]{standard damage}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: >-
+          <p>Deal @Identifier[core:standard-and-critical-damage]{critical
+          damage}.</p>
+        hit: >-
+          <p>Deal @Identifier[core:standard-and-critical-damage]{standard
+          damage}.</p>
+      targets:
+        - creature
+      trigger: >-
+        <p>Moving at least 10 feet in a straight line towards the target and
+        becoming adjacent to them.</p>
+    transfer: true
+    type: ability
+  - _id: UVIkNRnXnBr0TyuB
+    _key: '!items.effects!8e30941541fc2583.UVIkNRnXnBr0TyuB'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/scent-seeing.webp
+    name: Scent Seeing
+    system:
+      _sup: plQWgQJodxJW3Tms
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.smell
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '10'
+          type: changes
+      competence:
+        raw: 0
+      delivery: aura
+      duration:
+        conditions:
+          absent:
+            - down
+        unit: unlimited
+      effectTypes:
+        - sensory
+      executionTime:
+        base: passive
+      form: normal
+      identifier: scent-seeing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You know the exact location of all target creatures. You continue
+          to know the location of all targets within 10 feet, whether they are
+          or you are moving or not, so long as they are still within 10 feet of
+          you.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '10'
+        unit: ft
+      requirements: >-
+        <p>You are not @Identifier[status:anosmatic]{anosmatic} and the target
+        is not @Identifier[status:odorless]{odorless}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: HYOL5MnjdNszPhaF
+    _key: '!items.effects!8e30941541fc2583.HYOL5MnjdNszPhaF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5pnQBaF30VIQrAZO
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
+    name: Melee Damage Boost
+    system:
+      _sup: ZpmDpRTc0goeu9zU
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      effectTypes:
+        - damaging
+      executionTime:
+        base: r0
+      form: normal
+      identifier: melee-damage-boost
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You may spend an unused @Identifier[core:active-maneuvers]{action}
+          to @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage}.</p>
+        proficient: >-
+          <p>You may spend an additional unused
+          @Identifier[core:active-maneuvers]{action} to
+          @Identifier[keyword:boosted]{boost} the triggering
+          @Identifier[core:damage]{damage} again.</p>
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have hit a creature with a @Wiki[Category:Damaging
+        effects]{damaging} melee @Wiki[Category:Weapon delivery
+        abilities]{weapon} @Identifier[core:attack-interaction]{attack}.</p>
+    transfer: true
+    type: ability
+  - _id: aNTGoi8FvRIh1Tdu
+    _key: '!items.effects!8e30941541fc2583.aNTGoi8FvRIh1Tdu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8aa8167e9f40cbb2
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/improved-strength.webp
+    name: Improved Strength
+    system:
+      _sup: ZpmDpRTc0goeu9zU
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: improved-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:beastly-strength]{Beastly Strength}
+          and @Identifier[ability:improved-armor-piercing]{Improved Armor
+          Piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 2
+    transfer: true
+    type: ability
+  - _id: liz1Jn0pyWlBGCiW
+    _key: '!items.effects!8e30941541fc2583.liz1Jn0pyWlBGCiW'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/beastly-strength.webp
+    name: Beastly Strength
+    system:
+      _sup: aNTGoi8FvRIh1Tdu
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: beastly-strength
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Can wield @Identifier[property:two-handed]{two-handed} weapons in
+          one hand.</p><p class="note"><b>Note:</b>
+          @Identifier[property:armor-piercing]{Armor piercing} weapons must
+          still be wielded in two hands to be
+          @Identifier[keyword:armor-voiding]{AV0}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: str
+          value: 1
+    transfer: true
+    type: ability
+  - _id: hzfa3XtlTGpPFmRb
+    _key: '!items.effects!8e30941541fc2583.hzfa3XtlTGpPFmRb'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.54f63d63ae4376a9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
+    name: Improved Armor Piercing
+    system:
+      _sup: aNTGoi8FvRIh1Tdu
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: improved-armor-piercing
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Melee weapons you use are
+          @Identifier[property:armor-piercing]{armor piercing}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+folder: 30f4d11e5e53d332
+img: systems/teriock/src/icons/creatures/rhinoceros.webp
+name: Rhinoceros
+system:
+  br: 8
+  competence:
+    raw: 1
+  identifier: rhinoceros
+  size:
+    enabled: true
+    value: 5
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '2'
+    mp:
+      disabled: false
+      faces: 6
+      number:
+        raw: '1'
+  traits:
+    - animal
+  transformation:
+    img: systems/teriock/src/icons/tokens/rhinoceros.webp
+    ring: true
+type: species

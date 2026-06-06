@@ -1,0 +1,328 @@
+_id: rU4PXSer6dSjaU7V
+_key: '!items!rU4PXSer6dSjaU7V'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.920e7b4df1e4ae19
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: aY2uxfG131SHjtk7
+    _key: '!items.effects!rU4PXSer6dSjaU7V.aY2uxfG131SHjtk7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9db3f09e7a942624
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/prepare-poison.webp
+    name: Prepare Poison
+    system:
+      competence:
+        raw: 0
+      costs:
+        components:
+          material:
+            description: <p>A vial of poison or constituent ingredients.</p>
+            type: description
+      delivery: self
+      duration:
+        raw: '24'
+        unit: hour
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      form: normal
+      identifier: prepare-poison
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You spend a @Identifier[core:short-rest]{short rest} preparing a
+          vial of poison for your own uses. Once the vial is prepared, you may
+          either apply it to a
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon},
+          which can then be used for a single
+          @Identifier[ability:poison-strike]{Poison Strike}, or get it ready to
+          put on some other item, which can in turn be applied with
+          @Identifier[ability:poison-item]{Poison Item}. Once prepared, the
+          poison only lasts 24 hours before it expires.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: V33jSSpXn12Zy2HS
+    _key: '!items.effects!rU4PXSer6dSjaU7V.V33jSSpXn12Zy2HS'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.971a09e4791f1745
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/vitals-silence.webp
+    name: Vitals Silence
+    system:
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: end
+              trigger: turn
+            who:
+              type: target
+          override:
+            combat: true
+          type: expiration
+        1d6d351357604b50:
+          _id: 1d6d351357604b50
+          executor: false
+          multi: false
+          relation: include
+          status: silenced
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        unit: instant
+      endCondition: >-
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: vitals-silence
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        hit: <p>Target is @Identifier[status:silenced]{silenced}.</p>
+      skill: true
+      standard: true
+      targets:
+        - vitals
+    transfer: true
+    type: ability
+  - _id: Q9PMn6DeKJ5Q0oU1
+    _key: '!items.effects!rU4PXSer6dSjaU7V.Q9PMn6DeKJ5Q0oU1'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a046cd851f312b9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/poison-strike.webp
+    name: Poison Strike
+    system:
+      _sup: aY2uxfG131SHjtk7
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          competencies:
+            - 0
+          formula: 1d6[toxic]
+          impact: damage
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+          formula: 1d8[toxic]
+          impact: damage
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d10[toxic]
+          impact: damage
+          type: roll
+        743730f25f256b10:
+          _id: 743730f25f256b10
+          executor: false
+          multi: false
+          relation: include
+          status: poisoned
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: weapon
+      duration:
+        raw: '24'
+        unit: hour
+      effectTypes:
+        - poison
+      endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: poison-strike
+      interaction: attack
+      maneuver: active
+      overview:
+        fluent: >-
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
+        proficient: >-
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - alchemical
+      range:
+        unit: contact
+      results:
+        hit: >-
+          <p>Target is @Identifier[status:poisoned]{poisoned}. The
+          @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @Identifier[core:damage]{damage}.</p>
+      skill: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: 8ptu18n6POFQGysK
+    _key: '!items.effects!rU4PXSer6dSjaU7V.8ptu18n6POFQGysK'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.15e9b598e41c0f04
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/poison-item.webp
+    name: Poison Item
+    system:
+      _sup: aY2uxfG131SHjtk7
+      automations:
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          formula: 1d6[toxic]
+          impact: damage
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d8[toxic]
+          impact: damage
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d10[toxic]
+          impact: damage
+          type: roll
+        743730f25f256b10:
+          _id: 743730f25f256b10
+          executor: false
+          multi: false
+          relation: include
+          status: poisoned
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        raw: '24'
+        unit: hour
+      endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: poison-item
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target makes a creature become
+          @Identifier[status:poisoned]{poisoned}. The
+          @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          @Identifier[core:damage]{damage}. The way the item delivers this to
+          its user depends on the nature of the item. If it's food or drink,
+          it's when the item is consumed. The @Identifier[core:game-master]{GM}
+          may approve other cases as well. The item only delivers the
+          @Identifier[status:poisoned]{poison} effect once.</p>
+        fluent: >-
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
+        proficient: >-
+          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
+      powerSources:
+        - alchemical
+      range:
+        unit: contact
+      requirements: <p>Target is not a weapon.</p>
+      skill: true
+      standard: true
+      targets:
+        - item
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-5-assassin.webp
+name: Rank 5 Assassin
+system:
+  _sup: e575cc2833903bfc
+  archetype: semi
+  class: assassin
+  competence:
+    raw: 1
+  description: >-
+    <p>The shadiest of all the classes, @Identifier[class:assassin]{Assassins}
+    see life as expendable and unimportant. Even their own life is trivial,
+    someone will kill them sooner or later. That's life. Life is short and thus
+    @Identifier[class:assassin]{Assassins} tend to get to the point quickly,
+    literally. Some-what of a martial artist, there is something Zen about the
+    @Identifier[class:assassin]{Assassin}'s way, not unlike the
+    @Identifier[class:duelist]{Duelist} in that they have strong inner
+    motivation, though care nothing for honor.
+    @Identifier[class:assassin]{Assassins} try to increase hatred between people
+    in the hopes of creating more job opportunities for themselves. If you're an
+    @Identifier[class:assassin]{Assassin}, don't think twice about killing
+    someone, care little for your own life and cut to the chase!</p>
+  identifier: rank-5-assassin
+  innate: false
+  maxAv: 2
+  number: 5
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d10
+    mp:
+      disabled: false
+      formula: 1d10
+type: rank

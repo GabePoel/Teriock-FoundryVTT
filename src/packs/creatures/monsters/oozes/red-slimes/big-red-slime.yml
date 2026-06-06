@@ -1,0 +1,3207 @@
+_id: f17d41368198171e
+_key: '!actors!f17d41368198171e'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.15
+folder: 9eb51b53c8495b9d
+img: systems/teriock/src/icons/creatures/big-red-slime.webp
+items:
+  - _id: f17d41368198171e
+    _key: '!actors.items!f17d41368198171e.f17d41368198171e'
+    _stats:
+      compendiumSource: Compendium.teriock.species.Item.f17d41368198171e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: ReFidaLw1r0OBh6a
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.ReFidaLw1r0OBh6a
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.bc223260c6f1bc70
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/acidic-blood.webp
+        name: Acidic Blood
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - automatic
+          executionTime:
+            base: passive
+          form: normal
+          identifier: acidic-blood
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Any
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+              that deals @Identifier[core:damage]{damage} to you becomes
+              @Identifier[property:shattered]{shattered} at the start of your
+              next @Identifier[core:turns]{turn}.</p>
+          powerSources:
+            - alchemical
+          range:
+            unit: self
+          targets:
+            - self
+          trigger: >-
+            <p>This triggers automatically. You cannot choose to not use it if
+            you are able to.</p>
+        transfer: true
+        type: ability
+      - _id: YoRD7adkMLV1qF4X
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.YoRD7adkMLV1qF4X
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f6aa56d2e5c27c4
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/advanced-smell.webp
+        name: Advanced Smell
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            conditions:
+              absent:
+                - down
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime:
+            base: passive
+          form: normal
+          identifier: advanced-smell
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can passively smell the types of all living creatures
+              within 30 feet. You can detect dead and undead creatures as well,
+              but you cannot distinguish within or between them. They all smell
+              like death. You also gain @Identifier[ability:scent-seeing]{Scent
+              Seeing}. You can not detect @Identifier[status:odorless]{odorless}
+              creatures in this way.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 2
+        transfer: true
+        type: ability
+      - _id: gv4OfgaS7YBjTPkt
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.gv4OfgaS7YBjTPkt
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.07a0880b230cdb14
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/beastly-strength.webp
+        name: Beastly Strength
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: beastly-strength
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Can wield @Identifier[property:two-handed]{two-handed} weapons
+              in one hand.</p><p class="note"><b>Note:</b>
+              @Identifier[property:armor-piercing]{Armor piercing} weapons must
+              still be wielded in two hands to be
+              @Identifier[keyword:armor-voiding]{AV0}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: str
+              value: 1
+        transfer: true
+        type: ability
+      - _id: V38fgHsMd8yaIKvw
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.V38fgHsMd8yaIKvw
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.c99638056493f146
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: icons/creatures/slimes/slime-giant-face-eyes.webp
+        name: Blind Fighting
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.blind
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '60'
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime:
+            base: passive
+          form: normal
+          identifier: blind-fighting
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can sense up to 60 feet around you even when you are
+              @Identifier[status:blind]{blind}. This lets you detect
+              @Wiki[Category:Movement effects]{moving creatures}, but has no
+              color nor depth. Even subtle movements like breathing are
+              sufficient for this purpose. This does not detect any color nor
+              depth, such as pictures or words on a page.</p>
+          powerSources:
+            - magical
+            - primal
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: per
+              value: 1
+        transfer: true
+        type: ability
+      - _id: loPc99efEKIBkAc4
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.loPc99efEKIBkAc4
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ae090f329b40fa37
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/bumbling.webp
+        name: Bumbling
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: bumbling
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: snk
+              value: -2
+        transfer: true
+        type: ability
+      - _id: YLURiaiC1xMga01i
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.YLURiaiC1xMga01i
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0d78f7478e1024cb
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/dark-vision.webp
+        name: Dark Vision
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.dark
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '60'
+              type: changes
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime:
+            base: passive
+          form: normal
+          identifier: dark-vision
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You can see in the dark up to 60 feet as though it is dim
+              light.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: NbnYWzat4o9vkrcf
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.NbnYWzat4o9vkrcf
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f927c5a43cc3b312
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/devour.webp
+        name: Devour
+        system:
+          competence:
+            raw: 0
+          delivery: bite
+          duration:
+            unit: instant
+          executionTime:
+            base: a2
+          form: normal
+          identifier: devour
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - martial
+          range:
+            unit: contact
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
+          results:
+            hit: >-
+              <p>Target is @Identifier[status:dead]{dead},
+              @Identifier[status:ruined]{ruined}, and their
+              @Identifier[core:size]{SIZE} is reduced by 1. If their
+              @Identifier[core:size]{SIZE} was already less than 1, it is
+              reduced to 0.</p>
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: vVRrAoFJmXPCj84m
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.vVRrAoFJmXPCj84m
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f74c24d6438b7fea
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
+        name: Gooey Damage Reduction
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: special
+          identifier: gooey-damage-reduction
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>All @Identifier[core:damage]{damage} you take is
+              @Identifier[keyword:deboosted]{deboosted}.</p>
+          powerSources:
+            - alchemical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: slhCucdPLEbV1wpX
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.slhCucdPLEbV1wpX
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.423d45de3530311a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
+        name: Ooze Mind
+        system:
+          automations:
+            6cV7jWQ7Cw2JO44h:
+              _id: 6cV7jWQ7Cw2JO44h
+              category: statuses
+              relation: immunities
+              type: protection
+              value: frenzied
+            F1AoyKmaYImGd34B:
+              _id: F1AoyKmaYImGd34B
+              category: statuses
+              relation: immunities
+              type: protection
+              value: frightened
+            QvNjVsVhJtMrRosF:
+              _id: QvNjVsVhJtMrRosF
+              category: statuses
+              relation: immunities
+              type: protection
+              value: goaded
+            p5tXQvLJSzv7w8cO:
+              _id: p5tXQvLJSzv7w8cO
+              category: statuses
+              relation: immunities
+              type: protection
+              value: allured
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          form: special
+          identifier: ooze-mind
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to being
+              @Identifier[status:frightened]{frightened},
+              @Identifier[status:goaded]{goaded},
+              @Identifier[status:frenzied]{frenzied}, and
+              @Identifier[status:allured]{allured}.</p>
+          powerSources:
+            - alchemical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: 7uzxpjmABjmZagDJ
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.7uzxpjmABjmZagDJ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2e92597058dd0b95
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/resist-effects.webp
+        name: Resist Effects
+        system:
+          automations:
+            63c7106d02025d43:
+              _id: 63c7106d02025d43
+              macro: Compendium.teriock.execution.Macro.989bee0dce350480
+              trigger: preExecute
+              type: abilityMacro
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              hex: false
+              type: resist
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: self
+          duration:
+            raw: '1'
+            unit: hour
+          effectTypes:
+            - resistance
+          elements:
+            - storm
+          executionTime:
+            base: a1
+          form: special
+          identifier: resist-effects
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>Pick one of the following @Wiki[Category:Effects]{effect
+              types}. You @Identifier[keyword:resistance]{resist}
+              @Wiki[Category:Effects]{effects} of that
+              type.</p><ol><li>@Wiki[Category:Awakening effects]{Awakening
+              effects}</li>
+
+              <li>@Wiki[Category:Control effects]{Control effects}</li>
+
+              <li>@Wiki[Category:Displacement effects]{Displacement
+              effects}</li>
+
+              <li>@Wiki[Category:Duel modifying effects]{Duel modifying
+              effects}</li>
+
+              <li>@Wiki[Category:Financial effects]{Financial effects}</li>
+
+              <li>@Wiki[Category:Healing effects]{Healing effects}</li>
+
+              <li>@Wiki[Category:Killing effects]{Killing effects}</li>
+
+              <li>@Wiki[Category:Knockout effects]{Knockout effects}</li>
+
+              <li>@Wiki[Category:Loud effects]{Loud effects}</li>
+
+              <li>@Wiki[Category:Mental effects]{Mental effects}</li>
+
+              <li>@Wiki[Category:Poison effects]{Poison effects}</li>
+
+              <li>@Wiki[Category:Reanimation effects]{Reanimation effects}</li>
+
+              <li>@Wiki[Category:Regeneration effects]{Regeneration
+              effects}</li>
+
+              <li>@Wiki[Category:Revitalization effects]{Revitalization
+              effects}</li>
+
+              <li>@Wiki[Category:Revival effects]{Revival effects}</li>
+
+              <li>@Wiki[Category:Stealing effects]{Stealing effects}</li>
+
+              <li>@Wiki[Category:Summoning effects]{Summoning effects}</li>
+
+              <li>@Wiki[Category:Temporal effects]{Temporal effects}</li>
+
+              <li>@Wiki[Category:Transformation effects]{Transformation
+              effects}</li>
+
+              <li>@Wiki[Category:Truth detecting effects]{Truth detecting
+              effects}</li></ol>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: fRayAqPKgsBYqx5H
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.fRayAqPKgsBYqx5H
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.919e1424f589c498
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/slow.webp
+        name: Slow
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: flaw
+          identifier: slow
+          interaction: manifest
+          maneuver: passive
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+          upgrades:
+            score:
+              attribute: mov
+              value: -1
+        transfer: true
+        type: ability
+      - _id: l9vV7a9KQdHdRbwW
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.l9vV7a9KQdHdRbwW
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.be49083356b0f9c7
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
+        name: Unconsciousness Immunity
+        system:
+          automations:
+            uwOYmc8mNN1jL3We:
+              _id: uwOYmc8mNN1jL3We
+              category: statuses
+              relation: immunities
+              type: protection
+              value: unconscious
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          form: normal
+          identifier: unconsciousness-immunity
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to falling
+              @Identifier[status:unconscious]{unconscious}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: AYClXdlidLMCYuS3
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.AYClXdlidLMCYuS3
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.be255d05a54f0291
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/vitals-durability.webp
+        name: Vitals Durability
+        system:
+          automations:
+            FNFs7lvzhiFH7Uvn:
+              _id: FNFs7lvzhiFH7Uvn
+              category: equipment
+              relation: immunities
+              type: protection
+              value: arrow
+            tPwKcAdyCg31MgdV:
+              _id: tPwKcAdyCg31MgdV
+              category: other
+              relation: immunities
+              type: protection
+              value: Vitals Targeting Abilities
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          effectTypes:
+            - immunity
+          executionTime:
+            base: passive
+          form: normal
+          identifier: vitals-durability
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You are @Identifier[keyword:immunity]{immune} to
+              @Wiki[Category:Bows]{arrows} and @Wiki[Category:Vitals target
+              abilities]{vitals target abilities}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: JFvyvAjvEseRsw8Z
+        _key: >-
+          !actors.items.effects!f17d41368198171e.f17d41368198171e.JFvyvAjvEseRsw8Z
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6c43c5ea09e100d5
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/scent-seeing.webp
+        name: Scent Seeing
+        system:
+          _sup: YoRD7adkMLV1qF4X
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.senses.smell
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '10'
+              type: changes
+          competence:
+            raw: 0
+          delivery: aura
+          duration:
+            conditions:
+              absent:
+                - down
+            unit: unlimited
+          effectTypes:
+            - sensory
+          executionTime:
+            base: passive
+          form: normal
+          identifier: scent-seeing
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You know the exact location of all target creatures. You
+              continue to know the location of all targets within 10 feet,
+              whether they are or you are moving or not, so long as they are
+              still within 10 feet of you.</p>
+          powerSources:
+            - martial
+          range:
+            raw: '10'
+            unit: ft
+          requirements: >-
+            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
+            target is not @Identifier[status:odorless]{odorless}.</p>
+          skill: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+    folder: 9eb51b53c8495b9d
+    img: systems/teriock/src/icons/creatures/big-red-slime.webp
+    name: Big Red Slime
+    system:
+      appearance: <p>A pool of thick opaque red liquid.</p>
+      br: 15
+      competence:
+        raw: 1
+      description: <p>Slimes are a conglomeration of semi-sentient ooze.</p>
+      hpIncrease: <p>Gain another 2 hit dice for every 1 additional size.</p>
+      identifier: big-red-slime
+      innateRanks: >-
+        <p>Innately @Pack[teriock.classes]{rank} 3
+        @Identifier[class:flame-mage]{Flame Mage}.</p>
+      mpIncrease: <p>Gain another mana die for every 1 additional size.</p>
+      size:
+        enabled: true
+        max: 6
+        min: 5
+        value: 5
+      statDice:
+        hp:
+          disabled: false
+          formula: (2 * @species.size)d6
+        mp:
+          disabled: false
+          formula: (@species.size)d6
+      traits:
+        - ooze
+      transformation:
+        img: systems/teriock/src/icons/tokens/big-red-slime.webp
+        ring: true
+    type: species
+  - _id: DtYP4I28jj1TTQEO
+    _key: '!actors.items!f17d41368198171e.DtYP4I28jj1TTQEO'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.678069c1b38b8e6b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: wKxfL6pzdYHJceL0
+        _key: >-
+          !actors.items.effects!f17d41368198171e.DtYP4I28jj1TTQEO.wKxfL6pzdYHJceL0
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.59fbc7ba847855be
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/fire-ball.webp
+        name: Fire Ball
+        system:
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d4[magic fire]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic fire]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: fire-ball
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            raw: '30'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[magic fire]]]
+              @Identifier[core:damage]{damage} to target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: jNVwWGftQrYicpwi
+        _key: >-
+          !actors.items.effects!f17d41368198171e.DtYP4I28jj1TTQEO.jNVwWGftQrYicpwi
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ae9bbe52072963a4
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/flame-ray.webp
+        name: Flame Ray
+        system:
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d8[fire magic]
+              heighten:
+                - 1
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d8[fire magic]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: flame-ray
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d8[fire magic]]]
+              @Identifier[core:damage]{damage} to target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: LbLjjWiopqGfltmW
+        _key: >-
+          !actors.items.effects!f17d41368198171e.DtYP4I28jj1TTQEO.LbLjjWiopqGfltmW
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.27733508134aba43
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/mage-light.webp
+        name: Mage Light
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: mage-light
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @Identifier[ability:light]{Light} and
+              @Identifier[ability:ignite]{Ignite}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: yHA67BqutokLx7uo
+        _key: >-
+          !actors.items.effects!f17d41368198171e.DtYP4I28jj1TTQEO.yHA67BqutokLx7uo
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6de6fc2f99a96881
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/self-detonate.webp
+        name: Self Detonate
+        system:
+          automations:
+            32BRYYbao0OafqCz:
+              _id: 32BRYYbao0OafqCz
+              attribute: mov
+              bonus: '0'
+              threshold: 10 + @c
+              type: feat
+            YxFIjavyUBnxf6OV:
+              _id: YxFIjavyUBnxf6OV
+              all: false
+              angle: '60'
+              attachToToken: true
+              automatic: true
+              deleteOnTurnChange: true
+              excludeToken: true
+              expandWithToken: true
+              innerWidth: '0'
+              multi: false
+              outerWidth: '0'
+              regionType: emanation
+              restriction:
+                enabled: false
+                priority: 0
+                type: move
+              targeting: true
+              type: region
+              visibility: 2
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: sight
+          duration:
+            raw: '8'
+            unit: hour
+          elements:
+            - flame
+          executionTime:
+            base: 10 Minutes
+            slow:
+              raw: '10'
+              unit: minute
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
+            target an additional person.</p>
+          identifier: self-detonate
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>The next @Wiki[Category:Conjured spells]{conjured}
+              @Wiki[Category:Missile delivery spells]{missile spell} cast on the
+              target @Identifier[core:detonate-expansion]{detonates} (emanates
+              in a 10 foot radius @Identifier[core:aura-delivery]{aura} from the
+              target). This is a @Identifier[core:movement]{MOV}
+              @Identifier[core:feat-interaction]{feat save} using <i>your</i>
+              DC. Do not add your
+              @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC.
+              This detonating @Identifier[core:aura-delivery]{aura} is
+              @Wiki[Category:Loud effects]{loud}.</p>
+            fluent: >-
+              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now
+              included in the @Identifier[core:feat-interaction]{feat save
+              DC}.</p>
+            proficient: >-
+              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is
+              now included in the @Identifier[core:feat-interaction]{feat save
+              DC}.</p>
+          powerSources:
+            - magical
+          range:
+            raw: '5'
+            unit: ft
+          requirements: >-
+            <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may
+            only target yourself.</p>
+          ritual: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: iRSBKmS7JeM08vT1
+        _key: >-
+          !actors.items.effects!f17d41368198171e.DtYP4I28jj1TTQEO.iRSBKmS7JeM08vT1
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.9fca66d84679dd1f
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/ignite.webp
+        name: Ignite
+        system:
+          _sup: LbLjjWiopqGfltmW
+          automations:
+            HzyxPJ30wjiQSRG4:
+              _id: HzyxPJ30wjiQSRG4
+              all: false
+              attachDocuments: true
+              automatic: true
+              identifiers:
+                - property:flaming
+              multi: false
+              separate: false
+              type: addDocuments
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              changeType: add
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              type: duration
+          competence:
+            raw: 0
+          delivery: hand
+          duration:
+            raw: '1'
+            unit: hour
+          elements:
+            - flame
+          executionTime:
+            base: a0
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
+            of this effect increases by 1 hour.</p>
+          identifier: ignite
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>Target is set on fire or is put out. If the target is on fire,
+              it is considered to be @Identifier[property:flaming]{flaming}.
+              Your @Identifier[property:handy]{handy} items count as a
+              @Identifier[equipment:torch]{torch} for the purpose of [[lookup
+              name]]. The fire produced by [[lookup name]] does not harm you
+              while it is burning.</p>
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          requirements: >-
+            <p>Target must be a @Identifier[equipment:torch]{torch},
+            @Identifier[equipment:candle]{candle}, or some other item that
+            designed to be lit on fire.</p>
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - item
+        transfer: true
+        type: ability
+      - _id: QxNija819EXaYXv9
+        _key: >-
+          !actors.items.effects!f17d41368198171e.DtYP4I28jj1TTQEO.QxNija819EXaYXv9
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.3b0ab4b52326316f
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/light.webp
+        name: Light
+        system:
+          _sup: LbLjjWiopqGfltmW
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: token.light.bright
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '50'
+                - key: token.light.dim
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '100'
+                - key: token.light.color
+                  priority: 5
+                  target: Actor
+                  type: override
+                  value: '#C64600'
+                - key: token.light.animation.type
+                  priority: 10
+                  target: Actor
+                  type: override
+                  value: pulse
+                - key: token.light.angle
+                  priority: 10
+                  target: Actor
+                  type: override
+                  value: '60'
+              type: changes
+          competence:
+            raw: 0
+          delivery: cone
+          duration:
+            raw: '1'
+            unit: minute
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: normal
+          identifier: light
+          interaction: manifest
+          maneuver: active
+          overview:
+            base: >-
+              <p>The area is illuminated. This [[lookup name style=lc]] emanates
+              from your hand and moves with you. You may change its direction at
+              will.</p>
+          powerSources:
+            - magical
+          range:
+            raw: '100'
+            unit: ft
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - area
+            - self
+        transfer: true
+        type: ability
+    folder: 9eb51b53c8495b9d
+    img: systems/teriock/src/icons/ranks/rank-1-flame-mage.webp
+    name: Rank 1 Flame Mage
+    system:
+      _sup: f17d41368198171e
+      archetype: mage
+      class: flame-mage
+      competence:
+        raw: 1
+      description: >-
+        <p>Fierce and brazen, these mages are always at war. The arms dealers of
+        the world, their magic is completely focused on destruction and thus
+        they seek to create bigger and better ways to blow things up.
+        Passionate, wild and a bit chaotic, these mages like the mountains and
+        underground spaces. If you are playing a
+        @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like,
+        ready for battle, and consuming everything.</p>
+      identifier: rank-1-flame-mage
+      innate: false
+      maxAv: 0
+      number: 1
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d8
+        mp:
+          disabled: false
+          formula: 1d12
+    type: rank
+  - _id: dKZ3EqSX9echEVXh
+    _key: '!actors.items!f17d41368198171e.dKZ3EqSX9echEVXh'
+    _stats:
+      compendiumSource: Compendium.teriock.bodyParts.Item.1d64ec2126fd6bfe
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: ycpaNkX8sIbCk6Lt
+        _key: >-
+          !actors.items.effects!f17d41368198171e.dKZ3EqSX9echEVXh.ycpaNkX8sIbCk6Lt
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.294cd7a4f1545ed9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/bashing.webp
+        name: Bashing
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with the <b>[[lookup name style=lc]]</b> property is not
+            a weapon, but can still be used to make a
+            @Identifier[ability:basic-attack]{Basic Attack}.</p>
+          form: intrinsic
+          identifier: bashing
+        transfer: true
+        type: property
+      - _id: UwQcncdwmwzEFuxl
+        _key: >-
+          !actors.items.effects!f17d41368198171e.dKZ3EqSX9echEVXh.UwQcncdwmwzEFuxl
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.417457cfa2643f5b
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/handy.webp
+        name: Handy
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property can be used to deliver
+            @Wiki[Category:Hand delivery abilities]{hand delivery
+            abilities}.</p>
+          form: intrinsic
+          identifier: handy
+          powerSources:
+            - martial
+        transfer: true
+        type: property
+      - _id: dKdNBKWT1hmgJcIc
+        _key: >-
+          !actors.items.effects!f17d41368198171e.dKZ3EqSX9echEVXh.dKdNBKWT1hmgJcIc
+        _stats:
+          compendiumSource: Compendium.teriock.properties.ActiveEffect.3d2cc8d952adebec
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/properties/small.webp
+        name: Small
+        system:
+          applyIfDampened: true
+          applyIfDeattuned: true
+          competence:
+            raw: 0
+          description: >-
+            <p>An item with this property is easily concealed and can often be
+            used in the same hand as a
+            @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.</p>
+          form: intrinsic
+          identifier: small
+        transfer: true
+        type: property
+    folder: 9eb51b53c8495b9d
+    img: icons/creatures/slimes/slime-movement-pseudopods-blue.webp
+    name: Pseudopod
+    system:
+      _sup: f17d41368198171e
+      attackPenalty: '-3'
+      competence:
+        raw: 0
+      damage:
+        base: '1'
+        twoHanded: '0'
+      identifier: pseudopod
+      range:
+        long:
+          unit: melee
+        melee: true
+        ranged: false
+        short:
+          unit: self
+    type: body
+  - _id: eFjFlb2kILdMVVRX
+    _key: '!actors.items!f17d41368198171e.eFjFlb2kILdMVVRX'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.0615c1e02cf44dbd
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: CaTTWTstOULxfkrp
+        _key: >-
+          !actors.items.effects!f17d41368198171e.eFjFlb2kILdMVVRX.CaTTWTstOULxfkrp
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.7dbf0f42e843d563
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        flags:
+          teriock:
+            category: combat
+            defaultAbility: true
+        img: systems/teriock/src/icons/abilities/additional-flame-rotators.webp
+        name: Additional Flame Rotators
+        system:
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: additional-flame-rotators
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Add @Identifier[ability:cremate]{Cremate} and
+              @Identifier[ability:minor-weapon-enchantment]{Minor Weapon
+              Enchantment} to your list of possible @Wiki[Category:Rotator
+              spells]{rotator spells}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: EjA48yTYBOoAhMOD
+        _key: >-
+          !actors.items.effects!f17d41368198171e.eFjFlb2kILdMVVRX.EjA48yTYBOoAhMOD
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.f4719f88dc5f8192
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        flags:
+          teriock:
+            category: support
+            defaultAbility: true
+            dontConsume: false
+        img: systems/teriock/src/icons/abilities/expanded-flame-elder-sorcery.webp
+        name: Expanded Flame Elder Sorcery
+        system:
+          automations:
+            SwABVPaWrBx5DFZJ:
+              _id: SwABVPaWrBx5DFZJ
+              competence:
+                raw: 2
+              competencies:
+                - 1
+                - 2
+              identifier: ability:flame-elder-sorcery-words
+              type: changeCompetence
+            qBmh3IhareOUWYkp:
+              _id: qBmh3IhareOUWYkp
+              competence:
+                raw: 2
+              competencies:
+                - 1
+                - 2
+              identifier: ability:celestial-elder-sorcery-words
+              type: changeCompetence
+            wtkqvDCHK6EONV6H:
+              _id: wtkqvDCHK6EONV6H
+              competence:
+                raw: 2
+              competencies:
+                - 1
+                - 2
+              identifier: ability:elder-sorcery-creation
+              type: changeCompetence
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: instant
+          elderSorcery: true
+          elements:
+            - flame
+          executionTime:
+            base: passive
+          featSaveAttribute: int
+          form: special
+          identifier: expanded-flame-elder-sorcery
+          interaction: feat
+          maneuver: passive
+          overview:
+            base: >-
+              <p>In addition to the custom rotator spells you create, you can
+              learn @Wiki[Category:Rotator spells]{spells} created by others.
+              When you come across a fully created spell using only words you
+              are @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 +
+              @Identifier[core:elder-sorcery]{OP}
+              @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save} to attempt to learn
+              it over the course of a @Identifier[core:long-rest]{long rest}. If
+              you succeed, you can add it to your rotator spell list. If you
+              fail, you are @Identifier[keyword:incapable]{incapable} of
+              attempting to learn that spell again. The
+              @Identifier[core:game-master]{GM} may modify the DC based on the
+              spell's complexity, your knowledge of the spell, any special
+              training you receive, if the spell's creator is there to assist
+              you, or for any other factors they see fit. You may also attempt
+              to learn words that you come across as long as they are of
+              elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+              @Identifier[core:game-master]{GM} may adjust the DC for these as
+              they see fit as well, but the default is DC 15 + OP
+              @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save}.</p>
+            proficient: >-
+              <p>You are @Identifier[core:fluency-bonus]{fluent} in
+              @Identifier[ability:elder-sorcery-creation]{Elder Sorcery
+              Creation},
+              @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+              Sorcery Words}, and
+              @Identifier[ability:flame-elder-sorcery-words]{Flame Elder Sorcery
+              Words}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          results:
+            fail: >-
+              <p>You are @Identifier[keyword:incapable]{incapable} of attempting
+              to learn that spell or word again.</p>
+            save: <p>You learn the spell or word.</p>
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: n7UdvHS9F670tWcH
+        _key: >-
+          !actors.items.effects!f17d41368198171e.eFjFlb2kILdMVVRX.n7UdvHS9F670tWcH
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.2496ec9ba004a8e2
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/cremate.webp
+        name: Cremate
+        system:
+          _sup: CaTTWTstOULxfkrp
+          automations:
+            1728b3a84ea27844:
+              _id: 1728b3a84ea27844
+              common:
+                - bag
+              showConfirmationDialog: true
+              type: common
+            3a62dd96319ca135:
+              _id: 3a62dd96319ca135
+              executor: false
+              multi: false
+              relation: apply
+              status: burned
+              target: false
+              type: status
+            5e9e1d2033fe152a:
+              _id: 5e9e1d2033fe152a
+              executor: false
+              multi: false
+              relation: apply
+              status: ruined
+              target: false
+              type: status
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: weapon
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+            - killing
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: special
+          identifier: cremate
+          interaction: attack
+          invoked: true
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          requirements: <p>Target is @Identifier[status:down]{down}.</p>
+          results:
+            hit: >-
+              <p>Target is @Identifier[status:burned]{burned}, and
+              @Identifier[status:ruined]{ruined}.</p>
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - vitals
+        transfer: true
+        type: ability
+      - _id: fzhZEDksnmBXbe6R
+        _key: >-
+          !actors.items.effects!f17d41368198171e.eFjFlb2kILdMVVRX.fzhZEDksnmBXbe6R
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.7e1e0b3ce0953833
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/minor-weapon-enchantment.webp
+        name: Minor Weapon Enchantment
+        system:
+          _sup: CaTTWTstOULxfkrp
+          automations:
+            FZiTANhHbYeUrxD6:
+              _id: FZiTANhHbYeUrxD6
+              all: false
+              attachDocuments: true
+              automatic: true
+              identifiers:
+                - property:magelore
+              multi: false
+              separate: false
+              type: addDocuments
+            TUjBJXUmGzXEFt79:
+              _id: TUjBJXUmGzXEFt79
+              all: false
+              attachDocuments: true
+              automatic: true
+              identifiers:
+                - property:magic
+              multi: false
+              separate: false
+              type: addDocuments
+            WDPfYxMp2lWJxkW4:
+              _id: WDPfYxMp2lWJxkW4
+              all: false
+              attachDocuments: true
+              automatic: false
+              data: |-
+                {
+                  "system": {
+                    "costs": {
+                      "tweaks": {
+                        "gifted": 1
+                      }
+                    },
+                    "delivery": "weapon",
+                    "grantOnly": true,
+                    "invoked": 1,
+                    "piercing": {
+                      "raw": 1
+                    }
+                  }
+                }
+              local:
+                qualifier: and(@ability, @spell, not(@es), @delivery.ray)
+              multi: false
+              overrideData: true
+              separate: false
+              type: addDocuments
+            Tu4qrPot571fIQao:
+              _id: Tu4qrPot571fIQao
+              changes:
+                - key: system.tier.raw
+                  priority: 5
+                  target: Item
+                  type: add
+                  value: '1'
+                - key: system.powerLevel
+                  priority: 5
+                  target: Item
+                  type: override
+                  value: enchanted
+              type: changes
+            72ce567009179bea:
+              _id: 72ce567009179bea
+              changeType: add
+              duration:
+                raw: '@h * 3600'
+                unit: second
+              heighten:
+                - 1
+              type: duration
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: sight
+          duration:
+            raw: '1'
+            unit: hour
+          elements:
+            - flame
+          executionTime:
+            base: 10 Minutes
+            slow:
+              raw: '10'
+              unit: minute
+          form: special
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
+            of this effect increases by 1 hour.</p>
+          identifier: minor-weapon-enchantment
+          interaction: manifest
+          invoked: true
+          maneuver: slow
+          overview:
+            base: >-
+              <p>Target weapon is enchanted to deal
+              @Identifier[damage:magic]{magic damage} and
+              @Identifier[property:granting]{grant} a @Wiki[Category:Conjured
+              spells]{conjured} @Wiki[Category:Ray delivery spells]{ray spell}
+              that you know. Except, the spell has the @Wiki[Category:AV0
+              spells]{AV0} @Wiki[Category:Weapon delivery spells]{weapon
+              delivery} instead, is @Identifier[keyword:gifted]{gifted}, and can
+              only be delivered with the enchanted weapon. The enchanted weapon
+              is @Identifier[core:presence]{tier 1}. If the weapon is
+              @Identifier[property:shattered]{shattered}, this enchantment
+              fades.</p>
+          powerSources:
+            - magical
+          range:
+            raw: '5'
+            unit: ft
+          ritual: true
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - weapon
+        transfer: true
+        type: ability
+    folder: 9eb51b53c8495b9d
+    img: systems/teriock/src/icons/ranks/rank-3-flame-mage.webp
+    name: Rank 3 Flame Mage
+    system:
+      _sup: f17d41368198171e
+      archetype: mage
+      class: flame-mage
+      competence:
+        raw: 1
+      description: >-
+        <p>Fierce and brazen, these mages are always at war. The arms dealers of
+        the world, their magic is completely focused on destruction and thus
+        they seek to create bigger and better ways to blow things up.
+        Passionate, wild and a bit chaotic, these mages like the mountains and
+        underground spaces. If you are playing a
+        @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like,
+        ready for battle, and consuming everything.</p>
+      identifier: rank-3-flame-mage
+      innate: false
+      maxAv: 0
+      number: 3
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d8
+        mp:
+          disabled: false
+          formula: 1d12
+    type: rank
+  - _id: mp2EHUN4c2HlEJZR
+    _key: '!actors.items!f17d41368198171e.mp2EHUN4c2HlEJZR'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.978c2cd690fc8370
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: eYLadmAGh7YjVXpX
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.eYLadmAGh7YjVXpX
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.697ba5f42235282d
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/flame-elder-sorcery.webp
+        name: Flame Elder Sorcery
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: flame-elder-sorcery
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You gain @Identifier[ability:elder-sorcery-creation]{Elder
+              Sorcery Creation},
+              @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+              Sorcery Words}, and
+              @Identifier[ability:flame-elder-sorcery-words]{Flame Elder Sorcery
+              Words}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: cirogt3aILQXokIv
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.cirogt3aILQXokIv
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d0b84764493398aa
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/flame-rotators.webp
+        name: Flame Rotators
+        system:
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: system.rotators.max
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: '@rank.mage - 1'
+              competencies:
+                - 0
+              type: changes
+            f025905e157ac261:
+              _id: f025905e157ac261
+              changes:
+                - key: system.rotators.max
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: 2 * (@rank.mage - 1)
+              competencies:
+                - 1
+              type: changes
+            f7da3b5e1992a724:
+              _id: f7da3b5e1992a724
+              changes:
+                - key: system.rotators.max
+                  priority: 10
+                  target: Actor
+                  type: upgrade
+                  value: 2 * (@rank.mage - 1) + @p
+              competencies:
+                - 2
+              type: changes
+          competence:
+            raw: 0
+          costs:
+            primary:
+              mp:
+                formula: '1'
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: flame-rotators
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Having mastered the basic techniques in this field of magic,
+              you are able to cast more advanced @Wiki[Category:Spells]{spells}.
+              If you create any @Identifier[core:elder-sorcery]{Elder Sorcery}
+              @Wiki[Category:Spells]{spells} of your own, they get added to this
+              list. However, just because you "know" how to cast these spells,
+              doesn't mean you are always prepared to. Although all
+              @Identifier[archetype:mage]{mage classes} grant their own
+              @Identifier[core:elder-sorcery]{Elder Sorcery} and
+              @Wiki[Category:Rotator spells]{rotator spells}, you may only have
+              a maximum of @Identifier[archetype:mage]{MR} - 1 of these spells
+              rotated into your spell list at any given time across <i>all</i>
+              classes. @Identifier[archetype:mage]{MR} refers to the number of
+              @Identifier[core:leveling-up]{ranks} you have in
+              @Identifier[archetype:mage]{mage classes}. During a
+              @Identifier[core:long-rest]{long rest}, you can "rotate" which
+              spells you have prepared. The @Wiki[Category:Rotator
+              spells]{rotator spells} automatically available to you are
+              @Identifier[ability:bellows]{Bellows},
+              @Identifier[ability:control-and-resist-fire]{Control and Resist
+              Fire}, @Identifier[ability:crown-of-flame]{Crown of Flame},
+              @Identifier[ability:melting-grasp]{Melting Grasp}, and
+              @Identifier[ability:rupture-mark]{Rupture Mark}.</p><div
+              class="expandable-table"></div>
+            fluent: >-
+              <p>You may instead prepare 2 × (MR - 1) +
+              @Identifier[core:proficiency-bonus]{P} of these
+              @Wiki[Category:Spells]{spells}.</p>
+            proficient: >-
+              <p>You may instead prepare 2 × (MR - 1) of these
+              @Wiki[Category:Spells]{spells}.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: KhbIIdUN2oUpyVyr
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.KhbIIdUN2oUpyVyr
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+        name: Elder Sorcery Creation
+        system:
+          _sup: eYLadmAGh7YjVXpX
+          competence:
+            raw: 0
+          costs:
+            components:
+              material:
+                description: >-
+                  <p>Creation cost is at least 3 × the material components of
+                  the spell itself.</p>
+                type: description
+            primary:
+              hp:
+                description: >-
+                  <p>Creation cost is at least 3 ×
+                  @Identifier[core:hit-points-and-mana-points]{HP} of the spell
+                  itself.</p>
+                type: description
+              mp:
+                description: >-
+                  <p>Creation cost is at least 1
+                  @Identifier[core:hit-points-and-mana-points]{MP} per
+                  @Identifier[core:elder-sorcery]{OP} of <i>each</i> word in the
+                  spell plus 3 ×
+                  @Identifier[core:hit-points-and-mana-points]{MP} of the spell
+                  itself.</p>
+                type: description
+          delivery: sight
+          duration:
+            unit: instant
+          elderSorcery: true
+          executionTime:
+            base: Long Rest
+            slow:
+              unit: longRest
+          form: special
+          identifier: elder-sorcery-creation
+          interaction: manifest
+          maneuver: slow
+          overview:
+            base: >-
+              <p>You may create 1 custom "rotator"
+              @Wiki[Category:Spells]{spells} using
+              @Identifier[core:elder-sorcery]{Elder Sorcery} words that you know
+              using whatever @Identifier[core:elder-sorcery]{Elder Sorcery}
+              creation rules are dictated to you by your
+              @Identifier[core:game-master]{GM}. As with other rotators, this
+              spell is not always available to you. You have to "rotate" into
+              having it prepared. This spell may have a maximum number of words
+              equal to your @Identifier[core:leveling-up]{level}. Your
+              @Identifier[core:game-master]{GM} may allow you to "improvise"
+              @Wiki[Category:Spells]{spells} as well, using whatever rules they
+              wish.</p>
+            fluent: >-
+              <p>In addition to the spells that you create, you can learn
+              @Identifier[core:proficiency-bonus]{P} additional spells from
+              other @Identifier[core:elder-sorcery]{Elder Sorcery} users. See
+              @Identifier[core:elder-sorcery]{Elder Sorcery} for more
+              information.</p>
+            proficient: >-
+              <p>You may now create 2 × (@Identifier[archetype:mage]{MR} - 1)
+              custom "rotator" @Wiki[Category:Spells]{spells} where
+              @Identifier[archetype:mage]{MR} is the number of
+              @Identifier[core:leveling-up]{ranks} you have in
+              @Identifier[archetype:mage]{mage classes}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          ritual: true
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: Bx0mtAMrslQUWgIf
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.Bx0mtAMrslQUWgIf
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c7566b8ee1b71f8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/flame-elder-sorcery-words.webp
+        name: Flame Elder Sorcery Words
+        system:
+          _sup: eYLadmAGh7YjVXpX
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          elderSorcery: true
+          elements:
+            - flame
+          executionTime:
+            base: passive
+          form: special
+          identifier: flame-elder-sorcery-words
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You know @Identifier[core:elder-sorcery]{OP} 1 @Wiki[Core:Flame
+              Elder Sorcery Words]{Flame Elder Sorcery words}.</p><table
+              class="wikitable sortable">
+
+              <caption style="white-space:nowrap">OP 1 Flame @Wiki[Core:Elder
+              Sorcery Words]{Elder Sorcery Words}
+
+              </caption>
+
+              <tbody><tr>
+
+              <th style="background-color:#e5a50a1A">OP</th>
+
+              <th
+              style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame
+              Nouns}</th>
+
+              <th
+              style="background-color:#a51d2d1A">@Identifier[class:flame-mage]{Flame
+              Verbs}
+
+              </th></tr>
+
+              <tr>
+
+              <td rowspan="9" style="background-color:#f9f06b1A">1
+
+              </td>
+
+              <td style="background-color:#f661511A">ash
+
+              </td>
+
+              <td style="background-color:#f661511A">crack
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#a51d2d1A">cinder
+
+              </td>
+
+              <td style="background-color:#a51d2d1A">damage
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#f661511A">ember
+
+              </td>
+
+              <td style="background-color:#f661511A">dry
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#a51d2d1A">flame
+
+              </td>
+
+              <td style="background-color:#a51d2d1A">glow
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#f661511A">howl
+
+              </td>
+
+              <td style="background-color:#f661511A">illuminate
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#a51d2d1A">light
+
+              </td>
+
+              <td style="background-color:#a51d2d1A">kindle
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#f661511A">spark
+
+              </td>
+
+              <td style="background-color:#f661511A">rush
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#a51d2d1A">tinder
+
+              </td>
+
+              <td style="background-color:#a51d2d1A">temper
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#f661511A">warmth
+
+              </td>
+
+              <td style="background-color:#f661511A">warm
+
+              </td></tr></tbody></table>
+            fluent: >-
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:fluency-bonus]{F}).</p>
+            proficient: >-
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:proficiency-bonus]{P}).</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: T6OenXdaLv7dwR0C
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.T6OenXdaLv7dwR0C
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.41ba9670a628fc21
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
+        name: Celestial Elder Sorcery Words
+        system:
+          _sup: eYLadmAGh7YjVXpX
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          elderSorcery: true
+          executionTime:
+            base: passive
+          form: special
+          identifier: celestial-elder-sorcery-words
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You know @Identifier[core:elder-sorcery]{OP} 1
+              @Wiki[Core:Celestial Elder Sorcery Words]{Celestial Elder Sorcery
+              words}.</p><table class="wikitable sortable">
+
+              <caption style="white-space:nowrap">OP 1 Celestial
+              @Wiki[Core:Elder Sorcery Words]{Elder Sorcery Words}
+
+              </caption>
+
+              <tbody><tr>
+
+              <th style="background-color:#e5a50a1A">OP</th>
+
+              <th style="background-color:#6135831A">Celestial Adjectives</th>
+
+              <th style="background-color:#6135831A">Celestial Adverbs</th>
+
+              <th style="background-color:#6135831A">Celestial Articles</th>
+
+              <th style="background-color:#6135831A">Celestial Conjunctions</th>
+
+              <th style="background-color:#6135831A">Celestial Nouns</th>
+
+              <th style="background-color:#6135831A">Celestial Prepositions</th>
+
+              <th style="background-color:#6135831A">Celestial Pronouns</th>
+
+              <th style="background-color:#6135831A">Celestial Verbs
+
+              </th></tr>
+
+              <tr>
+
+              <td rowspan="9" style="background-color:#f9f06b1A">1
+
+              </td>
+
+              <td style="background-color:#dc8add1A">bad
+
+              </td>
+
+              <td style="background-color:#dc8add1A">as
+
+              </td>
+
+              <td style="background-color:#dc8add1A">an
+
+              </td>
+
+              <td style="background-color:#dc8add1A">as
+
+              </td>
+
+              <td style="background-color:#dc8add1A">color
+
+              </td>
+
+              <td style="background-color:#dc8add1A">by
+
+              </td>
+
+              <td style="background-color:#dc8add1A">me
+
+              </td>
+
+              <td style="background-color:#dc8add1A">are
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">big
+
+              </td>
+
+              <td style="background-color:#6135831A">carefully
+
+              </td>
+
+              <td style="background-color:#6135831A">one
+
+              </td>
+
+              <td style="background-color:#6135831A">but
+
+              </td>
+
+              <td style="background-color:#6135831A">cup
+
+              </td>
+
+              <td style="background-color:#6135831A">for
+
+              </td>
+
+              <td style="background-color:#6135831A">my
+
+              </td>
+
+              <td style="background-color:#6135831A">be
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">bright
+
+              </td>
+
+              <td style="background-color:#dc8add1A">here
+
+              </td>
+
+              <td style="background-color:#dc8add1A">the
+
+              </td>
+
+              <td style="background-color:#dc8add1A">or
+
+              </td>
+
+              <td style="background-color:#dc8add1A">dagger
+
+              </td>
+
+              <td style="background-color:#dc8add1A">in
+
+              </td>
+
+              <td style="background-color:#dc8add1A">that
+
+              </td>
+
+              <td style="background-color:#dc8add1A">begin
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">clean
+
+              </td>
+
+              <td style="background-color:#6135831A">pretty
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">so
+
+              </td>
+
+              <td style="background-color:#6135831A">foot
+
+              </td>
+
+              <td style="background-color:#6135831A">of
+
+              </td>
+
+              <td style="background-color:#6135831A">this
+
+              </td>
+
+              <td style="background-color:#6135831A">did
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">little
+
+              </td>
+
+              <td style="background-color:#dc8add1A">then
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">hand
+
+              </td>
+
+              <td style="background-color:#dc8add1A">off
+
+              </td>
+
+              <td style="background-color:#dc8add1A">you
+
+              </td>
+
+              <td style="background-color:#dc8add1A">may
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">long
+
+              </td>
+
+              <td style="background-color:#6135831A">there
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">hat
+
+              </td>
+
+              <td style="background-color:#6135831A">on
+
+              </td>
+
+              <td style="background-color:#6135831A">your
+
+              </td>
+
+              <td style="background-color:#6135831A">might
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">short
+
+              </td>
+
+              <td style="background-color:#dc8add1A">today
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">skin
+
+              </td>
+
+              <td style="background-color:#dc8add1A">to
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">stand
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#6135831A">small
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">torch
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">
+
+              </td>
+
+              <td style="background-color:#6135831A">tend
+
+              </td></tr>
+               
+              <tr>
+
+              <td style="background-color:#dc8add1A">this
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">wand
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">
+
+              </td>
+
+              <td style="background-color:#dc8add1A">use
+
+              </td></tr></tbody></table>
+            fluent: >-
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:fluency-bonus]{F}).</p>
+            proficient: >-
+              <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1
+              + (3 × @Identifier[core:proficiency-bonus]{P}).</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: 1ngUVMbqsQRVPTvZ
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.1ngUVMbqsQRVPTvZ
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.7rCKfysWgfkAxS8b
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/rupture-mark.webp
+        name: Rupture Mark
+        system:
+          _sup: cirogt3aILQXokIv
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: hand
+          duration:
+            raw: '1'
+            unit: minute
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: special
+          identifier: rupture-mark
+          interaction: attack
+          invoked: true
+          maneuver: active
+          piercing:
+            raw: 0
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          results:
+            hit: >-
+              <p>Target's next @Wiki[Category:Conjured spells]{conjured spell}
+              does not trigger @Wiki[Category:Reaction
+              abilities]{reactions}.</p>
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: 2WkstCMZkBBJDAJA
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.2WkstCMZkBBJDAJA
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1794713e6e1eaa6d
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/control-and-resist-fire.webp
+        name: Control and Resist Fire
+        system:
+          _sup: cirogt3aILQXokIv
+          automations:
+            xcIT6RMeLEKOON09:
+              _id: xcIT6RMeLEKOON09
+              changeType: add
+              key: system.damage
+              qualifier: '@dmg'
+              target: armament
+              type: childChange
+              value: 1d4[fire magic]
+            al3xVPNELugSBHWw:
+              _id: al3xVPNELugSBHWw
+              category: damageTypes
+              relation: resistances
+              type: protection
+              value: fire
+            8f623097f9f2a087:
+              _id: 8f623097f9f2a087
+              bonus: '0'
+              hex: false
+              type: resist
+            dYuGyhEwQceIhEHF:
+              _id: dYuGyhEwQceIhEHF
+              formula: 1d4[fire magic]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: self
+          duration:
+            raw: '1'
+            unit: hour
+          effectTypes:
+            - resistance
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: special
+          identifier: control-and-resist-fire
+          interaction: manifest
+          invoked: true
+          maneuver: active
+          overview:
+            base: >-
+              <p>Your @Identifier[core:standard-and-critical-damage]{standard
+              damage} increases by [[/damage 1d4[fire magic]]]
+              @Identifier[core:damage]{damage}. You also
+              @Identifier[keyword:resistance]{resist}
+              @Identifier[damage:fire]{fire damage}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: 3KYBHa7iIM4XBDIM
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.3KYBHa7iIM4XBDIM
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.1QbMxtzwRThtJgm8
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/bellows.webp
+        name: Bellows
+        system:
+          _sup: cirogt3aILQXokIv
+          automations:
+            hEOQSeJ8HpNRH1gY:
+              _id: hEOQSeJ8HpNRH1gY
+              macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
+              trigger: executeSpell
+              type: abilityMacro
+            Y4tkQwce00WMBG20:
+              _id: Y4tkQwce00WMBG20
+              changeType: add
+              key: system.boosts.damage
+              qualifier: '@spell'
+              target: ability
+              type: childChange
+              value: 1 + @h
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: self
+          duration:
+            raw: '1'
+            unit: minute
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: special
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the next
+            @Wiki[Category:Spells]{spell} you cast is
+            @Identifier[keyword:boosted]{boosted} again.</p>
+          identifier: bellows
+          interaction: manifest
+          invoked: true
+          maneuver: active
+          overview:
+            base: >-
+              <p>The next @Wiki[Category:Spells]{spell} you cast that would deal
+              @Identifier[core:damage]{damage} is
+              @Identifier[keyword:boosted]{boosted}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: vcwFoiTAvTJYDaAy
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.vcwFoiTAvTJYDaAy
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.6078c188ebffa71a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/melting-grasp.webp
+        name: Melting Grasp
+        system:
+          _sup: cirogt3aILQXokIv
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: hand
+          duration:
+            unit: instant
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: special
+          identifier: melting-grasp
+          interaction: attack
+          invoked: true
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          results:
+            hit: <p>Item is @Identifier[property:shattered]{shattered}.</p>
+          rotator: true
+          spell: true
+          standard: true
+          targets:
+            - item
+        transfer: true
+        type: ability
+      - _id: UpjKvpXDUt5B7Wqk
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.UpjKvpXDUt5B7Wqk
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5b0849eece36c49e
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/crown-of-flame.webp
+        name: Crown of Flame
+        system:
+          _sup: cirogt3aILQXokIv
+          automations:
+            e789ed5e109ebd1a:
+              _id: e789ed5e109ebd1a
+              changes:
+                - key: token.light.dim
+                  priority: 3
+                  target: Actor
+                  type: upgrade
+                  value: '0.01'
+                - key: token.light.color
+                  priority: 3
+                  target: Actor
+                  type: override
+                  value: '#E01B24'
+                - key: token.light.animation.type
+                  priority: 3
+                  target: Actor
+                  type: override
+                  value: sunburst
+              type: changes
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: self
+          duration:
+            raw: '8'
+            unit: hour
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: special
+          identifier: crown-of-flame
+          interaction: manifest
+          invoked: true
+          maneuver: active
+          overview:
+            base: >-
+              <p>A small circle of smokeless fire circles above your head. You
+              gain @Identifier[ability:burning-touch]{Burning Touch} and
+              @Identifier[ability:inferno-aura]{Inferno Aura}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          rotator: true
+          spell: true
+          standard: true
+          sustained: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+      - _id: eXWPRko8wR7XUcmD
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.eXWPRko8wR7XUcmD
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.5mq2yWHo9SivIxO9
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/burning-touch.webp
+        name: Burning Touch
+        system:
+          _sup: UpjKvpXDUt5B7Wqk
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d6[magic fire]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+          delivery: hand
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d6[magic fire]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: burning-touch
+          interaction: attack
+          invoked: true
+          maneuver: active
+          piercing:
+            raw: 2
+          powerSources:
+            - magical
+          range:
+            unit: contact
+          results:
+            critHit: >-
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d6[fire magic]]]
+              @Identifier[core:damage]{damage} to target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: g6R7k2xkCIKAcKOq
+        _key: >-
+          !actors.items.effects!f17d41368198171e.mp2EHUN4c2HlEJZR.g6R7k2xkCIKAcKOq
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.TjGzX2qZGteBzniJ
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/inferno-aura.webp
+        name: Inferno Aura
+        system:
+          _sup: UpjKvpXDUt5B7Wqk
+          automations:
+            7400b41f20d9f100:
+              _id: 7400b41f20d9f100
+              all: false
+              angle: '60'
+              attachToToken: true
+              automatic: true
+              deleteOnTurnChange: true
+              excludeToken: true
+              expandWithToken: true
+              innerWidth: '0'
+              multi: false
+              outerWidth: '0'
+              regionType: emanation
+              restriction:
+                enabled: false
+                priority: 0
+                type: move
+              targeting: true
+              trigger: executeInput
+              type: region
+              visibility: 2
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d6[magic fire]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          costs:
+            components:
+              somatic:
+                type: tag
+              verbal:
+                type: tag
+            primary:
+              mp:
+                formula: '1'
+                type: formula
+          delivery: aura
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          elements:
+            - flame
+          executionTime:
+            base: a1
+          featSaveAttribute: mov
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d6[magic fire]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: inferno-aura
+          interaction: feat
+          invoked: true
+          maneuver: active
+          powerSources:
+            - magical
+          range:
+            raw: '10'
+            unit: ft
+          results:
+            fail: >-
+              <p>Deal [[/damage 1d6[magic fire]]]
+              @Identifier[core:damage]{damage} to target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+    folder: 9eb51b53c8495b9d
+    img: systems/teriock/src/icons/ranks/rank-2-flame-mage.webp
+    name: Rank 2 Flame Mage
+    system:
+      _sup: f17d41368198171e
+      archetype: mage
+      class: flame-mage
+      competence:
+        raw: 1
+      description: >-
+        <p>Fierce and brazen, these mages are always at war. The arms dealers of
+        the world, their magic is completely focused on destruction and thus
+        they seek to create bigger and better ways to blow things up.
+        Passionate, wild and a bit chaotic, these mages like the mountains and
+        underground spaces. If you are playing a
+        @Identifier[class:flame-mage]{Flame Mage} be hot tempered, war-like,
+        ready for battle, and consuming everything.</p>
+      identifier: rank-2-flame-mage
+      innate: false
+      maxAv: 0
+      number: 2
+      statDice:
+        hp:
+          disabled: false
+          formula: 1d8
+        mp:
+          disabled: false
+          formula: 1d12
+    type: rank
+  - _id: 6QvGJnH4nz8aqzyJ
+    _key: '!actors.items!f17d41368198171e.6QvGJnH4nz8aqzyJ'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    effects:
+      - _id: NGCuRUaVtXnxAbRe
+        _key: >-
+          !actors.items.effects!f17d41368198171e.6QvGJnH4nz8aqzyJ.NGCuRUaVtXnxAbRe
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/arcane-ray.webp
+        name: Arcane Ray
+        system:
+          automations:
+            800c70e6560525a8:
+              _id: 800c70e6560525a8
+              formula: (1 + @h)d4[magic]
+              impact: damage
+              type: roll
+          competence:
+            raw: 0
+          delivery: missile
+          duration:
+            unit: instant
+          effectTypes:
+            - damaging
+          executionTime:
+            base: a1
+          form: normal
+          heightened: >-
+            <p>For each additional
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
+            additional [[/damage 1d4[magic]]]
+            @Identifier[core:damage]{damage}.</p>
+          identifier: arcane-ray
+          interaction: attack
+          maneuver: active
+          piercing:
+            raw: 1
+          powerSources:
+            - magical
+          range:
+            raw: '60'
+            unit: ft
+          results:
+            critHit: >-
+              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+              @Pack[teriock.abilities]{ability}.</p>
+            hit: >-
+              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
+              target.</p>
+          spell: true
+          standard: true
+          targets:
+            - creature
+        transfer: true
+        type: ability
+      - _id: aCWLNsvSFjEuLTyl
+        _key: >-
+          !actors.items.effects!f17d41368198171e.6QvGJnH4nz8aqzyJ.aCWLNsvSFjEuLTyl
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.12.84
+        img: systems/teriock/src/icons/abilities/staff-touch.webp
+        name: Staff Touch
+        system:
+          competence:
+            raw: 0
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: staff-touch
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>You may use your @Identifier[property:magelore]{magelore} items
+              as though they were your @Identifier[body:hand]{hand}. This makes
+              them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not
+              @Identifier[core:proficiency-bonus]{proficient} nor
+              @Identifier[core:fluency-bonus]{fluent} with
+              @Pack[teriock.abilities]{abilities} you use through your
+              @Identifier[property:magelore]{magelore} items.</p>
+            fluent: >-
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
+              @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
+            proficient: >-
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
+              an @Pack[teriock.abilities]{ability} you use through your
+              @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
+              @Pack[teriock.abilities]{ability}.</p>
+          powerSources:
+            - magical
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 4a095aaed0254ec3
+    img: systems/teriock/src/icons/archetypes/mage.webp
+    name: Mage
+    system:
+      competence:
+        raw: 1
+      description: >-
+        <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical
+        spells} and each class has a different approach, but are generally all
+        quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most
+        mages prefer to hang back and cast at their enemies from afar or use
+        their magic to control the flow of a battle while avoiding messy
+        melees.</p>
+      identifier: mage
+    type: archetype
+name: Big Red Slime
+prototypeToken:
+  actorLink: false
+  appendNumber: false
+  bar1:
+    attribute: hp
+  bar2:
+    attribute: mp
+  displayBars: 20
+  displayName: 30
+  height: 2
+  name: Big Red Slime
+  ring:
+    enabled: true
+    subject:
+      texture: systems/teriock/src/icons/tokens/big-red-slime.webp
+  texture:
+    src: systems/teriock/src/icons/creatures/big-red-slime.webp
+  turnMarker:
+    disposition: false
+    mode: 1
+  width: 2
+system:
+  hp:
+    value: 40
+  identifier: big-red-slime
+  initiative: 1d20 + @mov
+  mp:
+    value: 20
+  presence:
+    max: 1
+    min: 0
+    value: 0
+  scaling:
+    brScale: true
+  size:
+    number:
+      raw: '5'
+  wielding:
+    attacker: dKZ3EqSX9echEVXh
+    blocker: dKZ3EqSX9echEVXh
+type: creature

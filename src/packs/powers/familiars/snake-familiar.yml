@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
@@ -57,12 +57,12 @@ effects:
       overview:
         base: >-
           <p>You aim with deadly precision, causing the next
-          @Wiki[Category:Attack abilities]{attack} you make with an item to be
-          @Identifier[keyword:boosted]{boosted}. This @Wiki[Category:Attack
-          abilities]{attack} must hit the target's
+          @Identifier[core:attack-interaction]{attack} you make with an item to
+          be @Identifier[keyword:boosted]{boosted}. This
+          @Identifier[core:attack-interaction]{attack} must hit the target's
           @Identifier[core:vitals-target]{vitals}
-          (@Identifier[core:armor-class]{AC} + 3) or the @Wiki[Category:Attack
-          abilities]{attack} does nothing. Only the
+          (@Identifier[core:armor-class]{AC} + 3) or the
+          @Identifier[core:attack-interaction]{attack} does nothing. Only the
           @Identifier[core:damage]{damage} from the item itself can be
           @Identifier[keyword:boosted]{boosted} in this way.</p>
       powerSources:
@@ -86,7 +86,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.82
+      systemVersion: 0.12.84
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
@@ -137,9 +137,10 @@ effects:
           <p>Target takes an additional [[/damage 5[lethal]]]
           @Identifier[core:damage]{damage}. This also has all
           @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
-          types} of the triggering @Wiki[Category:Attack abilities]{attack}. If
-          the triggering @Wiki[Category:Attack abilities]{attack} was a critical
-          hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
+          types} of the triggering @Identifier[core:attack-interaction]{attack}.
+          If the triggering @Identifier[core:attack-interaction]{attack} was a
+          critical hit, this deals 10 @Identifier[core:damage]{damage}
+          instead.</p>
       powerSources:
         - martial
       range:
@@ -149,9 +150,9 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just hit a creature with an @Wiki[Category:Attack
-        abilities]{attack} that dealt them @Identifier[core:damage]{damage} from
-        it.</p>
+        <p>You have just hit a creature with an
+        @Identifier[core:attack-interaction]{attack} that dealt them
+        @Identifier[core:damage]{damage} from it.</p>
     transfer: true
     type: ability
   - _id: snakeTamer000000

@@ -1,0 +1,204 @@
+_id: iADYy6Kszj3VoRLC
+_key: '!items!iADYy6Kszj3VoRLC'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.9f64a79ff1b0a15f
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: SIKeU2QEaZhXtXeq
+    _key: '!items.effects!iADYy6Kszj3VoRLC.SIKeU2QEaZhXtXeq'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.fe7bea7b8d14cba3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/flame-rotator-fluency.webp
+    name: Flame Rotator Fluency
+    system:
+      automations:
+        CKkMWA9GGDaFRfjY:
+          _id: CKkMWA9GGDaFRfjY
+          competence:
+            raw: 2
+          competencies:
+            - 1
+            - 2
+          identifier: ability:flame-rotators
+          type: changeCompetence
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: flame-rotator-fluency
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may rotate between @Wiki[Category:Flame element spells]{flame}
+          rotator @Wiki[Category:Spells]{spells} during a
+          @Identifier[core:short-rest]{short rest} instead of a
+          @Identifier[core:long-rest]{long rest}.</p>
+        proficient: >-
+          <p>You are @Identifier[core:fluency-bonus]{fluent} in
+          @Identifier[ability:flame-rotators]{Flame Rotators}. (This does not
+          make you @Identifier[core:fluency-bonus]{fluent} in the
+          @Wiki[Category:Spells]{spells} themselves.)</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: hi6DT2tdldx5HKNj
+    _key: '!items.effects!iADYy6Kszj3VoRLC.hi6DT2tdldx5HKNj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.74698480298e4de5
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/flame-spell-strikes.webp
+    name: Flame Spell Strikes
+    system:
+      automations:
+        pMFd0Bm7jcnG7BdF:
+          _id: pMFd0Bm7jcnG7BdF
+          all: false
+          automatic: true
+          expandTables: false
+          local:
+            identifiers:
+              - ability:fire-ball
+              - ability:flame-ray
+          multi: false
+          noHeighten: false
+          type: useDocuments
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: flame-spell-strikes
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:spell-strike]{Spell Strike}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: AlmAx1nCui5NDa8C
+    _key: '!items.effects!iADYy6Kszj3VoRLC.AlmAx1nCui5NDa8C'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/spell-strike.webp
+    name: Spell Strike
+    system:
+      _sup: hi6DT2tdldx5HKNj
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: r0
+      form: normal
+      identifier: spell-strike
+      interaction: manifest
+      limitation: >-
+        <p>Only usable with @Identifier[ability:flame-ray]{Flame Ray} and
+        @Identifier[ability:fire-ball]{Fire Ball}.</p>
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
+          delivery spells]{missile spell} that you are
+          @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
+          hit was a critical hit, then the target takes the "on critical hit"
+          effect instead.</p>
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
+        abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
+        @Identifier[core:attack-interaction]{attack} on another creature and the
+        effect has successfully applied.</p>
+    transfer: true
+    type: ability
+folder: 997cd433ccad17d7
+img: systems/teriock/src/icons/ranks/rank-5-flame-mage.webp
+name: Rank 5 Flame Mage
+system:
+  _sup: f5d366c9fb78831f
+  archetype: mage
+  class: flame-mage
+  competence:
+    raw: 1
+  description: >-
+    <p>Fierce and brazen, these mages are always at war. The arms dealers of the
+    world, their magic is completely focused on destruction and thus they seek
+    to create bigger and better ways to blow things up. Passionate, wild and a
+    bit chaotic, these mages like the mountains and underground spaces. If you
+    are playing a @Identifier[class:flame-mage]{Flame Mage} be hot tempered,
+    war-like, ready for battle, and consuming everything.</p>
+  identifier: rank-5-flame-mage
+  innate: false
+  maxAv: 0
+  number: 5
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d8
+    mp:
+      disabled: false
+      formula: 1d12
+type: rank

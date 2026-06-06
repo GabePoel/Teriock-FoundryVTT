@@ -1,0 +1,1499 @@
+_id: ghQ07em6ftxTjqg0
+_key: '!items!ghQ07em6ftxTjqg0'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.6e5114a61a5eb4b2
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: JFQwPusSGXNlFxzg
+    _key: '!items.effects!ghQ07em6ftxTjqg0.JFQwPusSGXNlFxzg'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.24ca0fecea593c33
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery.webp
+    name: Necromancy Elder Sorcery
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: necromancy-elder-sorcery
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:elder-sorcery-creation]{Elder Sorcery
+          Creation},
+          @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder
+          Sorcery Words}, and
+          @Identifier[ability:necromancy-elder-sorcery-words]{Necromancy Elder
+          Sorcery Words}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: GF9CzLYvEuHeIKIm
+    _key: '!items.effects!ghQ07em6ftxTjqg0.GF9CzLYvEuHeIKIm'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e28f577c843bc530
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/necromancy-rotators.webp
+    name: Necromancy Rotators
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.rotators.max
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '@rank.mage - 1'
+          competencies:
+            - 0
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.rotators.max
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: 2 * (@rank.mage - 1)
+          competencies:
+            - 1
+          type: changes
+        f7da3b5e1992a724:
+          _id: f7da3b5e1992a724
+          changes:
+            - key: system.rotators.max
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: 2 * (@rank.mage - 1) + @p
+          competencies:
+            - 2
+          type: changes
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: necromancy-rotators
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Having mastered the basic techniques in this field of magic, you
+          are able to cast more advanced @Wiki[Category:Spells]{spells}. If you
+          create any @Identifier[core:elder-sorcery]{Elder Sorcery}
+          @Wiki[Category:Spells]{spells} of your own, they get added to this
+          list. However, just because you "know" how to cast these spells,
+          doesn't mean you are always prepared to. Although all
+          @Identifier[archetype:mage]{mage classes} grant their own
+          @Identifier[core:elder-sorcery]{Elder Sorcery} and
+          @Wiki[Category:Rotator spells]{rotator spells}, you may only have a
+          maximum of @Identifier[archetype:mage]{MR} - 1 of these spells rotated
+          into your spell list at any given time across <i>all</i> classes.
+          @Identifier[archetype:mage]{MR} refers to the number of
+          @Identifier[core:leveling-up]{ranks} you have in
+          @Identifier[archetype:mage]{mage classes}. During a
+          @Identifier[core:long-rest]{long rest}, you can "rotate" which spells
+          you have prepared. The @Wiki[Category:Rotator spells]{rotator spells}
+          automatically available to you are
+          @Identifier[ability:crown-of-fear]{Crown of Fear},
+          @Identifier[ability:death-rattle]{Death Rattle},
+          @Identifier[ability:ethereal-shift]{Ethereal Shift},
+          @Identifier[ability:spirit-bury]{Spirit Bury}, and
+          @Identifier[ability:undead-reanimation]{Undead Reanimation}.</p><div
+          class="expandable-table"></div>
+        fluent: >-
+          <p>You may instead prepare 2 × (MR - 1) +
+          @Identifier[core:proficiency-bonus]{P} of these
+          @Wiki[Category:Spells]{spells}.</p>
+        proficient: >-
+          <p>You may instead prepare 2 × (MR - 1) of these
+          @Wiki[Category:Spells]{spells}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: AKDu1M1ATAD1QfG4
+    _key: '!items.effects!ghQ07em6ftxTjqg0.AKDu1M1ATAD1QfG4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0q5khIx32nw3ihVe
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
+    name: Elder Sorcery Creation
+    system:
+      _sup: JFQwPusSGXNlFxzg
+      competence:
+        raw: 0
+      costs:
+        components:
+          material:
+            description: >-
+              <p>Creation cost is at least 3 × the material components of the
+              spell itself.</p>
+            type: description
+        primary:
+          hp:
+            description: >-
+              <p>Creation cost is at least 3 ×
+              @Identifier[core:hit-points-and-mana-points]{HP} of the spell
+              itself.</p>
+            type: description
+          mp:
+            description: >-
+              <p>Creation cost is at least 1
+              @Identifier[core:hit-points-and-mana-points]{MP} per
+              @Identifier[core:elder-sorcery]{OP} of <i>each</i> word in the
+              spell plus 3 × @Identifier[core:hit-points-and-mana-points]{MP} of
+              the spell itself.</p>
+            type: description
+      delivery: sight
+      duration:
+        unit: instant
+      elderSorcery: true
+      executionTime:
+        base: Long Rest
+        slow:
+          unit: longRest
+      form: special
+      identifier: elder-sorcery-creation
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You may create 1 custom "rotator" @Wiki[Category:Spells]{spells}
+          using @Identifier[core:elder-sorcery]{Elder Sorcery} words that you
+          know using whatever @Identifier[core:elder-sorcery]{Elder Sorcery}
+          creation rules are dictated to you by your
+          @Identifier[core:game-master]{GM}. As with other rotators, this spell
+          is not always available to you. You have to "rotate" into having it
+          prepared. This spell may have a maximum number of words equal to your
+          @Identifier[core:leveling-up]{level}. Your
+          @Identifier[core:game-master]{GM} may allow you to "improvise"
+          @Wiki[Category:Spells]{spells} as well, using whatever rules they
+          wish.</p>
+        fluent: >-
+          <p>In addition to the spells that you create, you can learn
+          @Identifier[core:proficiency-bonus]{P} additional spells from other
+          @Identifier[core:elder-sorcery]{Elder Sorcery} users. See
+          @Identifier[core:elder-sorcery]{Elder Sorcery} for more
+          information.</p>
+        proficient: >-
+          <p>You may now create 2 × (@Identifier[archetype:mage]{MR} - 1) custom
+          "rotator" @Wiki[Category:Spells]{spells} where
+          @Identifier[archetype:mage]{MR} is the number of
+          @Identifier[core:leveling-up]{ranks} you have in
+          @Identifier[archetype:mage]{mage classes}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      ritual: true
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: YtA1iEIuKS3LlWjJ
+    _key: '!items.effects!ghQ07em6ftxTjqg0.YtA1iEIuKS3LlWjJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.41ba9670a628fc21
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
+    name: Celestial Elder Sorcery Words
+    system:
+      _sup: JFQwPusSGXNlFxzg
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      elderSorcery: true
+      executionTime:
+        base: passive
+      form: special
+      identifier: celestial-elder-sorcery-words
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You know @Identifier[core:elder-sorcery]{OP} 1 @Wiki[Core:Celestial
+          Elder Sorcery Words]{Celestial Elder Sorcery words}.</p><table
+          class="wikitable sortable">
+
+          <caption style="white-space:nowrap">OP 1 Celestial @Wiki[Core:Elder
+          Sorcery Words]{Elder Sorcery Words}
+
+          </caption>
+
+          <tbody><tr>
+
+          <th style="background-color:#e5a50a1A">OP</th>
+
+          <th style="background-color:#6135831A">Celestial Adjectives</th>
+
+          <th style="background-color:#6135831A">Celestial Adverbs</th>
+
+          <th style="background-color:#6135831A">Celestial Articles</th>
+
+          <th style="background-color:#6135831A">Celestial Conjunctions</th>
+
+          <th style="background-color:#6135831A">Celestial Nouns</th>
+
+          <th style="background-color:#6135831A">Celestial Prepositions</th>
+
+          <th style="background-color:#6135831A">Celestial Pronouns</th>
+
+          <th style="background-color:#6135831A">Celestial Verbs
+
+          </th></tr>
+
+          <tr>
+
+          <td rowspan="9" style="background-color:#f9f06b1A">1
+
+          </td>
+
+          <td style="background-color:#dc8add1A">bad
+
+          </td>
+
+          <td style="background-color:#dc8add1A">as
+
+          </td>
+
+          <td style="background-color:#dc8add1A">an
+
+          </td>
+
+          <td style="background-color:#dc8add1A">as
+
+          </td>
+
+          <td style="background-color:#dc8add1A">color
+
+          </td>
+
+          <td style="background-color:#dc8add1A">by
+
+          </td>
+
+          <td style="background-color:#dc8add1A">me
+
+          </td>
+
+          <td style="background-color:#dc8add1A">are
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">big
+
+          </td>
+
+          <td style="background-color:#6135831A">carefully
+
+          </td>
+
+          <td style="background-color:#6135831A">one
+
+          </td>
+
+          <td style="background-color:#6135831A">but
+
+          </td>
+
+          <td style="background-color:#6135831A">cup
+
+          </td>
+
+          <td style="background-color:#6135831A">for
+
+          </td>
+
+          <td style="background-color:#6135831A">my
+
+          </td>
+
+          <td style="background-color:#6135831A">be
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">bright
+
+          </td>
+
+          <td style="background-color:#dc8add1A">here
+
+          </td>
+
+          <td style="background-color:#dc8add1A">the
+
+          </td>
+
+          <td style="background-color:#dc8add1A">or
+
+          </td>
+
+          <td style="background-color:#dc8add1A">dagger
+
+          </td>
+
+          <td style="background-color:#dc8add1A">in
+
+          </td>
+
+          <td style="background-color:#dc8add1A">that
+
+          </td>
+
+          <td style="background-color:#dc8add1A">begin
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">clean
+
+          </td>
+
+          <td style="background-color:#6135831A">pretty
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">so
+
+          </td>
+
+          <td style="background-color:#6135831A">foot
+
+          </td>
+
+          <td style="background-color:#6135831A">of
+
+          </td>
+
+          <td style="background-color:#6135831A">this
+
+          </td>
+
+          <td style="background-color:#6135831A">did
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">little
+
+          </td>
+
+          <td style="background-color:#dc8add1A">then
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">hand
+
+          </td>
+
+          <td style="background-color:#dc8add1A">off
+
+          </td>
+
+          <td style="background-color:#dc8add1A">you
+
+          </td>
+
+          <td style="background-color:#dc8add1A">may
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">long
+
+          </td>
+
+          <td style="background-color:#6135831A">there
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">hat
+
+          </td>
+
+          <td style="background-color:#6135831A">on
+
+          </td>
+
+          <td style="background-color:#6135831A">your
+
+          </td>
+
+          <td style="background-color:#6135831A">might
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">short
+
+          </td>
+
+          <td style="background-color:#dc8add1A">today
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">skin
+
+          </td>
+
+          <td style="background-color:#dc8add1A">to
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">stand
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#6135831A">small
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">torch
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">
+
+          </td>
+
+          <td style="background-color:#6135831A">tend
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#dc8add1A">this
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">wand
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">
+
+          </td>
+
+          <td style="background-color:#dc8add1A">use
+
+          </td></tr></tbody></table>
+        fluent: >-
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:fluency-bonus]{F}).</p>
+        proficient: >-
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:proficiency-bonus]{P}).</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: f08Upr1f7JJZlnoA
+    _key: '!items.effects!ghQ07em6ftxTjqg0.f08Upr1f7JJZlnoA'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.44b9f6ea2a6750be
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/necromancy-elder-sorcery-words.webp
+    name: Necromancy Elder Sorcery Words
+    system:
+      _sup: JFQwPusSGXNlFxzg
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      elderSorcery: true
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: special
+      identifier: necromancy-elder-sorcery-words
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You know @Identifier[core:elder-sorcery]{OP} 1
+          @Wiki[Core:Necromancy Elder Sorcery Words]{Necromancy Elder Sorcery
+          words}.</p><table class="wikitable sortable">
+
+          <caption style="white-space:nowrap">OP 1 Necromancy @Wiki[Core:Elder
+          Sorcery Words]{Elder Sorcery Words}
+
+          </caption>
+
+          <tbody><tr>
+
+          <th style="background-color:#e5a50a1A">OP</th>
+
+          <th
+          style="background-color:#0000001A">@Identifier[class:necromancer]{Necromancy
+          Nouns}</th>
+
+          <th
+          style="background-color:#0000001A">@Identifier[class:necromancer]{Necromancy
+          Verbs}
+
+          </th></tr>
+
+          <tr>
+
+          <td rowspan="9" style="background-color:#f9f06b1A">1
+
+          </td>
+
+          <td style="background-color:#77767b1A">blemish
+
+          </td>
+
+          <td style="background-color:#77767b1A">force
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#0000001A">darkness
+
+          </td>
+
+          <td style="background-color:#0000001A">intimidate
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#77767b1A">filth
+
+          </td>
+
+          <td style="background-color:#77767b1A">shame
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#0000001A">grave
+
+          </td>
+
+          <td style="background-color:#0000001A">sicken
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#77767b1A">pain
+
+          </td>
+
+          <td style="background-color:#77767b1A">spoil
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#0000001A">seizure
+
+          </td>
+
+          <td style="background-color:#0000001A">summon
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#77767b1A">stench
+
+          </td>
+
+          <td style="background-color:#77767b1A">taint
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#0000001A">tears
+
+          </td>
+
+          <td style="background-color:#0000001A">twist
+
+          </td></tr>
+           
+          <tr>
+
+          <td style="background-color:#77767b1A">woe
+
+          </td>
+
+          <td style="background-color:#77767b1A">wrench
+
+          </td></tr></tbody></table>
+        fluent: >-
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:fluency-bonus]{F}).</p>
+        proficient: >-
+          <p>The @Identifier[core:elder-sorcery]{OP} of words you know is 1 + (3
+          × @Identifier[core:proficiency-bonus]{P}).</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 6tAKo9OpEP5DbSoj
+    _key: '!items.effects!ghQ07em6ftxTjqg0.6tAKo9OpEP5DbSoj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2f4f5e357e9b92c7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/ethereal-shift.webp
+    name: Ethereal Shift
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      automations:
+        067cb526e2f9e98f:
+          _id: 067cb526e2f9e98f
+          executor: false
+          multi: false
+          relation: include
+          status: ethereal
+          target: false
+          type: status
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '1'
+        unit: hour
+      elements:
+        - necromancy
+      executionTime:
+        base: a3
+      form: special
+      identifier: ethereal-shift
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You go @Identifier[status:ethereal]{Ethereal} or manifest back into
+          the Material Realm.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: lDv03SkK2EYbm5wT
+    _key: '!items.effects!ghQ07em6ftxTjqg0.lDv03SkK2EYbm5wT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.42x5ExJDC2KutTTJ
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/undead-reanimation.webp
+    name: Undead Reanimation
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+      delivery: self
+      duration:
+        raw: '8'
+        unit: hour
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: special
+      identifier: undead-reanimation
+      interaction: manifest
+      invoked: true
+      maneuver: active
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:zombify]{Zombify} and
+          @Identifier[ability:animate-dead]{Animate Dead}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: s3ekMZ285AkwUY46
+    _key: '!items.effects!ghQ07em6ftxTjqg0.s3ekMZ285AkwUY46'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.OJa7qEXpvUsuQzvQ
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/animate-dead.webp
+    name: Animate Dead
+    system:
+      _sup: lDv03SkK2EYbm5wT
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: hand
+      duration:
+        unit: instant
+      effectTypes:
+        - reanimation
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: normal
+      identifier: animate-dead
+      interaction: attack
+      invoked: true
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target is @Identifier[status:alive]{alive} (but still
+          @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead})
+          at 1 @Identifier[core:hit-points-and-mana-points]{HP}, although its
+          maximum @Identifier[core:hit-points-and-mana-points]{HP} is halved
+          (minimum of 1) until it completes a @Identifier[core:short-rest]{short
+          rest}. This does not count as a @Wiki[Category:Revival
+          effects]{revival effect}.</p>
+        fluent: <p>Target's @Wiki[Core:HP]{HP} is no longer halved.</p>
+        proficient: >-
+          <p>Target has all @Wiki[Core:HP]{HP} restored, but its maximum
+          @Wiki[Core:HP]{HP} is still halved. This does not count as a
+          @Wiki[Category:Healing effects]{healing effect}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      requirements: >-
+        <p>Target is @Identifier[status:dead]{dead} and
+        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: hPSUqbn6a2zx5cJa
+    _key: '!items.effects!ghQ07em6ftxTjqg0.hPSUqbn6a2zx5cJa'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/zombify.webp
+    name: Zombify
+    system:
+      _sup: lDv03SkK2EYbm5wT
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          type: duration
+        838ba57012685987:
+          _id: 838ba57012685987
+          changeType: add
+          competencies:
+            - 2
+          duration:
+            raw: '3600'
+            unit: second
+          type: duration
+        ngQVntiCQ8Ruot8n:
+          _id: ngQVntiCQ8Ruot8n
+          all: false
+          automatic: true
+          competence:
+            raw: 0
+          identifiers:
+            - species:zombie
+          multi: false
+          override:
+            - art
+          overrideCompetence: true
+          reset:
+            - hp
+            - mp
+          ring: false
+          suppress:
+            - body
+            - fluency
+            - rank
+            - species
+          type: transformation
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+      delivery: hand
+      duration:
+        raw: '1'
+        unit: minute
+      effectTypes:
+        - control
+        - reanimation
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: normal
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the duration of this effect increases by 1 hour.</p>
+      identifier: zombify
+      interaction: attack
+      invoked: true
+      maneuver: active
+      overview:
+        fluent: >-
+          <p>The base duration of this effect is 1 hour and the
+          @Identifier[creature:zombie]{zombie} is a
+          @Identifier[core:minions]{minion} under your command.</p>
+        proficient: <p>[[lookup name]] is @Identifier[keyword:warded]{warded}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
+      results:
+        hit: >-
+          <p>Target is reanimated as a @Identifier[creature:zombie]{zombie}. It
+          is not under your command, but is hostile to everyone other than you
+          that is not
+          @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{another
+          zombie}. The @Identifier[creature:zombie]{zombie} keeps the
+          @Identifier[core:size]{SIZE} it had before, but loses all other traits
+          and abilities. If the target was already
+          @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{some kind
+          of zombie}, then it is reanimated as that type.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: g7SpayF8igKmmj2R
+    _key: '!items.effects!ghQ07em6ftxTjqg0.g7SpayF8igKmmj2R'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.22c986b97b5f3050
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/spirit-bury.webp
+    name: Spirit Bury
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      automations:
+        72ce567009179bea:
+          _id: 72ce567009179bea
+          changeType: add
+          duration:
+            raw: '@h * 3600'
+            unit: second
+          heighten:
+            - 1
+          type: duration
+        6a329470043b61f6:
+          _id: 6a329470043b61f6
+          changeType: add
+          competencies:
+            - 1
+            - 2
+          duration:
+            raw: '600'
+            unit: second
+          type: duration
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+      delivery: hand
+      duration:
+        raw: '1'
+        unit: minute
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: special
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, the duration of this effect increases by 1 hour.</p>
+      identifier: spirit-bury
+      interaction: attack
+      invoked: true
+      maneuver: active
+      overview:
+        proficient: <p>This effect lasts 10 minutes instead of 1.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      requirements: <p>Target is @Identifier[status:dead]{dead}.</p>
+      results:
+        hit: <p>Target cannot become @Identifier[status:wisping]{wisping}.</p>
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: rnsDmeBUWZ3FWDeD
+    _key: '!items.effects!ghQ07em6ftxTjqg0.rnsDmeBUWZ3FWDeD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.EZt37ToLutUxjQ2r
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/death-rattle.webp
+    name: Death Rattle
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      automations:
+        PKZXkwmO94niPsUb:
+          _id: PKZXkwmO94niPsUb
+          all: false
+          automatic: true
+          expandTables: false
+          local:
+            qualifier: and(@ability, @time.a1)
+          multi: false
+          noHeighten: false
+          trigger: execute
+          type: useDocuments
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+      delivery: self
+      duration:
+        unit: instant
+      elements:
+        - necromancy
+      executionTime:
+        base: r1
+      form: special
+      identifier: death-rattle
+      interaction: manifest
+      invoked: true
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You execute one @Wiki[Category:Single action abilities]{single
+          action ability} you have.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You @Identifier[status:dead]{die}.</p>
+    transfer: true
+    type: ability
+  - _id: cnJNTsW44c8z2Zag
+    _key: '!items.effects!ghQ07em6ftxTjqg0.cnJNTsW44c8z2Zag'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a29a6c7e09abbb9d
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/crown-of-fear.webp
+    name: Crown of Fear
+    system:
+      _sup: GF9CzLYvEuHeIKIm
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: token.light.dim
+              priority: 3
+              target: Actor
+              type: upgrade
+              value: '0.01'
+            - key: token.light.color
+              priority: 3
+              target: Actor
+              type: override
+              value: '#9141AC'
+            - key: token.light.animation.type
+              priority: 3
+              target: Actor
+              type: override
+              value: sunburst
+          type: changes
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: self
+      duration:
+        raw: '8'
+        unit: hour
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: special
+      identifier: crown-of-fear
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A small circle of glowing purple mist circles above your head. You
+          gain @Identifier[ability:fear-touch]{Fear Touch} and
+          @Identifier[ability:fear-aura]{Fear Aura}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      rotator: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: npxayWRc68DwZ7mV
+    _key: '!items.effects!ghQ07em6ftxTjqg0.npxayWRc68DwZ7mV'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.12c2bc74fed2e058
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/fear-touch.webp
+    name: Fear Touch
+    system:
+      _sup: cnJNTsW44c8z2Zag
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: end
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 0
+          override:
+            combat: true
+          type: expiration
+        d5717000e99ee582:
+          _id: d5717000e99ee582
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 1
+              time: end
+              trigger: turn
+            who:
+              type: target
+          crit:
+            - 1
+          override:
+            combat: true
+          type: expiration
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          formula: (@h)d4[magic terror]
+          heighten:
+            - 1
+          impact: damage
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          executor: true
+          multi: false
+          relation: include
+          status: frightened
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: hand
+      duration:
+        raw: '1'
+        unit: minute
+      effectTypes:
+        - mental
+      elements:
+        - necromancy
+      endCondition: >-
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      form: normal
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic terror]]]
+        @Identifier[core:damage]{damage}  as well.</p>
+      identifier: fear-touch
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      results:
+        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>Target is @Identifier[status:frightened]{frightened}.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: 6k6PtXIICvWVoXOT
+    _key: '!items.effects!ghQ07em6ftxTjqg0.6k6PtXIICvWVoXOT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.C6frBNJPvLFOMnx9
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/fear-aura.webp
+    name: Fear Aura
+    system:
+      _sup: cnJNTsW44c8z2Zag
+      automations:
+        d635eb44dba086dd:
+          _id: d635eb44dba086dd
+          combat:
+            what:
+              roll: 2d4kh1
+              threshold: 4
+              type: rolled
+            when:
+              skip: 0
+              time: end
+              trigger: turn
+            who:
+              type: target
+          override:
+            combat: true
+          type: expiration
+        7400b41f20d9f100:
+          _id: 7400b41f20d9f100
+          all: false
+          angle: '60'
+          attachToToken: true
+          automatic: true
+          deleteOnTurnChange: true
+          excludeToken: true
+          expandWithToken: true
+          innerWidth: '0'
+          multi: false
+          outerWidth: '0'
+          regionType: emanation
+          restriction:
+            enabled: false
+            priority: 0
+            type: move
+          targeting: true
+          trigger: executeInput
+          type: region
+          visibility: 2
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          formula: (@h)d4[magic terror]
+          heighten:
+            - 1
+          impact: damage
+          type: roll
+        b4960732f0b9ed9f:
+          _id: b4960732f0b9ed9f
+          executor: true
+          multi: false
+          relation: include
+          status: frightened
+          target: false
+          type: status
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: aura
+      duration:
+        raw: '1'
+        unit: minute
+      effectTypes:
+        - mental
+      elements:
+        - necromancy
+      endCondition: >-
+        <p>At the end of each of the target's @Identifier[core:turns]{turns},
+        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
+        ends.</p>
+      executionTime:
+        base: a1
+      featSaveAttribute: mov
+      form: normal
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic terror]]]
+        @Identifier[core:damage]{damage}  as well.</p>
+      identifier: fear-aura
+      interaction: feat
+      maneuver: active
+      powerSources:
+        - magical
+      range:
+        raw: '10'
+        unit: ft
+      results:
+        fail: <p>Target is @Identifier[status:frightened]{frightened}.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: 479155f14ad8612d
+img: systems/teriock/src/icons/ranks/rank-2-necromancer.webp
+name: Rank 2 Necromancer
+system:
+  _sup: 482da026cc94996f
+  archetype: mage
+  class: necromancer
+  competence:
+    raw: 1
+  description: >-
+    <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers}
+    are most at home in the cemetery digging up future minions. Shunned by most
+    of society, these dark mages are not necessarily evil, they simply see death
+    as full of potential energy while others see it as the end of life.
+    @Identifier[class:necromancer]{Necromancers} fear nothing, as they are
+    always facing death. If you are playing a
+    @Identifier[class:necromancer]{Necromancer} be unafraid, kill without
+    remorse and be interested in @Identifier[status:dead]{dead} bodies, close to
+    death yourself, almost in another world.</p>
+  identifier: rank-2-necromancer
+  innate: false
+  maxAv: 0
+  number: 2
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d8
+    mp:
+      disabled: false
+      formula: 1d12
+type: rank

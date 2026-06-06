@@ -1,0 +1,386 @@
+_id: P8NQsneOiqYNipFS
+_key: '!items!P8NQsneOiqYNipFS'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.8e0c2b8d16a120d3
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.79
+effects:
+  - _id: vU4DiB0u1DAfzrs5
+    _key: '!items.effects!P8NQsneOiqYNipFS.vU4DiB0u1DAfzrs5'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5bb5b13ca45f582b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/bow-out.webp
+    name: Bow Out
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: bow-out
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:active-bow-out]{Active Bow Out} and
+          @Identifier[ability:reactive-bow-out]{Reactive Bow Out}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: Ckzn261n62CcGUwr
+    _key: '!items.effects!P8NQsneOiqYNipFS.Ckzn261n62CcGUwr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2670da014614edb4
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/dueling-techniques.webp
+    name: Dueling Techniques
+    system:
+      competence:
+        raw: 0
+      costs:
+        components:
+          somatic:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+      delivery: self
+      duration:
+        conditions:
+          present:
+            - dueling
+        unit: unlimited
+      endCondition: <p>You are no longer @Identifier[status:dueling]{dueling}.</p>
+      executionTime:
+        base: a1
+      form: normal
+      identifier: dueling-techniques
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>A
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          you are @Identifier[keyword:using]{using} of your choice becomes
+          @Identifier[property:armor-voiding]{AV0} against creatures you are
+          @Identifier[status:dueling]{dueling} and you gain
+          @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:chi-strike]{Chi Strike}.</p>
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      requirements: >-
+        <p>You must be @Identifier[status:dueling]{dueling} and wielding the
+        targeted weapon.</p>
+      skill: true
+      standard: true
+      targets:
+        - weapon
+    transfer: true
+    type: ability
+  - _id: aMpBM1gwJl2mau2J
+    _key: '!items.effects!P8NQsneOiqYNipFS.aMpBM1gwJl2mau2J'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.43df205ab1de2597
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/tea-ceremony.webp
+    name: Tea Ceremony
+    system:
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            description: >-
+              <p>2 MP per participant. Each participant must pay at least 1 MP.
+              After that, the remaining cost of may be paid in any combination
+              by any of the participants.</p>
+            type: description
+      delivery: sight
+      duration:
+        raw: '24'
+        unit: hour
+      effectTypes:
+        - truthDetecting
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      form: normal
+      identifier: tea-ceremony
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>[[lookup name]] is done in collaboration with up to 1 other
+          creature (although they do not need to have [[lookup name]]). It
+          requires willing and active participation from all targets. As part of
+          [[lookup name]], you must ask three questions about the alignment,
+          motives, or intentions of the group. Each participant (including
+          yourself) must individually answer these questions. The questions are
+          asked one at a time, and each participant must answer before the next
+          question is asked. If anyone refuses to answer truthfully, the
+          [[lookup name]] fails and all participants are
+          @Identifier[keyword:vulnerable]{vulnerable} to
+          @Identifier[drain:mana]{mana drain} and @Identifier[drain:mana]{mana
+          drain} is @Identifier[keyword:boosted]{boosted} against them for 24
+          hours. This occurs once everyone has answered the latest question or
+          immediately if someone refuses to answer whatsoever. If the [[lookup
+          name]] is successful, all participants are
+          @Identifier[keyword:resistance]{resistant} to
+          @Identifier[drain:mana]{mana drain} for 24 hours and suffer no
+          negative effects of @Wiki[Core:MP]{mana loss} other than
+          @Identifier[status:dead]{death} and
+          @Identifier[status:unconscious]{unconsciousness}. [[lookup name]] can
+          only be performed once per @Identifier[core:long-rest]{long
+          rest}.</p><p class="note"><b>Note:</b> [[lookup name]] detects only
+          whether the participants believe their answers to be true, not whether
+          or not they are.</p><p class="note"><b>Note:</b> If an effect such as
+          @Identifier[ability:lie]{Lie} is used to deceive the [[lookup name]],
+          it continues as if the lie were true.</p>
+        fluent: >-
+          <p>You may now target up to 2 × @Identifier[core:fluency-bonus]{F}
+          creatures (including yourself) with [[lookup name]].</p>
+        proficient: >-
+          <p>You may now target up to 2 × @Identifier[core:proficiency-bonus]{P}
+          creatures (including yourself) with [[lookup name]].</p>
+      powerSources:
+        - spiritual
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: eoiAjtYM5t20hyOM
+    _key: '!items.effects!P8NQsneOiqYNipFS.eoiAjtYM5t20hyOM'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c0042e5fff873fda
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
+    name: Reactive Bow Out
+    system:
+      _sup: vU4DiB0u1DAfzrs5
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: instant
+      executionTime:
+        base: r1
+      form: normal
+      identifier: reactive-bow-out
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>The effect causing you to enter a @Identifier[status:dueling]{duel}
+          or that would @Wiki[Category:Duel modifying effects]{modify} a
+          @Identifier[status:dueling]{duel} you are in
+          @Identifier[core:fizzles]{fizzles}. You do not count as "forfeiting"
+          or "losing" if you use [[lookup name]] to stop
+          @Identifier[status:dueling]{dueling}.</p>
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: >-
+        <p>Some effect would cause you to start
+        @Identifier[status:dueling]{dueling} or @Wiki[Category:Duel modifying
+        effects]{modify} a @Identifier[status:dueling]{duel} you are in.</p>
+    transfer: true
+    type: ability
+  - _id: ue3To7AyB61EVyHO
+    _key: '!items.effects!P8NQsneOiqYNipFS.ue3To7AyB61EVyHO'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.Gs4jCmyXyojxu0WM
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/active-bow-out.webp
+    name: Active Bow Out
+    system:
+      _sup: vU4DiB0u1DAfzrs5
+      automations:
+        824b5b01e1a4efec:
+          _id: 824b5b01e1a4efec
+          executor: false
+          multi: false
+          relation: remove
+          status: dueling
+          target: false
+          type: status
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: instant
+      effectTypes:
+        - duelModifying
+      executionTime:
+        base: a1
+      form: normal
+      identifier: active-bow-out
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You end a @Identifier[status:dueling]{duel} you are currently in.
+          You do not count as "forfeiting" or "losing" if you use [[lookup
+          name]] to stop @Identifier[status:dueling]{dueling}.</p>
+        proficient: >-
+          <p>If you want, everyone in the @Identifier[status:dueling]{duel}
+          returns to the number of
+          @Identifier[core:hit-points-and-mana-points]{HP} they had prior to
+          @Identifier[status:dueling]{dueling}.</p>
+      powerSources:
+        - spiritual
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: awi40cm9HdJp774e
+    _key: '!items.effects!P8NQsneOiqYNipFS.awi40cm9HdJp774e'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3e3bec7c2738ffa5
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/chi-strike.webp
+    name: Chi Strike
+    system:
+      _sup: Ckzn261n62CcGUwr
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - standardDamage
+          showConfirmationDialog: true
+          type: common
+      competence:
+        raw: 0
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        unit: instant
+      effectTypes:
+        - draining
+      executionTime:
+        base: a1
+      form: normal
+      identifier: chi-strike
+      interaction: attack
+      limitation: >-
+        <p>May only be delivered with the @Wiki[Category:Weapons]{weapon} you
+        made @Identifier[property:armor-voiding]{AV0} and only against creatures
+        you are @Identifier[status:dueling]{dueling}.</p>
+      maneuver: active
+      overview:
+        base: >-
+          <p>This strike deals @Identifier[drain:mana]{mana drain} instead of
+          @Identifier[core:damage]{damage}. It has no
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
+          types}, but is otherwise treated as any other
+          @Identifier[core:attack-interaction]{attack} <i>prior</i> to hitting.
+          So, @Identifier[ability:triumphant-damage-boost]{Triumphant Damage
+          Boost} would @Identifier[keyword:boosted]{boost} it, but
+          @Identifier[ability:improved-brace]{Improved Brace} would not
+          @Identifier[keyword:deboosted]{deboost} it.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - spiritual
+      range:
+        unit: contact
+      results:
+        critHit: >-
+          <p>Deal an amount of @Identifier[drain:mana]{mana drain} equal to the
+          amount of @Identifier[core:standard-and-critical-damage]{critical
+          damage} you would otherwise deal.</p>
+        hit: >-
+          <p>Deal an amount of @Identifier[drain:mana]{mana drain} equal to the
+          @Identifier[core:standard-and-critical-damage]{standard damage} you
+          would otherwise deal.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: 0b00935e53673daa
+img: systems/teriock/src/icons/ranks/rank-2-duelist.webp
+name: Rank 2 Duelist
+system:
+  _sup: d3672cafa9fd70c4
+  archetype: warrior
+  class: duelist
+  competence:
+    raw: 1
+  description: >-
+    <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists}
+    are often judges and referees for duels as well as devoted warriors.
+    @Identifier[class:duelist]{Duelists} prize the honor of their family above
+    any sort of personal gain and thus strive for excellence in everything that
+    they do. A true @Identifier[class:duelist]{Duelist} wins the battle before
+    it has begun. Strategy and personal perfection are the
+    @Identifier[class:duelist]{Duelist}'s way. If you are a
+    @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and
+    confident in yourself.</p>
+  flaws: <p>Duelists cannot use @Wiki[Category:Shields]{shields}.</p>
+  identifier: rank-2-duelist
+  innate: false
+  maxAv: 4
+  number: 2
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d12
+    mp:
+      disabled: false
+      formula: 1d8
+type: rank

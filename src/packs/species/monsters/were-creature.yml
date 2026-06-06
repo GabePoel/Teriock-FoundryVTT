@@ -1,0 +1,471 @@
+_id: b9a89312847ea5a2
+_key: '!items!b9a89312847ea5a2'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.84
+effects:
+  - _id: AXoTQa6PBMTJxDKM
+    _key: '!items.effects!b9a89312847ea5a2.AXoTQa6PBMTJxDKM'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.67aa47433b535449
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/aggressive.webp
+    name: Aggressive
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: aggressive
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You will not leave combat willingly and are
+          @Identifier[keyword:inept]{inept} at not killing anyone who opposes
+          you.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: OUxSvKCFWy7ToSek
+    _key: '!items.effects!b9a89312847ea5a2.OUxSvKCFWy7ToSek'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.09653aa7d237cf8f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/bite.webp
+    name: Bite
+    system:
+      automations:
+        SSt00nG9WUEpsaDV:
+          _id: SSt00nG9WUEpsaDV
+          changeType: upgrade
+          competencies:
+            - 0
+          key: system.damage
+          priority: 10
+          qualifier: '@prop.biting'
+          target: armament
+          type: childChange
+          value: 1d4
+        Qu3wFDMJp5Glvj3R:
+          _id: Qu3wFDMJp5Glvj3R
+          changeType: upgrade
+          competencies:
+            - 1
+          key: system.damage
+          priority: 10
+          qualifier: '@prop.biting'
+          target: armament
+          type: childChange
+          value: 1d6
+        b7iQNyYdqIYyHGzo:
+          _id: b7iQNyYdqIYyHGzo
+          changeType: upgrade
+          competencies:
+            - 2
+          key: system.damage
+          priority: 10
+          qualifier: '@prop.biting'
+          target: armament
+          type: childChange
+          value: 1d8
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          formula: 1d4
+          impact: damage
+          type: roll
+        5e4d195ed81a10cc:
+          _id: 5e4d195ed81a10cc
+          competencies:
+            - 1
+            - 2
+          formula: 1d6
+          impact: damage
+          type: roll
+        3f7fa7707643426f:
+          _id: 3f7fa7707643426f
+          competencies:
+            - 2
+          formula: 1d8
+          impact: damage
+          type: roll
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: bite
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Your @Identifier[body:mouth]{mouth} and other
+          @Identifier[property:biting]{biting items} count as a
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
+          for the purposes of abilities that target or are delivered by it
+          (although it cannot be @Identifier[property:shattered]{shattered} or
+          @Identifier[property:destroyed]{destroyed}). You may
+          @Identifier[core:attack-interaction]{attack} with it and its damage
+          die is now [[/damage 1d4]].</p>
+        fluent: <p>The damage die is instead [[/damage 1d8]].</p>
+        proficient: <p>The damage die is instead [[/damage 1d6]].</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: zWkaZiGXB6OOuN7t
+    _key: '!items.effects!b9a89312847ea5a2.zWkaZiGXB6OOuN7t'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.997e18ba323899eb
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/infertile.webp
+    name: Infertile
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: infertile
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You cannot reproduce.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: Xw1DMRxpXXCmZD6L
+    _key: '!items.effects!b9a89312847ea5a2.Xw1DMRxpXXCmZD6L'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.873114c38f087ff8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/regenerating.webp
+    name: Regenerating
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+            - revive
+          showConfirmationDialog: true
+          type: common
+        iCn9pFDIGFJWxm6H:
+          _id: iCn9pFDIGFJWxm6H
+          conditions:
+            absent:
+              - burned
+              - frozen
+          consumeStatDice: false
+          forHarm: false
+          noStatDice: false
+          trigger: turnStart
+          type: heal
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - healing
+        - regeneration
+        - revival
+      executionTime:
+        base: passive
+      form: special
+      identifier: regenerating
+      interaction: manifest
+      limitation: >-
+        <p>Does not work on @Identifier[damage:silver]{silver damage} or
+        @Identifier[damage:magic]{magic damage}.</p>
+      maneuver: passive
+      overview:
+        base: >-
+          <p>At the start of each of your @Identifier[core:turns]{turns}, you 
+          @Identifier[core:healing]{heal} and regain that many
+          @Identifier[core:hit-points-and-mana-points]{HP}. This does <i>not</i>
+          consume your @Wiki[Core:HP]{hit die}. If you were
+          @Identifier[status:dead]{dead} due to
+          @Identifier[core:hit-points-and-mana-points]{HP} loss, this brings you
+          @Identifier[status:alive]{back to life}. If you take
+          @Identifier[damage:fire]{fire damage}, this effect doesn't apply on
+          your next @Identifier[core:turns]{turn}. You only
+          @Identifier[status:dead]{die} due to
+          @Identifier[core:hit-points-and-mana-points]{HP} loss if you start
+          your @Identifier[core:turns]{turn} without successfully [[lookup name
+          style=lc]] @Identifier[core:hit-points-and-mana-points]{HP}.</p>
+      powerSources:
+        - primal
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: kwtmYLfXtwwXQla7
+    _key: '!items.effects!b9a89312847ea5a2.kwtmYLfXtwwXQla7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b4ddf2af6bd8975f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/were-creature-infect.webp
+    name: Were-Creature Infect
+    system:
+      competence:
+        raw: 0
+      delivery: bite
+      duration:
+        unit: unlimited
+      effectTypes:
+        - disease
+      executionTime:
+        base: r0
+      featSaveAttribute: unp
+      form: special
+      identifier: were-creature-infect
+      interaction: feat
+      maneuver: reactive
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      results:
+        fail: >-
+          <p>Over the coming month, the target will become a
+          @Identifier[creature:were-creature]{were-creature}. The DC for
+          @Identifier[ability:cure-illness]{Cure Illness} starts at 1,
+          immediately following the bite. But with every day that passes, the DC
+          increases by 1. After 30 days, they become a
+          @Identifier[creature:were-creature]{were-creature} and
+          @Identifier[ability:were-creature-transformation]{transform} for the
+          first time.</p>
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just @Identifier[core:damage]{damaged} a
+        @Wiki[Category:Humanoid creatures]{humanoid creature} with your
+        @Identifier[property:biting]{bite}.</p>
+    transfer: true
+    type: ability
+  - _id: qnlkGPNVyfUROxTp
+    _key: '!items.effects!b9a89312847ea5a2.qnlkGPNVyfUROxTp'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c4099e67f11fdc4f
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/were-creature-transformation.webp
+    name: Were-Creature Transformation
+    system:
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        raw: '24'
+        unit: hour
+      effectTypes:
+        - automatic
+        - disease
+        - transformation
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      form: special
+      identifier: were-creature-transformation
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You undergo a @Identifier[status:transformed]{greater
+          transformation} that cannot be reverted from into a particular
+          @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animal}.
+          This is typically the type of
+          @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animal}
+          that the @Identifier[creature:were-creature]{were-creature} that first
+          bit you was. Your @Identifier[core:size]{SIZE} is 1 greater than that
+          @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animal}
+          normally is and you maintain all
+          @Identifier[creature:were-creature]{were-creature}
+          @Pack[teriock.abilities]{abilities},
+          @Identifier[core:hit-points-and-mana-points]{hit dice}, and
+          @Identifier[core:hit-points-and-mana-points]{HP}. You also have
+          @Identifier[ability:impure-durability]{Impure Durability}, and become
+          @Identifier[ability:aggressive]{Aggressive} while
+          @Identifier[status:transformed]{transformed}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+      trigger: >-
+        <p>The moon is in a particular phase. This is typically the phase in
+        which you were first bitten by a
+        @Identifier[creature:were-creature]{were-creature}. This triggers
+        automatically. You cannot choose to not use it if you are able to.</p>
+    transfer: true
+    type: ability
+  - _id: Gj2IdXGT4M47AL5N
+    _key: '!items.effects!b9a89312847ea5a2.Gj2IdXGT4M47AL5N'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.67aa47433b535449
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/aggressive.webp
+    name: Aggressive
+    system:
+      _sup: qnlkGPNVyfUROxTp
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: aggressive
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You will not leave combat willingly and are
+          @Identifier[keyword:inept]{inept} at not killing anyone who opposes
+          you.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: kiUnKNdweTQmYBzu
+    _key: '!items.effects!b9a89312847ea5a2.kiUnKNdweTQmYBzu'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.84
+    img: systems/teriock/src/icons/abilities/impure-durability.webp
+    name: Impure Durability
+    system:
+      _sup: qnlkGPNVyfUROxTp
+      automations:
+        uevhIJEJYaY0sz5X:
+          _id: uevhIJEJYaY0sz5X
+          category: other
+          relation: immunities
+          type: protection
+          value: Non-Magical Non-Silver Damage
+      competence:
+        raw: 0
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime:
+        base: passive
+      form: special
+      identifier: impure-durability
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to
+          non-@Identifier[damage:magic]{magic}
+          non-@Identifier[damage:silver]{silver}
+          @Identifier[core:damage]{damage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+folder: 13ef6e80a087d7cf
+img: systems/teriock/src/icons/creatures/were-creature.webp
+name: Were-Creature
+system:
+  appearance: >-
+    <p>A monstrous cross between an
+    @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animal} and a
+    @Wiki[Category:Humanoid creatures]{humanoid species}.</p>
+  br: 15
+  competence:
+    raw: 1
+  description: >-
+    <p>Were-creatures change during their particular moon phase into a chaotic
+    half-beast of themselves and begin attacking everything nearby. The rest of
+    the time they appear as a normal @Wiki[Category:Humanoid
+    creatures]{humanoid}, except they still have the
+    @Pack[teriock.abilities]{abilities} listed here.</p>
+  identifier: were-creature
+  size:
+    enabled: false
+    value: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '1'
+    mp:
+      disabled: true
+      faces: 10
+      number:
+        raw: '1'
+  traits:
+    - monstrous
+    - partialHumanoid
+  transformation:
+    img: systems/teriock/src/icons/tokens/were-creature.webp
+    ring: true
+type: species
