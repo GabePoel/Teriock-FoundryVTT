@@ -2,9 +2,7 @@ import { makeIcon } from "../../helpers/utils.mjs";
 
 const { ContextMenu } = foundry.applications.ux;
 
-/**
- * @inheritDoc
- */
+/** @inheritDoc */
 export default class TeriockContextMenu extends ContextMenu {
   /**
    * Helper method to quickly generate context menu entries.

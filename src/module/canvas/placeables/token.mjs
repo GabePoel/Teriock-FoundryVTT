@@ -3,7 +3,7 @@ import { getImage } from "../../helpers/path.mjs";
 const { Token } = foundry.canvas.placeables;
 
 /**
- * @extends {Token}
+ * @inheritDoc
  * @property {TeriockTokenDocument} document
  * @property {TeriockActor|null} actor
  * @property {Scene} scene

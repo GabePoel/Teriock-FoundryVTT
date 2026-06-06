@@ -4,6 +4,7 @@ import { hotbarDropDialog } from "../dialogs/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;
 
+/** @inheritDoc */
 export default class TeriockHotbar extends Hotbar {
   /**
    * A helper method used to retrieve a Macro document from a hotbar slot element.

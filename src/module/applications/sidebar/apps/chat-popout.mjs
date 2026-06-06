@@ -2,6 +2,7 @@ import { makeIconClass } from "../../../helpers/utils.mjs";
 
 const { ChatPopout } = foundry.applications.sidebar.apps;
 
+/** @inheritDoc */
 export default class TeriockChatPopout extends ChatPopout {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(CONFIG.ChatMessage.sidebarIcon, "title") } };

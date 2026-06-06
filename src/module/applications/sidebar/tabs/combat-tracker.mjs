@@ -1,5 +1,6 @@
 const { CombatTracker } = foundry.applications.sidebar.tabs;
 
+/** @inheritDoc */
 export default class TeriockCombatTracker extends CombatTracker {
   /** @inheritDoc */
   _onCombatantControl(event, target) {

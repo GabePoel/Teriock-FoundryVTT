@@ -5,9 +5,9 @@ import { createElement } from "./html.mjs";
 import { localizeChoices } from "./localization.mjs";
 
 /**
- * Creates an HTML icon using Font Awesome classes.
+ * Creates an HTML icon using Font Awesome, Material Design, or Material Symbols classes.
  * @param {string} icon - The icon name to use.
- * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
+ * @param {...Teriock.UI.IconStyle} styles - One or more style names or an alias (e.g., "solid", "duotone", "title").
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIcon(icon, ...styles) {
@@ -16,9 +16,9 @@ export function makeIcon(icon, ...styles) {
 }
 
 /**
- * Creates an HTML icon element using Font Awesome classes.
+ * Creates an HTML icon element using Font Awesome, Material Design, or Material Symbols classes.
  * @param {string} icon - The icon name to use.
- * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
+ * @param {...Teriock.UI.IconStyle} styles - One or more style names or an alias (e.g., "solid", "duotone", "title").
  * @returns {HTMLElement}
  */
 export function makeIconElement(icon, ...styles) {
@@ -26,9 +26,9 @@ export function makeIconElement(icon, ...styles) {
 }
 
 /**
- * Creates the class for an HTML icon element using Font Awesome classes.
+ * Creates the class for an HTML icon element using Font Awesome, Material Design, or Material Symbols classes.
  * @param {string} icon - The icon name to use.
- * @param {...Teriock.UI.IconStyle} styles - One or more Font Awesome style names (e.g., "solid", "duotone").
+ * @param {...Teriock.UI.IconStyle} styles - One or more style names or an alias (e.g., "solid", "duotone", "title").
  * @returns {string} The HTML string for the icon element.
  */
 export function makeIconClass(icon, ...styles) {

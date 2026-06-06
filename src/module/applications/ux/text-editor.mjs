@@ -2,6 +2,7 @@ import { parseIdentifier } from "../../helpers/utils.mjs";
 
 const { TextEditor } = foundry.applications.ux;
 
+/** @inheritDoc */
 export default class TeriockTextEditor extends TextEditor {
   /**
    * Localized HTML string to represent a loading panel.

@@ -1,5 +1,6 @@
 const { TokenHUD } = foundry.applications.hud;
 
+/** @inheritDoc */
 export default class TeriockTokenHUD extends TokenHUD {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = { classes: ["teriock"] };

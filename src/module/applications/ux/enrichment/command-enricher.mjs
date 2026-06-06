@@ -1,6 +1,6 @@
-import { createElement } from "../../../helpers/html.mjs";
+import { TeriockTextEditor } from "../_module.mjs";
 import { buildCommandOptions, commands, getCommandEntryValue } from "../../../helpers/interaction/_module.mjs";
-import { makeIconElement, objectMap } from "../../../helpers/utils.mjs";
+import { makeIconClass, objectMap } from "../../../helpers/utils.mjs";
 import { interpretTerm } from "../enrichment-helpers.mjs";
 
 /**
@@ -53,22 +53,18 @@ const commandEnricher = {
     const command = commands[parsed.alias];
     const payload = parsed.arguments.length ? parsed.arguments[0] : "";
     const commandOptions = { ...parsed.config, ...buildCommandOptions(payload, command) };
-    const label = parsed.label ?? _loc(getCommandEntryValue(command, "label", commandOptions));
-    const icon = getCommandEntryValue(command, "icon", commandOptions);
-    const tooltip = getCommandEntryValue(command, "tooltip", commandOptions);
-    const anchor = createElement("a", {
-      className: "teriock-inline-command",
+    return TeriockTextEditor.createAnchor({
+      classes: ["teriock-inline-command"],
       dataset: {
         action: "executeCommand",
         command: command.id,
         relativeTo: options?.relativeTo?.uuid,
-        tooltip,
+        tooltip: getCommandEntryValue(command, "tooltip", commandOptions),
         ...objectMap(commandOptions, v => v.toString()),
       },
+      icon: makeIconClass(getCommandEntryValue(command, "icon", commandOptions), "inline"),
+      name: parsed.label ?? _loc(getCommandEntryValue(command, "label", commandOptions)),
     });
-    anchor.prepend(makeIconElement(icon, "inline"));
-    anchor.appendChild(document.createTextNode(label));
-    return anchor;
   },
 };
 

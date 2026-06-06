@@ -1,4 +1,5 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
+import { TeriockActor } from "../../../documents/_module.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import DocumentDirectoryMixin from "./document-directory-mixin.mjs";
 
@@ -17,7 +18,7 @@ export default class TeriockItemDirectory extends DocumentDirectoryMixin(ItemDir
       onClick: async (_ev, li) => {
         const data = await this._getDocumentFromLi(li)?.system.toCreature();
         if (!data) { return; }
-        Actor.implementation.create(data, { renderSheet: true });
+        TeriockActor.create(data, { renderSheet: true });
         foundry.ui.actors?.activate();
       },
       visible: li => this._getDocumentFromLi(li)?.type === "species" && game.user.hasPermission("ACTOR_CREATE"),

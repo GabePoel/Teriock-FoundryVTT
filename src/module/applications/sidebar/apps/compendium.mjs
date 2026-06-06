@@ -3,6 +3,7 @@ import { makeIconClass } from "../../../helpers/utils.mjs";
 
 const { Compendium } = foundry.applications.sidebar.apps;
 
+/** @inheritDoc */
 export default class TeriockCompendium extends Compendium {
   static _entryPartial = "teriock/sidebar/index-partial";
 

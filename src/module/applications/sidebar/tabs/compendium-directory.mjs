@@ -4,6 +4,7 @@ import TeriockCompendium from "../apps/compendium.mjs";
 
 const { CompendiumDirectory } = foundry.applications.sidebar.tabs;
 
+/** @inheritDoc */
 export default class TeriockCompendiumDirectory extends CompendiumDirectory {
   /** @inheritDoc */
   async _onCreateEntry(event, target) {
