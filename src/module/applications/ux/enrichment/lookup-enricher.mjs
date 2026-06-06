@@ -68,8 +68,9 @@ const lookupEnricher = {
           fetched = true;
         }
       }
-      if (!fetched && !textContent && ["boolean", "number", "string"].includes(typeof raw)) {textContent = raw
-          .toString();}
+      if (!fetched && !textContent && ["boolean", "number", "string"].includes(typeof raw)) {
+        textContent = raw.toString();
+      }
       if (!fetched && name && !link && validateTypedIdentifier(raw, { strict: true })) { textContent = getName(raw); }
       if (!fetched && link) {
         // Display a content link

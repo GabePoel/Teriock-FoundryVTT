@@ -1,5 +1,5 @@
-import { createElement } from "../../../helpers/html.mjs";
-import { makeIconElement } from "../../../helpers/utils.mjs";
+import { TeriockTextEditor } from "../_module.mjs";
+import { makeIconClass } from "../../../helpers/utils.mjs";
 
 /** @type {Teriock.Enrichment.EnricherConfig} */
 const packEnricher = {
@@ -14,17 +14,16 @@ const packEnricher = {
   },
   process: (parsed) => {
     const pack = game.packs.get(parsed.arguments[0]);
-    const anchor = createElement("a", {
-      className: "teriock-inline-command",
+    return TeriockTextEditor.createAnchor({
+      classes: ["teriock-inline-command"],
       dataset: {
         action: "openPack",
         pack: parsed.arguments[0],
         tooltip: _loc("TERIOCK.COMMANDS.OpenPack", { title: pack?.title }),
       },
+      icon: makeIconClass(TERIOCK.display.icons.ui.compendium, "inline"),
+      name: _loc(parsed.label ?? pack?.title),
     });
-    anchor.prepend(makeIconElement(TERIOCK.display.icons.ui.compendium, "inline"));
-    anchor.appendChild(document.createTextNode(_loc(parsed.label ?? pack?.title)));
-    return anchor;
   },
 };
 

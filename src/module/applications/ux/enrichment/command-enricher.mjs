@@ -16,8 +16,9 @@ async function executeCommand(target, operation, event) {
   const command = commands[target.dataset.command];
   if (!command || !command[operation]) { return; }
   const options = {};
-  for (const mod of ["alt", "ctrl", "shift"]) { if (command[mod] && event[`${mod}Key`]) { options[command[mod]] =
-        true; } }
+  for (const mod of ["alt", "ctrl", "shift"]) {
+    if (command[mod] && event[`${mod}Key`]) { options[command[mod]] = true; }
+  }
   for (const [key, value] of Object.entries(target.dataset)) {
     if (!["action", "command"].includes(key)) {
       options[key] = interpretTerm(value);
