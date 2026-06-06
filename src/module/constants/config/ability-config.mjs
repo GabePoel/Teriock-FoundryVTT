@@ -90,6 +90,7 @@ export default {
     spell: "TERIOCK.TERMS.Targets.spell",
     vitals: "TERIOCK.TERMS.Targets.vitals",
     weapon: "TERIOCK.TERMS.Targets.weapon",
+
     other: "TERIOCK.TERMS.Targets.other",
   },
 };

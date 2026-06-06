@@ -12,9 +12,10 @@ export default {
     holiday: { color: colors.palette.yellow, icon: icons.power.holiday, label: "TERIOCK.TERMS.PowerType.holiday" },
     innate: { color: colors.palette.purple, icon: icons.power.innate, label: "TERIOCK.TERMS.PowerType.innate" },
     learned: { color: colors.palette.brown, icon: icons.power.learned, label: "TERIOCK.TERMS.PowerType.learned" },
-    other: { color: colors.palette.green, icon: icons.power.other, label: "TERIOCK.TERMS.PowerType.other" },
     pact: { color: colors.palette.grey, icon: icons.power.pact, label: "TERIOCK.TERMS.PowerType.pact" },
     traits: { color: colors.palette.green, icon: icons.power.traits, label: "TERIOCK.TERMS.PowerType.traits" },
+
+    other: { color: colors.palette.green, icon: icons.power.other, label: "TERIOCK.TERMS.PowerType.other" },
   },
 };
 

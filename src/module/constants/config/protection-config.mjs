@@ -49,7 +49,6 @@ export default {
       label: "TYPES.Item.equipment",
       type: "equipment",
     },
-    other: { choices: "none", format: "none", imgCategory: "none", label: "TERIOCK.DIALOGS.Select.otherButton" },
     powerSources: {
       choices: "reference.powerSources",
       format: "camel",
@@ -83,6 +82,8 @@ export default {
       imgCategory: "tradecrafts",
       label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
     },
+
+    other: { choices: "none", format: "none", imgCategory: "none", label: "TERIOCK.DIALOGS.Select.otherButton" },
   },
   // no sort
   types: {
