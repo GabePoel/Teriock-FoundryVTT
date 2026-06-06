@@ -99,8 +99,8 @@ const takeIdentify = equipmentCommandFunctionFactory(
 const takeReadMagic = equipmentCommandFunctionFactory(
   e => !e.system.identification.read,
   e => e.system.identification.readMagic(),
-  "TERIOCK.COMMANDS.Glue.hint",
-  "TERIOCK.SYSTEMS.Equipment.MENU.glue",
+  "TERIOCK.COMMANDS.ReadMagic.hint",
+  "TERIOCK.SYSTEMS.Equipment.MENU.readMagic",
 );
 
 /**

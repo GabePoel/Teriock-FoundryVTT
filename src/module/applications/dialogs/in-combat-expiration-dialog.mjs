@@ -37,7 +37,7 @@ export default async function inCombatExpirationDialog(effect, forceDialog = fal
         createElement("legend", { innerText: _loc("TERIOCK.DIALOGS.InCombatExpiration.endConditionLegend") }),
       );
       descriptionElement.append(
-        createElement("div", { innerText: await TextEditor.enrichHTML(effect.system.expirations.description) }),
+        createElement("div", { innerHTML: await TextEditor.enrichHTML(effect.system.expirations.description) }),
       );
       contentHtml.append(descriptionElement);
     }
