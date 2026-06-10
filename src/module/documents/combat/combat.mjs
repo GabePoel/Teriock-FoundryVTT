@@ -98,7 +98,7 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
    * @returns {AnyActor[]}
    */
   get actors() {
-    return Array.from(this.combatants.filter(c => c.actor).map(c => c.actor));
+    return this.combatants.filter(c => c.actor).map(c => c.actor);
   }
 
   /** @inheritDoc */

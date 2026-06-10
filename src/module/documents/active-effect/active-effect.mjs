@@ -49,7 +49,7 @@ export default class TeriockActiveEffect
    * @returns {boolean}
    */
   get isStatus() {
-    return Object.values(CONFIG.statusEffects).map(s => s?._id).includes(this.id);
+    return Object.values(CONFIG.statusEffects).some(s => s?._id === this.id);
   }
 
   /** @inheritDoc */

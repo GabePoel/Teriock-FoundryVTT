@@ -1,7 +1,7 @@
 import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
-import documentConfig from "../../../constants/config/document-config.mjs";
 import effectConfig from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
+import { TeriockActiveEffect, TeriockItem } from "../../../documents/_module.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
@@ -159,12 +159,8 @@ export default class AddDocumentsActivation extends BaseActivation {
    * @returns {Promise<AnyChildDocument[]>}
    */
   async safeCreate(parent, docs) {
-    const effectTypes = Object.entries(documentConfig).filter(([_k, v]) => v.documentName === "ActiveEffect").map((
-      [k, _v],
-    ) => k);
-    const itemTypes = Object.entries(documentConfig).filter(([_k, v]) => v.documentName === "Item").map(([k, _v]) => k);
-    const effectData = docs.filter(d => effectTypes.includes(d?.type));
-    const itemData = docs.filter(d => itemTypes.includes(d?.type));
+    const effectData = docs.filter(d => TeriockActiveEffect.TYPES.includes(d?.type));
+    const itemData = docs.filter(d => TeriockItem.TYPES.includes(d?.type));
     const promises = [];
     if (effectData.length > 0) { promises.push(parent.createChildDocuments("ActiveEffect", effectData)); }
     if (itemData.length > 0) { promises.push(parent.createChildDocuments("Item", itemData)); }
