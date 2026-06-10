@@ -32,6 +32,7 @@ export default {
     tradesman: { archetype: "everyman", icon: icons.class.tradesman, label: "TERIOCK.TERMS.Everyman.tradesman" },
     veteran: { archetype: "warrior", icon: icons.class.veteran, label: "TERIOCK.TERMS.Classes.veteran" },
   },
+  defaults: { maxAv: 2 },
 };
 
 preLocalize("config.class.archetypes", { keys: ["label"] });

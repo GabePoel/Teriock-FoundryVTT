@@ -69,11 +69,9 @@ export default class SpeciesSystem
         enabled: new fields.BooleanField({ initial: true }),
         max: new fields.NumberField(),
         min: new fields.NumberField(),
-        value: new fields.NumberField({ initial: 3 }),
+        value: new fields.NumberField({ initial: TERIOCK.config.system.baseValues.size }),
       }),
-      traits: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.traits }), {
-        initial: ["humanoid"],
-      }),
+      traits: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.traits })),
       transformation: new fields.SchemaField(speciesTransformationFields()),
     });
   }
@@ -286,7 +284,7 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   prepareBaseData() {
-    if (this.size.enabled && !this.size.value) { this.size.value = 3; }
+    if (this.size.enabled && !this.size.value) { this.size.value = TERIOCK.config.system.baseValues.size; }
     super.prepareBaseData();
   }
 

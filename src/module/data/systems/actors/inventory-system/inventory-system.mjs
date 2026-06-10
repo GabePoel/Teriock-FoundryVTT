@@ -29,34 +29,27 @@ export default class InventorySystem extends BaseActorSystem {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
+    const STATUS_IMMUNITY = { category: "statuses", relation: "immunities", type: "protection" };
+    const LIGHT_CHANGE = {
+      priority: 150,
+      qualifier: "1",
+      target: "Actor",
+      time: TERIOCK.config.change.defaultPhase,
+      type: "override",
+      value: "0",
+    };
+    const BAR = { attribute: null, type: null, value: null };
+
     this.parent.updateSource(
       foundry.utils.mergeObject({
         effects: [{
           name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableDown"),
-          system: {
-            automations: {
-              invImmunity00002: {
-                _id: "invImmunity00002",
-                category: "statuses",
-                relation: "immunities",
-                type: "protection",
-                value: "down",
-              },
-            },
-          },
+          system: { automations: { invImmunity00002: { _id: "invImmunity00002", value: "down", ...STATUS_IMMUNITY } } },
           type: "consequence",
         }, {
           name: _loc("TERIOCK.SYSTEMS.Inventory.EFFECTS.disableEncumbered"),
           system: {
-            automations: {
-              invImmunity00001: {
-                _id: "invImmunity00001",
-                category: "statuses",
-                relation: "immunities",
-                type: "protection",
-                value: "encumbered",
-              },
-            },
+            automations: { invImmunity00001: { _id: "invImmunity00001", value: "encumbered", ...STATUS_IMMUNITY } },
           },
           type: "consequence",
         }, {
@@ -65,23 +58,7 @@ export default class InventorySystem extends BaseActorSystem {
             automations: {
               invChanges000001: {
                 _id: "invChanges000001",
-                changes: [{
-                  key: "token.light.dim",
-                  priority: 150,
-                  qualifier: "1",
-                  target: "Actor",
-                  time: TERIOCK.config.change.defaultPhase,
-                  type: "override",
-                  value: "0",
-                }, {
-                  key: "token.light.bright",
-                  priority: 150,
-                  qualifier: "1",
-                  target: "Actor",
-                  time: TERIOCK.config.change.defaultPhase,
-                  type: "override",
-                  value: "0",
-                }],
+                changes: [{ key: "token.light.dim", ...LIGHT_CHANGE }, { key: "token.light.bright", ...LIGHT_CHANGE }],
                 type: "changes",
               },
             },
@@ -90,7 +67,10 @@ export default class InventorySystem extends BaseActorSystem {
         }],
         prototypeToken: {
           actorLink: true,
+          bar1: BAR,
+          bar2: BAR,
           displayBars: CONST.TOKEN_DISPLAY_MODES.NONE,
+          displayName: CONST.TOKEN_DISPLAY_MODES.NONE,
           disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
         },
         system: { settings: { automation: { nonHierarchicalChanges: false, payAbilityCosts: false, wound: false } } },

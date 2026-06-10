@@ -58,7 +58,7 @@ export default class RankSystem
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
       innate: new fields.BooleanField({ initial: false }),
-      maxAv: new fields.NumberField({ initial: 2, integer: true, min: 0 }),
+      maxAv: new fields.NumberField({ initial: classConfig.defaults.maxAv, integer: true, min: 0 }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
     });
   }

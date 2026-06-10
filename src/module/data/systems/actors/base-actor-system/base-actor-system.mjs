@@ -120,7 +120,12 @@ export default class BaseActorSystem
 
     this.parent.updateSource(
       foundry.utils.mergeObject({
-        prototypeToken: { bar1: { attribute: "hp" }, bar2: { attribute: "mp" }, displayBars: 20 },
+        prototypeToken: {
+          bar1: { attribute: "hp" },
+          bar2: { attribute: "mp" },
+          displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+          displayName: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+        },
       }, data),
     );
   }
