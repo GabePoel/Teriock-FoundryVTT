@@ -219,7 +219,7 @@ export default class RankSystem
     if (this.parent.sup?.type === "species") { this.innate = true; }
     if (
       game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
-    ) { this.proficient = false; }
+    ) { this.competence.raw = 0; }
   }
 
   /** @inheritDoc */
