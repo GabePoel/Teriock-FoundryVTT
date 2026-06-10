@@ -88,7 +88,11 @@ export default class InventorySystem extends BaseActorSystem {
           },
           type: "consequence",
         }],
-        prototypeToken: { actorLink: true, displayBars: 0 },
+        prototypeToken: {
+          actorLink: true,
+          displayBars: CONST.TOKEN_DISPLAY_MODES.NONE,
+          disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL,
+        },
         system: { settings: { automation: { nonHierarchicalChanges: false, payAbilityCosts: false, wound: false } } },
       }, data),
     );

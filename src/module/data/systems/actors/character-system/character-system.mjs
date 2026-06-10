@@ -42,7 +42,8 @@ export default class CharacterSystem extends BaseActorSystem {
     this.parent.updateSource(
       foundry.utils.mergeObject({
         items: itemData,
-        prototypeToken: { actorLink: true, disposition: 0, sight: { enabled: true } },
+        prototypeToken: { actorLink: true, disposition: CONST.TOKEN_DISPOSITIONS.FRIENDLY, sight: { enabled: true } },
+        system: { scaling: { brScale: false } },
       }, data),
     );
   }

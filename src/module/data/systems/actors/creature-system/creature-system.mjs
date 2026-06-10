@@ -27,7 +27,12 @@ export default class CreatureSystem extends systemMixins.WikiSystemMixin(BaseAct
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    this.parent.updateSource(foundry.utils.mergeObject({ system: { system: { brScale: true } } }, data));
+    this.parent.updateSource(
+      foundry.utils.mergeObject({
+        prototypeToken: { actorLink: false, disposition: CONST.TOKEN_DISPOSITIONS.NEUTRAL },
+        system: { scaling: { brScale: true } },
+      }, data),
+    );
   }
 
   /** @inheritDoc */
