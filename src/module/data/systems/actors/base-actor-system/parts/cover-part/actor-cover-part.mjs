@@ -47,6 +47,7 @@ export default Base => {
 
       /** @inheritDoc */
       prepareDerivedData() {
+        super.prepareDerivedData();
         if (this.cover === 1) {
           this.defense.ac += 2;
           this.attributes.mov.raw = addFormula(this.attributes.mov.raw, "2");
