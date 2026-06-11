@@ -25,9 +25,7 @@ export default Base => {
             return {
               icon: makeIcon(v.icon, "contextMenu"),
               label: v.label || k.titleCase(),
-              onClick: async () => {
-                await this.document.update({ [path]: k });
-              },
+              onClick: async () => await this.document.update({ [path]: k }),
             };
           }),
           eventName,
