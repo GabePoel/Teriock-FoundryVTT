@@ -162,7 +162,6 @@ const defaultPhase = Object.entries(phase).find(([_k, v]) => v.default)[0];
 export default { child, defaultPhase, parent, phase };
 
 preLocalize("config.change.child.groups");
-preLocalize("config.change.child.categories", { key: "label", sort: true });
 preLocalize("config.change.child.paths", { key: "label", sort: true });
 preLocalize("config.change.parent.target");
 preLocalize("config.change.phase", { keys: ["hint", "label"] });
