@@ -32,11 +32,10 @@ export default function ChangesSheetMixin(Base) {
         const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document, valuePath)) || [];
         const newChange = {
           key: "",
-          phase: "normal",
+          phase: TERIOCK.config.change.defaultPhase,
           priority: 0,
           qualifier: "1",
           target: "Actor",
-          time: "normal",
           type: "add",
           value: "",
         };

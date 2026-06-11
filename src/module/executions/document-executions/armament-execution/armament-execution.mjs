@@ -120,7 +120,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
       if (this.formula === null) { return false; }
       this.crit = false;
     }
-    await super._getInput();
+    return super._getInput();
   }
 
   /** @inheritDoc */

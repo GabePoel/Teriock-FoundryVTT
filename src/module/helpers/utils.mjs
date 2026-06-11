@@ -219,9 +219,7 @@ export async function buildWriteOperation(operation) {
     const document = await foundry.utils.fromUuid(operation.uuid);
     if (!document) { return null; }
     if (operation.docData) {
-      const data = [{ ...operation.docData, _id: document.id }];
-      if (operation.action === "update") { operation.updates = data; }
-      else if (operation.action === "create") { operation.data = data; }
+      if (operation.action === "update") { operation.updates = [{ ...operation.docData, _id: document.id }]; }
       delete operation.docData;
     }
     if (document) {

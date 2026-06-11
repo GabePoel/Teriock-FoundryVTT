@@ -156,7 +156,7 @@ export default function ThresholdExecutionMixin(Base) {
         if (this.showDialog) {
           if ((await this._showRollDialog()) === false) { return false; }
         }
-        await super._getInput();
+        return super._getInput();
       }
 
       /** @inheritDoc */

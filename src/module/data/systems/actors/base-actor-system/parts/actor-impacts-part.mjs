@@ -248,7 +248,7 @@ export default Base => {
       }
 
       /**
-       * Applies wither to the actor's hit points.
+       * Applies wither to the actor's lifespan points.
        *
        * Relevant wiki pages:
        * - [Wither](https://wiki.teriock.com/index.php/Drain:Wither)
@@ -257,7 +257,6 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async takeWither(amount) {
-        console.log(amount);
         await this.parent.hookCall("wither", { scope: { amount } });
         await this.parent.update({ "system.lp.value": barClamp(this.lp, amount) });
       }
