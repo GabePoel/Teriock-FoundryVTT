@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.86
+      systemVersion: 0.12.87
     effects:
       - _id: 5mLPbGiWQLB5Ai6f
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
@@ -34,6 +34,11 @@ items:
               _id: iSxkhemk7psQTxpR
               changes:
                 - key: system.hp.max
+                  priority: 50
+                  target: Actor
+                  type: multiply
+                  value: '0.5'
+                - key: system.mp.max
                   priority: 50
                   target: Actor
                   type: multiply
@@ -161,7 +166,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/bestial-transformation.webp
         name: Bestial Transformation
         system:
@@ -255,7 +260,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/charm.webp
         name: Charm
         system:
@@ -314,14 +319,14 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/duel.webp
         name: Duel
         system:
           automations:
             sGyei1adB2IsKjZP:
               _id: sGyei1adB2IsKjZP
-              makeEffect: true
+              makeEffect: false
               preventFeat: false
               preventThreshold: false
               type: modifyEffect
@@ -395,7 +400,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: icons/skills/social/diplomacy-handshake-blue.webp
         name: Expert Courtier
         system:
@@ -440,7 +445,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -506,7 +511,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/greater-undead.webp
         name: Greater Undead
         system:
@@ -552,11 +557,18 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: >-
           systems/teriock/src/icons/abilities/increased-running-water-sensitivity.webp
         name: Increased Running Water Sensitivity
         system:
+          automations:
+            ot7qfrE7B8m6FPC3:
+              _id: ot7qfrE7B8m6FPC3
+              consumeStatDice: false
+              forHarm: true
+              noStatDice: false
+              type: heal
           competence:
             raw: 0
           delivery: self
@@ -573,12 +585,13 @@ items:
           overview:
             base: >-
               <p>If you end your @Identifier[core:turns]{turn} in running water,
-              you roll your <i>largest</i> @Wiki[Core:HP]{hit die} and take that
-              much @Identifier[keyword:warded]{warded}
+              you roll your <i>largest</i>
+              @Identifier[core:hit-points-and-mana-points]{hit die} and take
+              that much @Identifier[keyword:warded]{warded}
               @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
               damage} instead of the normal @Identifier[core:healing]{healing}
-              effect. This does not consume any of your @Wiki[Core:HP]{hit
-              dice}.</p>
+              effect. This does not consume any of your
+              @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
           powerSources:
             - magical
           range:
@@ -596,11 +609,18 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: >-
           systems/teriock/src/icons/abilities/increased-sunlight-sensitivity.webp
         name: Increased Sunlight Sensitivity
         system:
+          automations:
+            ZZQC5rSt9O5o6otv:
+              _id: ZZQC5rSt9O5o6otv
+              consumeStatDice: false
+              forHarm: true
+              noStatDice: false
+              type: heal
           competence:
             raw: 0
           delivery: self
@@ -617,12 +637,13 @@ items:
           overview:
             base: >-
               <p>If you end your @Identifier[core:turns]{turn} in direct
-              sunlight, you roll your <i>largest</i> @Wiki[Core:HP]{hit die} and
-              take that much @Identifier[keyword:warded]{warded}
+              sunlight, you roll your <i>largest</i>
+              @Identifier[core:hit-points-and-mana-points]{hit die} and take
+              that much @Identifier[keyword:warded]{warded}
               @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
               damage} instead of the normal @Identifier[core:healing]{healing}
-              effect. This does not consume any of your @Wiki[Core:HP]{hit
-              dice}.</p>
+              effect. This does not consume any of your
+              @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
           powerSources:
             - magical
           range:
@@ -640,7 +661,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/instant-ethereal.webp
         name: Instant Ethereal
         system:
@@ -687,7 +708,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/sentient-feeding.webp
         name: Sentient Feeding
         system:
@@ -710,16 +731,20 @@ items:
               creature with @Identifier[core:intelligence]{INT} of 0 or greater
               to @Identifier[status:dead]{death} every day 24 hours or you start
               taking penalties. If 24 hours pass and you have not fed, you lose
-              your your largest @Wiki[Core:HP]{hit die} and @Wiki[Core:MP]{mana
-              die}. Your @Identifier[core:hit-points-and-mana-points]{HP} and
+              your your largest @Identifier[core:hit-points-and-mana-points]{hit
+              die} and @Identifier[core:hit-points-and-mana-points]{mana die}.
+              Your @Identifier[core:hit-points-and-mana-points]{HP} and
               @Identifier[core:hit-points-and-mana-points]{MP} maximums decrease
               by the value of those dice. For each additional 24 hours you go
-              without feeding, you lose your next largest @Wiki[Core:HP]{hit
-              die} and @Wiki[Core:MP]{mana die}. To restore lost
-              @Wiki[Core:HP]{hit dice} and @Wiki[Core:MP]{mana dice}, you must
+              without feeding, you lose your next largest
+              @Identifier[core:hit-points-and-mana-points]{hit die} and
+              @Identifier[core:hit-points-and-mana-points]{mana die}. To restore
+              lost @Identifier[core:hit-points-and-mana-points]{hit dice} and
+              @Identifier[core:hit-points-and-mana-points]{mana dice}, you must
               feed more than normal. If you feed on at least 2 creatures within
-              a 24 hour period, you restore 1 lost @Wiki[Core:HP]{hit die} and
-              @Wiki[Core:MP]{mana die}.</p>
+              a 24 hour period, you restore 1 lost
+              @Identifier[core:hit-points-and-mana-points]{hit die} and
+              @Identifier[core:hit-points-and-mana-points]{mana die}.</p>
           powerSources:
             - martial
           range:
@@ -736,7 +761,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/spirit-bury.webp
         name: Spirit Bury
         system:
@@ -811,7 +836,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/vampiric-infect.webp
         name: Vampiric Infect
         system:
@@ -882,7 +907,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/very-high-intelligence.webp
         name: Very High Intelligence
         system:
@@ -917,7 +942,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -941,10 +966,11 @@ items:
               @Identifier[core:damage]{damage} you. If the creature providing
               you @Identifier[core:healing]{healing} specifies that they are
               doing so "for damage" then you roll your <i>largest</i>
-              @Wiki[Core:HP]{hit die} and take that much
-              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
-              damage} instead of the normal @Identifier[core:healing]{healing}
-              effect. This does not consume any of your @Wiki[Core:HP]{hit
+              @Identifier[core:hit-points-and-mana-points]{hit die} and take
+              that much @Identifier[damage:holy]{holy}
+              @Identifier[damage:magic]{magic damage} instead of the normal
+              @Identifier[core:healing]{healing} effect. This does not consume
+              any of your @Identifier[core:hit-points-and-mana-points]{hit
               dice}.</p>
           powerSources:
             - magical
@@ -962,7 +988,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -1015,7 +1041,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -1061,7 +1087,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -1117,7 +1143,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -1183,7 +1209,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
         name: Mana Drain Touch
         system:
@@ -1275,7 +1301,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.86
+      systemVersion: 0.12.87
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -1285,7 +1311,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1311,7 +1337,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.86
+          systemVersion: 0.12.87
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
