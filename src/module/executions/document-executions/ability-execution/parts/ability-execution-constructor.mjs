@@ -38,9 +38,6 @@ export default class AbilityExecutionConstructor
     ) {
       armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "handy"));
     }
-    if (this.source.system.delivery === "bite" && !armament?.properties.some((p) => p.system.identifier === "biting")) {
-      armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "biting"));
-    }
     return armament;
   }
 
