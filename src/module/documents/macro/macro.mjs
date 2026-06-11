@@ -70,7 +70,7 @@ export default class TeriockMacro
    */
   static async getLinkedUseMacro(doc) {
     const macro = game.macros.find(m =>
-      m.getFlag("teriock", "macroType" === "useLinked") && m.getFlag("teriock", "macroUuid" === doc.uuid)
+      m.getFlag("teriock", "macroType") === "useLinked" && m.getFlag("teriock", "macroUuid") === doc.uuid
     );
     if (macro) { return macro; }
     return this.makeLinkedUseMacro(doc);
