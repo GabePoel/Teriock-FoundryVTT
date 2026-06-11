@@ -47,6 +47,7 @@ export default function AutomatableSystemMixin(Base) {
       static migrateData(source, options, state) {
         if (foundry.utils.hasProperty(source, "automations")) {
           for (const a of Object.values(source.automations)) {
+            migrateValue(a, "type", "modifyEffect", "override");
             if (foundry.utils.getProperty(a, "type") === "combatExpiration") {
               migrateValue(a, "type", "combatExpiration", "expiration");
               foundry.utils.setProperty(a, "override.combat", true);

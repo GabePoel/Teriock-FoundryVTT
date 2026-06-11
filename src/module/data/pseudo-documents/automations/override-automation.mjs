@@ -12,7 +12,7 @@ const { fields } = foundry.data;
  * @mixes DisplayAutomation
  * @mixes OverrideDataAutomation
  */
-export default class ModifyEffectAutomation
+export default class OverrideAutomation
   extends mixClasses(
     CritAutomation,
     automationMixins.DisplayAutomationMixin,
@@ -21,16 +21,16 @@ export default class ModifyEffectAutomation
   )
 {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ModifyEffect"];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Override"];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.ModifyEffect.LABEL";
+    return "TERIOCK.AUTOMATIONS.Override.LABEL";
   }
 
   /** @inheritDoc */
   static get TYPE() {
-    return "modifyEffect";
+    return "override";
   }
 
   /** @inheritDoc */

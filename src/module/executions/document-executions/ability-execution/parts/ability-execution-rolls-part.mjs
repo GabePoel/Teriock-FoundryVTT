@@ -24,8 +24,8 @@ export default function AbilityExecutionRollsPart(Base) {
 
       /** @inheritDoc */
       async _buildRolls() {
-        const modifyEffectAutomation = this.activeAutomations.find(a => a.type === "modifyEffect");
-        const preventThreshold = Boolean(modifyEffectAutomation?.preventThreshold);
+        const overrideAutomation = this.activeAutomations.find(a => a.type === "override");
+        const preventThreshold = Boolean(overrideAutomation?.preventThreshold);
         const styles = {
           dice: { classes: this.source.system.interaction },
           total: { classes: this.source.system.interaction },

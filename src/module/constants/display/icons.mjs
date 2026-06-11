@@ -323,7 +323,7 @@ export const icons = {
     remove: "ms-close",
     reset: "ms-replay",
     save: "ms-save",
-    select: "ms-task-alt",
+    select: "ms-check-circle",
     shareImage: "ms-mms",
     shareText: "ms-chat",
     sheet: "ms-ad-group",

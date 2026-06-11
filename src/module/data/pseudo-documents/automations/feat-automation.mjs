@@ -6,7 +6,7 @@ const { fields } = foundry.data;
 export default class FeatAutomation extends ThresholdAutomation {
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.ROLLS.Feat.label";
+    return "TERIOCK.TERMS.Interaction.feat";
   }
 
   /** @inheritDoc */

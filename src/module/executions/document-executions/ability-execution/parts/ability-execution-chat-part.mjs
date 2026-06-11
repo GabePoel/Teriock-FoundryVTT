@@ -264,12 +264,12 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildActivations() {
         const acts = teriock.data.pseudoDocuments.activations;
-        const modifyEffectAutomation = this.activeAutomations.find(a => a.type === "modifyEffect");
+        const overrideAutomation = this.activeAutomations.find(a => a.type === "override");
 
         // Add feat save activation
-        if (this.isFeat && !modifyEffectAutomation?.preventFeat) {
+        if (this.isFeat && !overrideAutomation?.preventFeat) {
           const featOptions = { attribute: this.source.system.featSaveAttribute };
-          if (!modifyEffectAutomation?.preventThreshold) { featOptions.threshold = this.rolls[0].total; }
+          if (!overrideAutomation?.preventThreshold) { featOptions.threshold = this.rolls[0].total; }
           this.activations.push(new acts.FeatActivation({ options: featOptions }));
         }
 
@@ -278,9 +278,9 @@ export default function AbilityExecutionChatPart(Base) {
           this.activations.push(new acts.UseLocalActivation({ options: { lookup: "ability:block-cone" } }));
         }
 
-        const makeEffect = modifyEffectAutomation?.makeEffect ?? null;
-        const targetsActor = modifyEffectAutomation?.targetsActor ?? this.targetsActor;
-        const targetsArmament = modifyEffectAutomation?.targetsArmament ?? this.targetsArmament;
+        const makeEffect = overrideAutomation?.makeEffect ?? null;
+        const targetsActor = overrideAutomation?.targetsActor ?? this.targetsActor;
+        const targetsArmament = overrideAutomation?.targetsArmament ?? this.targetsArmament;
         if (
           makeEffect !== false
           && (makeEffect === true
@@ -346,7 +346,7 @@ export default function AbilityExecutionChatPart(Base) {
             if (a?.crit.has(0)) { normConData.system.transformation.uuids.push(...toAdd); }
             if (a?.crit.has(1)) { critConData.system.transformation.uuids.push(...toAdd); }
           }
-          this.getAutomations("modifyEffect", { active: true, crit: false }).forEach(a => {
+          this.getAutomations("override", { active: true, crit: false }).forEach(a => {
             if (a?.overrideCompetence) {
               foundry.utils.setProperty(normConData, "system.competence.raw", a.competence.value);
               foundry.utils.setProperty(normImbData, "system.competence.raw", a.competence.value);
@@ -356,7 +356,7 @@ export default function AbilityExecutionChatPart(Base) {
               foundry.utils.mergeObject(normImbData, a.data, { inplace: true });
             }
           });
-          this.getAutomations("modifyEffect", { active: true, crit: true }).forEach(a => {
+          this.getAutomations("override", { active: true, crit: true }).forEach(a => {
             if (a?.overrideCompetence) {
               foundry.utils.setProperty(critConData, "system.competence.raw", a.competence.value);
               foundry.utils.setProperty(critImbData, "system.competence.raw", a.competence.value);
@@ -369,7 +369,7 @@ export default function AbilityExecutionChatPart(Base) {
           if (targetsActor) {
             this.activations.push(
               new acts.AddDocumentsActivation({
-                display: { label: modifyEffectAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.label" },
+                display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.label" },
                 primary: {
                   children: normConChildren,
                   grandchildren: normGrandchildren,
@@ -389,7 +389,7 @@ export default function AbilityExecutionChatPart(Base) {
           if (targetsArmament) {
             this.activations.push(
               new acts.AddDocumentsActivation({
-                display: { label: modifyEffectAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.armament" },
+                display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.armament" },
                 primary: {
                   children: normImbChildren,
                   grandchildren: normGrandchildren,
