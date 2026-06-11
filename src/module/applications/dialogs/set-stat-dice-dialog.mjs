@@ -1,4 +1,3 @@
-import { ucFirst } from "../../helpers/string.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import { TeriockDialog } from "../api/_module.mjs";
 
@@ -12,7 +11,7 @@ export default async function setStatDiceDialog(pool) {
     label: _loc("TERIOCK.MODELS.BaseStatPool.FIELDS.formula.label"),
     rootId: foundry.utils.randomID(),
   }, { name: "formula", value: pool._source.formula });
-  const canToggle = pool.parent[`_canToggle${ucFirst(pool.stat)}Dice`];
+  const canToggle = pool.parent[`_canToggle${pool.stat.capitalize()}Dice`];
   const tooltip = !canToggle ? _loc("TERIOCK.SYSTEMS.StatGiver.DIALOG.cantToggle") : "";
   const dataset = {};
   if (tooltip.length > 0) { dataset.tooltip = tooltip; }

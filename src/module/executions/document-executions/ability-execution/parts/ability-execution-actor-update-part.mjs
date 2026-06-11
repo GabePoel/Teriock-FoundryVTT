@@ -2,7 +2,6 @@ import costConfig from "../../../../constants/config/cost-config.mjs";
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
-import { toTitleCase } from "../../../../helpers/string.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -20,7 +19,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        */
       get #paidCosts() {
         return Object.keys(costConfig.primary.keys).filter(c =>
-          this.costs[c] > 0 && !this.options[`no${toTitleCase(c)}`]
+          this.costs[c] > 0 && !this.options[`no${c.titleCase()}`]
         );
       }
 

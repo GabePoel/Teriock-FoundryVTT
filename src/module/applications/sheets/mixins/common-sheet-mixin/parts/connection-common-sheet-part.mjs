@@ -1,4 +1,3 @@
-import { toTitleCase } from "../../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../../helpers/utils.mjs";
 import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
@@ -25,7 +24,7 @@ export default Base => {
           Object.entries(obj).map(([k, v]) => {
             return {
               icon: makeIcon(v.icon, "contextMenu"),
-              label: v.name || toTitleCase(k),
+              label: v.label || k.titleCase(),
               onClick: async () => {
                 await this.document.update({ [path]: k });
               },

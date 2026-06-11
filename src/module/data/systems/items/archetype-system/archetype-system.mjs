@@ -1,6 +1,7 @@
 import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { dotJoin, toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
+import { dotJoin } from "../../../../helpers/string.mjs";
+import { getName } from "../../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -42,7 +43,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
     return Array.from(
       new Set(
         this.actor?.ranks.filter(r => r.system._source.archetype === this.identifier).map(r =>
-          TERIOCK.reference.classes[toCamelCase(r.system._source.class)] ?? toTitleCase(r.system._source.class)
+          getName(r.system.class)
         ),
       ),
     ).sort((a, b) => a.localeCompare(b));

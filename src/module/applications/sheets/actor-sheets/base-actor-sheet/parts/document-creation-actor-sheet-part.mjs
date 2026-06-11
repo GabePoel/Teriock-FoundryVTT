@@ -1,4 +1,3 @@
-import { ucFirst } from "../../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../../helpers/utils.mjs";
 
 export default Base =>
@@ -31,7 +30,7 @@ export default Base =>
       return {
         icon: makeIconClass(TERIOCK.config.document[type].icon, "contextMenu"),
         label: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: TERIOCK.config.document[type].label }),
-        onClick: this.constructor[`_onCreate${ucFirst(type)}`].bind(this),
+        onClick: this.constructor[`_onCreate${type?.capitalize()}`].bind(this),
       };
     }
 

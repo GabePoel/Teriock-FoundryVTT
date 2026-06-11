@@ -1,7 +1,6 @@
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/helpers/initializers.mjs";
@@ -262,7 +261,7 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       async use(options = {}) {
         await this.parent.hookCall("use");
-        Hooks.callAll(`teriock.use${ucFirst(this.parent.type)}${this.parent.type.slice(1)}`, [this.parent]);
+        Hooks.callAll(`teriock.use${this.parent.type.capitalize()}`, [this.parent]);
         await super.use(options);
       }
     }

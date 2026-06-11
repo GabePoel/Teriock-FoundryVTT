@@ -1,6 +1,5 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
-import { toTitleCase } from "../../../../../../helpers/string.mjs";
 import { fromIdentifier, getName, makeIcon } from "../../../../../../helpers/utils.mjs";
 import { initialText } from "../../../../../fields/helpers/initializers.mjs";
 
@@ -133,9 +132,9 @@ export default Base => {
         const reference = (await fromIdentifier(`equipment:${equipmentType}`))?.toObject(true)
           || { system: { equipmentType }, type: "equipment" };
         let img;
-        if (toTitleCase(equipmentType) === "Scroll") {
+        if (equipmentType.titleCase() === "Scroll") {
           if (this.elements.size === 1) {
-            img = getImage("consumables", `${toTitleCase(Array.from(this.elements)[0])} Spell Scroll`);
+            img = getImage("consumables", `${this.elements.first().titleCase()} Spell Scroll`);
           } else { img = getImage("consumables", "Celestial Spell Scroll"); }
         }
         let out = foundry.utils.mergeObject(reference, {

@@ -2,7 +2,7 @@ import { TeriockTextEditor } from "../_module.mjs";
 import { validateTypedIdentifier } from "../../../data/fields/helpers/validators.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
-import { toCamelCase, toKebabCase, toTitleCase, ucFirst } from "../../../helpers/string.mjs";
+import { toCamelCase, toKebabCase } from "../../../helpers/string.mjs";
 import { getName } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -94,7 +94,7 @@ const lookupEnricher = {
             break;
           case "title":
           case "tc":
-            textContent = toTitleCase(textContent);
+            textContent = textContent.titleCase();
             break;
           case "camel":
           case "cc":
@@ -106,7 +106,7 @@ const lookupEnricher = {
             break;
           case "upperFirst":
           case "ucf":
-            textContent = ucFirst(textContent.toLowerCase());
+            textContent = textContent.capitalize();
             break;
           default:
             break;

@@ -1,7 +1,7 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../helpers/panel.mjs";
-import { toCamelCase, toTitleCase } from "../../../helpers/string.mjs";
+import { toCamelCase } from "../../../helpers/string.mjs";
 import * as automations from "../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../mixins/_module.mjs";
 import BasePageSystem from "./base-page-system/base-page-system.mjs";
@@ -56,7 +56,7 @@ export default class HarmSystem
 
   /** @inheritDoc */
   get wikiPage() {
-    return `${toTitleCase(this.parent.type)}:${TERIOCK.index.damageTypes[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `${this.parent.type.capitalize()}:${TERIOCK.index.damageTypes[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 
   /** @inheritDoc */

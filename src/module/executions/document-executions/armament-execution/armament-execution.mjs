@@ -28,7 +28,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
    * @returns {Teriock.Keys.Impact|null}
    */
   get #singleImpact() {
-    if (this.impacts.size === 1) { return Array.from(this.impacts)[0]; }
+    if (this.impacts.size === 1) { return this.impacts.first(); }
     return null;
   }
 
@@ -73,7 +73,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   get flavor() {
     if (this.impacts.size === 1) {
-      return _loc("TERIOCK.ROLLS.Base.name", { value: TERIOCK.config.impact[Array.from(this.impacts)[0]].label });
+      return _loc("TERIOCK.ROLLS.Base.name", { value: TERIOCK.config.impact[this.impacts.first()].label });
     }
     return _loc("TERIOCK.ROLLS.Harm.multi");
   }

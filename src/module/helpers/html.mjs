@@ -5,7 +5,7 @@
  */
 export function elementClass(elements) {
   if (elements.size !== 1) { return "es-multi"; }
-  return `es-${Array.from(elements)[0]}`;
+  return `es-${elements.first()}`;
 }
 
 /**

@@ -1,5 +1,4 @@
 import triggerConfig from "../../constants/config/trigger-config.mjs";
-import { ucFirst } from "../../helpers/string.mjs";
 import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/utils.mjs";
 
 /**
@@ -37,14 +36,14 @@ async function increaseDebt(_worldTime, dt, _options, userId) {
 function fireTimeTriggerFactory(trigger) {
   return function fireTrigger() {
     for (const actor of game.actors.visible) {
-      if (game.user.id === actor.defaultUser.id) { actor?.system[`take${ucFirst(trigger)}`](); }
+      if (game.user.id === actor.defaultUser.id) { actor?.system[`take${trigger.capitalize()}`](); }
     }
   };
 }
 
 const timeHookEntries = [
   ["updateWorldTime", increaseDebt],
-  ...Object.keys(triggerConfig.time.choices).map(t => [`teriock.force${ucFirst(t)}`, fireTimeTriggerFactory(t)]),
+  ...Object.keys(triggerConfig.time.choices).map(t => [`teriock.force${t.capitalize()}`, fireTimeTriggerFactory(t)]),
 ];
 
 export default timeHookEntries;

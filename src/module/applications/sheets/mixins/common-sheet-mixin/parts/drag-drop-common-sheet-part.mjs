@@ -1,4 +1,3 @@
-import { ucFirst } from "../../../../../helpers/string.mjs";
 import { TeriockTextEditor } from "../../../../ux/_module.mjs";
 
 const DragDrop = foundry.applications.ux.DragDrop.implementation;
@@ -41,7 +40,7 @@ export default Base => {
         const parents = TERIOCK.config.document[this.document?.type]?.plural ?? "";
         if (!this.document.constructor.validateChildType(this.document, doc)) {
           ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType", {
-            format: { children: ucFirst(children), parents },
+            format: { children: children.capitalize(), parents },
             localize: true,
           });
           return false;

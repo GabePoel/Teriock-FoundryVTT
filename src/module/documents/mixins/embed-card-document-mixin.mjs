@@ -1,5 +1,4 @@
 import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { toTitleCase } from "../../helpers/string.mjs";
 
 /**
  * Mixin that provides support for embedding as a card.
@@ -41,7 +40,7 @@ export default function EmbedCardDocumentMixin(Base) {
           img: this.img,
           makeTooltip: false,
           openable: true,
-          subtitle: toTitleCase(this.documentName),
+          subtitle: _loc(`DOCUMENT.${this.documentName}`),
           text: this.collectionName,
           title: this.name,
           uuid: this.uuid,

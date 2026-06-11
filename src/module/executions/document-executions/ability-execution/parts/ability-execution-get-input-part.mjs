@@ -4,7 +4,6 @@ import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createElement } from "../../../../helpers/html.mjs";
-import { ucFirst } from "../../../../helpers/string.mjs";
 import { makeIconClass } from "../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
@@ -66,7 +65,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @returns {boolean}
        */
       #shouldShowCostPrompt(stat) {
-        return this.source.system.costs.primary[stat].type === "description" && !this.options[`no${ucFirst(stat)}`];
+        return this.source.system.costs.primary[stat].type === "description" && !this.options[`no${stat.capitalize()}`];
       }
 
       /** @inheritDoc */

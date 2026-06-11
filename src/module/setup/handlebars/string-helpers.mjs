@@ -1,4 +1,4 @@
-import { dotJoin, ucFirst } from "../../helpers/string.mjs";
+import { dotJoin } from "../../helpers/string.mjs";
 
 /**
  * Strip message bars to just the ones that have content.
@@ -16,6 +16,6 @@ function cleanBars(bars) {
   return newBars;
 }
 
-const stringHelperEntries = [["cleanBars", cleanBars], ["dotJoin", dotJoin], ["ucFirst", ucFirst]];
+const stringHelperEntries = [["cleanBars", cleanBars], ["dotJoin", dotJoin], ["ucFirst", s => s.capitalize()]];
 
 export default stringHelperEntries;

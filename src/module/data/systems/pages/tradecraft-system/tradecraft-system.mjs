@@ -1,6 +1,6 @@
 import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { toCamelCase, toTitleCase } from "../../../../helpers/string.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -49,6 +49,6 @@ export default class TradecraftSystem extends mixClasses(BasePageSystem, systemM
 
   /** @inheritDoc */
   get wikiPage() {
-    return `${toTitleCase(this.parent.type)}:${TERIOCK.index.tradecrafts[toCamelCase(this.identifier ?? "")] ?? ""}`;
+    return `Tradecraft:${TERIOCK.index.tradecrafts[toCamelCase(this.identifier ?? "")] ?? ""}`;
   }
 }

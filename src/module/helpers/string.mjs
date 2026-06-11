@@ -17,16 +17,6 @@ export function isKebabCase(str) {
 }
 
 /**
- * Checks if a string is in `Title Case` format.
- * @param {string} str
- * @returns {boolean}
- */
-export function isTitleCase(str) {
-  if (!str) { return false; }
-  return str === toTitleCase(str);
-}
-
-/**
  * Converts a string to `camelCase` format.
  * @param {string} str - The string to convert.
  * @returns {string} The camelCase version of the string.
@@ -38,15 +28,6 @@ export function toCamelCase(str) {
       /[^a-z0-9]+(.)/gi,
       (_, c) => c.toUpperCase(),
     ).replace(/[^a-z0-9]/gi, "").replace(/^[A-Z]/, c => c.toLowerCase());
-}
-
-/**
- * Converts a string to `Title Case` format.
- * @param {string} str - The string to convert.
- * @returns {string} The Title Case version of the string.
- */
-export function toTitleCase(str) {
-  return str.toLowerCase().replace(/(?:^|\s|-)\w/g, match => match.toUpperCase());
 }
 
 /**
@@ -131,15 +112,6 @@ export function dedent(str) {
     return Math.min(min, match ? match[1].length : 0);
   }, Infinity);
   return lines.map(line => line.slice(minIndent)).join("\n");
-}
-
-/**
- * Make the first character of a string upper case.
- * @param {string} str - The string to convert.
- * @returns {string} - The modified string.
- */
-export function ucFirst(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 /**

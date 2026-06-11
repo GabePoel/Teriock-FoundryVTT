@@ -4,13 +4,12 @@ import { default as keywords } from "../../../index/content/keywords.json" with 
 import { default as tradecrafts } from "../../../index/content/tradecrafts.json" with { type: "json" };
 import { default as weaponFightingStyles } from "../../../index/content/weapon-fighting-styles.json" with { type: "json" };
 import { preLocalize } from "../../helpers/localization.mjs";
-import { ucFirst } from "../../helpers/string.mjs";
 
 const rawContent = { classes, conditions, keywords, tradecrafts, weaponFightingStyles };
 const content = Object.fromEntries(
   Object.entries(rawContent).map(([category, records]) => {
     const prefixedRecords = Object.fromEntries(
-      Object.keys(records).map(key => [key, `TERIOCK.CONTENT.${ucFirst(category)}.${key}`]),
+      Object.keys(records).map(key => [key, `TERIOCK.CONTENT.${category.capitalize()}.${key}`]),
     );
     return [category, prefixedRecords];
   }),
