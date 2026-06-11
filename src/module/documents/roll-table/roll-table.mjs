@@ -1,6 +1,7 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { quickAddAssociation } from "../../helpers/panel.mjs";
+import { tableResultSort } from "../../helpers/sort.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
@@ -53,7 +54,7 @@ export default class TeriockRollTable
   async getPanelParts() {
     return Object.assign(await super.getPanelParts(), {
       associations: quickAddAssociation(
-        this.results.contents,
+        tableResultSort([...this.results]),
         _loc("TERIOCK.DOCUMENTS.result.plural"),
         TERIOCK.display.icons.document.tableResult,
         [],

@@ -16,6 +16,21 @@ export function conditionSort(conditions) {
 }
 
 /**
+ * Sort roll table results by their roll range.
+ * @param {TeriockTableResult[]} results
+ * @returns {TeriockTableResult[]}
+ */
+export function tableResultSort(results) {
+  return results.sort((a, b) => {
+    const rangeA = a.range?.[0] ?? 0;
+    const rangeB = b.range?.[0] ?? 0;
+    if (rangeA !== rangeB) { return rangeA - rangeB; }
+    if (a.sort !== b.sort) { return a.sort - b.sort; }
+    return (a.name ?? "").localeCompare(b.name ?? "");
+  });
+}
+
+/**
  * Sort documents.
  * @template T
  * @param {T[]} docs
