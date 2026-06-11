@@ -1,5 +1,5 @@
 /** @type {Teriock.UI.ThreeToggle} */
-const threeToggleInitial = 0;
+const threeToggleInitial = null;
 
 /**
  * @returns {Teriock.Sheet.BaseActorSheetSettings}
@@ -7,7 +7,7 @@ const threeToggleInitial = 0;
 export default function defaultSheetSettings() {
   return {
     abilityFilters: {
-      basic: game.teriock.getSetting("hideBasicAbilitiesByDefault") ? -1 : 0,
+      basic: game.teriock.getSetting("hideBasicAbilitiesByDefault") ? false : null,
       delivery: null,
       effectTypes: null,
       element: null,

@@ -1,4 +1,5 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { TernaryField } from "../../fields/_module.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
 import { CritAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
@@ -35,7 +36,7 @@ export default class ModifyEffectAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      preventEffect: new fields.BooleanField({ initial: false }),
+      makeEffect: new TernaryField(),
       preventFeat: new fields.BooleanField({ initial: false }),
       preventThreshold: new fields.BooleanField({ initial: false }),
     });
@@ -44,6 +45,7 @@ export default class ModifyEffectAutomation
   /** @inheritDoc */
   static migrateData(source, options, state) {
     migrateKey(source, "prevent", "preventEffect");
+    migrateKey(source, "preventEffect", "makeEffect", v => v === true ? false : v);
     return super.migrateData(source, options, state);
   }
 
@@ -51,8 +53,8 @@ export default class ModifyEffectAutomation
   get _formPaths() {
     return [
       "display.label",
+      "makeEffect",
       "preventFeat",
-      "preventEffect",
       "preventThreshold",
       ...this._competencePaths,
       ...this._overrideDataPaths,

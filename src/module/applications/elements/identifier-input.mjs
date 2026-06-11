@@ -20,7 +20,7 @@ const { setInputAttributes } = foundry.applications.fields;
  * @extends {AbstractFormInputElement<string|null>}
  */
 export default class HTMLIdentifierInputElement extends AbstractFormInputElement {
-  /** @override */
+  /** @inheritDoc */
   static tagName = "identifier-input";
 
   /**
@@ -66,7 +66,7 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
     return this.getAttribute("reset");
   }
 
-  /** @override */
+  /** @inheritDoc */
   _activateListeners() {
     this.#resetButton.addEventListener("click", this.#onReset.bind(this));
     this.#input.addEventListener("change", event => {
@@ -75,7 +75,7 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
     });
   }
 
-  /** @override */
+  /** @inheritDoc */
   _buildElements() {
     this.#input = this._primaryInput = createElement("input", {
       placeholder: this.getAttribute("placeholder"),
@@ -91,13 +91,13 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
     return [this.#input, this.#resetButton];
   }
 
-  /** @override */
+  /** @inheritDoc */
   _getValue() {
     const value = this.#input?.value.trim();
     return value || null;
   }
 
-  /** @override */
+  /** @inheritDoc */
   _refresh() {
     if (!this.#input) { return; }
     const initial = this.getAttribute("value");
@@ -105,12 +105,12 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
     this.removeAttribute("value");
   }
 
-  /** @override */
+  /** @inheritDoc */
   _setValue(value) {
     if (this.#input) { this.#input.value = value ?? ""; }
   }
 
-  /** @override */
+  /** @inheritDoc */
   _toggleDisabled(disabled) {
     this.#input.disabled = disabled;
     this.#resetButton.disabled = disabled;

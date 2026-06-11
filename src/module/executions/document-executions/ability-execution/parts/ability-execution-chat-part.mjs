@@ -278,10 +278,11 @@ export default function AbilityExecutionChatPart(Base) {
           this.activations.push(new acts.UseLocalActivation({ options: { lookup: "ability:block-cone" } }));
         }
 
+        const makeEffect = modifyEffectAutomation?.makeEffect ?? null;
         if (
-          this.source.system.duration.unit !== "instant"
-          && this.source.system.maneuver !== "passive"
-          && !modifyEffectAutomation?.preventEffect
+          makeEffect !== false
+          && (makeEffect === true
+            || (this.source.system.duration.unit !== "instant" && this.source.system.maneuver !== "passive"))
           && (this.targetsActor || this.targetsArmament)
         ) {
           // Add apply effects activation

@@ -1,11 +1,13 @@
 @use "../mixins" as mixins;
 
-label + .three-toggle {
+label + ternary-input {
   margin-left: 1px;
 }
 
-.three-toggle {
-  .three-toggle-bg {
+ternary-input {
+  flex: none;
+
+  > button {
     @include mixins.centralize;
     border-radius: 10px;
     height: 18px;
@@ -19,7 +21,7 @@ label + .three-toggle {
       cursor: pointer;
     }
 
-    .three-toggle-circle {
+    > div {
       background-color: color-mix(in srgb, var(--button-text-color), transparent 35%);
       border-radius: 50%;
       height: 14px;
@@ -29,30 +31,26 @@ label + .three-toggle {
       width: 14px;
     }
 
-    &.toggled-on,
-    &[data-value="1"] {
+    &[value="true"] {
       background-color: var(--color-warm-2);
 
-      .three-toggle-circle {
+      > div {
         background-color: var(--button-hover-text-color);
         left: 19px;
       }
     }
 
-    &.toggled-off,
-    &[data-value="-1"] {
+    &[value="false"] {
       background-color: var(--color-warm-2);
 
-      .three-toggle-circle {
+      > div {
         background-color: var(--button-hover-text-color);
         left: 1px;
       }
     }
 
-    &:hover {
-      .three-toggle-circle {
-        background-color: var(--button-hover-text-color);
-      }
+    &:hover > div {
+      background-color: var(--button-hover-text-color);
     }
   }
 }

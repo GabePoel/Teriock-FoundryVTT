@@ -46,18 +46,6 @@ export default class BaseActorSheet
     this.settings = defaultSheetSettings();
   }
 
-  /**
-   * Cycle the value of a three-way switch either forwards or backwards.
-   * @param {HTMLButtonElement} toggleSwitch
-   * @param {number} change
-   */
-  #cycleToggleSwitch(toggleSwitch, change = 1) {
-    const name = toggleSwitch.getAttribute("data-name");
-    if (!name) { return; }
-    const val = foundry.utils.getProperty(this, name);
-    foundry.utils.setProperty(this, name, ((val + 1 + change) % 3) - 1);
-  }
-
   /** @type {string} */
   _activeTab;
 
@@ -76,26 +64,11 @@ export default class BaseActorSheet
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    /** @type {NodeListOf<HTMLButtonElement>} */
-    const toggleSwitches = this.element.querySelectorAll("button[data-action=\"toggleSwitch\"]");
-    toggleSwitches.forEach(el => {
-      // Left-click: forward cycle
-      el.addEventListener("click", async () => {
-        this.#cycleToggleSwitch(el, 1);
-        await this.render();
-      });
-      // Right-click: reverse cycle
-      el.addEventListener("contextmenu", async () => {
-        this.#cycleToggleSwitch(el, 2);
-        await this.render();
-      });
-      // Support right-click on associated labels
-      if (!el.id) { return; }
-      const label = this.element.querySelector(`label[for="${el.id}"]`);
-      if (!label) { return; }
-      label.addEventListener("contextmenu", async event => {
-        event.preventDefault();
-        this.#cycleToggleSwitch(el, 2);
+    /** @type {NodeListOf<HTMLTernaryElement>} */
+    const ternaryInputs = this.element.querySelectorAll("ternary-input[name]");
+    ternaryInputs.forEach(el => {
+      el.addEventListener("change", async () => {
+        foundry.utils.setProperty(this, el.name, el.value);
         await this.render();
       });
     });

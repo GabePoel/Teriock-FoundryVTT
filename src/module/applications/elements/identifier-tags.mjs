@@ -28,7 +28,7 @@ const { fromUuid } = foundry.utils;
  * @extends {AbstractFormInputElement<string|string[]|null>}
  */
 export default class HTMLIdentifierTagsElement extends AbstractFormInputElement {
-  /** @override */
+  /** @inheritDoc */
   static tagName = "identifier-tags";
 
   /**
@@ -224,7 +224,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   }
 
   /**
-   * @override
+   * @inheritDoc
    * @type {Record<string, string>}
    * @protected
    */
@@ -282,7 +282,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     this.setAttribute("types", value.join(","));
   }
 
-  /** @override */
+  /** @inheritDoc */
   _activateListeners() {
     this.#button.addEventListener("click", () => this.#tryAdd(this.#input.value));
     this.#tags.addEventListener("click", this.#onClickTag.bind(this));
@@ -291,7 +291,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     this.addEventListener("drop", this.#onDrop.bind(this), { signal: this.abortSignal });
   }
 
-  /** @override */
+  /** @inheritDoc */
   _buildElements() {
     this.#tags = createElement("div", { className: "tags input-element-tags" });
     this.#input = this._primaryInput = createElement("input", {
@@ -309,7 +309,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     return [this.#tags, this.#input, this.#button];
   }
 
-  /** @override */
+  /** @inheritDoc */
   _getValue() {
     const identifiers = Object.keys(this._value);
     if (this.single) { return identifiers[0] ?? null; }
@@ -340,14 +340,14 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     this.removeAttribute("value");
   }
 
-  /** @override */
+  /** @inheritDoc */
   _refresh() {
     if (!this.#tags) { return; }
     const tags = Object.entries(this._value).map(([k, v]) => this.constructor.renderTag(k, v, this.editable));
     this.#tags.replaceChildren(...tags);
   }
 
-  /** @override */
+  /** @inheritDoc */
   _setValue(value) {
     this._value = {};
     if (!value) {
@@ -365,7 +365,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     this._refresh();
   }
 
-  /** @override */
+  /** @inheritDoc */
   _toggleDisabled(disabled) {
     this.#input.disabled = disabled;
     this.#button.disabled = disabled;

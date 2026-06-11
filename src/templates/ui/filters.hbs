@@ -17,10 +17,12 @@
     {{#each filterToggles as |toggle|}}
       <div class="tgrid-item">
         <label for="{{concat ../appId '.' toggle.key}}">{{localize toggle.label}}</label>
-        {{threeToggle
-          id=(concat ../appId "." toggle.key)
-          name=toggle.name
-        }}
+        <ternary-input
+          id="{{concat ../appId '.' toggle.key}}"
+          data-never-disable="true"
+          name="{{ toggle.name }}"
+          value="{{ toggle.value }}"
+        ></ternary-input>
       </div>
     {{/each}}
   </div>

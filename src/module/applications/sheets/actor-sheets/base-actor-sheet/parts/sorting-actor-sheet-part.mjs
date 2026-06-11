@@ -132,7 +132,7 @@ export default Base =>
             label: "TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label",
             name: "settings.abilityFilters.sustained",
           },
-        ],
+        ].map(t => ({ ...t, value: foundry.utils.getProperty(this, t.name) })),
         equipment: this._sortEquipment(this._getFilteredEquipment(context.equipment)),
         equipmentFilterSelects: [{
           choices: TERIOCK.reference.equipmentClasses,
@@ -187,7 +187,7 @@ export default Base =>
           key: "consumable",
           label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label",
           name: "settings.equipmentFilters.consumable",
-        }],
+        }].map(t => ({ ...t, value: foundry.utils.getProperty(this, t.name) })),
       });
       return context;
     }
