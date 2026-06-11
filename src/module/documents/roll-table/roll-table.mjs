@@ -1,6 +1,5 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { quickAddAssociation } from "../../helpers/panel.mjs";
 import { tableResultSort } from "../../helpers/sort.mjs";
 import TeriockChatMessage from "../chat-message/chat-message.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
@@ -23,6 +22,18 @@ export default class TeriockRollTable
     documentMixins.PanelDocumentMixin,
   )
 {
+  /**
+   * Format a roll table result range for display in associations.
+   * @param {number[]} [range]
+   * @returns {string}
+   */
+  static formatResultRange(range) {
+    if (!range?.length) { return ""; }
+    const [min, max] = range;
+    if (min === max) { return String(min); }
+    return `${min}\u2013${max}`;
+  }
+
   /**
    * All the documents in the results of this table.
    * @return {Promise<TeriockDocument[]>}
@@ -52,14 +63,23 @@ export default class TeriockRollTable
 
   /** @inheritDoc */
   async getPanelParts() {
+    const results = tableResultSort([...this.results]);
     return Object.assign(await super.getPanelParts(), {
-      associations: quickAddAssociation(
-        tableResultSort([...this.results]),
-        _loc("TERIOCK.DOCUMENTS.result.plural"),
-        TERIOCK.display.icons.document.tableResult,
-        [],
-        { makeTooltip: true },
-      ),
+      associations: results.length
+        ? [{
+          cards: results.map(r => ({
+            badge: TeriockRollTable.formatResultRange(r.range),
+            id: r._id,
+            img: r.img,
+            makeTooltip: true,
+            name: r.name,
+            type: r.documentName,
+            uuid: r.uuid,
+          })),
+          icon: TERIOCK.display.icons.document.tableResult,
+          title: _loc("TERIOCK.DOCUMENTS.result.plural"),
+        }]
+        : [],
       bars: [{
         icon: TERIOCK.display.icons.ui.formula,
         label: _loc("TERIOCK.TERMS.Common.formula"),

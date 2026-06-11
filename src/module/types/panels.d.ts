@@ -22,9 +22,10 @@ declare global {
 
     /** Definition for an association card. */
     export type PanelAssociationCard = {
+      badge?: string;
       color?: string;
       draggable?: boolean;
-      icon?: string;
+      icon?: Teriock.EmbedData.EmbedIcon;
       id?: ID<TeriockDocument>;
       img: string;
       makeTooltip?: boolean;
