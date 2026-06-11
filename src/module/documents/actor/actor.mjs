@@ -369,11 +369,12 @@ export default class TeriockActor
     if (yes === false) { return false; }
 
     const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
-    if (foundry.utils.hasProperty(changes, "system.size.raw")) {
-      const tokenSize = this.constructor.getSizeConfig(changes.size.raw).length;
+    if (foundry.utils.hasProperty(changes, "system.size.number")) {
+      const tokenSize = this.constructor.getSizeConfig(foundry.utils.getProperty(changes, "system.size.number")).length;
       if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
-        tokenUpdates["prototypeToken.width"] = tokenSize;
-        tokenUpdates["prototypeToken.height"] = tokenSize;
+        tokenUpdates.width = tokenSize;
+        tokenUpdates.height = tokenSize;
+        foundry.utils.setProperty(changes, "prototypeToken", tokenUpdates);
       }
       for (const token of this.getDependentTokens()) {
         if (token.parent?.grid?.type === 0) { await token.resize({ height: tokenSize, width: tokenSize }); }
