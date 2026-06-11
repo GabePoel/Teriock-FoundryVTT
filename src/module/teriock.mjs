@@ -108,7 +108,6 @@ foundry.helpers.Hooks.once("init", function() {
     },
   });
   applications.ux.enrichment.registerEnrichers();
-  applications.elements.registerElements();
 
   // Configure Canvas
   // ================
