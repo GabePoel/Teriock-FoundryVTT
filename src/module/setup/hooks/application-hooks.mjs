@@ -68,7 +68,7 @@ function addIdentifierClipboardListener(application) {
   const type = _loc("TERIOCK.TERMS.Common.identifier").toLowerCase();
   const label = _loc(application.document.constructor.metadata.label);
   application.window.header.querySelectorAll("[data-action=copyUuid]").forEach(el =>
-    el.addEventListener("auxclick", e => {
+    el.addEventListener("auxclick", async e => {
       if (e.button !== 1) { return; }
       e.preventDefault();
       e.stopPropagation();
@@ -81,7 +81,7 @@ function addIdentifierClipboardListener(application) {
         });
         return;
       }
-      game.clipboard.copyPlainText(id);
+      await game.clipboard.copyPlainText(id);
       ui.notifications.info("DOCUMENT.IdCopiedClipboard", { format: { id, label, type } });
     })
   );

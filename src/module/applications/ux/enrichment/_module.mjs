@@ -1,4 +1,5 @@
 import { registerEnricher } from "../enrichment-helpers.mjs";
+import { default as codeEnricher } from "./code-enricher.mjs";
 import { default as commandEnricher } from "./command-enricher.mjs";
 import { default as identifierEnricher } from "./identifier-enricher.mjs";
 import { default as lookupEnricher } from "./lookup-enricher.mjs";
@@ -9,6 +10,7 @@ import { default as wikiEnricher } from "./wiki-enricher.mjs";
  * Register all enrichers.
  */
 export function registerEnrichers() {
+  registerEnricher(codeEnricher);
   registerEnricher(commandEnricher);
   registerEnricher(identifierEnricher);
   registerEnricher(lookupEnricher);
