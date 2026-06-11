@@ -48,7 +48,7 @@ export default class TeriockRevitalizeManager extends TeriockStatManager {
       label: _loc("TERIOCK.AUTOMATIONS.Revitalize.forHarm.label"),
     });
     this._consumeStatDiceField = new fields.BooleanField({
-      hint: _loc("TERIOCK.AUTOMATIONS.Revitalize.forHarm.hint"),
+      hint: _loc("TERIOCK.AUTOMATIONS.Revitalize.consumeStatDice.hint"),
       initial: true,
       label: _loc("TERIOCK.AUTOMATIONS.Revitalize.consumeStatDice.label"),
     });
