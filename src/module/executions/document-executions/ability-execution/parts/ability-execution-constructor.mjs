@@ -319,6 +319,7 @@ export default class AbilityExecutionConstructor
     // Fall back to default token
     this.executor ??= this.actor?.defaultToken ?? null;
     this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
+    if (Number.isNaN(this.existingAttackPenalty)) { this.existingAttackPenalty = 0; }
     this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
     this.payCosts = this.actor?.system.settings.automation.payAbilityCosts ?? true;
     this.targets = new Set();
