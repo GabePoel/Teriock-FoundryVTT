@@ -145,6 +145,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
 
   /** @inheritDoc */
   prepareDerivedData() {
+    super.prepareDerivedData();
     if (this.inheritTier && this.target) { this.tier = this.target.system.tier.currentValue; }
     this.changes.push({ key: "system.presence.value", phase: "initial", priority: 10, type: "add", value: this.tier });
   }
