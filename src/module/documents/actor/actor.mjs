@@ -460,15 +460,6 @@ export default class TeriockActor
     return this.modifiableChildren.filter(c => !c.metadata.revealable || c.system.revealed || game.user.isGM);
   }
 
-  /**
-   * Performs post-update operations for the actor.
-   * @returns {Promise<void>}
-   */
-  async postUpdate() {
-    await this.system.postUpdate();
-    this.parent.fireTrigger("updateActor", this.parent.getScope());
-  }
-
   /** @inheritDoc */
   prepareData() {
     super.prepareData();

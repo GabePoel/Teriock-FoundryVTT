@@ -13,18 +13,6 @@ function addCardContextMenuEntriesToHeader(application, controls) {
   const document = application.document;
   if (typeof document.getCardContextMenuEntries !== "function") { return; }
   const entries = document.getCardContextMenuEntries(document);
-  const groups = {};
-  const ungrouped = [];
-  const sorted = [];
-  // TODO: Fully commit to either grouped or ungrouped
-  // We sort entries by group, but this isn't really necessary since we sort alphabetically anyway
-  entries.forEach(entry => {
-    if (entry.group && !groups[entry.group]) { groups[entry.group] = []; }
-    if (entry.group) { groups[entry.group].push(entry); }
-    else { ungrouped.push(entry); }
-  });
-  Object.values(groups).forEach(g => sorted.push(...g));
-  sorted.push(...ungrouped);
   controls.push(
     ...entries.filter(e =>
       e.label !== _loc("SIDEBAR.DUPLICATE")
