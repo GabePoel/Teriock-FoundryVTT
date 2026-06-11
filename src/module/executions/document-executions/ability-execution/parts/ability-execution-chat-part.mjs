@@ -445,7 +445,7 @@ export default function AbilityExecutionChatPart(Base) {
 
       /** @inheritDoc */
       async _buildTags() {
-        if (this.source.system.interaction === "attack" && this.ub) {
+        if (this.source.system.interaction === "attack" && this.piercing.ub) {
           this.tags.push(_loc("TERIOCK.TERMS.Properties.unblockable"));
         }
         if (this.warded) { this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label")); }
