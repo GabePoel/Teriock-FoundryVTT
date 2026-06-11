@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.12.86
     effects:
       - _id: tH77doK8pe2GLfdR
         _key: >-
@@ -25,10 +25,69 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
+          automations:
+            iSxkhemk7psQTxpR:
+              _id: iSxkhemk7psQTxpR
+              changes:
+                - key: system.hp.max
+                  priority: 50
+                  target: Actor
+                  type: multiply
+                  value: '0.5'
+              competencies:
+                - 0
+                - 1
+              type: changes
+            ZdtyUjiggvt0bxgX:
+              _id: ZdtyUjiggvt0bxgX
+              common:
+                - revive
+              showConfirmationDialog: true
+              type: common
+            BM5ygmNfL3vRPzmS:
+              _id: BM5ygmNfL3vRPzmS
+              override:
+                triggers: true
+              triggers:
+                - shortRest
+              type: expiration
+            ZlgI0KUafWT3wE27:
+              _id: ZlgI0KUafWT3wE27
+              competencies:
+                - 0
+                - 1
+              makeEffect: true
+              preventFeat: false
+              preventThreshold: false
+              type: modifyEffect
+            6v7WhWcAO2fARRYl:
+              _id: 6v7WhWcAO2fARRYl
+              amount: 999999
+              competencies:
+                - 1
+                - 2
+              display:
+                label: Restore MP
+              impact: revitalizing
+              morganti: false
+              showDialog: false
+              type: take
+            YHHJxY54wT2k778U:
+              _id: YHHJxY54wT2k778U
+              amount: 999999
+              competencies:
+                - 1
+                - 2
+              display:
+                label: Restore HP
+              impact: healing
+              morganti: false
+              showDialog: false
+              type: take
           competence:
             raw: 0
           costs:
@@ -58,17 +117,27 @@ items:
           overview:
             base: >-
               <p>Target is @Identifier[status:alive]{alive} (but still
-              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead})
-              at 1 @Identifier[core:hit-points-and-mana-points]{HP}, although
-              its maximum @Identifier[core:hit-points-and-mana-points]{HP} is
-              halved (minimum of 1) until it completes a
-              @Identifier[core:short-rest]{short rest}. This does not count as a
-              @Wiki[Category:Revival effects]{revival effect}.</p>
-            fluent: <p>Target's @Wiki[Core:HP]{HP} is no longer halved.</p>
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}).
+              It's @Identifier[core:hit-points-and-mana-points]{HP} and
+              @Identifier[core:hit-points-and-mana-points]{MP} are both
+              increased to 1 if they were less than that value. However, the
+              target's maximum @Identifier[core:hit-points-and-mana-points]{HP}
+              and @Identifier[core:hit-points-and-mana-points]{MP} are both
+              halved to a minimum of 1. This effect lasts until the target
+              completes a @Identifier[core:short-rest]{short rest}. This does
+              not <i>count</i> as a @Wiki[Category:Revival effects]{revival
+              effect} although it acts as one.</p>
+            fluent: >-
+              <p>Target's @Identifier[core:hit-points-and-mana-points]{HP} and
+              @Identifier[core:hit-points-and-mana-points]{MP} are no longer
+              halved.</p>
             proficient: >-
-              <p>Target has all @Wiki[Core:HP]{HP} restored, but its maximum
-              @Wiki[Core:HP]{HP} is still halved. This does not count as a
-              @Wiki[Category:Healing effects]{healing effect}.</p>
+              <p>Target has all @Identifier[core:hit-points-and-mana-points]{HP}
+              and @Identifier[core:hit-points-and-mana-points]{MP} restored, but
+              its maximum @Identifier[core:hit-points-and-mana-points]{HP} and
+              @Identifier[core:hit-points-and-mana-points]{MP} are still halved.
+              This does not count as a @Wiki[Category:Healing effects]{healing
+              effect} or a @Wiki[Category:Revival effects]{revival effect}.</p>
           piercing:
             raw: 2
           powerSources:
@@ -92,7 +161,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/attack-resistance.webp
         name: Attack Resistance
         system:
@@ -148,7 +217,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
@@ -203,7 +272,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/full-undead.webp
         name: Full Undead
         system:
@@ -249,7 +318,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/ghostlike.webp
         name: Ghostlike
         system:
@@ -284,7 +353,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/incorporeal.webp
         name: Incorporeal
         system:
@@ -335,7 +404,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -370,7 +439,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -405,7 +474,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -440,7 +509,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/tiny-strength.webp
         name: Tiny Strength
         system:
@@ -475,7 +544,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/zombify.webp
         name: Zombify
         system:
@@ -586,7 +655,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/impure-durability.webp
         name: Impure Durability
         system:
@@ -633,7 +702,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/undying-durability.webp
         name: Undying Durability
         system:
@@ -699,7 +768,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -744,7 +813,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/undead-mind.webp
         name: Undead Mind
         system:
@@ -800,7 +869,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
         name: Mana Drain Grasp
         system:
@@ -865,7 +934,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
         name: Ethereal Senses
         system:
@@ -950,7 +1019,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.12.86
     effects:
       - _id: oy1A5zdakXd9Rhxu
         _key: >-
@@ -960,7 +1029,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/empathic-ray.webp
         name: Empathic Ray
         system:
@@ -1049,7 +1118,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/familiar-bond.webp
         name: Familiar Bond
         system:
@@ -1140,7 +1209,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/oracle.webp
         name: Oracle
         system:
@@ -1211,7 +1280,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/treeform-ball.webp
         name: Treeform Ball
         system:
@@ -1330,24 +1399,24 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: XVsECu6yaaRJPTCk
-    _key: '!actors.items!79988d25c2baed6a.XVsECu6yaaRJPTCk'
+  - _id: h2QdeYrEEAFz6Jgj
+    _key: '!actors.items!79988d25c2baed6a.h2QdeYrEEAFz6Jgj'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.12.86
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!79988d25c2baed6a.XVsECu6yaaRJPTCk.NGCuRUaVtXnxAbRe
+          !actors.items.effects!79988d25c2baed6a.h2QdeYrEEAFz6Jgj.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1397,13 +1466,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!79988d25c2baed6a.XVsECu6yaaRJPTCk.aCWLNsvSFjEuLTyl
+          !actors.items.effects!79988d25c2baed6a.h2QdeYrEEAFz6Jgj.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.84
+          systemVersion: 0.12.86
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

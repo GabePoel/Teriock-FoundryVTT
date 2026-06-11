@@ -6,6 +6,11 @@ label + ternary-input {
 
 ternary-input {
   flex: none;
+  --color-toggle-background: var(--color-warm-2);
+
+  &[disabled] {
+    --color-toggle-background: var(--disabled-ternary-background);
+  }
 
   > button {
     @include mixins.centralize;
@@ -32,7 +37,7 @@ ternary-input {
     }
 
     &[value="true"] {
-      background-color: var(--color-warm-2);
+      background-color: var(--color-toggle-background);
 
       > div {
         background-color: var(--button-hover-text-color);
@@ -41,7 +46,7 @@ ternary-input {
     }
 
     &[value="false"] {
-      background-color: var(--color-warm-2);
+      background-color: var(--color-toggle-background);
 
       > div {
         background-color: var(--button-hover-text-color);
