@@ -145,7 +145,7 @@ export default class AbilityExecutionConstructor
   /** @returns {boolean} */
   get canHeighten() {
     return this.competence.proficient && Boolean(this.source.system.heightened) && !this.flags.noHeighten
-      && (this.actor?.system.scaling.p ?? 0 > 0);
+      && (this.actor?.system.scaling.p ?? 0) > 0;
   }
 
   /** @inheritDoc */
