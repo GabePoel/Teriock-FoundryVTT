@@ -82,7 +82,7 @@ export default {
     label: "TERIOCK.EFFECTS.Impacts.setTempMp.label",
     take: "TERIOCK.EFFECTS.Impacts.setTempMp.take",
     apply: async (actor, amt) => await actor?.system.takeSetTempMp(amt),
-    reverse: async actor => await actor?.system.takeSetTempHp(0),
+    reverse: async actor => await actor?.system.takeSetTempMp(0),
   },
 
   hide: {
