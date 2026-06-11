@@ -32,6 +32,17 @@ export default class TeriockToken extends Token {
   }
 
   /** @inheritDoc */
+  _getBarColors(index, data) {
+    if (["hp", "lp", "mp"].includes(data.attribute)) {
+      return {
+        empty: Color.fromString(TERIOCK.display.colors[data.attribute].darkest),
+        full: Color.fromString(TERIOCK.display.colors[data.attribute].base),
+      };
+    }
+    return super._getBarColors(index, data);
+  }
+
+  /** @inheritDoc */
   _onApplyStatusEffect(statusId, active) {
     switch (statusId) {
       case CONFIG.specialStatusEffects.ETHEREAL:

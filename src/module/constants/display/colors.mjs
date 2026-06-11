@@ -13,7 +13,7 @@ export const colors = {
     yellow: "#E5A50A",
   },
 
-  hp: { dark: "#A51D2D", light: "#F66151" },
-  lp: { dark: "#241F31", light: "#5E5C64" },
-  mp: { dark: "#1A5FB4", light: "#99C1F1" },
+  hp: { base: "#e01b24", dark: "#A51D2D", darkest: "#320000", light: "#F66151" },
+  lp: { base: "#3d3846", dark: "#241F31", darkest: "#16131d", light: "#5E5C64" },
+  mp: { base: "#3584e4", dark: "#1A5FB4", darkest: "#000032", light: "#99C1F1" },
 };
