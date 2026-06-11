@@ -24,6 +24,7 @@ async function buildAllMjsFiles(dir) {
 
 /**
  * Build a macro's `.mjs` file that be converted back into a `.yml` file and packed into a database.
+ * @param {string} fp
  */
 async function buildMjsFile(fp) {
   try {
