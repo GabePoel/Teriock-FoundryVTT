@@ -244,6 +244,7 @@ export default function AbilityExecutionGetInputPart(Base) {
       /** @inheritDoc */
       async _getInput() {
         const out = await super._getInput();
+        if (out === false) { return out; }
         await this._getCostInput();
         return out;
       }
