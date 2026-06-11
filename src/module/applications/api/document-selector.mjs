@@ -86,8 +86,7 @@ export default class TeriockDocumentSelector extends TeriockResolvableDialog {
       callback: (_e, _q, rgx, container) => {
         container.querySelectorAll(".doc-select-item").forEach(/** @param {HTMLLIElement} card */ card => {
           const title = card.querySelector(".doc-name-container")?.textContent ?? "";
-          const match = rgx ? rgx.test(title) : true;
-          card.style.display = match ? "block" : "none";
+          card.classList.toggle("hidden", rgx ? !rgx.test(title) : false);
         });
       },
     });
