@@ -130,7 +130,7 @@ export default Base => {
       prepareBaseData() {
         super.prepareBaseData();
         const armor = this.parent.equipment.filter(e => e.system.equipped && e.system.equipmentClasses.has("armor"));
-        this.defense.av.base = Math.max(armor.map(a => a.system.av.value));
+        this.defense.av.base = Math.max(0, ...armor.map(a => a.system.av.value));
       }
 
       /** @inheritDoc */
