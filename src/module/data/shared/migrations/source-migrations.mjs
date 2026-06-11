@@ -31,7 +31,7 @@ export function migrateUuid(uuid) {
  */
 export function migrateKey(source, oldKey, newKey, transform = val => val) {
   if (hasProperty(source, oldKey) && !hasProperty(source, newKey)) {
-    setProperty(source, transform(newKey), getProperty(source, oldKey));
+    setProperty(source, newKey, transform(getProperty(source, oldKey)));
   }
   deleteProperty(source, oldKey);
 }

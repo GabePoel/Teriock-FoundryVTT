@@ -45,7 +45,7 @@ export default class ModifyEffectAutomation
   /** @inheritDoc */
   static migrateData(source, options, state) {
     migrateKey(source, "prevent", "preventEffect");
-    migrateKey(source, "preventEffect", "makeEffect", v => v === true ? false : v);
+    migrateKey(source, "preventEffect", "makeEffect", v => v === true ? false : null);
     return super.migrateData(source, options, state);
   }
 

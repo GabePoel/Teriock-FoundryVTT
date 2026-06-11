@@ -59,7 +59,7 @@ export default Base => {
           foundry.utils.deleteProperty(source, "expansion.cap.raw");
         }
         if (typeof source.expansion?.cap === "number") { source.expansion.cap = `${source.expansion.cap}`; }
-        migrateKey(source, "expansionRange", "source.expansion.range.raw");
+        migrateKey(source, "expansionRange", "expansion.range.raw");
 
         // Execution time migration
         if (typeof source.executionTime === "string") {

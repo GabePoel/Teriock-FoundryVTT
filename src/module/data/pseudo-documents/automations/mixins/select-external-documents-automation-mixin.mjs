@@ -34,7 +34,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
 
       /** @inheritDoc */
       static migrateData(source, options, state) {
-        migrateKey(source, "documents", "uuids", migrateUuid);
+        migrateKey(source, "documents", "uuids", v => v.map(migrateUuid));
         return super.migrateData(source, options, state);
       }
 
