@@ -54,6 +54,20 @@
                 tooltip=change.priority
                 property="priority")
             }}
+            {{#if changeFields.phase}}
+              {{formIcon
+                changeFields.phase
+                name=""
+                value=change.phase
+                icon=@root/TERIOCK.display.icons.change.phase
+                disabled=(not @root/editable)
+                id=(concat @root/appId ../../changesPath "." i ".phase")
+                classes="teriock-change-input"
+                dataset=(object
+                  property="phase"
+                  tooltip=(localize (concat "TERIOCK.CHANGES.Phase." change.phase ".hint")))
+              }}
+            {{/if}}
           </div>
           <div class="change-assignment">
             {{formIcon

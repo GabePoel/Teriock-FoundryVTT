@@ -170,6 +170,13 @@ export default Base => {
       }
 
       /** @inheritDoc */
+      prepareCleanupData() {
+        super.prepareCleanupData();
+        this.hp.value = Math.clamp(this.hp.value, this.hp.min, this.hp.max);
+        this.mp.value = Math.clamp(this.mp.value, this.mp.min, this.hp.max);
+      }
+
+      /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
         this.prepareStatDice();

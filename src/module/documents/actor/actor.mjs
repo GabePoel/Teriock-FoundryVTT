@@ -473,6 +473,7 @@ export default class TeriockActor
     super.prepareData();
     this.prepareSpecialData();
     this.prepareVirtualEffects();
+    this.prepareCleanupData();
   }
 
   /** @inheritDoc */
@@ -484,6 +485,12 @@ export default class TeriockActor
     this.prepareChangeData();
     this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
     this.applyActiveEffects("children");
+  }
+
+  /** @inheritDoc */
+  prepareSpecialData() {
+    super.prepareSpecialData();
+    this.applyActiveEffects("special");
   }
 
   /** @inheritDoc */

@@ -120,6 +120,12 @@ export function changeTypeField() {
 export function qualifiedChangeField() {
   return new SchemaField({
     key: new StringField({ initial: "", label: "TERIOCK.SCHEMA.QualifiedChange.key.label" }),
+    phase: new StringField({
+      choices: objectMap(TERIOCK.config.change.phase, (p) => p.label, { localize: true, filter: p => p.visible }),
+      initial: TERIOCK.config.change.defaultPhase,
+      label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
+      required: true,
+    }),
     priority: new NumberField({ initial: 20, label: "TERIOCK.SCHEMA.QualifiedChange.priority.label" }),
     target: new StringField({
       choices: localizeChoices(TERIOCK.config.change.parent.targets),

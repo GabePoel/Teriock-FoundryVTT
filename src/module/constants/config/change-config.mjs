@@ -143,6 +143,13 @@ const phase = {
     default: true,
     hint: "TERIOCK.CHANGES.Phase.derived.hint",
     label: "TERIOCK.CHANGES.Phase.derived.label",
+    visible: true,
+  },
+  special: {
+    applyToItems: true,
+    hint: "TERIOCK.CHANGES.Phase.special.hint",
+    label: "TERIOCK.CHANGES.Phase.special.label",
+    visible: true,
   },
 };
 

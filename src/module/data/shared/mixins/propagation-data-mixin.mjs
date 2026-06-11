@@ -102,6 +102,14 @@ export default function PropagationDataMixin(Base) {
       }
 
       /**
+       * The final step of data preparation that happens after `prepareSpecialData()`. This ensures that values are
+       * constrained by maximum and minimum values.
+       */
+      prepareCleanupData() {
+        this._propagateOperation("prepareCleanupData", false);
+      }
+
+      /**
        * Data preparation that happens after `prepareDerivedData()`. This allows {@link AnyChildDocument} documents to
        * apply changes from the parent {@link TeriockActor} and should be primarily used for that purpose.
        * {@link TeriockActor}s are the only documents that call this directly. In all other cases, it is only called
