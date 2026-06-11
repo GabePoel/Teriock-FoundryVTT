@@ -279,11 +279,13 @@ export default function AbilityExecutionChatPart(Base) {
         }
 
         const makeEffect = modifyEffectAutomation?.makeEffect ?? null;
+        const targetsActor = modifyEffectAutomation?.targetsActor ?? this.targetsActor;
+        const targetsArmament = modifyEffectAutomation?.targetsArmament ?? this.targetsArmament;
         if (
           makeEffect !== false
           && (makeEffect === true
             || (this.source.system.duration.unit !== "instant" && this.source.system.maneuver !== "passive"))
-          && (this.targetsActor || this.targetsArmament)
+          && (targetsActor || targetsArmament)
         ) {
           // Add apply effects activation
           const normConData = await this.#generateEffectConsequence(false);
@@ -364,7 +366,7 @@ export default function AbilityExecutionChatPart(Base) {
               foundry.utils.mergeObject(critImbData, a.data, { inplace: true });
             }
           });
-          if (this.targetsActor) {
+          if (targetsActor) {
             this.activations.push(
               new acts.AddDocumentsActivation({
                 display: { label: modifyEffectAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.label" },
@@ -384,7 +386,7 @@ export default function AbilityExecutionChatPart(Base) {
               }),
             );
           }
-          if (this.targetsArmament) {
+          if (targetsArmament) {
             this.activations.push(
               new acts.AddDocumentsActivation({
                 display: { label: modifyEffectAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.armament" },

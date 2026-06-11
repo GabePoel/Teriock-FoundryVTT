@@ -65,11 +65,6 @@
     var(--font-h1), serif;
 }
 
-@mixin image-right-border() {
-  border-right: 1px solid var(--color-border);
-  left: 1px solid var(--color-border);
-}
-
 @mixin image-position() {
   object-fit: cover;
   object-position: 50% 0;
@@ -274,11 +269,6 @@
   font-variation-settings: "FILL" 1, "wght" 700, "GRAD" 200, "opsz" 48;
 }
 
-@mixin material-design-icon() {
-  @include icon-format;
-  font-family: "Material Design Icons", sans-serif;
-}
-
 @mixin shatter-background() {
   &::before {
     background: url("../src/assets/shattered.png") no-repeat top center;
@@ -297,6 +287,27 @@
   align-items: center;
   display: flex;
   justify-content: center;
+}
+
+@mixin thover-states($important: false) {
+  $suffix: if($important, " !important", "");
+
+  &:hover {
+    color: var(--color-warm-2) #{$suffix};
+  }
+
+  &:active {
+    color: var(--color-text-subtle) #{$suffix};
+  }
+}
+
+@mixin no-results-block() {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.075);
+  border: var(--teriock-block-outer-border-width) solid var(--color-block-container-border);
+  border-radius: var(--teriock-block-outer-border-radius);
+  border-top-width: var(--teriock-block-inner-border-width);
+  box-shadow: var(--teriock-block-box-shadow);
 }
 
 @mixin pseudo-top-border($padding: 0) {

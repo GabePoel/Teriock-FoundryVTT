@@ -1,25 +1,29 @@
-@use "mixins";
-
 @use "sass:meta";
+@use "mixins";
 @use "themes";
 @use "page-sizing";
+@use "utils/fonts";
+
+@use "ui/block";
+@use "ui/grid";
+@use "ui/ternary";
 @use "ui/panel";
 @use "ui/editor";
 @use "ui/content-link";
-@use "components/chat";
-@use "components/common";
 @use "ui/tooltip";
+@use "ui/automation";
+
+@use "components/chat";
 @use "components/fields";
 @use "components/identifier-tags";
 @use "components/elder-sorcery";
 @use "components/changes";
 @use "components/character";
-@use "ui/automation";
-@use "dialogs/stat-dialogs";
-@use "dialogs/execution-editor";
-@use "utils/fonts";
 @use "components/base-effect";
 @use "components/harm";
+
+@use "dialogs/stat-dialogs";
+@use "dialogs/execution-editor";
 
 .teriock {
   @include meta.load-css("ui/forms");
@@ -35,21 +39,6 @@
 
 .chat-message .message-content {
   overflow: unset !important;
-}
-
-.thover {
-  cursor: pointer;
-}
-
-.thover,
-.thover-soft {
-  &:hover {
-    color: var(--color-warm-2);
-  }
-
-  &:active {
-    color: var(--color-text-secondary);
-  }
 }
 
 dl dt {
@@ -73,7 +62,7 @@ dl:not(:first-child) {
 }
 
 .roll-table-sheet .flexrow .image img {
-  @include mixins.image-border;
+  @include mixins.image-border(4px, 0.3, 3px);
   @include mixins.warm-image-background;
 }
 
@@ -140,18 +129,12 @@ dl:not(:first-child) {
   }
 }
 
-// Custom sizing so that they scale the same as Font Awesome icons.
-// If this scope ends up being too broad we can assign an additional class prefix in `makeIconClass` at some point.
-.mdi,
-.mic {
-  font-size: 125%;
-  width: 1em;
-}
-
 #context-menu {
   overflow: hidden;
   text-align: start;
-  .mdi, .mic {
+
+  .mdi,
+  .mic {
     width: 1.25em;
   }
 

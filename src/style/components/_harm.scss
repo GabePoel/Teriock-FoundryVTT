@@ -1,4 +1,4 @@
-@use "../mixins";
+@use "../mixins" as mixins;
 
 .teriock-harm-header {
   @include mixins.centralize;
@@ -8,20 +8,8 @@
   margin-left: 6px;
 
   .teriock-harm-img {
-    @include mixins.warm-image-container-background;
-    @include mixins.image-border(6px, 0.5, 5px);
-    height: 48px;
+    @include mixins.simple-two-layer-image(48px, 6px, 0.5, 5px);
     margin-right: 0.8rem;
-    max-height: 48px;
-    max-width: 48px;
-    min-height: 48px;
-    min-width: 48px;
-    width: 48px;
-
-    img {
-      @include mixins.warm-drop-shadow;
-      @include mixins.image-position;
-    }
   }
 
   h1 {

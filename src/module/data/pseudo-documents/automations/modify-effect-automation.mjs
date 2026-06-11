@@ -39,6 +39,8 @@ export default class ModifyEffectAutomation
       makeEffect: new TernaryField(),
       preventFeat: new fields.BooleanField({ initial: false }),
       preventThreshold: new fields.BooleanField({ initial: false }),
+      targetsActor: new TernaryField(),
+      targetsArmament: new TernaryField(),
     });
   }
 
@@ -54,6 +56,9 @@ export default class ModifyEffectAutomation
     return [
       "display.label",
       "makeEffect",
+      "targetsActor",
+      "targetsArmament",
+      "hr",
       "preventFeat",
       "preventThreshold",
       ...this._competencePaths,

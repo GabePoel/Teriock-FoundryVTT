@@ -1,4 +1,4 @@
-@use "../mixins";
+@use "../mixins" as mixins;
 
 @mixin teriock-block-tiny() {
   --teriock-block-content-align-items: center;
@@ -250,40 +250,8 @@
   }
 
   .no-results {
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.075);
-    border: var(--teriock-block-outer-border-width) solid var(--color-block-container-border);
-    border-radius: var(--teriock-block-outer-border-radius);
-    border-top-width: var(--teriock-block-inner-border-width);
-    box-shadow: var(--teriock-block-box-shadow);
+    @include mixins.no-results-block;
   }
-}
-
-:root {
-  --teriock-block-border-color: var(--color-block-container-border);
-  --teriock-block-border-radius: var(--teriock-block-outer-border-radius);
-  --teriock-block-box-shadow: 0 0 6px var(--color-block-shadow);
-  --teriock-block-container-box-shadow: none;
-  --teriock-block-content-align-items: end;
-  --teriock-block-content-flex-direction: column;
-  --teriock-block-content-font-size: 0.8em;
-  --teriock-block-content-gap: 0;
-  --teriock-block-content-padding: 10px;
-  --teriock-block-content-right-padding: 10px;
-  --teriock-block-height: 56px;
-  --teriock-block-icons-gap: 4px;
-  --teriock-block-image-hide-width: 249px;
-  --teriock-block-image-margin-left: 5px;
-  --teriock-block-image-padding: 8px;
-  --teriock-block-inner-border-width: 1px;
-  --teriock-block-outer-border-radius: 6px;
-  --teriock-block-outer-border-width: 1px;
-  --teriock-block-subtitle-font-size: 0.8em;
-  --teriock-block-title-font-size: 1em;
-  --teriock-block-titles-align-items: flex-start;
-  --teriock-block-titles-flex-direction: column;
-  --teriock-block-titles-gap: 0;
-  --teriock-block-titles-padding-left: 0;
 }
 
 .teriock-block-container {
@@ -329,8 +297,6 @@
     --teriock-block-image-margin-left: 6px;
     --teriock-block-outer-border-width: 0;
     border-top-width: 0;
-    //box-shadow: var(--teriock-block-container-box-shadow),
-    //inset 0 0 0 1px var(--color-block-container-border);
     gap: 0;
     overflow: hidden;
     position: relative;
@@ -355,12 +321,7 @@
   }
 
   .no-results {
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.075);
-    border: var(--teriock-block-outer-border-width) solid var(--color-block-container-border);
-    border-radius: var(--teriock-block-outer-border-radius);
-    border-top-width: var(--teriock-block-inner-border-width);
-    box-shadow: var(--teriock-block-box-shadow);
+    @include mixins.no-results-block;
     display: none;
     flex-direction: column;
     height: var(--teriock-block-height);

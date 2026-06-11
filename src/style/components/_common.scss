@@ -1,7 +1,4 @@
 @use "../mixins" as mixins;
-@use "../ui/block";
-@use "../ui/grid";
-@use "../ui/ternary";
 
 table {
   margin: 1em 0 0;
@@ -21,15 +18,13 @@ table {
   font-size: small;
 }
 
-.thover,
-.thover-soft {
-  &:hover {
-    color: var(--color-warm-2) !important;
-  }
+.thover {
+  cursor: pointer;
+  @include mixins.thover-states($important: true);
+}
 
-  &:active {
-    color: var(--color-text-subtle) !important;
-  }
+.thover-soft {
+  @include mixins.thover-states($important: true);
 }
 
 .toggle-button {
