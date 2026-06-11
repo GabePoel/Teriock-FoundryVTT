@@ -19,24 +19,13 @@ export class EtherealBackgroundVisionShader extends BackgroundVisionShader {
     void main() {
       ${this.FRAGMENT_BEGIN}    
       
-      // Simple time-based animation
-      float t = time * -8.0;
-      
-      // Create a simple vignette effect (darker edges)
+      float t = time * -8.0;      
       float vignette = 1.0 - length(vUvs - 0.5) * 1.5;
       vignette = clamp(vignette, 0.0, 1.0);
-      
-      // Simple pulsing effect
       float pulse = sin(t * 0.2) * 0.2 + 0.8;
-      
-      // Desaturate the base color for spooky effect
       vec3 grey = vec3(perceivedBrightness(baseColor.rgb));
       vec3 spookyColor = mix(baseColor.rgb, grey, 0.7);
-      
-      // Apply vignette and pulse
       spookyColor *= vignette * pulse;
-      
-      // Apply the color tint
       finalColor = spookyColor * colorTint;
       
       ${this.ADJUSTMENTS}
@@ -71,23 +60,12 @@ export class EtherealColorationVisionShader extends ColorationVisionShader {
     void main() {
       ${this.FRAGMENT_BEGIN}
       
-      // Simple time-based animation
       float t = time * -8.0;
-      
-      // Create simple ripple effect from center
       float distFromCenter = distance(vUvs, vec2(0.5, 0.5));
       float ripple = sin(distFromCenter * 20.0 + t * 0.2) * 0.5 + 0.5;
-      
-      // Fade the ripple based on distance
       ripple *= 1.0 - smoothstep(0.0, 0.7, distFromCenter);
-      
-      // Add a simple flicker
       float flicker = sin(t * 0.5) * 0.1 + 0.9;
-      
-      // Combine effects
       float ghostEffect = ripple * flicker;
-      
-      // Apply the color effect
       finalColor = vec3(ghostEffect) * colorEffect;
       
       ${this.COLORATION_TECHNIQUES}

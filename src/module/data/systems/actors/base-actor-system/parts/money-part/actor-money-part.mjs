@@ -63,32 +63,23 @@ export default Base => {
       async takePay(amount, mode) {
         await this.parent.hookCall("takePay", { scope: { amount, mode } });
 
-        // Get current money state
-        const currentMoney = { ...this.money };
+        // TODO: Rework this so that instead of this arduous automatic payment algorithm it will open some dialog.
 
-        // Calculate total available wealth in gold value
-        const totalWealth = Object.keys(TERIOCK.config.currency).reduce((total, currency) => {
-          return total + (currentMoney[currency] || 0) * TERIOCK.config.currency[currency].conversion;
-        }, 0);
-
-        // If not enough money, add to debt and exit
-        if (totalWealth < amount) {
-          const shortfall = amount - totalWealth;
-          await this.parent.update({ "system.money.debt": currentMoney.debt + shortfall });
+        // Simple check to see if it's more money than the character has
+        if (this.money.total < amount) {
+          await this.parent.update({
+            "system.money": { ...objectMap(TERIOCK.config.currency, () => 0), debt: amount - this.money.total },
+          });
           return;
         }
-
-        // Create an array of currencies sorted by value (highest first)
         const currencies = Object.entries(TERIOCK.config.currency).sort(([, a], [, b]) => b.conversion - a.conversion)
-          .map(([key, config]) => ({ key, ...config, current: currentMoney[key] || 0 }));
-
+          .map(([key, config]) => ({ key, ...config, current: this.money[key] || 0 }));
         let remainingAmount = amount;
         const toDeduct = {};
 
-        // First pass: Deduct currencies starting from the highest value
+        // Greedily spend currencies from highest to lowest denomination
         for (const currency of currencies) {
           if (remainingAmount <= 0) { break; }
-
           const canTake = Math.min(currency.current, Math.floor(remainingAmount / currency.conversion));
           if (canTake > 0) {
             toDeduct[currency.key] = canTake;
@@ -100,10 +91,8 @@ export default Base => {
         if (remainingAmount > 0) {
           for (const currency of currencies) {
             if (remainingAmount <= 0) { break; }
-
             const alreadyTaken = toDeduct[currency.key] || 0;
             const stillHave = currency.current - alreadyTaken;
-
             if (stillHave > 0) {
               toDeduct[currency.key] = (toDeduct[currency.key] || 0) + 1;
               remainingAmount -= currency.conversion;
@@ -114,36 +103,27 @@ export default Base => {
 
         // Calculate change needed (will be negative if we overpaid)
         const changeNeeded = -remainingAmount;
-
-        // Prepare update object
         const updateData = {};
-
-        // Deduct the currencies we're spending
         for (
           const [currencyKey, amountToDeduct] of Object.entries(toDeduct)
-        ) { updateData[`system.money.${currencyKey}`] = currentMoney[currencyKey] - amountToDeduct; }
+        ) { updateData[`system.money.${currencyKey}`] = this.money[currencyKey] - amountToDeduct; }
 
         // Handle change for exact mode
         if (mode === "exact" && changeNeeded > 0) {
           let changeRemaining = changeNeeded;
-
-          // Give change using the largest denominations possible
           for (const currency of currencies) {
             if (changeRemaining <= 0) { break; }
-
             const changeAmount = Math.floor(changeRemaining / currency.conversion);
             if (changeAmount > 0) {
               const currentAmount = updateData[`system.money.${currency.key}`] !== undefined
                 ? updateData[`system.money.${currency.key}`]
-                : currentMoney[currency.key];
-
+                : this.money[currency.key];
               updateData[`system.money.${currency.key}`] = currentAmount + changeAmount;
               changeRemaining -= changeAmount * currency.conversion;
             }
           }
         }
 
-        // Apply the update
         await this.parent.update(updateData);
       }
     }
