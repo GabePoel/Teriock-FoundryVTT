@@ -64,6 +64,6 @@ export const toggleStatusCommand = {
   id: "toggle",
   primary: toggle,
   label: options => options?.status
-    ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", { name: TERIOCK.index.conditions[options.status] })
+    ? _loc("TERIOCK.COMMANDS.Status.toggleNamed", { name: TERIOCK.reference.conditions[options.status] })
     : _loc("TERIOCK.COMMANDS.Status.toggleUnnamed"),
 };

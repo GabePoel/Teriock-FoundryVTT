@@ -314,7 +314,7 @@ export default Base => {
             && e.system.consumable
             && e.system.quantity < e.system.maxQuantity.value
           );
-          if (stackCandidates) {
+          if (stackCandidates?.length > 0) {
             const selected = await selectDocumentDialog(stackCandidates, {
               auto: false,
               hint: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.hint", { name: equipment.name }),

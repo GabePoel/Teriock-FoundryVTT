@@ -85,7 +85,7 @@ export default class ImpactRoll extends BaseRoll {
         return {
           icon: makeIcon(option.icon, "contextMenu"),
           label: option.take,
-          onClick: () => game.actors.selected.forEach(a => option.apply(a, this.total)),
+          onClick: async () => await Promise.all(game.actors.selected.map(a => option.apply(a, this.total))),
         };
       }),
       ...super._getTotalContextOptions(_options),
