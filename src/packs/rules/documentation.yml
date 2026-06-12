@@ -1,0 +1,134 @@
+_id: pIYm1KYBRZQdHajT
+_key: '!journal!pIYm1KYBRZQdHajT'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.12.90
+name: Documentation
+pages:
+  - _id: t14xGhzsmr4mZ3Hn
+    _key: '!journal.pages!pIYm1KYBRZQdHajT.t14xGhzsmr4mZ3Hn'
+    _stats:
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.90
+    name: Enrichers
+    text:
+      content: >-
+        <p>A number of <strong>enrichers</strong> are available for use in text.
+        These are strings of text that will be displayed to have special
+        functionality.</p><h2>Link Enrichers</h2><p>By default, Foundry provides
+        enrichers of the form [[code @UUID​[&lt;uuid&gt;]{&lt;label&gt;}]] to
+        link to documents. For instance, writing [[code
+        @UUID​[Compendium.teriock.essentials.Item.fb31c853fddd91bb]]] will
+        produce the link
+        @UUID[Compendium.teriock.essentials.Item.fb31c853fddd91bb].</p><p>In
+        addition to the built-in [[code @UUID]] enricher, the Teriock system
+        implements several other ways to link to relevant
+        information.</p><h3>Identifier Links</h3><p>Used to link to the
+        canonical document for a given typed
+        identifier.</p><table><tbody><tr><td
+        data-colwidth="127"><p>Format</p></td><td><p>[[code
+        @Identifier​[&lt;identifier&gt;]{&lt;label&gt;} ]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example Input</p></td><td><p>[[code
+        @Identifier​[ability:snare]]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example
+        Result</p></td><td><p>@Identifier[ability:snare]</p></td></tr></tbody></table><h4></h4><h3>Wiki
+        Links</h3><p>Used to link to a page on the Teriock wiki by its name. The
+        page's namespace must be included in the name.</p><table><tbody><tr><td
+        data-colwidth="127"><p>Format</p></td><td><p>[[code
+        @Wiki​[&lt;name&gt;]{&lt;label&gt;} ]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example Input</p></td><td><p>[[code
+        @Wiki​[Equipment:Longsword]]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example
+        Result</p></td><td><p>@Wiki[Equipment:Longsword]</p></td></tr></tbody></table><h4></h4><h3>Compendium
+        Links</h3><p>Used to link to a compendium pack by its
+        ID.</p><table><tbody><tr><td
+        data-colwidth="127"><p>Format</p></td><td><p>[[code
+        @Pack​[&lt;name&gt;]{&lt;label&gt;} ]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example Input</p></td><td><p>[[code
+        @Pack​[teriock.properties]]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example
+        Result</p></td><td><p>@Pack[teriock.properties]</p></td></tr></tbody></table><p></p><h2>Command
+        Enrichers</h2><p>Anything that can be invoked as a chat command can also
+        be used as an enricher. By default, Foundry lets you use [[code [[/roll
+        1d20]]]] to create a button roll a d20 that looks like [[/roll 1d20]].
+        This corresponds to typing [[code /roll 1d20]] directly into the
+        chat.</p><p>A full list of possible commands can be seen by typing
+        [[code /help]] in the chat or by [[/help]]{clicking here}. For example,
+        [[code [​[/heal]​]{a healing button} ]] can be used to make [[/heal]]{a
+        healing button}.</p><table><tbody><tr><td
+        data-colwidth="127"><p>Format</p></td><td><p>[[code [/&lt;command&gt;
+        &lt;options&gt;]{&lt;label&gt;} ]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example Input</p></td><td><p>[[code
+        [​[/heal]​]]]</p></td></tr><tr><td data-colwidth="127"><p>Example
+        Result</p></td><td><p>[[/heal]]</p></td></tr></tbody></table><p></p><h2>Display
+        Enrichers</h2><p>These enrichers exist just for formatting
+        text.</p><h3>Lookup Enricher</h3><p>Used to display information about
+        the current document as formatted text.</p><table><tbody><tr><td
+        data-colwidth="127"><p>Format</p></td><td><p>[[code [​[lookup
+        &lt;path&gt; &lt;options&gt;]​] ]]</p></td></tr><tr><td
+        data-colwidth="127"><p>Example Input</p></td><td><p>[[code [​[lookup
+        name style=uc]​] ]]</p></td></tr><tr><td data-colwidth="127"><p>Example
+        Result</p></td><td><p>[[lookup name
+        style=uc]]</p></td></tr></tbody></table><h3>Code Enricher</h3><p>Used to
+        display inline code in monospace with the option to click on it to copy
+        the displayed text. This is the enricher that's been used throughout
+        this documentation.</p><table><tbody><tr><td
+        data-colwidth="127"><p>Format</p></td><td><p>[[code [​[code
+        &lt;text&gt;]​] ]]</p></td></tr><tr><td data-colwidth="127"><p>Example
+        Input</p></td><td><p>[[code [​[code /dmg 1d10[fire magic]​]​]
+        ]]</p></td></tr><tr><td data-colwidth="127"><p>Example
+        Result</p></td><td><p>[[code /dmg 1d10[fire
+        magic]]]</p></td></tr></tbody></table><p></p><h2>Embed
+        Enrichers</h2><p>Foundry normally allows [[code @Embed​[uuid options]]]
+        to be used to display a document within a block of text. We expand this
+        functionality so identifiers can be used in place of UUIDs. For
+        instance, [[code @Embed​[body:claw inline=true]]] will display the
+        following.</p><p>@Embed[body:claw inline=true]</p><p>In addition to the
+        normal Foundry embed options, we allow the use of [[code panel]] to
+        documents in a panel like it would appear in tooltips or chat messages.
+        This means the text [[code @Embed​[body:claw panel inline=true]]]
+        produces the following.</p><p>@Embed[body:claw panel
+        inline=true]</p><p>The panel format can be used regardless of whether an
+        identifier or UUID is used to invoke the embed enricher.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
+  - _id: wQnmIwHqgTnNI3Yl
+    _key: '!journal.pages!pIYm1KYBRZQdHajT.wQnmIwHqgTnNI3Yl'
+    _stats:
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.12.90
+    name: Identifiers
+    text:
+      content: >-
+        <p>The Teriock game system makes extensive use of
+        <strong>identifiers</strong>. These are keys that correspond to the
+        "canonical" document for a given piece of rules text. These are readible
+        kebab-case strings that are assigned for each document and can be
+        customized in a document's "Configure Document" options. For example,
+        the identifier for @Identifier[ability:arcane-ray] is [[code
+        arcane-ray]].</p><p>Each document also has a <strong>typed
+        identifier</strong>, which consists of the document's "type" followed by
+        a colon and its identifier. So, typed identifier for
+        @Identifier[ability:arcane-ray] is [[code ability:arcane-ray]]. Any
+        document's typed identifier can be copied to the clipboard by middle
+        clicking on the "Copy Document UUID" button in its sheet's header.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: text
+    video:
+      controls: true
+      volume: 0.5
