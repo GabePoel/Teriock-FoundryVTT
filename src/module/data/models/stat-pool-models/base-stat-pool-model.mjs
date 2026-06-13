@@ -2,6 +2,7 @@ import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { getImage } from "../../../helpers/path.mjs";
+import { toId } from "../../../helpers/string.mjs";
 import { getRollIcon } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
@@ -139,7 +140,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
       for (const term of this._terms) {
         for (let i = 0; i < term.number; i++) {
           const statDie = new this.constructor._statDieModel({
-            _id: foundry.utils.randomID(),
+            _id: toId(this.parent.parent.collectionName + this.parent.parent.id + this.path + i.toString()),
             faces: term.faces,
             index,
           }, { parent: this });
