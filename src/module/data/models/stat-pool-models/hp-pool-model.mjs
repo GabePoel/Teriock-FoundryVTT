@@ -2,6 +2,7 @@ import { getImage } from "../../../helpers/path.mjs";
 import BaseStatPoolModel from "./base-stat-pool-model.mjs";
 
 export default class HpPoolModel extends BaseStatPoolModel {
+  /** @inheritDoc */
   get callback() {
     return async amount => {
       const criticallyWounded = this.actor?.statuses.has("criticallyWounded");

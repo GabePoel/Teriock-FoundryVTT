@@ -2,6 +2,7 @@ import { getImage } from "../../../helpers/path.mjs";
 import BaseStatPoolModel from "./base-stat-pool-model.mjs";
 
 export default class MpPoolModel extends BaseStatPoolModel {
+  /** @inheritDoc */
   get callback() {
     return /** @param {number} amount */ async amount => {
       await this.actor?.system.takeRevitalizing(amount);
