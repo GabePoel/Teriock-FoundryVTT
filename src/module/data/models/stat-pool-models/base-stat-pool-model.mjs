@@ -140,7 +140,7 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
       for (const term of this._terms) {
         for (let i = 0; i < term.number; i++) {
           const statDie = new this.constructor._statDieModel({
-            _id: toId(this.parent.parent.collectionName + this.parent.parent.id + this.path + i.toString()),
+            _id: toId(this.parent.parent.collectionName + this.parent.parent.id + this.path + index.toString()),
             faces: term.faces,
             index,
           }, { parent: this });
