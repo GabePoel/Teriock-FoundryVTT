@@ -104,7 +104,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.89
+      systemVersion: 0.12.90
     flags:
       teriock:
         category: support
@@ -267,7 +267,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.89
+      systemVersion: 0.12.90
     flags:
       teriock:
         category: combat
@@ -324,7 +324,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.89
+      systemVersion: 0.12.90
     flags:
       teriock:
         category: support
@@ -344,6 +344,7 @@ effects:
               - ability:treeform-ball
           multi: false
           noHeighten: false
+          trigger: execute
           type: useDocuments
       competence:
         raw: 0
@@ -381,7 +382,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.89
+      systemVersion: 0.12.90
     img: systems/teriock/src/icons/abilities/transmute.webp
     name: Transmute
     system:
@@ -479,7 +480,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.89
+      systemVersion: 0.12.90
     img: systems/teriock/src/icons/abilities/advanced-hack-healing.webp
     name: Advanced Hack Healing
     system:
@@ -592,7 +593,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.89
+      systemVersion: 0.12.90
     img: systems/teriock/src/icons/abilities/territorial-casting.webp
     name: Territorial Casting
     system:
@@ -647,11 +648,23 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.12.90
     img: systems/teriock/src/icons/abilities/spell-strike.webp
     name: Spell Strike
     system:
       _sup: ojIO6Jux9N05JT8V
+      automations:
+        bJn9LIvdgJ11S1tr:
+          _id: bJn9LIvdgJ11S1tr
+          all: false
+          automatic: true
+          expandTables: false
+          local:
+            qualifier: and(@spell, @delivery.missile, @pro)
+          multi: false
+          noHeighten: false
+          trigger: execute
+          type: useDocuments
       competence:
         raw: 0
       costs:

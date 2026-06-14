@@ -18,7 +18,7 @@ command: >-
       hint: _loc("TERIOCK.DIALOGS.Select.Armament.hint"),
       title: _loc("TERIOCK.DIALOGS.Select.Armament.title"),
     });
-    let abilities = await actor.allAbilities();
+    let abilities = [...actor.abilities, ...game.teriock.basicAbilities];
     abilities = abilities.filter((a) =>
       a.system.interaction === "attack"
       && a.system.maneuver === "active"
