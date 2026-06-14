@@ -24,12 +24,11 @@ export default Base =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
-      context.abilities = await this.document.allAbilities();
       context.equipment = context.equipment.filter(e => !e.sup || e.sup.type !== "equipment");
       Object.assign(context, {
-        abilities: this._getFilteredAbilities(
-          this._sortAbilities(context.abilities.filter(a => a.system.revealed || game.user.isGM)),
-        ),
+        abilities: this._getFilteredAbilities(this._sortAbilities(this.document.abilities.filter(a =>
+          a.system.revealed || game.user.isGM
+        ))),
         abilityFilterSelects: [{
           choices: TERIOCK.config.ability.maneuver,
           key: "maneuver",
@@ -133,6 +132,9 @@ export default Base =>
             name: "settings.abilityFilters.sustained",
           },
         ].map(t => ({ ...t, value: foundry.utils.getProperty(this, t.name) })),
+        basicAbilities: this._getFilteredAbilities(
+          this._sortAbilities(game.teriock.basicAbilities.filter(a => a.system.revealed || game.user.isGM)),
+        ),
         equipment: this._sortEquipment(this._getFilteredEquipment(context.equipment)),
         equipmentFilterSelects: [{
           choices: TERIOCK.reference.equipmentClasses,

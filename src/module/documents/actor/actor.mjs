@@ -1,7 +1,7 @@
 import { config } from "../../constants/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { findBestDocument, fromIdentifier, fromKey } from "../../helpers/utils.mjs";
+import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -395,15 +395,6 @@ export default class TeriockActor
     this._stagedItemDeletions = new Set();
   }
 
-  /**
-   * All abilities, including virtual ones.
-   * @returns {Promise<TeriockAbility[]>}
-   */
-  async allAbilities() {
-    const basicAbilitiesItem = await fromIdentifier("power:basic-abilities");
-    return [...this.abilities, ...(basicAbilitiesItem?.abilities || [])];
-  }
-
   /** @inheritDoc */
   applyActiveEffects(phase) {
     const apply = !this._completedActiveEffectPhases.has(phase);
@@ -443,10 +434,7 @@ export default class TeriockActor
 
   /** @inheritDoc */
   async getEffectiveChildren() {
-    const children = (await super.getEffectiveChildren()).filter(c => c.type !== "ability");
-    const abilities = await this.allAbilities();
-    children.push(...abilities);
-    return children;
+    return [...(await super.getEffectiveChildren()), ...game.teriock.basicAbilities];
   }
 
   /** @inheritDoc */

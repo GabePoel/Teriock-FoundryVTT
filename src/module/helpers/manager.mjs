@@ -4,6 +4,9 @@ import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mj
  * Singleton class that manages Teriock-specific states and functionality.
  */
 export default class TeriockManager {
+  /** @type {TeriockAbility[]} */
+  #basicAbilities = [];
+
   /** @type {ApplicationV2[]} */
   #minimizedApplications = [];
 
@@ -35,6 +38,14 @@ export default class TeriockManager {
    * @type {TeriockPacks}
    */
   packs = new TeriockPacks();
+
+  /**
+   * All the basic abilities.
+   * @returns {TeriockAbility[]}
+   */
+  get basicAbilities() {
+    return this.#basicAbilities;
+  }
 
   /**
    * The singleton dependents registry.
@@ -107,6 +118,9 @@ export default class TeriockManager {
   initializeRegistries() {
     this.#registries.dependents._initialize();
     this.#registries.identifiers._initialize();
+    this.#registries.identifiers.initializing.then(async () => {
+      this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities")).abilities;
+    });
   }
 
   /**
