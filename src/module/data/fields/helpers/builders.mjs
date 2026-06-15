@@ -196,12 +196,14 @@ export function barsField() {
 }
 
 /**
- * A string that is usually null.
+ * A string that is initially null.
+ * @param {StringFieldOptions} options
  * @returns {StringField}
  */
-function nullString() {
-  return new StringField({ blank: true, initial: null, nullable: true, required: false });
+export function nullString(options) {
+  return new StringField({ blank: true, initial: null, nullable: true, required: false, ...options });
 }
+
 
 /**
  * A JSON field with an empty object.
