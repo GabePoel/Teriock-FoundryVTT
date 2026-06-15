@@ -24,6 +24,19 @@ export default Base => {
         foundry.utils.setProperty(this, path, !current);
         await this.render();
       }
+
+      /** @inheritDoc */
+      async _onRender(context, options) {
+        await super._onRender(context, options);
+        /** @type {NodeListOf<HTMLToggleButtonElement>} */
+        const toggleButtons = this.element.querySelectorAll("toggle-button[data-path]");
+        toggleButtons.forEach(el => {
+          el.addEventListener("change", async () => {
+            foundry.utils.setProperty(this, el.dataset.path, el.value);
+            await this.render();
+          });
+        });
+      }
     }
   );
 };

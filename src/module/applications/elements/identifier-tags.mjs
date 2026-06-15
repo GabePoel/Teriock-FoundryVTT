@@ -7,10 +7,6 @@ const { AbstractFormInputElement, HTMLStringTagsElement } = foundry.applications
 const { fromUuid } = foundry.utils;
 
 /**
- * @import {FormInputConfig} from "@common/data/_types.mjs";
- */
-
-/**
  * @typedef IdentifierTagsInputConfig
  * @property {string[]} [types] - Allowed Teriock document type prefixes for typed identifiers.
  * @property {boolean} [single] - Only allow referencing a single identifier. The submitted form value will be a string rather than an array.

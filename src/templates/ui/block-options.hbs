@@ -1,30 +1,32 @@
 <div class="teriock-block-options-header">
-  <button class="{{ tab }}-options-menu-toggle options-menu-toggle {{toggleButton optionsToggle}}" data-bool="{{ optionsToggle }}" data-path="{{ optionsPath }}" data-action="sheetToggle" data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.displayOptions"}}'>{{makeIcon TERIOCK.display.icons.ui.options "button"}}</button>
+  <toggle-button
+    class="{{ tab }}-options-menu-toggle options-menu-toggle"
+    icon="{{ TERIOCK.display.icons.ui.options }}"
+    value="{{ optionsToggle }}"
+    data-path="{{ optionsPath }}"
+    data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.displayOptions"}}'
+  ></toggle-button>
 
   {{#if (defined sortToggle)}}
-    <button
-      class="{{ tab }}-sort-menu-toggle sort-menu-toggle {{toggleButton sortToggle}}"
-      data-bool="{{ sortToggle }}"
+    <toggle-button
+      class="{{ tab }}-sort-menu-toggle sort-menu-toggle"
+      icon="{{ TERIOCK.display.icons.ui.sort }}"
+      value="{{ sortToggle }}"
       data-path="{{ sortPath }}"
-      data-action="sheetToggle"
       data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
       data-never-disable="true"
-    >
-      {{makeIcon TERIOCK.display.icons.ui.sort "button"}}
-    </button>
+    ></toggle-button>
   {{/if}}
 
   {{#if (defined filterToggle)}}
-    <button
-      class="{{ tab }}-filter-menu-toggle filter-menu-toggle {{toggleButton filterToggle}}"
-      data-bool="{{ filterToggle }}"
+    <toggle-button
+      class="{{ tab }}-filter-menu-toggle filter-menu-toggle"
+      icon="{{ TERIOCK.display.icons.ui.filter }}"
+      value="{{ filterToggle }}"
       data-path="{{ filterPath }}"
-      data-action="sheetToggle"
       data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
       data-never-disable="true"
-    >
-      {{makeIcon TERIOCK.display.icons.ui.filter "button"}}
-    </button>
+    ></toggle-button>
   {{/if}}
 
   <input

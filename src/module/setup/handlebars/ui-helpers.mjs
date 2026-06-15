@@ -21,18 +21,6 @@ function makeIconHelper(icon, ...styles) {
   return new Handlebars.SafeString(makeIcon(icon, ...styles));
 }
 
-/**
- * CSS class list for a toggleable button.
- * @param {boolean} bool
- * @returns {string}
- */
-function toggleButton(bool) {
-  return `toggle-button${bool ? " toggled" : ""}`;
-}
-
-const uiHelperEntries = [["makeIcon", makeIconHelper], ["makeIconClass", makeIconClass], ["tabActive", tabActive], [
-  "toggleButton",
-  toggleButton,
-]];
+const uiHelperEntries = [["makeIcon", makeIconHelper], ["makeIconClass", makeIconClass], ["tabActive", tabActive]];
 
 export default uiHelperEntries;

@@ -6,10 +6,6 @@ const { AbstractFormInputElement } = foundry.applications.elements;
 const { setInputAttributes } = foundry.applications.fields;
 
 /**
- * @import {FormInputConfig} from "@common/data/_types.mjs";
- */
-
-/**
  * @typedef IdentifierInputConfig
  * @property {string|null} [reset] Identifier applied when the reset button is clicked.
  */
