@@ -184,7 +184,7 @@ export default class BasePreviewModel extends EmbeddedDataModel {
       ...groupConfig,
       classes: ["ab-multi-select-label"],
       rootId: this.#rootId,
-    }, { ...inputConfig, name: `filterMenus.${this.name}.${path}`, value: foundry.utils.getProperty(this, path) });
+    }, { ...inputConfig, name: `previewMenus.${this.name}.${path}`, value: foundry.utils.getProperty(this, path) });
     const field = this.getFieldForProperty(path);
     if (
       field instanceof fields.StringField || field instanceof fields.NumberField || field instanceof fields.SetField

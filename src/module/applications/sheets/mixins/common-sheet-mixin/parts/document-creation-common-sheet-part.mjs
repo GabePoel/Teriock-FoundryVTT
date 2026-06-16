@@ -13,6 +13,8 @@ import {
 } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 
+const { SearchFilter } = foundry.applications.ux;
+
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
@@ -272,7 +274,7 @@ export default Base => {
 
       constructor(...args) {
         super(...args);
-        this.filterMenus = {};
+        this.previewMenus = {};
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           let PreviewModelCls = BasePreviewModel;
           if (options?.previewModel) {
@@ -280,12 +282,48 @@ export default Base => {
           }
           const source = { name: type };
           if (options?.display) { source.display = options.display; }
-          this.filterMenus[type] = new PreviewModelCls(source, { parent: this.document });
+          this.previewMenus[type] = new PreviewModelCls(source, { parent: this.document });
         }
+        /** @type {Record<string, string>} */
+        this._searchStrings = {};
       }
 
       /** @type {Record<string, BasePreviewModel>} */
-      filterMenus;
+      previewMenus;
+
+      /**
+       * Bind a {@link SearchFilter} to every preview search input rendered on the sheet, scoping each to its
+       * `data-search-key` results container and persisting the query onto the matching preview model.
+       */
+      _initSearchFilters() {
+        this.element.querySelectorAll(".teriock-block-search[data-search-key]").forEach(
+          /** @param {HTMLInputElement} input */ input => {
+            const searchKey = input.dataset.searchKey;
+            if (!searchKey) { return; }
+            const resultsContainer = this.element.querySelector(
+              `.teriock-block-results[data-search-key="${searchKey}"]`,
+            );
+            if (!resultsContainer) { return; }
+            const preview = this.previewMenus?.[searchKey];
+            const initial = preview ? preview.search : (this._searchStrings[searchKey] || "");
+            const searchFilter = new SearchFilter({
+              contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,
+              initial,
+              inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
+              callback: (_event, query, rgx, container) => {
+                this._searchStrings[searchKey] = query;
+                if (preview) { preview.search = query; }
+                container.querySelectorAll(".teriock-block").forEach(card => {
+                  const title = card.querySelector(".teriock-block-title")?.textContent ?? "";
+                  const isMatch = rgx ? rgx.test(title) : true;
+                  card.classList.toggle("hidden", !isMatch);
+                });
+              },
+            });
+            searchFilter.bind(this.element);
+          },
+        );
+      }
 
       /** @inheritDoc */
       async _onRender(context, options) {
@@ -294,7 +332,7 @@ export default Base => {
           const uuid = el.dataset.uuid;
           fromUuid(uuid).then(doc => doc?.onEmbed(el));
         });
-        this.element.querySelectorAll("[name^=\"filterMenus.\"]").forEach(el => {
+        this.element.querySelectorAll("[name^=\"previewMenus.\"]").forEach(el => {
           el.addEventListener("change", async e => {
             /** @type {AbstractFormInputElement} */
             const filterElement = e.target;
@@ -302,6 +340,7 @@ export default Base => {
             await this.render();
           });
         });
+        this._initSearchFilters();
       }
 
       /** @inheritDoc */
@@ -315,13 +354,19 @@ export default Base => {
           return true;
         });
         context.filterForms = {};
-        context.previews = this.filterMenus;
+        context.previews = this.previewMenus;
+        context.previewGroups = {};
         context.previewSortOrders = {};
+        context.searchStrings = foundry.utils.deepClone(this._searchStrings);
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter) {
             context[options.getter] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
-            context.filterForms[type] = this.filterMenus[type]?._getEditorFormsSync().outerHTML;
-            context.previewSortOrders[type] = this.filterMenus[type]?.constructor.sortOrders;
+            context.filterForms[type] = this.previewMenus[type]?._getEditorFormsSync().outerHTML;
+            context.previewSortOrders[type] = this.previewMenus[type]?.constructor.sortOrders;
+            context.previewGroups[type] = [{
+              docs: this.previewMenus[type].previewDocuments(context[options.getter]),
+              empty: options.plural,
+            }];
           }
         }
         return context;

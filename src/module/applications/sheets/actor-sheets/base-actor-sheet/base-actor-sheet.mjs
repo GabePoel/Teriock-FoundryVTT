@@ -16,8 +16,6 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes EquipmentDropSheet
  * @mixes HackStatApplication
  * @mixes HidingActorSheetPart
- * @mixes SearchingActorSheetPart
- * @mixes SortingActorSheetPart
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  * @property {Teriock.Sheet.BaseActorSheetSettings} settings
@@ -30,8 +28,6 @@ export default class BaseActorSheet
     mixins.CommonSheetMixin,
     mixins.EquipmentDropSheetMixin,
     parts.HidingActorSheetPart,
-    parts.SearchingActorSheetPart,
-    parts.SortingActorSheetPart,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -63,7 +59,7 @@ export default class BaseActorSheet
   async _onRender(context, options) {
     await super._onRender(context, options);
     /** @type {NodeListOf<HTMLTernaryElement>} */
-    const ternaryInputs = this.element.querySelectorAll("ternary-input[name]:not([name^=\"filterMenus.\"])");
+    const ternaryInputs = this.element.querySelectorAll("ternary-input[name]:not([name^=\"previewMenus.\"])");
     ternaryInputs.forEach(el => {
       el.addEventListener("change", async () => {
         foundry.utils.setProperty(this, el.name, el.value);
@@ -102,10 +98,10 @@ export default class BaseActorSheet
    */
   _preparePreviewGroups(context) {
     const d = TERIOCK.config.document;
-    const p = this.filterMenus;
+    const p = this.previewMenus;
     const isGM = game.user.isGM;
     const visible = a => !a.isReference && (a.system.revealed || isGM);
-    context.previewGroups = {
+    Object.assign(context.previewGroups, {
       ability: [{
         docs: p.ability.previewDocuments((this.document.abilities ?? []).filter(visible)),
         empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.nonBasic"),
@@ -144,6 +140,6 @@ export default class BaseActorSheet
         docs: context.consumableProperties ?? [],
         empty: _loc("TERIOCK.SHEETS.Actor.TABS.Resources.consumable", { value: d.property.plural }),
       }],
-    };
+    });
   }
 }

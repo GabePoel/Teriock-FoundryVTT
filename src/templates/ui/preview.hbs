@@ -5,15 +5,16 @@
         class="{{ ../type }}-block-menu-toggle block-menu-toggle"
         icon="{{ @root/TERIOCK.display.icons.ui.options }}"
         value="{{ preview.menus.block }}"
-        data-path="filterMenus.{{ ../type }}.menus.block"
+        data-path="previewMenus.{{ ../type }}.menus.block"
         data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.blockOptions"}}'
+        data-never-disable="true"
       ></toggle-button>
 
       <toggle-button
         class="{{ ../type }}-sort-menu-toggle sort-menu-toggle"
         icon="{{ @root/TERIOCK.display.icons.ui.sort }}"
         value="{{ preview.menus.sort }}"
-        data-path="filterMenus.{{ ../type }}.menus.sort"
+        data-path="previewMenus.{{ ../type }}.menus.sort"
         data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
         data-never-disable="true"
       ></toggle-button>
@@ -22,7 +23,7 @@
         class="{{ ../type }}-filter-menu-toggle filter-menu-toggle"
         icon="{{ @root/TERIOCK.display.icons.ui.filter }}"
         value="{{ preview.menus.filter }}"
-        data-path="filterMenus.{{ ../type }}.menus.filter"
+        data-path="previewMenus.{{ ../type }}.menus.filter"
         data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
         data-never-disable="true"
       ></toggle-button>
@@ -59,7 +60,7 @@
               type="checkbox"
               data-action="sheetToggle"
               data-bool="{{ preview.display.gapless }}"
-              data-path="filterMenus.{{ ../type }}.display.gapless"
+              data-path="previewMenus.{{ ../type }}.display.gapless"
               data-never-disable="true"
               {{checked preview.display.gapless}}
             />
@@ -68,7 +69,7 @@
             <select
               id="{{ ../type }}-size"
               data-action="sheetSelect"
-              data-path="filterMenus.{{ ../type }}.display.size"
+              data-path="previewMenus.{{ ../type }}.display.size"
               data-never-disable="true"
             >
               {{selectOptions
@@ -91,7 +92,7 @@
               type="checkbox"
               data-action="sheetToggle"
               data-bool="{{ preview.sort.ascending }}"
-              data-path="filterMenus.{{ ../type }}.sort.ascending"
+              data-path="previewMenus.{{ ../type }}.sort.ascending"
               data-never-disable="true"
               {{checked preview.sort.ascending}}
             />
@@ -100,7 +101,7 @@
             <select
               id="{{ ../type }}-sort"
               data-action="sheetSelect"
-              data-path="filterMenus.{{ ../type }}.sort.option"
+              data-path="previewMenus.{{ ../type }}.sort.option"
               data-never-disable="true"
             >
               {{selectOptions

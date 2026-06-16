@@ -36,6 +36,12 @@ export default Base => {
             await this.render();
           });
         });
+        this.element.querySelectorAll("[data-action='sheetSelect']").forEach(/** @param {HTMLInputElement} el */ el => {
+          el.addEventListener("change", async () => {
+            foundry.utils.setProperty(this, el.dataset.path, el.value);
+            await this.render();
+          });
+        });
       }
     }
   );
