@@ -9,6 +9,8 @@ const { fields } = foundry.data;
  * @typedef {object} BaseFilters
  * @property {boolean|null} active
  * @property {boolean|null} children
+ * @property {boolean|null} fluent
+ * @property {boolean|null} proficient
  */
 
 /**
@@ -70,6 +72,8 @@ export default class BasePreviewModel extends EmbeddedDataModel {
     return {
       active: new TernaryField({ label: _loc("TERIOCK.SHEETS.Common.TAGS.active") }),
       children: new TernaryField({ label: _loc("TERIOCK.CHANGES.Phase.children.label") }),
+      fluent: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.2") }),
+      proficient: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.1") }),
     };
   }
 
@@ -120,6 +124,7 @@ export default class BasePreviewModel extends EmbeddedDataModel {
   get _formPathsTernary() {
     const paths = ["filters.active"];
     if (this.relativeTo) { paths.push("filters.children"); }
+    paths.push("filters.proficient", "filters.fluent");
     return paths;
   }
 
@@ -213,6 +218,8 @@ export default class BasePreviewModel extends EmbeddedDataModel {
     for (const document of documents) {
       if (
         this._checkTernaryFilter(this.filters.active, document?.active)
+        && this._checkTernaryFilter(this.filters.proficient, document?.system?.competence?.proficient)
+        && this._checkTernaryFilter(this.filters.fluent, document?.system?.competence?.fluent)
         && (!this.relativeTo
           || this._checkTernaryFilter(
             this.filters.children,
