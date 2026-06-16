@@ -16,6 +16,9 @@ function cleanBars(bars) {
   return newBars;
 }
 
-const stringHelperEntries = [["cleanBars", cleanBars], ["dotJoin", dotJoin], ["ucFirst", s => s.capitalize()]];
+const stringHelperEntries = [["cleanBars", cleanBars], ["dotJoin", dotJoin], ["ucFirst", s => s.capitalize()], [
+  "sign",
+  n => n.signedString(),
+]];
 
 export default stringHelperEntries;
