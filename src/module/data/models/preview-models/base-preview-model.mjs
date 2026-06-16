@@ -1,3 +1,4 @@
+import { createElement } from "../../../helpers/html.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 import { blockGaplessField, blockSizeField } from "../../fields/helpers/builders.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
@@ -156,18 +157,31 @@ export default class BasePreviewModel extends EmbeddedDataModel {
 
   /** @inheritDoc */
   _getEditorFormsSync() {
-    const group = super._getEditorFormsSync();
-    group.className = "ttable";
-    return group;
+    const container = createElement("div", { className: "teriock-form-container" });
+    for (const pathsArrays of [this._formPathsSelect, this._formPathsTernary]) {
+      if (!pathsArrays.length) { continue; }
+      const group = createElement("div", { className: "ttable" });
+      this._makeFormGroups(pathsArrays).forEach(fg => group.append(fg));
+      container.append(group);
+    }
+    return container;
   }
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-    return super._makeFormGroup(path, { ...groupConfig, classes: ["tgrid-item"] }, {
+    const group = super._makeFormGroup(path, { ...groupConfig, classes: ["ab-multi-select-label"] }, {
       ...inputConfig,
       name: `filterMenus.${this.name}.${path}`,
       value: foundry.utils.getProperty(this, path),
     });
+    if (this.getFieldForProperty(path) instanceof fields.StringField) {
+      group.classList.remove("form-group");
+      const label = group.querySelector("label");
+      if (label) { label.className = "tsubtle"; }
+    }
+    const outerContainer = createElement("div", { className: "tgrid-item" });
+    outerContainer.append(group);
+    return outerContainer;
   }
 
   /**
