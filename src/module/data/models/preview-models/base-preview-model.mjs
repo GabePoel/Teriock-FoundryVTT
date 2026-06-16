@@ -123,7 +123,7 @@ export default class BasePreviewModel extends EmbeddedDataModel {
    */
   get _formPathsTernary() {
     const paths = ["filters.active"];
-    if (this.relativeTo) { paths.push("filters.children"); }
+    if (this.relativeTo && this.relativeTo?.documentName === "Actor") { paths.push("filters.children"); }
     paths.push("filters.proficient", "filters.fluent");
     return paths;
   }
