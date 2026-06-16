@@ -112,8 +112,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
    */
   *filterDocuments(documents) {
     const f = this.filters;
-    for (const document of documents) {
-      // Body parts and mounts share only some of these fields, so access them defensively.
+    for (const document of super.filterDocuments(documents)) {
       const system = document.system;
       if (
         (!f.properties || this.#hasProperty(document, f.properties))
