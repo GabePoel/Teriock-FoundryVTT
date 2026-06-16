@@ -21,7 +21,7 @@ export default Base => {
       static async _onSheetToggle(_event, target) {
         const { path } = target.dataset;
         const current = target.dataset.bool === "true";
-        foundry.utils.setProperty(this, path, !current);
+        this.setPreviewSource(path, !current);
         await this.render();
       }
 
@@ -32,13 +32,13 @@ export default Base => {
         const toggleButtons = this.element.querySelectorAll("toggle-button[data-path]");
         toggleButtons.forEach(el => {
           el.addEventListener("change", async () => {
-            foundry.utils.setProperty(this, el.dataset.path, el.value);
+            this.setPreviewSource(el.dataset.path, el.value);
             await this.render();
           });
         });
         this.element.querySelectorAll("[data-action='sheetSelect']").forEach(/** @param {HTMLInputElement} el */ el => {
           el.addEventListener("change", async () => {
-            foundry.utils.setProperty(this, el.dataset.path, el.value);
+            this.setPreviewSource(el.dataset.path, el.value);
             await this.render();
           });
         });

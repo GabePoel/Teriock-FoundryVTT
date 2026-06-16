@@ -311,7 +311,7 @@ export default Base => {
               inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
               callback: (_event, query, rgx, container) => {
                 this._searchStrings[searchKey] = query;
-                if (preview) { preview.search = query; }
+                if (preview) { preview.updateSource({ search: query }); }
                 container.querySelectorAll(".teriock-block").forEach(card => {
                   const title = card.querySelector(".teriock-block-title")?.textContent ?? "";
                   const isMatch = rgx ? rgx.test(title) : true;
@@ -335,7 +335,7 @@ export default Base => {
           el.addEventListener("change", e => {
             /** @type {AbstractFormInputElement} */
             const filterElement = e.target;
-            foundry.utils.setProperty(this, filterElement.name, filterElement.value);
+            this.setPreviewSource(filterElement.name, filterElement.value);
             if (filterElement instanceof HTMLTernaryElement) { setTimeout(() => this.render(), 250); }
             else { this.render(); }
           });
@@ -406,6 +406,21 @@ export default Base => {
           }
         }
         return false;
+      }
+
+      /**
+       * Apply a change to a preview model's source from a `previewMenus.<type>.<path>` form/data path. Any other
+       * path falls back to a direct property set so the generic toggle handlers stay safe.
+       * @param {string} formPath
+       * @param {*} value
+       */
+      setPreviewSource(formPath, value) {
+        if (!formPath?.startsWith("previewMenus.")) {
+          foundry.utils.setProperty(this, formPath, value);
+          return;
+        }
+        const [, type, ...rest] = formPath.split(".");
+        this.previewMenus[type]?.updateSource({ [rest.join(".")]: value });
       }
     }
   );
