@@ -32,7 +32,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
 
   /** @inheritDoc */
   static defineFilters() {
-    return {
+    return Object.assign(super.defineFilters(), {
       attuned: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Attunement.USAGE.attuned") }),
       consumable: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.consumable.label") }),
       equipmentClasses: nullString({
@@ -50,7 +50,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
         choices: TERIOCK.reference.weaponFightingStyles,
         label: _loc("TERIOCK.SYSTEMS.Armament.FIELDS.fightingStyle.label"),
       }),
-    };
+    });
   }
 
   /**
@@ -65,12 +65,24 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
 
   /** @inheritDoc */
   get _formPathsSelect() {
-    return ["filters.equipmentClasses", "filters.properties", "filters.weaponFightingStyles", "filters.powerLevel"];
+    return [
+      ...super._formPathsSelect,
+      "filters.equipmentClasses",
+      "filters.properties",
+      "filters.weaponFightingStyles",
+      "filters.powerLevel",
+    ];
   }
 
   /** @inheritDoc */
   get _formPathsTernary() {
-    return ["filters.equipped", "filters.attuned", "filters.identified", "filters.consumable"];
+    return [
+      ...super._formPathsTernary,
+      "filters.equipped",
+      "filters.attuned",
+      "filters.identified",
+      "filters.consumable",
+    ];
   }
 
   /** @inheritDoc */
