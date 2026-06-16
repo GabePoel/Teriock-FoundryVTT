@@ -1,38 +1,10 @@
 <div class="character-tab powers">
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Powers.title"}}</h1>
-  <div class="character-tab-page teriock-block-results" data-search-key="powers">
+  <div class="character-tab-page teriock-block-results" data-search-key="power">
     <div class="teriock-block-display">
-      <div class="teriock-block-options">
-        {{> "teriock/ui/block-options"
-          tab="power"
-          optionsToggle=settings.menus.powerOptions
-          optionsPath="settings.menus.powerOptions"
-          searchValue=settings.powerFilters.search
-          searchKey="powers"
-          addAction="createPower"
-          gaplessPath="system.settings.sheet.blockPowersGapless"
-          gaplessValue=system.settings.sheet.blockPowersGapless
-          sizePath="system.settings.sheet.blockPowersSize"
-          sizeValue=system.settings.sheet.blockPowersSize
-          tabDisplay=TERIOCK.config.document.power.label
-        }}
-      </div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=species
-        searchKey="powers"
-        displayKey="power"
-        empty=TERIOCK.config.document.species.plural
-        gapless="sheet.blockPowersGapless"
-        size="sheet.blockPowersSize"
-      }}
-      <div class="teriock-block-display-divider"></div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=powers
-        searchKey="powers"
-        displayKey="power"
-        empty=TERIOCK.config.document.power.plural
-        gapless="sheet.blockPowersGapless"
-        size="sheet.blockPowersSize"
+      {{> "teriock/ui/preview"
+        type="power"
+        addAction="createPower"
       }}
     </div>
   </div>

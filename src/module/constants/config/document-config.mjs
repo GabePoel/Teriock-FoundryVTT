@@ -1,3 +1,8 @@
+import {
+  AbilityPreviewModel,
+  EquipmentPreviewModel,
+  MetaphysicsPreviewModel,
+} from "../../data/models/preview-models/_module.mjs";
 import { preLocalize } from "../../helpers/localization.mjs";
 import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
@@ -16,6 +21,7 @@ export default {
     label: "TYPES.ActiveEffect.ability",
     pack: "abilities",
     plural: "TERIOCK.DOCUMENTS.ability.plural",
+    previewModel: AbilityPreviewModel,
     sorter: effectSort,
   },
   archetype: /** @type {Teriock.Config.DocumentEntry} */ {
@@ -81,6 +87,7 @@ export default {
     sorter: docSort,
   },
   consequence: /** @type {Teriock.Config.DocumentEntry} */ {
+    display: { gapless: true, size: "small" },
     documentName: "ActiveEffect",
     getter: "consequences",
     hint: "TERIOCK.DOCUMENTS.consequence.hint",
@@ -144,6 +151,7 @@ export default {
     label: "TYPES.Item.equipment",
     pack: "equipment",
     plural: "TERIOCK.DOCUMENTS.equipment.plural",
+    previewModel: EquipmentPreviewModel,
     sorter: docSort,
   },
   fluency: /** @type {Teriock.Config.DocumentEntry} */ {
@@ -207,6 +215,7 @@ export default {
     label: "TYPES.ActiveEffect.property",
     pack: "properties",
     plural: "TERIOCK.DOCUMENTS.property.plural",
+    previewModel: MetaphysicsPreviewModel,
     sorter: effectSort,
   },
   rank: /** @type {Teriock.Config.DocumentEntry} */ {

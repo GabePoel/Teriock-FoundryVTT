@@ -1,3 +1,4 @@
+import { BasePreviewModel } from "../../../../../data/models/preview-models/_module.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toKebabCase } from "../../../../../helpers/string.mjs";
 import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
@@ -269,12 +270,37 @@ export default Base => {
         if (decision && obj) { await this.document.createChildDocuments("Item", [obj]); }
       }
 
+      constructor(...args) {
+        super(...args);
+        this.filterMenus = {};
+        for (const [type, options] of Object.entries(TERIOCK.config.document)) {
+          let PreviewModelCls = BasePreviewModel;
+          if (options?.previewModel) {
+            PreviewModelCls = options.previewModel;
+          }
+          const source = { name: type };
+          if (options?.display) { source.display = options.display; }
+          this.filterMenus[type] = new PreviewModelCls(source, { parent: this.document });
+        }
+      }
+
+      /** @type {Record<string, BasePreviewModel>} */
+      filterMenus;
+
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
         this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
           const uuid = el.dataset.uuid;
           fromUuid(uuid).then(doc => doc?.onEmbed(el));
+        });
+        this.element.querySelectorAll("[name^=\"filterMenus.\"]").forEach(el => {
+          el.addEventListener("change", async e => {
+            /** @type {AbstractFormInputElement} */
+            const filterElement = e.target;
+            foundry.utils.setProperty(this, filterElement.name, filterElement.value);
+            await this.render();
+          });
         });
       }
 
@@ -288,9 +314,14 @@ export default Base => {
           }
           return true;
         });
+        context.filterForms = {};
+        context.previews = this.filterMenus;
+        context.previewSortOrders = {};
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter) {
             context[options.getter] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
+            context.filterForms[type] = this.filterMenus[type]?._getEditorFormsSync().outerHTML;
+            context.previewSortOrders[type] = this.filterMenus[type]?.constructor.sortOrders;
           }
         }
         return context;

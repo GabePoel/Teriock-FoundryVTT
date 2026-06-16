@@ -14,7 +14,6 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes CommonSheet
  * @mixes DragDropCommonSheetPart
  * @mixes EquipmentDropSheet
- * @mixes FiltersActorSheetPart
  * @mixes HackStatApplication
  * @mixes HidingActorSheetPart
  * @mixes SearchingActorSheetPart
@@ -30,7 +29,6 @@ export default class BaseActorSheet
     HandlebarsApplicationMixin,
     mixins.CommonSheetMixin,
     mixins.EquipmentDropSheetMixin,
-    parts.FiltersActorSheetPart,
     parts.HidingActorSheetPart,
     parts.SearchingActorSheetPart,
     parts.SortingActorSheetPart,
@@ -65,7 +63,7 @@ export default class BaseActorSheet
   async _onRender(context, options) {
     await super._onRender(context, options);
     /** @type {NodeListOf<HTMLTernaryElement>} */
-    const ternaryInputs = this.element.querySelectorAll("ternary-input[name]");
+    const ternaryInputs = this.element.querySelectorAll("ternary-input[name]:not([name^=\"filterMenus.\"])");
     ternaryInputs.forEach(el => {
       el.addEventListener("change", async () => {
         foundry.utils.setProperty(this, el.name, el.value);
@@ -82,6 +80,7 @@ export default class BaseActorSheet
     context.enrichedSpecialRules = await this._enrich(this.document.system.wielding.attacker?.system?.specialRules);
     context.consumableAbilities = this.document.abilities.filter(a => a.system.consumable);
     context.consumableProperties = this.document.properties.filter(a => a.system.consumable);
+    this._preparePreviewGroups(context);
     return context;
   }
 
@@ -93,5 +92,58 @@ export default class BaseActorSheet
     context.actor = this.actor;
     context.editable = this.isEditable;
     context.settings = this.settings;
+  }
+
+  /**
+   * Build the document groups shown under each tab's preview, keyed by document type. Each group is
+   * `{ docs, empty, optional? }`; the primary group of each tab is filtered and sorted through its preview
+   * model, while distinct secondary categories keep their existing order.
+   * @param {object} context
+   */
+  _preparePreviewGroups(context) {
+    const d = TERIOCK.config.document;
+    const p = this.filterMenus;
+    const isGM = game.user.isGM;
+    const visible = a => !a.isReference && (a.system.revealed || isGM);
+    context.previewGroups = {
+      ability: [{
+        docs: p.ability.previewDocuments((this.document.abilities ?? []).filter(visible)),
+        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.nonBasic"),
+      }, {
+        docs: p.ability.previewDocuments(game.teriock.basicAbilities.filter(visible)),
+        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Abilities.basic"),
+      }],
+      consequence: [{ docs: p.consequence.previewDocuments(context.consequences ?? []), empty: d.consequence.plural }, {
+        docs: context.attunements ?? [],
+        empty: d.attunement.plural,
+      }, { docs: context.miscEffects ?? [], empty: d.effect.plural, optional: true }],
+      equipment: [
+        {
+          docs: p.equipment.previewDocuments(
+            (context.equipment ?? []).filter(e => !e.sup || e.sup.type !== "equipment"),
+          ),
+          empty: d.equipment.plural,
+        },
+        { docs: context.bodyParts ?? [], empty: d.body.plural },
+        { docs: context.mounts ?? [], empty: d.mount.plural },
+      ],
+      fluency: [{ docs: p.fluency.previewDocuments(context.fluencies ?? []), empty: d.fluency.plural }],
+      power: [{ docs: context.species ?? [], empty: d.species.plural }, {
+        docs: p.power.previewDocuments(context.powers ?? []),
+        empty: d.power.plural,
+      }],
+      rank: [{ docs: p.rank.previewDocuments(context.ranks ?? []), empty: d.rank.plural }, {
+        docs: context.archetypes ?? [],
+        empty: d.archetype.plural,
+        optional: true,
+      }],
+      resource: [{ docs: p.resource.previewDocuments(context.resources ?? []), empty: d.resource.plural }, {
+        docs: context.consumableAbilities ?? [],
+        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Resources.consumable", { value: d.ability.plural }),
+      }, {
+        docs: context.consumableProperties ?? [],
+        empty: _loc("TERIOCK.SHEETS.Actor.TABS.Resources.consumable", { value: d.property.plural }),
+      }],
+    };
   }
 }

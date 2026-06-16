@@ -23,13 +23,15 @@ export default Base =>
           if (!searchKey) { return; }
           const resultsContainer = this.element.querySelector(`.teriock-block-results[data-search-key="${searchKey}"]`);
           if (!resultsContainer) { return; }
-          const initial = this._searchStrings[searchKey] || "";
+          const preview = this.filterMenus?.[searchKey];
+          const initial = preview ? preview.search : (this._searchStrings[searchKey] || "");
           const searchFilter = new SearchFilter({
             contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,
             initial,
             inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
             callback: (_event, query, rgx, container) => {
               this._searchStrings[searchKey] = query;
+              if (preview) { preview.search = query; }
               container.querySelectorAll(".teriock-block").forEach(card => {
                 const title = card.querySelector(".teriock-block-title")?.textContent ?? "";
                 const isMatch = rgx ? rgx.test(title) : true;

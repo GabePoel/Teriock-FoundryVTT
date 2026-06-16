@@ -57,6 +57,14 @@ export default function AccessDataMixin(Base) {
        * @returns {Promise<HTMLDivElement>}
        */
       async _getEditorForms() {
+        return this._getEditorFormsSync();
+      }
+
+      /**
+       * Synchronously get forms that go into a simple editor for this data model.
+       * @returns {HTMLDivElement}
+       */
+      _getEditorFormsSync() {
         const group = createElement("div", { className: "teriock-form-container" });
         this._makeFormGroups(this._formPaths).forEach(fg => group.append(fg));
         return group;

@@ -2,6 +2,7 @@
   {{#each document.visibleTypes as |type|}}
     {{#if (or @root/editable (exists (lookup @root (path @root/TERIOCK.config.document type "getter"))))}}
       <div class="ab-main">
+        <div class="standard-form">{{{lookup @root.filterForms type}}}</div>
         {{#if (exists (lookup @root (path @root/TERIOCK.config.document type "getter")))}}
           <div
             class="

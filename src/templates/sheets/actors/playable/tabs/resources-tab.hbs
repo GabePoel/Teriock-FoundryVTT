@@ -1,47 +1,10 @@
 <div class="character-tab resources">
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Resources.title"}}</h1>
-  <div class="character-tab-page teriock-block-results" data-search-key="resources">
+  <div class="character-tab-page teriock-block-results" data-search-key="resource">
     <div class="teriock-block-display">
-      <div class="teriock-block-options">
-        {{> "teriock/ui/block-options"
-          tab="resource"
-          optionsToggle=settings.menus.resourceOptions
-          optionsPath="settings.menus.resourceOptions"
-          searchValue=settings.resourceFilters.search
-          searchKey="resources"
-          addAction="createResource"
-          gaplessPath="system.settings.sheet.blockResourcesGapless"
-          gaplessValue=system.settings.sheet.blockResourcesGapless
-          sizePath="system.settings.sheet.blockResourcesSize"
-          sizeValue=system.settings.sheet.blockResourcesSize
-          tabDisplay=TERIOCK.config.document.resource.label
-        }}
-      </div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=resources
-        searchKey="resources"
-        displayKey="resource"
-        empty=TERIOCK.config.document.resource.plural
-        gapless="sheet.blockResourcesGapless"
-        size="sheet.blockResourcesSize"
-      }}
-      <div class="teriock-block-display-divider"></div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=consumableAbilities
-        searchKey="resources"
-        displayKey="resource"
-        empty=(localize "TERIOCK.SHEETS.Actor.TABS.Resources.consumable" value=TERIOCK.config.document.ability.plural)
-        gapless="sheet.blockResourcesGapless"
-        size="sheet.blockResourcesSize"
-      }}
-      <div class="teriock-block-display-divider"></div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=consumableProperties
-        searchKey="resources"
-        displayKey="resource"
-        empty=(localize "TERIOCK.SHEETS.Actor.TABS.Resources.consumable" value=TERIOCK.config.document.property.plural)
-        gapless="sheet.blockResourcesGapless"
-        size="sheet.blockResourcesSize"
+      {{> "teriock/ui/preview"
+        type="resource"
+        addAction="createResource"
       }}
     </div>
   </div>

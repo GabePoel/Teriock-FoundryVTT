@@ -1,50 +1,11 @@
 <div class="character-tab conditions">
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Effects.title"}}</h1>
-  <div class="character-tab-page teriock-block-results" data-search-key="effects">
+  <div class="character-tab-page teriock-block-results" data-search-key="consequence">
     <div class="teriock-block-display">
-      <div class="teriock-block-options">
-        {{> "teriock/ui/block-options"
-          tab="consequence"
-          optionsToggle=settings.menus.consequenceOptions
-          optionsPath="settings.menus.consequenceOptions"
-          searchValue=settings.consequenceFilters.search
-          searchKey="effects"
-          addAction="createConsequence"
-          gaplessPath="system.settings.sheet.blockEffectsGapless"
-          gaplessValue=system.settings.sheet.blockEffectsGapless
-          sizePath="system.settings.sheet.blockEffectsSize"
-          sizeValue=system.settings.sheet.blockEffectsSize
-          tabDisplay=TERIOCK.config.document.consequence.label
-        }}
-      </div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=consequences
-        searchKey="effects"
-        displayKey="consequence"
-        empty=TERIOCK.config.document.consequence.plural
-        gapless="sheet.blockEffectsGapless"
-        size="sheet.blockEffectsSize"
+      {{> "teriock/ui/preview"
+        type="consequence"
+        addAction="createConsequence"
       }}
-      <div class="teriock-block-display-divider"></div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=attunements
-        searchKey="effects"
-        displayKey="consequence"
-        empty=TERIOCK.config.document.attunement.plural
-        gapless="sheet.blockEffectsGapless"
-        size="sheet.blockEffectsSize"
-      }}
-      {{#if (exists miscEffects)}}
-        <div class="teriock-block-display-divider"></div>
-        {{> "teriock/sheets/actors/playable/results/search-results"
-          docs=miscEffects
-          searchKey="effects"
-          displayKey="consequence"
-          empty=TERIOCK.config.document.effect.plural
-          gapless="sheet.blockEffectsGapless"
-          size="sheet.blockEffectsSize"
-        }}
-      {{/if}}
       <div class="teriock-block-display-divider"></div>
       {{> "teriock/sheets/actors/playable/results/condition-results"}}
     </div>

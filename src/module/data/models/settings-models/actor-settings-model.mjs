@@ -1,5 +1,3 @@
-import characterConfig from "../../../constants/config/character-config.mjs";
-import { blockGaplessField, blockSizeField } from "../../fields/helpers/builders.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -32,18 +30,6 @@ export default class ActorSettingsModel extends EmbeddedDataModel {
         }),
         wound: new fields.BooleanField({ initial: true }),
       }),
-      sheet: new fields.SchemaField(characterConfig.tabs.reduce((fields, { gapless, key, size }) => {
-        const childPath = `TERIOCK.SHEETS.Actor.TABS.${key}.title`;
-        fields[`block${key}Gapless`] = new blockGaplessField({
-          child: childPath,
-          ...(gapless !== undefined && { initial: gapless }),
-        });
-        fields[`block${key}Size`] = new blockSizeField({
-          child: childPath,
-          ...(size !== undefined && { initial: size }),
-        });
-        return fields;
-      }, {})),
       token: new fields.SchemaField({
         autoColoration: new fields.BooleanField({ initial: true }),
         autoDetectionModes: new fields.BooleanField({ initial: true }),

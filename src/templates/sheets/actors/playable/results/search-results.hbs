@@ -1,28 +1,26 @@
-{{~#with @root.document.system.settings as |settings| ~}}
-  <div
-    class="
-      teriock-block-container
-      {{#if (path settings ../gapless)}}
-        gapless
-      {{/if}}
-      {{path settings ../size}}
-    "
-  >
-    {{#each ../docs as |doc|}}
-      {{> "teriock/ui/block"
-        (merge
-          doc.embedParts
-          (object hidden=(rgx (lookup @root.searchStrings ../../searchKey) doc.name) relative=../../document.uuid))
-      }}
-    {{/each}}
+<div
+  class="
+    teriock-block-container
+    {{#if gapless}}
+      gapless
+    {{/if}}
+    {{ size }}
+  "
+>
+  {{#each docs as |doc|}}
+    {{> "teriock/ui/block"
+      (merge
+        doc.embedParts
+        (object hidden=(rgx (lookup @root.searchStrings ../searchKey) doc.name) relative=@root.document.uuid))
+    }}
+  {{/each}}
 
-    <div class="no-results {{lookup settings ../size}}">
-      <p>
-        {{localize
-          "TERIOCK.SHEETS.Common.SEARCH.noResultsNamed"
-          name=../empty
-        }}
-      </p>
-    </div>
+  <div class="no-results {{ size }}">
+    <p>
+      {{localize
+        "TERIOCK.SHEETS.Common.SEARCH.noResultsNamed"
+        name=empty
+      }}
+    </p>
   </div>
-{{/with}}
+</div>

@@ -1,41 +1,11 @@
 <div class="character-tab classes">
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Classes.title"}}</h1>
-  <div class="character-tab-page teriock-block-results" data-search-key="ranks">
+  <div class="character-tab-page teriock-block-results" data-search-key="rank">
     <div class="teriock-block-display">
-      <div class="teriock-block-options">
-        {{> "teriock/ui/block-options"
-          tab="rank"
-          optionsToggle=settings.menus.rankOptions
-          optionsPath="settings.menus.rankOptions"
-          searchValue=settings.rankFilters.search
-          searchKey="ranks"
-          addAction="createRank"
-          gaplessPath="system.settings.sheet.blockClassesGapless"
-          gaplessValue=system.settings.sheet.blockClassesGapless
-          sizePath="system.settings.sheet.blockClassesSize"
-          sizeValue=system.settings.sheet.blockClassesSize
-          tabDisplay=TERIOCK.config.document.rank.label
-        }}
-      </div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=ranks
-        searchKey="ranks"
-        displayKey="rank"
-        empty=TERIOCK.config.document.rank.plural
-        gapless="sheet.blockClassesGapless"
-        size="sheet.blockClassesSize"
+      {{> "teriock/ui/preview"
+        type="rank"
+        addAction="createRank"
       }}
-      {{#if (exists archetypes)}}
-        <div class="teriock-block-display-divider"></div>
-        {{> "teriock/sheets/actors/playable/results/search-results"
-          docs=archetypes
-          searchKey="ranks"
-          displayKey="rank"
-          empty=TERIOCK.config.document.archetype.plural
-          gapless="sheet.blockClassesGapless"
-          size="sheet.blockClassesSize"
-        }}
-      {{/if}}
     </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
@@ -37,6 +38,7 @@ declare global {
       label: string;
       pack: string;
       plural: string;
+      previewModel?: typeof BasePreviewModel;
       sorter: (doc: AnyCommonDocument[]) => AnyCommonDocument[];
     };
 

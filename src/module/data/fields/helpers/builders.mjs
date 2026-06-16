@@ -204,7 +204,6 @@ export function nullString(options) {
   return new StringField({ blank: true, initial: null, nullable: true, required: false, ...options });
 }
 
-
 /**
  * A JSON field with an empty object.
  * @returns {JSONField}

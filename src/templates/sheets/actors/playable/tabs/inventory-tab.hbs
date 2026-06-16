@@ -3,59 +3,9 @@
   <div class="character-tab-page teriock-block-results" data-search-key="equipment">
     {{> "teriock/sheets/actors/playable/parts/money-display"}}
     <div class="teriock-block-display">
-      <div class="teriock-block-options">
-        {{> "teriock/ui/block-options"
-          tab="equipment"
-          optionsToggle=settings.menus.equipmentOptions
-          optionsPath="settings.menus.equipmentOptions"
-          filterToggle=settings.menus.equipmentFilters
-          filterPath="settings.menus.equipmentFilters"
-          sortToggle=settings.menus.equipmentSort
-          sortPath="settings.menus.equipmentSort"
-          searchValue=settings.equipmentFilters.search
-          searchKey="equipment"
-          addAction="createEquipment"
-          sortOptions=TERIOCK.config.display.equipmentSortOrders
-          sortValue=settings.equipmentSortOption
-          sortOptionPath="settings.equipmentSortOption"
-          gaplessPath="system.settings.sheet.blockInventoryGapless"
-          gaplessValue=system.settings.sheet.blockInventoryGapless
-          sizePath="system.settings.sheet.blockInventorySize"
-          sizeValue=system.settings.sheet.blockInventorySize
-          ascendingPath="settings.equipmentSortAscending"
-          ascendingValue=settings.equipmentSortAscending
-          tabDisplay=TERIOCK.config.document.equipment.label
-        }}
-        {{#if settings.menus.equipmentFilters}}
-          {{> "teriock/ui/filters"
-            appId=appId
-            filterSelects=equipmentFilterSelects
-            filterToggles=equipmentFilterToggles
-          }}
-        {{/if}}
-      </div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=equipment
-        searchKey="equipment"
-        empty=TERIOCK.config.document.equipment.plural
-        gapless="sheet.blockInventoryGapless"
-        size="sheet.blockInventorySize"
-      }}
-      <div class="teriock-block-display-divider"></div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=bodyParts
-        searchKey="equipment"
-        empty=TERIOCK.config.document.body.plural
-        gapless="sheet.blockInventoryGapless"
-        size="sheet.blockInventorySize"
-      }}
-      <div class="teriock-block-display-divider"></div>
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=mounts
-        searchKey="equipment"
-        empty=TERIOCK.config.document.mount.plural
-        gapless="sheet.blockInventoryGapless"
-        size="sheet.blockInventorySize"
+      {{> "teriock/ui/preview"
+        type="equipment"
+        addAction="createEquipment"
       }}
     </div>
   </div>
