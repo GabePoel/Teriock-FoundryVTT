@@ -12,20 +12,6 @@ export const settings = {
       scope: "client",
       type: Boolean,
     },
-    hideBasicAbilitiesByDefault: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.hideBasicAbilitiesByDefault.hint",
-      name: "TERIOCK.SETTINGS.hideBasicAbilitiesByDefault.name",
-      scope: "user",
-      type: Boolean,
-    },
-    hideInactiveDocumentsByDefault: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.hideInactiveDocumentsByDefault.hint",
-      name: "TERIOCK.SETTINGS.hideInactiveDocumentsByDefault.name",
-      scope: "user",
-      type: Boolean,
-    },
   },
   armament: {
     rollAttackOnArmamentUse: {

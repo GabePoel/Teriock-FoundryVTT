@@ -3,7 +3,6 @@ import { changeSizeDialog } from "../../../dialogs/_module.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 import defaultSheetSettings from "./helpers/default-sheet-settings.mjs";
-import * as parts from "./parts/_module.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -15,7 +14,6 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes DragDropCommonSheetPart
  * @mixes EquipmentDropSheet
  * @mixes HackStatApplication
- * @mixes HidingActorSheetPart
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  * @property {Teriock.Sheet.BaseActorSheetSettings} settings
@@ -27,7 +25,6 @@ export default class BaseActorSheet
     HandlebarsApplicationMixin,
     mixins.CommonSheetMixin,
     mixins.EquipmentDropSheetMixin,
-    parts.HidingActorSheetPart,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
