@@ -9,6 +9,7 @@ const { fields } = foundry.data;
  * @typedef {object} BaseFilters
  * @property {boolean|null} active
  * @property {boolean|null} children
+ * @property {boolean|null} duplicates
  * @property {boolean|null} fluent
  * @property {boolean|null} proficient
  */
@@ -72,6 +73,7 @@ export default class BasePreviewModel extends EmbeddedDataModel {
     return {
       active: new TernaryField({ label: _loc("TERIOCK.SHEETS.Common.TAGS.active") }),
       children: new TernaryField({ label: _loc("TERIOCK.CHANGES.Phase.children.label") }),
+      duplicates: new TernaryField({ label: _loc("TERIOCK.TERMS.Common.duplicates") }),
       fluent: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.2") }),
       proficient: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.1") }),
     };
@@ -122,9 +124,8 @@ export default class BasePreviewModel extends EmbeddedDataModel {
    * @returns {string[]}
    */
   get _formPathsTernary() {
-    const paths = ["filters.active"];
+    const paths = ["filters.active", "filters.duplicates", "filters.fluent", "filters.proficient"];
     if (this.relativeTo && this.relativeTo?.documentName === "Actor") { paths.push("filters.children"); }
-    paths.push("filters.proficient", "filters.fluent");
     return paths;
   }
 
@@ -210,17 +211,24 @@ export default class BasePreviewModel extends EmbeddedDataModel {
    * @returns {Generator<T, void, void>}
    */
   *filterDocuments(documents) {
+    const knownIdentifiers = new Set();
     for (const document of documents) {
+      console.log(document?.name, knownIdentifiers.has(document?.typedIdentifier));
       if (
         this._checkTernaryFilter(this.filters.active, document?.active)
         && this._checkTernaryFilter(this.filters.proficient, document?.system?.competence?.proficient)
         && this._checkTernaryFilter(this.filters.fluent, document?.system?.competence?.fluent)
+        && this._checkTernaryFilter(this.filters.duplicates, knownIdentifiers.has(document?.typedIdentifier))
         && (!this.relativeTo
           || this._checkTernaryFilter(
             this.filters.children,
             document?.sup && (document?.sup?.uuid !== this.relativeTo?.uuid),
           ))
-      ) { yield document; }
+      ) {
+        const typedIdentifier = document?.typedIdentifier;
+        if (typedIdentifier) { knownIdentifiers.add(typedIdentifier); }
+        yield document;
+      }
     }
   }
 
