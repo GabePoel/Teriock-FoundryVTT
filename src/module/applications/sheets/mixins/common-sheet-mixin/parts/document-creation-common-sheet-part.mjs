@@ -280,9 +280,7 @@ export default Base => {
           if (options?.previewModel) {
             PreviewModelCls = options.previewModel;
           }
-          const source = { name: type };
-          if (options?.display) { source.display = options.display; }
-          this.previewMenus[type] = new PreviewModelCls(source, { parent: this.document });
+          this.previewMenus[type] = new PreviewModelCls({ name: type }, { parent: this.document });
         }
         /** @type {Record<string, string>} */
         this._searchStrings = {};

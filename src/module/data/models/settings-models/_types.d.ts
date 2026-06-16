@@ -5,13 +5,6 @@ import { BaseItemSystem } from "../../systems/items/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type CommonSettingsSheetData = {
-      /** <schema> Whether child blocks render without gaps */
-      blockChildGapless: boolean;
-      /** <schema> Display size for child blocks */
-      blockChildSize: Teriock.Keys.CardDisplaySize;
-    };
-
     type TabNames = typeof characterConfig.tabs[number]["key"];
 
     export type ActorSettingsSheetData =
@@ -54,12 +47,7 @@ declare global {
       autoVisionRange: boolean;
     };
 
-    export type ChildSettingsModelData = {
-      /** <schema> Sheet display settings */
-      sheet: CommonSettingsSheetData;
-
-      get parent(): BaseEffectSystem | BaseItemSystem;
-    };
+    export type ChildSettingsModelData = { get parent(): BaseEffectSystem | BaseItemSystem };
 
     export type ActorSettingsModelData = {
       /** <schema> Automation behavior settings */
@@ -90,8 +78,6 @@ declare global {
     export type AbilitySettingsModelData = {
       /** <schema> Execution prompt settings */
       execution: AbilitySettingsExecutionData;
-      /** <schema> Sheet display settings */
-      sheet: CommonSettingsSheetData;
 
       get parent(): AbilitySystem;
     };

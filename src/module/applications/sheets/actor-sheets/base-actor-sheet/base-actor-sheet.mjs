@@ -33,11 +33,24 @@ export default class BaseActorSheet
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { classes: ["unpadded", "character"], form: { submitOnChange: true } };
 
+  /**
+   * Per-document-type block display defaults applied to the preview models.
+   * @type {Record<string, PreviewDisplay>}
+   */
+  static PREVIEW_DISPLAY = {
+    ability: { gapless: true, size: "small" },
+    consequence: { gapless: true, size: "small" },
+    equipment: { gapless: true, size: "small" },
+  };
+
   constructor(...args) {
     super(...args);
     this._locked = false;
     this._activeTab = "tradecrafts";
     this.settings = defaultSheetSettings();
+    for (const [type, display] of Object.entries(BaseActorSheet.PREVIEW_DISPLAY)) {
+      this.previewMenus[type]?.updateSource({ display });
+    }
   }
 
   /** @type {string} */

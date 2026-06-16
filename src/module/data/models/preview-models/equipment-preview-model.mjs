@@ -1,7 +1,7 @@
 import { toCamelCase } from "../../../helpers/string.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
-import { blockGaplessField, blockSizeField, nullString } from "../../fields/helpers/builders.mjs";
+import { nullString } from "../../fields/helpers/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
@@ -28,11 +28,6 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static get sortOrders() {
     return TERIOCK.config.display.equipmentSortOrders;
-  }
-
-  /** @inheritDoc */
-  static defineDisplay() {
-    return { gapless: blockGaplessField({ initial: true }), size: blockSizeField({ initial: "small" }) };
   }
 
   /** @inheritDoc */

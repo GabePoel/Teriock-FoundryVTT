@@ -184,7 +184,12 @@ export default class BasePreviewModel extends EmbeddedDataModel {
       ...groupConfig,
       classes: ["ab-multi-select-label"],
       rootId: this.#rootId,
-    }, { ...inputConfig, name: `previewMenus.${this.name}.${path}`, value: foundry.utils.getProperty(this, path) });
+    }, {
+      ...inputConfig,
+      dataset: { neverDisable: "true" },
+      name: `previewMenus.${this.name}.${path}`,
+      value: foundry.utils.getProperty(this, path),
+    });
     const field = this.getFieldForProperty(path);
     if (
       field instanceof fields.StringField || field instanceof fields.NumberField || field instanceof fields.SetField
@@ -236,7 +241,6 @@ export default class BasePreviewModel extends EmbeddedDataModel {
   sortDocuments(documents) {
     if (!Array.isArray(documents) || documents.length === 0) { return []; }
     const accessor = this._sortMap[this.sort.option];
-    // Options without an accessor (e.g. `default`) preserve the order documents are passed in.
     const sorted = accessor
       ? [...documents].sort((a, b) => {
         const aVal = accessor(a) ?? "";

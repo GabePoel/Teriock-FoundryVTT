@@ -87,7 +87,6 @@ export default {
     sorter: docSort,
   },
   consequence: /** @type {Teriock.Config.DocumentEntry} */ {
-    display: { gapless: true, size: "small" },
     documentName: "ActiveEffect",
     getter: "consequences",
     hint: "TERIOCK.DOCUMENTS.consequence.hint",

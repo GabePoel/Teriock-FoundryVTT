@@ -1,6 +1,6 @@
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
-import { blockGaplessField, blockSizeField, nullString } from "../../fields/helpers/builders.mjs";
+import { nullString } from "../../fields/helpers/builders.mjs";
 import MetaphysicsPreviewModel from "./metaphysics-preview-model.mjs";
 
 const { fields } = foundry.data;
@@ -43,11 +43,6 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */
   static get sortOrders() {
     return TERIOCK.config.display.abilitySortOrders;
-  }
-
-  /** @inheritDoc */
-  static defineDisplay() {
-    return { gapless: blockGaplessField({ initial: true }), size: blockSizeField({ initial: "small" }) };
   }
 
   /** @inheritDoc */
