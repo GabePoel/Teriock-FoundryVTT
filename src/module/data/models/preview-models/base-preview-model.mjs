@@ -211,22 +211,48 @@ export default class BasePreviewModel extends EmbeddedDataModel {
    * @returns {Generator<T, void, void>}
    */
   *filterDocuments(documents) {
+    // Special handling for the duplicates filter since it has different
+    // behavior depending on if it's on or off. If it's on, then all duplicate
+    // documents should be shown. If it's off then only the first instance of
+    // each document should be shown.
     const knownIdentifiers = new Set();
+    const duplicateIdentifiers = new Set();
+    if (this.filters.duplicates === true) {
+      const identifierCounts = {};
+      for (const document of documents) {
+        const identifier = document?.typedIdentifier;
+        if (identifier) {
+          identifierCounts[identifier] = (identifierCounts[identifier] || 0) + 1;
+          if (identifierCounts[identifier] > 1) { duplicateIdentifiers.add(identifier); }
+        }
+      }
+    }
+
     for (const document of documents) {
-      console.log(document?.name, knownIdentifiers.has(document?.typedIdentifier));
+      let duplicateFilter = true;
+      if (this.filters.duplicates === true) {
+        // Show only the duplicate documents.
+        duplicateFilter = duplicateIdentifiers.has(document?.typedIdentifier);
+      } else if (this.filters.duplicates === false) {
+        // Show only the first instance of any duplicate document.
+        const identifier = document?.typedIdentifier;
+        if (identifier) {
+          duplicateFilter = !knownIdentifiers.has(identifier);
+          knownIdentifiers.add(identifier);
+        }
+      }
+
       if (
         this._checkTernaryFilter(this.filters.active, document?.active)
         && this._checkTernaryFilter(this.filters.proficient, document?.system?.competence?.proficient)
         && this._checkTernaryFilter(this.filters.fluent, document?.system?.competence?.fluent)
-        && this._checkTernaryFilter(this.filters.duplicates, knownIdentifiers.has(document?.typedIdentifier))
+        && duplicateFilter
         && (!this.relativeTo
           || this._checkTernaryFilter(
             this.filters.children,
             document?.sup && (document?.sup?.uuid !== this.relativeTo?.uuid),
           ))
       ) {
-        const typedIdentifier = document?.typedIdentifier;
-        if (typedIdentifier) { knownIdentifiers.add(typedIdentifier); }
         yield document;
       }
     }
