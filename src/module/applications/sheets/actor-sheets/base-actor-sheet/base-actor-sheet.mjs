@@ -124,8 +124,8 @@ export default class BaseActorSheet
           ),
           empty: d.equipment.plural,
         },
-        { docs: context.bodyParts ?? [], empty: d.body.plural },
-        { docs: context.mounts ?? [], empty: d.mount.plural },
+        { docs: p.equipment.previewDocuments(context.bodyParts ?? []), empty: d.body.plural },
+        { docs: p.equipment.previewDocuments(context.mounts ?? []), empty: d.mount.plural },
       ],
       fluency: [{ docs: p.fluency.previewDocuments(context.fluencies ?? []), empty: d.fluency.plural }],
       power: [{ docs: context.species ?? [], empty: d.species.plural }, {

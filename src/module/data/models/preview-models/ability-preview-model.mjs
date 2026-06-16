@@ -1,4 +1,3 @@
-import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 import { blockGaplessField, blockSizeField, nullString } from "../../fields/helpers/builders.mjs";
@@ -21,7 +20,6 @@ const { fields } = foundry.data;
  * @property {Teriock.Keys.Interaction|null} interaction
  * @property {Teriock.Keys.Maneuver|null} maneuver
  * @property {Teriock.Keys.Target|null} target
- * @property {Teriock.System.PiercingLevel|null} piercing
  * @property {boolean|null} basic
  * @property {boolean|null} heightened
  * @property {boolean|null} invoked
@@ -55,35 +53,64 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      basic: new TernaryField(),
+      basic: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label") }),
       costs: new fields.SchemaField({
         components: new fields.SchemaField(objectMap(TERIOCK.config.cost.components.keys, (c) =>
-          new TernaryField({ label: _loc(c) }))),
+          new TernaryField({ label: _loc("TERIOCK.COSTS.Long.component", { key: _loc(c) }) }))),
         primary: new fields.SchemaField(objectMap(TERIOCK.config.cost.primary.keys, (c) =>
-          new TernaryField({ label: _loc(c.label) }))),
+          new TernaryField({ label: _loc("TERIOCK.COSTS.Long.primary", { key: _loc(c.label) }) }))),
         tweaks: new fields.SchemaField(objectMap(TERIOCK.config.cost.tweaks, (c) =>
           new TernaryField({ label: _loc(c.label) }))),
       }),
-      delivery: nullString({ choices: TERIOCK.config.ability.delivery }),
-      expansion: nullString({ choices: TERIOCK.config.ability.expansion }),
-      heightened: new TernaryField(),
-      interaction: nullString({ choices: TERIOCK.config.ability.interaction }),
-      invoked: new TernaryField(),
-      maneuver: nullString({ choices: TERIOCK.config.ability.maneuver }),
-      piercing: new fields.NumberField({
-        blank: true,
-        choices: localizeChoices(TERIOCK.config.piercing.levels),
-        initial: null,
-        nullable: true,
+      delivery: nullString({
+        choices: TERIOCK.config.ability.delivery,
+        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label"),
       }),
-      ritual: new TernaryField(),
-      rotator: new TernaryField(),
-      skill: new TernaryField(),
-      spell: new TernaryField(),
-      standard: new TernaryField(),
-      sustained: new TernaryField(),
-      target: nullString({ choices: TERIOCK.config.ability.targets }),
+      expansion: nullString({
+        choices: TERIOCK.config.ability.expansion,
+        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label"),
+      }),
+      heightened: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label") }),
+      interaction: nullString({
+        choices: TERIOCK.config.ability.interaction,
+        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label"),
+      }),
+      invoked: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.invoked.label") }),
+      maneuver: nullString({
+        choices: TERIOCK.config.ability.maneuver,
+        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label"),
+      }),
+      ritual: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label") }),
+      rotator: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label") }),
+      skill: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label") }),
+      spell: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label") }),
+      standard: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label") }),
+      sustained: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label") }),
+      target: nullString({
+        choices: TERIOCK.config.ability.targets,
+        label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.targets.label"),
+      }),
     });
+  }
+
+  /**
+   * Whether an ability passes the cost, component, and tweak filters.
+   * @param {TeriockAbility} document
+   * @returns {boolean}
+   */
+  #checkCostFilters(document) {
+    const costs = document.system.costs;
+    const filters = this.filters.costs;
+    for (const key of Object.keys(filters.primary)) {
+      if (!this._checkTernaryFilter(filters.primary[key], costs?.primary?.[key]?.type)) { return false; }
+    }
+    for (const key of Object.keys(filters.components)) {
+      if (!this._checkTernaryFilter(filters.components[key], costs?.components?.[key]?.type)) { return false; }
+    }
+    for (const key of Object.keys(filters.tweaks)) {
+      if (!this._checkTernaryFilter(filters.tweaks[key], costs?.tweaks?.[key])) { return false; }
+    }
+    return true;
   }
 
   /** @inheritDoc */
@@ -94,7 +121,6 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       "filters.maneuver",
       "filters.delivery",
       "filters.expansion",
-      "filters.piercing",
       "filters.target",
     ];
   }
@@ -160,8 +186,8 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
         && this._checkValueFilter(this.filters.expansion, document.system.expansion.type)
         && this._checkValueFilter(this.filters.interaction, document.system.interaction)
         && this._checkValueFilter(this.filters.maneuver, document.system.maneuver)
-        && this._checkValueFilter(this.filters.piercing, document.system.piercing.value)
         && this._checkValueFilter(this.filters.target, document.system.targets)
+        && this.#checkCostFilters(document)
       ) {
         yield document;
       }

@@ -67,7 +67,10 @@ export default class BasePreviewModel extends EmbeddedDataModel {
    * @returns {Record<string, DataField>}
    */
   static defineFilters() {
-    return { active: new TernaryField(), children: new TernaryField() };
+    return {
+      active: new TernaryField({ label: _loc("TERIOCK.SHEETS.Common.TAGS.active") }),
+      children: new TernaryField({ label: _loc("TERIOCK.CHANGES.Phase.children.label") }),
+    };
   }
 
   /** @inheritDoc */
@@ -88,6 +91,14 @@ export default class BasePreviewModel extends EmbeddedDataModel {
       }),
     });
   }
+
+  constructor(...args) {
+    super(...args);
+    this.#rootId = foundry.utils.randomID();
+  }
+
+  /** @type {string} */
+  #rootId;
 
   /** @inheritDoc */
   get _formPaths() {
@@ -169,12 +180,15 @@ export default class BasePreviewModel extends EmbeddedDataModel {
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-    const group = super._makeFormGroup(path, { ...groupConfig, classes: ["ab-multi-select-label"] }, {
-      ...inputConfig,
-      name: `filterMenus.${this.name}.${path}`,
-      value: foundry.utils.getProperty(this, path),
-    });
-    if (this.getFieldForProperty(path) instanceof fields.StringField) {
+    const group = super._makeFormGroup(path, {
+      ...groupConfig,
+      classes: ["ab-multi-select-label"],
+      rootId: this.#rootId,
+    }, { ...inputConfig, name: `filterMenus.${this.name}.${path}`, value: foundry.utils.getProperty(this, path) });
+    const field = this.getFieldForProperty(path);
+    if (
+      field instanceof fields.StringField || field instanceof fields.NumberField || field instanceof fields.SetField
+    ) {
       group.classList.remove("form-group");
       const label = group.querySelector("label");
       if (label) { label.className = "tsubtle"; }
@@ -195,7 +209,10 @@ export default class BasePreviewModel extends EmbeddedDataModel {
       if (
         this._checkTernaryFilter(this.filters.active, document?.active)
         && (!this.relativeTo
-          || this._checkTernaryFilter(this.filters.children, document?.system?._sup === this.relativeTo?.uuid))
+          || this._checkTernaryFilter(
+            this.filters.children,
+            document?.sup && (document?.sup?.uuid !== this.relativeTo?.uuid),
+          ))
       ) { yield document; }
     }
   }
