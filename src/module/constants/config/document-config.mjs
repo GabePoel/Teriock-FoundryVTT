@@ -1,6 +1,7 @@
 import {
   AbilityPreviewModel,
   EquipmentPreviewModel,
+  FluencyPreviewModel,
   MetaphysicsPreviewModel,
 } from "../../data/models/preview-models/_module.mjs";
 import { preLocalize } from "../../helpers/localization.mjs";
@@ -160,6 +161,7 @@ export default {
     icon: icons.document.fluency,
     label: "TYPES.ActiveEffect.fluency",
     plural: "TERIOCK.DOCUMENTS.fluency.plural",
+    previewModel: FluencyPreviewModel,
     sorter: docSort,
   },
   hack: /** @type {Teriock.Config.DocumentEntry} */ {
