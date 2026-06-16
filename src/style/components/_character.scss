@@ -463,9 +463,7 @@ body > form:only-child section .character-page,
     border-bottom: 1px dashed var(--color-form-hint);
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
-    margin-bottom: 0.5em;
-    padding-bottom: 0.5em;
+    gap: 0;
     width: 100%;
 
     .teriock-block-options-header {
@@ -474,6 +472,7 @@ body > form:only-child section .character-page,
       flex-direction: row;
       gap: 0.5em;
       justify-content: start;
+      margin-bottom: calc(0.5em - 0px);
       width: 100%;
 
       input {
@@ -482,8 +481,23 @@ body > form:only-child section .character-page,
     }
 
     .teriock-block-options-content {
-      border-top: 1px dotted var(--color-form-hint);
-      padding-top: 0.5em;
+      @include mixins.collapsible;
+      @include mixins.collapsible-open;
+
+      &.collapsed {
+        @include mixins.collapsible-closed;
+        .teriock-block-options-content-inner {
+          border-top-width: 0;
+          padding: 0;
+        }
+      }
+
+      .teriock-block-options-content-inner {
+        @include mixins.collapsible-content;
+        border-top: 1px dotted var(--color-form-hint);
+        padding-block: 0.5em;
+        transition: padding 125ms, border-top-width 125ms;
+      }
     }
   }
 
@@ -491,6 +505,11 @@ body > form:only-child section .character-page,
     max-width: unset;
     width: 100%;
   }
+}
+
+.teriock-preview-header {
+  margin-bottom: 0.5em;
+  width: 100%;
 }
 
 .character-tab-page {

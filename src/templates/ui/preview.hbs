@@ -1,125 +1,152 @@
 {{#with (lookup @root.previews type) as |preview|}}
-  <div class="teriock-block-options standard-form">
-    <div class="teriock-block-options-header">
-      <toggle-button
-        class="{{ ../type }}-block-menu-toggle block-menu-toggle"
-        icon="{{ @root/TERIOCK.display.icons.ui.options }}"
-        value="{{ preview.menus.block }}"
-        data-path="previewMenus.{{ ../type }}.menus.block"
-        data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.blockOptions"}}'
-        data-never-disable="true"
-      ></toggle-button>
+  <div class="teriock-preview-header">
+    <div class="teriock-block-options standard-form">
+      <div class="teriock-block-options-header">
+        <toggle-button
+          class="{{ ../type }}-block-menu-toggle block-menu-toggle"
+          icon="{{ @root/TERIOCK.display.icons.ui.options }}"
+          value="{{ preview.menus.block }}"
+          data-path="previewMenus.{{ ../type }}.menus.block"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.blockOptions"}}'
+          data-never-disable="true"
+        ></toggle-button>
 
-      <toggle-button
-        class="{{ ../type }}-sort-menu-toggle sort-menu-toggle"
-        icon="{{ @root/TERIOCK.display.icons.ui.sort }}"
-        value="{{ preview.menus.sort }}"
-        data-path="previewMenus.{{ ../type }}.menus.sort"
-        data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
-        data-never-disable="true"
-      ></toggle-button>
+        <toggle-button
+          class="{{ ../type }}-sort-menu-toggle sort-menu-toggle"
+          icon="{{ @root/TERIOCK.display.icons.ui.sort }}"
+          value="{{ preview.menus.sort }}"
+          data-path="previewMenus.{{ ../type }}.menus.sort"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
+          data-never-disable="true"
+        ></toggle-button>
 
-      <toggle-button
-        class="{{ ../type }}-filter-menu-toggle filter-menu-toggle"
-        icon="{{ @root/TERIOCK.display.icons.ui.filter }}"
-        value="{{ preview.menus.filter }}"
-        data-path="previewMenus.{{ ../type }}.menus.filter"
-        data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
-        data-never-disable="true"
-      ></toggle-button>
+        <toggle-button
+          class="{{ ../type }}-filter-menu-toggle filter-menu-toggle"
+          icon="{{ @root/TERIOCK.display.icons.ui.filter }}"
+          value="{{ preview.menus.filter }}"
+          data-path="previewMenus.{{ ../type }}.menus.filter"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
+          data-never-disable="true"
+        ></toggle-button>
 
-      <input
-        class="{{ ../type }}-search teriock-block-search"
-        type="search"
-        placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
-        data-type="{{ ../type }}"
-        data-search-key="{{ ../type }}"
-        data-never-disable="true"
-        value="{{ preview.search }}"
-      />
+        <input
+          class="{{ ../type }}-search teriock-block-search"
+          type="search"
+          placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
+          data-type="{{ ../type }}"
+          data-search-key="{{ ../type }}"
+          data-never-disable="true"
+          value="{{ preview.search }}"
+        />
 
-      {{#if ../addAction}}
-        <button
-          class="toggle-button {{ ../type }}-add-button add-button"
-          data-tab="{{ ../type }}"
-          data-action="{{ ../addAction }}"
-          data-tooltip='{{localize "TERIOCK.DIALOGS.NewDocument.title" name=(path @root/TERIOCK.config.document ../type "label")}}'
-        >
-          {{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}
-        </button>
-      {{/if}}
+        {{#if ../addAction}}
+          <button
+            class="toggle-button {{ ../type }}-add-button add-button"
+            data-tab="{{ ../type }}"
+            data-action="{{ ../addAction }}"
+            data-tooltip='{{localize "TERIOCK.DIALOGS.NewDocument.title" name=(path @root/TERIOCK.config.document ../type "label")}}'
+          >
+            {{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}
+          </button>
+        {{/if}}
+      </div>
+
+      <div
+        class="
+          teriock-block-options-content
+          {{#unless preview.menus.block}}
+            collapsed
+          {{/unless}}
+        "
+        data-content-type="{{ ../type }}"
+        data-content-menu="block"
+      >
+        <div class="teriock-block-options-content-inner">
+          <div class="tgrid g4">
+            <div class="tgrid-item form-group">
+              <label for="{{ ../type }}-gapless">{{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}</label>
+              <input
+                id="{{ ../type }}-gapless"
+                type="checkbox"
+                data-action="sheetToggle"
+                data-bool="{{ preview.display.gapless }}"
+                data-path="previewMenus.{{ ../type }}.display.gapless"
+                data-never-disable="true"
+                {{checked preview.display.gapless}}
+              />
+            </div>
+            <div class="tgrid-item gi3">
+              <select
+                id="{{ ../type }}-size"
+                data-action="sheetSelect"
+                data-path="previewMenus.{{ ../type }}.display.size"
+                data-never-disable="true"
+              >
+                {{selectOptions
+                  @root/TERIOCK.config.display.sizes
+                  selected=preview.display.size
+                }}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="
+          teriock-block-options-content
+          {{#unless preview.menus.sort}}
+            collapsed
+          {{/unless}}
+        "
+        data-content-type="{{ ../type }}"
+        data-content-menu="sort"
+      >
+        <div class="teriock-block-options-content-inner">
+          <div class="tgrid g4">
+            <div class="tgrid-item form-group">
+              <label for="{{ ../type }}-ascending">{{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}</label>
+              <input
+                id="{{ ../type }}-ascending"
+                type="checkbox"
+                data-action="sheetToggle"
+                data-bool="{{ preview.sort.ascending }}"
+                data-path="previewMenus.{{ ../type }}.sort.ascending"
+                data-never-disable="true"
+                {{checked preview.sort.ascending}}
+              />
+            </div>
+            <div class="tgrid-item gi3">
+              <select
+                id="{{ ../type }}-sort"
+                data-action="sheetSelect"
+                data-path="previewMenus.{{ ../type }}.sort.option"
+                data-never-disable="true"
+              >
+                {{selectOptions
+                  (lookup @root.previewSortOrders ../type)
+                  selected=preview.sort.option
+                  localize=true
+                }}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="
+          teriock-block-options-content
+          {{#unless preview.menus.filter}}
+            collapsed
+          {{/unless}}
+        "
+        data-content-type="{{ ../type }}"
+        data-content-menu="filter"
+      >
+        <div class="teriock-block-options-content-inner">{{{lookup @root.filterForms ../type}}}</div>
+      </div>
     </div>
-
-    {{#if preview.menus.block}}
-      <div class="teriock-block-options-content">
-        <div class="tgrid g4">
-          <div class="tgrid-item">
-            <label for="{{ ../type }}-gapless">{{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}</label>
-            <input
-              id="{{ ../type }}-gapless"
-              type="checkbox"
-              data-action="sheetToggle"
-              data-bool="{{ preview.display.gapless }}"
-              data-path="previewMenus.{{ ../type }}.display.gapless"
-              data-never-disable="true"
-              {{checked preview.display.gapless}}
-            />
-          </div>
-          <div class="tgrid-item gi3">
-            <select
-              id="{{ ../type }}-size"
-              data-action="sheetSelect"
-              data-path="previewMenus.{{ ../type }}.display.size"
-              data-never-disable="true"
-            >
-              {{selectOptions
-                @root/TERIOCK.config.display.sizes
-                selected=preview.display.size
-              }}
-            </select>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-
-    {{#if preview.menus.sort}}
-      <div class="teriock-block-options-content">
-        <div class="tgrid g4">
-          <div class="tgrid-item">
-            <label for="{{ ../type }}-ascending">{{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}</label>
-            <input
-              id="{{ ../type }}-ascending"
-              type="checkbox"
-              data-action="sheetToggle"
-              data-bool="{{ preview.sort.ascending }}"
-              data-path="previewMenus.{{ ../type }}.sort.ascending"
-              data-never-disable="true"
-              {{checked preview.sort.ascending}}
-            />
-          </div>
-          <div class="tgrid-item gi3">
-            <select
-              id="{{ ../type }}-sort"
-              data-action="sheetSelect"
-              data-path="previewMenus.{{ ../type }}.sort.option"
-              data-never-disable="true"
-            >
-              {{selectOptions
-                (lookup @root.previewSortOrders ../type)
-                selected=preview.sort.option
-                localize=true
-              }}
-            </select>
-          </div>
-        </div>
-      </div>
-    {{/if}}
-
-    {{#if preview.menus.filter}}
-      <div class="teriock-block-options-content">
-        {{{lookup @root.filterForms ../type}}}
-      </div>
-    {{/if}}
   </div>
 
   {{#each (lookup @root.previewGroups ../type) as |group|}}

@@ -33,6 +33,15 @@ export default Base => {
         toggleButtons.forEach(el => {
           el.addEventListener("change", async () => {
             this.setPreviewSource(el.dataset.path, el.value);
+            const menuMatch = el.dataset.path?.match(/^previewMenus\.([^.]+)\.menus\.([^.]+)$/);
+            if (menuMatch) {
+              const [, type, menu] = menuMatch;
+              const content = this.element.querySelector(
+                `.teriock-block-options-content[data-content-type="${type}"][data-content-menu="${menu}"]`,
+              );
+              content?.classList.toggle("collapsed", !el.value);
+              return;
+            }
             await this.render();
           });
         });
