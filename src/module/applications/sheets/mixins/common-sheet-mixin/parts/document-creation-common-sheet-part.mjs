@@ -12,6 +12,7 @@ import {
   selectTradecraftDialog,
 } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
+import { HTMLTernaryElement } from "../../../../elements/_module.mjs";
 
 const { SearchFilter } = foundry.applications.ux;
 
@@ -331,11 +332,12 @@ export default Base => {
           fromUuid(uuid).then(doc => doc?.onEmbed(el));
         });
         this.element.querySelectorAll("[name^=\"previewMenus.\"]").forEach(el => {
-          el.addEventListener("change", async e => {
+          el.addEventListener("change", e => {
             /** @type {AbstractFormInputElement} */
             const filterElement = e.target;
             foundry.utils.setProperty(this, filterElement.name, filterElement.value);
-            await this.render();
+            if (filterElement instanceof HTMLTernaryElement) { setTimeout(() => this.render(), 250); }
+            else { this.render(); }
           });
         });
         this._initSearchFilters();
