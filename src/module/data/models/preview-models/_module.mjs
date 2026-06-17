@@ -3,3 +3,6 @@ export { default as BasePreviewModel } from "./base-preview-model.mjs";
 export { default as EquipmentPreviewModel } from "./equipment-preview-model.mjs";
 export { default as FluencyPreviewModel } from "./fluency-preview-model.mjs";
 export { default as MetaphysicsPreviewModel } from "./metaphysics-preview-model.mjs";
+export { default as PowerPreviewModel } from "./power-preview-model.mjs";
+export { default as PropertyPreviewModel } from "./property-preview-model.mjs";
+export { default as RankPreviewModel } from "./rank-preview-model.mjs";

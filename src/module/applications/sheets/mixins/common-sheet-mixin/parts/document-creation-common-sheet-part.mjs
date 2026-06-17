@@ -359,7 +359,7 @@ export default Base => {
         context.previewSortOrders = {};
         context.searchStrings = foundry.utils.deepClone(this._searchStrings);
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
-          if (options?.getter) {
+          if (options?.getter && ["ActiveEffect", "Item"].includes(options?.documentName)) {
             context[options.getter] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
             context.filterForms[type] = this.previewMenus[type]?._getEditorFormsSync().outerHTML;
             context.previewSortOrders[type] = this.previewMenus[type]?.constructor.sortOrders;
