@@ -4,7 +4,7 @@
 
 This is a first party implementation of the [Teriock](https://wiki.teriock.com) game system
 for [Foundry Virtual Tabletop](http://foundryvtt.com/). It is officially supported and deeply integrated with the
-Teriock wiki so that rules and content should be synchronized and up to date.
+Teriock wiki so that rules and content should be synchronized and up to date. It is designed to exist as a stand-alone system that provides everything needed to run games without any additional modules.
 
 ## Installation
 
@@ -17,31 +17,55 @@ https://github.com/GabePoel/Teriock-FoundryVTT/releases/latest/download/manifest
 
 ## Features
 
-### Deep Ability Integration
+### Attractive Character Sheets
 
-![abilities.webp](src/assets/screenshots/abilities.webp)
+![character-sheet.webp](src/assets/screenshots/character-sheet.webp)
 
-### All Core Content Built In
+### All Core Content Included
 
 ![compendia.webp](src/assets/screenshots/compendia.webp)
+![useful-tables.webp](src/assets/screenshots/useful-tables.webp)
+![content-management.webp](src/assets/screenshots/content-management.webp)
+
+### Deep Ability Integration
+
+![ability-automation.webp](src/assets/screenshots/ability-automation.webp)
+![using-an-ability.webm](src/assets/screenshots/using-an-ability.gif)
 
 ### Easy Tooltips and Menus
 
 ![tooltips.webp](src/assets/screenshots/tooltips.webp)
 
-### Chat Message Automation
+### Rich Chat Messages
 
-![chat.webp](src/assets/screenshots/chat.webp)
+![damage-message.webp](src/assets/screenshots/damage-message.webp)
+![elder-mind-control-message.webp](src/assets/screenshots/elder-mind-control-message.webp)
+![death-bag-message.webp](src/assets/screenshots/death-bag-message.webp)
 
-### Module Integration
+### Custom Damage Types
 
-![condition-effect-demo.gif](src/assets/screenshots/condition-effect-demo.gif)
+![custom-damage-types.webp](src/assets/screenshots/custom-damage-types.webp)
 
-### Excessive Options and Dialogs
+### Custom Detection Modes
 
-![menus.webp](src/assets/screenshots/menus.webp)
+![custom-detection-modes.webp](src/assets/screenshots/custom-detection-modes.webp)
 
-### Spinning Things
+### Annoying Instructional Messages
 
-![spinning.webp](src/assets/screenshots/spinning.webp)
-![hold.webp](src/assets/screenshots/hold.webp)
+![power.webp](src/assets/screenshots/power.webp)
+
+### Other Stuff
+
+And plenty of other things including (but not limited to):
+
+- Maps!
+- Custom vision modes
+- Internal rules reference
+- Wiki integration
+- Inventory management helpers
+- Custom enrichers
+- Excessive dialogs
+- Useless spinning Elder Sorcery animations
+- Extensive ability automation
+- Custom (hand-drawn non-AI) art for all abilities, properties, species, effects, etc.
+- Easy integration with Dice So Nice!, Item Piles, and Token Action HUD modules
