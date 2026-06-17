@@ -46,7 +46,7 @@ export default class TeriockUsers extends BaseWorldCollectionMixin(Users) {
       ui.notifications.warn(failMessage, { format: queryOptions.format, localize: queryOptions.localize });
     }
     try {
-      return await this.activeGM?.query(queryName, queryData, queryOptions);
+      return this.activeGM?.query(queryName, queryData, queryOptions);
     } catch (e) {
       console.error(e, queryName, queryData, queryOptions);
       if (queryOptions.fallback) { return queryOptions.fallback; }

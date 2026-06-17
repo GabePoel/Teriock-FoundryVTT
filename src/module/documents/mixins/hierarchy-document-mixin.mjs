@@ -446,7 +446,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /** @inheritDoc */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
-        if (embeddedName === this.documentName) { return await this.createSubDocuments(data, operation); }
+        if (embeddedName === this.documentName) { return this.createSubDocuments(data, operation); }
         return super.createChildDocuments(embeddedName, data, operation);
       }
 

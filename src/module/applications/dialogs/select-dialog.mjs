@@ -45,7 +45,7 @@ export async function selectDialog(choices, options = {}) {
   }
 
   if (!other) {
-    return await TeriockDialog.prompt({
+    return TeriockDialog.prompt({
       content: selectContentHtml,
       modal: true,
       ok: { callback: (_event, button) => button.form.elements.namedItem("selected").value },
@@ -59,7 +59,7 @@ export async function selectDialog(choices, options = {}) {
     otherField.toFormGroup({ rootId: foundry.utils.randomID(), units: "other" }, { name: "other" }),
   );
 
-  return await TeriockDialog.prompt({
+  return TeriockDialog.prompt({
     buttons: [{
       action: "other",
       label: _loc("TERIOCK.DIALOGS.Select.otherButton"),
@@ -67,7 +67,7 @@ export async function selectDialog(choices, options = {}) {
         dialog.classList.add("force-hidden");
         if (genericOther) { return null; }
 
-        return await TeriockDialog.prompt({
+        return TeriockDialog.prompt({
           content: otherContentHtml,
           modal: true,
           ok: { callback: (_event, button) => button.form.elements.namedItem("other").value },
@@ -87,7 +87,7 @@ export async function selectDialog(choices, options = {}) {
  * @returns {Promise<Teriock.Keys.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
-  return await selectDialog(TERIOCK.reference.equipmentClasses, {
+  return selectDialog(TERIOCK.reference.equipmentClasses, {
     hint: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
     label: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
     title: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
@@ -99,7 +99,7 @@ export async function selectEquipmentClassDialog() {
  * @returns {Promise<Teriock.Keys.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
-  return await selectDialog(TERIOCK.reference.weaponClasses, {
+  return selectDialog(TERIOCK.reference.weaponClasses, {
     hint: _loc("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
     label: _loc("TERIOCK.DIALOGS.Select.WeaponClass.label"),
     title: _loc("TERIOCK.DIALOGS.Select.WeaponClass.title"),
@@ -111,7 +111,7 @@ export async function selectWeaponClassDialog() {
  * @returns {Promise<Teriock.Keys.Condition>}
  */
 export async function selectConditionDialog() {
-  return await selectDialog(TERIOCK.reference.conditions, {
+  return selectDialog(TERIOCK.reference.conditions, {
     hint: _loc("TERIOCK.DIALOGS.Select.Condition.hint"),
     label: _loc("TERIOCK.DIALOGS.Select.Condition.label"),
     title: _loc("TERIOCK.DIALOGS.Select.Condition.title"),
@@ -123,7 +123,7 @@ export async function selectConditionDialog() {
  * @returns {Promise<TeriockProperty|void>}
  */
 export async function selectPropertyDialog() {
-  return await resolveDocument(
+  return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.properties), {
       hint: _loc("TERIOCK.DIALOGS.Select.Property.hint"),
       openable: true,
@@ -169,7 +169,7 @@ export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}
  * @returns {Promise<TeriockAbility|void>}
  */
 export async function selectAbilityDialog() {
-  return await resolveDocument(
+  return resolveDocument(
     await selectDocumentDialog(await noSup(game.teriock.packs.abilities), {
       hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
       openable: true,

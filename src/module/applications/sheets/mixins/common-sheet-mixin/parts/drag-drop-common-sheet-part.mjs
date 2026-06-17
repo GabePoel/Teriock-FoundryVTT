@@ -84,7 +84,7 @@ export default Base => {
       /**
        * Handles drop events.
        * @param {Teriock.Sheet.EmbedDragEvent} event
-       * @returns {Promise<boolean>} Promise that resolves to true if the drop was handled.
+       * @returns {Promise<TeriockDocument|boolean>} Promise that resolves to true if the drop was handled.
        */
       async _onDrop(event) {
         const dropData = TeriockTextEditor.getDragEventData(event);
@@ -93,9 +93,9 @@ export default Base => {
           this._onDropAutomation(event);
         } else if (["ActiveEffect", "Actor", "Item"].includes(dropData.type)) {
           if (this._tab === "automations") { return false; }
-          return await this._onDropChild(event, dropData);
+          return this._onDropChild(event, dropData);
         } else if (dropData.type === "JournalEntryPage") {
-          return await this._onDropJournalEntryPage(event, dropData);
+          return this._onDropJournalEntryPage(event, dropData);
         }
         return false;
       }

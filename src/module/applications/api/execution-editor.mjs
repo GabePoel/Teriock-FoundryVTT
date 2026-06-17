@@ -16,6 +16,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
     window: { contentClasses: ["wide-toggles"] },
   };
 
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     content: { template: "teriock/dialogs/execution-editor" },
     footer: { template: "templates/generic/form-footer.hbs" },

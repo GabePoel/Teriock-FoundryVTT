@@ -72,7 +72,7 @@ export async function selectDocumentsDialog(documents, options = {}) {
     }
   }
 
-  const sheet = new TeriockDocumentSelector(context.documents, {
+  const selected = await TeriockDocumentSelector.prompt(context.documents, {
     hint: options.hint,
     icon: options.icon,
     multi: options.multi,
@@ -80,8 +80,6 @@ export async function selectDocumentsDialog(documents, options = {}) {
     title: options.title,
     tooltip: options.tooltip,
   });
-
-  const selected = await sheet.activate();
   if (selected) { return selected.map(id => idToDoc.get(id)).filter(Boolean); }
   return [];
 }

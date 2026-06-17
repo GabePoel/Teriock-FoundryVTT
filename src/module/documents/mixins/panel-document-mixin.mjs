@@ -138,12 +138,12 @@ export default function PanelDocumentMixin(Base) {
       /** @returns {Promise<Teriock.Panels.PanelParts>} */
       async toPanel() {
         const parts = await this.getPanelParts();
-        return await TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
+        return TeriockTextEditor.enrichPanel(parts, { relativeTo: this });
       }
 
       /** @inheritDoc */
       async toTooltip() {
-        return await TeriockTextEditor.makeTooltip(await this.getPanelParts(), { relativeTo: this });
+        return TeriockTextEditor.makeTooltip(await this.getPanelParts(), { relativeTo: this });
       }
     }
   );

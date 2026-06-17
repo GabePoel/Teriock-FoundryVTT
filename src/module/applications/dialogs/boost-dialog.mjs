@@ -61,7 +61,7 @@ export default async function boostDialog(rollFormula, options = {}) {
       placeholder: "0",
     }).toFormGroup({ rootId }, { name: "crit" }),
   );
-  return await TeriockDialog.prompt({
+  return TeriockDialog.prompt({
     content: contentHtml,
     ok: {
       icon: makeIconClass(TERIOCK.display.icons.ui.dice, "title"),

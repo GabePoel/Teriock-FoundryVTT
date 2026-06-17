@@ -35,7 +35,7 @@ export default class ThresholdAutomation extends BaseAutomation {
    * @returns {Promise<number|null>}
    */
   async getThreshold(rollData) {
-    if (this.threshold) { return await BaseRoll.getValue(this.threshold, rollData); }
+    if (this.threshold) { return BaseRoll.getValue(this.threshold, rollData); }
     return null;
   }
 }

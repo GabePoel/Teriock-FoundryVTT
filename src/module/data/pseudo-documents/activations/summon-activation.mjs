@@ -158,7 +158,7 @@ export default class SummonActivation extends BaseActivation {
         ownership: { [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
       })
     );
-    return await canvas.tokens.placeTokens(tokenData, { createOptions: { asGM: true } });
+    return canvas.tokens.placeTokens(tokenData, { createOptions: { asGM: true } });
   }
 
   /**

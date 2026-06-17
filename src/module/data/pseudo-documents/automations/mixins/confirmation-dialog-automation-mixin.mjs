@@ -85,7 +85,7 @@ export default function ConfirmationDialogAutomationMixin(Base) {
           { content, window: { icon: makeIconClass(icon, "title"), title } },
           dialog,
         );
-        return await TeriockDialog.confirm(config);
+        return TeriockDialog.confirm(config);
       }
     }
   );

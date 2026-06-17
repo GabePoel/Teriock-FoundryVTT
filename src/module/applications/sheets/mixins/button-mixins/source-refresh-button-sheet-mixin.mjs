@@ -29,8 +29,7 @@ export default function SourceRefreshButtonSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     static async _onSourceRefresh() {
-      const dialog = new SourceRefreshDialog({ document: this.document });
-      await dialog.render(true);
+      await SourceRefreshDialog.create({ document: this.document });
     }
   };
 }

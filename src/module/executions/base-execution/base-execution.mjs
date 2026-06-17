@@ -236,7 +236,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {Promise<false|void>}
    */
   async _fireActorTrigger(trigger, scope = {}) {
-    return await this.actor?.hookCall(trigger, { scope: this.getScope({ ...scope, trigger }) });
+    return this.actor?.hookCall(trigger, { scope: this.getScope({ ...scope, trigger }) });
   }
 
   /**
@@ -353,7 +353,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   async fireTrigger(trigger, scope) {
     const automations = this.activeAutomations.filter(a => a.actor !== this.actor);
     await this._fireAutomationsTrigger(trigger, scope, { automations });
-    return await this._fireActorTrigger(trigger, scope);
+    return this._fireActorTrigger(trigger, scope);
   }
 
   /**

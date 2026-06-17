@@ -229,7 +229,7 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {Promise<void|any[]>}
        */
       async _preFire(scope) {
-        if (this.triggerMetadata.activationTime === "pre") { return await this._activateActivations(scope); }
+        if (this.triggerMetadata.activationTime === "pre") { return this._activateActivations(scope); }
       }
 
       /** @inheritDoc */

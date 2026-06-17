@@ -11,6 +11,17 @@ export default function BaseApplicationMixin(Base) {
     /** @type {Partial<ApplicationConfiguration>}*/
     static DEFAULT_OPTIONS = { classes: ["teriock"] };
 
+    /**
+     * Make and immediately show this application.
+     * @param {*} args
+     * @returns {Promise<InstanceType<this>>}
+     */
+    static async create(...args) {
+      const app = new this(...args);
+      await app.render(true);
+      return app;
+    }
+
     /** @inheritDoc */
     async _onRender(context, options = {}) {
       await super._onRender(context, options);

@@ -26,6 +26,16 @@ export default class TeriockResolvableDialog extends TeriockBaseApplication {
   }
 
   /**
+   * Show the dialog and wait for interaction to complete.
+   * @param {*} args
+   * @returns {Promise<*>}
+   */
+  static async prompt(...args) {
+    const app = await this.create(...args);
+    return app._result;
+  }
+
+  /**
    * @param {Partial<ApplicationConfiguration>} [config]
    */
   constructor(config = {}) {
@@ -58,14 +68,5 @@ export default class TeriockResolvableDialog extends TeriockBaseApplication {
   _onClose() {
     super._onClose();
     this._finish(this._fallbackFinishValue);
-  }
-
-  /**
-   * Show the dialog and wait for interaction to complete.
-   * @returns {Promise<*>}
-   */
-  async activate() {
-    await this.render(true);
-    return this._result;
   }
 }

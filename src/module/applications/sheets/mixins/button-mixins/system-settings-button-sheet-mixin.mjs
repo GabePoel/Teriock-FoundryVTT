@@ -29,8 +29,7 @@ export default function SystemSettingsButtonSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     static async _onOpenDocumentSettings() {
-      const settingsSheet = new DocumentSettingsSheet({ document: this.document, sheetConfig: false });
-      await settingsSheet.render({ force: true });
+      await DocumentSettingsSheet.create({ document: this.document, sheetConfig: false });
     }
   };
 }
