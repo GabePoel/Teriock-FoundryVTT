@@ -58,7 +58,7 @@ https://github.com/GabePoel/Teriock-FoundryVTT/releases/latest/download/manifest
 
 And plenty of other things including (but not limited to):
 
-- Maps!
+- [Maps!](https://map.teriock.com)
 - Custom vision modes
 - Internal rules reference
 - Wiki integration
