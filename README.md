@@ -68,4 +68,4 @@ And plenty of other things including (but not limited to):
 - Useless spinning Elder Sorcery animations
 - Extensive ability automation
 - Custom (hand-drawn non-AI) art for all abilities, properties, species, effects, etc.
-- Easy integration with Dice So Nice!, Item Piles, and Token Action HUD modules
+- Easy integration with Dice So Nice!, [Item Piles](https://github.com/GabePoel/Teriock-FoundryVTT-Item-Piles), and [Token Action HUD](https://github.com/GabePoel/Teriock-FoundryVTT-Token-Action-HUD) modules
