@@ -126,7 +126,7 @@ export default class PropertySystem
 
   /** @inheritDoc */
   async _use(options = {}) {
-    await new BaseDocumentExecution(options).execute();
+    await BaseDocumentExecution.create(options);
   }
 
   /** @inheritDoc */

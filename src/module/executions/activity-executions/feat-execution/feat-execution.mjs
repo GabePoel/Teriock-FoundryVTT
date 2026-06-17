@@ -15,7 +15,6 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
     this.attribute = options.attribute;
     if (this.actor) { this.bonus = addFormula(this.actor.system.attributes[options.attribute].formula, this.bonus); }
   }
-
   /** @type {Teriock.Keys.Attribute} */
   attribute;
 
@@ -45,6 +44,11 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
   }
 
   /** @inheritDoc */
+  get journalEntryPageIdentifier() {
+    return TERIOCK.config.attribute[this.attribute]?.identifier;
+  }
+
+  /** @inheritDoc */
   get name() {
     return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.reference.attributesFull[this.attribute] });
   }
@@ -61,9 +65,7 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
 
   /** @inheritDoc */
   async _buildPanels() {
-    this.panels = [
-      await (await teriock.fromIdentifier(TERIOCK.config.attribute[this.attribute]?.identifier)).toPanel(),
-    ];
+    this.panels = [await this.journalEntryPage.toPanel()];
   }
 
   /**

@@ -125,7 +125,7 @@ export default class FluencySystem
    */
   async _use(options = {}) {
     options.source = this.parent;
-    await new FluencyExecution(options).execute();
+    await FluencyExecution.create(options);
   }
 
   /** @inheritDoc */

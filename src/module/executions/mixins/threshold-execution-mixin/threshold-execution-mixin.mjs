@@ -74,9 +74,16 @@ export default function ThresholdExecutionMixin(Base) {
           : [{ action: "confirm", default: true, icon: icons.ui.enable, label: "COMMON.Confirm", name: "ok" }];
       }
 
-      /** @returns {Teriock.Execution.ExecutionDialogDocument[]} */
+      /** @inheritDoc */
       get _dialogDocuments() {
-        return [];
+        const docs = super._dialogDocuments ?? [];
+        if (this.journalEntryPage) {
+          docs.push({
+            document: this.journalEntryPage,
+            label: _loc(`TYPES.JournalEntryPage.${this.journalEntryPage.type}`),
+          });
+        }
+        return docs;
       }
 
       /**  @returns {Teriock.Execution.ExecutionDialogEntry[]} */

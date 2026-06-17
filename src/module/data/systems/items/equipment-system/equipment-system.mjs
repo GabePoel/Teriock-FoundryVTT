@@ -185,7 +185,7 @@ export default class EquipmentSystem
     if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
       await this.actor?.useDocument("basic-attack", { type: "ability" });
     }
-    await new EquipmentExecution(options).execute();
+    await EquipmentExecution.create(options);
   }
 
   /** @inheritDoc */

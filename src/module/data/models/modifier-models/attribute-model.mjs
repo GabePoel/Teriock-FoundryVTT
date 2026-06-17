@@ -23,7 +23,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async _use(options) {
-    await new FeatExecution({ actor: this.actor, attribute: this.key, ...options }).execute();
+    await FeatExecution.create({ actor: this.actor, attribute: this.key, ...options });
   }
 
   /** @inheritDoc */

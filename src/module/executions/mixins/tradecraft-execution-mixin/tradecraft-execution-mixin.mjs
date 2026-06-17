@@ -41,6 +41,11 @@ export default function TradecraftExecutionMixin(Base) {
         return TERIOCK.display.icons.tradecraft[this.tradecraft];
       }
 
+      /** @inheritDoc */
+      get journalEntryPageIdentifier() {
+        return `tradecraft:${this.tradecraft}`;
+      }
+
       /**
        * Tradecraft this execution corresponds to.
        * @returns {Teriock.Keys.Tradecraft}

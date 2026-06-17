@@ -9,6 +9,17 @@ class AbstractExecution {}
 
 export default class BaseExecution extends dataMixins.AutomatedDataMixin(AbstractExecution) {
   /**
+   * Create an execution and immediately execute it.
+   * @param  {...any} args
+   * @returns {Promise<InstanceType<this>>}
+   */
+  static async create(...args) {
+    const execution = new this(...args);
+    await execution.execute();
+    return execution;
+  }
+
+  /**
    * Construct an execution.
    * @param {Partial<Teriock.Execution.BaseExecutionOptions>} options
    */
@@ -23,6 +34,9 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
     this._determineCompetence(options);
     options.competence = this.competence.raw;
   }
+
+  /** @type {TeriockJournalEntryPage} */
+  #journalEntryPage;
 
   /** @type {AnyActor|null} */
   _actor;
@@ -153,6 +167,22 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   }
 
   /**
+   * A set journal entry page.
+   * @returns {TeriockJournalEntryPage|null}
+   */
+  get journalEntryPage() {
+    return this.#journalEntryPage;
+  }
+
+  /**
+   * An identifier for a journal entry page to display.
+   * @returns {TypedIdentifier|null}
+   */
+  get journalEntryPageIdentifier() {
+    return null;
+  }
+
+  /**
    * Roll data used by this execution.
    * @returns {object}
    */
@@ -230,6 +260,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   }
 
   /**
+   * Fetch any data that needs to be got asynchronously before other steps.
+   * @returns {Promise<false|void>}
+   */
+  async _fetchData() {
+    this.#journalEntryPage = await teriock.fromIdentifier(this.journalEntryPageIdentifier);
+  }
+
+  /**
    * Propagate a trigger through the connected actor.
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
@@ -292,7 +330,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
 
   /**
    * The start of the execution.
-   * @returns {Promise<void|false>}
+   * @returns {Promise<false|void>}
    */
   async _preExecute() {
     await this._fireAutomationsTrigger("preExecute", { awaitFire: true });
@@ -329,6 +367,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {Promise<false|void>}
    */
   async execute() {
+    if ((await this._fetchData()) === false) { return false; }
     if ((await this._getInput()) === false) { return false; }
     if ((await this._postInput()) === false) { return false; }
     if ((await this._prepareFormula()) === false) { return false; }

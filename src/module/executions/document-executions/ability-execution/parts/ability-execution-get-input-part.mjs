@@ -71,7 +71,6 @@ export default function AbilityExecutionGetInputPart(Base) {
       /** @inheritDoc */
       get _dialogDocuments() {
         const docs = super._dialogDocuments;
-        docs.push({ document: this.source, label: _loc("TYPES.ActiveEffect.ability") });
         if (this.isContact) {
           docs.push({
             document: this.armament,

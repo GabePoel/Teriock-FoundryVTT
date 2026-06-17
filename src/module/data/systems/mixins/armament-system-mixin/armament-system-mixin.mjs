@@ -338,7 +338,7 @@ export default function ArmamentSystemMixin(Base) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
         }
         options.impacts ??= this.impacts;
-        await new ArmamentExecution(options).execute();
+        await ArmamentExecution.create(options);
       }
 
       /** @inheritDoc */

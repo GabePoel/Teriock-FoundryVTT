@@ -341,7 +341,7 @@ export default class AbilitySystem
     if (this.grantOnly && this.parent.parent.metadata.armament) {
       options.armament = /** @type {TeriockArmament} */ this.parent.parent;
     }
-    await new AbilityExecution(options).execute();
+    await AbilityExecution.create(options);
   }
 
   /** @inheritDoc */

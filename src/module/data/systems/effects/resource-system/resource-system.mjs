@@ -36,7 +36,7 @@ export default class ResourceSystem
 
   /** @inheritDoc */
   async _use(options = {}) {
-    await new BaseDocumentExecution(options).execute();
+    await BaseDocumentExecution.create(options);
   }
 
   /** @inheritDoc */

@@ -40,7 +40,7 @@ export default function EmbedCardDocumentMixin(Base) {
           img: this.img,
           makeTooltip: false,
           openable: true,
-          subtitle: _loc(`DOCUMENT.${this.documentName}`),
+          subtitle: this.type ? _loc(`TYPES.${this.documentName}.${this.type}`) : _loc(`DOCUMENT.${this.documentName}`),
           text: this.collectionName,
           title: this.name,
           uuid: this.uuid,

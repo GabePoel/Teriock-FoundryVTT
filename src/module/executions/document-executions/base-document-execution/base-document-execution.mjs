@@ -17,6 +17,13 @@ export default class BaseDocumentExecution extends BaseExecution {
   _source;
 
   /** @inheritDoc */
+  get _dialogDocuments() {
+    const docs = super._dialogDocuments ?? [];
+    docs.unshift({ document: this.source, label: _loc(`TYPES.${this.source.documentName}.${this.source.type}`) });
+    return docs;
+  }
+
+  /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, { system: { _src: this.source.uuid } });
   }

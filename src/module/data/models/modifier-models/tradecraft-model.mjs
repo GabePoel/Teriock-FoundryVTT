@@ -23,7 +23,7 @@ export default class TradecraftModel extends BaseModifierModel {
 
   /** @inheritDoc */
   async _use(options) {
-    await new TradecraftExecution({ actor: this.actor, tradecraft: this.key, ...options }).execute();
+    await TradecraftExecution.create({ actor: this.actor, tradecraft: this.key, ...options });
   }
 
   /** @inheritDoc */
