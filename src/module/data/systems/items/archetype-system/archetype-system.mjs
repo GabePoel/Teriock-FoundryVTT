@@ -36,17 +36,20 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
   }
 
   /**
+   * The identifiers for the classes that provide this.
+   */
+  get classIdentifiers() {
+    return new Set(
+      this.actor?.ranks.filter(r => r.system._source.archetype === this.identifier).map(r => r.system.class),
+    );
+  }
+
+  /**
    * The localized names of all the classes that provide this.
    * @returns {string[]}
    */
   get classNames() {
-    return Array.from(
-      new Set(
-        this.actor?.ranks.filter(r => r.system._source.archetype === this.identifier).map(r =>
-          getName(r.system.class)
-        ),
-      ),
-    ).sort((a, b) => a.localeCompare(b));
+    return Array.from(this.classIdentifiers, id => getName("class", id)).sort((a, b) => a.localeCompare(b));
   }
 
   /** @inheritDoc */

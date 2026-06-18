@@ -2,16 +2,7 @@ import { TernaryField } from "../../fields/_module.mjs";
 import MetaphysicsPreviewModel from "./metaphysics-preview-model.mjs";
 
 /**
- * @typedef {MetaphysicsFilters} PropertyFilters
- * @property {boolean|null} applyIfDampened
- * @property {boolean|null} applyIfDeattuned
- * @property {boolean|null} applyIfShattered
- * @property {boolean|null} applyIfUnequipped
- * @property {boolean|null} consumable
- */
-
-/**
- * @property {PropertyFilters} filters
+ * @property {Teriock.Models.PropertyFilters} filters
  */
 export default class PropertyPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */
@@ -45,13 +36,13 @@ export default class PropertyPreviewModel extends MetaphysicsPreviewModel {
   *filterDocuments(documents) {
     const f = this.filters;
     for (const document of super.filterDocuments(documents)) {
-      const system = document?.system;
+      const s = document?.system;
       if (
-        this._checkTernaryFilter(f.applyIfDampened, system?.applyIfDampened)
-        && this._checkTernaryFilter(f.applyIfDeattuned, system?.applyIfDeattuned)
-        && this._checkTernaryFilter(f.applyIfShattered, system?.applyIfShattered)
-        && this._checkTernaryFilter(f.applyIfUnequipped, system?.applyIfUnequipped)
-        && this._checkTernaryFilter(f.consumable, system?.consumable)
+        this._checkTernaryFilter(f.applyIfDampened, s?.applyIfDampened)
+        && this._checkTernaryFilter(f.applyIfDeattuned, s?.applyIfDeattuned)
+        && this._checkTernaryFilter(f.applyIfShattered, s?.applyIfShattered)
+        && this._checkTernaryFilter(f.applyIfUnequipped, s?.applyIfUnequipped)
+        && this._checkTernaryFilter(f.consumable, s?.consumable)
       ) { yield document; }
     }
   }

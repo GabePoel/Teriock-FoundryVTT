@@ -4,13 +4,7 @@ import { IdentifierField } from "../../fields/_module.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
- * @typedef {BaseFilters} FluencyFilters
- * @property {Teriock.Keys.Field|null} field
- * @property {Teriock.Keys.Tradecraft|null} tradecraft
- */
-
-/**
- * @property {FluencyFilters} filters
+ * @property {Teriock.Models.FluencyFilters} filters
  */
 export default class FluencyPreviewModel extends BasePreviewModel {
   /** @inheritDoc */

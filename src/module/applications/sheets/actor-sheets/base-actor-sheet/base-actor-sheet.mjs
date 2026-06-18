@@ -32,7 +32,7 @@ export default class BaseActorSheet
 
   /**
    * Per-document-type block display defaults applied to the preview models.
-   * @type {Record<string, PreviewDisplay>}
+   * @type {Record<string, Teriock.Models.PreviewDisplay>}
    */
   static PREVIEW_DISPLAY = {
     ability: { gapless: true, size: "small" },
@@ -139,7 +139,7 @@ export default class BaseActorSheet
         empty: d.power.plural,
       }],
       rank: [{ docs: p.rank.previewDocuments(context.ranks ?? []), empty: d.rank.plural }, {
-        docs: context.archetypes ?? [],
+        docs: p.rank.previewDocuments(context.archetypes ?? []),
         empty: d.archetype.plural,
         optional: true,
       }],

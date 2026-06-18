@@ -3,15 +3,7 @@ import { nullString } from "../../fields/helpers/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
- * @typedef {BaseFilters} MetaphysicsFilters
- * @property {Teriock.Keys.EffectType|null} effectType
- * @property {Teriock.Keys.Element|null} element
- * @property {Teriock.Keys.Form|null} form
- * @property {Teriock.Keys.PowerSource|null} powerSource
- */
-
-/**
- * @property {MetaphysicsFilters} filters
+ * @property {Teriock.Models.MetaphysicsFilters} filters
  */
 export default class MetaphysicsPreviewModel extends BasePreviewModel {
   /** @inheritDoc */

@@ -5,19 +5,7 @@ import { nullString } from "../../fields/helpers/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
- * @typedef {BaseFilters} EquipmentFilters
- * @property {Teriock.Keys.EquipmentClass|null} equipmentClasses
- * @property {string|null} properties
- * @property {string|null} weaponFightingStyles
- * @property {Teriock.Keys.PowerLevel|null} powerLevel
- * @property {boolean|null} attuned
- * @property {boolean|null} consumable
- * @property {boolean|null} equipped
- * @property {boolean|null} identified
- */
-
-/**
- * @property {EquipmentFilters} filters
+ * @property {Teriock.Models.EquipmentFilters} filters
  */
 export default class EquipmentPreviewModel extends BasePreviewModel {
   /** @inheritDoc */

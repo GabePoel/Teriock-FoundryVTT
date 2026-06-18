@@ -6,38 +6,10 @@ import EmbeddedDataModel from "../embedded-data-model.mjs";
 const { fields } = foundry.data;
 
 /**
- * @typedef {object} BaseFilters
- * @property {boolean|null} active
- * @property {boolean|null} children
- * @property {boolean|null} duplicates
- * @property {boolean|null} fluent
- * @property {boolean|null} proficient
- */
-
-/**
- * @typedef {object} PreviewMenus
- * @property {boolean} block - Whether the block options menu is open.
- * @property {boolean} filter - Whether the filter menu is open.
- * @property {boolean} sort - Whether the sort menu is open.
- */
-
-/**
- * @typedef {object} PreviewSort
- * @property {boolean} ascending
- * @property {string} option
- */
-
-/**
- * @typedef {object} PreviewDisplay
- * @property {Teriock.Keys.CardDisplaySize} size
- * @property {boolean} gapless
- */
-
-/**
- * @property {PreviewDisplay} display
- * @property {BaseFilters} filters
- * @property {PreviewMenus} menus
- * @property {PreviewSort} sort
+ * @property {Teriock.Models.PreviewDisplay} display
+ * @property {Teriock.Models.BaseFilters} filters
+ * @property {Teriock.Models.PreviewMenus} menus
+ * @property {Teriock.Models.PreviewSort} sort
  * @property {string} search
  */
 export default class BasePreviewModel extends EmbeddedDataModel {
@@ -213,7 +185,7 @@ export default class BasePreviewModel extends EmbeddedDataModel {
   *filterDocuments(documents) {
     // Special handling for the duplicates filter since it has different
     // behavior depending on if it's on or off. If it's on, then all duplicate
-    // documents should be shown. If it's off then only the first instance of
+    // documents should be shown. If it's off, then only the first instance of
     // each document should be shown.
     const knownIdentifiers = new Set();
     const duplicateIdentifiers = new Set();

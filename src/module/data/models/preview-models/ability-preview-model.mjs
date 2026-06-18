@@ -6,33 +6,7 @@ import MetaphysicsPreviewModel from "./metaphysics-preview-model.mjs";
 const { fields } = foundry.data;
 
 /**
- * @typedef {object} CostFilters
- * @property {Record<Teriock.Keys.PrimaryCost, boolean|null>} primary
- * @property {Record<Teriock.Keys.Component, boolean|null>} components
- * @property {Record<Teriock.Keys.CostTweak, boolean|null>} tweaks
- */
-
-/**
- * @typedef {MetaphysicsFilters} AbilityFilters
- * @property {CostFilters} costs
- * @property {Teriock.Keys.Delivery|null} delivery
- * @property {Teriock.Keys.Expansion|null} expansion
- * @property {Teriock.Keys.Interaction|null} interaction
- * @property {Teriock.Keys.Maneuver|null} maneuver
- * @property {Teriock.Keys.Target|null} target
- * @property {boolean|null} basic
- * @property {boolean|null} heightened
- * @property {boolean|null} invoked
- * @property {boolean|null} ritual
- * @property {boolean|null} rotator
- * @property {boolean|null} skill
- * @property {boolean|null} spell
- * @property {boolean|null} standard
- * @property {boolean|null} sustained
- */
-
-/**
- * @property {AbilityFilters} filters
+ * @property {Teriock.Models.AbilityFilters} filters
  */
 export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */

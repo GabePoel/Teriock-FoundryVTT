@@ -3,12 +3,7 @@ import { nullString } from "../../fields/helpers/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
- * @typedef {BaseFilters} PowerFilters
- * @property {Teriock.Keys.PowerType|null} type
- */
-
-/**
- * @property {PowerFilters} filters
+ * @property {Teriock.Models.PowerFilters} filters
  */
 export default class PowerPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
