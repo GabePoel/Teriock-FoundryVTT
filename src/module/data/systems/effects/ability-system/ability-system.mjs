@@ -34,6 +34,7 @@ const { fields } = foundry.data;
  * @mixes AttackSystem
  * @mixes CompetenceDisplaySystem
  * @mixes ConsumableSystem
+ * @mixes ExpirableSystem
  * @mixes MetaphysicsSystem
  * @mixes RevelationSystem
  * @mixes ThresholdData
@@ -50,6 +51,7 @@ export default class AbilitySystem
     systemMixins.RevelationSystemMixin,
     systemMixins.WikiSystemMixin,
     systemMixins.AdjustableSystemMixin,
+    systemMixins.ExpirableSystemMixin,
     parts.AbilityAutomationsPart,
     parts.AbilityCostsPart,
     parts.AbilityDurationPart,

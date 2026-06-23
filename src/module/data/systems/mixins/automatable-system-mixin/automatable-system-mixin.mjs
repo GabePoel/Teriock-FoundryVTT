@@ -59,11 +59,6 @@ export default function AutomatableSystemMixin(Base) {
         }
         return super.migrateData(source, options, state);
       }
-
-      /** @inheritDoc */
-      get pseudoCollections() {
-        return Object.assign(super.pseudoCollections, { Automation: this.automations });
-      }
     }
   );
 }

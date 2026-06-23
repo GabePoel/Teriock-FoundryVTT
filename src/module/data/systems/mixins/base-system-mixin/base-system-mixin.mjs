@@ -27,6 +27,12 @@ export default function BaseSystemMixin(Base) {
       }
 
       /**
+       * Cached pseudo-document collections map.
+       * @type {Record<string, TypeCollection>}
+       */
+      #pseudoCollections;
+
+      /**
        * Custom buttons to activate things from sheet menus. Should not toggle HTML fields.
        * @returns {Teriock.Display.DisplayButton[]}
        */
@@ -149,7 +155,14 @@ export default function BaseSystemMixin(Base) {
        * @returns {Record<string, TypeCollection>}
        */
       get pseudoCollections() {
-        return {};
+        if (!this.#pseudoCollections) {
+          this.#pseudoCollections = {};
+          const pseudoMap = this.metadata?.pseudos ?? {};
+          for (const [documentName, path] of Object.entries(pseudoMap)) {
+            this.#pseudoCollections[documentName] = foundry.utils.getProperty(this.parent, path);
+          }
+        }
+        return this.#pseudoCollections;
       }
 
       /**

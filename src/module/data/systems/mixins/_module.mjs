@@ -10,6 +10,7 @@ export { default as CombatExpirableSystemMixin } from "./combat-expirable-system
 export { default as CommonSystemMixin } from "./common-system-mixin/common-system-mixin.mjs";
 export { default as CompetenceDisplaySystemMixin } from "./competence-display-system-mixin.mjs";
 export { default as ConsumableSystemMixin } from "./consumable-system-mixin/consumable-system-mixin.mjs";
+export { default as ExpirableSystemMixin } from "./expirable-system-mixin/expirable-system-mixin.mjs";
 export { default as GrantedSystemMixin } from "./granted-system-mixin/granted-system-mixin.mjs";
 export { default as HierarchySystemMixin } from "./hierarchy-system-mixin/hierarchy-system-mixin.mjs";
 export { default as MetaphysicsSystemMixin } from "./metaphysics-system-mixin/metaphysics-system-mixin.mjs";

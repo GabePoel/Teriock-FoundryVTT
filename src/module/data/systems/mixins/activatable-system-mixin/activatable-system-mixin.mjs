@@ -42,11 +42,6 @@ export default function ActivatableSystemMixin(Base) {
         });
       }
 
-      /** @inheritDoc */
-      get pseudoCollections() {
-        return Object.assign(super.pseudoCollections, { Activation: this.activations });
-      }
-
       /**
        * Connect all activation listeners to some HTML element.
        * @param {HTMLElement} element

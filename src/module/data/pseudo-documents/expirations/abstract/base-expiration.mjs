@@ -6,6 +6,9 @@ import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @extends {Teriock.Expirations.BaseExpirationData}
+ */
 export default class BaseExpiration extends TypedPseudoDocument {
   /** @inheritDoc */
   static get metadata() {

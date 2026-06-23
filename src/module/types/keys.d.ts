@@ -101,5 +101,8 @@ declare global {
     export type Movement = keyof typeof config.character.movement;
     export type Sense = keyof typeof config.character.sense;
     export type Speed = keyof typeof config.character.speed;
+
+    // Math Keys
+    export type Comparison = keyof typeof config.math.comparisons;
   }
 }
