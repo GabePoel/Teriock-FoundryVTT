@@ -18,6 +18,7 @@ import hackConfig from "./hack-config.mjs";
 import illusionConfig from "./illusion-config.mjs";
 import impactConfig from "./impact-config.mjs";
 import indexConfig from "./index-config.mjs";
+import mathConfig from "./math-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
 import powerConfig from "./power-config.mjs";
 import protectionConfig from "./protection-config.mjs";
@@ -48,6 +49,7 @@ const config = {
   illusion: illusionConfig,
   impact: impactConfig,
   index: indexConfig,
+  math: mathConfig,
   piercing: piercingConfig,
   power: powerConfig,
   protection: protectionConfig,

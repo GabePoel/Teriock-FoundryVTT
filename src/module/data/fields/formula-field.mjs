@@ -122,7 +122,9 @@ export default class FormulaField extends StringField {
   _validateType(value) {
     if (this.deterministic) {
       const roll = new BaseRoll(value, {});
-      if (!roll.isDeterministic) { throw new Error(`Deterministic formula must not contain dice terms: ${value}`); }
+      if (!roll.isDeterministic) {
+        throw new Error(`Deterministic formula must not contain dice terms: ${value}`);
+      }
     }
     super._validateType(value);
   }
@@ -131,11 +133,17 @@ export default class FormulaField extends StringField {
   applyChange(value, model, change, { replacementData = {} } = {}) {
     let updated;
     const delta = change.value;
-    if (change.type === "boost") { updated = this._applyChangeBoost(value, delta, model, change); }
-    else if (change.type === "typeAdd") { updated = this._applyChangeTypeAdd(value, delta, model, change); }
-    else if (change.type === "typeRemove") { updated = this._applyChangeTypeRemove(value, delta, model, change); }
-    else if (change.type === "typeSet") { updated = this._applyChangeTypeSet(value, delta, model, change); }
-    else { return super.applyChange(value, model, change, { replacementData }); }
+    if (change.type === "boost") {
+      updated = this._applyChangeBoost(value, delta, model, change);
+    } else if (change.type === "typeAdd") {
+      updated = this._applyChangeTypeAdd(value, delta, model, change);
+    } else if (change.type === "typeRemove") {
+      updated = this._applyChangeTypeRemove(value, delta, model, change);
+    } else if (change.type === "typeSet") {
+      updated = this._applyChangeTypeSet(value, delta, model, change);
+    } else {
+      return super.applyChange(value, model, change, { replacementData });
+    }
     return this.initialize(updated, model);
   }
 
@@ -143,6 +151,7 @@ export default class FormulaField extends StringField {
   toFormGroup(groupConfig = {}, inputConfig = {}) {
     groupConfig.classes ||= [];
     groupConfig.classes.push("formula-input");
+    groupConfig.units ??= _loc(`TERIOCK.TERMS.Formula.${this.deterministic ? "deterministic" : "rollable"}`);
     return super.toFormGroup(groupConfig, inputConfig);
   }
 }

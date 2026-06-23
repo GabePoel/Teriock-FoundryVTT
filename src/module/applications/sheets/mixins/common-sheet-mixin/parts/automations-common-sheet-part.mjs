@@ -157,6 +157,7 @@ export default Base => {
             const auto = await fromUuid(uuid);
             await auto?.duplicate();
           },
+          visible: () => this.isEditable,
         }, {
           icon: makeIcon(TERIOCK.display.icons.ui.delete),
           label: _loc("COMMON.Delete"),
@@ -166,6 +167,7 @@ export default Base => {
             const auto = await fromUuid(uuid);
             await auto?.deleteDialog({ modal: true });
           },
+          visible: () => this.isEditable,
         }], { eventName: "contextmenu", fixed: true, jQuery: false });
       }
 
