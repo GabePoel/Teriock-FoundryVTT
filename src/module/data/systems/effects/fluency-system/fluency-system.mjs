@@ -1,11 +1,10 @@
-import tradecraftConfig from "../../../../constants/config/tradecraft-config.mjs";
 import { iconManifest } from "../../../../constants/display/_module.mjs";
 import { FluencyExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { getName, objectMap } from "../../../../helpers/utils.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { getName } from "../../../../helpers/utils.mjs";
+import { fieldField, tradecraftField } from "../../../fields/helpers/builders.mjs";
 import { initialText } from "../../../fields/helpers/initializers.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
@@ -54,18 +53,8 @@ export default class FluencySystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 2 } }),
-      field: new IdentifierField({
-        choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
-        initial: "artisan",
-        nullable: false,
-        required: true,
-        type: "field",
-      }),
-      tradecraft: new IdentifierField({
-        initial: "artist",
-        label: "TERIOCK.TERMS.Common.tradecraft",
-        type: "tradecraft",
-      }),
+      field: fieldField({ required: true }),
+      tradecraft: tradecraftField({ required: true }),
       tradecraftDescription: initialText({ label: "TERIOCK.TERMS.Common.tradecraft" }),
     });
   }

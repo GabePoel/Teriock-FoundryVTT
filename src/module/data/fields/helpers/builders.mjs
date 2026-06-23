@@ -1,7 +1,10 @@
-import { EvaluationField, FormulaField } from "../_module.mjs";
+import { EvaluationField, FormulaField, IdentifierField } from "../_module.mjs";
+import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
+import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
+import { toKebabCase } from "../../../helpers/string.mjs";
+import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
 
 const {
@@ -16,6 +19,38 @@ const {
   SetField,
   StringField,
 } = foundry.data.fields;
+
+/**
+ * Tradecraft choices.
+ * @returns {Record<string, FormSelectOption>}
+ */
+function getTradecraftChoices() {
+  const RAW_TRADECRAFT_CHOICES = {};
+  for (const [k, v] of Object.entries(tradecraftConfig.tradecrafts)) {
+    const fieldKey = v.field;
+    if (!RAW_TRADECRAFT_CHOICES[fieldKey]) {
+      RAW_TRADECRAFT_CHOICES[fieldKey] = { choices: {}, label: _loc(tradecraftConfig.fields[fieldKey].label) };
+    }
+    RAW_TRADECRAFT_CHOICES[fieldKey].choices[toKebabCase(k)] = _loc(v.label);
+  }
+  return formatDynamicSelectOptions(RAW_TRADECRAFT_CHOICES);
+}
+
+/**
+ * Class choices.
+ * @returns {Record<string, FormSelectOption>}
+ */
+function getClassChoices() {
+  const RAW_CLASS_CHOICES = {};
+  for (const [k, v] of Object.entries(classConfig.classes)) {
+    const archetypeKey = v.archetype;
+    if (!RAW_CLASS_CHOICES[archetypeKey]) {
+      RAW_CLASS_CHOICES[archetypeKey] = { choices: {}, label: _loc(classConfig.archetypes[archetypeKey].label) };
+    }
+    RAW_CLASS_CHOICES[archetypeKey].choices[toKebabCase(k)] = _loc(v.label);
+  }
+  return formatDynamicSelectOptions(RAW_CLASS_CHOICES);
+}
 
 /**
  * Field for source portion of combat expiration.
@@ -356,4 +391,77 @@ export function rollableFormulaField(options = {}) {
  */
 export function defenseField(options = {}) {
   return new EvaluationField({ deterministic: true, floor: true, min: 0, model: DefenseModel, ...options });
+}
+
+/**
+ * Field for selecting a tradecraft.
+ * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+ * @returns {IdentifierField}
+ */
+export function tradecraftField(options = {}) {
+  return new IdentifierField({
+    choices: getTradecraftChoices(),
+    initial: Object.keys(TERIOCK.reference.tradecrafts)[0],
+    label: _loc("TERIOCK.TERMS.Common.tradecraft"),
+    nullable: false,
+    type: "tradecraft",
+    ...options,
+  });
+}
+
+/**
+ * Field for selecting multiple tradecrafts.
+ * @param {ArrayFieldOptions} [options]
+ * @returns {SetField}
+ */
+export function tradecraftsField(options = {}) {
+  return new SetField(new StringField({ choices: getTradecraftChoices() }), options);
+}
+
+/**
+ * Field for selecting a field.
+ * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+ * @returns {IdentifierField}
+ */
+export function fieldField(options = {}) {
+  return new IdentifierField({
+    choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
+    initial: Object.keys(tradecraftConfig.fields)[0],
+    label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
+    nullable: false,
+    type: "field",
+    ...options,
+  });
+}
+
+/**
+ * Field for selecting a class.
+ * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+ * @returns {IdentifierField}
+ */
+export function classField(options = {}) {
+  return new IdentifierField({
+    choices: getClassChoices(),
+    initial: Object.keys(TERIOCK.reference.classes)[0],
+    label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
+    nullable: false,
+    type: "class",
+    ...options,
+  });
+}
+
+/**
+ * Field for selecting an archetype.
+ * @param {StringFieldOptions & Teriock.Fields._IdentifierFieldOptions} [options]
+ * @returns {IdentifierField}
+ */
+export function archetypeField(options = {}) {
+  return new IdentifierField({
+    choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
+    initial: Object.keys(classConfig.archetypes)[0],
+    label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
+    nullable: false,
+    type: "archetype",
+    ...options,
+  });
 }

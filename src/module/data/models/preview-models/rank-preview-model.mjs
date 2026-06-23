@@ -1,7 +1,5 @@
-import classConfig from "../../../constants/config/class-config.mjs";
-import { toKebabCase } from "../../../helpers/string.mjs";
-import { objectMap } from "../../../helpers/utils.mjs";
-import { IdentifierField, TernaryField } from "../../fields/_module.mjs";
+import { TernaryField } from "../../fields/_module.mjs";
+import { archetypeField, classField } from "../../fields/helpers/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
@@ -12,22 +10,8 @@ export default class RankPreviewModel extends BasePreviewModel {
   /** @inheritDoc */
   static defineFilters() {
     return Object.assign(super.defineFilters(), {
-      archetype: new IdentifierField({
-        choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
-        initial: null,
-        label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
-        nullable: true,
-        type: "archetype",
-      }),
-      class: new IdentifierField({
-        choices: Object.fromEntries(
-          Object.entries(classConfig.classes).map(([k, v]) => [toKebabCase(k), _loc(v.label)]),
-        ),
-        initial: null,
-        label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
-        nullable: true,
-        type: "class",
-      }),
+      archetype: archetypeField({ initial: null, nullable: true }),
+      class: classField({ initial: null, nullable: true }),
       innate: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.innate.label") }),
     });
   }
