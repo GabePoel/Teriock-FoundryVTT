@@ -122,7 +122,7 @@ export default function AttunableSystemMixin(Base) {
             format: { name: this.parent.fullName },
             localize: true,
           });
-          await this.parent.sheet?.render();
+          await this.parent.render();
         } else {
           ui.notifications.error("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.notEnoughPresence", {
             format: { name: this.parent.fullName },
@@ -162,7 +162,7 @@ export default function AttunableSystemMixin(Base) {
             format: { name: this.parent.fullName },
             localize: true,
           });
-          await this.parent.sheet?.render();
+          await this.parent?.render();
         }
       }
 
