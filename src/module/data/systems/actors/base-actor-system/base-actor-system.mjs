@@ -1,7 +1,10 @@
+import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { makeIcon } from "../../../../helpers/utils.mjs";
 import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
+import { StatusExpiration } from "../../../pseudo-documents/expirations/_module.mjs";
+import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -173,5 +176,9 @@ export default class BaseActorSystem
     const toDelete = this.parent.applicables.filter(e => e.system.shouldExpireFromConditions()).map(e => e.id);
     await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
     await Promise.all([...this.parent.getDependentTokens().map(t => t.postActorUpdate())]);
+    TeriockActiveEffect.registry.refresh(BaseExpiration.EXPIRY_VALIDATION_EVENT, {
+      actors: new Set([this.parent]),
+      type: StatusExpiration.TYPE,
+    });
   }
 }

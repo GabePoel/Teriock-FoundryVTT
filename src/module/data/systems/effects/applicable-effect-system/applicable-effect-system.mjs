@@ -5,6 +5,7 @@ import { builders } from "../../../fields/helpers/_module.mjs";
 import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import DurationModel from "../../../models/unit-models/duration-model.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
@@ -57,6 +58,7 @@ export default class ApplicableEffectSystem
     return foundry.utils.mergeObject(super.defineSchema(), {
       blocks: builders.blocksField(),
       critical: new fields.BooleanField(),
+      executor: new fields.DocumentUUIDField({ nullable: true, type: "Actor" }),
       expirations: new fields.SchemaField({
         combat: new fields.SchemaField({
           what: builders.combatExpirationMethodField(),
@@ -194,6 +196,14 @@ export default class ApplicableEffectSystem
   /** @inheritDoc */
   async _use(_options = {}) {
     await this.inCombatExpiration(true);
+  }
+
+  /** @inheritDoc */
+  isExpiryEvent(event, _context) {
+    if (event === BaseExpiration.EXPIRY_VALIDATION_EVENT || event === BaseExpiration.EXPIRY_CLEANUP_EVENT) {
+      // TODO: Process with expiration pseudo-documents instead.
+      return false;
+    }
   }
 
   /** @inheritDoc */

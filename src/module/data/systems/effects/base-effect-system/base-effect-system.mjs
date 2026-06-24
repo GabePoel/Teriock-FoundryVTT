@@ -193,6 +193,17 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     return data;
   }
 
+  /**
+   * Subtype-specific handling expiry event determination. This check is independent of whether the duration was also
+   * reached. If this returns `null`, then the default ActiveEffect handling is used.
+   * @param {string} _event
+   * @param {object} _context
+   * @returns {boolean|null}
+   */
+  isExpiryEvent(_event, _context) {
+    return null;
+  }
+
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();

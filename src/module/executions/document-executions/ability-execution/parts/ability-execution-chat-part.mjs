@@ -253,6 +253,7 @@ export default function AbilityExecutionChatPart(Base) {
             competence: { raw: this.competence.value },
             critical: crit,
             deleteOnExpire: true,
+            executor: this.actor?.uuid ?? null,
             expirations: this.#generateEffectExpirations(crit),
             heightened: this.heightened,
             identifier: `${this.source.forcedIdentifier}-effect`,

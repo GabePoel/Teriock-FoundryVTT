@@ -1,7 +1,10 @@
 import { config } from "../../constants/_module.mjs";
+import { TriggerExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
+import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
+import TeriockActiveEffect from "../active-effect/active-effect.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Actor } = foundry.documents;
@@ -441,6 +444,17 @@ export default class TeriockActor
   async getTokenDocument(data = {}, options = {}) {
     if (game.canvas.scene.grid.type === 0) { data.shape ??= 0; }
     return super.getTokenDocument(data, options);
+  }
+
+  /** @inheritDoc */
+  async hookCall(trigger, options = {}) {
+    const out = await super.hookCall(trigger, options);
+    TeriockActiveEffect.registry.refresh(BaseExpiration.EXPIRY_VALIDATION_EVENT, {
+      actors: new Set([this]),
+      trigger,
+      type: TriggerExpiration.TYPE,
+    });
+    return out;
   }
 
   /** @inheritDoc */

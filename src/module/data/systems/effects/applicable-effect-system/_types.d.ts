@@ -14,6 +14,8 @@ declare global {
       blocks: Teriock.Panels.PanelBlock[];
       /** <schema> If this was the result of an effect that went critical */
       critical: boolean;
+      /** <schema> UUID of the actor which executed the ability this is sourced from */
+      executor: UUID<TeriockActor> | null;
       /** <schema> Circumstances in which this effect is active or expires */
       expirations: {
         /** <schema> Expirations based on combat timing */
