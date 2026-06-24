@@ -53,10 +53,7 @@ export default function HierarchyDocumentMixin(Base) {
           operation.renderSheet = false;
           for (const [i, document] of documents.entries()) {
             if (operation.dontRenderSheets.includes(document.id)) { continue; }
-            document.sheet?.render(true, {
-              renderContext: `create${this.documentName}`,
-              renderData: operation.data[i],
-            });
+            document?.render(true, { renderContext: `create${this.documentName}`, renderData: operation.data[i] });
           }
         }
         await super._onCreateOperation(documents, operation, user);
@@ -272,7 +269,7 @@ export default function HierarchyDocumentMixin(Base) {
         const doc = this.dependee;
         if (!doc) { return; }
         if (typeof doc.resetChildMaps === "function") { doc.resetChildMaps(); }
-        if (doc.isViewer) { doc?.sheet?.render({ force: false }); }
+        if (doc.isViewer) { doc.render(); }
       }
 
       /**
@@ -282,7 +279,7 @@ export default function HierarchyDocumentMixin(Base) {
         this.getAllSups().then(result => {
           result.forEach(doc => {
             if (typeof doc.resetChildMaps === "function") { doc.resetChildMaps(); }
-            if (doc.isViewer) { doc.sheet?.render({ force: false }); }
+            if (doc.isViewer) { doc.render(); }
           });
         });
         if (this.collection.name === "CompendiumCollection") {

@@ -49,15 +49,15 @@ export default function EquipmentDropSheetMixin(Base) {
           const oldElder = await resolveDocument(_elder);
           if (stack) {
             await doc.delete();
-            if (oldElder) { await oldElder.sheet?.render(); }
+            if (oldElder) { await oldElder.render(); }
             return stack;
           } else if (this.document.type === "equipment" && this.document.system.storage.enabled) {
             await doc.update({ "system._sup": this.document.id });
-            if (oldElder) { await oldElder.sheet?.render(); }
+            if (oldElder) { await oldElder.render(); }
             return doc;
           } else if (this.document.documentName === "Actor") {
             await doc.update({ "system._sup": null });
-            if (oldElder) { await oldElder.sheet?.render(); }
+            if (oldElder) { await oldElder.render(); }
             return doc;
           }
         }

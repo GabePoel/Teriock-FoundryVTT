@@ -87,11 +87,11 @@ export default Base => {
               this.actor.createEmbeddedDocuments("Item", [data], op);
               if (this.actor.sheet?.rendered) {
                 this.actor.sheet._activeTab = "inventory";
-                this.actor.sheet.render();
+                await this.actor.sheet.render();
               }
             } else {
               TeriockItem.create(data, op);
-              foundry.ui.items?.activate();
+              ui.items?.activate();
             }
           },
         });

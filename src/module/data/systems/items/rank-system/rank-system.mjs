@@ -2,8 +2,8 @@ import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { getName, objectMap } from "../../../../helpers/utils.mjs";
-import { IdentifierField } from "../../../fields/_module.mjs";
+import { getName } from "../../../../helpers/utils.mjs";
+import { archetypeField, classField } from "../../../fields/helpers/builders.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { migrateKey, migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -43,18 +43,8 @@ export default class RankSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      archetype: new IdentifierField({
-        choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
-        initial: "everyman",
-        type: "archetype",
-      }),
-      class: new IdentifierField({
-        choices: Object.fromEntries(
-          Object.entries(classConfig.classes).map(([k, v]) => [toKebabCase(k), _loc(v.label)]),
-        ),
-        initial: "journeyman",
-        type: "class",
-      }),
+      archetype: archetypeField(),
+      class: classField(),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
       innate: new fields.BooleanField({ initial: false }),

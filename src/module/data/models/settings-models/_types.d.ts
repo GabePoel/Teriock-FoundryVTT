@@ -1,22 +1,9 @@
-import characterConfig from "../../../constants/config/character-config.mjs";
 import { BaseActorSystem } from "../../systems/actors/_module.mjs";
 import { AbilitySystem, BaseEffectSystem } from "../../systems/effects/_module.mjs";
 import { BaseItemSystem } from "../../systems/items/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    type TabNames = typeof characterConfig.tabs[number]["key"];
-
-    export type ActorSettingsSheetData =
-      & {
-        /** <schema> Whether these blocks render without gaps */
-        [K in TabNames as `block${K}Gapless`]: boolean;
-      }
-      & {
-        /** <schema> Display size for these blocks */
-        [K in TabNames as `block${K}Size`]: Teriock.Keys.CardDisplaySize;
-      };
-
     export type ActorSettingsAutomationData = {
       /** <schema> Whether non-hierarchical changes apply to children */
       nonHierarchicalChanges: boolean;
@@ -52,8 +39,6 @@ declare global {
     export type ActorSettingsModelData = {
       /** <schema> Automation behavior settings */
       automation: ActorSettingsAutomationData;
-      /** <schema> Sheet display settings */
-      sheet: ActorSettingsSheetData;
       /** <schema> Token sync settings */
       token: ActorSettingsTokenData;
 

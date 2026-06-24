@@ -19,7 +19,7 @@ export default class TeriockItemDirectory extends DocumentDirectoryMixin(ItemDir
         const data = await this._getDocumentFromLi(li)?.system.toCreature();
         if (!data) { return; }
         TeriockActor.create(data, { renderSheet: true });
-        foundry.ui.actors?.activate();
+        ui.actors?.activate();
       },
       visible: li => this._getDocumentFromLi(li)?.type === "species" && game.user.hasPermission("ACTOR_CREATE"),
     }, ...super._getEntryContextOptions()];
