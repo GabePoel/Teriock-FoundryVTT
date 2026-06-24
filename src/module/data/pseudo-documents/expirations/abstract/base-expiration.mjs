@@ -75,7 +75,7 @@ export default class BaseExpiration extends TypedPseudoDocument {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["method", ...this._formPathsRoll, "result"];
+    return ["method", ...this._formPathsRoll, "result", "hr"];
   }
 
   /**
@@ -96,8 +96,7 @@ export default class BaseExpiration extends TypedPseudoDocument {
    */
   isExpiryEvent(event, context = {}) {
     if (!this.isValidEvent(event, context)) { return false; }
-    if (this.isRollEvent(event, context)) { return false; }
-    return true;
+    return !this.isRollEvent(event, context);
   }
 
   /**
