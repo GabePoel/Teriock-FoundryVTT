@@ -9,25 +9,6 @@ img: systems/teriock/src/icons/abilities/jumpstart-heal.webp
 name: Jumpstart Heal
 system:
   automations:
-    mu7Bjc7TUzFrkPCm:
-      _id: mu7Bjc7TUzFrkPCm
-      combat:
-        what:
-          roll: 2d4kh1
-          threshold: 4
-          type: forced
-        when:
-          skip: 0
-          time: start
-          trigger: turn
-        who:
-          type: target
-      override:
-        combat: true
-        triggers: true
-      triggers:
-        - damage
-      type: expiration
     do0moPMb5BgARhLv:
       _id: do0moPMb5BgARhLv
       consumeStatDice: true
@@ -46,6 +27,19 @@ system:
   endCondition: <p>The start of the target's next @Identifier[core:turns]{turn}.</p>
   executionTime:
     base: a1
+  expirations:
+    cdd190efe70ff5c5:
+      _id: cdd190efe70ff5c5
+      event: turn
+      relation: target
+      skip: 0
+      timing: start
+      type: combat
+    bbf9eafe29e97d6c:
+      _id: bbf9eafe29e97d6c
+      triggers:
+        - damage
+      type: trigger
   form: normal
   identifier: jumpstart-heal
   interaction: attack

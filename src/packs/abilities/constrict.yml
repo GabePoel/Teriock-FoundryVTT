@@ -8,34 +8,28 @@ _stats:
 img: systems/teriock/src/icons/abilities/constrict.webp
 name: Constrict
 system:
-  automations:
-    d635eb44dba086dd:
-      _id: d635eb44dba086dd
-      combat:
-        what:
-          roll: 2d4kh1
-          threshold: 4
-          type: forced
-        when:
-          skip: 0
-          time: start
-          trigger: turn
-        who:
-          type: executor
-      override:
-        combat: true
-      type: expiration
   competence:
     raw: 0
   delivery: hand
   duration:
     raw: '10'
-    triggers:
-      - movement
     unit: second
   endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
   executionTime:
     base: a1
+  expirations:
+    66672059c7a29a30:
+      _id: 66672059c7a29a30
+      event: turn
+      relation: executor
+      skip: 0
+      timing: start
+      type: combat
+    d1f6b6eaa581aa10:
+      _id: d1f6b6eaa581aa10
+      triggers:
+        - movement
+      type: trigger
   featSaveAttribute: str
   form: normal
   identifier: constrict

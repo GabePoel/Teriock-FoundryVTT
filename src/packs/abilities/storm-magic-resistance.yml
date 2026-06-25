@@ -11,7 +11,7 @@ system:
   automations:
     VqTewc25VT1TySs2:
       _id: VqTewc25VT1TySs2
-      activeQualifier: and(not(@status.down))
+      activeQualifier: not(@status.down)
       category: elements
       relation: resistances
       type: protection
@@ -25,9 +25,6 @@ system:
     raw: 0
   delivery: self
   duration:
-    conditions:
-      absent:
-        - down
     unit: unlimited
   effectTypes:
     - resistance

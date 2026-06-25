@@ -260,23 +260,6 @@ effects:
     img: systems/teriock/src/icons/abilities/disruption-ball.webp
     name: Disruption Ball
     system:
-      automations:
-        d635eb44dba086dd:
-          _id: d635eb44dba086dd
-          combat:
-            what:
-              roll: 2d4kh1
-              threshold: 4
-              type: rolled
-            when:
-              skip: 0
-              time: end
-              trigger: turn
-            who:
-              type: target
-          override:
-            combat: true
-          type: expiration
       competence:
         raw: 0
       costs:
@@ -299,6 +282,19 @@ effects:
         ends.</p>
       executionTime:
         base: r1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: turn
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: end
+          type: combat
       form: normal
       identifier: disruption-ball
       interaction: attack

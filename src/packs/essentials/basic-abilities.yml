@@ -302,13 +302,17 @@ effects:
         raw: 0
       delivery: self
       duration:
-        conditions:
-          absent:
-            - dead
         unit: unlimited
       endCondition: <p>This effect ends if you @Identifier[status:dead]{die}.</p>
       executionTime:
         base: a1
+      expirations:
+        05f6d4dd9db56877:
+          _id: 05f6d4dd9db56877
+          statuses:
+            present:
+              - dead
+          type: status
       form: intrinsic
       identifier: attune
       interaction: manifest
@@ -935,23 +939,6 @@ effects:
     img: systems/teriock/src/icons/abilities/disengage.webp
     name: Disengage
     system:
-      automations:
-        Jf7lm5O9p6bUY22C:
-          _id: Jf7lm5O9p6bUY22C
-          combat:
-            what:
-              roll: 2d4kh1
-              threshold: 4
-              type: forced
-            when:
-              skip: 0
-              time: end
-              trigger: turn
-            who:
-              type: everyone
-          override:
-            combat: true
-          type: expiration
       basic: true
       competence:
         raw: 0
@@ -962,6 +949,14 @@ effects:
       endCondition: <p>The turn ends.</p>
       executionTime:
         base: a1
+      expirations:
+        f953eeab832f574e:
+          _id: f953eeab832f574e
+          event: turn
+          relation: everyone
+          skip: 0
+          timing: end
+          type: combat
       form: intrinsic
       identifier: disengage
       interaction: manifest
@@ -1689,23 +1684,6 @@ effects:
     img: systems/teriock/src/icons/abilities/power-through.webp
     name: Power Through
     system:
-      automations:
-        q5Iy9zdvgLTuzdmS:
-          _id: q5Iy9zdvgLTuzdmS
-          combat:
-            what:
-              roll: 2d4kh1
-              threshold: 4
-              type: forced
-            when:
-              skip: 0
-              time: end
-              trigger: turn
-            who:
-              type: everyone
-          override:
-            combat: true
-          type: expiration
       basic: true
       competence:
         raw: 0
@@ -1721,6 +1699,14 @@ effects:
       endCondition: <p>The turn ends.</p>
       executionTime:
         base: a0
+      expirations:
+        7c3b427d7098bbe9:
+          _id: 7c3b427d7098bbe9
+          event: turn
+          relation: everyone
+          skip: 0
+          timing: end
+          type: combat
       form: intrinsic
       identifier: power-through
       interaction: manifest

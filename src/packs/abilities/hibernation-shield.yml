@@ -12,17 +12,24 @@ system:
     raw: 0
   delivery: sight
   duration:
-    conditions:
-      present:
-        - down
-    triggers:
-      - dawn
     unit: unlimited
   elements:
     - life
   endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
   executionTime:
     base: r1
+  expirations:
+    05f6d4dd9db56877:
+      _id: 05f6d4dd9db56877
+      statuses:
+        absent:
+          - down
+      type: status
+    d1f6b6eaa581aa10:
+      _id: d1f6b6eaa581aa10
+      triggers:
+        - dawn
+      type: trigger
   form: normal
   identifier: hibernation-shield
   interaction: manifest

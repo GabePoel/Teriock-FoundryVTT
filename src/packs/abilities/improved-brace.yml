@@ -11,6 +11,7 @@ system:
   automations:
     e789ed5e109ebd1a:
       _id: e789ed5e109ebd1a
+      activeQualifier: not(@status.down)
       changes:
         - key: flags.rollData.braceDieSize
           priority: 10
@@ -22,9 +23,6 @@ system:
     raw: 0
   delivery: self
   duration:
-    conditions:
-      absent:
-        - down
     unit: unlimited
   executionTime:
     base: passive

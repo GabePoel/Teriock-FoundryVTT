@@ -67,9 +67,7 @@ effects:
       automations:
         Suc9ayhHqRkmjAwZ:
           _id: Suc9ayhHqRkmjAwZ
-          activeQualifier: >-
-            and(not(@status.dead), not(@status.burned), not(@status.dead),
-            not(@status.frozen))
+          activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
           consumeStatDice: false
           forHarm: false
           noStatDice: false
@@ -79,9 +77,6 @@ effects:
         raw: 0
       delivery: self
       duration:
-        conditions:
-          absent:
-            - dead
         unit: unlimited
       effectTypes:
         - healing
@@ -437,8 +432,6 @@ effects:
       delivery: self
       duration:
         raw: '24'
-        triggers:
-          - dawn
         unit: hour
       effectTypes:
         - transformation
@@ -447,6 +440,12 @@ effects:
       endCondition: <p>The break of dawn.</p>
       executionTime:
         base: a1
+      expirations:
+        d1f6b6eaa581aa10:
+          _id: d1f6b6eaa581aa10
+          triggers:
+            - dawn
+          type: trigger
       form: normal
       identifier: treeform-self
       interaction: manifest

@@ -9,22 +9,6 @@ img: systems/teriock/src/icons/abilities/rebuke.webp
 name: Rebuke
 system:
   automations:
-    d635eb44dba086dd:
-      _id: d635eb44dba086dd
-      combat:
-        what:
-          roll: 2d4kh1
-          threshold: 4
-          type: forced
-        when:
-          skip: 0
-          time: end
-          trigger: turn
-        who:
-          type: executor
-      override:
-        combat: true
-      type: expiration
     29b275994cf9f5b1:
       _id: 29b275994cf9f5b1
       formula: 1d6[spiritual]
@@ -47,6 +31,14 @@ system:
   endCondition: <p>Your next @Identifier[core:turns]{turn} ends.</p>
   executionTime:
     base: r1
+  expirations:
+    66672059c7a29a30:
+      _id: 66672059c7a29a30
+      event: turn
+      relation: executor
+      skip: 0
+      timing: end
+      type: combat
   form: normal
   identifier: rebuke
   interaction: manifest
