@@ -85,8 +85,6 @@ export default class TeriockActiveEffect
 
   /** @inheritDoc */
   isExpiryEvent(event, context) {
-    // TODO: Remove logging.
-    console.log(event, context);
     if (typeof this.system.isExpiryEvent === "function") {
       const out = this.system.isExpiryEvent(event, context);
       if (typeof out === "boolean") { return out; }
@@ -97,5 +95,15 @@ export default class TeriockActiveEffect
   /** @inheritDoc */
   async toggleDisabled() {
     await this.update({ disabled: !this.disabled });
+  }
+
+  /** @inheritDoc */
+  updateDuration(context) {
+    const out = super.updateDuration(context);
+    if (context?.forceNoDuration && this.pseudoCollections.Expiration) {
+      out.remaining = 0;
+      out.secondsRemaining = 0;
+    }
+    return out;
   }
 }

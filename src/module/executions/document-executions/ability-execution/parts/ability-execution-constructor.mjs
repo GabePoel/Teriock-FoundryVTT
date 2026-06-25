@@ -139,6 +139,17 @@ export default class AbilityExecutionConstructor
     );
   }
 
+  /**
+   * Active expirations.
+   * @returns {Teriock.Expirations.Any[]}
+   */
+  get activeExpirations() {
+    return this.source.system.expirations.contents.filter(e =>
+      e.competencies.has(this.competence.raw) && e.checkIfQualified(this.rollData)
+      && ((e.heighten.has(0) && !this.heightened) || (e.heighten.has(1) && this.heightened))
+    );
+  }
+
   /** @returns {boolean} */
   get canHeighten() {
     return this.competence.proficient && Boolean(this.source.system.heightened) && !this.flags.noHeighten
@@ -292,11 +303,25 @@ export default class AbilityExecutionConstructor
    * @returns {Teriock.Automations.TypeMap[T][]}
    */
   getAutomations(type, options = {}) {
-    const autos = super.getAutomations(type, options);
+    const automations = super.getAutomations(type, options);
     if (typeof options.crit === "boolean") {
-      return autos.filter(a => (options.crit && a.crit?.has(1)) || (!options.crit && a.crit?.has(0)));
+      return automations.filter(a => (options.crit && a.crit?.has(1)) || (!options.crit && a.crit?.has(0)));
     }
-    return autos;
+    return automations;
+  }
+
+  /**
+   * Get all the expirations of a given type.
+   * @template {Teriock.Expirations.Type} T
+   * @param {T} type
+   * @param {object} [options]
+   * @param {boolean} [options.active]
+   * @returns {Teriock.Expirations.TypeMap[T][]}
+   */
+  getExpirations(type, options = {}) {
+    const { active } = options;
+    if (active) { return this.activeExpirations.filter(e => e.type === type); }
+    return this.source.system.expirations.contents.filter(e => e.type === type);
   }
 
   /**

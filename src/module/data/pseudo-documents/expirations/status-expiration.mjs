@@ -22,28 +22,36 @@ export default class StatusExpiration extends BaseExpiration {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { statuses: conditionRequirementsField() });
+    const schema = Object.assign(super.defineSchema(), { statuses: conditionRequirementsField() });
+    delete schema.method;
+    return schema;
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...super._formPaths, "statuses.absent", "statuses.present"];
+    return ["statuses.absent", "statuses.present"];
   }
 
   /**
    * Whether this has statuses that will cause expiration.
    * @returns {boolean}
    */
-  get hasExpiryStatuses() {
+  get shouldExpire() {
     if (this.actor) {
-      for (const c of this.statuses.present) { if (!this.actor.statuses.has(c)) { return false; } }
-      for (const c of this.statuses.absent) { if (this.actor.statuses.has(c)) { return false; } }
+      for (const c of this.statuses.present) { if (this.actor.statuses.has(c)) { return true; } }
+      for (const c of this.statuses.absent) { if (!this.actor.statuses.has(c)) { return true; } }
     }
     return false;
   }
 
   /** @inheritDoc */
   isValidEvent(event, context = {}) {
-    return super.isValidEvent(event, context) && this.hasExpiryStatuses;
+    return super.isValidEvent(event, context) && this.shouldExpire;
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    this.method = "automatic";
   }
 }

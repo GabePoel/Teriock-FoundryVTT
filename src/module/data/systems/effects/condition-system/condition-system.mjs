@@ -1,11 +1,9 @@
+import { ExpirationExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
-import { combatExpirationMethodField } from "../../../fields/helpers/builders.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * Condition-specific effect data model.
@@ -15,14 +13,12 @@ const { fields } = foundry.data;
  *
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ConditionSystemData}
- * @mixes CombatExpirableSystem
  * @mixes TransformationSystem
  * @mixes WikiSystem
  */
 export default class ConditionSystem
   extends mixClasses(
     BaseEffectSystem,
-    systemMixins.CombatExpirableSystemMixin,
     systemMixins.WikiSystemMixin,
     systemMixins.TransformationSystemMixin,
     dataMixins.ThresholdDataMixin,
@@ -31,13 +27,6 @@ export default class ConditionSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, { namespace: "Condition", type: "condition" });
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return foundry.utils.mergeObject(super.defineSchema(), {
-      expirations: new fields.SchemaField({ combat: new fields.SchemaField({ what: combatExpirationMethodField() }) }),
-    });
   }
 
   /** @inheritDoc */
@@ -93,7 +82,7 @@ export default class ConditionSystem
   /** @inheritDoc */
   async _use(_options = {}) {
     if (this.parent.id.includes("dead") && this.parent.actor) { await this.parent.actor.system.deathBagPull(); }
-    else { await this.inCombatExpiration(true); }
+    else { await ExpirationExecution.create({ actor: this.actor, source: this.parent }); }
   }
 
   /** @inheritDoc */

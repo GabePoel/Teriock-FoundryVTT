@@ -1,8 +1,9 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import { TakeActivation } from "../activations/_module.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -12,12 +13,17 @@ const { fields } = foundry.data;
  * @property {boolean} morganti
  * @property {boolean} showDialog
  * @property {number | null} amount
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
  */
 export default class TakeAutomation
-  extends mixClasses(CritAutomation, automationMixins.DisplayAutomationMixin, automationMixins.TriggerAutomationMixin)
+  extends mixClasses(
+    CritMechanicMixin(BaseAutomation),
+    automationMixins.DisplayAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Take"];

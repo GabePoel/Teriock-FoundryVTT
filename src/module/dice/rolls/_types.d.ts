@@ -21,7 +21,7 @@ declare global {
 
     type BaseRollOptions = RollOptions & {
       _id?: ID<BaseRoll>;
-      comparison?: Teriock.Fields.ComparisonCheck;
+      comparison?: Teriock.Keys.Comparison;
       hideRoll: boolean;
       keepId?: boolean;
       styles: DieStyles;

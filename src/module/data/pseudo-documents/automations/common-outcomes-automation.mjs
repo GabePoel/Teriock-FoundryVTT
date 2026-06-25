@@ -1,20 +1,22 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import * as activations from "../activations/command-activations.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {Set<Teriock.Keys.CommonOutcome>} common
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
  */
 export default class CommonOutcomesAutomation
   extends mixClasses(
-    CritAutomation,
+    CritMechanicMixin(BaseAutomation),
     automationMixins.ConfirmationDialogAutomationMixin,
     automationMixins.TriggerAutomationMixin,
   )

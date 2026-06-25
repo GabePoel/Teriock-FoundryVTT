@@ -2,6 +2,11 @@
   "TERIOCK": {
     "EXPIRATIONS": {
       "Base": {
+        "EXECUTION": {
+          "expire": "Expire",
+          "name": "{label} Expiration",
+          "roll": "Roll Expiration"
+        },
         "FIELDS": {
           "method": {
             "hint": "How this expiration is checked when its event fires.",
@@ -28,17 +33,35 @@
         }
       },
       "Combat": {
-        "LABEL": "Combat"
+        "LABEL": "Combat",
+        "FIELDS": {
+          "event": {
+            "hint": "Event that makes this effect expire.",
+            "label": "Event"
+          },
+          "relation": {
+            "hint": "Relationship between this effect and the expiration.",
+            "label": "Relation"
+          },
+          "skip": {
+            "hint": "Number of instances of this event to skip before expiring.",
+            "label": "Skip"
+          },
+          "timing": {
+            "hint": "Timing of the event that makes this effect expire.",
+            "label": "Timing"
+          }
+        }
       },
       "Status": {
         "FIELDS": {
           "statuses": {
             "absent": {
-              "hint": "This expires only while the actor has none of these conditions.",
+              "hint": "This expires if the actor doesn't have any of these conditions.",
               "label": "Absent Conditions"
             },
             "present": {
-              "hint": "This expires only while the actor has all of these conditions.",
+              "hint": "This expires if the actor has any of these conditions.",
               "label": "Present Conditions"
             }
           }

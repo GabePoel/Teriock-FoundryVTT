@@ -104,5 +104,10 @@ declare global {
 
     // Math Keys
     export type Comparison = keyof typeof config.math.comparisons;
+
+    // Combat Keys
+    export type CombatEvent = keyof typeof config.combat.event;
+    export type CombatRelation = keyof typeof config.combat.relation;
+    export type CombatTiming = keyof typeof config.combat.timing;
   }
 }

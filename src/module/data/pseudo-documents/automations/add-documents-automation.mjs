@@ -1,15 +1,17 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/helpers/builders.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @param {boolean} attachDocuments
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes SelectDocumentsAutomation
  * @mixes CompetenceAutomation
  * @mixes OverrideDataAutomation
@@ -19,7 +21,7 @@ const { fields } = foundry.data;
  */
 export default class AddDocumentsAutomation
   extends mixClasses(
-    CritAutomation,
+    CritMechanicMixin(BaseAutomation),
     automationMixins.SelectDocumentsAutomationMixin,
     automationMixins.CompetenceAutomationMixin,
     automationMixins.OverrideDataAutomationMixin,

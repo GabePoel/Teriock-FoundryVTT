@@ -1,7 +1,8 @@
 import { TypedIdentifierField } from "../../fields/_module.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
-export default class SuppressAutomation extends CritAutomation {
+export default class SuppressAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Suppress"];
 

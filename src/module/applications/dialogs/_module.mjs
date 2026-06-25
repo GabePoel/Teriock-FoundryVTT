@@ -2,7 +2,6 @@ export { default as boostDialog } from "./boost-dialog.mjs";
 export { default as changeSizeDialog } from "./change-size-dialog.mjs";
 export { default as deathBagDialog } from "./death-bag-dialog.mjs";
 export { default as hotbarDropDialog } from "./hotbar-drop-dialog.mjs";
-export { default as inCombatExpirationDialog } from "./in-combat-expiration-dialog.mjs";
 export { default as newDocumentDialog } from "./new-document-dialog.mjs";
 export * from "./select-dialog.mjs";
 export * from "./select-document-dialog.mjs";

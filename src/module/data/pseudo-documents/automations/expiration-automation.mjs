@@ -1,7 +1,8 @@
 import * as builders from "../../fields/helpers/builders.mjs";
 import { conditionRequirementsField } from "../../fields/helpers/builders.mjs";
 import { DurationModel } from "../../models/unit-models/_module.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,7 +15,7 @@ const { fields } = foundry.data;
  * @property {{absent: Set<Teriock.Keys.Condition>, present: Set<Teriock.Keys.Condition>}} conditions
  * @property {{combat: boolean, conditions: boolean, triggers: boolean}} override
  */
-export default class ExpirationAutomation extends CritAutomation {
+export default class ExpirationAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Expiration"];
 

@@ -1,4 +1,5 @@
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
+import { ExpirationExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
@@ -15,18 +16,12 @@ const { fields } = foundry.data;
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ApplicableEffectSystemData}
- * @mixes CombatExpirableSystem
  * @mixes ExpirableSystem
  * @mixes ThresholdData
  * @see {DurationModel}
  */
 export default class ApplicableEffectSystem
-  extends mixClasses(
-    BaseEffectSystem,
-    systemMixins.CombatExpirableSystemMixin,
-    systemMixins.ExpirableSystemMixin,
-    dataMixins.ThresholdDataMixin,
-  )
+  extends mixClasses(BaseEffectSystem, systemMixins.ExpirableSystemMixin, dataMixins.ThresholdDataMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
@@ -150,7 +145,8 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   get isTemporary() {
-    return super.isTemporary || this.expirations.size > 0;
+    if (this.expirations.size > 0) { return true; }
+    return super.isTemporary;
   }
 
   /**
@@ -198,14 +194,19 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   async _use(_options = {}) {
-    await this.inCombatExpiration(true);
+    await ExpirationExecution.create({
+      actor: this.actor,
+      expiration: this.activeExpirations.find((e) => e.method === "roll"),
+      source: this.parent,
+    });
   }
 
   /** @inheritDoc */
   isExpiryEvent(event, context = {}) {
-    if (BaseExpiration.EXPIRY_EVENTS.has(event)) {
-      for (const e of /** @type{Teriock.Expirations.Any[]} */ this.expirations.contents) {
-        if (e.isExpiryEvent(event, context)) { return true; }
+    if (BaseExpiration.EXPIRY_REFRESH_EVENT === event) {
+      const activeExpirations = this.activeExpirations;
+      if (activeExpirations.length) {
+        for (const e of activeExpirations) { if (e.isExpiryEvent(event, context)) { return true; } }
       }
       return false;
     }

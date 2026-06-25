@@ -23,7 +23,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     return Object.assign(ActiveEffectTypeDataModel.defineSchema(), {
       ...super.defineSchema(),
       applyIfDeattuned: new fields.BooleanField(),
-      deleteOnExpire: new fields.BooleanField(),
     });
   }
 
@@ -177,13 +176,13 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   }
 
   /**
-   * Expires the effect, removing it from the parent document.
+   * Expires the effect manually.
    * @returns {Promise<void>}
    */
   async expire() {
-    if (!this.deleteOnExpire) { await this.parent.hookCall("effectExpiration"); }
-    if (this.deleteOnExpire) { await this.parent.delete(); }
-    else { await this.parent.update({ disabled: true }); }
+    if (CONFIG.ActiveEffect.expiryAction !== "delete") { await this.parent.hookCall("effectExpiration"); }
+    if (CONFIG.ActiveEffect.expiryAction === "delete") { await this.parent.delete(); }
+    else if (CONFIG.ActiveEffect.expiryAction === "update") { await this.parent.update({ "duration.expired": true }); }
   }
 
   /** @inheritDoc */

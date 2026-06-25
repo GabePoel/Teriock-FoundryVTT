@@ -4,6 +4,7 @@ import attunementConfig from "./attunement-config.mjs";
 import changeConfig from "./change-config.mjs";
 import characterConfig from "./character-config.mjs";
 import classConfig from "./class-config.mjs";
+import combatConfig from "./combat-config.mjs";
 import competenceConfig from "./competence-config.mjs";
 import consequenceConfig from "./consequence-config.mjs";
 import costConfig from "./cost-config.mjs";
@@ -35,6 +36,7 @@ const config = {
   change: changeConfig,
   character: characterConfig,
   class: classConfig,
+  combat: combatConfig,
   competence: competenceConfig,
   consequence: consequenceConfig,
   cost: costConfig,

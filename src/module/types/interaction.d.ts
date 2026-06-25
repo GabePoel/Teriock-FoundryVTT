@@ -27,7 +27,7 @@ declare global {
       /** Some bonus to add to the roll */
       bonus?: Teriock.System.FormulaString;
       /** The comparison operation `c(roll, threshold)` */
-      comparison?: Teriock.Fields.ComparisonCheck;
+      comparison?: Teriock.Keys.Comparison;
       /** Proficiency and fluency */
       competence?: Teriock.System.CompetenceLevel;
       /** Positive for advantage, negative for disadvantage */

@@ -1,14 +1,18 @@
 import { omit } from "../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../fields/_module.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes CompetenceAutomation
  * @property {TypedIdentifier} identifier
  */
-export default class ChangeCompetenceAutomation extends automationMixins.CompetenceAutomationMixin(CritAutomation) {
+export default class ChangeCompetenceAutomation
+  extends automationMixins.CompetenceAutomationMixin(CritMechanicMixin(BaseAutomation))
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChangeCompetence"];
 

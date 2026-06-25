@@ -196,12 +196,12 @@ export default class BaseRoll extends Roll {
     return terms;
   }
 
-  /** @returns {Teriock.Fields.ComparisonCheck} */
+  /** @returns {Teriock.Keys.Comparison} */
   get comparison() {
     return this.options.comparison ?? "gte";
   }
 
-  /** @param {Teriock.Fields.ComparisonCheck} comparison */
+  /** @param {Teriock.Keys.Comparison} comparison */
   set comparison(comparison) {
     this.options.comparison = comparison;
   }

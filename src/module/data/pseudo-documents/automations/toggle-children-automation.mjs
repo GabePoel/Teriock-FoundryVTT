@@ -2,18 +2,20 @@ import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { ensureChildren, ensureNoChildren } from "../../../helpers/resolve.mjs";
 import { FormulaField, TypedIdentifierSetField } from "../../fields/_module.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @property {Set<TypedIdentifier>} add
  * @property {Set<TypedIdentifier>} remove
  * @property {Teriock.System.FormulaString} qualifier
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes TriggerAutomation
  */
 export default class ToggleChildrenAutomation
-  extends mixClasses(CritAutomation, automationMixins.TriggerAutomationMixin)
+  extends mixClasses(CritMechanicMixin(BaseAutomation), automationMixins.TriggerAutomationMixin)
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ToggleChildren"];

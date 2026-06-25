@@ -1,11 +1,15 @@
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @mixes MacroAutomation
  */
-export default class AbilityMacroAutomation extends automationMixins.MacroAutomationMixin(CritAutomation) {
+export default class AbilityMacroAutomation
+  extends automationMixins.MacroAutomationMixin(CritMechanicMixin(BaseAutomation))
+{
   /** @inheritDoc */
   static get TYPE() {
     return "abilityMacro";

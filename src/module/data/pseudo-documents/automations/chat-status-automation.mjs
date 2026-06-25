@@ -1,10 +1,11 @@
 import { localizeChoices } from "../../../helpers/localization.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import {
   ApplyStatusActivation,
   RemoveStatusActivation,
   ToggleStatusActivation,
 } from "../activations/command-activations.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -12,7 +13,7 @@ const { fields } = foundry.data;
  * @property {Teriock.Keys.Condition} status
  * @property {"apply"|"remove"|"toggle"} relation
  */
-export default class ChatStatusAutomation extends CritAutomation {
+export default class ChatStatusAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.ChatStatus"];
 

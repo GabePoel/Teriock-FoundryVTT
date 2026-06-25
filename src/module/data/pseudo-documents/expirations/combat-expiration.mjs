@@ -1,14 +1,13 @@
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { combatExpirationSourceTypeField } from "../../fields/helpers/builders.mjs";
 import { BaseExpiration } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @property {"action"|"combat"|"turn"|"round"} event
- * @property {"everyone"|"executor"|"target"} relation
- * @property {"start"|"end"} timing
- * @property {Teriock.System.FormulaString} skip
+ * @property {Teriock.Keys.CombatEvent} event
+ * @property {Teriock.Keys.CombatRelation} relation
+ * @property {Teriock.Keys.CombatTiming} timing
+ * @property {number} skip
  */
 export default class CombatExpiration extends BaseExpiration {
   /** @inheritDoc */
@@ -28,31 +27,19 @@ export default class CombatExpiration extends BaseExpiration {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       event: new fields.StringField({
-        choices: localizeChoices({
-          action: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.action",
-          combat: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.combat",
-          turn: "TERIOCK.SCHEMA.CombatExpiration.when.trigger.choices.turn",
-        }),
-        hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.trigger.hint"),
+        choices: localizeChoices(TERIOCK.config.combat.event),
         initial: "turn",
-        label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.trigger.label"),
         required: true,
       }),
-      relation: combatExpirationSourceTypeField(),
-      skip: new fields.NumberField({
-        hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.skip.hint"),
-        initial: 0,
-        label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.skip.label"),
+      relation: new fields.StringField({
+        choices: localizeChoices(TERIOCK.config.combat.relation),
+        initial: "target",
+        required: true,
       }),
+      skip: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       timing: new fields.StringField({
-        choices: localizeChoices({
-          start: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.start",
-
-          end: "TERIOCK.SCHEMA.CombatExpiration.when.time.choices.end",
-        }),
-        hint: _loc("TERIOCK.SCHEMA.CombatExpiration.when.time.hint"),
+        choices: localizeChoices(TERIOCK.config.combat.timing, { sort: false }),
         initial: "start",
-        label: _loc("TERIOCK.SCHEMA.CombatExpiration.when.time.label"),
         required: true,
       }),
     });
@@ -85,6 +72,7 @@ export default class CombatExpiration extends BaseExpiration {
 
   /** @inheritDoc */
   isValidEvent(event, context = {}) {
-    return super.isValidEvent(event, context) && this.isValidActor(context.actor);
+    return super.isValidEvent(event, context) && this.isValidActor(context.actor) && this.skip === 0
+      && context.event === this.event && context.timing === this.timing;
   }
 }

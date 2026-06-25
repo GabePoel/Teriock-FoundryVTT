@@ -146,6 +146,7 @@ foundry.helpers.Hooks.once("init", function() {
       },
       defaultType: "consequence",
       documentClass: documents.TeriockActiveEffect,
+      expiryAction: "delete",
       phases: constants.config.change.phase,
     },
     Actor: {

@@ -2,13 +2,14 @@ import { EvaluationField } from "../../fields/_module.mjs";
 import { changeTypeField } from "../../fields/helpers/builders.mjs";
 import { TimeUnitModel } from "../../models/unit-models/_module.mjs";
 import { migrateChangeType } from "../../shared/migrations/change-migrations.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
 /**
  * @property {TimeUnitModel} duration
  * @property {string} changeType
  */
-export default class DurationAutomation extends CritAutomation {
+export default class DurationAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Duration"];
 

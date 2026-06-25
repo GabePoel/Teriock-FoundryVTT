@@ -86,7 +86,7 @@ export default function ThresholdExecutionMixin(Base) {
         return docs;
       }
 
-      /**  @returns {Teriock.Execution.ExecutionDialogEntry[]} */
+      /** @returns {Teriock.Execution.ExecutionDialogEntry[]} */
       get _dialogFields() {
         return [{
           condition: this.requiresCompetence,

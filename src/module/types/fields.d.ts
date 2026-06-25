@@ -1,5 +1,4 @@
 import { EvaluationModel } from "../data/models/_module.mjs";
-import { comparisons } from "../dice/functions/_module.mjs";
 
 declare global {
   namespace Teriock.Fields {
@@ -40,11 +39,6 @@ declare global {
     export type _IdentifierFieldOptions = { reset?: string | null, type?: string | null };
 
     export type _TypedIdentifierFieldOptions = { single?: boolean, types?: string[] };
-
-    /**
-     * Valid comparison operations.
-     */
-    export type ComparisonCheck = keyof typeof comparisons;
 
     /**
      * A single group that will be given the corresponding label in a generated `<select>` element.

@@ -1,14 +1,15 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
 import { migrateChange } from "../../shared/migrations/change-migrations.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {Teriock.Changes.QualifiedChangeData[]} changes
  */
-export default class ChangesAutomation extends CritAutomation {
+export default class ChangesAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.Changes.LABEL";

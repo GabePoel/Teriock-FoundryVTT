@@ -6,8 +6,7 @@ import type {
 
 import type queries from "./_module.mjs";
 
-import { ApplicableEffectSystem } from "../../data/systems/effects/_module.mjs";
-import { TeriockActiveEffect, TeriockActor, TeriockUser } from "../../documents/_module.mjs";
+import { TeriockActor, TeriockUser } from "../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Queries {
@@ -42,8 +41,6 @@ declare global {
       ids: string[];
       operation: Partial<Omit<DatabaseDeleteOperation, "ids">>;
     };
-
-    export type InCombatExpirationData = { uuid: UUID<TeriockActiveEffect & { system: ApplicableEffectSystem }> };
 
     export type FireTriggerData = { options: object, trigger: Teriock.System.Trigger, uuid: UUID<AnyCommonDocument> };
 

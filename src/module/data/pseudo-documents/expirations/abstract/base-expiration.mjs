@@ -1,8 +1,10 @@
 import mathConfig from "../../../../constants/config/math-config.mjs";
+import { ExpirationExecution } from "../../../../executions/document-executions/_module.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
 import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document.mjs";
+import { CritMechanicMixin } from "../../abstract/mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,30 +17,18 @@ const { fields } = foundry.data;
 
 /**
  * @extends {Teriock.Expirations.BaseExpirationData}
+ * @extends {MechanicPseudoDocument}
  * @property {AnyActiveEffect} document
  * @property {BaseEffectSystem} parent
  * @property {ID<BaseExpiration>} _id
  * @property {Teriock.Expirations.Type} type
- * @todo Needs crit handling.
  */
-export default class BaseExpiration extends MechanicPseudoDocument {
+export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocument) {
   /**
-   * The expiry event which checks expiration cleanup.
+   * The expiry event used for expiration refreshes.
    * @type {string}
    */
-  static EXPIRY_CLEANUP_EVENT = "expirationCleanup";
-
-  /**
-   * The expiry event which checks expiration validation.
-   * @type {string}
-   */
-  static EXPIRY_VALIDATION_EVENT = "expirationValidation";
-
-  /**
-   * The expiry events which interact with expirations.
-   * @type {Set<string>}
-   */
-  static EXPIRY_EVENTS = new Set([this.EXPIRY_CLEANUP_EVENT, this.EXPIRY_VALIDATION_EVENT]);
+  static EXPIRY_REFRESH_EVENT = "expirationRefresh";
 
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Base"];
@@ -101,7 +91,10 @@ export default class BaseExpiration extends MechanicPseudoDocument {
    */
   isExpiryEvent(event, context = {}) {
     if (!this.isValidEvent(event, context)) { return false; }
-    return !this.isRollEvent(event, context);
+    const isRoll = this.isRollEvent(event, context);
+    if (isRoll) { this.use(); }
+    else { this.document.duration.remaining = 0; }
+    return !isRoll;
   }
 
   /**
@@ -111,7 +104,7 @@ export default class BaseExpiration extends MechanicPseudoDocument {
    * @returns {boolean}
    */
   isRollEvent(event, context = {}) {
-    return (this.method === "roll" && event === this.constructor.EXPIRY_VALIDATION_EVENT
+    return (this.method === "roll" && event === this.constructor.EXPIRY_REFRESH_EVENT
       && this.isValidEvent(event, context));
   }
 
@@ -122,6 +115,16 @@ export default class BaseExpiration extends MechanicPseudoDocument {
    * @returns {boolean}
    */
   isValidEvent(event, context = {}) {
-    return (context.type === this.type && this.constructor.EXPIRY_EVENTS.has(event));
+    return (context.type === this.type && event === this.constructor.EXPIRY_REFRESH_EVENT);
+  }
+
+  /**
+   * Use this expiration.
+   * @returns {Promise<void>}
+   */
+  async use() {
+    if (this.method === "roll") {
+      await ExpirationExecution.create({ actor: this.actor, expiration: this, source: this.document });
+    } else { await this.document.system.expire(); }
   }
 }

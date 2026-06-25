@@ -5,6 +5,7 @@ import { default as activations } from "../../src/en/activations.json" with { ty
 import { default as automations } from "../../src/en/automations.json" with { type: "json" };
 import { default as base } from "../../src/en/base.json" with { type: "json" };
 import { default as changes } from "../../src/en/changes.json" with { type: "json" };
+import { default as combat } from "../../src/en/combat.json" with { type: "json" };
 import { default as commands } from "../../src/en/commands.json" with { type: "json" };
 import { default as compendium } from "../../src/en/compendium.json" with { type: "json" };
 import { default as configs } from "../../src/en/configs.json" with { type: "json" };
@@ -110,6 +111,7 @@ mergeObjects(
   activations,
   automations,
   changes,
+  combat,
   commands,
   compendium,
   configs,

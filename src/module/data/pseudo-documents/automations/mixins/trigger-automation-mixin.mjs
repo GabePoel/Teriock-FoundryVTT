@@ -16,7 +16,7 @@ const { fields } = foundry.data;
 
 /**
  * Automation that hooks this into triggers.
- * @param {typeof BaseAutomation | typeof CritAutomation} Base
+ * @param {typeof BaseAutomation} Base
  */
 export default function TriggerAutomationMixin(Base) {
   return (

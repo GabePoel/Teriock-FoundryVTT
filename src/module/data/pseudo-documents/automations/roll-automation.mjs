@@ -4,14 +4,16 @@ import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import { RollActivation } from "../activations/_module.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @property {Teriock.Keys.Impact} impact
  * @property {Teriock.System.FormulaString} formula
  * @property {boolean} merge
@@ -19,7 +21,11 @@ const { fields } = foundry.data;
  * @mixes TriggerAutomation
  */
 export default class RollAutomation
-  extends mixClasses(CritAutomation, automationMixins.DisplayAutomationMixin, automationMixins.TriggerAutomationMixin)
+  extends mixClasses(
+    CritMechanicMixin(BaseAutomation),
+    automationMixins.DisplayAutomationMixin,
+    automationMixins.TriggerAutomationMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Roll"];

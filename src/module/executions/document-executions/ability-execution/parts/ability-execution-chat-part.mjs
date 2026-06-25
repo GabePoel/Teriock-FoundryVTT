@@ -208,25 +208,21 @@ export default function AbilityExecutionChatPart(Base) {
       }
 
       /**
-       * Generate all effect expirations.
        * @param {boolean} crit
-       * @returns {object}
+       * @returns {Record<string, object>}
        */
       #generateEffectExpirations(crit = false) {
-        const expirations = {
-          conditions: {
-            absent: Array.from(this.source.system.duration.conditions.absent),
-            present: Array.from(this.source.system.duration.conditions.present),
-          },
-          description: this.source.system.endCondition,
-          sustained: this.source.system.sustained,
-          triggers: Array.from(this.source.system.duration.triggers),
-        };
-        const autos = this.getAutomations("expiration", { active: true, crit });
-        autos.forEach(a => {
-          Object.assign(expirations, a.getExpirationData({ actor: this.actor }));
-        });
-        return expirations;
+        const types = CONFIG.ActiveEffect.dataModels.consequence._expirationTypes;
+        const out = {};
+        for (const Cls of types) {
+          const expirations = this.getExpirations(Cls.TYPE, { active: true, crit });
+          for (const e of expirations) {
+            const data = e.toObject();
+            data._id = foundry.utils.randomID();
+            out[data._id] = data;
+          }
+        }
+        return out;
       }
 
       /**
@@ -252,7 +248,6 @@ export default function AbilityExecutionChatPart(Base) {
             blocks: (await this.source.system.getPanelParts()).blocks,
             competence: { raw: this.competence.value },
             critical: crit,
-            deleteOnExpire: true,
             executor: this.actor?.uuid ?? null,
             expirations: this.#generateEffectExpirations(crit),
             heightened: this.heightened,

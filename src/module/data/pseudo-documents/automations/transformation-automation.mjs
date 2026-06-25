@@ -1,17 +1,19 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { automationTransformationFields } from "../../fields/helpers/transformation-fields.mjs";
-import { CritAutomation } from "./abstract/_module.mjs";
+import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
- * @extends {CritAutomation}
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @extends {AutomationTransformationConfig}
  * @mixes SelectExternalDocumentsAutomation
  * @mixes CompetenceAutomation
  */
 export default class TransformationAutomation
   extends mixClasses(
-    CritAutomation,
+    CritMechanicMixin(BaseAutomation),
     automationMixins.SelectExternalDocumentsAutomationMixin,
     automationMixins.CompetenceAutomationMixin,
   )
