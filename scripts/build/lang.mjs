@@ -13,9 +13,11 @@ import { default as dialogs } from "../../src/en/dialogs.json" with { type: "jso
 import { default as documents } from "../../src/en/documents.json" with { type: "json" };
 import { default as effects } from "../../src/en/effects.json" with { type: "json" };
 import { default as elements } from "../../src/en/elements.json" with { type: "json" };
+import { default as expirations } from "../../src/en/expirations.json" with { type: "json" };
 import { default as fields } from "../../src/en/fields.json" with { type: "json" };
 import { default as format } from "../../src/en/format.json" with { type: "json" };
 import { default as macros } from "../../src/en/macros.json" with { type: "json" };
+import { default as mechanics } from "../../src/en/mechanics.json" with { type: "json" };
 import { default as message } from "../../src/en/message.json" with { type: "json" };
 import { default as models } from "../../src/en/models.json" with { type: "json" };
 import { default as packs } from "../../src/en/packs.json" with { type: "json" };
@@ -117,9 +119,11 @@ mergeObjects(
   documents,
   effects,
   elements,
+  expirations,
   fields,
   format,
   macros,
+  mechanics,
   message,
   models,
   packs,

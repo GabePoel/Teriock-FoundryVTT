@@ -8,18 +8,18 @@ import TypedPseudoDocument from "./typed-pseudo-document.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {Teriock.PseudoDocuments.DynamicTypedPseudoDocumentData}
+ * @extends {Teriock.PseudoDocuments.MechanicPseudoDocumentData}
  * @extends {TypedPseudoDocument}
  * @mixes PropagationData
- * @property {ID<DynamicTypedPseudoDocument>} _id
+ * @property {ID<MechanicPseudoDocument>} _id
  */
-export default class DynamicTypedPseudoDocument extends dataMixins.PropagationDataMixin(TypedPseudoDocument) {
+export default class MechanicPseudoDocument extends dataMixins.PropagationDataMixin(TypedPseudoDocument) {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Base"];
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MECHANICS.Base"];
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.AUTOMATIONS.Base.LABEL";
+    return "TERIOCK.MECHANICS.Base.LABEL";
   }
 
   /** @inheritDoc */
@@ -35,8 +35,8 @@ export default class DynamicTypedPseudoDocument extends dataMixins.PropagationDa
       heighten: new fields.SetField(
         new fields.NumberField({
           choices: localizeChoices({
-            0: "TERIOCK.AUTOMATIONS.Base.FIELDS.heighten.choices.0",
-            1: "TERIOCK.AUTOMATIONS.Base.FIELDS.heighten.choices.1",
+            0: "TERIOCK.MECHANICS.Base.FIELDS.heighten.choices.0",
+            1: "TERIOCK.MECHANICS.Base.FIELDS.heighten.choices.1",
           }),
         }),
         { initial: [0, 1] },

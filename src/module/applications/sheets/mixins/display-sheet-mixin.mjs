@@ -24,7 +24,9 @@ export default function DisplaySheetMixin(Base) {
       }
 
       /** @type {Record<string, HandlebarsTemplatePart>} */
-      static CONTENT_PARTS = { content: { template: "teriock/sheets/shared/content" } };
+      static CONTENT_PARTS = {
+        content: { template: "teriock/sheets/shared/content", templates: ["templates/generic/tab-navigation.hbs"] },
+      };
 
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {

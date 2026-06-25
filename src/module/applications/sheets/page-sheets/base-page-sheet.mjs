@@ -2,11 +2,11 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { BaseSheetMixin, DisplaySheetMixin } from "../mixins/_module.mjs";
 import { SystemSettingsButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
 import {
-  AutomationsCommonSheetPart,
-  AutomationsTabsCommonSheetPart,
   ConnectionCommonSheetPart,
   DragDropCommonSheetPart,
   LockingCommonSheetPart,
+  MechanicsCommonSheetPart,
+  MechanicsTabsCommonSheetPart,
   MenuCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
@@ -29,8 +29,8 @@ export default class BasePageSheet
     DragDropCommonSheetPart,
     LockingCommonSheetPart,
     MenuCommonSheetPart,
-    AutomationsCommonSheetPart,
-    AutomationsTabsCommonSheetPart,
+    MechanicsCommonSheetPart,
+    MechanicsTabsCommonSheetPart,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

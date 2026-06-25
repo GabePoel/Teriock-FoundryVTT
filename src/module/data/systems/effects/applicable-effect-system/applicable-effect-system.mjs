@@ -2,9 +2,8 @@ import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
-import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
-import DurationModel from "../../../models/unit-models/duration-model.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -17,11 +16,17 @@ const { fields } = foundry.data;
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ApplicableEffectSystemData}
  * @mixes CombatExpirableSystem
+ * @mixes ExpirableSystem
  * @mixes ThresholdData
  * @see {DurationModel}
  */
 export default class ApplicableEffectSystem
-  extends mixClasses(BaseEffectSystem, systemMixins.CombatExpirableSystemMixin, dataMixins.ThresholdDataMixin)
+  extends mixClasses(
+    BaseEffectSystem,
+    systemMixins.CombatExpirableSystemMixin,
+    systemMixins.ExpirableSystemMixin,
+    dataMixins.ThresholdDataMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
@@ -44,6 +49,16 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
+  static get _expirationTypes() {
+    return [
+      ...super._expirationTypes,
+      expirations.TriggerExpiration,
+      expirations.CombatExpiration,
+      expirations.StatusExpiration,
+    ];
+  }
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
       childEffectTypes: ["ability", "fluency", "property", "resource"],
@@ -59,22 +74,18 @@ export default class ApplicableEffectSystem
       blocks: builders.blocksField(),
       critical: new fields.BooleanField(),
       executor: new fields.DocumentUUIDField({ nullable: true, type: "Actor" }),
-      expirations: new fields.SchemaField({
-        combat: new fields.SchemaField({
-          what: builders.combatExpirationMethodField(),
-          when: builders.combatExpirationTimingField(),
-          who: new fields.SchemaField({
-            source: new fields.DocumentUUIDField({ nullable: true, type: "Actor" }),
-            type: builders.combatExpirationSourceTypeField(),
-          }),
-        }),
-        conditions: conditionRequirementsField(),
-        description: new fields.StringField(),
-        sustained: new fields.BooleanField(),
-        triggers: new fields.SetField(new fields.StringField({ choices: DurationModel.triggerChoices })),
-      }),
       heightened: new fields.NumberField(),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    if (typeof source.expirations === "object") {
+      for (const k of Object.keys(source.expirations)) {
+        if (k.length !== 16) { delete source.expirations[k]; }
+      }
+    }
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */
@@ -139,9 +150,7 @@ export default class ApplicableEffectSystem
 
   /** @inheritDoc */
   get isTemporary() {
-    return super.isTemporary || this.expirations.combat.what.type !== "none" || Boolean(this.expirations.triggers.size)
-      || Boolean(this.expirations.description) || Boolean(this.expirations.conditions.absent.size)
-      || Boolean(this.expirations.conditions.present.size);
+    return super.isTemporary || this.expirations.size > 0;
   }
 
   /**
@@ -165,12 +174,6 @@ export default class ApplicableEffectSystem
         "applyEffect",
         this.parent.getScope(),
       ); }
-  }
-
-  /** @inheritDoc */
-  _onFireTrigger(trigger) {
-    super._onFireTrigger(trigger);
-    if (this.expirations.triggers.has(trigger)) { this.expire(); }
   }
 
   /** @inheritDoc */
@@ -199,11 +202,14 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
-  isExpiryEvent(event, _context) {
-    if (event === BaseExpiration.EXPIRY_VALIDATION_EVENT || event === BaseExpiration.EXPIRY_CLEANUP_EVENT) {
-      // TODO: Process with expiration pseudo-documents instead.
+  isExpiryEvent(event, context = {}) {
+    if (BaseExpiration.EXPIRY_EVENTS.has(event)) {
+      for (const e of /** @type{Teriock.Expirations.Any[]} */ this.expirations.contents) {
+        if (e.isExpiryEvent(event, context)) { return true; }
+      }
       return false;
     }
+    return null;
   }
 
   /** @inheritDoc */
@@ -227,22 +233,5 @@ export default class ApplicableEffectSystem
         <div class="teriock-panel-body">${blocksHTML}</div>
       </div>`).trim();
     }
-  }
-
-  /** @inheritDoc */
-  async shouldExpire() {
-    if (this.shouldExpireFromConditions()) { return true; }
-    return super.shouldExpire();
-  }
-
-  /**
-   * Checks if this should expire due to its actor's conditions.
-   * @returns {boolean}
-   */
-  shouldExpireFromConditions() {
-    if (!this.actor) { return false; }
-    for (const c of this.expirations.conditions.present) { if (!this.actor.statuses.has(c)) { return true; } }
-    for (const c of this.expirations.conditions.absent) { if (this.actor.statuses.has(c)) { return true; } }
-    return false;
   }
 }

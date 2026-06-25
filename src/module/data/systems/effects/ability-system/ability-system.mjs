@@ -4,6 +4,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
+import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
@@ -101,6 +102,17 @@ export default class AbilitySystem
       automations.TradecraftAutomation,
       automations.TransformationAutomation,
       automations.UseDocumentsAutomation,
+    ];
+  }
+
+  /** @inheritDoc */
+  static get _expirationTypes() {
+    return [
+      ...super._expirationTypes,
+      expirations.CombatExpiration,
+      expirations.StatusExpiration,
+      expirations.TimeExpiration,
+      expirations.TriggerExpiration,
     ];
   }
 

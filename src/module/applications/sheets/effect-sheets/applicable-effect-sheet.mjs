@@ -3,10 +3,10 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import { BaseSheetMixin, SystemSettingsButtonSheetMixin } from "../mixins/_module.mjs";
 import {
-  AutomationsCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
   LockingCommonSheetPart,
+  MechanicsCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -15,14 +15,14 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * {@link TeriockImbuement} and {@link TeriockConsequence} sheet.
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
- * @mixes AutomationsCommonSheetPart
+ * @mixes MechanicsCommonSheetPart
  */
 export default class ApplicableEffectSheet
   extends mixClasses(
     ActiveEffectConfig,
     BaseSheetMixin,
     SystemSettingsButtonSheetMixin,
-    AutomationsCommonSheetPart,
+    MechanicsCommonSheetPart,
     DocumentCreationCommonSheetPart,
     DragDropCommonSheetPart,
     LockingCommonSheetPart,
@@ -34,13 +34,17 @@ export default class ApplicableEffectSheet
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     ...super.PARTS,
-    automations: { scrollable: [""], template: "teriock/sheets/effects/consequence/automations-tab" },
-    children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
-    duration: {
+    mechanics: {
       scrollable: [""],
-      template: "teriock/sheets/effects/consequence/duration-tab",
-      templates: ["templates/sheets/active-effect/duration.hbs"],
+      template: "teriock/sheets/effects/consequence/mechanics-tab",
+      templates: ["templates/generic/tab-navigation.hbs"],
     },
+    children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
+    // duration: {
+    //   scrollable: [""],
+    //   template: "teriock/sheets/effects/consequence/duration-tab",
+    //   templates: ["templates/sheets/active-effect/duration.hbs"],
+    // },
   };
 
   /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
@@ -48,10 +52,11 @@ export default class ApplicableEffectSheet
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
-      tabs: [...super.TABS.sheet.tabs, {
-        icon: makeIconClass(icons.pseudoDocument.automation, "solid"),
-        id: "automations",
-      }, { icon: makeIconClass(icons.ui.document, "solid"), id: "children" }],
+      tabs: [
+        ...super.TABS.sheet.tabs,
+        { icon: makeIconClass(icons.pseudoDocument.mechanic, "solid"), id: "mechanics" },
+        { icon: makeIconClass(icons.ui.document, "solid"), id: "children" },
+      ],
     },
   };
 
@@ -61,7 +66,7 @@ export default class ApplicableEffectSheet
   }
 
   /** @inheritDoc */
-  get _canDropAutomations() {
+  get _canDropMechanics() {
     return true;
   }
 

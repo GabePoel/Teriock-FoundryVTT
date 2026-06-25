@@ -8,16 +8,16 @@ export default Base => {
      * @mixin
      * @property {AnyCommonDocument} document
      */
-    class AutomationsTabsCommonSheetPart extends Base {
+    class MechanicsTabsCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-      static DEFAULT_OPTIONS = { actions: { toggleAutomations: this._onToggleAutomations } };
+      static DEFAULT_OPTIONS = { actions: { toggleMechanics: this._onToggleMechanics } };
 
       /**
-       * Toggles between overview and impacts tabs.
+       * Toggles between the overview and mechanics tabs.
        * @returns {Promise<void>}
        */
-      static async _onToggleAutomations() {
-        this._tab = this._tab === "automations" ? "overview" : "automations";
+      static async _onToggleMechanics() {
+        this._tab = this._tab === "mechanics" ? "overview" : "mechanics";
         await this.render();
         if (typeof this.toggleMenu === "function") { this.toggleMenu(false); }
       }
@@ -30,7 +30,7 @@ export default Base => {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        this.element.querySelectorAll("[data-action='toggleAutomations']").forEach(
+        this.element.querySelectorAll("[data-action='toggleMechanics']").forEach(
           /** @param {HTMLButtonElement} el */ el => {
             el.disabled = false;
           },

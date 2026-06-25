@@ -8,6 +8,14 @@ import { BaseExpiration } from "./abstract/_module.mjs";
  */
 export default class StatusExpiration extends BaseExpiration {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Status"];
+
+  /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.EXPIRATIONS.Status.LABEL";
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "status";
   }

@@ -2,7 +2,7 @@ import mathConfig from "../../../../constants/config/math-config.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
-import DynamicTypedPseudoDocument from "../../abstract/dynamic-typed-pseudo-document.mjs";
+import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document.mjs";
 
 const { fields } = foundry.data;
 
@@ -21,21 +21,31 @@ const { fields } = foundry.data;
  * @property {Teriock.Expirations.Type} type
  * @todo Needs crit handling.
  */
-export default class BaseExpiration extends DynamicTypedPseudoDocument {
+export default class BaseExpiration extends MechanicPseudoDocument {
   /**
    * The expiry event which checks expiration cleanup.
-   * @returns {string}
+   * @type {string}
    */
-  static get EXPIRY_CLEANUP_EVENT() {
-    return "expirationCleanup";
-  }
+  static EXPIRY_CLEANUP_EVENT = "expirationCleanup";
 
   /**
    * The expiry event which checks expiration validation.
-   * @returns {string}
+   * @type {string}
    */
-  static get EXPIRY_VALIDATION_EVENT() {
-    return "expirationValidation";
+  static EXPIRY_VALIDATION_EVENT = "expirationValidation";
+
+  /**
+   * The expiry events which interact with expirations.
+   * @type {Set<string>}
+   */
+  static EXPIRY_EVENTS = new Set([this.EXPIRY_CLEANUP_EVENT, this.EXPIRY_VALIDATION_EVENT]);
+
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Base"];
+
+  /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.EXPIRATIONS.Base.LABEL";
   }
 
   /** @inheritDoc */
@@ -55,15 +65,6 @@ export default class BaseExpiration extends DynamicTypedPseudoDocument {
         initial: "automatic",
         required: true,
       }),
-      result: new fields.StringField({
-        blank: false,
-        choices: {
-          delete: _loc("TERIOCK.EXPIRATIONS.Base.RESULT.delete"),
-          disable: _loc("TERIOCK.EXPIRATIONS.Base.RESULT.disable"),
-        },
-        initial: "delete",
-        required: true,
-      }),
       roll: new fields.SchemaField({
         comparison: new fields.StringField({
           blank: false,
@@ -79,7 +80,7 @@ export default class BaseExpiration extends DynamicTypedPseudoDocument {
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["method", ...this._formPathsRoll, "result", "hr"];
+    return ["method", ...this._formPathsRoll, "hr"];
   }
 
   /**
@@ -121,7 +122,6 @@ export default class BaseExpiration extends DynamicTypedPseudoDocument {
    * @returns {boolean}
    */
   isValidEvent(event, context = {}) {
-    return (context.type === this.type
-      && [this.constructor.EXPIRY_CLEANUP_EVENT, this.constructor.EXPIRY_VALIDATION_EVENT].includes(event));
+    return (context.type === this.type && this.constructor.EXPIRY_EVENTS.has(event));
   }
 }

@@ -334,7 +334,7 @@ foundry.helpers.Hooks.once("init", function() {
     {
       cls: applications.sheets.effect.AttunementSheet,
       doc: documents.TeriockActiveEffect,
-      label: "TERIOCK.SHEETS.Attune.LABEL",
+      label: "TERIOCK.SHEETS.Attunement.LABEL",
       types: ["attunement"],
     },
     {

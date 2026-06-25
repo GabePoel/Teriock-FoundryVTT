@@ -1,10 +1,10 @@
-import DynamicTypedPseudoDocument from "../../abstract/dynamic-typed-pseudo-document.mjs";
+import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document.mjs";
 
 /**
  * @property {Teriock.Automations.Type} type
  * @property {ID<BaseAutomation>} _id
  */
-export default class BaseAutomation extends DynamicTypedPseudoDocument {
+export default class BaseAutomation extends MechanicPseudoDocument {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Base"];
 

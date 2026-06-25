@@ -17,7 +17,8 @@ export default function CommonSheetMixin(Base) {
      * @mixes DragDropCommonSheetPart
      * @mixes FieldsCommonSheetPart
      * @mixes ImageEditingCommonSheetPart
-     * @mixes AutomationsTabsCommonSheetPart
+     * @mixes MechanicsTabsCommonSheetPart
+     * @mixes MechanicsCommonSheetPart
      * @mixes LockingCommonSheetPart
      * @mixes MenuCommonSheetPart
      * @mixes StatDiceCommonSheetPart
@@ -35,12 +36,12 @@ export default function CommonSheetMixin(Base) {
         parts.DocumentCreationCommonSheetPart,
         parts.FieldsCommonSheetPart,
         parts.ImageEditingCommonSheetPart,
-        parts.AutomationsTabsCommonSheetPart,
+        parts.MechanicsTabsCommonSheetPart,
         parts.LockingCommonSheetPart,
         parts.MenuCommonSheetPart,
         parts.StatDiceCommonSheetPart,
         parts.ToggleCommonSheetPart,
-        parts.AutomationsCommonSheetPart,
+        parts.MechanicsCommonSheetPart,
         SourceRefreshButtonSheetMixin,
       )
     {

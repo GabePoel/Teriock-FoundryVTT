@@ -173,10 +173,8 @@ export default class BaseActorSystem
    * @returns {Promise<void>}
    */
   async postUpdate() {
-    const toDelete = this.parent.applicables.filter(e => e.system.shouldExpireFromConditions()).map(e => e.id);
-    await this.parent.deleteEmbeddedDocuments("ActiveEffect", toDelete);
     await Promise.all([...this.parent.getDependentTokens().map(t => t.postActorUpdate())]);
-    TeriockActiveEffect.registry.refresh(BaseExpiration.EXPIRY_VALIDATION_EVENT, {
+    await TeriockActiveEffect.registry.refresh(BaseExpiration.EXPIRY_VALIDATION_EVENT, {
       actors: new Set([this.parent]),
       type: StatusExpiration.TYPE,
     });

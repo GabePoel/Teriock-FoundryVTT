@@ -6,9 +6,12 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
  * {@link TeriockConsequence} sheet.
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
- * @mixes AutomationsCommonSheetPart
+ * @mixes MechanicsCommonSheetPart
  */
 export default class ConsequenceSheet extends ApplicableEffectSheet {
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = { position: { width: 600 } };
+
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     ...super.PARTS,

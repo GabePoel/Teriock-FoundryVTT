@@ -1,3 +1,6 @@
+import { MechanicPseudoDocument } from "../data/pseudo-documents/abstract/_module.mjs";
+import { TypeCollection } from "../documents/collections/_module.mjs";
+
 declare global {
   namespace Teriock.Sheet {
     export type DragDropSelector = { dragSelector: string | null, dropSelector: string | null };
@@ -15,9 +18,30 @@ declare global {
       currentTarget: HTMLElement;
     }
 
-    export type EquipmentSorter = (e: TeriockEquipment) => boolean | number | string;
+    export type MechanicCollectionConfig = {
+      baseClass: typeof MechanicPseudoDocument;
+      collection: TypeCollection<ID<MechanicPseudoDocument>, MechanicPseudoDocument>;
+      hint: string;
+      icon: string;
+      title: string;
+      types: Record<string, typeof MechanicPseudoDocument>;
+    };
 
-    export type AbilitySorter = (a: TeriockAbility) => boolean | number | string;
+    export type MechanicTab = {
+      active: boolean;
+      cssClass: string;
+      group: "mechanics";
+      icon: string;
+      id: "automations" | "expirations";
+      label: string;
+    };
+
+    export type MechanicEntry = {
+      collapsed: boolean;
+      formEditor: string;
+      mechanic: Teriock.PseudoDocuments.MechanicPseudoDocumentData;
+      messages: Teriock.UI.FormMessage[];
+    };
 
     export type _SheetConfiguration = { teriock: { autoIcon?: boolean } };
   }

@@ -8,6 +8,14 @@ const { fields } = foundry.data;
  */
 export default class TriggerExpiration extends BaseExpiration {
   /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Trigger"];
+
+  /** @inheritDoc */
+  static get LABEL() {
+    return "TERIOCK.EXPIRATIONS.Trigger.LABEL";
+  }
+
+  /** @inheritDoc */
   static get TYPE() {
     return "trigger";
   }
@@ -17,7 +25,7 @@ export default class TriggerExpiration extends BaseExpiration {
     return Object.assign(super.defineSchema(), {
       trigger: new fields.StringField({
         blank: false,
-        choices: formatDynamicSelectOptions(TERIOCK.config.trigger),
+        choices: formatDynamicSelectOptions(TERIOCK.config.trigger, { localize: true }),
         initial: "dawn",
         nullable: false,
       }),
