@@ -1,5 +1,4 @@
 import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
-import { conditionRequirementsField } from "../../../fields/helpers/builders.mjs";
 import { migrateValue } from "../../../shared/migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
@@ -9,8 +8,7 @@ const { fields } = foundry.data;
  * @property {"pre"|"on"|null} activationTime - Default time for to call activations for a simple trigger effect.
  * @property {Teriock.Fields.DynamicChoices} choices - Available trigger choices to select from.
  * @property {Teriock.System.Trigger|null} initial - Initial trigger this is set to.
- * @property {boolean} conditions - Whether trigger has checks for present or absent conditions.
- * @property {boolean} executionOnly - Force trigger to only have execution trigger choices. Overrides conditions.
+ * @property {boolean} executionOnly - Force trigger to only have execution trigger choices.
  * @property {boolean} nullable - Whether trigger is nullable.
  */
 
@@ -61,7 +59,6 @@ export default function TriggerAutomationMixin(Base) {
             protection: TERIOCK.config.trigger.protection,
             time: TERIOCK.config.trigger.time,
           },
-          conditions: true,
           executionOnly: false,
           initial: null,
           nullable: true,
@@ -70,7 +67,7 @@ export default function TriggerAutomationMixin(Base) {
 
       /** @inheritDoc */
       static defineSchema() {
-        const schema = Object.assign(super.defineSchema(), {
+        return Object.assign(super.defineSchema(), {
           trigger: new fields.StringField({
             blank: true,
             choices: this._processedTriggerChoices,
@@ -78,15 +75,24 @@ export default function TriggerAutomationMixin(Base) {
             nullable: this.triggerMetadata.nullable,
           }),
         });
-        if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
-          schema.conditions = conditionRequirementsField();
-        }
-        return schema;
       }
 
       /** @inheritDoc */
       static migrateData(source, options, state) {
         migrateValue(source, "trigger", "none", null);
+        // Condition prerequisites have been folded into the active qualifier.
+        if (source.conditions) {
+          const conditions = source.conditions;
+          delete source.conditions;
+          const pieces = [
+            ...(conditions.present ?? []).map((c) => `@status.${c}`),
+            ...(conditions.absent ?? []).map((c) => `not(@status.${c})`),
+          ];
+          if (pieces.length) {
+            if (source.activeQualifier && source.activeQualifier !== "1") { pieces.unshift(source.activeQualifier); }
+            source.activeQualifier = pieces.length === 1 ? pieces[0] : `and(${pieces.join(", ")})`;
+          }
+        }
         return super.migrateData(source, options, state);
       }
 
@@ -96,18 +102,6 @@ export default function TriggerAutomationMixin(Base) {
        */
       get _canRunPassively() {
         return this.document.type !== "ability" || this.document.system.maneuver === "passive";
-      }
-
-      /**
-       * Whether prerequisite conditions are met.
-       * @returns {boolean}
-       */
-      get _conditionsActive() {
-        if (this.document.actor && this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
-          for (const c of this.conditions.present) { if (!this.document.actor.statuses.has(c)) { return false; } }
-          for (const c of this.conditions.absent) { if (this.document.actor.statuses.has(c)) { return false; } }
-        }
-        return true;
       }
 
       /**
@@ -136,13 +130,7 @@ export default function TriggerAutomationMixin(Base) {
        * @returns {string[]}
        */
       get _triggerPaths() {
-        const paths = ["trigger"];
-        if (this._source.trigger) {
-          if (this.triggerMetadata.conditions && !this.triggerMetadata.executionOnly) {
-            paths.push(...["conditions.present", "conditions.absent"]);
-          }
-        }
-        return paths;
+        return ["trigger"];
       }
 
       /** @inheritDoc */
@@ -248,7 +236,7 @@ export default function TriggerAutomationMixin(Base) {
        */
       canFire(trigger) {
         return (trigger === this.trigger
-          && this._conditionsActive
+          && this.checkIfQualified()
           && (this._isActiveTrigger(trigger) || (this.active && this._canRunPassively && this._documentActive)));
       }
 

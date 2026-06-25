@@ -256,17 +256,6 @@ export function attributeField(options = { nullable: true, unp: false }) {
 }
 
 /**
- * Conditions that must be absent and present.
- * @returns {SchemaField}
- */
-export function conditionRequirementsField() {
-  return new SchemaField({
-    absent: new SetField(new StringField({ choices: TERIOCK.reference.conditions })),
-    present: new SetField(new StringField({ choices: TERIOCK.reference.conditions })),
-  });
-}
-
-/**
  * Field for a movement action.
  * @param {StringFieldOptions} [options]
  * @returns {StringField}

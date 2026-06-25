@@ -1,5 +1,6 @@
-import { conditionRequirementsField } from "../../fields/helpers/builders.mjs";
 import { BaseExpiration } from "./abstract/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * @property {object} statuses
@@ -22,7 +23,12 @@ export default class StatusExpiration extends BaseExpiration {
 
   /** @inheritDoc */
   static defineSchema() {
-    const schema = Object.assign(super.defineSchema(), { statuses: conditionRequirementsField() });
+    const schema = Object.assign(super.defineSchema(), {
+      statuses: new fields.SchemaField({
+        absent: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.conditions })),
+        present: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.conditions })),
+      }),
+    });
     delete schema.method;
     return schema;
   }
