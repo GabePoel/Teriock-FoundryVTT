@@ -19,7 +19,6 @@ declare global {
       commonMacro: automations.CommonMacroAutomation;
       cover: automations.CoverAutomation;
       duration: automations.DurationAutomation;
-      expiration: automations.ExpirationAutomation;
       feat: automations.FeatAutomation;
       hacks: automations.HacksAutomation;
       heal: automations.HealAutomation;
@@ -96,7 +95,6 @@ declare global {
     export interface TypeMap {
       combat: expirations.CombatExpiration;
       status: expirations.StatusExpiration;
-      time: expirations.TimeExpiration;
       trigger: expirations.TriggerExpiration;
     }
 

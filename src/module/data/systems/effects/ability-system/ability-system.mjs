@@ -84,7 +84,6 @@ export default class AbilitySystem
       automations.CommonOutcomesAutomation,
       automations.CoverAutomation,
       automations.DurationAutomation,
-      automations.ExpirationAutomation,
       automations.FeatAutomation,
       automations.HacksAutomation,
       automations.HealAutomation,
@@ -111,7 +110,6 @@ export default class AbilitySystem
       ...super._expirationTypes,
       expirations.CombatExpiration,
       expirations.StatusExpiration,
-      expirations.TimeExpiration,
       expirations.TriggerExpiration,
     ];
   }
