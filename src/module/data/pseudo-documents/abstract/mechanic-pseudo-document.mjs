@@ -89,7 +89,7 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
    * @param {object} [rollData]
    * @returns {boolean}
    */
-  checkIfQualified(rollData = {}) {
+  checkIfQualified(rollData) {
     return BaseRoll.qualify(this.activeQualifier, rollData ?? this.getRollData());
   }
 
