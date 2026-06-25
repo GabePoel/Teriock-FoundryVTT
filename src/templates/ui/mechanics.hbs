@@ -1,0 +1,52 @@
+{{#if splitMechanics}}
+  <div class="teriock-mechanics">
+    {{> "templates/generic/tab-navigation.hbs"
+      tabs=mechanicsTabs
+      tabClasses="teriock-mechanics-tabs"
+    }}
+    <section
+      class="
+        tab
+        {{#if mechanicsTabs.automations.active}}
+          active
+        {{/if}}
+      "
+      data-group="mechanics"
+      data-tab="automations"
+    >
+      {{> "teriock/ui/mechanic-collection"
+        entries=automationEntries
+        collection="automations"
+        addLabel="TERIOCK.SHEETS.Common.NAVIGATION.addAutomation"
+      }}
+    </section>
+    <section
+      class="
+        tab
+        {{#if mechanicsTabs.expirations.active}}
+          active
+        {{/if}}
+      "
+      data-group="mechanics"
+      data-tab="expirations"
+    >
+      {{> "teriock/ui/mechanic-collection"
+        entries=expirationEntries
+        collection="expirations"
+        addLabel="TERIOCK.SHEETS.Common.NAVIGATION.addExpiration"
+      }}
+    </section>
+  </div>
+{{else if hasAutomations}}
+  {{> "teriock/ui/mechanic-collection"
+    entries=automationEntries
+    collection="automations"
+    addLabel="TERIOCK.SHEETS.Common.NAVIGATION.addAutomation"
+  }}
+{{else if hasExpirations}}
+  {{> "teriock/ui/mechanic-collection"
+    entries=expirationEntries
+    collection="expirations"
+    addLabel="TERIOCK.SHEETS.Common.NAVIGATION.addExpiration"
+  }}
+{{/if}}
