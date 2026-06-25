@@ -219,11 +219,6 @@ export default class AbilityExecutionConstructor
   }
 
   /** @inheritDoc */
-  get name() {
-    return this.source.system.fullName;
-  }
-
-  /** @inheritDoc */
   get rollData() {
     return Object.assign(super.rollData, {
       "angle.dragon": game.teriock.getSetting("defaultDragonBreathAngle"),

@@ -1,7 +1,6 @@
-import { boostDialog } from "../../../applications/dialogs/_module.mjs";
 import impactConfig from "../../../constants/config/impact-config.mjs";
-import { BaseRoll, HarmRoll } from "../../../dice/rolls/_module.mjs";
-import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { ImpactsExecution } from "../../../executions/activity-executions/_module.mjs";
 import { formulaCommand } from "./abstract-command.mjs";
 
 /**
@@ -10,7 +9,7 @@ import { formulaCommand } from "./abstract-command.mjs";
  * @param {Teriock.Command.ImpactOptions} options
  */
 async function abstractImpactCommandOperation(actor, options) {
-  let formula = options.formula || "0";
+  const formula = options.formula || "0";
   const impact = options.impact || "damage";
   const config = TERIOCK.config.impact[impact];
   if (options.apply) {
@@ -20,16 +19,16 @@ async function abstractImpactCommandOperation(actor, options) {
     else { await config.apply(actor, amount); }
     return;
   }
-  const rollData = Object.assign(options.rollData ?? {}, actor?.getRollData() || {});
-  if (options.boost) {
-    formula = await boostDialog(formula, { boosts: options.boosts, document: options.document, impact, rollData });
-  }
-  if (!formula) { return; }
-  const roll = new HarmRoll(formula, rollData, { impact });
-  if (options.crit) { roll.alter(2, 0, { multiplyNumeric: false }); }
-  await roll.evaluate();
-  const messageData = { speaker: TeriockChatMessage.getSpeaker({ actor }), system: { avatar: actor?.img } };
-  await roll.toMessage(messageData);
+  await ImpactsExecution.create({
+    actor,
+    boosts: options.boosts,
+    crit: options.crit,
+    document: options.document,
+    formula,
+    impact,
+    rollData: options.rollData,
+    showDialog: options.boost,
+  });
 }
 
 /**

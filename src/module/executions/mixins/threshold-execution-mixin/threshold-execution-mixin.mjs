@@ -1,5 +1,3 @@
-import { TeriockExecutionEditor } from "../../../applications/api/_module.mjs";
-import { icons } from "../../../constants/display/icons.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
@@ -39,54 +37,34 @@ export default function ThresholdExecutionMixin(Base) {
         this.showDialog = showDialog;
       }
 
-      /** @returns {Teriock.Execution.ExecutionDialogEntry[]} */
-      get _activeDialogFields() {
-        return this._dialogFields.filter(f => {
-          return typeof f.condition === "function" ? f.condition() : Boolean(f.condition);
-        });
-      }
-
-      /** @returns {Teriock.Execution.ExecutionDialogButton[]} */
+      /** @inheritDoc */
       get _dialogButtons() {
-        return this.isRoll
-          ? [{
-            action: "confirm",
-            default: this.edge < 0,
-            icon: "fa-dice-d20",
-            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
-            name: "disadvantage",
-            callback: () => (this.edge = -1),
-          }, {
-            action: "confirm",
-            default: this.edge === 0,
-            icon: "fa-dice-d20",
-            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
-            name: "normal",
-            callback: () => (this.edge = 0),
-          }, {
-            action: "confirm",
-            default: this.edge > 0,
-            icon: "fa-dice-d20",
-            label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
-            name: "advantage",
-            callback: () => (this.edge = 1),
-          }]
-          : [{ action: "confirm", default: true, icon: icons.ui.enable, label: "COMMON.Confirm", name: "ok" }];
+        if (!this.isRoll) { return super._dialogButtons; }
+        return [{
+          action: "confirm",
+          default: this.edge < 0,
+          icon: "fa-dice-d20",
+          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
+          name: "disadvantage",
+          callback: () => (this.edge = -1),
+        }, {
+          action: "confirm",
+          default: this.edge === 0,
+          icon: "fa-dice-d20",
+          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
+          name: "normal",
+          callback: () => (this.edge = 0),
+        }, {
+          action: "confirm",
+          default: this.edge > 0,
+          icon: "fa-dice-d20",
+          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
+          name: "advantage",
+          callback: () => (this.edge = 1),
+        }];
       }
 
       /** @inheritDoc */
-      get _dialogDocuments() {
-        const docs = super._dialogDocuments ?? [];
-        if (this.journalEntryPage) {
-          docs.push({
-            document: this.journalEntryPage,
-            label: _loc(`TYPES.JournalEntryPage.${this.journalEntryPage.type}`),
-          });
-        }
-        return docs;
-      }
-
-      /** @returns {Teriock.Execution.ExecutionDialogEntry[]} */
       get _dialogFields() {
         return [{
           condition: this.requiresCompetence,
@@ -142,7 +120,7 @@ export default function ThresholdExecutionMixin(Base) {
        * @returns {string}
        */
       get name() {
-        return "";
+        return super.name ?? "";
       }
 
       /**
@@ -160,9 +138,7 @@ export default function ThresholdExecutionMixin(Base) {
 
       /** @inheritDoc */
       async _getInput() {
-        if (this.showDialog) {
-          if ((await this._showRollDialog()) === false) { return false; }
-        }
+        if (this.showDialog && (await this._showInputDialog()) === false) { return false; }
         return super._getInput();
       }
 
@@ -189,16 +165,6 @@ export default function ThresholdExecutionMixin(Base) {
       async _prepareFormula() {
         await this._prepareBaseFormula();
         await super._prepareFormula();
-      }
-
-      /**
-       * Show a dialog to configure basic roll options.
-       * @returns {Promise<false|void>}
-       */
-      async _showRollDialog() {
-        if (!this._activeDialogFields.length && !this._dialogDocuments.length) { return; }
-        const result = await TeriockExecutionEditor.prompt(this);
-        if (result === null) { return false; }
       }
     }
   );

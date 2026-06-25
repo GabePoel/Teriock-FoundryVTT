@@ -77,7 +77,10 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
     foundry.utils.setProperty(
       this.options,
       "window.title",
-      _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", { name: execution.name }).trim(),
+      _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", {
+        name: execution.name,
+        use: _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.use"),
+      }).trim(),
     );
     foundry.utils.setProperty(this.options, "window.icon", makeIconClass(execution.icon, "title"));
   }
@@ -99,8 +102,9 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
     for (const field of this.execution._activeDialogFields) {
       const element = /** @type {HTMLInputElement} */ (this.element.querySelector(`[name="${field.name}"]`));
       if (!element) { continue; }
-      element.addEventListener("change", () => {
+      element.addEventListener("change", async () => {
         field.update(this.#readFieldValue(field, element));
+        await this.render();
       });
     }
   }
@@ -113,7 +117,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
    */
   #prepareFieldContext(field, { small = false } = {}) {
     return {
-      classes: small ? "tgrid-item" : undefined,
+      classes: [...(field.classes ?? []), small ? "tgrid-item" : null].filterJoin(" "),
       field: field.field,
       hint: field.hint ? _loc(field.hint) : undefined,
       integer: field.integer,

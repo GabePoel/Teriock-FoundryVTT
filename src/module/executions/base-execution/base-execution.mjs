@@ -1,3 +1,4 @@
+import { TeriockExecutionEditor } from "../../applications/api/_module.mjs";
 import { CompetenceModel } from "../../data/models/_module.mjs";
 import * as dataMixins from "../../data/shared/mixins/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
@@ -74,11 +75,64 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   /** @type {BaseRoll[]} */
   rolls = [];
 
+  /**
+   * Whether to show an input dialog before this execution resolves.
+   * @type {boolean}
+   */
+  showDialog = false;
+
   /** @type {string[]} */
   tags = [];
 
   /** @type {object} */
   updates = {};
+
+  /**
+   * The dialog fields whose condition currently evaluates to true.
+   * @returns {Teriock.Execution.ExecutionDialogEntry[]}
+   */
+  get _activeDialogFields() {
+    return this._dialogFields.filter(f =>
+      Boolean(typeof f.condition === "function" ? f.condition() : (f.condition ?? true))
+    );
+  }
+
+  /**
+   * Buttons displayed in this execution's input dialog.
+   * @returns {Teriock.Execution.ExecutionDialogButton[]}
+   */
+  get _dialogButtons() {
+    return [{
+      action: "confirm",
+      default: true,
+      icon: TERIOCK.display.icons.ui.enable,
+      label: "COMMON.Confirm",
+      name: "ok",
+    }];
+  }
+
+  /**
+   * Documents displayed alongside this execution's input dialog.
+   * @returns {Teriock.Execution.ExecutionDialogDocument[]}
+   */
+  get _dialogDocuments() {
+    const docs = [];
+    if (this.journalEntryPage) {
+      docs.push({
+        document: this.journalEntryPage,
+        label: _loc(`TYPES.JournalEntryPage.${this.journalEntryPage.type}`),
+      });
+    }
+    return docs;
+  }
+
+  /**
+   * Fields displayed in this execution's input dialog.
+   * @returns {Teriock.Execution.ExecutionDialogEntry[]}
+   */
+  get _dialogFields() {
+    return [];
+  }
 
   /**
    * A class to use for roll construction.
@@ -167,6 +221,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   }
 
   /**
+   * An icon for this execution to show in its input dialog.
+   * @returns {string}
+   */
+  get icon() {
+    return TERIOCK.display.icons.ui.dice;
+  }
+
+  /**
    * A set journal entry page.
    * @returns {TeriockJournalEntryPage|null}
    */
@@ -180,6 +242,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    */
   get journalEntryPageIdentifier() {
     return null;
+  }
+
+  /**
+   * A name for this execution to show in its input dialog.
+   * @returns {string}
+   */
+  get name() {
+    return "";
   }
 
   /**
@@ -353,6 +423,16 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {Promise<false|void>}
    */
   async _prepareUpdates() {}
+
+  /**
+   * Show an input dialog to configure this execution before it resolves.
+   * @returns {Promise<false|void>}
+   */
+  async _showInputDialog() {
+    if (!this._activeDialogFields.length && !this._dialogDocuments.length) { return; }
+    const result = await TeriockExecutionEditor.prompt(this);
+    if (result === null) { return false; }
+  }
 
   /**
    * Update the actor with any costs or other changes as a result of this execution.

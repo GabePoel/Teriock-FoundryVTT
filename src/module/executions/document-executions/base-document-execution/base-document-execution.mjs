@@ -8,8 +8,8 @@ export default class BaseDocumentExecution extends BaseExecution {
   constructor(options = {}) {
     super(options);
     this._source = options.source;
-    this._actor = options.actor ?? this.source.actor ?? game.actors.default;
-    this._automations = this.source.system.automations.contents || [];
+    this._actor = options.actor ?? this.source?.actor ?? game.actors.default;
+    this._automations = this.source.system.automations?.contents ?? [];
     this._boosts = options.boosts ?? this.source.system.boosts ?? this._boosts;
   }
 
@@ -26,6 +26,11 @@ export default class BaseDocumentExecution extends BaseExecution {
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, { system: { _src: this.source.uuid } });
+  }
+
+  /** @inheritDoc */
+  get name() {
+    return this.source.system.fullName;
   }
 
   /**
@@ -96,7 +101,7 @@ export default class BaseDocumentExecution extends BaseExecution {
    * @param {Teriock.Execution.DocumentExecutionOptions} options
    */
   _determineCompetence(options) {
-    this.competence.raw = options.source?.system.competence.value || 0;
+    this.competence.raw = options.source?.system.competence?.value || 0;
     super._determineCompetence(options);
   }
 

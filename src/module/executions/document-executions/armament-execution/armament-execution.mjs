@@ -1,56 +1,58 @@
-import { boostDialog, selectDocumentsDialog } from "../../../applications/dialogs/_module.mjs";
-import { HarmRoll } from "../../../dice/rolls/_module.mjs";
+import { selectDocumentsDialog } from "../../../applications/dialogs/_module.mjs";
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import * as executionMixins from "../../mixins/_module.mjs";
 import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * @implements {Teriock.Execution.ArmamentExecutionInterface}
+ * @mixes ImpactsExecution
  * @param {HarmRoll[]} rolls
  */
-export default class ArmamentExecution extends BaseDocumentExecution {
+export default class ArmamentExecution extends executionMixins.ImpactsExecutionMixin(BaseDocumentExecution) {
   /**
    * @param {Teriock.Execution.ArmamentExecutionOptions} options
    */
   constructor(options = {}) {
     super(options);
-    this.crit = options.crit ?? false;
     this.impacts = new Set(options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"]);
     this.bonus = options.bonus ?? "";
     this.showDialog = options.showDialog;
     this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
     this.formula = options.formula
       ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
+    this.#dealImpacts = formulaExists(this.formula);
   }
 
-  /**
-   * A single impact if this only has one.
-   * @returns {Teriock.Keys.Impact|null}
-   */
-  get #singleImpact() {
-    if (this.impacts.size === 1) { return this.impacts.first(); }
-    return null;
-  }
+  /** @type {boolean} */
+  #dealImpacts;
 
-  /**
-   * A copy of the roll for each impact this deals.
-   * @returns {HarmRoll[]}
-   */
-  get #typedRolls() {
-    if (this.rolls.length === 0) { return []; }
-    const roll = this.rolls[0];
-    return Array.from(this.impacts).map(impact => {
-      const impactRoll = roll.clone({ evaluated: true });
-      impactRoll.impact = impact;
-      return impactRoll;
-    });
-  }
-
-  crit = false;
+  /** @type {boolean} */
+  #useAbilities = true;
 
   /** @inheritDoc */
-  get _RollClass() {
-    return HarmRoll;
+  get _dialogFields() {
+    return [...super._dialogFields, {
+      classes: ["slim"],
+      field: new fields.BooleanField(),
+      hint: "TERIOCK.SYSTEMS.Armament.EXECUTION.dealImpacts.hint",
+      label: "TERIOCK.SYSTEMS.Armament.EXECUTION.dealImpacts.label",
+      name: "dealImpacts",
+      small: true,
+      value: this.#dealImpacts,
+      update: v => (this.#dealImpacts = v),
+    }, {
+      classes: ["slim"],
+      field: new fields.BooleanField(),
+      hint: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.hint",
+      label: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.label",
+      name: "useAbilities",
+      small: true,
+      value: this.#useAbilities,
+      update: v => (this.#useAbilities = v),
+    }];
   }
 
   /** @inheritDoc */
@@ -61,64 +63,21 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   }
 
   /** @inheritDoc */
-  get chatData() {
-    return { ...super.chatData, rolls: this.#typedRolls };
-  }
-
-  /** @inheritDoc */
   get executionNames() {
     return [...super.executionNames, "Armament"];
   }
 
   /** @inheritDoc */
-  get flavor() {
-    if (this.impacts.size === 1) {
-      return _loc("TERIOCK.ROLLS.Base.name", { value: TERIOCK.config.impact[this.impacts.first()].label });
-    }
-    return _loc("TERIOCK.ROLLS.Harm.multi");
-  }
-
-  /** @inheritDoc */
-  async _buildActivations() {
-    for (const roll of this.#typedRolls) { this.activations.push(...(await roll.getActivations())); }
-    await super._buildActivations();
-  }
-
-  /** @inheritDoc */
-  async _buildPanels() {
-    await super._buildPanels();
-    for (const roll of this.#typedRolls) { this.panels.push(...(await roll.getPanels())); }
-  }
-
-  /** @inheritDoc */
-  async _buildRolls() {
-    await super._buildRolls();
-    if (this.crit) {
-      for (const roll of this.rolls) {
-        roll.impact = this.#singleImpact;
-        roll.alter(2, 0, { multiplyNumeric: false });
-      }
-    }
+  get hasFormula() {
+    return this.#dealImpacts;
   }
 
   /** @inheritDoc */
   async _getInput() {
-    let boosts = 0;
-    for (const impact of this.impacts) {
-      if (this._hasBoostForImpact(impact)) {
-        const amt = this._boostsResolved[impact];
-        if (amt > boosts) { boosts = amt; }
+    if (this.showDialog) {
+      for (const impact of this.impacts) {
+        if (this._hasBoostForImpact(impact)) { this.boosts = Math.max(this.boosts, this._boostsResolved[impact]); }
       }
-    }
-    if (this.showDialog && formulaExists(this.formula)) {
-      this.formula = await boostDialog(this.formula, {
-        boosts,
-        crit: this.crit,
-        document: this.source,
-        impact: this.#singleImpact,
-      });
-      if (this.formula === null) { return false; }
-      this.crit = false;
     }
     return super._getInput();
   }
@@ -132,7 +91,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   async _postExecute() {
     const onUseAbilities = this.source.system.onUseAbilities;
-    if (onUseAbilities.length > 0) {
+    if (this.#useAbilities && onUseAbilities.length > 0) {
       const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", { name: this.source.name }),
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
@@ -151,6 +110,7 @@ export default class ArmamentExecution extends BaseDocumentExecution {
 
   /** @inheritDoc */
   async _prepareFormula() {
+    this._applyImpactModifiers();
     if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
   }
 

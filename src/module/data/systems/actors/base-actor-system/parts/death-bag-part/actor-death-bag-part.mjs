@@ -1,4 +1,4 @@
-import { deathBagDialog } from "../../../../../../applications/dialogs/_module.mjs";
+import { DeathBagExecution } from "../../../../../../executions/actor-executions/_module.mjs";
 import { FormulaField } from "../../../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
@@ -31,11 +31,11 @@ export default Base => {
 
       /**
        * Pull from the Death Bag.
+       * @param {Partial<Teriock.Execution.DeathBagExecutionOptions>} [options]
        * @returns {Promise<void>}
        */
-      async deathBagPull() {
-        await deathBagDialog(this.actor);
-        await this.parent.hookCall("executeDeathBag");
+      async deathBagPull(options = {}) {
+        await DeathBagExecution.create(Object.assign(options, { actor: this.parent }));
       }
 
       /** @inheritDoc */

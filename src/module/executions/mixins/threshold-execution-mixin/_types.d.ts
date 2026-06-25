@@ -5,7 +5,8 @@ declare global {
     export type ThresholdExecutionOptions = Teriock.Execution.BaseExecutionOptions & Teriock.Command.ThresholdOptions;
 
     export type ExecutionDialogEntry = {
-      condition: (() => boolean) | boolean;
+      classes: string[];
+      condition?: (() => boolean) | boolean;
       field: DataField;
       hint?: string;
       integer?: number;
