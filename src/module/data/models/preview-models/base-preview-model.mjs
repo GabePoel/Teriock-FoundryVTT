@@ -1,6 +1,5 @@
 import { createElement } from "../../../helpers/html.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
-import { blockGaplessField, blockSizeField } from "../../fields/helpers/builders.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -34,7 +33,22 @@ export default class BasePreviewModel extends EmbeddedDataModel {
    * @returns {Record<string, DataField>}
    */
   static defineDisplay() {
-    return { gapless: blockGaplessField(), size: blockSizeField() };
+    return {
+      gapless: new fields.BooleanField({
+        hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint"),
+        initial: false,
+        label: _loc("TERIOCK.SCHEMA.BlackGapless.label"),
+      }),
+      size: new fields.StringField({
+        blank: false,
+        choices: TERIOCK.config.display.sizes,
+        hint: _loc("TERIOCK.SCHEMA.BlockSize.hint"),
+        initial: "medium",
+        label: _loc("TERIOCK.SCHEMA.BlockSize.label"),
+        nullable: false,
+        required: true,
+      }),
+    };
   }
 
   /**

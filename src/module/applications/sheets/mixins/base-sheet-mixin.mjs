@@ -15,6 +15,12 @@ export default function BaseSheetMixin(Base) {
     static DEFAULT_OPTIONS = { teriock: { autoIcon: true } };
 
     /** @inheritDoc */
+    get isEditable() {
+      if (this.document.isStatus) { return false; }
+      return super.isEditable;
+    }
+
+    /** @inheritDoc */
     async _onFirstRender(context, options) {
       await super._onFirstRender(context, options);
       if (!this.options.teriock?.autoIcon || !this.window.header) { return; }

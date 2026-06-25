@@ -187,42 +187,6 @@ export function panelsField() {
 }
 
 /**
- * Field that sets block sizes.
- * @param {object} [options]
- * @param {Teriock.Keys.CardDisplaySize} [options.initial]
- * @param {string} [options.child]
- * @returns {StringField}
- */
-export function blockSizeField(options = {}) {
-  const { child = "TERIOCK.SCHEMA.BlockSize.default", initial = "medium" } = options;
-  return new StringField({
-    blank: initial === null,
-    choices: TERIOCK.config.display.sizes,
-    hint: _loc("TERIOCK.SCHEMA.BlockSize.hint", { name: _loc(child).toLocaleLowerCase() }),
-    initial,
-    label: _loc("TERIOCK.SCHEMA.BlockSize.label", { name: _loc(child) }),
-    nullable: initial === null,
-    required: true,
-  });
-}
-
-/**
- * Field that sets block gaps.
- * @param {object} [options]
- * @param {boolean} [options.initial]
- * @param {string} [options.child]
- * @returns {BooleanField}
- */
-export function blockGaplessField(options = {}) {
-  const { child = "TERIOCK.SCHEMA.BlackGapless.default", initial = false } = options;
-  return new BooleanField({
-    hint: _loc("TERIOCK.SCHEMA.BlackGapless.hint", { name: _loc(child).toLocaleLowerCase() }),
-    initial,
-    label: _loc("TERIOCK.SCHEMA.BlackGapless.label", { name: _loc(child) }),
-  });
-}
-
-/**
  * Competence field.
  * @returns {NumberField}
  */
