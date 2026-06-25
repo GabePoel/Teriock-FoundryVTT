@@ -14,7 +14,7 @@ export default function ExpirableSystemMixin(Base) {
     class ExpirableSystem extends Base {
       /**
        * Array of the types of expirations that this system can have.
-       * @returns {(typeof BaseExpiration)[]}
+       * @returns {(typeof Teriock.Expirations.Any)[]}
        */
       static get _expirationTypes() {
         return [];
@@ -22,7 +22,7 @@ export default function ExpirableSystemMixin(Base) {
 
       /**
        * The types of expirations that this system can have.
-       * @returns {Record<string, (typeof BaseExpiration)>}
+       * @returns {Record<string, (typeof Teriock.Expirations.Any)>}
        */
       static get expirationTypes() {
         return Object.fromEntries(this._expirationTypes.map(e => [e.TYPE, e]));

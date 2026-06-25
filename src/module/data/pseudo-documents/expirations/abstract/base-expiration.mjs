@@ -2,7 +2,7 @@ import mathConfig from "../../../../constants/config/math-config.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
-import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
+import DynamicTypedPseudoDocument from "../../abstract/dynamic-typed-pseudo-document.mjs";
 
 const { fields } = foundry.data;
 
@@ -15,9 +15,13 @@ const { fields } = foundry.data;
 
 /**
  * @extends {Teriock.Expirations.BaseExpirationData}
- * @todo This will depend on many of the toggles that `BaseAutomation` has. Move them and crit handling to new class.
+ * @property {AnyActiveEffect} document
+ * @property {BaseEffectSystem} parent
+ * @property {ID<BaseExpiration>} _id
+ * @property {Teriock.Expirations.Type} type
+ * @todo Needs crit handling.
  */
-export default class BaseExpiration extends TypedPseudoDocument {
+export default class BaseExpiration extends DynamicTypedPseudoDocument {
   /**
    * The expiry event which checks expiration cleanup.
    * @returns {string}
@@ -36,7 +40,7 @@ export default class BaseExpiration extends TypedPseudoDocument {
 
   /** @inheritDoc */
   static get metadata() {
-    return Object.assign(super.metadata, { label: _loc("TERIOCK.EXPIRATIONS.Base.LABEL") });
+    return Object.assign(super.metadata, { documentName: "Expiration", label: _loc("TERIOCK.EXPIRATIONS.Base.LABEL") });
   }
 
   /** @inheritDoc */

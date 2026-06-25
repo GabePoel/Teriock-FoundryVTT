@@ -1,20 +1,10 @@
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
-import { FormulaField } from "../../../fields/_module.mjs";
-import { competenceField } from "../../../fields/helpers/builders.mjs";
-import * as dataMixins from "../../../shared/mixins/_module.mjs";
-import TypedPseudoDocument from "../../abstract/typed-pseudo-document.mjs";
-
-const { fields } = foundry.data;
+import DynamicTypedPseudoDocument from "../../abstract/dynamic-typed-pseudo-document.mjs";
 
 /**
- * @extends {Teriock.Automations.BaseAutomationData}
- * @extends {TypedPseudoDocument}
- * @mixes PropagationData
- * @property {ID<BaseAutomation>} _id
  * @property {Teriock.Automations.Type} type
+ * @property {ID<BaseAutomation>} _id
  */
-export default class BaseAutomation extends dataMixins.PropagationDataMixin(TypedPseudoDocument) {
+export default class BaseAutomation extends DynamicTypedPseudoDocument {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Base"];
 
@@ -38,100 +28,13 @@ export default class BaseAutomation extends dataMixins.PropagationDataMixin(Type
     });
   }
 
-  /** @inheritDoc */
-  static get TYPE() {
-    return "base";
-  }
-
-  /** @inheritDoc */
-  static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      activeQualifier: new FormulaField({ deterministic: true, initial: "1" }),
-      competencies: new fields.SetField(competenceField(), { initial: [0, 1, 2] }),
-      heighten: new fields.SetField(
-        new fields.NumberField({
-          choices: localizeChoices({
-            0: "TERIOCK.AUTOMATIONS.Base.FIELDS.heighten.choices.0",
-            1: "TERIOCK.AUTOMATIONS.Base.FIELDS.heighten.choices.1",
-          }),
-        }),
-        { initial: [0, 1] },
-      ),
-    });
-  }
-
-  /**
-   * Whether this is active and should be included in the overall effect.
-   * @returns {boolean}
-   */
-  get active() {
-    return this.competent && this.checkIfQualified();
-  }
-
-  /**
-   * Whether this can crit.
-   * @returns {boolean}
-   */
-  get canCrit() {
-    return false;
-  }
-
-  /**
-   * Whether the competence requirements for this to be active are met.
-   * @returns {boolean}
-   */
-  get competent() {
-    return this.competencies.has(this.parent.competence.value);
-  }
-
-  /**
-   * Notification-style messages that appear in the editor form.
-   * @returns {Teriock.UI.FormMessage[]}
-   */
-  get formMessages() {
-    return [];
-  }
-
   /**
    * Whether this is passive or not.
    * @returns {boolean}
    */
   get isPassive() {
-    if (this.document.type === "ability") { return this.parent.maneuver === "passive"; }
+    if (this.document.type === "ability") { return this.document?.system?.maneuver === "passive"; }
     return this.document.type === "property";
-  }
-
-  /**
-   * Whether this wants a competence dialog to be displayed upon execution.
-   * @return {boolean}
-   */
-  get requiresCompetence() {
-    return this.competencies.size !== 3;
-  }
-
-  /**
-   * Whether this is qualified.
-   * @param {object} [rollData]
-   * @returns {boolean}
-   */
-  checkIfQualified(rollData = {}) {
-    return BaseRoll.qualify(this.activeQualifier, rollData ?? this.getRollData());
-  }
-
-  /**
-   * Edit this automation's active qualifier.
-   * @returns {Promise<void>}
-   */
-  async editActiveQualifier() {
-    const editor = new foundry.applications.apps.FormulaEditor({
-      context: "actor",
-      formula: this.activeQualifier,
-      window: { title: this.getFieldForProperty("activeQualifier")?.label },
-    });
-    editor.addEventListener("close", async () => {
-      await this.document?.update({ [`${this.localPath}.activeQualifier`]: editor.formula });
-    });
-    await editor.render(true);
   }
 
   /**

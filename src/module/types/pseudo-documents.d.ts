@@ -1,5 +1,6 @@
 import * as activations from "../data/pseudo-documents/activations/_module.mjs";
 import * as automations from "../data/pseudo-documents/automations/_module.mjs";
+import * as expirations from "../data/pseudo-documents/expirations/_module.mjs";
 
 declare global {
   namespace Teriock.Automations {
@@ -85,6 +86,18 @@ declare global {
       unhack: activations.TakeUnhackActivation;
       useExternal: activations.UseExternalActivation;
       useLocal: activations.UseLocalActivation;
+    }
+
+    export type Type = keyof TypeMap;
+    export type Any = TypeMap[Type];
+  }
+
+  namespace Teriock.Expirations {
+    export interface TypeMap {
+      combat: expirations.CombatExpiration;
+      status: expirations.StatusExpiration;
+      time: expirations.TimeExpiration;
+      trigger: expirations.TriggerExpiration;
     }
 
     export type Type = keyof TypeMap;
