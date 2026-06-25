@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: q9K4tFcggwWF1M1m
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/bumbling.webp
         name: Bumbling
         system:
@@ -60,7 +60,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/construct-mind.webp
         name: Construct Mind
         system:
@@ -125,7 +125,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/constructed-body.webp
         name: Constructed Body
         system:
@@ -208,7 +208,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -243,7 +243,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/gliding.webp
         name: Gliding
         system:
@@ -299,7 +299,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/knockback.webp
         name: Knockback
         system:
@@ -357,7 +357,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/natural-hide.webp
         name: Natural Hide
         system:
@@ -404,7 +404,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -439,7 +439,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -474,7 +474,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/partial-undead.webp
         name: Partial Undead
         system:
@@ -514,7 +514,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/passive-endure.webp
         name: Passive Endure
         system:
@@ -557,7 +557,7 @@ items:
               attempted to @Identifier[core:block-interaction]{block} the
               triggering @Identifier[core:attack-interaction]{attack}, then a
               limb that @Identifier[keyword:using]{used} whatever
-              @Wiki[Category:Items]{item} you
+              @Pack[teriock.equipment]{item} you
               @Identifier[core:block-interaction]{blocked} with is the one
               that's @Identifier[damage:hack]{hacked}. Otherwise, if the
               @Identifier[core:damage]{damage} was dealt by a creature, they
@@ -584,47 +584,11 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 0
-              override:
-                combat: true
-              type: expiration
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 1
-              override:
-                combat: true
-              type: expiration
             5d57231066693cee:
               _id: 5d57231066693cee
               executor: false
@@ -644,6 +608,31 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
+              timing: end
+              type: combat
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: end
+              type: combat
           form: normal
           identifier: snare
           interaction: attack
@@ -673,13 +662,14 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/spell-immunity.webp
         name: Spell Immunity
         system:
           automations:
             WCOWPl5PVXo46Bmp:
               _id: WCOWPl5PVXo46Bmp
+              activeQualifier: not(@status.down)
               category: other
               relation: immunities
               type: protection
@@ -688,9 +678,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
             unit: unlimited
           effectTypes:
             - immunity
@@ -708,6 +695,7 @@ items:
             - magical
           range:
             unit: self
+          requirements: <p>You are @Identifier[status:up]{up}.</p>
           targets:
             - self
         transfer: true
@@ -720,7 +708,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/skills/trades/profession-sailing-ship.webp
         name: Talented Mariner
         system:
@@ -766,7 +754,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/tiny-strength.webp
         name: Tiny Strength
         system:
@@ -801,27 +789,11 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/tumble.webp
         name: Tumble
         system:
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-              override:
-                combat: true
-              type: expiration
             KZJ2N3W1O5Hm0Y4a:
               _id: KZJ2N3W1O5Hm0Y4a
               display:
@@ -862,6 +834,19 @@ items:
             ends.</p>
           executionTime:
             base: r1
+          expirations:
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: executor
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: start
+              type: combat
           form: normal
           identifier: tumble
           interaction: manifest
@@ -897,7 +882,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/whirlwind-aura.webp
         name: Whirlwind Aura
         system:
@@ -977,7 +962,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
         name: Healing Sensitivity
         system:
@@ -1052,7 +1037,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: E6q5xsR0sa3T35PJ
         _key: >-
@@ -1062,7 +1047,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/cumbersome.webp
         name: Cumbersome
         system:
@@ -1107,7 +1092,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/fragile.webp
         name: Fragile
         system:

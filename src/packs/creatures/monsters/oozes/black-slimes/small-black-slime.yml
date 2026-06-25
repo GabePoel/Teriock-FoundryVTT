@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: ERAd5WL7VPBplT44
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
         name: Acidic Blood
         system:
@@ -68,7 +68,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -76,9 +76,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
             unit: unlimited
           effectTypes:
             - sensory
@@ -100,7 +97,9 @@ items:
             - martial
           range:
             unit: self
-          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+          requirements: >-
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic}.</p>
           skill: true
           standard: true
           targets:
@@ -119,7 +118,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/slimes/slime-giant-face-eyes.webp
         name: Blind Fighting
         system:
@@ -176,7 +175,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/bumbling.webp
         name: Bumbling
         system:
@@ -211,7 +210,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -259,7 +258,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -300,7 +299,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
         name: Gooey Damage Reduction
         system:
@@ -335,7 +334,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -370,7 +369,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
         name: Ooze Mind
         system:
@@ -435,7 +434,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/resist-effects.webp
         name: Resist Effects
         system:
@@ -542,7 +541,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/slow.webp
         name: Slow
         system:
@@ -577,7 +576,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
@@ -621,7 +620,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/vitals-durability.webp
         name: Vitals Durability
         system:
@@ -672,7 +671,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -680,6 +679,7 @@ items:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: not(@status.down)
               changes:
                 - key: system.senses.smell
                   phase: derived
@@ -692,10 +692,7 @@ items:
             raw: 0
           delivery: aura
           duration:
-            conditions:
-              absent:
-                - down
-            unit: unlimited
+            unit: instant
           effectTypes:
             - sensory
           executionTime:
@@ -716,8 +713,9 @@ items:
             raw: '10'
             unit: ft
           requirements: >-
-            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
-            target is not @Identifier[status:odorless]{odorless}.</p>
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic} and the target is not
+            @Identifier[status:odorless]{odorless}.</p>
           skill: true
           standard: true
           targets:
@@ -764,7 +762,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: ycpaNkX8sIbCk6Lt
         _key: >-
@@ -774,7 +772,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -798,7 +796,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -824,7 +822,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -867,7 +865,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: Q3bElOKJWjw3DI9t
         _key: >-
@@ -877,7 +875,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -943,7 +941,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/spirit-guide.webp
         name: Spirit Guide
         system:
@@ -1026,7 +1024,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/summon-the-dead.webp
         name: Summon the Dead
         system:
@@ -1103,7 +1101,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/terror-ball.webp
         name: Terror Ball
         system:
@@ -1185,24 +1183,24 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: PVGXdK4fw0CAcTLa
-    _key: '!actors.items!5c43d8698a6166cb.PVGXdK4fw0CAcTLa'
+  - _id: ZfbDfi78B4k5ySmr
+    _key: '!actors.items!5c43d8698a6166cb.ZfbDfi78B4k5ySmr'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!5c43d8698a6166cb.PVGXdK4fw0CAcTLa.NGCuRUaVtXnxAbRe
+          !actors.items.effects!5c43d8698a6166cb.ZfbDfi78B4k5ySmr.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1252,13 +1250,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!5c43d8698a6166cb.PVGXdK4fw0CAcTLa.aCWLNsvSFjEuLTyl
+          !actors.items.effects!5c43d8698a6166cb.ZfbDfi78B4k5ySmr.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

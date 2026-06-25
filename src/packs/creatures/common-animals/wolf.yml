@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: agKpP566qqPTxSZX
         _key: >-
@@ -25,13 +25,14 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/advanced-hearing.webp
         name: Advanced Hearing
         system:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: not(@status.down)
               changes:
                 - key: system.senses.hearing
                   phase: derived
@@ -44,9 +45,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
             unit: unlimited
           effectTypes:
             - sensory
@@ -66,6 +64,7 @@ items:
             - martial
           range:
             unit: self
+          requirements: <p>You are @Identifier[status:up]{up}.</p>
           targets:
             - self
           upgrades:
@@ -82,7 +81,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -90,9 +89,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
             unit: unlimited
           effectTypes:
             - sensory
@@ -114,7 +110,9 @@ items:
             - martial
           range:
             unit: self
-          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+          requirements: >-
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic}.</p>
           skill: true
           standard: true
           targets:
@@ -133,7 +131,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -171,7 +169,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -206,7 +204,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/hack.webp
         name: Hack
         system:
@@ -262,7 +260,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/hunting-party.webp
         name: Hunting Party
         system:
@@ -323,7 +321,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/impale.webp
         name: Impale
         system:
@@ -378,7 +376,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -413,7 +411,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -448,7 +446,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -483,7 +481,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -518,7 +516,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/slay.webp
         name: Slay
         system:
@@ -594,7 +592,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/track.webp
         name: Track
         system:
@@ -650,7 +648,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/vitals-hack.webp
         name: Vitals Hack
         system:
@@ -711,7 +709,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -719,6 +717,7 @@ items:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: not(@status.down)
               changes:
                 - key: system.senses.smell
                   phase: derived
@@ -731,10 +730,7 @@ items:
             raw: 0
           delivery: aura
           duration:
-            conditions:
-              absent:
-                - down
-            unit: unlimited
+            unit: instant
           effectTypes:
             - sensory
           executionTime:
@@ -755,8 +751,9 @@ items:
             raw: '10'
             unit: ft
           requirements: >-
-            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
-            target is not @Identifier[status:odorless]{odorless}.</p>
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic} and the target is not
+            @Identifier[status:odorless]{odorless}.</p>
           skill: true
           standard: true
           targets:
@@ -771,28 +768,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
           _sup: ZhZXJHYOfLhrFner
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-              override:
-                combat: true
-              type: expiration
             7400b41f20d9f100:
               _id: 7400b41f20d9f100
               all: false
@@ -840,6 +821,19 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: start
+              type: combat
           featSaveAttribute: int
           form: normal
           identifier: battle-cry-aura
@@ -870,7 +864,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
@@ -924,7 +918,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/flanking.webp
         name: Flanking
         system:
@@ -965,48 +959,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
           _sup: xWHfU0gDAtzf3JGc
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 0
-              override:
-                combat: true
-              type: expiration
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 1
-              override:
-                combat: true
-              type: expiration
             5d57231066693cee:
               _id: 5d57231066693cee
               executor: false
@@ -1029,6 +987,31 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
+              timing: end
+              type: combat
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: end
+              type: combat
           form: normal
           identifier: snare
           interaction: attack
@@ -1059,7 +1042,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/agile.webp
         name: Agile
         system:
@@ -1131,7 +1114,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: T6tkKBbgt98kmWzP
         _key: >-
@@ -1141,7 +1124,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1167,7 +1150,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1210,7 +1193,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -1220,7 +1203,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1246,7 +1229,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1291,7 +1274,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1301,7 +1284,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1325,7 +1308,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1368,7 +1351,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     folder: 30f4d11e5e53d332
     img: systems/teriock/src/icons/body-parts/hide.webp
     name: Hide

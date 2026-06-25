@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
     name: Advanced Smell
     system:
@@ -45,7 +45,9 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+      requirements: >-
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic}.</p>
       skill: true
       standard: true
       targets:
@@ -81,7 +83,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/fearless.webp
     name: Fearless
     system:
@@ -122,7 +124,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     name: Scent Seeing
     system:
@@ -130,6 +132,7 @@ effects:
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
           changes:
             - key: system.senses.smell
               phase: derived
@@ -145,7 +148,7 @@ effects:
         conditions:
           absent:
             - down
-        unit: unlimited
+        unit: instant
       effectTypes:
         - sensory
       executionTime:
@@ -166,8 +169,9 @@ effects:
         raw: '10'
         unit: ft
       requirements: >-
-        <p>You are not @Identifier[status:anosmatic]{anosmatic} and the target
-        is not @Identifier[status:odorless]{odorless}.</p>
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic} and the target is not
+        @Identifier[status:odorless]{odorless}.</p>
       skill: true
       standard: true
       targets:

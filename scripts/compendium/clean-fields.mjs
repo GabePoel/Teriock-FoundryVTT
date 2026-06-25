@@ -26,6 +26,7 @@ export function cleanDocument(doc) {
     cleanActiveEffect(doc);
     if (doc.type === "character" || doc.type === "creature") { cleanActor(doc); }
     if (doc.system.automations) { cleanAutomations(doc.system.automations); }
+    if (doc.system.expirations) { cleanExpirations(doc.system.expirations); }
     if (doc.type === "ability") { cleanAbility(doc); }
     if (doc.type === "body") { cleanBody(doc); }
     if (doc.type === "creature") { cleanCreature(doc); }
@@ -363,9 +364,34 @@ function cleanAutomations(automations) {
 }
 
 /**
+ * @param {Record<string, Teriock.Expirations.Any>} expirations
+ */
+function cleanExpirations(expirations) {
+  for (const e of Object.values(expirations)) { cleanExpiration(e); }
+}
+
+/**
+ * Clean fields shared by all mechanics (both automations and expirations).
+ * @param {Teriock.PseudoDocuments.MechanicPseudoDocumentData} mechanic
+ */
+function cleanMechanic(mechanic) {
+  if (mechanic.activeQualifier === "1") { delete mechanic.activeQualifier; }
+}
+
+/**
+ * @param {Teriock.Expirations.Any} expiration
+ */
+function cleanExpiration(expiration) {
+  cleanMechanic(expiration);
+  if (expiration.type === "status") { delete expiration.method; }
+  if (expiration.method !== "roll") { delete expiration.roll; }
+}
+
+/**
  * @param {Teriock.Automations.Any} automation
  */
 function cleanAutomation(automation) {
+  cleanMechanic(automation);
   delete automation.transformation;
   if (!automation.overrideCompetence) { delete automation.overrideCompetence; }
   if (!automation.overrideData) { delete automation.overrideData; }
@@ -380,7 +406,6 @@ function cleanAutomation(automation) {
     delete automation.when;
     delete automation.who;
   }
-  if (automation.activeQualifier === "1") { delete automation.activeQualifier; }
   if (automation.type === "changes") {
     for (const c of automation.changes ?? []) {
       delete c.qualifier;

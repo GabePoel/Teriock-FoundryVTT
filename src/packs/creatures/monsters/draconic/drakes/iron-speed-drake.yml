@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: zg1KZn5uwUITxUla
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/battle-cry.webp
         name: Battle Cry
         system:
@@ -63,7 +63,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -107,7 +107,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -175,7 +175,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/iron-drake-breath.webp
         name: Iron Drake Breath
         system:
@@ -248,7 +248,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/night-vision.webp
         name: Night Vision
         system:
@@ -296,7 +296,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -331,7 +331,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -366,7 +366,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -401,7 +401,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/stupid-intelligence.webp
         name: Stupid Intelligence
         system:
@@ -436,7 +436,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/super-speed.webp
         name: Super Speed
         system:
@@ -471,7 +471,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
         name: Battle Cry Resistance
         system:
@@ -525,28 +525,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
         name: Battle Cry Aura
         system:
           _sup: zg1KZn5uwUITxUla
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-              override:
-                combat: true
-              type: expiration
             7400b41f20d9f100:
               _id: 7400b41f20d9f100
               all: false
@@ -594,6 +578,19 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: start
+              type: combat
           featSaveAttribute: int
           form: normal
           identifier: battle-cry-aura
@@ -659,7 +656,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: Sl0nzLp79MCyqwfT
         _key: >-
@@ -669,13 +666,14 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/gladiator-skills.webp
         name: Gladiator Skills
         system:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: '@status.dueling'
               changes:
                 - key: system.hp.base
                   phase: derived
@@ -688,9 +686,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              present:
-                - dueling
             unit: unlimited
           executionTime:
             base: passive
@@ -729,7 +724,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/hack.webp
         name: Hack
         system:
@@ -784,47 +779,11 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/threat.webp
         name: Threat
         system:
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 0
-              override:
-                combat: true
-              type: expiration
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: start
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 1
-              override:
-                combat: true
-              type: expiration
             b4960732f0b9ed9f:
               _id: b4960732f0b9ed9f
               executor: true
@@ -845,6 +804,31 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
+              timing: start
+              type: combat
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: start
+              type: combat
           form: normal
           identifier: threat
           interaction: attack
@@ -905,7 +889,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: vgYp2OlY2QgragN9
         _key: >-
@@ -915,7 +899,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -941,7 +925,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -986,7 +970,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -996,7 +980,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1020,7 +1004,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1063,7 +1047,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: Q3eKznomGL4eVOGB
         _key: >-
@@ -1073,7 +1057,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1099,7 +1083,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -1122,7 +1106,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -1171,24 +1155,24 @@ items:
         short:
           unit: self
     type: body
-  - _id: egPAo18l7W3BMsUb
-    _key: '!actors.items!830a3f528a5bc17d.egPAo18l7W3BMsUb'
+  - _id: kqf8yrOSNZDUMZtB
+    _key: '!actors.items!830a3f528a5bc17d.kqf8yrOSNZDUMZtB'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!830a3f528a5bc17d.egPAo18l7W3BMsUb.8e9roKoeCSmTjbbo
+          !actors.items.effects!830a3f528a5bc17d.kqf8yrOSNZDUMZtB.8e9roKoeCSmTjbbo
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/warrior-techniques.webp
         name: Warrior Techniques
         system:
@@ -1224,13 +1208,13 @@ items:
         type: ability
       - _id: aOvOlScH5bn7jX7m
         _key: >-
-          !actors.items.effects!830a3f528a5bc17d.egPAo18l7W3BMsUb.aOvOlScH5bn7jX7m
+          !actors.items.effects!830a3f528a5bc17d.kqf8yrOSNZDUMZtB.aOvOlScH5bn7jX7m
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
         name: Defensive Martial Arts
         system:

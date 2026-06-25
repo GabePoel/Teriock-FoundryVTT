@@ -13,30 +13,11 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/healing-touch.webp
     name: Healing Touch
     system:
       automations:
-        oJJEmjlNH83yIZ12:
-          _id: oJJEmjlNH83yIZ12
-          combat:
-            what:
-              roll: 2d4kh1
-              threshold: 4
-              type: forced
-            when:
-              skip: 0
-              time: start
-              trigger: turn
-            who:
-              type: executor
-          override:
-            combat: true
-            triggers: true
-          triggers:
-            - damage
-          type: expiration
         qgzpq8KiqEEOCMXJ:
           _id: qgzpq8KiqEEOCMXJ
           consumeStatDice: true
@@ -103,18 +84,16 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
     name: Improved Healing Factor
     system:
       automations:
         Suc9ayhHqRkmjAwZ:
           _id: Suc9ayhHqRkmjAwZ
-          conditions:
-            absent:
-              - burned
-              - dead
-              - frozen
+          activeQualifier: >-
+            and(not(@status.dead), not(@status.burned), not(@status.dead),
+            not(@status.frozen))
           consumeStatDice: false
           forHarm: false
           noStatDice: false
@@ -149,6 +128,7 @@ effects:
         - primal
       range:
         unit: self
+      requirements: <p>You are @Identifier[status:alive]{alive}.</p>
       targets:
         - self
     transfer: true
@@ -160,7 +140,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -223,7 +203,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-intelligence.webp
     name: Normal Intelligence
     system:
@@ -257,7 +237,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -291,7 +271,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -325,7 +305,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -359,7 +339,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/partial-hands.webp
     name: Partial Hands
     system:
@@ -393,7 +373,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -500,7 +480,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/treeform-ball.webp
     name: Treeform Ball
     system:
@@ -541,13 +521,15 @@ effects:
         raw: 0
       delivery: missile
       duration:
+        raw: '24'
         triggers:
           - dawn
-        unit: unlimited
+        unit: hour
       effectTypes:
         - transformation
       elements:
         - nature
+      endCondition: <p>The break of dawn.</p>
       executionTime:
         base: a1
       form: normal
@@ -593,7 +575,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/treeform-self.webp
     name: Treeform Self
     system:
@@ -634,13 +616,15 @@ effects:
         raw: 0
       delivery: self
       duration:
+        raw: '24'
         triggers:
           - dawn
-        unit: unlimited
+        unit: hour
       effectTypes:
         - transformation
       elements:
         - nature
+      endCondition: <p>The break of dawn.</p>
       executionTime:
         base: a1
       form: normal
@@ -668,7 +652,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/supernatural-strength.webp
     name: Supernatural Strength
     system:
@@ -715,7 +699,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -763,7 +747,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -805,7 +789,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -849,7 +833,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -886,7 +870,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -935,7 +919,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/shattering-grip.webp
     name: Shattering Grip
     system:

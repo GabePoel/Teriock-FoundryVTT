@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: HpBK2Qv94ErYtxFx
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/boat-smashing.webp
         name: Boat Smashing
         system:
@@ -62,7 +62,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/carrying.webp
         name: Carrying
         system:
@@ -98,7 +98,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -133,7 +133,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/endure.webp
         name: Endure
         system:
@@ -172,7 +172,7 @@ items:
               attempted to @Identifier[core:block-interaction]{block} the
               triggering @Identifier[core:attack-interaction]{attack}, then a
               limb that @Identifier[keyword:using]{used} whatever
-              @Wiki[Category:Items]{item} you
+              @Pack[teriock.equipment]{item} you
               @Identifier[core:block-interaction]{blocked} with is the one
               that's @Identifier[damage:hack]{hacked}. Otherwise, if the
               @Identifier[core:damage]{damage} was dealt by a creature, they
@@ -201,7 +201,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -249,7 +249,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/gliding.webp
         name: Gliding
         system:
@@ -305,7 +305,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -340,7 +340,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -375,7 +375,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -410,7 +410,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/reach.webp
         name: Reach
         system:
@@ -447,47 +447,11 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 0
-              override:
-                combat: true
-              type: expiration
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 1
-              override:
-                combat: true
-              type: expiration
             5d57231066693cee:
               _id: 5d57231066693cee
               executor: false
@@ -507,6 +471,31 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
+              timing: end
+              type: combat
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: end
+              type: combat
           form: normal
           identifier: snare
           interaction: attack
@@ -536,7 +525,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -587,7 +576,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -631,7 +620,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -676,7 +665,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -752,7 +741,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     folder: aa772458d708a91e
     img: systems/teriock/src/icons/body-parts/scales.webp
     name: Scales
@@ -782,7 +771,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: Y1lFpTxewxRN4iDS
         _key: >-
@@ -792,7 +781,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -818,7 +807,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -841,7 +830,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:

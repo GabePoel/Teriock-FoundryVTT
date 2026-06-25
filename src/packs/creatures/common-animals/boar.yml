@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: rbnHqtYfchwGvOeF
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -33,9 +33,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
             unit: unlimited
           effectTypes:
             - sensory
@@ -57,7 +54,9 @@ items:
             - martial
           range:
             unit: self
-          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+          requirements: >-
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic}.</p>
           skill: true
           standard: true
           targets:
@@ -76,7 +75,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/battle-charge.webp
         name: Battle Charge
         system:
@@ -128,7 +127,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/berserk.webp
         name: Berserk
         system:
@@ -157,14 +156,6 @@ items:
               multi: false
               separate: false
               type: addDocuments
-            X2DN6pHX8ivuh2kl:
-              _id: X2DN6pHX8ivuh2kl
-              conditions:
-                absent:
-                  - dead
-              override:
-                conditions: true
-              type: expiration
             mmCTbgaQIg38Y0II:
               _id: mmCTbgaQIg38Y0II
               executor: false
@@ -189,6 +180,13 @@ items:
           endCondition: <p>You die or 1 minute passes without combat.</p>
           executionTime:
             base: a1
+          expirations:
+            b50b3ee67eddc9f9:
+              _id: b50b3ee67eddc9f9
+              statuses:
+                present:
+                  - dead
+              type: status
           form: normal
           identifier: berserk
           interaction: manifest
@@ -225,7 +223,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/defy-death.webp
         name: Defy Death
         system:
@@ -272,7 +270,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
@@ -307,7 +305,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
@@ -342,7 +340,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
@@ -377,7 +375,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -412,7 +410,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -447,7 +445,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -482,7 +480,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/trample.webp
         name: Trample
         system:
@@ -545,7 +543,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -553,6 +551,7 @@ items:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: not(@status.down)
               changes:
                 - key: system.senses.smell
                   phase: derived
@@ -565,10 +564,7 @@ items:
             raw: 0
           delivery: aura
           duration:
-            conditions:
-              absent:
-                - down
-            unit: unlimited
+            unit: instant
           effectTypes:
             - sensory
           executionTime:
@@ -589,8 +585,9 @@ items:
             raw: '10'
             unit: ft
           requirements: >-
-            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
-            target is not @Identifier[status:odorless]{odorless}.</p>
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic} and the target is not
+            @Identifier[status:odorless]{odorless}.</p>
           skill: true
           standard: true
           targets:
@@ -683,7 +680,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -693,7 +690,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -717,7 +714,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -760,7 +757,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: Q3eKznomGL4eVOGB
         _key: >-
@@ -770,7 +767,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -796,7 +793,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -819,7 +816,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
@@ -875,7 +872,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: vgYp2OlY2QgragN9
         _key: >-
@@ -885,7 +882,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -911,7 +908,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:

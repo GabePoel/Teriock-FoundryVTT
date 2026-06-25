@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
     name: Advanced Smell
     system:
@@ -45,7 +45,9 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+      requirements: >-
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic}.</p>
       skill: true
       standard: true
       targets:
@@ -63,13 +65,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/berserker-tracking.webp
     name: Berserker Tracking
     system:
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
           changes:
             - key: system.tradecrafts.tracker.score
               phase: derived
@@ -80,6 +83,7 @@ effects:
           type: changes
         IBmHOLtkQZqJ33hc:
           _id: IBmHOLtkQZqJ33hc
+          activeQualifier: not(@status.down)
           category: other
           relation: resistances
           type: protection
@@ -96,7 +100,7 @@ effects:
         conditions:
           absent:
             - down
-        unit: unlimited
+        unit: instant
       effectTypes:
         - resistance
         - sensory
@@ -117,7 +121,9 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are outside towns and other urban areas.</p>
+      requirements: >-
+        <p>You are @Identifier[status:up]{up}. You are outside towns and other
+        urban areas.</p>
       skill: true
       standard: true
       targets:
@@ -135,13 +141,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/missile-magic-resistance.webp
     name: Missile Magic Resistance
     system:
       automations:
         DJbz2qen0LiY6ZNs:
           _id: DJbz2qen0LiY6ZNs
+          activeQualifier: not(@status.dead)
           category: other
           relation: resistances
           type: protection
@@ -176,6 +183,7 @@ effects:
         - primal
       range:
         unit: self
+      requirements: <p>You are @Identifier[status:alive]{alive}.</p>
       skill: true
       standard: true
       targets:
@@ -189,13 +197,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/missile-weapon-resistance.webp
     name: Missile Weapon Resistance
     system:
       automations:
         xAwRqwHAvNRxhW5d:
           _id: xAwRqwHAvNRxhW5d
+          activeQualifier: not(@status.down)
           category: properties
           relation: resistances
           type: protection
@@ -230,6 +239,7 @@ effects:
         - primal
       range:
         unit: self
+      requirements: <p>You are @Identifier[status:up]{up}.</p>
       skill: true
       standard: true
       targets:
@@ -243,7 +253,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     name: Scent Seeing
     system:
@@ -251,6 +261,7 @@ effects:
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
           changes:
             - key: system.senses.smell
               phase: derived
@@ -266,7 +277,7 @@ effects:
         conditions:
           absent:
             - down
-        unit: unlimited
+        unit: instant
       effectTypes:
         - sensory
       executionTime:
@@ -287,8 +298,9 @@ effects:
         raw: '10'
         unit: ft
       requirements: >-
-        <p>You are not @Identifier[status:anosmatic]{anosmatic} and the target
-        is not @Identifier[status:odorless]{odorless}.</p>
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic} and the target is not
+        @Identifier[status:odorless]{odorless}.</p>
       skill: true
       standard: true
       targets:

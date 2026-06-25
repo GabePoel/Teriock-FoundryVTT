@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.90
+  systemVersion: 0.13.00
 img: systems/teriock/src/icons/abilities/stamina.webp
 name: Stamina
 system:
@@ -13,12 +13,14 @@ system:
   automations:
     OcOpa5UjB3iZQsAH:
       _id: OcOpa5UjB3iZQsAH
+      activeQualifier: not(@status.down)
       category: statuses
       relation: resistances
       type: protection
       value: unconscious
     suLYYH4S6R39pqk6:
       _id: suLYYH4S6R39pqk6
+      activeQualifier: not(@status.down)
       category: other
       relation: resistances
       type: protection
@@ -57,6 +59,7 @@ system:
     - martial
   range:
     unit: self
+  requirements: <p>You are @Identifier[status:up]{up}.</p>
   skill: true
   standard: true
   targets:

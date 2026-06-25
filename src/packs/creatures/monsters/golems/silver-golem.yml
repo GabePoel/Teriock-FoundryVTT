@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: zZxGyfXzmiqupGxt
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/amplify-thunderbolt.webp
         name: Amplify Thunderbolt
         system:
@@ -66,7 +66,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -110,7 +110,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/bumbling.webp
         name: Bumbling
         system:
@@ -145,7 +145,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/construct-mind.webp
         name: Construct Mind
         system:
@@ -210,13 +210,14 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/golem-reactivation.webp
         name: Golem Reactivation
         system:
           automations:
             1728b3a84ea27844:
               _id: 1728b3a84ea27844
+              activeQualifier: '@status.down'
               common:
                 - bag
                 - revive
@@ -224,12 +225,14 @@ items:
               type: common
             8HKmB76Ft338yIWV:
               _id: 8HKmB76Ft338yIWV
+              activeQualifier: '@status.down'
               consumeStatDice: false
               forHarm: false
               noStatDice: false
               type: heal
             JBf8TF0QndAYSO6i:
               _id: JBf8TF0QndAYSO6i
+              activeQualifier: '@status.down'
               consumeStatDice: false
               forHarm: false
               type: revitalize
@@ -237,9 +240,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              present:
-                - down
             unit: unlimited
           effectTypes:
             - automatic
@@ -269,6 +269,7 @@ items:
             - magical
           range:
             unit: self
+          requirements: <p>You are @Identifier[status:down]{down}.</p>
           targets:
             - self
           trigger: >-
@@ -286,7 +287,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/magical-durability.webp
         name: Magical Durability
         system:
@@ -331,7 +332,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -366,7 +367,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -401,7 +402,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/shattering-armor.webp
         name: Shattering Armor
         system:
@@ -455,7 +456,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/silver-being.webp
         name: Silver Being
         system:
@@ -503,13 +504,14 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/spell-immunity.webp
         name: Spell Immunity
         system:
           automations:
             WCOWPl5PVXo46Bmp:
               _id: WCOWPl5PVXo46Bmp
+              activeQualifier: not(@status.down)
               category: other
               relation: immunities
               type: protection
@@ -518,9 +520,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
             unit: unlimited
           effectTypes:
             - immunity
@@ -538,6 +537,7 @@ items:
             - magical
           range:
             unit: self
+          requirements: <p>You are @Identifier[status:up]{up}.</p>
           targets:
             - self
         transfer: true
@@ -550,7 +550,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/thunderbolt.webp
         name: Thunderbolt
         system:
@@ -611,7 +611,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
@@ -655,7 +655,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/very-high-intelligence.webp
         name: Very High Intelligence
         system:
@@ -796,7 +796,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -806,7 +806,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -830,7 +830,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -873,7 +873,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: wqfdDsQm1GJrMQCa
         _key: >-
@@ -883,7 +883,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/silver.webp
         name: Silver
         system:
@@ -937,7 +937,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -947,7 +947,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -971,7 +971,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -997,7 +997,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1022,7 +1022,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:

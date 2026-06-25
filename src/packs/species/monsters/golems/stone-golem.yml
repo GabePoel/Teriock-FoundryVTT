@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -56,7 +56,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/bumbling.webp
     name: Bumbling
     system:
@@ -90,7 +90,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/construct-mind.webp
     name: Construct Mind
     system:
@@ -154,13 +154,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/golem-reactivation.webp
     name: Golem Reactivation
     system:
       automations:
         1728b3a84ea27844:
           _id: 1728b3a84ea27844
+          activeQualifier: '@status.down'
           common:
             - bag
             - revive
@@ -168,12 +169,14 @@ effects:
           type: common
         8HKmB76Ft338yIWV:
           _id: 8HKmB76Ft338yIWV
+          activeQualifier: '@status.down'
           consumeStatDice: false
           forHarm: false
           noStatDice: false
           type: heal
         JBf8TF0QndAYSO6i:
           _id: JBf8TF0QndAYSO6i
+          activeQualifier: '@status.down'
           consumeStatDice: false
           forHarm: false
           type: revitalize
@@ -212,6 +215,7 @@ effects:
         - magical
       range:
         unit: self
+      requirements: <p>You are @Identifier[status:down]{down}.</p>
       targets:
         - self
       trigger: >-
@@ -227,7 +231,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
@@ -271,7 +275,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-intelligence.webp
     name: Normal Intelligence
     system:
@@ -305,7 +309,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -339,7 +343,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -373,7 +377,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/shattering-armor.webp
     name: Shattering Armor
     system:
@@ -426,13 +430,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/spell-immunity.webp
     name: Spell Immunity
     system:
       automations:
         WCOWPl5PVXo46Bmp:
           _id: WCOWPl5PVXo46Bmp
+          activeQualifier: not(@status.down)
           category: other
           relation: immunities
           type: protection
@@ -461,6 +466,7 @@ effects:
         - magical
       range:
         unit: self
+      requirements: <p>You are @Identifier[status:up]{up}.</p>
       targets:
         - self
     transfer: true
@@ -472,7 +478,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
     name: Unconsciousness Immunity
     system:

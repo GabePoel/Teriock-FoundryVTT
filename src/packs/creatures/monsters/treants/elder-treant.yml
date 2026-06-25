@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: heLUDUHueblDblfh
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -73,30 +73,11 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/healing-touch.webp
         name: Healing Touch
         system:
           automations:
-            oJJEmjlNH83yIZ12:
-              _id: oJJEmjlNH83yIZ12
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-              override:
-                combat: true
-                triggers: true
-              triggers:
-                - damage
-              type: expiration
             qgzpq8KiqEEOCMXJ:
               _id: qgzpq8KiqEEOCMXJ
               consumeStatDice: true
@@ -128,6 +109,21 @@ items:
           endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
           executionTime:
             base: a1
+          expirations:
+            e69e6a8cea6409b3:
+              _id: e69e6a8cea6409b3
+              event: turn
+              method: automatic
+              relation: executor
+              skip: 0
+              timing: start
+              type: combat
+            371677e21bfa861a:
+              _id: 371677e21bfa861a
+              method: automatic
+              triggers:
+                - damage
+              type: trigger
           form: normal
           heightened: >-
             <p>For each additional
@@ -165,18 +161,16 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
         name: Improved Healing Factor
         system:
           automations:
             Suc9ayhHqRkmjAwZ:
               _id: Suc9ayhHqRkmjAwZ
-              conditions:
-                absent:
-                  - burned
-                  - dead
-                  - frozen
+              activeQualifier: >-
+                and(not(@status.dead), not(@status.burned), not(@status.dead),
+                not(@status.frozen))
               consumeStatDice: false
               forHarm: false
               noStatDice: false
@@ -186,9 +180,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - dead
             unit: unlimited
           effectTypes:
             - healing
@@ -212,6 +203,7 @@ items:
             - primal
           range:
             unit: self
+          requirements: <p>You are @Identifier[status:alive]{alive}.</p>
           targets:
             - self
         transfer: true
@@ -224,7 +216,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
         name: Innate Elder Sorcery
         system:
@@ -317,7 +309,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
@@ -382,7 +374,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -417,7 +409,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -452,7 +444,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -487,7 +479,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -522,7 +514,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/partial-hands.webp
         name: Partial Hands
         system:
@@ -557,7 +549,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/rebirth.webp
         name: Rebirth
         system:
@@ -667,7 +659,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/treeform-ball.webp
         name: Treeform Ball
         system:
@@ -708,15 +700,22 @@ items:
             raw: 0
           delivery: missile
           duration:
-            triggers:
-              - dawn
-            unit: unlimited
+            raw: '24'
+            unit: hour
           effectTypes:
             - transformation
           elements:
             - nature
+          endCondition: <p>The break of dawn.</p>
           executionTime:
             base: a1
+          expirations:
+            d1f6b6eaa581aa10:
+              _id: d1f6b6eaa581aa10
+              method: automatic
+              triggers:
+                - dawn
+              type: trigger
           form: normal
           heightened: >-
             <p>For each additional
@@ -763,7 +762,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/treeform-self.webp
         name: Treeform Self
         system:
@@ -804,15 +803,22 @@ items:
             raw: 0
           delivery: self
           duration:
-            triggers:
-              - dawn
-            unit: unlimited
+            raw: '24'
+            unit: hour
           effectTypes:
             - transformation
           elements:
             - nature
+          endCondition: <p>The break of dawn.</p>
           executionTime:
             base: a1
+          expirations:
+            d1f6b6eaa581aa10:
+              _id: d1f6b6eaa581aa10
+              method: automatic
+              triggers:
+                - dawn
+              type: trigger
           form: normal
           identifier: treeform-self
           interaction: manifest
@@ -840,7 +846,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/unbreachability.webp
         name: Unbreachability
         system:
@@ -886,7 +892,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/ward.webp
         name: Ward
         system:
@@ -956,7 +962,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
         name: All Elder Sorcery Words
         system:
@@ -1817,7 +1823,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         name: Elder Sorcery Creation
         system:
@@ -1903,7 +1909,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
@@ -1952,7 +1958,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -2001,7 +2007,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
@@ -2045,7 +2051,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -2090,7 +2096,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
@@ -2128,7 +2134,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
@@ -2179,7 +2185,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -2267,7 +2273,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -2277,7 +2283,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -2301,7 +2307,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -2344,7 +2350,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: HVkT9rIkTVbfdXWn
         _key: >-
@@ -2354,7 +2360,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -2380,7 +2386,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -2405,7 +2411,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
@@ -2450,7 +2456,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     folder: 615ff873d830ae70
     img: systems/teriock/src/icons/body-parts/reinforced-bark.webp
     name: Reinforced Bark
@@ -2480,7 +2486,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -2490,7 +2496,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -2514,7 +2520,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -2540,7 +2546,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -2565,7 +2571,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -2608,7 +2614,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: P2NBun61bqKdYpZP
         _key: >-
@@ -2618,7 +2624,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/entangling.webp
         name: Entangling
         system:
@@ -2641,7 +2647,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -2667,7 +2673,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:

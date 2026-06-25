@@ -112,7 +112,8 @@ function cleanEntry(doc) {
   cleanDocument(doc);
   doc._stats = { ...doc._stats ?? {}, ...BASIC_STATS };
   sortKeys(doc);
-  if (doc.system?.automations) { sortAutomations(doc.system.automations); }
+  if (doc.system?.automations) { sortMechanics(doc.system.automations); }
+  if (doc.system?.expirations) { sortMechanics(doc.system.expirations); }
 }
 
 /**
@@ -184,7 +185,7 @@ function conformDataValues(obj) {
 }
 
 /**
- * @typedef MinimalAutomationData
+ * @typedef MinimalMechanicData
  * @property {string} type
  * @property {string} _id
  * @property {(0|1|2)[]} competencies
@@ -193,20 +194,11 @@ function conformDataValues(obj) {
  */
 
 /**
- * @typedef MinimalAutomationData
- * @property {string} type
- * @property {string} _id
- * @property {(0|1|2)[]} competencies
- * @property {(0|1)[]} heighten
- * @property {(0|1)[]} [crit]
+ * Sorts mechanics (automations and expirations) consistently.
+ * @param {Record<string, MinimalMechanicData>} mechanics
+ * @returns {Record<string, MinimalMechanicData>}
  */
-
-/**
- * Sorts automations consistently.
- * @param {Record<string, MinimalAutomationData>} automations
- * @returns {Record<string, MinimalAutomationData>}
- */
-function sortAutomations(automations) {
+function sortMechanics(mechanics) {
   const COMPETENCY_MAP = {
     0: [0, 0, 0],
     1: [1, 0, 0],
@@ -230,27 +222,31 @@ function sortAutomations(automations) {
     return acc;
   }, {});
 
-  const sortableArray = Object.entries(automations).map(([key, a]) => {
-    a.competencies ??= [0, 1, 2];
-    a.competencies.sort();
-    a.heighten ??= [0, 1];
-    a.heighten.sort();
-    a.crit ??= [0, 1];
-    a.crit.sort();
+  if (Object.keys(mechanics).some((k) => k.length !== 16)) {
+    return mechanics;
+  }
 
-    const comps = a.competencies || [];
+  const sortableArray = Object.entries(mechanics).map(([key, m]) => {
+    m.competencies ??= [0, 1, 2];
+    m.competencies.sort();
+    m.heighten ??= [0, 1];
+    m.heighten.sort();
+    m.crit ??= [0, 1];
+    m.crit.sort();
+
+    const comps = m.competencies || [];
     const compStr = `${Number(comps.includes(0))}${Number(comps.includes(1))}${Number(comps.includes(2))}`;
     const compSort = STRING_MAP[compStr] || "0";
 
-    const h = a.heighten || [];
+    const h = m.heighten || [];
     const hStr = `${Number(h.includes(0))}${Number(h.includes(1))}`;
     const hSort = PAIR_STRING_MAP[hStr] || "0";
 
-    const c = a.crit || [];
+    const c = m.crit || [];
     const cStr = `${Number(c.includes(0))}${Number(c.includes(1))}`;
     const cSort = PAIR_STRING_MAP[cStr] || "0";
 
-    return { data: a, key, sortKey: a.type + compSort + hSort + cSort };
+    return { data: m, key, sortKey: m.type + compSort + hSort + cSort };
   });
 
   sortableArray.sort((a, b) => {
@@ -259,14 +255,14 @@ function sortAutomations(automations) {
     return 0;
   });
 
-  for (const key of Object.keys(automations)) { delete automations[key]; }
+  for (const key of Object.keys(mechanics)) { delete mechanics[key]; }
   for (const item of sortableArray) {
     if (item.data.competencies.length === 3) { delete item.data.competencies; }
     if (item.data.heighten.length === 2) { delete item.data.heighten; }
     if (item.data.crit?.length === 2) { delete item.data.crit; }
-    automations[item.key] = item.data;
+    mechanics[item.key] = item.data;
   }
-  return automations;
+  return mechanics;
 }
 
 /**

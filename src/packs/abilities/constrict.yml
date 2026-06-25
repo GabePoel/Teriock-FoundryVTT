@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.84
+  systemVersion: 0.13.00
 img: systems/teriock/src/icons/abilities/constrict.webp
 name: Constrict
 system:
@@ -29,9 +29,10 @@ system:
     raw: 0
   delivery: hand
   duration:
+    raw: '10'
     triggers:
       - movement
-    unit: unlimited
+    unit: second
   endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
   executionTime:
     base: a1
@@ -44,7 +45,9 @@ system:
     - martial
   range:
     unit: contact
-  requirements: <p>Target is your @Identifier[core:size]{SIZE} or smaller.</p>
+  requirements: >-
+    <p>Target is your @Identifier[core:size]{SIZE} or smaller. You cannot move
+    while using [[lookup name]].</p>
   results:
     fail: >-
       <p>Target is @Identifier[status:suffocating]{suffocating} and

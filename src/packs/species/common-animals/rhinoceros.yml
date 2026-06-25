@@ -13,13 +13,14 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/advanced-hearing.webp
     name: Advanced Hearing
     system:
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
           changes:
             - key: system.senses.hearing
               phase: derived
@@ -53,6 +54,7 @@ effects:
         - martial
       range:
         unit: self
+      requirements: <p>You are @Identifier[status:up]{up}.</p>
       targets:
         - self
       upgrades:
@@ -68,7 +70,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
     name: Advanced Smell
     system:
@@ -100,7 +102,9 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+      requirements: >-
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic}.</p>
       skill: true
       standard: true
       targets:
@@ -118,7 +122,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/battle-charge.webp
     name: Battle Charge
     system:
@@ -168,7 +172,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/berserk.webp
     name: Berserk
     system:
@@ -197,14 +201,6 @@ effects:
           multi: false
           separate: false
           type: addDocuments
-        X2DN6pHX8ivuh2kl:
-          _id: X2DN6pHX8ivuh2kl
-          conditions:
-            absent:
-              - dead
-          override:
-            conditions: true
-          type: expiration
         mmCTbgaQIg38Y0II:
           _id: mmCTbgaQIg38Y0II
           executor: false
@@ -263,7 +259,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/dense-intelligence.webp
     name: Dense Intelligence
     system:
@@ -297,7 +293,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -344,7 +340,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/impale.webp
     name: Impale
     system:
@@ -397,7 +393,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/knockback.webp
     name: Knockback
     system:
@@ -454,7 +450,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/no-hands.webp
     name: No Hands
     system:
@@ -488,7 +484,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -522,7 +518,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -556,7 +552,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/trample.webp
     name: Trample
     system:
@@ -616,7 +612,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     name: Scent Seeing
     system:
@@ -624,6 +620,7 @@ effects:
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
           changes:
             - key: system.senses.smell
               phase: derived
@@ -639,7 +636,7 @@ effects:
         conditions:
           absent:
             - down
-        unit: unlimited
+        unit: instant
       effectTypes:
         - sensory
       executionTime:
@@ -660,8 +657,9 @@ effects:
         raw: '10'
         unit: ft
       requirements: >-
-        <p>You are not @Identifier[status:anosmatic]{anosmatic} and the target
-        is not @Identifier[status:odorless]{odorless}.</p>
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic} and the target is not
+        @Identifier[status:odorless]{odorless}.</p>
       skill: true
       standard: true
       targets:
@@ -675,7 +673,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -724,7 +722,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -766,7 +764,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -810,7 +808,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:

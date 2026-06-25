@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.84
+  systemVersion: 0.13.00
 img: systems/teriock/src/icons/abilities/howling-gale.webp
 name: Howling Gale
 system:
@@ -34,7 +34,8 @@ system:
   duration:
     triggers:
       - movement
-    unit: unlimited
+    unit: instant
+  endCondition: <p>You move or are moved.</p>
   executionTime:
     base: a1
   featSaveAttribute: str
@@ -53,6 +54,7 @@ system:
   range:
     raw: '10'
     unit: ft
+  requirements: <p>You remain stationary.</p>
   results:
     fail: >-
       <p>Target is moved away from you until they are out of range of [[lookup

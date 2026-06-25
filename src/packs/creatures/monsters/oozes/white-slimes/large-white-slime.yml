@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: Tmbr8gp3gAlpZBNW
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
         name: Acidic Blood
         system:
@@ -68,7 +68,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/advanced-smell.webp
         name: Advanced Smell
         system:
@@ -76,9 +76,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              absent:
-                - down
             unit: unlimited
           effectTypes:
             - sensory
@@ -100,7 +97,9 @@ items:
             - martial
           range:
             unit: self
-          requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+          requirements: >-
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic}.</p>
           skill: true
           standard: true
           targets:
@@ -119,7 +118,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
@@ -163,7 +162,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/slimes/slime-giant-face-eyes.webp
         name: Blind Fighting
         system:
@@ -220,7 +219,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/bumbling.webp
         name: Bumbling
         system:
@@ -255,7 +254,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -303,7 +302,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
@@ -344,7 +343,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
         name: Gooey Damage Reduction
         system:
@@ -379,7 +378,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
         name: Ooze Mind
         system:
@@ -444,7 +443,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/resist-effects.webp
         name: Resist Effects
         system:
@@ -551,7 +550,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/slow.webp
         name: Slow
         system:
@@ -586,7 +585,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
         name: Unconsciousness Immunity
         system:
@@ -630,7 +629,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/vitals-durability.webp
         name: Vitals Durability
         system:
@@ -681,7 +680,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/scent-seeing.webp
         name: Scent Seeing
         system:
@@ -689,6 +688,7 @@ items:
           automations:
             e789ed5e109ebd1a:
               _id: e789ed5e109ebd1a
+              activeQualifier: not(@status.down)
               changes:
                 - key: system.senses.smell
                   phase: derived
@@ -701,10 +701,7 @@ items:
             raw: 0
           delivery: aura
           duration:
-            conditions:
-              absent:
-                - down
-            unit: unlimited
+            unit: instant
           effectTypes:
             - sensory
           executionTime:
@@ -725,8 +722,9 @@ items:
             raw: '10'
             unit: ft
           requirements: >-
-            <p>You are not @Identifier[status:anosmatic]{anosmatic} and the
-            target is not @Identifier[status:odorless]{odorless}.</p>
+            <p>You are @Identifier[status:up]{up}. You are not
+            @Identifier[status:anosmatic]{anosmatic} and the target is not
+            @Identifier[status:odorless]{odorless}.</p>
           skill: true
           standard: true
           targets:
@@ -773,7 +771,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: ycpaNkX8sIbCk6Lt
         _key: >-
@@ -783,7 +781,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -807,7 +805,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -833,7 +831,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -876,7 +874,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: aO1rApSYgJxjhJbo
         _key: >-
@@ -886,7 +884,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
         name: Life Elder Sorcery
         system:
@@ -926,7 +924,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/life-rotators.webp
         name: Life Rotators
         system:
@@ -1031,7 +1029,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
         name: Life Elder Sorcery Words
         system:
@@ -1191,7 +1189,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
         name: Celestial Elder Sorcery Words
         system:
@@ -1573,7 +1571,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
         name: Elder Sorcery Creation
         system:
@@ -1659,7 +1657,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/blessing.webp
         name: Blessing
         system:
@@ -1766,7 +1764,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/ward.webp
         name: Ward
         system:
@@ -1837,7 +1835,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/crown-of-light.webp
         name: Crown of Light
         system:
@@ -1909,28 +1907,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/light-aura.webp
         name: Light Aura
         system:
           _sup: SopErXNigmcYe6S0
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              override:
-                combat: true
-              type: expiration
             7400b41f20d9f100:
               _id: 7400b41f20d9f100
               all: false
@@ -1986,6 +1968,19 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: end
+              type: combat
           featSaveAttribute: mov
           form: normal
           heightened: >-
@@ -2019,48 +2014,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/light-touch.webp
         name: Light Touch
         system:
           _sup: SopErXNigmcYe6S0
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 0
-              override:
-                combat: true
-              type: expiration
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: rolled
-                when:
-                  skip: 1
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 1
-              override:
-                combat: true
-              type: expiration
             800c70e6560525a8:
               _id: 800c70e6560525a8
               formula: (@h)d4[magic holy]
@@ -2090,6 +2049,31 @@ items:
             of these dice roll a 4, this effect ends.</p>
           executionTime:
             base: a1
+          expirations:
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
+              timing: end
+              type: combat
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 0
+              timing: end
+              type: combat
           form: normal
           heightened: >-
             <p>For each additional
@@ -2126,7 +2110,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/rebirth.webp
         name: Rebirth
         system:
@@ -2234,7 +2218,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/glow-of-healing.webp
         name: Glow of Healing
         system:
@@ -2291,31 +2275,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/healing-touch.webp
         name: Healing Touch
         system:
           _sup: WBqSvmJVpbNwrsBF
           automations:
-            oJJEmjlNH83yIZ12:
-              _id: oJJEmjlNH83yIZ12
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: start
-                  trigger: turn
-                who:
-                  type: executor
-              override:
-                combat: true
-                triggers: true
-              triggers:
-                - damage
-              type: expiration
             qgzpq8KiqEEOCMXJ:
               _id: qgzpq8KiqEEOCMXJ
               consumeStatDice: true
@@ -2347,6 +2312,21 @@ items:
           endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
           executionTime:
             base: a1
+          expirations:
+            e69e6a8cea6409b3:
+              _id: e69e6a8cea6409b3
+              event: turn
+              method: automatic
+              relation: executor
+              skip: 0
+              timing: start
+              type: combat
+            371677e21bfa861a:
+              _id: 371677e21bfa861a
+              method: automatic
+              triggers:
+                - damage
+              type: trigger
           form: normal
           heightened: >-
             <p>For each additional
@@ -2384,7 +2364,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/cure-illness.webp
         name: Cure Illness
         system:
@@ -2499,7 +2479,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: 06z0wz68hsmApPL9
         _key: >-
@@ -2509,7 +2489,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/hibernation-shield.webp
         name: Hibernation Shield
         system:
@@ -2517,17 +2497,25 @@ items:
             raw: 0
           delivery: sight
           duration:
-            conditions:
-              present:
-                - down
-            triggers:
-              - dawn
             unit: unlimited
           elements:
             - life
           endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
           executionTime:
             base: r1
+          expirations:
+            05f6d4dd9db56877:
+              _id: 05f6d4dd9db56877
+              statuses:
+                absent:
+                  - down
+              type: status
+            d1f6b6eaa581aa10:
+              _id: d1f6b6eaa581aa10
+              method: automatic
+              triggers:
+                - dawn
+              type: trigger
           form: normal
           identifier: hibernation-shield
           interaction: manifest
@@ -2564,7 +2552,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         flags:
           teriock:
             dontConsume: false
@@ -2572,42 +2560,6 @@ items:
         name: Light Ray
         system:
           automations:
-            d635eb44dba086dd:
-              _id: d635eb44dba086dd
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: target
-              crit:
-                - 0
-              override:
-                combat: true
-              type: expiration
-            d5717000e99ee582:
-              _id: d5717000e99ee582
-              combat:
-                what:
-                  roll: 2d4kh1
-                  threshold: 4
-                  type: forced
-                when:
-                  skip: 0
-                  time: end
-                  trigger: turn
-                who:
-                  type: executor
-              crit:
-                - 1
-              override:
-                combat: true
-              type: expiration
             800c70e6560525a8:
               _id: 800c70e6560525a8
               formula: (@h)d4[magic holy]
@@ -2633,6 +2585,23 @@ items:
             - life
           executionTime:
             base: a1
+          expirations:
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              event: turn
+              method: automatic
+              relation: executor
+              skip: 0
+              timing: end
+              type: combat
+            66672059c7a29a30:
+              _id: 66672059c7a29a30
+              event: turn
+              method: automatic
+              relation: target
+              skip: 0
+              timing: end
+              type: combat
           form: normal
           heightened: >-
             <p>For each additional
@@ -2671,7 +2640,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/medicine-ball.webp
         name: Medicine Ball
         system:
@@ -2740,7 +2709,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/resurrect.webp
         name: Resurrect
         system:
@@ -2830,7 +2799,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/hibernation.webp
         name: Hibernation
         system:
@@ -2839,9 +2808,6 @@ items:
             raw: 0
           delivery: self
           duration:
-            conditions:
-              present:
-                - down
             unit: unlimited
           executionTime:
             base: passive
@@ -2857,6 +2823,7 @@ items:
             - primal
           range:
             unit: self
+          requirements: <p>You are @Identifier[status:down]{down}.</p>
           skill: true
           standard: true
           targets:
@@ -2901,7 +2868,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: byYbma8NDzi77Mh0
         _key: >-
@@ -2911,7 +2878,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         flags:
           teriock:
             category: combat
@@ -2957,7 +2924,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         flags:
           teriock:
             category: support
@@ -3062,7 +3029,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/minor-item-enchantment.webp
         name: Minor Item Enchantment
         system:
@@ -3193,7 +3160,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/swift-sleep-aura.webp
         name: Swift Sleep Aura
         system:
@@ -3271,14 +3238,20 @@ items:
                 type: formula
           delivery: aura
           duration:
-            triggers:
-              - dawn
-            unit: unlimited
+            raw: '24'
+            unit: hour
           elements:
             - life
-          endCondition: <p>Target is successfully @Identifier[keyword:awaken]{awakened}.</p>
+          endCondition: <p>The break of dawn.</p>
           executionTime:
             base: a1
+          expirations:
+            d1f6b6eaa581aa10:
+              _id: d1f6b6eaa581aa10
+              method: automatic
+              triggers:
+                - dawn
+              type: trigger
           featSaveAttribute: per
           form: special
           heightened: >-
@@ -3353,7 +3326,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: i5ClxMJqr4B84tsr
         _key: >-
@@ -3363,7 +3336,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         flags:
           teriock:
             category: combat
@@ -3415,7 +3388,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         flags:
           teriock:
             category: support
@@ -3479,7 +3452,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/emergency-casting.webp
         name: Emergency Casting
         system:
@@ -3537,7 +3510,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/sheltered-casting.webp
         name: Sheltered Casting
         system:
@@ -3605,24 +3578,24 @@ items:
           disabled: false
           formula: 1d12
     type: rank
-  - _id: XNCFS5NMUcFGwLcg
-    _key: '!actors.items!2beea20664d2e739.XNCFS5NMUcFGwLcg'
+  - _id: ZNJQOca2j3QxsAEt
+    _key: '!actors.items!2beea20664d2e739.ZNJQOca2j3QxsAEt'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!2beea20664d2e739.XNCFS5NMUcFGwLcg.NGCuRUaVtXnxAbRe
+          !actors.items.effects!2beea20664d2e739.ZNJQOca2j3QxsAEt.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -3672,13 +3645,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!2beea20664d2e739.XNCFS5NMUcFGwLcg.aCWLNsvSFjEuLTyl
+          !actors.items.effects!2beea20664d2e739.ZNJQOca2j3QxsAEt.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.12.90
+          systemVersion: 0.13.00
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

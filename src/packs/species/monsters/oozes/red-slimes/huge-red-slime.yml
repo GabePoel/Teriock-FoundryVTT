@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/acidic-blood.webp
     name: Acidic Blood
     system:
@@ -55,7 +55,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/advanced-smell.webp
     name: Advanced Smell
     system:
@@ -87,7 +87,9 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are not @Identifier[status:anosmatic]{anosmatic}.</p>
+      requirements: >-
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic}.</p>
       skill: true
       standard: true
       targets:
@@ -105,7 +107,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: icons/creatures/slimes/slime-giant-face-eyes.webp
     name: Blind Fighting
     system:
@@ -161,7 +163,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/bumbling.webp
     name: Bumbling
     system:
@@ -195,7 +197,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -242,7 +244,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/devour.webp
     name: Devour
     system:
@@ -282,7 +284,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/flame-magic-adept.webp
     name: Flame Magic Adept
     system:
@@ -328,7 +330,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -375,7 +377,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: icons/creatures/slimes/slime-movement-splashing-yellow.webp
     name: Gooey Damage Reduction
     system:
@@ -409,7 +411,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: icons/creatures/slimes/slime-movement-pseudopods-teal.webp
     name: Ooze Mind
     system:
@@ -473,7 +475,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/resist-effects.webp
     name: Resist Effects
     system:
@@ -577,7 +579,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/slow.webp
     name: Slow
     system:
@@ -611,7 +613,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/unconsciousness-immunity.webp
     name: Unconsciousness Immunity
     system:
@@ -654,7 +656,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/vitals-durability.webp
     name: Vitals Durability
     system:
@@ -704,7 +706,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.90
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/scent-seeing.webp
     name: Scent Seeing
     system:
@@ -712,6 +714,7 @@ effects:
       automations:
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
+          activeQualifier: not(@status.down)
           changes:
             - key: system.senses.smell
               phase: derived
@@ -727,7 +730,7 @@ effects:
         conditions:
           absent:
             - down
-        unit: unlimited
+        unit: instant
       effectTypes:
         - sensory
       executionTime:
@@ -748,8 +751,9 @@ effects:
         raw: '10'
         unit: ft
       requirements: >-
-        <p>You are not @Identifier[status:anosmatic]{anosmatic} and the target
-        is not @Identifier[status:odorless]{odorless}.</p>
+        <p>You are @Identifier[status:up]{up}. You are not
+        @Identifier[status:anosmatic]{anosmatic} and the target is not
+        @Identifier[status:odorless]{odorless}.</p>
       skill: true
       standard: true
       targets:
@@ -763,7 +767,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -812,7 +816,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -854,7 +858,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -898,7 +902,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.84
+      systemVersion: 0.13.00
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
