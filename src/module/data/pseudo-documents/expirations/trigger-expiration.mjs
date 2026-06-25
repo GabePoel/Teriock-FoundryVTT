@@ -4,7 +4,7 @@ import { BaseExpiration } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Teriock.System.Trigger} trigger
+ * @property {Set<Teriock.System.Trigger>} triggers
  */
 export default class TriggerExpiration extends BaseExpiration {
   /** @inheritDoc */
@@ -23,22 +23,19 @@ export default class TriggerExpiration extends BaseExpiration {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      trigger: new fields.StringField({
-        blank: false,
-        choices: formatDynamicSelectOptions(TERIOCK.config.trigger, { localize: true }),
-        initial: "dawn",
-        nullable: false,
-      }),
+      triggers: new fields.SetField(
+        new fields.StringField({ choices: formatDynamicSelectOptions(TERIOCK.config.trigger, { localize: true }) }),
+      ),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...super._formPaths, "trigger"];
+    return [...super._formPaths, "triggers"];
   }
 
   /** @inheritDoc */
   isValidEvent(event, context = {}) {
-    return super.isValidEvent(event, context) && context.trigger === this.trigger;
+    return super.isValidEvent(event, context) && this.triggers.has(context.trigger);
   }
 }

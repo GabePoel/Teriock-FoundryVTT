@@ -40,11 +40,6 @@ export default class ApplicableEffectSheet
       templates: ["templates/generic/tab-navigation.hbs"],
     },
     children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
-    // duration: {
-    //   scrollable: [""],
-    //   template: "teriock/sheets/effects/consequence/duration-tab",
-    //   templates: ["templates/sheets/active-effect/duration.hbs"],
-    // },
   };
 
   /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
