@@ -1,5 +1,5 @@
 /**
- * Default values for configurable document settings.
+ * Default values for inheritable document settings.
  * @satisfies {Teriock.Config.SettingsConfig}
  */
 export default {

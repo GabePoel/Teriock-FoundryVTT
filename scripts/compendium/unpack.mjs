@@ -222,6 +222,7 @@ function sortMechanics(mechanics) {
     return acc;
   }, {});
 
+  // TODO: Remove this once I'm confident all expirations are properly migrated
   if (Object.keys(mechanics).some((k) => k.length !== 16)) {
     return mechanics;
   }
