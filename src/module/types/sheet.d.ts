@@ -40,7 +40,7 @@ declare global {
       collapsed: boolean;
       formEditor: string;
       mechanic: Teriock.PseudoDocuments.MechanicPseudoDocumentData;
-      messages: Teriock.UI.FormMessage[];
+      tips: Teriock.UI.Tip[];
     };
 
     export type _SheetConfiguration = { teriock: { autoIcon?: boolean } };

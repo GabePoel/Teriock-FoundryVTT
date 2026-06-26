@@ -52,12 +52,12 @@ export default function ConfirmationDialogAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      get formMessages() {
-        const messages = super.formMessages;
+      get formTips() {
+        const tips = super.formTips;
         if (this._showConfirmationWarning) {
-          messages.unshift({ level: "warning", text: this.#pre("NOTIFICATIONS.noConfirmation") });
+          tips.unshift({ level: "warning", text: this.#pre("NOTIFICATIONS.noConfirmation") });
         }
-        return messages;
+        return tips;
       }
 
       /**

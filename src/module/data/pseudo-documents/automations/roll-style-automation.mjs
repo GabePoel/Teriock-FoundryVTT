@@ -30,11 +30,11 @@ export default class RollStyleAutomation extends BaseAutomation {
   }
 
   /** @inheritDoc */
-  get formMessages() {
-    const messages = super.formMessages;
+  get formTips() {
+    const tips = super.formTips;
     if (!game.modules.get("dice-so-nice")?.active) {
-      messages.unshift({ level: "error", text: "TERIOCK.AUTOMATIONS.RollStyle.NOTIFICATIONS.DsnRequired" });
+      tips.unshift({ level: "error", text: "TERIOCK.AUTOMATIONS.RollStyle.NOTIFICATIONS.DsnRequired" });
     }
-    return messages;
+    return tips;
   }
 }

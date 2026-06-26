@@ -69,10 +69,10 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   }
 
   /**
-   * Notification-style messages that appear in the editor form.
-   * @returns {Teriock.UI.FormMessage[]}
+   * Notification-style tips that appear in the editor form.
+   * @returns {Teriock.UI.Tip[]}
    */
-  get formMessages() {
+  get formTips() {
     return [];
   }
 

@@ -149,15 +149,12 @@ export default class ChangeQuantityAutomation
   }
 
   /** @inheritDoc */
-  get formMessages() {
-    const messages = super.formMessages;
+  get formTips() {
+    const tips = super.formTips;
     if (this.targetParent && !this.document?.system?.consumable) {
-      messages.unshift({
-        level: "error",
-        text: "TERIOCK.AUTOMATIONS.ChangeQuantity.NOTIFICATIONS.parentNotConsumable",
-      });
+      tips.unshift({ level: "error", text: "TERIOCK.AUTOMATIONS.ChangeQuantity.NOTIFICATIONS.parentNotConsumable" });
     }
-    return messages;
+    return tips;
   }
 
   /** @inheritDoc */

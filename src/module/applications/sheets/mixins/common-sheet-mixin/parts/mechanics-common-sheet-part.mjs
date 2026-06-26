@@ -230,7 +230,7 @@ export default Base => {
             collapsed: this._mechanicCollapsedIds.has(mechanic.id),
             formEditor: (await mechanic.getEditor()).outerHTML,
             mechanic,
-            messages: mechanic.formMessages,
+            tips: mechanic.formTips,
           };
         }));
       }
