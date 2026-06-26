@@ -1,4 +1,4 @@
-import BaseActorSheet from "../base-actor-sheet/base-actor-sheet.mjs";
+import BaseActorSheet from "./abstract/base-actor-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockInventory}.

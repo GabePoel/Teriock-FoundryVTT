@@ -2,7 +2,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { changeSizeDialog } from "../../../dialogs/_module.mjs";
 import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
 import * as mixins from "../../mixins/_module.mjs";
-import defaultSheetSettings from "./helpers/default-sheet-settings.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
 const { HandlebarsApplicationMixin } = foundry.applications.api;
@@ -44,7 +43,7 @@ export default class BaseActorSheet
     super(...args);
     this._locked = false;
     this._activeTab = "tradecrafts";
-    this.settings = defaultSheetSettings();
+    this.settings = { avatarImagePath: "img", conditionExpansions: {} };
     for (const [type, display] of Object.entries(BaseActorSheet.PREVIEW_DISPLAY)) {
       this.previewMenus[type]?.updateSource({ display });
     }
@@ -102,7 +101,7 @@ export default class BaseActorSheet
 
   /**
    * Build the document groups shown under each tab's preview, keyed by document type. Each group is
-   * `{ docs, empty, optional? }`; the primary group of each tab is filtered and sorted through its preview
+   * `{ docs, empty, optional? }`. The primary group of each tab is filtered and sorted through its preview
    * model, while distinct secondary categories keep their existing order.
    * @param {object} context
    */

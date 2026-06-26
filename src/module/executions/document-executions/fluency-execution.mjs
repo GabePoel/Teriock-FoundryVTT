@@ -1,5 +1,5 @@
-import * as executionMixins from "../../mixins/_module.mjs";
-import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
+import * as executionMixins from "../mixins/_module.mjs";
+import BaseDocumentExecution from "./base-document-execution/base-document-execution.mjs";
 
 /**
  * @extends {BaseDocumentExecution}

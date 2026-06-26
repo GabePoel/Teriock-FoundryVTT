@@ -1,4 +1,4 @@
-import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
+import BaseDocumentExecution from "./base-document-execution/base-document-execution.mjs";
 
 /**
  * @property {TeriockAttunement} source

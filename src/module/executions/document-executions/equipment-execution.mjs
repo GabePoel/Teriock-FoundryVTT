@@ -1,6 +1,6 @@
-import { getImage } from "../../../helpers/path.mjs";
-import { getName } from "../../../helpers/utils.mjs";
-import ArmamentExecution from "../armament-execution/armament-execution.mjs";
+import { getImage } from "../../helpers/path.mjs";
+import { getName } from "../../helpers/utils.mjs";
+import ArmamentExecution from "./armament-execution/armament-execution.mjs";
 
 export default class EquipmentExecution extends ArmamentExecution {
   /** @inheritDoc */

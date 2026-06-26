@@ -1,5 +1,5 @@
-import BaseExecution from "../../base-execution/base-execution.mjs";
-import * as executionMixins from "../../mixins/_module.mjs";
+import BaseExecution from "../base-execution/base-execution.mjs";
+import * as executionMixins from "../mixins/_module.mjs";
 
 /**
  * Execution that rolls one or more impacts (damage, drain, healing, etc.) and offers boost/deboost/critical modifiers.
