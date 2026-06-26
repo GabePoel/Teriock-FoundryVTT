@@ -29,6 +29,17 @@ export default class BaseDocumentExecution extends BaseExecution {
   _source;
 
   /** @inheritDoc */
+  get _dialogButtons() {
+    return [{
+      action: "confirm",
+      default: true,
+      icon: TERIOCK.display.icons.ui.enable,
+      label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.use",
+      name: "ok",
+    }];
+  }
+
+  /** @inheritDoc */
   get _dialogDocuments() {
     return [
       { document: this.source, label: _loc(`TYPES.${this.source.documentName}.${this.source.type}`) },

@@ -1,4 +1,5 @@
 import attunementConfig from "../../../../constants/config/attunement-config.mjs";
+import { AttunementExecution } from "../../../../executions/document-executions/_module.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
@@ -17,11 +18,14 @@ const { fields } = foundry.data;
  */
 export default class AttunementSystem extends CleanedEffectSystem {
   /** @inheritDoc */
+  static Execution = AttunementExecution;
+
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Attunement"];
 
   /** @inheritDoc */
   static get metadata() {
-    return foundry.utils.mergeObject(super.metadata, { type: "attunement" });
+    return foundry.utils.mergeObject(super.metadata, { type: "attunement", usable: true });
   }
 
   /** @inheritDoc */

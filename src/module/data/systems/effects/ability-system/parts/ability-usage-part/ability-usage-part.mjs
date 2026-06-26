@@ -232,6 +232,16 @@ export default Base => {
         for (const target of this.targets) { data[`target.${target}`] = 1; }
         return data;
       }
+
+      /** @inheritDoc */
+      prepareDerivedData() {
+        super.prepareDerivedData();
+        if (this.maneuver === "slow") {
+          if (this.executionTime.slow.unit === "shortRest") { this.executionTime.base = "shortRest"; }
+          else if (this.executionTime.slow.unit === "longRest") { this.executionTime.base = "longRest"; }
+          else { this.executionTime.base = "custom"; }
+        }
+      }
     }
   );
 };

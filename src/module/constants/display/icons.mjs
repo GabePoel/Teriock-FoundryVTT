@@ -327,7 +327,7 @@ export const icons = {
     shareImage: "ms-mms",
     shareText: "ms-chat",
     sheet: "ms-ad-group",
-    shortRest: "ms-hr-resting",
+    shortRest: "ms-fireplace",
     show: "ms-visibility",
     sort: "ms-sort",
     tabLeft: "ms-keyboard-double-arrow-left",

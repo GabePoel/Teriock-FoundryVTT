@@ -15,6 +15,7 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
     this.attribute = options.attribute;
     if (this.actor) { this.bonus = addFormula(this.actor.system.attributes[options.attribute].formula, this.bonus); }
   }
+
   /** @type {Teriock.Keys.Attribute} */
   attribute;
 

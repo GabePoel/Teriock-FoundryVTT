@@ -1,5 +1,4 @@
-import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
-import { makeIconClass } from "../../../../../helpers/utils.mjs";
+import { LongRestExecution, ShortRestExecution } from "../../../../../executions/actor-executions/_module.mjs";
 
 export default Base => {
   return (
@@ -62,31 +61,20 @@ export default Base => {
 
       /**
        * Take a long rest.
+       * @param {Partial<Teriock.Execution.LongRestExecutionOptions>} [options]
        * @returns {Promise<void>}
        */
-      async takeLongRest() {
-        await this.parent.hookCall("longRest");
-        if (this.parent.statuses.has("dead")) { return; }
-        if (!game.teriock.getSetting("showLongRestDialog")) { return; }
-        const heal = await TeriockDialog.confirm({
-          content: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.healText"),
-          modal: true,
-          rejectClose: false,
-          window: {
-            icon: makeIconClass(TERIOCK.display.icons.ui.longRest, "title"),
-            title: _loc("TERIOCK.SHEETS.Actor.ACTIONS.TakeLongRest.label"),
-          },
-        });
-        if (!heal) { return; }
-        await this.partialReset({ hp: true, hpDice: true, mp: true, mpDice: true });
+      async takeLongRest(options = {}) {
+        await LongRestExecution.create(Object.assign(options, { actor: this.parent, source: this.parent }));
       }
 
       /**
        * Take a short rest.
+       * @param {Partial<Teriock.Execution.ShortRestExecutionOptions>} [options]
        * @returns {Promise<void>}
        */
-      async takeShortRest() {
-        await this.actor.hookCall("shortRest");
+      async takeShortRest(options = {}) {
+        await ShortRestExecution.create(Object.assign(options, { actor: this.parent, source: this.parent }));
       }
     }
   );

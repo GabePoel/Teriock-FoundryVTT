@@ -6,11 +6,6 @@ import BaseDocumentExecution from "../../document-executions/base-document-execu
 /** @type {Teriock.Keys.DeathBagStoneColor[]} */
 const STONE_COLORS = ["black", "red", "white"];
 
-/**
- * Execution that pulls from an actor's Death Bag. This replaces the old `deathBagDialog`. The acting actor is used as
- * this execution's source document.
- * @extends {BaseDocumentExecution}
- */
 export default class DeathBagExecution extends BaseDocumentExecution {
   /**
    * @param {Partial<Teriock.Execution.DeathBagExecutionOptions>} options
