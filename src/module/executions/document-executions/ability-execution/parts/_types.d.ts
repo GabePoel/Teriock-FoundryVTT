@@ -13,7 +13,6 @@ declare global {
       noHp?: boolean;
       noLp?: boolean;
       noMp?: boolean;
-      noTemplate?: boolean;
       piercing?: Teriock.System.PiercingLevel;
       sb?: boolean;
       source?: TeriockAbility;
@@ -31,7 +30,7 @@ declare module "./ability-execution-constructor.mjs" {
     attackPenaltyFormula: string;
     costs: { gp: number, hp: number, lp: number, mp: number };
     executor: TeriockToken | null;
-    flags: { noHeighten: boolean, noTemplate: boolean };
+    noHeighten: boolean;
     heightened: number;
     targets: Set<TeriockToken>;
     vitals: boolean;

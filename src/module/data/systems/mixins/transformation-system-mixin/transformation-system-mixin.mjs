@@ -416,7 +416,7 @@ export default function TransformationSystemMixin(Base) {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (
-          this.isPrimaryTransformation && this.actor?.system.settings.token.autoTransformation
+          this.isPrimaryTransformation && this.actor?.system.settings.getSetting("autoTransformation")
           && this.transformation.img
         ) {
           this.changes.push(...[{

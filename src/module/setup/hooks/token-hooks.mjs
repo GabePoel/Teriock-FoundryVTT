@@ -9,9 +9,8 @@
 async function applyTokenMagicFilters(token, statusId, active) {
   if (
     game.release.generation === 13
-    && token.document.baseActor?.system.settings.token.autoMagic
+    && token.document.baseActor?.system.settings.getSetting("autoMagic")
     && game.modules.get("tokenmagic")?.active
-    && game.teriock.getSetting("autoTokenMagicConditionEffects")
     && token.isOwner
   ) {
     if (Object.keys(TERIOCK.display.tokenMagic).includes(statusId)) {

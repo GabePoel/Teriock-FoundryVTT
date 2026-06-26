@@ -41,6 +41,8 @@ declare global {
         /** <schema> Short range */
         short: RangeModel;
       };
+      /** <schema> Per-document behavior and display settings */
+      settings: Teriock.Models.ArmamentSettingsModel;
       /** <derived> Special Rules (Weapon Fighting Style) */
       specialRules: string;
       /** <schema> Spell Turning */

@@ -1,6 +1,21 @@
 import * as configs from "../applications/settings/_module.mjs";
+import settingsConfig from "../constants/config/settings-config.mjs";
+import { userSettingsModels } from "../data/models/settings-models/user-settings-models.mjs";
 
 const { fields } = foundry.data;
+
+/** @type {Record<Teriock.Config.SettingsCategory, SettingConfig>} */
+export const configurableSettings = Object.fromEntries(
+  Object.keys(settingsConfig).map(
+    category => [category, {
+      default: settingsConfig[/** @type {Teriock.Config.SettingsCategory} */ (category)],
+      hint: `TERIOCK.SETTINGS.${category}.hint`,
+      name: `TERIOCK.SETTINGS.${category}.name`,
+      scope: "user",
+      type: userSettingsModels[/** @type {Teriock.Config.SettingsCategory} */ (category)],
+    }]
+  ),
+);
 
 export const settings = {
   actorSheet: {
@@ -10,29 +25,6 @@ export const settings = {
       name: "TERIOCK.SETTINGS.floatingActorTabs.name",
       requiresReload: true,
       scope: "client",
-      type: Boolean,
-    },
-  },
-  armament: {
-    rollAttackOnArmamentUse: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.rollAttackOnArmamentUse.hint",
-      name: "TERIOCK.SETTINGS.rollAttackOnArmamentUse.name",
-      scope: "user",
-      type: Boolean,
-    },
-    secretEquipment: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.secretEquipment.hint",
-      name: "TERIOCK.SETTINGS.secretEquipment.name",
-      scope: "user",
-      type: Boolean,
-    },
-    twoHandedArmaments: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.twoHandedArmaments.hint",
-      name: "TERIOCK.SETTINGS.twoHandedArmaments.name",
-      scope: "user",
       type: Boolean,
     },
   },
@@ -53,18 +45,18 @@ export const settings = {
     },
   },
   automatedBehavior: {
-    autoChangeVisionModes: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.autoChangeVisionModes.hint",
-      name: "TERIOCK.SETTINGS.autoChangeVisionModes.name",
-      scope: "user",
-      type: Boolean,
-    },
     autoPayAbilityCosts: {
       default: true,
       hint: "TERIOCK.SETTINGS.autoPayAbilityCosts.hint",
       name: "TERIOCK.SETTINGS.autoPayAbilityCosts.name",
       scope: "user",
+      type: Boolean,
+    },
+    autoWound: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.autoWound.hint",
+      name: "TERIOCK.SETTINGS.autoWound.name",
+      scope: "world",
       type: Boolean,
     },
     nonHierarchicalChanges: {
@@ -191,13 +183,6 @@ export const settings = {
     },
   },
   generalDisplay: {
-    // autoTokenMagicConditionEffects: {
-    //   default: true,
-    //   hint: "TERIOCK.SETTINGS.autoTokenMagicConditionEffects.hint",
-    //   name: "TERIOCK.SETTINGS.autoTokenMagicConditionEffects.name",
-    //   scope: "client",
-    //   type: Boolean,
-    // },
     styleDice: {
       default: true,
       hint: "TERIOCK.SETTINGS.styleDice.hint",
@@ -266,12 +251,16 @@ export const settings = {
  * Register all settings and setting menus.
  */
 export function registerSettings() {
+  configs.AbilitySettingsConfig.registerMenu();
+  configs.ActorSettingsConfig.registerMenu();
+  configs.ArmamentSettingsConfig.registerMenu();
   configs.AutomatedBehaviorConfig.registerMenu();
   configs.AlternateRulesConfig.registerMenu();
   configs.DialogConfig.registerMenu();
   configs.DisplayConfig.registerMenu();
   configs.GameContentConfig.registerMenu();
   configs.GameMasterControlsConfig.registerMenu();
+  for (const [k, d] of Object.entries(configurableSettings)) { game.settings.register("teriock", k, d); }
   for (const s of Object.values(settings)) {
     for (const [k, d] of Object.entries(s)) { game.settings.register("teriock", k, d); }
   }

@@ -6,7 +6,7 @@ import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { EvaluationField, IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField } from "../../../fields/helpers/builders.mjs";
 import { initialText } from "../../../fields/helpers/initializers.mjs";
-import { RangeModel } from "../../../models/_module.mjs";
+import { ArmamentSettingsModel, RangeModel } from "../../../models/_module.mjs";
 import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
@@ -69,6 +69,7 @@ export default function ArmamentSystemMixin(Base) {
             ranged: new fields.BooleanField({ initial: false }),
             short: new EvaluationField({ model: RangeModel }),
           }, { multiChangePaths: ["long", "short"] }),
+          settings: new fields.EmbeddedDataField(ArmamentSettingsModel),
           specialRules: initialText(),
           spellTurning: new fields.BooleanField(),
           vitals: new fields.BooleanField(),
@@ -86,10 +87,16 @@ export default function ArmamentSystemMixin(Base) {
        * @inheritDoc
        * @returns {Teriock.Execution.ArmamentExecutionOptions}
        */
-      static parseEvent(event) {
-        return Object.assign(super.parseEvent(event), {
+      static parseEvent(event, source) {
+        const settings = source?.system?.settings;
+        const rollSecretly = settings?.getSetting("rollSecretly")
+          ?? game.settings.get("teriock", "armament").rollSecretly;
+        const rollTwoHanded = settings?.getSetting("rollTwoHanded")
+          ?? game.settings.get("teriock", "armament").rollTwoHanded;
+        return Object.assign(super.parseEvent(event, source), {
           crit: event.ctrlKey,
-          twoHanded: game.teriock.getSetting("twoHandedArmaments") ? !event.altKey : event.altKey,
+          secret: rollSecretly ? !event.shiftKey : event.shiftKey,
+          twoHanded: rollTwoHanded ? !event.altKey : event.altKey,
         });
       }
 
@@ -337,7 +344,7 @@ export default function ArmamentSystemMixin(Base) {
        * @param {Teriock.Execution.ArmamentExecutionOptions} options
        */
       async _use(options = {}) {
-        if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
+        if (this.settings.getSetting("rollAttackOnUse")) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
         }
         options.impacts ??= this.impacts;

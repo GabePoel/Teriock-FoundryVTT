@@ -174,7 +174,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           || this.automations.filter(a => a?.requiresCompetence).length !== 0
           || Boolean(this.source.system.overview.proficient)
           || Boolean(this.source.system.overview.fluent)
-          || (this.source.system.heightened && !this.flags.noHeighten));
+          || (this.source.system.heightened && !this.noHeighten));
       }
 
       /**

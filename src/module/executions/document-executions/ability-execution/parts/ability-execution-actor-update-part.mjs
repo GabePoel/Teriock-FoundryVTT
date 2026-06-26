@@ -55,7 +55,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
 
       /** @inheritDoc */
       async _updateActor() {
-        if (this.actor && this.payCosts && game.teriock.getSetting("autoPayAbilityCosts")) {
+        if (this.actor && this.payCosts) {
           for (const c of this.#paidCosts) {
             const config = costConfig.primary.keys[c];
             if (!config?.barStat) { await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]); }

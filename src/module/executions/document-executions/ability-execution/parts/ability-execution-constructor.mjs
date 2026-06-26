@@ -64,23 +64,12 @@ export default class AbilityExecutionConstructor
    */
   #initializeCosts(options = {}) {
     Object.assign(this.options, {
-      noGp: options.noGp ?? !this.source.system.settings.execution.promptCostGp,
-      noHp: options.noHp ?? !this.source.system.settings.execution.promptCostHp,
-      noLp: options.noLp ?? !this.source.system.settings.execution.promptCostLp,
-      noMp: options.noMp ?? !this.source.system.settings.execution.promptCostMp,
+      noGp: options.noGp ?? !this.source.system.settings.getSetting("promptCostGp"),
+      noHp: options.noHp ?? !this.source.system.settings.getSetting("promptCostHp"),
+      noLp: options.noLp ?? !this.source.system.settings.getSetting("promptCostLp"),
+      noMp: options.noMp ?? !this.source.system.settings.getSetting("promptCostMp"),
     });
     this.costs = { gp: 0, hp: 0, mp: 0 };
-  }
-
-  /**
-   * Handles UI/Prompting flags.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   */
-  #initializeFlags(options = {}) {
-    this.flags = {
-      noHeighten: options.noHeighten ?? !this.source.system.settings.execution.promptHeighten,
-      noTemplate: options.noTemplate ?? !this.source.system.settings.execution.promptTemplate,
-    };
   }
 
   /**
@@ -152,7 +141,7 @@ export default class AbilityExecutionConstructor
 
   /** @returns {boolean} */
   get canHeighten() {
-    return this.competence.proficient && Boolean(this.source.system.heightened) && !this.flags.noHeighten
+    return this.competence.proficient && Boolean(this.source.system.heightened) && !this.noHeighten
       && (this.actor?.system.scaling.p ?? 0) > 0;
   }
 
@@ -319,7 +308,7 @@ export default class AbilityExecutionConstructor
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
   initializeExecution(options = {}) {
-    this.#initializeFlags(options);
+    this.noHeighten = options.noHeighten ?? !this.source.system.settings.getSetting("promptHeighten");
     this.#initializeCosts(options);
     this._updateArmament(this.armament, options);
     if (!this.bonus) { this.bonus = "0"; }
@@ -333,7 +322,7 @@ export default class AbilityExecutionConstructor
     this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
     if (Number.isNaN(this.existingAttackPenalty)) { this.existingAttackPenalty = 0; }
     this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
-    this.payCosts = this.actor?.system.settings.automation.payAbilityCosts ?? true;
+    this.payCosts = game.teriock.getSetting("autoPayAbilityCosts");
     this.targets = new Set();
   }
 }

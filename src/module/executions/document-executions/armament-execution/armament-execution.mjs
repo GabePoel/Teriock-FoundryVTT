@@ -19,6 +19,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     super(options);
     this.impacts = new Set(options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"]);
     this.bonus = options.bonus ?? "";
+    this.secret = options.secret ?? this.source.system.settings.getSetting("rollSecretly");
     this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
     this.formula = options.formula
       ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
@@ -70,6 +71,22 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
   /** @inheritDoc */
   get hasFormula() {
     return this.#dealImpacts;
+  }
+
+  /** @inheritDoc */
+  async _buildSourcePanel() {
+    if (this.secret) {
+      return {
+        blocks: [{
+          text: _loc("TERIOCK.SYSTEMS.Armament.PANELS.used"),
+          title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
+        }],
+        icon: TERIOCK.config.document[this.source.type]?.icon ?? this.icon,
+        image: this.source.img,
+        name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown"),
+      };
+    }
+    return this.source.toPanel();
   }
 
   /** @inheritDoc */

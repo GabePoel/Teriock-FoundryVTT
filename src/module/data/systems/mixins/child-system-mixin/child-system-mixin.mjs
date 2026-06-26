@@ -5,7 +5,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { initialBoolean } from "../../../fields/helpers/initializers.mjs";
-import { ChildSettingsModel } from "../../../models/settings-models/_module.mjs";
+import { CommonSettingsModel } from "../../../models/settings-models/_module.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
@@ -56,7 +56,7 @@ export default function ChildSystemMixin(Base) {
           description: new fields.HTMLField({ initial: "" }),
           forceSuppressed: new initialBoolean(),
           instructions: new fields.HTMLField({ initial: "" }),
-          settings: new fields.EmbeddedDataField(ChildSettingsModel),
+          settings: new fields.EmbeddedDataField(CommonSettingsModel),
         });
       }
 

@@ -270,7 +270,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
 
         // Add block cone activation
-        if (this.source.system.delivery === "cone" && !this.flags.noTemplate) {
+        if (this.source.system.delivery === "cone") {
           this.activations.push(new acts.UseLocalActivation({ options: { lookup: "ability:block-cone" } }));
         }
 

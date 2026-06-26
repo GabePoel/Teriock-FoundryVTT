@@ -34,7 +34,7 @@ export default class TeriockTokenDocument
   /** @inheritDoc */
   _prepareDetectionModes() {
     super._prepareDetectionModes();
-    if (this.actor?.system.settings.token.autoDetectionModes) {
+    if (this.actor?.system.settings.getSetting("autoDetectionModes")) {
       for (const senseEntry of Object.values(TERIOCK.config.character.sense)) {
         const mode = senseEntry?.detectionMode;
         if (mode) {
@@ -65,7 +65,7 @@ export default class TeriockTokenDocument
     const updateData = {};
     const updateOptions = {};
     if (this.actor) {
-      if (this.actor.system.settings.token.autoScale) {
+      if (this.actor.system.settings.getSetting("autoScale")) {
         if (this.width !== this.actor.system.size.length) { updateData.width = this.actor.system.size.length; }
         if (this.height !== this.actor.system.size.length) { updateData.height = this.actor.system.size.length; }
       }
@@ -80,7 +80,7 @@ export default class TeriockTokenDocument
    */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.hasStatusEffect("ethereal") && this.actor.system.settings.token.autoLighting) {
+    if (this.hasStatusEffect("ethereal") && this.actor.system.settings.getSetting("autoLighting")) {
       const lightRange = Math.max(this.light.bright, this.light.dim);
       foundry.utils.setProperty(this, "detectionModes.spectral.enabled", true);
       foundry.utils.setProperty(this, "detectionModes.spectral.range", lightRange);

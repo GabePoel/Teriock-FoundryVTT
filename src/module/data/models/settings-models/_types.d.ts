@@ -1,71 +1,61 @@
-import { BaseActorSystem } from "../../systems/actors/_module.mjs";
-import { AbilitySystem, BaseEffectSystem } from "../../systems/effects/_module.mjs";
-import { BaseItemSystem } from "../../systems/items/_module.mjs";
+import { DataField } from "@common/data/fields.mjs";
+
+import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type ActorSettingsAutomationData = {
-      /** <schema> Whether non-hierarchical changes apply to children */
-      nonHierarchicalChanges: boolean;
-      /** <schema> Whether ability costs are paid automatically */
-      payAbilityCosts: boolean;
-      /** <schema> Whether wound statuses are applied automatically */
-      wound: boolean;
+    export type SettingsDefaults<Category extends Teriock.Config.SettingsCategory> = {
+      [Key in Teriock.Config.SettingsKey<Category>]: boolean;
     };
 
-    export type ActorSettingsTokenData = {
-      /** <schema> Whether token coloration is synced from actor status */
-      autoColoration: boolean;
-      /** <schema> Whether detection modes are synced from actor senses */
-      autoDetectionModes: boolean;
-      /** <schema> Whether lighting is synced from actor status */
-      autoLighting: boolean;
-      /** <schema> Whether token magic filters are applied automatically */
-      autoMagic: boolean;
-      /** <schema> Whether token scale is synced from actor size */
-      autoScale: boolean;
-      /** <schema> Whether token art is synced from transformations */
-      autoTransformation: boolean;
-      /** <schema> Whether vision angle is synced from actor senses */
-      autoVisionAngle: boolean;
-      /** <schema> Whether vision mode is synced from actor senses and status */
-      autoVisionModes: boolean;
-      /** <schema> Whether vision range is synced from actor senses */
-      autoVisionRange: boolean;
+    export type DocumentSettingsValues<Category extends Teriock.Config.SettingsCategory> = {
+      [Key in Teriock.Config.SettingsKey<Category>]: boolean | null;
     };
 
-    export type ChildSettingsModelData = { get parent(): BaseEffectSystem | BaseItemSystem };
-
-    export type ActorSettingsModelData = {
-      /** <schema> Automation behavior settings */
-      automation: ActorSettingsAutomationData;
-      /** <schema> Token sync settings */
-      token: ActorSettingsTokenData;
-
-      get parent(): BaseActorSystem;
+    export type DocumentSettingsModelData<
+      Category extends Teriock.Config.SettingsCategory = Teriock.Config.SettingsCategory,
+    > = DocumentSettingsValues<Category> & {
+      getSetting<Key extends Teriock.Config.SettingsKey<Category>>(setting: Key): boolean;
     };
 
-    export type AbilitySettingsExecutionData = {
-      /** <schema> Whether GP costs should prompt during execution */
-      promptCostGp: boolean;
-      /** <schema> Whether HP costs should prompt during execution */
-      promptCostHp: boolean;
-      /** <schema> Whether LP costs should prompt during execution */
-      promptCostLp: boolean;
-      /** <schema> Whether MP costs should prompt during execution */
-      promptCostMp: boolean;
-      /** <schema> Whether heightening should prompt during execution */
-      promptHeighten: boolean;
-      /** <schema> Whether template placement should prompt during execution */
-      promptTemplate: boolean;
+    export type UserSettingsModelData<
+      Category extends Teriock.Config.SettingsCategory = Teriock.Config.SettingsCategory,
+    > = SettingsDefaults<Category>;
+
+    export type CommonSettingsModelData = Record<string, never>;
+
+    export type DocumentSettingsModelInstance<Category extends Teriock.Config.SettingsCategory> =
+      & DocumentSettingsModelData<Category>
+      & EmbeddedDataModel;
+
+    export type UserSettingsModelInstance<Category extends Teriock.Config.SettingsCategory> =
+      & UserSettingsModelData<Category>
+      & EmbeddedDataModel;
+
+    export interface DocumentSettingsModelConstructor<Category extends Teriock.Config.SettingsCategory> {
+      new(...args: object[]): DocumentSettingsModelInstance<Category>;
+      CATEGORY: Category;
+      defineSchema(): Record<string, DataField>;
+    }
+
+    export interface UserSettingsModelConstructor<Category extends Teriock.Config.SettingsCategory> {
+      new(...args: object[]): UserSettingsModelInstance<Category>;
+      CATEGORY: Category;
+      defineSchema(): Record<string, DataField>;
+    }
+
+    export type DocumentSettingsModelConstructorMap = {
+      [Category in Teriock.Config.SettingsCategory]: DocumentSettingsModelConstructor<Category>;
     };
 
-    export type AbilitySettingsModelData = {
-      /** <schema> Execution prompt settings */
-      execution: AbilitySettingsExecutionData;
-
-      get parent(): AbilitySystem;
+    export type UserSettingsModelConstructorMap = {
+      [Category in Teriock.Config.SettingsCategory]: UserSettingsModelConstructor<Category>;
     };
+
+    export type AbilitySettingsModel = DocumentSettingsModelInstance<"ability">;
+    export type ActorSettingsModel = DocumentSettingsModelInstance<"actor">;
+    export type ArmamentSettingsModel = DocumentSettingsModelInstance<"armament">;
+    export type CommonSettingsModel = EmbeddedDataModel & CommonSettingsModelData;
   }
 }
 

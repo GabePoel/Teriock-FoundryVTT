@@ -1,8 +1,17 @@
+import settingsConfig from "../constants/config/settings-config.mjs";
 import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
   export namespace Teriock.Config {
+    export type SettingsConfig = typeof settingsConfig;
+
+    export type SettingsCategory = keyof SettingsConfig;
+
+    export type SettingsKey<Category extends SettingsCategory = SettingsCategory> =
+      & keyof SettingsConfig[Category]
+      & string;
+
     export type ChildChangeTargetEntry = {
       label: string;
       /** The child document subtypes that this applies to. */

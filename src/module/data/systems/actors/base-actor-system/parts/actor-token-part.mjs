@@ -18,7 +18,7 @@ export default Base => {
       _prepareTokenColor() {
         if (
           (this.actor.statuses.has("down") || this.actor.statuses.has("dead"))
-          && this.actor.system.settings.token.autoColoration
+          && this.actor.system.settings.getSetting("autoColoration")
         ) {
           this._tokenChanges.push({
             key: "texture.tint",
@@ -34,7 +34,7 @@ export default Base => {
        * Prepare token detection mode changes.
        */
       _prepareTokenDetectionModes() {
-        if (!this.actor.system.settings.token.autoDetectionModes) { return; }
+        if (!this.actor.system.settings.getSetting("autoDetectionModes")) { return; }
         for (const [sense, config] of Object.entries(TERIOCK.config.character.sense)) {
           if (config?.detectionMode) {
             this._tokenChanges.push({
@@ -87,7 +87,7 @@ export default Base => {
             [_k, v],
           ) => v),
         );
-        if (this.actor.system.settings.token.autoVisionModes) {
+        if (this.actor.system.settings.getSetting("autoVisionModes")) {
           this._tokenChanges.push({
             key: "sight.visionMode",
             phase: "initial",
@@ -96,7 +96,7 @@ export default Base => {
             value: visionMode,
           });
         }
-        if (this.actor.system.settings.token.autoVisionRange) {
+        if (this.actor.system.settings.getSetting("autoVisionRange")) {
           this._tokenChanges.push({
             key: "sight.range",
             phase: "initial",
@@ -105,7 +105,7 @@ export default Base => {
             value: range,
           });
         }
-        if (this.actor.system.settings.token.autoVisionAngle) {
+        if (this.actor.system.settings.getSetting("autoVisionAngle")) {
           this._tokenChanges.push({
             key: "sight.angle",
             phase: "initial",
@@ -114,7 +114,7 @@ export default Base => {
             value: angle,
           });
         }
-        if (sightColor && this.actor.system.settings.token.autoVisionModes) {
+        if (sightColor && this.actor.system.settings.getSetting("autoVisionModes")) {
           this._tokenChanges.push({
             key: "sight.color",
             phase: "initial",

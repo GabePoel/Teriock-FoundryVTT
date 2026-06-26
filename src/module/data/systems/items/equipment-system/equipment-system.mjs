@@ -106,13 +106,6 @@ export default class EquipmentSystem
   }
 
   /** @inheritDoc */
-  static parseEvent(event) {
-    return Object.assign(super.parseEvent(event), {
-      secret: game.teriock.getSetting("secretEquipment") ? !event.shiftKey : event.shiftKey,
-    });
-  }
-
-  /** @inheritDoc */
   get _attunableWrappers() {
     if (!this.identification.identified && !this.isAttuned) { return []; }
     return super._attunableWrappers;

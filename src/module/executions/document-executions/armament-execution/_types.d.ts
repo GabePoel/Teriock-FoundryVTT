@@ -4,6 +4,7 @@ declare global {
       bonus?: Teriock.System.FormulaString;
       crit?: boolean;
       impacts?: Iterable<Teriock.Keys.Impact>;
+      secret?: boolean;
       source?: TeriockArmament;
       twoHanded?: boolean;
     };

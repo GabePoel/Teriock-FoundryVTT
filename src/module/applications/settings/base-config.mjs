@@ -1,4 +1,6 @@
+import settingsConfig from "../../constants/config/settings-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
+import { userSettingsModels } from "../../data/models/settings-models/user-settings-models.mjs";
 import { makeIconClass } from "../../helpers/utils.mjs";
 import TeriockBaseApplication from "../api/base-application.mjs";
 
@@ -85,8 +87,28 @@ export default class BaseConfig extends TeriockBaseApplication {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     context.fields = [];
+    context.legend = undefined;
     context.buttons = [{ icon: makeIconClass(icons.ui.save, "button"), label: "SETTINGS.Save", type: "submit" }];
     return context;
+  }
+
+  /**
+   * Create form fields for a configurable settings category stored as a data model.
+   * @param {Teriock.Config.SettingsCategory} category
+   * @returns {object[]}
+   */
+  createConfigurableSettingFields(category) {
+    const value = game.settings.get("teriock", category) ?? {};
+    const Model = userSettingsModels[category];
+    const schemaFields = new Model().schema.fields;
+    return Object.keys(settingsConfig[category]).map(key => ({
+      field: schemaFields[key],
+      hint: schemaFields[key].hint,
+      label: schemaFields[key].label,
+      localize: true,
+      name: `${category}.${key}`,
+      value: value[key],
+    }));
   }
 
   /**
@@ -105,13 +127,14 @@ export default class BaseConfig extends TeriockBaseApplication {
     }
     const data = {
       field: isDataField ? setting.type : new Field({ blank: false, required: true }),
-      hint: _loc(setting.hint),
-      label: _loc(setting.name),
+      hint: setting.hint,
+      label: setting.name,
+      localize: true,
       name,
       value: game.settings.get("teriock", name),
     };
     if (setting.choices) {
-      data.options = Object.entries(setting.choices).map(([value, label]) => ({ label: _loc(label), value }));
+      data.options = Object.entries(setting.choices).map(([value, label]) => ({ label, value }));
     }
     return data;
   }

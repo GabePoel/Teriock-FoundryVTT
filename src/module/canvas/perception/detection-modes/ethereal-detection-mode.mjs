@@ -14,9 +14,9 @@ const { Token } = foundry.canvas.placeables;
 export default class EtherealDetectionMode extends LightDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
-    if (
-      !game.modules.get("tokenmagic")?.active || !game.teriock.getSetting("autoTokenMagicConditionEffects")
-    ) { return (this._detectionFilter ??= EtherealFilter.create({ blur: 10 })); }
+    if (!game.modules.get("tokenmagic")?.active || !game.teriock.getSetting("actor")?.autoMagic) {
+      return (this._detectionFilter ??= EtherealFilter.create({ blur: 10 }));
+    }
     return super.getDetectionFilter();
   }
 

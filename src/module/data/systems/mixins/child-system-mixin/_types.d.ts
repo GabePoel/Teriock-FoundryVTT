@@ -1,5 +1,3 @@
-import { ChildSettingsModel } from "../../../models/_module.mjs";
-
 declare global {
   namespace Teriock.Models {
     export type ChildSystemData = {
@@ -10,9 +8,11 @@ declare global {
       /** <schema> Setup and usage instructions */
       instructions: string;
       /** <schema> Per-document behavior and display settings */
-      settings: ChildSettingsModel;
+      settings: Teriock.Models.CommonSettingsModel;
 
       get parent(): AnyChildDocument;
     };
   }
 }
+
+export {};

@@ -19,13 +19,7 @@ export default class DialogConfig extends BaseConfig {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    switch (partId) {
-      case "general":
-        context.fields = this.createSettingFields(settings.dialog);
-        break;
-      default:
-        break;
-    }
+    if (partId === "general") { context.fields = this.createSettingFields(settings.dialog); }
     return context;
   }
 }

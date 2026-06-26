@@ -3,10 +3,12 @@ import { settings } from "../setup/system-settings.mjs";
 
 declare global {
   namespace Teriock.Keys {
-    // System Keys
-    export type Setting = {
+    // Setting Keys
+    export type FlatSetting = {
       [Category in keyof typeof settings]: keyof (typeof settings)[Category];
     }[keyof typeof settings];
+    export type ConfigurableSettingCategory = Teriock.Config.SettingsCategory;
+    export type Setting = ConfigurableSettingCategory | FlatSetting;
 
     // Tradecraft Keys
     export type Field = keyof typeof config.tradecraft.fields;
