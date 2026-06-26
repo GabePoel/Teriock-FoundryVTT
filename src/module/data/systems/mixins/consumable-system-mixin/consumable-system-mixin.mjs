@@ -104,6 +104,12 @@ export default function ConsumableSystemMixin(Base) {
           });
       }
 
+      /** @inheritDoc */
+      _collectSuppressionMessages() {
+        super._collectSuppressionMessages();
+        if (this._isSuppressedConsumed) { this._addSuppressionMessage("consumed"); }
+      }
+
       /**
        * Adds one unit to the consumable item.
        * Increments the quantity by 1, respecting maximum quantity limits.

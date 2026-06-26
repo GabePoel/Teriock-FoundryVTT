@@ -1,6 +1,9 @@
 import * as configs from "../applications/settings/_module.mjs";
+import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
+import suppressionConfig from "../constants/config/suppression-config.mjs";
 import { userSettingsModels } from "../data/models/settings-models/user-settings-models.mjs";
+import { objectMap } from "../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -217,6 +220,51 @@ export const settings = {
       name: "TERIOCK.SETTINGS.openPanelContextMenuEntry.name",
       scope: "client",
       type: Boolean,
+    },
+  },
+  suppression: {
+    showSuppressionMessagesOnSheets: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.showSuppressionMessagesOnSheets.hint",
+      name: "TERIOCK.SETTINGS.showSuppressionMessagesOnSheets.name",
+      scope: "client",
+      type: Boolean,
+    },
+    showSuppressionMessagesOnTooltips: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.showSuppressionMessagesOnTooltips.hint",
+      name: "TERIOCK.SETTINGS.showSuppressionMessagesOnTooltips.name",
+      scope: "client",
+      type: Boolean,
+    },
+    suppressionMessages: {
+      default: Object.keys(suppressionConfig.messages),
+      hint: "TERIOCK.SETTINGS.suppressionMessages.hint",
+      name: "TERIOCK.SETTINGS.suppressionMessages.name",
+      scope: "client",
+      type: new fields.SetField(new fields.StringField({ choices: suppressionConfig.messages }), {
+        initial: Object.keys(suppressionConfig.messages),
+      }),
+    },
+    suppressionMessageTypes: {
+      default: Object.entries(documentConfig).filter(([_k, v]) => ["ActiveEffect", "Item"].includes(v.documentName))
+        .map(([k, _v]) =>
+          k
+        ),
+      hint: "TERIOCK.SETTINGS.suppressionMessageTypes.hint",
+      name: "TERIOCK.SETTINGS.suppressionMessageTypes.name",
+      scope: "client",
+      type: new fields.SetField(
+        new fields.StringField({
+          choices: objectMap(documentConfig, (v) => v.label, {
+            filter: v => ["ActiveEffect", "Item"].includes(v.documentName),
+          }),
+        }),
+        {
+          initial: Object.entries(documentConfig).filter(([_k, v]) => ["ActiveEffect", "Item"].includes(v.documentName))
+            .map(([k, _v]) => k),
+        },
+      ),
     },
   },
   tooltip: {

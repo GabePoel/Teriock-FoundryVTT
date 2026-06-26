@@ -81,12 +81,18 @@ export default class TeriockTextEditor extends TextEditor {
    * @param {boolean} [options.noBars]
    * @param {boolean} [options.noBlocks]
    * @param {boolean} [options.noAssociations]
+   * @param {ClientDocument} [options.relativeTo]
    * @returns {Promise<string>}
    */
   static async makeTooltip(parts, options = {}) {
     if (options.noBars) { delete parts.bars; }
     if (options.noBlocks) { delete parts.blocks; }
     if (options.noAssociations) { delete parts.associations; }
+    if (
+      game.teriock.getSetting("showSuppressionMessagesOnTooltips") && options.relativeTo?.system?.formMessages?.length
+    ) {
+      parts.messages = options.relativeTo.system.formMessages;
+    }
     await this.enrichPanel(parts, options);
     return this.renderTemplate("teriock/ui/panel", parts);
   }

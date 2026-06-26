@@ -336,6 +336,12 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      _collectSuppressionMessages() {
+        super._collectSuppressionMessages();
+        if (this._isSuppressedTransformation) { this._addSuppressionMessage("notPrimary"); }
+      }
+
+      /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
         if (this.parent.checkEditor(userId) && this.isTransformation && this.actor) { this.#modifyOnCreate(); }

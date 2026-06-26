@@ -24,6 +24,7 @@ import piercingConfig from "./piercing-config.mjs";
 import powerConfig from "./power-config.mjs";
 import protectionConfig from "./protection-config.mjs";
 import settingsConfig from "./settings-config.mjs";
+import suppressionConfig from "./suppression-config.mjs";
 import systemConfig from "./system-config.mjs";
 import tradecraftConfig from "./tradecraft-config.mjs";
 import transformationConfig from "./transformation-config.mjs";
@@ -57,6 +58,7 @@ const config = {
   power: powerConfig,
   protection: protectionConfig,
   settings: settingsConfig,
+  suppression: suppressionConfig,
   system: systemConfig,
   tradecraft: tradecraftConfig,
   transformation: transformationConfig,

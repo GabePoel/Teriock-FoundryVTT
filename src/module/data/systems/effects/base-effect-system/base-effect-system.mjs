@@ -175,6 +175,17 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     return changes;
   }
 
+  /** @inheritDoc */
+  _collectSuppressionMessages() {
+    super._collectSuppressionMessages();
+    if (this._isSuppressedDampened) { this._addSuppressionMessage("dampened"); }
+    if (this._isSuppressedDeattuned) { this._addSuppressionMessage("deattuned"); }
+    if (this._isSuppressedDestroyed) { this._addSuppressionMessage("parentDestroyed"); }
+    if (this._isSuppressedShattered) { this._addSuppressionMessage("shattered"); }
+    if (this._isSuppressedStashed) { this._addSuppressionMessage("parentStashed"); }
+    if (this._isSuppressedUnequipped) { this._addSuppressionMessage("parentUnequipped"); }
+  }
+
   /**
    * Expires the effect manually.
    * @returns {Promise<void>}

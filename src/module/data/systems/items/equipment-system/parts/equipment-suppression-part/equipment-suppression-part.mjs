@@ -52,6 +52,30 @@ export default Base => {
         }, ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("attuned"))];
       }
 
+      /**
+       * If this is suppressed due to being destroyed.
+       * @returns {boolean}
+       */
+      get _isSuppressedDestroyed() {
+        return this.destroyed;
+      }
+
+      /**
+       * If this is suppressed due to being stashed.
+       * @returns {boolean}
+       */
+      get _isSuppressedStashed() {
+        return this.stashed;
+      }
+
+      /**
+       * If this is suppressed due to not being equipped.
+       * @returns {boolean}
+       */
+      get _isSuppressedUnequipped() {
+        return !this.equipped;
+      }
+
       /** @inheritDoc */
       get _nameTags() {
         const tags = super._nameTags;
@@ -66,7 +90,18 @@ export default Base => {
 
       /** @inheritDoc */
       get makeSuppressed() {
-        return super.makeSuppressed || !this.equipped || this.stashed || this.destroyed;
+        return super.makeSuppressed
+          || this._isSuppressedUnequipped
+          || this._isSuppressedStashed
+          || this._isSuppressedDestroyed;
+      }
+
+      /** @inheritDoc */
+      _collectSuppressionMessages() {
+        super._collectSuppressionMessages();
+        if (this._isSuppressedUnequipped) { this._addSuppressionMessage("unequipped"); }
+        if (this._isSuppressedStashed) { this._addSuppressionMessage("stashed"); }
+        if (this._isSuppressedDestroyed) { this._addSuppressionMessage("destroyed"); }
       }
 
       /**
@@ -92,7 +127,7 @@ export default Base => {
        */
       async destroy() {
         await this.parent.hookCall("destroy", { scope: { equipment: this.parent } });
-        await this.parent.toggleChild("property:dampened", { active: true });
+        await this.parent.toggleChild("property:destroyed", { active: true });
       }
 
       /** @inheritdoc */

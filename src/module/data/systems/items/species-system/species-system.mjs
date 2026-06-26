@@ -142,6 +142,24 @@ export default class SpeciesSystem
   }
 
   /**
+   * If this is suppressed due to its transformation effect being inactive.
+   * @returns {boolean}
+   */
+  get _isSuppressedTransformationInactive() {
+    return Boolean(
+      this.isTransformation && this.parent.actor && this.transformationEffect && !this.transformationEffect.active,
+    );
+  }
+
+  /**
+   * If this is suppressed due to not being the primary transformation species.
+   * @returns {boolean}
+   */
+  get _isSuppressedTransformationSecondary() {
+    return Boolean(this.isTransformation && this.parent.actor && !this.isPrimaryTransformation);
+  }
+
+  /**
    * Trait tags.
    * @returns {Teriock.Display.DisplayTag[]}
    */
@@ -204,12 +222,9 @@ export default class SpeciesSystem
 
   /** @inheritDoc */
   get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    if (this.isTransformation && this.parent.actor) {
-      const transformationEffect = this.transformationEffect;
-      suppressed ||= (transformationEffect && !transformationEffect.active) || !this.isPrimaryTransformation;
-    }
-    return suppressed;
+    return super.makeSuppressed
+      || this._isSuppressedTransformationInactive
+      || this._isSuppressedTransformationSecondary;
   }
 
   /**
@@ -224,6 +239,13 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get wikiPage() {
     return `Creature:${TERIOCK.index.creatures[toCamelCase(this.identifier ?? "")] ?? ""}`;
+  }
+
+  /** @inheritDoc */
+  _collectSuppressionMessages() {
+    super._collectSuppressionMessages();
+    if (this._isSuppressedTransformationInactive) { this._addSuppressionMessage("inactiveTransformation"); }
+    if (this._isSuppressedTransformationSecondary) { this._addSuppressionMessage("notPrimary"); }
   }
 
   /** @inheritDoc */

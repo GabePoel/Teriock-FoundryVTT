@@ -5,9 +5,6 @@ declare global {
     /** Notification-style messages that appear in application */
     export type FormMessage = { icon?: string, level?: "error" | "info" | "success" | "warning", text?: string };
 
-    /** Three-way toggle */
-    export type ThreeToggle = boolean | null;
-
     /** Icon style */
     export type IconStyle = keyof typeof iconStyles;
 

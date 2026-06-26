@@ -1,6 +1,7 @@
 @use "../mixins" as mixins;
 
 .notification-container {
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   gap: 0.5em;
@@ -8,9 +9,14 @@
   padding: 0;
   width: 100%;
 
-  li {
-    text-shadow: 0 0 2px black;
+  li.notification {
+    padding-left: 7px;
+    text-shadow: 0 0 2px black !important;
     width: 100%;
+    &::before {
+      font-size: small;
+      margin-right: 5px;
+    }
   }
 }
 

@@ -12,6 +12,7 @@ export default class DisplayConfig extends BaseConfig {
   /** @inheritDoc */
   static PARTS = {
     general: super.PARTS.general,
+    suppression: { template: "teriock/settings/base-config" },
     panels: { template: "teriock/settings/base-config" },
     tooltips: { template: "teriock/settings/base-config" },
     actorSheet: { template: "teriock/settings/base-config" },
@@ -31,6 +32,15 @@ export default class DisplayConfig extends BaseConfig {
     switch (partId) {
       case "general":
         context.fields = this.createSettingFields(settings.generalDisplay);
+        break;
+      case "suppression":
+        context.fields = this.createSettingFields(settings.suppression);
+        for (const field of context.fields) {
+          if (field.name === "suppressionMessageTypes" || field.name === "suppressionMessages") {
+            field.classes = "stacked";
+          }
+        }
+        context.legend = "TERIOCK.CONFIGS.Display.parts.suppression";
         break;
       case "panels":
         context.fields = this.createSettingFields(settings.panel);

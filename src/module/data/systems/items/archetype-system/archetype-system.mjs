@@ -30,6 +30,27 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
     });
   }
 
+  /**
+   * If this is suppressed due to worn armor exceeding maximum AV.
+   * @returns {boolean}
+   */
+  get _isSuppressedArmor() {
+    return Boolean(
+      game.teriock.getSetting("armorSuppressesRanks")
+        && this.actor
+        && !this.innate
+        && this.actor.system.defense.av.base > this.maxAv,
+    );
+  }
+
+  /**
+   * If this is suppressed due to having no active ranks.
+   * @returns {boolean}
+   */
+  get _isSuppressedInactiveRanks() {
+    return Boolean(this.actor && this.ranks.filter(r => r.active).length === 0);
+  }
+
   /** @inheritDoc */
   get _panelBars() {
     return [{ icon: documentConfig.rank.icon, label: documentConfig.rank.plural, wrappers: this.classNames }];
@@ -59,17 +80,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
 
   /** @inheritDoc */
   get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    if (
-      game.teriock.getSetting("armorSuppressesRanks")
-      && this.actor
-      && !this.innate
-      && this.actor.system.defense.av.base > this.maxAv
-    ) {
-      suppressed = true;
-    }
-    if (this.actor && this.ranks.filter(r => r.active).length === 0) { suppressed = true; }
-    return suppressed;
+    return super.makeSuppressed || this._isSuppressedArmor || this._isSuppressedInactiveRanks;
   }
 
   /**
@@ -79,6 +90,13 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
   get ranks() {
     if (!this.actor) { return []; }
     return this.actor.ranks.filter(r => r.system._source.archetype === this.identifier);
+  }
+
+  /** @inheritDoc */
+  _collectSuppressionMessages() {
+    super._collectSuppressionMessages();
+    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor"); }
+    if (this._isSuppressedInactiveRanks) { this._addSuppressionMessage("inactiveRanks"); }
   }
 
   /**

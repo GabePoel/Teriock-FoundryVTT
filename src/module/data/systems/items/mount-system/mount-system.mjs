@@ -58,6 +58,14 @@ export default class MountSystem
     }];
   }
 
+  /**
+   * If this is suppressed due to not being mounted.
+   * @returns {boolean}
+   */
+  get _isSuppressedUnmounted() {
+    return !this.mounted;
+  }
+
   /** @inheritDoc */
   get _panelBars() {
     return [this._statBar, {
@@ -92,7 +100,13 @@ export default class MountSystem
 
   /** @inheritDoc */
   get makeSuppressed() {
-    return super.makeSuppressed || !this.mounted;
+    return super.makeSuppressed || this._isSuppressedUnmounted;
+  }
+
+  /** @inheritDoc */
+  _collectSuppressionMessages() {
+    super._collectSuppressionMessages();
+    if (this._isSuppressedUnmounted) { this._addSuppressionMessage("unmounted"); }
   }
 
   /** @inheritDoc */
@@ -128,6 +142,12 @@ export default class MountSystem
   async mount() {
     await this.parent.hookCall("mount", { scope: { mount: this.parent } });
     await this.parent.update({ "system.mounted": true });
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if (!this.actor) { this.mounted = true; }
   }
 
   /**

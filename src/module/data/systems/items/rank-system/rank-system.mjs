@@ -91,6 +91,19 @@ export default class RankSystem
     return super._canToggleMpDice && !this.innate;
   }
 
+  /**
+   * If this is suppressed due to worn armor exceeding maximum AV.
+   * @returns {boolean}
+   */
+  get _isSuppressedArmor() {
+    return Boolean(
+      game.teriock.getSetting("armorSuppressesRanks")
+        && this.actor
+        && !this.innate
+        && this.actor.system.defense.av.base > this.maxAv,
+    );
+  }
+
   /** @inheritDoc */
   get _panelBars() {
     return [
@@ -146,21 +159,18 @@ export default class RankSystem
 
   /** @inheritDoc */
   get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    if (
-      game.teriock.getSetting("armorSuppressesRanks")
-      && this.actor
-      && !this.innate
-      && this.actor.system.defense.av.base > this.maxAv
-    ) {
-      suppressed = true;
-    }
-    return suppressed;
+    return super.makeSuppressed || this._isSuppressedArmor;
   }
 
   /** @inheritDoc */
   get wikiPage() {
     return `Class:${TERIOCK.index.classes[toCamelCase(this._source.class ?? "")] ?? ""}`;
+  }
+
+  /** @inheritDoc */
+  _collectSuppressionMessages() {
+    super._collectSuppressionMessages();
+    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor"); }
   }
 
   /** @inheritDoc */

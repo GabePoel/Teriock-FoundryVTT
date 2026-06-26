@@ -36,6 +36,19 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
     });
   }
 
+  /**
+   * If this is suppressed due to worn armor exceeding maximum AV.
+   * @returns {boolean}
+   */
+  get _isSuppressedArmor() {
+    return Boolean(
+      game.teriock.getSetting("armorSuppressesRanks")
+        && this.actor
+        && !this.innate
+        && this.actor.system.defense.av.base > this.maxAv,
+    );
+  }
+
   /** @inheritDoc */
   get _panelBars() {
     return [{
@@ -65,16 +78,13 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
 
   /** @inheritDoc */
   get makeSuppressed() {
-    let suppressed = super.makeSuppressed;
-    if (
-      game.teriock.getSetting("armorSuppressesRanks")
-      && this.actor
-      && !this.innate
-      && this.actor.system.defense.av.base > this.maxAv
-    ) {
-      suppressed = true;
-    }
-    return suppressed;
+    return super.makeSuppressed || this._isSuppressedArmor;
+  }
+
+  /** @inheritDoc */
+  _collectSuppressionMessages() {
+    super._collectSuppressionMessages();
+    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor"); }
   }
 
   /** @inheritDoc */

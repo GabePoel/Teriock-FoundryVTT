@@ -1,9 +1,10 @@
 import settingsConfig from "../constants/config/settings-config.mjs";
+import suppressionConfig from "../constants/config/suppression-config.mjs";
 import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 import { TeriockActor } from "../documents/_module.mjs";
 
 declare global {
-  export namespace Teriock.Config {
+  namespace Teriock.Config {
     export type SettingsConfig = typeof settingsConfig;
 
     export type SettingsCategory = keyof SettingsConfig;
@@ -11,6 +12,8 @@ declare global {
     export type SettingsKey<Category extends SettingsCategory = SettingsCategory> =
       & keyof SettingsConfig[Category]
       & string;
+
+    export type SuppressionMessageKey = keyof typeof suppressionConfig.messages;
 
     export type ChildChangeTargetEntry = {
       label: string;
