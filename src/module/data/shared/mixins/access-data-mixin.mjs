@@ -65,7 +65,7 @@ export default function AccessDataMixin(Base) {
        * @returns {HTMLDivElement}
        */
       _getEditorFormsSync() {
-        const group = createElement("div", { className: "teriock-form-container" });
+        const group = createElement("div", { className: "teriock-form-container standard-form" });
         this._makeFormGroups(this._formPaths).forEach(fg => group.append(fg));
         return group;
       }

@@ -11,7 +11,7 @@ import { TeriockDialog } from "../api/_module.mjs";
  */
 export default async function updateDialog(doc, paths, title, icon = "file-pen") {
   const resolvedTitle = title ?? _loc("TERIOCK.DIALOGS.Update.defaults.title");
-  const content = createElement("div", { className: "teriock-form-container" });
+  const content = createElement("div", { className: "teriock-form-container standard-form" });
   for (const path of paths) {
     const field = doc.getFieldForProperty(path);
     const value = foundry.utils.getProperty(doc, `_source.${path}`);

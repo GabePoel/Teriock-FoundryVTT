@@ -115,13 +115,6 @@ export const settings = {
       scope: "user",
       type: Boolean,
     },
-    placeTemplateOnAbilityUse: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.placeTemplateOnAbilityUse.hint",
-      name: "TERIOCK.SETTINGS.placeTemplateOnAbilityUse.name",
-      scope: "user",
-      type: Boolean,
-    },
     showRollDialogs: {
       default: true,
       hint: "TERIOCK.SETTINGS.showRollDialogs.hint",
