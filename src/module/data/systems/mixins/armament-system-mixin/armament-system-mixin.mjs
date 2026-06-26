@@ -93,10 +93,11 @@ export default function ArmamentSystemMixin(Base) {
           ?? game.settings.get("teriock", "armament").rollSecretly;
         const rollTwoHanded = settings?.getSetting("rollTwoHanded")
           ?? game.settings.get("teriock", "armament").rollTwoHanded;
+        const hasTwoHandedAttack = Boolean(source?.system?.hasTwoHandedAttack);
         return Object.assign(super.parseEvent(event, source), {
           crit: event.ctrlKey,
-          secret: rollSecretly ? !event.shiftKey : event.shiftKey,
-          twoHanded: rollTwoHanded ? !event.altKey : event.altKey,
+          secret: rollSecretly !== Boolean(event.shiftKey),
+          twoHanded: hasTwoHandedAttack && (rollTwoHanded !== Boolean(event.altKey)),
         });
       }
 

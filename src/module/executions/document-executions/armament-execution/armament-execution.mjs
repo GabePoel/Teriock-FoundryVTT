@@ -20,7 +20,8 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     this.impacts = new Set(options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"]);
     this.bonus = options.bonus ?? "";
     this.secret = options.secret ?? this.source.system.settings.getSetting("rollSecretly");
-    this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
+    this.twoHanded = this.source.system.hasTwoHandedAttack
+      && (options.twoHanded ?? this.source.system.settings.getSetting("rollTwoHanded"));
     this.formula = options.formula
       ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
     this.#dealImpacts = formulaExists(this.formula);
@@ -35,6 +36,29 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
   /** @inheritDoc */
   get _dialogFields() {
     return [...super._dialogFields, {
+      classes: ["slim"],
+      field: new fields.BooleanField(),
+      hint: "TERIOCK.SETTINGS.armament.rollSecretly.hint",
+      label: "TERIOCK.SETTINGS.armament.rollSecretly.name",
+      name: "secret",
+      small: true,
+      value: Boolean(this.secret),
+      update: v => (this.secret = v),
+    }, {
+      classes: ["slim"],
+      field: new fields.BooleanField(),
+      hint: "TERIOCK.SETTINGS.armament.rollTwoHanded.hint",
+      label: "TERIOCK.SETTINGS.armament.rollTwoHanded.name",
+      name: "twoHanded",
+      small: true,
+      value: Boolean(this.twoHanded),
+      condition: () => this.hasFormula && this.source.system.hasTwoHandedAttack,
+      update: v => {
+        this.twoHanded = v;
+        this.formula = this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base;
+        this.#dealImpacts = formulaExists(this.formula);
+      },
+    }, {
       classes: ["slim"],
       field: new fields.BooleanField(),
       hint: "TERIOCK.SYSTEMS.Armament.EXECUTION.dealImpacts.hint",
@@ -77,13 +101,10 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
   async _buildSourcePanel() {
     if (this.secret) {
       return {
-        blocks: [{
-          text: _loc("TERIOCK.SYSTEMS.Armament.PANELS.used"),
-          title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
-        }],
+        blocks: [],
         icon: TERIOCK.config.document[this.source.type]?.icon ?? this.icon,
         image: this.source.img,
-        name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown"),
+        name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown", { type: _loc(`TYPES.Item.${this.source.type}`) }),
       };
     }
     return this.source.toPanel();

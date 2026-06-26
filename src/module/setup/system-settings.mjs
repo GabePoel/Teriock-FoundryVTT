@@ -5,14 +5,14 @@ import { userSettingsModels } from "../data/models/settings-models/user-settings
 const { fields } = foundry.data;
 
 /** @type {Record<Teriock.Config.SettingsCategory, SettingConfig>} */
-export const configurableSettings = Object.fromEntries(
+export const inheritedSettings = Object.fromEntries(
   Object.keys(settingsConfig).map(
     category => [category, {
-      default: settingsConfig[/** @type {Teriock.Config.SettingsCategory} */ (category)],
+      default: settingsConfig[category],
       hint: `TERIOCK.SETTINGS.${category}.hint`,
       name: `TERIOCK.SETTINGS.${category}.name`,
       scope: "user",
-      type: userSettingsModels[/** @type {Teriock.Config.SettingsCategory} */ (category)],
+      type: userSettingsModels[category],
     }]
   ),
 );
@@ -260,7 +260,7 @@ export function registerSettings() {
   configs.DisplayConfig.registerMenu();
   configs.GameContentConfig.registerMenu();
   configs.GameMasterControlsConfig.registerMenu();
-  for (const [k, d] of Object.entries(configurableSettings)) { game.settings.register("teriock", k, d); }
+  for (const [k, d] of Object.entries(inheritedSettings)) { game.settings.register("teriock", k, d); }
   for (const s of Object.values(settings)) {
     for (const [k, d] of Object.entries(s)) { game.settings.register("teriock", k, d); }
   }

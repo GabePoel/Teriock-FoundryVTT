@@ -25,9 +25,10 @@ export default function UsableDataMixin(Base) {
       /**
        * Parse an event into usable roll or execution options for this type.
        * @param {PointerEvent} event
+       * @param {AnyCommonDocument} [_source]
        * @returns {Teriock.Execution.DocumentExecutionOptions}
        */
-      static parseEvent(event) {
+      static parseEvent(event, _source) {
         return BaseRoll.parseEvent(event);
       }
 
@@ -71,7 +72,9 @@ export default function UsableDataMixin(Base) {
        */
       async use(options = {}) {
         options.source ??= this.parent;
-        if (options.event) { Object.assign(options, this.constructor.parseEvent(options.event)); }
+        if (options.event) {
+          Object.assign(options, this.constructor.parseEvent(options.event, options.source));
+        }
         await this._use(options);
       }
     }
