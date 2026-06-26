@@ -141,7 +141,6 @@ export default function AbilityExecutionGetInputPart(Base) {
             update: v => (this.vitals = v),
           },
           {
-            condition: true,
             field: new fields.BooleanField(),
             label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
             name: "warded",

@@ -168,11 +168,6 @@ export default class AbilityExecutionConstructor
     return this.isAttack || this.isFeat;
   }
 
-  /** @inheritDoc */
-  get icon() {
-    return TERIOCK.display.icons.document.ability;
-  }
-
   /**
    * If this is an attack interaction.
    * @returns {boolean}

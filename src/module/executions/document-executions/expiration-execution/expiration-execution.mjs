@@ -58,7 +58,6 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
     const entries = [];
     if (formulaField) {
       entries.push({
-        condition: true,
         field: formulaField,
         hint: formulaField.hint,
         label: formulaField.label,
@@ -70,7 +69,6 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
     }
     if (comparisonField) {
       entries.push({
-        condition: true,
         field: comparisonField,
         hint: comparisonField.hint,
         label: comparisonField.label,
@@ -81,7 +79,6 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
     }
     if (thresholdField) {
       entries.push({
-        condition: true,
         field: thresholdField,
         hint: thresholdField.hint,
         label: thresholdField.label,

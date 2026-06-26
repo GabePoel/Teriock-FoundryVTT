@@ -24,6 +24,9 @@ export default class ApplicableEffectSystem
   extends mixClasses(BaseEffectSystem, systemMixins.ExpirableSystemMixin, dataMixins.ThresholdDataMixin)
 {
   /** @inheritDoc */
+  static Execution = ExpirationExecution;
+
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
 
   /** @inheritDoc */
@@ -193,12 +196,14 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
-  async _use(_options = {}) {
-    await ExpirationExecution.create({
-      actor: this.actor,
-      expiration: this.activeExpirations.find((e) => e.method === "roll"),
-      source: this.parent,
-    });
+  async _use(options = {}) {
+    await super._use(
+      Object.assign(options, {
+        actor: this.actor,
+        expiration: this.activeExpirations.find((e) => e.method === "roll"),
+        source: this.parent,
+      }),
+    );
   }
 
   /** @inheritDoc */

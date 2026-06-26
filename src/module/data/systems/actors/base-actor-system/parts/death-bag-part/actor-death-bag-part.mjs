@@ -35,7 +35,7 @@ export default Base => {
        * @returns {Promise<void>}
        */
       async deathBagPull(options = {}) {
-        await DeathBagExecution.create(Object.assign(options, { actor: this.parent }));
+        await DeathBagExecution.create(Object.assign(options, { source: this.parent }));
       }
 
       /** @inheritDoc */

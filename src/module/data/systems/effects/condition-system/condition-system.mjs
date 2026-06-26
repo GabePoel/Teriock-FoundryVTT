@@ -25,6 +25,9 @@ export default class ConditionSystem
   )
 {
   /** @inheritDoc */
+  static Execution = ExpirationExecution;
+
+  /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, { namespace: "Condition", type: "condition" });
   }
@@ -77,12 +80,6 @@ export default class ConditionSystem
     if (yes === false) { return false; }
 
     if (changes.disabled === true) { return false; }
-  }
-
-  /** @inheritDoc */
-  async _use(_options = {}) {
-    if (this.parent.id.includes("dead") && this.parent.actor) { await this.parent.actor.system.deathBagPull(); }
-    else { await ExpirationExecution.create({ actor: this.actor, source: this.parent }); }
   }
 
   /** @inheritDoc */

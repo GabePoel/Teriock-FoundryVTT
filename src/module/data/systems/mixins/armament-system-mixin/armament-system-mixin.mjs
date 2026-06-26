@@ -24,6 +24,9 @@ export default function ArmamentSystemMixin(Base) {
      */
     class ArmamentSystem extends AttackSystemMixin(Base) {
       /** @inheritDoc */
+      static Execution = ArmamentExecution;
+
+      /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Armament"];
 
       /** @inheritDoc */
@@ -338,7 +341,7 @@ export default function ArmamentSystemMixin(Base) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
         }
         options.impacts ??= this.impacts;
-        await ArmamentExecution.create(options);
+        await super._use(options);
       }
 
       /** @inheritDoc */

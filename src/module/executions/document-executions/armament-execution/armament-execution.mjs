@@ -19,7 +19,6 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     super(options);
     this.impacts = new Set(options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"]);
     this.bonus = options.bonus ?? "";
-    this.showDialog = options.showDialog;
     this.twoHanded = options.twoHanded && this.source.system.hasTwoHandedAttack;
     this.formula = options.formula
       ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
@@ -45,6 +44,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
       update: v => (this.#dealImpacts = v),
     }, {
       classes: ["slim"],
+      condition: this.source.system.onUseAbilities.length > 0,
       field: new fields.BooleanField(),
       hint: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.hint",
       label: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.label",

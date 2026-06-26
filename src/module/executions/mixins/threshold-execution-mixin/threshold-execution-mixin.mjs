@@ -21,20 +21,12 @@ export default function ThresholdExecutionMixin(Base) {
        */
       constructor(options = {}) {
         super(options);
-        const {
-          bonus = "",
-          comparison = "gte",
-          edge = 0,
-          formula = undefined,
-          showDialog = game.teriock.getSetting("showRollDialogs"),
-          threshold,
-        } = options;
+        const { bonus = "", comparison = "gte", edge = 0, formula = undefined, threshold } = options;
         this.edge = edge;
         this.threshold = threshold;
         this.formula = formula;
         this.bonus = `${bonus}`;
         this.comparison = comparison;
-        this.showDialog = showDialog;
       }
 
       /** @inheritDoc */
@@ -83,7 +75,7 @@ export default function ThresholdExecutionMixin(Base) {
           placeholder: "0",
           value: this.bonus,
           update: v => (this.bonus = v),
-        }];
+        }, ...super._dialogFields];
       }
 
       /** @inheritDoc */
@@ -100,27 +92,11 @@ export default function ThresholdExecutionMixin(Base) {
       }
 
       /**
-       * An icon for this execution to show in dialogs.
-       * @returns {string}
-       */
-      get icon() {
-        return "dice-d20";
-      }
-
-      /**
        * If this is a roll.
        * @return {boolean}
        */
       get isRoll() {
         return true;
-      }
-
-      /**
-       * A name for this execution to show in dialogs.
-       * @returns {string}
-       */
-      get name() {
-        return super.name ?? "";
       }
 
       /**
@@ -134,12 +110,6 @@ export default function ThresholdExecutionMixin(Base) {
       /** @inheritDoc */
       get rollOptions() {
         return { comparison: this.comparison, flavor: this.flavor, threshold: this.threshold };
-      }
-
-      /** @inheritDoc */
-      async _getInput() {
-        if (this.showDialog && (await this._showInputDialog()) === false) { return false; }
-        return super._getInput();
       }
 
       /** @inheritDoc */

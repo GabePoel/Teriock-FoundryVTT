@@ -27,7 +27,6 @@ export default function ImpactsExecutionMixin(Base) {
         this.boosts = netBoosts > 0 ? netBoosts : 0;
         this.deboosts = netBoosts < 0 ? -netBoosts : 0;
         this.impacts = new Set(options.impacts ?? (options.impact ? [options.impact] : ["damage"]));
-        this.showDialog = options.showDialog ?? game.teriock.getSetting("showRollDialogs");
       }
 
       /** @type {number} */
@@ -104,7 +103,7 @@ export default function ImpactsExecutionMixin(Base) {
           value: this.deboosts,
           condition: () => this.hasFormula,
           update: v => (this.deboosts = Number(v) || 0),
-        }];
+        }, ...super._dialogFields];
       }
 
       /** @inheritDoc */
@@ -149,7 +148,7 @@ export default function ImpactsExecutionMixin(Base) {
 
       /** @inheritDoc */
       get icon() {
-        return TERIOCK.display.icons.ui.dice;
+        return super.icon ?? TERIOCK.display.icons.ui.dice;
       }
 
       /**
@@ -199,12 +198,6 @@ export default function ImpactsExecutionMixin(Base) {
       async _buildTags() {
         await super._buildTags();
         if (this.crit) { this.tags.push(_loc("TERIOCK.DIALOGS.Boost.TAGS.crit")); }
-      }
-
-      /** @inheritDoc */
-      async _getInput() {
-        if (this.showDialog && (await this._showInputDialog()) === false) { return false; }
-        return super._getInput();
       }
 
       /** @inheritDoc */

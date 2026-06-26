@@ -138,15 +138,6 @@ export default function ConsumableSystemMixin(Base) {
         }
       }
 
-      /** @inheritDoc */
-      async use(options = {}) {
-        await super.use(options);
-        if (this.parent.isOwner && this.consumable && !this.parent.inCompendium) {
-          if (!this.parent.getFlag("teriock", "dontConsume")) { await this.useOne(); }
-          await this.parent.setFlag("teriock", "dontConsume", false);
-        }
-      }
-
       /**
        * Consumes one unit of the consumable item.
        * Decrements the quantity by 1, ensuring it doesn't go below 0.
@@ -154,7 +145,7 @@ export default function ConsumableSystemMixin(Base) {
        */
       async useOne() {
         if (this.consumable && this.consumptionAmount) {
-          await this.parent.update({ "system.quantity": Math.max(0, this.quantity - this.consumptionAmount) });
+          await this.parent.update({ "system.quantity": Math.max(0, this.quantity - 1) });
         }
       }
     }

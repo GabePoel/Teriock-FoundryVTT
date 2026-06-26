@@ -16,8 +16,7 @@ export default class DeathBagExecution extends BaseDocumentExecution {
    * @param {Partial<Teriock.Execution.DeathBagExecutionOptions>} options
    */
   constructor(options = {}) {
-    super({ ...options, source: options.source ?? options.actor });
-    this.showDialog = options.showDialog ?? true;
+    super(options);
     this.pullFormula = options.pullFormula ?? this.actor?.system.deathBag.pull ?? "10";
     /** @type {Record<Teriock.Keys.DeathBagStoneColor, Teriock.System.FormulaString>} */
     this.stonesFormulas = options.stonesFormulas
@@ -54,7 +53,6 @@ export default class DeathBagExecution extends BaseDocumentExecution {
   get _dialogFields() {
     const deathBagFields = this.actor.system.schema.fields.deathBag.fields;
     const entries = [{
-      condition: true,
       field: deathBagFields.pull,
       hint: deathBagFields.pull.hint,
       label: deathBagFields.pull.label,
@@ -66,7 +64,6 @@ export default class DeathBagExecution extends BaseDocumentExecution {
     for (const color of STONE_COLORS) {
       const stoneField = deathBagFields.stones.fields[color];
       entries.push({
-        condition: true,
         field: stoneField,
         hint: stoneField.hint,
         label: stoneField.label,
@@ -203,11 +200,5 @@ export default class DeathBagExecution extends BaseDocumentExecution {
   /** @inheritDoc */
   async _buildTags() {
     this.tags.push(_loc("TERIOCK.DIALOGS.DeathBag.PANEL.pulledStonesTag", { count: this.toPullCount }));
-  }
-
-  /** @inheritDoc */
-  async _getInput() {
-    if (this.showDialog && (await this._showInputDialog()) === false) { return false; }
-    return super._getInput();
   }
 }

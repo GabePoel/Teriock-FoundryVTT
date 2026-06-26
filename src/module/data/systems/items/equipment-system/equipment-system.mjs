@@ -46,6 +46,9 @@ export default class EquipmentSystem
   )
 {
   /** @inheritDoc */
+  static Execution = EquipmentExecution;
+
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Equipment"];
 
   /** @inheritDoc */
@@ -175,17 +178,6 @@ export default class EquipmentSystem
     if (yes === false) { return false; }
 
     if (this.parent.isEmbedded) { this.updateSource({ equipped: true }); }
-  }
-
-  /**
-   * @inheritDoc
-   * @param {Partial<Teriock.Execution.EquipmentExecutionOptions>} options
-   */
-  async _use(options = {}) {
-    if (game.teriock.getSetting("rollAttackOnArmamentUse")) {
-      await this.actor?.useDocument("basic-attack", { type: "ability" });
-    }
-    await EquipmentExecution.create(options);
   }
 
   /** @inheritDoc */

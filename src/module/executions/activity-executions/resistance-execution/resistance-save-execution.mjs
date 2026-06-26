@@ -23,11 +23,6 @@ export default class ResistanceExecution extends executionMixins.ThresholdExecut
   }
 
   /** @inheritDoc */
-  get icon() {
-    return TERIOCK.display.icons.effect.protection;
-  }
-
-  /** @inheritDoc */
   get journalEntryPageIdentifier() {
     return this.hex ? "keyword:hexproof" : "keyword:resistance";
   }

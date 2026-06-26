@@ -1,4 +1,3 @@
-import { BaseDocumentExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -32,11 +31,6 @@ export default class ResourceSystem
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, { type: "resource", usable: true });
-  }
-
-  /** @inheritDoc */
-  async _use(options = {}) {
-    await BaseDocumentExecution.create(options);
   }
 
   /** @inheritDoc */

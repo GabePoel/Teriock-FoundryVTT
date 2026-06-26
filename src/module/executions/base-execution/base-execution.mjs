@@ -27,6 +27,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   constructor(options = {}) {
     super();
     this.options = options;
+    this._showDialog = options.showDialog ?? game.teriock.getSetting("showRollDialogs");
     this._actor = options.actor ?? game.actors.default;
     this._boosts = options.boosts ?? {};
     this._formula = options.formula ?? "";
@@ -60,6 +61,9 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   /** @type {object} */
   _rollOptions = {};
 
+  /** @type {boolean} */
+  _showDialog = false;
+
   /** @type {Teriock.Activations.Any[]} */
   activations = [];
 
@@ -74,12 +78,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
 
   /** @type {BaseRoll[]} */
   rolls = [];
-
-  /**
-   * Whether to show an input dialog before this execution resolves.
-   * @type {boolean}
-   */
-  showDialog = false;
 
   /** @type {string[]} */
   tags = [];
@@ -172,6 +170,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   }
 
   /**
+   * Whether this has content to populate an input dialog.
+   * @returns {boolean}
+   */
+  get canShowDialog() {
+    return Boolean(this._activeDialogFields.length) || Boolean(this._dialogDocuments.length);
+  }
+
+  /**
    * Data for the chat message this execution creates.
    * @returns {Partial<Teriock.Data.ChatMessageData>}
    */
@@ -194,7 +200,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @return {boolean}
    */
   get competenceImprovesFormula() {
-    return true;
+    return formulaExists(this.formula);
   }
 
   /** @returns {string[]} */
@@ -225,7 +231,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {string}
    */
   get icon() {
-    return TERIOCK.display.icons.ui.dice;
+    return undefined;
   }
 
   /**
@@ -257,9 +263,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {object}
    */
   get rollData() {
-    const rollData = this.actor?.getRollData() || {};
-    Object.assign(rollData, foundry.utils.deepClone(this._rollData));
-    return rollData;
+    return Object.assign(this.actor?.getRollData() || {}, foundry.utils.deepClone(this._rollData));
   }
 
   /**
@@ -268,6 +272,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    */
   get rollOptions() {
     return foundry.utils.mergeObject({ flavor: this.flavor }, this._rollOptions);
+  }
+
+  /**
+   * Whether to show an input dialog before this execution resolves.
+   * @returns {boolean}
+   */
+  get showDialog() {
+    return this._showDialog && this.canShowDialog;
   }
 
   /**
@@ -364,7 +376,9 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * Get any user input that is relevant for staging this execution.
    * @returns {Promise<false|void>}
    */
-  async _getInput() {}
+  async _getInput() {
+    if (this.showDialog && (await this._showInputDialog()) === false) { return false; }
+  }
 
   /**
    * Improve the formula used in this execution.
@@ -429,7 +443,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {Promise<false|void>}
    */
   async _showInputDialog() {
-    if (!this._activeDialogFields.length && !this._dialogDocuments.length) { return; }
+    if (!this.showDialog) { return; }
     const result = await TeriockExecutionEditor.prompt(this);
     if (result === null) { return false; }
   }

@@ -1,6 +1,11 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import BaseExecution from "../../base-execution/base-execution.mjs";
 
+const { fields } = foundry.data;
+
+/**
+ * @property {Teriock.Execution.BaseExecutionOptions} options
+ */
 export default class BaseDocumentExecution extends BaseExecution {
   /**
    * @param {Teriock.Execution.DocumentExecutionOptions} options
@@ -11,21 +16,49 @@ export default class BaseDocumentExecution extends BaseExecution {
     this._actor = options.actor ?? this.source?.actor ?? game.actors.default;
     this._automations = this.source.system.automations?.contents ?? [];
     this._boosts = options.boosts ?? this.source.system.boosts ?? this._boosts;
+    this._consumeUses = options.consumeUses ?? true;
   }
+
+  /**
+   * Whether using this should consume one of the source document's uses.
+   * @type {boolean}
+   */
+  _consumeUses = true;
 
   /** @type {AnyChildDocument} */
   _source;
 
   /** @inheritDoc */
   get _dialogDocuments() {
-    const docs = super._dialogDocuments ?? [];
-    docs.unshift({ document: this.source, label: _loc(`TYPES.${this.source.documentName}.${this.source.type}`) });
-    return docs;
+    return [
+      { document: this.source, label: _loc(`TYPES.${this.source.documentName}.${this.source.type}`) },
+      ...super._dialogDocuments,
+    ];
+  }
+
+  /** @inheritDoc */
+  get _dialogFields() {
+    return [...super._dialogFields, {
+      classes: ["slim"],
+      field: new fields.BooleanField(),
+      hint: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumeUses.hint",
+      label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumeUses.label",
+      name: "consumeUses",
+      small: true,
+      value: this._consumeUses,
+      condition: () => this.source?.system.consumable,
+      update: v => (this._consumeUses = Boolean(v)),
+    }];
   }
 
   /** @inheritDoc */
   get chatData() {
     return foundry.utils.mergeObject(super.chatData, { system: { _src: this.source.uuid } });
+  }
+
+  /** @inheritDoc */
+  get icon() {
+    return TERIOCK.config.document[this.source.type]?.icon ?? super.icon;
   }
 
   /** @inheritDoc */
@@ -123,6 +156,21 @@ export default class BaseDocumentExecution extends BaseExecution {
    */
   _hasBoostForImpact(impact) {
     return this._boostsResolved[impact] && this.activations.some(a => a.type === "roll" && a.impact === impact);
+  }
+
+  /** @inheritDoc */
+  async _postInput() {
+    this.options.consumeUses = this._consumeUses;
+    return await super._postInput();
+  }
+
+  /** @inheritDoc */
+  async _updateActor() {
+    if (this.source.system.consumable) {
+      this.source.update({
+        "system.quantity": Math.max(0, this.source.system.quantity - this.source.system.consumptionAmount),
+      });
+    }
   }
 
   /** @inheritDoc */

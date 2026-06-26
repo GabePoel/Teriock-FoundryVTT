@@ -37,6 +37,9 @@ export default class FluencySystem
   )
 {
   /** @inheritDoc */
+  static Execution = FluencyExecution;
+
+  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 
   /** @inheritDoc */
@@ -106,15 +109,6 @@ export default class FluencySystem
       }
       foundry.utils.setProperty(changes, "img", getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]));
     }
-  }
-
-  /**
-   * @inheritDoc
-   * @param {Teriock.Execution.DocumentExecutionOptions} options
-   */
-  async _use(options = {}) {
-    options.source = this.parent;
-    await FluencyExecution.create(options);
   }
 
   /** @inheritDoc */

@@ -25,6 +25,11 @@ export default class ImmunityExecution extends BaseExecution {
   }
 
   /** @inheritDoc */
+  get icon() {
+    return TERIOCK.display.icons.effect.protection;
+  }
+
+  /** @inheritDoc */
   get journalEntryPageIdentifier() {
     return this.hex ? "keyword:hexseal" : "keyword:immunity";
   }
