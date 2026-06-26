@@ -33,6 +33,18 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   }
 
   /** @inheritDoc */
+  get _displayMessagesSuppression() {
+    const messages = super._displayMessagesSuppression;
+    if (this._isSuppressedDampened) { this._addSuppressionMessage("dampened", messages); }
+    if (this._isSuppressedDeattuned) { this._addSuppressionMessage("deattuned", messages); }
+    if (this._isSuppressedDestroyed) { this._addSuppressionMessage("parentDestroyed", messages); }
+    if (this._isSuppressedShattered) { this._addSuppressionMessage("shattered", messages); }
+    if (this._isSuppressedStashed) { this._addSuppressionMessage("parentStashed", messages); }
+    if (this._isSuppressedUnequipped) { this._addSuppressionMessage("parentUnequipped", messages); }
+    return messages;
+  }
+
+  /** @inheritDoc */
   get _displayToggles() {
     return [...super._displayToggles, {
       label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
@@ -173,17 +185,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     const changes = [];
     for (const a of this.activeAutomations.filter(a => a.metadata.changes)) { changes.push(...a.getChanges()); }
     return changes;
-  }
-
-  /** @inheritDoc */
-  _collectSuppressionMessages() {
-    super._collectSuppressionMessages();
-    if (this._isSuppressedDampened) { this._addSuppressionMessage("dampened"); }
-    if (this._isSuppressedDeattuned) { this._addSuppressionMessage("deattuned"); }
-    if (this._isSuppressedDestroyed) { this._addSuppressionMessage("parentDestroyed"); }
-    if (this._isSuppressedShattered) { this._addSuppressionMessage("shattered"); }
-    if (this._isSuppressedStashed) { this._addSuppressionMessage("parentStashed"); }
-    if (this._isSuppressedUnequipped) { this._addSuppressionMessage("parentUnequipped"); }
   }
 
   /**

@@ -6,3 +6,4 @@ export { default as DialogConfig } from "./dialog-config.mjs";
 export { default as DisplayConfig } from "./display-config.mjs";
 export { default as GameContentConfig } from "./game-content-config.mjs";
 export { default as GameMasterControlsConfig } from "./game-master-controls-config.mjs";
+export { default as TipsConfig } from "./tips-config.mjs";

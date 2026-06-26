@@ -1,5 +1,5 @@
 import settingsConfig from "../constants/config/settings-config.mjs";
-import suppressionConfig from "../constants/config/suppression-config.mjs";
+import tipConfig from "../constants/config/tip-config.mjs";
 import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 import { TeriockActor } from "../documents/_module.mjs";
 
@@ -13,7 +13,9 @@ declare global {
       & keyof SettingsConfig[Category]
       & string;
 
-    export type SuppressionMessageKey = keyof typeof suppressionConfig.messages;
+    // Tip Keys
+    export type SuppressionMessageKey = keyof typeof tipConfig.suppression;
+    export type ErrorMessageKey = keyof typeof tipConfig.error;
 
     export type ChildChangeTargetEntry = {
       label: string;

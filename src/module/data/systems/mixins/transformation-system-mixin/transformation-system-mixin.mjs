@@ -256,6 +256,13 @@ export default function TransformationSystemMixin(Base) {
         return docs.map(d => d.id);
       }
 
+      /** @inheritDoc */
+      get _displayMessagesSuppression() {
+        const messages = super._displayMessagesSuppression;
+        if (this._isSuppressedTransformation) { this._addSuppressionMessage("notPrimary", messages); }
+        return messages;
+      }
+
       /**
        * If this is suppressed due to not being the primary transformation.
        * @returns {boolean}
@@ -333,12 +340,6 @@ export default function TransformationSystemMixin(Base) {
             preTransform: foundry.utils.expandObject(preTransform),
           },
         };
-      }
-
-      /** @inheritDoc */
-      _collectSuppressionMessages() {
-        super._collectSuppressionMessages();
-        if (this._isSuppressedTransformation) { this._addSuppressionMessage("notPrimary"); }
       }
 
       /** @inheritDoc */

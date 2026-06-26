@@ -30,6 +30,14 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
     });
   }
 
+  /** @inheritDoc */
+  get _displayMessagesSuppression() {
+    const messages = super._displayMessagesSuppression;
+    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor", messages); }
+    if (this._isSuppressedInactiveRanks) { this._addSuppressionMessage("inactiveRanks", messages); }
+    return messages;
+  }
+
   /**
    * If this is suppressed due to worn armor exceeding maximum AV.
    * @returns {boolean}
@@ -90,13 +98,6 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
   get ranks() {
     if (!this.actor) { return []; }
     return this.actor.ranks.filter(r => r.system._source.archetype === this.identifier);
-  }
-
-  /** @inheritDoc */
-  _collectSuppressionMessages() {
-    super._collectSuppressionMessages();
-    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor"); }
-    if (this._isSuppressedInactiveRanks) { this._addSuppressionMessage("inactiveRanks"); }
   }
 
   /**

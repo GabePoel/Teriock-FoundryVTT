@@ -26,6 +26,15 @@ export default Base => {
       }
 
       /** @inheritDoc */
+      get _displayMessagesSuppression() {
+        const messages = super._displayMessagesSuppression;
+        if (this._isSuppressedUnequipped) { this._addSuppressionMessage("unequipped", messages); }
+        if (this._isSuppressedStashed) { this._addSuppressionMessage("stashed", messages); }
+        if (this._isSuppressedDestroyed) { this._addSuppressionMessage("destroyed", messages); }
+        return messages;
+      }
+
+      /** @inheritDoc */
       get _embedIcons() {
         return [super._embedIcons.find(i => i.action?.toLowerCase().includes("attuned")), {
           action: "toggleDampenedDoc",
@@ -94,14 +103,6 @@ export default Base => {
           || this._isSuppressedUnequipped
           || this._isSuppressedStashed
           || this._isSuppressedDestroyed;
-      }
-
-      /** @inheritDoc */
-      _collectSuppressionMessages() {
-        super._collectSuppressionMessages();
-        if (this._isSuppressedUnequipped) { this._addSuppressionMessage("unequipped"); }
-        if (this._isSuppressedStashed) { this._addSuppressionMessage("stashed"); }
-        if (this._isSuppressedDestroyed) { this._addSuppressionMessage("destroyed"); }
       }
 
       /**

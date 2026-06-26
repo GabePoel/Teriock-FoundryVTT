@@ -1,7 +1,7 @@
 import * as configs from "../applications/settings/_module.mjs";
 import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
-import suppressionConfig from "../constants/config/suppression-config.mjs";
+import tipConfig from "../constants/config/tip-config.mjs";
 import { userSettingsModels } from "../data/models/settings-models/user-settings-models.mjs";
 import { objectMap } from "../helpers/utils.mjs";
 
@@ -118,6 +118,34 @@ export const settings = {
       type: Boolean,
     },
   },
+  error: {
+    errorMessages: {
+      default: Object.keys(tipConfig.error),
+      hint: "TERIOCK.SETTINGS.errorMessages.hint",
+      name: "TERIOCK.SETTINGS.errorMessages.name",
+      requiresReload: true,
+      scope: "client",
+      type: new fields.SetField(new fields.StringField({ choices: tipConfig.error }), {
+        initial: Object.keys(tipConfig.error),
+      }),
+    },
+    showErrorTipsOnSheets: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.showErrorTipsOnSheets.hint",
+      name: "TERIOCK.SETTINGS.showErrorTipsOnSheets.name",
+      requiresReload: true,
+      scope: "client",
+      type: Boolean,
+    },
+    showErrorTipsOnTooltips: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.showErrorTipsOnTooltips.hint",
+      name: "TERIOCK.SETTINGS.showErrorTipsOnTooltips.name",
+      requiresReload: true,
+      scope: "client",
+      type: Boolean,
+    },
+  },
   gameContent: {
     identifierSourcePriority: {
       default: {
@@ -223,27 +251,30 @@ export const settings = {
     },
   },
   suppression: {
-    showSuppressionMessagesOnSheets: {
+    showSuppressionTipsOnSheets: {
       default: true,
-      hint: "TERIOCK.SETTINGS.showSuppressionMessagesOnSheets.hint",
-      name: "TERIOCK.SETTINGS.showSuppressionMessagesOnSheets.name",
+      hint: "TERIOCK.SETTINGS.showSuppressionTipsOnSheets.hint",
+      name: "TERIOCK.SETTINGS.showSuppressionTipsOnSheets.name",
+      requiresReload: true,
       scope: "client",
       type: Boolean,
     },
-    showSuppressionMessagesOnTooltips: {
+    showSuppressionTipsOnTooltips: {
       default: true,
-      hint: "TERIOCK.SETTINGS.showSuppressionMessagesOnTooltips.hint",
-      name: "TERIOCK.SETTINGS.showSuppressionMessagesOnTooltips.name",
+      hint: "TERIOCK.SETTINGS.showSuppressionTipsOnTooltips.hint",
+      name: "TERIOCK.SETTINGS.showSuppressionTipsOnTooltips.name",
+      requiresReload: true,
       scope: "client",
       type: Boolean,
     },
     suppressionMessages: {
-      default: Object.keys(suppressionConfig.messages),
+      default: Object.keys(tipConfig.suppression),
       hint: "TERIOCK.SETTINGS.suppressionMessages.hint",
       name: "TERIOCK.SETTINGS.suppressionMessages.name",
+      requiresReload: true,
       scope: "client",
-      type: new fields.SetField(new fields.StringField({ choices: suppressionConfig.messages }), {
-        initial: Object.keys(suppressionConfig.messages),
+      type: new fields.SetField(new fields.StringField({ choices: tipConfig.suppression }), {
+        initial: Object.keys(tipConfig.suppression),
       }),
     },
     suppressionMessageTypes: {
@@ -253,6 +284,7 @@ export const settings = {
         ),
       hint: "TERIOCK.SETTINGS.suppressionMessageTypes.hint",
       name: "TERIOCK.SETTINGS.suppressionMessageTypes.name",
+      requiresReload: true,
       scope: "client",
       type: new fields.SetField(
         new fields.StringField({
@@ -306,6 +338,7 @@ export function registerSettings() {
   configs.AlternateRulesConfig.registerMenu();
   configs.DialogConfig.registerMenu();
   configs.DisplayConfig.registerMenu();
+  configs.TipsConfig.registerMenu();
   configs.GameContentConfig.registerMenu();
   configs.GameMasterControlsConfig.registerMenu();
   for (const [k, d] of Object.entries(inheritedSettings)) { game.settings.register("teriock", k, d); }

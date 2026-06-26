@@ -124,6 +124,14 @@ export default class SpeciesSystem
   }
 
   /** @inheritDoc */
+  get _displayMessagesSuppression() {
+    const messages = super._displayMessagesSuppression;
+    if (this._isSuppressedTransformationInactive) { this._addSuppressionMessage("inactiveTransformation", messages); }
+    if (this._isSuppressedTransformationSecondary) { this._addSuppressionMessage("notPrimary", messages); }
+    return messages;
+  }
+
+  /** @inheritDoc */
   get _displayTags() {
     return [...super._displayTags, ...this._traitTags];
   }
@@ -239,13 +247,6 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get wikiPage() {
     return `Creature:${TERIOCK.index.creatures[toCamelCase(this.identifier ?? "")] ?? ""}`;
-  }
-
-  /** @inheritDoc */
-  _collectSuppressionMessages() {
-    super._collectSuppressionMessages();
-    if (this._isSuppressedTransformationInactive) { this._addSuppressionMessage("inactiveTransformation"); }
-    if (this._isSuppressedTransformationSecondary) { this._addSuppressionMessage("notPrimary"); }
   }
 
   /** @inheritDoc */

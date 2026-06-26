@@ -38,6 +38,13 @@ export default class MountSystem
   }
 
   /** @inheritDoc */
+  get _displayMessagesSuppression() {
+    const messages = super._displayMessagesSuppression;
+    if (this._isSuppressedUnmounted) { this._addSuppressionMessage("unmounted", messages); }
+    return messages;
+  }
+
+  /** @inheritDoc */
   get _displayTags() {
     return [...super._displayTags, ...this._attunableTags];
   }
@@ -101,12 +108,6 @@ export default class MountSystem
   /** @inheritDoc */
   get makeSuppressed() {
     return super.makeSuppressed || this._isSuppressedUnmounted;
-  }
-
-  /** @inheritDoc */
-  _collectSuppressionMessages() {
-    super._collectSuppressionMessages();
-    if (this._isSuppressedUnmounted) { this._addSuppressionMessage("unmounted"); }
   }
 
   /** @inheritDoc */

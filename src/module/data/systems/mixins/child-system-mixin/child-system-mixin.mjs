@@ -56,7 +56,6 @@ export default function ChildSystemMixin(Base) {
           description: new fields.HTMLField({ initial: "" }),
           forceSuppressed: new initialBoolean(),
           instructions: new fields.HTMLField({ initial: "" }),
-          messages: new fields.SetField(new fields.StringField(), { initial: [], persisted: false }),
           settings: new fields.EmbeddedDataField(CommonSettingsModel),
         });
       }
@@ -72,6 +71,26 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       get _displayFields() {
         return [this._displayFieldInstructions, "system.description", ...super._displayFields];
+      }
+
+      /**
+       * Localized error messages for {@link ChildSystem.displayTips}.
+       * @returns {Set<string>}
+       */
+      get _displayMessagesError() {
+        return new Set();
+      }
+
+      /**
+       * Localized suppression messages for {@link ChildSystem.displayTips}.
+       * @returns {Set<string>}
+       */
+      get _displayMessagesSuppression() {
+        const messages = new Set();
+        if (this.parent.disabled) { this._addSuppressionMessage("disabled", messages); }
+        if (this._isSuppressedForced) { this._addSuppressionMessage("forced", messages); }
+        if (this._isSuppressedElder) { this._addSuppressionMessage("elder", messages); }
+        return messages;
       }
 
       /** @inheritDoc */
@@ -140,6 +159,17 @@ export default function ChildSystemMixin(Base) {
         }];
       }
 
+      /**
+       * Tips that appear on document sheets and tooltips.
+       * @returns {Teriock.UI.Tip[]}
+       */
+      get displayTips() {
+        return [
+          ...[...this._displayMessagesSuppression].map(text => ({ level: "warning", text })),
+          ...[...this._displayMessagesError].map(text => ({ level: "error", text })),
+        ];
+      }
+
       /** @inheritDoc */
       get embedParts() {
         return Object.assign(super.embedParts, {
@@ -148,14 +178,6 @@ export default function ChildSystemMixin(Base) {
           struck: this.parent.disabled,
           usable: true,
         });
-      }
-
-      /**
-       * Notification-style messages that appear on document sheets.
-       * @returns {Teriock.UI.FormMessage[]}
-       */
-      get formMessages() {
-        return [...this.messages].map(text => ({ level: "warning", text }));
       }
 
       /** @returns {boolean} */
@@ -182,25 +204,28 @@ export default function ChildSystemMixin(Base) {
       }
 
       /**
-       * Add a configured suppression message.
-       * @param {Teriock.Config.SuppressionMessageKey} key
+       * Add a configured error message to a set.
+       * @param {Teriock.Config.ErrorMessageKey} key
+       * @param {Set<string>} messages
        */
-      _addSuppressionMessage(key) {
-        const text = TERIOCK.config.suppression.messages[key];
+      _addErrorMessage(key, messages) {
+        const text = TERIOCK.config.tip.error[key];
+        if (!text || !game.teriock.getSetting("errorMessages").has(key)) { return; }
+        messages.add(text);
+      }
+
+      /**
+       * Add a configured suppression message to a set.
+       * @param {Teriock.Config.SuppressionMessageKey} key
+       * @param {Set<string>} messages
+       */
+      _addSuppressionMessage(key, messages) {
+        const text = TERIOCK.config.tip.suppression[key];
         if (
           !text || !game.teriock.getSetting("suppressionMessageTypes").has(this.parent.type)
           || !game.teriock.getSetting("suppressionMessages").has(key)
         ) { return; }
-        this.messages.add(text);
-      }
-
-      /**
-       * Populate {@link ChildSystem.messages} with localized suppression reasons.
-       */
-      _collectSuppressionMessages() {
-        if (this.parent.disabled) { this._addSuppressionMessage("disabled"); }
-        if (this._isSuppressedForced) { this._addSuppressionMessage("forced"); }
-        if (this._isSuppressedElder) { this._addSuppressionMessage("elder"); }
+        messages.add(text);
       }
 
       /** @inheritDoc */
@@ -293,13 +318,6 @@ export default function ChildSystemMixin(Base) {
        */
       isInstructionsField(field) {
         return (typeof field === "string" ? field : field.path) === "system.instructions";
-      }
-
-      /** @inheritDoc */
-      prepareCleanupData() {
-        super.prepareCleanupData();
-        this.messages.clear();
-        this._collectSuppressionMessages();
       }
 
       /** @inheritDoc */

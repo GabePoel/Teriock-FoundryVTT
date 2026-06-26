@@ -216,6 +216,7 @@ export const icons = {
     display: "ms-display-settings",
     gameContent: "mdi-flask",
     gameMasterControls: "mdi-crown",
+    tips: "mdi-message-alert",
   },
   species: {
     adult: "ms-account-child-invert",

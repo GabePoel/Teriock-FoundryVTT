@@ -88,11 +88,11 @@ export default class TeriockTextEditor extends TextEditor {
     if (options.noBars) { delete parts.bars; }
     if (options.noBlocks) { delete parts.blocks; }
     if (options.noAssociations) { delete parts.associations; }
-    if (
-      game.teriock.getSetting("showSuppressionMessagesOnTooltips") && options.relativeTo?.system?.formMessages?.length
-    ) {
-      parts.messages = options.relativeTo.system.formMessages;
-    }
+    const tips = options.relativeTo?.system?.displayTips?.filter(tip =>
+      (tip.level !== "warning" || game.teriock.getSetting("showSuppressionTipsOnTooltips"))
+      && (tip.level !== "error" || game.teriock.getSetting("showErrorTipsOnTooltips"))
+    );
+    if (tips?.length) { parts.tips = tips; }
     await this.enrichPanel(parts, options);
     return this.renderTemplate("teriock/ui/panel", parts);
   }

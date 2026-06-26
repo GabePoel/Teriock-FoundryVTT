@@ -147,9 +147,10 @@ export default function DisplaySheetMixin(Base) {
             return { ...f, enriched: await TeriockTextEditor.enrichHTML(f.value, { relativeTo: this.document }) };
           }),
         );
-        context.formMessages = game.teriock.getSetting("showSuppressionMessagesOnSheets")
-          ? this.document.system.formMessages
-          : [];
+        context.displayTips = this.document.system.displayTips.filter(tip =>
+          (tip.level !== "warning" || game.teriock.getSetting("showSuppressionTipsOnSheets"))
+          && (tip.level !== "error" || game.teriock.getSetting("showErrorTipsOnSheets"))
+        );
         context.bars = this._tab === "overview" ? this.constructor.BARS : [];
       }
 

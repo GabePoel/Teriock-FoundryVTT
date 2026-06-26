@@ -61,10 +61,10 @@ declare global {
       image?: string;
       /** Label that gets displayed upon hovering over icon. */
       label?: string;
-      /** Notification-style messages, such as suppression reasons in tooltips. */
-      messages?: Teriock.UI.FormMessage[];
       /** The name or title to display in the panel. */
       name?: string;
+      /** Tips, such as suppression reasons in tooltips. */
+      tips?: Teriock.UI.Tip[];
       /** UUID of a document that can be opened */
       uuid?: UUID<TeriockDocument>;
     };

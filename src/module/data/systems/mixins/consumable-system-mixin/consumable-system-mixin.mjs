@@ -61,6 +61,13 @@ export default function ConsumableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      get _displayMessagesSuppression() {
+        const messages = super._displayMessagesSuppression;
+        if (this._isSuppressedConsumed) { this._addSuppressionMessage("consumed", messages); }
+        return messages;
+      }
+
+      /** @inheritDoc */
       get _embedActions() {
         return Object.assign(super._embedActions, {
           useOneDoc: { primary: async () => await this.useOne(), secondary: async () => await this.gainOne() },
@@ -102,12 +109,6 @@ export default function ConsumableSystemMixin(Base) {
             max: this.maxQuantity.value,
             value: this.quantity,
           });
-      }
-
-      /** @inheritDoc */
-      _collectSuppressionMessages() {
-        super._collectSuppressionMessages();
-        if (this._isSuppressedConsumed) { this._addSuppressionMessage("consumed"); }
       }
 
       /**

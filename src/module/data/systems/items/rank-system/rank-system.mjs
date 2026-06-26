@@ -91,6 +91,13 @@ export default class RankSystem
     return super._canToggleMpDice && !this.innate;
   }
 
+  /** @inheritDoc */
+  get _displayMessagesSuppression() {
+    const messages = super._displayMessagesSuppression;
+    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor", messages); }
+    return messages;
+  }
+
   /**
    * If this is suppressed due to worn armor exceeding maximum AV.
    * @returns {boolean}
@@ -165,12 +172,6 @@ export default class RankSystem
   /** @inheritDoc */
   get wikiPage() {
     return `Class:${TERIOCK.index.classes[toCamelCase(this._source.class ?? "")] ?? ""}`;
-  }
-
-  /** @inheritDoc */
-  _collectSuppressionMessages() {
-    super._collectSuppressionMessages();
-    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor"); }
   }
 
   /** @inheritDoc */
