@@ -295,12 +295,18 @@ export default class AbilityExecutionConstructor
    * @param {T} type
    * @param {object} [options]
    * @param {boolean} [options.active]
+   * @param {boolean} [options.crit]
    * @returns {Teriock.Expirations.TypeMap[T][]}
    */
   getExpirations(type, options = {}) {
+    const filter = (e) =>
+      (e.type === type)
+      && (typeof options.crit === "boolean"
+        ? ((options.crit && e.crit.has(1)) || (!options.crit && e.crit.has(0)))
+        : true);
     const { active } = options;
-    if (active) { return this.activeExpirations.filter(e => e.type === type); }
-    return this.source.system.expirations.contents.filter(e => e.type === type);
+    if (active) { return this.activeExpirations.filter(filter); }
+    return this.source.system.expirations.contents.filter(filter);
   }
 
   /**

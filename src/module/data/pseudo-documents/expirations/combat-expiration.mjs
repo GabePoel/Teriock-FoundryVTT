@@ -53,6 +53,15 @@ export default class CombatExpiration extends BaseExpiration {
     return paths;
   }
 
+  /**
+   * Check if an event's context would be valid if it were not skipped.
+   * @param {object} context
+   * @returns {boolean}
+   */
+  _isValidEventContext(context = {}) {
+    return context.event === this.event && context.timing === this.timing && this.isValidActor(context.actor);
+  }
+
   /** @inheritDoc */
   isRollEvent(event, context = {}) {
     return super.isRollEvent(event, context) && this.actor?.defaultUser?.isSelf;
@@ -72,7 +81,9 @@ export default class CombatExpiration extends BaseExpiration {
 
   /** @inheritDoc */
   isValidEvent(event, context = {}) {
-    return super.isValidEvent(event, context) && this.isValidActor(context.actor) && this.skip === 0
-      && context.event === this.event && context.timing === this.timing;
+    const progress = super.isValidEvent(event, context) && this._isValidEventContext(context);
+    if (!progress || this.skip === 0) { return progress; }
+    this.document.update({ [`${this.localPath}.skip`]: this.skip - 1 });
+    return false;
   }
 }

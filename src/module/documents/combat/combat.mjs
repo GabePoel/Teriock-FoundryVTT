@@ -117,6 +117,7 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
     super._onStartTurn(combatant, context);
     this.#refreshCombatExpirations(combatant.actor, "turn", "start");
     if (combatant.actor) { this.#fireTrigger(combatant.actor, "turnStart"); }
+    this.#refreshCombatExpirations(combatant.actor, "action", "start");
   }
 
   /** @inheritDoc */
