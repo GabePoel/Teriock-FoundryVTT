@@ -24,6 +24,10 @@ export default class PseudoDocument extends EmbeddedDataModel {
     return "";
   }
 
+  /**
+   * Metadata.
+   * @returns {{documentName: string, icon: string, label: string, sheetClass: null}}
+   */
   static get metadata() {
     return { documentName: "", icon: "", label: "", sheetClass: null };
   }
@@ -129,6 +133,10 @@ export default class PseudoDocument extends EmbeddedDataModel {
     return `${this.fieldPath}.${this.id}`;
   }
 
+  /**
+   * Metadata.
+   * @returns {{documentName: string, icon: string, label: string, sheetClass: null}}
+   */
   get metadata() {
     return this.constructor.metadata;
   }
@@ -142,13 +150,16 @@ export default class PseudoDocument extends EmbeddedDataModel {
   }
 
   /**
-   * Delete this pseudo-document.
-   * @param {DatabaseUpdateOperation} operation
-   * @returns {Promise<Document|undefined>}
+   * Delete this pseudo-document, removing it from the database.
+   * @param {Partial<DatabaseDeleteOperation>} operation - Parameters of the deletion operation
+   * @returns {Promise<PseudoDocument|undefined>} The deleted PseudoDocument instance, or undefined if not deleted
    */
   async delete(operation = {}) {
+    if (!this.document) { return undefined; }
     const updateData = { [this.localPath]: _del };
-    return this.document.update(updateData, operation);
+    const out = await this.document.update(updateData, operation);
+    if (!out) { return undefined; }
+    return this;
   }
 
   /**
@@ -191,5 +202,18 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   toDragData() {
     return { type: this.documentName, uuid: this.uuid };
+  }
+
+  /**
+   * Update this PseudoDocument using incremental data, saving it to the database.
+   * @param {object} [data={}] - Differential update data which modifies the existing values of this pseudo-document
+   * @param {Partial<Omit<DatabaseUpdateOperation, "updates">>} operation - Parameters of the update operation
+   * @returns {Promise<PseudoDocument|undefined>} The updated PseudoDocument instance, or undefined not updated
+   */
+  async update(data = {}, operation = {}) {
+    if (!this.document) { return undefined; }
+    const out = await this.document.update({ [this.localPath]: data }, operation);
+    if (!out) { return undefined; }
+    return this;
   }
 }

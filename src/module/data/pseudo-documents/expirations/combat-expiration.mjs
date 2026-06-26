@@ -83,7 +83,7 @@ export default class CombatExpiration extends BaseExpiration {
   isValidEvent(event, context = {}) {
     const progress = super.isValidEvent(event, context) && this._isValidEventContext(context);
     if (!progress || this.skip === 0) { return progress; }
-    this.document.update({ [`${this.localPath}.skip`]: this.skip - 1 });
+    this.update({ skip: this.skip - 1 });
     return false;
   }
 }
