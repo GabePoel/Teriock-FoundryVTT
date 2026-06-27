@@ -209,12 +209,12 @@ export default class ApplicableEffectSystem
   /** @inheritDoc */
   isExpiryEvent(event, context = {}) {
     if (BaseExpiration.EXPIRY_REFRESH_EVENT === event) {
-      const activeExpirations = this.activeExpirations;
-      if (activeExpirations.length) {
-        for (const e of activeExpirations) { if (e.isExpiryEvent(event, context)) { return true; } }
-      }
-      return false;
+      const out = this.activeExpirations.some((e) => e.isExpiryEvent(event, context));
+      // Since the active effect registry has already processed duration, it's safe to return it to its real value
+      this.parent.updateDuration();
+      return out;
     }
+    if (!this.parent.duration.expiry && this.parent.duration.remaining > 0) { return false; }
     return null;
   }
 

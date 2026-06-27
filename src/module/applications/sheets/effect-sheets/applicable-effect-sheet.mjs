@@ -5,6 +5,7 @@ import { BaseSheetMixin, SystemSettingsButtonSheetMixin } from "../mixins/_modul
 import {
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
+  FieldsCommonSheetPart,
   LockingCommonSheetPart,
   MechanicsCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
@@ -22,10 +23,11 @@ export default class ApplicableEffectSheet
     ActiveEffectConfig,
     BaseSheetMixin,
     SystemSettingsButtonSheetMixin,
-    MechanicsCommonSheetPart,
     DocumentCreationCommonSheetPart,
     DragDropCommonSheetPart,
+    FieldsCommonSheetPart,
     LockingCommonSheetPart,
+    MechanicsCommonSheetPart,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -34,12 +36,13 @@ export default class ApplicableEffectSheet
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     ...super.PARTS,
+    header: { template: "teriock/sheets/shared/top" },
+    children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
     mechanics: {
       scrollable: [""],
       template: "teriock/sheets/effects/consequence/mechanics-tab",
       templates: ["templates/generic/tab-navigation.hbs"],
     },
-    children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
   };
 
   /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
@@ -47,11 +50,10 @@ export default class ApplicableEffectSheet
     sheet: {
       initial: super.TABS.sheet.initial,
       labelPrefix: super.TABS.sheet.labelPrefix,
-      tabs: [
-        ...super.TABS.sheet.tabs,
-        { icon: makeIconClass(icons.pseudoDocument.mechanic, "solid"), id: "mechanics" },
-        { icon: makeIconClass(icons.ui.document, "solid"), id: "children" },
-      ],
+      tabs: [...super.TABS.sheet.tabs, { icon: makeIconClass(icons.ui.document, "solid"), id: "children" }, {
+        icon: makeIconClass(icons.pseudoDocument.mechanic, "solid"),
+        id: "mechanics",
+      }],
     },
   };
 
