@@ -125,7 +125,7 @@ export default Base => {
         this.size.category = sizeDefinition.category;
         this.size.length = sizeDefinition.length;
         this.size.reach = sizeDefinition.reach;
-        if (this.weight.self === null) { this.weight.self = Math.pow(3 + this.size.number, 3); }
+        if (this.weight.self === null) { this.weight.self = TeriockActor.getDefaultWeight(this.size.number); }
       }
 
       /** @inheritDoc */
@@ -143,23 +143,17 @@ export default Base => {
           if (this.encumbranceLevel >= 1) { this.movementSpeed = Math.max(this.movementSpeed - 10, 0); }
           if (this.encumbranceLevel >= 2) {
             this.parent.statuses.add("slowed");
-            this.parent._addVirtualStatus("slowed", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2", { localize: true });
+            this._addVirtualStatus("slowed", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2", { localize: true });
           }
           switch (this.encumbranceLevel) {
             case 1:
-              this.parent._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1", {
-                localize: true,
-              });
+              this._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.1", { localize: true });
               break;
             case 2:
-              this.parent._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2", {
-                localize: true,
-              });
+              this._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.2", { localize: true });
               break;
             case 3:
-              this.parent._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3", {
-                localize: true,
-              });
+              this._addVirtualStatus("encumbered", "TERIOCK.SYSTEMS.BaseActor.ENCUMBRANCE.3", { localize: true });
               break;
             default:
               break;

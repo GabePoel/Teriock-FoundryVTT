@@ -281,6 +281,8 @@ export default function CommonDocumentMixin(Base) {
       prepareData() {
         this.resetChildMaps();
         super.prepareData();
+        if (this.isTop) { this.prepareSpecialData(); }
+        if (this.isTop) { this.prepareCleanupData(); }
       }
 
       /**

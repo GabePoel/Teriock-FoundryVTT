@@ -22,6 +22,6 @@ export default class RevitalizeAutomation extends StatAutomation {
 
   /** @inheritDoc */
   canFire(trigger) {
-    return (this.actor?.isDrained || this.forHarm) && super.canFire(trigger);
+    return (this.actor?.system.isDrained || this.forHarm) && super.canFire(trigger);
   }
 }

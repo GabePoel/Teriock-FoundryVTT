@@ -27,6 +27,85 @@ export default Base => {
         });
       }
 
+      /**
+       * Add statuses and explanations for being wounded.
+       */
+      #prepareVirtualWounds() {
+        if (!game.settings.get("teriock", "autoWound")) { return; }
+        const hpUncn = this.hp.value < 1;
+        const hpCrit = this.hp.value === (this.hp.min < 0 ? this.hp.min + 1 : 0);
+        const hpDead = this.hp.value === this.hp.min;
+        const mpUncn = this.mp.value < 1;
+        const mpCrit = this.mp.value === (this.mp.min < 0 ? this.mp.min + 1 : 0);
+        const mpDead = this.mp.value === this.mp.min;
+
+        const statDead = hpDead || mpDead;
+        const statCrit = hpCrit || mpCrit;
+
+        const protUncn = this.isProtected("statuses", "unconscious");
+        const protCrit = this.isProtected("statuses", "criticallyWounded");
+        const protDead = this.isProtected("statuses", "dead");
+        const protDown = this.isProtected("statuses", "down");
+
+        const autoDead = statDead && !protDead && !protDown;
+        const autoCrit = statCrit && !protCrit && !protDown && !autoDead;
+
+        if (hpDead && !protDead && !protDown) {
+          this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp");
+        }
+        if (mpDead && !protDead && !protDown) {
+          this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp");
+        }
+        if (hpCrit && !protCrit && !protDown && !autoDead) {
+          this._addVirtualStatuses(
+            ["criticallyWounded", "down"],
+            "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeHp",
+          );
+        }
+        if (mpCrit && !protCrit && !protDown && !autoDead) {
+          this._addVirtualStatuses(
+            ["criticallyWounded", "down"],
+            "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeMp",
+          );
+        }
+        if (hpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
+          if (this.hp.value === 0) {
+            this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp");
+          } else {
+            this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp");
+          }
+        }
+        if (mpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
+          if (this.mp.value === 0) {
+            this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp");
+          } else {
+            this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp");
+          }
+        }
+
+        if (this.parent.statuses.has("dead")) {
+          this.parent.statuses.delete("unconscious");
+          this.parent.statuses.delete("criticallyWounded");
+        }
+        if (this.parent.statuses.has("criticallyWounded")) { this.parent.statuses.delete("unconscious"); }
+      }
+
+      /**
+       * Is this actor damaged?
+       * @returns {boolean}
+       */
+      get isDamaged() {
+        return this.hp.value < this.hp.max || this.parent.statuses.has("hacked");
+      }
+
+      /**
+       * Is this actor drained?
+       * @returns {boolean}
+       */
+      get isDrained() {
+        return this.mp.value < this.mp.max;
+      }
+
       /** @inheritDoc */
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
@@ -189,6 +268,12 @@ export default Base => {
         for (const item of items) { item.system.prepareStatDice(); }
         this._prepareStat("hp", items);
         this._prepareStat("mp", items);
+      }
+
+      /** @inheritDoc */
+      prepareVirtualEffects() {
+        this.#prepareVirtualWounds();
+        super.prepareVirtualEffects();
       }
 
       /**

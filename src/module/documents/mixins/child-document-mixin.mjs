@@ -80,12 +80,6 @@ export default function ChildDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      prepareData() {
-        super.prepareData();
-        if (this.isTop) { this.prepareCleanupData(); }
-      }
-
-      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.isTop) { this.prepareChangeData(); }

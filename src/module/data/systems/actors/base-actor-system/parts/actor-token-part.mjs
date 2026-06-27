@@ -1,3 +1,5 @@
+import { TeriockActor } from "../../../../../documents/_module.mjs";
+
 /**
  * Actor data model that handles automatically derived token changes.
  * @param {typeof BaseActorSystem} Base
@@ -11,6 +13,26 @@ export default Base => {
     class ActorTokenPart extends Base {
       /** @type {ActiveEffectData[]} */
       _tokenChanges;
+
+      /** @inheritDoc */
+      async _preCreate(data, options, user) {
+        const yes = await super._preCreate(data, options, user);
+        if (yes === false) { return false; }
+
+        this.parent.updateSource(
+          foundry.utils.mergeObject({
+            prototypeToken: {
+              bar1: { attribute: "hp" },
+              bar2: { attribute: "mp" },
+              displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+              displayName: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
+              height: this.size.length,
+              sight: { enabled: true, range: 0 },
+              width: this.size.length,
+            },
+          }, data),
+        );
+      }
 
       /**
        * Prepare token color.
@@ -122,6 +144,32 @@ export default Base => {
             type: "override",
             value: sightColor,
           });
+        }
+      }
+
+      /** @inheritDoc */
+      async _preUpdate(changes, options, user) {
+        const yes = await super._preUpdate(changes, options, user);
+        if (yes === false) { return false; }
+
+        const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
+        if (foundry.utils.hasProperty(changes, "system.size.number")) {
+          const tokenSize = TeriockActor.getSizeConfig(foundry.utils.getProperty(changes, "system.size.number")).length;
+          if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
+            tokenUpdates.width = tokenSize;
+            tokenUpdates.height = tokenSize;
+            foundry.utils.setProperty(changes, "prototypeToken", tokenUpdates);
+          }
+          for (const token of this.parent.getDependentTokens()) {
+            if (token.parent?.grid?.type === 0) { await token.resize({ height: tokenSize, width: tokenSize }); }
+          }
+        }
+        if (Object.keys(tokenUpdates).length > 0) {
+          await Promise.all(
+            this.parent.getDependentTokens().filter(t => t.id).map(t =>
+              t.update(foundry.utils.deepClone(tokenUpdates))
+            ),
+          );
         }
       }
 

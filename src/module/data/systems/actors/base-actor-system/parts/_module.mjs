@@ -1,4 +1,3 @@
-export { default as ActorConditionTogglingPart } from "./actor-condition-toggling-part.mjs";
 export { default as ActorRollableTakesPart } from "./actor-impacts-part.mjs";
 export { default as ActorRestingPart } from "./actor-resting-part.mjs";
 export { default as ActorTokenPart } from "./actor-token-part.mjs";
@@ -6,6 +5,7 @@ export { default as ActorAttributesPart } from "./attributes-part/actor-attribut
 export { default as ActorAutomationPart } from "./automation-part/actor-automation-part.mjs";
 export { default as ActorCapacitiesPart } from "./capacities-part/actor-capacities-part.mjs";
 export { default as ActorCombatPart } from "./combat-part/actor-combat-part.mjs";
+export { default as ActorConditionsPart } from "./conditions-part/actor-conditions-part.mjs";
 export { default as ActorCoverPart } from "./cover-part/actor-cover-part.mjs";
 export { default as ActorDeathBagPart } from "./death-bag-part/actor-death-bag-part.mjs";
 export { default as ActorHacksPart } from "./hacks-part/actor-hacks-part.mjs";

@@ -206,7 +206,7 @@ export default Base => {
        */
       async reforge() {
         await this.parent.hookCall("reforge", { scope: { equipment: this.parent } });
-        await this.parent.toggleChild("property:dampened", { active: false });
+        await this.parent.toggleChild("property:destroyed", { active: false });
       }
 
       /**

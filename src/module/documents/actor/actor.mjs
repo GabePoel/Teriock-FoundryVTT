@@ -10,7 +10,6 @@ const { Actor } = foundry.documents;
 /**
  * The Teriock Actor implementation.
  * @implements {Teriock.Documents.ActorInterface}
- * @implements {Teriock.Data.ActorPropagator}
  * @extends {Actor}
  * @extends {ClientDocument}
  * @mixes BaseDocument
@@ -106,7 +105,7 @@ export default class TeriockActor
    */
   get defaultToken() {
     if (this.token) { return this.token.object; }
-    return this.getActiveTokens()[0] || null;
+    return this.getActiveTokens()[0] ?? null;
   }
 
   /**
@@ -133,22 +132,6 @@ export default class TeriockActor
     return this.statuses.has("dead");
   }
 
-  /**
-   * Is this actor damaged?
-   * @returns {boolean}
-   */
-  get isDamaged() {
-    return this.system.hp.value < this.system.hp.max || this.statuses.has("hacked");
-  }
-
-  /**
-   * Is this actor drained?
-   * @returns {boolean}
-   */
-  get isDrained() {
-    return this.system.mp.value < this.system.mp.max;
-  }
-
   /** @inheritDoc */
   get isTop() {
     return true;
@@ -172,31 +155,6 @@ export default class TeriockActor
   get validEffects() {
     if (!this._validEffects) { this._validEffects = Array.from(this.allApplicableEffects()); }
     return this._validEffects;
-  }
-
-  /**
-   * Helper method to add a virtual status.
-   * @param {Teriock.Keys.Condition} condition
-   * @param {string} reason
-   * @param {object} [options]
-   * @param {boolean} [options.localize]
-   */
-  _addVirtualStatus(condition, reason, options = {}) {
-    const { localize = true } = options;
-    if (!reason) { reason = TERIOCK.reference.conditions[condition]; }
-    this.system.conditionInformation[condition]?.reasons?.add(localize ? _loc(reason) : reason);
-    this.statuses.add(condition);
-  }
-
-  /**
-   * Helper method to add multiple virtual statuses with the same reason.
-   * @param {Teriock.Keys.Condition[]} conditions
-   * @param {string} reason
-   * @param {object} [options]
-   * @param {boolean} [options.localize]
-   */
-  _addVirtualStatuses(conditions, reason, options = {}) {
-    for (const condition of conditions) { this._addVirtualStatus(condition, reason, options); }
   }
 
   /**
@@ -272,34 +230,6 @@ export default class TeriockActor
   }
 
   /**
-   * Apply all competence automations of a certain value to this actor's children.
-   * @param {Teriock.System.CompetenceLevel} value
-   */
-  _applyCompetenceAutomations(value) {
-    const autos = this.validEffects.filter(e => e.active).flatMap(e =>
-      e.system.activeAutomations.filter(a => a?.type === "changeCompetence" && a?.competence.value === value)
-    );
-    const identifiers = new Set(autos.map(a => a.identifier));
-    for (
-      const c of this.modifiableChildren
-    ) { if (identifiers.has(c.typedIdentifier) && c.system.competence.raw < value) { c.system.competence.raw =
-          value; } }
-  }
-
-  /**
-   * Apply all suppress automations that force certain children of this document to be suppressed.
-   */
-  _applySuppressAutomations() {
-    const autos = this.validEffects.filter(e => e.active).flatMap(e =>
-      e.system.activeAutomations.filter(a => a?.type === "suppress")
-    );
-    const identifiers = new Set(autos.map(a => a.identifier));
-    for (const c of this.modifiableChildren) {
-      if (identifiers.has(c.typedIdentifier)) { c.system.forceSuppressed = true; }
-    }
-  }
-
-  /**
    * Generate an operation for creating staged items.
    * @returns {Promise<Partial<DatabaseCreateOperation>|null>}
    */
@@ -334,59 +264,6 @@ export default class TeriockActor
   }
 
   /**
-   * @inheritDoc
-   * @param {ActorData} data
-   * @param {object} options
-   * @param {TeriockUser} user
-   * @returns {Promise<boolean|void>}
-   */
-  async _preCreate(data, options, user) {
-    const yes = await super._preCreate(data, options, user);
-    if (yes === false) { return false; }
-
-    this.updateSource(
-      foundry.utils.mergeObject({
-        prototypeToken: {
-          height: this.system.size.length,
-          sight: { enabled: true, range: 0 },
-          width: this.system.size.length,
-        },
-      }),
-      data,
-    );
-  }
-
-  /**
-   * @inheritDoc
-   * @param {object} changes
-   * @param {object} options
-   * @param {TeriockUser} user
-   * @returns {Promise<boolean|void>}
-   */
-  async _preUpdate(changes, options, user) {
-    const yes = await super._preUpdate(changes, options, user);
-    if (yes === false) { return false; }
-
-    const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
-    if (foundry.utils.hasProperty(changes, "system.size.number")) {
-      const tokenSize = this.constructor.getSizeConfig(foundry.utils.getProperty(changes, "system.size.number")).length;
-      if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
-        tokenUpdates.width = tokenSize;
-        tokenUpdates.height = tokenSize;
-        foundry.utils.setProperty(changes, "prototypeToken", tokenUpdates);
-      }
-      for (const token of this.getDependentTokens()) {
-        if (token.parent?.grid?.type === 0) { await token.resize({ height: tokenSize, width: tokenSize }); }
-      }
-    }
-    if (Object.keys(tokenUpdates).length > 0) {
-      await Promise.all(
-        this.getDependentTokens().filter(t => t.id).map(t => t.update(foundry.utils.deepClone(tokenUpdates))),
-      );
-    }
-  }
-
-  /**
    * Clear and initialize all staged operations.
    */
   _resetStagedOperations() {
@@ -416,21 +293,6 @@ export default class TeriockActor
     await this.createEmbeddedDocuments("ActiveEffect", effects, { keepId: true });
   }
 
-  /**
-   * Prepare condition information now that all virtual statuses have been applied.
-   */
-  cleanConditionInformation() {
-    for (const part of ["arm", "leg"]) {
-      const str = `TERIOCK.STATUSES.Hacks.${part}Hack`;
-      if (this.system.conditionInformation.hacked.reasons.has(_loc(`${str}2`))) {
-        this.system.conditionInformation.hacked.reasons.delete(_loc(`${str}1`));
-      }
-    }
-    for (const info of Object.values(this.system.conditionInformation)) {
-      if (info.reasons.size > 0) { info.locked = true; }
-    }
-  }
-
   /** @inheritDoc */
   async getEffectiveChildren() {
     return [...(await super.getEffectiveChildren()), ...game.teriock.basicAbilities];
@@ -455,19 +317,9 @@ export default class TeriockActor
   }
 
   /** @inheritDoc */
-  prepareData() {
-    super.prepareData();
-    this.prepareSpecialData();
-    this.prepareVirtualEffects();
-    this.prepareCleanupData();
-  }
-
-  /** @inheritDoc */
   prepareEmbeddedDocuments() {
     super.prepareEmbeddedDocuments();
-    this._applySuppressAutomations();
-    this._applyCompetenceAutomations(1);
-    this._applyCompetenceAutomations(2);
+    this.system.prepareChildAutomations();
     this.prepareChangeData();
     this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
     this.applyActiveEffects("children");
@@ -477,90 +329,6 @@ export default class TeriockActor
   prepareSpecialData() {
     super.prepareSpecialData();
     this.applyActiveEffects("special");
-  }
-
-  /** @inheritDoc */
-  prepareVirtualEffects() {
-    for (const e of this.validEffects) {
-      for (const s of e.statuses) {
-        if (!e.id.startsWith(s)) {
-          this.system.conditionInformation[s]?.reasons.add(e.name);
-        }
-      }
-    }
-    this.prepareVirtualWounds();
-    this.system.prepareVirtualEffects();
-    this.cleanConditionInformation();
-  }
-
-  /**
-   * Add statuses and explanations for being wounded.
-   */
-  prepareVirtualWounds() {
-    if (!game.settings.get("teriock", "autoWound")) { return; }
-    // Check what states are triggered in normal circumstances
-    const hpUncn = this.system.hp.value < 1;
-    const hpCrit = this.system.hp.value === (this.system.hp.min < 0 ? this.system.hp.min + 1 : 0);
-    const hpDead = this.system.hp.value === this.system.hp.min;
-    const mpUncn = this.system.mp.value < 1;
-    const mpCrit = this.system.mp.value === (this.system.mp.min < 0 ? this.system.mp.min + 1 : 0);
-    const mpDead = this.system.mp.value === this.system.mp.min;
-
-    // Merge HP and MP
-    const statDead = hpDead || mpDead;
-    const statCrit = hpCrit || mpCrit;
-
-    // Check what states are at least partially passively protected against
-    const protUncn = this.system.isProtected("statuses", "unconscious");
-    const protCrit = this.system.isProtected("statuses", "criticallyWounded");
-    const protDead = this.system.isProtected("statuses", "dead");
-    const protDown = this.system.isProtected("statuses", "down");
-
-    // What wounds that supersede other wounds would apply automatically
-    const autoDead = statDead && !protDead && !protDown;
-    const autoCrit = statCrit && !protCrit && !protDown && !autoDead;
-
-    // Factoring in protections and overriding states, which states would automatically trigger
-    if (hpDead && !protDead && !protDown) {
-      this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxHp");
-    }
-    if (mpDead && !protDead && !protDown) {
-      this._addVirtualStatuses(["dead", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHalfMaxMp");
-    }
-    if (hpCrit && !protCrit && !protDown && !autoDead) {
-      this._addVirtualStatuses(
-        ["criticallyWounded", "down"],
-        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeHp",
-      );
-    }
-    if (mpCrit && !protCrit && !protDown && !autoDead) {
-      this._addVirtualStatuses(
-        ["criticallyWounded", "down"],
-        "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.criticallyNegativeMp",
-      );
-    }
-    if (hpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
-      if (this.system.hp.value === 0) {
-        this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroHp");
-      } else {this._addVirtualStatuses(
-          ["unconscious", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeHp",
-        );}
-    }
-    if (mpUncn && !protUncn && !autoCrit && !autoDead && !protDown) {
-      if (this.system.mp.value === 0) {
-        this._addVirtualStatuses(["unconscious", "down"], "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.zeroMp");
-      } else {this._addVirtualStatuses(
-          ["unconscious", "down"],
-          "TERIOCK.SYSTEMS.BaseActor.VIRTUAL_EFFECTS.negativeMp",
-        );}
-    }
-
-    if (this.statuses.has("dead")) {
-      this.statuses.delete("unconscious");
-      this.statuses.delete("criticallyWounded");
-    }
-    if (this.statuses.has("criticallyWounded")) { this.statuses.delete("unconscious"); }
   }
 
   /**

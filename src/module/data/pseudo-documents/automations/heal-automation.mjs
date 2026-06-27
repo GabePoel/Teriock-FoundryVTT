@@ -42,6 +42,6 @@ export default class HealAutomation extends StatAutomation {
 
   /** @inheritDoc */
   canFire(trigger) {
-    return (this.actor?.isDamaged || this.forHarm) && super.canFire(trigger);
+    return (this.actor?.system.isDamaged || this.forHarm) && super.canFire(trigger);
   }
 }

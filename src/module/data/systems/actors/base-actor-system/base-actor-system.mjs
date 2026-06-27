@@ -17,7 +17,7 @@ const { fields } = foundry.data;
  * @mixes ActorAutomationPart
  * @mixes ActorCapacitiesPart
  * @mixes ActorCombatPart
- * @mixes ActorConditionTogglingPart
+ * @mixes ActorConditionsPart
  * @mixes ActorCoverPart
  * @mixes ActorDeathBagPart
  * @mixes ActorHacksPart
@@ -38,13 +38,13 @@ export default class BaseActorSystem
   extends mixClasses(
     AbstractActorSystem,
     parts.ActorStatsPart,
+    parts.ActorConditionsPart,
     parts.ActorAutomationPart,
     parts.ActorScalingPart,
     parts.ActorHacksPart,
     parts.ActorCombatPart,
     parts.ActorCoverPart,
     parts.ActorRollableTakesPart,
-    parts.ActorConditionTogglingPart,
     parts.ActorTradecraftsPart,
     parts.ActorAttributesPart,
     parts.ActorCapacitiesPart,
@@ -112,23 +112,6 @@ export default class BaseActorSystem
       subtitle: TERIOCK.config.document[this.parent.type]?.label,
       text: dotJoin(this._scalingTags),
     });
-  }
-
-  /** @inheritDoc */
-  async _preCreate(data, options, user) {
-    const yes = await super._preCreate(data, options, user);
-    if (yes === false) { return false; }
-
-    this.parent.updateSource(
-      foundry.utils.mergeObject({
-        prototypeToken: {
-          bar1: { attribute: "hp" },
-          bar2: { attribute: "mp" },
-          displayBars: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
-          displayName: CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
-        },
-      }, data),
-    );
   }
 
   /** @inheritDoc */

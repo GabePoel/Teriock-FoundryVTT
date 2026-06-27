@@ -231,13 +231,4 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     super.prepareChangeData();
     this.changes.push(...this.qualifiedChanges.filter(c => c.target === "Actor"));
   }
-
-  /**
-   * Checks if the effect should expire based on its current state.
-   * @returns {Promise<boolean>} True if the effect should expire, false otherwise.
-   */
-  async shouldExpire() {
-    if (!this.parent.isTemporary) { return false; }
-    return this.parent.duration.remaining < 0;
-  }
 }
