@@ -205,8 +205,8 @@ export default class AbilityExecutionConstructor
   /** @inheritDoc */
   get rollData() {
     return Object.assign(super.rollData, {
-      "angle.dragon": game.teriock.getSetting("defaultDragonBreathAngle"),
-      "angle.normal": game.teriock.getSetting("defaultConeAngle"),
+      "angle.dragon": game.settings.get("teriock", "defaultDragonBreathAngle"),
+      "angle.normal": game.settings.get("teriock", "defaultConeAngle"),
       ap: this.existingAttackPenalty,
     });
   }
@@ -328,7 +328,7 @@ export default class AbilityExecutionConstructor
     this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
     if (Number.isNaN(this.existingAttackPenalty)) { this.existingAttackPenalty = 0; }
     this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
-    this.payCosts = game.teriock.getSetting("autoPayAbilityCosts");
+    this.payCosts = game.settings.get("teriock", "autoPayAbilityCosts");
     this.targets = new Set();
   }
 }

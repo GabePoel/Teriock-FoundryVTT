@@ -31,7 +31,7 @@ export default function DocumentDirectoryMixin(Base) {
           onClick: async (_ev, li) => this._getDocumentFromLi(li)?.openPanelSheet(),
           visible: li => {
             const document = this._getDocumentFromLi(li);
-            return game.teriock.getSetting("openPanelContextMenuEntry")
+            return game.settings.get("teriock", "openPanelContextMenuEntry")
               && typeof document?.system?._getPanelCardContextMenuEntry === "function" && document.isViewer;
           },
         }, ...super._getEntryContextOptions()];
@@ -40,7 +40,7 @@ export default function DocumentDirectoryMixin(Base) {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         return Object.assign(await super._prepareContext(options), {
-          makeTooltips: game.teriock.getSetting("sidebarTooltips"),
+          makeTooltips: game.settings.get("teriock", "sidebarTooltips"),
         });
       }
     }

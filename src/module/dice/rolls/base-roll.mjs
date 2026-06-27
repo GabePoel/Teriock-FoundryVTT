@@ -91,7 +91,7 @@ export default class BaseRoll extends Roll {
    * @returns {object}
    */
   static parseEvent(event) {
-    return { showDialog: game.teriock.getSetting("showRollDialogs") ? event.button !== 2 : event.button === 2 };
+    return { showDialog: game.settings.get("teriock", "showRollDialogs") ? event.button !== 2 : event.button === 2 };
   }
 
   /**

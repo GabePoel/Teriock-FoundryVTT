@@ -49,7 +49,7 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
    */
   get _isSuppressedArmor() {
     return Boolean(
-      game.teriock.getSetting("armorSuppressesRanks")
+      game.settings.get("teriock", "armorSuppressesRanks")
         && this.actor
         && !this.innate
         && this.actor.system.defense.av.base > this.maxAv,
@@ -110,7 +110,7 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
   prepareBaseData() {
     super.prepareBaseData();
     if (
-      game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
+      game.settings.get("teriock", "armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
     ) { this.proficient = false; }
   }
 }

@@ -106,7 +106,7 @@ export default class StatDieModel extends EmbeddedDataModel {
   async use(spend = true) {
     let proceed = !this.spent;
     if (this.spent) {
-      if (!game.teriock.getSetting("confirmStatDiceRerolls")) { proceed = true; }
+      if (!game.settings.get("teriock", "confirmStatDiceRerolls")) { proceed = true; }
       else {
         proceed = await TeriockDialog.confirm({
           content: _loc("TERIOCK.MODELS.StatDie.DIALOG.Reroll.content"),

@@ -272,7 +272,7 @@ export default function CommonSystemMixin(Base) {
           icon: makeIcon(TERIOCK.display.icons.ui.panel),
           label: _loc("TERIOCK.SHEETS.Panel.OPEN"),
           onClick: async () => await this.document.openPanelSheet(),
-          visible: () => game.teriock.getSetting("openPanelContextMenuEntry") && this.document.isViewer,
+          visible: () => game.settings.get("teriock", "openPanelContextMenuEntry") && this.document.isViewer,
         }
       }
 

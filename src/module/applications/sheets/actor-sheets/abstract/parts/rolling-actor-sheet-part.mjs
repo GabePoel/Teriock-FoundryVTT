@@ -74,7 +74,7 @@ export default Base =>
     /** @inheritDoc */
     async _prepareContext(options = {}) {
       const context = await super._prepareContext(options);
-      const index = game.teriock.packs.player.index;
+      const index = game.packs.get("teriock.player").index;
       context.attributeMacros = Object.fromEntries(
         Object.keys(TERIOCK.index.attributesFull).map(
           att => [att, index.getName(`Make ${att.toUpperCase()} Feat Save`)?.uuid]

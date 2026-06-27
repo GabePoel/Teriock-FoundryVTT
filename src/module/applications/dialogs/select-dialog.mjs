@@ -124,7 +124,7 @@ export async function selectConditionDialog() {
  */
 export async function selectPropertyDialog() {
   return resolveDocument(
-    await selectDocumentDialog(await noSup(game.teriock.packs.properties), {
+    await selectDocumentDialog(await noSup(game.packs.get("teriock.properties")), {
       hint: _loc("TERIOCK.DIALOGS.Select.Property.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Property.title"),
@@ -150,7 +150,7 @@ export async function selectTradecraftDialog(tradecrafts) {
  * @returns {Promise<Teriock.Keys.Tradecraft[]>}
  */
 export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}) {
-  const tradecraftJournal = await resolveDocument(game.teriock.packs.rules.getName("Tradecraft"));
+  const tradecraftJournal = await resolveDocument(game.packs.get("teriock.rules").getName("Tradecraft"));
   let choices = tradecraftJournal?.pages.contents;
   if (tradecrafts) { choices = choices.filter(t => tradecrafts.includes(t.system.identifier)); }
   if (choices.length === 0) { return []; }
@@ -170,7 +170,7 @@ export async function selectTradecraftsDialog(tradecrafts, { multi = true } = {}
  */
 export async function selectAbilityDialog() {
   return resolveDocument(
-    await selectDocumentDialog(await noSup(game.teriock.packs.abilities), {
+    await selectDocumentDialog(await noSup(game.packs.get("teriock.abilities")), {
       hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
@@ -203,7 +203,7 @@ export async function selectCompendiumsDialog(selected = true) {
  */
 export async function selectEquipmentTypeDialog() {
   return resolveDocument(
-    await selectDocumentDialog(await noSup(game.teriock.packs.equipment), {
+    await selectDocumentDialog(await noSup(game.packs.get("teriock.equipment")), {
       hint: _loc("TERIOCK.DIALOGS.Select.EquipmentType.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.EquipmentType.title"),
@@ -217,7 +217,7 @@ export async function selectEquipmentTypeDialog() {
  */
 export async function selectSpeciesDialog() {
   return resolveDocument(
-    await selectDocumentDialog(await noSup(game.teriock.packs.species), {
+    await selectDocumentDialog(await noSup(game.packs.get("teriock.species")), {
       hint: _loc("TERIOCK.DIALOGS.Select.Species.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.Species.title"),
@@ -231,7 +231,7 @@ export async function selectSpeciesDialog() {
  */
 export async function selectBodyPartDialog() {
   return resolveDocument(
-    await selectDocumentDialog(await noSup(game.teriock.packs.bodyParts), {
+    await selectDocumentDialog(await noSup(game.packs.get("teriock.bodyParts")), {
       hint: _loc("TERIOCK.DIALOGS.Select.BodyPart.hint"),
       openable: true,
       title: _loc("TERIOCK.DIALOGS.Select.BodyPart.title"),
@@ -245,7 +245,7 @@ export async function selectBodyPartDialog() {
  * @returns {Promise<Teriock.Keys.Class|null>}
  */
 export async function selectClassDialog(classes = null) {
-  const classJournal = await resolveDocument(game.teriock.packs.rules.getName("Class"));
+  const classJournal = await resolveDocument(game.packs.get("teriock.rules").getName("Class"));
   let choices = classJournal?.pages.contents;
   if (classes) { choices = choices.filter(c => classes.includes(c.system.identifier)); }
   choices = choices.filter((c) => c.system.archetype !== "archetype:everyman");

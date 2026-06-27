@@ -50,7 +50,7 @@ export default Base =>
       delete p2.tradecrafts.metaphysicist;
       context.prestigeFields = { p1, p2 };
 
-      const index = game.teriock.packs.player.index;
+      const index = game.packs.get("teriock.player").index;
       context.tradecraftMacros = Object.fromEntries(
         Object.entries(TERIOCK.index.tradecrafts).map(([tc, name]) => [tc, index.getName(`Make ${name} Check`)?.uuid]),
       );

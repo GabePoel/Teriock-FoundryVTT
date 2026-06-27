@@ -73,12 +73,11 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     const embeddable = parsed.embedded.length === 0
       || (parsed.embedded.length === 2 && this.#embeddedDocumentNames.has(parsed.type));
     if (!embeddable) { return null; }
-    // By default, world collections are prioritized
-    // This is a setting that can be changed
+    // Compendium collections are prioritized
     let level = 0;
     if (parsed.collection?.collection) {
       const collection = parsed.collection.collection;
-      const configuredPackPriorities = game.teriock.getSetting("identifierSourcePriority") ?? {};
+      const configuredPackPriorities = game.settings.get("teriock", "identifierSourcePriority") ?? {};
       const configuredLevel = Number(configuredPackPriorities[collection]);
       if (Number.isFinite(configuredLevel)) { level = configuredLevel; }
     }

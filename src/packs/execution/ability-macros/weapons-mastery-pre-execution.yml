@@ -14,7 +14,7 @@ command: >-
     img: scope.effect?.img,
     name: _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.effectName", { name: scope.effect?.name || "" }).trim(),
     system: {
-      _dep: game.teriock.getSetting("trackSustainedConsequences") ? scope.effect.uuid : undefined,
+      _dep: game.settings.get("teriock", "trackSustainedConsequences") ? scope.effect.uuid : undefined,
       automations: {
         [childChangeId]: {
           _id: childChangeId,

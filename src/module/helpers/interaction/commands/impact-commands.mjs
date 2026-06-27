@@ -42,11 +42,11 @@ function impactCommandFunctionFactory(impact, operation) {
     options.impact = impact;
     delete options.boost;
     if (operation === "primary") {
-      options.boost = game.teriock.getSetting("showRollDialogs");
+      options.boost = game.settings.get("teriock", "showRollDialogs");
       delete options.reverse;
     }
     if (operation === "secondary") {
-      options.boost = !game.teriock.getSetting("showRollDialogs");
+      options.boost = !game.settings.get("teriock", "showRollDialogs");
       options.reverse = true;
     }
     return abstractImpactCommandOperation(actor, options);

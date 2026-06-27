@@ -148,8 +148,8 @@ export default function DisplaySheetMixin(Base) {
           }),
         );
         context.displayTips = this.document.system.displayTips.filter(tip =>
-          (tip.level !== "warning" || game.teriock.getSetting("showSuppressionTipsOnSheets"))
-          && (tip.level !== "error" || game.teriock.getSetting("showErrorTipsOnSheets"))
+          (tip.level !== "warning" || game.settings.get("teriock", "showSuppressionTipsOnSheets"))
+          && (tip.level !== "error" || game.settings.get("teriock", "showErrorTipsOnSheets"))
         );
         context.bars = this._tab === "overview" ? this.constructor.BARS : [];
       }

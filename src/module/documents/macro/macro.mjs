@@ -26,7 +26,7 @@ export default class TeriockMacro
    * @returns {TeriockFolder|null}
    */
   static get hotbarFolder() {
-    if (!game.teriock.getSetting("sortNewPlayerMacros")) { return null; }
+    if (!game.settings.get("teriock", "sortNewPlayerMacros")) { return null; }
     return game.folders.find(f =>
       f.getFlag("teriock", "user") === game.user.id && f.getFlag("teriock", "hotbarFolder") && f.type === "Macro"
     ) ?? null;
@@ -37,7 +37,7 @@ export default class TeriockMacro
    * @returns {Promise<TeriockFolder>|null}
    */
   static async ensureHotbarFolder() {
-    if (!game.teriock.getSetting("sortNewPlayerMacros")) { return null; }
+    if (!game.settings.get("teriock", "sortNewPlayerMacros")) { return null; }
     const hotbarFolder = this.hotbarFolder;
     if (hotbarFolder) { return hotbarFolder; }
     await game.users.queryGM("teriock.createHotbarFolder", { id: game.user.id, name: game.user.name }, {
@@ -168,7 +168,7 @@ export default class TeriockMacro
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    if (game.teriock.getSetting("sortNewPlayerMacros") && !this.folder) {
+    if (game.settings.get("teriock", "sortNewPlayerMacros") && !this.folder) {
       if ((!game.user.isGM && this.constructor.hotbarFolder) || game.users.activeGM) {
         this.updateSource({ folder: (await this.constructor.ensureHotbarFolder())?.id });
       }

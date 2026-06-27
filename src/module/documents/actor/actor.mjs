@@ -205,7 +205,7 @@ export default class TeriockActor
    * @internal
    */
   _applyActiveEffectsToChildren(phase) {
-    if (!game.teriock.getSetting("nonHierarchicalChanges")) { return; }
+    if (!game.settings.get("teriock", "nonHierarchicalChanges")) { return; }
     /** @type {Record<string, Teriock.Changes.QualifiedChangeData[]>} */
     const changeMap = { ability: [], armament: [] };
     for (const effect of this.allApplicableEffects()) {
@@ -497,7 +497,7 @@ export default class TeriockActor
    * Add statuses and explanations for being wounded.
    */
   prepareVirtualWounds() {
-    if (!game.teriock.getSetting("autoWound")) { return; }
+    if (!game.settings.get("teriock", "autoWound")) { return; }
     // Check what states are triggered in normal circumstances
     const hpUncn = this.system.hp.value < 1;
     const hpCrit = this.system.hp.value === (this.system.hp.min < 0 ? this.system.hp.min + 1 : 0);

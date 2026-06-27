@@ -44,7 +44,7 @@ export default class TeriockTextEditor extends TextEditor {
 
   /** @inheritdoc */
   static createAnchor({ attrs = {}, classes = [], dataset = {}, icon, name } = {}) {
-    if (dataset.uuid && game.teriock.getSetting("contentLinkTooltips")) { dataset.tooltipUuid = dataset.uuid; }
+    if (dataset.uuid && game.settings.get("teriock", "contentLinkTooltips")) { dataset.tooltipUuid = dataset.uuid; }
     return super.createAnchor({ attrs, classes, dataset, icon, name });
   }
 
@@ -89,8 +89,8 @@ export default class TeriockTextEditor extends TextEditor {
     if (options.noBlocks) { delete parts.blocks; }
     if (options.noAssociations) { delete parts.associations; }
     const tips = options.relativeTo?.system?.displayTips?.filter(tip =>
-      (tip.level !== "warning" || game.teriock.getSetting("showSuppressionTipsOnTooltips"))
-      && (tip.level !== "error" || game.teriock.getSetting("showErrorTipsOnTooltips"))
+      (tip.level !== "warning" || game.settings.get("teriock", "showSuppressionTipsOnTooltips"))
+      && (tip.level !== "error" || game.settings.get("teriock", "showErrorTipsOnTooltips"))
     );
     if (tips?.length) { parts.tips = tips; }
     await this.enrichPanel(parts, options);

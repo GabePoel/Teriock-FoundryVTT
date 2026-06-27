@@ -18,7 +18,7 @@ export default class TeriockCompendium extends Compendium {
           await document?.openPanelSheet();
         },
         visible: () =>
-          game.teriock.getSetting("openPanelContextMenuEntry")
+          game.settings.get("teriock", "openPanelContextMenuEntry")
           && ["ActiveEffect", "Actor", "Item"].includes(this.documentName),
       },
       ...super._getEntryContextOptions(),
@@ -53,7 +53,7 @@ export default class TeriockCompendium extends Compendium {
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    if (game.teriock.getSetting("compendiumTooltips")) { context.makeTooltip = true; }
+    if (game.settings.get("teriock", "compendiumTooltips")) { context.makeTooltip = true; }
     return context;
   }
 

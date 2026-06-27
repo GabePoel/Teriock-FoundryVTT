@@ -67,7 +67,7 @@ export default Base =>
       const context = await super._prepareContext(options);
       return Object.assign(context, {
         activeTab: this._activeTab,
-        floatingTabs: game.teriock.getSetting("floatingActorTabs"),
+        floatingTabs: game.settings.get("teriock", "floatingActorTabs"),
       });
     }
 

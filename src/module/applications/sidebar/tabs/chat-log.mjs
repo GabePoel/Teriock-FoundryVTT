@@ -66,7 +66,7 @@ export default class TeriockChatLog extends ChatLog {
           if (parsed.collection.visible) { return true; }
         }
         if (!doc) { return false; }
-        return game.user.isGM || game.teriock.getSetting("openChatDocuments") || doc.isViewer;
+        return game.user.isGM || game.settings.get("teriock", "openChatDocuments") || doc.isViewer;
       },
     }];
   }

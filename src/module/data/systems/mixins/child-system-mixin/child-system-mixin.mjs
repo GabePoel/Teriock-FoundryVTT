@@ -210,7 +210,7 @@ export default function ChildSystemMixin(Base) {
        */
       _addErrorMessage(key, messages) {
         const text = TERIOCK.config.tip.error[key];
-        if (!text || !game.teriock.getSetting("errorMessages").has(key)) { return; }
+        if (!text || !game.settings.get("teriock", "errorMessages").has(key)) { return; }
         messages.add(text);
       }
 
@@ -222,8 +222,8 @@ export default function ChildSystemMixin(Base) {
       _addSuppressionMessage(key, messages) {
         const text = TERIOCK.config.tip.suppression[key];
         if (
-          !text || !game.teriock.getSetting("suppressionMessageTypes").has(this.parent.type)
-          || !game.teriock.getSetting("suppressionMessages").has(key)
+          !text || !game.settings.get("teriock", "suppressionMessageTypes").has(this.parent.type)
+          || !game.settings.get("teriock", "suppressionMessages").has(key)
         ) { return; }
         messages.add(text);
       }

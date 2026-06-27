@@ -128,7 +128,7 @@ export default class BaseMessageSystem
         return src
           && src.length
           && target.getAttribute("data-openable")
-          && (game.user.isGM || game.teriock.getSetting("openChatImages"));
+          && (game.user.isGM || game.settings.get("teriock", "openChatImages"));
       },
     }], { eventName: "contextmenu", fixed: true, jQuery: false });
 
@@ -162,7 +162,7 @@ export default class BaseMessageSystem
     else if (defaultCollapse === "open") { autoCollapse = false; }
     else {
       autoCollapse =
-        this.document.timestamp < Date.now() - game.teriock.getSetting("autoPanelCollapseTime") * 60 * 1000;
+        this.document.timestamp < Date.now() - game.settings.get("teriock", "autoPanelCollapseTime") * 60 * 1000;
     }
     TeriockItem.toggleCollapse(htmlElement, { autoCollapse: true, collapseAll: autoCollapse });
   }

@@ -44,7 +44,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
    */
   get _isSuppressedArmor() {
     return Boolean(
-      game.teriock.getSetting("armorSuppressesRanks")
+      game.settings.get("teriock", "armorSuppressesRanks")
         && this.actor
         && !this.innate
         && this.actor.system.defense.av.base > this.maxAv,

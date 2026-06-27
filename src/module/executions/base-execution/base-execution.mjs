@@ -27,7 +27,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   constructor(options = {}) {
     super();
     this.options = options;
-    this._showDialog = options.showDialog ?? game.teriock.getSetting("showRollDialogs");
+    this._showDialog = options.showDialog ?? game.settings.get("teriock", "showRollDialogs");
     this._actor = options.actor ?? game.actors.default;
     this._boosts = options.boosts ?? {};
     this._formula = options.formula ?? "";

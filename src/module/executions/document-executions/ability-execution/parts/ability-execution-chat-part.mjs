@@ -239,7 +239,7 @@ export default function AbilityExecutionChatPart(Base) {
           origin: this.source.uuid,
           showIcon: 0,
           system: {
-            _dep: this.source.system.sustained && game.teriock.getSetting("trackSustainedConsequences")
+            _dep: this.source.system.sustained && game.settings.get("teriock", "trackSustainedConsequences")
               ? this.source.uuid
               : undefined,
             _src: this.source.uuid,

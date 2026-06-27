@@ -104,7 +104,7 @@ export default class RankSystem
    */
   get _isSuppressedArmor() {
     return Boolean(
-      game.teriock.getSetting("armorSuppressesRanks")
+      game.settings.get("teriock", "armorSuppressesRanks")
         && this.actor
         && !this.innate
         && this.actor.system.defense.av.base > this.maxAv,
@@ -219,7 +219,7 @@ export default class RankSystem
     super.prepareBaseData();
     if (this.parent.sup?.type === "species") { this.innate = true; }
     if (
-      game.teriock.getSetting("armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
+      game.settings.get("teriock", "armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
     ) { this.competence.raw = 0; }
   }
 

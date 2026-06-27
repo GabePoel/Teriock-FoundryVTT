@@ -36,7 +36,7 @@ function addCardContextMenuEntriesToHeader(application, controls) {
  * @see {renderApplicationV2}
  */
 function addDeveloperModeLoggingListener(application) {
-  if (!game.teriock.getSetting("developerMode") || !application.window.header) { return; }
+  if (!game.settings.get("teriock", "developerMode") || !application.window.header) { return; }
   application.window.header.querySelectorAll("[data-action=close]").forEach(el => {
     el.addEventListener("contextmenu", async e => {
       e.preventDefault();
