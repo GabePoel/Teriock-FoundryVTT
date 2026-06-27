@@ -29,7 +29,7 @@ export default Base =>
     #createContextMenuEntry(type) {
       return {
         icon: makeIconClass(TERIOCK.config.document[type].icon, "contextMenu"),
-        label: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: TERIOCK.config.document[type].label }),
+        label: _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: TERIOCK.config.document[type].label }),
         onClick: () => this._createChild(type),
       };
     }

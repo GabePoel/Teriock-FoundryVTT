@@ -3,11 +3,13 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/utils.mjs";
 import { BaseSheetMixin, SystemSettingsButtonSheetMixin } from "../mixins/_module.mjs";
 import {
+  ConnectionCommonSheetPart,
   DocumentCreationCommonSheetPart,
   DragDropCommonSheetPart,
   FieldsCommonSheetPart,
   LockingCommonSheetPart,
   MechanicsCommonSheetPart,
+  ToggleCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
@@ -23,11 +25,13 @@ export default class ApplicableEffectSheet
     ActiveEffectConfig,
     BaseSheetMixin,
     SystemSettingsButtonSheetMixin,
+    ConnectionCommonSheetPart,
     DocumentCreationCommonSheetPart,
     DragDropCommonSheetPart,
     FieldsCommonSheetPart,
     LockingCommonSheetPart,
     MechanicsCommonSheetPart,
+    ToggleCommonSheetPart,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

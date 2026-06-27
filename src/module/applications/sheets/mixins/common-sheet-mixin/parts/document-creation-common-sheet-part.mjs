@@ -1,6 +1,7 @@
 import { BasePreviewModel } from "../../../../../data/models/preview-models/_module.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toKebabCase } from "../../../../../helpers/string.mjs";
+import { makeIconClass } from "../../../../../helpers/utils.mjs";
 import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
 import { selectClassDialog, selectTradecraftDialog } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
@@ -44,12 +45,34 @@ export default Base => {
           }
           this.previewMenus[type] = new PreviewModelCls({ name: type }, { parent: this.document });
         }
+        this.previewMenus.children = new BasePreviewModel({ name: "children" }, { parent: this.document });
+        this.previewMenus.children.updateSource({ display: { gapless: true, size: "small" } });
         /** @type {Record<string, string>} */
         this._searchStrings = {};
       }
 
       /** @type {Record<string, BasePreviewModel>} */
       previewMenus;
+
+      /**
+       * Connect a left-click context menu to the consolidated children add button.
+       */
+      _connectChildrenCreateMenu() {
+        if (!this.isEditable || typeof this._connectContextMenu !== "function") { return; }
+        const types = this.document.visibleTypes;
+        if (types.length <= 1 || !this.element.querySelector(".children-add-button")) { return; }
+        this._connectContextMenu(
+          ".children-add-button",
+          types.map(type => ({
+            icon: makeIconClass(TERIOCK.config.document[type].icon, "contextMenu"),
+            label: _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: TERIOCK.config.document[type].label }),
+            onClick: () => this._createChild(type),
+          })),
+          "click",
+          undefined,
+          true,
+        );
+      }
 
       /**
        * Create a child document of the given type.
@@ -242,6 +265,28 @@ export default Base => {
           });
         });
         this._initSearchFilters();
+        this._connectChildrenCreateMenu();
+      }
+
+      /**
+       * Build grouped preview sections for the consolidated children block.
+       * @param {object} context
+       */
+      _prepareChildrenPreviewGroups(context) {
+        const groups = [];
+        for (const type of this.document.visibleTypes) {
+          const config = TERIOCK.config.document[type];
+          const docs = context[config.getter];
+          if (docs?.length) {
+            groups.push({ docs: this.previewMenus.children.previewDocuments(docs ?? []), empty: config.plural });
+          }
+        }
+        if (!groups.length) {
+          groups.push({ docs: [], empty: _loc("TERIOCK.DOCUMENTS.document.plural") });
+        }
+        context.previewGroups.children = groups;
+        context.filterForms.children = this.previewMenus.children?._getEditorFormsSync().outerHTML;
+        context.previewSortOrders.children = this.previewMenus.children?.constructor.sortOrders;
       }
 
       /** @inheritDoc */
@@ -258,6 +303,9 @@ export default Base => {
         context.previews = this.previewMenus;
         context.previewGroups = {};
         context.previewSortOrders = {};
+        context.addType = this.document.visibleTypes.length !== 1 ? "children" : this.document.visibleTypes[0];
+        context.addButton = this.document.visibleTypes.length === 1;
+        context.addMenu = !context.addButton;
         context.searchStrings = foundry.utils.deepClone(this._searchStrings);
         for (const [type, options] of Object.entries(TERIOCK.config.document)) {
           if (options?.getter && ["ActiveEffect", "Item"].includes(options?.documentName)) {
@@ -270,6 +318,7 @@ export default Base => {
             }];
           }
         }
+        this._prepareChildrenPreviewGroups(context);
         return context;
       }
 

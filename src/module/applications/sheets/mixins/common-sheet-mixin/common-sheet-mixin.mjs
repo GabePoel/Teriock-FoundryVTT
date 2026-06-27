@@ -47,8 +47,9 @@ export default function CommonSheetMixin(Base) {
     {
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
+        classes: ["common"],
         form: { closeOnSubmit: false, submitOnChange: true },
-        position: { height: 600, width: 560 },
+        position: { height: 600, width: 580 },
         window: { resizable: true },
       };
 

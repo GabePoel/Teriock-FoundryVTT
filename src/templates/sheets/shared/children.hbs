@@ -1,12 +1,13 @@
 <div class="children-container">
-  {{#each document.visibleTypes as |type|}}
-    {{#if (or @root/editable (exists (lookup @root (path @root/TERIOCK.config.document type "getter"))))}}
-      <div class="ab-main teriock-block-results teriock-block-display" data-search-key="{{ type }}">
+  {{#if (exists @root/document.visibleTypes)}}
+    {{#if (or @root/editable (exists @root/document.visibleChildren))}}
+      <div class="ab-main teriock-block-results teriock-block-display" data-search-key="children">
         {{> "teriock/ui/preview"
-          type=type
-          addButton=true
+          type=@root/addType
+          addMenu=@root/addMenu
+          addButton=@root/addButton
         }}
       </div>
     {{/if}}
-  {{/each}}
+  {{/if}}
 </div>

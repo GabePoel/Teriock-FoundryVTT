@@ -45,10 +45,12 @@
             data-tab="{{ ../type }}"
             data-type="{{ ../type }}"
             data-action="createChild"
-            data-tooltip='{{localize "TERIOCK.DIALOGS.NewDocument.title" name=(path @root/TERIOCK.config.document ../type "label")}}'
+            data-tooltip='{{localize "TERIOCK.SHEETS.Common.PREVIEW.addType" type=(path @root/TERIOCK.config.document ../type "label")}}'
           >
             {{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}
           </button>
+        {{else if ../addMenu}}
+          <button class="toggle-button {{ ../type }}-add-button add-button" data-tooltip='{{localize "TERIOCK.SHEETS.Common.PREVIEW.addChildDocument"}}' type="button">{{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}</button>
         {{/if}}
       </div>
 
