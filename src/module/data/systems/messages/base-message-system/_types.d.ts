@@ -7,8 +7,6 @@ declare global {
     export type BaseMessageData = {
       /** <schema> Activations */
       activations: Record<ID, object>;
-      /** <schema> Fallback avatar image to use. */
-      avatar: string;
       /** <schema> Content to be displayed in addition to and above {@link BaseRoll} results */
       content: string;
       /** <schema> Panels to render */

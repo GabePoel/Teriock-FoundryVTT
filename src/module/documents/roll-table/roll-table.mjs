@@ -113,7 +113,6 @@ export default class TeriockRollTable
         activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
           (await Promise.all(results.map(r => r.getActivations()))).flat(),
         ),
-        avatar: TeriockChatMessage.getSpeakerActor(TeriockChatMessage.getSpeaker())?.img,
         panels: await Promise.all(results.map(r => r.getPanelParts())),
       },
     }, messageData);

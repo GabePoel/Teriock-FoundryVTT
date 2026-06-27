@@ -1,4 +1,5 @@
 import { EvaluationField, FormulaField, IdentifierField } from "../_module.mjs";
+import attributeConfig from "../../../constants/config/attribute-config.mjs";
 import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
@@ -204,17 +205,21 @@ export function competenceField() {
 
 /**
  * Attribute field.
- * @param {object} [options]
+ * @param {StringFieldOptions} [options]
  * @param {boolean} [options.unp]
  * @param {boolean} [options.nullable]
  * @returns {StringField}
  */
 export function attributeField(options = { nullable: true, unp: false }) {
   return new StringField({
-    choices: options.unp ? TERIOCK.reference.attributes : TERIOCK.reference.statAttributes,
+    choices: objectMap(attributeConfig, (v) => v.label, {
+      localize: true,
+      filter: (v) => options.unp || !v?.notImprovable,
+    }),
     initial: options.nullable ? null : "int",
     nullable: options.nullable ?? true,
     required: false,
+    ...options,
   });
 }
 

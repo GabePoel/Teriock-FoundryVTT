@@ -191,7 +191,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
         activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(this.activations),
-        avatar: this.actor?.img,
         buttons: this.buttons,
         panels: this.panels,
         tags: this.tags,
@@ -324,7 +323,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
     const { mode = this._messageMode } = options;
     const chatData = this.chatData;
     TeriockChatMessage.applyMode(chatData, mode);
-    this.message = await TeriockChatMessage.create(chatData);
+    this.message = await TeriockChatMessage.create(chatData, { chatBubble: false });
   }
 
   /**

@@ -6,6 +6,10 @@ import BaseDocumentExecution from "../base-document-execution/base-document-exec
 /** @type {boolean} */
 let BASE_EXPIRATION_LOCALIZED = false;
 
+/**
+ * @extends {BaseDocumentExecution}
+ * @mixes ThresholdExecution
+ */
 export default class ExpirationExecution extends executionMixins.ThresholdExecutionMixin(BaseDocumentExecution) {
   /**
    * @param {Teriock.Execution.ExpirationExecutionOptions} options
@@ -110,7 +114,6 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
 
   /** @inheritDoc */
   async _postInput() {
-    console.log(this, this.autoExpire);
     if (this.autoExpire) {
       this.source.system.expire();
       return false;

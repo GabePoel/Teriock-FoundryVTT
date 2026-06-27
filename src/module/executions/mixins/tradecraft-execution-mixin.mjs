@@ -19,7 +19,7 @@ export default function TradecraftExecutionMixin(Base) {
         super(options);
         if (this.actor) { this.bonus = addFormula(this.actor.system.tradecrafts[this.tradecraft].formula, this.bonus); }
         if (game.settings.get("teriock", "secretTradecrafts").has(this.tradecraft)) {
-          this._messageMode = options.mode ?? "blind";
+          this._messageMode = options.messageMode ?? "blind";
         }
       }
 
@@ -33,10 +33,12 @@ export default function TradecraftExecutionMixin(Base) {
         if (typeof this.threshold === "number") {
           return _loc("TERIOCK.ROLLS.Tradecraft.thresholded", {
             threshold: this.threshold,
-            value: TERIOCK.reference.tradecrafts[this.tradecraft],
+            value: TERIOCK.config.tradecraft.tradecrafts[this.tradecraft].label,
           });
         }
-        return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: TERIOCK.reference.tradecrafts[this.tradecraft] });
+        return _loc("TERIOCK.ROLLS.Tradecraft.name", {
+          value: TERIOCK.config.tradecraft.tradecrafts[this.tradecraft].label,
+        });
       }
 
       /** @inheritDoc */

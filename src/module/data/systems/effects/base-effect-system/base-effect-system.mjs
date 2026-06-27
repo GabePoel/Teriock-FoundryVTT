@@ -141,14 +141,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   }
 
   /**
-   * Whether this is temporary due to type-specific behavior.
-   * @returns {boolean}
-   */
-  get isTemporary() {
-    return false;
-  }
-
-  /**
    * Changes to apply to the parent item.
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */

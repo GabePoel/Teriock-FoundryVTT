@@ -122,7 +122,6 @@ export default function PanelDocumentMixin(Base) {
           speaker: TeriockChatMessage.getSpeaker({ actor }),
           system: {
             _src: this.uuid,
-            avatar: actor?.img,
             bars: [],
             blocks: [],
             buttons: [],

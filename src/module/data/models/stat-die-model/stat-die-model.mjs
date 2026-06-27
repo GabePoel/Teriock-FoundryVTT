@@ -120,8 +120,6 @@ export default class StatDieModel extends EmbeddedDataModel {
       }
     }
     if (proceed) {
-      const panels = this.parent.panels;
-      await TeriockTextEditor.enrichPanels(panels);
       const roll = new BaseRoll(this.formula, {}, {
         flavor: _loc("TERIOCK.ROLLS.Base.name", { value: this.parent.dieName }),
       });
@@ -131,7 +129,7 @@ export default class StatDieModel extends EmbeddedDataModel {
       const messageData = {
         rolls: [roll],
         speaker: TeriockChatMessage.getSpeaker({ actor: this.parent.parent.parent.actor }),
-        system: { avatar: this.parent.parent.parent.actor.img, panels },
+        system: { panels: await TeriockTextEditor.enrichPanels(this.parent.panels) },
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });
       if (spend) { await this.toggle(true); }

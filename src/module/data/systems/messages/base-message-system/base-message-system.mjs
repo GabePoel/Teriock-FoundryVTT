@@ -32,7 +32,6 @@ export default class BaseMessageSystem
    */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      avatar: new fields.FilePathField({ categories: ["IMAGE"] }),
       content: new fields.HTMLField(),
       panels: panelsField(),
       source: new fields.DocumentUUIDField(),
@@ -147,6 +146,7 @@ export default class BaseMessageSystem
     return {
       activations: this.activations.contents.filter(a => a?.visible),
       isContentVisible: this.document.isContentVisible,
+      speakerImg: this.document.speakerImg,
       system: this,
       TERIOCK,
       ...options,

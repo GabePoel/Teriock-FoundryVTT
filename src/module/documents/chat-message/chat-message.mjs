@@ -1,4 +1,3 @@
-import { systemPath } from "../../helpers/path.mjs";
 import { dedent } from "../../helpers/string.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
@@ -50,8 +49,7 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
     if (token) { return token.img; }
     const actor = this.speakerActor;
     if (actor) { return actor.img; }
-    if (this.system.avatar) { return this.system.avatar; }
-    return systemPath("icons/documents/character.svg");
+    return this.author.avatar;
   }
 
   /**
@@ -61,7 +59,7 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
   get speakerToken() {
     if (this.speaker.scene && this.speaker.token) {
       const scene = game.scenes.get(this.speaker.scene);
-      return scene?.tokens.get(this.speaker.token) || null;
+      return scene?.tokens.get(this.speaker.token) ?? null;
     }
     return null;
   }
@@ -84,13 +82,5 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
     const element = await super.renderHTML(context);
     await this.system._onRender(context, { element, ...options });
     return element;
-  }
-
-  /** @inheritDoc */
-  toObject(source = true) {
-    const obj = super.toObject(source);
-    obj.img = this.speakerImg;
-    if (this.author?.name !== this.alias) { obj.writer = this.author?.name; }
-    return obj;
   }
 }

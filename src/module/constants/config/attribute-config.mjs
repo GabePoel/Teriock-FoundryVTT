@@ -37,6 +37,7 @@ export default {
     icon: icons.attribute.unp,
     identifier: "core:presence",
     label: "TERIOCK.TERMS.Attributes.unp.label",
+    notImprovable: true,
   },
 };
 

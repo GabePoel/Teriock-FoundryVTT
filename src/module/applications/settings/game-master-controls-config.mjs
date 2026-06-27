@@ -13,6 +13,14 @@ export default class GameMasterControlsConfig extends BaseConfig {
   };
 
   /** @inheritDoc */
+  static PARTS = {
+    general: super.PARTS.general,
+    secrets: { template: "teriock/settings/base-config" },
+    developer: { template: "teriock/settings/base-config" },
+    footer: super.PARTS.footer,
+  };
+
+  /** @inheritDoc */
   static SETTINGS_MENU = {
     hint: "TERIOCK.CONFIGS.GameMasterControls.hint",
     key: "gameMasterControlsConfig",
@@ -26,6 +34,14 @@ export default class GameMasterControlsConfig extends BaseConfig {
     switch (partId) {
       case "general":
         context.fields = this.createSettingFields(settings.gameMasterControls);
+        break;
+      case "secrets":
+        context.fields = this.createSettingFields(settings.secrets);
+        context.legend = "TERIOCK.CONFIGS.GameMasterControls.parts.secrets";
+        break;
+      case "developer":
+        context.fields = this.createSettingFields(settings.developer);
+        context.legend = "TERIOCK.CONFIGS.GameMasterControls.parts.developer";
         break;
       default:
         break;

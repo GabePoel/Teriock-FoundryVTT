@@ -146,21 +146,6 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
-  get isTemporary() {
-    if (this.expirations.size > 0) { return true; }
-    return super.isTemporary;
-  }
-
-  /**
-   * Gets the maneuver type for this effect.
-   * Effects are always passive maneuvers.
-   * @returns {string} The maneuver type ("passive").
-   */
-  get maneuver() {
-    return "passive";
-  }
-
-  /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.SYSTEMS.Condition.USAGE.use", { value: this.parent.name });
   }
@@ -217,26 +202,14 @@ export default class ApplicableEffectSystem
     );
   }
 
-  /**
-   * Attempt to expire.
-   * @param {Teriock.Expirations.Type} _type
-   * @param {object} _context
-   * @param {boolean} _delegate
-   * @param type
-   * @param context
-   * @param delegate
-   * @returns {boolean}
-   */
-  attemptExpirations(type, context, delegate) {
-    return this.expirations.some((e) => e.attempt(type, context, delegate));
-  }
-
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    // We can't override the `isTemporary` getter since that messes with Foundry's ActiveEffectRegistry.
     if (this.parent._source.showIcon === CONST.ACTIVE_EFFECT_SHOW_ICON.CONDITIONAL && this.expirations.size) {
       this.parent.showIcon = CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS;
     }
+    // Having a description that matches the structure of our panels helps these get along better with modules.
     const blocks = this._panelBlocks;
     if (this.parent._source.description || !blocks?.length) { return; }
     const blocksHTML = blocks.reduce((acc, block) => {

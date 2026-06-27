@@ -17,6 +17,9 @@ export default class BaseDocumentExecution extends BaseExecution {
     this._automations = this.source.system.automations?.contents ?? [];
     this._boosts = options.boosts ?? this.source.system.boosts ?? this._boosts;
     this._consumeUses = options.consumeUses ?? true;
+    if (game.settings.get("teriock", "secretDocuments").has(this.source.typedIdentifier)) {
+      this._messageMode = options.messageMode ?? "blind";
+    }
   }
 
   /**

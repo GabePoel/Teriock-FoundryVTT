@@ -190,7 +190,6 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
         showLabel: multipleDocuments,
       };
     });
-    const mode = this.execution._messageMode;
     return Object.assign(await super._prepareContext(options), {
       buttons: this.execution._dialogButtons.map(button => ({
         ...button,
@@ -201,7 +200,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
       documents,
       mainFields,
       messageModes: Object.entries(CONFIG.ChatMessage.modes).map(([action, { icon, label }]) => {
-        return { action, active: action === mode, icon, label };
+        return { action, active: action === this.execution._messageMode, icon, label };
       }),
       smallFields,
     });

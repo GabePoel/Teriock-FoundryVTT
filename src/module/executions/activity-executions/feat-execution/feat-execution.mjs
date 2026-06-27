@@ -14,6 +14,9 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
     super(options);
     this.attribute = options.attribute;
     if (this.actor) { this.bonus = addFormula(this.actor.system.attributes[options.attribute].formula, this.bonus); }
+    if (game.settings.get("teriock", "secretAttributes").has(this.attribute)) {
+      this._messageMode = options.messageMode ?? "blind";
+    }
   }
 
   /** @type {Teriock.Keys.Attribute} */

@@ -1,8 +1,9 @@
 import * as configs from "../applications/settings/_module.mjs";
+import attributeConfig from "../constants/config/attribute-config.mjs";
 import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
-import tradecraftConfig from "../constants/config/tradecraft-config.mjs";
+import { TypedIdentifierSetField } from "../data/fields/_module.mjs";
 import { tradecraftsField } from "../data/fields/helpers/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/user-settings-models.mjs";
 import { objectMap } from "../helpers/utils.mjs";
@@ -104,6 +105,15 @@ export const settings = {
       type: new fields.NumberField({ max: 360, min: 0 }),
     },
   },
+  developer: {
+    developerMode: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.developerMode.hint",
+      name: "TERIOCK.SETTINGS.developerMode.name",
+      scope: "world",
+      type: Boolean,
+    },
+  },
   dialog: {
     confirmStatDiceRerolls: {
       default: true,
@@ -172,13 +182,6 @@ export const settings = {
     },
   },
   gameMasterControls: {
-    developerMode: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.developerMode.hint",
-      name: "TERIOCK.SETTINGS.developerMode.name",
-      scope: "world",
-      type: Boolean,
-    },
     gmDocumentNotesJournalName: {
       default: "GM Document Notes",
       hint: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.hint",
@@ -206,13 +209,6 @@ export const settings = {
       name: "TERIOCK.SETTINGS.playerMacrosFolderName.name",
       scope: "world",
       type: String,
-    },
-    secretTradecrafts: {
-      default: [],
-      hint: "TERIOCK.SETTINGS.secretTradecrafts.hint",
-      name: "TERIOCK.SETTINGS.secretTradecrafts.name",
-      scope: "world",
-      type: tradecraftsField(),
     },
     sortNewPlayerMacros: {
       default: true,
@@ -257,6 +253,40 @@ export const settings = {
       name: "TERIOCK.SETTINGS.openPanelContextMenuEntry.name",
       scope: "client",
       type: Boolean,
+    },
+  },
+  secrets: {
+    deathBagMessageMode: {
+      default: null,
+      hint: "TERIOCK.SETTINGS.deathBagMessageMode.hint",
+      name: "TERIOCK.SETTINGS.deathBagMessageMode.name",
+      scope: "world",
+      type: new fields.StringField({
+        choices: objectMap(CONFIG.ChatMessage.modes, (c) => c.label),
+        initial: null,
+        nullable: true,
+      }),
+    },
+    secretAttributes: {
+      default: [],
+      hint: "TERIOCK.SETTINGS.secretAttributes.hint",
+      name: "TERIOCK.SETTINGS.secretAttributes.name",
+      scope: "world",
+      type: new fields.SetField(new fields.StringField({ choices: objectMap(attributeConfig, (c) => c.label) })),
+    },
+    secretDocuments: {
+      default: [],
+      hint: "TERIOCK.SETTINGS.secretDocuments.hint",
+      name: "TERIOCK.SETTINGS.secretDocuments.name",
+      scope: "world",
+      type: new TypedIdentifierSetField(),
+    },
+    secretTradecrafts: {
+      default: [],
+      hint: "TERIOCK.SETTINGS.secretTradecrafts.hint",
+      name: "TERIOCK.SETTINGS.secretTradecrafts.name",
+      scope: "world",
+      type: tradecraftsField(),
     },
   },
   suppression: {

@@ -153,7 +153,9 @@ export default Base => {
           const f = TERIOCK.config.tradecraft.tradecrafts[tc].field;
           await this.document.createChildDocuments("ActiveEffect", [{
             img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
-            name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", { tradecraft: TERIOCK.reference.tradecrafts[tc] }),
+            name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", {
+              tradecraft: TERIOCK.config.tradecraft.tradecrafts[tc].label,
+            }),
             system: { field: f, tradecraft: tc },
             type: "fluency",
           }]);

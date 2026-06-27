@@ -1,5 +1,3 @@
-import { BaseExpiration } from "../data/pseudo-documents/expirations/abstract/_module.mjs";
-import { TeriockActiveEffect } from "../documents/_module.mjs";
 import { DependentsRegistry, IdentifiersRegistry } from "./registries/_module.mjs";
 
 /**

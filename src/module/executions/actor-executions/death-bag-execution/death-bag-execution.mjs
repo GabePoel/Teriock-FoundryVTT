@@ -16,6 +16,10 @@ export default class DeathBagExecution extends BaseDocumentExecution {
     /** @type {Record<Teriock.Keys.DeathBagStoneColor, Teriock.System.FormulaString>} */
     this.stonesFormulas = options.stonesFormulas
       ?? Object.fromEntries(STONE_COLORS.map(color => [color, this.actor?.system.deathBag.stones[color] ?? "0"]));
+    const defaultMessageMode = game.settings.get("teriock", "deathBagMessageMode");
+    if (defaultMessageMode) {
+      this._messageMode = options.messageMode ?? defaultMessageMode;
+    }
   }
 
   /** @type {string} */

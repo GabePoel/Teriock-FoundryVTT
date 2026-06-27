@@ -63,15 +63,18 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
   }
 
   /**
-   * Attempt expirations for all the specified actors.
-   * @param {TeriockActor[]} actors
-   * @param {Teriock.Expirations.Type} type
-   * @param {object} context
-   * @param {boolean} delegate
+   * Attempt to expire each applicable ActiveEffect on an array of Actors.
+   * @param {TeriockActor[]} actors - Actors to check the Expirations of
+   * @param {Teriock.Expirations.Type} type - The type of Expiration to check
+   * @param {object} context - Any context relevant to the type of Expiration we check
+   * @param {boolean} delegate - Whether to delegate the rolls to each Actor's default User
+   * @returns {Promise<void>}
    */
   static async massExpire(actors, type, context, delegate = false) {
     const effects = actors.flatMap(actor =>
-      actor.applicables.filter(effect => effect.active && effect.system.attemptExpirations(type, context, delegate))
+      actor.applicables.filter(effect =>
+        effect.active && effect.system.activeExpirations.some((e) => e.attempt(type, context, delegate))
+      )
     );
     if (!effects.length) { return; }
     const operations = await Promise.all(
