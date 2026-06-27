@@ -53,6 +53,7 @@ declare global {
       pack: string;
       plural: string;
       previewModel?: typeof BasePreviewModel;
+      importDialog?: () => Promise<TeriockDocument | void>;
       sorter: (doc: AnyCommonDocument[]) => AnyCommonDocument[];
     };
 

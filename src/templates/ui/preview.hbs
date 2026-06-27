@@ -39,11 +39,12 @@
           value="{{ preview.search }}"
         />
 
-        {{#if ../addAction}}
+        {{#if ../addButton}}
           <button
             class="toggle-button {{ ../type }}-add-button add-button"
             data-tab="{{ ../type }}"
-            data-action="{{ ../addAction }}"
+            data-type="{{ ../type }}"
+            data-action="createChild"
             data-tooltip='{{localize "TERIOCK.DIALOGS.NewDocument.title" name=(path @root/TERIOCK.config.document ../type "label")}}'
           >
             {{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}

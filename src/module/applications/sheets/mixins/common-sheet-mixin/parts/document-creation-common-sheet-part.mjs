@@ -2,15 +2,7 @@ import { BasePreviewModel } from "../../../../../data/models/preview-models/_mod
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toKebabCase } from "../../../../../helpers/string.mjs";
 import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
-import {
-  selectAbilityDialog,
-  selectBodyPartDialog,
-  selectClassDialog,
-  selectEquipmentTypeDialog,
-  selectPropertyDialog,
-  selectSpeciesDialog,
-  selectTradecraftDialog,
-} from "../../../../dialogs/select-dialog.mjs";
+import { selectClassDialog, selectTradecraftDialog } from "../../../../dialogs/select-dialog.mjs";
 import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
 import { HTMLTernaryElement } from "../../../../elements/_module.mjs";
 
@@ -28,84 +20,103 @@ export default Base => {
      */
     class DocumentCreationCommonSheetPart extends Base {
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-      static DEFAULT_OPTIONS = {
-        actions: {
-          createAbility: this._onCreateAbility,
-          createAttunement: this._onCreateAttunement,
-          createBody: this._onCreateBody,
-          createConsequence: this._onCreateConsequence,
-          createEquipment: this._onCreateEquipment,
-          createFluency: this._onCreateFluency,
-          createImbuement: this._onCreateImbuement,
-          createMount: this._onCreateMount,
-          createPower: this._onCreatePower,
-          createProperty: this._onCreateProperty,
-          createRank: this._onCreateRank,
-          createResource: this._onCreateResource,
-          createSpecies: this._onCreateSpecies,
-        },
-      };
+      static DEFAULT_OPTIONS = { actions: { createChild: this._onCreateChild } };
 
       /**
-       * Adds a new {@link TeriockAbility} to the current document.
+       * Create a child document from a preview add button.
+       * @this {DocumentCreationCommonSheetPart}
+       * @param {PointerEvent} _event
+       * @param {HTMLElement} target
        * @returns {Promise<void>}
        */
-      static async _onCreateAbility() {
-        const decision = await newDocumentDialog("ability");
-        let obj = newDocumentObj("ability");
-        if (decision === "import") {
-          const out = await selectAbilityDialog();
-          if (!out) { return; }
-          obj = out.toObject(true);
-          obj["_stats.compendiumSource"] = out.uuid;
+      static async _onCreateChild(_event, target) {
+        const type = /** @type {Teriock.Documents.ChildType|undefined} */ target.dataset.type;
+        if (type) { await this._createChild(type); }
+      }
+
+      constructor(...args) {
+        super(...args);
+        this.previewMenus = {};
+        for (const [type, options] of Object.entries(TERIOCK.config.document)) {
+          let PreviewModelCls = BasePreviewModel;
+          if (options?.previewModel) {
+            PreviewModelCls = options.previewModel;
+          }
+          this.previewMenus[type] = new PreviewModelCls({ name: type }, { parent: this.document });
         }
-        if (decision && obj) { await this.document.createChildDocuments("ActiveEffect", [obj]); }
+        /** @type {Record<string, string>} */
+        this._searchStrings = {};
+      }
+
+      /** @type {Record<string, BasePreviewModel>} */
+      previewMenus;
+
+      /**
+       * Create a child document of the given type.
+       * @this {DocumentCreationCommonSheetPart}
+       * @param {Teriock.Documents.ChildType} type
+       * @returns {Promise<void>}
+       */
+      async _createChild(type) {
+        switch (type) {
+          case "rank":
+            return this._onCreateRank();
+          case "fluency":
+            return this._onCreateFluency();
+          case "equipment":
+            return this._onCreateEquipment();
+          default: {
+            const obj = await resolveCreateObject(type);
+            if (!obj) { return; }
+            await this.document.createChildDocuments(TERIOCK.config.document[type]?.documentName, [obj]);
+          }
+        }
       }
 
       /**
-       * Adds a new {@link TeriockAttunement} to the current document.
-       * @returns {Promise<void>}
+       * Bind a {@link SearchFilter} to every preview search input rendered on the sheet, scoping each to its
+       * `data-search-key` results container and persisting the query onto the matching preview model.
        */
-      static async _onCreateAttunement() {
-        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("attunement")]);
-      }
-
-      /**
-       * Adds a new {@link TeriockBody} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreateBody() {
-        const decision = await newDocumentDialog("body");
-        let obj = newDocumentObj("body");
-        if (decision === "import") { obj = game.items.fromCompendium(await selectBodyPartDialog()); }
-        if (decision && obj) { await this.document.createChildDocuments("Item", [obj]); }
-      }
-
-      /**
-       * Adds a new {@link TeriockConsequence} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreateConsequence() {
-        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("consequence")]);
+      _initSearchFilters() {
+        this.element.querySelectorAll(".teriock-block-search[data-search-key]").forEach(
+          /** @param {HTMLInputElement} input */ input => {
+            const searchKey = input.dataset.searchKey;
+            if (!searchKey) { return; }
+            const resultsContainer = this.element.querySelector(
+              `.teriock-block-results[data-search-key="${searchKey}"]`,
+            );
+            if (!resultsContainer) { return; }
+            const preview = this.previewMenus?.[searchKey];
+            const initial = preview ? preview.search : (this._searchStrings[searchKey] || "");
+            const searchFilter = new SearchFilter({
+              contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,
+              initial,
+              inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
+              callback: (_event, query, rgx, container) => {
+                this._searchStrings[searchKey] = query;
+                if (preview) { preview.updateSource({ search: query }); }
+                container.querySelectorAll(".teriock-block").forEach(card => {
+                  const title = card.querySelector(".teriock-block-title")?.textContent ?? "";
+                  const isMatch = rgx ? rgx.test(title) : true;
+                  card.classList.toggle("hidden", !isMatch);
+                });
+              },
+            });
+            searchFilter.bind(this.element);
+          },
+        );
       }
 
       /**
        * Adds a new {@link TeriockEquipment} to the current document.
        * @returns {Promise<void>}
-       * @this {DocumentCreationCommonSheetPart}
        */
-      static async _onCreateEquipment() {
-        const decision = await newDocumentDialog("equipment");
-        let obj = newDocumentObj("equipment");
-        if (decision === "import") {
-          const out = await selectEquipmentTypeDialog();
-          if (!out) { return; }
-          obj = out.toObject(true);
-          obj["_stats.compendiumSource"] = out.uuid;
-        }
-        if (decision && obj) {
-          const stack = await this._stackEquipment(obj);
-          if (!stack) { await this.document.createChildDocuments("Item", [obj]); }
+      async _onCreateEquipment() {
+        const obj = await resolveCreateObject("equipment");
+        if (!obj) { return; }
+        const stack = await this._stackEquipment(obj);
+        if (!stack) {
+          await this.document.createChildDocuments(TERIOCK.config.document.equipment.documentName, [obj]);
         }
       }
 
@@ -113,7 +124,7 @@ export default Base => {
        * Adds a new {@link TeriockFluency} to the current document.
        * @returns {Promise<void>}
        */
-      static async _onCreateFluency() {
+      async _onCreateFluency() {
         const tc = await selectTradecraftDialog();
         if (tc) {
           const f = TERIOCK.config.tradecraft.tradecrafts[tc].field;
@@ -127,51 +138,11 @@ export default Base => {
       }
 
       /**
-       * Adds a new {@link TeriockImbuement} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreateImbuement() {
-        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("imbuement")]);
-      }
-
-      /**
-       * Adds a new {@link TeriockMount} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreateMount() {
-        await this.document.createChildDocuments("Item", [newDocumentObj("mount")]);
-      }
-
-      /**
-       * Adds a new {@link TeriockPower} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreatePower() {
-        await this.document.createChildDocuments("Item", [newDocumentObj("power")]);
-      }
-
-      /**
-       * Adds a new {@link TeriockProperty} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreateProperty() {
-        const decision = await newDocumentDialog("property");
-        let obj = newDocumentObj("property");
-        if (decision === "import") {
-          const out = await selectPropertyDialog();
-          if (!out) { return; }
-          obj = out.toObject(true);
-          obj["_stats.compendiumSource"] = out.uuid;
-        }
-        if (decision && obj) { await this.document.createChildDocuments("ActiveEffect", [obj]); }
-      }
-
-      /**
        * Adds a new {@link TeriockRank} to the current document.
        * @returns {Promise<void>}
        * @todo There is 100% a simpler/more generalized version of this that could be made.
        */
-      static async _onCreateRank() {
+      async _onCreateRank() {
         const rankClass = await selectClassDialog();
         const innate = this.document.documentName !== "Actor";
         if (!rankClass) { return; }
@@ -252,76 +223,6 @@ export default Base => {
         const toCreate = game.items.fromCompendium(rank);
         toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate });
         await this.document.createChildDocuments("Item", [toCreate]);
-      }
-
-      /**
-       * Adds a new {@link TeriockResource} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreateResource() {
-        await this.document.createChildDocuments("ActiveEffect", [newDocumentObj("resource")]);
-      }
-
-      /**
-       * Adds a new {@link TeriockSpecies} to the current document.
-       * @returns {Promise<void>}
-       */
-      static async _onCreateSpecies() {
-        const decision = await newDocumentDialog("species");
-        let obj = newDocumentObj("species");
-        if (decision === "import") { obj = game.items.fromCompendium(await selectSpeciesDialog()); }
-        if (decision && obj) { await this.document.createChildDocuments("Item", [obj]); }
-      }
-
-      constructor(...args) {
-        super(...args);
-        this.previewMenus = {};
-        for (const [type, options] of Object.entries(TERIOCK.config.document)) {
-          let PreviewModelCls = BasePreviewModel;
-          if (options?.previewModel) {
-            PreviewModelCls = options.previewModel;
-          }
-          this.previewMenus[type] = new PreviewModelCls({ name: type }, { parent: this.document });
-        }
-        /** @type {Record<string, string>} */
-        this._searchStrings = {};
-      }
-
-      /** @type {Record<string, BasePreviewModel>} */
-      previewMenus;
-
-      /**
-       * Bind a {@link SearchFilter} to every preview search input rendered on the sheet, scoping each to its
-       * `data-search-key` results container and persisting the query onto the matching preview model.
-       */
-      _initSearchFilters() {
-        this.element.querySelectorAll(".teriock-block-search[data-search-key]").forEach(
-          /** @param {HTMLInputElement} input */ input => {
-            const searchKey = input.dataset.searchKey;
-            if (!searchKey) { return; }
-            const resultsContainer = this.element.querySelector(
-              `.teriock-block-results[data-search-key="${searchKey}"]`,
-            );
-            if (!resultsContainer) { return; }
-            const preview = this.previewMenus?.[searchKey];
-            const initial = preview ? preview.search : (this._searchStrings[searchKey] || "");
-            const searchFilter = new SearchFilter({
-              contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,
-              initial,
-              inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
-              callback: (_event, query, rgx, container) => {
-                this._searchStrings[searchKey] = query;
-                if (preview) { preview.updateSource({ search: query }); }
-                container.querySelectorAll(".teriock-block").forEach(card => {
-                  const title = card.querySelector(".teriock-block-title")?.textContent ?? "";
-                  const isMatch = rgx ? rgx.test(title) : true;
-                  card.classList.toggle("hidden", !isMatch);
-                });
-              },
-            });
-            searchFilter.bind(this.element);
-          },
-        );
       }
 
       /** @inheritDoc */
@@ -427,12 +328,23 @@ export default Base => {
 };
 
 /**
+ * Resolve a creation object from config, optionally via the new-document import dialog.
  * @param {Teriock.Documents.ChildType} type
- * @returns {{name: string, type: Teriock.Documents.ChildType}}
+ * @returns {Promise<object|null>}
  */
-function newDocumentObj(type) {
-  return {
+async function resolveCreateObject(type) {
+  const obj = {
     name: _loc("TERIOCK.SHEETS.Common.MENU.Create.document", { type: TERIOCK.config.document[type]?.label }),
     type,
   };
+  if (!TERIOCK.config.document[type]?.importDialog) { return obj; }
+  const decision = await newDocumentDialog(type);
+  if (!decision) { return null; }
+  if (decision === "import") {
+    const picked = await TERIOCK.config.document[type]?.importDialog();
+    if (!picked) { return null; }
+    if (TERIOCK.config.document[type]?.documentName === "Item") { return game.items.fromCompendium(picked); }
+    return foundry.utils.mergeObject(picked.toObject(), { _stats: { compendiumSource: picked.uuid } });
+  }
+  return obj;
 }
