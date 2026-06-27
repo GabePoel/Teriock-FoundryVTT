@@ -6,6 +6,7 @@ import identifyItemQuery from "./identify-item-query.mjs";
 import massWriteQuery from "./mass-write-query.mjs";
 import turnChangeQuery from "./turn-change-query.mjs";
 import updateDocumentsQuery from "./update-documents-query.mjs";
+import useQuery from "./use-query.mjs";
 
 const queries = {
   "teriock.createDocuments": createDocumentsQuery,
@@ -16,6 +17,7 @@ const queries = {
   "teriock.massWrite": massWriteQuery,
   "teriock.turnChange": turnChangeQuery,
   "teriock.updateDocuments": updateDocumentsQuery,
+  "teriock.use": useQuery,
 };
 
 export default queries;

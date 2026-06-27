@@ -1,4 +1,5 @@
 import { CombatExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
+import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
@@ -27,13 +28,12 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
    * @param {Teriock.Keys.CombatTiming} timing
    */
   #refreshCombatExpirations(actor, event, timing) {
-    game.teriock.expirationRefresh({
-      actor,
-      actors: actor ? undefined : new Set(this.actors),
-      event,
-      timing,
-      type: CombatExpiration.TYPE,
-    });
+    const context = { actor, event, timing };
+    if (game.user.isActiveGM) {
+      BaseExpiration.massExpire(this.actors, CombatExpiration.TYPE, context, true);
+    } else if (!game.users.activeGM) {
+      BaseExpiration.massExpire(this.actors.filter((a) => a.defaultUser.isSelf), CombatExpiration.TYPE, context, false);
+    }
   }
 
   /**

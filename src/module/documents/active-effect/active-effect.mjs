@@ -52,11 +52,6 @@ export default class TeriockActiveEffect
     return Object.values(CONFIG.statusEffects).some(s => s?._id === this.id);
   }
 
-  /** @inheritDoc */
-  get isTemporary() {
-    return super.isTemporary || Boolean(this.system.isTemporary);
-  }
-
   /**
    * The time remaining before this effect expires, as a string.
    * @returns {string|null}
@@ -84,26 +79,7 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
-  isExpiryEvent(event, context) {
-    if (typeof this.system.isExpiryEvent === "function") {
-      const out = this.system.isExpiryEvent(event, context);
-      if (typeof out === "boolean") { return out; }
-    }
-    return super.isExpiryEvent(event, context);
-  }
-
-  /** @inheritDoc */
   async toggleDisabled() {
     await this.update({ disabled: !this.disabled });
-  }
-
-  /** @inheritDoc */
-  updateDuration(context) {
-    const out = super.updateDuration(context);
-    if (context?.forceNoDuration && this.pseudoCollections.Expiration) {
-      out.remaining = 0;
-      out.secondsRemaining = 0;
-    }
-    return out;
   }
 }

@@ -100,18 +100,6 @@ export default class TeriockManager {
   }
 
   /**
-   * Safely refresh the active effects registry while allowing for expirations to activate even with duration remaining.
-   * @param {object} context
-   * @returns {Promise<void>}
-   */
-  async expirationRefresh(context = {}) {
-    await TeriockActiveEffect.registry.refresh(
-      BaseExpiration.EXPIRY_REFRESH_EVENT,
-      Object.assign(context, { forceNoDuration: true }),
-    );
-  }
-
-  /**
    * Initialize registries.
    */
   initializeRegistries() {

@@ -1,5 +1,6 @@
 import { config } from "../../constants/_module.mjs";
 import { TriggerExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
+import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { findBestDocument, fromKey } from "../../helpers/utils.mjs";
@@ -307,7 +308,7 @@ export default class TeriockActor
   /** @inheritDoc */
   async hookCall(trigger, options = {}) {
     const out = await super.hookCall(trigger, options);
-    game.teriock.expirationRefresh({ actors: new Set([this]), trigger, type: TriggerExpiration.TYPE });
+    BaseExpiration.massExpire([this], TriggerExpiration.TYPE, { trigger }, false);
     return out;
   }
 

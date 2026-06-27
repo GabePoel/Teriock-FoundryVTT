@@ -5,7 +5,6 @@ import { dedent } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
-import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
@@ -192,7 +191,19 @@ export default class ApplicableEffectSystem
     const yes = await super._preDelete(options, user);
     if (yes === false) { return false; }
 
-    this.parent.fireTrigger("expireEffect", this.parent.getScope());
+    if (CONFIG.ActiveEffect.expiryAction === "delete") {
+      this.parent.fireTrigger("expireEffect", this.parent.getScope());
+    }
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) { return false; }
+
+    if (
+      CONFIG.ActiveEffect.expiryAction === "update" && foundry.utils.getProperty(changes, "duration.expired") === true
+    ) { this.parent.fireTrigger("expireEffect", this.parent.getScope()); }
   }
 
   /** @inheritDoc */
@@ -206,21 +217,26 @@ export default class ApplicableEffectSystem
     );
   }
 
-  /** @inheritDoc */
-  isExpiryEvent(event, context = {}) {
-    if (BaseExpiration.EXPIRY_REFRESH_EVENT === event) {
-      const out = this.activeExpirations.some((e) => e.isExpiryEvent(event, context));
-      // Since the active effect registry has already processed duration, it's safe to return it to its real value
-      this.parent.updateDuration();
-      return out;
-    }
-    if (!this.parent.duration.expiry && this.parent.duration.remaining > 0) { return false; }
-    return null;
+  /**
+   * Attempt to expire.
+   * @param {Teriock.Expirations.Type} _type
+   * @param {object} _context
+   * @param {boolean} _delegate
+   * @param type
+   * @param context
+   * @param delegate
+   * @returns {boolean}
+   */
+  attemptExpirations(type, context, delegate) {
+    return this.expirations.some((e) => e.attempt(type, context, delegate));
   }
 
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
+    if (this.parent._source.showIcon === CONST.ACTIVE_EFFECT_SHOW_ICON.CONDITIONAL && this.expirations.size) {
+      this.parent.showIcon = CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS;
+    }
     const blocks = this._panelBlocks;
     if (this.parent._source.description || !blocks?.length) { return; }
     const blocksHTML = blocks.reduce((acc, block) => {

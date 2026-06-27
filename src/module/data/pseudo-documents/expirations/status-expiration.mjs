@@ -51,8 +51,8 @@ export default class StatusExpiration extends BaseExpiration {
   }
 
   /** @inheritDoc */
-  isValidEvent(event, context = {}) {
-    return super.isValidEvent(event, context) && this.shouldExpire;
+  _validateExpirationAttempt(type, context) {
+    return super._validateExpirationAttempt(type, context) && this.shouldExpire;
   }
 
   /** @inheritDoc */

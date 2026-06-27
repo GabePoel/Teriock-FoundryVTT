@@ -192,7 +192,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
    * @returns {Promise<void>}
    */
   async expire() {
-    if (CONFIG.ActiveEffect.expiryAction !== "delete") { await this.parent.hookCall("effectExpiration"); }
     if (CONFIG.ActiveEffect.expiryAction === "delete") { await this.parent.delete(); }
     else if (CONFIG.ActiveEffect.expiryAction === "update") { await this.parent.update({ "duration.expired": true }); }
   }
@@ -202,17 +201,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     const data = super.getLocalRollData();
     for (const status of this.parent.statuses) { data[`condition.${status}`] = 1; }
     return data;
-  }
-
-  /**
-   * Subtype-specific handling expiry event determination. This check is independent of whether the duration was also
-   * reached. If this returns `null`, then the default ActiveEffect handling is used.
-   * @param {string} _event
-   * @param {object} _context
-   * @returns {boolean|null}
-   */
-  isExpiryEvent(_event, _context) {
-    return null;
   }
 
   /** @inheritDoc */

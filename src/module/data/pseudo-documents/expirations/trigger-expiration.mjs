@@ -35,16 +35,7 @@ export default class TriggerExpiration extends BaseExpiration {
   }
 
   /** @inheritDoc */
-  _onFireTrigger(trigger, scope = {}) {
-    super._onFireTrigger(trigger, scope);
-    if (this.isExpiryEvent(this.constructor.EXPIRY_REFRESH_EVENT), { trigger, type: this.type }) {
-      console.log(true);
-      // this.document.system.expire()
-    }
-  }
-
-  /** @inheritDoc */
-  isValidEvent(event, context = {}) {
-    return super.isValidEvent(event, context) && this.triggers.has(context.trigger);
+  _validateExpirationAttempt(type, context) {
+    return super._validateExpirationAttempt(type, context) && this.triggers.has(context.trigger);
   }
 }

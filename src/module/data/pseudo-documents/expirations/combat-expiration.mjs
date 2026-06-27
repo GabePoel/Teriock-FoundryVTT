@@ -53,18 +53,13 @@ export default class CombatExpiration extends BaseExpiration {
     return paths;
   }
 
-  /**
-   * Check if an event's context would be valid if it were not skipped.
-   * @param {object} context
-   * @returns {boolean}
-   */
-  _isValidEventContext(context = {}) {
-    return context.event === this.event && context.timing === this.timing && this.isValidActor(context.actor);
-  }
-
   /** @inheritDoc */
-  isRollEvent(event, context = {}) {
-    return super.isRollEvent(event, context) && this.actor?.defaultUser?.isSelf;
+  _validateExpirationAttempt(type, context) {
+    const progress = super._validateExpirationAttempt(type, context) && context.event === this.event
+      && context.timing === this.timing && this.isValidActor(context.actor);
+    if (!progress || this.skip === 0) { return progress; }
+    this.update({ skip: this.skip - 1 });
+    return false;
   }
 
   /**
@@ -76,14 +71,6 @@ export default class CombatExpiration extends BaseExpiration {
     if (this.relation === "target" && this.actor?.uuid === actor.uuid) { return true; }
     else if (this.relation === "executor" && this.document?.system?.executor === actor.uuid) { return true; }
     else if (this.relation === "everyone") { return true; }
-    return false;
-  }
-
-  /** @inheritDoc */
-  isValidEvent(event, context = {}) {
-    const progress = super.isValidEvent(event, context) && this._isValidEventContext(context);
-    if (!progress || this.skip === 0) { return progress; }
-    this.update({ skip: this.skip - 1 });
     return false;
   }
 }

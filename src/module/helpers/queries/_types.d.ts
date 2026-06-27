@@ -51,5 +51,7 @@ declare global {
     export type CreateHotbarFolderData = { id: ID<TeriockUser>, name: string };
 
     export type MassWriteData = { operations: object[] };
+
+    export type UseData = { uuid: UUID };
   }
 }

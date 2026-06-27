@@ -1,8 +1,9 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { buildWriteOperation, consolidateWriteOperations, makeIcon } from "../../../../helpers/utils.mjs";
 import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
 import { StatusExpiration } from "../../../pseudo-documents/expirations/_module.mjs";
+import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 import AbstractActorSystem from "./abstract-actor-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
@@ -155,6 +156,6 @@ export default class BaseActorSystem
    */
   async postUpdate() {
     await Promise.all([...this.parent.getDependentTokens().map(t => t.postActorUpdate())]);
-    await game.teriock.expirationRefresh({ actors: new Set([this.parent]), type: StatusExpiration.TYPE });
+    await BaseExpiration.massExpire([this.parent], StatusExpiration.TYPE, {}, true);
   }
 }

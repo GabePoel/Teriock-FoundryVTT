@@ -1,6 +1,6 @@
 import mathConfig from "../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../executions/document-executions/_module.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { buildWriteOperation, consolidateWriteOperations, objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
 import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
 import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document.mjs";
@@ -24,12 +24,6 @@ const { fields } = foundry.data;
  * @property {Teriock.Expirations.Type} type
  */
 export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocument) {
-  /**
-   * The expiry event used for expiration refreshes.
-   * @type {string}
-   */
-  static EXPIRY_REFRESH_EVENT = "expirationRefresh";
-
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXPIRATIONS.Base"];
 
@@ -68,6 +62,31 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
     });
   }
 
+  /**
+   * Attempt expirations for all the specified actors.
+   * @param {TeriockActor[]} actors
+   * @param {Teriock.Expirations.Type} type
+   * @param {object} context
+   * @param {boolean} delegate
+   */
+  static async massExpire(actors, type, context, delegate = false) {
+    const effects = actors.flatMap(actor =>
+      actor.applicables.filter(effect => effect.active && effect.system.attemptExpirations(type, context, delegate))
+    );
+    if (!effects.length) { return; }
+    const operations = await Promise.all(
+      effects.map(async (e) =>
+        buildWriteOperation({
+          action: CONFIG.ActiveEffect.expiryAction,
+          docData: { "duration.expired": true },
+          uuid: e.uuid,
+        })
+      ),
+    );
+    const consolidatedOperations = consolidateWriteOperations(operations.filter(Boolean));
+    await foundry.documents.modifyBatch(consolidatedOperations);
+  }
+
   /** @inheritDoc */
   get _formPaths() {
     return ["method", ...this._formPathsRoll, "hr"];
@@ -83,39 +102,30 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
   }
 
   /**
-   * Expiration-specific handling expiry event determination. This check is independent of whether the duration was also
-   * reached.
-   * @param {string} event
-   * @param {ExpirationEventContext} context
-   * @returns {boolean|null}
+   * Validate an expiration attempt.
+   * @param {Teriock.Expirations.Type} type
+   * @param {object} _context
+   * @returns {boolean}
    */
-  isExpiryEvent(event, context = {}) {
-    if (!this.isValidEvent(event, context)) { return false; }
-    const isRoll = this.isRollEvent(event, context);
-    if (isRoll) { this.use(); }
-    else { this.document.duration.remaining = 0; }
-    return !isRoll;
+  _validateExpirationAttempt(type, _context) {
+    return type === this.type;
   }
 
   /**
-   * Check if the event should invoke a roll.
-   * @param {string} event
-   * @param {ExpirationEventContext} context
-   * @returns {boolean}
+   * Attempt to expire.
+   * @param {Teriock.Expirations.Type} type
+   * @param {object} context
+   * @param {boolean} delegate
+   * @returns {boolean} Whether this should expire but didn't manage its own handling.
    */
-  isRollEvent(event, context = {}) {
-    return (this.method === "roll" && event === this.constructor.EXPIRY_REFRESH_EVENT
-      && this.isValidEvent(event, context));
-  }
-
-  /**
-   * Check if the event is valid.
-   * @param {string} event
-   * @param {ExpirationEventContext} context
-   * @returns {boolean}
-   */
-  isValidEvent(event, context = {}) {
-    return (context.type === this.type && event === this.constructor.EXPIRY_REFRESH_EVENT);
+  attempt(type, context, delegate) {
+    if (this._validateExpirationAttempt(type, context)) {
+      if (this.method === "roll") {
+        if (delegate) { this.actor.defaultUser.query("teriock.use", { uuid: this.uuid }); }
+        else { this.use(); }
+      } else { return true; }
+    }
+    return false;
   }
 
   /**
