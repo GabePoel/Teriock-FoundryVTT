@@ -2,7 +2,6 @@ import { EvaluationField, FormulaField, IdentifierField } from "../_module.mjs";
 import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
-import { localizeChoices } from "../../../helpers/localization.mjs";
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
@@ -29,9 +28,9 @@ function getTradecraftChoices() {
   for (const [k, v] of Object.entries(tradecraftConfig.tradecrafts)) {
     const fieldKey = v.field;
     if (!RAW_TRADECRAFT_CHOICES[fieldKey]) {
-      RAW_TRADECRAFT_CHOICES[fieldKey] = { choices: {}, label: _loc(tradecraftConfig.fields[fieldKey].label) };
+      RAW_TRADECRAFT_CHOICES[fieldKey] = { choices: {}, label: tradecraftConfig.fields[fieldKey].label };
     }
-    RAW_TRADECRAFT_CHOICES[fieldKey].choices[toKebabCase(k)] = _loc(v.label);
+    RAW_TRADECRAFT_CHOICES[fieldKey].choices[toKebabCase(k)] = v.label;
   }
   return formatDynamicSelectOptions(RAW_TRADECRAFT_CHOICES);
 }
@@ -80,7 +79,7 @@ export function qualifiedChangeField() {
     }),
     priority: new NumberField({ initial: 20, label: "TERIOCK.SCHEMA.QualifiedChange.priority.label" }),
     target: new StringField({
-      choices: localizeChoices(TERIOCK.config.change.parent.targets),
+      choices: objectMap(TERIOCK.config.change.parent.targets, (t) => t, { localize: true }),
       initial: "Actor",
       label: "TERIOCK.SCHEMA.QualifiedChange.target.label",
       nullable: false,
@@ -226,17 +225,16 @@ export function attributeField(options = { nullable: true, unp: false }) {
  */
 export function movementActionField(options = {}) {
   return new StringField({
-    choices: localizeChoices(
-      objectMap(
-        Object.fromEntries(
-          Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
-            if (typeof v.canSelect === "function") { return v.canSelect(); }
-            else if (typeof v.canSelect === "boolean") { return v.canSelect; }
-            return true;
-          }),
-        ),
-        t => t.label,
+    choices: objectMap(
+      Object.fromEntries(
+        Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
+          if (typeof v.canSelect === "function") { return v.canSelect(); }
+          else if (typeof v.canSelect === "boolean") { return v.canSelect; }
+          return true;
+        }),
       ),
+      t => t.label,
+      { localize: true },
     ),
     initial: "walk",
     nullable: false,

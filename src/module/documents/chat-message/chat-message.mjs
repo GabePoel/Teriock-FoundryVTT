@@ -91,7 +91,6 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
     const obj = super.toObject(source);
     obj.img = this.speakerImg;
     if (this.author?.name !== this.alias) { obj.writer = this.author?.name; }
-    if (!this.isContentVisible) { obj.system.panels.length = 0; }
     return obj;
   }
 }

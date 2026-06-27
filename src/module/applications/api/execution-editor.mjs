@@ -6,11 +6,23 @@ const { fields } = foundry.data;
 
 export default class TeriockExecutionEditor extends TeriockResolvableDialog {
   /**
+   * Change the message mode.
+   * @param {PointerEvent} _event
+   * @param {HTMLButtonElement} target
+   * @returns {Promise<void>}
+   * @this {TeriockExecutionEditor}
+   */
+  static async #onMessageMode(_event, target) {
+    this.execution._messageMode = target.dataset.mode;
+    await this.render();
+  }
+
+  /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
    */
   static DEFAULT_OPTIONS = {
-    actions: { changeDocument: this._onChangeDocument, confirm: this._onConfirm },
+    actions: { changeDocument: this._onChangeDocument, confirm: this._onConfirm, messageMode: this.#onMessageMode },
     classes: ["execution-editor"],
     position: { width: 550 },
     window: { contentClasses: ["wide-toggles"] },
@@ -19,6 +31,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     content: { template: "teriock/dialogs/execution-editor" },
+    messageModes: { template: "teriock/ui/message-modes" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
@@ -49,7 +62,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
     });
     if (selected === null) { return; }
     if (typeof entry.update === "function") { await entry.update(selected); }
-    await this.render(false);
+    await this.render();
   }
 
   /**
@@ -177,6 +190,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
         showLabel: multipleDocuments,
       };
     });
+    const mode = this.execution._messageMode;
     return Object.assign(await super._prepareContext(options), {
       buttons: this.execution._dialogButtons.map(button => ({
         ...button,
@@ -186,6 +200,9 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
       })),
       documents,
       mainFields,
+      messageModes: Object.entries(CONFIG.ChatMessage.modes).map(([action, { icon, label }]) => {
+        return { action, active: action === mode, icon, label };
+      }),
       smallFields,
     });
   }
