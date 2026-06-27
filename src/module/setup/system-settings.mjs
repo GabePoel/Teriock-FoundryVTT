@@ -2,6 +2,8 @@ import * as configs from "../applications/settings/_module.mjs";
 import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
+import tradecraftConfig from "../constants/config/tradecraft-config.mjs";
+import { tradecraftsField } from "../data/fields/helpers/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/user-settings-models.mjs";
 import { objectMap } from "../helpers/utils.mjs";
 
@@ -204,6 +206,13 @@ export const settings = {
       name: "TERIOCK.SETTINGS.playerMacrosFolderName.name",
       scope: "world",
       type: String,
+    },
+    secretTradecrafts: {
+      default: [],
+      hint: "TERIOCK.SETTINGS.secretTradecrafts.hint",
+      name: "TERIOCK.SETTINGS.secretTradecrafts.name",
+      scope: "world",
+      type: tradecraftsField(),
     },
     sortNewPlayerMacros: {
       default: true,

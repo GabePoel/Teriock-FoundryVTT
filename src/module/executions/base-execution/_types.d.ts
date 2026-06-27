@@ -8,6 +8,7 @@ declare global {
       competence?: Teriock.System.CompetenceLevel;
       event?: PointerEvent;
       formula?: Teriock.System.FormulaString;
+      messageMode?: Teriock.Messages.Mode;
       rollData?: object;
       rollOptions?: object;
       showDialog?: boolean;

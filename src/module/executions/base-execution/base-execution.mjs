@@ -33,6 +33,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
     this._formula = options.formula ?? "";
     this._rollData = options.rollData ?? {};
     this._rollOptions = options.rollOptions ?? {};
+    this._messageMode = options.messageMode ?? game.settings.get("core", "messageMode");
     this._determineCompetence(options);
     options.competence = this.competence.raw;
   }
@@ -54,6 +55,9 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
 
   /** @type {Teriock.System.FormulaString} */
   _formula;
+
+  /** @type {Teriock.Messages.Mode} */
+  _messageMode;
 
   /** @type {object} */
   _rollData;
@@ -317,7 +321,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {Promise<false|void>}
    */
   async _createChatMessage(options = {}) {
-    const { mode = game.settings.get("core", "messageMode") } = options;
+    const { mode = this._messageMode } = options;
     const chatData = this.chatData;
     TeriockChatMessage.applyMode(chatData, mode);
     this.message = await TeriockChatMessage.create(chatData);

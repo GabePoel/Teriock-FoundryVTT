@@ -133,7 +133,9 @@ export default class BaseMessageSystem
     }], { eventName: "contextmenu", fixed: true, jQuery: false });
 
     // Add roll context menus
-    for (const roll of this.document.rolls) { roll.bindContextMenus(element); }
+    if (this.document.isContentVisible) {
+      for (const roll of this.document.rolls) { roll.bindContextMenus(element); }
+    }
   }
 
   /**
