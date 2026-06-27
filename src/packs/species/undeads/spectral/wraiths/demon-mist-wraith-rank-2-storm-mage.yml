@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.0
+  systemVersion: 0.13.3
 effects:
   - _id: sMsWGrGzjxmEFclJ
     _key: '!items.effects!QYwUrN8XCUUYETmu.sMsWGrGzjxmEFclJ'
@@ -53,7 +53,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/storm-rotators.webp
     name: Storm Rotators
     system:
@@ -780,7 +780,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
     name: Dispel Magic
     system:
@@ -870,7 +870,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/resist-effects.webp
     name: Resist Effects
     system:
@@ -975,7 +975,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/displace.webp
     name: Displace
     system:
@@ -1033,7 +1033,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/spell-trigger.webp
     name: Spell Trigger
     system:
@@ -1094,7 +1094,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/crown-of-ice.webp
     name: Crown of Ice
     system:
@@ -1171,7 +1171,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/blizzard-aura.webp
     name: Blizzard Aura
     system:
@@ -1238,6 +1238,19 @@ effects:
         2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: action
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: start
+          type: combat
       featSaveAttribute: mov
       form: normal
       heightened: >-
@@ -1268,7 +1281,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/shock-touch.webp
     name: Shock Touch
     system:
@@ -1310,6 +1323,35 @@ effects:
         If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          crit:
+            - 0
+          event: action
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: end
+          type: combat
+        28294dbc80493c2c:
+          _id: 28294dbc80493c2c
+          crit:
+            - 1
+          event: action
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 1
+          timing: end
+          type: combat
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}

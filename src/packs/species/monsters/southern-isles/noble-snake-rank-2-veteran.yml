@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.0
+  systemVersion: 0.13.3
 effects:
   - _id: WPnSLdXPauH6iDwJ
     _key: '!items.effects!vlG9bGua2MYDseyC.WPnSLdXPauH6iDwJ'
@@ -51,7 +51,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/fortify-area.webp
     name: Fortify Area
     system:
@@ -145,7 +145,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/tumble.webp
     name: Tumble
     system:
@@ -189,6 +189,19 @@ effects:
         [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: r1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: turn
+          method: roll
+          relation: executor
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: start
+          type: combat
       form: normal
       identifier: tumble
       interaction: manifest
@@ -223,7 +236,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/unbreachability.webp
     name: Unbreachability
     system:
@@ -268,7 +281,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
     name: Bodyguard Backup
     system:
@@ -321,7 +334,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
     name: Bodyguard Taunt
     system:
@@ -343,6 +356,15 @@ effects:
         unit: second
       executionTime:
         base: r0
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: turn
+          method: automatic
+          relation: executor
+          skip: 0
+          timing: start
+          type: combat
       form: normal
       identifier: bodyguard-taunt
       interaction: manifest

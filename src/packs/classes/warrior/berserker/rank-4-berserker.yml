@@ -52,7 +52,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     flags:
       teriock:
         category: combat
@@ -109,6 +109,13 @@ effects:
       endCondition: <p>You die or 1 minute passes without combat.</p>
       executionTime:
         base: a1
+      expirations:
+        b50b3ee67eddc9f9:
+          _id: b50b3ee67eddc9f9
+          statuses:
+            present:
+              - dead
+          type: status
       form: normal
       identifier: berserk
       interaction: manifest
@@ -143,7 +150,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     flags:
       teriock:
         category: support
@@ -155,7 +162,7 @@ effects:
           _id: 8QOdQYnnSxyi3PA8
           activeQualifier: >-
             and(not(@status.dead), @status.hacked, not(@status.burned),
-            not(@status.frozen))
+            not(@status.dead), not(@status.frozen))
           consumeStatDice: true
           forHarm: false
           noStatDice: true
@@ -198,7 +205,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     flags:
       teriock:
         category: combat
@@ -344,7 +351,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -397,7 +404,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -450,6 +457,19 @@ effects:
         ends.</p>
       executionTime:
         base: a1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: turn
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: start
+          type: combat
       featSaveAttribute: int
       form: normal
       identifier: battle-cry-aura
@@ -479,7 +499,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/terrify.webp
     name: Terrify
     system:
@@ -539,7 +559,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/intimidating-presence.webp
     name: Intimidating Presence
     system:

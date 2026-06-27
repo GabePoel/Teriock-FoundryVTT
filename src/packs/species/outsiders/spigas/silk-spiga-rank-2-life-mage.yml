@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.0
+  systemVersion: 0.13.3
 effects:
   - _id: aO1rApSYgJxjhJbo
     _key: '!items.effects!BmNUjg8yCSO01zU8.aO1rApSYgJxjhJbo'
@@ -52,7 +52,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/life-rotators.webp
     name: Life Rotators
     system:
@@ -779,7 +779,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/blessing.webp
     name: Blessing
     system:
@@ -882,7 +882,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/ward.webp
     name: Ward
     system:
@@ -951,7 +951,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/crown-of-light.webp
     name: Crown of Light
     system:
@@ -1022,7 +1022,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/light-aura.webp
     name: Light Aura
     system:
@@ -1083,6 +1083,19 @@ effects:
         ends.</p>
       executionTime:
         base: a1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: turn
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: end
+          type: combat
       featSaveAttribute: mov
       form: normal
       heightened: >-
@@ -1114,7 +1127,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/light-touch.webp
     name: Light Touch
     system:
@@ -1149,6 +1162,35 @@ effects:
         ends.</p>
       executionTime:
         base: a1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          crit:
+            - 0
+          event: turn
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: end
+          type: combat
+        28294dbc80493c2c:
+          _id: 28294dbc80493c2c
+          crit:
+            - 1
+          event: turn
+          method: roll
+          relation: target
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 1
+          timing: end
+          type: combat
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
@@ -1181,7 +1223,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -1342,7 +1384,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.3
     img: systems/teriock/src/icons/abilities/healing-touch.webp
     name: Healing Touch
     system:
@@ -1379,6 +1421,21 @@ effects:
       endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
       executionTime:
         base: a1
+      expirations:
+        e69e6a8cea6409b3:
+          _id: e69e6a8cea6409b3
+          event: turn
+          method: automatic
+          relation: executor
+          skip: 0
+          timing: start
+          type: combat
+        371677e21bfa861a:
+          _id: 371677e21bfa861a
+          method: automatic
+          triggers:
+            - damage
+          type: trigger
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
