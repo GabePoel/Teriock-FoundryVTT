@@ -45,11 +45,7 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
    * @returns {string}
    */
   get speakerImg() {
-    const token = this.speakerToken;
-    if (token) { return token.img; }
-    const actor = this.speakerActor;
-    if (actor) { return actor.img; }
-    return this.author.avatar;
+    return this.speakerToken?.img ?? this.speakerActor?.img ?? this.author.avatar;
   }
 
   /**

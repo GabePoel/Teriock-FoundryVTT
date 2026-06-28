@@ -5,6 +5,7 @@ import { AutomationActivationFactory } from "./abstract/_module.mjs";
 /**
  * @property {Teriock.Keys.Impact} impact
  * @property {number} amount
+ * @extends {BaseActivation}
  */
 export default class TakeActivation extends AutomationActivationFactory(TakeAutomation) {
   /** @inheritDoc */
@@ -66,10 +67,13 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
         await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti: this.morganti });
       } else {
         await this.#entry.apply(actor, this.#amount);
-        ui.notifications.success("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied", {
-          format: { actor: actor.fullName, amount: this.#amount, impact: this.label },
-          localize: true,
+        const message = _loc("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied", {
+          actor: actor.fullName,
+          amount: this.#amount,
+          impact: this.label,
         });
+        if (this.morganti) { ui.notifications.morganti(message); }
+        else { ui.notifications.success(message); }
       }
     }
   }
@@ -79,10 +83,13 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
     if (!this.checkActors()) { return; }
     for (const actor of this.actors) {
       await this.#entry?.reverse(actor, this.#amount);
-      ui.notifications.success("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed", {
-        format: { actor: actor.fullName, amount: this.#amount, impact: this.label },
-        localize: true,
+      const message = _loc("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed", {
+        actor: actor.fullName,
+        amount: this.#amount,
+        impact: this.label,
       });
+      if (this.morganti) { ui.notifications.morganti(message); }
+      else { ui.notifications.success(message); }
     }
   }
 }
