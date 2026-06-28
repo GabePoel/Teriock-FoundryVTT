@@ -35,7 +35,12 @@ export default class HealAutomation extends StatAutomation {
   async _getActivations() {
     return [
       new HealActivation({
-        options: { consumeStatDice: this.consumeStatDice, forHarm: this.forHarm, noStatDice: this.noStatDice },
+        options: {
+          bonus: this.bonus,
+          consumeStatDice: this.consumeStatDice,
+          forHarm: this.forHarm,
+          noStatDice: this.noStatDice,
+        },
       }),
     ];
   }

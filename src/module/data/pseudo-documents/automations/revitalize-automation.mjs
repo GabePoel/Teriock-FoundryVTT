@@ -17,7 +17,11 @@ export default class RevitalizeAutomation extends StatAutomation {
 
   /** @inheritDoc */
   async _getActivations() {
-    return [new RevitalizeActivation({ options: { consumeStatDice: this.consumeStatDice, forHarm: this.forHarm } })];
+    return [
+      new RevitalizeActivation({
+        options: { bonus: this.bonus, consumeStatDice: this.consumeStatDice, forHarm: this.forHarm },
+      }),
+    ];
   }
 
   /** @inheritDoc */

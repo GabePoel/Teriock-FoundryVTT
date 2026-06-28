@@ -1,3 +1,4 @@
+import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
 import { CritMechanicMixin } from "../../abstract/mixins/_module.mjs";
 import * as automationMixins from "../mixins/_module.mjs";
 import BaseAutomation from "./base-automation.mjs";
@@ -7,6 +8,7 @@ const { fields } = foundry.data;
 /**
  * @param {boolean} consumeStatDice
  * @param {boolean} forHarm
+ * @param {Teriock.System.FormulaString} bonus
  * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  */
@@ -22,6 +24,7 @@ export default class StatAutomation extends automationMixins.TriggerAutomationMi
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      bonus: rollableFormulaField({ initial: "", placeholder: "0" }),
       consumeStatDice: new fields.BooleanField({ initial: true }),
       forHarm: new fields.BooleanField({ initial: false }),
     });
@@ -29,6 +32,6 @@ export default class StatAutomation extends automationMixins.TriggerAutomationMi
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["consumeStatDice", "forHarm", ...super._formPaths];
+    return ["bonus", "consumeStatDice", "forHarm", ...super._formPaths];
   }
 }

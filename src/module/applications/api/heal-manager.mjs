@@ -28,12 +28,15 @@ export default class TeriockHealManager extends TeriockStatManager {
   static async _onRollStatDie(event, target) {
     const statDie = this._getStatDie(target);
     if (this._forHarm) {
-      const rollActivation = new RollActivation({ formula: statDie.formula.replace("hp", "holy"), roll: "damage" });
+      const rollActivation = new RollActivation({
+        formula: this._getStatDieRollFormula(statDie.formula.replace("hp", "holy")),
+        roll: "damage",
+      });
       rollActivation.event = event;
       await rollActivation.primaryAction();
       if (this._consumeStatDice) { await statDie.toggle(true); }
     } else {
-      await statDie.use(this._consumeStatDice);
+      await statDie.use(this._consumeStatDice, { bonus: this._bonus });
     }
   }
 
