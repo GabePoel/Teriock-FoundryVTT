@@ -120,6 +120,14 @@ export default function BaseSystemMixin(Base) {
       }
 
       /**
+       * Tips that appear on document sheets and tooltips.
+       * @returns {Teriock.UI.Tip[]}
+       */
+      get displayTips() {
+        return [];
+      }
+
+      /**
        * A string containing the document's name and any other additional adjustments that go along with it.
        * @returns {string}
        */

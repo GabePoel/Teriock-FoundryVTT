@@ -159,10 +159,7 @@ export default function ChildSystemMixin(Base) {
         }];
       }
 
-      /**
-       * Tips that appear on document sheets and tooltips.
-       * @returns {Teriock.UI.Tip[]}
-       */
+      /** @inheritDoc */
       get displayTips() {
         return [
           ...[...this._displayMessagesSuppression].map(text => ({ level: "warning", text })),
