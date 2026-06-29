@@ -29,7 +29,7 @@ export default class FormulaField extends StringField {
   /**
    * Apply a "boost" change to this field.
    * @param {Teriock.System.FormulaString} value
-   * @param {string|string[]} delta
+   * @param {Teriock.System.FormulaString} delta
    * @param {DataModel} _model
    * @param {ActiveEffectChangeData} _change
    * @returns {Teriock.System.FormulaString}
@@ -50,6 +50,18 @@ export default class FormulaField extends StringField {
   /** @inheritDoc */
   _applyChangeMultiply(value, delta, _model, _change) {
     return formula.multiplyFormula(value ?? "0", delta);
+  }
+
+  /**
+   * Apply a "substitute" change to this field.
+   * @param {Teriock.Select.FormulaField} value
+   * @param {Teriock.System.FormulaString} delta
+   * @param {DataModel} _model
+   * @param {ActiveEffectChangeData} _change
+   * @returns {Teriock.System.FormulaString}
+   */
+  _applyChangeSubstitute(value, delta, _model, _change) {
+    return formula.substituteFormula(value ?? "", delta ?? "");
   }
 
   /** @inheritDoc */
@@ -135,6 +147,8 @@ export default class FormulaField extends StringField {
     const delta = change.value;
     if (change.type === "boost") {
       updated = this._applyChangeBoost(value, delta, model, change);
+    } else if (change.type === "substitute") {
+      updated = this._applyChangeSubstitute(value, delta, model, change);
     } else if (change.type === "typeAdd") {
       updated = this._applyChangeTypeAdd(value, delta, model, change);
     } else if (change.type === "typeRemove") {

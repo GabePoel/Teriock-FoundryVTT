@@ -4,7 +4,7 @@ import impactConfig from "./impact-config.mjs";
 const booleanTypes = ["upgrade", "downgrade", "override"];
 const simpleTypes = ["add", "subtract", ...booleanTypes];
 const numericalTypes = [...simpleTypes, "multiply"];
-const formulaTypes = [...numericalTypes, "boost"];
+const formulaTypes = [...numericalTypes, "boost", "substitute"];
 const harmTypes = [...formulaTypes, "typeAdd", "typeRemove", "typeSet"];
 
 /** @type {Record<string, Teriock.Changes.Type[]>} */

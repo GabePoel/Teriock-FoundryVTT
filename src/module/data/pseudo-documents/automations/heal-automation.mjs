@@ -36,10 +36,10 @@ export default class HealAutomation extends StatAutomation {
     return [
       new HealActivation({
         options: {
-          bonus: this.bonus,
           consumeStatDice: this.consumeStatDice,
           forHarm: this.forHarm,
           noStatDice: this.noStatDice,
+          substitution: this.substitution,
         },
       }),
     ];

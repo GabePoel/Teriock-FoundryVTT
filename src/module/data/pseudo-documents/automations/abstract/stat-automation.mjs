@@ -8,7 +8,7 @@ const { fields } = foundry.data;
 /**
  * @param {boolean} consumeStatDice
  * @param {boolean} forHarm
- * @param {Teriock.System.FormulaString} bonus
+ * @param {Teriock.System.FormulaString} substitution
  * @extends {BaseAutomation}
  * @mixes TriggerAutomation
  */
@@ -24,14 +24,14 @@ export default class StatAutomation extends automationMixins.TriggerAutomationMi
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      bonus: rollableFormulaField({ initial: "", placeholder: "0" }),
       consumeStatDice: new fields.BooleanField({ initial: true }),
       forHarm: new fields.BooleanField({ initial: false }),
+      substitution: rollableFormulaField({ initial: "", placeholder: "@base" }),
     });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["bonus", "consumeStatDice", "forHarm", ...super._formPaths];
+    return ["substitution", "consumeStatDice", "forHarm", ...super._formPaths];
   }
 }

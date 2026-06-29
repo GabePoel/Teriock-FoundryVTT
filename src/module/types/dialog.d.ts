@@ -1,9 +1,9 @@
 declare global {
   namespace Teriock.Dialog {
     export type StatDialogOptions = {
-      bonus?: Teriock.System.FormulaString;
       consumeStatDice?: boolean;
       forHarm?: boolean;
+      substitution?: Teriock.System.FormulaString;
       title?: string;
     };
 

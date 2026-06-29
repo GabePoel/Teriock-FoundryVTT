@@ -81,6 +81,21 @@ export function multiplyFormula(value, delta) {
 }
 
 /**
+ * Substitute a formula with a new one where the substitution term is the old
+ * formula. The default substitution term is "@base".
+ * @param {Teriock.System.FormulaString} value
+ * @param {Teriock.System.FormulaString} delta
+ * @param {Teriock.System.FormulaString} [substitutionTerm="@base"]
+ * @returns {Teriock.System.FormulaString}
+ */
+export function substituteFormula(value, delta, substitutionTerm = "@base") {
+  if (!formulaExists(value)) { return delta; }
+  const escapedTerm = substitutionTerm.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`${escapedTerm}(?![a-zA-Z0-9_])`, "g");
+  return delta.replace(regex, value);
+}
+
+/**
  * Upgrade a formula deterministically.
  * @param {Teriock.System.FormulaString} value - Original formula.
  * @param {Teriock.System.FormulaString} delta - Modification to formula.

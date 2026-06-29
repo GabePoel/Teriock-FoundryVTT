@@ -36,7 +36,7 @@ export default class TeriockHealManager extends TeriockStatManager {
       await rollActivation.primaryAction();
       if (this._consumeStatDice) { await statDie.toggle(true); }
     } else {
-      await statDie.use(this._consumeStatDice, { bonus: this._bonus });
+      await statDie.use(this._consumeStatDice, { substitution: this._substitution });
     }
   }
 

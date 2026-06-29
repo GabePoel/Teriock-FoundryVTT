@@ -27,24 +27,26 @@
     </fieldset>
   {{/if}}
   {{#if (not noDice)}}
-    {{formGroup
-      bonusField
-      value=bonus
-      rootId=appId
-      name="bonus"
-    }}
-    {{formGroup
-      forHarmField
-      value=forHarm
-      rootId=appId
-      name="for-harm"
-    }}
-    {{formGroup
-      consumeStatDiceField
-      value=consumeStatDice
-      rootId=appId
-      name="consume-dice"
-    }}
+    <div class="standard-form teriock-form-container">
+      {{formGroup
+        substitutionField
+        value=substitution
+        rootId=appId
+        name="substitution"
+      }}
+      {{formGroup
+        forHarmField
+        value=forHarm
+        rootId=appId
+        name="for-harm"
+      }}
+      {{formGroup
+        consumeStatDiceField
+        value=consumeStatDice
+        rootId=appId
+        name="consume-dice"
+      }}
+    </div>
   {{/if}}
   <footer class="form-footer" style="margin-top:auto;">
     <button type="submit" data-action="ok" autofocus>

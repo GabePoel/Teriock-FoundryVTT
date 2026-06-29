@@ -1,5 +1,5 @@
 import { PiercingModel } from "../../../../data/models/_module.mjs";
-import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
+import { addFormula, formulaExists, substituteFormula } from "../../../../helpers/formula.mjs";
 import * as executionMixins from "../../../mixins/_module.mjs";
 import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
 
@@ -245,9 +245,8 @@ export default class AbilityExecutionConstructor
    * @returns {string}
    */
   _heightenString(s) {
-    const regex = /@h(?![a-zA-Z])/g;
-    if (regex.test(s)) { return s.replace(regex, (this.heightened || 0).toString()); }
-    return s;
+    const replacement = (this.heightened || 0).toString();
+    return substituteFormula(replacement, s, "@h");
   }
 
   /**

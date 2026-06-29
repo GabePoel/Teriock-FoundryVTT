@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
 import { getRollIcon, makeIconClass } from "../../../helpers/utils.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
@@ -103,10 +103,10 @@ export default class StatDieModel extends EmbeddedDataModel {
    * Use this die.
    * @param {boolean} [spend]
    * @param {object} [options]
-   * @param {Teriock.System.FormulaString} [options.bonus]
+   * @param {Teriock.System.FormulaString} [options.substitution]
    * @returns {Promise<void>}
    */
-  async use(spend = true, { bonus } = {}) {
+  async use(spend = true, { substitution } = {}) {
     let proceed = !this.spent;
     if (this.spent) {
       if (!game.settings.get("teriock", "confirmStatDiceRerolls")) { proceed = true; }
@@ -124,7 +124,7 @@ export default class StatDieModel extends EmbeddedDataModel {
     }
     if (proceed) {
       let formula = this.formula;
-      if (formulaExists(bonus)) { formula = addFormula(formula, bonus); }
+      if (formulaExists(substitution)) { formula = substituteFormula(formula, substitution); }
       const roll = new BaseRoll(formula, this.parent.getRollData(), {
         flavor: _loc("TERIOCK.ROLLS.Base.name", { value: this.parent.dieName }),
       });
