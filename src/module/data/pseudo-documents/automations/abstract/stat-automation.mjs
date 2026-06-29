@@ -32,6 +32,6 @@ export default class StatAutomation extends automationMixins.TriggerAutomationMi
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["substitution", "consumeStatDice", "forHarm", ...super._formPaths];
+    return ["consumeStatDice", "forHarm", "substitution", ...super._formPaths];
   }
 }
