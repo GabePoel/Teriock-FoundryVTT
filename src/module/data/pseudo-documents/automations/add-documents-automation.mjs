@@ -1,4 +1,5 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { substituteFormula } from "../../../helpers/formula.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/helpers/builders.mjs";
 import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
@@ -56,6 +57,21 @@ export default class AddDocumentsAutomation
     });
   }
 
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    // Replace "{name}" with "@base" in the document name.
+    if (typeof source.data === "string" && source.data.includes("{name}")) {
+      try {
+        const data = JSON.parse(source.data);
+        if (typeof data?.name === "string") {
+          data.name = data.name.replaceAll("{name}", "@base");
+          source.data = JSON.stringify(data);
+        }
+      } catch { /* Leave malformed JSON untouched. */ }
+    }
+    return super.migrateData(source, options, state);
+  }
+
   /**
    * Determine the label for an activation from a construction.
    * @param {DocumentConstruction} construction
@@ -74,7 +90,6 @@ export default class AddDocumentsAutomation
    */
   #updateConstructionName(construction) {
     let uuidName;
-    let dataName;
     let name;
     if (construction.uuid) {
       const index = fromUuidSync(construction.uuid);
@@ -82,10 +97,8 @@ export default class AddDocumentsAutomation
       name = uuidName;
     }
     if (foundry.utils.hasProperty(construction, "data.name")) {
-      dataName = construction.data.name;
-      name = dataName;
+      name = substituteFormula(uuidName ?? "", construction.data.name);
     }
-    if (dataName?.includes("{name}")) { name = dataName.replace("{name}", uuidName || ""); }
     if (name) { foundry.utils.setProperty(construction, "data.name", name); }
   }
 

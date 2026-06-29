@@ -81,8 +81,7 @@ export function multiplyFormula(value, delta) {
 }
 
 /**
- * Substitute a formula with a new one where the substitution term is the old
- * formula. The default substitution term is "@base".
+ * Substitute a formula with a new one where the substitution term is the old formula.
  * @param {Teriock.System.FormulaString} value
  * @param {Teriock.System.FormulaString} delta
  * @param {Teriock.System.FormulaString} [substitutionTerm="@base"]

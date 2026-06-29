@@ -26,7 +26,7 @@ export default class DurationAutomation extends CritMechanicMixin(BaseAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      changeType: changeTypeField(),
+      changeType: changeTypeField(TERIOCK.config.change.child.typeSubsets.simple),
       duration: new EvaluationField({ model: TimeUnitModel }),
     });
   }

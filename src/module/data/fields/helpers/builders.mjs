@@ -54,12 +54,16 @@ function getClassChoices() {
 
 /**
  * A change type field.
+ * @param {Teriock.Changes.Type[]} [types] - Restricts the choices to this subset of change types.
  * @returns {StringField}
  */
-export function changeTypeField() {
+export function changeTypeField(types = null) {
+  const allowed = types
+    ? Object.fromEntries(Object.entries(ActiveEffect.CHANGE_TYPES).filter(([k]) => types.includes(k)))
+    : ActiveEffect.CHANGE_TYPES;
   return new StringField({
-    choices: objectMap(ActiveEffect.CHANGE_TYPES, t => t.label, { localize: true }),
-    initial: "add",
+    choices: objectMap(allowed, t => t.label, { localize: true }),
+    initial: types && !types.includes("add") ? types[0] : "add",
     label: "TERIOCK.SCHEMA.QualifiedChange.type.label",
     required: true,
   });
