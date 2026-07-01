@@ -18,11 +18,12 @@ export default Base => {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          interestRate: new fields.NumberField({ initial: 1, integer: false, label: "Interest Rate" }),
+          interestRate: new fields.NumberField({ initial: 1, integer: false }),
           money: new fields.SchemaField({
-            ...objectMap(currencyConfig, e => currencyField(e.label)),
-            debt: currencyField("Debt", false),
-            total: currencyField("Total Money", false),
+            ...objectMap(currencyConfig, e => currencyField({ label: e.label })),
+            debt: currencyField({ integer: false, placeholder: true }),
+            physical: currencyField({ integer: false, placeholder: true }),
+            total: currencyField({ integer: false, placeholder: true }),
           }),
         });
       }
@@ -34,6 +35,7 @@ export default Base => {
           rollData[`money.${k}`] = this.money[k];
         }
         rollData["money.debt"] = this.money.debt;
+        rollData["money.physical"] = this.money.physical;
         rollData.money = this.money.total;
         return rollData;
       }
@@ -41,17 +43,16 @@ export default Base => {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        const totalValue = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
+        this.money.physical = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
           this.money[key] = Math.max(0, this.money[key] || 0);
           const value = this.money[key] * TERIOCK.config.currency[key].conversion;
           return sum + value;
-        }, 0) - this.money.debt;
-        const totalWeight = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
+        }, 0).toNearest(0.01);
+        this.money.total = (this.money.physical - this.money.debt).toNearest(0.01);
+        this.weight.money = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
           const weight = (this.money[key] || 0) * TERIOCK.config.currency[key].weight;
           return sum + weight;
-        }, 0);
-        this.money.total = totalValue.toNearest(0.01);
-        this.weight.money = totalWeight.toNearest(0.01);
+        }, 0).toNearest(0.01);
       }
 
       /**
@@ -68,7 +69,7 @@ export default Base => {
         // Simple check to see if it's more money than the character has
         if (this.money.total < amount) {
           await this.parent.update({
-            "system.money": { ...objectMap(TERIOCK.config.currency, () => 0), debt: amount - this.money.total },
+            "system.money": { ...objectMap(TERIOCK.config.currency, () => 0), debt: amount - this.money.physical },
           });
           return;
         }
@@ -132,9 +133,8 @@ export default Base => {
 
 /**
  * Creates a currency field definition for tracking different types of money.
- * @param {string} label - The display label for this currency type
- * @param {boolean} [integer] - If value must be an integer.
+ * @param {NumberFieldOptions} [options]
  */
-function currencyField(label, integer = true) {
-  return new fields.NumberField({ initial: 0, integer, label, min: 0, nullable: false, placeholder: "0" });
+function currencyField(options = {}) {
+  return new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false, placeholder: "0", ...options });
 }

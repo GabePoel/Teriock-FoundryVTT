@@ -59,6 +59,7 @@ const actorContext = {
   "db.stones.white": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.white.label",
 
   "money.debt": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.label",
+  "money.physical": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.physical",
   "money.total": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.total.label",
 };
 
