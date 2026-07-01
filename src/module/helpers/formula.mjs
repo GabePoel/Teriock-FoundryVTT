@@ -75,9 +75,11 @@ export function downgradeIndeterministicFormula(value, delta) {
  */
 export function multiplyFormula(value, delta) {
   if (Number(delta) === 1) { return value; }
-  const terms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
-  if (terms.length > 1) { return `(${value}) * ${delta}`; }
-  return `${value} * ${delta}`;
+  const valueTerms = new teriock.dice.rolls.BaseRoll(value, {}).terms;
+  const deltaTerms = new teriock.dice.rolls.BaseRoll(delta, {}).terms;
+  const valueString = valueTerms.length > 1 ? `(${value})` : value;
+  const deltaString = deltaTerms.length > 1 ? `(${delta})` : delta;
+  return `${valueString} * ${deltaString}`;
 }
 
 /**
