@@ -70,7 +70,7 @@ export default class AbilityExecutionConstructor
       noLp: options.noLp ?? !this.source.system.settings.getSetting("promptCostLp"),
       noMp: options.noMp ?? !this.source.system.settings.getSetting("promptCostMp"),
     });
-    this.costs = { gp: 0, hp: 0, mp: 0 };
+    this.costs = { gp: 0, hp: 0, lp: 0, mp: 0 };
   }
 
   /**
