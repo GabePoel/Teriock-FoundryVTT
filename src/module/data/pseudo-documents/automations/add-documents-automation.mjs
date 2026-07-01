@@ -1,5 +1,5 @@
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { substituteFormula } from "../../../helpers/formula.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/helpers/builders.mjs";
 import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
@@ -97,7 +97,7 @@ export default class AddDocumentsAutomation
       name = uuidName;
     }
     if (foundry.utils.hasProperty(construction, "data.name")) {
-      name = substituteFormula(uuidName ?? "", construction.data.name);
+      name = BaseRoll.replaceFormulaData(construction.data.name, { base: uuidName });
     }
     if (name) { foundry.utils.setProperty(construction, "data.name", name); }
   }

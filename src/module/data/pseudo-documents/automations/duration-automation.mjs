@@ -1,13 +1,11 @@
-import { EvaluationField } from "../../fields/_module.mjs";
-import { changeTypeField } from "../../fields/helpers/builders.mjs";
+import { EvaluationField, FormulaField } from "../../fields/_module.mjs";
 import { TimeUnitModel } from "../../models/unit-models/_module.mjs";
-import { migrateChangeType } from "../../shared/migrations/change-migrations.mjs";
 import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 /**
  * @property {TimeUnitModel} duration
- * @property {string} changeType
+ * @property {Teriock.System.FormulaString} substitution
  */
 export default class DurationAutomation extends CritMechanicMixin(BaseAutomation) {
   /** @inheritDoc */
@@ -26,19 +24,13 @@ export default class DurationAutomation extends CritMechanicMixin(BaseAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      changeType: changeTypeField(TERIOCK.config.change.child.typeSubsets.simple),
       duration: new EvaluationField({ model: TimeUnitModel }),
+      substitution: new FormulaField({ initial: "@base + @new" }),
     });
   }
 
   /** @inheritDoc */
-  static migrateData(source, options, state) {
-    migrateChangeType(source, "changeType");
-    return super.migrateData(source, options, state);
-  }
-
-  /** @inheritDoc */
   get _formPaths() {
-    return ["duration.unit", "duration.raw", "changeType", ...super._formPaths];
+    return ["duration.unit", "duration.raw", "substitution", ...super._formPaths];
   }
 }

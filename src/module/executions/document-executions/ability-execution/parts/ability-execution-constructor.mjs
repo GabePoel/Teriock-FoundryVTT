@@ -1,5 +1,6 @@
 import { PiercingModel } from "../../../../data/models/_module.mjs";
-import { addFormula, formulaExists, substituteFormula } from "../../../../helpers/formula.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import * as executionMixins from "../../../mixins/_module.mjs";
 import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
 
@@ -241,12 +242,11 @@ export default class AbilityExecutionConstructor
 
   /**
    * Replace `@h` with the heightened amount in strings.
-   * @param {string} s
+   * @param {string} formula
    * @returns {string}
    */
-  _heightenString(s) {
-    const replacement = (this.heightened || 0).toString();
-    return substituteFormula(replacement, s, "@h");
+  _heightenString(formula) {
+    return BaseRoll.replaceFormulaData(formula, { h: this.heightened });
   }
 
   /**

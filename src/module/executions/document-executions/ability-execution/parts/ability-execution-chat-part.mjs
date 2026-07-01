@@ -1,5 +1,4 @@
 import costConfig from "../../../../constants/config/cost-config.mjs";
-import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
@@ -189,18 +188,11 @@ export default function AbilityExecutionChatPart(Base) {
       async #generateEffectDuration(crit = false) {
         const durationAutomations = this.getAutomations("duration", { active: true, crit });
         let durationFormula = this.source.system.duration.formula;
-        const formulaField = new FormulaField({ deterministic: false });
         durationAutomations.forEach(a => {
-          const formula = a.duration.formula;
-          const change = {
-            effect: this.source,
-            key: "duration",
-            phase: "initial",
-            priority: 5,
-            type: a.changeType,
-            value: formula,
-          };
-          durationFormula = formulaField.applyChange(durationFormula, null, change, { replacementData: this.rollData });
+          durationFormula = BaseRoll.replaceFormulaData(a.substitution, {
+            base: durationFormula,
+            new: a.duration.formula,
+          });
         });
         let durationValue = await BaseRoll.getValue(durationFormula, this.rollData);
         if (durationValue > Number("9".repeat(30))) { durationValue = undefined; }
