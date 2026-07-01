@@ -72,9 +72,13 @@ function cleanCommon(doc) {
  */
 function cleanActiveEffect(doc) {
   if (doc.tint === "#ffffff") { delete doc.tint; }
-  if (doc.type === "ability" || doc.type === "property") { doc.transfer = true; }
-  delete doc.duration;
-  delete doc.start;
+  if (["ability", "attunement", "fluency", "property", "resource"].includes(doc.type)) {
+    if (["ability", "property"].includes(doc.type)) {
+      doc.transfer = true;
+    }
+    delete doc.duration;
+    delete doc.start;
+  }
   if (!doc.disabled) { delete doc.disabled; }
   if (doc.showIcon) { delete doc.showIcon; }
   if (doc.system.revealed) { delete doc.system.revealed; }
@@ -410,6 +414,12 @@ function cleanAutomation(automation) {
     for (const c of automation.changes ?? []) {
       delete c.qualifier;
       delete c.time;
+    }
+  }
+  if (automation.type === "duration") {
+    delete automation.changeType;
+    if (automation.substitution === "@base + @new") {
+      delete automation.substitution;
     }
   }
   if (automation.type === "expiration") {
