@@ -1,1 +1,1 @@
-import "rolls/_types.js";
+import "./rolls/_types";

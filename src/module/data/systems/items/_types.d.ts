@@ -1,3 +1,4 @@
+import "./archetype-system/_types";
 import "./base-item-system/_types";
 import "./body-system/_types";
 import "./equipment-system/_types";

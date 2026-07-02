@@ -1,6 +1,7 @@
 import "./active-effect/_types";
 import "./actor/_types";
 import "./card/_types";
+import "./cards/_types";
 import "./chat-message/_types";
 import "./combat/_types";
 import "./combatant/_types";
@@ -10,6 +11,7 @@ import "./journal-entry-category/_types";
 import "./journal-entry-page/_types";
 import "./journal-entry/_types";
 import "./macro/_types";
+import "./region-document/_types";
 import "./roll-table/_types";
 import "./scene/_types";
 import "./table-result/_types";

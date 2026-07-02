@@ -1,6 +1,8 @@
+import "./applications/_types";
 import "./data/_types";
 import "./dice/_types";
 import "./documents/_types";
+import "./executions/_types";
 import "./helpers/_types";
 import { ForcedDeletion, ForcedReplacement } from "@common/data/operators.mjs";
 

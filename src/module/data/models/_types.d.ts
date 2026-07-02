@@ -5,6 +5,7 @@ import "./settings-models/_types";
 import "./stat-die-model/_types";
 import "./stat-pool-models/_types";
 import "./storage-model/_types";
+import "./unit-models/_types";
 
 declare global {
   namespace Teriock.Models {
