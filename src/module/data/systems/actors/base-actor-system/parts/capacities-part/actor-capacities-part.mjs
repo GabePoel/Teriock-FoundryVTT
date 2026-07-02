@@ -1,7 +1,7 @@
 import equipmentConfig from "../../../../../../constants/config/equipment-config.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
-import { initialNumber, initialString } from "../../../../../fields/helpers/initializers.mjs";
-import { migrateEvaluationToNumber } from "../../../../../shared/migrations/_module.mjs";
+import { initialNumber, initialString } from "../../../../../fields/tools/initializers.mjs";
+import { migrateEvaluationToNumber } from "../../../../../migrations/_module.mjs";
 
 const { fields } = foundry.data;
 const { utils } = foundry;

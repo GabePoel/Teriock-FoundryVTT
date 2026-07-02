@@ -1,4 +1,4 @@
-import { SpeciesTransformationConfig } from "../../../../../fields/helpers/_types.js";
+import { SpeciesTransformationConfig } from "../../../../../fields/tools/_types.js";
 
 declare global {
   namespace Teriock.Models {

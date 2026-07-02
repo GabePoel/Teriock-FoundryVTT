@@ -1,5 +1,5 @@
 import { TeriockActor } from "../_module.mjs";
-import * as dataMixins from "../../data/shared/mixins/_module.mjs";
+import * as dataMixins from "../../data/mixins/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 import { ensureChildren, ensureNoChildren, resolveDocuments } from "../../helpers/resolve.mjs";

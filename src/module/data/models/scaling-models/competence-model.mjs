@@ -1,13 +1,12 @@
-import { competenceField } from "../fields/helpers/builders.mjs";
-import EmbeddedDataModel from "./embedded-data-model.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
+import { competenceField } from "../../fields/tools/builders.mjs";
 
 /**
  * Model for common implementation of piercing settings.
- * @extends {Teriock.Models.ScaleModelData}
  * @property {Teriock.System.CompetenceLevel} raw
- * @property {CommonSystem|null} parent
+ * @implements {Teriock.Functionality.ScalingModel}
  */
-export default class CompetenceModel extends EmbeddedDataModel {
+export default class CompetenceModel extends BaseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return { raw: competenceField() };
@@ -42,20 +41,14 @@ export default class CompetenceModel extends EmbeddedDataModel {
     return Boolean(this.raw >= 2 || this.document?.elder?.system?.competence?.fluent);
   }
 
-  /**
-   * Icon that represents this.
-   * @returns {string}
-   */
+  /** @inheritDoc */
   get icon() {
     if (this.fluent) { return TERIOCK.display.icons.competence.fluent; }
     if (this.proficient) { return TERIOCK.display.icons.competence.proficient; }
     return TERIOCK.display.icons.competence.none;
   }
 
-  /**
-   * A label that describes this.
-   * @returns {string}
-   */
+  /** @inheritDoc */
   get label() {
     return TERIOCK.config.competence.levels[this.value].label;
   }

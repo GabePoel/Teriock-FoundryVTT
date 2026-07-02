@@ -1,5 +1,5 @@
 import { TypedIdentifierField } from "../../fields/_module.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 export default class SuppressAutomation extends CritMechanicMixin(BaseAutomation) {

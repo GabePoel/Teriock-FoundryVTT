@@ -1,8 +1,8 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
-import { competenceField } from "../../fields/helpers/builders.mjs";
-import * as dataMixins from "../../shared/mixins/_module.mjs";
+import { competenceField } from "../../fields/tools/builders.mjs";
+import * as dataMixins from "../../mixins/_module.mjs";
 import TypedPseudoDocument from "./typed-pseudo-document.mjs";
 
 const { fields } = foundry.data;

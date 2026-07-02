@@ -1,5 +1,5 @@
 import { HTMLIdentifierInputElement } from "../../applications/elements/_module.mjs";
-import { validateIdentifier } from "./helpers/validators.mjs";
+import { validateIdentifier } from "./tools/validators.mjs";
 
 const { StringField } = foundry.data.fields;
 const { createTextInput } = foundry.applications.fields;

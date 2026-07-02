@@ -3,7 +3,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
-import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;

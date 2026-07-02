@@ -1,5 +1,3 @@
-import "./parts/_types";
-
 declare global {
   namespace Teriock.Models {
     export type SpeciesSystemData = SpeciesTransformationPartData & {
@@ -31,3 +29,5 @@ declare global {
     };
   }
 }
+
+export {};

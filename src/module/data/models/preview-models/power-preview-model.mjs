@@ -1,9 +1,11 @@
 import { objectMap } from "../../../helpers/utils.mjs";
-import { nullString } from "../../fields/helpers/builders.mjs";
+import { nullString } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
+ * @inheritDoc
  * @property {Teriock.Models.PowerFilters} filters
+ * @see {PowerSystem}
  */
 export default class PowerPreviewModel extends BasePreviewModel {
   /** @inheritDoc */

@@ -2,7 +2,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { fromIdentifierLocal, fromQualifier } from "../../../../helpers/utils.mjs";
 import { FormulaField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
-import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
+import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import SelectExternalDocumentsAutomationMixin from "./select-external-documents-automation-mixin.mjs";
 
 const { fields } = foundry.data;

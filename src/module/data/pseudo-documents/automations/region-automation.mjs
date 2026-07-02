@@ -2,8 +2,8 @@ import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import { RegionActivation } from "../activations/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 

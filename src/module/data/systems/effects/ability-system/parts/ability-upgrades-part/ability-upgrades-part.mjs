@@ -1,5 +1,5 @@
-import { attributeField, competenceField } from "../../../../../fields/helpers/builders.mjs";
-import { initialText } from "../../../../../fields/helpers/initializers.mjs";
+import { attributeField, competenceField } from "../../../../../fields/tools/builders.mjs";
+import { initialText } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 

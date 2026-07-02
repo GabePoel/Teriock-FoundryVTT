@@ -441,7 +441,7 @@ export default class BaseRoll extends Roll {
     const panels = await this.getPanels();
     messageData = foundry.utils.mergeObject({
       system: {
-        activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(activations),
+        activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(activations),
         panels,
       },
     }, messageData);

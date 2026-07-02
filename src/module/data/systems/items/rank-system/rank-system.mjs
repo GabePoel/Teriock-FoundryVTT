@@ -3,9 +3,9 @@ import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
-import { archetypeField, classField } from "../../../fields/helpers/builders.mjs";
+import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
+import { migrateKey, migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
-import { migrateKey, migrateValueTransform } from "../../../shared/migrations/source-migrations.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 

@@ -2,7 +2,7 @@ import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
-import { migrateKey, migrateUuid } from "../../../shared/migrations/source-migrations.mjs";
+import { migrateKey, migrateUuid } from "../../../migrations/source-migrations.mjs";
 import SelectAutomationMixin from "./select-automation-mixin.mjs";
 
 const { fields } = foundry.data;

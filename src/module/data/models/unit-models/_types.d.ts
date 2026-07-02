@@ -10,10 +10,6 @@ declare global {
       system?: string;
     };
   }
-
-  namespace Teriock.Models {
-    export type BaseUnitModelData = { unit: string };
-  }
 }
 
 export {};

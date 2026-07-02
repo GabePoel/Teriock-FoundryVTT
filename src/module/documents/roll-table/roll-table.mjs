@@ -110,7 +110,7 @@ export default class TeriockRollTable
       speaker: TeriockChatMessage.getSpeaker(),
       system: {
         _src: this.uuid,
-        activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(
+        activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(
           (await Promise.all(results.map(r => r.getActivations()))).flat(),
         ),
         panels: await Promise.all(results.map(r => r.getPanelParts())),

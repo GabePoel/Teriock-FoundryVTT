@@ -2,10 +2,10 @@ import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
-import { builders } from "../../../fields/helpers/_module.mjs";
+import { builders } from "../../../fields/tools/_module.mjs";
+import * as dataMixins from "../../../mixins/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
-import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
 

@@ -3,14 +3,14 @@ import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { fromIdentifier, getName, objectMap } from "../../../helpers/utils.mjs";
-import EmbeddedDataModel from "../embedded-data-model.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @extends {Teriock.Models.IdentificationModelData}
  */
-export default class IdentificationModel extends EmbeddedDataModel {
+export default class IdentificationModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Identification"];
 

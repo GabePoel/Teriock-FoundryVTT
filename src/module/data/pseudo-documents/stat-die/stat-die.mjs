@@ -4,7 +4,7 @@ import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
 import { getRollIcon, makeIconClass } from "../../../helpers/icon.mjs";
-import { PseudoDocument } from "../abstract/_module.mjs";
+import { BasePseudoDocument } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -13,7 +13,7 @@ const { fields } = foundry.data;
  * They are never saved to the database.
  * @extends {Teriock.StatDie.StatDieModelData}
  */
-export default class StatDie extends PseudoDocument {
+export default class StatDie extends BasePseudoDocument {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {

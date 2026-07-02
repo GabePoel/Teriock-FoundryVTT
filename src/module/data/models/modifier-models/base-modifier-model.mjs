@@ -1,11 +1,12 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { initialString } from "../../fields/helpers/initializers.mjs";
-import * as dataMixins from "../../shared/mixins/_module.mjs";
-import EvaluationModel from "../evaluation-model.mjs";
+import { EvaluationModel } from "../../abstract/_module.mjs";
+import { initialString } from "../../fields/tools/initializers.mjs";
+import * as dataMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * A data model for some rollable modifier that has a score associated with it.
  * @extends {EvaluationModel}
  * @extends {Teriock.Models.BaseModifierModelData}
  * @mixes ThresholdData

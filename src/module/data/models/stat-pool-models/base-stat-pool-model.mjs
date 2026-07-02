@@ -4,9 +4,9 @@ import { formulaExists } from "../../../helpers/formula.mjs";
 import { getRollIcon } from "../../../helpers/icon.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import { StatDie } from "../../pseudo-documents/_module.mjs";
-import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 const { Collection } = foundry.utils;
@@ -17,7 +17,7 @@ const { Collection } = foundry.utils;
  * @property {Set<number>} spent
  * @implements {Teriock.Functionality.StatProvider}
  */
-export default class BaseStatPoolModel extends EmbeddedDataModel {
+export default class BaseStatPoolModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseStatPool"];
 

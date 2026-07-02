@@ -1,6 +1,6 @@
 import { config } from "../../../../../../constants/_module.mjs";
 import { toCamelCase } from "../../../../../../helpers/string.mjs";
-import { initialBoolean, initialNumber, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
+import { initialBoolean, initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 

@@ -1,4 +1,4 @@
-import { initialBar, initialNumber } from "../../../../../fields/helpers/initializers.mjs";
+import { initialBar, initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 

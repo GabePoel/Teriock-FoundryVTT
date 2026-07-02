@@ -1,9 +1,11 @@
 import { FeatExecution } from "../../../executions/activity-executions/_module.mjs";
-import { initialNumber } from "../../fields/helpers/initializers.mjs";
+import { initialNumber } from "../../fields/tools/initializers.mjs";
 import BaseModifierModel from "./base-modifier-model.mjs";
 
 /**
+ * A {@link BaseModifierModel} for attribute modifiers.
  * @property {number} passive
+ * @see {FeatExecution}
  */
 export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */

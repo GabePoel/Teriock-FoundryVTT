@@ -1,6 +1,6 @@
 import effectConfig from "../../../../../../constants/config/effect-config.mjs";
 import { addFormula } from "../../../../../../helpers/formula.mjs";
-import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
+import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 /**
  * Actor data model that handles cover.

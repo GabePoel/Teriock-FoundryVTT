@@ -1,6 +1,6 @@
 import { multiplyFormula } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import EvaluationModel from "../evaluation-model.mjs";
+import { EvaluationModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 const { DialogV2 } = foundry.applications.api;
@@ -37,7 +37,7 @@ class UnitDialog extends DialogV2 {
 }
 
 /**
- * @extends {Teriock.Models.BaseUnitModelData}
+ * @property {string} unit
  */
 export default class BaseUnitModel extends EvaluationModel {
   /** @inheritDoc */

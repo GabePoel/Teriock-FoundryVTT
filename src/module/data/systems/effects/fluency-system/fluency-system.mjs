@@ -4,11 +4,11 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
-import { fieldField, tradecraftField } from "../../../fields/helpers/builders.mjs";
-import { initialText } from "../../../fields/helpers/initializers.mjs";
+import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
+import { initialText } from "../../../fields/tools/initializers.mjs";
+import * as dataMixins from "../../../mixins/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import { CommonMacroAutomation } from "../../../pseudo-documents/automations/_module.mjs";
-import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 

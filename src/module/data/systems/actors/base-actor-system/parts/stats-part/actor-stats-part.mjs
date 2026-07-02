@@ -1,6 +1,6 @@
 import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
 import { docSort, rankSort } from "../../../../../../helpers/sort.mjs";
-import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
+import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 

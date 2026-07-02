@@ -1,9 +1,11 @@
 import effectConfig from "../../../constants/config/effect-config.mjs";
-import { nullString } from "../../fields/helpers/builders.mjs";
+import { nullString } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
+ * @inheritDoc
  * @property {Teriock.Models.MetaphysicsFilters} filters
+ * @see {MetaphysicsSystemMixin}
  */
 export default class MetaphysicsPreviewModel extends BasePreviewModel {
   /** @inheritDoc */

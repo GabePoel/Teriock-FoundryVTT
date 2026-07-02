@@ -1,6 +1,6 @@
 import { config } from "../../../../../../constants/_module.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
+import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 

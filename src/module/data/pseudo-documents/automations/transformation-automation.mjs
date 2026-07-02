@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { automationTransformationFields } from "../../fields/helpers/transformation-fields.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { automationTransformationFields } from "../../fields/tools/transformation-fields.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 

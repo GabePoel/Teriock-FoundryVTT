@@ -1,6 +1,6 @@
 import settingsConfig from "../../constants/config/settings-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
-import { userSettingsModels } from "../../data/models/settings-models/user-settings-models.mjs";
+import { userSettingsModels } from "../../data/models/settings-models/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { TeriockApplication } from "../api/_module.mjs";
 

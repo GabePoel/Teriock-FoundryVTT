@@ -1,4 +1,4 @@
-import { createElement } from "../../../helpers/html.mjs";
+import { createElement } from "../../helpers/html.mjs";
 
 /**
  * Mixin to ensure data models have access to the data they need.

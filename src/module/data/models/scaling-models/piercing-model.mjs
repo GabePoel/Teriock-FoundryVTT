@@ -1,15 +1,15 @@
-import piercingConfig from "../../constants/config/piercing-config.mjs";
-import { localizeChoices } from "../../helpers/localization.mjs";
-import EmbeddedDataModel from "./embedded-data-model.mjs";
+import piercingConfig from "../../../constants/config/piercing-config.mjs";
+import { localizeChoices } from "../../../helpers/localization.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * Model for a common implementation of piercing settings.
- * @extends {Teriock.Models.ScaleModelData}
  * @property {Teriock.System.PiercingLevel} raw
+ * @implements {Teriock.Functionality.ScalingModel}
  */
-export default class PiercingModel extends EmbeddedDataModel {
+export default class PiercingModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Piercing"];
 
@@ -35,10 +35,14 @@ export default class PiercingModel extends EmbeddedDataModel {
     return this.raw >= 1;
   }
 
-  /**
-   * A label that describes this.
-   * @returns {string}
-   */
+  /** @inheritDoc */
+  get icon() {
+    if (this.ub) { return TERIOCK.display.icons.piercing.ub; }
+    if (this.av0) { return TERIOCK.display.icons.piercing.av0; }
+    return TERIOCK.display.icons.piercing.none;
+  }
+
+  /** @inheritDoc */
   get label() {
     return this.value >= 1 ? piercingConfig.levels[this.value] : "";
   }

@@ -1,4 +1,4 @@
-import { movementActionField } from "../../fields/helpers/builders.mjs";
+import { movementActionField } from "../../fields/tools/builders.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;

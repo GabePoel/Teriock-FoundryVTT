@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import * as activations from "../activations/command-activations.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 

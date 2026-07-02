@@ -1,6 +1,6 @@
 import { EvaluationField, FormulaField } from "../../fields/_module.mjs";
 import { TimeUnitModel } from "../../models/unit-models/_module.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 /**

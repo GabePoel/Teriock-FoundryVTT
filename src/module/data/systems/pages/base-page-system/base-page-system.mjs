@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { systemPath } from "../../../../helpers/path.mjs";
-import * as dataMixins from "../../../shared/mixins/_module.mjs";
+import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;

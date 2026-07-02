@@ -1,6 +1,6 @@
 import { DataField } from "@common/data/fields.mjs";
 
-import EmbeddedDataModel from "../embedded-data-model.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -22,15 +22,13 @@ declare global {
       Category extends Teriock.Config.SettingsCategory = Teriock.Config.SettingsCategory,
     > = SettingsDefaults<Category>;
 
-    export type CommonSettingsModelData = Record<string, never>;
-
     export type DocumentSettingsModelInstance<Category extends Teriock.Config.SettingsCategory> =
       & DocumentSettingsModelData<Category>
-      & EmbeddedDataModel;
+      & BaseDataModel;
 
     export type UserSettingsModelInstance<Category extends Teriock.Config.SettingsCategory> =
       & UserSettingsModelData<Category>
-      & EmbeddedDataModel;
+      & BaseDataModel;
 
     export interface DocumentSettingsModelConstructor<Category extends Teriock.Config.SettingsCategory> {
       new(...args: object[]): DocumentSettingsModelInstance<Category>;
@@ -43,19 +41,6 @@ declare global {
       CATEGORY: Category;
       defineSchema(): Record<string, DataField>;
     }
-
-    export type DocumentSettingsModelConstructorMap = {
-      [Category in Teriock.Config.SettingsCategory]: DocumentSettingsModelConstructor<Category>;
-    };
-
-    export type UserSettingsModelConstructorMap = {
-      [Category in Teriock.Config.SettingsCategory]: UserSettingsModelConstructor<Category>;
-    };
-
-    export type AbilitySettingsModel = DocumentSettingsModelInstance<"ability">;
-    export type ActorSettingsModel = DocumentSettingsModelInstance<"actor">;
-    export type ArmamentSettingsModel = DocumentSettingsModelInstance<"armament">;
-    export type CommonSettingsModel = EmbeddedDataModel & CommonSettingsModelData;
   }
 }
 

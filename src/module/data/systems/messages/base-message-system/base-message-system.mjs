@@ -2,7 +2,7 @@ import { TeriockContextMenu } from "../../../../applications/ux/_module.mjs";
 import { TeriockItem } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { panelsField } from "../../../fields/helpers/builders.mjs";
+import { panelsField } from "../../../fields/tools/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";

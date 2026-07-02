@@ -1,7 +1,7 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { qualifiedChangeField } from "../../fields/helpers/builders.mjs";
-import { migrateChange } from "../../shared/migrations/change-migrations.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { qualifiedChangeField } from "../../fields/tools/builders.mjs";
+import { migrateChange } from "../../migrations/change-migrations.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;

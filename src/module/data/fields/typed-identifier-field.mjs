@@ -1,5 +1,5 @@
 import { HTMLIdentifierTagsElement } from "../../applications/elements/_module.mjs";
-import { validateTypedIdentifier } from "./helpers/validators.mjs";
+import { validateTypedIdentifier } from "./tools/validators.mjs";
 
 const { StringField } = foundry.data.fields;
 

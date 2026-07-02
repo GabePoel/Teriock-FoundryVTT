@@ -1,4 +1,4 @@
-import { actorTransformationConfig } from "../../../../../fields/helpers/transformation-fields.mjs";
+import { actorTransformationConfig } from "../../../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
 

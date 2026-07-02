@@ -1,8 +1,10 @@
-import { fieldField, tradecraftField } from "../../fields/helpers/builders.mjs";
+import { fieldField, tradecraftField } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
+ * @inheritDoc
  * @property {Teriock.Models.FluencyFilters} filters
+ * @see {FluencySystem}
  */
 export default class FluencyPreviewModel extends BasePreviewModel {
   /** @inheritDoc */

@@ -3,9 +3,9 @@ import { commands } from "../../../helpers/interaction/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
-import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { RollActivation } from "../activations/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 

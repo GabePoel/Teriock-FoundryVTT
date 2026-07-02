@@ -1,12 +1,14 @@
 import { objectMap } from "../../../helpers/utils.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
-import { nullString } from "../../fields/helpers/builders.mjs";
+import { nullString } from "../../fields/tools/builders.mjs";
 import MetaphysicsPreviewModel from "./metaphysics-preview-model.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * @inheritDoc
  * @property {Teriock.Models.AbilityFilters} filters
+ * @see {AbilitySystem}
  */
 export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */

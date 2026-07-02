@@ -1,10 +1,13 @@
 import { TernaryField } from "../../fields/_module.mjs";
-import { archetypeField, classField } from "../../fields/helpers/builders.mjs";
+import { archetypeField, classField } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
  * Preview model for ranks that also works for archetypes.
+ * @inheritDoc
  * @property {Teriock.Models.RankFilters} filters
+ * @see {ArchetypeSystem}
+ * @see {RankSystem}
  */
 export default class RankPreviewModel extends BasePreviewModel {
   /** @inheritDoc */

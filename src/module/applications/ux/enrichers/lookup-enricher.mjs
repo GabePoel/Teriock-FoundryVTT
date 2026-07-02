@@ -1,5 +1,5 @@
 import { TeriockTextEditor } from "../_module.mjs";
-import { validateTypedIdentifier } from "../../../data/fields/helpers/validators.mjs";
+import { validateTypedIdentifier } from "../../../data/fields/tools/validators.mjs";
 import { createElement } from "../../../helpers/html.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
 import { toCamelCase, toKebabCase } from "../../../helpers/string.mjs";

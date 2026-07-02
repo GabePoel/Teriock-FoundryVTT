@@ -42,7 +42,7 @@ declare global {
         short: RangeModel;
       };
       /** <schema> Per-document behavior and display settings */
-      settings: Teriock.Models.ArmamentSettingsModel;
+      settings: Teriock.Models.DocumentSettingsModelInstance<"armament">;
       /** <derived> Special Rules (Weapon Fighting Style) */
       specialRules: string;
       /** <schema> Spell Turning */

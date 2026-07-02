@@ -1,4 +1,4 @@
-import { EffectTransformationConfig } from "../../../fields/helpers/_types";
+import { EffectTransformationConfig } from "../../../fields/tools/_types";
 
 declare global {
   namespace Teriock.Models {

@@ -1,4 +1,4 @@
-import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
+import { migrateKey } from "../../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 

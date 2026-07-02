@@ -1,6 +1,6 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
-import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
+import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import BaseAutomation from "./base-automation.mjs";
 
 export default class ThresholdAutomation extends BaseAutomation {

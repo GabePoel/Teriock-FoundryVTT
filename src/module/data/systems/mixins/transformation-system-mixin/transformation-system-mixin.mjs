@@ -1,6 +1,6 @@
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { consolidateWriteOperations } from "../../../../helpers/utils.mjs";
-import { effectTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
+import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
 

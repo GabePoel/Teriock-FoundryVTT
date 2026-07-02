@@ -1,4 +1,4 @@
-import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
+import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 
 /**
  * @param {typeof UsableData} Base

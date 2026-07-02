@@ -1,6 +1,6 @@
 import { PseudoCollectionField } from "../../../fields/_module.mjs";
+import { migrateKey, migrateValue } from "../../../migrations/source-migrations.mjs";
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
-import { migrateKey, migrateValue } from "../../../shared/migrations/source-migrations.mjs";
 
 /**
  * @param {typeof BaseSystem} Base

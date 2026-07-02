@@ -2,10 +2,10 @@ import costConfig from "../../../../constants/config/cost-config.mjs";
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
-import { AbilitySettingsModel } from "../../../models/settings-models/_module.mjs";
+import * as dataMixins from "../../../mixins/_module.mjs";
+import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
-import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 import * as parts from "./parts/_module.mjs";
@@ -127,7 +127,9 @@ export default class AbilitySystem
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { settings: new fields.EmbeddedDataField(AbilitySettingsModel) });
+    return Object.assign(super.defineSchema(), {
+      settings: new fields.EmbeddedDataField(documentSettingsModels.ability),
+    });
   }
 
   /** @inheritDoc */

@@ -4,8 +4,8 @@ import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
 import { TypedIdentifierSetField } from "../data/fields/_module.mjs";
-import { tradecraftsField } from "../data/fields/helpers/builders.mjs";
-import { userSettingsModels } from "../data/models/settings-models/user-settings-models.mjs";
+import { tradecraftsField } from "../data/fields/tools/builders.mjs";
+import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
 import { objectMap } from "../helpers/utils.mjs";
 
 const { fields } = foundry.data;

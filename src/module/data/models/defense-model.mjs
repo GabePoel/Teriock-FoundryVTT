@@ -1,6 +1,6 @@
 import { toInt } from "../../helpers/string.mjs";
-import { initialNumber } from "../fields/helpers/initializers.mjs";
-import EmbeddedDataModel from "./embedded-data-model.mjs";
+import { BaseDataModel } from "../abstract/_module.mjs";
+import { initialNumber } from "../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 
@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * @property {number} bonus
  * @property {number} raw
  */
-export default class DefenseModel extends EmbeddedDataModel {
+export default class DefenseModel extends BaseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {

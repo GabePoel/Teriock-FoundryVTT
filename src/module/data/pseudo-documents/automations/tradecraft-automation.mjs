@@ -1,7 +1,7 @@
 import { selectTradecraftDialog, selectTradecraftsDialog } from "../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { tradecraftsField } from "../../fields/helpers/builders.mjs";
-import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
+import { tradecraftsField } from "../../fields/tools/builders.mjs";
+import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { TradecraftActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";

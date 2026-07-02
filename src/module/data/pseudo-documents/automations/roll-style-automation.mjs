@@ -1,4 +1,4 @@
-import { defaultJSONField } from "../../fields/helpers/builders.mjs";
+import { defaultJSONField } from "../../fields/tools/builders.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 /**

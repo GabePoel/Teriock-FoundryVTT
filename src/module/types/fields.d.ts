@@ -1,4 +1,4 @@
-import { EvaluationModel } from "../data/models/_module.mjs";
+import { EvaluationModel } from "../data/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Fields {

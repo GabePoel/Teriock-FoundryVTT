@@ -2,7 +2,9 @@ import { TernaryField } from "../../fields/_module.mjs";
 import MetaphysicsPreviewModel from "./metaphysics-preview-model.mjs";
 
 /**
+ * @inheritDoc
  * @property {Teriock.Models.PropertyFilters} filters
+ * @see {PropertySystem}
  */
 export default class PropertyPreviewModel extends MetaphysicsPreviewModel {
   /** @inheritDoc */

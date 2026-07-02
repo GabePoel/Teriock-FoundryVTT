@@ -1,13 +1,13 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import EmbeddedDataModel from "../../models/embedded-data-model.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {AccessData} parent
- * @property {ID<PseudoDocument>} _id
+ * @property {ID<BasePseudoDocument>} _id
  */
-export default class PseudoDocument extends EmbeddedDataModel {
+export default class BasePseudoDocument extends BaseDataModel {
   /**
    * Icon for this pseudo-document class.
    * @returns {string}
@@ -37,7 +37,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * @param {object} data
    * @param {CommonSystem | HarmSystem} parent
    * @param {DatabaseCreateOperation} operation
-   * @returns {Promise<PseudoDocument>}
+   * @returns {Promise<BasePseudoDocument>}
    */
   static async create(data = {}, { parent, ...operation } = {}) {
     if (!parent) { throw new Error("Pseudo-documents must have parents"); }
@@ -58,8 +58,8 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * Helper function to obtain the relevant pseudo-document from drop data.
-   * @param {Teriock.Sheet.DropData<PseudoDocument>} data
-   * @returns {Promise<PseudoDocument>}
+   * @param {Teriock.Sheet.DropData<BasePseudoDocument>} data
+   * @returns {Promise<BasePseudoDocument>}
    */
   static async fromDropData(data) {
     const pseudo = await fromUuid(data.uuid);
@@ -100,7 +100,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    */
   get fieldPath() {
     let path = this.parent.constructor.metadata.pseudos[this.documentName];
-    if (this.parent instanceof PseudoDocument) { path = [this.parent.fieldPath, this.parent.id, path].join("."); }
+    if (this.parent instanceof BasePseudoDocument) { path = [this.parent.fieldPath, this.parent.id, path].join("."); }
     return path;
   }
 
@@ -114,7 +114,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * The ID of this pseudo-document.
-   * @returns {ID<PseudoDocument>}
+   * @returns {ID<BasePseudoDocument>}
    */
   get id() {
     return this._id;
@@ -143,7 +143,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * The UUID of this pseudo-document.
-   * @returns {UUID<PseudoDocument> | null}
+   * @returns {UUID<BasePseudoDocument> | null}
    */
   get uuid() {
     return this.document?.uuid ? [this.document.uuid, this.documentName, this.id].join(".") : null;
@@ -152,7 +152,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
   /**
    * Delete this pseudo-document, removing it from the database.
    * @param {Partial<DatabaseDeleteOperation>} operation - Parameters of the deletion operation
-   * @returns {Promise<PseudoDocument|undefined>} The deleted PseudoDocument instance, or undefined if not deleted
+   * @returns {Promise<BasePseudoDocument|undefined>} The deleted PseudoDocument instance, or undefined if not deleted
    */
   async delete(operation = {}) {
     if (!this.document) { return undefined; }
@@ -198,7 +198,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
 
   /**
    * Drag data for storing on initiated drag events.
-   * @returns {Teriock.Sheet.DropData<PseudoDocument>}
+   * @returns {Teriock.Sheet.DropData<BasePseudoDocument>}
    */
   toDragData() {
     return { type: this.documentName, uuid: this.uuid };
@@ -208,7 +208,7 @@ export default class PseudoDocument extends EmbeddedDataModel {
    * Update this PseudoDocument using incremental data, saving it to the database.
    * @param {object} [data={}] - Differential update data which modifies the existing values of this pseudo-document
    * @param {Partial<Omit<DatabaseUpdateOperation, "updates">>} operation - Parameters of the update operation
-   * @returns {Promise<PseudoDocument|undefined>} The updated PseudoDocument instance, or undefined not updated
+   * @returns {Promise<BasePseudoDocument|undefined>} The updated PseudoDocument instance, or undefined not updated
    */
   async update(data = {}, operation = {}) {
     if (!this.document) { return undefined; }

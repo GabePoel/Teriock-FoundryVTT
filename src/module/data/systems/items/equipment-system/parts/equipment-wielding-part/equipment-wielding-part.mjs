@@ -1,6 +1,6 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
 import { makeIcon } from "../../../../../../helpers/icon.mjs";
-import { initialBoolean } from "../../../../../fields/helpers/initializers.mjs";
+import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 

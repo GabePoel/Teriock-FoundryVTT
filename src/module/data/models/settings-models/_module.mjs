@@ -1,14 +1,12 @@
-export { defineDocumentSettingsModel, documentSettingsModels } from "./document-settings-models.mjs";
-export { default as CommonSettingsModel } from "./user-settings-models.mjs";
-export {
-  booleanSettingField,
-  defineUserSettingsModel,
-  settingsPath,
-  userSettingsModels,
-} from "./user-settings-models.mjs";
+import settingsConfig from "../../../constants/config/settings-config.mjs";
+import {
+  CommonDocumentSettingsModel,
+  documentSettingsModelFactory,
+  userSettingsModelFactory,
+} from "./settings-model-factories.mjs";
 
-import { documentSettingsModels } from "./document-settings-models.mjs";
+const keys = Object.keys(settingsConfig);
 
-export const AbilitySettingsModel = documentSettingsModels.ability;
-export const ActorSettingsModel = documentSettingsModels.actor;
-export const ArmamentSettingsModel = documentSettingsModels.armament;
+export { CommonDocumentSettingsModel };
+export const userSettingsModels = Object.fromEntries(keys.map((k) => [k, userSettingsModelFactory(k)]));
+export const documentSettingsModels = Object.fromEntries(keys.map((k) => [k, documentSettingsModelFactory(k)]));

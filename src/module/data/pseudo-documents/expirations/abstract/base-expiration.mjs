@@ -2,9 +2,9 @@ import mathConfig from "../../../../constants/config/math-config.mjs";
 import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
 import { buildWriteOperation, consolidateWriteOperations, objectMap } from "../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../fields/_module.mjs";
-import { rollableFormulaField } from "../../../fields/helpers/builders.mjs";
+import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import MechanicPseudoDocument from "../../abstract/mechanic-pseudo-document.mjs";
-import { CritMechanicMixin } from "../../abstract/mixins/_module.mjs";
+import { CritMechanicMixin } from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 

@@ -1,9 +1,9 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
-import { defaultJSONField } from "../../fields/helpers/builders.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { defaultJSONField } from "../../fields/tools/builders.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 

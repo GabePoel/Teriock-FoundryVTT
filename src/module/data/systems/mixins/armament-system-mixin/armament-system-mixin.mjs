@@ -5,10 +5,10 @@ import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { EvaluationField, IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
-import { defenseField, rollableFormulaField } from "../../../fields/helpers/builders.mjs";
-import { initialText } from "../../../fields/helpers/initializers.mjs";
-import { ArmamentSettingsModel, RangeModel } from "../../../models/_module.mjs";
-import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
+import { defenseField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
+import { initialText } from "../../../fields/tools/initializers.mjs";
+import { migrateKey } from "../../../migrations/source-migrations.mjs";
+import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -70,7 +70,7 @@ export default function ArmamentSystemMixin(Base) {
             ranged: new fields.BooleanField({ initial: false }),
             short: new EvaluationField({ model: RangeModel }),
           }, { multiChangePaths: ["long", "short"] }),
-          settings: new fields.EmbeddedDataField(ArmamentSettingsModel),
+          settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
           specialRules: initialText(),
           spellTurning: new fields.BooleanField(),
           vitals: new fields.BooleanField(),

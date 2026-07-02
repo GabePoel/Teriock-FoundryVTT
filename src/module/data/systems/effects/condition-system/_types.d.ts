@@ -1,4 +1,4 @@
-import { CombatExpirationMethod } from "../../../fields/helpers/_types";
+import { CombatExpirationMethod } from "../../../fields/tools/_types";
 
 declare global {
   namespace Teriock.Models {

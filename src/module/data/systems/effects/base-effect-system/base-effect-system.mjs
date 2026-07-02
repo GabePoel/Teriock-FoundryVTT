@@ -1,5 +1,5 @@
+import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import { StatusAutomation } from "../../../pseudo-documents/automations/_module.mjs";
-import { migrateKey } from "../../../shared/migrations/source-migrations.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
 const { ActiveEffectTypeDataModel, fields } = foundry.data;

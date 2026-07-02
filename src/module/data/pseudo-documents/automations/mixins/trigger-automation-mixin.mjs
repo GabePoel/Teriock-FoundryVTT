@@ -1,5 +1,5 @@
 import { formatDynamicSelectOptions } from "../../../../helpers/utils.mjs";
-import { migrateValue } from "../../../shared/migrations/source-migrations.mjs";
+import { migrateValue } from "../../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 

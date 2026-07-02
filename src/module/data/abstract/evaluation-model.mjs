@@ -1,12 +1,12 @@
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { FormulaField } from "../fields/_module.mjs";
-import EmbeddedDataModel from "./embedded-data-model.mjs";
+import BaseDataModel from "./base-data-model.mjs";
 
 /**
  * Model that improves functionality and ergonomics of formula fields.
  * @property {Teriock.System.FormulaString} raw - String corresponding to the formula.
  */
-export default class EvaluationModel extends EmbeddedDataModel {
+export default class EvaluationModel extends BaseDataModel {
   /**
    * @inheritDoc
    * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options]

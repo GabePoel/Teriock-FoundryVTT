@@ -1,7 +1,7 @@
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
-import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { migrateKey } from "../../migrations/source-migrations.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;

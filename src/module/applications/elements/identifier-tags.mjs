@@ -1,4 +1,4 @@
-import { validateTypedIdentifier } from "../../data/fields/helpers/validators.mjs";
+import { validateTypedIdentifier } from "../../data/fields/tools/validators.mjs";
 import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";

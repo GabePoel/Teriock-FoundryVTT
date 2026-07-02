@@ -1,5 +1,5 @@
 import equipmentConfig from "../../../constants/config/equipment-config.mjs";
-import EmbeddedDataModel from "../embedded-data-model.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Model that provides useful getters for equipment that stores other equipment.
  * @extends {Teriock.Models.StorageModelData}
  */
-export default class StorageModel extends EmbeddedDataModel {
+export default class StorageModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Storage"];
 

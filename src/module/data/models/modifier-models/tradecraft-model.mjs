@@ -3,6 +3,10 @@ import BaseModifierModel from "./base-modifier-model.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * A {@link BaseModifierModel} for tradecraft modifiers.
+ * @see {TradecraftExecution}
+ */
 export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema(options = {}) {

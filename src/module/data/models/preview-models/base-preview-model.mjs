@@ -1,17 +1,18 @@
 import { createElement } from "../../../helpers/html.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
-import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * Previews are used for sorting and filtering documents in sheets and are never stored to the database.
  * @property {Teriock.Models.PreviewDisplay} display
  * @property {Teriock.Models.BaseFilters} filters
  * @property {Teriock.Models.PreviewMenus} menus
  * @property {Teriock.Models.PreviewSort} sort
  * @property {string} search
  */
-export default class BasePreviewModel extends EmbeddedDataModel {
+export default class BasePreviewModel extends BaseDataModel {
   /**
    * The sort option selected by default. The `default` option preserves the order documents are passed in.
    * @returns {string}

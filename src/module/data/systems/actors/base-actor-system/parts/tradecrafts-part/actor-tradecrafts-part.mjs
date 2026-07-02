@@ -1,6 +1,6 @@
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { EvaluationField } from "../../../../../fields/_module.mjs";
-import { TradecraftModel } from "../../../../../models/_module.mjs";
+import { TradecraftModel } from "../../../../../models/modifier-models/_module.mjs";
 
 const { SchemaField } = foundry.data.fields;
 

@@ -1,6 +1,6 @@
 import hackConfig from "../../../../../../constants/config/hack-config.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { initialBar, initialSchema } from "../../../../../fields/helpers/initializers.mjs";
+import { initialBar, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 
 /**
  * Actor data model mixin that handles hacks.

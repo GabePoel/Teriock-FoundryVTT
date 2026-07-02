@@ -1,4 +1,4 @@
-import { migrateEvaluationToNumber } from "../../../../shared/migrations/evaluation-migrations.mjs";
+import { migrateEvaluationToNumber } from "../../../../migrations/evaluation-migrations.mjs";
 
 /**
  * Equipment migrate data part.

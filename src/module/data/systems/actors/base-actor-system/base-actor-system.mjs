@@ -1,7 +1,7 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
-import { ActorSettingsModel } from "../../../models/settings-models/_module.mjs";
+import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
 import { StatusExpiration } from "../../../pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../../pseudo-documents/expirations/abstract/_module.mjs";
 import AbstractActorSystem from "./abstract-actor-system.mjs";
@@ -78,7 +78,9 @@ export default class BaseActorSystem
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), { settings: new fields.EmbeddedDataField(ActorSettingsModel) });
+    return Object.assign(super.defineSchema(), {
+      settings: new fields.EmbeddedDataField(documentSettingsModels.actor),
+    });
   }
 
   /**

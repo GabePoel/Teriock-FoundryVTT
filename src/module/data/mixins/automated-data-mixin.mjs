@@ -1,6 +1,6 @@
 /**
  * Mixin for classes that use automations even if they don't have them in their data model.
- * @param {typeof ChildSystem|EmbeddedDataModel} Base
+ * @param {typeof ChildSystem|BaseDataModel} Base
  */
 export default function AutomatedDataMixin(Base) {
   return (

@@ -1,7 +1,7 @@
 import protectionConfig from "../../../constants/config/protection-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;

@@ -1,8 +1,8 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
-import { migrateKey } from "../../shared/migrations/source-migrations.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
+import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { TakeActivation } from "../activations/_module.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 

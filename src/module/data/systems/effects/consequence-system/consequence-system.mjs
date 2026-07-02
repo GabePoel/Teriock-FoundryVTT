@@ -1,5 +1,5 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { associationsField } from "../../../fields/helpers/builders.mjs";
+import { associationsField } from "../../../fields/tools/builders.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import ApplicableEffectSystem from "../applicable-effect-system/applicable-effect-system.mjs";
 

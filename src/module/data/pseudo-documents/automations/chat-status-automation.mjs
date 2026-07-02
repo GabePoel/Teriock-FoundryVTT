@@ -1,10 +1,10 @@
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { CritMechanicMixin } from "../abstract/mixins/_module.mjs";
 import {
   ApplyStatusActivation,
   RemoveStatusActivation,
   ToggleStatusActivation,
 } from "../activations/command-activations.mjs";
+import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;

@@ -1,5 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
-import { migrateUuid, migrateValueTransform } from "../../data/shared/migrations/source-migrations.mjs";
+import { migrateUuid, migrateValueTransform } from "../../data/migrations/source-migrations.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
 import * as documentMixins from "../mixins/_module.mjs";

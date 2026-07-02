@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
 import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
-import { speciesTransformationFields } from "../../../../../fields/helpers/transformation-fields.mjs";
+import { speciesTransformationFields } from "../../../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
 

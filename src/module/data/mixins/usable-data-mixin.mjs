@@ -1,17 +1,17 @@
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { CompetenceModel } from "../../../models/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import { CompetenceModel } from "../models/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * Mixin for data models that can be used. This typically involves running an execution.
- * @param {typeof EmbeddedDataModel | typeof CommonSystem} Base
+ * @param {typeof BaseDataModel | typeof CommonSystem} Base
  */
 export default function UsableDataMixin(Base) {
   return (
     /**
-     * @extends {EmbeddedDataModel|CommonSystem}
-     * @extends {Teriock.Models.UsableDataData}
+     * @extends {BaseDataModel|CommonSystem}
+     * @property {CompetenceModel} competence
      * @mixin
      */
     class UsableData extends Base {

@@ -1,6 +1,6 @@
 import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
+import * as dataMixins from "../../../data/mixins/_module.mjs";
 import { CompetenceModel } from "../../../data/models/_module.mjs";
-import * as dataMixins from "../../../data/shared/mixins/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
@@ -190,7 +190,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
       rolls: this.rolls,
       speaker: TeriockChatMessage.getSpeaker({ actor: this.actor }),
       system: {
-        activations: teriock.data.pseudoDocuments.abstract.PseudoDocument.toCollectionObject(this.activations),
+        activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(this.activations),
         buttons: this.buttons,
         panels: this.panels,
         tags: this.tags,

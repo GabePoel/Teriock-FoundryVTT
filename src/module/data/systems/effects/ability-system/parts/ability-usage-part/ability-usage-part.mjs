@@ -1,7 +1,7 @@
 import { formulaExists } from "../../../../../../helpers/formula.mjs";
 import { EvaluationField, FormulaField } from "../../../../../fields/_module.mjs";
+import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
-import { migrateKey } from "../../../../../shared/migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 

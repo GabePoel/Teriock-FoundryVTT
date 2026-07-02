@@ -1,4 +1,4 @@
-import { ActorTransformationConfig } from "../../../../../fields/helpers/_types.js";
+import { ActorTransformationConfig } from "../../../../../fields/tools/_types.js";
 
 declare global {
   namespace Teriock.Models {

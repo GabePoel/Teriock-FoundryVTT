@@ -1,4 +1,4 @@
-import { movementActionField } from "../../fields/helpers/builders.mjs";
+import { movementActionField } from "../../fields/tools/builders.mjs";
 import { ChangeMovementActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 
