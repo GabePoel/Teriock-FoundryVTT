@@ -11,10 +11,7 @@ import { DocumentDialogSheet } from "../../sheets/utility-sheets/_module.mjs";
  * @property {Teriock.System.FormulaString} _substitution
  */
 export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialogSheet) {
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = { actions: { ok: this._onDone }, classes: ["dialog"], position: { width: 425 } };
 
   /**

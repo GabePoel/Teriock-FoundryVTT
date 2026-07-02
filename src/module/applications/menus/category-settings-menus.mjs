@@ -16,12 +16,12 @@ function defineCategorySettingsConfig(category) {
   const { configKey, icon } = categoryConfigs[category];
 
   return class CategorySettingsConfig extends BaseMenu {
-    /** @inheritDoc */
+    /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       window: { icon: makeIconClass(icon, "title"), title: `TERIOCK.MENUS.${configKey}.name` },
     };
 
-    /** @inheritDoc */
+    /** @type {Record<string, HandlebarsTemplatePart>} */
     static PARTS = { settings: { template: "teriock/menus/base-menu" }, footer: super.PARTS.footer };
 
     /** @inheritDoc */

@@ -20,10 +20,7 @@ const DEFAULT_SELECT_OPTIONS = {
 };
 
 export default class DocumentSelector extends ResolvableDialog {
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onGetSelected },
     classes: ["dynamic-select"],
@@ -31,6 +28,7 @@ export default class DocumentSelector extends ResolvableDialog {
     window: { icon: makeIconClass(icons.ui.select, "title"), title: "TERIOCK.DIALOGS.Select.Document.title" },
   };
 
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     all: { scrollable: [".doc-list-container"], template: "teriock/dialogs/document-selector" },
     footer: { template: "templates/generic/form-footer.hbs" },

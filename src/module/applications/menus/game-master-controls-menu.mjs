@@ -4,7 +4,7 @@ import { settings } from "../../setup/system-settings.mjs";
 import BaseMenu from "./base-menu.mjs";
 
 export default class GameMasterControlsMenu extends BaseMenu {
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     window: {
       icon: makeIconClass(icons.settings.gameMasterControls, "title"),
@@ -12,7 +12,7 @@ export default class GameMasterControlsMenu extends BaseMenu {
     },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     general: super.PARTS.general,
     secrets: { template: "teriock/menus/base-menu" },

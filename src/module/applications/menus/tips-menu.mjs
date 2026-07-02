@@ -4,12 +4,12 @@ import { settings } from "../../setup/system-settings.mjs";
 import BaseMenu from "./base-menu.mjs";
 
 export default class TipsMenu extends BaseMenu {
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     window: { icon: makeIconClass(icons.settings.tips, "title"), title: "TERIOCK.MENUS.Tips.name" },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     suppression: { template: "teriock/menus/base-menu" },
     error: { template: "teriock/menus/base-menu" },

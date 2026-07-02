@@ -4,10 +4,7 @@ import TeriockApplication from "./application.mjs";
  * A custom application representing something that needs to be resolved before some routing can continue.
  */
 export default class ResolvableDialog extends TeriockApplication {
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { cancel: this._onCancel },
     classes: ["dialog"],

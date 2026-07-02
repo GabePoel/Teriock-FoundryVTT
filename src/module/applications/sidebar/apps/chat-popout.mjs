@@ -4,7 +4,7 @@ const { ChatPopout } = foundry.applications.sidebar.apps;
 
 /** @inheritDoc */
 export default class TeriockChatPopout extends ChatPopout {
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(CONFIG.ChatMessage.sidebarIcon, "title") } };
 
   /** @inheritDoc */

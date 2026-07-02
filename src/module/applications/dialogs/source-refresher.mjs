@@ -24,6 +24,7 @@ class RefreshOptions extends DataModel {
 let localized = false;
 
 export default class SourceRefresher extends DocumentDialogSheet {
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onRefresh },
     classes: ["dynamic-select", "dialog"],
@@ -31,6 +32,7 @@ export default class SourceRefresher extends DocumentDialogSheet {
     window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.ui.compendium, "title"), resizable: false },
   };
 
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     select: { scrollable: [".doc-list-container"], template: "teriock/dialogs/document-selector" },
     options: { template: "teriock/shared/field-list-part" },

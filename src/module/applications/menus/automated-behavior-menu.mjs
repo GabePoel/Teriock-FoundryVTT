@@ -4,7 +4,7 @@ import { settings } from "../../setup/system-settings.mjs";
 import BaseMenu from "./base-menu.mjs";
 
 export default class AutomatedBehaviorMenu extends BaseMenu {
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     window: {
       icon: makeIconClass(icons.settings.automatedBehavior, "title"),

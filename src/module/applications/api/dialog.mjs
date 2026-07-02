@@ -9,9 +9,6 @@ const { DialogV2 } = foundry.applications.api;
  * @mixes BaseApplication
  */
 export default class TeriockDialog extends BaseApplicationMixin(DialogV2) {
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ui.edit, "title") } };
 }

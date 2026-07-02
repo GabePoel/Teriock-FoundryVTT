@@ -17,10 +17,7 @@ export default class ExecutionEditor extends ResolvableDialog {
     await this.render();
   }
 
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { changeDocument: this._onChangeDocument, confirm: this._onConfirm, messageMode: this.#onMessageMode },
     classes: ["execution-editor"],

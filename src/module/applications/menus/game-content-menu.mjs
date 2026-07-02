@@ -20,7 +20,7 @@ export default class GameContentMenu extends BaseMenu {
     void this.render();
   }
 
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { moveIdentifierPriority: this.#onMoveIdentifierPriority },
     form: { closeOnSubmit: true, handler: GameContentMenu._onCommitChanges },
@@ -28,7 +28,7 @@ export default class GameContentMenu extends BaseMenu {
     window: { icon: makeIconClass(icons.settings.gameContent, "title"), title: "TERIOCK.MENUS.GameContent.name" },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = { identifierSources: { template: "teriock/menus/game-content-menu" }, footer: super.PARTS.footer };
 
   /** @inheritDoc */

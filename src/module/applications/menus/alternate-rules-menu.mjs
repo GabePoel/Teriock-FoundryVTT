@@ -4,12 +4,12 @@ import { settings } from "../../setup/system-settings.mjs";
 import BaseMenu from "./base-menu.mjs";
 
 export default class AlternateRulesMenu extends BaseMenu {
-  /** @inheritDoc */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     window: { icon: makeIconClass(icons.settings.alternateRules, "title"), title: "TERIOCK.MENUS.AlternateRules.name" },
   };
 
-  /** @inheritDoc */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     armor: { template: "teriock/menus/base-menu" },
     cones: { template: "teriock/menus/base-menu" },

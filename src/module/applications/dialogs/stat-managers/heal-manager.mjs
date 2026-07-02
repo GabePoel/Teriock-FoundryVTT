@@ -5,10 +5,7 @@ import BaseStatManager from "./base-stat-manager.mjs";
 const { fields } = foundry.data;
 
 export default class HealManager extends BaseStatManager {
-  /**
-   * @inheritDoc
-   * @type {Partial<ApplicationConfiguration>}
-   */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { rollStatDie: this._onRollStatDie, takeHack: this._onTakeUnhack },
     window: {
@@ -18,6 +15,7 @@ export default class HealManager extends BaseStatManager {
     },
   };
 
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = { all: { scrollable: [""], template: "teriock/dialogs/heal-manager" } };
 
   /**

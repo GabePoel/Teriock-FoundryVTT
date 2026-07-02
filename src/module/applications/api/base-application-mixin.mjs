@@ -8,7 +8,7 @@ export default function BaseApplicationMixin(Base) {
    * @mixin
    */
   class BaseApplication extends Base {
-    /** @type {Partial<ApplicationConfiguration>}*/
+    /** @type {Partial<ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = { classes: ["teriock"] };
 
     /**

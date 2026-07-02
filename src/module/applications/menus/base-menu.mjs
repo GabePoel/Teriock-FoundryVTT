@@ -21,7 +21,7 @@ export default class BaseMenu extends TeriockApplication {
     return Object.values(cls.PARTS ?? {}).filter(part => part.template === "teriock/menus/base-menu").length;
   }
 
-  /** @override */
+  /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: true, handler: BaseMenu._onCommitChanges },
     position: { width: 650 },
@@ -29,7 +29,7 @@ export default class BaseMenu extends TeriockApplication {
     window: { contentClasses: ["standard-form", "teriock-settings"], resizable: true },
   };
 
-  /** @override */
+  /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     general: { template: "teriock/menus/base-menu" },
     footer: { template: "templates/generic/form-footer.hbs" },
