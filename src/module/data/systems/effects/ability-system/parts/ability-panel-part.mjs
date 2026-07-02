@@ -6,7 +6,7 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
  * Ability panel part.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityPanelPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -57,4 +57,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Ability overview part.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityOverviewPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -30,4 +30,4 @@ export default Base => {
       }
     }
   );
-};
+}

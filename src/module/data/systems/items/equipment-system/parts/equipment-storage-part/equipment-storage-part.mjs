@@ -10,7 +10,7 @@ const { EmbeddedDataField, NumberField } = foundry.data.fields;
 /**
  * @param {typeof EquipmentSystem} Base
  */
-export default Base => {
+export default function EquipmentStoragePart(Base) {
   return (
     /**
      * @extends {ConsumableSystem}
@@ -266,4 +266,4 @@ export default Base => {
       }
     }
   );
-};
+}

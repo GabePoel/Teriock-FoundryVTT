@@ -6,7 +6,7 @@ import { initialBar, initialSchema } from "../../../../../fields/helpers/initial
  * Actor data model mixin that handles hacks.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorHacksPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -72,4 +72,4 @@ export default Base => {
       }
     }
   );
-};
+}

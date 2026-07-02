@@ -1,6 +1,9 @@
 import { LongRestExecution, ShortRestExecution } from "../../../../../executions/actor-executions/_module.mjs";
 
-export default Base => {
+/**
+ * @param {typeof CommonSystem} Base
+ */
+export default function ActorRestingPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -78,4 +81,4 @@ export default Base => {
       }
     }
   );
-};
+}

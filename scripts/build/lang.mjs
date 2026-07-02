@@ -8,7 +8,7 @@ import { default as changes } from "../../src/en/changes.json" with { type: "jso
 import { default as combat } from "../../src/en/combat.json" with { type: "json" };
 import { default as commands } from "../../src/en/commands.json" with { type: "json" };
 import { default as compendium } from "../../src/en/compendium.json" with { type: "json" };
-import { default as configs } from "../../src/en/configs.json" with { type: "json" };
+import { default as menus } from "../../src/en/menus.json" with { type: "json" };
 import { default as costs } from "../../src/en/costs.json" with { type: "json" };
 import { default as dialogs } from "../../src/en/dialogs.json" with { type: "json" };
 import { default as documents } from "../../src/en/documents.json" with { type: "json" };
@@ -114,7 +114,7 @@ mergeObjects(
   combat,
   commands,
   compendium,
-  configs,
+  menus,
   content,
   costs,
   dialogs,

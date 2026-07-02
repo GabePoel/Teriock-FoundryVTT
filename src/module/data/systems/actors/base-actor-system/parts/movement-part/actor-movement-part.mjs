@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * Actor data model that handles movement.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorMovementPart(Base) {
   return (
     /**
      * @extends {AbstractActorSystem}
@@ -59,7 +59,7 @@ export default Base => {
       }
     }
   );
-};
+}
 
 /**
  * Creates a speed adjustment field definition for different movement types.

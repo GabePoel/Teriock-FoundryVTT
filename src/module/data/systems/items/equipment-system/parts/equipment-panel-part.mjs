@@ -6,7 +6,7 @@ import { getName } from "../../../../../helpers/utils.mjs";
  * Equipment panel part.
  * @param {typeof EquipmentSystem} Base
  */
-export default Base => {
+export default function EquipmentPanelPart(Base) {
   return (
     /**
      * @extends {EquipmentIdentificationPart}
@@ -69,4 +69,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -1,22 +1,22 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { settings } from "../../setup/system-settings.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseMenu from "./base-menu.mjs";
 
-export default class AutomatedBehaviorConfig extends BaseConfig {
+export default class AutomatedBehaviorMenu extends BaseMenu {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     window: {
       icon: makeIconClass(icons.settings.automatedBehavior, "title"),
-      title: "TERIOCK.CONFIGS.AutomatedBehavior.name",
+      title: "TERIOCK.MENUS.AutomatedBehavior.name",
     },
   };
 
   /** @inheritDoc */
   static SETTINGS_MENU = {
-    hint: "TERIOCK.CONFIGS.AutomatedBehavior.hint",
+    hint: "TERIOCK.MENUS.AutomatedBehavior.hint",
     key: "automatedBehaviorConfig",
-    label: "TERIOCK.CONFIGS.AutomatedBehavior.label",
+    label: "TERIOCK.MENUS.AutomatedBehavior.label",
   };
 
   /** @inheritDoc */

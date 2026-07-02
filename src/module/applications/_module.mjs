@@ -2,7 +2,7 @@ export * as api from "./api/_module.mjs";
 export * as dialogs from "./dialogs/_module.mjs";
 export * as elements from "./elements/_module.mjs";
 export * as hud from "./hud/_module.mjs";
-export * as settings from "./settings/_module.mjs";
+export * as menus from "./menus/_module.mjs";
 export * as shared from "./shared/_module.mjs";
 export * as sheets from "./sheets/_module.mjs";
 export * as sidebar from "./sidebar/_module.mjs";

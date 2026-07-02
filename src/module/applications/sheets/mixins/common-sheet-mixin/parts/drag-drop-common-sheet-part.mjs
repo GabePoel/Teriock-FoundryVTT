@@ -5,7 +5,7 @@ const DragDrop = foundry.applications.ux.DragDrop.implementation;
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default Base => {
+export default function DragDropCommonSheetPart(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -148,4 +148,4 @@ export default Base => {
       }
     }
   );
-};
+}

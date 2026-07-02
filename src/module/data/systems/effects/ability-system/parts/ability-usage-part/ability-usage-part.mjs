@@ -9,7 +9,7 @@ const { fields } = foundry.data;
  * Ability usage part: delivery, timing, interaction, targets, range, expansion.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityUsagePart(Base) {
   return (
     /**
      * @extends {AttackSystem}
@@ -244,4 +244,4 @@ export default Base => {
       }
     }
   );
-};
+}

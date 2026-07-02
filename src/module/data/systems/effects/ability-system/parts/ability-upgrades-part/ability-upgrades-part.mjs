@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Ability improvements part.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityUpgradesPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -139,7 +139,7 @@ export default Base => {
       }
     }
   );
-};
+}
 
 /**
  * Build an attribute link.

@@ -10,7 +10,7 @@ import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default Base => {
+export default function MechanicsCommonSheetPart(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -261,4 +261,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Ability tags part.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityMetaphysicsPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -35,4 +35,4 @@ export default Base => {
       }
     }
   );
-};
+}

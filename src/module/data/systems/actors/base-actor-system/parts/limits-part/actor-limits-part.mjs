@@ -6,7 +6,7 @@ const { fields } = foundry.data;
  * Actor data model that handles limits.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorLimitsPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -37,4 +37,4 @@ export default Base => {
       }
     }
   );
-};
+}

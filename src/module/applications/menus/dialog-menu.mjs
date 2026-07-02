@@ -1,19 +1,19 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { settings } from "../../setup/system-settings.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseMenu from "./base-menu.mjs";
 
-export default class DialogConfig extends BaseConfig {
+export default class DialogMenu extends BaseMenu {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(icons.settings.dialog, "title"), title: "TERIOCK.CONFIGS.Dialog.name" },
+    window: { icon: makeIconClass(icons.settings.dialog, "title"), title: "TERIOCK.MENUS.Dialog.name" },
   };
 
   /** @inheritDoc */
   static SETTINGS_MENU = {
-    hint: "TERIOCK.CONFIGS.Dialog.hint",
+    hint: "TERIOCK.MENUS.Dialog.hint",
     key: "dialogConfig",
-    label: "TERIOCK.CONFIGS.Dialog.label",
+    label: "TERIOCK.MENUS.Dialog.label",
   };
 
   /** @inheritDoc */

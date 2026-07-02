@@ -4,7 +4,7 @@ import { toId } from "../../../../../helpers/string.mjs";
  * Ability automations part.
  * @param {typeof BaseEffectSystem} Base
  */
-export default Base => {
+export default function AbilityAutomationsPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -68,4 +68,4 @@ export default Base => {
       }
     }
   );
-};
+}

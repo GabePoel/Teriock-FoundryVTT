@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Equipment data model mixin that handles shattering and dampening.
  * @param {typeof EquipmentSystem} Base
  */
-export default Base => {
+export default function EquipmentSuppressionPart(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
@@ -265,4 +265,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseMenu from "./base-menu.mjs";
 
 /** @type {Record<Teriock.Config.SettingsCategory, { configKey: string, icon: string }>} */
 const categoryConfigs = {
@@ -15,20 +15,20 @@ const categoryConfigs = {
 function defineCategorySettingsConfig(category) {
   const { configKey, icon } = categoryConfigs[category];
 
-  return class CategorySettingsConfig extends BaseConfig {
+  return class CategorySettingsConfig extends BaseMenu {
     /** @inheritDoc */
     static DEFAULT_OPTIONS = {
-      window: { icon: makeIconClass(icon, "title"), title: `TERIOCK.CONFIGS.${configKey}.name` },
+      window: { icon: makeIconClass(icon, "title"), title: `TERIOCK.MENUS.${configKey}.name` },
     };
 
     /** @inheritDoc */
-    static PARTS = { settings: { template: "teriock/settings/base-config" }, footer: super.PARTS.footer };
+    static PARTS = { settings: { template: "teriock/menus/base-menu" }, footer: super.PARTS.footer };
 
     /** @inheritDoc */
     static SETTINGS_MENU = {
-      hint: `TERIOCK.CONFIGS.${configKey}.hint`,
+      hint: `TERIOCK.MENUS.${configKey}.hint`,
       key: `${category}SettingsConfig`,
-      label: `TERIOCK.CONFIGS.${configKey}.label`,
+      label: `TERIOCK.MENUS.${configKey}.label`,
     };
 
     /** @inheritDoc */
@@ -43,6 +43,6 @@ function defineCategorySettingsConfig(category) {
   };
 }
 
-export const AbilitySettingsConfig = defineCategorySettingsConfig("ability");
-export const ActorSettingsConfig = defineCategorySettingsConfig("actor");
-export const ArmamentSettingsConfig = defineCategorySettingsConfig("armament");
+export const AbilitySettingsMenu = defineCategorySettingsConfig("ability");
+export const ActorSettingsMenu = defineCategorySettingsConfig("actor");
+export const ArmamentSettingsMenu = defineCategorySettingsConfig("armament");

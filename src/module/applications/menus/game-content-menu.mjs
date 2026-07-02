@@ -1,14 +1,14 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { getPackIcon } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseMenu from "./base-menu.mjs";
 
-export default class GameContentConfig extends BaseConfig {
+export default class GameContentMenu extends BaseMenu {
   /**
    * Move an identifier source row up or down.
    * @param {PointerEvent} _event
    * @param {HTMLElement} target
-   * @this {GameContentConfig}
+   * @this {GameContentMenu}
    */
   static #onMoveIdentifierPriority(_event, target) {
     const direction = target?.dataset.identifierPriorityMove;
@@ -23,22 +23,19 @@ export default class GameContentConfig extends BaseConfig {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     actions: { moveIdentifierPriority: this.#onMoveIdentifierPriority },
-    form: { closeOnSubmit: true, handler: GameContentConfig._onCommitChanges },
+    form: { closeOnSubmit: true, handler: GameContentMenu._onCommitChanges },
     position: { width: 500 },
-    window: { icon: makeIconClass(icons.settings.gameContent, "title"), title: "TERIOCK.CONFIGS.GameContent.name" },
+    window: { icon: makeIconClass(icons.settings.gameContent, "title"), title: "TERIOCK.MENUS.GameContent.name" },
   };
 
   /** @inheritDoc */
-  static PARTS = {
-    identifierSources: { template: "teriock/settings/game-content-config" },
-    footer: super.PARTS.footer,
-  };
+  static PARTS = { identifierSources: { template: "teriock/menus/game-content-menu" }, footer: super.PARTS.footer };
 
   /** @inheritDoc */
   static SETTINGS_MENU = {
-    hint: "TERIOCK.CONFIGS.GameContent.hint",
+    hint: "TERIOCK.MENUS.GameContent.hint",
     key: "gameContentConfig",
-    label: "TERIOCK.CONFIGS.GameContent.label",
+    label: "TERIOCK.MENUS.GameContent.label",
     restricted: true,
   };
 

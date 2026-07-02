@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Actor data model that handles money.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorMoneyPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -129,7 +129,7 @@ export default Base => {
       }
     }
   );
-};
+}
 
 /**
  * Creates a currency field definition for tracking different types of money.

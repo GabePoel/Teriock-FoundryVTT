@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * Actor data model that handles stats.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorStatsPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -335,7 +335,7 @@ export default Base => {
       }
     }
   );
-};
+}
 
 /**
  * Creates a stat field definition with min, max, and current values, plus optional base and temp fields.

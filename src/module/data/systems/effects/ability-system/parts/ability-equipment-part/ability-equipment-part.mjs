@@ -10,7 +10,7 @@ const { fields } = foundry.data;
  * Ability equipment part.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityEquipmentPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -166,4 +166,4 @@ export default Base => {
       }
     }
   );
-};
+}

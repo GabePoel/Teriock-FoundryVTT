@@ -15,7 +15,7 @@ const { SearchFilter } = foundry.applications.ux;
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default Base => {
+export default function DocumentCreationCommonSheetPart(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -379,7 +379,7 @@ export default Base => {
       }
     }
   );
-};
+}
 
 /**
  * Resolve a creation object from config, optionally via the new-document import dialog.

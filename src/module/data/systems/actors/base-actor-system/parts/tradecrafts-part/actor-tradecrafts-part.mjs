@@ -8,7 +8,7 @@ const { SchemaField } = foundry.data.fields;
  * Actor data model mixin that handles tradecrafts.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorTradecraftsPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -69,4 +69,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -1,30 +1,30 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { settings } from "../../setup/system-settings.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseMenu from "./base-menu.mjs";
 
-export default class GameMasterControlsConfig extends BaseConfig {
+export default class GameMasterControlsMenu extends BaseMenu {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     window: {
       icon: makeIconClass(icons.settings.gameMasterControls, "title"),
-      title: "TERIOCK.CONFIGS.GameMasterControls.name",
+      title: "TERIOCK.MENUS.GameMasterControls.name",
     },
   };
 
   /** @inheritDoc */
   static PARTS = {
     general: super.PARTS.general,
-    secrets: { template: "teriock/settings/base-config" },
-    developer: { template: "teriock/settings/base-config" },
+    secrets: { template: "teriock/menus/base-menu" },
+    developer: { template: "teriock/menus/base-menu" },
     footer: super.PARTS.footer,
   };
 
   /** @inheritDoc */
   static SETTINGS_MENU = {
-    hint: "TERIOCK.CONFIGS.GameMasterControls.hint",
+    hint: "TERIOCK.MENUS.GameMasterControls.hint",
     key: "gameMasterControlsConfig",
-    label: "TERIOCK.CONFIGS.GameMasterControls.label",
+    label: "TERIOCK.MENUS.GameMasterControls.label",
     restricted: true,
   };
 
@@ -37,11 +37,11 @@ export default class GameMasterControlsConfig extends BaseConfig {
         break;
       case "secrets":
         context.fields = this.createSettingFields(settings.secrets);
-        context.legend = "TERIOCK.CONFIGS.GameMasterControls.parts.secrets";
+        context.legend = "TERIOCK.MENUS.GameMasterControls.parts.secrets";
         break;
       case "developer":
         context.fields = this.createSettingFields(settings.developer);
-        context.legend = "TERIOCK.CONFIGS.GameMasterControls.parts.developer";
+        context.legend = "TERIOCK.MENUS.GameMasterControls.parts.developer";
         break;
       default:
         break;

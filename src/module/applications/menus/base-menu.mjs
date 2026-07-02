@@ -11,10 +11,19 @@ const { SettingsConfig } = foundry.applications.settings;
  * Base application for configuring system settings.
  * Adapted from D&D 5E.
  */
-export default class BaseConfig extends TeriockApplication {
+export default class BaseMenu extends TeriockApplication {
+  /**
+   * Count menu parts rendered with the base settings template.
+   * @param {typeof BaseMenu} cls
+   * @returns {number}
+   */
+  static #countMenuParts(cls) {
+    return Object.values(cls.PARTS ?? {}).filter(part => part.template === "teriock/menus/base-menu").length;
+  }
+
   /** @override */
   static DEFAULT_OPTIONS = {
-    form: { closeOnSubmit: true, handler: BaseConfig._onCommitChanges },
+    form: { closeOnSubmit: true, handler: BaseMenu._onCommitChanges },
     position: { width: 650 },
     tag: "form",
     window: { contentClasses: ["standard-form", "teriock-settings"], resizable: true },
@@ -22,7 +31,7 @@ export default class BaseConfig extends TeriockApplication {
 
   /** @override */
   static PARTS = {
-    general: { template: "teriock/settings/base-config" },
+    general: { template: "teriock/menus/base-menu" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
@@ -35,7 +44,7 @@ export default class BaseConfig extends TeriockApplication {
   /**
    * Commit settings changes.
    * This method processes the submitted form data, updates the settings, and determines if a reload is required.
-   * @this {BaseConfig}
+   * @this {BaseMenu}
    * @param {SubmitEvent} _event - The submission event.
    * @param {HTMLFormElement} _form - The submitted form element.
    * @param {FormDataExtended} formData - The submitted form data.
@@ -88,6 +97,7 @@ export default class BaseConfig extends TeriockApplication {
     context = await super._preparePartContext(partId, context, options);
     context.fields = [];
     context.legend = undefined;
+    context.fieldset = BaseMenu.#countMenuParts(this.constructor) > 1;
     context.buttons = [{ icon: makeIconClass(icons.ui.save, "button"), label: "SETTINGS.Save", type: "submit" }];
     return context;
   }

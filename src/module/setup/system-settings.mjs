@@ -1,4 +1,4 @@
-import * as configs from "../applications/settings/_module.mjs";
+import * as menus from "../applications/menus/_module.mjs";
 import attributeConfig from "../constants/config/attribute-config.mjs";
 import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
@@ -370,16 +370,16 @@ export const settings = {
  * Register all settings and setting menus.
  */
 export function registerSettings() {
-  configs.AbilitySettingsConfig.registerMenu();
-  configs.ActorSettingsConfig.registerMenu();
-  configs.ArmamentSettingsConfig.registerMenu();
-  configs.AutomatedBehaviorConfig.registerMenu();
-  configs.AlternateRulesConfig.registerMenu();
-  configs.DialogConfig.registerMenu();
-  configs.DisplayConfig.registerMenu();
-  configs.TipsConfig.registerMenu();
-  configs.GameContentConfig.registerMenu();
-  configs.GameMasterControlsConfig.registerMenu();
+  menus.AbilitySettingsMenu.registerMenu();
+  menus.ActorSettingsMenu.registerMenu();
+  menus.ArmamentSettingsMenu.registerMenu();
+  menus.AutomatedBehaviorMenu.registerMenu();
+  menus.AlternateRulesMenu.registerMenu();
+  menus.DialogMenu.registerMenu();
+  menus.DisplayMenu.registerMenu();
+  menus.TipsMenu.registerMenu();
+  menus.GameContentMenu.registerMenu();
+  menus.GameMasterControlsMenu.registerMenu();
   for (const [k, d] of Object.entries(inheritedSettings)) { game.settings.register("teriock", k, d); }
   for (const s of Object.values(settings)) {
     for (const [k, d] of Object.entries(s)) { game.settings.register("teriock", k, d); }

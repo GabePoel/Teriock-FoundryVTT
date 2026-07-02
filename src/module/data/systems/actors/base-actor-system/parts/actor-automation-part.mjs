@@ -2,7 +2,7 @@
  * Actor data model that handles {@link BaseAutomation} application during preparation.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorAutomationPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -48,4 +48,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -4,7 +4,7 @@ const { fields } = foundry.data;
  * Ability flags part.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityInfoPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -79,4 +79,4 @@ export default Base => {
       }
     }
   );
-};
+}

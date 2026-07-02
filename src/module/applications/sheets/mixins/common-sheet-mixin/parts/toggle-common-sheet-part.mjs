@@ -1,7 +1,7 @@
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default Base => {
+export default function ToggleCommonSheetPart(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -54,4 +54,4 @@ export default Base => {
       }
     }
   );
-};
+}

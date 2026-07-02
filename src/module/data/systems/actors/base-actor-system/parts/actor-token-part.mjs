@@ -4,7 +4,7 @@ import { TeriockActor } from "../../../../../documents/_module.mjs";
  * Actor data model that handles automatically derived token changes.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorTokenPart(Base) {
   return (
     /**
      * @extends {AbstractActorSystem}
@@ -194,4 +194,4 @@ export default Base => {
       }
     }
   );
-};
+}

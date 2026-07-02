@@ -1,28 +1,28 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { settings } from "../../setup/system-settings.mjs";
-import BaseConfig from "./base-config.mjs";
+import BaseMenu from "./base-menu.mjs";
 
-export default class DisplayConfig extends BaseConfig {
+export default class DisplayMenu extends BaseMenu {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    window: { icon: makeIconClass(icons.settings.display, "title"), title: "TERIOCK.CONFIGS.Display.name" },
+    window: { icon: makeIconClass(icons.settings.display, "title"), title: "TERIOCK.MENUS.Display.name" },
   };
 
   /** @inheritDoc */
   static PARTS = {
     general: super.PARTS.general,
-    panels: { template: "teriock/settings/base-config" },
-    tooltips: { template: "teriock/settings/base-config" },
-    actorSheet: { template: "teriock/settings/base-config" },
+    panels: { template: "teriock/menus/base-menu" },
+    tooltips: { template: "teriock/menus/base-menu" },
+    actorSheet: { template: "teriock/menus/base-menu" },
     footer: super.PARTS.footer,
   };
 
   /** @inheritDoc */
   static SETTINGS_MENU = {
-    hint: "TERIOCK.CONFIGS.Display.hint",
+    hint: "TERIOCK.MENUS.Display.hint",
     key: "displayConfig",
-    label: "TERIOCK.CONFIGS.Display.label",
+    label: "TERIOCK.MENUS.Display.label",
   };
 
   /** @inheritDoc */
@@ -34,15 +34,15 @@ export default class DisplayConfig extends BaseConfig {
         break;
       case "panels":
         context.fields = this.createSettingFields(settings.panel);
-        context.legend = "TERIOCK.CONFIGS.Display.parts.panels";
+        context.legend = "TERIOCK.MENUS.Display.parts.panels";
         break;
       case "tooltips":
         context.fields = this.createSettingFields(settings.tooltip);
-        context.legend = "TERIOCK.CONFIGS.Display.parts.tooltips";
+        context.legend = "TERIOCK.MENUS.Display.parts.tooltips";
         break;
       case "actorSheet":
         context.fields = this.createSettingFields(settings.actorSheet);
-        context.legend = "TERIOCK.CONFIGS.Display.parts.actorSheets";
+        context.legend = "TERIOCK.MENUS.Display.parts.actorSheets";
         break;
       default:
         break;

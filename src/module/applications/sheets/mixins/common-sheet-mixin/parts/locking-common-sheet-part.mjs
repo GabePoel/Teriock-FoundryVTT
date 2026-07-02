@@ -1,7 +1,7 @@
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default Base => {
+export default function LockingCommonSheetPart(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -75,4 +75,4 @@ export default Base => {
       }
     }
   );
-};
+}

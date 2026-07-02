@@ -6,7 +6,7 @@ const { fields } = foundry.data;
  * Actor data model that handles transformation.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorAutomationPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -51,4 +51,4 @@ export default Base => {
       }
     }
   );
-};
+}

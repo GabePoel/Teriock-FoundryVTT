@@ -114,6 +114,8 @@ export default class DocumentSettingsSheet extends DocumentDialogSheet {
         }
       }
     }
+    const useFieldset = context.configs.length > 1;
+    context.configs = context.configs.map(config => ({ ...config, fieldset: useFieldset }));
     return context;
   }
 }

@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * Equipment data model mixin that handles equipping, gluing, and attunement.
  * @param {typeof EquipmentSystem} Base
  */
-export default Base => {
+export default function EquipmentWieldingPart(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
@@ -175,4 +175,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -4,7 +4,7 @@ import { makeIcon } from "../../../../../helpers/icon.mjs";
  * Ability rank part.
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityRankPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -72,4 +72,4 @@ export default Base => {
       }
     }
   );
-};
+}

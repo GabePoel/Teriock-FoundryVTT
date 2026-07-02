@@ -20,7 +20,7 @@ function nullifyWielded(doc) {
  * Actor data model that handles combat.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorCombatPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -151,4 +151,4 @@ export default Base => {
       }
     }
   );
-};
+}

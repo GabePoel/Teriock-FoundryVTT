@@ -9,7 +9,7 @@ const { fields } = foundry.data;
  * Actor data model that handles protections.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorProtectionsPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -91,4 +91,4 @@ export default Base => {
       }
     }
   );
-};
+}

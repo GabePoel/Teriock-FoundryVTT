@@ -7,7 +7,7 @@ const { fields } = foundry.data;
  * Actor data model mixin that handles the death bag.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorDeathBagPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -51,7 +51,7 @@ export default Base => {
       }
     }
   );
-};
+}
 
 /**
  * Make the field for a color of stone in the Death Bag.

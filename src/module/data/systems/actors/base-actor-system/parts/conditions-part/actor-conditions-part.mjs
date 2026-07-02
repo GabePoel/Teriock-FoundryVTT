@@ -6,7 +6,7 @@ const { fields } = foundry.data;
  * Actor data model that handles conditions.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorConditionsPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -96,4 +96,4 @@ export default Base => {
       }
     }
   );
-};
+}

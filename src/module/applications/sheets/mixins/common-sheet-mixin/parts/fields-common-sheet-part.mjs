@@ -3,7 +3,7 @@ import { updateDialog } from "../../../../dialogs/_module.mjs";
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
-export default Base => {
+export default function FieldsCommonSheetPart(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
@@ -68,4 +68,4 @@ export default Base => {
       };
     }
   );
-};
+}

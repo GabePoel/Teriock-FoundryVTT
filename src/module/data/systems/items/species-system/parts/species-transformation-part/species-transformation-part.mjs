@@ -8,7 +8,7 @@ const { fields } = foundry.data;
  * Species data model mixin that handles transformation behavior.
  * @param {typeof SpeciesSystem} Base
  */
-export default Base => {
+export default function SpeciesTransformationPart(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
@@ -203,4 +203,4 @@ export default Base => {
       }
     }
   );
-};
+}

@@ -10,7 +10,7 @@ import { DurationModel } from "../../../../../models/unit-models/_module.mjs";
  *
  * @param {typeof AbilitySystem} Base
  */
-export default Base => {
+export default function AbilityDurationPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
@@ -86,4 +86,4 @@ export default Base => {
       }
     }
   );
-};
+}

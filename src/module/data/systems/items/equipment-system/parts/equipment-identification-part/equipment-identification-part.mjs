@@ -7,7 +7,7 @@ const { EmbeddedDataField } = foundry.data.fields;
  * Equipment data model mixin that handles identifying and reading magic.
  * @param {typeof EquipmentSystem} Base
  */
-export default Base => {
+export default function EquipmentIdentificationPart(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
@@ -106,4 +106,4 @@ export default Base => {
       }
     }
   );
-};
+}

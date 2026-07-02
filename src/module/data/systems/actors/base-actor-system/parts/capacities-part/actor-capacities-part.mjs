@@ -10,7 +10,7 @@ const { utils } = foundry;
  * Actor capacities part.
  * @param {typeof BaseActorSystem} Base
  */
-export default Base => {
+export default function ActorCapacitiesPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
@@ -162,4 +162,4 @@ export default Base => {
       }
     }
   );
-};
+}
