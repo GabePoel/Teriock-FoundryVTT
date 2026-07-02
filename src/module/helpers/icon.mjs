@@ -1,5 +1,4 @@
 import { iconStyles } from "../constants/display/icon-styles.mjs";
-import { BaseRoll } from "../dice/rolls/_module.mjs";
 import { createElement } from "./html.mjs";
 
 /**
@@ -50,7 +49,7 @@ export function makeIconClass(icon, ...styles) {
  */
 export function getRollIcon(rollFormula) {
   const polyhedralDice = [4, 6, 8, 10, 12, 20];
-  const roll = new BaseRoll(rollFormula, {});
+  const roll = new teriock.dice.rolls.BaseRoll(rollFormula, {});
   const dice = roll.dice;
   dice.sort((a, b) => b.faces - a.faces);
   for (const die of dice) {

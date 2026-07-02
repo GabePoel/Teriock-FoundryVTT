@@ -2,7 +2,7 @@ import settingsConfig from "../../constants/config/settings-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
 import { userSettingsModels } from "../../data/models/settings-models/user-settings-models.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
-import TeriockApplication from "../api/application.mjs";
+import { TeriockApplication } from "../api/_module.mjs";
 
 const { fields } = foundry.data;
 const { SettingsConfig } = foundry.applications.settings;

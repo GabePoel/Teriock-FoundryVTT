@@ -1,5 +1,5 @@
 import { makeIconClass } from "../../helpers/icon.mjs";
-import ResolvableDialog from "../api/resolvable-dialog.mjs";
+import { ResolvableDialog } from "../api/_module.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
 const { fields } = foundry.data;
