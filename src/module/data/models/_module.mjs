@@ -8,7 +8,6 @@ export { default as TradecraftModel } from "./modifier-models/tradecraft-model.m
 export { default as PiercingModel } from "./piercing-model.mjs";
 export * from "./preview-models/_module.mjs";
 export * from "./settings-models/_module.mjs";
-export { default as StatDieModel } from "./stat-die-model/stat-die-model.mjs";
 export * from "./stat-pool-models/_module.mjs";
 export { default as StorageModel } from "./storage-model/storage-model.mjs";
 export * from "./unit-models/_module.mjs";

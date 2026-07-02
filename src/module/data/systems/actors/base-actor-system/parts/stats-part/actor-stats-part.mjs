@@ -139,7 +139,7 @@ export default function ActorStatsPart(Base) {
        */
       _prepareStat(stat, items) {
         const statData = this[stat];
-        statData._dice = [];
+        const dice = [];
         statData.base = 0;
         let numRanks = 0;
         for (const item of items) {
@@ -150,10 +150,10 @@ export default function ActorStatsPart(Base) {
             continue;
           }
           if (item.type === "rank" && !item.system.innate) { numRanks += 1; }
-          statData._dice.push(...item.system.statDice[stat]._dice);
+          dice.push(...item.system.statDice[stat].dice.contents);
           statData.base += item.system.statDice[stat].value;
         }
-        statData.dice = new Collection(statData._dice.map(d => [d.id, d]));
+        statData.dice = new Collection(dice.map(d => [d.id, d]));
         statData.max = Math.max(1, statData.base);
         statData.min = -Math.floor(statData.max / 2);
         statData.max -= statData.morganti;

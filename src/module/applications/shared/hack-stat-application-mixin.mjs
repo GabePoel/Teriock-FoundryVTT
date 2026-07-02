@@ -60,7 +60,7 @@ export default function HackStatApplicationMixin(Base) {
       /**
        * Get a stat die from an HTML element.
        * @param {HTMLElement} target
-       * @returns {StatDieModel}
+       * @returns {StatDie}
        */
       _getStatDie(target) {
         const id = target.dataset.id;

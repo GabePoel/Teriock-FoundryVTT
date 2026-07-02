@@ -4,21 +4,22 @@ import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
 import { getRollIcon, makeIconClass } from "../../../helpers/icon.mjs";
-import EmbeddedDataModel from "../embedded-data-model.mjs";
+import { PseudoDocument } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @extends {Teriock.Models.StatDieModelData}
+ * Stat dice use the pseudo-document `_id` infrastructure, but are only ever derived inside a {@link StatPoolModel}.
+ * They are never saved to the database.
+ * @extends {Teriock.StatDie.StatDieModelData}
  */
-export default class StatDieModel extends EmbeddedDataModel {
+export default class StatDie extends PseudoDocument {
   /** @inheritDoc */
   static defineSchema() {
-    return {
-      _id: new fields.DocumentIdField({ required: true }),
+    return Object.assign(super.defineSchema(), {
       faces: new fields.NumberField({ integer: true, required: true }),
       index: new fields.NumberField({ integer: true, required: true }),
-    };
+    });
   }
 
   /**
@@ -43,14 +44,6 @@ export default class StatDieModel extends EmbeddedDataModel {
    */
   get icon() {
     return getRollIcon(this.formula);
-  }
-
-  /**
-   * The ID for this stat die.
-   * @return {ID<StatDieModel>}
-   */
-  get id() {
-    return this._id;
   }
 
   /**

@@ -1,6 +1,6 @@
 import { Collection } from "@common/utils/_module.mjs";
 
-import { StatDieModel } from "../../../../../models/_module.mjs";
+import { StatDie } from "../../../../../pseudo-documents/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -11,16 +11,13 @@ declare global {
       lp: Foundry.BarField;
       /** <schema> Mana points (drain) */
       mp: CoreStat;
-      statDice: { hp: { dice: StatDieModel[], html: string }, mp: { dice: StatDieModel[], html: string } };
     };
 
     export type CoreStat = Foundry.BarField & {
-      /** <special> Dice not in a collection */
-      _dice: StatDieModel[];
       /** <base> Base */
       base: number;
       /** <special> Stat dice of this type */
-      dice: Collection<ID<StatDieModel>, StatDieModel>;
+      dice: Collection<ID<StatDie>, StatDie>;
       /** <schema> Morganti */
       morganti: number;
       /** <base> Number of stat pools that this can have from ranks */

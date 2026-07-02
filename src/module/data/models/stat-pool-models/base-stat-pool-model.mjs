@@ -5,8 +5,8 @@ import { getRollIcon } from "../../../helpers/icon.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
+import { StatDie } from "../../pseudo-documents/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
-import StatDieModel from "../stat-die-model/stat-die-model.mjs";
 
 const { fields } = foundry.data;
 const { Collection } = foundry.utils;
@@ -18,12 +18,6 @@ const { Collection } = foundry.utils;
  * @implements {Teriock.Functionality.StatProvider}
  */
 export default class BaseStatPoolModel extends EmbeddedDataModel {
-  /**
-   * The model for the stat dice in this pool.
-   * @type {typeof StatDieModel}
-   */
-  static _statDieModel = StatDieModel;
-
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseStatPool"];
 
@@ -49,20 +43,8 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   }
 
   /**
-   * The stat dice within this pool.
-   * @type {StatDieModel[]}
-   */
-  _dice = [];
-
-  /**
-   * The terms that define the stat dice within this pool.
-   * @type {DiceTerm[]}
-   */
-  _terms = [];
-
-  /**
-   * @inheritDoc
-   * @type {Collection<ID<StatDieModel>, StatDieModel>}
+   * A collection of all the dice within this pool.
+   * @type {Collection<ID<StatDie>, StatDie>}
    */
   dice;
 
@@ -113,14 +95,6 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
   }
 
   /**
-   * The path for this stat pool.
-   * @returns {string}
-   */
-  get path() {
-    return `system.statDice.${this.stat}`;
-  }
-
-  /**
    * The stat this modifies.
    * @returns {string}
    */
@@ -130,27 +104,28 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
 
   /** @inheritDoc */
   prepareStatDice() {
-    this._dice = [];
-    this._terms = [];
+    const dice = [];
     if (!this.disabled && formulaExists(this.formula)) {
       const roll = new BaseRoll(this.formula, this.getRollData());
       roll.evaluateSync({ minimize: true });
-      this._terms = roll.dice;
+      const terms = roll.dice;
       let index = 0;
-      for (const term of this._terms) {
+      for (const term of terms) {
         for (let i = 0; i < term.number; i++) {
-          const statDie = new this.constructor._statDieModel({
-            _id: toId(this.parent.parent.collectionName + this.parent.parent.id + this.path + index.toString()),
+          const statDie = new StatDie({
+            _id: toId(this.parent.parent.collectionName + this.parent.parent.id + this.path + index.toString(), {
+              hash: true,
+            }),
             faces: term.faces,
             index,
           }, { parent: this });
-          this._dice.push(statDie);
+          dice.push(statDie);
           index++;
         }
       }
     }
-    this.dice = new Collection(this._dice.map(d => [d.id, d]));
-    this.value = this._dice.reduce((total, die) => ((die.faces + 1) / 2).toNearest(1, "round") + total, 0);
+    this.dice = new Collection(dice.map(d => [d.id, d]));
+    this.value = dice.reduce((total, die) => ((die.faces + 1) / 2).toNearest(1, "round") + total, 0);
   }
 
   /**
@@ -159,14 +134,5 @@ export default class BaseStatPoolModel extends EmbeddedDataModel {
    */
   async setStatDice() {
     await setStatDiceDialog(this);
-  }
-
-  /**
-   * Update the stat pool.
-   * @param {object} data
-   * @returns {Promise<void>}
-   */
-  async update(data = {}) {
-    await this.document.update({ [this.path]: data });
   }
 }

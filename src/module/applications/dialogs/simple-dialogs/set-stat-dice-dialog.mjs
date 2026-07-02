@@ -2,7 +2,7 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import { TeriockDialog } from "../../api/_module.mjs";
 
 /**
- * Dialog that sets {@link StatDieModel} values.
+ * Dialog that sets {@link StatDie} values.
  * @param {BaseStatPoolModel} pool
  */
 export default async function setStatDiceDialog(pool) {
@@ -34,7 +34,9 @@ export default async function setStatDiceDialog(pool) {
         const disabledInput = /** @type {HTMLInputElement} */ button.form.elements.namedItem("disabled");
         const formula = formulaInput.value;
         const disabled = disabledInput.checked;
-        if (formula !== pool.formula || disabled !== pool.disabled) { await pool.update({ disabled, formula }); }
+        if (formula !== pool.formula || disabled !== pool.disabled) {
+          await pool.document.update({ [pool.localPath]: { disabled, formula } });
+        }
       },
     },
     window: {

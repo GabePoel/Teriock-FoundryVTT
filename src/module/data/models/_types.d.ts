@@ -2,7 +2,6 @@ import "./identification-model/_types";
 import "./modifier-models/_types";
 import "./preview-models/_types";
 import "./settings-models/_types";
-import "./stat-die-model/_types";
 import "./stat-pool-models/_types";
 import "./storage-model/_types";
 import "./unit-models/_types";
