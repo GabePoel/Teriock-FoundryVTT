@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../../../helpers/icon.mjs";
 import { IdentificationModel } from "../../../../../models/_module.mjs";
 
 const { EmbeddedDataField } = foundry.data.fields;

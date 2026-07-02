@@ -1,4 +1,4 @@
-import { makeIconElement } from "../../helpers/utils.mjs";
+import { makeIconElement } from "../../helpers/icon.mjs";
 
 const { AbstractFormInputElement } = foundry.applications.elements;
 

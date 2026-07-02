@@ -1,6 +1,7 @@
 import { TeriockItem } from "../../../../../../documents/_module.mjs";
+import { makeIcon } from "../../../../../../helpers/icon.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
-import { fromIdentifier, getName, makeIcon } from "../../../../../../helpers/utils.mjs";
+import { fromIdentifier, getName } from "../../../../../../helpers/utils.mjs";
 import { initialText } from "../../../../../fields/helpers/initializers.mjs";
 
 const { fields } = foundry.data;

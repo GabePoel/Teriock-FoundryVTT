@@ -1,4 +1,4 @@
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
 
 /**
  * Clamp bar inputs to non-negative numbers for percentage helpers.

@@ -4,7 +4,7 @@ import {
   selectEquipmentTypeDialog,
   selectPropertyDialog,
   selectSpeciesDialog,
-} from "../../applications/dialogs/select-dialog.mjs";
+} from "../../applications/dialogs/_module.mjs";
 import {
   AbilityPreviewModel,
   EquipmentPreviewModel,

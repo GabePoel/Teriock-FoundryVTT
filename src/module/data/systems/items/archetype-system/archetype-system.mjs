@@ -78,7 +78,7 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
    * @returns {string[]}
    */
   get classNames() {
-    return Array.from(this.classIdentifiers, id => getName("class", id)).sort((a, b) => a.localeCompare(b));
+    return Array.from(this.classIdentifiers, identifier => getName(identifier)).sort((a, b) => a.localeCompare(b));
   }
 
   /** @inheritDoc */

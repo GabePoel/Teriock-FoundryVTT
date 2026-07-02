@@ -1,7 +1,7 @@
 import { TeriockDialog } from "../../applications/api/_module.mjs";
-import { selectDocumentsDialog } from "../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { makeIconClass } from "../utils.mjs";
+import { makeIconClass } from "../icon.mjs";
 
 /**
  * Query that asks the GM to identify the item.
@@ -32,12 +32,11 @@ export default async function identifyItemQuery(queryData) {
       ...item.resources.filter(r => !r.system.revealed),
       ...item.fluencies.filter(f => !f.system.revealed),
     ];
-    const toReveal = await selectDocumentsDialog(unrevealed, {
+    const toReveal = await DocumentSelector.selectMulti(unrevealed, {
       checked: unrevealed.map(r => r.uuid),
       hint: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.hint"),
       noDocumentsMessage: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage"),
       silent: true,
-      tooltipAsync: false,
     });
     await item.updateEmbeddedDocuments(
       "ActiveEffect",

@@ -1,4 +1,4 @@
-import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof BaseActorSheet} Base
@@ -30,12 +30,11 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onSelectAttacker() {
-      const attacker = await selectDocumentDialog(
+      const attacker = await DocumentSelector.selectSingle(
         [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
         {
           checked: this.document.system.wielding.attacker?.uuid,
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.hint"),
-          label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectAttacker.label"),
           openable: true,
           textKey: "system.summarizedAttack",
         },
@@ -48,12 +47,11 @@ export default Base =>
      * @returns {Promise<void>}
      */
     static async #onSelectBlocker() {
-      const attacker = await selectDocumentDialog(
+      const attacker = await DocumentSelector.selectSingle(
         [...this.document.equipment.filter(e => e.system.equipped), ...this.document.bodyParts].filter(a => a.active),
         {
           checked: this.document.system.wielding.blocker?.uuid,
           hint: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.hint"),
-          label: _loc("TERIOCK.SHEETS.Actor.ACTIONS.SelectBlocker.label"),
           openable: true,
           textKey: "system.summarizedBlock",
         },

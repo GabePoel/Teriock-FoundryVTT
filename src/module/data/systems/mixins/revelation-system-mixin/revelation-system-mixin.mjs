@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/icon.mjs";
 
 const { fields } = foundry.data;
 

@@ -1,5 +1,5 @@
+import { makeIcon } from "../../../helpers/icon.mjs";
 import { buildCommandOptions, commands } from "../../../helpers/interaction/_module.mjs";
-import { makeIcon } from "../../../helpers/utils.mjs";
 
 const { ChatLog } = foundry.applications.sidebar.tabs;
 

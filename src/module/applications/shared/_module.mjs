@@ -1,1 +1,1 @@
-export * as mixins from "./mixins/_module.mjs";
+export { default as HackStatApplicationMixin } from "./hack-stat-application-mixin.mjs";

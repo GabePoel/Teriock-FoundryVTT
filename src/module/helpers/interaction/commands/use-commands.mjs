@@ -1,4 +1,4 @@
-import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { resolveDocuments } from "../../resolve.mjs";
 import { getIcon } from "../../utils.mjs";
@@ -43,7 +43,7 @@ async function useExternal(actor, options = {}) {
     return;
   }
   const documents = await resolveDocuments([options.uuid], { ...options, expandFolders: true });
-  const chosen = documents.length > 1 ? await selectDocumentsDialog(documents) : documents;
+  const chosen = documents.length > 1 ? await DocumentSelector.selectMulti(documents) : documents;
   await Promise.all(chosen.map(c => c.use({ ...options, actor })));
 }
 

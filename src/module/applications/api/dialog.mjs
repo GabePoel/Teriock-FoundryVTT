@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
-import { BaseApplicationMixin } from "../shared/mixins/_module.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
+import BaseApplicationMixin from "./base-application-mixin.mjs";
 
 const { DialogV2 } = foundry.applications.api;
 

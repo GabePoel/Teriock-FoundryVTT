@@ -1,6 +1,7 @@
 import { TeriockTextEditor } from "../_module.mjs";
 import wikiConfig from "../../../constants/config/wiki-config.mjs";
-import { makeIconClass, parseIdentifier } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import { parseIdentifier } from "../../../helpers/utils.mjs";
 
 const IDENTIFIER_ICON_MAP = Object.fromEntries(
   Object.values(wikiConfig.namespaces).filter(c => c.identifierType && c.icon).map(c => [c.identifierType, c.icon]),

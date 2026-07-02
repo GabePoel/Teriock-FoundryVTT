@@ -1,6 +1,6 @@
-import { createElement } from "../../helpers/html.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
-import { TeriockDialog } from "../api/_module.mjs";
+import { createElement } from "../../../helpers/html.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import { TeriockDialog } from "../../api/_module.mjs";
 
 /**
  * Create a dialog to update the specified paths.

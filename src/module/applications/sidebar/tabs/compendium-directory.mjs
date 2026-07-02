@@ -1,5 +1,5 @@
 import { getPackIcon } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import TeriockCompendium from "../apps/compendium.mjs";
 
 const { CompendiumDirectory } = foundry.applications.sidebar.tabs;

@@ -1,6 +1,6 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
-import { SourceRefreshDialog } from "../../../dialogs/_module.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
+import { SourceRefresher } from "../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -29,7 +29,7 @@ export default function SourceRefreshButtonSheetMixin(Base) {
      * @returns {Promise<void>}
      */
     static async _onSourceRefresh() {
-      await SourceRefreshDialog.create({ document: this.document });
+      await SourceRefresher.create({ document: this.document });
     }
   };
 }

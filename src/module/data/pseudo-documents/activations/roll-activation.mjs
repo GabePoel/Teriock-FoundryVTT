@@ -1,6 +1,6 @@
 import { icons } from "../../../constants/display/icons.mjs";
+import { getRollIcon } from "../../../helpers/icon.mjs";
 import commands from "../../../helpers/interaction/commands/_module.mjs";
-import { getRollIcon } from "../../../helpers/utils.mjs";
 import RollAutomation from "../automations/roll-automation.mjs";
 import { AutomationActivationFactory } from "./abstract/_module.mjs";
 

@@ -1,6 +1,7 @@
 import { ExpirationExecution } from "../../../../executions/document-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/icon.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../shared/mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";

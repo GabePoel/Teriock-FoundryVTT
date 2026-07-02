@@ -1,6 +1,6 @@
+import { makeIcon } from "../../helpers/icon.mjs";
 import { resolveDocument } from "../../helpers/resolve.mjs";
 import { toId, toKebabCase } from "../../helpers/string.mjs";
-import { makeIcon } from "../../helpers/utils.mjs";
 
 /**
  * Base mixin.

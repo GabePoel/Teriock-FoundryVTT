@@ -1,9 +1,9 @@
-import TeriockBaseApplication from "./base-application.mjs";
+import TeriockApplication from "./application.mjs";
 
 /**
  * A custom application representing something that needs to be resolved before some routing can continue.
  */
-export default class TeriockResolvableDialog extends TeriockBaseApplication {
+export default class ResolvableDialog extends TeriockApplication {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -17,7 +17,7 @@ export default class TeriockResolvableDialog extends TeriockBaseApplication {
   /**
    * @param {PointerEvent} event
    * @returns {Promise<void>}
-   * @this {TeriockResolvableDialog}
+   * @this {ResolvableDialog}
    */
   static async _onCancel(event) {
     event?.preventDefault();

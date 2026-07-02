@@ -1,5 +1,5 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**

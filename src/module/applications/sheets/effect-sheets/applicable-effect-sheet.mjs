@@ -1,16 +1,8 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
-import { BaseSheetMixin, SystemSettingsButtonSheetMixin } from "../mixins/_module.mjs";
-import {
-  ConnectionCommonSheetPart,
-  DocumentCreationCommonSheetPart,
-  DragDropCommonSheetPart,
-  FieldsCommonSheetPart,
-  LockingCommonSheetPart,
-  MechanicsCommonSheetPart,
-  ToggleCommonSheetPart,
-} from "../mixins/common-sheet-mixin/parts/_module.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import * as sheetMixins from "../mixins/_module.mjs";
+import * as commonSheetParts from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -23,15 +15,15 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 export default class ApplicableEffectSheet
   extends mixClasses(
     ActiveEffectConfig,
-    BaseSheetMixin,
-    SystemSettingsButtonSheetMixin,
-    ConnectionCommonSheetPart,
-    DocumentCreationCommonSheetPart,
-    DragDropCommonSheetPart,
-    FieldsCommonSheetPart,
-    LockingCommonSheetPart,
-    MechanicsCommonSheetPart,
-    ToggleCommonSheetPart,
+    sheetMixins.BaseSheetMixin,
+    sheetMixins.SystemSettingsButtonSheetMixin,
+    commonSheetParts.ConnectionCommonSheetPart,
+    commonSheetParts.DocumentCreationCommonSheetPart,
+    commonSheetParts.DragDropCommonSheetPart,
+    commonSheetParts.FieldsCommonSheetPart,
+    commonSheetParts.LockingCommonSheetPart,
+    commonSheetParts.MechanicsCommonSheetPart,
+    commonSheetParts.ToggleCommonSheetPart,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

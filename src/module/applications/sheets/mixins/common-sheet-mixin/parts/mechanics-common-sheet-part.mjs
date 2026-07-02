@@ -1,9 +1,10 @@
 import { ChangesSheetMixin } from "../../_module.mjs";
 import { BaseAutomation } from "../../../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { BaseExpiration } from "../../../../../data/pseudo-documents/expirations/abstract/_module.mjs";
+import { makeIcon, makeIconClass } from "../../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
-import { makeIcon, makeIconClass, objectMap } from "../../../../../helpers/utils.mjs";
-import { selectDialog } from "../../../../dialogs/select-dialog.mjs";
+import { objectMap } from "../../../../../helpers/utils.mjs";
+import { selectDialog } from "../../../../dialogs/_module.mjs";
 import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
 /**

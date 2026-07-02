@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { changeSizeDialog } from "../../../dialogs/_module.mjs";
-import HackStatApplicationMixin from "../../../shared/mixins/hack-stat-application-mixin.mjs";
+import { HackStatApplicationMixin } from "../../../shared/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;

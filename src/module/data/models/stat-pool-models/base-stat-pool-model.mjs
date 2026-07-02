@@ -1,9 +1,9 @@
 import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
+import { getRollIcon } from "../../../helpers/icon.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
-import { getRollIcon } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 import StatDieModel from "../stat-die-model/stat-die-model.mjs";

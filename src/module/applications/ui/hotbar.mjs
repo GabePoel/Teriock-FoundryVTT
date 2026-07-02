@@ -1,5 +1,6 @@
 import { TeriockMacro } from "../../documents/_module.mjs";
-import { findBestDocument, makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../helpers/icon.mjs";
+import { findBestDocument } from "../../helpers/utils.mjs";
 import { hotbarDropDialog } from "../dialogs/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;

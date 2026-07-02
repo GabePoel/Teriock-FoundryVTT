@@ -1,5 +1,5 @@
 import { icons } from "../../../../../constants/display/icons.mjs";
-import { makeIconClass } from "../../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../../helpers/icon.mjs";
 
 /**
  * @param {typeof BaseActorSheet} Base

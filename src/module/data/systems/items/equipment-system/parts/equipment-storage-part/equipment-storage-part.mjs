@@ -1,8 +1,8 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
-import { selectDocumentDialog } from "../../../../../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
 import equipmentConfig from "../../../../../../constants/config/equipment-config.mjs";
+import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
 import { resolveDocument } from "../../../../../../helpers/resolve.mjs";
-import { makeIcon, makeIconClass } from "../../../../../../helpers/utils.mjs";
 import { StorageModel } from "../../../../../models/_module.mjs";
 
 const { EmbeddedDataField, NumberField } = foundry.data.fields;
@@ -163,7 +163,7 @@ export default Base => {
         if (!this.consumable) { return; }
         const candidates = this._stackingCandidates;
         if (!candidates.length) { return; }
-        const chosen = await selectDocumentDialog(candidates, {
+        const chosen = await DocumentSelector.selectSingle(candidates, {
           auto: true,
           hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.stack.hint"),
           icon: makeIconClass(TERIOCK.display.icons.equipment.stack, "title"),

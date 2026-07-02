@@ -1,5 +1,5 @@
 import { formulaExists } from "../../../../helpers/formula.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/icon.mjs";
 import { EvaluationField } from "../../../fields/_module.mjs";
 
 const { fields } = foundry.data;

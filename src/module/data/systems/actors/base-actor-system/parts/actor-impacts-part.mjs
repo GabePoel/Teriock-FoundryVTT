@@ -1,5 +1,6 @@
 import { TeriockDialog } from "../../../../../applications/api/_module.mjs";
-import { barClamp, makeIconClass } from "../../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../../helpers/icon.mjs";
+import { barClamp } from "../../../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 

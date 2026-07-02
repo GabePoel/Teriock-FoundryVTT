@@ -1,6 +1,6 @@
-import { makeIconClass } from "../../helpers/utils.mjs";
-import { TeriockDialog } from "../api/_module.mjs";
-import { TeriockTextEditor } from "../ux/_module.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import TeriockDialog from "../../api/dialog.mjs";
+import { TeriockTextEditor } from "../../ux/_module.mjs";
 
 /**
  * Dialog to select what type of macro to make.

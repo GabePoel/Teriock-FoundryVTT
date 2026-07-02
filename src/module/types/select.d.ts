@@ -9,16 +9,8 @@ declare global {
       name: string;
       /** Text to display */
       text?: string;
-      /** HTML to include in tooltip */
-      tooltip?: string;
       /** UUID used for opening document sheets and fetching tooltips */
       uuid?: string;
-    };
-
-    export type DocumentSelectContext = {
-      documents: Record<string, Teriock.Select.DocumentSelectionEntry>;
-      hint: string;
-      tooltip: boolean;
     };
 
     type _BaseDocumentSelectDialogOptions = {
@@ -26,14 +18,10 @@ declare global {
       hint?: string;
       /** Icon class */
       icon?: string;
-      /** Unique key to use that identifies each document */
-      idKey?: string;
       /** Path to an image to display for each document */
       imgKey?: string;
       /** Whether to localize title, hint, and warning strings */
       localize?: boolean;
-      /** Path to a name to display for each document */
-      nameKey?: string;
       /** Whether document sheets can be opened on double click */
       openable?: boolean;
       /** Whether to suppress warnings if there's no documents to select from. */
@@ -44,12 +32,6 @@ declare global {
       title?: string;
       /** Whether a tooltip should be displayed for each document option */
       tooltip?: boolean;
-      /** Path to an identifier used for fetching the tooltip */
-      tooltipIdentifier?: string;
-      /** Path to HTML to use for the tooltip for each document */
-      tooltipKey?: string | null;
-      /** Path to a UUID used for fetching the tooltip */
-      tooltipUuid?: string;
     };
 
     export type SelectDocumentDialogOptions = _BaseDocumentSelectDialogOptions & {

@@ -1,6 +1,6 @@
 import { TeriockPanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
 
 /**
  * Add the entries from {@link BaseDocument.getCardContextMenuEntries} to sheet header.

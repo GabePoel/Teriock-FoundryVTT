@@ -1,5 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import DocumentDialogSheet from "./document-dialog-sheet.mjs";
 
 export default class DocumentSettingsSheet extends DocumentDialogSheet {

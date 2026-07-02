@@ -1,7 +1,7 @@
 import { TeriockContextMenu } from "../../applications/ux/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { makeIcon } from "../../helpers/icon.mjs";
 import { systemPath } from "../../helpers/path.mjs";
-import { makeIcon } from "../../helpers/utils.mjs";
 import Booster from "../booster.mjs";
 import { selectWeightedMaxFaceDie } from "../helpers.mjs";
 

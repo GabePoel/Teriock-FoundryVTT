@@ -4,7 +4,7 @@ import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createElement } from "../../../../helpers/html.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
 
 const { fields } = foundry.data;
 

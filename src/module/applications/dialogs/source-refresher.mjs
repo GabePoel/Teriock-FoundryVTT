@@ -1,5 +1,5 @@
 import { icons } from "../../constants/display/icons.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
 import { DocumentDialogSheet } from "../sheets/utility-sheets/_module.mjs";
 
 const { BooleanField } = foundry.data.fields;
@@ -23,7 +23,7 @@ class RefreshOptions extends DataModel {
 
 let localized = false;
 
-export default class SourceRefreshDialog extends DocumentDialogSheet {
+export default class SourceRefresher extends DocumentDialogSheet {
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onRefresh },
     classes: ["dynamic-select", "dialog"],
@@ -40,7 +40,7 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
   /**
    * Close this dialog and activate the refresh.
    * @returns {Promise<void>}
-   * @this {SourceRefreshDialog}
+   * @this {SourceRefresher}
    */
   static async _onRefresh() {
     const source = await fromUuid(this.selected);
@@ -91,7 +91,7 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
       });
     });
     // Listen for double clicks to open refresh sources
-    /** @see {TeriockDocumentSelector._initClickLoader} */
+    /** @see {DocumentSelector._initClickLoader} */
     this.element.querySelectorAll("[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
       el.addEventListener("dblclick", async ev => {
         const target = /** @type {HTMLElement} */ ev.currentTarget;
@@ -120,7 +120,6 @@ export default class SourceRefreshDialog extends DocumentDialogSheet {
       documents: documentMap,
       hint: _loc(documents.length ? "TERIOCK.DIALOGS.SourceRefresh.hint" : "TERIOCK.DIALOGS.SourceRefresh.noSources"),
       tooltip: true,
-      tooltipAsync: true,
     });
   }
 

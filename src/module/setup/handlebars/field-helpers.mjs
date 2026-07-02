@@ -1,5 +1,5 @@
 import { createElement } from "../../helpers/html.mjs";
-import { makeIconClass, makeIconElement } from "../../helpers/utils.mjs";
+import { makeIconClass, makeIconElement } from "../../helpers/icon.mjs";
 
 /**
  * Renders a labeled form box.

@@ -14,7 +14,7 @@ command: >-
   actor.system.wielding.attacker?.id !== a.id);
 
   if (armaments.length > 0) {
-    const selectedArmament = await tm.dialogs.selectDocumentDialog(armaments, {
+    const selectedArmament = await teriock.applications.dialogs.DocumentSelector.selectSingle(armaments, {
       hint: _loc("TERIOCK.DIALOGS.Select.Armament.hint"),
       title: _loc("TERIOCK.DIALOGS.Select.Armament.title"),
     });
@@ -25,7 +25,7 @@ command: >-
       && a.system.executionTime.base === "a1"
       && ["hand", "weapon"].includes(a.system.delivery)
     ).sort((a, b) => a.name.localeCompare(b.name));
-    const ability = await tm.dialogs.selectDocumentDialog(abilities, {
+    const ability = await teriock.applications.dialogs.DocumentSelector.selectSingle(abilities, {
       hint: _loc("TERIOCK.DIALOGS.Select.Ability.hint"),
       title: _loc("TERIOCK.DIALOGS.Select.Ability.title"),
     });

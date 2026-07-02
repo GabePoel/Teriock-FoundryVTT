@@ -1,6 +1,6 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import * as mixins from "../mixins/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
 

@@ -1,4 +1,4 @@
-import { makeIcon, makeIconClass } from "../../helpers/utils.mjs";
+import { makeIcon, makeIconClass } from "../../helpers/icon.mjs";
 
 /**
  * CSS class for if a tab is active or inactive.

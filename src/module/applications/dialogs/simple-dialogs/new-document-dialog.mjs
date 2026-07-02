@@ -1,5 +1,5 @@
-import { makeIconClass } from "../../helpers/utils.mjs";
-import { TeriockDialog } from "../api/_module.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import { TeriockDialog } from "../../api/_module.mjs";
 
 /**
  * Dialog to create or import a new document.

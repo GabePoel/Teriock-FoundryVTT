@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { createElement } from "../../helpers/html.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
 
 const { AbstractFormInputElement } = foundry.applications.elements;
 const { setInputAttributes } = foundry.applications.fields;

@@ -1,8 +1,8 @@
 import settingsConfig from "../../constants/config/settings-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
 import { userSettingsModels } from "../../data/models/settings-models/user-settings-models.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
-import TeriockBaseApplication from "../api/base-application.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
+import TeriockApplication from "../api/application.mjs";
 
 const { fields } = foundry.data;
 const { SettingsConfig } = foundry.applications.settings;
@@ -11,7 +11,7 @@ const { SettingsConfig } = foundry.applications.settings;
  * Base application for configuring system settings.
  * Adapted from D&D 5E.
  */
-export default class BaseConfig extends TeriockBaseApplication {
+export default class BaseConfig extends TeriockApplication {
   /** @override */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: true, handler: BaseConfig._onCommitChanges },

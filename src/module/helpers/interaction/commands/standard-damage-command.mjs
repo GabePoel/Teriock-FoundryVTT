@@ -1,4 +1,4 @@
-import { selectDocumentDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 
 /**
@@ -17,7 +17,7 @@ async function use(actor, options = {}) {
   if (options.select) {
     const selOpts = { noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems" };
     if (attacker?.uuid) { selOpts.checked = attacker.uuid; }
-    attacker = await selectDocumentDialog(actor.armaments.filter(a => a.active), selOpts);
+    attacker = await DocumentSelector.selectSingle(actor.armaments.filter(a => a.active), selOpts);
   }
   if (!attacker) {
     ui.notifications.error("TERIOCK.COMMANDS.StandardDamage.noDefaultWeapon", {

@@ -1,4 +1,4 @@
-import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import effectConfig from "../../../constants/config/effect-config.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 import { TeriockActiveEffect, TeriockItem } from "../../../documents/_module.mjs";
@@ -140,7 +140,7 @@ export default class AddDocumentsActivation extends BaseActivation {
         let choices = [];
         if (this.target === "armament") { choices = a.armaments; }
         if (this.target === "item") { choices = a.visibleChildren.filter(c => c.documentName === "Item"); }
-        const chosen = await selectDocumentsDialog(choices);
+        const chosen = await DocumentSelector.selectMulti(choices);
         await Promise.all(chosen.map(c => {
           this.createFamily(c, family);
           ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.added", {

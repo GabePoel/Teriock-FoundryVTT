@@ -1,4 +1,4 @@
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 
 const { ChatPopout } = foundry.applications.sidebar.apps;
 

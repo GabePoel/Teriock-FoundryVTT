@@ -1,11 +1,10 @@
-import impactConfig from "../../constants/config/impact-config.mjs";
-import { RollActivation } from "../../data/pseudo-documents/activations/_module.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
-import TeriockStatManager from "./stat-manager.mjs";
+import impactConfig from "../../../constants/config/impact-config.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import BaseStatManager from "./base-stat-manager.mjs";
 
 const { fields } = foundry.data;
 
-export default class TeriockHealManager extends TeriockStatManager {
+export default class HealManager extends BaseStatManager {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -23,12 +22,12 @@ export default class TeriockHealManager extends TeriockStatManager {
 
   /**
    * @inheritDoc
-   * @this {TeriockHealManager}
+   * @this {HealManager}
    */
   static async _onRollStatDie(event, target) {
     const statDie = this._getStatDie(target);
     if (this._forHarm) {
-      const rollActivation = new RollActivation({
+      const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({
         formula: this._getStatDieRollFormula(statDie.formula.replace("hp", "holy")),
         roll: "damage",
       });

@@ -1,7 +1,7 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
 import { elementClass } from "../../../helpers/html.mjs";
+import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
-import { makeIcon, makeIconClass } from "../../../helpers/utils.mjs";
 import { TeriockContextMenu } from "../../ux/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 

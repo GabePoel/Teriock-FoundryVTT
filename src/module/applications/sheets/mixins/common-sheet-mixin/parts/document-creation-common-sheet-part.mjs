@@ -1,10 +1,13 @@
 import { BasePreviewModel } from "../../../../../data/models/preview-models/_module.mjs";
+import { makeIconClass } from "../../../../../helpers/icon.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toKebabCase } from "../../../../../helpers/string.mjs";
-import { makeIconClass } from "../../../../../helpers/utils.mjs";
-import { newDocumentDialog } from "../../../../dialogs/_module.mjs";
-import { selectClassDialog, selectTradecraftDialog } from "../../../../dialogs/select-dialog.mjs";
-import { selectDocumentDialog } from "../../../../dialogs/select-document-dialog.mjs";
+import {
+  DocumentSelector,
+  newDocumentDialog,
+  selectClassDialog,
+  selectTradecraftDialog,
+} from "../../../../dialogs/_module.mjs";
 import { HTMLTernaryElement } from "../../../../elements/_module.mjs";
 
 const { SearchFilter } = foundry.applications.ux;
@@ -179,7 +182,7 @@ export default Base => {
           teriock.fromIdentifier(`rank:rank-4-${classIdentifier}`),
           teriock.fromIdentifier(`rank:rank-5-${classIdentifier}`),
         ]);
-        const referenceRank = /**@type {TeriockRank} */ await selectDocumentDialog(possibleRanks, {
+        const referenceRank = /**@type {TeriockRank} */ await DocumentSelector.selectSingle(possibleRanks, {
           openable: true,
           title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
         });
@@ -214,7 +217,7 @@ export default Base => {
         const chosenAbilityNames = [];
         if (availableCombatAbilityNames.size > 1) {
           const availableCombatAbilities = referenceRank.abilities.filter(a => availableCombatAbilityNames.has(a.name));
-          const chosenCombatAbility = await selectDocumentDialog(availableCombatAbilities, {
+          const chosenCombatAbility = await DocumentSelector.selectSingle(availableCombatAbilities, {
             openable: true,
             title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat"),
           });
@@ -227,7 +230,7 @@ export default Base => {
           const availableSupportAbilities = referenceRank.abilities.filter(a =>
             availableSupportAbilityNames.has(a.name)
           );
-          const chosenSupportAbility = await selectDocumentDialog(availableSupportAbilities, {
+          const chosenSupportAbility = await DocumentSelector.selectSingle(availableSupportAbilities, {
             openable: true,
             title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport"),
           });
@@ -343,7 +346,7 @@ export default Base => {
             && e.system.quantity < e.system.maxQuantity.value
           );
           if (stackCandidates?.length > 0) {
-            const selected = await selectDocumentDialog(stackCandidates, {
+            const selected = await DocumentSelector.selectSingle(stackCandidates, {
               auto: false,
               hint: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.hint", { name: equipment.name }),
               openable: true,

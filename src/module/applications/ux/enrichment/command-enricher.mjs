@@ -1,6 +1,7 @@
 import { TeriockTextEditor } from "../_module.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import { buildCommandOptions, commands, getCommandEntryValue } from "../../../helpers/interaction/_module.mjs";
-import { makeIconClass, objectMap } from "../../../helpers/utils.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { interpretTerm } from "../enrichment-helpers.mjs";
 
 /**

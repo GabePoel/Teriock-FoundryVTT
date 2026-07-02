@@ -1,4 +1,4 @@
-import { TeriockHealManager, TeriockRevitalizeManager } from "../../../../../../applications/api/_module.mjs";
+import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
 import { docSort, rankSort } from "../../../../../../helpers/sort.mjs";
 import { initialNumber } from "../../../../../fields/helpers/initializers.mjs";
 
@@ -302,7 +302,7 @@ export default Base => {
        */
       async takeHeal(options = {}) {
         await this.parent.hookCall("takeHeal");
-        await TeriockHealManager.create(this.actor, options);
+        await HealManager.create(this.actor, options);
       }
 
       /**
@@ -312,7 +312,7 @@ export default Base => {
        */
       async takeRevitalize(options = {}) {
         await this.parent.hookCall("takeRevitalize");
-        await TeriockRevitalizeManager.create(this.actor, options);
+        await RevitalizeManager.create(this.actor, options);
       }
 
       /**

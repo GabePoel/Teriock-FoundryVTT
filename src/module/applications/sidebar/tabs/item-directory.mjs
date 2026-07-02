@@ -1,6 +1,6 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
 import { TeriockActor } from "../../../documents/_module.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import DocumentDirectoryMixin from "./document-directory-mixin.mjs";
 
 const { ItemDirectory } = foundry.applications.sidebar.tabs;

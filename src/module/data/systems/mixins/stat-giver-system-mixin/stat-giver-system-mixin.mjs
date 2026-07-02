@@ -1,5 +1,5 @@
 import { icons } from "../../../../constants/display/icons.mjs";
-import { makeIcon } from "../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../helpers/icon.mjs";
 import { HpPoolModel, MpPoolModel } from "../../../models/stat-pool-models/_module.mjs";
 
 const { fields } = foundry.data;

@@ -1,5 +1,5 @@
 import { getPackIcon } from "../../../helpers/html.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 
 const { Compendium } = foundry.applications.sidebar.apps;
 

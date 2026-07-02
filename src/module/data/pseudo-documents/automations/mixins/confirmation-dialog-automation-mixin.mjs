@@ -1,6 +1,6 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { makeIconClass } from "../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
 
 const { fields } = foundry.data;
 

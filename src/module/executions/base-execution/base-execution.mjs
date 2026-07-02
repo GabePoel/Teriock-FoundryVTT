@@ -1,4 +1,4 @@
-import { TeriockExecutionEditor } from "../../applications/api/_module.mjs";
+import { ExecutionEditor } from "../../applications/dialogs/_module.mjs";
 import { CompetenceModel } from "../../data/models/_module.mjs";
 import * as dataMixins from "../../data/shared/mixins/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
@@ -447,7 +447,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    */
   async _showInputDialog() {
     if (!this.showDialog) { return; }
-    const result = await TeriockExecutionEditor.prompt(this);
+    const result = await ExecutionEditor.prompt(this);
     if (result === null) { return false; }
   }
 

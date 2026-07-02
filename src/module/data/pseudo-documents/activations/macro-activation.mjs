@@ -1,5 +1,5 @@
 import { icons } from "../../../constants/display/icons.mjs";
-import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import TeriockChatMessage from "../../../documents/chat-message/chat-message.mjs";
 import { BaseActivation } from "./abstract/_module.mjs";
 
 const { fields } = foundry.data;

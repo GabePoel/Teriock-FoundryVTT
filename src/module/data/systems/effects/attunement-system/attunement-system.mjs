@@ -1,8 +1,9 @@
 import attunementConfig from "../../../../constants/config/attunement-config.mjs";
 import { AttunementExecution } from "../../../../executions/document-executions/_module.mjs";
+import { makeIcon } from "../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon, objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 

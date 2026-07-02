@@ -1,5 +1,5 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import { BaseApplicationMixin } from "../shared/mixins/_module.mjs";
+import BaseApplicationMixin from "./base-application-mixin.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -8,6 +8,6 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes HandlebarsApplicationMixin
  * @mixes BaseApplication
  */
-export default class TeriockBaseApplication
+export default class TeriockApplication
   extends mixClasses(ApplicationV2, HandlebarsApplicationMixin, BaseApplicationMixin)
 {}

@@ -1,4 +1,4 @@
-import { makeIcon } from "../../../../../helpers/utils.mjs";
+import { makeIcon } from "../../../../../helpers/icon.mjs";
 import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
 /**

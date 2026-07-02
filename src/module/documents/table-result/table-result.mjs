@@ -1,13 +1,7 @@
 import { icons } from "../../constants/display/icons.mjs";
-import {
-  AddDocumentsActivation,
-  MacroActivation,
-  SummonActivation,
-  UseExternalActivation,
-} from "../../data/pseudo-documents/activations/_module.mjs";
 import { migrateUuid, migrateValueTransform } from "../../data/shared/migrations/source-migrations.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../helpers/icon.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { TableResult } = foundry.documents;
@@ -43,6 +37,7 @@ export default class TeriockTableResult
    * @returns {Promise<Teriock.Activations.Any[]>}
    */
   async getActivations() {
+    const acts = teriock.data.pseudoDocuments.activations;
     if (!this.documentUuid) { return []; }
     const parsed = foundry.utils.parseUuid(this.documentUuid);
     if (!parsed) { return []; }
@@ -54,16 +49,16 @@ export default class TeriockTableResult
       const label = _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.placeNamed", {
         name: doc?.name || _loc("TERIOCK.AUTOMATIONS.Summon.BUTTONS.defaultName"),
       });
-      activations.push(new SummonActivation({ display: { label }, uuids: [this.documentUuid] }));
+      activations.push(new acts.SummonActivation({ display: { label }, uuids: [this.documentUuid] }));
     }
     if (doc.documentName === "Macro") {
-      activations.push(new MacroActivation({ display: { label: name }, macro: this.documentUuid }));
+      activations.push(new acts.MacroActivation({ display: { label: name }, macro: this.documentUuid }));
     }
     if (["ActiveEffect", "Item", "RollTable"].includes(doc.documentName)) {
       const label = _loc("TERIOCK.COMMANDS.UseDocument.useNamed", { name });
       const icon = TERIOCK.config.document[doc.type]?.icon;
       activations.push(
-        new UseExternalActivation({ display: { icon, label }, options: { icon, label, uuid: this.documentUuid } }),
+        new acts.UseExternalActivation({ display: { icon, label }, options: { icon, label, uuid: this.documentUuid } }),
       );
     }
     if (["ActiveEffect", "Item"].includes(doc.documentName) && doc.type !== "ability") {
@@ -72,7 +67,7 @@ export default class TeriockTableResult
         : _loc("TERIOCK.AUTOMATIONS.AddDocuments.BUTTONS.default");
       const activationFamily = { root: { uuid: this.documentUuid } };
       activations.push(
-        new AddDocumentsActivation({
+        new acts.AddDocumentsActivation({
           display: { label },
           primary: activationFamily,
           secondary: activations,

@@ -1,16 +1,16 @@
-import { makeIconClass } from "../../helpers/utils.mjs";
-import { selectDocumentDialog } from "../dialogs/_module.mjs";
-import TeriockResolvableDialog from "./resolvable-dialog.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
+import ResolvableDialog from "../api/resolvable-dialog.mjs";
+import DocumentSelector from "./document-selector.mjs";
 
 const { fields } = foundry.data;
 
-export default class TeriockExecutionEditor extends TeriockResolvableDialog {
+export default class ExecutionEditor extends ResolvableDialog {
   /**
    * Change the message mode.
    * @param {PointerEvent} _event
    * @param {HTMLButtonElement} target
    * @returns {Promise<void>}
-   * @this {TeriockExecutionEditor}
+   * @this {ExecutionEditor}
    */
   static async #onMessageMode(_event, target) {
     this.execution._messageMode = target.dataset.mode;
@@ -48,7 +48,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
     const entry = this.execution._dialogDocuments[index];
     if (!entry?.editable || typeof entry.getChoices !== "function") { return; }
     const choices = await entry.getChoices();
-    const selected = await selectDocumentDialog(choices, {
+    const selected = await DocumentSelector.selectSingle(choices, {
       auto: false,
       checked: entry.document?.uuid,
       hint: _loc(entry.selectHint ?? "TERIOCK.DIALOGS.Select.Armament.hint"),
@@ -69,7 +69,7 @@ export default class TeriockExecutionEditor extends TeriockResolvableDialog {
    * @param {PointerEvent} event
    * @param {HTMLButtonElement} target
    * @returns {Promise<void>}
-   * @this {TeriockExecutionEditor}
+   * @this {ExecutionEditor}
    */
   static async _onConfirm(event, target) {
     event?.preventDefault();

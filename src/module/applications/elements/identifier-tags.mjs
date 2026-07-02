@@ -1,6 +1,7 @@
 import { validateTypedIdentifier } from "../../data/fields/helpers/validators.mjs";
 import { createElement } from "../../helpers/html.mjs";
-import { makeIconClass, parseIdentifier } from "../../helpers/utils.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
+import { parseIdentifier } from "../../helpers/utils.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { AbstractFormInputElement, HTMLStringTagsElement } = foundry.applications.elements;

@@ -1,7 +1,8 @@
 import { TeriockDialog } from "../../../applications/api/_module.mjs";
-import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import { fromIdentifier, getName, makeIconClass, objectMap } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import { fromIdentifier, getName, objectMap } from "../../../helpers/utils.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;
@@ -132,12 +133,11 @@ export default class IdentificationModel extends EmbeddedDataModel {
       const checked = revealed.filter(e =>
         e.type !== "property" || !uncheckedPropertyIdentifiers.includes(e.system.identifier)
       ).map(e => e.uuid);
-      const toReveal = await selectDocumentsDialog(revealed, {
+      const toReveal = await DocumentSelector.selectMulti(revealed, {
         checked,
         hint: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.hint"),
         noDocumentsMessage: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.noDocumentsMessage"),
         silent: true,
-        tooltipAsync: false,
       });
       await this.parent.parent.updateEmbeddedDocuments(
         "ActiveEffect",

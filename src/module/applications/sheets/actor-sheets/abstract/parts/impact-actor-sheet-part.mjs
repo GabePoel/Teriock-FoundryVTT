@@ -1,4 +1,4 @@
-import { makeIconClass } from "../../../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../../../helpers/icon.mjs";
 import { TeriockDialog } from "../../../../api/_module.mjs";
 
 const { fields } = foundry.data;

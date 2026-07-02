@@ -1,9 +1,9 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { makeIcon, makeIconClass } from "../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
-import { makeIcon, makeIconClass } from "../../../../helpers/utils.mjs";
 import { speciesTransformationFields } from "../../../fields/helpers/transformation-fields.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";

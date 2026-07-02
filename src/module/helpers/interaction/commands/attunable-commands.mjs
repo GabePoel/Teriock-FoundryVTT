@@ -1,4 +1,4 @@
-import { selectDocumentsDialog } from "../../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { icons } from "../../../constants/display/icons.mjs";
 
 /**
@@ -9,7 +9,7 @@ import { icons } from "../../../constants/display/icons.mjs";
 async function takeAttune(actor) {
   if (!game.actors.check(actor)) { return; }
   const choices = [...actor.equipment, ...actor.mounts].filter(a => !a.system.isAttuned);
-  const chosen = await selectDocumentsDialog(choices, {
+  const chosen = await DocumentSelector.selectMulti(choices, {
     hint: "TERIOCK.COMMANDS.Attune.hint",
     localize: true,
     noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",
@@ -26,7 +26,7 @@ async function takeAttune(actor) {
 async function takeDeattune(actor) {
   if (!game.actors.check(actor)) { return; }
   const choices = [...actor.equipment, ...actor.mounts].filter(a => a.system.isAttuned);
-  const chosen = await selectDocumentsDialog(choices, {
+  const chosen = await DocumentSelector.selectMulti(choices, {
     hint: "TERIOCK.COMMANDS.Deattune.hint",
     localize: true,
     noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems",

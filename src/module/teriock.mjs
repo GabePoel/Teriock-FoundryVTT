@@ -6,6 +6,7 @@ import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
+import { makeIconClass } from "./helpers/icon.mjs";
 import * as setup from "./setup/_module.mjs";
 
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
@@ -225,7 +226,7 @@ foundry.helpers.Hooks.once("init", function() {
 
   for (const [k, v] of Object.entries(constants.config.document)) {
     if (v?.documentName) {
-      CONFIG[v.documentName].typeIcons[k] = helpers.utils.makeIconClass(v.icon, "title");
+      CONFIG[v.documentName].typeIcons[k] = makeIconClass(v.icon, "title");
       CONFIG[v.documentName].typeHints[k] = v.hint;
     }
   }

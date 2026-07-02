@@ -3,7 +3,7 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
-import { getRollIcon, makeIconClass } from "../../../helpers/utils.mjs";
+import { getRollIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import EmbeddedDataModel from "../embedded-data-model.mjs";
 
 const { fields } = foundry.data;

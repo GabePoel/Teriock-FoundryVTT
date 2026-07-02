@@ -1,5 +1,5 @@
 import { multiplyFormula } from "../../../helpers/formula.mjs";
-import { makeIconClass } from "../../../helpers/utils.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import EvaluationModel from "../evaluation-model.mjs";
 
 const { fields } = foundry.data;

@@ -1,6 +1,6 @@
-import { selectDocumentDialog, selectDocumentsDialog } from "../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
-import { makeIcon } from "../../helpers/utils.mjs";
+import { makeIcon } from "../../helpers/icon.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { User } = foundry.documents;
@@ -47,7 +47,7 @@ export default class TeriockUser
    * @returns {Promise<TeriockTokenDocument|null>}
    */
   async selectTargetedToken(options = {}) {
-    return selectDocumentDialog(Array.from(this.targets).map(t => t.document), {
+    return DocumentSelector.selectSingle(this.targets.map(t => t.document), {
       hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedToken.hint",
       imgKey: "texture.src",
       silent: true,
@@ -63,7 +63,7 @@ export default class TeriockUser
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectTargetedTokens(options = {}) {
-    return selectDocumentsDialog(Array.from(this.targets).map(t => t.document), {
+    return DocumentSelector.selectMulti(this.targets.map(t => t.document), {
       hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectTargetedTokens.hint",
       imgKey: "texture.src",
       silent: true,
@@ -78,7 +78,7 @@ export default class TeriockUser
    * @param {Teriock.Select.SelectDocumentDialogOptions} options
    */
   async selectVisibleToken(options = {}) {
-    return selectDocumentDialog(Array.from(this.visibleTokens).map(t => t.document), {
+    return DocumentSelector.selectSingle(this.visibleTokens.map(t => t.document), {
       hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleToken.hint",
       imgKey: "texture.src",
       silent: true,
@@ -94,7 +94,7 @@ export default class TeriockUser
    * @returns {Promise<TeriockTokenDocument[]>}
    */
   async selectVisibleTokens(options = {}) {
-    return selectDocumentsDialog(Array.from(this.visibleTokens).map(t => t.document), {
+    return DocumentSelector.selectMulti(this.visibleTokens.map(t => t.document), {
       hint: "TERIOCK.SYSTEMS.User.DIALOGS.SelectVisibleTokens.hint",
       imgKey: "texture.src",
       silent: true,

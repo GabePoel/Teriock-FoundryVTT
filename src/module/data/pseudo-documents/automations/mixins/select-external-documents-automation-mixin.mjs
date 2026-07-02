@@ -1,4 +1,4 @@
-import { selectDocumentsDialog } from "../../../../applications/dialogs/select-document-dialog.mjs";
+import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocuments } from "../../../../helpers/resolve.mjs";
 import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
@@ -77,7 +77,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
         if (choices.length === 0) { return []; }
         if (this.automatic && choices.length === 1) { return choices; }
         if (this.multi && this.all) { return choices; }
-        return selectDocumentsDialog(choices, {
+        return DocumentSelector.selectMulti(choices, {
           multi: this.multi,
           title: this.document.fullName || this.document.name,
         });

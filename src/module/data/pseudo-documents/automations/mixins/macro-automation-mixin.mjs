@@ -2,7 +2,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../../helpers/resolve.mjs";
 import { lcFirst } from "../../../../helpers/string.mjs";
 import { migrateKey, migrateValue } from "../../../shared/migrations/source-migrations.mjs";
-import { MacroActivation } from "../../activations/_module.mjs";
+import MacroActivation from "../../activations/macro-activation.mjs";
 import DisplayAutomationMixin from "./display-automation-mixin.mjs";
 import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
 

@@ -1,4 +1,4 @@
-import { selectDocumentsDialog } from "../../../applications/dialogs/_module.mjs";
+import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import * as executionMixins from "../../mixins/_module.mjs";
@@ -130,7 +130,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
   async _postExecute() {
     const onUseAbilities = this.source.system.onUseAbilities;
     if (this.#useAbilities && onUseAbilities.length > 0) {
-      const usedAbilities = await selectDocumentsDialog(onUseAbilities, {
+      const usedAbilities = await DocumentSelector.selectMulti(onUseAbilities, {
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", { name: this.source.name }),
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
       });

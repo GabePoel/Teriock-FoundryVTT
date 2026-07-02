@@ -1,7 +1,7 @@
-import { FormulaField } from "../../data/fields/_module.mjs";
-import { formulaExists, substituteFormula } from "../../helpers/formula.mjs";
-import { HackStatMixin } from "../shared/mixins/_module.mjs";
-import { DocumentDialogSheet } from "../sheets/utility-sheets/_module.mjs";
+import { FormulaField } from "../../../data/fields/_module.mjs";
+import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
+import { HackStatApplicationMixin } from "../../shared/_module.mjs";
+import { DocumentDialogSheet } from "../../sheets/utility-sheets/_module.mjs";
 
 /**
  * @extends {DocumentDialogSheet}
@@ -10,7 +10,7 @@ import { DocumentDialogSheet } from "../sheets/utility-sheets/_module.mjs";
  * @property {boolean} _forHarm
  * @property {Teriock.System.FormulaString} _substitution
  */
-export default class TeriockStatManager extends HackStatMixin(DocumentDialogSheet) {
+export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialogSheet) {
   /**
    * @inheritDoc
    * @type {Partial<ApplicationConfiguration>}
@@ -32,7 +32,7 @@ export default class TeriockStatManager extends HackStatMixin(DocumentDialogShee
    * @param {PointerEvent} _event
    * @param {HTMLElement} target
    * @returns {Promise<void>}
-   * @this {TeriockStatManager}
+   * @this {BaseStatManager}
    */
   static async _onRollStatDie(_event, target) {
     const statDie = this._getStatDie(target);

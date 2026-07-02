@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { getPackIcon } from "../../helpers/html.mjs";
-import { makeIconClass } from "../../helpers/utils.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
 import BaseConfig from "./base-config.mjs";
 
 export default class GameContentConfig extends BaseConfig {
