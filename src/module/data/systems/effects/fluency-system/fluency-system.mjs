@@ -1,5 +1,5 @@
 import { iconManifest } from "../../../../constants/display/_module.mjs";
-import { FluencyExecution } from "../../../../executions/document-executions/_module.mjs";
+import { FluencyExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";

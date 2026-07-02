@@ -1,6 +1,7 @@
+import { EtherealBackgroundVisionShader, EtherealColorationVisionShader } from "../../rendering/shaders/_module.mjs";
+
+const { VisionMode } = foundry.canvas.perception;
 const { shaders } = foundry.canvas.rendering;
-import { EtherealBackgroundVisionShader, EtherealColorationVisionShader } from "../../rendering/ethereal-shaders.mjs";
-import TeriockVisionMode from "./base-vision-mode.mjs";
 
 /**
  * Everything is in black and white, and there's an odd emanating haze.
@@ -11,13 +12,13 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
  * @returns {VisionMode}
  */
 export default function etherealVisionMode() {
-  return new TeriockVisionMode({
+  return new VisionMode({
     canvas: { shader: shaders.ColorAdjustmentsSamplerShader, uniforms: { brightness: 0, contrast: 0, saturation: -1 } },
     id: "ethereal",
     label: "TERIOCK.PERCEPTION.VisionModes.ethereal",
     lighting: {
       background: { postProcessingModes: ["SATURATION"], uniforms: { saturation: -1.0, tint: [1, 1, 1] } },
-      coloration: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
+      coloration: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
       illumination: { postProcessingModes: ["SATURATION"], uniforms: { saturation: -1.0, tint: [1, 1, 1] } },
     },
     vision: {

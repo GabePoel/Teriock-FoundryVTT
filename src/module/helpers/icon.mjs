@@ -1,5 +1,4 @@
 import { iconStyles } from "../constants/display/icon-styles.mjs";
-import { createElement } from "./html.mjs";
 
 /**
  * Creates an HTML icon using Font Awesome, Material Design, or Material Symbols classes.
@@ -19,7 +18,7 @@ export function makeIcon(icon, ...styles) {
  * @returns {HTMLElement}
  */
 export function makeIconElement(icon, ...styles) {
-  return createElement("i", { className: makeIconClass(icon, ...styles) });
+  return teriock.helpers.html.createElement("i", { className: makeIconClass(icon, ...styles) });
 }
 
 /**

@@ -1,16 +1,16 @@
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import DocumentExecution from "../../abstract/document-execution/document-execution.mjs";
 import * as executionMixins from "../../mixins/_module.mjs";
-import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 /** @type {boolean} */
 let BASE_EXPIRATION_LOCALIZED = false;
 
 /**
- * @extends {BaseDocumentExecution}
+ * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  */
-export default class ExpirationExecution extends executionMixins.ThresholdExecutionMixin(BaseDocumentExecution) {
+export default class ExpirationExecution extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
   /**
    * @param {Teriock.Execution.ExpirationExecutionOptions} options
    */

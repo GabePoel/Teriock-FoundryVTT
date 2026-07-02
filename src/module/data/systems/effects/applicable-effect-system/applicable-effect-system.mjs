@@ -1,5 +1,5 @@
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
-import { ExpirationExecution } from "../../../../executions/document-executions/_module.mjs";
+import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/helpers/_module.mjs";

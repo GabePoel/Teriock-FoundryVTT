@@ -1,8 +1,8 @@
+export { default as ActorAutomationPart } from "./actor-automation-part.mjs";
 export { default as ActorRollableTakesPart } from "./actor-impacts-part.mjs";
 export { default as ActorRestingPart } from "./actor-resting-part.mjs";
 export { default as ActorTokenPart } from "./actor-token-part.mjs";
 export { default as ActorAttributesPart } from "./attributes-part/actor-attributes-part.mjs";
-export { default as ActorAutomationPart } from "./automation-part/actor-automation-part.mjs";
 export { default as ActorCapacitiesPart } from "./capacities-part/actor-capacities-part.mjs";
 export { default as ActorCombatPart } from "./combat-part/actor-combat-part.mjs";
 export { default as ActorConditionsPart } from "./conditions-part/actor-conditions-part.mjs";

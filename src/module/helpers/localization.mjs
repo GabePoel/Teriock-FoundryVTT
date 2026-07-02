@@ -1,6 +1,3 @@
-import { toCamelCase, toKebabCase } from "./string.mjs";
-import { sortObject } from "./utils.mjs";
-
 // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
 
 /**
@@ -16,7 +13,7 @@ import { sortObject } from "./utils.mjs";
  */
 export function localizeChoices(choices, options = { sort: true }) {
   const out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _loc(v)]));
-  if (options.sort) { return sortObject(out, { value: true }); }
+  if (options.sort) { return teriock.helpers.utils.sortObject(out, { value: true }); }
   return out;
 }
 
@@ -120,8 +117,8 @@ export function localizeObject(obj, { keys, prefix = "", suffix = "", transform 
 function transformValue(value, transform) {
   if (transform === "lc") { return value.toLowerCase(); }
   if (transform === "uc") { return value.toUpperCase(); }
-  if (transform === "cc") { return toCamelCase(value); }
-  if (transform === "kc") { return toKebabCase(value); }
+  if (transform === "cc") { return teriock.helpers.string.toCamelCase(value); }
+  if (transform === "kc") { return teriock.helpers.string.toKebabCase(value); }
   return value;
 }
 

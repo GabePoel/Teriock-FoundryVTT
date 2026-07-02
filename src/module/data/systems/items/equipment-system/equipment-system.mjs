@@ -1,4 +1,4 @@
-import { EquipmentExecution } from "../../../../executions/document-executions/_module.mjs";
+import { EquipmentExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mjs";

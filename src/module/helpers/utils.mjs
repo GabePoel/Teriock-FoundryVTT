@@ -1,6 +1,3 @@
-import { formulaExists } from "./formula.mjs";
-import { localizeChoices } from "./localization.mjs";
-
 /**
  * Make fields fancy.
  * @param {Teriock.Display.DisplayField[]} displayFields
@@ -89,7 +86,7 @@ export function sortObject(obj, options = {}) {
 export function objectMap(obj, fn, options = {}) {
   const { filter = () => true, localize = false } = options;
   const out = Object.fromEntries(Object.entries(obj).filter(([_k, v]) => filter(v)).map(([k, v]) => [k, fn(v)]));
-  return localize ? localizeChoices(out) : out;
+  return localize ? teriock.helpers.localization.localizeChoices(out) : out;
 }
 
 /**
@@ -102,7 +99,7 @@ export function objectMap(obj, fn, options = {}) {
  */
 export function choiceMap(obj, fn, options = { localize: true }) {
   const out = Object.fromEntries(Object.keys(obj).map(k => [k, fn(k)]));
-  if (options.localize) { return localizeChoices(out); }
+  if (options.localize) { return teriock.helpers.localization.localizeChoices(out); }
   return out;
 }
 
@@ -277,7 +274,7 @@ export async function fromIdentifierLocal(identifier, relativeTo) {
  * @returns {Promise<AnyCommonDocument[]>}
  */
 export async function fromQualifier(document, qualifier) {
-  if (!document || !formulaExists(qualifier)) { return []; }
+  if (!document || !teriock.helpers.formula.formulaExists(qualifier)) { return []; }
   if (typeof document.getEffectiveChildren !== "function") { return []; }
   const children = await document.getEffectiveChildren();
   const matched = [];

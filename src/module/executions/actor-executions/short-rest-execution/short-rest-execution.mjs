@@ -1,11 +1,11 @@
 import { UseDocumentsAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { toId, toKebabCase } from "../../../helpers/string.mjs";
-import BaseDocumentExecution from "../../document-executions/base-document-execution/base-document-execution.mjs";
+import { DocumentExecution } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
-export default class ShortRestExecution extends BaseDocumentExecution {
+export default class ShortRestExecution extends DocumentExecution {
   /**
    * @param {Partial<Teriock.Execution.ShortRestExecutionOptions>} options
    */

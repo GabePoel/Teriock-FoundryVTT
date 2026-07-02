@@ -1,6 +1,6 @@
-const { shaders } = foundry.canvas.rendering;
-import { WoundedBackgroundVisionShader, WoundedColorationVisionShader } from "../../rendering/wounded-shader.mjs";
-import TeriockVisionMode from "./base-vision-mode.mjs";
+import { WoundedBackgroundVisionShader, WoundedColorationVisionShader } from "../../rendering/shaders/_module.mjs";
+
+const { VisionMode } = foundry.canvas.perception;
 
 /**
  * Everything turns intensely red.
@@ -8,17 +8,17 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
  * @returns {VisionMode}
  */
 export default function deadVisionMode() {
-  return new TeriockVisionMode({
+  return new VisionMode({
     canvas: {
-      shader: shaders.ColorAdjustmentsSamplerShader,
+      shader: foundry.canvas.rendering.shaders.ColorAdjustmentsSamplerShader,
       uniforms: { contrast: 0, exposure: -0.65, saturation: -0.8 },
     },
     id: "dead",
     label: "TERIOCK.PERCEPTION.VisionModes.dead",
     lighting: {
-      background: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
-      darkness: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
-      illumination: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
+      background: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
+      darkness: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
+      illumination: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
     },
     vision: {
       background: { shader: WoundedBackgroundVisionShader },

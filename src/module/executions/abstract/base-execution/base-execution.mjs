@@ -1,10 +1,10 @@
-import { ExecutionEditor } from "../../applications/dialogs/_module.mjs";
-import { CompetenceModel } from "../../data/models/_module.mjs";
-import * as dataMixins from "../../data/shared/mixins/_module.mjs";
-import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { TeriockChatMessage } from "../../documents/_module.mjs";
-import { TypeCollection } from "../../documents/collections/_module.mjs";
-import { addFormula, formulaExists } from "../../helpers/formula.mjs";
+import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
+import { CompetenceModel } from "../../../data/models/_module.mjs";
+import * as dataMixins from "../../../data/shared/mixins/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
+import { TeriockChatMessage } from "../../../documents/_module.mjs";
+import { TypeCollection } from "../../../documents/collections/_module.mjs";
+import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 
 class AbstractExecution {}
 

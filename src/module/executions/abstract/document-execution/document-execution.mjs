@@ -1,12 +1,12 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import BaseExecution from "../../base-execution/base-execution.mjs";
+import BaseExecution from "../base-execution/base-execution.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * @property {Teriock.Execution.BaseExecutionOptions} options
  */
-export default class BaseDocumentExecution extends BaseExecution {
+export default class DocumentExecution extends BaseExecution {
   /**
    * @param {Teriock.Execution.DocumentExecutionOptions} options
    */

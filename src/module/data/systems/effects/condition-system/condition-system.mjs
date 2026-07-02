@@ -1,4 +1,4 @@
-import { ExpirationExecution } from "../../../../executions/document-executions/_module.mjs";
+import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";

@@ -10,7 +10,7 @@ import {
 
 /**
  * @extends {AbilityExecutionConstructor}
- * @extends {BaseDocumentExecution}
+ * @extends {DocumentExecution}
  * @mixes AbilityExecutionActorUpdate
  * @mixes AbilityExecutionChat
  * @mixes AbilityExecutionGetInput

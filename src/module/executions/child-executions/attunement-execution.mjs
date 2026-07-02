@@ -1,9 +1,9 @@
-import BaseDocumentExecution from "./base-document-execution/base-document-execution.mjs";
+import { DocumentExecution } from "../abstract/_module.mjs";
 
 /**
  * @property {TeriockAttunement} source
  */
-export default class AttunementExecution extends BaseDocumentExecution {
+export default class AttunementExecution extends DocumentExecution {
   /** @type {boolean} */
   #deattune = false;
 

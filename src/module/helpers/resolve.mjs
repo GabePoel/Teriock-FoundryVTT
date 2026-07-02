@@ -1,6 +1,4 @@
-import { validateTypedIdentifier } from "../data/fields/helpers/validators.mjs";
 import { TypeCollection } from "../documents/collections/_module.mjs";
-import { fromIdentifier, fromKey, parseIdentifier } from "./utils.mjs";
 
 const { Document } = foundry.abstract;
 
@@ -13,7 +11,7 @@ const { Document } = foundry.abstract;
 export async function resolveDocument(syncDoc) {
   let out = null;
   if (!syncDoc) { return out; }
-  if (typeof syncDoc === "string") { out = await fromKey(syncDoc); }
+  if (typeof syncDoc === "string") { out = await teriock.helpers.utils.fromKey(syncDoc); }
   else if (syncDoc instanceof Document) { out = syncDoc; }
   else { out = await foundry.utils.fromUuid(syncDoc.uuid); }
   return out;
@@ -68,11 +66,11 @@ export async function ensureChildren(document, identifiers) {
   if (identifiers.length === 0) { return []; }
   const typed = (await document.getChildren()).documentsByType;
   const candidates = await Promise.all(identifiers.map(async identifier => {
-    const parsed = parseIdentifier(identifier);
-    if (!(validateTypedIdentifier(identifier, { strict: true }))) { return; }
+    const parsed = teriock.helpers.utils.parseIdentifier(identifier);
+    if (!(teriock.data.fields.helpers.validators.validateTypedIdentifier(identifier, { strict: true }))) { return; }
     const existing = (typed[parsed.type] || []).filter(n => n?.system?.identifier === parsed.identifier);
     if (existing.length) { return; }
-    const doc = await fromIdentifier(identifier);
+    const doc = await teriock.helpers.utils.fromIdentifier(identifier);
     if (!doc) { return; }
     const obj = doc.toObject(true);
     foundry.utils.setProperty(obj, "_stats.compendiumSource", doc.uuid);
@@ -121,7 +119,7 @@ export async function ensureNoChildren(document, identifiers) {
  * @returns {Promise<void>}
  */
 export async function inferCompendiumSource(document) {
-  const ref = await fromIdentifier(document.typedIdentifier);
+  const ref = await teriock.helpers.utils.fromIdentifier(document.typedIdentifier);
   if (ref?.uuid) { await document.update({ "_stats.compendiumSource": ref.uuid }); }
 }
 

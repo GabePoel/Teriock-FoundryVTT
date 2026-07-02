@@ -1,7 +1,7 @@
 import tc from "../constants/config/trigger-config.mjs";
 import { BaseAutomation } from "../data/pseudo-documents/automations/abstract/_module.mjs";
-import BaseExecution from "../executions/base-execution/base-execution.mjs";
-import { AbilityExecution, ArmamentExecution } from "../executions/document-executions/_module.mjs";
+import BaseExecution from "../executions/abstract/base-execution/base-execution.mjs";
+import { AbilityExecution, ArmamentExecution } from "../executions/child-executions/_module.mjs";
 
 declare global {
   export namespace Teriock.System {

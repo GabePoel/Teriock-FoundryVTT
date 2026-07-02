@@ -1,5 +1,5 @@
 import { AttackSystemMixin } from "../_module.mjs";
-import { ArmamentExecution } from "../../../../executions/document-executions/_module.mjs";
+import { ArmamentExecution } from "../../../../executions/child-executions/_module.mjs";
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";

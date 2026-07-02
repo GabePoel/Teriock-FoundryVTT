@@ -1,4 +1,4 @@
-import BaseExecution from "../../base-execution/base-execution.mjs";
+import { BaseExecution } from "../../abstract/_module.mjs";
 import * as executionMixins from "../../mixins/_module.mjs";
 
 /**

@@ -1,5 +1,5 @@
 import attunementConfig from "../../../../constants/config/attunement-config.mjs";
-import { AttunementExecution } from "../../../../executions/document-executions/_module.mjs";
+import { AttunementExecution } from "../../../../executions/child-executions/_module.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";

@@ -1,16 +1,14 @@
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
+import { DocumentExecution } from "../../../abstract/_module.mjs";
 import * as executionMixins from "../../../mixins/_module.mjs";
-import BaseDocumentExecution from "../../base-document-execution/base-document-execution.mjs";
 
 /**
- * @extends {BaseDocumentExecution}
+ * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  */
-export default class AbilityExecutionConstructor
-  extends executionMixins.ThresholdExecutionMixin(BaseDocumentExecution)
-{
+export default class AbilityExecutionConstructor extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
   /**
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
@@ -119,8 +117,35 @@ export default class AbilityExecutionConstructor
     return this.source.system.isContact && armamentWarded ? true : Boolean(this.source.system.warded);
   }
 
+  /** @type {TeriockArmament} */
+  armament;
+
+  /** @type {number} */
+  attackPenalty;
+
+  /** @type {Record<Teriock.Keys.PrimaryCost, number>} */
+  costs;
+
+  /** @type {TeriockToken|null} */
+  executor;
+
+  /** @type {number} */
+  heightened;
+
+  /** @type {boolean} */
+  noHeighten;
+
   /** @type {PiercingModel} */
   piercing = new PiercingModel();
+
+  /** @type {Set<TeriockToken>} */
+  targets;
+
+  /** @type {boolean} */
+  vitals;
+
+  /** @type {boolean} */
+  warded;
 
   /** @inheritDoc */
   get activeAutomations() {

@@ -1,8 +1,8 @@
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { TypeCollection } from "../../../documents/collections/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { DocumentExecution } from "../../abstract/_module.mjs";
 import * as executionMixins from "../../mixins/_module.mjs";
-import BaseDocumentExecution from "../base-document-execution/base-document-execution.mjs";
 
 const { fields } = foundry.data;
 
@@ -11,7 +11,7 @@ const { fields } = foundry.data;
  * @mixes ImpactsExecution
  * @param {HarmRoll[]} rolls
  */
-export default class ArmamentExecution extends executionMixins.ImpactsExecutionMixin(BaseDocumentExecution) {
+export default class ArmamentExecution extends executionMixins.ImpactsExecutionMixin(DocumentExecution) {
   /**
    * @param {Teriock.Execution.ArmamentExecutionOptions} options
    */

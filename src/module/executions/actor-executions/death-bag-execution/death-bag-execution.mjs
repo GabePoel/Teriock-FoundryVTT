@@ -1,12 +1,12 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
-import BaseDocumentExecution from "../../document-executions/base-document-execution/base-document-execution.mjs";
+import { DocumentExecution } from "../../abstract/_module.mjs";
 
 /** @type {Teriock.Keys.DeathBagStoneColor[]} */
 const STONE_COLORS = ["black", "red", "white"];
 
-export default class DeathBagExecution extends BaseDocumentExecution {
+export default class DeathBagExecution extends DocumentExecution {
   /**
    * @param {Partial<Teriock.Execution.DeathBagExecutionOptions>} options
    */

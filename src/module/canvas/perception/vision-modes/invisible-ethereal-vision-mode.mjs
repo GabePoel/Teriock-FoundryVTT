@@ -1,5 +1,5 @@
 const { shaders } = foundry.canvas.rendering;
-import TeriockVisionMode from "./base-vision-mode.mjs";
+const { VisionMode } = foundry.canvas.perception;
 
 /**
  * Everything goes black. If a creature is both Ethereal and invisible, they are detached from the world in a way that
@@ -13,7 +13,7 @@ import TeriockVisionMode from "./base-vision-mode.mjs";
  * @returns {VisionMode}
  */
 export default function invisibleEtherealVisionMode() {
-  return new TeriockVisionMode({
+  return new VisionMode({
     canvas: {
       shader: shaders.ColorAdjustmentsSamplerShader,
       uniforms: { brightness: -2, contrast: 1, saturation: -1.0, tint: [0, 0, 0] },
@@ -21,10 +21,10 @@ export default function invisibleEtherealVisionMode() {
     id: "invisibleEthereal",
     label: "TERIOCK.PERCEPTION.VisionModes.invisibleEthereal",
     lighting: {
-      background: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
-      coloration: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
-      darkness: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
-      illumination: { visibility: TeriockVisionMode.LIGHTING_VISIBILITY.DISABLED },
+      background: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
+      coloration: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
+      darkness: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
+      illumination: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
     },
     vision: {
       darkness: { adaptive: false },

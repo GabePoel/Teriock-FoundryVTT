@@ -1,4 +1,4 @@
-import { TeriockActor } from "../../documents/_module.mjs";
+import { TeriockActor } from "../../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Execution {

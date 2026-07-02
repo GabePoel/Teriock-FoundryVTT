@@ -1,8 +1,6 @@
-import { SpeciesTransformationConfig } from "../../../fields/helpers/_types.js";
-
 declare global {
   namespace Teriock.Models {
-    export type SpeciesSystemData = {
+    export type SpeciesSystemData = SpeciesTransformationPartData & {
       /** <schema> Age of maturity */
       adult: number;
       /** <schema> Appearance */
@@ -26,8 +24,6 @@ declare global {
       };
       /** <schema> Traits */
       traits: Set<Teriock.Keys.Trait>;
-      /** <schema> Transformation config */
-      transformation: SpeciesTransformationConfig;
 
       get parent(): TeriockSpecies;
     };

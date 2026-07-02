@@ -1,6 +1,6 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { getImage } from "../../../helpers/path.mjs";
-import BaseExecution from "../../base-execution/base-execution.mjs";
+import { BaseExecution } from "../../abstract/_module.mjs";
 
 export default class ImmunityExecution extends BaseExecution {
   /**

@@ -1,4 +1,4 @@
-import EtherealFilter from "../../rendering/ethereal-filter.mjs";
+import { EtherealFilter } from "../../rendering/filters/_module.mjs";
 import LightDetectionMode from "./light-detection-mode.mjs";
 
 const { Token } = foundry.canvas.placeables;

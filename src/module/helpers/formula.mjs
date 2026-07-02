@@ -1,6 +1,3 @@
-import { BaseRoll } from "../dice/rolls/_module.mjs";
-import { isKebabCase } from "./string.mjs";
-
 /**
  * Add something to a formula.
  * @param {Teriock.System.FormulaString} value - Original formula.
@@ -91,7 +88,7 @@ export function multiplyFormula(value, delta) {
  */
 export function substituteFormula(value, delta, substitutionTerm = "base") {
   if (!formulaExists(value)) { return delta; }
-  return BaseRoll.replaceFormulaData(delta, { [substitutionTerm]: value });
+  return teriock.dice.rolls.BaseRoll.replaceFormulaData(delta, { [substitutionTerm]: value });
 }
 
 /**
@@ -173,8 +170,8 @@ function addTermTypes(term, types) {
 function processFormula(formula, types, fn) {
   if (["number", "string"].includes(typeof types)) { types = [types.toString()]; }
   if (!formulaExists(formula)) { return formula; }
-  types = new Set(Array.from(types).filter(t => isKebabCase(t)));
-  const roll = new BaseRoll(formula);
+  types = new Set(Array.from(types).filter(t => teriock.helpers.string.isKebabCase(t)));
+  const roll = new teriock.dice.rolls.BaseRoll(formula);
   for (const term of roll._allTerms) { fn(term, types); }
   return roll.formula;
 }
