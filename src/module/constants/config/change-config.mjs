@@ -159,7 +159,9 @@ const parent = { targets: parentTargets };
 
 const defaultPhase = Object.entries(phase).find(([_k, v]) => v.default)[0];
 
-export default { child, defaultPhase, parent, phase };
+const tokenPhase = "initial";
+
+export default { child, defaultPhase, parent, phase, tokenPhase };
 
 preLocalize("config.change.child.groups");
 preLocalize("config.change.child.paths", { key: "label", sort: true });

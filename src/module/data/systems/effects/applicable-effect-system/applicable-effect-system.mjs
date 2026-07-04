@@ -37,6 +37,7 @@ export default class ApplicableEffectSystem
       automations.ChangesAutomation,
       automations.ChildChangeAutomation,
       automations.HealAutomation,
+      automations.LightAutomation,
       automations.ProtectionAutomation,
       automations.RevitalizeAutomation,
       automations.RollAutomation,

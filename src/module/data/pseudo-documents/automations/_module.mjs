@@ -16,6 +16,7 @@ export { default as DurationAutomation } from "./duration-automation.mjs";
 export { default as FeatAutomation } from "./feat-automation.mjs";
 export { default as HacksAutomation } from "./hacks-automation.mjs";
 export { default as HealAutomation } from "./heal-automation.mjs";
+export { default as LightAutomation } from "./light-automation.mjs";
 export * as mixins from "./mixins/_module.mjs";
 export { default as MoveAutomation } from "./move-automation.mjs";
 export { default as OverrideAutomation } from "./override-automation.mjs";

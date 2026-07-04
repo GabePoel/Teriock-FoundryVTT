@@ -21,6 +21,7 @@ declare global {
       feat: automations.FeatAutomation;
       hacks: automations.HacksAutomation;
       heal: automations.HealAutomation;
+      light: automations.LightAutomation;
       move: automations.MoveAutomation;
       override: automations.OverrideAutomation;
       propertyMacro: automations.PropertyMacroAutomation;

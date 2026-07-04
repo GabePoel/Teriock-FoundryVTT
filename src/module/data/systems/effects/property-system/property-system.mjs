@@ -44,13 +44,14 @@ export default class PropertySystem
     return [
       ...super._automationTypes,
       automations.ChangesAutomation,
-      automations.TradecraftAutomation,
       automations.CommonOutcomesAutomation,
       automations.CoverAutomation,
       automations.HacksAutomation,
+      automations.LightAutomation,
       automations.PropertyMacroAutomation,
       automations.RollAutomation,
       automations.TakeAutomation,
+      automations.TradecraftAutomation,
       automations.UseDocumentsAutomation,
     ];
   }

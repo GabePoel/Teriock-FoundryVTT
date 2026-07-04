@@ -87,6 +87,7 @@ export default class AbilitySystem
       automations.FeatAutomation,
       automations.HacksAutomation,
       automations.HealAutomation,
+      automations.LightAutomation,
       automations.MoveAutomation,
       automations.OverrideAutomation,
       automations.ProtectionAutomation,
