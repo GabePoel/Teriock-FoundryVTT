@@ -4,48 +4,56 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.72
+  systemVersion: 0.13.8
 img: systems/teriock/src/icons/properties/destroyed.webp
 name: Destroyed
 system:
   applyIfDampened: true
   applyIfDeattuned: true
+  applyIfDestroyed: false
   applyIfShattered: true
   automations:
     parameterChanges:
       _id: parameterChanges
       changes:
         - key: system.destroyed
+          phase: setup
           priority: 10
           target: Item
           type: override
           value: 'true'
         - key: system.av.raw
+          phase: derived
           priority: 100
           target: Item
           type: override
           value: '0'
         - key: system.av.bonus
+          phase: derived
           priority: 100
           target: Item
           type: override
           value: '0'
         - key: system.bv.raw
+          phase: derived
           priority: 100
           target: Item
           type: override
           value: '0'
         - key: system.bv.bonus
+          phase: derived
           priority: 100
           target: Item
           type: override
           value: '0'
         - key: system.damage
+          phase: derived
           priority: 100
           target: Item
           type: override
           value: '0'
         - key: system.weight.raw
+          phase: derived
           priority: 100
           target: Item
           type: override

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.79
+  systemVersion: 0.13.8
 effects:
   - _id: QxDyN7VLtCaq1ppD
     _key: '!items.effects!4d084b2bd2d58aec.QxDyN7VLtCaq1ppD'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: support
@@ -77,7 +77,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: combat
@@ -120,10 +120,10 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>The target leaves their @Identifier[status:dueling]{duel} and you
-          enter in their place. This does not end the
-          @Identifier[status:dueling]{duel} and the target is not considered to
-          have "lost" or "forfeited". Any @Wiki[Category:Duel modifying
+          <p>The target leaves their @Identifier[condition:dueling]{duel} and
+          you enter in their place. This does not end the
+          @Identifier[condition:dueling]{duel} and the target is not considered
+          to have "lost" or "forfeited". Any @Wiki[Category:Duel modifying
           effects]{duel modifying effects} remain in place.</p><p
           class="note"><b>Note:</b> This ability costs no
           @Identifier[core:hit-points-and-mana-points]{MP} to use on creatures
@@ -135,7 +135,7 @@ effects:
         unit: ft
       requirements: >-
         <p>Target must be an allied creature in a
-        @Identifier[status:dueling]{duel} within range.</p>
+        @Identifier[condition:dueling]{duel} within range.</p>
       skill: true
       standard: true
       targets:
@@ -149,7 +149,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: combat
@@ -201,13 +201,13 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>While @Identifier[status:defying-death]{defying death}, your
+          <p>While @Identifier[condition:defying-death]{defying death}, your
           @Wiki[Category:Weapon delivery abilities]{weapon}
           @Identifier[core:attack-interaction]{attacks} are
           @Identifier[keyword:boosted]{boosted} and @Identifier[keyword:ub]{UB}.
-          When you stop @Identifier[status:defying-death]{defying death}, you
-          @Identifier[status:dead]{die} and your body is
-          @Identifier[status:ruined]{ruined}.</p>
+          When you stop @Identifier[condition:defying-death]{defying death}, you
+          @Identifier[condition:dead]{die} and your body is
+          @Identifier[condition:ruined]{ruined}.</p>
       powerSources:
         - martial
       range:
@@ -216,7 +216,7 @@ effects:
       standard: true
       targets:
         - self
-      trigger: <p>You start @Identifier[status:defying-death]{defying death}.</p>
+      trigger: <p>You start @Identifier[condition:defying-death]{defying death}.</p>
     transfer: true
     type: ability
   - _id: BpqCFcyosxmNw45i
@@ -226,7 +226,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: support
@@ -285,7 +285,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: support
@@ -306,7 +306,7 @@ effects:
       overview:
         base: >-
           <p>Your first @Wiki[Category:Strike delivery abilities]{strike} in any
-          @Identifier[status:dueling]{duel} deals
+          @Identifier[condition:dueling]{duel} deals
           @Identifier[keyword:boosted-damage]{boosted}
           @Identifier[core:damage]{damage} and is
           @Identifier[keyword:warded]{warded}.</p>
@@ -314,7 +314,7 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are @Identifier[status:up]{up}.</p>
+      requirements: <p>You are @Identifier[rule:up]{up}.</p>
       skill: true
       standard: true
       targets:
@@ -328,7 +328,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: combat
@@ -375,7 +375,7 @@ effects:
         base: >-
           <p>The triggering creature takes [[/damage 1d6[spiritual]]]
           @Identifier[core:damage]{damage} and is
-          @Identifier[status:lighted]{lighted} towards a creature of your
+          @Identifier[condition:lighted]{lighted} towards a creature of your
           choice.</p>
       powerSources:
         - spiritual
@@ -386,7 +386,9 @@ effects:
       standard: true
       targets:
         - creature
-      trigger: <p>A creature forfeits a @Identifier[status:dueling]{duel} with you.</p>
+      trigger: >-
+        <p>A creature forfeits a @Identifier[condition:dueling]{duel} with
+        you.</p>
     transfer: true
     type: ability
 folder: 3743957c10da8991
@@ -407,13 +409,15 @@ system:
     @Identifier[class:duelist]{Duelist}'s way. If you are a
     @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and
     confident in yourself.</p>
-  flaws: <p>Duelists cannot use @Wiki[Category:Shields]{shields}.</p>
+  flaws: >-
+    <p>Duelists cannot use
+    @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-3-duelist
   innate: false
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support
     @Pack[teriock.abilities]{ability} to gain from [[lookup name]]. Delete the
-    other abilities.</p>
+    other @Pack[teriock.abilities]{abilities}.</p>
   maxAv: 4
   number: 3
   statDice:

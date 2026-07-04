@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.7
+  systemVersion: 0.13.8
 img: systems/teriock/src/icons/abilities/poison-item.webp
 name: Poison Item
 system:
@@ -45,7 +45,7 @@ system:
   duration:
     raw: '24'
     unit: hour
-  endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
+  endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
   executionTime:
     base: a1
   form: normal
@@ -54,18 +54,19 @@ system:
   maneuver: active
   overview:
     base: >-
-      <p>Target makes a creature become @Identifier[status:poisoned]{poisoned}.
-      The @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+      <p>Target makes a creature become
+      @Identifier[condition:poisoned]{poisoned}. The
+      @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
       @Identifier[core:damage]{damage}. The way the item delivers this to its
       user depends on the nature of the item. If it's food or drink, it's when
       the item is consumed. The @Identifier[core:game-master]{GM} may approve
       other cases as well. The item only delivers the
-      @Identifier[status:poisoned]{poison} effect once.</p>
+      @Identifier[condition:poisoned]{poison} effect once.</p>
     fluent: >-
-      <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+      <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
       1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
     proficient: >-
-      <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+      <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
       1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
   powerSources:
     - alchemical

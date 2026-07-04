@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.7
+  systemVersion: 0.13.8
 effects:
   - _id: 06z0wz68hsmApPL9
     _key: '!items.effects!56GXVh2jTnSw38LR.06z0wz68hsmApPL9'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/hibernation-shield.webp
     name: Hibernation Shield
     system:
@@ -25,7 +25,7 @@ effects:
         unit: unlimited
       elements:
         - life
-      endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
+      endCondition: <p>Target is no longer @Identifier[condition:down]{down}.</p>
       executionTime:
         base: r1
       expirations:
@@ -48,7 +48,7 @@ effects:
         base: >-
           <p>Target gains @Identifier[ability:hibernation]{Hibernation}. You may
           target yourself with this as you go
-          @Identifier[status:down]{down}.</p>
+          @Identifier[condition:down]{down}.</p>
         fluent: >-
           <p>You may target up to @Identifier[core:fluency-bonus]{F}
           creatures.</p>
@@ -60,12 +60,12 @@ effects:
       range:
         raw: '10'
         unit: ft
-      requirements: <p>Target must be @Identifier[status:down]{down}.</p>
+      requirements: <p>Target must be @Identifier[condition:down]{down}.</p>
       spell: true
       standard: true
       targets:
         - creature
-      trigger: <p>You go @Identifier[status:down]{down}.</p>
+      trigger: <p>You go @Identifier[condition:down]{down}.</p>
     transfer: true
     type: ability
   - _id: JhNbjfOBP4vq6fDO
@@ -75,7 +75,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         dontConsume: false
@@ -146,10 +146,10 @@ effects:
         unit: ft
       results:
         critHit: >-
-          <p>If you want, target is @Identifier[status:lighted]{lighted} until
-          the end of your next @Identifier[core:turns]{turn}.</p>
+          <p>If you want, target is @Identifier[condition:lighted]{lighted}
+          until the end of your next @Identifier[core:turns]{turn}.</p>
         hit: >-
-          <p>Target is @Identifier[status:lighted]{lighted} to a creature of
+          <p>Target is @Identifier[condition:lighted]{lighted} to a creature of
           your choice until the end of their next
           @Identifier[core:turns]{turn}.</p>
       spell: true
@@ -165,7 +165,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/medicine-ball.webp
     name: Medicine Ball
     system:
@@ -232,7 +232,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/resurrect.webp
     name: Resurrect
     system:
@@ -268,7 +268,7 @@ effects:
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, target can have been @Identifier[status:dead]{dead} for an
+        spent, target can have been @Identifier[condition:dead]{dead} for an
         additional 24 hours. If target is
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
         they are @Identifier[core:healing]{healed} an additional time.</p>
@@ -277,9 +277,9 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>If target is @Identifier[status:dead]{dead}, they are brought back
-          to life with 1 @Identifier[core:hit-points-and-mana-points]{HP}. If
-          target is
+          <p>If target is @Identifier[condition:dead]{dead}, they are brought
+          back to life with 1 @Identifier[core:hit-points-and-mana-points]{HP}.
+          If target is
           @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
           you can choose to have them be @Identifier[core:healing]{healed} for
           @Identifier[core:damage]{damage}. [[lookup name]] does not count as a
@@ -305,7 +305,7 @@ effects:
       requirements: >-
         <p>Target is
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} or
-        has @Identifier[status:dead]{died} within the last 24 hours.</p>
+        has @Identifier[condition:dead]{died} within the last 24 hours.</p>
       ritual: true
       spell: true
       standard: true
@@ -320,7 +320,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/hibernation.webp
     name: Hibernation
     system:
@@ -344,7 +344,7 @@ effects:
         - primal
       range:
         unit: self
-      requirements: <p>You are @Identifier[status:down]{down}.</p>
+      requirements: <p>You are @Identifier[condition:down]{down}.</p>
       skill: true
       standard: true
       targets:

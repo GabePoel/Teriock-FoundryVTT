@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.0
+  systemVersion: 0.13.8
 img: systems/teriock/src/icons/abilities/poison-strike.webp
 name: Poison Strike
 system:
@@ -48,7 +48,7 @@ system:
     unit: hour
   effectTypes:
     - poison
-  endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
+  endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
   executionTime:
     base: a1
   form: normal
@@ -57,10 +57,10 @@ system:
   maneuver: active
   overview:
     fluent: >-
-      <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+      <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
       1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
     proficient: >-
-      <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+      <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
       1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
   piercing:
     raw: 0
@@ -70,8 +70,8 @@ system:
     unit: contact
   results:
     hit: >-
-      <p>Target is @Identifier[status:poisoned]{poisoned}. The
-      @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+      <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+      @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
       @Identifier[core:damage]{damage}.</p>
   skill: true
   targets:

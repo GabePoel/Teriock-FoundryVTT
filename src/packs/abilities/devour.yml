@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.0
+  systemVersion: 0.13.8
 img: systems/teriock/src/icons/abilities/devour.webp
 name: Devour
 system:
@@ -25,13 +25,14 @@ system:
     - martial
   range:
     unit: contact
-  requirements: <p>Target is @Identifier[status:down]{down}.</p>
+  requirements: <p>Target is @Identifier[condition:down]{down}.</p>
   results:
     hit: >-
-      <p>Target is @Identifier[status:dead]{dead},
-      @Identifier[status:ruined]{ruined}, and their @Identifier[core:size]{SIZE}
-      is reduced by 1. If their @Identifier[core:size]{SIZE} was already less
-      than 1, it is reduced to 0.</p>
+      <p>Target is @Identifier[condition:dead]{dead},
+      @Identifier[condition:ruined]{ruined}, and their
+      @Identifier[core:size]{SIZE} is reduced by 1. If their
+      @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
+      0.</p>
   targets:
     - creature
 transfer: true

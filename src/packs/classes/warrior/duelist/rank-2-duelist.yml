@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.79
+  systemVersion: 0.13.8
 effects:
   - _id: vU4DiB0u1DAfzrs5
     _key: '!items.effects!8e0c2b8d16a120d3.vU4DiB0u1DAfzrs5'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/bow-out.webp
     name: Bow Out
     system:
@@ -49,7 +49,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/dueling-techniques.webp
     name: Dueling Techniques
     system:
@@ -65,7 +65,7 @@ effects:
       delivery: self
       duration:
         unit: unlimited
-      endCondition: <p>You are no longer @Identifier[status:dueling]{dueling}.</p>
+      endCondition: <p>You are no longer @Identifier[condition:dueling]{dueling}.</p>
       executionTime:
         base: a1
       expirations:
@@ -85,7 +85,7 @@ effects:
           @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
           you are @Identifier[keyword:using]{using} of your choice becomes
           @Identifier[property:armor-voiding]{AV0} against creatures you are
-          @Identifier[status:dueling]{dueling} and you gain
+          @Identifier[condition:dueling]{dueling} and you gain
           @Identifier[keyword:limited]{Limited}
           @Identifier[ability:chi-strike]{Chi Strike}.</p>
       powerSources:
@@ -93,7 +93,7 @@ effects:
       range:
         unit: self
       requirements: >-
-        <p>You must be @Identifier[status:dueling]{dueling} and wielding the
+        <p>You must be @Identifier[condition:dueling]{dueling} and wielding the
         targeted weapon.</p>
       skill: true
       standard: true
@@ -108,7 +108,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/tea-ceremony.webp
     name: Tea Ceremony
     system:
@@ -157,9 +157,9 @@ effects:
           @Identifier[keyword:resistance]{resistant} to
           @Identifier[drain:mana]{mana drain} for 24 hours and suffer no
           negative effects of @Identifier[core:hit-points-and-mana-points]{mana
-          loss} other than @Identifier[status:dead]{death} and
-          @Identifier[status:unconscious]{unconsciousness}. [[lookup name]] can
-          only be performed once per @Identifier[core:long-rest]{long
+          loss} other than @Identifier[condition:dead]{death} and
+          @Identifier[condition:unconscious]{unconsciousness}. [[lookup name]]
+          can only be performed once per @Identifier[core:long-rest]{long
           rest}.</p><p class="note"><b>Note:</b> [[lookup name]] detects only
           whether the participants believe their answers to be true, not whether
           or not they are.</p><p class="note"><b>Note:</b> If an effect such as
@@ -190,7 +190,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/active-bow-out.webp
     name: Active Bow Out
     system:
@@ -219,14 +219,14 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You end a @Identifier[status:dueling]{duel} you are currently in.
-          You do not count as "forfeiting" or "losing" if you use [[lookup
-          name]] to stop @Identifier[status:dueling]{dueling}.</p>
+          <p>You end a @Identifier[condition:dueling]{duel} you are currently
+          in. You do not count as "forfeiting" or "losing" if you use [[lookup
+          name]] to stop @Identifier[condition:dueling]{dueling}.</p>
         proficient: >-
-          <p>If you want, everyone in the @Identifier[status:dueling]{duel}
+          <p>If you want, everyone in the @Identifier[condition:dueling]{duel}
           returns to the number of
           @Identifier[core:hit-points-and-mana-points]{HP} they had prior to
-          @Identifier[status:dueling]{dueling}.</p>
+          @Identifier[condition:dueling]{dueling}.</p>
       powerSources:
         - spiritual
       range:
@@ -244,7 +244,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/reactive-bow-out.webp
     name: Reactive Bow Out
     system:
@@ -262,12 +262,12 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>The effect causing you to enter a @Identifier[status:dueling]{duel}
-          or that would @Wiki[Category:Duel modifying effects]{modify} a
-          @Identifier[status:dueling]{duel} you are in
-          @Identifier[core:fizzles]{fizzles}. You do not count as "forfeiting"
-          or "losing" if you use [[lookup name]] to stop
-          @Identifier[status:dueling]{dueling}.</p>
+          <p>The effect causing you to enter a
+          @Identifier[condition:dueling]{duel} or that would @Wiki[Category:Duel
+          modifying effects]{modify} a @Identifier[condition:dueling]{duel} you
+          are in @Identifier[core:fizzles]{fizzles}. You do not count as
+          "forfeiting" or "losing" if you use [[lookup name]] to stop
+          @Identifier[condition:dueling]{dueling}.</p>
       powerSources:
         - spiritual
       range:
@@ -278,8 +278,8 @@ effects:
         - self
       trigger: >-
         <p>Some effect would cause you to start
-        @Identifier[status:dueling]{dueling} or @Wiki[Category:Duel modifying
-        effects]{modify} a @Identifier[status:dueling]{duel} you are in.</p>
+        @Identifier[condition:dueling]{dueling} or @Wiki[Category:Duel modifying
+        effects]{modify} a @Identifier[condition:dueling]{duel} you are in.</p>
     transfer: true
     type: ability
   - _id: 7kB1JtcWeY4CLVek
@@ -289,7 +289,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/chi-strike.webp
     name: Chi Strike
     system:
@@ -373,7 +373,9 @@ system:
     @Identifier[class:duelist]{Duelist}'s way. If you are a
     @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and
     confident in yourself.</p>
-  flaws: <p>Duelists cannot use @Wiki[Category:Shields]{shields}.</p>
+  flaws: >-
+    <p>Duelists cannot use
+    @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-2-duelist
   innate: false
   maxAv: 4

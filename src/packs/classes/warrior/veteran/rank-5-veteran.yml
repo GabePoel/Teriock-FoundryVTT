@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.79
+  systemVersion: 0.13.8
 effects:
   - _id: 16u6C5BMXaOmLloI
     _key: '!items.effects!6a4c29966ff94257.16u6C5BMXaOmLloI'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: support
@@ -52,7 +52,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: combat
@@ -109,7 +109,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: combat
@@ -157,7 +157,7 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are @Identifier[status:up]{up}.</p>
+      requirements: <p>You are @Identifier[rule:up]{up}.</p>
       skill: true
       standard: true
       targets:
@@ -171,7 +171,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: combat
@@ -198,8 +198,8 @@ effects:
       overview:
         base: >-
           <p>If the effect causing the
-          @Identifier[status:unconscious]{unconsciousness} or
-          @Identifier[status:dead]{death} was a cost, then [[lookup name]]
+          @Identifier[condition:unconscious]{unconsciousness} or
+          @Identifier[condition:dead]{death} was a cost, then [[lookup name]]
           @Identifier[core:fizzles]{fizzles}. [[lookup name]]'s cost can be paid
           with @Identifier[core:temporary-hit-points]{temporary HP}.</p><p
           class="note"><b>Note:</b> Creatures can choose to be hit by attacks
@@ -213,14 +213,15 @@ effects:
       results:
         hit: >-
           <p>The effect causing the target to become
-          @Identifier[status:down]{down} @Identifier[core:fizzles]{fizzles}.</p>
+          @Identifier[condition:down]{down}
+          @Identifier[core:fizzles]{fizzles}.</p>
       skill: true
       standard: true
       targets:
         - creature
       trigger: >-
         <p>A creature within range would be
-        @Identifier[status:down]{dropped}.</p>
+        @Identifier[condition:down]{dropped}.</p>
     transfer: true
     type: ability
   - _id: VBoKPDCDrZYSanpd
@@ -230,7 +231,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: support
@@ -307,7 +308,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: support
@@ -361,7 +362,7 @@ effects:
           @Identifier[ability:fortify-area]{Fortify Area}, you
           @Identifier[keyword:resistance]{resist} being
           @Identifier[core:surprise-rounds]{surprised}, becoming
-          @Identifier[status:frightened]{frightened}, and all
+          @Identifier[condition:frightened]{frightened}, and all
           @Wiki[Category:Mediator tradecrafts]{mediator tradecrafts}. You also
           gain these benefits when you use @Identifier[ability:brace]{Brace} as
           long as you remain stationary and while performing "guard duty".
@@ -380,7 +381,7 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are @Identifier[status:up]{up}.</p>
+      requirements: <p>You are @Identifier[rule:up]{up}.</p>
       skill: true
       standard: true
       targets:
@@ -394,7 +395,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/master-armor-smith.webp
     name: Master Armor Smith
     system:
@@ -444,7 +445,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/runic-armor.webp
     name: Runic Armor
     system:
@@ -524,7 +525,7 @@ system:
   instructions: >-
     <p>Choose one combat @Pack[teriock.abilities]{ability} and one support
     @Pack[teriock.abilities]{ability} to gain from [[lookup name]]. Delete the
-    other abilities.</p>
+    other @Pack[teriock.abilities]{abilities}.</p>
   maxAv: 4
   number: 5
   statDice:

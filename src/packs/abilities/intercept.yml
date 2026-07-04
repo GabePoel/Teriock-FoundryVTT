@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.0
+  systemVersion: 0.13.8
 img: systems/teriock/src/icons/abilities/intercept.webp
 name: Intercept
 system:
@@ -27,8 +27,8 @@ system:
   overview:
     base: >-
       <p>If the effect causing the
-      @Identifier[status:unconscious]{unconsciousness} or
-      @Identifier[status:dead]{death} was a cost, then [[lookup name]]
+      @Identifier[condition:unconscious]{unconsciousness} or
+      @Identifier[condition:dead]{death} was a cost, then [[lookup name]]
       @Identifier[core:fizzles]{fizzles}. [[lookup name]]'s cost can be paid
       with @Identifier[core:temporary-hit-points]{temporary HP}.</p><p
       class="note"><b>Note:</b> Creatures can choose to be hit by attacks while
@@ -41,12 +41,14 @@ system:
     unit: contact
   results:
     hit: >-
-      <p>The effect causing the target to become @Identifier[status:down]{down}
-      @Identifier[core:fizzles]{fizzles}.</p>
+      <p>The effect causing the target to become
+      @Identifier[condition:down]{down} @Identifier[core:fizzles]{fizzles}.</p>
   skill: true
   standard: true
   targets:
     - creature
-  trigger: <p>A creature within range would be @Identifier[status:down]{dropped}.</p>
+  trigger: >-
+    <p>A creature within range would be
+    @Identifier[condition:down]{dropped}.</p>
 transfer: true
 type: ability

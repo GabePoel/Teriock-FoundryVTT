@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.7
+  systemVersion: 0.13.8
 effects:
   - _id: Uz1hvRPju7UkGtEK
     _key: '!items.effects!uf77dPhDHKFHHJj5.Uz1hvRPju7UkGtEK'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/defy-death.webp
     name: Defy Death
     system:
@@ -40,7 +40,7 @@ effects:
       interaction: manifest
       maneuver: reactive
       overview:
-        base: <p>You begin @Identifier[status:defying-death]{defying death}.</p>
+        base: <p>You begin @Identifier[condition:defying-death]{defying death}.</p>
       powerSources:
         - martial
       range:
@@ -50,7 +50,7 @@ effects:
       sustained: true
       targets:
         - self
-      trigger: <p>You would @Identifier[status:down]{drop}.</p>
+      trigger: <p>You would @Identifier[condition:down]{drop}.</p>
     transfer: true
     type: ability
   - _id: A4WZCzLVp8Jq9ykR
@@ -60,7 +60,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/duel.webp
     name: Duel
     system:
@@ -107,13 +107,13 @@ effects:
           <p>You challenge the target to advance and fight you. They may
           immediately @Identifier[ability:move]{Move} towards you as a
           @Identifier[core:reactive-maneuvers]{free reaction} to this and begin
-          @Identifier[status:dueling]{dueling} with you. If they choose not to
-          or are unable to do so, then they are considered to have "forfeited"
-          the [[lookup name style=lc]] (but are not considered to have "lost"
-          it). Any creature that forfeits this [[lookup name style=lc]] becomes
-          @Identifier[status:lighted]{lighted} to each of their would-be
-          opponents in the [[lookup name style=lc]] until the end of that
-          opponent's next @Identifier[core:turns]{turn}.</p>
+          @Identifier[condition:dueling]{dueling} with you. If they choose not
+          to or are unable to do so, then they are considered to have
+          "forfeited" the [[lookup name style=lc]] (but are not considered to
+          have "lost" it). Any creature that forfeits this [[lookup name
+          style=lc]] becomes @Identifier[condition:lighted]{lighted} to each of
+          their would-be opponents in the [[lookup name style=lc]] until the end
+          of that opponent's next @Identifier[core:turns]{turn}.</p>
         proficient: >-
           <p>You may also @Identifier[ability:move]{Move} or make a
           @Wiki[Category:Single action abilities]{single action}
@@ -126,7 +126,7 @@ effects:
         raw: '30'
         unit: ft
       requirements: >-
-        <p>You are not @Identifier[status:dueling]{dueling} and can only use
+        <p>You are not @Identifier[condition:dueling]{dueling} and can only use
         this on an opponent.</p>
       skill: true
       standard: true
@@ -141,7 +141,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/resolve-conflict.webp
     name: Resolve Conflict
     system:
@@ -193,7 +193,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/detect-lie.webp
     name: Detect Lie
     system:
@@ -259,7 +259,9 @@ system:
     @Identifier[class:duelist]{Duelist}'s way. If you are a
     @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and
     confident in yourself.</p>
-  flaws: <p>Duelists cannot use @Wiki[Category:Shields]{shields}.</p>
+  flaws: >-
+    <p>Duelists cannot use
+    @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-1-duelist
   innate: false
   maxAv: 4

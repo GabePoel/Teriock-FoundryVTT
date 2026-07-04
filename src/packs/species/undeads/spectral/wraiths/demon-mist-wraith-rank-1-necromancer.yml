@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.7
+  systemVersion: 0.13.8
 effects:
   - _id: Q3bElOKJWjw3DI9t
     _key: '!items.effects!MbcsX0QqPsBUm3gj.Q3bElOKJWjw3DI9t'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/death-ray.webp
     name: Death Ray
     system:
@@ -56,14 +56,14 @@ effects:
         raw: '60'
         unit: ft
       requirements: >-
-        <p>Target is neither @Identifier[status:dead]{dead} nor
+        <p>Target is neither @Identifier[condition:dead]{dead} nor
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
       results:
         critHit: <p>Double the number of dice rolled.</p>
         hit: >-
           <p>Roll [[/kill 2d6]] if this is greater than or equal to the number
           of @Identifier[core:hit-points-and-mana-points]{HP} the target has,
-          they @Identifier[status:dead]{die}. This does not deal
+          they @Identifier[condition:dead]{die}. This does not deal
           @Identifier[core:damage]{damage}.</p>
       spell: true
       standard: true
@@ -78,7 +78,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/spirit-guide.webp
     name: Spirit Guide
     system:
@@ -124,14 +124,15 @@ effects:
       overview:
         base: >-
           <p>You can see, hear, and speak to spirits and
-          @Identifier[status:ethereal]{Ethereal} creatures within 120 feet.</p>
+          @Identifier[condition:ethereal]{Ethereal} creatures within 120
+          feet.</p>
         fluent: >-
-          <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+          <p>You can target @Identifier[condition:ethereal]{Ethereal} creatures
           with @Wiki[Category:Spiritually powered abilities]{spiritual}
           @Wiki[Category:Ritual delivery spells]{ritual spells} such as
           @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
         proficient: >-
-          <p>You can target @Identifier[status:ethereal]{Ethereal} creatures
+          <p>You can target @Identifier[condition:ethereal]{Ethereal} creatures
           with @Wiki[Category:Necromancy element abilities]{necromancy}
           @Wiki[Category:Ritual delivery spells]{ritual spells} such as
           @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
@@ -158,7 +159,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/summon-the-dead.webp
     name: Summon the Dead
     system:
@@ -202,11 +203,11 @@ effects:
         base: >-
           <p>If you have the body of the target in your possession, you can put
           the spirit back into its body such that it is no longer
-          @Identifier[status:wisping]{wisping}. The body maintains all damage it
-          had when it died.</p>
+          @Identifier[condition:wisping]{wisping}. The body maintains all damage
+          it had when it died.</p>
         proficient: >-
           <p>If the body is thoroughly damaged (such as if it's
-          @Identifier[status:ruined]{ruined}) or missing entirely, you can
+          @Identifier[condition:ruined]{ruined}) or missing entirely, you can
           expend some of your own life force to recreate the body from the
           spirit for additional @Identifier[core:hit-points-and-mana-points]{MP}
           and @Identifier[core:hit-points-and-mana-points]{HP}. The creature is
@@ -218,7 +219,7 @@ effects:
       range:
         raw: '5'
         unit: ft
-      requirements: <p>Target must be @Identifier[status:wisping]{wisping}.</p>
+      requirements: <p>Target must be @Identifier[condition:wisping]{wisping}.</p>
       ritual: true
       spell: true
       standard: true
@@ -233,7 +234,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/terror-ball.webp
     name: Terror Ball
     system:
@@ -299,8 +300,8 @@ system:
     @Identifier[class:necromancer]{Necromancers} fear nothing, as they are
     always facing death. If you are playing a
     @Identifier[class:necromancer]{Necromancer} be unafraid, kill without
-    remorse and be interested in @Identifier[status:dead]{dead} bodies, close to
-    death yourself, almost in another world.</p>
+    remorse and be interested in @Identifier[condition:dead]{dead} bodies, close
+    to death yourself, almost in another world.</p>
   identifier: rank-1-necromancer
   innate: false
   maxAv: 0

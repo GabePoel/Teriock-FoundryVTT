@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.84
+  systemVersion: 0.13.8
 effects:
   - _id: kYUwT14Txb9wA7UT
     _key: '!items.effects!c489adeae1c683aa.kYUwT14Txb9wA7UT'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/acidic-blood.webp
     name: Acidic Blood
     system:
@@ -55,7 +55,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     name: Acrobatics
     system:
@@ -97,7 +97,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/animate-dead.webp
     name: Animate Dead
     system:
@@ -197,7 +197,7 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Target is @Identifier[status:alive]{alive} (but still
+          <p>Target is @Identifier[rule:alive]{alive} (but still
           @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}).
           It's @Identifier[core:hit-points-and-mana-points]{HP} and
           @Identifier[core:hit-points-and-mana-points]{MP} are both increased to
@@ -226,7 +226,7 @@ effects:
       range:
         unit: contact
       requirements: >-
-        <p>Target is @Identifier[status:dead]{dead} and
+        <p>Target is @Identifier[condition:dead]{dead} and
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
       spell: true
       standard: true
@@ -241,7 +241,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/bestial-transformation.webp
     name: Bestial Transformation
     system:
@@ -302,8 +302,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You are @Identifier[status:transformed]{fully transformed} into a
-          @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{common
+          <p>You are @Identifier[condition:transformed]{fully transformed} into
+          a @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{common
           animal}. The maximum @Identifier[core:battle-rating]{BR} of
           @UUID[Compendium.teriock.tables.RollTable.77cfb7b27d7836e5]{animals}
           you can choose is 1.</p>
@@ -331,7 +331,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/charm.webp
     name: Charm
     system:
@@ -364,7 +364,7 @@ effects:
       identifier: charm
       improvement: >-
         <p>May have up to 2 × @Identifier[core:presence]{PRES} creatures
-        @Identifier[status:charmed]{charmed} at a time.</p>
+        @Identifier[condition:charmed]{charmed} at a time.</p>
       interaction: attack
       maneuver: active
       piercing:
@@ -375,9 +375,9 @@ effects:
         unit: contact
       requirements: >-
         <p>A creature may only have up to @Identifier[core:presence]{PRES}
-        creatures @Identifier[status:charmed]{charmed} at a time.</p>
+        creatures @Identifier[condition:charmed]{charmed} at a time.</p>
       results:
-        hit: <p>Target is @Identifier[status:charmed]{charmed}.</p>
+        hit: <p>Target is @Identifier[condition:charmed]{charmed}.</p>
       targets:
         - creature
     transfer: true
@@ -389,7 +389,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/dark-vision.webp
     name: Dark Vision
     system:
@@ -436,7 +436,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/devour.webp
     name: Devour
     system:
@@ -457,11 +457,11 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @Identifier[status:down]{down}.</p>
+      requirements: <p>Target is @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @Identifier[status:dead]{dead},
-          @Identifier[status:ruined]{ruined}, and their
+          <p>Target is @Identifier[condition:dead]{dead},
+          @Identifier[condition:ruined]{ruined}, and their
           @Identifier[core:size]{SIZE} is reduced by 1. If their
           @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
           0.</p>
@@ -476,7 +476,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/duel.webp
     name: Duel
     system:
@@ -523,13 +523,13 @@ effects:
           <p>You challenge the target to advance and fight you. They may
           immediately @Identifier[ability:move]{Move} towards you as a
           @Identifier[core:reactive-maneuvers]{free reaction} to this and begin
-          @Identifier[status:dueling]{dueling} with you. If they choose not to
-          or are unable to do so, then they are considered to have "forfeited"
-          the [[lookup name style=lc]] (but are not considered to have "lost"
-          it). Any creature that forfeits this [[lookup name style=lc]] becomes
-          @Identifier[status:lighted]{lighted} to each of their would-be
-          opponents in the [[lookup name style=lc]] until the end of that
-          opponent's next @Identifier[core:turns]{turn}.</p>
+          @Identifier[condition:dueling]{dueling} with you. If they choose not
+          to or are unable to do so, then they are considered to have
+          "forfeited" the [[lookup name style=lc]] (but are not considered to
+          have "lost" it). Any creature that forfeits this [[lookup name
+          style=lc]] becomes @Identifier[condition:lighted]{lighted} to each of
+          their would-be opponents in the [[lookup name style=lc]] until the end
+          of that opponent's next @Identifier[core:turns]{turn}.</p>
         proficient: >-
           <p>You may also @Identifier[ability:move]{Move} or make a
           @Wiki[Category:Single action abilities]{single action}
@@ -542,7 +542,7 @@ effects:
         raw: '30'
         unit: ft
       requirements: >-
-        <p>You are not @Identifier[status:dueling]{dueling} and can only use
+        <p>You are not @Identifier[condition:dueling]{dueling} and can only use
         this on an opponent.</p>
       skill: true
       standard: true
@@ -557,7 +557,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/extreme-intelligence.webp
     name: Extreme Intelligence
     system:
@@ -591,7 +591,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/fluent-caster.webp
     name: Fluent Caster
     system:
@@ -631,7 +631,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -678,7 +678,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/greater-undead.webp
     name: Greater Undead
     system:
@@ -723,7 +723,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: >-
       systems/teriock/src/icons/abilities/increased-running-water-sensitivity.webp
     name: Increased Running Water Sensitivity
@@ -774,7 +774,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/increased-sunlight-sensitivity.webp
     name: Increased Sunlight Sensitivity
     system:
@@ -824,7 +824,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/instant-ethereal.webp
     name: Instant Ethereal
     system:
@@ -853,8 +853,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You go @Identifier[status:ethereal]{Ethereal} or manifest back into
-          the Material Realm.</p>
+          <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back
+          into the Material Realm.</p>
       powerSources:
         - magical
       range:
@@ -870,7 +870,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/magical-unweaver.webp
     name: Magical Unweaver
     system:
@@ -909,7 +909,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
     name: Natural Unbreachability
     system:
@@ -955,7 +955,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -989,7 +989,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -1023,7 +1023,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -1057,7 +1057,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: icons/environment/creatures/bug-spider-blue.webp
     name: Nos Farachnai Transformation
     system:
@@ -1106,7 +1106,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/poison-strike.webp
     name: Poison Strike
     system:
@@ -1148,7 +1148,7 @@ effects:
         unit: hour
       effectTypes:
         - poison
-      endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
+      endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
       executionTime:
         base: a1
       form: normal
@@ -1157,10 +1157,10 @@ effects:
       maneuver: active
       overview:
         fluent: >-
-          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
           1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
         proficient: >-
-          <p>The @Identifier[status:poisoned]{poison} instead deals [[/damage
+          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
           1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
       piercing:
         raw: 0
@@ -1170,8 +1170,8 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>Target is @Identifier[status:poisoned]{poisoned}. The
-          @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
+          <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+          @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
           @Identifier[core:damage]{damage}.</p>
       skill: true
       targets:
@@ -1185,7 +1185,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/sentient-feeding.webp
     name: Sentient Feeding
     system:
@@ -1206,9 +1206,9 @@ effects:
         base: >-
           <p>You must @Identifier[drain:mana]{mana drain} at least 1 creature
           with @Identifier[core:intelligence]{INT} of 0 or greater to
-          @Identifier[status:dead]{death} every day 24 hours or you start taking
-          penalties. If 24 hours pass and you have not fed, you lose your your
-          largest @Identifier[core:hit-points-and-mana-points]{hit die} and
+          @Identifier[condition:dead]{death} every day 24 hours or you start
+          taking penalties. If 24 hours pass and you have not fed, you lose your
+          your largest @Identifier[core:hit-points-and-mana-points]{hit die} and
           @Identifier[core:hit-points-and-mana-points]{mana die}. Your
           @Identifier[core:hit-points-and-mana-points]{HP} and
           @Identifier[core:hit-points-and-mana-points]{MP} maximums decrease by
@@ -1237,7 +1237,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/spiga-webbing.webp
     name: Spiga Webbing
     system:
@@ -1272,7 +1272,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/vampiric-infect.webp
     name: Vampiric Infect
     system:
@@ -1313,10 +1313,10 @@ effects:
         unit: contact
       results:
         fail: >-
-          <p>Target is @Identifier[status:allured]{allured} to you. This effect
-          <i>cannot</i> be removed with @Identifier[ability:remove-charm]{Remove
-          Charm}, but it <i>can</i> be removed with
-          @Identifier[ability:exorcism]{Exorcism} or
+          <p>Target is @Identifier[condition:allured]{allured} to you. This
+          effect <i>cannot</i> be removed with
+          @Identifier[ability:remove-charm]{Remove Charm}, but it <i>can</i> be
+          removed with @Identifier[ability:exorcism]{Exorcism} or
           @Identifier[ability:cure-illness]{Cure Illness}. Over the coming
           month, the target will become
           @UUID[Compendium.teriock.tables.RollTable.65fbed36e42b583a]{vampiric}.
@@ -1342,7 +1342,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -1408,7 +1408,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
@@ -1492,7 +1492,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/fluent-cast-aura.webp
     name: Fluent Cast Aura
     system:
@@ -1560,7 +1560,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/fluent-cast-ball.webp
     name: Fluent Cast Ball
     system:
@@ -1628,7 +1628,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/innate-elder-sorcery.webp
     name: Innate Elder Sorcery
     system:
@@ -1718,7 +1718,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/all-elder-sorcery-words.webp
     name: All Elder Sorcery Words
     system:
@@ -2578,7 +2578,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -2661,7 +2661,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/fluent-cast-touch.webp
     name: Fluent Cast Touch
     system:
@@ -2729,7 +2729,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/fluent-cast-ritual.webp
     name: Fluent Cast Ritual
     system:
@@ -2797,7 +2797,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/rotator-fluency.webp
     name: Rotator Fluency
     system:
@@ -2850,7 +2850,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/fluent-cast-ray.webp
     name: Fluent Cast Ray
     system:
@@ -2918,7 +2918,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/rotators.webp
     name: Rotators
     system:
@@ -3012,7 +3012,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -3061,7 +3061,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -3103,7 +3103,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -3147,7 +3147,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -3184,7 +3184,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/magical-durability.webp
     name: Magical Durability
     system:
@@ -3229,7 +3229,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/undead-mind.webp
     name: Undead Mind
     system:
@@ -3265,10 +3265,10 @@ effects:
       overview:
         base: >-
           <p>You are @Identifier[keyword:immunity]{immune} to being
-          @Identifier[status:frightened]{frightened} and
-          @Identifier[status:charmed]{charmed}. The effects of [[lookup name]]
-          are maintained even if
-          @Identifier[status:transformed]{transformed}.</p>
+          @Identifier[condition:frightened]{frightened} and
+          @Identifier[condition:charmed]{charmed}. The effects of [[lookup
+          name]] are maintained even if
+          @Identifier[condition:transformed]{transformed}.</p>
       powerSources:
         - magical
       range:
@@ -3284,7 +3284,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
     name: Healing Sensitivity
     system:
@@ -3328,7 +3328,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/ethereal-senses.webp
     name: Ethereal Senses
     system:
@@ -3362,7 +3362,8 @@ effects:
       overview:
         base: >-
           <p>You can see and hear spirits and
-          @Identifier[status:ethereal]{Ethereal} creatures within 120 feet.</p>
+          @Identifier[condition:ethereal]{Ethereal} creatures within 120
+          feet.</p>
       powerSources:
         - magical
         - primal
@@ -3380,7 +3381,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/undying-durability.webp
     name: Undying Durability
     system:
@@ -3422,12 +3423,12 @@ effects:
       overview:
         base: >-
           <p>You are @Identifier[keyword:immunity]{immune} to
-          @Identifier[status:unconscious]{unconsciousness},
-          @Identifier[status:suffocating]{suffocating}, and being
-          @Identifier[status:poisoned]{poisoned}. You do not
-          @Identifier[status:down]{drop} due to being at negative
+          @Identifier[condition:unconscious]{unconsciousness},
+          @Identifier[condition:suffocating]{suffocating}, and being
+          @Identifier[condition:poisoned]{poisoned}. You do not
+          @Identifier[condition:down]{drop} due to being at negative
           @Identifier[core:hit-points-and-mana-points]{HP}. You still
-          @Identifier[status:dead]{die} when you reach half your maximum
+          @Identifier[condition:dead]{die} when you reach half your maximum
           @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also
           do not have to @Identifier[core:drowning]{breathe}.</p>
       powerSources:
@@ -3445,7 +3446,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
     name: Mana Drain Touch
     system:
@@ -3485,16 +3486,16 @@ effects:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[status:dead]{kills} the target, you
-          @Identifier[core:revitalizing]{revitalize} twice. This
+          to the target. If this @Identifier[condition:dead]{kills} the target,
+          you @Identifier[core:revitalizing]{revitalize} twice. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>
         hit: >-
           <p>Deal [[/drain 1d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[status:dead]{kills} the target, you
-          @Identifier[core:revitalizing]{revitalize}.  This
+          to the target. If this @Identifier[condition:dead]{kills} the target,
+          you @Identifier[core:revitalizing]{revitalize}.  This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>
@@ -3509,7 +3510,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/dispel-magic.webp
     name: Dispel Magic
     system:
@@ -3599,7 +3600,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/mitigate-magic.webp
     name: Mitigate Magic
     system:
@@ -3650,7 +3651,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: systems/teriock/src/icons/abilities/interrupt-magic.webp
     name: Interrupt Magic
     system:
@@ -3737,7 +3738,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: icons/creatures/webs/web-sparse-pink.webp
     name: Spiga Web Packet
     system:
@@ -3757,13 +3758,13 @@ effects:
       duration:
         unit: unlimited
       endCondition: >-
-        <p>The @Identifier[status:snared]{snare} caused by this ability does not
-        end on its own. It can be escaped by
+        <p>The @Identifier[condition:snared]{snare} caused by this ability does
+        not end on its own. It can be escaped by
         @Identifier[ability:interact]{interacting} with the web making a DC 25
         @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat
         save}. This can be done either by the creature that is
-        @Identifier[status:snared]{snared} or by another that attempts to free
-        them. The DC is reduced by 1 for every additional creature of
+        @Identifier[condition:snared]{snared} or by another that attempts to
+        free them. The DC is reduced by 1 for every additional creature of
         @Identifier[core:size]{SIZE} 1 or larger that is assisting the
         target.</p>
       executionTime:
@@ -3780,7 +3781,7 @@ effects:
         raw: '60'
         unit: ft
       results:
-        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+        hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
       targets:
         - creature
     transfer: true
@@ -3792,7 +3793,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: icons/creatures/webs/web-nest-ball-teal.webp
     name: Spiga Web Ball
     system:
@@ -3812,13 +3813,13 @@ effects:
       duration:
         unit: unlimited
       endCondition: >-
-        <p>The @Identifier[status:snared]{snare} caused by this ability does not
-        end on its own. It can be escaped by
+        <p>The @Identifier[condition:snared]{snare} caused by this ability does
+        not end on its own. It can be escaped by
         @Identifier[ability:interact]{interacting} with the web making a DC 25
         @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat
         save}. This can be done either by the creature that is
-        @Identifier[status:snared]{snared} or by another that attempts to free
-        them. The DC is reduced by 1 for every additional creature of
+        @Identifier[condition:snared]{snared} or by another that attempts to
+        free them. The DC is reduced by 1 for every additional creature of
         @Identifier[core:size]{SIZE} 1 or larger that is assisting the
         target.</p>
       executionTime:
@@ -3835,7 +3836,7 @@ effects:
         raw: '30'
         unit: ft
       results:
-        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+        hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
       targets:
         - creature
     transfer: true
@@ -3847,7 +3848,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     img: icons/creatures/webs/webthin-blue.webp
     name: Spiga Snare
     system:
@@ -3867,13 +3868,13 @@ effects:
       duration:
         unit: unlimited
       endCondition: >-
-        <p>The @Identifier[status:snared]{snare} caused by this ability does not
-        end on its own. It can be escaped by
+        <p>The @Identifier[condition:snared]{snare} caused by this ability does
+        not end on its own. It can be escaped by
         @Identifier[ability:interact]{interacting} with the web making a DC 25
         @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat
         save}. This can be done either by the creature that is
-        @Identifier[status:snared]{snared} or by another that attempts to free
-        them. The DC is reduced by 1 for every additional creature of
+        @Identifier[condition:snared]{snared} or by another that attempts to
+        free them. The DC is reduced by 1 for every additional creature of
         @Identifier[core:size]{SIZE} 1 or larger that is assisting the
         target.</p>
       executionTime:
@@ -3889,7 +3890,7 @@ effects:
       range:
         unit: contact
       results:
-        hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+        hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
       targets:
         - creature
     transfer: true

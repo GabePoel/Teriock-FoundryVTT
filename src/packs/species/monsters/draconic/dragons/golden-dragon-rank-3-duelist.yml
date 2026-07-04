@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.7
+  systemVersion: 0.13.8
 effects:
   - _id: QxDyN7VLtCaq1ppD
     _key: '!items.effects!dXfF2tqPwmeyw4BC.QxDyN7VLtCaq1ppD'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: support
@@ -78,7 +78,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.7
+      systemVersion: 0.13.8
     flags:
       teriock:
         category: combat
@@ -121,10 +121,10 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>The target leaves their @Identifier[status:dueling]{duel} and you
-          enter in their place. This does not end the
-          @Identifier[status:dueling]{duel} and the target is not considered to
-          have "lost" or "forfeited". Any @Wiki[Category:Duel modifying
+          <p>The target leaves their @Identifier[condition:dueling]{duel} and
+          you enter in their place. This does not end the
+          @Identifier[condition:dueling]{duel} and the target is not considered
+          to have "lost" or "forfeited". Any @Wiki[Category:Duel modifying
           effects]{duel modifying effects} remain in place.</p><p
           class="note"><b>Note:</b> This ability costs no
           @Identifier[core:hit-points-and-mana-points]{MP} to use on creatures
@@ -136,7 +136,7 @@ effects:
         unit: ft
       requirements: >-
         <p>Target must be an allied creature in a
-        @Identifier[status:dueling]{duel} within range.</p>
+        @Identifier[condition:dueling]{duel} within range.</p>
       skill: true
       standard: true
       targets:
@@ -162,7 +162,9 @@ system:
     @Identifier[class:duelist]{Duelist}'s way. If you are a
     @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and
     confident in yourself.</p>
-  flaws: <p>Duelists cannot use @Wiki[Category:Shields]{shields}.</p>
+  flaws: >-
+    <p>Duelists cannot use
+    @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
   identifier: rank-3-duelist
   innate: false
   maxAv: 4
