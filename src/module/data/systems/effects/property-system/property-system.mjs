@@ -92,6 +92,7 @@ export default class PropertySystem
     return [
       "system.applyIfDampened",
       "system.applyIfDeattuned",
+      "system.applyIfDestroyed",
       "system.applyIfShattered",
       "system.applyIfUnequipped",
       "system.consumable",

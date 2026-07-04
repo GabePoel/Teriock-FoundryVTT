@@ -72,6 +72,9 @@ export default class ConditionSystem
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
+    if (Object.keys(TERIOCK.content.conditions).includes(data?.system?.identifier)) {
+      options.keepId = true;
+    }
     if (data.disabled === true) { return false; }
   }
 

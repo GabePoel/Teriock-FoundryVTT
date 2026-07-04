@@ -322,6 +322,7 @@ export default class TeriockActor
     super.prepareEmbeddedDocuments();
     this.system.prepareChildAutomations();
     this.prepareChangeData();
+    this.applyActiveEffects("setup");
     this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
     this.applyActiveEffects("children");
   }

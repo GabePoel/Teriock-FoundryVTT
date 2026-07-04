@@ -67,7 +67,7 @@ export async function ensureChildren(document, identifiers) {
   const typed = (await document.getChildren()).documentsByType;
   const candidates = await Promise.all(identifiers.map(async identifier => {
     const parsed = teriock.helpers.utils.parseIdentifier(identifier);
-    if (!(teriock.data.fields.helpers.validators.validateTypedIdentifier(identifier, { strict: true }))) { return; }
+    if (!(teriock.data.fields.tools.validators.validateTypedIdentifier(identifier, { strict: true }))) { return; }
     const existing = (typed[parsed.type] || []).filter(n => n?.system?.identifier === parsed.identifier);
     if (existing.length) { return; }
     const doc = await teriock.helpers.utils.fromIdentifier(identifier);

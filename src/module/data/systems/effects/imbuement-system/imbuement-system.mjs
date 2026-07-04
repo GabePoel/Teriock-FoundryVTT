@@ -16,6 +16,6 @@ export default class ImbuementSystem extends mixClasses(ApplicableEffectSystem, 
 
   /** @inheritDoc */
   get _formPaths() {
-    return ["applyIfDampened", "applyIfDeattuned", "applyIfShattered", "applyIfUnequipped"];
+    return ["applyIfDampened", "applyIfDeattuned", "applyIfDestroyed", "applyIfShattered", "applyIfUnequipped"];
   }
 }

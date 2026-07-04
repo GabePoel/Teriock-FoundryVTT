@@ -3,6 +3,8 @@ declare global {
     export type GrantedSystemData = {
       /** <schema> Applies even if the parent {@link TeriockEquipment} is dampened */
       applyIfDampened: boolean;
+      /** <schema> Applies even if the parent {@link TeriockEquipment} is destroyed */
+      applyIfDestroyed: boolean;
       /** <schema> Applies even if the parent {@link TeriockEquipment} is shattered */
       applyIfShattered: boolean;
       /** <schema> Applies even if the parent {@link TeriockEquipment} is unequipped */

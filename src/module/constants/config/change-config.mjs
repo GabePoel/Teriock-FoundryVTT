@@ -145,6 +145,12 @@ const phase = {
     label: "TERIOCK.CHANGES.Phase.derived.label",
     visible: true,
   },
+  setup: {
+    applyToItems: true,
+    hint: "TERIOCK.CHANGES.Phase.setup.hint",
+    label: "TERIOCK.CHANGES.Phase.setup.label",
+    visible: true,
+  },
   special: {
     applyToItems: true,
     hint: "TERIOCK.CHANGES.Phase.special.hint",

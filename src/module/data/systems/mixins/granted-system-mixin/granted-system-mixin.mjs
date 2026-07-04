@@ -19,6 +19,7 @@ export default function GrantedSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           applyIfDampened: new fields.BooleanField(),
+          applyIfDestroyed: new fields.BooleanField(),
           applyIfShattered: new fields.BooleanField(),
           applyIfUnequipped: new fields.BooleanField({ initial: true }),
         });
@@ -27,6 +28,11 @@ export default function GrantedSystemMixin(Base) {
       /** @inheritDoc */
       get _isSuppressedDampened() {
         return !this.applyIfDampened && super._isSuppressedDampened;
+      }
+
+      /** @inheritDoc */
+      get _isSuppressedDestroyed() {
+        return !this.applyIfDestroyed && super._isSuppressedDestroyed;
       }
 
       /** @inheritDoc */

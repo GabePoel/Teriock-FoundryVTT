@@ -17,7 +17,7 @@ export default {
     Condition: {
       collection: "pages",
       icon: documentConfig.condition.icon,
-      identifierType: "status",
+      identifierType: "rule",
       index: "conditions",
       packs: ["teriock.rules"],
       parentKey: "namespace",

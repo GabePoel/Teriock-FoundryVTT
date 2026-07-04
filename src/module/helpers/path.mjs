@@ -1,5 +1,6 @@
 import { default as iconManifest } from "../../icons/icon-manifest.json" with { type: "json" };
 import indexConfig from "../constants/config/index-config.mjs";
+import { toCamelCase, toKebabCase } from "./string.mjs";
 
 /**
  * Get a path relative to the Teriock system root.
@@ -19,10 +20,10 @@ export function systemPath(path) {
  */
 export function getImage(category, name, fallback) {
   const out = fallback || systemPath("icons/documents/uncertainty.svg");
-  let l1 = teriock.helpers.string.toCamelCase(category);
+  let l1 = toCamelCase(category);
   if (!iconManifest[l1]) { l1 = indexConfig[category]; }
   if (!iconManifest[l1]) { return out; }
-  return iconManifest[l1][teriock.helpers.string.toCamelCase(name)] || out;
+  return iconManifest[l1][toCamelCase(name)] || out;
 }
 
 /**
@@ -33,7 +34,7 @@ export function getImage(category, name, fallback) {
  */
 export function getRankImage(className, rankNumber) {
   if (rankNumber <= 10) {
-    return systemPath(`icons/ranks/rank-${rankNumber}-${teriock.helpers.string.toKebabCase(className)}.webp`);
+    return systemPath(`icons/ranks/rank-${rankNumber}-${toKebabCase(className)}.webp`);
   }
   return systemPath(`icons/classes/${className}.webp`);
 }
