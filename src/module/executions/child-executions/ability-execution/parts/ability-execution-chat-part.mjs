@@ -275,26 +275,29 @@ export default function AbilityExecutionChatPart(Base) {
             || (this.source.system.duration.unit !== "instant" && this.source.system.maneuver !== "passive"))
           && (targetsActor || targetsArmament)
         ) {
-          // Add apply effects activation
-          const normConData = await this.#generateEffectConsequence(false);
-          const critConData = await this.#generateEffectConsequence(true);
-          const normImbData = await this.#generateEffectImbuement(false);
-          const critImbData = await this.#generateEffectImbuement(true);
+          // Add apply effects activation. Everything is built once per crit variant: index 0 is the normal outcome
+          // and index 1 is the critical one, matching the indexes automations use in their `crit` sets.
+          const variants = [];
+          for (const crit of [false, true]) {
+            variants.push({
+              con: {
+                children: this.source.subs.map(s => {
+                  return { uuid: s.uuid };
+                }),
+                data: await this.#generateEffectConsequence(crit),
+              },
+              crit,
+              docs: [],
+              grandchildren: [],
+              imb: { children: [], data: await this.#generateEffectImbuement(crit) },
+            });
+          }
           await this.#generateConsequenceAssociations();
-          normConData.system.associations = this.#associationMap.normal;
-          normConData.changes.push(...this.#trackerMap.normal);
-          critConData.system.associations = this.#associationMap.crit;
-          critConData.changes.push(...this.#trackerMap.crit);
-          const normConChildren = this.source.subs.map(s => {
-            return { uuid: s.uuid };
-          });
-          const critConChildren = [...normConChildren];
-          const normGrandchildren = [];
-          const critGrandchildren = [];
-          const normImbChildren = [];
-          const critImbChildren = [];
-          const normDocs = [];
-          const critDocs = [];
+          for (const v of variants) {
+            const key = v.crit ? "crit" : "normal";
+            v.con.data.system.associations = this.#associationMap[key];
+            v.con.data.changes.push(...this.#trackerMap[key]);
+          }
           const childAutomations = this.getAutomations("addDocuments", { active: true }).filter(a => !a.separate);
           for (const a of childAutomations) {
             const toAdd = await a.choose({ actor: this.actor });
@@ -309,67 +312,49 @@ export default function AbilityExecutionChatPart(Base) {
                 grandchildren.push(grandchild);
               }
             }
-            if (a.crit.has(0)) {
+            for (const [i, v] of variants.entries()) {
+              if (!a.crit.has(i)) { continue; }
               if (a.attachDocuments) {
-                normConChildren.push(...toAdd);
-                normImbChildren.push(...toAdd);
+                v.con.children.push(...toAdd);
+                v.imb.children.push(...toAdd);
               } else {
-                normDocs.push(...toAdd);
+                v.docs.push(...toAdd);
               }
-              normGrandchildren.push(...grandchildren);
-            }
-            if (a.crit.has(1)) {
-              if (a.attachDocuments) {
-                critConChildren.push(...toAdd);
-                critImbChildren.push(...toAdd);
-              } else {
-                critDocs.push(...toAdd);
-              }
-              critGrandchildren.push(...grandchildren);
+              v.grandchildren.push(...grandchildren);
             }
           }
           const transformationAutomations = this.getAutomations("transformation", { active: true });
           for (const a of transformationAutomations) {
             const toAdd = await a?.choose({ actor: this.actor });
-            if (a?.crit.has(0)) { normConData.system.transformation.uuids.push(...toAdd); }
-            if (a?.crit.has(1)) { critConData.system.transformation.uuids.push(...toAdd); }
+            for (const [i, v] of variants.entries()) {
+              if (a?.crit.has(i)) { v.con.data.system.transformation.uuids.push(...toAdd); }
+            }
           }
-          this.getAutomations("override", { active: true, crit: false }).forEach(a => {
-            if (a?.overrideCompetence) {
-              foundry.utils.setProperty(normConData, "system.competence.raw", a.competence.value);
-              foundry.utils.setProperty(normImbData, "system.competence.raw", a.competence.value);
-            }
-            if (a?.overrideData && a.data) {
-              foundry.utils.mergeObject(normConData, a.data, { inplace: true });
-              foundry.utils.mergeObject(normImbData, a.data, { inplace: true });
-            }
-          });
-          this.getAutomations("override", { active: true, crit: true }).forEach(a => {
-            if (a?.overrideCompetence) {
-              foundry.utils.setProperty(critConData, "system.competence.raw", a.competence.value);
-              foundry.utils.setProperty(critImbData, "system.competence.raw", a.competence.value);
-            }
-            if (a?.overrideData && a.data) {
-              foundry.utils.mergeObject(critConData, a.data, { inplace: true });
-              foundry.utils.mergeObject(critImbData, a.data, { inplace: true });
-            }
-          });
+          for (const v of variants) {
+            this.getAutomations("override", { active: true, crit: v.crit }).forEach(a => {
+              for (const effectData of [v.con.data, v.imb.data]) {
+                if (a?.overrideCompetence) {
+                  foundry.utils.setProperty(effectData, "system.competence.raw", a.competence.value);
+                }
+                if (a?.overrideData && a.data) { foundry.utils.mergeObject(effectData, a.data, { inplace: true }); }
+              }
+            });
+          }
+          const bundle = (v, kind) => {
+            return {
+              children: v[kind].children,
+              grandchildren: v.grandchildren,
+              other: v.docs,
+              root: { data: v[kind].data },
+            };
+          };
+          const [norm, crit] = variants;
           if (targetsActor) {
             this.activations.push(
               new acts.AddDocumentsActivation({
                 display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.label" },
-                primary: {
-                  children: normConChildren,
-                  grandchildren: normGrandchildren,
-                  other: normDocs,
-                  root: { data: normConData },
-                },
-                secondary: {
-                  children: critConChildren,
-                  grandchildren: critGrandchildren,
-                  other: critDocs,
-                  root: { data: critConData },
-                },
+                primary: bundle(norm, "con"),
+                secondary: bundle(crit, "con"),
                 target: "actor",
               }),
             );
@@ -378,18 +363,8 @@ export default function AbilityExecutionChatPart(Base) {
             this.activations.push(
               new acts.AddDocumentsActivation({
                 display: { label: overrideAutomation?.display?.label || "TERIOCK.COMMANDS.ApplyEffect.armament" },
-                primary: {
-                  children: normImbChildren,
-                  grandchildren: normGrandchildren,
-                  other: normDocs,
-                  root: { data: normImbData },
-                },
-                secondary: {
-                  children: critImbChildren,
-                  grandchildren: critGrandchildren,
-                  other: critDocs,
-                  root: { data: critImbData },
-                },
+                primary: bundle(norm, "imb"),
+                secondary: bundle(crit, "imb"),
                 target: "armament",
               }),
             );
@@ -409,26 +384,16 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildSourcePanel() {
         const panel = await super._buildSourcePanel();
-        const proficientBlock = panel.blocks.find(b =>
-          b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label")
-        );
-        if (proficientBlock) {
-          if (this.competence.proficient) { delete proficientBlock.classes; }
-          else { proficientBlock.classes = [TERIOCK.display.panel.classes.faded]; }
-        }
-        const fluentBlock = panel.blocks.find(b =>
-          b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label")
-        );
-        if (fluentBlock) {
-          if (this.competence.fluent) { delete fluentBlock.classes; }
-          else { fluentBlock.classes = [TERIOCK.display.panel.classes.faded]; }
-        }
-        const heightenedBlock = panel.blocks.find(b =>
-          b.title === _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label")
-        );
-        if (heightenedBlock) {
-          if (this.heightened) { delete heightenedBlock.classes; }
-          else { heightenedBlock.classes = [TERIOCK.display.panel.classes.faded]; }
+        const blockStates = {
+          "TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label": this.heightened,
+          "TERIOCK.SYSTEMS.Ability.FIELDS.overview.fluent.label": this.competence.fluent,
+          "TERIOCK.SYSTEMS.Ability.FIELDS.overview.proficient.label": this.competence.proficient,
+        };
+        for (const [labelKey, active] of Object.entries(blockStates)) {
+          const block = panel.blocks.find(b => b.title === _loc(labelKey));
+          if (!block) { continue; }
+          if (active) { delete block.classes; }
+          else { block.classes = [TERIOCK.display.panel.classes.faded]; }
         }
         return panel;
       }
