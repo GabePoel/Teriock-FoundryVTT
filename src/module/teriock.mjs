@@ -30,6 +30,20 @@ Object.assign(globalThis, {
   tm: { ...helpers, dialogs: applications.dialogs },
 });
 
+// Handle Dark Reader Conflicts
+// ============================
+
+// Tell Dark Reader to ignore this through their recommended method.
+document.head.append(Object.assign(document.createElement("meta"), { name: "darkreader-lock" }));
+
+// Sometimes Dark Reader ignores this request, so we explicitly load the CSS in those cases. This has the downside of
+// messing with Foundry's CSS layers so it could in theory annoy some modules.
+if ([...document.querySelectorAll("style")].some((el) => el.classList.contains("darkreader"))) {
+  document.head.append(
+    Object.assign(document.createElement("link"), { href: "systems/teriock/css/teriock.css", rel: "stylesheet" }),
+  );
+}
+
 foundry.helpers.Hooks.once("init", function() {
   /**
    * Helper function to assign configs to `CONFIG` one level deep.
