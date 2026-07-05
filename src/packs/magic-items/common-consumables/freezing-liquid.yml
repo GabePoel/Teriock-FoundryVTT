@@ -13,10 +13,23 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/drink-freezing-liquid.webp
     name: Drink Freezing Liquid
     system:
+      automations:
+        0bb837e76f1dfd72:
+          _id: 0bb837e76f1dfd72
+          all: false
+          attachDocuments: true
+          automatic: true
+          data: '{"system":{"costs":{"tweaks":{"gifted":1}}}}'
+          identifiers:
+            - ability:shock-touch
+          multi: false
+          overrideData: true
+          separate: false
+          type: addDocuments
       competence:
         raw: 0
       delivery: self
@@ -49,7 +62,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -76,7 +89,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/pour-freezing-liquid.webp
     name: Pour Freezing Liquid
     system:
@@ -144,7 +157,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -167,7 +180,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -183,110 +196,6 @@ effects:
       identifier: small
     transfer: true
     type: property
-  - _id: apBxp2fY1ZC3n916
-    _key: '!items.effects!2d956f82dca6786f.apBxp2fY1ZC3n916'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4d4cbf6dfd95efca
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/shock-touch.webp
-    name: Shock Touch
-    system:
-      _sup: iYl1sblFlotOhUBe
-      automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          formula: (@h)d4[magic ice]
-          heighten:
-            - 1
-          impact: damage
-          type: roll
-        09ed285450c5de7b:
-          _id: 09ed285450c5de7b
-          executor: false
-          multi: false
-          relation: include
-          status: frozen
-          target: false
-          type: status
-      competence:
-        raw: 0
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        tweaks:
-          gifted: 1
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      endCondition: >-
-        <p>At the end of each of the target's actions, they roll [[/roll 2d4]].
-        If either of these dice roll a 4, this effect ends.</p>
-      executionTime:
-        base: a1
-      expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
-          crit:
-            - 0
-          event: action
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 0
-          timing: end
-          type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
-          crit:
-            - 1
-          event: action
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 1
-          timing: end
-          type: combat
-      form: normal
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic ice]]]
-        @Identifier[core:damage]{damage}  as well.</p>
-      identifier: shock-touch
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @Identifier[condition:frozen]{frozen}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
 folder: 64a9d9ba60f26294
 img: systems/teriock/src/icons/consumables/freezing-liquid.webp
 name: Freezing Liquid

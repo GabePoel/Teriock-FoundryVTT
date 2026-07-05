@@ -13,10 +13,21 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/drink-time-freeze-potion.webp
     name: Drink Time Freeze Potion
     system:
+      automations:
+        067a91222810db11:
+          _id: 067a91222810db11
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:prethaw
+          multi: false
+          separate: false
+          type: addDocuments
       competence:
         raw: 0
       consumeSource: true
@@ -57,7 +68,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -84,7 +95,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -107,7 +118,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -130,7 +141,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/smash-time-freeze-potion.webp
     name: Smash Time Freeze Potion
     system:
@@ -207,99 +218,6 @@ effects:
       targets:
         - area
         - creature
-    transfer: true
-    type: ability
-  - _id: VYlQ8kgVFr0mLeU3
-    _key: '!items.effects!0c8562b5b07a745a.VYlQ8kgVFr0mLeU3'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.04dRC1WFIiPcIyFD
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/prethaw.webp
-    name: Prethaw
-    system:
-      _sup: 00Jx8eBDx8jdp0uV
-      automations:
-        e5fd10094b33ef98:
-          _id: e5fd10094b33ef98
-          executor: false
-          multi: false
-          relation: remove
-          status: frozen
-          target: false
-          type: status
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      executionTime:
-        base: a1
-      form: normal
-      identifier: prethaw
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You immediately stop being @Identifier[condition:frozen]{frozen}.
-          You may use this ability even while
-          @Identifier[condition:frozen]{frozen}. However, you also gain
-          @Identifier[ability:temporal-lethargy]{Temporal Lethargy}.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: 1A7bbgO0ivn59uID
-    _key: '!items.effects!0c8562b5b07a745a.1A7bbgO0ivn59uID'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.05b3ffb3ba1f30b1
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/temporal-lethargy.webp
-    name: Temporal Lethargy
-    system:
-      _sup: VYlQ8kgVFr0mLeU3
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        unit: unlimited
-      effectTypes:
-        - temporal
-      elements:
-        - storm
-      executionTime:
-        base: passive
-      form: flaw
-      identifier: temporal-lethargy
-      interaction: manifest
-      maneuver: passive
-      overview:
-        base: >-
-          <p>Negative effects tend to linger on you longer than they would
-          otherwise. Effects placed on you by opponents have their duration
-          doubled. Additionally, if you would roll some number of [[/roll d4]]s
-          to end effects placed on you by opponents, you roll one less [[/roll
-          d4]] than you would otherwise.</p>
-      powerSources:
-        - magical
-      range:
-        unit: self
-      targets:
-        - self
     transfer: true
     type: ability
 folder: 64a9d9ba60f26294

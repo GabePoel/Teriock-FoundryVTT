@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: support
@@ -60,7 +60,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: combat
@@ -111,7 +111,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: support
@@ -175,13 +175,24 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: combat
     img: systems/teriock/src/icons/abilities/ninja-duel.webp
     name: Ninja Duel
     system:
+      automations:
+        11ce8f2e4c143095:
+          _id: 11ce8f2e4c143095
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:active-bow-out
+          multi: false
+          separate: false
+          type: addDocuments
       competence:
         raw: 1
       delivery: sight
@@ -221,13 +232,34 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: support
     img: systems/teriock/src/icons/abilities/prepare-poison.webp
     name: Prepare Poison
     system:
+      automations:
+        904001f2f2f27913:
+          _id: 904001f2f2f27913
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:poison-item
+          multi: false
+          separate: false
+          type: addDocuments
+        bfc1d19721518c86:
+          _id: bfc1d19721518c86
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:poison-strike
+          multi: false
+          separate: false
+          type: addDocuments
       competence:
         raw: 1
       costs:
@@ -275,7 +307,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: combat
@@ -331,221 +363,6 @@ effects:
       standard: true
       targets:
         - vitals
-    transfer: true
-    type: ability
-  - _id: GhYypaGdz4ZFKgAz
-    _key: '!items.effects!44d96cbb7f74e56b.GhYypaGdz4ZFKgAz'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.Gs4jCmyXyojxu0WM
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/active-bow-out.webp
-    name: Active Bow Out
-    system:
-      _sup: TPDy7mdCreIIfHhc
-      automations:
-        824b5b01e1a4efec:
-          _id: 824b5b01e1a4efec
-          executor: false
-          multi: false
-          relation: remove
-          status: dueling
-          target: false
-          type: status
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: instant
-      effectTypes:
-        - duelModifying
-      executionTime:
-        base: a1
-      form: normal
-      identifier: active-bow-out
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You end a @Identifier[condition:dueling]{duel} you are currently
-          in. You do not count as "forfeiting" or "losing" if you use [[lookup
-          name]] to stop @Identifier[condition:dueling]{dueling}.</p>
-        proficient: >-
-          <p>If you want, everyone in the @Identifier[condition:dueling]{duel}
-          returns to the number of
-          @Identifier[core:hit-points-and-mana-points]{HP} they had prior to
-          @Identifier[condition:dueling]{dueling}.</p>
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
-    transfer: true
-    type: ability
-  - _id: DBgTCGXwC5QxTP8I
-    _key: '!items.effects!44d96cbb7f74e56b.DBgTCGXwC5QxTP8I'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a046cd851f312b9
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/poison-strike.webp
-    name: Poison Strike
-    system:
-      _sup: uFYTrboNyyNImgLI
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          competencies:
-            - 0
-          formula: 1d6[toxic]
-          impact: damage
-          type: roll
-        5e4d195ed81a10cc:
-          _id: 5e4d195ed81a10cc
-          competencies:
-            - 1
-          formula: 1d8[toxic]
-          impact: damage
-          type: roll
-        3f7fa7707643426f:
-          _id: 3f7fa7707643426f
-          competencies:
-            - 2
-          formula: 1d10[toxic]
-          impact: damage
-          type: roll
-        743730f25f256b10:
-          _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
-          status: poisoned
-          target: false
-          type: status
-      competence:
-        raw: 1
-      delivery: weapon
-      duration:
-        raw: '24'
-        unit: hour
-      effectTypes:
-        - poison
-      endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
-      identifier: poison-strike
-      interaction: attack
-      maneuver: active
-      overview:
-        fluent: >-
-          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
-        proficient: >-
-          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
-      piercing:
-        raw: 0
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is @Identifier[condition:poisoned]{poisoned}. The
-          @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @Identifier[core:damage]{damage}.</p>
-      skill: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: m97Chu1yWbAewAyP
-    _key: '!items.effects!44d96cbb7f74e56b.m97Chu1yWbAewAyP'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.15e9b598e41c0f04
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/poison-item.webp
-    name: Poison Item
-    system:
-      _sup: uFYTrboNyyNImgLI
-      automations:
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
-          formula: 1d6[toxic]
-          impact: damage
-          type: roll
-        5e4d195ed81a10cc:
-          _id: 5e4d195ed81a10cc
-          competencies:
-            - 1
-            - 2
-          formula: 1d8[toxic]
-          impact: damage
-          type: roll
-        3f7fa7707643426f:
-          _id: 3f7fa7707643426f
-          competencies:
-            - 2
-          formula: 1d10[toxic]
-          impact: damage
-          type: roll
-        743730f25f256b10:
-          _id: 743730f25f256b10
-          executor: false
-          multi: false
-          relation: include
-          status: poisoned
-          target: false
-          type: status
-      competence:
-        raw: 1
-      delivery: hand
-      duration:
-        raw: '24'
-        unit: hour
-      endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
-      executionTime:
-        base: a1
-      form: normal
-      identifier: poison-item
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>Target makes a creature become
-          @Identifier[condition:poisoned]{poisoned}. The
-          @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
-          @Identifier[core:damage]{damage}. The way the item delivers this to
-          its user depends on the nature of the item. If it's food or drink,
-          it's when the item is consumed. The @Identifier[core:game-master]{GM}
-          may approve other cases as well. The item only delivers the
-          @Identifier[condition:poisoned]{poison} effect once.</p>
-        fluent: >-
-          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
-          1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
-        proficient: >-
-          <p>The @Identifier[condition:poisoned]{poison} instead deals [[/damage
-          1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
-      powerSources:
-        - alchemical
-      range:
-        unit: contact
-      requirements: <p>Target is not a weapon.</p>
-      skill: true
-      standard: true
-      targets:
-        - item
     transfer: true
     type: ability
 folder: c00337a27e3585c4

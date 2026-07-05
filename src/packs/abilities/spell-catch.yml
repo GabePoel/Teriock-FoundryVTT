@@ -4,10 +4,29 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.8
+  systemVersion: 0.13.10
 img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
 name: Spell Catch
 system:
+  automations:
+    ac7f15d75b31c07a:
+      _id: ac7f15d75b31c07a
+      all: false
+      attachDocuments: true
+      automatic: true
+      data: >-
+        {"system":{"improvement":"<p>You are considered to have and be
+        @Identifier[core:proficiency-bonus]{proficient} in the stored
+        @Wiki[Category:Missile delivery spells]{spell} for this
+        purpose.</p>","limitation":"<p>Can only be used with the stored
+        @Wiki[Category:Missile delivery spells]{spell} and the item it is stored
+        in.</p>","costs":{"tweaks":{"adept":1}}}}
+      identifiers:
+        - ability:spell-strike
+      multi: false
+      overrideData: true
+      separate: false
+      type: addDocuments
   competence:
     raw: 0
   costs:
@@ -40,7 +59,9 @@ system:
       to deliver [[lookup name]]. For the duration of [[lookup name]], you gain
       @Identifier[keyword:adept]{Adept} @Identifier[keyword:limited]{Limited}
       @Identifier[keyword:improved]{Improved}
-      @Identifier[ability:spell-strike]{Spell Strike}. Only one
+      @Identifier[ability:spell-strike]{Spell Strike} with the stored
+      @Wiki[Category:Missile delivery spells]{spell}. You are considered to be
+      @Identifier[core:proficiency-bonus]{proficient} with it. Only one
       @Wiki[Category:Missile delivery spells]{spell} can be stored in the
       @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} at a
       time.</p>

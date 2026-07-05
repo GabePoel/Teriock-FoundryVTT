@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.8
+  systemVersion: 0.13.10
 effects:
   - _id: GuY5Z5Ne7TFP7tx6
     _key: '!items.effects!hOR5OYFDFEdtXSVA.GuY5Z5Ne7TFP7tx6'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: support
@@ -79,7 +79,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     flags:
       teriock:
         category: combat
@@ -87,6 +87,17 @@ effects:
     img: systems/teriock/src/icons/abilities/ninja-duel.webp
     name: Ninja Duel
     system:
+      automations:
+        11ce8f2e4c143095:
+          _id: 11ce8f2e4c143095
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:active-bow-out
+          multi: false
+          separate: false
+          type: addDocuments
       competence:
         raw: 1
       delivery: sight
@@ -117,60 +128,6 @@ effects:
       standard: true
       targets:
         - creature
-    transfer: true
-    type: ability
-  - _id: Ikw4Yl13BBr5Wx7i
-    _key: '!items.effects!hOR5OYFDFEdtXSVA.Ikw4Yl13BBr5Wx7i'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.Gs4jCmyXyojxu0WM
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/active-bow-out.webp
-    name: Active Bow Out
-    system:
-      _sup: in6Jh6JD4Ay5BnMS
-      automations:
-        824b5b01e1a4efec:
-          _id: 824b5b01e1a4efec
-          executor: false
-          multi: false
-          relation: remove
-          status: dueling
-          target: false
-          type: status
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: instant
-      effectTypes:
-        - duelModifying
-      executionTime:
-        base: a1
-      form: normal
-      identifier: active-bow-out
-      interaction: manifest
-      maneuver: active
-      overview:
-        base: >-
-          <p>You end a @Identifier[condition:dueling]{duel} you are currently
-          in. You do not count as "forfeiting" or "losing" if you use [[lookup
-          name]] to stop @Identifier[condition:dueling]{dueling}.</p>
-        proficient: >-
-          <p>If you want, everyone in the @Identifier[condition:dueling]{duel}
-          returns to the number of
-          @Identifier[core:hit-points-and-mana-points]{HP} they had prior to
-          @Identifier[condition:dueling]{dueling}.</p>
-      powerSources:
-        - spiritual
-      range:
-        unit: self
-      skill: true
-      standard: true
-      targets:
-        - self
     transfer: true
     type: ability
 folder: 997cd433ccad17d7

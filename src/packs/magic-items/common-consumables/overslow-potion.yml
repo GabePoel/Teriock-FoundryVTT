@@ -13,11 +13,21 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/drink-overslow-potion.webp
     name: Drink Overslow Potion
     system:
       automations:
+        8edb379ab757090c:
+          _id: 8edb379ab757090c
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:overslow-blood
+          multi: false
+          separate: false
+          type: addDocuments
         e789ed5e109ebd1a:
           _id: e789ed5e109ebd1a
           changes:
@@ -75,7 +85,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/fragile.webp
     name: Fragile
     system:
@@ -102,7 +112,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/searchable.webp
     name: Searchable
     system:
@@ -125,7 +135,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/small.webp
     name: Small
     system:
@@ -148,7 +158,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/smash-overslow-potion.webp
     name: Smash Overslow Potion
     system:
@@ -234,74 +244,6 @@ effects:
       targets:
         - area
         - creature
-    transfer: true
-    type: ability
-  - _id: jqilcXnt9QhKcx1Z
-    _key: '!items.effects!6e783368243b9285.jqilcXnt9QhKcx1Z'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.MNgnBIeEE2Xh9Hbq
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/overslow-blood.webp
-    name: Overslow Blood
-    system:
-      _sup: dFQb14Z2VHTaoasr
-      automations:
-        ca0696ba7cfc9ec1:
-          _id: ca0696ba7cfc9ec1
-          executor: false
-          multi: false
-          relation: include
-          status: slowed
-          target: false
-          type: status
-      competence:
-        raw: 0
-      delivery: self
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - automatic
-      endCondition: >-
-        <p>At the end of each of the target's @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
-      executionTime:
-        base: r0
-      expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
-          event: turn
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 0
-          timing: end
-          type: combat
-      featSaveAttribute: mov
-      form: normal
-      identifier: overslow-blood
-      interaction: feat
-      maneuver: reactive
-      powerSources:
-        - alchemical
-      range:
-        unit: self
-      results:
-        fail: <p>Target creature becomes @Identifier[condition:slowed]{slowed}.</p>
-      targets:
-        - creature
-      trigger: >-
-        <p>You are hit with a melee @Wiki[Category:Weapon delivery
-        abilities]{weapon} @Identifier[core:attack-interaction]{attack}. This
-        triggers automatically. You cannot choose to not use it if you are able
-        to.</p>
     transfer: true
     type: ability
 folder: 64a9d9ba60f26294

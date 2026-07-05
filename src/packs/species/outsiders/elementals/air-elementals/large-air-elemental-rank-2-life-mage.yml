@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.8
+  systemVersion: 0.13.10
 effects:
   - _id: aO1rApSYgJxjhJbo
     _key: '!items.effects!ZK5FG8FMqofEXNez.aO1rApSYgJxjhJbo'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/life-elder-sorcery.webp
     name: Life Elder Sorcery
     system:
@@ -52,7 +52,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/life-rotators.webp
     name: Life Rotators
     system:
@@ -156,7 +156,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/elder-sorcery-creation.webp
     name: Elder Sorcery Creation
     system:
@@ -239,7 +239,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/celestial-elder-sorcery-words.webp
     name: Celestial Elder Sorcery Words
     system:
@@ -620,7 +620,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/life-elder-sorcery-words.webp
     name: Life Elder Sorcery Words
     system:
@@ -779,7 +779,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/blessing.webp
     name: Blessing
     system:
@@ -882,7 +882,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/ward.webp
     name: Ward
     system:
@@ -951,12 +951,32 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/crown-of-light.webp
     name: Crown of Light
     system:
       _sup: BtjyB6cjHw37lX9f
       automations:
+        70095f59a20e3aa8:
+          _id: 70095f59a20e3aa8
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:light-touch
+          multi: false
+          separate: false
+          type: addDocuments
+        db4756dbc366378e:
+          _id: db4756dbc366378e
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:light-aura
+          multi: false
+          separate: false
+          type: addDocuments
         Lu71V2L9hiMtzyQr:
           _id: Lu71V2L9hiMtzyQr
           light:
@@ -1018,207 +1038,6 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: pgTzgPZrpySwC1ld
-    _key: '!items.effects!ZK5FG8FMqofEXNez.pgTzgPZrpySwC1ld'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.217dcd7aa8492a56
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/light-aura.webp
-    name: Light Aura
-    system:
-      _sup: dL7lyRXsYwnDdCCp
-      automations:
-        7400b41f20d9f100:
-          _id: 7400b41f20d9f100
-          all: false
-          angle: '60'
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: '0'
-          multi: false
-          outerWidth: '0'
-          regionType: emanation
-          restriction:
-            enabled: false
-            priority: 0
-            type: move
-          targeting: true
-          trigger: executeInput
-          type: region
-          visibility: 2
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          formula: (@h)d4[magic holy]
-          heighten:
-            - 1
-          impact: damage
-          type: roll
-        747b3e9c9b617af6:
-          _id: 747b3e9c9b617af6
-          executor: false
-          multi: false
-          relation: include
-          status: lighted
-          target: true
-          type: status
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      elements:
-        - life
-      endCondition: >-
-        <p>At the end of each of the target's @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
-      executionTime:
-        base: a1
-      expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
-          event: turn
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 0
-          timing: end
-          type: combat
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic holy]]]
-        @Identifier[core:damage]{damage}  as well.</p>
-      identifier: light-aura
-      interaction: feat
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: >-
-          <p>Target is @Identifier[condition:lighted]{lighted} to a creature of
-          your choice.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: P8R3cPTO9a5AiN3A
-    _key: '!items.effects!ZK5FG8FMqofEXNez.P8R3cPTO9a5AiN3A'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.NrCsatKWGADDVSWS
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/light-touch.webp
-    name: Light Touch
-    system:
-      _sup: dL7lyRXsYwnDdCCp
-      automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          formula: (@h)d4[magic holy]
-          heighten:
-            - 1
-          impact: damage
-          type: roll
-        747b3e9c9b617af6:
-          _id: 747b3e9c9b617af6
-          executor: false
-          multi: false
-          relation: include
-          status: lighted
-          target: true
-          type: status
-      competence:
-        raw: 1
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      elements:
-        - life
-      endCondition: >-
-        <p>At the end of each of the target's @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
-      executionTime:
-        base: a1
-      expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
-          crit:
-            - 0
-          event: turn
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 0
-          timing: end
-          type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
-          crit:
-            - 1
-          event: turn
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 1
-          timing: end
-          type: combat
-      form: normal
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic holy]]]
-        @Identifier[core:damage]{damage}  as well.</p>
-      identifier: light-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: >-
-          <p>Target is @Identifier[condition:lighted]{lighted} to a creature of
-          your choice.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
   - _id: nkXFK64iZUbgdbvm
     _key: '!items.effects!ZK5FG8FMqofEXNez.nkXFK64iZUbgdbvm'
     _stats:
@@ -1226,7 +1045,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/rebirth.webp
     name: Rebirth
     system:
@@ -1331,11 +1150,32 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/glow-of-healing.webp
     name: Glow of Healing
     system:
       _sup: BtjyB6cjHw37lX9f
+      automations:
+        63682dee443c42c0:
+          _id: 63682dee443c42c0
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:healing-touch
+          multi: false
+          separate: false
+          type: addDocuments
+        94f4cb28d83a43f6:
+          _id: 94f4cb28d83a43f6
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:cure-illness
+          multi: false
+          separate: false
+          type: addDocuments
       competence:
         raw: 1
       costs:
@@ -1378,175 +1218,6 @@ effects:
       standard: true
       targets:
         - self
-    transfer: true
-    type: ability
-  - _id: 9DRAAku8vBovm5ab
-    _key: '!items.effects!ZK5FG8FMqofEXNez.9DRAAku8vBovm5ab'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.23dbmrZ4Rm0lCBPv
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/healing-touch.webp
-    name: Healing Touch
-    system:
-      _sup: vwW2hE2uPbv0GEdY
-      automations:
-        qgzpq8KiqEEOCMXJ:
-          _id: qgzpq8KiqEEOCMXJ
-          consumeStatDice: true
-          forHarm: false
-          noStatDice: false
-          type: heal
-        dkyGJcbZt5KR85PK:
-          _id: dkyGJcbZt5KR85PK
-          executor: false
-          multi: false
-          relation: remove
-          status: poisoned
-          target: false
-          type: status
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-      delivery: hand
-      duration:
-        raw: '10'
-        unit: second
-      elements:
-        - life
-      endCondition: <p>The start of your next @Identifier[core:turns]{turn}.</p>
-      executionTime:
-        base: a1
-      expirations:
-        e69e6a8cea6409b3:
-          _id: e69e6a8cea6409b3
-          event: turn
-          method: automatic
-          relation: executor
-          skip: 0
-          timing: start
-          type: combat
-        371677e21bfa861a:
-          _id: 371677e21bfa861a
-          method: automatic
-          triggers:
-            - damage
-          type: trigger
-      form: normal
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, target is @Identifier[core:healing]{healed} again at the start of
-        your next @Identifier[core:turns]{turn}.</p>
-      identifier: healing-touch
-      interaction: attack
-      invoked: true
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        hit: >-
-          <p>Target is immediately no longer
-          @Identifier[condition:poisoned]{poisoned} and is also
-          @Identifier[core:healing]{healed} at the start of your next
-          @Identifier[core:turns]{turn} if they do not take any
-          @Identifier[core:damage]{damage} before then.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: AHIag8mRtouS9y3x
-    _key: '!items.effects!ZK5FG8FMqofEXNez.AHIag8mRtouS9y3x'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3055b234b402b5ec
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/cure-illness.webp
-    name: Cure Illness
-    system:
-      _sup: vwW2hE2uPbv0GEdY
-      competence:
-        raw: 1
-      costs:
-        components:
-          somatic:
-            type: tag
-          verbal:
-            type: tag
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: sight
-      duration:
-        raw: '1'
-        unit: hour
-      effectTypes:
-        - healing
-      elements:
-        - life
-      executionTime:
-        base: 10 Minutes
-        slow:
-          raw: '10'
-          unit: minute
-      form: normal
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, The DC of the check is reduced by 1.</p>
-      identifier: cure-illness
-      interaction: manifest
-      invoked: true
-      maneuver: slow
-      overview:
-        base: >-
-          <p>Make an [[/tc herbalist]]{herbalist check} to remove a
-          @Wiki[Category:Disease effects]{disease or illness} from some
-          creature. The @Identifier[core:game-master]{GM} determines the
-          difficulty based on the severity of the illness. The
-          @Identifier[core:game-master]{GM} may also require you to have access
-          to specific ingredients or tools or put other conditions in place. If
-          the illness is mental in nature, then [[lookup name]] acts as a
-          @Wiki[Category:Mental effects]{mental effect}.</p>
-        proficient: >-
-          <p>You are @Identifier[keyword:adept]{adept} at [[lookup name]].
-          Before you make the check, you may spend 1 additional
-          @Identifier[core:hit-points-and-mana-points]{MP} to know the DC if it
-          is less than your total level. You may also add your
-          @Identifier[core:proficiency-bonus]{proficiency bonus} to the [[/tc
-          herbalist]]{herbalist check} regardless of whether or not you are
-          proficient in @Identifier[tradecraft:herbalist]{herbalist}.</p>
-      powerSources:
-        - magical
-      range:
-        raw: '5'
-        unit: ft
-      results:
-        fail: >-
-          <p>The target is not cured, but the illness does not worsen for the
-          duration of Healing Touch. You may cast [[lookup name]] again to keep
-          the disease from progressing, but you may not attempt the check
-          again.</p>
-        save: <p>The target is cured of the illness.</p>
-      ritual: true
-      spell: true
-      standard: true
-      targets:
-        - creature
     transfer: true
     type: ability
 folder: c0c0ec104c5cd2eb

@@ -4,11 +4,29 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.8
+  systemVersion: 0.13.10
 img: systems/teriock/src/icons/abilities/hitman.webp
 name: Hitman
 system:
   automations:
+    5cc3337b502deba6:
+      _id: 5cc3337b502deba6
+      all: false
+      attachDocuments: true
+      automatic: true
+      data: >-
+        {"system":{"improvement":"<p>You may [[lookup name]] regardless of the
+        environment (cover, lighting, etc.) that you
+        prepare.</p>","limitation":"<p>You may only [[lookup name]] in the
+        location you have prepared and you do not get the attribute improvement
+        from this ability. You also do not remain
+        @Identifier[condition:hidden]{hidden} if you leave this location.</p>"}}
+      identifiers:
+        - ability:hide
+      multi: false
+      overrideData: true
+      separate: false
+      type: addDocuments
     3M3REt0RFM6rEUgs:
       _id: 3M3REt0RFM6rEUgs
       angle: '60'
@@ -47,8 +65,11 @@ system:
   maneuver: active
   overview:
     base: >-
-      <p>You prepare a 5 foot by 5 foot area. While in this area, you may make a
-      limited improved @Identifier[ability:hide]{Hide} action.</p>
+      <p>You prepare a 5 foot by 5 foot area. While in this area, you may gain
+      @Identifier[keyword:limited]{Limited}
+      @Identifier[keyword:improved]{Improved} @Identifier[ability:hide]{Hide}.
+      You are no longer @Identifier[condition:hidden]{hidden} if you leave this
+      area.</p>
   powerSources:
     - martial
   range:

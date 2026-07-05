@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -35,10 +35,27 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
     name: Spell Store
     system:
+      automations:
+        de3dc8ec26907440:
+          _id: de3dc8ec26907440
+          all: false
+          attachDocuments: true
+          automatic: true
+          data: >-
+            {"system":{"improvement":"<p>You are considered to have and be
+            @Identifier[core:proficiency-bonus]{proficient} in the stored spell
+            for this purpose.</p>","limitation":"<p>Can only be used with the
+            stored spell and the item it is stored in.</p>"}}
+          identifiers:
+            - ability:spell-strike
+          multi: false
+          overrideData: true
+          separate: false
+          type: addDocuments
       competence:
         raw: 0
       costs:
@@ -69,7 +86,9 @@ effects:
           For the duration of [[lookup name]], you gain
           @Identifier[keyword:limited]{Limited}
           @Identifier[keyword:improved]{Improved}
-          @Identifier[ability:spell-strike]{Spell Strike}. Only one
+          @Identifier[ability:spell-strike]{Spell Strike} with that
+          @Wiki[Category:Missile delivery spells]{spell}. You are considered to
+          be @Identifier[core:proficiency-bonus]{proficient} in it. Only one
           @Wiki[Category:Missile delivery spells]{spell} can be stored in the
           target
           @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} at
@@ -91,10 +110,29 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp
     name: Spell Catch
     system:
+      automations:
+        ac7f15d75b31c07a:
+          _id: ac7f15d75b31c07a
+          all: false
+          attachDocuments: true
+          automatic: true
+          data: >-
+            {"system":{"improvement":"<p>You are considered to have and be
+            @Identifier[core:proficiency-bonus]{proficient} in the stored
+            @Wiki[Category:Missile delivery spells]{spell} for this
+            purpose.</p>","limitation":"<p>Can only be used with the stored
+            @Wiki[Category:Missile delivery spells]{spell} and the item it is
+            stored in.</p>","costs":{"tweaks":{"adept":1}}}}
+          identifiers:
+            - ability:spell-strike
+          multi: false
+          overrideData: true
+          separate: false
+          type: addDocuments
       competence:
         raw: 0
       costs:
@@ -129,152 +167,14 @@ effects:
           you gain @Identifier[keyword:adept]{Adept}
           @Identifier[keyword:limited]{Limited}
           @Identifier[keyword:improved]{Improved}
-          @Identifier[ability:spell-strike]{Spell Strike}. Only one
+          @Identifier[ability:spell-strike]{Spell Strike} with the stored
+          @Wiki[Category:Missile delivery spells]{spell}. You are considered to
+          be @Identifier[core:proficiency-bonus]{proficient} with it. Only one
           @Wiki[Category:Missile delivery spells]{spell} can be stored in the
           @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} at
           a time.</p>
       targets:
         - spell
-    transfer: true
-    type: ability
-  - _id: QL9KdLvTwKSUOp0W
-    _key: '!items.effects!21b38d71792642dd.QL9KdLvTwKSUOp0W'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: YO5TamPRhJOmWbtw
-      automations:
-        bJn9LIvdgJ11S1tr:
-          _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
-          noHeighten: false
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: r0
-      form: normal
-      identifier: spell-strike
-      improvement: >-
-        <p>You are considered to have and be
-        @Identifier[core:proficiency-bonus]{proficient} in the stored spell for
-        this purpose.</p>
-      interaction: manifest
-      limitation: >-
-        <p>Can only be used with the stored spell and the item it is stored
-        in.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
-          delivery spells]{missile spell} that you are
-          @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
-          hit was a critical hit, then the target takes the "on critical hit"
-          effect instead.</p>
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
-        abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
-        @Identifier[core:attack-interaction]{attack} on another creature and the
-        effect has successfully applied.</p>
-    transfer: true
-    type: ability
-  - _id: h2oGvjYCVbav80lU
-    _key: '!items.effects!21b38d71792642dd.h2oGvjYCVbav80lU'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.HXidffXqZoxo8wog
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/spell-strike.webp
-    name: Spell Strike
-    system:
-      _sup: tFJU61ATYk8dIyh4
-      automations:
-        bJn9LIvdgJ11S1tr:
-          _id: bJn9LIvdgJ11S1tr
-          all: false
-          automatic: true
-          expandTables: false
-          local:
-            qualifier: and(@spell, @delivery.missile, @pro)
-          multi: false
-          noHeighten: false
-          trigger: execute
-          type: useDocuments
-      competence:
-        raw: 0
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-        tweaks:
-          adept: 1
-      delivery: weapon
-      duration:
-        unit: instant
-      executionTime:
-        base: r0
-      form: normal
-      identifier: spell-strike
-      improvement: >-
-        <p>You are considered to have and be
-        @Identifier[core:proficiency-bonus]{proficient} in the stored spell for
-        this purpose.</p>
-      interaction: manifest
-      limitation: >-
-        <p>Can only be used with the stored spell and the item it is stored
-        in.</p>
-      maneuver: reactive
-      overview:
-        base: >-
-          <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
-          delivery spells]{missile spell} that you are
-          @Identifier[core:proficiency-bonus]{proficient} in. If the triggering
-          hit was a critical hit, then the target takes the "on critical hit"
-          effect instead.</p>
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      skill: true
-      standard: true
-      targets:
-        - creature
-      trigger: >-
-        <p>You have just landed a hit with a @Wiki[Category:Weapon delivery
-        abilities]{weapon} or @Wiki[Category:Bite delivery abilities]{bite}
-        @Identifier[core:attack-interaction]{attack} on another creature and the
-        effect has successfully applied.</p>
     transfer: true
     type: ability
 folder: 9e47cf966e0cd702

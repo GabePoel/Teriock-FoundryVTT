@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.8
+  systemVersion: 0.13.10
 effects:
   - _id: pD4bPqJz3rVj2AE7
     _key: '!items.effects!2OCoweP6sUSXrrtT.pD4bPqJz3rVj2AE7'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     name: Acrobatics
     system:
@@ -56,11 +56,30 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/hitman.webp
     name: Hitman
     system:
       automations:
+        5cc3337b502deba6:
+          _id: 5cc3337b502deba6
+          all: false
+          attachDocuments: true
+          automatic: true
+          data: >-
+            {"system":{"improvement":"<p>You may [[lookup name]] regardless of
+            the environment (cover, lighting, etc.) that you
+            prepare.</p>","limitation":"<p>You may only [[lookup name]] in the
+            location you have prepared and you do not get the attribute
+            improvement from this ability. You also do not remain
+            @Identifier[condition:hidden]{hidden} if you leave this
+            location.</p>"}}
+          identifiers:
+            - ability:hide
+          multi: false
+          overrideData: true
+          separate: false
+          type: addDocuments
         3M3REt0RFM6rEUgs:
           _id: 3M3REt0RFM6rEUgs
           all: false
@@ -107,7 +126,10 @@ effects:
       overview:
         base: >-
           <p>You prepare a 5 foot by 5 foot area. While in this area, you may
-          make a limited improved @Identifier[ability:hide]{Hide} action.</p>
+          gain @Identifier[keyword:limited]{Limited}
+          @Identifier[keyword:improved]{Improved}
+          @Identifier[ability:hide]{Hide}. You are no longer
+          @Identifier[condition:hidden]{hidden} if you leave this area.</p>
       powerSources:
         - martial
       range:
@@ -129,7 +151,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/martial-arts.webp
     name: Martial Arts
     system:
@@ -167,7 +189,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/climbing.webp
     name: Climbing
     system:
@@ -233,7 +255,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
@@ -310,87 +332,6 @@ effects:
         - self
     transfer: true
     type: ability
-  - _id: rPe3jh1XOKqnDWiV
-    _key: '!items.effects!2OCoweP6sUSXrrtT.rPe3jh1XOKqnDWiV'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.9df212d89cab196d
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/hide.webp
-    name: Hide
-    system:
-      _sup: HxQ5OA9s2kzlEHO9
-      automations:
-        Hd5o6s1SdA8C7IfT:
-          _id: Hd5o6s1SdA8C7IfT
-          competence:
-            raw: 0
-          preventFeat: false
-          preventThreshold: true
-          type: override
-        0b0d1426453abb55:
-          _id: 0b0d1426453abb55
-          executor: false
-          multi: false
-          relation: apply
-          status: hidden
-          target: false
-          type: status
-      competence:
-        raw: 1
-      delivery: self
-      duration:
-        unit: instant
-      executionTime:
-        base: a1
-      featSaveAttribute: snk
-      form: normal
-      identifier: hide
-      improvement: >-
-        <p>You may [[lookup name]] regardless of the environment (cover,
-        lighting, etc.) that you prepare.</p>
-      interaction: feat
-      limitation: >-
-        <p>You may only [[lookup name]] in the location you have prepared and
-        you do not get the attribute improvement from this ability. You also do
-        not remain @Identifier[status:hidden]{hidden} if you leave this
-        location.</p>
-      maneuver: active
-      overview:
-        base: >-
-          <p>You become @Identifier[condition:hidden]{hidden}. If the result of
-          your @Identifier[core:sneak]{SNK}
-          @Identifier[core:feat-interaction]{save} is greater than your
-          @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}
-          (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your
-          hidden DC. If not, use your @Wiki[Core:Passive Attributes]{passive}
-          @Identifier[core:sneak]{sneak}.</p>
-      powerSources:
-        - martial
-      range:
-        unit: self
-      requirements: >-
-        <p>You are in a location with shadows, dim light,
-        @Identifier[core:cover]{three-quarters cover}, or some other feature
-        which the @Identifier[core:game-master]{GM} determines is appropriate
-        for being @Identifier[condition:hidden]{hidden}. You must remain in
-        areas that maintain these conditions to stay
-        @Identifier[condition:hidden]{hidden}.</p>
-      skill: true
-      standard: true
-      targets:
-        - self
-      upgrades:
-        competence:
-          attribute: snk
-          value: 1
-        score:
-          attribute: snk
-          value: 2
-    transfer: true
-    type: ability
   - _id: GN56yVyaUHYNGG2I
     _key: '!items.effects!2OCoweP6sUSXrrtT.GN56yVyaUHYNGG2I'
     _stats:
@@ -398,7 +339,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
     name: Defensive Martial Arts
     system:
@@ -475,7 +416,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/offensive-martial-arts.webp
     name: Offensive Martial Arts
     system:

@@ -13,11 +13,31 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/crown-of-fear.webp
     name: Crown of Fear
     system:
       automations:
+        34c83d4c84860906:
+          _id: 34c83d4c84860906
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:fear-aura
+          multi: false
+          separate: false
+          type: addDocuments
+        3b2978862c7f9d50:
+          _id: 3b2978862c7f9d50
+          all: false
+          attachDocuments: true
+          automatic: true
+          identifiers:
+            - ability:fear-touch
+          multi: false
+          separate: false
+          type: addDocuments
         JB09RCj8EnrKPqjG:
           _id: JB09RCj8EnrKPqjG
           light:
@@ -86,7 +106,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/monstrous-strength.webp
     name: Monstrous Strength
     system:
@@ -149,7 +169,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/normal-intelligence.webp
     name: Normal Intelligence
     system:
@@ -183,7 +203,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/normal-movement.webp
     name: Normal Movement
     system:
@@ -217,7 +237,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/normal-perception.webp
     name: Normal Perception
     system:
@@ -251,7 +271,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/normal-sneak.webp
     name: Normal Sneak
     system:
@@ -278,207 +298,6 @@ effects:
           value: 0
     transfer: true
     type: ability
-  - _id: mnkFevp2Ey3BVmPK
-    _key: '!items.effects!908f92bcd0dc093c.mnkFevp2Ey3BVmPK'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.12c2bc74fed2e058
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/fear-touch.webp
-    name: Fear Touch
-    system:
-      _sup: YDk3sa2CjhAMNk3f
-      automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          formula: (@h)d4[magic terror]
-          heighten:
-            - 1
-          impact: damage
-          type: roll
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
-          executor: true
-          multi: false
-          relation: include
-          status: frightened
-          target: false
-          type: status
-      competence:
-        raw: 1
-      delivery: hand
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - mental
-      elements:
-        - necromancy
-      endCondition: >-
-        <p>At the end of each of the target's @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
-      executionTime:
-        base: a1
-      expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
-          crit:
-            - 0
-          event: turn
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 0
-          timing: end
-          type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
-          crit:
-            - 1
-          event: turn
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 1
-          timing: end
-          type: combat
-      form: normal
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic terror]]]
-        @Identifier[core:damage]{damage}  as well.</p>
-      identifier: fear-touch
-      interaction: attack
-      maneuver: active
-      piercing:
-        raw: 2
-      powerSources:
-        - magical
-      range:
-        unit: contact
-      results:
-        critHit: <p>The target automatically fails the first [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @Identifier[condition:frightened]{frightened}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
-  - _id: S8kvdG0itgrJcbGw
-    _key: '!items.effects!908f92bcd0dc093c.S8kvdG0itgrJcbGw'
-    _stats:
-      compendiumSource: Compendium.teriock.abilities.ActiveEffect.C6frBNJPvLFOMnx9
-      coreVersion: '14'
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.13.8
-    img: systems/teriock/src/icons/abilities/fear-aura.webp
-    name: Fear Aura
-    system:
-      _sup: YDk3sa2CjhAMNk3f
-      automations:
-        7400b41f20d9f100:
-          _id: 7400b41f20d9f100
-          all: false
-          angle: '60'
-          attachToToken: true
-          automatic: true
-          deleteOnTurnChange: true
-          excludeToken: true
-          expandWithToken: true
-          innerWidth: '0'
-          multi: false
-          outerWidth: '0'
-          regionType: emanation
-          restriction:
-            enabled: false
-            priority: 0
-            type: move
-          targeting: true
-          trigger: executeInput
-          type: region
-          visibility: 2
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
-          formula: (@h)d4[magic terror]
-          heighten:
-            - 1
-          impact: damage
-          type: roll
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
-          executor: true
-          multi: false
-          relation: include
-          status: frightened
-          target: false
-          type: status
-      competence:
-        raw: 1
-      costs:
-        primary:
-          mp:
-            formula: '1'
-            type: formula
-      delivery: aura
-      duration:
-        raw: '1'
-        unit: minute
-      effectTypes:
-        - mental
-      elements:
-        - necromancy
-      endCondition: >-
-        <p>At the end of each of the target's @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
-      executionTime:
-        base: a1
-      expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
-          event: turn
-          method: roll
-          relation: target
-          roll:
-            comparison: gte
-            formula: 2d4kh1
-            threshold: '4'
-          skip: 0
-          timing: end
-          type: combat
-      featSaveAttribute: mov
-      form: normal
-      heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic terror]]]
-        @Identifier[core:damage]{damage}  as well.</p>
-      identifier: fear-aura
-      interaction: feat
-      maneuver: active
-      powerSources:
-        - magical
-      range:
-        raw: '10'
-        unit: ft
-      results:
-        fail: <p>Target is @Identifier[condition:frightened]{frightened}.</p>
-      spell: true
-      standard: true
-      targets:
-        - creature
-    transfer: true
-    type: ability
   - _id: mklcSEOPZFwH1Scd
     _key: '!items.effects!908f92bcd0dc093c.mklcSEOPZFwH1Scd'
     _stats:
@@ -486,7 +305,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/supernatural-strength.webp
     name: Supernatural Strength
     system:
@@ -533,7 +352,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/giant-strength.webp
     name: Giant Strength
     system:
@@ -581,7 +400,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/improved-strength.webp
     name: Improved Strength
     system:
@@ -623,7 +442,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/beastly-strength.webp
     name: Beastly Strength
     system:
@@ -667,7 +486,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
     name: Improved Armor Piercing
     system:
@@ -704,7 +523,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
     name: Melee Damage Boost
     system:
@@ -753,7 +572,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.8
+      systemVersion: 0.13.10
     img: systems/teriock/src/icons/abilities/shattering-grip.webp
     name: Shattering Grip
     system:
