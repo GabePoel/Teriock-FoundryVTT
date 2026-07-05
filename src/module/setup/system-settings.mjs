@@ -219,6 +219,13 @@ export const settings = {
     },
   },
   generalDisplay: {
+    openConditionsAsJournalEntryPages: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.openConditionsAsJournalEntryPages.hint",
+      name: "TERIOCK.SETTINGS.openConditionsAsJournalEntryPages.name",
+      scope: "client",
+      type: Boolean,
+    },
     styleDice: {
       default: true,
       hint: "TERIOCK.SETTINGS.styleDice.hint",

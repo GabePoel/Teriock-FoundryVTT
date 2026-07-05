@@ -38,7 +38,7 @@ export default class CompetenceModel extends BaseDataModel {
    * @returns {boolean}
    */
   get fluent() {
-    return Boolean(this.raw >= 2 || this.document?.elder?.system?.competence?.fluent);
+    return Boolean(this.raw >= 2);
   }
 
   /** @inheritDoc */
@@ -58,7 +58,7 @@ export default class CompetenceModel extends BaseDataModel {
    * @returns {boolean}
    */
   get proficient() {
-    return Boolean(this.raw >= 1 || this.document?.elder?.system?.competence?.proficient);
+    return Boolean(this.raw >= 1);
   }
 
   /**

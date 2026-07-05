@@ -87,6 +87,7 @@ export default class FluencySystem
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
+    foundry.utils.setProperty(options, "keepCompetence", true);
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 

@@ -12,13 +12,14 @@ export default class ConditionSheet extends BaseSheetMixin(ActiveEffectConfig) {
   /** @inheritDoc */
   _canRender(options) {
     // Prevent normal sheet rendering for known conditions.
-    return !this.document.isStatus && super._canRender(options);
+    return !(this.document.isStatus && game.settings.get("teriock", "openConditionsAsJournalEntryPages"))
+      && super._canRender(options);
   }
 
   /** @inheritDoc */
   async render(options) {
     // If this is a known condition, open its journal entry instead of its sheet. Information is displayed more nicely.
-    if (this.document.isStatus) {
+    if (this.document.isStatus && game.settings.get("teriock", "openConditionsAsJournalEntryPages")) {
       const journal = await fromUuid("Compendium.teriock.rules.JournalEntry.condition0000000");
       const page = journal?.pages.find((p) => p.system.identifier === this.document.system.identifier);
       if (journal && page) {

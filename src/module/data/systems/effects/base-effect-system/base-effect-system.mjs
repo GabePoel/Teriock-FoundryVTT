@@ -179,6 +179,18 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     return changes;
   }
 
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) { return false; }
+
+    if (options?.keepCompetence) { return; }
+    const competence = this.parent.elder?.system?.competence?.raw;
+    if (typeof competence === "number") {
+      this.parent.updateSource({ "system.competence.raw": competence });
+    }
+  }
+
   /**
    * Expires the effect manually.
    * @returns {Promise<void>}
