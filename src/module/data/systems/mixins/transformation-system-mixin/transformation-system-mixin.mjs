@@ -63,6 +63,21 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * Batch an update to the actor itself.
+       * @param {object} data
+       */
+      #addBatchActorUpdate(data) {
+        this.#batchedOperations.push({
+          action: "update",
+          documentName: "Actor",
+          ids: [this.actor.id],
+          pack: this.actor.pack,
+          parent: this.actor.parent,
+          updates: [{ _id: this.actor.id, ...data }],
+        });
+      }
+
+      /**
        * Pull species data, configure it, and batch it to be added to the actor.
        * @returns {Promise<void>}
        */
@@ -161,14 +176,7 @@ export default function TransformationSystemMixin(Base) {
         if (!this.actor) { return; }
         this.#addBatchToggleDocuments(false);
         if (this.transformation.reset.size) {
-          this.#batchedOperations.push({
-            action: "update",
-            documentName: "Actor",
-            ids: [this.actor.id],
-            pack: this.actor.pack,
-            parent: this.actor.parent,
-            updates: [{ _id: this.actor.id, ...(this.parent.getFlag("teriock", "preTransform") ?? {}) }],
-          });
+          this.#addBatchActorUpdate(this.parent.getFlag("teriock", "preTransform") ?? {});
         }
       }
 
@@ -201,18 +209,10 @@ export default function TransformationSystemMixin(Base) {
       async #modifyOnCreate() {
         await this.#addBatchCreateTransformedSpecies();
         this.#addBatchUpdatesApplyTransformation();
-        this.#batchedOperations.push({
-          action: "update",
-          documentName: "Actor",
-          ids: [this.actor.id],
-          pack: this.actor.pack,
-          parent: this.actor.parent,
-          updates: [{
-            _id: this.actor.id,
-            "flags.teriock.lastTransformation": this.parent.id,
-            "system.transformation.primary": this.parent.id,
-            ...this.#resetUpdateData,
-          }],
+        this.#addBatchActorUpdate({
+          "flags.teriock.lastTransformation": this.parent.id,
+          "system.transformation.primary": this.parent.id,
+          ...this.#resetUpdateData,
         });
         await this.#modifyBatch();
       }
@@ -234,16 +234,7 @@ export default function TransformationSystemMixin(Base) {
         if (this.parent.disabled) { this.#addBatchUpdatesRemoveTransformation(); }
         else {
           this.#addBatchUpdatesApplyTransformation();
-          if (this.transformation.reset.size) {
-            this.#batchedOperations.push({
-              action: "update",
-              documentName: "Actor",
-              ids: [this.actor.id],
-              pack: this.actor.pack,
-              parent: this.actor.parent,
-              updates: [{ _id: this.actor.id, ...this.#resetUpdateData }],
-            });
-          }
+          if (this.transformation.reset.size) { this.#addBatchActorUpdate(this.#resetUpdateData); }
         }
         await this.#modifyBatch();
       }
