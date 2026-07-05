@@ -1,13 +1,4 @@
 import BaseDetectionMode from "./base-detection-mode.mjs";
+import EtherealTargetDetectionMixin from "./ethereal-target-detection-mixin.mjs";
 
-const { Token } = foundry.canvas.placeables;
-
-export default class SpectralDetectionMode extends BaseDetectionMode {
-  _canDetect(visionSource, target) {
-    if (!super._canDetect(visionSource, target)) { return false; }
-    if (target instanceof Token) {
-      if (!target.document.hasStatusEffect("ethereal")) { return false; }
-    }
-    return true;
-  }
-}
+export default class SpectralDetectionMode extends EtherealTargetDetectionMixin(BaseDetectionMode) {}

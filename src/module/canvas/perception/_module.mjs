@@ -96,13 +96,13 @@ export const detectionModes = {
 /**
  * Vision modes
  *
- * @type {Record<string, TeriockVisionMode>}
+ * @type {Record<string, VisionMode>}
  */
 export const visionModes = {
-  /** Dead vision mode */
-  dead: vision.deadVisionMode(),
-  /** Down vision mode */
-  down: vision.downVisionMode(),
+  /** Dead vision mode - everything turns intensely red */
+  dead: vision.woundedVisionMode("dead", "#ff0000"),
+  /** Down vision mode - everything turns a pale red */
+  down: vision.woundedVisionMode("down", "#a36767"),
   /** Ethereal vision mode */
   ethereal: vision.etherealVisionMode(),
   /** Invisible-Ethereal vision mode */
