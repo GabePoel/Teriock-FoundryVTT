@@ -13,9 +13,16 @@ const { fields } = foundry.data;
  * Power-specific item data model.
  * @extends {BaseItemSystem}
  * @extends {Teriock.Models.PowerSystemData}
+ * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  */
-export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins.CompetenceDisplaySystemMixin) {
+export default class PowerSystem
+  extends mixClasses(
+    BaseItemSystem,
+    systemMixins.ArmorSuppressionSystemMixin,
+    systemMixins.CompetenceDisplaySystemMixin,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Power"];
 
@@ -34,26 +41,6 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
         initial: "other",
       }),
     });
-  }
-
-  /** @inheritDoc */
-  get _displayMessagesSuppression() {
-    const messages = super._displayMessagesSuppression;
-    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor", messages); }
-    return messages;
-  }
-
-  /**
-   * If this is suppressed due to worn armor exceeding maximum AV.
-   * @returns {boolean}
-   */
-  get _isSuppressedArmor() {
-    return Boolean(
-      game.settings.get("teriock", "armorSuppressesRanks")
-        && this.actor
-        && !this.innate
-        && this.actor.system.defense.av.base > this.maxAv,
-    );
   }
 
   /** @inheritDoc */
@@ -81,11 +68,6 @@ export default class PowerSystem extends mixClasses(BaseItemSystem, systemMixins
     parts.text = dotJoin([powerConfig.type[this.type].label, parts.text]);
     parts.subtitle = _loc("TYPES.Item.power");
     return parts;
-  }
-
-  /** @inheritDoc */
-  get makeSuppressed() {
-    return super.makeSuppressed || this._isSuppressedArmor;
   }
 
   /** @inheritDoc */

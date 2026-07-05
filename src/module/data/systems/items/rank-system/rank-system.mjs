@@ -20,6 +20,7 @@ const { fields } = foundry.data;
  * @extends {BaseItemSystem}
  * @extends {CommonSystem}
  * @extends {Teriock.Models.RankSystemData}
+ * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  * @mixes StatGiverSystem
  * @mixes WikiSystem
@@ -27,6 +28,7 @@ const { fields } = foundry.data;
 export default class RankSystem
   extends mixClasses(
     BaseItemSystem,
+    systemMixins.ArmorSuppressionSystemMixin,
     systemMixins.CompetenceDisplaySystemMixin,
     systemMixins.WikiSystemMixin,
     systemMixins.StatGiverSystemMixin,
@@ -92,26 +94,6 @@ export default class RankSystem
   }
 
   /** @inheritDoc */
-  get _displayMessagesSuppression() {
-    const messages = super._displayMessagesSuppression;
-    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor", messages); }
-    return messages;
-  }
-
-  /**
-   * If this is suppressed due to worn armor exceeding maximum AV.
-   * @returns {boolean}
-   */
-  get _isSuppressedArmor() {
-    return Boolean(
-      game.settings.get("teriock", "armorSuppressesRanks")
-        && this.actor
-        && !this.innate
-        && this.actor.system.defense.av.base > this.maxAv,
-    );
-  }
-
-  /** @inheritDoc */
   get _panelBars() {
     return [
       {
@@ -162,11 +144,6 @@ export default class RankSystem
   /** @inheritDoc */
   get isOnWiki() {
     return this.number > 0 && this.number <= 5;
-  }
-
-  /** @inheritDoc */
-  get makeSuppressed() {
-    return super.makeSuppressed || this._isSuppressedArmor;
   }
 
   /** @inheritDoc */

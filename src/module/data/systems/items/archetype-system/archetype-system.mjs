@@ -12,9 +12,16 @@ const { fields } = foundry.data;
  * Archetype-specific item data model.
  * @extends {BaseItemSystem}
  * @extends {Teriock.Models.ArchetypeSystemData}
+ * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
  */
-export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMixins.CompetenceDisplaySystemMixin) {
+export default class ArchetypeSystem
+  extends mixClasses(
+    BaseItemSystem,
+    systemMixins.ArmorSuppressionSystemMixin,
+    systemMixins.CompetenceDisplaySystemMixin,
+  )
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Archetype"];
 
@@ -43,22 +50,8 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
   /** @inheritDoc */
   get _displayMessagesSuppression() {
     const messages = super._displayMessagesSuppression;
-    if (this._isSuppressedArmor) { this._addSuppressionMessage("armor", messages); }
     if (this._isSuppressedInactiveRanks) { this._addSuppressionMessage("inactiveRanks", messages); }
     return messages;
-  }
-
-  /**
-   * If this is suppressed due to worn armor exceeding maximum AV.
-   * @returns {boolean}
-   */
-  get _isSuppressedArmor() {
-    return Boolean(
-      game.settings.get("teriock", "armorSuppressesRanks")
-        && this.actor
-        && !this.innate
-        && this.actor.system.defense.av.base > this.maxAv,
-    );
   }
 
   /**
@@ -98,7 +91,15 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
 
   /** @inheritDoc */
   get makeSuppressed() {
-    return super.makeSuppressed || this._isSuppressedArmor || this._isSuppressedInactiveRanks;
+    return super.makeSuppressed || this._isSuppressedInactiveRanks;
+  }
+
+  /**
+   * The max AV of this archetype's ranks.
+   * @returns {number}
+   */
+  get maxAv() {
+    return Math.max(...this.ranks.map((r) => r.system.maxAv), 0);
   }
 
   /**
