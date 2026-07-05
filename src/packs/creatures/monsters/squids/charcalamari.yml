@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: 3aZn4MrRTK9HbPI0
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -42,7 +42,7 @@ items:
               impact: kill
               type: roll
           competence:
-            raw: 0
+            raw: 1
           delivery: missile
           duration:
             unit: instant
@@ -68,15 +68,15 @@ items:
             raw: '60'
             unit: ft
           requirements: >-
-            <p>Target is neither @Identifier[status:dead]{dead} nor
+            <p>Target is neither @Identifier[condition:dead]{dead} nor
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           results:
             critHit: <p>Double the number of dice rolled.</p>
             hit: >-
               <p>Roll [[/kill 2d6]] if this is greater than or equal to the
               number of @Identifier[core:hit-points-and-mana-points]{HP} the
-              target has, they @Identifier[status:dead]{die}. This does not deal
-              @Identifier[core:damage]{damage}.</p>
+              target has, they @Identifier[condition:dead]{die}. This does not
+              deal @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
           targets:
@@ -91,12 +91,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/disable-ray.webp
         name: Disable Ray
         system:
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -174,7 +174,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/flying.webp
         name: Flying
         system:
@@ -207,7 +207,7 @@ items:
                 - 2
               type: changes
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -243,12 +243,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/low-intelligence.webp
         name: Low Intelligence
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -278,12 +278,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -313,12 +313,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -348,12 +348,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -383,7 +383,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/passive-self-detonate.webp
         name: Passive Self Detonate
         system:
@@ -415,7 +415,7 @@ items:
               type: region
               visibility: 2
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -463,12 +463,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/sneaky.webp
         name: Sneaky
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -527,7 +527,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: OSGutQn4dKlL3p0R
         _key: >-
@@ -537,12 +537,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -563,12 +564,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-

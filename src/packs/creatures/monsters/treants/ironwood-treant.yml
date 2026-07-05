@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: LIIdUrc5blFyp2QM
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/dark-vision.webp
         name: Dark Vision
         system:
@@ -41,7 +41,7 @@ items:
                   value: '60'
               type: changes
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -73,21 +73,23 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-healing-factor.webp
         name: Improved Healing Factor
         system:
           automations:
             Suc9ayhHqRkmjAwZ:
               _id: Suc9ayhHqRkmjAwZ
-              activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
+              activeQualifier: >-
+                and(not(@status.dead), not(@status.burned), not(@status.dead),
+                not(@status.frozen))
               consumeStatDice: false
               forHarm: false
               noStatDice: false
               trigger: turnStart
               type: heal
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -113,7 +115,7 @@ items:
             - primal
           range:
             unit: self
-          requirements: <p>You are @Identifier[status:alive]{alive}.</p>
+          requirements: <p>You are @Identifier[rule:alive]{alive}.</p>
           targets:
             - self
         transfer: true
@@ -126,12 +128,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/low-intelligence.webp
         name: Low Intelligence
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -161,7 +163,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
@@ -183,7 +185,7 @@ items:
               type: childChange
               value: '1'
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -226,7 +228,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/natural-unbreachability.webp
         name: Natural Unbreachability
         system:
@@ -240,7 +242,7 @@ items:
               type: childChange
               value: '1'
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -273,12 +275,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -308,12 +310,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -343,12 +345,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -378,12 +380,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/partial-hands.webp
         name: Partial Hands
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -413,7 +415,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/treeform-self.webp
         name: Treeform Self
         system:
@@ -451,7 +453,7 @@ items:
                 - species
               type: transformation
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             raw: '24'
@@ -476,10 +478,10 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>You are @Identifier[status:transformed]{minorly transformed}
+              <p>You are @Identifier[condition:transformed]{minorly transformed}
               into a @Identifier[creature:tree]{tree} or revert from being one.
               You may do this even if you are
-              @Identifier[status:transformed]{minorly transformed} into a
+              @Identifier[condition:transformed]{minorly transformed} into a
               @Identifier[creature:tree]{tree}.</p>
           powerSources:
             - magical
@@ -497,13 +499,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
           _sup: SPl3YCMTxR6Alha1
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -546,7 +548,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -557,7 +559,7 @@ items:
               identifier: property:cumbersome
               type: suppress
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -595,13 +597,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
           _sup: TatxpTRGlnSrmtzY
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -639,13 +641,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
           _sup: MitYYxuQYYt8ym0o
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -684,13 +686,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
           _sup: MitYYxuQYYt8ym0o
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -722,13 +724,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
           _sup: TatxpTRGlnSrmtzY
           competence:
-            raw: 0
+            raw: 1
           delivery: weapon
           duration:
             unit: instant
@@ -773,7 +775,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -786,7 +788,7 @@ items:
               showConfirmationDialog: true
               type: common
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -859,7 +861,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -869,12 +871,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -893,12 +896,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -919,12 +923,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -944,12 +949,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -987,7 +993,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -997,12 +1003,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1021,12 +1028,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1064,7 +1072,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: vgYp2OlY2QgragN9
         _key: >-
@@ -1074,12 +1082,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1100,12 +1109,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1145,7 +1155,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     folder: 615ff873d830ae70
     img: systems/teriock/src/icons/body-parts/reinforced-bark.webp
     name: Reinforced Bark
@@ -1175,7 +1185,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: P2NBun61bqKdYpZP
         _key: >-
@@ -1185,11 +1195,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/entangling.webp
         name: Entangling
         system:
           applyIfDampened: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           damageType: vine
@@ -1208,12 +1219,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1234,12 +1246,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-

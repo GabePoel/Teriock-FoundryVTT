@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: Mngk8rX8lJ2lg7z5
         _key: >-
@@ -25,12 +25,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/carrying.webp
         name: Carrying
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -61,12 +61,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: bite
           duration:
             unit: instant
@@ -82,11 +82,11 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[status:down]{down}.</p>
+          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[status:dead]{dead},
-              @Identifier[status:ruined]{ruined}, and their
+              <p>Target is @Identifier[condition:dead]{dead},
+              @Identifier[condition:ruined]{ruined}, and their
               @Identifier[core:size]{SIZE} is reduced by 1. If their
               @Identifier[core:size]{SIZE} was already less than 1, it is
               reduced to 0.</p>
@@ -102,12 +102,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -137,12 +137,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -172,12 +172,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -207,7 +207,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
@@ -221,7 +221,7 @@ items:
               target: false
               type: status
           competence:
-            raw: 0
+            raw: 1
           delivery: weapon
           duration:
             unit: unlimited
@@ -232,20 +232,10 @@ items:
           executionTime:
             base: a1
           expirations:
-            28294dbc80493c2c:
-              _id: 28294dbc80493c2c
-              event: turn
-              method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: '4'
-              skip: 1
-              timing: end
-              type: combat
             66672059c7a29a30:
               _id: 66672059c7a29a30
+              crit:
+                - 0
               event: turn
               method: roll
               relation: target
@@ -254,6 +244,20 @@ items:
                 formula: 2d4kh1
                 threshold: '4'
               skip: 0
+              timing: end
+              type: combat
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              crit:
+                - 1
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
               timing: end
               type: combat
           form: normal
@@ -270,7 +274,7 @@ items:
             critHit: >-
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
-            hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+            hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
           skill: true
           standard: true
           targets:
@@ -292,12 +296,12 @@ items:
         they always have four legs. A single koolasoka is represented by
         multiple different creatures at once. There is one koolasoka head and at
         least one @Identifier[creature:koolasoka-leg]{koolasoka leg}. If the
-        koolasoka head @Identifier[status:dead]{dies} then each
+        koolasoka head @Identifier[condition:dead]{dies} then each
         @Identifier[creature:koolasoka-leg]{koolasoka leg} does as well.
         Otherwise, each @Identifier[creature:koolasoka-leg]{koolasoka leg} acts
         independently. No
         @UUID[Compendium.teriock.rules.JournalEntry.condition0000000]{conditions}
-        other than @Identifier[status:dead]{death} are shared. However, each
+        other than @Identifier[condition:dead]{death} are shared. However, each
         @Identifier[creature:koolasoka-leg]{koolasoka leg} cannot go more than
         the koolasoka head's @Identifier[core:size]{SIZE} × 5 feet away from the
         koolasoka head.</p>
@@ -326,7 +330,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -336,12 +340,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -362,12 +367,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -407,7 +413,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/hide.webp
     name: Hide

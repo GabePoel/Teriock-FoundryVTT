@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: PcmQknrNuDA6U7CP
         _key: >-
@@ -25,35 +25,38 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/crown-of-light.webp
         name: Crown of Light
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
-              changes:
-                - key: token.light.dim
-                  phase: derived
-                  priority: 3
-                  target: Actor
-                  type: upgrade
-                  value: '0.01'
-                - key: token.light.color
-                  phase: derived
-                  priority: 3
-                  target: Actor
-                  type: override
-                  value: '#DEDDDA'
-                - key: token.light.animation.type
-                  phase: derived
-                  priority: 3
-                  target: Actor
-                  type: override
-                  value: sunburst
-              type: changes
+            Lu71V2L9hiMtzyQr:
+              _id: Lu71V2L9hiMtzyQr
+              light:
+                alpha: 0.5
+                angle: 360
+                animation:
+                  intensity: 5
+                  reverse: false
+                  speed: 5
+                  type: sunburst
+                attenuation: 0.5
+                bright: 0
+                color: '#deddda'
+                coloration: 1
+                contrast: 0
+                darkness:
+                  max: 1
+                  min: 0
+                dim: 0.01
+                luminosity: 0.5
+                negative: false
+                priority: 0
+                saturation: 0
+                shadows: 0
+              type: light
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -96,7 +99,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/monstrous-strength.webp
         name: Monstrous Strength
         system:
@@ -118,7 +121,7 @@ items:
               type: childChange
               value: '1'
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -161,12 +164,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -196,12 +199,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -231,12 +234,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -266,12 +269,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -301,7 +304,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/light-aura.webp
         name: Light Aura
         system:
@@ -344,7 +347,7 @@ items:
               target: true
               type: status
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -392,8 +395,8 @@ items:
             unit: ft
           results:
             fail: >-
-              <p>Target is @Identifier[status:lighted]{lighted} to a creature of
-              your choice.</p>
+              <p>Target is @Identifier[condition:lighted]{lighted} to a creature
+              of your choice.</p>
           spell: true
           standard: true
           targets:
@@ -408,7 +411,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/light-touch.webp
         name: Light Touch
         system:
@@ -430,7 +433,7 @@ items:
               target: true
               type: status
           competence:
-            raw: 0
+            raw: 1
           delivery: hand
           duration:
             raw: '1'
@@ -444,20 +447,10 @@ items:
           executionTime:
             base: a1
           expirations:
-            28294dbc80493c2c:
-              _id: 28294dbc80493c2c
-              event: turn
-              method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: '4'
-              skip: 1
-              timing: end
-              type: combat
             66672059c7a29a30:
               _id: 66672059c7a29a30
+              crit:
+                - 0
               event: turn
               method: roll
               relation: target
@@ -466,6 +459,20 @@ items:
                 formula: 2d4kh1
                 threshold: '4'
               skip: 0
+              timing: end
+              type: combat
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              crit:
+                - 1
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
               timing: end
               type: combat
           form: normal
@@ -488,8 +495,8 @@ items:
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
             hit: >-
-              <p>Target is @Identifier[status:lighted]{lighted} to a creature of
-              your choice.</p>
+              <p>Target is @Identifier[condition:lighted]{lighted} to a creature
+              of your choice.</p>
           spell: true
           standard: true
           targets:
@@ -504,13 +511,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/supernatural-strength.webp
         name: Supernatural Strength
         system:
           _sup: WVr640aGgm0hhjhI
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -553,7 +560,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -564,7 +571,7 @@ items:
               identifier: property:cumbersome
               type: suppress
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -602,13 +609,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
           _sup: 63vWfKIhw8ylCGyx
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -646,13 +653,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
           _sup: wT1eUTTPMTPb4S8E
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -691,13 +698,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
           _sup: wT1eUTTPMTPb4S8E
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -729,13 +736,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
           _sup: 63vWfKIhw8ylCGyx
           competence:
-            raw: 0
+            raw: 1
           delivery: weapon
           duration:
             unit: instant
@@ -780,7 +787,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/shattering-grip.webp
         name: Shattering Grip
         system:
@@ -793,7 +800,7 @@ items:
               showConfirmationDialog: true
               type: common
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -863,7 +870,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: 06z0wz68hsmApPL9
         _key: >-
@@ -873,18 +880,18 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/hibernation-shield.webp
         name: Hibernation Shield
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: sight
           duration:
             unit: unlimited
           elements:
             - life
-          endCondition: <p>Target is no longer @Identifier[status:down]{down}.</p>
+          endCondition: <p>Target is no longer @Identifier[condition:down]{down}.</p>
           executionTime:
             base: r1
           expirations:
@@ -908,7 +915,7 @@ items:
             base: >-
               <p>Target gains @Identifier[ability:hibernation]{Hibernation}. You
               may target yourself with this as you go
-              @Identifier[status:down]{down}.</p>
+              @Identifier[condition:down]{down}.</p>
             fluent: >-
               <p>You may target up to @Identifier[core:fluency-bonus]{F}
               creatures.</p>
@@ -920,12 +927,12 @@ items:
           range:
             raw: '10'
             unit: ft
-          requirements: <p>Target must be @Identifier[status:down]{down}.</p>
+          requirements: <p>Target must be @Identifier[condition:down]{down}.</p>
           spell: true
           standard: true
           targets:
             - creature
-          trigger: <p>You go @Identifier[status:down]{down}.</p>
+          trigger: <p>You go @Identifier[condition:down]{down}.</p>
         transfer: true
         type: ability
       - _id: JhNbjfOBP4vq6fDO
@@ -936,7 +943,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         flags:
           teriock:
             dontConsume: false
@@ -960,7 +967,7 @@ items:
               target: true
               type: status
           competence:
-            raw: 0
+            raw: 1
           delivery: missile
           duration:
             raw: '1'
@@ -970,19 +977,23 @@ items:
           executionTime:
             base: a1
           expirations:
-            28294dbc80493c2c:
-              _id: 28294dbc80493c2c
-              event: turn
-              method: automatic
-              relation: executor
-              skip: 0
-              timing: end
-              type: combat
             66672059c7a29a30:
               _id: 66672059c7a29a30
+              crit:
+                - 0
               event: turn
               method: automatic
               relation: target
+              skip: 0
+              timing: end
+              type: combat
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              crit:
+                - 1
+              event: turn
+              method: automatic
+              relation: executor
               skip: 0
               timing: end
               type: combat
@@ -1004,11 +1015,11 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>If you want, target is @Identifier[status:lighted]{lighted}
+              <p>If you want, target is @Identifier[condition:lighted]{lighted}
               until the end of your next @Identifier[core:turns]{turn}.</p>
             hit: >-
-              <p>Target is @Identifier[status:lighted]{lighted} to a creature of
-              your choice until the end of their next
+              <p>Target is @Identifier[condition:lighted]{lighted} to a creature
+              of your choice until the end of their next
               @Identifier[core:turns]{turn}.</p>
           spell: true
           standard: true
@@ -1024,7 +1035,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/medicine-ball.webp
         name: Medicine Ball
         system:
@@ -1046,7 +1057,7 @@ items:
               noStatDice: false
               type: heal
           competence:
-            raw: 0
+            raw: 1
           delivery: missile
           duration:
             unit: instant
@@ -1093,7 +1104,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/resurrect.webp
         name: Resurrect
         system:
@@ -1112,7 +1123,7 @@ items:
               noStatDice: false
               type: heal
           competence:
-            raw: 0
+            raw: 1
           delivery: sight
           duration:
             unit: instant
@@ -1130,8 +1141,8 @@ items:
           heightened: >-
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, target can
-            have been @Identifier[status:dead]{dead} for an additional 24 hours.
-            If target is
+            have been @Identifier[condition:dead]{dead} for an additional 24
+            hours. If target is
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
             they are @Identifier[core:healing]{healed} an additional time.</p>
           identifier: resurrect
@@ -1139,8 +1150,8 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>If target is @Identifier[status:dead]{dead}, they are brought
-              back to life with 1
+              <p>If target is @Identifier[condition:dead]{dead}, they are
+              brought back to life with 1
               @Identifier[core:hit-points-and-mana-points]{HP}. If target is
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
               you can choose to have them be @Identifier[core:healing]{healed}
@@ -1167,7 +1178,8 @@ items:
           requirements: >-
             <p>Target is
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}
-            or has @Identifier[status:dead]{died} within the last 24 hours.</p>
+            or has @Identifier[condition:dead]{died} within the last 24
+            hours.</p>
           ritual: true
           spell: true
           standard: true
@@ -1183,13 +1195,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/hibernation.webp
         name: Hibernation
         system:
           _sup: 06z0wz68hsmApPL9
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -1207,7 +1219,7 @@ items:
             - primal
           range:
             unit: self
-          requirements: <p>You are @Identifier[status:down]{down}.</p>
+          requirements: <p>You are @Identifier[condition:down]{down}.</p>
           skill: true
           standard: true
           targets:
@@ -1252,7 +1264,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -1262,12 +1274,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1286,12 +1299,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1312,12 +1326,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1356,7 +1371,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1366,12 +1381,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1390,12 +1406,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1433,7 +1450,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -1443,12 +1460,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1467,12 +1485,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1493,12 +1512,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1518,12 +1538,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -1554,24 +1575,24 @@ items:
         short:
           unit: self
     type: body
-  - _id: VcLa8gWdJEzxdjAS
-    _key: '!actors.items!1a3da29e5eee7166.VcLa8gWdJEzxdjAS'
+  - _id: XcmJMK2t3pxs2RWU
+    _key: '!actors.items!1a3da29e5eee7166.XcmJMK2t3pxs2RWU'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!1a3da29e5eee7166.VcLa8gWdJEzxdjAS.NGCuRUaVtXnxAbRe
+          !actors.items.effects!1a3da29e5eee7166.XcmJMK2t3pxs2RWU.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
@@ -1621,13 +1642,13 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!1a3da29e5eee7166.VcLa8gWdJEzxdjAS.aCWLNsvSFjEuLTyl
+          !actors.items.effects!1a3da29e5eee7166.XcmJMK2t3pxs2RWU.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/staff-touch.webp
         name: Staff Touch
         system:

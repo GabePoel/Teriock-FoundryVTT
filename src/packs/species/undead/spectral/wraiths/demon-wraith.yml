@@ -1,0 +1,1144 @@
+_id: 354477f72ff10733
+_key: '!items!354477f72ff10733'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.13.8
+effects:
+  - _id: OWGNmsV8k3XZbRhZ
+    _key: '!items.effects!354477f72ff10733.OWGNmsV8k3XZbRhZ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.OJa7qEXpvUsuQzvQ
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/animate-dead.webp
+    name: Animate Dead
+    system:
+      automations:
+        iSxkhemk7psQTxpR:
+          _id: iSxkhemk7psQTxpR
+          changes:
+            - key: system.hp.max
+              phase: special
+              priority: 50
+              target: Actor
+              type: multiply
+              value: '0.5'
+            - key: system.mp.max
+              phase: special
+              priority: 50
+              target: Actor
+              type: multiply
+              value: '0.5'
+          competencies:
+            - 0
+            - 1
+          type: changes
+        ZdtyUjiggvt0bxgX:
+          _id: ZdtyUjiggvt0bxgX
+          common:
+            - revive
+          showConfirmationDialog: true
+          type: common
+        ZlgI0KUafWT3wE27:
+          _id: ZlgI0KUafWT3wE27
+          competence:
+            raw: 0
+          competencies:
+            - 0
+            - 1
+          makeEffect: true
+          preventFeat: false
+          preventThreshold: false
+          type: override
+        6v7WhWcAO2fARRYl:
+          _id: 6v7WhWcAO2fARRYl
+          amount: 999999
+          competencies:
+            - 1
+            - 2
+          display:
+            label: Restore MP
+          impact: revitalizing
+          morganti: false
+          showDialog: false
+          type: take
+        YHHJxY54wT2k778U:
+          _id: YHHJxY54wT2k778U
+          amount: 999999
+          competencies:
+            - 1
+            - 2
+          display:
+            label: Restore HP
+          impact: healing
+          morganti: false
+          showDialog: false
+          type: take
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: hand
+      duration:
+        unit: instant
+      effectTypes:
+        - reanimation
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      expirations:
+        c32fbccf9d83e581:
+          _id: c32fbccf9d83e581
+          method: automatic
+          triggers:
+            - shortRest
+          type: trigger
+      form: normal
+      identifier: animate-dead
+      interaction: attack
+      invoked: true
+      maneuver: active
+      overview:
+        base: >-
+          <p>Target is @Identifier[rule:alive]{alive} (but still
+          @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}).
+          It's @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} are both increased to
+          1 if they were less than that value. However, the target's maximum
+          @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} are both halved to a
+          minimum of 1. This effect lasts until the target completes a
+          @Identifier[core:short-rest]{short rest}. This does not <i>count</i>
+          as a @Wiki[Category:Revival effects]{revival effect} although it acts
+          as one.</p>
+        fluent: >-
+          <p>Target's @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} are no longer
+          halved.</p>
+        proficient: >-
+          <p>Target has all @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} restored, but its
+          maximum @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} are still halved.
+          This does not count as a @Wiki[Category:Healing effects]{healing
+          effect} or a @Wiki[Category:Revival effects]{revival effect}.</p>
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      requirements: >-
+        <p>Target is @Identifier[condition:dead]{dead} and
+        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: KTOTgtiyY8jLzIKt
+    _key: '!items.effects!354477f72ff10733.KTOTgtiyY8jLzIKt'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.66f276dcbe210dd0
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/charm.webp
+    name: Charm
+    system:
+      automations:
+        f004b5e5538cefe9:
+          _id: f004b5e5538cefe9
+          executor: false
+          multi: false
+          relation: include
+          status: charmed
+          target: false
+          type: status
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: hand
+      duration:
+        raw: '1'
+        unit: hour
+      effectTypes:
+        - control
+        - mental
+      executionTime:
+        base: a1
+      form: normal
+      identifier: charm
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      requirements: >-
+        <p>A creature may only have up to @Identifier[core:presence]{PRES}
+        creatures @Identifier[condition:charmed]{charmed} at a time.</p>
+      results:
+        hit: <p>Target is @Identifier[condition:charmed]{charmed}.</p>
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: 0BYeSpf0zYslfA6U
+    _key: '!items.effects!354477f72ff10733.0BYeSpf0zYslfA6U'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a08de7a1eb79f2bb
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/encroaching-touch.webp
+    name: Encroaching Touch
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: special
+      identifier: encroaching-touch
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You may use your melee items as though they were your
+          @Identifier[equipment:hand]{hand}. You are not
+          @Identifier[core:proficiency-bonus]{proficient} nor
+          @Identifier[core:fluency-bonus]{fluent} with
+          @Pack[teriock.abilities]{abilities} you use through your items.</p>
+        fluent: >-
+          <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
+          @Pack[teriock.abilities]{ability} you use through your melee items,
+          you regain the @Identifier[core:fluency-bonus]{fluency bonus} for that
+          @Pack[teriock.abilities]{ability}.</p>
+        proficient: >-
+          <p>If you are @Identifier[core:proficiency-bonus]{proficient} with an
+          @Pack[teriock.abilities]{ability} you use through your melee items,
+          you regain the @Identifier[core:proficiency-bonus]{proficiency bonus}
+          for that @Pack[teriock.abilities]{ability}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: kORf9eZGZOtGX2PG
+    _key: '!items.effects!354477f72ff10733.kORf9eZGZOtGX2PG'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.55db54d205333a5b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/feeding.webp
+    name: Feeding
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: feeding
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You must @Identifier[drain:mana]{mana drain} at least 3 creatures
+          to @Identifier[condition:dead]{death} every day 24 hours or you start
+          taking penalties. If 24 hours pass and you have not fed, you lose your
+          your largest @Identifier[core:hit-points-and-mana-points]{hit die} and
+          @Identifier[core:hit-points-and-mana-points]{mana die}. Your
+          @Identifier[core:hit-points-and-mana-points]{HP} and
+          @Identifier[core:hit-points-and-mana-points]{MP} maximums decrease by
+          the value of those dice. For each additional 24 hours you go without
+          [[lookup name style=lc]], you lose your next largest
+          @Identifier[core:hit-points-and-mana-points]{hit die} and
+          @Identifier[core:hit-points-and-mana-points]{mana die}. To restore
+          lost @Identifier[core:hit-points-and-mana-points]{hit dice} and
+          @Identifier[core:hit-points-and-mana-points]{mana dice}, you must feed
+          more than normal. If you feed on at least 6 creatures within a 24 hour
+          period, you restore 1 lost
+          @Identifier[core:hit-points-and-mana-points]{hit die} and
+          @Identifier[core:hit-points-and-mana-points]{mana die}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: VI03c9jKB7rMSQsD
+    _key: '!items.effects!354477f72ff10733.VI03c9jKB7rMSQsD'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.184f6f0ddbd9247e
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/flying.webp
+    name: Flying
+    system:
+      automations:
+        5KN7CIW4kc6fgrgW:
+          _id: 5KN7CIW4kc6fgrgW
+          movementAction: fly
+          type: changeMovement
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.speedAdjustments.fly
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '2'
+          type: changes
+        f025905e157ac261:
+          _id: f025905e157ac261
+          changes:
+            - key: system.speedAdjustments.fly
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '3'
+          competencies:
+            - 1
+            - 2
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - movement
+      executionTime:
+        base: passive
+      form: normal
+      identifier: flying
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: <p>You fly at @Identifier[core:movement-speed]{half speed}.</p>
+        proficient: >-
+          <p>You instead fly at @Identifier[core:movement-speed]{full
+          speed}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: EftNTn0oP5LUkuNs
+    _key: '!items.effects!354477f72ff10733.EftNTn0oP5LUkuNs'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a18ca3d154552f3
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/ghostlike.webp
+    name: Ghostlike
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: special
+      identifier: ghostlike
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: snk
+          value: 5
+    transfer: true
+    type: ability
+  - _id: bLRII1JRCHMbi0U7
+    _key: '!items.effects!354477f72ff10733.bLRII1JRCHMbi0U7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.a3ba1215e06bfb82
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/greater-undead.webp
+    name: Greater Undead
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: special
+      identifier: greater-undead
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You count as being @Identifier[keyword:undead]{undead} for the
+          purposes of @Pack[teriock.abilities]{abilities},
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage},
+          and other @Wiki[Category:Effects]{effects}. You also gain
+          @Identifier[ability:ethereal-senses]{Ethereal Senses},
+          @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
+          @Identifier[ability:magical-durability]{Magical Durability},
+          @Identifier[ability:mana-drain-touch]{Mana Drain Touch},
+          @Identifier[ability:undead-mind]{Undead Mind}, and
+          @Identifier[ability:undying-durability]{Undying Durability}.</p><div
+          class="expandable-table"></div>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: VbmqlumGqtifx0lY
+    _key: '!items.effects!354477f72ff10733.VbmqlumGqtifx0lY'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.5894bcd8755bdac8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/hack.webp
+    name: Hack
+    system:
+      automations:
+        d873eb939c3b5951:
+          _id: d873eb939c3b5951
+          hacks:
+            - arm
+            - leg
+          reverse: false
+          type: hacks
+      competence:
+        raw: 1
+      delivery: weapon
+      duration:
+        unit: instant
+      executionTime:
+        base: a1
+      form: normal
+      identifier: hack
+      interaction: attack
+      limitation: >-
+        <p>Melee
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}
+        only.</p>
+      maneuver: active
+      overview:
+        base: >-
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The damage
+          gets dealt accordingly.</p>
+      piercing:
+        raw: 0
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      results:
+        critHit: >-
+          <p>The target takes 2 @Identifier[damage:hack]{hack damage} on either
+          arms or legs, depending on what you chose.</p>
+        hit: >-
+          <p>The target takes 1 @Identifier[damage:hack]{hack damage} on either
+          an arm or leg, depending on what you chose.</p>
+      skill: true
+      standard: true
+      targets:
+        - arm
+        - leg
+    transfer: true
+    type: ability
+  - _id: yuXjKnFxj7uPTzJM
+    _key: '!items.effects!354477f72ff10733.yuXjKnFxj7uPTzJM'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9a5b331aeeff5b
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/incorporeal.webp
+    name: Incorporeal
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.weight.self
+              phase: derived
+              priority: 10
+              target: Actor
+              type: override
+              value: '0'
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime:
+        base: passive
+      form: normal
+      identifier: incorporeal
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You cannot wear
+          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} and
+          you may pass through non-@Identifier[property:silver]{silver} walls
+          while @Identifier[condition:ethereal]{Ethereal}. You are also
+          @Identifier[keyword:immunity]{immune} to being
+          @Identifier[condition:snared]{snared} and have no weight.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: sxOg2mIrUmPIuMl4
+    _key: '!items.effects!354477f72ff10733.sxOg2mIrUmPIuMl4'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c431236ddaf7ccb4
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/instant-ethereal.webp
+    name: Instant Ethereal
+    system:
+      automations:
+        067cb526e2f9e98f:
+          _id: 067cb526e2f9e98f
+          executor: false
+          multi: false
+          relation: include
+          status: ethereal
+          target: false
+          type: status
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        raw: '1'
+        unit: hour
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: special
+      identifier: instant-ethereal
+      interaction: manifest
+      maneuver: active
+      overview:
+        base: >-
+          <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back
+          into the Material Realm.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 4oM2bcoYxQBJ3jTc
+    _key: '!items.effects!354477f72ff10733.4oM2bcoYxQBJ3jTc'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/normal-movement.webp
+    name: Normal Movement
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: normal-movement
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: mov
+          value: 0
+    transfer: true
+    type: ability
+  - _id: F1RFGrhJdAm86RY3
+    _key: '!items.effects!354477f72ff10733.F1RFGrhJdAm86RY3'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/normal-perception.webp
+    name: Normal Perception
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: normal-perception
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: per
+          value: 0
+    transfer: true
+    type: ability
+  - _id: IXMGgnilXSp5Mvik
+    _key: '!items.effects!354477f72ff10733.IXMGgnilXSp5Mvik'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/slay.webp
+    name: Slay
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          showConfirmationDialog: true
+          type: common
+        29b275994cf9f5b1:
+          _id: 29b275994cf9f5b1
+          display:
+            label: Roll 5 Damage
+          formula: 5[lethal]
+          impact: damage
+          type: roll
+        tnG4HOJcOpBMkG4W:
+          _id: tnG4HOJcOpBMkG4W
+          display:
+            label: Roll 10 Damage
+          formula: 10[lethal]
+          impact: damage
+          type: roll
+      competence:
+        raw: 1
+      costs:
+        primary:
+          mp:
+            formula: '1'
+            type: formula
+      delivery: weapon
+      duration:
+        unit: instant
+      effectTypes:
+        - damaging
+        - killing
+      executionTime:
+        base: r0
+      form: normal
+      identifier: slay
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Target takes an additional [[/damage 5[lethal]]]
+          @Identifier[core:damage]{damage}. This also has all
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
+          types} of the triggering @Identifier[core:attack-interaction]{attack}.
+          If the triggering @Identifier[core:attack-interaction]{attack} was a
+          critical hit, this deals 10 @Identifier[core:damage]{damage}
+          instead.</p>
+      powerSources:
+        - martial
+      range:
+        unit: contact
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You have just hit a creature with an
+        @Identifier[core:attack-interaction]{attack} that dealt them
+        @Identifier[core:damage]{damage} from it.</p>
+    transfer: true
+    type: ability
+  - _id: YZCWBsdk9ZzusV2b
+    _key: '!items.effects!354477f72ff10733.YZCWBsdk9ZzusV2b'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.da2917a69e74c22a
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/very-high-intelligence.webp
+    name: Very High Intelligence
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: special
+      identifier: very-high-intelligence
+      interaction: manifest
+      maneuver: passive
+      powerSources:
+        - martial
+      range:
+        unit: self
+      targets:
+        - self
+      upgrades:
+        score:
+          attribute: int
+          value: 4
+    transfer: true
+    type: ability
+  - _id: VBS9m0a5DW0Dmylr
+    _key: '!items.effects!354477f72ff10733.VBS9m0a5DW0Dmylr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
+    name: Healing Sensitivity
+    system:
+      _sup: bLRII1JRCHMbi0U7
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: flaw
+      identifier: healing-sensitivity
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>@Identifier[core:healing]{Healing} can be used to
+          @Identifier[core:damage]{damage} you. If the creature providing you
+          @Identifier[core:healing]{healing} specifies that they are doing so
+          "for damage" then you roll your <i>largest</i>
+          @Identifier[core:hit-points-and-mana-points]{hit die} and take that
+          much @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic
+          damage} instead of the normal @Identifier[core:healing]{healing}
+          effect. This does not consume any of your
+          @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: BDAewftqcVODMWQv
+    _key: '!items.effects!354477f72ff10733.BDAewftqcVODMWQv'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/ethereal-senses.webp
+    name: Ethereal Senses
+    system:
+      _sup: bLRII1JRCHMbi0U7
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '120'
+          type: changes
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: normal
+      identifier: ethereal-senses
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You can see and hear spirits and
+          @Identifier[condition:ethereal]{Ethereal} creatures within 120
+          feet.</p>
+      powerSources:
+        - magical
+        - primal
+        - spiritual
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: Umf8fRRHNyekMsnM
+    _key: '!items.effects!354477f72ff10733.Umf8fRRHNyekMsnM'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/undead-mind.webp
+    name: Undead Mind
+    system:
+      _sup: bLRII1JRCHMbi0U7
+      automations:
+        EEiHRIyCxZhUuw07:
+          _id: EEiHRIyCxZhUuw07
+          category: statuses
+          relation: immunities
+          type: protection
+          value: charmed
+        Glnnr440sVehTfZ5:
+          _id: Glnnr440sVehTfZ5
+          category: statuses
+          relation: immunities
+          type: protection
+          value: frightened
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: special
+      identifier: undead-mind
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to being
+          @Identifier[condition:frightened]{frightened} and
+          @Identifier[condition:charmed]{charmed}. The effects of [[lookup
+          name]] are maintained even if
+          @Identifier[condition:transformed]{transformed}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 35iXT3n9Ac8lc2Jj
+    _key: '!items.effects!354477f72ff10733.35iXT3n9Ac8lc2Jj'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.267a2993fd42e843
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/mana-drain-touch.webp
+    name: Mana Drain Touch
+    system:
+      _sup: bLRII1JRCHMbi0U7
+      automations:
+        xreyNK2IzDp9qCUE:
+          _id: xreyNK2IzDp9qCUE
+          consumeStatDice: true
+          forHarm: false
+          type: revitalize
+        157afc517847f562:
+          _id: 157afc517847f562
+          formula: 1d8[mana]
+          impact: drain
+          type: roll
+      competence:
+        raw: 1
+      delivery: hand
+      duration:
+        unit: instant
+      effectTypes:
+        - draining
+        - revitalization
+      executionTime:
+        base: a1
+      form: special
+      identifier: mana-drain-touch
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        unit: contact
+      results:
+        critHit: >-
+          <p>Deal [[/drain 2d8[mana]]]
+          @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+          to the target. If this @Identifier[condition:dead]{kills} the target,
+          you @Identifier[core:revitalizing]{revitalize} twice. This
+          @Identifier[core:revitalizing]{revitalization} is the only part of
+          this that is a @Wiki[Category:Revitalization effects]{revitalization
+          effect}.</p>
+        hit: >-
+          <p>Deal [[/drain 1d8[mana]]]
+          @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
+          to the target. If this @Identifier[condition:dead]{kills} the target,
+          you @Identifier[core:revitalizing]{revitalize}.  This
+          @Identifier[core:revitalizing]{revitalization} is the only part of
+          this that is a @Wiki[Category:Revitalization effects]{revitalization
+          effect}.</p>
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: YykjCqAT6vHsuuZe
+    _key: '!items.effects!354477f72ff10733.YykjCqAT6vHsuuZe'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.P5i3FWFMMYPBuVtV
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/magical-durability.webp
+    name: Magical Durability
+    system:
+      _sup: bLRII1JRCHMbi0U7
+      automations:
+        NxGVe5qLdm9laW3Q:
+          _id: NxGVe5qLdm9laW3Q
+          category: damageTypes
+          relation: immunities
+          type: protection
+          value: mundane
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      executionTime:
+        base: passive
+      form: special
+      identifier: magical-durability
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to
+          @Identifier[damage:mundane]{mundane}
+          @Identifier[core:damage]{damage}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: HfhmjkB1XrZqLat6
+    _key: '!items.effects!354477f72ff10733.HfhmjkB1XrZqLat6'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/undying-durability.webp
+    name: Undying Durability
+    system:
+      _sup: bLRII1JRCHMbi0U7
+      automations:
+        HaVjAr78BgQGd92W:
+          _id: HaVjAr78BgQGd92W
+          category: statuses
+          relation: immunities
+          type: protection
+          value: poisoned
+        OlGtbdaImhaj6OiM:
+          _id: OlGtbdaImhaj6OiM
+          category: statuses
+          relation: immunities
+          type: protection
+          value: suffocating
+        W3eMyYlHd3WnCnAm:
+          _id: W3eMyYlHd3WnCnAm
+          category: statuses
+          relation: immunities
+          type: protection
+          value: unconscious
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      effectTypes:
+        - immunity
+      elements:
+        - necromancy
+      executionTime:
+        base: passive
+      form: special
+      identifier: undying-durability
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You are @Identifier[keyword:immunity]{immune} to
+          @Identifier[condition:unconscious]{unconsciousness},
+          @Identifier[condition:suffocating]{suffocating}, and being
+          @Identifier[condition:poisoned]{poisoned}. You do not
+          @Identifier[condition:down]{drop} due to being at negative
+          @Identifier[core:hit-points-and-mana-points]{HP}. You still
+          @Identifier[condition:dead]{die} when you reach half your maximum
+          @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also
+          do not have to @Identifier[core:drowning]{breathe}.</p>
+      powerSources:
+        - magical
+      range:
+        unit: self
+      targets:
+        - self
+    transfer: true
+    type: ability
+folder: bd7120d756dc6f4f
+img: systems/teriock/src/icons/creatures/demon-wraith.webp
+name: Demon Wraith
+system:
+  appearance: >-
+    <p>Transparent @Wiki[Category:Infernal creatures]{infernal creatures} with
+    glowing red eyes, long claws, and black strands of darkness blowing around
+    them.</p>
+  br: 30
+  competence:
+    raw: 1
+  description: >-
+    <p>Demon wraiths are thought to be demons from the
+    @Identifier[condition:ethereal]{Ethereal plane}.</p>
+  identifier: demon-wraith
+  size:
+    enabled: true
+    value: 3
+  statDice:
+    hp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '4'
+    mp:
+      disabled: false
+      faces: 10
+      number:
+        raw: '2'
+  traits:
+    - infernal
+    - undead
+  transformation:
+    img: systems/teriock/src/icons/tokens/demon-wraith.webp
+    ring: true
+type: species

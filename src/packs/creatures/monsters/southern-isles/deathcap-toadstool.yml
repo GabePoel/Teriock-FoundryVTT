@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: wDQVrdOUejAIUjmv
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/death-ray.webp
         name: Death Ray
         system:
@@ -42,7 +42,7 @@ items:
               impact: kill
               type: roll
           competence:
-            raw: 0
+            raw: 1
           delivery: missile
           duration:
             unit: instant
@@ -68,15 +68,15 @@ items:
             raw: '60'
             unit: ft
           requirements: >-
-            <p>Target is neither @Identifier[status:dead]{dead} nor
+            <p>Target is neither @Identifier[condition:dead]{dead} nor
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           results:
             critHit: <p>Double the number of dice rolled.</p>
             hit: >-
               <p>Roll [[/kill 2d6]] if this is greater than or equal to the
               number of @Identifier[core:hit-points-and-mana-points]{HP} the
-              target has, they @Identifier[status:dead]{die}. This does not deal
-              @Identifier[core:damage]{damage}.</p>
+              target has, they @Identifier[condition:dead]{die}. This does not
+              deal @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
           targets:
@@ -91,12 +91,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -126,7 +126,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/fire-damage-immunity.webp
         name: Fire Damage Immunity
         system:
@@ -138,7 +138,7 @@ items:
               type: protection
               value: fire
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -170,7 +170,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/lightning-immunity.webp
         name: Lightning Immunity
         system:
@@ -182,7 +182,7 @@ items:
               type: protection
               value: lightning
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -212,12 +212,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/low-strength.webp
         name: Low Strength
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -247,12 +247,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -282,12 +282,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/poor-perception.webp
         name: Poor Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -317,12 +317,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/slow.webp
         name: Slow
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -352,7 +352,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/snare.webp
         name: Snare
         system:
@@ -366,7 +366,7 @@ items:
               target: false
               type: status
           competence:
-            raw: 0
+            raw: 1
           delivery: weapon
           duration:
             unit: unlimited
@@ -377,20 +377,10 @@ items:
           executionTime:
             base: a1
           expirations:
-            28294dbc80493c2c:
-              _id: 28294dbc80493c2c
-              event: turn
-              method: roll
-              relation: target
-              roll:
-                comparison: gte
-                formula: 2d4kh1
-                threshold: '4'
-              skip: 1
-              timing: end
-              type: combat
             66672059c7a29a30:
               _id: 66672059c7a29a30
+              crit:
+                - 0
               event: turn
               method: roll
               relation: target
@@ -399,6 +389,20 @@ items:
                 formula: 2d4kh1
                 threshold: '4'
               skip: 0
+              timing: end
+              type: combat
+            28294dbc80493c2c:
+              _id: 28294dbc80493c2c
+              crit:
+                - 1
+              event: turn
+              method: roll
+              relation: target
+              roll:
+                comparison: gte
+                formula: 2d4kh1
+                threshold: '4'
+              skip: 1
               timing: end
               type: combat
           form: normal
@@ -415,7 +419,7 @@ items:
             critHit: >-
               <p>The target automatically fails the first [[/roll 2d4]]
               roll.</p>
-            hit: <p>Target is @Identifier[status:snared]{snared}.</p>
+            hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
           skill: true
           standard: true
           targets:
@@ -466,7 +470,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: OSGutQn4dKlL3p0R
         _key: >-
@@ -476,12 +480,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -502,12 +507,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-

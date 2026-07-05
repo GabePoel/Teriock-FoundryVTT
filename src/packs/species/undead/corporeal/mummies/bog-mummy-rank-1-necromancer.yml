@@ -1,0 +1,316 @@
+_id: gVDDJlWaX1r1J4bK
+_key: '!items!gVDDJlWaX1r1J4bK'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.2bd7d6c9b89adbcf
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.13.8
+effects:
+  - _id: Q3bElOKJWjw3DI9t
+    _key: '!items.effects!gVDDJlWaX1r1J4bK.Q3bElOKJWjw3DI9t'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.b231c43502dd9d39
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/death-ray.webp
+    name: Death Ray
+    system:
+      automations:
+        1728b3a84ea27844:
+          _id: 1728b3a84ea27844
+          common:
+            - bag
+          showConfirmationDialog: true
+          type: common
+        71e51b18552837f1:
+          _id: 71e51b18552837f1
+          formula: (2 + @h)d6
+          impact: kill
+          type: roll
+      competence:
+        raw: 1
+      delivery: missile
+      duration:
+        unit: instant
+      effectTypes:
+        - killing
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: normal
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, roll an additional [[/kill 1d6]].</p>
+      identifier: death-ray
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 1
+      powerSources:
+        - magical
+      range:
+        raw: '60'
+        unit: ft
+      requirements: >-
+        <p>Target is neither @Identifier[condition:dead]{dead} nor
+        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
+      results:
+        critHit: <p>Double the number of dice rolled.</p>
+        hit: >-
+          <p>Roll [[/kill 2d6]] if this is greater than or equal to the number
+          of @Identifier[core:hit-points-and-mana-points]{HP} the target has,
+          they @Identifier[condition:dead]{die}. This does not deal
+          @Identifier[core:damage]{damage}.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: 15t1ifTnUgXbHDY7
+    _key: '!items.effects!gVDDJlWaX1r1J4bK.15t1ifTnUgXbHDY7'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.cb297af126bd9530
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/spirit-guide.webp
+    name: Spirit Guide
+    system:
+      automations:
+        e789ed5e109ebd1a:
+          _id: e789ed5e109ebd1a
+          changes:
+            - key: system.senses.ethereal
+              phase: derived
+              priority: 10
+              target: Actor
+              type: upgrade
+              value: '120'
+          type: changes
+      competence:
+        raw: 1
+      costs:
+        components:
+          somatic:
+            type: tag
+          verbal:
+            type: tag
+      delivery: sight
+      duration:
+        raw: '24'
+        unit: hour
+      effectTypes:
+        - sensory
+      elements:
+        - necromancy
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      form: normal
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, you may target an additional creature.</p>
+      identifier: spirit-guide
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You can see, hear, and speak to spirits and
+          @Identifier[condition:ethereal]{Ethereal} creatures within 120
+          feet.</p>
+        fluent: >-
+          <p>You can target @Identifier[condition:ethereal]{Ethereal} creatures
+          with @Wiki[Category:Spiritually powered abilities]{spiritual}
+          @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:tea-ceremony]{Tea Ceremony}.</p>
+        proficient: >-
+          <p>You can target @Identifier[condition:ethereal]{Ethereal} creatures
+          with @Wiki[Category:Necromancy element abilities]{necromancy}
+          @Wiki[Category:Ritual delivery spells]{ritual spells} such as
+          @Identifier[ability:summon-the-dead]{Summon the Dead}.</p>
+      powerSources:
+        - magical
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may only
+        target yourself.</p>
+      ritual: true
+      spell: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: 6ouKT638ARM4Cphm
+    _key: '!items.effects!gVDDJlWaX1r1J4bK.6ouKT638ARM4Cphm'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e03c8211ae426819
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/summon-the-dead.webp
+    name: Summon the Dead
+    system:
+      competence:
+        raw: 1
+      costs:
+        primary:
+          hp:
+            description: >-
+              <p>[[lookup name]] costs 0
+              @Identifier[core:hit-points-and-mana-points]{HP} if the body is in
+              your possession. Otherwise, it costs 3
+              @Identifier[core:hit-points-and-mana-points]{HP} per
+              @Identifier[core:size]{size} of the body.</p>
+            type: description
+          mp:
+            description: >-
+              <p>[[lookup name]] costs 0
+              @Identifier[core:hit-points-and-mana-points]{MP} if the body is in
+              your possession. Otherwise, it costs 2
+              @Identifier[core:hit-points-and-mana-points]{MP} per
+              @Identifier[core:size]{size} of the body.</p>
+            type: description
+      delivery: sight
+      duration:
+        unit: instant
+      effectTypes:
+        - summoning
+      elements:
+        - necromancy
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      form: normal
+      identifier: summon-the-dead
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>If you have the body of the target in your possession, you can put
+          the spirit back into its body such that it is no longer
+          @Identifier[condition:wisping]{wisping}. The body maintains all damage
+          it had when it died.</p>
+        proficient: >-
+          <p>If the body is thoroughly damaged (such as if it's
+          @Identifier[condition:ruined]{ruined}) or missing entirely, you can
+          expend some of your own life force to recreate the body from the
+          spirit for additional @Identifier[core:hit-points-and-mana-points]{MP}
+          and @Identifier[core:hit-points-and-mana-points]{HP}. The creature is
+          still dead, but the body is now intact.</p>
+      powerSources:
+        - magical
+        - primal
+        - spiritual
+      range:
+        raw: '5'
+        unit: ft
+      requirements: <p>Target must be @Identifier[condition:wisping]{wisping}.</p>
+      ritual: true
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+  - _id: epbHgxy8x6bO3jkQ
+    _key: '!items.effects!gVDDJlWaX1r1J4bK.epbHgxy8x6bO3jkQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.c86ef5877a48d710
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/terror-ball.webp
+    name: Terror Ball
+    system:
+      automations:
+        800c70e6560525a8:
+          _id: 800c70e6560525a8
+          formula: (1 + @h)d4[magic terror]
+          impact: damage
+          type: roll
+      competence:
+        raw: 1
+      delivery: missile
+      duration:
+        unit: instant
+      effectTypes:
+        - damaging
+      elements:
+        - necromancy
+      executionTime:
+        base: a1
+      form: normal
+      heightened: >-
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
+        spent, deal an additional [[/damage 1d4[magic terror]]]
+        @Identifier[core:damage]{damage}.</p>
+      identifier: terror-ball
+      interaction: attack
+      maneuver: active
+      piercing:
+        raw: 2
+      powerSources:
+        - magical
+      range:
+        raw: '30'
+        unit: ft
+      results:
+        critHit: >-
+          <p>Double the @Identifier[core:damage]{damage dice} dealt by this
+          @Pack[teriock.abilities]{ability}.</p>
+        hit: >-
+          <p>Deal [[/damage 1d4[terror magic]]] @Identifier[core:damage]{damage}
+          to target.</p>
+      spell: true
+      standard: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: a8e8026a8376d9d4
+img: systems/teriock/src/icons/ranks/rank-1-necromancer.webp
+name: Rank 1 Necromancer
+system:
+  _sup: 7845daf31326be74
+  archetype: mage
+  class: necromancer
+  competence:
+    raw: 1
+  description: >-
+    <p>The true dealer of death, @Identifier[class:necromancer]{Necromancers}
+    are most at home in the cemetery digging up future minions. Shunned by most
+    of society, these dark mages are not necessarily evil, they simply see death
+    as full of potential energy while others see it as the end of life.
+    @Identifier[class:necromancer]{Necromancers} fear nothing, as they are
+    always facing death. If you are playing a
+    @Identifier[class:necromancer]{Necromancer} be unafraid, kill without
+    remorse and be interested in @Identifier[condition:dead]{dead} bodies, close
+    to death yourself, almost in another world.</p>
+  identifier: rank-1-necromancer
+  innate: false
+  maxAv: 0
+  number: 1
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d8
+    mp:
+      disabled: false
+      formula: 1d12
+type: rank

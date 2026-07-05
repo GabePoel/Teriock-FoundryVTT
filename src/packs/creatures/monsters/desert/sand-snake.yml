@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: C5VEfmbThE7PPU0b
         _key: >-
@@ -25,12 +25,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -60,12 +60,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -103,12 +103,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -138,12 +138,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -173,7 +173,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/poison-strike.webp
         name: Poison Strike
         system:
@@ -208,14 +208,14 @@ items:
               target: false
               type: status
           competence:
-            raw: 0
+            raw: 1
           delivery: weapon
           duration:
             raw: '24'
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
+          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -225,10 +225,10 @@ items:
           maneuver: active
           overview:
             fluent: >-
-              <p>The @Identifier[status:poisoned]{poison} instead deals
+              <p>The @Identifier[condition:poisoned]{poison} instead deals
               [[/damage 1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>The @Identifier[status:poisoned]{poison} instead deals
+              <p>The @Identifier[condition:poisoned]{poison} instead deals
               [[/damage 1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
           piercing:
             raw: 0
@@ -238,9 +238,9 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[status:poisoned]{poisoned}. The
-              @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
-              @Identifier[core:damage]{damage}.</p>
+              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              @Identifier[condition:poisoned]{poison} deals [[/damage
+              1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
           targets:
             - creature
@@ -254,13 +254,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
           _sup: NzuIr5ZNvRZbmIVS
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -299,13 +299,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
           _sup: NzuIr5ZNvRZbmIVS
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -362,7 +362,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: ISv1kpsgnOq0hLF3
         _key: >-
@@ -372,12 +372,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -398,12 +399,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-

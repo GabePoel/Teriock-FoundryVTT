@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: g7ZtkAQEh3Yg7Bw0
         _key: >-
@@ -25,12 +25,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/acidic-blood.webp
         name: Acidic Blood
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -68,12 +68,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/carrying.webp
         name: Carrying
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -104,12 +104,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -139,12 +139,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/devour.webp
         name: Devour
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: bite
           duration:
             unit: instant
@@ -160,11 +160,11 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[status:down]{down}.</p>
+          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[status:dead]{dead},
-              @Identifier[status:ruined]{ruined}, and their
+              <p>Target is @Identifier[condition:dead]{dead},
+              @Identifier[condition:ruined]{ruined}, and their
               @Identifier[core:size]{SIZE} is reduced by 1. If their
               @Identifier[core:size]{SIZE} was already less than 1, it is
               reduced to 0.</p>
@@ -180,7 +180,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/giant-strength.webp
         name: Giant Strength
         system:
@@ -190,7 +190,7 @@ items:
               identifier: property:cumbersome
               type: suppress
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -228,7 +228,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/gliding.webp
         name: Gliding
         system:
@@ -248,7 +248,7 @@ items:
                   value: '1'
               type: changes
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -284,12 +284,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -319,12 +319,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -354,12 +354,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/reach.webp
         name: Reach
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -391,7 +391,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/regenerating.webp
         name: Regenerating
         system:
@@ -412,7 +412,7 @@ items:
               trigger: turnStart
               type: heal
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -433,12 +433,12 @@ items:
               @Identifier[core:hit-points-and-mana-points]{HP}. This does
               <i>not</i> consume your
               @Identifier[core:hit-points-and-mana-points]{hit die}. If you were
-              @Identifier[status:dead]{dead} due to
+              @Identifier[condition:dead]{dead} due to
               @Identifier[core:hit-points-and-mana-points]{HP} loss, this brings
-              you @Identifier[status:alive]{back to life}. If you take
+              you @Identifier[rule:alive]{back to life}. If you take
               @Identifier[damage:fire]{fire damage}, this effect doesn't apply
               on your next @Identifier[core:turns]{turn}. You only
-              @Identifier[status:dead]{die} due to
+              @Identifier[condition:dead]{die} due to
               @Identifier[core:hit-points-and-mana-points]{HP} loss if you start
               your @Identifier[core:turns]{turn} without successfully [[lookup
               name style=lc]]
@@ -459,13 +459,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/melee-damage-boost.webp
         name: Melee Damage Boost
         system:
           _sup: cxo2paC3Eoaf9Gyc
           competence:
-            raw: 0
+            raw: 1
           delivery: weapon
           duration:
             unit: instant
@@ -510,13 +510,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-strength.webp
         name: Improved Strength
         system:
           _sup: cxo2paC3Eoaf9Gyc
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -554,13 +554,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/beastly-strength.webp
         name: Beastly Strength
         system:
           _sup: pq4E0tM9yXnJavEA
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -599,13 +599,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/improved-armor-piercing.webp
         name: Improved Armor Piercing
         system:
           _sup: pq4E0tM9yXnJavEA
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -643,10 +643,10 @@ items:
         <p>A single hydra is represented by multiple different creatures at
         once. There is one @Identifier[creature:hydra-body]{hydra body} and at
         least one hydra head. If the @Identifier[creature:hydra-body]{hydra
-        body} @Identifier[status:dead]{dies} then each hydra head does as well.
-        Otherwise, each hydra head acts independently. No
+        body} @Identifier[condition:dead]{dies} then each hydra head does as
+        well. Otherwise, each hydra head acts independently. No
         @UUID[Compendium.teriock.rules.JournalEntry.condition0000000]{conditions}
-        other than @Identifier[status:dead]{death} are shared. However, each
+        other than @Identifier[condition:dead]{death} are shared. However, each
         hydra head cannot go more than the
         @Identifier[creature:hydra-body]{hydra body's}
         @Identifier[core:size]{SIZE} × 5 feet away from the
@@ -676,7 +676,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     folder: bd20345e7214a088
     img: systems/teriock/src/icons/body-parts/scales.webp
     name: Scales
@@ -706,7 +706,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: Q3eKznomGL4eVOGB
         _key: >-
@@ -716,12 +716,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -742,12 +743,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/weapon.webp
         name: Weapon
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -765,12 +767,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/armor-voiding.webp
         name: Armor Voiding
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           automations:
             parameterChanges:
               _id: parameterChanges

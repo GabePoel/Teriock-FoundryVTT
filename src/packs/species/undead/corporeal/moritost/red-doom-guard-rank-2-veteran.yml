@@ -1,0 +1,425 @@
+_id: dvyPRx7EM6Ux7sX0
+_key: '!items!dvyPRx7EM6Ux7sX0'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.f4fa53da7bdde52e
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.13.8
+effects:
+  - _id: WPnSLdXPauH6iDwJ
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.WPnSLdXPauH6iDwJ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.96a3ad260a44b6d0
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/bodyguard-training.webp
+    name: Bodyguard Training
+    system:
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        raw: '1'
+        unit: minute
+      executionTime:
+        base: passive
+      form: normal
+      identifier: bodyguard-training
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>You gain @Identifier[ability:bodyguard-backup]{Bodyguard Backup}
+          and @Identifier[ability:bodyguard-taunt]{Bodyguard Taunt}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: 0PHdhRQSojTzyJig
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.0PHdhRQSojTzyJig'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.1a2785f526c7ad57
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/fortify-area.webp
+    name: Fortify Area
+    system:
+      automations:
+        iuw4WAwzmlNQvs7e:
+          _id: iuw4WAwzmlNQvs7e
+          all: false
+          angle: '60'
+          attachToToken: false
+          automatic: true
+          deleteOnTurnChange: false
+          excludeToken: true
+          expandWithToken: false
+          innerWidth: '0'
+          multi: false
+          outerWidth: '0'
+          radius: '30'
+          regionType: circle
+          restriction:
+            enabled: true
+            priority: 0
+            type: move
+          targeting: false
+          type: region
+          visibility: 2
+        eb15e1b671a010f5:
+          _id: eb15e1b671a010f5
+          formula: 1d10
+          impact: gainTempHp
+          type: roll
+        fc2613f22401a088:
+          _id: fc2613f22401a088
+          competencies:
+            - 1
+            - 2
+          formula: 1d10 + (@p)d10
+          impact: gainTempHp
+          type: roll
+        a678f22a0f730677:
+          _id: a678f22a0f730677
+          competencies:
+            - 2
+          formula: 1d10 + (@f)d10
+          impact: gainTempHp
+          type: roll
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        raw: '24'
+        unit: hour
+      executionTime:
+        base: Short Rest
+        slow:
+          unit: shortRest
+      form: normal
+      identifier: fortify-area
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>You may spend a @Identifier[core:short-rest]{short rest} building
+          defensive fortifications around the area you are resting in. The area
+          must not be greater than 30 feet wide in any direction. You and your
+          allies that are in this are when @Identifier[core:combat]{combat}
+          begins gain [[/gainTempHp 1d10]]
+          @Identifier[core:temporary-hit-points]{temporary HP} for the duration
+          of that @Identifier[core:combat]{combat}. This area counts as having
+          been "fortified".</p>
+        fluent: >-
+          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@f)d10]]
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+        proficient: >-
+          <p>You and your allies instead gain [[/gainTempHp 1d10 + (@p)d10]]
+          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      requirements: <p>You remain in the targeted area.</p>
+      skill: true
+      standard: true
+      targets:
+        - area
+    transfer: true
+    type: ability
+  - _id: A4im5MWvCxmM8xzm
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.A4im5MWvCxmM8xzm'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.7521f8bdad437902
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/tumble.webp
+    name: Tumble
+    system:
+      automations:
+        KZJ2N3W1O5Hm0Y4a:
+          _id: KZJ2N3W1O5Hm0Y4a
+          display:
+            label: Move Randomly
+          distance: '5'
+          movementAction: walk
+          origin: random
+          originBarrier: true
+          type: move
+        LGh4yKXRJOFrgnM2:
+          _id: LGh4yKXRJOFrgnM2
+          display:
+            label: Move Back
+          distance: '5'
+          movementAction: walk
+          origin: target
+          originBarrier: true
+          type: move
+        AW2QK35iCBSYIP88:
+          _id: AW2QK35iCBSYIP88
+          executor: false
+          multi: false
+          relation: include
+          status: snared
+          target: false
+          type: status
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        raw: '1'
+        unit: minute
+      effectTypes:
+        - movement
+      endCondition: >-
+        <p>At the start of each of your @Identifier[core:turns]{turns}, you roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+      executionTime:
+        base: r1
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: turn
+          method: roll
+          relation: executor
+          roll:
+            comparison: gte
+            formula: 2d4kh1
+            threshold: '4'
+          skip: 0
+          timing: start
+          type: combat
+      form: normal
+      identifier: tumble
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>You are moved 5 feet in the direction opposite the source of the
+          damage and become @Identifier[condition:snared]{snared}. If there is
+          no direction associated with the source of the
+          @Identifier[core:damage]{damage}, you move in a random direction
+          instead. This movement does not count as a trigger for
+          @Identifier[ability:opportunity-attack]{Opportunity Attack}. If this
+          all completes without interruption, you take only half the triggering
+          @Identifier[core:damage]{damage}. If the
+          @Identifier[core:damage]{damage} has multiple types, each type is
+          rounded down independently.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You would take @Identifier[core:damage]{damage}.</p>
+    transfer: true
+    type: ability
+  - _id: QTwygiNnoFgmLtLQ
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.QTwygiNnoFgmLtLQ'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.4f0fea9742a070ef
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/unbreachability.webp
+    name: Unbreachability
+    system:
+      automations:
+        JSQ4VFQaY3W9x3gL:
+          _id: JSQ4VFQaY3W9x3gL
+          changeType: upgrade
+          key: system.av.bonus
+          qualifier: and(@equipment, @class.armor)
+          target: armament
+          type: childChange
+          value: '1'
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: passive
+      form: normal
+      identifier: unbreachability
+      interaction: manifest
+      maneuver: passive
+      overview:
+        base: >-
+          <p>Armor you wear is
+          @Identifier[property:unbreachable]{unbreachable}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+    transfer: true
+    type: ability
+  - _id: ZUW1RKwyd44AVujF
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.ZUW1RKwyd44AVujF'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.0a310dcb43626a6c
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/bodyguard-backup.webp
+    name: Bodyguard Backup
+    system:
+      _sup: WPnSLdXPauH6iDwJ
+      automations:
+        28f5387f29e5aae1:
+          _id: 28f5387f29e5aae1
+          macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
+          trigger: executeFeat
+          type: abilityMacro
+      competence:
+        raw: 1
+      delivery: weapon
+      duration:
+        raw: '1'
+        unit: minute
+      executionTime:
+        base: r0
+      form: normal
+      identifier: bodyguard-backup
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Pick another creature within range. They gain
+          @Identifier[core:advantage]{advantage} on the next
+          @Identifier[core:movement]{MOV} or @Identifier[core:strength]{STR}
+          @Identifier[core:feat-interaction]{feat save} they make.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You are not also using @Identifier[ability:bodyguard-taunt]{Bodyguard
+        Taunt}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You attempt an @Identifier[core:attack-interaction]{attack} against
+        another creature.</p>
+    transfer: true
+    type: ability
+  - _id: o1D9Sqg4qjNZg8vC
+    _key: '!items.effects!dvyPRx7EM6Ux7sX0.o1D9Sqg4qjNZg8vC'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.e5f8ee3fe3112156
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    img: systems/teriock/src/icons/abilities/bodyguard-taunt.webp
+    name: Bodyguard Taunt
+    system:
+      _sup: WPnSLdXPauH6iDwJ
+      automations:
+        6cebaedf0c5c1507:
+          _id: 6cebaedf0c5c1507
+          executor: false
+          multi: false
+          relation: include
+          status: goaded
+          target: true
+          type: status
+      competence:
+        raw: 1
+      delivery: weapon
+      duration:
+        raw: '10'
+        unit: second
+      executionTime:
+        base: r0
+      expirations:
+        66672059c7a29a30:
+          _id: 66672059c7a29a30
+          event: turn
+          method: automatic
+          relation: executor
+          skip: 0
+          timing: start
+          type: combat
+      form: normal
+      identifier: bodyguard-taunt
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>Pick another creature within range. They are
+          @Identifier[condition:goaded]{goaded} until the start of your next
+          @Identifier[core:turns]{turn}.</p>
+      powerSources:
+        - martial
+      range:
+        raw: '5'
+        unit: ft
+      requirements: >-
+        <p>You are not also using
+        @Identifier[ability:bodyguard-backup]{Bodyguard Backup}.</p>
+      skill: true
+      standard: true
+      targets:
+        - creature
+      trigger: >-
+        <p>You attempt an @Identifier[core:attack-interaction]{attack} against
+        another creature.</p>
+    transfer: true
+    type: ability
+folder: 0b00935e53673daa
+img: systems/teriock/src/icons/ranks/rank-2-veteran.webp
+name: Rank 2 Veteran
+system:
+  _sup: dd82c49b923ee750
+  archetype: warrior
+  class: veteran
+  competence:
+    raw: 1
+  description: >-
+    <p>Jaded and tough, these warriors act as if they have seen it all.
+    Obviously they are not all seasoned warriors, but the training of a
+    @Identifier[class:veteran]{Veteran} involves a great deal of time in battle,
+    so even a first rank @Identifier[class:veteran]{Veteran} has seen more
+    action than other first rank warriors. The strategy of the
+    @Identifier[class:veteran]{Veteran} is to be an immovable wall, and hold the
+    line. @Identifier[class:veteran]{Veterans} rely on defense in battle, always
+    working to better ensure their protection, which is why they survive to be
+    veterans. If you are a @Identifier[class:veteran]{Veteran} be jaded,
+    unimpressed, hard, and pessimistic.</p>
+  identifier: rank-2-veteran
+  innate: false
+  maxAv: 4
+  number: 2
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d12
+    mp:
+      disabled: false
+      formula: 1d8
+type: rank

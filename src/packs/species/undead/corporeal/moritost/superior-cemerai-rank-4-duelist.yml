@@ -1,0 +1,181 @@
+_id: c3vARGYgkapF7wTV
+_key: '!items!c3vARGYgkapF7wTV'
+_stats:
+  compendiumSource: Compendium.teriock.classes.Item.c9ac57bad8e1fbb5
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.13.8
+effects:
+  - _id: ygSqYQJfPOv9a0Fr
+    _key: '!items.effects!c3vARGYgkapF7wTV.ygSqYQJfPOv9a0Fr'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.2979c948c07b8151
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    flags:
+      teriock:
+        category: combat
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/final-fury.webp
+    name: Final Fury
+    system:
+      automations:
+        Axozk1FdcJFFmu6r:
+          _id: Axozk1FdcJFFmu6r
+          changeType: add
+          key: system.boosts.damage
+          qualifier: '@prop.weapon'
+          target: armament
+          type: childChange
+          value: '1'
+        XAFvURmf8rUSddkm:
+          _id: XAFvURmf8rUSddkm
+          changeType: upgrade
+          key: system.piercing.raw
+          qualifier: '@prop.weapon'
+          target: armament
+          type: childChange
+          value: '2'
+        5e9e1d2033fe152a:
+          _id: 5e9e1d2033fe152a
+          executor: false
+          multi: false
+          relation: apply
+          status: ruined
+          target: false
+          type: status
+      competence:
+        raw: 1
+      delivery: self
+      duration:
+        unit: unlimited
+      executionTime:
+        base: r0
+      expirations:
+        05f6d4dd9db56877:
+          _id: 05f6d4dd9db56877
+          statuses:
+            absent:
+              - null
+          type: status
+      form: normal
+      identifier: final-fury
+      interaction: manifest
+      maneuver: reactive
+      overview:
+        base: >-
+          <p>While @Identifier[condition:defying-death]{defying death}, your
+          @Wiki[Category:Weapon delivery abilities]{weapon}
+          @Identifier[core:attack-interaction]{attacks} are
+          @Identifier[keyword:boosted]{boosted} and @Identifier[keyword:ub]{UB}.
+          When you stop @Identifier[condition:defying-death]{defying death}, you
+          @Identifier[condition:dead]{die} and your body is
+          @Identifier[condition:ruined]{ruined}.</p>
+      powerSources:
+        - martial
+      range:
+        unit: self
+      skill: true
+      standard: true
+      targets:
+        - self
+      trigger: <p>You start @Identifier[condition:defying-death]{defying death}.</p>
+    transfer: true
+    type: ability
+  - _id: yZ3N79vChFytd8iT
+    _key: '!items.effects!c3vARGYgkapF7wTV.yZ3N79vChFytd8iT'
+    _stats:
+      compendiumSource: Compendium.teriock.abilities.ActiveEffect.07806fe5345b9727
+      coreVersion: '14'
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.13.8
+    flags:
+      teriock:
+        category: support
+        defaultAbility: true
+    img: systems/teriock/src/icons/abilities/hara-kiri.webp
+    name: Hara-Kiri
+    system:
+      competence:
+        raw: 1
+      delivery: sight
+      duration:
+        unit: unlimited
+      executionTime:
+        base: 10 Minutes
+        slow:
+          raw: '10'
+          unit: minute
+      form: normal
+      identifier: hara-kiri
+      interaction: manifest
+      maneuver: slow
+      overview:
+        base: >-
+          <p>The next time you would pull from the
+          @Identifier[core:death-bag]{death bag}, you will pull twice with a
+          total number of stones between the two pulls equal to the amount you
+          would have pulled had you not used [[lookup name]]. You declare how
+          many stones are in each group prior to pulling and then do both pulls
+          from the @Identifier[core:death-bag]{death bag}. The pulls are
+          independent and you take the effects of both pulls. Add one black
+          stone to the @Identifier[core:death-bag]{death bag} prior to making
+          each pull. You may not use [[lookup name]] if you would pull less than
+          3 stones from the @Identifier[core:death-bag]{death bag}.</p>
+        fluent: >-
+          <p>You know all the details of any @Wiki[Core:Divine
+          Intervention]{divine intervention} you are offered if you
+          @Identifier[core:permanent-death]{permanently die} from these
+          pulls.</p>
+        proficient: <p>You do not need to add an additional black stone to each pull.</p>
+      powerSources:
+        - spiritual
+      range:
+        raw: '5'
+        unit: ft
+      ritual: true
+      skill: true
+      standard: true
+      sustained: true
+      targets:
+        - creature
+    transfer: true
+    type: ability
+folder: 0b00935e53673daa
+img: systems/teriock/src/icons/ranks/rank-4-duelist.webp
+name: Rank 4 Duelist
+system:
+  _sup: d3672cafa9fd70c4
+  archetype: warrior
+  class: duelist
+  competence:
+    raw: 1
+  description: >-
+    <p>Honor-bound and honest to the core, @Identifier[class:duelist]{Duelists}
+    are often judges and referees for duels as well as devoted warriors.
+    @Identifier[class:duelist]{Duelists} prize the honor of their family above
+    any sort of personal gain and thus strive for excellence in everything that
+    they do. A true @Identifier[class:duelist]{Duelist} wins the battle before
+    it has begun. Strategy and personal perfection are the
+    @Identifier[class:duelist]{Duelist}'s way. If you are a
+    @Identifier[class:duelist]{Duelist}, be calm, focused, well spoken and
+    confident in yourself.</p>
+  flaws: >-
+    <p>Duelists cannot use
+    @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}.</p>
+  identifier: rank-4-duelist
+  innate: false
+  maxAv: 4
+  number: 4
+  statDice:
+    hp:
+      disabled: false
+      formula: 1d12
+    mp:
+      disabled: false
+      formula: 1d8
+type: rank

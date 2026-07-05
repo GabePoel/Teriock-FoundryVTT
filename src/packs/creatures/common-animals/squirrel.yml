@@ -15,7 +15,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: 2knYszv5eq38Z3sG
         _key: >-
@@ -25,12 +25,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/dense-intelligence.webp
         name: Dense Intelligence
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -60,12 +60,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/no-hands.webp
         name: No Hands
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -95,12 +95,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -130,12 +130,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -165,12 +165,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -200,7 +200,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/poison-strike.webp
         name: Poison Strike
         system:
@@ -235,14 +235,14 @@ items:
               target: false
               type: status
           competence:
-            raw: 0
+            raw: 1
           delivery: weapon
           duration:
             raw: '24'
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[status:dead]{dies}.</p>
+          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -252,10 +252,10 @@ items:
           maneuver: active
           overview:
             fluent: >-
-              <p>The @Identifier[status:poisoned]{poison} instead deals
+              <p>The @Identifier[condition:poisoned]{poison} instead deals
               [[/damage 1d10[toxic]]] @Identifier[core:damage]{damage}.</p>
             proficient: >-
-              <p>The @Identifier[status:poisoned]{poison} instead deals
+              <p>The @Identifier[condition:poisoned]{poison} instead deals
               [[/damage 1d8[toxic]]] @Identifier[core:damage]{damage}.</p>
           piercing:
             raw: 0
@@ -265,9 +265,9 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[status:poisoned]{poisoned}. The
-              @Identifier[status:poisoned]{poison} deals [[/damage 1d6[toxic]]]
-              @Identifier[core:damage]{damage}.</p>
+              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              @Identifier[condition:poisoned]{poison} deals [[/damage
+              1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
           targets:
             - creature
@@ -281,12 +281,12 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/tiny-strength.webp
         name: Tiny Strength
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -316,7 +316,7 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/abilities/unglue.webp
         name: Unglue
         system:
@@ -328,7 +328,7 @@ items:
               showConfirmationDialog: true
               type: common
           competence:
-            raw: 0
+            raw: 1
           costs:
             primary:
               mp:
@@ -354,7 +354,7 @@ items:
           range:
             unit: contact
           requirements: >-
-            <p>Target's bearer is @Identifier[status:down]{down} or target it
+            <p>Target's bearer is @Identifier[condition:down]{down} or target it
             @Identifier[property:searchable]{searchable}.</p>
           skill: true
           standard: true
@@ -393,7 +393,7 @@ items:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.0
+      systemVersion: 0.13.8
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -403,12 +403,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -427,12 +428,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
@@ -453,12 +455,13 @@ items:
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.13.0
+          systemVersion: 0.13.8
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
           applyIfDampened: true
           applyIfDeattuned: true
+          applyIfDestroyed: false
           competence:
             raw: 0
           description: >-
