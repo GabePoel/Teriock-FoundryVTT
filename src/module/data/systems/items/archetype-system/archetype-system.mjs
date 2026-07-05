@@ -37,16 +37,6 @@ export default class ArchetypeSystem
     });
   }
 
-  /**
-   * Derive a competence value.
-   * @returns {Teriock.System.CompetenceLevel}
-   */
-  #deriveCompetence() {
-    const activeRanks = this.ranks.filter(r => r.active);
-    if (activeRanks.length === 0) { return 0; }
-    return Math.max(...activeRanks.map(r => r.system.competence.value));
-  }
-
   /** @inheritDoc */
   get _displayMessagesSuppression() {
     const messages = super._displayMessagesSuppression;
@@ -114,6 +104,5 @@ export default class ArchetypeSystem
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.actor) { this.competence.raw = this.#deriveCompetence(); }
   }
 }
