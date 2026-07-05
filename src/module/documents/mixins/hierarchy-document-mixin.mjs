@@ -493,7 +493,8 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteSubDocuments(ids = [], operation = {}) {
-        ids = ids.filter(id => this.subs.map(s => s._id).includes(id));
+        const subIds = new Set(this.subs.map(s => s._id));
+        ids = ids.filter(id => subIds.has(id));
         if (this.parent) { return this.parent.deleteEmbeddedDocuments(this.documentName, ids, operation); }
 
         if (this.inCompendium) { operation.pack = this.collection.collection; }
@@ -585,7 +586,8 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async updateSubDocuments(updates = [], operation = {}) {
-        updates = updates.filter(update => this.subs.map(s => s._id).includes(update._id));
+        const subIds = new Set(this.subs.map(s => s._id));
+        updates = updates.filter(update => subIds.has(update._id));
         if (this.parent) { return this.parent.updateEmbeddedDocuments(this.documentName, updates, operation); }
 
         if (this.inCompendium) { operation.pack = this.collection?.collection; }

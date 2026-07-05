@@ -12,7 +12,7 @@ class UnitDialog extends DialogV2 {
    * @private
    */
   #updateInputs(rawInput, value) {
-    rawInput.disabled = !this.unitModel.constructor.finiteChoiceEntries.map(e => e.id).includes(value);
+    rawInput.disabled = !this.unitModel.constructor.finiteChoiceEntries.some(e => e.id === value);
   }
 
   /** @type {BaseUnitModel} */
@@ -177,8 +177,8 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {"zero" | "finite" | "infinite"}
    */
   get unitType() {
-    if (this.constructor.zeroChoiceEntries.map(e => e.id).includes(this.unit)) { return "zero"; }
-    else if (this.constructor.finiteChoiceEntries.map(e => e.id).includes(this.unit)) { return "finite"; }
+    if (this.constructor.zeroChoiceEntries.some(e => e.id === this.unit)) { return "zero"; }
+    else if (this.constructor.finiteChoiceEntries.some(e => e.id === this.unit)) { return "finite"; }
     return "infinite";
   }
 

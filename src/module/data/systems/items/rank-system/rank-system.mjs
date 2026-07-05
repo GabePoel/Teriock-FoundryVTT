@@ -68,9 +68,9 @@ export default class RankSystem
    */
   #stageArchetypeCreation() {
     const archetypeConfig = TERIOCK.config.class.archetypes[this._source.archetype];
-    if (
-      !archetypeConfig?.dontStage && !this.actor.archetypes.map(a => a.typedIdentifier).includes(this.archetype)
-    ) { this.actor._stagedItemCreations.add(this.archetype); }
+    if (!archetypeConfig?.dontStage && !this.actor.archetypes.some(a => a.typedIdentifier === this.archetype)) {
+      this.actor._stagedItemCreations.add(this.archetype);
+    }
   }
 
   /**

@@ -50,7 +50,7 @@ export default class EquipmentPreviewModel extends BasePreviewModel {
    * @returns {boolean}
    */
   #hasProperty(equipment, propertyKey) {
-    return (equipment.properties ?? []).map(p => toCamelCase(p.forcedIdentifier)).includes(propertyKey);
+    return (equipment.properties ?? []).some(p => toCamelCase(p.forcedIdentifier) === propertyKey);
   }
 
   /** @inheritDoc */

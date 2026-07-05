@@ -76,7 +76,7 @@ export default class PowerSystem
     if (yes === false) { return false; }
 
     if (
-      this.actor?.powers.map(p => p.system.identifier).includes(this.identifier)
+      this.actor?.powers.some(p => p.system.identifier === this.identifier)
       && ["mage", "semi", "warrior"].includes(this.identifier)
     ) {
       return false;

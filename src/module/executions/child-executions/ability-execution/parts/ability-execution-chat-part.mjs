@@ -26,7 +26,8 @@ export default function AbilityExecutionChatPart(Base) {
         const existing = associations.find(a => a.title === association.title);
         if (!existing) { associations.push(association); }
         else {
-          existing.cards.push(...association.cards.filter(c => !existing.cards.map(e => e.uuid).includes(c.uuid)));
+          const existingUuids = new Set(existing.cards.map(e => e.uuid));
+          existing.cards.push(...association.cards.filter(c => !existingUuids.has(c.uuid)));
         }
       }
 
@@ -35,9 +36,8 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {string} key
        */
       #addTrackersToMap(trackers, key) {
-        this.#trackerMap[key].push(
-          ...trackers.filter(t => !this.#trackerMap[key].map(e => e?.value).includes(t?.value)),
-        );
+        const existingValues = new Set(this.#trackerMap[key].map(e => e?.value));
+        this.#trackerMap[key].push(...trackers.filter(t => !existingValues.has(t?.value)));
       }
 
       /**
