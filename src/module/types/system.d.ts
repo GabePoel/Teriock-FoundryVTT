@@ -28,6 +28,8 @@ declare global {
       dontRenderSheets?: ID<TeriockDocument>[];
       /** Tracker to see if the value of `cachedKeepId` should be read. */
       isKeepIdCached?: boolean;
+      /** Keep competence instead of inheriting from elder. */
+      keepCompetence?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
     } & _Operation;

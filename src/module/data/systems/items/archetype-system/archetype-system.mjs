@@ -30,6 +30,16 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
     });
   }
 
+  /**
+   * Derive a competence value.
+   * @returns {Teriock.System.CompetenceLevel}
+   */
+  #deriveCompetence() {
+    const activeRanks = this.ranks.filter(r => r.active);
+    if (activeRanks.length === 0) { return 0; }
+    return Math.max(...activeRanks.map(r => r.system.competence.value));
+  }
+
   /** @inheritDoc */
   get _displayMessagesSuppression() {
     const messages = super._displayMessagesSuppression;
@@ -100,19 +110,9 @@ export default class ArchetypeSystem extends mixClasses(BaseItemSystem, systemMi
     return this.actor.ranks.filter(r => r.system._source.archetype === this.identifier);
   }
 
-  /**
-   * Derive a competence value.
-   * @returns {Teriock.System.CompetenceLevel}
-   */
-  deriveCompetence() {
-    const activeRanks = this.ranks.filter(r => r.active);
-    if (activeRanks.length === 0) { return 0; }
-    return Math.max(...activeRanks.map(r => r.system.competence.value));
-  }
-
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    this.competence.raw = this.deriveCompetence();
+    if (this.actor) { this.competence.raw = this.#deriveCompetence(); }
   }
 }

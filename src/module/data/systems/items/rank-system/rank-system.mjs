@@ -220,7 +220,10 @@ export default class RankSystem
     if (this.parent.sup?.type === "species") { this.innate = true; }
     if (
       game.settings.get("teriock", "armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
-    ) { this.competence.raw = 0; }
+    ) {
+      this.competence.raw = 0;
+      for (const e of this.parent.effects) { foundry.utils.setProperty(e, "system.competence.raw", 0); }
+    }
   }
 
   /** @inheritDoc */

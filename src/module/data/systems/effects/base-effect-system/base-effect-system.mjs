@@ -185,7 +185,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     if (yes === false) { return false; }
 
     if (options?.keepCompetence) { return; }
-    const competence = this.parent.elder?.system?.competence?.raw;
+    const competence = (await this.parent.getElder())?.system?.competence?.raw;
     if (typeof competence === "number") {
       this.parent.updateSource({ "system.competence.raw": competence });
     }
