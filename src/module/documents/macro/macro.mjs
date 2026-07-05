@@ -1,5 +1,4 @@
 import { mixClasses } from "../../helpers/construction.mjs";
-import { dedent } from "../../helpers/string.mjs";
 import { findBestDocument } from "../../helpers/utils.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
@@ -21,6 +20,24 @@ export default class TeriockMacro
     documentMixins.UsableDocumentMixin,
   )
 {
+  /**
+   * Create a use macro from the given document.
+   * @param {AnyChildDocument} doc
+   * @param {string} command
+   * @param {object} flags - Teriock-scoped flags specific to the macro type.
+   * @returns {Promise<TeriockMacro>}
+   */
+  static async #makeUseMacro(doc, command, flags) {
+    return this.create({
+      command,
+      flags: { teriock: { ...flags, user: game.user.id } },
+      folder: (await this.ensureHotbarFolder())?.id,
+      img: doc.img,
+      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: doc.name }),
+      type: "script",
+    });
+  }
+
   /**
    * Hotbar folder for the current user.
    * @returns {TeriockFolder|null}
@@ -83,17 +100,8 @@ export default class TeriockMacro
    */
   static async makeGeneralUseMacro(doc) {
     const lookup = doc.lookupKey;
-    const command = dedent(`
-    await Macro.implementation.useDocumentGeneral("${lookup}", { actor, event })`);
-    const macroData = {
-      command,
-      flags: { teriock: { macroLookupKey: lookup, macroType: "useGeneral", user: game.user.id } },
-      folder: (await this.ensureHotbarFolder())?.id,
-      img: doc.img,
-      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: doc.name }),
-      type: "script",
-    };
-    return this.create(macroData);
+    const command = `await Macro.implementation.useDocumentGeneral("${lookup}", { actor, event })`;
+    return this.#makeUseMacro(doc, command, { macroLookupKey: lookup, macroType: "useGeneral" });
   }
 
   /**
@@ -102,17 +110,8 @@ export default class TeriockMacro
    * @returns {Promise<TeriockMacro>}
    */
   static async makeLinkedUseMacro(doc) {
-    const command = dedent(`
-    await Macro.implementation.useDocumentLinked("${doc.uuid}", { event: event })`);
-    const macroData = {
-      command,
-      flags: { teriock: { macroDocumentUuid: doc.uuid, macroType: "useLinked", user: game.user.id } },
-      folder: (await this.ensureHotbarFolder())?.id,
-      img: doc.img,
-      name: _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: doc.name }),
-      type: "script",
-    };
-    return this.create(macroData);
+    const command = `await Macro.implementation.useDocumentLinked("${doc.uuid}", { event: event })`;
+    return this.#makeUseMacro(doc, command, { macroDocumentUuid: doc.uuid, macroType: "useLinked" });
   }
 
   /**
