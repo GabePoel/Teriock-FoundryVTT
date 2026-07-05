@@ -57,6 +57,10 @@ export default function ActorProtectionsPart(Base) {
           this.protections.resistances.effectTypes.add("revival");
         }
         if (this.parent.statuses.has("frenzied")) { this.protections.resistances.statuses.add("frightened"); }
+        if (this.parent.statuses.has("defyingDeath")) {
+          this.protections.resistances.statuses.add("dead");
+          this.protections.resistances.statuses.add("unconscious");
+        }
       }
 
       /**
