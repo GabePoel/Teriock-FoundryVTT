@@ -175,13 +175,9 @@ export default function DocumentCreationCommonSheetPart(Base) {
         const innate = this.document.documentName !== "Actor";
         if (!rankClass) { return; }
         const classIdentifier = toKebabCase(rankClass);
-        const possibleRanks = await Promise.all([
-          teriock.fromIdentifier(`rank:rank-1-${classIdentifier}`),
-          teriock.fromIdentifier(`rank:rank-2-${classIdentifier}`),
-          teriock.fromIdentifier(`rank:rank-3-${classIdentifier}`),
-          teriock.fromIdentifier(`rank:rank-4-${classIdentifier}`),
-          teriock.fromIdentifier(`rank:rank-5-${classIdentifier}`),
-        ]);
+        const possibleRanks = await Promise.all(
+          Array.from({ length: 5 }, (_v, i) => teriock.fromIdentifier(`rank:rank-${i + 1}-${classIdentifier}`)),
+        );
         const referenceRank = /**@type {TeriockRank} */ await DocumentSelector.selectSingle(possibleRanks, {
           openable: true,
           title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.title"),
@@ -197,47 +193,34 @@ export default function DocumentCreationCommonSheetPart(Base) {
         }
         /** @type {TeriockRank[]} */
         const existingRanks = (await this.document.getRanks()).filter(r => r.system._source.class === classIdentifier);
-        const combatAbilityNames = new Set(
-          referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === "combat").map(a => a.name),
-        );
-        const availableCombatAbilityNames = new Set(combatAbilityNames);
-        const supportAbilityNames = new Set(
-          referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === "support").map(a => a.name),
-        );
-        const availableSupportAbilityNames = new Set(supportAbilityNames);
+        const availableNames = {};
+        for (const category of ["combat", "support"]) {
+          availableNames[category] = new Set(
+            referenceRank.abilities.filter(a => a.getFlag("teriock", "category") === category).map(a => a.name),
+          );
+        }
         for (const existingRank of existingRanks) {
           for (const ability of existingRank.abilities) {
             const existingAbility = rank.abilities.find(a => a.name === ability.name);
             if (existingAbility) {
-              availableCombatAbilityNames.delete(existingAbility.name);
-              availableSupportAbilityNames.delete(existingAbility.name);
+              availableNames.combat.delete(existingAbility.name);
+              availableNames.support.delete(existingAbility.name);
             }
           }
         }
         const chosenAbilityNames = [];
-        if (availableCombatAbilityNames.size > 1) {
-          const availableCombatAbilities = referenceRank.abilities.filter(a => availableCombatAbilityNames.has(a.name));
-          const chosenCombatAbility = await DocumentSelector.selectSingle(availableCombatAbilities, {
-            openable: true,
-            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectCombat"),
-          });
-          const chosenCombatAbilityName = chosenCombatAbility.name;
-          chosenAbilityNames.push(chosenCombatAbilityName);
-        } else {
-          chosenAbilityNames.push(...availableCombatAbilityNames);
-        }
-        if (availableSupportAbilityNames.size > 1) {
-          const availableSupportAbilities = referenceRank.abilities.filter(a =>
-            availableSupportAbilityNames.has(a.name)
-          );
-          const chosenSupportAbility = await DocumentSelector.selectSingle(availableSupportAbilities, {
-            openable: true,
-            title: _loc("TERIOCK.SHEETS.Common.MENU.CreateRank.selectSupport"),
-          });
-          const supportAbilityName = chosenSupportAbility.name;
-          chosenAbilityNames.push(supportAbilityName);
-        } else {
-          chosenAbilityNames.push(...availableSupportAbilityNames);
+        for (const [category, titleKey] of [["combat", "selectCombat"], ["support", "selectSupport"]]) {
+          const available = availableNames[category];
+          if (available.size > 1) {
+            const availableAbilities = referenceRank.abilities.filter(a => available.has(a.name));
+            const chosenAbility = await DocumentSelector.selectSingle(availableAbilities, {
+              openable: true,
+              title: _loc(`TERIOCK.SHEETS.Common.MENU.CreateRank.${titleKey}`),
+            });
+            chosenAbilityNames.push(chosenAbility.name);
+          } else {
+            chosenAbilityNames.push(...available);
+          }
         }
         const abilities = rank.effects;
         const allowedAbilityIds = new Set();
