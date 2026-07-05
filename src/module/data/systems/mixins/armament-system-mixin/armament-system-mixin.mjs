@@ -338,7 +338,7 @@ export default function ArmamentSystemMixin(Base) {
 
       /** @inheritDoc */
       get useIcon() {
-        return formulaExists(this.hasAttack) ? TERIOCK.display.icons.ui.damage : super.useIcon;
+        return this.hasAttack ? TERIOCK.display.icons.ui.damage : super.useIcon;
       }
 
       /**

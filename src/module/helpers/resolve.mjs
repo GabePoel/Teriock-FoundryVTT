@@ -25,7 +25,7 @@ export async function resolveDocument(syncDoc) {
  * @returns {Promise<T[]>}
  */
 export async function resolveDocuments(syncDocs, options = {}) {
-  const fetched = await Promise.all(syncDocs.map(async syncDoc => resolveDocument(syncDoc, options)));
+  const fetched = await Promise.all(syncDocs.map(syncDoc => resolveDocument(syncDoc)));
   let out = [...fetched.filter(d => d?.documentName !== "Folder")];
   const folders = /** @type {TeriockFolder[]} */ fetched.filter(d => d?.documentName === "Folder");
   if (options.expandFolders) {
@@ -129,6 +129,6 @@ export async function inferCompendiumSource(document) {
  * @returns {Promise<void>}
  */
 export async function inferChildCompendiumSources(document) {
-  const children = (await document.getChildArray()).map(Boolean);
+  const children = (await document.getChildArray()).filter(Boolean);
   await Promise.all(children.map(async c => await inferCompendiumSource(c)));
 }

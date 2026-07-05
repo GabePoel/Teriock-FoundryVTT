@@ -338,6 +338,6 @@ export async function fromKey(uuidOrIdentifier, options = {}) {
  */
 export function omit(obj, keys) {
   const out = { ...obj };
-  for (const k of keys) { foundry.utils.deleteProperty(out, k); }
+  for (const k of keys) { delete out[k]; }
   return out;
 }
