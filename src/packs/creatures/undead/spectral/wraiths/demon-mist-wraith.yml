@@ -7440,43 +7440,47 @@ items:
           disabled: false
           formula: 1d10
     type: rank
-  - _id: ZqAKgWEcF4PA0Wgx
-    _key: '!actors.items!fdec3f206b747460.ZqAKgWEcF4PA0Wgx'
+  - _id: cAAqCBSIinMls8JN
+    _key: '!actors.items!fdec3f206b747460.cAAqCBSIinMls8JN'
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
+      compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.13.8
     effects:
-      - _id: 4XNvcPLM4s2CAFYb
+      - _id: 8e9roKoeCSmTjbbo
         _key: >-
-          !actors.items.effects!fdec3f206b747460.ZqAKgWEcF4PA0Wgx.4XNvcPLM4s2CAFYb
+          !actors.items.effects!fdec3f206b747460.cAAqCBSIinMls8JN.8e9roKoeCSmTjbbo
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.13.8
-        img: systems/teriock/src/icons/abilities/semi-techniques.webp
-        name: Semi Techniques
+        img: systems/teriock/src/icons/abilities/warrior-techniques.webp
+        name: Warrior Techniques
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
           executionTime:
             base: passive
           form: normal
-          identifier: semi-techniques
+          identifier: warrior-techniques
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>For every 2 ranks you train in @Identifier[archetype:semi]{semi
-              classes}, you gain a @Wiki[Category:Semi guildmaster
-              abilities]{semi guildmaster ability} of your choice.</p>
+              <p>For every 2 ranks you train in
+              @Identifier[archetype:warrior]{warrior classes}, you gain a
+              @Wiki[Category:Warrior guildmaster abilities]{warrior guildmaster
+              ability} of your choice. You also gain
+              @Identifier[keyword:limited]{Limited}
+              @Identifier[ability:defensive-martial-arts]{Defensive Martial
+              Arts}.</p>
           powerSources:
             - martial
           range:
@@ -7487,28 +7491,103 @@ items:
             - self
         transfer: true
         type: ability
-    folder: 57a3f724d5743aa3
-    img: systems/teriock/src/icons/archetypes/semi.webp
-    name: Semi
+      - _id: aOvOlScH5bn7jX7m
+        _key: >-
+          !actors.items.effects!fdec3f206b747460.cAAqCBSIinMls8JN.aOvOlScH5bn7jX7m
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
+          coreVersion: '14'
+          lastModifiedBy: teriockBuilder00
+          systemId: teriock
+          systemVersion: 0.13.8
+        img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
+        name: Defensive Martial Arts
+        system:
+          _sup: 8e9roKoeCSmTjbbo
+          automations:
+            F9NLbFodo8GgQLdh:
+              _id: F9NLbFodo8GgQLdh
+              changeType: upgrade
+              competencies:
+                - 0
+              key: system.bv.bonus
+              qualifier: '@prop.handy'
+              target: armament
+              type: childChange
+              value: '1'
+            iijE8Q6bC3GKvrTX:
+              _id: iijE8Q6bC3GKvrTX
+              changeType: upgrade
+              competencies:
+                - 1
+              key: system.bv.bonus
+              qualifier: '@prop.handy'
+              target: armament
+              type: childChange
+              value: '2'
+            pI8dAIbbmiCqE5n9:
+              _id: pI8dAIbbmiCqE5n9
+              changeType: upgrade
+              competencies:
+                - 2
+              key: system.bv.bonus
+              qualifier: '@prop.handy'
+              target: armament
+              type: childChange
+              value: '3'
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: defensive-martial-arts
+          interaction: manifest
+          limitation: <p>While wearing @Wiki[Category:Armor]{armor} only.</p>
+          maneuver: passive
+          overview:
+            base: >-
+              <p>Your @Identifier[body:hand]{hands} and other
+              @Identifier[property:handy]{handy body parts} count as
+              @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}
+              for the purposes of @Wiki[Category:Weapon target
+              abilities]{abilities that target them} (although they cannot be
+              @Identifier[property:shattered]{shattered} or
+              @Identifier[property:destroyed]{destroyed}). You may
+              @Identifier[core:block-interaction]{block} with them and their
+              @Wiki[Core:Block Value]{BV} is +1.</p>
+            fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
+            proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 380dac2710b593e9
+    img: systems/teriock/src/icons/archetypes/warrior.webp
+    name: Warrior
     system:
       competence:
         raw: 1
       description: >-
-        <p>Semis are classes that fill tactical or support roles in
-        @Identifier[core:combat]{combat}. Some are very skilled in close combat
-        and have a variety of @Wiki[Category:Semi archetype skills]{skills} to
-        achieve their aim, and others are more suited to fighting at range. All
-        are classes that combine well with either
-        @Identifier[archetype:warrior]{warriors} or
-        @Identifier[archetype:mage]{mages}, making semis the most versatile
-        class archetype.</p>
-      identifier: semi
+        <p>Warriors are primarily fighters and can handle themselves well in
+        heavy melee @Identifier[core:combat]{combat}. Though they all have
+        similar combat strength, they achieve different goals in battle in order
+        to win their objective.</p>
+      identifier: warrior
       instructions: >-
         <p>Add @Pack[teriock.abilities]{abilities} from
-        @Identifier[ability:semi-techniques] here when you gain them.</p>
+        @Identifier[ability:warrior-techniques] here when you gain them.</p>
     type: archetype
-  - _id: HREiU1YMpETlWtxd
-    _key: '!actors.items!fdec3f206b747460.HREiU1YMpETlWtxd'
+  - _id: IcKtCUuYVuysxP2Z
+    _key: '!actors.items!fdec3f206b747460.IcKtCUuYVuysxP2Z'
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
       coreVersion: '14'
@@ -7518,7 +7597,7 @@ items:
     effects:
       - _id: NGCuRUaVtXnxAbRe
         _key: >-
-          !actors.items.effects!fdec3f206b747460.HREiU1YMpETlWtxd.NGCuRUaVtXnxAbRe
+          !actors.items.effects!fdec3f206b747460.IcKtCUuYVuysxP2Z.NGCuRUaVtXnxAbRe
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
           coreVersion: '14'
@@ -7535,7 +7614,7 @@ items:
               impact: damage
               type: roll
           competence:
-            raw: 0
+            raw: 1
           delivery: missile
           duration:
             unit: instant
@@ -7574,7 +7653,7 @@ items:
         type: ability
       - _id: aCWLNsvSFjEuLTyl
         _key: >-
-          !actors.items.effects!fdec3f206b747460.HREiU1YMpETlWtxd.aCWLNsvSFjEuLTyl
+          !actors.items.effects!fdec3f206b747460.IcKtCUuYVuysxP2Z.aCWLNsvSFjEuLTyl
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
           coreVersion: '14'
@@ -7585,7 +7664,7 @@ items:
         name: Staff Touch
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
@@ -7642,47 +7721,43 @@ items:
         melees.</p>
       identifier: mage
     type: archetype
-  - _id: GjAL4usQ0J5FFUGD
-    _key: '!actors.items!fdec3f206b747460.GjAL4usQ0J5FFUGD'
+  - _id: 41jt3BalP0US1Myx
+    _key: '!actors.items!fdec3f206b747460.41jt3BalP0US1Myx'
     _stats:
-      compendiumSource: Compendium.teriock.classes.Item.380dac2710b593e9
+      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
       systemVersion: 0.13.8
     effects:
-      - _id: 8e9roKoeCSmTjbbo
+      - _id: 4XNvcPLM4s2CAFYb
         _key: >-
-          !actors.items.effects!fdec3f206b747460.GjAL4usQ0J5FFUGD.8e9roKoeCSmTjbbo
+          !actors.items.effects!fdec3f206b747460.41jt3BalP0US1Myx.4XNvcPLM4s2CAFYb
         _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.d97a0e2c8e3d8730
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
           coreVersion: '14'
           lastModifiedBy: teriockBuilder00
           systemId: teriock
           systemVersion: 0.13.8
-        img: systems/teriock/src/icons/abilities/warrior-techniques.webp
-        name: Warrior Techniques
+        img: systems/teriock/src/icons/abilities/semi-techniques.webp
+        name: Semi Techniques
         system:
           competence:
-            raw: 0
+            raw: 1
           delivery: self
           duration:
             unit: unlimited
           executionTime:
             base: passive
           form: normal
-          identifier: warrior-techniques
+          identifier: semi-techniques
           interaction: manifest
           maneuver: passive
           overview:
             base: >-
-              <p>For every 2 ranks you train in
-              @Identifier[archetype:warrior]{warrior classes}, you gain a
-              @Wiki[Category:Warrior guildmaster abilities]{warrior guildmaster
-              ability} of your choice. You also gain
-              @Identifier[keyword:limited]{Limited}
-              @Identifier[ability:defensive-martial-arts]{Defensive Martial
-              Arts}.</p>
+              <p>For every 2 ranks you train in @Identifier[archetype:semi]{semi
+              classes}, you gain a @Wiki[Category:Semi guildmaster
+              abilities]{semi guildmaster ability} of your choice.</p>
           powerSources:
             - martial
           range:
@@ -7693,100 +7768,25 @@ items:
             - self
         transfer: true
         type: ability
-      - _id: aOvOlScH5bn7jX7m
-        _key: >-
-          !actors.items.effects!fdec3f206b747460.GjAL4usQ0J5FFUGD.aOvOlScH5bn7jX7m
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.8axMH45Og1OFpGIu
-          coreVersion: '14'
-          lastModifiedBy: teriockBuilder00
-          systemId: teriock
-          systemVersion: 0.13.8
-        img: systems/teriock/src/icons/abilities/defensive-martial-arts.webp
-        name: Defensive Martial Arts
-        system:
-          _sup: 8e9roKoeCSmTjbbo
-          automations:
-            F9NLbFodo8GgQLdh:
-              _id: F9NLbFodo8GgQLdh
-              changeType: upgrade
-              competencies:
-                - 0
-              key: system.bv.bonus
-              qualifier: '@prop.handy'
-              target: armament
-              type: childChange
-              value: '1'
-            iijE8Q6bC3GKvrTX:
-              _id: iijE8Q6bC3GKvrTX
-              changeType: upgrade
-              competencies:
-                - 1
-              key: system.bv.bonus
-              qualifier: '@prop.handy'
-              target: armament
-              type: childChange
-              value: '2'
-            pI8dAIbbmiCqE5n9:
-              _id: pI8dAIbbmiCqE5n9
-              changeType: upgrade
-              competencies:
-                - 2
-              key: system.bv.bonus
-              qualifier: '@prop.handy'
-              target: armament
-              type: childChange
-              value: '3'
-          competence:
-            raw: 0
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          form: normal
-          identifier: defensive-martial-arts
-          interaction: manifest
-          limitation: <p>While wearing @Wiki[Category:Armor]{armor} only.</p>
-          maneuver: passive
-          overview:
-            base: >-
-              <p>Your @Identifier[body:hand]{hands} and other
-              @Identifier[property:handy]{handy body parts} count as
-              @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shields}
-              for the purposes of @Wiki[Category:Weapon target
-              abilities]{abilities that target them} (although they cannot be
-              @Identifier[property:shattered]{shattered} or
-              @Identifier[property:destroyed]{destroyed}). You may
-              @Identifier[core:block-interaction]{block} with them and their
-              @Wiki[Core:Block Value]{BV} is +1.</p>
-            fluent: <p>The @Identifier[core:block-interaction]{BV} is now +3.</p>
-            proficient: <p>The @Identifier[core:block-interaction]{BV} is now +2.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-    folder: 380dac2710b593e9
-    img: systems/teriock/src/icons/archetypes/warrior.webp
-    name: Warrior
+    folder: 57a3f724d5743aa3
+    img: systems/teriock/src/icons/archetypes/semi.webp
+    name: Semi
     system:
       competence:
         raw: 1
       description: >-
-        <p>Warriors are primarily fighters and can handle themselves well in
-        heavy melee @Identifier[core:combat]{combat}. Though they all have
-        similar combat strength, they achieve different goals in battle in order
-        to win their objective.</p>
-      identifier: warrior
+        <p>Semis are classes that fill tactical or support roles in
+        @Identifier[core:combat]{combat}. Some are very skilled in close combat
+        and have a variety of @Wiki[Category:Semi archetype skills]{skills} to
+        achieve their aim, and others are more suited to fighting at range. All
+        are classes that combine well with either
+        @Identifier[archetype:warrior]{warriors} or
+        @Identifier[archetype:mage]{mages}, making semis the most versatile
+        class archetype.</p>
+      identifier: semi
       instructions: >-
         <p>Add @Pack[teriock.abilities]{abilities} from
-        @Identifier[ability:warrior-techniques] here when you gain them.</p>
+        @Identifier[ability:semi-techniques] here when you gain them.</p>
     type: archetype
 name: Demon Mist Wraith
 prototypeToken:
