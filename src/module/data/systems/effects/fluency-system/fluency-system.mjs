@@ -87,7 +87,9 @@ export default class FluencySystem
 
   /** @inheritDoc */
   async _preCreate(data, options, user) {
+    // Fluencies should always be fluent.
     foundry.utils.setProperty(options, "keepCompetence", true);
+
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 

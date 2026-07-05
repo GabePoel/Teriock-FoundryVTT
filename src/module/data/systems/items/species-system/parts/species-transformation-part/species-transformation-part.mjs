@@ -185,10 +185,9 @@ export default function SpeciesTransformationPart(Base) {
       }
 
       /** @inheritDoc */
-      prepareBaseData(){
+      prepareBaseData() {
         super.prepareBaseData();
-
-        // Abilities from minor transformations are not proficient
+        // Abilities from minor transformations are not proficient.
         if (this.isTransformation && this.transformationEffect?.system.transformation.level === "minor") {
           this.parent.abilities.forEach((a) => a.system.competence.raw = 0);
         }

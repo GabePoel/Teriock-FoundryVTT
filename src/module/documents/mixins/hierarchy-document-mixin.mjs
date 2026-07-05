@@ -192,7 +192,7 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       static async createDocuments(data = [], operation = {}) {
-        // Pre-clean documents so they always have their `_ref` UUID available
+        // Pre-clean documents so they always have their `_ref` UUID available.
         for (let i = 0; i < data.length; i++) {
           const doc = data[i];
           if (doc instanceof foundry.abstract.Document) { data[i] = doc.toObject(true); }
