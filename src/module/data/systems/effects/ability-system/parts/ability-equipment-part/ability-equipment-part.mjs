@@ -56,7 +56,7 @@ export default function AbilityEquipmentPart(Base) {
        * @returns {boolean}
        */
       get isArmamentChild() {
-        return ["body", "equipment"].includes(this.parent.elder?.type);
+        return ["body", "equipment"].includes(this.parent.parent?.type);
       }
 
       /** @inheritDoc */

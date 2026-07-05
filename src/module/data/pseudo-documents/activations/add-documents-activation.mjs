@@ -162,8 +162,12 @@ export default class AddDocumentsActivation extends BaseActivation {
     const effectData = docs.filter(d => TeriockActiveEffect.TYPES.includes(d?.type));
     const itemData = docs.filter(d => TeriockItem.TYPES.includes(d?.type));
     const promises = [];
-    if (effectData.length > 0) { promises.push(parent.createChildDocuments("ActiveEffect", effectData)); }
-    if (itemData.length > 0) { promises.push(parent.createChildDocuments("Item", itemData)); }
+    if (effectData.length > 0) {
+      promises.push(parent.createChildDocuments("ActiveEffect", effectData, { keepCompetence: true }));
+    }
+    if (itemData.length > 0) {
+      promises.push(parent.createChildDocuments("Item", itemData, { keepCompetence: true }));
+    }
     const allChildren = await Promise.all(promises);
     const out = [];
     for (const children of allChildren) { out.push(...children); }
