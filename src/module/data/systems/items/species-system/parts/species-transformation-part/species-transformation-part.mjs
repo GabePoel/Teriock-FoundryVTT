@@ -145,9 +145,10 @@ export default function SpeciesTransformationPart(Base) {
       }
 
       /** @inheritDoc */
-      async deleteThis() {
+      _onDelete(options, userId) {
+        super._onDelete(options, userId);
         if (this.transformationEffect) {
-          const proceed = await TeriockDialog.confirm({
+          TeriockDialog.confirm({
             content: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content"),
             modal: true,
             rejectClose: false,
@@ -155,11 +156,9 @@ export default function SpeciesTransformationPart(Base) {
               icon: makeIconClass(TERIOCK.display.icons.effect.transform, "title"),
               title: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.title"),
             },
+          }).then((p) => {
+            if (p) { this.transformationEffect.delete(); }
           });
-          if (proceed) { await this.transformationEffect.delete(); }
-          else { await super.deleteThis(); }
-        } else {
-          await super.deleteThis();
         }
       }
 
@@ -183,6 +182,16 @@ export default function SpeciesTransformationPart(Base) {
           "transformation.primary": Number(this.isPrimaryTransformation),
         });
         return data;
+      }
+
+      /** @inheritDoc */
+      prepareBaseData(){
+        super.prepareBaseData();
+
+        // Abilities from minor transformations are not proficient
+        if (this.isTransformation && this.transformationEffect?.system.transformation.level === "minor") {
+          this.parent.abilities.forEach((a) => a.system.competence.raw = 0);
+        }
       }
 
       /** @inheritDoc */
