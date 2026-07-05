@@ -12,6 +12,27 @@ function settingsPath(category, key, field) {
   return `TERIOCK.SETTINGS.${category}.${key}.${field}`;
 }
 
+/**
+ * Build a schema with one field per setting in a category.
+ * @param {Teriock.Config.SettingsCategory} category
+ * @param {typeof foundry.data.fields.DataField} FieldClass
+ * @returns {DataSchema}
+ */
+function settingsSchema(category, FieldClass) {
+  return Object.fromEntries(
+    Object.keys(settingsConfig[category]).map(
+      key => [
+        key,
+        new FieldClass({
+          hint: settingsPath(category, key, "hint"),
+          initial: settingsConfig[category][key],
+          label: settingsPath(category, key, "name"),
+        }),
+      ]
+    ),
+  );
+}
+
 export class CommonDocumentSettingsModel extends BaseDataModel {
   /** @type {Teriock.Config.SettingsCategory} */
   static CATEGORY;
@@ -40,18 +61,7 @@ export function documentSettingsModelFactory(category) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return Object.fromEntries(
-        Object.keys(settingsConfig[category]).map(
-          key => [
-            key,
-            new TernaryField({
-              hint: settingsPath(category, key, "hint"),
-              initial: settingsConfig[category][key],
-              label: settingsPath(category, key, "name"),
-            }),
-          ]
-        ),
-      );
+      return settingsSchema(category, TernaryField);
     }
   };
 }
@@ -65,18 +75,7 @@ export function userSettingsModelFactory(category) {
   return class UserSettingsModel extends BaseDataModel {
     /** @inheritDoc */
     static defineSchema() {
-      return Object.fromEntries(
-        Object.keys(settingsConfig[category]).map(
-          key => [
-            key,
-            new foundry.data.fields.BooleanField({
-              hint: settingsPath(category, key, "hint"),
-              initial: settingsConfig[category][key],
-              label: settingsPath(category, key, "name"),
-            }),
-          ]
-        ),
-      );
+      return settingsSchema(category, foundry.data.fields.BooleanField);
     }
   };
 }
