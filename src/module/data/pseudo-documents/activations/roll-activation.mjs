@@ -24,6 +24,25 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
     return Object.assign(super.defineSchema(), { boosts: new fields.NumberField() });
   }
 
+  /**
+   * Run this activation's command for each connected actor.
+   * @param {"primary"|"secondary"} action
+   * @returns {Promise<void>}
+   */
+  async #act(action) {
+    let actors = this.actors;
+    if (!this.actors.length) { actors = [null]; }
+    for (const actor of actors) {
+      await commands[this.impact][action](actor, {
+        boost: true,
+        boosts: this.boosts,
+        document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
+        formula: this.formula,
+        type: this.impact,
+      });
+    }
+  }
+
   /** @inheritDoc */
   get icon() {
     return this.display.icon || getRollIcon(this.formula) || super.icon;
@@ -43,31 +62,11 @@ export default class RollActivation extends AutomationActivationFactory(RollAuto
 
   /** @inheritDoc */
   async primaryAction() {
-    let actors = this.actors;
-    if (!this.actors.length) { actors = [null]; }
-    for (const actor of actors) {
-      await commands[this.impact].primary(actor, {
-        boost: true,
-        boosts: this.boosts,
-        document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
-        formula: this.formula,
-        type: this.impact,
-      });
-    }
+    await this.#act("primary");
   }
 
   /** @inheritDoc */
   async secondaryAction() {
-    let actors = this.actors;
-    if (!this.actors.length) { actors = [null]; }
-    for (const actor of actors) {
-      await commands[this.impact].secondary(actor, {
-        boost: true,
-        boosts: this.boosts,
-        document: this.document?.system?._src ? await fromUuid(this.document.system._src) : null,
-        formula: this.formula,
-        type: this.impact,
-      });
-    }
+    await this.#act("secondary");
   }
 }

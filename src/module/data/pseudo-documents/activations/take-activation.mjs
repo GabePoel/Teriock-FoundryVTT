@@ -40,6 +40,21 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
     return showDialog;
   }
 
+  /**
+   * Notify that this was applied to or reversed for an actor.
+   * @param {AnyActor} actor
+   * @param {"applied"|"reversed"} key
+   */
+  #notify(actor, key) {
+    const message = _loc(`TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.${key}`, {
+      actor: actor.fullName,
+      amount: this.#amount,
+      impact: this.label,
+    });
+    if (this.morganti) { ui.notifications.morganti(message); }
+    else { ui.notifications.success(message); }
+  }
+
   /** @inheritDoc */
   get classes() {
     return [super.classes, `${this.impact}-button`].join(" ");
@@ -67,13 +82,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
         await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti: this.morganti });
       } else {
         await this.#entry.apply(actor, this.#amount);
-        const message = _loc("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.applied", {
-          actor: actor.fullName,
-          amount: this.#amount,
-          impact: this.label,
-        });
-        if (this.morganti) { ui.notifications.morganti(message); }
-        else { ui.notifications.success(message); }
+        this.#notify(actor, "applied");
       }
     }
   }
@@ -83,13 +92,7 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
     if (!this.checkActors()) { return; }
     for (const actor of this.actors) {
       await this.#entry?.reverse(actor, this.#amount);
-      const message = _loc("TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.reversed", {
-        actor: actor.fullName,
-        amount: this.#amount,
-        impact: this.label,
-      });
-      if (this.morganti) { ui.notifications.morganti(message); }
-      else { ui.notifications.success(message); }
+      this.#notify(actor, "reversed");
     }
   }
 }
