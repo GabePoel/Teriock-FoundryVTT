@@ -77,14 +77,6 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   }
 
   /**
-   * Whether this wants a competence dialog to be displayed upon execution.
-   * @return {boolean}
-   */
-  get requiresCompetence() {
-    return this.competencies.size !== 3;
-  }
-
-  /**
    * Whether this is qualified.
    * @param {object} [rollData]
    * @returns {boolean}

@@ -154,6 +154,7 @@ export default class AddDocumentsAutomation
    * @inheritDoc
    * @param {object} [options]
    * @param {AnyActor} [options.actor]
+   * @param {BaseExecution} [options.execution]
    * @return {Promise<Teriock.System.Attachment<AnyChildDocument>[]>}
    */
   async choose(options = {}) {
@@ -162,7 +163,7 @@ export default class AddDocumentsAutomation
       const data = foundry.utils.expandObject({
         "system.competence.raw": this.overrideCompetence
           ? this.competence.raw
-          : this.document?.system?.competence?.value,
+          : (options?.execution?.competence?.value ?? this.document?.system?.competence?.value),
       });
       if (this.overrideData && this.data) { foundry.utils.mergeObject(data, this.data, { inplace: true }); }
       const construction = { data, uuid };

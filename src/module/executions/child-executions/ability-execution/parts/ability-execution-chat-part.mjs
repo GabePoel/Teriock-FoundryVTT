@@ -298,9 +298,9 @@ export default function AbilityExecutionChatPart(Base) {
             v.con.data.system.associations = this.#associationMap[key];
             v.con.data.changes.push(...this.#trackerMap[key]);
           }
-          const childAutomations = this.getAutomations("addDocuments", { active: true }).filter(a => !a.separate);
-          for (const a of childAutomations) {
-            const toAdd = await a.choose({ actor: this.actor });
+          const addAutomations = this.getAutomations("addDocuments", { active: true }).filter(a => !a.separate);
+          for (const a of addAutomations) {
+            const toAdd = await a.choose({ actor: this.actor, execution: this });
             const grandchildren = [];
             if (a.children.enabled) {
               const uuids = Array.from(a.children.uuids ?? []);
