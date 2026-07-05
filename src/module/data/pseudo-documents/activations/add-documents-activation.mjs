@@ -159,6 +159,8 @@ export default class AddDocumentsActivation extends BaseActivation {
    * @returns {Promise<AnyChildDocument[]>}
    */
   async safeCreate(parent, docs) {
+    // Don't create children if the document creation was rejected.
+    if (!parent?.persisted) { return []; }
     const effectData = docs.filter(d => TeriockActiveEffect.TYPES.includes(d?.type));
     const itemData = docs.filter(d => TeriockItem.TYPES.includes(d?.type));
     const promises = [];
