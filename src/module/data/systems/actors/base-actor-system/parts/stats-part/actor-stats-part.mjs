@@ -110,24 +110,13 @@ export default function ActorStatsPart(Base) {
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
         if (options.teriock) {
-          // The large number catch is used to keep from rendering the stat change upon applying transformations
-          if (options.teriock.hpChange !== 0 && options.teriock.hpChange < TERIOCK.config.system.inf / 2) {
-            const color = options.teriock.hpChange > 0
-              ? TERIOCK.display.colors.hp.light
-              : TERIOCK.display.colors.hp.dark;
-            this.animateStatChangeEffect(options.teriock.hpChange, color);
-          }
-          if (options.teriock.lpChange !== 0 && options.teriock.lpChange < TERIOCK.config.system.inf / 2) {
-            const color = options.teriock.lpChange > 0
-              ? TERIOCK.display.colors.lp.light
-              : TERIOCK.display.colors.lp.dark;
-            this.animateStatChangeEffect(options.teriock.lpChange, color);
-          }
-          if (options.teriock.mpChange !== 0 && options.teriock.mpChange < TERIOCK.config.system.inf / 2) {
-            const color = options.teriock.mpChange > 0
-              ? TERIOCK.display.colors.mp.light
-              : TERIOCK.display.colors.mp.dark;
-            this.animateStatChangeEffect(options.teriock.mpChange, color);
+          for (const stat of ["hp", "lp", "mp"]) {
+            const change = options.teriock[`${stat}Change`];
+            // The large number catch is used to keep from rendering the stat change upon applying transformations
+            if (change !== 0 && change < TERIOCK.config.system.inf / 2) {
+              const colors = TERIOCK.display.colors[stat];
+              this.animateStatChangeEffect(change, change > 0 ? colors.light : colors.dark);
+            }
           }
         }
       }
@@ -167,27 +156,15 @@ export default function ActorStatsPart(Base) {
         if (yes === false) { return false; }
 
         options.teriock ??= {};
-        const newHp = foundry.utils.mergeObject(
-          foundry.utils.deepClone(this.hp),
-          foundry.utils.getProperty(changes, "system.hp") || {},
-        );
-        const newMp = foundry.utils.mergeObject(
-          foundry.utils.deepClone(this.mp),
-          foundry.utils.getProperty(changes, "system.mp") || {},
-        );
-        const newWither = foundry.utils.mergeObject(
-          foundry.utils.deepClone(this.lp),
-          foundry.utils.getProperty(changes, "system.lp") || {},
-        );
-        const realHpChange = newHp.value - this.hp.value;
-        const tempHpChange = newHp.temp - this.hp.temp;
-        const realMpChange = newMp.value - this.mp.value;
-        const tempMpChange = newMp.temp - this.mp.temp;
-        Object.assign(options.teriock, {
-          hpChange: realHpChange + tempHpChange,
-          lpChange: newWither.value - this.lp.value,
-          mpChange: realMpChange + tempMpChange,
-        });
+        for (const stat of ["hp", "lp", "mp"]) {
+          const newStat = foundry.utils.mergeObject(
+            foundry.utils.deepClone(this[stat]),
+            foundry.utils.getProperty(changes, `system.${stat}`) || {},
+          );
+          const realChange = newStat.value - this[stat].value;
+          const tempChange = (newStat.temp ?? 0) - (this[stat].temp ?? 0);
+          options.teriock[`${stat}Change`] = realChange + tempChange;
+        }
       }
 
       /**
