@@ -2,17 +2,11 @@ import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
-import { fromIdentifier, prefixObject } from "../../../../helpers/utils.mjs";
+import { prefixObject } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
-
-/**
- * @typedef RefreshSourceNode
- * @property {AnyCommonDocument|null} document
- * @property {string} label
- */
 
 /**
  * @param {typeof TypeDataModel} Base
@@ -25,6 +19,7 @@ export default function CommonSystemMixin(Base) {
      * @mixes PropagationData
      * @mixes AccessData
      * @mixes AutomatedData
+     * @mixes RefreshSystem
      * @mixin
      */
     // dprint-ignore
@@ -35,28 +30,14 @@ export default function CommonSystemMixin(Base) {
         dataMixins.PropagationDataMixin,
         dataMixins.AccessDataMixin,
         dataMixins.AutomatedDataMixin,
+        systemMixins.RefreshSystemMixin,
       )
     {
-      /** @type {string[]} */
-      static DEFAULT_PRESERVED_PROPERTIES = [
-        "_id",
-        "_stats",
-        "flags",
-        "folder",
-        "origin",
-        "ownership",
-        "sort",
-        "system._dep",
-        "system._ref",
-        "system._sup",
-        "type",
-      ];
-
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Common"];
 
-      /** @type {string[]} */
-      static PRESERVED_PROPERTIES = [...this.DEFAULT_PRESERVED_PROPERTIES, "system.identifier"];
+      /** @inheritDoc */
+      static PRESERVED_PROPERTIES = ["system.identifier", ...super.PRESERVED_PROPERTIES];
 
       /** @returns {Teriock.Documents.ModelMetadata} */
       static get metadata() {
@@ -104,46 +85,6 @@ export default function CommonSystemMixin(Base) {
         return true;
       }
 
-      /**
-       * @param {Record<Teriock.Documents.CommonType, AnyCommonDocument[]>} srcTypeMap
-       * @param {Record<Teriock.Documents.CommonType, AnyCommonDocument[]>} dstTypeMap
-       * @param {"diff" | "union" | "intersect" | "diffSrc" | "diffDst"} mapType
-       * @returns {ChildDeltaMap}
-       */
-      #makeChildDeltaMap(srcTypeMap, dstTypeMap, mapType) {
-        const childMap = {};
-        for (const type of new Set([...Object.keys(srcTypeMap), ...Object.keys(dstTypeMap)])) {
-          const srcChildren = srcTypeMap[type] || [];
-          const dstChildren = dstTypeMap[type] || [];
-          const srcKeys = srcChildren.map(s => s.lookupKey);
-          const dstKeys = dstChildren.map(d => d.lookupKey);
-          let keys = [];
-          if (mapType === "union") {
-            keys = Array.from(new Set([...srcKeys, ...dstKeys]));
-          } else if (mapType === "intersect") {
-            keys = srcKeys.filter(s => dstKeys.includes(s));
-          } else {
-            const srcDiffKeys = srcKeys.filter(s => !dstKeys.includes(s));
-            const dstDiffKeys = dstKeys.filter(d => !srcKeys.includes(d));
-            const diffKeys = [...srcKeys, ...dstKeys];
-            if (mapType === "diffSrc") keys = srcDiffKeys;
-            else if (mapType === "diffDst") keys = dstDiffKeys;
-            else if (mapType === "diff") keys = diffKeys;
-          }
-          const srcDocs = srcChildren.filter(s => keys.includes(s.lookupKey));
-          const dstDocs = dstChildren.filter(d => keys.includes(d.lookupKey));
-          const docNames = new Set([...srcDocs.map(s => s.documentName), ...dstDocs.map(d => d.documentName)]);
-          for (const docName of docNames) {
-            const existing = childMap[docName] || { dst: [], src: [] };
-            childMap[docName] = {
-              dst: [...existing.dst, ...dstDocs.filter(d => d.documentName === docName)],
-              src: [...existing.src, ...srcDocs.filter(s => s.documentName === docName)],
-            };
-          }
-        }
-        return childMap;
-      }
-
       /** @returns {Record<string, Teriock.EmbedData.EmbedAction>} */
       get _embedActions() {
         return {};
@@ -157,39 +98,6 @@ export default function CommonSystemMixin(Base) {
       /** @returns {string} */
       get _masterText() {
         return this.parent.master?.fullName || this.parent.master?.name || "";
-      }
-
-      /**
-       * An array of unresolved promises that resolve to documents this could refresh from.
-       * @returns {Promise<RefreshSourceNode>[]}
-       */
-      get _refreshPromises() {
-        const promises = [];
-        if (this.parent._stats.compendiumSource) {
-          promises.push(
-            this._formatRefreshPromise(
-              fromUuid(this.parent._stats.compendiumSource),
-              "TERIOCK.SHEETS.DocumentSettings.FIELDS.compendiumSource.label",
-            ),
-          );
-        }
-        if (this.parent._stats.duplicateSource) {
-          promises.push(
-            this._formatRefreshPromise(
-              fromUuid(this.parent._stats.duplicateSource),
-              "TERIOCK.SHEETS.DocumentSettings.FIELDS.duplicateSource.label",
-            ),
-          );
-        }
-        if (this.parent.typedIdentifier) {
-          promises.push(
-            this._formatRefreshPromise(
-              fromIdentifier(this.parent.typedIdentifier),
-              "TERIOCK.SYSTEMS.Rules.FIELDS.identifier.label",
-            ),
-          );
-        }
-        return promises;
       }
 
       /** @returns {AnyCommonDocument} */
@@ -234,36 +142,6 @@ export default function CommonSystemMixin(Base) {
       }
 
       /**
-       * @param {ChildDeltaMap} createMap
-       * @returns {Promise<void>}
-       */
-      async _createFromChildDeltaMap(createMap) {
-        for (const [docName, children] of Object.entries(createMap)) {
-          await this.parent.createChildDocuments(docName, children.src.map(s => s.toObject(true)));
-        }
-      }
-
-      /**
-       * @param {ChildDeltaMap} deleteMap
-       * @returns {Promise<void>}
-       */
-      async _deleteFromChildDeltaMap(deleteMap) {
-        for (const [docName, children] of Object.entries(deleteMap)) {
-          await this.parent.deleteChildDocuments(docName, children.dst.map(d => d.id));
-        }
-      }
-
-      /**
-       * Format a refresh promise properly.
-       * @param {Promise<AnyCommonDocument|null>} document
-       * @param {string} label
-       * @returns {Promise<RefreshSourceNode>}
-       */
-      async _formatRefreshPromise(document, label) {
-        return { document: await document, label: _loc(label) };
-      }
-
-      /**
        * A context menu entry which lets you open this as a panel.
        * @returns {ContextMenuEntry}
        */
@@ -288,22 +166,6 @@ export default function CommonSystemMixin(Base) {
           }
         }
         await super._propagateOperation(methodName, isAsync, args);
-      }
-
-      /**
-       * @param {ChildDeltaMap} updateMap
-       * @returns {Promise<void>}
-       */
-      async _updateFromChildDeltaMap(updateMap) {
-        for (const [docName, children] of Object.entries(updateMap)) {
-          const updateArray = await Promise.all(children.dst.map(async d => {
-            const refreshDocument = await fromUuid(d._stats.compendiumSource);
-            const obj = refreshDocument ? d.system.toRefreshObject(refreshDocument) : {};
-            obj._id = d.id;
-            return obj;
-          }));
-          await this.parent.updateChildDocuments(docName, updateArray);
-        }
       }
 
       /**
@@ -361,15 +223,6 @@ export default function CommonSystemMixin(Base) {
           }
         }
         return parts;
-      }
-
-      /**
-       * Get an array of documents which can be used to refresh this from.
-       * @returns {Promise<RefreshSourceNode[]>}
-       */
-      async getRefreshSources() {
-        const resolvedNodes = await Promise.all(this._refreshPromises);
-        return resolvedNodes.filter(n => n.document && n.document.isViewer && n.document.uuid !== this.parent.uuid);
       }
 
       /** @inheritDoc */
@@ -440,94 +293,6 @@ export default function CommonSystemMixin(Base) {
         }
       }
 
-      /**
-       * @param {AnyCommonDocument} document
-       * @param {Partial<Teriock.System.RefreshOptions>} [options]
-       * @returns {Promise<void>}
-       */
-      async refreshFromSource(document, options = {}) {
-        const {
-          createChildren = true,
-          deleteChildren = true,
-          fullOverride = false,
-          recursive = true,
-          updateChildren = true,
-          updateDocument = true,
-        } = options;
-        if (document) {
-          if (updateDocument) {
-            if (this.automations?.contents.length) {
-              await this.parent.update({ "system.automations": _replace({}) });
-            }
-            const updateObject = this.toRefreshObject(document, options);
-            if (fullOverride) {
-              updateObject.effects = _replace(updateObject.effects);
-              updateObject.items = _replace(updateObject.items);
-            }
-            delete updateObject.flags;
-            await this.parent.update(updateObject);
-          }
-          if (createChildren || deleteChildren || updateChildren) {
-            const srcChildren = await document.getChildren();
-            if (fullOverride) {
-              for (const id of srcChildren.keys()) {
-                if (srcChildren.get(id)?.sup?.uuid !== document.uuid) {
-                  srcChildren.delete(id);
-                }
-              }
-            }
-            const srcChildTypeMap = srcChildren.documentsByType;
-            const dstChildren = await this.parent.getChildren();
-            if (fullOverride) {
-              for (const id of dstChildren.keys()) {
-                if (dstChildren.get(id)?.sup?.uuid !== this.parent.uuid) {
-                  dstChildren.delete(id);
-                }
-              }
-            }
-            const dstChildTypeMap = dstChildren.documentsByType;
-            if (createChildren) {
-              const createMap = this.#makeChildDeltaMap(srcChildTypeMap, dstChildTypeMap, "diffSrc");
-              await this._createFromChildDeltaMap(createMap);
-            }
-            if (deleteChildren) {
-              const deleteMap = this.#makeChildDeltaMap(srcChildTypeMap, dstChildTypeMap, "diffDst");
-              await this._deleteFromChildDeltaMap(deleteMap);
-            }
-            if (updateChildren) {
-              const updateMap = this.#makeChildDeltaMap(srcChildTypeMap, dstChildTypeMap, "intersect");
-              await this._updateFromChildDeltaMap(updateMap);
-            }
-          }
-        }
-        if (recursive) {
-          for (const child of ((fullOverride && this.metadata.hierarchy) ? await this.parent.getSubs() : await this.parent.getChildArray())) {
-            const childSource = await fromUuid(child._stats.compendiumSource);
-            await child.system.refreshFromSource(childSource, {
-              createChildren,
-              deleteChildren,
-              recursive,
-              updateChildren,
-              updateDocument,
-            });
-          }
-        }
-      }
-
-      /**
-       * Get a refresh object from a document with the same type as this one.
-       * @param {AnyCommonDocument} document
-       * @param {Partial<Teriock.System.RefreshOptions>} [options]
-       * @returns {object}
-       */
-      toRefreshObject(document, options = {}) {
-        const obj = document?.toObject(true) ?? {};
-        const preservedProperties = options.fullOverride
-          ? this.constructor.DEFAULT_PRESERVED_PROPERTIES
-          : this.metadata.preservedProperties;
-        for (const p of preservedProperties || []) foundry.utils.deleteProperty(obj, p);
-        return obj;
-      }
     }
   );
 }

@@ -119,6 +119,11 @@ export default class RankSystem
     ];
   }
 
+  /** @inheritDoc */
+  get _refreshCanCreateChildren() {
+    return this.number < 3 || this.parent.abilities.length !== 2;
+  }
+
   /**
    * The icon for this rank's class.
    * @returns {string}
@@ -149,11 +154,6 @@ export default class RankSystem
   /** @inheritDoc */
   get wikiPage() {
     return `Class:${TERIOCK.index.classes[toCamelCase(this._source.class ?? "")] ?? ""}`;
-  }
-
-  /** @inheritDoc */
-  async _createFromChildDeltaMap(createMap) {
-    if (this.number < 3 || this.parent.abilities.length !== 2) { await super._createFromChildDeltaMap(createMap); }
   }
 
   /** @inheritDoc */
