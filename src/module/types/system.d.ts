@@ -8,6 +8,8 @@ declare global {
     export type _Operation = {
       /** Forward this to a GM query which handles the operation instead of the local client. */
       asGM?: boolean;
+      /** Notify the user if the operation failed. */
+      notifyOnFailure?: boolean;
     };
 
     export type _CreateOperation = {
@@ -22,7 +24,7 @@ declare global {
        * {@link HierarchyDocument.createDocuments}.
        */
       cachedKeepId?: boolean;
-      /** If true then subs will not be removed prior to document creation */
+      /** If true then subs will not be removed prior to document creation. */
       dontFilterSubs?: boolean;
       /** Skip rendering of sheets for documents with these IDs. */
       dontRenderSheets?: ID<TeriockDocument>[];

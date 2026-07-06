@@ -70,7 +70,7 @@ export default class TeriockTableResult
         new acts.AddDocumentsActivation({
           display: { label },
           primary: activationFamily,
-          secondary: activations,
+          secondary: activationFamily,
           target: ["imbuement", "property"].includes(doc.type) ? "armament" : "actor",
         }),
       );

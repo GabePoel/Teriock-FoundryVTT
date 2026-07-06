@@ -36,6 +36,19 @@ const { fields } = foundry.data;
  * @property {Teriock.Keys.ApplicationTarget} target
  */
 export default class AddDocumentsActivation extends BaseActivation {
+  /**
+   * Whether a family construction has any documents to create.
+   * @param {Partial<FamilyConstruction>} famConstruct
+   * @returns {boolean}
+   */
+  static #familyHasContent(famConstruct) {
+    return Boolean(
+      famConstruct?.root?.uuid
+        || !foundry.utils.isEmpty(famConstruct?.root?.data ?? {})
+        || famConstruct?.other?.length > 0,
+    );
+  }
+
   /** @inheritDoc */
   static get ICON() {
     return icons.ui.apply;
@@ -61,6 +74,53 @@ export default class AddDocumentsActivation extends BaseActivation {
         initial: "actor",
       }),
     });
+  }
+
+  /**
+   * Selection entry representing a constructed document family.
+   * @param {"primary"|"secondary"} key
+   * @param {Partial<ResolvedFamily>} fam
+   * @returns {{ uuid: string, name: string, img: string, text: string }}
+   */
+  #familyEntry(key, fam) {
+    const representative = fam.root ?? fam.other?.[0] ?? {};
+    const documentName = TeriockActiveEffect.TYPES.includes(representative?.type) ? "ActiveEffect" : "Item";
+    const Cls = foundry.utils.getDocumentClass(documentName);
+    const doc = new Cls(representative);
+    return {
+      img: doc.img,
+      name: doc.fullName ?? doc.name ?? _loc(`TERIOCK.ACTIVATIONS.AddDocuments.DIALOG.${key}`),
+      text: _loc(`TERIOCK.ACTIVATIONS.AddDocuments.DIALOG.${key}`),
+      uuid: key,
+    };
+  }
+
+  /**
+   * Choose between the constructed document families.
+   * @returns {Promise<Partial<ResolvedFamily>|null>} The chosen constructed family, or `null` if canceled.
+   */
+  async chooseFamily() {
+    const useSecondary = Boolean(this.event?.altKey);
+    if (
+      !AddDocumentsActivation.#familyHasContent(this.secondary)
+      || foundry.utils.equals(this.primary, this.secondary)
+      || !game.settings.get("teriock", "selectAddedDocuments")
+    ) {
+      return this.constructFamily(useSecondary ? this.secondary : this.primary);
+    }
+    const families = {
+      primary: await this.constructFamily(this.primary),
+      secondary: await this.constructFamily(this.secondary),
+    };
+    const entries = Object.entries(families).map(([key, fam]) => this.#familyEntry(key, fam));
+    const chosen = await DocumentSelector.selectSingle(entries, {
+      checked: useSecondary ? "secondary" : "primary",
+      hint: "TERIOCK.ACTIVATIONS.AddDocuments.DIALOG.hint",
+      textKey: "text",
+      title: "TERIOCK.ACTIVATIONS.AddDocuments.DIALOG.title",
+      tooltip: false,
+    });
+    return chosen ? families[chosen.uuid] : null;
   }
 
   /**
@@ -127,8 +187,8 @@ export default class AddDocumentsActivation extends BaseActivation {
   /** @inheritDoc */
   async primaryAction() {
     if (!this.checkActors()) { return; }
-    const familyConstruction = this.event?.altKey ? this.secondary : this.primary;
-    const family = await this.constructFamily(familyConstruction);
+    const family = await this.chooseFamily();
+    if (!family) { return; }
     await Promise.all(this.actors.map(async a => {
       if (this.target === "actor") {
         await this.createFamily(a, family);
@@ -165,10 +225,12 @@ export default class AddDocumentsActivation extends BaseActivation {
     const itemData = docs.filter(d => TeriockItem.TYPES.includes(d?.type));
     const promises = [];
     if (effectData.length > 0) {
-      promises.push(parent.createChildDocuments("ActiveEffect", effectData, { keepCompetence: true }));
+      promises.push(
+        parent.createChildDocuments("ActiveEffect", effectData, { keepCompetence: true, notifyOnFailure: true }),
+      );
     }
     if (itemData.length > 0) {
-      promises.push(parent.createChildDocuments("Item", itemData, { keepCompetence: true }));
+      promises.push(parent.createChildDocuments("Item", itemData, { keepCompetence: true, notifyOnFailure: true }));
     }
     const allChildren = await Promise.all(promises);
     const out = [];

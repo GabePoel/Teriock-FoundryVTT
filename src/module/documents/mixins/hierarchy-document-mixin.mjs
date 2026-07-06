@@ -256,10 +256,18 @@ export default function HierarchyDocumentMixin(Base) {
        * Validate if a relationship between a sup and sub is allowed.
        * @param {HierarchyDocument} sup
        * @param {HierarchyDocument} sub
+       * @param {DatabaseWriteOperation & Teriock.System._Operation} operation
        * @returns {Promise<boolean>}
        */
-      static async validateRelationship(sup, sub) {
-        return !(await this.checkIfCyclic(sup, sub));
+      static async validateRelationship(sup, sub, operation) {
+        const out = !(await this.checkIfCyclic(sup, sub));
+        if (out === false && operation.notifyOnFailure) {
+          ui.notifications.error("TERIOCK.OPERATIONS.cyclic", {
+            format: { sub: sub.name, sup: sup.name },
+            localize: true,
+          });
+        }
+        return out;
       }
 
       /**
@@ -420,7 +428,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (yes === false) { return false; }
 
         const elder = await this.getElder();
-        const valid = await this.constructor.validateRelationship(elder, this);
+        const valid = await this.constructor.validateRelationship(elder, this, options);
         if (!valid) { return false; }
       }
 
@@ -433,7 +441,7 @@ export default function HierarchyDocumentMixin(Base) {
         if (_sup) {
           const collection = this.siblingCollection;
           const sup = await resolveDocument(collection?.get(_sup));
-          const valid = await this.constructor.validateRelationship(sup, this);
+          const valid = await this.constructor.validateRelationship(sup, this, options);
           if (!valid) { return false; }
         }
       }

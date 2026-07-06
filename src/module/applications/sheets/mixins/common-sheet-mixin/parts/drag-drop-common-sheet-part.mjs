@@ -114,7 +114,7 @@ export default function DragDropCommonSheetPart(Base) {
         const obj = doc.toObject(true);
         if (doc.inCompendium && !doc._stats.compendiumSource) { obj["_stats.compendiumSource"] = uuid; }
         if (!this._canDropChild(doc)) { return; }
-        const created = await this.document.createChildDocuments(doc.documentName, [obj]);
+        const created = await this.document.createChildDocuments(doc.documentName, [obj], { notifyOnFailure: true });
         return created[0];
       }
 

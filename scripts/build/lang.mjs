@@ -8,7 +8,6 @@ import { default as changes } from "../../src/en/changes.json" with { type: "jso
 import { default as combat } from "../../src/en/combat.json" with { type: "json" };
 import { default as commands } from "../../src/en/commands.json" with { type: "json" };
 import { default as compendium } from "../../src/en/compendium.json" with { type: "json" };
-import { default as menus } from "../../src/en/menus.json" with { type: "json" };
 import { default as costs } from "../../src/en/costs.json" with { type: "json" };
 import { default as dialogs } from "../../src/en/dialogs.json" with { type: "json" };
 import { default as documents } from "../../src/en/documents.json" with { type: "json" };
@@ -19,8 +18,10 @@ import { default as fields } from "../../src/en/fields.json" with { type: "json"
 import { default as format } from "../../src/en/format.json" with { type: "json" };
 import { default as macros } from "../../src/en/macros.json" with { type: "json" };
 import { default as mechanics } from "../../src/en/mechanics.json" with { type: "json" };
+import { default as menus } from "../../src/en/menus.json" with { type: "json" };
 import { default as message } from "../../src/en/message.json" with { type: "json" };
 import { default as models } from "../../src/en/models.json" with { type: "json" };
+import { default as operations } from "../../src/en/operations.json" with { type: "json" };
 import { default as packs } from "../../src/en/packs.json" with { type: "json" };
 import { default as perception } from "../../src/en/perception.json" with { type: "json" };
 import { default as rollContext } from "../../src/en/roll-context.json" with { type: "json" };
@@ -114,7 +115,6 @@ mergeObjects(
   combat,
   commands,
   compendium,
-  menus,
   content,
   costs,
   dialogs,
@@ -126,8 +126,10 @@ mergeObjects(
   format,
   macros,
   mechanics,
+  menus,
   message,
   models,
+  operations,
   packs,
   perception,
   rollContext,

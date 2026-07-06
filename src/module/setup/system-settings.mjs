@@ -130,6 +130,13 @@ export const settings = {
       scope: "user",
       type: Boolean,
     },
+    selectAddedDocuments: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.selectAddedDocuments.hint",
+      name: "TERIOCK.SETTINGS.selectAddedDocuments.name",
+      scope: "user",
+      type: Boolean,
+    },
     showRollDialogs: {
       default: true,
       hint: "TERIOCK.SETTINGS.showRollDialogs.hint",

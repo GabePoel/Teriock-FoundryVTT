@@ -52,11 +52,11 @@ export default function EquipmentDropSheetMixin(Base) {
             if (oldElder) { await oldElder.render(); }
             return stack;
           } else if (this.document.type === "equipment" && this.document.system.storage.enabled) {
-            await doc.update({ "system._sup": this.document.id });
+            await doc.update({ "system._sup": this.document.id }, { notifyOnFailure: true });
             if (oldElder) { await oldElder.render(); }
             return doc;
           } else if (this.document.documentName === "Actor") {
-            await doc.update({ "system._sup": null });
+            await doc.update({ "system._sup": null }, { notifyOnFailure: true });
             if (oldElder) { await oldElder.render(); }
             return doc;
           }
