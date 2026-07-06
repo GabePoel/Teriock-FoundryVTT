@@ -79,6 +79,14 @@ export default class ArchetypeSystem
     return Object.assign(super.embedParts, { text: dotJoin(this.classNames) });
   }
 
+  /**
+   * Whether this is considered innate.
+   * @returns {boolean}
+   */
+  get innate() {
+    return this.ranks.some((r) => r.system.innate);
+  }
+
   /** @inheritDoc */
   get makeSuppressed() {
     return super.makeSuppressed || this._isSuppressedInactiveRanks;
