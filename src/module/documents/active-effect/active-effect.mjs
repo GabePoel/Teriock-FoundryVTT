@@ -36,20 +36,30 @@ export default class TeriockActiveEffect
     return super.migrateData(source, options, state);
   }
 
+  /** @type {boolean} */
+  _isReference;
+
+  /** @type {boolean} */
+  _isStatus;
+
   /**
-   * Whether this effect is a reference and not "real".
+   * Whether this effect is a reference and not "real". Lazily recomputed.
    * @returns {boolean}
    */
   get isReference() {
-    return Boolean(this.system.isReference);
+    if (this._isReference === undefined) { this._isReference = Boolean(this.system.isReference); }
+    return this._isReference;
   }
 
   /**
-   * Whether this is a status effect.
+   * Whether this is a status effect. Lazily computed. Doesn't need to be recomputed since ID doesn't change.
    * @returns {boolean}
    */
   get isStatus() {
-    return Object.values(CONFIG.statusEffects).some(s => s?._id === this.id);
+    if (this._isStatus === undefined) {
+      this._isStatus = Object.values(CONFIG.statusEffects).some(s => s?._id === this.id);
+    }
+    return this._isStatus;
   }
 
   /**
@@ -76,6 +86,12 @@ export default class TeriockActiveEffect
   /** @inheritDoc */
   async enable() {
     await this.update({ disabled: false });
+  }
+
+  /** @inheritDoc */
+  resetChildMaps() {
+    super.resetChildMaps();
+    delete this._isReference;
   }
 
   /** @inheritDoc */

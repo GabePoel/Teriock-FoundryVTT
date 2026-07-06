@@ -57,6 +57,12 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /** @type {AnyChildDocument[]} */
+      _childArray;
+
+      /** @type {TypeCollection} */
+      _children;
+
+      /** @type {AnyChildDocument[]} */
       _visibleChildren;
 
       /** @type {Record<string, AnyChildDocument[]>} */
@@ -82,22 +88,21 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
-       * Array containing all children or their indexes.
+       * Lazily recomputed array containing all children or their indexes.
        * @returns {AnyChildDocument[]}
        */
       get childArray() {
-        return [
-          ...(this.effects?.contents || []).filter(e => !e.sup),
-          ...(this.items?.contents || []).filter(i => !i.sup),
-        ];
+        if (!this._childArray) { this._childArray = this.makeChildArray(); }
+        return this._childArray;
       }
 
       /**
-       * Collection containing all children or their indexes.
+       * Lazily recomputed collection containing all children or their indexes.
        * @returns {TypeCollection}
        */
       get children() {
-        return new TypeCollection(this.childArray.map(c => [c._id, c]));
+        if (!this._children) { this._children = new TypeCollection(this.childArray.map(c => [c._id, c])); }
+        return this._children;
       }
 
       /** @inheritDoc */
@@ -270,6 +275,17 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
+       * Make an array of all children or their indexes.
+       * @returns {AnyChildDocument[]}
+       */
+      makeChildArray() {
+        return [
+          ...(this.effects?.contents || []).filter(e => !e.sup),
+          ...(this.items?.contents || []).filter(i => !i.sup),
+        ];
+      }
+
+      /**
        * Make an array of visible children.
        * @returns {AnyChildDocument[]}
        */
@@ -289,6 +305,8 @@ export default function CommonDocumentMixin(Base) {
        * Clear all references to existing visible children so they can be recomputed.
        */
       resetChildMaps() {
+        delete this._childArray;
+        delete this._children;
         delete this._visibleChildren;
         delete this._visibleChildrenByType;
       }

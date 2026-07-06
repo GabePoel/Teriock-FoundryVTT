@@ -297,6 +297,15 @@ export default function HierarchyDocumentMixin(Base) {
         this.#reloadDependee();
       }
 
+      /** @type {TypeCollection} */
+      _allSups;
+
+      /** @type {ID<AnyCommonDocument>|null} */
+      _cachedSupId;
+
+      /** @type {TypeCollection} */
+      _subs;
+
       /**
        * All the sub descendant of this document or their indexes.
        * @returns {TypeCollection}
@@ -306,19 +315,12 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * All the sups ancestral to this document or their indexes.
+       * Lazily recomputed collection of all the sups ancestral to this document or their indexes.
        * @returns {TypeCollection}
        */
       get allSups() {
-        return HierarchyDocument.findAllSups(this, this.siblingCollection);
-      }
-
-      /**
-       * Array containing all children or their indexes.
-       * @returns {AnyChildDocument[]}
-       */
-      get childArray() {
-        return [...super.childArray, ...(this.subs.contents || []), ...this.dependents];
+        if (!this._allSups) { this._allSups = HierarchyDocument.findAllSups(this, this.siblingCollection); }
+        return this._allSups;
       }
 
       /**
@@ -365,11 +367,12 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * The subs of this document or their indexes.
+       * Lazily recomputed collection of the subs of this document or their indexes.
        * @returns {TypeCollection}
        */
       get subs() {
-        return HierarchyDocument.findSubs(this, this.siblingCollection);
+        if (!this._subs) { this._subs = HierarchyDocument.findSubs(this, this.siblingCollection); }
+        return this._subs;
       }
 
       /**
@@ -542,9 +545,30 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
+      makeChildArray() {
+        return [...super.makeChildArray(), ...(this.subs.contents || []), ...this.dependents];
+      }
+
+      /** @inheritDoc */
       prepareData() {
         super.prepareData();
         if (this.system._dep && this.uuid) { game.teriock?.dependents.track(this.system._dep, this); }
+        // If this moved to a different sup, the old sup isn't reached by #reloadSups and must be reset directly.
+        if (this._cachedSupId && this._cachedSupId !== this.system._sup) {
+          const previousSup = this.siblingCollection?.get(this._cachedSupId);
+          if (typeof previousSup?.resetChildMaps === "function") {
+            previousSup.resetChildMaps();
+            if (previousSup.isViewer) { previousSup.render(); }
+          }
+        }
+        this._cachedSupId = this.system._sup;
+      }
+
+      /** @inheritDoc */
+      resetChildMaps() {
+        super.resetChildMaps();
+        delete this._allSups;
+        delete this._subs;
       }
 
       /** @inheritDoc */
