@@ -1,8 +1,11 @@
 import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
+import costConfig from "../../../../../../constants/config/cost-config.mjs";
 import { docSort, rankSort } from "../../../../../../helpers/sort.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
+
+const BAR_STATS = Object.entries(costConfig.primary.keys).filter(([_k, v]) => v.barStat).map(([k, _v]) => k);
 
 /**
  * Actor data model that handles stats.
@@ -110,7 +113,7 @@ export default function ActorStatsPart(Base) {
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
         if (options.teriock) {
-          for (const stat of ["hp", "lp", "mp"]) {
+          for (const stat of BAR_STATS) {
             const change = options.teriock[`${stat}Change`];
             // The large number catch is used to keep from rendering the stat change upon applying transformations
             if (change !== 0 && change < TERIOCK.config.system.inf / 2) {
@@ -156,7 +159,7 @@ export default function ActorStatsPart(Base) {
         if (yes === false) { return false; }
 
         options.teriock ??= {};
-        for (const stat of ["hp", "lp", "mp"]) {
+        for (const stat of BAR_STATS) {
           const newStat = foundry.utils.mergeObject(
             foundry.utils.deepClone(this[stat]),
             foundry.utils.getProperty(changes, `system.${stat}`) || {},

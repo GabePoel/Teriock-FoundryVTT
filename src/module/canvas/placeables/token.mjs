@@ -33,11 +33,9 @@ export default class TeriockToken extends Token {
 
   /** @inheritDoc */
   _getBarColors(index, data) {
-    if (["hp", "lp", "mp"].includes(data.attribute)) {
-      return {
-        empty: Color.fromString(TERIOCK.display.colors[data.attribute].darkest),
-        full: Color.fromString(TERIOCK.display.colors[data.attribute].base),
-      };
+    const colors = TERIOCK.display.colors[data.attribute];
+    if (colors?.base && colors?.darkest) {
+      return { empty: Color.fromString(colors.darkest), full: Color.fromString(colors.base) };
     }
     return super._getBarColors(index, data);
   }
