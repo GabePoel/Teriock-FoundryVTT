@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.10
+  systemVersion: 0.13.13
 effects:
   - _id: AtUPPT2VKpl3SDUg
     _key: '!items.effects!NzYaOFCxcJBkdUUd.AtUPPT2VKpl3SDUg'
@@ -14,7 +14,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.10
+      systemVersion: 0.13.13
     flags:
       teriock:
         category: combat
@@ -54,7 +54,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.10
+      systemVersion: 0.13.13
     flags:
       teriock:
         category: support
@@ -110,7 +110,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.10
+      systemVersion: 0.13.13
     img: systems/teriock/src/icons/abilities/battle-cry-resistance.webp
     name: Battle Cry Resistance
     system:
@@ -163,7 +163,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.10
+      systemVersion: 0.13.13
     img: systems/teriock/src/icons/abilities/battle-cry-aura.webp
     name: Battle Cry Aura
     system:
@@ -204,6 +204,10 @@ effects:
         components:
           verbal:
             type: tag
+        primary:
+          mp:
+            formula: '1'
+            type: formula
       delivery: aura
       duration:
         raw: '1'
@@ -234,15 +238,12 @@ effects:
       identifier: battle-cry-aura
       interaction: feat
       maneuver: active
-      overview:
-        base: >-
-          <p>This ability cannot affect @Identifier[condition:deaf]{deaf}
-          creatures.</p>
       powerSources:
         - martial
       range:
         raw: '10'
         unit: ft
+      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
       results:
         fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
       skill: true

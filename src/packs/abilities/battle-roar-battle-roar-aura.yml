@@ -5,7 +5,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.10
+  systemVersion: 0.13.13
 img: systems/teriock/src/icons/abilities/battle-roar-aura.webp
 name: Battle Roar Aura
 system:
@@ -46,6 +46,10 @@ system:
     components:
       verbal:
         type: tag
+    primary:
+      mp:
+        formula: '2'
+        type: formula
   delivery: aura
   duration:
     raw: '1'
@@ -75,15 +79,12 @@ system:
   identifier: battle-roar-aura
   interaction: feat
   maneuver: active
-  overview:
-    base: >-
-      <p>This ability cannot affect @Identifier[condition:deaf]{deaf}
-      creatures.</p>
   powerSources:
     - martial
   range:
     raw: '150'
     unit: ft
+  requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
   results:
     fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
   targets:
