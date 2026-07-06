@@ -238,7 +238,7 @@ export default class ApplicableEffectSystem
     }, "");
     if (blocksHTML) {
       this.parent.description = dedent(`
-      <div class="teriock-panel teriock-description-panel">
+      <div class="teriock-panel teriock-panel-no-background teriock-description-panel">
         <div class="teriock-panel-body">${blocksHTML}</div>
       </div>`).trim();
     }

@@ -13,7 +13,11 @@
   }
 }
 
-[role="tooltip"]:not(.teriock-rich-tooltip), .teriock-rich-tooltip, .sre-tooltip {
+.teriock-rich-tooltip:not(.locked-tooltip) {
+  border: 1px solid var(--color-panel-edge);
+}
+
+[role="tooltip"]:not(.teriock-rich-tooltip), .teriock-rich-tooltip {
   max-height: calc(100% - 200px);
 
   .teriock-panel {
@@ -26,6 +30,19 @@
       &:has(.teriock-panel-spacer .teriock-panel-body):not(:has(.teriock-panel-body *)) {
         margin-top: 0;
       }
+    }
+  }
+}
+
+.teriock-panel.teriock-panel-no-background {
+  background: transparent;
+  border: none;
+
+  .teriock-panel-content {
+    margin-top: 4px;
+
+    &:has(.teriock-panel-spacer .teriock-panel-body):not(:has(.teriock-panel-body *)) {
+      margin-top: 0;
     }
   }
 }
