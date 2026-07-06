@@ -68,16 +68,8 @@ export default function ActorMovementPart(Base) {
  * - [Movement Speed](https://wiki.teriock.com/index.php/Core:Movement_Speed)
  *
  * @param {number} initial - The initial speed adjustment value (0-4)
- * @param {string} name - The display name for this speed adjustment type
+ * @param {string} label - The display name for this speed adjustment type
  */
-function speedField(initial, name) {
-  return new fields.NumberField({
-    initial,
-    integer: true,
-    label: `${name} Speed Adjustment`,
-    max: 4,
-    min: 0,
-    persisted: false,
-    step: 1,
-  });
+function speedField(initial, label) {
+  return new fields.NumberField({ initial, integer: true, label, max: 4, min: 0, step: 1 });
 }

@@ -27,6 +27,14 @@
     transition: opacity 50ms;
   }
 
+  // Highlight if value differs from `_source`.
+  &.modified .unselected {
+    &,
+    * {
+      color: var(--color-text-accent);
+    }
+  }
+
   &:hover,
   &:focus-within {
     .unselected {
@@ -47,4 +55,40 @@
 
 .affix {
   position: relative;
+}
+
+// Icon equivalent of .affix.
+.affix-icon {
+  position: relative;
+
+  .selected,
+  .unselected {
+    @include mixins.centralize;
+    height: 100%;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    transition: opacity 50ms;
+    width: 100%;
+  }
+
+  .selected {
+    opacity: 0;
+  }
+
+  // Highlight if value differs from `_source`.
+  &.modified .unselected {
+    color: var(--color-text-accent);
+  }
+
+  &:hover {
+    .selected {
+      opacity: 1;
+    }
+
+    .unselected {
+      opacity: 0;
+    }
+  }
 }

@@ -17,9 +17,13 @@ export default function ActorLimitsPart(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          curses: initialBar({ max: 3 }),
+          curses: new fields.SchemaField({
+            max: new fields.NumberField({ initial: 3, integer: true, min: 0, nullable: false }),
+            min: initialNumber(),
+            value: initialNumber(),
+          }),
           rotators: new fields.SchemaField({
-            max: new fields.NumberField({ initial: 0, nullable: false }),
+            max: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
             min: initialNumber(),
             value: initialNumber(),
           }),

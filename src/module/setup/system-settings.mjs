@@ -33,6 +33,14 @@ export const settings = {
       scope: "client",
       type: Boolean,
     },
+    highlightModifiedValues: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.highlightModifiedValues.hint",
+      name: "TERIOCK.SETTINGS.highlightModifiedValues.name",
+      requiresReload: true,
+      scope: "client",
+      type: Boolean,
+    },
   },
   armor: {
     armorSuppressesRanks: {

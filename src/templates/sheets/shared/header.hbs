@@ -51,7 +51,16 @@
   </div>
   {{#if system.competence}}
     <div
-      class="ab-competence thover"
+      class="
+        ab-competence
+        thover
+        affix-icon
+        {{#if (and
+          highlightModified
+          (not (eq system.competence.raw source.system.competence.raw)))}}
+          modified
+        {{/if}}
+      "
       style="color: var(--color-text-subtle);"
       data-tooltip="{{ system.competence.description }}"
       {{#if editable}}
@@ -59,7 +68,8 @@
       {{/if}}
       data-path="system.competence.raw"
     >
-      <i class="mic fa-light {{ system.competence.icon }}"></i>
+      <i class="unselected mic fa-light {{ system.competence.icon }}"></i>
+      <i class="selected mic fa-light {{competenceIcon source.system.competence.raw}}"></i>
     </div>
   {{/if}}
 </div>

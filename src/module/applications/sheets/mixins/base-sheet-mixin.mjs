@@ -37,6 +37,7 @@ export default function BaseSheetMixin(Base) {
         editable: this.isEditable,
         fields: this.document?.schema.fields,
         flags: this.document.flags,
+        highlightModified: game.settings.get("teriock", "highlightModifiedValues"),
         id: this.document.id,
         img: this.document?.img,
         imgPath: "img",

@@ -21,7 +21,9 @@ export default function FieldsCommonSheetPart(Base) {
       static async #onIncrement(event, target, change = 1) {
         if (event.button === 2) { change = change * -1; }
         const { path } = target.dataset;
-        const value = foundry.utils.getProperty(this.document, path);
+        // Cycle relative to the source value, since that's what the update writes to.
+        const value = foundry.utils.getProperty(this.document._source, path)
+          ?? foundry.utils.getProperty(this.document, path);
         const schema = this.document.getFieldForProperty(path);
         const min = schema?.min ?? 0;
         const max = schema?.max ?? Infinity;

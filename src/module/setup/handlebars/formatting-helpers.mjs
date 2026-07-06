@@ -12,14 +12,55 @@ function normalizeBarInputs(value, max, temp = 0) {
 }
 
 /**
+ * Icon name for a raw competence level.
+ * @param {Teriock.System.CompetenceLevel} level
+ * @returns {string}
+ */
+function competenceIcon(level) {
+  if (level >= 2) { return TERIOCK.display.icons.competence.fluent; }
+  if (level >= 1) { return TERIOCK.display.icons.competence.proficient; }
+  return TERIOCK.display.icons.competence.none;
+}
+
+/**
+ * CSS class string for a raw competence level.
+ * @param {Teriock.System.CompetenceLevel} level
+ * @returns {string}
+ */
+function competenceIconClass(level) {
+  if (level >= 2) { return makeIconClass(TERIOCK.display.icons.ui.filled2, "solid"); }
+  if (level >= 1) { return makeIconClass(TERIOCK.display.icons.ui.filled1, "light"); }
+  return makeIconClass(TERIOCK.display.icons.ui.filled0, "light");
+}
+
+/**
  * CSS class string for a modifier based on its competence.
  * @param {BaseModifierModel} modifier
  * @returns {string}
  */
 function modifierIconClass(modifier) {
-  if (modifier.competence.fluent) { return makeIconClass(TERIOCK.display.icons.ui.filled2, "solid"); }
-  if (modifier.competence.proficient) { return makeIconClass(TERIOCK.display.icons.ui.filled1, "light"); }
-  return makeIconClass(TERIOCK.display.icons.ui.filled0, "light");
+  return competenceIconClass(modifier.competence.raw);
+}
+
+/**
+ * CSS class string for a tradecraft score.
+ * @param {number} score
+ * @returns {string}
+ */
+function tradecraftScoreIconClass(score) {
+  if (score >= 3) { return "fa-fw fa-light mic ms-check-circle"; }
+  if (score >= 2) { return "fa-fw fa-regular fa-check-double"; }
+  if (score >= 1) { return "fa-fw fa-regular fa-check"; }
+  return "fa-fw fa-regular fa-xmark";
+}
+
+/**
+ * Localized label for a tradecraft score.
+ * @param {number} score
+ * @returns {string}
+ */
+function tradecraftScoreLabel(score) {
+  return _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.${Math.min(Math.max(score ?? 0, 0), 3)}`);
 }
 
 /**
@@ -101,9 +142,13 @@ const formattingHelperEntries = [
   ["barLost", barLost],
   ["barTemp", barTemp],
   ["barTempHide", barTempHide],
+  ["competenceIcon", competenceIcon],
+  ["competenceIconClass", competenceIconClass],
   ["getName", getName],
   ["hackFill", hackFill],
   ["modifierIconClass", modifierIconClass],
+  ["tradecraftScoreIconClass", tradecraftScoreIconClass],
+  ["tradecraftScoreLabel", tradecraftScoreLabel],
 ];
 
 export default formattingHelperEntries;
