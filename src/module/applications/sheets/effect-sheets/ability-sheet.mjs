@@ -1,5 +1,5 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
-import { elementClass } from "../../../helpers/html.mjs";
+import { createElement, elementClass } from "../../../helpers/html.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
 import { TeriockContextMenu } from "../../ux/_module.mjs";
@@ -128,17 +128,37 @@ export default class AbilitySheet extends ChildSheet {
     window: { icon: makeIconClass(documentConfig.ability.icon, "title") },
   };
 
-  /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = { mask: { template: "teriock/sheets/effects/ability/elder-sorcery-mask" }, ...super.PARTS };
-
   /**
-   * Reset the elder sorcery elements that this sheet's window has.
+   * Reset elder sorcery theme classes, scroll wrapper, and mask element.
    */
   #resetElderSorceryElements() {
-    this.window.content.classList.remove(...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi");
-    if (this.document.system.elderSorcery) {
-      this.window.content.classList.add(elementClass(this.document.system.elements));
+    const { content } = this.window;
+    const elementClasses = [...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi"];
+    content.classList.remove(...elementClasses);
+    content.querySelector(":scope > .es-mask-rotator")?.remove();
+
+    if (!this.document.system.elderSorcery) {
+      const scroll = content.querySelector(":scope > .ab-sheet-everything");
+      if (scroll) {
+        while (scroll.firstChild) { content.insertBefore(scroll.firstChild, scroll); }
+        scroll.remove();
+      }
+      return;
     }
+
+    content.classList.add(elementClass(this.document.system.elements));
+
+    let scroll = content.querySelector(":scope > .ab-sheet-everything");
+    if (!scroll) {
+      scroll = createElement("div", { className: "ab-sheet-everything" });
+      content.appendChild(scroll);
+    }
+    for (const child of [...content.children]) {
+      if (child === scroll || child.classList.contains("es-mask-rotator")) { continue; }
+      scroll.appendChild(child);
+    }
+
+    content.prepend(createElement("div", { className: "es-mask-rotator" }));
   }
 
   /**
@@ -167,9 +187,9 @@ export default class AbilitySheet extends ChildSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
+    this.#resetElderSorceryElements();
     if (!this.isEditable) { return; }
     this._activateContextMenus();
-    this.#resetElderSorceryElements();
   }
 
   /** @inheritDoc */
