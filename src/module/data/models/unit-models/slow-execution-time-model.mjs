@@ -2,7 +2,11 @@ import { TimeUnitModel } from "./_module.mjs";
 
 export default class SlowExecutionTimeModel extends TimeUnitModel {
   /** @inheritDoc */
-  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.Duration"];
+  static LOCALIZATION_PREFIXES = [
+    ...super.LOCALIZATION_PREFIXES,
+    "TERIOCK.MODELS.Duration",
+    "TERIOCK.MODELS.SlowExecutionTime",
+  ];
 
   /** @inheritDoc */
   static get infiniteChoiceEntries() {
