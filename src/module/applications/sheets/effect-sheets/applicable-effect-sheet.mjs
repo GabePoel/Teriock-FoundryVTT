@@ -1,6 +1,7 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
+import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import * as sheetMixins from "../mixins/_module.mjs";
 import * as commonSheetParts from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
@@ -15,7 +16,7 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 export default class ApplicableEffectSheet
   extends mixClasses(
     ActiveEffectConfig,
-    sheetMixins.BaseSheetMixin,
+    BaseDocumentSheetMixin,
     sheetMixins.SystemSettingsButtonSheetMixin,
     commonSheetParts.ConnectionCommonSheetPart,
     commonSheetParts.DocumentCreationCommonSheetPart,

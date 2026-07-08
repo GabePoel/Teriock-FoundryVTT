@@ -1,8 +1,8 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { TeriockDocumentSheet } from "./_module.mjs";
+import { TeriockDocumentSheet } from "../../api/_module.mjs";
 
-export default class TeriockPanelSheet extends TeriockDocumentSheet {
+export default class PanelSheet extends TeriockDocumentSheet {
   /**
    * Open this document's main sheet.
    * @returns {Promise<void>}

@@ -1,5 +1,6 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { BaseSheetMixin, DisplaySheetMixin } from "../mixins/_module.mjs";
+import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
+import { DisplaySheetMixin } from "../mixins/_module.mjs";
 import { SystemSettingsButtonSheetMixin } from "../mixins/button-mixins/_module.mjs";
 import {
   ConnectionCommonSheetPart,
@@ -22,7 +23,7 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
 export default class BasePageSheet
   extends mixClasses(
     JournalEntryPageProseMirrorSheet,
-    BaseSheetMixin,
+    BaseDocumentSheetMixin,
     DisplaySheetMixin,
     SystemSettingsButtonSheetMixin,
     ConnectionCommonSheetPart,

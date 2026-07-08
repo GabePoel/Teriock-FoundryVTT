@@ -1,8 +1,8 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import DocumentDialogSheet from "./document-dialog-sheet.mjs";
+import { DocumentDialog } from "../../api/_module.mjs";
 
-export default class DocumentSettingsSheet extends DocumentDialogSheet {
+export default class DocumentSettingsSheet extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: false, submitOnChange: true },

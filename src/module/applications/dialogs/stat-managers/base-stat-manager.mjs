@@ -1,16 +1,16 @@
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
+import { DocumentDialog } from "../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../shared/_module.mjs";
-import { DocumentDialogSheet } from "../../sheets/utility-sheets/_module.mjs";
 
 /**
- * @extends {DocumentDialogSheet}
+ * @extends {DocumentDialog}
  * @mixes HackStatApplication
  * @property {boolean} _consumeStatDice
  * @property {boolean} _forHarm
  * @property {Teriock.System.FormulaString} _substitution
  */
-export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialogSheet) {
+export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialog) {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = { actions: { ok: this._onDone }, classes: ["dialog"], position: { width: 425 } };
 

@@ -1,16 +1,16 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { BaseApplicationMixin } from "../../api/_module.mjs";
+import BaseApplicationMixin from "./base-application-mixin.mjs";
 
 /**
  * @param {typeof DocumentSheetV2} Base
  */
-export default function BaseSheetMixin(Base) {
+export default function BaseDocumentSheetMixin(Base) {
   /**
    * @extends {DocumentSheetV2}
    * @property {ApplicationConfiguration & Teriock.Sheet._SheetConfiguration} options
    * @mixin
    */
-  class BaseSheet extends BaseApplicationMixin(Base) {
+  class BaseDocumentSheet extends BaseApplicationMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
     static DEFAULT_OPTIONS = { teriock: { autoIcon: true } };
 
@@ -53,5 +53,5 @@ export default function BaseSheetMixin(Base) {
       });
     }
   }
-  return BaseSheet;
+  return BaseDocumentSheet;
 }

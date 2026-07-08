@@ -4,7 +4,7 @@ import { TokenLayer } from "@client/canvas/layers/_module.mjs";
 import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
 import { Collection } from "@common/utils/_module.mjs";
 
-import { TeriockDocumentSheet } from "../applications/sheets/utility-sheets/_module.mjs";
+import { TeriockDocumentSheet } from "../applications/api/_module.mjs";
 import {
   TeriockActorDirectory,
   TeriockChatLog,

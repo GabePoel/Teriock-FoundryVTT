@@ -1,5 +1,5 @@
 import { TeriockChatMessage } from "../_module.mjs";
-import { TeriockPanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
+import { PanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
 
@@ -108,8 +108,8 @@ export default function PanelDocumentMixin(Base) {
        * @returns {Promise<void>}
        */
       async openPanelSheet() {
-        let panelSheet = Object.values(this.apps).find((a) => a instanceof TeriockPanelSheet);
-        if (!panelSheet) { panelSheet = new TeriockPanelSheet({ document: this }); }
+        let panelSheet = Object.values(this.apps).find((a) => a instanceof PanelSheet);
+        if (!panelSheet) { panelSheet = new PanelSheet({ document: this }); }
         await panelSheet.render(true);
       }
 

@@ -1,6 +1,6 @@
 import { icons } from "../../constants/display/icons.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
-import { DocumentDialogSheet } from "../sheets/utility-sheets/_module.mjs";
+import { DocumentDialog } from "../api/_module.mjs";
 
 const { BooleanField } = foundry.data.fields;
 const { DataModel } = foundry.abstract;
@@ -23,7 +23,7 @@ class RefreshOptions extends DataModel {
 
 let localized = false;
 
-export default class SourceRefresher extends DocumentDialogSheet {
+export default class SourceRefresher extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onRefresh },

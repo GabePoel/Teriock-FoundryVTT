@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { TeriockDocumentSheet } from "../../api/_module.mjs";
 import * as sheetMixins from "../mixins/_module.mjs";
-import TeriockDocumentSheet from "./document-sheet.mjs";
 
 /**
  * A simple sheet for {@link AnyChildDocument}.

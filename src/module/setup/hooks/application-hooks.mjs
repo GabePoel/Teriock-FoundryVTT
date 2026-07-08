@@ -1,4 +1,4 @@
-import { TeriockPanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
+import { PanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 
@@ -16,7 +16,7 @@ function addCardContextMenuEntriesToHeader(application, controls) {
   controls.push(
     ...entries.filter(e =>
       e.label !== _loc("SIDEBAR.DUPLICATE")
-      && ((e.label !== _loc("TERIOCK.SHEETS.Panel.OPEN")) || !(application instanceof TeriockPanelSheet))
+      && ((e.label !== _loc("TERIOCK.SHEETS.Panel.OPEN")) || !(application instanceof PanelSheet))
     ).map(e => {
       return {
         group: e.group,

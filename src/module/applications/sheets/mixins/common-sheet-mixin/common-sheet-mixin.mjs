@@ -1,7 +1,7 @@
 import { SourceRefreshButtonSheetMixin, SystemSettingsButtonSheetMixin } from "../_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { BaseDocumentSheetMixin } from "../../../api/_module.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
-import BaseSheetMixin from "../base-sheet-mixin.mjs";
 import * as parts from "./parts/_module.mjs";
 
 /**
@@ -29,7 +29,7 @@ export default function CommonSheetMixin(Base) {
     class CommonSheet
       extends mixClasses(
         Base,
-        BaseSheetMixin,
+        BaseDocumentSheetMixin,
         SystemSettingsButtonSheetMixin,
         parts.ConnectionCommonSheetPart,
         parts.DragDropCommonSheetPart,

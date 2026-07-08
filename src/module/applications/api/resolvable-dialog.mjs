@@ -1,9 +1,10 @@
 import TeriockApplication from "./application.mjs";
+import TemporaryApplicationMixin from "./mixins/temporary-application-mixin.mjs";
 
 /**
  * A custom application representing something that needs to be resolved before some routing can continue.
  */
-export default class ResolvableDialog extends TeriockApplication {
+export default class ResolvableDialog extends TemporaryApplicationMixin(TeriockApplication) {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { cancel: this._onCancel },

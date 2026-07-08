@@ -1,5 +1,5 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { DocumentDialogSheet } from "../../sheets/utility-sheets/_module.mjs";
+import { DocumentDialog } from "../../api/_module.mjs";
 
 const { FormDataExtended } = foundry.applications.ux;
 
@@ -7,7 +7,7 @@ const { FormDataExtended } = foundry.applications.ux;
  * Dialog for updating fields of a document.
  * @property {TeriockDocument} document
  */
-export default class BaseUpdater extends DocumentDialogSheet {
+export default class BaseUpdater extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: true, submitOnChange: false },
@@ -86,6 +86,12 @@ export default class BaseUpdater extends DocumentDialogSheet {
   }
 
   /** @inheritDoc */
+  async _onFirstRender(context, options = {}) {
+    await super._onFirstRender(context, options);
+    this.element.querySelector("button[type='submit']")?.focus();
+  }
+
+  /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     if (partId === "form") {
@@ -101,6 +107,7 @@ export default class BaseUpdater extends DocumentDialogSheet {
     }
     if (partId === "footer") {
       context.buttons = [{
+        default: true,
         icon: makeIconClass(TERIOCK.display.icons.ui.done),
         label: _loc("COMMON.Confirm"),
         type: "submit",

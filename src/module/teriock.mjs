@@ -57,11 +57,11 @@ foundry.helpers.Hooks.once("init", function() {
    * Make a panel sheet for a given document class.
    * @template T
    * @param {T} doc
-   * @returns {{ cls: typeof TeriockPanelSheet, doc: T, makeDefault: boolean, types: string[] }}
+   * @returns {{ cls: typeof PanelSheet, doc: T, makeDefault: boolean, types: string[] }}
    */
   function makePanelSheet(doc) {
     return {
-      cls: applications.sheets.utility.TeriockPanelSheet,
+      cls: applications.sheets.utility.PanelSheet,
       doc,
       label: "TERIOCK.SHEETS.Panel.LABEL",
       makeDefault: false,
