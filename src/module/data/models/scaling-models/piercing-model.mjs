@@ -1,5 +1,5 @@
 import piercingConfig from "../../../constants/config/piercing-config.mjs";
-import { localizeChoices } from "../../../helpers/localization.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -17,7 +17,7 @@ export default class PiercingModel extends BaseDataModel {
   static defineSchema() {
     return {
       raw: new fields.NumberField({
-        choices: localizeChoices(piercingConfig.levels),
+        choices: objectMap(piercingConfig.levels, (v) => v.label, { localize: true, sort: false }),
         initial: 0,
         max: 2,
         min: 0,
@@ -37,14 +37,12 @@ export default class PiercingModel extends BaseDataModel {
 
   /** @inheritDoc */
   get icon() {
-    if (this.ub) { return TERIOCK.display.icons.piercing.ub; }
-    if (this.av0) { return TERIOCK.display.icons.piercing.av0; }
-    return TERIOCK.display.icons.piercing.none;
+    return piercingConfig.levels[this.value].icon;
   }
 
   /** @inheritDoc */
   get label() {
-    return this.value >= 1 ? piercingConfig.levels[this.value] : "";
+    return this.value >= 1 ? piercingConfig.levels[this.value].label : "";
   }
 
   /**

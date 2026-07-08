@@ -63,11 +63,13 @@ export default function SidebarActorSheetPart(Base) {
        * @returns {ContextMenuEntry[]}
        */
       #piercingContextMenu() {
-        return TeriockContextMenu.makeUpdateEntries(this.actor, [
-          { icon: TERIOCK.display.icons.piercing.none, label: _loc("TERIOCK.MODELS.Piercing.MENU.0"), value: 0 },
-          { icon: TERIOCK.display.icons.piercing.av0, label: _loc("TERIOCK.MODELS.Piercing.MENU.1"), value: 1 },
-          { icon: TERIOCK.display.icons.piercing.ub, label: _loc("TERIOCK.MODELS.Piercing.MENU.2"), value: 2 },
-        ], { path: "system.offense.piercing.raw" });
+        return TeriockContextMenu.makeUpdateEntries(
+          this.actor,
+          Object.entries(TERIOCK.config.piercing.levels).map(([k, v]) => {
+            return { icon: v.icon, label: v.label, value: k };
+          }),
+          { path: "system.offense.piercing.raw" },
+        );
       }
 
       /**

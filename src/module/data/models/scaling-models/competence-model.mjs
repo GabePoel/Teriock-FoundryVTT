@@ -43,9 +43,7 @@ export default class CompetenceModel extends BaseDataModel {
 
   /** @inheritDoc */
   get icon() {
-    if (this.fluent) { return TERIOCK.display.icons.competence.fluent; }
-    if (this.proficient) { return TERIOCK.display.icons.competence.proficient; }
-    return TERIOCK.display.icons.competence.none;
+    return TERIOCK.config.competence.levels[this.value].icon;
   }
 
   /** @inheritDoc */

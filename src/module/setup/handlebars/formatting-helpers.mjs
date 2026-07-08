@@ -12,17 +12,6 @@ function normalizeBarInputs(value, max, temp = 0) {
 }
 
 /**
- * Icon name for a raw competence level.
- * @param {Teriock.System.CompetenceLevel} level
- * @returns {string}
- */
-function competenceIcon(level) {
-  if (level >= 2) { return TERIOCK.display.icons.competence.fluent; }
-  if (level >= 1) { return TERIOCK.display.icons.competence.proficient; }
-  return TERIOCK.display.icons.competence.none;
-}
-
-/**
  * CSS class string for a raw competence level.
  * @param {Teriock.System.CompetenceLevel} level
  * @returns {string}
@@ -142,7 +131,6 @@ const formattingHelperEntries = [
   ["barLost", barLost],
   ["barTemp", barTemp],
   ["barTempHide", barTempHide],
-  ["competenceIcon", competenceIcon],
   ["competenceIconClass", competenceIconClass],
   ["getName", getName],
   ["hackFill", hackFill],
