@@ -37,6 +37,19 @@ export default function AdjustableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
+      get _displayButtons() {
+        const buttons = super._displayButtons;
+        if (!this.badge) {
+          buttons.push({
+            button: "badge",
+            label: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.label",
+            update: { "system.badge": "x" },
+          });
+        }
+        return buttons;
+      }
+
+      /** @inheritDoc */
       get _isSuppressedDampened() {
         return this.form !== "intrinsic" && super._isSuppressedDampened;
       }
