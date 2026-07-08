@@ -173,18 +173,13 @@ export default class DocumentExecution extends BaseExecution {
   }
 
   /** @inheritDoc */
-  async _postInput() {
-    this.options.consumeUses = this._consumeUses;
-    return await super._postInput();
-  }
-
-  /** @inheritDoc */
-  async _updateActor() {
-    if (this.source.system.consumable) {
+  async _postExecute() {
+    if (this.source.system.consumable && this._consumeUses) {
       this.source.update({
         "system.quantity": Math.max(0, this.source.system.quantity - this.source.system.consumptionAmount),
       });
     }
+    await super._postExecute();
   }
 
   /** @inheritDoc */
