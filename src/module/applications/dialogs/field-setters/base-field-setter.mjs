@@ -1,0 +1,107 @@
+import { icons } from "../../../constants/display/icons.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
+import { DocumentDialogSheet } from "../../sheets/utility-sheets/_module.mjs";
+
+const { FormDataExtended } = foundry.applications.ux;
+
+/**
+ * Dialog for setting fields of a document.
+ * @property {TeriockDocument} document
+ */
+export default class BaseFieldSetter extends DocumentDialogSheet {
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = {
+    form: { closeOnSubmit: true, submitOnChange: false },
+    position: { width: 450 },
+    window: {
+      contentClasses: ["standard-form"],
+      icon: makeIconClass(icons.ability.delivery, "title"),
+      resizable: false,
+    },
+  };
+
+  /** @type {Record<string, HandlebarsTemplatePart>} */
+  static PARTS = {
+    form: { template: "teriock/shared/field-list-part" },
+    footer: { template: "templates/generic/form-footer.hbs" },
+  };
+
+  /**
+   * @inheritDoc
+   * @param {Partial<ApplicationConfiguration & { TeriockDocument: document }>} options
+   */
+  constructor(options) {
+    super(options);
+    this._currentData = {};
+    for (const p of this._dataPaths) {
+      foundry.utils.setProperty(
+        this._currentData,
+        p,
+        foundry.utils.getProperty(this.document, p.replace("system.", "system._source.")),
+      );
+    }
+    this._currentData = foundry.utils.expandObject(this._currentData);
+  }
+
+  /** @type {object} */
+  _currentData;
+
+  /**
+   * The paths to initially get data for.
+   * @returns {string[]}
+   */
+  get _dataPaths() {
+    return [];
+  }
+
+  /**
+   * The paths to display at any given time.
+   * @returns {string[]}
+   */
+  get _formPaths() {
+    return this._dataPaths;
+  }
+
+  /**
+   * Get the choices for a path based on some other data.
+   * @param {string} path
+   * @returns {object | null}
+   */
+  _getChoicesForPath(path) {
+    return this.document.getFieldForProperty(path)?.choices;
+  }
+
+  /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    this._currentData = foundry.utils.mergeObject(
+      this._currentData,
+      this._processFormData(event, this.form, new FormDataExtended(this.form)),
+    );
+    this.render();
+  }
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    if (partId === "form") {
+      context.fields = [];
+      for (const p of this._formPaths) {
+        context.fields.push({
+          choices: this._getChoicesForPath(p),
+          field: this.document.getFieldForProperty(p),
+          name: p,
+          value: foundry.utils.getProperty(this._currentData, p),
+        });
+      }
+    }
+    if (partId === "footer") {
+      context.buttons = [{
+        icon: makeIconClass(TERIOCK.display.icons.ui.done),
+        label: _loc("COMMON.Confirm"),
+        type: "submit",
+      }];
+    }
+    return context;
+  }
+}

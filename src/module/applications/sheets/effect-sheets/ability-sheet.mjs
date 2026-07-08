@@ -3,7 +3,11 @@ import { createElement, elementClass } from "../../../helpers/html.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
-import { TeriockContextMenu } from "../../ux/_module.mjs";
+import {
+  AbilityDeliverySetter,
+  AbilityExecutionTimeSetter,
+  AbilityInteractionSetter,
+} from "../../dialogs/field-setters/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
@@ -56,57 +60,17 @@ function abilityContextMenus(ability) {
   }
 
   return {
-    active: quickMenu(TERIOCK.config.ability.executionTime.active, "system.executionTime"),
-    delivery: quickMenu(objectMap(TERIOCK.config.ability.delivery, v => v.label), "system.delivery"),
     expansion: quickMenu(objectMap(TERIOCK.config.ability.expansion, v => v.label), "system.expansion.type", true),
     expansionSaveAttribute: [{
       icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
       label: _loc("TERIOCK.TERMS.Common.none"),
       onClick: async () => await ability.update({ "system.expansion.featSaveAttribute": null }),
     }, ...quickMenu(TERIOCK.reference.attributes, "system.expansion.featSaveAttribute")],
-    featSaveAttribute: quickMenu(TERIOCK.reference.attributes, "system.featSaveAttribute"),
     form: Object.entries(TERIOCK.config.effect.form).map(([key, value]) => ({
       icon: makeIcon(value.icon, TERIOCK.display.iconStyles.contextMenu),
       label: value.label,
       onClick: async () => await ability.update({ "system.form": key }),
     })),
-    interaction: quickMenu(TERIOCK.config.ability.interaction, "system.interaction"),
-    maneuver: [{
-      icon: makeIcon(TERIOCK.display.icons.maneuver.active, "contextMenu"),
-      label: _loc("TERIOCK.TERMS.Maneuver.active"),
-      onClick: async () => {
-        await ability.update({ "system.executionTime.base": "a1", "system.maneuver": "active" });
-      },
-    }, {
-      icon: makeIcon(TERIOCK.display.icons.maneuver.reactive, "contextMenu"),
-      label: _loc("TERIOCK.TERMS.Maneuver.reactive"),
-      onClick: async () => {
-        await ability.update({ "system.executionTime.base": "r1", "system.maneuver": "reactive" });
-      },
-    }, {
-      icon: makeIcon(TERIOCK.display.icons.maneuver.passive, "contextMenu"),
-      label: _loc("TERIOCK.TERMS.Maneuver.passive"),
-      onClick: async () =>
-        await ability.update({ "system.executionTime.base": "passive", "system.maneuver": "passive" }),
-    }, {
-      icon: makeIcon(TERIOCK.display.icons.maneuver.slow, "contextMenu"),
-      label: _loc("TERIOCK.TERMS.Maneuver.slow"),
-      onClick: async () => {
-        await ability.update({
-          "system.executionTime.slow.raw": "10",
-          "system.executionTime.slow.unit": "minute",
-          "system.maneuver": "slow",
-        });
-      },
-    }],
-    piercing: TeriockContextMenu.makeUpdateEntries(
-      ability,
-      Object.entries(TERIOCK.config.piercing.levels).map(([k, v]) => {
-        return { icon: v.icon, label: v.label, value: k };
-      }),
-      { path: "system.piercing.raw" },
-    ),
-    reactive: quickMenu(TERIOCK.config.ability.executionTime.reactive, "system.executionTime"),
   };
 }
 /**
@@ -114,6 +78,30 @@ function abilityContextMenus(ability) {
  * @property {TeriockAbility} document
  */
 export default class AbilitySheet extends ChildSheet {
+  /**
+   * Open the delivery setter.
+   * @returns {Promise<void>}
+   */
+  static async #onEditDelivery() {
+    await AbilityDeliverySetter.create({ document: this.document });
+  }
+
+  /**
+   * Open the execution time setter.
+   * @returns {Promise<void>}
+   */
+  static async #onEditExecutionTime() {
+    await AbilityExecutionTimeSetter.create({ document: this.document });
+  }
+
+  /**
+   * Open the interaction setter.
+   * @returns {Promise<void>}
+   */
+  static async #onEditInteraction() {
+    await AbilityInteractionSetter.create({ document: this.document });
+  }
+
   /** @type {string[]} */
   static BARS = [
     "teriock/sheets/effects/ability/status-bar",
@@ -127,6 +115,11 @@ export default class AbilitySheet extends ChildSheet {
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
+    actions: {
+      editDelivery: this.#onEditDelivery,
+      editExecutionTime: this.#onEditExecutionTime,
+      editInteraction: this.#onEditInteraction,
+    },
     classes: ["ability"],
     window: { icon: makeIconClass(documentConfig.ability.icon, "title") },
   };
@@ -171,13 +164,6 @@ export default class AbilitySheet extends ChildSheet {
   _activateContextMenus() {
     const cm = abilityContextMenus(this.document);
     const contextMap = [
-      [".delivery-box", cm.delivery, "click"],
-      [".delivery-box", cm.piercing, "contextmenu"],
-      [".execution-box", cm.maneuver, "contextmenu"],
-      [".execution-box[data-maneuver=\"Active\"]", cm.active, "click"],
-      [".execution-box[data-maneuver=\"Reactive\"]", cm.reactive, "click"],
-      [".interaction-box", cm.interaction, "click"],
-      [".interaction-box-feat", cm.featSaveAttribute, "contextmenu"],
       [".expansion-box", cm.expansion, "click"],
       [".expansion-box-detonate", cm.expansionSaveAttribute, "contextmenu"],
       [".expansion-box-ripple", cm.expansionSaveAttribute, "contextmenu"],

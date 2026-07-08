@@ -30,7 +30,7 @@ export default function AbilityUsagePart(Base) {
             required: true,
           }),
           executionTime: new fields.SchemaField({
-            base: new fields.StringField({ initial: "a1" }),
+            base: new fields.StringField({ blank: false, initial: "a1", required: true }),
             slow: new EvaluationField({ model: SlowExecutionTimeModel }),
           }),
           expansion: new fields.SchemaField({
@@ -43,9 +43,25 @@ export default function AbilityUsagePart(Base) {
             range: new EvaluationField({ model: RangeModel }),
             type: new fields.StringField({ initial: null, nullable: true }),
           }),
-          featSaveAttribute: new fields.StringField({ choices: TERIOCK.reference.attributes, initial: "mov" }),
-          interaction: new fields.StringField({ choices: TERIOCK.config.ability.interaction, initial: "attack" }),
-          maneuver: new fields.StringField({ choices: TERIOCK.config.ability.maneuver, initial: "active" }),
+          featSaveAttribute: new fields.StringField({
+            blank: false,
+            choices: TERIOCK.reference.attributes,
+            initial: "mov",
+            required: true,
+          }),
+          interaction: new fields.StringField({
+            blank: false,
+            choices: TERIOCK.config.ability.interaction,
+            initial: "attack",
+            required: true,
+          }),
+          maneuver: new fields.StringField({
+            blank: false,
+            choices: TERIOCK.config.ability.maneuver,
+            initial: "active",
+            nullable: false,
+            required: true,
+          }),
           range: new EvaluationField({ model: RangeModel }),
           targets: new fields.SetField(
             new fields.StringField({
