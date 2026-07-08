@@ -1,4 +1,4 @@
-import { setStatDiceDialog } from "../../../applications/dialogs/_module.mjs";
+import { StatDiceUpdater } from "../../../applications/dialogs/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { getRollIcon } from "../../../helpers/icon.mjs";
@@ -133,6 +133,6 @@ export default class BaseStatPoolModel extends BaseDataModel {
    * @returns {Promise<void>}
    */
   async setStatDice() {
-    await setStatDiceDialog(this);
+    await StatDiceUpdater.create({ pool: this });
   }
 }

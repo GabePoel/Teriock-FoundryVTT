@@ -1,7 +1,7 @@
-import { icons } from "../../../constants/display/icons.mjs";
-import { SlowExecutionTimeModel } from "../../../data/models/unit-models/_module.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
-import BaseUpdater from "./base-updater.mjs";
+import { icons } from "../../../../constants/display/icons.mjs";
+import { SlowExecutionTimeModel } from "../../../../data/models/unit-models/_module.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
+import BaseUpdater from "../base-updater.mjs";
 
 /**
  * Dialog for updating an ability's maneuver and execution time.

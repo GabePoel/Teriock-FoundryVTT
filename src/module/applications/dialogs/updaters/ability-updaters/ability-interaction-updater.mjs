@@ -1,6 +1,6 @@
-import { icons } from "../../../constants/display/icons.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
-import BaseUpdater from "./base-updater.mjs";
+import { icons } from "../../../../constants/display/icons.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
+import BaseUpdater from "../base-updater.mjs";
 
 /**
  * Dialog for updating an ability's interaction and feat save attribute.
