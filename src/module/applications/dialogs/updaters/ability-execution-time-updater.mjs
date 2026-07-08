@@ -1,13 +1,13 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { SlowExecutionTimeModel } from "../../../data/models/unit-models/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import BaseFieldSetter from "./base-field-setter.mjs";
+import BaseUpdater from "./base-updater.mjs";
 
 /**
- * Dialog for setting an ability's maneuver and execution time.
+ * Dialog for updating an ability's maneuver and execution time.
  * @property {TeriockAbility} document
  */
-export default class AbilityExecutionTimeSetter extends BaseFieldSetter {
+export default class AbilityExecutionTimeUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.execution, "title") } };
 

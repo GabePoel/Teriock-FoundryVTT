@@ -4,10 +4,10 @@ import { DocumentDialogSheet } from "../../sheets/utility-sheets/_module.mjs";
 const { FormDataExtended } = foundry.applications.ux;
 
 /**
- * Dialog for setting fields of a document.
+ * Dialog for updating fields of a document.
  * @property {TeriockDocument} document
  */
-export default class BaseFieldSetter extends DocumentDialogSheet {
+export default class BaseUpdater extends DocumentDialogSheet {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: true, submitOnChange: false },

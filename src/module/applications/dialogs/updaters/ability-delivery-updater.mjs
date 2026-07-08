@@ -1,12 +1,12 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import BaseFieldSetter from "./base-field-setter.mjs";
+import BaseUpdater from "./base-updater.mjs";
 
 /**
- * Dialog for setting an ability's delivery and piercing.
+ * Dialog for updating an ability's delivery and piercing.
  * @property {TeriockAbility} document
  */
-export default class AbilityDeliverySetter extends BaseFieldSetter {
+export default class AbilityDeliveryUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.delivery, "title") } };
 

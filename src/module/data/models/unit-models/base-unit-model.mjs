@@ -1,40 +1,8 @@
+import { UnitUpdater } from "../../../applications/dialogs/updaters/_module.mjs";
 import { multiplyFormula } from "../../../helpers/formula.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
 import { EvaluationModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
-const { DialogV2 } = foundry.applications.api;
-
-class UnitDialog extends DialogV2 {
-  /**
-   * @param {HTMLInputElement} rawInput
-   * @param {string} value
-   * @private
-   */
-  #updateInputs(rawInput, value) {
-    rawInput.disabled = !this.unitModel.constructor.finiteChoiceEntries.some(e => e.id === value);
-  }
-
-  /** @type {BaseUnitModel} */
-  unitModel;
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if (this.unitModel) {
-      const unitInput = /** @type {HTMLInputElement} */ this.element.querySelector(
-        `[name="${this.unitModel.schema.fieldPath}.unit"]`,
-      );
-      const rawInput = /** @type {HTMLInputElement} */ this.element.querySelector(
-        `[name="${this.unitModel.schema.fieldPath}.raw"]`,
-      );
-      this.#updateInputs(rawInput, unitInput.value);
-      unitInput.addEventListener("change", e => {
-        this.#updateInputs(rawInput, e.target.value);
-      });
-    }
-  }
-}
 
 /**
  * @property {string} unit
@@ -203,33 +171,6 @@ export default class BaseUnitModel extends EvaluationModel {
    * @returns {Promise<void>}
    */
   async updateDialog() {
-    const group = await this.getEditor();
-    const document = this.document;
-    const dialog = new UnitDialog({
-      buttons: [{
-        action: "update",
-        default: true,
-        icon: makeIconClass(TERIOCK.display.icons.ui.enable, "button"),
-        label: _loc("TERIOCK.DIALOGS.Update.BUTTONS.update"),
-        /**
-         * @param {PointerEvent} _event
-         * @param {HTMLButtonElement} button
-         */
-        async callback(_event, button) {
-          const namedElements = /** @type {HTMLInputElement[]} */ Array.from(button.form.elements).filter(el =>
-            el.hasAttribute("name")
-          );
-          const updateData = Object.fromEntries(
-            namedElements.map(el => [el.getAttribute("name"), el.type === "checkbox" ? el.checked : el.value]),
-          );
-          await document.update(updateData);
-        },
-      }],
-      content: group.outerHTML,
-      position: { width: 500 },
-      window: { icon: makeIconClass(this.icon, "title"), title: this._updateTitle },
-    });
-    dialog.unitModel = this;
-    await dialog.render(true);
+    await UnitUpdater.create({ document: this.document, path: this.schema.fieldPath, unitModel: this });
   }
 }

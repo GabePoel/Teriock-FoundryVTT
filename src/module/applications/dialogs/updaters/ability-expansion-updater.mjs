@@ -1,13 +1,13 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
-import BaseFieldSetter from "./base-field-setter.mjs";
+import BaseUpdater from "./base-updater.mjs";
 
 /**
- * Dialog for setting an ability's expansion type and feat save attribute.
+ * Dialog for updating an ability's expansion type and feat save attribute.
  * @property {TeriockAbility} document
  */
-export default class AbilityExpansionSetter extends BaseFieldSetter {
+export default class AbilityExpansionUpdater extends BaseUpdater {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.expansion, "title") } };
 

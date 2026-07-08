@@ -1,11 +1,11 @@
 import { createElement, elementClass } from "../../../helpers/html.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
 import {
-  AbilityDeliverySetter,
-  AbilityExecutionTimeSetter,
-  AbilityExpansionSetter,
-  AbilityInteractionSetter,
-} from "../../dialogs/field-setters/_module.mjs";
+  AbilityDeliveryUpdater,
+  AbilityExecutionTimeUpdater,
+  AbilityExpansionUpdater,
+  AbilityInteractionUpdater,
+} from "../../dialogs/updaters/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
@@ -14,19 +14,19 @@ import { ChildSheet } from "../utility-sheets/_module.mjs";
  */
 export default class AbilitySheet extends ChildSheet {
   /**
-   * Open the delivery setter.
+   * Open the delivery updater.
    * @returns {Promise<void>}
    */
   static async #onEditDelivery() {
-    await AbilityDeliverySetter.create({ document: this.document });
+    await AbilityDeliveryUpdater.create({ document: this.document });
   }
 
   /**
-   * Open the execution time setter.
+   * Open the execution time updater.
    * @returns {Promise<void>}
    */
   static async #onEditExecutionTime() {
-    await AbilityExecutionTimeSetter.create({ document: this.document });
+    await AbilityExecutionTimeUpdater.create({ document: this.document });
   }
 
   /**
@@ -34,15 +34,15 @@ export default class AbilitySheet extends ChildSheet {
    * @returns {Promise<void>}
    */
   static async #onEditExpansion() {
-    await AbilityExpansionSetter.create({ document: this.document });
+    await AbilityExpansionUpdater.create({ document: this.document });
   }
 
   /**
-   * Open the interaction setter.
+   * Open the interaction updater.
    * @returns {Promise<void>}
    */
   static async #onEditInteraction() {
-    await AbilityInteractionSetter.create({ document: this.document });
+    await AbilityInteractionUpdater.create({ document: this.document });
   }
 
   /** @type {string[]} */
