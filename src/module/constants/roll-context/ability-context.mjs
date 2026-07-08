@@ -50,11 +50,11 @@ Hooks.once("i18nInit", () => {
     abilityContext[`interaction.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.interaction", { name: _loc(v) });
   });
   Object.entries(TERIOCK.config.ability.delivery).forEach(([k, v]) => {
-    abilityContext[`delivery.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.delivery", { name: _loc(v) });
+    abilityContext[`delivery.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.delivery", { name: v.label });
   });
   Object.keys(TERIOCK.config.ability.targets).forEach(k => {
     abilityContext[`target.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.target", {
-      name: _loc(TERIOCK.config.ability.targets[k]),
+      name: TERIOCK.config.ability.targets[k].label,
     });
   });
   Object.entries(TERIOCK.config.ability.executionTime).forEach(([_group, values]) => {
@@ -63,7 +63,7 @@ Hooks.once("i18nInit", () => {
     });
   });
   Object.entries(TERIOCK.config.ability.expansion).forEach(([k, v]) => {
-    abilityContext[`expansion.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansion", { name: _loc(v) });
+    abilityContext[`expansion.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.expansion", { name: v.label });
   });
   Object.entries(TERIOCK.config.attribute).forEach(([k, v]) => {
     const name = _loc(v.abbreviation);

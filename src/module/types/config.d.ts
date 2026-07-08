@@ -89,6 +89,19 @@ declare global {
       reach: number;
     };
 
+    export type TargetEntry = { label: string, targetsActor?: boolean, targetsArmament?: boolean };
+
+    export type DeliveryEntry = {
+      allowPiercing?: boolean;
+      aoe?: boolean;
+      contact?: boolean;
+      label: string;
+      needsItem?: boolean;
+      ranged?: boolean;
+      sizes?: string;
+      template?: string;
+    };
+
     export type SubtypeEntry = { color: string, icon: string, label: string };
   }
 }

@@ -9,7 +9,6 @@ import competenceConfig from "./competence-config.mjs";
 import consequenceConfig from "./consequence-config.mjs";
 import costConfig from "./cost-config.mjs";
 import currencyConfig from "./currency-config.mjs";
-import deliveryConfig from "./delivery-config.mjs";
 import dieConfig from "./die-config.mjs";
 import displayConfig from "./display-config.mjs";
 import documentConfig from "./document-config.mjs";
@@ -43,7 +42,6 @@ const config = {
   consequence: consequenceConfig,
   cost: costConfig,
   currency: currencyConfig,
-  delivery: deliveryConfig,
   die: dieConfig,
   display: displayConfig,
   document: documentConfig,

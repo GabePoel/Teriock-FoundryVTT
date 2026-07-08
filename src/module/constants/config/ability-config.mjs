@@ -1,18 +1,18 @@
 import { preLocalize } from "../../helpers/localization.mjs";
 
 export default {
-  delivery: {
-    armor: "TERIOCK.TERMS.Delivery.armor",
-    aura: "TERIOCK.TERMS.Delivery.aura",
-    bite: "TERIOCK.TERMS.Delivery.bite",
-    cone: "TERIOCK.TERMS.Delivery.cone",
-    hand: "TERIOCK.TERMS.Delivery.hand",
-    item: "TERIOCK.TERMS.Delivery.item",
-    missile: "TERIOCK.TERMS.Delivery.missile",
-    self: "TERIOCK.TERMS.Delivery.self",
-    shield: "TERIOCK.TERMS.Delivery.shield",
-    sight: "TERIOCK.TERMS.Delivery.sight",
-    weapon: "TERIOCK.TERMS.Delivery.weapon",
+  delivery: /** @enum {Teriock.Config.DeliveryEntry} */ {
+    armor: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.armor", needsItem: true },
+    aura: { aoe: true, label: "TERIOCK.TERMS.Delivery.aura", ranged: true, sizes: "radius", template: "circle" },
+    bite: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.bite" },
+    cone: { aoe: true, label: "TERIOCK.TERMS.Delivery.cone", ranged: true, sizes: "length", template: "cone" },
+    hand: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.hand" },
+    item: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.item", needsItem: true },
+    missile: { allowPiercing: true, label: "TERIOCK.TERMS.Delivery.missile", ranged: true },
+    self: { label: "TERIOCK.TERMS.Delivery.self" },
+    shield: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.shield", needsItem: true },
+    sight: { label: "TERIOCK.TERMS.Delivery.sight", ranged: true },
+    weapon: { allowPiercing: true, contact: true, label: "TERIOCK.TERMS.Delivery.weapon", needsItem: true },
   },
   deliveryPackage: {
     ball: "TERIOCK.TERMS.DeliveryPackage.ball",
@@ -54,11 +54,11 @@ export default {
       custom: "TERIOCK.TERMS.ExecutionTime.slow.custom",
     },
   },
-  expansion: {
-    cascade: "TERIOCK.TERMS.Expansion.cascade",
-    detonate: "TERIOCK.TERMS.Expansion.detonate",
-    fork: "TERIOCK.TERMS.Expansion.fork",
-    ripple: "TERIOCK.TERMS.Expansion.ripple",
+  expansion: /** @enum {Teriock.Config.DeliveryEntry} */ {
+    cascade: { label: "TERIOCK.TERMS.Expansion.cascade", ranged: true },
+    detonate: { aoe: true, label: "TERIOCK.TERMS.Expansion.detonate", ranged: true, sizes: "radius" },
+    fork: { label: "TERIOCK.TERMS.Expansion.fork", ranged: true },
+    ripple: { aoe: true, label: "TERIOCK.TERMS.Expansion.ripple", ranged: true, sizes: "radius" },
   },
   interaction: {
     attack: "TERIOCK.TERMS.Interaction.attack",
@@ -75,27 +75,26 @@ export default {
   },
   targetParent: { ability: "TERIOCK.TERMS.TargetParent.ability", item: "TERIOCK.TERMS.TargetParent.item" },
   // no sort
-  targets: {
-    ability: "TERIOCK.TERMS.Targets.ability",
-    area: "TERIOCK.TERMS.Targets.area",
-    arm: "TERIOCK.TERMS.Targets.arm",
-    armor: "TERIOCK.TERMS.Targets.armor",
-    attack: "TERIOCK.TERMS.Targets.attack",
-    creature: "TERIOCK.TERMS.Targets.creature",
-    item: "TERIOCK.TERMS.Targets.item",
-    leg: "TERIOCK.TERMS.Targets.leg",
-    self: "TERIOCK.TERMS.Targets.self",
-    ship: "TERIOCK.TERMS.Targets.ship",
-    skill: "TERIOCK.TERMS.Targets.skill",
-    spell: "TERIOCK.TERMS.Targets.spell",
-    vitals: "TERIOCK.TERMS.Targets.vitals",
-    weapon: "TERIOCK.TERMS.Targets.weapon",
-
-    other: "TERIOCK.TERMS.Targets.other",
+  targets: /** @enum {Teriock.Config.TargetEntry} */ {
+    ability: { label: "TERIOCK.TERMS.Targets.ability" },
+    area: { label: "TERIOCK.TERMS.Targets.area" },
+    arm: { label: "TERIOCK.TERMS.Targets.arm", targetsActor: true },
+    armor: { label: "TERIOCK.TERMS.Targets.armor", targetsArmament: true },
+    attack: { label: "TERIOCK.TERMS.Targets.attack" },
+    creature: { label: "TERIOCK.TERMS.Targets.creature", targetsActor: true },
+    item: { label: "TERIOCK.TERMS.Targets.item", targetsArmament: true },
+    leg: { label: "TERIOCK.TERMS.Targets.leg", targetsActor: true },
+    other: { label: "TERIOCK.TERMS.Targets.other" },
+    self: { label: "TERIOCK.TERMS.Targets.self", targetsActor: true },
+    ship: { label: "TERIOCK.TERMS.Targets.ship" },
+    skill: { label: "TERIOCK.TERMS.Targets.skill" },
+    spell: { label: "TERIOCK.TERMS.Targets.spell" },
+    vitals: { label: "TERIOCK.TERMS.Targets.vitals", targetsActor: true },
+    weapon: { label: "TERIOCK.TERMS.Targets.weapon", targetsArmament: true },
   },
 };
 
-preLocalize("config.ability.delivery");
+preLocalize("config.ability.delivery", { keys: ["label"] });
 preLocalize("config.ability.deliveryPackage");
 preLocalize("config.ability.deliveryParent");
 preLocalize("config.ability.duration.unit");
@@ -103,9 +102,9 @@ preLocalize("config.ability.executionTime.active");
 preLocalize("config.ability.executionTime.passive");
 preLocalize("config.ability.executionTime.reactive");
 preLocalize("config.ability.executionTime.slow");
-preLocalize("config.ability.expansion");
+preLocalize("config.ability.expansion", { keys: ["label"] });
 preLocalize("config.ability.featSaveImprovementAmount");
 preLocalize("config.ability.interaction");
 preLocalize("config.ability.maneuver");
 preLocalize("config.ability.targetParent");
-preLocalize("config.ability.targets");
+preLocalize("config.ability.targets", { keys: ["label"] });

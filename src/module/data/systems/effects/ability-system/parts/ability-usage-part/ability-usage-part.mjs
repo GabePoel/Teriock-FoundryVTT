@@ -1,4 +1,5 @@
 import { formulaExists } from "../../../../../../helpers/formula.mjs";
+import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { EvaluationField, FormulaField } from "../../../../../fields/_module.mjs";
 import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
@@ -21,7 +22,13 @@ export default function AbilityUsagePart(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          delivery: new fields.StringField({ choices: TERIOCK.config.ability.delivery, initial: "weapon" }),
+          delivery: new fields.StringField({
+            blank: false,
+            choices: objectMap(TERIOCK.config.ability.delivery, v => v.label, { localize: true }),
+            initial: "weapon",
+            nullable: false,
+            required: true,
+          }),
           executionTime: new fields.SchemaField({
             base: new fields.StringField({ initial: "a1" }),
             slow: new EvaluationField({ model: SlowExecutionTimeModel }),
@@ -40,9 +47,12 @@ export default function AbilityUsagePart(Base) {
           interaction: new fields.StringField({ choices: TERIOCK.config.ability.interaction, initial: "attack" }),
           maneuver: new fields.StringField({ choices: TERIOCK.config.ability.maneuver, initial: "active" }),
           range: new EvaluationField({ model: RangeModel }),
-          targets: new fields.SetField(new fields.StringField({ choices: TERIOCK.config.ability.targets }), {
-            initial: ["creature"],
-          }),
+          targets: new fields.SetField(
+            new fields.StringField({
+              choices: objectMap(TERIOCK.config.ability.targets, v => v.label, { localize: true }),
+            }),
+            { initial: ["creature"] },
+          ),
         });
       }
 
@@ -99,7 +109,7 @@ export default function AbilityUsagePart(Base) {
         return [
           time || "",
           this.piercing.label,
-          TERIOCK.config.ability.delivery[this.delivery] || "",
+          TERIOCK.config.ability.delivery[this.delivery]?.label || "",
           this.interaction === "feat" ? TERIOCK.reference.attributes[this.featSaveAttribute] : "",
           TERIOCK.config.ability.interaction[this.interaction] || "",
         ];
@@ -115,7 +125,7 @@ export default function AbilityUsagePart(Base) {
             ["detonate", "ripple"].includes(this.expansion.type)
               ? TERIOCK.reference.attributes[this.expansion.featSaveAttribute]
               : "",
-            TERIOCK.config.ability.expansion[this.expansion.type] || "",
+            TERIOCK.config.ability.expansion[this.expansion.type]?.label || "",
             this.expansion.range.abbreviation,
             formulaExists(this.expansion.cap)
               ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.expansionCap", { value: this.expansion.cap })
@@ -131,7 +141,7 @@ export default function AbilityUsagePart(Base) {
       get _targetingWrappers() {
         return [
           this.isRanged ? this.range.abbreviation : "",
-          ...Array.from(this.targets.map(target => TERIOCK.config.ability.targets[target])),
+          ...Array.from(this.targets.map(target => TERIOCK.config.ability.targets[target]?.label)),
           this.duration.text || "",
         ];
       }
@@ -141,7 +151,8 @@ export default function AbilityUsagePart(Base) {
        * @returns {boolean}
        */
       get isAoe() {
-        return this.delivery === "aura" || this.delivery === "cone" || this.expansion.type === "detonate";
+        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.aoe)
+          || Boolean(TERIOCK.config.ability.expansion[this.expansion.type]?.aoe);
       }
 
       /**
@@ -157,7 +168,7 @@ export default function AbilityUsagePart(Base) {
        * @returns {boolean}
        */
       get isContact() {
-        return ["armor", "bite", "hand", "item", "shield", "weapon"].includes(this.delivery);
+        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.contact);
       }
 
       /**
@@ -165,7 +176,7 @@ export default function AbilityUsagePart(Base) {
        * @returns {boolean}
        */
       get isRanged() {
-        return ["area", "aura", "cone", "missile", "sight"].includes(this.delivery);
+        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.ranged);
       }
 
       /**
@@ -197,7 +208,7 @@ export default function AbilityUsagePart(Base) {
        * @returns {boolean}
        */
       get needsItem() {
-        return ["armor", "item", "shield", "weapon"].includes(this.delivery);
+        return Boolean(TERIOCK.config.ability.delivery[this.delivery]?.needsItem);
       }
 
       /** @inheritDoc */
@@ -231,6 +242,12 @@ export default function AbilityUsagePart(Base) {
         // Add targets
         for (const target of this.targets) { data[`target.${target}`] = 1; }
         return data;
+      }
+
+      /** @inheritDoc */
+      prepareCleanupData() {
+        if (!TERIOCK.config.ability.delivery[this.delivery].allowPiercing) { this.piercing.raw = 0; }
+        super.prepareCleanupData();
       }
 
       /** @inheritDoc */

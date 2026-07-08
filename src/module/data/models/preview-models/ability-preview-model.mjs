@@ -34,11 +34,11 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
           new TernaryField({ label: _loc(c.label) }))),
       }),
       delivery: nullString({
-        choices: TERIOCK.config.ability.delivery,
+        choices: objectMap(TERIOCK.config.ability.delivery, v => v.label),
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label"),
       }),
       expansion: nullString({
-        choices: TERIOCK.config.ability.expansion,
+        choices: objectMap(TERIOCK.config.ability.expansion, v => v.label),
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label"),
       }),
       heightened: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.heightened.label") }),
@@ -58,7 +58,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       standard: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label") }),
       sustained: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label") }),
       target: nullString({
-        choices: TERIOCK.config.ability.targets,
+        choices: objectMap(TERIOCK.config.ability.targets, v => v.label),
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.targets.label"),
       }),
     });

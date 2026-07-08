@@ -250,9 +250,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
    * @returns {boolean}
    */
   get targetsActor() {
-    const validTargets = ["creature", "vitals", "arm", "leg", "ability", "attack", "self", "other"];
-    for (const t of validTargets) { if (this.source.system.targets.has(t)) { return true; } }
-    return false;
+    return this.source.system.targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsActor);
   }
 
   /**
@@ -260,9 +258,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
    * @returns {boolean}
    */
   get targetsArmament() {
-    const validTargets = ["armor", "item", "ship", "weapon"];
-    for (const t of validTargets) { if (this.source.system.targets.has(t)) { return true; } }
-    return false;
+    return this.source.system.targets.some((t) => TERIOCK.config.ability.targets[t]?.targetsArmament);
   }
 
   /**

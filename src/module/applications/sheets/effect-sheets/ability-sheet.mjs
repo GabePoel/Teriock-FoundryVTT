@@ -2,6 +2,7 @@ import documentConfig from "../../../constants/config/document-config.mjs";
 import { createElement, elementClass } from "../../../helpers/html.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { listFormat } from "../../../helpers/localization.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 import { TeriockContextMenu } from "../../ux/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
@@ -56,8 +57,8 @@ function abilityContextMenus(ability) {
 
   return {
     active: quickMenu(TERIOCK.config.ability.executionTime.active, "system.executionTime"),
-    delivery: quickMenu(TERIOCK.config.ability.delivery, "system.delivery"),
-    expansion: quickMenu(TERIOCK.config.ability.expansion, "system.expansion.type", true),
+    delivery: quickMenu(objectMap(TERIOCK.config.ability.delivery, v => v.label), "system.delivery"),
+    expansion: quickMenu(objectMap(TERIOCK.config.ability.expansion, v => v.label), "system.expansion.type", true),
     expansionSaveAttribute: [{
       icon: makeIcon(TERIOCK.display.icons.ui.remove, "contextMenu"),
       label: _loc("TERIOCK.TERMS.Common.none"),
@@ -202,7 +203,7 @@ export default class AbilitySheet extends ChildSheet {
     else if (maneuver === "reactive") { time = TERIOCK.config.ability.executionTime.reactive[executionTime.base]; }
     else if (maneuver === "passive") { time = TERIOCK.config.ability.executionTime.passive.passive; }
     else { time = executionTime.slow.text; }
-    const targetString = listFormat(this.document.system.targets.map(t => TERIOCK.config.ability.targets[t]), {
+    const targetString = listFormat(this.document.system.targets.map(t => TERIOCK.config.ability.targets[t]?.label), {
       type: "unit",
     });
     return Object.assign(context, { executionTime: time, targetString });
