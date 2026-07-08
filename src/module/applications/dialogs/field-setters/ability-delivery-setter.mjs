@@ -1,3 +1,5 @@
+import { icons } from "../../../constants/display/icons.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseFieldSetter from "./base-field-setter.mjs";
 
 /**
@@ -5,6 +7,9 @@ import BaseFieldSetter from "./base-field-setter.mjs";
  * @property {TeriockAbility} document
  */
 export default class AbilityDeliverySetter extends BaseFieldSetter {
+  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.delivery, "title") } };
+
   /** @inheritDoc */
   get _dataPaths() {
     return ["system.delivery", "system.piercing.raw"];
@@ -17,10 +22,5 @@ export default class AbilityDeliverySetter extends BaseFieldSetter {
       paths.push("system.piercing.raw");
     }
     return paths;
-  }
-
-  /** @inheritDoc */
-  get _titlePrefix() {
-    return "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label";
   }
 }

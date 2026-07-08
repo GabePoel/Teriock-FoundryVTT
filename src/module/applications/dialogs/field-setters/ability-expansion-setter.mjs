@@ -9,10 +9,7 @@ import BaseFieldSetter from "./base-field-setter.mjs";
  */
 export default class AbilityExpansionSetter extends BaseFieldSetter {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = {
-    ...super.DEFAULT_OPTIONS,
-    window: { ...super.DEFAULT_OPTIONS.window, icon: makeIconClass(icons.ability.expansion, "title") },
-  };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.expansion, "title") } };
 
   /**
    * The currently selected expansion type.
@@ -41,11 +38,6 @@ export default class AbilityExpansionSetter extends BaseFieldSetter {
       paths.push("system.expansion.featSaveAttribute");
     }
     return paths;
-  }
-
-  /** @inheritDoc */
-  get _titlePrefix() {
-    return "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label";
   }
 
   /** @inheritDoc */

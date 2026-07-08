@@ -4,7 +4,7 @@ import {
   AbilityDeliverySetter,
   AbilityExecutionTimeSetter,
   AbilityExpansionSetter,
-  AbilityInteractionSetter
+  AbilityInteractionSetter,
 } from "../../dialogs/field-setters/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 

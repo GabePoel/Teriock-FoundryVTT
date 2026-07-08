@@ -1,4 +1,5 @@
-import { updateDialog } from "../../../../dialogs/_module.mjs";
+import { makeIconClass } from "../../../../../helpers/icon.mjs";
+import { BaseFieldSetter } from "../../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -40,12 +41,11 @@ export default function FieldsCommonSheetPart(Base) {
        */
       static async #onUpdatePaths(_event, target) {
         if (this.isEditable) {
-          await updateDialog(
-            this.document,
-            target.dataset.paths.split(" ").map(p => p.trim()),
-            target.dataset.title,
-            target.dataset.icon,
-          );
+          await BaseFieldSetter.create({
+            document: this.document,
+            paths: target.dataset.paths.split(" ").map(p => p.trim()),
+            window: { icon: makeIconClass(target.dataset.icon, "title") },
+          });
         }
       }
 

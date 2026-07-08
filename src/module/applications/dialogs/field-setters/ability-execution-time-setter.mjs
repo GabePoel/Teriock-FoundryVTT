@@ -9,10 +9,7 @@ import BaseFieldSetter from "./base-field-setter.mjs";
  */
 export default class AbilityExecutionTimeSetter extends BaseFieldSetter {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = {
-    ...super.DEFAULT_OPTIONS,
-    window: { ...super.DEFAULT_OPTIONS.window, icon: makeIconClass(icons.ability.execution, "title") },
-  };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.execution, "title") } };
 
   /**
    * Whether the current slow execution time unit is finite.
@@ -67,11 +64,6 @@ export default class AbilityExecutionTimeSetter extends BaseFieldSetter {
     if (this._currentData.system.maneuver === "passive") { return paths; }
     paths.push("system.executionTime.base");
     return paths;
-  }
-
-  /** @inheritDoc */
-  get _titlePrefix() {
-    return "TERIOCK.TERMS.Common.executionTime";
   }
 
   /** @inheritDoc */

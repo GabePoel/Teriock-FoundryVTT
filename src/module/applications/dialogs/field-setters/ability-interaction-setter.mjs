@@ -8,10 +8,7 @@ import BaseFieldSetter from "./base-field-setter.mjs";
  */
 export default class AbilityInteractionSetter extends BaseFieldSetter {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = {
-    ...super.DEFAULT_OPTIONS,
-    window: { ...super.DEFAULT_OPTIONS.window, icon: makeIconClass(icons.ability.interaction, "title") },
-  };
+  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(icons.ability.interaction, "title") } };
 
   /** @inheritDoc */
   get _dataPaths() {
@@ -23,10 +20,5 @@ export default class AbilityInteractionSetter extends BaseFieldSetter {
     const paths = ["system.interaction"];
     if (this._currentData.system.interaction === "feat") { paths.push("system.featSaveAttribute"); }
     return paths;
-  }
-
-  /** @inheritDoc */
-  get _titlePrefix() {
-    return "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label";
   }
 }

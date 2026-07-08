@@ -1,4 +1,3 @@
-import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentDialogSheet } from "../../sheets/utility-sheets/_module.mjs";
 
@@ -13,11 +12,7 @@ export default class BaseFieldSetter extends DocumentDialogSheet {
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: true, submitOnChange: false },
     position: { width: 450 },
-    window: {
-      contentClasses: ["standard-form"],
-      icon: makeIconClass(icons.ability.delivery, "title"),
-      resizable: false,
-    },
+    window: { contentClasses: ["standard-form"], resizable: false },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
@@ -28,10 +23,11 @@ export default class BaseFieldSetter extends DocumentDialogSheet {
 
   /**
    * @inheritDoc
-   * @param {Partial<ApplicationConfiguration & { TeriockDocument: document }>} options
+   * @param {Partial<ApplicationConfiguration & { TeriockDocument: document, paths?: string[] }>} options
    */
   constructor(options) {
     super(options);
+    if (options.paths) { this.#dataPaths = options.paths; }
     this._currentData = {};
     for (const p of this._dataPaths) {
       foundry.utils.setProperty(
@@ -43,6 +39,9 @@ export default class BaseFieldSetter extends DocumentDialogSheet {
     this._currentData = foundry.utils.expandObject(this._currentData);
   }
 
+  /** @type {string[]} */
+  #dataPaths = [];
+
   /** @type {object} */
   _currentData;
 
@@ -51,7 +50,7 @@ export default class BaseFieldSetter extends DocumentDialogSheet {
    * @returns {string[]}
    */
   get _dataPaths() {
-    return [];
+    return this.#dataPaths;
   }
 
   /**
@@ -60,6 +59,11 @@ export default class BaseFieldSetter extends DocumentDialogSheet {
    */
   get _formPaths() {
     return this._dataPaths;
+  }
+
+  /** @inheritDoc */
+  get _titlePrefix() {
+    return this.document.getFieldForProperty(this._formPaths[0])?.label ?? super._titlePrefix;
   }
 
   /**
