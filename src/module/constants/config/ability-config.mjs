@@ -54,11 +54,23 @@ export default {
       custom: "TERIOCK.TERMS.ExecutionTime.slow.custom",
     },
   },
-  expansion: /** @enum {Teriock.Config.DeliveryEntry} */ {
+  expansion: /** @enum {Teriock.Config.ExpansionEntry} */ {
     cascade: { label: "TERIOCK.TERMS.Expansion.cascade", ranged: true },
-    detonate: { aoe: true, label: "TERIOCK.TERMS.Expansion.detonate", ranged: true, sizes: "radius" },
+    detonate: {
+      aoe: true,
+      label: "TERIOCK.TERMS.Expansion.detonate",
+      needsSaveAttribute: true,
+      ranged: true,
+      sizes: "radius",
+    },
     fork: { label: "TERIOCK.TERMS.Expansion.fork", ranged: true },
-    ripple: { aoe: true, label: "TERIOCK.TERMS.Expansion.ripple", ranged: true, sizes: "radius" },
+    ripple: {
+      aoe: true,
+      label: "TERIOCK.TERMS.Expansion.ripple",
+      needsSaveAttribute: true,
+      ranged: true,
+      sizes: "radius",
+    },
   },
   interaction: {
     attack: "TERIOCK.TERMS.Interaction.attack",

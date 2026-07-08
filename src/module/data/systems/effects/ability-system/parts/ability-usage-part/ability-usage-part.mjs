@@ -36,9 +36,10 @@ export default function AbilityUsagePart(Base) {
           expansion: new fields.SchemaField({
             cap: new FormulaField({ deterministic: false }),
             featSaveAttribute: new fields.StringField({
+              blank: false,
               choices: TERIOCK.reference.attributes,
-              initial: null,
-              nullable: true,
+              initial: "mov",
+              required: true,
             }),
             range: new EvaluationField({ model: RangeModel }),
             type: new fields.StringField({ initial: null, nullable: true }),
