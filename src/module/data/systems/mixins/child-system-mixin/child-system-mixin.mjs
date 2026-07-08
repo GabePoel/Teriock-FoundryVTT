@@ -290,7 +290,7 @@ export default function ChildSystemMixin(Base) {
             group: "share",
             icon: makeIcon(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareImage"),
-            onClick: async () => TeriockChatMessage.fromImage(this.parent.img, { actor: this.actor }),
+            onClick: async () => TeriockChatMessage.fromImg(this.parent.img, { actor: this.actor }),
           },
           {
             group: "share",

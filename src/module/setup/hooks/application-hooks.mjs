@@ -110,7 +110,7 @@ function addShareImageToHeader(application, controls) {
     action: "shareImageInChat",
     icon: makeIconClass(TERIOCK.display.icons.ui.shareImage, "contextMenu"),
     label: _loc("TERIOCK.SYSTEMS.Child.MENU.shareInChat"),
-    onClick: () => TeriockChatMessage.fromImage(application.options.src),
+    onClick: () => TeriockChatMessage.fromImg(application.options.src),
   });
 }
 

@@ -33,6 +33,7 @@ export default class BaseMessageSystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       content: new fields.HTMLField(),
+      img: new fields.FilePathField({ categories: ["IMAGE"] }),
       panels: panelsField(),
       source: new fields.DocumentUUIDField(),
       tags: new fields.ArrayField(new fields.StringField()),
@@ -149,6 +150,7 @@ export default class BaseMessageSystem
       speakerImg: this.document.speakerImg,
       system: this,
       TERIOCK,
+      writer: this.document.alias !== this.document.author?.name ? this.document.author?.name : null,
       ...options,
     };
   }

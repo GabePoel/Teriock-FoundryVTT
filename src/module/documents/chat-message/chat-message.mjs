@@ -13,12 +13,15 @@ const { ChatMessage } = foundry.documents;
 export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin(ChatMessage) {
   /**
    * @inheritDoc
-   * @param {object} data
-   * @param {Partial<DatabaseCreateOperation & { defaultMode: boolean} >} [operation]
+   * @param {object[]} [data]
+   * @param {Partial<DatabaseCreateOperation & { defaultMode: boolean}>} [operation]
    */
-  static async create(data = {}, operation = {}) {
-    if (operation.defaultMode) { this.applyMode(data, game.settings.get("core", "messageMode")); }
-    return super.create(data, operation);
+  static async createDocuments(data = [], operation = {}) {
+    for (const d of data) {
+      if (d.speaker?.img) { foundry.utils.setProperty(d, "system.img", d.speaker.img); }
+      if (operation.defaultMode) { this.applyMode(d, game.settings.get("core", "messageMode")); }
+    }
+    return super.createDocuments(data, operation);
   }
 
   /**
@@ -29,7 +32,7 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
    * @param {string} [options.name]
    * @returns {Promise<void>}
    */
-  static async fromImage(img, options = {}) {
+  static async fromImg(img, options = {}) {
     if (!img) { return; }
     await this.create({
       content: dedent(`
@@ -41,11 +44,69 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
   }
 
   /**
+   * Attempt to determine who is the image for a certain chat message.
+   * @param {object} options
+   * @param {TeriockActor} [options.actor]
+   * @param {TeriockToken|TeriockTokenDocument} [options.token]
+   * @param {TeriockScene} [options.scene]
+   * @param {string} [options.img]
+   * @returns {string|null}
+   */
+  static getImg(options = {}) {
+    // Mirror the cases of `getSpeaker` so that have the correct image.
+
+    // Case 0: An image is explicitly provided.
+    if (typeof options.img === "string") { return options.img; }
+
+    // Case 1: A token is explicitly provided.
+    if (options.token instanceof foundry.canvas.placeables.Token) { options.token = options.token.document; }
+    if (options.token instanceof foundry.documents.TokenDocument) { return options.token.img; }
+
+    // Case 2: An actor is explicitly provided
+    if (options.actor instanceof foundry.documents.Actor) { return options.actor.img; }
+
+    // Case 3: Not the viewed scene
+    if (options.scene instanceof foundry.documents.Scene) {
+      const character = game.user.character;
+      if (character) { return character.img; }
+    }
+
+    // Case 4: Infer from controlled tokens
+    if (canvas.ready) {
+      const controlled = canvas.tokens.controlled;
+      if (controlled.length) { return controlled.shift().document.img; }
+    }
+
+    // Case 5 - Infer from impersonated Actor
+    const character = game.user.character;
+    if (character) {
+      const tokens = character.getActiveTokens(false, true);
+      if (tokens.length) { return tokens.shift()?.img; }
+    }
+
+    // Case 6 - Let it be
+    return null;
+  }
+
+  /**
+   * @inheritDoc
+   * @param {object} options
+   * @param {TeriockActor} [options.actor]
+   * @param {TeriockToken|TeriockTokenDocument} [options.token]
+   * @param {TeriockScene} [options.scene]
+   * @param {string} [options.img]
+   * @returns {scene?: ID<TeriockScene>, actor?: ID<TeriockActor>, token?: ID<TeriockTokenDocument>, alias?: string, img?: Teriock.System.ImageString}
+   */
+  static getSpeaker(options = {}) {
+    return Object.assign(super.getSpeaker(options), { img: this.getImg(options) });
+  }
+
+  /**
    * An image representing the speaker of this message.
    * @returns {string}
    */
   get speakerImg() {
-    return this.speakerToken?.img ?? this.speakerActor?.img ?? this.author.avatar;
+    return this.system.img ?? this.speakerToken?.img ?? this.speakerActor?.img ?? this.author.avatar;
   }
 
   /**
