@@ -63,7 +63,7 @@ export default class BaseUnitModel extends EvaluationModel {
     const unitType = this.unitType;
     if (unitType === "zero") { return 0; }
     if (unitType === "infinite") { return Infinity; }
-    return value;
+    return value.toNearest(0.01);
   }
 
   /** @inheritDoc */

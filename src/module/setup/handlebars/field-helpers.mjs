@@ -46,6 +46,7 @@ function formBox(input, options) {
     else { content = `${secondary}&nbsp;/&nbsp;${content}`; }
   }
   if (hasUnselected) { content = `<div class="selected">${content}</div>`; }
+  const splitInputClass = hasSecondaryContent && !hasUnselected ? "ab-split-input" : "";
   const tooltipStr = tooltip && tooltip.toString().length > 0 ? `data-tooltip="${tooltip}"` : "";
   let iconStr = `<i class="${makeIconClass(icon, "light")}" ${tooltipStr}></i>`;
   let styleStr = "";
@@ -63,7 +64,7 @@ function formBox(input, options) {
               ${iconStr}
             </div>
             <div 
-              class="ab-box-content ${overflow ? "ab-text-content" : ""} ${hasSecondaryContent ? "ab-split-input" : ""}"
+              class="ab-box-content ${overflow ? "ab-text-content" : ""} ${splitInputClass}"
               ${overflowTooltip}
             >
               ${unselectedContent}${content}

@@ -46,7 +46,7 @@ export default function ArmamentSystemMixin(Base) {
           bv: defenseField(),
           damage: new MultiChangeField({
             base: rollableFormulaField(),
-            twoHanded: rollableFormulaField(),
+            twoHanded: rollableFormulaField({ initial: "" }),
             types: new fields.SetField(new IdentifierField()),
           }, { multiChangePaths: ["base", "twoHanded"] }),
           equipmentClasses: new fields.SetField(
@@ -161,13 +161,6 @@ export default function ArmamentSystemMixin(Base) {
             update: { "system.damage.base": "1" },
           });
         }
-        if (!formulaExists(this._source.damage.twoHanded)) {
-          buttons.push({
-            button: "twoHandedDamage",
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.twoHanded.label",
-            update: { "system.damage.twoHanded": "1" },
-          });
-        }
         if (!this.av.raw) {
           buttons.push({
             button: "av",
@@ -196,13 +189,6 @@ export default function ArmamentSystemMixin(Base) {
             button: "range",
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label",
             update: { "system.range.long.raw": "5" },
-          });
-        }
-        if (this.range.ranged && !formulaExists(this.range.short.raw)) {
-          buttons.push({
-            button: "shortRange",
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label",
-            update: { "system.range.short.raw": "5" },
           });
         }
         return buttons;

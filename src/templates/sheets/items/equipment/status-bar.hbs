@@ -29,24 +29,12 @@
     icon=TERIOCK.display.icons.equipment.equipmentType
   }}
   {{formBox
-    (concat
-      "<span style='flex: auto;' data-tooltip='"
-      (ifThen
-        (not (eq system.range.long.unitType "zero"))
-        (localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.alt")
-        "")
-      "' data-path='system.range.long' data-action='updateUnit'>"
-      (ifThen (eq system.range.long.unitType "finite") system.range.long.formula system.range.long.text)
-      "</span>")
-    secondary=(concat
-      "<span style='flex: auto;' data-tooltip='"
-      (localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.short.raw.label")
-      "' data-path='system.range.short' data-action='updateUnit'>"
-      (ifThen (eq system.range.short.unitType "finite") system.range.short.formula system.range.short.text)
-      "</span>")
+    (ifThen (eq system.range.long.unitType "finite") system.range.long.formula system.range.long.text)
+    secondary=(ifThen (eq system.range.short.unitType "finite") system.range.short.formula system.range.short.text)
+    action=(ifThen editable "editArmamentRange" "")
     after=false
     icon=TERIOCK.display.icons.ability.range
-    includeSecondary=(not (eq system.range.long.unitType "zero"))
+    includeSecondary=(exists system._source.range.short.raw)
     label=(ifThen (eq system.range.long.unitType "finite") system.range.long.symbol "")
     tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label")
   }}
