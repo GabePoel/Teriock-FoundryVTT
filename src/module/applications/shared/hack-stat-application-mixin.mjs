@@ -10,7 +10,6 @@ export default function HackStatApplicationMixin(Base) {
      * @extends {TeriockDocumentSheet}
      * @mixin
      * @property {TeriockActor} document
-     * @property {boolean} _consumeStatDice
      */
     class HackStatApplication extends Base {
       /**
@@ -23,7 +22,7 @@ export default function HackStatApplicationMixin(Base) {
       static async _onRollStatDie(_event, target) {
         const statDie = this._getStatDie(target);
         const criticallyWounded = this.document.statuses.has("criticallyWounded");
-        await statDie.use(this._consumeStatDice ?? true);
+        await statDie.use(this.state?.consumeStatDice ?? true);
         if (!criticallyWounded) { await this.document.system.takeAwaken(); }
       }
 

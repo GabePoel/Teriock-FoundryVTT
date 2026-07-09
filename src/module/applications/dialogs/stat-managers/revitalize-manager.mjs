@@ -21,14 +21,14 @@ export default class RevitalizeManager extends BaseStatManager {
   /** @inheritDoc */
   static async _onRollStatDie(event, target) {
     const statDie = this._getStatDie(target);
-    if (this._forHarm) {
+    if (this.state.forHarm) {
       const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({
         formula: this._getStatDieRollFormula(statDie.formula.replace("mp", "mana")),
-        roll: "drain",
+        impact: "drain",
       });
       rollActivation.event = event;
       await rollActivation.primaryAction();
-      if (this._consumeStatDice) { await statDie.toggle(true); }
+      if (this.state.consumeStatDice) { await statDie.toggle(true); }
     } else {
       await super._onRollStatDie(event, target);
     }

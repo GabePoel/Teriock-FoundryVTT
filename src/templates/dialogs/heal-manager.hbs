@@ -1,4 +1,4 @@
-<form class="dialog-form standard-form heal-dialog">
+<div class="dialog-form standard-form heal-dialog">
   <div class="stat-header">
     <div class="ab-profile-img timage" data-tooltip="{{ name }}">
       <img src="{{ img }}" alt="" loading="lazy" />
@@ -30,21 +30,21 @@
     <div class="standard-form teriock-form-container">
       {{formGroup
         consumeStatDiceField
-        value=consumeStatDice
+        value=state.consumeStatDice
         rootId=appId
-        name="consume-dice"
+        name="state.consumeStatDice"
       }}
       {{formGroup
         forHarmField
-        value=forHarm
+        value=state.forHarm
         rootId=appId
-        name="for-harm"
+        name="state.forHarm"
       }}
       {{formGroup
         substitutionField
-        value=substitution
+        value=state.substitution
         rootId=appId
-        name="substitution"
+        name="state.substitution"
       }}
     </div>
   {{/if}}
@@ -54,4 +54,4 @@
       <span>{{localize "TERIOCK.DIALOGS.Heal.done"}}</span>
     </button>
   </footer>
-</form>
+</div>

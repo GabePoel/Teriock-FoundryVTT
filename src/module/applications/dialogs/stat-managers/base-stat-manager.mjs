@@ -6,9 +6,6 @@ import { HackStatApplicationMixin } from "../../shared/_module.mjs";
 /**
  * @extends {DocumentDialog}
  * @mixes HackStatApplication
- * @property {boolean} _consumeStatDice
- * @property {boolean} _forHarm
- * @property {Teriock.System.FormulaString} _substitution
  */
 export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialog) {
   /** @type {Partial<ApplicationConfiguration>} */
@@ -34,7 +31,7 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
   static async _onRollStatDie(_event, target) {
     const statDie = this._getStatDie(target);
     const criticallyWounded = this.document.statuses.has("criticallyWounded");
-    await statDie.use(this._consumeStatDice ?? true, { substitution: this._substitution });
+    await statDie.use(this.state.consumeStatDice ?? true, { substitution: this.state.substitution });
     if (!criticallyWounded) { await this.document.system.takeAwaken(); }
   }
 
@@ -49,9 +46,7 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
     if (title.length > 0) { applicationOptions.title = title; }
     Object.assign(applicationOptions, { document: actor, sheetConfig: false });
     super(applicationOptions);
-    this._forHarm = forHarm;
-    this._consumeStatDice = consumeStatDice;
-    this._substitution = substitution;
+    this.state = { consumeStatDice, forHarm, substitution };
     this._substitutionField = new FormulaField({
       deterministic: false,
       hint: _loc("TERIOCK.DIALOGS.StatManager.FIELDS.substitution.hint"),
@@ -61,13 +56,16 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
     });
   }
 
+  /** @type {FormulaField} */
+  _substitutionField;
+
   /**
    * Apply the dialog substitution to a stat die roll formula.
    * @param {Teriock.System.FormulaString} formula
    * @returns {Teriock.System.FormulaString}
    */
   _getStatDieRollFormula(formula) {
-    return formulaExists(this._substitution) ? substituteFormula(formula, this._substitution) : formula;
+    return formulaExists(this.state.substitution) ? substituteFormula(formula, this.state.substitution) : formula;
   }
 
   /** @inheritDoc */
@@ -78,39 +76,11 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    /** @type {HTMLInputElement} */
-    const forHarmCheckbox = this.element.querySelector("[name='for-harm']");
-    if (forHarmCheckbox) {
-      forHarmCheckbox.addEventListener("change", () => {
-        this._forHarm = forHarmCheckbox.checked;
-      });
-    }
-    /** @type {HTMLInputElement} */
-    const consumeDiceCheckbox = this.element.querySelector("[name='consume-dice']");
-    if (consumeDiceCheckbox) {
-      consumeDiceCheckbox.addEventListener("change", () => {
-        this._consumeStatDice = consumeDiceCheckbox.checked;
-      });
-    }
-    /** @type {HTMLInputElement} */
-    const substitutionInput = this.element.querySelector("[name='substitution']");
-    if (substitutionInput) {
-      substitutionInput.addEventListener("change", () => {
-        this._substitution = substitutionInput.value;
-      });
-    }
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options = {}) {
     return Object.assign(await super._prepareContext(options), {
-      consumeStatDice: this._consumeStatDice,
       consumeStatDiceField: this._consumeStatDiceField,
-      forHarm: this._forHarm,
       forHarmField: this._forHarmField,
-      substitution: this._substitution,
+      state: this.state,
       substitutionField: this._substitutionField,
     });
   }

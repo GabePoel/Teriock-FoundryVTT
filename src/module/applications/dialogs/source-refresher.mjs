@@ -48,9 +48,9 @@ export default class SourceRefresher extends DocumentDialog {
    * @this {SourceRefresher}
    */
   static async _onRefresh() {
-    const source = await fromUuid(this.selected);
+    const source = await fromUuid(this.state.selected);
     await this.close();
-    await this.document.system.refreshFromSource(source, this.refreshOptions);
+    await this.document.system.refreshFromSource(source, this.state.refreshOptions);
   }
 
   constructor(...args) {
@@ -59,15 +59,13 @@ export default class SourceRefresher extends DocumentDialog {
       foundry.helpers.Localization.localizeDataModel(RefreshOptions);
       localized = true;
     }
-    this.refreshOptions = new RefreshOptions();
-    this.selected = null;
+    const refreshOptions = new RefreshOptions();
+    this.#refreshOptionFields = refreshOptions.schema.fields;
+    this.state = { refreshOptions: refreshOptions.toObject(), selected: null };
   }
 
-  /** @type {RefreshOptions} */
-  refreshOptions;
-
-  /** @type {UUID<AnyCommonDocument>|null} */
-  selected;
+  /** @type {Record<string, BooleanField>} */
+  #refreshOptionFields;
 
   /** @inheritDoc */
   get _titlePrefix() {
@@ -81,19 +79,6 @@ export default class SourceRefresher extends DocumentDialog {
     this.element.querySelectorAll(".teriock-block-searchbar").forEach(el => el.remove());
     this.element.querySelectorAll(".dynamic-select .form-group").forEach(/** @param {HTMLElement} el */ el => {
       el.style.setProperty("--fade", "0");
-    });
-    // Listen for updates from the available refresh source documents
-    this.element.querySelectorAll("input[type='radio']").forEach(el => {
-      el.addEventListener("change", () => {
-        if (el?.checked) { this.selected = el.value; }
-      });
-    });
-    // Listen for refresh option updates
-    this.element.querySelectorAll("input[type='checkbox']").forEach(el => {
-      el.addEventListener("change", () => {
-        const name = el.getAttribute("name");
-        this.refreshOptions[name] = el?.checked;
-      });
     });
   }
 
@@ -112,8 +97,10 @@ export default class SourceRefresher extends DocumentDialog {
         label: "COMMON.Confirm",
         type: "submit",
       }],
+      choiceName: "state.selected",
       documents: documentMap,
       hint: _loc(documents.length ? "TERIOCK.DIALOGS.SourceRefresh.hint" : "TERIOCK.DIALOGS.SourceRefresh.noSources"),
+      state: this.state,
       tooltip: true,
     });
   }
@@ -122,9 +109,11 @@ export default class SourceRefresher extends DocumentDialog {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     if (partId === "options") {
-      context.fields = Object.values(this.refreshOptions.schema.fields).map(f => {
-        return { field: f };
-      });
+      context.fields = Object.entries(this.#refreshOptionFields).map(([name, field]) => ({
+        field,
+        name: `state.refreshOptions.${name}`,
+        value: this.state.refreshOptions[name],
+      }));
     }
     return context;
   }

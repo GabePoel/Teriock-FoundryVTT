@@ -24,16 +24,16 @@ export default class HealManager extends BaseStatManager {
    */
   static async _onRollStatDie(event, target) {
     const statDie = this._getStatDie(target);
-    if (this._forHarm) {
+    if (this.state.forHarm) {
       const rollActivation = new teriock.data.pseudoDocuments.activations.RollActivation({
         formula: this._getStatDieRollFormula(statDie.formula.replace("hp", "holy")),
-        roll: "damage",
+        impact: "damage",
       });
       rollActivation.event = event;
       await rollActivation.primaryAction();
-      if (this._consumeStatDice) { await statDie.toggle(true); }
+      if (this.state.consumeStatDice) { await statDie.toggle(true); }
     } else {
-      await statDie.use(this._consumeStatDice, { substitution: this._substitution });
+      await statDie.use(this.state.consumeStatDice, { substitution: this.state.substitution });
     }
   }
 

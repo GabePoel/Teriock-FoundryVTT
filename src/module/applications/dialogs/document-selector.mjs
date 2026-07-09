@@ -61,6 +61,15 @@ export default class DocumentSelector extends ResolvableDialog {
   }
 
   /**
+   * @inheritDoc
+   * @this {DocumentSelector}
+   */
+  static async _onDoubleClickOpenDocument(event, target) {
+    if (!this.openable) { return; }
+    return super._onDoubleClickOpenDocument(event, target);
+  }
+
+  /**
    * @param {PointerEvent} event
    * @returns {Promise<void>}
    * @this {DocumentSelector}

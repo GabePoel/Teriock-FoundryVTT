@@ -40,6 +40,10 @@
                     {{#if ../multi}}
                       type="checkbox"
                       name="{{ id }}"
+                    {{else if ../choiceName}}
+                      type="radio"
+                      name="{{ ../choiceName }}"
+                      value="{{ id }}"
                     {{else}}
                       type="radio"
                       name="{{concat "choice-" @root/appId}}"
