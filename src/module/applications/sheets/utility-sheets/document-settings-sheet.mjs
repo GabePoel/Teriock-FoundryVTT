@@ -16,7 +16,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    all: { scrollable: [""], template: "teriock/sheets/utility/document-config" },
+    all: { scrollable: [""], template: "teriock/sheets/utility/document-settings-sheet" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
@@ -37,6 +37,7 @@ export default class DocumentSettingsSheet extends DocumentDialog {
       hint,
       label,
       localize,
+      name: path,
       placeholder,
       reset,
       value: foundry.utils.getProperty(this.document, path),

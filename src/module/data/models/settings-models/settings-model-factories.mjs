@@ -16,9 +16,10 @@ function settingsPath(category, key, field) {
  * Build a schema with one field per setting in a category.
  * @param {Teriock.Config.SettingsCategory} category
  * @param {typeof foundry.data.fields.DataField} FieldClass
+ * @param {DataFieldOptions} [options]
  * @returns {DataSchema}
  */
-function settingsSchema(category, FieldClass) {
+function settingsSchema(category, FieldClass, options = {}) {
   return Object.fromEntries(
     Object.keys(settingsConfig[category]).map(
       key => [
@@ -27,6 +28,7 @@ function settingsSchema(category, FieldClass) {
           hint: settingsPath(category, key, "hint"),
           initial: settingsConfig[category][key],
           label: settingsPath(category, key, "name"),
+          ...options,
         }),
       ]
     ),
@@ -61,7 +63,7 @@ export function documentSettingsModelFactory(category) {
 
     /** @inheritDoc */
     static defineSchema() {
-      return settingsSchema(category, TernaryField);
+      return settingsSchema(category, TernaryField, { initial: null });
     }
   };
 }
