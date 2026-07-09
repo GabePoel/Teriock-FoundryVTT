@@ -43,7 +43,7 @@ export default function BaseApplicationMixin(Base) {
 
     /**
      * A generic event handler for double-clicks which can be extended by subclasses.
-     * Handlers defined in {@link Teriock.Application._ApplicationConfiguration.doubles | doubles} are called first.
+     * Handlers defined in {@link Teriock.Application._ApplicationConfiguration.doubles} are called first.
      * This method is only called for `data-double` values that have no defined handler.
      * @param {MouseEvent} _event
      * @param {HTMLElement} _target
