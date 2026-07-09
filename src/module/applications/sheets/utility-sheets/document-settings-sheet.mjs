@@ -5,7 +5,7 @@ import { DocumentDialog } from "../../api/_module.mjs";
 export default class DocumentSettingsSheet extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
-    form: { closeOnSubmit: false, submitOnChange: true },
+    form: { closeOnSubmit: true, submitOnChange: false },
     position: { width: 650 },
     window: {
       contentClasses: ["standard-form", "teriock-settings"],
@@ -15,7 +15,10 @@ export default class DocumentSettingsSheet extends DocumentDialog {
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = { all: { scrollable: [""], template: "teriock/sheets/utility/document-config" } };
+  static PARTS = {
+    all: { scrollable: [""], template: "teriock/sheets/utility/document-config" },
+    footer: { template: "templates/generic/form-footer.hbs" },
+  };
 
   /**
    * Configure a field.
@@ -116,6 +119,20 @@ export default class DocumentSettingsSheet extends DocumentDialog {
     }
     const useFieldset = context.configs.length > 1;
     context.configs = context.configs.map(config => ({ ...config, fieldset: useFieldset }));
+    return context;
+  }
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    if (partId === "footer") {
+      context.buttons = [{
+        default: true,
+        icon: makeIconClass(TERIOCK.display.icons.ui.done),
+        label: _loc("COMMON.Confirm"),
+        type: "submit",
+      }];
+    }
     return context;
   }
 }

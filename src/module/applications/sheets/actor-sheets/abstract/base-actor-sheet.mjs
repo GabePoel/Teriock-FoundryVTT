@@ -65,19 +65,6 @@ export default class BaseActorSheet
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    /** @type {NodeListOf<HTMLTernaryElement>} */
-    const ternaryInputs = this.element.querySelectorAll("ternary-input[name]:not([name^=\"previewMenus.\"])");
-    ternaryInputs.forEach(el => {
-      el.addEventListener("change", async () => {
-        foundry.utils.setProperty(this, el.name, el.value);
-        await this.render();
-      });
-    });
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
     this._prepareDisplayContext(context);
