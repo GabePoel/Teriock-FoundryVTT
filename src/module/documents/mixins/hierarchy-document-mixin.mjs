@@ -407,13 +407,15 @@ export default function HierarchyDocumentMixin(Base) {
         super._onDelete(options, userId);
         if (game.user.isActiveGM) { this.dependents.forEach(d => d.delete()); }
         if (this.system._dep && this.uuid) { game.teriock?.dependents.untrack(this.system._dep, this); }
-        // If this is deleted as part of a folder it might not call the appropriate operation and descendents need
-        // to be deleted separately. This sucks but IDK a better solution.
+        // If this is deleted as part of a folder it might not call the appropriate operation and descendents need to be
+        // deleted separately. Only remaining documents get deleted. This sucks but IDK a better solution.
         if (this.checkEditor(userId)) {
-          this.constructor.deleteDocuments(this.allSubs.contents.map(s => s._id), {
-            pack: this.compendium?.collection,
-            parent: this.parent,
-          });
+          this.getAllSubs().then((subs) =>
+            this.constructor.deleteDocuments(subs.contents.filter((s) => s?.persisted).map((s) => s._id), {
+              pack: this.compendium?.collection,
+              parent: this.parent,
+            })
+          );
         }
         if (options.render !== false) { this.#renderSheets(); }
       }

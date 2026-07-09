@@ -27,9 +27,9 @@ export default class TeriockItem
 {
   /** @inheritDoc */
   static async _onWriteOperation(documents, operation, user) {
-    if (documents.some(d => d.checkEditor(user))) {
-      const actors = new Set();
-      for (const d of documents) { if (d.actor) { actors.add(d.actor); } }
+    const actors = new Set();
+    for (const d of documents) { if (d.actor && d.checkEditor(user)) { actors.add(d.actor); } }
+    if (actors.size) {
       const operations = (await Promise.all(actors.map(a => a._getStagedOperations()))).flat();
       await foundry.documents.modifyBatch(operations);
     }
