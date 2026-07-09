@@ -4,8 +4,8 @@
       "Ability": {
         "DIALOG": {
           "MakeScroll": {
-            "name": "{type} of {spell}",
-            "description": "<p>This [[lookup system.equipmentType style=lc]] contains instructions for casting @UUID[.ActiveEffect.{id}] and is enchanted to do so if those instructions are followed. @Identifier[ability:interact] with this [[lookup system.equipmentType style=lc]] to cast the spell. Doing so has the spell's execution time and consumes this.</p>"
+            "description": "<p>This [[lookup system.equipmentType style=lc]] contains instructions for casting @UUID[.ActiveEffect.{id}] and is enchanted to do so if those instructions are followed. @Identifier[ability:interact] with this [[lookup system.equipmentType style=lc]] to cast the spell. Doing so has the spell's execution time and consumes this.</p>",
+            "name": "{type} of {spell}"
           },
           "VariableCosts": {
             "gp": "Variable Gold Cost",
@@ -279,18 +279,21 @@
           },
           "upgrades": {
             "competence": {
+              "attribute": {
+                "label": "Competence Attribute"
+              },
               "button": "Attribute Competence",
               "description": "This ability makes you {upgrade} in {attribute} {saves}.",
               "saves": "feat saves",
               "text": {
                 "label": "Attribute Competence Improvement"
               },
-              "update": "Update Attribute Competence Upgrade",
-              "attribute": {
-                "label": "Competence Attribute"
-              }
+              "update": "Update Attribute Competence Upgrade"
             },
             "score": {
+              "attribute": {
+                "label": "Score Attribute"
+              },
               "button": "Attribute Score",
               "description": "This ability sets your {attribute} score to a minimum of {value}.",
               "text": {
@@ -300,9 +303,6 @@
               "value": {
                 "hint": "The value of this attribute score.",
                 "label": "Score"
-              },
-              "attribute": {
-                "label": "Score Attribute"
               }
             }
           }
@@ -344,19 +344,6 @@
           "limited": "Limited"
         }
       },
-      "Metaphysics": {
-        "FIELDS": {
-          "effectTypes": {
-            "label": "Effect Types"
-          },
-          "elements": {
-            "label": "Elements"
-          },
-          "powerSources": {
-            "label": "Power Sources"
-          }
-        }
-      },
       "Applicable": {
         "PANELS": {
           "conditions": "Conditions",
@@ -367,15 +354,22 @@
           "spent": "{amount} {label} Spent"
         }
       },
+      "Archetype": {
+        "MESSAGES": {
+          "suppression": {
+            "inactiveRanks": "This has no active ranks."
+          }
+        }
+      },
       "Armament": {
         "EXECUTION": {
           "dealImpacts": {
-            "label": "Deal Impacts",
-            "hint": "Check to deal damage or other impacts."
+            "hint": "Check to deal damage or other impacts.",
+            "label": "Deal Impacts"
           },
           "useAbilities": {
-            "label": "Use Abilities",
-            "int": "Check to activate this armament's on-use abilities."
+            "int": "Check to activate this armament's on-use abilities.",
+            "label": "Use Abilities"
           }
         },
         "FIELDS": {
@@ -470,9 +464,9 @@
       "Attunable": {
         "FIELDS": {
           "needsAttunement": {
+            "false": "Attunement Unneeded",
             "label": "Attunement",
-            "true": "Attunement Needed",
-            "false": "Attunement Unneeded"
+            "true": "Attunement Needed"
           },
           "tier": {
             "abbreviation": "TIER",
@@ -715,14 +709,19 @@
           "zeroMp": "Zero MP"
         }
       },
-      "Archetype": {
-        "MESSAGES": {
-          "suppression": {
-            "inactiveRanks": "This has no active ranks."
-          }
-        }
-      },
       "BaseEffect": {
+        "FIELDS": {
+          "applyIfDeattuned": {
+            "label": "Apply if Deattuned"
+          },
+          "badge": {
+            "label": "Badge",
+            "placeholder": "No Badge"
+          },
+          "form": {
+            "label": "Form"
+          }
+        },
         "MESSAGES": {
           "suppression": {
             "dampened": "Parent equipment is dampened.",
@@ -731,18 +730,6 @@
             "shattered": "Parent equipment is shattered.",
             "stashed": "Parent equipment is stashed.",
             "unequipped": "Parent equipment is unequipped."
-          }
-        },
-        "FIELDS": {
-          "badge": {
-            "label": "Badge",
-            "placeholder": "No Badge"
-          },
-          "form": {
-            "label": "Form"
-          },
-          "applyIfDeattuned": {
-            "label": "Apply if Deattuned"
           }
         },
         "PANELS": {
@@ -786,13 +773,6 @@
             "label": "Instructions"
           }
         },
-        "MESSAGES": {
-          "suppression": {
-            "disabled": "This is disabled.",
-            "elder": "Parent is inactive.",
-            "forced": "This is forcibly suppressed."
-          }
-        },
         "MENU": {
           "disable": "Disable",
           "enable": "Enable",
@@ -803,6 +783,13 @@
           "shareImage": "Share Image",
           "shareInChat": "Share in Chat",
           "shareWriteup": "Share Writeup"
+        },
+        "MESSAGES": {
+          "suppression": {
+            "disabled": "This is disabled.",
+            "elder": "Parent is inactive.",
+            "forced": "This is forcibly suppressed."
+          }
         },
         "USAGE": {
           "use": "Use {value}"
@@ -877,14 +864,14 @@
             "label": "Quantity"
           }
         },
-        "PANELS": {
-          "max": "{value} Maximum",
-          "noMax": "No Maximum"
-        },
         "MESSAGES": {
           "suppression": {
             "consumed": "This is fully consumed."
           }
+        },
+        "PANELS": {
+          "max": "{value} Maximum",
+          "noMax": "No Maximum"
         }
       },
       "Equipment": {
@@ -894,13 +881,13 @@
             "title": "Activate Abilities"
           },
           "stack": {
-            "title": "Stack",
-            "hint": "Select a group to stack this with."
+            "hint": "Select a group to stack this with.",
+            "title": "Stack"
           },
           "unstack": {
             "amount": {
-              "label": "Amount",
-              "hint": "How many should be in the new group?"
+              "hint": "How many should be in the new group?",
+              "label": "Amount"
             },
             "title": "Unstack"
           }
@@ -965,16 +952,6 @@
           "unidentify": "Unidentify",
           "unstash": "Unstash"
         },
-        "PANELS": {
-          "carriedCount": "{value} / {max} Items Carried",
-          "carriedWeight": "{value} / {max} lb Carried",
-          "minStr": "{value} min STR",
-          "weight": "{value} lb",
-          "weightMultiplier": "× {value} Weight Multiplier"
-        },
-        "USAGE": {
-          "twoHanded": "Use in Two Hands"
-        },
         "MESSAGES": {
           "error": {
             "overCarriedCount": "Over maximum equipment carried.",
@@ -985,6 +962,16 @@
             "stashed": "This is stashed.",
             "unequipped": "This is unequipped."
           }
+        },
+        "PANELS": {
+          "carriedCount": "{value} / {max} Items Carried",
+          "carriedWeight": "{value} / {max} lb Carried",
+          "minStr": "{value} min STR",
+          "weight": "{value} lb",
+          "weightMultiplier": "× {value} Weight Multiplier"
+        },
+        "USAGE": {
+          "twoHanded": "Use in Two Hands"
         }
       },
       "Fluency": {
@@ -1012,17 +999,17 @@
       },
       "Hack": {
         "FIELDS": {
+          "escalation": {
+            "hint": "If this corresponds to the first hack of a type, second, etc.",
+            "label": "Escalation"
+          },
           "part": {
-            "label": "Part",
-            "hint": "The body part this is a hack for."
+            "hint": "The body part this is a hack for.",
+            "label": "Part"
           },
           "permanent": {
-            "label": "Permanent",
-            "hint": "Whether this hack is permanent and cannot be healed through normal means."
-          },
-          "escalation": {
-            "label": "Escalation",
-            "hint": "If this corresponds to the first hack of a type, second, etc."
+            "hint": "Whether this hack is permanent and cannot be healed through normal means.",
+            "label": "Permanent"
           }
         }
       },
@@ -1058,6 +1045,19 @@
           }
         }
       },
+      "Metaphysics": {
+        "FIELDS": {
+          "effectTypes": {
+            "label": "Effect Types"
+          },
+          "elements": {
+            "label": "Elements"
+          },
+          "powerSources": {
+            "label": "Power Sources"
+          }
+        }
+      },
       "Mount": {
         "EMBED": {
           "mounted": "Mounted",
@@ -1075,13 +1075,13 @@
           "mount": "Mount",
           "unmount": "Unmount"
         },
-        "PANELS": {
-          "load": "Load"
-        },
         "MESSAGES": {
           "suppression": {
             "unmounted": "This is unmounted."
           }
+        },
+        "PANELS": {
+          "load": "Load"
         }
       },
       "Power": {
@@ -1135,6 +1135,11 @@
           "rollHpDie": "Roll Hit Die",
           "rollMpDie": "Roll Mana Die"
         },
+        "MESSAGES": {
+          "suppression": {
+            "armor": "Armor exceeds maximum AV."
+          }
+        },
         "PANELS": {
           "class": "Class",
           "details": "Details",
@@ -1142,11 +1147,6 @@
           "learned": "Learned",
           "origin": "Origin",
           "rank": "Rank {value}"
-        },
-        "MESSAGES": {
-          "suppression": {
-            "armor": "Armor exceeds maximum AV."
-          }
         }
       },
       "Revelation": {
@@ -1239,6 +1239,11 @@
         "MENU": {
           "setPrimaryTransformation": "Set Primary Transformation"
         },
+        "MESSAGES": {
+          "suppression": {
+            "inactiveTransformation": "Parent transformation is inactive."
+          }
+        },
         "PANELS": {
           "br": "BR {value}",
           "lifespan": {
@@ -1251,18 +1256,6 @@
             "max": "Size {value} Maximum",
             "min": "Size {value} Minimum",
             "value": "Size {value}"
-          }
-        },
-        "MESSAGES": {
-          "suppression": {
-            "inactiveTransformation": "Parent transformation is inactive."
-          }
-        }
-      },
-      "Transformation": {
-        "MESSAGES": {
-          "suppression": {
-            "notPrimary": "This is not the primary transformation."
           }
         }
       },
@@ -1306,6 +1299,13 @@
           "documents": "Documents",
           "resultType": "Result Type",
           "tableResult": "Table Result"
+        }
+      },
+      "Transformation": {
+        "MESSAGES": {
+          "suppression": {
+            "notPrimary": "This is not the primary transformation."
+          }
         }
       },
       "User": {

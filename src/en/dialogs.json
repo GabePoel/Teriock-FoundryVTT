@@ -1,10 +1,6 @@
 {
   "TERIOCK": {
     "DIALOGS": {
-      "Sheet": {
-        "TITLE": "{prefix}: {name}",
-        "PREFIX": "Edit"
-      },
       "Boost": {
         "BUTTONS": {
           "crit": "Critical",
@@ -75,11 +71,31 @@
         "legend": "Stones",
         "title": "Death Bag"
       },
-      "ShortRest": {
+      "ExecutionEditor": {
+        "changeDocument": "Change"
+      },
+      "Heal": {
+        "done": "Done",
+        "hintNoDice": "Click on the hacks you want to heal.",
+        "hintWithDice": "Click on the hacks you want to heal and the hit dice you want to spend.",
+        "title": "Healing"
+      },
+      "HotbarDrop": {
         "BUTTONS": {
-          "takeShortRest": "Take Short Rest"
+          "general": "General",
+          "linked": "Linked"
         },
-        "title": "Short Rest"
+        "actor": {
+          "hint": "This macro connects to this specific instance of {child} on {actor}."
+        },
+        "entry": "Open Document Sheet",
+        "general": {
+          "hint": "This macro checks whether any actor that's selected has some {label} with identifier {identifier} and makes them all use it."
+        },
+        "linked": {
+          "hint": "This macro connects to this specific instance of {child}."
+        },
+        "title": "Macro Type Selection"
       },
       "LongRest": {
         "BUTTONS": {
@@ -111,29 +127,6 @@
         },
         "title": "Long Rest"
       },
-      "Heal": {
-        "done": "Done",
-        "hintNoDice": "Click on the hacks you want to heal.",
-        "hintWithDice": "Click on the hacks you want to heal and the hit dice you want to spend.",
-        "title": "Healing"
-      },
-      "HotbarDrop": {
-        "BUTTONS": {
-          "general": "General",
-          "linked": "Linked"
-        },
-        "actor": {
-          "hint": "This macro connects to this specific instance of {child} on {actor}."
-        },
-        "entry": "Open Document Sheet",
-        "general": {
-          "hint": "This macro checks whether any actor that's selected has some {label} with identifier {identifier} and makes them all use it."
-        },
-        "linked": {
-          "hint": "This macro connects to this specific instance of {child}."
-        },
-        "title": "Macro Type Selection"
-      },
       "NewDocument": {
         "BUTTONS": {
           "create": "Create",
@@ -151,48 +144,10 @@
         "messageNamed": "Removing Source for {name}",
         "messageUnnamed": "Removing Sources from Compendiums"
       },
-      "SourceRefresh": {
-        "FIELDS": {
-          "createChildren": {
-            "hint": "If checked, will create children that aren't present in the local document.",
-            "label": "Create Children"
-          },
-          "deleteChildren": {
-            "hint": "If checked, will delete children that aren't present in the refresh source.",
-            "label": "Delete Children"
-          },
-          "fullOverride": {
-            "hint": "If checked, will fully override all data in this document.",
-            "label": "Full Override"
-          },
-          "recursive": {
-            "hint": "If checked, refreshes will apply recursively using the compendium source.",
-            "label": "Refresh Recursively"
-          },
-          "updateChildren": {
-            "hint": "If checked, will update children to match the refresh source.",
-            "label": "Update Children"
-          },
-          "updateDocument": {
-            "hint": "If checked, will update local document to match the refresh source.",
-            "label": "Update Document"
-          }
-        },
-        "hint": "Select a source to refresh from.",
-        "noSources": "No sources found to refresh from. You can still refresh this document's children."
-      },
       "Revitalize": {
         "done": "Done",
         "hint": "Click on the mana dice you want to spend.",
         "title": "Revitalizing"
-      },
-      "StatManager": {
-        "FIELDS": {
-          "substitution": {
-            "hint": "Formula that replaces each stat die roll. Use @base to refer to the original die.",
-            "label": "Substitution"
-          }
-        }
       },
       "Select": {
         "Ability": {
@@ -304,8 +259,53 @@
       "SetStatDice": {
         "title": "Set {dieName}"
       },
-      "ExecutionEditor": {
-        "changeDocument": "Change"
+      "Sheet": {
+        "PREFIX": "Edit",
+        "TITLE": "{prefix}: {name}"
+      },
+      "ShortRest": {
+        "BUTTONS": {
+          "takeShortRest": "Take Short Rest"
+        },
+        "title": "Short Rest"
+      },
+      "SourceRefresh": {
+        "FIELDS": {
+          "createChildren": {
+            "hint": "If checked, will create children that aren't present in the local document.",
+            "label": "Create Children"
+          },
+          "deleteChildren": {
+            "hint": "If checked, will delete children that aren't present in the refresh source.",
+            "label": "Delete Children"
+          },
+          "fullOverride": {
+            "hint": "If checked, will fully override all data in this document.",
+            "label": "Full Override"
+          },
+          "recursive": {
+            "hint": "If checked, refreshes will apply recursively using the compendium source.",
+            "label": "Refresh Recursively"
+          },
+          "updateChildren": {
+            "hint": "If checked, will update children to match the refresh source.",
+            "label": "Update Children"
+          },
+          "updateDocument": {
+            "hint": "If checked, will update local document to match the refresh source.",
+            "label": "Update Document"
+          }
+        },
+        "hint": "Select a source to refresh from.",
+        "noSources": "No sources found to refresh from. You can still refresh this document's children."
+      },
+      "StatManager": {
+        "FIELDS": {
+          "substitution": {
+            "hint": "Formula that replaces each stat die roll. Use @base to refer to the original die.",
+            "label": "Substitution"
+          }
+        }
       },
       "ThresholdExecutionOptions": {
         "BUTTONS": {

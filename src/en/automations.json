@@ -20,16 +20,16 @@
               "hint": "Add these documents to every other document created by this automation.",
               "label": "Enable Children"
             },
+            "identifiers": {
+              "hint": "Identifiers for external documents to create as grandchildren on each created child or other document. They will all be added with no selection or prompt.",
+              "label": "Child Identifiers"
+            },
             "overrideData": {
               "label": "Override Child Data"
             },
             "uuids": {
               "hint": "UUIDs for external documents to create as grandchildren on each created child or other document. They will all be added with no selection or prompt.",
               "label": "Child UUIDs"
-            },
-            "identifiers": {
-              "hint": "Identifiers for external documents to create as grandchildren on each created child or other document. They will all be added with no selection or prompt.",
-              "label": "Child Identifiers"
             }
           },
           "data": {
@@ -61,8 +61,8 @@
         "FIELDS": {
           "competence": {
             "raw": {
-              "label": "Competence",
-              "hint": "Whether the upgrade is proficient or fluent."
+              "hint": "Whether the upgrade is proficient or fluent.",
+              "label": "Competence"
             }
           }
         },
@@ -133,10 +133,6 @@
           "impact": "{impact} Boosts"
         },
         "FIELDS": {
-          "target": {
-            "label": "Target",
-            "hint": "Which documents this change applies to."
-          },
           "changeType": {
             "label": "Change Type"
           },
@@ -149,6 +145,10 @@
           "qualifier": {
             "hint": "Applies to all documents in the actor that meet the qualifier above.",
             "label": "Qualifier"
+          },
+          "target": {
+            "hint": "Which documents this change applies to.",
+            "label": "Target"
           },
           "value": {
             "label": "Value"
@@ -238,13 +238,13 @@
       },
       "ExternalDocuments": {
         "FIELDS": {
-          "uuids": {
-            "label": "External UUIDs",
-            "hint": "External documents can be specified by UUIDs or identifiers. UUIDs refer to specific documents. Tables and folders are allowed."
-          },
           "identifiers": {
-            "label": "External Identifiers",
-            "hint": "External documents can be specified by UUIDs or identifiers. Identifiers refer to whatever the canonical document for a given piece of rules text. Does not support tables or folders."
+            "hint": "External documents can be specified by UUIDs or identifiers. Identifiers refer to whatever the canonical document for a given piece of rules text. Does not support tables or folders.",
+            "label": "External Identifiers"
+          },
+          "uuids": {
+            "hint": "External documents can be specified by UUIDs or identifiers. UUIDs refer to specific documents. Tables and folders are allowed.",
+            "label": "External UUIDs"
           }
         }
       },
@@ -288,7 +288,6 @@
         "LABEL": "Macro"
       },
       "Move": {
-        "LABEL": "Reposition",
         "DIALOGS": {
           "SelectToken": {
             "title": "Select {name} Movement Origin"
@@ -304,20 +303,21 @@
             "label": "Movement Action"
           },
           "origin": {
-            "hint": "The point that acts as the origin for this movement.",
-            "label": "Origin",
             "choices": {
               "chosen": "Chosen Token",
               "executor": "Executor's Token",
               "random": "Random Direction",
               "target": "Targeted Token"
-            }
+            },
+            "hint": "The point that acts as the origin for this movement.",
+            "label": "Origin"
           },
           "originBarrier": {
             "hint": "Whether the origin token acts as a barrier which stops movement.",
             "label": "Origin Barrier"
           }
-        }
+        },
+        "LABEL": "Reposition"
       },
       "Optional": {
         "FIELDS": {
@@ -516,26 +516,26 @@
         }
       },
       "Summon": {
-        "LABEL": "Summon",
         "BUTTONS": {
-          "placeNamed": "Place {name}",
-          "defaultName": "Token"
+          "defaultName": "Token",
+          "placeNamed": "Place {name}"
         },
         "FIELDS": {
           "merge": {
-            "label": "Merge",
-            "hint": "If selected, there will be only one button displayed that covers all tokens."
+            "hint": "If selected, there will be only one button displayed that covers all tokens.",
+            "label": "Merge"
           }
-        }
+        },
+        "LABEL": "Summon"
       },
       "Suppress": {
-        "LABEL": "Suppress",
         "FIELDS": {
           "identifier": {
-            "label": "Identifier",
-            "hint": "The typed identifier for some other document to suppress. This applies before competence change automations are applied."
+            "hint": "The typed identifier for some other document to suppress. This applies before competence change automations are applied.",
+            "label": "Identifier"
           }
-        }
+        },
+        "LABEL": "Suppress"
       },
       "Take": {
         "FIELDS": {
@@ -568,25 +568,25 @@
         }
       },
       "ToggleChildren": {
-        "LABEL": "Toggle",
         "FIELDS": {
           "add": {
-            "label": "Add",
-            "hint": "These children will be added to the document that contains this automation if they don't already exist."
-          },
-          "remove": {
-            "label": "Remove",
-            "hint": "These children will be removed from the document that contains this automation if they exist."
+            "hint": "These children will be added to the document that contains this automation if they don't already exist.",
+            "label": "Add"
           },
           "qualifier": {
-            "label": "Qualifier",
-            "hint": "Children will only be added or removed if this qualifier evaluates to a truthy value while the specified trigger event fires."
+            "hint": "Children will only be added or removed if this qualifier evaluates to a truthy value while the specified trigger event fires.",
+            "label": "Qualifier"
+          },
+          "remove": {
+            "hint": "These children will be removed from the document that contains this automation if they exist.",
+            "label": "Remove"
           },
           "trigger": {
-            "label": "Trigger",
-            "hint": "The event that causes this toggling to occur."
+            "hint": "The event that causes this toggling to occur.",
+            "label": "Trigger"
           }
-        }
+        },
+        "LABEL": "Toggle"
       },
       "Tradecraft": {
         "FIELDS": {

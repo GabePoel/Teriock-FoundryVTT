@@ -1,11 +1,8 @@
 {
   "TERIOCK": {
     "SHEETS": {
-      "Page": {
-        "LABEL": "Teriock Journal Entry Page Sheet"
-      },
-      "Inventory": {
-        "LABEL": "Inventory Sheet"
+      "Ability": {
+        "LABEL": "Ability Sheet"
       },
       "Actor": {
         "ACTIONS": {
@@ -77,6 +74,11 @@
               "take": "Take Damage",
               "temp": "Temporary HP"
             },
+            "lp": {
+              "current": "Current LP",
+              "max": "Maximum LP",
+              "take": "Take Wither"
+            },
             "mp": {
               "current": "Current MP",
               "max": "Maximum MP",
@@ -85,11 +87,6 @@
             },
             "presence": {
               "tooltip": "{value} out of {max} Presence Used"
-            },
-            "lp": {
-              "current": "Current LP",
-              "max": "Maximum LP",
-              "take": "Take Wither"
             }
           },
           "BattleBox": {
@@ -177,9 +174,6 @@
             "title": "Classes"
           },
           "Details": {
-            "detection": {
-              "passiveFallback": "Leave blank to use passive {passive}."
-            },
             "carrying": {
               "heavy": "Heavy",
               "heavyCapacity": "Heavy Carrying Capacity",
@@ -193,8 +187,8 @@
             "curses": {
               "label": "Curses"
             },
-            "rotators": {
-              "label": "Rotators"
+            "detection": {
+              "passiveFallback": "Leave blank to use passive {passive}."
             },
             "hiding": {
               "label": "Hiding Score"
@@ -223,6 +217,9 @@
             },
             "perceiving": {
               "label": "Perceiving Score"
+            },
+            "rotators": {
+              "label": "Rotators"
             },
             "sense": {
               "label": "Sense",
@@ -291,8 +288,14 @@
           }
         }
       },
+      "ApplicableEffect": {
+        "LABEL": "Applicable Effect Sheet"
+      },
       "Armament": {
         "LABEL": "Armament Sheet"
+      },
+      "Attunement": {
+        "LABEL": "Attunement Sheet"
       },
       "Child": {
         "DEFAULTS": {
@@ -303,9 +306,6 @@
           "defaultTagTooltip": "Flags"
         },
         "LABEL": "Child Document Sheet"
-      },
-      "Playable": {
-        "LABEL": "Playable Actor Sheet"
       },
       "Common": {
         "ACTIONS": {
@@ -325,21 +325,15 @@
         },
         "DIALOGS": {
           "EquipmentStackConfirmation": {
-            "title": "Stack Equipment",
-            "hint": "Select an existing stack of equipment to add {name} to or close this dialog to place it without stacking."
+            "hint": "Select an existing stack of equipment to add {name} to or close this dialog to place it without stacking.",
+            "title": "Stack Equipment"
           }
-        },
-        "HEADER": {
-          "name": "Name"
-        },
-        "NOTIFICATIONS": {
-          "cantDropPermission": "You do not have sufficient permission to add this document.",
-          "cantDropType": "{children} cannot be directly added to {parents}.",
-          "noIdentifier": "{label} has no identifier.",
-          "copiedToClipboard": "Copied \"{text}\" to clipboard."
         },
         "ENRICHMENT": {
           "copyCode": "Copy Code"
+        },
+        "HEADER": {
+          "name": "Name"
         },
         "MENU": {
           "Create": {
@@ -360,9 +354,15 @@
           "exitMechanicsTab": "Back",
           "openMenu": "Open Menu"
         },
+        "NOTIFICATIONS": {
+          "cantDropPermission": "You do not have sufficient permission to add this document.",
+          "cantDropType": "{children} cannot be directly added to {parents}.",
+          "copiedToClipboard": "Copied \"{text}\" to clipboard.",
+          "noIdentifier": "{label} has no identifier."
+        },
         "PREVIEW": {
-          "addType": "Add {type}",
-          "addChildDocument": "Add Child Document"
+          "addChildDocument": "Add Child Document",
+          "addType": "Add {type}"
         },
         "SEARCH": {
           "ascending": "Ascending",
@@ -389,6 +389,12 @@
           "inactive": "Inactive",
           "remove": "Remove Tag"
         }
+      },
+      "Condition": {
+        "LABEL": "Condition Sheet"
+      },
+      "Consequence": {
+        "LABEL": "Consequence Sheet"
       },
       "DocumentSettings": {
         "BUTTONS": {
@@ -421,50 +427,14 @@
           "notStorage": "{name} does not allow other equipment to be stored within it."
         }
       },
-      "Mount": {
-        "LABEL": "Mount Sheet"
-      },
-      "Rank": {
-        "LABEL": "Rank Sheet"
-      },
-      "Power": {
-        "LABEL": "Power Sheet"
-      },
-      "Species": {
-        "LABEL": "Species Sheet"
-      },
-      "Ability": {
-        "LABEL": "Ability Sheet"
-      },
       "Fluency": {
         "LABEL": "Fluency Sheet"
-      },
-      "Resource": {
-        "LABEL": "Resource Sheet"
-      },
-      "Property": {
-        "LABEL": "Property Sheet"
-      },
-      "Consequence": {
-        "LABEL": "Consequence Sheet"
-      },
-      "Condition": {
-        "LABEL": "Condition Sheet"
-      },
-      "Attunement": {
-        "LABEL": "Attunement Sheet"
-      },
-      "ApplicableEffect": {
-        "LABEL": "Applicable Effect Sheet"
       },
       "Hack": {
         "LABEL": "Hack Sheet"
       },
-      "Token": {
-        "LABEL": "Token Sheet"
-      },
-      "Journal": {
-        "LABEL": "Teriock Journal Entry Sheet"
+      "Inventory": {
+        "LABEL": "Inventory Sheet"
       },
       "Item": {
         "ACTIONS": {
@@ -473,10 +443,40 @@
           }
         }
       },
+      "Journal": {
+        "LABEL": "Teriock Journal Entry Sheet"
+      },
+      "Mount": {
+        "LABEL": "Mount Sheet"
+      },
+      "Page": {
+        "LABEL": "Teriock Journal Entry Page Sheet"
+      },
       "Panel": {
         "LABEL": "Panel Sheet",
         "OPEN": "Open Panel",
         "OPEN_SHEET": "Open Sheet"
+      },
+      "Playable": {
+        "LABEL": "Playable Actor Sheet"
+      },
+      "Power": {
+        "LABEL": "Power Sheet"
+      },
+      "Property": {
+        "LABEL": "Property Sheet"
+      },
+      "Rank": {
+        "LABEL": "Rank Sheet"
+      },
+      "Resource": {
+        "LABEL": "Resource Sheet"
+      },
+      "Species": {
+        "LABEL": "Species Sheet"
+      },
+      "Token": {
+        "LABEL": "Token Sheet"
       }
     }
   }

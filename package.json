@@ -1,34 +1,9 @@
 {
-  "name": "teriock",
-  "version": "3.0.0",
-  "description": "Scripts to manage Teriock Foundry VTT system.",
-  "scripts": {
-    "build": "run-s compendium:pack build:*",
-    "build:lang": "node scripts/build/lang.mjs",
-    "build:manifest": "node scripts/build/manifest.mjs",
-    "build:style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
-    "build:templates": "node scripts/build/templates.mjs",
-    "build:zip": "node scripts/build/zip.mjs && dprint fmt",
-    "compendium:compile": "node scripts/compendium/compile.mjs",
-    "compendium:pack": "node scripts/compendium/pack.mjs",
-    "compendium:uncompile": "node scripts/compendium/uncompile.mjs",
-    "compendium:unpack": "node scripts/compendium/unpack.mjs",
-    "format:check": "dprint check && prettier . --check",
-    "format:dprint": "dprint fmt",
-    "format:fix": "dprint fmt && prettier . --write",
-    "link:foundry": "node scripts/link/foundry.mjs",
-    "link:symbols": "node scripts/link/symbols.mjs",
-    "lint:check": "eslint src/module/teriock.mjs src/module/**/*",
-    "lint:fix": "eslint --fix src/module/teriock.mjs src/module/**/*",
-    "prepare:check": "run-s lint:check format:check",
-    "prepare:fix": "run-s lint:fix format:fix compendium:compile"
-  },
+  "author": "Gabriel",
   "browserslist": [
     "last 3 versions"
   ],
-  "author": "Gabriel",
-  "license": "MIT",
-  "private": true,
+  "description": "Scripts to manage Teriock Foundry VTT system.",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "@foundryvtt/foundryvtt-cli": "^3.0.3",
@@ -45,8 +20,35 @@
     "npm-run-all": "^4.1.5",
     "prettier": "3.6.2",
     "prettier-plugin-organize-attributes": "^1.0.0",
+    "prettier-plugin-sort-json": "^4.2.0",
     "sass": "^1.89.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.44.1"
-  }
+  },
+  "license": "MIT",
+  "name": "teriock",
+  "private": true,
+  "scripts": {
+    "build": "run-s compendium:pack build:*",
+    "build:lang": "node scripts/build/lang.mjs",
+    "build:manifest": "node scripts/build/manifest.mjs",
+    "build:style": "sass src/style/teriock.scss css/teriock.css --style=expanded",
+    "build:templates": "node scripts/build/templates.mjs",
+    "build:zip": "node scripts/build/zip.mjs && npm run format:json-sort && dprint fmt",
+    "compendium:compile": "node scripts/compendium/compile.mjs",
+    "compendium:pack": "node scripts/compendium/pack.mjs",
+    "compendium:uncompile": "node scripts/compendium/uncompile.mjs",
+    "compendium:unpack": "node scripts/compendium/unpack.mjs",
+    "format:check": "dprint check && prettier . --check",
+    "format:dprint": "dprint fmt",
+    "format:fix": "npm run format:json-sort && dprint fmt && prettier . --write",
+    "format:json-sort": "prettier --ignore-path /dev/null --write \"**/*.json\"",
+    "link:foundry": "node scripts/link/foundry.mjs",
+    "link:symbols": "node scripts/link/symbols.mjs",
+    "lint:check": "eslint src/module/teriock.mjs src/module/**/*",
+    "lint:fix": "eslint --fix src/module/teriock.mjs src/module/**/*",
+    "prepare:check": "run-s lint:check format:check",
+    "prepare:fix": "run-s lint:fix format:fix compendium:compile"
+  },
+  "version": "3.0.0"
 }
