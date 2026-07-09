@@ -2,7 +2,7 @@ import { makeIconClass } from "../../helpers/icon.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
-const { fields } = foundry.data;
+const { FormDataExtended } = foundry.applications.ux;
 
 export default class ExecutionEditor extends ResolvableDialog {
   /**
@@ -27,7 +27,10 @@ export default class ExecutionEditor extends ResolvableDialog {
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    content: { template: "teriock/dialogs/execution-editor" },
+    content: {
+      forms: { form: { closeOnSubmit: false, submitOnChange: false } },
+      template: "teriock/dialogs/execution-editor",
+    },
     messageModes: { template: "teriock/ui/message-modes" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
@@ -96,30 +99,6 @@ export default class ExecutionEditor extends ResolvableDialog {
   }
 
   /**
-   * Bind embed listeners for document blocks.
-   */
-  #bindBlockListeners() {
-    this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
-      const uuid = el.dataset.uuid;
-      fromUuid(uuid).then(doc => doc?.onEmbed(el));
-    });
-  }
-
-  /**
-   * Bind live update listeners for execution dialog fields.
-   */
-  #bindFieldListeners() {
-    for (const field of this.execution._activeDialogFields) {
-      const element = /** @type {HTMLInputElement} */ (this.element.querySelector(`[name="${field.name}"]`));
-      if (!element) { continue; }
-      element.addEventListener("change", async () => {
-        field.update(this.#readFieldValue(field, element));
-        await this.render();
-      });
-    }
-  }
-
-  /**
    * @param {Teriock.Execution.ExecutionDialogEntry} field
    * @param {object} [options]
    * @param {boolean} [options.small]
@@ -140,14 +119,15 @@ export default class ExecutionEditor extends ResolvableDialog {
     };
   }
 
-  /**
-   * @param {Teriock.Execution.ExecutionDialogEntry} field
-   * @param {HTMLInputElement|HTMLSelectElement|HTMLTextAreaElement} element
-   */
-  #readFieldValue(field, element) {
-    if (field.field instanceof fields.BooleanField) { return element.checked; }
-    if (field.field instanceof fields.NumberField) { return Number(element.value); }
-    return element.value;
+  /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    const form = /** @type {HTMLFormElement} */ (event.currentTarget);
+    const data = foundry.utils.expandObject(new FormDataExtended(form).object);
+    for (const field of this.execution._activeDialogFields) {
+      if (foundry.utils.hasProperty(data, field.name)) { field.update(foundry.utils.getProperty(data, field.name)); }
+    }
+    this.render();
   }
 
   /** @inheritDoc */
@@ -164,8 +144,10 @@ export default class ExecutionEditor extends ResolvableDialog {
   /** @inheritDoc */
   async _onRender(context, options = {}) {
     await super._onRender(context, options);
-    this.#bindBlockListeners();
-    this.#bindFieldListeners();
+    this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
+      const uuid = el.dataset.uuid;
+      fromUuid(uuid).then(doc => doc?.onEmbed(el));
+    });
   }
 
   /** @inheritDoc */
