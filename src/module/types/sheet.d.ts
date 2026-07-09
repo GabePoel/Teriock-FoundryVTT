@@ -43,7 +43,9 @@ declare global {
       tips: Teriock.UI.Tip[];
     };
 
-    export type _SheetConfiguration = { teriock: { autoIcon?: boolean } };
+    export type _SheetConfiguration = Teriock.Application._ApplicationConfiguration & {
+      teriock: { autoIcon?: boolean };
+    };
   }
 }
 

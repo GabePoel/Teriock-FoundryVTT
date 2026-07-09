@@ -23,8 +23,11 @@ class RefreshOptions extends DataModel {
 
 let localized = false;
 
+/**
+ * @property {AnyCommonDocument & { system: RefreshSystem }} document
+ */
 export default class SourceRefresher extends DocumentDialog {
-  /** @type {Partial<ApplicationConfiguration>} */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onRefresh },
     classes: ["dynamic-select", "dialog"],
@@ -92,16 +95,6 @@ export default class SourceRefresher extends DocumentDialog {
         this.refreshOptions[name] = el?.checked;
       });
     });
-    // Listen for double clicks to open refresh sources
-    /** @see {DocumentSelector._initClickLoader} */
-    this.element.querySelectorAll("[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
-      el.addEventListener("dblclick", async ev => {
-        const target = /** @type {HTMLElement} */ ev.currentTarget;
-        const uuid = target.dataset.uuid;
-        const doc = /** @type {AnyChildDocument} */ await fromUuid(uuid);
-        await doc.sheet.render(true);
-      });
-    });
   }
 
   /** @inheritDoc */
@@ -128,15 +121,10 @@ export default class SourceRefresher extends DocumentDialog {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    const fields = Object.values(this.refreshOptions.schema.fields);
-    switch (partId) {
-      case "options":
-        context.fields = fields.map(f => {
-          return { field: f };
-        });
-        break;
-      default:
-        break;
+    if (partId === "options") {
+      context.fields = Object.values(this.refreshOptions.schema.fields).map(f => {
+        return { field: f };
+      });
     }
     return context;
   }

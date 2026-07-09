@@ -20,7 +20,7 @@ const DEFAULT_SELECT_OPTIONS = {
 };
 
 export default class DocumentSelector extends ResolvableDialog {
-  /** @type {Partial<ApplicationConfiguration>} */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onGetSelected },
     classes: ["dynamic-select"],
@@ -179,15 +179,6 @@ export default class DocumentSelector extends ResolvableDialog {
   }
 
   /**
-   * Initialize double-click handling on the document list.
-   */
-  _initClickLoader() {
-    if (!this.openable) { return; }
-    const list = this.element.querySelector(".doc-list-container");
-    list?.addEventListener("dblclick", this._onDblClickOpen.bind(this));
-  }
-
-  /**
    * Initialize the search filter.
    */
   _initSearchFilter() {
@@ -208,22 +199,10 @@ export default class DocumentSelector extends ResolvableDialog {
     searchFilter.bind(this.element);
   }
 
-  /**
-   * Open a document sheet when a row is double-clicked.
-   * @param {MouseEvent} event
-   */
-  async _onDblClickOpen(event) {
-    const row = /** @type {HTMLElement|null} */ event.target.closest("[data-uuid]");
-    if (!row?.dataset.uuid) { return; }
-    const doc = /** @type {AnyChildDocument} */ await fromUuid(row.dataset.uuid);
-    await doc?.sheet?.render(true);
-  }
-
   /** @inheritDoc */
   async _onRender(context, options = {}) {
     await super._onRender(context, options);
     this._initSearchFilter();
-    this._initClickLoader();
   }
 
   /** @inheritDoc */
