@@ -154,8 +154,10 @@ export default function CommonDocumentMixin(Base) {
       /** @inheritDoc */
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
-        if (this.checkEditor(userId) && this.actor) { this.actor.system.postUpdate(); }
-        this.fireTrigger("updateDocument", this.getScope());
+        if (this.checkEditor(userId)) {
+          if (this.actor) { this.actor.system.postUpdate(); }
+          this.fireTrigger("updateDocument", this.getScope());
+        }
       }
 
       /** @inheritDoc */

@@ -81,7 +81,7 @@ export default function EquipmentWieldingPart(Base) {
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        this.unglue();
+        if (this.document.checkEditor(userId)) { this.unglue(); }
       }
 
       /**

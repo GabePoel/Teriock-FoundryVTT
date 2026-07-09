@@ -409,10 +409,12 @@ export default function HierarchyDocumentMixin(Base) {
         if (this.system._dep && this.uuid) { game.teriock?.dependents.untrack(this.system._dep, this); }
         // If this is deleted as part of a folder it might not call the appropriate operation and descendents need
         // to be deleted separately. This sucks but IDK a better solution.
-        this.constructor.deleteDocuments(this.allSubs.contents.map(s => s._id), {
-          pack: this.compendium?.collection,
-          parent: this.parent,
-        });
+        if (this.checkEditor(userId)) {
+          this.constructor.deleteDocuments(this.allSubs.contents.map(s => s._id), {
+            pack: this.compendium?.collection,
+            parent: this.parent,
+          });
+        }
         if (options.render !== false) { this.#renderSheets(); }
       }
 

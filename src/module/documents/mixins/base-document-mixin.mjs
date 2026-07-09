@@ -42,7 +42,7 @@ export default function BaseDocumentMixin(Base) {
        * @returns {Promise<boolean|void>}
        */
       static async _onCreateOperation(documents, operation, user) {
-        await this._onWriteOperation(documents);
+        await this._onWriteOperation(documents, operation, user);
         return super._onCreateOperation(documents, operation, user);
       }
 
@@ -54,7 +54,7 @@ export default function BaseDocumentMixin(Base) {
        * @returns {Promise<void>}
        */
       static async _onDeleteOperation(documents, operation, user) {
-        await this._onWriteOperation(documents);
+        await this._onWriteOperation(documents, operation, user);
         return super._onDeleteOperation(documents, operation, user);
       }
 
@@ -66,7 +66,7 @@ export default function BaseDocumentMixin(Base) {
        * @returns {Promise<void>}
        */
       static async _onUpdateOperation(documents, operation, user) {
-        await this._onWriteOperation(documents);
+        await this._onWriteOperation(documents, operation, user);
         return super._onUpdateOperation(documents, operation, user);
       }
 
