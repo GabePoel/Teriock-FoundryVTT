@@ -1,5 +1,5 @@
 import TeriockDocumentSheet from "./document-sheet.mjs";
-import TemporaryApplicationMixin from "./mixins/temporary-application-mixin.mjs";
+import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
 /**
  * A minimal document sheet with some edits to make it better resemble a dialog.

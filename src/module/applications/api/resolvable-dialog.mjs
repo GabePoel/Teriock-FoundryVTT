@@ -1,5 +1,5 @@
 import TeriockApplication from "./application.mjs";
-import TemporaryApplicationMixin from "./mixins/temporary-application-mixin.mjs";
+import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
 /**
  * A custom application representing something that needs to be resolved before some routing can continue.

@@ -1,4 +1,5 @@
-import BaseDocumentSheetMixin from "./mixins/base-document-sheet-mixin.mjs";
+import { mixClasses } from "../../helpers/construction.mjs";
+import { BaseDocumentSheetMixin } from "./mixins/_module.mjs";
 
 const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -7,4 +8,6 @@ const { DocumentSheetV2, HandlebarsApplicationMixin } = foundry.applications.api
  * @mixes HandlebarsApplication
  * @property {TeriockDocument} document
  */
-export default class TeriockDocumentSheet extends BaseDocumentSheetMixin(HandlebarsApplicationMixin(DocumentSheetV2)) {}
+export default class TeriockDocumentSheet
+  extends mixClasses(DocumentSheetV2, HandlebarsApplicationMixin, BaseDocumentSheetMixin)
+{}
