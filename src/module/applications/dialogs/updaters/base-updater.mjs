@@ -12,7 +12,7 @@ export default class BaseUpdater extends DocumentDialog {
   static DEFAULT_OPTIONS = {
     form: { closeOnSubmit: true, submitOnChange: false },
     position: { width: 450 },
-    window: { contentClasses: ["standard-form"], resizable: false },
+    window: { contentClasses: ["standard-form"], minimizable: false, resizable: false },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
