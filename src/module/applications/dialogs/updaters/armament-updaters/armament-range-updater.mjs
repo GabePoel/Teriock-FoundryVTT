@@ -12,7 +12,7 @@ export default class ArmamentRangeUpdater extends BaseUpdater {
 
   /** @inheritDoc */
   get _dataPaths() {
-    return ["system.range.short.raw", "system.range.long.raw", "system.range.long.unit"];
+    return ["system.range.long.unit", "system.range.short.raw", "system.range.long.raw"];
   }
 
   /** @inheritDoc */
