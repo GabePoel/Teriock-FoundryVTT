@@ -1,0 +1,23 @@
+_id: joY4OqPJ9UxdPFVa
+_key: '!macros!joY4OqPJ9UxdPFVa'
+_stats:
+  coreVersion: '14'
+  lastModifiedBy: teriockBuilder00
+  systemId: teriock
+  systemVersion: 0.13.22
+command: |-
+  if (actor?.isOwner) {
+    const amount = actor.system.scaling.p + 1;
+    await actor.update({ "system.money.silver": actor.system.money.silver + amount });
+    foundry.ui.notifications.success("TERIOCK.DIALOGS.Common.SUCCESSES.gain", {
+      localize: true,
+      format: { name: actor.name, amount, thing: TERIOCK.config.currency.silver.label.toLowerCase() }
+    });
+  } else {
+    foundry.ui.notifications.error("TERIOCK.DIALOGS.Common.ERRORS.noOwnedActor");
+  }
+folder: yVE41zXjrbmVyvj6
+img: icons/svg/dice-target.svg
+name: Gain P + 1 Silver
+scope: global
+type: script

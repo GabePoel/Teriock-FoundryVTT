@@ -2,12 +2,8 @@ import { BasePreviewModel } from "../../../../../data/models/preview-models/_mod
 import { makeIconClass } from "../../../../../helpers/icon.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toKebabCase } from "../../../../../helpers/string.mjs";
-import {
-  DocumentSelector,
-  newDocumentDialog,
-  selectClassDialog,
-  selectTradecraftDialog,
-} from "../../../../dialogs/_module.mjs";
+import { TeriockDialog } from "../../../../api/_module.mjs";
+import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../../../../dialogs/_module.mjs";
 import { HTMLTernaryElement } from "../../../../elements/_module.mjs";
 
 const { SearchFilter } = foundry.applications.ux;
@@ -375,7 +371,27 @@ async function resolveCreateObject(type) {
     type,
   };
   if (!TERIOCK.config.document[type]?.importDialog) { return obj; }
-  const decision = await newDocumentDialog(type);
+  const label = TERIOCK.config.document[type].label;
+  const typeName = label.toLowerCase();
+  const decision = await TeriockDialog.prompt({
+    buttons: [{
+      icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
+      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
+      callback: () => "create",
+    }],
+    content: _loc("TERIOCK.DIALOGS.NewDocument.content", { typeName }),
+    modal: true,
+    ok: {
+      default: true,
+      icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
+      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
+      callback: () => "import",
+    },
+    window: {
+      icon: makeIconClass(TERIOCK.display.icons.ui.add, "title"),
+      title: _loc("TERIOCK.DIALOGS.NewDocument.title", { name: label }),
+    },
+  });
   if (!decision) { return null; }
   if (decision === "import") {
     const picked = await TERIOCK.config.document[type]?.importDialog();

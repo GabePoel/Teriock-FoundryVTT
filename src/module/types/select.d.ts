@@ -50,25 +50,15 @@ declare global {
       noDocumentsMessage?: string;
     };
 
-    export type SelectDialogOptions = {
-      /** If true, "Other" returns `null` instead of prompting again. */
-      genericOther?: boolean;
-      /** Hint text. */
-      hint?: string;
+    export type _ChoiceSelectorOptions = {
       /** Additional hint with more complex HTML. */
       hintHtml?: string;
       /** Title for the additional hint. */
       hintTitle?: string;
       /** Icon to use for the select window. */
       icon?: string;
-      /** The initially selected choice. */
-      initial?: string | null;
-      /** Label for the select field. */
-      label?: string;
-      /** Whether to include an "Other" button. */
+      /** Whether to include an "Other" button that resolves with `null`. */
       other?: boolean;
-      /** If true, no blank choice will be offered. */
-      required?: boolean;
       /** Dialog title. */
       title?: string;
     };

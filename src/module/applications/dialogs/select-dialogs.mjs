@@ -1,13 +1,13 @@
-import { resolveDocument } from "../../../helpers/resolve.mjs";
-import DocumentSelector from "../document-selector.mjs";
-import selectDialog from "./select-dialog.mjs";
+import { resolveDocument } from "../../helpers/resolve.mjs";
+import ChoiceSelector from "./choice-selector.mjs";
+import DocumentSelector from "./document-selector.mjs";
 
 /**
  * Dialog to select an equipment class.
  * @returns {Promise<Teriock.Keys.EquipmentClass>}
  */
 export async function selectEquipmentClassDialog() {
-  return selectDialog(TERIOCK.reference.equipmentClasses, {
+  return ChoiceSelector.prompt(TERIOCK.reference.equipmentClasses, {
     hint: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.hint"),
     label: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.label"),
     title: _loc("TERIOCK.DIALOGS.Select.EquipmentClass.title"),
@@ -19,7 +19,7 @@ export async function selectEquipmentClassDialog() {
  * @returns {Promise<Teriock.Keys.WeaponClass>}
  */
 export async function selectWeaponClassDialog() {
-  return selectDialog(TERIOCK.reference.weaponClasses, {
+  return ChoiceSelector.prompt(TERIOCK.reference.weaponClasses, {
     hint: _loc("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
     label: _loc("TERIOCK.DIALOGS.Select.WeaponClass.label"),
     title: _loc("TERIOCK.DIALOGS.Select.WeaponClass.title"),
@@ -31,7 +31,7 @@ export async function selectWeaponClassDialog() {
  * @returns {Promise<Teriock.Keys.Condition>}
  */
 export async function selectConditionDialog() {
-  return selectDialog(TERIOCK.reference.conditions, {
+  return ChoiceSelector.prompt(TERIOCK.reference.conditions, {
     hint: _loc("TERIOCK.DIALOGS.Select.Condition.hint"),
     label: _loc("TERIOCK.DIALOGS.Select.Condition.label"),
     title: _loc("TERIOCK.DIALOGS.Select.Condition.title"),

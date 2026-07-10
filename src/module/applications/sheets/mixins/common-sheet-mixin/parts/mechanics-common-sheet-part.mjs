@@ -4,7 +4,7 @@ import { BaseExpiration } from "../../../../../data/pseudo-documents/expirations
 import { makeIcon, makeIconClass } from "../../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../helpers/utils.mjs";
-import { selectDialog } from "../../../../dialogs/_module.mjs";
+import { ChoiceSelector } from "../../../../dialogs/_module.mjs";
 import { TeriockContextMenu } from "../../../../ux/_module.mjs";
 
 /**
@@ -44,7 +44,7 @@ export default function MechanicsCommonSheetPart(Base) {
         let choice;
         if (Object.keys(choices).length === 1) { choice = Object.keys(choices)[0]; }
         else {
-          choice = await selectDialog(choices, {
+          choice = await ChoiceSelector.prompt(choices, {
             hint: config.hint,
             icon: config.icon,
             required: true,

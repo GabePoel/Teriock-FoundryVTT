@@ -4,20 +4,19 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.83
+  systemVersion: 0.13.22
 command: >-
   const transformationLevels = TERIOCK.config.transformation.level;
 
   const chosenTransformationLevel = await
-  tm.dialogs.selectDialog(transformationLevels, {
+  tm.dialogs.ChoiceSelector.prompt(transformationLevels, {
     hint: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hint"),
-    hintHtml: await TextEditor.implementation.enrichHTML(
-      (await teriock.fromIdentifier("status:transformed")).text.content,
+    hintHtml: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
+      (await teriock.fromIdentifier("rule:transformed")).text.content,
     ),
     hintTitle: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.hintTitle"),
     initial: "minor",
     label: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.label"),
-    other: true,
     title: _loc("TERIOCK.DIALOGS.Select.TransformationLevel.title"),
   });
 

@@ -1,6 +1,8 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { changeSizeDialog } from "../../../dialogs/_module.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
+import { TeriockDialog } from "../../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../../shared/_module.mjs";
+import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -59,7 +61,25 @@ export default class BaseActorSheet
       out?.type === "species" && out.system.size.enabled
       && out.system.size.value !== this.document.system._source.size.number
     ) {
-      changeSizeDialog(this.actor, out);
+      if (this.actor.system.size.number !== out.system.size.value) {
+        const proceed = await TeriockDialog.confirm({
+          content: await TeriockTextEditor.enrichHTML(
+            _loc("TERIOCK.DIALOGS.ChangeSize.content", {
+              actor: `@UUID[${this.actor.uuid}]`,
+              actorSize: this.actor.system.size.number,
+              species: `@UUID[${out.uuid}]`,
+              speciesSize: out.system.size.value,
+            }),
+          ),
+          modal: true,
+          position: { width: 400 },
+          window: {
+            icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
+            title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
+          },
+        });
+        if (proceed) { await this.actor.update({ "system.size.number": out.system.size.value }); }
+      }
     }
     return out;
   }

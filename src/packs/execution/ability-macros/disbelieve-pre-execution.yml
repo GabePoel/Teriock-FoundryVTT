@@ -4,22 +4,20 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.83
+  systemVersion: 0.13.22
 command: >-
   const illusionLevels = TERIOCK.config.illusion.level;
 
-  const chosenIllusionLevel = /** @type {Teriock.Keys.IllusionLevel | null} */
-  await tm.dialogs.selectDialog(
+  const chosenIllusionLevel = await tm.dialogs.ChoiceSelector.prompt(
     illusionLevels,
     {
       hint: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.hint"),
-      hintHtml: await TextEditor.implementation.enrichHTML(
+      hintHtml: await foundry.applications.ux.TextEditor.implementation.enrichHTML(
         (await teriock.fromIdentifier("keyword:illusionary")).text.content,
       ),
       hintTitle: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.hintTitle"),
       initial: "minor",
       label: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.label"),
-      other: true,
       title: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
     },
   );

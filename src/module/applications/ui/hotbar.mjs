@@ -1,7 +1,8 @@
 import { TeriockMacro } from "../../documents/_module.mjs";
-import { makeIcon } from "../../helpers/icon.mjs";
+import { makeIcon, makeIconClass } from "../../helpers/icon.mjs";
 import { findBestDocument } from "../../helpers/utils.mjs";
-import { hotbarDropDialog } from "../dialogs/_module.mjs";
+import { TeriockDialog } from "../api/_module.mjs";
+import { TeriockTextEditor } from "../ux/_module.mjs";
 
 const { Hotbar } = foundry.applications.ui;
 
@@ -21,15 +22,36 @@ export default class TeriockHotbar extends Hotbar {
 
   /**
    * @inheritDoc
-   * @param {AnyChildDocument} doc
+   * @param {AnyChildDocument} document
    */
-  async _createDocumentSheetToggle(doc) {
-    if (doc.documentMetadata.child) {
-      const macroType = await hotbarDropDialog(doc);
-      if (macroType === "linked") { return TeriockMacro.getLinkedUseMacro(doc); }
-      else if (macroType === "general") { return TeriockMacro.getGeneralUseMacro(doc); }
+  async _createDocumentSheetToggle(document) {
+    if (document.documentMetadata.child) {
+      const macroType = await TeriockDialog.prompt({
+        buttons: [{
+          action: "linked",
+          icon: makeIconClass(TERIOCK.display.icons.ui.linked),
+          label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.linked"),
+          callback: () => "linked",
+        }],
+        content: await TeriockTextEditor.enrichHTML(
+          await TeriockTextEditor.renderTemplate("teriock/dialogs/hotbar-drop", {
+            actor: `@UUID[${document.actor?.uuid}]`,
+            child: `@UUID[${document.uuid}]`,
+            identifier: document.lookupKey,
+            label: TERIOCK.config.document[document.type].label.toLowerCase(),
+          }),
+        ),
+        modal: true,
+        ok: { default: true, label: _loc("TERIOCK.DIALOGS.HotbarDrop.BUTTONS.general"), callback: () => "general" },
+        window: {
+          icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
+          title: _loc("TERIOCK.DIALOGS.HotbarDrop.title"),
+        },
+      });
+      if (macroType === "linked") { return TeriockMacro.getLinkedUseMacro(document); }
+      else if (macroType === "general") { return TeriockMacro.getGeneralUseMacro(document); }
     } else {
-      return super._createDocumentSheetToggle(doc);
+      return super._createDocumentSheetToggle(document);
     }
   }
 
