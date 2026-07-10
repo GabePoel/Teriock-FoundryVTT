@@ -5,6 +5,7 @@ import * as constants from "./constants/_module.mjs";
 import * as data from "./data/_module.mjs";
 import * as dice from "./dice/_module.mjs";
 import * as documents from "./documents/_module.mjs";
+import * as executions from "./executions/_module.mjs";
 import * as helpers from "./helpers/_module.mjs";
 import { makeIconClass } from "./helpers/icon.mjs";
 import * as setup from "./setup/_module.mjs";
@@ -23,6 +24,7 @@ Object.assign(globalThis, {
     data,
     dice,
     documents,
+    executions,
     fromIdentifier: helpers.utils.fromIdentifier,
     fromIdentifierSync: helpers.utils.fromIdentifierSync,
     helpers,
@@ -436,6 +438,19 @@ foundry.helpers.Hooks.once("setup", function() {
 // ===========================================================================
 
 Hooks.once("i18nInit", () => {
+  game.teriock.i18nReady = true;
+  for (
+    const v of Object.values({
+      ...teriock.executions.abstract,
+      ...teriock.executions.activity,
+      ...teriock.executions.actor,
+      ...teriock.executions.document,
+    })
+  ) {
+    if (foundry.utils.isSubclass(v, teriock.executions.abstract.BaseExecution)) {
+      v.preLocalize();
+    }
+  }
   helpers.localization.performPreLocalization(TERIOCK);
   Object.assign(CONFIG.formulaEditor.contexts.child.labels, {
     ...TERIOCK.rollContext.ability,

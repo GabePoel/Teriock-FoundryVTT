@@ -34,6 +34,12 @@ export default class TeriockManager {
   }
 
   /**
+   * Whether i18n localization is ready.
+   * @type {boolean}
+   */
+  i18nReady = false;
+
+  /**
    * All the basic abilities.
    * @returns {TeriockAbility[]}
    */

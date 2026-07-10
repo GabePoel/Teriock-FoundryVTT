@@ -1,24 +1,6 @@
-import type { DataField } from "@common/data/fields.mjs";
-
 declare global {
   namespace Teriock.Execution {
-    export type ThresholdExecutionOptions = Teriock.Execution.BaseExecutionOptions & Teriock.Command.ThresholdOptions;
-
-    export type ExecutionDialogEntry = {
-      classes: string[];
-      condition?: (() => boolean) | boolean;
-      field: DataField;
-      hint?: string;
-      integer?: number;
-      label: string;
-      max?: number;
-      min?: number;
-      name: string;
-      placeholder?: number | string;
-      small?: boolean;
-      value: boolean | number | string;
-      update: (value: boolean | number | string) => void;
-    };
+    export type ThresholdExecutionOptions = Teriock.Execution.ExecutionOptions & { threshold?: number };
 
     export type ExecutionDialogButton = {
       action?: string;
@@ -40,3 +22,5 @@ declare global {
     };
   }
 }
+
+export {};

@@ -1,4 +1,3 @@
-import { DocumentExecution } from "../../../../executions/abstract/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
@@ -124,11 +123,6 @@ export default class PropertySystem
   /** @inheritDoc */
   get wikiPage() {
     return `Property:${TERIOCK.index.properties[toCamelCase(this.identifier ?? "")] ?? ""}`;
-  }
-
-  /** @inheritDoc */
-  async _use(options = {}) {
-    await DocumentExecution.create(options);
   }
 
   /** @inheritDoc */

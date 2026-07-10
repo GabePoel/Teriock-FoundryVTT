@@ -17,29 +17,24 @@ export default function ImpactsExecutionMixin(Base) {
      * @mixin
      */
     class ImpactsExecution extends Base {
-      /**
-       * @param {Teriock.Execution.ImpactsExecutionOptions} options
-       */
-      constructor(options = {}) {
-        super(options);
-        const netBoosts = typeof options.boosts === "number" ? options.boosts : 0;
-        this.crit = options.crit ?? false;
-        this.boosts = netBoosts > 0 ? netBoosts : 0;
-        this.deboosts = netBoosts < 0 ? -netBoosts : 0;
-        this.impacts = new Set(options.impacts ?? (options.impact ? [options.impact] : ["damage"]));
+      /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Boost"];
+
+      /** @inheritDoc */
+      static defineSchema() {
+        return Object.assign(super.defineSchema(), {
+          boosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
+          crit: new fields.BooleanField(),
+          deboosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
+          formula: new FormulaField({ deterministic: false, initial: "" }),
+          impacts: new fields.SetField(
+            new fields.StringField({
+              choices: objectMap(TERIOCK.config.impact, i => i.deal, { filter: c => !c?.hidden }),
+            }),
+            { initial: ["damage"] },
+          ),
+        });
       }
-
-      /** @type {number} */
-      boosts = 0;
-
-      /** @type {boolean} */
-      crit = false;
-
-      /** @type {number} */
-      deboosts = 0;
-
-      /** @type {Set<Teriock.Keys.Impact>} */
-      impacts = new Set(["damage"]);
 
       /** @inheritDoc */
       get _dialogButtons() {
@@ -49,59 +44,22 @@ export default function ImpactsExecutionMixin(Base) {
           icon: TERIOCK.display.icons.consequence.none,
           label: "TERIOCK.DIALOGS.Boost.BUTTONS.ok",
           name: "ok",
-          callback: () => (this.crit = false),
+          callback: () => this.updateSource({ crit: false }),
         }, {
           action: "confirm",
           default: this.crit,
           icon: TERIOCK.display.icons.consequence.crit,
           label: "TERIOCK.DIALOGS.Boost.BUTTONS.crit",
           name: "crit",
-          callback: () => (this.crit = true),
+          callback: () => this.updateSource({ crit: true }),
         }];
       }
 
       /** @inheritDoc */
-      get _dialogFields() {
-        return [{
-          field: new fields.SetField(
-            new fields.StringField({
-              choices: objectMap(TERIOCK.config.impact, i => i.deal, { filter: c => !c?.hidden }),
-            }),
-          ),
-          hint: "TERIOCK.DIALOGS.Boost.FIELDS.impacts.hint",
-          label: "TERIOCK.DIALOGS.Boost.FIELDS.impacts.label",
-          name: "impacts",
-          value: Array.from(this.impacts),
-          condition: () => this.hasFormula,
-          update: v => (this.impacts = new Set(Array.isArray(v) ? v : [v].filter(Boolean))),
-        }, {
-          field: new FormulaField({ deterministic: false }),
-          hint: "TERIOCK.DIALOGS.Boost.FIELDS.formula.hint",
-          label: "TERIOCK.DIALOGS.Boost.FIELDS.formula.label",
-          name: "formula",
-          placeholder: "0",
-          value: this.formula,
-          condition: () => this.hasFormula,
-          update: v => (this.formula = v),
-        }, {
-          field: new fields.NumberField({ min: 0 }),
-          hint: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.hint",
-          label: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.label",
-          name: "boosts",
-          placeholder: "0",
-          value: this.boosts,
-          condition: () => this.hasFormula,
-          update: v => (this.boosts = Number(v) || 0),
-        }, {
-          field: new fields.NumberField({ min: 0 }),
-          hint: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.hint",
-          label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.label",
-          name: "deboosts",
-          placeholder: "0",
-          value: this.deboosts,
-          condition: () => this.hasFormula,
-          update: v => (this.deboosts = Number(v) || 0),
-        }, ...super._dialogFields];
+      get _formPaths() {
+        const paths = [];
+        if (this.hasFormula) { paths.push("impacts", "formula", "boosts", "deboosts"); }
+        return [...paths, ...super._formPaths];
       }
 
       /** @inheritDoc */

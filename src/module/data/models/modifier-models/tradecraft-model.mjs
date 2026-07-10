@@ -1,4 +1,3 @@
-import { TradecraftExecution } from "../../../executions/activity-executions/_module.mjs";
 import BaseModifierModel from "./base-modifier-model.mjs";
 
 const { fields } = foundry.data;
@@ -8,6 +7,11 @@ const { fields } = foundry.data;
  * @see {TradecraftExecution}
  */
 export default class TradecraftModel extends BaseModifierModel {
+  /** @inheritDoc */
+  static get Execution() {
+    return teriock.executions.activity.TradecraftExecution;
+  }
+
   /** @inheritDoc */
   static defineSchema(options = {}) {
     return Object.assign(super.defineSchema(options), {
@@ -23,11 +27,6 @@ export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.ROLLS.Tradecraft.name", { value: this.name });
-  }
-
-  /** @inheritDoc */
-  async _use(options) {
-    await TradecraftExecution.create({ actor: this.actor, tradecraft: this.key, ...options });
   }
 
   /** @inheritDoc */

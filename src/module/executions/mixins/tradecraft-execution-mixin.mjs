@@ -13,11 +13,14 @@ export default function TradecraftExecutionMixin(Base) {
      */
     class TradecraftExecution extends executionMixins.ThresholdExecutionMixin(Base) {
       /**
-       * @param {Teriock.Execution.TradecraftExecutionOptions} options
+       * @param {object} [data]
+       * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
        */
-      constructor(options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {}) {
-        super(options);
-        if (this.actor) { this.bonus = addFormula(this.actor.system.tradecrafts[this.tradecraft].formula, this.bonus); }
+      constructor(data = {}, options = {}) {
+        super(data, options);
+        if (this.actor) {
+          this.updateSource({ bonus: addFormula(this.actor.system.tradecrafts[this.tradecraft].formula, this.bonus) });
+        }
         if (game.settings.get("teriock", "secretTradecrafts").has(this.tradecraft)) {
           this._messageMode = options.messageMode ?? "blind";
         }

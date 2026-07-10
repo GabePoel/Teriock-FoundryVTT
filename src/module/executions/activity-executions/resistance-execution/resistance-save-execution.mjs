@@ -8,10 +8,11 @@ import ImmunityExecution from "../immunity-execution/immunity-execution.mjs";
  */
 export default class ResistanceExecution extends executionMixins.ThresholdExecutionMixin(ImmunityExecution) {
   /**
-   * @param {Teriock.Execution.ResistanceExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.ResistanceExecutionOptions} [options]
    */
-  constructor(options = {}) {
-    super(options);
+  constructor(data = {}, options = {}) {
+    super(data, options);
     if (options.threshold === undefined) { this.threshold = 10; }
     this.img = options.img
       || (this.hex ? getImage("effect-types", "Hexproof") : getImage("effect-types", "Resistance"));
@@ -42,7 +43,7 @@ export default class ResistanceExecution extends executionMixins.ThresholdExecut
 
   /** @inheritDoc */
   _determineCompetence(options) {
-    this.competence.raw = 1;
+    this.updateSource({ "competence.raw": 1 });
     super._determineCompetence(options);
   }
 }

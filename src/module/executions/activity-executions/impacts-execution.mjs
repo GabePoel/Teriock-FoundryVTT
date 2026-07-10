@@ -1,4 +1,4 @@
-import BaseExecution from "../abstract/base-execution/base-execution.mjs";
+import BaseExecution from "../abstract/base-execution.mjs";
 import * as executionMixins from "../mixins/_module.mjs";
 
 /**
@@ -9,12 +9,13 @@ import * as executionMixins from "../mixins/_module.mjs";
  */
 export default class ImpactsExecution extends executionMixins.ImpactsExecutionMixin(BaseExecution) {
   /**
-   * @param {Teriock.Execution.ImpactsExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.ImpactsExecutionOptions} [options]
    */
-  constructor(options = {}) {
-    super(options);
+  constructor(data = {}, options = {}) {
+    data.formula ??= "0";
+    super(data, options);
     this._document = options.document ?? null;
-    this.formula = options.formula ?? "0";
   }
 
   /** @type {AnyChildDocument|null} */

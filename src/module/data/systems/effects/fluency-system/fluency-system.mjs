@@ -1,5 +1,4 @@
 import { iconManifest } from "../../../../constants/display/_module.mjs";
-import { FluencyExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
@@ -37,14 +36,16 @@ export default class FluencySystem
   )
 {
   /** @inheritDoc */
-  static Execution = FluencyExecution;
-
-  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 
   /** @inheritDoc */
   static get _automationTypes() {
     return [CommonMacroAutomation];
+  }
+
+  /** @inheritDoc */
+  static get Execution() {
+    return teriock.executions.document.FluencyExecution;
   }
 
   /** @inheritDoc */

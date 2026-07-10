@@ -1,7 +1,8 @@
+import mathConfig from "../../../constants/config/math-config.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
-import { CompetenceModel } from "../../../data/models/_module.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
@@ -16,18 +17,35 @@ export default function ThresholdExecutionMixin(Base) {
      * @mixin
      */
     class ThresholdExecution extends Base {
-      /**
-       * @param {Teriock.Execution.ThresholdExecutionOptions} options
-       */
-      constructor(options = {}) {
-        super(options);
-        const { bonus = "", comparison = "gte", edge = 0, formula = undefined, threshold } = options;
-        this.edge = edge;
-        this.threshold = threshold;
-        this.formula = formula;
-        this.bonus = `${bonus}`;
-        this.comparison = comparison;
+      /** @inheritDoc */
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Threshold"];
+
+      /** @inheritDoc */
+      static defineSchema() {
+        return Object.assign(super.defineSchema(), {
+          bonus: new FormulaField({ deterministic: false, initial: "" }),
+          comparison: new fields.StringField({
+            blank: false,
+            choices: objectMap(mathConfig.comparisons, (c) => c.label, { localize: true }),
+            initial: "gte",
+            label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.comparison.label",
+            required: true,
+          }),
+          edge: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
+        });
       }
+
+      /**
+       * @param {object} [data]
+       * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
+       */
+      constructor(data = {}, options = {}) {
+        super(data, options);
+        this.threshold = options.threshold;
+      }
+
+      /** @type {number|undefined} */
+      threshold;
 
       /** @inheritDoc */
       get _dialogButtons() {
@@ -38,44 +56,30 @@ export default function ThresholdExecutionMixin(Base) {
           icon: "fa-dice-d20",
           label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
           name: "disadvantage",
-          callback: () => (this.edge = -1),
+          callback: () => this.updateSource({ edge: -1 }),
         }, {
           action: "confirm",
           default: this.edge === 0,
           icon: "fa-dice-d20",
           label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.normal",
           name: "normal",
-          callback: () => (this.edge = 0),
+          callback: () => this.updateSource({ edge: 0 }),
         }, {
           action: "confirm",
           default: this.edge > 0,
           icon: "fa-dice-d20",
           label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
           name: "advantage",
-          callback: () => (this.edge = 1),
+          callback: () => this.updateSource({ edge: 1 }),
         }];
       }
 
       /** @inheritDoc */
-      get _dialogFields() {
-        return [{
-          condition: this.requiresCompetence,
-          field: new fields.EmbeddedDataField(CompetenceModel).fields.raw,
-          hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.hint",
-          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.competence.label",
-          name: "competence",
-          value: this.competence.raw,
-          update: v => (this.competence.raw = Number(v)),
-        }, {
-          condition: this.hasBonus,
-          field: new FormulaField({ deterministic: false }),
-          hint: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.hint",
-          label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.FIELDS.bonus.label",
-          name: "bonus",
-          placeholder: "0",
-          value: this.bonus,
-          update: v => (this.bonus = v),
-        }, ...super._dialogFields];
+      get _formPaths() {
+        const paths = [];
+        if (this.requiresCompetence) { paths.push("competence.raw"); }
+        if (this.hasBonus) { paths.push("bonus"); }
+        return [...paths, ...super._formPaths];
       }
 
       /** @inheritDoc */

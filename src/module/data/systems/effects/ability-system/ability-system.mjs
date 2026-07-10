@@ -349,14 +349,13 @@ export default class AbilitySystem
 
   /**
    * @inheritDoc
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.AbilityExecutionOptions} [options]
    */
-  async _use(options = {}) {
+  async _use(data = {}, options = {}) {
     options.source = this.parent;
-    if (this.grantOnly && this.parent.parent.metadata.armament) {
-      options.armament = /** @type {TeriockArmament} */ this.parent.parent;
-    }
-    await AbilityExecution.create(options);
+    if (this.grantOnly && this.parent.parent.metadata.armament) { options.armament = this.parent.parent; }
+    await AbilityExecution.create(data, options);
   }
 
   /** @inheritDoc */

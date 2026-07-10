@@ -31,11 +31,11 @@ export default function ActorDeathBagPart(Base) {
 
       /**
        * Pull from the Death Bag.
-       * @param {Partial<Teriock.Execution.DeathBagExecutionOptions>} [options]
+       * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
        * @returns {Promise<void>}
        */
       async deathBagPull(options = {}) {
-        await DeathBagExecution.create(Object.assign(options, { source: this.parent }));
+        await DeathBagExecution.create({}, Object.assign(options, { source: this.parent }));
       }
 
       /** @inheritDoc */

@@ -1,12 +1,8 @@
 import { TeriockDialog } from "../../../../applications/api/_module.mjs";
 import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { FormulaField } from "../../../../data/fields/_module.mjs";
-import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { createElement } from "../../../../helpers/html.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * Creates a dialog fieldset for user input.
@@ -84,88 +80,18 @@ export default function AbilityExecutionGetInputPart(Base) {
       }
 
       /** @inheritDoc */
-      get _dialogFields() {
-        const oldFields = super._dialogFields;
-        const newFields = oldFields.filter(f => f.name === "competence");
-        const endFields = oldFields.filter(f => f.name !== "competence");
-        return [
-          ...newFields,
-          {
-            condition: this.isAttack,
-            field: new fields.EmbeddedDataField(PiercingModel).fields.raw,
-            hint: "TERIOCK.MODELS.Piercing.FIELDS.raw.hint",
-            label: "TERIOCK.MODELS.Piercing.FIELDS.raw.label",
-            name: "piercing",
-            value: this.piercing.raw,
-            update: v => (this.piercing.raw = v),
-          },
-          {
-            condition: this.isAttack,
-            field: new fields.NumberField({ deterministic: false }),
-            hint: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.existing.hint",
-            integer: true,
-            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.existing.label",
-            max: 0,
-            name: "existing-attack-penalty",
-            placeholder: "0",
-            value: this.existingAttackPenalty,
-            update: v => (this.existingAttackPenalty = v),
-          },
-          {
-            condition: this.isAttack && this.actor,
-            field: new FormulaField({ deterministic: false }),
-            hint: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.hint",
-            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.attackPenalty.incurred.label",
-            name: "incurred-attack-penalty",
-            placeholder: "0",
-            value: this.incurredAttackPenalty,
-            update: v => (this.incurredAttackPenalty = v),
-          },
-          ...endFields,
-          {
-            condition: this.isAttack,
-            field: new fields.BooleanField(),
-            label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label",
-            name: "sb",
-            small: true,
-            value: Boolean(this.sb),
-            update: v => (this.sb = v),
-          },
-          {
-            condition: this.isAttack,
-            field: new fields.BooleanField(),
-            label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label",
-            name: "vitals",
-            small: true,
-            value: Boolean(this.vitals),
-            update: v => (this.vitals = v),
-          },
-          {
-            field: new fields.BooleanField(),
-            label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
-            name: "warded",
-            small: true,
-            value: Boolean(this.warded),
-            update: v => (this.warded = v),
-          },
-          {
-            condition: this.source.system.maneuver === "reactive",
-            field: new fields.BooleanField(),
-            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.usesReaction.label",
-            name: "uses-reaction",
-            small: true,
-            value: Boolean(this.usesReaction),
-            update: v => (this.usesReaction = v),
-          },
-          {
-            field: new fields.BooleanField(),
-            label: "TERIOCK.SYSTEMS.Ability.EXECUTION.payCosts.label",
-            name: "pay-costs",
-            small: true,
-            value: Boolean(this.payCosts),
-            update: v => (this.payCosts = v),
-          },
-        ];
+      get _formPaths() {
+        const paths = ["competence.raw"];
+        if (this.isAttack) {
+          paths.push("piercing.raw", "existingAttackPenalty");
+          if (this.actor) { paths.push("incurredAttackPenalty"); }
+        }
+        paths.push(...super._formPaths.filter(p => p !== "competence.raw"));
+        if (this.isAttack) { paths.push("sb", "vitals"); }
+        paths.push("warded");
+        if (this.source.system.maneuver === "reactive") { paths.push("usesReaction"); }
+        paths.push("payCosts");
+        return paths;
       }
 
       /** @inheritDoc */

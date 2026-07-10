@@ -1,45 +1,68 @@
-import { ExecutionEditor } from "../../../applications/dialogs/_module.mjs";
-import * as dataMixins from "../../../data/mixins/_module.mjs";
-import { CompetenceModel } from "../../../data/models/_module.mjs";
-import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import { TeriockChatMessage } from "../../../documents/_module.mjs";
-import { TypeCollection } from "../../../documents/collections/_module.mjs";
-import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
+import { ExecutionEditor } from "../../applications/dialogs/_module.mjs";
+import { BaseDataModel } from "../../data/abstract/_module.mjs";
+import { FormulaField } from "../../data/fields/_module.mjs";
+import * as dataMixins from "../../data/mixins/_module.mjs";
+import { CompetenceModel } from "../../data/models/_module.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import { TeriockChatMessage } from "../../documents/_module.mjs";
+import { TypeCollection } from "../../documents/collections/_module.mjs";
+import { addFormula, formulaExists } from "../../helpers/formula.mjs";
 
-class AbstractExecution {}
+const { fields } = foundry.data;
 
-export default class BaseExecution extends dataMixins.AutomatedDataMixin(AbstractExecution) {
+/**
+ * Executions are ephemeral classes that resolve some sort of roll, activity, document usage, etc. They show an
+ * {@link ExecutionEditor} dialog for the user to interact with and configure.
+ * @mixes AutomatedData
+ * @extends {BaseDataModel}
+ */
+export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDataModel) {
   /**
    * Create an execution and immediately execute it.
-   * @param  {...any} args
+   * @param {object} [data] - Initial schema data.
+   * @param {Partial<Teriock.Execution.ExecutionOptions>} [options] - Construction context.
    * @returns {Promise<InstanceType<this>>}
    */
-  static async create(...args) {
-    const execution = new this(...args);
+  static async create(data = {}, options = {}) {
+    const execution = new this(data, options);
     await execution.execute();
     return execution;
   }
 
+  /** @inheritDoc */
+  static defineSchema() {
+    return {
+      competence: new fields.EmbeddedDataField(CompetenceModel),
+      formula: new FormulaField({ deterministic: false, initial: "" }),
+    };
+  }
+
   /**
    * Construct an execution.
-   * @param {Partial<Teriock.Execution.BaseExecutionOptions>} options
+   * @param {object} [data] - Initial schema data, handled by default {@link DataModel} construction.
+   * @param {Partial<Teriock.Execution.ExecutionOptions>} [options] - Construction context.
    */
-  constructor(options = {}) {
-    super();
+  constructor(data = {}, options = {}) {
+    super(data);
     this.options = options;
+    this.#source = options.source;
     this._showDialog = options.showDialog ?? game.settings.get("teriock", "showRollDialogs");
     this._actor = options.actor ?? game.actors.default;
     this._boosts = options.boosts ?? {};
-    this._formula = options.formula ?? "";
     this._rollData = options.rollData ?? {};
     this._rollOptions = options.rollOptions ?? {};
     this._messageMode = options.messageMode ?? game.settings.get("core", "messageMode");
     this._determineCompetence(options);
-    options.competence = this.competence.raw;
   }
 
   /** @type {TeriockJournalEntryPage} */
   #journalEntryPage;
+
+  /**
+   * The source this execution comes from.
+   * @type {AnyCommonDocument|BaseModifierModel}
+   */
+  #source;
 
   /** @type {AnyActor|null} */
   _actor;
@@ -52,9 +75,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
 
   /** @type {Record<Teriock.Keys.Impact, number>} */
   _boostsResolved;
-
-  /** @type {Teriock.System.FormulaString} */
-  _formula;
 
   /** @type {Teriock.Messages.Mode} */
   _messageMode;
@@ -71,9 +91,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   /** @type {Teriock.Activations.Any[]} */
   activations = [];
 
-  /** @type {CompetenceModel} */
-  competence = new CompetenceModel();
-
   /** @type {TeriockChatMessage|undefined} */
   message;
 
@@ -88,16 +105,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
 
   /** @type {object} */
   updates = {};
-
-  /**
-   * The dialog fields whose condition currently evaluates to true.
-   * @returns {Teriock.Execution.ExecutionDialogEntry[]}
-   */
-  get _activeDialogFields() {
-    return this._dialogFields.filter(f =>
-      Boolean(typeof f.condition === "function" ? f.condition() : (f.condition ?? true))
-    );
-  }
 
   /**
    * Buttons displayed in this execution's input dialog.
@@ -126,14 +133,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
       });
     }
     return docs;
-  }
-
-  /**
-   * Fields displayed in this execution's input dialog.
-   * @returns {Teriock.Execution.ExecutionDialogEntry[]}
-   */
-  get _dialogFields() {
-    return [];
   }
 
   /**
@@ -178,7 +177,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    * @returns {boolean}
    */
   get canShowDialog() {
-    return Boolean(this._activeDialogFields.length) || Boolean(this._dialogDocuments.length);
+    return Boolean(this._formPaths.length) || Boolean(this._dialogDocuments.length);
   }
 
   /**
@@ -217,16 +216,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
    */
   get flavor() {
     return "";
-  }
-
-  /** @returns {Teriock.System.FormulaString} */
-  get formula() {
-    return this._formula;
-  }
-
-  /** @param {Teriock.System.FormulaString} formula */
-  set formula(formula) {
-    this._formula = formula;
   }
 
   /**
@@ -286,6 +275,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
   }
 
   /**
+   * Source of this execution.
+   * @returns {AnyChildDocument|BaseModifierModel}
+   */
+  get source() {
+    return this.#source;
+  }
+
+  /**
    * Build activations to attach to this execution's chat message.
    * @returns {Promise<false|void>}
    */
@@ -328,10 +325,18 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(Abstrac
 
   /**
    * Determine this execution's competence.
-   * @param {Teriock.Execution.BaseExecutionOptions} options
+   * @param {Teriock.Execution.ExecutionOptions} options
    */
   _determineCompetence(options) {
-    if (options.competence !== undefined) { this.competence.raw = options.competence; }
+    let competence = 0;
+    if (foundry.utils.hasProperty(this.source, "system.competence.raw")) {
+      competence = foundry.utils.getProperty(this.source, "system.competence.value");
+    }
+    if (foundry.utils.hasProperty(this.source, "competence.raw")) {
+      competence = foundry.utils.getProperty(this.source, "competence.value");
+    }
+    if (foundry.utils.hasProperty(options, "competence")) { competence = options.competence; }
+    this.updateSource({ "competence.raw": competence });
   }
 
   /**

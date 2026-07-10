@@ -1,4 +1,3 @@
-import { EquipmentExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mjs";
@@ -46,9 +45,6 @@ export default class EquipmentSystem
   )
 {
   /** @inheritDoc */
-  static Execution = EquipmentExecution;
-
-  /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Equipment"];
 
   /** @inheritDoc */
@@ -74,6 +70,11 @@ export default class EquipmentSystem
       automations.TakeAutomation,
       automations.UseDocumentsAutomation,
     ];
+  }
+
+  /** @inheritDoc */
+  static get Execution() {
+    return teriock.executions.document.EquipmentExecution;
   }
 
   /** @inheritDoc */

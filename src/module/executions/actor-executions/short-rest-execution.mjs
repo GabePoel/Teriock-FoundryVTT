@@ -1,17 +1,25 @@
-import { UseDocumentsAutomation } from "../../../data/pseudo-documents/automations/_module.mjs";
-import { TypeCollection } from "../../../documents/collections/_module.mjs";
-import { toId, toKebabCase } from "../../../helpers/string.mjs";
-import { DocumentExecution } from "../../abstract/_module.mjs";
+import { UseDocumentsAutomation } from "../../data/pseudo-documents/automations/_module.mjs";
+import { TypeCollection } from "../../documents/collections/_module.mjs";
+import { toId, toKebabCase } from "../../helpers/string.mjs";
+import { DocumentExecution } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
 export default class ShortRestExecution extends DocumentExecution {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.ShortRest"];
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), { useAbilities: new fields.BooleanField({ initial: true }) });
+  }
+
   /**
-   * @param {Partial<Teriock.Execution.ShortRestExecutionOptions>} options
+   * @param {object} [data]
+   * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
    */
-  constructor(options = {}) {
-    super(options);
-    this.#useAbilities = options.useAbilities ?? true;
+  constructor(data = {}, options = {}) {
+    super(data, options);
     this._automations = [
       new UseDocumentsAutomation({
         _id: toId(UseDocumentsAutomation.TYPE, { hash: true }),
@@ -22,9 +30,6 @@ export default class ShortRestExecution extends DocumentExecution {
       }, { parent: this.source.system }),
     ];
   }
-
-  /** @type {boolean} */
-  #useAbilities = true;
 
   /** @inheritDoc */
   get _dialogButtons() {
@@ -38,18 +43,8 @@ export default class ShortRestExecution extends DocumentExecution {
   }
 
   /** @inheritDoc */
-  get _dialogFields() {
-    return [{
-      classes: ["slim"],
-      field: new fields.BooleanField(),
-      hint: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.int",
-      label: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.label",
-      name: "useAbilities",
-      small: true,
-      value: this.#useAbilities,
-      condition: () => this._hasAbilities,
-      update: v => (this.#useAbilities = Boolean(v)),
-    }];
+  get _formPaths() {
+    return this._hasAbilities ? ["useAbilities"] : [];
   }
 
   /**
@@ -65,7 +60,7 @@ export default class ShortRestExecution extends DocumentExecution {
 
   /** @inheritDoc */
   get automations() {
-    if (!this.#useAbilities) { return new TypeCollection([]); }
+    if (!this.useAbilities) { return new TypeCollection([]); }
     return super.automations;
   }
 

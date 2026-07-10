@@ -34,14 +34,21 @@ export function sortObjectEntries(obj, sortKey) {
 }
 
 /**
- * Storage for pre-localization configuration.
+ * Storage for pre-localization object registration.
  * @type {object}
  * @private
  */
-const _preLocalizationRegistrations = {};
+const _preLocalizationObjectRegistrations = {};
 
 /**
- * Mark the provided config key to be pre-localized during the init stage.
+ * Storage for pre-localization model registration.
+ * @type {(typeof BaseDataModel)[]}
+ * @private
+ */
+const _preLocalizationDataModelRegistrations = [];
+
+/**
+ * Mark the provided config key to be localized.
  * @param {string} configKeyPath - Key path within `TERIOCK` to localize.
  * @param {object} [options={}]
  * @param {string} [options.key] - If each entry in the config enum is an object, localize and sort using this property.
@@ -54,7 +61,15 @@ const _preLocalizationRegistrations = {};
  */
 export function preLocalize(configKeyPath, { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {}) {
   if (key) { keys.unshift(key); }
-  _preLocalizationRegistrations[configKeyPath] = { keys, prefix, sort, suffix, transform };
+  _preLocalizationObjectRegistrations[configKeyPath] = { keys, prefix, sort, suffix, transform };
+}
+
+/**
+ * Mark the provided data model to be localized.
+ * @param {typeof BaseDataModel} model
+ */
+export function preLocalizeDataModel(model) {
+  _preLocalizationDataModelRegistrations.push(model);
 }
 
 /**
@@ -62,7 +77,7 @@ export function preLocalize(configKeyPath, { key, keys = [], prefix = "", sort =
  * @param {object} config - The `TERIOCK` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization(config) {
-  for (const [keyPath, settings] of Object.entries(_preLocalizationRegistrations)) {
+  for (const [keyPath, settings] of Object.entries(_preLocalizationObjectRegistrations)) {
     const target = foundry.utils.getProperty(config, keyPath);
     if (!target) { continue; }
     localizeObject(target, settings);
@@ -71,6 +86,9 @@ export function performPreLocalization(config) {
   Object.values(CONFIG.statusEffects).forEach(e => {
     e.name = _loc(e.name);
   });
+  for (const model of _preLocalizationDataModelRegistrations) {
+    model.localize();
+  }
 }
 
 /**

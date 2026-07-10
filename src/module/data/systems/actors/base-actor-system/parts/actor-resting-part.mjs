@@ -64,20 +64,20 @@ export default function ActorRestingPart(Base) {
 
       /**
        * Take a long rest.
-       * @param {Partial<Teriock.Execution.LongRestExecutionOptions>} [options]
+       * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
        * @returns {Promise<void>}
        */
       async takeLongRest(options = {}) {
-        await LongRestExecution.create(Object.assign(options, { actor: this.parent, source: this.parent }));
+        await LongRestExecution.create({}, Object.assign(options, { actor: this.parent, source: this.parent }));
       }
 
       /**
        * Take a short rest.
-       * @param {Partial<Teriock.Execution.ShortRestExecutionOptions>} [options]
+       * @param {Partial<Teriock.Execution.ExecutionOptions>} [options]
        * @returns {Promise<void>}
        */
       async takeShortRest(options = {}) {
-        await ShortRestExecution.create(Object.assign(options, { actor: this.parent, source: this.parent }));
+        await ShortRestExecution.create({}, Object.assign(options, { actor: this.parent, source: this.parent }));
       }
     }
   );

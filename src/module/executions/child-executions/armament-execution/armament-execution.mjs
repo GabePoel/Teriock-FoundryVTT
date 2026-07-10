@@ -12,72 +12,50 @@ const { fields } = foundry.data;
  * @param {HarmRoll[]} rolls
  */
 export default class ArmamentExecution extends executionMixins.ImpactsExecutionMixin(DocumentExecution) {
-  /**
-   * @param {Teriock.Execution.ArmamentExecutionOptions} options
-   */
-  constructor(options = {}) {
-    super(options);
-    this.impacts = new Set(options.impacts ?? Array.from(this.source.system.impacts) ?? ["damage"]);
-    this.bonus = options.bonus ?? "";
-    this.secret = options.secret ?? this.source.system.settings.getSetting("rollSecretly");
-    this.twoHanded = this.source.system.hasTwoHandedAttack
-      && (options.twoHanded ?? this.source.system.settings.getSetting("rollTwoHanded"));
-    this.formula = options.formula
-      ?? (this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base);
-    this.#dealImpacts = formulaExists(this.formula);
-  }
-
-  /** @type {boolean} */
-  #dealImpacts;
-
-  /** @type {boolean} */
-  #useAbilities = true;
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Armament"];
 
   /** @inheritDoc */
-  get _dialogFields() {
-    return [...super._dialogFields, {
-      classes: ["slim"],
-      field: new fields.BooleanField(),
-      hint: "TERIOCK.SETTINGS.armament.rollSecretly.hint",
-      label: "TERIOCK.SETTINGS.armament.rollSecretly.name",
-      name: "secret",
-      small: true,
-      value: Boolean(this.secret),
-      update: v => (this.secret = v),
-    }, {
-      classes: ["slim"],
-      field: new fields.BooleanField(),
-      hint: "TERIOCK.SETTINGS.armament.rollTwoHanded.hint",
-      label: "TERIOCK.SETTINGS.armament.rollTwoHanded.name",
-      name: "twoHanded",
-      small: true,
-      value: Boolean(this.twoHanded),
-      condition: () => this.hasFormula && this.source.system.hasTwoHandedAttack,
-      update: v => {
-        this.twoHanded = v;
-        this.formula = this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base;
-        this.#dealImpacts = formulaExists(this.formula);
-      },
-    }, {
-      classes: ["slim"],
-      field: new fields.BooleanField(),
-      hint: "TERIOCK.SYSTEMS.Armament.EXECUTION.dealImpacts.hint",
-      label: "TERIOCK.SYSTEMS.Armament.EXECUTION.dealImpacts.label",
-      name: "dealImpacts",
-      small: true,
-      value: this.#dealImpacts,
-      update: v => (this.#dealImpacts = v),
-    }, {
-      classes: ["slim"],
-      condition: this.source.system.onUseAbilities.length > 0,
-      field: new fields.BooleanField(),
-      hint: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.hint",
-      label: "TERIOCK.SYSTEMS.Armament.EXECUTION.useAbilities.label",
-      name: "useAbilities",
-      small: true,
-      value: this.#useAbilities,
-      update: v => (this.#useAbilities = v),
-    }];
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      dealImpacts: new fields.BooleanField(),
+      secret: new fields.BooleanField({
+        hint: "TERIOCK.SETTINGS.armament.rollSecretly.hint",
+        label: "TERIOCK.SETTINGS.armament.rollSecretly.name",
+      }),
+      twoHanded: new fields.BooleanField({
+        hint: "TERIOCK.SETTINGS.armament.rollTwoHanded.hint",
+        label: "TERIOCK.SETTINGS.armament.rollTwoHanded.name",
+      }),
+      useAbilities: new fields.BooleanField({ initial: true }),
+    });
+  }
+
+  /**
+   * @param {object} [data]
+   * @param {Teriock.Execution.ArmamentExecutionOptions} [options]
+   */
+  constructor(data = {}, options = {}) {
+    const sys = options.source.system;
+    data.secret ??= sys.settings.getSetting("rollSecretly");
+    data.twoHanded = sys.hasTwoHandedAttack && (data.twoHanded ?? sys.settings.getSetting("rollTwoHanded"));
+    data.formula ??= data.twoHanded ? sys.damage.twoHanded : sys.damage.base;
+    data.dealImpacts ??= formulaExists(data.formula);
+    data.impacts ??= Array.from(sys.impacts ?? ["damage"]);
+    super(data, options);
+    this.bonus = options.bonus ?? "";
+  }
+
+  /** @type {Teriock.System.FormulaString} */
+  bonus = "";
+
+  /** @inheritDoc */
+  get _formPaths() {
+    const paths = [...super._formPaths, "secret"];
+    if (this.hasFormula && this.source.system.hasTwoHandedAttack) { paths.push("twoHanded"); }
+    paths.push("dealImpacts");
+    if (this.source.system.onUseAbilities.length > 0) { paths.push("useAbilities"); }
+    return paths;
   }
 
   /** @inheritDoc */
@@ -94,7 +72,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
 
   /** @inheritDoc */
   get hasFormula() {
-    return this.#dealImpacts;
+    return this.dealImpacts;
   }
 
   /** @inheritDoc */
@@ -113,9 +91,11 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
   /** @inheritDoc */
   async _getInput() {
     if (this.showDialog) {
+      let boosts = this.boosts;
       for (const impact of this.impacts) {
-        if (this._hasBoostForImpact(impact)) { this.boosts = Math.max(this.boosts, this._boostsResolved[impact]); }
+        if (this._hasBoostForImpact(impact)) { boosts = Math.max(boosts, this._boostsResolved[impact]); }
       }
+      if (boosts !== this.boosts) { this.updateSource({ boosts }); }
     }
     return super._getInput();
   }
@@ -129,7 +109,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
   /** @inheritDoc */
   async _postExecute() {
     const onUseAbilities = this.source.system.onUseAbilities;
-    if (this.#useAbilities && onUseAbilities.length > 0) {
+    if (this.useAbilities && onUseAbilities.length > 0) {
       const usedAbilities = await DocumentSelector.selectMulti(onUseAbilities, {
         hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.hint", { name: this.source.name }),
         title: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.onUse.title"),
@@ -152,8 +132,18 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
   }
 
-  /** @inheritDoc */
+  /** @inheritDoc*/
   getScope(scope = {}) {
     return Object.assign(super.getScope(scope), { armament: this.source });
+  }
+
+  /** @inheritDoc */
+  updateSource(changes = {}, options = {}) {
+    const diff = super.updateSource(changes, options);
+    if (("twoHanded" in diff) && !options.dryRun) {
+      const formula = this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base;
+      Object.assign(diff, super.updateSource({ dealImpacts: formulaExists(formula), formula }, options));
+    }
+    return diff;
   }
 }

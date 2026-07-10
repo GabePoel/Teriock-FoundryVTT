@@ -1,35 +1,33 @@
-import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import BaseExecution from "../base-execution/base-execution.mjs";
+import { BaseRoll } from "../../dice/rolls/_module.mjs";
+import BaseExecution from "./base-execution.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @property {Teriock.Execution.BaseExecutionOptions} options
+ * @property {Teriock.Execution.ExecutionOptions} options
  */
 export default class DocumentExecution extends BaseExecution {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Document"];
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), { consumeUses: new fields.BooleanField({ initial: true }) });
+  }
+
   /**
-   * @param {Teriock.Execution.DocumentExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.ExecutionOptions} [options]
    */
-  constructor(options = {}) {
-    super(options);
-    this._source = options.source;
+  constructor(data = {}, options = {}) {
+    super(data, options);
     this._actor = options.actor ?? this.source?.actor ?? game.actors.default;
     this._automations = this.source.system.automations?.contents ?? [];
     this._boosts = options.boosts ?? this.source.system.boosts ?? this._boosts;
-    this._consumeUses = options.consumeUses ?? true;
     if (game.settings.get("teriock", "secretDocuments").has(this.source.typedIdentifier)) {
       this._messageMode = options.messageMode ?? "blind";
     }
   }
-
-  /**
-   * Whether using this should consume one of the source document's uses.
-   * @type {boolean}
-   */
-  _consumeUses = true;
-
-  /** @type {AnyChildDocument} */
-  _source;
 
   /** @inheritDoc */
   get _dialogButtons() {
@@ -51,18 +49,10 @@ export default class DocumentExecution extends BaseExecution {
   }
 
   /** @inheritDoc */
-  get _dialogFields() {
-    return [...super._dialogFields, {
-      classes: ["slim"],
-      field: new fields.BooleanField(),
-      hint: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumeUses.hint",
-      label: "TERIOCK.SYSTEMS.Consumable.FIELDS.consumeUses.label",
-      name: "consumeUses",
-      small: true,
-      value: this._consumeUses,
-      condition: () => this.source?.system.consumable,
-      update: v => (this._consumeUses = Boolean(v)),
-    }];
+  get _formPaths() {
+    const paths = super._formPaths;
+    if (this.source?.system.consumable) { paths.push("consumeUses"); }
+    return paths;
   }
 
   /** @inheritDoc */
@@ -86,14 +76,6 @@ export default class DocumentExecution extends BaseExecution {
    */
   get rollData() {
     return Object.assign(this.source.system.getSystemRollData() || {}, super.rollData);
-  }
-
-  /**
-   * Source document.
-   * @returns {AnyChildDocument}
-   */
-  get source() {
-    return this._source;
   }
 
   /** @inheritDoc */
@@ -144,15 +126,6 @@ export default class DocumentExecution extends BaseExecution {
   }
 
   /**
-   * @inheritDoc
-   * @param {Teriock.Execution.DocumentExecutionOptions} options
-   */
-  _determineCompetence(options) {
-    this.competence.raw = options.source?.system.competence?.value || 0;
-    super._determineCompetence(options);
-  }
-
-  /**
    * Evaluate boosts.
    * @returns {Promise<void>}
    */
@@ -174,7 +147,7 @@ export default class DocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   async _postExecute() {
-    if (this.source.system.consumable && this._consumeUses) {
+    if (this.source.system.consumable && this.consumeUses) {
       this.source.update({
         "system.quantity": Math.max(0, this.source.system.quantity - this.source.system.consumptionAmount),
       });

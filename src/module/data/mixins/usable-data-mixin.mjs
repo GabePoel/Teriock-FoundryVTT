@@ -11,10 +11,17 @@ export default function UsableDataMixin(Base) {
   return (
     /**
      * @extends {BaseDataModel|CommonSystem}
-     * @property {CompetenceModel} competence
      * @mixin
      */
     class UsableData extends Base {
+      /**
+       * The type of execution this uses.
+       * @typeof {DocumentExecution}
+       */
+      static get Execution() {
+        return teriock.executions.abstract.BaseExecution;
+      }
+
       /** @inheritDoc */
       static defineSchema(...args) {
         return Object.assign(super.defineSchema(...args), {
@@ -23,13 +30,13 @@ export default function UsableDataMixin(Base) {
       }
 
       /**
-       * Parse an event into usable roll or execution options for this type.
+       * Parse an event into execution data and options for this type.
        * @param {PointerEvent} event
        * @param {AnyCommonDocument} [_source]
-       * @returns {Teriock.Execution.DocumentExecutionOptions}
+       * @returns {Teriock.Execution.ParsedEvent}
        */
       static parseEvent(event, _source) {
-        return BaseRoll.parseEvent(event);
+        return { data: {}, options: BaseRoll.parseEvent(event) };
       }
 
       /**
@@ -50,10 +57,15 @@ export default function UsableDataMixin(Base) {
 
       /**
        * Use this without any hook or trigger calls.
-       * @param {object} _options
+       * @param {object} [data] - Execution schema data.
+       * @param {object} [options] - Execution construction context.
        * @returns {Promise<void>}
        */
-      async _use(_options = {}) {}
+      async _use(data = {}, options = {}) {
+        options.actor ??= this.actor;
+        options.source = this;
+        await this.constructor.Execution.create(data, options);
+      }
 
       /** @inheritDoc */
       getLocalRollData() {
@@ -72,10 +84,13 @@ export default function UsableDataMixin(Base) {
        */
       async use(options = {}) {
         options.source ??= this.parent;
+        const data = {};
         if (options.event) {
-          Object.assign(options, this.constructor.parseEvent(options.event, options.source));
+          const parsed = this.constructor.parseEvent(options.event, options.source);
+          Object.assign(data, parsed.data);
+          Object.assign(options, parsed.options);
         }
-        await this._use(options);
+        await this._use(data, options);
       }
     }
   );

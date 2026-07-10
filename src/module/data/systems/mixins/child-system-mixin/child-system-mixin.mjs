@@ -1,6 +1,5 @@
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import { TeriockChatMessage } from "../../../../documents/_module.mjs";
-import { DocumentExecution } from "../../../../executions/abstract/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
@@ -36,14 +35,16 @@ export default function ChildSystemMixin(Base) {
         systemMixins.HierarchySystemMixin,
       )
     {
-      /** @typeof {DocumentExecution} */
-      static Execution = DocumentExecution;
-
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
 
       /** @inheritDoc */
       static PRESERVED_PROPERTIES = ["system.competence", "system.instructions", ...super.PRESERVED_PROPERTIES];
+
+      /** @inheritDoc */
+      static get Execution() {
+        return teriock.executions.abstract.DocumentExecution;
+      }
 
       /** @inheritDoc */
       static defineSchema() {
@@ -227,10 +228,10 @@ export default function ChildSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _use(options = {}) {
+      async _use(data = {}, options = {}) {
         options.actor ??= this.actor;
         options.source = this.parent;
-        await this.constructor.Execution.create(options);
+        await this.constructor.Execution.create(data, options);
       }
 
       /** @inheritDoc */

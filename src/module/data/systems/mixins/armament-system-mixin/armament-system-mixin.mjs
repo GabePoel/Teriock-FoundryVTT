@@ -1,5 +1,4 @@
 import { AttackSystemMixin } from "../_module.mjs";
-import { ArmamentExecution } from "../../../../executions/child-executions/_module.mjs";
 import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
@@ -25,10 +24,12 @@ export default function ArmamentSystemMixin(Base) {
      */
     class ArmamentSystem extends AttackSystemMixin(Base) {
       /** @inheritDoc */
-      static Execution = ArmamentExecution;
+      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Armament"];
 
       /** @inheritDoc */
-      static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Armament"];
+      static get Execution() {
+        return teriock.executions.document.ArmamentExecution;
+      }
 
       /** @inheritDoc */
       static get metadata() {
@@ -84,22 +85,21 @@ export default function ArmamentSystemMixin(Base) {
         return super.migrateData(source, options, state);
       }
 
-      /**
-       * @inheritDoc
-       * @returns {Teriock.Execution.ArmamentExecutionOptions}
-       */
+      /** @inheritDoc */
       static parseEvent(event, source) {
+        const parsed = super.parseEvent(event, source);
         const settings = source?.system?.settings;
         const rollSecretly = settings?.getSetting("rollSecretly")
           ?? game.settings.get("teriock", "armament").rollSecretly;
         const rollTwoHanded = settings?.getSetting("rollTwoHanded")
           ?? game.settings.get("teriock", "armament").rollTwoHanded;
         const hasTwoHandedAttack = Boolean(source?.system?.hasTwoHandedAttack);
-        return Object.assign(super.parseEvent(event, source), {
+        Object.assign(parsed.data, {
           crit: event.ctrlKey,
           secret: rollSecretly !== Boolean(event.shiftKey),
           twoHanded: hasTwoHandedAttack && (rollTwoHanded !== Boolean(event.altKey)),
         });
+        return parsed;
       }
 
       /**
@@ -329,14 +329,15 @@ export default function ArmamentSystemMixin(Base) {
 
       /**
        * @inheritDoc
-       * @param {Teriock.Execution.ArmamentExecutionOptions} options
+       * @param {object} [data]
+       * @param {Teriock.Execution.ArmamentExecutionOptions} [options]
        */
-      async _use(options = {}) {
+      async _use(data = {}, options = {}) {
         if (this.settings.getSetting("rollAttackOnUse")) {
           await this.actor?.useDocument("basic-attack", { type: "ability" });
         }
-        options.impacts ??= this.impacts;
-        await super._use(options);
+        data.impacts ??= this.impacts;
+        await super._use(data, options);
       }
 
       /** @inheritDoc */

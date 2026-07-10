@@ -75,7 +75,7 @@ export default function ActorProtectionsPart(Base) {
        */
       async rollImmunity(options = {}) {
         await this.parent.hookCall(options.hex ? "hexseal" : "immune");
-        await ImmunityExecution.create(Object.assign(options, { actor: this.parent }));
+        await ImmunityExecution.create({}, Object.assign(options, { actor: this.parent }));
       }
 
       /**
@@ -91,7 +91,7 @@ export default function ActorProtectionsPart(Base) {
       async rollResistance(options = {}) {
         if (options.event) { Object.assign(options, ThresholdRoll.parseEvent(options.event)); }
         await this.parent.hookCall(options.hex ? "hexproof" : "resist");
-        await ResistanceExecution.create(Object.assign(options, { actor: this.parent }));
+        await ResistanceExecution.create({}, Object.assign(options, { actor: this.parent }));
       }
     }
   );

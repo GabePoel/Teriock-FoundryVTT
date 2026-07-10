@@ -1,30 +1,43 @@
+import { FormulaField } from "../../../data/fields/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
-import DocumentExecution from "../../abstract/document-execution/document-execution.mjs";
+import DocumentExecution from "../../abstract/document-execution.mjs";
 import * as executionMixins from "../../mixins/_module.mjs";
-
-/** @type {boolean} */
-let BASE_EXPIRATION_LOCALIZED = false;
 
 /**
  * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  */
 export default class ExpirationExecution extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      formula: new FormulaField({
+        deterministic: false,
+        hint: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.hint",
+        initial: "",
+        label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.label",
+      }),
+      thresholdFormula: new FormulaField({
+        hint: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.threshold.hint",
+        initial: "2d4kh1",
+        label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.threshold.label",
+      }),
+    });
+  }
+
   /**
-   * @param {Teriock.Execution.ExpirationExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.ExpirationExecutionOptions} [options]
    */
-  constructor(options = {}) {
-    super(options);
-    if (!BASE_EXPIRATION_LOCALIZED) {
-      foundry.helpers.Localization.localizeDataModel(BaseExpiration);
-      BASE_EXPIRATION_LOCALIZED = true;
-    }
-    this.#expiration = options.expiration ?? new BaseExpiration({ method: "roll" }, { parent: this.source.system });
-    this.threshold = BaseRoll.minValue(this.#expiration.roll.threshold);
-    this.formula = this.#expiration.roll.formula;
-    this.thresholdFormula = this.#expiration.roll.threshold;
-    this.comparison = this.#expiration.roll.comparison;
+  constructor(data = {}, options = {}) {
+    const expiration = options.expiration ?? new BaseExpiration({ method: "roll" }, { parent: options.source.system });
+    data.comparison ??= expiration.roll.comparison;
+    data.formula ??= expiration.roll.formula;
+    data.thresholdFormula ??= expiration.roll.threshold;
+    super(data, options);
+    this.#expiration = expiration;
+    this.threshold = BaseRoll.minValue(this.thresholdFormula);
   }
 
   /** @type {BaseExpiration} */
@@ -32,9 +45,6 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
 
   /** @type {boolean} */
   autoExpire = false;
-
-  /** @type {Teriock.System.FormulaString} */
-  thresholdFormula = "2d4kh1";
 
   /** @inheritDoc */
   get _dialogButtons() {
@@ -53,46 +63,12 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
     }];
   }
 
-  /** @inheritDoc */
-  get _dialogFields() {
-    const formulaField = this.#expiration.getFieldForProperty("roll.formula");
-    const comparisonField = this.#expiration.getFieldForProperty("roll.comparison");
-    const thresholdField = this.#expiration.getFieldForProperty("roll.threshold");
-    /** @type {Teriock.Execution.ExecutionDialogEntry[]} */
-    const entries = [];
-    if (formulaField) {
-      entries.push({
-        field: formulaField,
-        hint: formulaField.hint,
-        label: formulaField.label,
-        name: "formula",
-        placeholder: "0",
-        value: this.formula,
-        update: v => (this.formula = v),
-      });
-    }
-    if (comparisonField) {
-      entries.push({
-        field: comparisonField,
-        hint: comparisonField.hint,
-        label: comparisonField.label,
-        name: "comparison",
-        value: this.comparison,
-        update: v => (this.comparison = v),
-      });
-    }
-    if (thresholdField) {
-      entries.push({
-        field: thresholdField,
-        hint: thresholdField.hint,
-        label: thresholdField.label,
-        name: "threshold",
-        placeholder: "0",
-        value: this.thresholdFormula,
-        update: v => (this.thresholdFormula = v),
-      });
-    }
-    return entries;
+  /**
+   * @inheritDoc
+   * @remarks Intentionally does not include parent paths.
+   */
+  get _formPaths() {
+    return ["formula", "comparison", "thresholdFormula"];
   }
 
   /** @inheritDoc */

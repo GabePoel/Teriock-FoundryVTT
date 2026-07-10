@@ -19,16 +19,14 @@ async function abstractImpactCommandOperation(actor, options) {
     else { await config.apply(actor, amount); }
     return;
   }
+  const netBoosts = options.boosts ?? 0;
   await ImpactsExecution.create({
-    actor,
-    boosts: options.boosts,
+    boosts: Math.max(netBoosts, 0),
     crit: options.crit,
-    document: options.document,
+    deboosts: Math.max(-netBoosts, 0),
     formula,
-    impact,
-    rollData: options.rollData,
-    showDialog: options.boost,
-  });
+    impacts: [impact],
+  }, { actor, document: options.document, rollData: options.rollData, showDialog: options.boost });
 }
 
 /**

@@ -1,18 +1,18 @@
-import { BaseExecution } from "../../abstract/_module.mjs";
-import * as executionMixins from "../../mixins/_module.mjs";
+import { BaseExecution } from "../abstract/_module.mjs";
+import * as executionMixins from "../mixins/_module.mjs";
 
 /**
  * @extends {BaseExecution}
  * @mixes TradecraftExecution
- * @property {Teriock.Execution.TradecraftExecutionOptions} options
+ * @property {Teriock.Execution.ThresholdExecutionOptions} options
  */
 export default class TradecraftCheckExecution extends executionMixins.TradecraftExecutionMixin(BaseExecution) {
   /**
-   * @param {Teriock.Execution.TradecraftExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.ThresholdExecutionOptions} [options]
    */
-  constructor(options = /** @type {Teriock.Execution.TradecraftExecutionOptions} */ {}) {
-    super(options);
-    this._tradecraft = options.tradecraft;
+  constructor(data = {}, options = {}) {
+    super(data, options);
   }
 
   /** @inheritDoc */
@@ -34,20 +34,11 @@ export default class TradecraftCheckExecution extends executionMixins.Tradecraft
 
   /** @inheritDoc */
   get tradecraft() {
-    return this._tradecraft ?? this.options.tradecraft;
+    return this.source.key;
   }
 
   /** @inheritDoc */
   async _buildPanels() {
     this.panels.push(await (await teriock.fromIdentifier(`tradecraft:${this.tradecraft}`))?.toPanel());
-  }
-
-  /**
-   * @inheritDoc
-   * @param {Teriock.Execution.TradecraftExecutionOptions} options
-   */
-  _determineCompetence(options) {
-    if (this.actor) { this.competence.raw = this.actor.system.tradecrafts[options.tradecraft].competence.value; }
-    super._determineCompetence(options);
   }
 }

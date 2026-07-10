@@ -1,11 +1,11 @@
 import { icons } from "../../constants/display/icons.mjs";
+import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { DocumentDialog } from "../api/_module.mjs";
 
 const { BooleanField } = foundry.data.fields;
-const { DataModel } = foundry.abstract;
 
-class RefreshOptions extends DataModel {
+class RefreshOptions extends BaseDataModel {
   static LOCALIZATION_PREFIXES = ["TERIOCK.DIALOGS.SourceRefresh"];
 
   /** @inheritDoc */
@@ -21,7 +21,7 @@ class RefreshOptions extends DataModel {
   }
 }
 
-let localized = false;
+RefreshOptions.preLocalize();
 
 /**
  * @property {AnyCommonDocument & { system: RefreshSystem }} document
@@ -55,10 +55,6 @@ export default class SourceRefresher extends DocumentDialog {
 
   constructor(...args) {
     super(...args);
-    if (!localized) {
-      foundry.helpers.Localization.localizeDataModel(RefreshOptions);
-      localized = true;
-    }
     const refreshOptions = new RefreshOptions();
     this.#refreshOptionFields = refreshOptions.schema.fields;
     this.state = { refreshOptions: refreshOptions.toObject(), selected: null };

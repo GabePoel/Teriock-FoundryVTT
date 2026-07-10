@@ -137,7 +137,7 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
    */
   async use() {
     if (this.method === "roll") {
-      await ExpirationExecution.create({ actor: this.actor, expiration: this, source: this.document });
+      await ExpirationExecution.create({}, { actor: this.actor, expiration: this, source: this.document });
     } else { await this.document.system.expire(); }
   }
 }

@@ -1,3 +1,4 @@
+import { preLocalizeDataModel } from "../../helpers/localization.mjs";
 import * as dataMixins from "../mixins/_module.mjs";
 
 const { DataModel } = foundry.abstract;
@@ -17,6 +18,21 @@ export default class BaseDataModel extends dataMixins.AccessDataMixin(DataModel)
    */
   static defineSchema() {
     return {};
+  }
+
+  /**
+   * Localize this data model.
+   */
+  static localize() {
+    if (!game?.teriock.i18nReady) { return; }
+    foundry.helpers.Localization.localizeDataModel(this);
+  }
+
+  /**
+   * Mark this data model to be localized.
+   */
+  static preLocalize() {
+    preLocalizeDataModel(this);
   }
 
   /**

@@ -72,7 +72,7 @@ declare global {
 
     export type ResistOptions = ThresholdOptions & { hex?: boolean };
 
-    export type DocumentUseOptions = ThresholdOptions & Teriock.Execution.DocumentExecutionOptions & {
+    export type DocumentUseOptions = ThresholdOptions & Teriock.Execution.ExecutionOptions & {
       competence?: number;
       noHeighten?: boolean;
     };

@@ -1,6 +1,6 @@
-import { addFormula } from "../../../helpers/formula.mjs";
-import { BaseExecution } from "../../abstract/_module.mjs";
-import * as executionMixins from "../../mixins/_module.mjs";
+import { addFormula } from "../../helpers/formula.mjs";
+import { BaseExecution } from "../abstract/_module.mjs";
+import * as executionMixins from "../mixins/_module.mjs";
 
 /**
  * @extends {BaseExecution}
@@ -8,19 +8,26 @@ import * as executionMixins from "../../mixins/_module.mjs";
  */
 export default class FeatExecution extends executionMixins.ThresholdExecutionMixin(BaseExecution) {
   /**
-   * @param {Partial<Teriock.Execution.FeatExecutionOptions>} options
+   * @param {object} [data]
+   * @param {Partial<Teriock.Execution.ThresholdExecutionOptions>} [options]
    */
-  constructor(options = {}) {
-    super(options);
-    this.attribute = options.attribute;
-    if (this.actor) { this.bonus = addFormula(this.actor.system.attributes[options.attribute].formula, this.bonus); }
+  constructor(data = {}, options = {}) {
+    super(data, options);
+    if (this.actor) {
+      this.updateSource({ bonus: addFormula(this.actor.system.attributes[this.attribute].formula, this.bonus) });
+    }
     if (game.settings.get("teriock", "secretAttributes").has(this.attribute)) {
       this._messageMode = options.messageMode ?? "blind";
     }
   }
 
-  /** @type {Teriock.Keys.Attribute} */
-  attribute;
+  /**
+   * The attribute of this execution.
+   * @returns {Teriock.Keys.Attribute}
+   */
+  get attribute() {
+    return this.source.key;
+  }
 
   /** @inheritDoc */
   get chatData() {
@@ -70,14 +77,5 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
   /** @inheritDoc */
   async _buildPanels() {
     this.panels = [await this.journalEntryPage.toPanel()];
-  }
-
-  /**
-   * @inheritDoc
-   * @param {Teriock.Execution.FeatExecutionOptions} options
-   */
-  _determineCompetence(options) {
-    if (this.actor) { this.competence.raw = this.actor.system.attributes[options.attribute].competence.value; }
-    super._determineCompetence(options);
   }
 }

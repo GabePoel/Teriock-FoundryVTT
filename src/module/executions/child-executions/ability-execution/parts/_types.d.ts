@@ -1,9 +1,8 @@
 declare global {
   namespace Teriock.Execution {
-    export type AbilityExecutionOptions = DocumentExecutionOptions & ThresholdExecutionOptions & {
+    export type AbilityExecutionOptions = ExecutionOptions & ThresholdExecutionOptions & {
       armament?: TeriockArmament;
       attackPenalty?: string;
-      av0?: boolean;
       limb?: boolean;
       noGp?: boolean;
       noHeighten?: boolean;
@@ -13,7 +12,6 @@ declare global {
       piercing?: Teriock.System.PiercingLevel;
       sb?: boolean;
       source?: TeriockAbility;
-      ub?: boolean;
       vitals?: boolean;
       warded?: boolean;
     };

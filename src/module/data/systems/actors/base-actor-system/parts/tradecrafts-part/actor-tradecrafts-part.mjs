@@ -61,10 +61,10 @@ export default function ActorTradecraftsPart(Base) {
        * - [Tradecrafts](https://wiki.teriock.com/index.php/Core:Tradecrafts)
        *
        * @param {Teriock.Keys.Tradecraft} tradecraft - The tradecraft to roll for.
-       * @param {Partial<Teriock.Execution.TradecraftExecutionOptions>} [options] - Options for the roll.
+       * @param {Partial<Teriock.Execution.ThresholdExecutionOptions>} [options] - Options for the roll.
        * @returns {Promise<void>}
        */
-      async rollTradecraft(tradecraft, options = { tradecraft }) {
+      async rollTradecraft(tradecraft, options = {}) {
         await this.tradecrafts[tradecraft].use(options);
       }
     }

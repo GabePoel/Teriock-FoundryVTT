@@ -1,4 +1,3 @@
-import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
@@ -26,7 +25,9 @@ export default class ConditionSystem
   )
 {
   /** @inheritDoc */
-  static Execution = ExpirationExecution;
+  static get Execution() {
+    return teriock.executions.document.ExpirationExecution;
+  }
 
   /** @inheritDoc */
   static get metadata() {

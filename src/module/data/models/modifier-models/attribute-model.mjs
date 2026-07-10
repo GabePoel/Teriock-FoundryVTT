@@ -1,4 +1,3 @@
-import { FeatExecution } from "../../../executions/activity-executions/_module.mjs";
 import { initialNumber } from "../../fields/tools/initializers.mjs";
 import BaseModifierModel from "./base-modifier-model.mjs";
 
@@ -8,6 +7,11 @@ import BaseModifierModel from "./base-modifier-model.mjs";
  * @see {FeatExecution}
  */
 export default class AttributeModel extends BaseModifierModel {
+  /** @inheritDoc */
+  static get Execution() {
+    return teriock.executions.activity.FeatExecution;
+  }
+
   /** @inheritDoc */
   static defineSchema(options) {
     return Object.assign(super.defineSchema(options), { passive: initialNumber(4) });
@@ -21,11 +25,6 @@ export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */
   get useText() {
     return _loc("TERIOCK.ROLLS.Feat.name", { value: this.name });
-  }
-
-  /** @inheritDoc */
-  async _use(options) {
-    await FeatExecution.create({ actor: this.actor, attribute: this.key, ...options });
   }
 
   /** @inheritDoc */

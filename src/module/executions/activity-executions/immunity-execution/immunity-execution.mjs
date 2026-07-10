@@ -4,10 +4,11 @@ import { BaseExecution } from "../../abstract/_module.mjs";
 
 export default class ImmunityExecution extends BaseExecution {
   /**
-   * @param {Teriock.Execution.ImmunityExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.ImmunityExecutionOptions} [options]
    */
-  constructor(options = {}) {
-    super(options);
+  constructor(data = {}, options = {}) {
+    super(data, options);
     this.hex = options.hex;
     this.wrappers = options.wrappers || [];
     this.wrappers.push(this.hex ? _loc("TERIOCK.TERMS.Common.chosen") : _loc("TERIOCK.TERMS.Common.automatic"));

@@ -1,5 +1,4 @@
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
-import { ExpirationExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
@@ -22,9 +21,6 @@ const { fields } = foundry.data;
 export default class ApplicableEffectSystem
   extends mixClasses(BaseEffectSystem, systemMixins.ExpirableSystemMixin, dataMixins.ThresholdDataMixin)
 {
-  /** @inheritDoc */
-  static Execution = ExpirationExecution;
-
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
 
@@ -54,6 +50,11 @@ export default class ApplicableEffectSystem
       expirations.CombatExpiration,
       expirations.StatusExpiration,
     ];
+  }
+
+  /** @inheritDoc */
+  static get Execution() {
+    return teriock.executions.document.ExpirationExecution;
   }
 
   /** @inheritDoc */
@@ -206,8 +207,9 @@ export default class ApplicableEffectSystem
   }
 
   /** @inheritDoc */
-  async _use(options = {}) {
+  async _use(data = {}, options = {}) {
     await super._use(
+      data,
       Object.assign(options, {
         actor: this.actor,
         expiration: this.activeExpirations.find((e) => e.method === "roll"),

@@ -1,8 +1,10 @@
+import { FormulaField } from "../../data/fields/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import DocumentSelector from "./document-selector.mjs";
 
 const { FormDataExtended } = foundry.applications.ux;
+const { fields } = foundry.data;
 
 export default class ExecutionEditor extends ResolvableDialog {
   /**
@@ -99,23 +101,22 @@ export default class ExecutionEditor extends ResolvableDialog {
   }
 
   /**
-   * @param {Teriock.Execution.ExecutionDialogEntry} field
-   * @param {object} [options]
-   * @param {boolean} [options.small]
+   * Build the render context for a single execution schema field.
+   * @param {string} path
    * @returns {object}
    */
-  #prepareFieldContext(field, { small = false } = {}) {
+  #prepareFieldContext(path) {
+    const field = this.execution.schema.getField(path);
+    const small = field instanceof fields.BooleanField;
+    const numeric = field instanceof FormulaField || (field instanceof fields.NumberField && !field.choices);
     return {
-      classes: [...(field.classes ?? []), small ? "tgrid-item" : null].filterJoin(" "),
-      field: field.field,
-      hint: field.hint ? _loc(field.hint) : undefined,
-      integer: field.integer,
-      label: _loc(field.label),
-      max: field.max,
-      min: field.min,
-      name: field.name,
-      placeholder: field.placeholder,
-      value: field.value,
+      classes: small ? "slim tgrid-item" : undefined,
+      field,
+      localize: true,
+      name: path,
+      placeholder: numeric ? "0" : undefined,
+      small,
+      value: foundry.utils.getProperty(this.execution._source, path),
     };
   }
 
@@ -123,10 +124,12 @@ export default class ExecutionEditor extends ResolvableDialog {
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
     const form = /** @type {HTMLFormElement} */ (event.currentTarget);
-    const data = foundry.utils.expandObject(new FormDataExtended(form).object);
-    for (const field of this.execution._activeDialogFields) {
-      if (foundry.utils.hasProperty(data, field.name)) { field.update(foundry.utils.getProperty(data, field.name)); }
+    const submitted = new FormDataExtended(form).object;
+    const changes = {};
+    for (const path of this.execution._formPaths) {
+      if (path in submitted) { changes[path] = submitted[path]; }
     }
+    this.execution.updateSource(changes);
     this.render();
   }
 
@@ -154,9 +157,11 @@ export default class ExecutionEditor extends ResolvableDialog {
   async _prepareContext(options = {}) {
     const mainFields = [];
     const smallFields = [];
-    for (const field of this.execution._activeDialogFields) {
-      if (field.small) { smallFields.push(this.#prepareFieldContext(field, { small: true })); }
-      else { mainFields.push(this.#prepareFieldContext(field)); }
+    for (const path of this.execution._formPaths) {
+      if (path === "hr") { continue; }
+      const fieldContext = this.#prepareFieldContext(path);
+      if (fieldContext.small) { smallFields.push(fieldContext); }
+      else { mainFields.push(fieldContext); }
     }
     const multipleDocuments = this.execution._dialogDocuments.length > 1;
     const documents = this.execution._dialogDocuments.map((entry, index) => {

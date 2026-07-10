@@ -1,19 +1,40 @@
+import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
 import { DocumentExecution } from "../../../abstract/_module.mjs";
 import * as executionMixins from "../../../mixins/_module.mjs";
 
+const { fields } = foundry.data;
+
 /**
  * @extends {DocumentExecution}
  * @mixes ThresholdExecution
  */
 export default class AbilityExecutionConstructor extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
+  /** @inheritDoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Ability"];
+
+  /** @inheritDoc */
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
+      incurredAttackPenalty: new FormulaField({ deterministic: false, initial: "0" }),
+      payCosts: new fields.BooleanField(),
+      piercing: new fields.EmbeddedDataField(PiercingModel),
+      sb: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label" }),
+      usesReaction: new fields.BooleanField(),
+      vitals: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label" }),
+      warded: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label" }),
+    });
+  }
+
   /**
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
+   * @param {object} [data]
+   * @param {Teriock.Execution.AbilityExecutionOptions} [options]
    */
-  constructor(options = {}) {
-    super(options);
+  constructor(data = {}, options = {}) {
+    super(data, options);
     this.rootBonus = this.bonus;
     this.armament = options.armament ?? this.#determineDefaultArmament();
     this.initializeExecution(options);
@@ -43,18 +64,15 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   /**
    * Resolves piercing by comparing source, armament, and actor offense.
    * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {PiercingModel}
+   * @returns {Teriock.System.PiercingLevel}
    */
   #determinePiercing(options = {}) {
-    this.piercing.raw = this.source.system.piercing.raw;
+    let raw = this.source.system.piercing.raw;
     if (this.armament && this.source.system.isContact) {
-      this.piercing.raw = Math.max(
-        this.piercing.raw,
-        this.armament.system.piercing.raw,
-        this.actor?.system.offense.piercing.raw || 0,
-      );
+      raw = Math.max(raw, this.armament.system.piercing.raw, this.actor?.system.offense.piercing.raw || 0);
     }
-    if (options.piercing !== undefined) { this.piercing.raw = options.piercing; }
+    if (options.piercing !== undefined) { raw = options.piercing; }
+    return raw;
   }
 
   /**
@@ -135,17 +153,8 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   /** @type {boolean} */
   noHeighten;
 
-  /** @type {PiercingModel} */
-  piercing = new PiercingModel();
-
   /** @type {Set<TeriockToken>} */
   targets;
-
-  /** @type {boolean} */
-  vitals;
-
-  /** @type {boolean} */
-  warded;
 
   /** @inheritDoc */
   get activeAutomations() {
@@ -278,18 +287,21 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   _updateArmament(armament, options = {}) {
     this.armament = armament;
     const sys = this.source.system;
-    this.#determinePiercing();
-    this.sb = options.sb ?? Boolean(this.armament && sys.isContact) * (this.actor?.system.offense.sb ?? 0);
-    this.vitals = this.#resolveVitals();
-    this.warded = this.#resolveWarded();
-    this.incurredAttackPenalty = this.#resolveAttackPenalty();
+    const changes = {
+      incurredAttackPenalty: this.#resolveAttackPenalty(),
+      "piercing.raw": this.#determinePiercing(options),
+      sb: Boolean(options.sb ?? ((this.armament && sys.isContact) ? this.actor?.system.offense.sb : 0)),
+      vitals: this.#resolveVitals(),
+      warded: this.#resolveWarded(),
+    };
     if (this.isAttack && sys.isContact) {
-      this.bonus = formulaExists(this.rootBonus) && formulaExists(armament?.system.hitBonus)
+      changes.bonus = formulaExists(this.rootBonus) && formulaExists(armament?.system.hitBonus)
         ? addFormula(this.rootBonus, armament.system.hitBonus)
         : (formulaExists(armament?.system.hitBonus)
           ? armament.system.hitBonus
           : (formulaExists(this.rootBonus) ? this.rootBonus : "0"));
     }
+    this.updateSource(changes);
   }
 
   /**
@@ -337,7 +349,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     this.noHeighten = options.noHeighten ?? !this.source.system.settings.getSetting("promptHeighten");
     this.#initializeCosts(options);
     this._updateArmament(this.armament, options);
-    if (!this.bonus) { this.bonus = "0"; }
+    if (!this.bonus) { this.updateSource({ bonus: "0" }); }
     this.limb = this.#resolveLimb(options);
     // Try and find a specific token that this is being executed by
     /** @type {TeriockToken[]} */
@@ -345,10 +357,13 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     for (const t of selectedTokens) { if (t.actor?.uuid === this.actor.uuid) { this.executor = t; } }
     // Fall back to default token
     this.executor ??= this.actor?.defaultToken ?? null;
-    this.existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
-    if (Number.isNaN(this.existingAttackPenalty)) { this.existingAttackPenalty = 0; }
-    this.usesReaction = this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1";
-    this.payCosts = game.settings.get("teriock", "autoPayAbilityCosts");
+    let existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
+    if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
+    this.updateSource({
+      existingAttackPenalty: Math.min(existingAttackPenalty, 0),
+      payCosts: game.settings.get("teriock", "autoPayAbilityCosts"),
+      usesReaction: this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1",
+    });
     this.targets = new Set();
   }
 }
