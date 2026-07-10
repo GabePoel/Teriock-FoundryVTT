@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
 const attunementContext = {
@@ -12,7 +12,7 @@ const attunementContext = {
 
 export default attunementContext;
 
-preLocalize("rollContext.attunement");
+preLocalizeConfig("rollContext.attunement");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.attunement.type).forEach(([k, v]) => {
     attunementContext[`type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Attunement.type", { name: _loc(v.label) });

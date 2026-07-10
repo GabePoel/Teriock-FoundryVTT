@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
 /** @enum {Teriock.Config.ImpactEntry} */
@@ -140,4 +140,4 @@ export default {
   },
 };
 
-preLocalize("config.impact", { keys: ["label", "deal", "take"] });
+preLocalizeConfig("config.impact", { keys: ["label", "deal", "take"] });

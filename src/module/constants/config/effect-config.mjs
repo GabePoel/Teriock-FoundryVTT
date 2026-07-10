@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { colors } from "../display/colors.mjs";
 import { icons } from "../display/icons.mjs";
 
@@ -20,5 +20,5 @@ export default {
   },
 };
 
-preLocalize("config.effect.applicationTargets", { key: "label" });
-preLocalize("config.effect.form", { key: "label" });
+preLocalizeConfig("config.effect.applicationTargets", { key: "label" });
+preLocalizeConfig("config.effect.form", { key: "label" });

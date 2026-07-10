@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
 export default {
@@ -35,5 +35,5 @@ export default {
   defaults: { maxAv: 2 },
 };
 
-preLocalize("config.class.archetypes", { keys: ["label"] });
-preLocalize("config.class.classes", { keys: ["label"] });
+preLocalizeConfig("config.class.archetypes", { keys: ["label"] });
+preLocalizeConfig("config.class.classes", { keys: ["label"] });

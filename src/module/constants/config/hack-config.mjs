@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
 /** @enum {Teriock.Config.HackEntry} */
@@ -63,4 +63,4 @@ export default {
   },
 };
 
-preLocalize("config.hack", { keys: ["label", "part", "remove"] });
+preLocalizeConfig("config.hack", { keys: ["label", "part", "remove"] });

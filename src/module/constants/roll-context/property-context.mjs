@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
@@ -13,7 +13,7 @@ const propertyContext = {
 
 export default propertyContext;
 
-preLocalize("rollContext.property");
+preLocalizeConfig("rollContext.property");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.effect.form).forEach(([k, v]) => {
     propertyContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", { name: _loc(v.label) });

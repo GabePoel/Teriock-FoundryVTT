@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 const suppression = {
   armor: "TERIOCK.SYSTEMS.Rank.MESSAGES.suppression.armor",
@@ -28,5 +28,5 @@ const error = {
 
 export default { error, suppression };
 
-preLocalize("config.tip.suppression");
-preLocalize("config.tip.error");
+preLocalizeConfig("config.tip.suppression");
+preLocalizeConfig("config.tip.error");

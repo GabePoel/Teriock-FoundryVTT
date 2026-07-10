@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
   // no sort
@@ -9,4 +9,4 @@ export default {
   },
 };
 
-preLocalize("config.illusion.level");
+preLocalizeConfig("config.illusion.level");

@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { colors, icons } from "../display/_module.mjs";
 
 export default {
@@ -16,5 +16,5 @@ export default {
   weight: { interval: 0.01 },
 };
 
-preLocalize("config.equipment.powerLevel", { keys: ["label"] });
-preLocalize("config.equipment.powerLevelShort");
+preLocalizeConfig("config.equipment.powerLevel", { keys: ["label"] });
+preLocalizeConfig("config.equipment.powerLevelShort");

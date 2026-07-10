@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import impactConfig from "./impact-config.mjs";
 
 const booleanTypes = ["upgrade", "downgrade", "override"];
@@ -169,7 +169,7 @@ const tokenPhase = "initial";
 
 export default { child, defaultPhase, parent, phase, tokenPhase };
 
-preLocalize("config.change.child.groups");
-preLocalize("config.change.child.paths", { key: "label", sort: true });
-preLocalize("config.change.parent.target");
-preLocalize("config.change.phase", { keys: ["hint", "label"] });
+preLocalizeConfig("config.change.child.groups");
+preLocalizeConfig("config.change.child.paths", { key: "label", sort: true });
+preLocalizeConfig("config.change.parent.target");
+preLocalizeConfig("config.change.phase", { keys: ["hint", "label"] });

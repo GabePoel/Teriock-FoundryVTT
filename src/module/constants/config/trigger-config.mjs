@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { objectMap } from "../../helpers/utils.mjs";
 import impactConfig from "./impact-config.mjs";
 
@@ -96,17 +96,17 @@ const triggerConfig = {
   },
 };
 
-preLocalize("config.trigger", { keys: ["label"] });
-preLocalize("config.trigger.activity.choices");
-preLocalize("config.trigger.attunable.choices");
-preLocalize("config.trigger.combat.choices");
-preLocalize("config.trigger.consequence.choices");
-preLocalize("config.trigger.equipment.choices");
-preLocalize("config.trigger.execution.choices");
-preLocalize("config.trigger.impact.choices");
-preLocalize("config.trigger.mount.choices");
-preLocalize("config.trigger.protection.choices");
-preLocalize("config.trigger.time.choices");
-preLocalize("config.trigger.update.choices");
+preLocalizeConfig("config.trigger", { keys: ["label"] });
+preLocalizeConfig("config.trigger.activity.choices");
+preLocalizeConfig("config.trigger.attunable.choices");
+preLocalizeConfig("config.trigger.combat.choices");
+preLocalizeConfig("config.trigger.consequence.choices");
+preLocalizeConfig("config.trigger.equipment.choices");
+preLocalizeConfig("config.trigger.execution.choices");
+preLocalizeConfig("config.trigger.impact.choices");
+preLocalizeConfig("config.trigger.mount.choices");
+preLocalizeConfig("config.trigger.protection.choices");
+preLocalizeConfig("config.trigger.time.choices");
+preLocalizeConfig("config.trigger.update.choices");
 
 export default triggerConfig;

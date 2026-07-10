@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import metaphysicsContext from "./metaphysics-context.mjs";
 import usableContext from "./usable-context.mjs";
 
@@ -41,7 +41,7 @@ const abilityContext = {
 
 export default abilityContext;
 
-preLocalize("rollContext.ability");
+preLocalizeConfig("rollContext.ability");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.ability.maneuver).forEach(([k, v]) => {
     abilityContext[`maneuver.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.maneuver", { name: _loc(v) });

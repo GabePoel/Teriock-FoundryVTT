@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 /** @enum {Teriock.Config.CurrencyEntry} */
 // no sort
@@ -18,4 +18,4 @@ const currencyConfig = {
 
 export default currencyConfig;
 
-preLocalize("config.currency", { key: "label" });
+preLocalizeConfig("config.currency", { key: "label" });

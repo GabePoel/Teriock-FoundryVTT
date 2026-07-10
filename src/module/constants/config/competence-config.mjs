@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { icons } from "../display/icons.mjs";
 
 export default {
@@ -21,4 +21,4 @@ export default {
   },
 };
 
-preLocalize("config.competence.levels", { keys: ["label"], sort: false });
+preLocalizeConfig("config.competence.levels", { keys: ["label"], sort: false });

@@ -34,14 +34,14 @@ export function sortObjectEntries(obj, sortKey) {
 }
 
 /**
- * Storage for pre-localization object registration.
+ * Storage for pre-localization config registration.
  * @type {object}
  * @private
  */
-const _preLocalizationObjectRegistrations = {};
+const _preLocalizationConfigRegistrations = {};
 
 /**
- * Storage for pre-localization model registration.
+ * Storage for pre-localization data model registration.
  * @type {(typeof BaseDataModel)[]}
  * @private
  */
@@ -59,9 +59,9 @@ const _preLocalizationDataModelRegistrations = [];
  * @param {TransformKey} [options.transform] - Add a transformation to the value before localizing.
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
  */
-export function preLocalize(configKeyPath, { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {}) {
+export function preLocalizeConfig(configKeyPath, { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {}) {
   if (key) { keys.unshift(key); }
-  _preLocalizationObjectRegistrations[configKeyPath] = { keys, prefix, sort, suffix, transform };
+  _preLocalizationConfigRegistrations[configKeyPath] = { keys, prefix, sort, suffix, transform };
 }
 
 /**
@@ -77,7 +77,7 @@ export function preLocalizeDataModel(model) {
  * @param {object} config - The `TERIOCK` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization(config) {
-  for (const [keyPath, settings] of Object.entries(_preLocalizationObjectRegistrations)) {
+  for (const [keyPath, settings] of Object.entries(_preLocalizationConfigRegistrations)) {
     const target = foundry.utils.getProperty(config, keyPath);
     if (!target) { continue; }
     localizeObject(target, settings);

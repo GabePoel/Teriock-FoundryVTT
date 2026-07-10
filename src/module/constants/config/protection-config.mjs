@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
   categories: {
@@ -114,5 +114,5 @@ export default {
   },
 };
 
-preLocalize("config.protection.categories", { keys: ["label"] });
-preLocalize("config.protection.types", { keys: ["label", "button"] });
+preLocalizeConfig("config.protection.categories", { keys: ["label"] });
+preLocalizeConfig("config.protection.types", { keys: ["label", "button"] });

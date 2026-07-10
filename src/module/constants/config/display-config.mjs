@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
   abilitySortOrders: {
@@ -32,6 +32,6 @@ export default {
   },
 };
 
-preLocalize("config.display.sizes");
-preLocalize("config.display.abilitySortOrders");
-preLocalize("config.display.equipmentSortOrders");
+preLocalizeConfig("config.display.sizes");
+preLocalizeConfig("config.display.abilitySortOrders");
+preLocalizeConfig("config.display.equipmentSortOrders");

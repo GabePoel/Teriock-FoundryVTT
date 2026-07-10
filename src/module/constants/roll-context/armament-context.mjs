@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
 const armamentContext = {
@@ -44,7 +44,7 @@ const armamentContext = {
 
 export default armamentContext;
 
-preLocalize("rollContext.armament");
+preLocalizeConfig("rollContext.armament");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.reference.weaponFightingStyles).forEach(([k, v]) => {
     armamentContext[`style.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Armament.style", { name: _loc(v) });

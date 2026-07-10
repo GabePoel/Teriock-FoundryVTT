@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import currencyConfig from "./currency-config.mjs";
 import systemConfig from "./system-config.mjs";
 
@@ -32,5 +32,5 @@ export default {
   },
 };
 
-preLocalize("config.transformation.level");
-preLocalize("config.transformation.override", { key: "label" });
+preLocalizeConfig("config.transformation.level");
+preLocalizeConfig("config.transformation.override", { key: "label" });

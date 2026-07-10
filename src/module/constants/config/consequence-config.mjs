@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
   common: {
@@ -38,8 +38,8 @@ export default {
   },
 };
 
-preLocalize("config.consequence.interaction.attack");
-preLocalize("config.consequence.interaction.feat");
-preLocalize("config.consequence.interaction.manifest");
-preLocalize("config.consequence.interaction.block");
-preLocalize("config.consequence.common");
+preLocalizeConfig("config.consequence.interaction.attack");
+preLocalizeConfig("config.consequence.interaction.feat");
+preLocalizeConfig("config.consequence.interaction.manifest");
+preLocalizeConfig("config.consequence.interaction.block");
+preLocalizeConfig("config.consequence.common");

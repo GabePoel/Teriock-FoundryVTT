@@ -13,7 +13,7 @@ import {
   PropertyPreviewModel,
   RankPreviewModel,
 } from "../../data/models/preview-models/_module.mjs";
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import { docSort, effectSort, rankSort } from "../../helpers/sort.mjs";
 import { icons } from "../display/icons.mjs";
 
@@ -291,4 +291,4 @@ export default {
   },
 };
 
-preLocalize("config.document", { keys: ["hint", "label", "plural"] });
+preLocalizeConfig("config.document", { keys: ["hint", "label", "plural"] });

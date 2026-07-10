@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
   delivery: /** @enum {Teriock.Config.DeliveryEntry} */ {
@@ -106,17 +106,17 @@ export default {
   },
 };
 
-preLocalize("config.ability.delivery", { keys: ["label"] });
-preLocalize("config.ability.deliveryPackage");
-preLocalize("config.ability.deliveryParent");
-preLocalize("config.ability.duration.unit");
-preLocalize("config.ability.executionTime.active");
-preLocalize("config.ability.executionTime.passive");
-preLocalize("config.ability.executionTime.reactive");
-preLocalize("config.ability.executionTime.slow");
-preLocalize("config.ability.expansion", { keys: ["label"] });
-preLocalize("config.ability.featSaveImprovementAmount");
-preLocalize("config.ability.interaction");
-preLocalize("config.ability.maneuver");
-preLocalize("config.ability.targetParent");
-preLocalize("config.ability.targets", { keys: ["label"] });
+preLocalizeConfig("config.ability.delivery", { keys: ["label"] });
+preLocalizeConfig("config.ability.deliveryPackage");
+preLocalizeConfig("config.ability.deliveryParent");
+preLocalizeConfig("config.ability.duration.unit");
+preLocalizeConfig("config.ability.executionTime.active");
+preLocalizeConfig("config.ability.executionTime.passive");
+preLocalizeConfig("config.ability.executionTime.reactive");
+preLocalizeConfig("config.ability.executionTime.slow");
+preLocalizeConfig("config.ability.expansion", { keys: ["label"] });
+preLocalizeConfig("config.ability.featSaveImprovementAmount");
+preLocalizeConfig("config.ability.interaction");
+preLocalizeConfig("config.ability.maneuver");
+preLocalizeConfig("config.ability.targetParent");
+preLocalizeConfig("config.ability.targets", { keys: ["label"] });

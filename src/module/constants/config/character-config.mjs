@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
   defaults: { initiative: "1d20 + @mov", maxPresence: 1 },
@@ -58,7 +58,7 @@ export default {
   ],
 };
 
-preLocalize("config.character.movement", { key: "label" });
-preLocalize("config.character.sense", { key: "label" });
-preLocalize("config.character.sizes", { keys: ["category"] });
-preLocalize("config.character.speed", { keys: ["label"] });
+preLocalizeConfig("config.character.movement", { key: "label" });
+preLocalizeConfig("config.character.sense", { key: "label" });
+preLocalizeConfig("config.character.sizes", { keys: ["category"] });
+preLocalizeConfig("config.character.speed", { keys: ["label"] });

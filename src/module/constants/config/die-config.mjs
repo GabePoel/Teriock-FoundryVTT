@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
   deathBagStoneColor: {
@@ -14,4 +14,4 @@ export default {
   styles: { hp: { colorset: "red" }, mp: { colorset: "blue" } },
 };
 
-preLocalize("config.die.deathBagStoneColor");
+preLocalizeConfig("config.die.deathBagStoneColor");

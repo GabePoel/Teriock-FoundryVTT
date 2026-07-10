@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 const actorContext = {
   c: "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.c.label",
@@ -65,7 +65,7 @@ const actorContext = {
 
 export default actorContext;
 
-preLocalize("rollContext.actor");
+preLocalizeConfig("rollContext.actor");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.document).filter(([_k, v]) => v.documentName === "Actor").forEach(([k, v]) => {
     actorContext[k] = _loc(v?.label);

@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
 const mountContext = {
@@ -19,4 +19,4 @@ const mountContext = {
 
 export default mountContext;
 
-preLocalize("rollContext.mount");
+preLocalizeConfig("rollContext.mount");

@@ -1,4 +1,4 @@
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import usableContext from "./usable-context.mjs";
 
 const fluencyContext = {
@@ -11,7 +11,7 @@ const fluencyContext = {
 
 export default fluencyContext;
 
-preLocalize("rollContext.fluency");
+preLocalizeConfig("rollContext.fluency");
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.tradecraft.fields).forEach(([k, v]) => {
     fluencyContext[`field.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Fluency.field", { name: _loc(v.label) });

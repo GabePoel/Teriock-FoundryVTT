@@ -1,7 +1,7 @@
 // The reference is like the index but with names localized.
 // This is the better object to use when constructing anything user facing.
 
-import { preLocalize } from "../../helpers/localization.mjs";
+import { preLocalizeConfig } from "../../helpers/localization.mjs";
 import {
   abilities,
   attributes,
@@ -54,31 +54,31 @@ const reference = {
 };
 export default reference;
 
-preLocalize("reference.abilities", { prefix: "TERIOCK.TERMS.Abilities.", transform: "cc" });
-preLocalize("reference.attributes", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".abbreviation", transform: "lc" });
-preLocalize("reference.attributesFull", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".label", transform: "lc" });
-preLocalize("reference.bodyParts", { prefix: "TERIOCK.TERMS.BodyParts.", transform: "cc" });
-preLocalize("reference.classes", { prefix: "TERIOCK.TERMS.Classes.", transform: "cc" });
-preLocalize("reference.conditions", { prefix: "TERIOCK.STATUSES.Conditions.", transform: "cc" });
-preLocalize("reference.creatures", { prefix: "TERIOCK.TERMS.Creatures.", transform: "cc" });
-preLocalize("reference.damageTypes", { prefix: "TERIOCK.TERMS.DamageTypes.", transform: "cc" });
-preLocalize("reference.deathBag", { prefix: "TERIOCK.TERMS.StoneColor.", transform: "cc" });
-preLocalize("reference.drainTypes", { prefix: "TERIOCK.TERMS.DrainTypes.", transform: "cc" });
-preLocalize("reference.effectTypes", { prefix: "TERIOCK.TERMS.EffectTypes.", transform: "cc" });
-preLocalize("reference.elements", { prefix: "TERIOCK.TERMS.Elements.", transform: "cc" });
-preLocalize("reference.equipment", { prefix: "TERIOCK.TERMS.Equipment.", transform: "cc" });
-preLocalize("reference.equipmentClasses", { prefix: "TERIOCK.TERMS.EquipmentClasses.", transform: "cc" });
-preLocalize("reference.powerSources", { prefix: "TERIOCK.TERMS.PowerSources.", transform: "cc" });
-preLocalize("reference.properties", { prefix: "TERIOCK.TERMS.Properties.", transform: "cc" });
-preLocalize("reference.statAttributes", {
+preLocalizeConfig("reference.abilities", { prefix: "TERIOCK.TERMS.Abilities.", transform: "cc" });
+preLocalizeConfig("reference.attributes", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".abbreviation", transform: "lc" });
+preLocalizeConfig("reference.attributesFull", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".label", transform: "lc" });
+preLocalizeConfig("reference.bodyParts", { prefix: "TERIOCK.TERMS.BodyParts.", transform: "cc" });
+preLocalizeConfig("reference.classes", { prefix: "TERIOCK.TERMS.Classes.", transform: "cc" });
+preLocalizeConfig("reference.conditions", { prefix: "TERIOCK.STATUSES.Conditions.", transform: "cc" });
+preLocalizeConfig("reference.creatures", { prefix: "TERIOCK.TERMS.Creatures.", transform: "cc" });
+preLocalizeConfig("reference.damageTypes", { prefix: "TERIOCK.TERMS.DamageTypes.", transform: "cc" });
+preLocalizeConfig("reference.deathBag", { prefix: "TERIOCK.TERMS.StoneColor.", transform: "cc" });
+preLocalizeConfig("reference.drainTypes", { prefix: "TERIOCK.TERMS.DrainTypes.", transform: "cc" });
+preLocalizeConfig("reference.effectTypes", { prefix: "TERIOCK.TERMS.EffectTypes.", transform: "cc" });
+preLocalizeConfig("reference.elements", { prefix: "TERIOCK.TERMS.Elements.", transform: "cc" });
+preLocalizeConfig("reference.equipment", { prefix: "TERIOCK.TERMS.Equipment.", transform: "cc" });
+preLocalizeConfig("reference.equipmentClasses", { prefix: "TERIOCK.TERMS.EquipmentClasses.", transform: "cc" });
+preLocalizeConfig("reference.powerSources", { prefix: "TERIOCK.TERMS.PowerSources.", transform: "cc" });
+preLocalizeConfig("reference.properties", { prefix: "TERIOCK.TERMS.Properties.", transform: "cc" });
+preLocalizeConfig("reference.statAttributes", {
   prefix: "TERIOCK.TERMS.Attributes.",
   suffix: ".abbreviation",
   transform: "lc",
 });
-preLocalize("reference.traits", { prefix: "TERIOCK.TERMS.Traits.", transform: "cc" });
-preLocalize("reference.tradecrafts", { prefix: "TERIOCK.TERMS.Tradecrafts.", transform: "cc" });
-preLocalize("reference.traits", { prefix: "TERIOCK.TERMS.Traits.", transform: "cc" });
-preLocalize("reference.weaponClasses", { prefix: "TERIOCK.TERMS.EquipmentClasses.", transform: "cc" });
-preLocalize("reference.weaponFightingStyles", { prefix: "TERIOCK.TERMS.WeaponFightingStyles.", transform: "cc" });
-preLocalize("reference.magicalProperties", { prefix: "TERIOCK.TERMS.Properties.", transform: "cc" });
-preLocalize("reference.materialProperties", { prefix: "TERIOCK.TERMS.Properties.", transform: "cc" });
+preLocalizeConfig("reference.traits", { prefix: "TERIOCK.TERMS.Traits.", transform: "cc" });
+preLocalizeConfig("reference.tradecrafts", { prefix: "TERIOCK.TERMS.Tradecrafts.", transform: "cc" });
+preLocalizeConfig("reference.traits", { prefix: "TERIOCK.TERMS.Traits.", transform: "cc" });
+preLocalizeConfig("reference.weaponClasses", { prefix: "TERIOCK.TERMS.EquipmentClasses.", transform: "cc" });
+preLocalizeConfig("reference.weaponFightingStyles", { prefix: "TERIOCK.TERMS.WeaponFightingStyles.", transform: "cc" });
+preLocalizeConfig("reference.magicalProperties", { prefix: "TERIOCK.TERMS.Properties.", transform: "cc" });
+preLocalizeConfig("reference.materialProperties", { prefix: "TERIOCK.TERMS.Properties.", transform: "cc" });
