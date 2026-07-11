@@ -39,7 +39,7 @@ export default function AbilityExecutionGetInputPart(Base) {
        */
       async #determineCost(stat) {
         if (this.source.system.costs.primary[stat].type === "formula") {
-          const roll = new BaseRoll(this.source.system.costs.primary[stat].formula, this.rollData);
+          const roll = new BaseRoll(this.source.system.costs.primary[stat].formula, this.getRollData());
           await roll.evaluate();
           return roll.total;
         }

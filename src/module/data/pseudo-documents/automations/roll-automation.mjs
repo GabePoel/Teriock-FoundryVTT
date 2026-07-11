@@ -84,7 +84,7 @@ export default class RollAutomation
     commands[this.impact]?.primary(this.document.actor, {
       boost: true,
       formula: this.formula,
-      rollData: scope?.execution?.rollData ?? {},
+      rollData: scope?.execution?.getRollData() ?? {},
     });
   }
 

@@ -169,7 +169,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
    */
   get activeExpirations() {
     return this.source.system.expirations.contents.filter(e =>
-      e.competencies.has(this.competence.raw) && e.checkIfQualified(this.rollData)
+      e.competencies.has(this.competence.raw) && e.checkIfQualified(this.getRollData())
       && ((e.heighten.has(0) && !this.heightened) || (e.heighten.has(1) && this.heightened))
     );
   }
@@ -235,15 +235,6 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   /** @inheritDoc */
   get isRoll() {
     return this.isAttack;
-  }
-
-  /** @inheritDoc */
-  get rollData() {
-    return Object.assign(super.rollData, {
-      "angle.dragon": game.settings.get("teriock", "defaultDragonBreathAngle"),
-      "angle.normal": game.settings.get("teriock", "defaultConeAngle"),
-      ap: this.existingAttackPenalty,
-    });
   }
 
   /**
@@ -339,6 +330,15 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     const { active } = options;
     if (active) { return this.activeExpirations.filter(filter); }
     return this.source.system.expirations.contents.filter(filter);
+  }
+
+  /** @inheritDoc */
+  getRollData() {
+    return Object.assign(super.getRollData(), {
+      "angle.dragon": game.settings.get("teriock", "defaultDragonBreathAngle"),
+      "angle.normal": game.settings.get("teriock", "defaultConeAngle"),
+      ap: this.existingAttackPenalty,
+    });
   }
 
   /**

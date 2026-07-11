@@ -55,8 +55,16 @@ const reference = {
 export default reference;
 
 preLocalizeConfig("reference.abilities", { prefix: "TERIOCK.TERMS.Abilities.", transform: "cc" });
-preLocalizeConfig("reference.attributes", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".abbreviation", transform: "lc" });
-preLocalizeConfig("reference.attributesFull", { prefix: "TERIOCK.TERMS.Attributes.", suffix: ".label", transform: "lc" });
+preLocalizeConfig("reference.attributes", {
+  prefix: "TERIOCK.TERMS.Attributes.",
+  suffix: ".abbreviation",
+  transform: "lc",
+});
+preLocalizeConfig("reference.attributesFull", {
+  prefix: "TERIOCK.TERMS.Attributes.",
+  suffix: ".label",
+  transform: "lc",
+});
 preLocalizeConfig("reference.bodyParts", { prefix: "TERIOCK.TERMS.BodyParts.", transform: "cc" });
 preLocalizeConfig("reference.classes", { prefix: "TERIOCK.TERMS.Classes.", transform: "cc" });
 preLocalizeConfig("reference.conditions", { prefix: "TERIOCK.STATUSES.Conditions.", transform: "cc" });

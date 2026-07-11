@@ -37,31 +37,6 @@ export default class AbilityExecution
   }
 
   /** @inheritDoc */
-  get rollData() {
-    const rollData = super.rollData;
-    const rollAdditions = {
-      av0: Number(this.piercing.av0) * 2,
-      "av0.wep": Number(this.armament?.system.piercing.av0) * 2,
-      c: this.competence.fluent
-        ? this.actor?.system.scaling.f
-        : (this.competence.proficient ? this.actor?.system.scaling.p : 0),
-      h: this.heightened,
-      sb: this.sb ? this.actor?.system.scaling.p ?? 0 : 0,
-      ub: Number(this.piercing.ub),
-      "ub.wep": Number(this.armament?.system.piercing.ub),
-      warded: Number(this.warded),
-      "warded.wep": Number(this.armament?.system.warded),
-    };
-    if (this.armament) {
-      rollAdditions.bv = this.armament.system.bv.value;
-      rollAdditions.hit = this.armament.system.hitBonus;
-      rollAdditions["hit.wep"] = this.armament.system.hitBonus;
-    }
-    Object.assign(rollData, rollAdditions);
-    return rollData;
-  }
-
-  /** @inheritDoc */
   async _improveFormula() {
     if (this.isAttack) {
       if (this.piercing.av0) { this.formula = addFormula(this.formula, "@av0"); }
@@ -80,6 +55,26 @@ export default class AbilityExecution
       this.formula = addFormula(this.formula, "@ap");
     } else if (this.isFeat) { this.formula = "10"; }
     else if (this.isBlock) { this.formula = "10 + @av + @bv"; }
+  }
+
+  /** @inheritDoc */
+  getRollData() {
+    return Object.assign(super.getRollData(), {
+      0: Number(this.piercing.av0) * 2,
+      "av0.wep": Number(this.armament?.system.piercing.av0) * 2,
+      bv: this.armament?.system.bv.value ?? 0,
+      c: this.competence.fluent
+        ? this.actor?.system.scaling.f
+        : (this.competence.proficient ? this.actor?.system.scaling.p : 0),
+      h: this.heightened,
+      hit: this.armament?.system.hitBonus ?? 0,
+      "hit.wep": this.armament?.system.hitBonus ?? 0,
+      sb: this.sb ? this.actor?.system.scaling.p ?? 0 : 0,
+      ub: Number(this.piercing.ub),
+      "ub.wep": Number(this.armament?.system.piercing.ub),
+      warded: Number(this.warded),
+      "warded.wep": Number(this.armament?.system.warded),
+    });
   }
 
   /** @inheritDoc */

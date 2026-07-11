@@ -41,7 +41,7 @@ command: >-
     const r = scope.execution.rolls[i];
     if (r.styles.dice.classes === "feat") {
       if (typeof dc === "number") {
-        const newRoll = new teriock.dice.rolls.BaseRoll(`${dc} - 2 * @h`, scope.execution.rollData, {
+        const newRoll = new teriock.dice.rolls.BaseRoll(`${dc} - 2 * @h`, scope.execution.getRollData(), {
           flavor: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.flavor", { level: illusionLevels[chosenIllusionLevel] }),
           styles: { dice: { classes: "feat" }, total: { classes: "feat", icon: TERIOCK.display.icons.interaction.feat } },
         });

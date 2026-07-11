@@ -99,6 +99,6 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
 
   /** @inheritDoc */
   async _prepareFormula() {
-    this.threshold = await BaseRoll.getValue(this.thresholdFormula, this.rollData);
+    this.threshold = await BaseRoll.getValue(this.thresholdFormula, this.getRollData());
   }
 }

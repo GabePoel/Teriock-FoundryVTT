@@ -70,18 +70,10 @@ export default class DocumentExecution extends BaseExecution {
     return this.source.system.fullName;
   }
 
-  /**
-   * Roll data used by this execution.
-   * @returns {object}
-   */
-  get rollData() {
-    return Object.assign(this.source.system.getSystemRollData() || {}, super.rollData);
-  }
-
   /** @inheritDoc */
   async _buildActivations() {
     const activationLists = await Promise.all(
-      this.activeAutomations.map(a => a.getActivations({ execution: this, rollData: this.rollData })),
+      this.activeAutomations.map(a => a.getActivations({ execution: this, rollData: this.getRollData() })),
     );
     for (const activations of activationLists) { this.activations.push(...activations); }
     for (const a of this.activations) {
@@ -132,7 +124,7 @@ export default class DocumentExecution extends BaseExecution {
   async _evaluateBoosts() {
     const boostPromises = Object.entries(this._boosts).map(async (
       [k, v],
-    ) => [k, await BaseRoll.getValue(v || "0", this.rollData)]);
+    ) => [k, await BaseRoll.getValue(v || "0", this.getRollData())]);
     this._boostsResolved = Object.fromEntries(await Promise.all(boostPromises));
   }
 
@@ -163,6 +155,14 @@ export default class DocumentExecution extends BaseExecution {
     }
     await this._evaluateBoosts();
     await super.execute();
+  }
+
+  /**
+   * Roll data used by this execution.
+   * @returns {object}
+   */
+  getRollData() {
+    return Object.assign(this.source.system.getSystemRollData() || {}, super.getRollData());
   }
 
   /** @inheritDoc*/

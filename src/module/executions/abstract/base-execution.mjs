@@ -146,7 +146,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @inheritDoc */
   get activeAutomations() {
     return this.automations.contents.filter(a =>
-      a.competencies.has(this.competence.raw) && a.checkIfQualified(this.rollData)
+      a.competencies.has(this.competence.raw) && a.checkIfQualified(this.getRollData())
     );
   }
 
@@ -251,14 +251,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   }
 
   /**
-   * Roll data used by this execution.
-   * @returns {object}
-   */
-  get rollData() {
-    return Object.assign(this.actor?.getRollData() || {}, foundry.utils.deepClone(this._rollData));
-  }
-
-  /**
    * Roll options used by this execution.
    * @returns {object}
    */
@@ -300,7 +292,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    */
   async _buildRolls() {
     if (formulaExists(this.formula)) {
-      this.rolls.push(new this._RollClass(this.formula, this.rollData, this.rollOptions));
+      this.rolls.push(new this._RollClass(this.formula, this.getRollData(), this.rollOptions));
     }
   }
 
@@ -495,6 +487,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     const automations = this.activeAutomations.filter(a => a.actor !== this.actor);
     await this._fireAutomationsTrigger(trigger, scope, { automations });
     return this._fireActorTrigger(trigger, scope);
+  }
+
+  /**
+   * Roll data used by this execution.
+   * @returns {object}
+   */
+  getRollData() {
+    return Object.assign(this.actor?.getRollData() || {}, foundry.utils.deepClone(this._rollData));
   }
 
   /**

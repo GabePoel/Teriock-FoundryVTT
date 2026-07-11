@@ -50,15 +50,15 @@ export default function AbilityExecutionRollsPart(Base) {
               if (this.limb) { rollOptions.threshold += TERIOCK.config.system.target.limb; }
               else if (this.vitals) { rollOptions.threshold += TERIOCK.config.system.target.vitals; }
             }
-            this.rolls.push(new ThresholdRoll(this.formula, this.rollData, rollOptions));
+            this.rolls.push(new ThresholdRoll(this.formula, this.getRollData(), rollOptions));
           }
           if (this.rolls.length === 0) {
-            this.rolls.push(new ThresholdRoll(this.formula, this.rollData, generalRollOptions));
+            this.rolls.push(new ThresholdRoll(this.formula, this.getRollData(), generalRollOptions));
           }
         } else if (this.isFeat && !preventThreshold) {
           styles.total.icon = TERIOCK.display.icons.interaction.feat;
           this.rolls.push(
-            new BaseRoll(this.formula, this.rollData, {
+            new BaseRoll(this.formula, this.getRollData(), {
               flavor: this.flavor,
               hideRoll: preventThreshold,
               styles,
@@ -68,7 +68,7 @@ export default function AbilityExecutionRollsPart(Base) {
         } else if (this.isBlock) {
           styles.total.icon = TERIOCK.display.icons.interaction.block;
           this.rolls.push(
-            new BaseRoll(this.formula, this.rollData, {
+            new BaseRoll(this.formula, this.getRollData(), {
               flavor: this.flavor,
               styles,
               targets: Array.from(this.targets),
@@ -77,7 +77,7 @@ export default function AbilityExecutionRollsPart(Base) {
         } else if (this.isManifest) {
           if (this.targets.size > 0) {
             this.rolls.push(
-              new BaseRoll("0", this.rollData, {
+              new BaseRoll("0", this.getRollData(), {
                 flavor: this.flavor,
                 hideRoll: true,
                 styles,

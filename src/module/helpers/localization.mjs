@@ -59,7 +59,10 @@ const _preLocalizationDataModelRegistrations = [];
  * @param {TransformKey} [options.transform] - Add a transformation to the value before localizing.
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
  */
-export function preLocalizeConfig(configKeyPath, { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {}) {
+export function preLocalizeConfig(
+  configKeyPath,
+  { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {},
+) {
   if (key) { keys.unshift(key); }
   _preLocalizationConfigRegistrations[configKeyPath] = { keys, prefix, sort, suffix, transform };
 }

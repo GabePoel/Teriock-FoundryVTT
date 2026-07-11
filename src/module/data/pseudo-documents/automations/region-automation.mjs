@@ -153,7 +153,7 @@ export default class RegionAutomation
    * @returns {object}
    */
   #getRegionShapeData(options) {
-    const rollData = options.execution?.rollData ?? options.rollData ?? {};
+    const rollData = options.execution?.getRollData() ?? options.rollData ?? {};
     const data = {
       type: this.regionType,
       x: 0,

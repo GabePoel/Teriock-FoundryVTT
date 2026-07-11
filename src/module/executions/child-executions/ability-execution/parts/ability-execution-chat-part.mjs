@@ -194,7 +194,7 @@ export default function AbilityExecutionChatPart(Base) {
             new: a.duration.formula,
           });
         });
-        let durationValue = await BaseRoll.getValue(durationFormula, this.rollData);
+        let durationValue = await BaseRoll.getValue(durationFormula, this.getRollData());
         if (durationValue > Number("9".repeat(30))) { durationValue = undefined; }
         return durationValue;
       }

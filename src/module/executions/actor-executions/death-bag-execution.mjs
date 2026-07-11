@@ -155,7 +155,7 @@ export default class DeathBagExecution extends DocumentExecution {
 
   /** @inheritDoc */
   async _buildRolls() {
-    const rollData = this.rollData;
+    const rollData = this.getRollData();
     this.toPullCount = Math.floor(Math.max(await BaseRoll.getValue(this.pull, rollData), 0));
     /** @type {Record<Teriock.Keys.DeathBagStoneColor, number>} */
     const startingStones = {};

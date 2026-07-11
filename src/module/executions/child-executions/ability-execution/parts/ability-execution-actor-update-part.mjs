@@ -29,7 +29,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        */
       async _prepareAttackPenalty() {
         if (this.isAttack && formulaExists(this.incurredAttackPenalty)) {
-          this.attackPenalty = await BaseRoll.getValue(this.incurredAttackPenalty, this.rollData);
+          this.attackPenalty = await BaseRoll.getValue(this.incurredAttackPenalty, this.getRollData());
         } else { this.attackPenalty = 0; }
       }
 

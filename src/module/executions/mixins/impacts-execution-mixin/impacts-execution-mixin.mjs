@@ -130,7 +130,7 @@ export default function ImpactsExecutionMixin(Base) {
       _applyImpactModifiers() {
         if (!formulaExists(this.formula)) { return; }
         if (this.crit) {
-          const roll = new this._RollClass(this.formula, this.rollData);
+          const roll = new this._RollClass(this.formula, this.getRollData());
           roll.alter(2, 0, { multiplyNumeric: false });
           this.formula = roll.formula;
         }
