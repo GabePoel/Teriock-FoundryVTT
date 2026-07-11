@@ -275,7 +275,7 @@ export default class IdentifiersRegistry extends BaseRegistryLifecycle {
     if (!this.#documentNames.has(document.documentName)) { return; }
     const uuid = document.uuid;
     const identifier = document.typedIdentifier;
-    if (!uuid || !identifier || document.sup) { return; }
+    if (!uuid || !identifier || document.sup || !document.trackable) { return; }
     this.track(identifier, uuid, document.name);
   }
 

@@ -226,6 +226,14 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * Whether this is the actual document persisted to the database and not a sneaky clone.
+       * @returns {boolean}
+       */
+      get trackable() {
+        return this.collection?.get(this.id) === this;
+      }
+
+      /**
        * This document's typed identifier, if it has one.
        * @returns {TypedIdentifier|null}
        */
@@ -335,7 +343,7 @@ export default function BaseDocumentMixin(Base) {
       /** @inheritDoc */
       prepareData() {
         super.prepareData();
-        game.teriock.identifiers.untrack(this._cachedIdentifier, this.uuid);
+        if (this.trackable) { game.teriock.identifiers.untrack(this._cachedIdentifier, this.uuid); }
         if (this.persisted) { game.teriock.identifiers.trackDocument(this); }
         this._cachedIdentifier = this.typedIdentifier;
       }
