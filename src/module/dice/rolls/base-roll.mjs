@@ -351,11 +351,11 @@ export default class BaseRoll extends Roll {
    */
   bindContextMenus(element, options = {}) {
     new TeriockContextMenu(element, `.dice-formula[data-id="${this.id}"]`, this._getFormulaContextOptions(options), {
-      fixed: false,
+      fixed: true,
       jQuery: false,
     });
     new TeriockContextMenu(element, `.dice-total[data-id="${this.id}"]`, this._getTotalContextOptions(options), {
-      fixed: false,
+      fixed: true,
       jQuery: false,
     });
   }

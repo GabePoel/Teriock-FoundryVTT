@@ -44,14 +44,15 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
    * Notify that this was applied to or reversed for an actor.
    * @param {AnyActor} actor
    * @param {"applied"|"reversed"} key
+   * @param {boolean} [morganti]
    */
-  #notify(actor, key) {
+  #notify(actor, key, morganti) {
     const message = _loc(`TERIOCK.ACTIVATIONS.Take.NOTIFICATIONS.${key}`, {
       actor: actor.fullName,
       amount: this.#amount,
       impact: this.label,
     });
-    if (this.morganti) { ui.notifications.morganti(message); }
+    if (morganti ?? this.morganti) { ui.notifications.morganti(message); }
     else { ui.notifications.success(message); }
   }
 
@@ -77,13 +78,14 @@ export default class TakeActivation extends AutomationActivationFactory(TakeAuto
   /** @inheritDoc */
   async primaryAction() {
     if (!this.checkActors()) { return; }
+    let notify = true;
     for (const actor of this.actors) {
       if (this.#showDialog) {
-        await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti: this.morganti });
+        notify = await actor.system.impactDialog(this.impact, { amount: this.#amount, morganti: this.morganti });
       } else {
         await this.#entry.apply(actor, this.#amount);
-        this.#notify(actor, "applied");
       }
+      if (notify) { this.#notify(actor, "applied", notify === "morganti"); }
     }
   }
 

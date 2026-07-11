@@ -81,11 +81,13 @@ export default class ImpactRoll extends BaseRoll {
   /** @inheritDoc */
   _getTotalContextOptions(_options = {}) {
     return [
-      ...Object.values(impactConfig).filter(option => !option?.hidden).map(option => {
+      ...Object.entries(impactConfig).filter(([_k, v]) => !v?.hidden).map(([k, v]) => {
         return {
-          icon: makeIcon(option.icon, "contextMenu"),
-          label: option.take,
-          onClick: async () => await Promise.all(game.actors.selected.map(a => option.apply(a, this.total))),
+          icon: makeIcon(v.icon, "contextMenu"),
+          label: v.take,
+          onClick: async () =>
+            await new teriock.data.pseudoDocuments.activations.TakeActivation({ amount: this.total, impact: k })
+              .primaryAction(),
         };
       }),
       ...super._getTotalContextOptions(_options),

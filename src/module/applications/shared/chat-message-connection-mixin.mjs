@@ -1,4 +1,8 @@
+import { makeIcon } from "../../helpers/icon.mjs";
 import { BaseApplicationMixin } from "../api/mixins/_module.mjs";
+import { TeriockContextMenu } from "../ux/_module.mjs";
+
+const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Mixin for applications that render chat messages.
@@ -60,6 +64,29 @@ export default function ChatMessageConnectionMixin(Base) {
     };
 
     /**
+     * Connect the context menu that opens openable chat message images.
+     */
+    #connectImageContextMenu() {
+      new TeriockContextMenu(this.element, "img", [{
+        icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
+        label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
+        onClick: async (_ev, target) => {
+          await new ImagePopout({
+            src: target.getAttribute("src"),
+            window: { title: target.getAttribute("alt") || "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
+          }).render(true);
+        },
+        visible: target => {
+          const src = target.getAttribute("src");
+          return src
+            && src.length
+            && target.getAttribute("data-openable")
+            && (game.user.isGM || game.settings.get("teriock", "openChatImages"));
+        },
+      }], { eventName: "contextmenu", fixed: true, jQuery: false });
+    }
+
+    /**
      * Suppress default context menus for elements that have a right click button.
      * @param {MouseEvent} event
      */
@@ -76,6 +103,7 @@ export default function ChatMessageConnectionMixin(Base) {
     _attachFrameListeners() {
       super._attachFrameListeners();
       this.element.addEventListener("contextmenu", this.#suppressContextMenu.bind(this));
+      this.#connectImageContextMenu();
     }
   }
 

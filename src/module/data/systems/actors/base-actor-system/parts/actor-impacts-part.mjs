@@ -41,7 +41,7 @@ export default function ActorImpactsPart(Base) {
        * @param {object} [options]
        * @param {number|null} [options.amount]
        * @param {boolean} [options.morganti]
-       * @returns {Promise<void>}
+       * @returns {Promise<boolean|"morganti">}
        */
       async impactDialog(impact, options = {}) {
         const entry = TERIOCK.config.impact[impact];
@@ -66,7 +66,7 @@ export default function ActorImpactsPart(Base) {
         if (entry.morganti) {
           content.append(morgantiField.toFormGroup({ rootId }, { name: "morganti", value: initialMorganti }));
         }
-        await TeriockDialog.prompt({
+        return await TeriockDialog.prompt({
           content,
           modal: true,
           ok: {
@@ -76,6 +76,7 @@ export default function ActorImpactsPart(Base) {
               const amount = typeof value === "string" && value.length > 0 ? Number(value) : null;
               if (entry.morganti) { morganti = button.form.elements.namedItem("morganti")?.checked; }
               await entry.apply(this.parent, amount, { morganti });
+              return morganti ? "morganti" : true;
             },
           },
           window: { icon: makeIconClass(entry.icon, "title"), title: entry.take },

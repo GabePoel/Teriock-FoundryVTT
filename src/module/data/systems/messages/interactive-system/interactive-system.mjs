@@ -1,7 +1,5 @@
-import { TeriockContextMenu } from "../../../../applications/ux/_module.mjs";
 import { TeriockItem } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { makeIcon } from "../../../../helpers/icon.mjs";
 import { panelsField } from "../../../fields/tools/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
@@ -9,7 +7,6 @@ import * as systemMixins from "../../mixins/_module.mjs";
 import BaseMessageSystem from "../base-message-system/base-message-system.mjs";
 
 const { fields } = foundry.data;
-const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Interactive chat message data model.
@@ -46,7 +43,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
   async _onRender(_context, options) {
     const element = options.element;
     if (!element) { return; }
-    element.classList.add("teriock");
     TeriockItem.bindPanelListeners(element);
     this.collapsePanels(element);
 
@@ -64,24 +60,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
         delete el.dataset.tooltipHtml;
       });
     }
-
-    new TeriockContextMenu(element, "img", [{
-      icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
-      label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
-      onClick: async (_ev, target) => {
-        await new ImagePopout({
-          src: target.getAttribute("src"),
-          window: { title: target.getAttribute("alt") || "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
-        }).render(true);
-      },
-      visible: target => {
-        const src = target.getAttribute("src");
-        return src
-          && src.length
-          && target.getAttribute("data-openable")
-          && (game.user.isGM || game.settings.get("teriock", "openChatImages"));
-      },
-    }], { eventName: "contextmenu", fixed: true, jQuery: false });
 
     // Add roll context menus
     if (this.document.isContentVisible) {
