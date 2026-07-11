@@ -205,7 +205,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get all subs for a given document.
-       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
+       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -219,7 +219,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get all sups for a given document.
-       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
+       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -231,7 +231,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get subs for a given document.
-       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
+       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
        * @param {Collection} [collection]
        * @returns {TypeCollection}
        */
@@ -243,7 +243,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The sup for a given document.
-       * @param {AnyCommonDocument|Index<AnyCommonDocument>} document
+       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
        * @param {Collection} collection
        * @returns {AnyCommonDocument|undefined}
        */
@@ -353,7 +353,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The document that most directly provides this one.
-       * @returns {SyncDoc<AnyCommonDocument>}
+       * @returns {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>}
        */
       get elder() {
         return this.sup || this.parent;
@@ -385,7 +385,7 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * The sup of this document or its index.
-       * @returns {SyncDoc<AnyCommonDocument>|undefined}
+       * @returns {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>|undefined}
        */
       get sup() {
         return HierarchyDocument.findSup(this, this.siblingCollection);

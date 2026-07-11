@@ -5,7 +5,7 @@ const { Document } = foundry.abstract;
 /**
  * Ensure a document is not an index.
  * @template T
- * @param {Index<T> | UUID<T> | TypedIdentifier} syncDoc
+ * @param {Teriock.Hierarchy.Index<T> | UUID<T> | TypedIdentifier} syncDoc
  * @returns {Promise<T|null>}
  */
 export async function resolveDocument(syncDoc) {
@@ -20,7 +20,7 @@ export async function resolveDocument(syncDoc) {
 /**
  * Ensure all documents in an array are not indexes.
  * @template T
- * @param {Index<T>[] | UUID<T> | TypedIdentifier} syncDocs
+ * @param {Teriock.Hierarchy.Index<T>[] | UUID<T> | TypedIdentifier} syncDocs
  * @param {Teriock.System.ResolveDocumentsOptions} [options]
  * @returns {Promise<T[]>}
  */

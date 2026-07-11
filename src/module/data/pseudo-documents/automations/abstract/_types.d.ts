@@ -1,17 +1,7 @@
-import { BaseExecution } from "../../../../executions/_module.mjs";
-import { BaseEffectSystem } from "../../../systems/effects/_module.mjs";
-import { BaseItemSystem } from "../../../systems/items/_module.mjs";
+import { BaseExecution } from "../../../../executions/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Automations {
-    export type BaseAutomationData = {
-      activeQualifier: Teriock.System.FormulaString;
-      competencies: Set<number>;
-      heighten: Set<number>;
-
-      get parent(): BaseEffectSystem | BaseItemSystem;
-    };
-
     export type GetActivationsOptions = {
       /** The execution that is asking for these activations. */
       execution?: BaseExecution;

@@ -1,5 +1,3 @@
-import { CombatExpirationMethod } from "../../../fields/tools/_types";
-
 declare global {
   namespace Teriock.Models {
     export type ConditionSystemData = {
@@ -8,7 +6,7 @@ declare global {
         /** <schema> Combat expirations */
         combat: {
           /** <schema> Method of combat expiration */
-          what: CombatExpirationMethod;
+          what: Teriock.Fields.CombatExpirationMethod;
         };
         /** <schema> Expiration description */
         description?: string;
@@ -18,3 +16,5 @@ declare global {
     };
   }
 }
+
+export {};

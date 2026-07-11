@@ -1,5 +1,6 @@
+import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
+
 import { TeriockJournalEntry, TeriockJournalEntryCategory, TeriockJournalEntryPage } from "../_module.mjs";
-import { DocumentCollection } from "../../../../foundry/client/documents/abstract/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {

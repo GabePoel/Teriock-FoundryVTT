@@ -3,6 +3,11 @@ import { FormulaField } from "../fields/_module.mjs";
 import BaseDataModel from "./base-data-model.mjs";
 
 /**
+ * @typedef {Teriock.Fields.FormulaDerivationOptions} EvaluationOptions
+ * @property {object} rollData
+ */
+
+/**
  * Model that improves functionality and ergonomics of formula fields.
  * @property {Teriock.System.FormulaString} raw - String corresponding to the formula.
  */
@@ -26,7 +31,7 @@ export default class EvaluationModel extends BaseDataModel {
 
   /**
    * Derive the value of the formula internally.
-   * @param {Partial<Teriock.Options.EvaluationOptions>} [options]
+   * @param {Partial<EvaluationOptions>} [options]
    * @returns {number}
    */
   #evaluate(options = {}) {
@@ -103,7 +108,7 @@ export default class EvaluationModel extends BaseDataModel {
 
   /**
    * Derive value of formula.
-   * @param {Partial<Teriock.Options.EvaluationOptions>} [options]
+   * @param {Partial<EvaluationOptions>} [options]
    */
   evaluate(options = {}) {
     this._value = this.#evaluate(options);

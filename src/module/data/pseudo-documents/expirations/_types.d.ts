@@ -1,12 +1,11 @@
-import "./abstract/_types";
-import * as expirations from "./_module.mjs";
+import { CombatExpiration, StatusExpiration, TriggerExpiration } from "./_module.mjs";
 
 declare global {
   namespace Teriock.Expirations {
     export interface TypeMap {
-      combat: expirations.CombatExpiration;
-      status: expirations.StatusExpiration;
-      trigger: expirations.TriggerExpiration;
+      combat: CombatExpiration;
+      status: StatusExpiration;
+      trigger: TriggerExpiration;
     }
 
     export type Type = keyof TypeMap;

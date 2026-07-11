@@ -121,7 +121,7 @@ export default function AbilityExecutionChatPart(Base) {
 
       /**
        * @param {boolean} crit
-       * @returns {Promise<Partial<EffectTransformationConfig>>}
+       * @returns {Promise<Partial<Teriock.Fields.EffectTransformationConfig>>}
        */
       async #generateConsequenceTransformation(crit = false) {
         const transformationAutomations = this.getAutomations("transformation", { active: true, crit });

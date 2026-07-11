@@ -1,40 +1,8 @@
-import "./active-effect/_types";
-import "./actor/_types";
-import "./card/_types";
-import "./cards/_types";
-import "./chat-message/_types";
-import "./combat/_types";
-import "./combatant/_types";
-import "./folder/_types";
-import "./item/_types";
-import "./journal-entry-category/_types";
-import "./journal-entry-page/_types";
-import "./journal-entry/_types";
-import "./macro/_types";
-import "./region-document/_types";
-import "./roll-table/_types";
-import "./scene/_types";
-import "./table-result/_types";
-import "./token-document/_types";
-import "./user/_types";
 import documentConfig from "../constants/config/document-config.mjs";
 
 declare global {
   namespace Teriock.Documents {
     type DocumentConfig = typeof documentConfig;
-
-    export type IndexCategoryKey = keyof typeof TERIOCK.index;
-
-    export type IndexCompendiumKey =
-      | "abilities"
-      | "bodyParts"
-      | "classes"
-      | "creatures"
-      | "equipment"
-      | "magicItems"
-      | "powers"
-      | "properties"
-      | "species";
 
     type ExtractKeysByDocName<T extends string> = {
       [K in keyof DocumentConfig]: DocumentConfig[K] extends { documentName: T } ? K : never;
@@ -46,6 +14,19 @@ declare global {
     export type CardType = ExtractKeysByDocName<"Card">;
     export type ChildType = Teriock.Documents.ActiveEffectType | Teriock.Documents.ItemType;
     export type CommonType = "base" | Teriock.Documents.ActorType | Teriock.Documents.ChildType;
+
+    export type DocumentBase<Class, Parent extends object = object> = Class & Parent;
+
+    export type Subtype<Base, Type extends string, Sheet, System> =
+      & Omit<Base, "_id" | "id" | "sheet" | "system" | "type" | "uuid">
+      & {
+        _id: ID<Subtype<Base, Type, Sheet, System>>;
+        sheet: Sheet;
+        system: System;
+        type: Type;
+        get id(): ID<Subtype<Base, Type, Sheet, System>>;
+        get uuid(): UUID<Subtype<Base, Type, Sheet, System>>;
+      };
 
     export type ModelMetadata = {
       armament: boolean;

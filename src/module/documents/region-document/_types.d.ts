@@ -1,5 +1,4 @@
-import { TeriockScene } from "../_module.mjs";
-import TeriockRegionDocument from "./region-document.mjs";
+import { TeriockRegionDocument, TeriockScene } from "../_module.mjs";
 
 declare global {
   namespace Teriock.Documents {

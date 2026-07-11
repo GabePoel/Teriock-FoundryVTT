@@ -211,7 +211,7 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * That document that has the most control over this one.
-       * @return {SyncDoc<AnyCommonDocument>}
+       * @return {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>}
        */
       get master() {
         return this.parent;
@@ -281,7 +281,7 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * Check whether the provided document or its index is an ancestor of this one.
-       * @param {TeriockDocument|Index<TeriockDocument>} doc
+       * @param {TeriockDocument|Teriock.Hierarchy.Index<TeriockDocument>} doc
        */
       checkAncestor(doc) {
         if (doc?.uuid === this.uuid) { return true; }

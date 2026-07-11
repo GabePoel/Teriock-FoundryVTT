@@ -1,8 +1,38 @@
+import { Actor } from "@client/documents/_module.mjs";
 import { DocumentCollection } from "@client/documents/abstract/_module.mjs";
 
-import { TeriockActiveEffect, TeriockTokenDocument } from "../_module.mjs";
-import { BaseActorSheet } from "../../applications/sheets/actor-sheets/_module.mjs";
-import { BaseActorSystem } from "../../data/systems/actors/_module.mjs";
+import { TeriockActiveEffect, TeriockActor, TeriockItem, TeriockTokenDocument } from "../_module.mjs";
+import {
+  BaseActorSheet,
+  CharacterSheet,
+  CreatureSheet,
+  InventorySheet,
+} from "../../applications/sheets/actor-sheets/_module.mjs";
+import {
+  BaseActorSystem,
+  CharacterSystem,
+  CreatureSystem,
+  InventorySystem,
+} from "../../data/systems/actors/_module.mjs";
+
+type ActorDocument = Teriock.Documents.DocumentBase<TeriockActor, Actor> & {
+  // @ts-expect-error DocumentConstructionContext
+  effects: DocumentCollection<TeriockActiveEffect>;
+  // @ts-expect-error DocumentConstructionContext
+  items: DocumentCollection<TeriockItem>;
+};
+
+declare global {
+  export type TeriockCharacter = Teriock.Documents.Subtype<ActorDocument, "character", CharacterSheet, CharacterSystem>;
+  export type TeriockCreature = Teriock.Documents.Subtype<ActorDocument, "creature", CreatureSheet, CreatureSystem>;
+  export type TeriockInventory = Teriock.Documents.Subtype<ActorDocument, "inventory", InventorySheet, InventorySystem>;
+
+  export interface ActorTypeMap {
+    character: TeriockCharacter;
+    creature: TeriockCreature;
+    inventory: TeriockInventory;
+  }
+}
 
 declare global {
   namespace Teriock.Documents {
