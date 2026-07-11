@@ -130,6 +130,7 @@ export default function PanelDocumentMixin(Base) {
             source: null,
             tags: [],
           },
+          type: "interactive",
         };
         return TeriockChatMessage.create(messageData, { defaultMode: true });
       }

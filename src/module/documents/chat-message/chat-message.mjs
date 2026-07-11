@@ -40,6 +40,7 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
         <img src="${img}" alt="${options.name || ""}" class="teriock-image" data-openable="true">
       </div>`),
       speaker: this.getSpeaker({ actor: options.actor }, { defaultMode: true }),
+      type: "interactive",
     });
   }
 

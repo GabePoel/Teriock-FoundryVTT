@@ -19,7 +19,7 @@ async function use() {
     if (c.aliases?.length) { code += ` (${c.aliases.map(a => `/${a}`).join(", ")})`; }
     code += "]]</p>";
   }
-  const chatData = { content: code, speaker: TeriockChatMessage.getSpeaker() };
+  const chatData = { content: code };
   TeriockChatMessage.applyMode(chatData, "self");
   await TeriockChatMessage.create(chatData);
 }

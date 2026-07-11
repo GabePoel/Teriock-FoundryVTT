@@ -1,8 +1,22 @@
 import { ChatSpeakerData } from "@client/documents/_types.mjs";
 
 import { TeriockChatMessage, TeriockUser } from "../_module.mjs";
-import { BaseMessageSystem } from "../../data/systems/messages/_module.mjs";
+import { BaseMessageSystem, InteractiveSystem } from "../../data/systems/messages/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
+
+declare global {
+  export type TeriockInteractive = Teriock.Documents.Subtype<
+    Teriock.Documents.ChatMessageInterface,
+    "interactive",
+    null,
+    InteractiveSystem
+  >;
+
+  export interface ChatMessageTypeMap {
+    base: TeriockChatMessage;
+    interactive: TeriockInteractive;
+  }
+}
 
 declare global {
   namespace Teriock.Data {
@@ -11,7 +25,7 @@ declare global {
       content: string;
       rolls: BaseRoll[];
       speaker: ChatSpeakerData;
-      system: Partial<Teriock.Data.BaseMessageData>;
+      system: Partial<Teriock.Data.InteractiveMessageData>;
     }
   }
 
@@ -20,7 +34,7 @@ declare global {
       _id: ID<TeriockChatMessage>;
       author: TeriockUser;
       rolls: BaseRoll[];
-      system: BaseMessageSystem;
+      system: BaseMessageSystem | InteractiveSystem;
 
       get documentName(): "ChatMessage";
 

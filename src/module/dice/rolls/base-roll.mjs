@@ -444,6 +444,7 @@ export default class BaseRoll extends Roll {
         activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(activations),
         panels,
       },
+      type: "interactive",
     }, messageData);
     return super.toMessage(messageData, { create, messageMode });
   }

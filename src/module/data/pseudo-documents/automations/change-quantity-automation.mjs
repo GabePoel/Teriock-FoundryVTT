@@ -99,6 +99,7 @@ export default class ChangeQuantityAutomation
       rolls: [roll],
       speaker: TeriockChatMessage.getSpeaker({ actor: scope?.actor || this.actor }),
       system: { panels: [panel] },
+      type: "interactive",
     };
     await TeriockChatMessage.create(messageData, { defaultMode: true });
     await consumable.update({

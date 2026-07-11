@@ -194,6 +194,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
         panels: this.panels,
         tags: this.tags,
       },
+      type: "interactive",
     };
   }
 

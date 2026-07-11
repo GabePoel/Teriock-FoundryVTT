@@ -128,6 +128,7 @@ export default class StatDie extends BasePseudoDocument {
         rolls: [roll],
         speaker: TeriockChatMessage.getSpeaker({ actor: this.parent.parent.parent.actor }),
         system: { panels: await TeriockTextEditor.enrichPanels(this.parent.panels) },
+        type: "interactive",
       };
       await TeriockChatMessage.create(messageData, { defaultMode: true });
       if (spend) { await this.toggle(true); }

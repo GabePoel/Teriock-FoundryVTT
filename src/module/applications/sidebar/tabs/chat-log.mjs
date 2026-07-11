@@ -78,7 +78,7 @@ export default class TeriockChatLog extends ChatLog {
       const li of /** @type {NodeListOf<HTMLLIElement>} */ document.querySelectorAll(".chat-message[data-message-id]")
     ) {
       const message = game.messages.get(li.dataset.messageId);
-      message.system.collapsePanels(li);
+      if (typeof message.system.collapsePanels === "function") { message.system.collapsePanels(li); }
     }
   }
 }

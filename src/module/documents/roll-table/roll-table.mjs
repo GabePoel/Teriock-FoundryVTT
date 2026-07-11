@@ -115,6 +115,7 @@ export default class TeriockRollTable
         ),
         panels: await Promise.all(results.map(r => r.getPanelParts())),
       },
+      type: "interactive",
     }, messageData);
     if (this.displayRoll && roll) { messageData.rolls.push(roll); }
     messageData.system.panels.forEach(panel => {

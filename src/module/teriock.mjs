@@ -182,7 +182,11 @@ foundry.helpers.Hooks.once("init", function() {
     },
     ChatMessage: {
       collection: documents.collections.TeriockChatMessages,
-      dataModels: { base: data.systems.messages.BaseMessageSystem },
+      dataModels: {
+        base: data.systems.messages.BaseMessageSystem,
+        interactive: data.systems.messages.InteractiveSystem,
+      },
+      defaultType: "interactive",
       documentClass: documents.TeriockChatMessage,
       popoutClass: applications.sidebar.apps.TeriockChatPopout,
       template: "teriock/ui/chat-message",
