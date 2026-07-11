@@ -256,7 +256,8 @@ export default class RegionAutomation
         let releaseOthers = true;
         for (
           const t of (game.scenes.viewed?.tokens.contents ?? []).filter(t =>
-            t.hasStatusEffect("ethereal") === Boolean(scope.execution?.actor?.statuses.has("ethereal"))
+            t?.object?.isVisible
+            && t.hasStatusEffect("ethereal") === Boolean(scope.execution?.actor?.statuses.has("ethereal"))
             && t.testInsideRegion(region)
           )
         ) {

@@ -52,12 +52,11 @@ export default function ChatMessageConnectionMixin(Base) {
       /** @type {TeriockToken} */
       const token = fromUuidSync(target.dataset.tokenUuid)?.object;
       if (!token?.isVisible) { return; }
-      if (event.ctrlKey) {
-        canvas.animatePan(token.center);
-        return;
-      }
-      if (event.button === 2) { token.release(); }
-      else if (token.isOwner) { token.control({ releaseOthers: !event.shiftKey }); }
+      if (event.button === 0 && token.isOwner) {
+        const selected = new Set(game.canvas?.tokens.controlled ?? []);
+        if (selected.has(token)) { token.release(); }
+        else { token.control({ releaseOthers: !event.shiftKey }); }
+      } else if (event.button === 2) { canvas.animatePan(token.center); }
     }
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
