@@ -114,6 +114,7 @@ export default class DocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   async _buildTags() {
+    await super._buildTags();
     this._buildBoostTags();
   }
 

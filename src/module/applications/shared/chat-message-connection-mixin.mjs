@@ -37,7 +37,8 @@ export default function ChatMessageConnectionMixin(Base) {
      * @param {HTMLElement} target
      */
     static async #openTargetSheet(_event, target) {
-      const actor = /** @type {TeriockActor} */ await fromUuid(target.dataset.actorUuid);
+      /** @type {TeriockActor} */
+      const actor = await fromUuid(target.dataset.actorUuid);
       if (actor?.isOwner) { await actor.sheet.render(true); }
     }
 
@@ -48,19 +49,24 @@ export default function ChatMessageConnectionMixin(Base) {
      * @param {HTMLElement} target
      */
     static async #selectTarget(event, target) {
-      const tokenDocument = /** @type {TeriockTokenDocument} */ await fromUuid(target.dataset.tokenUuid);
-      if (!tokenDocument) { return; }
-      if (event.button === 2) { tokenDocument.object?.release(); }
-      else if (tokenDocument.isOwner) { tokenDocument.object.control({ releaseOthers: !event.shiftKey }); }
+      /** @type {TeriockToken} */
+      const token = fromUuidSync(target.dataset.tokenUuid)?.object;
+      if (!token?.isVisible) { return; }
+      if (event.ctrlKey) {
+        canvas.animatePan(token.center);
+        return;
+      }
+      if (event.button === 2) { token.release(); }
+      else if (token.isOwner) { token.control({ releaseOthers: !event.shiftKey }); }
     }
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
-        activateActivation: { buttons: [0, 2], handler: this.#activateActivation },
-        selectTarget: { buttons: [0, 2], handler: this.#selectTarget },
+        activateActivation: { buttons: [0, 2], handler: this.#activateActivation, suppressContextMenu: true },
+        selectTarget: { buttons: [0, 2], handler: this.#selectTarget, suppressContextMenu: false },
       },
-      doubles: { selectTarget: this.#openTargetSheet },
+      doubles: { openTarget: this.#openTargetSheet },
     };
 
     /**
@@ -91,9 +97,9 @@ export default function ChatMessageConnectionMixin(Base) {
      * @param {MouseEvent} event
      */
     #suppressContextMenu(event) {
-      const target = /** @type {HTMLElement} */ (event.target).closest("[data-action]");
+      const target = /** @type {HTMLElement} */ event.target.closest("[data-action]");
       const action = target && this.options.actions[target.dataset.action];
-      if (action?.buttons?.includes(2)) {
+      if (action?.suppressContextMenu || event.target.closest("[data-suppress-context-menu]")) {
         event.preventDefault();
         event.stopImmediatePropagation();
       }

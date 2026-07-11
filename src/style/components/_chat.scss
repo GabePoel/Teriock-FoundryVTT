@@ -85,7 +85,10 @@
   position: relative;
   user-select: none;
   @include mixins.inverse-roll-style;
-  @include mixins.inverse-roll-style-hover;
+  &.selectable {
+    cursor: pointer;
+    @include mixins.inverse-roll-style-hover;
+  }
 
   .teriock-target-img {
     @include mixins.simple-two-layer-image(18px);
@@ -224,6 +227,13 @@
   flex-direction: row;
   gap: 7px;
   margin-bottom: 8px;
+
+  &.selectable {
+    cursor: pointer;
+    &:hover {
+      filter: drop-shadow(0 0 2px rgba(125, 0, 0, 0.4));
+    }
+  }
 
   .message-avatar {
     @include mixins.simple-two-layer-image(30px, 4px, 0.3, 100%, var(--color-dark-6));

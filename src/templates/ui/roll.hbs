@@ -8,17 +8,18 @@
     {{#if (exists targets)}}
       {{#each targets as |target|}}
         <div
-          class="teriock-target-container dice-formula"
-          data-tooltip='{{localize "TERIOCK.MESSAGE.Roll.selectTarget"}}'
+          class="teriock-target-container selectable dice-formula"
+          data-suppress-context-menu="true"
           data-tooltip-direction="LEFT"
+          data-tooltip='{{localize "TERIOCK.MESSAGE.Roll.selectTarget"}}'
           {{#if (exists actorUuid)}}
             data-actor-uuid="{{ actorUuid }}"
+            data-double="openTarget"
           {{/if}}
           {{#if (exists tokenUuid)}}
             data-token-uuid="{{ tokenUuid }}"
+            data-action="selectTarget"
           {{/if}}
-          data-action="selectTarget"
-          data-double="selectTarget"
         >
           <div class="teriock-target-img">
             <img src="{{ img }}" alt="" />

@@ -301,7 +301,9 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    * Build tags displayed in this execution's chat message.
    * @returns {Promise<false|void>}
    */
-  async _buildTags() {}
+  async _buildTags() {
+    if (this.competence.proficient) { this.tags.push(this.competence.label); }
+  }
 
   /**
    * Create a chat message from this execution.

@@ -6,11 +6,28 @@
   {{/if}}
 >
   <header class="message-header flexrow">
-    <div class="messenger">
+    <div
+      class="
+        messenger
+        {{#if hasSpeakerInteraction}}
+          selectable
+        {{/if}}
+      "
+      {{#if (exists speakerToken)}}
+        data-action="selectTarget" data-token-uuid="{{ speakerToken.uuid }}"
+      {{/if}}
+      {{#if (exists speakerActor)}}
+        data-double="openTarget" data-actor-uuid="{{ speakerActor.uuid }}"
+      {{/if}}
+      {{#if hasSpeakerInteraction}}
+        data-tooltip="TERIOCK.MESSAGE.Speaker.selectSpeaker"
+        data-tooltip-direction="LEFT"
+      {{/if}}
+    >
       <div class="message-avatar">
         <img src="{{ speakerImg }}" alt="{{ alias }}" data-openable="true" />
       </div>
-      <div class="message-author">
+      <div class="message-author" data-suppress-context-menu="true">
         <h4 class="message-sender">{{ alias }}</h4>
         {{#if writer}}
           <div class="message-writer">

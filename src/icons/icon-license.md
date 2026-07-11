@@ -2,7 +2,7 @@ The webp icons in this directory and its subdirectories are licensed from [Craft
 [Wenrexa](https://www.wenrexa.com/),
 [Poneti](https://poneti.artstation.com/), and Rexard.
 
-The icons in [`./documents`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)).
+The icons in [`./documents`]() and [`./hold`]() are from [game-icons.net]() ([License](https://creativecommons.org/licenses/by/3.0/)).
 Links to the original pages with the authors can be found below.
 
 - [`./documents/ability.svg`](https://game-icons.net/1x1/delapouite/sparkles.html)
@@ -31,3 +31,11 @@ Links to the original pages with the authors can be found below.
 - [`./documents/species.svg`](https://game-icons.net/1x1/lorc/dna1.html)
 - [`./documents/tradecraft.svg`](https://game-icons.net/1x1/delapouite/swiss-army-knife.html)
 - [`./documents/uncertainty.svg`](https://game-icons.net/1x1/lorc/uncertainty.html)
+- [`./hold/anchor.svg`](https://game-icons.net/1x1/lorc/anchor.html)
+- [`./hold/compass.svg`](https://game-icons.net/1x1/lorc/compass.html)
+- [`./hold/crab.svg`](https://game-icons.net/1x1/lorc/crab.html)
+- [`./hold/crown-coin.svg`](https://game-icons.net/1x1/lorc/crown-coin.html)
+- [`./hold/ship-wheel.svg`](https://game-icons.net/1x1/delapouite/ship-wheel.html)
+- [`./hold/shooner-sailboat.svg`](https://game-icons.net/1x1/pierre-leducq/shooner-sailboat.html)
+- [`./hold/spider-alt.svg](https://game-icons.net/1x1/carl-olsen/spider-alt.html)
+- [`./hold/treasure-map.svg`](https://game-icons.net/1x1/lorc/treasure-map.html)

@@ -115,6 +115,7 @@ foundry.helpers.Hooks.once("init", function() {
       hotbar: applications.ui.TeriockHotbar,
       items: applications.sidebar.tabs.TeriockItemDirectory,
       notifications: applications.ui.TeriockNotifications,
+      pause: applications.ui.TeriockGamePause,
       tables: applications.sidebar.tabs.TeriockRollTableDirectory,
     },
     ux: {
@@ -125,6 +126,35 @@ foundry.helpers.Hooks.once("init", function() {
     },
   });
   applications.ux.enrichment.registerEnrichers();
+  const fontPath = (s) => `${helpers.path.systemPath(`assets/fonts/${s}`)}`;
+  Object.assign(CONFIG.fontDefinitions, {
+    "Alegreya SC": {
+      editor: true,
+      fonts: [
+        { style: "normal", urls: [fontPath("alegreya-sc/AlegreyaSC-Regular.ttf")], weight: "400" },
+        { style: "normal", urls: [fontPath("alegreya-sc/AlegreyaSC-Medium.ttf")], weight: "500" },
+        { style: "normal", urls: [fontPath("alegreya-sc/AlegreyaSC-Bold.ttf")], weight: "700" },
+        { style: "normal", urls: [fontPath("alegreya-sc/AlegreyaSC-ExtraBold.ttf")], weight: "800" },
+        { style: "normal", urls: [fontPath("alegreya-sc/AlegreyaSC-Black.ttf")], weight: "900" },
+        { style: "italic", urls: [fontPath("alegreya-sc/AlegreyaSC-Italic.ttf")], weight: "400" },
+        { style: "italic", urls: [fontPath("alegreya-sc/AlegreyaSC-MediumItalic.ttf")], weight: "500" },
+        { style: "italic", urls: [fontPath("alegreya-sc/AlegreyaSC-BoldItalic.ttf")], weight: "700" },
+        { style: "italic", urls: [fontPath("alegreya-sc/AlegreyaSC-ExtraBoldItalic.ttf")], weight: "800" },
+        { style: "italic", urls: [fontPath("alegreya-sc/AlegreyaSC-BlackItalic.ttf")], weight: "900" },
+      ],
+    },
+    Augusta: { editor: true, fonts: [{ urls: [fontPath("augusta/Augusta.ttf")] }] },
+    "Augusta Shadow": { editor: false, fonts: [{ urls: [fontPath("augusta-shadow/Augusta-Shadow.ttf")] }] },
+    Quintessential: {
+      editor: true,
+      fonts: [{ style: "normal", urls: [fontPath("quintessential/Quintessential-Regular.ttf")], weight: "400" }],
+    },
+    XmasTerpiece: { editor: true, fonts: [{ urls: [fontPath("xmas-terpiece/XmasTerpiece.ttf")] }] },
+    XmasTerpieceSwashes: {
+      editor: true,
+      fonts: [{ urls: [fontPath("xmas-terpiece-swashes/XmasTerpieceSwashes.ttf")] }],
+    },
+  });
 
   // Configure Canvas
   // ================

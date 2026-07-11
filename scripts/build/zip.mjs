@@ -32,9 +32,10 @@ for (const asset of ASSETS) {
       recursive: true,
       filter: src => {
         const fileName = path.basename(src);
-        if (fileName === "macros") { return false; }
-        if (fileName === "en") { return false; }
         if (fileName === "categories") { return false; }
+        if (fileName === "en") { return false; }
+        if (fileName === "macros") { return false; }
+        if (fileName === "teriock-cover.svg") { return false; }
         if (fileName.endsWith(".d.ts")) { return false; }
         // Currently we leave SCSS files in so there aren't failed requests.
         // if (fileName.endsWith(".scss")) { return false; }

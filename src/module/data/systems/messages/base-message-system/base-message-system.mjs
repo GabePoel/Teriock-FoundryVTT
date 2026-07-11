@@ -27,10 +27,36 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
    * @param {HTMLLIElement} [options.element]
    */
   async _onRender(_context, options) {
+    if (!options.element) { return; }
+
     // Add roll context menus
-    if (options.element && this.document.isContentVisible) {
+    if (this.document.isContentVisible) {
       for (const roll of this.document.rolls) { roll.bindContextMenus(options.element); }
     }
+
+    // Connect target interactions
+    options.element.querySelectorAll("[data-action='selectTarget']").forEach((el) => {
+      const tokenDocument = fromUuidSync(el.dataset.tokenUuid);
+      if (tokenDocument?.visible) {
+        el.addEventListener("pointerover", (ev) => {
+          /** @type {TeriockToken} */
+          const token = fromUuidSync(ev.currentTarget.dataset.tokenUuid)?.object;
+          if (token && token?.isVisible) { token._onHoverIn(ev); }
+        });
+        el.addEventListener("pointerout", (ev) => {
+          /** @type {TeriockToken} */
+          const token = fromUuidSync(ev.currentTarget.dataset.tokenUuid)?.object;
+          if (token && token?.isVisible) { token._onHoverOut(ev); }
+        });
+      } else {
+        el.classList.remove("selectable");
+        el.dataset.tooltip = "TERIOCK.MESSAGE.Roll.target";
+        delete el.dataset.action;
+        delete el.dataset.double;
+        delete el.dataset.tokenUuid;
+        delete el.dataset.actorUuid;
+      }
+    });
   }
 
   /**
@@ -39,9 +65,12 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
    * @returns {Promise<object>}
    */
   async _prepareContext(options = {}) {
+    const speakerToken = this.document.speakerToken;
     return {
+      hasSpeakerInteraction: Boolean(speakerToken?.visible || this.document.speakerActor?.visible),
       isContentVisible: this.document.isContentVisible,
       speakerImg: this.document.speakerImg,
+      speakerToken,
       system: this,
       TERIOCK,
       writer: this.document.alias !== this.document.author?.name ? this.document.author?.name : null,
