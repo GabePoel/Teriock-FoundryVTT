@@ -27,7 +27,10 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
    * @param {HTMLLIElement} [options.element]
    */
   async _onRender(_context, options) {
-    options.element?.classList.add("teriock");
+    // Add roll context menus
+    if (options.element && this.document.isContentVisible) {
+      for (const roll of this.document.rolls) { roll.bindContextMenus(options.element); }
+    }
   }
 
   /**

@@ -40,7 +40,8 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
   }
 
   /** @inheritDoc */
-  async _onRender(_context, options) {
+  async _onRender(context, options) {
+    await super._onRender(context, options);
     const element = options.element;
     if (!element) { return; }
     TeriockItem.bindPanelListeners(element);
@@ -59,11 +60,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
         delete el.dataset.tooltip;
         delete el.dataset.tooltipHtml;
       });
-    }
-
-    // Add roll context menus
-    if (this.document.isContentVisible) {
-      for (const roll of this.document.rolls) { roll.bindContextMenus(element); }
     }
   }
 
