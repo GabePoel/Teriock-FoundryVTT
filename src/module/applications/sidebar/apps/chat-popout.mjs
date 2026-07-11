@@ -1,11 +1,28 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
+import { ChatMessageConnectionMixin } from "../../shared/_module.mjs";
 
 const { ChatPopout } = foundry.applications.sidebar.apps;
 
-/** @inheritDoc */
-export default class TeriockChatPopout extends ChatPopout {
+/**
+ * @extends {ChatPopout}
+ * @mixes ChatMessageConnection
+ */
+export default class TeriockChatPopout extends ChatMessageConnectionMixin(ChatPopout) {
+  /**
+   * Handle toggling the expanded state of a roll breakdown.
+   * @this {ChatLog}
+   * @type {ApplicationClickAction}
+   */
+  static #onExpandRoll(event, target) {
+    event.preventDefault();
+    target.classList.toggle("expanded");
+  }
+
   /** @type {Partial<ApplicationConfiguration>} */
-  static DEFAULT_OPTIONS = { window: { icon: makeIconClass(CONFIG.ChatMessage.sidebarIcon, "title") } };
+  static DEFAULT_OPTIONS = {
+    actions: { expandRoll: this.#onExpandRoll },
+    window: { icon: makeIconClass(CONFIG.ChatMessage.sidebarIcon, "title") },
+  };
 
   /** @inheritDoc */
   get title() {

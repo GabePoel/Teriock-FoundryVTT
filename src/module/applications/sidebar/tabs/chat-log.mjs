@@ -1,10 +1,17 @@
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { buildCommandOptions, commands } from "../../../helpers/interaction/_module.mjs";
+import { BaseApplicationMixin } from "../../api/mixins/_module.mjs";
+import { ChatMessageConnectionMixin } from "../../shared/_module.mjs";
 
 const { ChatLog } = foundry.applications.sidebar.tabs;
 
-/** @inheritDoc */
-export default class TeriockChatLog extends ChatLog {
+/**
+ * @extends {ChatLog}
+ * @mixes BaseApplication
+ * @mixes ChatMessageConnection
+ */
+export default class TeriockChatLog extends mixClasses(ChatLog, BaseApplicationMixin, ChatMessageConnectionMixin) {
   /** @inheritDoc */
   static CHAT_COMMANDS = (() => {
     const registry = { ...super.CHAT_COMMANDS };

@@ -48,7 +48,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     if (!element) { return; }
     element.classList.add("teriock");
     TeriockItem.bindPanelListeners(element);
-    this._connectActivationListeners(element);
     this.collapsePanels(element);
 
     // Remove custom content if it shouldn't be visible
@@ -65,41 +64,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
         delete el.dataset.tooltipHtml;
       });
     }
-
-    // Add target selection listeners
-    element.querySelectorAll(".teriock-target-container").forEach(/** @param {HTMLElement} container */ container => {
-      let clickTimeout = null;
-
-      container.addEventListener("contextmenu", async event => {
-        event.stopPropagation();
-        const tokenDocument = /** @type {TeriockDocument} */ await fromUuid(container.dataset.tokenUuid);
-        if (tokenDocument) { tokenDocument.object.release(); }
-      });
-
-      container.addEventListener("click", async event => {
-        event.stopPropagation();
-        if (clickTimeout) {
-          clearTimeout(clickTimeout);
-          clickTimeout = null;
-          return;
-        }
-        clickTimeout = setTimeout(async () => {
-          const tokenDocument = /** @type {TeriockTokenDocument} */ await fromUuid(container.dataset.tokenUuid);
-          if (tokenDocument?.isOwner) { tokenDocument.object.control({ releaseOthers: !event.shiftKey }); }
-          clickTimeout = null;
-        }, 200);
-      });
-
-      container.addEventListener("dblclick", async event => {
-        event.stopPropagation();
-        if (clickTimeout) {
-          clearTimeout(clickTimeout);
-          clickTimeout = null;
-        }
-        const actor = /** @type {TeriockActor} */ await fromUuid(container.dataset.actorUuid);
-        if (actor.isOwner) { await actor.sheet.render(true); }
-      });
-    });
 
     new TeriockContextMenu(element, "img", [{
       icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
