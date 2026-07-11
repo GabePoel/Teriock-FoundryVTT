@@ -2,12 +2,11 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-import { FOUNDRY_ROOT } from "../script-utils.mjs";
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const DEV_ROOT = path.resolve(__dirname, "..", "..", "src", "templates");
+const FOUNDRY_ROOT = "systems/teriock/src/templates";
 
 /**
  * @param {string} dir

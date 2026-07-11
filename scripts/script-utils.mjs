@@ -22,5 +22,3 @@ export function sortObject(obj) {
     return acc;
   }, {});
 }
-
-export const FOUNDRY_ROOT = "systems/teriock/src/icons/hold";

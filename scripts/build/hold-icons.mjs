@@ -3,8 +3,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import { toCamelCase } from "../../src/module/helpers/string.mjs";
-import { FOUNDRY_ROOT, sortObject } from "../script-utils.mjs";
+import { sortObject } from "../script-utils.mjs";
 
+const FOUNDRY_ROOT = "systems/teriock/src/icons/hold";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
