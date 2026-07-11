@@ -7,7 +7,7 @@ import * as automationMixins from "./mixins/_module.mjs";
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
- * @extends {AutomationTransformationConfig}
+ * @extends {Teriock.Transformation.AutomationTransformationConfig}
  * @mixes SelectExternalDocumentsAutomation
  * @mixes CompetenceAutomation
  */
