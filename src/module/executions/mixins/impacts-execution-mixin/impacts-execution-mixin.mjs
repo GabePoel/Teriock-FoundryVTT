@@ -51,6 +51,7 @@ export default function ImpactsExecutionMixin(Base) {
           icon: TERIOCK.display.icons.consequence.crit,
           label: "TERIOCK.DIALOGS.Boost.BUTTONS.crit",
           name: "crit",
+          type: "button",
           callback: () => this.updateSource({ crit: true }),
         }];
       }

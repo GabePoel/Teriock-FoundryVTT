@@ -1,3 +1,5 @@
+import { createElement } from "../../../../../helpers/html.mjs";
+
 /**
  * @param {typeof TeriockDocumentSheet} Base
  */
@@ -57,14 +59,12 @@ export default function LockingCommonSheetPart(Base) {
       /** @inheritDoc */
       async _renderFrame(options = {}) {
         const frame = await super._renderFrame(options);
-        if (
-          this.document.documentName === "Item"
-          || this.document.documentName === "ActiveEffect"
-          || this.document.documentName === "JournalEntryPage"
-        ) {
-          const toggleButton = document.createElement("button");
-          toggleButton.classList.add(...["header-control", "icon", "fa-solid"]);
-          toggleButton.setAttribute("data-action", "toggleLockThis");
+        if (["ActiveEffect", "Item", "JournalEntryPage"].includes(this.document.documentName)) {
+          const toggleButton = createElement("button", {
+            className: "header-control icon fa-solid",
+            dataset: { action: "toggleLockThis" },
+            type: "button",
+          });
           this.#setToggleLockButtonAttributes(toggleButton);
           if (!this.document.isOwner || (this.document.inCompendium && this.document.compendium.locked)) {
             toggleButton.setAttribute("disabled", "disabled");

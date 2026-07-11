@@ -23,16 +23,15 @@ export default class ExecutionEditor extends ResolvableDialog {
   static DEFAULT_OPTIONS = {
     actions: { changeDocument: this._onChangeDocument, confirm: this._onConfirm, messageMode: this.#onMessageMode },
     classes: ["execution-editor"],
+    form: { closeOnSubmit: false, submitOnChange: false },
     position: { width: 550 },
+    tag: "form",
     window: { contentClasses: ["wide-toggles"] },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    content: {
-      forms: { form: { closeOnSubmit: false, submitOnChange: false } },
-      template: "teriock/dialogs/execution-editor",
-    },
+    content: { template: "teriock/dialogs/execution-editor" },
     messageModes: { template: "teriock/ui/message-modes" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
@@ -176,10 +175,10 @@ export default class ExecutionEditor extends ResolvableDialog {
     });
     return Object.assign(await super._prepareContext(options), {
       buttons: this.execution._dialogButtons.map(button => ({
+        type: "submit",
         ...button,
         icon: makeIconClass(button.icon || this.execution.icon, "button"),
         label: _loc(button.label),
-        type: "submit",
       })),
       documents,
       mainFields,

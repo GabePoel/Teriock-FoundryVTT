@@ -95,10 +95,10 @@
           </div>
         </div>
         <div class="change-controls">
-          <button class="change-delete" data-action="deleteQualifiedChange" data-tooltip='{{localize "TERIOCK.CHANGES.Actions.deleteChange"}}' data-index="{{ i }}" data-path="{{ ../../changesPath }}" data-value-path="{{ ../../valuePath }}" {{#each ../additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}</button>
+          <button class="change-delete" type="button" data-action="deleteQualifiedChange" data-tooltip='{{localize "TERIOCK.CHANGES.Actions.deleteChange"}}' data-index="{{ i }}" data-path="{{ ../../changesPath }}" data-value-path="{{ ../../valuePath }}" {{#each ../additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}</button>
         </div>
       </li>
     {{/with}}
   {{/each}}
-  <button class="add-change-button" data-action="addQualifiedChange" data-path="{{ changesPath }}" data-value-path="{{ valuePath }}" {{#each additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.CHANGES.Actions.addChange"}}</button>
+  <button class="add-change-button" type="button" data-action="addQualifiedChange" data-path="{{ changesPath }}" data-value-path="{{ valuePath }}" {{#each additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.CHANGES.Actions.addChange"}}</button>
 </ol>

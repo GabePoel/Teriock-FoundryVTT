@@ -56,6 +56,7 @@ export default function ThresholdExecutionMixin(Base) {
           icon: "fa-dice-d20",
           label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.disadvantage",
           name: "disadvantage",
+          type: "button",
           callback: () => this.updateSource({ edge: -1 }),
         }, {
           action: "confirm",
@@ -70,6 +71,7 @@ export default function ThresholdExecutionMixin(Base) {
           icon: "fa-dice-d20",
           label: "TERIOCK.DIALOGS.ThresholdExecutionOptions.BUTTONS.advantage",
           name: "advantage",
+          type: "button",
           callback: () => this.updateSource({ edge: 1 }),
         }];
       }
