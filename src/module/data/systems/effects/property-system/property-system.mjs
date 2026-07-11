@@ -129,10 +129,10 @@ export default class PropertySystem
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      [`damage.type.${this._source.damageType}`]: 1,
+      [`dmg.type.${this._source.damageType}`]: 1,
       [`form.${this.form}`]: 1,
-      "damage.extra": this.extraDamage,
-      "damage.type": this._source.damageType,
+      "dmg.extra": this.extraDamage,
+      "dmg.type": this._source.damageType,
       form: this.form,
     };
   }

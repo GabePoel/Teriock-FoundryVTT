@@ -6,8 +6,8 @@ const propertyContext = {
   ...usableContext,
   property: "TYPES.ActiveEffect.property",
 
-  "damage.extra": "TERIOCK.ROLL_CONTEXT.Property.extraDamage",
-  "damage.type": "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label",
+  "dmg.extra": "TERIOCK.ROLL_CONTEXT.Property.extraDamage",
+  "dmg.type": "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label",
   form: "TERIOCK.SYSTEMS.BaseEffect.FIELDS.form.label",
 };
 
@@ -19,7 +19,7 @@ Hooks.once("i18nInit", () => {
     propertyContext[`form.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Common.form", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.damageTypes).forEach(([k, v]) => {
-    propertyContext[`damage.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Property.damageType", { name: _loc(v) });
+    propertyContext[`dmg.type.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Property.damageType", { name: _loc(v) });
   });
 });
 
