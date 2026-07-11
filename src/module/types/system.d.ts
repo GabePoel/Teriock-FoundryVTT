@@ -10,6 +10,8 @@ declare global {
       asGM?: boolean;
       /** Notify the user if the operation failed. */
       notifyOnFailure?: boolean;
+      /** Don't track this in registries. */
+      noTrack?: boolean;
     };
 
     export type _CreateOperation = {

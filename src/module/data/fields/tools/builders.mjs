@@ -13,6 +13,7 @@ const {
   DocumentIdField,
   DocumentUUIDField,
   FilePathField,
+  HTMLField,
   JSONField,
   NumberField,
   SchemaField,
@@ -130,7 +131,7 @@ export function blocksField() {
   return new ArrayField(
     new SchemaField({
       classes: new StringField({ initial: "" }),
-      text: new StringField({ blank: true, nullable: true }),
+      text: new HTMLField({ blank: true, nullable: true }),
       title: new StringField(),
     }),
   );
