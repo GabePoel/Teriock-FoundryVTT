@@ -1,10 +1,6 @@
 // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
 
 /**
- * @typedef {"lc"|"uc"|"cc"|"kc"} TransformKey
- */
-
-/**
  * Localize an object.
  * @param {Record<string, string>} choices
  * @param {object} [options]
@@ -54,17 +50,11 @@ const _preLocalizationDataModelRegistrations = [];
  * @param {string} [options.key] - If each entry in the config enum is an object, localize and sort using this property.
  * @param {string[]} [options.keys=[]]- Array of localization keys. The first key listed will be used for sorting if
  * multiple is provided.
- * @param {string} [options.prefix] - Add a prefix to the values being localized.
- * @param {string} [options.suffix] - Add a suffix to the values being localized.
- * @param {TransformKey} [options.transform] - Add a transformation to the value before localizing.
  * @param {boolean} [options.sort=false] - Sort this config enum, using the key if set.
  */
-export function preLocalizeConfig(
-  configKeyPath,
-  { key, keys = [], prefix = "", sort = false, suffix = "", transform } = {},
-) {
+export function preLocalizeConfig(configKeyPath, { key, keys = [], sort = false } = {}) {
   if (key) { keys.unshift(key); }
-  _preLocalizationConfigRegistrations[configKeyPath] = { keys, prefix, sort, suffix, transform };
+  _preLocalizationConfigRegistrations[configKeyPath] = { keys, sort };
 }
 
 /**
@@ -99,18 +89,14 @@ export function performPreLocalization(config) {
  * @param {object} obj - The configuration object to localize.
  * @param {object} [options]
  * @param {string[]} [options.keys] - List of inner keys that should be localized if this is an object.
- * @param {string} [options.prefix] - An optional prefix to add to the value being localized.
- * @param {string} [options.suffix] - An optional suffix to add to the value being localized.
- * @param {TransformKey} [options.transform] - An optional transformation to make to the value before localizing.
  */
-export function localizeObject(obj, { keys, prefix = "", suffix = "", transform } = {}) {
+export function localizeObject(obj, { keys } = {}) {
   for (const [k, v] of Object.entries(obj)) {
     const type = typeof v;
     if (type === "string") {
-      obj[k] = _loc(prefix + transformValue(v, transform) + suffix);
+      obj[k] = _loc(v);
       continue;
     }
-
     if (type !== "object") {
       console.error(
         new Error(`Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`),
@@ -121,26 +107,12 @@ export function localizeObject(obj, { keys, prefix = "", suffix = "", transform 
       console.error(new Error("Localization keys must be provided for pre-localizing when target is an object."));
       continue;
     }
-
     for (const key of keys) {
       const value = foundry.utils.getProperty(v, key);
       if (!value) { continue; }
-      foundry.utils.setProperty(v, key, _loc(prefix + transformValue(value, transform) + suffix));
+      foundry.utils.setProperty(v, key, _loc(value));
     }
   }
-}
-
-/**
- * @param {string} value
- * @param {"lc"|"uc"|"cc"|"kc"} [transform]
- * @returns {string}
- */
-function transformValue(value, transform) {
-  if (transform === "lc") { return value.toLowerCase(); }
-  if (transform === "uc") { return value.toUpperCase(); }
-  if (transform === "cc") { return teriock.helpers.string.toCamelCase(value); }
-  if (transform === "kc") { return teriock.helpers.string.toKebabCase(value); }
-  return value;
 }
 
 /**
