@@ -564,7 +564,14 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       prepareData() {
         super.prepareData();
-        if (this.system._dep && this.uuid) { game.teriock?.dependents.track(this.system._dep, this); }
+        // Ony mutate dependents registry if this is actually saved to the database.
+        if (this.trackable) {
+          if (this._cachedDep && this._cachedDep !== this.system._dep) {
+            game.teriock?.dependents.untrack(this._cachedDep, this);
+          }
+          if (this.system._dep) { game.teriock?.dependents.track(this.system._dep, this); }
+          this._cachedDep = this.system._dep;
+        }
         // If this moved to a different sup, the old sup isn't reached by #reloadSups and must be reset directly.
         if (this._cachedSupId && this._cachedSupId !== this.system._sup) {
           const previousSup = this.siblingCollection?.get(this._cachedSupId);
