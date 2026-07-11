@@ -3,14 +3,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 import { toCamelCase } from "../../src/module/helpers/string.mjs";
-import { sortObject } from "../script-utils.mjs";
+import { FOUNDRY_ROOT, sortObject } from "../script-utils.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SRC = path.resolve(__dirname, "../../src/icons/hold");
 const DST = path.resolve(__dirname, "../../src/icons/hold/hold-icons.json");
-const FOUNDRY_ROOT = "systems/teriock/src/icons/hold";
 
 const files = (await fs.promises.readdir(SRC)).filter(file => file.endsWith(".svg")).sort((a, b) => a.localeCompare(b));
 
