@@ -147,7 +147,7 @@ export function barClamp(bar, change) {
  * Builds a single document write operation given its UUID and some document data. Best for simplifying create and
  * delete operation construction.
  * @param {DatabaseWriteOperation & { uuid?: UUID<TeriockDocument>, docData?: object}} operation
- * @returns {DatabaseWriteOperation | null}
+ * @returns {Promise<DatabaseWriteOperation | null>}
  */
 export async function buildWriteOperation(operation) {
   if (operation.uuid && ["delete", "update"].includes(operation.action)) {
@@ -179,7 +179,7 @@ export function consolidateWriteOperations(operations) {
   const exclusions = ["ids", "_id", "replacements", "data", "updates"];
   /** @type {DatabaseWriteOperation[]} */
   const consolidated = [];
-  for (const op of operations) {
+  for (const op of operations.filter(Boolean)) {
     const opMini = { ...op };
     for (const exclusion of exclusions) { delete opMini[exclusion]; }
     const comOp = consolidated.find(co => {

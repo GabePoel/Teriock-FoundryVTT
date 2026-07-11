@@ -59,11 +59,24 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
   get(doc) {
     if (!this.initialized) { return []; }
     doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);
-    return Array.from(this.#dependents.get(doc?.uuid) ?? []).map(uuid => this.fetchFromUuid(doc, uuid)).filter(Boolean);
+    const uuids = this.#dependents.get(doc?.uuid);
+    if (!uuids) { return []; }
+    const dependents = [];
+    for (const uuid of uuids) {
+      const dependent = this.fetchFromUuid(doc, uuid);
+      // Deletion can't always untrack so we have to manually untrack it here just in case.
+      if (dependent) { dependents.push(dependent); }
+      else { uuids.delete(uuid); }
+    }
+    if (uuids.size === 0) { this.#dependents.delete(doc?.uuid); }
+    return dependents;
   }
 
   /**
    * Resolve a document ID into an absolute UUID.
+   *
+   * A plain ID only resolves if the dependee is an effect directly on the dependent's parent or actor, or
+   * an item on the dependent's actor. Dependees embedded anywhere else must be referenced by full UUID.
    * @param {ID<AnyChildDocument>|UUID<AnyChildDocument>} idOrUuid - ID or UUID of a document.
    * @param {AnyChildDocument} dependent - Document to track as a dependent.
    * @returns {UUID<AnyChildDocument>}

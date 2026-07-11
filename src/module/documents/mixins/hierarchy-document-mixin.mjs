@@ -1,4 +1,5 @@
 import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
+import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/utils.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 
 const { Collection } = foundry.utils;
@@ -145,6 +146,8 @@ export default function HierarchyDocumentMixin(Base) {
         if (yes === false) { return false; }
 
         for (const doc of documents) { operation.ids.push(...doc.allSubs.contents.map(s => s._id)); }
+        // Deleting a sup alongside one of its subs would push that sub's id a second time.
+        operation.ids = Array.from(new Set(operation.ids));
       }
 
       /**
@@ -405,7 +408,14 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
-        if (game.user.isActiveGM) { this.dependents.forEach(d => d.delete()); }
+        if (game.user.isActiveGM) {
+          Promise.all(this.dependents.map((d) => buildWriteOperation({ action: "delete", uuid: d.uuid }))).then(
+            (operations) => {
+              const consolidatedOperations = consolidateWriteOperations(operations.filter(Boolean));
+              if (operations.length) { foundry.documents.modifyBatch(consolidatedOperations); }
+            },
+          );
+        }
         if (this.system._dep && this.uuid) { game.teriock?.dependents.untrack(this.system._dep, this); }
         // If this is deleted as part of a folder it might not call the appropriate operation and descendents need to be
         // deleted separately. Only remaining documents get deleted. This sucks but IDK a better solution.
@@ -415,7 +425,7 @@ export default function HierarchyDocumentMixin(Base) {
               pack: this.compendium?.collection,
               parent: this.parent,
             })
-          );
+          ).catch(err => console.warn(`Failed to delete subs of ${this.uuid}.`, err));
         }
         if (options.render !== false) { this.#renderSheets(); }
       }

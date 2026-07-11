@@ -279,6 +279,14 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
+      _onCreate(data, options, userId) {
+        super._onCreate(data, options, userId);
+        // Extra tracking for world documents created during the game.
+        game.teriock.identifiers.trackDocument(this);
+        this._cachedIdentifier = this.typedIdentifier;
+      }
+
+      /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
         game.teriock.identifiers.untrackDocument(this);
