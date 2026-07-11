@@ -63,6 +63,10 @@ export default class ChangeQuantityAutomation
   async #changeQuantity(scope = {}) {
     const consumable = await this.#findConsumable(scope);
     if (!consumable) { return; }
+    if (consumable.system.quantity <= 0 && BaseRoll.maxValue(this.formula) <= 0) { return; }
+    if (
+      consumable.system.quantity >= consumable.system.maxQuantity.value && BaseRoll.minValue(this.formula) >= 0
+    ) { return; }
     const shouldChange = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
       data: { amount: this.formula, name: `@UUID[${consumable.uuid}]` },

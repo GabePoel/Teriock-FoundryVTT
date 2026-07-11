@@ -6,6 +6,22 @@ import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
  */
 export default class CleanedEffectSystem extends BaseEffectSystem {
   /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) { return false; }
+
+    this.parent.updateSource({ statuses: [], transfer: true });
+  }
+
+  /** @inheritDoc */
+  async _preUpdate(changes, options, user) {
+    const yes = await super._preUpdate(changes, options, user);
+    if (yes === false) { return false; }
+
+    if (changes?.transfer === false) { return false; }
+  }
+
+  /** @inheritDoc */
   prepareBaseData() {
     this.changes = [];
     this.parent.transfer = true;
