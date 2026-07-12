@@ -8,21 +8,21 @@ declare global {
       [Key in Teriock.Config.SettingsKey<Category>]: boolean;
     };
 
-    export type DocumentSettingsValues<Category extends Teriock.Config.SettingsCategory> = {
-      [Key in Teriock.Config.SettingsKey<Category>]: boolean | null;
+    export type DocumentSettingsValues<Category extends Teriock.Config.DocumentSettingsCategory> = {
+      [Key in Teriock.Config.ComposedSettingsKey<Category>]: boolean | null;
     };
 
     export type DocumentSettingsModelData<
-      Category extends Teriock.Config.SettingsCategory = Teriock.Config.SettingsCategory,
+      Category extends Teriock.Config.DocumentSettingsCategory = Teriock.Config.DocumentSettingsCategory,
     > = DocumentSettingsValues<Category> & {
-      getSetting<Key extends Teriock.Config.SettingsKey<Category>>(setting: Key): boolean;
+      getSetting<Key extends Teriock.Config.ComposedSettingsKey<Category>>(setting: Key): boolean;
     };
 
     export type UserSettingsModelData<
       Category extends Teriock.Config.SettingsCategory = Teriock.Config.SettingsCategory,
     > = SettingsDefaults<Category>;
 
-    export type DocumentSettingsModelInstance<Category extends Teriock.Config.SettingsCategory> =
+    export type DocumentSettingsModelInstance<Category extends Teriock.Config.DocumentSettingsCategory> =
       & DocumentSettingsModelData<Category>
       & BaseDataModel;
 
@@ -30,9 +30,10 @@ declare global {
       & UserSettingsModelData<Category>
       & BaseDataModel;
 
-    export interface DocumentSettingsModelConstructor<Category extends Teriock.Config.SettingsCategory> {
+    export interface DocumentSettingsModelConstructor<Category extends Teriock.Config.DocumentSettingsCategory> {
       new(...args: object[]): DocumentSettingsModelInstance<Category>;
       CATEGORY: Category;
+      KEY_GROUPS: Record<string, Teriock.Config.SettingsCategory>;
       defineSchema(): Record<string, DataField>;
     }
 

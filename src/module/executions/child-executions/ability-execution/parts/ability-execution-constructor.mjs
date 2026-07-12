@@ -380,7 +380,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
     this.updateSource({
       existingAttackPenalty: Math.min(existingAttackPenalty, 0),
-      payCosts: game.settings.get("teriock", "autoPayAbilityCosts"),
+      payCosts: this.source.system.settings.getSetting("autoPayCosts"),
       usesReaction: this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1",
     });
     this.targets = new Set();

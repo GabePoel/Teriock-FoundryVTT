@@ -22,7 +22,8 @@ export default class EquipmentExecution extends ArmamentExecution {
   }
 
   /** @inheritDoc */
-  constructor(data, options) {
+  constructor(data = {}, options = {}) {
+    data.consumeAmmunition ??= options.source.system.settings.getSetting("consumeAmmunition");
     super(data, options);
     if (this.source.system.ammunition.enabled) {
       if (options.ammunition?.system.consumable) { this.ammunition = options.ammunition; }

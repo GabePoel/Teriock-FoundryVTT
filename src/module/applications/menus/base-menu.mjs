@@ -1,6 +1,4 @@
-import settingsConfig from "../../constants/config/settings-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
-import { userSettingsModels } from "../../data/models/settings-models/_module.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { TeriockApplication } from "../api/_module.mjs";
 
@@ -95,30 +93,12 @@ export default class BaseMenu extends TeriockApplication {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
+    if (partId in (context.tabs ?? {})) { context.tab = context.tabs[partId]; }
     context.fields = [];
     context.legend = undefined;
     context.fieldset = BaseMenu.#countMenuParts(this.constructor) > 1;
     context.buttons = [{ icon: makeIconClass(icons.ui.save, "button"), label: "SETTINGS.Save", type: "submit" }];
     return context;
-  }
-
-  /**
-   * Create form fields for a configurable settings category stored as a data model.
-   * @param {Teriock.Config.SettingsCategory} category
-   * @returns {object[]}
-   */
-  createConfigurableSettingFields(category) {
-    const value = game.settings.get("teriock", category) ?? {};
-    const Model = userSettingsModels[category];
-    const schemaFields = new Model().schema.fields;
-    return Object.keys(settingsConfig[category]).map(key => ({
-      field: schemaFields[key],
-      hint: schemaFields[key].hint,
-      label: schemaFields[key].label,
-      localize: true,
-      name: `${category}.${key}`,
-      value: value[key],
-    }));
   }
 
   /**

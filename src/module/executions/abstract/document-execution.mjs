@@ -20,6 +20,7 @@ export default class DocumentExecution extends BaseExecution {
    * @param {Teriock.Execution.ExecutionOptions} [options]
    */
   constructor(data = {}, options = {}) {
+    data.consumeUses ??= options.source?.system.settings?.getSetting("consumeOnUse");
     super(data, options);
     this._actor = options.actor ?? this.source?.actor ?? game.actors.default;
     this._automations = this.source.system.automations?.contents ?? [];

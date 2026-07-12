@@ -5,8 +5,10 @@ import {
   userSettingsModelFactory,
 } from "./settings-model-factories.mjs";
 
-const keys = Object.keys(settingsConfig);
-
 export { CommonDocumentSettingsModel };
-export const userSettingsModels = Object.fromEntries(keys.map((k) => [k, userSettingsModelFactory(k)]));
-export const documentSettingsModels = Object.fromEntries(keys.map((k) => [k, documentSettingsModelFactory(k)]));
+export const userSettingsModels = Object.fromEntries(
+  Object.keys(settingsConfig.categories).map((k) => [k, userSettingsModelFactory(k)]),
+);
+export const documentSettingsModels = Object.fromEntries(
+  Object.keys(settingsConfig.compositions).map((k) => [k, documentSettingsModelFactory(k)]),
+);

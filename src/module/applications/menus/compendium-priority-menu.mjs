@@ -3,12 +3,12 @@ import { getPackIcon } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import BaseMenu from "./base-menu.mjs";
 
-export default class GameContentMenu extends BaseMenu {
+export default class CompendiumPriorityMenu extends BaseMenu {
   /**
    * Move an identifier source row up or down.
    * @param {PointerEvent} _event
    * @param {HTMLElement} target
-   * @this {GameContentMenu}
+   * @this {CompendiumPriorityMenu}
    */
   static #onMoveIdentifierPriority(_event, target) {
     const direction = target?.dataset.identifierPriorityMove;
@@ -23,19 +23,22 @@ export default class GameContentMenu extends BaseMenu {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { moveIdentifierPriority: this.#onMoveIdentifierPriority },
-    form: { closeOnSubmit: true, handler: GameContentMenu._onCommitChanges },
+    form: { closeOnSubmit: true, handler: CompendiumPriorityMenu._onCommitChanges },
     position: { width: 500 },
-    window: { icon: makeIconClass(icons.settings.gameContent, "title"), title: "TERIOCK.MENUS.GameContent.name" },
+    window: { icon: makeIconClass(icons.ui.compendium, "title"), title: "TERIOCK.MENUS.CompendiumPriority.name" },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = { identifierSources: { template: "teriock/menus/game-content-menu" }, footer: super.PARTS.footer };
+  static PARTS = {
+    identifierSources: { template: "teriock/menus/compendium-priority-menu" },
+    footer: super.PARTS.footer,
+  };
 
   /** @inheritDoc */
   static SETTINGS_MENU = {
-    hint: "TERIOCK.MENUS.GameContent.hint",
-    key: "gameContentConfig",
-    label: "TERIOCK.MENUS.GameContent.label",
+    hint: "TERIOCK.MENUS.CompendiumPriority.hint",
+    key: "compendiumPriorityConfig",
+    label: "TERIOCK.MENUS.CompendiumPriority.label",
     restricted: true,
   };
 

@@ -3,6 +3,7 @@ import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mj
 import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 import { migrateValueTransform } from "../../../migrations/source-migrations.mjs";
+import { documentSettingsModels } from "../../../models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -97,6 +98,7 @@ export default class EquipmentSystem
         initial: "mundane",
       }),
       price: new fields.NumberField({ initial: 0 }),
+      settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),
     });
   }
 

@@ -34,7 +34,7 @@ export default function ActorStatsPart(Base) {
        * Add statuses and explanations for being wounded.
        */
       #prepareVirtualWounds() {
-        if (!game.settings.get("teriock", "autoWound")) { return; }
+        if (!this.settings.getSetting("autoWound")) { return; }
         const hpUncn = this.hp.value < 1;
         const hpCrit = this.hp.value === (this.hp.min < 0 ? this.hp.min + 1 : 0);
         const hpDead = this.hp.value === this.hp.min;

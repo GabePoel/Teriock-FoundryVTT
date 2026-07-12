@@ -17,10 +17,10 @@ export default class TeriockTooltipManager extends TooltipManager {
   static RICH_TOOLTIP_WIDTH = 350;
 
   /**
-   * Cache of documents' `documentName` and whether they allow rich tooltips.
-   * @type {{allowed: Set<string>, disallowed: Set<string>}}
+   * Internal cache of allowed document names.
+   * @type {Set<string>}
    */
-  #KNOWN_DOCUMENT_NAMES = { allowed: new Set(), disallowed: new Set() };
+  #allowedDocumentNames;
 
   /**
    * Fetch a rich tooltip.
@@ -64,17 +64,12 @@ export default class TeriockTooltipManager extends TooltipManager {
    */
   #validateUuid(uuid) {
     if (!uuid) { return false; }
+    if (!this.#allowedDocumentNames) { this.#allowedDocumentNames = game.settings.get(
+        "teriock",
+        "documentTooltips",
+      ); }
     const documentName = foundry.utils.parseUuid(uuid)?.type;
-    if (!documentName) { return false; }
-    if (this.#KNOWN_DOCUMENT_NAMES.allowed.has(documentName)) { return true; }
-    if (this.#KNOWN_DOCUMENT_NAMES.disallowed.has(documentName)) { return false; }
-    const Cls = foundry.utils.getDocumentClass(documentName);
-    if (Cls?.documentMetadata?.tooltip) {
-      this.#KNOWN_DOCUMENT_NAMES.allowed.add(documentName);
-      return true;
-    }
-    this.#KNOWN_DOCUMENT_NAMES.disallowed.add(documentName);
-    return false;
+    return this.#allowedDocumentNames.has(documentName);
   }
 
   /** @inheritdoc */

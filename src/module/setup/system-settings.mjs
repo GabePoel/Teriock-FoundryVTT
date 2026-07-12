@@ -6,15 +6,16 @@ import tipConfig from "../constants/config/tip-config.mjs";
 import { TypedIdentifierSetField } from "../data/fields/_module.mjs";
 import { tradecraftsField } from "../data/fields/tools/builders.mjs";
 import { userSettingsModels } from "../data/models/settings-models/_module.mjs";
+import * as documents from "../documents/_module.mjs";
 import { objectMap } from "../helpers/utils.mjs";
 
 const { fields } = foundry.data;
 
 /** @type {Record<Teriock.Config.SettingsCategory, SettingConfig>} */
 export const inheritedSettings = Object.fromEntries(
-  Object.keys(settingsConfig).map(
+  Object.keys(settingsConfig.categories).map(
     category => [category, {
-      default: settingsConfig[category],
+      default: settingsConfig.categories[category],
       hint: `TERIOCK.SETTINGS.${category}.hint`,
       name: `TERIOCK.SETTINGS.${category}.name`,
       scope: "user",
@@ -58,43 +59,27 @@ export const settings = {
       type: Boolean,
     },
   },
-  automatedBehavior: {
-    autoPayAbilityCosts: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.autoPayAbilityCosts.hint",
-      name: "TERIOCK.SETTINGS.autoPayAbilityCosts.name",
-      scope: "user",
-      type: Boolean,
-    },
-    autoWound: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.autoWound.hint",
-      name: "TERIOCK.SETTINGS.autoWound.name",
-      scope: "world",
-      type: Boolean,
-    },
-    nonHierarchicalChanges: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
-      name: "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
+  compendiumPriority: {
+    identifierSourcePriority: {
+      default: {
+        "teriock.abilities": 11,
+        "teriock.bodyParts": 9,
+        "teriock.classes": 7,
+        "teriock.creatures": 5,
+        "teriock.equipment": 8,
+        "teriock.essentials": 3,
+        "teriock.magicItems": 1,
+        "teriock.powers": 2,
+        "teriock.properties": 10,
+        "teriock.rules": 12,
+        "teriock.species": 6,
+        "teriock.templateEffects": 4,
+      },
+      hint: "TERIOCK.SETTINGS.identifierSourcePriority.hint",
+      name: "TERIOCK.SETTINGS.identifierSourcePriority.name",
       requiresReload: true,
       scope: "world",
-      type: Boolean,
-    },
-    rollImpactsOnUse: {
-      default: false,
-      hint: "TERIOCK.SETTINGS.rollImpactsOnUse.hint",
-      name: "TERIOCK.SETTINGS.rollImpactsOnUse.name",
-      requiresReload: true,
-      scope: "user",
-      type: Boolean,
-    },
-    trackSustainedConsequences: {
-      default: true,
-      hint: "TERIOCK.SETTINGS.trackSustainedConsequences.hint",
-      name: "TERIOCK.SETTINGS.trackSustainedConsequences.name",
-      scope: "world",
-      type: Boolean,
+      type: new fields.TypedObjectField(new fields.NumberField(), { expandKeys: false }),
     },
   },
   cone: {
@@ -173,29 +158,6 @@ export const settings = {
       type: Boolean,
     },
   },
-  gameContent: {
-    identifierSourcePriority: {
-      default: {
-        "teriock.abilities": 11,
-        "teriock.bodyParts": 9,
-        "teriock.classes": 7,
-        "teriock.creatures": 5,
-        "teriock.equipment": 8,
-        "teriock.essentials": 3,
-        "teriock.magicItems": 1,
-        "teriock.powers": 2,
-        "teriock.properties": 10,
-        "teriock.rules": 12,
-        "teriock.species": 6,
-        "teriock.templateEffects": 4,
-      },
-      hint: "TERIOCK.SETTINGS.identifierSourcePriority.hint",
-      name: "TERIOCK.SETTINGS.identifierSourcePriority.name",
-      requiresReload: true,
-      scope: "world",
-      type: new fields.TypedObjectField(new fields.NumberField(), { expandKeys: false }),
-    },
-  },
   gameMasterControls: {
     gmDocumentNotesJournalName: {
       default: "GM Document Notes",
@@ -203,6 +165,14 @@ export const settings = {
       name: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.name",
       scope: "world",
       type: String,
+    },
+    nonHierarchicalChanges: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
+      name: "TERIOCK.SETTINGS.nonHierarchicalChanges.name",
+      requiresReload: true,
+      scope: "world",
+      type: Boolean,
     },
     openChatDocuments: {
       default: false,
@@ -229,6 +199,13 @@ export const settings = {
       default: true,
       hint: "TERIOCK.SETTINGS.sortNewPlayerMacros.hint",
       name: "TERIOCK.SETTINGS.sortNewPlayerMacros.name",
+      scope: "world",
+      type: Boolean,
+    },
+    trackSustainedConsequences: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.trackSustainedConsequences.hint",
+      name: "TERIOCK.SETTINGS.trackSustainedConsequences.name",
       scope: "world",
       type: Boolean,
     },
@@ -377,6 +354,24 @@ export const settings = {
       scope: "client",
       type: Boolean,
     },
+    documentTooltips: {
+      default: Object.values(documents).filter((d) =>
+        foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.tooltip
+      ).map(d => d.documentName),
+      hint: "TERIOCK.SETTINGS.documentTooltips.hint",
+      name: "TERIOCK.SETTINGS.documentTooltips.name",
+      requiresReload: true,
+      scope: "client",
+      type: new fields.SetField(
+        new fields.StringField({
+          choices: Object.fromEntries(
+            Object.values(documents).filter((d) =>
+              foundry.utils.isSubclass(d, foundry.abstract.Document) && d.documentMetadata?.tooltip
+            ).map(d => d.documentName).map(n => [n, `DOCUMENT.${n}`]),
+          ),
+        }),
+      ),
+    },
     sidebarTooltips: {
       default: true,
       hint: "TERIOCK.SETTINGS.sidebarTooltips.hint",
@@ -392,15 +387,12 @@ export const settings = {
  * Register all settings and setting menus.
  */
 export function registerSettings() {
-  menus.AbilitySettingsMenu.registerMenu();
-  menus.ActorSettingsMenu.registerMenu();
-  menus.ArmamentSettingsMenu.registerMenu();
-  menus.AutomatedBehaviorMenu.registerMenu();
+  menus.DocumentBehaviorMenu.registerMenu();
   menus.AlternateRulesMenu.registerMenu();
   menus.DialogMenu.registerMenu();
   menus.DisplayMenu.registerMenu();
   menus.TipsMenu.registerMenu();
-  menus.GameContentMenu.registerMenu();
+  menus.CompendiumPriorityMenu.registerMenu();
   menus.GameMasterControlsMenu.registerMenu();
   for (const [k, d] of Object.entries(inheritedSettings)) { game.settings.register("teriock", k, d); }
   for (const s of Object.values(settings)) {

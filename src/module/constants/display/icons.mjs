@@ -215,7 +215,6 @@ export const icons = {
     automatedBehavior: "mdi-auto-fix",
     dialog: "mdi-script",
     display: "ms-display-settings",
-    gameContent: "mdi-flask",
     gameMasterControls: "mdi-crown",
     tips: "mdi-message-alert",
   },

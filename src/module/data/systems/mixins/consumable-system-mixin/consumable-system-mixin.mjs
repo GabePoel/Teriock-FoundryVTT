@@ -1,4 +1,5 @@
 import { EvaluationField } from "../../../fields/_module.mjs";
+import { documentSettingsModels } from "../../../models/_module.mjs";
 import { ChangeQuantityAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
 const { fields } = foundry.data;
@@ -42,6 +43,7 @@ export default function ConsumableSystemMixin(Base) {
           consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
           maxQuantity: new EvaluationField({ blank: Infinity, deterministic: true, floor: true, min: 0 }),
           quantity: new fields.NumberField({ initial: 1, integer: true, min: 0, nullable: false, placeholder: "0" }),
+          settings: new fields.EmbeddedDataField(documentSettingsModels.consumable),
         });
       }
 

@@ -87,11 +87,4 @@ export default class RollAutomation
       rollData: scope?.execution?.getRollData() ?? {},
     });
   }
-
-  /** @inheritDoc */
-  prepareData() {
-    if (this.document?.type === "ability" && game.settings.get("teriock", "rollImpactsOnUse") && !this.trigger) {
-      this.trigger = "execute";
-    }
-  }
 }
