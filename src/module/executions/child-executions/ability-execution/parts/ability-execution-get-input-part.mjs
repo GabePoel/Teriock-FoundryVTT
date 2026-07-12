@@ -75,6 +75,15 @@ export default function AbilityExecutionGetInputPart(Base) {
             getChoices: () => this.actor?.armaments.filter(a => a.active) ?? [],
             update: armament => this._updateArmament(armament),
           });
+          if (this.armament?.system.ammunition?.enabled) {
+            docs.push({
+              document: this.ammunition,
+              editable: true,
+              label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
+              getChoices: () => this.actor?.equipment.filter(e => e.active && e.system.consumable) ?? [],
+              update: ammunition => this.ammunition = ammunition,
+            });
+          }
         }
         return docs;
       }
@@ -91,6 +100,10 @@ export default function AbilityExecutionGetInputPart(Base) {
         paths.push("warded");
         if (this.source.system.maneuver === "reactive") { paths.push("usesReaction"); }
         paths.push("payCosts");
+        if (this.isContact) {
+          if (this.armament?.system.consumable) { paths.push("consumeEquipment"); }
+          if (this.armament?.system.ammunition?.enabled && this.ammunition) { paths.push("consumeAmmunition"); }
+        }
         return paths;
       }
 

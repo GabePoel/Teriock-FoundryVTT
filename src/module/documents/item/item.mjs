@@ -110,6 +110,9 @@ export default class TeriockItem
   /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
-    if (this.isTop) { this.applyActiveEffects(TERIOCK.config.change.defaultPhase); }
+    if (this.isTop) {
+      this.applyActiveEffects("setup");
+      this.applyActiveEffects(TERIOCK.config.change.defaultPhase);
+    }
   }
 }

@@ -35,13 +35,15 @@ export default class LongRestExecution extends ShortRestExecution {
   }
 
   /** @inheritDoc */
-  async _updateActor() {
+  async _performUpdates() {
+    const yes = await super._performUpdates();
+    if (yes === false) { return false; }
+
     await this.actor.system.partialReset({
       hp: this.restoreHp,
       hpDice: this.restoreHpDice,
       mp: this.restoreMp,
       mpDice: this.restoreMpDice,
     });
-    return super._updateActor();
   }
 }

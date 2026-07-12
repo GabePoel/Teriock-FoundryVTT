@@ -123,6 +123,7 @@ export const icons = {
     wither: "ms-hourglass-disabled",
   },
   equipment: {
+    ammunition: "mdi-arrow-projectile-multiple",
     dampen: "ms-notifications-off",
     equipmentClasses: "ms-flag",
     equipmentType: "ms-shapes",

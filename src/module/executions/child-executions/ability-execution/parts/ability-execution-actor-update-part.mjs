@@ -27,41 +27,80 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        * Prepare attack penalty.
        * @returns {Promise<void>}
        */
-      async _prepareAttackPenalty() {
+      async #prepareAttackPenalty() {
         if (this.isAttack && formulaExists(this.incurredAttackPenalty)) {
           this.attackPenalty = await BaseRoll.getValue(this.incurredAttackPenalty, this.getRollData());
         } else { this.attackPenalty = 0; }
       }
 
+      /**
+       * Prepare equipment to be consumed.
+       */
+      #prepareConsumption() {
+        if (this.isContact && this.consumeEquipment && this.armament?.system.consumable) {
+          this.operations.push({
+            action: "update",
+            documentName: "Item",
+            parent: this.armament.parent,
+            updates: [{
+              _id: this.armament.id,
+              system: { quantity: Math.max(0, this.armament.system.quantity - this.armament.system.consumptionAmount) },
+            }],
+          });
+        }
+        if (this.isContact && this.consumeAmmunition && this.ammunition?.system.consumable) {
+          this.operations.push({
+            action: "update",
+            documentName: "Item",
+            parent: this.ammunition.parent,
+            updates: [{
+              _id: this.ammunition.id,
+              system: {
+                quantity: Math.max(
+                  0,
+                  this.ammunition.system.quantity
+                    - (this.armament?.system.ammunition.consumptionAmount ?? this.ammunition.system.consumptionAmount),
+                ),
+              },
+            }],
+          });
+        }
+      }
+
+      /** @inheritDoc */
+      async _performUpdates() {
+        const yes = await super._performUpdates();
+        if (yes === false) { return false; }
+
+        if (this.actor && this.payCosts) {
+          for (const c of this.#paidCosts) {
+            const config = costConfig.primary.keys[c];
+            if (!config?.barStat) { await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]); }
+          }
+        }
+      }
+
       /** @inheritDoc */
       async _prepareUpdates() {
-        await this._prepareAttackPenalty();
+        await this.#prepareAttackPenalty();
+        this.#prepareConsumption();
         if (this.actor) {
           if (this.isAttack) {
-            this.updates["system.combat.attackPenalty"] = this.actor.system.combat.attackPenalty + this.attackPenalty;
+            this.actorUpdates["system.combat.attackPenalty"] = this.actor.system.combat.attackPenalty
+              + this.attackPenalty;
           }
-          if (this.usesReaction) { this.updates["system.combat.hasReaction"] = false; }
+          if (this.usesReaction) { this.actorUpdates["system.combat.hasReaction"] = false; }
           for (const c of this.#paidCosts) {
             const config = costConfig.primary.keys[c];
             if (config?.barStat) {
-              this.updates[`system.${c}.value`] = Math.max(
+              this.actorUpdates[`system.${c}.value`] = Math.max(
                 this.actor.system[c].value + (config?.multiplier ?? 1) * this.costs[c],
                 this.actor.system[c].min ?? 0,
               );
             }
           }
         }
-      }
-
-      /** @inheritDoc */
-      async _updateActor() {
-        if (this.actor && this.payCosts) {
-          for (const c of this.#paidCosts) {
-            const config = costConfig.primary.keys[c];
-            if (!config?.barStat) { await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]); }
-          }
-          if (Object.keys(this.updates).length > 0) { this.actor.update(this.updates); }
-        }
+        return super._prepareUpdates();
       }
     }
   );

@@ -76,12 +76,13 @@ export default class CommonOutcomesAutomation
   /** @inheritDoc */
   async _getActivations(options) {
     const activationOptions = {};
-    if (
-      foundry.utils.hasProperty(options, "execution.armament.uuid")
-      && foundry.utils.hasProperty(options, "execution.actor.uuid")
-    ) {
-      const uuid = foundry.utils.buildRelativeUuid(options.execution.armament, options.execution.actor);
-      foundry.utils.setProperty(activationOptions, "options.armament", uuid);
+    if (options?.execution?.armament?.uuid && options?.execution?.actor?.uuid) {
+      const armamentUuid = foundry.utils.buildRelativeUuid(options.execution.armament, options.execution.actor);
+      foundry.utils.setProperty(activationOptions, "options.armament", armamentUuid);
+      if (options?.execution?.ammunition?.uuid) {
+        const ammunitionUuid = foundry.utils.buildRelativeUuid(options.execution.ammunition, options.execution.actor);
+        foundry.utils.setProperty(activationOptions, "options.ammunition", ammunitionUuid);
+      }
     }
     const activationClasses = Object.values(activations);
     return Array.from(this.common).filter(Boolean).map(c => {

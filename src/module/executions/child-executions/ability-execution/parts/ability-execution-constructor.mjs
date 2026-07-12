@@ -10,6 +10,16 @@ const { fields } = foundry.data;
 /**
  * @extends {DocumentExecution}
  * @mixes ThresholdExecution
+ * @property {boolean} consumeAmmunition
+ * @property {boolean} consumeEquipment
+ * @property {number} existingAttackPenalty
+ * @property {Teriock.System.FormulaString} incurredAttackPenalty
+ * @property {boolean} payCosts
+ * @property {PiercingModel} piercing
+ * @property {boolean} sb
+ * @property {boolean} usesReaction
+ * @property {boolean} vitals
+ * @property {boolean} warded
  */
 export default class AbilityExecutionConstructor extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
   /** @inheritDoc */
@@ -18,6 +28,8 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      consumeAmmunition: new fields.BooleanField({ initial: true }),
+      consumeEquipment: new fields.BooleanField({ initial: false }),
       existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
       incurredAttackPenalty: new FormulaField({ deterministic: false, initial: "0" }),
       payCosts: new fields.BooleanField(),
@@ -134,6 +146,9 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
       || this.actor?.system?.combat?.offense?.warded;
     return this.source.system.isContact && armamentWarded ? true : Boolean(this.source.system.warded);
   }
+
+  /** @type {TeriockEquipment|null} */
+  ammunition;
 
   /** @type {TeriockArmament} */
   armament;
@@ -277,20 +292,24 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
    */
   _updateArmament(armament, options = {}) {
     this.armament = armament;
-    const sys = this.source.system;
     const changes = {
       incurredAttackPenalty: this.#resolveAttackPenalty(),
       "piercing.raw": this.#determinePiercing(options),
-      sb: Boolean(options.sb ?? ((this.armament && sys.isContact) ? this.actor?.system.offense.sb : 0)),
+      sb: Boolean(options.sb ?? ((this.armament && this.isContact) ? this.actor?.system.offense.sb : 0)),
       vitals: this.#resolveVitals(),
       warded: this.#resolveWarded(),
     };
-    if (this.isAttack && sys.isContact) {
+    if (this.isAttack && this.isContact) {
       changes.bonus = formulaExists(this.rootBonus) && formulaExists(armament?.system.hitBonus)
         ? addFormula(this.rootBonus, armament.system.hitBonus)
         : (formulaExists(armament?.system.hitBonus)
           ? armament.system.hitBonus
           : (formulaExists(this.rootBonus) ? this.rootBonus : "0"));
+    }
+    if (this.isContact && armament?.system.ammunition?.enabled) {
+      this.ammunition = this.actor?.equipment.find(e =>
+        e.active && e.system.consumable && (e.system.equipmentType === armament.system.ammunition.type)
+      );
     }
     this.updateSource(changes);
   }

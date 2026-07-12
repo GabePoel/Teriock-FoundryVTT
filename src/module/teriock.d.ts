@@ -1,6 +1,8 @@
 import { ForcedDeletion, ForcedReplacement } from "@common/data/operators.mjs";
 
 declare global {
+  // const TERIOCK: typeof import("./constants/_module.mjs");
+
   const __brand: unique symbol;
 
   const _del: () => ForcedDeletion;

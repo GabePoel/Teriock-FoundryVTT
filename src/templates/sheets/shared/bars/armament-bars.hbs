@@ -6,16 +6,14 @@
 }}
   <div class="ab-bar">
     {{formBox
-      system._source.damage.base
-      secondary=system._source.damage.twoHanded
+      sourceDamageString
       action=(ifThen editable "editArmamentDamage" "")
       icon=TERIOCK.display.icons.ui.damage
       include=(exists system.damage.base)
-      includeSecondary=system.hasTwoHandedAttack
-      unselected=system.damage.base
-      unselectedSecondary=system.damage.twoHanded
+      unselected=damageString
       label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.abbreviation")
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label")
+      overflow=true
     }}
     {{formBox
       (formInput

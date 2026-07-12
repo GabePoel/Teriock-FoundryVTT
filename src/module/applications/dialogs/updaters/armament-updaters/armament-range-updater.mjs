@@ -1,5 +1,6 @@
 import { BaseUpdater } from "../_module.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
+import { RangeModel } from "../../../../data/models/unit-models/_module.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 
 /**
@@ -13,6 +14,15 @@ export default class ArmamentRangeUpdater extends BaseUpdater {
   /** @inheritDoc */
   get _dataPaths() {
     return ["system.range.long.unit", "system.range.short.raw", "system.range.long.raw"];
+  }
+
+  /** @inheritDoc */
+  get _formPaths() {
+    const paths = ["system.range.long.unit"];
+    if (RangeModel.finiteChoiceEntries.some(e => e.id === this._currentData.system.range.long.unit)) {
+      paths.push(...["system.range.short.raw", "system.range.long.raw"]);
+    }
+    return paths;
   }
 
   /** @inheritDoc */

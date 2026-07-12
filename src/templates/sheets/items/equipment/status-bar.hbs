@@ -24,18 +24,17 @@
       value=system._source.equipmentType
       disabled=(not editable)
       placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"))
-    unselected=(getName system.equipmentType)
-    tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
     icon=TERIOCK.display.icons.equipment.equipmentType
+    tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
+    unselected=(getName system.equipmentType)
   }}
   {{formBox
-    (ifThen (eq system.range.long.unitType "finite") system.range.long.formula system.range.long.text)
-    secondary=(ifThen (eq system.range.short.unitType "finite") system.range.short.formula system.range.short.text)
+    rangeString
     action=(ifThen editable "editArmamentRange" "")
-    after=false
     icon=TERIOCK.display.icons.ability.range
-    includeSecondary=(exists system._source.range.short.raw)
     label=(ifThen (eq system.range.long.unitType "finite") system.range.long.symbol "")
+    overflow=true
     tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.range.long.raw.label")
+    unselected=sourceRangeString
   }}
 </div>

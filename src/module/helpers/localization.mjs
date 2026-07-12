@@ -116,6 +116,7 @@ export function localizeObject(obj, { keys } = {}) {
 }
 
 /**
+ * Format strings in a list.
  * @param {Iterable<string>} strings
  * @param {Intl.ListFormatOptions} options
  * @param {boolean} [options.sort]
@@ -126,4 +127,21 @@ export function listFormat(strings, options) {
   const arr = Array.from(strings);
   if (options.sort) { arr.sort((a, b) => a.localeCompare(b)); }
   return game.i18n.getListFormatter(options).format(arr);
+}
+
+/**
+ * Format primary and secondary strings.
+ * @param {string} primary
+ * @param {string} secondary
+ * @param {object} [options]
+ * @param {boolean} [options.reverse]
+ * @param {(string) => boolean} [options.secondFilter]
+ * @returns {*|string}
+ */
+export function secondaryFormat(primary, secondary, options = {}) {
+  const secondFilter = options.secondFilter ?? (() => true);
+  if (secondary === primary || !secondFilter(secondary)) { return primary; }
+  const first = options.reverse ? secondary : primary;
+  const second = options.reverse ? primary : secondary;
+  return _loc("TERIOCK.FORMAT.secondary", { first, second });
 }

@@ -91,8 +91,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @type {Teriock.Activations.Any[]} */
   activations = [];
 
+  /** @type {object} */
+  actorUpdates = {};
+
   /** @type {TeriockChatMessage|undefined} */
   message;
+
+  /** @type {DatabaseWriteOperation[]} */
+  operations = [];
 
   /** @type {Teriock.Panels.PanelParts[]} */
   panels = [];
@@ -102,9 +108,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
 
   /** @type {string[]} */
   tags = [];
-
-  /** @type {object} */
-  updates = {};
 
   /**
    * Buttons displayed in this execution's input dialog.
@@ -395,6 +398,14 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   }
 
   /**
+   * Perform all staged update operations.
+   * @returns {Promise<false|void>}
+   */
+  async _performUpdates() {
+    if (this.operations.length) { await foundry.documents.modifyBatch(this.operations); }
+  }
+
+  /**
    * The end of the execution.
    * @returns {Promise<false|void>}
    */
@@ -436,10 +447,19 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   }
 
   /**
-   * Prepare updates that will be applied to the actor.
+   * Prepare updates that will be applied.
    * @returns {Promise<false|void>}
    */
-  async _prepareUpdates() {}
+  async _prepareUpdates() {
+    if (this.actor && Object.keys(this.actorUpdates).length) {
+      this.operations.push({
+        action: "update",
+        documentName: "Actor",
+        parent: this.actor?.parent,
+        updates: [{ _id: this.actor.id, ...this.actorUpdates }],
+      });
+    }
+  }
 
   /**
    * Show an input dialog to configure this execution before it resolves.
@@ -449,14 +469,6 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     if (!this.showDialog) { return; }
     const result = await ExecutionEditor.prompt(this);
     if (result === null) { return false; }
-  }
-
-  /**
-   * Update the actor with any costs or other changes as a result of this execution.
-   * @returns {Promise<false|void>}
-   */
-  async _updateActor() {
-    if (this.actor && Object.keys(this.updates).length > 0) { await this.actor.update(this.updates); }
   }
 
   /**
@@ -476,7 +488,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     if ((await this._preExecute()) === false) { return false; }
     if ((await this._createChatMessage()) === false) { return false; }
     if ((await this._prepareUpdates()) === false) { return false; }
-    if ((await this._updateActor()) === false) { return false; }
+    if ((await this._performUpdates()) === false) { return false; }
     if ((await this._postExecute()) === false) { return false; }
   }
 

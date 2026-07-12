@@ -64,6 +64,7 @@ declare global {
     export type StatusOptions = UseOptions & { status?: Teriock.Keys.Condition };
 
     export type StandardDamageOptions = UseOptions & {
+      ammunition?: UUID<TeriockEquipment>;
       armament?: UUID<TeriockArmament>;
       crit?: boolean;
       select?: boolean;

@@ -14,6 +14,9 @@ async function use(actor, options = {}) {
     const newAttacker = await foundry.utils.fromUuid(options.armament, { relative: actor });
     if (newAttacker) { attacker = newAttacker; }
   }
+  if (typeof options.ammunition === "string") {
+    options.ammunition = await foundry.utils.fromUuid(options.ammunition, { relative: actor });
+  }
   if (options.select) {
     const selOpts = { noDocumentsMessage: "TERIOCK.DIALOGS.Common.ERRORS.noRelevantItems" };
     if (attacker?.uuid) { selOpts.checked = attacker.uuid; }

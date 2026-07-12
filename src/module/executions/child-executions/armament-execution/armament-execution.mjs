@@ -10,6 +10,10 @@ const { fields } = foundry.data;
  * @implements {Teriock.Execution.ArmamentExecutionInterface}
  * @mixes ImpactsExecution
  * @param {HarmRoll[]} rolls
+ * @property {boolean} dealImpacts
+ * @property {boolean} secret
+ * @property {boolean} twoHanded
+ * @property {boolean} useAbilities
  */
 export default class ArmamentExecution extends executionMixins.ImpactsExecutionMixin(DocumentExecution) {
   /** @inheritDoc */
@@ -132,6 +136,14 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
     if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
   }
 
+  /**
+   * Ready an updated formula.
+   * @returns {Teriock.System.FormulaString}
+   */
+  _readyUpdatedFormula() {
+    return this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base;
+  }
+
   /** @inheritDoc*/
   getScope(scope = {}) {
     return Object.assign(super.getScope(scope), { armament: this.source });
@@ -140,8 +152,8 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
   /** @inheritDoc */
   updateSource(changes = {}, options = {}) {
     const diff = super.updateSource(changes, options);
-    if (("twoHanded" in diff) && !options.dryRun) {
-      const formula = this.twoHanded ? this.source.system.damage.twoHanded : this.source.system.damage.base;
+    if (("twoHanded" in diff)) {
+      const formula = this._readyUpdatedFormula();
       Object.assign(diff, super.updateSource({ dealImpacts: formulaExists(formula), formula }, options));
     }
     return diff;

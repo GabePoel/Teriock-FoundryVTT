@@ -139,13 +139,21 @@ export default class DocumentExecution extends BaseExecution {
   }
 
   /** @inheritDoc */
-  async _postExecute() {
+  async _prepareUpdates() {
+    const yes = await super._prepareUpdates();
+    if (yes === false) { return false; }
+
     if (this.source.system.consumable && this.consumeUses) {
-      this.source.update({
-        "system.quantity": Math.max(0, this.source.system.quantity - this.source.system.consumptionAmount),
+      this.operations.push({
+        action: "update",
+        documentName: this.source.documentName,
+        parent: this.source.parent,
+        updates: [{
+          _id: this.source.id,
+          system: { quantity: Math.max(0, this.source.system.quantity - this.source.system.consumptionAmount) },
+        }],
       });
     }
-    await super._postExecute();
   }
 
   /** @inheritDoc */

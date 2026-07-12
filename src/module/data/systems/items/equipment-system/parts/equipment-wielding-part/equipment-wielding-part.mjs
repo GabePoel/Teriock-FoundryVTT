@@ -1,5 +1,6 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
 import { makeIcon } from "../../../../../../helpers/icon.mjs";
+import { IdentifierField } from "../../../../../fields/_module.mjs";
 import { initialBoolean } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -20,6 +21,11 @@ export default function EquipmentWieldingPart(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          ammunition: new fields.SchemaField({
+            consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
+            enabled: initialBoolean(),
+            type: new IdentifierField({ type: "equipment" }),
+          }),
           equipped: new fields.BooleanField({ initial: false }),
           glued: initialBoolean(),
           minStr: new fields.NumberField({ initial: -3, integer: true, min: -3 }),

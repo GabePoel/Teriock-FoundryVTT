@@ -1,3 +1,4 @@
+import changeConfig from "../constants/config/change-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
 import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
@@ -25,9 +26,9 @@ declare global {
 
     export type ChildChangePathEntry = {
       forExecution?: boolean;
-      group: keyof typeof TERIOCK.config.change.child.groups;
+      group: keyof typeof changeConfig.child.groups;
       label: string;
-      targets: (keyof typeof TERIOCK.config.change.child.targets)[];
+      targets: (keyof typeof changeConfig.child.targets)[];
       types?: Teriock.Changes.Type[];
     };
 
@@ -37,7 +38,7 @@ declare global {
       collection?: string;
       icon: string;
       identifierType?: string;
-      index?: keyof typeof TERIOCK.index;
+      index?: string;
       packs: string[];
       parentKey: string;
       type: string;

@@ -295,7 +295,7 @@ export default function ArmamentSystemMixin(Base) {
        * @returns {boolean}
        */
       get hasTwoHandedAttack() {
-        return formulaExists(this.damage.twoHanded) && this.damage.twoHanded !== this.damage.base;
+        return formulaExists(this.damage.twoHanded) && (this.damage.twoHanded !== this.damage.base);
       }
 
       /**
