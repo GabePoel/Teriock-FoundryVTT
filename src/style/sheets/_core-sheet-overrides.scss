@@ -1,0 +1,46 @@
+// Modify core Foundry document sheets to make them match Teriock styles
+@use "../mixins" as mixins;
+
+.roll-table-sheet .flexrow .image img {
+  @include mixins.image-border(4px, 0.3, 3px);
+  @include mixins.warm-image-background;
+}
+
+.cards-config,
+.macro-config,
+.roll-table-sheet,
+.active-effect-config {
+  .sheet-header {
+    input {
+      @include mixins.title-text-styling;
+      @include mixins.sheet-entry-hover;
+    }
+
+    img {
+      @include mixins.image-border(12px, 0.5, 5px);
+      @include mixins.warm-image-background;
+    }
+  }
+}
+
+.active-effect-config .sheet-header {
+  padding-bottom: 1em;
+}
+
+.cards-config.deck,
+.macro-config,
+.active-effect-config {
+  header {
+    input {
+      @include mixins.title-text-spacing(calc(64px + 1rem));
+    }
+  }
+}
+
+.cards-config:not(.deck) {
+  header {
+    input {
+      @include mixins.title-text-spacing(0);
+    }
+  }
+}

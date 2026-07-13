@@ -1,25 +1,25 @@
-<div class="character-mana-bar-container character-bar-container">
-  <div class="character-mana-bar character-bar toutline">
-    <div class="character-bar-left" style="width: {{ bars.mp.remaining }}%;"></div>
+<div class="actor-mana-bar-container actor-bar-container">
+  <div class="actor-mana-bar actor-bar toutline">
+    <div class="actor-bar-left" style="width: {{ bars.mp.remaining }}%;"></div>
     <div
-      class="character-bar-temp"
+      class="actor-bar-temp"
       style="width: {{ bars.mp.temp }}%; {{barTempHide system.mp.value system.mp.max system.mp.temp system.mp.morganti}}"
     ></div>
-    <div class="character-bar-lost" style="width: {{ bars.mp.lost }}%;"></div>
-    <div class="character-bar-morganti" style="width: {{ bars.mp.morganti }}%;"></div>
+    <div class="actor-bar-lost" style="width: {{ bars.mp.lost }}%;"></div>
+    <div class="actor-bar-morganti" style="width: {{ bars.mp.morganti }}%;"></div>
   </div>
-  <div class="character-bar-overlay" data-action="toggleStatDrawer" data-stat="mp">
-    <div class="character-bar-overlay-row character-mana-bar-overlay-row">
+  <div class="actor-bar-overlay" data-action="toggleStatDrawer" data-stat="mp">
+    <div class="actor-bar-overlay-row actor-mana-bar-overlay-row">
       {{numberInput
         system.mp.value
         name="system.mp.value"
         max=system.mp.max
         min=system.mp.min
-        class="thover-soft character-bar-overlay-left character-bar-overlay-label"
+        class="thover-soft actor-bar-overlay-left actor-bar-overlay-label"
         dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.current"))
       }}
       <div
-        class="character-bar-overlay-max character-bar-overlay-label"
+        class="actor-bar-overlay-max actor-bar-overlay-label"
         data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.max"}}'
       >
         <span>/ {{ system.mp.max }} +</span>
@@ -27,7 +27,7 @@
       {{formInput
         systemFields.mp.fields.temp
         value=system.mp.temp
-        classes="thover-soft character-bar-overlay-temp character-bar-overlay-label"
+        classes="thover-soft actor-bar-overlay-temp actor-bar-overlay-label"
         dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.mp.temp"))
       }}
     </div>

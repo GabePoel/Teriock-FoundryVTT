@@ -1,5 +1,6 @@
 import { icons } from "../../../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../../../helpers/icon.mjs";
+import { toKebabCase } from "../../../../../helpers/string.mjs";
 
 /**
  * @param {typeof BaseActorSheet} Base
@@ -80,13 +81,16 @@ export default function MechanicalActorSheetPart(Base) {
 
       /**
        * Toggles a condition.
-       * @param {PointerEvent} _event - The event object.
+       * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
        */
-      static async #onToggleCondition(_event, target) {
-        const conditionKey = target.dataset.condition;
-        await this.document.toggleStatusEffect(conditionKey);
+      static async #onToggleCondition(event, target) {
+        if (event.button === 0) { await this.document.toggleStatusEffect(target.dataset.condition); }
+        if (event.button === 2) {
+          const document = await teriock.fromIdentifier(`condition:${toKebabCase(target.dataset.condition)}`);
+          await document?.sheet.render(true);
+        }
       }
 
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -99,7 +103,7 @@ export default function MechanicalActorSheetPart(Base) {
           takeDusk: this.#onTakeDusk,
           takeLongRest: this.#onTakeLongRest,
           takeShortRest: this.#onTakeShortRest,
-          toggleCondition: this.#onToggleCondition,
+          toggleCondition: { buttons: [0, 2], handler: this.#onToggleCondition },
         },
         window: {
           controls: [{

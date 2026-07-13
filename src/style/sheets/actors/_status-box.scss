@@ -1,11 +1,11 @@
 @use "../../components/colors" as colors;
 @use "../../mixins" as mixins;
 
-.character-status-box {
+.actor-status-box {
   @include mixins.centralize;
   flex-direction: column;
 
-  .character-status-bars {
+  .actor-status-bars {
     display: flex;
     flex-direction: column;
     gap: 1em;
@@ -13,25 +13,25 @@
   }
 }
 
-.character-bar-container {
+.actor-bar-container {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   position: relative;
 
-  .character-bar {
+  .actor-bar {
     border-radius: 6px;
     display: flex;
     flex-direction: row;
     height: 3em;
     overflow: hidden;
 
-    &.character-hit-bar {
+    &.actor-hit-bar {
       border: 2px solid colors.$hp-red;
 
-      .character-bar-left {
+      .actor-bar-left {
         background-color: colors.$hp-red;
       }
 
-      .character-bar-temp {
+      .actor-bar-temp {
         background-image: repeating-linear-gradient(
           135deg,
           colors.$hp-red 0px,
@@ -42,23 +42,23 @@
         border-right: 2px solid colors.$hp-red;
       }
 
-      .character-bar-lost {
+      .actor-bar-lost {
         background: linear-gradient(90deg, colors.$hp-red-faint, colors.$hp-red-darkest);
       }
 
-      .character-bar-morganti {
+      .actor-bar-morganti {
         background: linear-gradient(90deg, black, colors.$hp-red-drawer);
       }
     }
 
-    &.character-mana-bar {
+    &.actor-mana-bar {
       border: 2px solid colors.$mp-blue;
 
-      .character-bar-left {
+      .actor-bar-left {
         background-color: colors.$mp-blue;
       }
 
-      .character-bar-temp {
+      .actor-bar-temp {
         background-image: repeating-linear-gradient(
           135deg,
           colors.$mp-blue 0px,
@@ -69,23 +69,23 @@
         border-right: 2px solid colors.$mp-blue;
       }
 
-      .character-bar-lost {
+      .actor-bar-lost {
         background: linear-gradient(90deg, colors.$mp-blue-faint, colors.$mp-blue-darkest);
       }
 
-      .character-bar-morganti {
+      .actor-bar-morganti {
         background: linear-gradient(90deg, black, colors.$mp-blue-drawer);
       }
     }
 
-    &.character-lifespan-bar {
+    &.actor-lifespan-bar {
       border: 2px solid colors.$lp-grey;
 
-      .character-bar-left {
+      .actor-bar-left {
         background-color: colors.$lp-grey;
       }
 
-      .character-bar-temp {
+      .actor-bar-temp {
         background-image: repeating-linear-gradient(
           135deg,
           colors.$lp-grey 0px,
@@ -96,20 +96,20 @@
         border-right: 2px solid colors.$lp-grey;
       }
 
-      .character-bar-lost {
+      .actor-bar-lost {
         background: linear-gradient(90deg, colors.$lp-grey-faint, colors.$lp-grey-darkest);
       }
     }
 
-    .character-bar-left,
-    .character-bar-temp,
-    .character-bar-lost {
+    .actor-bar-left,
+    .actor-bar-temp,
+    .actor-bar-lost {
       flex: none;
       height: 3em;
     }
   }
 
-  .character-bar-overlay {
+  .actor-bar-overlay {
     align-content: center;
     bottom: 0;
     left: 0;
@@ -117,7 +117,7 @@
     right: 0;
     top: 0;
 
-    .character-bar-overlay-row {
+    .actor-bar-overlay-row {
       align-items: center;
       display: flex;
       flex-direction: row;
@@ -135,7 +135,7 @@
         }
       }
 
-      .character-bar-overlay-label {
+      .actor-bar-overlay-label {
         align-items: center;
         background-color: transparent;
         box-shadow: none;
@@ -146,13 +146,13 @@
         height: var(--input-height);
       }
 
-      .character-bar-overlay-left {
+      .actor-bar-overlay-left {
         margin-left: 0.25em;
         text-align: right;
         width: 2em;
       }
 
-      .character-bar-overlay-temp {
+      .actor-bar-overlay-temp {
         text-align: left;
         width: 2em;
       }

@@ -1,15 +1,15 @@
-<div class="character-tab notes">
+<div class="actor-tab notes">
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Details.title"}}</h1>
-  <div class="character-tab-page">
+  <div class="actor-tab-page">
     <div class="tgrid g2" style="gap: 1em;">
       <div class="teriock-block-display">
         <div
-          class="character-shortbox character-movement-box"
+          class="actor-shortbox actor-movement-box"
           data-tooltip-identifier="core:movement-speed"
           data-tooltip-direction="LEFT"
         >
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.label"}}</div>
-          <div class="character-shortbox-value">
+          <div class="actor-shortbox-value">
             {{{ system.movementSpeed }}}
             {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate"}}
           </div>
@@ -85,7 +85,7 @@
         <div class="teriock-block-display" style="padding-top: 0.75em;">
           <div class="carrying-box-main" data-tooltip-identifier="core:size" style="display: flex; flex-direction: row;"
           >
-            <div class="character-shortbox character-size-box">
+            <div class="actor-shortbox actor-size-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.label"}}</div>
               <div
                 class="
@@ -98,11 +98,11 @@
                 "
               >
                 <div class="unselected">
-                  <span class="character-size-input character-smallbox-value">{{{ system.size.number }}}</span>
+                  <span class="actor-size-input actor-smallbox-value">{{{ system.size.number }}}</span>
                 </div>
                 {{formInput
                   systemFields.size.fields.number
-                  classes="character-size-input character-smallbox-value selected transparent-input"
+                  classes="actor-size-input actor-smallbox-value selected transparent-input"
                   context="actor"
                   dataset=(object
                     tooltip=(localize
@@ -115,15 +115,15 @@
                 }}
               </div>
             </div>
-            <div class="character-shortbox character-weight-box">
+            <div class="actor-shortbox actor-weight-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.label"}}</div>
               <div class="affix">
                 <div class="unselected">
-                  <span class="character-weight-input character-smallbox-value">{{{ system.weight.self }}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}</span>
+                  <span class="actor-weight-input actor-smallbox-value">{{{ system.weight.self }}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}</span>
                 </div>
                 {{formInput
                   systemFields.weight.fields.self
-                  classes="character-weight-input character-smallbox-value selected transparent-input"
+                  classes="actor-weight-input actor-smallbox-value selected transparent-input"
                   context="actor"
                   dataset=(object
                     tooltip=(localize
@@ -136,10 +136,10 @@
                 }}
               </div>
             </div>
-            <div class="character-shortbox character-carrying-box">
+            <div class="actor-shortbox actor-carrying-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.label"}}</div>
               <div
-                class="character-smallbox-value tcenter"
+                class="actor-smallbox-value tcenter"
                 data-tooltip-class=""
                 data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.includingSelf" value=system.weight.value}}'
                 data-tooltip-direction="DOWN"
@@ -205,11 +205,11 @@
       </div>
       <div class="teriock-block-display" style=" padding-bottom: 0.25em; padding-top: 0.75em;">
         <div class="tgrid g2">
-          <div class="character-shortbox" data-tooltip-identifier="keyword:curse" data-tooltip-direction="LEFT">
+          <div class="actor-shortbox" data-tooltip-identifier="keyword:curse" data-tooltip-direction="LEFT">
             <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
             <div
               class="
-                character-smallbox-value
+                actor-smallbox-value
                 tcenter
                 affix
                 {{#if (and
@@ -235,11 +235,11 @@
               }}
             </div>
           </div>
-          <div class="character-shortbox">
+          <div class="actor-shortbox">
             <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.rotators.label"}}</div>
             <div
               class="
-                character-smallbox-value
+                actor-smallbox-value
                 tcenter
                 affix
                 {{#if (and
@@ -268,27 +268,27 @@
         </div>
       </div>
       <div class="teriock-block-display" style="flex-direction: row; padding-bottom: 0.25em; padding-top: 0.75em;">
-        <div class="character-shortbox">
+        <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}</div>
           {{formInput
             systemFields.detection.fields.hiding
             value=system._source.detection.hiding
-            classes="character-detection-input character-smallbox-value selected transparent-input"
+            classes="actor-detection-input actor-smallbox-value selected transparent-input"
             placeholder=system.attributes.snk.passive
           }}
         </div>
-        <div class="character-shortbox">
+        <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}</div>
           {{formInput
             systemFields.detection.fields.perceiving
             value=system._source.detection.perceiving
-            classes="character-detection-input character-smallbox-value selected transparent-input"
+            classes="actor-detection-input actor-smallbox-value selected transparent-input"
             placeholder=system.attributes.per.passive
           }}
         </div>
       </div>
     </div>
-    <div class="teriock-block-display character-notes-content">
+    <div class="teriock-block-display actor-notes-content">
       <prose-mirror name="system.notes" value="{{ system.notes }}" toggled="true" editable="editable">
         {{#if (exists enrichedNotes)}}
           {{{ enrichedNotes }}}

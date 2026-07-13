@@ -38,7 +38,7 @@ export default class TeriockPlayableActorSheet
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     all: {
-      scrollable: [".character-sidebar", ".character-tab-content"],
+      scrollable: [".actor-sidebar", ".actor-tab-content"],
       template: "systems/teriock/src/templates/sheets/actors/playable/playable.hbs",
     },
   };

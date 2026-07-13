@@ -1,23 +1,11 @@
-<nav class="character-tabbers">
+<nav class="actor-tabbers">
   {{#each tabs as |tab|}}
     {{#if (eq tab.group "primary")}}
-      <div
-        class="character-tabber ui-controls {{tabActive @root/activeTab tab.id}} attached-tab"
-        data-action="changeTab"
-        data-tab="{{ tab.id }}"
-        data-tooltip="{{ tab.label }}"
-        data-tooltip-direction="RIGHT"
-      >
-        {{makeIcon tab.icon "solid"}}
+      <div class="actor-tabber-container attached-tab" data-tooltip="{{ tab.label }}" data-tooltip-direction="RIGHT">
+        <button id='{{concat @root/appId tab.id "attached"}}' class="actor-tabber ui-controls {{tabActive @root/activeTab tab.id}} attached-tab" data-action="changeTab" data-tab="{{ tab.id }}" type="button">{{makeIcon tab.icon "solid"}}</button>
       </div>
-      <div
-        class="character-tabber ui-controls {{tabActive @root/activeTab tab.id}} detached-tab"
-        data-action="changeTab"
-        data-tab="{{ tab.id }}"
-        data-tooltip="{{ tab.label }}"
-        data-tooltip-direction="LEFT"
-      >
-        {{makeIcon tab.icon "solid"}}
+      <div class="actor-tabber-container detached-tab">
+        <button id='{{concat @root/appId tab.id "detached"}}' class="actor-tabber ui-controls {{tabActive @root/activeTab tab.id}} detached-tab" data-action="changeTab" data-tab="{{ tab.id }}" data-tooltip-direction="LEFT" data-tooltip="{{ tab.label }}" type="button">{{makeIcon tab.icon "solid"}}</button>
       </div>
     {{/if}}
   {{/each}}

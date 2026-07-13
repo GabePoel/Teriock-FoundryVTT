@@ -29,7 +29,7 @@ export default class BaseActorSheet
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { classes: ["unpadded", "character"], form: { submitOnChange: true } };
+  static DEFAULT_OPTIONS = { classes: ["unpadded", "actor"], form: { submitOnChange: true } };
 
   /**
    * Per-document-type block display defaults applied to the preview models.

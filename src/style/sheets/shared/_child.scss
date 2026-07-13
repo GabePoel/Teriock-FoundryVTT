@@ -1,23 +1,12 @@
-@use "../mixins" as mixins;
+@use "../../mixins" as mixins;
 
-.ab-sheet-sidebar {
-  backdrop-filter: blur(4px);
-  background-color: rgba(255, 255, 255, 0.3);
-  display: none;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.ab-sheet-top {
+.teriock-sheet-top {
   background-color: var(--color-sheet-header-background);
   box-shadow: 0 0 30px var(--color-sheet-header-shadow);
   width: 100%;
 }
 
-.ab-header {
+.teriock-sheet-header {
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -28,7 +17,7 @@
     @include mixins.shatter-background;
   }
 
-  .ab-profile-img {
+  .teriock-sheet-profile-img {
     flex: 0 0 auto;
     @include mixins.simple-two-layer-image(64px, 12px, 0.5, 5px);
     left: 0;
@@ -55,14 +44,13 @@
     }
   }
 
-  .ab-title {
+  .teriock-sheet-title {
     flex: 1 1 auto;
     --font-h1: "Modesto Condensed";
     min-width: 0;
     padding-inline: 0.5em;
 
-    input,
-    .ab-title-text {
+    input {
       font-size: clamp(1rem, 4vw, 2rem);
       font-weight: lighter;
       height: 100%;
@@ -79,7 +67,7 @@
     }
   }
 
-  .ab-competence {
+  .teriock-sheet-competence {
     @include mixins.centralize;
     height: 1.25em;
     position: absolute;
@@ -89,16 +77,16 @@
   }
 }
 
-.ab-bars {
+.teriock-sheet-bars {
   border-bottom: 1px solid var(--color-bar-border);
 
-  .ab-bar {
+  .teriock-sheet-bar {
     border-top: 1px solid var(--color-bar-border);
     display: flex;
     flex-direction: row;
     justify-content: center;
 
-    .ab-box-container {
+    .teriock-sheet-box-container {
       flex: 1;
       min-width: 0;
       position: relative;
@@ -116,7 +104,7 @@
         width: 1px;
       }
 
-      .ab-box {
+      .teriock-sheet-box {
         align-items: center;
         border: 1px solid transparent;
         border-radius: 3px;
@@ -130,7 +118,7 @@
         padding: 0.25em;
         position: relative;
 
-        .ab-box-icon {
+        .teriock-sheet-box-icon {
           display: block;
           height: 1em;
           left: 0.25em;
@@ -151,7 +139,7 @@
           }
         }
 
-        .ab-box-label {
+        .teriock-sheet-box-label {
           @include mixins.text-subtle;
           height: 1em;
           position: absolute;
@@ -166,7 +154,7 @@
           box-shadow: 0 0 5px var(--color-shadow-primary);
         }
 
-        .ab-box-content {
+        .teriock-sheet-box-content {
           @include mixins.centralize;
           cursor: pointer;
           flex-direction: row;
@@ -178,27 +166,9 @@
           white-space: nowrap;
           width: 100%;
 
-          &.ab-text-content {
+          &.teriock-sheet-text-content {
             display: block;
             max-width: unset;
-          }
-        }
-
-        .ab-split-input {
-          :first-child {
-            text-align: right;
-
-            input {
-              text-align: right;
-            }
-          }
-
-          :last-child {
-            text-align: left;
-
-            input {
-              text-align: left;
-            }
           }
         }
       }
@@ -254,7 +224,7 @@
   }
 }
 
-.ab-menu {
+.teriock-sheet-menu {
   @include mixins.collapsible;
   @include mixins.collapsible-open;
   background-color: color-mix(in srgb, var(--color-sheet-header-background), transparent 30%);
@@ -270,7 +240,7 @@
     padding-block: 0;
   }
 
-  .ab-menu-content {
+  .teriock-sheet-menu-content {
     @include mixins.collapsible-content;
     align-items: center;
     display: flex;
@@ -278,7 +248,7 @@
     gap: 0.5em;
     width: 100%;
 
-    .ab-menu-bar {
+    .teriock-sheet-menu-bar {
       width: 100%;
 
       .tgrid-item:has(select) {
@@ -299,17 +269,7 @@
         }
       }
 
-      .ab-menu-item {
-        @include mixins.centralize;
-        flex-direction: row;
-
-        input {
-          margin-bottom: 0;
-          margin-top: 0;
-        }
-      }
-
-      .ab-multi-select-label {
+      .teriock-sheet-multi-select-label {
         gap: unset;
         width: 100%;
       }
@@ -317,7 +277,7 @@
   }
 }
 
-.ab-multi-select-label {
+.teriock-sheet-multi-select-label {
   width: 100%;
 
   label {
@@ -330,12 +290,12 @@
   }
 }
 
-.tab.children .ab-main {
+.tab.children .teriock-sheet-main {
   margin-inline: 0;
   width: 100%;
 }
 
-.ab-main {
+.teriock-sheet-main {
   background-color: var(--color-block-display-background);
   border: 1px solid var(--color-block-container-border);
   border-radius: 9px;
@@ -347,43 +307,43 @@
   padding: 0.5em;
   width: calc(100% - 2em);
 
-  .ab-tags-all {
+  .teriock-sheet-tags-all {
     display: grid;
     gap: 0.25em;
 
-    .ab-tags-container {
+    .teriock-sheet-tags-container {
       width: 100%;
 
-      .ab-tags {
+      .teriock-sheet-tags {
         display: block;
 
-        .ab-menu-icons {
+        .teriock-sheet-menu-icons {
           display: flex;
           flex-direction: row;
           float: right;
           margin-bottom: 0;
           margin-left: 0.25em;
 
-          .ab-menu-toggle {
+          .teriock-sheet-menu-toggle {
             background: transparent;
             border: none;
             cursor: pointer;
             padding: 0;
 
-            .ab-menu-closed-container {
+            .teriock-sheet-menu-closed-container {
               display: flex;
             }
 
-            .ab-menu-open-container {
+            .teriock-sheet-menu-open-container {
               display: none;
             }
 
-            &.ab-menu-toggle-open {
-              .ab-menu-closed-container {
+            &.teriock-sheet-menu-toggle-open {
+              .teriock-sheet-menu-closed-container {
                 display: none;
               }
 
-              .ab-menu-open-container {
+              .teriock-sheet-menu-open-container {
                 display: flex;
               }
             }
@@ -404,7 +364,7 @@
           }
         }
 
-        .ab-tag {
+        .teriock-sheet-tag {
           @include mixins.tag-style;
           display: inline-block;
           margin: 0.125em 0.125em 0.25em;
@@ -418,7 +378,7 @@
     }
   }
 
-  .ab-section-container {
+  .teriock-sheet-section-container {
     &.faded {
       opacity: 0.5;
     }
@@ -433,7 +393,7 @@
   }
 }
 
-.ab-primary {
+.teriock-sheet-primary {
   margin-block: 1em;
 }
 
@@ -443,7 +403,7 @@
   gap: 1em;
 }
 
-.ab-icon {
+.teriock-sheet-icon {
   border-radius: 6px;
   cursor: pointer;
   display: grid;
@@ -480,22 +440,22 @@
   }
 }
 
-.ab-check-grid,
-.ab-select-grid {
+.teriock-sheet-check-grid,
+.teriock-sheet-select-grid {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.ab-select-grid {
+.teriock-sheet-select-grid {
   align-items: start;
 }
 
-.ab-button-grid {
+.teriock-sheet-button-grid {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
 @container (max-width: 349px) {
-  .ab-header {
-    .ab-profile-img {
+  .teriock-sheet-header {
+    .teriock-sheet-profile-img {
       @include mixins.simple-two-layer-image(20px, 12px, 0.5, 2px);
       border-radius: 2px;
       left: 6px;
@@ -506,11 +466,10 @@
       width: 20px;
     }
 
-    .ab-title {
+    .teriock-sheet-title {
       height: 2.5em;
       padding: 0.25em;
 
-      .ab-title-text,
       input {
         font-size: 1em;
         font-weight: bold;
@@ -521,17 +480,17 @@
       }
     }
 
-    .ab-competence {
+    .teriock-sheet-competence {
       right: 0.75em;
       top: 0.75em;
     }
   }
 
-  .ab-bars {
-    .ab-bar {
+  .teriock-sheet-bars {
+    .teriock-sheet-bar {
       flex-direction: column;
 
-      .ab-box-container {
+      .teriock-sheet-box-container {
         &:not(:last-child)::after {
           bottom: 0;
           height: 1px;
@@ -545,25 +504,14 @@
     }
   }
 
-  .ab-check-grid,
-  .menu-small-grid {
+  .teriock-sheet-check-grid {
     grid-template-columns: 1fr 1fr !important;
   }
 
-  .ab-select-grid,
-  .ab-button-grid,
+  .teriock-sheet-select-grid,
+  .teriock-sheet-button-grid,
   .menu-large-grid {
     grid-template-columns: 1fr !important;
-  }
-}
-
-@container (max-width: 249px) {
-  .ab-main {
-    .ab-section-container {
-      .ab-section-title.ab-section-title-dynamic {
-        width: min-content;
-      }
-    }
   }
 }
 
@@ -600,7 +548,7 @@
   top: 0;
 }
 
-.ab-sheet-everything {
+.teriock-sheet-everything {
   height: 100%;
   max-height: 100%;
   overflow: auto;

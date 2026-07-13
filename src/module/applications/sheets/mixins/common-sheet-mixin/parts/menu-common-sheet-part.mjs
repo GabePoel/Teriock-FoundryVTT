@@ -44,8 +44,11 @@ export default function MenuCommonSheetPart(Base) {
        */
       toggleMenu(state) {
         this._menuOpen = state ?? !this._menuOpen;
-        this.element.querySelector(".ab-menu")?.classList.toggle("collapsed", !this._menuOpen);
-        this.element.querySelector(".ab-menu-toggle")?.classList.toggle("ab-menu-toggle-open", this._menuOpen);
+        this.element.querySelector(".teriock-sheet-menu")?.classList.toggle("collapsed", !this._menuOpen);
+        this.element.querySelector(".teriock-sheet-menu-toggle")?.classList.toggle(
+          "teriock-sheet-menu-toggle-open",
+          this._menuOpen,
+        );
       }
     }
   );

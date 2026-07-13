@@ -34,7 +34,7 @@ export default function SidebarActorSheetPart(Base) {
        * @returns {Promise<void>}
        */
       static async #onToggleStatDrawer(_event, target) {
-        target.closest(".character-status-bar-box")?.querySelector(".die-drawer:not(.top-drawer)")?.classList.toggle(
+        target.closest(".actor-status-bar-box")?.querySelector(".die-drawer:not(.top-drawer)")?.classList.toggle(
           "collapsed",
         );
         const stat = target.dataset.stat;
@@ -92,8 +92,8 @@ export default function SidebarActorSheetPart(Base) {
       async _onRender(context, options) {
         await super._onRender(context, options);
 
-        this._connectContextMenu(".character-piercing-box", this.#piercingContextMenu(), "click");
-        this._connectContextMenu(".character-basics", this.#scalingContextMenu(), "contextmenu", "down");
+        this._connectContextMenu(".actor-piercing-box", this.#piercingContextMenu(), "click");
+        this._connectContextMenu(".actor-basics", this.#scalingContextMenu(), "contextmenu", "down");
       }
 
       /** @inheritDoc */

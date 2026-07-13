@@ -1,0 +1,76 @@
+@use "../mixins" as mixins;
+
+// Styles "document-select-list"
+.doc-select {
+  margin: 6px;
+  padding: 0;
+
+  .doc-select-item {
+    margin: 0;
+    padding: 0;
+  }
+
+  .doc-select-row {
+    align-items: center;
+    background-color: var(--color-block-display-background);
+    cursor: pointer !important;
+    display: flex;
+    flex-direction: row;
+    gap: 11px;
+
+    * {
+      pointer-events: none;
+    }
+
+    .doc-checkbox-container {
+      @include mixins.centralize;
+      flex-direction: column;
+      height: 28px;
+      margin-left: 10px;
+      margin-top: 0;
+      min-width: 20px;
+      width: 20px;
+
+      input {
+        @include mixins.centralize;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      * {
+        margin: 0;
+      }
+    }
+
+    .doc-image-container {
+      @include mixins.centralize;
+      flex-direction: column;
+      height: 28px;
+      min-width: 28px;
+      width: 28px;
+      @include mixins.warm-image-container-background;
+      @include mixins.image-border(6px, 0.6);
+      @include mixins.image-position;
+
+      img {
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
+      }
+    }
+
+    .doc-name-container {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      font-family:
+        var(--font-h1), serif;
+      font-size: large;
+      height: 28px;
+    }
+
+    .doc-text-container {
+      @include mixins.text-subtle;
+      margin-left: auto;
+      margin-right: 14px;
+    }
+  }
+}

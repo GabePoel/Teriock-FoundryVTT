@@ -1,40 +1,43 @@
 <div
   class="
     {{ cssClass }}
-    character-window
+    actor-window
     {{#if (not floatingTabs)}}
       no-floating-tabs
     {{/if}}
   "
 >
-  <div class="character-tabber-background floating">
+  <div class="actor-tabber-background floating">
     {{> "teriock/sheets/actors/playable/parts/tabs"}}
   </div>
-  <div class="character-page">
+  <div class="actor-page">
     {{> "teriock/sheets/actors/playable/parts/sidebar"}}
     <div
       class="
-        character-sidebar-tabber-container
+        actor-sidebar-tabber-container
         sidebar-collapser
         {{#if (not sidebarOpen)}}
           collapsed
         {{/if}}
       "
     >
-      <div
-        class="character-tabber character-sidebar-tabber ui-controls"
-        data-action="toggleSidebar"
-        data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Toggle.label"}}'
-        data-tooltip-direction="RIGHT"
-      >
-        <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} hflip expanded-icon'></i>
-        <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} collapsed-icon'></i>
+      <div class="actor-tabbers">
+        <div
+          class="actor-tabber-container"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Toggle.label"}}'
+          data-tooltip-direction="RIGHT"
+        >
+          <button class="actor-tabber actor-sidebar-tabber ui-controls" data-action="toggleSidebar" type="button">
+            <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} hflip expanded-icon'></i>
+            <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} collapsed-icon'></i>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="character-tab-content">
+    <div class="actor-tab-content">
       {{> (concat "teriock/sheets/actors/playable/tabs/" activeTab "-tab")}}
     </div>
-    <div class="character-tabber-background non-floating">
+    <div class="actor-tabber-background non-floating">
       {{> "teriock/sheets/actors/playable/parts/tabs"}}
     </div>
   </div>

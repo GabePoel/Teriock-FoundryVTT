@@ -1,29 +1,29 @@
-@use "./colors" as colors;
-@use "../mixins" as mixins;
-@use "../actor/sidebar/intro-box";
-@use "../actor/sidebar/status-box";
+@use "../../components/colors" as colors;
+@use "../../mixins" as mixins;
+@use "./intro-box";
+@use "./status-box";
 
 .inventory-sheet {
   overflow: auto;
 
-  .character-tab.inventory {
+  .actor-tab.inventory {
     padding-top: 0 !important;
   }
 }
 
-.character-tabber {
+.actor-tabber {
   @include mixins.centralize;
   background: var(--color-cool-5);
   border: 1px solid var(--color-cool-4);
-  border-bottom-right-radius: 6px;
   border-left: 1px solid var(--color-border);
-  border-top-right-radius: 6px;
+  border-radius: 0 6px 6px 0;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
   color: var(--color-text-selection);
   cursor: default;
   height: 2.75em;
-  margin-block: 0.25em;
+  outline: none;
   overflow: hidden;
+  padding: 0;
   position: relative;
   text-align: center;
   transition: all 0.2s ease-in-out;
@@ -82,9 +82,11 @@
   }
 }
 
-.character-tabbers {
+.actor-tabbers {
   left: 100%;
   overflow: hidden;
+  padding-block: 4px;
+  padding-right: 8px;
   position: absolute;
 
   &.floating {
@@ -94,16 +96,20 @@
   }
 }
 
-.character-tabber-background {
+.actor-tabber-container {
+  margin-block: 0.25em;
+}
+
+.actor-tabber-background {
   border-bottom-right-radius: 6px;
   overflow: visible;
   position: relative;
 }
 
-body > form:only-child section .character-page,
+body > form:only-child section .actor-page,
 .detached,
 .no-floating-tabs {
-  .character-tabbers {
+  .actor-tabbers {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -113,7 +119,7 @@ body > form:only-child section .character-page,
     right: 0;
     width: calc(34px + 0.5em);
 
-    .character-tabber {
+    .actor-tabber {
       background: none;
       border: none !important;
       border-radius: 4px !important;
@@ -144,7 +150,7 @@ body > form:only-child section .character-page,
     }
   }
 
-  .character-tabber-background {
+  .actor-tabber-background {
     background-color: var(--color-header-background);
     border-left: 1px solid var(--color-border);
     display: block;
@@ -160,35 +166,35 @@ body > form:only-child section .character-page,
 
 .system-teriock {
   &:not(.detached) {
-    .character-tabber.attached-tab {
+    .actor-tabber-container.attached-tab {
       display: flex;
     }
 
-    .character-tabber.detached-tab {
+    .actor-tabber-container.detached-tab {
       display: none;
     }
   }
 
   &.detached {
-    .character-tabber-background.floating {
+    .actor-tabber-container-background.floating {
       display: none;
     }
 
-    .character-tabber.attached-tab {
+    .actor-tabber-container.attached-tab {
       display: none;
     }
 
-    .character-tabber.detached-tab {
+    .actor-tabber-container.detached-tab {
       display: flex;
     }
   }
 }
 
-.character-window {
+.actor-window {
   height: calc(100% - 36px);
   max-height: calc(100% - 36px);
 
-  .character-page {
+  .actor-page {
     container-type: inline-size;
     display: flex;
     flex-direction: row;
@@ -197,7 +203,7 @@ body > form:only-child section .character-page,
     overflow: hidden;
     position: relative;
 
-    .character-smallbox-value {
+    .actor-smallbox-value {
       @include mixins.centralize;
       background-color: transparent;
       border: none;
@@ -205,12 +211,12 @@ body > form:only-child section .character-page,
       text-align: center;
     }
 
-    .character-shortbox {
+    .actor-shortbox {
       @include mixins.centralize;
       flex-direction: column;
       width: 100%;
 
-      .character-shortbox-value {
+      .actor-shortbox-value {
         background-color: transparent;
         border: none;
         color: var(--color-text);
@@ -218,13 +224,13 @@ body > form:only-child section .character-page,
         text-align: center;
       }
 
-      .character-smallbox-value {
+      .actor-smallbox-value {
         @include mixins.centralize;
         font-size: 1.25em;
         min-height: 22px;
       }
 
-      .character-shortbox-label {
+      .actor-shortbox-label {
         @include mixins.text-subtle;
         background-color: transparent;
         border: none;
@@ -233,7 +239,7 @@ body > form:only-child section .character-page,
       }
     }
 
-    .character-sidebar {
+    .actor-sidebar {
       background: var(--color-cool-5);
       --color-border: var(--color-light-4);
       border-bottom-left-radius: 4px;
@@ -251,7 +257,7 @@ body > form:only-child section .character-page,
       width: 500px;
       z-index: 1;
 
-      .character-sidebar-container {
+      .actor-sidebar-container {
         display: flex;
         flex: 1 1 auto;
         flex-direction: column;
@@ -279,37 +285,29 @@ body > form:only-child section .character-page,
         box-shadow: none;
         max-width: 0;
 
-        .character-sidebar-container {
+        .actor-sidebar-container {
           opacity: 0;
         }
       }
 
-      .character-size-box,
-      .character-weight-box,
-      .character-movement-box,
-      .character-carrying-box {
+      .actor-size-box,
+      .actor-weight-box,
+      .actor-movement-box,
+      .actor-carrying-box {
         margin: 0;
         padding: 0;
         width: 100%;
       }
 
-      .character-movement-box {
+      .actor-movement-box {
         border-bottom: 1px dotted var(--color-text-subtle);
         margin-bottom: 0.75em;
         padding-bottom: 0.25em;
       }
 
-      .detection-box-main {
-        @include mixins.centralize;
-        flex-direction: row;
-        margin-bottom: 0;
-        padding-bottom: 0;
-        width: 100%;
-
-        .character-detection-input {
-          height: unset;
-          line-height: unset;
-        }
+      .actor-detection-input {
+        height: unset;
+        line-height: unset;
       }
 
       .cover-box {
@@ -367,7 +365,7 @@ body > form:only-child section .character-page,
         top: 0.5em;
       }
 
-      .character-fighting-style-summary {
+      .actor-fighting-style-summary {
         :first-child {
           margin-top: 0;
         }
@@ -378,13 +376,13 @@ body > form:only-child section .character-page,
       }
     }
 
-    .character-sidebar-tabber-container {
+    .actor-sidebar-tabber-container {
       left: 249px;
       position: absolute;
       transition: 250ms;
       z-index: 1;
 
-      .character-sidebar-tabber {
+      .actor-sidebar-tabber {
         border-left: none !important;
       }
 
@@ -409,20 +407,7 @@ body > form:only-child section .character-page,
       }
     }
 
-    .character-main {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-    }
-
-    .display-options {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      gap: 0.5em;
-    }
-
-    .character-tab-content {
+    .actor-tab-content {
       align-items: center;
       display: flex;
       flex-direction: column;
@@ -430,7 +415,7 @@ body > form:only-child section .character-page,
       overflow-y: auto;
       width: 100%;
 
-      .character-tab {
+      .actor-tab {
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -512,14 +497,14 @@ body > form:only-child section .character-page,
   width: 100%;
 }
 
-.character-tab-page {
+.actor-tab-page {
   @include mixins.centralize;
   flex-direction: column;
   gap: 1em;
   width: 100%;
 }
 
-.character-presence-container {
+.actor-presence-container {
   @include mixins.centralize;
   border: 2px solid var(--color-presence-bar);
   border-radius: 6px;
@@ -537,7 +522,7 @@ body > form:only-child section .character-page,
     --color-presence-bar-darkest: var(--color-level-error-border);
   }
 
-  .character-presence-bar {
+  .actor-presence-bar {
     display: grid;
     height: 100%;
     width: 100%;
@@ -776,18 +761,6 @@ body > form:only-child section .character-page,
     min-height: 0;
     padding-bottom: 0;
     padding-top: 0;
-  }
-}
-
-.currency-image {
-  @include mixins.centralize;
-  height: 100%;
-  width: 100%;
-
-  img {
-    @include mixins.image-border;
-    height: 24px;
-    width: 24px;
   }
 }
 

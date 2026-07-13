@@ -1,30 +1,30 @@
 <div class="ch-battle-box tbox toutline">
   <div class="defense-box">
     <div class="defense-box-main">
-      <div class="character-shortbox character-ac-box">
+      <div class="actor-shortbox actor-ac-box">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.label"}}</div>
         <div
-          class="character-smallbox-value"
+          class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.tooltip"}}'
         >
           {{{ system.defense.ac }}}
         </div>
       </div>
 
-      <div class="character-shortbox character-bv-box">
+      <div class="actor-shortbox actor-bv-box">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.label"}}</div>
         <div
-          class="character-smallbox-value"
+          class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.tooltip"}}'
         >
           {{{ system.defense.bv }}}
         </div>
       </div>
 
-      <div class="character-shortbox character-cc-box">
+      <div class="actor-shortbox actor-cc-box">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.label"}}</div>
         <div
-          class="character-smallbox-value"
+          class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.tooltip"}}'
         >
           {{{ system.defense.cc }}}
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="character-primary-blocker" style="width: 100%;" data-action="selectBlocker">
+    <div class="actor-primary-blocker" style="width: 100%;" data-action="selectBlocker">
       <div class="tsubtle little-title">
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.blockingWith"}}</div>
         <div class="title-right">
@@ -57,7 +57,7 @@
         </div>
       </div>
       <div
-        class="thover character-primary-blocker-select draggable"
+        class="thover actor-primary-blocker-select draggable"
         data-tooltip-direction="LEFT"
         {{#if (exists system.wielding.blocker)}}
           data-tooltip-uuid="{{ system.wielding.blocker.uuid }}"
@@ -113,9 +113,7 @@
     >
       <div class="title-left tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
       <div class="right-container" style="display: flex; align-items: center; justify-content: end; flex: 1;">
-        <div
-          class="character-smallbox-value"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
+        <div class="actor-smallbox-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
         >
           <i
             class='thover {{makeIconClass (lookup TERIOCK.display.icons.ui (ifThen system.combat.hasReaction "on" "off")) "light"}}'
@@ -127,10 +125,10 @@
 
   <div class="attack-box">
     <div class="attack-box-main">
-      <div class="character-shortbox character-piercing-box">
+      <div class="actor-shortbox actor-piercing-box">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.label"}}</div>
         <div
-          class="character-smallbox-value thover"
+          class="actor-smallbox-value thover"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.piercing.tooltip"}}'
         >
           {{#if (or
@@ -159,10 +157,10 @@
         </div>
       </div>
 
-      <div class="character-shortbox character-sb-box" data-action="toggleSb">
+      <div class="actor-shortbox actor-sb-box" data-action="toggleSb">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.label"}}</div>
         <div
-          class="character-smallbox-value"
+          class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.tooltip"}}'
         >
           <i
@@ -171,18 +169,18 @@
         </div>
       </div>
 
-      <div class="character-shortbox character-penalty-box" data-action="resetAttackPenalty">
+      <div class="actor-shortbox actor-penalty-box" data-action="resetAttackPenalty">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}</div>
         {{formInput
           systemFields.combat.fields.attackPenalty
           value=system.combat.attackPenalty
-          classes="character-penalty-input character-smallbox-value thover-soft"
+          classes="actor-penalty-input actor-smallbox-value thover-soft"
           dataset=(object tooltip=(localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.tooltip"))
         }}
       </div>
     </div>
 
-    <div class="character-primary-attacker" style="width: 100%;" data-action="selectAttacker">
+    <div class="actor-primary-attacker" style="width: 100%;" data-action="selectAttacker">
       <div class="tsubtle little-title">
         <div class="title-left">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.attackingWith"}}</div>
         <div class="title-right">
@@ -209,7 +207,7 @@
       </div>
 
       <div
-        class="thover character-primary-attacker-select draggable"
+        class="thover actor-primary-attacker-select draggable"
         data-tooltip-direction="LEFT"
         {{#if (exists system.wielding.attacker)}}
           data-tooltip-uuid="{{ system.wielding.attacker.uuid }}"
@@ -227,7 +225,7 @@
           {{path TERIOCK.reference.weaponFightingStyles system.wielding.attacker.system.fightingStyle}}
           {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.fightingStyle"}}
         </div>
-        <div class="character-fighting-style-summary">
+        <div class="actor-fighting-style-summary">
           {{{ enrichedSpecialRules }}}
         </div>
       {{/if}}

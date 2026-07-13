@@ -77,7 +77,7 @@ export default class AbilitySheet extends ChildSheet {
     content.querySelector(":scope > .es-mask-rotator")?.remove();
 
     if (!this.document.system.elderSorcery) {
-      const scroll = content.querySelector(":scope > .ab-sheet-everything");
+      const scroll = content.querySelector(":scope > .teriock-sheet-everything");
       if (scroll) {
         while (scroll.firstChild) { content.insertBefore(scroll.firstChild, scroll); }
         scroll.remove();
@@ -87,9 +87,9 @@ export default class AbilitySheet extends ChildSheet {
 
     content.classList.add(elementClass(this.document.system.elements));
 
-    let scroll = content.querySelector(":scope > .ab-sheet-everything");
+    let scroll = content.querySelector(":scope > .teriock-sheet-everything");
     if (!scroll) {
-      scroll = createElement("div", { className: "ab-sheet-everything" });
+      scroll = createElement("div", { className: "teriock-sheet-everything" });
       content.appendChild(scroll);
     }
     for (const child of [...content.children]) {

@@ -1,12 +1,12 @@
 @use "../../mixins" as mixins;
 
-.character-intro-box {
+.actor-intro-box {
   @include mixins.centralize;
   flex-direction: column;
   --shadow-icon-width: 72px;
   position: relative;
 
-  .character-avatar {
+  .actor-avatar {
     @include mixins.simple-two-layer-image(220px, 0, 0, 6px, var(--color-border), transparent);
     &::before {
       display: none;
@@ -28,7 +28,7 @@
       z-index: 1;
     }
 
-    .character-avatar-background {
+    .actor-avatar-background {
       @include mixins.warm-image-background;
       @include mixins.centralize;
       height: 100%;
@@ -38,7 +38,7 @@
       width: 100%;
       z-index: -1;
 
-      .character-avatar-token-circle {
+      .actor-avatar-token-circle {
         border: 1px solid var(--color-border);
         border-radius: 50%;
         position: absolute;
@@ -57,7 +57,7 @@
       }
     }
 
-    .character-avatar-shadow {
+    .actor-avatar-shadow {
       border-top-right-radius: 6px;
       display: flex;
       height: var(--shadow-icon-width);
@@ -69,7 +69,7 @@
       transition: opacity 150ms ease-in-out;
       width: var(--shadow-icon-width);
 
-      .character-avatar-buttons {
+      .actor-avatar-buttons {
         display: flex;
         flex-direction: row;
         gap: 0.25em;
@@ -88,7 +88,7 @@
       }
     }
 
-    &:hover .character-avatar-shadow {
+    &:hover .actor-avatar-shadow {
       opacity: 1;
     }
 
@@ -99,11 +99,11 @@
         box-shadow: none;
       }
 
-      .character-avatar-background {
+      .actor-avatar-background {
         background: none;
       }
 
-      .character-avatar-shadow {
+      .actor-avatar-shadow {
         &::before {
           background: none;
         }
@@ -111,11 +111,11 @@
     }
   }
 
-  .character-name {
+  .actor-name {
     margin-top: 1px;
     width: calc(100% - 2em);
 
-    .character-name-text {
+    .actor-name-text {
       background-color: var(--color-cool-5);
       border: 1px solid var(--color-text-subtle);
       border-radius: 6px;
@@ -127,7 +127,7 @@
     }
 
     &:not(.ring) {
-      .character-name-text {
+      .actor-name-text {
         border-radius: 0 0 6px 6px;
         border-top: none;
         padding-top: 1px;
@@ -135,7 +135,7 @@
     }
   }
 
-  .character-basics {
+  .actor-basics {
     display: flex;
     flex-direction: row;
     margin-top: 0.5em;

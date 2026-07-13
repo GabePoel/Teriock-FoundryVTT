@@ -48,15 +48,17 @@ function formBox(input, options) {
   const overflowTooltip = overflow && displayed.length > OVERFLOW_TOOLTIP_THRESHOLD ? displayed : "";
 
   const out = `
-    <div class="ab-box-container">
-      <div class="ab-box${classes ? ` ${classes}` : ""}"${attr("data-action", action)}${datasetStr}>
-        <div class="ab-box-icon"${attr("style", iconColor ? `color: ${iconColor};` : "")}>
+    <div class="teriock-sheet-box-container">
+      <div class="teriock-sheet-box${classes ? ` ${classes}` : ""}"${attr("data-action", action)}${datasetStr}>
+        <div class="teriock-sheet-box-icon"${attr("style", iconColor ? `color: ${iconColor};` : "")}>
           ${iconStr}
         </div>
-        <div class="ab-box-content${overflow ? " ab-text-content" : ""}"${attr("data-tooltip", overflowTooltip)}>
+        <div class="teriock-sheet-box-content${overflow ? " teriock-sheet-text-content" : ""}"${
+    attr("data-tooltip", overflowTooltip)
+  }>
           ${content}
         </div>
-        ${label ? `<div class="ab-box-label" style="text-transform: none;">${label}</div>` : ""}
+        ${label ? `<div class="teriock-sheet-box-label" style="text-transform: none;">${label}</div>` : ""}
       </div>
     </div>`;
   return new Handlebars.SafeString(out);

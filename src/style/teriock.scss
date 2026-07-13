@@ -1,47 +1,58 @@
 @use "sass:meta";
+@use "fonts";
 @use "mixins";
-@use "themes";
 @use "page-sizing";
-@use "utils/fonts";
+@use "themes";
+
+@use "components/scrollable";
+
+@use "dialogs/cost-payer";
+@use "dialogs/execution-editor";
+@use "dialogs/stat-managers";
+
+@use "elements/identifier-tags";
+@use "elements/ternary";
+@use "elements/toggle-button";
+
+@use "sheets/actors/actor";
+@use "sheets/core-sheet-overrides";
+@use "sheets/pages/text-view";
+@use "sheets/shared/changes";
+@use "sheets/shared/fields";
+
+@use "sidebar/combat-tracker";
 
 @use "ui/block";
+@use "ui/chat";
+@use "ui/elder-sorcery";
 @use "ui/grid";
-@use "ui/ternary";
-@use "ui/toggle-button";
-@use "ui/panel";
-@use "ui/editor";
-@use "ui/content-link";
-@use "ui/tooltip";
+@use "ui/hotbar";
 @use "ui/mechanic";
 @use "ui/notifiction";
+@use "ui/panel";
+@use "ui/pause";
+@use "ui/tooltip";
 
-@use "components/chat";
-@use "components/fields";
-@use "components/identifier-tags";
-@use "components/elder-sorcery";
-@use "components/changes";
-@use "components/character";
-@use "components/harm";
-@use "components/pause";
-
-@use "dialogs/stat-dialogs";
-@use "dialogs/execution-editor";
-@use "dialogs/cost-payer";
-@use "dialogs/scrollable";
+@use "ux/content-link";
+@use "ux/context-menu";
+@use "ux/editor";
 
 .teriock {
-  @include meta.load-css("ui/forms");
-  @include meta.load-css("dialogs/document-selector");
-  @include meta.load-css("dialogs/settings");
-  @include meta.load-css("utils/interactive");
   @include meta.load-css("components/common");
-  @include meta.load-css("components/child");
-  @include meta.load-css("components/death-bag");
-  @include meta.load-css("components/hud");
-  @include meta.load-css("actor/condition-toggle");
+  @include meta.load-css("components/document-select-list");
+  @include meta.load-css("dialogs/document-selector");
+  @include meta.load-css("dialogs/source-refresher");
+  @include meta.load-css("hud/hud");
+  @include meta.load-css("menus/compendium-priority-menu");
+  @include meta.load-css("menus/settings");
+  @include meta.load-css("sheets/actors/condition-toggle");
+  @include meta.load-css("sheets/shared/child");
+  @include meta.load-css("ui/death-bag");
+  @include meta.load-css("ui/forms");
+  @include meta.load-css("utils/interactive");
 
   &.active-effect-config {
-    .window-content .ab-sheet-top {
+    .window-content .teriock-sheet-top {
       margin-inline: calc(var(--spacer-16) * -1);
       margin-top: calc(var(--spacer-16) * -1);
       width: unset;
@@ -50,121 +61,5 @@
 
   &.common .children-container {
     margin-bottom: 1em;
-  }
-}
-
-.chat-message .message-content {
-  overflow: unset !important;
-}
-
-dl dt {
-  color: var(--color-text-emphatic);
-  font-weight: bold;
-  text-shadow: none;
-}
-
-dl dd,
-dl:not(:last-child) {
-  margin-bottom: 0.5em;
-}
-
-dl:not(:first-child) {
-  margin-top: 0.5em;
-}
-
-.force-hidden,
-.combat-sidebar .combat-tracker .token-effect {
-  filter: none;
-}
-
-.roll-table-sheet .flexrow .image img {
-  @include mixins.image-border(4px, 0.3, 3px);
-  @include mixins.warm-image-background;
-}
-
-.teriock-panels + .dice-roll,
-.dice-roll + .dice-roll {
-  margin-top: 6px;
-}
-
-.dice-tooltip {
-  .part-header {
-    border-color: var(--color-panel-edge);
-  }
-
-  .part-total {
-    background-color: var(--color-panel-background);
-    border-color: var(--color-panel-edge);
-  }
-}
-
-.cards-config,
-.macro-config,
-.roll-table-sheet,
-.active-effect-config {
-  .sheet-header {
-    input {
-      @include mixins.title-text-styling;
-      @include mixins.sheet-entry-hover;
-    }
-
-    img {
-      @include mixins.image-border(12px, 0.5, 5px);
-      @include mixins.warm-image-background;
-    }
-  }
-}
-
-.active-effect-config .sheet-header {
-  padding-bottom: 1em;
-}
-
-.cards-config.deck,
-.macro-config,
-.active-effect-config {
-  header {
-    input {
-      @include mixins.title-text-spacing(calc(64px + 1rem));
-    }
-  }
-}
-
-.cards-config:not(.deck) {
-  header {
-    input {
-      @include mixins.title-text-spacing(0);
-    }
-  }
-}
-
-#action-bar {
-  .slot {
-    .slot-icon {
-      @include mixins.image-position;
-    }
-  }
-}
-
-#context-menu {
-  overflow: hidden;
-  text-align: start;
-
-  .mdi,
-  .mic {
-    width: 1.25em;
-  }
-
-  li.context-item {
-    border-left-width: 0;
-    border-right-width: 0;
-    margin-bottom: 0;
-
-    &:first-child {
-      border-top-width: 0;
-    }
-
-    &:last-child {
-      border-bottom-width: 0;
-    }
   }
 }

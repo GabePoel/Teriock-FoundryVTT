@@ -1,6 +1,6 @@
 <div
   class="
-    character-sidebar
+    actor-sidebar
     sidebar-collapser
     theme-dark
     {{#if (not sidebarOpen)}}
@@ -8,11 +8,11 @@
     {{/if}}
   "
 >
-  <div class="character-sidebar-container">
-    <div class="character-intro-box">
+  <div class="actor-sidebar-container">
+    <div class="actor-intro-box">
       <div
         class="
-          character-avatar
+          actor-avatar
           timage
           {{#if displayedImgRing}}
             ring
@@ -20,8 +20,8 @@
         "
         data-src="{{ img }}"
       >
-        <div class="character-avatar-shadow">
-          <div class="character-avatar-buttons take-harm-button">
+        <div class="actor-avatar-shadow">
+          <div class="actor-avatar-buttons take-harm-button">
             {{#if (eq displayedImgDocument "token")}}
               <div
                 class="thover"
@@ -41,22 +41,22 @@
           </div>
         </div>
         <img
-          class="character-avatar-img"
+          class="actor-avatar-img"
           src="{{ displayedImg }}"
           data-edit="{{ editableImgPath }}"
           data-action="editImage"
           alt="{{ name }}"
         />
-        <div class="character-avatar-background">
+        <div class="actor-avatar-background">
           {{#if displayedImgRing}}
-            <div class="character-avatar-token-circle inner"></div>
-            <div class="character-avatar-token-circle outer"></div>
+            <div class="actor-avatar-token-circle inner"></div>
+            <div class="actor-avatar-token-circle outer"></div>
           {{/if}}
         </div>
       </div>
       <div
         class="
-          character-name
+          actor-name
           {{#if displayedImgRing}}
             ring
           {{/if}}
@@ -66,35 +66,35 @@
         {{formInput
           fields.name
           value=name
-          classes="character-name-text"
+          classes="actor-name-text"
         }}
       </div>
-      <div class="character-basics">
-        <div class="character-shortbox character-level-box">
+      <div class="actor-basics">
+        <div class="actor-shortbox actor-level-box">
           {{formInput
             systemFields.scaling.fields.lvl
             value=system.scaling.lvl
-            classes="character-level-input character-shortbox-value thover-soft"
+            classes="actor-level-input actor-shortbox-value thover-soft"
           }}
-          <div class="character-level-label character-shortbox-label">
+          <div class="actor-level-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.lvl"}}
           </div>
         </div>
         <div
-          class="character-shortbox character-rank-box"
+          class="actor-shortbox actor-rank-box"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
         >
           {{numberInput
             system.scaling.rank
-            class="character-fluency-input character-shortbox-value"
+            class="actor-fluency-input actor-shortbox-value"
             disabled=true
           }}
-          <div class="character-class-label character-shortbox-label">
+          <div class="actor-class-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.rank"}}
           </div>
         </div>
         <div
-          class="character-shortbox character-proficiency-box"
+          class="actor-shortbox actor-proficiency-box"
           {{#if system.scaling.brScale}}
             data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
           {{else}}
@@ -103,15 +103,15 @@
         >
           {{numberInput
             system.scaling.p
-            class="character-fluency-input character-shortbox-value"
+            class="actor-fluency-input actor-shortbox-value"
             disabled=true
           }}
-          <div class="character-level-label character-shortbox-label">
+          <div class="actor-level-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.pro"}}
           </div>
         </div>
         <div
-          class="character-shortbox character-fluency-box"
+          class="actor-shortbox actor-fluency-box"
           {{#if system.scaling.brScale}}
             data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
           {{else}}
@@ -120,10 +120,10 @@
         >
           {{numberInput
             system.scaling.f
-            class="character-fluency-input character-shortbox-value"
+            class="actor-fluency-input actor-shortbox-value"
             disabled=true
           }}
-          <div class="character-fluency-label character-shortbox-label">
+          <div class="actor-fluency-label actor-shortbox-label">
             {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.labels.flu"}}
           </div>
         </div>
