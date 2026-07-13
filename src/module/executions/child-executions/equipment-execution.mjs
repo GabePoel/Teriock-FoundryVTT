@@ -31,6 +31,12 @@ export default class EquipmentExecution extends ArmamentExecution {
         this.ammunition = this.actor?.equipment.find(e =>
           e.active && e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
         );
+        // Fall back to inactive ammunition
+        if (!this.ammunition) {
+          this.ammunition = this.actor?.equipment.find(e =>
+            e.system.consumable && (e.system.equipmentType === this.source.system.ammunition.type)
+          );
+        }
       }
     }
     this.updateSource({ formula: this._readyUpdatedFormula() });
@@ -47,7 +53,7 @@ export default class EquipmentExecution extends ArmamentExecution {
         document: this.ammunition,
         editable: true,
         label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-        getChoices: () => this.actor?.equipment.filter(e => e.active && e.system.consumable) ?? [],
+        getChoices: () => this.actor?.equipment.filter(e => e.system.consumable) ?? [],
         update: ammunition => {
           this.ammunition = ammunition;
           this.updateSource({ formula: this._readyUpdatedFormula() });

@@ -296,6 +296,12 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
       this.ammunition = this.actor?.equipment.find(e =>
         e.active && e.system.consumable && (e.system.equipmentType === armament.system.ammunition.type)
       );
+      // Fall back to inactive ammunition
+      if (!this.ammunition) {
+        this.ammunition = this.actor?.equipment.find(e =>
+          e.system.consumable && (e.system.equipmentType === armament.system.ammunition.type)
+        );
+      }
     }
     this.updateSource(changes);
   }

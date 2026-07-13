@@ -27,7 +27,7 @@ export default function AbilityExecutionGetInputPart(Base) {
               document: this.ammunition,
               editable: true,
               label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-              getChoices: () => this.actor?.equipment.filter(e => e.active && e.system.consumable) ?? [],
+              getChoices: () => this.actor?.equipment.filter(e => e.system.consumable) ?? [],
               update: ammunition => this.ammunition = ammunition,
             });
           }
