@@ -303,7 +303,9 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
       type: "button",
     });
     this.#button.type = "button";
-    return [this.#tags, this.#input, this.#button];
+    const group = createElement("div", { className: "input-group" });
+    group.append(this.#input, this.#button);
+    return [this.#tags, group];
   }
 
   /** @inheritDoc */

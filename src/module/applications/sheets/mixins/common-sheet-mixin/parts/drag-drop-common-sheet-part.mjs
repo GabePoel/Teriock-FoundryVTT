@@ -94,8 +94,6 @@ export default function DragDropCommonSheetPart(Base) {
         } else if (["ActiveEffect", "Actor", "Item"].includes(dropData.type)) {
           if (this._tab === "mechanics") { return false; }
           return this._onDropChild(event, dropData);
-        } else if (dropData.type === "JournalEntryPage") {
-          return this._onDropJournalEntryPage(event, dropData);
         }
         return false;
       }
@@ -116,20 +114,6 @@ export default function DragDropCommonSheetPart(Base) {
         if (!this._canDropChild(doc)) { return; }
         const created = await this.document.createChildDocuments(doc.documentName, [obj], { notifyOnFailure: true });
         return created[0];
-      }
-
-      /**
-       * Handles dropping of journal entry pages.
-       * @param {Teriock.Sheet.EmbedDragEvent} _event - The drop event.
-       * @param {Teriock.Sheet.DropData<TeriockJournalEntryPage>} dropData - The document drop data.
-       * @returns {Promise<TeriockJournalEntryPage|void>} Promise that resolves to the created document if successful.
-       */
-      async _onDropJournalEntryPage(_event, dropData) {
-        if (game.user.isGM) {
-          const updateData = { "system.gmNotes": dropData.uuid };
-          await this.document.update(updateData);
-          return fromUuid(dropData.uuid);
-        }
       }
 
       /** @inheritDoc */

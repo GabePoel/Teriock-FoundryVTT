@@ -270,13 +270,6 @@ export default function ChildSystemMixin(Base) {
           },
           {
             group: "open",
-            icon: makeIcon(TERIOCK.display.icons.ui.notes, "contextMenu"),
-            label: _loc("TERIOCK.SYSTEMS.Child.MENU.openGmNotes"),
-            visible: game.user.isGM,
-            onClick: async () => await this.gmNotesOpen(),
-          },
-          {
-            group: "open",
             icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
             label: _loc("TERIOCK.SYSTEMS.Child.MENU.openImage"),
             onClick: async () => {

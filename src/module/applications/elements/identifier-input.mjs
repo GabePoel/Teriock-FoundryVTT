@@ -84,7 +84,9 @@ export default class HTMLIdentifierInputElement extends AbstractFormInputElement
       dataset: { tooltip: "TERIOCK.ELEMENTS.IDENTIFIER_TAGS.reset" },
       type: "button",
     });
-    return [this.#input, this.#resetButton];
+    const group = createElement("div", { className: "input-group" });
+    group.append(this.#input, this.#resetButton);
+    return [group];
   }
 
   /** @inheritDoc */

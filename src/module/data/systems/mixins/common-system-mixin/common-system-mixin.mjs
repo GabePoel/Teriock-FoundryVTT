@@ -1,12 +1,9 @@
-import { TeriockJournalEntry } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { quickAddAssociation } from "../../../../helpers/panel.mjs";
 import { prefixObject } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
-
-const { fields } = foundry.data;
 
 /**
  * @param {typeof TypeDataModel} Base
@@ -58,21 +55,6 @@ export default function CommonSystemMixin(Base) {
           visibleTypes: [],
           wiki: false,
         };
-      }
-
-      /**
-       * @inheritDoc
-       * @returns {DataSchema}
-       */
-      static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          gmNotes: new fields.DocumentUUIDField({
-            initial: null,
-            nullable: true,
-            required: false,
-            type: "JournalEntryPage",
-          }),
-        });
       }
 
       /**
@@ -242,55 +224,6 @@ export default function CommonSystemMixin(Base) {
        */
       getSystemRollData() {
         return { ...prefixObject(this.getLocalRollData(), this.parent.type) };
-      }
-
-      /** @returns {Promise<void>} */
-      async gmNotesOpen() {
-        let notesPage;
-        if (this.gmNotes) {
-          notesPage = await fromUuid(this.gmNotes);
-        }
-        if (notesPage) {
-          const notesJournal = notesPage.parent;
-          await notesJournal?.sheet.render(true);
-          notesJournal?.sheet.goToPage(notesPage.id);
-        } else {
-          const journalEntryName = game.settings.get("teriock", "gmDocumentNotesJournalName");
-          let notesJournal = game.journal.getName(journalEntryName);
-          if (!notesJournal) {
-            notesJournal = await TeriockJournalEntry.create({ name: journalEntryName });
-          }
-          if (notesJournal) {
-            const notesCategoryName = TERIOCK.config.document[this.parent.type]?.label
-              || _loc("TERIOCK.SYSTEMS.Common.FIELDS.gmNotes.otherCategory");
-            notesPage = notesJournal.pages.find(p =>
-              p.name === this.parent.name && notesJournal?.categories.get(p.category)?.name === notesCategoryName
-            );
-            if (!notesPage) {
-              let notesCategory = notesJournal.categories.getName(notesCategoryName);
-              if (!notesCategory) {
-                const categories = await notesJournal.createEmbeddedDocuments("JournalEntryCategory", [{
-                  name: notesCategoryName,
-                }]);
-                notesCategory = categories[0];
-              }
-              const pages = await notesJournal.createEmbeddedDocuments("JournalEntryPage", [{
-                category: notesCategory.id,
-                name: this.parent.name,
-                text: { content: `<p>@Embed[${this.parent.uuid}]</p>` },
-                type: "text",
-              }]);
-              notesPage = pages[0];
-            }
-            if (notesPage) {
-              await notesJournal?.sheet.render(true);
-              notesJournal?.sheet.goToPage(notesPage.id);
-              if (!this.parent.inCompendium) {
-                await this.parent.update({ "system.gmNotes": notesPage.uuid });
-              }
-            }
-          }
-        }
       }
 
     }

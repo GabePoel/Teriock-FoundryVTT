@@ -1,24 +1,83 @@
-// Designed to resemble Foundry's document-tags element
+// Designed to resemble Foundry's document-tags and string-tags elements
 
-@mixin identifier-tag-element() {
-  align-items: center;
+identifier-tags,
+identifier-input {
+  --input-background-color: var(--color-cool-4);
+  --input-border-color: transparent;
+  --input-box-shadow: none;
+  --input-focus-outline-color: var(--color-cool-3);
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.25rem;
   margin: 0;
 
-  > input {
-    flex: 1;
+  &:disabled {
+    --input-background-color: var(--color-cool-5);
+    --input-border-color: var(--color-cool-4);
+    --input-text-color: var(--color-light-4);
   }
 
-  > button.icon {
-    flex-basis: 36px;
+  // Frame the input and its button into a single control
+  > .input-group {
+    align-items: center;
+    background: var(--input-background-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    box-shadow: var(--input-box-shadow);
+    display: flex;
+    height: var(--input-height);
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    transition: outline-color 0.5s;
+    width: 100%;
+
+    &:focus-within {
+      outline-color: var(--input-focus-outline-color);
+    }
+
+    > input[type="text"] {
+      --input-background-color: transparent;
+      --input-box-shadow: none;
+      --input-focus-outline-color: transparent;
+      border: none;
+      flex: 1;
+      padding-right: 0;
+
+      &:disabled,
+      &[readonly] {
+        --input-background-color: transparent;
+      }
+    }
+
+    > button {
+      --button-background-color: transparent;
+      --button-focus-outline-color: transparent;
+      --button-hover-text-color: var(--button-text-color);
+      --button-hover-background-color: transparent;
+      border: none;
+
+      &[disabled] {
+        --button-background-color: transparent;
+        --button-hover-background-color: transparent;
+      }
+    }
   }
 }
 
-@mixin identifier-tag-button() {
-  flex: 0 0 36px;
-  line-height: var(--form-field-height);
+.theme-light :is(identifier-tags, identifier-input) {
+  --input-background-color: rgba(0, 0, 0, 0.1);
+  --input-border-color: var(--color-dark-6);
+  --input-box-shadow: inset 0 0 6px var(--input-background-color);
+  --input-focus-outline-color: var(--color-warm-2);
+  --input-placeholder-color: var(--color-dark-4);
+  --input-text-color: var(--color-dark-2);
+
+  &:disabled {
+    --input-background-color: rgba(0, 0, 0, 0.2);
+    --input-border-color: transparent;
+    --input-box-shadow: none;
+    --input-text-color: var(--color-dark-3);
+  }
 }
 
 .tags.input-element-tags {
@@ -27,13 +86,4 @@
       display: none;
     }
   }
-}
-
-identifier-tags,
-identifier-input {
-  @include identifier-tag-element;
-}
-
-body.game .app form .form-group .form-fields :is(identifier-tags, identifier-input) > button {
-  @include identifier-tag-button;
 }

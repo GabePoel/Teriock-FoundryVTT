@@ -159,13 +159,6 @@ export const settings = {
     },
   },
   gameMasterControls: {
-    gmDocumentNotesJournalName: {
-      default: "GM Document Notes",
-      hint: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.hint",
-      name: "TERIOCK.SETTINGS.gmDocumentNotesJournalName.name",
-      scope: "world",
-      type: String,
-    },
     nonHierarchicalChanges: {
       default: true,
       hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
