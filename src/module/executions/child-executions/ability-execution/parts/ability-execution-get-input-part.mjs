@@ -1,26 +1,4 @@
-import { TeriockDialog } from "../../../../applications/api/_module.mjs";
-import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { createElement } from "../../../../helpers/html.mjs";
-import { makeIconClass } from "../../../../helpers/icon.mjs";
-
-/**
- * Creates a dialog fieldset for user input.
- * @param {NumberFieldOptions & { name?: string }} [options]
- * @returns {string} HTML string for the dialog fieldset.
- */
-export function createDialogInput(options = {}) {
-  const field = new foundry.data.fields.NumberField({ min: 0, nullable: false, placeholder: "0", ...options });
-  const formGroup = field.toFormGroup({ classes: ["stacked"], hint: "TEMP", label: options.label }, {
-    name: options.name,
-    rootId: foundry.utils.randomID(),
-    value: 0,
-  });
-  formGroup.querySelectorAll(".hint").forEach(hint =>
-    hint.replaceWith(createElement("div", { className: "hint", innerHTML: options.hint }))
-  );
-  return formGroup.outerHTML;
-}
+import { CostPayer } from "../../../../applications/dialogs/_module.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -33,37 +11,6 @@ export default function AbilityExecutionGetInputPart(Base) {
      * @mixin
      */
     class AbilityExecutionGetInput extends Base {
-      /**
-       * @param {string} stat
-       * @returns {Promise<number>}
-       */
-      async #determineCost(stat) {
-        if (this.source.system.costs.primary[stat].type === "formula") {
-          const roll = new BaseRoll(this.source.system.costs.primary[stat].formula, this.getRollData());
-          await roll.evaluate();
-          return roll.total;
-        }
-        return 0;
-      }
-
-      /**
-       * Apply constant adept/inept/gifted modifications to default costs.
-       */
-      #modifyCosts() {
-        for (const [k, v] of Object.entries(TERIOCK.config.cost.tweaks)) {
-          this.costs[v.primary] += v.multiplier * this.source.system.costs.tweaks[k];
-        }
-      }
-
-      /**
-       * Whether the prompt for a given cost should be shown.
-       * @param {string} stat
-       * @returns {boolean}
-       */
-      #shouldShowCostPrompt(stat) {
-        return this.source.system.costs.primary[stat].type === "description" && !this.options[`no${stat.capitalize()}`];
-      }
-
       /** @inheritDoc */
       get _dialogDocuments() {
         const docs = super._dialogDocuments;
@@ -99,7 +46,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         if (this.isAttack) { paths.push("sb", "vitals"); }
         paths.push("warded");
         if (this.source.system.maneuver === "reactive") { paths.push("usesReaction"); }
-        paths.push("payCosts");
+        paths.push("autoPayCosts");
         if (this.isContact) {
           if (this.armament?.system.consumable) { paths.push("consumeEquipment"); }
           if (this.armament?.system.ammunition?.enabled && this.ammunition) { paths.push("consumeAmmunition"); }
@@ -117,68 +64,19 @@ export default function AbilityExecutionGetInputPart(Base) {
        * @returns {Promise<void>}
        */
       async _getCostInput() {
-        const dialogs = [];
-        for (const [k, v] of Object.entries(TERIOCK.config.cost.primary.keys)) {
-          if (this.#shouldShowCostPrompt(k)) {
-            dialogs.push(
-              createDialogInput({
-                hint: await TeriockTextEditor.enrichHTML(this.source.system.costs.primary[k].description),
-                integer: k !== "gp",
-                label: _loc("TERIOCK.COSTS.Long.primary", { key: v.label }),
-                name: k,
-              }),
-            );
-          } else {
-            this.costs[k] = await this.#determineCost(k);
-          }
+        const result = await CostPayer.prompt(this, { autoPay: this.autoPayCosts });
+        if (result) {
+          Object.assign(this.costs, result.costs);
+          this.heightened = result.heightened;
         }
-        if (this.canHeighten) {
-          const heightenDescription = await TeriockTextEditor.enrichHTML(this.source.system.heightened, {
-            relativeTo: this.source,
-          });
-          dialogs.push(
-            createDialogInput({
-              hint: heightenDescription,
-              integer: true,
-              label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened"),
-              max: this.actor?.system.scaling.p,
-              name: "heightened",
-            }),
-          );
-        }
-        if (dialogs.length > 0) {
-          const title = this.source.system.spell
-            ? _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.casting", { name: this.source.name })
-            : _loc("TERIOCK.SYSTEMS.Ability.EXECUTION.executing", { name: this.source.name });
-          await TeriockDialog.prompt({
-            content: dialogs.join(""),
-            modal: true,
-            ok: {
-              label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.ok"),
-              callback: (_event, button) => {
-                for (const k of Object.keys(TERIOCK.config.cost.primary.keys)) {
-                  if (this.#shouldShowCostPrompt(k)) {
-                    this.costs[k] = Number(button.form.elements.namedItem(k).value || "0") || 0;
-                  }
-                }
-                if (this.canHeighten) {
-                  this.heightened = Number(button.form.elements.namedItem("heightened").value);
-                  this.costs.mp += this.heightened;
-                }
-              },
-            },
-            window: { icon: makeIconClass(TERIOCK.display.icons.document.ability, "title"), title },
-          });
-        }
-        this.#modifyCosts();
       }
 
       /** @inheritDoc */
       async _getInput() {
-        const out = await super._getInput();
-        if (out === false) { return out; }
+        const yes = await super._getInput();
+        if (yes === false) { return yes; }
+
         await this._getCostInput();
-        return out;
       }
 
       /**

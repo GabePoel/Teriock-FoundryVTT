@@ -32,6 +32,12 @@ export default function TemporaryApplicationMixin(Base) {
       }
 
       /**
+       * Record of registered models.
+       * @type {Record<string, typeof BaseDataModel>}
+       */
+      models = {};
+
+      /**
        * State data bound to form fields via `name="state.<path>"`.
        * @type {Record<string, any>}
        */
@@ -68,6 +74,30 @@ export default function TemporaryApplicationMixin(Base) {
        * @param {object} _data
        */
       _onStateChanged(_event, _data) {}
+
+      /**
+       * Prepare fields for a registered data model. Only works with flat data models without nested schema. Every model
+       * must be registered using {@link _registerModelFields.}
+       * @param {string} id
+       * @returns {{field: DataField, name: string, value: *}[]}
+       */
+      _prepareModelFields(id) {
+        return Object.entries(this.models[id].schema.fields).map(([name, field]) => ({
+          field,
+          name: `state.${id}.${name}`,
+          value: this.state[id][name],
+        }));
+      }
+
+      /**
+       * Register fields from a data model.
+       * @param {typeof BaseDataModel} Model
+       * @param {string} id
+       */
+      _registerModelFields(Model, id) {
+        this.models[id] = Model;
+        this.state[id] = new Model().toObject();
+      }
     }
   );
 }

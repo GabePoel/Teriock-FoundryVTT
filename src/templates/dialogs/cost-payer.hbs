@@ -1,0 +1,37 @@
+<form class="dialog-form standard-form cost-payer-form">
+  <div class="teriock-form-container">
+    {{#if heightened}}
+      {{formGroup
+        heightened.field
+        max=heightened.max
+        name=heightened.name
+        rootId=@root.partId
+        value=heightened.value
+      }}
+    {{/if}}
+
+    {{#each primaryCosts as |cost|}}
+      {{formGroup
+        cost.field
+        integer=cost.integer
+        name=cost.name
+        placeholder=cost.placeholder
+        rootId=@root.partId
+        value=cost.value
+      }}
+    {{/each}}
+
+    <div class="flexrow" style="gap: 0.5rem;">
+      {{#each tweakFields as |tweak|}}
+        {{formGroup
+          tweak.field
+          classes="stacked"
+          min=tweak.min
+          name=tweak.name
+          rootId=@root.partId
+          value=tweak.value
+        }}
+      {{/each}}
+    </div>
+  </div>
+</form>

@@ -62,7 +62,7 @@ export default class EquipmentExecution extends ArmamentExecution {
     const paths = super._formPaths;
     if (this.source.system.ammunition.enabled && this.ammunition) {
       paths.push("consumeAmmunition");
-      paths.push("inheritAmmunitionDamageTypes");
+      if (this.dealImpacts) { paths.push("inheritAmmunitionDamageTypes"); }
     }
     return paths;
   }

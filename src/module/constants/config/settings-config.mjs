@@ -4,14 +4,7 @@
  */
 export default {
   categories: {
-    ability: {
-      autoPayCosts: true,
-      promptCostGp: true,
-      promptCostHp: true,
-      promptCostLp: true,
-      promptCostMp: true,
-      promptHeighten: true,
-    },
+    ability: { autoPayCosts: true, consumeAmmunition: true, consumeEquipment: false },
     actor: {
       autoColoration: true,
       autoDetectionModes: true,

@@ -7,12 +7,12 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {boolean} noHeighten
  * @property {boolean} expandTables
  * @extends {BaseAutomation}
  * @mixes SelectDocumentsAutomation
  * @mixes CompetenceAutomation
  * @mixes TriggerAutomation
+ * @mixes OverrideAutomation
  */
 export default class UseDocumentsAutomation
   extends mixClasses(
@@ -20,6 +20,7 @@ export default class UseDocumentsAutomation
     automationMixins.SelectDocumentsAutomationMixin,
     automationMixins.TriggerAutomationMixin,
     automationMixins.CompetenceAutomationMixin,
+    automationMixins.OverrideDataAutomationMixin,
   )
 {
   /** @inheritDoc */
@@ -42,10 +43,7 @@ export default class UseDocumentsAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      expandTables: new fields.BooleanField(),
-      noHeighten: new fields.BooleanField(),
-    });
+    return Object.assign(super.defineSchema(), { expandTables: new fields.BooleanField() });
   }
 
   /**
@@ -59,14 +57,7 @@ export default class UseDocumentsAutomation
     const icon = TERIOCK.config.document[doc.type]?.icon;
     return new UseExternalActivation({
       display: { icon: TERIOCK.config.document[doc.type]?.icon, label: doc.name },
-      options: {
-        competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
-        expandTables: this.expandTables,
-        icon,
-        label,
-        noHeighten: this.noHeighten,
-        uuid,
-      },
+      options: { ...this.getUseOptions(), expandTables: this.expandTables, icon, label, uuid },
     });
   }
 
@@ -76,20 +67,19 @@ export default class UseDocumentsAutomation
    * @returns {UseLocalActivation}
    */
   #makeLocalActivation(identifier) {
-    return new UseLocalActivation({
-      options: {
-        competence: this.overrideCompetence
-          ? this.competence.raw
-          : (this.document?.system?.competence?.raw ?? undefined),
-        lookup: identifier,
-        noHeighten: this.noHeighten,
-      },
-    });
+    return new UseLocalActivation({ options: { ...this.getUseOptions(), lookup: identifier } });
   }
 
   /** @inheritDoc */
   get _formPaths() {
-    return [...this._selectionPaths, "hr", ...this._triggerPaths, "hr", "noHeighten", ...this._competencePaths];
+    return [
+      ...this._selectionPaths,
+      "hr",
+      ...this._triggerPaths,
+      "hr",
+      ...this._competencePaths,
+      ...this._overrideDataPaths,
+    ];
   }
 
   /** @inheritDoc */
@@ -132,12 +122,24 @@ export default class UseDocumentsAutomation
   }
 
   /**
+   * Get use options.
+   * @returns {object}
+   */
+  getUseOptions() {
+    const options = {
+      competence: this.overrideCompetence ? this.competence.raw : (this.document?.system?.competence?.raw ?? undefined),
+    };
+    if (this.overrideData) { Object.assign(options, this.data); }
+    return options;
+  }
+
+  /**
    * Use specified documents with the provided options.
    * @param {object} options
    * @returns {Promise<void>}
    */
   async use(options = {}) {
-    options = Object.assign({ noHeighten: this.noHeighten }, options);
+    options = Object.assign(this.getUseOptions(), options);
     if (options.actor == null) { options.actor = this.actor ?? this.document?.actor ?? null; }
     const chosen = await this._choose({ actor: options.actor, expandFolders: true, expandTables: this.expandTables });
     if (this.automatic && chosen.length === 1) { await chosen[0].use(options); }

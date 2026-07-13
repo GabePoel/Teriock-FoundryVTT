@@ -55,13 +55,8 @@ export default class SourceRefresher extends DocumentDialog {
 
   constructor(...args) {
     super(...args);
-    const refreshOptions = new RefreshOptions();
-    this.#refreshOptionFields = refreshOptions.schema.fields;
-    this.state = { refreshOptions: refreshOptions.toObject(), selected: null };
+    this._registerModelFields(RefreshOptions, "refreshOptions");
   }
-
-  /** @type {Record<string, BooleanField>} */
-  #refreshOptionFields;
 
   /** @inheritDoc */
   get _titlePrefix() {
@@ -105,11 +100,7 @@ export default class SourceRefresher extends DocumentDialog {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     if (partId === "options") {
-      context.fields = Object.entries(this.#refreshOptionFields).map(([name, field]) => ({
-        field,
-        name: `state.refreshOptions.${name}`,
-        value: this.state.refreshOptions[name],
-      }));
+      context.fields = this._prepareModelFields("refreshOptions");
     }
     return context;
   }

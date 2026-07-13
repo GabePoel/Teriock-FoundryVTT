@@ -136,11 +136,7 @@ export default class ExecutionEditor extends ResolvableDialog {
   async _onFirstRender(context, options = {}) {
     await super._onFirstRender(context, options);
     const btn = this.execution._dialogButtons.find(d => d.default);
-    if (btn && btn.name) {
-      /** @type {HTMLButtonElement} */
-      const btnEl = this.element.querySelector(`.form-footer button[name=${btn.name}]`);
-      if (btnEl) { btnEl.focus(); }
-    }
+    if (btn && btn.name) { this.element.querySelector(`.form-footer button[name=${btn.name}]`)?.focus(); }
   }
 
   /** @inheritDoc */

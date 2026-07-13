@@ -457,6 +457,9 @@ function cleanAutomation(automation) {
       delete automation.localQualifier;
     }
   }
+  if (automation.type === "useDocuments") {
+    delete automation.noHeighten;
+  }
 }
 
 /**

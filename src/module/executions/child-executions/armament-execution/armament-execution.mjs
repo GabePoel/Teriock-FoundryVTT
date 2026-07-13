@@ -132,6 +132,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
 
   /** @inheritDoc */
   async _prepareFormula() {
+    if (!this.dealImpacts) { this.formula = ""; }
     this._applyImpactModifiers();
     if (formulaExists(this.bonus)) { this.formula = addFormula(this.formula, this.bonus); }
   }

@@ -2,6 +2,7 @@ import { FormulaField } from "../../../../data/fields/_module.mjs";
 import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
+import { objectMap } from "../../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../../abstract/_module.mjs";
 import * as executionMixins from "../../../mixins/_module.mjs";
 
@@ -14,8 +15,9 @@ const { fields } = foundry.data;
  * @property {boolean} consumeEquipment
  * @property {number} existingAttackPenalty
  * @property {Teriock.System.FormulaString} incurredAttackPenalty
- * @property {boolean} payCosts
+ * @property {boolean} autoPayCosts
  * @property {PiercingModel} piercing
+ * @property {boolean} noHeighten
  * @property {boolean} sb
  * @property {boolean} usesReaction
  * @property {boolean} vitals
@@ -28,11 +30,12 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
+      autoPayCosts: new fields.BooleanField(),
       consumeAmmunition: new fields.BooleanField({ initial: true }),
       consumeEquipment: new fields.BooleanField({ initial: false }),
       existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
       incurredAttackPenalty: new FormulaField({ deterministic: false, initial: "0" }),
-      payCosts: new fields.BooleanField(),
+      noHeighten: new fields.BooleanField({ initial: false }),
       piercing: new fields.EmbeddedDataField(PiercingModel),
       sb: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label" }),
       usesReaction: new fields.BooleanField(),
@@ -85,20 +88,6 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     }
     if (options.piercing !== undefined) { raw = options.piercing; }
     return raw;
-  }
-
-  /**
-   * Syncs cost options and initializes cost tracking.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   */
-  #initializeCosts(options = {}) {
-    Object.assign(this.options, {
-      noGp: options.noGp ?? !this.source.system.settings.getSetting("promptCostGp"),
-      noHp: options.noHp ?? !this.source.system.settings.getSetting("promptCostHp"),
-      noLp: options.noLp ?? !this.source.system.settings.getSetting("promptCostLp"),
-      noMp: options.noMp ?? !this.source.system.settings.getSetting("promptCostMp"),
-    });
-    this.costs = { gp: 0, hp: 0, lp: 0, mp: 0 };
   }
 
   /**
@@ -164,9 +153,6 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
 
   /** @type {number} */
   heightened;
-
-  /** @type {boolean} */
-  noHeighten;
 
   /** @type {Set<TeriockToken>} */
   targets;
@@ -365,8 +351,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
   initializeExecution(options = {}) {
-    this.noHeighten = options.noHeighten ?? !this.source.system.settings.getSetting("promptHeighten");
-    this.#initializeCosts(options);
+    this.costs = objectMap(TERIOCK.config.cost.primary, () => 0);
     this._updateArmament(this.armament, options);
     if (!this.bonus) { this.updateSource({ bonus: "0" }); }
     this.limb = this.#resolveLimb(options);
@@ -379,8 +364,8 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     let existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
     if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
     this.updateSource({
+      autoPayCosts: this.source.system.settings.getSetting("autoPayCosts"),
       existingAttackPenalty: Math.min(existingAttackPenalty, 0),
-      payCosts: this.source.system.settings.getSetting("autoPayCosts"),
       usesReaction: this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1",
     });
     this.targets = new Set();

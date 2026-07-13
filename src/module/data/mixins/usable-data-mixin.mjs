@@ -84,7 +84,7 @@ export default function UsableDataMixin(Base) {
        */
       async use(options = {}) {
         options.source ??= this.parent;
-        const data = {};
+        const data = { ...options };
         if (options.event) {
           const parsed = this.constructor.parseEvent(options.event, options.source);
           Object.assign(data, parsed.data);
