@@ -1,0 +1,70 @@
+name: Release
+
+# Publishes a release whenever the version in system.json changes on main.
+
+on:
+  push:
+    branches: [main]
+    paths: ["system.json"]
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Read version
+        id: version
+        run: |
+          VERSION="$(node -p "require('./system.json').version")"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=release-$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check whether release already exists
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release ${{ steps.version.outputs.tag }} already exists; skipping."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Setup Node
+        if: steps.check.outputs.exists == 'false'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        if: steps.check.outputs.exists == 'false'
+        run: npm ci
+
+      - name: Build
+        if: steps.check.outputs.exists == 'false'
+        run: npm run build
+
+      - name: Publish release
+        if: steps.check.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            dist/manifest.json \
+            dist/release.zip \
+            --target "${{ github.sha }}" \
+            --title "${{ steps.version.outputs.tag }}" \
+            --latest \
+            --notes "${{ github.event.head_commit.message || steps.version.outputs.tag }}"
