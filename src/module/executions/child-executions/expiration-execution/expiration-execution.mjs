@@ -7,6 +7,8 @@ import * as executionMixins from "../../mixins/_module.mjs";
 /**
  * @extends {DocumentExecution}
  * @mixes ThresholdExecution
+ * @property {Teriock.System.FormulaString} formula
+ * @property {Teriock.System.FormulaString} thresholdFormula
  */
 export default class ExpirationExecution extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
   /** @inheritDoc */

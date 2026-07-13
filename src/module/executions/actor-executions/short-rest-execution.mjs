@@ -5,6 +5,9 @@ import { DocumentExecution } from "../abstract/_module.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @property {boolean} useAbilities
+ */
 export default class ShortRestExecution extends DocumentExecution {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.ShortRest"];

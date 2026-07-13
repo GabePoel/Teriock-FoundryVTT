@@ -15,6 +15,9 @@ export default function ThresholdExecutionMixin(Base) {
     /**
      * @extends {BaseExecution}
      * @mixin
+     * @property {Teriock.Keys.Comparison} comparison
+     * @property {Teriock.System.FormulaString} bonus
+     * @property {number} edge
      */
     class ThresholdExecution extends Base {
       /** @inheritDoc */

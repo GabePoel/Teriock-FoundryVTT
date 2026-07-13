@@ -9,6 +9,10 @@ const { fields } = foundry.data;
 /** @type {Teriock.Keys.DeathBagStoneColor[]} */
 const STONE_COLORS = ["black", "red", "white"];
 
+/**
+ * @property {Record<Teriock.Keys.DeathBagStoneColor, Teriock.System.FormulaString>} stones
+ * @property {Teriock.System.FormulaString} pull
+ */
 export default class DeathBagExecution extends DocumentExecution {
   /** @inheritDoc */
   static defineSchema() {

@@ -15,6 +15,11 @@ export default function ImpactsExecutionMixin(Base) {
     /**
      * @extends {BaseExecution}
      * @mixin
+     * @property {Set<Teriock.Keys.Impact>} impacts
+     * @property {Teriock.System.FormulaString} formula
+     * @property {boolean} crit
+     * @property {number} boosts
+     * @property {number} deboosts
      */
     class ImpactsExecution extends Base {
       /** @inheritDoc */

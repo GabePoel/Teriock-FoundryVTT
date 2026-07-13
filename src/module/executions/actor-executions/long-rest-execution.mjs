@@ -2,6 +2,12 @@ import ShortRestExecution from "./short-rest-execution.mjs";
 
 const { fields } = foundry.data;
 
+/**
+ * @property {boolean} restoreHp
+ * @property {boolean} restoreHpDice
+ * @property {boolean} restoreMp
+ * @property {boolean} restoreMpDice
+ */
 export default class LongRestExecution extends ShortRestExecution {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.LongRest"];

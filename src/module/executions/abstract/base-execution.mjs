@@ -13,8 +13,10 @@ const { fields } = foundry.data;
 /**
  * Executions are ephemeral classes that resolve some sort of roll, activity, document usage, etc. They show an
  * {@link ExecutionEditor} dialog for the user to interact with and configure.
- * @mixes AutomatedData
  * @extends {BaseDataModel}
+ * @mixes AutomatedData
+ * @property {CompetenceModel} competence
+ * @property {Teriock.System.FormulaString} formula
  */
 export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDataModel) {
   /**

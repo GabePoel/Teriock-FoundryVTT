@@ -5,6 +5,7 @@ const { fields } = foundry.data;
 
 /**
  * @property {Teriock.Execution.ExecutionOptions} options
+ * @property {boolean} consumeUses
  */
 export default class DocumentExecution extends BaseExecution {
   /** @inheritDoc */
