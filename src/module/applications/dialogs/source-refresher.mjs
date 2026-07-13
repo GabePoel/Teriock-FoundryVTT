@@ -37,8 +37,8 @@ export default class SourceRefresher extends DocumentDialog {
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    select: { scrollable: [".doc-list-container"], template: "teriock/dialogs/document-selector" },
-    options: { template: "teriock/shared/field-list-part" },
+    select: { template: "teriock/dialogs/document-selector" },
+    options: { scrollable: [""], template: "teriock/shared/field-list-part" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 

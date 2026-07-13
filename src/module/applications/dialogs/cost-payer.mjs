@@ -3,7 +3,6 @@ import { icons } from "../../constants/display/icons.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass } from "../../helpers/icon.mjs";
 import { ResolvableDialog } from "../api/_module.mjs";
 import { TeriockTextEditor } from "../ux/_module.mjs";
@@ -15,7 +14,6 @@ class CostPayerOptions extends BaseDataModel {
   static defineSchema() {
     return {
       heightened: new fields.NumberField({
-        hint: "heightened",
         initial: 0,
         integer: true,
         label: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.VariableCosts.heightened"),
@@ -25,7 +23,7 @@ class CostPayerOptions extends BaseDataModel {
         Object.fromEntries(
           Object.entries(costConfig.primary.keys).map((
             [k, v],
-          ) => [k, new FormulaField({ hint: k, initial: "", label: v.label, placeholder: "0" })]),
+          ) => [k, new FormulaField({ initial: "", label: v.label, placeholder: "0" })]),
         ),
       ),
       tweaks: new fields.SchemaField(
@@ -49,12 +47,12 @@ export default class CostPayer extends ResolvableDialog {
     form: { closeOnSubmit: false, submitOnChange: false },
     position: { width: 450 },
     tag: "form",
-    window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.ability.cost, "title"), resizable: false },
+    window: { contentClasses: ["standard-form"], icon: makeIconClass(icons.ability.cost, "title") },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    options: { template: "teriock/dialogs/cost-payer" },
+    options: { scrollable: [""], template: "teriock/dialogs/cost-payer" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
@@ -74,7 +72,7 @@ export default class CostPayer extends ResolvableDialog {
    * Open and use the cost payer.
    * @param {AbilityExecution} execution
    * @param {Partial<ApplicationConfiguration> & { autoPay?: boolean }} [options]
-   * @returns {Promise<{ costs: Record<string, number>, heightened: number }|null>}
+   * @returns {Promise<{ costs: Record<string, number>, heightened: number }|false>}
    */
   static async prompt(execution, options = {}) {
     const { autoPay, ...appOptions } = options;
@@ -101,7 +99,6 @@ export default class CostPayer extends ResolvableDialog {
         this.state.costOptions.primary[k] = this.#ability.system.costs.primary[k].formula;
       }
     }
-    if (this.#ability.system.heightened) { this.#hints.heightened = this.#ability.system.heightened; }
   }
 
   /** @type {Set<string>} */
@@ -112,6 +109,9 @@ export default class CostPayer extends ResolvableDialog {
 
   /** @type {Record<string, string>} */
   #hints = {};
+
+  /** @type {boolean} */
+  #hintsPrepared = false;
 
   /**
    * The ability this is paying costs for.
@@ -132,15 +132,21 @@ export default class CostPayer extends ResolvableDialog {
   }
 
   /**
-   * Replace placeholder hint elements with enriched HTML.
+   * Enrich cost description and heightening hints once so they can render directly in the template.
+   * @returns {Promise<void>}
    */
-  #replaceHints() {
-    this.element.querySelectorAll("p.hint").forEach(hintElement => {
-      const id = hintElement.textContent.trim();
-      if (this.#hints[id]) {
-        hintElement.replaceWith(createElement("div", { className: "hint", innerHTML: this.#hints[id] }));
-      } else { hintElement.remove(); }
-    });
+  async #prepareHints() {
+    if (this.#hintsPrepared) { return; }
+    this.#hintsPrepared = true;
+    for (const k of Object.keys(costConfig.primary.keys)) {
+      const description = this.#ability.system.costs.primary[k].description;
+      if (description) { this.#hints[k] = await TeriockTextEditor.enrichHTML(description); }
+    }
+    if (this.#ability.system.heightened) {
+      this.#hints.heightened = await TeriockTextEditor.enrichHTML(this.#ability.system.heightened, {
+        relativeTo: this.#ability,
+      });
+    }
   }
 
   /**
@@ -175,6 +181,11 @@ export default class CostPayer extends ResolvableDialog {
   }
 
   /** @inheritDoc */
+  get _fallbackFinishValue() {
+    return false;
+  }
+
+  /** @inheritDoc */
   get title() {
     return _loc("TERIOCK.DIALOGS.CostPayer.TITLE", { name: this.#ability.fullName });
   }
@@ -187,46 +198,38 @@ export default class CostPayer extends ResolvableDialog {
 
   /** @inheritDoc */
   async _onFirstRender(context, options) {
-    for (const k of Object.keys(costConfig.primary.keys)) {
-      const description = this.#ability.system.costs.primary[k].description;
-      if (description) { this.#hints[k] = await TeriockTextEditor.enrichHTML(description); }
-    }
-    if (this.#ability.system.heightened) {
-      this.#hints.heightened = await TeriockTextEditor.enrichHTML(this.#ability.system.heightened, {
-        relativeTo: this.#ability,
-      });
-    }
     await super._onFirstRender(context, options);
     this.element.querySelector(".form-footer button")?.focus();
-  }
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    this.#replaceHints();
   }
 
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     if (partId === "options") {
+      await this.#prepareHints();
       const fields = this.models.costOptions.schema.fields;
       if (this.#execution.canHeighten) {
         context.heightened = {
           field: fields.heightened,
+          hint: this.#hints.heightened,
           max: this.#execution.actor?.system.scaling.p,
           name: "state.costOptions.heightened",
           value: this.state.costOptions.heightened,
         };
       }
-      context.primaryCosts = Array.from(this.#costs).map(k => ({
-        field: fields.primary.fields[k],
-        integer: k !== "gp",
-        key: k,
-        name: `state.costOptions.primary.${k}`,
-        placeholder: "0",
-        value: this.state.costOptions.primary[k],
-      }));
+      context.primaryCosts = Array.from(this.#costs).map(k => {
+        const field = fields.primary.fields[k];
+        return {
+          field,
+          hint: this.#hints[k],
+          integer: k !== "gp",
+          key: k,
+          name: `state.costOptions.primary.${k}`,
+          placeholder: "0",
+          units: _loc(`TERIOCK.TERMS.Formula.${field.deterministic ? "deterministic" : "rollable"}`),
+          value: this.state.costOptions.primary[k],
+        };
+      });
       context.tweakFields = this.#includedTweaks().map(k => ({
         field: fields.tweaks.fields[k],
         key: k,

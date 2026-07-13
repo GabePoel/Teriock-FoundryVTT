@@ -8,11 +8,7 @@ export default class RevitalizeManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { rollStatDie: this._onRollStatDie },
-    window: {
-      icon: makeIconClass(impactConfig.revitalizing.icon, "title"),
-      resizable: false,
-      title: "TERIOCK.DIALOGS.Revitalize.title",
-    },
+    window: { icon: makeIconClass(impactConfig.revitalizing.icon, "title"), title: "TERIOCK.DIALOGS.Revitalize.title" },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */

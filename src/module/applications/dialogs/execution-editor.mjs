@@ -31,7 +31,7 @@ export default class ExecutionEditor extends ResolvableDialog {
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    content: { template: "teriock/dialogs/execution-editor" },
+    content: { scrollable: [""], template: "teriock/dialogs/execution-editor" },
     messageModes: { template: "teriock/ui/message-modes" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };

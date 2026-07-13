@@ -1,24 +1,47 @@
-<div class="dialog-form standard-form cost-payer-form">
+<div class="dialog-form standard-form cost-payer-form scrollable scroll-fade">
   <div class="teriock-form-container">
     {{#if heightened}}
-      {{formGroup
-        heightened.field
-        max=heightened.max
-        name=heightened.name
-        rootId=@root.partId
-        value=heightened.value
-      }}
+      <div class="form-group">
+        <label for='{{concat @root.partId "-" heightened.name}}'>{{ heightened.field.label }}</label>
+        <div class="form-fields">
+          {{formInput
+            heightened.field
+            id=(concat @root.partId "-" heightened.name)
+            max=heightened.max
+            name=heightened.name
+            value=heightened.value
+          }}
+        </div>
+        {{#if heightened.hint}}
+          <div class="hint">
+            {{{ heightened.hint }}}
+          </div>
+        {{/if}}
+      </div>
     {{/if}}
 
     {{#each primaryCosts as |cost|}}
-      {{formGroup
-        cost.field
-        integer=cost.integer
-        name=cost.name
-        placeholder=cost.placeholder
-        rootId=@root.partId
-        value=cost.value
-      }}
+      <div class="form-group formula-input">
+        <label for='{{concat @root.partId "-" cost.name}}'>
+          {{ cost.field.label }}
+          <span class="units">({{ cost.units }})</span>
+        </label>
+        <div class="form-fields">
+          {{formInput
+            cost.field
+            id=(concat @root.partId "-" cost.name)
+            integer=cost.integer
+            name=cost.name
+            placeholder=cost.placeholder
+            value=cost.value
+          }}
+        </div>
+        {{#if cost.hint}}
+          <div class="hint">
+            {{{ cost.hint }}}
+          </div>
+        {{/if}}
+      </div>
     {{/each}}
 
     <div class="flexrow cost-payer-tweaks">

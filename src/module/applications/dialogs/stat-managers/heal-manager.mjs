@@ -8,11 +8,7 @@ export default class HealManager extends BaseStatManager {
   /** @type {Partial<ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { rollStatDie: this._onRollStatDie, takeHack: this._onTakeUnhack },
-    window: {
-      icon: makeIconClass(impactConfig.healing.icon, "title"),
-      resizable: false,
-      title: "TERIOCK.DIALOGS.Heal.title",
-    },
+    window: { icon: makeIconClass(impactConfig.healing.icon, "title"), title: "TERIOCK.DIALOGS.Heal.title" },
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */

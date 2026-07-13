@@ -61,7 +61,7 @@ export default function AbilityExecutionGetInputPart(Base) {
 
       /**
        * Get user input on costs.
-       * @returns {Promise<void>}
+       * @returns {Promise<object|false>}
        */
       async _getCostInput() {
         const result = await CostPayer.prompt(this, { autoPay: this.autoPayCosts });
@@ -69,6 +69,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           Object.assign(this.costs, result.costs);
           this.heightened = result.heightened;
         }
+        return result;
       }
 
       /** @inheritDoc */
@@ -76,7 +77,7 @@ export default function AbilityExecutionGetInputPart(Base) {
         const yes = await super._getInput();
         if (yes === false) { return yes; }
 
-        await this._getCostInput();
+        return this._getCostInput();
       }
 
       /**

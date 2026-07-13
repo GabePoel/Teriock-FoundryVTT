@@ -9,7 +9,12 @@ import { HackStatApplicationMixin } from "../../shared/_module.mjs";
  */
 export default class BaseStatManager extends HackStatApplicationMixin(DocumentDialog) {
   /** @type {Partial<ApplicationConfiguration>} */
-  static DEFAULT_OPTIONS = { actions: { ok: this._onDone }, classes: ["dialog"], position: { width: 425 } };
+  static DEFAULT_OPTIONS = {
+    actions: { ok: this._onDone },
+    classes: ["dialog"],
+    position: { width: 425 },
+    window: { resizable: false },
+  };
 
   /**
    * Close the manager.

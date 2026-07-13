@@ -1,0 +1,55 @@
+@property --fade-top-color {
+  inherits: false;
+  initial-value: #000000;
+  syntax: "<color>";
+}
+
+@property --fade-bottom-color {
+  inherits: false;
+  initial-value: #000000;
+  syntax: "<color>";
+}
+
+.scroll-fade {
+  --fade: 16px;
+  mask-image: linear-gradient(
+    to bottom,
+    var(--fade-top-color) 0,
+    #000000 var(--fade),
+    #000000 calc(100% - var(--fade)),
+    var(--fade-bottom-color) 100%
+  );
+  overflow-y: auto;
+  transition: --fade-top-color 0.05s ease, --fade-bottom-color 0.05s ease;
+
+  @supports (animation-timeline: scroll()) {
+    animation: toggle-top-fade linear both, toggle-bottom-fade linear both;
+    animation-timeline: scroll(self);
+  }
+
+  &.has-top-fade {
+    --fade-top-color: transparent;
+  }
+
+  &.has-bottom-fade {
+    --fade-bottom-color: transparent;
+  }
+}
+
+@keyframes toggle-top-fade {
+  0% {
+    --fade-top-color: #000000;
+  }
+  0.5%, 100% {
+    --fade-top-color: transparent;
+  }
+}
+
+@keyframes toggle-bottom-fade {
+  0%, 99.5% {
+    --fade-bottom-color: transparent;
+  }
+  100% {
+    --fade-bottom-color: #000000;
+  }
+}
