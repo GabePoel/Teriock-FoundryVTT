@@ -3,7 +3,12 @@
     {{#if (gt number 0)}}
       <div class="death-bag-stones-container">
         <header class="message-header">
-          <span class="flavor-text">{{localize (concat "TERIOCK.TERMS.Stones." color)}}</span>
+          <span class="flavor-text">
+            {{localize
+              "TERIOCK.TERMS.Stones.ofColor"
+              color=(localize (concat "TERIOCK.TERMS.StoneColor." color))
+            }}
+          </span>
         </header>
         <div class="death-bag-stones dice-formula">
           {{#repeat number}}

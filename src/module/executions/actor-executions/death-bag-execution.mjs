@@ -1,13 +1,8 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
-import { FormulaField } from "../../data/fields/_module.mjs";
+import { deathBagSchema } from "../../data/fields/tools/builders.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 import { getImage } from "../../helpers/path.mjs";
 import { DocumentExecution } from "../abstract/_module.mjs";
-
-const { fields } = foundry.data;
-
-/** @type {Teriock.Keys.DeathBagStoneColor[]} */
-const STONE_COLORS = ["black", "red", "white"];
 
 /**
  * @property {Record<Teriock.Keys.DeathBagStoneColor, Teriock.System.FormulaString>} stones
@@ -16,26 +11,7 @@ const STONE_COLORS = ["black", "red", "white"];
 export default class DeathBagExecution extends DocumentExecution {
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
-      pull: new FormulaField({
-        hint: "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.hint",
-        initial: "10",
-        label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
-      }),
-      stones: new fields.SchemaField(
-        Object.fromEntries(
-          STONE_COLORS.map(
-            color => [
-              color,
-              new FormulaField({
-                initial: "0",
-                label: `TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.${color}.label`,
-              }),
-            ]
-          ),
-        ),
-      ),
-    });
+    return Object.assign(super.defineSchema(), deathBagSchema());
   }
 
   /**
@@ -45,7 +21,11 @@ export default class DeathBagExecution extends DocumentExecution {
   constructor(data = {}, options = {}) {
     const actor = options.actor ?? options.source?.actor ?? game.actors.default;
     data.pull ??= actor?.system.deathBag.pull ?? "10";
-    data.stones ??= Object.fromEntries(STONE_COLORS.map(color => [color, actor?.system.deathBag.stones[color] ?? "0"]));
+    data.stones ??= Object.fromEntries(
+      Object.keys(TERIOCK.config.die.deathBagStoneColor).map(
+        color => [color, actor?.system.deathBag.stones[color] ?? "0"]
+      ),
+    );
     super(data, options);
     const defaultMessageMode = game.settings.get("teriock", "deathBagMessageMode");
     if (defaultMessageMode) {
@@ -84,7 +64,7 @@ export default class DeathBagExecution extends DocumentExecution {
    * @remarks Intentionally does not include parent paths.
    */
   get _formPaths() {
-    return ["pull", ...STONE_COLORS.map(color => `stones.${color}`)];
+    return ["pull", ...game.settings.get("teriock", "deathBagStoneColors").map(color => `stones.${color}`)];
   }
 
   /** @inheritDoc */
@@ -169,8 +149,8 @@ export default class DeathBagExecution extends DocumentExecution {
     const bag = [];
     let totalStonesCount = 0;
     this.wrappers = [];
-    for (const [color, formula] of Object.entries(this.stones)) {
-      startingStones[color] = Math.floor(Math.max(await BaseRoll.getValue(formula, rollData), 0));
+    for (const color of game.settings.get("teriock", "deathBagStoneColors")) {
+      startingStones[color] = Math.floor(Math.max(await BaseRoll.getValue(this.stones[color], rollData), 0));
       totalStonesCount += startingStones[color];
       pulledStones[color] = 0;
       this.wrappers.push(`${startingStones[color]} ${TERIOCK.reference.deathBag[color]}`);

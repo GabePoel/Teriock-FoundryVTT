@@ -54,9 +54,6 @@ const actorContext = {
   warded: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label",
 
   "db.pull": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
-  "db.stones.black": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.black.label",
-  "db.stones.red": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.red.label",
-  "db.stones.white": "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.stones.white.label",
 
   "money.debt": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.debt.label",
   "money.physical": "TERIOCK.SYSTEMS.BaseActor.FIELDS.money.physical",
@@ -66,9 +63,15 @@ const actorContext = {
 export default actorContext;
 
 preLocalizeConfig("rollContext.actor");
+
 Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.document).filter(([_k, v]) => v.documentName === "Actor").forEach(([k, v]) => {
     actorContext[k] = _loc(v?.label);
+  });
+  Object.keys(TERIOCK.config.die.deathBagStoneColor).forEach((color) => {
+    actorContext[`db.stones.${color}`] = _loc("TERIOCK.TERMS.Stones.ofColor", {
+      color: _loc(`TERIOCK.TERMS.StoneColor.${color}`),
+    });
   });
   Object.entries(TERIOCK.config.attribute).forEach(([k, v]) => {
     const name = _loc(v.abbreviation);

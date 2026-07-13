@@ -1,5 +1,5 @@
 import { DeathBagExecution } from "../../../../../../executions/actor-executions/_module.mjs";
-import { FormulaField } from "../../../../../fields/_module.mjs";
+import { deathBagSchema } from "../../../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;
 
@@ -17,16 +17,7 @@ export default function ActorDeathBagPart(Base) {
     class ActorDeathBagPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          deathBag: new fields.SchemaField({
-            pull: new FormulaField({ deterministic: false, initial: "10", nullable: false }),
-            stones: new fields.SchemaField({
-              black: stoneField("black", 3),
-              red: stoneField("red", 10),
-              white: stoneField("white", 20),
-            }),
-          }),
-        });
+        return Object.assign(super.defineSchema(), { deathBag: new fields.SchemaField(deathBagSchema()) });
       }
 
       /**
@@ -41,29 +32,12 @@ export default function ActorDeathBagPart(Base) {
       /** @inheritDoc */
       getRollData() {
         const rollData = super.getRollData();
-        Object.assign(rollData, {
-          "db.pull": this.deathBag.pull,
-          "db.stones.black": this.deathBag.stones.black,
-          "db.stones.red": this.deathBag.stones.red,
-          "db.stones.white": this.deathBag.stones.white,
-        });
+        rollData["db.pull"] = this.deathBag.pull;
+        for (const color of Object.keys(this.deathBag.stones)) {
+          rollData[`db.stones.${color}`] = this.deathBag.stones[color];
+        }
         return rollData;
       }
     }
   );
-}
-
-/**
- * Make the field for a color of stone in the Death Bag.
- * @param {Teriock.Keys.DeathBagStoneColor} color
- * @param {number} initial
- * @returns {FormulaField}
- */
-function stoneField(color, initial) {
-  return new FormulaField({
-    deterministic: false,
-    initial: `${initial}`,
-    label: _loc(`TERIOCK.TERMS.Stones.${color}`),
-    nullable: false,
-  });
 }

@@ -2,6 +2,7 @@ import { EvaluationField, FormulaField, IdentifierField } from "../_module.mjs";
 import attributeConfig from "../../../constants/config/attribute-config.mjs";
 import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
+import dieConfig from "../../../constants/config/die-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
@@ -260,6 +261,42 @@ export function movementActionField(options = {}) {
  */
 export function rollableFormulaField(options = {}) {
   return new FormulaField({ deterministic: false, initial: "0", nullable: false, ...options });
+}
+
+/**
+ * Field for the number of a single color of stone in the death bag.
+ * @param {Teriock.Keys.DeathBagStoneColor} color - Stone color key.
+ * @param {number} number - Default number of stones of this color.
+ * @returns {FormulaField}
+ */
+function deathBagStoneField(color, number) {
+  return new FormulaField({
+    deterministic: false,
+    initial: `${number}`,
+    label: _loc("TERIOCK.TERMS.Stones.ofColor", { color: _loc(`TERIOCK.TERMS.StoneColor.${color}`) }),
+    nullable: false,
+  });
+}
+
+/**
+ * Schema fields for the death bag.
+ * @returns {Record<string, FormulaField | SchemaField>}
+ */
+export function deathBagSchema() {
+  return {
+    pull: new FormulaField({
+      deterministic: false,
+      hint: "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.hint",
+      initial: "10",
+      label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.deathBag.pull.label",
+      nullable: false,
+    }),
+    stones: new SchemaField(
+      Object.fromEntries(
+        Object.entries(dieConfig.deathBagStoneColor).map(([color, c]) => [color, deathBagStoneField(color, c.number)]),
+      ),
+    ),
+  };
 }
 
 /**

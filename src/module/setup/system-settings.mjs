@@ -1,5 +1,6 @@
 import * as menus from "../applications/menus/_module.mjs";
 import attributeConfig from "../constants/config/attribute-config.mjs";
+import dieConfig from "../constants/config/die-config.mjs";
 import documentConfig from "../constants/config/document-config.mjs";
 import settingsConfig from "../constants/config/settings-config.mjs";
 import tipConfig from "../constants/config/tip-config.mjs";
@@ -159,6 +160,15 @@ export const settings = {
     },
   },
   gameMasterControls: {
+    deathBagStoneColors: {
+      default: Object.keys(dieConfig.deathBagStoneColor).filter(k => dieConfig.deathBagStoneColor[k].initial),
+      hint: "TERIOCK.SETTINGS.deathBagStoneColors.hint",
+      name: "TERIOCK.SETTINGS.deathBagStoneColors.name",
+      scope: "world",
+      type: new fields.SetField(
+        new fields.StringField({ choices: objectMap(dieConfig.deathBagStoneColor, (c) => c.label) }),
+      ),
+    },
     nonHierarchicalChanges: {
       default: true,
       hint: "TERIOCK.SETTINGS.nonHierarchicalChanges.hint",
