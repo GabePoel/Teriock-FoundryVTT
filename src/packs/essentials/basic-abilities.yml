@@ -1154,13 +1154,29 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.24
+      systemVersion: 0.13.28
     flags:
       teriock:
         dontConsume: false
     img: systems/teriock/src/icons/abilities/interact.webp
     name: Interact
     system:
+      automations:
+        cWvOZuWD3eXz92cb:
+          _id: cWvOZuWD3eXz92cb
+          all: false
+          automatic: false
+          data: |-
+            {
+              "dealImpacts": false
+            }
+          expandTables: false
+          local:
+            qualifier: '@equipment'
+          multi: false
+          overrideData: true
+          trigger: execute
+          type: useDocuments
       basic: true
       competence:
         raw: 1
@@ -1510,7 +1526,6 @@ effects:
               and(@ability, @interaction.attack, @time.a1, or(@delivery.weapon,
               @delivery.hand))
           multi: false
-          noHeighten: false
           trigger: execute
           type: useDocuments
       basic: true

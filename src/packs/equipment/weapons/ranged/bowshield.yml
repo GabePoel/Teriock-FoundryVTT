@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.58
+  systemVersion: 0.13.28
 effects:
   - _id: M2AkhrgOW5mJ1f7j
     _key: '!items.effects!166ea77529f40962.M2AkhrgOW5mJ1f7j'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/ammunition.webp
     name: Ammunition
     system:
@@ -24,7 +24,13 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.range.ranged
-              phase: derived
+              phase: setup
+              priority: 10
+              target: Item
+              type: override
+              value: 'true'
+            - key: system.ammunition.enabled
+              phase: setup
               priority: 10
               target: Item
               type: override
@@ -47,7 +53,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/blocking.webp
     name: Blocking
     system:
@@ -70,7 +76,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/loading.webp
     name: Loading
     system:
@@ -94,7 +100,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/tower-shielding.webp
     name: Tower Shielding
     system:
@@ -120,7 +126,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/two-handed.webp
     name: Two-Handed
     system:
@@ -143,7 +149,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -165,7 +171,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/missile.webp
     name: Missile
     system:
@@ -199,7 +205,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -238,6 +244,8 @@ folder: 87e86f2640702582
 img: systems/teriock/src/icons/equipment/bowshield.webp
 name: Bowshield
 system:
+  ammunition:
+    type: arrow
   attackPenalty: '-3'
   bv:
     raw: 3

@@ -4,7 +4,7 @@ _stats:
   coreVersion: '14'
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.12.58
+  systemVersion: 0.13.28
 effects:
   - _id: tUSt1LeNZtvJkAGx
     _key: '!items.effects!ee0b2e6fa9eaf8bc.tUSt1LeNZtvJkAGx'
@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/ammunition.webp
     name: Ammunition
     system:
@@ -24,7 +24,13 @@ effects:
           _id: parameterChanges
           changes:
             - key: system.range.ranged
-              phase: derived
+              phase: setup
+              priority: 10
+              target: Item
+              type: override
+              value: 'true'
+            - key: system.ammunition.enabled
+              phase: setup
               priority: 10
               target: Item
               type: override
@@ -47,7 +53,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/loading.webp
     name: Loading
     system:
@@ -71,7 +77,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/weapon.webp
     name: Weapon
     system:
@@ -93,7 +99,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/missile.webp
     name: Missile
     system:
@@ -127,7 +133,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.25
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/properties/ranged.webp
     name: Ranged
     system:
@@ -166,6 +172,8 @@ folder: 87e86f2640702582
 img: systems/teriock/src/icons/equipment/hand-crossbow.webp
 name: Hand Crossbow
 system:
+  ammunition:
+    type: arrow
   attackPenalty: '-2'
   competence:
     raw: 0

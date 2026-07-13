@@ -13,7 +13,7 @@ effects:
       coreVersion: '14'
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.13.24
+      systemVersion: 0.13.28
     img: systems/teriock/src/icons/abilities/acrobatics.webp
     name: Acrobatics
     system:
@@ -34,6 +34,21 @@ effects:
         base: >-
           <p>You gain @Identifier[ability:climbing]{Climbing} and
           @Identifier[ability:leaping]{Leaping}.</p>
+        fluent: >-
+          <p>The @Identifier[core:damage]{damage} you take from
+          @Identifier[core:falling]{falling} is instead
+          @Identifier[keyword:deboosted]{deboosted}
+          @Identifier[core:fluency-bonus]{F} times.</p>
+        proficient: >-
+          <p>You are also skilled at landing from difficult
+          @Identifier[core:falling]{falls} onto land. The
+          @Identifier[core:damage]{damage} you would take from
+          @Identifier[core:falling]{falling} onto land is
+          @Identifier[keyword:deboosted]{deboosted}
+          @Identifier[core:proficiency-bonus]{P} times and you are not rendered
+          @Identifier[condition:prone]{prone} if you take no
+          @Identifier[core:damage]{damage} from the
+          @Identifier[core:falling]{fall}.</p>
       powerSources:
         - martial
       range:
@@ -191,7 +206,6 @@ effects:
             identifiers:
               - ability:catch-item
           multi: false
-          noHeighten: false
           type: useDocuments
       competence:
         raw: 1
@@ -2499,7 +2513,6 @@ effects:
           local:
             qualifier: and(@ability, @time.a1)
           multi: false
-          noHeighten: false
           trigger: execute
           type: useDocuments
       competence:
