@@ -38,7 +38,7 @@
     "compendium:compile": "node scripts/compendium/compile.mjs",
     "compendium:pack": "node scripts/compendium/pack.mjs",
     "compendium:uncompile": "node scripts/compendium/uncompile.mjs",
-    "compendium:unpack": "node scripts/compendium/unpack.mjs",
+    "compendium:unpack": "node scripts/compendium/unpack.mjs && run-s format:dprint",
     "format:check": "dprint check && prettier . --check",
     "format:dprint": "dprint fmt",
     "format:fix": "npm run format:json-sort && dprint fmt && prettier . --write",
@@ -50,5 +50,5 @@
     "prepare:check": "run-s lint:check format:check",
     "prepare:fix": "run-s lint:fix format:fix"
   },
-  "version": "3.1.0"
+  "version": "3.1.1"
 }
