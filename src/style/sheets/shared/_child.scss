@@ -233,6 +233,7 @@
   box-shadow: inset 0 0 5px var(--color-sheet-header-shadow);
   padding-block: 0.5rem;
   padding-inline: 0.5rem;
+  transition: grid-template-rows 250ms, opacity 250ms, padding-block 250ms;
   width: 100%;
 
   &.collapsed {
@@ -321,6 +322,7 @@
           display: flex;
           flex-direction: row;
           float: right;
+          gap: 0.25em;
           margin-bottom: 0;
           margin-left: 0.25em;
 
@@ -404,23 +406,36 @@
 }
 
 .teriock-sheet-icon {
+  background: none;
+  border: none;
   border-radius: 6px;
+  box-shadow: none;
+  color: inherit;
   cursor: pointer;
   display: grid;
   height: 1.5em;
+  margin: 0;
+  max-height: 1.5em;
+  min-height: 0;
+  padding: 0;
   place-items: center;
   width: 1.5em;
 
-  div {
+  span {
     @include mixins.centralize;
     font-size: smaller;
     height: 100%;
+    transition: transform 150ms ease;
     width: 100%;
   }
 
   i {
     font-size: 1em;
     opacity: 0.8;
+  }
+
+  &.teriock-sheet-menu-toggle-open span {
+    transform: rotate(180deg);
   }
 
   &:hover {

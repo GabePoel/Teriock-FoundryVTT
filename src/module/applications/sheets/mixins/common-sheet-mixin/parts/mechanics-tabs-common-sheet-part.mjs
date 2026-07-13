@@ -14,12 +14,20 @@ export default function MechanicsTabsCommonSheetPart(Base) {
 
       /**
        * Toggles between the overview and mechanics tabs.
+       * @param {PointerEvent} _event
+       * @param {HTMLBaseElement} target
        * @returns {Promise<void>}
        */
-      static async _onToggleMechanics() {
+      static async _onToggleMechanics(_event, target) {
         this._tab = this._tab === "mechanics" ? "overview" : "mechanics";
         await this.render();
         if (typeof this.toggleMenu === "function") { this.toggleMenu(false); }
+        if (target.classList.contains("teriock-sheet-menu-mechanics-container")) {
+          this.element.querySelector(".teriock-sheet-mechanics-close")?.focus();
+        }
+        if (target.classList.contains("teriock-sheet-mechanics-close")) {
+          this.element.querySelector(".teriock-sheet-menu-mechanics-container")?.focus();
+        }
       }
 
       constructor(...args) {

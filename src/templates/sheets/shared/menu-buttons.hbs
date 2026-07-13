@@ -1,16 +1,18 @@
 {{#if canHaveMechanics}}
-  <div class="teriock-sheet-icon teriock-sheet-mechanics-toggle">
-    <div
-      class="teriock-sheet-menu-mechanics-container"
-      data-tooltip='{{localize "TERIOCK.SHEETS.Common.NAVIGATION.enterMechanicsTab"}}'
-      data-action="toggleMechanics"
-    >
-      {{makeIcon TERIOCK.display.icons.pseudoDocument.mechanic "solid"}}
-    </div>
-  </div>
+  <button
+    id='{{concat @root/appId "toggle-sheet-mechanics-button"}}'
+    class="teriock-sheet-icon teriock-sheet-mechanics-toggle teriock-sheet-menu-mechanics-container"
+    type="button"
+    data-tooltip='{{localize "TERIOCK.SHEETS.Common.NAVIGATION.enterMechanicsTab"}}'
+    data-action="toggleMechanics"
+    data-never-disable="true"
+  >
+    <span>{{makeIcon TERIOCK.display.icons.pseudoDocument.mechanic "solid"}}</span>
+  </button>
 {{/if}}
 {{#if hasMenu}}
-  <div
+  <button
+    id='{{concat @root/appId "toggle-sheet-menu-button"}}'
     class="
       teriock-sheet-icon
       teriock-sheet-menu-toggle
@@ -18,19 +20,11 @@
         teriock-sheet-menu-toggle-open
       {{/if}}
     "
+    type="button"
+    data-tooltip='{{localize (ifThen menuCollapsed "TERIOCK.SHEETS.Common.NAVIGATION.openMenu" "TERIOCK.SHEETS.Common.NAVIGATION.closeMenu")}}'
     data-action="toggleMenu"
+    data-never-disable="true"
   >
-    <div
-      class="teriock-sheet-menu-closed-container"
-      data-tooltip='{{localize "TERIOCK.SHEETS.Common.NAVIGATION.openMenu"}}'
-    >
-      {{makeIcon TERIOCK.display.icons.ui.menuOpen "solid"}}
-    </div>
-    <div
-      class="teriock-sheet-menu-open-container"
-      data-tooltip='{{localize "TERIOCK.SHEETS.Common.NAVIGATION.closeMenu"}}'
-    >
-      {{makeIcon TERIOCK.display.icons.ui.menuClose "solid"}}
-    </div>
-  </div>
+    <span>{{makeIcon TERIOCK.display.icons.ui.menuOpen "solid"}}</span>
+  </button>
 {{/if}}
