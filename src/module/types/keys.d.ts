@@ -40,7 +40,7 @@ declare global {
     export type Attribute = keyof typeof index.attributes;
 
     // Stat Keys
-    export type DieStat = "hp" | "mp";
+    export type DieStat = keyof typeof config.die.stats;
 
     // Impact Keys
     export type PayMode = "exact" | "greedy";
@@ -55,8 +55,6 @@ declare global {
     export type PowerLevel = keyof typeof config.equipment.powerLevel;
 
     // Property Keys
-    export type MagicalProperty = keyof typeof index.magicalProperties;
-    export type MaterialProperty = keyof typeof index.materialProperties;
     export type Property = keyof typeof index.properties;
 
     // Species Keys
