@@ -1,3 +1,5 @@
+@use "../mixins" as mixins;
+
 .execution-editor-form {
   min-width: 0;
 
@@ -44,13 +46,11 @@
     }
 
     .execution-editor-document-label {
+      @include mixins.text-cutoff;
       color: var(--color-text-secondary);
       font-weight: bold;
       line-height: 1.25;
       min-width: 0;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
 
     .execution-editor-document-change {

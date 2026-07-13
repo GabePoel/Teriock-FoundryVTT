@@ -54,10 +54,8 @@
       font-size: clamp(1rem, 4vw, 2rem);
       font-weight: lighter;
       height: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       width: calc(100% - 14px - 1.5rem);
+      @include mixins.text-cutoff;
       @include mixins.title-text-spacing(calc(64px + 0rem));
       @include mixins.title-text-styling;
     }
@@ -156,13 +154,12 @@
 
         .teriock-sheet-box-content {
           @include mixins.centralize;
+          @include mixins.text-cutoff;
           cursor: pointer;
           flex-direction: row;
           min-width: 0;
-          overflow: hidden;
           padding-inline: 1.5em;
           text-align: center;
-          text-overflow: ellipsis;
           white-space: nowrap;
           width: 100%;
 
