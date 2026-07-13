@@ -6,18 +6,28 @@ label + ternary-input {
 
 ternary-input {
   flex: none;
-  --color-toggle-background: var(--color-warm-2);
-  --color-toggle-background-true: var(--color-warm-2);
-  --color-toggle-background-false: var(--color-warm-3);
+  --color-ternary-background: var(--color-ternary-enabled-null-background);
+  --color-ternary-background-true: var(--color-ternary-enabled-true-background);
+  --color-ternary-background-false: var(--color-ternary-enabled-false-background);
+  --color-ternary-background-hover: var(--color-ternary-enabled-hover-background);
+  --color-ternary-knob: var(--color-ternary-enabled-null-knob);
+  --color-ternary-knob-true: var(--color-ternary-enabled-true-knob);
+  --color-ternary-knob-false: var(--color-ternary-enabled-false-knob);
+  --color-ternary-knob-hover: var(--color-ternary-enabled-hover-knob);
 
   &[disabled] {
-    --color-toggle-background: var(--disabled-ternary-background);
-    --color-toggle-background-true: var(--disabled-ternary-background-true);
-    --color-toggle-background-false: var(--disabled-ternary-background-false);
+    --color-ternary-background: var(--color-ternary-disabled-null-background);
+    --color-ternary-background-true: var(--color-ternary-disabled-true-background);
+    --color-ternary-background-false: var(--color-ternary-disabled-false-background);
+    --color-ternary-knob: var(--color-ternary-disabled-null-knob);
+    --color-ternary-knob-true: var(--color-ternary-disabled-true-knob);
+    --color-ternary-knob-false: var(--color-ternary-disabled-false-knob);
   }
 
   > button {
     @include mixins.centralize;
+    background-color: var(--color-ternary-background);
+    border-color: var(--button-border-color);
     border-radius: 10px;
     height: 18px;
     margin: 3px;
@@ -28,10 +38,19 @@ ternary-input {
 
     &:not([disabled]) {
       cursor: pointer;
+
+      &:hover {
+        background-color: var(--color-ternary-background-hover);
+        border-color: var(--button-hover-border-color);
+
+        > div {
+          background-color: var(--color-ternary-knob-hover);
+        }
+      }
     }
 
     > div {
-      background-color: color-mix(in srgb, var(--button-text-color), transparent 35%);
+      background-color: var(--color-ternary-knob);
       border-radius: 50%;
       height: 14px;
       left: 10px;
@@ -41,28 +60,20 @@ ternary-input {
     }
 
     &[value="true"] {
-      background-color: var(--color-toggle-background-true);
+      background-color: var(--color-ternary-background-true);
 
       > div {
-        background-color: var(--button-hover-text-color);
+        background-color: var(--color-ternary-knob-true);
         left: 19px;
       }
     }
 
     &[value="false"] {
-      background-color: var(--color-toggle-background-false);
+      background-color: var(--color-ternary-background-false);
 
       > div {
-        background-color: var(--button-hover-text-color);
+        background-color: var(--color-ternary-knob-false);
         left: 1px;
-      }
-    }
-
-    &:hover:not([disabled]) {
-      background-color: var(--color-warm-2);
-
-      > div {
-        background-color: var(--button-hover-text-color);
       }
     }
   }

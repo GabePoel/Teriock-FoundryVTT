@@ -1,0 +1,43 @@
+{{!-- This doesn't overflow. That needs to be provided by templates that use this template. --}}
+<ul class="doc-select teriock-block-container small" role="listbox">
+  {{#each documents as |doc id|}}
+    <li class="doc-select-item">
+      <label
+        class="doc-select-row teriock-block"
+        {{#if (exists doc.uuid)}}
+          data-double="openDocument"
+          data-uuid="{{{ doc.uuid }}}"
+        {{/if}}
+        {{#if (and ../tooltip (exists doc.uuid))}}
+          data-tooltip-uuid="{{{ doc.uuid }}}"
+        {{/if}}
+      >
+        <span class="doc-checkbox-container">
+          <input
+            id='doc-{{concat @root/appId "-" id}}'
+            {{#if checked}}
+              checked="checked"
+            {{/if}}
+            {{#if ../multi}}
+              type="checkbox"
+              name="{{ id }}"
+            {{else if ../choiceName}}
+              type="radio"
+              name="{{ ../choiceName }}"
+              value="{{ id }}"
+            {{else}}
+              type="radio"
+              name="{{concat "choice-" @root/appId}}"
+              value="{{ id }}"
+            {{/if}}
+          />
+        </span>
+        <span class="doc-image-container">
+          <img alt="" loading="lazy" src="{{ doc.img }}" />
+        </span>
+        <span class="doc-name-container">{{ doc.name }}</span>
+        <span class="doc-text-container">{{ doc.text }}</span>
+      </label>
+    </li>
+  {{/each}}
+</ul>

@@ -37,8 +37,7 @@ export default class SourceRefresher extends DocumentDialog {
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    select: { template: "teriock/dialogs/document-selector" },
-    options: { scrollable: [""], template: "teriock/shared/field-list-part" },
+    body: { scrollable: [""], template: "teriock/dialogs/source-refresher" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
 
@@ -64,16 +63,6 @@ export default class SourceRefresher extends DocumentDialog {
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    // Remove search since this shouldn't ever have enough documents to warrant it
-    this.element.querySelectorAll(".teriock-block-searchbar").forEach(el => el.remove());
-    this.element.querySelectorAll(".dynamic-select .form-group").forEach(/** @param {HTMLElement} el */ el => {
-      el.style.setProperty("--fade", "0");
-    });
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options = {}) {
     const documents = await this.document.system.getRefreshSources();
     const documentMap = Object.fromEntries(
@@ -90,18 +79,10 @@ export default class SourceRefresher extends DocumentDialog {
       }],
       choiceName: "state.selected",
       documents: documentMap,
+      fields: this._prepareModelFields("refreshOptions"),
       hint: _loc(documents.length ? "TERIOCK.DIALOGS.SourceRefresh.hint" : "TERIOCK.DIALOGS.SourceRefresh.noSources"),
       state: this.state,
       tooltip: true,
     });
-  }
-
-  /** @inheritDoc */
-  async _preparePartContext(partId, context, options) {
-    context = await super._preparePartContext(partId, context, options);
-    if (partId === "options") {
-      context.fields = this._prepareModelFields("refreshOptions");
-    }
-    return context;
   }
 }

@@ -1,0 +1,18 @@
+<div class="dialog-form standard-form teriock source-refresher-body scrollable scroll-fade">
+
+  {{#if (exists hint)}}
+    <p class="hint">
+      {{{ hint }}}
+    </p>
+  {{/if}}
+
+  {{#if (exists documents)}}
+    {{> "teriock/shared/document-select-list"}}
+  {{/if}}
+
+  <div class="teriock-form-container">
+    {{> "teriock/shared/field-list"
+      @root/fields
+    }}
+  </div>
+</div>
