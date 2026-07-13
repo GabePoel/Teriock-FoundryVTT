@@ -7,9 +7,13 @@ label + ternary-input {
 ternary-input {
   flex: none;
   --color-toggle-background: var(--color-warm-2);
+  --color-toggle-background-true: var(--color-warm-2);
+  --color-toggle-background-false: var(--color-warm-3);
 
   &[disabled] {
     --color-toggle-background: var(--disabled-ternary-background);
+    --color-toggle-background-true: var(--disabled-ternary-background-true);
+    --color-toggle-background-false: var(--disabled-ternary-background-false);
   }
 
   > button {
@@ -37,7 +41,7 @@ ternary-input {
     }
 
     &[value="true"] {
-      background-color: var(--color-toggle-background);
+      background-color: var(--color-toggle-background-true);
 
       > div {
         background-color: var(--button-hover-text-color);
@@ -46,7 +50,7 @@ ternary-input {
     }
 
     &[value="false"] {
-      background-color: var(--color-toggle-background);
+      background-color: var(--color-toggle-background-false);
 
       > div {
         background-color: var(--button-hover-text-color);
@@ -54,8 +58,12 @@ ternary-input {
       }
     }
 
-    &:hover > div {
-      background-color: var(--button-hover-text-color);
+    &:hover:not([disabled]) {
+      background-color: var(--color-warm-2);
+
+      > div {
+        background-color: var(--button-hover-text-color);
+      }
     }
   }
 }

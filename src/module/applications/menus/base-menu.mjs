@@ -79,6 +79,13 @@ export default class BaseMenu extends TeriockApplication {
     });
   }
 
+  /** @inheritDoc */
+  _initializeApplicationOptions(options) {
+    return Object.assign(super._initializeApplicationOptions(options), {
+      uniqueId: `teriock-menu-${this.constructor.SETTINGS_MENU.key}`,
+    });
+  }
+
   /**
    * Prepare expanded settings data for commit.
    * @param {SubmitEvent} _event

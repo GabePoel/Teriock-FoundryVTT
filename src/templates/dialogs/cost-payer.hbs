@@ -1,4 +1,4 @@
-<form class="dialog-form standard-form cost-payer-form">
+<div class="dialog-form standard-form cost-payer-form">
   <div class="teriock-form-container">
     {{#if heightened}}
       {{formGroup
@@ -21,17 +21,24 @@
       }}
     {{/each}}
 
-    <div class="flexrow" style="gap: 0.5rem;">
+    <div class="flexrow cost-payer-tweaks">
       {{#each tweakFields as |tweak|}}
         {{formGroup
           tweak.field
-          classes="stacked"
+          classes="inline cost-payer-tweak"
           min=tweak.min
           name=tweak.name
           rootId=@root.partId
           value=tweak.value
+          units=(localize
+            "TERIOCK.SYSTEMS.Ability.PANELS.constant"
+            value=(path
+              @root/TERIOCK.config.cost.primary.keys
+              (path @root/TERIOCK.config.cost.tweaks tweak.key "primary")
+              "abbreviation")
+            cost=(sign (path @root/TERIOCK.config.cost.tweaks tweak.key "multiplier")))
         }}
       {{/each}}
     </div>
   </div>
-</form>
+</div>

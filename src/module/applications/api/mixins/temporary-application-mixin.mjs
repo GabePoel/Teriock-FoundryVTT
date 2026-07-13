@@ -32,8 +32,8 @@ export default function TemporaryApplicationMixin(Base) {
       }
 
       /**
-       * Record of registered models.
-       * @type {Record<string, typeof BaseDataModel>}
+       * Record of registered model instances.
+       * @type {Record<string, BaseDataModel>}
        */
       models = {};
 
@@ -69,11 +69,22 @@ export default function TemporaryApplicationMixin(Base) {
       }
 
       /**
-       * Hook called after {@link TemporaryApplication.state} is updated from the form.
+       * Called after {@link TemporaryApplication.state} is updated from the form.
        * @param {Event} _event
-       * @param {object} _data
+       * @param {object} data
        */
-      _onStateChanged(_event, _data) {}
+      _onStateChanged(_event, data) {
+        const stateData = data.state ?? {};
+        for (const [id, model] of Object.entries(this.models)) {
+          if (!stateData[id]) { continue; }
+          try {
+            model.updateSource(this.state[id]);
+          } catch (err) {
+            console.error(err);
+          }
+          this.state[id] = model.toObject();
+        }
+      }
 
       /**
        * Prepare fields for a registered data model. Only works with flat data models without nested schema. Every model
@@ -95,8 +106,8 @@ export default function TemporaryApplicationMixin(Base) {
        * @param {string} id
        */
       _registerModelFields(Model, id) {
-        this.models[id] = Model;
-        this.state[id] = new Model().toObject();
+        this.models[id] = new Model();
+        this.state[id] = this.models[id].toObject();
       }
     }
   );

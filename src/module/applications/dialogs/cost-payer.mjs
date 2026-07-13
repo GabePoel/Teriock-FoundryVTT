@@ -32,7 +32,7 @@ class CostPayerOptions extends BaseDataModel {
         Object.fromEntries(
           Object.entries(costConfig.tweaks).map((
             [k, v],
-          ) => [k, new fields.NumberField({ initial: 0, integer: true, label: v.label, min: 0, placeholder: "0" })]),
+          ) => [k, new fields.NumberField({ integer: true, label: v.label, min: 0, placeholder: "0" })]),
         ),
       ),
     };
@@ -180,6 +180,12 @@ export default class CostPayer extends ResolvableDialog {
   }
 
   /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    this.render();
+  }
+
+  /** @inheritDoc */
   async _onFirstRender(context, options) {
     for (const k of Object.keys(costConfig.primary.keys)) {
       const description = this.#ability.system.costs.primary[k].description;
@@ -216,15 +222,17 @@ export default class CostPayer extends ResolvableDialog {
       context.primaryCosts = Array.from(this.#costs).map(k => ({
         field: fields.primary.fields[k],
         integer: k !== "gp",
+        key: k,
         name: `state.costOptions.primary.${k}`,
         placeholder: "0",
         value: this.state.costOptions.primary[k],
       }));
       context.tweakFields = this.#includedTweaks().map(k => ({
         field: fields.tweaks.fields[k],
+        key: k,
         min: 0,
         name: `state.costOptions.tweaks.${k}`,
-        value: this.state.costOptions.tweaks[k],
+        value: this.state.costOptions.tweaks[k] || undefined,
       }));
     }
     if (partId === "footer") {
