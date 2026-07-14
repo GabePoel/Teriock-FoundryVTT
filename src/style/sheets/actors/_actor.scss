@@ -731,9 +731,10 @@ body > form:only-child section .actor-page,
   min-height: 2.5em;
   overflow: hidden;
   padding: 0.5em;
+  transition: grid-template-rows 250ms, opacity 250ms, padding-block 250ms, min-height 250ms;
 
   .tgrid {
-    overflow: hidden;
+    @include mixins.collapsible-content;
   }
 
   i {
@@ -757,8 +758,7 @@ body > form:only-child section .actor-page,
   &.collapsed {
     @include mixins.collapsible-closed;
     min-height: 0;
-    padding-bottom: 0;
-    padding-top: 0;
+    padding-block: 0;
   }
 }
 
