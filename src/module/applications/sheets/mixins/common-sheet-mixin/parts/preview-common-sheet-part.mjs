@@ -162,11 +162,10 @@ export default function PreviewCommonSheetPart(Base) {
 
       /** @inheritDoc */
       _toggleCollapsed(collapsibleId, collapsed) {
-        super._toggleCollapsed(collapsibleId, collapsed);
-        for (const control of this.element.querySelectorAll("toggle-button[data-collapsible-target]")) {
-          if (control.dataset.collapsibleTarget !== collapsibleId) { continue; }
-          if (control.isConnected) { control.value = !collapsed; }
-          else { control.setAttribute("value", String(!collapsed)); }
+        collapsed = super._toggleCollapsed(collapsibleId, collapsed);
+        for (const tb of this.element.querySelectorAll(`toggle-button[data-collapsible-target=${collapsibleId}]`)) {
+          if (tb.isConnected) { tb.value = !collapsed; }
+          else { tb.setAttribute("value", String(!collapsed)); }
         }
       }
 

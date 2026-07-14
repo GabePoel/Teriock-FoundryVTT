@@ -1,6 +1,6 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
-import { TeriockDialog } from "../../../api/_module.mjs";
+import { BaseDocumentSheetMixin, TeriockDialog } from "../../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../../shared/_module.mjs";
 import { TeriockTextEditor } from "../../../ux/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
@@ -11,8 +11,8 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
 /**
  * Base actor sheet.
  * @extends {ActorSheetV2}
+ * @mixes BaseDocumentSheet
  * @mixes CommonSheet
- * @mixes DragDropCommonSheetPart
  * @mixes EquipmentDropSheet
  * @mixes HackStatApplication
  * @property {TeriockActor} actor
@@ -24,6 +24,7 @@ export default class BaseActorSheet
     ActorSheetV2,
     HackStatApplicationMixin,
     HandlebarsApplicationMixin,
+    BaseDocumentSheetMixin,
     mixins.CommonSheetMixin,
     mixins.EquipmentDropSheetMixin,
   )

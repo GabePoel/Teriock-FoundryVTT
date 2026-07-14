@@ -19,34 +19,6 @@ export default function PanelDocumentMixin(Base) {
         return Object.assign(super.documentMetadata, { tooltip: true });
       }
 
-      /**
-       * Toggle collapse state of panel elements.
-       * @param {HTMLElement} element
-       * @param {object} [options]
-       * @param {boolean} [options.autoCollapse]
-       * @param {boolean} [options.collapseAll]
-       * @param {boolean} [options.collapsePanel]
-       * @param {boolean} [options.collapseAssociation]
-       */
-      static toggleCollapse(element, options = {}) {
-        const selector = options.autoCollapse ? "collapsible:not([data-no-auto-toggle])" : "collapsible";
-        if (options.collapsePanel) {
-          element.querySelectorAll(`.teriock-panel.${selector}`).forEach(el => {
-            el.classList.toggle("collapsed", true);
-          });
-        }
-        if (options.collapseAssociation) {
-          element.querySelectorAll(`.teriock-panel-association.${selector}`).forEach(el => {
-            el.classList.toggle("collapsed", true);
-          });
-        }
-        if (options.collapseAll) {
-          element.querySelectorAll(`.${selector}`).forEach(el => {
-            el.classList.toggle("collapsed", true);
-          });
-        }
-      }
-
       /** @inheritDoc */
       async _buildEmbedHTML(config, options = {}) {
         if (config.values.includes("panel")) {

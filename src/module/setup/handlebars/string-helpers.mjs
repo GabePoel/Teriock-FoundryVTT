@@ -1,4 +1,4 @@
-import { dotJoin } from "../../helpers/string.mjs";
+import { dotJoin, toKebabCase } from "../../helpers/string.mjs";
 
 /**
  * Strip message bars to just the ones that have content.
@@ -17,8 +17,8 @@ function cleanBars(bars) {
 }
 
 const stringHelperEntries = [["cleanBars", cleanBars], ["dotJoin", dotJoin], ["ucFirst", s => s.capitalize()], [
-  "sign",
-  n => n.signedString(),
-]];
+  "toKebabCase",
+  toKebabCase,
+], ["sign", n => n.signedString()]];
 
 export default stringHelperEntries;

@@ -52,6 +52,27 @@ export default function BaseDocumentSheetMixin(Base) {
         uuid: this.document.uuid,
       });
     }
+
+    /** @inheritDoc */
+    _replaceHTML(result, content, options) {
+      super._replaceHTML(result, content, options);
+      // Re-apply again because prose-mirrors rebuild themselves after the first re-apply.
+      this._reapplyCollapsibleSates();
+    }
+
+    /** @inheritDoc */
+    _toggleDisabled(disabled) {
+      super._toggleDisabled(disabled);
+      if (!disabled) { return; }
+      // If a prose-mirror element is disabled, then we can't toggle whether any enriched panels are collapsed. This is
+      // an ugly hack that enables the element but disables the editor toggle button.
+      // TODO: Remove this if this ever changes.
+      for (const editor of this.element?.querySelectorAll("prose-mirror") ?? []) {
+        editor.disabled = false;
+        const toggle = editor.querySelector(":scope > button.toggle");
+        if (toggle) { toggle.disabled = true; }
+      }
+    }
   }
   return BaseDocumentSheet;
 }

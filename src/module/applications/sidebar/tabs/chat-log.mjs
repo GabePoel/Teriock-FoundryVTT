@@ -1,17 +1,15 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIcon } from "../../../helpers/icon.mjs";
 import { buildCommandOptions, commands } from "../../../helpers/interaction/_module.mjs";
-import { BaseApplicationMixin } from "../../api/mixins/_module.mjs";
 import { ChatMessageConnectionMixin } from "../../shared/_module.mjs";
 
 const { ChatLog } = foundry.applications.sidebar.tabs;
 
 /**
  * @extends {ChatLog}
- * @mixes BaseApplication
  * @mixes ChatMessageConnection
  */
-export default class TeriockChatLog extends mixClasses(ChatLog, BaseApplicationMixin, ChatMessageConnectionMixin) {
+export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConnectionMixin) {
   /** @inheritDoc */
   static CHAT_COMMANDS = (() => {
     const registry = { ...super.CHAT_COMMANDS };
@@ -30,6 +28,30 @@ export default class TeriockChatLog extends mixClasses(ChatLog, BaseApplicationM
     }
     return registry;
   })();
+
+  /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
+  static DEFAULT_OPTIONS = { actions: { toggleCollapse: this._onToggleCollapse } };
+
+  /**
+   * @inheritDoc
+   * @this {TeriockChatLog}
+   */
+  static async _onToggleCollapse(event, target) {
+    await super._onToggleCollapse(event, target);
+    const collapsibleId = this._getCollapsibleId(target);
+    if (collapsibleId) { this.noAutoCollapse.add(collapsibleId); }
+  }
+
+  /** @type {Set<string>} */
+  #noAutoCollapse = new Set();
+
+  /**
+   * The ids to not auto-collapse.
+   * @returns {Set<string>}
+   */
+  get noAutoCollapse() {
+    return this.#noAutoCollapse;
+  }
 
   /** @inheritDoc */
   _getEntryContextOptions() {
@@ -92,7 +114,13 @@ export default class TeriockChatLog extends mixClasses(ChatLog, BaseApplicationM
       const li of /** @type {NodeListOf<HTMLLIElement>} */ document.querySelectorAll(".chat-message[data-message-id]")
     ) {
       const message = game.messages.get(li.dataset.messageId);
-      if (typeof message.system.collapsePanels === "function") { message.system.collapsePanels(li); }
+      if (message.system?.collapsedByDefault) {
+        li.querySelectorAll("[data-collapsible-id]").forEach(el => {
+          if (!this.noAutoCollapse.has(el.dataset.collapsibleId)) {
+            this._toggleCollapsed(el.dataset.collapsibleId, true);
+          }
+        });
+      }
     }
   }
 }

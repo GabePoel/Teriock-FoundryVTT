@@ -8,6 +8,15 @@ export default function BaseApplicationMixin(Base) {
    * @mixin
    */
   class BaseApplication extends Base {
+    /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
+    static DEFAULT_OPTIONS = {
+      actions: {
+        toggleCollapse: this._onToggleCollapse,
+        toggleCollapseRightClick: { buttons: [2], handler: this._onToggleCollapse },
+      },
+      classes: ["teriock"],
+    };
+
     /**
      * Toggle the collapse state of a collapsible element.
      * @param {PointerEvent} event
@@ -15,23 +24,12 @@ export default function BaseApplicationMixin(Base) {
      * @this {BaseApplication}
      * @returns {Promise<void>}
      */
-    static async #onToggleCollapse(event, target) {
+    static async _onToggleCollapse(event, target) {
       event.stopPropagation();
       if (event.target instanceof Element && event.target.closest("[data-collapsible-ignore]")) { return; }
-      const collapsibleId = target.dataset.collapsibleTarget
-        ?? target.closest(".collapsible[data-collapsible-id]")?.dataset.collapsibleId;
-      if (!collapsibleId) { return; }
-      this._toggleCollapsed(collapsibleId);
+      const collapsibleId = this._getCollapsibleId(target);
+      if (collapsibleId) { this._toggleCollapsed(collapsibleId); }
     }
-
-    /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
-    static DEFAULT_OPTIONS = {
-      actions: {
-        toggleCollapse: this.#onToggleCollapse,
-        toggleCollapseRightClick: { buttons: [2], handler: this.#onToggleCollapse },
-      },
-      classes: ["teriock"],
-    };
 
     /**
      * Make and immediately show this application.
@@ -52,18 +50,17 @@ export default function BaseApplicationMixin(Base) {
 
     /**
      * Apply a tracked collapse to every `.collapsible` element and every toggle control (`[data-collapsible-target]`)
-     * sharing the same `collapsible-id` are updated so they stay in sync.
+     * sharing the same `collapsible-id` so they stay in sync.
      * @param {string} collapsibleId
      * @param {boolean} collapsed
-     * @param {ParentNode} [element]
+     * @param {ParentNode} [root]
      */
-    #applyCollapsibleState(collapsibleId, collapsed, element = this.element) {
-      for (const el of element.querySelectorAll(".collapsible[data-collapsible-id]")) {
-        if (el.dataset.collapsibleId !== collapsibleId) { continue; }
+    #applyCollapsibleState(collapsibleId, collapsed, root = this.element) {
+      this.collapsibleElements.set(collapsibleId, collapsed);
+      for (const el of findMatchingElements(root, `.collapsible[data-collapsible-id="${collapsibleId}"]`)) {
         el.classList.toggle("collapsed", collapsed);
-        el.dataset.noAutoToggle = "true";
       }
-      for (const control of element.querySelectorAll(`[data-collapsible-target=${collapsibleId}]`)) {
+      for (const control of findMatchingElements(root, `[data-collapsible-target="${collapsibleId}"]`)) {
         control.classList.toggle("collapse-toggle-open", !collapsed);
       }
     }
@@ -93,6 +90,16 @@ export default function BaseApplicationMixin(Base) {
       const handler = this.options.doubles?.[target.dataset.double];
       if (handler) { handler.call(this, event, target); }
       else { this._onDoubleClickAction(event, target); }
+    }
+
+    /**
+     * Get the collapsible ID from an HTML element.
+     * @param {HTMLElement} htmlElement
+     * @returns {string|null}
+     */
+    _getCollapsibleId(htmlElement) {
+      return htmlElement.dataset.collapsibleTarget
+        ?? htmlElement.closest(".collapsible[data-collapsible-id]")?.dataset.collapsibleId ?? null;
     }
 
     /**
@@ -129,7 +136,7 @@ export default function BaseApplicationMixin(Base) {
      * @param {ParentNode} [element]
      */
     _reapplyCollapsibleSates(element = this.element) {
-      for (const [collapsibleId, collapsed] of this.#collapsibleElements) {
+      for (const [collapsibleId, collapsed] of this.collapsibleElements) {
         this.#applyCollapsibleState(collapsibleId, collapsed, element);
       }
     }
@@ -146,19 +153,33 @@ export default function BaseApplicationMixin(Base) {
     /**
      * Toggle the collapse state of a collapsible element.
      * @param {string} collapsibleId
-     * @param {boolean} [collapsed]
+     * @param {object} [collapsed]
+     * @returns {boolean} - Final collapsed state.
      */
     _toggleCollapsed(collapsibleId, collapsed) {
       collapsed ??=
         !(this.collapsibleElements.has(collapsibleId)
           ? this.collapsibleElements.get(collapsibleId)
-          : this.element.querySelector(`.collapsible[data-collapsible-id=${collapsibleId}]`)?.classList.contains(
+          : this.element.querySelector(`.collapsible[data-collapsible-id="${collapsibleId}"]`)?.classList.contains(
             "collapsed",
           ));
-      this.collapsibleElements.set(collapsibleId, collapsed);
-      if (this.element) { this.#applyCollapsibleState(collapsibleId, collapsed, this.element); }
+      this.#applyCollapsibleState(collapsibleId, collapsed);
+      return collapsed;
     }
   }
 
   return BaseApplication;
+}
+
+/**
+ * Elements matching the selector including the root.
+ * @param {ParentNode} root
+ * @param {string} selector
+ * @returns {HTMLElement[]}
+ */
+function findMatchingElements(root, selector) {
+  const matches = [];
+  if (root instanceof Element && root.matches(selector)) { matches.push(root); }
+  matches.push(...root.querySelectorAll(selector));
+  return matches;
 }

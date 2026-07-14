@@ -1,4 +1,3 @@
-import { TeriockItem } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { panelsField } from "../../../fields/tools/builders.mjs";
 import * as activations from "../../../pseudo-documents/activations/_module.mjs";
@@ -39,12 +38,27 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     });
   }
 
+  /**
+   * The default collapse state for this message's panels.
+   * @returns {boolean}
+   */
+  get collapsedByDefault() {
+    const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
+    if (defaultCollapse === "closed") { return true; }
+    else if (defaultCollapse === "open") { return false; }
+    return this.document.timestamp < Date.now() - game.settings.get("teriock", "autoPanelCollapseTime") * 60 * 1000;
+  }
+
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     const element = options.element;
     if (!element) { return; }
-    this.collapsePanels(element);
+    if (this.collapsedByDefault) {
+      element.querySelectorAll(".collapsible").forEach(el => {
+        el.classList.toggle("collapsed", true);
+      });
+    }
 
     // Remove custom content if it shouldn't be visible
     if (!this.document.isContentVisible) {
@@ -67,21 +81,5 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     return Object.assign(await super._prepareContext(options), {
       activations: this.activations.contents.filter(a => a?.visible),
     });
-  }
-
-  /**
-   * Auto-collapse panels.
-   * @param {HTMLLIElement} htmlElement
-   */
-  collapsePanels(htmlElement) {
-    let autoCollapse;
-    const defaultCollapse = game.settings.get("teriock", "defaultPanelCollapseState");
-    if (defaultCollapse === "closed") { autoCollapse = true; }
-    else if (defaultCollapse === "open") { autoCollapse = false; }
-    else {
-      autoCollapse =
-        this.document.timestamp < Date.now() - game.settings.get("teriock", "autoPanelCollapseTime") * 60 * 1000;
-    }
-    TeriockItem.toggleCollapse(htmlElement, { autoCollapse: true, collapseAll: autoCollapse });
   }
 }
