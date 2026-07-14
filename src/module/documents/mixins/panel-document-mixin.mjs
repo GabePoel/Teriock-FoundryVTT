@@ -2,6 +2,7 @@ import { TeriockChatMessage } from "../_module.mjs";
 import { PanelSheet } from "../../applications/sheets/utility-sheets/_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { systemPath } from "../../helpers/path.mjs";
+import { toId } from "../../helpers/string.mjs";
 
 /**
  * @param {typeof BaseDocument} Base
@@ -19,22 +20,6 @@ export default function PanelDocumentMixin(Base) {
       }
 
       /**
-       * Bind listeners to collapse panel elements.
-       * @param {HTMLElement} element
-       */
-      static bindPanelListeners(element) {
-        element.querySelectorAll("[data-action='toggle-collapse']").forEach(el => {
-          el.addEventListener("click", e => {
-            e.stopPropagation();
-            const target = /** @type {HTMLElement} */ e.target;
-            const collapsable = /** @type {HTMLElement} */ target.closest(".collapsable");
-            collapsable.classList.toggle("collapsed");
-            collapsable.dataset.noAutoToggle = "true";
-          });
-        });
-      }
-
-      /**
        * Toggle collapse state of panel elements.
        * @param {HTMLElement} element
        * @param {object} [options]
@@ -44,7 +29,7 @@ export default function PanelDocumentMixin(Base) {
        * @param {boolean} [options.collapseAssociation]
        */
       static toggleCollapse(element, options = {}) {
-        const selector = options.autoCollapse ? "collapsable:not([data-no-auto-toggle])" : "collapsable";
+        const selector = options.autoCollapse ? "collapsible:not([data-no-auto-toggle])" : "collapsible";
         if (options.collapsePanel) {
           element.querySelectorAll(`.teriock-panel.${selector}`).forEach(el => {
             el.classList.toggle("collapsed", true);
@@ -66,8 +51,13 @@ export default function PanelDocumentMixin(Base) {
       async _buildEmbedHTML(config, options = {}) {
         if (config.values.includes("panel")) {
           if (!config.label) { config.caption = false; }
+          const parts = await this.getPanelParts();
+          parts._id = toId(
+            [options?.relativeTo?.uuid, this.uuid ?? this.id, this.forcedIdentifier].filter(Boolean).join("-"),
+            { hash: true },
+          );
           return foundry.utils.parseHTML(
-            await TeriockTextEditor.makeTooltip(await this.getPanelParts(), {
+            await TeriockTextEditor.makeTooltip(parts, {
               noAssociations: config.values.includes("noAssociations"),
               noBars: config.values.includes("noBars"),
               noBlocks: config.values.includes("noBlocks"),
@@ -95,12 +85,6 @@ export default function PanelDocumentMixin(Base) {
             await this.system.getPanelParts(),
           ); }
         return parts;
-      }
-
-      /** @inheritDoc */
-      onEmbed(element) {
-        PanelDocument.bindPanelListeners(element);
-        super.onEmbed(element);
       }
 
       /**

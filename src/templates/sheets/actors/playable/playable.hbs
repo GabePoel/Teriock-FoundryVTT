@@ -12,22 +12,19 @@
   </div>
   <div class="actor-page">
     {{> "teriock/sheets/actors/playable/parts/sidebar"}}
-    <div
-      class="
-        actor-sidebar-tabber-container
-        sidebar-collapser
-        {{#if (not sidebarOpen)}}
-          collapsed
-        {{/if}}
-      "
-    >
+    <div class="actor-sidebar-tabber-container sidebar-collapser collapsible" data-collapsible-id="sidebar">
       <div class="actor-tabbers">
         <div
           class="actor-tabber-container"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Toggle.label"}}'
           data-tooltip-direction="RIGHT"
         >
-          <button class="actor-tabber actor-sidebar-tabber ui-controls" data-action="toggleSidebar" type="button">
+          <button
+            class="actor-tabber actor-sidebar-tabber ui-controls"
+            data-action="toggleCollapse"
+            data-collapsible-target="sidebar"
+            type="button"
+          >
             <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} hflip expanded-icon'></i>
             <i class='{{makeIconClass TERIOCK.display.icons.ui.tabRight "solid"}} collapsed-icon'></i>
           </button>

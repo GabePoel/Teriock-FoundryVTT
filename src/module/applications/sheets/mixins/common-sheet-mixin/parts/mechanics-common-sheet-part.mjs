@@ -26,7 +26,6 @@ export default function MechanicsCommonSheetPart(Base) {
           deleteMechanic: this._onDeleteMechanic,
           editActiveQualifier: this._onEditActiveQualifier,
           setToggle: this._onSetToggle,
-          toggleMechanicCollapse: this._onToggleMechanicCollapse,
         },
       };
 
@@ -93,32 +92,6 @@ export default function MechanicsCommonSheetPart(Base) {
         if (present) { set.delete(term); }
         else { set.add(term); }
         await this.document.update({ [path]: Array.from(set) });
-      }
-
-      /**
-       * Toggle a mechanic section's collapsed state.
-       * @param {PointerEvent} event
-       * @param {HTMLElement} target
-       * @this {MechanicsCommonSheetPart}
-       */
-      static _onToggleMechanicCollapse(event, target) {
-        if (event.target.closest(".teriock-mechanic-header-buttons")) { return; }
-        const container = target.closest(".teriock-mechanic-container");
-        const id = container?.dataset.mechanicId;
-        if (!id || !container) { return; }
-        if (this._mechanicCollapsedIds.has(id)) {
-          this._mechanicCollapsedIds.delete(id);
-          container.classList.remove("collapsed");
-        } else {
-          this._mechanicCollapsedIds.add(id);
-          container.classList.add("collapsed");
-        }
-      }
-
-      /** @inheritDoc */
-      constructor(...args) {
-        super(...args);
-        this._mechanicCollapsedIds = new Set();
       }
 
       /**
@@ -227,12 +200,7 @@ export default function MechanicsCommonSheetPart(Base) {
        */
       async _prepareMechanicEntries(collection) {
         return Promise.all(collection.contents.map(async mechanic => {
-          return {
-            collapsed: this._mechanicCollapsedIds.has(mechanic.id),
-            formEditor: (await mechanic.getEditor()).outerHTML,
-            mechanic,
-            tips: mechanic.formTips,
-          };
+          return { formEditor: (await mechanic.getEditor()).outerHTML, mechanic, tips: mechanic.formTips };
         }));
       }
 

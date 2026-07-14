@@ -10,21 +10,14 @@
     <span>{{makeIcon TERIOCK.display.icons.pseudoDocument.mechanic "solid"}}</span>
   </button>
 {{/if}}
-{{#if hasMenu}}
-  <button
-    id='{{concat @root/appId "toggle-sheet-menu-button"}}'
-    class="
-      teriock-sheet-icon
-      teriock-sheet-menu-toggle
-      {{#if (not menuCollapsed)}}
-        teriock-sheet-menu-toggle-open
-      {{/if}}
-    "
-    type="button"
-    data-tooltip='{{localize (ifThen menuCollapsed "TERIOCK.SHEETS.Common.NAVIGATION.openMenu" "TERIOCK.SHEETS.Common.NAVIGATION.closeMenu")}}'
-    data-action="toggleMenu"
-    data-never-disable="true"
-  >
-    <span>{{makeIcon TERIOCK.display.icons.ui.menuOpen "solid"}}</span>
-  </button>
-{{/if}}
+<button
+  id='{{concat @root/appId "toggle-sheet-menu-button"}}'
+  class="teriock-sheet-icon teriock-sheet-menu-toggle"
+  type="button"
+  data-tooltip='{{localize "TERIOCK.SHEETS.Common.NAVIGATION.toggleMenu"}}'
+  data-action="toggleCollapse"
+  data-collapsible-target="menu"
+  data-never-disable="true"
+>
+  <span>{{makeIcon TERIOCK.display.icons.ui.menuOpen "solid"}}</span>
+</button>

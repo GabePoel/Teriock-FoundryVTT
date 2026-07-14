@@ -8,7 +8,6 @@ const { fields } = foundry.data;
  * Previews are used for sorting and filtering documents in sheets and are never stored to the database.
  * @property {Teriock.Models.PreviewDisplay} display
  * @property {Teriock.Models.BaseFilters} filters
- * @property {Teriock.Models.PreviewMenus} menus
  * @property {Teriock.Models.PreviewSort} sort
  * @property {string} search
  */
@@ -71,11 +70,6 @@ export default class BasePreviewModel extends BaseDataModel {
     return Object.assign(super.defineSchema(), {
       display: new fields.SchemaField(this.defineDisplay()),
       filters: new fields.SchemaField(this.defineFilters()),
-      menus: new fields.SchemaField({
-        block: new fields.BooleanField({ initial: false }),
-        filter: new fields.BooleanField({ initial: false }),
-        sort: new fields.BooleanField({ initial: false }),
-      }),
       name: new fields.StringField(),
       search: new fields.StringField(),
       sort: new fields.SchemaField({

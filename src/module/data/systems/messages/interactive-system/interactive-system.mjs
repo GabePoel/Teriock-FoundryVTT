@@ -44,7 +44,6 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
     await super._onRender(context, options);
     const element = options.element;
     if (!element) { return; }
-    TeriockItem.bindPanelListeners(element);
     this.collapsePanels(element);
 
     // Remove custom content if it shouldn't be visible

@@ -20,9 +20,8 @@ export default function CommonSheetMixin(Base) {
      * @mixes MechanicsTabsCommonSheetPart
      * @mixes MechanicsCommonSheetPart
      * @mixes LockingCommonSheetPart
-     * @mixes MenuCommonSheetPart
      * @mixes StatDiceCommonSheetPart
-     * @mixes ToggleCommonSheetPart
+     * @mixes PreviewCommonSheetPart
      * @mixin
      * @property {AnyCommonDocument} document
      */
@@ -38,9 +37,8 @@ export default function CommonSheetMixin(Base) {
         parts.ImageEditingCommonSheetPart,
         parts.MechanicsTabsCommonSheetPart,
         parts.LockingCommonSheetPart,
-        parts.MenuCommonSheetPart,
         parts.StatDiceCommonSheetPart,
-        parts.ToggleCommonSheetPart,
+        parts.PreviewCommonSheetPart,
         parts.MechanicsCommonSheetPart,
         SourceRefreshButtonSheetMixin,
       )

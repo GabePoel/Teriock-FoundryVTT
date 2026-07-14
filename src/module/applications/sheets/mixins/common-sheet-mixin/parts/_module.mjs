@@ -6,6 +6,5 @@ export { default as ImageEditingCommonSheetPart } from "./image-editing-common-s
 export { default as LockingCommonSheetPart } from "./locking-common-sheet-part.mjs";
 export { default as MechanicsCommonSheetPart } from "./mechanics-common-sheet-part.mjs";
 export { default as MechanicsTabsCommonSheetPart } from "./mechanics-tabs-common-sheet-part.mjs";
-export { default as MenuCommonSheetPart } from "./menu-common-sheet-part.mjs";
+export { default as PreviewCommonSheetPart } from "./preview-common-sheet-part.mjs";
 export { default as StatDiceCommonSheetPart } from "./stat-dice-common-sheet-part.mjs";
-export { default as ToggleCommonSheetPart } from "./toggle-common-sheet-part.mjs";

@@ -177,6 +177,7 @@ export function defaultJSONField() {
 export function panelsField() {
   return new ArrayField(
     new SchemaField({
+      _id: new DocumentIdField({ initial: () => foundry.utils.randomID(16) }),
       associations: associationsField(),
       bars: barsField(),
       blocks: blocksField(),

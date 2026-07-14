@@ -24,7 +24,7 @@ export default class ApplicableEffectSheet
     commonSheetParts.FieldsCommonSheetPart,
     commonSheetParts.LockingCommonSheetPart,
     commonSheetParts.MechanicsCommonSheetPart,
-    commonSheetParts.ToggleCommonSheetPart,
+    commonSheetParts.PreviewCommonSheetPart,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

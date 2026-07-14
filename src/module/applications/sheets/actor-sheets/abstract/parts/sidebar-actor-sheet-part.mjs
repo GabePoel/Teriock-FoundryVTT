@@ -18,44 +18,10 @@ export default function SidebarActorSheetPart(Base) {
         await this.document.update({ "system.combat.attackPenalty": 0 });
       }
 
-      /**
-       * Toggle the sidebar's collapsed state.
-       * @returns {Promise<void>}
-       */
-      static async #onToggleSidebar() {
-        this.element.querySelectorAll(".sidebar-collapser").forEach(el => el.classList.toggle("collapsed"));
-        this._sidebarOpen = !this._sidebarOpen;
-      }
-
-      /**
-       * Toggle a stat drawer's collapsed state.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>}
-       */
-      static async #onToggleStatDrawer(_event, target) {
-        target.closest(".actor-status-bar-box")?.querySelector(".die-drawer:not(.top-drawer)")?.classList.toggle(
-          "collapsed",
-        );
-        const stat = target.dataset.stat;
-        this[`_${stat}DrawerOpen`] = !this[`_${stat}DrawerOpen`];
-      }
-
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: {
-          resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty },
-          toggleSidebar: this.#onToggleSidebar,
-          toggleStatDrawer: { buttons: [2], handler: this.#onToggleStatDrawer },
-        },
+        actions: { resetAttackPenalty: { buttons: [2], handler: this.#onResetAttackPenalty } },
       };
-
-      /** @inheritDoc */
-      constructor(...args) {
-        super(...args);
-        this._sidebarOpen = true;
-        for (const stat of Object.keys(TERIOCK.config.die.stats)) { this[`_${stat}DrawerOpen`] = true; }
-      }
 
       /**
        * Creates a context menu for selecting piercing type.
@@ -98,11 +64,7 @@ export default function SidebarActorSheetPart(Base) {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        for (const stat of Object.keys(TERIOCK.config.die.stats)) {
-          context[`${stat}DrawerCollapsed`] = !this[`_${stat}DrawerOpen`];
-        }
-        return Object.assign(context, { sidebarOpen: this._sidebarOpen, takeStatButtons: true });
+        return Object.assign(await super._prepareContext(options), { takeStatButtons: true });
       }
     }
   );

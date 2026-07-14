@@ -21,7 +21,7 @@ export default function MechanicsTabsCommonSheetPart(Base) {
       static async _onToggleMechanics(_event, target) {
         this._tab = this._tab === "mechanics" ? "overview" : "mechanics";
         await this.render();
-        if (typeof this.toggleMenu === "function") { this.toggleMenu(false); }
+        this._toggleCollapsed("menu", true);
         if (target.classList.contains("teriock-sheet-menu-mechanics-container")) {
           this.element.querySelector(".teriock-sheet-mechanics-close")?.focus();
         }
@@ -47,7 +47,7 @@ export default function MechanicsTabsCommonSheetPart(Base) {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        return Object.assign(await super._prepareContext(options), { tab: this._tab });
+        return Object.assign(await super._prepareContext(options), { canHaveMechanics: true, tab: this._tab });
       }
     }
   );

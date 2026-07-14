@@ -1,12 +1,8 @@
-import { BasePreviewModel } from "../../../../../data/models/preview-models/_module.mjs";
 import { makeIconClass } from "../../../../../helpers/icon.mjs";
 import { getImage } from "../../../../../helpers/path.mjs";
 import { toKebabCase } from "../../../../../helpers/string.mjs";
 import { TeriockDialog } from "../../../../api/_module.mjs";
 import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../../../../dialogs/_module.mjs";
-import { HTMLTernaryElement } from "../../../../elements/_module.mjs";
-
-const { SearchFilter } = foundry.applications.ux;
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -33,25 +29,6 @@ export default function DocumentCreationCommonSheetPart(Base) {
         const type = /** @type {Teriock.Documents.ChildType|undefined} */ target.dataset.type;
         if (type) { await this._createChild(type); }
       }
-
-      constructor(...args) {
-        super(...args);
-        this.previewMenus = {};
-        for (const [type, options] of Object.entries(TERIOCK.config.document)) {
-          let PreviewModelCls = BasePreviewModel;
-          if (options?.previewModel) {
-            PreviewModelCls = options.previewModel;
-          }
-          this.previewMenus[type] = new PreviewModelCls({ name: type }, { parent: this.document });
-        }
-        this.previewMenus.children = new BasePreviewModel({ name: "children" }, { parent: this.document });
-        this.previewMenus.children.updateSource({ display: { gapless: true, size: "small" } });
-        /** @type {Record<string, string>} */
-        this._searchStrings = {};
-      }
-
-      /** @type {Record<string, BasePreviewModel>} */
-      previewMenus;
 
       /**
        * Connect a left-click context menu to the consolidated children add button.
@@ -93,40 +70,6 @@ export default function DocumentCreationCommonSheetPart(Base) {
             await this.document.createChildDocuments(TERIOCK.config.document[type]?.documentName, [obj]);
           }
         }
-      }
-
-      /**
-       * Bind a {@link SearchFilter} to every preview search input rendered on the sheet, scoping each to its
-       * `data-search-key` results container and persisting the query onto the matching preview model.
-       */
-      _initSearchFilters() {
-        this.element.querySelectorAll(".teriock-block-search[data-search-key]").forEach(
-          /** @param {HTMLInputElement} input */ input => {
-            const searchKey = input.dataset.searchKey;
-            if (!searchKey) { return; }
-            const resultsContainer = this.element.querySelector(
-              `.teriock-block-results[data-search-key="${searchKey}"]`,
-            );
-            if (!resultsContainer) { return; }
-            const preview = this.previewMenus?.[searchKey];
-            const initial = preview ? preview.search : (this._searchStrings[searchKey] || "");
-            const searchFilter = new SearchFilter({
-              contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,
-              initial,
-              inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
-              callback: (_event, query, rgx, container) => {
-                this._searchStrings[searchKey] = query;
-                if (preview) { preview.updateSource({ search: query }); }
-                container.querySelectorAll(".teriock-block").forEach(card => {
-                  const title = card.querySelector(".teriock-block-title")?.textContent ?? "";
-                  const isMatch = rgx ? rgx.test(title) : true;
-                  card.classList.toggle("hidden", !isMatch);
-                });
-              },
-            });
-            searchFilter.bind(this.element);
-          },
-        );
       }
 
       /**
@@ -235,75 +178,7 @@ export default function DocumentCreationCommonSheetPart(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        this.element.querySelectorAll(".teriock-block[data-uuid]").forEach(/** @param {HTMLElement} el */ el => {
-          const uuid = el.dataset.uuid;
-          fromUuid(uuid).then(doc => doc?.onEmbed(el));
-        });
-        this.element.querySelectorAll("[name^=\"previewMenus.\"]").forEach(el => {
-          el.addEventListener("change", e => {
-            /** @type {AbstractFormInputElement} */
-            const filterElement = e.target;
-            this.setPreviewSource(filterElement.name, filterElement.value);
-            if (filterElement instanceof HTMLTernaryElement) { setTimeout(() => this.render(), 250); }
-            else { this.render(); }
-          });
-        });
-        this._initSearchFilters();
         this._connectChildrenCreateMenu();
-      }
-
-      /**
-       * Build grouped preview sections for the consolidated children block.
-       * @param {object} context
-       */
-      _prepareChildrenPreviewGroups(context) {
-        const groups = [];
-        for (const type of this.document.visibleTypes) {
-          const config = TERIOCK.config.document[type];
-          const docs = context[config.getter];
-          if (docs?.length) {
-            groups.push({ docs: this.previewMenus.children.previewDocuments(docs ?? []), empty: config.plural });
-          }
-        }
-        if (!groups.length) {
-          groups.push({ docs: [], empty: _loc("TERIOCK.DOCUMENTS.document.plural") });
-        }
-        context.previewGroups.children = groups;
-        context.filterForms.children = this.previewMenus.children?._getEditorFormsSync().outerHTML;
-        context.previewSortOrders.children = this.previewMenus.children?.constructor.sortOrders;
-      }
-
-      /** @inheritDoc */
-      async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        let children = await this.document.getVisibleChildren();
-        children = children.filter(c => {
-          if (foundry.utils.hasProperty(c, "system.revealed")) {
-            return foundry.utils.getProperty(c, "system.revealed") || game.user.isGM;
-          }
-          return true;
-        });
-        context.filterForms = {};
-        context.previews = this.previewMenus;
-        context.previewGroups = {};
-        context.previewSortOrders = {};
-        context.addType = this.document.visibleTypes.length !== 1 ? "children" : this.document.visibleTypes[0];
-        context.addButton = this.document.visibleTypes.length === 1;
-        context.addMenu = !context.addButton;
-        context.searchStrings = foundry.utils.deepClone(this._searchStrings);
-        for (const [type, options] of Object.entries(TERIOCK.config.document)) {
-          if (options?.getter && ["ActiveEffect", "Item"].includes(options?.documentName)) {
-            context[options.getter] = TERIOCK.config.document[type].sorter(children.filter(c => c.type === type));
-            context.filterForms[type] = this.previewMenus[type]?._getEditorFormsSync().outerHTML;
-            context.previewSortOrders[type] = this.previewMenus[type]?.constructor.sortOrders;
-            context.previewGroups[type] = [{
-              docs: this.previewMenus[type].previewDocuments(context[options.getter]),
-              empty: options.plural,
-            }];
-          }
-        }
-        this._prepareChildrenPreviewGroups(context);
-        return context;
       }
 
       /**
@@ -340,21 +215,6 @@ export default function DocumentCreationCommonSheetPart(Base) {
           }
         }
         return false;
-      }
-
-      /**
-       * Apply a change to a preview model's source from a `previewMenus.<type>.<path>` form/data path. Any other
-       * path falls back to a direct property set so the generic toggle handlers stay safe.
-       * @param {string} formPath
-       * @param {*} value
-       */
-      setPreviewSource(formPath, value) {
-        if (!formPath?.startsWith("previewMenus.")) {
-          foundry.utils.setProperty(this, formPath, value);
-          return;
-        }
-        const [, type, ...rest] = formPath.split(".");
-        this.previewMenus[type]?.updateSource({ [rest.join(".")]: value });
       }
     }
   );

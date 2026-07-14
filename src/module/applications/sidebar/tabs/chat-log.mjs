@@ -37,20 +37,20 @@ export default class TeriockChatLog extends mixClasses(ChatLog, BaseApplicationM
       icon: makeIcon(TERIOCK.display.icons.ui.expand, "contextMenu"),
       label: "TERIOCK.MESSAGE.Menu.expandAll",
       onClick: (_ev, li) => {
-        li.querySelectorAll(".collapsable").forEach(el => {
-          el.classList.toggle("collapsed", false);
+        li.querySelectorAll(".collapsible[data-collapsible-id]").forEach(el => {
+          this._toggleCollapsed(el.dataset.collapsibleId, false);
         });
       },
-      visible: li => Boolean(li.querySelector(".collapsable.collapsed")),
+      visible: li => Boolean(li.querySelector(".collapsible.collapsed")),
     }, {
       icon: makeIcon(TERIOCK.display.icons.ui.collapse, "contextMenu"),
       label: "TERIOCK.MESSAGE.Menu.collapseAll",
       onClick: (_ev, li) => {
-        li.querySelectorAll(".collapsable").forEach(el => {
-          el.classList.toggle("collapsed", true);
+        li.querySelectorAll(".collapsible[data-collapsible-id]").forEach(el => {
+          this._toggleCollapsed(el.dataset.collapsibleId, true);
         });
       },
-      visible: li => Boolean(li.querySelector(".collapsable:not(.collapsed)")),
+      visible: li => Boolean(li.querySelector(".collapsible:not(.collapsed)")),
     }, {
       icon: makeIcon(TERIOCK.display.icons.ui.openWindow, "contextMenu"),
       label: "TERIOCK.SYSTEMS.Common.MENU.openSource",

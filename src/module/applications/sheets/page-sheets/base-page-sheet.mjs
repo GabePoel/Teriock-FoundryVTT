@@ -8,7 +8,6 @@ import {
   LockingCommonSheetPart,
   MechanicsCommonSheetPart,
   MechanicsTabsCommonSheetPart,
-  MenuCommonSheetPart,
 } from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal;
@@ -29,7 +28,6 @@ export default class BasePageSheet
     ConnectionCommonSheetPart,
     DragDropCommonSheetPart,
     LockingCommonSheetPart,
-    MenuCommonSheetPart,
     MechanicsCommonSheetPart,
     MechanicsTabsCommonSheetPart,
   )

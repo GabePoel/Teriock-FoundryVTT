@@ -1,5 +1,5 @@
 {{!-- Make sure to update `ApplicableEffectSystem.prepareDerivedData()` when this is changed. --}}
-<div class="teriock-panel collapsable es-container">
+<div class="teriock-panel collapsible es-container" data-collapsible-id='{{concat "panel-" _id}}'>
   <div
     class="
       overlay
@@ -8,7 +8,7 @@
       {{/if}}
     "
   ></div>
-  <header class="teriock-panel-header" data-action="toggle-collapse">
+  <header class="teriock-panel-header" data-action="toggleCollapse">
     <div
       class="teriock-panel-image"
       {{#if (exists color)}}
@@ -76,14 +76,14 @@
               <div
                 class="
                   teriock-panel-association
-                  collapsable
+                  collapsible
                   {{#if message}}
                     collapsed
                   {{/if}}
                 "
+                data-collapsible-id='{{concat "panel-" @root/_id "-association-" title}}'
               >
-                <div class="teriock-panel-association-row teriock-panel-association-title" data-action="toggle-collapse"
-                >
+                <div class="teriock-panel-association-row teriock-panel-association-title" data-action="toggleCollapse">
                   {{#if (exists icon)}}
                     <div class="teriock-panel-association-icon">
                       {{makeIcon icon "light"}}

@@ -2,8 +2,6 @@ declare global {
   namespace Teriock.Models {
     export type PreviewDisplay = { gapless: boolean, size: Teriock.Keys.CardDisplaySize };
 
-    export type PreviewMenus = { block: boolean, filter: boolean, sort: boolean };
-
     export type PreviewSort = { ascending: boolean, option: string };
 
     export type BaseFilters = {

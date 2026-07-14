@@ -4,49 +4,52 @@
       <div class="teriock-block-options-header">
         <toggle-button
           class="{{ ../type }}-block-menu-toggle block-menu-toggle"
-          icon="{{ @root/TERIOCK.display.icons.ui.options }}"
-          value="{{ preview.menus.block }}"
-          data-path="previewMenus.{{ ../type }}.menus.block"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.blockOptions"}}'
+          data-action="toggleCollapse"
+          data-collapsible-target="preview-{{ ../type }}-block"
           data-never-disable="true"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.blockOptions"}}'
+          icon="{{ @root/TERIOCK.display.icons.ui.options }}"
+          value='{{path @root/previewToggles ../type "block"}}'
         ></toggle-button>
 
         <toggle-button
           class="{{ ../type }}-sort-menu-toggle sort-menu-toggle"
-          icon="{{ @root/TERIOCK.display.icons.ui.sort }}"
-          value="{{ preview.menus.sort }}"
-          data-path="previewMenus.{{ ../type }}.menus.sort"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
+          data-action="toggleCollapse"
+          data-collapsible-target="preview-{{ ../type }}-sort"
           data-never-disable="true"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
+          icon="{{ @root/TERIOCK.display.icons.ui.sort }}"
+          value='{{path @root/previewToggles ../type "sort"}}'
         ></toggle-button>
 
         <toggle-button
           class="{{ ../type }}-filter-menu-toggle filter-menu-toggle"
-          icon="{{ @root/TERIOCK.display.icons.ui.filter }}"
-          value="{{ preview.menus.filter }}"
-          data-path="previewMenus.{{ ../type }}.menus.filter"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
+          data-action="toggleCollapse"
+          data-collapsible-target="preview-{{ ../type }}-filter"
           data-never-disable="true"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
+          icon="{{ @root/TERIOCK.display.icons.ui.filter }}"
+          value='{{path @root/previewToggles ../type "filter"}}'
         ></toggle-button>
 
         <input
           class="{{ ../type }}-search teriock-block-search"
-          type="search"
-          placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
-          data-type="{{ ../type }}"
-          data-search-key="{{ ../type }}"
           data-never-disable="true"
+          data-search-key="{{ ../type }}"
+          data-type="{{ ../type }}"
+          placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
+          type="search"
           value="{{ preview.search }}"
         />
 
         {{#if ../addButton}}
           <button
             class="toggle-button {{ ../type }}-add-button add-button"
-            type="button"
-            data-tab="{{ ../type }}"
-            data-type="{{ ../type }}"
             data-action="createChild"
+            data-tab="{{ ../type }}"
             data-tooltip='{{localize "TERIOCK.SHEETS.Common.PREVIEW.addType" type=(path @root/TERIOCK.config.document ../type "label")}}'
+            data-type="{{ ../type }}"
+            type="button"
           >
             {{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}
           </button>
@@ -56,14 +59,10 @@
       </div>
 
       <div
-        class="
-          teriock-block-options-content
-          {{#unless preview.menus.block}}
-            collapsed
-          {{/unless}}
-        "
-        data-content-type="{{ ../type }}"
+        class="teriock-block-options-content collapsible collapsed"
+        data-collapsible-id="preview-{{ ../type }}-block"
         data-content-menu="block"
+        data-content-type="{{ ../type }}"
       >
         <div class="teriock-block-options-content-inner">
           <div class="tgrid g4">
@@ -71,11 +70,11 @@
               <label for="{{ ../type }}-gapless">{{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}</label>
               <input
                 id="{{ ../type }}-gapless"
-                type="checkbox"
                 data-action="sheetToggle"
                 data-bool="{{ preview.display.gapless }}"
-                data-path="previewMenus.{{ ../type }}.display.gapless"
                 data-never-disable="true"
+                data-path="previewMenus.{{ ../type }}.display.gapless"
+                type="checkbox"
                 {{checked preview.display.gapless}}
               />
             </div>
@@ -83,8 +82,8 @@
               <select
                 id="{{ ../type }}-size"
                 data-action="sheetSelect"
-                data-path="previewMenus.{{ ../type }}.display.size"
                 data-never-disable="true"
+                data-path="previewMenus.{{ ../type }}.display.size"
               >
                 {{selectOptions
                   @root/TERIOCK.config.display.sizes
@@ -97,12 +96,8 @@
       </div>
 
       <div
-        class="
-          teriock-block-options-content
-          {{#unless preview.menus.sort}}
-            collapsed
-          {{/unless}}
-        "
+        class="teriock-block-options-content collapsible collapsed"
+        data-collapsible-id="preview-{{ ../type }}-sort"
         data-content-type="{{ ../type }}"
         data-content-menu="sort"
       >
@@ -112,11 +107,11 @@
               <label for="{{ ../type }}-ascending">{{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}</label>
               <input
                 id="{{ ../type }}-ascending"
-                type="checkbox"
                 data-action="sheetToggle"
                 data-bool="{{ preview.sort.ascending }}"
-                data-path="previewMenus.{{ ../type }}.sort.ascending"
                 data-never-disable="true"
+                data-path="previewMenus.{{ ../type }}.sort.ascending"
+                type="checkbox"
                 {{checked preview.sort.ascending}}
               />
             </div>
@@ -124,8 +119,8 @@
               <select
                 id="{{ ../type }}-sort"
                 data-action="sheetSelect"
-                data-path="previewMenus.{{ ../type }}.sort.option"
                 data-never-disable="true"
+                data-path="previewMenus.{{ ../type }}.sort.option"
               >
                 {{selectOptions
                   (lookup @root.previewSortOrders ../type)
@@ -139,12 +134,8 @@
       </div>
 
       <div
-        class="
-          teriock-block-options-content
-          {{#unless preview.menus.filter}}
-            collapsed
-          {{/unless}}
-        "
+        class="teriock-block-options-content collapsible collapsed"
+        data-collapsible-id="preview-{{ ../type }}-filter"
         data-content-type="{{ ../type }}"
         data-content-menu="filter"
       >

@@ -1,17 +1,7 @@
-<div
-  class="
-    teriock-mechanic-container
-    collapsable
-    {{#if collapsed}}
-      collapsed
-    {{/if}}
-  "
-  data-mechanic-id="{{ mechanic.id }}"
->
-  <header class="teriock-mechanic-header draggable" data-action="toggleMechanicCollapse" data-uuid="{{ mechanic.uuid }}"
-  >
+<div class="teriock-mechanic-container collapsible" data-collapsible-id="mechanic-{{ mechanic.id }}">
+  <header class="teriock-mechanic-header draggable" data-action="toggleCollapse" data-uuid="{{ mechanic.uuid }}">
     <div class="teriock-mechanic-header-name">{{localize mechanic.label}}</div>
-    <div class="teriock-mechanic-header-buttons">
+    <div class="teriock-mechanic-header-buttons" data-collapsible-ignore>
       {{#if mechanic.canCrit}}
         <div class="teriock-mechanic-header-button-group">
           <button
