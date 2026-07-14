@@ -124,16 +124,22 @@ export default function BaseApplicationMixin(Base) {
       return Object.assign(await super._prepareContext(options), { appId: this.id, TERIOCK });
     }
 
+    /**
+     * Re-apply every tracked collapsible state.
+     * @param {ParentNode} [element]
+     */
+    _reapplyCollapsibleSates(element = this.element) {
+      for (const [collapsibleId, collapsed] of this.#collapsibleElements) {
+        this.#applyCollapsibleState(collapsibleId, collapsed, element);
+      }
+    }
+
     /** @inheritDoc */
     _replaceHTML(result, content, options) {
       const roots = result instanceof Element
         ? [result]
         : Object.values(result ?? {}).filter(node => node instanceof Element);
-      for (const root of roots) {
-        for (const [collapsibleId, collapsed] of this.collapsibleElements) {
-          this.#applyCollapsibleState(collapsibleId, collapsed, root);
-        }
-      }
+      for (const root of roots) { this._reapplyCollapsibleSates(root); }
       super._replaceHTML(result, content, options);
     }
 

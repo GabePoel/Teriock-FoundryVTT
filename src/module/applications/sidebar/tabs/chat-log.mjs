@@ -79,6 +79,13 @@ export default class TeriockChatLog extends mixClasses(ChatLog, BaseApplicationM
   }
 
   /** @inheritDoc */
+  async updateMessage(message, notify = false) {
+    await super.updateMessage(message, notify);
+    const card = this.element?.querySelector(`.message[data-message-id="${message.id}"]`);
+    if (card) { this._reapplyCollapsibleSates(card); }
+  }
+
+  /** @inheritDoc */
   updateTimestamps() {
     super.updateTimestamps();
     for (
