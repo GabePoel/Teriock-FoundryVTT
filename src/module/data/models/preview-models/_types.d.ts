@@ -14,7 +14,7 @@ declare global {
 
     export type CostFilters = {
       components: Record<Teriock.Keys.Component, boolean | null>;
-      primary: Record<Teriock.Keys.PrimaryCost, boolean | null>;
+      primary: Record<Teriock.Keys.Stat, boolean | null>;
       tweaks: Record<Teriock.Keys.CostTweak, boolean | null>;
     };
 

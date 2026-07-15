@@ -1,5 +1,7 @@
+import { icons } from "../../../constants/display/icons.mjs";
 import { FormulaField } from "../../../data/fields/_module.mjs";
 import { formulaExists, substituteFormula } from "../../../helpers/formula.mjs";
+import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentDialog } from "../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../shared/_module.mjs";
 
@@ -12,9 +14,14 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
   static DEFAULT_OPTIONS = {
     actions: { ok: this._onDone },
     classes: ["dialog"],
+    form: { closeOnSubmit: false, submitOnChange: true },
     position: { width: 425 },
-    window: { resizable: false },
+    tag: "form",
+    window: { contentClasses: ["standard-form"], resizable: false },
   };
+
+  /** @type {Record<string, HandlebarsTemplatePart>} */
+  static PARTS = { footer: { template: "templates/generic/form-footer.hbs" } };
 
   /**
    * Close the manager.
@@ -81,12 +88,34 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
   }
 
   /** @inheritDoc */
+  async _onFirstRender(context, options = {}) {
+    await super._onFirstRender(context, options);
+    this.element.querySelector(".form-footer button")?.focus();
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options = {}) {
     return Object.assign(await super._prepareContext(options), {
       consumeStatDiceField: this._consumeStatDiceField,
+      editStatBar: true,
       forHarmField: this._forHarmField,
       state: this.state,
       substitutionField: this._substitutionField,
     });
+  }
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    if (partId === "footer") {
+      context.buttons = [{
+        action: "ok",
+        default: true,
+        icon: makeIconClass(icons.ui.done, "button"),
+        label: "TERIOCK.TERMS.Common.done",
+        type: "submit",
+      }];
+    }
+    return context;
   }
 }

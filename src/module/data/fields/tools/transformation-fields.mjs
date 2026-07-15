@@ -1,11 +1,14 @@
 import { LocalDocumentField } from "../_module.mjs";
 import documentConfig from "../../../constants/config/document-config.mjs";
+import statConfig from "../../../constants/config/stat-config.mjs";
 import transformationConfig from "../../../constants/config/transformation-config.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { choiceMap, objectMap } from "../../../helpers/utils.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
+
+const RESET_STATS = Object.fromEntries(Object.entries(statConfig).filter(([_k, v]) => v.transformationReset));
 
 /**
  * Species transformation fields.
@@ -66,16 +69,11 @@ export function automationTransformationFields() {
         label: "TERIOCK.SCHEMA.Transformation.override.label",
       },
     ),
-    reset: new fields.SetField(
-      new fields.StringField({
-        choices: choiceMap(transformationConfig.reset, k => TERIOCK.config.cost.primary.keys[k].label),
-      }),
-      {
-        hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
-        initial: Object.keys(transformationConfig.reset).filter(k => transformationConfig.reset[k].initial),
-        label: "TERIOCK.SCHEMA.Transformation.reset.label",
-      },
-    ),
+    reset: new fields.SetField(new fields.StringField({ choices: choiceMap(RESET_STATS, k => statConfig[k].label) }), {
+      hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
+      initial: Object.keys(RESET_STATS).filter(k => RESET_STATS[k].transformationReset.initial),
+      label: "TERIOCK.SCHEMA.Transformation.reset.label",
+    }),
     suppress: new fields.SetField(
       new fields.StringField({ choices: choiceMap(transformationConfig.suppress, k => documentConfig[k].label) }),
       {

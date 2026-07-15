@@ -1,5 +1,5 @@
 import { StatDie } from "../_module.mjs";
-import { StatPoolModel } from "../../models/stat-pool-models/_module.mjs";
+import { StatPoolModel } from "../../models/_module.mjs";
 
 declare global {
   namespace Teriock.StatDie {

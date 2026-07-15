@@ -357,7 +357,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
    * @param {Teriock.Execution.AbilityExecutionOptions} options
    */
   initializeExecution(options = {}) {
-    this.costs = objectMap(TERIOCK.config.cost.primary, () => 0);
+    this.costs = objectMap(TERIOCK.config.stat, () => 0);
     this._updateArmament(this.armament, options);
     if (!this.bonus) { this.updateSource({ bonus: "0" }); }
     this.limb = this.#resolveLimb(options);

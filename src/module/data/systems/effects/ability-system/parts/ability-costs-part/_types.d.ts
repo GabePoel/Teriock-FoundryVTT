@@ -15,7 +15,7 @@ declare global {
         /** <schema> Component costs */
         components: Record<Teriock.Keys.Component, CostComponentValue>;
         /** <schema> Primary costs */
-        primary: Record<Teriock.Keys.PrimaryCost, CostPrimaryValue>;
+        primary: Record<Teriock.Keys.Stat, CostPrimaryValue>;
         /** <schema> Cost tweaks */
         tweaks: Record<Teriock.Keys.CostTweak, number>;
       };

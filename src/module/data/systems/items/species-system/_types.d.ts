@@ -1,6 +1,8 @@
 declare global {
   namespace Teriock.Models {
-    export type SpeciesSystemData = SpeciesTransformationPartData & {
+    export type SpeciesStatIncreaseFields = { [K in Teriock.Keys.DieStat as `${K}Increase`]: string; };
+
+    export type SpeciesSystemData = SpeciesStatIncreaseFields & SpeciesTransformationPartData & {
       /** <schema> Age of maturity */
       adult: number;
       /** <schema> Appearance */
@@ -9,14 +11,10 @@ declare global {
       attributeIncrease: string;
       /** <schema> Battle rating */
       br: number;
-      /** <schema> HP increase */
-      hpIncrease: string;
       /** <schema> Innate ranks */
       innateRanks: string;
       /** <schema> Maximum lifespan */
       lifespan: number | null;
-      /** <schema> MP increase */
-      mpIncrease: string;
       /** <schema> Size constraints */
       size: Foundry.BarField & {
         /** <schema> Enabled */

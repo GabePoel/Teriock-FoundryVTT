@@ -22,9 +22,7 @@ export default class DeathBagExecution extends DocumentExecution {
     const actor = options.actor ?? options.source?.actor ?? game.actors.default;
     data.pull ??= actor?.system.deathBag.pull ?? "10";
     data.stones ??= Object.fromEntries(
-      Object.keys(TERIOCK.config.die.deathBagStoneColor).map(
-        color => [color, actor?.system.deathBag.stones[color] ?? "0"]
-      ),
+      Object.keys(TERIOCK.config.deathBag.stones).map(color => [color, actor?.system.deathBag.stones[color] ?? "0"]),
     );
     super(data, options);
     const defaultMessageMode = game.settings.get("teriock", "deathBagMessageMode");

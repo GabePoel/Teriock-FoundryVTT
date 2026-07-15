@@ -1,11 +1,11 @@
 import { HealManager, RevitalizeManager } from "../../../../../../applications/dialogs/stat-managers/_module.mjs";
-import costConfig from "../../../../../../constants/config/cost-config.mjs";
+import statConfig from "../../../../../../constants/config/stat-config.mjs";
 import { docSort, rankSort } from "../../../../../../helpers/sort.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
 
-const BAR_STATS = Object.entries(costConfig.primary.keys).filter(([_k, v]) => v.barStat).map(([k, _v]) => k);
+const BAR_STATS = Object.entries(statConfig).filter(([_k, v]) => v.bar).map(([k, _v]) => k);
 
 /**
  * Actor data model that handles stats.
@@ -22,12 +22,11 @@ export default function ActorStatsPart(Base) {
     class ActorStatsPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), {
-          hp: statField({ morganti: true, temp: true }),
-          lp: statField({ max: 100, value: 20 }),
-          mp: statField({ morganti: true, temp: true }),
-          presence: statField({ max: 1, value: 0 }),
-        });
+        const schema = Object.assign(super.defineSchema(), { presence: statField({ initial: 0, max: 1 }) });
+        for (const [k, v] of Object.entries(statConfig)) {
+          if (v.bar) { schema[k] = statField({ ...v.bar, morganti: v.morganti }); }
+        }
+        return schema;
       }
 
       /**
@@ -117,7 +116,7 @@ export default function ActorStatsPart(Base) {
             const change = options.teriock[`${stat}Change`];
             // The large number catch is used to keep from rendering the stat change upon applying transformations
             if (change !== 0 && change < TERIOCK.config.system.inf / 2) {
-              const colors = TERIOCK.display.colors[stat];
+              const colors = statConfig[stat].color;
               this.animateStatChangeEffect(change, change > 0 ? colors.light : colors.dark);
             }
           }
@@ -318,12 +317,11 @@ export default function ActorStatsPart(Base) {
 }
 
 /**
- * Creates a stat field definition with min, max, and current values, plus optional base and temp fields.
- * @param {object} [options] - Configuration options for the stat field
+ * Creates a stat field definition with min, max, and current values, plus optional temp fields.
+ * @param {object} [options] - Configuration options for the stat field (the stat's `bar` config plus `morganti`)
  * @param {number} [options.min=0] - Initial minimum value for the stat
  * @param {number} [options.max=1] - Initial maximum value for the stat
- * @param {number} [options.value=1] - Initial current value for the stat
- * @param {boolean} [options.base=false] - Whether to include a base value
+ * @param {number} [options.initial=1] - Initial current value for the stat
  * @param {boolean} [options.temp=false] - Whether to include a temporary value
  * @param {boolean} [options.morganti=false] - Whether to include a morganti value
  */
@@ -331,7 +329,7 @@ function statField(options = {}) {
   const schema = {
     max: new fields.NumberField({ initial: options.max ?? 1, integer: true, persisted: false }),
     min: new fields.NumberField({ initial: options.min ?? 0, integer: true, persisted: false }),
-    value: new fields.NumberField({ initial: options.value ?? 1, integer: true }),
+    value: new fields.NumberField({ initial: options.initial ?? 1, integer: true }),
   };
   if (options.temp) {
     schema.temp = new fields.NumberField({ initial: 0, integer: true, min: 0 });

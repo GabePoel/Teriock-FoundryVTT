@@ -1,5 +1,5 @@
-import costConfig from "../../../../constants/config/cost-config.mjs";
 import impactConfig from "../../../../constants/config/impact-config.mjs";
+import statConfig from "../../../../constants/config/stat-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 
@@ -18,9 +18,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        * @returns {string[]}
        */
       get #paidCosts() {
-        return Object.keys(costConfig.primary.keys).filter(c =>
-          this.costs[c] > 0 && !this.options[`no${c.titleCase()}`]
-        );
+        return Object.keys(statConfig).filter(c => this.costs[c] > 0 && !this.options[`no${c.titleCase()}`]);
       }
 
       /**
@@ -74,8 +72,8 @@ export default function AbilityExecutionActorUpdatePart(Base) {
 
         if (this.actor && this.payCosts) {
           for (const c of this.#paidCosts) {
-            const config = costConfig.primary.keys[c];
-            if (!config?.barStat) { await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]); }
+            const config = statConfig[c];
+            if (!config?.bar) { await impactConfig[config?.impact]?.apply(this.actor, this.costs[c]); }
           }
         }
       }
@@ -91,8 +89,8 @@ export default function AbilityExecutionActorUpdatePart(Base) {
           }
           if (this.usesReaction) { this.actorUpdates["system.combat.hasReaction"] = false; }
           for (const c of this.#paidCosts) {
-            const config = costConfig.primary.keys[c];
-            if (config?.barStat) {
+            const config = statConfig[c];
+            if (config?.bar) {
               this.actorUpdates[`system.${c}.value`] = Math.max(
                 this.actor.system[c].value + (config?.multiplier ?? 1) * this.costs[c],
                 this.actor.system[c].min ?? 0,

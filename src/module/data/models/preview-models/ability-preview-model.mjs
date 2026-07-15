@@ -28,7 +28,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
       costs: new fields.SchemaField({
         components: new fields.SchemaField(objectMap(TERIOCK.config.cost.components.keys, (c) =>
           new TernaryField({ label: _loc("TERIOCK.COSTS.Long.component", { key: _loc(c) }) }))),
-        primary: new fields.SchemaField(objectMap(TERIOCK.config.cost.primary.keys, (c) =>
+        primary: new fields.SchemaField(objectMap(TERIOCK.config.stat, (c) =>
           new TernaryField({ label: _loc("TERIOCK.COSTS.Long.primary", { key: _loc(c.label) }) }))),
         tweaks: new fields.SchemaField(objectMap(TERIOCK.config.cost.tweaks, (c) =>
           new TernaryField({ label: _loc(c.label) }))),
@@ -119,7 +119,7 @@ export default class AbilityPreviewModel extends MetaphysicsPreviewModel {
    */
   get _formPathsTernaryCosts() {
     return [
-      ...Object.keys(TERIOCK.config.cost.primary.keys).map((k) => `filters.costs.primary.${k}`),
+      ...Object.keys(TERIOCK.config.stat).map((k) => `filters.costs.primary.${k}`),
       ...Object.keys(TERIOCK.config.cost.components.keys).map((k) => `filters.costs.components.${k}`),
       ...Object.keys(TERIOCK.config.cost.tweaks).map((k) => `filters.costs.tweaks.${k}`),
     ];

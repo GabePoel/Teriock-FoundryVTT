@@ -1,6 +1,4 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import currencyConfig from "./currency-config.mjs";
-import systemConfig from "./system-config.mjs";
 
 export default {
   // no sort
@@ -12,12 +10,6 @@ export default {
   override: {
     art: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.art" },
     size: { initial: true, label: "TERIOCK.SCHEMA.Transformation.override.choices.size" },
-  },
-  reset: {
-    gp: { initial: true, update: Object.fromEntries(Object.keys(currencyConfig).map(k => [`system.money.${k}`, 0])) },
-    hp: { initial: true, update: { "system.hp.value": systemConfig.inf } },
-    lp: { initial: false, update: { "system.lp.value": 20 } },
-    mp: { initial: false, update: { "system.mp.value": systemConfig.inf } },
   },
   suppress: {
     attunement: { initial: false, path: "disabled" },

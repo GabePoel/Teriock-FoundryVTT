@@ -21,7 +21,6 @@
   color: var(--color-text-selection);
   cursor: default;
   height: 2.75em;
-  outline: none;
   overflow: hidden;
   padding: 0;
   position: relative;
@@ -53,6 +52,19 @@
     color: white;
     cursor: pointer;
     width: 2.5em;
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:focus,
+  &:focus-visible {
+    border: 1px solid var(--color-cool-3);
+    border-left: 1px solid var(--color-border);
+    box-shadow: none;
+    color: white;
+    outline: none;
 
     &::before {
       opacity: 1;
@@ -104,52 +116,39 @@
   border-bottom-right-radius: 6px;
   overflow: visible;
   position: relative;
+
+  &.floating {
+    .actor-tabber-tooltip-container {
+      height: 2.75em;
+      overflow: visible;
+      position: relative;
+      width: 2.5em;
+
+      > .actor-tabber {
+        left: 0;
+        position: absolute;
+        top: 0;
+      }
+    }
+
+    .actor-tabber {
+      &:focus,
+      &:focus-visible,
+      &.active {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+  }
+
+  .actor-tabber-container {
+    display: flex;
+  }
 }
 
 body > form:only-child section .actor-page,
 .detached,
 .no-floating-tabs {
-  .actor-tabbers {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-    left: unset;
-    padding: 0.5em;
-    right: 0;
-    width: calc(34px + 0.5em);
-
-    .actor-tabber {
-      background: none;
-      border: none !important;
-      border-radius: 4px !important;
-      border-right-width: 0;
-      box-shadow: none;
-      font-size: var(--font-size-14);
-      height: 1.75em !important;
-      margin: 0 !important;
-      width: 1.75em !important;
-
-      &::before {
-        display: none;
-      }
-
-      i {
-        z-index: 0;
-      }
-
-      &:hover,
-      &.active {
-        background: var(--color-warm-2);
-      }
-
-      &::before {
-        background: none !important;
-        border: none !important;
-      }
-    }
-  }
-
   .actor-tabber-background {
     background-color: var(--color-header-background);
     border-left: 1px solid var(--color-border);
@@ -161,31 +160,55 @@ body > form:only-child section .actor-page,
     &.floating {
       display: none;
     }
-  }
-}
 
-.system-teriock {
-  &:not(.detached) {
-    .actor-tabber-container.attached-tab {
+    .actor-tabbers {
+      align-items: center;
       display: flex;
-    }
+      flex-direction: column;
+      gap: 0.5em;
+      left: unset;
+      padding: 0.5em;
+      right: 0;
+      width: calc(34px + 0.5em);
 
-    .actor-tabber-container.detached-tab {
-      display: none;
-    }
-  }
+      .actor-tabber {
+        background: none;
+        border: none !important;
+        border-radius: 4px !important;
+        border-right-width: 0;
+        box-shadow: none;
+        font-size: var(--font-size-14);
+        height: 1.75em !important;
+        margin: 0 !important;
+        width: 1.75em !important;
 
-  &.detached {
-    .actor-tabber-container-background.floating {
-      display: none;
-    }
+        &::before {
+          display: none;
+        }
 
-    .actor-tabber-container.attached-tab {
-      display: none;
-    }
+        i {
+          z-index: 0;
+        }
 
-    .actor-tabber-container.detached-tab {
-      display: flex;
+        &:hover,
+        &:focus,
+        &:focus-visible,
+        &.active {
+          background: var(--color-warm-2);
+          box-shadow: none;
+          outline: none;
+        }
+
+        &::before {
+          background: none !important;
+          border: none !important;
+        }
+      }
+
+      .actor-tabber-tooltip-container {
+        height: 1.75em;
+        width: 1.75em;
+      }
     }
   }
 }
@@ -381,6 +404,23 @@ body > form:only-child section .actor-page,
       position: absolute;
       transition: 250ms;
       z-index: 1;
+
+      .actor-tabbers {
+        overflow: visible;
+      }
+
+      .actor-tabber-tooltip-container {
+        height: 2.75em;
+        overflow: visible;
+        position: relative;
+        width: 2.5em;
+
+        > .actor-tabber {
+          left: 0;
+          position: absolute;
+          top: 0;
+        }
+      }
 
       .actor-sidebar-tabber {
         border-left: none !important;
@@ -719,22 +759,37 @@ body > form:only-child section .actor-page,
 
 .die-drawer {
   @include mixins.collapsible;
-  @include mixins.collapsible-open;
   align-items: center;
   border: 1px solid var(--color-text-subtle);
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
   border-top: none;
+  grid-template-rows: auto;
   line-height: 3;
   margin-block: 1px;
   margin-inline: 0.5em;
   min-height: 2.5em;
+  opacity: 1;
   overflow: hidden;
   padding: 0.5em;
   transition: grid-template-rows 250ms, opacity 250ms, padding-block 250ms, min-height 250ms;
 
   .tgrid {
     @include mixins.collapsible-content;
+    min-height: min-content;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .hack-marker-box,
+  .die-box {
+    @include mixins.centralize;
+    min-height: 1.25em;
+  }
+
+  .grid-fill {
+    height: auto;
+    min-height: 2em;
   }
 
   i {
@@ -759,6 +814,10 @@ body > form:only-child section .actor-page,
     @include mixins.collapsible-closed;
     min-height: 0;
     padding-block: 0;
+
+    .tgrid {
+      overflow: hidden;
+    }
   }
 }
 

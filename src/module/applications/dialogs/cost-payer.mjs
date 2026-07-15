@@ -1,4 +1,5 @@
 import costConfig from "../../constants/config/cost-config.mjs";
+import statConfig from "../../constants/config/stat-config.mjs";
 import { icons } from "../../constants/display/icons.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
 import { FormulaField } from "../../data/fields/_module.mjs";
@@ -21,7 +22,7 @@ class CostPayerOptions extends BaseDataModel {
       }),
       primary: new fields.SchemaField(
         Object.fromEntries(
-          Object.entries(costConfig.primary.keys).map((
+          Object.entries(statConfig).map((
             [k, v],
           ) => [k, new FormulaField({ initial: "", label: v.label, placeholder: "0" })]),
         ),
@@ -138,7 +139,7 @@ export default class CostPayer extends ResolvableDialog {
   async #prepareHints() {
     if (this.#hintsPrepared) { return; }
     this.#hintsPrepared = true;
-    for (const k of Object.keys(costConfig.primary.keys)) {
+    for (const k of Object.keys(statConfig)) {
       const description = this.#ability.system.costs.primary[k].description;
       if (description) { this.#hints[k] = await TeriockTextEditor.enrichHTML(description); }
     }
@@ -168,7 +169,7 @@ export default class CostPayer extends ResolvableDialog {
     const heightened = Number(this.state.costOptions.heightened) || 0;
     const rollData = Object.assign(this.#execution.getRollData(), { h: heightened });
     /** @type {Record<string, number>} */
-    const costs = Object.fromEntries(Object.keys(costConfig.primary.keys).map(k => [k, 0]));
+    const costs = Object.fromEntries(Object.keys(statConfig).map(k => [k, 0]));
     for (const k of this.#costs) {
       costs[k] = await BaseRoll.getValue(this.state.costOptions.primary[k] || "0", rollData) || 0;
     }

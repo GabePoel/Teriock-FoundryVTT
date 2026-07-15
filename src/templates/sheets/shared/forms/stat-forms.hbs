@@ -1,22 +1,15 @@
-{{formBox
-  (concat
-    system.statDice.hp.formula " "
-    " (" system.statDice.hp.value ")")
-  action="setStatDice"
-  dataset=(object stat="hp")
-  icon=TERIOCK.display.icons.stat.hp
-  tooltip=(localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label")
-  label=(localize "TERIOCK.STATS.hp.abbreviation")
-  overflow=true
-}}
-{{formBox
-  (concat
-    system.statDice.mp.formula " "
-    " (" system.statDice.mp.value ")")
-  action="setStatDice"
-  dataset=(object stat="mp")
-  icon=TERIOCK.display.icons.stat.mp
-  tooltip=(localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.mp.label")
-  label=(localize "TERIOCK.STATS.mp.abbreviation")
-  overflow=true
-}}
+{{#each TERIOCK.config.stat as |config key|}}
+  {{#if config.pool.enabled}}
+    {{formBox
+      (concat
+        (lookup (lookup @root/system.statDice key) "formula") " "
+        " (" (lookup (lookup @root/system.statDice key) "value") ")")
+      action="setStatDice"
+      dataset=(object stat=key)
+      icon=config.icon
+      tooltip=(localize (concat "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice." key ".label"))
+      label=(localize config.abbreviation)
+      overflow=true
+    }}
+  {{/if}}
+{{/each}}

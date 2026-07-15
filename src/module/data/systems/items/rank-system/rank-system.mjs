@@ -84,16 +84,6 @@ export default class RankSystem
   }
 
   /** @inheritDoc */
-  get _canToggleHpDice() {
-    return super._canToggleHpDice && !this.innate;
-  }
-
-  /** @inheritDoc */
-  get _canToggleMpDice() {
-    return super._canToggleMpDice && !this.innate;
-  }
-
-  /** @inheritDoc */
   get _panelBars() {
     return [
       {
@@ -154,6 +144,11 @@ export default class RankSystem
   /** @inheritDoc */
   get wikiPage() {
     return `Class:${TERIOCK.index.classes[toCamelCase(this._source.class ?? "")] ?? ""}`;
+  }
+
+  /** @inheritDoc */
+  _canToggleStatDice(stat) {
+    return super._canToggleStatDice(stat) && !this.innate;
   }
 
   /** @inheritDoc */

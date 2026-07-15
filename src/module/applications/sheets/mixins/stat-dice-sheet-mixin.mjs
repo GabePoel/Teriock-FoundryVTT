@@ -22,7 +22,7 @@ export default function StatDiceSheetMixin(Base) {
        */
       static async _onSetStatDice(_event, target) {
         if (!this.isEditable) { return; }
-        await StatDiceUpdater.create(this.document.system.statDice[target.dataset.stat])
+        await StatDiceUpdater.create(this.document.system.statDice[target.dataset.stat]);
       }
     }
   );

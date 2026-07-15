@@ -1,8 +1,11 @@
 import { TeriockDialog } from "../../../../../../applications/api/_module.mjs";
+import statConfig from "../../../../../../constants/config/stat-config.mjs";
 import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
 import { speciesTransformationFields } from "../../../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
+
+const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
  * Species data model mixin that handles transformation behavior.
@@ -21,16 +24,6 @@ export default function SpeciesTransformationPart(Base) {
         return Object.assign(super.defineSchema(), {
           transformation: new fields.SchemaField(speciesTransformationFields()),
         });
-      }
-
-      /** @inheritDoc */
-      get _canToggleHpDice() {
-        return super._canToggleHpDice && !this._isInactiveTransformation;
-      }
-
-      /** @inheritDoc */
-      get _canToggleMpDice() {
-        return super._canToggleMpDice && !this._isInactiveTransformation;
       }
 
       /** @inheritDoc */
@@ -145,6 +138,11 @@ export default function SpeciesTransformationPart(Base) {
       }
 
       /** @inheritDoc */
+      _canToggleStatDice(stat) {
+        return super._canToggleStatDice(stat) && !this._isInactiveTransformation;
+      }
+
+      /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
         if (this.transformationEffect && this.document.checkEditor(userId)) {
@@ -197,8 +195,7 @@ export default function SpeciesTransformationPart(Base) {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this._isInactiveTransformation) {
-          this.statDice.hp.disabled = true;
-          this.statDice.mp.disabled = true;
+          for (const stat of POOL_STATS) { this.statDice[stat].disabled = true; }
         }
       }
 

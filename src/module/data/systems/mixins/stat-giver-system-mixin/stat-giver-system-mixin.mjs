@@ -1,8 +1,11 @@
+import statConfig from "../../../../constants/config/stat-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { HpPoolModel, MpPoolModel } from "../../../models/stat-pool-models/_module.mjs";
+import { StatPoolModel } from "../../../models/_module.mjs";
 
 const { fields } = foundry.data;
+
+const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
  * @param {typeof BaseItemSystem} Base
@@ -27,27 +30,18 @@ export default function StatGiverSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          statDice: new fields.SchemaField({
-            hp: new fields.EmbeddedDataField(HpPoolModel),
-            mp: new fields.EmbeddedDataField(MpPoolModel),
-          }),
+          statDice: new fields.SchemaField(
+            Object.fromEntries(
+              POOL_STATS.map(k => [k, new fields.EmbeddedDataField(StatPoolModel, { initial: { stat: k } })]),
+            ),
+          ),
         });
       }
 
-      /**
-       * Whether the HP dice can be toggled disabled/enabled.
-       * @returns {boolean}
-       */
-      get _canToggleHpDice() {
-        return true;
-      }
-
-      /**
-       * Whether the MP dice can be toggled disabled/enabled.
-       * @returns {boolean}
-       */
-      get _canToggleMpDice() {
-        return true;
+      /** @inheritDoc */
+      static migrateData(source, options, state) {
+        for (const stat of POOL_STATS) { foundry.utils.setProperty(source, `statDice.${stat}.stat`, stat); }
+        return super.migrateData(source, options, state);
       }
 
       /** @returns {Teriock.Panels.PanelBar} */
@@ -55,58 +49,51 @@ export default function StatGiverSystemMixin(Base) {
         return {
           icon: icons.ui.dice,
           label: _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.statDice"),
-          wrappers: [
-            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.hp", { value: this.statDice.hp.formula }),
-            _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.mp", { value: this.statDice.mp.formula }),
-          ],
+          wrappers: POOL_STATS.map(k =>
+            _loc(`TERIOCK.SYSTEMS.StatGiver.PANELS.${k}`, { value: this.statDice[k].formula })
+          ),
         };
       }
 
       /**
-       * Context menu entries to enable/disable HP and mana dice.
+       * Whether stat dice on this document can be toggled.
+       * @param {Teriock.Keys.DieStat} _stat
+       * @returns {boolean}
+       */
+      _canToggleStatDice(_stat) {
+        return true;
+      }
+
+      /**
+       * Context menu entries to enable/disable stat dice.
        * @param {TeriockDocument} doc
        * @returns {ContextMenuEntry[]}
        */
       getCardContextMenuEntries(doc) {
         const entries = super.getCardContextMenuEntries(doc);
         if (!doc?.isOwner) { return entries; }
-        entries.push({
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableHpDice"),
-          visible: this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
-          onClick: async () => {
-            await this.parent.update({ "system.statDice.hp.disabled": false });
-          },
-        }, {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableHpDice"),
-          visible: !this.statDice.hp.disabled && this._canToggleHpDice && doc !== this.parent,
-          onClick: async () => {
-            await this.parent.update({ "system.statDice.hp.disabled": true });
-          },
-        }, {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.enableMpDice"),
-          visible: this.statDice.mp.disabled
-            && this._canToggleMpDice
-            && this.parent._checkValidEditorDocument(doc, { self: false }),
-          onClick: async () => {
-            await this.parent.update({ "system.statDice.mp.disabled": false });
-          },
-        }, {
-          group: "control",
-          icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
-          label: _loc("TERIOCK.SYSTEMS.StatGiver.MENU.disableMpDice"),
-          visible: !this.statDice.mp.disabled
-            && this._canToggleMpDice
-            && this.parent._checkValidEditorDocument(doc, { self: false }),
-          onClick: async () => {
-            await this.parent.update({ "system.statDice.mp.disabled": true });
-          },
-        });
+        for (const stat of POOL_STATS) {
+          const canToggle = this._canToggleStatDice(stat);
+          entries.push({
+            group: "control",
+            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+            label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.enable${stat.capitalize()}Dice`),
+            visible: this.statDice[stat].disabled && canToggle
+              && this.parent._checkValidEditorDocument(doc, { self: false }),
+            onClick: async () => {
+              await this.parent.update({ [`system.statDice.${stat}.disabled`]: false });
+            },
+          }, {
+            group: "control",
+            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+            label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.disable${stat.capitalize()}Dice`),
+            visible: !this.statDice[stat].disabled && canToggle
+              && this.parent._checkValidEditorDocument(doc, { self: false }),
+            onClick: async () => {
+              await this.parent.update({ [`system.statDice.${stat}.disabled`]: true });
+            },
+          });
+        }
         return entries;
       }
 
@@ -114,12 +101,14 @@ export default function StatGiverSystemMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          hp: this.statDice.hp.formula,
-          "hp.disabled": Number(this.statDice.hp.disabled),
-          "hp.value": Number(this.statDice.hp.value),
-          mp: this.statDice.mp.formula,
-          "mp.disabled": Number(this.statDice.mp.disabled),
-          "mp.value": Number(this.statDice.mp.value),
+          ...Object.fromEntries(
+            POOL_STATS.flatMap(
+              k => [[k, this.statDice[k].formula], [`${k}.disabled`, Number(this.statDice[k].disabled)], [
+                `${k}.value`,
+                Number(this.statDice[k].value),
+              ]]
+            ),
+          ),
         };
       }
 
@@ -131,8 +120,7 @@ export default function StatGiverSystemMixin(Base) {
 
       /** @inheritDoc */
       prepareStatDice() {
-        this.statDice.hp.prepareStatDice();
-        this.statDice.mp.prepareStatDice();
+        for (const stat of POOL_STATS) { this.statDice[stat].prepareStatDice(); }
       }
     }
   );

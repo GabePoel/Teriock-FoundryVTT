@@ -9,7 +9,7 @@ import competenceConfig from "./competence-config.mjs";
 import consequenceConfig from "./consequence-config.mjs";
 import costConfig from "./cost-config.mjs";
 import currencyConfig from "./currency-config.mjs";
-import dieConfig from "./die-config.mjs";
+import deathBagConfig from "./death-bag-config.mjs";
 import displayConfig from "./display-config.mjs";
 import documentConfig from "./document-config.mjs";
 import effectConfig from "./effect-config.mjs";
@@ -23,6 +23,7 @@ import piercingConfig from "./piercing-config.mjs";
 import powerConfig from "./power-config.mjs";
 import protectionConfig from "./protection-config.mjs";
 import settingsConfig from "./settings-config.mjs";
+import statConfig from "./stat-config.mjs";
 import systemConfig from "./system-config.mjs";
 import tipConfig from "./tip-config.mjs";
 import tradecraftConfig from "./tradecraft-config.mjs";
@@ -42,7 +43,7 @@ const config = {
   consequence: consequenceConfig,
   cost: costConfig,
   currency: currencyConfig,
-  die: dieConfig,
+  deathBag: deathBagConfig,
   display: displayConfig,
   document: documentConfig,
   effect: effectConfig,
@@ -56,6 +57,7 @@ const config = {
   power: powerConfig,
   protection: protectionConfig,
   settings: settingsConfig,
+  stat: statConfig,
   system: systemConfig,
   tip: tipConfig,
   tradecraft: tradecraftConfig,

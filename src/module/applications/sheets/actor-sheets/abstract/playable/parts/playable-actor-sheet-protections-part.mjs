@@ -55,11 +55,12 @@ export default function PlayableActorSheetProtectionsPart(Base) {
                 action: tv.action,
                 img,
                 makeTooltip: true,
+                openable: false,
                 subtitle: cv.label,
                 text: tv.label,
                 title,
+                tooltipUuid: uuid,
                 usable: true,
-                uuid,
               };
               protectionEntries.push(entry);
             });

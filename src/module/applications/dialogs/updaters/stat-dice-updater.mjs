@@ -12,7 +12,7 @@ export default class StatDiceUpdater extends BaseUpdater {
 
   /**
    * @inheritDoc
-   * @param {Partial<ApplicationConfiguration & { pool: BaseStatPoolModel }>} options
+   * @param {Partial<ApplicationConfiguration & { pool: StatPoolModel }>} options
    */
   constructor(options) {
     const pool = options.pool;
@@ -20,7 +20,7 @@ export default class StatDiceUpdater extends BaseUpdater {
     this.#pool = pool;
   }
 
-  /** @type {BaseStatPoolModel} */
+  /** @type {StatPoolModel} */
   #pool;
 
   /** @inheritDoc */

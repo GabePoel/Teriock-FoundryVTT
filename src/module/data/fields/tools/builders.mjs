@@ -2,7 +2,7 @@ import { EvaluationField, FormulaField, IdentifierField } from "../_module.mjs";
 import attributeConfig from "../../../constants/config/attribute-config.mjs";
 import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
-import dieConfig from "../../../constants/config/die-config.mjs";
+import dieConfig from "../../../constants/config/death-bag-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
@@ -294,7 +294,7 @@ export function deathBagSchema() {
     }),
     stones: new SchemaField(
       Object.fromEntries(
-        Object.entries(dieConfig.deathBagStoneColor).map(([color, c]) => [color, deathBagStoneField(color, c.number)]),
+        Object.entries(dieConfig.stones).map(([color, c]) => [color, deathBagStoneField(color, c.number)]),
       ),
     ),
   };

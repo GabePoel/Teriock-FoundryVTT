@@ -1,27 +1,27 @@
 <div class="actor-status-box">
   <div class="actor-status-bars">
-    <div class="actor-status-bar-box">
-      <div class="die-drawer top-drawer hack-drawer hp-drawer">
-        {{> "teriock/sheets/actors/playable/parts/hack-box"}}
-      </div>
-      {{> "teriock/sheets/actors/playable/parts/bar-hp"}}
-      <div class="die-drawer hp-die-drawer hp-drawer collapsible" data-collapsible-id="drawer-hp">
-        {{> "teriock/ui/stat-dice"
-          dice=system.hp.dice
+    {{#each barStats as |statKey|}}
+      <div class="actor-status-bar-box">
+        {{#if (path @root/bars statKey "config.hacks")}}
+          <div class="die-drawer top-drawer hack-drawer {{ statKey }}-drawer">
+            {{> "teriock/sheets/actors/playable/parts/hack-box"}}
+          </div>
+        {{/if}}
+        {{> "teriock/sheets/actors/playable/parts/stat-bar"
+          stat=statKey
         }}
+        {{#if (path @root/bars statKey "config.pool.enabled")}}
+          <div
+            class="die-drawer {{ statKey }}-die-drawer {{ statKey }}-drawer collapsible"
+            data-collapsible-id="drawer-{{ statKey }}"
+          >
+            {{> "teriock/ui/stat-dice"
+              dice=(path @root/system statKey "dice")
+            }}
+          </div>
+        {{/if}}
       </div>
-    </div>
-    <div class="actor-status-bar-box">
-      {{> "teriock/sheets/actors/playable/parts/bar-mp"}}
-      <div class="die-drawer mp-die-drawer mp-drawer collapsible" data-collapsible-id="drawer-mp">
-        {{> "teriock/ui/stat-dice"
-          dice=system.mp.dice
-        }}
-      </div>
-    </div>
-    <div class="actor-status-bar-box">
-      {{> "teriock/sheets/actors/playable/parts/bar-lp"}}
-    </div>
+    {{/each}}
     <div class="actor-status-bar-box">
       {{> "teriock/sheets/actors/playable/parts/bar-presence"}}
     </div>

@@ -68,7 +68,7 @@ Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.document).filter(([_k, v]) => v.documentName === "Actor").forEach(([k, v]) => {
     actorContext[k] = _loc(v?.label);
   });
-  Object.keys(TERIOCK.config.die.deathBagStoneColor).forEach((color) => {
+  Object.keys(TERIOCK.config.deathBag.stones).forEach((color) => {
     actorContext[`db.stones.${color}`] = _loc("TERIOCK.TERMS.Stones.ofColor", {
       color: _loc(`TERIOCK.TERMS.StoneColor.${color}`),
     });

@@ -40,11 +40,15 @@ declare global {
     export type Attribute = keyof typeof index.attributes;
 
     // Stat Keys
-    export type DieStat = keyof typeof config.die.stats;
+    export type Stat = keyof typeof config.stat;
+    export type DieStat = {
+      [K in keyof typeof config.stat]: typeof config.stat[K] extends { pool: { enabled: true } } ? K
+        : never;
+    }[keyof typeof config.stat];
 
     // Impact Keys
     export type PayMode = "exact" | "greedy";
-    export type DeathBagStoneColor = keyof typeof config.die.deathBagStoneColor;
+    export type DeathBagStoneColor = keyof typeof config.deathBag.stones;
     export type Impact = keyof typeof config.impact;
     export type CommonOutcome = keyof typeof config.consequence.common;
 
@@ -89,7 +93,7 @@ declare global {
 
     // Cost Keys
     export type Component = keyof typeof config.cost.components.keys;
-    export type PrimaryCost = keyof typeof config.cost.primary.keys;
+    export type PrimaryCost = keyof typeof config.stat;
     export type CostTweak = keyof typeof config.cost.tweaks;
 
     // Protection Keys

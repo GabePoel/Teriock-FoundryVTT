@@ -15,43 +15,7 @@ export default {
     },
     types: { description: "TERIOCK.COSTS.Types.description", tag: "TERIOCK.COSTS.Types.tag" },
   },
-  primary: {
-    keys: {
-      gp: {
-        abbreviation: "TERIOCK.STATS.gp.abbreviation",
-        barStat: false,
-        icon: icons.stat.gp,
-        impact: "pay",
-        label: "TERIOCK.COSTS.Primary.gp",
-        multiplier: -1,
-      },
-      hp: {
-        abbreviation: "TERIOCK.STATS.hp.abbreviation",
-        barStat: true,
-        icon: icons.stat.hp,
-        impact: "damage",
-        label: "TERIOCK.COSTS.Primary.hp",
-        multiplier: -1,
-      },
-      lp: {
-        abbreviation: "TERIOCK.STATS.lp.abbreviation",
-        barStat: true,
-        icon: icons.stat.lp,
-        impact: "wither",
-        label: "TERIOCK.COSTS.Primary.lp",
-        multiplier: +1,
-      },
-      mp: {
-        abbreviation: "TERIOCK.STATS.mp.abbreviation",
-        barStat: true,
-        icon: icons.stat.mp,
-        impact: "drain",
-        label: "TERIOCK.COSTS.Primary.mp",
-        multiplier: -1,
-      },
-    },
-    types: { description: "TERIOCK.COSTS.Types.description", formula: "TERIOCK.COSTS.Types.formula" },
-  },
+  primary: { types: { description: "TERIOCK.COSTS.Types.description", formula: "TERIOCK.COSTS.Types.formula" } },
   tweaks: {
     adept: { icon: icons.form.special, label: "TERIOCK.COSTS.Tweaks.adept", multiplier: -1, primary: "mp" },
     gifted: { icon: icons.form.gifted, label: "TERIOCK.COSTS.Tweaks.gifted", multiplier: 1, primary: "mp" },
@@ -59,7 +23,6 @@ export default {
   },
 };
 
-preLocalizeConfig("config.cost.primary.keys", { keys: ["abbreviation", "label"] });
 preLocalizeConfig("config.cost.primary.types");
 preLocalizeConfig("config.cost.components.keys");
 preLocalizeConfig("config.cost.components.types");

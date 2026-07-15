@@ -8,4 +8,7 @@ const comparisons = {
   neq: { label: "TERIOCK.TERMS.Comparison.neq", fn: (a, b) => Number(a != b) },
 };
 
-export default { comparisons };
+// no sort
+const dieFaces = { 2: "d2", 4: "d4", 6: "d6", 8: "d8", 10: "d10", 12: "d12", 20: "d20", 100: "d100" };
+
+export default { comparisons, dieFaces };

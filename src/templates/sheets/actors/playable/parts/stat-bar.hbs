@@ -1,0 +1,63 @@
+{{!-- @param stat - bar stat key (hp, mp, lp) --}}
+{{#with (lookup @root/bars stat) as |bar|}}
+  <div class="actor-{{ bar.config.bar.class }}-bar-container actor-bar-container">
+    <div class="actor-{{ bar.config.bar.class }}-bar actor-bar toutline">
+      <div class="actor-bar-left" style="width: {{ bar.remaining }}%;"></div>
+      {{#if bar.config.bar.temp}}
+        <div class="actor-bar-temp" style="width: {{ bar.temp }}%; {{ bar.tempHide }}"></div>
+      {{/if}}
+      <div class="actor-bar-lost" style="width: {{ bar.lost }}%;"></div>
+      {{#if bar.config.morganti}}
+        <div class="actor-bar-morganti" style="width: {{ bar.morganti }}%;"></div>
+      {{/if}}
+    </div>
+    <div
+      class="actor-bar-overlay"
+      {{#if bar.config.pool.enabled}}
+        data-action="toggleCollapseRightClick"
+        data-collapsible-target="drawer-{{ bar.key }}"
+      {{/if}}
+    >
+      <div class="actor-bar-overlay-row actor-{{ bar.config.bar.class }}-bar-overlay-row">
+        {{numberInput
+          bar.data.value
+          name=bar.paths.value
+          max=bar.data.max
+          min=bar.data.min
+          class="thover-soft actor-bar-overlay-left actor-bar-overlay-label"
+          dataset=(object tooltip=(localize bar.labels.current))
+          disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
+        }}
+        <div class="actor-bar-overlay-max actor-bar-overlay-label" data-tooltip="{{localize bar.labels.max}}">
+          <span>
+            /
+            {{ bar.data.max }}
+            {{#if bar.config.bar.temp}}
+              +
+            {{/if}}
+          </span>
+        </div>
+        {{#if bar.config.bar.temp}}
+          {{formInput
+            (path @root/systemFields bar.key "fields.temp")
+            name=bar.paths.temp
+            value=bar.data.temp
+            classes="thover-soft actor-bar-overlay-temp actor-bar-overlay-label"
+            dataset=(object tooltip=(localize bar.labels.temp))
+            disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
+          }}
+        {{/if}}
+      </div>
+      {{#if (or @root/takeStatButtons (not bar.config.bar.temp))}}
+        <div
+          class="take-harm-button thover take-damage-button"
+          data-action="takeImpact"
+          data-tooltip="{{localize bar.labels.take}}"
+          data-impact="{{ bar.impact }}"
+        >
+          {{makeIcon (path @root/TERIOCK.config.impact bar.impact "icon") "light"}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+{{/with}}

@@ -1,4 +1,4 @@
-import costConfig from "../../../../constants/config/cost-config.mjs";
+import statConfig from "../../../../constants/config/stat-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
@@ -417,7 +417,7 @@ export default function AbilityExecutionChatPart(Base) {
           this.tags.push(
             _loc("TERIOCK.SYSTEMS.Applicable.PANELS.spent", {
               amount: this.costs[c],
-              label: costConfig.primary.keys[c]?.abbreviation,
+              label: statConfig[c]?.abbreviation,
             }),
           );
         }

@@ -1,7 +1,7 @@
-import { HpPoolModel, MpPoolModel } from "../../../models/stat-pool-models/_module.mjs";
+import { StatPoolModel } from "../../../models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
-    export type StatGiverSystemData = { statDice: { hp: HpPoolModel, mp: MpPoolModel } };
+    export type StatGiverSystemData = { statDice: Record<Teriock.Keys.DieStat, StatPoolModel> };
   }
 }

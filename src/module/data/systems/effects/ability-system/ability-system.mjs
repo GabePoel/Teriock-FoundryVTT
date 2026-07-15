@@ -1,4 +1,5 @@
 import costConfig from "../../../../constants/config/cost-config.mjs";
+import statConfig from "../../../../constants/config/stat-config.mjs";
 import { AbilityExecution } from "../../../../executions/child-executions/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
@@ -186,7 +187,7 @@ export default class AbilitySystem
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
       },
-      ...Object.keys(costConfig.primary.keys).map(k => {
+      ...Object.keys(statConfig).map(k => {
         return { path: `system.costs.primary.${k}.description`, visible: this.costs.primary[k].type === "description" };
       }),
       ...Object.keys(costConfig.components.keys).map(k => {

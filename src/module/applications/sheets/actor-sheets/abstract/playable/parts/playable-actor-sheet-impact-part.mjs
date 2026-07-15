@@ -26,7 +26,7 @@ export default function PlayableActorSheetImpactPart(Base) {
        */
       static async _applyMorganti(impact, actor) {
         if (TERIOCK.config.impact[impact]?.morganti) {
-          const cost = Object.entries(TERIOCK.config.cost.primary.keys).find(([_k, v]) => v.impact === impact);
+          const cost = Object.entries(TERIOCK.config.stat).find(([_k, v]) => v.impact === impact);
           const stat = cost ? cost[0] : null;
           if (!stat) { return; }
           const field = new fields.NumberField({

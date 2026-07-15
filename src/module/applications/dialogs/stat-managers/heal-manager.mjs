@@ -12,7 +12,10 @@ export default class HealManager extends BaseStatManager {
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = { all: { scrollable: [""], template: "teriock/dialogs/heal-manager" } };
+  static PARTS = {
+    content: { scrollable: [""], template: "teriock/dialogs/heal-manager" },
+    footer: super.PARTS.footer,
+  };
 
   /**
    * @inheritDoc

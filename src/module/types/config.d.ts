@@ -51,6 +51,25 @@ declare global {
 
     export type CurrencyEntry = { conversion: number, label: string, weight: number };
 
+    export type StatEntry = {
+      abbreviation: string;
+      bar?: { class: string, initial: number, lockInputs?: boolean, max?: number, min?: number, temp?: boolean };
+      color?: { base: string, dark: string, darkest: string, light: string };
+      /** DSN flavor key */
+      die?: string;
+      hacks?: boolean;
+      icon: string;
+      impact: Teriock.Keys.Impact;
+      label: string;
+      morganti?: boolean;
+      multiplier: number;
+      /** Stat pool configuration */
+      pool?: { enabled: boolean, img: string, panel: { name: string, text: string } };
+      /** DSN appearance options */
+      style?: { colorset: string };
+      transformationReset?: { initial: boolean, update: Record<string, unknown> };
+    };
+
     export type WikiNamespaceEntry = {
       collection?: string;
       icon: string;

@@ -1,3 +1,5 @@
+import statConfig from "../../../../constants/config/stat-config.mjs";
+import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
@@ -9,6 +11,8 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
 import * as parts from "./parts/_module.mjs";
 
 const { fields } = foundry.data;
+
+const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
  * Species-specific item data model.
@@ -60,10 +64,9 @@ export default class SpeciesSystem
       br: new fields.NumberField({ initial: 1 }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
-      hpIncrease: new fields.HTMLField(),
       innateRanks: new fields.HTMLField(),
       lifespan: new fields.NumberField({ initial: 0, min: 0 }),
-      mpIncrease: new fields.HTMLField(),
+      ...Object.fromEntries(POOL_STATS.map(k => [`${k}Increase`, new fields.HTMLField()])),
       size: new fields.SchemaField({
         enabled: new fields.BooleanField({ initial: true }),
         max: new fields.NumberField(),
@@ -97,8 +100,7 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get _displayFields() {
     return [
-      "system.hpIncrease",
-      "system.mpIncrease",
+      ...POOL_STATS.map(k => `system.${k}Increase`),
       "system.attributeIncrease",
       "system.innateRanks",
       "system.appearance",
@@ -191,8 +193,7 @@ export default class SpeciesSystem
       },
       system: {
         _src: this.parent.uuid,
-        hp: { value: TERIOCK.config.system.inf },
-        mp: { value: TERIOCK.config.system.inf },
+        ...Object.fromEntries(POOL_STATS.map(k => [k, { value: systemConfig.inf }])),
         size: { number: this.size.value },
       },
       type: "creature",

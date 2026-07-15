@@ -79,7 +79,7 @@ Hooks.once("i18nInit", () => {
   Object.entries(TERIOCK.config.cost.components.keys).forEach(([k, v]) => {
     abilityContext[`components.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.component", { name: _loc(v) });
   });
-  Object.entries(TERIOCK.config.cost.primary.keys).forEach(([k, v]) => {
+  Object.entries(TERIOCK.config.stat).forEach(([k, v]) => {
     abilityContext[`costs.${k}`] = _loc("TERIOCK.ROLL_CONTEXT.Ability.cost", { name: _loc(v.label) });
   });
   Object.entries(TERIOCK.reference.classes).forEach(([k, v]) => {

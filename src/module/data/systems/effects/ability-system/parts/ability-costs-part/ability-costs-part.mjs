@@ -1,4 +1,5 @@
 import costConfig from "../../../../../../constants/config/cost-config.mjs";
+import statConfig from "../../../../../../constants/config/stat-config.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
 import { FormulaField } from "../../../../../fields/_module.mjs";
@@ -40,7 +41,7 @@ export default function AbilityCostsPart(Base) {
                 }),
               }, { label });
             })),
-            primary: new fields.SchemaField(objectMap(costConfig.primary.keys, v => {
+            primary: new fields.SchemaField(objectMap(statConfig, v => {
               const label = _loc("TERIOCK.COSTS.Long.primary", { key: _loc(v.label) });
               return new fields.SchemaField({
                 description: new fields.HTMLField({ label }),
@@ -105,7 +106,7 @@ export default function AbilityCostsPart(Base) {
        */
       get _costWrappers() {
         return [
-          ...Object.entries(TERIOCK.config.cost.primary.keys).map(([k, v]) =>
+          ...Object.entries(TERIOCK.config.stat).map(([k, v]) =>
             this.costs.primary[k].type === "formula"
               ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.constant", {
                 cost: v.abbreviation,
@@ -132,7 +133,7 @@ export default function AbilityCostsPart(Base) {
        */
       get _displayInputsCosts() {
         return [
-          ...Object.keys(TERIOCK.config.cost.primary.keys).map(k => `system.costs.primary.${k}.type`),
+          ...Object.keys(TERIOCK.config.stat).map(k => `system.costs.primary.${k}.type`),
           ...Object.keys(TERIOCK.config.cost.components.keys).map(k => `system.costs.components.${k}.type`),
         ];
       }

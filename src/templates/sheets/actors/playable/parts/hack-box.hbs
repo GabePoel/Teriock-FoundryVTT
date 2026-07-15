@@ -1,12 +1,12 @@
 <div class="tgrid g7">
-  {{#each TERIOCK.config.hack as |options part|}}
+  {{#each @root/hackParts as |hack|}}
     <div
       class="thover hack-marker-box grid-fill"
       data-action="takeHack"
-      data-part="{{ part }}"
-      data-tooltip='{{lookup options "label"}}'
+      data-part="{{ hack.part }}"
+      data-tooltip="{{localize hack.label}}"
     >
-      <i class='fa-fw {{lookup @root/hackFills part}} {{lookup options "icon"}}'></i>
+      <i class="fa-fw {{ hack.fill }} {{ hack.icon }}"></i>
     </div>
   {{/each}}
 </div>

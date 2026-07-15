@@ -12,7 +12,10 @@ export default class RevitalizeManager extends BaseStatManager {
   };
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
-  static PARTS = { all: { scrollable: [""], template: "teriock/dialogs/revitalize-manager" } };
+  static PARTS = {
+    content: { scrollable: [""], template: "teriock/dialogs/revitalize-manager" },
+    footer: super.PARTS.footer,
+  };
 
   /** @inheritDoc */
   static async _onRollStatDie(event, target) {

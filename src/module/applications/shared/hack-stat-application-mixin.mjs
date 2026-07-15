@@ -1,4 +1,7 @@
 import hackConfig from "../../constants/config/hack-config.mjs";
+import statConfig from "../../constants/config/stat-config.mjs";
+
+const BAR_STATS = Object.keys(statConfig).filter(k => statConfig[k].bar);
 
 /**
  * Mixin allowing hacks and spending dice stats.
@@ -86,19 +89,46 @@ export default function HackStatApplicationMixin(Base) {
         });
       }
 
+      /**
+       * Render context for a stat bar.
+       * @param {Teriock.Keys.Stat} key
+       * @param {object} system
+       */
+      _prepareBar(key, system) {
+        const config = statConfig[key];
+        const data = system[key] ?? { max: 0, morganti: 0, temp: 0, value: 0 };
+        return {
+          ...this._prepareStatContext(data),
+          config,
+          data,
+          impact: config.impact,
+          key,
+          labels: {
+            current: `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.current`,
+            max: `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.max`,
+            take: `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.take`,
+            temp: config.bar.temp ? `TERIOCK.SHEETS.Actor.SIDEBAR.Bars.${key}.temp` : null,
+          },
+          paths: { temp: `system.${key}.temp`, value: `system.${key}.value` },
+        };
+      }
+
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
         const system = this.document.system;
         return Object.assign(context, {
-          bars: {
-            hp: this._prepareStatContext(system.hp),
-            lp: this._prepareStatContext(system.lp ?? { max: 0, morganti: 0, temp: 0, value: 0 }),
-            mp: this._prepareStatContext(system.mp),
-          },
+          bars: Object.fromEntries(BAR_STATS.map(k => [k, this._prepareBar(k, system)])),
+          barStats: BAR_STATS,
           hackFills: Object.fromEntries(
             Object.entries(system.hacks ?? {}).map(([part, bar]) => [part, this._prepareHackFill(bar)]),
           ),
+          hackParts: Object.entries(hackConfig).map(([part, options]) => ({
+            fill: this._prepareHackFill(system.hacks?.[part]),
+            icon: options.icon,
+            label: options.label,
+            part,
+          })),
         });
       }
 

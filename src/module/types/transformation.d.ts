@@ -1,3 +1,4 @@
+import statConfig from "../constants/config/stat-config.mjs";
 import transformationConfig from "../constants/config/transformation-config.mjs";
 import { CompetenceModel } from "../data/models/_module.mjs";
 
@@ -21,7 +22,11 @@ declare global {
       /** <schema> Additional parameters this transformation should override */
       override: Set<keyof typeof transformationConfig.override>;
       /** <schema> Stats this transformation should reset */
-      reset: Set<keyof typeof transformationConfig.reset>;
+      reset: Set<
+        {
+          [K in keyof typeof statConfig]: typeof statConfig[K] extends { transformationReset: object } ? K : never;
+        }[keyof typeof statConfig]
+      >;
       /** <schema> Types of documents this transformation should turn off */
       suppress: Set<keyof typeof transformationConfig.suppress>;
     };

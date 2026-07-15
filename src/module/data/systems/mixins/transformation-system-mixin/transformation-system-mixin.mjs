@@ -1,8 +1,29 @@
+import statConfig from "../../../../constants/config/stat-config.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { consolidateWriteOperations } from "../../../../helpers/utils.mjs";
 import { effectTransformationFields } from "../../../fields/tools/transformation-fields.mjs";
 
 const { fields } = foundry.data;
+
+const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
+
+/**
+ * Actor flag key storing item ids whose stat dice were disabled for a pool stat.
+ * @param {Teriock.Keys.DieStat} stat
+ * @returns {string}
+ */
+function disabledStatDiceFlag(stat) {
+  return `disabled${stat[0].toUpperCase()}${stat.slice(1)}DiceItems`;
+}
+
+/**
+ * Actor flag key storing a stat value when a transformation is disabled.
+ * @param {Teriock.Keys.DieStat} stat
+ * @returns {string}
+ */
+function transformationStatFlag(stat) {
+  return `transformation${stat[0].toUpperCase()}${stat.slice(1)}`;
+}
 
 /**
  * @param {typeof ChildSystem} Base
@@ -35,8 +56,7 @@ export default function TransformationSystemMixin(Base) {
        * @returns {{
        *  disabledEffects: ID<AnyActiveEffect>[],
        *  disabledItems: ID<AnyItem>[],
-       *  disabledHpDiceItems: ID<AnyItem>[],
-       *  disabledMpDiceItems: ID<AnyItem>[]
+       *  disabledStatDiceItems: Record<Teriock.Keys.DieStat, ID<AnyItem>[]>
        * }}
        */
       get #flagMap() {
@@ -44,9 +64,12 @@ export default function TransformationSystemMixin(Base) {
         const hasEffect = id => this.actor.effects.has(id);
         return {
           disabledEffects: (this.parent.getFlag("teriock", "disabledEffects") ?? []).filter(hasEffect),
-          disabledHpDiceItems: (this.parent.getFlag("teriock", "disabledHpDiceItems") ?? []).filter(hasItem),
           disabledItems: (this.parent.getFlag("teriock", "disabledItems") ?? []).filter(hasItem),
-          disabledMpDiceItems: (this.parent.getFlag("teriock", "disabledMpDiceItems") ?? []).filter(hasItem),
+          disabledStatDiceItems: Object.fromEntries(
+            POOL_STATS.map(
+              stat => [stat, (this.parent.getFlag("teriock", disabledStatDiceFlag(stat)) ?? []).filter(hasItem)]
+            ),
+          ),
         };
       }
 
@@ -57,7 +80,7 @@ export default function TransformationSystemMixin(Base) {
       get #resetUpdateData() {
         const updateData = {};
         for (const r of this.transformation.reset) {
-          Object.assign(updateData, TERIOCK.config.transformation.reset[r].update);
+          Object.assign(updateData, statConfig[r].transformationReset.update);
         }
         return updateData;
       }
@@ -93,8 +116,9 @@ export default function TransformationSystemMixin(Base) {
         itemData.forEach(s => {
           s.system._dep = this.parent.id;
           s.system.transformationLevel = this.transformation.level;
-          s.system.statDice.hp.disabled = !this.transformation.reset.has("hp");
-          s.system.statDice.mp.disabled = !this.transformation.reset.has("mp");
+          for (const stat of POOL_STATS) {
+            s.system.statDice[stat].disabled = !this.transformation.reset.has(stat);
+          }
           s.system.competence.raw = this.transformation.competence.value;
           if (s.system.size.min && s.system.size.max) {
             s.system.size.value = Math.clamp(this.actor.system.size.number, s.system.size.min, s.system.size.max);
@@ -124,11 +148,10 @@ export default function TransformationSystemMixin(Base) {
         const fm = this.#flagMap;
         for (const id of fm.disabledItems) { this.#addBatchToggle(this.actor.items, id, value); }
         for (const id of fm.disabledEffects) { this.#addBatchToggle(this.actor.effects, id, value); }
-        for (const id of fm.disabledHpDiceItems) {
-          this.#addBatchUpdateDocument(this.actor.items, id, { "system.statDice.hp.disabled": value });
-        }
-        for (const id of fm.disabledMpDiceItems) {
-          this.#addBatchUpdateDocument(this.actor.items, id, { "system.statDice.mp.disabled": value });
+        for (const stat of POOL_STATS) {
+          for (const id of fm.disabledStatDiceItems[stat]) {
+            this.#addBatchUpdateDocument(this.actor.items, id, { [`system.statDice.${stat}.disabled`]: value });
+          }
         }
       }
 
@@ -300,8 +323,7 @@ export default function TransformationSystemMixin(Base) {
       _buildTransformationFlags() {
         const disabledEffects = [];
         const disabledItems = [];
-        const disabledHpDiceItems = [];
-        const disabledMpDiceItems = [];
+        const disabledStatDiceItems = Object.fromEntries(POOL_STATS.map(stat => [stat, []]));
         const typeMap = this.actor.children.documentsByType;
         for (const t of this.transformation.suppress) {
           if (TERIOCK.config.document[t].documentName === "ActiveEffect") {
@@ -312,23 +334,23 @@ export default function TransformationSystemMixin(Base) {
           }
         }
         const statItems = this.actor.items.contents.filter(i => i.system.metadata.stats);
-        if (this.transformation.reset.has("hp")) {
-          disabledHpDiceItems.push(...statItems.filter(i => !i.system.statDice.hp.disabled));
-        }
-        if (this.transformation.reset.has("mp")) {
-          disabledMpDiceItems.push(...statItems.filter(i => !i.system.statDice.mp.disabled));
+        for (const stat of POOL_STATS) {
+          if (this.transformation.reset.has(stat)) {
+            disabledStatDiceItems[stat].push(...statItems.filter(i => !i.system.statDice[stat].disabled));
+          }
         }
         const preTransform = {};
         for (const r of this.transformation.reset) {
-          const update = TERIOCK.config.transformation.reset[r].update;
+          const update = statConfig[r].transformationReset.update;
           for (const k of Object.keys(update)) { preTransform[k] = foundry.utils.getProperty(this.actor, k); }
         }
         return {
           teriock: {
             disabledEffects: this.#toIds(disabledEffects),
-            disabledHpDiceItems: this.#toIds(disabledHpDiceItems),
             disabledItems: this.#toIds(disabledItems),
-            disabledMpDiceItems: this.#toIds(disabledMpDiceItems),
+            ...Object.fromEntries(
+              POOL_STATS.map(stat => [disabledStatDiceFlag(stat), this.#toIds(disabledStatDiceItems[stat])]),
+            ),
             preTransform: foundry.utils.expandObject(preTransform),
           },
         };
@@ -371,8 +393,13 @@ export default function TransformationSystemMixin(Base) {
             const flags = foundry.utils.mergeObject(this.parent.flags, this._buildTransformationFlags());
             foundry.utils.setProperty(changes, "flags", flags);
           } else {
-            foundry.utils.setProperty(changes, "flags.teriock.transformationHp", this.actor.system.hp.value);
-            foundry.utils.setProperty(changes, "flags.teriock.transformationMp", this.actor.system.mp.value);
+            for (const stat of POOL_STATS) {
+              foundry.utils.setProperty(
+                changes,
+                `flags.teriock.${transformationStatFlag(stat)}`,
+                this.actor.system[stat].value,
+              );
+            }
           }
         }
       }

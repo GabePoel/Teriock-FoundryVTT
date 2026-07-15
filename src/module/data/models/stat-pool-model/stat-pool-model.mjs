@@ -1,6 +1,7 @@
+import impactConfig from "../../../constants/config/impact-config.mjs";
+import statConfig from "../../../constants/config/stat-config.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
-import { getRollIcon } from "../../../helpers/icon.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
@@ -10,13 +11,15 @@ import { StatDie } from "../../pseudo-documents/_module.mjs";
 const { fields } = foundry.data;
 const { Collection } = foundry.utils;
 
+const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
+
 /**
- * @extends {Teriock.Models.BaseStatPoolModelData}
+ * @extends {Teriock.Models.StatPoolModelData}
  * @property {StatGiverSystem} parent
  * @property {Set<number>} spent
  * @implements {Teriock.Functionality.StatProvider}
  */
-export default class BaseStatPoolModel extends BaseDataModel {
+export default class StatPoolModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseStatPool"];
 
@@ -26,6 +29,7 @@ export default class BaseStatPoolModel extends BaseDataModel {
       disabled: new fields.BooleanField({ initial: false }),
       formula: new FormulaField({ deterministic: false, initial: "1d10" }),
       spent: new fields.SetField(new fields.NumberField()),
+      stat: new fields.StringField({ choices: POOL_STATS, nullable: false, required: true }),
     };
   }
 
@@ -37,6 +41,10 @@ export default class BaseStatPoolModel extends BaseDataModel {
       source.formula = `${number}d${source.faces}`;
       delete source.faces;
       delete source.number;
+    }
+    if (!source.stat && state?.parentPath) {
+      const match = state.parentPath.match(/\.statDice\.(\w+)$/);
+      if (match) { source.stat = match[1]; }
     }
     return super.migrateData(source, options, state);
   }
@@ -54,11 +62,24 @@ export default class BaseStatPoolModel extends BaseDataModel {
   value = 0;
 
   /**
-   * @returns {(_number: number) => Promise<void>}
-   * @abstract
+   * @returns {(amount: number) => Promise<void>}
    */
   get callback() {
-    return _number => {};
+    const reverse = impactConfig[this.config?.impact]?.reverse;
+    return async amount => {
+      await reverse?.(this.actor, amount);
+      if (this.stat === "hp" && !this.actor?.statuses.has("criticallyWounded")) {
+        await this.actor?.system.takeAwaken();
+      }
+    };
+  }
+
+  /**
+   * Config entry for this pool's stat.
+   * @returns {Teriock.Config.StatEntry}
+   */
+  get config() {
+    return statConfig[this.stat];
   }
 
   /**
@@ -66,7 +87,7 @@ export default class BaseStatPoolModel extends BaseDataModel {
    * @returns {string}
    */
   get dieName() {
-    return _loc("TERIOCK.MODELS.BaseStatPool.PANELS.name");
+    return _loc(this.config.pool.panel.name);
   }
 
   /**
@@ -74,31 +95,41 @@ export default class BaseStatPoolModel extends BaseDataModel {
    * @returns {string}
    */
   get flavor() {
-    return "";
+    return this.stat;
   }
 
   /**
    * @returns {Teriock.Panels.PanelParts[]}
    */
   get panels() {
-    return [{
+    const panels = [{
       bars: [],
-      blocks: [{
-        text: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.text"),
-        title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
-      }],
-      icon: getRollIcon(this.formula),
-      image: getImage("equipment", "Die"),
-      name: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.name"),
+      blocks: [{ text: _loc(this.config.pool.panel.text), title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title") }],
+      icon: this.config.icon,
+      image: getImage("misc", this.config.pool.img),
+      name: this.dieName,
     }];
-  }
-
-  /**
-   * The stat this modifies.
-   * @returns {string}
-   */
-  get stat() {
-    return "";
+    if (this.stat === "hp" && this.actor?.statuses.has("criticallyWounded")) {
+      panels.push({
+        bars: [],
+        blocks: [{
+          text: TERIOCK.data.conditions.criticallyWounded.description,
+          title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title"),
+        }],
+        icon: TERIOCK.config.document.condition.icon,
+        image: TERIOCK.data.conditions.criticallyWounded.img,
+        name: TERIOCK.data.conditions.criticallyWounded.name,
+      });
+    } else if (this.stat === "hp" && this.actor?.statuses.has("unconscious")) {
+      panels.push({
+        bars: [],
+        blocks: [{ text: TERIOCK.content.keywords.awaken, title: _loc("TERIOCK.MODELS.BaseStatPool.PANELS.title") }],
+        icon: TERIOCK.display.icons.effect.awaken,
+        image: getImage("effect-types", "Awakening"),
+        name: _loc("TERIOCK.EFFECTS.Common.awaken"),
+      });
+    }
+    return panels;
   }
 
   /** @inheritDoc */
