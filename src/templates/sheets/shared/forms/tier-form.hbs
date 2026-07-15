@@ -1,11 +1,10 @@
 {{formBox
-  (formInput
-    systemFields.tier
-    value=system._source.tier.raw
-    disabled=(not editable)
-    placeholder="0")
+  system._source.tier.raw
+  action=(ifThen editable "updatePaths" "")
+  dataset=(object paths="system.tier.raw")
   icon=TERIOCK.display.icons.attunable.tier
   label=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.abbreviation")
+  placeholder="0"
   tooltip=(localize "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label")
   unselected=(ifThen system.tier.raw system.tier.value "")
 }}

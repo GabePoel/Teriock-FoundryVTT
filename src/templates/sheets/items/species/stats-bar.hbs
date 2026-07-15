@@ -1,10 +1,9 @@
 <div class="teriock-sheet-bar">
   {{> "teriock/sheets/shared/forms/stat-forms"}}
   {{formBox
-    (formInput
-      systemFields.br
-      value=system.br
-      disabled=(not editable))
+    system.br
+    action=(ifThen editable "updatePaths" "")
+    dataset=(object paths="system.br")
     icon=TERIOCK.display.icons.species.br
     tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.br.label")
     label=(localize "TERIOCK.SYSTEMS.BaseActor.FIELDS.scaling.br.abbreviation")

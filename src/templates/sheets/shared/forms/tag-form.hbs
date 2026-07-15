@@ -1,10 +1,9 @@
 {{formBox
-  (formInput
-    systemFields.badge
-    value=system.badge
-    disabled=(not editable)
-    placeholder=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.placeholder"))
+  system.badge
+  action=(ifThen editable "updatePaths" "")
+  dataset=(object paths="system.badge")
   include=(exists system.badge)
+  placeholder=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.placeholder")
   tooltip=(localize "TERIOCK.SYSTEMS.BaseEffect.FIELDS.badge.label")
   icon=TERIOCK.display.icons.ui.badge
 }}

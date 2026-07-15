@@ -45,8 +45,8 @@ export default class RankSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      archetype: archetypeField(),
-      class: classField(),
+      archetype: archetypeField({ blank: false, initial: "everyman", required: true }),
+      class: classField({ blank: false, initial: "journeyman", required: true }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
       innate: new fields.BooleanField({ initial: false }),
@@ -166,7 +166,10 @@ export default class RankSystem
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor && foundry.utils.hasProperty(changed, "system.archetype")) {
+    // A class change carries an archetype change with it.
+    const archetypeChanged = foundry.utils.hasProperty(changed, "system.archetype")
+      || foundry.utils.hasProperty(changed, "system.class");
+    if (this.parent.checkEditor(userId) && this.actor && archetypeChanged) {
       this.#stageArchetypeCreation();
       this.#stageArchetypeDeletion();
     }
@@ -189,6 +192,10 @@ export default class RankSystem
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
+    // Enforce matching class/archetype
+    this.archetype = `archetype:${
+      TERIOCK.config.class.classes[toCamelCase(this._source.class)]?.archetype ?? this._source.archetype
+    }`;
     if (this.parent.sup?.type === "species") { this.innate = true; }
     if (
       game.settings.get("teriock", "armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv

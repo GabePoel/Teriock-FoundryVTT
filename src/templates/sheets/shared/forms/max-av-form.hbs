@@ -1,8 +1,10 @@
 {{formBox
-  (formInput
-    systemFields.maxAv
-    value=system.maxAv
-    disabled=(not editable))
+  (ifThen
+    (eq system._source.maxAv 0)
+    (localize "TERIOCK.SYSTEMS.Power.PANELS.noArmor")
+    (localize "TERIOCK.SYSTEMS.Power.PANELS.maxAv" value=system._source.maxAv))
+  action=(ifThen editable "updatePaths" "")
+  dataset=(object paths="system.maxAv")
   icon=TERIOCK.display.icons.armament.av
   unselected=(ifThen
     (eq system.maxAv 0)

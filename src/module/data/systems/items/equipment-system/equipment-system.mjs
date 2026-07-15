@@ -94,8 +94,10 @@ export default class EquipmentSystem
       consumable: new fields.BooleanField({ initial: false }),
       equipmentType: new IdentifierField({ type: "equipment" }),
       powerLevel: new fields.StringField({
-        choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
+        blank: false,
+        choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label, { localize: true }),
         initial: "mundane",
+        required: true,
       }),
       price: new fields.NumberField({ initial: 0 }),
       settings: new fields.EmbeddedDataField(documentSettingsModels.equipment),

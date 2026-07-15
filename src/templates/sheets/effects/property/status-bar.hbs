@@ -1,11 +1,10 @@
 <div class="teriock-sheet-bar">
   {{> "teriock/sheets/shared/forms/form-form"}}
   {{formBox
-    (formInput
-      systemFields.damageType
-      value=system._source.damageType
-      disabled=(not editable)
-      placeholder=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.placeholder"))
+    system._source.damageType
+    action=(ifThen editable "updatePaths" "")
+    dataset=(object paths="system.damageType")
+    placeholder=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.placeholder")
     unselected=(getName system.damageType)
     tooltip=(localize "TERIOCK.SYSTEMS.Property.FIELDS.damageType.label")
     icon=TERIOCK.display.icons.effect.damage

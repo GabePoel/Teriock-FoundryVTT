@@ -2,7 +2,8 @@
   {{#if (and isGM (not system.identification.read))}}
     {{formBox
       (path TERIOCK.config.equipment.powerLevel system.identification.powerLevel "label")
-      classes=(ifThen editable "power-level-box")
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.powerLevel")
       icon=(path TERIOCK.config.equipment.powerLevel "unknown" "icon")
       iconColor=(path
         TERIOCK.config.equipment.powerLevel system.identification.powerLevel "color")
@@ -11,7 +12,8 @@
   {{else}}
     {{formBox
       (path TERIOCK.config.equipment.powerLevel system.powerLevel "label")
-      classes=(ifThen editable "power-level-box")
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.powerLevel")
       icon=(path TERIOCK.config.equipment.powerLevel system.powerLevel "icon")
       iconColor=(path
         TERIOCK.config.equipment.powerLevel system.powerLevel "color")
@@ -19,12 +21,11 @@
     }}
   {{/if}}
   {{formBox
-    (formInput
-      systemFields.equipmentType
-      value=system._source.equipmentType
-      disabled=(not editable)
-      placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label"))
+    system._source.equipmentType
+    action=(ifThen editable "updatePaths" "")
+    dataset=(object paths="system.equipmentType")
     icon=TERIOCK.display.icons.equipment.equipmentType
+    placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
     tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
     unselected=(getName system.equipmentType)
   }}

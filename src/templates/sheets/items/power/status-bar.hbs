@@ -1,8 +1,9 @@
 <div class="teriock-sheet-bar">
   {{formBox
     (path TERIOCK.config.power.type system.type "label")
+    action=(ifThen editable "updatePaths" "")
+    dataset=(object paths="system.type")
     icon=(path TERIOCK.config.power.type system.type "icon")
-    classes="power-box"
     tooltip=(localize "TERIOCK.SYSTEMS.Power.FIELDS.type.label")
   }}
   {{> "teriock/sheets/shared/forms/max-av-form"}}

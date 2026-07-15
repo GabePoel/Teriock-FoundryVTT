@@ -1,14 +1,14 @@
 <div class="teriock-sheet-bar">
   {{formBox
     (path TERIOCK.config.tradecraft.fields system._source.field "label")
+    action=(ifThen editable "editTradecraft" "")
     icon=(path TERIOCK.config.tradecraft.fields system._source.field "icon")
-    classes=(ifThen editable "field-box" "")
     tooltip=(localize "TERIOCK.SYSTEMS.Fluency.FIELDS.field.label")
   }}
   {{formBox
     (path TERIOCK.reference.tradecrafts system._source.tradecraft)
+    action=(ifThen editable "editTradecraft" "")
     icon=(path TERIOCK.config.tradecraft.tradecrafts system._source.tradecraft "icon")
-    classes=(ifThen editable "tradecraft-box" "")
     tooltip=(localize "TERIOCK.TERMS.Common.tradecraft")
   }}
 </div>

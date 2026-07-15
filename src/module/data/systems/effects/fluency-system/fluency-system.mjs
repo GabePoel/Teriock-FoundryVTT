@@ -133,6 +133,13 @@ export default class FluencySystem
   }
 
   /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    // Enforce matching tradecraft/field
+    this.field = `field:${TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft]?.field ?? this._source.field}`;
+  }
+
+  /** @inheritDoc */
   prepareDerivedData() {
     super.prepareDerivedData();
     this.tradecraftDescription = TERIOCK.content.tradecrafts[this._source.tradecraft];

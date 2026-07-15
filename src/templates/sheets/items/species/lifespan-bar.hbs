@@ -1,14 +1,20 @@
 {{#if (exists system.adult)}}
   <div class="teriock-sheet-bar">
     {{formBox
-      (formInput systemFields.adult value=system.adult disabled=(not editable))
+      (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult" value=system._source.adult)
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.adult")
       unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult" value=system.adult)
       icon=TERIOCK.display.icons.species.adult
       tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.adult.label")
     }}
     {{formBox
-      (formInput
-        systemFields.lifespan value=system.lifespan disabled=(not editable))
+      (ifThen
+        (exists system._source.lifespan)
+        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=system._source.lifespan)
+        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite"))
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.lifespan")
       unselected=(ifThen
         (exists system.lifespan)
         (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=system.lifespan)

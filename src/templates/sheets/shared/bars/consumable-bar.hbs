@@ -1,21 +1,19 @@
 {{#if system.consumable}}
   <div class="teriock-sheet-bar">
     {{formBox
-      (formInput
-        systemFields.quantity
-        disabled=(not editable)
-        value=system.quantity)
+      (localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system._source.quantity)
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.quantity")
       icon=TERIOCK.display.icons.ui.quantity
       unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity)
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label")
     }}
     {{formBox
-      (formInput
-        systemFields.maxQuantity
-        disabled=(not editable)
-        value=system._source.maxQuantity.raw
-        placeholder=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax"))
+      system._source.maxQuantity.raw
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.maxQuantity.raw")
       icon=TERIOCK.display.icons.ui.maximum
+      placeholder=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
       unselected=(ifThen
         system.maxQuantity.raw
         (localize
@@ -25,11 +23,9 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.maxQuantity.raw.label")
     }}
     {{formBox
-      (formInput
-        systemFields.consumptionAmount
-        disabled=(not editable)
-        value=system._source.consumptionAmount
-        placeholder="0")
+      (localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system._source.consumptionAmount)
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.consumptionAmount")
       icon=TERIOCK.display.icons.ui.amount
       unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system.consumptionAmount)
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.consumptionAmount.label")

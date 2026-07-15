@@ -16,10 +16,9 @@
       overflow=true
     }}
     {{formBox
-      (formInput
-        systemFields.hitBonus
-        disabled=(not editable)
-        value=system._source.hitBonus)
+      system._source.hitBonus
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.hitBonus")
       icon=TERIOCK.display.icons.armament.hitBonus
       include=(exists system.hitBonus)
       label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.abbreviation")
@@ -27,10 +26,9 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label")
     }}
     {{formBox
-      (formInput
-        systemFields.attackPenalty
-        disabled=(not editable)
-        value=system._source.attackPenalty)
+      system._source.attackPenalty
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.attackPenalty")
       icon=TERIOCK.display.icons.armament.ap
       label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.abbreviation")
       unselected=system.attackPenalty
@@ -44,10 +42,9 @@
 }}
   <div class="teriock-sheet-bar">
     {{formBox
-      (formInput
-        systemFields.av
-        disabled=(not editable)
-        value=system._source.av.raw)
+      system._source.av.raw
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.av.raw")
       icon=TERIOCK.display.icons.armament.av
       include=(exists system.av.raw)
       label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.abbreviation")
@@ -55,10 +52,9 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label")
     }}
     {{formBox
-      (formInput
-        systemFields.bv
-        disabled=(not editable)
-        value=system._source.bv.raw)
+      system._source.bv.raw
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.bv.raw")
       icon=TERIOCK.display.icons.armament.bv
       include=(exists system.bv.raw)
       label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.bv.abbreviation")

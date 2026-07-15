@@ -1,24 +1,22 @@
 <div class="teriock-sheet-bar">
   {{formBox
     (getName system.archetype)
+    action=(ifThen editable "editClass" "")
     icon=(path TERIOCK.config.class.archetypes system._source.archetype "icon")
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label")
-    classes=(ifThen editable "archetype-box" "")
   }}
   {{formBox
     (getName system.class)
+    action=(ifThen editable "editClass" "")
     icon=system.classIcon
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.class.label")
-    classes=(ifThen editable "class-box" "")
   }}
   {{formBox
-    (formInput
-      systemFields.number
-      value=system.number
-      disabled=(not editable))
+    (localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system._source.number)
+    action=(ifThen editable "updatePaths" "")
+    dataset=(object paths="system.number")
     unselected=(localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system.number)
     icon=TERIOCK.config.document.rank.icon
-    classes=(ifThen editable "rank-box" "")
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.number.label")
   }}
 </div>

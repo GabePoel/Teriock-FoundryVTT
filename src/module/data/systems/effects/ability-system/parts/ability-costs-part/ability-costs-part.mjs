@@ -45,7 +45,7 @@ export default function AbilityCostsPart(Base) {
               const label = _loc("TERIOCK.COSTS.Long.primary", { key: _loc(v.label) });
               return new fields.SchemaField({
                 description: new fields.HTMLField({ label }),
-                formula: new FormulaField({ deterministic: false, label }),
+                formula: new FormulaField({ deterministic: false, initial: "0", label }),
                 type: new fields.StringField({
                   choices: localizeChoices(costConfig.primary.types),
                   initial: null,

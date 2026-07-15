@@ -1,22 +1,20 @@
 {{#if system.ammunition.enabled}}
   <div class="teriock-sheet-bar">
     {{formBox
-      (formInput
-        systemFields.ammunition.fields.type
-        value=system._source.ammunition.type
-        disabled=(not editable)
-        placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.ammunition.type.label"))
+      system._source.ammunition.type
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.ammunition.type")
+      placeholder=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.ammunition.type.label")
       unselected=(getName system.ammunition.type)
       tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.ammunition.type.label")
       icon=TERIOCK.display.icons.equipment.ammunition
     }}
     {{formBox
-      (formInput
-        systemFields.ammunition.fields.consumptionAmount
-        disabled=(not editable)
-        value=system._source.ammunition.consumptionAmount
-        placeholder="0")
+      system._source.ammunition.consumptionAmount
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.ammunition.consumptionAmount")
       icon=TERIOCK.display.icons.ui.amount
+      placeholder="0"
       unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system.consumptionAmount)
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.consumptionAmount.label")
     }}

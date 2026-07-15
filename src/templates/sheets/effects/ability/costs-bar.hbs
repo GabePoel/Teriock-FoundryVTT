@@ -10,11 +10,13 @@
         {{formBox
           (ifThen
             (eq (path @root/system.costs.primary key "type") "formula")
-            (formInput
-              (path @root/systemFields.costs.fields.primary.fields key "fields.formula")
-              value=(path @root/system.costs.primary key "formula")
-              disabled=(not @root/editable))
+            (path @root/system.costs.primary key "formula")
             @root/TERIOCK.config.cost.primary.types.description)
+          action=(ifThen
+            (and @root/editable (eq (path @root/system.costs.primary key "type") "formula"))
+            "updatePaths"
+            "")
+          dataset=(object paths=(concat "system.costs.primary." key ".formula"))
           icon=value.icon
           tooltip=(localize "TERIOCK.COSTS.Long.primary" key=value.label)
           label=value.abbreviation

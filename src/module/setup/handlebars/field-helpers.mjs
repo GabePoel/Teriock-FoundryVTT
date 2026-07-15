@@ -30,21 +30,27 @@ function formBox(input, options) {
     include = true,
     label = "",
     overflow = false,
+    placeholder = "",
     tooltip = "",
     unselected = "",
   } = options.hash;
   if (!include) { return new Handlebars.SafeString(""); }
 
-  const hasUnselected = String(unselected).length > 0;
-  const displayed = hasUnselected ? String(unselected) : String(input);
+  const main = input ?? "";
+  const alt = unselected ?? "";
+  const mainHtml = String(main).length > 0 || !placeholder
+    ? main
+    : `<span class="teriock-sheet-box-placeholder">${placeholder}</span>`;
+  const hasUnselected = String(alt).length > 0;
+  const displayed = hasUnselected ? String(alt) : String(main);
   const content = hasUnselected
-    ? `<div class="unselected">${unselected}</div><div class="selected">${input}</div>`
-    : input;
-
+    ? `<div class="unselected">${alt}</div><div class="selected">${mainHtml}</div>`
+    : mainHtml;
   const iconStr = String(icon).startsWith("<i")
     ? icon
     : `<i class="${makeIconClass(icon, "light")}"${attr("data-tooltip", tooltip)}></i>`;
-  const datasetStr = Object.entries(dataset).map(([key, value]) => attr(`data-${key}`, value)).join("");
+  const fullDataset = action === "updatePaths" && !("icon" in dataset) ? { ...dataset, icon } : dataset;
+  const datasetStr = Object.entries(fullDataset).map(([key, value]) => attr(`data-${key}`, value)).join("");
   const overflowTooltip = overflow && displayed.length > OVERFLOW_TOOLTIP_THRESHOLD ? displayed : "";
 
   const out = `

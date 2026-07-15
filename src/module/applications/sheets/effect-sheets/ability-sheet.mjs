@@ -104,8 +104,6 @@ export default class AbilitySheet extends ChildSheet {
   async _onRender(context, options) {
     await super._onRender(context, options);
     this.#resetElderSorceryElements();
-    if (!this.isEditable) { return; }
-    this._connectBuildContextMenu(".form-type-box", TERIOCK.config.effect.form, "system.form", "click");
   }
 
   /** @inheritDoc */

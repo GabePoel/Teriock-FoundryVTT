@@ -30,7 +30,7 @@ export default function AdjustableSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           badge: new fields.StringField({ initial: "" }),
-          form: new fields.StringField({ choices: effectConfig.form, initial: "normal" }),
+          form: new fields.StringField({ blank: false, choices: effectConfig.form, initial: "normal", required: true }),
           improvement: new fields.HTMLField({ initial: "" }),
           limitation: new fields.HTMLField({ initial: "" }),
         });

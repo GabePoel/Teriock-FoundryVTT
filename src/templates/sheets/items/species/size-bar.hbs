@@ -1,34 +1,30 @@
-<div class="teriock-sheet-bar">
-  {{#if system.size.enabled}}
+{{#if system.size.enabled}}
+  <div class="teriock-sheet-bar">
     {{formBox
-      (formInput
-        systemFields.size.fields.value
-        value=system.size.value
-        placeholder="3"
-        disabled=(not editable))
+      (localize "TERIOCK.SYSTEMS.Species.PANELS.size.value" value=system._source.size.value)
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.size.value")
       unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.value" value=system.size.value)
       icon=TERIOCK.display.icons.species.size
       tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label")
     }}
     {{#if (and (exists system.size.min) (exists system.size.max))}}
       {{formBox
-        (formInput
-          systemFields.size.fields.min
-          value=system.size.min
-          disabled=(not editable))
+        (localize "TERIOCK.SYSTEMS.Species.PANELS.size.min" value=system._source.size.min)
+        action=(ifThen editable "updatePaths" "")
+        dataset=(object paths="system.size.min")
         unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.min" value=system.size.min)
         icon=TERIOCK.display.icons.species.minSize
         tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label")
       }}
       {{formBox
-        (formInput
-          systemFields.size.fields.max
-          value=system.size.max
-          disabled=(not editable))
+        (localize "TERIOCK.SYSTEMS.Species.PANELS.size.max" value=system._source.size.max)
+        action=(ifThen editable "updatePaths" "")
+        dataset=(object paths="system.size.max")
         unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.size.max" value=system.size.max)
         icon=TERIOCK.display.icons.species.maxSize
         tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.max.label")
       }}
     {{/if}}
-  {{/if}}
-</div>
+  </div>
+{{/if}}

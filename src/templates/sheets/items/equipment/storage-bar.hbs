@@ -1,12 +1,11 @@
 {{#if system.storage.enabled}}
   <div class="teriock-sheet-bar">
     {{formBox
-      (formInput
-        systemFields.storage.fields.maxCount
-        disabled=(not editable)
-        value=system._source.storage.maxCount
-        placeholder=(localize "TERIOCK.TERMS.Math.infinity"))
+      system._source.storage.maxCount
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.storage.maxCount")
       icon=TERIOCK.display.icons.equipment.maxCount
+      placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       unselected=(ifThen
         system.storage.maxCount
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=system.storage.maxCount)
@@ -22,12 +21,11 @@
           (ifThen system.storage.isOverCountCapacity "over" "under")))
     }}
     {{formBox
-      (formInput
-        systemFields.storage.fields.maxWeight
-        disabled=(not editable)
-        value=system._source.storage.maxWeight
-        placeholder=(localize "TERIOCK.TERMS.Math.infinity"))
+      system._source.storage.maxWeight
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.storage.maxWeight")
       icon=TERIOCK.display.icons.equipment.maxWeight
+      placeholder=(localize "TERIOCK.TERMS.Math.infinity")
       unselected=(ifThen
         system.storage.maxWeight
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=system.storage.maxWeight)
@@ -43,12 +41,11 @@
           (ifThen system.storage.isOverWeightCapacity "over" "under")))
     }}
     {{formBox
-      (formInput
-        systemFields.storage.fields.weightMultiplier
-        disabled=(not editable)
-        value=system._source.storage.weightMultiplier
-        placeholder="0")
+      system._source.storage.weightMultiplier
+      action=(ifThen editable "updatePaths" "")
+      dataset=(object paths="system.storage.weightMultiplier")
       icon=TERIOCK.display.icons.equipment.weightMultiplier
+      placeholder="0"
       unselected=system.storage.weightMultiplier
       tooltip=(localize "TERIOCK.MODELS.Storage.FIELDS.weightMultiplier.label")
     }}

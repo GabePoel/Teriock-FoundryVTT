@@ -3,24 +3,22 @@
     {{> "teriock/sheets/shared/forms/tier-form"}}
   {{/if}}
   {{formBox
-    (formInput
-      systemFields.weight
-      disabled=(not editable)
-      placeholder="0"
-      value=system._source.weight)
+    system._source.weight
+    action=(ifThen editable "updatePaths" "")
+    dataset=(object paths="system.weight")
     icon=TERIOCK.display.icons.equipment.weight
     label="lb"
+    placeholder="0"
     unselected=system.weight
     tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label")
   }}
   {{formBox
-    (formInput
-      systemFields.minStr
-      disabled=(not editable)
-      placeholder="0"
-      value=system._source.minStr)
+    system._source.minStr
+    action=(ifThen editable "updatePaths" "")
+    dataset=(object paths="system.minStr")
     icon=TERIOCK.display.icons.equipment.minStr
     label=(localize "TERIOCK.TERMS.Attributes.str.abbreviation")
+    placeholder="0"
     unselected=system.minStr
     tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label")
   }}

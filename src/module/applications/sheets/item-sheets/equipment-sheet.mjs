@@ -30,18 +30,6 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, mixins.Equ
   };
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    if (!this.isEditable) { return; }
-    this._connectBuildContextMenu(
-      ".power-level-box",
-      TERIOCK.config.equipment.powerLevel,
-      "system.powerLevel",
-      "click",
-    );
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), {
       rangeString: this.document.system.range.long.unitType === "finite"
