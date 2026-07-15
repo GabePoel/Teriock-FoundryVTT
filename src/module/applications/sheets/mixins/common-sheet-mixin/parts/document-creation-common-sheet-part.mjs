@@ -19,7 +19,8 @@ export default function DocumentCreationCommonSheetPart(Base) {
       static DEFAULT_OPTIONS = { actions: { createChild: this._onCreateChild } };
 
       /**
-       * Create a child document from a preview add button.
+       * Create the add button's default child type (its `data-type`) on left-click. Buttons without a default `data-type`
+       * open a context menu instead (see {@link _connectChildrenCreateMenu}).
        * @this {DocumentCreationCommonSheetPart}
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
@@ -31,23 +32,33 @@ export default function DocumentCreationCommonSheetPart(Base) {
       }
 
       /**
-       * Connect a left-click context menu to the consolidated children add button.
+       * Connect the child-creation context menus. Menu entries cover every child type but are only visible when their
+       * type appears in the clicked button's `data-types`. Buttons with no default `data-type` open the menu on
+       * left-click; buttons with a default (created directly on left-click via {@link _onCreateChild}) expose the full
+       * list on right-click.
        */
       _connectChildrenCreateMenu() {
         if (!this.isEditable || typeof this._connectContextMenu !== "function") { return; }
-        const types = this.document.visibleTypes;
-        if (types.length <= 1 || !this.element.querySelector(".children-add-button")) { return; }
-        this._connectContextMenu(
-          ".children-add-button",
-          types.map(type => ({
-            icon: makeIconClass(TERIOCK.config.document[type].icon, "contextMenu"),
-            label: _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: TERIOCK.config.document[type].label }),
+        if (!this.element.querySelector(".add-button[data-types]")) { return; }
+        const entries = () =>
+          Object.entries(TERIOCK.config.document).filter(([, config]) =>
+            ["ActiveEffect", "Item"].includes(config.documentName)
+          ).map(([type, config]) => ({
+            icon: makeIconClass(config.icon, "contextMenu"),
+            label: _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: config.label }),
             onClick: () => this._createChild(type),
-          })),
-          "click",
-          undefined,
-          true,
-        );
+            visible: target => parseAddTypes(target).includes(type),
+          }));
+        this._connectContextMenu(".add-button[data-types]:not([data-type])", entries(), {
+          attach: true,
+          eventName: "click",
+          fixed: true,
+        });
+        this._connectContextMenu(".add-button[data-types][data-type]", entries(), {
+          attach: true,
+          eventName: "contextmenu",
+          fixed: true,
+        });
       }
 
       /**
@@ -218,6 +229,15 @@ export default function DocumentCreationCommonSheetPart(Base) {
       }
     }
   );
+}
+
+/**
+ * Parse an add button's `data-types` attribute into a list of child types.
+ * @param {HTMLElement} [target]
+ * @returns {Teriock.Documents.ChildType[]}
+ */
+function parseAddTypes(target) {
+  return (target?.dataset.types ?? "").split(",").map(type => type.trim()).filter(Boolean);
 }
 
 /**

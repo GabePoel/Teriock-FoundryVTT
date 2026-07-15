@@ -89,7 +89,7 @@ export default class RankSheet extends ChildSheet {
 
     [{ menu: classContextMenu, selector: ".class-box" }, { menu: archetypeContextMenu, selector: ".archetype-box" }]
       .forEach(({ menu, selector }) => {
-        this._connectContextMenu(selector, menu(this.document), "click");
+        this._connectContextMenu(selector, menu(this.document));
       });
   }
 }

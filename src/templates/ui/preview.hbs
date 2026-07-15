@@ -1,95 +1,96 @@
-{{#with (lookup @root.previews type) as |preview|}}
+{{#with this as |preview|}}
   <div class="teriock-preview-header">
     <div class="teriock-block-options standard-form">
       <div class="teriock-block-options-header">
         <toggle-button
-          class="{{ ../type }}-block-menu-toggle block-menu-toggle"
+          class="{{ preview.id }}-block-menu-toggle block-menu-toggle"
           data-action="toggleCollapse"
-          data-collapsible-target="preview-{{ ../type }}-block"
+          data-collapsible-target="preview-{{ preview.id }}-block"
           data-never-disable="true"
           data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.blockOptions"}}'
           icon="{{ @root/TERIOCK.display.icons.ui.options }}"
-          value='{{path @root/previewToggles ../type "block"}}'
+          name="previews.{{ preview.id }}.toggles.block"
+          value="{{ preview.toggles.block }}"
         ></toggle-button>
 
         <toggle-button
-          class="{{ ../type }}-sort-menu-toggle sort-menu-toggle"
+          class="{{ preview.id }}-sort-menu-toggle sort-menu-toggle"
           data-action="toggleCollapse"
-          data-collapsible-target="preview-{{ ../type }}-sort"
+          data-collapsible-target="preview-{{ preview.id }}-sort"
           data-never-disable="true"
           data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.sortResults"}}'
           icon="{{ @root/TERIOCK.display.icons.ui.sort }}"
-          value='{{path @root/previewToggles ../type "sort"}}'
+          name="previews.{{ preview.id }}.toggles.sort"
+          value="{{ preview.toggles.sort }}"
         ></toggle-button>
 
         <toggle-button
-          class="{{ ../type }}-filter-menu-toggle filter-menu-toggle"
+          class="{{ preview.id }}-filter-menu-toggle filter-menu-toggle"
           data-action="toggleCollapse"
-          data-collapsible-target="preview-{{ ../type }}-filter"
+          data-collapsible-target="preview-{{ preview.id }}-filter"
           data-never-disable="true"
           data-tooltip='{{localize "TERIOCK.SHEETS.Common.SEARCH.filterResults"}}'
           icon="{{ @root/TERIOCK.display.icons.ui.filter }}"
-          value='{{path @root/previewToggles ../type "filter"}}'
+          name="previews.{{ preview.id }}.toggles.filter"
+          value="{{ preview.toggles.filter }}"
         ></toggle-button>
 
         <input
-          class="{{ ../type }}-search teriock-block-search"
+          class="{{ preview.id }}-search teriock-block-search"
           data-never-disable="true"
-          data-search-key="{{ ../type }}"
-          data-type="{{ ../type }}"
+          data-search-key="{{ preview.id }}"
+          data-type="{{ preview.id }}"
           placeholder='{{localize "TERIOCK.SHEETS.Common.SEARCH.placeholder"}}'
           type="search"
           value="{{ preview.search }}"
         />
 
-        {{#if ../addButton}}
+        {{#if preview.add}}
           <button
-            class="toggle-button {{ ../type }}-add-button add-button"
+            class="toggle-button {{ preview.id }}-add-button add-button"
             data-action="createChild"
-            data-tab="{{ ../type }}"
-            data-tooltip='{{localize "TERIOCK.SHEETS.Common.PREVIEW.addType" type=(path @root/TERIOCK.config.document ../type "label")}}'
-            data-type="{{ ../type }}"
+            data-tooltip="{{ preview.add.tooltip }}"
+            {{#if preview.add.dataType}}
+              data-type="{{ preview.add.dataType }}"
+            {{/if}}
+            {{#if preview.add.dataTypes}}
+              data-types="{{ preview.add.dataTypes }}"
+            {{/if}}
             type="button"
           >
             {{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}
           </button>
-        {{else if ../addMenu}}
-          <button class="toggle-button {{ ../type }}-add-button add-button" data-tooltip='{{localize "TERIOCK.SHEETS.Common.PREVIEW.addChildDocument"}}' type="button">{{makeIcon @root/TERIOCK.display.icons.ui.add "button"}}</button>
         {{/if}}
       </div>
 
       <div
         class="teriock-block-options-content collapsible collapsed"
-        data-collapsible-id="preview-{{ ../type }}-block"
+        data-collapsible-id="preview-{{ preview.id }}-block"
         data-content-menu="block"
-        data-content-type="{{ ../type }}"
+        data-content-type="{{ preview.id }}"
       >
         <div class="teriock-block-options-content-inner">
           <div class="tgrid g4">
             <div class="tgrid-item form-group">
-              <label for="{{ ../type }}-gapless">{{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}</label>
-              <input
-                id="{{ ../type }}-gapless"
-                data-action="sheetToggle"
-                data-bool="{{ preview.display.gapless }}"
-                data-never-disable="true"
-                data-path="previewMenus.{{ ../type }}.display.gapless"
-                type="checkbox"
-                {{checked preview.display.gapless}}
-              />
+              <label for='{{concat @root/appId "-" preview.id}}-gapless'>
+                {{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}
+              </label>
+              {{formInput
+                (path preview "schema" "fields" "display" "fields" "gapless")
+                id=(concat @root/appId "-" preview.id "-gapless")
+                name=(concat "previews." preview.id ".display.gapless")
+                value=preview.display.gapless
+                dataset=(object neverDisable="true")
+              }}
             </div>
             <div class="tgrid-item gi3">
-              <select
-                id="{{ ../type }}-size"
-                data-action="sheetSelect"
-                data-never-disable="true"
-                data-path="previewMenus.{{ ../type }}.display.size"
-              >
-                {{selectOptions
-                  @root/TERIOCK.config.display.sizes
-                  selected=preview.display.size
-                }}
-              </select>
+              {{formInput
+                (path preview "schema" "fields" "display" "fields" "size")
+                id=(concat @root/appId "-" preview.id "-size")
+                name=(concat "previews." preview.id ".display.size")
+                value=preview.display.size
+                dataset=(object neverDisable="true")
+              }}
             </div>
           </div>
         </div>
@@ -97,37 +98,33 @@
 
       <div
         class="teriock-block-options-content collapsible collapsed"
-        data-collapsible-id="preview-{{ ../type }}-sort"
-        data-content-type="{{ ../type }}"
+        data-collapsible-id="preview-{{ preview.id }}-sort"
+        data-content-type="{{ preview.id }}"
         data-content-menu="sort"
       >
         <div class="teriock-block-options-content-inner">
           <div class="tgrid g4">
             <div class="tgrid-item form-group">
-              <label for="{{ ../type }}-ascending">{{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}</label>
-              <input
-                id="{{ ../type }}-ascending"
-                data-action="sheetToggle"
-                data-bool="{{ preview.sort.ascending }}"
-                data-never-disable="true"
-                data-path="previewMenus.{{ ../type }}.sort.ascending"
-                type="checkbox"
-                {{checked preview.sort.ascending}}
-              />
+              <label for='{{concat @root/appId "-" preview.id}}-ascending'>
+                {{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}
+              </label>
+              {{formInput
+                (path preview "schema" "fields" "sort" "fields" "ascending")
+                id=(concat @root/appId "-" preview.id "-ascending")
+                name=(concat "previews." preview.id ".sort.ascending")
+                value=preview.sort.ascending
+                dataset=(object neverDisable="true")
+              }}
             </div>
             <div class="tgrid-item gi3">
-              <select
-                id="{{ ../type }}-sort"
-                data-action="sheetSelect"
-                data-never-disable="true"
-                data-path="previewMenus.{{ ../type }}.sort.option"
-              >
-                {{selectOptions
-                  (lookup @root.previewSortOrders ../type)
-                  selected=preview.sort.option
-                  localize=true
-                }}
-              </select>
+              {{formInput
+                (path preview "schema" "fields" "sort" "fields" "option")
+                id=(concat @root/appId "-" preview.id "-sort")
+                name=(concat "previews." preview.id ".sort.option")
+                value=preview.sort.option
+                localize=true
+                dataset=(object neverDisable="true")
+              }}
             </div>
           </div>
         </div>
@@ -135,27 +132,25 @@
 
       <div
         class="teriock-block-options-content collapsible collapsed"
-        data-collapsible-id="preview-{{ ../type }}-filter"
-        data-content-type="{{ ../type }}"
+        data-collapsible-id="preview-{{ preview.id }}-filter"
+        data-content-type="{{ preview.id }}"
         data-content-menu="filter"
       >
-        <div class="teriock-block-options-content-inner">{{{lookup @root.filterForms ../type}}}</div>
+        <div class="teriock-block-options-content-inner">{{{ preview.filterForm }}}</div>
       </div>
     </div>
   </div>
 
-  {{#each (lookup @root.previewGroups ../type) as |group|}}
-    {{#if (or (not group.optional) (exists group.docs))}}
-      {{#if @index}}
-        <div class="teriock-block-display-divider"></div>
-      {{/if}}
-      {{> "teriock/sheets/actors/playable/results/search-results"
-        docs=group.docs
-        searchKey=../../type
-        empty=group.empty
-        gapless=preview.display.gapless
-        size=preview.display.size
-      }}
+  {{#each preview.renderedGroups as |group|}}
+    {{#if @index}}
+      <div class="teriock-block-display-divider"></div>
     {{/if}}
+    {{> "teriock/sheets/actors/playable/results/search-results"
+      docs=group.docs
+      searchKey=preview.id
+      empty=group.empty
+      gapless=preview.display.gapless
+      size=preview.display.size
+    }}
   {{/each}}
 {{/with}}

@@ -26,8 +26,8 @@ export default class TeriockGamePause extends GamePause {
   }
 
   /** @inheritDoc */
-  _replaceHTML(result, content, _options) {
-    super._replaceHTML(result, content, _options);
+  _replaceHTML(result, content, options) {
+    super._replaceHTML(result, content, options);
     content.classList.toggle("teriock-paused", game.paused);
   }
 }

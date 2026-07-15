@@ -58,6 +58,32 @@ export default function TradecraftsActorSheetPart(Base) {
             [tc, name],
           ) => [tc, index.getName(`Make ${name} Check`)?.uuid]),
         );
+
+        const scoreIconClass = score => {
+          if (score >= 3) { return "fa-fw fa-light mic ms-check-circle"; }
+          if (score >= 2) { return "fa-fw fa-regular fa-check-double"; }
+          if (score >= 1) { return "fa-fw fa-regular fa-check"; }
+          return "fa-fw fa-regular fa-xmark";
+        };
+        const scoreLabel = score =>
+          _loc(`TERIOCK.SHEETS.Actor.TABS.Tradecrafts.score.${Math.min(Math.max(score ?? 0, 0), 3)}`);
+        const competenceIconClass = level =>
+          TERIOCK.config.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
+        context.tradecraftDisplay = Object.fromEntries(
+          Object.keys(TERIOCK.index.tradecrafts).map(key => {
+            const tradecraft = this.document.system.tradecrafts[key];
+            const source = this.document.system._source.tradecrafts[key];
+            const score = tradecraft?.score ?? 0;
+            const sourceScore = source?.score ?? 0;
+            return [key, {
+              competenceIconClass: competenceIconClass(tradecraft?.competence?.raw),
+              scoreIconClass: scoreIconClass(score),
+              scoreLabel: scoreLabel(score),
+              sourceCompetenceIconClass: competenceIconClass(source?.competence?.raw),
+              sourceScoreIconClass: scoreIconClass(sourceScore),
+            }];
+          }),
+        );
         return context;
       }
     }

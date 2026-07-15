@@ -58,8 +58,11 @@ export default function SidebarActorSheetPart(Base) {
       async _onRender(context, options) {
         await super._onRender(context, options);
 
-        this._connectContextMenu(".actor-piercing-box", this.#piercingContextMenu(), "click");
-        this._connectContextMenu(".actor-basics", this.#scalingContextMenu(), "contextmenu", "down");
+        this._connectContextMenu(".actor-piercing-box", this.#piercingContextMenu());
+        this._connectContextMenu(".actor-basics", this.#scalingContextMenu(), {
+          eventName: "contextmenu",
+          forceDirection: "down",
+        });
       }
 
       /** @inheritDoc */

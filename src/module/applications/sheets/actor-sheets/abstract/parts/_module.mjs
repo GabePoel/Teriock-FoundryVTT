@@ -4,6 +4,7 @@ export { default as ConditionsActorSheetPart } from "./conditions-actor-sheet-pa
 export { default as DocumentCreationActorSheetPart } from "./document-creation-actor-sheet-part.mjs";
 export { default as ImpactActorSheetPart } from "./impact-actor-sheet-part.mjs";
 export { default as MechanicalActorSheetPart } from "./mechanical-actor-sheet-part.mjs";
+export { default as PreviewActorSheetPart } from "./preview-actor-sheet-part.mjs";
 export { default as ProtectionsActorSheetPart } from "./protections-actor-sheet-part.mjs";
 export { default as RollingActorSheetPart } from "./rolling-actor-sheet-part.mjs";
 export { default as SidebarActorSheetPart } from "./sidebar-actor-sheet-part.mjs";

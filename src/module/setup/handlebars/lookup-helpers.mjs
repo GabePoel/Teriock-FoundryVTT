@@ -1,4 +1,11 @@
-import { getImage } from "../../helpers/path.mjs";
+/**
+ * Infer a name from an identifier.
+ * @param {Identifier} identifier
+ * @returns {string}
+ */
+function getName(identifier) {
+  return game.teriock.identifiers.getName(identifier, { forced: true });
+}
 
 /**
  * Read a nested property from an object using a dotted notation built from arguments.
@@ -12,6 +19,4 @@ function path(obj, ...pathSegments) {
   return foundry.utils.getProperty(obj, fullPath);
 }
 
-const lookupHelperEntries = [["getImage", getImage], ["path", path]];
-
-export default lookupHelperEntries;
+export default { getName, path };

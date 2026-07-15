@@ -50,9 +50,4 @@ function merge(a, b) {
   return foundry.utils.mergeObject(a ?? {}, b ?? {});
 }
 
-const existenceHelperEntries = [["defined", defined], ["exists", exists], ["merge", merge], ["repeat", repeat], [
-  "repeatStr",
-  repeatStr,
-]];
-
-export default existenceHelperEntries;
+export default { defined, exists, merge, repeat, repeatStr };

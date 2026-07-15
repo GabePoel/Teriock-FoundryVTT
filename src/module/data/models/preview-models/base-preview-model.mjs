@@ -3,15 +3,38 @@ import { BaseDataModel } from "../../abstract/_module.mjs";
 import { TernaryField } from "../../fields/_module.mjs";
 
 const { fields } = foundry.data;
+const { SearchFilter } = foundry.applications.ux;
 
 /**
  * Previews are used for sorting and filtering documents in sheets and are never stored to the database.
  * @property {Teriock.Models.PreviewDisplay} display
  * @property {Teriock.Models.BaseFilters} filters
+ * @property {string} id
  * @property {Teriock.Models.PreviewSort} sort
  * @property {string} search
+ * @property {Teriock.Previews.PreviewToggles} toggles
  */
 export default class BasePreviewModel extends BaseDataModel {
+  /**
+   * Resolve a preview's add button config into the render context stored on the model.
+   * @param {Teriock.Previews.PreviewAddButton} [add]
+   * @param {TeriockDocumentSheet} app - The sheet the preview belongs to.
+   * @returns {Teriock.Previews.PreviewAddButtonContext | null}
+   */
+  static #resolveAddButton(add, app) {
+    if (!add) { return null; }
+    const resolved = typeof add.types === "function" ? add.types(app) : add.types;
+    const types = (resolved ?? (add.type ? [add.type] : []))?.filter(Boolean) ?? [];
+    if (!types.length) { return null; }
+    const dataType = add.type ?? (types.length === 1 ? types[0] : null);
+    const tooltip = add.label
+      ? _loc(add.label)
+      : dataType
+      ? _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: TERIOCK.config.document[dataType].label })
+      : _loc("TERIOCK.SHEETS.Common.PREVIEW.addChildDocument");
+    return { dataType, dataTypes: types.length > 1 ? types.join(",") : null, tooltip, types };
+  }
+
   /**
    * The sort option selected by default. The `default` option preserves the order documents are passed in.
    * @returns {string}
@@ -26,6 +49,20 @@ export default class BasePreviewModel extends BaseDataModel {
    */
   static get sortOrders() {
     return { default: "TERIOCK.SHEETS.Common.SORT.default", name: "TERIOCK.SHEETS.Common.SORT.name" };
+  }
+
+  /**
+   * Build a preview model from a {@link Teriock.Previews.PreviewConfig}.
+   * @param {string} id
+   * @param {Teriock.Previews.PreviewConfig} config
+   * @param {TeriockDocumentSheet} app
+   * @returns {BasePreviewModel}
+   */
+  static create(id, config, app) {
+    const Model = config.model ?? this;
+    const preview = new Model({ ...config.data, id }, { parent: app.document });
+    preview.add = BasePreviewModel.#resolveAddButton(config.addButton, app);
+    return preview;
   }
 
   /**
@@ -70,11 +107,21 @@ export default class BasePreviewModel extends BaseDataModel {
     return Object.assign(super.defineSchema(), {
       display: new fields.SchemaField(this.defineDisplay()),
       filters: new fields.SchemaField(this.defineFilters()),
-      name: new fields.StringField(),
+      id: new fields.StringField(),
       search: new fields.StringField(),
       sort: new fields.SchemaField({
         ascending: new fields.BooleanField({ initial: true }),
-        option: new fields.StringField({ choices: this.sortOrders, initial: this.defaultSortOption }),
+        option: new fields.StringField({
+          blank: false,
+          choices: this.sortOrders,
+          initial: this.defaultSortOption,
+          required: true,
+        }),
+      }),
+      toggles: new fields.SchemaField({
+        block: new fields.BooleanField(),
+        filter: new fields.BooleanField(),
+        sort: new fields.BooleanField(),
       }),
     });
   }
@@ -86,6 +133,51 @@ export default class BasePreviewModel extends BaseDataModel {
 
   /** @type {string} */
   #rootId;
+
+  /**
+   * Whether a document's name matches the current search query.
+   * @param {*} document
+   * @param {RegExp|null} [rgx]
+   * @returns {boolean}
+   */
+  #matchesSearch(document, rgx = this.#searchRegex()) {
+    return !rgx || rgx.test(document?.name ?? "");
+  }
+
+  /**
+   * Prepare an array of documents for rendering.
+   * @template T
+   * @param {T[]} documents
+   * @returns {Teriock.Previews.RenderedPreviewEntry<T>[]}
+   */
+  #prepareDocuments(documents) {
+    const docs = Array.isArray(documents) ? documents : [];
+    const rgx = this.#searchRegex();
+    const ordered = this.sortDocuments(docs);
+    const visible = new Set(this.filterDocuments(docs));
+    return ordered.map(doc => ({ doc, hidden: !visible.has(doc) || !this.#matchesSearch(doc, rgx) }));
+  }
+
+  /**
+   * The regular expression matching the current search query.
+   * @returns {RegExp|null}
+   */
+  #searchRegex() {
+    const query = foundry.applications.ux.SearchFilter.cleanQuery(this.search ?? "");
+    return query ? new RegExp(RegExp.escape(query), "i") : null;
+  }
+
+  /**
+   * The add button, resolved once at creation by {@link create}, or `null` when the preview has no add button.
+   * @type {Teriock.Previews.PreviewAddButtonContext | null}
+   */
+  add = null;
+
+  /**
+   * The raw group definitions for this preview, set by the sheet each render.
+   * @type {Teriock.Previews.PreviewGroup[]}
+   */
+  groups = [];
 
   /** @inheritDoc */
   get _formPaths() {
@@ -119,11 +211,30 @@ export default class BasePreviewModel extends BaseDataModel {
   }
 
   /**
+   * The filter-menu form HTML for this preview.
+   * @returns {string}
+   */
+  get filterForm() {
+    return this._getEditorFormsSync().outerHTML;
+  }
+
+  /**
    * The document this is relative to.
    * @returns {AnyCommonDocument|null}
    */
   get relativeTo() {
     return this.parent;
+  }
+
+  /**
+   * The groups to render, in DOM order.
+   * @returns {Teriock.Previews.RenderedPreviewGroup[]}
+   */
+  get renderedGroups() {
+    return (this.groups ?? []).filter(group => !group.optional || group.docs?.length).map(group => ({
+      docs: this.#prepareDocuments(group.docs ?? []),
+      empty: group.empty,
+    }));
   }
 
   /**
@@ -171,7 +282,7 @@ export default class BasePreviewModel extends BaseDataModel {
       ...groupConfig,
       classes: ["teriock-sheet-multi-select-label"],
       rootId: this.#rootId,
-    }, { ...inputConfig, dataset: { neverDisable: "true" }, name: `previewMenus.${this.name}.${path}` });
+    }, { ...inputConfig, dataset: { neverDisable: "true" }, name: `previews.${this.id}.${path}` });
     const field = this.getFieldForProperty(path);
     if (
       field instanceof fields.StringField || field instanceof fields.NumberField || field instanceof fields.SetField
@@ -183,6 +294,62 @@ export default class BasePreviewModel extends BaseDataModel {
     const outerContainer = createElement("div", { className: "tgrid-item" });
     outerContainer.append(group);
     return outerContainer;
+  }
+
+  /**
+   * Apply this preview in-place by editing the DOM.
+   * @param {HTMLElement} element
+   */
+  apply(element) {
+    const results = element?.querySelector(`.teriock-block-results[data-search-key="${this.id}"]`);
+    if (!results) { return; }
+    const rendered = this.renderedGroups;
+    const sizes = Object.keys(TERIOCK.config.display.sizes);
+    results.querySelectorAll(":scope .teriock-block-container").forEach((container, i) => {
+      const group = rendered[i];
+      if (!group) { return; }
+      const noResults = container.querySelector(":scope > .no-results");
+      const cards = new Map();
+      container.querySelectorAll(":scope > .teriock-block[data-uuid]").forEach(card =>
+        cards.set(card.dataset.uuid, card)
+      );
+      for (const { doc, hidden } of group.docs) {
+        const card = cards.get(doc.uuid);
+        if (!card) { continue; }
+        card.classList.toggle("hidden", hidden);
+        container.insertBefore(card, noResults);
+      }
+      container.classList.toggle("gapless", this.display.gapless);
+      for (const size of sizes) { container.classList.toggle(size, size === this.display.size); }
+    });
+  }
+
+  /**
+   * Bind this preview's interactive controls within the sheet element.
+   * @param {HTMLElement} element - The sheet root element containing this preview.
+   */
+  bind(element) {
+    if (!element) { return; }
+    if (element.querySelector(`.teriock-block-search[data-search-key="${this.id}"]`)) {
+      new SearchFilter({
+        contentSelector: `.teriock-block-results[data-search-key="${this.id}"]`,
+        initial: this.search,
+        inputSelector: `.teriock-block-search[data-search-key="${this.id}"]`,
+        callback: (_event, query) => {
+          this.updateSource({ search: query });
+          this.apply(element);
+        },
+      }).bind(element);
+    }
+    element.querySelectorAll(`[name^="previews.${this.id}."]`).forEach(el => {
+      el.addEventListener("change", e => {
+        /** @type {AbstractFormInputElement} */
+        const input = e.target;
+        const value = input.type === "checkbox" ? input.checked : input.value;
+        this.updateSource({ [input.name.split(".").slice(2).join(".")]: value });
+        this.apply(element);
+      });
+    });
   }
 
   /**
@@ -237,16 +404,6 @@ export default class BasePreviewModel extends BaseDataModel {
         yield document;
       }
     }
-  }
-
-  /**
-   * Filter and then sort an array of documents.
-   * @template T
-   * @param {T[]} documents
-   * @returns {T[]}
-   */
-  previewDocuments(documents) {
-    return this.sortDocuments([...this.filterDocuments(documents)]);
   }
 
   /**

@@ -78,6 +78,4 @@ function formIcon(field, options = {}) {
   return new Handlebars.SafeString(group.outerHTML);
 }
 
-const fieldHelperEntries = [["formBox", formBox], ["formIcon", formIcon]];
-
-export default fieldHelperEntries;
+export default { formBox, formIcon };

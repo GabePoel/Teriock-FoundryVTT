@@ -33,6 +33,21 @@ export function quickAddAssociation(docs, title, icon, associations, options = {
 }
 
 /**
+ * Strip panel bars that have no content.
+ * @param {Teriock.Panels.PanelBar[]} [bars]
+ * @returns {Teriock.Panels.PanelBar[]}
+ */
+export function cleanBars(bars = []) {
+  const out = [];
+  for (const bar of bars) {
+    const wrappers = (bar?.wrappers || []).filter(Boolean);
+    if (!wrappers.length) { continue; }
+    out.push({ icon: bar?.icon, label: bar?.label, wrappers });
+  }
+  return out;
+}
+
+/**
  * Simplify a tag.
  * @param {Teriock.Display.DisplayTag} tag
  * @returns {string}

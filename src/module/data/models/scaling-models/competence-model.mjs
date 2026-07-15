@@ -46,6 +46,14 @@ export default class CompetenceModel extends BaseDataModel {
     return TERIOCK.config.competence.levels[this.value].icon;
   }
 
+  /**
+   * Filled-circle CSS classes for sheet competence toggles.
+   * @returns {string}
+   */
+  get iconClass() {
+    return TERIOCK.config.competence.levels[this.value].simpleIconClass;
+  }
+
   /** @inheritDoc */
   get label() {
     return TERIOCK.config.competence.levels[this.value].label;

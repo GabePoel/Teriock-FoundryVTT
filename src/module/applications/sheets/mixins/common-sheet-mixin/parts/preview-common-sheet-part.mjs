@@ -1,7 +1,4 @@
 import { BasePreviewModel } from "../../../../../data/models/preview-models/_module.mjs";
-import { HTMLTernaryElement } from "../../../../elements/_module.mjs";
-
-const { SearchFilter } = foundry.applications.ux;
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -14,73 +11,53 @@ export default function PreviewCommonSheetPart(Base) {
      * @property {AnyCommonDocument} document
      */
     class PreviewCommonSheetPart extends Base {
-      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-      static DEFAULT_OPTIONS = { actions: { sheetToggle: this._onSheetToggle } };
+      /**
+       * Build default child groups.
+       * @this {PreviewCommonSheetPart}
+       * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
+       */
+      static async #previewGroupChildren() {
+        const types = this.document.visibleTypes;
+        const children = await this.document.getVisibleChildren();
+        /** @type {Record<string, Teriock.Previews.PreviewGroup>} */
+        const groupRecord = Object.fromEntries(
+          types.map(t => [t, { docs: [], empty: TERIOCK.config.document[t].plural, optional: true }]),
+        );
+        for (const child of children) { groupRecord[child.type].docs.push(child); }
+        return Object.values(groupRecord);
+      }
 
       /**
-       * Toggles a boolean field on the sheet and re-renders.
-       * @param {PointerEvent} _event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>}
+       * The preview configuration for this sheet.
+       * @type {Record<string, Teriock.Previews.PreviewConfig>}
        */
-      static async _onSheetToggle(_event, target) {
-        const { path } = target.dataset;
-        const current = target.dataset.bool === "true";
-        this.setPreviewSource(path, !current);
-        await this.render();
-      }
+      static PREVIEWS = {
+        children: {
+          addButton: { types: app => app.document.visibleTypes },
+          data: { display: { gapless: true, size: "small" } },
+          groups: this.#previewGroupChildren,
+        },
+      };
 
       constructor(...args) {
         super(...args);
-        this.previewMenus = {};
-        for (const [type, options] of Object.entries(TERIOCK.config.document)) {
-          let PreviewModelCls = BasePreviewModel;
-          if (options?.previewModel) {
-            PreviewModelCls = options.previewModel;
-          }
-          this.previewMenus[type] = new PreviewModelCls({ name: type }, { parent: this.document });
+        for (const [id, config] of Object.entries(this.constructor.PREVIEWS)) {
+          this.#previews[id] = BasePreviewModel.create(id, config, this);
         }
-        this.previewMenus.children = new BasePreviewModel({ name: "children" }, { parent: this.document });
-        this.previewMenus.children.updateSource({ display: { gapless: true, size: "small" } });
-        /** @type {Record<string, string>} */
-        this._searchStrings = {};
       }
 
       /** @type {Record<string, BasePreviewModel>} */
-      previewMenus;
+      #previews = {};
 
       /**
-       * Bind a {@link SearchFilter} to every preview search input rendered on the sheet, scoping each to its
-       * `data-search-key` results container and persisting the query onto the matching preview model.
+       * The visible children of a given type, sorted by that type's configured sorter.
+       * @param {string} type
+       * @returns {AnyCommonDocument[]}
        */
-      _initSearchFilters() {
-        this.element.querySelectorAll(".teriock-block-search[data-search-key]").forEach(
-          /** @param {HTMLInputElement} input */ input => {
-            const searchKey = input.dataset.searchKey;
-            if (!searchKey) { return; }
-            const resultsContainer = this.element.querySelector(
-              `.teriock-block-results[data-search-key="${searchKey}"]`,
-            );
-            if (!resultsContainer) { return; }
-            const preview = this.previewMenus?.[searchKey];
-            const initial = preview ? preview.search : (this._searchStrings[searchKey] || "");
-            const searchFilter = new SearchFilter({
-              contentSelector: `.teriock-block-results[data-search-key="${searchKey}"]`,
-              initial,
-              inputSelector: `.teriock-block-search[data-search-key="${searchKey}"]`,
-              callback: (_event, query, rgx, container) => {
-                this._searchStrings[searchKey] = query;
-                if (preview) { preview.updateSource({ search: query }); }
-                container.querySelectorAll(".teriock-block").forEach(card => {
-                  const title = card.querySelector(".teriock-block-title")?.textContent ?? "";
-                  const isMatch = rgx ? rgx.test(title) : true;
-                  card.classList.toggle("hidden", !isMatch);
-                });
-              },
-            });
-            searchFilter.bind(this.element);
-          },
-        );
+      _childrenOfType(type) {
+        const config = TERIOCK.config.document[type];
+        const docs = [...(this.document.visibleChildrenByType[type] ?? [])];
+        return config?.sorter ? config.sorter(docs) : docs;
       }
 
       /** @inheritDoc */
@@ -90,74 +67,24 @@ export default function PreviewCommonSheetPart(Base) {
           const uuid = el.dataset.uuid;
           fromUuid(uuid).then(doc => doc?.onEmbed(el));
         });
-        this.element.querySelectorAll("[name^=\"previewMenus.\"]").forEach(el => {
-          el.addEventListener("change", e => {
-            /** @type {AbstractFormInputElement} */
-            const filterElement = e.target;
-            this.setPreviewSource(filterElement.name, filterElement.value);
-            if (filterElement instanceof HTMLTernaryElement) { setTimeout(() => this.render(), 250); }
-            else { this.render(); }
-          });
-        });
-        this.element.querySelectorAll("[data-action='sheetSelect']").forEach(/** @param {HTMLInputElement} el */ el => {
-          el.addEventListener("change", async () => {
-            this.setPreviewSource(el.dataset.path, el.value);
-            await this.render();
-          });
-        });
-        this._initSearchFilters();
+        for (const preview of Object.values(this.#previews)) { preview.bind(this.element); }
       }
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
-        const children = await this.document.getVisibleChildren();
-        const single = this.document.visibleTypes.length === 1;
-        context.addType = single ? this.document.visibleTypes[0] : "children";
-        context.addButton = single;
-        context.addMenu = !single;
-        context.searchStrings = foundry.utils.deepClone(this._searchStrings);
-        context.previews = this.previewMenus;
-        context.filterForms = {};
-        context.previewGroups = {};
-        context.previewSortOrders = {};
+        await this._preparePreviewContext();
+        return Object.assign(context, { previews: this.#previews });
+      }
 
-        // Prepare previews by type
-        for (const [type, config] of Object.entries(TERIOCK.config.document)) {
-          if (config.getter && ["ActiveEffect", "Item"].includes(config.documentName)) {
-            context[config.getter] = config.sorter(children.filter(c => c.type === type));
-            context.filterForms[type] = this.previewMenus[type]?._getEditorFormsSync().outerHTML;
-            context.previewSortOrders[type] = this.previewMenus[type]?.constructor.sortOrders;
-            context.previewGroups[type] = [{
-              docs: this.previewMenus[type].previewDocuments(context[config.getter]),
-              empty: config.plural,
-            }];
-          }
+      /**
+       * Refresh each preview's groups.
+       * @returns {Promise<void>}
+       */
+      async _preparePreviewContext() {
+        for (const [id, config] of Object.entries(this.constructor.PREVIEWS)) {
+          this.#previews[id].groups = await config.groups.call(this);
         }
-
-        // Prepare the consolidated "children" preview
-        const childrenGroups = [];
-        for (const type of this.document.visibleTypes) {
-          const config = TERIOCK.config.document[type];
-          const docs = context[config.getter];
-          if (docs?.length) {
-            childrenGroups.push({ docs: this.previewMenus.children.previewDocuments(docs), empty: config.plural });
-          }
-        }
-        if (!childrenGroups.length) {
-          childrenGroups.push({ docs: [], empty: _loc("TERIOCK.DOCUMENTS.document.plural") });
-        }
-        context.previewGroups.children = childrenGroups;
-        context.filterForms.children = this.previewMenus.children?._getEditorFormsSync().outerHTML;
-        context.previewSortOrders.children = this.previewMenus.children?.constructor.sortOrders;
-
-        // Initial open/closed state for each preview's collapse toggle-buttons.
-        context.previewToggles = {};
-        for (const type of Object.keys(this.previewMenus)) {
-          const open = menu => !(this.collapsibleElements.get(`preview-${type}-${menu}`) ?? true);
-          context.previewToggles[type] = { block: open("block"), filter: open("filter"), sort: open("sort") };
-        }
-        return context;
       }
 
       /** @inheritDoc */
@@ -167,21 +94,6 @@ export default function PreviewCommonSheetPart(Base) {
           if (tb.isConnected) { tb.value = !collapsed; }
           else { tb.setAttribute("value", String(!collapsed)); }
         }
-      }
-
-      /**
-       * Apply a change to a preview model's source from a `previewMenus.<type>.<path>` form/data path. Any other
-       * path falls back to a direct property set so the generic toggle handlers stay safe.
-       * @param {string} formPath
-       * @param {*} value
-       */
-      setPreviewSource(formPath, value) {
-        if (!formPath?.startsWith("previewMenus.")) {
-          foundry.utils.setProperty(this, formPath, value);
-          return;
-        }
-        const [, type, ...rest] = formPath.split(".");
-        this.previewMenus[type]?.updateSource({ [rest.join(".")]: value });
       }
     }
   );

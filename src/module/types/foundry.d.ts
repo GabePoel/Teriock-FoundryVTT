@@ -14,6 +14,7 @@ declare global {
     export type ContextMenuCallback = (target: HTMLElement) => unknown;
 
     export type ContextMenuOptions = {
+      attach?: boolean;
       eventName?: string;
       fixed?: boolean;
       forceDirection?: "down" | "up";

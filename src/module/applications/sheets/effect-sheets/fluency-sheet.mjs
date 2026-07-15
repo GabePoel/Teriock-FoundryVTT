@@ -58,7 +58,7 @@ export default class FluencySheet extends ChildSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    this._connectContextMenu(".field-box", this.#fieldContextMenuEntries(), "click");
-    this._connectContextMenu(".tradecraft-box", this.#tradecraftContextMenuEntries(), "click");
+    this._connectContextMenu(".field-box", this.#fieldContextMenuEntries());
+    this._connectContextMenu(".tradecraft-box", this.#tradecraftContextMenuEntries());
   }
 }

@@ -89,26 +89,51 @@ export default function HackStatApplicationMixin(Base) {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
+        const system = this.document.system;
         return Object.assign(context, {
           bars: {
-            hp: this._prepareStatContext(this.document.system.hp),
-            mp: this._prepareStatContext(this.document.system.mp),
+            hp: this._prepareStatContext(system.hp),
+            lp: this._prepareStatContext(system.lp ?? { max: 0, morganti: 0, temp: 0, value: 0 }),
+            mp: this._prepareStatContext(system.mp),
           },
+          hackFills: Object.fromEntries(
+            Object.entries(system.hacks ?? {}).map(([part, bar]) => [part, this._prepareHackFill(bar)]),
+          ),
         });
       }
 
       /**
-       * Widths of stats.
+       * CSS fill class for a hacked body-part bar.
+       * @param {Foundry.BarField} [bar]
+       * @returns {string}
+       */
+      _prepareHackFill(bar) {
+        const max = bar?.max || 0;
+        const value = bar?.value || 0;
+        if (value === 0) { return "mic fa-solid"; }
+        if (value === max) { return "mic fa-faint"; }
+        return "mic fa-intermediate";
+      }
+
+      /**
+       * Widths and styles for a pooled stat bar.
        * @param {object} stat
-       * @returns {{remaining, lost, temp, morganti}}
+       * @returns {{ lost: number, morganti: number, remaining: number, temp: number, tempHide: string }}
        */
       _prepareStatContext(stat) {
-        const total = stat.max + stat.temp + stat.morganti;
-        const remaining = Math.round((stat.value / total) * 100);
-        const morganti = Math.round((stat.morganti / total) * 100);
-        const temp = Math.round((stat.temp / total) * 100);
-        const lost = 100 - remaining - morganti - temp;
-        return { lost, morganti, remaining, temp };
+        const max = Math.max(0, stat.max ?? 0);
+        const value = Math.max(0, stat.value ?? 0);
+        const temp = Math.max(0, stat.temp ?? 0);
+        const morganti = Math.max(0, stat.morganti ?? 0);
+        const total = (max + temp + morganti) || 1;
+        const remaining = Math.round((value / total) * 100);
+        const tempPct = Math.round((temp / total) * 100);
+        const morgantiPct = Math.round((morganti / total) * 100);
+        const lost = 100 - remaining - morgantiPct - tempPct;
+        let tempHide = "";
+        if (!temp) { tempHide = "display: none;"; }
+        else if (max === value && !morganti) { tempHide = "border-right: none;"; }
+        return { lost, morganti: morgantiPct, remaining, temp: tempPct, tempHide };
       }
 
       /**

@@ -52,8 +52,8 @@
           data-tooltip-direction="LEFT"
           data-tooltip-class=""
         >
-          <i class="unselected {{modifierIconClass (lookup @root/system.tradecrafts name)}}"></i>
-          <i class="selected {{competenceIconClass (path @root/system._source.tradecrafts name 'competence.raw')}}"></i>
+          <i class='unselected {{path @root/tradecraftDisplay name "competenceIconClass"}}'></i>
+          <i class='selected {{path @root/tradecraftDisplay name "sourceCompetenceIconClass"}}'></i>
         </div>
         <div
           class="
@@ -72,12 +72,12 @@
           data-action="increment"
           data-path="system.tradecrafts.{{ name }}.score"
           data-tradecraft="{{ name }}"
-          data-tooltip="{{tradecraftScoreLabel (path @root/system.tradecrafts name 'score')}}"
+          data-tooltip='{{path @root/tradecraftDisplay name "scoreLabel"}}'
           data-tooltip-direction="LEFT"
           data-tooltip-class=""
         >
-          <i class="unselected {{tradecraftScoreIconClass (path @root/system.tradecrafts name 'score')}}"></i>
-          <i class="selected {{tradecraftScoreIconClass (path @root/system._source.tradecrafts name 'score')}}"></i>
+          <i class='unselected {{path @root/tradecraftDisplay name "scoreIconClass"}}'></i>
+          <i class='selected {{path @root/tradecraftDisplay name "sourceScoreIconClass"}}'></i>
         </div>
         <div
           class="tradecraft-panel-name thover gi3 draggable"

@@ -1,3 +1,4 @@
+import { cleanBars } from "../../helpers/panel.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 
 const { TextEditor } = foundry.applications.ux;
@@ -55,6 +56,7 @@ export default class TeriockTextEditor extends TextEditor {
    * @returns {Promise<Teriock.Panels.PanelParts>}
    */
   static async enrichPanel(panel, options = {}) {
+    if (panel.bars) { panel.bars = cleanBars(panel.bars); }
     await Promise.all((panel.blocks ?? []).map(async (b) => b.text = await this.enrichHTML(b.text, options)));
     for (const association of panel.associations ?? []) {
       for (const card of association.cards ?? []) {

@@ -9,6 +9,7 @@ import * as parts from "./parts/_module.mjs";
  * @mixes CombatActorSheetPart
  * @mixes ConditionsActorSheetPart
  * @mixes MechanicalActorSheetPart
+ * @mixes PreviewActorSheetPart
  * @mixes RollingActorSheetPart
  * @mixes SidebarActorSheetPart
  * @mixes TabsActorSheetPart
@@ -24,6 +25,7 @@ export default class TeriockPlayableActorSheet
     parts.ConditionsActorSheetPart,
     parts.DocumentCreationActorSheetPart,
     parts.MechanicalActorSheetPart,
+    parts.PreviewActorSheetPart,
     parts.ProtectionsActorSheetPart,
     parts.RollingActorSheetPart,
     parts.SidebarActorSheetPart,

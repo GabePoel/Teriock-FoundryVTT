@@ -81,6 +81,18 @@ export default function RollingActorSheetPart(Base) {
             att => [att, index.getName(`Make ${att.toUpperCase()} Feat Save`)?.uuid]
           ),
         );
+        const competenceIconClass = level =>
+          TERIOCK.config.competence.levels[Math.min(Math.max(level ?? 0, 0), 2)].simpleIconClass;
+        context.attributeDisplay = Object.fromEntries(
+          Object.keys(TERIOCK.index.attributesFull).map(key => {
+            const attribute = this.document.system.attributes[key];
+            const source = this.document.system._source.attributes[key];
+            return [key, {
+              competenceIconClass: competenceIconClass(attribute?.competence?.raw),
+              sourceCompetenceIconClass: competenceIconClass(source?.competence?.raw),
+            }];
+          }),
+        );
         return context;
       }
     }
