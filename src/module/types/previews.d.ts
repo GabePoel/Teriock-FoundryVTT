@@ -3,10 +3,23 @@ import { BasePreviewModel } from "../data/models/preview-models/_module.mjs";
 
 declare global {
   namespace Teriock.Previews {
+    /**
+     * The surface a preview needs to render, search, sort, and filter something that is not a document. Every other
+     * hook a {@link BasePreviewModel} touches is optional.
+     */
+    export type PreviewEntry = {
+      /** The block to render. Must carry the same `uuid` for the preview to match its card in the DOM. */
+      embedParts: Teriock.EmbedData.EmbedParts;
+      /** Matched against by search and the default name sort. */
+      name: string;
+      /** A stable, unique key. Need not resolve to a real document. */
+      uuid: string;
+    };
+
     /** A raw group definition for a preview, as produced by a {@link PreviewGroupBuilder} before arrangement. */
     export type PreviewGroup = {
-      /** The documents in the group. */
-      docs: AnyCommonDocument[];
+      /** The entries in the group. Usually documents, but anything exposing `name`, `uuid`, and `embedParts` renders. */
+      docs: (AnyCommonDocument | Teriock.Previews.PreviewEntry)[];
       /** The "no results" label for the group. */
       empty: string;
       /** Whether the group is hidden entirely when it has no documents. */

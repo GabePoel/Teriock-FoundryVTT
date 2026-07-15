@@ -1,4 +1,5 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
+import { colors } from "../display/colors.mjs";
 
 export default {
   categories: {
@@ -87,32 +88,78 @@ export default {
   },
   // no sort
   types: {
-    resistances: {
-      action: "rollResistance",
+    resistance: {
       button: "TERIOCK.ROLLS.Resist.button",
-      label: "TERIOCK.TERMS.Protections.resistance.single",
-      rule: "Resistance",
+      color: colors.palette.green,
+      competence: true,
+      hook: "resist",
+      identifier: "keyword:resistance",
+      imgCategory: "effectTypes",
+      label: "TERIOCK.TERMS.Affinities.resistance.single",
+      protection: true,
+      threshold: true,
     },
-    hexproofs: {
-      action: "rollHexproof",
+    hexproof: {
       button: "TERIOCK.ROLLS.Hexproof.button",
-      label: "TERIOCK.TERMS.Protections.hexproof.single",
-      rule: "Hexproof",
+      color: colors.palette.purple,
+      competence: true,
+      hex: true,
+      hook: "hexproof",
+      identifier: "keyword:hexproof",
+      imgCategory: "effectTypes",
+      label: "TERIOCK.TERMS.Affinities.hexproof.single",
+      protection: true,
+      threshold: true,
     },
-    immunities: {
-      action: "rollImmunity",
+    immunity: {
       button: "TERIOCK.ROLLS.Immune.button",
-      label: "TERIOCK.TERMS.Protections.immunity.single",
-      rule: "Immunity",
+      color: colors.palette.green,
+      hook: "immune",
+      identifier: "keyword:immunity",
+      imgCategory: "effectTypes",
+      label: "TERIOCK.TERMS.Affinities.immunity.single",
+      protection: true,
     },
-    hexseals: {
-      action: "rollHexseal",
+    hexseal: {
       button: "TERIOCK.ROLLS.Hexseal.button",
-      label: "TERIOCK.TERMS.Protections.hexseal.single",
-      rule: "Hexseal",
+      color: colors.palette.purple,
+      hex: true,
+      hook: "hexseal",
+      identifier: "keyword:hexseal",
+      imgCategory: "effectTypes",
+      label: "TERIOCK.TERMS.Affinities.hexseal.single",
+      protection: true,
+    },
+    takeBoost: {
+      color: colors.palette.red,
+      identifier: "keyword:boosted",
+      imgCategory: "keywords",
+      label: "TERIOCK.TERMS.Affinities.takeBoost.single",
+      stacking: true,
+    },
+    takeDeboost: {
+      color: colors.palette.green,
+      identifier: "keyword:deboosted",
+      imgCategory: "keywords",
+      label: "TERIOCK.TERMS.Affinities.takeDeboost.single",
+      stacking: true,
+    },
+    vulnerability: {
+      color: colors.palette.red,
+      identifier: "keyword:vulnerable",
+      imgCategory: "keywords",
+      label: "TERIOCK.TERMS.Affinities.vulnerability.single",
+      weakness: true,
+    },
+    binding: {
+      color: colors.palette.red,
+      identifier: "condition:bound",
+      imgCategory: "conditions",
+      label: "TERIOCK.TERMS.Affinities.binding.single",
+      weakness: true,
     },
   },
 };
 
-preLocalizeConfig("config.protection.categories", { keys: ["label"] });
-preLocalizeConfig("config.protection.types", { keys: ["label", "button"] });
+preLocalizeConfig("config.affinity.categories", { keys: ["label"] });
+preLocalizeConfig("config.affinity.types", { keys: ["label", "button"] });

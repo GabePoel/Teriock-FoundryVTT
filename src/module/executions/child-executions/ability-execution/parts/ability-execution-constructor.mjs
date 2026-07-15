@@ -157,6 +157,17 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   /** @type {Set<TeriockToken>} */
   targets;
 
+  /**
+   * Active affinities.
+   * @returns {Teriock.Affinities.Any[]}
+   */
+  get activeAffinities() {
+    return this.source.system.affinities.contents.filter(a =>
+      a.competencies.has(this.competence.raw) && a.checkIfQualified(this.getRollData())
+      && ((a.heighten.has(0) && !this.heightened) || (a.heighten.has(1) && this.heightened))
+    );
+  }
+
   /** @inheritDoc */
   get activeAutomations() {
     return super.activeAutomations.filter(a =>
@@ -304,6 +315,26 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
       }
     }
     this.updateSource(changes);
+  }
+
+  /**
+   * Get all the affinities of a given type.
+   * @template {Teriock.Affinities.Type} T
+   * @param {T} type
+   * @param {object} [options]
+   * @param {boolean} [options.active]
+   * @param {boolean} [options.crit]
+   * @returns {Teriock.Affinities.TypeMap[T][]}
+   */
+  getAffinities(type, options = {}) {
+    const filter = (a) =>
+      (a.type === type)
+      && (typeof options.crit === "boolean"
+        ? ((options.crit && a.crit.has(1)) || (!options.crit && a.crit.has(0)))
+        : true);
+    const { active } = options;
+    if (active) { return this.activeAffinities.filter(filter); }
+    return this.source.system.affinities.contents.filter(filter);
   }
 
   /**

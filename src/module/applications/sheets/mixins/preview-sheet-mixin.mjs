@@ -1,4 +1,5 @@
 import { BasePreviewModel } from "../../../data/models/preview-models/_module.mjs";
+import { fromIdentifier } from "../../../helpers/utils.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -23,9 +24,12 @@ export default function PreviewSheetMixin(Base) {
         const groupRecord = Object.fromEntries(
           types.map(t => [t, { docs: [], empty: TERIOCK.config.document[t].plural, optional: true }]),
         );
-        for (const child of children) { groupRecord[child.type].docs.push(child); }
+        for (const child of children) { if (groupRecord[child.type]) { groupRecord[child.type].docs.push(child); } }
         return Object.values(groupRecord);
       }
+
+      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
+      static DEFAULT_OPTIONS = { actions: { openIdentifier: this._onOpenIdentifier } };
 
       /**
        * The preview configuration for this sheet.
@@ -38,6 +42,24 @@ export default function PreviewSheetMixin(Base) {
           groups: this.#previewGroupChildren,
         },
       };
+
+      /**
+       * Open whatever document an identifier refers to. Fake documents stand in for things that are not documents, so
+       * they cannot use `openDoc`; this opens the thing they represent instead.
+       * @param {PointerEvent} _event
+       * @param {HTMLElement} target
+       * @returns {Promise<void>}
+       */
+      static async _onOpenIdentifier(_event, target) {
+        const doc = await fromIdentifier(target.dataset.identifier);
+        if (doc?.documentName === "JournalEntryPage") {
+          const journal = doc.parent;
+          await journal?.sheet?.render(true);
+          journal?.sheet?.goToPage(doc.id);
+        } else {
+          doc?.sheet?.render(true);
+        }
+      }
 
       constructor(...args) {
         super(...args);

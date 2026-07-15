@@ -25,6 +25,7 @@ export function cleanDocument(doc) {
     cleanCommon(doc);
     cleanActiveEffect(doc);
     if (doc.type === "character" || doc.type === "creature") { cleanActor(doc); }
+    if (doc.system.affinities) { cleanAffinities(doc.system.affinities); }
     if (doc.system.automations) { cleanAutomations(doc.system.automations); }
     if (doc.system.expirations) { cleanExpirations(doc.system.expirations); }
     if (doc.type === "ability") { cleanAbility(doc); }
@@ -365,6 +366,13 @@ function cleanAutomations(automations) {
     }
   }
   for (const a of Object.values(automations)) { cleanAutomation(a); }
+}
+
+/**
+ * @param {Record<string, Teriock.Expirations.Any>} cleanAffinities
+ */
+function cleanAffinities(cleanAffinities) {
+  for (const e of Object.values(cleanAffinities)) { cleanMechanic(e); }
 }
 
 /**

@@ -1,3 +1,4 @@
+import { BaseAffinity } from "../../../data/pseudo-documents/affinities/abstract/_module.mjs";
 import { BaseAutomation } from "../../../data/pseudo-documents/automations/abstract/_module.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
@@ -103,29 +104,48 @@ export default function MechanicsSheetMixin(Base) {
       }
 
       /**
-       * Configuration for each mechanic collection that can be rendered on this document.
+       * Configuration for each mechanic collection that can be rendered on this document. Keyed off the pseudo-document
+       * collections the document actually declares.
        * @returns {Record<string, Teriock.Sheet.MechanicCollectionConfig>}
        */
       get _mechanicCollections() {
+        const system = this.document.system;
+        const pseudos = system.pseudoCollections ?? {};
         const collections = {};
-        if (this.document.system.automations) {
+        if (pseudos.Automation) {
           collections.automations = {
+            addLabel: "TERIOCK.SHEETS.Common.NAVIGATION.addAutomation",
             baseClass: BaseAutomation,
-            collection: this.document.system.automations,
+            collection: pseudos.Automation,
             hint: _loc("TERIOCK.DIALOGS.Select.AddAutomation.hint"),
             icon: TERIOCK.display.icons.pseudoDocument.automation,
+            label: "EFFECT.TABS.automations",
             title: _loc("TERIOCK.DIALOGS.Select.AddAutomation.title"),
-            types: this.document.system.constructor.automationTypes,
+            types: system.constructor.automationTypes,
           };
         }
-        if (this.document.system.expirations) {
+        if (pseudos.Affinity) {
+          collections.affinities = {
+            addLabel: "TERIOCK.SHEETS.Common.NAVIGATION.addAffinity",
+            baseClass: BaseAffinity,
+            collection: pseudos.Affinity,
+            hint: _loc("TERIOCK.DIALOGS.Select.AddAffinity.hint"),
+            icon: TERIOCK.display.icons.pseudoDocument.affinity,
+            label: "EFFECT.TABS.affinities",
+            title: _loc("TERIOCK.DIALOGS.Select.AddAffinity.title"),
+            types: system.constructor.affinityTypes,
+          };
+        }
+        if (pseudos.Expiration) {
           collections.expirations = {
+            addLabel: "TERIOCK.SHEETS.Common.NAVIGATION.addExpiration",
             baseClass: BaseExpiration,
-            collection: this.document.system.expirations,
+            collection: pseudos.Expiration,
             hint: _loc("TERIOCK.DIALOGS.Select.AddExpiration.hint"),
             icon: TERIOCK.display.icons.pseudoDocument.expiration,
+            label: "EFFECT.TABS.expirations",
             title: _loc("TERIOCK.DIALOGS.Select.AddExpiration.title"),
-            types: this.document.system.constructor.expirationTypes,
+            types: system.constructor.expirationTypes,
           };
         }
         return collections;
@@ -181,15 +201,20 @@ export default function MechanicsSheetMixin(Base) {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         const context = await super._prepareContext(options);
-        const system = this.document.system;
-        const hasAutomations = Boolean(system.automations);
-        const hasExpirations = Boolean(system.expirations);
-        if (hasAutomations) { context.automationEntries = await this._prepareMechanicEntries(system.automations); }
-        if (hasExpirations) { context.expirationEntries = await this._prepareMechanicEntries(system.expirations); }
-        context.hasAutomations = hasAutomations;
-        context.hasExpirations = hasExpirations;
-        context.splitMechanics = hasAutomations && hasExpirations;
-        context.mechanicsTabs = this._prepareMechanicsTabs();
+        const tabs = this._prepareMechanicsTabs();
+        context.mechanicSections = await Promise.all(
+          Object.entries(this._mechanicCollections).map(async ([id, config]) => {
+            return {
+              active: tabs[id]?.active ?? false,
+              addLabel: config.addLabel,
+              entries: await this._prepareMechanicEntries(config.collection),
+              id,
+            };
+          }),
+        );
+        context.mechanicsTabs = tabs;
+        context.splitMechanics = context.mechanicSections.length > 1;
+        context.soleMechanicSection = context.mechanicSections.length === 1 ? context.mechanicSections[0] : null;
         return context;
       }
 
@@ -205,16 +230,13 @@ export default function MechanicsSheetMixin(Base) {
       }
 
       /**
-       * Build mechanics sub-tabs.
-       * @returns {Record<"automations"|"expirations", Teriock.Sheet.MechanicTab>}
+       * Build a sub-tab for each mechanic collection this document has.
+       * @returns {Record<string, Teriock.Sheet.MechanicTab>}
        */
       _prepareMechanicsTabs() {
-        const active = this.tabGroups?.mechanics ?? "automations";
-        const config = {
-          automations: { icon: TERIOCK.display.icons.pseudoDocument.automation, label: "EFFECT.TABS.automations" },
-          expirations: { icon: TERIOCK.display.icons.pseudoDocument.expiration, label: "EFFECT.TABS.expirations" },
-        };
-        return Object.entries(config).reduce((tabs, [id, { icon, label }]) => {
+        const collections = this._mechanicCollections;
+        const active = this.tabGroups?.mechanics ?? Object.keys(collections)[0];
+        return Object.entries(collections).reduce((tabs, [id, { icon, label }]) => {
           const isActive = active === id;
           tabs[id] = {
             active: isActive,

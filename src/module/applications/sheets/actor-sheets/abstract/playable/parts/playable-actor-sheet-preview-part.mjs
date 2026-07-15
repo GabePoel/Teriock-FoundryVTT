@@ -46,7 +46,7 @@ export default function PlayableActorSheetPreviewPart(Base) {
           ),
           empty: TERIOCK.config.document.effect.plural,
           optional: true,
-        }];
+        }, { docs: await this._fakeConditions(), empty: TERIOCK.config.document.condition.plural }];
       }
 
       /**

@@ -71,7 +71,7 @@ declare global {
       twoHanded?: boolean;
     };
 
-    export type ResistOptions = ThresholdOptions & { hex?: boolean };
+    export type ResistOptions = ThresholdOptions & { type?: Teriock.Affinities.Type };
 
     export type DocumentUseOptions = ThresholdOptions & Teriock.Execution.ExecutionOptions & {
       competence?: number;

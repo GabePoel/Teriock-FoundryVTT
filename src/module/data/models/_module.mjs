@@ -1,4 +1,5 @@
 export { default as DefenseModel } from "./defense-model.mjs";
+export * from "./fake-document-models/_module.mjs";
 export { default as IdentificationModel } from "./identification-model/identification-model.mjs";
 export * from "./modifier-models/_module.mjs";
 export * from "./preview-models/_module.mjs";

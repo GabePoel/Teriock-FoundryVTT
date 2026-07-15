@@ -3,6 +3,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dedent } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
+import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -14,15 +15,36 @@ const { fields } = foundry.data;
  * Effect-specific effect data model.
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ApplicableEffectSystemData}
+ * @mixes AffinableSystem
  * @mixes ExpirableSystem
  * @mixes ThresholdData
  * @see {DurationModel}
  */
 export default class ApplicableEffectSystem
-  extends mixClasses(BaseEffectSystem, systemMixins.ExpirableSystemMixin, dataMixins.ThresholdDataMixin)
+  extends mixClasses(
+    BaseEffectSystem,
+    systemMixins.AffinableSystemMixin,
+    systemMixins.ExpirableSystemMixin,
+    dataMixins.ThresholdDataMixin,
+  )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Applicable"];
+
+  /** @inheritDoc */
+  static get _affinityTypes() {
+    return [
+      ...super._affinityTypes,
+      affinities.BindingAffinity,
+      affinities.HexproofAffinity,
+      affinities.HexsealAffinity,
+      affinities.ImmunityAffinity,
+      affinities.ResistanceAffinity,
+      affinities.TakeBoostAffinity,
+      affinities.TakeDeboostAffinity,
+      affinities.VulnerabilityAffinity,
+    ];
+  }
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -34,7 +56,6 @@ export default class ApplicableEffectSystem
       automations.ChildChangeAutomation,
       automations.HealAutomation,
       automations.LightAutomation,
-      automations.ProtectionAutomation,
       automations.RevitalizeAutomation,
       automations.RollAutomation,
       automations.SuppressAutomation,

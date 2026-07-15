@@ -33,6 +33,6 @@ export default class ResistAutomation extends ThresholdAutomation {
 
   /** @inheritDoc */
   async getActivations() {
-    return [new ResistActivation({ options: { bonus: this.bonus, hex: this.hex } })];
+    return [new ResistActivation({ options: { bonus: this.bonus, type: this.hex ? "hexproof" : "resistance" } })];
   }
 }

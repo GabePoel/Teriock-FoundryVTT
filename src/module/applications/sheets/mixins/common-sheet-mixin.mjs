@@ -6,11 +6,8 @@ import DragDropSheetMixin from "./drag-drop-sheet-mixin.mjs";
 import FieldsSheetMixin from "./fields-sheet-mixin.mjs";
 import ImageEditingSheetMixin from "./image-editing-sheet-mixin.mjs";
 import LockingSheetMixin from "./locking-sheet-mixin.mjs";
-import MechanicsSheetMixin from "./mechanics-sheet-mixin.mjs";
-import MechanicsTabsSheetMixin from "./mechanics-tabs-sheet-mixin.mjs";
 import PreviewSheetMixin from "./preview-sheet-mixin.mjs";
 import SourceRefreshButtonSheetMixin from "./source-refresh-button-sheet-mixin.mjs";
-import StatDiceSheetMixin from "./stat-dice-sheet-mixin.mjs";
 import SystemSettingsButtonSheetMixin from "./system-settings-button-sheet-mixin.mjs";
 
 /**
@@ -27,11 +24,8 @@ export default function CommonSheetMixin(Base) {
      * @mixes FieldsSheet
      * @mixes ImageEditingSheet
      * @mixes LockingSheet
-     * @mixes MechanicsSheet
-     * @mixes MechanicsTabsSheet
      * @mixes PreviewSheet
      * @mixes SourceRefreshButtonSheet
-     * @mixes StatDiceSheet
      * @mixes SystemSettingsButtonSheet
      * @mixin
      * @property {AnyCommonDocument} document
@@ -45,11 +39,8 @@ export default function CommonSheetMixin(Base) {
         DocumentCreationSheetMixin,
         FieldsSheetMixin,
         ImageEditingSheetMixin,
-        MechanicsTabsSheetMixin,
         LockingSheetMixin,
-        StatDiceSheetMixin,
         PreviewSheetMixin,
-        MechanicsSheetMixin,
         SourceRefreshButtonSheetMixin,
       )
     {
@@ -60,16 +51,6 @@ export default function CommonSheetMixin(Base) {
         position: { height: 600, width: 580 },
         window: { resizable: true },
       };
-
-      /**
-       * Creates a new Teriock sheet instance.
-       * Initializes sheet state including settings.
-       * @param {...any} args - Arguments to pass to the base constructor.
-       */
-      constructor(...args) {
-        super(...args);
-        this.settings = {};
-      }
 
       /**
        * Enriches HTML content for display.
@@ -84,11 +65,7 @@ export default function CommonSheetMixin(Base) {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        return Object.assign(await super._prepareContext(options), {
-          enriched: {},
-          metadata: this.document.metadata,
-          settings: this.settings,
-        });
+        return Object.assign(await super._prepareContext(options), { enriched: {}, metadata: this.document.metadata });
       }
     }
   );

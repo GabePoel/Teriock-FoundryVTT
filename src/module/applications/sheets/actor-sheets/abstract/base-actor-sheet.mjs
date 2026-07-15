@@ -70,22 +70,11 @@ export default class BaseActorSheet
   /** @inheritDoc */
   async _prepareContext(options = {}) {
     const context = await super._prepareContext(options);
-    this._prepareDisplayContext(context);
     context.enrichedNotes = await this._enrich(this.document.system.notes);
     context.enrichedSpecialRules = await this._enrich(this.document.system.wielding.attacker?.system?.specialRules);
     context.currencyImages = Object.fromEntries(
       [...Object.keys(TERIOCK.config.currency), "debt"].map(id => [id, getImage("currency", id)]),
     );
     return context;
-  }
-
-  /**
-   * Add display configuration to rendering context.
-   * @param {object} context
-   */
-  _prepareDisplayContext(context) {
-    context.actor = this.actor;
-    context.editable = this.isEditable;
-    context.settings = this.settings;
   }
 }

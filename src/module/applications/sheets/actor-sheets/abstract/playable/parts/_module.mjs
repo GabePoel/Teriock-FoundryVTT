@@ -1,3 +1,4 @@
+export { default as PlayableActorSheetAffinitiesPart } from "./playable-actor-sheet-affinities-part.mjs";
 export { default as PlayableActorSheetAvatarImagePart } from "./playable-actor-sheet-avatar-image-part.mjs";
 export { default as PlayableActorSheetCombatPart } from "./playable-actor-sheet-combat-part.mjs";
 export { default as PlayableActorSheetConditionsPart } from "./playable-actor-sheet-conditions-part.mjs";
@@ -5,7 +6,6 @@ export { default as PlayableActorSheetDocumentCreationPart } from "./playable-ac
 export { default as PlayableActorSheetImpactPart } from "./playable-actor-sheet-impact-part.mjs";
 export { default as PlayableActorSheetMechanicalPart } from "./playable-actor-sheet-mechanical-part.mjs";
 export { default as PlayableActorSheetPreviewPart } from "./playable-actor-sheet-preview-part.mjs";
-export { default as PlayableActorSheetProtectionsPart } from "./playable-actor-sheet-protections-part.mjs";
 export { default as PlayableActorSheetRollingPart } from "./playable-actor-sheet-rolling-part.mjs";
 export { default as PlayableActorSheetSidebarPart } from "./playable-actor-sheet-sidebar-part.mjs";
 export { default as PlayableActorSheetTabsPart } from "./playable-actor-sheet-tabs-part.mjs";

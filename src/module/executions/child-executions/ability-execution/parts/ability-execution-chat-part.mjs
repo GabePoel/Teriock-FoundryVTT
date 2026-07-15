@@ -147,6 +147,24 @@ export default function AbilityExecutionChatPart(Base) {
        * @param {boolean} crit
        * @returns {Record<string, object>}
        */
+      #generateEffectAffinities(crit = false) {
+        const types = CONFIG.ActiveEffect.dataModels.consequence._affinityTypes;
+        const out = {};
+        for (const Cls of types) {
+          const affinities = this.getAffinities(Cls.TYPE, { active: true, crit });
+          for (const a of affinities) {
+            const data = a.toObject();
+            data._id = foundry.utils.randomID();
+            out[data._id] = data;
+          }
+        }
+        return out;
+      }
+
+      /**
+       * @param {boolean} crit
+       * @returns {Record<string, object>}
+       */
       #generateEffectAutomations(crit = false) {
         const types = CONFIG.ActiveEffect.dataModels.consequence._automationTypes;
         const out = {};
@@ -235,6 +253,7 @@ export default function AbilityExecutionChatPart(Base) {
               ? this.source.uuid
               : undefined,
             _src: this.source.uuid,
+            affinities: this.#generateEffectAffinities(crit),
             applyIfDeattuned: true,
             automations: this.#generateEffectAutomations(crit),
             blocks: (await this.source.system.getPanelParts()).blocks,

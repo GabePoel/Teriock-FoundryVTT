@@ -2,6 +2,7 @@ export { default as ActorAutomationPart } from "./actor-automation-part.mjs";
 export { default as ActorRollableTakesPart } from "./actor-impacts-part.mjs";
 export { default as ActorRestingPart } from "./actor-resting-part.mjs";
 export { default as ActorTokenPart } from "./actor-token-part.mjs";
+export { default as ActorAffinitiesPart } from "./affinities-part/actor-affinities-part.mjs";
 export { default as ActorAttributesPart } from "./attributes-part/actor-attributes-part.mjs";
 export { default as ActorCapacitiesPart } from "./capacities-part/actor-capacities-part.mjs";
 export { default as ActorCombatPart } from "./combat-part/actor-combat-part.mjs";
@@ -13,7 +14,6 @@ export { default as ActorInformationPart } from "./information-part/actor-inform
 export { default as ActorLimitsPart } from "./limits-part/actor-limits-part.mjs";
 export { default as ActorMoneyPart } from "./money-part/actor-money-part.mjs";
 export { default as ActorMovementPart } from "./movement-part/actor-movement-part.mjs";
-export { default as ActorProtectionsPart } from "./protections-part/actor-protections-part.mjs";
 export { default as ActorScalingPart } from "./scaling-part/actor-scaling-part.mjs";
 export { default as ActorSensesPart } from "./senses-part/actor-senses-part.mjs";
 export { default as ActorStatsPart } from "./stats-part/actor-stats-part.mjs";

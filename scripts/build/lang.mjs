@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 
 import { default as activations } from "../../src/en/activations.json" with { type: "json" };
+import { default as affinities } from "../../src/en/affinities.json" with { type: "json" };
 import { default as automations } from "../../src/en/automations.json" with { type: "json" };
 import { default as base } from "../../src/en/base.json" with { type: "json" };
 import { default as changes } from "../../src/en/changes.json" with { type: "json" };
@@ -111,6 +112,7 @@ Object.assign(terms.TERIOCK.TERMS, {
 mergeObjects(
   LANG,
   activations,
+  affinities,
   automations,
   changes,
   combat,

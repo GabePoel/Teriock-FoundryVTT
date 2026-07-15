@@ -96,9 +96,9 @@ declare global {
     export type PrimaryCost = keyof typeof config.stat;
     export type CostTweak = keyof typeof config.cost.tweaks;
 
-    // Protection Keys
-    export type ProtectionType = keyof typeof config.protection.types;
-    export type ProtectionCategory = keyof typeof config.protection.categories;
+    // Affinity Keys
+    export type AffinityType = keyof typeof config.affinity.types;
+    export type AffinityCategory = keyof typeof config.affinity.categories;
 
     // Character Keys
     export type Currency = keyof typeof config.currency;

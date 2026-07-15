@@ -1,5 +1,5 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { ArmamentDamageUpdater, ArmamentRangeUpdater, BaseUpdater } from "../../dialogs/_module.mjs";
+import { BaseUpdater } from "../../dialogs/_module.mjs";
 
 /**
  * @param {typeof TeriockDocumentSheet} Base
@@ -12,24 +12,6 @@ export default function FieldsSheetMixin(Base) {
      * @property {AnyCommonDocument} document
      */
     class FieldsSheet extends Base {
-      /**
-       * Edit armament damage formulas.
-       * @returns {Promise<void>}
-       */
-      static async #onEditArmamentDamage() {
-        if (!this.isEditable) { return; }
-        await ArmamentDamageUpdater.create({ document: this.document });
-      }
-
-      /**
-       * Edit armament ranges.
-       * @returns {Promise<void>}
-       */
-      static async #onEditArmamentRange() {
-        if (!this.isEditable) { return; }
-        await ArmamentRangeUpdater.create({ document: this.document });
-      }
-
       /**
        * Increment forwards.
        * @param {PointerEvent} event
@@ -81,8 +63,6 @@ export default function FieldsSheetMixin(Base) {
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
-          editArmamentDamage: this.#onEditArmamentDamage,
-          editArmamentRange: this.#onEditArmamentRange,
           increment: { buttons: [0, 2], handler: this.#onIncrement },
           updatePaths: this.#onUpdatePaths,
           updateUnit: this.#onUpdateUnit,

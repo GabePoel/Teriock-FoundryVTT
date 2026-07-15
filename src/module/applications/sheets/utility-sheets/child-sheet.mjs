@@ -6,7 +6,14 @@ import * as sheetMixins from "../mixins/_module.mjs";
  * A simple sheet for {@link AnyChildDocument}.
  */
 export default class ChildSheet
-  extends mixClasses(TeriockDocumentSheet, sheetMixins.DisplaySheetMixin, sheetMixins.CommonSheetMixin)
+  extends mixClasses(
+    TeriockDocumentSheet,
+    sheetMixins.DisplaySheetMixin,
+    sheetMixins.CommonSheetMixin,
+    sheetMixins.MechanicsSheetMixin,
+    sheetMixins.MechanicsTabsSheetMixin,
+    sheetMixins.StatDiceSheetMixin,
+  )
 {
   /**
    * Open this document's elder if it exists.

@@ -34,7 +34,11 @@ export default function PlayableActorSheetTabsPart(Base) {
             { icon: documentConfig.power.icon, id: "powers", label: "TERIOCK.SHEETS.Actor.TABS.Powers.title" },
             { icon: documentConfig.resource.icon, id: "resources", label: "TERIOCK.SHEETS.Actor.TABS.Resources.title" },
             { icon: documentConfig.condition.icon, id: "effects", label: "TERIOCK.SHEETS.Actor.TABS.Effects.title" },
-            { icon: icons.effect.protection, id: "protections", label: "TERIOCK.SHEETS.Actor.TABS.Protections.title" },
+            {
+              icon: icons.pseudoDocument.affinity,
+              id: "affinities",
+              label: "TERIOCK.SHEETS.Actor.TABS.Affinities.title",
+            },
             { icon: icons.ui.details, id: "details", label: "TERIOCK.SHEETS.Actor.TABS.Details.title" },
           ],
         },

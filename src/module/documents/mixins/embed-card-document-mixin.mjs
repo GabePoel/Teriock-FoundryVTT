@@ -81,7 +81,8 @@ export default function EmbedCardDocumentMixin(Base) {
                 const el = /** @type {HTMLElement} */ target.closest("[data-action]");
                 if (el) {
                   const action = el.dataset.action;
-                  const fn = this._embedActions[action][callback];
+                  // The action may belong to the sheet rather than to this document, in which case leave it alone.
+                  const fn = this._embedActions[action]?.[callback];
                   if (!fn || (isEmbedded && action !== "openDoc")) { return; }
                   ev.stopImmediatePropagation();
                   ev.preventDefault();

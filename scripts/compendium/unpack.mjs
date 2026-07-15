@@ -112,6 +112,7 @@ function cleanEntry(doc) {
   cleanDocument(doc);
   doc._stats = { ...doc._stats ?? {}, ...BASIC_STATS };
   sortKeys(doc);
+  if (doc.system?.affinities) { sortMechanics(doc.system.affinities); }
   if (doc.system?.automations) { sortMechanics(doc.system.automations); }
   if (doc.system?.expirations) { sortMechanics(doc.system.expirations); }
 }

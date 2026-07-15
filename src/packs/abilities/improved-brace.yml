@@ -4,7 +4,7 @@ _stats:
   coreVersion: "14"
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.13.24
+  systemVersion: 0.14.0
 img: systems/teriock/src/icons/abilities/improved-brace.webp
 name: Improved Brace
 system:
@@ -14,10 +14,17 @@ system:
       activeQualifier: not(@status.down)
       changes:
         - key: flags.rollData.braceDieSize
+          phase: derived
           priority: 10
           target: Actor
           type: override
           value: "10"
+        - key: flags.rollData.improvedBrace
+          phase: derived
+          priority: 10
+          target: Actor
+          type: override
+          value: "1"
       type: changes
   competence:
     raw: 0

@@ -3,6 +3,7 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { tradecraftsField } from "../../fields/tools/builders.mjs";
 import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { TradecraftActivation } from "../activations/command-activations.mjs";
+import { CompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
@@ -10,14 +11,14 @@ import * as automationMixins from "./mixins/_module.mjs";
  * @extends {ThresholdAutomation}
  * @mixes SelectAutomation
  * @mixes TriggerAutomation
- * @mixes CompetenceAutomation
+ * @mixes CompetenceMechanic
  */
 export default class TradecraftAutomation
   extends mixClasses(
     ThresholdAutomation,
     automationMixins.SelectAutomationMixin,
     automationMixins.TriggerAutomationMixin,
-    automationMixins.CompetenceAutomationMixin,
+    CompetenceMechanicMixin,
   )
 {
   /** @inheritDoc */

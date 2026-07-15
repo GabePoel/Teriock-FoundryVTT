@@ -12,6 +12,13 @@ declare global {
       proficient: boolean | null;
     };
 
+    export type AffinityFilters = {
+      category: Teriock.Keys.AffinityCategory | null;
+      protection: boolean | null;
+      type: Teriock.Affinities.Type | null;
+      weakness: boolean | null;
+    };
+
     export type CostFilters = {
       components: Record<Teriock.Keys.Component, boolean | null>;
       primary: Record<Teriock.Keys.Stat, boolean | null>;

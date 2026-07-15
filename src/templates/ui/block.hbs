@@ -21,13 +21,18 @@
     {{/if}}
   "
   data-img="{{#if (exists img)}}img{{else}}systems/teriock/src/icons/documents/uncertainty.svg{{/if}}"
-  {{#if openable}}
+  {{#if identifier}}
+    data-action="openIdentifier"
+    data-identifier="{{ identifier }}"
+  {{else if openable}}
     data-action="openDoc"
   {{/if}}
   {{#if uuid}}
     data-uuid="{{ uuid }}"
   {{/if}}
-  {{#if tooltipUuid}}
+  {{#if tooltipIdentifier}}
+    data-tooltip-identifier="{{ tooltipIdentifier }}"
+  {{else if tooltipUuid}}
     data-tooltip-uuid="{{ tooltipUuid }}"
   {{else if uuid}}
     data-tooltip-uuid="{{ uuid }}"

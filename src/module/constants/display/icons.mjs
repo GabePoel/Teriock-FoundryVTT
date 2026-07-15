@@ -207,7 +207,12 @@ export const icons = {
     traits: "ms-flag",
   },
   powerLevel: { enchanted: "ms-wand-shine", magic: "ms-wand-stars", mundane: "ms-candle", unknown: "ms-question-mark" },
-  pseudoDocument: { automation: "ms-automation", expiration: "ms-av-timer", mechanic: "ms-settings-b-roll" },
+  pseudoDocument: {
+    affinity: "ms-shield-question",
+    automation: "ms-automation",
+    expiration: "ms-av-timer",
+    mechanic: "ms-settings-b-roll",
+  },
   rank: { combatAbility: "ms-swords", supportAbility: "ms-shield-with-heart" },
   roll: { boost: "ms-arrow-warm-up", deboost: "ms-arrow-cool-down", reroll: "ms-replay" },
   settings: {

@@ -5,6 +5,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { toCamelCase } from "../../../../helpers/string.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import { documentSettingsModels } from "../../../models/settings-models/_module.mjs";
+import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as expirations from "../../../pseudo-documents/expirations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -33,6 +34,7 @@ const { fields } = foundry.data;
  * @mixes AbilityUpgradesPart
  * @mixes AbilityUsagePart
  * @mixes AdjustableSystem
+ * @mixes AffinableSystem
  * @mixes AttackSystem
  * @mixes CompetenceDisplaySystem
  * @mixes ConsumableSystem
@@ -53,6 +55,7 @@ export default class AbilitySystem
     systemMixins.RevelationSystemMixin,
     systemMixins.WikiSystemMixin,
     systemMixins.AdjustableSystemMixin,
+    systemMixins.AffinableSystemMixin,
     systemMixins.ExpirableSystemMixin,
     parts.AbilityAutomationsPart,
     parts.AbilityCostsPart,
@@ -70,6 +73,21 @@ export default class AbilitySystem
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Ability"];
+
+  /** @inheritDoc */
+  static get _affinityTypes() {
+    return [
+      ...super._affinityTypes,
+      affinities.BindingAffinity,
+      affinities.HexproofAffinity,
+      affinities.HexsealAffinity,
+      affinities.ImmunityAffinity,
+      affinities.ResistanceAffinity,
+      affinities.TakeBoostAffinity,
+      affinities.TakeDeboostAffinity,
+      affinities.VulnerabilityAffinity,
+    ];
+  }
 
   /** @inheritDoc */
   static get _automationTypes() {
@@ -91,7 +109,6 @@ export default class AbilitySystem
       automations.LightAutomation,
       automations.MoveAutomation,
       automations.OverrideAutomation,
-      automations.ProtectionAutomation,
       automations.RegionAutomation,
       automations.ResistAutomation,
       automations.RevitalizeAutomation,
@@ -307,6 +324,12 @@ export default class AbilitySystem
     }
     if (this.grantOnly) { tags.push(_loc("TERIOCK.SYSTEMS.Ability.NAME.granted")); }
     return [...tags, ...super._nameTags];
+  }
+
+  /** @inheritDoc */
+  get activeAffinities() {
+    if (this.maneuver !== "passive") { return []; }
+    return super.activeAffinities;
   }
 
   /** @inheritDoc */

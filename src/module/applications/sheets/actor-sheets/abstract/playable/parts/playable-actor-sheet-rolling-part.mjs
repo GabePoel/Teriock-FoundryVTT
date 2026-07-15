@@ -1,4 +1,4 @@
-import { ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
+import { FakeAffinityModel } from "../../../../../../data/models/_module.mjs";
 
 /**
  * @param {typeof BaseActorSheet} Base
@@ -11,7 +11,21 @@ export default function PlayableActorSheetRollingPart(Base) {
      */
     class PlayableActorSheetRollingPart extends Base {
       /**
-       * Rolls a feat save with optional advantage/disadvantage.
+       * Rolls an affinity.
+       * @param {PointerEvent} event - The event object.
+       * @param {HTMLElement} target - The target element.
+       * @returns {Promise<void>}
+       */
+      static async #onRollAffinity(event, target) {
+        const [fakeName, id] = (target.closest(".teriock-block")?.dataset.uuid ?? "").split(".");
+        const affinity = fakeName === FakeAffinityModel.FAKE_NAME ? this.actor.system.affinities[id] : null;
+        const type = affinity?.type ?? target.closest("[data-affinity-type]")?.dataset.affinityType;
+        if (!type) { return; }
+        await this.actor.system.rollAffinity(type, { affinity, event });
+      }
+
+      /**
+       * Rolls a feat save.
        * @param {PointerEvent} event - The event object.
        * @param {HTMLElement} target - The target element.
        * @returns {Promise<void>}
@@ -20,54 +34,11 @@ export default function PlayableActorSheetRollingPart(Base) {
         await this.actor.system.rollFeatSave(target.dataset.attribute, { event });
       }
 
-      /**
-       * Rolls hexproof resistance with optional advantage/disadvantage.
-       * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>}
-       */
-      static async #onRollHexproof(event, target) {
-        await this.actor.system.rollResistance(Object.assign(protectionOptions(event, target), { hex: true }));
-      }
-
-      /**
-       * Rolls hexseal immunity.
-       * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>}
-       */
-      static async #onRollHexseal(event, target) {
-        await this.actor.system.rollImmunity(Object.assign(protectionOptions(event, target), { hex: true }));
-      }
-
-      /**
-       * Rolls immunity.
-       * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>}
-       */
-      static async #onRollImmunity(event, target) {
-        await this.actor.system.rollImmunity(protectionOptions(event, target));
-      }
-
-      /**
-       * Rolls resistance with optional advantage/disadvantage.
-       * @param {PointerEvent} event - The event object.
-       * @param {HTMLElement} target - The target element.
-       * @returns {Promise<void>}
-       */
-      static async #onRollResistance(event, target) {
-        await this.actor.system.rollResistance(protectionOptions(event, target));
-      }
-
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
+          rollAffinity: { buttons: [0, 2], handler: this.#onRollAffinity },
           rollFeatSave: { buttons: [0, 2], handler: this.#onRollFeatSave },
-          rollHexproof: { buttons: [0, 2], handler: this.#onRollHexproof },
-          rollHexseal: { buttons: [0, 2], handler: this.#onRollHexseal },
-          rollImmunity: { buttons: [0, 2], handler: this.#onRollImmunity },
-          rollResistance: { buttons: [0, 2], handler: this.#onRollResistance },
           rollStatDie: { buttons: [0], handler: this._onRollStatDie },
         },
       };
@@ -97,23 +68,4 @@ export default function PlayableActorSheetRollingPart(Base) {
       }
     }
   );
-}
-
-/**
- * Get the protection options for a target.
- * @param {PointerEvent} event - The event object.
- * @param {HTMLElement} target
- * @returns {Partial<Teriock.Execution.ImmunityExecutionOptions>}
- */
-function protectionOptions(event, target) {
-  const img = target.querySelector("img");
-  const block = target.closest(".teriock-block");
-  const options = {
-    wrappers: [
-      block?.querySelector(".teriock-block-title")?.textContent || "",
-      block?.querySelector(".teriock-block-subtitle")?.textContent || "",
-    ],
-  };
-  if (img?.src) { options.img = img.src; }
-  return Object.assign(options, ThresholdRoll.parseEvent(event));
 }

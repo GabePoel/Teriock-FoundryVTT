@@ -14,6 +14,7 @@ const { fields } = foundry.data;
  * @extends {AbstractActorSystem}
  * @extends {Teriock.Models.BaseActorSystemData}
  * @mixes CommonSystem
+ * @mixes ActorAffinitiesPart
  * @mixes ActorAttributesPart
  * @mixes ActorAutomationPart
  * @mixes ActorCapacitiesPart
@@ -26,7 +27,6 @@ const { fields } = foundry.data;
  * @mixes ActorLimitsPart
  * @mixes ActorMoneyPart
  * @mixes ActorMovementPart
- * @mixes ActorProtectionsPart
  * @mixes ActorRestingPart
  * @mixes ActorImpactsPart
  * @mixes ActorScalingPart
@@ -56,7 +56,7 @@ export default class BaseActorSystem
     parts.ActorMoneyPart,
     parts.ActorMovementPart,
     parts.ActorSensesPart,
-    parts.ActorProtectionsPart,
+    parts.ActorAffinitiesPart,
     parts.ActorRestingPart,
     parts.ActorTokenPart,
   )

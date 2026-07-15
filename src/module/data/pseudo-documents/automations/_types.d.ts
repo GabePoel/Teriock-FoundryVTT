@@ -20,7 +20,6 @@ import {
   MoveAutomation,
   OverrideAutomation,
   PropertyMacroAutomation,
-  ProtectionAutomation,
   RegionAutomation,
   ResistAutomation,
   RevitalizeAutomation,
@@ -60,7 +59,6 @@ declare global {
       move: MoveAutomation;
       override: OverrideAutomation;
       propertyMacro: PropertyMacroAutomation;
-      protection: ProtectionAutomation;
       region: RegionAutomation;
       resist: ResistAutomation;
       revitalize: RevitalizeAutomation;

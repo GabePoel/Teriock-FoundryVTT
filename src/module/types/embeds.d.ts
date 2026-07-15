@@ -18,6 +18,8 @@ declare global {
       hidden?: boolean;
       icons?: Teriock.EmbedData.EmbedIcon[];
       id?: ID<AnyCommonDocument>;
+      /** Clicking the block opens whatever this refers to, in preference to `openable`. */
+      identifier?: string | TypedIdentifier;
       img: string;
       inactive?: boolean;
       makeTooltip?: boolean;
@@ -32,8 +34,9 @@ declare global {
       text?: string;
       title: string;
       tooltip?: string;
+      tooltipUuid?: UUID<TeriockDocument>;
       usable?: boolean;
-      uuid?: UUID<AnyCommonDocument>;
+      uuid?: string | UUID<AnyCommonDocument>;
     };
 
     export type EmbedAction = {

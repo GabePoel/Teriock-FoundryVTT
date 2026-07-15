@@ -1,4 +1,5 @@
 import abilityConfig from "./ability-config.mjs";
+import affinityConfig from "./affinity-config.mjs";
 import attributeConfig from "./attribute-config.mjs";
 import attunementConfig from "./attunement-config.mjs";
 import changeConfig from "./change-config.mjs";
@@ -21,7 +22,6 @@ import indexConfig from "./index-config.mjs";
 import mathConfig from "./math-config.mjs";
 import piercingConfig from "./piercing-config.mjs";
 import powerConfig from "./power-config.mjs";
-import protectionConfig from "./protection-config.mjs";
 import settingsConfig from "./settings-config.mjs";
 import statConfig from "./stat-config.mjs";
 import systemConfig from "./system-config.mjs";
@@ -33,6 +33,7 @@ import wikiConfig from "./wiki-config.mjs";
 
 const config = {
   ability: abilityConfig,
+  affinity: affinityConfig,
   attribute: attributeConfig,
   attunement: attunementConfig,
   change: changeConfig,
@@ -55,7 +56,6 @@ const config = {
   math: mathConfig,
   piercing: piercingConfig,
   power: powerConfig,
-  protection: protectionConfig,
   settings: settingsConfig,
   stat: statConfig,
   system: systemConfig,
