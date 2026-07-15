@@ -37,8 +37,10 @@ export default class PowerSystem
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       maxAv: new fields.NumberField({ initial: 4, integer: true, min: 0 }),
       type: new fields.StringField({
+        blank: false,
         choices: localizeChoices(objectMap(powerConfig.type, v => v.label)),
         initial: "other",
+        required: true,
       }),
     });
   }
