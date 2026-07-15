@@ -1,4 +1,3 @@
-import { StatDiceUpdater } from "../../../applications/dialogs/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { getRollIcon } from "../../../helpers/icon.mjs";
@@ -126,13 +125,5 @@ export default class BaseStatPoolModel extends BaseDataModel {
     }
     this.dice = new Collection(dice.map(d => [d.id, d]));
     this.value = dice.reduce((total, die) => ((die.faces + 1) / 2).toNearest(1, "round") + total, 0);
-  }
-
-  /**
-   * Opens dialog to set stat dice.
-   * @returns {Promise<void>}
-   */
-  async setStatDice() {
-    await StatDiceUpdater.create({ pool: this });
   }
 }

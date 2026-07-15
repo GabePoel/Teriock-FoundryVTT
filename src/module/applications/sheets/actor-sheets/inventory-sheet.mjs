@@ -1,5 +1,5 @@
 import { EquipmentPreviewModel } from "../../../data/models/preview-models/_module.mjs";
-import BaseActorSheet from "./abstract/base-actor-sheet.mjs";
+import { BaseActorSheet } from "./abstract/_module.mjs";
 
 /**
  * Sheet for a {@link TeriockInventory}.

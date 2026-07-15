@@ -6,7 +6,7 @@ import ApplicableEffectSheet from "./applicable-effect-sheet.mjs";
  * {@link TeriockConsequence} sheet.
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
- * @mixes MechanicsCommonSheetPart
+ * @mixes MechanicsSheet
  */
 export default class ConsequenceSheet extends ApplicableEffectSheet {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

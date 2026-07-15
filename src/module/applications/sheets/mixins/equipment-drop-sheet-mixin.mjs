@@ -3,13 +3,13 @@ import { resolveDocument } from "../../../helpers/resolve.mjs";
 /**
  * Mixin that handles {@link TeriockEquipment} dropping between actors and other equipment in a way that preserves
  * {@link TeriockAttunement} links.
- * @param {typeof DragDropCommonSheetPart} Base
+ * @param {typeof DragDropSheet} Base
  */
 export default function EquipmentDropSheetMixin(Base) {
   return (
     /**
-     * @extends {DragDropCommonSheetPart}
-     * @mixes DragDropCommonSheetPart
+     * @extends {DragDropSheet}
+     * @mixes DragDropSheet
      * @mixin
      * @property {TeriockEquipment} document
      */

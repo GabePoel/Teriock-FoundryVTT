@@ -18,7 +18,6 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes HackStatApplication
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
- * @property {Teriock.Sheet.BaseActorSheetSettings} settings
  */
 export default class BaseActorSheet
   extends mixClasses(
@@ -36,12 +35,7 @@ export default class BaseActorSheet
   constructor(...args) {
     super(...args);
     this._locked = false;
-    this._activeTab = "tradecrafts";
-    this.settings = { avatarImagePath: "img", conditionExpansions: {} };
   }
-
-  /** @type {string} */
-  _activeTab;
 
   /** @inheritDoc */
   async _onDropChild(event, dropData) {

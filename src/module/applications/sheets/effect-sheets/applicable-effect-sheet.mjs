@@ -3,7 +3,6 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import * as sheetMixins from "../mixins/_module.mjs";
-import * as commonSheetParts from "../mixins/common-sheet-mixin/parts/_module.mjs";
 
 const { ActiveEffectConfig } = foundry.applications.sheets;
 
@@ -11,20 +10,20 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * {@link TeriockImbuement} and {@link TeriockConsequence} sheet.
  * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
- * @mixes MechanicsCommonSheetPart
+ * @mixes MechanicsSheet
  */
 export default class ApplicableEffectSheet
   extends mixClasses(
     ActiveEffectConfig,
     BaseDocumentSheetMixin,
     sheetMixins.SystemSettingsButtonSheetMixin,
-    commonSheetParts.ConnectionCommonSheetPart,
-    commonSheetParts.DocumentCreationCommonSheetPart,
-    commonSheetParts.DragDropCommonSheetPart,
-    commonSheetParts.FieldsCommonSheetPart,
-    commonSheetParts.LockingCommonSheetPart,
-    commonSheetParts.MechanicsCommonSheetPart,
-    commonSheetParts.PreviewCommonSheetPart,
+    sheetMixins.ConnectionSheetMixin,
+    sheetMixins.DocumentCreationSheetMixin,
+    sheetMixins.DragDropSheetMixin,
+    sheetMixins.FieldsSheetMixin,
+    sheetMixins.LockingSheetMixin,
+    sheetMixins.MechanicsSheetMixin,
+    sheetMixins.PreviewSheetMixin,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
