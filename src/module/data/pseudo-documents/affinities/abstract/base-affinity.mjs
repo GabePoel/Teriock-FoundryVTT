@@ -95,7 +95,8 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
    */
   get effectiveImg() {
     if (this.img) { return this.img; }
-    const fallback = getImage(this._config.imgCategory, parseIdentifier(this._config.identifier).identifier);
+    const fallback = this.document?.img
+      ?? getImage(this._config.imgCategory, parseIdentifier(this._config.identifier).identifier);
     if (this.category === "other") { return fallback; }
     return getImage(this._categoryConfig.imgCategory, this.value, fallback);
   }
