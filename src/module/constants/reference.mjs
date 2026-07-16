@@ -1,8 +1,8 @@
 // The reference is like the index but with names localized.
 // This is the better object to use when constructing anything user facing.
 
-import { preLocalizeConfig } from "../../helpers/localization.mjs";
-import { toCamelCase } from "../../helpers/string.mjs";
+import { preLocalizeConfig } from "../helpers/localization.mjs";
+import { toCamelCase } from "../helpers/string.mjs";
 import {
   abilities,
   attributes,
@@ -24,7 +24,7 @@ import {
   traits,
   weaponClasses,
   weaponFightingStyles,
-} from "../index/_module.mjs";
+} from "./index.mjs";
 
 /**
  * Build reference localization keys directly from the index because I'm lazy.

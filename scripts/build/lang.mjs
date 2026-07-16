@@ -42,7 +42,7 @@ import { default as keywordsContent } from "../../src/index/content/keywords.jso
 import { default as tradecraftsContent } from "../../src/index/content/tradecrafts.json" with { type: "json" };
 import { default as weaponFightingStylesContent } from "../../src/index/content/weapon-fighting-styles.json" with { type: "json" };
 import { default as conditions } from "../../src/index/names/conditions.json" with { type: "json" };
-import * as index from "../../src/module/constants/index/_module.mjs";
+import * as index from "../../src/module/constants/index.mjs";
 import { sortObject } from "../script-utils.mjs";
 
 /**
