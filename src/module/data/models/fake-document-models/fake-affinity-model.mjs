@@ -1,4 +1,3 @@
-import affinityConfig from "../../../constants/config/affinity-config.mjs";
 import { dotJoin, toId } from "../../../helpers/string.mjs";
 import { competenceField } from "../../fields/tools/builders.mjs";
 import BaseFakeDocumentModel from "./base-fake-document-model.mjs";
@@ -45,27 +44,11 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
   }
 
   /**
-   * Configuration for this affinity's category.
-   * @returns {object}
-   */
-  get _categoryConfig() {
-    return affinityConfig.categories[this.category] || {};
-  }
-
-  /**
-   * Configuration for this affinity's type.
-   * @returns {object}
-   */
-  get _config() {
-    return affinityConfig.types[this.type] || {};
-  }
-
-  /**
    * Only affinities that are rolled care what competence they apply at.
    * @inheritDoc
    */
   get _embedIcons() {
-    if (!this._config.competence) { return [...super._embedIcons]; }
+    if (!TERIOCK.config.affinity.types[this.type]?.competence) { return [...super._embedIcons]; }
     const level = TERIOCK.config.competence.levels[this.competence] ?? {};
     return [{ icon: level.icon, tooltip: level.label }, ...super._embedIcons];
   }
@@ -75,16 +58,16 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
    * @returns {string}
    */
   get categoryLabel() {
-    return _loc(this._categoryConfig.label ?? "");
+    return _loc(TERIOCK.config.affinity.categories[this.category]?.label ?? "");
   }
 
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, {
       action: "rollAffinity",
-      color: this._config.color,
+      color: TERIOCK.config.affinity.types[this.type]?.color,
       makeTooltip: true,
-      tooltipIdentifier: this._config.identifier,
+      tooltipIdentifier: TERIOCK.config.affinity.types[this.type]?.identifier,
       usable: true,
     });
   }
@@ -96,7 +79,7 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
 
   /** @inheritDoc */
   get identifier() {
-    return this._config.identifier;
+    return TERIOCK.config.affinity.types[this.type]?.identifier;
   }
 
   /**
@@ -105,7 +88,8 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
    */
   get name() {
     if (this.category === "other") { return this.value; }
-    const choices = foundry.utils.getProperty(TERIOCK, this._categoryConfig.choices || {}) || {};
+    const choices = foundry.utils.getProperty(TERIOCK, TERIOCK.config.affinity.categories[this.category]?.choices || {})
+      || {};
     return choices[this.value] || this.value;
   }
 
@@ -114,7 +98,7 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
    * @returns {boolean}
    */
   get protection() {
-    return Boolean(this._config.protection);
+    return Boolean(TERIOCK.config.affinity.types[this.type]?.protection);
   }
 
   /** @inheritDoc */
@@ -127,8 +111,8 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
    * @returns {string}
    */
   get typeLabel() {
-    const label = _loc(this._config.label ?? "");
-    if (!this._config.stacking) { return label; }
+    const label = _loc(TERIOCK.config.affinity.types[this.type]?.label ?? "");
+    if (!TERIOCK.config.affinity.types[this.type]?.stacking) { return label; }
     return _loc("TERIOCK.SHEETS.Actor.TABS.Affinities.stackingLabel", { amount: this.amount, label });
   }
 
@@ -137,6 +121,6 @@ export default class FakeAffinityModel extends BaseFakeDocumentModel {
    * @returns {boolean}
    */
   get weakness() {
-    return Boolean(this._config.weakness);
+    return Boolean(TERIOCK.config.affinity.types[this.type]?.weakness);
   }
 }

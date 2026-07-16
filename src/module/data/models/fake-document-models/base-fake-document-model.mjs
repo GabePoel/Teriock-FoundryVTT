@@ -6,7 +6,7 @@ const { fields } = foundry.data;
 /**
  * Something an actor derives during preparation that is displayed as though it were a document, but is not one.
  * @extends {BaseDataModel}
- * @property {Teriock.System.ImageString} _img
+ * @property {Teriock.System.ImageString} img
  * @property {Set<string>} providers
  */
 export default class BaseFakeDocumentModel extends BaseDataModel {
@@ -21,7 +21,7 @@ export default class BaseFakeDocumentModel extends BaseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      _img: new fields.FilePathField({ categories: ["IMAGE"] }),
+      img: new fields.FilePathField({ categories: ["IMAGE"] }),
       providers: new fields.SetField(new fields.StringField()),
     });
   }
@@ -66,14 +66,6 @@ export default class BaseFakeDocumentModel extends BaseDataModel {
    */
   get identifier() {
     return "";
-  }
-
-  /**
-   * The image to show.
-   * @returns {string}
-   */
-  get img() {
-    return this._img;
   }
 
   /**

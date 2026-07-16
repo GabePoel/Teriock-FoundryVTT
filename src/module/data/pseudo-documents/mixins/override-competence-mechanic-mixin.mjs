@@ -6,14 +6,14 @@ const { fields } = foundry.data;
  * Adds an optional competence override to a {@link MechanicPseudoDocument}.
  * @param {typeof MechanicPseudoDocument} Base
  */
-export default function CompetenceMechanicMixin(Base) {
+export default function OverrideCompetenceMechanicMixin(Base) {
   return (
     /**
      * @mixin
      * @property {CompetenceModel} competence
      * @property {boolean} overrideCompetence
      */
-    class CompetenceMechanic extends Base {
+    class OverrideCompetenceMechanic extends Base {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Competence"];
 
@@ -40,13 +40,10 @@ export default function CompetenceMechanicMixin(Base) {
         return [...super._formPaths, ...this._competencePaths];
       }
 
-      /**
-       * The competence this uses, falling back to that of the document it comes from.
-       * @returns {Teriock.System.CompetenceLevel}
-       */
-      get effectiveCompetence() {
-        if (this.overrideCompetence) { return this.competence.raw; }
-        return this.document?.system?.competence?.raw ?? 0;
+      /** @inheritDoc */
+      getCompetence(scope) {
+        if (this.overrideCompetence) { return this.competence.value; }
+        return super.getCompetence(scope);
       }
     }
   );

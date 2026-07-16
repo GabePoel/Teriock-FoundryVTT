@@ -3,28 +3,27 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { TypedIdentifierSetField } from "../../fields/_module.mjs";
 import { defaultJSONField } from "../../fields/tools/builders.mjs";
 import { AddDocumentsActivation } from "../activations/_module.mjs";
-import { CompetenceMechanicMixin, CritMechanicMixin } from "../mixins/_module.mjs";
+import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @param {boolean} attachDocuments
  * @extends {BaseAutomation}
  * @mixes CritMechanic
- * @mixes SelectDocumentsAutomation
- * @mixes CompetenceMechanic
+ * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataAutomation
- * @property {boolean} separate
+ * @mixes SelectDocumentsAutomation
  * @property {boolean} attachDocuments
+ * @property {boolean} separate
  * @property {{enabled: boolean, data: object, overrideData: boolean, uuids: Set<UUID<AnyChildDocument>>[]}} children
  */
 export default class AddDocumentsAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
     automationMixins.SelectDocumentsAutomationMixin,
-    CompetenceMechanicMixin,
+    OverrideCompetenceMechanicMixin,
     automationMixins.OverrideDataAutomationMixin,
     automationMixins.DisplayAutomationMixin,
   )
@@ -160,11 +159,7 @@ export default class AddDocumentsAutomation
   async choose(options = {}) {
     const uuids = await super.choose(options);
     return uuids.map(uuid => {
-      const data = foundry.utils.expandObject({
-        "system.competence.raw": this.overrideCompetence
-          ? this.competence.raw
-          : (options?.execution?.competence?.value ?? this.document?.system?.competence?.value),
-      });
+      const data = foundry.utils.expandObject({ "system.competence.raw": this.getCompetence(options) });
       if (this.overrideData && this.data) { foundry.utils.mergeObject(data, this.data, { inplace: true }); }
       const construction = { data, uuid };
       this.#updateConstructionName(construction);

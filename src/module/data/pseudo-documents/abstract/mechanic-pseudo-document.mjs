@@ -100,4 +100,13 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
     });
     await editor.render(true);
   }
+
+  /**
+   * The competence this uses, falling back to the competence of its document.
+   * @param {Partial<Teriock.System.TriggerScope>} _scope
+   * @returns {Teriock.System.CompetenceLevel}
+   */
+  getCompetence(_scope) {
+    return this.document?.system?.competence?.raw ?? 0;
+  }
 }

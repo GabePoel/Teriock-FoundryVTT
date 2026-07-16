@@ -50,54 +50,17 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
   }
 
   /**
-   * Configuration for this affinity's category.
-   * @returns {object}
-   */
-  get _categoryConfig() {
-    return affinityConfig.categories[this.category] || {};
-  }
-
-  /**
    * Valid values for this affinity's category.
    * @returns {Record<string, string>}
    */
   get _choices() {
     if (this.category === "other") { return {}; }
-    return foundry.utils.getProperty(TERIOCK, this._categoryConfig.choices || {}) || {};
-  }
-
-  /**
-   * Configuration for this affinity's type.
-   * @returns {object}
-   */
-  get _config() {
-    return affinityConfig.types[this.type] || {};
+    return foundry.utils.getProperty(TERIOCK, TERIOCK.config.affinity.categories[this.category]?.choices || {}) || {};
   }
 
   /** @inheritDoc */
   get _formPaths() {
     return ["category", "value", "img"];
-  }
-
-  /**
-   * The competence this affinity applies at. Affinities that do not care about competence sit at the maximum so that
-   * they never lose to a competing source.
-   * @returns {Teriock.System.CompetenceLevel}
-   */
-  get effectiveCompetence() {
-    return 2;
-  }
-
-  /**
-   * The image representing this affinity, preferring an explicit override.
-   * @returns {string}
-   */
-  get effectiveImg() {
-    if (this.img) { return this.img; }
-    const fallback = this.document?.img
-      ?? getImage(this._config.imgCategory, parseIdentifier(this._config.identifier).identifier);
-    if (this.category === "other") { return fallback; }
-    return getImage(this._categoryConfig.imgCategory, this.value, fallback);
   }
 
   /**
@@ -123,16 +86,33 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
     return 0;
   }
 
+  /** @inheritDoc */
+  prepareData() {
+    if (!this.img) {
+      const fallback = this.document?.img
+        ?? getImage(
+          TERIOCK.config.affinity.types[this.type]?.imgCategory,
+          parseIdentifier(TERIOCK.config.affinity.types[this.type]?.identifier).identifier,
+        );
+      if (this.category === "other") { this.img = fallback; }
+      else { this.img = getImage(
+          TERIOCK.config.affinity.categories[this.category]?.imgCategory,
+          this.value,
+          fallback,
+        ); }
+    }
+  }
+
   /**
    * The data an actor stores for this affinity.
    * @returns {Teriock.Affinities.EntryData}
    */
   toEntry() {
     return {
-      _img: this.effectiveImg,
       amount: this.getAmount(),
       category: this.category,
-      competence: this.effectiveCompetence,
+      competence: this.getCompetence(),
+      img: this.img,
       providers: [this.document?.name].filter(Boolean),
       type: this.type,
       value: this.value,

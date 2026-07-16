@@ -87,17 +87,35 @@ export default {
     other: { choices: "none", format: "none", imgCategory: "none", label: "TERIOCK.DIALOGS.Select.otherButton" },
   },
   // no sort
+  groups: {
+    immunities: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.immunities", types: ["hexseal", "immunity"] },
+    resistances: {
+      label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.resistances",
+      types: ["hexproof", "resistance", "vulnerability"],
+    },
+    boosts: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.boosts", types: ["takeDeboost", "takeBoost"] },
+    bindings: { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.bindings", types: ["binding"] },
+  },
+  // no sort
   types: {
-    resistance: {
-      button: "TERIOCK.ROLLS.Resist.button",
-      color: colors.palette.green,
-      competence: true,
-      hook: "resist",
-      identifier: "keyword:resistance",
+    hexseal: {
+      button: "TERIOCK.ROLLS.Hexseal.button",
+      color: colors.palette.purple,
+      hex: true,
+      hook: "hexseal",
+      identifier: "keyword:hexseal",
       imgCategory: "effectTypes",
-      label: "TERIOCK.TERMS.Affinities.resistance.single",
+      label: "TERIOCK.TERMS.Affinities.hexseal.single",
       protection: true,
-      threshold: true,
+    },
+    immunity: {
+      button: "TERIOCK.ROLLS.Immune.button",
+      color: colors.palette.green,
+      hook: "immune",
+      identifier: "keyword:immunity",
+      imgCategory: "effectTypes",
+      label: "TERIOCK.TERMS.Affinities.immunity.single",
+      protection: true,
     },
     hexproof: {
       button: "TERIOCK.ROLLS.Hexproof.button",
@@ -111,24 +129,23 @@ export default {
       protection: true,
       threshold: true,
     },
-    immunity: {
-      button: "TERIOCK.ROLLS.Immune.button",
+    resistance: {
+      button: "TERIOCK.ROLLS.Resist.button",
       color: colors.palette.green,
-      hook: "immune",
-      identifier: "keyword:immunity",
+      competence: true,
+      hook: "resist",
+      identifier: "keyword:resistance",
       imgCategory: "effectTypes",
-      label: "TERIOCK.TERMS.Affinities.immunity.single",
+      label: "TERIOCK.TERMS.Affinities.resistance.single",
       protection: true,
+      threshold: true,
     },
-    hexseal: {
-      button: "TERIOCK.ROLLS.Hexseal.button",
-      color: colors.palette.purple,
-      hex: true,
-      hook: "hexseal",
-      identifier: "keyword:hexseal",
-      imgCategory: "effectTypes",
-      label: "TERIOCK.TERMS.Affinities.hexseal.single",
-      protection: true,
+    vulnerability: {
+      color: colors.palette.red,
+      identifier: "keyword:vulnerability",
+      imgCategory: "keywords",
+      label: "TERIOCK.TERMS.Affinities.vulnerability.single",
+      weakness: true,
     },
     takeBoost: {
       color: colors.palette.red,
@@ -143,13 +160,6 @@ export default {
       imgCategory: "keywords",
       label: "TERIOCK.TERMS.Affinities.takeDeboost.single",
       stacking: true,
-    },
-    vulnerability: {
-      color: colors.palette.red,
-      identifier: "keyword:vulnerable",
-      imgCategory: "keywords",
-      label: "TERIOCK.TERMS.Affinities.vulnerability.single",
-      weakness: true,
     },
     binding: {
       color: colors.palette.red,

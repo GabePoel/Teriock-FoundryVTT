@@ -4,18 +4,10 @@ import { getImage } from "../../../../../../helpers/path.mjs";
 import { parseIdentifier } from "../../../../../../helpers/utils.mjs";
 
 /**
- * How affinities are grouped.
+ * How affinities are grouped, in display order.
  * @type {{ label: string, types: Teriock.Affinities.Type[] }[]}
  */
-const AFFINITY_GROUPS = [
-  { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.immunities", types: ["hexseal", "immunity"] },
-  {
-    label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.resistances",
-    types: ["hexproof", "resistance", "vulnerability"],
-  },
-  { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.boosts", types: ["takeBoost", "takeDeboost"] },
-  { label: "TERIOCK.SHEETS.Actor.TABS.Affinities.GROUPS.bindings", types: ["binding"] },
-];
+const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
 
 /**
  * @param {typeof BaseActorSheet} Base
@@ -28,7 +20,7 @@ export default function PlayableActorSheetAffinitiesPart(Base) {
      */
     class PlayableActorSheetAffinitiesPart extends Base {
       /**
-       * A group for each kind of affinity, in the order given by {@link AFFINITY_GROUPS}.
+       * A group for each kind of affinity.
        * @this {PlayableActorSheetAffinitiesPart}
        * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
        */

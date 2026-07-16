@@ -128,10 +128,8 @@ export default function AbilityExecutionChatPart(Base) {
         const transformation = { enabled: Boolean(transformationAutomations.length), uuids: [] };
         if (transformation.enabled) {
           const a = transformationAutomations[0];
-          const competence = a.competence.toObject();
-          if (!a.overrideCompetence) { competence.raw = this.competence.value; }
           Object.assign(transformation, {
-            competence,
+            competence: { raw: a.getCompetence({ execution: this }) },
             img: a.img,
             level: a.level,
             override: Array.from(a.override),

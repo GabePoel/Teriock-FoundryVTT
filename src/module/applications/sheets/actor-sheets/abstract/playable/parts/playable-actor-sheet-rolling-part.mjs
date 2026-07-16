@@ -18,7 +18,7 @@ export default function PlayableActorSheetRollingPart(Base) {
        */
       static async #onRollAffinity(event, target) {
         const [fakeName, id] = (target.closest(".teriock-block")?.dataset.uuid ?? "").split(".");
-        const affinity = fakeName === FakeAffinityModel.FAKE_NAME ? this.actor.system.affinities[id] : null;
+        const affinity = fakeName === FakeAffinityModel.FAKE_NAME ? this.actor.system.derivedAffinities[id] : null;
         const type = affinity?.type ?? target.closest("[data-affinity-type]")?.dataset.affinityType;
         if (!type) { return; }
         await this.actor.system.rollAffinity(type, { affinity, event });

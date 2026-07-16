@@ -3,22 +3,22 @@ import { mixClasses } from "../../../helpers/construction.mjs";
 import { tradecraftsField } from "../../fields/tools/builders.mjs";
 import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { TradecraftActivation } from "../activations/command-activations.mjs";
-import { CompetenceMechanicMixin } from "../mixins/_module.mjs";
+import { OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {ThresholdAutomation}
+ * @mixes OverrideCompetenceMechanic
  * @mixes SelectAutomation
  * @mixes TriggerAutomation
- * @mixes CompetenceMechanic
  */
 export default class TradecraftAutomation
   extends mixClasses(
     ThresholdAutomation,
     automationMixins.SelectAutomationMixin,
     automationMixins.TriggerAutomationMixin,
-    CompetenceMechanicMixin,
+    OverrideCompetenceMechanicMixin,
   )
 {
   /** @inheritDoc */
@@ -71,12 +71,7 @@ export default class TradecraftAutomation
     return Array.from(this.tradecrafts).filter(Boolean).map(tradecraft =>
       new TradecraftActivation({
         display: this.getDisplayData(threshold),
-        options: {
-          bonus: this.bonus,
-          competence: this.overrideCompetence ? this.competence.raw : this.document?.system?.competence?.raw,
-          threshold,
-          tradecraft,
-        },
+        options: { bonus: this.bonus, competence: this.getCompetence(options), threshold, tradecraft },
       })
     );
   }
@@ -112,7 +107,7 @@ export default class TradecraftAutomation
       const threshold = await this.getThreshold(scope?.execution?.getRollData() ?? {});
       return actor.system.rollTradecraft(tradecraft, {
         bonus: this.bonus,
-        competence: this.overrideCompetence ? this.competence.raw : this.document.system.competence.raw,
+        competence: this.getCompetence(scope),
         threshold,
       });
     }));

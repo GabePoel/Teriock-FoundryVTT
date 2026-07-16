@@ -53,4 +53,9 @@ export default class BaseAutomation extends MechanicPseudoDocument {
   getChanges() {
     return [];
   }
+
+  /** @inheritDoc */
+  getCompetence(scope) {
+    return scope?.execution?.competence?.raw ?? super.getCompetence(scope);
+  }
 }

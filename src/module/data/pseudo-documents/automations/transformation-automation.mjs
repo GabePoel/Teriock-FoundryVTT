@@ -1,21 +1,21 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { automationTransformationFields } from "../../fields/tools/transformation-fields.mjs";
-import { CompetenceMechanicMixin, CritMechanicMixin } from "../mixins/_module.mjs";
+import { CritMechanicMixin, OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {BaseAutomation}
- * @mixes CritMechanic
  * @extends {Teriock.Transformation.AutomationTransformationConfig}
+ * @mixes CritMechanic
+ * @mixes OverrideCompetenceMechanic
  * @mixes SelectExternalDocumentsAutomation
- * @mixes CompetenceMechanic
  */
 export default class TransformationAutomation
   extends mixClasses(
     CritMechanicMixin(BaseAutomation),
     automationMixins.SelectExternalDocumentsAutomationMixin,
-    CompetenceMechanicMixin,
+    OverrideCompetenceMechanicMixin,
   )
 {
   /** @inheritDoc */

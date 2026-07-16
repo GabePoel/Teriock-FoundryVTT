@@ -1,4 +1,5 @@
 import { toKebabCase } from "../../../helpers/string.mjs";
+import { getName } from "../../../helpers/utils.mjs";
 import BaseFakeDocumentModel from "./base-fake-document-model.mjs";
 
 const { fields } = foundry.data;
@@ -31,14 +32,6 @@ export default class FakeConditionModel extends BaseFakeDocumentModel {
    * @type {TeriockCondition | null}
    */
   effect = null;
-
-  /**
-   * The static data describing this condition.
-   * @returns {object}
-   */
-  get _data() {
-    return TERIOCK.data.conditions[this.conditionKey] ?? {};
-  }
 
   /**
    * Something is forcing this condition, so it cannot simply be removed.
@@ -81,13 +74,8 @@ export default class FakeConditionModel extends BaseFakeDocumentModel {
   }
 
   /** @inheritDoc */
-  get img() {
-    return this._data.img;
-  }
-
-  /** @inheritDoc */
   get name() {
-    return this._data.name;
+    return getName(this.identifier);
   }
 
   /**
@@ -97,5 +85,11 @@ export default class FakeConditionModel extends BaseFakeDocumentModel {
   get uuid() {
     if (!this.locked && this.effect) { return this.effect.uuid; }
     return super.uuid;
+  }
+
+  /** @inheritDoc */
+  prepareData() {
+    super.prepareData();
+    this.img ??= TERIOCK.data.conditions[this.conditionKey]?.img;
   }
 }

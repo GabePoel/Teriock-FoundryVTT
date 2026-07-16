@@ -14,6 +14,12 @@ const { fields } = foundry.data;
 const PROTECTION_TYPES = Object.entries(affinityConfig.types).filter(([, t]) => t.protection).map(([k]) => k);
 
 /**
+ * The default display order for affinity types, taken from {@link affinityConfig}'s `groups`.
+ * @type {Teriock.Affinities.Type[]}
+ */
+const TYPE_ORDER = Object.values(affinityConfig.groups).flatMap(group => group.types);
+
+/**
  * Actor data model that handles affinities.
  * @param {typeof BaseActorSystem} Base
  */
@@ -28,7 +34,7 @@ export default function ActorAffinitiesPart(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          affinities: new fields.TypedObjectField(new fields.EmbeddedDataField(FakeAffinityModel), {
+          derivedAffinities: new fields.TypedObjectField(new fields.EmbeddedDataField(FakeAffinityModel), {
             persisted: false,
           }),
         });
@@ -42,16 +48,16 @@ export default function ActorAffinitiesPart(Base) {
        */
       #addAffinity(entry) {
         const id = FakeAffinityModel.affinityId(entry.type, entry.category, entry.value);
-        const existing = this.affinities[id];
+        const existing = this.derivedAffinities[id];
         if (!existing) {
-          this.affinities[id] = new FakeAffinityModel(entry, { parent: this });
+          this.derivedAffinities[id] = new FakeAffinityModel(entry, { parent: this });
           return;
         }
         existing.amount += entry.amount;
         for (const provider of entry.providers ?? []) { existing.providers.add(provider); }
         if (entry.competence > existing.competence) {
           existing.competence = entry.competence;
-          existing._img = entry._img;
+          existing.img = entry.img;
         }
       }
 
@@ -72,9 +78,8 @@ export default function ActorAffinitiesPart(Base) {
        * @returns {FakeAffinityModel[]}
        */
       get affinityEntries() {
-        const order = Object.keys(affinityConfig.types);
-        return Object.values(this.affinities).sort((a, b) =>
-          (order.indexOf(a.type) - order.indexOf(b.type)) || a.category.localeCompare(b.category)
+        return Object.values(this.derivedAffinities).sort((a, b) =>
+          (TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type)) || a.category.localeCompare(b.category)
           || a.value.localeCompare(b.value)
         );
       }
@@ -91,10 +96,10 @@ export default function ActorAffinitiesPart(Base) {
         const config = affinityConfig.types[type] || {};
         const fallback = getImage(config.imgCategory, parseIdentifier(config.identifier).identifier);
         this.#addAffinity({
-          _img: getImage(affinityConfig.categories[category]?.imgCategory, value, fallback),
           amount,
           category,
           competence: 2,
+          img: getImage(affinityConfig.categories[category]?.imgCategory, value, fallback),
           providers: [provider].filter(Boolean),
           type,
           value,
@@ -120,7 +125,7 @@ export default function ActorAffinitiesPart(Base) {
        * @returns {FakeAffinityModel | undefined}
        */
       getAffinity(type, category, value) {
-        return this.affinities[FakeAffinityModel.affinityId(type, category, value)];
+        return this.derivedAffinities[FakeAffinityModel.affinityId(type, category, value)];
       }
 
       /**
@@ -153,7 +158,7 @@ export default function ActorAffinitiesPart(Base) {
        * previously recorded.
        */
       prepareAffinities() {
-        for (const id of Object.keys(this.affinities)) { delete this.affinities[id]; }
+        for (const id of Object.keys(this.derivedAffinities)) { delete this.derivedAffinities[id]; }
         const effects = this.parent.validEffects.filter(e => e.active);
         for (const effect of effects) {
           for (const affinity of effect.system.activeAffinities ?? []) { this.#addAffinity(affinity.toEntry()); }
@@ -217,6 +222,7 @@ export default function ActorAffinitiesPart(Base) {
        * @param {Teriock.Keys.AffinityCategory} category
        * @param {string} value
        * @returns {number}
+       * @todo Find a way to use this on chat messages that isn't insane
        */
       takeBoostsAgainst(category, value) {
         return this.affinityAmount("takeBoost", category, value) - this.affinityAmount("takeDeboost", category, value);

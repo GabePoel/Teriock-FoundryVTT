@@ -1,5 +1,5 @@
 import { addTypesToFormula, formulaExists } from "../../helpers/formula.mjs";
-import { getImage } from "../../helpers/path.mjs";
+import { getImage, systemPath } from "../../helpers/path.mjs";
 import { getName } from "../../helpers/utils.mjs";
 import ArmamentExecution from "./armament-execution/armament-execution.mjs";
 
@@ -84,7 +84,11 @@ export default class EquipmentExecution extends ArmamentExecution {
       return {
         blocks: [],
         icon: TERIOCK.config.document.equipment.icon,
-        image: getImage("equipment", this.source.system._source.equipmentType),
+        image: getImage(
+          "equipment",
+          this.source.system._source.equipmentType,
+          systemPath("icons/documents/equipment.svg"),
+        ),
         name: _loc("TERIOCK.SYSTEMS.Armament.PANELS.unknown", { type: getName(this.source.system.equipmentType) }),
       };
     }

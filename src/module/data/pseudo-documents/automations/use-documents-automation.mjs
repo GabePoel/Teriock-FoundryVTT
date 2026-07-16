@@ -1,26 +1,26 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { resolveDocument } from "../../../helpers/resolve.mjs";
 import { UseExternalActivation, UseLocalActivation } from "../activations/command-activations.mjs";
-import { CompetenceMechanicMixin } from "../mixins/_module.mjs";
+import { OverrideCompetenceMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
- * @property {boolean} expandTables
  * @extends {BaseAutomation}
- * @mixes SelectDocumentsAutomation
- * @mixes CompetenceMechanic
- * @mixes TriggerAutomation
  * @mixes OverrideAutomation
+ * @mixes OverrideCompetenceMechanic
+ * @mixes SelectDocumentsAutomation
+ * @mixes TriggerAutomation
+ * @property {boolean} expandTables
  */
 export default class UseDocumentsAutomation
   extends mixClasses(
     BaseAutomation,
     automationMixins.SelectDocumentsAutomationMixin,
     automationMixins.TriggerAutomationMixin,
-    CompetenceMechanicMixin,
+    OverrideCompetenceMechanicMixin,
     automationMixins.OverrideDataAutomationMixin,
   )
 {
@@ -109,9 +109,7 @@ export default class UseDocumentsAutomation
     const actor = scope.execution?.actor ?? this.actor;
     await this.use({
       actor,
-      competence: this.overrideCompetence
-        ? this.competence.raw
-        : (scope.execution?.competence?.raw ?? this.document.system.competence.raw),
+      competence: this.getCompetence(scope),
       edge: scope.execution?.edge,
       event: scope.execution?.options?.event,
     });
@@ -127,9 +125,7 @@ export default class UseDocumentsAutomation
    * @returns {object}
    */
   getUseOptions() {
-    const options = {
-      competence: this.overrideCompetence ? this.competence.raw : (this.document?.system?.competence?.raw ?? undefined),
-    };
+    const options = { competence: this.getCompetence() };
     if (this.overrideData) { Object.assign(options, this.data); }
     return options;
   }

@@ -1,3 +1,5 @@
+const SCOPE_MAP = { ActiveEffect: "effect", Actor: "actor", Automation: "automation", Item: "item" };
+
 /**
  * A mixin that can be used by both documents and data models to propagate shared operations.
  * @param {typeof BaseDocument|typeof TypeDataModel} Base
@@ -34,7 +36,6 @@ export default function PropagationDataMixin(Base) {
        * @param {Array} [args] - Arguments to pass.
        * @returns {Promise<void>|void}
        */
-      // dprint-ignore
       async _propagateOperation(methodName, isAsync = false, args = []) {
         // Propagate operation to embedded collections
         const collections = this.constructor.metadata?.embedded || {};
@@ -43,8 +44,8 @@ export default function PropagationDataMixin(Base) {
           if (collection) {
             for (const doc of collection) {
               if (typeof doc[methodName] === "function") {
-                if (isAsync) await doc[methodName](...args);
-                else doc[methodName](...args);
+                if (isAsync) { await doc[methodName](...args); }
+                else { doc[methodName](...args); }
               }
             }
           }
@@ -74,22 +75,7 @@ export default function PropagationDataMixin(Base) {
        */
       getScope(scope = {}) {
         scope = { ...scope };
-        switch (this.documentName) {
-          case "Actor":
-            scope.actor = /** @type {AnyActor} */ this;
-            break;
-          case "Automation":
-            scope.automation = /** @type {BaseAutomation} */ this;
-            break;
-          case "ActiveEffect":
-            scope.effect = /** @type {AnyActiveEffect} */ this;
-            break;
-          case "Item":
-            scope.item = /** @type {AnyItem} */ this;
-            break;
-          default:
-            break;
-        }
+        if (SCOPE_MAP[this.documentName]) { scope[SCOPE_MAP[this.documentName]] = this; }
         if (this.parent && typeof this.parent.getScope === "function") { Object.assign(scope, this.parent.getScope()); }
         return scope;
       }

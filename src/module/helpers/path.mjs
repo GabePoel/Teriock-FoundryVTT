@@ -1,6 +1,6 @@
 import { default as iconManifest } from "../../icons/icon-manifest.json" with { type: "json" };
 import indexConfig from "../constants/config/index-config.mjs";
-import { toCamelCase, toKebabCase } from "./string.mjs";
+import { toCamelCase } from "./string.mjs";
 
 /**
  * Get a path relative to the Teriock system root.
@@ -24,17 +24,4 @@ export function getImage(category, name, fallback) {
   if (!iconManifest[l1]) { l1 = indexConfig[category]; }
   if (!iconManifest[l1]) { return out; }
   return iconManifest[l1][toCamelCase(name)] || out;
-}
-
-/**
- * Get the icon for a given rank.
- * @param {Teriock.Keys.Class} className
- * @param {number} rankNumber
- * @returns {string}
- */
-export function getRankImage(className, rankNumber) {
-  if (rankNumber <= 10) {
-    return systemPath(`icons/ranks/rank-${rankNumber}-${toKebabCase(className)}.webp`);
-  }
-  return systemPath(`icons/classes/${className}.webp`);
 }

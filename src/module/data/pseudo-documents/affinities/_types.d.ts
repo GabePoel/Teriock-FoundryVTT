@@ -27,12 +27,11 @@ declare global {
 
     /** The consolidated data an actor stores for each distinct affinity it has. */
     export type EntryData = {
-      /** The stored image, read back through `FakeAffinityModel#img`. */
-      _img: string;
       amount: number;
       category: Teriock.Keys.AffinityCategory;
       competence: Teriock.System.CompetenceLevel;
-      /** The things that grant this affinity, unioned across every source. */
+      img: string;
+      /** Names of the things that grant this affinity, unioned across every source. */
       providers: string[];
       type: Type;
       value: string;

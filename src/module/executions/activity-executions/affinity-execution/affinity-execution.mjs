@@ -1,5 +1,4 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
-import affinityConfig from "../../../constants/config/affinity-config.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { parseIdentifier } from "../../../helpers/utils.mjs";
 import { BaseExecution } from "../../abstract/_module.mjs";
@@ -23,15 +22,11 @@ export default class AffinityExecution extends BaseExecution {
     this.affinity = options.affinity ?? null;
     this.wrappers = options.wrappers
       ?? [this.affinity?.typeLabel, this.affinity?.categoryLabel, this.affinity?.name].filter(Boolean);
-    this.wrappers.push(this._config.hex ? _loc("TERIOCK.TERMS.Common.chosen") : _loc("TERIOCK.TERMS.Common.automatic"));
-  }
-
-  /**
-   * Configuration for the affinity type being rolled.
-   * @returns {object}
-   */
-  get _config() {
-    return affinityConfig.types[this.type] ?? {};
+    this.wrappers.push(
+      TERIOCK.config.affinity.types[this.type]?.hex
+        ? _loc("TERIOCK.TERMS.Common.chosen")
+        : _loc("TERIOCK.TERMS.Common.automatic"),
+    );
   }
 
   /** @inheritDoc */
@@ -62,17 +57,20 @@ export default class AffinityExecution extends BaseExecution {
    */
   get img() {
     if (this.affinity?.img) { return this.affinity.img; }
-    return getImage(this._config.imgCategory, parseIdentifier(this._config.identifier).identifier);
+    return getImage(
+      TERIOCK.config.affinity.types[this.type]?.imgCategory,
+      parseIdentifier(TERIOCK.config.affinity.types[this.type]?.identifier).identifier,
+    );
   }
 
   /** @inheritDoc */
   get journalEntryPageIdentifier() {
-    return this._config.identifier;
+    return TERIOCK.config.affinity.types[this.type]?.identifier;
   }
 
   /** @inheritDoc */
   get name() {
-    return _loc(this._config.label ?? "");
+    return _loc(TERIOCK.config.affinity.types[this.type]?.label ?? "");
   }
 
   /** @inheritDoc */
