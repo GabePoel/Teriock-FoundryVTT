@@ -72,6 +72,11 @@
     right: 1rem;
     top: 1rem;
     width: 1.25em;
+
+    // `.thover` sets a pointer cursor. The header drops `data-action` when not editable.
+    &:not([data-action]) {
+      cursor: default;
+    }
   }
 }
 
@@ -156,7 +161,6 @@
         .teriock-sheet-box-content {
           @include mixins.centralize;
           @include mixins.text-cutoff;
-          cursor: pointer;
           flex-direction: row;
           min-width: 0;
           padding-inline: 1.5em;
@@ -172,6 +176,11 @@
           .teriock-sheet-box-placeholder {
             color: var(--color-text-subtle);
           }
+        }
+
+        // Only actionable boxes are clickable. `formBox` drops `data-action` when not editable.
+        &[data-action] .teriock-sheet-box-content {
+          cursor: pointer;
         }
       }
     }

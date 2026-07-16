@@ -122,7 +122,7 @@ export default function DocumentCreationSheetMixin(Base) {
        */
       async _onCreateRank() {
         const rankClass = await selectClassDialog();
-        const innate = this.document.documentName !== "Actor";
+        const origin = this.document.documentName === "Actor" ? "learned" : "innate";
         if (!rankClass) { return; }
         const classIdentifier = toKebabCase(rankClass);
         const possibleRanks = await Promise.all(
@@ -137,7 +137,7 @@ export default function DocumentCreationSheetMixin(Base) {
         rank.updateSource({ "system.instructions": "" });
         if (rankNumber <= 2) {
           const toCreate = rank.toObject(true);
-          toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate });
+          toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { origin });
           await this.document.createChildDocuments("Item", [toCreate]);
           return;
         }
@@ -182,7 +182,7 @@ export default function DocumentCreationSheetMixin(Base) {
         }
         for (const ability of abilities) { if (!allowedAbilityIds.has(ability?.id)) { abilities.delete(ability?.id); } }
         const toCreate = game.items.fromCompendium(rank);
-        toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { innate });
+        toCreate.system = foundry.utils.mergeObject(toCreate.system || {}, { origin });
         await this.document.createChildDocuments("Item", [toCreate]);
       }
 

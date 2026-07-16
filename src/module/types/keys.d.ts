@@ -90,6 +90,7 @@ declare global {
     // Rank Keys
     export type Archetype = keyof typeof config.class.archetypes;
     export type Class = keyof typeof config.class.classes;
+    export type RankOrigin = keyof typeof config.class.origins;
 
     // Cost Keys
     export type Component = keyof typeof config.cost.components.keys;

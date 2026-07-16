@@ -1,12 +1,9 @@
 <div class="teriock-sheet-bar">
   {{> "teriock/sheets/shared/forms/max-av-form"}}
   {{formBox
-    (ifThen
-      system.innate
-      (localize "TERIOCK.SYSTEMS.Rank.PANELS.innate")
-      (localize "TERIOCK.SYSTEMS.Rank.PANELS.learned"))
-    action=(ifThen editable "editInnate" "")
-    tooltip=(localize "TERIOCK.SYSTEMS.Rank.PANELS.origin")
-    icon=(ifThen system.innate TERIOCK.display.icons.power.innate TERIOCK.display.icons.power.learned)
+    (path TERIOCK.config.class.origins system.origin "label")
+    action=(ifThen editable "editOrigin" "")
+    icon=(path TERIOCK.config.class.origins system.origin "icon")
+    tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.origin.label")
   }}
 </div>

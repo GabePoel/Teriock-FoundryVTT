@@ -1,6 +1,6 @@
 import documentConfig from "../../../constants/config/document-config.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { RankClassUpdater, RankInnateUpdater } from "../../dialogs/_module.mjs";
+import { RankClassUpdater, RankOriginUpdater } from "../../dialogs/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
@@ -19,12 +19,12 @@ export default class RankSheet extends ChildSheet {
   }
 
   /**
-   * Edit whether this rank is innate.
+   * Edit where this rank came from.
    * @returns {Promise<void>}
    */
-  static async #onEditInnate() {
+  static async #onEditOrigin() {
     if (!this.isEditable) { return; }
-    await RankInnateUpdater.create({ document: this.document });
+    await RankOriginUpdater.create({ document: this.document });
   }
 
   /** @type {string[]} */
@@ -36,7 +36,7 @@ export default class RankSheet extends ChildSheet {
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
-    actions: { editClass: this.#onEditClass, editInnate: this.#onEditInnate },
+    actions: { editClass: this.#onEditClass, editOrigin: this.#onEditOrigin },
     classes: ["rank"],
     window: { icon: makeIconClass(documentConfig.rank.icon, "title") },
   };

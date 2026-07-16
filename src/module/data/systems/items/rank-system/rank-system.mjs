@@ -1,8 +1,9 @@
 import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { getName } from "../../../../helpers/utils.mjs";
+import { getName, objectMap } from "../../../../helpers/utils.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
 import { migrateKey, migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -49,9 +50,14 @@ export default class RankSystem
       class: classField({ blank: false, initial: "journeyman", required: true }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
-      innate: new fields.BooleanField({ initial: false }),
       maxAv: new fields.NumberField({ initial: classConfig.defaults.maxAv, integer: true, min: 0 }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
+      origin: new fields.StringField({
+        blank: false,
+        choices: localizeChoices(objectMap(classConfig.origins, v => v.label)),
+        initial: "learned",
+        required: true,
+      }),
     });
   }
 
@@ -59,6 +65,7 @@ export default class RankSystem
   static migrateData(source, options, state) {
     migrateKey(source, "className", "class");
     migrateKey(source, "classRank", "number");
+    migrateKey(source, "innate", "origin", val => (val ? "innate" : "learned"));
     migrateValueTransform(source, "class", toKebabCase);
     return super.migrateData(source, options, state);
   }
@@ -103,7 +110,7 @@ export default class RankSystem
           this.maxAv === 0
             ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
             : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
-          this.innate ? _loc("TERIOCK.SYSTEMS.Rank.PANELS.innate") : _loc("TERIOCK.SYSTEMS.Rank.PANELS.learned"),
+          classConfig.origins[this.origin].label,
         ],
       },
     ];
@@ -124,16 +131,23 @@ export default class RankSystem
 
   /** @inheritDoc */
   get color() {
-    if (this.innate) { return TERIOCK.display.colors.palette.purple; }
-    return TERIOCK.display.colors.palette.grey;
+    return classConfig.origins[this.origin].color;
   }
 
   /** @inheritDoc */
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = getName(this.archetype);
-    parts.text ||= this.innate ? _loc("TERIOCK.TERMS.PowerType.innate") : _loc("TERIOCK.TERMS.PowerType.learned");
+    parts.text ||= classConfig.origins[this.origin].label;
     return parts;
+  }
+
+  /**
+   * Whether this rank was gained innately rather than learned.
+   * @returns {boolean}
+   */
+  get innate() {
+    return this.origin === "innate";
   }
 
   /** @inheritDoc */
@@ -181,11 +195,12 @@ export default class RankSystem
       ...super.getLocalRollData(),
       [`archetype.${this._source.archetype}`]: 1,
       [`class.${this._source.class}`]: 1,
+      [`origin.${this.origin}`]: 1,
       archetype: this._source.archetype,
       class: this._source.class,
-      innate: this.innate ? 1 : 0,
       maxAv: this.maxAv,
       number: this.number,
+      origin: this.origin,
     };
   }
 
@@ -196,7 +211,7 @@ export default class RankSystem
     this.archetype = `archetype:${
       TERIOCK.config.class.classes[toCamelCase(this._source.class)]?.archetype ?? this._source.archetype
     }`;
-    if (this.parent.sup?.type === "species") { this.innate = true; }
+    if (this.parent.sup?.type === "species") { this.origin = "innate"; }
     if (
       game.settings.get("teriock", "armorWeakensRanks") && this.actor && this.actor.system.defense.av.base > this.maxAv
     ) {

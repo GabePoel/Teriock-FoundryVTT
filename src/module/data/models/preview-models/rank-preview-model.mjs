@@ -1,5 +1,5 @@
-import { TernaryField } from "../../fields/_module.mjs";
-import { archetypeField, classField } from "../../fields/tools/builders.mjs";
+import { objectMap } from "../../../helpers/utils.mjs";
+import { archetypeField, classField, nullString } from "../../fields/tools/builders.mjs";
 import BasePreviewModel from "./base-preview-model.mjs";
 
 /**
@@ -15,18 +15,16 @@ export default class RankPreviewModel extends BasePreviewModel {
     return Object.assign(super.defineFilters(), {
       archetype: archetypeField({ initial: null, nullable: true }),
       class: classField({ initial: null, nullable: true }),
-      innate: new TernaryField({ label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.innate.label") }),
+      origin: nullString({
+        choices: objectMap(TERIOCK.config.class.origins, v => v.label),
+        label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.origin.label"),
+      }),
     });
   }
 
   /** @inheritDoc */
   get _formPathsSelect() {
-    return [...super._formPathsSelect, "filters.archetype", "filters.class"];
-  }
-
-  /** @inheritDoc */
-  get _formPathsTernary() {
-    return [...super._formPathsTernary, "filters.innate"];
+    return [...super._formPathsSelect, "filters.archetype", "filters.class", "filters.origin"];
   }
 
   /**
@@ -46,7 +44,8 @@ export default class RankPreviewModel extends BasePreviewModel {
         matches = this._checkValueFilter(f.archetype, system?.archetype)
           && this._checkValueFilter(f.class, system?.class);
       }
-      matches &&= this._checkTernaryFilter(f.innate, system?.innate);
+      // Archetypes have no origin of their own, so they take the origin of the ranks they hold.
+      matches &&= this._checkValueFilter(f.origin, system?.innate ? "innate" : "learned");
       if (matches) { yield document; }
     }
   }

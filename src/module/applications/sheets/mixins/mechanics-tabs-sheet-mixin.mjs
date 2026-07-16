@@ -33,7 +33,15 @@ export default function MechanicsTabsSheetMixin(Base) {
       constructor(...args) {
         super(...args);
         this._tab = "overview";
+        this.#canHaveMechanics = Boolean(
+          this.document.system.constructor._automationTypes?.length
+            || this.document.system.constructor._affinityTypes?.length
+            || this.document.system.constructor._expirationTypes?.length,
+        );
       }
+
+      /** @type {boolean} */
+      #canHaveMechanics;
 
       /** @inheritDoc */
       async _onRender(context, options) {
@@ -47,7 +55,10 @@ export default function MechanicsTabsSheetMixin(Base) {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        return Object.assign(await super._prepareContext(options), { canHaveMechanics: true, tab: this._tab });
+        return Object.assign(await super._prepareContext(options), {
+          canHaveMechanics: this.#canHaveMechanics,
+          tab: this._tab,
+        });
       }
     }
   );

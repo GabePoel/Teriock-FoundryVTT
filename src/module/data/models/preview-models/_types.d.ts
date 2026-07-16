@@ -79,7 +79,7 @@ declare global {
     export type RankFilters = BaseFilters & {
       archetype: Teriock.Keys.Archetype | null;
       class: Teriock.Keys.Class | null;
-      innate: boolean | null;
+      origin: Teriock.Keys.RankOrigin | null;
     };
   }
 }
