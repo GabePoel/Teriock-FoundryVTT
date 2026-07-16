@@ -1,9 +1,10 @@
 {{#each TERIOCK.config.stat as |config key|}}
   {{#if config.pool.enabled}}
     {{formBox
-      (concat
-        (lookup (lookup @root/system.statDice key) "formula") " "
-        " (" (lookup (lookup @root/system.statDice key) "value") ")")
+      (localize
+        "TERIOCK.MODELS.BaseStatPool.PANELS.summary"
+        formula=(path @root/system.statDice key "formula")
+        value=(path @root/system.statDice key "value"))
       action="setStatDice"
       dataset=(object stat=key)
       icon=config.icon
