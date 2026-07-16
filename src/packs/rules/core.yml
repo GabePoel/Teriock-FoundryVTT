@@ -349,9 +349,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Ability Target
     system:
@@ -416,9 +417,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Active Maneuvers
     system:
@@ -507,24 +509,24 @@ pages:
         whatever conditions are specified for the given
         @Identifier[power:basic-abilities]{basic ability}.</p><p>Regardless of
         where it comes from, each ability has the same underlying
-        structure.</p><h2>User</h2><p>An Ability's User is simply the creature
-        that is using the Ability. This is the same for all
-        Abilities.</p><h2>Target</h2><p>An ability's <b>target</b> type
-        determines what kinds of things can be affected by the Ability. Some of
-        the most common ones are listed here.</p><h4>Creature</h4><p>Abilities
-        that target @Pack[teriock.creatures]{creatures} affect some sort of
-        being. A "creature" doesn't necessarily have to be an
-        @Wiki[Category:Animal creatures]{animal}, it may be an animated statue
-        or a sentient @Wiki[Category:Plant creatures]{plant}. Check with your
+        structure.</p><h2>Executor</h2><p>The <b>executor</b> (or user) of an
+        @Pack[teriock.abilities]{ability} is the creature that executes
+        it.</p><h2>Target</h2><p>An ability's <b>target</b> type determines what
+        kinds of things can be affected by the Ability. Some of the most common
+        ones are listed here.</p><h4>Creature</h4><p>Abilities that target
+        @Pack[teriock.creatures]{creatures} affect some sort of being. A
+        "creature" doesn't necessarily have to be an @Wiki[Category:Animal
+        creatures]{animal}, it may be an animated statue or a sentient
+        @Wiki[Category:Plant creatures]{plant}. Check with your
         @Identifier[core:game-master]{GM} if in doubt of whether something is a
         @Pack[teriock.creatures]{creature} or not.</p><h5>Limb</h5><p>Rather
         than hitting an entire creature, some
-        @Pack[teriock.abilities]{abilities} will say that they only hit arms,
-        legs, or limbs. If @Wiki[Category:Limb target abilities]{these
-        abilities} are @Identifier[core:attack-interaction]{attacks}, then they
-        are slightly harder to land a hit with than ones that can hit a creature
-        anywhere. They require hitting that creature's
-        @Identifier[core:armor-class]{AC} +
+        @Pack[teriock.abilities]{abilities} will say that they only hit
+        <b>arms</b>, <b>legs</b>, or <b>limbs</b>. If @Wiki[Category:Limb target
+        abilities]{these abilities} are
+        @Identifier[core:attack-interaction]{attacks}, then they are slightly
+        harder to land a hit with than ones that can hit a creature anywhere.
+        They require hitting that creature's @Identifier[core:armor-class]{AC} +
         2.</p><h5>Vitals</h5><p><b>Vitals</b> targeted
         @Pack[teriock.abilities]{abilities} need to hit a creature's head or
         other vital organs rather than landing anywhere. If
@@ -552,34 +554,43 @@ pages:
         successfully @Identifier[core:block-interaction]{blocked}, it
         automatically hits the item that
         @Identifier[core:block-interaction]{blocked}
-        it.</p><h4>Area</h4><p>Abilities that target an area do not have a
-        precisely defined size. Rather, they affect a small, cohesive space such
-        as a campsite, a room in a dungeon, or a small shack. These abilities
-        may or may not have a range specified.</p><h4>Self</h4><p><b>Self</b>
-        targeted abilities affect @Identifier[core:executor]{the creature that
-        executes them}. They typically do not have a range
+        it.</p><h4>Area</h4><p>@Pack[teriock.abilities]{Abilities} that target
+        an <b>area</b> do not have a precisely defined size. Rather, they affect
+        a small, cohesive space such as a campsite, a room in a dungeon, or a
+        small shack. These @Pack[teriock.abilities]{abilities} may or may not
+        have a @Identifier[core:range]{range}
+        specified.</p><h4>Self</h4><p><b>Self</b> targeted abilities affect
+        @Identifier[core:executor]{the creature that executes them}. They
+        typically do not have a @Identifier[core:range]{range}
         specified.</p><h4>Ability</h4><p>Instead of targeting some person,
         place, or other physical thing, some @Pack[teriock.abilities]{abilities}
         target other @Pack[teriock.abilities]{abilities}. These include cases
         that target @Wiki[Category:Attack target abilities]{attack target
         abilities}, @Wiki[Category:Conjured spells]{conjured}
         @Wiki[Category:Spell target abilities]{spells}, or other types of
-        @Pack[teriock.abilities]{abilities}.</p><h4>Other</h4><p>Some ability
-        targets don't fit nearly into one of the predefined categories. In these
-        cases, the ability's target will just say
-        "other".</p><h2>Range</h2><p>Each Ability has some Range over which it
-        can be used. These depend on the Delivery and
-        Target.</p><h2>Delivery</h2><p>Every Ability has one and <i>only one</i>
-        @Wiki[Category:Delivery abilities]{delivery}. This always has at least
-        two parts, a <a href="#Source">Source</a> and <a
-        href="#Interaction">Interaction</a>.</p><h3>Source</h3><p>The Source of
-        an Ability's Delivery is the means by which it is transmitted from the
-        User to the Target. There are many possible Sources, but the most common
-        ones are as follows.</p><h4>Item</h4><p><b>Item delivery</b> abilities
-        are transmitted from the Executor to the Targets via one of the Executor
-        items. Some @Wiki[Category:Item delivery abilities]{item delivery
-        abilities} may only specify "item" as the Source. Others may give a more
-        specific description such as
+        @Pack[teriock.abilities]{abilities}.</p><h4>Other</h4><p>Some
+        @Pack[teriock.abilities]{ability} targets don't fit nearly into one of
+        the predefined categories. In these cases, the
+        @Pack[teriock.abilities]{ability's} target will just say
+        "<b>other</b>".</p><h2>Range</h2><p>Each
+        @Pack[teriock.abilities]{ability} has some <b>range</b> over which it
+        can be used. These depend on the @Wiki[Category:Delivery
+        abilities]{delivery} and @Wiki[Category:Target
+        abilities]{target}.</p><h2>Delivery</h2><p>Every
+        @Pack[teriock.abilities]{ability} has one and <i>only one</i>
+        <b>delivery</b>. This always has at least two parts, a <a
+        href="#Source">source</a> and <a
+        href="#Interaction">interaction</a>.</p><h4>Source</h4><p>The source of
+        an @Pack[teriock.abilities]{ability's} delivery is the means by which it
+        is transmitted from the @Identifier[core:executor]{executor} to the
+        @Identifier[core:targets]{target}. There are many possible sources, but
+        the most common ones are as follows.</p><h5>Item</h5><p><b>Item
+        delivery</b> abilities are transmitted from the
+        @Identifier[core:executor]{executor} to the
+        @Identifier[core:targets]{target} via one of the
+        @Identifier[core:executor]{executor's} items. Some @Wiki[Category:Item
+        delivery abilities]{item delivery abilities} may only specify "item" as
+        the source. Others may give a more specific description such as
         "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
         "@UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}",
         or "@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}".
@@ -588,22 +599,26 @@ pages:
         @Identifier[core:range]{range} of @Wiki[Category:Item delivery
         abilities]{item delivery abilities} is that of the
         @Wiki[Category:Armaments]{item} that delivers
-        it.</p><h4>Missile</h4><p>Abilities with the missile source are those
-        that would have spell stones in live action <a target="_blank"
-        rel="nofollow noreferrer noopener" class="external text"
-        href="https://www.fanwar.com/">FanWar</a>. These are most often
-        @Identifier[core:attack-interaction]{attacks}, but do not have any
-        physical weapon that mediates them. Instead, these Abilities may
-        correspond to a ball of fire, a bolt of lightning, a gust of wind, or
-        some other phenomenon. Missile
-        @Identifier[core:attack-interaction]{attacks} have
+        it.</p><h5>Missile</h5><p>@Pack[teriock.abilities]{Abilities} with the
+        <b>missile</b> source are those that would have spell stones in live
+        action <a target="_blank" rel="nofollow noreferrer noopener"
+        class="external text" href="https://www.fanwar.com/">FanWar</a>. These
+        are most often @Identifier[core:attack-interaction]{attacks}, but do not
+        have any physical
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} or
+        other @Wiki[Category:Armaments]{item} that mediates them. Instead, these
+        @Pack[teriock.abilities]{abilities} may correspond to a
+        @Identifier[ability:fire-ball]{ball of fire}, a
+        @Identifier[ability:lightning-ray]{bolt of lightning}, a
+        @Identifier[ability:wind-shuriken]{gust of wind}, or some other
+        phenomenon. Missile @Identifier[core:attack-interaction]{attacks} have
         @Identifier[core:disadvantage]{disadvantage} on targets that have their
-        executor within melee range. Missile sourced abilities also requite that
-        the creature executing them have an open hand.</p><p
-        class="note"><b>Note:</b> A creature with
-        @Identifier[ability:staff-touch]{Staff Touch} wielding a
+        @Identifier[core:executor]{executor} within melee range. Missile sourced
+        @Pack[teriock.abilities]{abilities} also requite that the creature
+        executing them have an open hand.</p><p class="note"><b>Note:</b> A
+        creature with @Identifier[ability:staff-touch]{Staff Touch} wielding a
         @Identifier[property:magelore]{magelore item} in their hand, counts as
-        having that hand open.</p><h4>Sight</h4><p>Abilities sourced by
+        having that hand open.</p><h5>Sight</h5><p>Abilities sourced by
         <b>sight</b> do <i>not</i> require the user to literally see the target
         with their eyeballs. While that's still necessary in most cases, some
         creatures may have some sort of "@Wiki[Category:Sensory
@@ -615,13 +630,14 @@ pages:
         <i>may not</i> actually be as far as the user can see. For instance,
         @Identifier[ability:duel]{Duel} operates by sight, but has a range of 30
         feet even though the user may see the target from much further
-        away.</p><h4>Aura</h4><p>Abilities with the <b>aura</b> delivery source
-        are ones that could affect every target within some specified radius,
-        centered on the @Identifier[core:executor]{executor}. Unless
-        specifically noted by the ability, the
+        away.</p><h5>Aura</h5><p>@Pack[teriock.abilities]{Abilities} with the
+        <b>aura</b> delivery source are ones that could affect every target
+        within some specified radius, centered on the
+        @Identifier[core:executor]{executor}. Unless specifically noted by the
+        @Pack[teriock.abilities]{ability}, the
         @Identifier[core:executor]{executor} is not affected by
         @Wiki[Category:Aura delivery abilities]{aura
-        abilities}.</p><h4>Hand</h4><p>Like with @Wiki[Category:Sight delivery
+        abilities}.</p><h5>Hand</h5><p>Like with @Wiki[Category:Sight delivery
         abilities]{sight} and eyeballs, @Wiki[Category:Hand delivery
         abilities]{hand delivery sourced abilities} don't require the user to
         physically have a dexterous humanoid hand with recognizable fingers.
@@ -638,7 +654,7 @@ pages:
         abilities]{hand delivery sourced abilities} is the reach of the
         @Identifier[core:executor]{executor's} arm (or other appendage). This
         depends in part on the creature's @Identifier[core:size]{size}, but is
-        usually 5 feet.</p><h4>Bite</h4><p>Abilities with the
+        usually 5 feet.</p><h5>Bite</h5><p>Abilities with the
         @Wiki[Category:Bite delivery abilities]{bite delivery source} are
         similar to @Wiki[Category:Hand delivery abilities]{hand abilities}, but
         they are transmitted with something that at least <i>resembles</i> a
@@ -649,19 +665,38 @@ pages:
         reach of the @Identifier[core:executor]{executor's} neck (or other
         similar body part). This depends in part on the creature's
         @Identifier[core:size]{size}, but is usually 5
-        feet.</p><h4>Self</h4><p>Self Sourced Abilities are the simplest ones.
-        They have no special means of transmission, but simply come from the
-        User. This is sometimes used as a catch-all for Abilities that don't fit
-        with any other Source.</p><h3>Interaction</h3><p>In addition to a
-        Source, every Ability is mediated by one of four
-        @Identifier[core:interactions]{interactions}. This determines what types
-        of dice rolls, if any, need to be done for an Ability to affect its
-        Target. See the @Identifier[core:interactions]{interactions} page for
-        complete detail.</p><h3>Other Delivery Modifiers</h3><p>Some Abilities
-        are <i>always</i> @Identifier[keyword:armor-voiding]{AV0} or
+        feet.</p><h5>Self</h5><p><b>Self</b> sourced
+        @Pack[teriock.abilities]{abilities} are the simplest ones. They have no
+        special means of transmission, but simply come from the
+        @Identifier[core:executor]{executor}. This is sometimes used as a
+        catch-all for @Pack[teriock.abilities]{abilities} that don't fit with
+        any other source.</p><h4>Interaction</h4><p>In addition to a <a
+        href="#Source">source</a>, every @Pack[teriock.abilities]{ability} is
+        mediated by one of four @Identifier[core:interactions]{interactions}.
+        This determines what types of dice rolls, if any, need to be done for an
+        @Pack[teriock.abilities]{ability} to affect its
+        @Wiki[Category:Targets]{target}. See the
+        @Identifier[core:interactions]{interactions} page for complete
+        detail.</p><h4>Other Delivery Modifiers</h4><p>Some
+        @Pack[teriock.abilities]{abilities} are <i>always</i>
+        @Identifier[keyword:armor-voiding]{AV0} or
         @Identifier[keyword:unblockable]{UB}. When this is the case, it's
-        mentioned within the Delivery.</p><h3>Delivery Packages</h3><p>Abilities
-        may be listed as @Wiki[Category:Strike delivery abilities]{strikes},
+        mentioned within the delivery.</p><h4>Delivery
+        Packages</h4><p>@Pack[teriock.abilities]{Abilities} may be listed as
+        @Wiki[Category:Strike delivery abilities]{strikes},
+        @Wiki[Category:Ritual delivery abilities]{rituals}, @Wiki[Category:Touch
+        delivery abilities]{touches}, @Wiki[Category:Ball delivery
+        abilities]{balls}, or @Wiki[Category:Ray delivery abilities]{rays}.
+        These represent certain common deliveries composed out of the source and
+        interaction primitives as well as other modifiers. What exactly these
+        mean is listed in parentheses in the "delivery" section of relevant
+        @Pack[teriock.abilities]{abilities}.</p><h3>Other Delivery
+        Modifiers</h3><p>Some Abilities are <i>always</i>
+        @Identifier[keyword:armor-voiding]{AV0} or
+        @Identifier[keyword:unblockable]{UB}. When this is the case, it's
+        mentioned within the Delivery.</p><h3>Delivery
+        Packages</h3><p>@Pack[teriock.abilities]{Abilities} may be listed as
+        @Wiki[Category:Strike delivery abilities]{strikes},
         @Wiki[Category:Ritual delivery abilities]{rituals}, @Wiki[Category:Touch
         delivery abilities]{touches}, @Wiki[Category:Ball delivery
         abilities]{balls}, or @Wiki[Category:Ray delivery abilities]{rays}.
@@ -669,12 +704,12 @@ pages:
         interaction primitives as well as other modifiers. What exactly these
         mean is listed in parentheses in the "delivery" section of relevant
         @Pack[teriock.abilities]{abilities}.</p><h2>Execution or Casting
-        Time</h2><p>Each Ability has a specified amount of "time" it takes to
-        use. For @Wiki[Category:Spells]{spells} this is called the "Casting"
-        time. For @Wiki[Category:Skills]{skills} and other
-        @Pack[teriock.abilities]{abilities} this is the "Execution" time. This
+        Time</h2><p>Each @Pack[teriock.abilities]{ability} has a specified
+        amount of "time" it takes to use. For @Wiki[Category:Spells]{spells}
+        this is called the "casting" time. For other
+        @Pack[teriock.abilities]{abilities} this is the "execution" time. This
         is always paired with the type of @Identifier[core:maneuvers]{maneuver}
-        (written in parentheses) the Ability operates under.</p><p>Make sure to
+        the @Pack[teriock.abilities]{ability} operates under.</p><p>Make sure to
         read the @Identifier[core:maneuvers]{maneuvers} page for complete
         information.</p><h2>Duration</h2><p>The <b>duration</b> of an
         @Pack[teriock.abilities]{ability} is the <i>maximum</i> amount of time
@@ -693,27 +728,13 @@ pages:
         be "@Wiki[Category:Magically powered abilities]{magical}",
         "@Wiki[Category:Spiritually powered abilities]{spiritual}", or powered
         through other means. For an @Pack[teriock.abilities]{ability} to work,
-        <i>all</i> power sources must be accessible.</p><h3>Standard
-        Abilities</h3><p>Noted under the "delivery sources" section of an
-        @Pack[teriock.abilities]{ability}, is whether it is considered
-        <b>@UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{standard}</b>.
-        This is a legacy term inherited from live action <a target="_blank"
-        rel="nofollow noreferrer noopener" class="external text"
-        href="https://www.fanwar.com/">FanWar</a> and has no mechanical effect
-        in <a target="_blank" rel="nofollow noreferrer noopener" class="external
-        text" href="https://www.teriock.com/">Teriock</a> Online. In live action
-        <a target="_blank" rel="nofollow noreferrer noopener" class="external
-        text" href="https://www.fanwar.com/">FanWar</a>, these
-        @Pack[teriock.abilities]{abilities} are typically those given by
-        @Pack[teriock.classes]{classes} or those that are particularly common,
-        well known, or easy to interact with. @Wiki[Category:Conjured
-        spells]{Standard spells} are referred to as <b>@Wiki[Category:Conjured
-        spells]{conjured}</b> and @Wiki[Category:Semblant skills]{standard
-        skills} as <b>@Wiki[Category:Semblant
-        skills]{semblant}</b>.</p><h2>Effect Types</h2><p>Some Abilities are
-        considered "effects" of various types. Effect types don't generally
-        influence the way Abilities mechanically operate. However, many
-        Abilities interact with different effect types in various
+        <i>all</i> power sources must be accessible.</p><h2>Effect
+        Types</h2><p>Some @Pack[teriock.abilities]{abilities} are considered
+        "effects" of various types. <b>@Wiki[Category:Effects]{Effect types}</b>
+        don't <i>generally</i> influence the way
+        @Pack[teriock.abilities]{abilities} mechanically operate. However, many
+        @Pack[teriock.abilities]{abilities} interact with different
+        @Wiki[Category:Effects]{effect types} in various
         ways.</p><h2>Heightening</h2><p>Some @Wiki[Category:Heightened
         abilities]{abilities} allow you to <b>heighten</b> them. In these cases,
         you can choose to spend additional
@@ -728,24 +749,64 @@ pages:
         @Identifier[core:attack-interaction]{attack ability} is heightened, it
         gets +1 to hit per level of heightening. If a @Wiki[Category:Feat
         abilities]{feat ability} is heightened, it gets +1 to the DC per level
-        of heightening.</p><h2>Components</h2><p>Many @Wiki[Category:Component
+        of heightening.</p><h2>Costs</h2><p>@Wiki[Category:Cost abilities]{Some
+        abilities} have <b>costs</b> that must be spent in order to use them.
+        These could be @Wiki[Category:HP cost abilities]{HP}, @Wiki[Category:MP
+        cost abilities]{MP}, or something else. If the cost is not paid, then
+        the @Pack[teriock.abilities]{ability} does not
+        execute.</p><h3>Components</h3><p>Many @Wiki[Category:Component
         abilities]{abilities} require one or more components in order to be
-        executed.</p><h3>Verbal Components</h3><p>If an @Wiki[Category:Verbal
+        executed.</p><h4>Verbal Components</h4><p>If an @Wiki[Category:Verbal
         component abilities]{ability} has a verbal component, the creature
         executing it must be able to speak to do so. The must not be
-        @Identifier[condition:deaf]{deaf}.</p><h3>Somatic Components</h3><p>If
+        @Identifier[condition:deaf]{deaf}.</p><h4>Somatic Components</h4><p>If
         an @Wiki[Category:Somatic component abilities]{ability} has a somatic
         component, the creature executing it must have at least one free hand to
         do so. If the creature has an @Identifier[damage:hack]{arm hack} then it
         must have both hands free. If the creature has two
         @Identifier[damage:hack]{arm hacks} then it cannot execute the
-        @Wiki[Category:Somatic component abilities]{ability}.</p><h3>Material
-        Components</h3><p>If an @Wiki[Category:Material component
+        @Wiki[Category:Somatic component abilities]{ability}.</p><h4>Material
+        Components</h4><p>If an @Wiki[Category:Material component
         abilities]{ability} has a material component, the creature executing it
         must have the material component on hand to do so. The specific material
         component is listed in the @Wiki[Category:Material component
         abilities]{ability's} description. Material components are consumed by
-        the ability unless otherwise noted.</p>
+        the ability unless otherwise noted.</p><h2>Expansions</h2><p>An ability
+        that <b>expands</b> is one that has special rules that may give it
+        additional targets. These are specific to the type of expansion (such as
+        @Identifier[core:cascade-expansion]{cascades} and
+        @Identifier[core:detonate-expansion]{detonations}). If an ability has an
+        <b>expansion cap</b> than that is the maximum number of times that the
+        expansion executes.</p><h4>Cascade Expansion</h4><p>An
+        @Pack[teriock.abilities]{ability} that <b>cascades</b> is one that
+        executes again if it hits the target and does not
+        @Identifier[core:fizzles]{fizzle}. This can happen a maximum number of
+        times equal to the value specified in the expansion range and occur
+        sequentially, each new target being within the expansion range of the
+        previous. You choose the additional targets. These extra executions do
+        <i>not</i> count as new attacks for the purposes of
+        @Identifier[core:multiple-attacks]{attack penalties}, although they must
+        still be rolled.</p><h4>Detonate Expansion</h4><p>An
+        @Pack[teriock.abilities]{ability} that <b>detonates</b> is one that
+        executes again as an @Wiki[Category:Aura delivery abilities]{aura} if it
+        hits its initial target and does not
+        @Identifier[core:fizzles]{fizzle}.</p><h2>Standard
+        Abilities</h2><p>Noted under the "delivery sources" section of an
+        @Pack[teriock.abilities]{ability}, is whether it is considered
+        <b>@UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{standard}</b>.
+        This is a legacy term inherited from live action <a target="_blank"
+        rel="nofollow noreferrer noopener" class="external text"
+        href="https://www.fanwar.com/">FanWar</a> and has no mechanical effect
+        in <a target="_blank" rel="nofollow noreferrer noopener" class="external
+        text" href="https://www.teriock.com/">Teriock</a> Online. In live action
+        <a target="_blank" rel="nofollow noreferrer noopener" class="external
+        text" href="https://www.fanwar.com/">FanWar</a>, these
+        @Pack[teriock.abilities]{abilities} are typically those given by
+        @Pack[teriock.classes]{classes} or those that are particularly common,
+        well known, or easy to interact with. @Wiki[Category:Conjured
+        spells]{Standard spells} are referred to as <b>@Wiki[Category:Conjured
+        spells]{conjured}</b> and @Wiki[Category:Semblant skills]{standard
+        skills} as <b>@Wiki[Category:Semblant skills]{semblant}</b>.</p>
       format: 1
     title:
       level: 1
@@ -760,9 +821,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Area Target
     system:
@@ -770,10 +832,11 @@ pages:
       img: systems/teriock/src/icons/core-rules/area-target.webp
     text:
       content: >-
-        <p>Abilities that target an area do not have a precisely defined size.
-        Rather, they affect a small, cohesive space such as a campsite, a room
-        in a dungeon, or a small shack. These abilities may or may not have a
-        range specified.</p>
+        <p>@Pack[teriock.abilities]{Abilities} that target an <b>area</b> do not
+        have a precisely defined size. Rather, they affect a small, cohesive
+        space such as a campsite, a room in a dungeon, or a small shack. These
+        @Pack[teriock.abilities]{abilities} may or may not have a
+        @Identifier[core:range]{range} specified.</p>
       format: 1
     title:
       level: 1
@@ -788,9 +851,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Attack Interaction
     system:
@@ -917,9 +981,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Aura Delivery
     system:
@@ -927,10 +992,11 @@ pages:
       img: systems/teriock/src/icons/core-rules/aura-delivery.webp
     text:
       content: >-
-        <p>Abilities with the <b>aura</b> delivery source are ones that could
-        affect every target within some specified radius, centered on the
-        @Identifier[core:executor]{executor}. Unless specifically noted by the
-        ability, the @Identifier[core:executor]{executor} is not affected by
+        <p>@Pack[teriock.abilities]{Abilities} with the <b>aura</b> delivery
+        source are ones that could affect every target within some specified
+        radius, centered on the @Identifier[core:executor]{executor}. Unless
+        specifically noted by the @Pack[teriock.abilities]{ability}, the
+        @Identifier[core:executor]{executor} is not affected by
         @Wiki[Category:Aura delivery abilities]{aura abilities}.</p>
       format: 1
     title:
@@ -3303,9 +3369,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Block Interaction
     system:
@@ -3372,9 +3439,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Base Damage
     system:
@@ -3403,9 +3471,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Bite Delivery
     system:
@@ -3571,9 +3640,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Cascade Expansion
     system:
@@ -3615,18 +3685,18 @@ pages:
     text:
       content: >-
         <p>Many @Wiki[Category:Component abilities]{abilities} require one or
-        more components in order to be executed.</p><h2>Verbal
-        Components</h2><p>If an @Wiki[Category:Verbal component
+        more components in order to be executed.</p><h3>Verbal
+        Components</h3><p>If an @Wiki[Category:Verbal component
         abilities]{ability} has a verbal component, the creature executing it
         must be able to speak to do so. The must not be
-        @Identifier[condition:deaf]{deaf}.</p><h2>Somatic Components</h2><p>If
+        @Identifier[condition:deaf]{deaf}.</p><h3>Somatic Components</h3><p>If
         an @Wiki[Category:Somatic component abilities]{ability} has a somatic
         component, the creature executing it must have at least one free hand to
         do so. If the creature has an @Identifier[damage:hack]{arm hack} then it
         must have both hands free. If the creature has two
         @Identifier[damage:hack]{arm hacks} then it cannot execute the
-        @Wiki[Category:Somatic component abilities]{ability}.</p><h2>Material
-        Components</h2><p>If an @Wiki[Category:Material component
+        @Wiki[Category:Somatic component abilities]{ability}.</p><h3>Material
+        Components</h3><p>If an @Wiki[Category:Material component
         abilities]{ability} has a material component, the creature executing it
         must have the material component on hand to do so. The specific material
         component is listed in the @Wiki[Category:Material component
@@ -3646,9 +3716,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Creature Target
     system:
@@ -3920,9 +3991,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Delivery Packages
     system:
@@ -3930,14 +4002,15 @@ pages:
       img: systems/teriock/src/icons/core-rules/delivery-packages.webp
     text:
       content: >-
-        <p>Abilities may be listed as @Wiki[Category:Strike delivery
-        abilities]{strikes}, @Wiki[Category:Ritual delivery abilities]{rituals},
-        @Wiki[Category:Touch delivery abilities]{touches}, @Wiki[Category:Ball
-        delivery abilities]{balls}, or @Wiki[Category:Ray delivery
-        abilities]{rays}. These represent certain common deliveries composed out
-        of the source and interaction primitives as well as other modifiers.
-        What exactly these mean is listed in parentheses in the "delivery"
-        section of relevant @Pack[teriock.abilities]{abilities}.</p>
+        <p>@Pack[teriock.abilities]{Abilities} may be listed as
+        @Wiki[Category:Strike delivery abilities]{strikes},
+        @Wiki[Category:Ritual delivery abilities]{rituals}, @Wiki[Category:Touch
+        delivery abilities]{touches}, @Wiki[Category:Ball delivery
+        abilities]{balls}, or @Wiki[Category:Ray delivery abilities]{rays}.
+        These represent certain common deliveries composed out of the source and
+        interaction primitives as well as other modifiers. What exactly these
+        mean is listed in parentheses in the "delivery" section of relevant
+        @Pack[teriock.abilities]{abilities}.</p>
       format: 1
     title:
       level: 1
@@ -3952,9 +4025,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Death Scars
     system:
@@ -4020,9 +4094,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Detonate Expansion
     system:
@@ -5785,9 +5860,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Feat Interaction
     system:
@@ -5821,32 +5897,6 @@ pages:
         @Identifier[core:proficiency-bonus]{P}. If not, then it's just
         10.</p><p><img class="interaction-routine"
         src="systems/teriock/src/assets/interaction-routines/complete-feat-interaction.svg"></p>
-      format: 1
-    title:
-      level: 1
-      show: true
-    type: rule
-    video:
-      controls: true
-      volume: 0.5
-  - _id: executer00000000
-    _key: "!journal.pages!core000000000000.executer00000000"
-    _stats:
-      coreVersion: "14"
-      lastModifiedBy: teriockBuilder00
-      systemId: teriock
-      systemVersion: 0.12.78
-    flags:
-      teriock:
-        journalIcon: ms-book-2
-    name: Executer
-    system:
-      identifier: executer
-      img: systems/teriock/src/icons/core-rules/executer.webp
-    text:
-      content: >-
-        <p>The <b>executer</b> of an @Pack[teriock.abilities]{ability} is the
-        creature that executes it.</p>
       format: 1
     title:
       level: 1
@@ -5902,7 +5952,20 @@ pages:
         (such as @Identifier[core:cascade-expansion]{cascades} and
         @Identifier[core:detonate-expansion]{detonations}). If an ability has an
         <b>expansion cap</b> than that is the maximum number of times that the
-        expansion executes.</p>
+        expansion executes.</p><h3>Cascade Expansion</h3><p>An
+        @Pack[teriock.abilities]{ability} that <b>cascades</b> is one that
+        executes again if it hits the target and does not
+        @Identifier[core:fizzles]{fizzle}. This can happen a maximum number of
+        times equal to the value specified in the expansion range and occur
+        sequentially, each new target being within the expansion range of the
+        previous. You choose the additional targets. These extra executions do
+        <i>not</i> count as new attacks for the purposes of
+        @Identifier[core:multiple-attacks]{attack penalties}, although they must
+        still be rolled.</p><h3>Detonate Expansion</h3><p>An
+        @Pack[teriock.abilities]{ability} that <b>detonates</b> is one that
+        executes again as an @Wiki[Category:Aura delivery abilities]{aura} if it
+        hits its initial target and does not
+        @Identifier[core:fizzles]{fizzle}.</p>
       format: 1
     title:
       level: 1
@@ -6465,9 +6528,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Hand Delivery
     system:
@@ -7314,9 +7378,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Item Delivery
     system:
@@ -7324,10 +7389,12 @@ pages:
       img: systems/teriock/src/icons/core-rules/item-delivery.webp
     text:
       content: >-
-        <p><b>Item delivery</b> abilities are transmitted from the Executor to
-        the Targets via one of the Executor items. Some @Wiki[Category:Item
+        <p><b>Item delivery</b> abilities are transmitted from the
+        @Identifier[core:executor]{executor} to the
+        @Identifier[core:targets]{target} via one of the
+        @Identifier[core:executor]{executor's} items. Some @Wiki[Category:Item
         delivery abilities]{item delivery abilities} may only specify "item" as
-        the Source. Others may give a more specific description such as
+        the source. Others may give a more specific description such as
         "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
         "@UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}",
         or "@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}".
@@ -9202,9 +9269,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Item Target
     system:
@@ -9247,9 +9315,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Material Components
     system:
@@ -9277,9 +9346,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Limb Target
     system:
@@ -9288,12 +9358,13 @@ pages:
     text:
       content: >-
         <p>Rather than hitting an entire creature, some
-        @Pack[teriock.abilities]{abilities} will say that they only hit arms,
-        legs, or limbs. If @Wiki[Category:Limb target abilities]{these
-        abilities} are @Identifier[core:attack-interaction]{attacks}, then they
-        are slightly harder to land a hit with than ones that can hit a creature
-        anywhere. They require hitting that creature's
-        @Identifier[core:armor-class]{AC} + 2.</p>
+        @Pack[teriock.abilities]{abilities} will say that they only hit
+        <b>arms</b>, <b>legs</b>, or <b>limbs</b>. If @Wiki[Category:Limb target
+        abilities]{these abilities} are
+        @Identifier[core:attack-interaction]{attacks}, then they are slightly
+        harder to land a hit with than ones that can hit a creature anywhere.
+        They require hitting that creature's @Identifier[core:armor-class]{AC} +
+        2.</p>
       format: 1
     title:
       level: 1
@@ -9417,9 +9488,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Missile Delivery
     system:
@@ -9427,20 +9499,24 @@ pages:
       img: systems/teriock/src/icons/core-rules/missile-delivery.webp
     text:
       content: >-
-        <p>Abilities with the missile source are those that would have spell
-        stones in live action <a target="_blank" rel="nofollow noreferrer
-        noopener" class="external text"
+        <p>@Pack[teriock.abilities]{Abilities} with the <b>missile</b> source
+        are those that would have spell stones in live action <a target="_blank"
+        rel="nofollow noreferrer noopener" class="external text"
         href="https://www.fanwar.com/">FanWar</a>. These are most often
         @Identifier[core:attack-interaction]{attacks}, but do not have any
-        physical weapon that mediates them. Instead, these Abilities may
-        correspond to a ball of fire, a bolt of lightning, a gust of wind, or
-        some other phenomenon. Missile
-        @Identifier[core:attack-interaction]{attacks} have
+        physical
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} or
+        other @Wiki[Category:Armaments]{item} that mediates them. Instead, these
+        @Pack[teriock.abilities]{abilities} may correspond to a
+        @Identifier[ability:fire-ball]{ball of fire}, a
+        @Identifier[ability:lightning-ray]{bolt of lightning}, a
+        @Identifier[ability:wind-shuriken]{gust of wind}, or some other
+        phenomenon. Missile @Identifier[core:attack-interaction]{attacks} have
         @Identifier[core:disadvantage]{disadvantage} on targets that have their
-        executor within melee range. Missile sourced abilities also requite that
-        the creature executing them have an open hand.</p><p
-        class="note"><b>Note:</b> A creature with
-        @Identifier[ability:staff-touch]{Staff Touch} wielding a
+        @Identifier[core:executor]{executor} within melee range. Missile sourced
+        @Pack[teriock.abilities]{abilities} also requite that the creature
+        executing them have an open hand.</p><p class="note"><b>Note:</b> A
+        creature with @Identifier[ability:staff-touch]{Staff Touch} wielding a
         @Identifier[property:magelore]{magelore item} in their hand, counts as
         having that hand open.</p>
       format: 1
@@ -9457,9 +9533,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Long Rest
     system:
@@ -9498,9 +9575,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Manifest Interaction
     system:
@@ -9567,9 +9645,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Other Target
     system:
@@ -9577,9 +9656,10 @@ pages:
       img: systems/teriock/src/icons/core-rules/other-target.webp
     text:
       content: >-
-        <p>Some ability targets don't fit nearly into one of the predefined
-        categories. In these cases, the ability's target will just say
-        "other".</p>
+        <p>Some @Pack[teriock.abilities]{ability} targets don't fit nearly into
+        one of the predefined categories. In these cases, the
+        @Pack[teriock.abilities]{ability's} target will just say
+        "<b>other</b>".</p>
       format: 1
     title:
       level: 1
@@ -9594,9 +9674,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Movement Speed
     system:
@@ -10308,9 +10389,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Passive Maneuvers
     system:
@@ -10339,9 +10421,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Permanent Death
     system:
@@ -11627,9 +11710,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Reactive Maneuvers
     system:
@@ -11737,9 +11821,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Self Delivery
     system:
@@ -11747,10 +11832,11 @@ pages:
       img: systems/teriock/src/icons/core-rules/self-delivery.webp
     text:
       content: >-
-        <p>Self Sourced Abilities are the simplest ones. They have no special
-        means of transmission, but simply come from the User. This is sometimes
-        used as a catch-all for Abilities that don't fit with any other
-        Source.</p>
+        <p><b>Self</b> sourced @Pack[teriock.abilities]{abilities} are the
+        simplest ones. They have no special means of transmission, but simply
+        come from the @Identifier[core:executor]{executor}. This is sometimes
+        used as a catch-all for @Pack[teriock.abilities]{abilities} that don't
+        fit with any other source.</p>
       format: 1
     title:
       level: 1
@@ -11765,9 +11851,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Self Target
     system:
@@ -11777,7 +11864,7 @@ pages:
       content: >-
         <p><b>Self</b> targeted @Identifier[core:abilities]{abilities} affect
         @Identifier[core:executor]{the creature that executes them}. They
-        typically do not have a range specified.</p>
+        typically do not have a @Identifier[core:range]{range} specified.</p>
       format: 1
     title:
       level: 1
@@ -12037,9 +12124,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Sight Delivery
     system:
@@ -12073,9 +12161,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Short Rest
     system:
@@ -12649,9 +12738,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Slow Maneuvers
     system:
@@ -12723,9 +12813,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Somatic Components
     system:
@@ -12753,9 +12844,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Standard and Critical Damage
     system:
@@ -13834,12 +13926,12 @@ pages:
         @Identifier[core:game-master]{GM} if in doubt of whether something is a
         @Pack[teriock.creatures]{creature} or not.</p><h4>Limb</h4><p>Rather
         than hitting an entire creature, some
-        @Pack[teriock.abilities]{abilities} will say that they only hit arms,
-        legs, or limbs. If @Wiki[Category:Limb target abilities]{these
-        abilities} are @Identifier[core:attack-interaction]{attacks}, then they
-        are slightly harder to land a hit with than ones that can hit a creature
-        anywhere. They require hitting that creature's
-        @Identifier[core:armor-class]{AC} +
+        @Pack[teriock.abilities]{abilities} will say that they only hit
+        <b>arms</b>, <b>legs</b>, or <b>limbs</b>. If @Wiki[Category:Limb target
+        abilities]{these abilities} are
+        @Identifier[core:attack-interaction]{attacks}, then they are slightly
+        harder to land a hit with than ones that can hit a creature anywhere.
+        They require hitting that creature's @Identifier[core:armor-class]{AC} +
         2.</p><h4>Vitals</h4><p><b>Vitals</b> targeted
         @Pack[teriock.abilities]{abilities} need to hit a creature's head or
         other vital organs rather than landing anywhere. If
@@ -13867,22 +13959,26 @@ pages:
         successfully @Identifier[core:block-interaction]{blocked}, it
         automatically hits the item that
         @Identifier[core:block-interaction]{blocked}
-        it.</p><h3>Area</h3><p>Abilities that target an area do not have a
-        precisely defined size. Rather, they affect a small, cohesive space such
-        as a campsite, a room in a dungeon, or a small shack. These abilities
-        may or may not have a range specified.</p><h3>Self</h3><p><b>Self</b>
-        targeted @Identifier[core:abilities]{abilities} affect
+        it.</p><h3>Area</h3><p>@Pack[teriock.abilities]{Abilities} that target
+        an <b>area</b> do not have a precisely defined size. Rather, they affect
+        a small, cohesive space such as a campsite, a room in a dungeon, or a
+        small shack. These @Pack[teriock.abilities]{abilities} may or may not
+        have a @Identifier[core:range]{range}
+        specified.</p><h3>Self</h3><p><b>Self</b> targeted
+        @Identifier[core:abilities]{abilities} affect
         @Identifier[core:executor]{the creature that executes them}. They
-        typically do not have a range specified.</p><h3>Ability</h3><p>Instead
-        of targeting some person, place, or other physical thing, some
-        @Pack[teriock.abilities]{abilities} target other
-        @Pack[teriock.abilities]{abilities}. These include cases that target
-        @Wiki[Category:Attack target abilities]{attack target abilities},
-        @Wiki[Category:Conjured spells]{conjured} @Wiki[Category:Spell target
-        abilities]{spells}, or other types of
-        @Pack[teriock.abilities]{abilities}.</p><h3>Other</h3><p>Some ability
-        targets don't fit nearly into one of the predefined categories. In these
-        cases, the ability's target will just say "other".</p>
+        typically do not have a @Identifier[core:range]{range}
+        specified.</p><h3>Ability</h3><p>Instead of targeting some person,
+        place, or other physical thing, some @Pack[teriock.abilities]{abilities}
+        target other @Pack[teriock.abilities]{abilities}. These include cases
+        that target @Wiki[Category:Attack target abilities]{attack target
+        abilities}, @Wiki[Category:Conjured spells]{conjured}
+        @Wiki[Category:Spell target abilities]{spells}, or other types of
+        @Pack[teriock.abilities]{abilities}.</p><h3>Other</h3><p>Some
+        @Pack[teriock.abilities]{ability} targets don't fit nearly into one of
+        the predefined categories. In these cases, the
+        @Pack[teriock.abilities]{ability's} target will just say
+        "<b>other</b>".</p>
       format: 1
     title:
       level: 1
@@ -13897,9 +13993,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Tradecraft Fluencies
     system:
@@ -15462,9 +15559,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Verbal Components
     system:
@@ -15524,9 +15622,10 @@ pages:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.12.78
+      systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Vitals Target
     system:
@@ -16062,6 +16161,7 @@ pages:
       systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Ball Delivery Package
     system:
@@ -16095,8 +16195,8 @@ pages:
       img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
     text:
       content: >-
-        <p>The <b>executor</b> of an @Pack[teriock.abilities]{ability} is the
-        creature that executes it.</p>
+        <p>The <b>executor</b> (or user) of an @Pack[teriock.abilities]{ability}
+        is the creature that executes it.</p>
       format: 1
     title:
       level: 1
@@ -16114,6 +16214,7 @@ pages:
       systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Ray Delivery Package
     system:
@@ -16140,6 +16241,7 @@ pages:
       systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Strike Delivery Package
     system:
@@ -16166,6 +16268,7 @@ pages:
       systemVersion: 0.14.7
     flags:
       teriock:
+        hiddenSubpage: true
         journalIcon: ms-book-2
     name: Touch Delivery Package
     system:
@@ -16175,6 +16278,144 @@ pages:
       content: >-
         <p>A <b>touch</b> is a @Identifier[keyword:unblockable]{UB}
         @Identifier[core:hand-delivery]{hand delivery}.</p>
+      format: 1
+    title:
+      level: 1
+      show: true
+    type: rule
+    video:
+      controls: true
+      volume: 0.5
+  - _id: deliveries000000
+    _key: "!journal.pages!core000000000000.deliveries000000"
+    _stats:
+      coreVersion: "14"
+      lastModifiedBy: teriockBuilder00
+      systemId: teriock
+      systemVersion: 0.14.7
+    flags:
+      teriock:
+        journalIcon: ms-book-2
+    name: Deliveries
+    system:
+      identifier: deliveries
+      img: systems/teriock/src/icons/powers/learned-elder-sorceries.webp
+    text:
+      content: >-
+        <p>Every @Pack[teriock.abilities]{ability} has one and <i>only one</i>
+        <b>delivery</b>. This always has at least two parts, a <a
+        href="#Source">source</a> and <a
+        href="#Interaction">interaction</a>.</p><h3>Source</h3><p>The source of
+        an @Pack[teriock.abilities]{ability's} delivery is the means by which it
+        is transmitted from the @Identifier[core:executor]{executor} to the
+        @Identifier[core:targets]{target}. There are many possible sources, but
+        the most common ones are as follows.</p><h4>Item</h4><p><b>Item
+        delivery</b> abilities are transmitted from the
+        @Identifier[core:executor]{executor} to the
+        @Identifier[core:targets]{target} via one of the
+        @Identifier[core:executor]{executor's} items. Some @Wiki[Category:Item
+        delivery abilities]{item delivery abilities} may only specify "item" as
+        the source. Others may give a more specific description such as
+        "@UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}",
+        "@UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}",
+        or "@UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}".
+        These are all considered to be delivered with items and are just a
+        shorthand for the type of item that can be used.</p><p>The
+        @Identifier[core:range]{range} of @Wiki[Category:Item delivery
+        abilities]{item delivery abilities} is that of the
+        @Wiki[Category:Armaments]{item} that delivers
+        it.</p><h4>Missile</h4><p>@Pack[teriock.abilities]{Abilities} with the
+        <b>missile</b> source are those that would have spell stones in live
+        action <a target="_blank" rel="nofollow noreferrer noopener"
+        class="external text" href="https://www.fanwar.com/">FanWar</a>. These
+        are most often @Identifier[core:attack-interaction]{attacks}, but do not
+        have any physical
+        @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} or
+        other @Wiki[Category:Armaments]{item} that mediates them. Instead, these
+        @Pack[teriock.abilities]{abilities} may correspond to a
+        @Identifier[ability:fire-ball]{ball of fire}, a
+        @Identifier[ability:lightning-ray]{bolt of lightning}, a
+        @Identifier[ability:wind-shuriken]{gust of wind}, or some other
+        phenomenon. Missile @Identifier[core:attack-interaction]{attacks} have
+        @Identifier[core:disadvantage]{disadvantage} on targets that have their
+        @Identifier[core:executor]{executor} within melee range. Missile sourced
+        @Pack[teriock.abilities]{abilities} also requite that the creature
+        executing them have an open hand.</p><p class="note"><b>Note:</b> A
+        creature with @Identifier[ability:staff-touch]{Staff Touch} wielding a
+        @Identifier[property:magelore]{magelore item} in their hand, counts as
+        having that hand open.</p><h4>Sight</h4><p>Abilities sourced by
+        <b>sight</b> do <i>not</i> require the user to literally see the target
+        with their eyeballs. While that's still necessary in most cases, some
+        creatures may have some sort of "@Wiki[Category:Sensory
+        effects]{blindsight}" that allows them to "see" other creatures even
+        when there's no light in the environment. Nevertheless, these abilities
+        always require that the user have some sort of direct "visibility" of
+        the target akin to seeing them directly. Regardless of how exactly the
+        user sees the target, sight abilities can be used over some range that
+        <i>may not</i> actually be as far as the user can see. For instance,
+        @Identifier[ability:duel]{Duel} operates by sight, but has a range of 30
+        feet even though the user may see the target from much further
+        away.</p><h4>Aura</h4><p>@Pack[teriock.abilities]{Abilities} with the
+        <b>aura</b> delivery source are ones that could affect every target
+        within some specified radius, centered on the
+        @Identifier[core:executor]{executor}. Unless specifically noted by the
+        @Pack[teriock.abilities]{ability}, the
+        @Identifier[core:executor]{executor} is not affected by
+        @Wiki[Category:Aura delivery abilities]{aura
+        abilities}.</p><h4>Hand</h4><p>Like with @Wiki[Category:Sight delivery
+        abilities]{sight} and eyeballs, @Wiki[Category:Hand delivery
+        abilities]{hand delivery sourced abilities} don't require the user to
+        physically have a dexterous humanoid hand with recognizable fingers.
+        Some creatures with claws, tentacles, or other appendages can use Hand
+        Abilities without problem. However, something of this nature is always
+        required. If a creature that typically has
+        @Identifier[equipment:hand]{literal hands} has their arms
+        @Identifier[ability:hack]{Hacked} or has their
+        @Identifier[equipment:hand]{hands} cut off, then they are unable to use
+        @Wiki[Category:Hand delivery abilities]{hand delivered abilities}. It
+        may be possible for them to find other ways to use these abilities in
+        the future, but that's up to @Identifier[core:game-master]{GM}
+        discretion.</p><p>The range of @Wiki[Category:Hand delivery
+        abilities]{hand delivery sourced abilities} is the reach of the
+        @Identifier[core:executor]{executor's} arm (or other appendage). This
+        depends in part on the creature's @Identifier[core:size]{size}, but is
+        usually 5 feet.</p><h4>Bite</h4><p>Abilities with the
+        @Wiki[Category:Bite delivery abilities]{bite delivery source} are
+        similar to @Wiki[Category:Hand delivery abilities]{hand abilities}, but
+        they are transmitted with something that at least <i>resembles</i> a
+        @Identifier[body:mouth]{mouth} rather than a
+        @Identifier[body:hand]{hand}. These are typically
+        @Identifier[property:biting]{biting}.</p><p>The range of
+        @Wiki[Category:Bite delivery abilities]{bite delivered abilities} is the
+        reach of the @Identifier[core:executor]{executor's} neck (or other
+        similar body part). This depends in part on the creature's
+        @Identifier[core:size]{size}, but is usually 5
+        feet.</p><h4>Self</h4><p><b>Self</b> sourced
+        @Pack[teriock.abilities]{abilities} are the simplest ones. They have no
+        special means of transmission, but simply come from the
+        @Identifier[core:executor]{executor}. This is sometimes used as a
+        catch-all for @Pack[teriock.abilities]{abilities} that don't fit with
+        any other source.</p><h3>Interaction</h3><p>In addition to a <a
+        href="#Source">source</a>, every @Pack[teriock.abilities]{ability} is
+        mediated by one of four @Identifier[core:interactions]{interactions}.
+        This determines what types of dice rolls, if any, need to be done for an
+        @Pack[teriock.abilities]{ability} to affect its
+        @Wiki[Category:Targets]{target}. See the
+        @Identifier[core:interactions]{interactions} page for complete
+        detail.</p><h3>Other Delivery Modifiers</h3><p>Some
+        @Pack[teriock.abilities]{abilities} are <i>always</i>
+        @Identifier[keyword:armor-voiding]{AV0} or
+        @Identifier[keyword:unblockable]{UB}. When this is the case, it's
+        mentioned within the delivery.</p><h3>Delivery
+        Packages</h3><p>@Pack[teriock.abilities]{Abilities} may be listed as
+        @Wiki[Category:Strike delivery abilities]{strikes},
+        @Wiki[Category:Ritual delivery abilities]{rituals}, @Wiki[Category:Touch
+        delivery abilities]{touches}, @Wiki[Category:Ball delivery
+        abilities]{balls}, or @Wiki[Category:Ray delivery abilities]{rays}.
+        These represent certain common deliveries composed out of the source and
+        interaction primitives as well as other modifiers. What exactly these
+        mean is listed in parentheses in the "delivery" section of relevant
+        @Pack[teriock.abilities]{abilities}.</p>
       format: 1
     title:
       level: 1

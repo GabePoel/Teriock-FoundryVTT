@@ -28,7 +28,7 @@ export default function BaseApplicationMixin(Base) {
       event.stopPropagation();
       if (event.target instanceof Element && event.target.closest("[data-collapsible-ignore]")) { return; }
       const collapsibleId = this._getCollapsibleId(target);
-      if (collapsibleId) { this._toggleCollapsed(collapsibleId); }
+      if (collapsibleId) { this._toggleCollapsed(collapsibleId, undefined, target); }
     }
 
     /**
@@ -153,17 +153,19 @@ export default function BaseApplicationMixin(Base) {
     /**
      * Toggle the collapse state of a collapsible element.
      * @param {string} collapsibleId
-     * @param {object} [collapsed]
+     * @param {boolean} [collapsed]
+     * @param {HTMLElement} [target]
      * @returns {boolean} - Final collapsed state.
      */
-    _toggleCollapsed(collapsibleId, collapsed) {
+    _toggleCollapsed(collapsibleId, collapsed, target) {
+      const root = (target instanceof Element && !this.element.contains(target)) ? target.getRootNode() : this.element;
       collapsed ??=
         !(this.collapsibleElements.has(collapsibleId)
           ? this.collapsibleElements.get(collapsibleId)
-          : this.element.querySelector(`.collapsible[data-collapsible-id="${collapsibleId}"]`)?.classList.contains(
+          : root.querySelector(`.collapsible[data-collapsible-id="${collapsibleId}"]`)?.classList.contains(
             "collapsed",
           ));
-      this.#applyCollapsibleState(collapsibleId, collapsed);
+      this.#applyCollapsibleState(collapsibleId, collapsed, root);
       return collapsed;
     }
   }

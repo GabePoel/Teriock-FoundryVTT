@@ -29,4 +29,9 @@ export default class BaseJournalSheet extends BaseApplicationMixin(JournalEntryS
       visible: li => this.#getPage(li)?.system?.isOnWiki,
     }];
   }
+
+  /** @inheritDoc */
+  isPageVisible(page) {
+    return super.isPageVisible(page) && !page.getFlag("teriock", "hiddenSubpage");
+  }
 }
