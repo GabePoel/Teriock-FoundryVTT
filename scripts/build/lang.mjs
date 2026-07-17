@@ -36,12 +36,12 @@ import { default as statuses } from "../../src/en/statuses.json" with { type: "j
 import { default as systems } from "../../src/en/systems.json" with { type: "json" };
 import { default as terms } from "../../src/en/terms.json" with { type: "json" };
 import { default as triggers } from "../../src/en/triggers.json" with { type: "json" };
-import { default as classesContent } from "../../src/index/content/classes.json" with { type: "json" };
-import { default as conditionsContent } from "../../src/index/content/conditions.json" with { type: "json" };
-import { default as keywordsContent } from "../../src/index/content/keywords.json" with { type: "json" };
-import { default as tradecraftsContent } from "../../src/index/content/tradecrafts.json" with { type: "json" };
-import { default as weaponFightingStylesContent } from "../../src/index/content/weapon-fighting-styles.json" with { type: "json" };
-import { default as conditions } from "../../src/index/names/conditions.json" with { type: "json" };
+import { default as classesContent } from "../../src/json/content/classes.json" with { type: "json" };
+import { default as conditionsContent } from "../../src/json/content/conditions.json" with { type: "json" };
+import { default as keywordsContent } from "../../src/json/content/keywords.json" with { type: "json" };
+import { default as tradecraftsContent } from "../../src/json/content/tradecrafts.json" with { type: "json" };
+import { default as weaponFightingStylesContent } from "../../src/json/content/weapon-fighting-styles.json" with { type: "json" };
+import { default as conditions } from "../../src/json/index/conditions.json" with { type: "json" };
 import * as index from "../../src/module/constants/index.mjs";
 import { sortObject } from "../script-utils.mjs";
 

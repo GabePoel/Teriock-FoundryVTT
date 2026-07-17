@@ -1,3 +1,3 @@
-export { default as conditions } from "../../index/data/conditions.json" with { type: "json" };
-export { default as cover } from "../../index/data/cover.json" with { type: "json" };
-export { default as hacks } from "../../index/data/hacks.json" with { type: "json" };
+export { default as conditions } from "../../json/statuses/conditions.json" with { type: "json" };
+export { default as cover } from "../../json/statuses/cover.json" with { type: "json" };
+export { default as hacks } from "../../json/statuses/hacks.json" with { type: "json" };

@@ -1,8 +1,8 @@
-import { default as classes } from "../../index/content/classes.json" with { type: "json" };
-import { default as conditions } from "../../index/content/conditions.json" with { type: "json" };
-import { default as keywords } from "../../index/content/keywords.json" with { type: "json" };
-import { default as tradecrafts } from "../../index/content/tradecrafts.json" with { type: "json" };
-import { default as weaponFightingStyles } from "../../index/content/weapon-fighting-styles.json" with { type: "json" };
+import { default as classes } from "../../json/content/classes.json" with { type: "json" };
+import { default as conditions } from "../../json/content/conditions.json" with { type: "json" };
+import { default as keywords } from "../../json/content/keywords.json" with { type: "json" };
+import { default as tradecrafts } from "../../json/content/tradecrafts.json" with { type: "json" };
+import { default as weaponFightingStyles } from "../../json/content/weapon-fighting-styles.json" with { type: "json" };
 import { preLocalizeConfig } from "../helpers/localization.mjs";
 
 const rawContent = { classes, conditions, keywords, tradecrafts, weaponFightingStyles };

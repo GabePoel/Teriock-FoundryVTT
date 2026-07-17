@@ -1,4 +1,4 @@
-import { default as templates } from "../index/templates.json" with { type: "json" };
+import { default as templates } from "../json/templates.json" with { type: "json" };
 import * as applications from "./applications/_module.mjs";
 import * as canvas from "./canvas/_module.mjs";
 import * as constants from "./constants/_module.mjs";
