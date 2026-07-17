@@ -36,8 +36,7 @@ declare global {
     export type PowerSource = keyof typeof index.powerSources;
 
     // Attribute Keys
-    export type StatAttribute = keyof typeof index.statAttributes;
-    export type Attribute = keyof typeof index.attributes;
+    export type Attribute = keyof typeof config.attribute;
 
     // Stat Keys
     export type Stat = keyof typeof config.stat;
@@ -54,7 +53,6 @@ declare global {
 
     // Armament Keys
     export type EquipmentClass = keyof typeof index.equipmentClasses;
-    export type WeaponClass = keyof typeof index.weaponClasses;
     export type WeaponFightingStyle = keyof typeof index.weaponFightingStyles;
     export type PowerLevel = keyof typeof config.equipment.powerLevel;
 

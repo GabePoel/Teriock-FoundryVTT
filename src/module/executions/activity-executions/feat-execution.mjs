@@ -61,7 +61,7 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
 
   /** @inheritDoc */
   get name() {
-    return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.reference.attributesFull[this.attribute] });
+    return _loc("TERIOCK.ROLLS.Feat.name", { value: TERIOCK.config.attribute[this.attribute]?.label });
   }
 
   /** @inheritDoc */

@@ -15,18 +15,6 @@ export async function selectEquipmentClassDialog() {
 }
 
 /**
- * Dialog to select a weapon class.
- * @returns {Promise<Teriock.Keys.WeaponClass>}
- */
-export async function selectWeaponClassDialog() {
-  return ChoiceSelector.prompt(TERIOCK.reference.weaponClasses, {
-    hint: _loc("TERIOCK.DIALOGS.Select.WeaponClass.hint"),
-    label: _loc("TERIOCK.DIALOGS.Select.WeaponClass.label"),
-    title: _loc("TERIOCK.DIALOGS.Select.WeaponClass.title"),
-  });
-}
-
-/**
  * Dialog to select a condition.
  * @returns {Promise<Teriock.Keys.Condition>}
  */

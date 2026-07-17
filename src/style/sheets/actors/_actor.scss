@@ -66,6 +66,10 @@
     color: white;
     outline: none;
 
+    &:not(.actor-sidebar-tabber) {
+      width: 2.5em;
+    }
+
     &::before {
       opacity: 1;
     }
@@ -135,7 +139,6 @@
       &:focus,
       &:focus-visible,
       &.active {
-        box-shadow: none;
         outline: none;
       }
     }
@@ -426,19 +429,16 @@ body > form:only-child section .actor-page,
         border-left: none !important;
       }
 
-      .expanded-icon {
+      .sidebar-tabber-icon {
         display: flex;
-      }
-
-      .collapsed-icon {
-        display: none;
+        transition: 250ms;
       }
 
       &.collapsed {
         left: 0;
 
-        .expanded-icon {
-          display: none;
+        .sidebar-tabber-icon {
+          transform: scaleX(-1);
         }
 
         .collapsed-icon {

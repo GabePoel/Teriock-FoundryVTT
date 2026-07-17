@@ -121,7 +121,6 @@ export default function AbilityUpgradesPart(Base) {
         } else {
           this.upgrades.score.text = "";
         }
-        if (this.upgrades.competence.value === 0) { this.upgrades.competence.attribute = null; }
         if (this.upgrades.competence.attribute) {
           const attribute = attributeLink(this.upgrades.competence.attribute);
           const amount = this.upgrades.competence.value;

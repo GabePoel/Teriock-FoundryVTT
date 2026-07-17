@@ -37,7 +37,7 @@ export default function AbilityUsagePart(Base) {
             cap: new FormulaField({ deterministic: false }),
             featSaveAttribute: new fields.StringField({
               blank: false,
-              choices: TERIOCK.reference.attributes,
+              choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
               initial: "mov",
               required: true,
             }),
@@ -46,7 +46,7 @@ export default function AbilityUsagePart(Base) {
           }),
           featSaveAttribute: new fields.StringField({
             blank: false,
-            choices: TERIOCK.reference.attributes,
+            choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
             initial: "mov",
             required: true,
           }),
@@ -127,7 +127,7 @@ export default function AbilityUsagePart(Base) {
           time || "",
           this.piercing.label,
           TERIOCK.config.ability.delivery[this.delivery]?.label || "",
-          this.interaction === "feat" ? TERIOCK.reference.attributes[this.featSaveAttribute] : "",
+          this.interaction === "feat" ? TERIOCK.config.attribute[this.featSaveAttribute]?.label : "",
           TERIOCK.config.ability.interaction[this.interaction] || "",
         ];
       }
@@ -140,7 +140,7 @@ export default function AbilityUsagePart(Base) {
         return this.expansion.type
           ? [
             ["detonate", "ripple"].includes(this.expansion.type)
-              ? TERIOCK.reference.attributes[this.expansion.featSaveAttribute]
+              ? TERIOCK.config.attribute[this.expansion.featSaveAttribute]?.label
               : "",
             TERIOCK.config.ability.expansion[this.expansion.type]?.label || "",
             this.expansion.range.abbreviation,

@@ -19,13 +19,13 @@ export default function ActorAttributesPart(Base) {
       /** @inheritDoc */
       static defineSchema() {
         const attributes = {};
-        Object.entries(TERIOCK.reference.attributes).forEach((
+        Object.entries(TERIOCK.config.attribute).forEach((
           [key, value],
         ) => (attributes[key] = new EvaluationField({
           deterministic: false,
           initial: `2 * @${key}.score`,
           interval: 1,
-          label: value,
+          label: value.label,
           min: -Infinity,
           model: AttributeModel,
           score: -3,

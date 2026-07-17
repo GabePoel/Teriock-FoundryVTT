@@ -1,3 +1,4 @@
+import { objectMap } from "../../../helpers/utils.mjs";
 import { FeatActivation } from "../activations/command-activations.mjs";
 import { ThresholdAutomation } from "./abstract/_module.mjs";
 
@@ -18,7 +19,7 @@ export default class FeatAutomation extends ThresholdAutomation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       attribute: new fields.StringField({
-        choices: TERIOCK.reference.attributesFull,
+        choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
         initial: "int",
         label: "TERIOCK.TERMS.Common.attribute",
         required: true,

@@ -5,7 +5,6 @@ import { preLocalizeConfig } from "../helpers/localization.mjs";
 import { toCamelCase } from "../helpers/string.mjs";
 import {
   abilities,
-  attributes,
   bodyParts,
   classes,
   conditions,
@@ -19,10 +18,8 @@ import {
   equipmentClasses,
   powerSources,
   properties,
-  statAttributes,
   tradecrafts,
   traits,
-  weaponClasses,
   weaponFightingStyles,
 } from "./index.mjs";
 
@@ -38,13 +35,8 @@ function prefixKeys(obj, prefix, transform = toCamelCase) {
   return Object.fromEntries(Object.keys(obj).map(k => [k, `${prefix}.${transform(k)}`]));
 }
 
-const abbreviation = k => `${k.toLowerCase()}.abbreviation`;
-const label = k => `${k.toLowerCase()}.label`;
-
 const reference = {
   abilities: prefixKeys(abilities, "TERIOCK.TERMS.Abilities"),
-  attributes: prefixKeys(attributes, "TERIOCK.TERMS.Attributes", abbreviation),
-  attributesFull: prefixKeys(attributes, "TERIOCK.TERMS.Attributes", label),
   bodyParts: prefixKeys(bodyParts, "TERIOCK.TERMS.BodyParts"),
   classes: prefixKeys(classes, "TERIOCK.TERMS.Classes"),
   conditions: prefixKeys(conditions, "TERIOCK.STATUSES.Conditions"),
@@ -58,10 +50,8 @@ const reference = {
   equipmentClasses: prefixKeys(equipmentClasses, "TERIOCK.TERMS.EquipmentClasses"),
   powerSources: prefixKeys(powerSources, "TERIOCK.TERMS.PowerSources"),
   properties: prefixKeys(properties, "TERIOCK.TERMS.Properties"),
-  statAttributes: prefixKeys(statAttributes, "TERIOCK.TERMS.Attributes", abbreviation),
   tradecrafts: prefixKeys(tradecrafts, "TERIOCK.TERMS.Tradecrafts"),
   traits: prefixKeys(traits, "TERIOCK.TERMS.Traits"),
-  weaponClasses: prefixKeys(weaponClasses, "TERIOCK.TERMS.EquipmentClasses"),
   weaponFightingStyles: prefixKeys(weaponFightingStyles, "TERIOCK.TERMS.WeaponFightingStyles"),
 };
 export default reference;
