@@ -8,6 +8,8 @@ declare global {
     export type _Operation = {
       /** Forward this to a GM query which handles the operation instead of the local client. */
       asGM?: boolean;
+      /** The operation can prompt the user with interactive dialogs. */
+      interactive?: boolean;
       /** Notify the user if the operation failed. */
       notifyOnFailure?: boolean;
       /** Don't track this in registries. */
@@ -36,6 +38,8 @@ declare global {
       keepCompetence?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
+      /** Flag for tracking what document some {@link TeriockEquipment} was stacked into. */
+      stackedInto?: UUID<TeriockDocument>;
     } & _Operation;
 
     export type ActivityTrigger = keyof typeof tc.activity.choices;

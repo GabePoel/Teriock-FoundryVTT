@@ -1,3 +1,4 @@
+import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import classConfig from "../../../../constants/config/class-config.mjs";
 import { icons } from "../../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
@@ -68,6 +69,55 @@ export default class RankSystem
     migrateKey(source, "innate", "origin", val => (val ? "innate" : "learned"));
     migrateValueTransform(source, "class", toKebabCase);
     return super.migrateData(source, options, state);
+  }
+
+  /**
+   * Prompt to choose which combat and support abilities to keep.
+   * @returns {Promise<void>}
+   */
+  async #onCreateSelectAbilities() {
+    const elder = await this.parent.getElder();
+    const otherRanks = (await elder?.getRanks() ?? []).filter(r =>
+      r.system.class === this.class && r.id !== this.parent.id
+    );
+    const toDelete = [];
+    for (const category of ["combat", "support"]) {
+      const selectMap = new Map(
+        this.parent.abilities.filter(a => a.getFlag("teriock", "category") === category).map(a => [a.lookupKey, a]),
+      );
+      for (const rank of otherRanks) {
+        for (const a of rank.abilities) {
+          const key = a.lookupKey;
+          if (selectMap.has(key)) {
+            toDelete.push(selectMap.get(key).id);
+            selectMap.delete(key);
+          }
+        }
+      }
+      if (selectMap.size) {
+        const chosen = await DocumentSelector.selectSingle(Array.from(selectMap.values()), {
+          openable: true,
+          title: _loc(`TERIOCK.SHEETS.Common.MENU.CreateRank.select${category.capitalize()}`),
+        });
+        if (!chosen) { continue; }
+        toDelete.push(...selectMap.values().filter(a => a.id !== chosen.id).map(a => a.id));
+      }
+    }
+    if (toDelete.length) {
+      await foundry.documents.modifyBatch([{
+        action: "delete",
+        documentName: "ActiveEffect",
+        ids: toDelete,
+        pack: this.parent.pack,
+        parent: this.parent,
+      }, {
+        action: "update",
+        documentName: "Item",
+        pack: this.parent.pack,
+        parent: this.parent.parent,
+        updates: [{ _id: this.parent.id, system: { instructions: "" } }],
+      }]);
+    }
   }
 
   /**
@@ -168,7 +218,10 @@ export default class RankSystem
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor) { this.#stageArchetypeCreation(); }
+    if (this.parent.checkEditor(userId)) {
+      if (this.actor) { this.#stageArchetypeCreation(); }
+      if (options.interactive) { this.#onCreateSelectAbilities(); }
+    }
   }
 
   /** @inheritDoc */

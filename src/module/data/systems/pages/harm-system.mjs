@@ -9,6 +9,7 @@ import BasePageSystem from "./base-page-system/base-page-system.mjs";
 /**
  * @extends {BasePageSystem}
  * @mixes AutomatableSystem
+ * @mixes InstructionsSystem
  * @mixes MetaphysicsSystem
  * @mixes WikiSystem
  */
@@ -16,6 +17,7 @@ export default class HarmSystem
   extends mixClasses(
     BasePageSystem,
     systemMixins.AutomatableSystemMixin,
+    systemMixins.InstructionsSystemMixin,
     systemMixins.MetaphysicsSystemMixin,
     systemMixins.WikiSystemMixin,
   )

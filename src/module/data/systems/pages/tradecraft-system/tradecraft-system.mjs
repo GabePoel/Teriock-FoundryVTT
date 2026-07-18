@@ -10,8 +10,11 @@ import BasePageSystem from "../base-page-system/base-page-system.mjs";
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.TradecraftSystemData}
  * @mixes WikiSystem
+ * @mixes InstructionsSystem
  */
-export default class TradecraftSystem extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin) {
+export default class TradecraftSystem
+  extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin, systemMixins.InstructionsSystemMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Fluency"];
 

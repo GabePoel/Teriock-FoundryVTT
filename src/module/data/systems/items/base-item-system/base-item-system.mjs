@@ -9,8 +9,11 @@ const { TypeDataModel } = foundry.abstract;
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.BaseItemSystemData}
  * @mixes ChildSystem
+ * @mixes InstructionsSystem
  */
-export default class BaseItemSystem extends systemMixins.ChildSystemMixin(TypeDataModel) {
+export default class BaseItemSystem
+  extends systemMixins.InstructionsSystemMixin(systemMixins.ChildSystemMixin(TypeDataModel))
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.BaseItem"];
 

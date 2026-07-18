@@ -335,7 +335,7 @@ export default function BaseDocumentMixin(Base) {
           group: "document",
           icon: makeIcon(TERIOCK.display.icons.ui.delete, "contextMenu"),
           label: _loc("COMMON.Delete"),
-          onClick: async () => await this.deleteDialog({ modal: true }),
+          onClick: async () => await this.deleteDialog({ modal: true }, { interactive: true }),
           visible: () =>
             this._checkValidEditorDocument(doc)
             || (this.inCompendium && !this.compendium.locked && !this.parent && this.sup?.uuid === doc?.uuid),

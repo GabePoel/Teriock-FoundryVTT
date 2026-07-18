@@ -39,7 +39,7 @@ export default function ChildSystemMixin(Base) {
       static LOCALIZATION_PREFIXES = super.LOCALIZATION_PREFIXES.concat("TERIOCK.SYSTEMS.Child");
 
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = ["system.competence", "system.instructions", ...super.PRESERVED_PROPERTIES];
+      static PRESERVED_PROPERTIES = ["system.competence", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static get Execution() {
@@ -57,22 +57,13 @@ export default function ChildSystemMixin(Base) {
           ),
           description: new fields.HTMLField({ initial: "" }),
           forceSuppressed: new initialBoolean(),
-          instructions: new fields.HTMLField({ initial: "" }),
           settings: new fields.EmbeddedDataField(CommonDocumentSettingsModel),
         });
       }
 
-      /**
-       * Display field for setup instructions.
-       * @returns {Teriock.Display.DisplayField}
-       */
-      get _displayFieldInstructions() {
-        return { classes: `${TERIOCK.display.panel.classes.instructions} theme-dark`, path: "system.instructions" };
-      }
-
       /** @inheritDoc */
       get _displayFields() {
-        return [this._displayFieldInstructions, "system.description", ...super._displayFields];
+        return ["system.description", ...super._displayFields];
       }
 
       /**
@@ -302,14 +293,6 @@ export default function ChildSystemMixin(Base) {
           },
         ]);
         return entries;
-      }
-
-      /**
-       * @param {Teriock.Display.DisplayField} field
-       * @returns {boolean}
-       */
-      isInstructionsField(field) {
-        return (typeof field === "string" ? field : field.path) === "system.instructions";
       }
 
       /** @inheritDoc */

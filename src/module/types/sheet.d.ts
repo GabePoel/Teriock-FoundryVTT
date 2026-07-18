@@ -9,6 +9,7 @@ declare global {
 
     export type DropData<T> = {
       data?: T;
+      interactive?: boolean;
       systemType?: Teriock.Documents.CommonType;
       type: "ActiveEffect" | "Actor" | "Automation" | "Item" | "JournalEntryPage" | "Macro";
       uuid: UUID<T>;

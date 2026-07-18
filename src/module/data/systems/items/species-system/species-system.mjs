@@ -100,6 +100,7 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get _displayFields() {
     return [
+      this._displayFieldInstructions,
       ...POOL_STATS.map(k => `system.${k}Increase`),
       "system.attributeIncrease",
       "system.innateRanks",

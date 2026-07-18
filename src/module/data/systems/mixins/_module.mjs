@@ -14,6 +14,7 @@ export { default as ConsumableSystemMixin } from "./consumable-system-mixin/cons
 export { default as ExpirableSystemMixin } from "./expirable-system-mixin/expirable-system-mixin.mjs";
 export { default as GrantedSystemMixin } from "./granted-system-mixin/granted-system-mixin.mjs";
 export { default as HierarchySystemMixin } from "./hierarchy-system-mixin/hierarchy-system-mixin.mjs";
+export { default as InstructionsSystemMixin } from "./instructions-system-mixin/instructions-system-mixin.mjs";
 export { default as MetaphysicsSystemMixin } from "./metaphysics-system-mixin/metaphysics-system-mixin.mjs";
 export { default as RefreshSystemMixin } from "./refresh-system-mixin/refresh-system-mixin.mjs";
 export { default as RevelationSystemMixin } from "./revelation-system-mixin/revelation-system-mixin.mjs";

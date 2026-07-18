@@ -108,11 +108,13 @@ export default function DragDropSheetMixin(Base) {
         /** @type {typeof ClientDocument} */
         const Cls = foundry.utils.getDocumentClass(dropData.type);
         const doc = /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
-        const uuid = doc.uuid;
         const obj = doc.toObject(true);
-        if (doc.inCompendium && !doc._stats.compendiumSource) { obj["_stats.compendiumSource"] = uuid; }
+        if (doc.inCompendium && !doc._stats.compendiumSource) { obj["_stats.compendiumSource"] = doc.uuid; }
         if (!this._canDropChild(doc)) { return; }
-        const created = await this.document.createChildDocuments(doc.documentName, [obj], { notifyOnFailure: true });
+        const created = await this.document.createChildDocuments(doc.documentName, [obj], {
+          interactive: true,
+          notifyOnFailure: true,
+        });
         return created[0];
       }
 

@@ -10,8 +10,11 @@ import BasePageSystem from "../base-page-system/base-page-system.mjs";
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.ClassSystemData}
  * @mixes WikiSystem
+ * @mixes InstructionsSystem
  */
-export default class ClassSystem extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin) {
+export default class ClassSystem
+  extends mixClasses(BasePageSystem, systemMixins.WikiSystemMixin, systemMixins.InstructionsSystemMixin)
+{
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Rank"];
 

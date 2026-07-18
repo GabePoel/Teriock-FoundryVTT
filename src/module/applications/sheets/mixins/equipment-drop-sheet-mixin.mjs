@@ -34,10 +34,6 @@ export default function EquipmentDropSheetMixin(Base) {
         // Create reference to old elder
         const _elder = doc.elder;
 
-        // Optionally stack equipment
-        let stack = false;
-        if (doc.type === "equipment") { stack = await this._stackEquipment(doc); }
-
         // Handle moving equipment around within inventory instead of duplicating it
         if (
           doc.type === "equipment"
@@ -47,6 +43,8 @@ export default function EquipmentDropSheetMixin(Base) {
           && doc.checkAncestor(this.document.actor)
         ) {
           const oldElder = await resolveDocument(_elder);
+          // TODO: Find a way to do this without special equipment handling
+          const stack = await doc.system._findAndStack(this.document, doc.system.quantity);
           if (stack) {
             await doc.delete();
             if (oldElder) { await oldElder.render(); }
@@ -62,13 +60,14 @@ export default function EquipmentDropSheetMixin(Base) {
           }
         }
 
-        if (stack) {
-          if (doc.isOwner && doc.actor) { await doc.delete(); }
-          return stack;
-        }
+        // TODO: Find a way to do stacking that doesn't need to return the operation
+        const operation = {};
+        const created = await super._onDropChild(event, dropData, operation);
 
-        // Run normal drop routine
-        const created = await super._onDropChild(event, dropData);
+        if (operation.stackedInto) {
+          if (doc.isOwner && doc.actor) { await doc.delete(); }
+          return await fromUuid(operation.stackedInto);
+        }
 
         // Delete old equipment if it was moved instead of duplicated
         if (created?.type === "equipment") {

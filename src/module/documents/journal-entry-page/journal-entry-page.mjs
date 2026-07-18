@@ -50,16 +50,17 @@ export default class TeriockJournalEntryPage
 
   /** @inheritDoc */
   async getPanelParts() {
+    const parts = await super.getPanelParts();
+    if (this.type !== "text") { return parts; }
     const div = createElement("div", { innerHTML: this.text.content });
     div.querySelectorAll("table").forEach(t => t.remove());
     return {
-      ...(await super.getPanelParts()),
+      ...parts,
       blocks: [{
         text: div.innerHTML,
         title: this.getFlag("teriock", "journalTitle") || _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
       }],
-      icon: (this.type === "rule" ? this.getFlag("teriock", "journalIcon") : null) ?? documentConfig[this.type]?.icon
-        ?? documentConfig.rule.icon,
+      icon: documentConfig[this.type]?.icon ?? documentConfig.rule.icon,
       image: this.img,
     };
   }

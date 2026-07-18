@@ -145,7 +145,7 @@ export default function SpeciesTransformationPart(Base) {
       /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
-        if (this.transformationEffect && this.document.checkEditor(userId)) {
+        if (options.interactive && this.transformationEffect && this.document.checkEditor(userId)) {
           TeriockDialog.confirm({
             content: _loc("TERIOCK.SYSTEMS.Species.DIALOG.deleteEffect.content"),
             modal: true,
