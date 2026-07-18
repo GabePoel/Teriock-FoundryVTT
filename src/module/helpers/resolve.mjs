@@ -78,13 +78,13 @@ export async function ensureChildren(document, identifiers) {
   }));
   const filtered = candidates.filter(Boolean);
   const documentNames = new Set(Object.values(filtered).map(v => v?.documentName));
-  const childPromises = [];
+  const operations = [];
   for (const documentName of documentNames) {
     const data = filtered.filter(d => d?.documentName === documentName).map(d => d?.data);
-    childPromises.push(document.createChildDocuments(documentName, data));
+    operations.push(document.getCreateChildDocumentsOperation(documentName, data));
   }
   /** @type {AnyChildDocument[][]} */
-  const childArrays = await Promise.all(childPromises);
+  const childArrays = await foundry.documents.modifyBatch(operations.filter(Boolean));
   const children = [];
   for (const childArray of childArrays) { children.push(...childArray.filter(Boolean)); }
   return children;
@@ -101,13 +101,13 @@ export async function ensureNoChildren(document, identifiers) {
   const toDelete = (await document.getChildArray()).filter(c => identifiers.includes(c.typedIdentifier));
   if (toDelete.length === 0) { return []; }
   const documentNames = new Set(toDelete.map(c => c?.documentName));
-  const deletePromises = [];
+  const operations = [];
   for (const documentName of documentNames) {
     const ids = toDelete.filter(c => c?.documentName === documentName).map(c => c.id);
-    deletePromises.push(document.deleteChildDocuments(documentName, ids));
+    operations.push(document.getDeleteChildDocumentsOperation(documentName, ids));
   }
   /** @type {AnyChildDocument[][]} */
-  const deletedArrays = await Promise.all(deletePromises);
+  const deletedArrays = await foundry.documents.modifyBatch(operations.filter(Boolean));
   const deletedDocs = [];
   for (const deletedArray of deletedArrays) { deletedDocs.push(...deletedArray.filter(Boolean)); }
   return deletedDocs;

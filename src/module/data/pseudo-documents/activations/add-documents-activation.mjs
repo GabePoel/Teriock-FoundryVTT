@@ -223,16 +223,15 @@ export default class AddDocumentsActivation extends BaseActivation {
     if (!parent?.persisted) { return []; }
     const effectData = docs.filter(d => TeriockActiveEffect.TYPES.includes(d?.type));
     const itemData = docs.filter(d => TeriockItem.TYPES.includes(d?.type));
-    const promises = [];
+    const operation = { keepCompetence: true, notifyOnFailure: true };
+    const operations = [];
     if (effectData.length > 0) {
-      promises.push(
-        parent.createChildDocuments("ActiveEffect", effectData, { keepCompetence: true, notifyOnFailure: true }),
-      );
+      operations.push(parent.getCreateChildDocumentsOperation("ActiveEffect", effectData, operation));
     }
     if (itemData.length > 0) {
-      promises.push(parent.createChildDocuments("Item", itemData, { keepCompetence: true, notifyOnFailure: true }));
+      operations.push(parent.getCreateChildDocumentsOperation("Item", itemData, operation));
     }
-    const allChildren = await Promise.all(promises);
+    const allChildren = await foundry.documents.modifyBatch(operations.filter(Boolean));
     const out = [];
     for (const children of allChildren) { out.push(...children); }
     return out;
@@ -254,14 +253,16 @@ export default class AddDocumentsActivation extends BaseActivation {
       else {
         const effectsToDelete = toDelete.filter(d => d.documentName === "ActiveEffect");
         const itemsToDelete = toDelete.filter(d => d.documentName === "Item");
-        const promises = [];
+        const operations = [];
         if (effectsToDelete.length > 0) {
-          promises.push(a.deleteChildDocuments("ActiveEffect", Array.from(new Set(effectsToDelete.map(e => e.id)))));
+          const ids = Array.from(new Set(effectsToDelete.map(e => e.id)));
+          operations.push(a.getDeleteChildDocumentsOperation("ActiveEffect", ids));
         }
         if (itemsToDelete.length > 0) {
-          promises.push(a.deleteChildDocuments("Item", Array.from(new Set(itemsToDelete.map(i => i.id)))));
+          const ids = Array.from(new Set(itemsToDelete.map(i => i.id)));
+          operations.push(a.getDeleteChildDocumentsOperation("Item", ids));
         }
-        await Promise.all(promises);
+        await foundry.documents.modifyBatch(operations.filter(Boolean));
       }
     }));
     ui.notifications.success("TERIOCK.ACTIVATIONS.AddDocuments.NOTIFICATIONS.removed", { localize: true });

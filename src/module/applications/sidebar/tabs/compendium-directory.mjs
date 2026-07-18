@@ -1,6 +1,7 @@
 import { getPackIcon } from "../../../helpers/html.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import TeriockCompendium from "../apps/compendium.mjs";
+import { TeriockDragDrop } from "../../ux/_module.mjs";
+import { TeriockCompendium } from "../apps/_module.mjs";
 
 const { CompendiumDirectory } = foundry.applications.sidebar.tabs;
 
@@ -19,6 +20,12 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
         pack.apps.push(new pack.applicationClass({ collection: pack }));
       }
     }
+  }
+
+  /** @inheritDoc */
+  _onDragDocumentStart(event) {
+    super._onDragDocumentStart(event);
+    TeriockDragDrop.setDefaultDragEventData(event);
   }
 
   /** @inheritDoc */

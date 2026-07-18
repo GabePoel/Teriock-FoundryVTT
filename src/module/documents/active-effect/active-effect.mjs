@@ -12,6 +12,7 @@ const { ActiveEffect } = foundry.documents;
  * @mixes BaseDocument
  * @mixes ChildDocument
  * @mixes CommonDocument
+ * @mixes DependeeDocument
  * @mixes RetrievalDocument
  */
 export default class TeriockActiveEffect
@@ -20,6 +21,7 @@ export default class TeriockActiveEffect
     documentMixins.BaseDocumentMixin,
     documentMixins.CommonDocumentMixin,
     documentMixins.ChildDocumentMixin,
+    documentMixins.DependeeDocumentMixin,
     documentMixins.RetrievalDocumentMixin,
   )
 {
@@ -73,12 +75,6 @@ export default class TeriockActiveEffect
   }
 
   /** @inheritDoc */
-  async createChildDocuments(embeddedName, data = [], operation = {}) {
-    if (embeddedName === "Item") { return this.createDependentDocuments(embeddedName, data, operation); }
-    return super.createChildDocuments(embeddedName, data, operation);
-  }
-
-  /** @inheritDoc */
   async disable() {
     await this.update({ disabled: true });
   }
@@ -86,6 +82,24 @@ export default class TeriockActiveEffect
   /** @inheritDoc */
   async enable() {
     await this.update({ disabled: false });
+  }
+
+  /** @inheritDoc */
+  getCreateChildDocumentsOperation(embeddedName, data = [], operation = {}) {
+    if (embeddedName === "Item") { return this.getCreateDependentDocumentsOperation(embeddedName, data, operation); }
+    return super.getCreateChildDocumentsOperation(embeddedName, data, operation);
+  }
+
+  /** @inheritDoc */
+  getDeleteChildDocumentsOperation(embeddedName, ids = [], operation = {}) {
+    if (embeddedName === "Item") { return this.getDeleteDependentDocumentsOperation(embeddedName, ids, operation); }
+    return super.getDeleteChildDocumentsOperation(embeddedName, ids, operation);
+  }
+
+  /** @inheritDoc */
+  getUpdateChildDocumentsOperation(embeddedName, updates = [], operation = {}) {
+    if (embeddedName === "Item") { return this.getUpdateDependentDocumentsOperation(embeddedName, updates, operation); }
+    return super.getUpdateChildDocumentsOperation(embeddedName, updates, operation);
   }
 
   /** @inheritDoc */

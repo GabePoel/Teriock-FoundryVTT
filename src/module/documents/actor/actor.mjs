@@ -264,6 +264,11 @@ export default class TeriockActor
     return operations;
   }
 
+  /** @inheritDoc */
+  _makeVisibleChildrenArray() {
+    return this.modifiableChildren.filter(c => !c.metadata.revealable || c.system.revealed || game.user.isGM);
+  }
+
   /**
    * Clear and initialize all staged operations.
    */
@@ -310,11 +315,6 @@ export default class TeriockActor
     const out = await super.hookCall(trigger, options);
     BaseExpiration.massExpire([this], TriggerExpiration.TYPE, { trigger }, false);
     return out;
-  }
-
-  /** @inheritDoc */
-  makeVisibleChildrenArray() {
-    return this.modifiableChildren.filter(c => !c.metadata.revealable || c.system.revealed || game.user.isGM);
   }
 
   /** @inheritDoc */

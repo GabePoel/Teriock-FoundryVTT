@@ -4,7 +4,6 @@ export { default as ConnectionSheetMixin } from "./connection-sheet-mixin.mjs";
 export { default as DisplaySheetMixin } from "./display-sheet-mixin.mjs";
 export { default as DocumentCreationSheetMixin } from "./document-creation-sheet-mixin.mjs";
 export { default as DragDropSheetMixin } from "./drag-drop-sheet-mixin.mjs";
-export { default as EquipmentDropSheetMixin } from "./equipment-drop-sheet-mixin.mjs";
 export { default as FieldsSheetMixin } from "./fields-sheet-mixin.mjs";
 export { default as ImageEditingSheetMixin } from "./image-editing-sheet-mixin.mjs";
 export { default as LockingSheetMixin } from "./locking-sheet-mixin.mjs";

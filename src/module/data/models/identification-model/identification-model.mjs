@@ -2,7 +2,7 @@ import { TeriockDialog } from "../../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { fromIdentifier, getName, objectMap } from "../../../helpers/utils.mjs";
+import { buildWriteOperation, fromIdentifier, getName, objectMap } from "../../../helpers/utils.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -139,24 +139,31 @@ export default class IdentificationModel extends BaseDataModel {
         noDocumentsMessage: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.noDocumentsMessage"),
         silent: true,
       });
-      await this.parent.parent.updateEmbeddedDocuments(
+      const revealOperation = this.parent.parent.getUpdateChildDocumentsOperation(
         "ActiveEffect",
         toReveal.map(e => {
           return { _id: e._id, "system.revealed": false };
         }),
       );
-      await this.parent.parent.update({
-        name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", { type: getName(this.parent.equipmentType) }),
-        "system.flaws": "",
-        "system.identification.flaws": this.parent.flaws,
-        "system.identification.identified": false,
-        "system.identification.name": this.parent.parent.name,
-        "system.identification.notes": this.parent.notes,
-        "system.identification.powerLevel": this.parent.powerLevel,
-        "system.identification.read": false,
-        "system.notes": "",
-        "system.powerLevel": "unknown",
+      const itemOperation = await buildWriteOperation({
+        action: "update",
+        docData: {
+          name: _loc("TERIOCK.MODELS.Identification.QUERY.Unidentify.name", {
+            type: getName(this.parent.equipmentType),
+          }),
+          "system.flaws": "",
+          "system.identification.flaws": this.parent.flaws,
+          "system.identification.identified": false,
+          "system.identification.name": this.parent.parent.name,
+          "system.identification.notes": this.parent.notes,
+          "system.identification.powerLevel": this.parent.powerLevel,
+          "system.identification.read": false,
+          "system.notes": "",
+          "system.powerLevel": "unknown",
+        },
+        uuid: this.parent.parent.uuid,
       });
+      await foundry.documents.modifyBatch([revealOperation, itemOperation].filter(Boolean));
     } else {
       ui.notifications.warn("TERIOCK.MODELS.Identification.QUERY.Unidentify.alreadyUnidentified", { localize: true });
     }

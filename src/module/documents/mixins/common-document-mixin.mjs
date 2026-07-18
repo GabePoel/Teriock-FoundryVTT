@@ -92,7 +92,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {AnyChildDocument[]}
        */
       get childArray() {
-        if (!this._childArray) { this._childArray = this.makeChildArray(); }
+        if (!this._childArray) { this._childArray = this._makeChildArray(); }
         return this._childArray;
       }
 
@@ -123,7 +123,7 @@ export default function CommonDocumentMixin(Base) {
        * @returns {AnyChildDocument[]}
        */
       get visibleChildren() {
-        if (!this._visibleChildren) { this._visibleChildren = this.makeVisibleChildrenArray(); }
+        if (!this._visibleChildren) { this._visibleChildren = this._makeVisibleChildrenArray(); }
         return this._visibleChildren;
       }
 
@@ -149,6 +149,25 @@ export default function CommonDocumentMixin(Base) {
        */
       get visibleTypes() {
         return this.system.visibleTypes;
+      }
+
+      /**
+       * Make an array of all children or their indexes.
+       * @returns {AnyChildDocument[]}
+       */
+      _makeChildArray() {
+        return [
+          ...(this.effects?.contents || []).filter(e => !e.sup),
+          ...(this.items?.contents || []).filter(i => !i.sup),
+        ];
+      }
+
+      /**
+       * Make an array of visible children.
+       * @returns {AnyChildDocument[]}
+       */
+      _makeVisibleChildrenArray() {
+        return this.childArray.filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
       }
 
       /** @inheritDoc */
@@ -178,7 +197,10 @@ export default function CommonDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async createChildDocuments(embeddedName, data = [], operation = {}) {
-        return this.createEmbeddedDocuments(embeddedName, data, operation);
+        const op = this.getCreateChildDocumentsOperation(embeddedName, data, operation);
+        if (!op) { return []; }
+        const out = await foundry.documents.modifyBatch([op]);
+        return out[0];
       }
 
       /**
@@ -189,7 +211,10 @@ export default function CommonDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
-        return this.deleteEmbeddedDocuments(embeddedName, ids, operation);
+        const op = this.getDeleteChildDocumentsOperation(embeddedName, ids, operation);
+        if (!op) { return []; }
+        const out = await foundry.documents.modifyBatch([op]);
+        return out[0];
       }
 
       /**
@@ -226,6 +251,28 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
+       * Get the operation to create child Documents.
+       * @param {ChildDocumentName} embeddedName
+       * @param {object[]} data
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
+       * @returns {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>|null}
+       */
+      getCreateChildDocumentsOperation(embeddedName, data = [], operation = {}) {
+        return { ...operation, action: "create", data, documentName: embeddedName, pack: this.pack, parent: this };
+      }
+
+      /**
+       * Get the operation to delete child Documents.
+       * @param {ChildDocumentName} embeddedName
+       * @param {ID<AnyCommonDocument>[]} ids
+       * @param {Partial<DatabaseDeleteOperation & Teriock.System._Operation>} operation
+       * @returns {Partial<DatabaseDeleteOperation & Teriock.System._Operation>|null}
+       */
+      getDeleteChildDocumentsOperation(embeddedName, ids = [], operation = {}) {
+        return { ...operation, action: "delete", documentName: embeddedName, ids, pack: this.pack, parent: this };
+      }
+
+      /**
        * Resolved children, either real or effective.
        * @returns {Promise<AnyCommonDocument[]>}
        */
@@ -239,6 +286,17 @@ export default function CommonDocumentMixin(Base) {
        */
       getRollData() {
         return this.system.getRollData();
+      }
+
+      /**
+       * Get the operation to update child Documents.
+       * @param {ChildDocumentName} embeddedName
+       * @param {object[]} updates
+       * @param {Partial<DatabaseUpdateOperation & Teriock.System._Operation>} operation
+       * @returns {Partial<DatabaseUpdateOperation & Teriock.System._Operation>|null}
+       */
+      getUpdateChildDocumentsOperation(embeddedName, updates = [], operation = {}) {
+        return { ...operation, action: "update", documentName: embeddedName, pack: this.pack, parent: this, updates };
       }
 
       /**
@@ -274,25 +332,6 @@ export default function CommonDocumentMixin(Base) {
         scope.trigger = trigger;
         if (!skipPropagation) { await this.actor?.fireTrigger(trigger, scope); }
         if (!skipCall) { return Hooks.call(`teriock.${trigger}`, this, this.getScope(scope)); }
-      }
-
-      /**
-       * Make an array of all children or their indexes.
-       * @returns {AnyChildDocument[]}
-       */
-      makeChildArray() {
-        return [
-          ...(this.effects?.contents || []).filter(e => !e.sup),
-          ...(this.items?.contents || []).filter(i => !i.sup),
-        ];
-      }
-
-      /**
-       * Make an array of visible children.
-       * @returns {AnyChildDocument[]}
-       */
-      makeVisibleChildrenArray() {
-        return this.childArray.filter(c => c.documentName !== "ActiveEffect" || c.system.revealed || game.user.isGM);
       }
 
       /** @inheritDoc */
@@ -354,7 +393,10 @@ export default function CommonDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async updateChildDocuments(embeddedName, updates = [], operation = {}) {
-        return this.updateEmbeddedDocuments(embeddedName, updates, operation);
+        const op = this.getUpdateChildDocumentsOperation(embeddedName, updates, operation);
+        if (!op) { return []; }
+        const out = await foundry.documents.modifyBatch([op]);
+        return out[0];
       }
     }
   );

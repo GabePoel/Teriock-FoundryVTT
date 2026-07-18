@@ -27,6 +27,65 @@ export default function EquipmentStoragePart(Base) {
         };
       }
 
+      /**
+       * Ask the user which matching, non-full consumable stack this equipment should merge into.
+       * @param {AnyCommonDocument} elder
+       * @returns {Promise<TeriockEquipment|null>}
+       */
+      async #findStackTarget(elder) {
+        if (!elder || !this.consumable || !this._source.quantity) { return null; }
+        const stackCandidates = (await elder.getEquipment()).filter(e =>
+          e.master?.uuid === elder.uuid
+          && e.uuid !== this.parent.uuid
+          && e.name === this.parent.name
+          && e.system.identifier === this._source.identifier
+          && e.system.consumable
+          && e.system.quantity < e.system.maxQuantity.value
+        );
+        if (stackCandidates.length === 0) { return null; }
+        const selected = await DocumentSelector.selectSingle(stackCandidates, {
+          auto: false,
+          hint: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.hint", { name: this.parent.name }),
+          openable: true,
+          silent: true,
+          textKey: "system.remainingString",
+          title: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.title"),
+        });
+        return selected || null;
+      }
+
+      /**
+       * The update that merges this equipment's quantity into a stack it is being combined with.
+       * @param {TeriockEquipment} stack
+       * @returns {DatabaseUpdateOperation}
+       */
+      #stackOperation(stack) {
+        return {
+          action: "update",
+          documentName: stack.documentName,
+          pack: stack.pack,
+          parent: stack.parent,
+          updates: [{ _id: stack.id, "system.quantity": stack.system.quantity + this._source.quantity }],
+        };
+      }
+
+      /**
+       * Reject a document that can't hold this equipment.
+       * @param {AnyCommonDocument} elder
+       * @param {DatabaseWriteOperation & Teriock.System._Operation} operation
+       * @returns {boolean}
+       */
+      #validateStorage(elder, operation) {
+        if (elder?.type !== "equipment" || elder.system.storage.enabled) { return true; }
+        if (operation.notifyOnFailure) {
+          ui.notifications.error("TERIOCK.SHEETS.Equipment.NOTIFICATIONS.notStorage", {
+            format: { name: elder.name },
+            localize: true,
+          });
+        }
+        return false;
+      }
+
       /** @inheritDoc */
       get _displayMessagesError() {
         const messages = super._displayMessagesError;
@@ -100,7 +159,15 @@ export default function EquipmentStoragePart(Base) {
         if (yes === false) { return false; }
 
         const elder = await this.parent.getElder();
-        if (elder?.type === "equipment" && !elder.system.storage.enabled) { return false; }
+        if (!this.#validateStorage(elder, options)) { return false; }
+        if (options.interactive) {
+          // Merging into a stack already present replaces this creation, so nothing new is written.
+          const target = await this.#findStackTarget(elder);
+          if (target) {
+            await foundry.documents.modifyBatch([this.#stackOperation(target)]);
+            return false;
+          }
+        }
       }
 
       /** @inheritDoc */
@@ -108,11 +175,24 @@ export default function EquipmentStoragePart(Base) {
         const yes = await super._preUpdate(changes, options, user);
         if (yes === false) { return false; }
 
+        if (!foundry.utils.hasProperty(changes, "system._sup")) { return; }
         const _sup = foundry.utils.getProperty(changes, "system._sup");
-        if (_sup) {
-          const collection = this.siblingCollection;
-          const sup = await resolveDocument(collection?.get(_sup));
-          if (sup?.type === "equipment" && !sup.system.storage.enabled) { return false; }
+        // A cleared sup means the equipment is being taken out of its container and back onto its actor.
+        const elder = _sup ? await resolveDocument(this.parent.siblingCollection?.get(_sup)) : this.parent.actor;
+        if (!this.#validateStorage(elder, options)) { return false; }
+        if (options.interactive) {
+          // Merging into a stack at the destination replaces the move, so original equipment is deleted.
+          const target = await this.#findStackTarget(elder);
+          if (target) {
+            await foundry.documents.modifyBatch([this.#stackOperation(target), {
+              action: "delete",
+              documentName: this.parent.documentName,
+              ids: [this.parent.id],
+              pack: this.parent.pack,
+              parent: this.parent.parent,
+            }]);
+            return false;
+          }
         }
       }
 
@@ -128,14 +208,14 @@ export default function EquipmentStoragePart(Base) {
             this.consumable
             && this.quantity < this.maxQuantity.value
             && this._stackingCandidates.length
-            && this.parent._checkValidEditorDocument(doc, { self: false }),
+            && this.document.isOwner && this.document.checkAncestor(doc),
         }, {
           group: "document",
           icon: makeIcon(TERIOCK.display.icons.equipment.unstack, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
           onClick: async () => await this.groupUnstackDialog(),
           visible: () =>
-            this.consumable && this.quantity > 1 && this.parent._checkValidEditorDocument(doc, { self: false }),
+            this.consumable && this.quantity > 1 && this.document.isOwner && this.document.checkAncestor(doc),
         }]);
         return entries;
       }

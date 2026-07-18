@@ -1,5 +1,4 @@
 import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
-import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/utils.mjs";
 import { TypeCollection } from "../collections/_module.mjs";
 
 const { Collection } = foundry.utils;
@@ -347,14 +346,6 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Array of dependent documents.
-       * @return {AnyChildDocument[]}
-       */
-      get dependents() {
-        return game.teriock?.dependents.get(this);
-      }
-
-      /**
        * The document that most directly provides this one.
        * @returns {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>}
        */
@@ -400,6 +391,11 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
+      _makeChildArray() {
+        return [...super._makeChildArray(), ...(this.subs.contents || [])];
+      }
+
+      /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
         if (options.render !== false) { this.#renderSheets(); }
@@ -408,14 +404,6 @@ export default function HierarchyDocumentMixin(Base) {
       /** @inheritDoc */
       _onDelete(options, userId) {
         super._onDelete(options, userId);
-        if (game.user.isActiveGM) {
-          Promise.all(this.dependents.map((d) => buildWriteOperation({ action: "delete", uuid: d.uuid }))).then(
-            (operations) => {
-              const consolidatedOperations = consolidateWriteOperations(operations.filter(Boolean));
-              if (operations.length) { foundry.documents.modifyBatch(consolidatedOperations); }
-            },
-          );
-        }
         if (this.system._dep && this.uuid) { game.teriock?.dependents.untrack(this.system._dep, this); }
         // If this is deleted as part of a folder it might not call the appropriate operation and descendents need to be
         // deleted separately. Only remaining documents get deleted. This sucks but IDK a better solution.
@@ -466,27 +454,6 @@ export default function HierarchyDocumentMixin(Base) {
         return this.elder?.checkAncestor ? this.elder?.checkAncestor(doc) || false : false;
       }
 
-      /** @inheritDoc */
-      async createChildDocuments(embeddedName, data = [], operation = {}) {
-        if (embeddedName === this.documentName) { return this.createSubDocuments(data, operation); }
-        return super.createChildDocuments(embeddedName, data, operation);
-      }
-
-      /**
-       * Create multiple dependent Document instances in this document's actor using provided input data. All
-       * created documents will be dependent on this one. The operation fails silently if this does not have an actor.
-       * @param {ChildDocumentName} embeddedName
-       * @param {object[]} data
-       * @param {Partial<DatabaseCreateOperation>} operation
-       * @return {Promise<AnyChildDocument[]>}
-       */
-      async createDependentDocuments(embeddedName, data = [], operation = {}) {
-        if (!this.actor) { return []; }
-        data = foundry.utils.deepClone(data);
-        for (const doc of data) { foundry.utils.setProperty(doc, "system._dep", this.id); }
-        return this.actor.createEmbeddedDocuments(embeddedName, data, operation);
-      }
-
       /**
        * Create multiple sub Document instances in a sup Document's collection using provided input data.
        * @param {object[]} data
@@ -494,21 +461,8 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyChildDocument[]>}
        */
       async createSubDocuments(data = [], operation = {}) {
-        data = foundry.utils.deepClone(data);
-        for (const doc of data) {
-          foundry.utils.setProperty(doc, "system._sup", this.id);
-          foundry.utils.setProperty(doc, "folder", this.folder?.id || null);
-        }
-        if (this.parent) { return this.parent.createEmbeddedDocuments(this.documentName, data, operation); }
-
-        if (this.inCompendium) { operation.pack = this.collection.collection; }
-        return foundry.utils.getDocumentClass(this.documentName).createDocuments(data, operation);
-      }
-
-      /** @inheritDoc */
-      async deleteChildDocuments(embeddedName, ids = [], operation = {}) {
-        if (embeddedName === this.documentName) { return this.deleteSubDocuments(ids, operation); }
-        return super.deleteChildDocuments(embeddedName, ids, operation);
+        const out = await foundry.documents.modifyBatch([this.getCreateSubDocumentsOperation(data, operation)]);
+        return out[0];
       }
 
       /**
@@ -518,12 +472,8 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteSubDocuments(ids = [], operation = {}) {
-        const subIds = new Set(this.subs.map(s => s._id));
-        ids = ids.filter(id => subIds.has(id));
-        if (this.parent) { return this.parent.deleteEmbeddedDocuments(this.documentName, ids, operation); }
-
-        if (this.inCompendium) { operation.pack = this.collection.collection; }
-        return foundry.utils.getDocumentClass(this.documentName).deleteDocuments(ids, operation);
+        const out = await foundry.documents.modifyBatch([this.getDeleteSubDocumentsOperation(ids, operation)]);
+        return out[0];
       }
 
       /**
@@ -540,6 +490,58 @@ export default function HierarchyDocumentMixin(Base) {
        */
       async getAllSups() {
         return resolveCollection(this.allSups);
+      }
+
+      /** @inheritDoc */
+      getCreateChildDocumentsOperation(embeddedName, data = [], operation = {}) {
+        if (embeddedName === this.documentName) { return this.getCreateSubDocumentsOperation(data, operation); }
+        return super.getCreateChildDocumentsOperation(embeddedName, data, operation);
+      }
+
+      /**
+       * Get the operation to create sub Documents.
+       * @param {object[]} data
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
+       * @returns {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>}
+       */
+      getCreateSubDocumentsOperation(data = [], operation = {}) {
+        data = foundry.utils.deepClone(data);
+        for (const d of data) {
+          foundry.utils.setProperty(d, "system._sup", this.id);
+          foundry.utils.setProperty(d, "folder", this.folder?.id || null);
+        }
+        return {
+          ...operation,
+          action: "create",
+          data,
+          documentName: this.documentName,
+          pack: this.pack,
+          parent: this.parent,
+        };
+      }
+
+      /** @inheritDoc */
+      getDeleteChildDocumentsOperation(embeddedName, ids = [], operation = {}) {
+        if (embeddedName === this.documentName) { return this.getDeleteSubDocumentsOperation(ids, operation); }
+        return super.getDeleteChildDocumentsOperation(embeddedName, ids, operation);
+      }
+
+      /**
+       * Get the operation to delete sub Documents.
+       * @param {ID<AnyCommonDocument>[]} ids
+       * @param {Partial<DatabaseDeleteOperation & Teriock.System._Operation>} operation
+       * @returns {Partial<DatabaseDeleteOperation & Teriock.System._Operation>}
+       */
+      getDeleteSubDocumentsOperation(ids = [], operation = {}) {
+        const subIds = new Set(this.subs.map(s => s._id));
+        return {
+          ...operation,
+          action: "delete",
+          documentName: this.documentName,
+          ids: ids.filter(id => subIds.has(id)),
+          pack: this.pack,
+          parent: this.parent,
+        };
       }
 
       /**
@@ -567,8 +569,27 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /** @inheritDoc */
-      makeChildArray() {
-        return [...super.makeChildArray(), ...(this.subs.contents || []), ...this.dependents];
+      getUpdateChildDocumentsOperation(embeddedName, updates = [], operation = {}) {
+        if (embeddedName === this.documentName) { return this.getUpdateSubDocumentsOperation(updates, operation); }
+        return super.getUpdateChildDocumentsOperation(embeddedName, updates, operation);
+      }
+
+      /**
+       * Get the operation to update sub Documents.
+       * @param {object[]} updates
+       * @param {Partial<DatabaseUpdateOperation & Teriock.System._Operation>} operation
+       * @returns {Partial<DatabaseUpdateOperation & Teriock.System._Operation>}
+       */
+      getUpdateSubDocumentsOperation(updates = [], operation = {}) {
+        const subIds = new Set(this.subs.map(s => s._id));
+        return {
+          ...operation,
+          action: "update",
+          documentName: this.documentName,
+          pack: this.pack,
+          parent: this.parent,
+          updates: updates.filter(update => subIds.has(update._id)),
+        };
       }
 
       /** @inheritDoc */
@@ -621,30 +642,14 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Update multiple child Document instances descendant from a Document using provided differential data.
-       * @param {ChildDocumentName} embeddedName
-       * @param {object[]} updates
-       * @param {DatabaseUpdateOperation} operation
-       * @returns {Promise<AnyCommonDocument[]>}
-       */
-      async updateChildDocuments(embeddedName, updates = [], operation = {}) {
-        if (embeddedName === this.documentName) { return this.updateSubDocuments(updates, operation); }
-        return super.updateChildDocuments(embeddedName, updates, operation);
-      }
-
-      /**
        * Update multiple sub Document instances in a sup Document's collection using provided differential data.
        * @param {object[]} updates
        * @param {DatabaseUpdateOperation} operation
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async updateSubDocuments(updates = [], operation = {}) {
-        const subIds = new Set(this.subs.map(s => s._id));
-        updates = updates.filter(update => subIds.has(update._id));
-        if (this.parent) { return this.parent.updateEmbeddedDocuments(this.documentName, updates, operation); }
-
-        if (this.inCompendium) { operation.pack = this.collection?.collection; }
-        return foundry.utils.getDocumentClass(this.documentName).updateDocuments(updates, operation);
+        const out = await foundry.documents.modifyBatch([this.getUpdateSubDocumentsOperation(updates, operation)]);
+        return out[0];
       }
     }
   );

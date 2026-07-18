@@ -2,6 +2,7 @@ import { TeriockDialog } from "../../applications/api/_module.mjs";
 import { DocumentSelector } from "../../applications/dialogs/_module.mjs";
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { makeIconClass } from "../icon.mjs";
+import { buildWriteOperation } from "../utils.mjs";
 
 /**
  * Query that asks the GM to identify the item.
@@ -38,22 +39,27 @@ export default async function identifyItemQuery(queryData) {
       noDocumentsMessage: _loc("TERIOCK.MODELS.Identification.QUERY.Identify.noDocumentsMessage"),
       silent: true,
     });
-    await item.updateEmbeddedDocuments(
+    const revealOperation = item.getUpdateChildDocumentsOperation(
       "ActiveEffect",
       toReveal.map(e => {
         return { _id: e._id, "system.revealed": true };
       }),
     );
-    await item.update({
-      name: item.system.identification.name,
-      "system.flaws": item.system.identification.flaws,
-      "system.identification.flaws": "",
-      "system.identification.identified": true,
-      "system.identification.notes": "",
-      "system.identification.read": true,
-      "system.notes": item.system.identification.notes,
-      "system.powerLevel": item.system.identification.powerLevel,
+    const itemOperation = await buildWriteOperation({
+      action: "update",
+      docData: {
+        name: item.system.identification.name,
+        "system.flaws": item.system.identification.flaws,
+        "system.identification.flaws": "",
+        "system.identification.identified": true,
+        "system.identification.notes": "",
+        "system.identification.read": true,
+        "system.notes": item.system.identification.notes,
+        "system.powerLevel": item.system.identification.powerLevel,
+      },
+      uuid: item.uuid,
     });
+    await foundry.documents.modifyBatch([revealOperation, itemOperation].filter(Boolean));
   }
   return doIdentify;
 }

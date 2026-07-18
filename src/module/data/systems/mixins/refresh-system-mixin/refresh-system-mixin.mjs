@@ -35,44 +35,6 @@ export default function RefreshSystemMixin(Base) {
       static PRESERVED_PROPERTIES = [...this.DEFAULT_PRESERVED_PROPERTIES];
 
       /**
-       * Build a single batched database operation targeting children of this document, mirroring the routing that
-       * {@link CommonDocument#createChildDocuments} and its siblings perform.
-       * @param {"create"|"delete"|"update"} action
-       * @param {ChildDocumentName} documentName
-       * @param {object[]|ID<AnyChildDocument>[]} payload - Creation data, update deltas, or ids to delete.
-       * @returns {DatabaseWriteOperation|null}
-       */
-      #childOperation(action, documentName, payload) {
-        const doc = this.parent;
-        let target = doc;
-        if (documentName === doc.documentName) {
-          // Subs share this document's collection rather than living in an embedded one.
-          if (action === "create") {
-            for (const data of payload) {
-              foundry.utils.setProperty(data, "system._sup", doc.id);
-              foundry.utils.setProperty(data, "folder", doc.folder?.id || null);
-            }
-          }
-          target = doc.parent;
-        } else if (doc.documentName === "ActiveEffect" && documentName === "Item") {
-          // Dependent items live on the actor.
-          if (!doc.actor) { return null; }
-          if (action === "create") {
-            for (const data of payload) { foundry.utils.setProperty(data, "system._dep", doc.id); }
-          }
-          target = doc.actor;
-        }
-        const payloadKey = { create: "data", delete: "ids", update: "updates" }[action];
-        return {
-          action,
-          documentName,
-          pack: (target ?? doc).pack ?? null,
-          parent: target ?? null,
-          [payloadKey]: payload,
-        };
-      }
-
-      /**
        * Group documents by their document name.
        * @param {AnyChildDocument[]} documents
        * @returns {Record<ChildDocumentName, AnyChildDocument[]>}
@@ -212,7 +174,9 @@ export default function RefreshSystemMixin(Base) {
           if (createChildren && this._refreshCanCreateChildren) {
             const createMap = this.#groupByDocumentName(srcChildren.filter(c => !dstKeys.has(c.lookupKey)));
             for (const [documentName, docs] of Object.entries(createMap)) {
-              operations.push(this.#childOperation("create", documentName, docs.map(d => d.toObject(true))));
+              operations.push(
+                this.parent.getCreateChildDocumentsOperation(documentName, docs.map(d => d.toObject(true))),
+              );
             }
           }
           if (deleteChildren) {
@@ -220,7 +184,7 @@ export default function RefreshSystemMixin(Base) {
             for (const doc of toDelete) { deletedIds.add(doc.id); }
             const deleteMap = this.#groupByDocumentName(toDelete);
             for (const [documentName, docs] of Object.entries(deleteMap)) {
-              operations.push(this.#childOperation("delete", documentName, docs.map(d => d.id)));
+              operations.push(this.parent.getDeleteChildDocumentsOperation(documentName, docs.map(d => d.id)));
             }
           }
         }

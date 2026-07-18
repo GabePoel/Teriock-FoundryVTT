@@ -7,9 +7,14 @@ declare global {
 
     export type DragDropConfiguration = { dragDrop: Teriock.Sheet.DragDropSelector[] };
 
+    /** How a dropped document is transferred. */
+    export type DropBehavior = "copy" | "move";
+
     export type DropData<T> = {
       data?: T;
       interactive?: boolean;
+      invertBehavior?: boolean;
+      startSheet?: string;
       systemType?: Teriock.Documents.CommonType;
       type: "ActiveEffect" | "Actor" | "Automation" | "Item" | "JournalEntryPage" | "Macro";
       uuid: UUID<T>;

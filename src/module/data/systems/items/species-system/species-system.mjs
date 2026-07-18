@@ -1,7 +1,10 @@
+import { TeriockDialog } from "../../../../applications/api/_module.mjs";
+import { TeriockTextEditor } from "../../../../applications/ux/_module.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 import systemConfig from "../../../../constants/config/system-config.mjs";
 import { TeriockActor } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -77,6 +80,32 @@ export default class SpeciesSystem
     });
   }
 
+  /**
+   * Offer to resize the actor to match the size this species specifies.
+   * @returns {Promise<void>}
+   */
+  async #onCreateChangeSize() {
+    const actor = this.actor;
+    if (!this.size.enabled || this.size.value === actor.system._source.size.number) { return; }
+    const proceed = await TeriockDialog.confirm({
+      content: await TeriockTextEditor.enrichHTML(
+        _loc("TERIOCK.DIALOGS.ChangeSize.content", {
+          actor: `@UUID[${actor.uuid}]`,
+          actorSize: actor.system._source.size.number,
+          species: `@UUID[${this.parent.uuid}]`,
+          speciesSize: this.size.value,
+        }),
+      ),
+      modal: true,
+      position: { width: 400 },
+      window: {
+        icon: makeIconClass(TERIOCK.display.icons.ui.confirm, "title"),
+        title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
+      },
+    });
+    if (proceed) { await actor.update({ "system.size.number": this.size.value }); }
+  }
+
   /** @inheritDoc */
   get _displayButtons() {
     const buttons = super._displayButtons;
@@ -140,6 +169,12 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get wikiPage() {
     return `Creature:${TERIOCK.index.creatures[toCamelCase(this.identifier ?? "")] ?? ""}`;
+  }
+
+  /** @inheritDoc */
+  _onCreate(data, options, userId) {
+    super._onCreate(data, options, userId);
+    if (this.parent.checkEditor(userId) && this.actor && options.interactive) { this.#onCreateChangeSize(); }
   }
 
   /** @inheritDoc */

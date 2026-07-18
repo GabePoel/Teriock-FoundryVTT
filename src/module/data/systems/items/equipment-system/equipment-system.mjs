@@ -1,4 +1,3 @@
-import { DocumentSelector } from "../../../../applications/dialogs/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { dotJoin, toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { fromIdentifier, getName, objectMap } from "../../../../helpers/utils.mjs";
@@ -171,49 +170,12 @@ export default class EquipmentSystem
     return `Equipment:${TERIOCK.index.equipment[toCamelCase(this._source.equipmentType ?? "")] ?? ""}`;
   }
 
-  /**
-   * Attempt to merge this equipment into a matching, non-full consumable stack already present.
-   * @param {AnyCommonDocument} elder - The document this equipment would otherwise be created under.
-   * @param {number} quantity - The quantity that would otherwise be created.
-   * @returns {Promise<TeriockEquipment|false>} The stack this was merged into, or `false` if not stacked.
-   */
-  async _findAndStack(elder, quantity) {
-    if (!elder || !this.consumable || !quantity) { return false; }
-    const stackCandidates = (await elder.getEquipment()).filter(e =>
-      e.master?.uuid === elder.uuid
-      && e.name === this.parent.name
-      && e.system.identifier === this._source.identifier
-      && e.system.consumable
-      && e.system.quantity < e.system.maxQuantity.value
-    );
-    if (stackCandidates.length === 0) { return false; }
-    const selected = await DocumentSelector.selectSingle(stackCandidates, {
-      auto: false,
-      hint: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.hint", { name: this.parent.name }),
-      openable: true,
-      silent: true,
-      textKey: "system.remainingString",
-      title: _loc("TERIOCK.SHEETS.Common.DIALOGS.EquipmentStackConfirmation.title"),
-    });
-    if (!selected) { return false; }
-    await selected.update({ "system.quantity": selected.system.quantity + quantity });
-    return selected;
-  }
-
   /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
     if (this.actor) { this.updateSource({ equipped: true }); }
-    if (options.interactive) {
-      const container = this._source._sup ? this.parent.actor?.items.get(this._source._sup) : this.parent.actor;
-      const stacked = await this._findAndStack(container, this._source.quantity);
-      if (stacked) {
-        options.stackedInto = stacked.uuid;
-        return false;
-      }
-    }
   }
 
   /** @inheritDoc */

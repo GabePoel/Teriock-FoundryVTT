@@ -114,7 +114,6 @@ export default function TransformationSystemMixin(Base) {
         if (!species.length) { return; }
         const itemData = /** @type {TeriockSpecies[]} */ species.map(s => s.toObject());
         itemData.forEach(s => {
-          s.system._dep = this.parent.id;
           s.system.transformationLevel = this.transformation.level;
           for (const stat of POOL_STATS) {
             s.system.statDice[stat].disabled = !this.transformation.reset.has(stat);
@@ -124,7 +123,8 @@ export default function TransformationSystemMixin(Base) {
             s.system.size.value = Math.clamp(this.actor.system.size.number, s.system.size.min, s.system.size.max);
           }
         });
-        this.#batchedOperations.push({ action: "create", data: itemData, documentName: "Item", parent: this.actor });
+        const op = this.parent.getCreateDependentDocumentsOperation("Item", itemData);
+        if (op) { this.#batchedOperations.push(op); }
       }
 
       /**
@@ -163,24 +163,16 @@ export default function TransformationSystemMixin(Base) {
        */
       #addBatchUpdateDocument(collection, id, data) {
         if (!collection.get(id)) { return; }
-        let operation = this.#batchedOperations.find(op =>
-          op.documentName === collection.documentName && op.action === "update" && op.ids.includes(id)
+        const operation = this.#batchedOperations.find(op =>
+          op.documentName === collection.documentName && op.action === "update" && op.updates?.some(u => u._id === id)
         );
         if (operation) {
-          if (!operation.updates) { operation.updates = []; }
           const update = operation.updates.find(u => u._id === id);
-          if (update) { Object.assign(update, data); }
-          else { operation.updates.push({ _id: id, ...data }); }
+          Object.assign(update, data);
         } else {
-          operation = {
-            action: "update",
-            documentName: collection.documentName,
-            ids: [id],
-            pack: this.actor.pack,
-            parent: this.actor,
-            updates: [{ _id: id, ...data }],
-          };
-          this.#batchedOperations.push(operation);
+          this.#batchedOperations.push(
+            this.actor.getUpdateChildDocumentsOperation(collection.documentName, [{ _id: id, ...data }]),
+          );
         }
       }
 

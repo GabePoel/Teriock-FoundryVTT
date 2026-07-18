@@ -38,8 +38,6 @@ declare global {
       keepCompetence?: boolean;
       /** Force even subs to keep their `_id`. May cause `_id` collisions. */
       keepSubIds?: boolean;
-      /** Flag for tracking what document some {@link TeriockEquipment} was stacked into. */
-      stackedInto?: UUID<TeriockDocument>;
     } & _Operation;
 
     export type ActivityTrigger = keyof typeof tc.activity.choices;

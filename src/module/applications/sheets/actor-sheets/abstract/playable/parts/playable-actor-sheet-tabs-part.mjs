@@ -1,6 +1,6 @@
 import documentConfig from "../../../../../../constants/config/document-config.mjs";
 import { icons } from "../../../../../../constants/display/icons.mjs";
-import TeriockTextEditor from "../../../../../ux/text-editor.mjs";
+import { TeriockDragDrop } from "../../../../../ux/_module.mjs";
 
 /**
  * @param {typeof BaseActorSheet} Base
@@ -14,6 +14,25 @@ export default function PlayableActorSheetTabsPart(Base) {
     class PlayableActorSheetTabsPart extends Base {
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = { actions: { changeTab: this._onChangeTab } };
+
+      /**
+       * The tab that a document of each type belongs to, used to reveal where a dragged document would land.
+       * @type {Record<Teriock.Documents.CommonType, string>}
+       */
+      static TAB_FOR_SYSTEM_TYPE = {
+        attunement: "effects",
+        base: "effects",
+        body: "inventory",
+        condition: "effects",
+        consequence: "effects",
+        equipment: "inventory",
+        fluency: "tradecrafts",
+        mount: "inventory",
+        power: "powers",
+        rank: "classes",
+        resource: "resources",
+        species: "powers",
+      };
 
       /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
       static TABS = {
@@ -70,18 +89,11 @@ export default function PlayableActorSheetTabsPart(Base) {
       _activeTab = "tradecrafts";
 
       /** @inheritDoc */
-      async _onDrop(event) {
-        const dropData = TeriockTextEditor.getDragEventData(event);
-        const out = await super._onDrop(event);
-        if (out) {
-          if (["body", "equipment", "mount"].includes(dropData.systemType)) { await this.setActiveTab("inventory"); }
-          else if (dropData.systemType === "fluency") { await this.setActiveTab("tradecrafts"); }
-          else if (dropData.systemType === "rank") { await this.setActiveTab("classes"); }
-          else if (["power", "species"].includes(dropData.systemType)) { await this.setActiveTab("powers"); }
-          else if (dropData.systemType === "resource") { await this.setActiveTab("resources"); }
-          else if (["attunement", "base", "condition", "consequence"].includes(dropData.systemType)) {
-            await this.setActiveTab("effects");
-          }
+      async _onDragOver(event) {
+        await super._onDragOver(event);
+        if (this._canDragDrop()) {
+          const tab = this.constructor.TAB_FOR_SYSTEM_TYPE[TeriockDragDrop.payload?.systemType];
+          if (tab && tab !== this._activeTab) { await this.setActiveTab(tab); }
         }
       }
 
