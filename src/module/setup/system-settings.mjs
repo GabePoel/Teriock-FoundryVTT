@@ -131,6 +131,22 @@ export const settings = {
       type: Boolean,
     },
   },
+  dragDrop: {
+    maximizeApplicationsOnDragEnter: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.maximizeApplicationsOnDragEnter.hint",
+      name: "TERIOCK.SETTINGS.maximizeApplicationsOnDragEnter.name",
+      scope: "client",
+      type: Boolean,
+    },
+    minimizeApplicationsOnDragStart: {
+      default: true,
+      hint: "TERIOCK.SETTINGS.minimizeApplicationsOnDragStart.hint",
+      name: "TERIOCK.SETTINGS.minimizeApplicationsOnDragStart.name",
+      scope: "client",
+      type: Boolean,
+    },
+  },
   error: {
     errorMessages: {
       default: Object.keys(tipConfig.error),

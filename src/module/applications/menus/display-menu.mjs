@@ -12,9 +12,10 @@ export default class DisplayMenu extends BaseMenu {
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
     general: super.PARTS.general,
+    actorSheet: { template: "teriock/menus/base-menu" },
+    dragDrop: { template: "teriock/menus/base-menu" },
     panels: { template: "teriock/menus/base-menu" },
     tooltips: { template: "teriock/menus/base-menu" },
-    actorSheet: { template: "teriock/menus/base-menu" },
     footer: super.PARTS.footer,
   };
 
@@ -43,6 +44,10 @@ export default class DisplayMenu extends BaseMenu {
       case "actorSheet":
         context.fields = this.createSettingFields(settings.actorSheet);
         context.legend = "TERIOCK.MENUS.Display.parts.actorSheets";
+        break;
+      case "dragDrop":
+        context.fields = this.createSettingFields(settings.dragDrop);
+        context.legend = "TERIOCK.MENUS.Display.parts.dragDrop";
         break;
       default:
         break;

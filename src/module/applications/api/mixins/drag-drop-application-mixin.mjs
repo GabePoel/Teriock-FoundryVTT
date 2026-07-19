@@ -27,6 +27,24 @@ export default function DragDropApplicationMixin(Base) {
       #wasMinimizedBeforeDragStart = null;
 
       /**
+       * Whether this should maximize on drag enter.
+       * @returns {boolean}
+       */
+      get #shouldMaximizeOnDragEnter() {
+        return game.settings.get("teriock", "maximizeApplicationsOnDragEnter")
+          && this.options?.teriock?.maximizeOnDragEnter && this.hasFrame;
+      }
+
+      /**
+       * Whether this should minimize on drag start.
+       * @returns {boolean}
+       */
+      get #shouldMinimizeOnDragStart() {
+        return game.settings.get("teriock", "minimizeApplicationsOnDragStart")
+          && this.options?.teriock?.minimizeOnDragStart && this.hasFrame;
+      }
+
+      /**
        * Return a cached copy of a DragDrop instance, creating one on first access.
        * @returns {DragDrop}
        */
@@ -110,7 +128,7 @@ export default function DragDropApplicationMixin(Base) {
       async _onDragEnd(_event) {
         this.#dragIsInApplication = false;
         this.bringToFront();
-        if (this.options?.teriock?.minimizeOnDragStart && !this.#wasMinimizedBeforeDragStart) { await this.maximize(); }
+        if (this.#shouldMinimizeOnDragStart && !this.#wasMinimizedBeforeDragStart) { await this.maximize(); }
       }
 
       /**
@@ -133,8 +151,8 @@ export default function DragDropApplicationMixin(Base) {
       async _onDragEnterApplication(event) {
         if (this._dropEffect(event) === "none" && !this._fieldDropTarget(event)) { return; }
         if (this.hasFrame) { this.bringToFront(); }
-        if (!this.options?.teriock?.maximizeOnDragEnter) { return; }
-        this.#wasMinimizedBeforeDragEnter = this.hasFrame && this.minimized;
+        if (!this.#shouldMaximizeOnDragEnter) { return; }
+        this.#wasMinimizedBeforeDragEnter = this.minimized;
         if (this.#wasMinimizedBeforeDragEnter) { await this.maximize(); }
       }
 
@@ -156,6 +174,7 @@ export default function DragDropApplicationMixin(Base) {
       async _onDragLeaveApplication() {
         this.#dragIsInApplication = false;
         DragDrop.implementation.enteredApplications.delete(this);
+        if (!this.#shouldMaximizeOnDragEnter) { return; }
         if (this.#wasMinimizedBeforeDragEnter) { await this.minimize(); }
         this.#wasMinimizedBeforeDragEnter = null;
       }
@@ -174,22 +193,16 @@ export default function DragDropApplicationMixin(Base) {
        * @param {DragEvent} event
        */
       _onDragStart(event) {
-        // Starts out as "uninitialized" rather than nothing, so it can't be tested for with `??=`.
         if (event.dataTransfer.effectAllowed === "uninitialized") { event.dataTransfer.effectAllowed = "copy"; }
         DragDrop.implementation.dragStartApplication = this;
-        if (this.options?.teriock?.minimizeOnDragStart) {
-          this.#wasMinimizedBeforeDragStart = this.hasFrame && this.minimized;
-        }
+        if (this.#shouldMinimizeOnDragStart) { this.#wasMinimizedBeforeDragStart = this.hasFrame && this.minimized; }
         setTimeout(() => {
           if (DragDrop.implementation.dragStartApplication !== this) { return; }
-          if (this.options?.teriock?.minimizeOnDragStart && this.hasFrame && !this.#wasMinimizedBeforeDragStart) {
-            this.minimize();
-          }
+          if (this.#shouldMinimizeOnDragStart && !this.#wasMinimizedBeforeDragStart) { this.minimize(); }
         }, 100);
-        const uuid = event.currentTarget.dataset.uuid;
+        const uuid = event.currentTarget?.dataset?.uuid;
         if (uuid) {
-          // The drag data store is only writable during this event, so the drag data must be built synchronously.
-          const doc = fromUuidSync(uuid, { strict: false });
+          const doc = foundry.utils.fromUuidSync(uuid, { strict: false });
           const dragData = typeof doc?.toDragData === "function"
             ? doc.toDragData()
             : { type: foundry.utils.parseUuid(uuid)?.type, uuid };

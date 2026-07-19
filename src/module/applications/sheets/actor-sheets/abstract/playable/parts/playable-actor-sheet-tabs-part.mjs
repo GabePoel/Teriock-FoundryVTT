@@ -20,13 +20,16 @@ export default function PlayableActorSheetTabsPart(Base) {
        * @type {Record<Teriock.Documents.CommonType, string>}
        */
       static TAB_FOR_SYSTEM_TYPE = {
+        archetype: "classes",
         attunement: "effects",
         base: "effects",
         body: "inventory",
         condition: "effects",
         consequence: "effects",
+        cover: "effects",
         equipment: "inventory",
         fluency: "tradecrafts",
+        hack: "effects",
         mount: "inventory",
         power: "powers",
         rank: "classes",

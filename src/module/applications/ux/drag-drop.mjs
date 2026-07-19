@@ -1,11 +1,41 @@
-import { omit } from "../../helpers/utils.mjs";
-
 const { DragDrop, TextEditor } = foundry.applications.ux;
 
 /** @inheritDoc */
 export default class TeriockDragDrop extends DragDrop {
   /** @type {Teriock.Application.DragDropPayload<AnyCommonDocument>|null} */
   static #payload = null;
+
+  /**
+   * Cleanup for any drag initialized via {@link initializeDragEvent}.
+   * @param {DragEvent} event
+   * @todo Move to {@link this._handleDragEnd} when core fixes event binding in {@link CompendiumDirectory._onRender}.
+   */
+  static #onDragEnd(event) {
+    TeriockDragDrop.dragStartApplication?._onDragEnd(event);
+    // No drop happened anywhere, so let the application under the release point explain a rejection.
+    if (event.dataTransfer.dropEffect === "none") {
+      const element = document.elementFromPoint(event.clientX, event.clientY);
+      const application = foundry.applications.instances.get(element?.closest?.(".application")?.id);
+      application?._onDropRejected?.(event);
+    }
+    for (const application of TeriockDragDrop.enteredApplications) { application._onDragLeaveApplication(); }
+    TeriockDragDrop.enteredApplications.clear();
+    TeriockDragDrop.#payload = null;
+    TeriockDragDrop.dragStartApplication = null;
+  }
+
+  /**
+   * Set document drag data.
+   * @param {DragEvent} event
+   * @param {Teriock.Application.DropData} dragData
+   * @param {TeriockDocument} document
+   */
+  static #setDocumentDragData(event, dragData, document) {
+    dragData.identifier ??= document?.typedIdentifier;
+    TeriockDragDrop.#payload.document ??= document;
+    TeriockDragDrop.#payload.identifier = dragData.identifier;
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
 
   /** @type {DragDropApplication|null} */
   static dragStartApplication = null;
@@ -29,41 +59,22 @@ export default class TeriockDragDrop extends DragDrop {
    * Ensure all the required drag event data is set. The drag data store is only writable while the dragstart event is
    * being dispatched, so this must be called synchronously from a dragstart handler.
    * @param {DragEvent} event
-   * @param {object} [data]
    */
-  static initializeDragEvent(event, data = {}) {
+  static initializeDragEvent(event) {
     game.tooltip.deactivate();
-    const dragData = Object.assign(TextEditor.implementation.getDragEventData(event), data);
+    window.addEventListener("dragend", TeriockDragDrop.#onDragEnd, { once: true });
+    const dragData = TextEditor.implementation.getDragEventData(event);
     dragData.interactive ??= !game.keyboard.isModifierActive("CONTROL");
-    if (dragData?.uuid) {
-      dragData.document ??= fromUuidSync(dragData.uuid, { strict: false });
-      dragData.identifier ??= dragData.document?.typedIdentifier;
-    }
-    event.dataTransfer.setData("text/plain", JSON.stringify(omit(dragData, ["document"])));
     TeriockDragDrop.#payload = dragData;
-    if (dragData?.uuid) {
-      fromUuid(dragData.uuid).then(doc => {
-        if (!doc || TeriockDragDrop.#payload !== dragData) { return; }
-        dragData.document = doc;
-        dragData.identifier ??= doc.typedIdentifier;
+    const document = fromUuidSync(dragData.uuid, { strict: false });
+    if (document) {
+      this.#setDocumentDragData(event, dragData, document);
+    } else {
+      fromUuid(dragData.uuid).then(document => {
+        if (!document) { return; }
+        this.#setDocumentDragData(event, dragData, document);
       });
     }
-  }
-
-  /** @inheritDoc */
-  _handleDragEnd(event) {
-    super._handleDragEnd(event);
-    TeriockDragDrop.dragStartApplication?._onDragEnd(event);
-    // No drop happened anywhere, so let the application under the release point explain a rejection.
-    if (event.dataTransfer.dropEffect === "none") {
-      const element = document.elementFromPoint(event.clientX, event.clientY);
-      const application = foundry.applications.instances.get(element?.closest?.(".application")?.id);
-      application?._onDropRejected?.(event);
-    }
-    for (const application of TeriockDragDrop.enteredApplications) { application._onDragLeaveApplication(); }
-    TeriockDragDrop.enteredApplications.clear();
-    TeriockDragDrop.#payload = null;
-    TeriockDragDrop.dragStartApplication = null;
   }
 
   /** @inheritDoc */
