@@ -236,6 +236,22 @@ export default function DragDropApplicationMixin(Base) {
         await super._onRender(context, options);
         this._dragDrop.bind(this.element);
       }
+
+      /** @inheritDoc */
+      async maximize() {
+        // Minimize/maximize in close succession from dragging/dropping can leave leftover classes.
+        this.element.classList.remove("minimizing");
+        await super.maximize();
+        this.element.classList.remove("minimized");
+      }
+
+      /** @inheritDoc */
+      async minimize() {
+        // Minimize/maximize in close succession from dragging/dropping can leave leftover classes.
+        this.element.classList.remove("maximizing");
+        await super.minimize();
+        this.element.classList.remove("maximized");
+      }
     }
   );
 }
