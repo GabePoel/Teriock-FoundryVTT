@@ -32,7 +32,7 @@ export default class TeriockChatPopout extends ChatMessageConnectionMixin(ChatPo
 
   /** @inheritDoc */
   _onPosition(position) {
-    super._prePosition(position);
+    super._onPosition(position);
     // Explicitly set height or else minimizing and maximizing will mess up the height if the message has panels.
     this.element.style.height = "fit-content";
   }
