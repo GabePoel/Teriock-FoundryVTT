@@ -1,4 +1,5 @@
 import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
+import { TeriockActiveEffect } from "../../../documents/_module.mjs";
 import { qualifiedChangeField } from "../../fields/tools/builders.mjs";
 import { migrateChange } from "../../migrations/change-migrations.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
@@ -41,16 +42,23 @@ export default class ChangesAutomation extends CritMechanicMixin(BaseAutomation)
 
   /** @inheritDoc */
   getChanges() {
-    return this.changes.map(c => ({ ...c }));
+    return this.changes.map(c => ({
+      ...c,
+      priority: c.priority ?? TeriockActiveEffect.CHANGE_TYPES[c.type]?.defaultPriority ?? 0,
+    }));
   }
 
   /** @inheritDoc */
   async getEditor() {
     const html = await TeriockTextEditor.renderTemplate("teriock/sheets/shared/changes", {
-      changesData: this.changes,
+      changesData: this._source.changes.map(c => ({
+        ...c,
+        defaultPriority: (TeriockActiveEffect.CHANGE_TYPES[c.type]?.defaultPriority ?? 0).toString(),
+      })),
       changesPath: `${this.localPath}.changes`,
       editable: this.document?.sheet?.isEditable,
       fieldDefs: this.schema.fields.changes.element.fields,
+      types: TeriockActiveEffect.CHANGE_TYPES,
       valuePath: `_source.${this.localPath}.changes`,
     });
     return /** @type {HTMLDivElement} */ foundry.utils.parseHTML(html);

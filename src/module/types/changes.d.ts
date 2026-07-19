@@ -1,10 +1,11 @@
 import { EffectChangeData } from "@common/documents/_types.mjs";
 
+import changeConfig from "../constants/config/change-config.mjs";
 import { changeConfigs } from "../setup/_module.mjs";
 
 declare global {
   namespace Teriock.Changes {
-    export type Phase = "final" | "initial" | keyof typeof TERIOCK.config.change.phase;
+    export type Phase = "final" | "initial" | keyof typeof changeConfig.phase;
 
     export type Type =
       | "add"

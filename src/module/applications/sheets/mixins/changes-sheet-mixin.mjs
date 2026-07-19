@@ -33,7 +33,7 @@ export default function ChangesSheetMixin(Base) {
         const newChange = {
           key: "",
           phase: TERIOCK.config.change.defaultPhase,
-          priority: 0,
+          priority: null,
           qualifier: "1",
           target: "Actor",
           type: "add",
@@ -82,7 +82,10 @@ export default function ChangesSheetMixin(Base) {
             const property = el.dataset.property;
             const changes = foundry.utils.deepClone(foundry.utils.getProperty(this.document._source, path));
             let value = el.value;
-            if (property === "priority") { value = Number(value); }
+            if (property === "priority") {
+              if (value === "") { value = null; }
+              else { value = Number(value); }
+            }
             changes[Number(index)][property] = value;
             this.document.update({ [path]: changes });
           });

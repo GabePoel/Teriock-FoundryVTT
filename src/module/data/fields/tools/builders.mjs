@@ -84,7 +84,13 @@ export function qualifiedChangeField() {
       label: "TERIOCK.SCHEMA.QualifiedChange.phase.label",
       required: true,
     }),
-    priority: new NumberField({ initial: 20, label: "TERIOCK.SCHEMA.QualifiedChange.priority.label" }),
+    priority: new NumberField({
+      blank: true,
+      initial: null,
+      label: "TERIOCK.SCHEMA.QualifiedChange.priority.label",
+      nullable: true,
+      required: false,
+    }),
     target: new StringField({
       choices: objectMap(TERIOCK.config.change.parent.targets, (t) => t, { localize: true }),
       initial: "Actor",
