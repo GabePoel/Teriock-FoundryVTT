@@ -6,6 +6,7 @@ export { default as DocumentCreationSheetMixin } from "./document-creation-sheet
 export { default as DragDropSheetMixin } from "./drag-drop-sheet-mixin.mjs";
 export { default as FieldsSheetMixin } from "./fields-sheet-mixin.mjs";
 export { default as ImageEditingSheetMixin } from "./image-editing-sheet-mixin.mjs";
+export { default as InventoryManagementSheetMixin } from "./inventory-management-sheet-mixin.mjs";
 export { default as LockingSheetMixin } from "./locking-sheet-mixin.mjs";
 export { default as MechanicsSheetMixin } from "./mechanics-sheet-mixin.mjs";
 export { default as MechanicsTabsSheetMixin } from "./mechanics-tabs-sheet-mixin.mjs";

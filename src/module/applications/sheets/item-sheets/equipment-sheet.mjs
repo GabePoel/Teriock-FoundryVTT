@@ -1,17 +1,17 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
+import { mixClasses } from "../../../helpers/construction.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
 import { secondaryFormat } from "../../../helpers/localization.mjs";
-import { TeriockDragDrop } from "../../ux/_module.mjs";
+import { InventoryManagementSheetMixin } from "../mixins/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
 
 /**
  * Sheet for a {@link TeriockEquipment}.
  * @extends {ArmamentSheet}
  * @mixes DragDropSheet
+ * @mixes InventoryManagementSheet
  * @property {TeriockEquipment} document
  */
-export default class EquipmentSheet extends ArmamentSheet {
+export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryManagementSheetMixin) {
   /** @type {string[]} */
   static BARS = [
     "teriock/sheets/items/equipment/status-bar",
@@ -22,30 +22,10 @@ export default class EquipmentSheet extends ArmamentSheet {
     "teriock/sheets/items/equipment/storage-bar",
   ];
 
-  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = {
-    classes: ["equipment"],
-    window: { icon: makeIconClass(documentConfig.equipment.icon, "title") },
-  };
-
   /** @inheritDoc */
   _checkChildDropEditable(droppedDocument, dropEffect) {
     return (this.document.system.storage.enabled && this.document.isOwner && droppedDocument?.type === "equipment")
       || super._checkChildDropEditable(droppedDocument, dropEffect);
-  }
-
-  /** @inheritDoc */
-  _dropEffect(event) {
-    const dropEffect = super._dropEffect(event);
-    if (dropEffect === "none" || !this.document.actor) { return dropEffect; }
-    const document = TeriockDragDrop.payload?.document;
-    if (
-      document?.type === "equipment" && document.actor && document.isOwner
-      && (document.actor === this.document.actor || !document.inCompendium)
-    ) {
-      return "move";
-    }
-    return dropEffect;
   }
 
   /** @inheritDoc */

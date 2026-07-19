@@ -1,5 +1,3 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
 import { RankClassUpdater, RankOriginUpdater } from "../../dialogs/_module.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
@@ -38,6 +36,5 @@ export default class RankSheet extends ChildSheet {
   static DEFAULT_OPTIONS = {
     actions: { editClass: this.#onEditClass, editOrigin: this.#onEditOrigin },
     classes: ["rank"],
-    window: { icon: makeIconClass(documentConfig.rank.icon, "title") },
   };
 }

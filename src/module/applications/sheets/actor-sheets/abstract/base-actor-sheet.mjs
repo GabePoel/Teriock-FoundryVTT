@@ -2,7 +2,6 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { BaseDocumentSheetMixin } from "../../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../../shared/_module.mjs";
-import { TeriockDragDrop } from "../../../ux/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -14,6 +13,7 @@ const { HandlebarsApplicationMixin } = foundry.applications.api;
  * @mixes BaseDocumentSheet
  * @mixes CommonSheet
  * @mixes HackStatApplication
+ * @mixes InventoryManagementSheet
  * @property {TeriockActor} actor
  * @property {TeriockActor} document
  */
@@ -24,6 +24,7 @@ export default class BaseActorSheet
     HandlebarsApplicationMixin,
     BaseDocumentSheetMixin,
     mixins.CommonSheetMixin,
+    mixins.InventoryManagementSheetMixin,
   )
 {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -32,20 +33,6 @@ export default class BaseActorSheet
   constructor(...args) {
     super(...args);
     this._locked = false;
-  }
-
-  /** @inheritDoc */
-  _dropEffect(event) {
-    const dropEffect = super._dropEffect(event);
-    if (dropEffect === "none") { return dropEffect; }
-    const document = TeriockDragDrop.payload?.document;
-    if (
-      document?.type === "equipment" && document.actor && document.isOwner
-      && (document.actor === this.document || !document.inCompendium)
-    ) {
-      return "move";
-    }
-    return dropEffect;
   }
 
   /** @inheritDoc */

@@ -8,9 +8,6 @@ export default class PropertySheet extends ChildSheet {
   /** @type {string[]} */
   static BARS = ["teriock/sheets/effects/property/status-bar", "teriock/sheets/shared/bars/consumable-bar"];
 
-  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = { classes: ["property"] };
-
   /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), { wideToggles: true });

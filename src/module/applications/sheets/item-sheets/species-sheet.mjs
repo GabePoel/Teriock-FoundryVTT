@@ -1,5 +1,3 @@
-import documentConfig from "../../../constants/config/document-config.mjs";
-import { makeIconClass } from "../../../helpers/icon.mjs";
 import { ChildSheet } from "../utility-sheets/_module.mjs";
 
 /**
@@ -14,10 +12,4 @@ export default class SpeciesSheet extends ChildSheet {
     "teriock/sheets/items/species/lifespan-bar",
     "teriock/sheets/items/species/size-bar",
   ];
-
-  /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-  static DEFAULT_OPTIONS = {
-    classes: ["species"],
-    window: { icon: makeIconClass(documentConfig.species.icon, "title") },
-  };
 }
