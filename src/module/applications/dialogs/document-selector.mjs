@@ -80,8 +80,8 @@ export default class DocumentSelector extends ResolvableDialog {
     let ids = [];
     if (this.multi) { ids = Array.from(root.querySelectorAll("input[type=\"checkbox\"]:checked")).map(el => el.name); }
     else {
-      const radio = root.querySelector(`input[name="choice-${this.id}"]:checked`);
-      if (radio) { ids = [radio?.value]; }
+      const radio = root.querySelector(`input[name]:checked`);
+      if (radio) { ids = [radio?.value].filter(Boolean); }
     }
     this._finish(ids);
     await this.close();
@@ -172,7 +172,7 @@ export default class DocumentSelector extends ResolvableDialog {
   constructor(documents, options = {}, config = {}) {
     const { hint = "", multi = true, openable = false, tooltip = true } = options;
     super(config);
-    this.docs = documents;
+    this.documents = documents;
     this.multi = multi;
     this.hint = hint;
     this.tooltip = tooltip;
@@ -180,6 +180,7 @@ export default class DocumentSelector extends ResolvableDialog {
     if (options.title) { foundry.utils.setProperty(this.options, "window.title", options.title); }
     if (options.icon) { foundry.utils.setProperty(this.options, "window.icon", options.icon); }
     this.config = foundry.utils.mergeObject(this.config ?? {}, this.options);
+    this.unchecked = !Object.values(documents).some(d => d.checked);
   }
 
   /** @inheritDoc */
@@ -223,10 +224,11 @@ export default class DocumentSelector extends ResolvableDialog {
         label: "COMMON.Confirm",
         type: "submit",
       }],
-      documents: this.docs,
+      documents: this.documents,
       hint: this.hint,
       multi: this.multi,
       tooltip: this.tooltip,
+      unchecked: this.unchecked,
     });
   }
 }

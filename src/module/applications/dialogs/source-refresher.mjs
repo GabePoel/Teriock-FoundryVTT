@@ -64,9 +64,9 @@ export default class SourceRefresher extends DocumentDialog {
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
-    const documents = await this.document.system.getRefreshSources();
-    const documentMap = Object.fromEntries(
-      documents.map(
+    const refreshSourceNodes = await this.document.system.getRefreshSources();
+    const refreshSourceMap = Object.fromEntries(
+      refreshSourceNodes.map(
         n => [n.document.uuid, { img: n.document.img, name: n.document.name, text: n.label, uuid: n.document.uuid }]
       ),
     );
@@ -78,11 +78,14 @@ export default class SourceRefresher extends DocumentDialog {
         type: "submit",
       }],
       choiceName: "state.selected",
-      documents: documentMap,
+      documents: refreshSourceMap,
       fields: this._prepareModelFields("refreshOptions"),
-      hint: _loc(documents.length ? "TERIOCK.DIALOGS.SourceRefresh.hint" : "TERIOCK.DIALOGS.SourceRefresh.noSources"),
+      hint: _loc(
+        refreshSourceNodes.length ? "TERIOCK.DIALOGS.SourceRefresh.hint" : "TERIOCK.DIALOGS.SourceRefresh.noSources",
+      ),
       state: this.state,
       tooltip: true,
+      unchecked: true,
     });
   }
 }

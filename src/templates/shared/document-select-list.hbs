@@ -1,5 +1,18 @@
 {{!-- This doesn't overflow. That needs to be provided by templates that use this template. --}}
 <ul class="doc-select teriock-block-container small" role="listbox">
+  {{#if (not multi)}}
+    {{!-- TODO: Remove this dummy radio if the issue with un-checked radio rendering issues ever get fixed. --}}
+    <label class="hidden">
+      <input
+        id="doc-{{ @root/partId }}-null"
+        {{#if unchecked}}
+          checked="checked"
+        {{/if}}
+        name='{{ifThen choiceName choiceName (concat "choice-" @root/partId)}}'
+        type="radio"
+      />
+    </label>
+  {{/if}}
   {{#each documents as |doc id|}}
     <li class="doc-select-item">
       <label
@@ -14,7 +27,7 @@
       >
         <span class="doc-checkbox-container">
           <input
-            id='doc-{{concat @root/appId "-" id}}'
+            id='doc-{{concat @root/partId "-" id}}'
             {{#if checked}}
               checked="checked"
             {{/if}}
@@ -27,7 +40,7 @@
               value="{{ id }}"
             {{else}}
               type="radio"
-              name="{{concat "choice-" @root/appId}}"
+              name="{{concat "choice-" @root/partId}}"
               value="{{ id }}"
             {{/if}}
           />
