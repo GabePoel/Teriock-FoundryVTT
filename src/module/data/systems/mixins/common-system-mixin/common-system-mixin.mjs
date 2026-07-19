@@ -91,7 +91,7 @@ export default function CommonSystemMixin(Base) {
       get embedParts() {
         return {
           color: this.color,
-          draggable: true,
+          draggable: this.document.isViewer,
           icons: this._embedIcons.filter(i => this.#checkEmbedIcon(i)),
           id: /** @type {ID<AnyCommonDocument>} */ this.parent.id,
           img: this.parent.img,

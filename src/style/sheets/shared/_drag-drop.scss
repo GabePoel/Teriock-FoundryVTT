@@ -1,7 +1,21 @@
-.teriock-drop-target {
-  --color-drop-target-glow: color-mix(in srgb, var(--color-warm-2), transparent 80%);
-  --color-drop-target-outline: color-mix(in srgb, var(--color-warm-2), transparent 25%);
+@mixin drop-target-marking {
+  border-radius: 0 0 6px 6px;
   box-shadow: inset 0 0 24px 4px var(--color-drop-target-glow);
   outline: 2px dashed var(--color-drop-target-outline);
   outline-offset: -6px;
+}
+
+.teriock-drop-target {
+  --color-drop-target-glow: color-mix(in srgb, var(--color-warm-2), transparent 80%);
+  --color-drop-target-outline: color-mix(in srgb, var(--color-warm-2), transparent 25%);
+  @include drop-target-marking;
+}
+
+.teriock-drop-target .actor-page::after {
+  @include drop-target-marking;
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
 }

@@ -12,7 +12,10 @@ export default function BaseDocumentSheetMixin(Base) {
    */
   class BaseDocumentSheet extends BaseApplicationMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-    static DEFAULT_OPTIONS = { teriock: { autoIcon: true } };
+    static DEFAULT_OPTIONS = {
+      classes: ["teriock-sheet"],
+      teriock: { autoIcon: true, maximizeOnDragEnter: true, minimizeOnDragStart: true },
+    };
 
     /** @inheritDoc */
     get isEditable() {

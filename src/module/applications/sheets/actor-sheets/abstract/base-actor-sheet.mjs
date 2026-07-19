@@ -2,6 +2,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { getImage } from "../../../../helpers/path.mjs";
 import { BaseDocumentSheetMixin } from "../../../api/_module.mjs";
 import { HackStatApplicationMixin } from "../../../shared/_module.mjs";
+import { TeriockDragDrop } from "../../../ux/_module.mjs";
 import * as mixins from "../../mixins/_module.mjs";
 
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -34,10 +35,17 @@ export default class BaseActorSheet
   }
 
   /** @inheritDoc */
-  _defaultDropBehavior(droppedDocument) {
-    // Equipment already carried by this actor is rearranged rather than duplicated.
-    if (droppedDocument?.type === "equipment" && droppedDocument.actor === this.document) { return "move"; }
-    return super._defaultDropBehavior(droppedDocument);
+  _dropEffect(event) {
+    const dropEffect = super._dropEffect(event);
+    if (dropEffect === "none") { return dropEffect; }
+    const document = TeriockDragDrop.payload?.document;
+    if (
+      document?.type === "equipment" && document.actor && document.isOwner
+      && (document.actor === this.document || !document.inCompendium)
+    ) {
+      return "move";
+    }
+    return dropEffect;
   }
 
   /** @inheritDoc */

@@ -19,6 +19,22 @@ declare global {
        * handler, mirroring Foundry's `data-action` / `actions` pattern.
        */
       doubles?: Partial<Record<string, ApplicationDoubleAction>>;
+      teriock?: { maximizeOnDragEnter?: boolean, minimizeOnDragStart?: boolean };
+    };
+
+    export type DragDropConfiguration = { dragDrop: Teriock.Application.DragDropSelector[] };
+
+    export type DragDropSelector = { dragSelector: string | null, dropSelector: string | null };
+
+    export type DropEffect = "copy" | "link" | "move" | "none";
+
+    export type DropData<T> = {
+      data?: T;
+      document?: T;
+      identifier?: TypedIdentifier;
+      interactive?: boolean;
+      type: "ActiveEffect" | "Actor" | "Automation" | "Item" | "JournalEntryPage" | "Macro";
+      uuid: UUID<T>;
     };
   }
 }

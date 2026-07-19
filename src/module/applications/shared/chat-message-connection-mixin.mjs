@@ -1,5 +1,6 @@
+import { mixClasses } from "../../helpers/construction.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
-import { BaseApplicationMixin } from "../api/mixins/_module.mjs";
+import { BaseApplicationMixin, DragDropApplicationMixin } from "../api/mixins/_module.mjs";
 import { TeriockContextMenu } from "../ux/_module.mjs";
 
 const { ImagePopout } = foundry.applications.apps;
@@ -11,9 +12,11 @@ const { ImagePopout } = foundry.applications.apps;
 export default function ChatMessageConnectionMixin(Base) {
   /**
    * @extends {ApplicationV2}
+   * @mixes BaseApplication
+   * @mixes DragDropApplication
    * @mixin
    */
-  class ChatMessageConnection extends BaseApplicationMixin(Base) {
+  class ChatMessageConnection extends mixClasses(Base, BaseApplicationMixin, DragDropApplicationMixin) {
     /**
      * Run an activation's primary (left-click) or secondary (right-click) action.
      * @this {ChatMessageConnection}

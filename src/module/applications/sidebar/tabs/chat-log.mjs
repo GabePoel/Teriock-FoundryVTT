@@ -105,6 +105,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
     await super.updateMessage(message, notify);
     const card = this.element?.querySelector(`.message[data-message-id="${message.id}"]`);
     if (card) { this._reapplyCollapsibleSates(card); }
+    this._dragDrop.bind(this.element);
   }
 
   /** @inheritDoc */

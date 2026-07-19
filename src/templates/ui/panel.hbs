@@ -97,17 +97,23 @@
                 <div class="teriock-panel-association-card-container">
                   <div class="teriock-panel-association-card-spacer">
                     {{#each cards}}
-                      <a
-                        class="teriock-panel-association-row teriock-panel-association-card"
+                      <div
+                        class="
+                          teriock-panel-association-row
+                          teriock-panel-association-card
+                          {{#if (or draggable @root/user.isGM)}}
+                            draggable
+                          {{/if}}
+                        "
                         data-uuid="{{{ uuid }}}"
                         data-id="{{{ id }}}"
                         data-type="{{{ type }}}"
                         data-pack="{{{ pack }}}"
-                        {{#if (or draggable @root/user.isGm)}}
-                          draggable="true"
-                        {{/if}}
                         data-link
                         data-tooltip-direction="LEFT"
+                        {{#if (or draggable @root/user.isGM)}}
+                          data-action="openDocument"
+                        {{/if}}
                         {{#if makeTooltip}}
                           data-tooltip-uuid="{{{ uuid }}}"
                         {{/if}}
@@ -140,7 +146,7 @@
                             {{{ badge }}}
                           </div>
                         {{/if}}
-                      </a>
+                      </div>
                     {{/each}}
                   </div>
                 </div>

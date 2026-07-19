@@ -5,7 +5,7 @@ import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
-import { TeriockContextMenu } from "../../ux/_module.mjs";
+import { TeriockContextMenu, TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
 
 /**
@@ -100,7 +100,7 @@ export default function MechanicsSheetMixin(Base) {
        * @returns {boolean}
        */
       get _canDropMechanics() {
-        return this._tab === "mechanics";
+        return this._tab === "mechanics" && game.teriock.checkEditable(this);
       }
 
       /**
@@ -151,17 +151,40 @@ export default function MechanicsSheetMixin(Base) {
         return collections;
       }
 
+      /** @inheritDoc */
+      _dropEffect(event) {
+        const dropEffect = super._dropEffect(event);
+        if (dropEffect !== "none") { return dropEffect; }
+        if (!this.isEditable || TeriockDragDrop.dragStartApplication === this) { return "none"; }
+        return this._mechanicCollectionFor(TeriockDragDrop.payload?.type) ? "copy" : "none";
+      }
+
+      /**
+       * The mechanic collection a dropped document name belongs to, if any of them accept it.
+       * @param {string} documentName
+       * @returns {Teriock.Sheet.MechanicCollectionConfig|undefined}
+       */
+      _mechanicCollectionFor(documentName) {
+        if (!documentName) { return undefined; }
+        return Object.values(this._mechanicCollections).find(c => c.baseClass.metadata.documentName === documentName);
+      }
+
+      /** @inheritDoc */
+      async _onDrop(event) {
+        await super._onDrop(event);
+        const dropData = TeriockTextEditor.getDragEventData(event);
+        await this._onDropMechanic(event, dropData);
+      }
+
       /**
        * Create a mechanic from drop data on whichever of the document's mechanic collections it belongs to.
-       * @param {Teriock.Sheet.EmbedDragEvent} _event
-       * @param {Teriock.Sheet.DropData<MechanicPseudoDocument>} dropData
+       * @param {DragEvent} _event
+       * @param {Teriock.Application.DropData<MechanicPseudoDocument>} dropData
        * @returns {Promise<boolean>} Whether the drop was handled.
        */
       async _onDropMechanic(_event, dropData) {
         if (!this._canDropMechanics) { return false; }
-        const config = Object.values(this._mechanicCollections).find(c =>
-          c.baseClass.metadata.documentName === dropData.type
-        );
+        const config = this._mechanicCollectionFor(dropData.type);
         if (!config) { return false; }
         const mechanic = await config.baseClass.fromDropData(dropData);
         if (!mechanic) { return false; }

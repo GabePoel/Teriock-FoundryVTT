@@ -2,6 +2,7 @@ import documentConfig from "../../../constants/config/document-config.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
 import { secondaryFormat } from "../../../helpers/localization.mjs";
+import { TeriockDragDrop } from "../../ux/_module.mjs";
 import ArmamentSheet from "./armament-sheet.mjs";
 
 /**
@@ -28,23 +29,23 @@ export default class EquipmentSheet extends ArmamentSheet {
   };
 
   /** @inheritDoc */
-  _canDragDrop() {
-    return this.document.isOwner;
-  }
-
-  /** @inheritDoc */
-  _checkChildDropEditable(droppedDocument, behavior) {
+  _checkChildDropEditable(droppedDocument, dropEffect) {
     return (this.document.system.storage.enabled && this.document.isOwner && droppedDocument?.type === "equipment")
-      || super._checkChildDropEditable(droppedDocument, behavior);
+      || super._checkChildDropEditable(droppedDocument, dropEffect);
   }
 
   /** @inheritDoc */
-  _defaultDropBehavior(droppedDocument) {
-    // Equipment carried by the same actor is moved into or out of this container rather than duplicated.
+  _dropEffect(event) {
+    const dropEffect = super._dropEffect(event);
+    if (dropEffect === "none" || !this.document.actor) { return dropEffect; }
+    const document = TeriockDragDrop.payload?.document;
     if (
-      droppedDocument?.type === "equipment" && droppedDocument.actor && droppedDocument.actor === this.document.actor
-    ) { return "move"; }
-    return super._defaultDropBehavior(droppedDocument);
+      document?.type === "equipment" && document.actor && document.isOwner
+      && (document.actor === this.document.actor || !document.inCompendium)
+    ) {
+      return "move";
+    }
+    return dropEffect;
   }
 
   /** @inheritDoc */

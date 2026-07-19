@@ -11,11 +11,27 @@ export default function BaseApplicationMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
     static DEFAULT_OPTIONS = {
       actions: {
+        openDocument: this._onOpenDocument,
         toggleCollapse: this._onToggleCollapse,
         toggleCollapseRightClick: { buttons: [2], handler: this._onToggleCollapse },
       },
       classes: ["teriock"],
     };
+
+    /**
+     * Open a document.
+     * @param {PointerEvent} event
+     * @param {HTMLElement} target
+     * @this {BaseApplication}
+     * @returns {Promise<void>}
+     */
+    static async _onOpenDocument(event, target) {
+      event.stopPropagation();
+      if (target.dataset.uuid) {
+        const document = await foundry.utils.fromUuid(target.dataset.uuid);
+        await document?.sheet?.render(true);
+      }
+    }
 
     /**
      * Toggle the collapse state of a collapsible element.

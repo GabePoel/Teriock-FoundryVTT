@@ -134,10 +134,21 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
   }
 
   /**
+   * Allow drops even when the containing application isn't itself a valid drop target.
+   * @param {DragEvent} event
+   */
+  #onDragOver(event) {
+    if (!this.editable) { return; }
+    event.preventDefault();
+    event.dataTransfer.dropEffect = "copy";
+  }
+
+  /**
    * Handle data dropped onto the form element.
    * @param {DragEvent} event
    */
   #onDrop(event) {
+    if (!this.editable) { return; }
     event.preventDefault();
     event.stopImmediatePropagation();
     const dropData = TeriockTextEditor.getDragEventData(event);
@@ -285,6 +296,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
     this.#tags.addEventListener("click", this.#onClickTag.bind(this));
     this.#input.addEventListener("keydown", this.#onKeydown.bind(this));
     this.#input.addEventListener("change", event => event.stopPropagation());
+    this.addEventListener("dragover", this.#onDragOver.bind(this), { signal: this.abortSignal });
     this.addEventListener("drop", this.#onDrop.bind(this), { signal: this.abortSignal });
   }
 

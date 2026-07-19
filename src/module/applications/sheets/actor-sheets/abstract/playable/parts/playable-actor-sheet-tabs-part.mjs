@@ -75,6 +75,9 @@ export default function PlayableActorSheetTabsPart(Base) {
         await this.render();
       }
 
+      /** @type {string|null} */
+      #tabBeforeDrag = null;
+
       /** @type {"LEFT"|"RIGHT"} */
       #tabDirection = "RIGHT";
 
@@ -89,12 +92,26 @@ export default function PlayableActorSheetTabsPart(Base) {
       _activeTab = "tradecrafts";
 
       /** @inheritDoc */
+      async _onDragLeaveApplication() {
+        await super._onDragLeaveApplication();
+        if (this.#tabBeforeDrag) { await this.setActiveTab(this.#tabBeforeDrag); }
+        this.#tabBeforeDrag = null;
+      }
+
+      /** @inheritDoc */
       async _onDragOver(event) {
         await super._onDragOver(event);
-        if (this._canDragDrop()) {
-          const tab = this.constructor.TAB_FOR_SYSTEM_TYPE[TeriockDragDrop.payload?.systemType];
-          if (tab && tab !== this._activeTab) { await this.setActiveTab(tab); }
-        }
+        if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
+        const tab = this.constructor.TAB_FOR_SYSTEM_TYPE[TeriockDragDrop.payload?.document?.type];
+        if (!tab || tab === this._activeTab) { return; }
+        this.#tabBeforeDrag ??= this._activeTab;
+        await this.setActiveTab(tab);
+      }
+
+      /** @inheritDoc */
+      async _onDrop(event) {
+        this.#tabBeforeDrag = null;
+        await super._onDrop(event);
       }
 
       /** @inheritDoc */

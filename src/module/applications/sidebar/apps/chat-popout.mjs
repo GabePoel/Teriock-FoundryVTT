@@ -18,9 +18,10 @@ export default class TeriockChatPopout extends ChatMessageConnectionMixin(ChatPo
     target.classList.toggle("expanded");
   }
 
-  /** @type {Partial<ApplicationConfiguration>} */
+  /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
   static DEFAULT_OPTIONS = {
     actions: { expandRoll: this.#onExpandRoll },
+    teriock: { minimizeOnDragStart: true },
     window: { icon: makeIconClass(CONFIG.ChatMessage.sidebarIcon, "title") },
   };
 

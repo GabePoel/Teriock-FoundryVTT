@@ -1,26 +1,33 @@
+import { DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 
-const DragDrop = foundry.applications.ux.DragDrop.implementation;
+const CHILD_DOCUMENT_TYPES = ["ActiveEffect", "Actor", "Item"];
+const DROP_TARGET_CLASS = "teriock-drop-target";
 
 /**
+ * Mixin adding drag-and-drop handling to sheets.
  * @param {typeof TeriockDocumentSheet} Base
  */
 export default function DragDropSheetMixin(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
-     * @property {AnyCommonDocument} document
+     * @mixes DragDropApplication
      * @mixin
+     * @property {AnyCommonDocument} document
      */
-    class DragDropSheet extends Base {
+    class DragDropSheet extends DragDropApplicationMixin(Base) {
+      /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
+      static DEFAULT_OPTIONS = { teriock: { maximizeOnDragEnter: true, minimizeOnDragStart: true } };
+
       /**
        * Whether a drop should be performed by moving a sub.
        * @param {AnyCommonDocument} droppedDocument
-       * @param {Teriock.Sheet.DropBehavior} behavior
+       * @param {Teriock.Application.DropEffect} dropEffect
        * @returns {boolean}
        */
-      #isSubMove(droppedDocument, behavior) {
-        if (behavior !== "move" || !droppedDocument.documentMetadata?.hierarchy) { return false; }
+      #isSubMove(droppedDocument, dropEffect) {
+        if (dropEffect !== "move" || !droppedDocument.documentMetadata?.hierarchy) { return false; }
         if (this.#subMoveTarget(droppedDocument) === (droppedDocument.system._sup || null)) { return false; }
         if (droppedDocument.documentName === this.document.documentName) {
           return droppedDocument.parent === this.document.parent && droppedDocument.pack === this.document.pack;
@@ -56,57 +63,52 @@ export default function DragDropSheetMixin(Base) {
       }
 
       /**
-       * Checks if a drop is allowed.
-       * @returns {boolean}
+       * What gets marked as where a drop would land.
+       * @returns {HTMLElement|null}
        */
-      _canDragDrop() {
-        return this.isEditable;
-      }
-
-      /**
-       * Checks if drag start is allowed.
-       * @param {string} _selector
-       * @returns {boolean}
-       */
-      _canDragStart(_selector) {
-        return true;
+      get _dropTargetElement() {
+        return this.window.content;
       }
 
       /**
        * Checks if some other document can be dropped on this document.
        * @param {AnyCommonDocument} droppedDocument
-       * @param {Teriock.Sheet.DropBehavior} [behavior]
+       * @param {Teriock.Application.DropEffect} [dropEffect]
        * @returns {boolean}
        */
-      _canDropChild(droppedDocument, behavior = "copy") {
-        if (!this._checkChildDropEditable(droppedDocument, behavior)) { return false; }
+      _canDropChild(droppedDocument, dropEffect = "copy") {
         if (!droppedDocument || droppedDocument === this.document) { return false; }
-        if (!this._checkChildDropType(droppedDocument, behavior)) { return false; }
-        if (!this._checkChildDropViewer(droppedDocument, behavior)) { return false; }
-        if (!this._checkChildDropMove(droppedDocument, behavior)) { return false; }
-        if (droppedDocument.parent === this.document) { return this.#isSubMove(droppedDocument, behavior); }
+        if (!this._checkChildDropEditable(droppedDocument, dropEffect)) {
+          ui.notifications.error("TERIOCK.DIALOGS.Common.ERRORS.notEditable", { localize: true });
+          return false;
+        }
+        if (!this._checkChildDropType(droppedDocument, dropEffect)) { return false; }
+        if (!this._checkChildDropViewer(droppedDocument, dropEffect)) { return false; }
+        if (!this._checkChildDropMove(droppedDocument, dropEffect)) { return false; }
+        if (droppedDocument.parent === this.document) { return this.#isSubMove(droppedDocument, dropEffect); }
         return true;
       }
 
       /**
        * Checks if a child document is blocked from being dropped on this document because this isn't editable.
+       * Evaluated on every drag over event, so it must not notify.
        * @param {AnyCommonDocument} _droppedDocument
-       * @param {Teriock.Sheet.DropBehavior} _behavior
+       * @param {Teriock.Application.DropEffect} _dropEffect
        * @returns {boolean}
        */
-      _checkChildDropEditable(_droppedDocument, _behavior) {
-        return game.teriock.checkEditable(this);
+      _checkChildDropEditable(_droppedDocument, _dropEffect) {
+        return this.isEditable;
       }
 
       /**
        * Checks if a child document is blocked from being dropped on this document because its being moved and the user
        * has insufficient permissions to delete the original child document.
        * @param {AnyCommonDocument} droppedDocument
-       * @param {Teriock.Sheet.DropBehavior} behavior
+       * @param {Teriock.Application.DropEffect} dropEffect
        * @returns {boolean}
        */
-      _checkChildDropMove(droppedDocument, behavior) {
-        if (behavior === "move" && !droppedDocument.isOwner) {
+      _checkChildDropMove(droppedDocument, dropEffect) {
+        if (dropEffect === "move" && !droppedDocument.isOwner) {
           ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropMove");
           return false;
         }
@@ -116,10 +118,10 @@ export default function DragDropSheetMixin(Base) {
       /**
        * Checks if a child document is blocked from being dropped on this document because of its type.
        * @param {AnyCommonDocument} droppedDocument
-       * @param {Teriock.Sheet.DropBehavior} _behavior
+       * @param {Teriock.Application.DropEffect} _dropEffect
        * @returns {boolean}
        */
-      _checkChildDropType(droppedDocument, _behavior) {
+      _checkChildDropType(droppedDocument, _dropEffect) {
         const children = TERIOCK.config.document[droppedDocument?.type]?.plural ?? "";
         const parents = TERIOCK.config.document[this.document?.type]?.plural ?? "";
         if (!this.document.constructor.validateChildType(this.document, droppedDocument)) {
@@ -135,10 +137,10 @@ export default function DragDropSheetMixin(Base) {
       /**
        * Checks if a child document is blocked from being dropped on this document because of insufficient permissions.
        * @param {AnyCommonDocument} droppedDocument
-       * @param {Teriock.Sheet.DropBehavior} _behavior
+       * @param {Teriock.Application.DropEffect} _dropEffect
        * @returns {boolean}
        */
-      _checkChildDropViewer(droppedDocument, _behavior) {
+      _checkChildDropViewer(droppedDocument, _dropEffect) {
         if (!droppedDocument.isViewer) {
           ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropViewer");
           return false;
@@ -146,68 +148,61 @@ export default function DragDropSheetMixin(Base) {
         return true;
       }
 
-      /**
-       * The behavior to use for a drop that didn't explicitly ask for one.
-       * @param {AnyCommonDocument} _droppedDocument
-       * @returns {Teriock.Sheet.DropBehavior}
-       */
-      _defaultDropBehavior(_droppedDocument) {
-        return "copy";
+      /** @inheritDoc */
+      _dropEffect() {
+        const dropEffect = TeriockDragDrop.dragStartApplication === this ? "none" : "copy";
+        if (dropEffect === "none") { return dropEffect; }
+        const payload = TeriockDragDrop.payload;
+        const dragged = payload?.document;
+        // Only child documents can be dropped on the sheet itself; pseudo-documents are handled by other mixins.
+        if (!dragged || !CHILD_DOCUMENT_TYPES.includes(payload.type)) { return "none"; }
+        if (!this._checkChildDropEditable(dragged, dropEffect)) { return "none"; }
+        if (!this.document.constructor.validateChildType(this.document, dragged)) { return "none"; }
+        return dropEffect;
       }
 
-      /**
-       * Handles drag over events.
-       * @param {Teriock.Sheet.EmbedDragEvent} _event
-       * @returns {Promise<void>}
-       */
-      async _onDragOver(_event) {
-        if (this._canDragDrop()) { TeriockDragDrop.setDropSheet(this); }
+      /** @inheritDoc */
+      async _onDragLeaveApplication() {
+        await super._onDragLeaveApplication();
+        this._dropTargetElement?.classList.remove(DROP_TARGET_CLASS);
       }
 
-      /**
-       * Handles drag start events.
-       * @param {Teriock.Sheet.EmbedDragEvent} event
-       * @returns {Promise<void>}
-       */
+      /** @inheritDoc */
+      async _onDragOver(event) {
+        await super._onDragOver(event);
+        // Field drop targets receive the drop themselves, so the sheet shouldn't be marked while over one.
+        const marked = event.dataTransfer.dropEffect !== "none" && !this._fieldDropTarget(event);
+        this._dropTargetElement?.classList.toggle(DROP_TARGET_CLASS, marked);
+      }
+
+      /** @inheritDoc */
       _onDragStart(event) {
-        TeriockDragDrop.initializeDrag(event, this);
-        if (event.currentTarget.dataset.uuid) {
-          fromUuid(event.currentTarget.dataset.uuid).then(embedded => {
-            const dragData = embedded?.toDragData();
-            if (dragData) { TeriockDragDrop.setDefaultDragEventData(event, { ...dragData, startSheet: this.id }); }
-          });
-        }
+        if (event.dataTransfer.effectAllowed === "uninitialized") { event.dataTransfer.effectAllowed = "copyMove"; }
+        super._onDragStart(event);
       }
 
-      /**
-       * Handles drop events.
-       * @param {Teriock.Sheet.EmbedDragEvent} event
-       * @returns {Promise<void>}
-       */
+      /** @inheritDoc */
       async _onDrop(event) {
+        await super._onDrop(event);
+        this._dropTargetElement?.classList.remove(DROP_TARGET_CLASS);
         const dropData = TeriockTextEditor.getDragEventData(event);
-        if (dropData.startSheet === this.id) { return; }
-        if (typeof this._onDropMechanic === "function" && await this._onDropMechanic(event, dropData)) { return; }
-        if (["ActiveEffect", "Actor", "Item"].includes(dropData.type)) {
-          if (this._tab === "mechanics") { return; }
-          await this._onDropChild(event, dropData);
-        }
+        if (CHILD_DOCUMENT_TYPES.includes(dropData.type)) { await this._onDropChild(event, dropData); }
       }
 
       /**
        * Handles dropping of potential children.
-       * @param {Teriock.Sheet.EmbedDragEvent} _event
-       * @param {Teriock.Sheet.DropData<AnyCommonDocument>} dropData
+       * @param {DragEvent} event
+       * @param {Teriock.Application.DropData<AnyCommonDocument>} dropData
        * @returns {Promise<void>}
        */
-      async _onDropChild(_event, dropData) {
-        /** @type {typeof ClientDocument} */
+      async _onDropChild(event, dropData) {
+        // Browsers don't reliably report the negotiated dropEffect on the drop event, so recompute it.
+        const dropEffect = this._dropEffect(event);
         const Cls = foundry.utils.getDocumentClass(dropData.type);
-        const doc = /** @type {AnyChildDocument} */ await Cls.fromDropData(dropData);
+        const doc = await Cls?.fromDropData(dropData);
         const interactive = dropData.interactive ?? true;
-        const behavior = TeriockDragDrop.resolveBehavior(this._defaultDropBehavior(doc), dropData);
-        if (!this._canDropChild(doc, behavior)) { return; }
-        if (this.#isSubMove(doc, behavior)) { return this.#onMoveSub(doc, interactive); }
+        if (!this._canDropChild(doc, dropEffect)) { return; }
+        if (this.#isSubMove(doc, dropEffect)) { return this.#onMoveSub(doc, interactive); }
 
         const obj = doc.toObject(true);
         if (doc.inCompendium && !doc._stats.compendiumSource) { obj["_stats.compendiumSource"] = doc.uuid; }
@@ -217,7 +212,7 @@ export default function DragDropSheetMixin(Base) {
             notifyOnFailure: true,
           }),
         ];
-        if (behavior === "move" && doc.isOwner && !(doc.inCompendium && doc.pack !== this.document.pack)) {
+        if (dropEffect === "move" && doc.isOwner && !(doc.inCompendium && doc.pack !== this.document.pack)) {
           operations.push({
             action: "delete",
             documentName: doc.documentName,
@@ -230,19 +225,17 @@ export default function DragDropSheetMixin(Base) {
         await foundry.documents.modifyBatch(operations.filter(Boolean));
       }
 
-      /** @inheritDoc */
-      async _onRender(context, options) {
-        new DragDrop({
-          callbacks: {
-            dragover: this._onDragOver.bind(this),
-            dragstart: this._onDragStart.bind(this),
-            drop: this._onDrop.bind(this),
-          },
-          dragSelector: ".draggable",
-          dropSelector: null,
-          permissions: { dragstart: this._canDragStart.bind(this), drop: this._canDragDrop.bind(this) },
-        }).bind(this.element);
-        await super._onRender(context, options);
+      /**
+       * Explains why a drag that was released over this sheet couldn't be dropped. The browser doesn't fire a drop
+       * event for rejected drops, so this is invoked from the drag end instead.
+       * @param {DragEvent} _event
+       */
+      _onDropRejected(_event) {
+        const payload = TeriockDragDrop.payload;
+        const dragged = payload?.document;
+        if (!(dragged instanceof foundry.abstract.Document) || !CHILD_DOCUMENT_TYPES.includes(payload.type)) { return; }
+        if (TeriockDragDrop.dragStartApplication === this) { return; }
+        this._canDropChild(dragged);
       }
     }
   );

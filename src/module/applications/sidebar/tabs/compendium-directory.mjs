@@ -25,7 +25,7 @@ export default class TeriockCompendiumDirectory extends CompendiumDirectory {
   /** @inheritDoc */
   _onDragDocumentStart(event) {
     super._onDragDocumentStart(event);
-    TeriockDragDrop.setDefaultDragEventData(event);
+    TeriockDragDrop.initializeDragEvent(event);
   }
 
   /** @inheritDoc */

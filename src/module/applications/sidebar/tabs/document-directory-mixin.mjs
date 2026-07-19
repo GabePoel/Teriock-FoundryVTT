@@ -38,18 +38,6 @@ export default function DocumentDirectoryMixin(Base) {
       }
 
       /** @inheritDoc */
-      async _handleDroppedEntry(target, data) {
-        await super._handleDroppedEntry(target, data);
-        // Copies by default so we invert to move.
-        if (data?.invertBehavior && data?.type) {
-          /** @type {typeof ClientDocument} */
-          const Cls = foundry.utils.getDocumentClass(data.type);
-          const doc = /** @type {AnyChildDocument} */ await Cls.fromDropData(data);
-          await doc.delete();
-        }
-      }
-
-      /** @inheritDoc */
       async _prepareContext(options = {}) {
         return Object.assign(await super._prepareContext(options), {
           makeTooltips: game.settings.get("teriock", "sidebarTooltips"),
