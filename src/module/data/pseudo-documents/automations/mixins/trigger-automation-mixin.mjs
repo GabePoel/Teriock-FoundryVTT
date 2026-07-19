@@ -190,11 +190,11 @@ export default function TriggerAutomationMixin(Base) {
       }
 
       /** @inheritDoc */
-      _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
+      _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
         if (this._triggerPaths.includes(path) && this.document?.documentName === "JournalEntryPage") {
           inputConfig.disabled = true;
         }
-        return super._makeFormGroup(path, groupConfig, inputConfig);
+        return super._makeFormGroup(path, groupConfig, inputConfig, config);
       }
 
       /**

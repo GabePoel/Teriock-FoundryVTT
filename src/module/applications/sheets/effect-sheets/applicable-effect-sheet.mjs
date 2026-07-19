@@ -69,7 +69,7 @@ export default class ApplicableEffectSheet
     this.element.querySelector("footer")?.remove();
     if (this.document.system._formPaths.length) {
       const disabledGroup = this.element.querySelector(".form-group:has(.form-fields input[name='disabled'])");
-      const editorForms = await this.document.system._getEditorForms();
+      const editorForms = await this.document.system._getEditorForms({ rootId: this.id });
       disabledGroup.after(editorForms);
     }
   }

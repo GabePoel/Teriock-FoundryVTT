@@ -49,7 +49,7 @@ export default class ChangesAutomation extends CritMechanicMixin(BaseAutomation)
   }
 
   /** @inheritDoc */
-  async getEditor() {
+  async getEditor(config = {}) {
     const html = await TeriockTextEditor.renderTemplate("teriock/sheets/shared/changes", {
       changesData: this._source.changes.map(c => ({
         ...c,
@@ -58,6 +58,7 @@ export default class ChangesAutomation extends CritMechanicMixin(BaseAutomation)
       changesPath: `${this.localPath}.changes`,
       editable: this.document?.sheet?.isEditable,
       fieldDefs: this.schema.fields.changes.element.fields,
+      rootId: [config.rootId, this.localPath].filterJoin("-"),
       types: TeriockActiveEffect.CHANGE_TYPES,
       valuePath: `_source.${this.localPath}.changes`,
     });

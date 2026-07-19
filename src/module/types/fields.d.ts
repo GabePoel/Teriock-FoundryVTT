@@ -52,6 +52,14 @@ declare global {
      * the group designated by its key.
      */
     export type DynamicChoices = Record<string, DynamicChoiceGroup>;
+
+    /**
+     * Configuration passed down the `getEditor`/`_getEditorForms`/`_makeFormGroup` chain.
+     */
+    export type EditorConfig = {
+      /** A per-window-unique id used to namespace generated form group ids. */
+      rootId?: string;
+    };
   }
 }
 

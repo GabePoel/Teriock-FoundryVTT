@@ -104,13 +104,13 @@ export default class ChildChangeAutomation extends CritMechanicMixin(BaseAutomat
   }
 
   /** @inheritDoc */
-  _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
     if (path.endsWith("key")) { inputConfig.choices = this._processedKeyChoices; }
     if (path.endsWith("qualifier")) { inputConfig.context = this.target; }
     if (path.endsWith("value")) { inputConfig.context = "actor"; }
     if (path.endsWith("changeType")) { inputConfig.choices = this._changeTypeChoices; }
     if (path.endsWith("priority")) { inputConfig.placeholder = this._defaultPriority.toString() ?? "0"; }
-    return super._makeFormGroup(path, groupConfig, inputConfig);
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
   /** @inheritDoc */

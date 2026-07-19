@@ -81,12 +81,12 @@ export default class LightAutomation extends CritMechanicMixin(BaseAutomation) {
   }
 
   /** @inheritDoc */
-  async getEditor() {
+  async getEditor(config = {}) {
     const html = await TeriockTextEditor.renderTemplate("templates/scene/token/light.hbs", {
       gridUnits: _loc("MEASUREMENT.GridUnits"),
       lightAnimations: this.light.negative ? CONFIG.Canvas.darknessAnimations : CONFIG.Canvas.lightAnimations,
       lightFields: this.getFieldForProperty("light").fields,
-      rootId: this.uuid,
+      rootId: [config.rootId, this.localPath].filterJoin("-"),
       source: this._source,
     });
     const element = foundry.utils.parseHTML(html);

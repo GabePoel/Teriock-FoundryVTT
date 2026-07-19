@@ -54,19 +54,21 @@ export default function AccessDataMixin(Base) {
 
       /**
        * Forms that go into a simple editor for this data model.
+       * @param {Teriock.Fields.EditorConfig} [config]
        * @returns {Promise<HTMLDivElement>}
        */
-      async _getEditorForms() {
-        return this._getEditorFormsSync();
+      async _getEditorForms(config = {}) {
+        return this._getEditorFormsSync(config);
       }
 
       /**
        * Synchronously get forms that go into a simple editor for this data model.
+       * @param {Teriock.Fields.EditorConfig} [config]
        * @returns {HTMLDivElement}
        */
-      _getEditorFormsSync() {
+      _getEditorFormsSync(config = {}) {
         const group = createElement("div", { className: "teriock-form-container standard-form" });
-        this._makeFormGroups(this._formPaths).forEach(fg => group.append(fg));
+        this._makeFormGroups(this._formPaths, config).forEach(fg => group.append(fg));
         return group;
       }
 
@@ -75,12 +77,13 @@ export default function AccessDataMixin(Base) {
        * @param {string} path
        * @param {FormGroupConfig} groupConfig
        * @param {FormInputConfig} inputConfig
+       * @param {Teriock.Fields.EditorConfig} [config]
        * @returns {HTMLDivElement}
        */
-      _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
+      _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
         return this.schema.getField(path).toFormGroup({
           localize: true,
-          rootId: foundry.utils.randomID(),
+          rootId: [config.rootId, this.localPath].filterJoin("-"),
           ...groupConfig,
         }, {
           context: this._inputContextKey,
@@ -93,18 +96,20 @@ export default function AccessDataMixin(Base) {
       /**
        * Make form groups from specified field paths.
        * @param {string[]} paths
+       * @param {Teriock.Fields.EditorConfig} [config]
        * @returns {HTMLElement[]}
        */
-      _makeFormGroups(paths) {
-        return paths.map(p => (p === "hr" ? document.createElement("hr") : this._makeFormGroup(p)));
+      _makeFormGroups(paths, config = {}) {
+        return paths.map(p => (p === "hr" ? document.createElement("hr") : this._makeFormGroup(p, {}, {}, config)));
       }
 
       /**
        * A simple editor for this data model.
+       * @param {Teriock.Fields.EditorConfig} [config]
        * @returns {Promise<HTMLDivElement>}
        */
-      async getEditor() {
-        return this._getEditorForms();
+      async getEditor(config = {}) {
+        return this._getEditorForms(config);
       }
 
       /**

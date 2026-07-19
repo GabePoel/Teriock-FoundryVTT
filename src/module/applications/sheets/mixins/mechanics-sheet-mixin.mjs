@@ -246,8 +246,9 @@ export default function MechanicsSheetMixin(Base) {
        * @returns {Promise<Teriock.Sheet.MechanicEntry[]>}
        */
       async _prepareMechanicEntries(collection) {
+        const config = { rootId: this.id };
         return Promise.all(collection.contents.map(async mechanic => {
-          return { formEditor: (await mechanic.getEditor()).outerHTML, mechanic, tips: mechanic.formTips };
+          return { formEditor: (await mechanic.getEditor(config)).outerHTML, mechanic, tips: mechanic.formTips };
         }));
       }
 

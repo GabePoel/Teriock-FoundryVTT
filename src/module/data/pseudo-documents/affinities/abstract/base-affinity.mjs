@@ -73,9 +73,9 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
   }
 
   /** @inheritDoc */
-  _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
     if (this.category !== "other" && path.endsWith("value")) { inputConfig.choices = this._choices; }
-    return super._makeFormGroup(path, groupConfig, inputConfig);
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 
   /**

@@ -265,24 +265,25 @@ export default class BasePreviewModel extends BaseDataModel {
   }
 
   /** @inheritDoc */
-  _getEditorFormsSync() {
+  _getEditorFormsSync(config = {}) {
     const container = createElement("div", { className: "teriock-form-container" });
     for (const pathsArrays of [this._formPathsSelect, this._formPathsTernary]) {
       if (!pathsArrays.length) { continue; }
       const group = createElement("div", { className: "ttable" });
-      this._makeFormGroups(pathsArrays).forEach(fg => group.append(fg));
+      this._makeFormGroups(pathsArrays, config).forEach(fg => group.append(fg));
       container.append(group);
     }
     return container;
   }
 
   /** @inheritDoc */
-  _makeFormGroup(path, groupConfig = {}, inputConfig = {}) {
-    const group = super._makeFormGroup(path, {
-      ...groupConfig,
-      classes: ["teriock-sheet-multi-select-label"],
-      rootId: this.#rootId,
-    }, { ...inputConfig, dataset: { neverDisable: "true" }, name: `previews.${this.id}.${path}` });
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    const group = super._makeFormGroup(
+      path,
+      { ...groupConfig, classes: ["teriock-sheet-multi-select-label"], rootId: this.#rootId },
+      { ...inputConfig, dataset: { neverDisable: "true" }, name: `previews.${this.id}.${path}` },
+      config,
+    );
     const field = this.getFieldForProperty(path);
     if (
       field instanceof fields.StringField || field instanceof fields.NumberField || field instanceof fields.SetField
