@@ -65,6 +65,12 @@ export default function BaseApplicationMixin(Base) {
     #collapsibleElements = new Map();
 
     /**
+     * Internal tracking of detached state.
+     * @type {boolean}
+     */
+    #detached = false;
+
+    /**
      * Apply a tracked collapse to every `.collapsible` element and every toggle control (`[data-collapsible-target]`)
      * sharing the same `collapsible-id` so they stay in sync.
      * @param {string} collapsibleId
@@ -87,6 +93,14 @@ export default function BaseApplicationMixin(Base) {
      */
     get collapsibleElements() {
       return this.#collapsibleElements;
+    }
+
+    /**
+     * Whether this application is detached.
+     * @returns {boolean}
+     */
+    get isDetached() {
+      return this.#detached;
     }
 
     /** @inheritDoc */
@@ -144,6 +158,7 @@ export default function BaseApplicationMixin(Base) {
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
+      if (foundry.utils.hasProperty(options, "window.detached")) { this.#detached = options.window.detached; }
       return Object.assign(await super._prepareContext(options), { appId: this.id, TERIOCK });
     }
 

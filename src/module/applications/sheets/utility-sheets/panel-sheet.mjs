@@ -1,8 +1,13 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { TeriockDocumentSheet } from "../../api/_module.mjs";
+import { DragDropApplicationMixin, TeriockDocumentSheet } from "../../api/_module.mjs";
 
-export default class PanelSheet extends TeriockDocumentSheet {
+/**
+ * A simple sheet for displaying a document as a simple panel.
+ * @extends {TeriockDocumentSheet}
+ * @mixes DragDropApplication
+ */
+export default class PanelSheet extends DragDropApplicationMixin(TeriockDocumentSheet) {
   /**
    * Open this document's main sheet.
    * @returns {Promise<void>}
@@ -16,7 +21,7 @@ export default class PanelSheet extends TeriockDocumentSheet {
     actions: { openSheet: this.#onOpenSheet },
     classes: ["panel-application"],
     position: { width: 300 },
-    teriock: { autoIcon: false },
+    teriock: { autoIcon: false, minimizeOnDragStart: true },
     window: {
       controls: [{
         action: "openSheet",

@@ -8,6 +8,7 @@ export default function DragDropApplicationMixin(Base) {
   return (
     /**
      * @extends {ApplicationV2}
+     * @mixes BaseApplication
      * @mixin
      */
     class DragDropApplication extends Base {
@@ -32,7 +33,7 @@ export default function DragDropApplicationMixin(Base) {
        */
       get #shouldMaximizeOnDragEnter() {
         return game.settings.get("teriock", "maximizeApplicationsOnDragEnter")
-          && this.options?.teriock?.maximizeOnDragEnter && this.hasFrame;
+          && this.options?.teriock?.maximizeOnDragEnter && this.hasFrame && !this.isDetached;
       }
 
       /**
@@ -41,7 +42,7 @@ export default function DragDropApplicationMixin(Base) {
        */
       get #shouldMinimizeOnDragStart() {
         return game.settings.get("teriock", "minimizeApplicationsOnDragStart")
-          && this.options?.teriock?.minimizeOnDragStart && this.hasFrame;
+          && this.options?.teriock?.minimizeOnDragStart && this.hasFrame && !this.isDetached;
       }
 
       /**

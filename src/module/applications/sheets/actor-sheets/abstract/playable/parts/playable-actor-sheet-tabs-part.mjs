@@ -81,13 +81,15 @@ export default function PlayableActorSheetTabsPart(Base) {
       /** @type {string|null} */
       #tabBeforeDrag = null;
 
-      /** @type {"LEFT"|"RIGHT"} */
-      #tabDirection = "RIGHT";
+      /** @returns {"LEFT"|"RIGHT"} */
+      get #tabTooltipDirection() {
+        return this.isDetached ? "LEFT" : "RIGHT";
+      }
 
       /** Apply the current tab tooltip direction without a full re-render. */
       #applyTabDirection() {
         for (const el of this.element.querySelectorAll(".actor-tabber-background .actor-tabber-tooltip-container")) {
-          el.dataset.tooltipDirection = this.#tabDirection;
+          el.dataset.tooltipDirection = this.#tabTooltipDirection;
         }
       }
 
@@ -125,14 +127,10 @@ export default function PlayableActorSheetTabsPart(Base) {
 
       /** @inheritDoc */
       async _prepareContext(options = {}) {
-        const context = await super._prepareContext(options);
-        if (foundry.utils.hasProperty(options, "window.detached")) {
-          this.#tabDirection = options.window.detached ? "LEFT" : "RIGHT";
-        }
-        return Object.assign(context, {
+        return Object.assign(await super._prepareContext(options), {
           activeTab: this._activeTab,
           floatingTabs: game.settings.get("teriock", "floatingActorTabs"),
-          tabDirection: this.#tabDirection,
+          tabDirection: this.#tabTooltipDirection,
         });
       }
 
