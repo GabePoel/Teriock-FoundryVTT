@@ -5,7 +5,7 @@ import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
-import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
+import { TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
 
 /**
@@ -95,12 +95,9 @@ export default function MechanicsSheetMixin(Base) {
         await this.document.update({ [path]: Array.from(set) });
       }
 
-      /**
-       * Whether mechanics can be dropped.
-       * @returns {boolean}
-       */
-      get _canDropMechanics() {
-        return this._tab === "mechanics" && game.teriock.checkEditable(this);
+      /** @inheritDoc */
+      get _droppableDocumentNames() {
+        return [...super._droppableDocumentNames, ...Object.keys(this.document.pseudoCollections)];
       }
 
       /**
@@ -151,14 +148,6 @@ export default function MechanicsSheetMixin(Base) {
         return collections;
       }
 
-      /** @inheritDoc */
-      _dropEffect(event) {
-        const dropEffect = super._dropEffect(event);
-        if (dropEffect !== "none") { return dropEffect; }
-        if (!this.isEditable || TeriockDragDrop.dragStartApplication === this) { return "none"; }
-        return this._mechanicCollectionFor(TeriockDragDrop.payload?.type) ? "copy" : "none";
-      }
-
       /**
        * The mechanic collection a dropped document name belongs to, if any of them accept it.
        * @param {string} documentName
@@ -183,14 +172,10 @@ export default function MechanicsSheetMixin(Base) {
        * @returns {Promise<boolean>} Whether the drop was handled.
        */
       async _onDropMechanic(_event, dropData) {
-        if (!this._canDropMechanics) { return false; }
-        const config = this._mechanicCollectionFor(dropData.type);
-        if (!config) { return false; }
-        const mechanic = await config.baseClass.fromDropData(dropData);
-        if (!mechanic) { return false; }
-        const data = mechanic.toObject();
-        if (!Object.keys(config.types).includes(data.type)) { return false; }
-        await config.baseClass.create(data, { parent: this.document });
+        const baseClass = this._mechanicCollectionFor(dropData.type)?.baseClass;
+        const document = await baseClass.fromDropData(dropData);
+        if (!document || !this._validateDrop({ document })) { return false; }
+        await baseClass.create(document.toObject(), { parent: this.document });
         return true;
       }
 
@@ -271,6 +256,28 @@ export default function MechanicsSheetMixin(Base) {
           };
           return tabs;
         }, {});
+      }
+
+      /** @inheritDoc */
+      _validateDropDocument(options) {
+        if (!super._validateDropDocument(options)) { return false; }
+        if (Object.keys(this.document.pseudoCollections).includes(options.document.documentName)) {
+          return this._validateDropMechanic(options);
+        }
+        return true;
+      }
+
+      /**
+       * Validates dropping a mechanic.
+       * @param {Teriock.Application.DropValidationOptions} options
+       * @returns {boolean}
+       */
+      _validateDropMechanic({ document, notify }) {
+        const config = this._mechanicCollectionFor(document.documentName);
+        if (!config || !Object.keys(config.types).includes(document.type)) {
+          return this._rejectDrop(notify, "TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropMechanic");
+        }
+        return true;
       }
     }
   );

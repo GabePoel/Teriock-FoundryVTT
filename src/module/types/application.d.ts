@@ -31,6 +31,8 @@ declare global {
     export type DropData<T> = { identifier?: TypedIdentifier, interactive?: boolean, type: string, uuid: UUID<T> };
 
     export type DragDropPayload<T> = DropData<T> & { document?: T };
+
+    export type DropValidationOptions = { document?: AnyCommonDocument, dropEffect?: DropEffect, notify?: boolean };
   }
 }
 

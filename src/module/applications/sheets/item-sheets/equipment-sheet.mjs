@@ -23,12 +23,6 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
   ];
 
   /** @inheritDoc */
-  _checkChildDropEditable(droppedDocument, dropEffect) {
-    return (this.document.system.storage.enabled && this.document.isOwner && droppedDocument?.type === "equipment")
-      || super._checkChildDropEditable(droppedDocument, dropEffect);
-  }
-
-  /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), {
       rangeString: this.document.system.range.long.unitType === "finite"
@@ -44,5 +38,11 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
         })
         : this.document.system.range.long.text,
     });
+  }
+
+  /** @inheritDoc */
+  _validateDropEditable(options) {
+    return (this.document.system.storage.enabled && this.document.isOwner && options.document?.type === "equipment")
+      || super._validateDropEditable(options);
   }
 }

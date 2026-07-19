@@ -48,12 +48,23 @@ export default function CommonDocumentMixin(Base) {
        * Validate whether a document supports a certain child type.
        * @param {AnyCommonDocument} parent
        * @param {AnyChildDocument} child
+       * @param {Partial<DatabaseWriteOperation & Teriock.System._Operation>} [operation]
        * @returns {boolean}
        */
-      static validateChildType(parent, child) {
+      static validateChildType(parent, child, operation = {}) {
         if (!parent?.metadata?.childItemTypes || !parent?.metadata?.childEffectTypes) { return true; }
         const childTypes = new Set([...parent.metadata.childEffectTypes, ...parent.metadata.childItemTypes]);
-        return childTypes.has(child?.type);
+        const out = childTypes.has(child?.type);
+        if (!out && operation.notifyOnFailure) {
+          ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType", {
+            format: {
+              children: (TERIOCK.config.document[child?.type]?.plural ?? "").capitalize(),
+              parents: TERIOCK.config.document[parent?.type]?.plural ?? "",
+            },
+            localize: true,
+          });
+        }
+        return out;
       }
 
       /** @type {AnyChildDocument[]} */

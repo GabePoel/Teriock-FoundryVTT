@@ -222,6 +222,15 @@ export default function DragDropApplicationMixin(Base) {
         this.#wasMinimizedBeforeDragEnter = null;
       }
 
+      /**
+       * Explains why a drag that was released over this application couldn't be dropped.
+       * @param {DragEvent} _event
+       * @returns {boolean} Whether the drag didn't start from this application, and so a rejection may apply.
+       */
+      _onDropRejected(_event) {
+        return DragDrop.implementation.dragStartApplication !== this;
+      }
+
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);

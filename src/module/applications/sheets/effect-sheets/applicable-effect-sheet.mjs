@@ -59,11 +59,6 @@ export default class ApplicableEffectSheet
   }
 
   /** @inheritDoc */
-  get _canDropMechanics() {
-    return true;
-  }
-
-  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     this.element.querySelector("footer")?.remove();
