@@ -5,7 +5,7 @@ import { makeIcon, makeIconClass } from "../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
 import { ChoiceSelector } from "../../dialogs/_module.mjs";
-import { TeriockContextMenu, TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
+import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
 
 /**
@@ -197,8 +197,7 @@ export default function MechanicsSheetMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        if (!this.isEditable) { return; }
-        new TeriockContextMenu(this.element, ".teriock-mechanic-header", [{
+        this._connectContextMenu(".teriock-mechanic-header", [{
           icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
           label: _loc("SIDEBAR.Duplicate"),
           onClick: async (_ev, el) => {

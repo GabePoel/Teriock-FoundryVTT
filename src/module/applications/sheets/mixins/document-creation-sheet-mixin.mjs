@@ -38,7 +38,6 @@ export default function DocumentCreationSheetMixin(Base) {
        * list on right-click.
        */
       _connectChildrenCreateMenu() {
-        if (!this.isEditable || typeof this._connectContextMenu !== "function") { return; }
         if (!this.element.querySelector(".add-button[data-types]")) { return; }
         const entries = () =>
           Object.entries(TERIOCK.config.document).filter(([, config]) =>
@@ -47,7 +46,7 @@ export default function DocumentCreationSheetMixin(Base) {
             icon: makeIconClass(config.icon, "contextMenu"),
             label: _loc("TERIOCK.SHEETS.Common.PREVIEW.addType", { type: config.label }),
             onClick: () => this._createChild(type),
-            visible: target => parseAddTypes(target).includes(type),
+            visible: target => parseAddTypes(target).includes(type) && this.isEditable,
           }));
         this._connectContextMenu(".add-button[data-types]:not([data-type])", entries(), {
           attach: true,
