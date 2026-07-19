@@ -28,14 +28,9 @@ declare global {
 
     export type DropEffect = "copy" | "link" | "move" | "none";
 
-    export type DropData<T> = {
-      data?: T;
-      document?: T;
-      identifier?: TypedIdentifier;
-      interactive?: boolean;
-      type: "ActiveEffect" | "Actor" | "Automation" | "Item" | "JournalEntryPage" | "Macro";
-      uuid: UUID<T>;
-    };
+    export type DropData<T> = { identifier?: TypedIdentifier, interactive?: boolean, type: string, uuid: UUID<T> };
+
+    export type DragDropPayload<T> = DropData<T> & { document?: T };
   }
 }
 

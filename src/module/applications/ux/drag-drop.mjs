@@ -4,7 +4,7 @@ const { DragDrop, TextEditor } = foundry.applications.ux;
 
 /** @inheritDoc */
 export default class TeriockDragDrop extends DragDrop {
-  /** @type {Teriock.Application.DropData<AnyCommonDocument>|null} */
+  /** @type {Teriock.Application.DragDropPayload<AnyCommonDocument>|null} */
   static #payload = null;
 
   /** @type {DragDropApplication|null} */
@@ -12,14 +12,14 @@ export default class TeriockDragDrop extends DragDrop {
 
   /**
    * Applications the current drag is inside, so they can be cleaned up when a drag ends without a drop or leave event
-   * ever reaching them (e.g. the drag is cancelled or dropped on another application).
+   * ever reaching them.
    * @type {Set<DragDropApplication>}
    */
   static enteredApplications = new Set();
 
   /**
    * The payload of the drag currently in progress.
-   * @returns {Teriock.Application.DropData<AnyCommonDocument>|null}
+   * @returns {Teriock.Application.DragDropPayload<AnyCommonDocument>|null}
    */
   static get payload() {
     return TeriockDragDrop.#payload;
@@ -35,13 +35,13 @@ export default class TeriockDragDrop extends DragDrop {
     game.tooltip.deactivate();
     const dragData = Object.assign(TextEditor.implementation.getDragEventData(event), data);
     dragData.interactive ??= !game.keyboard.isModifierActive("CONTROL");
-    if (dragData.uuid) {
+    if (dragData?.uuid) {
       dragData.document ??= fromUuidSync(dragData.uuid, { strict: false });
       dragData.identifier ??= dragData.document?.typedIdentifier;
     }
     event.dataTransfer.setData("text/plain", JSON.stringify(omit(dragData, ["document"])));
     TeriockDragDrop.#payload = dragData;
-    if (dragData.uuid) {
+    if (dragData?.uuid) {
       fromUuid(dragData.uuid).then(doc => {
         if (!doc || TeriockDragDrop.#payload !== dragData) { return; }
         dragData.document = doc;
