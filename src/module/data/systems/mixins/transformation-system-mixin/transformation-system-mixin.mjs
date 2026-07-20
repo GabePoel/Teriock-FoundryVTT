@@ -263,21 +263,6 @@ export default function TransformationSystemMixin(Base) {
         return docs.map(d => d.id);
       }
 
-      /** @inheritDoc */
-      get _displayMessagesSuppression() {
-        const messages = super._displayMessagesSuppression;
-        if (this._isSuppressedTransformation) { this._addSuppressionMessage("notPrimary", messages); }
-        return messages;
-      }
-
-      /**
-       * If this is suppressed due to not being the primary transformation.
-       * @returns {boolean}
-       */
-      get _isSuppressedTransformation() {
-        return this.isTransformation && this.actor && !this.isPrimaryTransformation;
-      }
-
       /**
        * Whether this is the primary transformation.
        * @returns {boolean}
@@ -293,11 +278,6 @@ export default function TransformationSystemMixin(Base) {
        */
       get isTransformation() {
         return this.transformation.enabled;
-      }
-
-      /** @inheritDoc */
-      get makeSuppressed() {
-        return super.makeSuppressed || this._isSuppressedTransformation;
       }
 
       /**
@@ -346,6 +326,19 @@ export default function TransformationSystemMixin(Base) {
             preTransform: foundry.utils.expandObject(preTransform),
           },
         };
+      }
+
+      /** @inheritDoc */
+      _getTipSuppressions() {
+        return Object.assign(super._getTipSuppressions(), { notPrimary: this._isSuppressedTransformation.bind(this) });
+      }
+
+      /**
+       * If this is suppressed due to not being the primary transformation.
+       * @returns {boolean}
+       */
+      _isSuppressedTransformation() {
+        return this.isTransformation && this.actor && !this.isPrimaryTransformation;
       }
 
       /** @inheritDoc */

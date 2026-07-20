@@ -26,15 +26,6 @@ export default function EquipmentSuppressionPart(Base) {
       }
 
       /** @inheritDoc */
-      get _displayMessagesSuppression() {
-        const messages = super._displayMessagesSuppression;
-        if (this._isSuppressedUnequipped) { this._addSuppressionMessage("unequipped", messages); }
-        if (this._isSuppressedStashed) { this._addSuppressionMessage("stashed", messages); }
-        if (this._isSuppressedDestroyed) { this._addSuppressionMessage("destroyed", messages); }
-        return messages;
-      }
-
-      /** @inheritDoc */
       get _embedIcons() {
         return [super._embedIcons.find(i => i.action?.toLowerCase().includes("attuned")), {
           action: "toggleDampenedDoc",
@@ -61,30 +52,6 @@ export default function EquipmentSuppressionPart(Base) {
         }, ...super._embedIcons.filter(i => !i.action?.toLowerCase().includes("attuned"))];
       }
 
-      /**
-       * If this is suppressed due to being destroyed.
-       * @returns {boolean}
-       */
-      get _isSuppressedDestroyed() {
-        return this.destroyed;
-      }
-
-      /**
-       * If this is suppressed due to being stashed.
-       * @returns {boolean}
-       */
-      get _isSuppressedStashed() {
-        return this.stashed;
-      }
-
-      /**
-       * If this is suppressed due to not being equipped.
-       * @returns {boolean}
-       */
-      get _isSuppressedUnequipped() {
-        return !this.equipped;
-      }
-
       /** @inheritDoc */
       get _nameTags() {
         const tags = super._nameTags;
@@ -98,11 +65,36 @@ export default function EquipmentSuppressionPart(Base) {
       }
 
       /** @inheritDoc */
-      get makeSuppressed() {
-        return super.makeSuppressed
-          || this._isSuppressedUnequipped
-          || this._isSuppressedStashed
-          || this._isSuppressedDestroyed;
+      _getTipSuppressions() {
+        return Object.assign(super._getTipSuppressions(), {
+          destroyed: this._isSuppressedDestroyed.bind(this),
+          stashed: this._isSuppressedStashed.bind(this),
+          unequipped: this._isSuppressedUnequipped.bind(this),
+        });
+      }
+
+      /**
+       * If this is suppressed due to being destroyed.
+       * @returns {boolean}
+       */
+      _isSuppressedDestroyed() {
+        return this.destroyed;
+      }
+
+      /**
+       * If this is suppressed due to being stashed.
+       * @returns {boolean}
+       */
+      _isSuppressedStashed() {
+        return this.stashed;
+      }
+
+      /**
+       * If this is suppressed due to not being equipped.
+       * @returns {boolean}
+       */
+      _isSuppressedUnequipped() {
+        return !this.equipped;
       }
 
       /**

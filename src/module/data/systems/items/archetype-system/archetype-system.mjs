@@ -38,21 +38,6 @@ export default class ArchetypeSystem
   }
 
   /** @inheritDoc */
-  get _displayMessagesSuppression() {
-    const messages = super._displayMessagesSuppression;
-    if (this._isSuppressedInactiveRanks) { this._addSuppressionMessage("inactiveRanks", messages); }
-    return messages;
-  }
-
-  /**
-   * If this is suppressed due to having no active ranks.
-   * @returns {boolean}
-   */
-  get _isSuppressedInactiveRanks() {
-    return Boolean(this.actor && this.ranks.filter(r => r.active).length === 0);
-  }
-
-  /** @inheritDoc */
   get _panelBars() {
     return [{ icon: documentConfig.rank.icon, label: documentConfig.rank.plural, wrappers: this.classNames }];
   }
@@ -87,11 +72,6 @@ export default class ArchetypeSystem
     return this.ranks.some((r) => r.system.innate);
   }
 
-  /** @inheritDoc */
-  get makeSuppressed() {
-    return super.makeSuppressed || this._isSuppressedInactiveRanks;
-  }
-
   /**
    * The max AV of this archetype's ranks.
    * @returns {number}
@@ -107,6 +87,19 @@ export default class ArchetypeSystem
   get ranks() {
     if (!this.actor) { return []; }
     return this.actor.ranks.filter(r => r.system._source.archetype === this.identifier);
+  }
+
+  /** @inheritDoc */
+  _getTipSuppressions() {
+    return Object.assign(super._getTipSuppressions(), { inactiveRanks: this._isSuppressedInactiveRanks.bind(this) });
+  }
+
+  /**
+   * If this is suppressed due to having no active ranks.
+   * @returns {boolean}
+   */
+  _isSuppressedInactiveRanks() {
+    return Boolean(this.actor && this.ranks.filter(r => r.active).length === 0);
   }
 
   /** @inheritDoc */

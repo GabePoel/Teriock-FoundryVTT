@@ -63,25 +63,10 @@ export default function ConsumableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      get _displayMessagesSuppression() {
-        const messages = super._displayMessagesSuppression;
-        if (this._isSuppressedConsumed) { this._addSuppressionMessage("consumed", messages); }
-        return messages;
-      }
-
-      /** @inheritDoc */
       get _embedActions() {
         return Object.assign(super._embedActions, {
           useOneDoc: { primary: async () => await this.useOne(), secondary: async () => await this.gainOne() },
         });
-      }
-
-      /**
-       * If this is suppressed due to being consumed.
-       * @returns {boolean}
-       */
-      get _isSuppressedConsumed() {
-        return this.consumable && this.quantity === 0;
       }
 
       /** @inheritDoc */
@@ -95,11 +80,6 @@ export default function ConsumableSystemMixin(Base) {
         return parts;
       }
 
-      /** @inheritDoc */
-      get makeSuppressed() {
-        return this._isSuppressedConsumed || super.makeSuppressed;
-      }
-
       /**
        * A string representing how many of these are remaining.
        * @returns {string}
@@ -111,6 +91,19 @@ export default function ConsumableSystemMixin(Base) {
             max: this.maxQuantity.value,
             value: this.quantity,
           });
+      }
+
+      /** @inheritDoc */
+      _getTipSuppressions() {
+        return Object.assign({ consumed: this._isSuppressedConsumed.bind(this) }, super._getTipSuppressions());
+      }
+
+      /**
+       * If this is suppressed due to being consumed.
+       * @returns {boolean}
+       */
+      _isSuppressedConsumed() {
+        return this.consumable && this.quantity === 0;
       }
 
       /**

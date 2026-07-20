@@ -9,28 +9,21 @@ export default function ArmorSuppressionSystemMixin(Base) {
      */
     class ArmorSuppressionSystem extends Base {
       /** @inheritDoc */
-      get _displayMessagesSuppression() {
-        const messages = super._displayMessagesSuppression;
-        if (this._isSuppressedArmor) { this._addSuppressionMessage("armor", messages); }
-        return messages;
+      _getTipSuppressions() {
+        return Object.assign(super._getTipSuppressions(), { armor: this._isSuppressedArmor.bind(this) });
       }
 
       /**
        * If this is suppressed due to worn armor exceeding maximum AV.
        * @returns {boolean}
        */
-      get _isSuppressedArmor() {
+      _isSuppressedArmor() {
         return Boolean(
           game.settings.get("teriock", "armorSuppressesRanks")
             && this.actor
             && !this.innate
             && this.actor.system.defense.av.base > this.maxAv,
         );
-      }
-
-      /** @inheritDoc */
-      get makeSuppressed() {
-        return super.makeSuppressed || this._isSuppressedArmor;
       }
     }
   );

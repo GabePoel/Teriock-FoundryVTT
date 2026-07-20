@@ -32,17 +32,6 @@ export default function SpeciesTransformationPart(Base) {
       }
 
       /** @inheritDoc */
-      get _displayMessagesSuppression() {
-        const messages = super._displayMessagesSuppression;
-        if (this._isSuppressedTransformationInactive) { this._addSuppressionMessage(
-            "inactiveTransformation",
-            messages,
-          ); }
-        if (this._isSuppressedTransformationSecondary) { this._addSuppressionMessage("notPrimary", messages); }
-        return messages;
-      }
-
-      /** @inheritDoc */
       get _displayToggles() {
         return ["system.transformation.ring", ...super._displayToggles];
       }
@@ -53,24 +42,6 @@ export default function SpeciesTransformationPart(Base) {
        */
       get _isInactiveTransformation() {
         return this.isTransformation && this.transformationEffect && !this.transformationEffect.active;
-      }
-
-      /**
-       * If this is suppressed due to its transformation effect being inactive.
-       * @returns {boolean}
-       */
-      get _isSuppressedTransformationInactive() {
-        return Boolean(
-          this.isTransformation && this.parent.actor && this.transformationEffect && !this.transformationEffect.active,
-        );
-      }
-
-      /**
-       * If this is suppressed due to not being the primary transformation species.
-       * @returns {boolean}
-       */
-      get _isSuppressedTransformationSecondary() {
-        return Boolean(this.isTransformation && this.parent.actor && !this.isPrimaryTransformation);
       }
 
       /** @inheritDoc */
@@ -121,13 +92,6 @@ export default function SpeciesTransformationPart(Base) {
         return Boolean(this.transformationEffect) && this.transformationEffect.system.isTransformation;
       }
 
-      /** @inheritDoc */
-      get makeSuppressed() {
-        return super.makeSuppressed
-          || this._isSuppressedTransformationInactive
-          || this._isSuppressedTransformationSecondary;
-      }
-
       /**
        * Transformation that provides this.
        * @returns {TeriockLingering|null}
@@ -140,6 +104,32 @@ export default function SpeciesTransformationPart(Base) {
       /** @inheritDoc */
       _canToggleStatDice(stat) {
         return super._canToggleStatDice(stat) && !this._isInactiveTransformation;
+      }
+
+      /** @inheritDoc */
+      _getTipSuppressions() {
+        return Object.assign(super._getTipSuppressions(), {
+          inactiveTransformation: this._isSuppressedTransformationInactive.bind(this),
+          notPrimary: this._isSuppressedTransformationSecondary.bind(this),
+        });
+      }
+
+      /**
+       * If this is suppressed due to its transformation effect being inactive.
+       * @returns {boolean}
+       */
+      _isSuppressedTransformationInactive() {
+        return Boolean(
+          this.isTransformation && this.parent.actor && this.transformationEffect && !this.transformationEffect.active,
+        );
+      }
+
+      /**
+       * If this is suppressed due to not being the primary transformation species.
+       * @returns {boolean}
+       */
+      _isSuppressedTransformationSecondary() {
+        return Boolean(this.isTransformation && this.parent.actor && !this.isPrimaryTransformation);
       }
 
       /** @inheritDoc */

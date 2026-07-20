@@ -26,28 +26,28 @@ export default function GrantedSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      get _isSuppressedDampened() {
-        return !this.applyIfDampened && super._isSuppressedDampened;
-      }
-
-      /** @inheritDoc */
-      get _isSuppressedDestroyed() {
-        return !this.applyIfDestroyed && super._isSuppressedDestroyed;
-      }
-
-      /** @inheritDoc */
-      get _isSuppressedShattered() {
-        return !this.applyIfShattered && super._isSuppressedShattered;
-      }
-
-      /** @inheritDoc */
-      get _isSuppressedUnequipped() {
-        return !this.applyIfUnequipped && super._isSuppressedUnequipped;
-      }
-
-      /** @inheritDoc */
       get needsAttunement() {
         return !this.applyIfDeattuned;
+      }
+
+      /** @inheritDoc */
+      _isSuppressedDampened() {
+        return !this.applyIfDampened && super._isSuppressedDampened();
+      }
+
+      /** @inheritDoc */
+      _isSuppressedDestroyed() {
+        return !this.applyIfDestroyed && super._isSuppressedDestroyed();
+      }
+
+      /** @inheritDoc */
+      _isSuppressedShattered() {
+        return !this.applyIfShattered && super._isSuppressedShattered();
+      }
+
+      /** @inheritDoc */
+      _isSuppressedUnequipped() {
+        return !this.applyIfUnequipped && super._isSuppressedUnequipped();
       }
     }
   );

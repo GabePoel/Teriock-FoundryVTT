@@ -33,78 +33,11 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
   }
 
   /** @inheritDoc */
-  get _displayMessagesSuppression() {
-    const messages = super._displayMessagesSuppression;
-    if (this._isSuppressedDampened) { this._addSuppressionMessage("dampened", messages); }
-    if (this._isSuppressedDeattuned) { this._addSuppressionMessage("deattuned", messages); }
-    if (this._isSuppressedDestroyed) { this._addSuppressionMessage("parentDestroyed", messages); }
-    if (this._isSuppressedShattered) { this._addSuppressionMessage("shattered", messages); }
-    if (this._isSuppressedStashed) { this._addSuppressionMessage("parentStashed", messages); }
-    if (this._isSuppressedUnequipped) { this._addSuppressionMessage("parentUnequipped", messages); }
-    return messages;
-  }
-
-  /** @inheritDoc */
   get _displayToggles() {
     return [...super._displayToggles, {
       label: _loc("TERIOCK.SYSTEMS.BaseItem.FIELDS.disabled.label"),
       path: "disabled",
     }];
-  }
-
-  /**
-   * If this is suppressed due to its parent being dampened.
-   * @returns {boolean}
-   */
-  get _isSuppressedDampened() {
-    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent?.system.dampened);
-  }
-
-  /**
-   * If this is suppressed due to its parent being deattuned.
-   * @returns {boolean}
-   */
-  get _isSuppressedDeattuned() {
-    return Boolean(this.actor && this.needsAttunement && !this.parent.parent?.system.isAttuned);
-  }
-
-  /**
-   * If this is suppressed due to its parent being destroyed.
-   * @returns {boolean}
-   */
-  get _isSuppressedDestroyed() {
-    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent?.system.destroyed);
-  }
-
-  /** @inheritDoc */
-  get _isSuppressedElder() {
-    return ((this.parent.elder?.type !== "equipment"
-      || (this.parent.elder?.type === "equipment" && this.parent.elder.system._isSuppressedConsumed))
-      && super._isSuppressedElder);
-  }
-
-  /**
-   * If this is suppressed due to its parent being shattered.
-   * @returns {boolean}
-   */
-  get _isSuppressedShattered() {
-    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent.system.shattered);
-  }
-
-  /**
-   * If this is suppressed due to its parent being stashed.
-   * @returns {boolean}
-   */
-  get _isSuppressedStashed() {
-    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent.system.stashed);
-  }
-
-  /**
-   * If this is suppressed due to its parent being unequipped.
-   * @returns {boolean}
-   */
-  get _isSuppressedUnequipped() {
-    return Boolean(this.parent.parent?.type === "equipment" && !this.parent.parent.system.equipped);
   }
 
   /** @inheritDoc */
@@ -148,17 +81,6 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     return this.qualifiedChanges.flat().filter(c => c.target === "Item");
   }
 
-  /** @inheritDoc */
-  get makeSuppressed() {
-    return (super.makeSuppressed
-      || this._isSuppressedDampened
-      || this._isSuppressedDeattuned
-      || this._isSuppressedDestroyed
-      || this._isSuppressedShattered
-      || this._isSuppressedStashed
-      || this._isSuppressedUnequipped);
-  }
-
   /**
    * Whether this needs attunement to be active.
    * @returns {boolean}
@@ -177,6 +99,72 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     const changes = [];
     for (const a of this.activeAutomations.filter(a => a.metadata.changes)) { changes.push(...a.getChanges()); }
     return changes;
+  }
+
+  _getTipSuppressions() {
+    return Object.assign({
+      dampened: this._isSuppressedDampened.bind(this),
+      deattuned: this._isSuppressedDeattuned.bind(this),
+      destroyed: this._isSuppressedDestroyed.bind(this),
+      parentStashed: this._isSuppressedStashed.bind(this),
+      parentUnequipped: this._isSuppressedUnequipped.bind(this),
+      shattered: this._isSuppressedShattered.bind(this),
+    });
+  }
+
+  /**
+   * If this is suppressed due to its parent being dampened.
+   * @returns {boolean}
+   */
+  _isSuppressedDampened() {
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent?.system.dampened);
+  }
+
+  /**
+   * If this is suppressed due to its parent being deattuned.
+   * @returns {boolean}
+   */
+  _isSuppressedDeattuned() {
+    return Boolean(this.actor && this.needsAttunement && !this.parent.parent?.system.isAttuned);
+  }
+
+  /**
+   * If this is suppressed due to its parent being destroyed.
+   * @returns {boolean}
+   */
+  _isSuppressedDestroyed() {
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent?.system.destroyed);
+  }
+
+  /** @inheritDoc */
+  _isSuppressedElder() {
+    return ((this.parent.elder?.type !== "equipment"
+      || (this.parent.elder?.type === "equipment" && this.parent.elder.system._isSuppressedConsumed()))
+      && super._isSuppressedElder());
+  }
+
+  /**
+   * If this is suppressed due to its parent being shattered.
+   * @returns {boolean}
+   */
+  _isSuppressedShattered() {
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent.system.shattered);
+  }
+
+  /**
+   * If this is suppressed due to its parent being stashed.
+   * @returns {boolean}
+   */
+  _isSuppressedStashed() {
+    return Boolean(this.parent.parent?.type === "equipment" && this.parent.parent.system.stashed);
+  }
+
+  /**
+   * If this is suppressed due to its parent being unequipped.
+   * @returns {boolean}
+   */
+  _isSuppressedUnequipped() {
+    return Boolean(this.parent.parent?.type === "equipment" && !this.parent.parent.system.equipped);
   }
 
   /** @inheritDoc */

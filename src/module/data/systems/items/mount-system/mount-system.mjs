@@ -39,13 +39,6 @@ export default class MountSystem
   }
 
   /** @inheritDoc */
-  get _displayMessagesSuppression() {
-    const messages = super._displayMessagesSuppression;
-    if (this._isSuppressedUnmounted) { this._addSuppressionMessage("unmounted", messages); }
-    return messages;
-  }
-
-  /** @inheritDoc */
   get _displayTags() {
     return [...super._displayTags, ...this._attunableTags];
   }
@@ -64,14 +57,6 @@ export default class MountSystem
         else { await this.mount(); }
       },
     }];
-  }
-
-  /**
-   * If this is suppressed due to not being mounted.
-   * @returns {boolean}
-   */
-  get _isSuppressedUnmounted() {
-    return !this.mounted;
   }
 
   /** @inheritDoc */
@@ -107,8 +92,16 @@ export default class MountSystem
   }
 
   /** @inheritDoc */
-  get makeSuppressed() {
-    return super.makeSuppressed || this._isSuppressedUnmounted;
+  _getTipSuppressions() {
+    return Object.assign(super._getTipSuppressions, { unmounted: this._isSuppressedUnmounted.bind(this) });
+  }
+
+  /**
+   * If this is suppressed due to not being mounted.
+   * @returns {boolean}
+   */
+  _isSuppressedUnmounted() {
+    return !this.mounted;
   }
 
   /** @inheritDoc */

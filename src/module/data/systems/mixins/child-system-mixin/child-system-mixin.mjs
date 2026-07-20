@@ -61,29 +61,34 @@ export default function ChildSystemMixin(Base) {
         });
       }
 
-      /** @inheritDoc */
-      get _displayFields() {
-        return ["system.description", ...super._displayFields];
-      }
-
       /**
        * Localized error messages for {@link ChildSystem.displayTips}.
        * @returns {Set<string>}
        */
-      get _displayMessagesError() {
-        return new Set();
+      #getTipErrorMessages() {
+        return new Set(
+          Object.entries(this._getTipErrors()).filter(([k, v]) =>
+            game.settings.get("teriock", "errorMessages").has(k) && v()
+          ).map(([k, _v]) => k),
+        ).map(k => TERIOCK.config.tip.error[k]);
       }
 
       /**
        * Localized suppression messages for {@link ChildSystem.displayTips}.
        * @returns {Set<string>}
        */
-      get _displayMessagesSuppression() {
-        const messages = new Set();
-        if (this.parent.disabled) { this._addSuppressionMessage("disabled", messages); }
-        if (this._isSuppressedForced) { this._addSuppressionMessage("forced", messages); }
-        if (this._isSuppressedElder) { this._addSuppressionMessage("elder", messages); }
-        return messages;
+      #getTipSuppressionMessages() {
+        if (!game.settings.get("teriock", "suppressionMessageTypes").has(this.parent.type)) { return new Set(); }
+        return new Set(
+          Object.entries(this._getTipSuppressions()).filter(([k, v]) =>
+            game.settings.get("teriock", "suppressionMessages").has(k) && v()
+          ).map(([k, _v]) => k),
+        ).map(k => TERIOCK.config.tip.suppression[k]);
+      }
+
+      /** @inheritDoc */
+      get _displayFields() {
+        return ["system.description", ...super._displayFields];
       }
 
       /** @inheritDoc */
@@ -120,22 +125,6 @@ export default function ChildSystemMixin(Base) {
         }];
       }
 
-      /**
-       * If this is suppressed due to its parent being inactive.
-       * @returns {boolean}
-       */
-      get _isSuppressedElder() {
-        return this.parent.elder?.active === false;
-      }
-
-      /**
-       * If this is suppressed due to something explicitly forcing it to be that way.
-       * @returns {boolean}
-       */
-      get _isSuppressedForced() {
-        return this.forceSuppressed;
-      }
-
       /** @inheritDoc */
       get _masterText() {
         return this.parent.master?.documentName === "Actor" ? "" : super._masterText;
@@ -155,8 +144,8 @@ export default function ChildSystemMixin(Base) {
       /** @inheritDoc */
       get displayTips() {
         return [
-          ...[...this._displayMessagesSuppression].map(text => ({ level: "warning", text })),
-          ...[...this._displayMessagesError].map(text => ({ level: "error", text })),
+          ...[...this.#getTipSuppressionMessages()].map(text => ({ level: "warning", text })),
+          ...[...this.#getTipErrorMessages()].map(text => ({ level: "error", text })),
         ];
       }
 
@@ -170,14 +159,17 @@ export default function ChildSystemMixin(Base) {
         });
       }
 
-      /** @returns {boolean} */
-      get isUsable() {
-        return this.constructor.metadata.usable;
+      /**
+       * Whether this should be made suppressed.
+       * @returns {boolean}
+       */
+      get isSuppressed() {
+        return Object.values(this._getTipSuppressions()).some(s => s());
       }
 
       /** @returns {boolean} */
-      get makeSuppressed() {
-        return this._isSuppressedForced || this._isSuppressedElder;
+      get isUsable() {
+        return this.constructor.metadata.usable;
       }
 
       /**
@@ -194,28 +186,41 @@ export default function ChildSystemMixin(Base) {
       }
 
       /**
-       * Add a configured error message to a set.
-       * @param {Teriock.Config.ErrorMessageKey} key
-       * @param {Set<string>} messages
+       * Errors are just messages don't affect functionality. Each one has a notification message registered in the tip
+       * config and a method to call to check if this has an error.
+       * @returns {Record<Teriock.Config.ErrorMessageKey, () => boolean}
        */
-      _addErrorMessage(key, messages) {
-        const text = TERIOCK.config.tip.error[key];
-        if (!text || !game.settings.get("teriock", "errorMessages").has(key)) { return; }
-        messages.add(text);
+      _getTipErrors() {
+        return {};
       }
 
       /**
-       * Add a configured suppression message to a set.
-       * @param {Teriock.Config.SuppressionMessageKey} key
-       * @param {Set<string>} messages
+       * Suppressions determine if this is suppressed or not. Each one has a notification message registered in the tip
+       * config and a method to call to check if this is suppressed.
+       * @returns {Record<Teriock.Config.SuppressionMessageKey, () => boolean}
        */
-      _addSuppressionMessage(key, messages) {
-        const text = TERIOCK.config.tip.suppression[key];
-        if (
-          !text || !game.settings.get("teriock", "suppressionMessageTypes").has(this.parent.type)
-          || !game.settings.get("teriock", "suppressionMessages").has(key)
-        ) { return; }
-        messages.add(text);
+      _getTipSuppressions() {
+        return {
+          elder: this._isSuppressedElder.bind(this),
+          forced: this._isSuppressedForced.bind(this),
+          disabled: () => this.parent?.disabled,
+        };
+      }
+
+      /**
+       * If this is suppressed due to its parent being inactive.
+       * @returns {boolean}
+       */
+      _isSuppressedElder() {
+        return this.parent.elder?.active === false;
+      }
+
+      /**
+       * If this is suppressed due to something explicitly forcing it to be that way.
+       * @returns {boolean}
+       */
+      _isSuppressedForced() {
+        return this.forceSuppressed;
       }
 
       /** @inheritDoc */

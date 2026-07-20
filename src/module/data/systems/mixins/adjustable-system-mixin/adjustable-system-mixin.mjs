@@ -50,11 +50,6 @@ export default function AdjustableSystemMixin(Base) {
       }
 
       /** @inheritDoc */
-      get _isSuppressedDampened() {
-        return this.form !== "intrinsic" && super._isSuppressedDampened;
-      }
-
-      /** @inheritDoc */
       get _nameBadge() {
         return this.badge || "";
       }
@@ -79,6 +74,11 @@ export default function AdjustableSystemMixin(Base) {
       /** @inheritDoc */
       get needsAttunement() {
         return this.form !== "intrinsic" && super.needsAttunement;
+      }
+
+      /** @inheritDoc */
+      _isSuppressedDampened() {
+        return this.form !== "intrinsic" && super._isSuppressedDampened();
       }
 
       /** @inheritDoc */

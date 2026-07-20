@@ -87,14 +87,6 @@ export default function EquipmentStoragePart(Base) {
       }
 
       /** @inheritDoc */
-      get _displayMessagesError() {
-        const messages = super._displayMessagesError;
-        if (this.storage.isOverCountCapacity) { this._addErrorMessage("overCarriedCount", messages); }
-        if (this.storage.isOverWeightCapacity) { this._addErrorMessage("overCarriedWeight", messages); }
-        return messages;
-      }
-
-      /** @inheritDoc */
       get _displayToggles() {
         return ["system.storage.enabled", ...super._displayToggles];
       }
@@ -138,6 +130,14 @@ export default function EquipmentStoragePart(Base) {
         if (this.parent.elder?.type === "equipment") { return this.parent.elder?.system?.storage?.weightMultiplier
             ?? 1; }
         return 1;
+      }
+
+      /** @inheritDoc */
+      _getTipErrors() {
+        return Object.assign(super._getTipErrors(), {
+          overCarriedCount: () => this.storage.isOverCountCapacity,
+          overCarriedWeight: () => this.storage.isOverWeightCapacity,
+        });
       }
 
       /** @inheritDoc */
