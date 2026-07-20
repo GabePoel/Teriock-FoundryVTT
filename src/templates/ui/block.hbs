@@ -2,38 +2,55 @@
   class="
     teriock-block
     {{ classes }}
-    {{#if draggable}}draggable{{/if}}
-    {{#if hidden}}hidden{{/if}}
-    {{#if inactive}}inactive{{else}}active{{/if}}
-    {{#if shattered}}shattered{{/if}}
-    {{#if struck}}struck{{/if}}
+    {{#if draggable}}
+      draggable
+    {{/if}}
+    {{#if hidden}}
+      hidden
+    {{/if}}
+    {{#if inactive}}
+      inactive
+    {{else}}
+      active
+    {{/if}}
+    {{#if shattered}}
+      shattered
+    {{/if}}
+    {{#if struck}}
+      struck
+    {{/if}}
   "
   data-img="{{#if (exists img)}}img{{else}}systems/teriock/src/icons/documents/uncertainty.svg{{/if}}"
   {{#if identifier}}
-  data-action="openIdentifier"
-  data-identifier="{{ identifier }}"
+    data-action="openIdentifier"
+    data-identifier="{{ identifier }}"
   {{else if openable}}
-  data-action="openDoc"
+    data-action="openDoc"
   {{/if}}
-  {{#if uuid}}data-uuid="{{ uuid }}"
+  {{#if uuid}}
+    data-uuid="{{ uuid }}"
   {{/if}}
   {{#if tooltipIdentifier}}
-  data-tooltip-identifier="{{ tooltipIdentifier }}"
+    data-tooltip-identifier="{{ tooltipIdentifier }}"
   {{else if tooltipUuid}}
-  data-tooltip-uuid="{{ tooltipUuid }}"
+    data-tooltip-uuid="{{ tooltipUuid }}"
   {{else if uuid}}
-  data-tooltip-uuid="{{ uuid }}"
+    data-tooltip-uuid="{{ uuid }}"
   {{/if}}
   {{#if id}}
-  data-id="{{ id }}"
+    data-id="{{ id }}"
   {{/if}}
-  {{#if parentId}}data-parent-id="{{ parentId }}"
+  {{#if parentId}}
+    data-parent-id="{{ parentId }}"
   {{/if}}
-  {{#if type}}data-type="{{ type }}"
+  {{#if type}}
+    data-type="{{ type }}"
   {{/if}}
-  {{#if relative}}data-relative="{{ relative }}"
+  {{#if relative}}
+    data-relative="{{ relative }}"
   {{/if}}
-  {{#if (exists tooltip)}}data-tooltip-html="{{ tooltip }}"
+  {{#if (exists tooltip)}}
+    data-tooltip-html="{{ tooltip }}"
   {{/if}}
   data-tooltip-direction='{{ifThen (exists tooltipDirection) tooltipDirection "RIGHT"}}'
   data-tooltip-class="teriock-rich-tooltip"
@@ -42,19 +59,19 @@
     class="
       teriock-block-image
       {{#if usable}}
-      usable
+        usable
       {{/if}}
     "
     {{#if color}}
-    style="outline-color: {{ color }}"
+      style="outline-color:{{ color }}"
     {{/if}}
     {{#if usable}}
-    data-tooltip='{{localize "TERIOCK.MODELS.Usable.USAGE.use"}}'
-    data-tooltip-direction="LEFT"
-    data-tooltip-class=""
+      data-tooltip='{{localize "TERIOCK.MODELS.Usable.USAGE.use"}}'
+      data-tooltip-direction="LEFT"
+      data-tooltip-class=""
     {{/if}}
     {{#if action}}
-    data-action="{{ action }}"
+      data-action="{{ action }}"
     {{/if}}
     data-shareable="true"
   >
@@ -68,7 +85,7 @@
     <div class="teriock-block-titles">
       <div class="teriock-block-title">
         {{#if (exists title)}}
-          {{title}}
+          {{ title }}
         {{else}}
           {{localize "TERIOCK.TERMS.Common.undefined"}}
         {{/if}}
@@ -77,23 +94,23 @@
         class="
           teriock-block-subtitle
           {{#if subtitleAction}}
-          teriock-block-clickable
+            teriock-block-clickable
           {{/if}}
         "
         {{#if subtitleAction}}
-        data-action="{{ subtitleAction }}"
+          data-action="{{ subtitleAction }}"
         {{/if}}
         {{#if subtitleTooltip}}
-        data-tooltip-direction="DOWN"
-        data-tooltip-class="teriock"
-        data-tooltip="{{ subtitleTooltip }}"
+          data-tooltip-direction="DOWN"
+          data-tooltip-class="teriock"
+          data-tooltip="{{ subtitleTooltip }}"
         {{/if}}
       >
-        {{subtitle}}
+        {{ subtitle }}
       </div>
     </div>
     <div class="teriock-block-content">
-      <div class="teriock-block-text">{{text}}</div>
+      <div class="teriock-block-text">{{ text }}</div>
       <div class="teriock-block-icons" data-tooltip-direction="DOWN" data-tootip-class="teriock">
         {{#each icons}}
           <i
@@ -102,18 +119,17 @@
               {{makeIconClass icon (ifThen (exists style) style "light")}}
               {{ classes }}
               {{#if (and clickable visible)}}
-              teriock-block-clickable
+                teriock-block-clickable
               {{/if}}
             '
             {{#if (and (or (not (defined visible)) visible) action)}}
-            data-action="{{ action }}"
+              data-action="{{ action }}"
             {{/if}}
             {{#if tooltip}}
-            data-tooltip="{{ tooltip }}"
+              data-tooltip="{{ tooltip }}"
             {{/if}}
             {{#if dataset}}
-            {{#each dataset as |value key|}}data-{{ key }}="{{ value }}"
-            {{/each}}
+              {{#each dataset as |value key|}}data-{{ key }}="{{ value }}"{{/each}}
             {{/if}}
           ></i>
         {{/each}}

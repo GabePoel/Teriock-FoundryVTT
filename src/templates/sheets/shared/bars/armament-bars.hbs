@@ -1,11 +1,8 @@
 {{#if (or
-  (exists system.attackPenalty)
-  (exists system.damage.base)
-  (exists system.damage.twoHanded)
-  (exists system.hitBonus))}}
+  (exists system.attackPenalty) (exists system.damage.base) (exists system.damage.twoHanded) (exists system.hitBonus))
+}}
   <div class="teriock-sheet-bar">
-    {{
-      formBox
+    {{formBox
       sourceDamageString
       action=(ifThen editable "editArmamentDamage" "")
       icon=TERIOCK.display.icons.ui.damage
@@ -15,8 +12,7 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label")
       overflow=true
     }}
-    {{
-      formBox
+    {{formBox
       system._source.hitBonus
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.hitBonus")
@@ -26,8 +22,7 @@
       unselected=system.hitBonus
       tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label")
     }}
-    {{
-      formBox
+    {{formBox
       system._source.attackPenalty
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.attackPenalty")
@@ -38,12 +33,9 @@
     }}
   </div>
 {{/if}}
-{{#if (or
-  (exists system.av.raw)
-  (exists system.bv.raw))}}
+{{#if (or (exists system.av.raw) (exists system.bv.raw))}}
   <div class="teriock-sheet-bar">
-    {{
-      formBox
+    {{formBox
       system._source.av.raw
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.av.raw")
@@ -53,8 +45,7 @@
       unselected=system.av.value
       tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.av.raw.label")
     }}
-    {{
-      formBox
+    {{formBox
       system._source.bv.raw
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.bv.raw")

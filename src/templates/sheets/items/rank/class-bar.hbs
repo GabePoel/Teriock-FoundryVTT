@@ -1,20 +1,17 @@
 <div class="teriock-sheet-bar">
-  {{
-    formBox
+  {{formBox
     (getName system.archetype)
     action=(ifThen editable "editClass" "")
     icon=(path TERIOCK.config.class.archetypes system._source.archetype "icon")
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label")
   }}
-  {{
-    formBox
+  {{formBox
     (getName system.class)
     action=(ifThen editable "editClass" "")
     icon=system.classIcon
     tooltip=(localize "TERIOCK.SYSTEMS.Rank.FIELDS.class.label")
   }}
-  {{
-    formBox
+  {{formBox
     (localize "TERIOCK.SYSTEMS.Rank.PANELS.rank" value=system._source.number)
     action=(ifThen editable "updatePaths" "")
     dataset=(object paths="system.number")

@@ -7,7 +7,7 @@
           class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ac.tooltip"}}'
         >
-          {{{system.defense.ac}}}
+          {{{ system.defense.ac }}}
         </div>
       </div>
 
@@ -17,7 +17,7 @@
           class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.bv.tooltip"}}'
         >
-          {{{system.defense.bv}}}
+          {{{ system.defense.bv }}}
         </div>
       </div>
 
@@ -27,7 +27,7 @@
           class="actor-smallbox-value"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.cc.tooltip"}}'
         >
-          {{{system.defense.cc}}}
+          {{{ system.defense.cc }}}
         </div>
       </div>
     </div>
@@ -61,11 +61,11 @@
         class="thover actor-primary-blocker-select draggable"
         data-tooltip-direction="LEFT"
         {{#if (exists system.wielding.blocker)}}
-        data-tooltip-uuid="{{ system.wielding.blocker.uuid }}"
+          data-tooltip-uuid="{{ system.wielding.blocker.uuid }}"
         {{/if}}
       >
         {{#if (exists system.wielding.blocker)}}
-          {{{system.wielding.blocker.name}}}
+          {{{ system.wielding.blocker.name }}}
         {{else}}
           {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.none"}}
         {{/if}}
@@ -89,20 +89,20 @@
       >
         <i
           {{#if (eq system.cover 0)}}
-          class='{{makeIconClass TERIOCK.display.icons.ui.off "solid"}}'
-          data-tooltip='{{localize "TERIOCK.STATUSES.Cover.noCover"}}'
+            class='{{makeIconClass TERIOCK.display.icons.ui.off "solid"}}'
+            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.noCover"}}'
           {{/if}}
           {{#if (eq system.cover 1)}}
-          class='{{makeIconClass TERIOCK.display.icons.cover.half "solid"}}'
-          data-tooltip='{{localize "TERIOCK.STATUSES.Cover.halfCover"}}'
+            class='{{makeIconClass TERIOCK.display.icons.cover.half "solid"}}'
+            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.halfCover"}}'
           {{/if}}
           {{#if (eq system.cover 2)}}
-          class='{{makeIconClass TERIOCK.display.icons.cover.partial "solid"}}'
-          data-tooltip='{{localize "TERIOCK.STATUSES.Cover.threeQuartersCover"}}'
+            class='{{makeIconClass TERIOCK.display.icons.cover.partial "solid"}}'
+            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.threeQuartersCover"}}'
           {{/if}}
           {{#if (eq system.cover 3)}}
-          class='{{makeIconClass TERIOCK.display.icons.cover.full "solid"}}'
-          data-tooltip='{{localize "TERIOCK.STATUSES.Cover.fullCover"}}'
+            class='{{makeIconClass TERIOCK.display.icons.cover.full "solid"}}'
+            data-tooltip='{{localize "TERIOCK.STATUSES.Cover.fullCover"}}'
           {{/if}}
         ></i>
       </div>
@@ -114,9 +114,7 @@
     >
       <div class="title-left tsubtle">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.label"}}</div>
       <div class="right-container" style="display: flex; align-items: center; justify-content: end; flex: 1">
-        <div
-          class="actor-smallbox-value"
-          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
+        <div class="actor-smallbox-value" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.ReactionBox.tooltip"}}'
         >
           <i
             class='thover {{makeIconClass (lookup TERIOCK.display.icons.ui (ifThen system.combat.hasReaction "on" "off")) "light"}}'
@@ -136,7 +134,8 @@
         >
           {{#if (or
             system.offense.piercing.ub
-            system.wielding.attacker.system.piercing.ub)}}
+            system.wielding.attacker.system.piercing.ub)
+          }}
             {{#if system.offense.piercing.ub}}
               {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.ub.forced"}}
             {{else}}
@@ -145,7 +144,8 @@
           {{else}}
             {{#if (or
               system.offense.piercing.av0
-              system.wielding.attacker.system.piercing.av0)}}
+              system.wielding.attacker.system.piercing.av0)
+            }}
               {{#if system.offense.piercing.av0}}
                 {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.av0.forced"}}
               {{else}}
@@ -172,8 +172,7 @@
 
       <div class="actor-shortbox actor-penalty-box" data-action="resetAttackPenalty">
         <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.penalty.label"}}</div>
-        {{
-          formInput
+        {{formInput
           systemFields.combat.fields.attackPenalty
           value=system.combat.attackPenalty
           classes="actor-penalty-input actor-smallbox-value thover-soft"
@@ -212,11 +211,11 @@
         class="thover actor-primary-attacker-select draggable"
         data-tooltip-direction="LEFT"
         {{#if (exists system.wielding.attacker)}}
-        data-tooltip-uuid="{{ system.wielding.attacker.uuid }}"
+          data-tooltip-uuid="{{ system.wielding.attacker.uuid }}"
         {{/if}}
       >
         {{#if (exists system.wielding.attacker)}}
-          {{{system.wielding.attacker.name}}}
+          {{{ system.wielding.attacker.name }}}
         {{else}}
           {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.none"}}
         {{/if}}
@@ -228,7 +227,7 @@
           {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.fightingStyle"}}
         </div>
         <div class="actor-fighting-style-summary">
-          {{{enrichedSpecialRules}}}
+          {{{ enrichedSpecialRules }}}
         </div>
       {{/if}}
     </div>

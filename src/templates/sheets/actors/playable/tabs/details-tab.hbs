@@ -10,7 +10,7 @@
         >
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.label"}}</div>
           <div class="actor-shortbox-value">
-            {{{system.movementSpeed}}}
+            {{{ system.movementSpeed }}}
             {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate"}}
           </div>
         </div>
@@ -18,7 +18,7 @@
         <div class="tgrid g3" style="padding-inline: 0.5em; row-gap: 0.55rem">
           {{#each TERIOCK.config.character.movement as |config key|}}
             <div class="gi2">
-              {{{config.label}}}
+              {{{ config.label }}}
             </div>
             <div
               class="
@@ -30,7 +30,7 @@
                 (not (eq
                 (lookup @root/system.speedAdjustments key)
                 (lookup @root/system._source.speedAdjustments key))))}}
-                modified
+                  modified
                 {{/if}}
               "
               data-action="increment"
@@ -54,7 +54,7 @@
             {{#each TERIOCK.config.character.sense as |config key|}}
               {{#if (not config.hidden)}}
                 <div class="gi2">
-                  {{{config.label}}}
+                  {{{ config.label }}}
                 </div>
                 <div
                   class="
@@ -63,7 +63,7 @@
                     {{#if (and
                     @root/highlightModified
                     (not (eq (path ../system.senses key) (path ../system._source.senses key))))}}
-                    modified
+                      modified
                     {{/if}}
                   "
                 >
@@ -71,8 +71,7 @@
                     <span class="tcolored tcenter ttransparent">{{path ../system.senses key}} ft</span>
                   </div>
                   <div class="tcolored">
-                    {{
-                      formInput
+                    {{formInput
                       (path ../systemFields "senses.fields" key)
                       value=(path ../system._source.senses key)
                       classes="tcenter ttransparent selected"
@@ -93,15 +92,14 @@
                   {{#if (and
                   highlightModified
                   (not (eq system.size.number system._source.size.number)))}}
-                  modified
+                    modified
                   {{/if}}
                 "
               >
                 <div class="unselected">
-                  <span class="actor-size-input actor-smallbox-value">{{{system.size.number}}}</span>
+                  <span class="actor-size-input actor-smallbox-value">{{{ system.size.number }}}</span>
                 </div>
-                {{
-                  formInput
+                {{formInput
                   systemFields.size.fields.number
                   classes="actor-size-input actor-smallbox-value selected transparent-input"
                   context="actor"
@@ -120,11 +118,9 @@
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.label"}}</div>
               <div class="affix">
                 <div class="unselected">
-                  <span class="actor-weight-input actor-smallbox-value">{{{system.weight.self}}}
-                    {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}</span>
+                  <span class="actor-weight-input actor-smallbox-value">{{{ system.weight.self }}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}</span>
                 </div>
-                {{
-                  formInput
+                {{formInput
                   systemFields.weight.fields.self
                   classes="actor-weight-input actor-smallbox-value selected transparent-input"
                   context="actor"
@@ -148,7 +144,7 @@
                 data-tooltip-direction="DOWN"
                 style="height: 2rem"
               >
-                {{{system.weight.carried}}}
+                {{{ system.weight.carried }}}
                 {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
               </div>
             </div>
@@ -163,14 +159,14 @@
                 tcenter
                 tround
                 {{#if (gte system.weight.carried system.carryingCapacity.light)}}
-                tred
+                  tred
                 {{/if}}
               "
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.lightCapacity"}}'
               data-tooltip-direction="DOWN"
               data-tooltip-class=""
             >
-              {{{system.carryingCapacity.light}}}
+              {{{ system.carryingCapacity.light }}}
               {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
             </div>
             <div
@@ -178,14 +174,14 @@
                 tcenter
                 tround
                 {{#if (gte system.weight.carried system.carryingCapacity.heavy)}}
-                tred
+                  tred
                 {{/if}}
               "
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavyCapacity"}}'
               data-tooltip-direction="DOWN"
               data-tooltip-class=""
             >
-              {{{system.carryingCapacity.heavy}}}
+              {{{ system.carryingCapacity.heavy }}}
               {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
             </div>
             <div
@@ -193,14 +189,14 @@
                 tcenter
                 tround
                 {{#if (gte system.weight.carried system.carryingCapacity.max)}}
-                tred
+                  tred
                 {{/if}}
               "
               data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.maxCapacity"}}'
               data-tooltip-direction="DOWN"
               data-tooltip-class=""
             >
-              {{{system.carryingCapacity.max}}}
+              {{{ system.carryingCapacity.max }}}
               {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
             </div>
           </div>
@@ -218,21 +214,19 @@
                 {{#if (and
                 highlightModified
                 (not (eq system.curses.max system._source.curses.max)))}}
-                modified
+                  modified
                 {{/if}}
               "
               style="height: 2rem"
             >
               <span class="unselected">
-                {{
-                  localize
+                {{localize
                   "TERIOCK.FORMAT.outOf"
                   numerator=system.curses.value
                   denominator=system.curses.max
                 }}
               </span>
-              {{
-                formInput
+              {{formInput
                 systemFields.curses.fields.max
                 value=system._source.curses.max
                 classes="selected transparent-input"
@@ -250,21 +244,19 @@
                 {{#if (and
                 highlightModified
                 (not (eq system.rotators.max system._source.rotators.max)))}}
-                modified
+                  modified
                 {{/if}}
               "
               style="height: 2rem"
             >
               <span class="unselected">
-                {{
-                  localize
+                {{localize
                   "TERIOCK.FORMAT.outOf"
                   numerator=system.rotators.value
                   denominator=system.rotators.max
                 }}
               </span>
-              {{
-                formInput
+              {{formInput
                 systemFields.rotators.fields.max
                 value=system._source.rotators.max
                 classes="selected transparent-input"
@@ -277,8 +269,7 @@
       <div class="teriock-block-display" style="flex-direction: row; padding-bottom: 0.25em; padding-top: 0.75em">
         <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}</div>
-          {{
-            formInput
+          {{formInput
             systemFields.detection.fields.hiding
             value=system._source.detection.hiding
             classes="actor-detection-input actor-smallbox-value selected transparent-input"
@@ -287,8 +278,7 @@
         </div>
         <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}</div>
-          {{
-            formInput
+          {{formInput
             systemFields.detection.fields.perceiving
             value=system._source.detection.perceiving
             classes="actor-detection-input actor-smallbox-value selected transparent-input"
@@ -300,7 +290,7 @@
     <div class="teriock-block-display actor-notes-content">
       <prose-mirror name="system.notes" value="{{ system.notes }}" toggled="true" editable="editable">
         {{#if (exists enrichedNotes)}}
-          {{{enrichedNotes}}}
+          {{{ enrichedNotes }}}
         {{else}}
           {{localize "TERIOCK.SHEETS.Actor.TABS.Details.notes.placeholder"}}
         {{/if}}

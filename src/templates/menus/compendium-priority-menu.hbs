@@ -9,8 +9,9 @@
           data-identifier-priority-label="{{ label }}"
           data-identifier-priority-collection="{{ collection }}"
         >
-          <span class="identifier-source-priority-number" data-identifier-priority-number>{{priority}}</span>
+          <span class="identifier-source-priority-number" data-identifier-priority-number>{{ priority }}</span>
           <div class="identifier-source-priority-controls">
+            {{!-- prettier-ignore --}}
             <button
               id="{{ @root.partId }}-identifier-priority-up-{{ collection }}"
               class="identifier-source-priority-button"
@@ -21,6 +22,7 @@
             >
               {{makeIcon "ms-arrow-drop-up" "solid"}}
             </button>
+            {{!-- prettier-ignore --}}
             <button
               id="{{ @root.partId }}-identifier-priority-down-{{ collection }}"
               class="identifier-source-priority-button"
@@ -34,8 +36,8 @@
           </div>
           <label class="identifier-source-priority-label">
             <i class="{{ icon }}"></i>
-            {{label}}
-            <span class="hint">({{collection}})</span>
+            {{ label }}
+            <span class="hint">({{ collection }})</span>
           </label>
         </li>
       {{/each}}

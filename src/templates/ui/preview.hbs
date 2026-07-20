@@ -51,10 +51,10 @@
             data-action="createChild"
             data-tooltip="{{ preview.add.tooltip }}"
             {{#if preview.add.dataType}}
-            data-type="{{ preview.add.dataType }}"
+              data-type="{{ preview.add.dataType }}"
             {{/if}}
             {{#if preview.add.dataTypes}}
-            data-types="{{ preview.add.dataTypes }}"
+              data-types="{{ preview.add.dataTypes }}"
             {{/if}}
             type="button"
           >
@@ -75,8 +75,7 @@
               <label for='{{concat @root/appId "-" preview.id}}-gapless'>
                 {{localize "TERIOCK.SHEETS.Common.SEARCH.gapless"}}
               </label>
-              {{
-                formInput
+              {{formInput
                 (path preview "schema" "fields" "display" "fields" "gapless")
                 id=(concat @root/appId "-" preview.id "-gapless")
                 name=(concat "previews." preview.id ".display.gapless")
@@ -85,8 +84,7 @@
               }}
             </div>
             <div class="tgrid-item gi3">
-              {{
-                formInput
+              {{formInput
                 (path preview "schema" "fields" "display" "fields" "size")
                 id=(concat @root/appId "-" preview.id "-size")
                 name=(concat "previews." preview.id ".display.size")
@@ -110,8 +108,7 @@
               <label for='{{concat @root/appId "-" preview.id}}-ascending'>
                 {{localize "TERIOCK.SHEETS.Common.SEARCH.ascending"}}
               </label>
-              {{
-                formInput
+              {{formInput
                 (path preview "schema" "fields" "sort" "fields" "ascending")
                 id=(concat @root/appId "-" preview.id "-ascending")
                 name=(concat "previews." preview.id ".sort.ascending")
@@ -120,8 +117,7 @@
               }}
             </div>
             <div class="tgrid-item gi3">
-              {{
-                formInput
+              {{formInput
                 (path preview "schema" "fields" "sort" "fields" "option")
                 id=(concat @root/appId "-" preview.id "-sort")
                 name=(concat "previews." preview.id ".sort.option")
@@ -140,7 +136,7 @@
         data-content-type="{{ preview.id }}"
         data-content-menu="filter"
       >
-        <div class="teriock-block-options-content-inner">{{{preview.filterForm}}}</div>
+        <div class="teriock-block-options-content-inner">{{{ preview.filterForm }}}</div>
       </div>
     </div>
   </div>
@@ -149,7 +145,6 @@
     {{#if @index}}
       <div class="teriock-block-display-divider"></div>
     {{/if}}
-    <!-- markup-fmt-ignore -->
     {{> "teriock/sheets/actors/playable/results/search-results"
       docs=group.docs
       searchKey=preview.id
@@ -158,7 +153,6 @@
       size=preview.display.size
     }}
   {{else}}
-    <!-- markup-fmt-ignore -->
     {{> "teriock/sheets/actors/playable/results/search-results"
       searchKey=preview.id
       empty=(localize "TERIOCK.SHEETS.Common.SEARCH.documents")

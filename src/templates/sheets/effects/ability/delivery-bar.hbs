@@ -1,6 +1,5 @@
 <div class="teriock-sheet-bar">
-  {{
-    formBox
+  {{formBox
     executionTime
     icon=TERIOCK.display.icons.ability.execution
     tooltip=(localize "TERIOCK.TERMS.Common.executionTime")
@@ -9,31 +8,23 @@
     classes=(ifThen editable "execution-box" "")
     overflow=true
   }}
-  {{
-    formBox
-    (concat
-      system.piercing.label
-      " "
-      (lookup (lookup TERIOCK.config.ability.delivery system.delivery) "label"))
+  {{formBox
+    (concat system.piercing.label " " (lookup (lookup TERIOCK.config.ability.delivery system.delivery) "label"))
     icon=TERIOCK.display.icons.ability.delivery
     action=(ifThen editable "editDelivery" "")
     classes=(ifThen editable "delivery-box" "")
     tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.delivery.label")
   }}
-  {{
-    formBox
+  {{formBox
     (concat
       (ifThen
         (eq system.interaction "feat")
-        (concat
-          (path TERIOCK.config.attribute system.featSaveAttribute "abbreviation")
-          " ")
+        (concat (path TERIOCK.config.attribute system.featSaveAttribute "abbreviation") " ")
         "")
       (lookup TERIOCK.config.ability.interaction system.interaction))
     icon=TERIOCK.display.icons.ability.interaction
     action=(ifThen editable "editInteraction" "")
-    classes=(ifThen
-      editable (concat "interaction-box interaction-box-" system.interaction) "")
+    classes=(ifThen editable (concat "interaction-box interaction-box-" system.interaction) "")
     tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label")
   }}
 </div>

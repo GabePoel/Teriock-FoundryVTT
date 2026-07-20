@@ -1,7 +1,6 @@
 {{#if system.storage.enabled}}
   <div class="teriock-sheet-bar">
-    {{
-      formBox
+    {{formBox
       system._source.storage.maxCount
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.maxCount")
@@ -12,17 +11,11 @@
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=system.storage.maxCount)
         system.storage.carriedCount)
       label="ITEMS"
-      iconColor=(ifThen
-        system.storage.isOverCountCapacity
-        TERIOCK.display.colors.palette.red
-        null)
+      iconColor=(ifThen system.storage.isOverCountCapacity TERIOCK.display.colors.palette.red null)
       tooltip=(localize
-        (concat
-          "TERIOCK.MODELS.Storage.FIELDS.maxCount."
-          (ifThen system.storage.isOverCountCapacity "over" "under")))
+        (concat "TERIOCK.MODELS.Storage.FIELDS.maxCount." (ifThen system.storage.isOverCountCapacity "over" "under")))
     }}
-    {{
-      formBox
+    {{formBox
       system._source.storage.maxWeight
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.maxWeight")
@@ -33,17 +26,11 @@
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=system.storage.maxWeight)
         system.storage.carriedWeight)
       label="lb"
-      iconColor=(ifThen
-        system.storage.isOverWeightCapacity
-        TERIOCK.display.colors.palette.red
-        null)
+      iconColor=(ifThen system.storage.isOverWeightCapacity TERIOCK.display.colors.palette.red null)
       tooltip=(localize
-        (concat
-          "TERIOCK.MODELS.Storage.FIELDS.maxWeight."
-          (ifThen system.storage.isOverWeightCapacity "over" "under")))
+        (concat "TERIOCK.MODELS.Storage.FIELDS.maxWeight." (ifThen system.storage.isOverWeightCapacity "over" "under")))
     }}
-    {{
-      formBox
+    {{formBox
       system._source.storage.weightMultiplier
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.weightMultiplier")

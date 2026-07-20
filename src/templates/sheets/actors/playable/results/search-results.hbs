@@ -1,19 +1,29 @@
-<div class="teriock-block-container {{#if gapless}}gapless{{/if}} {{ size }}">
+<div
+  class="
+    teriock-block-container
+    {{#if gapless}}
+      gapless
+    {{/if}}
+    {{ size }}
+  "
+>
   {{#unless docs.length}}
     <div class="teriock-block-container-start" style="display: none"></div>
   {{/unless}}
   {{#each docs as |entry|}}
-    <!-- markup-fmt-ignore -->
     {{> "teriock/ui/block"
       (merge
-      entry.doc.embedParts
-      (object relative=@root.document.uuid hidden=entry.hidden))
+        entry.doc.embedParts
+        (object relative=@root.document.uuid hidden=entry.hidden))
     }}
   {{/each}}
 
   <div class="no-results {{ size }}">
     <p>
-      {{localize "TERIOCK.SHEETS.Common.SEARCH.noResultsNamed" name=empty}}
+      {{localize
+        "TERIOCK.SHEETS.Common.SEARCH.noResultsNamed"
+        name=empty
+      }}
     </p>
   </div>
 </div>

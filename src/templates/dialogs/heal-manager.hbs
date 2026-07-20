@@ -4,7 +4,9 @@
       <img src="{{ img }}" alt="" loading="lazy" />
     </div>
     <div class="stat-bar">
-      {{> "teriock/sheets/actors/playable/parts/stat-bar" stat="hp"}}
+      {{> "teriock/sheets/actors/playable/parts/stat-bar"
+        stat="hp"
+      }}
     </div>
   </div>
   <p class="hint">
@@ -21,27 +23,26 @@
   {{#if (not noDice)}}
     <fieldset class="stat-manager-dice">
       <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label"}}</legend>
-      {{> "teriock/ui/stat-dice" dice=system.hp.dice}}
+      {{> "teriock/ui/stat-dice"
+        dice=system.hp.dice
+      }}
     </fieldset>
   {{/if}}
   {{#if (not noDice)}}
     <div class="standard-form teriock-form-container">
-      {{
-        formGroup
+      {{formGroup
         consumeStatDiceField
         value=state.consumeStatDice
         rootId=appId
         name="state.consumeStatDice"
       }}
-      {{
-        formGroup
+      {{formGroup
         forHarmField
         value=state.forHarm
         rootId=appId
         name="state.forHarm"
       }}
-      {{
-        formGroup
+      {{formGroup
         substitutionField
         value=state.substitution
         rootId=appId

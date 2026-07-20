@@ -1,29 +1,24 @@
 <div class="teriock-sheet-bar">
   {{#if (and isGM (not system.identification.read))}}
-    {{
-      formBox
+    {{formBox
       (path TERIOCK.config.equipment.powerLevel system.identification.powerLevel "label")
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.powerLevel")
       icon=(path TERIOCK.config.equipment.powerLevel "unknown" "icon")
-      iconColor=(path
-        TERIOCK.config.equipment.powerLevel system.identification.powerLevel "color")
+      iconColor=(path TERIOCK.config.equipment.powerLevel system.identification.powerLevel "color")
       tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
     }}
   {{else}}
-    {{
-      formBox
+    {{formBox
       (path TERIOCK.config.equipment.powerLevel system.powerLevel "label")
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.powerLevel")
       icon=(path TERIOCK.config.equipment.powerLevel system.powerLevel "icon")
-      iconColor=(path
-        TERIOCK.config.equipment.powerLevel system.powerLevel "color")
+      iconColor=(path TERIOCK.config.equipment.powerLevel system.powerLevel "color")
       tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label")
     }}
   {{/if}}
-  {{
-    formBox
+  {{formBox
     system._source.equipmentType
     action=(ifThen editable "updatePaths" "")
     dataset=(object paths="system.equipmentType")
@@ -32,8 +27,7 @@
     tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label")
     unselected=(getName system.equipmentType)
   }}
-  {{
-    formBox
+  {{formBox
     rangeString
     action=(ifThen editable "editArmamentRange" "")
     icon=TERIOCK.display.icons.ability.range

@@ -3,13 +3,11 @@
     <div class="ttable teriock-sheet-button-grid menu-large-grid">
       {{#each displayFieldButtons}}
         <div class="tgrid-item">
+          {{!-- prettier-ignore --}}
           <button
             type="button"
             data-action="populateField"
             data-path="{{ fieldPath }}"
-            {{#if (not ../editable)}}
-            disabled="disabled"
-            {{/if}}
           >
             {{makeIcon ../TERIOCK.display.icons.ui.add "button"}}
             {{name}}
@@ -18,14 +16,12 @@
       {{/each}}
       {{#each displayButtons}}
         <div class="tgrid-item">
+          {{!-- prettier-ignore --}}
           <button
             type="button"
             {{#if button}}
             data-action="applyButtonUpdate"
             data-update="{{ button }}"
-            {{/if}}
-            {{#if (not ../editable)}}
-            disabled="disabled"
             {{/if}}
           >
             {{makeIcon ../TERIOCK.display.icons.ui.add "button"}}

@@ -2,8 +2,7 @@
   {{#if (or system.identification.identified system.isAttuned)}}
     {{> "teriock/sheets/shared/forms/tier-form"}}
   {{/if}}
-  {{
-    formBox
+  {{formBox
     system._source.weight
     action=(ifThen editable "updatePaths" "")
     dataset=(object paths="system.weight")
@@ -13,8 +12,7 @@
     unselected=system.weight
     tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.weight.label")
   }}
-  {{
-    formBox
+  {{formBox
     system._source.minStr
     action=(ifThen editable "updatePaths" "")
     dataset=(object paths="system.minStr")

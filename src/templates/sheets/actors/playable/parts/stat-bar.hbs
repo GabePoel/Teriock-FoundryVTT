@@ -1,6 +1,5 @@
 {{#with (lookup @root/bars stat) as |bar|}}
   <div class="actor-{{ bar.config.bar.class }}-bar-container actor-bar-container">
-    <!-- markup-fmt-ignore -->
     <div class="actor-{{ bar.config.bar.class }}-bar actor-bar toutline">
       <div class="actor-bar-left" style="width:{{ bar.remaining }}%;"></div>
       {{#if bar.config.bar.temp}}
@@ -14,13 +13,12 @@
     <div
       class="actor-bar-overlay"
       {{#if bar.config.pool.enabled}}
-      data-action="toggleCollapseRightClick"
-      data-collapsible-target="drawer-{{ bar.key }}"
+        data-action="toggleCollapseRightClick"
+        data-collapsible-target="drawer-{{ bar.key }}"
       {{/if}}
     >
       <div class="actor-bar-overlay-row actor-{{ bar.config.bar.class }}-bar-overlay-row">
-        {{
-          numberInput
+        {{numberInput
           bar.data.value
           name=bar.paths.value
           max=bar.data.max
@@ -32,15 +30,14 @@
         <div class="actor-bar-overlay-max actor-bar-overlay-label" data-tooltip="{{localize bar.labels.max}}">
           <span>
             /
-            {{bar.data.max}}
+            {{ bar.data.max }}
             {{#if bar.config.bar.temp}}
               +
             {{/if}}
           </span>
         </div>
         {{#if bar.config.bar.temp}}
-          {{
-            formInput
+          {{formInput
             (path @root/systemFields bar.key "fields.temp")
             name=bar.paths.temp
             value=bar.data.temp

@@ -4,31 +4,32 @@
       <img src="{{ img }}" alt="" loading="lazy" />
     </div>
     <div class="stat-bar">
-      {{> "teriock/sheets/actors/playable/parts/stat-bar" stat="mp"}}
+      {{> "teriock/sheets/actors/playable/parts/stat-bar"
+        stat="mp"
+      }}
     </div>
   </div>
   <p class="hint">{{localize "TERIOCK.DIALOGS.Revitalize.hint"}}</p>
   <fieldset class="stat-manager-dice">
     <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.mp.label"}}</legend>
-    {{> "teriock/ui/stat-dice" dice=system.mp.dice}}
+    {{> "teriock/ui/stat-dice"
+      dice=system.mp.dice
+    }}
   </fieldset>
   <div class="standard-form teriock-form-container">
-    {{
-      formGroup
+    {{formGroup
       consumeStatDiceField
       value=state.consumeStatDice
       rootId=appId
       name="state.consumeStatDice"
     }}
-    {{
-      formGroup
+    {{formGroup
       forHarmField
       value=state.forHarm
       rootId=appId
       name="state.forHarm"
     }}
-    {{
-      formGroup
+    {{formGroup
       substitutionField
       value=state.substitution
       rootId=appId

@@ -7,13 +7,17 @@
             {{> "teriock/sheets/actors/playable/parts/hack-box"}}
           </div>
         {{/if}}
-        {{> "teriock/sheets/actors/playable/parts/stat-bar" stat=statKey}}
+        {{> "teriock/sheets/actors/playable/parts/stat-bar"
+          stat=statKey
+        }}
         {{#if (path @root/bars statKey "config.pool.enabled")}}
           <div
             class="die-drawer {{ statKey }}-die-drawer {{ statKey }}-drawer collapsible"
             data-collapsible-id="drawer-{{ statKey }}"
           >
-            {{> "teriock/ui/stat-dice" dice=(path @root/system statKey "dice")}}
+            {{> "teriock/ui/stat-dice"
+              dice=(path @root/system statKey "dice")
+            }}
           </div>
         {{/if}}
       </div>

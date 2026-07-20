@@ -1,12 +1,12 @@
 {{#if (or
   (gt system.costs.tweaks.adept 0)
   (gt system.costs.tweaks.gifted 0)
-  (gt system.costs.tweaks.inept 0))}}
+  (gt system.costs.tweaks.inept 0))
+}}
   <div class="teriock-sheet-bar">
     {{#each TERIOCK.config.cost.tweaks as |value key|}}
       {{#if (gt (path @root/system.costs.tweaks key) 0)}}
-        {{
-          formBox
+        {{formBox
           (path @root/system.costs.tweaks key)
           action=(ifThen @root/editable "updatePaths" "")
           dataset=(object paths=(concat "system.costs.tweaks." key))
