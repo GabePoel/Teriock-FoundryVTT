@@ -31,6 +31,12 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       autoPayCosts: new fields.BooleanField(),
+      bv: new fields.NumberField({
+        initial: 0,
+        integer: true,
+        label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
+        nullable: false,
+      }),
       consumeAmmunition: new fields.BooleanField({ initial: true }),
       consumeEquipment: new fields.BooleanField({ initial: false }),
       existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
@@ -50,6 +56,8 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
    */
   constructor(data = {}, options = {}) {
     super(data, options);
+    const bonusAutomation = this.getAutomations("override", { active: true }).find(a => formulaExists(a.rollBonus));
+    if (bonusAutomation) { this.updateSource({ bonus: addFormula(this.bonus, bonusAutomation.rollBonus) }); }
     this.rootBonus = this.bonus;
     this.armament = options.armament ?? this.#determineDefaultArmament();
     this.initializeExecution(options);
@@ -72,6 +80,12 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
       && !armament?.properties.some((p) => ["handy", "magelore"].includes(p.system.identifier))
     ) {
       armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "handy"));
+    }
+    if (this.source.system.delivery === "armor" && !armament?.system.equipmentClasses.has("armor")) {
+      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has("armor"));
+    }
+    if (this.source.system.delivery === "shield" && !armament?.system.equipmentClasses.has("shields")) {
+      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has("shields"));
     }
     return armament;
   }
@@ -290,6 +304,7 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   _updateArmament(armament, options = {}) {
     this.armament = armament;
     const changes = {
+      bv: this.armament?.system.bv.value,
       incurredAttackPenalty: this.#resolveAttackPenalty(),
       "piercing.raw": this.#determinePiercing(options),
       sb: Boolean(options.sb ?? ((this.armament && this.isContact) ? this.actor?.system.offense.sb : 0)),

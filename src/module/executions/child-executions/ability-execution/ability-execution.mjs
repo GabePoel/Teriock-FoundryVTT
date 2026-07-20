@@ -62,7 +62,7 @@ export default class AbilityExecution
     return Object.assign(super.getRollData(), {
       0: Number(this.piercing.av0) * 2,
       "av0.wep": Number(this.armament?.system.piercing.av0) * 2,
-      bv: this.armament?.system.bv.value ?? 0,
+      bv: this.bv ?? 0,
       c: this.competence.fluent
         ? this.actor?.system.scaling.f
         : (this.competence.proficient ? this.actor?.system.scaling.p : 0),

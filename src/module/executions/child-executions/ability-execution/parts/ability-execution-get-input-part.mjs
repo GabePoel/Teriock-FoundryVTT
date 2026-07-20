@@ -42,6 +42,7 @@ export default function AbilityExecutionGetInputPart(Base) {
           paths.push("piercing.raw", "existingAttackPenalty");
           if (this.actor) { paths.push("incurredAttackPenalty"); }
         }
+        if (this.isBlock) { paths.push("bv"); }
         paths.push(...super._formPaths.filter(p => p !== "competence.raw"));
         if (this.isAttack) { paths.push("sb", "vitals"); }
         paths.push("warded");
