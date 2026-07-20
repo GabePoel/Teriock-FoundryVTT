@@ -66,6 +66,7 @@ async function unpackPack(pack, buildRegistry) {
   const extractOptions = {
     expandAdventures: EXPAND_ADVENTURES,
     folders: FOLDERS,
+    omitVolatile: true,
     transformEntry,
     transformFolderName,
     transformName,
