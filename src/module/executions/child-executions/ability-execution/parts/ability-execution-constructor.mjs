@@ -72,14 +72,25 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     let armament;
     if (this.source.system.interaction === "attack") { armament = this.actor.system.wielding.attacker; }
     if (this.source.system.interaction === "block") { armament = this.actor.system.wielding.blocker; }
-    if (this.source.system.delivery === "bite" && !armament?.properties.some((p) => p.system.identifier === "biting")) {
-      armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "biting"));
+    if (
+      this.source.system.delivery === "bite"
+      && !armament?.properties.some((p) => p.active && p.system.identifier === "biting")
+    ) {
+      armament = this.actor.armaments.find((a) =>
+        a.active && a.properties.some(p => p.active && p.system.identifier === "biting")
+      );
+    }
+    const handPropertyIdentifiers = ["handy"];
+    if (this.actor.abilities.some(a => a.active && a.system.identifier === "staff-touch")) {
+      handPropertyIdentifiers.push("magelore");
     }
     if (
       this.source.system.delivery === "hand"
-      && !armament?.properties.some((p) => ["handy", "magelore"].includes(p.system.identifier))
+      && !armament?.properties.some((p) => handPropertyIdentifiers.includes(p.system.identifier))
     ) {
-      armament = this.actor.armaments.find((a) => a.active && a.properties.some(p => p.system.identifier === "handy"));
+      armament = this.actor.armaments.find((a) =>
+        a.active && a.properties.some(p => handPropertyIdentifiers.includes(p.system.identifier))
+      );
     }
     if (this.source.system.delivery === "armor" && !armament?.system.equipmentClasses.has("armor")) {
       armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has("armor"));

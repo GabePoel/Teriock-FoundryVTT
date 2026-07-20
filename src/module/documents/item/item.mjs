@@ -46,7 +46,7 @@ export default class TeriockItem
    * @returns {boolean}
    */
   get active() {
-    return !this.isSuppressed && !this.disabled;
+    return !this.isSuppressed;
   }
 
   /**

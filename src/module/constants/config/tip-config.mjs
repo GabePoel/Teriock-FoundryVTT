@@ -5,6 +5,7 @@ const suppression = {
   consumed: "TERIOCK.SYSTEMS.Consumable.MESSAGES.suppression.consumed",
   dampened: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.dampened",
   deattuned: "TERIOCK.SYSTEMS.BaseEffect.MESSAGES.suppression.deattuned",
+  dependee: "TERIOCK.SYSTEMS.Child.MESSAGES.suppression.dependee",
   destroyed: "TERIOCK.SYSTEMS.Equipment.MESSAGES.suppression.destroyed",
   disabled: "TERIOCK.SYSTEMS.Child.MESSAGES.suppression.disabled",
   elder: "TERIOCK.SYSTEMS.Child.MESSAGES.suppression.elder",

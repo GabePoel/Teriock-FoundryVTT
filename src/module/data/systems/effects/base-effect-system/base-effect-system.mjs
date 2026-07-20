@@ -101,8 +101,9 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
     return changes;
   }
 
+  /** @inheritDoc */
   _getTipSuppressions() {
-    return Object.assign({
+    return Object.assign(super._getTipSuppressions(), {
       dampened: this._isSuppressedDampened.bind(this),
       deattuned: this._isSuppressedDeattuned.bind(this),
       destroyed: this._isSuppressedDestroyed.bind(this),

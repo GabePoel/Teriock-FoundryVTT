@@ -34,7 +34,7 @@ export default function ChildDocumentMixin(Base) {
        * @returns {boolean}
        */
       get isSuppressed() {
-        return super.isSuppressed || this.system.isSuppressed || this.dependee?.active === false;
+        return this.system.isSuppressed || super.isSuppressed;
       }
 
       /** @inheritDoc */
