@@ -89,7 +89,7 @@ export default class TradecraftAutomation
   async executeTradecraft(scope = {}) {
     if (this.tradecrafts.size === 0) { return; }
     const choices = Array.from(this.tradecrafts);
-    let selected = [];
+    let selected;
     if (this.automatic && choices.length === 1) { selected = choices; }
     else {
       if (this.multi) {
