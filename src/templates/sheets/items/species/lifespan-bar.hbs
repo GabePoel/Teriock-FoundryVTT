@@ -1,6 +1,7 @@
 {{#if (exists system.adult)}}
   <div class="teriock-sheet-bar">
-    {{formBox
+    {{
+      formBox
       (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult" value=system._source.adult)
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.adult")
@@ -8,7 +9,8 @@
       icon=TERIOCK.display.icons.species.adult
       tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.adult.label")
     }}
-    {{formBox
+    {{
+      formBox
       (ifThen
         (exists system._source.lifespan)
         (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=system._source.lifespan)

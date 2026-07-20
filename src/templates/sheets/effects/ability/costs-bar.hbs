@@ -1,13 +1,14 @@
 {{#if (or
-  (eq system.costs.primary.gp.type "formula")
-  (eq system.costs.primary.hp.type "formula")
-  (eq system.costs.primary.lp.type "formula")
-  (eq system.costs.primary.mp.type "formula"))
-}}
+    (eq system.costs.primary.gp.type "formula")
+    (eq system.costs.primary.hp.type "formula")
+    (eq system.costs.primary.lp.type "formula")
+    (eq system.costs.primary.mp.type "formula")
+  )}}
   <div class="teriock-sheet-bar">
     {{#each TERIOCK.config.stat as |value key|}}
       {{#if (path @root/system.costs.primary key "type")}}
-        {{formBox
+        {{
+          formBox
           (ifThen
             (eq (path @root/system.costs.primary key "type") "formula")
             (path @root/system.costs.primary key "formula")

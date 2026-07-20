@@ -1,16 +1,7 @@
 {{#if (exists tips)}}
   <ul class="notification-container">
     {{#each tips as |tip|}}
-      <li
-        class="
-          notification
-          {{#if tip.level}}
-            {{ tip.level }}
-          {{else}}
-            info
-          {{/if}}
-        "
-      >
+      <li class="notification {{#if tip.level}}{{ tip.level }}{{else}}info{{/if}}">
         <span>{{localize tip.text}}</span>
       </li>
     {{/each}}

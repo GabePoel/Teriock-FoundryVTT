@@ -10,7 +10,9 @@
       <div class="tsubtle tcenter" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.AttributeBox.name.tooltip"}}'>
         {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.AttributeBox.name.label"}}
       </div>
-      <div class="tsubtle tcenter" data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.AttributeBox.score.tooltip"}}'
+      <div
+        class="tsubtle tcenter"
+        data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.AttributeBox.score.tooltip"}}'
       >
         {{localize "TERIOCK.SHEETS.Actor.SIDEBAR.AttributeBox.score.label"}}
       </div>
@@ -36,11 +38,11 @@
             grid-fill
             affix-icon
             {{#if (and
-              @root/highlightModified
-              (not (eq
-                (path @root/system.attributes name 'competence.raw')
-                (path @root/system._source.attributes name 'competence.raw'))))}}
-              modified
+            @root/highlightModified
+            (not (eq
+            (path @root/system.attributes name 'competence.raw')
+            (path @root/system._source.attributes name 'competence.raw'))))}}
+            modified
             {{/if}}
           "
           data-action="increment"
@@ -53,7 +55,7 @@
         </div>
         <div
           class="tcenter thover draggable"
-          style="text-transform: uppercase;"
+          style="text-transform: uppercase"
           data-action="rollFeatSave"
           data-attribute="{{ name }}"
           data-tooltip-direction="LEFT"
@@ -66,10 +68,10 @@
             tcenter
             affix
             {{#if (and
-              @root/highlightModified
-              (not (eq name 'unp'))
-              (not (eq (path @root/system.attributes name 'score') (path @root/system._source.attributes name 'score'))))}}
-              modified
+            @root/highlightModified
+            (not (eq name 'unp'))
+            (not (eq (path @root/system.attributes name 'score') (path @root/system._source.attributes name 'score'))))}}
+            modified
             {{/if}}
           "
         >
@@ -78,7 +80,8 @@
               {{{path @root/system.attributes name "score"}}}
             </span>
           </div>
-          {{formInput
+          {{
+            formInput
             (path @root/systemFields "attributes.fields" name "fields.score")
             value=(ifThen
               (eq name "unp")

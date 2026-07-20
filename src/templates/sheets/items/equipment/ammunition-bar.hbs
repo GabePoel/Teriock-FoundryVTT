@@ -1,6 +1,7 @@
 {{#if system.ammunition.enabled}}
   <div class="teriock-sheet-bar">
-    {{formBox
+    {{
+      formBox
       system._source.ammunition.type
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.ammunition.type")
@@ -9,7 +10,8 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Equipment.FIELDS.ammunition.type.label")
       icon=TERIOCK.display.icons.equipment.ammunition
     }}
-    {{formBox
+    {{
+      formBox
       system._source.ammunition.consumptionAmount
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.ammunition.consumptionAmount")

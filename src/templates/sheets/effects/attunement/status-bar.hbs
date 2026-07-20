@@ -1,12 +1,14 @@
 <div class="teriock-sheet-bar">
-  {{formBox
+  {{
+    formBox
     (path TERIOCK.config.attunement.type system.type "label")
     action=(ifThen editable "updatePaths" "")
     dataset=(object paths="system.type")
     icon=(path TERIOCK.config.attunement.type system.type "icon")
     tooltip=(localize "TERIOCK.SYSTEMS.Attunement.FIELDS.type.label")
   }}
-  {{formBox
+  {{
+    formBox
     system._source.tier
     action=(ifThen (and editable (not system.targetDocument)) "updatePaths" "")
     dataset=(object paths="system.tier")

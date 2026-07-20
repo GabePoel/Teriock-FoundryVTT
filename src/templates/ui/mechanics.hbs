@@ -1,20 +1,13 @@
 {{#if splitMechanics}}
   <div class="teriock-mechanics">
-    {{> "templates/generic/tab-navigation.hbs"
-      tabs=mechanicsTabs
-      tabClasses="teriock-mechanics-tabs"
-    }}
+    {{> "templates/generic/tab-navigation.hbs" tabs=mechanicsTabs tabClasses="teriock-mechanics-tabs"}}
     {{#each mechanicSections as |s|}}
       <section
-        class="
-          tab
-          {{#if s.active}}
-            active
-          {{/if}}
-        "
+        class="tab {{#if s.active}}active{{/if}}"
         data-group="mechanics"
         data-tab="{{ s.id }}"
       >
+        <!-- markup-fmt-ignore -->
         {{> "teriock/ui/mechanic-collection"
           entries=s.entries
           collection=s.id
@@ -23,7 +16,8 @@
       </section>
     {{/each}}
   </div>
-{{else if soleMechanicSection}}
+  {{else if soleMechanicSection}}
+  <!-- markup-fmt-ignore -->
   {{> "teriock/ui/mechanic-collection"
     entries=soleMechanicSection.entries
     collection=soleMechanicSection.id

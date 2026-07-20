@@ -4,9 +4,7 @@
       {{#each documents as |doc|}}
         <div class="execution-editor-document">
           <div class="execution-editor-document-embed">
-            {{> "teriock/ui/block"
-              (merge doc.document.embedParts (object usable=false text="" icons=""))
-            }}
+            {{> "teriock/ui/block" (merge doc.document.embedParts (object usable=false text="" icons=""))}}
           </div>
           {{#if doc.showFooter}}
             <div class="execution-editor-document-footer">
@@ -21,14 +19,14 @@
                   {{#if doc.showLabel}}
                     {{#if doc.label}}
                       <span class="execution-editor-document-label">
-                        {{ doc.label }}
+                        {{doc.label}}
                       </span>
                     {{/if}}
                   {{/if}}
                   {{makeIcon @root/TERIOCK.display.icons.ui.edit "button"}}
                 </a>
-              {{else if (and doc.showLabel doc.label)}}
-                <span class="execution-editor-document-label">{{ doc.label }}</span>
+                {{else if (and doc.showLabel doc.label)}}
+                <span class="execution-editor-document-label">{{doc.label}}</span>
               {{/if}}
             </div>
           {{/if}}
@@ -39,17 +37,13 @@
 
   {{#if mainFields.length}}
     <div class="teriock-form-container">
-      {{> "teriock/shared/field-list"
-        mainFields
-      }}
+      {{> "teriock/shared/field-list" mainFields}}
     </div>
   {{/if}}
 
   {{#if smallFields.length}}
-    <div class="ttable" style="column-gap: 1.5rem; row-gap: 0.75rem;">
-      {{> "teriock/shared/field-list"
-        smallFields
-      }}
+    <div class="ttable" style="column-gap: 1.5rem; row-gap: 0.75rem">
+      {{> "teriock/shared/field-list" smallFields}}
     </div>
   {{/if}}
 </div>

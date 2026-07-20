@@ -1,6 +1,7 @@
 {{#if system.expansion.type}}
   <div class="teriock-sheet-bar">
-    {{formBox
+    {{
+      formBox
       (concat
         (ifThen
           (path TERIOCK.config.ability.expansion system.expansion.type "needsSaveAttribute")
@@ -17,7 +18,8 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.label")
       icon=TERIOCK.display.icons.ability.expansion
     }}
-    {{formBox
+    {{
+      formBox
       (concat
         "<span style='flex: auto;' data-path='system.expansion.range' data-action='updateUnit'>"
         (ifThen
@@ -29,7 +31,8 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.expansion.range.label")
       label=(ifThen (eq system.expansion.range.unitType "finite") system.expansion.range.symbol "")
     }}
-    {{formBox
+    {{
+      formBox
       system._source.expansion.cap
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.expansion.cap")

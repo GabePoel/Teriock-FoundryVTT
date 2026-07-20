@@ -1,6 +1,7 @@
 {{#if system.size.enabled}}
   <div class="teriock-sheet-bar">
-    {{formBox
+    {{
+      formBox
       (localize "TERIOCK.SYSTEMS.Species.PANELS.size.value" value=system._source.size.value)
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.size.value")
@@ -9,7 +10,8 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.value.label")
     }}
     {{#if (and (exists system.size.min) (exists system.size.max))}}
-      {{formBox
+      {{
+        formBox
         (localize "TERIOCK.SYSTEMS.Species.PANELS.size.min" value=system._source.size.min)
         action=(ifThen editable "updatePaths" "")
         dataset=(object paths="system.size.min")
@@ -17,7 +19,8 @@
         icon=TERIOCK.display.icons.species.minSize
         tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.size.min.label")
       }}
-      {{formBox
+      {{
+        formBox
         (localize "TERIOCK.SYSTEMS.Species.PANELS.size.max" value=system._source.size.max)
         action=(ifThen editable "updatePaths" "")
         dataset=(object paths="system.size.max")

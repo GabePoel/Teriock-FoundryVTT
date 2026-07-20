@@ -6,7 +6,7 @@
       <input
         id="doc-{{ @root/partId }}-null"
         {{#if unchecked}}
-          checked="checked"
+        checked="checked"
         {{/if}}
         name='{{ifThen choiceName choiceName (concat "choice-" @root/partId)}}'
         type="radio"
@@ -18,38 +18,38 @@
       <label
         class="doc-select-row teriock-block"
         {{#if (exists doc.uuid)}}
-          data-double="openDocument"
-          data-uuid="{{{ doc.uuid }}}"
+        data-double="openDocument"
+        data-uuid="{{{ doc.uuid }}}"
         {{/if}}
         {{#if (and ../tooltip (exists doc.uuid))}}
-          data-tooltip-uuid="{{{ doc.uuid }}}"
+        data-tooltip-uuid="{{{ doc.uuid }}}"
         {{/if}}
       >
         <span class="doc-checkbox-container">
           <input
             id='doc-{{concat @root/partId "-" id}}'
             {{#if checked}}
-              checked="checked"
+            checked="checked"
             {{/if}}
             {{#if ../multi}}
-              type="checkbox"
-              name="{{ id }}"
+            type="checkbox"
+            name="{{ id }}"
             {{else if ../choiceName}}
-              type="radio"
-              name="{{ ../choiceName }}"
-              value="{{ id }}"
+            type="radio"
+            name="{{ ../choiceName }}"
+            value="{{ id }}"
             {{else}}
-              type="radio"
-              name="{{concat "choice-" @root/partId}}"
-              value="{{ id }}"
+            type="radio"
+            name='{{concat "choice-" @root/partId}}'
+            value="{{ id }}"
             {{/if}}
           />
         </span>
         <span class="doc-image-container">
           <img alt="" loading="lazy" src="{{ doc.img }}" />
         </span>
-        <span class="doc-name-container">{{ doc.name }}</span>
-        <span class="doc-text-container">{{ doc.text }}</span>
+        <span class="doc-name-container">{{doc.name}}</span>
+        <span class="doc-text-container">{{doc.text}}</span>
       </label>
     </li>
   {{/each}}

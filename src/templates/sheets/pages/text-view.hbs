@@ -5,7 +5,7 @@
         class="teriock-page-img"
         data-src="{{ img }}"
         {{#if (exists system.color)}}
-          style="outline-color:{{{ system.color }}};"
+        style="outline-color: {{{ system.color }}}"
         {{/if}}
       >
         <img
@@ -14,14 +14,12 @@
           data-edit="{{ imgPath }}"
           alt=""
           {{#if editable}}
-            data-action="editImage"
+          data-action="editImage"
           {{/if}}
           title="{{ name }}"
         />
       </div>
-      <h{{ title.level }}>
-        {{ name }}
-      </h{{title.level}}>
+      {{{concat "<h" title.level ">" name "</h" title.level ">"}}}
     </header>
   {{/if}}
   <div class="teriock-page-tags">
@@ -29,12 +27,12 @@
       <span
         class="page-tag"
         {{#if (exists tag.tooltip)}}
-          data-tooltip="{{ tag.tooltip }}"
+        data-tooltip="{{ tag.tooltip }}"
         {{/if}}
       >
-        {{ tag.label }}
+        {{tag.label}}
       </span>
     {{/each}}
   </div>
-  <section class="journal-page-content">{{{ text.enriched }}}</section>
+  <section class="journal-page-content">{{{text.enriched}}}</section>
 </div>

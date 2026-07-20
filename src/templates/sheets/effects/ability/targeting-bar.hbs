@@ -1,5 +1,6 @@
 <div class="teriock-sheet-bar">
-  {{formBox
+  {{
+    formBox
     (concat
       "<span style='flex: auto;' data-path='system.range' data-action='updateUnit'>"
       (ifThen (eq system.range.unitType "finite") system.range.formula system.range.text)
@@ -11,7 +12,8 @@
     include=system.isRanged
     tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.range.label")
   }}
-  {{formBox
+  {{
+    formBox
     targetString
     action=(ifThen editable "updatePaths" "")
     dataset=(object paths="system.targets")
@@ -19,7 +21,8 @@
     tooltip=(localize "TERIOCK.SYSTEMS.Ability.FIELDS.targets.label")
     overflow=true
   }}
-  {{formBox
+  {{
+    formBox
     system.duration.text
     icon=TERIOCK.display.icons.ability.duration
     action=(ifThen editable "updateUnit" "")

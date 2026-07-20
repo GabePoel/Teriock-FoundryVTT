@@ -2,9 +2,10 @@
   <div class="teriock-form-container">
     {{#if heightened}}
       <div class="form-group">
-        <label for='{{concat @root.partId "-" heightened.name}}'>{{ heightened.field.label }}</label>
+        <label for='{{concat @root.partId "-" heightened.name}}'>{{heightened.field.label}}</label>
         <div class="form-fields">
-          {{formInput
+          {{
+            formInput
             heightened.field
             id=(concat @root.partId "-" heightened.name)
             max=heightened.max
@@ -14,7 +15,7 @@
         </div>
         {{#if heightened.hint}}
           <div class="hint">
-            {{{ heightened.hint }}}
+            {{{heightened.hint}}}
           </div>
         {{/if}}
       </div>
@@ -23,11 +24,12 @@
     {{#each primaryCosts as |cost|}}
       <div class="form-group formula-input">
         <label for='{{concat @root.partId "-" cost.name}}'>
-          {{ cost.field.label }}
-          <span class="units">({{ cost.units }})</span>
+          {{cost.field.label}}
+          <span class="units">({{cost.units}})</span>
         </label>
         <div class="form-fields">
-          {{formInput
+          {{
+            formInput
             cost.field
             id=(concat @root.partId "-" cost.name)
             integer=cost.integer
@@ -38,7 +40,7 @@
         </div>
         {{#if cost.hint}}
           <div class="hint">
-            {{{ cost.hint }}}
+            {{{cost.hint}}}
           </div>
         {{/if}}
       </div>
@@ -46,7 +48,8 @@
 
     <div class="flexrow cost-payer-tweaks">
       {{#each tweakFields as |tweak|}}
-        {{formGroup
+        {{
+          formGroup
           tweak.field
           classes="inline cost-payer-tweak"
           min=tweak.min

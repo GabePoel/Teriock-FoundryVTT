@@ -13,7 +13,7 @@
       {{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.talent.label"}}
     </div>
     <div class="tradecraft-panel-name field-panel-header gi3">
-      <span data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.name.tooltip"}}'>{{ field.label }}</span>
+      <span data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.name.tooltip"}}'>{{field.label}}</span>
     </div>
     <div
       class="tradecraft-panel-symbol field-panel-header"
@@ -25,9 +25,9 @@
       <div
         class="tradecraft-container tgrid gi6"
         {{#if (and (not (eq ../index "artisan")) (not (eq ../index "scholar")) (not (eq ../index "p1")))}}
-          data-tooltip-direction="RIGHT"
+        data-tooltip-direction="RIGHT"
         {{else}}
-          data-tooltip-direction="LEFT"
+        data-tooltip-direction="LEFT"
         {{/if}}
         data-tooltip-identifier="tradecraft:{{ name }}"
       >
@@ -39,11 +39,11 @@
             grid-fill
             affix-icon
             {{#if (and
-              @root/highlightModified
-              (not (eq
-                (path @root/system.tradecrafts name 'competence.raw')
-                (path @root/system._source.tradecrafts name 'competence.raw'))))}}
-              modified
+            @root/highlightModified
+            (not (eq
+            (path @root/system.tradecrafts name 'competence.raw')
+            (path @root/system._source.tradecrafts name 'competence.raw'))))}}
+            modified
             {{/if}}
           "
           data-action="increment"
@@ -62,11 +62,11 @@
             grid-fill
             affix-icon
             {{#if (and
-              @root/highlightModified
-              (not (eq
-                (path @root/system.tradecrafts name 'score')
-                (path @root/system._source.tradecrafts name 'score'))))}}
-              modified
+            @root/highlightModified
+            (not (eq
+            (path @root/system.tradecrafts name 'score')
+            (path @root/system._source.tradecrafts name 'score'))))}}
+            modified
             {{/if}}
           "
           data-action="increment"
@@ -85,7 +85,7 @@
           data-tradecraft="{{ name }}"
           data-uuid="{{lookup @root/tradecraftMacros name}}"
         >
-          {{ tradecraft.label }}
+          {{tradecraft.label}}
         </div>
         <div class="tradecraft-panel-symbol">{{sign (path @root/system.tradecrafts name 'currentValue')}}</div>
       </div>

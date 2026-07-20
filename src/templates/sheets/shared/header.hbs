@@ -1,23 +1,19 @@
 <div
   class='
     teriock-sheet-header
-    {{#if (eq item.type "equipment")}}
-      {{#if system.shattered}}
-        shattered
-      {{/if}}
-    {{/if}}
+    {{#if (and (eq item.type "equipment") system.shattered)}}shattered{{/if}}
   '
 >
   <div
     class="
       teriock-sheet-profile-img
       {{#if (not editable)}}
-        timage
+      timage
       {{/if}}
     "
     data-src="{{ img }}"
     {{#if (exists system.color)}}
-      style="outline-color:{{{ system.color }}};"
+    style="outline-color: {{{ system.color }}}"
     {{/if}}
   >
     <img
@@ -26,14 +22,15 @@
       data-edit="{{ imgPath }}"
       alt=""
       {{#if editable}}
-        data-action="editImage"
+      data-action="editImage"
       {{/if}}
       title="{{ name }}"
     />
   </div>
   <div class="teriock-sheet-title affix">
     {{#if (exists system.fullName)}}
-      {{formInput
+      {{
+        formInput
         fields.name
         value=system.fullName
         classes="tfont unselected"
@@ -42,7 +39,8 @@
         editable=false
       }}
     {{/if}}
-    {{formInput
+    {{
+      formInput
       fields.name
       value=source.name
       classes=(ifThen (exists system.fullName) "tfont selected" "tfont")
@@ -56,20 +54,21 @@
         thover
         affix-icon
         {{#if (and
-          highlightModified
-          (not (eq system.competence.raw source.system.competence.raw)))}}
-          modified
+        highlightModified
+        (not (eq system.competence.raw source.system.competence.raw)))}}
+        modified
         {{/if}}
       "
-      style="color: var(--color-text-subtle);"
+      style="color: var(--color-text-subtle)"
       data-tooltip="{{ system.competence.description }}"
       {{#if editable}}
-        data-action="increment"
+      data-action="increment"
       {{/if}}
       data-path="system.competence.raw"
     >
       <i class="unselected mic fa-light {{ system.competence.icon }}"></i>
-      <i class='selected mic fa-light {{path TERIOCK.config.competence.levels source.system.competence.raw "icon"}}'
+      <i
+        class='selected mic fa-light {{path TERIOCK.config.competence.levels source.system.competence.raw "icon"}}'
       ></i>
     </div>
   {{/if}}

@@ -2,13 +2,7 @@
   <div class="actor-sidebar-container">
     <div class="actor-intro-box">
       <div
-        class="
-          actor-avatar
-          timage
-          {{#if displayedImgRing}}
-            ring
-          {{/if}}
-        "
+        class="actor-avatar timage {{#if displayedImgRing}}ring{{/if}}"
         data-src="{{ img }}"
       >
         <div class="actor-avatar-shadow">
@@ -17,9 +11,9 @@
               <div
                 class="thover"
                 {{#if displayedImgRing}}
-                  data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringEnabled"}}"
+                data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringEnabled"}}'
                 {{else}}
-                  data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringDisabled"}}"
+                data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Avatar.ringDisabled"}}'
                 {{/if}}
                 data-action="toggleRing"
               >
@@ -49,12 +43,13 @@
         class="
           actor-name
           {{#if displayedImgRing}}
-            ring
+          ring
           {{/if}}
         "
         data-debug="true"
       >
-        {{formInput
+        {{
+          formInput
           fields.name
           value=name
           classes="actor-name-text"
@@ -62,7 +57,8 @@
       </div>
       <div class="actor-basics">
         <div class="actor-shortbox actor-level-box">
-          {{formInput
+          {{
+            formInput
             systemFields.scaling.fields.lvl
             value=system.scaling.lvl
             classes="actor-level-input actor-shortbox-value thover-soft"
@@ -75,7 +71,8 @@
           class="actor-shortbox actor-rank-box"
           data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
         >
-          {{numberInput
+          {{
+            numberInput
             system.scaling.rank
             class="actor-fluency-input actor-shortbox-value"
             disabled=true
@@ -87,12 +84,13 @@
         <div
           class="actor-shortbox actor-proficiency-box"
           {{#if system.scaling.brScale}}
-            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}'
           {{else}}
-            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
           {{/if}}
         >
-          {{numberInput
+          {{
+            numberInput
             system.scaling.p
             class="actor-fluency-input actor-shortbox-value"
             disabled=true
@@ -104,12 +102,13 @@
         <div
           class="actor-shortbox actor-fluency-box"
           {{#if system.scaling.brScale}}
-            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.br"}}'
           {{else}}
-            data-tooltip="{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}"
+          data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.tooltip.lvl"}}'
           {{/if}}
         >
-          {{numberInput
+          {{
+            numberInput
             system.scaling.f
             class="actor-fluency-input actor-shortbox-value"
             disabled=true

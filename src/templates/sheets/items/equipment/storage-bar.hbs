@@ -1,6 +1,7 @@
 {{#if system.storage.enabled}}
   <div class="teriock-sheet-bar">
-    {{formBox
+    {{
+      formBox
       system._source.storage.maxCount
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.maxCount")
@@ -20,7 +21,8 @@
           "TERIOCK.MODELS.Storage.FIELDS.maxCount."
           (ifThen system.storage.isOverCountCapacity "over" "under")))
     }}
-    {{formBox
+    {{
+      formBox
       system._source.storage.maxWeight
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.maxWeight")
@@ -40,7 +42,8 @@
           "TERIOCK.MODELS.Storage.FIELDS.maxWeight."
           (ifThen system.storage.isOverWeightCapacity "over" "under")))
     }}
-    {{formBox
+    {{
+      formBox
       system._source.storage.weightMultiplier
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.weightMultiplier")

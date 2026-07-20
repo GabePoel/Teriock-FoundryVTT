@@ -14,7 +14,8 @@
     {{#with ../fieldDefs as |changeFields|}}
       <li class="change-container" data-index="{{ i }}" data-path="{{ ../../changesPath }}">
         <div class="change-entry">
-          {{formIcon
+          {{
+            formIcon
             changeFields.key
             name=""
             value=change.key
@@ -26,7 +27,8 @@
               tooltip=(minLen change.key 32)
               property="key")
           }}
-          {{formIcon
+          {{
+            formIcon
             changeFields.value
             name=""
             value=change.value
@@ -41,7 +43,8 @@
         </div>
         <div class="change-config">
           <div class="change-activation">
-            {{formIcon
+            {{
+              formIcon
               changeFields.priority
               name=""
               value=change.priority
@@ -53,7 +56,8 @@
               dataset=(object property="priority")
             }}
             {{#if changeFields.phase}}
-              {{formIcon
+              {{
+                formIcon
                 changeFields.phase
                 name=""
                 value=change.phase
@@ -68,7 +72,8 @@
             {{/if}}
           </div>
           <div class="change-assignment">
-            {{formIcon
+            {{
+              formIcon
               changeFields.type
               name=""
               value=change.type
@@ -79,7 +84,8 @@
               dataset=(object
                 property="type")
             }}
-            {{formIcon
+            {{
+              formIcon
               changeFields.target
               name=""
               value=change.target
@@ -93,10 +99,37 @@
           </div>
         </div>
         <div class="change-controls">
-          <button class="change-delete" type="button" data-action="deleteQualifiedChange" data-tooltip='{{localize "TERIOCK.CHANGES.Actions.deleteChange"}}' data-index="{{ i }}" data-path="{{ ../../changesPath }}" data-value-path="{{ ../../valuePath }}" {{#each ../additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}</button>
+          <button
+            class="change-delete"
+            type="button"
+            data-action="deleteQualifiedChange"
+            data-tooltip='{{localize "TERIOCK.CHANGES.Actions.deleteChange"}}'
+            data-index="{{ i }}"
+            data-path="{{ ../../changesPath }}"
+            data-value-path="{{ ../../valuePath }}"
+            {{#each ../additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"
+            {{/each}}
+            {{#if (not @root/editable)}}disabled="disabled"
+            {{/if}}
+          >
+            {{makeIcon @root/TERIOCK.display.icons.ui.delete "button"}}
+          </button>
         </div>
       </li>
     {{/with}}
   {{/each}}
-  <button class="add-change-button" type="button" data-action="addQualifiedChange" data-path="{{ changesPath }}" data-value-path="{{ valuePath }}" {{#each additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"{{/each}} {{#if (not @root/editable)}}disabled="disabled"{{/if}}>{{makeIcon TERIOCK.display.icons.ui.add "button"}} {{localize "TERIOCK.CHANGES.Actions.addChange"}}</button>
+  <button
+    class="add-change-button"
+    type="button"
+    data-action="addQualifiedChange"
+    data-path="{{ changesPath }}"
+    data-value-path="{{ valuePath }}"
+    {{#each additionalAttrs as |value key|}}data-{{ key }}="{{ value }}"
+    {{/each}}
+    {{#if (not @root/editable)}}disabled="disabled"
+    {{/if}}
+  >
+    {{makeIcon TERIOCK.display.icons.ui.add "button"}}
+    {{localize "TERIOCK.CHANGES.Actions.addChange"}}
+  </button>
 </ol>

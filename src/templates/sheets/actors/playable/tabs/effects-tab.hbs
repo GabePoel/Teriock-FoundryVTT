@@ -2,21 +2,14 @@
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Effects.title"}}</h1>
   <div class="actor-tab-page teriock-block-results" data-search-key="consequence">
     <div class="teriock-block-display">
-      {{> "teriock/ui/preview"
-        @root.previews.consequence
-      }}
+      {{> "teriock/ui/preview" @root.previews.consequence}}
     </div>
     <div class="teriock-block-display">
       <div class="tgrid g4 condition-toggle-container">
         {{#each TERIOCK.data.conditions as |condition key|}}
           {{#if (not (eq key "conscious"))}}
             <div
-              class="
-                condition-toggle
-                {{#if (not (includes ../removableConditions key))}}
-                  inactive
-                {{/if}}
-              "
+              class="condition-toggle {{#if (not (includes ../removableConditions key))}}inactive{{/if}}"
               data-action="toggleCondition"
               data-condition="{{{ key }}}"
               data-tooltip='
@@ -31,7 +24,7 @@
                   <img src="{{ condition.img }}" alt="{{ condition.name }}" loading="lazy" />
                 </div>
               </div>
-              <div class="condition-label tsubtle">{{ condition.name }}</div>
+              <div class="condition-label tsubtle">{{condition.name}}</div>
             </div>
           {{/if}}
         {{/each}}

@@ -4,22 +4,22 @@
     actor-bar-container
     toutline
     {{#if system.presence.overflow}}
-      overflow
+    overflow
     {{/if}}
   "
 >
   <div
     class="actor-presence-bar"
-    style="grid-template-columns:{{repeatStr system.presence.max ' 1fr'}};"
+    style="grid-template-columns: {{repeatStr system.presence.max ' 1fr'}}"
     data-tooltip='{{localize "TERIOCK.SHEETS.Actor.SIDEBAR.Bars.presence.tooltip" value=system.presence.value max=system.presence.max}}'
   >
     {{#if (gte system.presence.value 1)}}
       <div
         class="presence-indicator used"
-        style="grid-column: span {{{ system.presence.value }}}; grid-template-columns:{{repeatStr system.presence.value ' 1fr'}}; display: grid;"
+        style="grid-column: span {{{ system.presence.value }}}; grid-template-columns: {{repeatStr system.presence.value ' 1fr'}}; display: grid"
       >
         {{#repeat system.presence.value}}
-          <div class="presence-indicator empty" style="background: transparent;"></div>
+          <div class="presence-indicator empty" style="background: transparent"></div>
         {{/repeat}}
       </div>
     {{/if}}
