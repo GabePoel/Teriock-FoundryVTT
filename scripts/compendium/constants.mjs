@@ -8,4 +8,9 @@ export const SYSTEM_ID = system.id;
 export const SYSTEM_VERSION = system.version;
 export const YAML = true;
 
-export const BASIC_STATS = { coreVersion: CORE_VERSION, lastModifiedBy: BUILDER_NAME, systemId: SYSTEM_ID };
+export const BASIC_STATS = {
+  coreVersion: CORE_VERSION,
+  lastModifiedBy: BUILDER_NAME,
+  systemId: SYSTEM_ID,
+  systemVersion: SYSTEM_VERSION,
+};

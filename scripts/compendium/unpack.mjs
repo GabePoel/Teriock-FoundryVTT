@@ -4,7 +4,7 @@ import path from "path";
 
 import { toKebabCase, toKebabCaseFull } from "../../src/module/helpers/string.mjs";
 import { cleanDocument } from "./clean-fields.mjs";
-import { BASIC_STATS, EXPAND_ADVENTURES, FOLDERS, YAML } from "./constants.mjs";
+import { EXPAND_ADVENTURES, FOLDERS, YAML } from "./constants.mjs";
 
 /**
  * @typedef {object} CompendiumNode
@@ -144,11 +144,19 @@ function transformFolderName(doc) {
  */
 function cleanEntry(doc) {
   cleanDocument(doc);
-  doc._stats = { ...doc._stats ?? {}, ...BASIC_STATS };
   sortKeys(doc);
   if (doc.system?.affinities) { sortMechanics(doc.system.affinities); }
   if (doc.system?.automations) { sortMechanics(doc.system.automations); }
   if (doc.system?.expirations) { sortMechanics(doc.system.expirations); }
+  if (doc._stats) {
+    delete doc._stats.coreVersion;
+    delete doc._stats.lastModifiedBy;
+    delete doc._stats.systemId;
+    delete doc._stats.systemVersion;
+    if (!doc._stats.compendiumSource) { delete doc._stats.compendiumSource; }
+    if (!doc._stats.duplicateSource) { delete doc._stats.duplicateSource; }
+    if (!Object.keys(doc._stats).length) { delete doc._stats; }
+  }
 }
 
 /**
