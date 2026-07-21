@@ -9,7 +9,6 @@ const { fields } = foundry.data;
 /**
  * @extends {DocumentExecution}
  * @mixes AttackExecution
- * @property {boolean} consumeAmmunition
  * @property {boolean} consumeEquipment
  * @property {boolean} autoPayCosts
  * @property {boolean} noHeighten
@@ -29,7 +28,6 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
         label: "TERIOCK.SYSTEMS.Armament.FIELDS.bv.raw.label",
         nullable: false,
       }),
-      consumeAmmunition: new fields.BooleanField({ initial: true }),
       consumeEquipment: new fields.BooleanField({ initial: false }),
       noHeighten: new fields.BooleanField({ initial: false }),
       usesReaction: new fields.BooleanField(),
@@ -41,48 +39,13 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
    * @param {Teriock.Execution.AbilityExecutionOptions} [options]
    */
   constructor(data = {}, options = {}) {
+    data.consumeAmmunition ??= options.source?.system.settings.getSetting("consumeAmmunition");
     super(data, options);
     const bonusAutomation = this.getAutomations("override", { active: true }).find(a => formulaExists(a.rollBonus));
     if (bonusAutomation) { this.updateSource({ bonus: addFormula(this.bonus, bonusAutomation.rollBonus) }); }
     this.rootBonus = this.bonus;
     this.initializeExecution(options);
   }
-
-  /**
-   * Find the armament that matches a certain equipment class.
-   * @param {TeriockArmament|null} armament
-   * @param {Teriock.Keys.Delivery} delivery
-   * @param {Teriock.Keys.EquipmentClass} equipmentClass
-   * @returns {TeriockArmament|null}
-   */
-  _reselectArmamentForEquipmentClass(armament, delivery, equipmentClass) {
-    if (this.source.system.delivery === delivery && !armament?.system.equipmentClasses.has(equipmentClass)) {
-      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has(equipmentClass));
-    }
-    return armament;
-  }
-
-  /**
-   * Find the armament that matches certain properties.
-   * @param {TeriockArmament|null} armament
-   * @param {Teriock.Keys.Delivery} delivery
-   * @param {Identifier[]} properties
-   * @returns {TeriockArmament|null}
-   */
-  _reselectArmamentForProperties(armament, delivery, properties) {
-    if (
-      this.source.system.delivery === delivery
-      && !armament?.properties.some((p) => p.active && properties.includes(p.system.identifier))
-    ) {
-      armament = this.actor.armaments.find((a) =>
-        a.active && a.properties.some(p => p.active && properties.includes(p.system.identifier))
-      );
-    }
-    return armament;
-  }
-
-  /** @type {TeriockEquipment|null} */
-  ammunition;
 
   /** @type {Record<Teriock.Keys.PrimaryCost, number>} */
   costs;
@@ -262,21 +225,43 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
     return BaseRoll.replaceFormulaData(formula, { h: this.heightened });
   }
 
+  /**
+   * Find the armament that matches a certain equipment class.
+   * @param {TeriockArmament|null} armament
+   * @param {Teriock.Keys.Delivery} delivery
+   * @param {Teriock.Keys.EquipmentClass} equipmentClass
+   * @returns {TeriockArmament|null}
+   */
+  _reselectArmamentForEquipmentClass(armament, delivery, equipmentClass) {
+    if (this.source.system.delivery === delivery && !armament?.system.equipmentClasses.has(equipmentClass)) {
+      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has(equipmentClass));
+    }
+    return armament;
+  }
+
+  /**
+   * Find the armament that matches certain properties.
+   * @param {TeriockArmament|null} armament
+   * @param {Teriock.Keys.Delivery} delivery
+   * @param {Identifier[]} properties
+   * @returns {TeriockArmament|null}
+   */
+  _reselectArmamentForProperties(armament, delivery, properties) {
+    if (
+      this.source.system.delivery === delivery
+      && !armament?.properties.some((p) => p.active && properties.includes(p.system.identifier))
+    ) {
+      armament = this.actor.armaments.find((a) =>
+        a.active && a.properties.some(p => p.active && properties.includes(p.system.identifier))
+      );
+    }
+    return armament;
+  }
+
   /** @inheritDoc */
   _updateArmament(armament, options = {}) {
     super._updateArmament(armament, options);
     this.updateSource({ bv: this.armament?.system.bv.value });
-    if (this.isContact && this.armament?.system.ammunition?.enabled) {
-      this.ammunition = this.actor?.equipment.find(e =>
-        e.active && e.system.consumable && (e.system.equipmentType === this.armament.system.ammunition.type)
-      );
-      // Fall back to inactive ammunition
-      if (!this.ammunition) {
-        this.ammunition = this.actor?.equipment.find(e =>
-          e.system.consumable && (e.system.equipmentType === this.armament.system.ammunition.type)
-        );
-      }
-    }
   }
 
   /**

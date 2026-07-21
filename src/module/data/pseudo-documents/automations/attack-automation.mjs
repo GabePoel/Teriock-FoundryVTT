@@ -10,6 +10,7 @@ const { fields } = foundry.data;
  * @extends {ThresholdAutomation}
  * @mixes OverrideCompetenceMechanic
  * @property {Teriock.System.FormulaString} attackPenalty
+ * @property {boolean|null} consumeAmmunition
  * @property {boolean|null} limb
  * @property {boolean|null} sb
  * @property {boolean} useArmament
@@ -36,6 +37,7 @@ export default class AttackAutomation extends OverrideCompetenceMechanicMixin(Th
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       attackPenalty: new FormulaField({ deterministic: false, initial: "" }),
+      consumeAmmunition: new TernaryField(),
       keepArmament: new fields.BooleanField({ initial: true }),
       limb: new TernaryField(),
       sb: new TernaryField({ label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label" }),
@@ -48,7 +50,7 @@ export default class AttackAutomation extends OverrideCompetenceMechanicMixin(Th
   /** @inheritDoc */
   get _formPaths() {
     const paths = ["useArmament"];
-    if (this.useArmament) { paths.push("keepArmament"); }
+    if (this.useArmament) { paths.push(...["keepArmament", "consumeAmmunition"]); }
     return [...paths, "sb", "vitals", "limb", "warded", "attackPenalty", ...super._formPaths];
   }
 
@@ -61,6 +63,7 @@ export default class AttackAutomation extends OverrideCompetenceMechanicMixin(Th
         attackPenalty: this.attackPenalty,
         bonus: this.bonus,
         competence: { raw: this.getCompetence(options) },
+        consumeAmmunition: this.consumeAmmunition,
         display: this.getDisplayData(threshold),
         limb: this.limb,
         sb: this.sb,

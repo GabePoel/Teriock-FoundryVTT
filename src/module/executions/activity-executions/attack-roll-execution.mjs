@@ -12,6 +12,7 @@ export default class AttackRollExecution extends executionMixins.AttackExecution
    * @param {Teriock.Execution.AttackExecutionOptions} [options]
    */
   constructor(data = {}, options = {}) {
+    data.consumeAmmunition ??= game.settings.get("teriock", "ability").consumeAmmunition;
     super(data, options);
     this.rootBonus = this.bonus;
     this.initializeExecution(options);

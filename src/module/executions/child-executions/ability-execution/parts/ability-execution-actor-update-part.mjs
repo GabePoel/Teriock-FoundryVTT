@@ -22,7 +22,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
       /**
        * Prepare equipment to be consumed.
        */
-      #prepareConsumption() {
+      #prepareEquipmentConsumption() {
         if (this.isContact && this.consumeEquipment && this.armament?.system.consumable) {
           this.operations.push({
             action: "update",
@@ -31,23 +31,6 @@ export default function AbilityExecutionActorUpdatePart(Base) {
             updates: [{
               _id: this.armament.id,
               system: { quantity: Math.max(0, this.armament.system.quantity - this.armament.system.consumptionAmount) },
-            }],
-          });
-        }
-        if (this.isContact && this.consumeAmmunition && this.ammunition?.system.consumable) {
-          this.operations.push({
-            action: "update",
-            documentName: "Item",
-            parent: this.ammunition.parent,
-            updates: [{
-              _id: this.ammunition.id,
-              system: {
-                quantity: Math.max(
-                  0,
-                  this.ammunition.system.quantity
-                    - (this.armament?.system.ammunition.consumptionAmount ?? this.ammunition.system.consumptionAmount),
-                ),
-              },
             }],
           });
         }
@@ -68,7 +51,7 @@ export default function AbilityExecutionActorUpdatePart(Base) {
 
       /** @inheritDoc */
       async _prepareUpdates() {
-        this.#prepareConsumption();
+        this.#prepareEquipmentConsumption();
         if (this.actor) {
           if (this.usesReaction) { this.actorUpdates["system.combat.hasReaction"] = false; }
           for (const c of this.#paidCosts) {

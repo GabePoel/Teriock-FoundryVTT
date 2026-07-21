@@ -12,29 +12,11 @@ export default function AbilityExecutionGetInputPart(Base) {
      */
     class AbilityExecutionGetInput extends Base {
       /** @inheritDoc */
-      get _dialogDocuments() {
-        const docs = super._dialogDocuments;
-        if (this.isContact && this.armament?.system.ammunition?.enabled) {
-          docs.push({
-            document: this.ammunition,
-            editable: true,
-            label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-            getChoices: () => this.actor?.equipment.filter(e => e.system.consumable) ?? [],
-            update: ammunition => this.ammunition = ammunition,
-          });
-        }
-        return docs;
-      }
-
-      /** @inheritDoc */
       get _postAttackFormPaths() {
         const paths = super._postAttackFormPaths;
+        if (this.isContact && this.armament?.system.consumable) { paths.push("consumeEquipment"); }
         if (this.source.system.maneuver === "reactive") { paths.push("usesReaction"); }
         paths.push("autoPayCosts");
-        if (this.isContact) {
-          if (this.armament?.system.consumable) { paths.push("consumeEquipment"); }
-          if (this.armament?.system.ammunition?.enabled && this.ammunition) { paths.push("consumeAmmunition"); }
-        }
         return paths;
       }
 

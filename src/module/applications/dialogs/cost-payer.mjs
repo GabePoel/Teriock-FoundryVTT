@@ -78,7 +78,7 @@ export default class CostPayer extends ResolvableDialog {
   static async prompt(execution, options = {}) {
     const { autoPay, ...appOptions } = options;
     const payer = new this({ ...appOptions, execution });
-    if (autoPay && !payer.#requiresInteraction()) { return payer.#resolveCosts(); }
+    if (autoPay && !payer.#requiresInteraction() || !payer.#costs.size) { return payer.#resolveCosts(); }
     return super.prompt({ ...appOptions, execution });
   }
 

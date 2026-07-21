@@ -31,6 +31,7 @@ export default function AttackExecutionMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
+          consumeAmmunition: new fields.BooleanField({ initial: true }),
           existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
           incurredAttackPenalty: new FormulaField({ deterministic: false, initial: "0" }),
           piercing: new fields.EmbeddedDataField(PiercingModel),
@@ -49,6 +50,9 @@ export default function AttackExecutionMixin(Base) {
         super(data, options);
         this.armament = options.armament ? options.armament : this._determineDefaultArmament();
       }
+
+      /** @type {TeriockEquipment|null} */
+      ammunition;
 
       /** @type {TeriockArmament|null} */
       armament;
@@ -127,6 +131,15 @@ export default function AttackExecutionMixin(Base) {
             getChoices: () => this.actor?.armaments.filter(a => a.active) ?? [],
             update: armament => this._updateArmament(armament),
           });
+          if (this.armament?.system.ammunition?.enabled) {
+            docs.push({
+              document: this.ammunition,
+              editable: true,
+              label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
+              getChoices: () => this.actor?.equipment.filter(e => e.system.consumable) ?? [],
+              update: ammunition => this.ammunition = ammunition,
+            });
+          }
         }
         return docs;
       }
@@ -149,6 +162,9 @@ export default function AttackExecutionMixin(Base) {
         const paths = [];
         if (this.isAttack) { paths.push("sb", "vitals"); }
         paths.push("warded");
+        if (this.isContact && this.armament?.system.ammunition?.enabled && this.ammunition) {
+          paths.push("consumeAmmunition");
+        }
         return paths;
       }
 
@@ -237,6 +253,21 @@ export default function AttackExecutionMixin(Base) {
       }
 
       /**
+       * Logic to pick the ammunition this attacks with.
+       */
+      _determineDefaultAmmunition() {
+        if (!this.isContact || !this.armament?.system.ammunition?.enabled) { return; }
+        const type = this.armament.system.ammunition.type;
+        this.ammunition = this.actor?.equipment.find(e =>
+          e.active && e.system.consumable && (e.system.equipmentType === type)
+        );
+        // Fall back to inactive ammunition
+        if (!this.ammunition) {
+          this.ammunition = this.actor?.equipment.find(e => e.system.consumable && (e.system.equipmentType === type));
+        }
+      }
+
+      /**
        * Logic to pick the armament this attacks with.
        * @returns {TeriockArmament|null}
        */
@@ -283,6 +314,29 @@ export default function AttackExecutionMixin(Base) {
       }
 
       /**
+       * Prepare ammunition to be consumed.
+       */
+      _prepareAmmunitionConsumption() {
+        if (this.isContact && this.consumeAmmunition && this.ammunition?.system.consumable) {
+          this.operations.push({
+            action: "update",
+            documentName: "Item",
+            parent: this.ammunition.parent,
+            updates: [{
+              _id: this.ammunition.id,
+              system: {
+                quantity: Math.max(
+                  0,
+                  this.ammunition.system.quantity
+                    - (this.armament?.system.ammunition.consumptionAmount ?? this.ammunition.system.consumptionAmount),
+                ),
+              },
+            }],
+          });
+        }
+      }
+
+      /**
        * Prepare the attack penalty that making this attack incurs.
        * @returns {Promise<void>}
        */
@@ -301,6 +355,7 @@ export default function AttackExecutionMixin(Base) {
       /** @inheritDoc */
       async _prepareUpdates() {
         await this._prepareAttackPenalty();
+        this._prepareAmmunitionConsumption();
         if (this.actor && this.isAttack) {
           this.actorUpdates["system.combat.attackPenalty"] = this.actor.system.combat.attackPenalty
             + this.attackPenalty;
@@ -359,6 +414,7 @@ export default function AttackExecutionMixin(Base) {
        */
       _updateArmament(armament, options = {}) {
         this.armament = armament ?? null;
+        this._determineDefaultAmmunition();
         const changes = {
           incurredAttackPenalty: this._resolveAttackPenalty(options),
           "piercing.raw": this._determinePiercing(options),

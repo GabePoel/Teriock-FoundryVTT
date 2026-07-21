@@ -12,6 +12,7 @@ const { fields } = foundry.data;
  * @property {ID<TeriockArmament>|null} armamentId
  * @property {Teriock.System.FormulaString} attackPenalty
  * @property {Teriock.System.FormulaString} bonus
+ * @property {boolean|null} consumeAmmunition
  * @property {boolean|null} limb
  * @property {boolean|null} sb
  * @property {boolean|null} vitals
@@ -54,7 +55,7 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
       threshold: typeof this.threshold === "number" ? this.threshold : undefined,
       useArmament: this.useArmament,
     };
-    for (const key of ["limb", "sb", "vitals", "warded"]) {
+    for (const key of ["consumeAmmunition", "limb", "sb", "vitals", "warded"]) {
       if (this[key] !== null) { options[key] = this[key]; }
     }
     return options;
