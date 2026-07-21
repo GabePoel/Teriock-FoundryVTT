@@ -8,6 +8,9 @@ system:
   delivery: hand
   duration:
     unit: unlimited
+  endCondition: >-
+    <p>@Identifier[core:targets]{Target} is no longer
+    @Identifier[condition:down]{down}.</p>
   executionTime:
     base: a2
   expirations:
@@ -23,12 +26,16 @@ system:
   maneuver: active
   overview:
     base: >-
-      <p>Target is @Identifier[condition:snared]{snared} and
+      <p>@Identifier[core:targets]{Target} is
+      @Identifier[condition:snared]{snared} and
       @Identifier[condition:terrored]{terrored}.</p>
   powerSources:
     - martial
   range:
     unit: contact
+  requirements: >-
+    <p>@Identifier[core:targets]{Target} is
+    @Identifier[condition:down]{down}.</p>
   targets:
     - creature
 transfer: true

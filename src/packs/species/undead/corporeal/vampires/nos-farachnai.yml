@@ -195,7 +195,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Target is @Identifier[rule:alive]{alive} (but still
+          <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive}
+          (but still
           @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}).
           It's @Identifier[core:hit-points-and-mana-points]{HP} and
           @Identifier[core:hit-points-and-mana-points]{MP} are both increased to
@@ -211,7 +212,8 @@ effects:
           @Identifier[core:hit-points-and-mana-points]{MP} are no longer
           halved.</p>
         proficient: >-
-          <p>Target has all @Identifier[core:hit-points-and-mana-points]{HP} and
+          <p>@Identifier[core:targets]{Target} has all
+          @Identifier[core:hit-points-and-mana-points]{HP} and
           @Identifier[core:hit-points-and-mana-points]{MP} restored, but its
           maximum @Identifier[core:hit-points-and-mana-points]{HP} and
           @Identifier[core:hit-points-and-mana-points]{MP} are still halved.
@@ -224,7 +226,8 @@ effects:
       range:
         unit: contact
       requirements: >-
-        <p>Target is @Identifier[condition:dead]{dead} and
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:dead]{dead} and
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
       spell: true
       standard: true
@@ -441,13 +444,16 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @Identifier[condition:dead]{dead},
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their
-          @Identifier[core:size]{SIZE} is reduced by 1. If their
-          @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
+          @Identifier[core:size]{size} is reduced by 1. If their
+          @Identifier[core:size]{size} was already less than 1, it is reduced to
           0.</p>
       targets:
         - creature
@@ -1012,7 +1018,7 @@ effects:
           webform, you appear as a smaller
           @UUID[Compendium.teriock.tables.RollTable.479155f14ad8612d]{spiga}. In
           your humanoid form, you appear as one particular humanoid species that
-          is unique to you. You gain the @Identifier[core:size]{SIZE} and all
+          is unique to you. You gain the @Identifier[core:size]{size} and all
           @Pack[teriock.abilities]{abilities} of that humanoid species while in
           this state. Otherwise, your @Pack[teriock.abilities]{abilities},
           @Identifier[core:hit-points-and-mana-points]{HP}, and
@@ -1073,7 +1079,9 @@ effects:
         unit: hour
       effectTypes:
         - poison
-      endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+      endCondition: >-
+        <p>@Identifier[core:targets]{Target}
+        @Identifier[condition:dead]{dies}.</p>
       executionTime:
         base: a1
       form: normal
@@ -1095,7 +1103,8 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
           @Identifier[core:damage]{damage}.</p>
       skill: true
@@ -1231,11 +1240,12 @@ effects:
           @Identifier[ability:remove-charm]{Remove Charm}, but it <i>can</i> be
           removed with @Identifier[ability:exorcism]{Exorcism} or
           @Identifier[ability:cure-illness]{Cure Illness}. Over the coming
-          month, the target will become
+          month, the @Identifier[core:targets]{target} will become
           @UUID[Compendium.teriock.tables.RollTable.65fbed36e42b583a]{vampiric}.
           The DC for @Identifier[ability:cure-illness]{Cure Illness} starts at
           1, immediately following the bite. But with every day that passes, the
-          DC increases by 1. After 2 weeks, the target gain
+          DC increases by 1. After 2 weeks, the
+          @Identifier[core:targets]{target} gain
           @Identifier[ability:sunlight-sensitivity]{Sunlight Sensitivity}. After
           30 days, they become a
           @UUID[Compendium.teriock.tables.RollTable.65fbed36e42b583a]{vampire}.
@@ -2969,7 +2979,7 @@ effects:
         save}. This can be done either by the creature that is
         @Identifier[condition:snared]{snared} or by another that attempts to
         free them. The DC is reduced by 1 for every additional creature of
-        @Identifier[core:size]{SIZE} 1 or larger that is assisting the
+        @Identifier[core:size]{size} 1 or larger that is assisting the
         @Identifier[core:targets]{target}.</p>
       executionTime:
         base: a1
@@ -3020,7 +3030,7 @@ effects:
         save}. This can be done either by the creature that is
         @Identifier[condition:snared]{snared} or by another that attempts to
         free them. The DC is reduced by 1 for every additional creature of
-        @Identifier[core:size]{SIZE} 1 or larger that is assisting the
+        @Identifier[core:size]{size} 1 or larger that is assisting the
         @Identifier[core:targets]{target}.</p>
       executionTime:
         base: a1
@@ -3071,7 +3081,7 @@ effects:
         save}. This can be done either by the creature that is
         @Identifier[condition:snared]{snared} or by another that attempts to
         free them. The DC is reduced by 1 for every additional creature of
-        @Identifier[core:size]{SIZE} 1 or larger that is assisting the
+        @Identifier[core:size]{size} 1 or larger that is assisting the
         @Identifier[core:targets]{target}.</p>
       executionTime:
         base: a1
@@ -3086,7 +3096,9 @@ effects:
       range:
         unit: contact
       results:
-        hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:snared]{snared}.</p>
       targets:
         - creature
     transfer: true

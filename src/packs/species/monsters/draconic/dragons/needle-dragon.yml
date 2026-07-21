@@ -494,7 +494,7 @@ effects:
         unit: ft
       results:
         fail: >-
-          <p>Target takes [[/damage 8d4[magic]]]
+          <p>@Identifier[core:targets]{Target} takes [[/damage 8d4[magic]]]
           @Identifier[core:damage]{damage}.</p>
         save: >-
           <p>Target takes half as much @Identifier[core:damage]{damage} from
@@ -1882,9 +1882,13 @@ effects:
       range:
         raw: '150'
         unit: ft
-      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is not
+        @Identifier[condition:deaf]{deaf}.</p>
       results:
-        fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Targets} become
+          @Identifier[condition:frightened]{frightened}.</p>
       targets:
         - creature
     transfer: true

@@ -456,8 +456,10 @@ items:
           results:
             fail: >-
               <p>All non-@Identifier[property:magic]{magic}
-              @Pack[teriock.equipment]{items} targeted and
-              @Identifier[keyword:bearing]{beared} by targets are
+              @Pack[teriock.equipment]{items}
+              @Identifier[core:targets]{targeted} and
+              @Identifier[keyword:bearing]{beared} by
+              @Identifier[core:targets]{targets} are
               @Identifier[property:shattered]{shattered}.</p>
             save: >-
               <p>Only the @Pack[teriock.equipment]{items} that are not being
@@ -2253,10 +2255,12 @@ items:
           range:
             raw: '150'
             unit: ft
-          requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is not
+            @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: >-
-              <p>Targets become
+              <p>@Identifier[core:targets]{Targets} become
               @Identifier[condition:frightened]{frightened}.</p>
           targets:
             - creature
@@ -2878,7 +2882,9 @@ items:
             critHit: >-
               <p>The @Identifier[core:targets]{target} automatically fails the
               first [[/roll 2d4]] roll.</p>
-            hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:snared]{snared}.</p>
           skill: true
           standard: true
           targets:
@@ -3693,6 +3699,7 @@ items:
             - primal
           range:
             unit: self
+          requirements: <p>You are @Identifier[condition:down]{down}.</p>
           skill: true
           standard: true
           targets:

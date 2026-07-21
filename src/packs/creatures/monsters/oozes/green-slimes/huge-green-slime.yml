@@ -307,13 +307,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -817,10 +820,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all target creatures. You
-              continue to know the location of all targets within 10 feet,
-              whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              <p>You know the exact location of all
+              @Identifier[core:targets]{target} creatures. You continue to know
+              the location of all @Identifier[core:targets]{targets} within 10
+              feet, whether they are or you are moving or not, so long as they
+              are still within 10 feet of you.</p>
           powerSources:
             - martial
           range:
@@ -828,7 +832,8 @@ items:
             unit: ft
           requirements: >-
             <p>You are @Identifier[rule:up]{up}. You are not
-            @Identifier[condition:anosmatic]{anosmatic} and the target is not
+            @Identifier[condition:anosmatic]{anosmatic} and the
+            @Identifier[core:targets]{target} is not
             @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
@@ -1249,11 +1254,12 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
-              delivery spells]{missile spell} that you are
-              @Identifier[core:proficiency-bonus]{proficient} in. If the
-              triggering hit was a critical hit, then the target takes the "on
-              critical hit" effect instead.</p>
+              <p>@Identifier[core:targets]{Target} takes the "on hit" effect of
+              a @Wiki[Category:Missile delivery spells]{missile spell} that you
+              are @Identifier[core:proficiency-bonus]{proficient} in. If the
+              triggering hit was a critical hit, then the
+              @Identifier[core:targets]{target} takes the "on critical hit"
+              effect instead.</p>
           powerSources:
             - magical
           range:
@@ -1357,7 +1363,8 @@ items:
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
             additional [[/damage 1d6[magic]]] or @Identifier[core:healing]{heal}
-            the target again (depending on what you chose).</p>
+            the @Identifier[core:targets]{target} again (depending on what you
+            chose).</p>
           identifier: empathic-ray
           interaction: attack
           maneuver: active
@@ -1387,7 +1394,7 @@ items:
             critHit: >-
               <p>Double the @Identifier[core:damage]{damage dice} dealt by this
               @Pack[teriock.abilities]{ability}. Or, if you chose "healing",
-              double the number of times that target
+              double the number of times that @Identifier[core:targets]{target}
               @Identifier[core:healing]{heals}.</p>
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
@@ -1663,7 +1670,7 @@ items:
               transformed} into a @Identifier[creature:tree]{tree} or revert a
               @Identifier[condition:transformed]{minor transformation}. The
               @Identifier[core:size]{size} of the tree is equal to the target's
-              @Identifier[core:size]{SIZE} prior to being
+              @Identifier[core:size]{size} prior to being
               @Identifier[condition:transformed]{transformed}. If a treeformed
               creature is reduced to 0
               @Identifier[core:hit-points-and-mana-points]{HP}, then they revert
@@ -1960,12 +1967,14 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may select an additional target within 30 feet of the
-              triggering @Wiki[Category:Spells]{spell's} original target. Your
-              @Wiki[Category:Spells]{spell} targets them as well. Any
-              @Identifier[core:attack-interaction]{attack rolls},
-              @Identifier[core:feat-interaction]{feat saves}, or other necessary
-              rolls must be made for the new target as well.</p>
+              <p>You may select an additional @Identifier[core:targets]{target}
+              within 30 feet of the triggering @Wiki[Category:Spells]{spell's}
+              original @Identifier[core:targets]{target}. Your
+              @Wiki[Category:Spells]{spell} @Identifier[core:targets]{targets}
+              them as well. Any @Identifier[core:attack-interaction]{attack
+              rolls}, @Identifier[core:feat-interaction]{feat saves}, or other
+              necessary rolls must be made for the new
+              @Identifier[core:targets]{target} as well.</p>
           powerSources:
             - magical
           range:
@@ -2376,7 +2385,8 @@ items:
               @UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{ability}
               was @Identifier[keyword:unblockable]{UB}, but you otherwise would
               have been able to @Identifier[ability:basic-block]{Block} it, you
-              may treat it as though it targeted your arm. </p>
+              may treat it as though it @Identifier[core:targets]{targeted} your
+              arm. </p>
           powerSources:
             - magical
             - primal
@@ -3243,7 +3253,7 @@ items:
           piercing:
             raw: 2
           powerSources:
-            - martial
+            - magical
           range:
             unit: contact
           results:
@@ -3390,7 +3400,9 @@ items:
           range:
             unit: contact
           results:
-            hit: <p>Target is @Identifier[property:destroyed]{destroyed}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[property:destroyed]{destroyed}.</p>
           rotator: true
           spell: true
           standard: true

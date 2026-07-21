@@ -372,8 +372,9 @@ effects:
       results:
         fail: >-
           <p>All non-@Identifier[property:magic]{magic}
-          @Pack[teriock.equipment]{items} targeted and
-          @Identifier[keyword:bearing]{beared} by targets are
+          @Pack[teriock.equipment]{items} @Identifier[core:targets]{targeted}
+          and @Identifier[keyword:bearing]{beared} by
+          @Identifier[core:targets]{targets} are
           @Identifier[property:shattered]{shattered}.</p>
         save: >-
           <p>Only the @Pack[teriock.equipment]{items} that are not being
@@ -1892,9 +1893,13 @@ effects:
       range:
         raw: '150'
         unit: ft
-      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is not
+        @Identifier[condition:deaf]{deaf}.</p>
       results:
-        fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Targets} become
+          @Identifier[condition:frightened]{frightened}.</p>
       targets:
         - creature
     transfer: true

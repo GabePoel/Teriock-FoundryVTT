@@ -420,7 +420,9 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+          endCondition: >-
+            <p>@Identifier[core:targets]{Target}
+            @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -442,7 +444,8 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage
               1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
@@ -752,7 +755,7 @@ items:
               This @Identifier[drain:wither]{wither} has no
               @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
               types}, but is otherwise treated as it would be <i>prior</i> to
-              affecting its targets. So,
+              affecting its @Identifier[core:targets]{targets}. So,
               @Identifier[ability:triumphant-damage-boost]{Triumphant Damage
               Boost} would @Identifier[keyword:boosted]{boost} it, but
               @Identifier[ability:improved-brace]{Improved Brace} would not

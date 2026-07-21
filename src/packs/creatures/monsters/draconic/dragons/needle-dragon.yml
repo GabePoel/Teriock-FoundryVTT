@@ -608,7 +608,7 @@ items:
             unit: ft
           results:
             fail: >-
-              <p>Target takes [[/damage 8d4[magic]]]
+              <p>@Identifier[core:targets]{Target} takes [[/damage 8d4[magic]]]
               @Identifier[core:damage]{damage}.</p>
             save: >-
               <p>Target takes half as much @Identifier[core:damage]{damage} from
@@ -2242,10 +2242,12 @@ items:
           range:
             raw: '150'
             unit: ft
-          requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is not
+            @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: >-
-              <p>Targets become
+              <p>@Identifier[core:targets]{Targets} become
               @Identifier[condition:frightened]{frightened}.</p>
           targets:
             - creature
@@ -3178,8 +3180,8 @@ items:
           overview:
             base: >-
               <p>The extra @Identifier[core:attack-interaction]{attacks} you
-              make with @Identifier[ability:multi-shot]{Multi-Shot} can target
-              the same creature.</p>
+              make with @Identifier[ability:multi-shot]{Multi-Shot} can
+              @Identifier[core:targets]{target} the same creature.</p>
           powerSources:
             - martial
           range:
@@ -3328,8 +3330,9 @@ items:
             base: >-
               <p>You may have up to 1
               @Identifier[core:attack-interaction]{attack} you make with a
-              @Wiki[Category:Bows]{bow} and arrow be @Identifier[keyword:ub]{UB}
-              on each of your @Identifier[core:turns]{turns}.</p>
+              @Wiki[Category:Bows]{bow} and @Identifier[equipment:arrow]{arrow}
+              be @Identifier[keyword:unblockable]{UB} on each of your
+              @Identifier[core:turns]{turns}.</p>
           powerSources:
             - magical
           range:
@@ -3502,7 +3505,7 @@ items:
             - martial
           range:
             unit: self
-          requirements: <p>You remain in the targeted area.</p>
+          requirements: <p>You remain in the @Identifier[core:targets]{targeted} area.</p>
           skill: true
           standard: true
           targets:
@@ -3865,15 +3868,15 @@ items:
               <p>When you @Identifier[core:attack-interaction]{attack} with a
               @Identifier[property:ranged]{ranged weapons}, you may
               @Identifier[core:attack-interaction]{attack} up to 2 additional
-              targets as well. You must have enough
+              @Identifier[core:targets]{targets} as well. You must have enough
               @Identifier[property:ammunition]{ammunition} or
               @Identifier[property:thrown]{thrown} weapons to make these
               additional @Identifier[core:attack-interaction]{attacks}. These
               all count as the same
               @Identifier[core:attack-interaction]{attack}, although you roll
               for the @Identifier[core:attack-interaction]{attacks} against each
-              target separately. They do not incur additional attack
-              penalties.</p>
+              @Identifier[core:targets]{target} separately. They do not incur
+              additional attack penalties.</p>
           powerSources:
             - martial
           range:

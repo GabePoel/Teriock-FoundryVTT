@@ -272,13 +272,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -517,7 +520,9 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+          endCondition: >-
+            <p>@Identifier[core:targets]{Target}
+            @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -540,7 +545,8 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage
               1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
@@ -629,7 +635,9 @@ items:
             critHit: >-
               <p>The @Identifier[core:targets]{target} automatically fails the
               first [[/roll 2d4]] roll.</p>
-            hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:snared]{snared}.</p>
           skill: true
           standard: true
           targets:
@@ -792,7 +800,9 @@ items:
             raw: '30'
             unit: ft
           results:
-            hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:snared]{snared}.</p>
           targets:
             - creature
         transfer: true

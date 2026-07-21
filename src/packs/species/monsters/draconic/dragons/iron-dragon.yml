@@ -414,13 +414,15 @@ effects:
         unit: ft
       results:
         fail: >-
-          <p>Target takes 2 @Identifier[damage:hack]{arm hacks} and 2
-          @Identifier[damage:hack]{leg hacks}.</p>
+          <p>@Identifier[core:targets]{Target} takes 2
+          @Identifier[damage:hack]{arm hacks} and 2 @Identifier[damage:hack]{leg
+          hacks}.</p>
         save: >-
-          <p>Target takes 1 @Identifier[damage:hack]{arm hack}, 1
-          @Identifier[damage:hack]{leg hack}, and takes half as much
-          @Identifier[core:damage]{damage} from this as they would otherwise.
-          This is calculated after any @Identifier[keyword:boosted]{boosts} or
+          <p>@Identifier[core:targets]{Target} takes 1
+          @Identifier[damage:hack]{arm hack}, 1 @Identifier[damage:hack]{leg
+          hack}, and takes half as much @Identifier[core:damage]{damage} from
+          this as they would otherwise. This is calculated after any
+          @Identifier[keyword:boosted]{boosts} or
           @Identifier[keyword:deboosted]{deboosts}.</p>
       targets:
         - creature
@@ -1891,9 +1893,13 @@ effects:
       range:
         raw: '150'
         unit: ft
-      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is not
+        @Identifier[condition:deaf]{deaf}.</p>
       results:
-        fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Targets} become
+          @Identifier[condition:frightened]{frightened}.</p>
       targets:
         - creature
     transfer: true

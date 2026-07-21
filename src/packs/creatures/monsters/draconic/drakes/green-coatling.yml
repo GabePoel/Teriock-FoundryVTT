@@ -87,13 +87,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -242,8 +245,10 @@ items:
           results:
             fail: >-
               <p>All @Identifier[property:magic]{magic}
-              @Pack[teriock.equipment]{items} targeted and
-              @Identifier[keyword:bearing]{beared} by targets are
+              @Pack[teriock.equipment]{items}
+              @Identifier[core:targets]{targeted} and
+              @Identifier[keyword:bearing]{beared} by
+              @Identifier[core:targets]{targets} are
               @Identifier[property:destroyed]{destroyed}.</p>
           targets:
             - creature
@@ -1640,7 +1645,7 @@ items:
           piercing:
             raw: 2
           powerSources:
-            - martial
+            - magical
           range:
             unit: contact
           results:
@@ -1787,7 +1792,9 @@ items:
           range:
             unit: contact
           results:
-            hit: <p>Target is @Identifier[property:destroyed]{destroyed}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[property:destroyed]{destroyed}.</p>
           rotator: true
           spell: true
           standard: true
@@ -1984,7 +1991,8 @@ items:
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
             additional [[/damage 1d6[magic]]] or @Identifier[core:healing]{heal}
-            the target again (depending on what you chose).</p>
+            the @Identifier[core:targets]{target} again (depending on what you
+            chose).</p>
           identifier: empathic-ray
           interaction: attack
           maneuver: active
@@ -2014,7 +2022,7 @@ items:
             critHit: >-
               <p>Double the @Identifier[core:damage]{damage dice} dealt by this
               @Pack[teriock.abilities]{ability}. Or, if you chose "healing",
-              double the number of times that target
+              double the number of times that @Identifier[core:targets]{target}
               @Identifier[core:healing]{heals}.</p>
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
@@ -2290,7 +2298,7 @@ items:
               transformed} into a @Identifier[creature:tree]{tree} or revert a
               @Identifier[condition:transformed]{minor transformation}. The
               @Identifier[core:size]{size} of the tree is equal to the target's
-              @Identifier[core:size]{SIZE} prior to being
+              @Identifier[core:size]{size} prior to being
               @Identifier[condition:transformed]{transformed}. If a treeformed
               creature is reduced to 0
               @Identifier[core:hit-points-and-mana-points]{HP}, then they revert
@@ -2374,10 +2382,13 @@ items:
                 formula: '0'
           delivery: sight
           duration:
-            unit: unlimited
+            raw: '24'
+            unit: hour
           elements:
             - life
-          endCondition: <p>Target is no longer @Identifier[condition:down]{down}.</p>
+          endCondition: >-
+            <p>The break of dawn or the @Identifier[core:targets]{target} is no
+            longer @Identifier[condition:down]{down}.</p>
           executionTime:
             base: r1
           expirations:
@@ -2507,8 +2518,9 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>If you want, target is @Identifier[condition:lighted]{lighted}
-              until the end of your next @Identifier[core:turns]{turn}.</p>
+              <p>If you want, @Identifier[core:targets]{target} is
+              @Identifier[condition:lighted]{lighted} until the end of your next
+              @Identifier[core:turns]{turn}.</p>
             hit: >-
               <p>Target is @Identifier[condition:lighted]{lighted} to a creature
               of your choice until the end of their next
@@ -2587,7 +2599,9 @@ items:
             critHit: >-
               <p>Double the amount of times target
               @Identifier[core:healing]{heals}.</p>
-            hit: <p>Target @Identifier[core:healing]{heals}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target}
+              @Identifier[core:healing]{heals}.</p>
           spell: true
           standard: true
           targets:
@@ -2646,7 +2660,7 @@ items:
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, target can
             have been @Identifier[condition:dead]{dead} for an additional 24
-            hours. If target is
+            hours. If @Identifier[core:targets]{target} is
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
             they are @Identifier[core:healing]{healed} an additional time.</p>
           identifier: resurrect
@@ -2654,22 +2668,23 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>If target is @Identifier[condition:dead]{dead}, they are
-              brought back to life with 1
-              @Identifier[core:hit-points-and-mana-points]{HP}. If target is
+              <p>If @Identifier[core:targets]{target} is
+              @Identifier[condition:dead]{dead}, they are brought back to life
+              with 1 @Identifier[core:hit-points-and-mana-points]{HP}. If
+              @Identifier[core:targets]{target} is
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
               you can choose to have them be @Identifier[core:healing]{healed}
               for @Identifier[core:damage]{damage}. [[lookup name]] does not
               count as a @Wiki[Category:Healing effects]{healing effect} unless
               you choose to @Identifier[core:healing]{heal} with it.</p>
             fluent: >-
-              <p>If target is
+              <p>If @Identifier[core:targets]{target} is
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
               they are @Identifier[core:healing]{healed} for
               @Identifier[core:damage]{damage}
               @Identifier[core:fluency-bonus]{F} times.</p>
             proficient: >-
-              <p>If target is
+              <p>If @Identifier[core:targets]{target} is
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
               they are @Identifier[core:healing]{healed} for
               @Identifier[core:damage]{damage}

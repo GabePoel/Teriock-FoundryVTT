@@ -357,13 +357,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -760,10 +763,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all target creatures. You
-              continue to know the location of all targets within 10 feet,
-              whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              <p>You know the exact location of all
+              @Identifier[core:targets]{target} creatures. You continue to know
+              the location of all @Identifier[core:targets]{targets} within 10
+              feet, whether they are or you are moving or not, so long as they
+              are still within 10 feet of you.</p>
           powerSources:
             - martial
           range:
@@ -771,7 +775,8 @@ items:
             unit: ft
           requirements: >-
             <p>You are @Identifier[rule:up]{up}. You are not
-            @Identifier[condition:anosmatic]{anosmatic} and the target is not
+            @Identifier[condition:anosmatic]{anosmatic} and the
+            @Identifier[core:targets]{target} is not
             @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
@@ -1029,14 +1034,15 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>Target creature is moved to a location you have studied within
-              your level in miles. You can study locations by performing this
-              ritual on an area you are in over the course of a
-              @Identifier[core:long-rest]{long rest}. This location must be a
-              static part of the environment, not a moving location like a wagon
-              or ship. If the location substantially changes beyond recognition,
-              your ritual will fail to transport creatures there. You can only
-              have 2 location studied at a time.</p>
+              <p>@Identifier[core:targets]{Target} creature is moved to a
+              location you have studied within your level in miles. You can
+              study locations by performing this ritual on an area you are in
+              over the course of a @Identifier[core:long-rest]{long rest}. This
+              location must be a static part of the environment, not a moving
+              location like a wagon or ship. If the location substantially
+              changes beyond recognition, your ritual will fail to transport
+              creatures there. You can only have 2 location studied at a
+              time.</p>
             fluent: >-
               <p>You may now have 2 × @Identifier[core:fluency-bonus]{F}
               locations studied and can [[lookup name style=lc]] a distance of
@@ -1349,15 +1355,16 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>You may choose a new target for the
+              <p>You may choose a new @Identifier[core:targets]{target} for the
               @Wiki[Category:Spells]{spell}. All
               @Identifier[core:attack-interaction]{attack rolls},
               @Identifier[core:feat-interaction]{feat saves}, and other dice
               rolls or effects are re-rolled or re-calculated as if the
               @Wiki[Category:Spells]{spell} was cast on the new target. The
               range of the @Wiki[Category:Spells]{spell} remains unchanged, but
-              is calculated from the new target instead of from you.</p><p
-              class="note"><b>Note:</b> If the @Wiki[Category:Spells]{spell} was
+              is calculated from the new @Identifier[core:targets]{target}
+              instead of from you.</p><p class="note"><b>Note:</b> If the
+              @Wiki[Category:Spells]{spell} was
               @Identifier[core:heightening]{heightened}, or you spent any other
               @Wiki[Category:Cost spells]{costs} on the
               @Wiki[Category:Spells]{spell}, those remain unchanged and do not
@@ -1371,8 +1378,9 @@ items:
           targets:
             - spell
           trigger: >-
-            <p>The target of a @Wiki[Category:Spells]{spell} does not get
-            affected by your @Wiki[Category:Spells]{spell}.</p>
+            <p>The @Identifier[core:targets]{target} of a
+            @Wiki[Category:Spells]{spell} does not get affected by your
+            @Wiki[Category:Spells]{spell}.</p>
         transfer: true
         type: ability
       - _id: l7FeEyj4CzfMHWSt
@@ -1962,7 +1970,7 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>You know if the target is
+              <p>You know if the @Identifier[core:targets]{target} is
               @Identifier[keyword:illusionary]{illusionary}.</p>
           spell: true
           standard: true

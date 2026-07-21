@@ -119,7 +119,8 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Target is @Identifier[rule:alive]{alive} (but still
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[rule:alive]{alive} (but still
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}).
               It's @Identifier[core:hit-points-and-mana-points]{HP} and
               @Identifier[core:hit-points-and-mana-points]{MP} are both
@@ -135,9 +136,10 @@ items:
               @Identifier[core:hit-points-and-mana-points]{MP} are no longer
               halved.</p>
             proficient: >-
-              <p>Target has all @Identifier[core:hit-points-and-mana-points]{HP}
-              and @Identifier[core:hit-points-and-mana-points]{MP} restored, but
-              its maximum @Identifier[core:hit-points-and-mana-points]{HP} and
+              <p>@Identifier[core:targets]{Target} has all
+              @Identifier[core:hit-points-and-mana-points]{HP} and
+              @Identifier[core:hit-points-and-mana-points]{MP} restored, but its
+              maximum @Identifier[core:hit-points-and-mana-points]{HP} and
               @Identifier[core:hit-points-and-mana-points]{MP} are still halved.
               This does not count as a @Wiki[Category:Healing effects]{healing
               effect} or a @Wiki[Category:Revival effects]{revival effect}.</p>
@@ -148,7 +150,8 @@ items:
           range:
             unit: contact
           requirements: >-
-            <p>Target is @Identifier[condition:dead]{dead} and
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:dead]{dead} and
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           spell: true
           standard: true
@@ -224,10 +227,9 @@ items:
               @Pack[teriock.bodyParts]{body parts} gain those
               @Pack[teriock.properties]{properties}. Additionally, any
               @Wiki[Category:AV granting abilities]{natural AV} you may have
-              counts as <a
-              href="/index.php?title=Equipment:Armor&amp;action=edit&amp;redlink=1"
-              class="new" title="Equipment:Armor (page does not
-              exist)">armor</a> for these purposes.</p>
+              counts as
+              @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}
+              for these purposes.</p>
           powerSources:
             - martial
           range:
@@ -1101,7 +1103,7 @@ items:
             unit: self
           requirements: >-
             <p>You must be @Identifier[condition:dueling]{dueling} and wielding
-            the targeted weapon.</p>
+            the @Identifier[core:targets]{targeted} weapon.</p>
           skill: true
           standard: true
           targets:
@@ -2314,6 +2316,9 @@ items:
           delivery: self
           duration:
             unit: unlimited
+          endCondition: >-
+            <p>You are no longer @Identifier[condition:defying-death]{defying
+            death}.</p>
           executionTime:
             base: r0
           expirations:
@@ -2333,7 +2338,7 @@ items:
               @Wiki[Category:Weapon delivery abilities]{weapon}
               @Identifier[core:attack-interaction]{attacks} are
               @Identifier[keyword:boosted]{boosted} and
-              @Identifier[keyword:ub]{UB}. When you stop
+              @Identifier[keyword:unblockable]{UB}. When you stop
               @Identifier[condition:defying-death]{defying death}, you
               @Identifier[condition:dead]{die} and your body is
               @Identifier[condition:ruined]{ruined}.</p>

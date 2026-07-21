@@ -159,13 +159,16 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @Identifier[condition:dead]{dead},
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their
-          @Identifier[core:size]{SIZE} is reduced by 1. If their
-          @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
+          @Identifier[core:size]{size} is reduced by 1. If their
+          @Identifier[core:size]{size} was already less than 1, it is reduced to
           0.</p>
       targets:
         - creature
@@ -488,7 +491,9 @@ effects:
         unit: hour
       effectTypes:
         - poison
-      endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+      endCondition: >-
+        <p>@Identifier[core:targets]{Target}
+        @Identifier[condition:dead]{dies}.</p>
       executionTime:
         base: a1
       form: normal
@@ -511,7 +516,8 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
           @Identifier[core:damage]{damage}.</p>
       skill: true
@@ -1077,7 +1083,7 @@ effects:
         save}. This can be done either by the creature that is
         @Identifier[condition:snared]{snared} or by another that attempts to
         free them. The DC is reduced by 1 for every additional creature of
-        @Identifier[core:size]{SIZE} 1 or larger that is assisting the
+        @Identifier[core:size]{size} 1 or larger that is assisting the
         @Identifier[core:targets]{target}.</p>
       executionTime:
         base: a1
@@ -1128,7 +1134,7 @@ effects:
         save}. This can be done either by the creature that is
         @Identifier[condition:snared]{snared} or by another that attempts to
         free them. The DC is reduced by 1 for every additional creature of
-        @Identifier[core:size]{SIZE} 1 or larger that is assisting the
+        @Identifier[core:size]{size} 1 or larger that is assisting the
         @Identifier[core:targets]{target}.</p>
       executionTime:
         base: a1
@@ -1179,7 +1185,7 @@ effects:
         save}. This can be done either by the creature that is
         @Identifier[condition:snared]{snared} or by another that attempts to
         free them. The DC is reduced by 1 for every additional creature of
-        @Identifier[core:size]{SIZE} 1 or larger that is assisting the
+        @Identifier[core:size]{size} 1 or larger that is assisting the
         @Identifier[core:targets]{target}.</p>
       executionTime:
         base: a1
@@ -1194,7 +1200,9 @@ effects:
       range:
         unit: contact
       results:
-        hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:snared]{snared}.</p>
       targets:
         - creature
     transfer: true

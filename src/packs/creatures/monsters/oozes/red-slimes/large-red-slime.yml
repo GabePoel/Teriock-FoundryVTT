@@ -357,13 +357,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -760,10 +763,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all target creatures. You
-              continue to know the location of all targets within 10 feet,
-              whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              <p>You know the exact location of all
+              @Identifier[core:targets]{target} creatures. You continue to know
+              the location of all @Identifier[core:targets]{targets} within 10
+              feet, whether they are or you are moving or not, so long as they
+              are still within 10 feet of you.</p>
           powerSources:
             - martial
           range:
@@ -771,7 +775,8 @@ items:
             unit: ft
           requirements: >-
             <p>You are @Identifier[rule:up]{up}. You are not
-            @Identifier[condition:anosmatic]{anosmatic} and the target is not
+            @Identifier[condition:anosmatic]{anosmatic} and the
+            @Identifier[core:targets]{target} is not
             @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
@@ -1184,7 +1189,7 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>Target weapon is enchanted to deal
+              <p>@Identifier[core:targets]{Target} weapon is enchanted to deal
               @Identifier[damage:magic]{magic damage} and
               @Identifier[property:granting]{grant} a @Wiki[Category:Conjured
               spells]{conjured} @Wiki[Category:Ray delivery spells]{ray spell}
@@ -1416,8 +1421,9 @@ items:
               <p>You cast a @Wiki[Category:Single action spells]{single action
               spell} that the triggering creature is moving out of sight or out
               of range of. The triggering creature must be within range of the
-              spell when it triggers and at least one of the targets of the
-              @Wiki[Category:Single action spells]{spell} you cast.</p>
+              spell when it triggers and at least one of the
+              @Identifier[core:targets]{targets} of the @Wiki[Category:Single
+              action spells]{spell} you cast.</p>
           powerSources:
             - magical
           range:
@@ -1470,8 +1476,8 @@ items:
               <p>The triggering @Wiki[Category:Spells]{spell} becomes extremely
               visible and loud. Visually the @Wiki[Category:Spells]{spell}
               extends 10 feet in all directions from a line between the caster
-              and each of its targets. The spell can be heard up to 600 feet
-              away.</p>
+              and each of its @Identifier[core:targets]{targets}. The spell can
+              be heard up to 600 feet away.</p>
           powerSources:
             - magical
           range:
@@ -2700,7 +2706,7 @@ items:
           heightened: >-
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
-            target an additional person.</p>
+            choose an additional @Identifier[core:targets]{target}.</p>
           identifier: self-detonate
           interaction: manifest
           maneuver: slow
@@ -2714,8 +2720,9 @@ items:
               @Identifier[core:feat-interaction]{feat save} using <i>your</i>
               DC. Do not add your
               @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC.
-              This detonating @Identifier[core:aura-delivery]{aura} is
-              @Wiki[Category:Loud effects]{loud}.</p>
+              This @Identifier[core:detonate-expansion]{detonating}
+              @Identifier[core:aura-delivery]{aura} is @Wiki[Category:Loud
+              effects]{loud}.</p>
             fluent: >-
               <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now
               included in the @Identifier[core:feat-interaction]{feat save
@@ -2723,7 +2730,8 @@ items:
             proficient: >-
               <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is
               now included in the @Identifier[core:feat-interaction]{feat save
-              DC}.</p>
+              DC} and you may @Identifier[core:targets]{target} creatures other
+              than yourself.</p>
           powerSources:
             - magical
           range:
@@ -2731,7 +2739,7 @@ items:
             unit: ft
           requirements: >-
             <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may
-            only target yourself.</p>
+            only @Identifier[core:targets]{target} yourself.</p>
           ritual: true
           spell: true
           standard: true
@@ -2799,9 +2807,10 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Target is set on fire or is put out. If the target is on fire,
-              it is considered to be @Identifier[property:flaming]{flaming}.
-              Your @Identifier[property:handy]{handy} items count as a
+              <p>Target is set on fire or is put out. If the
+              @Identifier[core:targets]{target} is on fire, it is considered to
+              be @Identifier[property:flaming]{flaming}. Your
+              @Identifier[property:handy]{handy} items count as a
               @Identifier[equipment:torch]{torch} for the purpose of [[lookup
               name]]. The fire produced by [[lookup name]] does not harm you
               while it is burning.</p>

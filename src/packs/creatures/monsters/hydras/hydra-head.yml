@@ -175,13 +175,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -289,9 +292,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You @Wiki[Core:MOV]{fly} at
-              @Identifier[core:movement-speed]{quarter speed} and can glide over
-              terrain and other obstacles at
+              <p>You fly at @Identifier[core:movement-speed]{quarter speed} and
+              can glide over terrain and other obstacles at
               @Identifier[core:movement-speed]{normal speed}. However, you
               cannot move more than a couple feet above the ground. You fall at
               the rate of 30 feet per round (30 feet per 5 seconds).</p>

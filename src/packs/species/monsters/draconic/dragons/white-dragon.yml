@@ -634,13 +634,15 @@ effects:
         unit: ft
       results:
         fail: >-
-          <p>Target cannot deal @Identifier[core:damage]{damage} and is
+          <p>@Identifier[core:targets]{Target} cannot deal
+          @Identifier[core:damage]{damage} and is
           @Identifier[condition:lighted]{lighted} to a creature of your
           choice.</p>
         save: >-
-          <p>Target is @Identifier[condition:lighted]{lighted} to a creature of
-          your choice and takes half as much @Identifier[core:damage]{damage}
-          from this as they would otherwise. This is calculated after any
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:lighted]{lighted} to a creature of your choice
+          and takes half as much @Identifier[core:damage]{damage} from this as
+          they would otherwise. This is calculated after any
           @Identifier[keyword:boosted]{boosts} or
           @Identifier[keyword:deboosted]{deboosts}.</p>
       targets:
@@ -1894,9 +1896,13 @@ effects:
       range:
         raw: '150'
         unit: ft
-      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is not
+        @Identifier[condition:deaf]{deaf}.</p>
       results:
-        fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Targets} become
+          @Identifier[condition:frightened]{frightened}.</p>
       targets:
         - creature
     transfer: true

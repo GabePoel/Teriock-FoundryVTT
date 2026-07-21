@@ -41,7 +41,7 @@ effects:
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
         spent, target can have been @Identifier[condition:dead]{dead} for an
-        additional 24 hours. If target is
+        additional 24 hours. If @Identifier[core:targets]{target} is
         @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
         they are @Identifier[core:healing]{healed} an additional time.</p>
       identifier: resurrect
@@ -49,22 +49,23 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>If target is @Identifier[condition:dead]{dead}, they are brought
-          back to life with 1 @Identifier[core:hit-points-and-mana-points]{HP}.
-          If target is
+          <p>If @Identifier[core:targets]{target} is
+          @Identifier[condition:dead]{dead}, they are brought back to life with
+          1 @Identifier[core:hit-points-and-mana-points]{HP}. If
+          @Identifier[core:targets]{target} is
           @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
           you can choose to have them be @Identifier[core:healing]{healed} for
           @Identifier[core:damage]{damage}. [[lookup name]] does not count as a
           @Wiki[Category:Healing effects]{healing effect} unless you choose to
           @Identifier[core:healing]{heal} with it.</p>
         fluent: >-
-          <p>If target is
+          <p>If @Identifier[core:targets]{target} is
           @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
           they are @Identifier[core:healing]{healed} for
           @Identifier[core:damage]{damage} @Identifier[core:fluency-bonus]{F}
           times.</p>
         proficient: >-
-          <p>If target is
+          <p>If @Identifier[core:targets]{target} is
           @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
           they are @Identifier[core:healing]{healed} for
           @Identifier[core:damage]{damage}
@@ -143,10 +144,10 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>If you have the body of the target in your possession, you can put
-          the spirit back into its body such that it is no longer
-          @Identifier[condition:wisping]{wisping}. The body maintains all damage
-          it had when it died.</p>
+          <p>If you have the body of the @Identifier[core:targets]{target} in
+          your possession, you can put the spirit back into its body such that
+          it is no longer @Identifier[condition:wisping]{wisping}. The body
+          maintains all damage it had when it died.</p>
         proficient: >-
           <p>If the body is thoroughly damaged (such as if it's
           @Identifier[condition:ruined]{ruined}) or missing entirely, you can
@@ -161,7 +162,9 @@ effects:
       range:
         raw: '5'
         unit: ft
-      requirements: <p>Target must be @Identifier[condition:wisping]{wisping}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} must be
+        @Identifier[condition:wisping]{wisping}.</p>
       ritual: true
       spell: true
       standard: true

@@ -467,7 +467,9 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+          endCondition: >-
+            <p>@Identifier[core:targets]{Target}
+            @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -490,7 +492,8 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage
               1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
@@ -563,13 +566,14 @@ items:
             raw: '20'
             unit: ft
           requirements: >-
-            <p>Target must not be
+            <p>@Identifier[core:targets]{Target} must not be
             @Identifier[condition:anosmatic]{anosmatic}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:blind]{blinded}, loses their
-              largest remaining @Identifier[core:hit-points-and-mana-points]{hit
-              die}, and loses their largest remaining
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:blind]{blinded}, loses their largest
+              remaining @Identifier[core:hit-points-and-mana-points]{hit die},
+              and loses their largest remaining
               @Identifier[core:hit-points-and-mana-points]{mana die}. It is
               though those dice are spent, but without providing any
               @Identifier[core:healing]{healing} or

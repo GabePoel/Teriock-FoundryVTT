@@ -56,13 +56,16 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:down]{down}.</p>
       results:
         hit: >-
-          <p>Target is @Identifier[condition:dead]{dead},
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their
-          @Identifier[core:size]{SIZE} is reduced by 1. If their
-          @Identifier[core:size]{SIZE} was already less than 1, it is reduced to
+          @Identifier[core:size]{size} is reduced by 1. If their
+          @Identifier[core:size]{size} was already less than 1, it is reduced to
           0.</p>
       targets:
         - creature
@@ -228,7 +231,9 @@ effects:
         critHit: >-
           <p>The @Identifier[core:targets]{target} automatically fails the first
           [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:snared]{snared}.</p>
       skill: true
       standard: true
       targets:

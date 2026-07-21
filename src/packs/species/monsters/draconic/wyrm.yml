@@ -30,8 +30,8 @@ effects:
         hit: >-
           <p>Target is @Identifier[condition:dead]{dead},
           @Identifier[condition:ruined]{ruined}, and their
-          @Identifier[core:size]{SIZE} is reduced by 2. If their
-          @Identifier[core:size]{SIZE} was already 2 or less, their body is
+          @Identifier[core:size]{size} is reduced by 2. If their
+          @Identifier[core:size]{size} was already 2 or less, their body is
           completely consumed.</p>
       targets:
         - creature
@@ -873,9 +873,13 @@ effects:
       range:
         raw: '150'
         unit: ft
-      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is not
+        @Identifier[condition:deaf]{deaf}.</p>
       results:
-        fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Targets} become
+          @Identifier[condition:frightened]{frightened}.</p>
       targets:
         - creature
     transfer: true

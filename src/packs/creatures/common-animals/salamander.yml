@@ -411,7 +411,9 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+          endCondition: >-
+            <p>@Identifier[core:targets]{Target}
+            @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -434,7 +436,8 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage
               1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true

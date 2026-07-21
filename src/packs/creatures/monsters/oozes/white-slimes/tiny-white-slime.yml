@@ -266,13 +266,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -409,8 +412,9 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>If you want, target is @Identifier[condition:lighted]{lighted}
-              until the end of your next @Identifier[core:turns]{turn}.</p>
+              <p>If you want, @Identifier[core:targets]{target} is
+              @Identifier[condition:lighted]{lighted} until the end of your next
+              @Identifier[core:turns]{turn}.</p>
             hit: >-
               <p>Target is @Identifier[condition:lighted]{lighted} to a creature
               of your choice until the end of their next
@@ -846,10 +850,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all target creatures. You
-              continue to know the location of all targets within 10 feet,
-              whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              <p>You know the exact location of all
+              @Identifier[core:targets]{target} creatures. You continue to know
+              the location of all @Identifier[core:targets]{targets} within 10
+              feet, whether they are or you are moving or not, so long as they
+              are still within 10 feet of you.</p>
           powerSources:
             - martial
           range:
@@ -857,7 +862,8 @@ items:
             unit: ft
           requirements: >-
             <p>You are @Identifier[rule:up]{up}. You are not
-            @Identifier[condition:anosmatic]{anosmatic} and the target is not
+            @Identifier[condition:anosmatic]{anosmatic} and the
+            @Identifier[core:targets]{target} is not
             @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true

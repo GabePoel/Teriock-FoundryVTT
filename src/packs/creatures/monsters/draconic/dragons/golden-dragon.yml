@@ -2255,10 +2255,12 @@ items:
           range:
             raw: '150'
             unit: ft
-          requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is not
+            @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: >-
-              <p>Targets become
+              <p>@Identifier[core:targets]{Targets} become
               @Identifier[condition:frightened]{frightened}.</p>
           targets:
             - creature
@@ -2361,6 +2363,9 @@ items:
           delivery: self
           duration:
             unit: unlimited
+          endCondition: >-
+            <p>You are no longer @Identifier[condition:defying-death]{defying
+            death}.</p>
           executionTime:
             base: r0
           expirations:
@@ -2380,7 +2385,7 @@ items:
               @Wiki[Category:Weapon delivery abilities]{weapon}
               @Identifier[core:attack-interaction]{attacks} are
               @Identifier[keyword:boosted]{boosted} and
-              @Identifier[keyword:ub]{UB}. When you stop
+              @Identifier[keyword:unblockable]{UB}. When you stop
               @Identifier[condition:defying-death]{defying death}, you
               @Identifier[condition:dead]{die} and your body is
               @Identifier[condition:ruined]{ruined}.</p>
@@ -2644,7 +2649,7 @@ items:
             unit: self
           requirements: >-
             <p>You must be @Identifier[condition:dueling]{dueling} and wielding
-            the targeted weapon.</p>
+            the @Identifier[core:targets]{targeted} weapon.</p>
           skill: true
           standard: true
           targets:

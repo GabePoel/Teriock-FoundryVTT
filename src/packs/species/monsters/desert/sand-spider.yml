@@ -361,7 +361,9 @@ effects:
         critHit: >-
           <p>The @Identifier[core:targets]{target} automatically fails the first
           [[/roll 2d4]] roll.</p>
-        hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:snared]{snared}.</p>
       skill: true
       standard: true
       targets:
@@ -410,6 +412,9 @@ effects:
       delivery: hand
       duration:
         unit: unlimited
+      endCondition: >-
+        <p>@Identifier[core:targets]{Target} is no longer
+        @Identifier[condition:down]{down}.</p>
       executionTime:
         base: a2
       expirations:
@@ -425,12 +430,16 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Target is @Identifier[condition:snared]{snared} and
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:snared]{snared} and
           @Identifier[condition:terrored]{terrored}.</p>
       powerSources:
         - martial
       range:
         unit: contact
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:down]{down}.</p>
       targets:
         - creature
     transfer: true

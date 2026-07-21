@@ -210,13 +210,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -624,7 +627,9 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+          endCondition: >-
+            <p>@Identifier[core:targets]{Target}
+            @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -647,7 +652,8 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage
               1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
@@ -1351,7 +1357,7 @@ items:
             @Identifier[core:feat-interaction]{feat save}. This can be done
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
-            every additional creature of @Identifier[core:size]{SIZE} 1 or
+            every additional creature of @Identifier[core:size]{size} 1 or
             larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
@@ -1366,7 +1372,9 @@ items:
           range:
             unit: contact
           results:
-            hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:snared]{snared}.</p>
           targets:
             - creature
         transfer: true
@@ -1412,7 +1420,7 @@ items:
             @Identifier[core:feat-interaction]{feat save}. This can be done
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
-            every additional creature of @Identifier[core:size]{SIZE} 1 or
+            every additional creature of @Identifier[core:size]{size} 1 or
             larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
@@ -1474,7 +1482,7 @@ items:
             @Identifier[core:feat-interaction]{feat save}. This can be done
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
-            every additional creature of @Identifier[core:size]{SIZE} 1 or
+            every additional creature of @Identifier[core:size]{size} 1 or
             larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
@@ -2022,7 +2030,8 @@ items:
               @UUID[Compendium.teriock.rules.JournalEntry.class00000000000]{ability}
               was @Identifier[keyword:unblockable]{UB}, but you otherwise would
               have been able to @Identifier[ability:basic-block]{Block} it, you
-              may treat it as though it targeted your arm. </p>
+              may treat it as though it @Identifier[core:targets]{targeted} your
+              arm. </p>
           powerSources:
             - magical
             - primal
@@ -2127,7 +2136,8 @@ items:
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
             additional [[/damage 1d6[magic]]] or @Identifier[core:healing]{heal}
-            the target again (depending on what you chose).</p>
+            the @Identifier[core:targets]{target} again (depending on what you
+            chose).</p>
           identifier: empathic-ray
           interaction: attack
           maneuver: active
@@ -2157,7 +2167,7 @@ items:
             critHit: >-
               <p>Double the @Identifier[core:damage]{damage dice} dealt by this
               @Pack[teriock.abilities]{ability}. Or, if you chose "healing",
-              double the number of times that target
+              double the number of times that @Identifier[core:targets]{target}
               @Identifier[core:healing]{heals}.</p>
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
@@ -2433,7 +2443,7 @@ items:
               transformed} into a @Identifier[creature:tree]{tree} or revert a
               @Identifier[condition:transformed]{minor transformation}. The
               @Identifier[core:size]{size} of the tree is equal to the target's
-              @Identifier[core:size]{SIZE} prior to being
+              @Identifier[core:size]{size} prior to being
               @Identifier[condition:transformed]{transformed}. If a treeformed
               creature is reduced to 0
               @Identifier[core:hit-points-and-mana-points]{HP}, then they revert
@@ -3228,7 +3238,7 @@ items:
           piercing:
             raw: 2
           powerSources:
-            - martial
+            - magical
           range:
             unit: contact
           results:
@@ -3375,7 +3385,9 @@ items:
           range:
             unit: contact
           results:
-            hit: <p>Target is @Identifier[property:destroyed]{destroyed}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[property:destroyed]{destroyed}.</p>
           rotator: true
           spell: true
           standard: true

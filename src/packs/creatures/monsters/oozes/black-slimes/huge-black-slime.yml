@@ -307,13 +307,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -818,10 +821,11 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You know the exact location of all target creatures. You
-              continue to know the location of all targets within 10 feet,
-              whether they are or you are moving or not, so long as they are
-              still within 10 feet of you.</p>
+              <p>You know the exact location of all
+              @Identifier[core:targets]{target} creatures. You continue to know
+              the location of all @Identifier[core:targets]{targets} within 10
+              feet, whether they are or you are moving or not, so long as they
+              are still within 10 feet of you.</p>
           powerSources:
             - martial
           range:
@@ -829,7 +833,8 @@ items:
             unit: ft
           requirements: >-
             <p>You are @Identifier[rule:up]{up}. You are not
-            @Identifier[condition:anosmatic]{anosmatic} and the target is not
+            @Identifier[condition:anosmatic]{anosmatic} and the
+            @Identifier[core:targets]{target} is not
             @Identifier[condition:odorless]{odorless}.</p>
           skill: true
           standard: true
@@ -1304,7 +1309,7 @@ items:
               choice.</p><p>@Embed[Compendium.teriock.tables.RollTable.4c4a8524b4719a2f
               rollable]</p>
           powerSources:
-            - martial
+            - magical
           range:
             raw: '5'
             unit: ft
@@ -1757,7 +1762,8 @@ items:
               @Wiki[Category:Attack spells]{attack spell}, you make the
               @Identifier[core:attack-interaction]{attack roll} with
               @Identifier[core:advantage]{advantage}. If it is a
-              @Wiki[Category:Feat spells]{feat spell}, its targets make their
+              @Wiki[Category:Feat spells]{feat spell}, its
+              @Identifier[core:targets]{targets} make their
               @Identifier[core:feat-interaction]{feat save} with
               @Identifier[core:disadvantage]{disadvantage}.</p>
           powerSources:
@@ -2817,8 +2823,9 @@ items:
             hit: >-
               <p>Roll [[/kill 2d6]] if this is greater than or equal to the
               number of @Identifier[core:hit-points-and-mana-points]{HP} the
-              target has, they @Identifier[condition:dead]{die}. This does not
-              deal @Identifier[core:damage]{damage}.</p>
+              @Identifier[core:targets]{target} has, they
+              @Identifier[condition:dead]{die}. This does not deal
+              @Identifier[core:damage]{damage}.</p>
           spell: true
           standard: true
           targets:
@@ -2965,10 +2972,10 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>If you have the body of the target in your possession, you can
-              put the spirit back into its body such that it is no longer
-              @Identifier[condition:wisping]{wisping}. The body maintains all
-              damage it had when it died.</p>
+              <p>If you have the body of the @Identifier[core:targets]{target}
+              in your possession, you can put the spirit back into its body such
+              that it is no longer @Identifier[condition:wisping]{wisping}. The
+              body maintains all damage it had when it died.</p>
             proficient: >-
               <p>If the body is thoroughly damaged (such as if it's
               @Identifier[condition:ruined]{ruined}) or missing entirely, you
@@ -2984,7 +2991,9 @@ items:
           range:
             raw: '5'
             unit: ft
-          requirements: <p>Target must be @Identifier[condition:wisping]{wisping}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} must be
+            @Identifier[condition:wisping]{wisping}.</p>
           ritual: true
           spell: true
           standard: true
@@ -3266,11 +3275,12 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>Target takes the "on hit" effect of a @Wiki[Category:Missile
-              delivery spells]{missile spell} that you are
-              @Identifier[core:proficiency-bonus]{proficient} in. If the
-              triggering hit was a critical hit, then the target takes the "on
-              critical hit" effect instead.</p>
+              <p>@Identifier[core:targets]{Target} takes the "on hit" effect of
+              a @Wiki[Category:Missile delivery spells]{missile spell} that you
+              are @Identifier[core:proficiency-bonus]{proficient} in. If the
+              triggering hit was a critical hit, then the
+              @Identifier[core:targets]{target} takes the "on critical hit"
+              effect instead.</p>
           powerSources:
             - magical
           range:

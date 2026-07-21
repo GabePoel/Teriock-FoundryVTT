@@ -210,13 +210,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -571,7 +574,9 @@ items:
             unit: hour
           effectTypes:
             - poison
-          endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+          endCondition: >-
+            <p>@Identifier[core:targets]{Target}
+            @Identifier[condition:dead]{dies}.</p>
           executionTime:
             base: a1
           form: normal
@@ -594,7 +599,8 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>Target is @Identifier[condition:poisoned]{poisoned}. The
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:poisoned]{poisoned}. The
               @Identifier[condition:poisoned]{poison} deals [[/damage
               1d6[toxic]]] @Identifier[core:damage]{damage}.</p>
           skill: true
@@ -1351,7 +1357,7 @@ items:
             @Identifier[core:feat-interaction]{feat save}. This can be done
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
-            every additional creature of @Identifier[core:size]{SIZE} 1 or
+            every additional creature of @Identifier[core:size]{size} 1 or
             larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
@@ -1366,7 +1372,9 @@ items:
           range:
             unit: contact
           results:
-            hit: <p>Target is @Identifier[condition:snared]{snared}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:snared]{snared}.</p>
           targets:
             - creature
         transfer: true
@@ -1412,7 +1420,7 @@ items:
             @Identifier[core:feat-interaction]{feat save}. This can be done
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
-            every additional creature of @Identifier[core:size]{SIZE} 1 or
+            every additional creature of @Identifier[core:size]{size} 1 or
             larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
@@ -1474,7 +1482,7 @@ items:
             @Identifier[core:feat-interaction]{feat save}. This can be done
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
-            every additional creature of @Identifier[core:size]{SIZE} 1 or
+            every additional creature of @Identifier[core:size]{size} 1 or
             larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
@@ -2786,7 +2794,7 @@ items:
             unit: contact
           results:
             hit: >-
-              <p>You know if the target is
+              <p>You know if the @Identifier[core:targets]{target} is
               @Identifier[keyword:illusionary]{illusionary}.</p>
           spell: true
           standard: true
@@ -3224,14 +3232,15 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>Target creature is moved to a location you have studied within
-              your level in miles. You can study locations by performing this
-              ritual on an area you are in over the course of a
-              @Identifier[core:long-rest]{long rest}. This location must be a
-              static part of the environment, not a moving location like a wagon
-              or ship. If the location substantially changes beyond recognition,
-              your ritual will fail to transport creatures there. You can only
-              have 2 location studied at a time.</p>
+              <p>@Identifier[core:targets]{Target} creature is moved to a
+              location you have studied within your level in miles. You can
+              study locations by performing this ritual on an area you are in
+              over the course of a @Identifier[core:long-rest]{long rest}. This
+              location must be a static part of the environment, not a moving
+              location like a wagon or ship. If the location substantially
+              changes beyond recognition, your ritual will fail to transport
+              creatures there. You can only have 2 location studied at a
+              time.</p>
             fluent: >-
               <p>You may now have 2 × @Identifier[core:fluency-bonus]{F}
               locations studied and can [[lookup name style=lc]] a distance of

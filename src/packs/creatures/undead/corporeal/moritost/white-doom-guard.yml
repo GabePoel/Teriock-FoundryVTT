@@ -126,10 +126,9 @@ items:
               @Pack[teriock.bodyParts]{body parts} gain those
               @Pack[teriock.properties]{properties}. Additionally, any
               @Wiki[Category:AV granting abilities]{natural AV} you may have
-              counts as <a
-              href="/index.php?title=Equipment:Armor&amp;action=edit&amp;redlink=1"
-              class="new" title="Equipment:Armor (page does not
-              exist)">armor</a> for these purposes.</p>
+              counts as
+              @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}
+              for these purposes.</p>
           powerSources:
             - martial
           range:
@@ -945,10 +944,13 @@ items:
                 formula: '0'
           delivery: sight
           duration:
-            unit: unlimited
+            raw: '24'
+            unit: hour
           elements:
             - life
-          endCondition: <p>Target is no longer @Identifier[condition:down]{down}.</p>
+          endCondition: >-
+            <p>The break of dawn or the @Identifier[core:targets]{target} is no
+            longer @Identifier[condition:down]{down}.</p>
           executionTime:
             base: r1
           expirations:
@@ -1078,8 +1080,9 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>If you want, target is @Identifier[condition:lighted]{lighted}
-              until the end of your next @Identifier[core:turns]{turn}.</p>
+              <p>If you want, @Identifier[core:targets]{target} is
+              @Identifier[condition:lighted]{lighted} until the end of your next
+              @Identifier[core:turns]{turn}.</p>
             hit: >-
               <p>Target is @Identifier[condition:lighted]{lighted} to a creature
               of your choice until the end of their next
@@ -1158,7 +1161,9 @@ items:
             critHit: >-
               <p>Double the amount of times target
               @Identifier[core:healing]{heals}.</p>
-            hit: <p>Target @Identifier[core:healing]{heals}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target}
+              @Identifier[core:healing]{heals}.</p>
           spell: true
           standard: true
           targets:
@@ -1217,7 +1222,7 @@ items:
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, target can
             have been @Identifier[condition:dead]{dead} for an additional 24
-            hours. If target is
+            hours. If @Identifier[core:targets]{target} is
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
             they are @Identifier[core:healing]{healed} an additional time.</p>
           identifier: resurrect
@@ -1225,22 +1230,23 @@ items:
           maneuver: slow
           overview:
             base: >-
-              <p>If target is @Identifier[condition:dead]{dead}, they are
-              brought back to life with 1
-              @Identifier[core:hit-points-and-mana-points]{HP}. If target is
+              <p>If @Identifier[core:targets]{target} is
+              @Identifier[condition:dead]{dead}, they are brought back to life
+              with 1 @Identifier[core:hit-points-and-mana-points]{HP}. If
+              @Identifier[core:targets]{target} is
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
               you can choose to have them be @Identifier[core:healing]{healed}
               for @Identifier[core:damage]{damage}. [[lookup name]] does not
               count as a @Wiki[Category:Healing effects]{healing effect} unless
               you choose to @Identifier[core:healing]{heal} with it.</p>
             fluent: >-
-              <p>If target is
+              <p>If @Identifier[core:targets]{target} is
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
               they are @Identifier[core:healing]{healed} for
               @Identifier[core:damage]{damage}
               @Identifier[core:fluency-bonus]{F} times.</p>
             proficient: >-
-              <p>If target is
+              <p>If @Identifier[core:targets]{target} is
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
               they are @Identifier[core:healing]{healed} for
               @Identifier[core:damage]{damage}
@@ -1439,7 +1445,7 @@ items:
             - martial
           range:
             unit: self
-          requirements: <p>You remain in the targeted area.</p>
+          requirements: <p>You remain in the @Identifier[core:targets]{targeted} area.</p>
           skill: true
           standard: true
           targets:

@@ -154,13 +154,16 @@ items:
             - martial
           range:
             unit: contact
-          requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is
+            @Identifier[condition:down]{down}.</p>
           results:
             hit: >-
-              <p>Target is @Identifier[condition:dead]{dead},
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:dead]{dead},
               @Identifier[condition:ruined]{ruined}, and their
-              @Identifier[core:size]{SIZE} is reduced by 1. If their
-              @Identifier[core:size]{SIZE} was already less than 1, it is
+              @Identifier[core:size]{size} is reduced by 1. If their
+              @Identifier[core:size]{size} was already less than 1, it is
               reduced to 0.</p>
           targets:
             - creature
@@ -521,9 +524,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You @Wiki[Core:MOV]{fly} at
-              @Identifier[core:movement-speed]{quarter speed} and can glide over
-              terrain and other obstacles at
+              <p>You fly at @Identifier[core:movement-speed]{quarter speed} and
+              can glide over terrain and other obstacles at
               @Identifier[core:movement-speed]{normal speed}. However, you
               cannot move more than a couple feet above the ground. You fall at
               the rate of 30 feet per round (30 feet per 5 seconds).</p>
@@ -1372,7 +1374,8 @@ items:
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
             additional [[/damage 1d6[magic]]] or @Identifier[core:healing]{heal}
-            the target again (depending on what you chose).</p>
+            the @Identifier[core:targets]{target} again (depending on what you
+            chose).</p>
           identifier: empathic-ray
           interaction: attack
           maneuver: active
@@ -1402,7 +1405,7 @@ items:
             critHit: >-
               <p>Double the @Identifier[core:damage]{damage dice} dealt by this
               @Pack[teriock.abilities]{ability}. Or, if you chose "healing",
-              double the number of times that target
+              double the number of times that @Identifier[core:targets]{target}
               @Identifier[core:healing]{heals}.</p>
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
@@ -1678,7 +1681,7 @@ items:
               transformed} into a @Identifier[creature:tree]{tree} or revert a
               @Identifier[condition:transformed]{minor transformation}. The
               @Identifier[core:size]{size} of the tree is equal to the target's
-              @Identifier[core:size]{SIZE} prior to being
+              @Identifier[core:size]{size} prior to being
               @Identifier[condition:transformed]{transformed}. If a treeformed
               creature is reduced to 0
               @Identifier[core:hit-points-and-mana-points]{HP}, then they revert
@@ -3114,7 +3117,7 @@ items:
           heightened: >-
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
-            target an additional person.</p>
+            choose an additional @Identifier[core:targets]{target}.</p>
           identifier: self-detonate
           interaction: manifest
           maneuver: slow
@@ -3128,8 +3131,9 @@ items:
               @Identifier[core:feat-interaction]{feat save} using <i>your</i>
               DC. Do not add your
               @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC.
-              This detonating @Identifier[core:aura-delivery]{aura} is
-              @Wiki[Category:Loud effects]{loud}.</p>
+              This @Identifier[core:detonate-expansion]{detonating}
+              @Identifier[core:aura-delivery]{aura} is @Wiki[Category:Loud
+              effects]{loud}.</p>
             fluent: >-
               <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now
               included in the @Identifier[core:feat-interaction]{feat save
@@ -3137,7 +3141,8 @@ items:
             proficient: >-
               <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is
               now included in the @Identifier[core:feat-interaction]{feat save
-              DC}.</p>
+              DC} and you may @Identifier[core:targets]{target} creatures other
+              than yourself.</p>
           powerSources:
             - magical
           range:
@@ -3145,7 +3150,7 @@ items:
             unit: ft
           requirements: >-
             <p>Unless @Identifier[core:proficiency-bonus]{proficient}, you may
-            only target yourself.</p>
+            only @Identifier[core:targets]{target} yourself.</p>
           ritual: true
           spell: true
           standard: true
@@ -3213,9 +3218,10 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>Target is set on fire or is put out. If the target is on fire,
-              it is considered to be @Identifier[property:flaming]{flaming}.
-              Your @Identifier[property:handy]{handy} items count as a
+              <p>Target is set on fire or is put out. If the
+              @Identifier[core:targets]{target} is on fire, it is considered to
+              be @Identifier[property:flaming]{flaming}. Your
+              @Identifier[property:handy]{handy} items count as a
               @Identifier[equipment:torch]{torch} for the purpose of [[lookup
               name]]. The fire produced by [[lookup name]] does not harm you
               while it is burning.</p>
@@ -4091,7 +4097,7 @@ items:
           piercing:
             raw: 2
           powerSources:
-            - martial
+            - magical
           range:
             unit: contact
           results:
@@ -4238,7 +4244,9 @@ items:
           range:
             unit: contact
           results:
-            hit: <p>Target is @Identifier[property:destroyed]{destroyed}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[property:destroyed]{destroyed}.</p>
           rotator: true
           spell: true
           standard: true

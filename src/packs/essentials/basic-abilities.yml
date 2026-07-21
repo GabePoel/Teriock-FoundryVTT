@@ -300,7 +300,9 @@ effects:
         - spiritual
       range:
         unit: self
-      requirements: <p>You are using target item or mounted on target creature.</p>
+      requirements: >-
+        <p>You are using @Identifier[core:targets]{target} item or mounted on
+        @Identifier[core:targets]{target} creature.</p>
       sustained: true
       targets:
         - creature
@@ -535,7 +537,9 @@ effects:
           @Identifier[core:fizzles]{fizzles}.</p>
       targets:
         - ability
-      trigger: <p>A @Wiki[Category:Cone delivery abilities]{cone} would target you.</p>
+      trigger: >-
+        <p>A @Wiki[Category:Cone delivery abilities]{cone} would
+        @Identifier[core:targets]{target} you.</p>
     transfer: true
     type: ability
   - _id: cz8cKzPPUTA1DCeC
@@ -683,11 +687,11 @@ effects:
         unit: ft
       results:
         fail: >-
-          <p>You detect whether or not the target is
+          <p>You detect whether or not the @Identifier[core:targets]{target} is
           @Identifier[condition:disguised]{disguised}, but you can't determine
           the true form of the target.</p>
         save: >-
-          <p>You detect that the target is not
+          <p>You detect that the @Identifier[core:targets]{target} is not
           @Identifier[condition:disguised]{disguised}, regardless of whether or
           not they actually are. This also applies if [[lookup name]] is
           @Identifier[keyword:resistance]{resisted} or
@@ -830,10 +834,11 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Instead of the target making the
+          <p>Instead of the @Identifier[core:targets]{target} making the
           @Identifier[core:feat-interaction]{feat save}, you do. The DC of the
           [[lookup name]] is determined by the type of
-          @Identifier[keyword:illusionary]{illusion} are you targeting. If you
+          @Identifier[keyword:illusionary]{illusion} are you
+          @Identifier[core:targets]{targeting}. If you
           @Identifier[keyword:resistance]{resist} or are
           @Identifier[keyword:immunity]{immune} to @Wiki[Category:Mental
           effects]{mental effects}, then you are
@@ -1480,9 +1485,9 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>If the target is "@Identifier[damage:financial]{indebted}", this
-          pays off an amount of their debt equal to the amount paid upon using
-          [[lookup name]].</p>
+          <p>If the @Identifier[core:targets]{target} is
+          "@Identifier[damage:financial]{indebted}", this pays off an amount of
+          their debt equal to the amount paid upon using [[lookup name]].</p>
       powerSources:
         - divine
         - financial
@@ -1703,9 +1708,9 @@ effects:
         unit: contact
       results:
         hit: >-
-          <p>If the target is an item, you know if it is
-          @Identifier[property:magic]{magical} or not. If it is a creature, then
-          you know if they have any @Wiki[Category:Sustained
+          <p>If the @Identifier[core:targets]{target} is an item, you know if it
+          is @Identifier[property:magic]{magical} or not. If it is a creature,
+          then you know if they have any @Wiki[Category:Sustained
           abilities]{sustained} @Wiki[Category:Magically powered
           abilities]{magical abilities} currently active on them or if they
           themselves are intrinsically magical in some way.</p>
@@ -1927,7 +1932,9 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @Identifier[condition:down]{down}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:down]{down}.</p>
       targets:
         - creature
     transfer: true
