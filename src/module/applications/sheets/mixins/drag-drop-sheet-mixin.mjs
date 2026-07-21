@@ -179,6 +179,9 @@ export default function DragDropSheetMixin(Base) {
        * Validates a drop.
        * @param {Teriock.Application.DropValidationOptions} [options]
        * @returns {boolean}
+       * @todo Add cyclic document validation. Not urgent because it's still stopped in `_preCreate`.
+       * @todo Make this into a config object like suppression/error tips to simplify calls.
+       * @todo Move to {@link DragDropApplicationMixin}.
        */
       _validateDrop(options = {}) {
         options.document ??= TeriockDragDrop.payload?.document;

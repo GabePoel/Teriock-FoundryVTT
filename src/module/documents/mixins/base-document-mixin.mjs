@@ -146,9 +146,7 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
-       * Lazily-initialized store of computed values cached on this document. Cleared (in whole or in part) whenever the
-       * cached data may have gone stale, e.g. in {@link resetChildMaps}. Backed by an undeclared property rather than a
-       * class field so it survives the `prepareData` call Foundry makes during construction, before field initializers.
+       * Lazy store of lazy values cached on this document.
        * @returns {Teriock.Documents.DocumentCache}
        */
       get _cache() {
@@ -163,7 +161,10 @@ export default function BaseDocumentMixin(Base) {
         return tm.string.toKebabCase(this.name);
       }
 
-      /** @returns {Teriock.Documents.DocumentMetadata} */
+      /**
+       * Metadata that Teriock uses but Foundry doesn't.
+       * @returns {Teriock.Documents.DocumentMetadata}
+       */
       get documentMetadata() {
         return this.constructor.documentMetadata;
       }

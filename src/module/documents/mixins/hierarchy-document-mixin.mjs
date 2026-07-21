@@ -17,11 +17,14 @@ const { Collection } = foundry.utils;
  * This mixin is not related to pseudo-documents in any way.
  *
  * @param {typeof BaseDocument} Base
+ * @todo Move dependent stuff to its own mixin that complements {@link DependeeDocumentMixin}.
+ * @todo Fix issue where dependent documents aren't known on first load which messes with initial suppression.
  */
 export default function HierarchyDocumentMixin(Base) {
   return (
     /**
      * @extends AnyCommonDocument
+     * @mixes CommonDocument
      * @mixin
      * @property {HierarchySystem} system
      */
@@ -179,6 +182,7 @@ export default function HierarchyDocumentMixin(Base) {
        * Check if there is a circular dependencies between a sup and sub.
        * @param {HierarchyDocument} sup
        * @param {HierarchyDocument} sub
+       * @todo Make a synchronous version of this so it can run during drag and drop.
        */
       static async checkIfCyclic(sup, sub) {
         if (sup?.documentName !== sub?.documentName) { return false; }
@@ -447,8 +451,8 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Create multiple sub Document instances in a sup Document's collection using provided input data.
-       * @param {object[]} data
-       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
+       * @param {object[]} [data]
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} [operation]
        * @returns {Promise<AnyChildDocument[]>}
        */
       async createSubDocuments(data = [], operation = {}) {
@@ -458,8 +462,8 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Delete multiple sub Document instances in a sup Document's collection using provided string ids.
-       * @param {ID<AnyCommonDocument>[]} ids
-       * @param {DatabaseDeleteOperation} operation
+       * @param {ID<AnyCommonDocument>[]} [ids]
+       * @param {DatabaseDeleteOperation} [operation]
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async deleteSubDocuments(ids = [], operation = {}) {
@@ -491,8 +495,8 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get the operation to create sub Documents.
-       * @param {object[]} data
-       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} operation
+       * @param {object[]} [data]
+       * @param {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>} [operation]
        * @returns {Partial<DatabaseCreateOperation & Teriock.System._CreateOperation>}
        */
       getCreateSubDocumentsOperation(data = [], operation = {}) {
@@ -567,8 +571,8 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Get the operation to update sub Documents.
-       * @param {object[]} updates
-       * @param {Partial<DatabaseUpdateOperation & Teriock.System._Operation>} operation
+       * @param {object[]} [updates]
+       * @param {Partial<DatabaseUpdateOperation & Teriock.System._Operation>} [operation]
        * @returns {Partial<DatabaseUpdateOperation & Teriock.System._Operation>}
        */
       getUpdateSubDocumentsOperation(updates = [], operation = {}) {
@@ -622,7 +626,7 @@ export default function HierarchyDocumentMixin(Base) {
       /**
        * Copy and transform the data model of this and all its subs into an array of plain objects.
        * Refs are stripped from the array so that children aren't created multiple times.
-       * @param {boolean} source=true
+       * @param {boolean} [source=true]
        * @returns {Promise<object[]>}
        */
       async toObjects(source = true) {
@@ -634,8 +638,8 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Update multiple sub Document instances in a sup Document's collection using provided differential data.
-       * @param {object[]} updates
-       * @param {DatabaseUpdateOperation} operation
+       * @param {object[]} [updates]
+       * @param {DatabaseUpdateOperation} [operation]
        * @returns {Promise<AnyCommonDocument[]>}
        */
       async updateSubDocuments(updates = [], operation = {}) {
