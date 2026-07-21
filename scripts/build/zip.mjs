@@ -1,4 +1,4 @@
-import archiver from "archiver";
+import { ZipArchive } from "archiver";
 import fs from "fs";
 import path from "path";
 
@@ -71,7 +71,7 @@ await removeEmptyDirs(SYSTEM_DIR);
  */
 async function createZip() {
   const output = fs.createWriteStream(ZIP_PATH);
-  const archive = archiver("zip", { zlib: { level: 9 } });
+  const archive = new ZipArchive({ zlib: { level: 9 } });
   return new Promise((resolve, reject) => {
     output.on("close", () => {
       console.log(`Created ${path.basename(ZIP_PATH)} (${archive.pointer()} bytes)`);
