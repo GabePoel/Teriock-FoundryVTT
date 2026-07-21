@@ -278,7 +278,9 @@ effects:
         <p>A creature may only have up to @Identifier[core:presence]{PRES}
         creatures @Identifier[condition:charmed]{charmed} at a time.</p>
       results:
-        hit: <p>Target is @Identifier[condition:charmed]{charmed}.</p>
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:charmed]{charmed}.</p>
       targets:
         - creature
     transfer: true
@@ -330,13 +332,13 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You challenge the target to advance and fight you. They may
-          immediately @Identifier[ability:move]{Move} towards you as a
-          @Identifier[core:reactive-maneuvers]{free reaction} to this and begin
-          @Identifier[condition:dueling]{dueling} with you. If they choose not
-          to or are unable to do so, then they are considered to have
-          "forfeited" the [[lookup name style=lc]] (but are not considered to
-          have "lost" it). Any creature that forfeits this [[lookup name
+          <p>You challenge the @Identifier[core:targets]{target} to advance and
+          fight you. They may immediately @Identifier[ability:move]{Move}
+          towards you as a @Identifier[core:reactive-maneuvers]{free reaction}
+          to this and begin @Identifier[condition:dueling]{dueling} with you. If
+          they choose not to or are unable to do so, then they are considered to
+          have "forfeited" the [[lookup name style=lc]] (but are not considered
+          to have "lost" it). Any creature that forfeits this [[lookup name
           style=lc]] becomes @Identifier[condition:lighted]{lighted} to each of
           their would-be opponents in the [[lookup name style=lc]] until the end
           of that opponent's next @Identifier[core:turns]{turn}.</p>
@@ -344,8 +346,9 @@ effects:
           <p>You may also @Identifier[ability:move]{Move} or make a
           @Wiki[Category:Single action abilities]{single action}
           @Wiki[Category:Duelist class abilities]{Duelist ability} as a
-          @Identifier[core:reactive-maneuvers]{free reaction} to the target's
-          decision and subsequent movement.</p>
+          @Identifier[core:reactive-maneuvers]{free reaction} to the
+          @Identifier[core:targets]{target's} decision and subsequent
+          movement.</p>
       powerSources:
         - spiritual
       range:
@@ -732,7 +735,8 @@ effects:
       form: special
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, the duration of this effect increases by 1 hour.</p>
+        spent, the @Identifier[core:duration]{duration} of this effect increases
+        by 1 hour.</p>
       identifier: spirit-bury
       interaction: attack
       invoked: true
@@ -1130,16 +1134,18 @@ effects:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize} twice. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>
         hit: >-
           <p>Deal [[/drain 1d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize}. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>

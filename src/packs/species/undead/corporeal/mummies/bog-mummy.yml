@@ -556,9 +556,9 @@ effects:
       effectTypes:
         - loud
       endCondition: >-
-        <p>At the start of each of the targets' @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
+        <p>At the start of each of the @Identifier[core:targets]{targets'}
+        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
+        these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
@@ -584,9 +584,13 @@ effects:
       range:
         raw: '10'
         unit: ft
-      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is not
+        @Identifier[condition:deaf]{deaf}.</p>
       results:
-        fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Targets} become
+          @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
       targets:
@@ -734,16 +738,18 @@ effects:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize} twice. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>
         hit: >-
           <p>Deal [[/drain 1d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize}. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>

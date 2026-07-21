@@ -1121,24 +1121,27 @@ items:
           form: special
           heightened: >-
             <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, the range of
-            [[lookup name]] increases by 15 feet.</p>
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+            @Identifier[core:range]{range} of this increases by 15 feet.</p>
           identifier: reflect-magic
           interaction: manifest
           invoked: true
           maneuver: reactive
           overview:
             base: >-
-              <p>Target @Wiki[Category:Conjured spells]{spell}
-              @Identifier[core:fizzles]{fizzles}, as do any others cast
-              simultaneously within range. Their casters take the spells'
+              <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured
+              spells]{spell} @Identifier[core:fizzles]{fizzles}, as do any
+              others cast simultaneously within @Identifier[core:range]{range}.
+              Their casters take the @Wiki[Category:Conjured spells]{spells'}
               effects instead.</p>
           powerSources:
             - magical
           range:
             raw: '10'
             unit: ft
-          requirements: <p>Target is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured
+            spells]{conjured spell}.</p>
           rotator: true
           spell: true
           standard: true
@@ -1224,12 +1227,12 @@ items:
             base: >-
               <p>When you @Identifier[core:attack-interaction]{attack} with
               @Identifier[ability:lightning-ray]{Lightning Ray} or
-              @Identifier[ability:ice-ball]{Ice Ball}, you may target an
-              additional creature or the same creature twice. Any costs you pay
-              must be paid twice and be the same for both
-              @Identifier[core:attack-interaction]{attacks}. These incur
-              @Identifier[core:attack-interaction]{attack penalties} as though
-              they were two separate
+              @Identifier[ability:ice-ball]{Ice Ball}, you may
+              @Identifier[core:targets]{target} an additional creature or the
+              same creature twice. Any costs you pay must be paid twice and be
+              the same for both @Identifier[core:attack-interaction]{attacks}.
+              These incur @Identifier[core:attack-interaction]{attack penalties}
+              as though they were two separate
               @Identifier[core:attack-interaction]{attacks}.</p>
             fluent: >-
               <p>You may instead choose up to 1 +
@@ -1668,8 +1671,9 @@ items:
           elements:
             - storm
           endCondition: >-
-            <p>At the start of each of the target's actions, they roll [[/roll
-            2d4]]. If either of these dice roll a 4, this effect ends.</p>
+            <p>At the start of each of the @Identifier[core:targets]{target's}
+            actions, they roll [[/roll 2d4]]. If either of these dice roll a 4,
+            this effect ends.</p>
           executionTime:
             base: a1
           expirations:
@@ -1719,9 +1723,11 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>The target automatically fails the first [[/roll 2d4]]
-              roll.</p>
-            hit: <p>Target is @Identifier[condition:frozen]{frozen}.</p>
+              <p>The @Identifier[core:targets]{target} automatically fails the
+              first [[/roll 2d4]] roll.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:frozen]{frozen}.</p>
           spell: true
           standard: true
           targets:
@@ -1771,20 +1777,20 @@ items:
           heightened: >-
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
-            target an additional item.</p>
+            choose an additional @Identifier[core:targets]{target}.</p>
           identifier: identify
           interaction: manifest
           maneuver: slow
           overview:
             base: >-
-              <p>If the target is an item, you know if it is
-              @Identifier[property:magic]{magical} and what its
+              <p>If the @Identifier[core:targets]{target} is an item, you know
+              if it is @Identifier[property:magic]{magical} and what its
               @Pack[teriock.properties]{properties} or
               @Pack[teriock.abilities]{abilities} are, as well as any ongoing
               spells that are affecting the item. You also learn the name of the
-              object, if it has one. If the target is a creature, you learn what
-              ongoing or @Wiki[Category:Sustained spells]{sustained spells}, if
-              any, are affecting it.</p>
+              object, if it has one. If the @Identifier[core:targets]{target} is
+              a creature, you learn what ongoing or @Wiki[Category:Sustained
+              spells]{sustained spells}, if any, are affecting it.</p>
           powerSources:
             - magical
           range:
@@ -1900,7 +1906,7 @@ items:
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
-              target.</p>
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:
@@ -2009,8 +2015,9 @@ items:
           form: normal
           heightened: >-
             <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
-            of this effect increases by 1 hour.</p>
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+            @Identifier[core:duration]{duration} of this effect increases by 1
+            hour.</p>
           identifier: simple-illusion-creation
           interaction: manifest
           maneuver: active
@@ -2580,16 +2587,16 @@ items:
           form: special
           heightened: >-
             <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, the range of
-            [[lookup name]] increases by 10 feet.</p>
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+            @Identifier[core:range]{range} of this increases by 10 feet.</p>
           identifier: dispel-magic
           interaction: manifest
           invoked: true
           maneuver: reactive
           overview:
             base: >-
-              <p>Target @Wiki[Category:Conjured spells]{spell}
-              @Identifier[core:fizzles]{fizzles}.</p>
+              <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured
+              spells]{spell} @Identifier[core:fizzles]{fizzles}.</p>
             fluent: >-
               <p>You may now use [[lookup name]]
               @Identifier[core:fluency-bonus]{F} additional times as a
@@ -2607,7 +2614,9 @@ items:
           range:
             raw: '30'
             unit: ft
-          requirements: <p>Target is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured
+            spells]{conjured spell}.</p>
           rotator: true
           spell: true
           standard: true
@@ -3034,7 +3043,7 @@ items:
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
               <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
-              target.</p>
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:

@@ -47,7 +47,9 @@ effects:
         <p>A creature may only have up to @Identifier[core:presence]{PRES}
         creatures @Identifier[condition:charmed]{charmed} at a time.</p>
       results:
-        hit: <p>Target is @Identifier[condition:charmed]{charmed}.</p>
+        hit: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:charmed]{charmed}.</p>
       targets:
         - creature
     transfer: true
@@ -536,8 +538,8 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>Target takes an additional [[/damage 5[lethal]]]
-          @Identifier[core:damage]{damage}. This also has all
+          <p>@Identifier[core:targets]{Target} takes an additional [[/damage
+          5[lethal]]] @Identifier[core:damage]{damage}. This also has all
           @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
           types} of the triggering @Identifier[core:attack-interaction]{attack}.
           If the triggering @Identifier[core:attack-interaction]{attack} was a
@@ -796,16 +798,18 @@ effects:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize} twice. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>
         hit: >-
           <p>Deal [[/drain 1d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize}. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>

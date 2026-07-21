@@ -3,9 +3,18 @@ _key: '!effects!112ffa17a23ea71c'
 img: systems/teriock/src/icons/abilities/spell-deflection.webp
 name: Spell Deflection
 system:
+  automations:
+    7ndvczApzXOz27sF:
+      _id: 7ndvczApzXOz27sF
+      bonus: '0'
+      competence:
+        raw: 0
+      keepArmament: true
+      type: attack
+      useArmament: false
   competence:
     raw: 0
-  delivery: weapon
+  delivery: item
   duration:
     unit: instant
   executionTime:
@@ -27,14 +36,15 @@ system:
   range:
     unit: contact
   requirements: >-
-    <p>Target is a @Wiki[Category:Missile delivery spells]{missile attack
-    spell}.</p>
+    <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Missile delivery
+    spells]{missile attack spell}.</p>
   results:
     fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
     save: >-
       <p>The @Wiki[Category:Missile delivery spells]{spell} does not hit its
-      original target. Instead, you may pick a new target within 30 feet of you
-      and make an @Identifier[core:attack-interaction]{attack roll} without
+      original @Identifier[core:targets]{target}. Instead, you may pick a new
+      @Identifier[core:targets]{target} within 30 feet of you and make an
+      @Identifier[core:attack-interaction]{attack roll} without
       @Identifier[core:proficiency-bonus]{proficiency} against it. This is
       @Identifier[keyword:armor-voiding]{AV0} or
       @Identifier[keyword:unblockable]{UB} if the original

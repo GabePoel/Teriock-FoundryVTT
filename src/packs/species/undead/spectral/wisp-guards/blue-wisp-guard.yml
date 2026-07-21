@@ -548,15 +548,16 @@ effects:
       form: normal
       heightened: >-
         <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, the duration of this effect increases by 1 hour.</p>
+        spent, the @Identifier[core:duration]{duration} of this effect increases
+        by 1 hour.</p>
       identifier: zombify
       interaction: attack
       invoked: true
       maneuver: active
       overview:
         fluent: >-
-          <p>The base duration of this effect is 1 hour and the
-          @Identifier[creature:zombie]{zombie} is a
+          <p>The base @Identifier[core:duration]{duration} of this effect is 1
+          hour and the @Identifier[creature:zombie]{zombie} is a
           @Identifier[core:minions]{minion} under your command.</p>
         proficient: <p>[[lookup name]] is @Identifier[keyword:warded]{warded}.</p>
       piercing:
@@ -565,16 +566,18 @@ effects:
         - magical
       range:
         unit: contact
-      requirements: <p>Target is @Identifier[condition:dead]{dead}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:dead]{dead}.</p>
       results:
         hit: >-
-          <p>Target is reanimated as a @Identifier[creature:zombie]{zombie}. It
-          is not under your command, but is hostile to everyone other than you
-          that is not
+          <p>@Identifier[core:targets]{Target} is reanimated as a
+          @Identifier[creature:zombie]{zombie}. It is not under your command,
+          but is hostile to everyone other than you that is not
           @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{another
           zombie}. The @Identifier[creature:zombie]{zombie} keeps the
           @Identifier[core:size]{SIZE} it had before, but loses all other traits
-          and abilities. If the target was already
+          and abilities. If the @Identifier[core:targets]{target} was already
           @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{some kind
           of zombie}, then it is reanimated as that type.</p>
       spell: true
@@ -774,16 +777,18 @@ effects:
         critHit: >-
           <p>Deal [[/drain 2d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize} twice. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize} twice. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>
         hit: >-
           <p>Deal [[/drain 1d8[mana]]]
           @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-          to the target. If this @Identifier[condition:dead]{kills} the target,
-          you @Identifier[core:revitalizing]{revitalize}. This
+          to the target. If this @Identifier[condition:dead]{kills} the
+          @Identifier[core:targets]{target}, you
+          @Identifier[core:revitalizing]{revitalize}. This
           @Identifier[core:revitalizing]{revitalization} is the only part of
           this that is a @Wiki[Category:Revitalization effects]{revitalization
           effect}.</p>

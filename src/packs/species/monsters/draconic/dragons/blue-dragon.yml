@@ -62,9 +62,9 @@ effects:
       elements:
         - storm
       endCondition: >-
-        <p>At the end of each of the target's @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
+        <p>At the end of each of the @Identifier[core:targets]{target's}
+        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
+        these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
@@ -99,10 +99,11 @@ effects:
         fail: <p>Target is @Identifier[condition:frozen]{frozen}.</p>
         save: >-
           <p>Target is @Identifier[condition:frozen]{frozen}. At the end of each
-          of the target's actions, they roll [[/roll 2d4]]. If either of these
-          dice roll a 4, this effect ends. Target takes half as much
-          @Identifier[core:damage]{damage} from this as they would otherwise.
-          This is calculated after any @Identifier[keyword:boosted]{boosts} or
+          of the @Identifier[core:targets]{target's} actions, they roll [[/roll
+          2d4]]. If either of these dice roll a 4, this effect ends. Target
+          takes half as much @Identifier[core:damage]{damage} from this as they
+          would otherwise. This is calculated after any
+          @Identifier[keyword:boosted]{boosts} or
           @Identifier[keyword:deboosted]{deboosts}.</p>
       targets:
         - creature
@@ -1198,14 +1199,14 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>If the target is an item, you know if it is
-          @Identifier[property:magic]{magical} and what its
+          <p>If the @Identifier[core:targets]{target} is an item, you know if it
+          is @Identifier[property:magic]{magical} and what its
           @Pack[teriock.properties]{properties} or
           @Pack[teriock.abilities]{abilities} are, as well as any ongoing spells
           that are affecting the item. You also learn the name of the object, if
-          it has one. If the target is a creature, you learn what ongoing or
-          @Wiki[Category:Sustained spells]{sustained spells}, if any, are
-          affecting it.</p>
+          it has one. If the @Identifier[core:targets]{target} is a creature,
+          you learn what ongoing or @Wiki[Category:Sustained spells]{sustained
+          spells}, if any, are affecting it.</p>
       powerSources:
         - magical
       range:
@@ -1787,9 +1788,9 @@ effects:
       effectTypes:
         - loud
       endCondition: >-
-        <p>At the start of each of the targets' @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
+        <p>At the start of each of the @Identifier[core:targets]{targets'}
+        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
+        these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
@@ -1815,9 +1816,13 @@ effects:
       range:
         raw: '10'
         unit: ft
-      requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is not
+        @Identifier[condition:deaf]{deaf}.</p>
       results:
-        fail: <p>Targets become @Identifier[condition:frightened]{frightened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Targets} become
+          @Identifier[condition:frightened]{frightened}.</p>
       skill: true
       standard: true
       targets:
@@ -1879,9 +1884,9 @@ effects:
       effectTypes:
         - loud
       endCondition: >-
-        <p>At the start of each of the targets' @Identifier[core:turns]{turns},
-        they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect
-        ends.</p>
+        <p>At the start of each of the @Identifier[core:targets]{targets'}
+        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
+        these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:

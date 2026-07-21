@@ -462,8 +462,8 @@ items:
             unit: ft
           results:
             fail: >-
-              <p>Target takes [[/damage 2d10[magic fire]]]
-              @Identifier[core:damage]{damage}.</p>
+              <p>@Identifier[core:targets]{Target} takes [[/damage 2d10[magic
+              fire]]] @Identifier[core:damage]{damage}.</p>
           targets:
             - creature
         transfer: true
@@ -634,7 +634,7 @@ items:
           effectTypes:
             - loud
           endCondition: >-
-            <p>At the start of each of the targets'
+            <p>At the start of each of the @Identifier[core:targets]{targets'}
             @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
             of these dice roll a 4, this effect ends.</p>
           executionTime:
@@ -662,10 +662,12 @@ items:
           range:
             raw: '10'
             unit: ft
-          requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is not
+            @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: >-
-              <p>Targets become
+              <p>@Identifier[core:targets]{Targets} become
               @Identifier[condition:frightened]{frightened}.</p>
           skill: true
           standard: true
@@ -941,7 +943,8 @@ items:
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
               <p>Deal [[/damage 1d4[magic fire]]]
-              @Identifier[core:damage]{damage} to target.</p>
+              @Identifier[core:damage]{damage} to
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:
@@ -1006,8 +1009,9 @@ items:
               <p>Double the @Identifier[core:damage]{damage dice} dealt by this
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
-              <p>Deal [[/damage 1d8[fire magic]]]
-              @Identifier[core:damage]{damage} to target.</p>
+              <p>Deal [[/damage 1d8[magic fire]]]
+              @Identifier[core:damage]{damage} to
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:
@@ -1216,8 +1220,9 @@ items:
           form: normal
           heightened: >-
             <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
-            of this effect increases by 1 hour.</p>
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+            @Identifier[core:duration]{duration} of this effect increases by 1
+            hour.</p>
           identifier: ignite
           interaction: manifest
           maneuver: active
@@ -1579,7 +1584,7 @@ items:
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
               <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
-              target.</p>
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:

@@ -121,8 +121,8 @@ items:
             unit: ft
           results:
             fail: >-
-              <p>Target takes [[/damage 2d10[magic terror]]]
-              @Identifier[core:damage]{damage}.</p>
+              <p>@Identifier[core:targets]{Target} takes [[/damage 2d10[magic
+              terror]]] @Identifier[core:damage]{damage}.</p>
           targets:
             - creature
         transfer: true
@@ -634,7 +634,7 @@ items:
           effectTypes:
             - loud
           endCondition: >-
-            <p>At the start of each of the targets'
+            <p>At the start of each of the @Identifier[core:targets]{targets'}
             @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
             of these dice roll a 4, this effect ends.</p>
           executionTime:
@@ -662,10 +662,12 @@ items:
           range:
             raw: '10'
             unit: ft
-          requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is not
+            @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: >-
-              <p>Targets become
+              <p>@Identifier[core:targets]{Targets} become
               @Identifier[condition:frightened]{frightened}.</p>
           skill: true
           standard: true
@@ -972,7 +974,8 @@ items:
             raw: '60'
             unit: ft
           requirements: >-
-            <p>Target is neither @Identifier[condition:dead]{dead} nor
+            <p>@Identifier[core:targets]{Target} is neither
+            @Identifier[condition:dead]{dead} nor
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           results:
             critHit: <p>Double the number of dice rolled.</p>
@@ -1448,7 +1451,7 @@ items:
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
               <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
-              target.</p>
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:

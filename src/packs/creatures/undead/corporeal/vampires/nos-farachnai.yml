@@ -423,7 +423,9 @@ items:
             <p>A creature may only have up to @Identifier[core:presence]{PRES}
             creatures @Identifier[condition:charmed]{charmed} at a time.</p>
           results:
-            hit: <p>Target is @Identifier[condition:charmed]{charmed}.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:charmed]{charmed}.</p>
           targets:
             - creature
         transfer: true
@@ -587,8 +589,9 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>You challenge the target to advance and fight you. They may
-              immediately @Identifier[ability:move]{Move} towards you as a
+              <p>You challenge the @Identifier[core:targets]{target} to advance
+              and fight you. They may immediately
+              @Identifier[ability:move]{Move} towards you as a
               @Identifier[core:reactive-maneuvers]{free reaction} to this and
               begin @Identifier[condition:dueling]{dueling} with you. If they
               choose not to or are unable to do so, then they are considered to
@@ -603,7 +606,8 @@ items:
               @Wiki[Category:Single action abilities]{single action}
               @Wiki[Category:Duelist class abilities]{Duelist ability} as a
               @Identifier[core:reactive-maneuvers]{free reaction} to the
-              target's decision and subsequent movement.</p>
+              @Identifier[core:targets]{target's} decision and subsequent
+              movement.</p>
           powerSources:
             - spiritual
           range:
@@ -3215,7 +3219,8 @@ items:
               <p>Deal [[/drain 2d8[mana]]]
               @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
               to the target. If this @Identifier[condition:dead]{kills} the
-              target, you @Identifier[core:revitalizing]{revitalize} twice. This
+              @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize} twice. This
               @Identifier[core:revitalizing]{revitalization} is the only part of
               this that is a @Wiki[Category:Revitalization
               effects]{revitalization effect}.</p>
@@ -3223,7 +3228,8 @@ items:
               <p>Deal [[/drain 1d8[mana]]]
               @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
               to the target. If this @Identifier[condition:dead]{kills} the
-              target, you @Identifier[core:revitalizing]{revitalize}. This
+              @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize}. This
               @Identifier[core:revitalizing]{revitalization} is the only part of
               this that is a @Wiki[Category:Revitalization
               effects]{revitalization effect}.</p>
@@ -3291,16 +3297,16 @@ items:
           form: special
           heightened: >-
             <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, the range of
-            [[lookup name]] increases by 10 feet.</p>
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+            @Identifier[core:range]{range} of this increases by 10 feet.</p>
           identifier: dispel-magic
           interaction: manifest
           invoked: true
           maneuver: reactive
           overview:
             base: >-
-              <p>Target @Wiki[Category:Conjured spells]{spell}
-              @Identifier[core:fizzles]{fizzles}.</p>
+              <p>@Identifier[core:targets]{Target} @Wiki[Category:Conjured
+              spells]{spell} @Identifier[core:fizzles]{fizzles}.</p>
             fluent: >-
               <p>You may now use [[lookup name]]
               @Identifier[core:fluency-bonus]{F} additional times as a
@@ -3318,7 +3324,9 @@ items:
           range:
             raw: '30'
             unit: ft
-          requirements: <p>Target is a @Wiki[Category:Conjured spells]{conjured spell}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is a @Wiki[Category:Conjured
+            spells]{conjured spell}.</p>
           rotator: true
           spell: true
           standard: true
@@ -3432,7 +3440,7 @@ items:
             raw: '1'
             unit: minute
           endCondition: >-
-            <p>At the end of each of the target's
+            <p>At the end of each of the @Identifier[core:targets]{target's}
             @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
             of these dice roll a 4, this effect ends.</p>
           executionTime:
@@ -3462,7 +3470,8 @@ items:
             unit: ft
           results:
             fail: >-
-              <p>Target is @Identifier[keyword:incapable]{incapable} of using
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[keyword:incapable]{incapable} of using
               @Identifier[ability:sustain]{Sustain} on @Wiki[Category:Magically
               powered abilities]{magical abilities.} Any
               @Wiki[Category:Magically powered abilities]{magical}
@@ -3515,7 +3524,7 @@ items:
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
             every additional creature of @Identifier[core:size]{SIZE} 1 or
-            larger that is assisting the target.</p>
+            larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
           form: normal
@@ -3577,7 +3586,7 @@ items:
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
             every additional creature of @Identifier[core:size]{SIZE} 1 or
-            larger that is assisting the target.</p>
+            larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
           form: normal
@@ -3639,7 +3648,7 @@ items:
             either by the creature that is @Identifier[condition:snared]{snared}
             or by another that attempts to free them. The DC is reduced by 1 for
             every additional creature of @Identifier[core:size]{SIZE} 1 or
-            larger that is assisting the target.</p>
+            larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
           form: normal

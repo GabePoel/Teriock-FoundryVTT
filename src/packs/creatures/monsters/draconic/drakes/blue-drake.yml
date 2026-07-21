@@ -112,7 +112,7 @@ items:
           elements:
             - storm
           endCondition: >-
-            <p>At the end of each of the target's
+            <p>At the end of each of the @Identifier[core:targets]{target's}
             @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
             of these dice roll a 4, this effect ends.</p>
           executionTime:
@@ -653,7 +653,7 @@ items:
           effectTypes:
             - loud
           endCondition: >-
-            <p>At the start of each of the targets'
+            <p>At the start of each of the @Identifier[core:targets]{targets'}
             @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either
             of these dice roll a 4, this effect ends.</p>
           executionTime:
@@ -681,10 +681,12 @@ items:
           range:
             raw: '10'
             unit: ft
-          requirements: <p>Target is not @Identifier[condition:deaf]{deaf}.</p>
+          requirements: >-
+            <p>@Identifier[core:targets]{Target} is not
+            @Identifier[condition:deaf]{deaf}.</p>
           results:
             fail: >-
-              <p>Targets become
+              <p>@Identifier[core:targets]{Targets} become
               @Identifier[condition:frightened]{frightened}.</p>
           skill: true
           standard: true
@@ -1049,8 +1051,9 @@ items:
           elements:
             - storm
           endCondition: >-
-            <p>At the start of each of the target's actions, they roll [[/roll
-            2d4]]. If either of these dice roll a 4, this effect ends.</p>
+            <p>At the start of each of the @Identifier[core:targets]{target's}
+            actions, they roll [[/roll 2d4]]. If either of these dice roll a 4,
+            this effect ends.</p>
           executionTime:
             base: a1
           expirations:
@@ -1100,9 +1103,11 @@ items:
             unit: ft
           results:
             critHit: >-
-              <p>The target automatically fails the first [[/roll 2d4]]
-              roll.</p>
-            hit: <p>Target is @Identifier[condition:frozen]{frozen}.</p>
+              <p>The @Identifier[core:targets]{target} automatically fails the
+              first [[/roll 2d4]] roll.</p>
+            hit: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:frozen]{frozen}.</p>
           spell: true
           standard: true
           targets:
@@ -1152,20 +1157,20 @@ items:
           heightened: >-
             <p>For each additional
             @Identifier[core:hit-points-and-mana-points]{MP} spent, you may
-            target an additional item.</p>
+            choose an additional @Identifier[core:targets]{target}.</p>
           identifier: identify
           interaction: manifest
           maneuver: slow
           overview:
             base: >-
-              <p>If the target is an item, you know if it is
-              @Identifier[property:magic]{magical} and what its
+              <p>If the @Identifier[core:targets]{target} is an item, you know
+              if it is @Identifier[property:magic]{magical} and what its
               @Pack[teriock.properties]{properties} or
               @Pack[teriock.abilities]{abilities} are, as well as any ongoing
               spells that are affecting the item. You also learn the name of the
-              object, if it has one. If the target is a creature, you learn what
-              ongoing or @Wiki[Category:Sustained spells]{sustained spells}, if
-              any, are affecting it.</p>
+              object, if it has one. If the @Identifier[core:targets]{target} is
+              a creature, you learn what ongoing or @Wiki[Category:Sustained
+              spells]{sustained spells}, if any, are affecting it.</p>
           powerSources:
             - magical
           range:
@@ -1281,7 +1286,7 @@ items:
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
               <p>Deal [[/damage 1d6[magic]]] @Identifier[core:damage]{damage} to
-              target.</p>
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:
@@ -1390,8 +1395,9 @@ items:
           form: normal
           heightened: >-
             <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, the duration
-            of this effect increases by 1 hour.</p>
+            @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+            @Identifier[core:duration]{duration} of this effect increases by 1
+            hour.</p>
           identifier: simple-illusion-creation
           interaction: manifest
           maneuver: active
@@ -1569,7 +1575,7 @@ items:
               @Pack[teriock.abilities]{ability}.</p>
             hit: >-
               <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
-              target.</p>
+              @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:
