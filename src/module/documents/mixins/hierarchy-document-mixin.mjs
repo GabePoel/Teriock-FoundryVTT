@@ -307,15 +307,6 @@ export default function HierarchyDocumentMixin(Base) {
         this.#reloadDependee();
       }
 
-      /** @type {TypeCollection} */
-      _allSups;
-
-      /** @type {ID<AnyCommonDocument>|null} */
-      _cachedSupId;
-
-      /** @type {TypeCollection} */
-      _subs;
-
       /**
        * All the sub descendant of this document or their indexes.
        * @returns {TypeCollection}
@@ -329,8 +320,8 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       get allSups() {
-        if (!this._allSups) { this._allSups = HierarchyDocument.findAllSups(this, this.siblingCollection); }
-        return this._allSups;
+        if (!this._cache.allSups) { this._cache.allSups = HierarchyDocument.findAllSups(this, this.siblingCollection); }
+        return this._cache.allSups;
       }
 
       /**
@@ -373,8 +364,8 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       get subs() {
-        if (!this._subs) { this._subs = HierarchyDocument.findSubs(this, this.siblingCollection); }
-        return this._subs;
+        if (!this._cache.subs) { this._cache.subs = HierarchyDocument.findSubs(this, this.siblingCollection); }
+        return this._cache.subs;
       }
 
       /**
@@ -597,28 +588,28 @@ export default function HierarchyDocumentMixin(Base) {
         super.prepareData();
         // Ony mutate dependents registry if this is actually saved to the database.
         if (this.trackable) {
-          if (this._cachedDep && this._cachedDep !== this.system._dep) {
-            game.teriock?.dependents.untrack(this._cachedDep, this);
+          if (this._cache.dep && this._cache.dep !== this.system._dep) {
+            game.teriock?.dependents.untrack(this._cache.dep, this);
           }
           if (this.system._dep) { game.teriock?.dependents.track(this.system._dep, this); }
-          this._cachedDep = this.system._dep;
+          this._cache.dep = this.system._dep;
         }
         // If this moved to a different sup, the old sup isn't reached by #reloadSups and must be reset directly.
-        if (this._cachedSupId && this._cachedSupId !== this.system._sup) {
-          const previousSup = this.siblingCollection?.get(this._cachedSupId);
+        if (this._cache.supId && this._cache.supId !== this.system._sup) {
+          const previousSup = this.siblingCollection?.get(this._cache.supId);
           if (typeof previousSup?.resetChildMaps === "function") {
             previousSup.resetChildMaps();
             if (previousSup.isViewer) { previousSup.render(); }
           }
         }
-        this._cachedSupId = this.system._sup;
+        this._cache.supId = this.system._sup;
       }
 
       /** @inheritDoc */
       resetChildMaps() {
         super.resetChildMaps();
-        delete this._allSups;
-        delete this._subs;
+        delete this._cache.allSups;
+        delete this._cache.subs;
       }
 
       /** @inheritDoc */

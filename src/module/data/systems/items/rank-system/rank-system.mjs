@@ -126,7 +126,7 @@ export default class RankSystem
   #stageArchetypeCreation() {
     const archetypeConfig = TERIOCK.config.class.archetypes[this._source.archetype];
     if (!archetypeConfig?.dontStage && !this.actor.archetypes.some(a => a.typedIdentifier === this.archetype)) {
-      this.actor._stagedItemCreations.add(this.archetype);
+      this.actor._staged.itemCreations.add(this.archetype);
     }
   }
 
@@ -136,7 +136,7 @@ export default class RankSystem
   #stageArchetypeDeletion() {
     const neededArchetypes = new Set(this.actor.ranks.map(r => r.system.archetype));
     for (const a of this.actor.archetypes) {
-      if (!neededArchetypes.has(a.typedIdentifier)) { this.actor._stagedItemDeletions.add(a.id); }
+      if (!neededArchetypes.has(a.typedIdentifier)) { this.actor._staged.itemDeletions.add(a.id); }
     }
   }
 

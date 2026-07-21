@@ -67,18 +67,6 @@ export default function CommonDocumentMixin(Base) {
         return out;
       }
 
-      /** @type {AnyChildDocument[]} */
-      _childArray;
-
-      /** @type {TypeCollection} */
-      _children;
-
-      /** @type {AnyChildDocument[]} */
-      _visibleChildren;
-
-      /** @type {Record<string, AnyChildDocument[]>} */
-      _visibleChildrenByType;
-
       /** @inheritDoc */
       get _embedActions() {
         return { ...super._embedActions, ...this.system._embedActions };
@@ -103,8 +91,8 @@ export default function CommonDocumentMixin(Base) {
        * @returns {AnyChildDocument[]}
        */
       get childArray() {
-        if (!this._childArray) { this._childArray = this._makeChildArray(); }
-        return this._childArray;
+        if (!this._cache.childArray) { this._cache.childArray = this._makeChildArray(); }
+        return this._cache.childArray;
       }
 
       /**
@@ -112,8 +100,8 @@ export default function CommonDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       get children() {
-        if (!this._children) { this._children = new TypeCollection(this.childArray.map(c => [c._id, c])); }
-        return this._children;
+        if (!this._cache.children) { this._cache.children = new TypeCollection(this.childArray.map(c => [c._id, c])); }
+        return this._cache.children;
       }
 
       /** @inheritDoc */
@@ -134,8 +122,8 @@ export default function CommonDocumentMixin(Base) {
        * @returns {AnyChildDocument[]}
        */
       get visibleChildren() {
-        if (!this._visibleChildren) { this._visibleChildren = this._makeVisibleChildrenArray(); }
-        return this._visibleChildren;
+        if (!this._cache.visibleChildren) { this._cache.visibleChildren = this._makeVisibleChildrenArray(); }
+        return this._cache.visibleChildren;
       }
 
       /**
@@ -143,15 +131,15 @@ export default function CommonDocumentMixin(Base) {
        * @returns {Record<Teriock.Documents.ChildType, AnyChildDocument[]>}
        */
       get visibleChildrenByType() {
-        if (!this._visibleChildrenByType) {
+        if (!this._cache.visibleChildrenByType) {
           const typeMap = {};
           for (const c of this.visibleChildren) {
             if (!typeMap[c.type]) { typeMap[c.type] = []; }
             typeMap[c.type].push(c);
           }
-          this._visibleChildrenByType = typeMap;
+          this._cache.visibleChildrenByType = typeMap;
         }
-        return this._visibleChildrenByType;
+        return this._cache.visibleChildrenByType;
       }
 
       /**
@@ -357,10 +345,10 @@ export default function CommonDocumentMixin(Base) {
        * Clear all references to existing visible children so they can be recomputed.
        */
       resetChildMaps() {
-        delete this._childArray;
-        delete this._children;
-        delete this._visibleChildren;
-        delete this._visibleChildrenByType;
+        delete this._cache.childArray;
+        delete this._cache.children;
+        delete this._cache.visibleChildren;
+        delete this._cache.visibleChildrenByType;
       }
 
       /**

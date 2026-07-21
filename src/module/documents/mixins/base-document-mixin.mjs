@@ -146,6 +146,16 @@ export default function BaseDocumentMixin(Base) {
       }
 
       /**
+       * Lazily-initialized store of computed values cached on this document. Cleared (in whole or in part) whenever the
+       * cached data may have gone stale, e.g. in {@link resetChildMaps}. Backed by an undeclared property rather than a
+       * class field so it survives the `prepareData` call Foundry makes during construction, before field initializers.
+       * @returns {Teriock.Documents.DocumentCache}
+       */
+      get _cache() {
+        return (this.__cache ??= {});
+      }
+
+      /**
        * The default identifier for this document.
        * @returns {Identifier}
        */
@@ -283,7 +293,7 @@ export default function BaseDocumentMixin(Base) {
         super._onCreate(data, options, userId);
         // Extra tracking for world documents created during the game.
         game.teriock.identifiers.trackDocument(this);
-        this._cachedIdentifier = this.typedIdentifier;
+        this._cache.identifier = this.typedIdentifier;
       }
 
       /** @inheritDoc */
@@ -351,9 +361,9 @@ export default function BaseDocumentMixin(Base) {
       /** @inheritDoc */
       prepareData() {
         super.prepareData();
-        if (this.trackable) { game.teriock.identifiers.untrack(this._cachedIdentifier, this.uuid); }
+        if (this.trackable) { game.teriock.identifiers.untrack(this._cache.identifier, this.uuid); }
         if (this.persisted) { game.teriock.identifiers.trackDocument(this); }
-        this._cachedIdentifier = this.typedIdentifier;
+        this._cache.identifier = this.typedIdentifier;
       }
 
       /** @inheritDoc */

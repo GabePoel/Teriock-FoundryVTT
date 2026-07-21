@@ -64,17 +64,13 @@ export default class TeriockActor
     return foundry.utils.deepClone(config.character.sizes.find(d => d.max === minCategoryMaxSize));
   }
 
-  /** @type {AnyActiveEffect[]} */
-  _modifiableChildren;
-
-  /** @type {Set<UUID<TeriockItem>|TypedIdentifier>} */
-  _stagedItemCreations = new Set();
-
-  /** @type {Set<ID<TeriockItem>>} */
-  _stagedItemDeletions = new Set();
-
-  /** @type {AnyActiveEffect[]} */
-  _validEffects;
+  /**
+   * Store of pending item operations staged for the next database write.
+   * @returns {{itemCreations: Set<UUID<TeriockItem>|TypedIdentifier>, itemDeletions: Set<ID<TeriockItem>>}}
+   */
+  get _staged() {
+    return (this.__staged ??= { itemCreations: new Set(), itemDeletions: new Set() });
+  }
 
   /**
    * Is this actor active?
@@ -143,10 +139,10 @@ export default class TeriockActor
    * @returns {AnyActiveEffect[]}
    */
   get modifiableChildren() {
-    if (!this._modifiableChildren) {
-      this._modifiableChildren = [...this.validEffects, ...this.items.contents].filter(c => !c.isReference);
+    if (!this._cache.modifiableChildren) {
+      this._cache.modifiableChildren = [...this.validEffects, ...this.items.contents].filter(c => !c.isReference);
     }
-    return this._modifiableChildren;
+    return this._cache.modifiableChildren;
   }
 
   /**
@@ -154,8 +150,8 @@ export default class TeriockActor
    * @returns {AnyActiveEffect[]}
    */
   get validEffects() {
-    if (!this._validEffects) { this._validEffects = Array.from(this.allApplicableEffects()); }
-    return this._validEffects;
+    if (!this._cache.validEffects) { this._cache.validEffects = Array.from(this.allApplicableEffects()); }
+    return this._cache.validEffects;
   }
 
   /**
@@ -235,8 +231,8 @@ export default class TeriockActor
    * @returns {Promise<Partial<DatabaseCreateOperation>|null>}
    */
   async _getStagedCreateOperation() {
-    if (!this._stagedItemCreations || !this._stagedItemCreations.size) { return null; }
-    const items = await Promise.all(this._stagedItemCreations.map(uuid => fromKey(uuid)));
+    if (!this._staged.itemCreations.size) { return null; }
+    const items = await Promise.all(this._staged.itemCreations.map(uuid => fromKey(uuid)));
     const data = items.map(i => game.items.fromCompendium(i, { clearSort: true, keepId: true }));
     return { action: "create", data, documentName: "Item", pack: this.pack, parent: this };
   }
@@ -246,8 +242,8 @@ export default class TeriockActor
    * @returns {Promise<Partial<DatabaseDeleteOperation>|null>}
    */
   async _getStagedDeleteOperation() {
-    if (!this._stagedItemDeletions || !this._stagedItemDeletions.size) { return null; }
-    const ids = Array.from(this._stagedItemDeletions);
+    if (!this._staged.itemDeletions.size) { return null; }
+    const ids = Array.from(this._staged.itemDeletions);
     return { action: "delete", documentName: "Item", ids, pack: this.pack, parent: this };
   }
 
@@ -273,8 +269,8 @@ export default class TeriockActor
    * Clear and initialize all staged operations.
    */
   _resetStagedOperations() {
-    this._stagedItemCreations = new Set();
-    this._stagedItemDeletions = new Set();
+    this._staged.itemCreations.clear();
+    this._staged.itemDeletions.clear();
   }
 
   /** @inheritDoc */
@@ -347,8 +343,8 @@ export default class TeriockActor
   /** @inheritDoc */
   resetChildMaps() {
     super.resetChildMaps();
-    delete this._validEffects;
-    delete this._modifiableChildren;
+    delete this._cache.validEffects;
+    delete this._cache.modifiableChildren;
   }
 
   /**
