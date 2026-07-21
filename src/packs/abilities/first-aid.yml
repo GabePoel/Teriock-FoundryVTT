@@ -41,10 +41,16 @@ system:
     - martial
   range:
     unit: contact
-  requirements: <p>Target is @Identifier[condition:unconscious]{unconscious}.</p>
+  requirements: >-
+    <p>@Identifier[core:targets]{Target} is
+    @Identifier[condition:unconscious]{unconscious}.</p>
   results:
-    fail: <p>Target remains @Identifier[condition:unconscious]{unconscious}.</p>
-    save: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
+    fail: >-
+      <p>@Identifier[core:targets]{Target} remains
+      @Identifier[condition:unconscious]{unconscious}.</p>
+    save: >-
+      <p>@Identifier[core:targets]{Target} is
+      @Identifier[keyword:awaken]{awakened}.</p>
   targets:
     - creature
 transfer: true

@@ -576,7 +576,9 @@ effects:
       interaction: attack
       maneuver: active
       overview:
-        base: <p>Target is @Identifier[condition:burned]{burned}.</p>
+        base: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:burned]{burned}.</p>
       piercing:
         raw: 0
       powerSources:
@@ -652,7 +654,9 @@ effects:
         unit: contact
       targets:
         - item
-      trigger: <p>An item within range is falling or flying by.</p>
+      trigger: >-
+        <p>An item within @Identifier[core:range]{range} is falling or flying
+        by.</p>
     transfer: true
     type: ability
   - _id: FGLipV3PVHtAIM3u
@@ -1006,10 +1010,16 @@ effects:
         - martial
       range:
         unit: contact
-      requirements: <p>Target is @Identifier[condition:unconscious]{unconscious}.</p>
+      requirements: >-
+        <p>@Identifier[core:targets]{Target} is
+        @Identifier[condition:unconscious]{unconscious}.</p>
       results:
-        fail: <p>Target remains @Identifier[condition:unconscious]{unconscious}.</p>
-        save: <p>Target is @Identifier[keyword:awaken]{awakened}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Target} remains
+          @Identifier[condition:unconscious]{unconscious}.</p>
+        save: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[keyword:awaken]{awakened}.</p>
       targets:
         - creature
     transfer: true
@@ -1153,13 +1163,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p class="note"><b>Note:</b> There are many
-          @Pack[teriock.abilities]{Abilities}, @Pack[teriock.properties]{Item
-          Properties}, and other effects that alter the amount or type of damage
-          your
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-          may deal. These typically apply to this and other
-          @Identifier[core:attack-interaction]{attack abilities}.</p>
+          <p>This cannot reduce the @Identifier[core:targets]{target's}
+          @Identifier[core:hit-points-and-mana-points]{HP} to below 0.</p>
       piercing:
         raw: 0
       powerSources:

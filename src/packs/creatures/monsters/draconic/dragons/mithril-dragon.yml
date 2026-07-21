@@ -498,10 +498,13 @@ items:
             raw: '30'
             unit: ft
           results:
-            fail: <p>Target is @Identifier[condition:immobilized]{immobilized}.</p>
+            fail: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:immobilized]{immobilized}.</p>
             save: >-
-              <p>Target is @Identifier[condition:slowed]{slowed} and takes half
-              as much @Identifier[core:damage]{damage} from this as they would
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[condition:slowed]{slowed} and takes half as much
+              @Identifier[core:damage]{damage} from this as they would
               otherwise. This is calculated after any
               @Identifier[keyword:boosted]{boosts} or
               @Identifier[keyword:deboosted]{deboosts}.</p>
@@ -1935,7 +1938,9 @@ items:
           interaction: manifest
           maneuver: active
           overview:
-            base: <p>Target is @Identifier[property:shattered]{shattered}.</p>
+            base: >-
+              <p>@Identifier[core:targets]{Target} is
+              @Identifier[property:shattered]{shattered}.</p>
           powerSources:
             - martial
           range:
@@ -3096,7 +3101,7 @@ items:
           targets:
             - creature
           trigger: >-
-            <p>A creature within range would be
+            <p>A creature within @Identifier[core:range]{range} would be
             @Identifier[condition:down]{dropped}.</p>
         transfer: true
         type: ability
@@ -3648,9 +3653,9 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>Pick another creature within range. They are
-              @Identifier[condition:goaded]{goaded} until the start of your next
-              @Identifier[core:turns]{turn}.</p>
+              <p>Pick another creature within @Identifier[core:range]{range}.
+              They are @Identifier[condition:goaded]{goaded} until the start of
+              your next @Identifier[core:turns]{turn}.</p>
           powerSources:
             - martial
           range:

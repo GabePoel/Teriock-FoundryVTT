@@ -290,9 +290,21 @@ pages:
         @Pack[teriock.abilities]{ability's} target will just say
         "<b>other</b>".</p><h2>Range</h2><p>Each
         @Pack[teriock.abilities]{ability} has some <b>range</b> over which it
-        can be used. These depend on the @Wiki[Category:Delivery
-        abilities]{delivery} and @Wiki[Category:Target
-        abilities]{target}.</p><h2>Delivery</h2><p>Every
+        can be used. If it is a @Wiki[Category:Missile delivery
+        abilities]{missile}, @Wiki[Category:Sight delivery abilities]{sight}, or
+        @Wiki[Category:Area of effect abilities]{area of effect ability}, then
+        the range is specified by the @Wiki[Category:Ranged abilities]{ability}
+        itself. For @Wiki[Category:Item delivery abilities]{item delivery
+        abilities}, the range is determined by the
+        @Wiki[Category:Armaments]{item} that is being used. If the
+        @Wiki[Category:Armaments]{item} is melee, then it's the
+        @Wiki[Category:Armaments]{item's} range plus your
+        @Identifier[core:size]{reach}. This includes @Wiki[Category:Hand
+        delivery abilities]{hand} and @Wiki[Category:Bite delivery
+        abilities]{bite delivery abilities}. If it's
+        @Identifier[property:ranged]{ranged}, then it's just the
+        @Identifier[property:ranged]{range} of the
+        @Identifier[property:ranged]{item}.</p><h2>Delivery</h2><p>Every
         @Pack[teriock.abilities]{ability} has one and <i>only
         one</i><b>delivery</b>. This always has at least two parts, a <a
         href="#Source">source</a> and <a
@@ -757,7 +769,7 @@ pages:
         @Identifier[condition:encumbered]{encumbered} is shown in the table
         below.</p><table class="wikitable"><caption>Lightly Encumbered Carrying
         Capacity
-        </caption><tbody><tr><th>@Identifier[core:size]{size}</th><th>@Identifier[core:strength]{STR}
+        </caption><tbody><tr><th>@Identifier[core:size]{Size}</th><th>@Identifier[core:strength]{STR}
         = -3</th><th>@Identifier[core:strength]{STR} =
         -2</th><th>@Identifier[core:strength]{STR} =
         -1</th><th>@Identifier[core:strength]{STR} =
@@ -971,9 +983,9 @@ pages:
         Perception}</li></ul></td></tr></tbody></table><h2>Attributes and Feat
         Saves</h2><p>@Identifier[core:feat-interaction]{Feat saves} always have
         an attribute associated with them. You add the value of that attribute
-        when making the [[/roll d20]] roll for that Save. In addition, some
+        when making the [[/roll d20]] roll for that save. In addition, some
         abilities grant @Identifier[core:proficiency-bonus]{proficiency} or
-        @Identifier[core:fluency-bonus]{fluency} to the Save as well.</p><table
+        @Identifier[core:fluency-bonus]{fluency} to the save as well.</p><table
         class="wikitable"><tbody><tr><th></th><th>INT</th><th>STR</th><th>MOV</th><th>SNK</th><th>PER
         </th></tr><tr><td>@Identifier[core:proficiency-bonus]{Proficiency}</td><td><ul><li>@Identifier[ability:flame-disciplines]{Flame
         Disciplines}</li><li>@Identifier[ability:life-disciplines]{Life
@@ -1034,7 +1046,7 @@ pages:
         @Identifier[condition:encumbered]{encumbered} is shown in the table
         below.</p><table class="wikitable"><caption>Lightly Encumbered Carrying
         Capacity
-        </caption><tbody><tr><th>@Identifier[core:size]{size}</th><th>@Identifier[core:strength]{STR}
+        </caption><tbody><tr><th>@Identifier[core:size]{Size}</th><th>@Identifier[core:strength]{STR}
         = -3</th><th>@Identifier[core:strength]{STR} =
         -2</th><th>@Identifier[core:strength]{STR} =
         -1</th><th>@Identifier[core:strength]{STR} =
@@ -2083,11 +2095,17 @@ pages:
     text:
       content: >-
         <p>An <b>effect</b> is a catch-all term for "something that does
-        something". Some types of effects merely describe an aspect of an
-        @Pack[teriock.abilities]{ability} with no additional rules. Others (like
-        @Wiki[Category:Knockout effects]{knockout effects} or
-        @Wiki[Category:Transformation effects]{transformation effects}) have
-        rules for how they operate built into the effect itself.</p>
+        something". There are various @Wiki[Category:Effects]{types of effects}
+        which should essentially be treated as "tags" attached to effects. The
+        @Wiki[Category:Effects]{effect types} are not governed by additional
+        rules in-and-of themselves except that there are many aspects of the
+        game which interact with certain @Wiki[Category:Effects]{effect types}.
+        However some @Wiki[Category:Effects]{types of effects}, such as
+        @Wiki[Category:Transformation effects]{transformation effects} or
+        @Wiki[Category:Resistance effects]{resistance effects}, typically share
+        common
+        @UUID[Compendium.teriock.rules.JournalEntry.keyword000000000]{keywords}
+        or other rules text.</p>
       format: 1
     title:
       level: 1
@@ -4206,15 +4224,15 @@ pages:
         presence for another purpose. Whenever <b>PRES</b> is written, it refers
         to a character's <i>total</i> presence tier. <b>UNP</b> is a character's
         <i>unused</i> presence.</p><p class="note"><b>Note:</b> This is just a
-        generalization of Item Tiers from Roekron. Any item with an Item tier
+        generalization of item tiers from Roekron. Any item with an item tier
         (even one where the tier isn't listed) is one that requires
-        Presence.</p><p>When a creature @Identifier[condition:dead]{dies} and is
+        presence.</p><p>When a creature @Identifier[condition:dead]{dies} and is
         @Wiki[Category:Revival effects]{revived}, they release control over
         anything that is no longer on their person, freeing up the corresponding
         presence in the process. This includes
         @Pack[teriock.equipment]{equipment} that is no longer equipped, mounts
         that no longer with them, and so on.</p><p>The levels at which
-        characters gain Presence are shown highlighted in the table
+        characters gain presence are shown highlighted in the table
         below.</p><table class="wikitable"><caption>Bonuses By Level
         </caption><tbody><tr><th>Rank </th><th>Level
         </th><th>@Identifier[archetype:warrior]{Warrior}
@@ -4541,8 +4559,21 @@ pages:
     text:
       content: >-
         <p>Each @Pack[teriock.abilities]{ability} has some <b>range</b> over
-        which it can be used. These depend on the @Wiki[Category:Delivery
-        abilities]{delivery} and @Wiki[Category:Target abilities]{target}.</p>
+        which it can be used. If it is a @Wiki[Category:Missile delivery
+        abilities]{missile}, @Wiki[Category:Sight delivery abilities]{sight}, or
+        @Wiki[Category:Area of effect abilities]{area of effect ability}, then
+        the range is specified by the @Wiki[Category:Ranged abilities]{ability}
+        itself. For @Wiki[Category:Item delivery abilities]{item delivery
+        abilities}, the range is determined by the
+        @Wiki[Category:Armaments]{item} that is being used. If the
+        @Wiki[Category:Armaments]{item} is melee, then it's the
+        @Wiki[Category:Armaments]{item's} range plus your
+        @Identifier[core:size]{reach}. This includes @Wiki[Category:Hand
+        delivery abilities]{hand} and @Wiki[Category:Bite delivery
+        abilities]{bite delivery abilities}. If it's
+        @Identifier[property:ranged]{ranged}, then it's just the
+        @Identifier[property:ranged]{range} of the
+        @Identifier[property:ranged]{item}.</p>
       format: 1
     title:
       level: 1
@@ -5110,7 +5141,7 @@ pages:
         @Identifier[condition:encumbered]{encumbered} is shown in the table
         below.</p><table class="wikitable"><caption>Lightly Encumbered Carrying
         Capacity
-        </caption><tbody><tr><th>@Identifier[core:size]{size}</th><th>STR =
+        </caption><tbody><tr><th>@Identifier[core:size]{Size}</th><th>STR =
         -3</th><th>STR = -2</th><th>STR = -1</th><th>STR = 0</th><th>STR =
         1</th><th>STR = 2</th><th>STR = 3</th><th>STR = 4</th><th>STR = 5
         </th></tr><tr><td>1</td><td>5 lb.</td><td>25 lb.</td><td>45

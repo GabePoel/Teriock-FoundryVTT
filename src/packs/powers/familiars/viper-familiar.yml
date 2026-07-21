@@ -50,7 +50,8 @@ effects:
           <p>You aim with deadly precision, causing the next
           @Identifier[core:attack-interaction]{attack} you make with an item to
           be @Identifier[keyword:boosted]{boosted}. This
-          @Identifier[core:attack-interaction]{attack} must hit the target's
+          @Identifier[core:attack-interaction]{attack} must hit the
+          @Identifier[core:targets]{target's}
           @Identifier[core:vitals-target]{vitals}
           (@Identifier[core:armor-class]{AC} + 3) or the
           @Identifier[core:attack-interaction]{attack} does nothing. Only the
@@ -112,7 +113,9 @@ effects:
       duration:
         raw: '24'
         unit: hour
-      endCondition: <p>Target @Identifier[condition:dead]{dies}.</p>
+      endCondition: >-
+        <p>@Identifier[core:targets]{Target}
+        @Identifier[condition:dead]{dies}.</p>
       executionTime:
         base: a1
       form: normal
@@ -121,7 +124,7 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Target makes a creature become
+          <p>@Identifier[core:targets]{Target} makes a creature become
           @Identifier[condition:poisoned]{poisoned}. The
           @Identifier[condition:poisoned]{poison} deals [[/damage 1d6[toxic]]]
           @Identifier[core:damage]{damage}. The way the item delivers this to
@@ -139,7 +142,7 @@ effects:
         - alchemical
       range:
         unit: contact
-      requirements: <p>Target is not a weapon.</p>
+      requirements: <p>@Identifier[core:targets]{Target} is not a weapon.</p>
       skill: true
       standard: true
       targets:

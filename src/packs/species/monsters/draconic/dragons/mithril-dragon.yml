@@ -403,12 +403,14 @@ effects:
         raw: '30'
         unit: ft
       results:
-        fail: <p>Target is @Identifier[condition:immobilized]{immobilized}.</p>
+        fail: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:immobilized]{immobilized}.</p>
         save: >-
-          <p>Target is @Identifier[condition:slowed]{slowed} and takes half as
-          much @Identifier[core:damage]{damage} from this as they would
-          otherwise. This is calculated after any
-          @Identifier[keyword:boosted]{boosts} or
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[condition:slowed]{slowed} and takes half as much
+          @Identifier[core:damage]{damage} from this as they would otherwise.
+          This is calculated after any @Identifier[keyword:boosted]{boosts} or
           @Identifier[keyword:deboosted]{deboosts}.</p>
       targets:
         - creature
@@ -1615,7 +1617,9 @@ effects:
       interaction: manifest
       maneuver: active
       overview:
-        base: <p>Target is @Identifier[property:shattered]{shattered}.</p>
+        base: >-
+          <p>@Identifier[core:targets]{Target} is
+          @Identifier[property:shattered]{shattered}.</p>
       powerSources:
         - martial
       range:
