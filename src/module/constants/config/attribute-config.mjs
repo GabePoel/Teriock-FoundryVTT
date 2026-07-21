@@ -18,12 +18,14 @@ export default {
     abbreviation: "TERIOCK.TERMS.Attributes.per.abbreviation",
     icon: icons.attribute.per,
     identifier: "core:perception",
+    impact: "perceive",
     label: "TERIOCK.TERMS.Attributes.per.label",
   },
   snk: {
     abbreviation: "TERIOCK.TERMS.Attributes.snk.abbreviation",
     icon: icons.attribute.snk,
     identifier: "core:sneak",
+    impact: "hide",
     label: "TERIOCK.TERMS.Attributes.snk.label",
   },
   str: {

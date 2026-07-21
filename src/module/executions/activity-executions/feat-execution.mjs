@@ -66,8 +66,7 @@ export default class FeatExecution extends executionMixins.ThresholdExecutionMix
 
   /** @inheritDoc */
   async _buildActivations() {
-    const impactByAttribute = { per: "perceive", snk: "hide" };
-    const impact = impactByAttribute[this.attribute];
+    const impact = TERIOCK.config.attribute[this.attribute]?.impact;
     const amount = this.rolls[0]?.total;
     if (impact && Number.isFinite(amount)) {
       this.activations.push(new teriock.data.pseudoDocuments.activations.TakeActivation({ amount, impact }));
