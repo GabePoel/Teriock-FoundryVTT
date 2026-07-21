@@ -28,8 +28,6 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * @return {AnyChildDocument|null}
    */
   fetchFromUuid(ref, uuid) {
-    if (!this.initialized) { return null; }
-
     // Special handling for documents that share a parent with the reference document. We only need two levels for
     // active effects embedded within items.
     const parent = ref.parent || ref.actor;
@@ -48,6 +46,7 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
       const [, embeddedName, id] = uuid.replace(ref.parent.uuid, "").split(".");
       return ref.parent.getEmbeddedDocument(embeddedName, id);
     }
+    if (!this.initialized) { return null; }
     return foundry.utils.fromUuidSync(uuid, { strict: false });
   }
 
@@ -57,8 +56,10 @@ export default class DependentsRegistry extends BaseRegistryLifecycle {
    * @returns {AnyChildDocument[]}
    */
   get(doc) {
-    if (!this.initialized) { return []; }
-    doc = doc instanceof Document ? doc : foundry.utils.fromUuidSync(doc);
+    if (!(doc instanceof Document)) {
+      if (!this.initialized) { return []; }
+      doc = foundry.utils.fromUuidSync(doc);
+    }
     const uuids = this.#dependents.get(doc?.uuid);
     if (!uuids) { return []; }
     const dependents = [];

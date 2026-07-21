@@ -104,10 +104,16 @@ export default class TeriockManager {
   }
 
   /**
-   * Initialize registries.
+   * Initialize the dependents registry.
    */
-  initializeRegistries() {
+  initializeDependents() {
     this.#registries.dependents._initialize();
+  }
+
+  /**
+   * Initialize the identifiers registry.
+   */
+  initializeIdentifiers() {
     this.#registries.identifiers._initialize();
     this.#registries.identifiers.initializing.then(async () => {
       this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities")).abilities;

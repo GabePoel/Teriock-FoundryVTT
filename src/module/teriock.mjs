@@ -466,6 +466,7 @@ foundry.helpers.Hooks.once("init", function() {
 
 foundry.helpers.Hooks.once("setup", function() {
   for (const pack of game.packs) { pack.applicationClass = applications.sidebar.apps.TeriockCompendium; }
+  game.teriock.initializeDependents();
 });
 
 // Perform one-time pre-localization and sorting of some configuration objects
@@ -508,9 +509,7 @@ Hooks.once("i18nInit", () => {
 // ===========
 
 Hooks.once("ready", () => {
-  // Initialize Registries
-  // ---------------------
-  game.teriock.initializeRegistries();
+  game.teriock.initializeIdentifiers();
 });
 
 // Register Hook Listeners and Handlebars Helpers
