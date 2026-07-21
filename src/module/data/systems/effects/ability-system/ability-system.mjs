@@ -95,6 +95,7 @@ export default class AbilitySystem
       ...super._automationTypes,
       automations.AbilityMacroAutomation,
       automations.AddDocumentsAutomation,
+      automations.AttackAutomation,
       automations.AttunementAutomation,
       automations.ChangeCompetenceAutomation,
       automations.ChangeMovementAutomation,

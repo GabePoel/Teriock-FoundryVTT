@@ -15,7 +15,7 @@ import {
  * @mixes AbilityExecutionChat
  * @mixes AbilityExecutionGetInput
  * @mixes AbilityExecutionRolls
- * @mixes ThresholdExecution
+ * @mixes AttackExecution
  */
 export default class AbilityExecution
   extends mixClasses(
@@ -38,43 +38,22 @@ export default class AbilityExecution
 
   /** @inheritDoc */
   async _improveFormula() {
-    if (this.isAttack) {
-      if (this.piercing.av0) { this.formula = addFormula(this.formula, "@av0"); }
-      if (this.sb) { this.formula = addFormula(this.formula, "@sb"); }
-    }
-    if (this.competenceImprovesFormula) {
-      if (this.heightened > 0) { this.formula = addFormula(this.formula, "@h"); }
+    if (this.competenceImprovesFormula && this.heightened > 0) {
+      this.formula = addFormula(this.formula, "@h");
     }
     await super._improveFormula();
   }
 
   /** @inheritDoc */
   async _prepareBaseFormula() {
-    if (this.isAttack) {
-      await super._prepareBaseFormula();
-      this.formula = addFormula(this.formula, "@ap");
-    } else if (this.isFeat) { this.formula = "10"; }
+    if (this.isAttack) { return super._prepareBaseFormula(); }
+    if (this.isFeat) { this.formula = "10"; }
     else if (this.isBlock) { this.formula = "10 + @av + @bv"; }
   }
 
   /** @inheritDoc */
   getRollData() {
-    return Object.assign(super.getRollData(), {
-      0: Number(this.piercing.av0) * 2,
-      "av0.wep": Number(this.armament?.system.piercing.av0) * 2,
-      bv: this.bv ?? 0,
-      c: this.competence.fluent
-        ? this.actor?.system.scaling.f
-        : (this.competence.proficient ? this.actor?.system.scaling.p : 0),
-      h: this.heightened,
-      hit: this.armament?.system.hitBonus ?? 0,
-      "hit.wep": this.armament?.system.hitBonus ?? 0,
-      sb: this.sb ? this.actor?.system.scaling.p ?? 0 : 0,
-      ub: Number(this.piercing.ub),
-      "ub.wep": Number(this.armament?.system.piercing.ub),
-      warded: Number(this.warded),
-      "warded.wep": Number(this.armament?.system.warded),
-    });
+    return Object.assign(super.getRollData(), { bv: this.bv ?? 0, h: this.heightened });
   }
 
   /** @inheritDoc */

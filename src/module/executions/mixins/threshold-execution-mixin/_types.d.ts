@@ -1,6 +1,9 @@
 declare global {
   namespace Teriock.Execution {
-    export type ThresholdExecutionOptions = Teriock.Execution.ExecutionOptions & { threshold?: number };
+    export type ThresholdExecutionOptions = Teriock.Execution.ExecutionOptions & {
+      bonus?: Teriock.System.FormulaString;
+      threshold?: number;
+    };
 
     export type ExecutionDialogButton = {
       action?: string;

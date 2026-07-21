@@ -32,7 +32,7 @@ function addCardContextMenuEntriesToHeader(application, controls) {
 
 /**
  * Adds a right-click option to the close button in all applications.
- * @param {ApplicationV2|DocumentSheetV2} application
+ * @param {ApplicationV2|DocumentSheetV2|ExecutionEditor} application
  * @see {renderApplicationV2}
  */
 function addDeveloperModeLoggingListener(application) {
@@ -44,6 +44,9 @@ function addDeveloperModeLoggingListener(application) {
       e.stopImmediatePropagation();
       console.warn("Debug Application:");
       console.log("Application", application);
+      if (application.execution) {
+        console.log("Execution", application.execution);
+      }
       if (application.document) {
         console.log("Document", application.document);
         if (typeof application.document.getRollData === "function") {

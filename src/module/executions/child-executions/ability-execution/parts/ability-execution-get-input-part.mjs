@@ -14,44 +14,34 @@ export default function AbilityExecutionGetInputPart(Base) {
       /** @inheritDoc */
       get _dialogDocuments() {
         const docs = super._dialogDocuments;
-        if (this.isContact) {
+        if (this.isContact && this.armament?.system.ammunition?.enabled) {
           docs.push({
-            document: this.armament,
+            document: this.ammunition,
             editable: true,
-            label: _loc("TYPES.Item.armament"),
-            getChoices: () => this.actor?.armaments.filter(a => a.active) ?? [],
-            update: armament => this._updateArmament(armament),
+            label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
+            getChoices: () => this.actor?.equipment.filter(e => e.system.consumable) ?? [],
+            update: ammunition => this.ammunition = ammunition,
           });
-          if (this.armament?.system.ammunition?.enabled) {
-            docs.push({
-              document: this.ammunition,
-              editable: true,
-              label: _loc("TERIOCK.TERMS.EquipmentClasses.ammunition"),
-              getChoices: () => this.actor?.equipment.filter(e => e.system.consumable) ?? [],
-              update: ammunition => this.ammunition = ammunition,
-            });
-          }
         }
         return docs;
       }
 
       /** @inheritDoc */
-      get _formPaths() {
-        const paths = ["competence.raw"];
-        if (this.isAttack) {
-          paths.push("piercing.raw", "existingAttackPenalty");
-          if (this.actor) { paths.push("incurredAttackPenalty"); }
-        }
-        if (this.isBlock) { paths.push("bv"); }
-        paths.push(...super._formPaths.filter(p => p !== "competence.raw"));
-        if (this.isAttack) { paths.push("sb", "vitals"); }
-        paths.push("warded");
+      get _postAttackFormPaths() {
+        const paths = super._postAttackFormPaths;
         if (this.source.system.maneuver === "reactive") { paths.push("usesReaction"); }
         paths.push("autoPayCosts");
         if (this.isContact) {
           if (this.armament?.system.consumable) { paths.push("consumeEquipment"); }
           if (this.armament?.system.ammunition?.enabled && this.ammunition) { paths.push("consumeAmmunition"); }
         }
+        return paths;
+      }
+
+      /** @inheritDoc */
+      get _preAttackFormPaths() {
+        const paths = super._preAttackFormPaths;
+        if (this.isBlock) { paths.push("bv"); }
         return paths;
       }
 
@@ -81,21 +71,11 @@ export default function AbilityExecutionGetInputPart(Base) {
         return this._getCostInput();
       }
 
-      /**
-       * Determine targets and place templates.
-       * @return {Promise<void>}
-       */
+      /** @inheritDoc */
       async _getTargets() {
         if (this.source.system.targets.size === 1 && this.source.system.targets.has("self") && this.executor) {
           this.targets.add(this.executor);
-        } else { for (const target of game.user.targets) { this.targets.add(target); } }
-      }
-
-      /** @inheritDoc */
-      async _postInput() {
-        const out = await super._postInput();
-        await this._getTargets();
-        return out;
+        } else { await super._getTargets(); }
       }
     }
   );

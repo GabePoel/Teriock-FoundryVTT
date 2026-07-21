@@ -1,7 +1,5 @@
 import impactConfig from "../../../../constants/config/impact-config.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
-import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { formulaExists } from "../../../../helpers/formula.mjs";
 
 /**
  * @param {typeof AbilityExecutionConstructor} Base
@@ -19,16 +17,6 @@ export default function AbilityExecutionActorUpdatePart(Base) {
        */
       get #paidCosts() {
         return Object.keys(statConfig).filter(c => this.costs[c] > 0 && !this.options[`no${c.titleCase()}`]);
-      }
-
-      /**
-       * Prepare attack penalty.
-       * @returns {Promise<void>}
-       */
-      async #prepareAttackPenalty() {
-        if (this.isAttack && formulaExists(this.incurredAttackPenalty)) {
-          this.attackPenalty = await BaseRoll.getValue(this.incurredAttackPenalty, this.getRollData());
-        } else { this.attackPenalty = 0; }
       }
 
       /**
@@ -80,13 +68,8 @@ export default function AbilityExecutionActorUpdatePart(Base) {
 
       /** @inheritDoc */
       async _prepareUpdates() {
-        await this.#prepareAttackPenalty();
         this.#prepareConsumption();
         if (this.actor) {
-          if (this.isAttack) {
-            this.actorUpdates["system.combat.attackPenalty"] = this.actor.system.combat.attackPenalty
-              + this.attackPenalty;
-          }
           if (this.usesReaction) { this.actorUpdates["system.combat.hasReaction"] = false; }
           for (const c of this.#paidCosts) {
             const config = statConfig[c];

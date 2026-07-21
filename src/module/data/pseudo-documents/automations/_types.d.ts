@@ -1,6 +1,7 @@
 import {
   AbilityMacroAutomation,
   AddDocumentsAutomation,
+  AttackAutomation,
   AttunementAutomation,
   ChangeCompetenceAutomation,
   ChangeMovementAutomation,
@@ -40,6 +41,7 @@ declare global {
     export interface TypeMap {
       abilityMacro: AbilityMacroAutomation;
       addDocuments: AddDocumentsAutomation;
+      attack: AttackAutomation;
       attunement: AttunementAutomation;
       changeCompetence: ChangeCompetenceAutomation;
       changeMovement: ChangeMovementAutomation;

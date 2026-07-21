@@ -1,6 +1,7 @@
 export { default as AbilityMacroAutomation } from "./ability-macro-automation.mjs";
 export * as abstract from "./abstract/_module.mjs";
 export { default as AddDocumentsAutomation } from "./add-documents-automation.mjs";
+export { default as AttackAutomation } from "./attack-automation.mjs";
 export { default as AttunementAutomation } from "./attunement-automation.mjs";
 export { default as ChangeCompetenceAutomation } from "./change-competence-automation.mjs";
 export { default as ChangeMovementAutomation } from "./change-movement-automation.mjs";

@@ -418,12 +418,6 @@ export default function AbilityExecutionChatPart(Base) {
       /** @inheritDoc */
       async _buildTags() {
         await super._buildTags();
-        if (this.source.system.interaction === "attack") {
-          if (this.piercing.av0) { this.tags.push(this.piercing.label); }
-          if (this.sb) { this.tags.push(_loc("TERIOCK.SHEETS.Actor.SIDEBAR.BattleBox.sb.label")); }
-        }
-        if (this.warded) { this.tags.push(_loc("TERIOCK.SYSTEMS.Attack.FIELDS.warded.label")); }
-        if (this.vitals) { this.tags.push(_loc("TERIOCK.TERMS.Targets.vitals")); }
         if (this.heightened > 0) {
           if (this.heightened === 1) { this.tags.push(_loc("TERIOCK.SYSTEMS.Applicable.PANELS.heightenedSingle")); }
           else { this.tags.push(

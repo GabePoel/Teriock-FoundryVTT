@@ -1,5 +1,6 @@
 import { config } from "../../../../../../constants/_module.mjs";
 import systemConfig from "../../../../../../constants/config/system-config.mjs";
+import { BaseRoll, ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
 import { FormulaField, LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
@@ -148,6 +149,27 @@ export default function ActorCombatPart(Base) {
         this.defense.ac += this.defense.av.value;
         this.defense.bv = this.wielding.blocker?.system.bv.value || 0;
         this.defense.cc = this.defense.ac + this.defense.bv;
+      }
+
+      /**
+       * Rolls an attack.
+       *
+       * Relevant wiki pages:
+       * - [Attack Interaction](https://wiki.teriock.com/index.php/Core:Attack_Interaction)
+       *
+       * @param {Partial<Teriock.Execution.AttackExecutionOptions>} [options] - Options for the roll.
+       * @returns {Promise<void>}
+       */
+      async rollAttack(options = {}) {
+        const data = { ...options };
+        // Competence is construction context, not schema data
+        delete data.competence;
+        if (options.event) {
+          data.edge = ThresholdRoll.parseEvent(options.event).edge;
+          Object.assign(options, BaseRoll.parseEvent(options.event));
+        }
+        if (typeof options.armament === "string") { options.armament = await fromUuid(options.armament); }
+        await teriock.executions.activity.AttackRollExecution.create(data, { ...options, actor: this.parent });
       }
     }
   );

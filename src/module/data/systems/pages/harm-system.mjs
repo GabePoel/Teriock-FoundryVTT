@@ -26,6 +26,7 @@ export default class HarmSystem
   static get _automationTypes() {
     return [
       automations.AddDocumentsAutomation,
+      automations.AttackAutomation,
       automations.AttunementAutomation,
       automations.ChangeMovementAutomation,
       automations.ChatMacroAutomation,

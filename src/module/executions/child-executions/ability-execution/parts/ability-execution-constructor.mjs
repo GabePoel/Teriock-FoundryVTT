@@ -1,8 +1,6 @@
-import { FormulaField } from "../../../../data/fields/_module.mjs";
-import { PiercingModel } from "../../../../data/models/_module.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../../helpers/formula.mjs";
-import { objectMap } from "../../../../helpers/utils.mjs";
+import { objectMap, omit } from "../../../../helpers/utils.mjs";
 import { DocumentExecution } from "../../../abstract/_module.mjs";
 import * as executionMixins from "../../../mixins/_module.mjs";
 
@@ -10,26 +8,20 @@ const { fields } = foundry.data;
 
 /**
  * @extends {DocumentExecution}
- * @mixes ThresholdExecution
+ * @mixes AttackExecution
  * @property {boolean} consumeAmmunition
  * @property {boolean} consumeEquipment
- * @property {number} existingAttackPenalty
- * @property {Teriock.System.FormulaString} incurredAttackPenalty
  * @property {boolean} autoPayCosts
- * @property {PiercingModel} piercing
  * @property {boolean} noHeighten
- * @property {boolean} sb
  * @property {boolean} usesReaction
- * @property {boolean} vitals
- * @property {boolean} warded
  */
-export default class AbilityExecutionConstructor extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
+export default class AbilityExecutionConstructor extends executionMixins.AttackExecutionMixin(DocumentExecution) {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.EXECUTIONS.Ability"];
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
+    return Object.assign(omit(super.defineSchema(), "useArmament"), {
       autoPayCosts: new fields.BooleanField(),
       bv: new fields.NumberField({
         initial: 0,
@@ -39,14 +31,8 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
       }),
       consumeAmmunition: new fields.BooleanField({ initial: true }),
       consumeEquipment: new fields.BooleanField({ initial: false }),
-      existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
-      incurredAttackPenalty: new FormulaField({ deterministic: false, initial: "0" }),
       noHeighten: new fields.BooleanField({ initial: false }),
-      piercing: new fields.EmbeddedDataField(PiercingModel),
-      sb: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label" }),
       usesReaction: new fields.BooleanField(),
-      vitals: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.Armament.FIELDS.vitals.label" }),
-      warded: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.Attack.FIELDS.warded.label" }),
     });
   }
 
@@ -59,128 +45,81 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     const bonusAutomation = this.getAutomations("override", { active: true }).find(a => formulaExists(a.rollBonus));
     if (bonusAutomation) { this.updateSource({ bonus: addFormula(this.bonus, bonusAutomation.rollBonus) }); }
     this.rootBonus = this.bonus;
-    this.armament = options.armament ?? this.#determineDefaultArmament();
     this.initializeExecution(options);
   }
 
   /**
-   * Logic to pick armament based on interaction type.
+   * Find the armament that matches a certain equipment class.
+   * @param {TeriockArmament|null} armament
+   * @param {Teriock.Keys.Delivery} delivery
+   * @param {Teriock.Keys.EquipmentClass} equipmentClass
    * @returns {TeriockArmament|null}
    */
-  #determineDefaultArmament() {
-    if (!this.actor) { return null; }
-    let armament;
-    if (this.source.system.interaction === "attack") { armament = this.actor.system.wielding.attacker; }
-    if (this.source.system.interaction === "block") { armament = this.actor.system.wielding.blocker; }
-    if (
-      this.source.system.delivery === "bite"
-      && !armament?.properties.some((p) => p.active && p.system.identifier === "biting")
-    ) {
-      armament = this.actor.armaments.find((a) =>
-        a.active && a.properties.some(p => p.active && p.system.identifier === "biting")
-      );
-    }
-    const handPropertyIdentifiers = ["handy"];
-    if (this.actor.abilities.some(a => a.active && a.system.identifier === "staff-touch")) {
-      handPropertyIdentifiers.push("magelore");
-    }
-    if (
-      this.source.system.delivery === "hand"
-      && !armament?.properties.some((p) => handPropertyIdentifiers.includes(p.system.identifier))
-    ) {
-      armament = this.actor.armaments.find((a) =>
-        a.active && a.properties.some(p => handPropertyIdentifiers.includes(p.system.identifier))
-      );
-    }
-    if (this.source.system.delivery === "armor" && !armament?.system.equipmentClasses.has("armor")) {
-      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has("armor"));
-    }
-    if (this.source.system.delivery === "shield" && !armament?.system.equipmentClasses.has("shields")) {
-      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has("shields"));
+  _reselectArmamentForEquipmentClass(armament, delivery, equipmentClass) {
+    if (this.source.system.delivery === delivery && !armament?.system.equipmentClasses.has(equipmentClass)) {
+      armament = this.actor.armaments.find((a) => a.active && a.system.equipmentClasses.has(equipmentClass));
     }
     return armament;
   }
 
   /**
-   * Resolves piercing by comparing source, armament, and actor offense.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {Teriock.System.PiercingLevel}
+   * Find the armament that matches certain properties.
+   * @param {TeriockArmament|null} armament
+   * @param {Teriock.Keys.Delivery} delivery
+   * @param {Identifier[]} properties
+   * @returns {TeriockArmament|null}
    */
-  #determinePiercing(options = {}) {
-    let raw = this.source.system.piercing.raw;
-    if (this.armament && this.source.system.isContact) {
-      raw = Math.max(raw, this.armament.system.piercing.raw, this.actor?.system.offense.piercing.raw || 0);
+  _reselectArmamentForProperties(armament, delivery, properties) {
+    if (
+      this.source.system.delivery === delivery
+      && !armament?.properties.some((p) => p.active && properties.includes(p.system.identifier))
+    ) {
+      armament = this.actor.armaments.find((a) =>
+        a.active && a.properties.some(p => p.active && properties.includes(p.system.identifier))
+      );
     }
-    if (options.piercing !== undefined) { raw = options.piercing; }
-    return raw;
-  }
-
-  /**
-   * Determines the formula for attack penalties.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {string}
-   */
-  #resolveAttackPenalty(options = {}) {
-    if (options.attackPenalty !== undefined) { return options.attackPenalty; }
-    if (!this.isAttack) { return "0"; }
-    return this.isContact && this.armament ? this.armament.system.attackPenalty : this.source.system.attackPenalty;
-  }
-
-  /**
-   * Determines if limbs are being targeted.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {boolean}
-   */
-  #resolveLimb(options = {}) {
-    const sys = this.source.system;
-    if (options.limb !== undefined) { return options.limb; }
-    return sys.isContact && (sys.targets.has("arm") || sys.targets.has("leg") || sys.targets.has("limb"));
-  }
-
-  /**
-   * Determines if vitals are being targeted.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {boolean}
-   */
-  #resolveVitals(options = {}) {
-    if (options.vitals !== undefined) { return options.vitals; }
-    const armamentVitals = this.armament?.system.vitals && this.source.system.interaction === "attack";
-    return this.source.system.isContact && armamentVitals ? true : this.source.system.targets.has("vitals");
-  }
-
-  /**
-   * Determines if the execution is warded.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   * @returns {boolean}
-   */
-  #resolveWarded(options = {}) {
-    if (options.warded !== undefined) { return options.warded; }
-    const armamentWarded =
-      (this.armament?.system.warded && ["attack", "block"].includes(this.source.system.interaction))
-      || this.actor?.system?.combat?.offense?.warded;
-    return this.source.system.isContact && armamentWarded ? true : Boolean(this.source.system.warded);
+    return armament;
   }
 
   /** @type {TeriockEquipment|null} */
   ammunition;
 
-  /** @type {TeriockArmament} */
-  armament;
-
-  /** @type {number} */
-  attackPenalty;
-
   /** @type {Record<Teriock.Keys.PrimaryCost, number>} */
   costs;
-
-  /** @type {TeriockToken|null} */
-  executor;
 
   /** @type {number} */
   heightened;
 
-  /** @type {Set<TeriockToken>} */
-  targets;
+  /** @inheritDoc */
+  get _armamentWardedApplies() {
+    return ["attack", "block"].includes(this.source.system.interaction);
+  }
+
+  /** @inheritDoc */
+  get _baseAttackPenalty() {
+    return this.source.system.attackPenalty;
+  }
+
+  /** @inheritDoc */
+  get _baseLimb() {
+    const targets = this.source.system.targets;
+    return targets.has("arm") || targets.has("leg") || targets.has("limb");
+  }
+
+  /** @inheritDoc */
+  get _basePiercing() {
+    return this.source.system.piercing.raw;
+  }
+
+  /** @inheritDoc */
+  get _baseVitals() {
+    return this.source.system.targets.has("vitals");
+  }
+
+  /** @inheritDoc */
+  get _baseWarded() {
+    return Boolean(this.source.system.warded);
+  }
 
   /**
    * Active affinities.
@@ -269,11 +208,6 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     return this.source?.system.interaction === "manifest";
   }
 
-  /** @inheritDoc */
-  get isRoll() {
-    return this.isAttack;
-  }
-
   /**
    * @inheritDoc
    * @returns {TeriockAbility}
@@ -299,6 +233,27 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
   }
 
   /**
+   * Logic to pick armament based on interaction type.
+   * @inheritDoc
+   */
+  _determineDefaultArmament() {
+    if (!this.actor) { return null; }
+    let armament;
+    if (this.source.system.interaction === "attack") { armament = this.actor.system.wielding.attacker; }
+    if (this.source.system.interaction === "block") { armament = this.actor.system.wielding.blocker; }
+    armament = this._reselectArmamentForProperties(armament, "weapon", ["weapon"]);
+    armament = this._reselectArmamentForProperties(armament, "bite", ["biting"]);
+    const handPropertyIdentifiers = ["handy"];
+    if (this.actor?.abilities.some(a => a.active && a.system.identifier === "staff-touch")) {
+      handPropertyIdentifiers.push("magelore");
+    }
+    armament = this._reselectArmamentForProperties(armament, "hand", handPropertyIdentifiers);
+    armament = this._reselectArmamentForEquipmentClass(armament, "armor", "armor");
+    armament = this._reselectArmamentForEquipmentClass(armament, "shield", "shields");
+    return armament;
+  }
+
+  /**
    * Replace `@h` with the heightened amount in strings.
    * @param {string} formula
    * @returns {string}
@@ -307,40 +262,21 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     return BaseRoll.replaceFormulaData(formula, { h: this.heightened });
   }
 
-  /**
-   * Update armament and re-derive dependent execution values.
-   * @param {TeriockArmament|null} armament
-   * @param {Teriock.Execution.AbilityExecutionOptions} [options]
-   */
+  /** @inheritDoc */
   _updateArmament(armament, options = {}) {
-    this.armament = armament;
-    const changes = {
-      bv: this.armament?.system.bv.value,
-      incurredAttackPenalty: this.#resolveAttackPenalty(),
-      "piercing.raw": this.#determinePiercing(options),
-      sb: Boolean(options.sb ?? ((this.armament && this.isContact) ? this.actor?.system.offense.sb : 0)),
-      vitals: this.#resolveVitals(),
-      warded: this.#resolveWarded(),
-    };
-    if (this.isAttack && this.isContact) {
-      changes.bonus = formulaExists(this.rootBonus) && formulaExists(armament?.system.hitBonus)
-        ? addFormula(this.rootBonus, armament.system.hitBonus)
-        : (formulaExists(armament?.system.hitBonus)
-          ? armament.system.hitBonus
-          : (formulaExists(this.rootBonus) ? this.rootBonus : "0"));
-    }
-    if (this.isContact && armament?.system.ammunition?.enabled) {
+    super._updateArmament(armament, options);
+    this.updateSource({ bv: this.armament?.system.bv.value });
+    if (this.isContact && this.armament?.system.ammunition?.enabled) {
       this.ammunition = this.actor?.equipment.find(e =>
-        e.active && e.system.consumable && (e.system.equipmentType === armament.system.ammunition.type)
+        e.active && e.system.consumable && (e.system.equipmentType === this.armament.system.ammunition.type)
       );
       // Fall back to inactive ammunition
       if (!this.ammunition) {
         this.ammunition = this.actor?.equipment.find(e =>
-          e.system.consumable && (e.system.equipmentType === armament.system.ammunition.type)
+          e.system.consumable && (e.system.equipmentType === this.armament.system.ammunition.type)
         );
       }
     }
-    this.updateSource(changes);
   }
 
   /**
@@ -405,32 +341,16 @@ export default class AbilityExecutionConstructor extends executionMixins.Thresho
     return Object.assign(super.getRollData(), {
       "angle.dragon": game.settings.get("teriock", "defaultDragonBreathAngle"),
       "angle.normal": game.settings.get("teriock", "defaultConeAngle"),
-      ap: this.existingAttackPenalty,
     });
   }
 
-  /**
-   * Initialize this execution from a set of options.
-   * @param {Teriock.Execution.AbilityExecutionOptions} options
-   */
+  /** @inheritDoc */
   initializeExecution(options = {}) {
     this.costs = objectMap(TERIOCK.config.stat, () => 0);
-    this._updateArmament(this.armament, options);
-    if (!this.bonus) { this.updateSource({ bonus: "0" }); }
-    this.limb = this.#resolveLimb(options);
-    // Try and find a specific token that this is being executed by
-    /** @type {TeriockToken[]} */
-    const selectedTokens = game.canvas?.tokens.controlled ?? [];
-    for (const t of selectedTokens) { if (t.actor?.uuid === this.actor.uuid) { this.executor = t; } }
-    // Fall back to default token
-    this.executor ??= this.actor?.defaultToken ?? null;
-    let existingAttackPenalty = Number(this.actor?.system.combat.attackPenalty);
-    if (Number.isNaN(existingAttackPenalty)) { existingAttackPenalty = 0; }
+    super.initializeExecution(options);
     this.updateSource({
       autoPayCosts: this.source.system.settings.getSetting("autoPayCosts"),
-      existingAttackPenalty: Math.min(existingAttackPenalty, 0),
       usesReaction: this.source.system.maneuver === "reactive" && this.source.system.executionTime.base === "r1",
     });
-    this.targets = new Set();
   }
 }

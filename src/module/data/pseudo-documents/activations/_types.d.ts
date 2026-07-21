@@ -1,6 +1,7 @@
 import {
   AddDocumentsActivation,
   ApplyStatusActivation,
+  AttackActivation,
   AttuneActivation,
   AwakenActivation,
   ChangeMovementActivation,
@@ -46,6 +47,7 @@ declare global {
     export interface TypeMap {
       addDocuments: AddDocumentsActivation;
       apply: ApplyStatusActivation;
+      attack: AttackActivation;
       attune: AttuneActivation;
       awaken: AwakenActivation;
       bag: DeathBagActivation;
