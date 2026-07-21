@@ -16,6 +16,8 @@ import { BASIC_STATS, EXPAND_ADVENTURES, FOLDERS, YAML } from "./constants.mjs";
 const PACK_REGISTRY = {};
 
 const state = { buildRegistry: true, pack: null };
+const allPaths = new Set();
+let prefix;
 
 /**
  * Register a document to the pack registry.
@@ -51,18 +53,10 @@ function deriveName(pack, id) {
  * @param {boolean} buildRegistry
  */
 async function unpackPack(pack, buildRegistry) {
+  prefix = `./src/packs/${toKebabCaseFull(pack)}`;
   const directory = `./src/packs/${toKebabCaseFull(pack)}`;
   if (buildRegistry) { console.log(`Building registry for ${pack}`); }
   else { console.log(`Unpacking ${pack} to ${directory}`); }
-  try {
-    for (const file of await fs.readdir(directory)) {
-      const filePath = path.join(directory, file);
-      if (file.endsWith(YAML ? ".yml" : ".json")) { await fs.unlink(filePath); }
-      else { await fs.rm(filePath, { recursive: true }); }
-    }
-  } catch (error) {
-    if (error.code !== "ENOENT") { console.log(error); }
-  }
   const extractOptions = {
     expandAdventures: EXPAND_ADVENTURES,
     folders: FOLDERS,
@@ -74,15 +68,53 @@ async function unpackPack(pack, buildRegistry) {
   };
   state.pack = pack;
   state.buildRegistry = buildRegistry;
-  await extractPack(`./packs/${pack}`, `./src/packs/${toKebabCaseFull(pack)}`, extractOptions);
+  await extractPack(`./packs/${pack}`, prefix, extractOptions);
 }
 
 const packs = await fs.readdir("./packs");
 for (const pack of packs) { await unpackPack(pack, true); }
 for (const pack of packs) { await unpackPack(pack, false); }
+await removeOldFilesFromRoot("./src/packs");
 
-// Transformers
-// ============
+// Old File Removal
+// ================
+
+/**
+ * Remove every old file. This happens after unpacking so that `omitVolatile` has files to compare against.
+ * @param {string} root
+ * @returns {Promise<boolean>} Whether the directory is now empty.
+ */
+async function removeOldFilesFromRoot(root) {
+  const keep = new Set([...allPaths].map((p) => path.normalize(p)));
+  return await removeOldFilesFromDirectory(root, keep);
+}
+
+/**
+ * Remove all the old files from a directory.
+ * @param {string} dir
+ * @param {Set<string>} keep
+ * @returns {Promise<boolean>} Whether the directory is now empty.
+ */
+async function removeOldFilesFromDirectory(dir, keep) {
+  const dirents = await fs.readdir(dir, { withFileTypes: true });
+  let empty = true;
+  for (const dirent of dirents) {
+    const entryPath = path.join(dir, dirent.name);
+    if (dirent.isDirectory()) {
+      if (await removeOldFilesFromDirectory(entryPath, keep)) { await fs.rmdir(entryPath); }
+      else { empty = false; }
+    } else if (keep.has(path.normalize(entryPath))) {
+      empty = false;
+    } else {
+      console.log(`Removing old file ${entryPath}`);
+      await fs.unlink(entryPath);
+    }
+  }
+  return empty;
+}
+
+// Document Transformation
+// =======================
 
 /**
  * @param {object} doc
@@ -94,6 +126,7 @@ function transformName(doc, context) {
   if (!state.buildRegistry) { name = deriveName(state.pack, doc._id); }
   name = `${name}.${YAML ? "yml" : "json"}`;
   if (context.folder) { name = path.join(context.folder, name); }
+  allPaths.add(`${prefix}/${name}`);
   return name;
 }
 
@@ -154,6 +187,16 @@ function sortKeys(obj) {
 }
 
 /**
+ * Trim whitespace in HTML strings.
+ * @param {string} value
+ * @returns {string}
+ */
+function trimWhitespace(value) {
+  if (!/<[a-z][^>]*>/i.test(value)) { return value; }
+  return value.replace(/\s+/g, " ").replace(/>\s+</g, "><").trim();
+}
+
+/**
  * @param {object} obj
  * @returns {object}
  */
@@ -180,6 +223,8 @@ function conformDataValues(obj) {
       } else if (typeof obj[key] === "object" && obj[key] !== null) {
         if (Object.keys(obj[key]).length === 0) { delete obj[key]; }
         else { conformDataValues(obj[key]); }
+      } else if (typeof obj[key] === "string") {
+        obj[key] = trimWhitespace(obj[key]);
       }
     }
   }

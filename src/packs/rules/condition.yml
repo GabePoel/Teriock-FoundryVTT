@@ -544,15 +544,11 @@ pages:
       content: >-
         <p>An <b>encumbered</b> creature can be either <b>lightly encumbered</b>
         or <b>heavily encumbered</b>. The consequences are as
-        follows.</p><dl><dt>Lightly Encumbered</dt>
-
-        <dd>The creature's @Identifier[core:movement-speed]{movement speed} is
-        reduced by 10.</dd>
-
-        <dt>Heavily Encumbered</dt>
-
-        <dd>The creature is @Identifier[condition:slowed]{slowed}. The creature
-        also has @Identifier[core:disadvantage]{disadvantage} on
+        follows.</p><dl><dt>Lightly Encumbered</dt><dd>The creature's
+        @Identifier[core:movement-speed]{movement speed} is reduced by
+        10.</dd><dt>Heavily Encumbered</dt><dd>The creature is
+        @Identifier[condition:slowed]{slowed}. The creature also has
+        @Identifier[core:disadvantage]{disadvantage} on
         @Identifier[core:attack-interaction]{attacks} and
         @Identifier[core:movement]{MOV} @Identifier[core:feat-interaction]{feat
         saves}.</dd></dl>
@@ -770,70 +766,48 @@ pages:
     text:
       content: >-
         <p>A creature that's <b>hacked</b> is one suffering from
-        @Identifier[damage:hack]{hack damage}.
-
-        <b>Hack</b> damage does not reduce
-        @Identifier[core:hit-points-and-mana-points]{HP}. Instead, it applies
-        different
+        @Identifier[damage:hack]{hack damage}. <b>Hack</b> damage does not
+        reduce @Identifier[core:hit-points-and-mana-points]{HP}. Instead, it
+        applies different
         @UUID[Compendium.teriock.rules.JournalEntry.condition0000000]{conditions}
         or effects to creatures depending on the part of their body being
         hacked. Hack damage will always have some body part
-        specified.</p><dl><dt>Arm Hacks</dt>
-
-        <dd><b>1st Arm Hack:</b> @Identifier[core:attack-interaction]{Attacks}
-        you make with handheld @Wiki[Category:Item delivery abilities]{items},
-        @Wiki[Category:Missile delivery abilities]{missiles}, or your
-        @Wiki[Category:Hand delivery abilities]{hands} are done with
+        specified.</p><dl><dt>Arm Hacks</dt><dd><b>1st Arm Hack:</b>
+        @Identifier[core:attack-interaction]{Attacks} you make with handheld
+        @Wiki[Category:Item delivery abilities]{items}, @Wiki[Category:Missile
+        delivery abilities]{missiles}, or your @Wiki[Category:Hand delivery
+        abilities]{hands} are done with
         @Identifier[core:disadvantage]{disadvantage}. And you cannot make any
         @Identifier[core:attack-interaction]{attacks} requiring two hands (such
         as those with @Identifier[property:two-handed]{two-handed}
         @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapons}).
         You also cannot execute @Wiki[Category:Somatic component
-        abilities]{somatic abilities} unless both your hands are free.</dd>
-
-        <dd><b>2nd Arm Hack:</b> You now cannot
+        abilities]{somatic abilities} unless both your hands are
+        free.</dd><dd><b>2nd Arm Hack:</b> You now cannot
         @Identifier[core:attack-interaction]{attack}, @Wiki[Category:Block
         abilities]{block}, nor use any other @Pack[teriock.abilities]{abilities}
         with handheld @Wiki[Category:Item delivery abilities]{items},
         @Wiki[Category:Missile delivery abilities]{missiles}, or your
         @Wiki[Category:Hand delivery abilities]{hands} at all. You also cannot
         execute @Wiki[Category:Somatic component abilities]{somatic abilities}
-        at all.</dd>
-
-        <dt>Leg Hacks</dt>
-
-        <dd><b>1st Leg Hack:</b> You are @Identifier[condition:slowed]{slowed}
-        and @Identifier[core:attack-interaction]{attacks} you make with your
+        at all.</dd><dt>Leg Hacks</dt><dd><b>1st Leg Hack:</b> You are
+        @Identifier[condition:slowed]{slowed} and
+        @Identifier[core:attack-interaction]{attacks} you make with your
         @Identifier[body:foot]{feet} are done with
-        @Identifier[core:disadvantage]{disadvantage}.</dd>
-
-        <dd><b>2nd Leg Hack:</b> You are
-        @Identifier[condition:immobilized]{immobilized} and cannot make
+        @Identifier[core:disadvantage]{disadvantage}.</dd><dd><b>2nd Leg
+        Hack:</b> You are @Identifier[condition:immobilized]{immobilized} and
+        cannot make @Identifier[core:attack-interaction]{attacks} with your
+        @Identifier[body:foot]{feet}.</dd><dt>Vitals Hacks</dt><dd>The effects
+        of Vitals Hacks have even more granularity. Vitals Hacks will always
+        have a more specific body part specified and apply effects
+        accordingly.</dd><dd><b>Vitals Ear Hack:</b> You are
+        @Identifier[condition:deaf]{deaf}.</dd><dd><b>Vitals Eye Hack:</b> You
+        are @Identifier[condition:blind]{blind}.</dd><dd><b>Vitals Nose
+        Hack:</b> You are
+        @Identifier[condition:anosmatic]{anosmatic}.</dd><dd><b>Vitals Mouth
+        Hack:</b> You are @Identifier[condition:mute]{mute} and cannot make
         @Identifier[core:attack-interaction]{attacks} with your
-        @Identifier[body:foot]{feet}.</dd>
-
-        <dt>Vitals Hacks</dt>
-
-        <dd>The effects of Vitals Hacks have even more granularity. Vitals Hacks
-        will always have a more specific body part specified and apply effects
-        accordingly.</dd>
-
-        <dd><b>Vitals Ear Hack:</b> You are
-        @Identifier[condition:deaf]{deaf}.</dd>
-
-        <dd><b>Vitals Eye Hack:</b> You are
-        @Identifier[condition:blind]{blind}.</dd>
-
-        <dd><b>Vitals Nose Hack:</b> You are
-        @Identifier[condition:anosmatic]{anosmatic}.</dd>
-
-        <dd><b>Vitals Mouth Hack:</b> You are @Identifier[condition:mute]{mute}
-        and cannot make @Identifier[core:attack-interaction]{attacks} with your
-        @Identifier[equipment:mouth]{mouth}.</dd>
-
-        <dt>Body Hacks</dt>
-
-        <dd>You are
+        @Identifier[equipment:mouth]{mouth}.</dd><dt>Body Hacks</dt><dd>You are
         @Identifier[condition:immobilized]{immobilized}.</dd></dl><p>Despite not
         reducing @Identifier[core:hit-points-and-mana-points]{HP}, hack damage
         can be @Identifier[core:healing]{healed}.
@@ -1434,12 +1408,10 @@ pages:
       content: >-
         <p>If a creature is <b>transformed</b> then they are in a different form
         than their original form. Transformations can have different levels of
-        strength.</p><dl><dt>Minor Transformation</dt>
-
-        <dd>A minor transformation is a transformation that is not very strong
-        and is usually temporary. It can be reverted with a
-        @Identifier[ability:treeform-ball]{Treeform Ball}, a
-        @Identifier[ability:force-revert]{Force Revert}, or with a
+        strength.</p><dl><dt>Minor Transformation</dt><dd>A minor transformation
+        is a transformation that is not very strong and is usually temporary. It
+        can be reverted with a @Identifier[ability:treeform-ball]{Treeform
+        Ball}, a @Identifier[ability:force-revert]{Force Revert}, or with a
         @Identifier[ability:self-revert]{Self Revert} (DC 6
         @Identifier[core:intelligence]{INT}
         @Identifier[core:feat-interaction]{feat save}). Minor transformations do
@@ -1451,14 +1423,11 @@ pages:
         into the first form they transformed into. Creatures are not
         @Identifier[core:proficiency-bonus]{proficient} in
         @Pack[teriock.abilities]{abilities} they gain from being minorly
-        transformed.</dd>
-
-        <dt>Full Transformation</dt>
-
-        <dd>A full transformation is stronger than a minor transformation. It
-        cannot be reverted with a @Identifier[ability:treeform-ball]{Treeform
-        Ball} or a @Identifier[ability:force-revert]{Force Revert}. But it can
-        be reverted with a @Identifier[ability:self-revert]{Self Revert} (DC 12
+        transformed.</dd><dt>Full Transformation</dt><dd>A full transformation
+        is stronger than a minor transformation. It cannot be reverted with a
+        @Identifier[ability:treeform-ball]{Treeform Ball} or a
+        @Identifier[ability:force-revert]{Force Revert}. But it can be reverted
+        with a @Identifier[ability:self-revert]{Self Revert} (DC 12
         @Identifier[core:intelligence]{INT}
         @Identifier[core:feat-interaction]{feat save}). Full transformations
         change creatures' @Identifier[core:intelligence]{INT} from that of their
@@ -1473,13 +1442,9 @@ pages:
         returns to their <i>fully transformed</i> state. Creatures are not
         @Identifier[core:proficiency-bonus]{proficient} in
         @Pack[teriock.abilities]{abilities} they gain from being fully
-        transformed.</dd>
-
-        <dt>Greater Transformation</dt>
-
-        <dd>A greater transformation is even stronger than a full
-        transformation. It can be reverted with a
-        @Identifier[ability:self-revert]{Self Revert} (DC 18
+        transformed.</dd><dt>Greater Transformation</dt><dd>A greater
+        transformation is even stronger than a full transformation. It can be
+        reverted with a @Identifier[ability:self-revert]{Self Revert} (DC 18
         @Identifier[core:intelligence]{INT}
         @Identifier[core:feat-interaction]{feat save}). Greater transformations
         immediately change creature's @Identifier[core:intelligence]{INT} and

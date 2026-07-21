@@ -4,7 +4,7 @@ _stats:
   coreVersion: "14"
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.14.0
+  systemVersion: 0.14.17
 img: systems/teriock/src/icons/abilities/chi-ground.webp
 name: Chi Ground
 system:
@@ -26,15 +26,18 @@ system:
   maneuver: reactive
   overview:
     base: >-
-      <p>The effect of the triggering
-      @Identifier[core:attack-interaction]{attack}
-      @Identifier[core:fizzles]{fizzles}. This may be used on
-      @Identifier[keyword:unblockable]{UB}
+      <p>This may be used on @Identifier[keyword:unblockable]{UB}
       @Identifier[core:attack-interaction]{attacks}.</p>
   powerSources:
     - spiritual
   range:
     unit: contact
+  results:
+    fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
+    save: >-
+      <p>The effect of the triggering
+      @Identifier[core:attack-interaction]{attack}
+      @Identifier[core:fizzles]{fizzles}.</p>
   targets:
     - attack
   trigger: <p>You are being @Identifier[core:attack-interaction]{attacked}.</p>

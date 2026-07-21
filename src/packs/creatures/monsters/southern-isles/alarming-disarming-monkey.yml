@@ -15,7 +15,7 @@ items:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.14.9
+      systemVersion: 0.14.17
     effects:
       - _id: nMfS3c3xjW7AVrdL
         _key: >-
@@ -25,7 +25,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/acrobatics.webp
         name: Acrobatics
         system:
@@ -93,7 +93,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/disarm.webp
         name: Disarm
         system:
@@ -169,7 +169,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/forest-native.webp
         name: Forest Native
         system:
@@ -214,7 +214,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
         name: Normal Intelligence
         system:
@@ -259,7 +259,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/normal-movement.webp
         name: Normal Movement
         system:
@@ -304,7 +304,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/normal-perception.webp
         name: Normal Perception
         system:
@@ -349,7 +349,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/normal-sneak.webp
         name: Normal Sneak
         system:
@@ -394,7 +394,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/normal-strength.webp
         name: Normal Strength
         system:
@@ -439,7 +439,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/reflexes.webp
         name: Reflexes
         system:
@@ -510,7 +510,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/unglue.webp
         name: Unglue
         system:
@@ -570,7 +570,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/leaping.webp
         name: Leaping
         system:
@@ -665,7 +665,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/climbing.webp
         name: Climbing
         system:
@@ -742,7 +742,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/agile.webp
         name: Agile
         system:
@@ -802,7 +802,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/abilities/missile-reflexes.webp
         name: Missile Reflexes
         system:
@@ -837,13 +837,27 @@ items:
           interaction: block
           maneuver: reactive
           overview:
-            base: >-
-              <p>You @Identifier[keyword:resistance]{resist} the
-              @Identifier[core:attack-interaction]{attack}.</p>
+            proficient: >-
+              <p>If the @Identifier[core:attack-interaction]{attack} was
+              @Identifier[core:deliveries]{delivered} by a
+              @Identifier[property:ranged]{ranged weapon} that you could carry,
+              you may choose to catch the
+              @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
           powerSources:
             - martial
           range:
             unit: contact
+          requirements: >-
+            <p>The triggering @Identifier[core:attack-interaction]{attack} is
+            not @Identifier[keyword:warded]{warded} and could not cut otherwise
+            through a @Identifier[keyword:resistance]{resistance}.</p>
+          results:
+            fail: >-
+              <p>The @Identifier[core:interactions]{attack's} effect
+              applies.</p>
+            save: >-
+              <p>The @Identifier[core:attack-interaction]{attack's} effect
+              @Identifier[core:fizzles]{fizzles}.</p>
           skill: true
           standard: true
           targets:
@@ -895,7 +909,7 @@ items:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.14.9
+      systemVersion: 0.14.17
     effects:
       - _id: P7OVTSzdG9AdjU86
         _key: >-
@@ -905,7 +919,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -930,7 +944,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -957,7 +971,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -983,7 +997,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1027,7 +1041,7 @@ items:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.14.9
+      systemVersion: 0.14.17
     effects:
       - _id: CmkJGGebZrjvIBwd
         _key: >-
@@ -1037,7 +1051,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1062,7 +1076,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: icons/creatures/abilities/mouth-teeth-long-red.webp
         name: Biting
         system:
@@ -1089,7 +1103,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1133,7 +1147,7 @@ items:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.14.9
+      systemVersion: 0.14.17
     effects:
       - _id: TWk5AP5nzZgpXkaM
         _key: >-
@@ -1143,7 +1157,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1168,7 +1182,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:
@@ -1211,7 +1225,7 @@ items:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.14.9
+      systemVersion: 0.14.17
     folder: dbf885a327caa735
     img: systems/teriock/src/icons/body-parts/hide.webp
     name: Hide
@@ -1240,7 +1254,7 @@ items:
       coreVersion: "14"
       lastModifiedBy: teriockBuilder00
       systemId: teriock
-      systemVersion: 0.14.9
+      systemVersion: 0.14.17
     effects:
       - _id: H7Q5z5528FgfgbLp
         _key: >-
@@ -1250,7 +1264,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/bashing.webp
         name: Bashing
         system:
@@ -1275,7 +1289,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/handy.webp
         name: Handy
         system:
@@ -1302,7 +1316,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/prehensile.webp
         name: Prehensile
         system:
@@ -1328,7 +1342,7 @@ items:
           coreVersion: "14"
           lastModifiedBy: teriockBuilder00
           systemId: teriock
-          systemVersion: 0.14.9
+          systemVersion: 0.14.17
         img: systems/teriock/src/icons/properties/small.webp
         name: Small
         system:

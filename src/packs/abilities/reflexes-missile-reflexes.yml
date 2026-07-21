@@ -5,7 +5,7 @@ _stats:
   coreVersion: "14"
   lastModifiedBy: teriockBuilder00
   systemId: teriock
-  systemVersion: 0.14.0
+  systemVersion: 0.14.17
 img: systems/teriock/src/icons/abilities/missile-reflexes.webp
 name: Missile Reflexes
 system:
@@ -30,13 +30,25 @@ system:
   interaction: block
   maneuver: reactive
   overview:
-    base: >-
-      <p>You @Identifier[keyword:resistance]{resist} the
-      @Identifier[core:attack-interaction]{attack}.</p>
+    proficient: >-
+      <p>If the @Identifier[core:attack-interaction]{attack} was
+      @Identifier[core:deliveries]{delivered} by a
+      @Identifier[property:ranged]{ranged weapon} that you could carry, you may
+      choose to catch the
+      @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}.</p>
   powerSources:
     - martial
   range:
     unit: contact
+  requirements: >-
+    <p>The triggering @Identifier[core:attack-interaction]{attack} is not
+    @Identifier[keyword:warded]{warded} and could not cut otherwise through a
+    @Identifier[keyword:resistance]{resistance}.</p>
+  results:
+    fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
+    save: >-
+      <p>The @Identifier[core:attack-interaction]{attack's} effect
+      @Identifier[core:fizzles]{fizzles}.</p>
   skill: true
   standard: true
   targets:
