@@ -165,6 +165,7 @@ export default class ExecutionEditor extends ResolvableDialog {
         editable: entry.editable,
         index,
         label: entry.label,
+        openable: entry.openable ?? true,
         showFooter: entry.editable || (multipleDocuments && Boolean(entry.label)),
         showLabel: multipleDocuments,
       };

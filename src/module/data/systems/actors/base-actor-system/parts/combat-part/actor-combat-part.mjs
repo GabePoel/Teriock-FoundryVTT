@@ -1,10 +1,10 @@
-import { config } from "../../../../../../constants/_module.mjs";
 import systemConfig from "../../../../../../constants/config/system-config.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../../../../dice/rolls/_module.mjs";
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
-import { FormulaField, LocalDocumentField } from "../../../../../fields/_module.mjs";
+import { LocalDocumentField } from "../../../../../fields/_module.mjs";
 import { initialNumber, initialSchema } from "../../../../../fields/tools/initializers.mjs";
 import { PiercingModel } from "../../../../../models/_module.mjs";
+import InitiativeModel from "../../../../../models/modifier-models/initiative-model.mjs";
 
 const { fields } = foundry.data;
 
@@ -47,7 +47,7 @@ export default function ActorCombatPart(Base) {
             bv: initialNumber(),
             cc: initialNumber(systemConfig.baseValues.ac),
           }),
-          initiative: new FormulaField({ deterministic: false, initial: config.character.defaults.initiative }),
+          initiative: new fields.EmbeddedDataField(InitiativeModel),
           offense: new fields.SchemaField({
             piercing: new fields.EmbeddedDataField(PiercingModel),
             sb: new fields.BooleanField({ initial: false }),

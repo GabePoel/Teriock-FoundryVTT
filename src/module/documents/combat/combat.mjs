@@ -1,5 +1,6 @@
 import { CombatExpiration } from "../../data/pseudo-documents/expirations/_module.mjs";
 import { BaseExpiration } from "../../data/pseudo-documents/expirations/abstract/_module.mjs";
+import { InitiativeExecution } from "../../executions/activity-executions/_module.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { Combat } = foundry.documents;
@@ -125,6 +126,33 @@ export default class TeriockCombat extends documentMixins.BaseDocumentMixin(Comb
     const out = await super.endCombat();
     this._onEndCombat();
     return out;
+  }
+
+  /** @inheritDoc */
+  async rollAll(options = {}) {
+    return super.rollAll(Object.assign(options, { noExecution: true }));
+  }
+
+  /** @inheritDoc */
+  async rollInitiative(ids, options = {}) {
+    if (ids.length === 1 && !options.noExecution) {
+      const execution = await InitiativeExecution.create({}, { source: this.combatants.get(ids[0]) });
+      if (execution?.message?.rolls?.length) {
+        const total = execution.message.rolls[0]?.total;
+        if (typeof total === "number") {
+          options.formula = total.toString();
+          options.messageOptions = execution.message.toObject();
+          foundry.utils.setProperty(options, "formula", total.toString());
+          foundry.utils.setProperty(options, "messageOptions.flags.teriock.dontCreate", true);
+        }
+      } else { ids = []; }
+    }
+    return super.rollInitiative(ids, options);
+  }
+
+  /** @inheritDoc */
+  async rollNPC(options = {}) {
+    return super.rollNPC(Object.assign(options, { noExecution: true }));
   }
 
   /** @inheritDoc */

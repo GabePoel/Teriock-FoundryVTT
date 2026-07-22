@@ -223,7 +223,16 @@ foundry.helpers.Hooks.once("init", function() {
     },
     Combat: {
       documentClass: documents.TeriockCombat,
-      initiative: { decimals: 2, formula: TERIOCK.config.character.defaults.initiative },
+      initiative: {
+        decimals: 2,
+        formula: teriock.helpers.formula.addFormula(
+          teriock.helpers.formula.addFormula(
+            TERIOCK.config.character.defaults.initiative.base,
+            TERIOCK.config.character.defaults.initiative.competence,
+          ),
+          TERIOCK.config.character.defaults.initiative.bonus,
+        ),
+      },
     },
     Combatant: { documentClass: documents.TeriockCombatant },
     Folder: { collection: documents.collections.TeriockFolders, documentClass: documents.TeriockFolder },

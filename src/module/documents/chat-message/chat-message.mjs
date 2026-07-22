@@ -127,6 +127,8 @@ export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
+    // This was already made by an `InitiativeExecution` and will be redundant.
+    if (foundry.utils.getProperty(data, "flags.teriock.dontCreate")) { return false; }
     if (!foundry.utils.hasProperty(data, "flags.core.canPopout")) {
       this.updateSource({ "flags.core.canPopout": true });
     }

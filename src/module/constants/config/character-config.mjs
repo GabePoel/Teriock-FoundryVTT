@@ -1,7 +1,7 @@
 import { preLocalizeConfig } from "../../helpers/localization.mjs";
 
 export default {
-  defaults: { initiative: "1d20 + @mov", maxPresence: 1 },
+  defaults: { initiative: { base: "1d20", bonus: "@mov.score", competence: "@p" }, maxPresence: 1 },
   movement: {
     climb: { initial: 1, label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.climb" },
     crawl: { initial: 1, label: "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.crawl" },

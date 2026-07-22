@@ -18,6 +18,7 @@ declare global {
       document: AnyChildDocument | null | undefined;
       editable?: boolean;
       label?: string;
+      openable?: boolean;
       selectHint?: string;
       selectTitle?: string;
       getChoices?: () => AnyChildDocument[] | Promise<AnyChildDocument[]>;

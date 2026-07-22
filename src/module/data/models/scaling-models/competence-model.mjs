@@ -41,6 +41,16 @@ export default class CompetenceModel extends BaseDataModel {
     return Boolean(this.raw >= 2);
   }
 
+  /**
+   * The formula for this competence.
+   * @returns {string}
+   */
+  get formula() {
+    if (this.fluent) { return "@f"; }
+    if (this.proficient) { return "@p"; }
+    return "";
+  }
+
   /** @inheritDoc */
   get icon() {
     return TERIOCK.config.competence.levels[this.value].icon;

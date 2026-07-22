@@ -394,8 +394,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    */
   async _improveFormula() {
     if (this.competenceImprovesFormula) {
-      if (this.competence.fluent) { this.formula = addFormula(this.formula, "@f"); }
-      else if (this.competence.proficient) { this.formula = addFormula(this.formula, "@p"); }
+      this.formula = addFormula(this.formula, this.competence.formula);
     }
   }
 

@@ -443,6 +443,7 @@ export default class BaseRoll extends Roll {
       system: {
         activations: teriock.data.pseudoDocuments.abstract.BasePseudoDocument.toCollectionObject(activations),
         panels,
+        tags: this.options?.tags,
       },
       type: "interactive",
     }, messageData);

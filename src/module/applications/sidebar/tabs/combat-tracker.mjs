@@ -1,17 +1,28 @@
+import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
+
 const { CombatTracker } = foundry.applications.sidebar.tabs;
 
 /** @inheritDoc */
 export default class TeriockCombatTracker extends CombatTracker {
+  /** @type {Teriock.Command.ThresholdOptions} */
+  #defaultInitiativeExecutionData;
+
+  /**
+   * Options for initiative rolls.
+   * @returns {Teriock.Command.ThresholdOptions}
+   */
+  get defaultInitiativeExecutionData() {
+    return this.#defaultInitiativeExecutionData ?? {};
+  }
+
+  set defaultInitiativeExecutionData(options) {
+    this.#defaultInitiativeExecutionData = options;
+  }
+
   /** @inheritDoc */
   _onCombatantControl(event, target) {
-    /** @type {HTMLElement} */
-    const combatantElement = target.closest("[data-combatant-id]");
-    const { combatantId } = combatantElement?.dataset ?? {};
-    const combatant = this.viewed?.combatants.get(combatantId);
-    if (!combatant) { return; }
     if (target.dataset.action === "rollInitiative") {
-      if (event.altKey && !event.shiftKey) { combatant._advantage = true; }
-      else if (event.shiftKey && !event.altKey) { combatant._disadvantage = true; }
+      this.defaultInitiativeExecutionData = ThresholdRoll.parseEvent(event);
     }
     return super._onCombatantControl(event, target);
   }

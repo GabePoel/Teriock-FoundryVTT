@@ -21,12 +21,12 @@ export default class DocumentExecution extends BaseExecution {
    * @param {Teriock.Execution.ExecutionOptions} [options]
    */
   constructor(data = {}, options = {}) {
-    data.consumeUses ??= options.source?.system.settings?.getSetting("consumeOnUse");
+    data.consumeUses ??= options.source?.system?.settings?.getSetting("consumeOnUse");
     super(data, options);
     this._actor = options.actor ?? this.source?.actor ?? game.actors.default;
-    this._automations = this.source.system.automations?.contents ?? [];
-    this._boosts = options.boosts ?? this.source.system.boosts ?? this._boosts;
-    if (game.settings.get("teriock", "secretDocuments").has(this.source.typedIdentifier)) {
+    this._automations = this.source.system?.automations?.contents ?? [];
+    this._boosts = options.boosts ?? this.source.system?.boosts ?? this._boosts;
+    if (game.settings.get("teriock", "secretDocuments").has(this.source?.typedIdentifier)) {
       this._messageMode = options.messageMode ?? "blind";
     }
   }
@@ -69,7 +69,7 @@ export default class DocumentExecution extends BaseExecution {
 
   /** @inheritDoc */
   get name() {
-    return this.source.system.fullName;
+    return this.source.system.fullName ?? this.source.name;
   }
 
   /** @inheritDoc */
@@ -103,15 +103,15 @@ export default class DocumentExecution extends BaseExecution {
   async _buildPanels() {
     this.panels.length = 0;
     const panel = await this._buildSourcePanel();
-    this.panels.push(panel);
+    if (panel) { this.panels.push(panel); }
   }
 
   /**
    * Makes a panel representing the source document.
-   * @returns {Promise<Teriock.Panels.PanelParts>}
+   * @returns {Promise<Teriock.Panels.PanelParts|false>}
    */
   async _buildSourcePanel() {
-    return this.source.toPanel();
+    return this.source.toPanel?.() ?? false;
   }
 
   /** @inheritDoc */
@@ -145,7 +145,7 @@ export default class DocumentExecution extends BaseExecution {
     const yes = await super._prepareUpdates();
     if (yes === false) { return false; }
 
-    if (this.source.system.consumable && this.consumeUses) {
+    if (this.source.system?.consumable && this.consumeUses) {
       this.operations.push({
         action: "update",
         documentName: this.source.documentName,
@@ -173,7 +173,7 @@ export default class DocumentExecution extends BaseExecution {
    * @returns {object}
    */
   getRollData() {
-    return Object.assign(this.source.system.getSystemRollData() || {}, super.getRollData());
+    return Object.assign(this.source.system?.getSystemRollData?.() ?? {}, super.getRollData());
   }
 
   /** @inheritDoc*/

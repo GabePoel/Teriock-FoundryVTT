@@ -122,7 +122,7 @@ export function upgradeIndeterministicFormula(value, delta) {
  * @returns {boolean}
  */
 export function formulaExists(formula) {
-  return Boolean(formula) && (typeof formula === "string" && formula.trim() !== "0");
+  return Boolean(formula) && ((typeof formula === "string" && formula.trim() !== "0") || (typeof formula === "number"));
 }
 
 /**
