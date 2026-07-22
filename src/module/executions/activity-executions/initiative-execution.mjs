@@ -13,7 +13,6 @@ export default class InitiativeExecution extends executionMixins.ThresholdExecut
       bonus: options.source?.actor?.system?.initiative?.raw ?? TERIOCK.config.character.defaults.initiative.bonus,
       ...ui.combat.defaultInitiativeExecutionData,
     }, { inplace: true, overwrite: false });
-    console.log(foundry.utils.deepClone(data));
     ui.combat.defaultInitiativeExecutionData = {};
     super(data, options);
     if (!options.messageMode && this.source.hidden) { this._messageMode = "gm"; }
