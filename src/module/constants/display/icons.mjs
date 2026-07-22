@@ -214,7 +214,7 @@ export const icons = {
     mechanic: "ms-settings-b-roll",
   },
   rank: { combatAbility: "ms-swords", supportAbility: "ms-shield-with-heart" },
-  roll: { boost: "ms-arrow-warm-up", deboost: "ms-arrow-cool-down", reroll: "ms-replay" },
+  roll: { boost: "ms-arrow-warm-up", deboost: "ms-arrow-cool-down", initiative: "fa-dice-d20", reroll: "ms-replay" },
   settings: {
     alternateRules: "mdi-dice-multiple",
     automatedBehavior: "mdi-auto-fix",

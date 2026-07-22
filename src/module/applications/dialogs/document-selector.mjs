@@ -220,6 +220,7 @@ export default class DocumentSelector extends ResolvableDialog {
     return Object.assign(await super._prepareContext(options), {
       buttons: [{
         action: "ok",
+        default: !this.unchecked,
         icon: makeIconClass(TERIOCK.display.icons.ui.done, "button"),
         label: "COMMON.Confirm",
         type: "submit",
