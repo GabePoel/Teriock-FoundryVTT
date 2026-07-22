@@ -20,10 +20,16 @@ export default class TeriockCombatant
 {
   /**
    * Competence for this combatant's initiative.
+   * @type {CompetenceModel}
+   */
+  #competence = new CompetenceModel({ raw: 1 });
+
+  /**
+   * Competence for this combatant's initiative.
    * @returns {CompetenceModel}
    */
   get competence() {
-    return this.actor?.system?.initiative?.competence ?? new CompetenceModel({ raw: 1 })
+    return this.actor?.system?.initiative?.competence ?? this.#competence;
   }
 
   /** @inheritDoc */
@@ -44,8 +50,7 @@ export default class TeriockCombatant
   /** @inheritDoc */
   _getInitiativeFormula() {
     const base = TERIOCK.config.character.defaults.initiative.base;
-    const competence = this.competence.formula
-      ?? TERIOCK.config.character.defaults.initiative.competence;
+    const competence = this.competence.formula ?? TERIOCK.config.character.defaults.initiative.competence;
     const bonus = this.actor?.system?.initiative?.raw ?? TERIOCK.config.character.defaults.initiative.bonus;
     // Formula matches `InitiativeExecution`.
     return addFormula(addFormula(base, competence), bonus);

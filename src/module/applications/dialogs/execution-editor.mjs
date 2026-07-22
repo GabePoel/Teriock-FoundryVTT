@@ -93,7 +93,7 @@ export default class ExecutionEditor extends ResolvableDialog {
       "window.title",
       _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.title", {
         name: execution.name,
-        use: _loc("TERIOCK.DIALOGS.ThresholdExecutionOptions.use"),
+        use: _loc("TERIOCK.EXECUTIONS.Base.USE"),
       }).trim(),
     );
     foundry.utils.setProperty(this.options, "window.icon", makeIconClass(execution.icon, "title"));
