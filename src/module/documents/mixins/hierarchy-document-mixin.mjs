@@ -19,6 +19,10 @@ const { Collection } = foundry.utils;
  * @param {typeof BaseDocument} Base
  * @todo Move dependent stuff to its own mixin that complements {@link DependeeDocumentMixin}.
  * @todo Fix issue where dependent documents aren't known on first load which messes with initial suppression.
+ * @see {HierarchySystemMixin}
+ * @see {SubCollection}
+ * @see {TeriockCompendiumDirectory}
+ * @see {TeriockCompendium}
  */
 export default function HierarchyDocumentMixin(Base) {
   return (

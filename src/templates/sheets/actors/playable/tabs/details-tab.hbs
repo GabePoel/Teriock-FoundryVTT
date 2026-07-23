@@ -106,12 +106,8 @@
                 data-tooltip-direction="DOWN"
                 style="height: 2rem"
               >
-                <div class="unselected">
-                  {{{ system.size.value }}}
-                </div>
-                <div class="selected">
-                  {{{ system._source.size.value }}}
-                </div>
+                <div class="unselected">{{{ system.size.value }}}</div>
+                <div class="selected">{{{ system._source.size.value }}}</div>
               </div>
             </div>
             <div class="actor-shortbox actor-weight-box">
@@ -141,7 +137,11 @@
                   {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
                 </div>
                 <div class="selected">
-                  {{#if system._source.weight.self}}{{{ system._source.weight.self }}}{{else}}0{{/if}}
+                  {{#if system._source.weight.self}}
+                    {{{ system._source.weight.self }}}
+                  {{else}}
+                    0
+                  {{/if}}
                   {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
                 </div>
               </div>
