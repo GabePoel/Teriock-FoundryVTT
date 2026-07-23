@@ -1,5 +1,3 @@
-import { EvaluationModel } from "../../../abstract/_module.mjs";
-
 declare global {
   namespace Teriock.Models {
     export type ConsumableSystemData = {
@@ -7,10 +5,19 @@ declare global {
       consumable: boolean;
       /** <schema> The amount of the document to consumer per use */
       consumptionAmount: number;
-      /** <schema> Maximum quantity configuration */
-      maxQuantity: EvaluationModel;
       /** <schema> Current quantity of the document */
-      quantity: number;
+      quantity: {
+        /** <derived> Maximum quantity */
+        max: number;
+        /** <schema> Formula used to derive maximum quantity */
+        maxFormula: Teriock.System.FormulaString;
+        /** <derived> Minimum quantity */
+        min: number;
+        /** <schema> Current quantity remaining */
+        value: number;
+      };
     };
   }
 }
+
+export {};

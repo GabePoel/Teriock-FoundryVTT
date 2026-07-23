@@ -65,7 +65,7 @@ export default class MountSystem
       icon: TERIOCK.display.icons.armament.load,
       label: _loc("TERIOCK.SYSTEMS.Mount.PANELS.load"),
       wrappers: [
-        _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text || "0" }),
+        _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw || "0" }),
         getName(this.mountType),
       ],
     }];

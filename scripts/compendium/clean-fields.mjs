@@ -53,7 +53,6 @@ function cleanCommon(doc) {
   delete doc.system.qualifiers;
   if (!doc.system.consumable) {
     delete doc.system.quantity;
-    delete doc.system.maxQuantity;
     delete doc.system.consumptionAmount;
   }
 

@@ -27,7 +27,7 @@ export default class StorageModel extends BaseDataModel {
    */
   get carriedCount() {
     // Async stored equipment is assumed to have a quantity of 1
-    return this.storedEquipment.map(e => (e.system?.consumable ? (e.system?.quantity ?? 1) : 1) || 1).reduce(
+    return this.storedEquipment.map(e => (e.system?.consumable ? (e.system?.quantity?.value ?? 1) : 1) || 1).reduce(
       (a, b) => a + b,
       0,
     );

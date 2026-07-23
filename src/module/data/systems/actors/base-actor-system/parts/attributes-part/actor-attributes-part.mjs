@@ -31,6 +31,7 @@ export default function ActorAttributesPart(Base) {
        * Prepare presence.
        */
       #preparePresence() {
+        this.presence.value = this.actor?.attunements.filter(a => a.active).reduce((sum, a) => sum + a.system.tier, 0);
         this.presence.overflow = this.presence.value > this.presence.max;
         this.presence.value = Math.min(this.presence.value, this.presence.max);
         this.attributes.unp.score = this.presence.max - this.presence.value;
@@ -47,8 +48,8 @@ export default function ActorAttributesPart(Base) {
       }
 
       /** @inheritDoc */
-      prepareDerivedData() {
-        super.prepareDerivedData();
+      prepareSpecialData() {
+        super.prepareSpecialData();
         this.#preparePresence();
       }
 

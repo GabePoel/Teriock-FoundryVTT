@@ -1,4 +1,4 @@
-import { EvaluationField, FormulaField, IdentifierField } from "../_module.mjs";
+import { FormulaField, IdentifierField } from "../_module.mjs";
 import attributeConfig from "../../../constants/config/attribute-config.mjs";
 import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
@@ -13,6 +13,7 @@ const {
   BooleanField,
   DocumentIdField,
   DocumentUUIDField,
+  EmbeddedDataField,
   FilePathField,
   HTMLField,
   JSONField,
@@ -308,11 +309,11 @@ export function deathBagSchema() {
 
 /**
  * Field for a defense.
- * @param {StringFieldOptions & Teriock.Fields._EvaluationFieldOptions} [options]
- * @returns {EvaluationField}
+ * @param {DataFieldOptions} [options]
+ * @returns {EmbeddedDataField}
  */
 export function defenseField(options = {}) {
-  return new EvaluationField({ deterministic: true, floor: true, min: 0, model: DefenseModel, ...options });
+  return new EmbeddedDataField(DefenseModel, options);
 }
 
 /**

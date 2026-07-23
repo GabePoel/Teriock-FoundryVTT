@@ -1,22 +1,22 @@
 {{#if system.consumable}}
   <div class="teriock-sheet-bar">
     {{formBox
-      (localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system._source.quantity)
+      (localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system._source.quantity.value)
       action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.quantity")
+      dataset=(object paths="system.quantity.value")
       icon=TERIOCK.display.icons.ui.quantity
-      unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity)
-      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label")
+      unselected=(localize "TERIOCK.SYSTEMS.Consumable.EMBED.remaining" value=system.quantity.value)
+      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label")
     }}
     {{formBox
-      system._source.maxQuantity.raw
+      system._source.quantity.maxFormula
       action=(ifThen editable "updatePaths" "")
-      dataset=(object paths="system.maxQuantity.raw")
+      dataset=(object paths="system.quantity.maxFormula")
       icon=TERIOCK.display.icons.ui.maximum
       placeholder=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
       unselected=(ifThen
-        system.maxQuantity.raw (localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=system.maxQuantity.value) "")
-      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.maxQuantity.raw.label")
+        system.quantity.maxFormula (localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=system.quantity.max) "")
+      tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label")
     }}
     {{formBox
       (localize "TERIOCK.SYSTEMS.Consumable.EMBED.perUse" value=system._source.consumptionAmount)

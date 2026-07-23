@@ -120,7 +120,7 @@ export default class ArmamentExecution extends executionMixins.ImpactsExecutionM
       });
       for (const ability of usedAbilities) {
         if (ability.system.consumable && this.source.system.consumable) {
-          if (ability.system.quantity !== 1 && this.source.isOwner && !this.source.inCompendium) {
+          if (ability.system.quantity.value !== 1 && this.source.isOwner && !this.source.inCompendium) {
             await this.source.setFlag("teriock", "dontConsume", true);
           }
         }

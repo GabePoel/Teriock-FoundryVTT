@@ -4,6 +4,7 @@ import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 import { LocalDocumentField } from "../../../fields/_module.mjs";
+import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import CleanedEffectSystem from "../cleaned-effect-system.mjs";
 
 const { fields } = foundry.data;
@@ -34,13 +35,22 @@ export default class AttunementSystem extends CleanedEffectSystem {
   static defineSchema() {
     return foundry.utils.mergeObject(super.defineSchema(), {
       inheritTier: new fields.BooleanField({ initial: true }),
-      target: new LocalDocumentField(foundry.documents.BaseItem),
-      tier: new fields.NumberField({ initial: 0, label: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label" }),
-      type: new fields.StringField({
-        choices: localizeChoices(objectMap(attunementConfig.type, v => v.label)),
+      origin: new fields.StringField({
+        blank: false,
+        choices: localizeChoices(objectMap(attunementConfig.origin, v => v.label)),
         initial: "effect",
+        nullable: false,
+        required: true,
       }),
+      target: new LocalDocumentField(foundry.documents.BaseItem),
+      tier: new fields.NumberField({ initial: 0 }),
     });
+  }
+
+  /** @inheritDoc */
+  static migrateData(source, options, state) {
+    migrateKey(source, "type", "origin");
+    return super.migrateData(source, options, state);
   }
 
   /** @inheritDoc */
@@ -68,7 +78,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   get embedParts() {
     const parts = super.embedParts;
     parts.subtitle = _loc("TERIOCK.SYSTEMS.Attunement.PANELS.subtitle", { tier: this.tier || 0 });
-    parts.text = dotJoin([attunementConfig.type[this.type].label, this.usage]);
+    parts.text = dotJoin([attunementConfig.origin[this.origin].label, this.usage]);
     return parts;
   }
 
@@ -115,7 +125,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
   getLocalRollData() {
     return {
       ...super.getLocalRollData(),
-      [`type.${toCamelCase(this.type)}`]: 1,
+      [`origin.${toCamelCase(this.origin)}`]: 1,
       target: this.target ? 1 : 0,
       tier: this.tier,
     };
@@ -128,7 +138,7 @@ export default class AttunementSystem extends CleanedEffectSystem {
       icon: TERIOCK.display.icons.attunable.tier,
       label: _loc("TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label"),
       wrappers: [
-        attunementConfig.type[this.type].label,
+        attunementConfig.origin[this.origin].label,
         _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier || 0 }),
       ],
     }];
@@ -150,9 +160,8 @@ export default class AttunementSystem extends CleanedEffectSystem {
   }
 
   /** @inheritDoc */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    if (this.inheritTier && this.target) { this.tier = this.target.system.tier.currentValue; }
-    this.changes.push({ key: "system.presence.value", phase: "initial", priority: 10, type: "add", value: this.tier });
+  prepareSpecialData() {
+    super.prepareSpecialData();
+    if (this.inheritTier && this.target) { this.tier = this.target.system.tier.value; }
   }
 }

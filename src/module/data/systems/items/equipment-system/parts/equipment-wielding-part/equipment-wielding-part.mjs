@@ -68,7 +68,7 @@ export default function EquipmentWieldingPart(Base) {
        * @returns {boolean}
        */
       get canEquip() {
-        return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.actor && !this.equipped;
+        return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && !this.equipped;
       }
 
       /**
@@ -76,7 +76,7 @@ export default function EquipmentWieldingPart(Base) {
        * @returns {boolean}
        */
       get canUnequip() {
-        return ((this.consumable && this.quantity >= 1) || !this.consumable) && this.actor && this.equipped;
+        return ((this.consumable && this.quantity.value >= 1) || !this.consumable) && this.actor && this.equipped;
       }
 
       /** @inheritDoc */
@@ -159,7 +159,7 @@ export default function EquipmentWieldingPart(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.consumable && this.quantity === 0) { this.equipped = false; }
+        if (this.consumable && this.quantity.value === 0) { this.equipped = false; }
       }
 
       /**

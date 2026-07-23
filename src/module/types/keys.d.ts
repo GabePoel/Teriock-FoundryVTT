@@ -83,7 +83,7 @@ declare global {
     export type Status = Condition | Cover | Hack;
 
     // Attunement Keys
-    export type AttunementType = keyof typeof config.attunement.type;
+    export type AttunementOrigin = keyof typeof config.attunement.origin;
 
     // Rank Keys
     export type Archetype = keyof typeof config.class.archetypes;

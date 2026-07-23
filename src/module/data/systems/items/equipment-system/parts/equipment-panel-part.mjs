@@ -41,8 +41,8 @@ export default function EquipmentPanelPart(Base) {
             wrappers: [
               _loc("TERIOCK.SYSTEMS.Equipment.PANELS.weight", { value: this.weight }),
               _loc("TERIOCK.SYSTEMS.Equipment.PANELS.minStr", { value: this.minStr }),
-              (this.identification.identified || this.isAttuned) && formulaExists(this.tier.text)
-                ? _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text })
+              (this.identification.identified || this.isAttuned) && formulaExists(this.tier.raw)
+                ? _loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw })
                 : "",
               ...simplifyTags(this._identificationTags),
             ],

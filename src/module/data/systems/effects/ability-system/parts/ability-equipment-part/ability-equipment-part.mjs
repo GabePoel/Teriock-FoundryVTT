@@ -149,7 +149,7 @@ export default function AbilityEquipmentPart(Base) {
             identifier: `${equipmentType}-of-${this.parent.forcedIdentifier}`,
             needsAttunement: false,
             powerLevel: "enchanted",
-            quantity: 1,
+            quantity: { value: 1 },
           },
         });
         if (img) { out.img = img; }

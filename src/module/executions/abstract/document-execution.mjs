@@ -152,7 +152,9 @@ export default class DocumentExecution extends BaseExecution {
         parent: this.source.parent,
         updates: [{
           _id: this.source.id,
-          system: { quantity: Math.max(0, this.source.system.quantity - this.source.system.consumptionAmount) },
+          system: {
+            quantity: { value: Math.max(0, this.source.system.quantity.value - this.source.system.consumptionAmount) },
+          },
         }],
       });
     }

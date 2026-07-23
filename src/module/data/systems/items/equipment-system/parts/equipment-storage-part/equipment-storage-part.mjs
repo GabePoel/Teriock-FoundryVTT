@@ -33,14 +33,14 @@ export default function EquipmentStoragePart(Base) {
        * @returns {Promise<TeriockEquipment|null>}
        */
       async #findStackTarget(elder) {
-        if (!elder || !this.consumable || !this._source.quantity) { return null; }
+        if (!elder || !this.consumable || !this._source.quantity?.value) { return null; }
         const stackCandidates = (await elder.getEquipment()).filter(e =>
           e.master?.uuid === elder.uuid
           && e.uuid !== this.parent.uuid
           && e.name === this.parent.name
           && e.system.identifier === this._source.identifier
           && e.system.consumable
-          && e.system.quantity < e.system.maxQuantity.value
+          && e.system.quantity.value < e.system.quantity.max
         );
         if (stackCandidates.length === 0) { return null; }
         const selected = await DocumentSelector.selectSingle(stackCandidates, {
@@ -65,7 +65,10 @@ export default function EquipmentStoragePart(Base) {
           documentName: stack.documentName,
           pack: stack.pack,
           parent: stack.parent,
-          updates: [{ _id: stack.id, "system.quantity": stack.system.quantity + this._source.quantity }],
+          updates: [{
+            _id: stack.id,
+            "system.quantity.value": stack.system.quantity.value + this._source.quantity.value,
+          }],
         };
       }
 
@@ -102,7 +105,7 @@ export default function EquipmentStoragePart(Base) {
           && e.elder?.uuid === this.parent.elder?.uuid
           && e.uuid !== this.parent.uuid
           && e.system.consumable === this.consumable
-          && e.system.quantity + this.quantity <= e.system.maxQuantity.value
+          && e.system.quantity.value + this.quantity.value <= e.system.quantity.max
         );
       }
 
@@ -112,7 +115,7 @@ export default function EquipmentStoragePart(Base) {
        */
       get totalWeight() {
         if (this.stashed) { return 0; }
-        let total = this.weight * (this.consumable ? this.quantity : 1) * this.weightMultiplier;
+        let total = this.weight * (this.consumable ? this.quantity.value : 1) * this.weightMultiplier;
         if (this.storage.enabled) { total += this.storage.carriedWeight; }
         return total.toNearest(equipmentConfig.weight.interval);
       }
@@ -206,7 +209,7 @@ export default function EquipmentStoragePart(Base) {
           onClick: async () => await this.groupStackDialog(),
           visible: () =>
             this.consumable
-            && this.quantity < this.maxQuantity.value
+            && this.quantity.value < this.quantity.max
             && this._stackingCandidates.length
             && this.document.isOwner && this.document.checkAncestor(doc),
         }, {
@@ -215,7 +218,7 @@ export default function EquipmentStoragePart(Base) {
           label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.title"),
           onClick: async () => await this.groupUnstackDialog(),
           visible: () =>
-            this.consumable && this.quantity > 1 && this.document.isOwner && this.document.checkAncestor(doc),
+            this.consumable && this.quantity.value > 1 && this.document.isOwner && this.document.checkAncestor(doc),
         }]);
         return entries;
       }
@@ -258,7 +261,10 @@ export default function EquipmentStoragePart(Base) {
           ids: [chosen.id],
           pack: chosen.pack,
           parent: chosen.parent,
-          updates: [{ _id: chosen.id, system: { quantity: chosen.system.quantity + this.quantity } }],
+          updates: [{
+            _id: chosen.id,
+            system: { quantity: { value: chosen.system.quantity.value + this.quantity.value } },
+          }],
         }, {
           action: "delete",
           documentName: "Item",
@@ -275,13 +281,13 @@ export default function EquipmentStoragePart(Base) {
        * @returns {Promise<void>}
        */
       async groupUnstack(amount = 0) {
-        if (!this.consumable || !amount || amount >= this.quantity) { return; }
+        if (!this.consumable || !amount || amount >= this.quantity.value) { return; }
         const operations = [{
           action: "create",
           data: [
             foundry.utils.mergeObject(this.parent.toObject(), {
               _id: foundry.utils.randomID(),
-              system: { quantity: amount },
+              system: { quantity: { value: amount } },
             }),
           ],
           documentName: "Item",
@@ -293,7 +299,7 @@ export default function EquipmentStoragePart(Base) {
           ids: [this.document.id],
           pack: this.parent.pack,
           parent: this.parent.parent,
-          updates: [{ _id: this.document.id, system: { quantity: this.quantity - amount } }],
+          updates: [{ _id: this.document.id, system: { quantity: { value: this.quantity.value - amount } } }],
         }];
         await foundry.documents.modifyBatch(operations);
       }
@@ -303,14 +309,14 @@ export default function EquipmentStoragePart(Base) {
        * @returns {Promise<void>}
        */
       async groupUnstackDialog() {
-        if (!this.consumable || !this.quantity) { return; }
+        if (!this.consumable || !this.quantity.value) { return; }
         const content = document.createElement("div");
         const amountField = new NumberField({
           hint: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.amount.hint"),
           initial: 1,
           integer: true,
           label: _loc("TERIOCK.SYSTEMS.Equipment.DIALOG.unstack.amount.label"),
-          max: this.quantity,
+          max: this.quantity.value,
           min: 0,
           nullable: false,
         });

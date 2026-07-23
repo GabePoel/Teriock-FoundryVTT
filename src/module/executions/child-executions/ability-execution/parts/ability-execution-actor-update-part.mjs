@@ -30,7 +30,11 @@ export default function AbilityExecutionActorUpdatePart(Base) {
             parent: this.armament.parent,
             updates: [{
               _id: this.armament.id,
-              system: { quantity: Math.max(0, this.armament.system.quantity - this.armament.system.consumptionAmount) },
+              system: {
+                quantity: {
+                  value: Math.max(0, this.armament.system.quantity.value - this.armament.system.consumptionAmount),
+                },
+              },
             }],
           });
         }

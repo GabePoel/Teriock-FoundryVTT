@@ -325,11 +325,14 @@ export default function AttackExecutionMixin(Base) {
             updates: [{
               _id: this.ammunition.id,
               system: {
-                quantity: Math.max(
-                  0,
-                  this.ammunition.system.quantity
-                    - (this.armament?.system.ammunition.consumptionAmount ?? this.ammunition.system.consumptionAmount),
-                ),
+                quantity: {
+                  value: Math.max(
+                    0,
+                    this.ammunition.system.quantity.value
+                      - (this.armament?.system.ammunition.consumptionAmount
+                        ?? this.ammunition.system.consumptionAmount),
+                  ),
+                },
               },
             }],
           });

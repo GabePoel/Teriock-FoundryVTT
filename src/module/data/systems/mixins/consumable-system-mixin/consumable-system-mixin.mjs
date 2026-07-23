@@ -1,4 +1,5 @@
-import { EvaluationField } from "../../../fields/_module.mjs";
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import { ChangeQuantityAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
@@ -19,12 +20,7 @@ export default function ConsumableSystemMixin(Base) {
       static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Consumable"];
 
       /** @inheritDoc */
-      static PRESERVED_PROPERTIES = [
-        "system.consumable",
-        "system.maxQuantity",
-        "system.quantity",
-        ...super.PRESERVED_PROPERTIES,
-      ];
+      static PRESERVED_PROPERTIES = ["system.consumable", "system.quantity", ...super.PRESERVED_PROPERTIES];
 
       /** @inheritDoc */
       static get _automationTypes() {
@@ -41,22 +37,36 @@ export default function ConsumableSystemMixin(Base) {
         return Object.assign(super.defineSchema(), {
           consumable: new fields.BooleanField({ initial: true }),
           consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
-          maxQuantity: new EvaluationField({ blank: Infinity, deterministic: true, floor: true, min: 0 }),
-          quantity: new fields.NumberField({ initial: 1, integer: true, min: 0, nullable: false, placeholder: "0" }),
+          quantity: new fields.SchemaField({
+            max: new fields.NumberField({ integer: true, persisted: false }),
+            maxFormula: new FormulaField({ deterministic: true }),
+            min: new fields.NumberField({ initial: 0, integer: true, persisted: false }),
+            value: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "0" }),
+          }),
           settings: new fields.EmbeddedDataField(documentSettingsModels.consumable),
         });
+      }
+
+      /** @inheritDoc */
+      static migrateData(source, options, state) {
+        if (typeof source.quantity === "number") { source.quantity = { value: source.quantity }; }
+        else if (!source.quantity || typeof source.quantity !== "object") { source.quantity = {}; }
+        const raw = source.maxQuantity?.raw;
+        if (["number", "string"].includes(typeof raw)) { source.quantity.maxFormula ??= `${raw}`; }
+        delete source.maxQuantity;
+        return super.migrateData(source, options, state);
       }
 
       /** @returns {Teriock.Panels.PanelBar} */
       get _consumableBar() {
         return {
           icon: TERIOCK.display.icons.ui.quantity,
-          label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.label"),
+          label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label"),
           wrappers: [
-            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity }),
-            this.maxQuantity.value === Infinity
+            _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity.value }),
+            this.quantity.max === Infinity
               ? _loc("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-              : _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", { value: this.maxQuantity.value }),
+              : _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", { value: this.quantity.max }),
             _loc("TERIOCK.SYSTEMS.Consumable.EMBED.perUse", { value: this.consumptionAmount }),
           ],
         };
@@ -85,11 +95,11 @@ export default function ConsumableSystemMixin(Base) {
        * @returns {string}
        */
       get remainingString() {
-        return this.maxQuantity.value === Infinity
-          ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity })
+        return this.quantity.max === Infinity
+          ? _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity.value })
           : _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remainingMax", {
-            max: this.maxQuantity.value,
-            value: this.quantity,
+            max: this.quantity.max,
+            value: this.quantity.value,
           });
       }
 
@@ -103,7 +113,7 @@ export default function ConsumableSystemMixin(Base) {
        * @returns {boolean}
        */
       _isSuppressedConsumed() {
-        return this.consumable && this.quantity === 0;
+        return this.consumable && this.quantity.value === 0;
       }
 
       /**
@@ -113,7 +123,9 @@ export default function ConsumableSystemMixin(Base) {
        */
       async gainOne() {
         if (this.consumable) {
-          await this.parent.update({ "system.quantity": Math.clamp(this.quantity + 1, 0, this.maxQuantity.value) });
+          await this.parent.update({
+            "system.quantity.value": Math.clamp(this.quantity.value + 1, this.quantity.min, this.quantity.max),
+          });
         }
       }
 
@@ -122,9 +134,9 @@ export default function ConsumableSystemMixin(Base) {
         return {
           ...super.getLocalRollData(),
           consumable: Number(this.consumable),
-          max: this.consumable ? this.maxQuantity.value : 1,
-          quantity: this.consumable ? this.quantity : 1,
-          "quantity.max": this.consumable ? this.maxQuantity.value : 1,
+          max: this.quantity.max,
+          quantity: this.quantity.value,
+          "quantity.max": this.quantity.max,
         };
       }
 
@@ -132,11 +144,13 @@ export default function ConsumableSystemMixin(Base) {
       prepareDerivedData() {
         super.prepareDerivedData();
         if (this.consumable) {
-          this.maxQuantity.evaluate();
-          this.quantity = Math.clamp(this.quantity, 0, this.maxQuantity.value);
+          this.quantity.max = this.quantity.maxFormula
+            ? Math.max(0, Math.floor(BaseRoll.minValue(this.quantity.maxFormula, this.getRollData())))
+            : Infinity;
+          this.quantity.value = Math.clamp(this.quantity.value, this.quantity.min, this.quantity.max);
         } else {
-          this.maxQuantity._value = Infinity;
-          this.quantity = 1;
+          this.quantity.max = 1;
+          this.quantity.value = 1;
         }
       }
 
@@ -147,7 +161,7 @@ export default function ConsumableSystemMixin(Base) {
        */
       async useOne() {
         if (this.consumable && this.consumptionAmount) {
-          await this.parent.update({ "system.quantity": Math.max(0, this.quantity - 1) });
+          await this.parent.update({ "system.quantity.value": Math.max(0, this.quantity.value - 1) });
         }
       }
     }

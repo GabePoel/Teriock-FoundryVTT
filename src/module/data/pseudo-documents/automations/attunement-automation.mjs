@@ -35,7 +35,7 @@ export default class AttunementAutomation extends BaseAutomation {
     const attunementData = {
       img: this.document.img,
       name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.document.name }),
-      system: { inheritTier: false, tier, type: "effect" },
+      system: { inheritTier: false, origin: "effect", tier },
       type: "attunement",
     };
     return [

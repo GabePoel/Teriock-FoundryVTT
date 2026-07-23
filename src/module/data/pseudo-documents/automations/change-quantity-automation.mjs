@@ -63,9 +63,9 @@ export default class ChangeQuantityAutomation
   async #changeQuantity(scope = {}) {
     const consumable = await this.#findConsumable(scope);
     if (!consumable) { return; }
-    if (consumable.system.quantity <= 0 && BaseRoll.maxValue(this.formula) <= 0) { return; }
+    if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(this.formula) <= 0) { return; }
     if (
-      consumable.system.quantity >= consumable.system.maxQuantity.value && BaseRoll.minValue(this.formula) >= 0
+      consumable.system.quantity.value >= consumable.system.quantity.max && BaseRoll.minValue(this.formula) >= 0
     ) { return; }
     const shouldChange = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
@@ -107,7 +107,11 @@ export default class ChangeQuantityAutomation
     };
     await TeriockChatMessage.create(messageData, { defaultMode: true });
     await consumable.update({
-      "system.quantity": Math.clamp(consumable.system.quantity + roll.total, 0, consumable.system.maxQuantity.value),
+      "system.quantity.value": Math.clamp(
+        consumable.system.quantity.value + roll.total,
+        consumable.system.quantity.min,
+        consumable.system.quantity.max,
+      ),
     });
   }
 

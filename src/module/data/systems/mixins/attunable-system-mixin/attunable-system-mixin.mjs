@@ -1,6 +1,7 @@
+import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { makeIcon } from "../../../../helpers/icon.mjs";
-import { EvaluationField } from "../../../fields/_module.mjs";
+import { FormulaField } from "../../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -25,7 +26,10 @@ export default function AttunableSystemMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           needsAttunement: new fields.BooleanField({ initial: true }),
-          tier: new EvaluationField({ deterministic: true, min: 0 }),
+          tier: new fields.SchemaField({
+            raw: new FormulaField({ deterministic: true, initial: "" }),
+            value: new fields.NumberField({ integer: true, min: 0, persisted: false }),
+          }),
         });
       }
 
@@ -47,8 +51,8 @@ export default function AttunableSystemMixin(Base) {
        * @returns {string[]}
        */
       get _attunableWrappers() {
-        return formulaExists(this.tier.text)
-          ? [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.text })]
+        return formulaExists(this.tier.raw)
+          ? [_loc("TERIOCK.SYSTEMS.Attunable.PANELS.tier", { value: this.tier.raw })]
           : [];
       }
 
@@ -92,7 +96,7 @@ export default function AttunableSystemMixin(Base) {
       /** @inheritDoc */
       _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
-        if (this.parent.checkEditor(userId)) {
+        if (this.parent.checkEditor(userId) && foundry.utils.hasProperty(changed, "system.tier")) {
           if (this.attunement) { this.attunement.update({ "system.tier": this.tier.value }); }
         }
       }
@@ -113,7 +117,7 @@ export default function AttunableSystemMixin(Base) {
           changes: [{ key: "system.attunements", phase: "initial", priority: 10, type: "add", value: this.parent._id }],
           img: this.parent.img,
           name: _loc("TERIOCK.SYSTEMS.Attunable.USAGE.Attune.defaultName", { name: this.parent.name }),
-          system: { inheritTier: true, target: this.parent._id, tier: this.tier.value, type: this.parent.type },
+          system: { inheritTier: true, origin: this.parent.type, target: this.parent._id, tier: this.tier.value },
           type: "attunement",
         };
         if (this.parent.actor && (await this.canAttune())) {
@@ -139,9 +143,8 @@ export default function AttunableSystemMixin(Base) {
        */
       async canAttune() {
         if (this.parent.actor) {
-          const tierDerived = this.tier.value;
           const unp = this.parent.actor.system.presence.max - this.parent.actor.system.presence.value;
-          return tierDerived <= unp;
+          return this.tier.value <= unp;
         }
         return false;
       }
@@ -191,12 +194,7 @@ export default function AttunableSystemMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-      }
-
-      /** @inheritDoc */
-      prepareSpecialData() {
-        super.prepareSpecialData();
-        this.tier.evaluate();
+        this.tier.value = Math.max(0, Math.floor(BaseRoll.minValue(this.tier.raw || "0", this.getRollData())));
       }
     }
   );
