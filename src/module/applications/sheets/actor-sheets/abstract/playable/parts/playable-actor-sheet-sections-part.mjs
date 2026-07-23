@@ -219,7 +219,9 @@ export default function PlayableActorSheetSectionsPart(Base) {
       );
 
       /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
-      static TABS = { primary: { tabs: this.SECTIONS.map(({ icon, id, label }) => ({ icon, id, label })) } };
+      static TABS = {
+        primary: { initial: "tradecrafts", tabs: this.SECTIONS.map(({ icon, id, label }) => ({ icon, id, label })) },
+      };
     }
   );
 }

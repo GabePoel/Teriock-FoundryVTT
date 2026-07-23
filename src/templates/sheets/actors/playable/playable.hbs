@@ -7,7 +7,7 @@
     {{/if}}
   "
 >
-  <div class="actor-tabber-background floating">
+  <div class="actor-tabber-background floating tabs">
     {{> "teriock/sheets/actors/playable/parts/tabs"}}
   </div>
   <div class="actor-page">
@@ -34,9 +34,14 @@
       </div>
     </div>
     <div class="actor-tab-content">
-      {{> (concat "teriock/sheets/actors/playable/tabs/" activeTab "-tab")}}
+      {{#each tabs as |tab|}}
+        {{> (concat "teriock/sheets/actors/playable/tabs/" tab.id "-tab")
+          @root
+          tabClass=tab.cssClass
+        }}
+      {{/each}}
     </div>
-    <div class="actor-tabber-background non-floating">
+    <div class="actor-tabber-background non-floating tabs">
       {{> "teriock/sheets/actors/playable/parts/tabs"}}
     </div>
   </div>

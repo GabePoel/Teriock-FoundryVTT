@@ -87,8 +87,7 @@ export default function AbilityEquipmentPart(Base) {
             if (doc?.actor?.documentName === "Actor" && doc?.actor?.uuid === this.actor?.uuid) {
               this.actor.createEmbeddedDocuments("Item", [data], op);
               if (this.actor.sheet?.rendered) {
-                this.actor.sheet._activeTab = "inventory";
-                await this.actor.sheet.render();
+                this.actor.sheet.changeTab("inventory", "primary");
               }
             } else {
               TeriockItem.create(data, op);

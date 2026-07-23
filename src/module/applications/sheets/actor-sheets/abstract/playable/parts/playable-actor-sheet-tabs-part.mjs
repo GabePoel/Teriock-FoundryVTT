@@ -10,21 +10,6 @@ export default function PlayableActorSheetTabsPart(Base) {
      * @mixin
      */
     class PlayableActorSheetTabsPart extends Base {
-      /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
-      static DEFAULT_OPTIONS = { actions: { changeTab: this._onChangeTab } };
-
-      /**
-       * Change tab.
-       * @param {PointerEvent} _event
-       * @param {HTMLElement} target
-       * @returns {Promise<void>}
-       * @this {PlayableActorSheetTabsPart}
-       */
-      static async _onChangeTab(_event, target) {
-        this._activeTab = target.dataset.tab;
-        await this.render();
-      }
-
       /** @type {string|null} */
       #tabBeforeDrag = null;
 
@@ -40,13 +25,10 @@ export default function PlayableActorSheetTabsPart(Base) {
         }
       }
 
-      /** @type {string} */
-      _activeTab = "tradecrafts";
-
       /** @inheritDoc */
       async _onDragLeaveApplication() {
         await super._onDragLeaveApplication();
-        if (this.#tabBeforeDrag) { await this.setActiveTab(this.#tabBeforeDrag); }
+        if (this.#tabBeforeDrag) { this.changeTab(this.#tabBeforeDrag, "primary"); }
         this.#tabBeforeDrag = null;
       }
 
@@ -56,9 +38,9 @@ export default function PlayableActorSheetTabsPart(Base) {
         if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
         const droppedType = TeriockDragDrop.payload?.document?.type;
         const tabId = this.constructor.SECTIONS.find(section => (section.dragTypes ?? []).includes(droppedType))?.id;
-        if (!tabId || tabId === this._activeTab) { return; }
-        this.#tabBeforeDrag ??= this._activeTab;
-        await this.setActiveTab(tabId);
+        if (!tabId || tabId === this.tabGroups.primary) { return; }
+        this.#tabBeforeDrag ??= this.tabGroups.primary;
+        this.changeTab(tabId, "primary");
       }
 
       /** @inheritDoc */
@@ -76,20 +58,9 @@ export default function PlayableActorSheetTabsPart(Base) {
       /** @inheritDoc */
       async _prepareContext(options = {}) {
         return Object.assign(await super._prepareContext(options), {
-          activeTab: this._activeTab,
           floatingTabs: game.settings.get("teriock", "floatingActorTabs"),
           tabDirection: this.#tabTooltipDirection,
         });
-      }
-
-      /**
-       * Sets the active tab.
-       * @param {string} tab - The tab ID to set as active.
-       * @returns {Promise<void>}
-       */
-      async setActiveTab(tab) {
-        this._activeTab = tab;
-        await this.render();
       }
     }
   );
