@@ -114,26 +114,24 @@ export default class BaseUpdater extends DocumentDialog {
         context.fields.push({
           choices: this._getChoicesForPath(p),
           field: this.document.getFieldForProperty(p),
+          localize: true,
           name: p,
           value: foundry.utils.getProperty(this._currentData, p),
         });
       }
     }
     if (partId === "footer") {
-      context.buttons = [
-        {
-          default: true,
-          icon: makeIconClass(TERIOCK.display.icons.ui.done),
-          label: _loc("COMMON.Confirm"),
-          type: "submit",
-        },
-        {
-          action: "reset",
-          icon: makeIconClass(TERIOCK.display.icons.ui.reset),
-          label: "TERIOCK.DIALOGS.Sheet.BUTTONS.reset",
-          type: "button",
-        },
-      ];
+      context.buttons = [{
+        default: true,
+        icon: makeIconClass(TERIOCK.display.icons.ui.done),
+        label: _loc("COMMON.Confirm"),
+        type: "submit",
+      }, {
+        action: "reset",
+        icon: makeIconClass(TERIOCK.display.icons.ui.reset),
+        label: "TERIOCK.DIALOGS.Sheet.BUTTONS.reset",
+        type: "button",
+      }];
     }
     return context;
   }

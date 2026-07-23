@@ -33,8 +33,9 @@
                   modified
                 {{/if}}
               "
-              data-action="increment"
-              data-path="system.speedAdjustments.{{ key }}"
+              data-action="updatePaths"
+              data-icon="{{ config.icon }}"
+              data-paths="system.speedAdjustments.{{ key }}"
             >
               <div class="unselected" style="justify-content: left">
                 {{path @root/TERIOCK.config.character.speed (lookup @root/system.speedAdjustments key) "label"}}
@@ -59,6 +60,7 @@
                 <div
                   class="
                     tcenter
+                    thover
                     affix
                     {{#if (and
                     @root/highlightModified
@@ -66,16 +68,15 @@
                       modified
                     {{/if}}
                   "
+                  data-action="updatePaths"
+                  data-icon="{{ config.icon }}"
+                  data-paths="system.senses.{{ key }}"
                 >
                   <div class="unselected">
                     <span class="tcolored tcenter ttransparent">{{path ../system.senses key}} ft</span>
                   </div>
-                  <div class="tcolored">
-                    {{formInput
-                      (path ../systemFields "senses.fields" key)
-                      value=(path ../system._source.senses key)
-                      classes="tcenter ttransparent selected"
-                    }}
+                  <div class="selected">
+                    <span class="tcolored tcenter ttransparent">{{path ../system._source.senses key}} ft</span>
                   </div>
                 </div>
               {{/if}}
@@ -83,64 +84,62 @@
           </div>
         </div>
         <div class="teriock-block-display" style="padding-top: 0.75em">
-          <div class="carrying-box-main" data-tooltip-identifier="core:size" style="display: flex; flex-direction: row">
+          <div class="carrying-box-main" data-tooltip-identifier="core:size">
             <div class="actor-shortbox actor-size-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.label"}}</div>
               <div
                 class="
-                  affix
+                  actor-size-input
+                  actor-smallbox-value
+                  thover
                   {{#if (and
                   highlightModified
                   (not (eq system.size.value system._source.size.value)))}}
-                    modified
+                    tcolored
                   {{/if}}
                 "
+                data-action="updatePaths"
+                data-icon="{{ TERIOCK.display.icons.species.size }}"
+                data-paths="system.size.value"
+                data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.description" category=system.size.category reach=system.size.reach}}'
+                data-tooltip-class=""
+                data-tooltip-direction="DOWN"
+                style="height: 2rem"
               >
-                <div class="unselected">
-                  <span class="actor-size-input actor-smallbox-value">{{{ system.size.value }}}</span>
-                </div>
-                {{formInput
-                  systemFields.size.fields.value
-                  classes="actor-size-input actor-smallbox-value selected transparent-input"
-                  context="actor"
-                  dataset=(object
-                    tooltip=(localize
-                      "TERIOCK.SHEETS.Actor.TABS.Details.size.description"
-                      category=system.size.category
-                      reach=system.size.reach)
-                    tooltipClass=""
-                    tooltipDirection="DOWN")
-                  value=system._source.size.value
-                }}
+                {{{ system.size.value }}}
               </div>
             </div>
             <div class="actor-shortbox actor-weight-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.label"}}</div>
-              <div class="affix">
-                <div class="unselected">
-                  <span class="actor-weight-input actor-smallbox-value">{{{ system.weight.self }}} {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}</span>
-                </div>
-                {{formInput
-                  systemFields.weight.fields.self
-                  classes="actor-weight-input actor-smallbox-value selected transparent-input"
-                  context="actor"
-                  dataset=(object
-                    tooltip=(localize
-                      "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment"
-                      value=system.weight.value)
-                    tooltipClass=""
-                    tooltipDirection="")
-                  placeholder=system.weight.self
-                  value=system._source.weight.self
-                }}
+              <div
+                class="
+                  actor-weight-input
+                  actor-smallbox-value
+                  thover
+                  {{#if (and
+                  highlightModified
+                  (not (eq system.weight.self system._source.weight.self)))}}
+                    tcolored
+                  {{/if}}
+                "
+                data-action="updatePaths"
+                data-icon="{{ TERIOCK.display.icons.equipment.weight }}"
+                data-paths="system.weight.self"
+                data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment" value=system.weight.value}}'
+                data-tooltip-class=""
+                data-tooltip-direction="DOWN"
+                style="height: 2rem{{#unless (or (eq system._source.weight.self 0) system._source.weight.self)}}; color: var(--color-text-subtle){{/unless}}"
+              >
+                {{{ system.weight.self }}}
+                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
               </div>
             </div>
             <div class="actor-shortbox actor-carrying-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.label"}}</div>
               <div
                 class="actor-smallbox-value tcenter"
-                data-tooltip-class=""
                 data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.includingSelf" value=system.weight.value}}'
+                data-tooltip-class=""
                 data-tooltip-direction="DOWN"
                 style="height: 2rem"
               >
@@ -211,12 +210,16 @@
                 actor-smallbox-value
                 tcenter
                 affix
+                thover
                 {{#if (and
                 highlightModified
                 (not (eq system.curses.max system._source.curses.max)))}}
                   modified
                 {{/if}}
               "
+              data-action="updatePaths"
+              data-icon="{{ TERIOCK.display.icons.power.curse }}"
+              data-paths="system.curses.max"
               style="height: 2rem"
             >
               <span class="unselected">
@@ -226,12 +229,13 @@
                   denominator=system.curses.max
                 }}
               </span>
-              {{formInput
-                systemFields.curses.fields.max
-                value=system._source.curses.max
-                classes="selected transparent-input"
-                placeholder="3"
-              }}
+              <span class="selected">
+                {{localize
+                  "TERIOCK.FORMAT.outOf"
+                  numerator=system.curses.value
+                  denominator=system._source.curses.max
+                }}
+              </span>
             </div>
           </div>
           <div class="actor-shortbox">
@@ -241,12 +245,16 @@
                 actor-smallbox-value
                 tcenter
                 affix
+                thover
                 {{#if (and
                 highlightModified
                 (not (eq system.rotators.max system._source.rotators.max)))}}
                   modified
                 {{/if}}
               "
+              data-action="updatePaths"
+              data-icon="{{ TERIOCK.display.icons.maneuver.passive }}"
+              data-paths="system.rotators.max"
               style="height: 2rem"
             >
               <span class="unselected">
@@ -256,12 +264,13 @@
                   denominator=system.rotators.max
                 }}
               </span>
-              {{formInput
-                systemFields.rotators.fields.max
-                value=system._source.rotators.max
-                classes="selected transparent-input"
-                placeholder="0"
-              }}
+              <span class="selected">
+                {{localize
+                  "TERIOCK.FORMAT.outOf"
+                  numerator=system.rotators.value
+                  denominator=system._source.rotators.max
+                }}
+              </span>
             </div>
           </div>
         </div>
@@ -269,21 +278,35 @@
       <div class="teriock-block-display" style="flex-direction: row; padding-bottom: 0.25em; padding-top: 0.75em">
         <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}</div>
-          {{formInput
-            systemFields.detection.fields.hiding
-            value=system._source.detection.hiding
-            classes="actor-detection-input actor-smallbox-value selected transparent-input"
-            placeholder=system.attributes.snk.passive
-          }}
+          <div
+            class="actor-detection-input actor-smallbox-value thover"
+            data-action="updatePaths"
+            data-icon="{{ TERIOCK.display.icons.attribute.snk }}"
+            data-paths="system.detection.hiding"
+            style="height: 2rem{{#unless (or (eq system._source.detection.hiding 0) system._source.detection.hiding)}}; color: var(--color-text-subtle){{/unless}}"
+          >
+            {{#if (or (eq system._source.detection.hiding 0) system._source.detection.hiding)}}
+              {{ system._source.detection.hiding }}
+            {{else}}
+              {{ system.attributes.snk.passive }}
+            {{/if}}
+          </div>
         </div>
         <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}</div>
-          {{formInput
-            systemFields.detection.fields.perceiving
-            value=system._source.detection.perceiving
-            classes="actor-detection-input actor-smallbox-value selected transparent-input"
-            placeholder=system.attributes.per.passive
-          }}
+          <div
+            class="actor-detection-input actor-smallbox-value thover"
+            data-action="updatePaths"
+            data-icon="{{ TERIOCK.display.icons.attribute.per }}"
+            data-paths="system.detection.perceiving"
+            style="height: 2rem{{#unless (or (eq system._source.detection.perceiving 0) system._source.detection.perceiving)}}; color: var(--color-text-subtle){{/unless}}"
+          >
+            {{#if (or (eq system._source.detection.perceiving 0) system._source.detection.perceiving)}}
+              {{ system._source.detection.perceiving }}
+            {{else}}
+              {{ system.attributes.per.passive }}
+            {{/if}}
+          </div>
         </div>
       </div>
     </div>

@@ -106,7 +106,7 @@ export default class EquipmentSystem
 
   /** @inheritDoc */
   static migrateData(source, options, state) {
-    if (source?.equipmentType) { migrateValueTransform(source, "equipmentType", toKebabCase) }
+    if (source?.equipmentType) { migrateValueTransform(source, "equipmentType", toKebabCase); }
     return super.migrateData(source, options, state);
   }
 

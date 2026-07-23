@@ -32,7 +32,7 @@ export default function ActorCapacitiesPart(Base) {
             category: initialString(),
             length: initialNumber(),
             reach: initialNumber(),
-            value: new fields.NumberField({ initial: 3, label: "Size", max: 30, min: 0.25 }),
+            value: new fields.NumberField({ initial: 3, max: 30, min: 0.25 }),
           }),
           weight: new fields.SchemaField({
             carried: initialNumber(),

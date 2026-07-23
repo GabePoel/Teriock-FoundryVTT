@@ -71,5 +71,13 @@ export default function ActorMovementPart(Base) {
  * @param {string} label - The display name for this speed adjustment type
  */
 function speedField(initial, label) {
-  return new fields.NumberField({ initial, integer: true, label, max: 4, min: 0, step: 1 });
+  return new fields.NumberField({
+    choices: objectMap(config.character.speed, e => e.label, { localize: true }),
+    initial,
+    integer: true,
+    label,
+    max: 4,
+    min: 0,
+    step: 1,
+  });
 }

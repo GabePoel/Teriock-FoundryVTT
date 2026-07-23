@@ -1,3 +1,4 @@
+import documentConfig from "../../../../constants/config/document-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { systemPath } from "../../../../helpers/path.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
@@ -55,6 +56,14 @@ export default class BasePageSystem
       foundry.utils.mergeObject({ system: { img: systemPath(`icons/documents/${this.parent.type}.svg`) } }),
       data,
     );
+  }
+
+  /** @inheritDoc */
+  async getPanelParts() {
+    return Object.assign(await super.getPanelParts(), {
+      icon: this.parent.getFlag("teriock", "journalIcon") ?? documentConfig[this.parent.type]?.icon
+        ?? documentConfig.rule.icon,
+    });
   }
 
   /** @inheritDoc */
