@@ -8,10 +8,10 @@
         <div class="money-panel tgrid g4">
           {{formInput
             (path ../systemFields.money "fields" id)
-            value=(path ../system.money id)
             classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
-            dataset=(object tooltip=(minLen (path ../system.money id) 4))
+            dataset=(object tooltip=(minLen (path ../system.money id) 4) noScroll="true")
             placeholder="0"
+            value=(path ../system.money id)
           }}
           <div class="money-info tsubtle tcenter gi3">
             <div class="money-name">{{ currency.label }}</div>
@@ -33,10 +33,10 @@
       <div class="money-panel tgrid g4">
         {{formInput
           systemFields.money.fields.debt
-          value=system.money.debt
           classes="tgrid-item gi1 money-panel-input tgrid-item tcenter"
-          dataset=(object tooltip=system.money.debt)
+          dataset=(object tooltip=(minLen system.money.debt 4) noScroll="true")
           placeholder="0"
+          value=system.money.debt
         }}
         <div class="money-info tsubtle tcenter gi3">
           <div class="money-name">{{localize "TERIOCK.TERMS.Currency.debt"}}</div>
