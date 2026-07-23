@@ -24,7 +24,7 @@
           max=bar.data.max
           min=bar.data.min
           class="thover-soft actor-bar-overlay-left actor-bar-overlay-label"
-          dataset=(object tooltip=(localize bar.labels.current))
+          dataset=(object tooltip=(localize bar.labels.current) noScroll="true")
           disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
         }}
         <div class="actor-bar-overlay-max actor-bar-overlay-label" data-tooltip="{{localize bar.labels.max}}">
@@ -42,7 +42,7 @@
             name=bar.paths.temp
             value=bar.data.temp
             classes="thover-soft actor-bar-overlay-temp actor-bar-overlay-label"
-            dataset=(object tooltip=(localize bar.labels.temp))
+            dataset=(object tooltip=(localize bar.labels.temp) noScroll="true")
             disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
           }}
         {{/if}}

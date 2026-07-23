@@ -150,15 +150,14 @@ export default function BaseApplicationMixin(Base) {
     /** @inheritDoc */
     async _onRender(context, options = {}) {
       await super._onRender(context, options);
-      this.element.querySelectorAll("[data-never-disable]").forEach(
-        /** @param {HTMLButtonElement|HTMLInputElement} e */
-        e => (e.disabled = false),
+      this.element.querySelectorAll("[data-never-disable]").forEach(el => (el.disabled = false));
+      this.element.querySelectorAll("[data-no-scroll]").forEach(el =>
+        el.addEventListener("wheel", ev => ev.preventDefault())
       );
     }
 
     /** @inheritDoc */
     async _prepareContext(options = {}) {
-      if (foundry.utils.hasProperty(options, "window.detached")) { this.#detached = options.window.detached; }
       return Object.assign(await super._prepareContext(options), { appId: this.id, TERIOCK });
     }
 
