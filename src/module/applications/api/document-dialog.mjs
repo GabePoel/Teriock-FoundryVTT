@@ -3,6 +3,8 @@ import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
 /**
  * A minimal document sheet with some edits to make it better resemble a dialog.
+ * @mixes TemporaryApplication
+ * @extends {TeriockDocumentSheet}
  */
 export default class DocumentDialog extends TemporaryApplicationMixin(TeriockDocumentSheet) {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

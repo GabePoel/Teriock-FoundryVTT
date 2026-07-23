@@ -10,6 +10,7 @@ const { FormDataExtended } = foundry.applications.ux;
 export default class BaseUpdater extends DocumentDialog {
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
   static DEFAULT_OPTIONS = {
+    actions: { reset: this._onReset },
     form: { closeOnSubmit: true, submitOnChange: false },
     position: { width: 450 },
     window: { contentClasses: ["standard-form"], minimizable: false, resizable: false },
@@ -20,6 +21,19 @@ export default class BaseUpdater extends DocumentDialog {
     form: { template: "teriock/shared/field-list-part" },
     footer: { template: "templates/generic/form-footer.hbs" },
   };
+
+  /**
+   * Reset this updater's form values to initial values from the document's schema.
+   * @this {BaseUpdater}
+   */
+  static async _onReset() {
+    for (const p of this._dataPaths) {
+      const field = this.document.getFieldForProperty(p);
+      if (!field) { continue; }
+      foundry.utils.setProperty(this._currentData, p, field.getInitialValue());
+    }
+    await this.render();
+  }
 
   /**
    * @inheritDoc
@@ -106,12 +120,20 @@ export default class BaseUpdater extends DocumentDialog {
       }
     }
     if (partId === "footer") {
-      context.buttons = [{
-        default: true,
-        icon: makeIconClass(TERIOCK.display.icons.ui.done),
-        label: _loc("COMMON.Confirm"),
-        type: "submit",
-      }];
+      context.buttons = [
+        {
+          default: true,
+          icon: makeIconClass(TERIOCK.display.icons.ui.done),
+          label: _loc("COMMON.Confirm"),
+          type: "submit",
+        },
+        {
+          action: "reset",
+          icon: makeIconClass(TERIOCK.display.icons.ui.reset),
+          label: "TERIOCK.DIALOGS.Sheet.BUTTONS.reset",
+          type: "button",
+        },
+      ];
     }
     return context;
   }
