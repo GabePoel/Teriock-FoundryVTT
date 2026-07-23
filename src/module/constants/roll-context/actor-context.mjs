@@ -77,10 +77,9 @@ Hooks.once("i18nInit", () => {
     const name = _loc(v.abbreviation);
     Object.assign(actorContext, {
       [`${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
-      [`${k}.pas`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.passive", { name }),
+      [`${k}.passive`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.passive", { name }),
       [`${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
       [`${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
-      [`${k}`]: name,
     });
   });
   Object.entries(TERIOCK.reference.tradecrafts).forEach(([k, v]) => {
@@ -89,7 +88,6 @@ Hooks.once("i18nInit", () => {
       [`tc.${k}.flu`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.flu", { name }),
       [`tc.${k}.pro`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.pro", { name }),
       [`tc.${k}.score`]: _loc("TERIOCK.ROLL_CONTEXT.Mod.score", { name }),
-      [`tc.${k}`]: name,
     });
   });
   Object.entries(TERIOCK.config.hack).forEach(([k, v]) => {

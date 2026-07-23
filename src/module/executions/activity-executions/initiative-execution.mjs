@@ -10,7 +10,7 @@ import * as executionMixins from "../mixins/_module.mjs";
 export default class InitiativeExecution extends executionMixins.ThresholdExecutionMixin(DocumentExecution) {
   constructor(data = {}, options = {}) {
     foundry.utils.mergeObject(data, {
-      bonus: options.source?.actor?.system?.initiative?.raw ?? TERIOCK.config.character.defaults.initiative.bonus,
+      bonus: options.source?.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus,
       ...ui.combat.defaultInitiativeExecutionData,
     }, { inplace: true, overwrite: false });
     ui.combat.defaultInitiativeExecutionData = {};

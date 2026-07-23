@@ -1,8 +1,7 @@
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
 import { TradecraftModel } from "../../../../../models/modifier-models/_module.mjs";
 
-const { SchemaField } = foundry.data.fields;
+const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 
 /**
  * Actor data model mixin that handles tradecrafts.
@@ -21,22 +20,11 @@ export default function ActorTradecraftsPart(Base) {
         const tradecrafts = {};
         Object.entries(TERIOCK.reference.tradecrafts).forEach((
           [key, value],
-        ) => (tradecrafts[key] = new EvaluationField({
-          deterministic: false,
-          initial: `@tc.${key}.score`,
-          interval: 1,
+        ) => (tradecrafts[key] = new EmbeddedDataField(TradecraftModel, {
+          initial: { bonus: `@tc.${key}.score` },
           label: value,
-          min: -Infinity,
-          model: TradecraftModel,
         })));
         return Object.assign(super.defineSchema(), { tradecrafts: new SchemaField(tradecrafts) });
-      }
-
-      /**
-       * Ensure tradecrafts have the correct keys assigned.
-       */
-      #prepareTradecrafts() {
-        for (const [k, v] of Object.entries(this.tradecrafts)) { v._key = k; }
       }
 
       /** @inheritDoc */
@@ -46,12 +34,6 @@ export default function ActorTradecraftsPart(Base) {
           Object.assign(rollData, prefixObject(tc.getLocalRollData(), `tc.${tc.key}`));
         }
         return rollData;
-      }
-
-      /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.#prepareTradecrafts();
       }
 
       /**

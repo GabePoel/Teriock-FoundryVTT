@@ -1,8 +1,7 @@
 import { prefixObject } from "../../../../../../helpers/utils.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
 import { AttributeModel } from "../../../../../models/_module.mjs";
 
-const { SchemaField } = foundry.data.fields;
+const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 
 /**
  * Actor data model mixin that handles attributes.
@@ -21,23 +20,11 @@ export default function ActorAttributesPart(Base) {
         const attributes = {};
         Object.entries(TERIOCK.config.attribute).forEach((
           [key, value],
-        ) => (attributes[key] = new EvaluationField({
-          deterministic: false,
-          initial: `2 * @${key}.score`,
-          interval: 1,
+        ) => (attributes[key] = new EmbeddedDataField(AttributeModel, {
+          initial: { bonus: `2 * @${key}.score`, score: -3 },
           label: value.label,
-          min: -Infinity,
-          model: AttributeModel,
-          score: -3,
         })));
         return Object.assign(super.defineSchema(), { attributes: new SchemaField(attributes) });
-      }
-
-      /**
-       * Ensure attributes have the correct keys assigned.
-       */
-      #prepareAttributes() {
-        for (const [k, v] of Object.entries(this.attributes)) { v._key = k; }
       }
 
       /**
@@ -60,16 +47,9 @@ export default function ActorAttributesPart(Base) {
       }
 
       /** @inheritDoc */
-      prepareBaseData() {
-        super.prepareBaseData();
-        this.#prepareAttributes();
-      }
-
-      /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
         this.#preparePresence();
-        for (const att of Object.values(this.attributes)) { att.passive = 10 + att.value; }
       }
 
       /**

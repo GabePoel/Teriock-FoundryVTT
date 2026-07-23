@@ -50,10 +50,10 @@ export default function ActorCoverPart(Base) {
         super.prepareDerivedData();
         if (this.cover === 1) {
           this.defense.ac += 2;
-          this.attributes.mov.raw = addFormula(this.attributes.mov.raw, "2");
+          this.attributes.mov.bonus = addFormula(this.attributes.mov.bonus, "2");
         } else if (this.cover >= 2) {
           this.defense.ac += 5;
-          this.attributes.mov.raw = addFormula(this.attributes.mov.raw, "5");
+          this.attributes.mov.bonus = addFormula(this.attributes.mov.bonus, "5");
         }
       }
     }

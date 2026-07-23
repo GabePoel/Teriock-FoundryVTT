@@ -25,7 +25,7 @@ export default function UsableDataMixin(Base) {
       /** @inheritDoc */
       static defineSchema(...args) {
         return Object.assign(super.defineSchema(...args), {
-          competence: new fields.EmbeddedDataField(CompetenceModel),
+          competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 0 }, required: false }),
         });
       }
 
@@ -71,7 +71,7 @@ export default function UsableDataMixin(Base) {
       getLocalRollData() {
         return {
           ...super.getLocalRollData(),
-          c: this.competence.bonus,
+          c: this.competence?.bonus,
           flu: Number(this.competence?.fluent),
           pro: Number(this.competence?.proficient),
         };

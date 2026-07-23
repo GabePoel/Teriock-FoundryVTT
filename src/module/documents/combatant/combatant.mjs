@@ -51,7 +51,7 @@ export default class TeriockCombatant
   _getInitiativeFormula() {
     const base = TERIOCK.config.character.defaults.initiative.base;
     const competence = this.competence.formula ?? TERIOCK.config.character.defaults.initiative.competence;
-    const bonus = this.actor?.system?.initiative?.raw ?? TERIOCK.config.character.defaults.initiative.bonus;
+    const bonus = this.actor?.system?.initiative?.bonus ?? TERIOCK.config.character.defaults.initiative.bonus;
     // Formula matches `InitiativeExecution`.
     return addFormula(addFormula(base, competence), bonus);
   }

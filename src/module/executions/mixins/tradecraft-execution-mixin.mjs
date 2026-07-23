@@ -19,7 +19,7 @@ export default function TradecraftExecutionMixin(Base) {
       constructor(data = {}, options = {}) {
         super(data, options);
         if (this.actor) {
-          this.updateSource({ bonus: addFormula(this.actor.system.tradecrafts[this.tradecraft].formula, this.bonus) });
+          this.updateSource({ bonus: addFormula(this.actor.system.tradecrafts[this.tradecraft].bonus, this.bonus) });
         }
         if (game.settings.get("teriock", "secretTradecrafts").has(this.tradecraft)) {
           this._messageMode = options.messageMode ?? "blind";

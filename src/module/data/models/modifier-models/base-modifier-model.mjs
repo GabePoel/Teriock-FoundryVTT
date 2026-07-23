@@ -1,40 +1,27 @@
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
-import { EvaluationModel } from "../../abstract/_module.mjs";
-import { initialString } from "../../fields/tools/initializers.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 import * as dataMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
 
 /**
  * A data model for some rollable modifier that has a score associated with it.
- * @extends {EvaluationModel}
+ * @extends {BaseDataModel}
  * @extends {Teriock.Models.BaseModifierModelData}
  * @mixes ThresholdData
  * @mixes UsableData
  */
 export default class BaseModifierModel
-  extends mixClasses(EvaluationModel, dataMixins.UsableDataMixin, dataMixins.ThresholdDataMixin)
+  extends mixClasses(BaseDataModel, dataMixins.UsableDataMixin, dataMixins.ThresholdDataMixin)
 {
   /** @inheritDoc */
-  static defineSchema(options = {}) {
-    return Object.assign(super.defineSchema(options), {
-      _key: initialString(),
-      score: new fields.NumberField({ initial: options.score ?? 0, integer: true, nullable: false }),
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      bonus: new FormulaField({ deterministic: false }),
+      score: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
     });
-  }
-
-  /**
-   * Modify a value with proficiency and fluency.
-   * @param {number} value
-   * @returns {number}
-   */
-  #modify(value) {
-    return value + this.competence.bonus;
-  }
-
-  /** @inheritDoc */
-  get currentValue() {
-    return this.#modify(super.currentValue);
   }
 
   /**
@@ -42,7 +29,7 @@ export default class BaseModifierModel
    * @returns {string}
    */
   get key() {
-    return this._key || "";
+    return this.schema.name || "";
   }
 
   /**
@@ -50,16 +37,19 @@ export default class BaseModifierModel
    * @returns {string}
    */
   get name() {
-    return this.schema.fields.raw.label;
+    return this.key;
   }
 
-  /** @inheritDoc */
+  /**
+   * Evaluated roll modifier.
+   * @returns {number}
+   */
   get value() {
-    return this.#modify(super.value);
+    return BaseRoll.minValue(this.bonus || "0", this.getRollData()) + this.competence?.bonus;
   }
 
   /** @inheritDoc */
   getLocalRollData() {
-    return foundry.utils.mergeObject(super.getLocalRollData(), { "": this.value, score: this.score });
+    return foundry.utils.mergeObject(super.getLocalRollData(), { score: this.score });
   }
 }

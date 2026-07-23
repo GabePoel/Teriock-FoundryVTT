@@ -1,9 +1,9 @@
-import { initialNumber } from "../../fields/tools/initializers.mjs";
 import BaseModifierModel from "./base-modifier-model.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * A {@link BaseModifierModel} for attribute modifiers.
- * @property {number} passive
  * @see {FeatExecution}
  */
 export default class AttributeModel extends BaseModifierModel {
@@ -13,13 +13,23 @@ export default class AttributeModel extends BaseModifierModel {
   }
 
   /** @inheritDoc */
-  static defineSchema(options) {
-    return Object.assign(super.defineSchema(options), { passive: initialNumber(4) });
+  static defineSchema() {
+    return Object.assign(super.defineSchema(), {
+      score: new fields.NumberField({ initial: -3, integer: true, max: 5, min: -3 }),
+    });
   }
 
   /** @inheritDoc */
   get name() {
     return TERIOCK.config.attribute[this.key].label;
+  }
+
+  /**
+   * Passive attribute value.
+   * @returns {number}
+   */
+  get passive() {
+    return 10 + this.score;
   }
 
   /** @inheritDoc */
@@ -29,7 +39,7 @@ export default class AttributeModel extends BaseModifierModel {
 
   /** @inheritDoc */
   getLocalRollData() {
-    return Object.assign(super.getLocalRollData(), { pas: this.passive });
+    return Object.assign(super.getLocalRollData(), { passive: this.passive });
   }
 
   /** @inheritDoc */

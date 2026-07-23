@@ -80,15 +80,16 @@
           </div>
           {{formInput
             (path @root/systemFields "attributes.fields" name "fields.score")
+            classes="ch-attribute-input tcolored tcenter ttransparent selected"
+            disabled=(eq name "unp")
+            type="number"
             value=(ifThen
               (eq name "unp")
               @root/system.attributes.unp.score
               (path @root/system._source.attributes name "score"))
-            classes="ch-attribute-input tcolored tcenter ttransparent selected"
-            disabled=(eq name "unp")
           }}
         </div>
-        <div class="tcolored tcenter">{{sign (path @root/system.attributes name "currentValue")}}</div>
+        <div class="tcolored tcenter">{{sign (path @root/system.attributes name "value")}}</div>
       </div>
     {{/each}}
   </div>
