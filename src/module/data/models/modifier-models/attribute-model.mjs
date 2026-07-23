@@ -15,7 +15,7 @@ export default class AttributeModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      score: new fields.NumberField({ initial: -3, integer: true, max: 5, min: -3 }),
+      score: new fields.NumberField({ initial: -3, integer: true, max: 5, min: -3, required: true }),
     });
   }
 

@@ -117,7 +117,7 @@ export default function EquipmentStoragePart(Base) {
         if (this.stashed) { return 0; }
         let total = this.weight * (this.consumable ? this.quantity.value : 1) * this.weightMultiplier;
         if (this.storage.enabled) { total += this.storage.carriedWeight; }
-        return total.toNearest(equipmentConfig.weight.interval);
+        return total.toNearest(TERIOCK.config.system.unitPrecision);
       }
 
       /** @inheritDoc */
@@ -348,7 +348,7 @@ export default function EquipmentStoragePart(Base) {
       /** @inheritDoc */
       prepareSpecialData() {
         super.prepareSpecialData();
-        this.weight = this.weight.toNearest(equipmentConfig.weight.interval);
+        this.weight = this.weight.toNearest(TERIOCK.config.system.unitPrecision);
       }
     }
   );

@@ -104,7 +104,7 @@ export default class BaseActorSystem
     return [
       _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.lvl", { number: this.scaling.lvl }),
       _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.br", { number: this.scaling.br }),
-      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", { number: this.size.number }),
+      _loc("TERIOCK.SHEETS.Actor.SIDEBAR.Scaling.scaled.size", { number: this.size.value }),
     ];
   }
 

@@ -37,7 +37,7 @@ export default function ActorAutomationPart(Base) {
           && this.transformation.primary?.system.transformation.override.has("size")
           && this.transformation.primary?.system.primarySpecies?.system.size.value
         ) {
-          this.size.number = this.transformation.primary?.system.primarySpecies.system.size.value || this.size.number;
+          this.size.value = this.transformation.primary?.system.primarySpecies.system.size.value || this.size.value;
         }
       }
 

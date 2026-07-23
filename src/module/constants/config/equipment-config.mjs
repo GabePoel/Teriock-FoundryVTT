@@ -13,7 +13,6 @@ export default {
     unknown: { color: colors.palette.grey, icon: icons.powerLevel.unknown, label: "TERIOCK.TERMS.PowerLevel.unknown" },
   },
   unidentifiedProperties: ["cumbersome", "destroyed", "glowing", "master-crafted", "morganti", "shattered", "small"],
-  weight: { interval: 0.01 },
 };
 
 preLocalizeConfig("config.equipment.powerLevel", { keys: ["label"] });

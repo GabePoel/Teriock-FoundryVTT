@@ -1,7 +1,7 @@
-import equipmentConfig from "../../../../../../constants/config/equipment-config.mjs";
 import { TeriockActor } from "../../../../../../documents/_module.mjs";
 import { initialNumber, initialString } from "../../../../../fields/tools/initializers.mjs";
 import { migrateEvaluationToNumber } from "../../../../../migrations/_module.mjs";
+import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
 
 const { fields } = foundry.data;
 const { utils } = foundry;
@@ -31,19 +31,14 @@ export default function ActorCapacitiesPart(Base) {
           size: new fields.SchemaField({
             category: initialString(),
             length: initialNumber(),
-            number: new fields.NumberField({ initial: 3, label: "Size", max: 30, min: 0.25 }),
             reach: initialNumber(),
+            value: new fields.NumberField({ initial: 3, label: "Size", max: 30, min: 0.25 }),
           }),
           weight: new fields.SchemaField({
             carried: initialNumber(),
             equipment: initialNumber(),
             money: initialNumber(),
-            self: new fields.NumberField({
-              initial: null,
-              interval: equipmentConfig.weight.interval,
-              min: 0,
-              nullable: true,
-            }),
+            self: new fields.NumberField({ initial: null, min: 0, nullable: true }),
             value: initialNumber(),
           }),
         });
@@ -58,6 +53,7 @@ export default function ActorCapacitiesPart(Base) {
           source.weight = parseFloat(utils.getProperty(source, "weight").replace("lb", "").trim());
         }
         migrateEvaluationToNumber(source, "size.number", { fallback: 3 });
+        migrateKey(source, "size.number", "size.value");
         migrateEvaluationToNumber(source, "weight.self", { fallback: null });
         return super.migrateData(source, options, state);
       }
@@ -66,7 +62,7 @@ export default function ActorCapacitiesPart(Base) {
        * Prepare carrying capacity from STR.
        */
       #prepareCarryingCapacity() {
-        const factor = 65 + 20 * (this.attributes.str.score + Math.pow(Math.max(this.size.number - 4, 0), 2));
+        const factor = 65 + 20 * (this.attributes.str.score + Math.pow(Math.max(this.size.value - 4, 0), 2));
         this.carryingCapacity = { factor, heavy: factor * 2, light: factor, max: factor * 3 };
       }
 
@@ -89,9 +85,9 @@ export default function ActorCapacitiesPart(Base) {
         for (const e of this.parent.equipment) { equipmentWeight += e.system.totalWeight; }
         this.weight.equipment = equipmentWeight;
         const carried = this.weight.equipment + this.weight.money;
-        this.weight.carried = carried.toNearest(equipmentConfig.weight.interval);
+        this.weight.carried = carried.toNearest(TERIOCK.config.system.unitPrecision);
         const value = this.weight.equipment + this.weight.money + this.weight.self;
-        this.weight.value = value.toNearest(equipmentConfig.weight.interval);
+        this.weight.value = value.toNearest(TERIOCK.config.system.unitPrecision);
       }
 
       /** @inheritDoc */
@@ -106,7 +102,7 @@ export default function ActorCapacitiesPart(Base) {
           "carry.light.hit": Number(weightCarried >= this.carryingCapacity.light),
           "carry.max": this.carryingCapacity.max,
           "carry.max.hit": Number(weightCarried >= this.carryingCapacity.max),
-          size: this.size.number,
+          size: this.size.value,
           weight: this.weight.self,
         });
         return rollData;
@@ -121,11 +117,12 @@ export default function ActorCapacitiesPart(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        const sizeDefinition = TeriockActor.getSizeConfig(this.size.number);
+        const sizeDefinition = TeriockActor.getSizeConfig(this.size.value);
         this.size.category = sizeDefinition.category;
         this.size.length = sizeDefinition.length;
         this.size.reach = sizeDefinition.reach;
-        if (this.weight.self === null) { this.weight.self = TeriockActor.getDefaultWeight(this.size.number); }
+        this.weight.self ??= this.weight.self = TeriockActor.getDefaultWeight(this.size.value);
+        this.weight.self = this.weight.self.toNearest(TERIOCK.config.system.unitPrecision);
       }
 
       /** @inheritDoc */

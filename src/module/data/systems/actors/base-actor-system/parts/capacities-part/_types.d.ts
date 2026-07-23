@@ -10,10 +10,10 @@ declare global {
         category: string;
         /** <derived> */
         length: number;
-        /** <schema> Numbered size */
-        number: number;
         /** <derived> */
         reach: number;
+        /** <schema> Numbered size */
+        value: number;
       };
       /** <schema> Weight of the actor and what they carry */
       weight: {

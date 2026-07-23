@@ -91,16 +91,16 @@
                   affix
                   {{#if (and
                   highlightModified
-                  (not (eq system.size.number system._source.size.number)))}}
+                  (not (eq system.size.value system._source.size.value)))}}
                     modified
                   {{/if}}
                 "
               >
                 <div class="unselected">
-                  <span class="actor-size-input actor-smallbox-value">{{{ system.size.number }}}</span>
+                  <span class="actor-size-input actor-smallbox-value">{{{ system.size.value }}}</span>
                 </div>
                 {{formInput
-                  systemFields.size.fields.number
+                  systemFields.size.fields.value
                   classes="actor-size-input actor-smallbox-value selected transparent-input"
                   context="actor"
                   dataset=(object
@@ -110,7 +110,7 @@
                       reach=system.size.reach)
                     tooltipClass=""
                     tooltipDirection="DOWN")
-                  value=system._source.size.number
+                  value=system._source.size.value
                 }}
               </div>
             </div>

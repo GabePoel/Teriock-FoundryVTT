@@ -20,7 +20,7 @@ export default class BaseModifierModel
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       bonus: new FormulaField({ deterministic: false }),
-      score: new fields.NumberField({ initial: 0, integer: true, nullable: false }),
+      score: new fields.NumberField({ initial: 0, integer: true, nullable: false, required: true }),
     });
   }
 

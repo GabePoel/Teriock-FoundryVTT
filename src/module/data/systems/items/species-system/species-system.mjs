@@ -86,12 +86,12 @@ export default class SpeciesSystem
    */
   async #onCreateChangeSize() {
     const actor = this.actor;
-    if (!this.size.enabled || this.size.value === actor.system._source.size.number) { return; }
+    if (!this.size.enabled || this.size.value === actor.system._source.size.value) { return; }
     const proceed = await TeriockDialog.confirm({
       content: await TeriockTextEditor.enrichHTML(
         _loc("TERIOCK.DIALOGS.ChangeSize.content", {
           actor: `@UUID[${actor.uuid}]`,
-          actorSize: actor.system._source.size.number,
+          actorSize: actor.system._source.size.value,
           species: `@UUID[${this.parent.uuid}]`,
           speciesSize: this.size.value,
         }),
@@ -103,7 +103,7 @@ export default class SpeciesSystem
         title: _loc("TERIOCK.DIALOGS.ChangeSize.title"),
       },
     });
-    if (proceed) { await actor.update({ "system.size.number": this.size.value }); }
+    if (proceed) { await actor.update({ "system.size.value": this.size.value }); }
   }
 
   /** @inheritDoc */
@@ -230,7 +230,7 @@ export default class SpeciesSystem
       system: {
         _src: this.parent.uuid,
         ...Object.fromEntries(POOL_STATS.map(k => [k, { value: systemConfig.inf }])),
-        size: { number: this.size.value },
+        size: { value: this.size.value },
       },
       type: "creature",
     }, data);

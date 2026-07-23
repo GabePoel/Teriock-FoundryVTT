@@ -120,7 +120,7 @@ export default function TransformationSystemMixin(Base) {
           }
           s.system.competence.raw = this.transformation.competence.value;
           if (s.system.size.min && s.system.size.max) {
-            s.system.size.value = Math.clamp(this.actor.system.size.number, s.system.size.min, s.system.size.max);
+            s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
           }
         });
         const op = this.parent.getCreateDependentDocumentsOperation("Item", itemData);

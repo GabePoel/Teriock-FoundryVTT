@@ -52,7 +52,7 @@ export default function ActorMoneyPart(Base) {
         this.weight.money = Object.keys(TERIOCK.config.currency).reduce((sum, key) => {
           const weight = (this.money[key] || 0) * TERIOCK.config.currency[key].weight;
           return sum + weight;
-        }, 0).toNearest(0.01);
+        }, 0).toNearest(TERIOCK.config.system.unitPrecision);
       }
 
       /**

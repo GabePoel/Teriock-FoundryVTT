@@ -141,7 +141,7 @@ declare global {
 
     export type ExpansionEntry = DeliveryEntry & { needsSaveAttribute?: boolean };
 
-    export type SubtypeEntry = { color: string, icon: string, label: string };
+    export type SubtypeEntry = { color?: string, icon: string, label: string };
   }
 }
 

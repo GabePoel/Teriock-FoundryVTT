@@ -153,8 +153,8 @@ export default function ActorTokenPart(Base) {
         if (yes === false) { return false; }
 
         const tokenUpdates = foundry.utils.getProperty(changes, "prototypeToken") || {};
-        if (foundry.utils.hasProperty(changes, "system.size.number")) {
-          const tokenSize = TeriockActor.getSizeConfig(foundry.utils.getProperty(changes, "system.size.number")).length;
+        if (foundry.utils.hasProperty(changes, "system.size.value")) {
+          const tokenSize = TeriockActor.getSizeConfig(foundry.utils.getProperty(changes, "system.size.value")).length;
           if (!foundry.utils.hasProperty(changes, "prototypeToken.width")) {
             tokenUpdates.width = tokenSize;
             tokenUpdates.height = tokenSize;

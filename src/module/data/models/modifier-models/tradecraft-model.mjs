@@ -15,7 +15,7 @@ export default class TradecraftModel extends BaseModifierModel {
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      score: new fields.NumberField({ initial: 0, integer: true, max: 3, min: 0 }),
+      score: new fields.NumberField({ initial: 0, integer: true, max: 3, min: 0, required: true }),
     });
   }
 

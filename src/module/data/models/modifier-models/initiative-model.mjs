@@ -16,7 +16,7 @@ export default class InitiativeModel extends BaseModifierModel {
   static defineSchema() {
     return Object.assign(omit(super.defineSchema(), ["score"]), {
       bonus: new FormulaField({ deterministic: false, initial: characterConfig.defaults.initiative.bonus }),
-      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 }, required: false }),
+      competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
     });
   }
 

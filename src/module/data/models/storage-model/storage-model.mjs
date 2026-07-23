@@ -1,4 +1,3 @@
-import equipmentConfig from "../../../constants/config/equipment-config.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
 
 const { fields } = foundry.data;
@@ -40,7 +39,7 @@ export default class StorageModel extends BaseDataModel {
   get carriedWeight() {
     // Async stored equipment is assumed to have a weight of 0
     return this.storedEquipment.map(e => e.system?.totalWeight ?? 0).reduce((a, b) => a + b, 0).toNearest(
-      equipmentConfig.weight.interval,
+      TERIOCK.config.system.unitPrecision,
     );
   }
 
