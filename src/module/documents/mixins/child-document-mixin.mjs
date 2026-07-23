@@ -85,6 +85,14 @@ export default function ChildDocumentMixin(Base) {
         if (this.isTop) { this.prepareChangeData(); }
       }
 
+      /**
+       * Toggles whether this document is disabled.
+       * @returns {Promise<void>}
+       */
+      async toggleDisabled() {
+        await this.update({ "system.disabled": !this.system.disabled });
+      }
+
       /** @inheritDoc */
       async use(options = {}) {
         await this.system.use(options);

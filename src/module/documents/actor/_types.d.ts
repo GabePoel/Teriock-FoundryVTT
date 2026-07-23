@@ -57,8 +57,6 @@ declare global {
 
       get documentName(): "Actor";
 
-      getDependentTokens(): TeriockTokenDocument[];
-
       get id(): ID<AnyActor>;
 
       get temporaryEffects(): TeriockActiveEffect[];

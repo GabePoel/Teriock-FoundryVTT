@@ -96,6 +96,7 @@
                   (not (eq system.size.value system._source.size.value)))}}
                     tcolored
                   {{/if}}
+                  affix
                 "
                 data-action="updatePaths"
                 data-icon="{{ TERIOCK.display.icons.species.size }}"
@@ -105,7 +106,12 @@
                 data-tooltip-direction="DOWN"
                 style="height: 2rem"
               >
-                {{{ system.size.value }}}
+                <div class="unselected">
+                  {{{ system.size.value }}}
+                </div>
+                <div class="selected">
+                  {{{ system._source.size.value }}}
+                </div>
               </div>
             </div>
             <div class="actor-shortbox actor-weight-box">
@@ -120,6 +126,7 @@
                   (not (eq system.weight.self system._source.weight.self)))}}
                     tcolored
                   {{/if}}
+                  affix
                 "
                 data-action="updatePaths"
                 data-icon="{{ TERIOCK.display.icons.equipment.weight }}"
@@ -129,8 +136,14 @@
                 data-tooltip-direction="DOWN"
                 style="height: 2rem{{#unless (or (eq system._source.weight.self 0) system._source.weight.self)}}; color: var(--color-text-subtle){{/unless}}"
               >
-                {{{ system.weight.self }}}
-                {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+                <div class="unselected">
+                  {{{ system.weight.self }}}
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+                </div>
+                <div class="selected">
+                  {{#if system._source.weight.self}}{{{ system._source.weight.self }}}{{else}}0{{/if}}
+                  {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
+                </div>
               </div>
             </div>
             <div class="actor-shortbox actor-carrying-box">

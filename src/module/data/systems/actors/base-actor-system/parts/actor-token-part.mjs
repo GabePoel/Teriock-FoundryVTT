@@ -160,16 +160,6 @@ export default function ActorTokenPart(Base) {
             tokenUpdates.height = tokenSize;
             foundry.utils.setProperty(changes, "prototypeToken", tokenUpdates);
           }
-          for (const token of this.parent.getDependentTokens()) {
-            if (token.parent?.grid?.type === 0) { await token.resize({ height: tokenSize, width: tokenSize }); }
-          }
-        }
-        if (Object.keys(tokenUpdates).length > 0) {
-          await Promise.all(
-            this.parent.getDependentTokens().filter(t => t.id).map(t =>
-              t.update(foundry.utils.deepClone(tokenUpdates))
-            ),
-          );
         }
       }
 

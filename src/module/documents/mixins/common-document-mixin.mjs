@@ -377,14 +377,6 @@ export default function CommonDocumentMixin(Base) {
       }
 
       /**
-       * Toggles whether this document is disabled.
-       * @returns {Promise<void>}
-       */
-      async toggleDisabled() {
-        await this.update({ "system.disabled": !this.system.disabled });
-      }
-
-      /**
        * Update multiple child Document instances descendant from a Document using provided differential data.
        * @param {ChildDocumentName} embeddedName
        * @param {object[]} updates

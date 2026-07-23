@@ -174,7 +174,7 @@ export default function ChildSystemMixin(Base) {
 
       /**
        * @inheritDoc
-       * @returns {AnyChildDocument}
+       * @returns {ChildDocument}
        */
       get parent() {
         return /** @type {AnyChildDocument} */ super.parent;
