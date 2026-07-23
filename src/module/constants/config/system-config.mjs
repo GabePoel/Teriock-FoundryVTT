@@ -4,4 +4,5 @@ export default {
   resistanceThreshold: 10,
   target: { limb: 2, vitals: 3 },
   timeout: { writeOperation: 5 * 1000 },
+  unitPrecision: 0.01,
 };

@@ -1,5 +1,3 @@
-import { EvaluationModel } from "../data/abstract/_module.mjs";
-
 declare global {
   namespace Teriock.Fields {
     export type _FormulaFieldOptions = {
@@ -19,21 +17,6 @@ declare global {
       idOnly?: boolean;
       /** Force to null if the specified condition is met */
       nullify?: (doc: TeriockDocument) => boolean;
-    };
-
-    export type FormulaDerivationOptions = {
-      blank?: number | string;
-      bool?: boolean;
-      ceil?: boolean;
-      floor?: boolean;
-      interval?: number;
-      max?: number;
-      min?: number;
-      skipRollData?: boolean;
-    };
-
-    export type _EvaluationFieldOptions = _FormulaFieldOptions & FormulaDerivationOptions & {
-      model?: typeof EvaluationModel;
     };
 
     export type _IdentifierFieldOptions = { reset?: string | null, type?: string | null };

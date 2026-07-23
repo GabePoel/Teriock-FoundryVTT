@@ -1,4 +1,3 @@
-export { default as EvaluationField } from "./evaluation-field.mjs";
 export { default as FormulaField } from "./formula-field.mjs";
 export { default as IdentifierField } from "./identifier-field.mjs";
 export { default as LocalDocumentField } from "./local-document-field.mjs";

@@ -137,7 +137,7 @@ export default class RegionAutomation
    */
   #evaluate(path, rollData, execution = null) {
     let out = 0;
-    if (path !== "angle" && !this[path] && execution) { out = execution.source.system.range.currentValue ?? 0; }
+    if (path !== "angle" && !this[path] && execution) { out = execution.source.system.range.value ?? 0; }
     else if (this[path]) { out = BaseRoll.minValue(this[path], rollData); }
     if (path === "angle") { return out; }
     out *= canvas.dimensions.distancePixels;

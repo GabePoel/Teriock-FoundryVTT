@@ -1,6 +1,7 @@
 import { toId } from "../../../../../../helpers/string.mjs";
-import { EvaluationField } from "../../../../../fields/_module.mjs";
 import { DurationModel } from "../../../../../models/unit-models/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * Ability duration part.
@@ -20,7 +21,7 @@ export default function AbilityDurationPart(Base) {
     class AbilityDurationPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
-        return Object.assign(super.defineSchema(), { duration: new EvaluationField({ model: DurationModel }) });
+        return Object.assign(super.defineSchema(), { duration: new fields.EmbeddedDataField(DurationModel) });
       }
 
       /** @inheritDoc */

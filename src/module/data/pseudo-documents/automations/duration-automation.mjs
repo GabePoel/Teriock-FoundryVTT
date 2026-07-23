@@ -1,7 +1,9 @@
-import { EvaluationField, FormulaField } from "../../fields/_module.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 import { TimeUnitModel } from "../../models/unit-models/_module.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
+
+const { fields } = foundry.data;
 
 /**
  * @property {TimeUnitModel} duration
@@ -24,7 +26,7 @@ export default class DurationAutomation extends CritMechanicMixin(BaseAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      duration: new EvaluationField({ model: TimeUnitModel }),
+      duration: new fields.EmbeddedDataField(TimeUnitModel),
       substitution: new FormulaField({ initial: "@base + @new" }),
     });
   }

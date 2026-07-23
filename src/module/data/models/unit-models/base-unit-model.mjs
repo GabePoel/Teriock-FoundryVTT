@@ -1,13 +1,17 @@
 import { UnitUpdater } from "../../../applications/dialogs/updaters/_module.mjs";
+import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { multiplyFormula } from "../../../helpers/formula.mjs";
-import { EvaluationModel } from "../../abstract/_module.mjs";
+import { BaseDataModel } from "../../abstract/_module.mjs";
+import FormulaField from "../../fields/formula-field.mjs";
 
 const { fields } = foundry.data;
 
 /**
+ * Model for a formula paired with a unit of measurement.
+ * @property {Teriock.System.FormulaString} raw
  * @property {string} unit
  */
-export default class BaseUnitModel extends EvaluationModel {
+export default class BaseUnitModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseUnit"];
 
@@ -44,14 +48,15 @@ export default class BaseUnitModel extends EvaluationModel {
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(super.defineSchema(), {
+    return {
+      raw: new FormulaField(),
       unit: new fields.StringField({
         choices: this.choices,
         initial: this.choiceEntries[0].id,
         nullable: false,
         required: true,
       }),
-    });
+    };
   }
 
   /**
@@ -63,20 +68,16 @@ export default class BaseUnitModel extends EvaluationModel {
     const unitType = this.unitType;
     if (unitType === "zero") { return 0; }
     if (unitType === "infinite") { return Infinity; }
-    return value.toNearest(0.01);
-  }
-
-  /** @inheritDoc */
-  get _formPaths() {
-    return ["unit", "raw"];
+    return value.toNearest(TERIOCK.config.system.unitPrecision);
   }
 
   /**
-   * Title for update window.
-   * @returns {string}
+   * Derive the value of the formula.
+   * @param {object} [rollData]
+   * @returns {number}
    */
-  get _updateTitle() {
-    return _loc("TERIOCK.MODELS.BaseUnit.UPDATE.basic", { label: this.schema.label });
+  #evaluate(rollData = {}) {
+    return BaseRoll.minValue(this.formula, rollData);
   }
 
   /**
@@ -99,20 +100,19 @@ export default class BaseUnitModel extends EvaluationModel {
     return this.constructor.finiteChoiceEntries.find(e => e.id === this.unit).conversion || 1;
   }
 
-  /** @inheritDoc */
-  get currentValue() {
-    return this.#convert(super.currentValue);
-  }
-
-  /** @inheritDoc */
+  /**
+   * The plain formula including unit conversion.
+   * @returns {Teriock.System.FormulaString}
+   */
   get formula() {
     const unitType = this.unitType;
     if (unitType === "zero") { return "0"; }
-    if (unitType === "infinite") { return "9".repeat(32); }
+    if (unitType === "infinite") { return TERIOCK.config.system.inf.toString(); }
 
+    const formula = this.raw || "0";
     const conversion = this.conversion;
-    if (conversion === 1) { return super.formula; }
-    return multiplyFormula(super.formula, conversion.toString());
+    if (conversion === 1) { return formula; }
+    return multiplyFormula(formula, conversion.toString());
   }
 
   /**
@@ -124,6 +124,14 @@ export default class BaseUnitModel extends EvaluationModel {
   }
 
   /**
+   * Evaluated value that's safe to use in roll data.
+   * @returns {number}
+   */
+  get rollValue() {
+    return this.#convert(this.#evaluate());
+  }
+
+  /**
    * An abbreviation for the unit.
    * @returns {string}
    */
@@ -131,7 +139,10 @@ export default class BaseUnitModel extends EvaluationModel {
     return this.constructor.choiceEntries.find(e => e.id === this.unit).symbol || this.unit;
   }
 
-  /** @inheritDoc */
+  /**
+   * Text that represents this unit value.
+   * @returns {string}
+   */
   get text() {
     if (this.unitType === "finite") {
       const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
@@ -150,20 +161,23 @@ export default class BaseUnitModel extends EvaluationModel {
     return "infinite";
   }
 
-  /** @inheritDoc */
+  /**
+   * Value as derived from current roll data.
+   * @returns {number}
+   */
   get value() {
-    return this.#convert(super.value);
+    return this.#convert(this.#evaluate(this.getRollData()));
   }
 
   /**
-   * Convert the current to a given unit.
+   * Convert the current value to a given unit.
    * @param {string} unit
    * @returns {number}
    */
   convertTo(unit) {
     const unitType = this.unitType;
-    if (unitType !== "finite") { return this.currentValue; }
-    return (this.constructor.finiteChoiceEntries.find(e => e.id === unit).conversion || 1) * this.currentValue;
+    if (unitType !== "finite") { return this.value; }
+    return (this.constructor.finiteChoiceEntries.find(e => e.id === unit).conversion || 1) * this.value;
   }
 
   /**

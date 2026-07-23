@@ -1,6 +1,6 @@
 import { formulaExists } from "../../../../../../helpers/formula.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { EvaluationField, FormulaField } from "../../../../../fields/_module.mjs";
+import { FormulaField } from "../../../../../fields/_module.mjs";
 import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
 
@@ -31,7 +31,7 @@ export default function AbilityUsagePart(Base) {
           }),
           executionTime: new fields.SchemaField({
             base: new fields.StringField({ blank: false, initial: "a1", required: true }),
-            slow: new EvaluationField({ model: SlowExecutionTimeModel }),
+            slow: new fields.EmbeddedDataField(SlowExecutionTimeModel),
           }),
           expansion: new fields.SchemaField({
             cap: new FormulaField({ deterministic: false }),
@@ -41,7 +41,7 @@ export default function AbilityUsagePart(Base) {
               initial: "mov",
               required: true,
             }),
-            range: new EvaluationField({ model: RangeModel }),
+            range: new fields.EmbeddedDataField(RangeModel),
             type: new fields.StringField({ initial: null, nullable: true }),
           }),
           featSaveAttribute: new fields.StringField({
@@ -63,7 +63,7 @@ export default function AbilityUsagePart(Base) {
             nullable: false,
             required: true,
           }),
-          range: new EvaluationField({ model: RangeModel }),
+          range: new fields.EmbeddedDataField(RangeModel),
           targets: new fields.SetField(
             new fields.StringField({
               choices: objectMap(TERIOCK.config.ability.targets, v => v.label, { localize: true }),
@@ -237,7 +237,7 @@ export default function AbilityUsagePart(Base) {
           [`time.${this.executionTime.base}`]: 1,
           interaction: this.interaction,
           maneuver: this.maneuver,
-          range: this.range.value,
+          range: this.range.rollValue,
           time: this.executionTime.base,
         });
         // Add deliveries
@@ -253,7 +253,7 @@ export default function AbilityUsagePart(Base) {
             [`expansion.${this.expansion.type}`]: 1,
             [`expansion.attr.${this.expansion.featSaveAttribute}`]: 1,
             expansion: this.expansion,
-            ["expansion.range"]: this.expansion.range.value,
+            ["expansion.range"]: this.expansion.range.rollValue,
           });
         }
         // Add targets

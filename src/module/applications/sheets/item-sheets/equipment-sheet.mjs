@@ -26,7 +26,7 @@ export default class EquipmentSheet extends mixClasses(ArmamentSheet, InventoryM
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), {
       rangeString: this.document.system.range.long.unitType === "finite"
-        ? secondaryFormat(this.document.system.range.long.formula, this.document.system.range.short.formula, {
+        ? secondaryFormat(this.document.system.range.long.raw, this.document.system.range.short.raw, {
           reverse: true,
           secondFilter: formulaExists,
         })

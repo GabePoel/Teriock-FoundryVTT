@@ -7,7 +7,7 @@ export default class LengthUnitModel extends BaseUnitModel {
    */
   static get finiteChoiceEntries() {
     return [{
-      conversion: 5 / 20,
+      conversion: 0.03281,
       id: "cm",
       label: "TERIOCK.MODELS.LengthUnit.UNITS.cm.label",
       plural: "TERIOCK.MODELS.LengthUnit.UNITS.cm.plural",
@@ -29,7 +29,7 @@ export default class LengthUnitModel extends BaseUnitModel {
       symbol: "ft",
       system: "imperial",
     }, {
-      conversion: 5 / 2,
+      conversion: 3.281,
       id: "m",
       label: "TERIOCK.MODELS.LengthUnit.UNITS.m.label",
       plural: "TERIOCK.MODELS.LengthUnit.UNITS.m.plural",
@@ -44,7 +44,7 @@ export default class LengthUnitModel extends BaseUnitModel {
       symbol: "mi",
       system: "imperial",
     }, {
-      conversion: 2500,
+      conversion: 3281,
       id: "km",
       label: "TERIOCK.MODELS.LengthUnit.UNITS.km.label",
       plural: "TERIOCK.MODELS.LengthUnit.UNITS.km.plural",

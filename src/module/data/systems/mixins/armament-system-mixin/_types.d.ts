@@ -30,8 +30,6 @@ declare global {
       props: Set<string>;
       /** <schema> Range (ft) (if ranged) */
       range: {
-        /** <base> Text that summarizes the range */
-        description: string;
         /** <schema> Long range (this is the default range) */
         long: RangeModel;
         /** <schema> Is the armament mêlée? */

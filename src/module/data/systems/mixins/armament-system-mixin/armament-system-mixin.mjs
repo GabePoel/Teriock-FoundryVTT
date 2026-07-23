@@ -3,7 +3,7 @@ import { addTypesToFormula, formulaExists } from "../../../../helpers/formula.mj
 import { makeIcon } from "../../../../helpers/icon.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
-import { EvaluationField, IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
+import { IdentifierField, MultiChangeField } from "../../../fields/_module.mjs";
 import { defenseField, rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { initialText } from "../../../fields/tools/initializers.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
@@ -66,10 +66,10 @@ export default function ArmamentSystemMixin(Base) {
           ),
           notes: new fields.HTMLField({ initial: "" }),
           range: new MultiChangeField({
-            long: new EvaluationField({ label: "Range", model: RangeModel }),
+            long: new fields.EmbeddedDataField(RangeModel, { label: "Range" }),
             melee: new fields.BooleanField({ initial: true }),
             ranged: new fields.BooleanField({ initial: false }),
-            short: new EvaluationField({ model: RangeModel }),
+            short: new fields.EmbeddedDataField(RangeModel),
           }, { multiChangePaths: ["long", "short"] }),
           settings: new fields.EmbeddedDataField(documentSettingsModels.armament),
           specialRules: initialText(),
@@ -362,10 +362,11 @@ export default function ArmamentSystemMixin(Base) {
           bv: this.bv.value,
           dmg: this.damage.base,
           "dmg.2h": this.damage.twoHanded,
-          range: this.range.long.formula,
+          range: this.range.long.rollValue,
+          "range.long": this.range.long.rollValue,
           "range.melee": Number(this.range.melee),
           "range.ranged": Number(this.range.ranged),
-          "range.short": this.range.short.formula,
+          "range.short": this.range.short.rollValue,
           spellTurning: Number(this.spellTurning),
           style: this.fightingStyle,
           vitals: Number(this.vitals),
@@ -397,7 +398,6 @@ export default function ArmamentSystemMixin(Base) {
         this.damage.twoHanded = addTypesToFormula(this.damage.twoHanded, this.damage.types);
 
         // Range
-        this.range.description = "";
         if (this.range.long.unitType === "zero") { this.range.melee = true; }
         this.range.ranged = this.range.long.unitType !== "zero";
       }
@@ -407,31 +407,11 @@ export default function ArmamentSystemMixin(Base) {
         super.prepareDerivedData();
 
         // Range
-        if (
-          this.range.long.unitType === "zero"
-          || (this.range.long.unitType === "finite" && this.range.short.unitType === "finite")
-        ) {
-          this.range.short.unit = this.range.long.unit;
-        }
+        this.range.short.unit = this.range.long.unit;
 
         // Fighting Style
         if (this.fightingStyle && this.fightingStyle.length > 0) {
           this.specialRules = TERIOCK.content.weaponFightingStyles[this.fightingStyle];
-        }
-      }
-
-      /** @inheritDoc */
-      prepareSpecialData() {
-        super.prepareSpecialData();
-
-        // Range
-        if (!this.hasAttack) { this.range.melee = false; }
-        this.range.description = this.range.long.abbreviation;
-        if (this.range.long.unitType !== "zero") {
-          const shortDescription = this.range.short.unitType === "finite"
-            ? this.range.short.formula
-            : this.range.short.text;
-          this.range.description = `${shortDescription} / ${this.range.description}`;
         }
       }
     }
