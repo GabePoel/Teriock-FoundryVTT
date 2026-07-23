@@ -142,6 +142,7 @@ function cleanActor(doc) {
   delete doc.system.weight;
   delete doc.system.detection;
   if (doc.system.scaling) { delete doc.system.scaling.lvl; }
+  delete doc.system.initiative;
 }
 
 /**

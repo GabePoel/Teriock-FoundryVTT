@@ -173,7 +173,7 @@ export default function MechanicsSheetMixin(Base) {
        */
       async _onDropMechanic(_event, dropData) {
         const baseClass = this._mechanicCollectionFor(dropData.type)?.baseClass;
-        if (!baseClass) { return false }
+        if (!baseClass) { return false; }
         const document = await baseClass.fromDropData(dropData);
         if (!document || !this._validateDrop({ document })) { return false; }
         await baseClass.create(document.toObject(), { parent: this.document });
