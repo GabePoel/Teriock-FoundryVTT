@@ -27,12 +27,17 @@ export default class ShortRestExecution extends DocumentExecution {
       new UseDocumentsAutomation({
         _id: toId(UseDocumentsAutomation.TYPE, { hash: true }),
         automatic: false,
+        inheritCompetence: false,
         local: { qualifier: `and(@ability, @time.${this.executionTime})` },
+        overrideCompetence: false,
         trigger: "execute",
         type: "useDocuments",
       }, { parent: this.source.system }),
     ];
   }
+
+  /** @type {TeriockAbility[]} */
+  #abilities = [];
 
   /** @inheritDoc */
   get _dialogButtons() {
@@ -55,10 +60,7 @@ export default class ShortRestExecution extends DocumentExecution {
    * @returns {boolean}
    */
   get _hasAbilities() {
-    return this.actor?.abilities.some(a => {
-      const time = a.system.executionTime;
-      return time?.base === this.executionTime || time?.slow?.unit === this.executionTime;
-    }) ?? false;
+    return Boolean(this.#abilities.length);
   }
 
   /** @inheritDoc */
@@ -103,6 +105,18 @@ export default class ShortRestExecution extends DocumentExecution {
   /** @inheritDoc */
   async _buildPanels() {
     this.panels = [Object.assign(await this.journalEntryPage.toPanel(), { icon: this.icon })];
+  }
+
+  /** @inheritDoc */
+  async _fetchData() {
+    const yes = await super._fetchData();
+    if (yes === false) { return false; }
+
+    this.#abilities = ((await this.actor?.getEffectiveChildren()) ?? []).filter(c => {
+      return c.type === "ability"
+        && (c.system.executionTime.base === this.executionTime
+          || c.system.executionTime.slow.unit === this.executionTime);
+    });
   }
 
   /** @inheritDoc */

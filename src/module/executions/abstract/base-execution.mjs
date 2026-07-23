@@ -335,7 +335,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     if (foundry.utils.hasProperty(this.source, "competence.raw")) {
       competence = foundry.utils.getProperty(this.source, "competence.value");
     }
-    if (foundry.utils.hasProperty(options, "competence")) { competence = options.competence; }
+    if (typeof options.competence === "number") { competence = options.competence; }
     this.updateSource({ "competence.raw": competence });
   }
 

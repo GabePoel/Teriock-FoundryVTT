@@ -24,6 +24,16 @@ const {
 } = foundry.data.fields;
 
 /**
+ * Safely localize a string.
+ * @param {string} s
+ * @returns {string}
+ */
+function _sloc(s) {
+  if (typeof globalThis?._loc === "function") { return _loc(s); }
+  return s;
+}
+
+/**
  * Tradecraft choices.
  * @returns {Record<string, FormSelectOption>}
  */
@@ -32,9 +42,9 @@ function getTradecraftChoices() {
   for (const [k, v] of Object.entries(tradecraftConfig.tradecrafts)) {
     const fieldKey = v.field;
     if (!RAW_TRADECRAFT_CHOICES[fieldKey]) {
-      RAW_TRADECRAFT_CHOICES[fieldKey] = { choices: {}, label: tradecraftConfig.fields[fieldKey].label };
+      RAW_TRADECRAFT_CHOICES[fieldKey] = { choices: {}, label: _sloc(tradecraftConfig.fields[fieldKey].label) };
     }
-    RAW_TRADECRAFT_CHOICES[fieldKey].choices[toKebabCase(k)] = v.label;
+    RAW_TRADECRAFT_CHOICES[fieldKey].choices[toKebabCase(k)] = _sloc(v.label);
   }
   return formatDynamicSelectOptions(RAW_TRADECRAFT_CHOICES);
 }
@@ -48,9 +58,9 @@ function getClassChoices() {
   for (const [k, v] of Object.entries(classConfig.classes)) {
     const archetypeKey = v.archetype;
     if (!RAW_CLASS_CHOICES[archetypeKey]) {
-      RAW_CLASS_CHOICES[archetypeKey] = { choices: {}, label: _loc(classConfig.archetypes[archetypeKey].label) };
+      RAW_CLASS_CHOICES[archetypeKey] = { choices: {}, label: _sloc(classConfig.archetypes[archetypeKey].label) };
     }
-    RAW_CLASS_CHOICES[archetypeKey].choices[toKebabCase(k)] = _loc(v.label);
+    RAW_CLASS_CHOICES[archetypeKey].choices[toKebabCase(k)] = _sloc(v.label);
   }
   return formatDynamicSelectOptions(RAW_CLASS_CHOICES);
 }
@@ -207,9 +217,9 @@ export function panelsField() {
 export function competenceField() {
   return new NumberField({
     choices: objectMap(competenceConfig.levels, l => l.label, { localize: true, sort: false }),
-    hint: _loc("TERIOCK.SCHEMA.Competence.hint"),
+    hint: _sloc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
-    label: _loc("TERIOCK.SCHEMA.Competence.label"),
+    label: _sloc("TERIOCK.SCHEMA.Competence.label"),
     max: 2,
     min: 0,
     nullable: false,
@@ -281,7 +291,7 @@ function deathBagStoneField(color, number) {
   return new FormulaField({
     deterministic: false,
     initial: `${number}`,
-    label: _loc("TERIOCK.TERMS.Stones.ofColor", { color: _loc(`TERIOCK.TERMS.StoneColor.${color}`) }),
+    label: _sloc("TERIOCK.TERMS.Stones.ofColor", { color: _sloc(`TERIOCK.TERMS.StoneColor.${color}`) }),
     nullable: false,
   });
 }
@@ -325,7 +335,7 @@ export function tradecraftField(options = {}) {
   return new IdentifierField({
     choices: getTradecraftChoices(),
     initial: Object.keys(TERIOCK.reference.tradecrafts)[0],
-    label: _loc("TERIOCK.TERMS.Common.tradecraft"),
+    label: _sloc("TERIOCK.TERMS.Common.tradecraft"),
     nullable: false,
     type: "tradecraft",
     ...options,
@@ -338,7 +348,7 @@ export function tradecraftField(options = {}) {
  * @returns {SetField}
  */
 export function tradecraftsField(options = {}) {
-  return new SetField(new StringField({ choices: getTradecraftChoices() }), options);
+  return new SetField(new StringField({ choices: getTradecraftChoices }), options);
 }
 
 /**
@@ -350,7 +360,7 @@ export function fieldField(options = {}) {
   return new IdentifierField({
     choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
     initial: Object.keys(tradecraftConfig.fields)[0],
-    label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
+    label: _sloc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
     nullable: false,
     type: "field",
     ...options,
@@ -366,7 +376,7 @@ export function classField(options = {}) {
   return new IdentifierField({
     choices: getClassChoices(),
     initial: Object.keys(TERIOCK.reference.classes)[0],
-    label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
+    label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.class.label"),
     nullable: false,
     type: "class",
     ...options,
@@ -382,7 +392,7 @@ export function archetypeField(options = {}) {
   return new IdentifierField({
     choices: objectMap(classConfig.archetypes, a => a.label, { localize: true }),
     initial: Object.keys(classConfig.archetypes)[0],
-    label: _loc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
+    label: _sloc("TERIOCK.SYSTEMS.Rank.FIELDS.archetype.label"),
     nullable: false,
     type: "archetype",
     ...options,

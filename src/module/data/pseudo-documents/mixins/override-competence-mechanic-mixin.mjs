@@ -11,6 +11,7 @@ export default function OverrideCompetenceMechanicMixin(Base) {
     /**
      * @mixin
      * @property {CompetenceModel} competence
+     * @property {boolean} inheritCompetence
      * @property {boolean} overrideCompetence
      */
     class OverrideCompetenceMechanic extends Base {
@@ -21,6 +22,7 @@ export default function OverrideCompetenceMechanicMixin(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           competence: new fields.EmbeddedDataField(CompetenceModel),
+          inheritCompetence: new fields.BooleanField(),
           overrideCompetence: new fields.BooleanField(),
         });
       }
@@ -30,7 +32,9 @@ export default function OverrideCompetenceMechanicMixin(Base) {
        * @returns {string[]}
        */
       get _competencePaths() {
-        const paths = ["overrideCompetence"];
+        const paths = [];
+        if (!this.overrideCompetence) { paths.push("inheritCompetence"); }
+        if (!this.inheritCompetence) { paths.push("overrideCompetence"); }
         if (this.overrideCompetence) { paths.push("competence.raw"); }
         return paths;
       }
@@ -42,8 +46,18 @@ export default function OverrideCompetenceMechanicMixin(Base) {
 
       /** @inheritDoc */
       getCompetence(scope) {
+        if (this.inheritCompetence && (scope?.execution?.competence || this.document?.system?.competence)) {
+          return scope?.execution?.competence?.value ?? this.document?.system?.competence?.value;
+        }
         if (this.overrideCompetence) { return this.competence.value; }
-        return super.getCompetence(scope);
+        return undefined;
+      }
+
+      /** @inheritDoc */
+      prepareData() {
+        super.prepareData();
+        if (this.inheritCompetence) { this.overrideCompetence = false; }
+        if (this.overrideCompetence) { this.inheritCompetence = false; }
       }
     }
   );
