@@ -50,17 +50,23 @@ export default function PlayableActorSheetTabsPart(Base) {
       }
 
       /** @inheritDoc */
-      async _onRender(context, options) {
-        await super._onRender(context, options);
-        if (options.window?.detach || options.window?.attach) { this.#applyTabDirection(); }
-      }
-
-      /** @inheritDoc */
       async _prepareContext(options = {}) {
         return Object.assign(await super._prepareContext(options), {
           floatingTabs: game.settings.get("teriock", "floatingActorTabs"),
           tabDirection: this.#tabTooltipDirection,
         });
+      }
+
+      /** @inheritDoc */
+      attachWindow(options = {}) {
+        super.attachWindow(options);
+        this.#applyTabDirection();
+      }
+
+      /** @inheritDoc */
+      detachWindow(options = {}) {
+        super.detachWindow(options);
+        this.#applyTabDirection();
       }
     }
   );

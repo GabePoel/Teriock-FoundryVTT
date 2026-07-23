@@ -68,7 +68,7 @@ export default function BaseApplicationMixin(Base) {
      * Internal tracking of detached state.
      * @type {boolean}
      */
-    #detached = false;
+    #detached = this.window?.windowId === this.id;
 
     /**
      * Apply a tracked collapse to every `.collapsible` element and every toggle control (`[data-collapsible-target]`)
@@ -198,6 +198,18 @@ export default function BaseApplicationMixin(Base) {
           ));
       this.#applyCollapsibleState(collapsibleId, collapsed, root);
       return collapsed;
+    }
+
+    /** @inheritDoc */
+    attachWindow(options = {}) {
+      this.#detached = false;
+      return super.attachWindow(options);
+    }
+
+    /** @inheritDoc */
+    detachWindow(options = {}) {
+      this.#detached = true;
+      return super.detachWindow(options);
     }
   }
 
