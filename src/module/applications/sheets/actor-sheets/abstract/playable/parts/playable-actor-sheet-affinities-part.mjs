@@ -1,13 +1,6 @@
 import affinityConfig from "../../../../../../constants/config/affinity-config.mjs";
-import { AffinityPreviewModel } from "../../../../../../data/models/preview-models/_module.mjs";
 import { getImage } from "../../../../../../helpers/path.mjs";
 import { parseIdentifier } from "../../../../../../helpers/utils.mjs";
-
-/**
- * How affinities are grouped, in display order.
- * @type {{ label: string, types: Teriock.Affinities.Type[] }[]}
- */
-const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
 
 /**
  * @param {typeof BaseActorSheet} Base
@@ -19,30 +12,6 @@ export default function PlayableActorSheetAffinitiesPart(Base) {
      * @mixin
      */
     class PlayableActorSheetAffinitiesPart extends Base {
-      /**
-       * A group for each kind of affinity.
-       * @this {PlayableActorSheetAffinitiesPart}
-       * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
-       */
-      static async #previewGroupAffinity() {
-        const entries = this.document.system.affinityEntries;
-        return AFFINITY_GROUPS.map(group => ({
-          docs: entries.filter(affinity => group.types.includes(affinity.type)),
-          empty: _loc(group.label).toLowerCase(),
-          optional: true,
-        }));
-      }
-
-      /** @inheritDoc */
-      static PREVIEWS = {
-        ...super.PREVIEWS,
-        affinity: {
-          data: { display: { gapless: false, size: "medium" } },
-          groups: this.#previewGroupAffinity,
-          model: AffinityPreviewModel,
-        },
-      };
-
       /**
        * Prepare affinity roll buttons context.
        * @param {object} context

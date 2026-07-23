@@ -5,8 +5,8 @@ export { default as PlayableActorSheetConditionsPart } from "./playable-actor-sh
 export { default as PlayableActorSheetDocumentCreationPart } from "./playable-actor-sheet-document-creation-part.mjs";
 export { default as PlayableActorSheetImpactPart } from "./playable-actor-sheet-impact-part.mjs";
 export { default as PlayableActorSheetMechanicalPart } from "./playable-actor-sheet-mechanical-part.mjs";
-export { default as PlayableActorSheetPreviewPart } from "./playable-actor-sheet-preview-part.mjs";
 export { default as PlayableActorSheetRollingPart } from "./playable-actor-sheet-rolling-part.mjs";
+export { default as PlayableActorSheetSectionsPart } from "./playable-actor-sheet-sections-part.mjs";
 export { default as PlayableActorSheetSidebarPart } from "./playable-actor-sheet-sidebar-part.mjs";
 export { default as PlayableActorSheetTabsPart } from "./playable-actor-sheet-tabs-part.mjs";
 export { default as PlayableActorSheetTradecraftsPart } from "./playable-actor-sheet-tradecrafts-part.mjs";

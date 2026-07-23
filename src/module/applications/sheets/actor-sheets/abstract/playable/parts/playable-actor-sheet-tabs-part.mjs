@@ -1,5 +1,3 @@
-import documentConfig from "../../../../../../constants/config/document-config.mjs";
-import { icons } from "../../../../../../constants/display/icons.mjs";
 import { TeriockDragDrop } from "../../../../../ux/_module.mjs";
 
 /**
@@ -14,57 +12,6 @@ export default function PlayableActorSheetTabsPart(Base) {
     class PlayableActorSheetTabsPart extends Base {
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = { actions: { changeTab: this._onChangeTab } };
-
-      /**
-       * The tab that a document of each type belongs to, used to reveal where a dragged document would land.
-       * @type {Record<Teriock.Documents.CommonType, string>}
-       */
-      static TAB_FOR_SYSTEM_TYPE = {
-        archetype: "classes",
-        attunement: "effects",
-        base: "effects",
-        body: "inventory",
-        condition: "effects",
-        consequence: "effects",
-        cover: "effects",
-        equipment: "inventory",
-        fluency: "tradecrafts",
-        hack: "effects",
-        mount: "inventory",
-        power: "powers",
-        rank: "classes",
-        resource: "resources",
-        species: "powers",
-      };
-
-      /** @type {Record<string, Partial<ApplicationTabsConfiguration>>} */
-      static TABS = {
-        primary: {
-          tabs: [
-            {
-              icon: documentConfig.fluency.icon,
-              id: "tradecrafts",
-              label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
-            },
-            { icon: documentConfig.ability.icon, id: "abilities", label: "TERIOCK.SHEETS.Actor.TABS.Abilities.title" },
-            {
-              icon: documentConfig.inventory.icon,
-              id: "inventory",
-              label: "TERIOCK.SHEETS.Actor.TABS.Inventory.title",
-            },
-            { icon: documentConfig.rank.icon, id: "classes", label: "TERIOCK.SHEETS.Actor.TABS.Classes.title" },
-            { icon: documentConfig.power.icon, id: "powers", label: "TERIOCK.SHEETS.Actor.TABS.Powers.title" },
-            { icon: documentConfig.resource.icon, id: "resources", label: "TERIOCK.SHEETS.Actor.TABS.Resources.title" },
-            { icon: documentConfig.condition.icon, id: "effects", label: "TERIOCK.SHEETS.Actor.TABS.Effects.title" },
-            {
-              icon: icons.pseudoDocument.affinity,
-              id: "affinities",
-              label: "TERIOCK.SHEETS.Actor.TABS.Affinities.title",
-            },
-            { icon: icons.ui.details, id: "details", label: "TERIOCK.SHEETS.Actor.TABS.Details.title" },
-          ],
-        },
-      };
 
       /**
        * Change tab.
@@ -107,10 +54,11 @@ export default function PlayableActorSheetTabsPart(Base) {
       async _onDragOver(event) {
         await super._onDragOver(event);
         if (event.dataTransfer.dropEffect === "none" || this._fieldDropTarget(event)) { return; }
-        const tab = this.constructor.TAB_FOR_SYSTEM_TYPE[TeriockDragDrop.payload?.document?.type];
-        if (!tab || tab === this._activeTab) { return; }
+        const droppedType = TeriockDragDrop.payload?.document?.type;
+        const tabId = this.constructor.SECTIONS.find(section => (section.dragTypes ?? []).includes(droppedType))?.id;
+        if (!tabId || tabId === this._activeTab) { return; }
         this.#tabBeforeDrag ??= this._activeTab;
-        await this.setActiveTab(tab);
+        await this.setActiveTab(tabId);
       }
 
       /** @inheritDoc */
