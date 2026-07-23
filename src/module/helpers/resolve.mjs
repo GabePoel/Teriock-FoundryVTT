@@ -1,4 +1,4 @@
-import { TypeCollection } from "../documents/collections/_module.mjs";
+import { SubCollection, TypeCollection } from "../documents/collections/_module.mjs";
 
 const { Document } = foundry.abstract;
 
@@ -48,12 +48,14 @@ export async function resolveDocuments(syncDocs, options = {}) {
 
 /**
  * Ensure all documents in a collection are not indexes.
- * @param {TypeCollection} typeCollection
- * @returns {Promise<TypeCollection>}
+ * @param {SubCollection|TypeCollection} collection
+ * @returns {Promise<SubCollection|TypeCollection>}
  */
-export async function resolveCollection(typeCollection) {
-  const syncDocs = await resolveDocuments(typeCollection.contents);
-  return new TypeCollection(syncDocs.map(d => [d.id, d]));
+export async function resolveCollection(collection) {
+  const syncDocs = await resolveDocuments(collection.contents);
+  const entries = syncDocs.map(d => [d.id, d]);
+  if (collection instanceof SubCollection) { return new SubCollection(entries, collection.supId); }
+  return new TypeCollection(entries);
 }
 
 /**

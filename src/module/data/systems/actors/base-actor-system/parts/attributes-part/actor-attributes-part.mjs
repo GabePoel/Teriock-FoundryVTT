@@ -21,7 +21,7 @@ export default function ActorAttributesPart(Base) {
         Object.entries(TERIOCK.config.attribute).forEach((
           [key, value],
         ) => (attributes[key] = new EmbeddedDataField(AttributeModel, {
-          initial: { bonus: `2 * @${key}.score`, score: -3 },
+          initial: { bonus: `2 * @${key}.score`, competence: { raw: 0 }, score: -3 },
           label: value.label,
         })));
         return Object.assign(super.defineSchema(), { attributes: new SchemaField(attributes) });

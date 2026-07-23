@@ -6,5 +6,6 @@ export { default as TeriockJournal } from "./journal.mjs";
 export { default as TeriockMacros } from "./macros.mjs";
 export { default as TeriockRollTables } from "./roll-tables.mjs";
 export { default as TeriockScenes } from "./scenes.mjs";
+export { default as SubCollection } from "./sub-collection.mjs";
 export { default as TypeCollection } from "./type-collection.mjs";
 export { default as TeriockUsers } from "./users.mjs";

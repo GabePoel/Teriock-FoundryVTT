@@ -16,12 +16,12 @@ export default class TeriockItemDirectory extends DocumentDirectoryMixin(ItemDir
       icon: makeIconClass(documentConfig.creature.icon, "contextMenu"),
       label: "TERIOCK.SYSTEMS.Species.EMBED.makeCreature",
       onClick: async (_ev, li) => {
-        const data = await this._getDocumentFromLi(li)?.system.toCreature();
+        const data = await this._getEntryFromLi(li)?.system.toCreature();
         if (!data) { return; }
         TeriockActor.create(data, { renderSheet: true });
         ui.actors?.activate();
       },
-      visible: li => this._getDocumentFromLi(li)?.type === "species" && game.user.hasPermission("ACTOR_CREATE"),
+      visible: li => this._getEntryFromLi(li)?.type === "species" && game.user.hasPermission("ACTOR_CREATE"),
     }, ...super._getEntryContextOptions()];
   }
 }

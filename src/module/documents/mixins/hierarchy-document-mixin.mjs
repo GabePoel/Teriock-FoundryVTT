@@ -1,5 +1,5 @@
 import { resolveCollection, resolveDocument } from "../../helpers/resolve.mjs";
-import { TypeCollection } from "../collections/_module.mjs";
+import { SubCollection, TypeCollection } from "../collections/_module.mjs";
 
 const { Collection } = foundry.utils;
 
@@ -97,7 +97,7 @@ export default function HierarchyDocumentMixin(Base) {
         await this._cacheDocumentReferenceCompendiums(documents);
         for (const doc of documents) {
           if (doc.system?._ref) {
-            const ref = await fromUuid(doc.system._ref);
+            const ref = /** @type {HierarchyDocument} */ await fromUuid(doc.system._ref);
             let create = true;
             if (ref) {
               if (knownRefs.includes(ref.uuid) && !operation.allowDuplicateSubs) { create = false; }
@@ -110,7 +110,6 @@ export default function HierarchyDocumentMixin(Base) {
               toCreate.push(newDoc);
               /** @type {Record<ID<AnyCommonDocument>, ID<AnyCommonDocument>>} */
               const idMap = { [ref.id]: newDoc._id };
-              /** @type {TypeCollection<ID<HierarchyDocument>, HierarchyDocument>} */
               const allRefSubs = await ref.getAllSubs();
               const clones = [];
               for (const sub of allRefSubs.contents) {
@@ -210,55 +209,6 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * Get all subs for a given document.
-       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
-       * @param {Collection} [collection]
-       * @returns {TypeCollection}
-       */
-      static findAllSubs(document, collection) {
-        const subs = this.findSubs(document, collection);
-        if (subs.size === 0) { return new TypeCollection(); }
-        return new TypeCollection(
-          subs.contents.flatMap(s => [s, ...this.findAllSubs(s, collection)]).map(s => [s._id, s]),
-        );
-      }
-
-      /**
-       * Get all sups for a given document.
-       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
-       * @param {Collection} [collection]
-       * @returns {TypeCollection}
-       */
-      static findAllSups(document, collection) {
-        const sup = this.findSup(document, collection);
-        if (!sup) { return new TypeCollection(); }
-        return new TypeCollection([sup].concat(this.findAllSups(sup)?.contents || []).map(d => [d._id, d]));
-      }
-
-      /**
-       * Get subs for a given document.
-       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
-       * @param {Collection} [collection]
-       * @returns {TypeCollection}
-       */
-      static findSubs(document, collection) {
-        if (!collection) { collection = document.siblingCollection; }
-        const subArray = collection.filter(d => foundry.utils.getProperty(d, "system._sup") === document._id);
-        return new TypeCollection(subArray.map(d => [d._id, d]));
-      }
-
-      /**
-       * The sup for a given document.
-       * @param {AnyCommonDocument|Teriock.Hierarchy.Index<AnyCommonDocument>} document
-       * @param {Collection} collection
-       * @returns {AnyCommonDocument|undefined}
-       */
-      static findSup(document, collection) {
-        if (!collection) { collection = document.siblingCollection; }
-        if (document.system?._sup) { return collection?.get(document.system._sup); }
-      }
-
-      /**
        * Validate if a relationship between a sup and sub is allowed.
        * @param {HierarchyDocument} sup
        * @param {HierarchyDocument} sub
@@ -312,11 +262,23 @@ export default function HierarchyDocumentMixin(Base) {
       }
 
       /**
-       * All the sub descendant of this document or their indexes.
+       * All the subs descendant of this document or their indexes.
        * @returns {TypeCollection}
        */
       get allSubs() {
-        return HierarchyDocument.findAllSubs(this, this.siblingCollection);
+        const found = new Map();
+        let toSearchFor = new Set([this.id]);
+        while (toSearchFor.size) {
+          const nextSearch = new Set();
+          for (const entry of this.siblingCollection ?? []) {
+            if (toSearchFor.has(foundry.utils.getProperty(entry, "system._sup")) && !found.has(entry._id)) {
+              found.set(entry._id, entry);
+              nextSearch.add(entry._id);
+            }
+          }
+          toSearchFor = nextSearch;
+        }
+        return new TypeCollection(found);
       }
 
       /**
@@ -324,7 +286,17 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {TypeCollection}
        */
       get allSups() {
-        if (!this._cache.allSups) { this._cache.allSups = HierarchyDocument.findAllSups(this, this.siblingCollection); }
+        if (!this._cache.allSups) {
+          const sups = new Map();
+          let supId = this.system?._sup;
+          while (supId && !sups.has(supId)) {
+            const sup = this.siblingCollection?.get(supId);
+            if (!sup) { break; }
+            sups.set(supId, sup);
+            supId = foundry.utils.getProperty(sup, "system._sup");
+          }
+          this._cache.allSups = new TypeCollection(sups);
+        }
         return this._cache.allSups;
       }
 
@@ -365,10 +337,14 @@ export default function HierarchyDocumentMixin(Base) {
 
       /**
        * Lazily recomputed collection of the subs of this document or their indexes.
-       * @returns {TypeCollection}
+       * @returns {SubCollection}
        */
       get subs() {
-        if (!this._cache.subs) { this._cache.subs = HierarchyDocument.findSubs(this, this.siblingCollection); }
+        if (!this._cache.subs) {
+          const subArray = this.siblingCollection?.filter(d => foundry.utils.getProperty(d, "system._sup") === this.id)
+            ?? [];
+          this._cache.subs = new SubCollection(subArray.map(d => [d._id, d]), this.id);
+        }
         return this._cache.subs;
       }
 
@@ -377,12 +353,19 @@ export default function HierarchyDocumentMixin(Base) {
        * @returns {Teriock.Hierarchy.SyncDoc<AnyCommonDocument>|undefined}
        */
       get sup() {
-        return HierarchyDocument.findSup(this, this.siblingCollection);
+        if (this.system?._sup) { return this.siblingCollection?.get(this.system._sup); }
       }
 
       /** @inheritDoc */
       get visible() {
         return super.visible && !this.sup;
+      }
+
+      /** @inheritDoc */
+      get visibleChildren() {
+        return super.visibleChildren.filter(c =>
+          c?.parent === this || foundry.utils.getProperty(c, "system._sup") === this.id || c?.master === this
+        );
       }
 
       /** @inheritDoc */

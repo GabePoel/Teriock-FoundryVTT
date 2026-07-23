@@ -1,69 +1,57 @@
 import { getPackIcon } from "../../../helpers/html.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
+import { DocumentDirectoryMixin } from "../tabs/_module.mjs";
 
 const { Compendium } = foundry.applications.sidebar.apps;
 
-/** @inheritDoc */
-export default class TeriockCompendium extends Compendium {
+/**
+ * @mixes TeriockDocumentDirectory
+ * @extends {Compendium}
+ */
+export default class TeriockCompendium extends DocumentDirectoryMixin(Compendium) {
   static _entryPartial = "teriock/sidebar/index-partial";
 
-  /** @inheritDoc */
-  _createDroppedEntry(entry, updates = {}) {
-    if (foundry.utils.getProperty(entry, "system._sup")) { updates["system._sup"] = null; }
-    return super._createDroppedEntry(entry, updates);
+  /**
+   * Remove entries with sups from the context tree.
+   * @param {object} node
+   */
+  #purgeContextTree(node) {
+    if (!node?.entries?.length && !node?.children?.length) { return; }
+    node.entries = node.entries.filter(e => !foundry.utils.getProperty(e, "system._sup"));
+    for (const c of node.children ?? []) { this.#purgeContextTree(c); }
   }
 
   /** @inheritDoc */
-  _entryAlreadyExists(entry) {
-    return super._entryAlreadyExists(entry) && !foundry.utils.getProperty(entry, "system._sup");
+  get _tooltipSettingsKey() {
+    return "compendiumTooltips";
   }
 
   /** @inheritDoc */
   _getEntryContextOptions() {
-    return [
-      {
-        icon: makeIconClass(TERIOCK.display.icons.ui.panel),
-        label: "TERIOCK.SHEETS.Panel.OPEN",
-        onClick: async (_ev, li) => {
-          const document = await this.collection?.getDocument(li.dataset.entryId);
-          await document?.openPanelSheet();
-        },
-        visible: () =>
-          game.settings.get("teriock", "openPanelContextMenuEntry")
-          && ["ActiveEffect", "Actor", "Item"].includes(this.documentName),
+    return [...super._getEntryContextOptions(), {
+      icon: makeIconClass(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
+      label: "TERIOCK.COMPENDIUM.DuplicateEntry",
+      visible: game.user.isGM && !this.collection?.locked,
+      onClick: async (_ev, li) => {
+        const document = await this.collection?.getDocument(li.dataset.entryId);
+        await document?.duplicate();
       },
-      ...super._getEntryContextOptions(),
-      {
-        icon: makeIconClass(TERIOCK.display.icons.ui.duplicate, "contextMenu"),
-        label: "TERIOCK.COMPENDIUM.DuplicateEntry",
-        visible: game.user.isGM && !this.collection?.locked,
-        onClick: async (_ev, li) => {
-          const document = await this.collection?.getDocument(li.dataset.entryId);
-          await document?.duplicate();
-        },
-      },
-    ];
+    }];
   }
 
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
+  async _getEntryFromLi(li) {
+    return this.collection?.getDocument(li.dataset.entryId);
+  }
+
+  /** @inheritDoc */
+  async _prepareDirectoryContext(context, options) {
     if (this.collection?.index) {
       if (!this.collection._reindexing) { this.collection._reindexing = this.collection.getIndex(); }
       await this.collection._reindexing;
-      for (const doc of this.collection.index) {
-        if (foundry.utils.getProperty(doc, "system._sup")) {
-          this.element?.querySelector(`[data-entry-id="${doc?._id}"]`)?.remove();
-        }
-      }
     }
-  }
-
-  /** @inheritDoc */
-  async _prepareContext(options = {}) {
-    const context = await super._prepareContext(options);
-    if (game.settings.get("teriock", "compendiumTooltips")) { context.makeTooltip = true; }
-    return context;
+    await super._prepareDirectoryContext(context, options);
+    this.#purgeContextTree(context?.tree);
   }
 
   /** @inheritDoc */
@@ -72,5 +60,11 @@ export default class TeriockCompendium extends Compendium {
     // Allow use of custom compendium icons. This has the added quirk of changing the journal entry icons and not just
     // the header. But maybe that's not a bad thing?
     context.sidebarIcon = makeIconClass(getPackIcon(this.collection), "solid");
+  }
+
+  /** @inheritDoc */
+  _validateOpenPanelEntryContextOption() {
+    return game.settings.get("teriock", "openPanelContextMenuEntry")
+      && ["ActiveEffect", "Actor", "Item"].includes(this.documentName);
   }
 }
