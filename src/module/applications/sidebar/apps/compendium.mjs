@@ -8,6 +8,17 @@ export default class TeriockCompendium extends Compendium {
   static _entryPartial = "teriock/sidebar/index-partial";
 
   /** @inheritDoc */
+  _createDroppedEntry(entry, updates = {}) {
+    if (foundry.utils.getProperty(entry, "system._sup")) { updates["system._sup"] = null; }
+    return super._createDroppedEntry(entry, updates);
+  }
+
+  /** @inheritDoc */
+  _entryAlreadyExists(entry) {
+    return super._entryAlreadyExists(entry) && !foundry.utils.getProperty(entry, "system._sup");
+  }
+
+  /** @inheritDoc */
   _getEntryContextOptions() {
     return [
       {

@@ -12,6 +12,17 @@ export default function DocumentDirectoryMixin(Base) {
     class TeriockDocumentDirectory extends Base {
       static _entryPartial = "teriock/sidebar/document-partial";
 
+      /** @inheritDoc */
+      _createDroppedEntry(entry, updates = {}) {
+        if (foundry.utils.getProperty(entry, "system._sup")) { updates["system._sup"] = null; }
+        return super._createDroppedEntry(entry, updates);
+      }
+
+      /** @inheritDoc */
+      _entryAlreadyExists(entry) {
+        return super._entryAlreadyExists(entry) && !foundry.utils.getProperty(entry, "system._sup");
+      }
+
       /**
        * Get the document that corresponds to a certain list item.
        * @param {HTMLLIElement} li

@@ -129,6 +129,7 @@ export default function DragDropSheetMixin(Base) {
         if (this.#isSubMove(doc, dropEffect)) { return this.#onMoveSub(doc, interactive); }
 
         const obj = doc.toObject(true);
+        foundry.utils.setProperty(obj, "system._sup", null);
         if (doc.inCompendium && !doc._stats.compendiumSource) { obj["_stats.compendiumSource"] = doc.uuid; }
         const operations = [
           this.document.getCreateChildDocumentsOperation(doc.documentName, [obj], {
