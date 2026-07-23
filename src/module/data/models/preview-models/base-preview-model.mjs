@@ -302,7 +302,7 @@ export default class BasePreviewModel extends BaseDataModel {
    * @param {HTMLElement} element
    */
   apply(element) {
-    const results = element?.querySelector(`.teriock-block-results[data-search-key="${this.id}"]`);
+    const results = element?.querySelector(`.teriock-block-results[data-preview-search-key="${this.id}"]`);
     if (!results) { return; }
     const rendered = this.renderedGroups;
     const sizes = Object.keys(TERIOCK.config.display.sizes);
@@ -331,11 +331,11 @@ export default class BasePreviewModel extends BaseDataModel {
    */
   bind(element) {
     if (!element) { return; }
-    if (element.querySelector(`.teriock-block-search[data-search-key="${this.id}"]`)) {
+    if (element.querySelector(`.teriock-block-search[data-preview-search-key="${this.id}"]`)) {
       new SearchFilter({
-        contentSelector: `.teriock-block-results[data-search-key="${this.id}"]`,
+        contentSelector: `.teriock-block-results[data-preview-search-key="${this.id}"]`,
         initial: this.search,
-        inputSelector: `.teriock-block-search[data-search-key="${this.id}"]`,
+        inputSelector: `.teriock-block-search[data-preview-search-key="${this.id}"]`,
         callback: (_event, query) => {
           this.updateSource({ search: query });
           this.apply(element);
