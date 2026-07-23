@@ -211,7 +211,7 @@ export default function AbilityExecutionChatPart(Base) {
           });
         });
         let durationValue = await BaseRoll.getValue(durationFormula, this.getRollData());
-        if (durationValue > Number("9".repeat(30))) { durationValue = undefined; }
+        if (durationValue >= TERIOCK.config.system.inf / 10) { durationValue = undefined; }
         return durationValue;
       }
 
