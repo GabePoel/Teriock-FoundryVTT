@@ -18,14 +18,16 @@
       {{/if}}
     >
       <div class="actor-bar-overlay-row actor-{{ bar.config.bar.class }}-bar-overlay-row">
-        {{numberInput
-          bar.data.value
-          name=bar.paths.value
-          max=bar.data.max
-          min=bar.data.min
-          class="thover-soft actor-bar-overlay-left actor-bar-overlay-label"
+        {{formInput
+          (path @root/systemFields bar.key "fields.value")
+          classes="actor-bar-overlay-left actor-bar-overlay-label"
           dataset=(object tooltip=(localize bar.labels.current) noScroll="true")
           disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
+          max=bar.data.max
+          min=bar.data.min
+          name=bar.paths.value
+          type="number"
+          value=bar.data.value
         }}
         <div class="actor-bar-overlay-max actor-bar-overlay-label" data-tooltip="{{localize bar.labels.max}}">
           <span>
@@ -39,11 +41,12 @@
         {{#if bar.config.bar.temp}}
           {{formInput
             (path @root/systemFields bar.key "fields.temp")
-            name=bar.paths.temp
-            value=bar.data.temp
-            classes="thover-soft actor-bar-overlay-temp actor-bar-overlay-label"
+            classes="actor-bar-overlay-temp actor-bar-overlay-label"
             dataset=(object tooltip=(localize bar.labels.temp) noScroll="true")
             disabled=(and bar.config.bar.lockInputs (not (or @root/takeStatButtons @root/editStatBar)))
+            min=0
+            name=bar.paths.temp
+            value=bar.data.temp
           }}
         {{/if}}
       </div>
