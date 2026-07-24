@@ -1,6 +1,7 @@
 import { icons } from "../../../constants/display/icons.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../helpers/icon.mjs";
+import { omit } from "../../../helpers/utils.mjs";
 import { BaseDocumentSheetMixin } from "../../api/_module.mjs";
 import * as sheetMixins from "../mixins/_module.mjs";
 
@@ -31,7 +32,7 @@ export default class ApplicableEffectSheet
 
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = {
-    ...super.PARTS,
+    ...omit(super.PARTS, ["footer"]),
     header: { template: "teriock/sheets/shared/top" },
     children: { scrollable: [""], template: "teriock/sheets/effects/consequence/children-tab" },
     mechanics: {
@@ -58,14 +59,22 @@ export default class ApplicableEffectSheet
     this._locked = false;
   }
 
+  #editorForms;
+
   /** @inheritDoc */
-  async _onRender(context, options) {
-    await super._onRender(context, options);
-    this.element.querySelector("footer")?.remove();
+  async _prepareContext(context = {}) {
     if (this.document.system._formPaths.length) {
-      const disabledGroup = this.element.querySelector(".form-group:has(.form-fields input[name='disabled'])");
-      const editorForms = await this.document.system._getEditorForms({ rootId: this.id });
-      disabledGroup.after(editorForms);
+      this.#editorForms = await this.document.system._getEditorForms({ rootId: this.id });
     }
+    return super._prepareContext(context);
+  }
+
+  /** @inheritDoc */
+  _replaceHTML(result, content, options) {
+    if (this.#editorForms) {
+      const disabledGroup = result.details?.querySelector(".form-group:has(.form-fields input[name='disabled'])");
+      if (disabledGroup) { disabledGroup.after(this.#editorForms); }
+    }
+    super._replaceHTML(result, content, options);
   }
 }
