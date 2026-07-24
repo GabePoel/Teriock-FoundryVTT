@@ -22,6 +22,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
   return (
     /**
      * @extends {BaseActorSheet}
+     * @mixes PlayableActorSheetConditionsPart
      * @mixin
      */
     class PlayableActorSheetSectionsPart extends Base {
@@ -78,7 +79,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
       static async #previewGroupEquipment() {
         return [
           {
-            docs: this._childrenOfType("equipment").filter(e => !e.sup || e.sup.type !== "equipment"),
+            docs: this._childrenOfType("equipment").filter(e => !e?.sup || e.sup.type !== "equipment"),
             empty: TERIOCK.config.document.equipment.plural,
           },
           { docs: this._childrenOfType("body"), empty: TERIOCK.config.document.body.plural },

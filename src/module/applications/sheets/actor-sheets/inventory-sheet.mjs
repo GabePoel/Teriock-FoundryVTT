@@ -12,7 +12,10 @@ export default class InventorySheet extends BaseActorSheet {
    * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
    */
   static async #previewGroupEquipment() {
-    return [{ docs: this._childrenOfType("equipment"), empty: TERIOCK.config.document.equipment.plural }];
+    return [{
+      docs: this._childrenOfType("equipment").filter(e => !e?.sup || e.sup.type !== "equipment"),
+      empty: TERIOCK.config.document.equipment.plural,
+    }];
   }
 
   /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
