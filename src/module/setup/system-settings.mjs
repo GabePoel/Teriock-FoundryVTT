@@ -278,7 +278,8 @@ export const settings = {
       name: "TERIOCK.SETTINGS.deathBagMessageMode.name",
       scope: "world",
       type: new fields.StringField({
-        choices: objectMap(CONFIG.ChatMessage.modes, (c) => c.label),
+        blank: true,
+        choices: objectMap(CONFIG.ChatMessage.modes, (c) => c.label, { none: true }),
         initial: null,
         nullable: true,
       }),

@@ -33,7 +33,7 @@ export default class MoveActivation extends BaseActivation {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       distance: new fields.NumberField(),
-      movementAction: movementActionField({ initial: null, nullable: true, required: false }),
+      movementAction: movementActionField({ blank: true, initial: null, nullable: true, required: false }),
       originBarrier: new fields.BooleanField(),
       randomDirection: new fields.BooleanField(),
       token: new fields.DocumentUUIDField({ initial: null, nullable: true, type: "Token" }),

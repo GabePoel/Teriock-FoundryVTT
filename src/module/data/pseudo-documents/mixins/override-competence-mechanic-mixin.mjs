@@ -33,10 +33,9 @@ export default function OverrideCompetenceMechanicMixin(Base) {
           setCompetence: new fields.StringField({
             blank: true,
             choices: localizeChoices({
-              "": "TERIOCK.AUTOMATIONS.Competence.FIELDS.setCompetence.choices.none",
               inherit: "TERIOCK.AUTOMATIONS.Competence.FIELDS.setCompetence.choices.inherit",
               override: "TERIOCK.AUTOMATIONS.Competence.FIELDS.setCompetence.choices.override",
-            }, { sort: false }),
+            }, { none: true, sort: false }),
             initial: this._setCompetenceInitial,
             nullable: false,
             required: true,

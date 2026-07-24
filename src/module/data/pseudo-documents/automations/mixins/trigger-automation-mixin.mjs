@@ -35,7 +35,7 @@ export default function TriggerAutomationMixin(Base) {
         const choices = this.triggerMetadata.executionOnly && this.triggerMetadata.choices.execution
           ? { execution: this.triggerMetadata.choices.execution }
           : this.triggerMetadata.choices;
-        return formatDynamicSelectOptions(choices, { localize: true });
+        return formatDynamicSelectOptions(choices, { localize: true, none: true });
       }
 
       /** @inheritDoc */

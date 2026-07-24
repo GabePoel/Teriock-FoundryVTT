@@ -70,8 +70,11 @@ export default class AddDocumentsActivation extends BaseActivation {
       primary: familyConstructionField(),
       secondary: familyConstructionField(),
       target: new fields.StringField({
+        blank: false,
         choices: objectMap(effectConfig.applicationTargets, e => e.label, { localize: true }),
         initial: "actor",
+        nullable: false,
+        required: true,
       }),
     });
   }

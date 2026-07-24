@@ -1,16 +1,44 @@
 // Pre-localization code is blatantly stolen from D&D 5E and then brutally modified.
 
 /**
+ * Safely localize a string.
+ * @param {string} s
+ * @returns {string}
+ */
+export function _sloc(s) {
+  if (typeof globalThis?._loc === "function") { return _loc(s); }
+  return s;
+}
+
+/**
  * Localize an object.
  * @param {Record<string, string>} choices
  * @param {object} [options]
- * @param {boolean} [options.sort]
+ * @param {boolean} [options.none] - Prepend a blank "None" choice.
+ * @param {boolean} [options.sort] - Sort the choices alphabetically.
  * @returns {Record<string, string>}
  */
-export function localizeChoices(choices, options = { sort: true }) {
-  const out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _loc(v)]));
-  if (options.sort) { return teriock.helpers.utils.sortObject(out, { value: true }); }
-  return out;
+export function localizeChoices(choices, options = {}) {
+  const { none = false, sort = true } = options;
+  let out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _loc(v)]));
+  if (sort) { out = teriock.helpers.utils.sortObject(out, { value: true }); }
+  return none ? choicesWithNone(out) : out;
+}
+
+/**
+ * Prepend a blank choice labeled "None" to field choices.
+ * @template {string|FormSelectOption} T
+ * @param {Record<string, T>} choices
+ * @param {object} [options]
+ * @param {string} [options.noneChoice]
+ * @returns {Record<string, T|string|{label: string}>}
+ */
+export function choicesWithNone(choices = {}, { noneChoice = "COMMON.None" } = {}) {
+  const sample = Object.values(choices)[0];
+  const none = sample && typeof sample === "object" && "label" in sample
+    ? { label: _sloc(noneChoice) }
+    : _sloc(noneChoice);
+  return { "": none, ...choices };
 }
 
 /**

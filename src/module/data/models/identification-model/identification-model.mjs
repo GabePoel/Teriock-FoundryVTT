@@ -22,9 +22,12 @@ export default class IdentificationModel extends BaseDataModel {
       name: new fields.StringField({ gmOnly: true, initial: "" }),
       notes: new fields.HTMLField({ gmOnly: true, initial: "", required: false }),
       powerLevel: new fields.StringField({
+        blank: false,
         choices: objectMap(TERIOCK.config.equipment.powerLevel, e => e.label),
         gmOnly: true,
         initial: "mundane",
+        nullable: false,
+        required: true,
       }),
       read: new fields.BooleanField({ initial: true }),
     };

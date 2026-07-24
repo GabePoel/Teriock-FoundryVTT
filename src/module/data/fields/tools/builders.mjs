@@ -4,6 +4,7 @@ import classConfig from "../../../constants/config/class-config.mjs";
 import competenceConfig from "../../../constants/config/competence-config.mjs";
 import dieConfig from "../../../constants/config/death-bag-config.mjs";
 import tradecraftConfig from "../../../constants/config/tradecraft-config.mjs";
+import { _sloc } from "../../../helpers/localization.mjs";
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { DefenseModel } from "../../models/_module.mjs";
@@ -22,16 +23,6 @@ const {
   SetField,
   StringField,
 } = foundry.data.fields;
-
-/**
- * Safely localize a string.
- * @param {string} s
- * @returns {string}
- */
-function _sloc(s) {
-  if (typeof globalThis?._loc === "function") { return _loc(s); }
-  return s;
-}
 
 /**
  * Tradecraft choices.
@@ -235,15 +226,22 @@ export function competenceField() {
  * @returns {StringField}
  */
 export function attributeField(options = { nullable: true, unp: false }) {
-  return new StringField({
-    choices: objectMap(attributeConfig, (v) => v.label, {
-      localize: true,
-      filter: (v) => options.unp || !v?.notImprovable,
-    }),
+  const { unp = false, ...rest } = options;
+  const fieldOptions = {
     initial: options.nullable ? null : "int",
     nullable: options.nullable ?? true,
     required: false,
-    ...options,
+    ...rest,
+  };
+  const allowBlank = fieldOptions.blank || fieldOptions.nullable || !fieldOptions.required;
+  return new StringField({
+    ...fieldOptions,
+    blank: allowBlank,
+    choices: objectMap(attributeConfig, (v) => v.label, {
+      localize: true,
+      none: allowBlank,
+      filter: (v) => unp || !v?.notImprovable,
+    }),
   });
 }
 
@@ -253,7 +251,10 @@ export function attributeField(options = { nullable: true, unp: false }) {
  * @returns {StringField}
  */
 export function movementActionField(options = {}) {
+  const fieldOptions = { initial: "walk", nullable: false, required: true, ...options };
+  const allowBlank = fieldOptions.blank || fieldOptions.nullable || !fieldOptions.required;
   return new StringField({
+    ...fieldOptions,
     choices: objectMap(
       Object.fromEntries(
         Object.entries(CONFIG.Token.movement.actions).filter(([_k, v]) => {
@@ -263,12 +264,8 @@ export function movementActionField(options = {}) {
         }),
       ),
       t => t.label,
-      { localize: true },
+      { localize: true, none: allowBlank },
     ),
-    initial: "walk",
-    nullable: false,
-    required: true,
-    ...options,
   });
 }
 

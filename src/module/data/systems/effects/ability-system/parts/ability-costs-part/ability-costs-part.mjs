@@ -34,7 +34,8 @@ export default function AbilityCostsPart(Base) {
               return new fields.SchemaField({
                 description: new fields.HTMLField({ label }),
                 type: new fields.StringField({
-                  choices: localizeChoices(costConfig.components.types),
+                  blank: true,
+                  choices: localizeChoices(costConfig.components.types, { none: true }),
                   initial: null,
                   label,
                   nullable: true,
@@ -47,7 +48,8 @@ export default function AbilityCostsPart(Base) {
                 description: new fields.HTMLField({ label }),
                 formula: new FormulaField({ deterministic: false, initial: "0", label }),
                 type: new fields.StringField({
-                  choices: localizeChoices(costConfig.primary.types),
+                  blank: true,
+                  choices: localizeChoices(costConfig.primary.types, { none: true }),
                   initial: null,
                   label,
                   nullable: true,

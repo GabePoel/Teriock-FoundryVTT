@@ -1,3 +1,5 @@
+import { choicesWithNone, localizeChoices } from "./localization.mjs";
+
 /**
  * Make fields fancy.
  * @param {Teriock.Display.DisplayField[]} displayFields
@@ -81,12 +83,14 @@ export function sortObject(obj, options = {}) {
  * @param {object} [options]
  * @param {(T) => boolean} [options.filter]
  * @param {boolean} [options.localize] - The output can only be localized if the output is a string.
+ * @param {boolean} [options.none] - Prepend a blank "None" choice.
  * @returns {Record<string, U>}
  */
 export function objectMap(obj, fn, options = {}) {
-  const { filter = () => true, localize = false } = options;
+  const { filter = () => true, localize = false, none = false } = options;
   const out = Object.fromEntries(Object.entries(obj).filter(([_k, v]) => filter(v)).map(([k, v]) => [k, fn(v)]));
-  return localize ? teriock.helpers.localization.localizeChoices(out) : out;
+  if (localize) { return localizeChoices(out, { none }); }
+  return none ? choicesWithNone(out) : out;
 }
 
 /**
@@ -108,6 +112,7 @@ export function choiceMap(obj, fn, options = { localize: true }) {
  * @param {Teriock.Fields.DynamicChoices|Teriock.Fields.DynamicChoices[]} choices
  * @param {object} [options]
  * @param {boolean} [options.localize]
+ * @param {boolean} [options.none] - Prepend a blank "None" choice.
  * @returns {Record<string, FormSelectOption>}
  */
 export function formatDynamicSelectOptions(choices = {}, options = {}) {
@@ -130,7 +135,7 @@ export function formatDynamicSelectOptions(choices = {}, options = {}) {
     out[choice.value] = choice;
     delete out[choice.value].value;
   }
-  return out;
+  return options.none ? teriock.helpers.localization.choicesWithNone(out) : out;
 }
 
 /**

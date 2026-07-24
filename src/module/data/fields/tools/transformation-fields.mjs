@@ -54,7 +54,7 @@ export function automationTransformationFields() {
   return Object.assign(speciesTransformationFields(), {
     level: new fields.StringField({
       blank: true,
-      choices: TERIOCK.config.transformation.level,
+      choices: localizeChoices(TERIOCK.config.transformation.level, { none: true }),
       hint: "TERIOCK.SCHEMA.Transformation.level.hint",
       initial: null,
       label: "TERIOCK.SCHEMA.Transformation.level.label",

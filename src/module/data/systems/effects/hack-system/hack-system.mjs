@@ -1,6 +1,5 @@
 import { ApplicableEffectSystem } from "../_module.mjs";
 import hackConfig from "../../../../constants/config/hack-config.mjs";
-import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
 
@@ -19,7 +18,7 @@ export default class HackSystem extends ApplicableEffectSystem {
       escalation: new fields.NumberField({ initial: 1, integer: true, min: 0, required: true }),
       part: new fields.StringField({
         blank: true,
-        choices: localizeChoices(objectMap(hackConfig, c => c.part)),
+        choices: objectMap(hackConfig, c => c.part, { localize: true, none: true }),
         initial: null,
         nullable: true,
       }),
