@@ -55,7 +55,7 @@ export default function ArmamentSystemMixin(Base) {
           ),
           fightingStyle: new fields.StringField({
             blank: true,
-            choices: objectMap(TERIOCK.reference.weaponFightingStyles, v => v, { none: true }),
+            choices: objectMap(TERIOCK.reference.weaponFightingStyles, v => v, { localize: true, none: true }),
             initial: null,
             nullable: true,
           }),

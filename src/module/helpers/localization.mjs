@@ -20,7 +20,7 @@ export function _sloc(s) {
  */
 export function localizeChoices(choices, options = {}) {
   const { none = false, sort = true } = options;
-  let out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _loc(v)]));
+  let out = Object.fromEntries(Object.entries(choices).map(([k, v]) => [k, _sloc(v)]));
   if (sort) { out = teriock.helpers.utils.sortObject(out, { value: true }); }
   return none ? choicesWithNone(out) : out;
 }
