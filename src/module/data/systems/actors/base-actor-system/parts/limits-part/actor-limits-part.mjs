@@ -1,3 +1,5 @@
+import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
+import { consolidateWriteOperations } from "../../../../../../helpers/utils.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -30,14 +32,29 @@ export default function ActorLimitsPart(Base) {
         });
       }
 
+      /**
+       * The curses that count towards the maximum value.
+       * @returns {TeriockPower[]}
+       */
+      get curseDocuments() {
+        return this.parent.powers.filter(p => p.system.type === "curse");
+      }
+
+      /**
+       * The rotators that count towards the maximum value.
+       * @returns {TeriockAbility[]}
+       */
+      get rotatorDocuments() {
+        return this.parent.abilities.filter(a =>
+          a.system.rotator && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type))
+        );
+      }
+
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        this.curses.value = this.parent.powers.filter(p => p.system.type === "curse" && !p.disabled).length;
-        this.rotators.value =
-          this.parent.abilities.filter(a =>
-            a.active && !a.isReference && (!a.parent || ["power", "rank"].includes(a.parent.type)) && a.system.rotator
-          ).length;
+        this.curses.value = this.curseDocuments.filter(c => c.active).length;
+        this.rotators.value = this.rotatorDocuments.filter(r => r.active).length;
       }
     }
   );

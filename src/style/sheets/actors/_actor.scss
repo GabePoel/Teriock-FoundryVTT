@@ -1,5 +1,6 @@
 @use "../../components/colors" as colors;
 @use "../../mixins" as mixins;
+@use "./details-tab";
 @use "./intro-box";
 @use "./status-box";
 
@@ -373,11 +374,6 @@
         }
       }
 
-      .middle-box {
-        padding-bottom: 0 !important;
-        padding-top: 0 !important;
-      }
-
       .ch-battle-box {
         @include mixins.centralize;
         flex-direction: column;
@@ -394,6 +390,30 @@
 
         .defense-box {
           border-bottom: 1px solid var(--color-border);
+        }
+
+        .middle-box {
+          flex-direction: row;
+          gap: 0.5em;
+          padding-block: 0;
+
+          .reaction-box {
+            align-items: center;
+            display: flex;
+            flex-direction: row;
+            width: 57%;
+          }
+        }
+
+        .right-container {
+          align-items: center;
+          display: flex;
+          flex: 1;
+          justify-content: end;
+        }
+
+        .actor-fighting-style-label {
+          margin-top: 0.5em;
         }
       }
 
@@ -600,10 +620,15 @@
           var(--color-presence-bar-dark) 2px,
           var(--color-presence-bar-dark) 8px
         );
+        display: grid;
       }
 
       &.unused {
         background-color: var(--color-presence-bar-darkest);
+      }
+
+      &.empty {
+        background: transparent;
       }
     }
   }
@@ -656,6 +681,10 @@
   .tradecraft-panel-name {
     margin-left: 12px;
   }
+}
+
+.ch-attribute-abbr {
+  text-transform: uppercase;
 }
 
 .money-panels {

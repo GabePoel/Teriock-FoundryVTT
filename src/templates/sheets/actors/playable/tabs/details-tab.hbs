@@ -1,8 +1,8 @@
-<section class="actor-tab notes tab {{ tabClass }}" data-group="primary" data-tab="details">
+<section class="actor-tab notes tab details-tab {{ tabClass }}" data-group="primary" data-tab="details">
   <h1>{{localize "TERIOCK.SHEETS.Actor.TABS.Details.title"}}</h1>
   <div class="actor-tab-page">
-    <div class="tgrid g2" style="gap: 1em">
-      <div class="teriock-block-display">
+    <div class="tgrid g2 details-columns">
+      <div class="teriock-block-display details-movement">
         <div
           class="actor-shortbox actor-movement-box"
           data-tooltip-identifier="core:movement-speed"
@@ -14,8 +14,8 @@
             {{localize "TERIOCK.SHEETS.Actor.TABS.Details.movementSpeed.rate"}}
           </div>
         </div>
-        <div class="teriock-block-display-divider" style="margin-bottom: 1rem"></div>
-        <div class="tgrid g3" style="padding-inline: 0.5em; row-gap: 0.55rem">
+        <div class="teriock-block-display-divider"></div>
+        <div class="tgrid g3">
           {{#each TERIOCK.config.character.movement as |config key|}}
             <div class="gi2">
               {{{ config.label }}}
@@ -37,19 +37,19 @@
               data-icon="{{ config.icon }}"
               data-paths="system.speedAdjustments.{{ key }}"
             >
-              <div class="unselected" style="justify-content: left">
+              <div class="unselected">
                 {{path @root/TERIOCK.config.character.speed (lookup @root/system.speedAdjustments key) "label"}}
               </div>
-              <div class="selected" style="justify-content: left">
+              <div class="selected">
                 {{path @root/TERIOCK.config.character.speed (lookup @root/system._source.speedAdjustments key) "label"}}
               </div>
             </div>
           {{/each}}
         </div>
       </div>
-      <div class="tgrid-item" style="display: flex; flex-direction: column; gap: 1em">
-        <div class="teriock-block-display" style="padding: 1em">
-          <div class="tgrid g3" style="padding-inline: 0.5em">
+      <div class="tgrid-item details-right-column">
+        <div class="teriock-block-display details-senses">
+          <div class="tgrid g3">
             <div class="gi2 tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}</div>
             <div class="tcenter tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}</div>
             {{#each TERIOCK.config.character.sense as |config key|}}
@@ -82,7 +82,7 @@
             {{/each}}
           </div>
         </div>
-        <div class="teriock-block-display" style="padding-top: 0.75em">
+        <div class="teriock-block-display details-physical">
           <div class="carrying-box-main" data-tooltip-identifier="core:size">
             <div class="actor-shortbox actor-size-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.label"}}</div>
@@ -90,6 +90,7 @@
                 class="
                   actor-size-input
                   actor-smallbox-value
+                  details-value
                   thover
                   {{#if (and
                   highlightModified
@@ -104,7 +105,6 @@
                 data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.size.description" category=system.size.category reach=system.size.reach}}'
                 data-tooltip-class=""
                 data-tooltip-direction="DOWN"
-                style="height: 2rem"
               >
                 <div class="unselected">{{{ system.size.value }}}</div>
                 <div class="selected">{{{ system._source.size.value }}}</div>
@@ -116,7 +116,11 @@
                 class="
                   actor-weight-input
                   actor-smallbox-value
+                  details-value
                   thover
+                  {{#unless (or (eq system._source.weight.self 0) system._source.weight.self)}}
+                    details-muted
+                  {{/unless}}
                   {{#if (and
                   highlightModified
                   (not (eq system.weight.self system._source.weight.self)))}}
@@ -130,7 +134,6 @@
                 data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.includingEquipment" value=system.weight.value}}'
                 data-tooltip-class=""
                 data-tooltip-direction="DOWN"
-                style="height: 2rem{{#unless (or (eq system._source.weight.self 0) system._source.weight.self)}}; color: var(--color-text-subtle){{/unless}}"
               >
                 <div class="unselected">
                   {{{ system.weight.self }}}
@@ -149,18 +152,17 @@
             <div class="actor-shortbox actor-carrying-box">
               <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.label"}}</div>
               <div
-                class="actor-smallbox-value tcenter"
+                class="actor-smallbox-value tcenter details-value"
                 data-tooltip='{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.includingSelf" value=system.weight.value}}'
                 data-tooltip-class=""
                 data-tooltip-direction="DOWN"
-                style="height: 2rem"
               >
                 {{{ system.weight.carried }}}
                 {{localize "TERIOCK.SHEETS.Actor.TABS.Details.weight.unit"}}
               </div>
             </div>
           </div>
-          <div class="teriock-block-display-divider" style="margin-top: 0.125em; margin-bottom: 0.625em"></div>
+          <div class="teriock-block-display-divider"></div>
           <div class="tgrid g3" data-tooltip-identifier="core:carrying-capacity">
             <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.light"}}</div>
             <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.carrying.heavy"}}</div>
@@ -213,14 +215,21 @@
           </div>
         </div>
       </div>
-      <div class="teriock-block-display" style="padding-bottom: 0.25em; padding-top: 0.75em">
+      <div class="teriock-block-display details-limits">
         <div class="tgrid g2">
-          <div class="actor-shortbox" data-tooltip-identifier="keyword:curse" data-tooltip-direction="LEFT">
+          <div
+            class="actor-shortbox"
+            data-action="toggleDocs"
+            data-path="system.curseDocuments"
+            data-tooltip-direction="LEFT"
+            data-tooltip-identifier="keyword:curse"
+          >
             <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.curses.label"}}</div>
             <div
               class="
                 actor-smallbox-value
                 tcenter
+                details-value
                 affix
                 thover
                 {{#if (and
@@ -232,7 +241,6 @@
               data-action="updatePaths"
               data-icon="{{ TERIOCK.display.icons.power.curse }}"
               data-paths="system.curses.max"
-              style="height: 2rem"
             >
               <span class="unselected">
                 {{localize
@@ -251,11 +259,14 @@
             </div>
           </div>
           <div class="actor-shortbox">
-            <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.rotators.label"}}</div>
+            <div class="tsubtle tcenter" data-action="toggleDocs" data-path="system.rotatorDocuments">
+              {{localize "TERIOCK.SHEETS.Actor.TABS.Details.rotators.label"}}
+            </div>
             <div
               class="
                 actor-smallbox-value
                 tcenter
+                details-value
                 affix
                 thover
                 {{#if (and
@@ -267,7 +278,6 @@
               data-action="updatePaths"
               data-icon="{{ TERIOCK.display.icons.maneuver.passive }}"
               data-paths="system.rotators.max"
-              style="height: 2rem"
             >
               <span class="unselected">
                 {{localize
@@ -287,15 +297,22 @@
           </div>
         </div>
       </div>
-      <div class="teriock-block-display" style="flex-direction: row; padding-bottom: 0.25em; padding-top: 0.75em">
+      <div class="teriock-block-display details-detection">
         <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.hiding.label"}}</div>
           <div
-            class="actor-detection-input actor-smallbox-value thover"
+            class="
+              actor-detection-input
+              actor-smallbox-value
+              details-value
+              thover
+              {{#unless (or (eq system._source.detection.hiding 0) system._source.detection.hiding)}}
+                details-muted
+              {{/unless}}
+            "
             data-action="updatePaths"
             data-icon="{{ TERIOCK.display.icons.attribute.snk }}"
             data-paths="system.detection.hiding"
-            style="height: 2rem{{#unless (or (eq system._source.detection.hiding 0) system._source.detection.hiding)}}; color: var(--color-text-subtle){{/unless}}"
           >
             {{#if (or (eq system._source.detection.hiding 0) system._source.detection.hiding)}}
               {{ system._source.detection.hiding }}
@@ -307,11 +324,18 @@
         <div class="actor-shortbox">
           <div class="tsubtle tcenter">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.perceiving.label"}}</div>
           <div
-            class="actor-detection-input actor-smallbox-value thover"
+            class="
+              actor-detection-input
+              actor-smallbox-value
+              details-value
+              thover
+              {{#unless (or (eq system._source.detection.perceiving 0) system._source.detection.perceiving)}}
+                details-muted
+              {{/unless}}
+            "
             data-action="updatePaths"
             data-icon="{{ TERIOCK.display.icons.attribute.per }}"
             data-paths="system.detection.perceiving"
-            style="height: 2rem{{#unless (or (eq system._source.detection.perceiving 0) system._source.detection.perceiving)}}; color: var(--color-text-subtle){{/unless}}"
           >
             {{#if (or (eq system._source.detection.perceiving 0) system._source.detection.perceiving)}}
               {{ system._source.detection.perceiving }}

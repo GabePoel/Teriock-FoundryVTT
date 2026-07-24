@@ -1,6 +1,8 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
 import { makeIconClass } from "../../../../../../helpers/icon.mjs";
 import { toKebabCase } from "../../../../../../helpers/string.mjs";
+import { consolidateWriteOperations } from "../../../../../../helpers/utils.mjs";
+import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
 
 /**
  * @param {typeof BaseActorSheet} Base
@@ -93,6 +95,30 @@ export default function PlayableActorSheetMechanicalPart(Base) {
         }
       }
 
+      /**
+       * Toggle Documents to be enabled or disabled.
+       * @param {PointerEvent} _event - The event object.
+       * @param {HTMLElement} target - The target element.
+       * @returns {Promise<void>}
+       */
+      static async #onToggleDocs(_event, target) {
+        const docs = foundry.utils.getProperty(this.document, target.dataset.path) ?? [];
+        const enabled = await DocumentSelector.selectMulti(docs, {
+          checked: docs.filter(d => !d.disabled).map(r => r.uuid),
+        });
+        const freeOps = docs.map(c => {
+          return {
+            action: "update",
+            documentName: c.documentName,
+            pack: c.pack,
+            parent: c.parent,
+            updates: [{ _id: c.id, "system.disabled": !enabled.includes(c) }],
+          };
+        });
+        const conOps = consolidateWriteOperations(freeOps);
+        await foundry.documents.modifyBatch(conOps);
+      }
+
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
       static DEFAULT_OPTIONS = {
         actions: {
@@ -104,6 +130,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           takeLongRest: this.#onTakeLongRest,
           takeShortRest: this.#onTakeShortRest,
           toggleCondition: { buttons: [0, 2], handler: this.#onToggleCondition },
+          toggleDocs: { buttons: [2], handler: this.#onToggleDocs },
         },
         window: {
           controls: [{
