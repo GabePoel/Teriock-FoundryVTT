@@ -50,8 +50,11 @@ items:
                 - 0
                 - 1
               makeEffect: true
+              preventAttack: false
+              preventBlockCone: false
               preventFeat: false
               preventThreshold: false
+              setCompetence: inherit
               type: override
             6v7WhWcAO2fARRYl:
               _id: 6v7WhWcAO2fARRYl
@@ -1909,6 +1912,7 @@ items:
                   <p>Creation cost is at least 3 ×
                   @Identifier[core:hit-points-and-mana-points]{HP} of the spell
                   itself.</p>
+                formula: '0'
                 type: description
               lp:
                 formula: '0'
@@ -1920,6 +1924,7 @@ items:
                   spell plus 3 ×
                   @Identifier[core:hit-points-and-mana-points]{MP} of the spell
                   itself.</p>
+                formula: '0'
                 type: description
           delivery: sight
           duration:
@@ -3199,6 +3204,7 @@ items:
               category: effectTypes
               competence:
                 raw: 0
+              setCompetence: inherit
               type: resistance
               value: truthDetecting
           automations:
@@ -3218,11 +3224,6 @@ items:
                   type: upgrade
                   value: '2'
               type: changes
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
-              hex: false
-              type: resist
           competence:
             raw: 1
           costs:
@@ -3565,6 +3566,7 @@ items:
                   is in your possession. Otherwise, it costs 3
                   @Identifier[core:hit-points-and-mana-points]{HP} per
                   @Identifier[core:size]{size} of the body.</p>
+                formula: '0'
                 type: description
               lp:
                 formula: '0'
@@ -3575,6 +3577,7 @@ items:
                   is in your possession. Otherwise, it costs 2
                   @Identifier[core:hit-points-and-mana-points]{MP} per
                   @Identifier[core:size]{size} of the body.</p>
+                formula: '0'
                 type: description
           delivery: sight
           duration:
@@ -4119,6 +4122,7 @@ items:
                   <p>Creation cost is at least 3 ×
                   @Identifier[core:hit-points-and-mana-points]{HP} of the spell
                   itself.</p>
+                formula: '0'
                 type: description
               lp:
                 formula: '0'
@@ -4130,6 +4134,7 @@ items:
                   spell plus 3 ×
                   @Identifier[core:hit-points-and-mana-points]{MP} of the spell
                   itself.</p>
+                formula: '0'
                 type: description
           delivery: sight
           duration:
@@ -4294,11 +4299,6 @@ items:
               macro: Compendium.teriock.execution.Macro.989bee0dce350480
               trigger: preExecute
               type: abilityMacro
-            8f623097f9f2a087:
-              _id: 8f623097f9f2a087
-              bonus: '0'
-              hex: false
-              type: resist
           competence:
             raw: 1
           costs:
@@ -4757,6 +4757,8 @@ items:
               _id: XdlHsYQu4RHDULLu
               competence:
                 raw: 0
+              preventAttack: false
+              preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               setCompetence: override
@@ -5893,8 +5895,11 @@ items:
               competence:
                 raw: 0
               makeEffect: false
+              preventAttack: false
+              preventBlockCone: false
               preventFeat: false
               preventThreshold: false
+              setCompetence: inherit
               type: override
           competence:
             raw: 1
@@ -6175,6 +6180,7 @@ items:
                   @Identifier[keyword:bearing]{bear}. It costs 1
                   @Identifier[core:hit-points-and-mana-points]{MP}
                   otherwise.</p>
+                formula: '0'
                 type: description
           delivery: missile
           duration:
@@ -6311,8 +6317,11 @@ items:
               _id: Hd5o6s1SdA8C7IfT
               competence:
                 raw: 0
+              preventAttack: false
+              preventBlockCone: false
               preventFeat: false
               preventThreshold: true
+              setCompetence: inherit
               type: override
             0b0d1426453abb55:
               _id: 0b0d1426453abb55
@@ -6664,6 +6673,75 @@ items:
         melees.</p>
       identifier: mage
     type: archetype
+  - _id: 57a3f724d5743aa3
+    _key: '!actors.items!fdec3f206b747460.57a3f724d5743aa3'
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
+    effects:
+      - _id: 4XNvcPLM4s2CAFYb
+        _key: >-
+          !actors.items.effects!fdec3f206b747460.57a3f724d5743aa3.4XNvcPLM4s2CAFYb
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
+        img: systems/teriock/src/icons/abilities/semi-techniques.webp
+        name: Semi Techniques
+        system:
+          competence:
+            raw: 1
+          costs:
+            primary:
+              gp:
+                formula: '0'
+              hp:
+                formula: '0'
+              lp:
+                formula: '0'
+              mp:
+                formula: '0'
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: semi-techniques
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>For every 2 ranks you train in @Identifier[archetype:semi]{semi
+              classes}, you gain a @Wiki[Category:Semi guildmaster
+              abilities]{semi guildmaster ability} of your choice.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 57a3f724d5743aa3
+    img: systems/teriock/src/icons/archetypes/semi.webp
+    name: Semi
+    system:
+      competence:
+        raw: 1
+      description: >-
+        <p>Semis are classes that fill tactical or support roles in
+        @Identifier[core:combat]{combat}. Some are very skilled in close combat
+        and have a variety of @Wiki[Category:Semi archetype skills]{skills} to
+        achieve their aim, and others are more suited to fighting at range. All
+        are classes that combine well with either
+        @Identifier[archetype:warrior]{warriors} or
+        @Identifier[archetype:mage]{mages}, making semis the most versatile
+        class archetype.</p>
+      identifier: semi
+      instructions: >-
+        <p>Add @Pack[teriock.abilities]{abilities} from
+        @Identifier[ability:semi-techniques] here when you gain them.</p>
+    type: archetype
   - _id: 380dac2710b593e9
     _key: '!actors.items!fdec3f206b747460.380dac2710b593e9'
     _stats:
@@ -6817,75 +6895,6 @@ items:
       instructions: >-
         <p>Add @Pack[teriock.abilities]{abilities} from
         @Identifier[ability:warrior-techniques] here when you gain them.</p>
-    type: archetype
-  - _id: 57a3f724d5743aa3
-    _key: '!actors.items!fdec3f206b747460.57a3f724d5743aa3'
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
-    effects:
-      - _id: 4XNvcPLM4s2CAFYb
-        _key: >-
-          !actors.items.effects!fdec3f206b747460.57a3f724d5743aa3.4XNvcPLM4s2CAFYb
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
-        img: systems/teriock/src/icons/abilities/semi-techniques.webp
-        name: Semi Techniques
-        system:
-          competence:
-            raw: 1
-          costs:
-            primary:
-              gp:
-                formula: '0'
-              hp:
-                formula: '0'
-              lp:
-                formula: '0'
-              mp:
-                formula: '0'
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          form: normal
-          identifier: semi-techniques
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>For every 2 ranks you train in @Identifier[archetype:semi]{semi
-              classes}, you gain a @Wiki[Category:Semi guildmaster
-              abilities]{semi guildmaster ability} of your choice.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-    folder: 57a3f724d5743aa3
-    img: systems/teriock/src/icons/archetypes/semi.webp
-    name: Semi
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Semis are classes that fill tactical or support roles in
-        @Identifier[core:combat]{combat}. Some are very skilled in close combat
-        and have a variety of @Wiki[Category:Semi archetype skills]{skills} to
-        achieve their aim, and others are more suited to fighting at range. All
-        are classes that combine well with either
-        @Identifier[archetype:warrior]{warriors} or
-        @Identifier[archetype:mage]{mages}, making semis the most versatile
-        class archetype.</p>
-      identifier: semi
-      instructions: >-
-        <p>Add @Pack[teriock.abilities]{abilities} from
-        @Identifier[ability:semi-techniques] here when you gain them.</p>
     type: archetype
 name: Demon Mist Wraith
 prototypeToken:

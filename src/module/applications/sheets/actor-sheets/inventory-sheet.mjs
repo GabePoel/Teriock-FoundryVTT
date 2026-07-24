@@ -24,6 +24,7 @@ export default class InventorySheet extends BaseActorSheet {
   /** @type {Record<string, HandlebarsTemplatePart>} */
   static PARTS = { all: { scrollable: [""], template: "teriock/sheets/actors/inventory/inventory" } };
 
+  /** @type {Record<string, Teriock.Previews.PreviewConfig>} */
   static PREVIEWS = {
     equipment: {
       addButton: { type: "equipment" },
