@@ -78,6 +78,7 @@ export default class InteractiveSystem extends mixClasses(BaseMessageSystem, sys
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
+    await game.teriock.identifiers.initializing;
     return Object.assign(await super._prepareContext(options), {
       activations: this.activations.contents.filter(a => a?.visible),
     });

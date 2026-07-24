@@ -54,6 +54,7 @@ const commandEnricher = {
     const command = commands[parsed.alias];
     const payload = parsed.arguments.length ? parsed.arguments[0] : "";
     const commandOptions = { ...parsed.config, ...buildCommandOptions(payload, command) };
+    await game.teriock.identifiers.initializing;
     return TeriockTextEditor.createAnchor({
       classes: ["teriock-inline-command"],
       dataset: {
