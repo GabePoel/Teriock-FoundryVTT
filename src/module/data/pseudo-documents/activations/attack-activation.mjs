@@ -35,7 +35,7 @@ export default class AttackActivation extends AutomationActivationFactory(Attack
 
   /** @inheritDoc */
   static defineSchema() {
-    return Object.assign(omit(super.defineSchema(), ["keepArmament", "overrideCompetence"]), {
+    return Object.assign(omit(super.defineSchema(), ["keepArmament", "setCompetence"]), {
       armamentId: new fields.DocumentIdField(),
       threshold: new fields.NumberField({ initial: null, integer: true, nullable: true }),
     });

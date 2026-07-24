@@ -27,9 +27,7 @@ export default class ShortRestExecution extends DocumentExecution {
       new UseDocumentsAutomation({
         _id: toId(UseDocumentsAutomation.TYPE, { hash: true }),
         automatic: false,
-        inheritCompetence: false,
         local: { qualifier: `and(@ability, @time.${this.executionTime})` },
-        overrideCompetence: false,
         trigger: "execute",
         type: "useDocuments",
       }, { parent: this.source.system }),

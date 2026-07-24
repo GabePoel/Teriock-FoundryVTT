@@ -17,6 +17,8 @@ const { fields } = foundry.data;
  * @property {boolean|null} makeEffect
  * @property {boolean|null} targetsActor
  * @property {boolean|null} targetsArmament
+ * @property {boolean} preventAttack
+ * @property {boolean} preventBlockCone
  * @property {boolean} preventFeat
  * @property {boolean} preventThreshold
  */
@@ -32,6 +34,11 @@ export default class OverrideAutomation
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Override"];
 
   /** @inheritDoc */
+  static get _setCompetenceInitial() {
+    return "inherit";
+  }
+
+  /** @inheritDoc */
   static get LABEL() {
     return "TERIOCK.AUTOMATIONS.Override.LABEL";
   }
@@ -45,6 +52,8 @@ export default class OverrideAutomation
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       makeEffect: new TernaryField(),
+      preventAttack: new fields.BooleanField({ initial: false }),
+      preventBlockCone: new fields.BooleanField({ initial: false }),
       preventFeat: new fields.BooleanField({ initial: false }),
       preventThreshold: new fields.BooleanField({ initial: false }),
       rollBonus: new FormulaField({ deterministic: false }),
@@ -70,10 +79,23 @@ export default class OverrideAutomation
       "hr",
       "rollBonus",
       "hr",
-      "preventFeat",
-      "preventThreshold",
+      ...this._preventPaths,
       ...this._competencePaths,
       ...this._overrideDataPaths,
     ];
+  }
+
+  /**
+   * Prevent fields relevant to the parent ability.
+   * @returns {string[]}
+   */
+  get _preventPaths() {
+    if (this.document?.type !== "ability") { return []; }
+    const paths = [];
+    if (this.document.system.interaction === "attack") { paths.push("preventAttack"); }
+    if (this.document.system.interaction === "feat") { paths.push("preventFeat", "preventThreshold"); }
+    if (this.document.system.delivery === "cone") { paths.push("preventBlockCone"); }
+    if (paths.length) { paths.push("hr"); }
+    return paths;
   }
 }

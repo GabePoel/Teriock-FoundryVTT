@@ -27,9 +27,7 @@ export default class ChangeCompetenceAutomation
 
   /** @inheritDoc */
   static defineSchema() {
-    return omit(Object.assign(super.defineSchema(), { identifier: new TypedIdentifierField() }), [
-      "overrideCompetence",
-    ]);
+    return omit(Object.assign(super.defineSchema(), { identifier: new TypedIdentifierField() }), ["setCompetence"]);
   }
 
   /** @inheritDoc */

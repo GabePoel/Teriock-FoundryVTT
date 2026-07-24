@@ -279,7 +279,7 @@ export default function AbilityExecutionChatPart(Base) {
         }
 
         // Add block cone activation
-        if (this.source.system.delivery === "cone") {
+        if (this.source.system.delivery === "cone" && !overrideAutomation?.preventBlockCone) {
           this.activations.push(new acts.UseLocalActivation({ options: { lookup: "ability:block-cone" } }));
         }
 
@@ -350,8 +350,9 @@ export default function AbilityExecutionChatPart(Base) {
           for (const v of variants) {
             this.getAutomations("override", { active: true, crit: v.crit }).forEach(a => {
               for (const effectData of [v.con.data, v.imb.data]) {
-                if (a?.overrideCompetence) {
-                  foundry.utils.setProperty(effectData, "system.competence.raw", a.competence.value);
+                const competence = a?.getCompetence({ execution: this });
+                if (typeof competence === "number") {
+                  foundry.utils.setProperty(effectData, "system.competence.raw", competence);
                 }
                 if (a?.overrideData && a.data) { foundry.utils.mergeObject(effectData, a.data, { inplace: true }); }
               }

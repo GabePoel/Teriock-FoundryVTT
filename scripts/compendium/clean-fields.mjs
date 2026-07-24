@@ -362,7 +362,7 @@ function cleanAutomations(automations) {
       if (!v?.overrideData) { delete v.data; }
     }
     if (["addDocuments", "modifyEffect", "tradecraft", "transformation", "useDocuments"].includes(v.type)) {
-      if (!v?.overrideCompetence) { delete v.competence; }
+      if (v?.setCompetence !== "override") { delete v.competence; }
     }
   }
   for (const a of Object.values(automations)) { cleanAutomation(a); }
@@ -388,6 +388,7 @@ function cleanExpirations(expirations) {
  */
 function cleanMechanic(mechanic) {
   if (mechanic.activeQualifier === "1") { delete mechanic.activeQualifier; }
+  if (!mechanic.setCompetence || mechanic.setCompetence === "none") { delete mechanic.setCompetence; }
 }
 
 /**
@@ -405,7 +406,6 @@ function cleanExpiration(expiration) {
 function cleanAutomation(automation) {
   cleanMechanic(automation);
   delete automation.transformation;
-  if (!automation.overrideCompetence) { delete automation.overrideCompetence; }
   if (!automation.overrideData) { delete automation.overrideData; }
 
   if (automation.type === "combatExpiration") {

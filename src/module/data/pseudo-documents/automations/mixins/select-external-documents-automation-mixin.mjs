@@ -61,7 +61,7 @@ export default function SelectExternalDocumentsAutomationMixin(Base) {
 
       /** @inheritDoc */
       get wantsDialog() {
-        return super.wantsDialog || !this.overrideCompetence;
+        return super.wantsDialog || this.setCompetence !== "override";
       }
 
       /**

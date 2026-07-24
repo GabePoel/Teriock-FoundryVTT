@@ -1,3 +1,4 @@
+import { localizeChoices } from "../../../helpers/localization.mjs";
 import { CompetenceModel } from "../../models/_module.mjs";
 
 const { fields } = foundry.data;
@@ -11,20 +12,42 @@ export default function OverrideCompetenceMechanicMixin(Base) {
     /**
      * @mixin
      * @property {CompetenceModel} competence
-     * @property {boolean} inheritCompetence
-     * @property {boolean} overrideCompetence
+     * @property {""|"override"|"inherit"} setCompetence
      */
     class OverrideCompetenceMechanic extends Base {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Competence"];
 
+      /**
+       * The initial setCompetence value.
+       * @returns {""|"override"|"inherit"}
+       */
+      static get _setCompetenceInitial() {
+        return "";
+      }
+
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           competence: new fields.EmbeddedDataField(CompetenceModel),
-          inheritCompetence: new fields.BooleanField(),
-          overrideCompetence: new fields.BooleanField(),
+          setCompetence: new fields.StringField({
+            blank: true,
+            choices: localizeChoices({
+              "": "TERIOCK.AUTOMATIONS.Competence.FIELDS.setCompetence.choices.none",
+              inherit: "TERIOCK.AUTOMATIONS.Competence.FIELDS.setCompetence.choices.inherit",
+              override: "TERIOCK.AUTOMATIONS.Competence.FIELDS.setCompetence.choices.override",
+            }, { sort: false }),
+            initial: this._setCompetenceInitial,
+            nullable: false,
+            required: true,
+          }),
         });
+      }
+
+      /** @inheritDoc */
+      static migrateData(source, options, state) {
+        if (source.setCompetence === "none") { source.setCompetence = ""; }
+        return super.migrateData(source, options, state);
       }
 
       /**
@@ -32,10 +55,8 @@ export default function OverrideCompetenceMechanicMixin(Base) {
        * @returns {string[]}
        */
       get _competencePaths() {
-        const paths = [];
-        if (!this.overrideCompetence) { paths.push("inheritCompetence"); }
-        if (!this.inheritCompetence) { paths.push("overrideCompetence"); }
-        if (this.overrideCompetence) { paths.push("competence.raw"); }
+        const paths = ["setCompetence"];
+        if (this.setCompetence === "override") { paths.push("competence.raw"); }
         return paths;
       }
 
@@ -46,18 +67,11 @@ export default function OverrideCompetenceMechanicMixin(Base) {
 
       /** @inheritDoc */
       getCompetence(scope) {
-        if (this.inheritCompetence && (scope?.execution?.competence || this.document?.system?.competence)) {
+        if (this.setCompetence === "inherit" && (scope?.execution?.competence || this.document?.system?.competence)) {
           return scope?.execution?.competence?.value ?? this.document?.system?.competence?.value;
         }
-        if (this.overrideCompetence) { return this.competence.value; }
+        if (this.setCompetence === "override") { return this.competence.value; }
         return undefined;
-      }
-
-      /** @inheritDoc */
-      prepareData() {
-        super.prepareData();
-        if (this.inheritCompetence) { this.overrideCompetence = false; }
-        if (this.overrideCompetence) { this.inheritCompetence = false; }
       }
     }
   );
