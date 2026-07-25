@@ -76,7 +76,7 @@ export const detectionModes = {
     type: BaseDetectionMode.DETECTION_TYPES.SOUND,
   }),
   /** Spectral (Ethereal lighting) detection mode */
-  spectral: new detection.LightDetectionMode({
+  spectral: new detection.BaseDetectionMode({
     angle: true,
     ethereal: true,
     id: "spectral",

@@ -15,7 +15,7 @@ export default class BaseDetectionMode extends DetectionMode {
    */
   static BLOCKING_STATUSES = {
     move: { src: ["dead", "frozen"], tgt: ["frozen"] },
-    scent: { src: ["anosmatic", "ethereal"], tgt: ["odorless"] },
+    scent: { src: ["anosmatic"], tgt: ["odorless"] },
     sight: { src: ["blind"], tgt: ["invisible"] },
     sound: { src: ["deaf"], tgt: ["silent"] },
   };
