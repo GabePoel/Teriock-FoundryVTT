@@ -27,11 +27,11 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
  *
  * @extends {BaseItemSystem}
  * @extends {Teriock.Models.SpeciesSystemData}
+ * @mixes WikiSystem
+ * @mixes StatGiverSystem
  * @mixes CompetenceDisplaySystem
  * @mixes SpeciesPanelPart
  * @mixes SpeciesTransformationPart
- * @mixes StatGiverSystem
- * @mixes WikiSystem
  */
 export default class SpeciesSystem
   extends mixClasses(

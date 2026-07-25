@@ -1,22 +1,22 @@
-import documentConfig from "../constants/config/document-config.mjs";
 import { TypeCollection } from "./collections/_module.mjs";
 
 declare global {
   namespace Teriock.Documents {
-    type DocumentConfig = typeof documentConfig;
-
-    type ExtractKeysByDocName<T extends string> = {
-      [K in keyof DocumentConfig]: DocumentConfig[K] extends { documentName: T } ? K : never;
-    }[keyof DocumentConfig];
-
-    export type ActorType = ExtractKeysByDocName<"Actor">;
-    export type ItemType = ExtractKeysByDocName<"Item">;
-    export type ActiveEffectType = ExtractKeysByDocName<"ActiveEffect">;
-    export type CardType = ExtractKeysByDocName<"Card">;
+    export type ActorType = TypeMapKey<ActorTypeMap>;
+    export type ItemType = TypeMapKey<ItemTypeMap>;
+    export type ActiveEffectType = TypeMapKey<ActiveEffectTypeMap>;
+    export type CardType = TypeMapKey<CardTypeMap>;
     export type ChildType = Teriock.Documents.ActiveEffectType | Teriock.Documents.ItemType;
     export type CommonType = "base" | Teriock.Documents.ActorType | Teriock.Documents.ChildType;
 
     export type DocumentBase<Class, Parent extends object = object> = Class & Parent;
+
+    export type PseudoCollections = {
+      Activation?: TypeCollection<ID<AnyActivation>, AnyActivation>;
+      Affinity?: TypeCollection<ID<AnyAffinity>, AnyAffinity>;
+      Automation?: TypeCollection<ID<AnyAutomation>, AnyAutomation>;
+      Expiration?: TypeCollection<ID<AnyExpiration>, AnyExpiration>;
+    };
 
     /**
      * Store of lazily-computed values cached on a document.
@@ -51,13 +51,15 @@ declare global {
     };
 
     export type Subtype<Base, Type extends string, Sheet, System> =
-      & Omit<Base, "_id" | "id" | "sheet" | "system" | "type" | "uuid">
+      & Omit<Base, "_id" | "documentName" | "id" | "pseudoCollections" | "sheet" | "system" | "type" | "uuid">
       & {
         _id: ID<Subtype<Base, Type, Sheet, System>>;
         sheet: Sheet;
         system: System;
         type: Type;
+        get documentName(): Base extends { documentName: infer N } ? N : string;
         get id(): ID<Subtype<Base, Type, Sheet, System>>;
+        get pseudoCollections(): PseudoCollections;
         get uuid(): UUID<Subtype<Base, Type, Sheet, System>>;
       };
 

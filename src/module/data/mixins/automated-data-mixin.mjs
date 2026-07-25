@@ -1,16 +1,18 @@
 /**
  * Mixin for classes that use automations even if they don't have them in their data model.
- * @param {typeof ChildSystem|BaseDataModel} Base
+ * @template {Constructor<ChildSystem | BaseDataModel>} T
+ * @param {T} Base
  */
 export default function AutomatedDataMixin(Base) {
   return (
     /**
+     * @extends {ChildSystem | BaseDataModel}
      * @mixin
      */
     class AutomatedData extends Base {
       /**
        * All the automations that this considers to be currently active.
-       * @returns {Teriock.Automations.Any[]}
+       * @returns {AnyAutomation[]}
        */
       get activeAutomations() {
         const automations = this.automations.contents;

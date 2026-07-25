@@ -9,7 +9,8 @@ import { TeriockTextEditor } from "../../ux/_module.mjs";
 import ChangesSheetMixin from "./changes-sheet-mixin.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function MechanicsSheetMixin(Base) {
   return (
@@ -35,6 +36,7 @@ export default function MechanicsSheetMixin(Base) {
        * @param {PointerEvent} _event
        * @param {HTMLElement} target
        * @returns {Promise<void>}
+       * @this {MechanicsSheet}
        */
       static async _onCreateMechanic(_event, target) {
         const config = this._mechanicCollections[target.dataset.collection];

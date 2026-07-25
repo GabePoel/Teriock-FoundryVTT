@@ -4,7 +4,8 @@ import { getName } from "../../../../../helpers/utils.mjs";
 
 /**
  * Equipment panel part.
- * @param {typeof EquipmentSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function EquipmentPanelPart(Base) {
   return (
@@ -13,6 +14,7 @@ export default function EquipmentPanelPart(Base) {
      * @extends {EquipmentStoragePart}
      * @extends {EquipmentWieldingPart}
      * @mixin
+     * @property {TeriockEquipment} parent
      */
     class EquipmentPanelPart extends Base {
       /** @inheritDoc */

@@ -2,13 +2,15 @@ import { makeIcon } from "../../../../../helpers/icon.mjs";
 
 /**
  * Ability rank part.
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityRankPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityRankPart extends Base {
       /** @inheritDoc */

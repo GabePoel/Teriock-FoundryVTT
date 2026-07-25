@@ -9,9 +9,17 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
 
 /**
  * {@link TeriockImbuement} and {@link TeriockConsequence} sheet.
- * @property {TeriockConsequence} document
  * @extends {ActiveEffectConfig}
+ * @mixes BaseDocumentSheet
+ * @mixes SystemSettingsButtonSheet
+ * @mixes ConnectionSheet
+ * @mixes DocumentCreationSheet
+ * @mixes DragDropSheet
+ * @mixes FieldsSheet
+ * @mixes LockingSheet
  * @mixes MechanicsSheet
+ * @mixes PreviewSheet
+ * @property {TeriockConsequence} document
  */
 export default class ApplicableEffectSheet
   extends mixClasses(

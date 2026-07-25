@@ -19,7 +19,8 @@ function nullifyWielded(doc) {
 
 /**
  * Actor data model that handles combat.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorCombatPart(Base) {
   return (
@@ -27,6 +28,7 @@ export default function ActorCombatPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorCombatPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorCombatPart extends Base {
       /** @inheritDoc */

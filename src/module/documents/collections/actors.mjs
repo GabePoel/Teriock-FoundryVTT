@@ -6,6 +6,7 @@ const { Actors } = foundry.documents.collections;
 /**
  * @extends {Actors}
  * @extends {WorldCollection<TeriockActor>}
+ * @mixes BaseWorldCollection
  * @property {Record<ID<TeriockActor>, TeriockActor>} tokens
  */
 export default class TeriockActors extends BaseWorldCollectionMixin(Actors) {

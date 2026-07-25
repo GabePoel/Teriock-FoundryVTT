@@ -2,16 +2,17 @@ const { fields } = foundry.data;
 
 /**
  * Shared selection options for automations that prompt user choice.
- * @param {typeof BaseAutomation} Base
+ * @template {Constructor<BaseAutomation>} T
+ * @param {T} Base
  */
 export default function SelectAutomationMixin(Base) {
   return (
     /**
      * @extends {BaseAutomation}
+     * @mixin
      * @property {boolean} all
      * @property {boolean} automatic
      * @property {boolean} multi
-     * @mixin
      */
     class SelectAutomation extends Base {
       /** @inheritDoc */

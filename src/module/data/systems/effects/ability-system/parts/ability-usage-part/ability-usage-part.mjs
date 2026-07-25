@@ -8,7 +8,8 @@ const { fields } = foundry.data;
 
 /**
  * Ability usage part: delivery, timing, interaction, targets, range, expansion.
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityUsagePart(Base) {
   return (
@@ -17,6 +18,7 @@ export default function AbilityUsagePart(Base) {
      * @extends {BaseEffectSystem}
      * @extends {Teriock.Models.AbilityUsagePartData}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityUsagePart extends Base {
       /** @inheritDoc */

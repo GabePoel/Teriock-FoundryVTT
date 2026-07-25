@@ -9,7 +9,8 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
 
 /**
  * Species data model mixin that handles transformation behavior.
- * @param {typeof SpeciesSystem} Base
+ * @template {Constructor<SpeciesSystem>} T
+ * @param {T} Base
  */
 export default function SpeciesTransformationPart(Base) {
   return (
@@ -17,6 +18,7 @@ export default function SpeciesTransformationPart(Base) {
      * @extends {BaseItemSystem}
      * @extends {Teriock.Models.SpeciesTransformationPartData}
      * @mixin
+     * @property {TeriockSpecies} parent
      */
     class SpeciesTransformationPart extends Base {
       /** @inheritDoc */

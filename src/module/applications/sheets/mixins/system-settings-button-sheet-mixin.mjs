@@ -3,7 +3,8 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import { DocumentSettingsSheet } from "../utility-sheets/_module.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function SystemSettingsButtonSheetMixin(Base) {
   /**

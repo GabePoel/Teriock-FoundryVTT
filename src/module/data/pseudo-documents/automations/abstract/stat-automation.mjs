@@ -6,11 +6,12 @@ import BaseAutomation from "./base-automation.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseAutomation}
+ * @mixes TriggerAutomation
+ * @mixes CritMechanic
  * @param {boolean} consumeStatDice
  * @param {boolean} forHarm
  * @param {Teriock.System.FormulaString} substitution
- * @extends {BaseAutomation}
- * @mixes TriggerAutomation
  */
 export default class StatAutomation extends automationMixins.TriggerAutomationMixin(CritMechanicMixin(BaseAutomation)) {
   /** @inheritDoc */

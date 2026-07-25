@@ -7,8 +7,8 @@ import TypedPseudoDocument from "./typed-pseudo-document.mjs";
 const { fields } = foundry.data;
 
 /**
- * @extends {Teriock.PseudoDocuments.MechanicPseudoDocumentData}
  * @extends {TypedPseudoDocument}
+ * @extends {Teriock.PseudoDocuments.MechanicPseudoDocumentData}
  * @mixes PropagationData
  * @property {ID<MechanicPseudoDocument>} _id
  */

@@ -5,10 +5,10 @@ const { ChatMessage } = foundry.documents;
 
 /**
  * The Teriock ChatMessage implementation.
- * @implements {Teriock.Documents.ChatMessageInterface}
  * @extends {ChatMessage}
  * @extends {ClientDocument}
  * @mixes BaseDocument
+ * @implements {Teriock.Documents.ChatMessageInterface}
  */
 export default class TeriockChatMessage extends documentMixins.BaseDocumentMixin(ChatMessage) {
   /**

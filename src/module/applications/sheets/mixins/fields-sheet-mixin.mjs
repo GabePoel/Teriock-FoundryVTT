@@ -2,7 +2,8 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import { BaseUpdater } from "../../dialogs/_module.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function FieldsSheetMixin(Base) {
   return (

@@ -5,12 +5,9 @@ import { BaseMessageSystem, InteractiveSystem } from "../../data/systems/message
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
 
 declare global {
-  export type TeriockInteractive = Teriock.Documents.Subtype<
-    Teriock.Documents.ChatMessageInterface,
-    "interactive",
-    null,
-    InteractiveSystem
-  >;
+  export interface TeriockInteractive
+    extends Teriock.Documents.Subtype<Teriock.Documents.ChatMessageInterface, "interactive", null, InteractiveSystem>
+  {}
 
   export interface ChatMessageTypeMap {
     base: TeriockChatMessage;

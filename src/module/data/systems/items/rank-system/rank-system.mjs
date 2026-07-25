@@ -25,8 +25,8 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.RankSystemData}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
- * @mixes StatGiverSystem
  * @mixes WikiSystem
+ * @mixes StatGiverSystem
  */
 export default class RankSystem
   extends mixClasses(

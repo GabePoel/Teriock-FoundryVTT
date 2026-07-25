@@ -6,7 +6,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles scaling.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorScalingPart(Base) {
   return (
@@ -14,6 +15,7 @@ export default function ActorScalingPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorScalingPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorScalingPart extends Base {
       /** @inheritDoc */

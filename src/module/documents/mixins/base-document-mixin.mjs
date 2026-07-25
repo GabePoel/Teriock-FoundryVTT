@@ -4,13 +4,13 @@ import { toId, toKebabCase } from "../../helpers/string.mjs";
 
 /**
  * Base mixin.
- * @param {typeof Foundry.ClientDocument} Base
- * @mixin
+ * @template {Constructor<ClientDocument>} T
+ * @param {T} Base
  */
 export default function BaseDocumentMixin(Base) {
   return (
     /**
-     * @extends {Foundry.ClientDocument}
+     * @extends {ClientDocument}
      * @mixin
      */
     class BaseDocument extends Base {
@@ -230,7 +230,7 @@ export default function BaseDocumentMixin(Base) {
 
       /**
        * The pseudo-document collections.
-       * @returns {Record<string, TypeCollection>}
+       * @returns {Teriock.Documents.PseudoCollections}
        */
       get pseudoCollections() {
         return this.system?.pseudoCollections ?? {};

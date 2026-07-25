@@ -3,6 +3,8 @@ import BaseWorldCollectionMixin from "./base-world-collection-mixin.mjs";
 const { RollTables } = foundry.documents.collections;
 
 /**
+ * @extends {RollTables}
+ * @mixes BaseWorldCollection
  * @implements {TypeCollection<TeriockRollTable, TeriockRollTable>}
  * @implements {DocumentCollection<TeriockRollTable>}
  * @property {TeriockRollTable|null} activeGM

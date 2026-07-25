@@ -5,12 +5,13 @@ import { systemPath } from "../../helpers/path.mjs";
 import { toId } from "../../helpers/string.mjs";
 
 /**
- * @param {typeof BaseDocument} Base
+ * @template {Constructor<BaseDocument>} T
+ * @param {T} Base
  */
 export default function PanelDocumentMixin(Base) {
   return (
     /**
-     * @mixes BaseDocument
+     * @extends {BaseDocument}
      * @mixin
      */
     class PanelDocument extends Base {

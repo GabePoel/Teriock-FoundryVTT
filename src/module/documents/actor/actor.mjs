@@ -10,14 +10,13 @@ const { Actor } = foundry.documents;
 
 /**
  * The Teriock Actor implementation.
- * @implements {Teriock.Documents.ActorInterface}
  * @extends {Actor}
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes CommonDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
- * @mixes PropagationData
+ * @implements {Teriock.Documents.ActorInterface}
  */
 export default class TeriockActor
   extends mixClasses(

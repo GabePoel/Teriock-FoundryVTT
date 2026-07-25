@@ -9,12 +9,15 @@ const { fields } = foundry.data;
 
 /**
  * Mixin to enable selecting external documents.
- * @param {typeof BaseAutomation} Base
+ * @template {Constructor<BaseAutomation>} T
+ * @param {T} Base
  */
 export default function SelectExternalDocumentsAutomationMixin(Base) {
   return (
     /**
      * @extends {BaseAutomation}
+     * @mixes SelectAutomation
+     * @mixin
      * @property {boolean} automatic
      * @property {boolean} multi
      * @property {Set<UUID<TeriockDocument>>} uuids

@@ -8,7 +8,8 @@ const { fields } = foundry.data;
 /**
  * Mixin for executions that deal an impact and can be modified with boosts, deboosts, and critical hits. This replicates
  * the logic of the old `boostDialog` inside the execution framework.
- * @param {typeof BaseExecution} Base
+ * @template {Constructor<BaseExecution>} T
+ * @param {T} Base
  */
 export default function ImpactsExecutionMixin(Base) {
   return (

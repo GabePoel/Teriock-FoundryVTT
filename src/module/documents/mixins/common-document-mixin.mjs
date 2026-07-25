@@ -9,12 +9,13 @@ import * as documentMixins from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes.
- * @param {typeof BaseDocument} Base
+ * @template {Constructor<BaseDocument>} T
+ * @param {T} Base
  */
 export default function CommonDocumentMixin(Base) {
   return (
     /**
-     * @mixes BaseDocument
+     * @extends {BaseDocument}
      * @mixes EmbedCardDocument
      * @mixes PanelDocument
      * @mixes PropagationData

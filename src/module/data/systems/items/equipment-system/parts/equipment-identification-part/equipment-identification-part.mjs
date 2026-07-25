@@ -5,7 +5,8 @@ const { EmbeddedDataField } = foundry.data.fields;
 
 /**
  * Equipment data model mixin that handles identifying and reading magic.
- * @param {typeof EquipmentSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function EquipmentIdentificationPart(Base) {
   return (
@@ -13,6 +14,7 @@ export default function EquipmentIdentificationPart(Base) {
      * @extends {BaseItemSystem}
      * @extends {Teriock.Models.EquipmentIdentificationPartData}
      * @mixin
+     * @property {TeriockEquipment} parent
      */
     class EquipmentIdentificationPart extends Base {
       /** @inheritDoc */

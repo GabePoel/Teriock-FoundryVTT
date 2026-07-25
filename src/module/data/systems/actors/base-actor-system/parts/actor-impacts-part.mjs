@@ -6,13 +6,15 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model mixin that handles rollable takes.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorImpactsPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorImpactsPart extends Base {
       /**

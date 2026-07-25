@@ -9,9 +9,9 @@ import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {ThresholdAutomation}
- * @mixes OverrideCompetenceMechanic
  * @mixes SelectAutomation
  * @mixes TriggerAutomation
+ * @mixes OverrideCompetenceMechanic
  */
 export default class TradecraftAutomation
   extends mixClasses(

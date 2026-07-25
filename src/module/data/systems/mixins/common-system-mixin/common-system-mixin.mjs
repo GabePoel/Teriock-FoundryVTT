@@ -6,11 +6,13 @@ import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 
 /**
- * @param {typeof TypeDataModel} Base
+ * @template {Constructor<TypeDataModel>} T
+ * @param {T} Base
  */
 export default function CommonSystemMixin(Base) {
   return (
     /**
+     * @extends {TypeDataModel}
      * @extends {Teriock.Models.CommonSystemData}
      * @mixes RulesSystem
      * @mixes PropagationData

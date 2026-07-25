@@ -1,12 +1,12 @@
 /**
  * Mixin to support manipulating changes arrays in automations.
- * @param {typeof BaseSheet} Base
+ * @template {Constructor<BaseSheet>} T
+ * @param {T} Base
  */
 export default function ChangesSheetMixin(Base) {
   return (
     /**
-     * @extends {CommonSheet}
-     * @mixes CommonSheet
+     * @extends {BaseSheet}
      * @mixin
      */
     class ChangesSheet extends Base {

@@ -1,5 +1,6 @@
 /**
- * @param {typeof ChildSystem} Base
+ * @template {Constructor<ChildSystem>} T
+ * @param {T} Base
  */
 export default function ArmorSuppressionSystemMixin(Base) {
   return (

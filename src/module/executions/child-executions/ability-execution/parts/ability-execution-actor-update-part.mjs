@@ -2,7 +2,8 @@ import impactConfig from "../../../../constants/config/impact-config.mjs";
 import statConfig from "../../../../constants/config/stat-config.mjs";
 
 /**
- * @param {typeof AbilityExecutionConstructor} Base
+ * @template {Constructor<AbilityExecutionConstructor>} T
+ * @param {T} Base
  */
 export default function AbilityExecutionActorUpdatePart(Base) {
   return (

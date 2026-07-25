@@ -1,7 +1,8 @@
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
 
 /**
- * @param {typeof AbilityExecutionConstructor} Base
+ * @template {Constructor<AbilityExecutionConstructor>} T
+ * @param {T} Base
  */
 export default function AbilityExecutionRollsPart(Base) {
   return (

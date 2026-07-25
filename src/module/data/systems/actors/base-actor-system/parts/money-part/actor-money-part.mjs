@@ -5,7 +5,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles money.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorMoneyPart(Base) {
   return (
@@ -13,6 +14,7 @@ export default function ActorMoneyPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorMoneyPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorMoneyPart extends Base {
       /** @inheritDoc */

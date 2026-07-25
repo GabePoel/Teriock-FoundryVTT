@@ -5,7 +5,8 @@ const { fields } = foundry.data;
 
 /**
  * Equipment data model mixin that handles shattering and dampening.
- * @param {typeof EquipmentSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function EquipmentSuppressionPart(Base) {
   return (
@@ -13,6 +14,7 @@ export default function EquipmentSuppressionPart(Base) {
      * @extends {BaseItemSystem}
      * @extends {Teriock.Models.EquipmentSuppressionPartData}
      * @mixin
+     * @property {TeriockEquipment} parent
      */
     class EquipmentSuppressionPart extends Base {
       /** @inheritDoc */

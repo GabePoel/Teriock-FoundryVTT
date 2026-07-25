@@ -13,8 +13,9 @@ import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
  *
  * @extends {BaseEffectSystem}
  * @extends {Teriock.Models.ConditionSystemData}
- * @mixes TransformationSystem
  * @mixes WikiSystem
+ * @mixes TransformationSystem
+ * @mixes ThresholdData
  */
 export default class ConditionSystem
   extends mixClasses(

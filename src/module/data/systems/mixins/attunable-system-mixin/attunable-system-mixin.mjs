@@ -6,7 +6,8 @@ import { FormulaField } from "../../../fields/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseItemSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function AttunableSystemMixin(Base) {
   return (

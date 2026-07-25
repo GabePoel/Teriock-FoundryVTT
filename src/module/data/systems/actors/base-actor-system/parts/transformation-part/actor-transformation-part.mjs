@@ -4,16 +4,18 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles transformation.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
-export default function ActorAutomationPart(Base) {
+export default function ActorTransformationPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorTransformationPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
-    class ActorAutomationPart extends Base {
+    class ActorTransformationPart extends Base {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {

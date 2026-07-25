@@ -5,11 +5,11 @@ const { JournalEntry } = foundry.documents;
 
 /**
  * The Teriock JournalEntry implementation.
- * @implements {Teriock.Documents.JournalEntryInterface}
  * @extends {JournalEntry}
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
+ * @implements {Teriock.Documents.JournalEntryInterface}
  */
 export default class TeriockJournalEntry
   extends mixClasses(JournalEntry, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)

@@ -2,6 +2,12 @@ import { TeriockCard, TeriockCards } from "../_module.mjs";
 import { BaseCardsSystem } from "../../data/systems/cards/_module.mjs";
 
 declare global {
+  export interface CardTypeMap {
+    stone: TeriockCard;
+  }
+}
+
+declare global {
   namespace Teriock.Documents {
     export interface CardInterface {
       _id: ID<TeriockCard>;

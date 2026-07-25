@@ -8,11 +8,13 @@ import { fromIdentifier } from "../../../../helpers/utils.mjs";
 
 /**
  * Mixin for refreshing documents from the source documents they were created from.
- * @param {typeof TypeDataModel} Base
+ * @template {Constructor<TypeDataModel>} T
+ * @param {T} Base
  */
 export default function RefreshSystemMixin(Base) {
   return (
     /**
+     * @extends {TypeDataModel}
      * @mixin
      */
     class RefreshSystem extends Base {

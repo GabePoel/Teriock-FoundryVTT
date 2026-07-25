@@ -3,7 +3,8 @@ import { getImage } from "../../../../../../helpers/path.mjs";
 import { parseIdentifier } from "../../../../../../helpers/utils.mjs";
 
 /**
- * @param {typeof BaseActorSheet} Base
+ * @template {Constructor<BaseActorSheet>} T
+ * @param {T} Base
  */
 export default function PlayableActorSheetAffinitiesPart(Base) {
   return (

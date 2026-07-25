@@ -86,10 +86,10 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Active affinities.
-   * @returns {Teriock.Affinities.Any[]}
+   * @returns {AnyAffinity[]}
    */
   get activeAffinities() {
-    return this.source.system.affinities.contents.filter(a =>
+    return this.source.system.affinities.filter(a =>
       a.competencies.has(this.competence.raw) && a.checkIfQualified(this.getRollData())
       && ((a.heighten.has(0) && !this.heightened) || (a.heighten.has(1) && this.heightened))
     );
@@ -104,10 +104,10 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
 
   /**
    * Active expirations.
-   * @returns {Teriock.Expirations.Any[]}
+   * @returns {AnyExpiration[]}
    */
   get activeExpirations() {
-    return this.source.system.expirations.contents.filter(e =>
+    return this.source.system.expirations.filter(e =>
       e.competencies.has(this.competence.raw) && e.checkIfQualified(this.getRollData())
       && ((e.heighten.has(0) && !this.heightened) || (e.heighten.has(1) && this.heightened))
     );

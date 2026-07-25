@@ -5,7 +5,7 @@ const { JournalEntrySheet } = foundry.applications.sheets.journal;
 
 /**
  * @extends {JournalEntrySheet}
- * @mixes BaseApplicationMixin
+ * @mixes BaseApplication
  */
 export default class TeriockJournalEntrySheet extends BaseApplicationMixin(JournalEntrySheet) {
   /** @inheritDoc */

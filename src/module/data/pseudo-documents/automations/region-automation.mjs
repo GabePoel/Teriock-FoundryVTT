@@ -10,6 +10,12 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
+ * @mixes SelectDocumentsAutomation
+ * @mixes TriggerAutomation
+ * @mixes OverrideDataAutomation
+ * @mixes DisplayAutomation
  * @property {"rectangle"|"circle"|"ellipse"|"emanation"|"cone"|"ring"} regionType
  * @property {Teriock.System.FormulaString} height
  * @property {Teriock.System.FormulaString} innerWidth
@@ -25,10 +31,6 @@ const { fields } = foundry.data;
  * @property {boolean} targeting
  * @property {number} visibility
  * @property {{enabled: boolean, type: string, priority: number}} restriction
- * @mixes DisplayAutomation
- * @mixes OverrideDataAutomation
- * @mixes SelectDocumentsAutomation
- * @mixes TriggerAutomation
  */
 export default class RegionAutomation
   extends mixClasses(

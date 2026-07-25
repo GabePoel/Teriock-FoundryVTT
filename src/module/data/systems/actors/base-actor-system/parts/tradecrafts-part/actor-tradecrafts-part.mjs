@@ -5,7 +5,8 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 
 /**
  * Actor data model mixin that handles tradecrafts.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorTradecraftsPart(Base) {
   return (
@@ -13,6 +14,7 @@ export default function ActorTradecraftsPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorTradecraftsPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorTradecraftsPart extends Base {
       /** @inheritDoc */

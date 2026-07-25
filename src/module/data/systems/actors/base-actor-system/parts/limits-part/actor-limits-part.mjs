@@ -6,7 +6,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles limits.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorLimitsPart(Base) {
   return (
@@ -14,6 +15,7 @@ export default function ActorLimitsPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorLimitsPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorLimitsPart extends Base {
       /** @inheritDoc */

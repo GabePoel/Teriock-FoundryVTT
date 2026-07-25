@@ -14,9 +14,14 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
 
 /**
  * @extends {JournalEntryPageProseMirrorSheet}
- * @mixes BaseApplication
+ * @mixes BaseDocumentSheet
  * @mixes DisplaySheet
  * @mixes SystemSettingsButtonSheet
+ * @mixes ConnectionSheet
+ * @mixes DragDropSheet
+ * @mixes LockingSheet
+ * @mixes MechanicsSheet
+ * @mixes MechanicsTabsSheet
  * @property {TeriockJournalEntryPage} document
  */
 export default class TeriockPageSheet

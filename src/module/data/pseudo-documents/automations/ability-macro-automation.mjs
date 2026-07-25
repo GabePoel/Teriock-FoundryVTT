@@ -4,8 +4,8 @@ import * as automationMixins from "./mixins/_module.mjs";
 
 /**
  * @extends {BaseAutomation}
- * @mixes CritMechanic
  * @mixes MacroAutomation
+ * @mixes CritMechanic
  */
 export default class AbilityMacroAutomation
   extends automationMixins.MacroAutomationMixin(CritMechanicMixin(BaseAutomation))

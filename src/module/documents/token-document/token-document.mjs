@@ -7,11 +7,11 @@ const { TokenDocument } = foundry.documents;
 
 /**
  * The Teriock TokenDocument implementation.
- * @implements {Teriock.Documents.TokenDocumentInterface}
  * @extends {TokenDocument}
  * @extends {ClientDocument}
- * @mixes EmbedCardDocument
  * @mixes BaseDocument
+ * @mixes EmbedCardDocument
+ * @implements {Teriock.Documents.TokenDocumentInterface}
  */
 export default class TeriockTokenDocument
   extends mixClasses(TokenDocument, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)

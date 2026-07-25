@@ -4,7 +4,8 @@ import { initialBar, initialSchema } from "../../../../../fields/tools/initializ
 
 /**
  * Actor data model mixin that handles hacks.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorHacksPart(Base) {
   return (
@@ -12,6 +13,7 @@ export default function ActorHacksPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorHacksPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorHacksPart extends Base {
       /** @inheritDoc */

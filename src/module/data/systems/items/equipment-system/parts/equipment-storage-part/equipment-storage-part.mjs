@@ -7,7 +7,8 @@ import { StorageModel } from "../../../../../models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof EquipmentSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function EquipmentStoragePart(Base) {
   return (
@@ -15,6 +16,7 @@ export default function EquipmentStoragePart(Base) {
      * @extends {ConsumableSystem}
      * @extends {Teriock.Models.EquipmentStoragePartData}
      * @mixin
+     * @property {TeriockEquipment} parent
      */
     class EquipmentStoragePart extends Base {
       /** @inheritDoc */

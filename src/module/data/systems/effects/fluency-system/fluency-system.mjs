@@ -21,10 +21,10 @@ const { fields } = foundry.data;
  *
  * @extends {CleanedEffectSystem}
  * @extends {Teriock.Models.FluencySystemData}
- * @mixes CompetenceDisplaySystem
- * @mixes RevelationSystem
- * @mixes ThresholdData
  * @mixes WikiSystem
+ * @mixes RevelationSystem
+ * @mixes CompetenceDisplaySystem
+ * @mixes ThresholdData
  */
 export default class FluencySystem
   extends mixClasses(

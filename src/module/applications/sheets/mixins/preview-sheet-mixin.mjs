@@ -2,7 +2,8 @@ import { BasePreviewModel } from "../../../data/models/preview-models/_module.mj
 import { fromIdentifier } from "../../../helpers/utils.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function PreviewSheetMixin(Base) {
   return (

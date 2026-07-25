@@ -16,13 +16,13 @@ const AFFINITY_GROUPS = Object.values(affinityConfig.groups);
  */
 
 /**
- * @param {typeof BaseActorSheet} Base
+ * @template {Constructor<BaseActorSheet>} T
+ * @param {T} Base
  */
 export default function PlayableActorSheetSectionsPart(Base) {
   return (
     /**
      * @extends {BaseActorSheet}
-     * @mixes PlayableActorSheetConditionsPart
      * @mixin
      */
     class PlayableActorSheetSectionsPart extends Base {

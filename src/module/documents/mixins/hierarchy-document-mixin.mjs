@@ -16,7 +16,8 @@ const { Collection } = foundry.utils;
  *
  * This mixin is not related to pseudo-documents in any way.
  *
- * @param {typeof BaseDocument} Base
+ * @template {Constructor<BaseDocument>} T
+ * @param {T} Base
  * @todo Move dependent stuff to its own mixin that complements {@link DependeeDocumentMixin}.
  * @todo Fix issue where dependent documents aren't known on first load which messes with initial suppression.
  * @see {HierarchySystemMixin}
@@ -27,8 +28,7 @@ const { Collection } = foundry.utils;
 export default function HierarchyDocumentMixin(Base) {
   return (
     /**
-     * @extends AnyCommonDocument
-     * @mixes CommonDocument
+     * @extends {AnyCommonDocument}
      * @mixin
      * @property {HierarchySystem} system
      */

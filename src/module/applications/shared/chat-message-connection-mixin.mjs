@@ -7,7 +7,8 @@ const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Mixin for applications that render chat messages.
- * @param {typeof ApplicationV2} Base
+ * @template {Constructor<ApplicationV2>} T
+ * @param {T} Base
  */
 export default function ChatMessageConnectionMixin(Base) {
   /**

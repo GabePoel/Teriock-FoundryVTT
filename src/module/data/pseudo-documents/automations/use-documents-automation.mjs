@@ -9,10 +9,10 @@ const { fields } = foundry.data;
 
 /**
  * @extends {BaseAutomation}
- * @mixes OverrideAutomation
- * @mixes OverrideCompetenceMechanic
  * @mixes SelectDocumentsAutomation
  * @mixes TriggerAutomation
+ * @mixes OverrideCompetenceMechanic
+ * @mixes OverrideDataAutomation
  * @property {boolean} expandTables
  */
 export default class UseDocumentsAutomation

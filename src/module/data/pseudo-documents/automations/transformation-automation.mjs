@@ -8,8 +8,8 @@ import * as automationMixins from "./mixins/_module.mjs";
  * @extends {BaseAutomation}
  * @extends {Teriock.Transformation.AutomationTransformationConfig}
  * @mixes CritMechanic
- * @mixes OverrideCompetenceMechanic
  * @mixes SelectExternalDocumentsAutomation
+ * @mixes OverrideCompetenceMechanic
  */
 export default class TransformationAutomation
   extends mixClasses(

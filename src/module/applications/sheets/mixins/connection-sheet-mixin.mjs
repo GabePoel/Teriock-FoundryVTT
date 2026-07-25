@@ -1,7 +1,8 @@
 import { TeriockContextMenu } from "../../ux/_module.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function ConnectionSheetMixin(Base) {
   return (

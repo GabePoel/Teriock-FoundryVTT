@@ -5,7 +5,8 @@ import { TeriockDialog } from "../../api/_module.mjs";
 import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../../dialogs/_module.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function DocumentCreationSheetMixin(Base) {
   return (

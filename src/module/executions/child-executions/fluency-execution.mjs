@@ -3,7 +3,7 @@ import * as executionMixins from "../mixins/_module.mjs";
 
 /**
  * @extends {DocumentExecution}
- * @mixes ThresholdExecution
+ * @mixes TradecraftExecution
  * @property {TeriockFluency} source
  */
 export default class FluencyExecution extends executionMixins.TradecraftExecutionMixin(DocumentExecution) {

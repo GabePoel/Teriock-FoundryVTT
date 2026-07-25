@@ -6,14 +6,14 @@ const { Item } = foundry.documents;
 
 /**
  * The Teriock Item implementation.
- * @implements {Teriock.Documents.ItemInterface}
- * @extends {ClientDocument}
  * @extends {Item}
+ * @extends {ClientDocument}
  * @mixes BaseDocument
- * @mixes ChildDocument
  * @mixes CommonDocument
+ * @mixes ChildDocument
  * @mixes ParentDocument
  * @mixes RetrievalDocument
+ * @implements {Teriock.Documents.ItemInterface}
  */
 export default class TeriockItem
   extends mixClasses(

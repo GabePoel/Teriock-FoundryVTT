@@ -7,7 +7,6 @@ import ArmamentSheet from "./armament-sheet.mjs";
 /**
  * Sheet for a {@link TeriockEquipment}.
  * @extends {ArmamentSheet}
- * @mixes DragDropSheet
  * @mixes InventoryManagementSheet
  * @property {TeriockEquipment} document
  */

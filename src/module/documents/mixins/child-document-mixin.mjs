@@ -3,15 +3,14 @@ import * as documentMixins from "./_module.mjs";
 
 /**
  * Mixin for common functions used across document classes embedded in actorsUuids.
- * @param {typeof BaseDocument} Base
+ * @template {Constructor<BaseDocument>} T
+ * @param {T} Base
  */
 export default function ChildDocumentMixin(Base) {
   return (
     /**
-     * @mixes BaseDocument
-     * @mixes CommonDocument
+     * @extends {BaseDocument}
      * @mixes HierarchyDocument
-     * @mixes PanelDocument
      * @mixes UsableDocument
      * @mixin
      */

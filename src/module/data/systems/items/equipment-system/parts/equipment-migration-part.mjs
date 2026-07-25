@@ -2,13 +2,15 @@ import { migrateEvaluationToNumber } from "../../../../migrations/evaluation-mig
 
 /**
  * Equipment migrate data part.
- * @param {typeof EquipmentSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function EquipmentMigrationPart(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
      * @mixin
+     * @property {TeriockEquipment} parent
      */
     class EquipmentMigrationPart extends Base {
       /** @inheritDoc */

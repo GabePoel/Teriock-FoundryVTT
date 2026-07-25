@@ -2,7 +2,8 @@ const { fields } = foundry.data;
 
 /**
  * Ability flags part.
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityInfoPart(Base) {
   return (
@@ -10,6 +11,7 @@ export default function AbilityInfoPart(Base) {
      * @extends {BaseEffectSystem}
      * @extends {Teriock.Models.AbilityFlagsPartData}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityInfoPart extends Base {
       /** @inheritDoc */

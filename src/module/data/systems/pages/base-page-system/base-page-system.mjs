@@ -10,8 +10,8 @@ const { TypeDataModel } = foundry.abstract;
 /**
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.BasePageSystemData}
- * @mixes AccessData
  * @mixes RulesSystem
+ * @mixes AccessData
  */
 export default class BasePageSystem
   extends mixClasses(TypeDataModel, systemMixins.RulesSystemMixin, dataMixins.AccessDataMixin)

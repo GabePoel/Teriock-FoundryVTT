@@ -4,7 +4,8 @@ import { TeriockDialog } from "../../../../../api/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseActorSheet} Base
+ * @template {Constructor<BaseActorSheet>} T
+ * @param {T} Base
  */
 export default function PlayableActorSheetImpactPart(Base) {
   return (

@@ -7,15 +7,16 @@ const { fields } = foundry.data;
 
 /**
  * Equipment data model mixin that handles equipping, gluing, and attunement.
- * @param {typeof EquipmentSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function EquipmentWieldingPart(Base) {
   return (
     /**
      * @extends {BaseItemSystem}
      * @extends {Teriock.Models.EquipmentWieldingPartData}
-     * @property {ClientDocument} parent
      * @mixin
+     * @property {TeriockEquipment} parent
      */
     class EquipmentWieldingPart extends Base {
       /** @inheritDoc */
@@ -100,7 +101,7 @@ export default function EquipmentWieldingPart(Base) {
       /** @inheritDoc */
       _onCreate(data, options, userId) {
         super._onCreate(data, options, userId);
-        if (this.document.checkEditor(userId)) { this.unglue(); }
+        if (this.parent.checkEditor(userId)) { this.unglue(); }
       }
 
       /**

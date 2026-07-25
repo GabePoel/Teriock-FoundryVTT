@@ -12,9 +12,8 @@ import BaseItemSystem from "../base-item-system/base-item-system.mjs";
  *
  * @extends {BaseItemSystem}
  * @extends {Teriock.Models.BodySystemData}
- * @mixes ArmamentSystem
- * @mixes ConsumableSystem
  * @mixes WikiSystem
+ * @mixes ArmamentSystem
  */
 export default class BodySystem
   extends mixClasses(BaseItemSystem, systemMixins.WikiSystemMixin, systemMixins.ArmamentSystemMixin)

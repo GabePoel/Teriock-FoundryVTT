@@ -5,10 +5,10 @@ const { JournalEntryCategory } = foundry.documents;
 
 /**
  * The Teriock JournalEntryCategory implementation.
- * @implements {Teriock.Documents.JournalEntryCategoryInterface}
- * @extends {ClientDocument}
  * @extends {JournalEntryCategory}
+ * @extends {ClientDocument}
  * @mixes BaseDocument
+ * @implements {Teriock.Documents.JournalEntryCategoryInterface}
  */
 export default class TeriockJournalEntryCategory
   extends mixClasses(JournalEntryCategory, documentMixins.BaseDocumentMixin)

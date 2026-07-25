@@ -4,7 +4,8 @@ import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 /**
  * Actor data model that handles cover.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorCoverPart(Base) {
   return (
@@ -12,6 +13,7 @@ export default function ActorCoverPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorCoverPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorCoverPart extends Base {
       /** @inheritDoc */

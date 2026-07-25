@@ -2,7 +2,8 @@ import { PseudoCollectionField } from "../../../fields/_module.mjs";
 import { BaseActivation } from "../../../pseudo-documents/activations/abstract/_module.mjs";
 
 /**
- * @param {typeof BaseSystem} Base
+ * @template {Constructor<BaseSystem>} T
+ * @param {T} Base
  */
 export default function ActivatableSystemMixin(Base) {
   return (

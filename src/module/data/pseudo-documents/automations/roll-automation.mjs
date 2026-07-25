@@ -14,11 +14,11 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
+ * @mixes DisplayAutomation
+ * @mixes TriggerAutomation
  * @property {Teriock.Keys.Impact} impact
  * @property {Teriock.System.FormulaString} formula
  * @property {boolean} merge
- * @mixes DisplayAutomation
- * @mixes TriggerAutomation
  */
 export default class RollAutomation
   extends mixClasses(

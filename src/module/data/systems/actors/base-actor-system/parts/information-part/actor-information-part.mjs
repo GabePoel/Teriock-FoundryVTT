@@ -2,7 +2,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model mixin that handles display.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorInformationPart(Base) {
   return (
@@ -10,6 +11,7 @@ export default function ActorInformationPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorInformationPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorInformationPart extends Base {
       /** @inheritDoc */

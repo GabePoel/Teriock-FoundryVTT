@@ -10,27 +10,25 @@ import {
   InventorySystem,
 } from "../../data/systems/actors/_module.mjs";
 
-type ActorDocument = Teriock.Documents.DocumentBase<TeriockActor, Actor> & {
+type ActorDocument = Omit<Teriock.Documents.DocumentBase<TeriockActor, Actor>, "documentName"> & {
   // @ts-expect-error DocumentConstructionContext
   effects: DocumentCollection<TeriockActiveEffect>;
   // @ts-expect-error DocumentConstructionContext
   items: DocumentCollection<TeriockItem>;
+
+  get documentName(): "Actor";
 };
 
 declare global {
-  export type TeriockCharacter = Teriock.Documents.Subtype<
-    ActorDocument,
-    "character",
-    PlayableActorSheet,
-    CharacterSystem
-  >;
-  export type TeriockCreature = Teriock.Documents.Subtype<
-    ActorDocument,
-    "creature",
-    PlayableActorSheet,
-    CreatureSystem
-  >;
-  export type TeriockInventory = Teriock.Documents.Subtype<ActorDocument, "inventory", InventorySheet, InventorySystem>;
+  export interface TeriockCharacter
+    extends Teriock.Documents.Subtype<ActorDocument, "character", PlayableActorSheet, CharacterSystem>
+  {}
+  export interface TeriockCreature
+    extends Teriock.Documents.Subtype<ActorDocument, "creature", PlayableActorSheet, CreatureSystem>
+  {}
+  export interface TeriockInventory
+    extends Teriock.Documents.Subtype<ActorDocument, "inventory", InventorySheet, InventorySystem>
+  {}
 
   export interface ActorTypeMap {
     character: TeriockCharacter;

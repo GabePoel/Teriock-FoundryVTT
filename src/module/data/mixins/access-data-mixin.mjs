@@ -2,14 +2,15 @@ import { createElement } from "../../helpers/html.mjs";
 
 /**
  * Mixin to ensure data models have access to the data they need.
- * @param {typeof DataModel | typeof TypeDataModel} Base
- * @property {AccessData} parent
+ * @template {Constructor<DataModel | TypeDataModel>} T
+ * @param {T} Base
  */
 export default function AccessDataMixin(Base) {
   return (
     /**
      * @extends {DataModel | TypeDataModel}
      * @mixin
+     * @property {AccessData} parent
      */
     class AccessData extends Base {
       /**

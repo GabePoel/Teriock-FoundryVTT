@@ -9,8 +9,8 @@ import TriggerAutomationMixin from "./trigger-automation-mixin.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseAutomation} Base
- * @constructor
+ * @template {Constructor<BaseAutomation>} T
+ * @param {T} Base
  */
 export default function MacroAutomationMixin(Base) {
   return (

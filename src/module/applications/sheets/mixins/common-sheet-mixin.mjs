@@ -12,7 +12,8 @@ import SystemSettingsButtonSheetMixin from "./system-settings-button-sheet-mixin
 
 /**
  * {@link AnyCommonDocument} sheet mixin.
- * @param {typeof TeriockDocumentSheet} Base - The base application class to mix in with.
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base - The base application class to mix in with.
  */
 export default function CommonSheetMixin(Base) {
   return (

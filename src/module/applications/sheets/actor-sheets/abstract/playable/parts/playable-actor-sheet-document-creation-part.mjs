@@ -1,5 +1,6 @@
 /**
- * @param {typeof BaseActorSheet} Base
+ * @template {Constructor<BaseActorSheet>} T
+ * @param {T} Base
  */
 export default function PlayableActorSheetDocumentCreationPart(Base) {
   return (

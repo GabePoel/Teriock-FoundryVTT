@@ -2,13 +2,15 @@ import { TeriockActor } from "../../../../../documents/_module.mjs";
 
 /**
  * Actor data model that handles automatically derived token changes.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorTokenPart(Base) {
   return (
     /**
      * @extends {AbstractActorSystem}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorTokenPart extends Base {
       /** @type {ActiveEffectData[]} */

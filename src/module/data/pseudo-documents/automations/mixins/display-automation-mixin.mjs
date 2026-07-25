@@ -3,7 +3,8 @@ import { migrateKey } from "../../../migrations/source-migrations.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseAutomation} Base
+ * @template {Constructor<BaseAutomation>} T
+ * @param {T} Base
  */
 export default function DisplayAutomationMixin(Base) {
   return (

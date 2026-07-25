@@ -9,13 +9,13 @@ import * as parts from "./parts/_module.mjs";
  * @mixes PlayableActorSheetCombatPart
  * @mixes PlayableActorSheetConditionsPart
  * @mixes PlayableActorSheetDocumentCreationPart
- * @mixes PlayableActorSheetImpactPart
  * @mixes PlayableActorSheetMechanicalPart
  * @mixes PlayableActorSheetSectionsPart
  * @mixes PlayableActorSheetAffinitiesPart
  * @mixes PlayableActorSheetRollingPart
  * @mixes PlayableActorSheetSidebarPart
  * @mixes PlayableActorSheetTabsPart
+ * @mixes PlayableActorSheetImpactPart
  * @mixes PlayableActorSheetTradecraftsPart
  */
 export default class TeriockPlayableActorSheet

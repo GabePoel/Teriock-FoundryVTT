@@ -4,6 +4,7 @@ import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
 /**
  * A class that enforces data cleaning for the various active effect types that have more custom behavior than
  * effects in Foundry normally do.
+ * @extends {BaseEffectSystem}
  * @mixes InstructionsSystem
  */
 export default class CleanedEffectSystem extends systemMixins.InstructionsSystemMixin(BaseEffectSystem) {

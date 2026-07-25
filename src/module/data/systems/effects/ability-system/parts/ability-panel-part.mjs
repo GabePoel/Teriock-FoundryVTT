@@ -4,7 +4,8 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
  * Ability panel part.
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityPanelPart(Base) {
   return (
@@ -20,6 +21,7 @@ export default function AbilityPanelPart(Base) {
      * @extends {AbilityUpgradesPart}
      * @extends {AbilityUsagePart}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityPanelPart extends Base {
       /** @inheritDoc */

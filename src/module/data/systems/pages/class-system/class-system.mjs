@@ -7,7 +7,7 @@ import * as systemMixins from "../../mixins/_module.mjs";
 import BasePageSystem from "../base-page-system/base-page-system.mjs";
 
 /**
- * @extends {TypeDataModel}
+ * @extends {BasePageSystem}
  * @extends {Teriock.Models.ClassSystemData}
  * @mixes WikiSystem
  * @mixes InstructionsSystem

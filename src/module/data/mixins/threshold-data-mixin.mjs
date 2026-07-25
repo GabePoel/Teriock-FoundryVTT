@@ -1,12 +1,13 @@
 import { ThresholdRoll } from "../../dice/rolls/_module.mjs";
 
 /**
- * @param {typeof UsableData} Base
+ * @template {Constructor<UsableData>} T
+ * @param {T} Base
  */
 export default function ThresholdDataMixin(Base) {
   return (
     /**
-     * @extends {ChildSystem}
+     * @extends {UsableData}
      * @mixin
      */
     class ThresholdData extends Base {

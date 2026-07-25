@@ -9,7 +9,8 @@ const BAR_STATS = Object.entries(statConfig).filter(([_k, v]) => v.bar).map(([k,
 
 /**
  * Actor data model that handles stats.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorStatsPart(Base) {
   return (
@@ -18,6 +19,7 @@ export default function ActorStatsPart(Base) {
      * @extends {Teriock.Models.ActorStatsPartData}
      * @implements {Teriock.Functionality.StatProvider}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorStatsPart extends Base {
       /** @inheritDoc */

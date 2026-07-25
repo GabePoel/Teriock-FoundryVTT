@@ -5,14 +5,16 @@ const { fields } = foundry.data;
 
 /**
  * Ability improvements part.
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityUpgradesPart(Base) {
   return (
     /**
-     * @extends {BaseEffectSystem}
+     * @extends {AbilitySystem}
      * @extends {Teriock.Models.AbilityUpgradesPartData}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityUpgradesPart extends Base {
       /** @inheritDoc */

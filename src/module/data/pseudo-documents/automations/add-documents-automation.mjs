@@ -12,9 +12,10 @@ const { fields } = foundry.data;
 /**
  * @extends {BaseAutomation}
  * @mixes CritMechanic
+ * @mixes SelectDocumentsAutomation
  * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataAutomation
- * @mixes SelectDocumentsAutomation
+ * @mixes DisplayAutomation
  * @property {boolean} attachDocuments
  * @property {boolean} separate
  * @property {{enabled: boolean, data: object, overrideData: boolean, uuids: Set<UUID<AnyChildDocument>>[]}} children

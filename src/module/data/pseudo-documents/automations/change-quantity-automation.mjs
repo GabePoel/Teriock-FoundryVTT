@@ -13,13 +13,13 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Teriock.System.FormulaString} formula
- * @property {TypedIdentifier|Identifier} identifier
- * @property {boolean} targetParent
  * @extends {BaseAutomation}
  * @mixes CritMechanic
  * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
+ * @property {Teriock.System.FormulaString} formula
+ * @property {TypedIdentifier|Identifier} identifier
+ * @property {boolean} targetParent
  */
 export default class ChangeQuantityAutomation
   extends mixClasses(

@@ -11,11 +11,10 @@ import {
 /**
  * @extends {AbilityExecutionConstructor}
  * @extends {DocumentExecution}
- * @mixes AbilityExecutionActorUpdate
- * @mixes AbilityExecutionChat
  * @mixes AbilityExecutionGetInput
+ * @mixes AbilityExecutionActorUpdate
  * @mixes AbilityExecutionRolls
- * @mixes AttackExecution
+ * @mixes AbilityExecutionChat
  */
 export default class AbilityExecution
   extends mixClasses(

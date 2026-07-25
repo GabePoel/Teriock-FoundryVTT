@@ -1,7 +1,8 @@
 import { createElement } from "../../../helpers/html.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function LockingSheetMixin(Base) {
   return (

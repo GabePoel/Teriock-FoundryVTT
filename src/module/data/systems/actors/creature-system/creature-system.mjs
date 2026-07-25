@@ -9,6 +9,8 @@ import BaseActorSystem from "../base-actor-system/base-actor-system.mjs";
  * - [Attributes](https://wiki.teriock.com/index.php/Core:Attributes)
  * - [Size](https://wiki.teriock.com/index.php/Core:Size)
  *
+ * @extends {BaseActorSystem}
+ * @mixes WikiSystem
  * @implements {Teriock.Models.CreatureSystemData}
  */
 export default class CreatureSystem extends systemMixins.WikiSystemMixin(BaseActorSystem) {

@@ -4,7 +4,8 @@ import { PiercingModel } from "../../../models/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof ChildSystem} Base
+ * @template {Constructor<ChildSystem>} T
+ * @param {T} Base
  */
 export default function AttackSystemMixin(Base) {
   return (

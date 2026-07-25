@@ -5,11 +5,13 @@ const { fields } = foundry.data;
 
 /**
  * Adds an optional competence override to a {@link MechanicPseudoDocument}.
- * @param {typeof MechanicPseudoDocument} Base
+ * @template {Constructor<MechanicPseudoDocument>} T
+ * @param {T} Base
  */
 export default function OverrideCompetenceMechanicMixin(Base) {
   return (
     /**
+     * @extends {MechanicPseudoDocument}
      * @mixin
      * @property {CompetenceModel} competence
      * @property {""|"override"|"inherit"} setCompetence

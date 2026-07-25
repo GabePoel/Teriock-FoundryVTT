@@ -10,13 +10,15 @@ const { fields } = foundry.data;
 
 /**
  * Mixin to enable selecting documents.
- * @param {typeof BaseAutomation} Base
+ * @template {Constructor<BaseAutomation>} T
+ * @param {T} Base
  */
 export default function SelectDocumentsAutomationMixin(Base) {
   return (
     /**
      * @extends {BaseAutomation}
      * @mixes SelectExternalDocumentsAutomation
+     * @mixin
      * @property {{identifiers: Set<TypedIdentifier>, qualifier: Teriock.System.FormulaString}} local
      */
     class SelectDocumentsAutomation extends mixClasses(Base, SelectExternalDocumentsAutomationMixin) {

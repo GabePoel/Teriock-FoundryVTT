@@ -26,7 +26,8 @@ function transformationStatFlag(stat) {
 }
 
 /**
- * @param {typeof ChildSystem} Base
+ * @template {Constructor<ChildSystem>} T
+ * @param {T} Base
  */
 export default function TransformationSystemMixin(Base) {
   return (

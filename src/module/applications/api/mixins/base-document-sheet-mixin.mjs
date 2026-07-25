@@ -2,13 +2,15 @@ import { makeIconClass } from "../../../helpers/icon.mjs";
 import BaseApplicationMixin from "./base-application-mixin.mjs";
 
 /**
- * @param {typeof DocumentSheetV2} Base
+ * @template {Constructor<DocumentSheetV2>} T
+ * @param {T} Base
  */
 export default function BaseDocumentSheetMixin(Base) {
   /**
    * @extends {DocumentSheetV2}
-   * @property {ApplicationConfiguration & Teriock.Sheet._SheetConfiguration} options
+   * @mixes BaseApplication
    * @mixin
+   * @property {ApplicationConfiguration & Teriock.Sheet._SheetConfiguration} options
    */
   class BaseDocumentSheet extends BaseApplicationMixin(Base) {
     /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */

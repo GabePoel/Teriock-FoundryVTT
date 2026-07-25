@@ -1,7 +1,8 @@
 import { TeriockContextMenu } from "../../../../../ux/_module.mjs";
 
 /**
- * @param {typeof BaseActorSheet} Base
+ * @template {Constructor<BaseActorSheet>} T
+ * @param {T} Base
  */
 export default function PlayableActorSheetSidebarPart(Base) {
   return (

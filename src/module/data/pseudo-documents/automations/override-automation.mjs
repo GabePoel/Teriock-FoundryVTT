@@ -11,8 +11,8 @@ const { fields } = foundry.data;
  * @extends {BaseAutomation}
  * @mixes CritMechanic
  * @mixes DisplayAutomation
- * @mixes OverrideCompetenceMechanic
  * @mixes OverrideDataAutomation
+ * @mixes OverrideCompetenceMechanic
  * @property {Teriock.System.FormulaString} rollBonus
  * @property {boolean|null} makeEffect
  * @property {boolean|null} targetsActor

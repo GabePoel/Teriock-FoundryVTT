@@ -9,14 +9,14 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Teriock.Keys.Impact} impact
- * @property {boolean} morganti
- * @property {boolean} showDialog
- * @property {number | null} amount
  * @extends {BaseAutomation}
  * @mixes CritMechanic
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
+ * @property {Teriock.Keys.Impact} impact
+ * @property {boolean} morganti
+ * @property {boolean} showDialog
+ * @property {number | null} amount
  */
 export default class TakeAutomation
   extends mixClasses(

@@ -5,18 +5,19 @@ const { fields } = foundry.data;
 
 /**
  * Mixin for data models that can be used. This typically involves running an execution.
- * @param {typeof BaseDataModel | typeof CommonSystem} Base
+ * @template {Constructor<BaseDataModel | CommonSystem>} T
+ * @param {T} Base
  */
 export default function UsableDataMixin(Base) {
   return (
     /**
-     * @extends {BaseDataModel|CommonSystem}
+     * @extends {BaseDataModel | CommonSystem}
      * @mixin
      */
     class UsableData extends Base {
       /**
        * The type of execution this uses.
-       * @typeof {DocumentExecution}
+       * @returns {typeof DocumentExecution}
        */
       static get Execution() {
         return teriock.executions.abstract.BaseExecution;

@@ -5,7 +5,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model mixin that handles the death bag.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorDeathBagPart(Base) {
   return (
@@ -13,6 +14,7 @@ export default function ActorDeathBagPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorDeathBagPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorDeathBagPart extends Base {
       /** @inheritDoc */

@@ -13,7 +13,8 @@ const { fields } = foundry.data;
 const { ImagePopout } = foundry.applications.apps;
 
 /**
- * @param {typeof TypeDataModel} Base
+ * @template {Constructor<TypeDataModel>} T
+ * @param {T} Base
  */
 export default function ChildSystemMixin(Base) {
   return (
@@ -120,7 +121,7 @@ export default function ChildSystemMixin(Base) {
           tooltip: this.parent.disabled
             ? _loc("TERIOCK.SYSTEMS.Child.EMBED.disabled")
             : _loc("TERIOCK.SYSTEMS.Child.EMBED.enabled"),
-          visible: this.parent?.isOwner,
+          visible: this.parent.isOwner,
           onClick: () => this.parent.toggleDisabled(),
         }];
       }
@@ -172,14 +173,6 @@ export default function ChildSystemMixin(Base) {
         return this.constructor.metadata.usable;
       }
 
-      /**
-       * @inheritDoc
-       * @returns {ChildDocument}
-       */
-      get parent() {
-        return /** @type {AnyChildDocument} */ super.parent;
-      }
-
       /** @inheritDoc */
       get useText() {
         return _loc("TERIOCK.SYSTEMS.Child.USAGE.use", { value: this.parent.name });
@@ -213,7 +206,7 @@ export default function ChildSystemMixin(Base) {
        * @returns {boolean}
        */
       _isSuppressedDependee() {
-        return this.parent?.dependee?.active === false;
+        return this.parent.dependee?.active === false;
       }
 
       /**
@@ -221,7 +214,7 @@ export default function ChildSystemMixin(Base) {
        * @returns {boolean}
        */
       _isSuppressedDisabled() {
-        return this.parent?.disabled;
+        return this.parent.disabled;
       }
 
       /**

@@ -3,7 +3,8 @@ import { conditionSort } from "../../../../../../helpers/sort.mjs";
 import { TeriockTextEditor } from "../../../../../ux/_module.mjs";
 
 /**
- * @param {typeof BaseActorSheet} Base
+ * @template {Constructor<BaseActorSheet>} T
+ * @param {T} Base
  */
 export default function PlayableActorSheetConditionsPart(Base) {
   return (

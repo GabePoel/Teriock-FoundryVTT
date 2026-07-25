@@ -4,7 +4,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles conditions.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorConditionsPart(Base) {
   return (
@@ -12,6 +13,7 @@ export default function ActorConditionsPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorConditionsPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorConditionsPart extends Base {
       /** @inheritDoc */

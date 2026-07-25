@@ -2,11 +2,13 @@ import { BaseSystemMixin } from "../_module.mjs";
 import { IdentifierField } from "../../../fields/_module.mjs";
 
 /**
- * @param {typeof TypeDataModel} Base
+ * @template {Constructor<TypeDataModel>} T
+ * @param {T} Base
  */
 export default function RulesSystemMixin(Base) {
   return (
     /**
+     * @extends {TypeDataModel}
      * @extends {Teriock.Models.RulesSystemData}
      * @mixes BaseSystem
      * @mixin

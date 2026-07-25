@@ -6,7 +6,8 @@ import { consolidateWriteOperations } from "../../../../../../helpers/utils.mjs"
 import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
 
 /**
- * @param {typeof BaseActorSheet} Base
+ * @template {Constructor<BaseActorSheet>} T
+ * @param {T} Base
  */
 export default function PlayableActorSheetMechanicalPart(Base) {
   return (

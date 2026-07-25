@@ -1,7 +1,6 @@
 /**
- * @template {typeof PlaceableObject} T
+ * @template {Constructor<PlaceableObject>} T
  * @param {T} Base
- * @return {T}
  */
 export default function EtherealLightPlaceableMixin(Base) {
   return (

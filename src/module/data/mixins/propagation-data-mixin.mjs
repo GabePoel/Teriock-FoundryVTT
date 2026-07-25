@@ -2,11 +2,13 @@ const SCOPE_MAP = { ActiveEffect: "effect", Actor: "actor", Automation: "automat
 
 /**
  * A mixin that can be used by both documents and data models to propagate shared operations.
- * @param {typeof BaseDocument|typeof TypeDataModel} Base
+ * @template {Constructor<BaseDocument | TypeDataModel>} T
+ * @param {T} Base
  */
 export default function PropagationDataMixin(Base) {
   return (
     /**
+     * @extends {BaseDocument | TypeDataModel}
      * @mixin
      */
     class PropagationData extends Base {

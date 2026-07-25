@@ -3,7 +3,8 @@ import { defaultJSONField } from "../../../fields/tools/builders.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseAutomation} Base
+ * @template {Constructor<BaseAutomation>} T
+ * @param {T} Base
  */
 export default function OverrideDataAutomationMixin(Base) {
   return (

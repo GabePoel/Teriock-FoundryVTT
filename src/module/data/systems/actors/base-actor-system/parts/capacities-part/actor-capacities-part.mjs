@@ -8,7 +8,8 @@ const { utils } = foundry;
 
 /**
  * Actor capacities part.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorCapacitiesPart(Base) {
   return (
@@ -16,6 +17,7 @@ export default function ActorCapacitiesPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorCapacitiesPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorCapacitiesPart extends Base {
       /** @inheritDoc */

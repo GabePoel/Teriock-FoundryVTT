@@ -10,6 +10,8 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseAutomation}
+ * @mixes CritMechanic
  * @property {Teriock.Keys.Condition} status
  * @property {"apply"|"remove"|"toggle"} relation
  */

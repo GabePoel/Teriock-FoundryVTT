@@ -5,8 +5,8 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 
 /**
  * @extends {BaseAutomation}
- * @mixes CritMechanic
  * @mixes OverrideCompetenceMechanic
+ * @mixes CritMechanic
  * @property {TypedIdentifier} identifier
  */
 export default class ChangeCompetenceAutomation

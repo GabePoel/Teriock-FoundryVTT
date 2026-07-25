@@ -9,7 +9,6 @@ const { ActiveEffectTypeDataModel, fields } = foundry.data;
  * @extends {ActiveEffectTypeDataModel}
  * @extends {Teriock.Models.BaseEffectSystemData}
  * @mixes ChildSystem
- * @mixes AutomatedData
  */
 export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(ActiveEffectTypeDataModel) {
   /** @inheritDoc */
@@ -96,9 +95,7 @@ export default class BaseEffectSystem extends systemMixins.ChildSystemMixin(Acti
    * @returns {Teriock.Changes.QualifiedChangeData[]}
    */
   get qualifiedChanges() {
-    const changes = [];
-    for (const a of this.activeAutomations.filter(a => a.metadata.changes)) { changes.push(...a.getChanges()); }
-    return changes;
+    return this.activeAutomations.filter(a => a.metadata.changes).flatMap(a => a.getChanges());
   }
 
   /** @inheritDoc */

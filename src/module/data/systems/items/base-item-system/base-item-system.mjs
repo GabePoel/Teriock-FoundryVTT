@@ -8,8 +8,8 @@ const { TypeDataModel } = foundry.abstract;
  * Provides common functionality for disabled state and update tracking.
  * @extends {TypeDataModel}
  * @extends {Teriock.Models.BaseItemSystemData}
- * @mixes ChildSystem
  * @mixes InstructionsSystem
+ * @mixes ChildSystem
  */
 export default class BaseItemSystem
   extends systemMixins.InstructionsSystemMixin(systemMixins.ChildSystemMixin(TypeDataModel))

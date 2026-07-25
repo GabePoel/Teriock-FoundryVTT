@@ -349,7 +349,7 @@ function cleanAbility(doc) {
 }
 
 /**
- * @param {Record<string, Teriock.Automations.Any>} automations
+ * @param {Record<string, AnyAutomation>} automations
  */
 function cleanAutomations(automations) {
   const DEPRECATED_TYPES = ["start", "end", "apply", "useAbilities"];
@@ -371,14 +371,14 @@ function cleanAutomations(automations) {
 }
 
 /**
- * @param {Record<string, Teriock.Expirations.Any>} cleanAffinities
+ * @param {Record<string, AnyExpiration>} cleanAffinities
  */
 function cleanAffinities(cleanAffinities) {
   for (const e of Object.values(cleanAffinities)) { cleanMechanic(e); }
 }
 
 /**
- * @param {Record<string, Teriock.Expirations.Any>} expirations
+ * @param {Record<string, AnyExpiration>} expirations
  */
 function cleanExpirations(expirations) {
   for (const e of Object.values(expirations)) { cleanExpiration(e); }
@@ -394,7 +394,7 @@ function cleanMechanic(mechanic) {
 }
 
 /**
- * @param {Teriock.Expirations.Any} expiration
+ * @param {AnyExpiration} expiration
  */
 function cleanExpiration(expiration) {
   cleanMechanic(expiration);
@@ -403,7 +403,7 @@ function cleanExpiration(expiration) {
 }
 
 /**
- * @param {Teriock.Automations.Any} automation
+ * @param {AnyAutomation} automation
  */
 function cleanAutomation(automation) {
   cleanMechanic(automation);

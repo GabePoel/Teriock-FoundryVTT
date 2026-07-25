@@ -6,7 +6,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles movement.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorMovementPart(Base) {
   return (
@@ -14,6 +15,7 @@ export default function ActorMovementPart(Base) {
      * @extends {AbstractActorSystem}
      * @extends {Teriock.Models.ActorMovementPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorMovementPart extends Base {
       /** @inheritDoc */

@@ -8,11 +8,11 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {Set<Teriock.Keys.CommonOutcome>} common
  * @extends {BaseAutomation}
  * @mixes CritMechanic
  * @mixes ConfirmationDialogAutomation
  * @mixes TriggerAutomation
+ * @property {Set<Teriock.Keys.CommonOutcome>} common
  */
 export default class CommonOutcomesAutomation
   extends mixClasses(

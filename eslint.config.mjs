@@ -86,6 +86,7 @@ export default tseslint.config(
     files,
     plugins: { jsdoc, perfectionist },
     rules: {
+      "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "with-single-extends" }],
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
       "default-case": "error",
       "dot-notation": "error",

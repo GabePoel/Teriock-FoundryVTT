@@ -26,56 +26,41 @@ import {
   ResourceSystem,
 } from "../../data/systems/effects/_module.mjs";
 
-type ActiveEffectDocument = Teriock.Documents.DocumentBase<TeriockActiveEffect, ActiveEffect> & {
+type ActiveEffectDocument = Omit<Teriock.Documents.DocumentBase<TeriockActiveEffect, ActiveEffect>, "documentName"> & {
   parent: TeriockActor | TeriockItem;
+
+  get documentName(): "ActiveEffect";
 };
 
 declare global {
-  export type TeriockAbility = Teriock.Documents.Subtype<ActiveEffectDocument, "ability", AbilitySheet, AbilitySystem>;
-  export type TeriockAttunement = Teriock.Documents.Subtype<
-    ActiveEffectDocument,
-    "attunement",
-    AttunementSheet,
-    AttunementSystem
-  >;
-  export type TeriockCondition = Teriock.Documents.Subtype<
-    ActiveEffectDocument,
-    "condition",
-    ConditionSheet,
-    ConditionSystem
-  >;
-  export type TeriockConsequence = Teriock.Documents.Subtype<
-    ActiveEffectDocument,
-    "consequence",
-    ConsequenceSheet,
-    ConsequenceSystem
-  >;
-  export type TeriockCover = Teriock.Documents.Subtype<
-    ActiveEffectDocument,
-    "cover",
-    TeriockDocumentSheet,
-    BaseEffectSystem
-  >;
-  export type TeriockFluency = Teriock.Documents.Subtype<ActiveEffectDocument, "fluency", FluencySheet, FluencySystem>;
-  export type TeriockHack = Teriock.Documents.Subtype<ActiveEffectDocument, "hack", HackSheet, HackSystem>;
-  export type TeriockImbuement = Teriock.Documents.Subtype<
-    ActiveEffectDocument,
-    "imbuement",
-    ApplicableEffectSheet,
-    ImbuementSystem
-  >;
-  export type TeriockProperty = Teriock.Documents.Subtype<
-    ActiveEffectDocument,
-    "property",
-    PropertySheet,
-    PropertySystem
-  >;
-  export type TeriockResource = Teriock.Documents.Subtype<
-    ActiveEffectDocument,
-    "resource",
-    ResourceSheet,
-    ResourceSystem
-  >;
+  export interface TeriockAbility
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "ability", AbilitySheet, AbilitySystem>
+  {}
+  export interface TeriockAttunement
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "attunement", AttunementSheet, AttunementSystem>
+  {}
+  export interface TeriockCondition
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "condition", ConditionSheet, ConditionSystem>
+  {}
+  export interface TeriockConsequence
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "consequence", ConsequenceSheet, ConsequenceSystem>
+  {}
+  export interface TeriockCover
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "cover", TeriockDocumentSheet, BaseEffectSystem>
+  {}
+  export interface TeriockFluency
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "fluency", FluencySheet, FluencySystem>
+  {}
+  export interface TeriockHack extends Teriock.Documents.Subtype<ActiveEffectDocument, "hack", HackSheet, HackSystem> {}
+  export interface TeriockImbuement
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "imbuement", ApplicableEffectSheet, ImbuementSystem>
+  {}
+  export interface TeriockProperty
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "property", PropertySheet, PropertySystem>
+  {}
+  export interface TeriockResource
+    extends Teriock.Documents.Subtype<ActiveEffectDocument, "resource", ResourceSheet, ResourceSystem>
+  {}
 
   export interface ActiveEffectTypeMap {
     ability: TeriockAbility;

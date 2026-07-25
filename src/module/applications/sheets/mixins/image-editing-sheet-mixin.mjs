@@ -1,5 +1,6 @@
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function ImageEditingSheetMixin(Base) {
   return (

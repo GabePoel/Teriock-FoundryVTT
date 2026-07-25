@@ -2,7 +2,8 @@ const { fields } = foundry.data;
 
 /**
  * Ability overview part.
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityOverviewPart(Base) {
   return (
@@ -10,6 +11,7 @@ export default function AbilityOverviewPart(Base) {
      * @extends {BaseEffectSystem}
      * @extends {Teriock.Models.AbilityOverviewPartData}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityOverviewPart extends Base {
       /** @inheritDoc */

@@ -1,12 +1,15 @@
 import { LongRestExecution, ShortRestExecution } from "../../../../../executions/actor-executions/_module.mjs";
 
 /**
- * @param {typeof CommonSystem} Base
+ * @template {Constructor<CommonSystem>} T
+ * @param {T} Base
  */
 export default function ActorRestingPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
+     * @mixin
+     * @property {AnyActor} parent
      */
     class ActorRestingPart extends Base {
       /**

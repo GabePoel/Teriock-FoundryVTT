@@ -1,12 +1,14 @@
 /**
  * Actor data model that handles {@link BaseAutomation} application during preparation.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorAutomationPart(Base) {
   return (
     /**
      * @extends {CommonSystem}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorAutomationPart extends Base {
       /**

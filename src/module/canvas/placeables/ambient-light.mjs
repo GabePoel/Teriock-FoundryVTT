@@ -3,9 +3,9 @@ import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 const { AmbientLight } = foundry.canvas.placeables;
 
 /**
- * @inheritDoc
  * @extends {AmbientLight}
  * @mixes EtherealLightPlaceable
+ * @inheritDoc
  */
 export default class TeriockAmbientLight extends EtherealLightPlaceableMixin(AmbientLight) {
   /** @inheritDoc */

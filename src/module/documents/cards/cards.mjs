@@ -1,13 +1,13 @@
 import * as documentMixins from "../mixins/_module.mjs";
 
-const { Card } = foundry.documents;
+const { Cards } = foundry.documents;
 
 /**
  * The Teriock Cards implementation.
- * @implements {Teriock.Documents.CardsInterface}
- * @extends {ClientDocument}
  * @extends {Cards}
+ * @extends {ClientDocument}
  * @mixes BaseDocument
+ * @implements {Teriock.Documents.CardsInterface}
  * @property {DocumentCollection<TeriockCard>} cards
  */
-export default class TeriockCards extends documentMixins.BaseDocumentMixin(Card) {}
+export default class TeriockCards extends documentMixins.BaseDocumentMixin(Cards) {}

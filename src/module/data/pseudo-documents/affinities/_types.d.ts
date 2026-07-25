@@ -10,20 +10,21 @@ import {
 } from "./_module.mjs";
 
 declare global {
-  namespace Teriock.Affinities {
-    export interface TypeMap {
-      binding: BindingAffinity;
-      hexproof: HexproofAffinity;
-      hexseal: HexsealAffinity;
-      immunity: ImmunityAffinity;
-      resistance: ResistanceAffinity;
-      takeBoost: TakeBoostAffinity;
-      takeDeboost: TakeDeboostAffinity;
-      vulnerability: VulnerabilityAffinity;
-    }
+  export interface AffinityTypeMap {
+    binding: BindingAffinity;
+    hexproof: HexproofAffinity;
+    hexseal: HexsealAffinity;
+    immunity: ImmunityAffinity;
+    resistance: ResistanceAffinity;
+    takeBoost: TakeBoostAffinity;
+    takeDeboost: TakeDeboostAffinity;
+    vulnerability: VulnerabilityAffinity;
+  }
 
-    export type Type = keyof TypeMap;
-    export type Any = TypeMap[Type];
+  namespace Teriock.Affinities {
+    export type TypeMap = AffinityTypeMap;
+    export type Type = TypeMapKey<AffinityTypeMap>;
+    export type Any = AnyAffinity;
 
     /** The consolidated data an actor stores for each distinct affinity it has. */
     export type EntryData = {

@@ -1,7 +1,8 @@
 import { CostPayer } from "../../../../applications/dialogs/_module.mjs";
 
 /**
- * @param {typeof AbilityExecutionConstructor} Base
+ * @template {Constructor<AbilityExecutionConstructor>} T
+ * @param {T} Base
  */
 export default function AbilityExecutionGetInputPart(Base) {
   return (

@@ -5,7 +5,8 @@ const BAR_STATS = Object.keys(statConfig).filter(k => statConfig[k].bar);
 
 /**
  * Mixin allowing hacks and spending dice stats.
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function HackStatApplicationMixin(Base) {
   return (

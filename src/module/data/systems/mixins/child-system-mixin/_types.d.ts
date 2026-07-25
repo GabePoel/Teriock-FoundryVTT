@@ -1,4 +1,5 @@
-import type { CommonDocumentSettingsModel } from "../../../models/settings-models/_module.mjs";
+import { TeriockActiveEffect, TeriockItem } from "../../../../documents/_module.mjs";
+import { CommonDocumentSettingsModel } from "../../../models/settings-models/_module.mjs";
 
 declare global {
   namespace Teriock.Models {
@@ -10,9 +11,7 @@ declare global {
       /** <schema> Per-document behavior and display settings */
       settings: CommonDocumentSettingsModel;
 
-      get parent(): AnyChildDocument;
+      get parent(): TeriockActiveEffect | TeriockItem;
     };
   }
 }
-
-export {};

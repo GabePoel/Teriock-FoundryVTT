@@ -8,7 +8,8 @@ const { fields } = foundry.data;
 
 /**
  * Mixin for executions involving a d20 roll.
- * @param {typeof BaseExecution} Base
+ * @template {Constructor<BaseExecution>} T
+ * @param {T} Base
  */
 export default function ThresholdExecutionMixin(Base) {
   return (

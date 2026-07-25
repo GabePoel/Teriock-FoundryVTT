@@ -13,27 +13,27 @@ const { fields } = foundry.data;
  * Base {@link TeriockActor} data model.
  * @extends {AbstractActorSystem}
  * @extends {Teriock.Models.BaseActorSystemData}
- * @mixes CommonSystem
- * @mixes ActorAffinitiesPart
- * @mixes ActorAttributesPart
- * @mixes ActorAutomationPart
- * @mixes ActorCapacitiesPart
- * @mixes ActorCombatPart
+ * @mixes ActorStatsPart
  * @mixes ActorConditionsPart
- * @mixes ActorCoverPart
- * @mixes ActorDeathBagPart
+ * @mixes ActorAutomationPart
+ * @mixes ActorScalingPart
  * @mixes ActorHacksPart
+ * @mixes ActorCombatPart
+ * @mixes ActorCoverPart
+ * @mixes ActorImpactsPart
+ * @mixes ActorTradecraftsPart
+ * @mixes ActorAttributesPart
+ * @mixes ActorCapacitiesPart
+ * @mixes ActorTransformationPart
+ * @mixes ActorDeathBagPart
  * @mixes ActorInformationPart
  * @mixes ActorLimitsPart
  * @mixes ActorMoneyPart
  * @mixes ActorMovementPart
- * @mixes ActorRestingPart
- * @mixes ActorImpactsPart
- * @mixes ActorScalingPart
  * @mixes ActorSensesPart
- * @mixes ActorStatsPart
- * @mixes ActorTradecraftsPart
- * @mixes ActorTransformationPart
+ * @mixes ActorAffinitiesPart
+ * @mixes ActorRestingPart
+ * @mixes ActorTokenPart
  */
 export default class BaseActorSystem
   extends mixClasses(

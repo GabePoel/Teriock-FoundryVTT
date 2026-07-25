@@ -1,7 +1,8 @@
 import { StatDiceUpdater } from "../../dialogs/updaters/_module.mjs";
 
 /**
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function StatDiceSheetMixin(Base) {
   return (

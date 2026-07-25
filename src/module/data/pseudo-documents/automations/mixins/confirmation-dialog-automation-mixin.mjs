@@ -6,7 +6,8 @@ const { fields } = foundry.data;
 
 /**
  * Automation to enable/disable confirmation dialogs.
- * @param {typeof BaseAutomation} Base
+ * @template {Constructor<BaseAutomation>} T
+ * @param {T} Base
  */
 export default function ConfirmationDialogAutomationMixin(Base) {
   return (

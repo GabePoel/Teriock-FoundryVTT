@@ -2,14 +2,15 @@ const { FormDataExtended } = foundry.applications.ux;
 
 /**
  * Mixin for short-lived applications.
- * @param {typeof ApplicationV2 & typeof BaseApplication} Base
+ * @template {Constructor<ApplicationV2 & BaseApplication>} T
+ * @param {T} Base
  */
 export default function TemporaryApplicationMixin(Base) {
   return (
     /**
      * @extends {ApplicationV2 & BaseApplication}
-     * @property {Record<string, any>} state - State data automatically updated in {@link _onChangeForm}.
      * @mixin
+     * @property {Record<string, any>} state - State data automatically updated in {@link _onChangeForm}.
      */
     class TemporaryApplication extends Base {
       /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */

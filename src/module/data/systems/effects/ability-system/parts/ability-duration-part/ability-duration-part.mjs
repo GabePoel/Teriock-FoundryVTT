@@ -9,7 +9,8 @@ const { fields } = foundry.data;
  * Relevant wiki pages:
  * - [Duration](https://wiki.teriock.com/index.php/Core:Duration)
  *
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityDurationPart(Base) {
   return (
@@ -17,6 +18,7 @@ export default function AbilityDurationPart(Base) {
      * @extends {BaseEffectSystem}
      * @extends {Teriock.Models.AbilityDurationPartData}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityDurationPart extends Base {
       /** @inheritDoc */

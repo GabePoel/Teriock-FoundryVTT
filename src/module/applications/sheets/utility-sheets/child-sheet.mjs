@@ -4,6 +4,12 @@ import * as sheetMixins from "../mixins/_module.mjs";
 
 /**
  * A simple sheet for {@link AnyChildDocument}.
+ * @extends {TeriockDocumentSheet}
+ * @mixes DisplaySheet
+ * @mixes CommonSheet
+ * @mixes MechanicsSheet
+ * @mixes MechanicsTabsSheet
+ * @mixes StatDiceSheet
  */
 export default class ChildSheet
   extends mixClasses(

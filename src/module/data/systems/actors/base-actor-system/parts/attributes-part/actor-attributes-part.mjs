@@ -5,7 +5,8 @@ const { EmbeddedDataField, SchemaField } = foundry.data.fields;
 
 /**
  * Actor data model mixin that handles attributes.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorAttributesPart(Base) {
   return (
@@ -13,6 +14,7 @@ export default function ActorAttributesPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorAttributesPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorAttributesPart extends Base {
       /** @inheritDoc */

@@ -9,11 +9,12 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
+ * @extends {BaseAutomation}
+ * @mixes DisplayAutomation
  * @property {"chosen"|"executor"|"random"|"target"} origin
  * @property {Teriock.System.FormulaString} distance
  * @property {boolean} originBarrier
  * @property {string} movementAction
- * @mixes DisplayAutomation
  */
 export default class RepositionAutomation extends mixClasses(BaseAutomation, automationMixins.DisplayAutomationMixin) {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];

@@ -66,7 +66,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
   /** @type {AnyActor|null} */
   _actor;
 
-  /** @type {Teriock.Automations.Any[]} */
+  /** @type {AnyAutomation[]} */
   _automations = [];
 
   /** @type {Record<Teriock.Keys.Impact, Teriock.System.FormulaString>} */
@@ -163,12 +163,12 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
     this._actor = actor;
   }
 
-  /** @returns {TypeCollection<ID<Teriock.Automations.Any>, Teriock.Automations.Any>} */
+  /** @returns {TypeCollection<ID<AnyAutomation>, AnyAutomation>} */
   get automations() {
     return new TypeCollection(this._automations.map(a => [a.id, a]));
   }
 
-  /** @param {TypeCollection | Teriock.Automations.Any[]} automations */
+  /** @param {TypeCollection | AnyAutomation[]} automations */
   set automations(automations) {
     if (Array.isArray(automations)) { this._automations = automations; }
     if (automations instanceof TypeCollection) { this._automations = automations.contents; }
@@ -369,7 +369,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
    * @param {Teriock.System.Trigger} trigger
    * @param {Partial<Teriock.System.TriggerScope>} [scope]
    * @param {object} [options]
-   * @param {Teriock.Automations.Any[]} [options.automations]
+   * @param {AnyAutomation[]} [options.automations]
    * @returns {Promise<false|void>}
    */
   async _fireAutomationsTrigger(trigger, scope = {}, options = {}) {

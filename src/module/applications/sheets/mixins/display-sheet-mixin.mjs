@@ -5,7 +5,8 @@ const { ImagePopout } = foundry.applications.apps;
 
 /**
  * Mixin that displays the parts of sheets configured in document systems.
- * @param {typeof BaseSheet} Base
+ * @template {Constructor<BaseSheet>} T
+ * @param {T} Base
  */
 export default function DisplaySheetMixin(Base) {
   return (

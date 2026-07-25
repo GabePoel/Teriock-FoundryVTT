@@ -10,6 +10,7 @@ const { User } = foundry.documents;
  * @extends {User}
  * @extends {ClientDocument}
  * @mixes BaseDocument
+ * @mixes EmbedCardDocument
  * @implements {Teriock.Documents.UserInterface}
  * @property {Readonly<Set<TeriockToken>>} targets
  */

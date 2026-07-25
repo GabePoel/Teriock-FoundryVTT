@@ -7,12 +7,9 @@ import { HarmSystem } from "../../data/systems/pages/_module.mjs";
 type JournalEntryPageDocument = Teriock.Documents.DocumentBase<TeriockJournalEntryPage, JournalEntryPage>;
 
 declare global {
-  export type TeriockHarm = Teriock.Documents.Subtype<
-    JournalEntryPageDocument,
-    "damage" | "drain",
-    TeriockPageSheet,
-    HarmSystem
-  >;
+  export interface TeriockHarm
+    extends Teriock.Documents.Subtype<JournalEntryPageDocument, "damage" | "drain", TeriockPageSheet, HarmSystem>
+  {}
 
   export interface PageTypeMap {
     harm: TeriockHarm;

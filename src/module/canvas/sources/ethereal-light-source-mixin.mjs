@@ -1,7 +1,6 @@
 /**
- * @template {typeof foundry.canvas.sources.BaseLightSource} T
+ * @template {Constructor<foundry.canvas.sources.BaseLightSource>} T
  * @param {T} Base
- * @return {T}
  */
 export default function EtherealLightSourceMixin(Base) {
   return (

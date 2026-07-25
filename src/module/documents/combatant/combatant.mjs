@@ -9,11 +9,11 @@ const { Combatant } = foundry.documents;
 
 /**
  * The Teriock Combatant implementation.
- * @implements {Teriock.Documents.CombatantInterface}
- * @extends {ClientDocument}
  * @extends {Combatant}
+ * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EmbedCardDocument
+ * @implements {Teriock.Documents.CombatantInterface}
  */
 export default class TeriockCombatant
   extends mixClasses(Combatant, documentMixins.BaseDocumentMixin, documentMixins.EmbedCardDocumentMixin)

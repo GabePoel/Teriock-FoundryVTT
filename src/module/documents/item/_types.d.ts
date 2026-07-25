@@ -22,21 +22,29 @@ import {
   SpeciesSystem,
 } from "../../data/systems/items/_module.mjs";
 
-type ItemDocument = Teriock.Documents.DocumentBase<TeriockItem, Item> & {
+type ItemDocument = Omit<Teriock.Documents.DocumentBase<TeriockItem, Item>, "documentName"> & {
   // @ts-expect-error Not a document
   effects: DocumentCollection<TeriockActiveEffect>;
+
+  get documentName(): "Item";
 
   get transferredEffects(): TeriockActiveEffect[];
 };
 
 declare global {
-  export type TeriockArchetype = Teriock.Documents.Subtype<ItemDocument, "archetype", ChildSheet, ArchetypeSystem>;
-  export type TeriockBody = Teriock.Documents.Subtype<ItemDocument, "body", ArmamentSheet, BodySystem>;
-  export type TeriockEquipment = Teriock.Documents.Subtype<ItemDocument, "equipment", EquipmentSheet, EquipmentSystem>;
-  export type TeriockMount = Teriock.Documents.Subtype<ItemDocument, "mount", MountSheet, MountSystem>;
-  export type TeriockPower = Teriock.Documents.Subtype<ItemDocument, "power", PowerSheet, PowerSystem>;
-  export type TeriockRank = Teriock.Documents.Subtype<ItemDocument, "rank", RankSheet, RankSystem>;
-  export type TeriockSpecies = Teriock.Documents.Subtype<ItemDocument, "species", SpeciesSheet, SpeciesSystem>;
+  export interface TeriockArchetype
+    extends Teriock.Documents.Subtype<ItemDocument, "archetype", ChildSheet, ArchetypeSystem>
+  {}
+  export interface TeriockBody extends Teriock.Documents.Subtype<ItemDocument, "body", ArmamentSheet, BodySystem> {}
+  export interface TeriockEquipment
+    extends Teriock.Documents.Subtype<ItemDocument, "equipment", EquipmentSheet, EquipmentSystem>
+  {}
+  export interface TeriockMount extends Teriock.Documents.Subtype<ItemDocument, "mount", MountSheet, MountSystem> {}
+  export interface TeriockPower extends Teriock.Documents.Subtype<ItemDocument, "power", PowerSheet, PowerSystem> {}
+  export interface TeriockRank extends Teriock.Documents.Subtype<ItemDocument, "rank", RankSheet, RankSystem> {}
+  export interface TeriockSpecies
+    extends Teriock.Documents.Subtype<ItemDocument, "species", SpeciesSheet, SpeciesSystem>
+  {}
 
   export interface ItemTypeMap {
     archetype: TeriockArchetype;

@@ -21,28 +21,29 @@ const { fields } = foundry.data;
  * - [Ability Rules](https://wiki.teriock.com/index.php/Category:Ability_rules)
  *
  * @extends {CleanedEffectSystem}
- * @implements {Teriock.Models.AbilitySystemData}
+ * @mixes ThresholdData
+ * @mixes AttackSystem
+ * @mixes ConsumableSystem
+ * @mixes CompetenceDisplaySystem
+ * @mixes MetaphysicsSystem
+ * @mixes RevelationSystem
+ * @mixes WikiSystem
+ * @mixes AdjustableSystem
+ * @mixes AffinableSystem
+ * @mixes ExpirableSystem
  * @mixes AbilityAutomationsPart
  * @mixes AbilityCostsPart
  * @mixes AbilityDurationPart
  * @mixes AbilityEquipmentPart
  * @mixes AbilityInfoPart
- * @mixes AbilityMetaphysicsPart
+ * @mixes AbilityUsagePart
+ * @mixes AbilityUpgradesPart
  * @mixes AbilityOverviewPart
  * @mixes AbilityPanelPart
+ * @mixes AbilityRankPart
  * @mixes AbilityResultsPart
- * @mixes AbilityUpgradesPart
- * @mixes AbilityUsagePart
- * @mixes AdjustableSystem
- * @mixes AffinableSystem
- * @mixes AttackSystem
- * @mixes CompetenceDisplaySystem
- * @mixes ConsumableSystem
- * @mixes ExpirableSystem
- * @mixes MetaphysicsSystem
- * @mixes RevelationSystem
- * @mixes ThresholdData
- * @mixes WikiSystem
+ * @mixes AbilityMetaphysicsPart
+ * @implements {Teriock.Models.AbilitySystemData}
  */
 export default class AbilitySystem
   extends mixClasses(

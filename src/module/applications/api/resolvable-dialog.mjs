@@ -3,6 +3,8 @@ import { TemporaryApplicationMixin } from "./mixins/_module.mjs";
 
 /**
  * A custom application representing something that needs to be resolved before some routing can continue.
+ * @extends {TeriockApplication}
+ * @mixes TemporaryApplication
  */
 export default class ResolvableDialog extends TemporaryApplicationMixin(TeriockApplication) {
   /** @type {Partial<ApplicationConfiguration>} */

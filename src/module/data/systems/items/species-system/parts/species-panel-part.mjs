@@ -4,12 +4,14 @@ import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
  * Species panel part.
- * @param {typeof SpeciesSystem} Base
+ * @template {Constructor<SpeciesSystem>} T
+ * @param {T} Base
  */
 export default function SpeciesPanelPart(Base) {
   return (
     /**
      * @mixin
+     * @property {TeriockSpecies} parent
      */
     class SpeciesPanelPart extends Base {
       /** @inheritDoc */

@@ -6,7 +6,8 @@ const { fields } = foundry.data;
 
 /**
  * Actor data model that handles senses.
- * @param {typeof BaseActorSystem} Base
+ * @template {Constructor<BaseActorSystem>} T
+ * @param {T} Base
  */
 export default function ActorSensesPart(Base) {
   return (
@@ -14,6 +15,7 @@ export default function ActorSensesPart(Base) {
      * @extends {CommonSystem}
      * @extends {Teriock.Models.ActorSensesPartData}
      * @mixin
+     * @property {AnyActor} parent
      */
     class ActorSensesPart extends Base {
       /** @inheritDoc */

@@ -3,7 +3,8 @@ import { fancifyFields } from "../../../../helpers/utils.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof TypeDataModel} Base
+ * @template {Constructor<TypeDataModel>} T
+ * @param {T} Base
  */
 export default function BaseSystemMixin(Base) {
   return (
@@ -160,7 +161,7 @@ export default function BaseSystemMixin(Base) {
 
       /**
        * The pseudo-document collections.
-       * @returns {Record<string, TypeCollection>}
+       * @returns {Teriock.Documents.PseudoCollections}
        */
       get pseudoCollections() {
         if (!this.#pseudoCollections) {

@@ -2,7 +2,8 @@ const { fields } = foundry.data;
 
 /**
  * Data mixin to support equipment suppression configuration.
- * @param {typeof BaseEffectSystem} Base
+ * @template {Constructor<BaseEffectSystem>} T
+ * @param {T} Base
  */
 export default function GrantedSystemMixin(Base) {
   return (

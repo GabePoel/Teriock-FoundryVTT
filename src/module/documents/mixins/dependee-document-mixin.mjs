@@ -8,12 +8,13 @@ import { buildWriteOperation, consolidateWriteOperations } from "../../helpers/u
  * This mixin covers the dependee (owning) side of that relationship. The dependent side lives in
  * {@link HierarchyDocumentMixin}, since any document can be a dependent even if it can't own dependents itself.
  *
- * @param {typeof BaseDocument} Base
+ * @template {Constructor<BaseDocument>} T
+ * @param {T} Base
  */
 export default function DependeeDocumentMixin(Base) {
   return (
     /**
-     * @extends AnyCommonDocument
+     * @extends {AnyCommonDocument}
      * @mixin
      */
     class DependeeDocument extends Base {

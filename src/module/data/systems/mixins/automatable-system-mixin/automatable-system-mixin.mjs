@@ -3,7 +3,8 @@ import { migrateKey, migrateValue } from "../../../migrations/source-migrations.
 import { BaseAutomation } from "../../../pseudo-documents/automations/abstract/_module.mjs";
 
 /**
- * @param {typeof BaseSystem} Base
+ * @template {Constructor<BaseSystem>} T
+ * @param {T} Base
  */
 export default function AutomatableSystemMixin(Base) {
   return (
@@ -15,7 +16,7 @@ export default function AutomatableSystemMixin(Base) {
     class AutomatableSystem extends Base {
       /**
        * Array of the types of automations that this system can have.
-       * @returns {(typeof Teriock.Automations.Any)[]}
+       * @returns {(typeof AnyAutomation)[]}
        */
       static get _automationTypes() {
         return [];
@@ -23,7 +24,7 @@ export default function AutomatableSystemMixin(Base) {
 
       /**
        * The types of automations that this system can have.
-       * @returns {Record<string, Teriock.Automations.Any>}
+       * @returns {Record<string, AnyAutomation>}
        */
       static get automationTypes() {
         return Object.fromEntries(

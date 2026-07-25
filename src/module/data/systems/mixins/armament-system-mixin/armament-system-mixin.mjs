@@ -12,7 +12,8 @@ import { documentSettingsModels, RangeModel } from "../../../models/_module.mjs"
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseItemSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function ArmamentSystemMixin(Base) {
   return (

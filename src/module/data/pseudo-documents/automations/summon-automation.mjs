@@ -7,10 +7,11 @@ import * as automationMixins from "./mixins/_module.mjs";
 const { fields } = foundry.data;
 
 /**
- * @property {boolean} merge
+ * @extends {BaseAutomation}
  * @mixes SelectExternalDocumentsAutomation
  * @mixes DisplayAutomation
  * @mixes TriggerAutomation
+ * @property {boolean} merge
  */
 export default class SummonAutomation
   extends mixClasses(

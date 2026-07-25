@@ -8,12 +8,12 @@ import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
 
 /**
- * @property {Set<TypedIdentifier>} add
- * @property {Set<TypedIdentifier>} remove
- * @property {Teriock.System.FormulaString} qualifier
  * @extends {BaseAutomation}
  * @mixes CritMechanic
  * @mixes TriggerAutomation
+ * @property {Set<TypedIdentifier>} add
+ * @property {Set<TypedIdentifier>} remove
+ * @property {Teriock.System.FormulaString} qualifier
  */
 export default class ToggleChildrenAutomation
   extends mixClasses(CritMechanicMixin(BaseAutomation), automationMixins.TriggerAutomationMixin)

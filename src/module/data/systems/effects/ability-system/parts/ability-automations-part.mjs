@@ -2,13 +2,15 @@ import { toId } from "../../../../../helpers/string.mjs";
 
 /**
  * Ability automations part.
- * @param {typeof BaseEffectSystem} Base
+ * @template {Constructor<BaseEffectSystem>} T
+ * @param {T} Base
  */
 export default function AbilityAutomationsPart(Base) {
   return (
     /**
      * @extends {BaseEffectSystem}
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityAutomationsPart extends Base {
       /** @inheritDoc */
@@ -60,7 +62,7 @@ export default function AbilityAutomationsPart(Base) {
 
       /**
        * The automations that are active right now.
-       * @returns {Teriock.Automations.Any[]}
+       * @returns {AnyAutomation[]}
        */
       get activeAutomations() {
         if (this.maneuver !== "passive") { return []; }

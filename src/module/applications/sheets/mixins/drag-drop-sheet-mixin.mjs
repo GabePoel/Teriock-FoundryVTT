@@ -6,7 +6,8 @@ const DROP_TARGET_CLASS = "teriock-drop-target";
 
 /**
  * Mixin adding drag-and-drop handling to sheets.
- * @param {typeof TeriockDocumentSheet} Base
+ * @template {Constructor<TeriockDocumentSheet>} T
+ * @param {T} Base
  */
 export default function DragDropSheetMixin(Base) {
   return (

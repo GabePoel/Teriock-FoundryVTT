@@ -2,11 +2,13 @@ const { fields } = foundry.data;
 
 /**
  * Add instructions to the system.
- * @param {typeof TypeDataModel} Base
+ * @template {Constructor<TypeDataModel>} T
+ * @param {T} Base
  */
 export default function InstructionsSystemMixin(Base) {
   return (
     /**
+     * @extends {TypeDataModel}
      * @extends {Teriock.Models.InstructionsSystemData}
      * @mixin
      */

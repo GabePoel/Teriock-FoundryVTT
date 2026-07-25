@@ -4,7 +4,7 @@ import ApplicableEffectSystem from "../applicable-effect-system/applicable-effec
 
 /**
  * Effect-specific effect data model.
- * @extends {BaseEffectSystem}
+ * @extends {ApplicableEffectSystem}
  * @extends {Teriock.Models.ImbuementSystemData}
  * @mixes GrantedSystem
  */

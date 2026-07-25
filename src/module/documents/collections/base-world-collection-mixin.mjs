@@ -1,5 +1,6 @@
 /**
- * @param {typeof WorldCollection} Base
+ * @template {Constructor<WorldCollection>} T
+ * @param {T} Base
  */
 export default function BaseWorldCollectionMixin(Base) {
   return (

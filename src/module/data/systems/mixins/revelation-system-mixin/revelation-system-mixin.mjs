@@ -3,7 +3,8 @@ import { makeIcon } from "../../../../helpers/icon.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseEffectSystem} Base
+ * @template {Constructor<BaseEffectSystem>} T
+ * @param {T} Base
  */
 export default function RevelationSystemMixin(Base) {
   return (

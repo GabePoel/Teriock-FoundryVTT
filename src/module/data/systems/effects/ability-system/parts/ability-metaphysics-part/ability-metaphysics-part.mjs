@@ -2,15 +2,16 @@ const { fields } = foundry.data;
 
 /**
  * Ability tags part.
- * @param {typeof AbilitySystem} Base
+ * @template {Constructor<AbilitySystem>} T
+ * @param {T} Base
  */
 export default function AbilityMetaphysicsPart(Base) {
   return (
     /**
-     * @extends {BaseEffectSystem}
+     * @extends {AbilitySystem}
      * @extends {Teriock.Models.AbilityTagsPartData}
-     * @mixes AdjustableSystem
      * @mixin
+     * @property {TeriockAbility} parent
      */
     class AbilityMetaphysicsPart extends Base {
       /** @inheritDoc */

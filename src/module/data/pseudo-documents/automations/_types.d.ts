@@ -37,46 +37,47 @@ import {
 } from "./_module.mjs";
 
 declare global {
-  namespace Teriock.Automations {
-    export interface TypeMap {
-      abilityMacro: AbilityMacroAutomation;
-      addDocuments: AddDocumentsAutomation;
-      attack: AttackAutomation;
-      attunement: AttunementAutomation;
-      changeCompetence: ChangeCompetenceAutomation;
-      changeMovement: ChangeMovementAutomation;
-      changeQuantity: ChangeQuantityAutomation;
-      changes: ChangesAutomation;
-      chatMacro: ChatMacroAutomation;
-      chatStatus: ChatStatusAutomation;
-      childChange: ChildChangeAutomation;
-      common: CommonOutcomesAutomation;
-      commonMacro: CommonMacroAutomation;
-      cover: CoverAutomation;
-      duration: DurationAutomation;
-      feat: FeatAutomation;
-      hacks: HacksAutomation;
-      heal: HealAutomation;
-      light: LightAutomation;
-      move: RepositionAutomation;
-      override: OverrideAutomation;
-      propertyMacro: PropertyMacroAutomation;
-      region: RegionAutomation;
-      resist: ResistAutomation;
-      revitalize: RevitalizeAutomation;
-      roll: RollAutomation;
-      rollStyle: RollStyleAutomation;
-      status: StatusAutomation;
-      summon: SummonAutomation;
-      suppress: SuppressAutomation;
-      take: TakeAutomation;
-      toggleChildren: ToggleChildrenAutomation;
-      tradecraft: TradecraftAutomation;
-      transformation: TransformationAutomation;
-      useDocuments: UseDocumentsAutomation;
-    }
+  export interface AutomationTypeMap {
+    abilityMacro: AbilityMacroAutomation;
+    addDocuments: AddDocumentsAutomation;
+    attack: AttackAutomation;
+    attunement: AttunementAutomation;
+    changeCompetence: ChangeCompetenceAutomation;
+    changeMovement: ChangeMovementAutomation;
+    changeQuantity: ChangeQuantityAutomation;
+    changes: ChangesAutomation;
+    chatMacro: ChatMacroAutomation;
+    chatStatus: ChatStatusAutomation;
+    childChange: ChildChangeAutomation;
+    common: CommonOutcomesAutomation;
+    commonMacro: CommonMacroAutomation;
+    cover: CoverAutomation;
+    duration: DurationAutomation;
+    feat: FeatAutomation;
+    hacks: HacksAutomation;
+    heal: HealAutomation;
+    light: LightAutomation;
+    move: RepositionAutomation;
+    override: OverrideAutomation;
+    propertyMacro: PropertyMacroAutomation;
+    region: RegionAutomation;
+    resist: ResistAutomation;
+    revitalize: RevitalizeAutomation;
+    roll: RollAutomation;
+    rollStyle: RollStyleAutomation;
+    status: StatusAutomation;
+    summon: SummonAutomation;
+    suppress: SuppressAutomation;
+    take: TakeAutomation;
+    toggleChildren: ToggleChildrenAutomation;
+    tradecraft: TradecraftAutomation;
+    transformation: TransformationAutomation;
+    useDocuments: UseDocumentsAutomation;
+  }
 
-    export type Type = keyof TypeMap;
-    export type Any = TypeMap[Type];
+  namespace Teriock.Automations {
+    export type TypeMap = AutomationTypeMap;
+    export type Type = TypeMapKey<AutomationTypeMap>;
+    export type Any = AnyAutomation;
   }
 }

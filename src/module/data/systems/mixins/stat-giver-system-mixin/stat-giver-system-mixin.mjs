@@ -8,7 +8,8 @@ const { fields } = foundry.data;
 const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
 
 /**
- * @param {typeof BaseItemSystem} Base
+ * @template {Constructor<BaseItemSystem>} T
+ * @param {T} Base
  */
 export default function StatGiverSystemMixin(Base) {
   return (

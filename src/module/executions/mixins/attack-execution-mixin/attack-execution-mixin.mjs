@@ -8,7 +8,8 @@ const { fields } = foundry.data;
 
 /**
  * Mixin for executions that can make an attack roll.
- * @param {typeof BaseExecution} Base
+ * @template {Constructor<BaseExecution>} T
+ * @param {T} Base
  */
 export default function AttackExecutionMixin(Base) {
   return (

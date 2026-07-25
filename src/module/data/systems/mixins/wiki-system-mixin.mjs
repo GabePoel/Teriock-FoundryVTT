@@ -1,10 +1,11 @@
 /**
- * @param {typeof ChildSystem} Base
+ * @template {Constructor<CommonSystem>} T
+ * @param {T} Base
  */
 export default function WikiSystemMixin(Base) {
   return (
     /**
-     * @extends {ChildSystem}
+     * @extends {CommonSystem}
      * @mixin
      */
     class WikiSystem extends Base {

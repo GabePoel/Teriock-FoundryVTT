@@ -1,7 +1,8 @@
 import { makeIcon } from "../../../helpers/icon.mjs";
 
 /**
- * @param {typeof DocumentDirectory} Base
+ * @template {Constructor<DocumentDirectory>} T
+ * @param {T} Base
  */
 export default function DocumentDirectoryMixin(Base) {
   return (

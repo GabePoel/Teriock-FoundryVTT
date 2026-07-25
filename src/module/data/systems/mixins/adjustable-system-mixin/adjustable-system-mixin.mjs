@@ -3,7 +3,8 @@ import effectConfig from "../../../../constants/config/effect-config.mjs";
 const { fields } = foundry.data;
 
 /**
- * @param {typeof BaseEffectSystem} Base
+ * @template {Constructor<BaseEffectSystem>} T
+ * @param {T} Base
  */
 export default function AdjustableSystemMixin(Base) {
   return (

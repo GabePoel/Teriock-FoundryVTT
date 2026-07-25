@@ -22,13 +22,13 @@ const { fields } = foundry.data;
  * @mixes ArmamentSystem
  * @mixes AttunableSystem
  * @mixes ConsumableSystem
+ * @mixes WikiSystem
  * @mixes EquipmentIdentificationPart
  * @mixes EquipmentMigrationPart
  * @mixes EquipmentPanelPart
  * @mixes EquipmentStoragePart
  * @mixes EquipmentSuppressionPart
  * @mixes EquipmentWieldingPart
- * @mixes WikiSystem
  */
 export default class EquipmentSystem
   extends mixClasses(

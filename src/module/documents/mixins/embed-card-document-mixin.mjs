@@ -2,12 +2,13 @@ import { TeriockContextMenu, TeriockTextEditor } from "../../applications/ux/_mo
 
 /**
  * Mixin that provides support for embedding as a card.
- * @param {typeof BaseDocument} Base
+ * @template {Constructor<BaseDocument>} T
+ * @param {T} Base
  */
 export default function EmbedCardDocumentMixin(Base) {
   return (
     /**
-     * @mixes BaseDocument
+     * @extends {BaseDocument}
      * @mixin
      */
     class EmbedCardDocument extends Base {

@@ -1,5 +1,6 @@
 /**
- * @param {typeof ChildSystem} Base
+ * @template {Constructor<ChildSystem>} T
+ * @param {T} Base
  */
 export default function CompetenceDisplaySystemMixin(Base) {
   return (
