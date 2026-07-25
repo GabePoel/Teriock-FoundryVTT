@@ -1,7 +1,8 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { formulaExists } from "../../../../helpers/formula.mjs";
 import { fromIdentifierLocal, fromQualifier } from "../../../../helpers/utils.mjs";
-import { FormulaField, TypedIdentifierSetField } from "../../../fields/_module.mjs";
+import { TypedIdentifierSetField } from "../../../fields/_module.mjs";
+import { qualifierField } from "../../../fields/tools/builders.mjs";
 import { migrateKey } from "../../../migrations/source-migrations.mjs";
 import SelectExternalDocumentsAutomationMixin from "./select-external-documents-automation-mixin.mjs";
 
@@ -25,10 +26,7 @@ export default function SelectDocumentsAutomationMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          local: new fields.SchemaField({
-            identifiers: new TypedIdentifierSetField(),
-            qualifier: new FormulaField({ initial: "0" }),
-          }),
+          local: new fields.SchemaField({ identifiers: new TypedIdentifierSetField(), qualifier: qualifierField() }),
         });
       }
 

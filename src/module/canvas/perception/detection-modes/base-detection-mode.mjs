@@ -107,9 +107,7 @@ export default class BaseDetectionMode extends DetectionMode {
       const srcActor = src.actor;
       const tgtActor = tgt.actor;
       if (srcActor && tgtActor) {
-        const perceive = srcActor.system.detection.perceiving ?? srcActor.system.attributes.per.passive;
-        const hide = tgtActor.system.detection.hiding ?? tgtActor.system.attributes.snk.passive;
-        return perceive > hide;
+        return srcActor.system.detection.perceiving >= tgtActor.system.detection.hiding;
       }
     }
     return true;

@@ -108,7 +108,7 @@ export default class AbilitySystem
       automations.HacksAutomation,
       automations.HealAutomation,
       automations.LightAutomation,
-      automations.MoveAutomation,
+      automations.RepositionAutomation,
       automations.OverrideAutomation,
       automations.RegionAutomation,
       automations.ResistAutomation,

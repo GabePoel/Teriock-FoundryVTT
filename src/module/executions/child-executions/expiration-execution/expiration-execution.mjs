@@ -1,4 +1,4 @@
-import { FormulaField } from "../../../data/fields/_module.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { BaseExpiration } from "../../../data/pseudo-documents/expirations/abstract/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import DocumentExecution from "../../abstract/document-execution.mjs";
@@ -14,13 +14,12 @@ export default class ExpirationExecution extends executionMixins.ThresholdExecut
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      formula: new FormulaField({
+      formula: new rollableFormulaField({
         deterministic: false,
         hint: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.hint",
-        initial: "",
         label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.formula.label",
       }),
-      thresholdFormula: new FormulaField({
+      thresholdFormula: rollableFormulaField({
         hint: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.threshold.hint",
         initial: "2d4kh1",
         label: "TERIOCK.EXPIRATIONS.Base.FIELDS.roll.threshold.label",

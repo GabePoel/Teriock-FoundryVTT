@@ -1,7 +1,8 @@
 import { mixClasses } from "../../../../helpers/construction.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
-import { FormulaField, IdentifierField } from "../../../fields/_module.mjs";
+import { IdentifierField } from "../../../fields/_module.mjs";
+import { rollableFormulaField } from "../../../fields/tools/builders.mjs";
 import { migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -71,7 +72,7 @@ export default class PropertySystem
     return Object.assign(super.defineSchema(), {
       consumable: new fields.BooleanField({ initial: false }),
       damageType: new IdentifierField({ type: "damage" }),
-      extraDamage: new FormulaField({ deterministic: false }),
+      extraDamage: rollableFormulaField(),
     });
   }
 

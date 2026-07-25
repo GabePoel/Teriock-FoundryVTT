@@ -22,13 +22,26 @@ export default function EquipmentWieldingPart(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           ammunition: new fields.SchemaField({
-            consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
+            consumptionAmount: new fields.NumberField({
+              initial: 1,
+              integer: true,
+              nullable: false,
+              placeholder: "1",
+              required: true,
+            }),
             enabled: initialBoolean(),
             type: new IdentifierField({ type: "equipment" }),
           }),
           equipped: new fields.BooleanField({ initial: false }),
           glued: initialBoolean(),
-          minStr: new fields.NumberField({ initial: -3, integer: true, min: -3 }),
+          minStr: new fields.NumberField({
+            initial: -3,
+            integer: true,
+            min: -3,
+            nullable: false,
+            placeholder: "-3",
+            required: true,
+          }),
         });
       }
 

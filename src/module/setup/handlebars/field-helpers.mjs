@@ -1,5 +1,6 @@
 import { createElement } from "../../helpers/html.mjs";
 import { makeIconClass, makeIconElement } from "../../helpers/icon.mjs";
+import { toKebabCase } from "../../helpers/string.mjs";
 
 /** Displayed value length past which overflowing content gets a full-text tooltip. */
 const OVERFLOW_TOOLTIP_THRESHOLD = 16;
@@ -12,6 +13,15 @@ const OVERFLOW_TOOLTIP_THRESHOLD = 16;
  */
 function attr(name, value) {
   return value != null && String(value).length > 0 ? ` ${name}="${value}"` : "";
+}
+
+/**
+ * Build a dataset attribute string.
+ * @param {Record<string, string>} dataset
+ * @returns {string}
+ */
+function buildDataAttrs(dataset) {
+  return Object.entries(dataset).map(([k, v]) => `data-${toKebabCase(k)}="${v}"`).join(" ");
 }
 
 /**
@@ -84,4 +94,40 @@ function formIcon(field, options = {}) {
   return new Handlebars.SafeString(group.outerHTML);
 }
 
-export default { formBox, formIcon };
+/**
+ * Make a box that changes value on hover.
+ * @param {object} options
+ * @returns {Handlebars.SafeString}
+ */
+function formHover(options) {
+  const {
+    action,
+    classes,
+    dataset = {},
+    highlightModified = game.settings.get("teriock", "highlightModifiedValues"),
+    icon,
+    nullValue,
+    paths = "",
+    selected,
+    selectedFormat,
+    tag = "div",
+    unselected,
+    unselectedFormat,
+  } = options.hash;
+  if (icon) { dataset.icon = icon; }
+  if (action) { dataset.action = action; }
+  if (paths) { dataset.paths = paths; }
+  const dataAttrs = buildDataAttrs(dataset);
+  const selectedValue = [Infinity, null].includes(selected) ? nullValue : selectedFormat ?? selected;
+  const unselectedValue = [Infinity, null].includes(unselected) ? nullValue : unselectedFormat ?? unselected;
+  return new Handlebars.SafeString(`
+    <${tag} class="affix ${classes ?? ""} ${selected === null ? "details-muted" : ""} ${
+    highlightModified && selectedValue !== unselectedValue ? "modified" : ""
+  }" ${dataAttrs}>
+      <${tag} class="selected thover">${selectedValue}</${tag}>
+      <${tag} class="unselected thover">${unselectedValue}</${tag}>
+    </${tag}>
+  `);
+}
+
+export default { formBox, formHover, formIcon };

@@ -1,4 +1,5 @@
 import { BaseDataModel } from "../../abstract/_module.mjs";
+import { InfiniteNumberField } from "../../fields/_module.mjs";
 
 const { fields } = foundry.data;
 
@@ -14,9 +15,15 @@ export default class StorageModel extends BaseDataModel {
   static defineSchema() {
     return {
       enabled: new fields.BooleanField({ initial: false, required: false }),
-      maxCount: new fields.NumberField({ initial: null, nullable: true, required: false }),
-      maxWeight: new fields.NumberField({ initial: null, nullable: true, required: false }),
-      weightMultiplier: new fields.NumberField({ initial: 1, min: 0 }),
+      maxCount: new InfiniteNumberField(),
+      maxWeight: new InfiniteNumberField(),
+      weightMultiplier: new fields.NumberField({
+        initial: 1,
+        min: 0,
+        nullable: false,
+        placeholder: "1",
+        required: true,
+      }),
     };
   }
 

@@ -20,8 +20,8 @@ export default function AttackSystemMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          attackPenalty: new FormulaField({ deterministic: false, initial: "-3" }),
-          hitBonus: new FormulaField({ deterministic: false }),
+          attackPenalty: new FormulaField({ blank: false, deterministic: false, initial: "-3", placeholder: "-3" }),
+          hitBonus: new FormulaField({ deterministic: false, placeholder: _loc("COMMON.None") }),
           piercing: new fields.EmbeddedDataField(PiercingModel),
           warded: new fields.BooleanField(),
         });

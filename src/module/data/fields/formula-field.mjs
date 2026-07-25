@@ -10,7 +10,7 @@ const { StringField } = foundry.data.fields;
 export default class FormulaField extends StringField {
   /** @inheritdoc */
   static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, { deterministic: false, required: false });
+    return Object.assign(super._defaults, { deterministic: false, required: false });
   }
 
   /**

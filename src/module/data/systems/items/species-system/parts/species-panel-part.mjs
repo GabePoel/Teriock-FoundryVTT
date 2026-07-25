@@ -1,4 +1,5 @@
 import { icons } from "../../../../../constants/display/icons.mjs";
+import { asInf } from "../../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../../helpers/panel.mjs";
 
 /**
@@ -22,7 +23,7 @@ export default function SpeciesPanelPart(Base) {
             this.adult ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.adult", { value: this.adult }) : "",
             this.adult
               ? this.lifespan
-                ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.max", { value: this.lifespan })
+                ? _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.max", { value: asInf(this.lifespan) })
                 : _loc("TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite")
               : "",
           ],

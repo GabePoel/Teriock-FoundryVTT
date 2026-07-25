@@ -38,11 +38,11 @@ export default class ArmamentSheet extends ChildSheet {
   /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), {
-      damageString: secondaryFormat(this.document.system.damage.base, this.document.system.damage.twoHanded, {
+      damageString: secondaryFormat(this.document.system.damage.base || "0", this.document.system.damage.twoHanded, {
         secondFilter: formulaExists,
       }),
       sourceDamageString: secondaryFormat(
-        this.document.system._source.damage.base,
+        this.document.system._source.damage.base || "0",
         this.document.system._source.damage.twoHanded,
         { secondFilter: formulaExists },
       ),

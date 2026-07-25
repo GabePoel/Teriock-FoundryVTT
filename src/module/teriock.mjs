@@ -85,7 +85,10 @@ foundry.helpers.Hooks.once("init", function() {
   // ========================
 
   Object.assign(CONFIG.specialStatusEffects, {
+    ANOSMATIC: "anosmatic",
+    BLIND: "blind",
     DEAD: "dead",
+    DEAF: "deaf",
     DEFEATED: "down",
     ETHEREAL: "ethereal",
     HIDDEN: "hidden",

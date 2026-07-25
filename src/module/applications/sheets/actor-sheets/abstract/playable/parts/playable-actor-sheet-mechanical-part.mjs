@@ -1,5 +1,6 @@
 import { icons } from "../../../../../../constants/display/icons.mjs";
-import { makeIconClass } from "../../../../../../helpers/icon.mjs";
+import { createElement } from "../../../../../../helpers/html.mjs";
+import { asInf, makeIconClass } from "../../../../../../helpers/icon.mjs";
 import { toKebabCase } from "../../../../../../helpers/string.mjs";
 import { consolidateWriteOperations } from "../../../../../../helpers/utils.mjs";
 import { DocumentSelector } from "../../../../../dialogs/_module.mjs";
@@ -106,17 +107,19 @@ export default function PlayableActorSheetMechanicalPart(Base) {
         const enabled = await DocumentSelector.selectMulti(docs, {
           checked: docs.filter(d => !d.disabled).map(r => r.uuid),
         });
-        const freeOps = docs.map(c => {
+        const freeOps = docs.map(d => {
           return {
             action: "update",
-            documentName: c.documentName,
-            pack: c.pack,
-            parent: c.parent,
-            updates: [{ _id: c.id, "system.disabled": !enabled.includes(c) }],
+            documentName: d.documentName,
+            pack: d.pack,
+            parent: d.parent,
+            updates: [{
+              _id: d.id,
+              [d.documentName === "Item" ? "system.disabled" : "disabled"]: !enabled.includes(d),
+            }],
           };
         });
-        const conOps = consolidateWriteOperations(freeOps);
-        await foundry.documents.modifyBatch(conOps);
+        await foundry.documents.modifyBatch(consolidateWriteOperations(freeOps));
       }
 
       /** @type {Partial<ApplicationConfiguration & Teriock.Sheet._SheetConfiguration>} */
@@ -130,7 +133,7 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           takeLongRest: this.#onTakeLongRest,
           takeShortRest: this.#onTakeShortRest,
           toggleCondition: { buttons: [0, 2], handler: this.#onToggleCondition },
-          toggleDocs: { buttons: [2], handler: this.#onToggleDocs },
+          toggleDocs: this.#onToggleDocs,
         },
         window: {
           controls: [{
@@ -151,6 +154,33 @@ export default function PlayableActorSheetMechanicalPart(Base) {
           }],
         },
       };
+
+      /** @inheritDoc */
+      async _prepareContext(options = {}) {
+        const context = await super._prepareContext(options);
+        context.senses = {};
+        for (const key of Object.keys(TERIOCK.config.character.sense)) {
+          context.senses[key] = {
+            source: toRangeHTML(this.document.system._source.senses[key]),
+            value: toRangeHTML(this.document.system.senses[key]),
+          };
+        }
+        return context;
+      }
     }
   );
+}
+
+/**
+ * @param {number|null} range
+ * @returns {string}
+ */
+function toRangeHTML(range) {
+  if ([Infinity, null].includes(range)) { return asInf(range); }
+  return createElement("span", {
+    innerText: _loc("TERIOCK.MODELS.BaseUnit.FORMAT", {
+      number: range,
+      unit: _loc("TERIOCK.MODELS.LengthUnit.UNITS.ft.symbol"),
+    }),
+  }).outerHTML;
 }

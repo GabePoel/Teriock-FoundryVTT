@@ -31,17 +31,26 @@ export default class TeriockTokenDocument
     return this.texture.src;
   }
 
-  /** @inheritDoc */
+  /**
+   * @inheritDoc
+   * @see {InfiniteNumberField}
+   */
   _prepareDetectionModes() {
     super._prepareDetectionModes();
-    if (this.actor?.system.settings.getSetting("autoDetectionModes")) {
-      for (const senseEntry of Object.values(TERIOCK.config.character.sense)) {
-        const mode = senseEntry?.detectionMode;
-        if (mode) {
-          this.detectionModes[mode] ??= {};
-          this.detectionModes[mode].enabled ??= false;
-          this.detectionModes[mode].range ??= 0;
+    const actor = this.actor;
+    if (!actor) { return; }
+    // Detection modes and range can't be changes since NumberField has no way to be set to null/Infinity via change.
+    const autoDetectionMode = actor.system.settings.getSetting("autoDetectionModes");
+    const autoVisionRange = actor.system.settings.getSetting("autoVisionRange");
+    if (autoDetectionMode || autoVisionRange) {
+      this.sight.range = 0;
+      for (const [id, config] of Object.entries(TERIOCK.config.character.sense)) {
+        const range = actor.system.senses[id];
+        if (autoDetectionMode) {
+          const mode = config?.detectionMode;
+          if (mode) { this.detectionModes[mode] = { enabled: range > 0, range }; }
         }
+        if (autoVisionRange && config?.grantsSight) { this.sight.range = Math.max(this.sight.range, range); }
       }
     }
     if (this.detectionModes.basicSight) { this.detectionModes.basicSight.enabled = false; }

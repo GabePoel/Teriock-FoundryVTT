@@ -46,7 +46,7 @@ export default class TakeAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      amount: new fields.NumberField({ nullable: true }),
+      amount: new fields.NumberField({ nullable: true, placeholder: _loc("COMMON.Default") }),
       impact: new fields.StringField({
         choices: objectMap(TERIOCK.config.impact, i => i.take, { localize: true, filter: c => !c?.hidden }),
         initial: "damage",

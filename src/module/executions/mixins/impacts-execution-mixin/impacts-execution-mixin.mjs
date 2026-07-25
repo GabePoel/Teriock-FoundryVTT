@@ -1,4 +1,4 @@
-import { FormulaField } from "../../../data/fields/_module.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { HarmRoll } from "../../../dice/rolls/_module.mjs";
 import { formulaExists } from "../../../helpers/formula.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -31,7 +31,7 @@ export default function ImpactsExecutionMixin(Base) {
           boosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
           crit: new fields.BooleanField(),
           deboosts: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
-          formula: new FormulaField({ deterministic: false, initial: "" }),
+          formula: rollableFormulaField(),
           impacts: new fields.SetField(
             new fields.StringField({
               choices: objectMap(TERIOCK.config.impact, i => i.deal, { filter: c => !c?.hidden }),

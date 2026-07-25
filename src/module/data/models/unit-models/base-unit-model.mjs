@@ -15,6 +15,14 @@ export default class BaseUnitModel extends BaseDataModel {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.MODELS.BaseUnit"];
 
+  /**
+   * The placeholder for the raw formula.
+   * @return {string}
+   */
+  static get _rawPlaceholder() {
+    return "0";
+  }
+
   /** @returns {Teriock.Units.UnitEntry[]} */
   static get choiceEntries() {
     return [...this.zeroChoiceEntries, ...this.finiteChoiceEntries, ...this.infiniteChoiceEntries];
@@ -49,7 +57,7 @@ export default class BaseUnitModel extends BaseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      raw: new FormulaField(),
+      raw: new FormulaField({ placeholder: this._rawPlaceholder }),
       unit: new fields.StringField({
         choices: this.choices,
         initial: this.choiceEntries[0].id,
@@ -85,7 +93,9 @@ export default class BaseUnitModel extends BaseDataModel {
    * @returns {string}
    */
   get abbreviation() {
-    if (this.unitType === "finite") { return `${this.formula} ${this.symbol}`; }
+    if (this.unitType === "finite") {
+      return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.formula, unit: this.symbol });
+    }
     return this.text;
   }
 
@@ -146,7 +156,7 @@ export default class BaseUnitModel extends BaseDataModel {
   get text() {
     if (this.unitType === "finite") {
       const entry = this.constructor.finiteChoiceEntries.find(e => e.id === this.unit);
-      return `${this.raw} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
+      return `${this.raw || "0"} ${this.raw === "1" ? _loc(entry.label) : _loc(entry.plural)}`;
     }
     return this.constructor.choices[this.unit];
   }

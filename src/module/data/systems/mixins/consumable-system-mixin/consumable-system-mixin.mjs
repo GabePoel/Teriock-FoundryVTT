@@ -1,5 +1,7 @@
+import systemConfig from "../../../../constants/config/system-config.mjs";
 import { BaseRoll } from "../../../../dice/rolls/_module.mjs";
-import { FormulaField } from "../../../fields/_module.mjs";
+import { asInf } from "../../../../helpers/icon.mjs";
+import { FormulaField, InfiniteNumberField } from "../../../fields/_module.mjs";
 import { documentSettingsModels } from "../../../models/_module.mjs";
 import { ChangeQuantityAutomation } from "../../../pseudo-documents/automations/_module.mjs";
 
@@ -38,8 +40,8 @@ export default function ConsumableSystemMixin(Base) {
           consumable: new fields.BooleanField({ initial: true }),
           consumptionAmount: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "1" }),
           quantity: new fields.SchemaField({
-            max: new fields.NumberField({ integer: true, persisted: false }),
-            maxFormula: new FormulaField({ deterministic: true }),
+            max: new InfiniteNumberField({ persisted: false }),
+            maxFormula: new FormulaField({ deterministic: true, placeholder: systemConfig.infCode }),
             min: new fields.NumberField({ initial: 0, integer: true, persisted: false }),
             value: new fields.NumberField({ initial: 1, integer: true, nullable: false, placeholder: "0" }),
           }),
@@ -64,9 +66,7 @@ export default function ConsumableSystemMixin(Base) {
           label: _loc("TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label"),
           wrappers: [
             _loc("TERIOCK.SYSTEMS.Consumable.EMBED.remaining", { value: this.quantity.value }),
-            this.quantity.max === Infinity
-              ? _loc("TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-              : _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", { value: this.quantity.max }),
+            _loc("TERIOCK.SYSTEMS.Consumable.PANELS.max", { value: asInf(this.quantity.max) }),
             _loc("TERIOCK.SYSTEMS.Consumable.EMBED.perUse", { value: this.consumptionAmount }),
           ],
         };

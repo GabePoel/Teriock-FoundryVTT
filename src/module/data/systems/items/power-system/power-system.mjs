@@ -1,8 +1,10 @@
 import powerConfig from "../../../../constants/config/power-config.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
+import { asInf } from "../../../../helpers/icon.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { objectMap } from "../../../../helpers/utils.mjs";
+import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseItemSystem from "../base-item-system/base-item-system.mjs";
@@ -35,7 +37,7 @@ export default class PowerSystem
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
-      maxAv: new fields.NumberField({ initial: 4, integer: true, min: 0 }),
+      maxAv: new InfiniteNumberField({ integer: true }),
       type: new fields.StringField({
         blank: false,
         choices: localizeChoices(objectMap(powerConfig.type, v => v.label)),
@@ -54,7 +56,7 @@ export default class PowerSystem
         powerConfig.type[this.type].label,
         this.maxAv === 0
           ? _loc("TERIOCK.SYSTEMS.Power.PANELS.noArmor")
-          : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: this.maxAv }),
+          : _loc("TERIOCK.SYSTEMS.Power.PANELS.maxAv", { value: asInf(this.maxAv) }),
       ],
     }];
   }

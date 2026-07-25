@@ -2,7 +2,7 @@ import costConfig from "../../../../../../constants/config/cost-config.mjs";
 import statConfig from "../../../../../../constants/config/stat-config.mjs";
 import { localizeChoices } from "../../../../../../helpers/localization.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { FormulaField } from "../../../../../fields/_module.mjs";
+import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 
 const { fields } = foundry.data;
 
@@ -46,7 +46,7 @@ export default function AbilityCostsPart(Base) {
               const label = _loc("TERIOCK.COSTS.Long.primary", { key: _loc(v.label) });
               return new fields.SchemaField({
                 description: new fields.HTMLField({ label }),
-                formula: new FormulaField({ deterministic: false, initial: "0", label }),
+                formula: rollableFormulaField(),
                 type: new fields.StringField({
                   blank: true,
                   choices: localizeChoices(costConfig.primary.types, { none: true }),

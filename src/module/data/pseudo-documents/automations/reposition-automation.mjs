@@ -1,8 +1,7 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { FormulaField } from "../../fields/_module.mjs";
-import { movementActionField } from "../../fields/tools/builders.mjs";
+import { movementActionField, rollableFormulaField } from "../../fields/tools/builders.mjs";
 import { MoveActivation } from "../activations/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
@@ -16,7 +15,7 @@ const { fields } = foundry.data;
  * @property {string} movementAction
  * @mixes DisplayAutomation
  */
-export default class MoveAutomation extends mixClasses(BaseAutomation, automationMixins.DisplayAutomationMixin) {
+export default class RepositionAutomation extends mixClasses(BaseAutomation, automationMixins.DisplayAutomationMixin) {
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.AUTOMATIONS.Move"];
 
   /** @inheritDoc */
@@ -32,7 +31,7 @@ export default class MoveAutomation extends mixClasses(BaseAutomation, automatio
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      distance: new FormulaField({ deterministic: false, initial: "0" }),
+      distance: rollableFormulaField(),
       movementAction: movementActionField({ blank: true, initial: null, nullable: true, required: false }),
       origin: new fields.StringField({
         choices: localizeChoices({

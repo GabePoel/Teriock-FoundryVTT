@@ -26,7 +26,7 @@ export default class LengthUnitModel extends BaseUnitModel {
       label: "TERIOCK.MODELS.LengthUnit.UNITS.ft.label",
       plural: "TERIOCK.MODELS.LengthUnit.UNITS.ft.plural",
       scale: 1,
-      symbol: "ft",
+      symbol: "TERIOCK.MODELS.LengthUnit.UNITS.ft.symbol",
       system: "imperial",
     }, {
       conversion: 3.281,

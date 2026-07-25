@@ -46,8 +46,8 @@ export default function ArmamentSystemMixin(Base) {
           av: defenseField(),
           bv: defenseField(),
           damage: new MultiChangeField({
-            base: rollableFormulaField(),
-            twoHanded: rollableFormulaField({ initial: "" }),
+            base: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
+            twoHanded: rollableFormulaField({ placeholder: _loc("COMMON.None") }),
             types: new fields.SetField(new IdentifierField()),
           }, { multiChangePaths: ["base", "twoHanded"] }),
           equipmentClasses: new fields.SetField(
@@ -67,7 +67,7 @@ export default function ArmamentSystemMixin(Base) {
           ),
           notes: new fields.HTMLField({ initial: "" }),
           range: new MultiChangeField({
-            long: new fields.EmbeddedDataField(RangeModel, { label: "Range" }),
+            long: new fields.EmbeddedDataField(RangeModel),
             melee: new fields.BooleanField({ initial: true }),
             ranged: new fields.BooleanField({ initial: false }),
             short: new fields.EmbeddedDataField(RangeModel),
@@ -155,7 +155,7 @@ export default function ArmamentSystemMixin(Base) {
       /** @inheritDoc */
       get _displayButtons() {
         const buttons = super._displayButtons;
-        if (!formulaExists(this.damage.base)) {
+        if (!this.damage.base) {
           buttons.push({
             button: "damage",
             label: "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label",

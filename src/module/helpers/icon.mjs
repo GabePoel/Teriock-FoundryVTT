@@ -58,3 +58,13 @@ export function getRollIcon(rollFormula) {
   }
   return "fa-dice";
 }
+
+/**
+ * Format a string to an infinity icon if it's null.
+ * @param {string|number|null} val
+ * @return {string}
+ */
+export function asInf(val) {
+  if (["", Infinity, null, undefined].includes(val)) { return makeIcon(TERIOCK.display.icons.ui.infinity, "regular"); }
+  return val;
+}

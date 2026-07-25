@@ -1,13 +1,13 @@
 {{#if system.storage.enabled}}
   <div class="teriock-sheet-bar">
     {{formBox
-      system._source.storage.maxCount
+      (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=(asInf system.storage._source.maxCount))
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.maxCount")
       icon=TERIOCK.display.icons.equipment.maxCount
-      placeholder=(localize "TERIOCK.TERMS.Math.infinity")
+      placeholder=(makeIcon TERIOCK.display.icons.ui.infinity)
       unselected=(ifThen
-        system.storage.maxCount
+        (isFinite system.storage.maxCount)
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedCount denominator=system.storage.maxCount)
         system.storage.carriedCount)
       label="ITEMS"
@@ -16,13 +16,13 @@
         (concat "TERIOCK.MODELS.Storage.FIELDS.maxCount." (ifThen system.storage.isOverCountCapacity "over" "under")))
     }}
     {{formBox
-      system._source.storage.maxWeight
+      (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=(asInf system.storage._source.maxWeight))
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.maxWeight")
       icon=TERIOCK.display.icons.equipment.maxWeight
-      placeholder=(localize "TERIOCK.TERMS.Math.infinity")
+      placeholder=(makeIcon TERIOCK.display.icons.ui.infinity)
       unselected=(ifThen
-        system.storage.maxWeight
+        (isFinite system.storage.maxWeight)
         (localize "TERIOCK.FORMAT.outOf" numerator=system.storage.carriedWeight denominator=system.storage.maxWeight)
         system.storage.carriedWeight)
       label="lb"
@@ -31,11 +31,11 @@
         (concat "TERIOCK.MODELS.Storage.FIELDS.maxWeight." (ifThen system.storage.isOverWeightCapacity "over" "under")))
     }}
     {{formBox
-      system._source.storage.weightMultiplier
+      system.storage._source.weightMultiplier
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.storage.weightMultiplier")
       icon=TERIOCK.display.icons.equipment.weightMultiplier
-      placeholder="0"
+      placeholder="1"
       unselected=system.storage.weightMultiplier
       tooltip=(localize "TERIOCK.MODELS.Storage.FIELDS.weightMultiplier.label")
     }}

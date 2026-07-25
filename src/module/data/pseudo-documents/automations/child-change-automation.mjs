@@ -1,5 +1,6 @@
 import { formatDynamicSelectOptions, objectMap } from "../../../helpers/utils.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
+import { qualifierField } from "../../fields/tools/builders.mjs";
 import { migrateKey } from "../../migrations/source-migrations.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
@@ -40,7 +41,7 @@ export default class ChildChangeAutomation extends CritMechanicMixin(BaseAutomat
         required: true,
       }),
       priority: new fields.NumberField(),
-      qualifier: new FormulaField({ initial: "0" }),
+      qualifier: qualifierField(),
       target: new fields.StringField({
         choices: objectMap(TERIOCK.config.change.child.targets, e => e.label, { localize: true }),
         initial: initialTarget,

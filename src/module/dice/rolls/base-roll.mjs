@@ -103,6 +103,7 @@ export default class BaseRoll extends Roll {
   static qualify(formula, data = {}) {
     if (formula === "1") { return true; }
     if (formula === "0") { return false; }
+    if (formula === "") { return false; }
     return Boolean(this.minValue(formula, data));
   }
 
@@ -125,6 +126,7 @@ export default class BaseRoll extends Roll {
    * @param {Partial<Teriock.Dice.BaseRollOptions>} options
    */
   constructor(formula, data, options = {}) {
+    if (!formula) { formula = "0"; }
     super(formula, data, options);
     this.options = foundry.utils.mergeObject(this.constructor.defaultOptions, options);
 

@@ -2,6 +2,7 @@ import { TeriockTextEditor } from "../../../applications/ux/_module.mjs";
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { TeriockChatMessage } from "../../../documents/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
+import { formulaExists } from "../../../helpers/formula.mjs";
 import { fromIdentifierLocal } from "../../../helpers/utils.mjs";
 import { TypedIdentifierField } from "../../fields/_module.mjs";
 import { rollableFormulaField } from "../../fields/tools/builders.mjs";
@@ -61,6 +62,7 @@ export default class ChangeQuantityAutomation
    * @returns {Promise<void>}
    */
   async #changeQuantity(scope = {}) {
+    if (!formulaExists(this.formula)) { return; }
     const consumable = await this.#findConsumable(scope);
     if (!consumable) { return; }
     if (consumable.system.quantity.value <= 0 && BaseRoll.maxValue(this.formula) <= 0) { return; }
@@ -69,7 +71,7 @@ export default class ChangeQuantityAutomation
     ) { return; }
     const shouldChange = await this.getConfirmation({
       content: "TERIOCK.AUTOMATIONS.ChangeQuantity.DIALOG.content",
-      data: { amount: this.formula, name: `@UUID[${consumable.uuid}]` },
+      data: { amount: `[[/r ${this.formula}]]`, name: `@UUID[${consumable.uuid}]` },
       icon: TERIOCK.config.document[consumable.type]?.icon ?? undefined,
     });
     if (!shouldChange) { return; }

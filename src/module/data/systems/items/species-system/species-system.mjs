@@ -7,6 +7,8 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { makeIconClass } from "../../../../helpers/icon.mjs";
 import { simplifyTags } from "../../../../helpers/panel.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
+import { InfiniteNumberField } from "../../../fields/_module.mjs";
+import { validateNonZero } from "../../../fields/tools/validators.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
 import * as automations from "../../../pseudo-documents/automations/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
@@ -61,20 +63,27 @@ export default class SpeciesSystem
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      adult: new fields.NumberField({ initial: 0, min: 0 }),
+      adult: new fields.NumberField({ initial: 0, min: 0, placeholder: _loc("COMMON.None") }),
       appearance: new fields.HTMLField(),
       attributeIncrease: new fields.HTMLField(),
       br: new fields.NumberField({ initial: 1 }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
       innateRanks: new fields.HTMLField(),
-      lifespan: new fields.NumberField({ initial: 0, min: 0 }),
+      lifespan: new InfiniteNumberField({ initial: 0 }),
       ...Object.fromEntries(POOL_STATS.map(k => [`${k}Increase`, new fields.HTMLField()])),
       size: new fields.SchemaField({
         enabled: new fields.BooleanField({ initial: true }),
-        max: new fields.NumberField(),
-        min: new fields.NumberField(),
-        value: new fields.NumberField({ initial: TERIOCK.config.system.baseValues.size }),
+        max: new fields.NumberField({ placeholder: _loc("COMMON.None") }),
+        min: new fields.NumberField({ placeholder: _loc("COMMON.None") }),
+        value: new fields.NumberField({
+          initial: TERIOCK.config.system.baseValues.size,
+          min: 0,
+          nullable: false,
+          placeholder: `${TERIOCK.config.system.baseValues.size}`,
+          validate: validateNonZero,
+          validationError: _loc("TERIOCK.SYSTEMS.Species.FIELDS.size.value.zeroValidationError"),
+        }),
       }),
       traits: new fields.SetField(new fields.StringField({ choices: TERIOCK.reference.traits })),
     });
@@ -109,7 +118,7 @@ export default class SpeciesSystem
   /** @inheritDoc */
   get _displayButtons() {
     const buttons = super._displayButtons;
-    if (!this.size.min || !this.size.max) {
+    if (this.size.enabled && (!this.size.min || !this.size.max)) {
       buttons.push({
         button: "sizeRange",
         label: "TERIOCK.SYSTEMS.Species.FIELDS.size.range.label",

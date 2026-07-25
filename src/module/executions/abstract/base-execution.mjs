@@ -1,6 +1,6 @@
 import { ExecutionEditor } from "../../applications/dialogs/_module.mjs";
 import { BaseDataModel } from "../../data/abstract/_module.mjs";
-import { FormulaField } from "../../data/fields/_module.mjs";
+import { rollableFormulaField } from "../../data/fields/tools/builders.mjs";
 import * as dataMixins from "../../data/mixins/_module.mjs";
 import { CompetenceModel } from "../../data/models/_module.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
@@ -33,10 +33,7 @@ export default class BaseExecution extends dataMixins.AutomatedDataMixin(BaseDat
 
   /** @inheritDoc */
   static defineSchema() {
-    return {
-      competence: new fields.EmbeddedDataField(CompetenceModel),
-      formula: new FormulaField({ deterministic: false, initial: "" }),
-    };
+    return { competence: new fields.EmbeddedDataField(CompetenceModel), formula: rollableFormulaField() };
   }
 
   /**

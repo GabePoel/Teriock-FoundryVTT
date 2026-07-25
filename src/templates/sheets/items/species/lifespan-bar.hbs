@@ -9,16 +9,10 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.adult.label")
     }}
     {{formBox
-      (ifThen
-        (exists system._source.lifespan)
-        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=system._source.lifespan)
-        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite"))
+      (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=(asInf system._source.lifespan))
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.lifespan")
-      unselected=(ifThen
-        (exists system.lifespan)
-        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=system.lifespan)
-        (localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.infinite"))
+      unselected=(localize "TERIOCK.SYSTEMS.Species.PANELS.lifespan.max" value=(asInf system.lifespan))
       icon=TERIOCK.display.icons.species.lifespan
       tooltip=(localize "TERIOCK.SYSTEMS.Species.FIELDS.lifespan.label")
     }}

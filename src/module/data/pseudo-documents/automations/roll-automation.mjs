@@ -43,7 +43,7 @@ export default class RollAutomation
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      formula: new FormulaField({ deterministic: false, nullable: true }),
+      formula: new FormulaField({ deterministic: false, nullable: true, placeholder: _loc("COMMON.None") }),
       impact: new fields.StringField({
         choices: localizeChoices(objectMap(TERIOCK.config.impact, i => i.deal)),
         initial: "damage",

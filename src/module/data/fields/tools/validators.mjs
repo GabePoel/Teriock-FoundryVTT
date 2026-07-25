@@ -29,3 +29,12 @@ export function validateTypedIdentifier(identifier, options = {}) {
   if (options.types?.length && !options.types.includes(type)) { return false; }
   return isKebabCase(type) && isKebabCase(id);
 }
+
+/**
+ * Validate that a number is not zero.
+ * @param {number} value
+ * @return {boolean}
+ */
+export function validateNonZero(value) {
+  return value !== 0;
+}

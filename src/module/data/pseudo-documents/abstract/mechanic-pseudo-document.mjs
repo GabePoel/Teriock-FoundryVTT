@@ -1,7 +1,6 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { localizeChoices } from "../../../helpers/localization.mjs";
-import { FormulaField } from "../../fields/_module.mjs";
-import { competenceField } from "../../fields/tools/builders.mjs";
+import { competenceField, qualifierField } from "../../fields/tools/builders.mjs";
 import * as dataMixins from "../../mixins/_module.mjs";
 import TypedPseudoDocument from "./typed-pseudo-document.mjs";
 
@@ -30,7 +29,7 @@ export default class MechanicPseudoDocument extends dataMixins.PropagationDataMi
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      activeQualifier: new FormulaField({ deterministic: true, initial: "1" }),
+      activeQualifier: qualifierField({ initial: "1" }),
       competencies: new fields.SetField(competenceField(), { initial: [0, 1, 2] }),
       heighten: new fields.SetField(
         new fields.NumberField({

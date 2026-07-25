@@ -9,13 +9,12 @@
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.value.label")
     }}
     {{formBox
-      system._source.quantity.maxFormula
+      (localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=(asInf system._source.quantity.maxFormula))
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.quantity.maxFormula")
       icon=TERIOCK.display.icons.ui.maximum
       placeholder=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.noMax")
-      unselected=(ifThen
-        system.quantity.maxFormula (localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=system.quantity.max) "")
+      unselected=(localize "TERIOCK.SYSTEMS.Consumable.PANELS.max" value=(asInf system.quantity.max))
       tooltip=(localize "TERIOCK.SYSTEMS.Consumable.FIELDS.quantity.maxFormula.label")
     }}
     {{formBox

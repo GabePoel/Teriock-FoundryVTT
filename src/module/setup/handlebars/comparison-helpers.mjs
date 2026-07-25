@@ -9,4 +9,4 @@ function includes(list, item) {
   return list ? Array.from(list).includes(item) : false;
 }
 
-export default { includes };
+export default { includes, isFinite };

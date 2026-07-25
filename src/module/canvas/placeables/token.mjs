@@ -3,6 +3,12 @@ import { getImage } from "../../helpers/path.mjs";
 const { Token } = foundry.canvas.placeables;
 
 /**
+ * Statuses that cause detection changes. The local ones leave "blind" out since that's handled by Foundry already.
+ * @type {{global: Set<Teriock.Keys.Condition>, local: Set<Teriock.Keys.Condition>}}
+ */
+const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new Set(["anosmatic", "deaf"]) };
+
+/**
  * @inheritDoc
  * @property {TeriockTokenDocument} document
  * @property {TeriockActor|null} actor
@@ -42,16 +48,22 @@ export default class TeriockToken extends Token {
 
   /** @inheritDoc */
   _onApplyStatusEffect(statusId, active) {
-    switch (statusId) {
-      case CONFIG.specialStatusEffects.ETHEREAL:
-        canvas.perception.update({ refreshVision: true });
-        break;
-      case CONFIG.specialStatusEffects.HIDDEN:
-        canvas.perception.update({ refreshVision: true });
-        break;
-      default:
-        break;
-    }
+    if (DETECTION_STATUSES.local.has(statusId)) { this.initializeVisionSource(); }
+    if (DETECTION_STATUSES.global.has(statusId)) { canvas.perception.update({ refreshVision: true }); }
     super._onApplyStatusEffect(statusId, active);
+  }
+
+  /**
+   * Handle changes to hiding score.
+   */
+  _onChangeHidingScore() {
+    canvas.perception.update({ refreshVision: true });
+  }
+
+  /**
+   * Handle changes to perceiving score.
+   */
+  _onChangePerceivingScore() {
+    this.initializeVisionSource();
   }
 }

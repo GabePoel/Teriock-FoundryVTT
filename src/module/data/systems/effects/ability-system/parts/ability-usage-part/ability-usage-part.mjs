@@ -1,6 +1,6 @@
 import { formulaExists } from "../../../../../../helpers/formula.mjs";
 import { objectMap } from "../../../../../../helpers/utils.mjs";
-import { FormulaField } from "../../../../../fields/_module.mjs";
+import { rollableFormulaField } from "../../../../../fields/tools/builders.mjs";
 import { migrateKey } from "../../../../../migrations/source-migrations.mjs";
 import { RangeModel, SlowExecutionTimeModel } from "../../../../../models/unit-models/_module.mjs";
 
@@ -34,7 +34,7 @@ export default function AbilityUsagePart(Base) {
             slow: new fields.EmbeddedDataField(SlowExecutionTimeModel),
           }),
           expansion: new fields.SchemaField({
-            cap: new FormulaField({ deterministic: false }),
+            cap: rollableFormulaField(),
             featSaveAttribute: new fields.StringField({
               blank: false,
               choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),

@@ -5,6 +5,7 @@ import { mixClasses } from "../../../../helpers/construction.mjs";
 import { localizeChoices } from "../../../../helpers/localization.mjs";
 import { toCamelCase, toKebabCase } from "../../../../helpers/string.mjs";
 import { getName, objectMap } from "../../../../helpers/utils.mjs";
+import { InfiniteNumberField } from "../../../fields/_module.mjs";
 import { archetypeField, classField } from "../../../fields/tools/builders.mjs";
 import { migrateKey, migrateValueTransform } from "../../../migrations/source-migrations.mjs";
 import { CompetenceModel } from "../../../models/_module.mjs";
@@ -51,7 +52,7 @@ export default class RankSystem
       class: classField({ blank: false, initial: "journeyman", required: true }),
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 1 } }),
       description: new fields.HTMLField(),
-      maxAv: new fields.NumberField({ initial: classConfig.defaults.maxAv, integer: true, min: 0 }),
+      maxAv: new InfiniteNumberField({ initial: classConfig.defaults.maxAv, integer: true }),
       number: new fields.NumberField({ initial: 0, integer: true, min: 0 }),
       origin: new fields.StringField({
         blank: false,

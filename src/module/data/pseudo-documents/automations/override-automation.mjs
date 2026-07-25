@@ -56,7 +56,7 @@ export default class OverrideAutomation
       preventBlockCone: new fields.BooleanField({ initial: false }),
       preventFeat: new fields.BooleanField({ initial: false }),
       preventThreshold: new fields.BooleanField({ initial: false }),
-      rollBonus: new FormulaField({ deterministic: false }),
+      rollBonus: new FormulaField({ deterministic: false, placeholder: "0" }),
       targetsActor: new TernaryField(),
       targetsArmament: new TernaryField(),
     });

@@ -1,3 +1,4 @@
+import { asInf } from "../../helpers/icon.mjs";
 import { dotJoin, toKebabCase } from "../../helpers/string.mjs";
 
 /**
@@ -10,4 +11,4 @@ function minLen(value, length) {
   return value.length >= length ? value : "";
 }
 
-export default { dotJoin, minLen, toKebabCase, sign: n => n.signedString() };
+export default { asInf, dotJoin, minLen, toKebabCase, sign: n => n.signedString() };

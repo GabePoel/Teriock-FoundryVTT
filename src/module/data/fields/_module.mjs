@@ -1,5 +1,6 @@
 export { default as FormulaField } from "./formula-field.mjs";
 export { default as IdentifierField } from "./identifier-field.mjs";
+export { default as InfiniteNumberField } from "./infinite-number-field.mjs";
 export { default as LocalDocumentField } from "./local-document-field.mjs";
 export { default as MultiChangeField } from "./multi-change-field.mjs";
 export { default as PseudoCollectionField } from "./pseudo-collection-field.mjs";

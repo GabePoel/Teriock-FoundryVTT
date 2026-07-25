@@ -1,16 +1,14 @@
-{{#if (or
-  (exists system.attackPenalty) (exists system.damage.base) (exists system.damage.twoHanded) (exists system.hitBonus))
-}}
+{{#if (or system.damage.base (exists system.damage.twoHanded) (exists system.hitBonus))}}
   <div class="teriock-sheet-bar">
     {{formBox
       sourceDamageString
       action=(ifThen editable "editArmamentDamage" "")
       icon=TERIOCK.display.icons.ui.damage
-      include=(exists system.damage.base)
-      unselected=damageString
+      include=(or system.damage.base system.damage.twoHanded)
       label=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.abbreviation")
-      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label")
       overflow=true
+      tooltip=(localize "TERIOCK.SYSTEMS.Armament.FIELDS.damage.label")
+      unselected=damageString
     }}
     {{formBox
       system._source.hitBonus
@@ -19,17 +17,20 @@
       icon=TERIOCK.display.icons.armament.hitBonus
       include=(exists system.hitBonus)
       label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.abbreviation")
-      unselected=system.hitBonus
+      placeholder="0"
       tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.hitBonus.label")
+      unselected=system.hitBonus
     }}
     {{formBox
       system._source.attackPenalty
       action=(ifThen editable "updatePaths" "")
       dataset=(object paths="system.attackPenalty")
       icon=TERIOCK.display.icons.armament.ap
+      include=(or system.damage.base system.damage.twoHanded)
       label=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.abbreviation")
-      unselected=system.attackPenalty
+      placeholder="0"
       tooltip=(localize "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label")
+      unselected=system.attackPenalty
     }}
   </div>
 {{/if}}

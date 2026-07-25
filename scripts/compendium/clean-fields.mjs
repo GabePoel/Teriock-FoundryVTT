@@ -192,6 +192,8 @@ function cleanArmament(doc) {
       doc.system.damage.twoHanded.raw; }
   if (isZero(doc.system.av?.raw)) { delete doc.system.av; }
   if (isZero(doc.system.bv?.raw)) { delete doc.system.bv; }
+  if (isZero(doc.system.damage.base)) { delete doc.system.damage.base; }
+  if (isZero(doc.system.damage.twoHanded)) { delete doc.system.damage.twoHanded; }
   if (!doc.system.spellTurning) { delete doc.system.spellTurning; }
   if (!doc.system.warded) { delete doc.system.warded; }
 }

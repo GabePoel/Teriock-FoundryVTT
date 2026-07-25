@@ -57,7 +57,7 @@ export default class BaseExpiration extends CritMechanicMixin(MechanicPseudoDocu
           required: true,
         }),
         formula: new rollableFormulaField({ initial: "2d4kh1" }),
-        threshold: new FormulaField({ initial: "4" }),
+        threshold: new FormulaField({ initial: "4", placeholder: "0" }),
       }),
     });
   }

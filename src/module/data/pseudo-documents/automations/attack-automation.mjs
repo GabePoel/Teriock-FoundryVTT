@@ -36,7 +36,7 @@ export default class AttackAutomation extends OverrideCompetenceMechanicMixin(Th
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      attackPenalty: new FormulaField({ deterministic: false, initial: "" }),
+      attackPenalty: new FormulaField({ deterministic: false, initial: "", placeholder: _loc("COMMON.Default") }),
       consumeAmmunition: new TernaryField(),
       keepArmament: new fields.BooleanField({ initial: true }),
       limb: new TernaryField(),

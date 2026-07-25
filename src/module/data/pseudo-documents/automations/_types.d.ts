@@ -18,10 +18,10 @@ import {
   HacksAutomation,
   HealAutomation,
   LightAutomation,
-  MoveAutomation,
   OverrideAutomation,
   PropertyMacroAutomation,
   RegionAutomation,
+  RepositionAutomation,
   ResistAutomation,
   RevitalizeAutomation,
   RollAutomation,
@@ -58,7 +58,7 @@ declare global {
       hacks: HacksAutomation;
       heal: HealAutomation;
       light: LightAutomation;
-      move: MoveAutomation;
+      move: RepositionAutomation;
       override: OverrideAutomation;
       propertyMacro: PropertyMacroAutomation;
       region: RegionAutomation;

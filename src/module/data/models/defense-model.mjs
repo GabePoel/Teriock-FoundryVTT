@@ -13,7 +13,7 @@ export default class DefenseModel extends BaseDataModel {
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       bonus: initialNumber(0),
-      raw: new fields.NumberField({ initial: 0, nullable: false }),
+      raw: new fields.NumberField({ initial: 0, nullable: false, placeholder: _loc("COMMON.None") }),
     });
   }
 

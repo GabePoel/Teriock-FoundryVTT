@@ -1,7 +1,7 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
-import { FormulaField } from "../../fields/_module.mjs";
+import { rollableFormulaField } from "../../fields/tools/builders.mjs";
 import * as dataMixins from "../../mixins/_module.mjs";
 
 const { fields } = foundry.data;
@@ -19,7 +19,7 @@ export default class BaseModifierModel
   /** @inheritDoc */
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
-      bonus: new FormulaField({ deterministic: false }),
+      bonus: rollableFormulaField(),
       score: new fields.NumberField({ initial: 0, integer: true, nullable: false, required: true }),
     });
   }

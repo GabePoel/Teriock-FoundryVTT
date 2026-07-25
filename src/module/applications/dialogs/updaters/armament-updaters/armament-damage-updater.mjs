@@ -27,7 +27,7 @@ export default class ArmamentDamageUpdater extends BaseUpdater {
       const twoHandedPath = "system.damage.twoHanded";
       for (const field of context.fields) {
         if (field.name === twoHandedPath) {
-          field.placeholder = this._currentData.system.damage.base;
+          field.placeholder = this._currentData.system.damage.base || _loc("COMMON.None");
         }
       }
     }

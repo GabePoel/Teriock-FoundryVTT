@@ -32,13 +32,18 @@ export default function ActorCapacitiesPart(Base) {
             category: initialString(),
             length: initialNumber(),
             reach: initialNumber(),
-            value: new fields.NumberField({ initial: 3, max: 30, min: 0.25 }),
+            value: new fields.NumberField({ initial: 3, max: 30, min: 0.25, nullable: false, placeholder: "3" }),
           }),
           weight: new fields.SchemaField({
             carried: initialNumber(),
             equipment: initialNumber(),
             money: initialNumber(),
-            self: new fields.NumberField({ initial: null, min: 0, nullable: true }),
+            self: new fields.NumberField({
+              initial: null,
+              min: 0,
+              nullable: true,
+              placeholder: _loc("COMMON.Default"),
+            }),
             value: initialNumber(),
           }),
         });

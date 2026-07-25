@@ -4,7 +4,7 @@ import { makeIcon, makeIconClass } from "../../../../../../helpers/icon.mjs";
 import { resolveDocument } from "../../../../../../helpers/resolve.mjs";
 import { StorageModel } from "../../../../../models/_module.mjs";
 
-const { EmbeddedDataField, NumberField } = foundry.data.fields;
+const { fields } = foundry.data;
 
 /**
  * @param {typeof EquipmentSystem} Base
@@ -21,8 +21,8 @@ export default function EquipmentStoragePart(Base) {
       static defineSchema() {
         return {
           ...super.defineSchema(),
-          storage: new EmbeddedDataField(StorageModel),
-          weight: new foundry.data.fields.NumberField({ initial: 0, nullable: false }),
+          storage: new fields.EmbeddedDataField(StorageModel),
+          weight: new fields.NumberField({ initial: 0, nullable: false, placeholder: "0", required: true }),
         };
       }
 

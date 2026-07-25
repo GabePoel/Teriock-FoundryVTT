@@ -1,6 +1,11 @@
 import LengthUnitModel from "./length-unit-model.mjs";
 
 export default class RangeModel extends LengthUnitModel {
+  /** @inheritDoc */
+  static get _rawPlaceholder() {
+    return _loc("COMMON.None");
+  }
+
   /**
    * @inheritDoc
    * @returns {Teriock.Units.UnitEntry[]}

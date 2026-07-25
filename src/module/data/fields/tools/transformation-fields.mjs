@@ -23,6 +23,7 @@ export function speciesTransformationFields() {
       initial: null,
       label: "TERIOCK.SCHEMA.Transformation.img.label",
       nullable: true,
+      placeholder: _loc("COMMON.None"),
       required: false,
       trim: true,
     }),

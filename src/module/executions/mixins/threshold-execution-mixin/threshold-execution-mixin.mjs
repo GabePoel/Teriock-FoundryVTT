@@ -1,5 +1,5 @@
 import mathConfig from "../../../constants/config/math-config.mjs";
-import { FormulaField } from "../../../data/fields/_module.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
 import { objectMap } from "../../../helpers/utils.mjs";
@@ -26,7 +26,7 @@ export default function ThresholdExecutionMixin(Base) {
       /** @inheritDoc */
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
-          bonus: new FormulaField({ deterministic: false, initial: "" }),
+          bonus: rollableFormulaField(),
           comparison: new fields.StringField({
             blank: false,
             choices: objectMap(mathConfig.comparisons, (c) => c.label, { localize: true }),

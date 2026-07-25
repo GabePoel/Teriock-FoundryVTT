@@ -111,9 +111,11 @@ export default class BaseUpdater extends DocumentDialog {
     if (partId === "form") {
       context.fields = [];
       for (const p of this._formPaths) {
+        const field = this.document.getFieldForProperty(p);
         context.fields.push({
           choices: this._getChoicesForPath(p),
-          field: this.document.getFieldForProperty(p),
+          classes: "teriock-icon-placeholder",
+          field,
           localize: true,
           name: p,
           value: foundry.utils.getProperty(this._currentData, p),

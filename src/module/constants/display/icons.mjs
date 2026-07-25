@@ -332,6 +332,7 @@ export const icons = {
     hide: "ms-visibility-off",
     image: "ms-image",
     import: "ms-download",
+    infinity: "mdi-infinity",
     info: "ms-info",
     linked: "ms-link",
     locked: "ms-lock",

@@ -27,8 +27,8 @@ export default function AttunableSystemMixin(Base) {
         return Object.assign(super.defineSchema(), {
           needsAttunement: new fields.BooleanField({ initial: true }),
           tier: new fields.SchemaField({
-            raw: new FormulaField({ deterministic: true, initial: "" }),
-            value: new fields.NumberField({ integer: true, min: 0, persisted: false }),
+            raw: new FormulaField({ deterministic: true, initial: "", placeholder: "0" }),
+            value: new fields.NumberField({ integer: true, min: 0, persisted: false, placeholder: "0" }),
           }),
         });
       }

@@ -64,7 +64,7 @@ export default {
       icon: icons.sense.invisible,
       label: "TERIOCK.TERMS.Senses.invisible",
     },
-    sight: { grantsSight: true, icon: icons.sense.sight, label: "TERIOCK.TERMS.Senses.sight" },
+    sight: { grantsSight: false, icon: icons.sense.sight, label: "TERIOCK.TERMS.Senses.sight" },
     smell: {
       detectionMode: "scentPerception",
       grantsSight: false,
@@ -73,7 +73,7 @@ export default {
     },
     truth: {
       detectionMode: "trueSight",
-      grantsSight: true,
+      grantsSight: false,
       icon: icons.sense.truth,
       label: "TERIOCK.TERMS.Senses.truth",
     },

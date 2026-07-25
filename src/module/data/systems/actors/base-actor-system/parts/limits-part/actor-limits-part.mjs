@@ -1,5 +1,5 @@
-import { DocumentSelector } from "../../../../../../applications/dialogs/_module.mjs";
-import { consolidateWriteOperations } from "../../../../../../helpers/utils.mjs";
+import systemConfig from "../../../../../../constants/config/system-config.mjs";
+import { InfiniteNumberField } from "../../../../../fields/_module.mjs";
 import { initialNumber } from "../../../../../fields/tools/initializers.mjs";
 
 const { fields } = foundry.data;
@@ -20,12 +20,12 @@ export default function ActorLimitsPart(Base) {
       static defineSchema() {
         return Object.assign(super.defineSchema(), {
           curses: new fields.SchemaField({
-            max: new fields.NumberField({ initial: 3, integer: true, min: 0, nullable: false }),
+            max: new InfiniteNumberField({ initial: systemConfig.baseValues.maxCurses, integer: true }),
             min: initialNumber(),
             value: initialNumber(),
           }),
           rotators: new fields.SchemaField({
-            max: new fields.NumberField({ initial: 0, integer: true, min: 0, nullable: false }),
+            max: new InfiniteNumberField({ initial: 0, integer: true }),
             min: initialNumber(),
             value: initialNumber(),
           }),

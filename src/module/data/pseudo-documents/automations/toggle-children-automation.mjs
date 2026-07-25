@@ -1,7 +1,8 @@
 import { BaseRoll } from "../../../dice/rolls/_module.mjs";
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { ensureChildren, ensureNoChildren } from "../../../helpers/resolve.mjs";
-import { FormulaField, TypedIdentifierSetField } from "../../fields/_module.mjs";
+import { TypedIdentifierSetField } from "../../fields/_module.mjs";
+import { qualifierField } from "../../fields/tools/builders.mjs";
 import { CritMechanicMixin } from "../mixins/_module.mjs";
 import { BaseAutomation } from "./abstract/_module.mjs";
 import * as automationMixins from "./mixins/_module.mjs";
@@ -39,7 +40,7 @@ export default class ToggleChildrenAutomation
   static defineSchema() {
     return Object.assign(super.defineSchema(), {
       add: new TypedIdentifierSetField(),
-      qualifier: new FormulaField({ initial: "0" }),
+      qualifier: qualifierField(),
       remove: new TypedIdentifierSetField(),
     });
   }

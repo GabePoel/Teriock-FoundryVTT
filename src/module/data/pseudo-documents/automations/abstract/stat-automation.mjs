@@ -26,7 +26,7 @@ export default class StatAutomation extends automationMixins.TriggerAutomationMi
     return Object.assign(super.defineSchema(), {
       consumeStatDice: new fields.BooleanField({ initial: true }),
       forHarm: new fields.BooleanField({ initial: false }),
-      substitution: rollableFormulaField({ initial: "", placeholder: "@base" }),
+      substitution: rollableFormulaField({ placeholder: "@base" }),
     });
   }
 

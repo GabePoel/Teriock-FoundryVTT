@@ -1,5 +1,5 @@
 import * as executionMixins from "../_module.mjs";
-import { FormulaField } from "../../../data/fields/_module.mjs";
+import { rollableFormulaField } from "../../../data/fields/tools/builders.mjs";
 import { PiercingModel } from "../../../data/models/_module.mjs";
 import { BaseRoll, ThresholdRoll } from "../../../dice/rolls/_module.mjs";
 import { addFormula, formulaExists } from "../../../helpers/formula.mjs";
@@ -33,7 +33,7 @@ export default function AttackExecutionMixin(Base) {
         return Object.assign(super.defineSchema(), {
           consumeAmmunition: new fields.BooleanField({ initial: true }),
           existingAttackPenalty: new fields.NumberField({ initial: 0, integer: true, max: 0, nullable: false }),
-          incurredAttackPenalty: new FormulaField({ deterministic: false, initial: "0" }),
+          incurredAttackPenalty: rollableFormulaField(),
           piercing: new fields.EmbeddedDataField(PiercingModel),
           sb: new fields.BooleanField({ label: "TERIOCK.SYSTEMS.BaseActor.FIELDS.offense.sb.label" }),
           useArmament: new fields.BooleanField(),

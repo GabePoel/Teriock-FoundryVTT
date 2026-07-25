@@ -275,7 +275,23 @@ export function movementActionField(options = {}) {
  * @returns {FormulaField}
  */
 export function rollableFormulaField(options = {}) {
-  return new FormulaField({ deterministic: false, initial: "0", nullable: false, ...options });
+  return new FormulaField({ deterministic: false, initial: "", nullable: false, placeholder: "0", ...options });
+}
+
+/**
+ * Field for a qualifier formula.
+ * @param {StringFieldOptions & Teriock.Fields._FormulaFieldOptions} [options]
+ * @return {FormulaField}
+ */
+export function qualifierField(options = {}) {
+  return new FormulaField({
+    blank: true,
+    deterministic: true,
+    initial: "",
+    nullable: false,
+    placeholder: "0",
+    ...options,
+  });
 }
 
 /**

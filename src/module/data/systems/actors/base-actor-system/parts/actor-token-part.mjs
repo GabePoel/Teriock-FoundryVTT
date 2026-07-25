@@ -53,31 +53,6 @@ export default function ActorTokenPart(Base) {
       }
 
       /**
-       * Prepare token detection mode changes.
-       */
-      _prepareTokenDetectionModes() {
-        if (!this.actor.system.settings.getSetting("autoDetectionModes")) { return; }
-        for (const [sense, config] of Object.entries(TERIOCK.config.character.sense)) {
-          if (config?.detectionMode) {
-            this._tokenChanges.push({
-              key: `detectionModes.${config.detectionMode}.range`,
-              phase: TERIOCK.config.change.tokenPhase,
-              priority: 5,
-              type: "override",
-              value: this.senses[sense],
-            });
-            this._tokenChanges.push({
-              key: `detectionModes.${config.detectionMode}.enabled`,
-              phase: TERIOCK.config.change.tokenPhase,
-              priority: 5,
-              type: "override",
-              value: this.senses[sense] > 0,
-            });
-          }
-        }
-      }
-
-      /**
        * Prepare token vision changes.
        */
       _prepareTokenVision() {
@@ -104,11 +79,6 @@ export default function ActorTokenPart(Base) {
           sightColor = "#ff0000";
           visionMode = "dead";
         }
-        const range = Math.max(
-          ...Object.entries(this.senses).filter(([k, _v]) => TERIOCK.config.character.sense[k]?.grantsSight).map((
-            [_k, v],
-          ) => v),
-        );
         if (this.actor.system.settings.getSetting("autoVisionModes")) {
           this._tokenChanges.push({
             key: "sight.visionMode",
@@ -116,15 +86,6 @@ export default function ActorTokenPart(Base) {
             priority: 5,
             type: "override",
             value: visionMode,
-          });
-        }
-        if (this.actor.system.settings.getSetting("autoVisionRange")) {
-          this._tokenChanges.push({
-            key: "sight.range",
-            phase: TERIOCK.config.change.tokenPhase,
-            priority: 5,
-            type: "override",
-            value: range,
           });
         }
         if (this.actor.system.settings.getSetting("autoVisionAngle")) {
@@ -172,7 +133,7 @@ export default function ActorTokenPart(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        this._prepareTokenDetectionModes();
+        // this._prepareTokenDetectionModes();
       }
 
       /** @inheritDoc */
