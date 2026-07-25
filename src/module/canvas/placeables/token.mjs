@@ -3,11 +3,15 @@ import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 
 const { Token } = foundry.canvas.placeables;
 
+/*
+ * @type {{global: Set<Teriock.Keys.Condition>, local: Set<Teriock.Keys.Condition>}}
+ */
+const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new Set(["anosmatic", "deaf"]) };
+
 /**
  * Statuses that cause detection changes. The local ones leave "blind" out since that's handled by Foundry already.
  * @extends {Token}
  * @mixes EtherealLightPlaceable
- * @type {{global: Set<Teriock.Keys.Condition>, local: Set<Teriock.Keys.Condition>}}
  * @inheritDoc
  * @property {Scene} scene
  * @property {TeriockActor|null} actor
