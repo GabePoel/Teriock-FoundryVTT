@@ -26,7 +26,7 @@ export default function etherealVisionMode() {
       background: { shader: EtherealBackgroundVisionShader },
       coloration: { shader: EtherealColorationVisionShader },
       darkness: { adaptive: false },
-      defaults: { attenuation: 0, brightness: 0, contrast: 0, saturation: 0.25 },
+      defaults: { attenuation: 0, brightness: 0, color: "#555555", contrast: 0, saturation: 0.25 },
     },
   }, { animated: true });
 }
