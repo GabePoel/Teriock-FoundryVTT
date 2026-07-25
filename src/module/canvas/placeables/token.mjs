@@ -1,4 +1,5 @@
 import { getImage } from "../../helpers/path.mjs";
+import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 
 const { Token } = foundry.canvas.placeables;
 
@@ -10,11 +11,18 @@ const DETECTION_STATUSES = { global: new Set(["ethereal", "hidden"]), local: new
 
 /**
  * @inheritDoc
- * @property {TeriockTokenDocument} document
- * @property {TeriockActor|null} actor
+ * @extends {Token}
+ * @mixes EtherealLightPlaceable
  * @property {Scene} scene
+ * @property {TeriockActor|null} actor
+ * @property {TeriockTokenDocument} document
  */
-export default class TeriockToken extends Token {
+export default class TeriockToken extends EtherealLightPlaceableMixin(Token) {
+  /** @inheritDoc */
+  get isEthereal() {
+    return this.document?.hasStatusEffect("ethereal");
+  }
+
   /** @inheritDoc */
   async _drawEffects() {
     await super._drawEffects();

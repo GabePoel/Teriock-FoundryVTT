@@ -82,24 +82,6 @@ export default class TeriockTokenDocument
     if (Object.keys(updateData).length > 0 && this.id) { await this.update(updateData, updateOptions); }
   }
 
-  /**
-   * Ensures that vision is correctly set when the token is first created.
-   * Configures vision modes and detection ranges based on the {@link TeriockActor}'s senses.
-   * @inheritdoc
-   */
-  prepareDerivedData() {
-    super.prepareDerivedData();
-    if (this.hasStatusEffect("ethereal") && this.actor.system.settings.getSetting("autoLighting")) {
-      const lightRange = Math.max(this.light.bright, this.light.dim);
-      foundry.utils.setProperty(this, "detectionModes.spectral.enabled", true);
-      foundry.utils.setProperty(this, "detectionModes.spectral.range", lightRange);
-      this.sight.range = lightRange;
-      this.sight.angle = this.light.angle;
-      this.light.bright = 0;
-      this.light.dim = 0;
-    }
-  }
-
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
     if (this.isLazyDelta) { return; }

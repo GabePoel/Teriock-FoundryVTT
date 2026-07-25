@@ -167,9 +167,12 @@ foundry.helpers.Hooks.once("init", function() {
     if (!["basicSight", "lightPerception"].includes(id)) { delete CONFIG.Canvas.detectionModes[key]; }
   }
   Object.assign(CONFIG.Canvas, {
+    darknessSourceClass: canvas.sources.TeriockPointDarknessSource,
     detectionModes: { ...CONFIG.Canvas.detectionModes, ...canvas.perception.detectionModes },
+    lightSourceClass: canvas.sources.TeriockPointLightSource,
     visionModes: { ...CONFIG.Canvas.visionModes, ...canvas.perception.visionModes },
   });
+  CONFIG.Canvas.layers.lighting.layerClass = canvas.layers.TeriockLightingLayer;
 
   // Configure Documents
   // ===================
@@ -208,6 +211,10 @@ foundry.helpers.Hooks.once("init", function() {
       },
       defaultType: "character",
       documentClass: documents.TeriockActor,
+    },
+    AmbientLight: {
+      documentClass: documents.TeriockAmbientLightDocument,
+      objectClass: canvas.placeables.TeriockAmbientLight,
     },
     Card: {
       dataModels: { card: data.systems.cards.BaseCardsSystem, stone: data.systems.cards.StoneSystem },
