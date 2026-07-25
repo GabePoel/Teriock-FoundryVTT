@@ -11,4 +11,12 @@ const { AmbientLightDocument } = foundry.documents;
  */
 export default class TeriockAmbientLightDocument
   extends mixClasses(AmbientLightDocument, documentMixins.BaseDocumentMixin)
-{}
+{
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if (typeof this.getFlag("teriock", "isEthereal") !== "boolean") {
+      foundry.utils.setProperty(this, "flags.teriock.isEthereal", false);
+    }
+  }
+}

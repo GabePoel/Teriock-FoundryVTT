@@ -309,6 +309,12 @@ foundry.helpers.Hooks.once("init", function() {
 
   // Register Custom V2 Sheets
   const sheetMap = [
+    // Ambient Lights
+    {
+      cls: applications.sheets.TeriockAmbientLightConfig,
+      doc: documents.TeriockAmbientLightDocument,
+      label: "TERIOCK.SHEETS.AmbientLight.LABEL",
+    },
     // Actors
     {
       cls: applications.sheets.actor.PlayableActorSheet,
@@ -422,13 +428,13 @@ foundry.helpers.Hooks.once("init", function() {
     },
     // Journal Entries
     {
-      cls: applications.sheets.journal.BaseJournalSheet,
+      cls: applications.sheets.TeriockJournalEntrySheet,
       doc: documents.TeriockJournalEntry,
       label: "TERIOCK.SHEETS.Journal.LABEL",
     },
     // Pages
     {
-      cls: applications.sheets.page.BasePageSheet,
+      cls: applications.sheets.TeriockPageSheet,
       doc: documents.TeriockJournalEntryPage,
       label: "TYPES.SHEETS.Page.LABEL",
       types: ["class", "damage", "drain", "rule", "tradecraft"],

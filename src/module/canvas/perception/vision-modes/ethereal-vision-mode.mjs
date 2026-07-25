@@ -3,6 +3,8 @@ import { EtherealBackgroundVisionShader, EtherealColorationVisionShader } from "
 const { VisionMode } = foundry.canvas.perception;
 const { shaders } = foundry.canvas.rendering;
 
+const DESATURATION = { postProcessingModes: ["SATURATION"], uniforms: { saturation: -0.75, tint: [1, 1, 1] } };
+
 /**
  * Everything is in black and white, and there's an odd emanating haze.
  *
@@ -13,19 +15,18 @@ const { shaders } = foundry.canvas.rendering;
  */
 export default function etherealVisionMode() {
   return new VisionMode({
-    canvas: { shader: shaders.ColorAdjustmentsSamplerShader, uniforms: { brightness: 0, contrast: 0, saturation: -1 } },
+    canvas: {
+      shader: shaders.ColorAdjustmentsSamplerShader,
+      uniforms: { brightness: 0, contrast: 0, saturation: -0.75 },
+    },
     id: "ethereal",
     label: "TERIOCK.PERCEPTION.VisionModes.ethereal",
-    lighting: {
-      background: { postProcessingModes: ["SATURATION"], uniforms: { saturation: -1.0, tint: [1, 1, 1] } },
-      coloration: { visibility: VisionMode.LIGHTING_VISIBILITY.DISABLED },
-      illumination: { postProcessingModes: ["SATURATION"], uniforms: { saturation: -1.0, tint: [1, 1, 1] } },
-    },
+    lighting: { background: DESATURATION, coloration: DESATURATION, illumination: DESATURATION },
     vision: {
       background: { shader: EtherealBackgroundVisionShader },
       coloration: { shader: EtherealColorationVisionShader },
       darkness: { adaptive: false },
-      defaults: { attenuation: 0, brightness: 0, contrast: 0, saturation: 0 },
+      defaults: { attenuation: 0, brightness: 0, contrast: 0, saturation: 0.25 },
     },
   }, { animated: true });
 }

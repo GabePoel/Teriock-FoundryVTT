@@ -1,5 +1,5 @@
-import { makeIconClass } from "../../../helpers/icon.mjs";
-import { BaseApplicationMixin } from "../../api/mixins/_module.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
+import { BaseApplicationMixin } from "../api/mixins/_module.mjs";
 
 const { JournalEntrySheet } = foundry.applications.sheets.journal;
 
@@ -7,7 +7,7 @@ const { JournalEntrySheet } = foundry.applications.sheets.journal;
  * @extends {JournalEntrySheet}
  * @mixes BaseApplicationMixin
  */
-export default class BaseJournalSheet extends BaseApplicationMixin(JournalEntrySheet) {
+export default class TeriockJournalEntrySheet extends BaseApplicationMixin(JournalEntrySheet) {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = { window: { icon: makeIconClass(CONFIG.JournalEntry.sidebarIcon, "title") } };
 
