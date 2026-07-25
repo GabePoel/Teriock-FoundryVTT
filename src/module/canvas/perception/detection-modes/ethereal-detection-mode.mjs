@@ -1,5 +1,4 @@
 import { EtherealFilter } from "../../rendering/filters/_module.mjs";
-import EtherealTargetDetectionMixin from "./ethereal-target-detection-mixin.mjs";
 import LightDetectionMode from "./light-detection-mode.mjs";
 
 /**
@@ -10,7 +9,7 @@ import LightDetectionMode from "./light-detection-mode.mjs";
  * - [Ethereal Senses](https://wiki.teriock.com/index.php/Ability:Ethereal_Senses)
  * - [Spirit Guide](https://wiki.teriock.com/index.php/Ability:Spirit_Guide)
  */
-export default class EtherealDetectionMode extends EtherealTargetDetectionMixin(LightDetectionMode) {
+export default class EtherealDetectionMode extends LightDetectionMode {
   /** @inheritDoc */
   static getDetectionFilter() {
     if (!game.modules.get("tokenmagic")?.active || !game.settings.get("teriock", "actor")?.autoMagic) {

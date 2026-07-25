@@ -5,5 +5,4 @@ export { default as InvisibleDetectionMode } from "./invisible-detection-mode.mj
 export { default as LightDetectionMode } from "./light-detection-mode.mjs";
 export { default as ScentDetectionMode } from "./scent-detection-mode.mjs";
 export { default as SoundDetectionMode } from "./sound-detection-mode.mjs";
-export { default as SpectralDetectionMode } from "./spectral-detection-mode.mjs";
 export { default as TrueSightDetectionMode } from "./true-sight-detection-mode.mjs";

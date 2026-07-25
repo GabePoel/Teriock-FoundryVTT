@@ -15,7 +15,6 @@ export default class EtherealFilter extends AbstractBaseFilter {
   /** @override */
   static _createFragmentShader() {
     return `
-    precision mediump float;
     varying vec2 vTextureCoord;
 
     uniform sampler2D uSampler;
@@ -70,7 +69,6 @@ export default class EtherealFilter extends AbstractBaseFilter {
   /** @override */
   static _createVertexShader() {
     return `
-    precision mediump float;
     attribute vec2 aVertexPosition;
     uniform mat3 projectionMatrix;
     uniform vec4 inputSize;
@@ -90,8 +88,11 @@ export default class EtherealFilter extends AbstractBaseFilter {
     const uniforms = { ...this.defaultUniforms, ...initialUniforms };
     const filter = new this(this._createVertexShader(), this._createFragmentShader(), uniforms);
     filter.blendMode = PIXI.BLEND_MODES.NORMAL;
+    filter.#blur = uniforms.blur;
     return filter;
   }
+
+  #blur = 10;
 
   animated = true;
 
@@ -99,7 +100,12 @@ export default class EtherealFilter extends AbstractBaseFilter {
 
   /** @inheritDoc */
   apply(filterManager, input, output, clear) {
-    if (this.animated && !game.canvas.photosensitiveMode) { this.uniforms.time = game.canvas.app.ticker.lastTime; }
+    const blur = this.#blur * game.canvas.stage.scale.x;
+    this.uniforms.blur = blur;
+    this.padding = blur;
+    let time = 0;
+    if (this.animated && !game.canvas.photosensitiveMode) { time = game.canvas.app.ticker.lastTime; }
+    this.uniforms.time = time;
     filterManager.applyFilter(this, input, output, clear);
   }
 }

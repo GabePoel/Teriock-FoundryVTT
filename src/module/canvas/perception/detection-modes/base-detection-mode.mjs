@@ -3,8 +3,8 @@ const { Token } = foundry.canvas.placeables;
 const { fields } = foundry.data;
 
 /**
- * @property {boolean} ethereal - Can this detect ethereal creatures from material?
- * @property {boolean} material - Can this detect material creatures from ethereal?
+ * @property {boolean} ethereal - Can this detect Ethereal creatures from Material?
+ * @property {boolean} material - Can this detect Material creatures from Ethereal?
  * @property {boolean} hidden - Can this detect hidden creatures?
  */
 export default class BaseDetectionMode extends DetectionMode {
