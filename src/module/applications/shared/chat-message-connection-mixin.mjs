@@ -55,7 +55,6 @@ export default function ChatMessageConnectionMixin(Base) {
     static async #selectTarget(event, target) {
       /** @type {TeriockToken} */
       const token = fromUuidSync(target.dataset.tokenUuid)?.object;
-      if (!token?.isVisible) { return; }
       if (event.button === 0 && token.isOwner) {
         const selected = new Set(game.canvas?.tokens.controlled ?? []);
         if (selected.has(token)) { token.release(); }

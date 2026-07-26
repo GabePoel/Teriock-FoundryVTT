@@ -57,7 +57,7 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
   async _prepareContext(options = {}) {
     const speakerToken = this.document.speakerToken;
     return {
-      hasSpeakerInteraction: Boolean(speakerToken?.visible || this.document.speakerActor?.visible),
+      hasSpeakerInteraction: Boolean(speakerToken || this.document.speakerActor?.visible),
       isContentVisible: this.document.isContentVisible,
       speakerImg: this.document.speakerImg,
       speakerToken,

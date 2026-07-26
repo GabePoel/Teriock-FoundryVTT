@@ -17,6 +17,7 @@ export default function BaseApplicationMixin(Base) {
         toggleCollapseRightClick: { buttons: [2], handler: this._onToggleCollapse },
       },
       classes: ["teriock"],
+      teriock: { doubleClickDelay: 250 },
     };
 
     /**
@@ -72,6 +73,12 @@ export default function BaseApplicationMixin(Base) {
     #detached = this.window?.windowId === this.id;
 
     /**
+     * Timeout ID of a click that is being held back in case it becomes a double click.
+     * @type {number}
+     */
+    #pendingClick;
+
+    /**
      * Apply a tracked collapse to every `.collapsible` element and every toggle control (`[data-collapsible-target]`)
      * sharing the same `collapsible-id` so they stay in sync.
      * @param {string} collapsibleId
@@ -86,6 +93,36 @@ export default function BaseApplicationMixin(Base) {
       for (const control of findMatchingElements(root, `[data-collapsible-target="${collapsibleId}"]`)) {
         control.classList.toggle("collapse-toggle-open", !collapsed);
       }
+    }
+
+    /**
+     * Pause a click on an element with both `data-action` and `data-double`.
+     * @param {PointerEvent} event
+     */
+    #onClickCapture(event) {
+      if (!event.isTrusted || event.button !== 0) { return; }
+      const target = /** @type {HTMLElement} */ (event.target);
+      if (!target.closest?.("[data-action][data-double]")) { return; }
+      event.stopPropagation();
+      window.clearTimeout(this.#pendingClick);
+      if (event.detail > 1) { return; }
+      this.#pendingClick = window.setTimeout(
+        () => target.dispatchEvent(new PointerEvent("click", event)),
+        this.options.teriock?.doubleClickDelay,
+      );
+    }
+
+    /**
+     * Dispatch a double click to a registered `doubles` handler.
+     * @param {MouseEvent} event
+     */
+    #onDoubleClick(event) {
+      window.clearTimeout(this.#pendingClick);
+      const target = /** @type {HTMLElement} */ (event.target).closest("[data-double]");
+      if (!target || target.closest(".window-header")) { return; }
+      const handler = this.options.doubles?.[target.dataset.double];
+      if (handler) { handler.call(this, event, target); }
+      else { this._onDoubleClickAction(event, target); }
     }
 
     /**
@@ -108,19 +145,8 @@ export default function BaseApplicationMixin(Base) {
     _attachFrameListeners() {
       super._attachFrameListeners();
       this.element.addEventListener("keydown", this._onPressKey.bind(this));
-      this.element.addEventListener("dblclick", this._dispatchDoubleClick.bind(this));
-    }
-
-    /**
-     * Dispatch a double click to a registered `doubles` handler.
-     * @param {MouseEvent} event
-     */
-    _dispatchDoubleClick(event) {
-      const target = /** @type {HTMLElement} */ (event.target).closest("[data-double]");
-      if (!target || target.closest(".window-header")) { return; }
-      const handler = this.options.doubles?.[target.dataset.double];
-      if (handler) { handler.call(this, event, target); }
-      else { this._onDoubleClickAction(event, target); }
+      this.element.addEventListener("dblclick", this.#onDoubleClick.bind(this));
+      this.element.addEventListener("click", this.#onClickCapture.bind(this), { capture: true });
     }
 
     /**

@@ -19,7 +19,14 @@ declare global {
        * handler, mirroring Foundry's `data-action` / `actions` pattern.
        */
       doubles?: Partial<Record<string, ApplicationDoubleAction>>;
-      teriock?: { maximizeOnDragEnter?: boolean, minimizeOnDragStart?: boolean };
+      teriock?: { 
+        /** Time to wait before firing a single click action if a double click is not detected. */
+        doubleClickDelay?: number; 
+        /** If this should maximize when something is dragged into it. */
+        maximizeOnDragEnter?: boolean, 
+        /** If this should minimize when something is dragged out of it. */
+        minimizeOnDragStart?: boolean, 
+      };
     };
 
     export type DragDropConfiguration = { dragDrop: Teriock.Application.DragDropSelector[] };
