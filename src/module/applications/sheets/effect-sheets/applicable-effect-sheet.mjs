@@ -12,7 +12,6 @@ const { ActiveEffectConfig } = foundry.applications.sheets;
  * @extends {ActiveEffectConfig}
  * @mixes BaseDocumentSheet
  * @mixes SystemSettingsButtonSheet
- * @mixes ConnectionSheet
  * @mixes DocumentCreationSheet
  * @mixes DragDropSheet
  * @mixes FieldsSheet
@@ -26,7 +25,6 @@ export default class ApplicableEffectSheet
     ActiveEffectConfig,
     BaseDocumentSheetMixin,
     sheetMixins.SystemSettingsButtonSheetMixin,
-    sheetMixins.ConnectionSheetMixin,
     sheetMixins.DocumentCreationSheetMixin,
     sheetMixins.DragDropSheetMixin,
     sheetMixins.FieldsSheetMixin,

@@ -94,7 +94,7 @@ export default class BaseUnitModel extends BaseDataModel {
    */
   get abbreviation() {
     if (this.unitType === "finite") {
-      return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.formula, unit: this.symbol });
+      return _loc("TERIOCK.MODELS.BaseUnit.FORMAT", { number: this.formula, unit: _loc(this.symbol) });
     }
     return this.text;
   }

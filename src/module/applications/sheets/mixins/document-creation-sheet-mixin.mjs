@@ -49,15 +49,15 @@ export default function DocumentCreationSheetMixin(Base) {
             onClick: () => this._createChild(type),
             visible: target => parseAddTypes(target).includes(type) && this.isEditable,
           }));
-        this._connectContextMenu(".add-button[data-types]:not([data-type])", entries(), {
-          attach: true,
+        this._createContextMenu(entries, ".add-button[data-types]:not([data-type])", {
           eventName: "click",
           fixed: true,
+          relative: "target",
         });
-        this._connectContextMenu(".add-button[data-types][data-type]", entries(), {
-          attach: true,
+        this._createContextMenu(entries, ".add-button[data-types][data-type]", {
           eventName: "contextmenu",
           fixed: true,
+          relative: "target",
         });
       }
 

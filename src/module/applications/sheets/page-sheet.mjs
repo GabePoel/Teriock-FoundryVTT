@@ -1,7 +1,6 @@
 import { mixClasses } from "../../helpers/construction.mjs";
 import { BaseDocumentSheetMixin } from "../api/_module.mjs";
 import {
-  ConnectionSheetMixin,
   DisplaySheetMixin,
   DragDropSheetMixin,
   LockingSheetMixin,
@@ -17,7 +16,6 @@ const { JournalEntryPageProseMirrorSheet } = foundry.applications.sheets.journal
  * @mixes BaseDocumentSheet
  * @mixes DisplaySheet
  * @mixes SystemSettingsButtonSheet
- * @mixes ConnectionSheet
  * @mixes DragDropSheet
  * @mixes LockingSheet
  * @mixes MechanicsSheet
@@ -30,7 +28,6 @@ export default class TeriockPageSheet
     BaseDocumentSheetMixin,
     DisplaySheetMixin,
     SystemSettingsButtonSheetMixin,
-    ConnectionSheetMixin,
     DragDropSheetMixin,
     LockingSheetMixin,
     MechanicsSheetMixin,

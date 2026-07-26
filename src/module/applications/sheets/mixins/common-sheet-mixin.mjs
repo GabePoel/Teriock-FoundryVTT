@@ -1,6 +1,5 @@
 import { mixClasses } from "../../../helpers/construction.mjs";
 import { TeriockTextEditor } from "../../ux/_module.mjs";
-import ConnectionSheetMixin from "./connection-sheet-mixin.mjs";
 import DocumentCreationSheetMixin from "./document-creation-sheet-mixin.mjs";
 import DragDropSheetMixin from "./drag-drop-sheet-mixin.mjs";
 import FieldsSheetMixin from "./fields-sheet-mixin.mjs";
@@ -19,7 +18,6 @@ export default function CommonSheetMixin(Base) {
   return (
     /**
      * @extends {TeriockDocumentSheet}
-     * @mixes ConnectionSheet
      * @mixes DocumentCreationSheet
      * @mixes DragDropSheet
      * @mixes FieldsSheet
@@ -35,7 +33,6 @@ export default function CommonSheetMixin(Base) {
       extends mixClasses(
         Base,
         SystemSettingsButtonSheetMixin,
-        ConnectionSheetMixin,
         DragDropSheetMixin,
         DocumentCreationSheetMixin,
         FieldsSheetMixin,

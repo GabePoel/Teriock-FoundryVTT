@@ -59,8 +59,8 @@ export default function PlayableActorSheetSidebarPart(Base) {
       async _onRender(context, options) {
         await super._onRender(context, options);
 
-        this._connectContextMenu(".actor-piercing-box", this.#piercingContextMenu());
-        this._connectContextMenu(".actor-basics", this.#scalingContextMenu(), {
+        this._createContextMenu(this.#piercingContextMenu, ".actor-piercing-box", { eventName: "click" });
+        this._createContextMenu(this.#scalingContextMenu, ".actor-basics", {
           eventName: "contextmenu",
           forceDirection: "down",
         });

@@ -36,12 +36,8 @@ export default class TeriockContextMenu extends ContextMenu {
       if (item.icon && !item.icon.includes("<i")) { item.icon = makeIcon(item.icon, "contextMenu"); }
     }
     super(container, selector, menuItems, options);
-    this.#attach = options.attach ?? false;
     this.#forceDirection = options.forceDirection ?? null;
   }
-
-  /** @type {boolean} */
-  #attach;
 
   /** @type {"up"|"down"|null} */
   #forceDirection;
@@ -53,12 +49,6 @@ export default class TeriockContextMenu extends ContextMenu {
   get expandUp() {
     if (!this.#forceDirection) { return super.expandUp; }
     return this.#forceDirection === "up";
-  }
-
-  /** @inheritDoc */
-  _setFixedPosition(menu, target, { event } = {}) {
-    if (this.#attach) { return super._setFixedPosition(menu, target); }
-    return super._setFixedPosition(menu, target, { event });
   }
 
   /** @inheritDoc */

@@ -67,6 +67,12 @@ export default function BaseApplicationMixin(Base) {
     #collapsibleElements = new Map();
 
     /**
+     * Internal map of context menus so they can safely be called in `_onRender`.
+     * @type {Map<string, TeriockContextMenu>}
+     */
+    #contextMenus = new Map();
+
+    /**
      * Internal tracking of detached state.
      * @type {boolean}
      */
@@ -147,6 +153,18 @@ export default function BaseApplicationMixin(Base) {
       this.element.addEventListener("keydown", this._onPressKey.bind(this));
       this.element.addEventListener("dblclick", this.#onDoubleClick.bind(this));
       this.element.addEventListener("click", this.#onClickCapture.bind(this), { capture: true });
+    }
+
+    /**
+     * @inheritDoc
+     * @returns {TeriockContextMenu|null}
+     */
+    _createContextMenu(handler, selector, options = {}) {
+      const key = `${options.eventName ?? "contextmenu"}:${selector}`;
+      if (this.#contextMenus.has(key)) { return this.#contextMenus.get(key); }
+      const menu = super._createContextMenu(handler, selector, options);
+      if (menu) { this.#contextMenus.set(key, menu); }
+      return menu;
     }
 
     /**

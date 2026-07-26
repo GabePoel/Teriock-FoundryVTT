@@ -19,13 +19,13 @@ declare global {
        * handler, mirroring Foundry's `data-action` / `actions` pattern.
        */
       doubles?: Partial<Record<string, ApplicationDoubleAction>>;
-      teriock?: { 
+      teriock?: {
         /** Time to wait before firing a single click action if a double click is not detected. */
-        doubleClickDelay?: number; 
+        doubleClickDelay?: number;
         /** If this should maximize when something is dragged into it. */
-        maximizeOnDragEnter?: boolean, 
+        maximizeOnDragEnter?: boolean;
         /** If this should minimize when something is dragged out of it. */
-        minimizeOnDragStart?: boolean, 
+        minimizeOnDragStart?: boolean;
       };
     };
 

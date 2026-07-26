@@ -185,27 +185,31 @@ export default function MechanicsSheetMixin(Base) {
       /** @inheritDoc */
       async _onRender(context, options) {
         await super._onRender(context, options);
-        this._connectContextMenu(".teriock-mechanic-header", [{
-          icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
-          label: _loc("SIDEBAR.Duplicate"),
-          onClick: async (_ev, el) => {
-            const uuid = el.dataset.uuid;
-            if (!uuid) { return; }
-            const mechanic = await fromUuid(uuid);
-            await mechanic?.duplicate();
-          },
-          visible: () => this.isEditable,
-        }, {
-          icon: makeIcon(TERIOCK.display.icons.ui.delete),
-          label: _loc("COMMON.Delete"),
-          onClick: async (_ev, el) => {
-            const uuid = el.dataset.uuid;
-            if (!uuid) { return; }
-            const mechanic = await fromUuid(uuid);
-            await mechanic?.deleteDialog({ modal: true });
-          },
-          visible: () => this.isEditable,
-        }], { eventName: "contextmenu", fixed: true, jQuery: false });
+        this._createContextMenu(
+          () => [{
+            icon: makeIcon(TERIOCK.display.icons.ui.duplicate),
+            label: _loc("SIDEBAR.Duplicate"),
+            onClick: async (_ev, el) => {
+              const uuid = el.dataset.uuid;
+              if (!uuid) { return; }
+              const mechanic = await fromUuid(uuid);
+              await mechanic?.duplicate();
+            },
+            visible: () => this.isEditable,
+          }, {
+            icon: makeIcon(TERIOCK.display.icons.ui.delete),
+            label: _loc("COMMON.Delete"),
+            onClick: async (_ev, el) => {
+              const uuid = el.dataset.uuid;
+              if (!uuid) { return; }
+              const mechanic = await fromUuid(uuid);
+              await mechanic?.deleteDialog({ modal: true });
+            },
+            visible: () => this.isEditable,
+          }],
+          ".teriock-mechanic-header",
+          { eventName: "contextmenu", fixed: true, jQuery: false },
+        );
       }
 
       /** @inheritDoc */
