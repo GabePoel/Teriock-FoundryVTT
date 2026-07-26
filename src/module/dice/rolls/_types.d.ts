@@ -1,8 +1,7 @@
 import { RollOptions } from "@client/dice/_types.mjs";
 
 import { TeriockToken } from "../../canvas/placeables/_module.mjs";
-import { TeriockActor, TeriockTokenDocument } from "../../documents/_module.mjs";
-import { BaseRoll } from "./_module.mjs";
+import { TeriockActor, TeriockChatMessage, TeriockTokenDocument } from "../../documents/_module.mjs";
 
 declare global {
   namespace Teriock.Dice {
@@ -20,10 +19,8 @@ declare global {
     type RawDieTarget = DieTarget | TeriockActor | TeriockToken | TeriockTokenDocument;
 
     type BaseRollOptions = RollOptions & {
-      _id?: ID<BaseRoll>;
       comparison?: Teriock.Keys.Comparison;
       hideRoll: boolean;
-      keepId?: boolean;
       styles: DieStyles;
       targets: DieTarget[];
       threshold?: number | null;
@@ -32,5 +29,7 @@ declare global {
     type ImpactRollOptions = BaseRollOptions & { impact: Teriock.Keys.Impact };
 
     type ThresholdRollOptions = BaseRollOptions & { critFailureThreshold: number, critSuccessThreshold: number };
+
+    type RollContextMenuConfig = { message?: TeriockChatMessage, messageData?: object, target?: HTMLElement };
   }
 }

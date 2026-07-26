@@ -1,4 +1,3 @@
-import { TeriockContextMenu } from "../../applications/ux/_module.mjs";
 import { TeriockChatMessage } from "../../documents/_module.mjs";
 import { makeIcon } from "../../helpers/icon.mjs";
 import { systemPath } from "../../helpers/path.mjs";
@@ -9,7 +8,6 @@ const { Roll } = foundry.dice;
 
 /**
  * @inheritDoc
- * @property {ID<BaseRoll>} id
  * @property {Teriock.Dice.BaseRollOptions} options
  */
 export default class BaseRoll extends Roll {
@@ -128,18 +126,11 @@ export default class BaseRoll extends Roll {
   constructor(formula, data, options = {}) {
     if (!formula) { formula = "0"; }
     super(formula, data, options);
+    this.id = foundry.utils.randomID();
     this.options = foundry.utils.mergeObject(this.constructor.defaultOptions, options);
 
     // If we don't do this, then the targets will be raw classes instead of JSON parsable objects
     this.targets = this.options.targets;
-
-    // Ensure roll has an ID that can be referenced in chat messages
-    if (this.options._id && this.options.keepId) {
-      delete this.options.keepId;
-      this._id = this.options._id;
-    } else {
-      this._id = foundry.utils.randomID();
-    }
   }
 
   /**
@@ -234,14 +225,6 @@ export default class BaseRoll extends Roll {
     this.options.hideRoll = Boolean(hideRoll);
   }
 
-  /**
-   * The ID for this roll.
-   * @returns {UUID<BaseRoll>}
-   */
-  get id() {
-    return this._id;
-  }
-
   /** @returns {Teriock.Dice.DieStyles} */
   get styles() {
     return foundry.utils.deepClone(this.options.styles ?? this.constructor.defaultOptions.styles);
@@ -299,27 +282,27 @@ export default class BaseRoll extends Roll {
 
   /**
    * Context menu entries for the roll formula.
-   * @param {object} [options]
+   * @param {Teriock.Dice.RollContextMenuConfig} [config]
    * @returns {ContextMenuEntry[]}
    */
-  _getFormulaContextOptions(options = {}) {
+  _getFormulaContextOptions(config = {}) {
     return [{
       icon: makeIcon(TERIOCK.display.icons.roll.reroll, "contextMenu"),
       label: "TERIOCK.ROLLS.Base.reroll",
       onClick: async () => {
-        const reroll = this.clone();
-        await reroll.evaluate();
-        await reroll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
+        const newRoll = this.clone();
+        await newRoll.evaluate();
+        await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
     }];
   }
 
   /**
    * Context menu entries for the roll total.
-   * @param {object} [_options]
+   * @param {Teriock.Dice.RollContextMenuConfig} [_config]
    * @returns {ContextMenuEntry[]}
    */
-  _getTotalContextOptions(_options = {}) {
+  _getTotalContextOptions(_config = {}) {
     return [];
   }
 
@@ -344,22 +327,6 @@ export default class BaseRoll extends Roll {
       context.styles.total.icon = TERIOCK.display.icons.ui.disable;
     }
     return context;
-  }
-
-  /**
-   * Bind context menu entries to some HTML element.
-   * @param {HTMLElement} element
-   * @param {object} [options]
-   */
-  bindContextMenus(element, options = {}) {
-    new TeriockContextMenu(element, `.dice-formula[data-id="${this.id}"]`, this._getFormulaContextOptions(options), {
-      fixed: true,
-      jQuery: false,
-    });
-    new TeriockContextMenu(element, `.dice-total[data-id="${this.id}"]`, this._getTotalContextOptions(options), {
-      fixed: true,
-      jQuery: false,
-    });
   }
 
   /**

@@ -75,23 +75,45 @@ export default function ChatMessageConnectionMixin(Base) {
      * Connect the context menu that opens openable chat message images.
      */
     #connectImageContextMenu() {
-      new TeriockContextMenu(this.element, "img", [{
-        icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
-        label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
-        onClick: async (_ev, target) => {
-          await new ImagePopout({
-            src: target.getAttribute("src"),
-            window: { title: target.getAttribute("alt") || "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
-          }).render(true);
-        },
-        visible: target => {
-          const src = target.getAttribute("src");
-          return src
-            && src.length
-            && target.getAttribute("data-openable")
-            && (game.user.isGM || game.settings.get("teriock", "openChatImages"));
-        },
-      }], { eventName: "contextmenu", fixed: true, jQuery: false });
+      this._createContextMenu(
+        () => [{
+          icon: makeIcon(TERIOCK.display.icons.ui.image, "contextMenu"),
+          label: "TERIOCK.SYSTEMS.Child.MENU.openImage",
+          onClick: async (_ev, target) => {
+            await new ImagePopout({
+              src: target.getAttribute("src"),
+              window: { title: target.getAttribute("alt") || "TERIOCK.SYSTEMS.Child.MENU.imagePreview" },
+            }).render(true);
+          },
+          visible: target => {
+            const src = target.getAttribute("src");
+            return src
+              && src.length
+              && target.getAttribute("data-openable")
+              && (game.user.isGM || game.settings.get("teriock", "openChatImages"));
+          },
+        }],
+        "img",
+        { eventName: "contextmenu", fixed: true },
+      );
+    }
+
+    /**
+     * Connect the context menus for roll formulas and totals.
+     */
+    #connectRollContextMenus() {
+      const resolve = this._resolveRoll.bind(this);
+      const connect = (selector, getEntries) =>
+        new TeriockContextMenu(this.element, selector, [], {
+          fixed: true,
+          jQuery: false,
+          onOpen(target) {
+            const resolved = resolve(target);
+            this.menuItems = resolved ? getEntries(resolved) : [];
+          },
+        });
+      connect(".dice-formula[data-id]", ({ config, roll }) => roll._getFormulaContextOptions(config));
+      connect(".dice-total[data-id]", ({ config, roll }) => roll._getTotalContextOptions(config));
     }
 
     /**
@@ -112,6 +134,19 @@ export default function ChatMessageConnectionMixin(Base) {
       super._attachFrameListeners();
       this.element.addEventListener("contextmenu", this.#suppressContextMenu.bind(this));
       this.#connectImageContextMenu();
+      this.#connectRollContextMenus();
+    }
+
+    /**
+     * Resolve a roll from its ID in a chat message.
+     * @param {HTMLElement} target
+     * @returns {{ config: Teriock.Dice.RollContextMenuConfig, roll: BaseRoll }|null}
+     */
+    _resolveRoll(target) {
+      const message = game.messages.get(target.closest("[data-message-id]")?.dataset.messageId);
+      if (!message?.isContentVisible) { return null; }
+      const roll = message.rolls.find(roll => roll.id === target.dataset.id);
+      return roll ? { config: { message }, roll } : null;
     }
   }
 

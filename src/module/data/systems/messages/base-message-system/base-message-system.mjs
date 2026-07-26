@@ -29,11 +29,6 @@ export default class BaseMessageSystem extends mixClasses(TypeDataModel, systemM
   async _onRender(_context, options) {
     if (!options.element) { return; }
 
-    // Add roll context menus
-    if (this.document.isContentVisible) {
-      for (const roll of this.document.rolls) { roll.bindContextMenus(options.element); }
-    }
-
     // Connect target interactions
     options.element.querySelectorAll("[data-action='selectTarget']").forEach((el) => {
       el.addEventListener("pointerover", (ev) => {

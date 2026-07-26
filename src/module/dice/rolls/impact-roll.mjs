@@ -60,26 +60,26 @@ export default class ImpactRoll extends BaseRoll {
   }
 
   /** @inheritDoc */
-  _getFormulaContextOptions(options = {}) {
+  _getFormulaContextOptions(config = {}) {
     return [{
       icon: makeIcon(TERIOCK.display.icons.roll.boost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.boosts.single",
       onClick: async () => {
-        const boostedRoll = await this.boost(this.options);
-        await boostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
+        const newRoll = await this.boost(this.options);
+        await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
     }, {
       icon: makeIcon(TERIOCK.display.icons.roll.deboost, "contextMenu"),
       label: "TERIOCK.DIALOGS.Boost.FIELDS.deboosts.single",
       onClick: async () => {
-        const deboostedRoll = await this.deboost(this.options);
-        await deboostedRoll.toMessage(options.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
+        const newRoll = await this.deboost(this.options);
+        await newRoll.toMessage(config.messageData ?? { speaker: TeriockChatMessage.getSpeaker() });
       },
-    }, ...super._getFormulaContextOptions(options)];
+    }, ...super._getFormulaContextOptions(config)];
   }
 
   /** @inheritDoc */
-  _getTotalContextOptions(_options = {}) {
+  _getTotalContextOptions(_config = {}) {
     return [
       ...Object.entries(impactConfig).filter(([_k, v]) => !v?.hidden).map(([k, v]) => {
         return {
@@ -90,7 +90,7 @@ export default class ImpactRoll extends BaseRoll {
               .primaryAction(),
         };
       }),
-      ...super._getTotalContextOptions(_options),
+      ...super._getTotalContextOptions(_config),
     ];
   }
 
