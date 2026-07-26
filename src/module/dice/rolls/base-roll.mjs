@@ -62,11 +62,9 @@ export default class BaseRoll extends Roll {
    */
   static get defaultOptions() {
     return {
-      comparison: "gte",
       hideRoll: false,
       styles: { dice: { classes: [], icon: "", tooltip: "" }, total: { classes: [], icon: "", tooltip: "" } },
       targets: [],
-      threshold: null,
     };
   }
 
@@ -189,51 +187,6 @@ export default class BaseRoll extends Roll {
   }
 
   /**
-   * Whether this threshold has not been met.
-   * @returns {boolean}
-   */
-  get failure() {
-    return this.hasThreshold && !this.success;
-  }
-
-  /**
-   * Whether this has a threshold.
-   * @returns {boolean}
-   */
-  get hasThreshold() {
-    return typeof this.threshold === "number";
-  }
-
-  /**
-   * Whether this threshold has been met.
-   * @returns {boolean}
-   */
-  get success() {
-    if (this.hasThreshold) {
-      const comparisonFormula = `${this.options.comparison}(${this.total}, ${this.threshold})`;
-      const comparisonRoll = new BaseRoll(comparisonFormula, {});
-      comparisonRoll.evaluateSync();
-      return Boolean(comparisonRoll.total);
-    }
-    return false;
-  }
-
-  /** @returns {number|null} */
-  get threshold() {
-    if (["number", "string"].includes(typeof this.options.threshold)) {
-      if (typeof this.options.threshold === "string" && !this.options.threshold) { return null; }
-      const th = Number(this.options.threshold);
-      if (Number.isNumeric(th)) { return th; }
-    }
-    return null;
-  }
-
-  /** @param {number} threshold */
-  set threshold(threshold) {
-    this.options.threshold = threshold;
-  }
-
-  /**
    * Apply additional options based on the damage type. This allows for styled Dice So Nice integration.
    */
   async _applyDiceStyles() {
@@ -274,22 +227,11 @@ export default class BaseRoll extends Roll {
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
     Object.assign(context, {
-      hasThreshold: this.hasThreshold,
       hideRoll: this.options.hideRoll,
       id: this.id,
       styles: foundry.utils.deepClone(this.options.styles),
       targets: this.options.targets,
-      threshold: this.threshold,
     });
-    if (this.success) {
-      context.styles.total.classes.push("success");
-      context.styles.total.tooltip += _loc("TERIOCK.ROLLS.Base.success");
-      context.styles.total.icon = TERIOCK.display.icons.ui.enable;
-    } else if (this.failure) {
-      context.styles.total.classes.push("failure");
-      context.styles.total.tooltip += _loc("TERIOCK.ROLLS.Base.failure");
-      context.styles.total.icon = TERIOCK.display.icons.ui.disable;
-    }
     return context;
   }
 

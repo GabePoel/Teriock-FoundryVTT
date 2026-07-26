@@ -7,7 +7,6 @@ declare global {
       alt?: string;
       args?: string[];
       ctrl?: string;
-      flags?: Record<string, string>;
       formula?: boolean;
       icon: ((options: object) => string) | string;
       id: string;

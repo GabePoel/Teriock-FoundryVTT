@@ -18,17 +18,16 @@ declare global {
 
     type RawDieTarget = DieTarget | TeriockActor | TeriockToken | TeriockTokenDocument;
 
-    type BaseRollOptions = RollOptions & {
-      comparison?: Teriock.Keys.Comparison;
-      hideRoll: boolean;
-      styles: DieStyles;
-      targets: DieTarget[];
-      threshold?: number | null;
-    };
+    type BaseRollOptions = RollOptions & { hideRoll: boolean, styles: DieStyles, targets: DieTarget[] };
 
     type ImpactRollOptions = BaseRollOptions & { impact: Teriock.Keys.Impact };
 
-    type ThresholdRollOptions = BaseRollOptions & { critFailureThreshold: number, critSuccessThreshold: number };
+    type ThresholdRollOptions = BaseRollOptions & {
+      comparison?: Teriock.Keys.Comparison;
+      critFailureThreshold: number;
+      critSuccessThreshold: number;
+      threshold?: number | null;
+    };
 
     type RollContextMenuConfig = { message?: TeriockChatMessage, messageData?: object, target?: HTMLElement };
   }

@@ -7,7 +7,12 @@ export default class ThresholdRoll extends BaseRoll {
    * @returns {Teriock.Dice.ThresholdRollOptions}
    */
   static get defaultOptions() {
-    return Object.assign(super.defaultOptions, { critFailureThreshold: 1, critSuccessThreshold: 20 });
+    return Object.assign(super.defaultOptions, {
+      comparison: "gte",
+      critFailureThreshold: 1,
+      critSuccessThreshold: 20,
+      threshold: null,
+    });
   }
 
   /**
@@ -19,6 +24,15 @@ export default class ThresholdRoll extends BaseRoll {
     return Object.assign(super.parseEvent(event), {
       edge: Number(event?.altKey || false) - Number(event?.shiftKey || false),
     });
+  }
+
+  /**
+   * Whether the threshold has been met, ignoring crits.
+   * @returns {boolean}
+   */
+  get #thresholdMet() {
+    return this.hasThreshold
+      && BaseRoll.qualify(`${this.options.comparison}(${this.total}, ${this.options.threshold})`, {});
   }
 
   /**
@@ -37,19 +51,42 @@ export default class ThresholdRoll extends BaseRoll {
     return Boolean(this.dice.length) && this.dice[0].total >= this.options.critSuccessThreshold;
   }
 
-  /** @inheritDoc */
+  /**
+   * Whether this threshold has not been met.
+   * @returns {boolean}
+   */
   get failure() {
-    return super.failure || this.critFailure;
+    return (this.hasThreshold && !this.success) || this.critFailure;
   }
 
-  /** @inheritDoc */
+  /**
+   * Whether this has a threshold.
+   * @returns {boolean}
+   */
+  get hasThreshold() {
+    return Number.isFinite(this.options.threshold);
+  }
+
+  /**
+   * Whether this threshold has been met.
+   * @returns {boolean}
+   */
   get success() {
-    return super.success || this.critSuccess;
+    return this.#thresholdMet || this.critSuccess;
   }
 
   /** @inheritDoc */
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
+    if (this.success) {
+      context.styles.total.classes.push("success");
+      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.success");
+      context.styles.total.icon = TERIOCK.display.icons.ui.enable;
+    } else if (this.failure) {
+      context.styles.total.classes.push("failure");
+      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.failure");
+      context.styles.total.icon = TERIOCK.display.icons.ui.disable;
+    }
     if (this.critSuccess) {
       context.styles.total.classes.push("crit-success");
       context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.critSuccess");

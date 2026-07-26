@@ -1,8 +1,4 @@
-export const thresholdCommand = {
-  alt: "advantage",
-  flags: { a: "advantage", adv: "advantage", d: "disadvantage", dc: "threshold", dis: "disadvantage" },
-  shift: "disadvantage",
-};
+export const thresholdCommand = { alt: "advantage", shift: "disadvantage" };
 
 export const formulaCommand = { args: ["formula"], formula: true };
 
