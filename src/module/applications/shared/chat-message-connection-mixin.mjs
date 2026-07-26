@@ -35,7 +35,7 @@ export default function ChatMessageConnectionMixin(Base) {
     }
 
     /**
-     * Open a roll target's actor sheet on double-click.
+     * Open a roll target's actor sheet.
      * @this {ChatMessageConnection}
      * @param {MouseEvent} _event
      * @param {HTMLElement} target
@@ -47,7 +47,7 @@ export default function ChatMessageConnectionMixin(Base) {
     }
 
     /**
-     * Control (left-click) or release (right-click) the token for a roll target.
+     * Control/release a token or pan to it.
      * @this {ChatMessageConnection}
      * @param {PointerEvent} event
      * @param {HTMLElement} target
@@ -59,7 +59,7 @@ export default function ChatMessageConnectionMixin(Base) {
         const selected = new Set(game.canvas?.tokens.controlled ?? []);
         if (selected.has(token)) { token.release(); }
         else { token.control({ releaseOthers: !event.shiftKey }); }
-      } else if (event.button === 2) { canvas.animatePan(token.center); }
+      } else if (event.button === 2 && token.isOwner || token.isVisible) { canvas.animatePan(token.center); }
     }
 
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
