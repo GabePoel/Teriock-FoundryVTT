@@ -1,4 +1,4 @@
-import { cleanBars } from "../../helpers/panel.mjs";
+import { cleanBars, wrapPanelTables } from "../../helpers/panel.mjs";
 import { parseIdentifier } from "../../helpers/utils.mjs";
 
 const { TextEditor } = foundry.applications.ux;
@@ -53,11 +53,17 @@ export default class TeriockTextEditor extends TextEditor {
    * Enrich all the blocks within a panel.
    * @param {Teriock.Panels.PanelParts} panel
    * @param {object} [options]
+   * @param {boolean} [options.collapseTables=true]
    * @returns {Promise<Teriock.Panels.PanelParts>}
    */
   static async enrichPanel(panel, options = {}) {
+    const { collapseTables = true } = options;
     if (panel.bars) { panel.bars = cleanBars(panel.bars); }
-    await Promise.all((panel.blocks ?? []).map(async (b) => b.text = await this.enrichHTML(b.text, options)));
+    const panelId = panel._id || foundry.utils.randomID(16);
+    await Promise.all((panel.blocks ?? []).map(async (b, i) => {
+      b.text = await this.enrichHTML(b.text, options);
+      b.text = wrapPanelTables(b.text, `panel-${panelId}-block-${i}`, { collapsed: collapseTables });
+    }));
     for (const association of panel.associations ?? []) {
       for (const card of association.cards ?? []) {
         if (card.uuid && card.makeTooltip) { card.tooltip = foundry.utils.escapeHTML(this.loadingPanelHTML); }

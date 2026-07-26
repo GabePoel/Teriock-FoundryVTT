@@ -6,34 +6,6 @@
   gap: 8px;
 }
 
-[role="tooltip"]:not(.teriock-rich-tooltip) {
-  .teriock-panel {
-    padding: 0;
-    --panel-padding: 0;
-  }
-}
-
-.teriock-rich-tooltip:not(.locked-tooltip) {
-  border: 1px solid var(--color-panel-edge);
-}
-
-[role="tooltip"]:not(.teriock-rich-tooltip), .teriock-rich-tooltip {
-  max-height: calc(100% - 200px);
-
-  .teriock-panel {
-    background: transparent;
-    border: none;
-
-    .teriock-panel-content {
-      margin-top: 4px;
-
-      &:has(.teriock-panel-spacer .teriock-panel-body):not(:has(.teriock-panel-body *)) {
-        margin-top: 0;
-      }
-    }
-  }
-}
-
 .teriock-panel.teriock-panel-no-background {
   background: transparent;
   border: none;
@@ -53,11 +25,7 @@
   .teriock-panel {
     border: none;
     overflow: auto;
-  }
-}
 
-.teriock.panel-application .window-content, .teriock-rich-tooltip {
-  .teriock-panel {
     .teriock-panel-header {
       background: none;
       cursor: unset;
@@ -76,22 +44,9 @@
       }
     }
 
-    .teriock-panel-body {
-      max-height: unset;
-    }
-
-    .teriock-panel-header-expander,
-    .teriock-panel-association-expander {
+    .teriock-panel-header-expander {
       display: none !important;
     }
-  }
-}
-
-.teriock-rich-tooltip {
-  .teriock-panel {
-    --panel-padding: 4px;
-    padding: 4px;
-    width: 300px;
   }
 }
 
@@ -275,12 +230,6 @@
     }
   }
 
-  .teriock-panel-association {
-    background: var(--color-panel-associations-background) !important;
-    border: 1px solid var(--color-panel-edge);
-    border-radius: 2px !important;
-  }
-
   .teriock-panel-bars {
     column-gap: 4px;
     columns: 200px 2;
@@ -368,16 +317,6 @@
         }
       }
 
-      :has(+ table) {
-        margin-bottom: 0;
-      }
-
-      // I might swap back to having roll tables visible in panels in the future do do a comment swap then.
-      //table:not(.roll-table-embed) {
-      table {
-        display: none;
-      }
-
       @include mixins.strip-edge-margins(3);
 
       img.interaction-routine {
@@ -386,15 +325,62 @@
     }
   }
 
-  .teriock-panel-association {
-    @include mixins.roll-style;
-    border-radius: 0.25em;
-    overflow: hidden;
-    user-select: none;
+  .teriock-panel-table {
+    @include mixins.panel-subsection;
+    margin-top: 0.25em;
+    min-width: 0;
 
-    * {
-      user-select: none;
+    .teriock-panel-table-content {
+      @include mixins.collapsible;
+      @include mixins.collapsible-open;
+      min-width: 0;
+
+      .teriock-panel-table-spacer {
+        border-top: 1px dotted var(--color-panel-associations-border);
+        min-width: 0;
+        overflow: hidden;
+        overflow-x: auto;
+
+        table {
+          margin: 0;
+          max-width: none;
+          min-width: 100%;
+          width: max-content;
+        }
+
+        .roll-table-embed {
+          thead {
+            border-bottom: 1px dotted var(--color-panel-associations-border);
+            border-left: 0px;
+            border-right: 0px;
+            border-top: 0px;
+          }
+        }
+      }
     }
+
+    @include mixins.panel-subsection-collapsed(".teriock-panel-table-content", ".teriock-panel-table-expander");
+
+    .teriock-panel-table-title {
+      @include mixins.text-subtle;
+      @include mixins.panel-subsection-toggle;
+
+      .teriock-panel-table-icon {
+        @include mixins.panel-subsection-toggle-icon;
+      }
+
+      .teriock-panel-table-name {
+        @include mixins.text-cutoff;
+      }
+
+      .teriock-panel-table-expander {
+        @include mixins.panel-subsection-toggle-expander;
+      }
+    }
+  }
+
+  .teriock-panel-association {
+    @include mixins.panel-subsection;
 
     .teriock-panel-association-card-container {
       @include mixins.collapsible;
@@ -405,15 +391,10 @@
       }
     }
 
-    &.collapsed {
-      .teriock-panel-association-card-container {
-        @include mixins.collapsible-closed;
-      }
-
-      .teriock-panel-association-expander {
-        transform: rotate(-90deg);
-      }
-    }
+    @include mixins.panel-subsection-collapsed(
+      ".teriock-panel-association-card-container",
+      ".teriock-panel-association-expander",
+    );
 
     .teriock-panel-association-row {
       align-items: center;
@@ -470,35 +451,14 @@
     }
 
     .teriock-panel-association-title {
-      cursor: pointer;
-      justify-content: center;
-      position: relative;
-      transition: 100ms;
-
-      &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-      }
-
-      &:active {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
+      @include mixins.panel-subsection-toggle;
 
       .teriock-panel-association-icon {
-        @include mixins.centralize;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        width: 2em;
+        @include mixins.panel-subsection-toggle-icon;
       }
 
       .teriock-panel-association-expander {
-        @include mixins.centralize;
-        height: 2em;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transition: 250ms;
-        width: 2em;
+        @include mixins.panel-subsection-toggle-expander;
       }
     }
   }

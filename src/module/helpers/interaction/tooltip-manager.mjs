@@ -1,4 +1,5 @@
 import TeriockTextEditor from "../../applications/ux/text-editor.mjs";
+import { toClass } from "../../helpers/string.mjs";
 
 const { TooltipManager } = foundry.helpers.interaction;
 
@@ -21,6 +22,19 @@ export default class TeriockTooltipManager extends TooltipManager {
    * @type {Set<string>}
    */
   #allowedDocumentNames;
+
+  /**
+   * Constrain a rich tooltip to the space below its current top so any content that expands doesn't go off screen.
+   * @param {HTMLElement} tooltip
+   */
+  #constrainTooltip(tooltip) {
+    const pad = this.constructor.TOOLTIP_MARGIN_PX;
+    const { innerHeight } = tooltip.ownerDocument.defaultView;
+    const top = tooltip.style.top ? parseFloat(tooltip.style.top) : tooltip.getBoundingClientRect().top;
+    if (!Number.isFinite(top)) { return; }
+    tooltip.style.maxHeight = `${Math.max(0, innerHeight - top - pad)}px`;
+    tooltip.style.overflowY = "auto";
+  }
 
   /**
    * Fetch a rich tooltip.
@@ -51,10 +65,30 @@ export default class TeriockTooltipManager extends TooltipManager {
     if ((element.dataset.tooltipUuid || element.dataset.tooltipIdentifier) && !element.dataset.tooltipFetched) {
       const uuid = element.dataset.tooltipUuid || game.teriock.identifiers.get(element.dataset.tooltipIdentifier);
       if (!this.#validateUuid(uuid)) { return; }
-      element.dataset.tooltipClass = TeriockTooltipManager.RICH_TOOLTIP_CLASS;
+      const tooltipClass = [element.dataset.tooltipClass];
+      tooltipClass.push(TeriockTooltipManager.RICH_TOOLTIP_CLASS);
+      element.dataset.tooltipClass = toClass(tooltipClass.filter(Boolean));
       element.dataset.tooltipHtml = TeriockTextEditor.loadingPanelHTML;
       this.#fetchRichTooltip(element);
     }
+  }
+
+  /**
+   * Toggle collapsible sections inside rich tooltips.
+   * @param {PointerEvent} event
+   */
+  #onToggleCollapse(event) {
+    const target = event.target?.closest?.(
+      `.${TeriockTooltipManager.RICH_TOOLTIP_CLASS} [data-action='toggleCollapse']:not(.teriock-panel-header)`,
+    );
+    if (!target) { return; }
+    const collapsible = target.closest(".collapsible[data-collapsible-id]");
+    if (!collapsible) { return; }
+    event.preventDefault();
+    event.stopPropagation();
+    const tooltip = target.closest(`.${TeriockTooltipManager.RICH_TOOLTIP_CLASS}`);
+    if (tooltip && collapsible.classList.contains("collapsed")) { this.#constrainTooltip(tooltip); }
+    collapsible.classList.toggle("collapsed");
   }
 
   /**
@@ -72,7 +106,7 @@ export default class TeriockTooltipManager extends TooltipManager {
   /** @inheritdoc */
   _setAnchor(direction) {
     const DIRECTIONS = TeriockTooltipManager.TOOLTIP_DIRECTIONS;
-    if (this.element.dataset.tooltipClass === TeriockTooltipManager.RICH_TOOLTIP_CLASS) {
+    if ((this.element.dataset.tooltipClass ?? "").includes(TeriockTooltipManager.RICH_TOOLTIP_CLASS)) {
       if (![DIRECTIONS.LEFT, DIRECTIONS.RIGHT].includes(direction)) { direction = DIRECTIONS.RIGHT; }
       const rect = this.element.getBoundingClientRect();
       const leftSpace = rect.left;
@@ -90,6 +124,7 @@ export default class TeriockTooltipManager extends TooltipManager {
   activateListeners(document, { _deprecated = false } = {}) {
     document ??= window.document;
     document.body.addEventListener("pointerenter", this.#onActivateRich.bind(this), { capture: true, passive: true });
+    document.body.addEventListener("click", this.#onToggleCollapse.bind(this), { capture: true });
     super.activateListeners(document, { _deprecated });
   }
 

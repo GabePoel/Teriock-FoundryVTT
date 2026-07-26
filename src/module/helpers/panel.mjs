@@ -1,3 +1,44 @@
+import { createElement } from "./html.mjs";
+import { makeIcon } from "./icon.mjs";
+
+/**
+ * Wrap bare tables in a collapsible HTML block.
+ * @param {string} html
+ * @param {string} rootId
+ * @param {object} [options]
+ * @param {boolean} [options.collapsed=true]
+ * @returns {string}
+ */
+export function wrapPanelTables(html, rootId, options = {}) {
+  const { collapsed = true } = options;
+  if (!html || !html.includes("<table")) { return html; }
+  const container = document.createElement("div");
+  container.innerHTML = html;
+  let index = 0;
+  for (const table of [...container.querySelectorAll("table")]) {
+    if (table.closest(".teriock-panel-table")) { continue; }
+    const wrap = createElement("div", {
+      className: `teriock-panel-table collapsible${collapsed ? " collapsed" : ""}`,
+      dataset: { collapsibleId: `${rootId}-table-${index++}` },
+    });
+    const title = createElement("div", {
+      className: "teriock-panel-table-title",
+      dataset: { action: "toggleCollapse" },
+      innerHTML: `
+        <div class="teriock-panel-table-icon">${makeIcon(TERIOCK.display.icons.document.table, "light")}</div>
+        <div class="teriock-panel-table-name">${_loc("TERIOCK.TERMS.Common.table")}</div>
+        <div class="teriock-panel-table-expander">${makeIcon(TERIOCK.display.icons.ui.menuOpen, "light")}</div>`,
+    });
+    const content = createElement("div", { className: "teriock-panel-table-content" });
+    const spacer = createElement("div", { className: "teriock-panel-table-spacer" });
+    table.replaceWith(wrap);
+    spacer.append(table);
+    content.append(spacer);
+    wrap.append(title, content);
+  }
+  return container.innerHTML;
+}
+
 /**
  * Quickly turn a {@link TeriockDocument} array into an association.
  * @param {TeriockDocument[]} docs
