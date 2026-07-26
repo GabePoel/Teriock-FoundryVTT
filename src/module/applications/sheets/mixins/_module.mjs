@@ -4,6 +4,7 @@ export { default as ConnectionSheetMixin } from "./connection-sheet-mixin.mjs";
 export { default as DisplaySheetMixin } from "./display-sheet-mixin.mjs";
 export { default as DocumentCreationSheetMixin } from "./document-creation-sheet-mixin.mjs";
 export { default as DragDropSheetMixin } from "./drag-drop-sheet-mixin.mjs";
+export { default as EtherealConfigMixin } from "./ethereal-config-mixin.mjs";
 export { default as FieldsSheetMixin } from "./fields-sheet-mixin.mjs";
 export { default as ImageEditingSheetMixin } from "./image-editing-sheet-mixin.mjs";
 export { default as InventoryManagementSheetMixin } from "./inventory-management-sheet-mixin.mjs";

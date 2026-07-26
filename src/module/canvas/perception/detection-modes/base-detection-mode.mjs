@@ -78,7 +78,7 @@ export default class BaseDetectionMode extends DetectionMode {
     if (this.isScent && !this._testStatuses("scent", src, tgt)) { return false; }
     if (this.isSight && !this._testStatuses("sight", src, tgt)) { return false; }
     if (this.isSound && !this._testStatuses("sound", src, tgt)) { return false; }
-    if (!this._testEthereal(src, tgt)) { return false; }
+    if (!this._testEthereal(src, tgt, target)) { return false; }
     return this._testHidden(src, tgt);
   }
 
@@ -86,13 +86,20 @@ export default class BaseDetectionMode extends DetectionMode {
    * Verify that a target is visible based on whether it and the source are Ethereal.
    * @param {TeriockTokenDocument} src
    * @param {TeriockTokenDocument} [tgt]
+   * @param {object|null} [target]
    * @returns {boolean}
    */
-  _testEthereal(src, tgt) {
+  _testEthereal(src, tgt, target) {
     if (tgt) {
       if (src.hasStatusEffect("ethereal") === tgt.hasStatusEffect("ethereal")) { return true; }
       else if (!src.hasStatusEffect("ethereal") && tgt.hasStatusEffect("ethereal")) { return this.ethereal; }
       else if (src.hasStatusEffect("ethereal") && !tgt.hasStatusEffect("ethereal")) { return this.material; }
+    } else if (target && ("isEthereal" in target)) {
+      const srcEthereal = src.hasStatusEffect("ethereal");
+      const tgtEthereal = Boolean(target.isEthereal);
+      if (srcEthereal === tgtEthereal) { return true; }
+      else if (!srcEthereal && tgtEthereal) { return this.ethereal; }
+      else if (srcEthereal && !tgtEthereal) { return this.material; }
     }
     return true;
   }

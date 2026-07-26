@@ -169,6 +169,7 @@ foundry.helpers.Hooks.once("init", function() {
   Object.assign(CONFIG.Canvas, {
     darknessSourceClass: canvas.sources.TeriockPointDarknessSource,
     detectionModes: { ...CONFIG.Canvas.detectionModes, ...canvas.perception.detectionModes },
+    doorControlClass: canvas.containers.TeriockDoorControl,
     lightSourceClass: canvas.sources.TeriockPointLightSource,
     visionModes: { ...CONFIG.Canvas.visionModes, ...canvas.perception.visionModes },
   });
@@ -278,6 +279,7 @@ foundry.helpers.Hooks.once("init", function() {
       defaultType: "script",
       documentClass: documents.TeriockMacro,
     },
+    Note: { documentClass: documents.TeriockNoteDocument, objectClass: canvas.placeables.TeriockNote },
     Region: { documentClass: documents.TeriockRegionDocument },
     RollTable: { collection: documents.collections.TeriockRollTables, documentClass: documents.TeriockRollTable },
     Scene: { collection: documents.collections.TeriockScenes, documentClass: documents.TeriockScene },
@@ -288,6 +290,7 @@ foundry.helpers.Hooks.once("init", function() {
       objectClass: canvas.placeables.TeriockToken,
     },
     User: { collection: documents.collections.TeriockUsers, documentClass: documents.TeriockUser },
+    Wall: { documentClass: documents.TeriockWallDocument },
   });
 
   // Configure Type Icons and Hints
@@ -314,6 +317,18 @@ foundry.helpers.Hooks.once("init", function() {
       cls: applications.sheets.TeriockAmbientLightConfig,
       doc: documents.TeriockAmbientLightDocument,
       label: "TERIOCK.SHEETS.AmbientLight.LABEL",
+    },
+    // Notes
+    {
+      cls: applications.sheets.TeriockNoteConfig,
+      doc: documents.TeriockNoteDocument,
+      label: "TERIOCK.SHEETS.Note.LABEL",
+    },
+    // Walls
+    {
+      cls: applications.sheets.TeriockWallConfig,
+      doc: documents.TeriockWallDocument,
+      label: "TERIOCK.SHEETS.Wall.LABEL",
     },
     // Actors
     {

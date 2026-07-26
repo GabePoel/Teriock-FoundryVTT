@@ -1,17 +1,17 @@
 import { mixClasses } from "../../helpers/construction.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
-const { AmbientLightDocument } = foundry.documents;
+const { WallDocument } = foundry.documents;
 
 /**
- * The Teriock AmbientLightDocument implementation.
- * @extends {AmbientLightDocument}
+ * The Teriock WallDocument implementation.
+ * @extends {WallDocument}
  * @extends {ClientDocument}
  * @mixes BaseDocument
  * @mixes EtherealDocument
  */
-export default class TeriockAmbientLightDocument extends mixClasses(
-  AmbientLightDocument,
+export default class TeriockWallDocument extends mixClasses(
+  WallDocument,
   documentMixins.BaseDocumentMixin,
   documentMixins.EtherealDocumentMixin,
 ) {}
