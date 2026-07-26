@@ -9,13 +9,13 @@
     <div class="teriock-block-display">
       <div class="tgrid g4 condition-toggle-container">
         {{#each TERIOCK.data.conditions as |condition key|}}
-          {{#if (not (eq key "conscious"))}}
+          {{#unless (eq key "conscious")}}
             <div
               class="
                 condition-toggle
-                {{#if (not (includes ../removableConditions key))}}
+                {{#unless (includes ../removableConditions key)}}
                   inactive
-                {{/if}}
+                {{/unless}}
               "
               data-action="toggleCondition"
               data-condition="{{{ key }}}"
@@ -33,7 +33,7 @@
               </div>
               <div class="condition-label tsubtle">{{ condition.name }}</div>
             </div>
-          {{/if}}
+          {{/unless}}
         {{/each}}
       </div>
     </div>

@@ -6,7 +6,7 @@ declare global {
     export type FancyDisplayField = {
       button?: string;
       choices?: Record<string, string>;
-      classes: string;
+      classes: string[];
       dataset: Record<string, string>;
       editable: boolean;
       label: string;
@@ -24,7 +24,7 @@ declare global {
     export type DisplayTag = string | Partial<FancyDisplayTag>;
 
     export type EnrichedDisplayField = {
-      classes: string;
+      classes: string[];
       editable: boolean;
       enriched: string;
       label: string;

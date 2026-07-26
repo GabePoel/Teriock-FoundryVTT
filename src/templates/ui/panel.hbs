@@ -1,13 +1,6 @@
 {{!-- Make sure to update `ApplicableEffectSystem.prepareDerivedData()` when this is changed. --}}
 <div class="teriock-panel collapsible es-container" data-collapsible-id='{{concat "panel-" _id}}'>
-  <div
-    class="
-      overlay
-      {{#if (exists classes)}}
-        {{ classes }}
-      {{/if}}
-    "
-  ></div>
+  <div class="overlay {{toClass classes}}"></div>
   <header class="teriock-panel-header" data-action="toggleCollapse">
     <div
       class="teriock-panel-image"
@@ -60,9 +53,7 @@
             <div
               class="
                 teriock-panel-block
-                {{#if (exists classes)}}
-                  {{ classes }}
-                {{/if}}
+                {{toClass classes}}
               "
             >
               <div class="teriock-panel-block-title">{{{ title }}}</div>

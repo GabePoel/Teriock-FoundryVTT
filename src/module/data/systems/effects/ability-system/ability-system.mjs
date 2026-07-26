@@ -201,7 +201,7 @@ export default class AbilitySystem
       this._displayFieldInstructions,
       {
         button: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.button"),
-        classes: TERIOCK.display.panel.classes.elderSorcery,
+        classes: [TERIOCK.display.panel.classes.elderSorcery],
         label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.elderSorceryIncant.elements", { elements: this.elementString }),
         path: "system.elderSorceryIncant",
         visible: this.elderSorcery,
@@ -238,17 +238,20 @@ export default class AbilitySystem
       fields.push(...["system.results.save", "system.results.fail"]);
     }
     fields.push(...[{
-      classes: this.competence.proficient ? "" : TERIOCK.display.panel.classes.faded,
+      classes: this.competence.proficient ? [] : [TERIOCK.display.panel.classes.faded],
       path: "system.overview.proficient",
-    }, { classes: this.competence.fluent ? "" : TERIOCK.display.panel.classes.faded, path: "system.overview.fluent" }]);
+    }, {
+      classes: this.competence.fluent ? [] : [TERIOCK.display.panel.classes.faded],
+      path: "system.overview.fluent",
+    }]);
     fields.push(...[
       "system.heightened",
       "system.endCondition",
-      { classes: TERIOCK.display.panel.classes.derived, editable: false, path: "system.grantOnlyText" },
-      { classes: TERIOCK.display.panel.classes.derived, editable: false, path: "system.grantUseText" },
-      { classes: TERIOCK.display.panel.classes.derived, editable: false, path: "system.consumeSourceText" },
+      { classes: [TERIOCK.display.panel.classes.derived], editable: false, path: "system.grantOnlyText" },
+      { classes: [TERIOCK.display.panel.classes.derived], editable: false, path: "system.grantUseText" },
+      { classes: [TERIOCK.display.panel.classes.derived], editable: false, path: "system.consumeSourceText" },
       {
-        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
+        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable],
         dataset: {
           icon: TERIOCK.display.icons.ui.numerical,
           paths: "system.upgrades.score.attribute system.upgrades.score.value",
@@ -258,7 +261,7 @@ export default class AbilitySystem
         path: "system.upgrades.score.text",
       },
       {
-        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable].join(" "),
+        classes: [TERIOCK.display.panel.classes.derived, TERIOCK.display.panel.classes.editable],
         dataset: {
           icon: TERIOCK.display.icons.competence.fluent,
           paths: "system.upgrades.competence.attribute system.upgrades.competence.value",

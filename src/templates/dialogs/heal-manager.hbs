@@ -20,15 +20,15 @@
     <legend>{{localize "TERIOCK.TERMS.Common.hacks"}}</legend>
     {{> "teriock/sheets/actors/playable/parts/hack-box"}}
   </fieldset>
-  {{#if (not noDice)}}
+  {{#unless noDice}}
     <fieldset class="stat-manager-dice">
       <legend>{{localize "TERIOCK.SYSTEMS.StatGiver.FIELDS.statDice.hp.label"}}</legend>
       {{> "teriock/ui/stat-dice"
         dice=system.hp.dice
       }}
     </fieldset>
-  {{/if}}
-  {{#if (not noDice)}}
+  {{/unless}}
+  {{#unless noDice}}
     <div class="standard-form teriock-form-container">
       {{formGroup
         consumeStatDiceField
@@ -49,5 +49,5 @@
         name="state.substitution"
       }}
     </div>
-  {{/if}}
+  {{/unless}}
 </div>

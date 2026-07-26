@@ -27,7 +27,7 @@ export default class TipsMenu extends BaseMenu {
         context.fields = this.createSettingFields(settings.suppression);
         for (const field of context.fields) {
           if (field.name === "suppressionMessageTypes" || field.name === "suppressionMessages") {
-            field.classes = "stacked";
+            field.stacked = true;
           }
         }
         context.legend = "TERIOCK.MENUS.Tips.parts.suppression";
@@ -35,7 +35,7 @@ export default class TipsMenu extends BaseMenu {
       case "error":
         context.fields = this.createSettingFields(settings.error);
         for (const field of context.fields) {
-          if (field.name === "errorMessages") { field.classes = "stacked"; }
+          if (field.name === "errorMessages") { field.stacked = true; }
         }
         context.legend = "TERIOCK.MENUS.Tips.parts.error";
         break;

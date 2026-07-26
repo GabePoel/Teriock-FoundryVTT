@@ -13,7 +13,7 @@ export function fancifyFields(displayFields) {
     const {
       button,
       choices,
-      classes = "",
+      classes = [],
       dataset = {},
       editable = true,
       label = "",

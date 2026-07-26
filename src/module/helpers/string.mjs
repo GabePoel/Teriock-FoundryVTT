@@ -75,13 +75,15 @@ export function dotJoin(strings) {
 }
 
 /**
- * Ensure a string or array is a good CSS class.
- * @param {string[]|string} [classes]
+ * Join CSS classes into a className string.
+ * @param {Iterable<string>|string|null|undefined} [classes]
  * @returns {string}
  */
 export function toClass(classes) {
-  if (Array.isArray(classes)) { return classes.filter(Boolean).join(" "); }
-  return classes ?? "";
+  if (classes == null || classes === "") { return ""; }
+  if (typeof classes === "string") { return classes; }
+  if (typeof classes?.[Symbol.iterator] === "function") { return Array.from(classes).filter(Boolean).join(" "); }
+  return "";
 }
 
 /**

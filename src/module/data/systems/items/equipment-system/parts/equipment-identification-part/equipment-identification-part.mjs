@@ -25,11 +25,11 @@ export default function EquipmentIdentificationPart(Base) {
       /** @inheritDoc */
       get _displayFields() {
         return [this._displayFieldInstructions, {
-          classes: "faded-display-field",
+          classes: [TERIOCK.display.panel.classes.faded],
           path: "system.identification.notes",
           visible: game.user.isGM && !this.identification.identified,
         }, {
-          classes: "faded-display-field",
+          classes: [TERIOCK.display.panel.classes.faded],
           path: "system.identification.flaws",
           visible: game.user.isGM && !this.identification.identified,
         }, ...super._displayFields.filter(f => !this.isInstructionsField(f))];

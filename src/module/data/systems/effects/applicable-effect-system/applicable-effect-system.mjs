@@ -1,6 +1,6 @@
 import { TeriockActiveEffect } from "../../../../documents/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { dedent } from "../../../../helpers/string.mjs";
+import { dedent, toClass } from "../../../../helpers/string.mjs";
 import { builders } from "../../../fields/tools/_module.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import * as affinities from "../../../pseudo-documents/affinities/_module.mjs";
@@ -252,9 +252,9 @@ export default class ApplicableEffectSystem
     const blocksHTML = blocks.reduce((acc, block) => {
       if (!block.text) { return acc; }
       const safeTitle = foundry.utils.escapeHTML(block.title || "");
-      const extraClasses = block.classes ? ` ${block.classes}` : "";
+      const extraClasses = toClass(block.classes);
       return `${acc}
-      <div class="teriock-panel-block${extraClasses}">
+      <div class="teriock-panel-block${extraClasses ? ` ${extraClasses}` : ""}">
         <div class="teriock-panel-block-title">${safeTitle}</div>
         <div class="teriock-panel-block-text">${block.text}</div>
       </div>`;

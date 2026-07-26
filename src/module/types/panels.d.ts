@@ -13,7 +13,7 @@ declare global {
     /** Pieces of a block within a panel. */
     export type PanelBlock = {
       /** Additional CSS classes to add */
-      classes?: string;
+      classes?: string[];
       /** The main text content of the message block. */
       text?: string;
       /** The title of the message block. */
@@ -57,7 +57,7 @@ declare global {
       /** Panel blocks */
       blocks?: Teriock.Panels.PanelBlock[];
       /** Additional CSS classes to add */
-      classes?: string;
+      classes?: string[];
       /** Color to assign to the image border */
       color?: Teriock.Keys.Color;
       /** Font Awesome icons */

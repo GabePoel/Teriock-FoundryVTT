@@ -139,7 +139,7 @@ export function associationsField() {
 export function blocksField() {
   return new ArrayField(
     new SchemaField({
-      classes: new StringField({ initial: "" }),
+      classes: new ArrayField(new StringField(), { initial: [] }),
       text: new HTMLField({ blank: true, nullable: true }),
       title: new StringField(),
     }),
@@ -189,7 +189,7 @@ export function panelsField() {
       associations: associationsField(),
       bars: barsField(),
       blocks: blocksField(),
-      classes: nullString(),
+      classes: new ArrayField(new StringField(), { initial: [] }),
       color: nullString(),
       icon: nullString(),
       image: nullString(),

@@ -109,7 +109,7 @@ export default class ExecutionEditor extends ResolvableDialog {
     const small = field instanceof fields.BooleanField;
     const numeric = field instanceof FormulaField || (field instanceof fields.NumberField && !field.choices);
     return {
-      classes: small ? "slim tgrid-item" : undefined,
+      classes: small ? ["slim", "tgrid-item"] : undefined,
       field,
       localize: true,
       name: path,

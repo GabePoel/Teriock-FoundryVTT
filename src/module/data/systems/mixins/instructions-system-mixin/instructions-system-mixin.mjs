@@ -29,7 +29,7 @@ export default function InstructionsSystemMixin(Base) {
        * @returns {Teriock.Display.DisplayField}
        */
       get _displayFieldInstructions() {
-        return { classes: `${TERIOCK.display.panel.classes.instructions} theme-dark`, path: "system.instructions" };
+        return { classes: [TERIOCK.display.panel.classes.instructions, "theme-dark"], path: "system.instructions" };
       }
 
       /** @inheritDoc */

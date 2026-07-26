@@ -53,7 +53,7 @@
             <div class="gi2 tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.label"}}</div>
             <div class="tcenter tsubtle">{{localize "TERIOCK.SHEETS.Actor.TABS.Details.sense.range"}}</div>
             {{#each TERIOCK.config.character.sense as |config key|}}
-              {{#if (not config.hidden)}}
+              {{#unless config.hidden}}
                 <div class="gi2">
                   {{{ config.label }}}
                 </div>
@@ -78,7 +78,7 @@
                     <span class="tcolored thover tcenter ttransparent">{{{path @root/senses key "source"}}}</span>
                   </div>
                 </div>
-              {{/if}}
+              {{/unless}}
             {{/each}}
           </div>
         </div>
