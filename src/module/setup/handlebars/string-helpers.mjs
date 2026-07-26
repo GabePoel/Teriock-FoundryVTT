@@ -1,5 +1,5 @@
 import { asInf } from "../../helpers/icon.mjs";
-import { dotJoin, toKebabCase } from "../../helpers/string.mjs";
+import { dotJoin, toClass, toKebabCase } from "../../helpers/string.mjs";
 
 /**
  * Show a string only if it's at least as long as some specified length.
@@ -11,4 +11,4 @@ function minLen(value, length) {
   return value.length >= length ? value : "";
 }
 
-export default { asInf, dotJoin, minLen, toKebabCase, sign: n => n.signedString() };
+export default { asInf, dotJoin, minLen, toClass, toKebabCase, sign: n => n.signedString() };

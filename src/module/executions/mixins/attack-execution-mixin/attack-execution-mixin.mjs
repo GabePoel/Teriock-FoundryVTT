@@ -215,11 +215,11 @@ export default function AttackExecutionMixin(Base) {
       /** @inheritDoc */
       async _buildRolls() {
         if (!this.isAttack) { return super._buildRolls(); }
-        const styles = { dice: { classes: "attack" }, total: { classes: "attack" } };
+        const styles = { dice: { classes: ["attack"] }, total: { classes: ["attack"] } };
         const generalRollOptions = { flavor: this.flavor, styles, targets: [] };
         if (this.piercing.ub) {
           generalRollOptions.styles.dice.icon = TERIOCK.display.icons.piercing.ub;
-          generalRollOptions.styles.dice.classes += " ub";
+          generalRollOptions.styles.dice.classes.push("ub");
           generalRollOptions.styles.dice.tooltip = _loc("TERIOCK.TERMS.Properties.unblockable");
         }
         for (const target of this.targets) {

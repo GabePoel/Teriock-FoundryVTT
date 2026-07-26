@@ -11,6 +11,48 @@ const { Roll } = foundry.dice;
  * @property {Teriock.Dice.BaseRollOptions} options
  */
 export default class BaseRoll extends Roll {
+  /**
+   * Normalize a target into a plain, JSON serializable object. Already parsed targets pass through unchanged.
+   * @param {Teriock.Dice.RawDieTarget} target
+   * @returns {Teriock.Dice.DieTarget}
+   */
+  static #parseTarget(target) {
+    let img = "";
+    let name = "";
+    /** @type {TeriockActor} */
+    let actor;
+    /** @type {TeriockTokenDocument} */
+    let token;
+    // Handling for token placeables
+    if (target.document) {
+      token = target.document;
+      actor = target.actor;
+    }
+    // Handling for documents
+    if (target.documentName === "TokenDocument") {
+      token = target;
+      actor ||= token.actor;
+    } else if (target.documentName === "Actor") {
+      token = target.token;
+      actor ||= target;
+    }
+    // Prioritize name and image from the token over the actor
+    if (actor) {
+      img = actor.img;
+      name = actor.name;
+    }
+    if (token) {
+      img = token.img;
+      name = token.name;
+    }
+    return {
+      actorUuid: actor?.uuid || target.actorUuid,
+      img: img || target?.img || systemPath("icons/documents/character.svg"),
+      name: name || target?.name,
+      tokenUuid: token?.uuid || target.tokenUuid,
+    };
+  }
+
   /** @inheritDoc */
   static CHAT_TEMPLATE = "teriock/ui/roll";
 
@@ -22,7 +64,7 @@ export default class BaseRoll extends Roll {
     return {
       comparison: "gte",
       hideRoll: false,
-      styles: { dice: { classes: "", icon: "", tooltip: "" }, total: { classes: "", icon: "", tooltip: "" } },
+      styles: { dice: { classes: [], icon: "", tooltip: "" }, total: { classes: [], icon: "", tooltip: "" } },
       targets: [],
       threshold: null,
     };
@@ -125,56 +167,13 @@ export default class BaseRoll extends Roll {
    */
   constructor(formula, data, options = {}) {
     if (!formula) { formula = "0"; }
+    options = foundry.utils.mergeObject(new.target.defaultOptions, options);
+    options.targets = options.targets.map(t => BaseRoll.#parseTarget(t));
     super(formula, data, options);
     this.id = foundry.utils.randomID();
-    this.options = foundry.utils.mergeObject(this.constructor.defaultOptions, options);
-
-    // If we don't do this, then the targets will be raw classes instead of JSON parsable objects
-    this.targets = this.options.targets;
   }
 
-  /**
-   * @param {Teriock.Dice.RawDieTarget} target
-   * @returns {Teriock.Dice.DieTarget}
-   */
-  #parseTarget(target) {
-    let img = "";
-    let name = "";
-    /** @type {TeriockActor} */
-    let actor;
-    /** @type {TeriockTokenDocument} */
-    let token;
-    // Handling for token placeables
-    if (target.document) {
-      token = target.document;
-      actor = target.actor;
-    }
-    // Handling for documents
-    if (target.documentName === "TokenDocument") {
-      token = target;
-      actor ||= token.actor;
-    } else if (target.documentName === "Actor") {
-      token = target.token;
-      actor ||= target;
-    }
-    // Prioritize name and image from the token over the actor
-    if (actor) {
-      img = actor.img;
-      name = actor.name;
-    }
-    if (token) {
-      img = token.img;
-      name = token.name;
-    }
-    return {
-      actorUuid: actor?.uuid || target.actorUuid,
-      img: img || target?.img || systemPath("icons/documents/character.svg"),
-      name: name || target?.name,
-      tokenUuid: token?.uuid || target.tokenUuid,
-    };
-  }
-
-  /**
+  /** `
    * All terms.
    * @returns {RollTerm[]}
    */
@@ -187,16 +186,6 @@ export default class BaseRoll extends Roll {
       }
     }
     return terms;
-  }
-
-  /** @returns {Teriock.Keys.Comparison} */
-  get comparison() {
-    return this.options.comparison ?? "gte";
-  }
-
-  /** @param {Teriock.Keys.Comparison} comparison */
-  set comparison(comparison) {
-    this.options.comparison = comparison;
   }
 
   /**
@@ -215,43 +204,18 @@ export default class BaseRoll extends Roll {
     return typeof this.threshold === "number";
   }
 
-  /** @returns {boolean} */
-  get hideRoll() {
-    return this.options.hideRoll ?? false;
-  }
-
-  /** @param {boolean} hideRoll */
-  set hideRoll(hideRoll) {
-    this.options.hideRoll = Boolean(hideRoll);
-  }
-
-  /** @returns {Teriock.Dice.DieStyles} */
-  get styles() {
-    return foundry.utils.deepClone(this.options.styles ?? this.constructor.defaultOptions.styles);
-  }
-
   /**
    * Whether this threshold has been met.
    * @returns {boolean}
    */
   get success() {
     if (this.hasThreshold) {
-      const comparisonFormula = `${this.comparison}(${this.total}, ${this.threshold})`;
+      const comparisonFormula = `${this.options.comparison}(${this.total}, ${this.threshold})`;
       const comparisonRoll = new BaseRoll(comparisonFormula, {});
       comparisonRoll.evaluateSync();
       return Boolean(comparisonRoll.total);
     }
     return false;
-  }
-
-  /** @returns {Teriock.Dice.DieTarget[]} */
-  get targets() {
-    return this.options.targets ?? [];
-  }
-
-  /** @param {Teriock.Dice.RawDieTarget[]} targets */
-  set targets(targets) {
-    this.options.targets = targets.map(t => this.#parseTarget(t));
   }
 
   /** @returns {number|null} */
@@ -311,18 +275,18 @@ export default class BaseRoll extends Roll {
     const context = await super._prepareChatRenderContext(options);
     Object.assign(context, {
       hasThreshold: this.hasThreshold,
-      hideRoll: this.hideRoll,
+      hideRoll: this.options.hideRoll,
       id: this.id,
-      styles: this.styles,
-      targets: this.targets,
+      styles: foundry.utils.deepClone(this.options.styles),
+      targets: this.options.targets,
       threshold: this.threshold,
     });
     if (this.success) {
-      context.styles.total.classes += " success";
+      context.styles.total.classes.push("success");
       context.styles.total.tooltip += _loc("TERIOCK.ROLLS.Base.success");
       context.styles.total.icon = TERIOCK.display.icons.ui.enable;
     } else if (this.failure) {
-      context.styles.total.classes += " failure";
+      context.styles.total.classes.push("failure");
       context.styles.total.tooltip += _loc("TERIOCK.ROLLS.Base.failure");
       context.styles.total.icon = TERIOCK.display.icons.ui.disable;
     }

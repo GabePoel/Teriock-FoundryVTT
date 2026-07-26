@@ -28,8 +28,8 @@ export default function AbilityExecutionRollsPart(Base) {
         }
         const preventThreshold = Boolean(overrideAutomation?.preventThreshold);
         const styles = {
-          dice: { classes: this.source.system.interaction },
-          total: { classes: this.source.system.interaction },
+          dice: { classes: [this.source.system.interaction] },
+          total: { classes: [this.source.system.interaction] },
         };
         if (this.isFeat && !preventThreshold) {
           styles.total.icon = TERIOCK.display.icons.interaction.feat;

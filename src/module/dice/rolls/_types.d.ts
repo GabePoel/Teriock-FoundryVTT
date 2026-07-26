@@ -5,7 +5,7 @@ import { TeriockActor, TeriockChatMessage, TeriockTokenDocument } from "../../do
 
 declare global {
   namespace Teriock.Dice {
-    type DiePartStyle = { classes?: string, icon?: string, tooltip?: string };
+    type DiePartStyle = { classes?: string[], icon?: string, tooltip?: string };
 
     type DieStyles = { dice: DiePartStyle, total: DiePartStyle };
 

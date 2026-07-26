@@ -1,7 +1,5 @@
 import BaseRoll from "./base-roll.mjs";
 
-const { getProperty, setProperty } = foundry.utils;
-
 /** @inheritDoc */
 export default class ThresholdRoll extends BaseRoll {
   /**
@@ -53,14 +51,12 @@ export default class ThresholdRoll extends BaseRoll {
   async _prepareChatRenderContext(options = {}) {
     const context = await super._prepareChatRenderContext(options);
     if (this.critSuccess) {
-      const classes = getProperty(context, "styles.total.classes") ?? "";
-      setProperty(context, "styles.total.classes", `${classes} crit-success`);
-      setProperty(context, "styles.total.tooltip", _loc("TERIOCK.ROLLS.Base.critSuccess"));
+      context.styles.total.classes.push("crit-success");
+      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.critSuccess");
     }
     if (this.critFailure) {
-      const classes = getProperty(context, "styles.total.classes") ?? "";
-      setProperty(context, "styles.total.classes", `${classes} crit-failure`);
-      setProperty(context, "styles.total.tooltip", _loc("TERIOCK.ROLLS.Base.critFailure"));
+      context.styles.total.classes.push("crit-failure");
+      context.styles.total.tooltip = _loc("TERIOCK.ROLLS.Base.critFailure");
     }
     return context;
   }

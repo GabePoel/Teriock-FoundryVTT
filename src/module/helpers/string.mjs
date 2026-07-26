@@ -75,6 +75,16 @@ export function dotJoin(strings) {
 }
 
 /**
+ * Ensure a string or array is a good CSS class.
+ * @param {string[]|string} [classes]
+ * @returns {string}
+ */
+export function toClass(classes) {
+  if (Array.isArray(classes)) { return classes.filter(Boolean).join(" "); }
+  return classes ?? "";
+}
+
+/**
  * Converts a string to an ID.
  * @param {string} str
  * @param {object} [options]
