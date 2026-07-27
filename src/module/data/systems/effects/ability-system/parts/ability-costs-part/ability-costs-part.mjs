@@ -48,7 +48,7 @@ export default function AbilityCostsPart(Base) {
               const label = _loc("TERIOCK.COSTS.Long.primary", { key: _loc(v.label) });
               return new fields.SchemaField({
                 description: new fields.HTMLField({ label }),
-                formula: rollableFormulaField(),
+                formula: rollableFormulaField({ label }),
                 type: new fields.StringField({
                   blank: true,
                   choices: localizeChoices(costConfig.primary.types, { none: true }),
@@ -105,10 +105,29 @@ export default function AbilityCostsPart(Base) {
       }
 
       /**
-       * Cost wrappers.
-       * @returns {string[]}
+       * Cost tags.
+       * @returns {Teriock.Display.DisplayTag[]}
        */
-      get _costWrappers() {
+      get _costTags() {
+        return [...this._costTagsComponents, ...this._costTagsPrimary];
+      }
+
+      /**
+       * Component cost tags.
+       * @returns {Teriock.Display.DisplayTag[]}
+       */
+      get _costTagsComponents() {
+        return [
+          ...Object.entries(TERIOCK.config.cost.components.keys).map(([k, v]) => this.costs.components[k].type ? v : "")
+            .filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.TERMS.Common.components") })),
+        ];
+      }
+
+      /**
+       * Primary cost tags.
+       * @returns {Teriock.Display.DisplayTag[]}
+       */
+      get _costTagsPrimary() {
         return [
           ...Object.entries(TERIOCK.config.stat).map(([k, v]) =>
             this.costs.primary[k].type === "formula"
@@ -119,11 +138,8 @@ export default function AbilityCostsPart(Base) {
               : this.costs.primary[k].type === "description"
               ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.variable", { cost: v.abbreviation })
               : ""
-          ),
-          ...Object.entries(TERIOCK.config.cost.components.keys).map(([k, v]) =>
-            this.costs.components[k].type ? v : ""
-          ),
-        ].filter(Boolean);
+          ).filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.TERMS.Common.costs") })),
+        ];
       }
 
       /** @inheritDoc */

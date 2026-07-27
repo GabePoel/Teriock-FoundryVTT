@@ -41,7 +41,7 @@ export default function AbilityPanelPart(Base) {
         }, {
           icon: icons.ability.cost,
           label: _loc("TERIOCK.SYSTEMS.Ability.FIELDS.costs.label"),
-          wrappers: this._costWrappers,
+          wrappers: simplifyTags(this._costTags),
         }, {
           icon: icons.ui.info,
           label: "TERIOCK.SYSTEMS.Ability.PANELS.info",

@@ -168,7 +168,7 @@ export default function BaseApplicationMixin(Base) {
      * @param {ParentNode} [root]
      */
     _captureScrollPositions(root = this.element) {
-      for (const el of root.querySelectorAll("[data-scrollable-id]")) {
+      for (const el of findMatchingElements(root, "[data-scrollable-id]")) {
         this.#scrollPositions.set(el.dataset.scrollableId, { left: el.scrollLeft, top: el.scrollTop });
       }
     }
@@ -243,7 +243,7 @@ export default function BaseApplicationMixin(Base) {
      */
     _reapplyScrollPositions(root = this.element) {
       if (!root.isConnected) { return; }
-      for (const el of root.querySelectorAll("[data-scrollable-id]")) {
+      for (const el of findMatchingElements(root, "[data-scrollable-id]")) {
         const pos = this.#scrollPositions.get(el.dataset.scrollableId);
         if (pos) {
           el.scrollLeft = pos.left;

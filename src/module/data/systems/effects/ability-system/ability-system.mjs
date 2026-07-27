@@ -276,7 +276,7 @@ export default class AbilitySystem
 
   /** @inheritDoc */
   get _displayTags() {
-    return [...super._displayTags, ...this._infoTags, ...this._costWrappers];
+    return [...super._displayTags, ...this._infoTags, ...this._costTagsComponents];
   }
 
   /** @inheritDoc */

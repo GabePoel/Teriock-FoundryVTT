@@ -112,6 +112,17 @@ export default function DisplaySheetMixin(Base) {
         return out;
       }
 
+      /** @inheritDoc */
+      _assignScrollableIds(root = this.element) {
+        super._assignScrollableIds(root);
+        // A dumb hack for when the scroll position jumps to the bottom below the menu.
+        // TODO: Do a real fix some day.
+        if (this.window?.content) { this.window.content.dataset.scrollableId ??= "window-content"; }
+        for (const el of root.querySelectorAll(".teriock-sheet-everything")) {
+          el.dataset.scrollableId ??= "sheet-everything";
+        }
+      }
+
       /**
        * @inheritDoc
        * @param {ApplicationRenderOptions} options

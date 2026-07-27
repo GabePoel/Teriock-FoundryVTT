@@ -89,7 +89,7 @@ export default class AbilitySheet extends ChildSheet {
 
     let scroll = content.querySelector(":scope > .teriock-sheet-everything");
     if (!scroll) {
-      scroll = createElement("div", { className: "teriock-sheet-everything" });
+      scroll = createElement("div", { className: "teriock-sheet-everything", dataset: { scrollableId: "es-wrapper" } });
       content.appendChild(scroll);
     }
     for (const child of [...content.children]) {
