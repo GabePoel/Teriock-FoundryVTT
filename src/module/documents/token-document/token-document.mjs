@@ -28,6 +28,26 @@ export default class TeriockTokenDocument
    * @returns {string}
    */
   get img() {
+    // Non-ring textures are preferred over ring ones because of sizing issues.
+    // No special handling is needed if this doesn't have a dynamic ring.
+    if (!this.ring.enabled) { return this.texture.src; }
+    // If texture is being modified, assume it is intentional and use that.
+    if (this.texture.src && this._source.texture.src !== this.texture.src) { return this.texture.src; }
+    // If ring texture is being modified, assume it is intentional and use that.
+    if (
+      this.ring.enabled && this.ring.subject.texture && this._source.ring.subject.texture !== this.ring.subject.texture
+    ) { return this.ring.subject.texture; }
+    // If this has an actor, additional validation is needed.
+    const actor = this.actor;
+    if (actor) {
+      // If this is using the original texture given by the actor, use the actor's art.
+      if (actor.constructor.getDefaultImageForType(actor.type) === this.texture.src) { return actor.img; }
+      // If this is using the default token art, use the actor's art.
+      if (this.texture.src === CONST.DEFAULT_TOKEN) { return actor.img; }
+    }
+    // Only use the ring texture if it really is the best one.
+    if (this.ring.subject.texture) { return this.ring.subject.texture; }
+    // Use the source texture if needed.
     return this.texture.src;
   }
 

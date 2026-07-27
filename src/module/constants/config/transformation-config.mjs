@@ -22,6 +22,7 @@ export default {
     resource: { initial: false, path: "system.disabled" },
     species: { initial: true, path: "system.disabled" },
   },
+  tokenChange: { phase: "initial", priority: 5 },
 };
 
 preLocalizeConfig("config.transformation.level");

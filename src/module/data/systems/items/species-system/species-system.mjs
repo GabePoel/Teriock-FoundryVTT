@@ -229,10 +229,7 @@ export default class SpeciesSystem
       prototypeToken: {
         height: TeriockActor.getSizeConfig(this.size.value).length,
         name: this.parent.name,
-        ring: {
-          enabled: this.transformation.ring,
-          subject: { texture: this.transformation.ring ? this.transformation.img : undefined },
-        },
+        ring: { enabled: this.transformation.ring, subject: { texture: this.transformation.ringImg } },
         texture: { src: this.parent.img },
         width: TeriockActor.getSizeConfig(this.size.value).length,
       },

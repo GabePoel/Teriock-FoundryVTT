@@ -136,4 +136,14 @@ export default class TeriockTableResult
       this.documentUuid = game.teriock.identifiers.get(this.documentIdentifier);
     }
   }
+
+  /** @inheritDoc */
+  toObject(source) {
+    const obj = super.toObject(source);
+    // Forcibly include a UUID in object if possible so that embedded roll tables include them.
+    if (obj?.type === "document" && obj?.flags?.teriock?.documentIdentifier && !obj?.documentUuid) {
+      obj.documentUuid = this.documentUuid;
+    }
+    return obj;
+  }
 }

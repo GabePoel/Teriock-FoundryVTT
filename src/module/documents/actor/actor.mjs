@@ -29,7 +29,7 @@ export default class TeriockActor
 {
   /** @inheritDoc */
   static getDefaultArtwork(actorData) {
-    const img = this.getDefaultImageForType(actorData?.type);
+    const img = actorData?.img ?? this.getDefaultImageForType(actorData?.type);
     return { img, texture: { src: img } };
   }
 

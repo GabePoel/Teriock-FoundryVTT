@@ -9,6 +9,8 @@ declare global {
       img: Teriock.System.ImageString;
       /** <schema> Override whether the token has a ring */
       ring: boolean;
+      /** <schema> A distinct image to use if there's a ring */
+      ringImg: Teriock.System.ImageString;
     };
 
     export type ActorTransformationConfig = SpeciesTransformationConfig & {

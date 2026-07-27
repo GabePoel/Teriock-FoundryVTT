@@ -75,6 +75,14 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
+       * Whether this needs to inherit an image.
+       * @return {boolean}
+       */
+      get #inheritImg() {
+        return this.actor && (!this.transformation.img || this.transformation.ring && !this.transformation.ringImg);
+      }
+
+      /**
        * Reset update data.
        * @returns {object}
        */
@@ -413,12 +421,11 @@ export default function TransformationSystemMixin(Base) {
       prepareBaseData() {
         super.prepareBaseData();
         if (this.isTransformation) {
-          if (this.actor && !this.transformation.img) {
+          if (this.#inheritImg) {
             for (const s of this.parent.species) {
-              if (s.system.transformation.img && !this.transformation.img) {
-                this.transformation.img = s.system.transformation.img;
-                this.transformation.ring = s.system.transformation.ring;
-              }
+              this.transformation.img ||= s.system.transformation.img;
+              this.transformation.ring ??= s.system.transformation.ring;
+              this.transformation.ringImg ||= s.system.transformation.ringImg;
             }
           }
         }
@@ -427,29 +434,36 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (
-          this.isPrimaryTransformation && this.actor?.system.settings.getSetting("autoTransformation")
-          && this.transformation.img
-        ) {
-          this.changes.push(...[{
-            key: "token.texture.src",
-            phase: "initial",
-            priority: 5,
-            type: "override",
-            value: this.transformation.img,
-          }, {
-            key: "token.ring.subject.texture",
-            phase: "initial",
-            priority: 5,
-            type: "override",
-            value: this.transformation.img,
-          }, {
-            key: "token.ring.enabled",
-            phase: "initial",
-            priority: 5,
-            type: "override",
-            value: this.transformation.ring,
-          }]);
+        if (this.isPrimaryTransformation && this.actor?.system.settings.getSetting("autoTransformation")) {
+          const changes = [];
+          if (typeof this.transformation.ring === "boolean") {
+            changes.push({
+              key: "token.ring.enabled",
+              phase: TERIOCK.config.transformation.tokenChange.phase,
+              priority: TERIOCK.config.transformation.tokenChange.priority,
+              type: "override",
+              value: this.transformation.ring,
+            });
+          }
+          if (this.transformation.img) {
+            changes.push({
+              key: "token.texture.src",
+              phase: TERIOCK.config.transformation.tokenChange.phase,
+              priority: TERIOCK.config.transformation.tokenChange.priority,
+              type: "override",
+              value: this.transformation.img,
+            });
+          }
+          if (this.transformation.ringImg) {
+            changes.push({
+              key: "token.ring.subject.texture",
+              phase: TERIOCK.config.transformation.tokenChange.phase,
+              priority: TERIOCK.config.transformation.tokenChange.priority,
+              type: "override",
+              value: this.transformation.ringImg,
+            });
+          }
+          this.changes.push(...changes);
         }
       }
 

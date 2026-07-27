@@ -43,6 +43,7 @@ export default class TransformationAutomation
       "level",
       "img",
       "ring",
+      "ringImg",
       "override",
       "reset",
       "suppress",

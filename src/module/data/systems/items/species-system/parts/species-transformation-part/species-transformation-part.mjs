@@ -30,7 +30,7 @@ export default function SpeciesTransformationPart(Base) {
 
       /** @inheritDoc */
       get _displayInputs() {
-        return [...super._displayInputs, "system.transformation.img"];
+        return [...super._displayInputs, "system.transformation.img", "system.transformation.ringImg"];
       }
 
       /** @inheritDoc */

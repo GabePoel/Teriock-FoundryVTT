@@ -1,4 +1,4 @@
-import { LocalDocumentField } from "../_module.mjs";
+import { LocalDocumentField, TernaryField } from "../_module.mjs";
 import documentConfig from "../../../constants/config/document-config.mjs";
 import statConfig from "../../../constants/config/stat-config.mjs";
 import transformationConfig from "../../../constants/config/transformation-config.mjs";
@@ -27,10 +27,20 @@ export function speciesTransformationFields() {
       required: false,
       trim: true,
     }),
-    ring: new fields.BooleanField({
+    ring: new TernaryField({
       hint: "TERIOCK.SCHEMA.Transformation.ring.hint",
-      initial: false,
       label: "TERIOCK.SCHEMA.Transformation.ring.label",
+    }),
+    ringImg: new fields.FilePathField({
+      blank: true,
+      categories: ["IMAGE"],
+      hint: "TERIOCK.SCHEMA.Transformation.ringImg.hint",
+      initial: null,
+      label: "TERIOCK.SCHEMA.Transformation.ringImg.label",
+      nullable: true,
+      placeholder: _loc("COMMON.None"),
+      required: false,
+      trim: true,
     }),
   };
 }

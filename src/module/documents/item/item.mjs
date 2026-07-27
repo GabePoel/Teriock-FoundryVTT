@@ -38,7 +38,8 @@ export default class TeriockItem
 
   /** @inheritDoc */
   static getDefaultArtwork(itemData) {
-    return { img: this.getDefaultImageForType(itemData?.type) };
+    const img = itemData?.img ?? this.getDefaultImageForType(itemData?.type);
+    return { img };
   }
 
   /**
