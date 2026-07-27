@@ -33,11 +33,6 @@ export default function SpeciesTransformationPart(Base) {
         return [...super._displayInputs, "system.transformation.img", "system.transformation.ringImg"];
       }
 
-      /** @inheritDoc */
-      get _displayToggles() {
-        return ["system.transformation.ring", ...super._displayToggles];
-      }
-
       /**
        * Whether this is part of an inactive transformation.
        * @returns {boolean}
@@ -177,6 +172,9 @@ export default function SpeciesTransformationPart(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
+        this.transformation.ring = null;
+        if (this.transformation.ringImg) {this.transformation.ring = true;}
+        else if (this.transformation.img) { this.transformation.ring = false;}
         // Abilities from minor transformations are not proficient.
         if (this.isTransformation && this.transformationEffect?.system.transformation.level === "minor") {
           this.parent.abilities.forEach((a) => a.system.competence.raw = 0);

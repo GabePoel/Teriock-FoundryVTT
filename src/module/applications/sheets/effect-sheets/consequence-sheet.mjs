@@ -29,8 +29,15 @@ export default class ConsequenceSheet extends ApplicableEffectSheet {
 
   /** @inheritDoc */
   async _prepareContext(options = {}) {
+    const transformationPaths = ["enabled"];
+    if (this.document.system.transformation.enabled) {
+      transformationPaths.push(...["level", "override"]);
+      if (this.document.system.transformation.override.has("art")) {
+        transformationPaths.push(...["ring", "img", "ringImg"]);
+      }
+    }
     return Object.assign(await super._prepareContext(options), {
-      transformation: ["enabled", "level", "img", "ring", "ringImg"].map(p => {
+      transformation: transformationPaths.map(p => {
         return {
           field: this.document.system.schema.getField(`transformation.${p}`),
           localize: true,

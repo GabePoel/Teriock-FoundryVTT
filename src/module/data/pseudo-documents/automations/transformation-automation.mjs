@@ -35,19 +35,20 @@ export default class TransformationAutomation
 
   /** @inheritDoc */
   get _formPaths() {
-    return [
+    const paths = [
       ...this._selectionPaths,
       "hr",
       ...this._competencePaths,
       "hr",
       "level",
-      "img",
-      "ring",
-      "ringImg",
-      "override",
       "reset",
       "suppress",
+      "override",
     ];
+    if (this.override.has("art")) {
+      paths.push(...["ring", "img", "ringImg"]);
+    }
+    return paths;
   }
 
   /** @inheritDoc */
