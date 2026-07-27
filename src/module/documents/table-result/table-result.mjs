@@ -27,6 +27,15 @@ export default class TeriockTableResult
     return super.migrateData(source, options, state);
   }
 
+  /**
+   * Typed identifier for the referenced document on document-type results.
+   * @returns {TypedIdentifier|null}
+   */
+  get documentIdentifier() {
+    if (this.type !== "document") { return null; }
+    return this.getFlag("teriock", "documentIdentifier") || null;
+  }
+
   /** @inheritDoc */
   get embedParts() {
     return Object.assign(super.embedParts, { makeTooltip: true, subtitle: this.type, text: this.parent.name || "" });
@@ -118,5 +127,13 @@ export default class TeriockTableResult
       }];
     }
     return parts;
+  }
+
+  /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if (this.documentIdentifier && !this.documentUuid) {
+      this.documentUuid = game.teriock.identifiers.get(this.documentIdentifier);
+    }
   }
 }

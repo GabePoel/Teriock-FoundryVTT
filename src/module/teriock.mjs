@@ -315,6 +315,16 @@ foundry.helpers.Hooks.once("init", function() {
       doc: documents.TeriockAmbientLightDocument,
       label: "TERIOCK.SHEETS.AmbientLight.LABEL",
     },
+    {
+      cls: applications.sheets.TeriockTableResultConfig,
+      doc: documents.TeriockTableResult,
+      label: "TERIOCK.SHEETS.TableResult.LABEL",
+    },
+    {
+      cls: applications.sheets.TeriockRollTableSheet,
+      doc: documents.TeriockRollTable,
+      label: "TERIOCK.SHEETS.RollTable.LABEL",
+    },
     // Actors
     {
       cls: applications.sheets.actor.PlayableActorSheet,

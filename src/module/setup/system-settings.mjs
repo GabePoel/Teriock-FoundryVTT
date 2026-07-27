@@ -107,6 +107,13 @@ export const settings = {
       scope: "world",
       type: Boolean,
     },
+    dontDropUuidsInTables: {
+      default: false,
+      hint: "TERIOCK.SETTINGS.dontDropUuidsInTables.hint",
+      name: "TERIOCK.SETTINGS.dontDropUuidsInTables.name",
+      scope: "world",
+      type: Boolean,
+    },
   },
   dialog: {
     confirmStatDiceRerolls: {

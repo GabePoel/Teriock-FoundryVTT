@@ -117,6 +117,7 @@ export default class TeriockManager {
     this.#registries.identifiers._initialize();
     this.#registries.identifiers.initializing.then(async () => {
       this.#basicAbilities = (await teriock.fromIdentifier("power:basic-abilities")).abilities;
+      game.tables.forEach(t => t.prepareData());
     });
   }
 

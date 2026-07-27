@@ -10,10 +10,12 @@ export default class InfiniteNumberField extends NumberField {
   /** @inheritdoc */
   static get _defaults() {
     return Object.assign(super._defaults, {
+      initial: null,
       integer: false,
       min: 0,
       nullable: true,
       placeholder: systemConfig.infCode,
+      required: true,
     });
   }
 
