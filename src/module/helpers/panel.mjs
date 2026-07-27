@@ -17,9 +17,10 @@ export function wrapPanelTables(html, rootId, options = {}) {
   let index = 0;
   for (const table of [...container.querySelectorAll("table")]) {
     if (table.closest(".teriock-panel-table")) { continue; }
+    const tableId = `${rootId}-table-${index++}`;
     const wrap = createElement("div", {
       className: `teriock-panel-table collapsible${collapsed ? " collapsed" : ""}`,
-      dataset: { collapsibleId: `${rootId}-table-${index++}` },
+      dataset: { collapsibleId: tableId },
     });
     const title = createElement("div", {
       className: "teriock-panel-table-title",
@@ -30,7 +31,10 @@ export function wrapPanelTables(html, rootId, options = {}) {
         <div class="teriock-panel-table-expander">${makeIcon(TERIOCK.display.icons.ui.menuOpen, "light")}</div>`,
     });
     const content = createElement("div", { className: "teriock-panel-table-content" });
-    const spacer = createElement("div", { className: "teriock-panel-table-spacer" });
+    const spacer = createElement("div", {
+      className: "teriock-panel-table-spacer",
+      dataset: { scrollableId: tableId },
+    });
     table.replaceWith(wrap);
     spacer.append(table);
     content.append(spacer);

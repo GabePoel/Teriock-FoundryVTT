@@ -102,8 +102,8 @@ export default class AbilitySheet extends ChildSheet {
 
   /** @inheritDoc */
   async _onRender(context, options) {
-    await super._onRender(context, options);
     this.#resetElderSorceryElements();
+    await super._onRender(context, options);
   }
 
   /** @inheritDoc */

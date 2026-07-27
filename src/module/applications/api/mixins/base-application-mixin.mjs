@@ -64,7 +64,7 @@ export default function BaseApplicationMixin(Base) {
      * Internal map of states of collapsible elements to persist between renders.
      * @type {Map<string, boolean>}
      */
-    #collapsibleElements = new Map();
+    #collapsibleStates = new Map();
 
     /**
      * Internal map of context menus so they can safely be called in `_onRender`.
@@ -85,6 +85,12 @@ export default function BaseApplicationMixin(Base) {
     #pendingClick;
 
     /**
+     * Internal map of scroll positions to persist between renders.
+     * @type {Map<string, {left: number, top: number}>}
+     */
+    #scrollPositions = new Map();
+
+    /**
      * Apply a tracked collapse to every `.collapsible` element and every toggle control (`[data-collapsible-target]`)
      * sharing the same `collapsible-id` so they stay in sync.
      * @param {string} collapsibleId
@@ -92,7 +98,7 @@ export default function BaseApplicationMixin(Base) {
      * @param {ParentNode} [root]
      */
     #applyCollapsibleState(collapsibleId, collapsed, root = this.element) {
-      this.collapsibleElements.set(collapsibleId, collapsed);
+      this.#collapsibleStates.set(collapsibleId, collapsed);
       for (const el of findMatchingElements(root, `.collapsible[data-collapsible-id="${collapsibleId}"]`)) {
         el.classList.toggle("collapsed", collapsed);
       }
@@ -132,19 +138,21 @@ export default function BaseApplicationMixin(Base) {
     }
 
     /**
-     * States of collapsible elements, keyed by `data-collapsible-id`. A `true` value means collapsed.
-     * @type {Map<string, boolean>}
-     */
-    get collapsibleElements() {
-      return this.#collapsibleElements;
-    }
-
-    /**
      * Whether this application is detached.
      * @returns {boolean}
      */
     get isDetached() {
       return this.#detached;
+    }
+
+    /**
+     * Assign undeclared scrollable ids onto elements whose scroll should persist between renders.
+     * @param {ParentNode} [root]
+     */
+    _assignScrollableIds(root = this.element) {
+      for (const editor of root.querySelectorAll("prose-mirror[name]")) {
+        editor.dataset.scrollableId ??= editor.getAttribute("name");
+      }
     }
 
     /** @inheritDoc */
@@ -153,6 +161,16 @@ export default function BaseApplicationMixin(Base) {
       this.element.addEventListener("keydown", this._onPressKey.bind(this));
       this.element.addEventListener("dblclick", this.#onDoubleClick.bind(this));
       this.element.addEventListener("click", this.#onClickCapture.bind(this), { capture: true });
+    }
+
+    /**
+     * Capture the scroll position of every scrollable element with an id.
+     * @param {ParentNode} [root]
+     */
+    _captureScrollPositions(root = this.element) {
+      for (const el of root.querySelectorAll("[data-scrollable-id]")) {
+        this.#scrollPositions.set(el.dataset.scrollableId, { left: el.scrollLeft, top: el.scrollTop });
+      }
     }
 
     /**
@@ -199,6 +217,7 @@ export default function BaseApplicationMixin(Base) {
       this.element.querySelectorAll("[data-no-scroll]").forEach(el =>
         el.addEventListener("wheel", ev => ev.preventDefault())
       );
+      this._syncSpinnerAnimations();
     }
 
     /** @inheritDoc */
@@ -211,18 +230,49 @@ export default function BaseApplicationMixin(Base) {
      * @param {ParentNode} [element]
      */
     _reapplyCollapsibleSates(element = this.element) {
-      for (const [collapsibleId, collapsed] of this.collapsibleElements) {
+      for (const [collapsibleId, collapsed] of this.#collapsibleStates) {
         this.#applyCollapsibleState(collapsibleId, collapsed, element);
+      }
+      this._reapplyScrollPositions(element);
+      this._syncSpinnerAnimations(element);
+    }
+
+    /**
+     * Re-apply every tracked scroll position.
+     * @param {ParentNode} [root]
+     */
+    _reapplyScrollPositions(root = this.element) {
+      if (!root.isConnected) { return; }
+      for (const el of root.querySelectorAll("[data-scrollable-id]")) {
+        const pos = this.#scrollPositions.get(el.dataset.scrollableId);
+        if (pos) {
+          el.scrollLeft = pos.left;
+          el.scrollTop = pos.top;
+        }
       }
     }
 
     /** @inheritDoc */
     _replaceHTML(result, content, options) {
+      this._captureScrollPositions(content);
       const roots = result instanceof Element
         ? [result]
         : Object.values(result ?? {}).filter(node => node instanceof Element);
       for (const root of roots) { this._reapplyCollapsibleSates(root); }
       super._replaceHTML(result, content, options);
+      this._assignScrollableIds(content);
+      this._reapplyCollapsibleSates(content);
+    }
+
+    /**
+     * Synchronize every Elder Sorcery spin animation.
+     * @param {ParentNode} [root]
+     */
+    _syncSpinnerAnimations(root = this.element) {
+      if (!(root instanceof Element) || !root.isConnected) { return; }
+      for (const animation of root.getAnimations({ subtree: true })) {
+        if (animation.animationName === "spin-offset" && animation.startTime !== 0) { animation.startTime = 0; }
+      }
     }
 
     /**
@@ -235,8 +285,8 @@ export default function BaseApplicationMixin(Base) {
     _toggleCollapsed(collapsibleId, collapsed, target) {
       const root = (target instanceof Element && !this.element.contains(target)) ? target.getRootNode() : this.element;
       collapsed ??=
-        !(this.collapsibleElements.has(collapsibleId)
-          ? this.collapsibleElements.get(collapsibleId)
+        !(this.#collapsibleStates.has(collapsibleId)
+          ? this.#collapsibleStates.get(collapsibleId)
           : root.querySelector(`.collapsible[data-collapsible-id="${collapsibleId}"]`)?.classList.contains(
             "collapsed",
           ));

@@ -59,13 +59,6 @@ export default function BaseDocumentSheetMixin(Base) {
     }
 
     /** @inheritDoc */
-    _replaceHTML(result, content, options) {
-      super._replaceHTML(result, content, options);
-      // Re-apply again because prose-mirrors rebuild themselves after the first re-apply.
-      this._reapplyCollapsibleSates();
-    }
-
-    /** @inheritDoc */
     _toggleDisabled(disabled) {
       super._toggleDisabled(disabled);
       if (!disabled) { return; }

@@ -104,6 +104,7 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
   async postOne(message, options = {}) {
     const result = await super.postOne(message, options);
     this._dragDrop.bind(this.element);
+    this._syncSpinnerAnimations();
     return result;
   }
 
@@ -111,13 +112,17 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
   async renderBatch(size) {
     const result = await super.renderBatch(size);
     this._dragDrop.bind(this.element);
+    this._syncSpinnerAnimations();
     return result;
   }
 
   /** @inheritDoc */
   async updateMessage(message, notify = false) {
+    const selector = `.message[data-message-id="${message.id}"]`;
+    const oldCard = this.element?.querySelector(selector);
+    if (oldCard) { this._captureScrollPositions(oldCard); }
     await super.updateMessage(message, notify);
-    const card = this.element?.querySelector(`.message[data-message-id="${message.id}"]`);
+    const card = this.element?.querySelector(selector);
     if (card) { this._reapplyCollapsibleSates(card); }
     this._dragDrop.bind(this.element);
   }
