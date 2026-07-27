@@ -173,8 +173,8 @@ export default function SpeciesTransformationPart(Base) {
       prepareBaseData() {
         super.prepareBaseData();
         this.transformation.ring = null;
-        if (this.transformation.ringImg) {this.transformation.ring = true;}
-        else if (this.transformation.img) { this.transformation.ring = false;}
+        if (this.transformation.ringImg) { this.transformation.ring = true; }
+        else if (this.transformation.img) { this.transformation.ring = false; }
         // Abilities from minor transformations are not proficient.
         if (this.isTransformation && this.transformationEffect?.system.transformation.level === "minor") {
           this.parent.abilities.forEach((a) => a.system.competence.raw = 0);

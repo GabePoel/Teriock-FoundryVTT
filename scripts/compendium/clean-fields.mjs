@@ -245,6 +245,7 @@ function cleanRank(doc) {
 function cleanSpecies(doc) {
   if (!doc.system.adult) { delete doc.system.adult; }
   if (!doc.system.lifespan) { delete doc.system.lifespan; }
+  if (typeof doc.system.transformation?.ring === "boolean") { delete doc.system.transformation.ring; }
 }
 
 /**

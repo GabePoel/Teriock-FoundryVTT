@@ -434,7 +434,10 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       prepareDerivedData() {
         super.prepareDerivedData();
-        if (this.isPrimaryTransformation && this.transformation.override.has("art") &&this.actor?.system.settings.getSetting("autoTransformation")) {
+        if (
+          this.isPrimaryTransformation && this.transformation.override.has("art")
+          && this.actor?.system.settings.getSetting("autoTransformation")
+        ) {
           const changes = [];
           if (typeof this.transformation.ring === "boolean") {
             changes.push({

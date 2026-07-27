@@ -4,6 +4,28 @@ img: systems/teriock/src/icons/abilities/smash-potion-of-bones.webp
 name: Smash Potion of Bones
 system:
   automations:
+    GcMGu7L9Xwau2FVz:
+      _id: GcMGu7L9Xwau2FVz
+      changes:
+        - key: token.texture.src
+          phase: derived
+          priority: 30
+          target: Actor
+          type: override
+          value: systems/teriock/src/icons/creatures/skeleton.webp
+        - key: token.ring.enabled
+          phase: derived
+          priority: 30
+          target: Actor
+          type: override
+          value: 'true'
+        - key: token.ring.subject.texture
+          phase: derived
+          priority: 30
+          target: Actor
+          type: override
+          value: systems/teriock/src/icons/tokens/skeleton.webp
+      type: changes
     7400b41f20d9f100:
       _id: 7400b41f20d9f100
       angle: '60'
@@ -29,24 +51,6 @@ system:
       status: frightened
       target: true
       type: status
-    CuuVbhvMA8fZPpd9:
-      _id: CuuVbhvMA8fZPpd9
-      automatic: true
-      img: systems/teriock/src/icons/tokens/skeleton.webp
-      multi: false
-      override:
-        - art
-      reset:
-        - gp
-        - hp
-      ring: true
-      suppress:
-        - body
-        - equipment
-        - fluency
-        - rank
-        - species
-      type: transformation
   competence:
     raw: 0
   consumeSource: true
