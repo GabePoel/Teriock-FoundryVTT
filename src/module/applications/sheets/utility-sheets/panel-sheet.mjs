@@ -43,6 +43,14 @@ export default class PanelSheet extends DragDropApplicationMixin(TeriockDocument
   }
 
   /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    this.element.querySelectorAll(".teriock-panel-header[data-action='toggleCollapse']").forEach(el =>
+      delete el.dataset.action
+    );
+  }
+
+  /** @inheritDoc */
   async _prepareContext(options) {
     return Object.assign(await super._prepareContext(options), await this.document.toPanel());
   }

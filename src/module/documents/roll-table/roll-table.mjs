@@ -49,10 +49,10 @@ export default class TeriockRollTable
     for (const result of this.results) {
       if (result.type !== "document" || !result.documentUuid) { continue; }
       const doc = fromUuidSync(result.documentUuid);
-      if (!doc.type || !doc?.system?.identifier) { continue }
+      if (!doc.type || !doc?.system?.identifier) { continue; }
       const documentIdentifier = `${doc.type}:${doc.system.identifier}`;
-      const updateData = { flags: { teriock: { documentIdentifier }}}
-      if (clearUuid && documentIdentifier) { updateData.documentUuid = null }
+      const updateData = { flags: { teriock: { documentIdentifier } } };
+      if (clearUuid && documentIdentifier) { updateData.documentUuid = null; }
       result.updateSource(updateData);
     }
   }
