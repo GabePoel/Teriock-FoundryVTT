@@ -34,6 +34,29 @@ export default class TeriockRollTable
     return `${min}\u2013${max}`;
   }
 
+  /** @inheritDoc */
+  static async fromFolder(folder, options = {}) {
+    return super.fromFolder(folder, { ...options, makeResultIdentifiers: true });
+  }
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    const yes = await super._preCreate(data, options, user);
+    if (yes === false) { return false; }
+
+    if (!options.makeResultIdentifiers) { return; }
+    const clearUuid = game.settings.get("teriock", "dontDropUuidsInTables");
+    for (const result of this.results) {
+      if (result.type !== "document" || !result.documentUuid) { continue; }
+      const doc = fromUuidSync(result.documentUuid);
+      if (!doc.type || !doc?.system?.identifier) { continue }
+      const documentIdentifier = `${doc.type}:${doc.system.identifier}`;
+      const updateData = { flags: { teriock: { documentIdentifier }}}
+      if (clearUuid && documentIdentifier) { updateData.documentUuid = null }
+      result.updateSource(updateData);
+    }
+  }
+
   /**
    * All the documents in the results of this table.
    * @return {Promise<TeriockDocument[]>}

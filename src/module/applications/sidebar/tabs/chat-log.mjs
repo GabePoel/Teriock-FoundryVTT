@@ -101,6 +101,20 @@ export default class TeriockChatLog extends mixClasses(ChatLog, ChatMessageConne
   }
 
   /** @inheritDoc */
+  async postOne(message, options = {}) {
+    const result = await super.postOne(message, options);
+    this._dragDrop.bind(this.element);
+    return result;
+  }
+
+  /** @inheritDoc */
+  async renderBatch(size) {
+    const result = await super.renderBatch(size);
+    this._dragDrop.bind(this.element);
+    return result;
+  }
+
+  /** @inheritDoc */
   async updateMessage(message, notify = false) {
     await super.updateMessage(message, notify);
     const card = this.element?.querySelector(`.message[data-message-id="${message.id}"]`);
