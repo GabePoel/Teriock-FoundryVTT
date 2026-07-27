@@ -39,7 +39,6 @@ export default function DocumentCreationSheetMixin(Base) {
        * list on right-click.
        */
       _connectChildrenCreateMenu() {
-        if (!this.element.querySelector(".add-button[data-types]")) { return; }
         const entries = () =>
           Object.entries(TERIOCK.config.document).filter(([, config]) =>
             ["ActiveEffect", "Item"].includes(config.documentName)
