@@ -71,39 +71,25 @@ export default class AbilitySheet extends ChildSheet {
    * Reset elder sorcery theme classes, scroll wrapper, and mask element.
    */
   #resetElderSorceryElements() {
-    const { content } = this.window;
-    const elementClasses = [...Object.keys(TERIOCK.reference.elements).map(e => `es-${e}`), "es-multi"];
-    content.classList.remove(...elementClasses);
-    content.querySelector(":scope > .es-mask-rotator")?.remove();
-
-    if (!this.document.system.elderSorcery) {
-      const scroll = content.querySelector(":scope > .teriock-sheet-everything");
-      if (scroll) {
-        while (scroll.firstChild) { content.insertBefore(scroll.firstChild, scroll); }
-        scroll.remove();
-      }
-      return;
-    }
-
-    content.classList.add(elementClass(this.document.system.elements));
-
+    const content = this.window?.content;
+    if (!content) { return; }
     let scroll = content.querySelector(":scope > .teriock-sheet-everything");
     if (!scroll) {
-      scroll = createElement("div", { className: "teriock-sheet-everything", dataset: { scrollableId: "es-wrapper" } });
-      content.appendChild(scroll);
+      scroll = createElement("div", { className: "teriock-sheet-everything" });
+      content.append(scroll);
     }
     for (const child of [...content.children]) {
       if (child === scroll || child.classList.contains("es-mask-rotator")) { continue; }
-      scroll.appendChild(child);
+      scroll.append(child);
     }
-
-    content.prepend(createElement("div", { className: "es-mask-rotator" }));
-  }
-
-  /** @inheritDoc */
-  async _onRender(context, options) {
-    this.#resetElderSorceryElements();
-    await super._onRender(context, options);
+    content.classList.remove(...[...content.classList].filter(c => c.startsWith("es-")));
+    const mask = content.querySelector(":scope > .es-mask-rotator");
+    if (!this.document.system.elderSorcery) {
+      mask?.remove();
+      return;
+    }
+    content.classList.add(elementClass(this.document.system.elements));
+    if (!mask) { content.prepend(createElement("div", { className: "es-mask-rotator" })); }
   }
 
   /** @inheritDoc */
@@ -123,9 +109,10 @@ export default class AbilitySheet extends ChildSheet {
   }
 
   /** @inheritDoc */
-  async _renderFrame(options = {}) {
-    const frame = await super._renderFrame(options);
+  _replaceHTML(result, content, options) {
+    super._replaceHTML(result, content, options);
     this.#resetElderSorceryElements();
-    return frame;
+    this._assignScrollableIds(content);
+    this._reapplyScrollPositions(content);
   }
 }
