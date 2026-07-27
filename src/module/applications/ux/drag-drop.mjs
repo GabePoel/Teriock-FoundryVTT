@@ -2,6 +2,9 @@ const { DragDrop, TextEditor } = foundry.applications.ux;
 
 /** @inheritDoc */
 export default class TeriockDragDrop extends DragDrop {
+  /** @type {DragEvent|null} */
+  static #initializedEvent = null;
+
   /** @type {Teriock.Application.DragDropPayload<AnyCommonDocument>|null} */
   static #payload = null;
 
@@ -61,6 +64,7 @@ export default class TeriockDragDrop extends DragDrop {
    * @param {DragEvent} event
    */
   static initializeDragEvent(event) {
+    TeriockDragDrop.#initializedEvent = event;
     game.tooltip.deactivate();
     window.addEventListener("dragend", TeriockDragDrop.#onDragEnd, { once: true });
     const dragData = TextEditor.implementation.getDragEventData(event);
@@ -75,6 +79,17 @@ export default class TeriockDragDrop extends DragDrop {
         this.#setDocumentDragData(event, dragData, document);
       });
     }
+  }
+
+  /**
+   * Initialize payloads for drags that never pass through a bound TeriockDragDrop instance.
+   */
+  static registerGlobalDragHandler() {
+    document.body.addEventListener("dragstart", (event) => {
+      if (TeriockDragDrop.#initializedEvent === event) { return; }
+      if (!event.target?.closest?.("a[data-link]")) { return; }
+      TeriockDragDrop.initializeDragEvent(event);
+    });
   }
 
   /** @inheritDoc */

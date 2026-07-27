@@ -545,6 +545,7 @@ Hooks.once("i18nInit", () => {
 
 Hooks.once("ready", () => {
   game.teriock.initializeIdentifiers();
+  applications.ux.TeriockDragDrop.registerGlobalDragHandler();
 });
 
 // Register Hook Listeners and Handlebars Helpers
