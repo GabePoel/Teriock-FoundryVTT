@@ -123,7 +123,7 @@ export default function AbilityCostsPart(Base) {
           ...Object.entries(TERIOCK.config.cost.components.keys).map(([k, v]) =>
             this.costs.components[k].type ? v : ""
           ),
-        ];
+        ].filter(Boolean);
       }
 
       /** @inheritDoc */
