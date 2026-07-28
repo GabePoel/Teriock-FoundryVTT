@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import yaml from "js-yaml";
+import { load } from "js-yaml";
 import path from "path";
 
 const SRC_DIR = "./src/packs";
@@ -29,7 +29,7 @@ async function buildAllMjsFiles(dir) {
 async function buildMjsFile(fp) {
   try {
     const fileContents = await fs.readFile(fp, "utf8");
-    const parsedYaml = yaml.load(fileContents);
+    const parsedYaml = load(fileContents);
     if (parsedYaml && typeof parsedYaml.command === "string" && parsedYaml.type === "script") {
       const relPath = path.relative(SRC_DIR, fp);
       const dstPath = path.join(DST_DIR, relPath).replace(/\.yml$/, ".mjs");

@@ -3,7 +3,6 @@ export { default as PlayableActorSheetAvatarImagePart } from "./playable-actor-s
 export { default as PlayableActorSheetCombatPart } from "./playable-actor-sheet-combat-part.mjs";
 export { default as PlayableActorSheetConditionsPart } from "./playable-actor-sheet-conditions-part.mjs";
 export { default as PlayableActorSheetDocumentCreationPart } from "./playable-actor-sheet-document-creation-part.mjs";
-export { default as PlayableActorSheetImpactPart } from "./playable-actor-sheet-impact-part.mjs";
 export { default as PlayableActorSheetMechanicalPart } from "./playable-actor-sheet-mechanical-part.mjs";
 export { default as PlayableActorSheetRollingPart } from "./playable-actor-sheet-rolling-part.mjs";
 export { default as PlayableActorSheetSectionsPart } from "./playable-actor-sheet-sections-part.mjs";

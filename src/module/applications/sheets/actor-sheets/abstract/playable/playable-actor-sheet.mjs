@@ -15,7 +15,6 @@ import * as parts from "./parts/_module.mjs";
  * @mixes PlayableActorSheetRollingPart
  * @mixes PlayableActorSheetSidebarPart
  * @mixes PlayableActorSheetTabsPart
- * @mixes PlayableActorSheetImpactPart
  * @mixes PlayableActorSheetTradecraftsPart
  */
 export default class TeriockPlayableActorSheet
@@ -31,7 +30,6 @@ export default class TeriockPlayableActorSheet
     parts.PlayableActorSheetRollingPart,
     parts.PlayableActorSheetSidebarPart,
     parts.PlayableActorSheetTabsPart,
-    parts.PlayableActorSheetImpactPart,
     parts.PlayableActorSheetTradecraftsPart,
   )
 {

@@ -20,7 +20,7 @@ export default function HackStatApplicationMixin(Base) {
     class HackStatApplication extends Base {
       /** @type {Partial<ApplicationConfiguration>} */
       static DEFAULT_OPTIONS = {
-        actions: { takeImpact: { buttons: [0, 2], handler: this._onTakeImpact } },
+        actions: { takeHack: this._onTakeHack, takeImpact: { buttons: [0, 2], handler: this._onTakeImpact } },
       };
 
       /**

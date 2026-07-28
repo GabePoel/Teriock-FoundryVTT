@@ -1,9 +1,8 @@
 import { promises as fs } from "fs";
-import yaml from "js-yaml";
+import { dump, load } from "js-yaml";
 import path from "path";
 
 import { toId } from "../../src/module/helpers/string.mjs";
-import { BASIC_STATS, SYSTEM_VERSION } from "./constants.mjs";
 
 const SRC_DIR = "./macros/";
 const DST_DIR = "./src/packs/";
@@ -43,7 +42,7 @@ async function buildYmlFile(fp) {
 
     try {
       const existingYaml = await fs.readFile(dstPath, "utf8");
-      yamlObj = yaml.load(existingYaml) || {};
+      yamlObj = load(existingYaml) || {};
       fileExists = true;
     } catch (e) {
       console.error("Error loading yaml file:", e);
@@ -54,13 +53,12 @@ async function buildYmlFile(fp) {
     Object.assign(yamlObj, {
       _id: yamlObj._id ?? generatedId,
       _key: yamlObj._key ?? `!macros!${generatedId}`,
-      _stats: { ...BASIC_STATS, systemVersion: SYSTEM_VERSION },
       command,
       scope: "global",
       type: "script",
     });
 
-    await fs.writeFile(dstPath, yaml.dump(yamlObj, { lineWidth: -1, quotingType: "'" }), "utf8");
+    await fs.writeFile(dstPath, dump(yamlObj, { lineWidth: -1, quoteStyle: "single" }), "utf8");
     console.log(`${fileExists ? "Updated" : "Created"}: ${fp} -> ${dstPath}`);
   } catch (e) {
     console.error(`Error building .yml file ${fp}:`, e.message);
