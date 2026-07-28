@@ -44,6 +44,10 @@ export default class TeriockTokenDocument
       if (actor.constructor.getDefaultImageForType(actor.type) === this.texture.src) { return actor.img; }
       // If this is using the default token art, use the actor's art.
       if (this.texture.src === CONST.DEFAULT_TOKEN) { return actor.img; }
+      // If there is no token art, use the actor's art.
+      if (!this.texture.src) { return actor.img; }
+      // Token texture has been intentionally set, so assume it's safe to use.
+      return this.texture.src;
     }
     // Only use the ring texture if it really is the best one.
     if (this.ring.subject.texture) { return this.ring.subject.texture; }
