@@ -116,7 +116,7 @@ export default class AbilityExecutionConstructor extends executionMixins.AttackE
   /** @returns {boolean} */
   get canHeighten() {
     return this.competence.proficient && Boolean(this.source.system.heightened) && !this.noHeighten
-      && (this.actor?.system.scaling.p ?? 0) > 0;
+      && ((this.actor?.system.scaling.p ?? 0) > 0);
   }
 
   /** @inheritDoc */
