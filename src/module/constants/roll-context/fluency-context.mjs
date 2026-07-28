@@ -5,8 +5,8 @@ const fluencyContext = {
   ...usableContext,
   fluency: "TYPES.ActiveEffect.fluency",
 
-  field: "TERIOCK.TERMS.Common.field",
-  tc: "TERIOCK.TERMS.Common.tradecraft",
+  field: "TERIOCK.COMMON.Field",
+  tc: "TERIOCK.COMMON.Tradecraft",
 };
 
 export default fluencyContext;

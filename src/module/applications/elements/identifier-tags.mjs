@@ -184,7 +184,7 @@ export default class HTMLIdentifierTagsElement extends AbstractFormInputElement 
    */
   #resolvePlaceholderTypeLabel() {
     const { types } = this;
-    if (!types.length) { return "TERIOCK.TERMS.Common.identifier"; }
+    if (!types.length) { return "TERIOCK.COMMON.Identifier"; }
     if (types.length === 1) { return TERIOCK.config.document[types[0]]?.label ?? types[0]; }
     return types.map(t => _loc(TERIOCK.config.document[t]?.label ?? t)).join(", ");
   }

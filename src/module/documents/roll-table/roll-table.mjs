@@ -105,7 +105,7 @@ export default class TeriockRollTable
         : [],
       bars: [{
         icon: TERIOCK.display.icons.ui.formula,
-        label: _loc("TERIOCK.TERMS.Common.formula"),
+        label: _loc("TERIOCK.COMMON.Formula"),
         wrappers: [this.formula ?? ""],
       }],
       blocks: [{ text: this.description, title: this.getFieldForProperty("description").label }],

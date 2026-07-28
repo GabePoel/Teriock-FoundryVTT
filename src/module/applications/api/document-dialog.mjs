@@ -15,7 +15,7 @@ export default class DocumentDialog extends TemporaryApplicationMixin(TeriockDoc
    * @returns {string}
    */
   get _titlePrefix() {
-    return "TERIOCK.DIALOGS.Sheet.PREFIX";
+    return "CONTROLS.CommonEdit";
   }
 
   /** @inheritDoc */

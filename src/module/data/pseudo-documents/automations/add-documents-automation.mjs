@@ -152,7 +152,7 @@ export default class AddDocumentsAutomation
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (path === "children.data") { groupConfig.stacked = true }
+    if (path === "children.data") { groupConfig.stacked = true; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 

@@ -112,7 +112,7 @@ export default class BaseStatManager extends HackStatApplicationMixin(DocumentDi
         action: "ok",
         default: true,
         icon: makeIconClass(icons.ui.done, "button"),
-        label: "TERIOCK.TERMS.Common.done",
+        label: "TERIOCK.COMMON.Done",
         type: "submit",
       }];
     }

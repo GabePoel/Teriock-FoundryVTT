@@ -38,7 +38,7 @@ export default function OverrideDataAutomationMixin(Base) {
 
       /** @inheritDoc */
       _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-        if (path === "data") { groupConfig.stacked = true }
+        if (path === "data") { groupConfig.stacked = true; }
         return super._makeFormGroup(path, groupConfig, inputConfig, config);
       }
     }

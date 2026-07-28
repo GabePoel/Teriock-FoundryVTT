@@ -309,7 +309,7 @@ export default class AbilitySystem
       icons.push({
         action: "toggleDisableLocked",
         icon: TERIOCK.display.icons.ui.locked,
-        tooltip: _loc("TERIOCK.SYSTEMS.Ability.EMBED.locked"),
+        tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked"),
         visible: this.basic,
         onClick: () => {
           ui.notifications.error("TERIOCK.SYSTEMS.Ability.EMBED.basic", { localize: true });

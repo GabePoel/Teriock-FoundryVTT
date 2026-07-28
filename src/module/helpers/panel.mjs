@@ -27,7 +27,7 @@ export function wrapPanelTables(html, rootId, options = {}) {
       dataset: { action: "toggleCollapse" },
       innerHTML: `
         <div class="teriock-panel-table-icon">${makeIcon(TERIOCK.display.icons.document.table, "light")}</div>
-        <div class="teriock-panel-table-name">${_loc("TERIOCK.TERMS.Common.table")}</div>
+        <div class="teriock-panel-table-name">${_loc("EDITOR.Table")}</div>
         <div class="teriock-panel-table-expander">${makeIcon(TERIOCK.display.icons.ui.menuOpen, "light")}</div>`,
     });
     const content = createElement("div", { className: "teriock-panel-table-content" });

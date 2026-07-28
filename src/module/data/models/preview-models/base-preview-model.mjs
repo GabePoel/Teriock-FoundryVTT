@@ -48,7 +48,7 @@ export default class BasePreviewModel extends BaseDataModel {
    * @returns {Record<string, string>}
    */
   static get sortOrders() {
-    return { default: "TERIOCK.SHEETS.Common.SORT.default", name: "TERIOCK.SHEETS.Common.SORT.name" };
+    return { default: "COMMON.Default", name: "DOCUMENT.FIELDS.name.label" };
   }
 
   /**
@@ -96,7 +96,7 @@ export default class BasePreviewModel extends BaseDataModel {
     return {
       active: new TernaryField({ label: _loc("TERIOCK.SHEETS.Common.TAGS.active") }),
       children: new TernaryField({ label: _loc("TERIOCK.CHANGES.Phase.children.label") }),
-      duplicates: new TernaryField({ label: _loc("TERIOCK.TERMS.Common.duplicates") }),
+      duplicates: new TernaryField({ label: _loc("TERIOCK.COMMON.Duplicates") }),
       fluent: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.2") }),
       proficient: new TernaryField({ label: _loc("TERIOCK.SCHEMA.Competence.choices.1") }),
     };

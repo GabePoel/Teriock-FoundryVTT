@@ -38,9 +38,7 @@ export default function LockingSheetMixin(Base) {
         toggleButton.classList.add(...[this.isEditable ? "fa-lock-open" : "fa-lock"]);
         toggleButton.setAttribute(
           "data-tooltip",
-          this.isEditable
-            ? _loc("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.off")
-            : _loc("TERIOCK.SHEETS.Common.ACTIONS.LockSheet.on"),
+          this.isEditable ? _loc("SIDEBAR.PLACEABLES.ACTIONS.Unlocked") : _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked"),
         );
       }
 

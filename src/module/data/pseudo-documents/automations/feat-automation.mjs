@@ -21,7 +21,7 @@ export default class FeatAutomation extends ThresholdAutomation {
       attribute: new fields.StringField({
         choices: objectMap(TERIOCK.config.attribute, (v) => v.label, { localize: true }),
         initial: "int",
-        label: "TERIOCK.TERMS.Common.attribute",
+        label: "TERIOCK.COMMON.Attribute",
         required: true,
       }),
     });

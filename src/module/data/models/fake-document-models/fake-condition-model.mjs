@@ -39,7 +39,7 @@ export default class FakeConditionModel extends BaseFakeDocumentModel {
    */
   get _embedIcons() {
     return [
-      { icon: TERIOCK.display.icons.ui.locked, tooltip: _loc("TERIOCK.SHEETS.Actor.CONDITIONS.locked") },
+      { icon: TERIOCK.display.icons.ui.locked, tooltip: _loc("SIDEBAR.PLACEABLES.ACTIONS.Locked") },
       ...super._embedIcons,
     ];
   }

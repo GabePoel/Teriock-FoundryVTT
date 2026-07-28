@@ -40,7 +40,7 @@ export default class RollStyleAutomation extends BaseAutomation {
 
   /** @inheritDoc */
   _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
-    if (["sfx", "style"].includes(path)) { groupConfig.stacked = true }
+    if (["sfx", "style"].includes(path)) { groupConfig.stacked = true; }
     return super._makeFormGroup(path, groupConfig, inputConfig, config);
   }
 }

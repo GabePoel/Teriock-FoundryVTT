@@ -101,7 +101,7 @@ export function qualifiedChangeField() {
       required: true,
     }),
     type: changeTypeField(),
-    value: new FormulaField({ deterministic: false, initial: "", label: "TERIOCK.SCHEMA.QualifiedChange.value.label" }),
+    value: new FormulaField({ deterministic: false, initial: "", label: "TERIOCK.COMMON.Value" }),
   });
 }
 
@@ -210,7 +210,7 @@ export function competenceField() {
     choices: objectMap(competenceConfig.levels, l => l.label, { localize: true, sort: false }),
     hint: _sloc("TERIOCK.SCHEMA.Competence.hint"),
     initial: 0,
-    label: _sloc("TERIOCK.SCHEMA.Competence.label"),
+    label: _sloc("TERIOCK.COMMON.Competence"),
     max: 2,
     min: 0,
     nullable: false,
@@ -348,7 +348,7 @@ export function tradecraftField(options = {}) {
   return new IdentifierField({
     choices: getTradecraftChoices(),
     initial: Object.keys(TERIOCK.reference.tradecrafts)[0],
-    label: _sloc("TERIOCK.TERMS.Common.tradecraft"),
+    label: _sloc("TERIOCK.COMMON.Tradecraft"),
     nullable: false,
     type: "tradecraft",
     ...options,
@@ -373,7 +373,7 @@ export function fieldField(options = {}) {
   return new IdentifierField({
     choices: objectMap(tradecraftConfig.fields, f => f.label, { localize: true }),
     initial: Object.keys(tradecraftConfig.fields)[0],
-    label: _sloc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
+    label: _sloc("TERIOCK.COMMON.Field"),
     nullable: false,
     type: "field",
     ...options,

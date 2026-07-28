@@ -23,7 +23,7 @@ export default function PreviewSheetMixin(Base) {
         const children = await this.document.getVisibleChildren();
         /** @type {Record<string, Teriock.Previews.PreviewGroup>} */
         const groupRecord = Object.fromEntries(
-          types.map(t => [t, { docs: [], empty: TERIOCK.config.document[t].plural, optional: true }]),
+          types.map(t => [t, { docs: [], empty: TERIOCK.config.document[t].plural.toLowerCase(), optional: true }]),
         );
         for (const child of children) { if (groupRecord[child.type]) { groupRecord[child.type].docs.push(child); } }
         return Object.values(groupRecord);

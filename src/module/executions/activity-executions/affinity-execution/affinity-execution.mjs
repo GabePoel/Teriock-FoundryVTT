@@ -23,9 +23,7 @@ export default class AffinityExecution extends BaseExecution {
     this.wrappers = options.wrappers
       ?? [this.affinity?.typeLabel, this.affinity?.categoryLabel, this.affinity?.name].filter(Boolean);
     this.wrappers.push(
-      TERIOCK.config.affinity.types[this.type]?.hex
-        ? _loc("TERIOCK.TERMS.Common.chosen")
-        : _loc("TERIOCK.TERMS.Common.automatic"),
+      TERIOCK.config.affinity.types[this.type]?.hex ? _loc("TERIOCK.COMMON.Chosen") : _loc("TERIOCK.COMMON.Automatic"),
     );
   }
 

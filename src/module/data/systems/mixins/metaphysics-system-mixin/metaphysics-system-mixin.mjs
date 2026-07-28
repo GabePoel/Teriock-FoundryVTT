@@ -77,7 +77,7 @@ export default function MetaphysicsSystemMixin(Base) {
        * @returns {string}
        */
       get elementString() {
-        if (this.elements.size === 0) { return _loc("TERIOCK.TERMS.Common.celestial"); }
+        if (this.elements.size === 0) { return _loc("TERIOCK.COMMON.Celestial"); }
         return listFormat(this.elements.map(e => TERIOCK.reference.elements[e]));
       }
 

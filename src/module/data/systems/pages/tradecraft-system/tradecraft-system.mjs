@@ -45,7 +45,7 @@ export default class TradecraftSystem
   get _panelBars() {
     return [{
       icon: TERIOCK.config.tradecraft.fields[this._source.field]?.icon,
-      label: _loc("TERIOCK.SYSTEMS.Fluency.FIELDS.field.label"),
+      label: _loc("TERIOCK.COMMON.Field"),
       wrappers: [TERIOCK.config.tradecraft.fields[this._source.field]?.label],
     }];
   }

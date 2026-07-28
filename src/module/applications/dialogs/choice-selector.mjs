@@ -56,9 +56,9 @@ export default class ChoiceSelector extends ResolvableDialog {
       hint: _loc("TERIOCK.DIALOGS.Select.defaults.hint"),
       hintHtml: options.hintHtml ? await TeriockTextEditor.enrichHTML(options.hintTitle) : "",
       icon: icons.ui.select,
-      label: _loc("TERIOCK.DIALOGS.Select.defaults.label"),
+      label: _loc("CONTROLS.CommonSelect"),
       other: false,
-      title: _loc("TERIOCK.DIALOGS.Select.defaults.title"),
+      title: _loc("CONTROLS.CommonSelect"),
       ...options,
     });
     await app.render(true);
@@ -102,7 +102,7 @@ export default class ChoiceSelector extends ResolvableDialog {
         buttons.push({
           action: "other",
           icon: makeIconClass(icons.ui.custom, "button"),
-          label: _loc("TERIOCK.DIALOGS.Select.otherButton"),
+          label: _loc("TERIOCK.COMMON.Other"),
         });
       }
       context.buttons = buttons;

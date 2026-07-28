@@ -68,7 +68,7 @@ function addDeveloperModeLoggingListener(application) {
  */
 function addIdentifierClipboardListener(application) {
   if (!application.window.header) { return; }
-  const type = _loc("TERIOCK.TERMS.Common.identifier").toLowerCase();
+  const type = _loc("TERIOCK.COMMON.Identifier").toLowerCase();
   const label = _loc(application.document.constructor.metadata.label);
   application.window.header.querySelectorAll("[data-action=copyUuid]").forEach(el =>
     el.addEventListener("auxclick", async e => {

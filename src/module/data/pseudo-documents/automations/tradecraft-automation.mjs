@@ -26,7 +26,7 @@ export default class TradecraftAutomation
 
   /** @inheritDoc */
   static get LABEL() {
-    return "TERIOCK.TERMS.Common.tradecraft";
+    return "TERIOCK.COMMON.Tradecraft";
   }
 
   /** @inheritDoc */

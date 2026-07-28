@@ -3,7 +3,7 @@ import { preLocalizeConfig } from "../../helpers/localization.mjs";
 export default {
   abilitySortOrders: {
     enabled: "TERIOCK.SHEETS.Common.SORT.enabled",
-    name: "TERIOCK.SHEETS.Common.SORT.name",
+    name: "DOCUMENT.FIELDS.name.label",
     sourceName: "TERIOCK.SHEETS.Common.SORT.sourceName",
     sourceType: "TERIOCK.SHEETS.Common.SORT.sourceType",
     type: "TERIOCK.SHEETS.Common.SORT.type",
@@ -17,7 +17,7 @@ export default {
     equipmentType: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipmentType.label",
     equipped: "TERIOCK.SYSTEMS.Equipment.FIELDS.equipped.label",
     minStr: "TERIOCK.SYSTEMS.Equipment.FIELDS.minStr.label",
-    name: "TERIOCK.SHEETS.Common.SORT.name",
+    name: "DOCUMENT.FIELDS.name.label",
     powerLevel: "TERIOCK.SYSTEMS.Equipment.FIELDS.powerLevel.label",
     shattered: "TERIOCK.SYSTEMS.Equipment.FIELDS.shattered.label",
     tier: "TERIOCK.SYSTEMS.Attunable.FIELDS.tier.raw.label",

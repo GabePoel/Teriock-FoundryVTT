@@ -41,12 +41,15 @@ export default function AbilityInfoPart(Base) {
         if (this.basic) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.basic.label"); }
         if (this.sustained) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.sustained.label"); }
         if (this.standard && !this.skill && !this.spell) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.standard.label"); }
-        if (this.standard && this.skill) { tags.push("TERIOCK.TERMS.Common.semblant"); }
+        if (this.standard && this.skill) { tags.push("TERIOCK.COMMON.Semblant"); }
         if (this.skill) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.skill.label"); }
-        if (this.standard && this.spell) { tags.push("TERIOCK.TERMS.Common.conjured"); }
+        if (this.standard && this.spell) { tags.push("TERIOCK.COMMON.Conjured"); }
         if (this.spell) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.spell.label"); }
         if (this.invoked) {
-          tags.push({ label: "TERIOCK.TERMS.Costs.invoked", tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label" });
+          tags.push({
+            label: "TERIOCK.COSTS.Components.invoked",
+            tooltip: "TERIOCK.SYSTEMS.Ability.FIELDS.costs.label",
+          });
         }
         if (this.ritual) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.ritual.label"); }
         if (this.rotator) { tags.push("TERIOCK.SYSTEMS.Ability.FIELDS.rotator.label"); }

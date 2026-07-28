@@ -59,7 +59,7 @@ export default class FluencySystem
       competence: new fields.EmbeddedDataField(CompetenceModel, { initial: { raw: 2 } }),
       field: fieldField({ required: true }),
       tradecraft: tradecraftField({ required: true }),
-      tradecraftDescription: initialText({ label: "TERIOCK.TERMS.Common.tradecraft" }),
+      tradecraftDescription: initialText({ label: "TERIOCK.COMMON.Tradecraft" }),
     });
   }
 
@@ -126,7 +126,7 @@ export default class FluencySystem
       ...(await super.getPanelParts()),
       bars: [{
         icon: TERIOCK.config.tradecraft.tradecrafts[this._source.tradecraft].icon,
-        label: _loc("TERIOCK.TERMS.Common.tradecraft"),
+        label: _loc("TERIOCK.COMMON.Tradecraft"),
         wrappers: [TERIOCK.config.tradecraft.fields[this._source.field].label, getName(this.tradecraft)],
       }],
     };

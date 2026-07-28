@@ -27,7 +27,7 @@ export default class HacksAutomation extends BaseAutomation {
     return Object.assign(super.defineSchema(), {
       hacks: new fields.SetField(
         new fields.StringField({ choices: localizeChoices(objectMap(TERIOCK.config.hack, h => h.part)) }),
-        { label: "TERIOCK.TERMS.Common.hacks" },
+        { label: "TERIOCK.COMMON.Hacks" },
       ),
       reverse: new fields.BooleanField(),
     });

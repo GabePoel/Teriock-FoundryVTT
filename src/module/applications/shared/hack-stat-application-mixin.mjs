@@ -1,10 +1,12 @@
 import hackConfig from "../../constants/config/hack-config.mjs";
 import statConfig from "../../constants/config/stat-config.mjs";
+import { makeIconClass } from "../../helpers/icon.mjs";
+import { BaseUpdater } from "../dialogs/updaters/_module.mjs";
 
 const BAR_STATS = Object.keys(statConfig).filter(k => statConfig[k].bar);
 
 /**
- * Mixin allowing hacks and spending dice stats.
+ * Mixin allowing hacks, impacts, and spending dice stats.
  * @template {Constructor<TeriockDocumentSheet>} T
  * @param {T} Base
  */
@@ -16,6 +18,11 @@ export default function HackStatApplicationMixin(Base) {
      * @property {TeriockActor} document
      */
     class HackStatApplication extends Base {
+      /** @type {Partial<ApplicationConfiguration>} */
+      static DEFAULT_OPTIONS = {
+        actions: { takeImpact: { buttons: [0, 2], handler: this._onTakeImpact } },
+      };
+
       /**
        * Rolls a stat die.
        * @param {PointerEvent} _event - The event object.
@@ -39,6 +46,30 @@ export default function HackStatApplicationMixin(Base) {
        */
       static async _onTakeHack(event, target) {
         await onTakeHack(this.document, event, target);
+      }
+
+      /**
+       * Prompt for taking some amount of something and applying it to the actor.
+       * Right-click opens a morganti updater when the impact supports it.
+       * @param {PointerEvent} event
+       * @param {HTMLElement} target
+       * @returns {Promise<void>}
+       * @this {HackStatApplication}
+       */
+      static async _onTakeImpact(event, target) {
+        const impact = target.dataset.impact;
+        if (event.button === 2) {
+          if (!TERIOCK.config.impact[impact]?.morganti) { return; }
+          const stat = Object.entries(TERIOCK.config.stat).find(([_k, v]) => v.impact === impact)?.[0];
+          if (!stat) { return; }
+          await BaseUpdater.create({
+            document: this.document,
+            paths: [`system.${stat}.morganti`],
+            window: { icon: makeIconClass(TERIOCK.config.impact[impact].icon, "title") },
+          });
+          return;
+        }
+        await this.document.system.impactDialog(impact);
       }
 
       /**

@@ -18,8 +18,8 @@ export default class AffinityPreviewModel extends BasePreviewModel {
   static get sortOrders() {
     return {
       category: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.category.label",
-      default: "TERIOCK.SHEETS.Common.SORT.default",
-      name: "TERIOCK.SHEETS.Common.SORT.name",
+      default: "COMMON.Default",
+      name: "DOCUMENT.FIELDS.name.label",
       type: "TERIOCK.AFFINITIES.Preview.FIELDS.filters.type.label",
     };
   }

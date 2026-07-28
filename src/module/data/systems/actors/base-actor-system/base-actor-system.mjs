@@ -140,7 +140,7 @@ export default class BaseActorSystem
         wrappers: this._scalingTags,
       }, {
         icon: TERIOCK.display.icons.interaction.feat,
-        label: _loc("TERIOCK.TERMS.Common.attributes"),
+        label: _loc("TERIOCK.COMMON.Attributes"),
         wrappers: this._attributeTags,
       }],
       blocks: [{ text: this.notes, title: _loc("TERIOCK.SYSTEMS.BaseActor.PANELS.notes") }],

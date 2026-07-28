@@ -62,7 +62,7 @@ export default class ChatStatusAutomation extends CritMechanicMixin(BaseAutomati
       status: new fields.StringField({
         choices: TERIOCK.reference.conditions,
         initial: Object.keys(TERIOCK.reference.conditions)[0],
-        label: "TERIOCK.TERMS.Common.condition",
+        label: "TERIOCK.COMMON.Condition",
         required: true,
       }),
     });

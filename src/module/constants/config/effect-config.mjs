@@ -5,8 +5,8 @@ import { icons } from "../display/icons.mjs";
 export default {
   applicationTargets: {
     actor: { effectType: "consequence", label: "TYPES.Actor.actor" },
-    armament: { effectType: "imbuement", label: "TERIOCK.CHANGES.Targets.armament" },
-    item: { effectType: "imbuement", label: "TERIOCK.CHANGES.Targets.items" },
+    armament: { effectType: "imbuement", label: "TERIOCK.DOCUMENTS.armament.plural" },
+    item: { effectType: "imbuement", label: "DOCUMENT.Items" },
   },
   cover: ["halfCover", "threeQuartersCover", "fullCover"],
   // no sort

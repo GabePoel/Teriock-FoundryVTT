@@ -119,7 +119,7 @@ export default function AbilityCostsPart(Base) {
       get _costTagsComponents() {
         return [
           ...Object.entries(TERIOCK.config.cost.components.keys).map(([k, v]) => this.costs.components[k].type ? v : "")
-            .filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.TERMS.Common.components") })),
+            .filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.COMMON.Components") })),
         ];
       }
 
@@ -138,7 +138,7 @@ export default function AbilityCostsPart(Base) {
               : this.costs.primary[k].type === "description"
               ? _loc("TERIOCK.SYSTEMS.Ability.PANELS.variable", { cost: v.abbreviation })
               : ""
-          ).filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.TERMS.Common.costs") })),
+          ).filter(Boolean).map(w => ({ label: w, tooltip: _loc("TERIOCK.COMMON.Costs") })),
         ];
       }
 

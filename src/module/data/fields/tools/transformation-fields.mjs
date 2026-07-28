@@ -77,13 +77,13 @@ export function automationTransformationFields() {
       {
         hint: "TERIOCK.SCHEMA.Transformation.override.hint",
         initial: Object.keys(transformationConfig.override).filter(k => transformationConfig.override[k].initial),
-        label: "TERIOCK.SCHEMA.Transformation.override.label",
+        label: "TERIOCK.COMMON.Override",
       },
     ),
     reset: new fields.SetField(new fields.StringField({ choices: choiceMap(RESET_STATS, k => statConfig[k].label) }), {
       hint: "TERIOCK.SCHEMA.Transformation.reset.hint",
       initial: Object.keys(RESET_STATS).filter(k => RESET_STATS[k].transformationReset.initial),
-      label: "TERIOCK.SCHEMA.Transformation.reset.label",
+      label: "SETTINGS.UI.ACTIONS.Reset",
     }),
     suppress: new fields.SetField(
       new fields.StringField({ choices: choiceMap(transformationConfig.suppress, k => documentConfig[k].label) }),

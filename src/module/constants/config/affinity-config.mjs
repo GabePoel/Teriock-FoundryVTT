@@ -84,7 +84,7 @@ export default {
       label: "TERIOCK.SHEETS.Actor.TABS.Tradecrafts.title",
     },
 
-    other: { choices: "none", format: "none", imgCategory: "none", label: "TERIOCK.DIALOGS.Select.otherButton" },
+    other: { choices: "none", format: "none", imgCategory: "none", label: "TERIOCK.COMMON.Other" },
   },
   // no sort
   groups: {

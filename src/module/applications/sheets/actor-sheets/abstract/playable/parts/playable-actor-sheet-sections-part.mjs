@@ -60,16 +60,21 @@ export default function PlayableActorSheetSectionsPart(Base) {
        * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
        */
       static async #previewGroupConsequence() {
-        return [{ docs: this._childrenOfType("consequence"), empty: TERIOCK.config.document.consequence.plural }, {
-          docs: this._childrenOfType("attunement"),
-          empty: TERIOCK.config.document.attunement.plural,
-        }, {
-          docs: this.document.effects.filter(e =>
-            ["base", "condition", "cover", "hack"].includes(e.type) && !e.isStatus
-          ),
-          empty: TERIOCK.config.document.effect.plural,
-          optional: true,
-        }, { docs: await this._fakeConditions(), empty: TERIOCK.config.document.condition.plural }];
+        return [
+          {
+            docs: this._childrenOfType("consequence"),
+            empty: TERIOCK.config.document.consequence.plural.toLowerCase(),
+          },
+          { docs: this._childrenOfType("attunement"), empty: TERIOCK.config.document.attunement.plural.toLowerCase() },
+          {
+            docs: this.document.effects.filter(e =>
+              ["base", "condition", "cover", "hack"].includes(e.type) && !e.isStatus
+            ),
+            empty: TERIOCK.config.document.effect.plural.toLowerCase(),
+            optional: true,
+          },
+          { docs: await this._fakeConditions(), empty: TERIOCK.config.document.condition.plural.toLowerCase() },
+        ];
       }
 
       /**
@@ -80,10 +85,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
         return [
           {
             docs: this._childrenOfType("equipment").filter(e => !e?.sup || e.sup.type !== "equipment"),
-            empty: TERIOCK.config.document.equipment.plural,
+            empty: TERIOCK.config.document.equipment.plural.toLowerCase(),
           },
-          { docs: this._childrenOfType("body"), empty: TERIOCK.config.document.body.plural },
-          { docs: this._childrenOfType("mount"), empty: TERIOCK.config.document.mount.plural },
+          { docs: this._childrenOfType("body"), empty: TERIOCK.config.document.body.plural.toLowerCase() },
+          { docs: this._childrenOfType("mount"), empty: TERIOCK.config.document.mount.plural.toLowerCase() },
         ];
       }
 
@@ -92,7 +97,7 @@ export default function PlayableActorSheetSectionsPart(Base) {
        * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
        */
       static async #previewGroupFluency() {
-        return [{ docs: this._childrenOfType("fluency"), empty: TERIOCK.config.document.fluency.plural }];
+        return [{ docs: this._childrenOfType("fluency"), empty: TERIOCK.config.document.fluency.plural.toLowerCase() }];
       }
 
       /**
@@ -100,10 +105,10 @@ export default function PlayableActorSheetSectionsPart(Base) {
        * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
        */
       static async #previewGroupPower() {
-        return [{ docs: this._childrenOfType("species"), empty: TERIOCK.config.document.species.plural }, {
-          docs: this._childrenOfType("power"),
-          empty: TERIOCK.config.document.power.plural,
-        }];
+        return [
+          { docs: this._childrenOfType("species"), empty: TERIOCK.config.document.species.plural.toLowerCase() },
+          { docs: this._childrenOfType("power"), empty: TERIOCK.config.document.power.plural.toLowerCase() },
+        ];
       }
 
       /**
@@ -111,9 +116,9 @@ export default function PlayableActorSheetSectionsPart(Base) {
        * @returns {Promise<Teriock.Previews.PreviewGroup[]>}
        */
       static async #previewGroupRank() {
-        return [{ docs: this._childrenOfType("rank"), empty: TERIOCK.config.document.rank.plural }, {
+        return [{ docs: this._childrenOfType("rank"), empty: TERIOCK.config.document.rank.plural.toLowerCase() }, {
           docs: this._childrenOfType("archetype"),
-          empty: TERIOCK.config.document.archetype.plural,
+          empty: TERIOCK.config.document.archetype.plural.toLowerCase(),
           optional: true,
         }];
       }
@@ -124,12 +129,15 @@ export default function PlayableActorSheetSectionsPart(Base) {
        */
       static async #previewGroupResource() {
         const consumable = "TERIOCK.SHEETS.Actor.TABS.Resources.consumable";
-        return [{ docs: this._childrenOfType("resource"), empty: TERIOCK.config.document.resource.plural }, {
+        return [{
+          docs: this._childrenOfType("resource"),
+          empty: TERIOCK.config.document.resource.plural.toLowerCase(),
+        }, {
           docs: this.document.abilities.filter(a => a.system.consumable),
-          empty: _loc(consumable, { value: TERIOCK.config.document.ability.plural }),
+          empty: _loc(consumable, { value: TERIOCK.config.document.ability.plural.toLowerCase() }),
         }, {
           docs: this.document.properties.filter(a => a.system.consumable),
-          empty: _loc(consumable, { value: TERIOCK.config.document.property.plural }),
+          empty: _loc(consumable, { value: TERIOCK.config.document.property.plural.toLowerCase() }),
         }];
       }
 

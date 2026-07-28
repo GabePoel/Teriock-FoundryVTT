@@ -29,7 +29,7 @@ const abilityContext = {
   interaction: "TERIOCK.SYSTEMS.Ability.FIELDS.interaction.label",
   maneuver: "TERIOCK.SYSTEMS.Ability.FIELDS.maneuver.label",
   range: "TERIOCK.SYSTEMS.Ability.FIELDS.range.label",
-  time: "TERIOCK.TERMS.Common.executionTime",
+  time: "TERIOCK.COMMON.ExecutionTime",
 
   ability: "TYPES.ActiveEffect.ability",
   "delivery.ball": "TERIOCK.TERMS.DeliveryPackage.ball",

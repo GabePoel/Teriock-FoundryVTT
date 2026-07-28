@@ -131,7 +131,7 @@ export default class BaseUpdater extends DocumentDialog {
       }, {
         action: "reset",
         icon: makeIconClass(TERIOCK.display.icons.ui.reset),
-        label: "TERIOCK.DIALOGS.Sheet.BUTTONS.reset",
+        label: "SETTINGS.UI.ACTIONS.Reset",
         type: "button",
       }];
     }

@@ -59,8 +59,8 @@ export default function CommonDocumentMixin(Base) {
         if (!out && operation.notifyOnFailure) {
           ui.notifications.error("TERIOCK.SHEETS.Common.NOTIFICATIONS.cantDropType", {
             format: {
-              children: (TERIOCK.config.document[child?.type]?.plural ?? "").capitalize(),
-              parents: TERIOCK.config.document[parent?.type]?.plural ?? "",
+              children: TERIOCK.config.document[child?.type]?.plural ?? "",
+              parents: TERIOCK.config.document[parent?.type]?.plural?.toLowerCase() ?? "",
             },
             localize: true,
           });

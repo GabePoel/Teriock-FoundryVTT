@@ -157,7 +157,7 @@ async function resolveCreateObject(type) {
   const decision = await TeriockDialog.prompt({
     buttons: [{
       icon: makeIconClass(TERIOCK.display.icons.ui.custom, "button"),
-      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.create"),
+      label: _loc("CONTROLS.CommonCreate"),
       callback: () => "create",
     }],
     content: _loc("TERIOCK.DIALOGS.NewDocument.content", { typeName }),
@@ -165,7 +165,7 @@ async function resolveCreateObject(type) {
     ok: {
       default: true,
       icon: makeIconClass(TERIOCK.display.icons.ui.import, "button"),
-      label: _loc("TERIOCK.DIALOGS.NewDocument.BUTTONS.import"),
+      label: _loc("APPLICATION.ACTIONS.ImportDocument"),
       callback: () => "import",
     },
     window: {
