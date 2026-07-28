@@ -150,6 +150,12 @@ export default class AddDocumentsAutomation
     return this.document.type !== "ability" || this.separate;
   }
 
+  /** @inheritDoc */
+  _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+    if (path === "children.data") { groupConfig.stacked = true }
+    return super._makeFormGroup(path, groupConfig, inputConfig, config);
+  }
+
   /**
    * @inheritDoc
    * @param {object} [options]

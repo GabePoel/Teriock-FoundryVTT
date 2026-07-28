@@ -35,6 +35,12 @@ export default function OverrideDataAutomationMixin(Base) {
         if (this.overrideData) { paths.push("data"); }
         return paths;
       }
+
+      /** @inheritDoc */
+      _makeFormGroup(path, groupConfig = {}, inputConfig = {}, config = {}) {
+        if (path === "data") { groupConfig.stacked = true }
+        return super._makeFormGroup(path, groupConfig, inputConfig, config);
+      }
     }
   );
 }

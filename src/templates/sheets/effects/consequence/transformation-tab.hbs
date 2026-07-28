@@ -11,35 +11,37 @@
   data-group="{{ tab.group }}"
   data-tab="{{ tab.id }}"
 >
-  {{> "teriock/shared/field-list"
-    @root/transformation
-  }}
-  {{#if showPrimarySpecies}}
-    <div class="form-group transformation-primary-species">
-      <label>{{localize "TERIOCK.SCHEMA.Transformation.primary.label"}}</label>
-      <div class="form-fields">
-        <div
-          class="transformation-primary-species-select"
-          {{#if @root/editable}}
-            data-action="selectPrimarySpecies"
-          {{/if}}
-        >
-          {{#if primarySpecies}}
-            {{> "teriock/ui/block"
-              (merge primarySpecies.embedParts (object openable=false usable=false))
-            }}
-          {{else}}
-            {{> "teriock/ui/block"
-              (object
-                openable=false
-                subtitle=(localize "TYPES.Item.species")
-                title=(localize "COMMON.None")
-                usable=false)
-            }}
-          {{/if}}
+  <div class="teriock-form-container">
+    {{> "teriock/shared/field-list"
+      @root/transformation
+    }}
+    {{#if showPrimarySpecies}}
+      <div class="form-group transformation-primary-species stacked">
+        <label>{{localize "TERIOCK.SCHEMA.Transformation.primary.label"}}</label>
+        <div class="form-fields">
+          <div
+            class="transformation-primary-species-select"
+            {{#if @root/editable}}
+              data-action="selectPrimarySpecies"
+            {{/if}}
+          >
+            {{#if primarySpecies}}
+              {{> "teriock/ui/block"
+                (merge primarySpecies.embedParts (object openable=false usable=false))
+              }}
+            {{else}}
+              {{> "teriock/ui/block"
+                (object
+                  openable=false
+                  subtitle=(localize "TYPES.Item.species")
+                  title=(localize "COMMON.None")
+                  usable=false)
+              }}
+            {{/if}}
+          </div>
         </div>
+        <p class="hint">{{localize "TERIOCK.SCHEMA.Transformation.primary.hint"}}</p>
       </div>
-      <p class="hint">{{localize "TERIOCK.SCHEMA.Transformation.primary.hint"}}</p>
-    </div>
-  {{/if}}
+    {{/if}}
+  </div>
 </section>
