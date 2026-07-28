@@ -38,6 +38,12 @@ export default class TeriockActiveEffect
     return super.migrateData(source, options, state);
   }
 
+  /** @inheritDoc */
+  get isExpiryTrackable() {
+    if (this.metadata.untrackable) { return false; }
+    return super.isExpiryTrackable;
+  }
+
   /**
    * Whether this effect is a reference and not "real". Lazily recomputed.
    * @returns {boolean}
@@ -56,6 +62,12 @@ export default class TeriockActiveEffect
       this._cache.isStatus = Object.values(CONFIG.statusEffects).some(s => s?._id === this.id);
     }
     return this._cache.isStatus;
+  }
+
+  /** @inheritDoc */
+  get isTemporary() {
+    if (this.metadata.untrackable) { return false; }
+    return super.isTemporary;
   }
 
   /**

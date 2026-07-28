@@ -9,11 +9,16 @@ import BaseEffectSystem from "./base-effect-system/base-effect-system.mjs";
  */
 export default class CleanedEffectSystem extends systemMixins.InstructionsSystemMixin(BaseEffectSystem) {
   /** @inheritDoc */
+  static get metadata() {
+    return Object.assign(super.metadata, { untrackable: true });
+  }
+
+  /** @inheritDoc */
   async _preCreate(data, options, user) {
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    this.parent.updateSource({ statuses: [], transfer: true });
+    this.parent.updateSource({ duration: { expired: false, expiry: null, value: null }, statuses: [], transfer: true });
   }
 
   /** @inheritDoc */
@@ -27,8 +32,11 @@ export default class CleanedEffectSystem extends systemMixins.InstructionsSystem
   /** @inheritDoc */
   prepareBaseData() {
     this.changes = [];
-    this.parent.transfer = true;
+    this.parent.duration.expired = false;
+    this.parent.duration.expiry = null;
+    this.parent.duration.value = Infinity;
     this.parent.statuses.clear();
+    this.parent.transfer = true;
     super.prepareBaseData();
   }
 }

@@ -77,6 +77,7 @@ declare global {
       stats: boolean;
       tooltip: boolean;
       type: Teriock.Documents.CommonType;
+      untrackable?: boolean;
       usable: boolean;
       visibleTypes: Teriock.Documents.CommonType[];
       wiki: boolean;
