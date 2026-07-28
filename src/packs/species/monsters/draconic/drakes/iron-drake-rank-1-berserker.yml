@@ -11,17 +11,59 @@ effects:
     name: Gladiator Skills
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
+        PsgKnkbTgHLVZsPe:
+          _id: PsgKnkbTgHLVZsPe
+          all: false
+          attachDocuments: false
+          automatic: true
+          display:
+            label: Apply Ally Effect
+          identifiers:
+            - consequence:gladiator-skills-ally-effect
+          multi: false
+          separate: true
+          type: addDocuments
+        WedUG7hLjDbJNzZY:
+          _id: WedUG7hLjDbJNzZY
+          all: false
+          attachDocuments: false
+          automatic: true
+          children:
+            enabled: true
+            identifiers:
+              - power:gladiator-skills-hit-die-power
+            overrideData: false
+          display:
+            label: Apply Executor Effect
+          identifiers:
+            - consequence:gladiator-skills-executor-effect
+          multi: false
+          separate: true
+          type: addDocuments
+        FyGy4uoglXanPjex:
+          _id: FyGy4uoglXanPjex
           activeQualifier: '@status.dueling'
-          changes:
-            - key: system.hp.base
-              phase: derived
-              priority: 10
-              target: Actor
-              type: add
-              value: '7'
-          type: changes
+          changeType: upgrade
+          key: system.piercing.raw
+          qualifier: '@style.gladiator'
+          target: armament
+          type: childChange
+          value: '1'
+        WQHRFCO9n8XvY2CI:
+          _id: WQHRFCO9n8XvY2CI
+          consumeStatDice: false
+          forHarm: false
+          noStatDice: false
+          type: heal
+        5B0LdRTMIqOiMDEu:
+          _id: 5B0LdRTMIqOiMDEu
+          amount: 1
+          display:
+            label: Spend 1 MP
+          impact: drain
+          morganti: false
+          showDialog: false
+          type: take
       competence:
         raw: 1
       delivery: self
@@ -37,9 +79,12 @@ effects:
         base: >-
           <p>While @Identifier[condition:dueling]{dueling} or in a staged battle
           (gladiator fights, ceremonial battles, etc.) you gain an extra
-          @Wiki[Core:Hit Die]{warrior hit die} (+7 HP, [[/roll 1d12]]).
-          Additionally, any allies @Identifier[condition:dueling]{dueled} with
-          you or with you in a staged fight may pay 1
+          @Wiki[Core:Hit Die]{warrior hit die} (+7 HP, [[/roll 1d12]]). When you
+          gain the @Identifier[core:hit-points-and-mana-points]{hit die}, you
+          may pay 1 @Identifier[core:hit-points-and-mana-points]{MP} to
+          immediately @Identifier[core:healing]{heal} with it without consuming
+          it. Additionally, any allies @Identifier[condition:dueling]{dueled}
+          with you or with you in a staged fight may pay 1
           @Identifier[core:hit-points-and-mana-points]{MP} at the beginning of
           the fight to gain @Identifier[ability:hack]{Hack} for that fight.
           @Wiki[Category:Gladiator fighting style weapons]{Weapons you use with
@@ -49,7 +94,9 @@ effects:
         - martial
       range:
         unit: self
-      requirements: <p>You are @Identifier[condition:dueling]{dueling}.</p>
+      requirements: >-
+        <p>You are @Identifier[condition:dueling]{dueling} or in a staged
+        battle.</p>
       skill: true
       standard: true
       targets:
