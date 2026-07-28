@@ -149,12 +149,13 @@ export default function SpeciesTransformationPart(Base) {
 
       /** @inheritDoc */
       getCardContextMenuEntries(doc) {
+        const isPrimarySpecies = this.transformationEffect?.system.primarySpecies === this.parent;
         return [...super.getCardContextMenuEntries(doc), {
           group: "control",
           icon: makeIcon(TERIOCK.display.icons.effect.transform, "contextMenu"),
           label: _loc("TERIOCK.SYSTEMS.Species.MENU.setPrimaryTransformation"),
           onClick: this.setPrimaryTransformation.bind(this),
-          visible: this.isTransformation && !this.isPrimaryTransformation,
+          visible: this.isTransformation && !(this.isPrimaryTransformation && isPrimarySpecies),
         }];
       }
 
@@ -190,11 +191,11 @@ export default function SpeciesTransformationPart(Base) {
       }
 
       /**
-       * Set the effects controlling this transformation as the primary transformation.
+       * Set the effects controlling this transformation as the primary transformation and this as its primary species.
        * @returns {Promise<void>}
        */
       async setPrimaryTransformation() {
-        await this.transformationEffect?.system.setPrimaryTransformation();
+        await this.transformationEffect?.system.setPrimaryTransformation(this.parent);
       }
     }
   );

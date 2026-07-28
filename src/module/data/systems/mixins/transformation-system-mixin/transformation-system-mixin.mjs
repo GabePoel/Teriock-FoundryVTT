@@ -123,6 +123,7 @@ export default function TransformationSystemMixin(Base) {
         if (!species.length) { return; }
         const itemData = /** @type {TeriockSpecies[]} */ species.map(s => s.toObject());
         itemData.forEach(s => {
+          s._id = foundry.utils.randomID();
           s.system.transformationLevel = this.transformation.level;
           for (const stat of POOL_STATS) {
             s.system.statDice[stat].disabled = !this.transformation.reset.has(stat);
@@ -132,8 +133,14 @@ export default function TransformationSystemMixin(Base) {
             s.system.size.value = Math.clamp(this.actor.system.size.value, s.system.size.min, s.system.size.max);
           }
         });
-        const op = this.parent.getCreateDependentDocumentsOperation("Item", itemData);
+        const op = this.parent.getCreateDependentDocumentsOperation("Item", itemData, { keepId: true });
         if (op) { this.#batchedOperations.push(op); }
+        this.#batchedOperations.push(
+          this.actor.getUpdateChildDocumentsOperation("ActiveEffect", [{
+            _id: this.parent.id,
+            "system.transformation.primary": itemData[0]._id,
+          }]),
+        );
       }
 
       /**
@@ -294,7 +301,8 @@ export default function TransformationSystemMixin(Base) {
        * @return {TeriockSpecies | null}
        */
       get primarySpecies() {
-        return this.isTransformation ? this.parent.species[0] : null;
+        if (!this.isTransformation) { return null; }
+        return this.transformation.primary ?? this.parent.species[0] ?? null;
       }
 
       /**
@@ -420,13 +428,12 @@ export default function TransformationSystemMixin(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        if (this.isTransformation) {
-          if (this.#inheritImg) {
-            for (const s of this.parent.species) {
-              this.transformation.img ||= s.system.transformation.img;
-              this.transformation.ring ??= s.system.transformation.ring;
-              this.transformation.ringImg ||= s.system.transformation.ringImg;
-            }
+        if (this.isTransformation && this.#inheritImg) {
+          const s = this.primarySpecies;
+          if (s) {
+            this.transformation.img ||= s.system.transformation.img;
+            this.transformation.ring ??= s.system.transformation.ring;
+            this.transformation.ringImg ||= s.system.transformation.ringImg;
           }
         }
       }
@@ -471,13 +478,29 @@ export default function TransformationSystemMixin(Base) {
       }
 
       /**
-       * Set this is the primary transformation.
+       * Set this as the primary transformation, optionally designating a primary species.
+       * @param {TeriockSpecies|null} [species] Species to set as this transformation's primary.
        * @returns {Promise<void>}
        */
-      async setPrimaryTransformation() {
-        if (this.parent.actor && this.isTransformation) {
-          await this.parent.actor.update({ "system.transformation.primary": this.parent.id });
+      async setPrimaryTransformation(species = null) {
+        if (!this.parent.actor || !this.isTransformation) { return; }
+        const operations = [{
+          action: "update",
+          documentName: this.actor.documentName,
+          pack: this.actor?.pack,
+          parent: this.actor?.parent,
+          updates: [{ _id: this.actor?.id, "system.transformation.primary": this.parent.id }],
+        }];
+        if (species) {
+          operations.push({
+            action: "update",
+            documentName: this.parent.documentName,
+            pack: this.parent.pack,
+            parent: this.parent.parent,
+            updates: [{ _id: this.parent.id, "system.transformation.primary": species.id }],
+          });
         }
+        await foundry.documents.modifyBatch(operations);
       }
     }
   );

@@ -245,7 +245,12 @@ export default function ActorStatsPart(Base) {
 
       /** @inheritDoc */
       prepareStatDice() {
-        const items = [...docSort(this.parent.species), ...rankSort(this.parent.ranks), ...docSort(this.parent.mounts)];
+        const items = [
+          ...docSort(this.parent.species),
+          ...rankSort(this.parent.ranks),
+          ...docSort(this.parent.powers),
+          ...docSort(this.parent.mounts),
+        ];
         for (const item of items) { item.system.prepareStatDice(); }
         this._prepareStat("hp", items);
         this._prepareStat("mp", items);

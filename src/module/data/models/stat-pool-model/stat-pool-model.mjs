@@ -5,7 +5,7 @@ import { formulaExists } from "../../../helpers/formula.mjs";
 import { getImage } from "../../../helpers/path.mjs";
 import { toId } from "../../../helpers/string.mjs";
 import { BaseDataModel } from "../../abstract/_module.mjs";
-import { rollableFormulaField } from "../../fields/tools/builders.mjs";
+import { FormulaField } from "../../fields/_module.mjs";
 import { StatDie } from "../../pseudo-documents/_module.mjs";
 
 const { fields } = foundry.data;
@@ -27,7 +27,13 @@ export default class StatPoolModel extends BaseDataModel {
   static defineSchema() {
     return {
       disabled: new fields.BooleanField({ initial: false }),
-      formula: rollableFormulaField({ initial: "1d10", placeholder: _loc("COMMON.None") }),
+      formula: new FormulaField({
+        blank: true,
+        deterministic: false,
+        nullable: false,
+        placeholder: _loc("COMMON.None"),
+        required: true,
+      }),
       spent: new fields.SetField(new fields.NumberField()),
       stat: new fields.StringField({ choices: POOL_STATS, nullable: false, required: true }),
     };
@@ -96,6 +102,22 @@ export default class StatPoolModel extends BaseDataModel {
    */
   get flavor() {
     return this.stat;
+  }
+
+  /**
+   * Whether this has dice.
+   * @return {boolean}
+   */
+  get hasDice() {
+    return formulaExists(this.formula);
+  }
+
+  /**
+   * Icon for this pool's current enabled/disabled state.
+   * @returns {string}
+   */
+  get icon() {
+    return TERIOCK.display.icons.stat[this.disabled ? `${this.stat}Off` : `${this.stat}On`];
   }
 
   /**

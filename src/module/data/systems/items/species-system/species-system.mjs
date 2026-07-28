@@ -28,8 +28,8 @@ const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabl
  * @extends {BaseItemSystem}
  * @extends {Teriock.Models.SpeciesSystemData}
  * @mixes WikiSystem
- * @mixes StatGiverSystem
  * @mixes CompetenceDisplaySystem
+ * @mixes StatGiverSystem
  * @mixes SpeciesPanelPart
  * @mixes SpeciesTransformationPart
  */
@@ -37,8 +37,8 @@ export default class SpeciesSystem
   extends mixClasses(
     BaseItemSystem,
     systemMixins.WikiSystemMixin,
-    systemMixins.StatGiverSystemMixin,
     systemMixins.CompetenceDisplaySystemMixin,
+    systemMixins.StatGiverSystemMixin,
     parts.SpeciesPanelPart,
     parts.SpeciesTransformationPart,
   )
@@ -183,7 +183,10 @@ export default class SpeciesSystem
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    if (this.parent.checkEditor(userId) && this.actor && options.interactive) { this.#onCreateChangeSize(); }
+    if (
+      this.parent.checkEditor(userId) && this.actor && options.interactive
+      && this.parent.master?.documentName === "Actor"
+    ) { this.#onCreateChangeSize(); }
   }
 
   /** @inheritDoc */

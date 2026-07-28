@@ -23,6 +23,14 @@ export default function StatGiverSystemMixin(Base) {
       /** @inheritDoc */
       static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.StatGiver"];
 
+      /**
+       * The initial stat pool formula to use.
+       * @return {Teriock.System.FormulaString}
+       */
+      static get _initialStatPoolFormula() {
+        return "1d10";
+      }
+
       /** @inheritDoc */
       static get metadata() {
         return foundry.utils.mergeObject(super.metadata, { stats: true });
@@ -33,7 +41,19 @@ export default function StatGiverSystemMixin(Base) {
         return Object.assign(super.defineSchema(), {
           statDice: new fields.SchemaField(
             Object.fromEntries(
-              POOL_STATS.map(k => [k, new fields.EmbeddedDataField(StatPoolModel, { initial: { stat: k } })]),
+              POOL_STATS.map(
+                k => [
+                  k,
+                  new fields.EmbeddedDataField(StatPoolModel, {
+                    initial: {
+                      disabled: false,
+                      formula: this._initialStatPoolFormula,
+                      spent: [],
+                      stat: k,
+                    },
+                  }),
+                ]
+              ),
             ),
           ),
         });
@@ -41,8 +61,30 @@ export default function StatGiverSystemMixin(Base) {
 
       /** @inheritDoc */
       static migrateData(source, options, state) {
-        for (const stat of POOL_STATS) { foundry.utils.setProperty(source, `statDice.${stat}.stat`, stat); }
+        for (const stat of POOL_STATS) {
+          const pool = foundry.utils.getProperty(source, `statDice.${stat}`);
+          if (foundry.utils.getType(pool) === "Object" && !pool.stat) { pool.stat = stat; }
+        }
         return super.migrateData(source, options, state);
+      }
+
+      /** @inheritDoc */
+      get _embedIcons() {
+        return [
+          ...POOL_STATS.map(stat => {
+            const disabled = this.statDice[stat].disabled;
+            return {
+              action: `toggle${stat.capitalize()}DiceDoc`,
+              icon: this.statDice[stat].icon,
+              tooltip: _loc(`TERIOCK.SYSTEMS.StatGiver.EMBED.${stat}${disabled ? "Disabled" : "Enabled"}`),
+              onClick: async () => {
+                await this.parent.update({ [`system.statDice.${stat}.disabled`]: !disabled });
+              },
+              visible: () => this.parent.isOwner && this._canToggleStatDice(stat) && this.statDice[stat].hasDice,
+            };
+          }),
+          ...super._embedIcons,
+        ];
       }
 
       /** @returns {Teriock.Panels.PanelBar} */
@@ -51,8 +93,10 @@ export default function StatGiverSystemMixin(Base) {
           icon: icons.ui.dice,
           label: _loc("TERIOCK.SYSTEMS.StatGiver.PANELS.statDice"),
           wrappers: POOL_STATS.map(k =>
-            _loc(`TERIOCK.SYSTEMS.StatGiver.PANELS.${k}`, { value: this.statDice[k].formula })
-          ),
+            this.statDice[k].hasDice
+              ? _loc(`TERIOCK.SYSTEMS.StatGiver.PANELS.${k}`, { value: this.statDice[k].formula })
+              : ""
+          ).filter(Boolean),
         };
       }
 
@@ -74,25 +118,25 @@ export default function StatGiverSystemMixin(Base) {
         const entries = super.getCardContextMenuEntries(doc);
         if (!doc?.isOwner) { return entries; }
         for (const stat of POOL_STATS) {
-          const canToggle = this._canToggleStatDice(stat);
+          const canToggle = this._canToggleStatDice(stat) && this.statDice[stat].hasDice;
           entries.push({
             group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.enable, "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.stat[`${stat}On`], "contextMenu"),
             label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.enable${stat.capitalize()}Dice`),
-            visible: this.statDice[stat].disabled && canToggle
-              && this.parent._checkValidEditorDocument(doc, { self: false }),
             onClick: async () => {
               await this.parent.update({ [`system.statDice.${stat}.disabled`]: false });
             },
+            visible: () =>
+              this.statDice[stat].disabled && canToggle && this.parent._checkValidEditorDocument(doc, { self: false }),
           }, {
             group: "control",
-            icon: makeIcon(TERIOCK.display.icons.ui.disable, "contextMenu"),
+            icon: makeIcon(TERIOCK.display.icons.stat[`${stat}Off`], "contextMenu"),
             label: _loc(`TERIOCK.SYSTEMS.StatGiver.MENU.disable${stat.capitalize()}Dice`),
-            visible: !this.statDice[stat].disabled && canToggle
-              && this.parent._checkValidEditorDocument(doc, { self: false }),
             onClick: async () => {
               await this.parent.update({ [`system.statDice.${stat}.disabled`]: true });
             },
+            visible: () =>
+              !this.statDice[stat].disabled && canToggle && this.parent._checkValidEditorDocument(doc, { self: false }),
           });
         }
         return entries;
@@ -121,7 +165,10 @@ export default function StatGiverSystemMixin(Base) {
 
       /** @inheritDoc */
       prepareStatDice() {
-        for (const stat of POOL_STATS) { this.statDice[stat].prepareStatDice(); }
+        for (const stat of POOL_STATS) {
+          this.statDice[stat].prepareStatDice();
+          if (!this._canToggleStatDice(stat)) { this.statDice[stat].disabled = true; }
+        }
       }
     }
   );

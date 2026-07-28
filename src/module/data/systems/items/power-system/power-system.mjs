@@ -17,16 +17,23 @@ const { fields } = foundry.data;
  * @extends {Teriock.Models.PowerSystemData}
  * @mixes ArmorSuppressionSystem
  * @mixes CompetenceDisplaySystem
+ * @mixes StatGiverSystem
  */
 export default class PowerSystem
   extends mixClasses(
     BaseItemSystem,
     systemMixins.ArmorSuppressionSystemMixin,
     systemMixins.CompetenceDisplaySystemMixin,
+    systemMixins.StatGiverSystemMixin,
   )
 {
   /** @inheritDoc */
   static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "TERIOCK.SYSTEMS.Power"];
+
+  /** @inheritDoc */
+  static get _initialStatPoolFormula() {
+    return "";
+  }
 
   /** @inheritDoc */
   static get metadata() {
@@ -49,7 +56,7 @@ export default class PowerSystem
 
   /** @inheritDoc */
   get _panelBars() {
-    return [{
+    return [this._statBar, {
       icon: powerConfig.type[this.type].icon,
       label: _loc("TERIOCK.SYSTEMS.Power.FIELDS.type.label"),
       wrappers: [

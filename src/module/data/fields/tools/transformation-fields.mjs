@@ -98,7 +98,7 @@ export function automationTransformationFields() {
 
 /**
  * Effect transformation fields.
- * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, reset: SetField, suppress: SetField} & {competence: EmbeddedDataField, enabled: BooleanField, uuids: SetField}}
+ * @returns {{img: FilePathField, ring: BooleanField} & {level: StringField, override: SetField, reset: SetField, suppress: SetField} & {competence: EmbeddedDataField, enabled: BooleanField, primary: LocalDocumentField, uuids: SetField}}
  */
 export function effectTransformationFields() {
   return Object.assign(automationTransformationFields(), {
@@ -109,6 +109,11 @@ export function effectTransformationFields() {
       label: "TERIOCK.SCHEMA.Transformation.enabled.label",
       nullable: false,
       required: false,
+    }),
+    primary: new LocalDocumentField(foundry.documents.BaseItem, {
+      hint: "TERIOCK.SCHEMA.Transformation.primary.hint",
+      label: "TERIOCK.SCHEMA.Transformation.primary.label",
+      nullify: d => d.type !== "species",
     }),
     uuids: new fields.SetField(
       new fields.DocumentUUIDField({

@@ -14,7 +14,7 @@ declare global {
     };
 
     export type ActorTransformationConfig = SpeciesTransformationConfig & {
-      /** <schema> ID of a transformation effect */
+      /** <schema> The primary transformation effect */
       primary: TeriockLingering | null;
     };
 
@@ -38,6 +38,8 @@ declare global {
       competence: CompetenceModel;
       /** <schema> Whether transformation is enabled */
       enabled: boolean;
+      /** <schema> The primary transformation species */
+      primary: TeriockSpecies | null;
       /** <schema> UUID of specific species to transform into */
       uuids: UUID<TeriockSpecies>[];
     };

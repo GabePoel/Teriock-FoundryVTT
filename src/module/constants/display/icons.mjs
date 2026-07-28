@@ -255,7 +255,16 @@ export const icons = {
     size: "mdi-human-male-height",
     traits: "ms-flag",
   },
-  stat: { gp: "ms-poker-chip", hp: "ms-favorite", lp: "ms-hourglass", mp: "ms-water-drop" },
+  stat: {
+    gp: "ms-poker-chip",
+    hp: "ms-favorite",
+    hpOff: "mdi-heart-off",
+    hpOn: "ms-cardio-load",
+    lp: "ms-hourglass",
+    mp: "ms-water-drop",
+    mpOff: "ms-invert-colors-off",
+    mpOn: "ms-invert-colors",
+  },
   target: {
     armor: "mdi-shield-account",
     item: "ms-candle",
