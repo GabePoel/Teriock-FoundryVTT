@@ -2,18 +2,34 @@ const { DragDrop } = foundry.applications.ux;
 
 /**
  * Mixin adding drag-and-drop handling to applications.
- * @template {Constructor<ApplicationV2>} T
+ * @template {Constructor<BaseApplication>} T
  * @param {T} Base
  */
 export default function DragDropApplicationMixin(Base) {
   return (
     /**
      * @extends {ApplicationV2}
+     * @mixes BaseApplication
+     * @property {ApplicationConfiguration & Teriock.Application._ApplicationConfiguration} options
      * @mixin
      */
     class DragDropApplication extends Base {
       /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = { teriock: { maximizeOnDragEnter: false } };
+      static DEFAULT_OPTIONS = {
+        teriock: {
+          dragDrop: {
+            bind: { dragEnter: true, dragLeave: true, dragOver: true, dragStart: true, drop: true },
+            dropBehavior: { child: false, effect: "none", inherit: false },
+            selectors: { drag: ".draggable", drop: null },
+            style: {
+              dropTargetClass: "teriock-drop-target",
+              maximizeOnDragEnter: false,
+              minimizeOnDragStart: false,
+              styleDropTarget: false,
+            },
+          },
+        },
+      };
 
       /** @type {DragDrop} */
       #dragDrop = null;
@@ -33,7 +49,7 @@ export default function DragDropApplicationMixin(Base) {
        */
       get #shouldMaximizeOnDragEnter() {
         return game.settings.get("teriock", "maximizeApplicationsOnDragEnter")
-          && this.options?.teriock?.maximizeOnDragEnter && this.hasFrame && !this.isDetached;
+          && this.options.teriock.dragDrop.style.maximizeOnDragEnter && this.hasFrame && !this.isDetached;
       }
 
       /**
@@ -42,7 +58,7 @@ export default function DragDropApplicationMixin(Base) {
        */
       get #shouldMinimizeOnDragStart() {
         return game.settings.get("teriock", "minimizeApplicationsOnDragStart")
-          && this.options?.teriock?.minimizeOnDragStart && this.hasFrame && !this.isDetached;
+          && this.options.teriock.dragDrop.style.minimizeOnDragStart && this.hasFrame && !this.isDetached;
       }
 
       /**
@@ -52,11 +68,11 @@ export default function DragDropApplicationMixin(Base) {
       get _dragDrop() {
         return this.#dragDrop ??= new DragDrop.implementation({
           callbacks: {
-            dragenter: this._onDragEnter.bind(this),
-            dragleave: this._onDragLeave.bind(this),
-            dragover: this._onDragOver.bind(this),
-            dragstart: this._onDragStart.bind(this),
-            drop: this._onDrop.bind(this),
+            dragenter: this.options.teriock.dragDrop.bind.dragEnter ? this._onDragEnter.bind(this) : undefined,
+            dragleave: this.options.teriock.dragDrop.bind.dragLeave ? this._onDragLeave.bind(this) : undefined,
+            dragover: this.options.teriock.dragDrop.bind.dragOver ? this._onDragOver.bind(this) : undefined,
+            dragstart: this.options.teriock.dragDrop.bind.dragStart ? this._onDragStart.bind(this) : undefined,
+            drop: this.options.teriock.dragDrop.bind.drop ? this._onDrop.bind(this) : undefined,
           },
           dragSelector: this._dragSelector,
           dropSelector: this._dropSelector,
@@ -69,7 +85,7 @@ export default function DragDropApplicationMixin(Base) {
        * @returns {string|null}
        */
       get _dragSelector() {
-        return ".draggable";
+        return this.options.teriock.dragDrop.selectors.drag;
       }
 
       /**
@@ -77,7 +93,15 @@ export default function DragDropApplicationMixin(Base) {
        * @returns {string|null}
        */
       get _dropSelector() {
-        return null;
+        return this.options.teriock.dragDrop.selectors.drop;
+      }
+
+      /**
+       * What gets marked as where a drop would land.
+       * @returns {HTMLElement|null}
+       */
+      get _dropTargetElement() {
+        return this.window.content;
       }
 
       /**
@@ -104,7 +128,7 @@ export default function DragDropApplicationMixin(Base) {
        * @returns {Teriock.Application.DropEffect}
        */
       _dropEffect(_event) {
-        return "none";
+        return this.options.teriock.dragDrop.dropBehavior.effect;
       }
 
       /**
@@ -139,9 +163,7 @@ export default function DragDropApplicationMixin(Base) {
        */
       async _onDragEnter(event) {
         if (this.#dragIsInApplication) { return; }
-        this.#dragIsInApplication = true;
-        DragDrop.implementation.enteredApplications.add(this);
-        await this._onDragEnterApplication(event);
+        DragDrop.implementation.enterApplication(this, event);
       }
 
       /**
@@ -150,6 +172,7 @@ export default function DragDropApplicationMixin(Base) {
        * @returns {Promise<void>}
        */
       async _onDragEnterApplication(event) {
+        this.#dragIsInApplication = true;
         if (this._dropEffect(event) === "none" && !this._fieldDropTarget(event)) { return; }
         if (this.hasFrame) { this.bringToFront(); }
         if (!this.#shouldMaximizeOnDragEnter) { return; }
@@ -165,7 +188,7 @@ export default function DragDropApplicationMixin(Base) {
       async _onDragLeave(event) {
         // Drag leave also fires while moving between elements within this application.
         if (event.currentTarget.contains(event.relatedTarget)) { return; }
-        await this._onDragLeaveApplication();
+        DragDrop.implementation.leaveApplication(this, event);
       }
 
       /**
@@ -174,9 +197,11 @@ export default function DragDropApplicationMixin(Base) {
        */
       async _onDragLeaveApplication() {
         this.#dragIsInApplication = false;
-        DragDrop.implementation.enteredApplications.delete(this);
+        if (this.options.teriock.dragDrop.style.styleDropTarget) {
+          this._dropTargetElement?.classList.remove(this.options.teriock.dragDrop.style.dropTargetClass);
+        }
         if (!this.#shouldMaximizeOnDragEnter) { return; }
-        if (this.#wasMinimizedBeforeDragEnter) { await this.minimize(); }
+        if (this.#wasMinimizedBeforeDragEnter) { this.minimize(); }
         this.#wasMinimizedBeforeDragEnter = null;
       }
 
@@ -187,6 +212,11 @@ export default function DragDropApplicationMixin(Base) {
        */
       async _onDragOver(event) {
         event.dataTransfer.dropEffect = this._fieldDropTarget(event) ? "copy" : this._dropEffect(event);
+        if (this.options.teriock.dragDrop.style.styleDropTarget) {
+          // Field drop targets receive the drop themselves, so the sheet shouldn't be marked while over one.
+          const marked = event.dataTransfer.dropEffect !== "none" && !this._fieldDropTarget(event);
+          this._dropTargetElement?.classList.toggle(this.options.teriock.dragDrop.style.dropTargetClass, marked);
+        }
       }
 
       /**
@@ -213,13 +243,14 @@ export default function DragDropApplicationMixin(Base) {
 
       /**
        * Handles drop events.
-       * @param {DragEvent} _event
+       * @param {DragEvent} event
        * @returns {Promise<void>}
        */
-      async _onDrop(_event) {
+      async _onDrop(event) {
+        this.#wasMinimizedBeforeDragEnter = false;
         this.#dragIsInApplication = false;
-        DragDrop.implementation.enteredApplications.delete(this);
-        this.#wasMinimizedBeforeDragEnter = null;
+        DragDrop.implementation.leaveApplication(this);
+        if (this.options.teriock.dragDrop.dropBehavior.inherit) { return super._onDrop?.(event); }
       }
 
       /**

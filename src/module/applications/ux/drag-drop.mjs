@@ -2,6 +2,13 @@ const { DragDrop, TextEditor } = foundry.applications.ux;
 
 /** @inheritDoc */
 export default class TeriockDragDrop extends DragDrop {
+  /**
+   * Applications the current drag is inside, so they can be cleaned up when a drag ends without a drop or leave event
+   * ever reaching them.
+   * @type {Set<DragDropApplication>}
+   */
+  static #enteredApplications = new Set();
+
   /** @type {DragEvent|null} */
   static #initializedEvent = null;
 
@@ -21,8 +28,10 @@ export default class TeriockDragDrop extends DragDrop {
       const application = foundry.applications.instances.get(element?.closest?.(".application")?.id);
       application?._onDropRejected?.(event);
     }
-    for (const application of TeriockDragDrop.enteredApplications) { application._onDragLeaveApplication(); }
-    TeriockDragDrop.enteredApplications.clear();
+    for (const application of TeriockDragDrop.#enteredApplications) {
+      TeriockDragDrop.leaveApplication(application, event);
+    }
+    TeriockDragDrop.#enteredApplications.clear();
     TeriockDragDrop.#payload = null;
     TeriockDragDrop.dragStartApplication = null;
   }
@@ -44,18 +53,21 @@ export default class TeriockDragDrop extends DragDrop {
   static dragStartApplication = null;
 
   /**
-   * Applications the current drag is inside, so they can be cleaned up when a drag ends without a drop or leave event
-   * ever reaching them.
-   * @type {Set<DragDropApplication>}
-   */
-  static enteredApplications = new Set();
-
-  /**
    * The payload of the drag currently in progress.
    * @returns {Teriock.Application.DragDropPayload<AnyCommonDocument>|null}
    */
   static get payload() {
     return TeriockDragDrop.#payload;
+  }
+
+  /**
+   * Register an application as being entered;
+   * @param {DragDropApplication} application
+   * @param {DragEvent} event
+   */
+  static enterApplication(application, event) {
+    TeriockDragDrop.#enteredApplications.add(application);
+    application?._onDragEnterApplication?.(event);
   }
 
   /**
@@ -72,13 +84,23 @@ export default class TeriockDragDrop extends DragDrop {
     TeriockDragDrop.#payload = dragData;
     const document = fromUuidSync(dragData.uuid, { strict: false });
     if (document) {
-      this.#setDocumentDragData(event, dragData, document);
+      TeriockDragDrop.#setDocumentDragData(event, dragData, document);
     } else {
       fromUuid(dragData.uuid).then(document => {
         if (!document) { return; }
-        this.#setDocumentDragData(event, dragData, document);
+        TeriockDragDrop.#setDocumentDragData(event, dragData, document);
       });
     }
+  }
+
+  /**
+   * Register an application as being left;
+   * @param {DragDropApplication} application
+   * @param {DragEvent} event
+   */
+  static leaveApplication(application, event) {
+    TeriockDragDrop.#enteredApplications.delete(application);
+    application?._onDragLeaveApplication?.(event);
   }
 
   /**

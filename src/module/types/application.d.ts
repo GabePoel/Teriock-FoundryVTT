@@ -22,10 +22,32 @@ declare global {
       teriock?: {
         /** Time to wait before firing a single click action if a double click is not detected. */
         doubleClickDelay?: number;
-        /** If this should maximize when something is dragged into it. */
-        maximizeOnDragEnter?: boolean;
-        /** If this should minimize when something is dragged out of it. */
-        minimizeOnDragStart?: boolean;
+        dragDrop?: {
+          /** Whether to bind callbacks */
+          bind?: { dragEnter?: boolean, dragLeave?: boolean, dragOver?: boolean, dragStart?: boolean, drop?: boolean };
+          /** Drop behavior customization */
+          dropBehavior?: {
+            /** Whether to treat drops as potential child documents */
+            child?: boolean;
+            /** Default drop effect */
+            effect?: Teriock.Application.DropEffect;
+            /** Whether to inherit default drop behavior from parent Foundry class */
+            inherit?: boolean;
+          };
+          /** CSS selectors */
+          selectors?: { drag?: string | null, drop?: string | null };
+          /** Style customization */
+          style?: {
+            /** Class to apply to the drop target if styled */
+            dropTargetClass?: string;
+            /** If this should maximize when something is dragged into it. */
+            maximizeOnDragEnter?: boolean;
+            /** If this should minimize when something is dragged out of it. */
+            minimizeOnDragStart?: boolean;
+            /** If the drop target should be highlighted */
+            styleDropTarget?: boolean;
+          };
+        };
       };
     };
 

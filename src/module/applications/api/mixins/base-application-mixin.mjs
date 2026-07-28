@@ -7,6 +7,7 @@ export default function BaseApplicationMixin(Base) {
   /**
    * @extends {ApplicationV2}
    * @mixin
+   * @property {ApplicationConfiguration & Teriock.Application._ApplicationConfiguration} options
    */
   class BaseApplication extends Base {
     /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */

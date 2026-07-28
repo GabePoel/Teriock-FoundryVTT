@@ -2,7 +2,6 @@ import { DragDropApplicationMixin } from "../../api/mixins/_module.mjs";
 import { TeriockDragDrop, TeriockTextEditor } from "../../ux/_module.mjs";
 
 const CHILD_DOCUMENT_TYPES = ["ActiveEffect", "Actor", "Item"];
-const DROP_TARGET_CLASS = "teriock-drop-target";
 
 /**
  * Mixin adding drag-and-drop handling to sheets.
@@ -19,7 +18,14 @@ export default function DragDropSheetMixin(Base) {
      */
     class DragDropSheet extends DragDropApplicationMixin(Base) {
       /** @type {Partial<ApplicationConfiguration & Teriock.Application._ApplicationConfiguration>} */
-      static DEFAULT_OPTIONS = { teriock: { maximizeOnDragEnter: true, minimizeOnDragStart: true } };
+      static DEFAULT_OPTIONS = {
+        teriock: {
+          dragDrop: {
+            dropBehavior: { child: true, effect: "copy", inherit: false },
+            style: { maximizeOnDragEnter: true, minimizeOnDragStart: true, styleDropTarget: true },
+          },
+        },
+      };
 
       /**
        * Whether a drop should be performed by moving a sub.
@@ -68,15 +74,7 @@ export default function DragDropSheetMixin(Base) {
        * @returns {string[]}
        */
       get _droppableDocumentNames() {
-        return CHILD_DOCUMENT_TYPES;
-      }
-
-      /**
-       * What gets marked as where a drop would land.
-       * @returns {HTMLElement|null}
-       */
-      get _dropTargetElement() {
-        return this.window.content;
+        return this.options.teriock.dragDrop.dropBehavior.child ? CHILD_DOCUMENT_TYPES : CONST.ALL_DOCUMENT_TYPES;
       }
 
       /** @inheritDoc */
@@ -84,20 +82,6 @@ export default function DragDropSheetMixin(Base) {
         if (TeriockDragDrop.dragStartApplication === this) { return "none"; }
         const dropEffect = this._payloadDropEffect();
         return this._validateDrop({ dropEffect, notify: false }) ? dropEffect : "none";
-      }
-
-      /** @inheritDoc */
-      async _onDragLeaveApplication() {
-        await super._onDragLeaveApplication();
-        this._dropTargetElement?.classList.remove(DROP_TARGET_CLASS);
-      }
-
-      /** @inheritDoc */
-      async _onDragOver(event) {
-        await super._onDragOver(event);
-        // Field drop targets receive the drop themselves, so the sheet shouldn't be marked while over one.
-        const marked = event.dataTransfer.dropEffect !== "none" && !this._fieldDropTarget(event);
-        this._dropTargetElement?.classList.toggle(DROP_TARGET_CLASS, marked);
       }
 
       /** @inheritDoc */
@@ -109,9 +93,10 @@ export default function DragDropSheetMixin(Base) {
       /** @inheritDoc */
       async _onDrop(event) {
         await super._onDrop(event);
-        this._dropTargetElement?.classList.remove(DROP_TARGET_CLASS);
-        const dropData = TeriockTextEditor.getDragEventData(event);
-        if (CHILD_DOCUMENT_TYPES.includes(dropData.type)) { await this._onDropChild(event, dropData); }
+        if (this.options.teriock.dragDrop.dropBehavior.child) {
+          const dropData = TeriockTextEditor.getDragEventData(event);
+          if (CHILD_DOCUMENT_TYPES.includes(dropData.type)) { await this._onDropChild(event, dropData); }
+        }
       }
 
       /**
@@ -225,7 +210,9 @@ export default function DragDropSheetMixin(Base) {
        * @returns {boolean}
        */
       _validateDropChildType({ document, notify }) {
-        return this.document.constructor.validateChildType(this.document, document, { notifyOnFailure: notify });
+        return this.options.teriock.dragDrop.dropBehavior.child
+          ? this.document.constructor.validateChildType(this.document, document, { notifyOnFailure: notify })
+          : true;
       }
 
       /**

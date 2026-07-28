@@ -21,7 +21,7 @@ export default class PanelSheet extends DragDropApplicationMixin(TeriockDocument
     actions: { openSheet: this.#onOpenSheet },
     classes: ["panel-application"],
     position: { width: 300 },
-    teriock: { autoIcon: false, minimizeOnDragStart: true },
+    teriock: { autoIcon: false, dragDrop: { style: { minimizeOnDragStart: true } } },
     window: {
       controls: [{
         action: "openSheet",
