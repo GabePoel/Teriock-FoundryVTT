@@ -7,25 +7,18 @@
   '
 >
   <div
-    class="
-      teriock-sheet-profile-img
-      {{#unless editable}}
-        timage
-      {{/unless}}
-    "
-    data-src="{{ img }}"
+    class="teriock-sheet-profile-img"
     {{#if (exists system.color)}}
       style="outline-color:{{{ system.color }}}"
     {{/if}}
   >
     <img
       class="profile-img"
-      src="{{ img }}"
-      data-edit="{{ imgPath }}"
       alt=""
-      {{#if editable}}
-        data-action="editImage"
-      {{/if}}
+      data-action="editImage"
+      data-edit="{{ imgPath }}"
+      data-never-disable="true"
+      src="{{ img }}"
       title="{{ name }}"
     />
   </div>

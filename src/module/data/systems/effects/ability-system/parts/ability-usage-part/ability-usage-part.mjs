@@ -266,7 +266,7 @@ export default function AbilityUsagePart(Base) {
       /** @inheritDoc */
       prepareBaseData() {
         super.prepareBaseData();
-        if (this.maneuver === "passive") { this.executionTime.base = "passive" }
+        if (this.maneuver === "passive") { this.executionTime.base = "passive"; }
       }
 
       /** @inheritDoc */
