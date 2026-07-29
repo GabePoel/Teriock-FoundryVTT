@@ -1,11 +1,10 @@
 _id: d3ce50677dca3446
-_key: '!effects!d3ce50677dca3446'
+_key: "!effects!d3ce50677dca3446"
 img: systems/teriock/src/icons/abilities/web-ball.webp
 name: Web Ball
 system:
   automations:
-    5d57231066693cee:
-      _id: 5d57231066693cee
+    - _id: 5d57231066693cee
       executor: false
       relation: include
       status: snared
@@ -17,21 +16,19 @@ system:
   duration:
     unit: instant
   endCondition: >-
-    <p>At the start of each of the @Identifier[core:targets]{target's}
-    @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of these
-    dice roll a 4, this effect ends.</p>
+    <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
   executionTime:
     base: a1
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       event: turn
       method: roll
       relation: target
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: start
       type: combat
@@ -44,12 +41,10 @@ system:
   powerSources:
     - martial
   range:
-    raw: '30'
+    raw: "30"
     unit: ft
   results:
-    hit: >-
-      <p>@Identifier[core:targets]{Target} is
-      @Identifier[condition:snared]{snared}.</p>
+    hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
   targets:
     - creature
 transfer: true

@@ -1,17 +1,14 @@
 _id: af98c06b062a4f8a
-_key: '!effects!af98c06b062a4f8a'
+_key: "!effects!af98c06b062a4f8a"
 img: systems/teriock/src/icons/abilities/opportunity-attack.webp
 name: Opportunity Attack
 system:
   automations:
-    ptx3hlPsPF9jHgFO:
-      _id: ptx3hlPsPF9jHgFO
+    - _id: ptx3hlPsPF9jHgFO
       automatic: true
       expandTables: false
       local:
-        qualifier: >-
-          and(@ability, @interaction.attack, @time.a1, or(@delivery.weapon,
-          @delivery.hand))
+        qualifier: and(@ability, @interaction.attack, @time.a1, or(@delivery.weapon, @delivery.hand))
       multi: false
       trigger: execute
       type: useDocuments
@@ -29,9 +26,8 @@ system:
   maneuver: reactive
   overview:
     base: >-
-      <p>You may make a @Wiki[Category:Single action abilities]{single action}
-      @Wiki[Category:Weapon delivery abilities]{weapon} or @Wiki[Category:Hand
-      delivery abilities]{hand} @Identifier[core:attack-interaction]{attack}
+      <p>You may make a @Wiki[Category:Single action abilities]{single action} @Wiki[Category:Weapon delivery
+      abilities]{weapon} or @Wiki[Category:Hand delivery abilities]{hand} @Identifier[core:attack-interaction]{attack}
       against the triggering creature.</p>
   powerSources:
     - martial
@@ -40,10 +36,8 @@ system:
   targets:
     - self
   trigger: >-
-    <p>A creature moves outside of your reach. This is also triggered when a
-    creature @Identifier[ability:reload]{reloads},
-    @Identifier[core:attack-interaction]{attacks} with, or
-    @Identifier[ability:interact]{interacts} to activate an
-    @Identifier[property:involved]{involved} item.</p>
+    <p>A creature moves outside of your reach. This is also triggered when a creature
+    @Identifier[ability:reload]{reloads}, @Identifier[core:attack-interaction]{attacks} with, or
+    @Identifier[ability:interact]{interacts} to activate an @Identifier[property:involved]{involved} item.</p>
 transfer: true
 type: ability

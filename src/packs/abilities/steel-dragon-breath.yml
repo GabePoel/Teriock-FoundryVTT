@@ -1,27 +1,25 @@
 _id: 037aac4f25f4e797
-_key: '!effects!037aac4f25f4e797'
+_key: "!effects!037aac4f25f4e797"
 img: systems/teriock/src/icons/abilities/steel-dragon-breath.webp
 name: Steel Dragon Breath
 system:
   automations:
-    iaRyiLjmNbLkpnGy:
-      _id: iaRyiLjmNbLkpnGy
-      distance: '30'
+    - _id: iaRyiLjmNbLkpnGy
+      distance: "30"
       movementAction: walk
       origin: executor
       originBarrier: true
       type: move
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.dragon'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.dragon"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
-      radius: '@ability.range + 5 * @h'
+      outerWidth: "0"
+      radius: "@ability.range + 5 * @h"
       regionType: cone
       restriction:
         enabled: true
@@ -32,8 +30,7 @@ system:
       type: region
       updateTargets: true
       visibility: 2
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
+    - _id: 800c70e6560525a8
       formula: (4 + 2 * @h)d10[magic]
       impact: damage
       merge: true
@@ -43,7 +40,7 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
@@ -53,28 +50,25 @@ system:
   featSaveAttribute: mov
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, deal an additional [[/damage 2d10[magic]]]
-    @Identifier[core:damage]{damage}. Additionally, the
-    @Identifier[core:range]{range} of this increases by 5 feet.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+    2d10[magic]]] @Identifier[core:damage]{damage}. Additionally, the @Identifier[core:range]{range} of this increases
+    by 5 feet.</p>
   identifier: steel-dragon-breath
   interaction: feat
   maneuver: active
   powerSources:
     - magical
   range:
-    raw: '30'
+    raw: "30"
     unit: ft
   results:
     fail: >-
-      <p>@Identifier[core:targets]{Target} takes [[/damage 4d10[magic]]]
-      @Identifier[core:damage]{damage} and is moved 30 feet away from you.</p>
+      <p>@Identifier[core:targets]{Target} takes [[/damage 4d10[magic]]] @Identifier[core:damage]{damage} and is moved
+      30 feet away from you.</p>
     save: >-
-      <p>Target takes half as much @Identifier[core:damage]{damage} from this as
-      they would otherwise and has no other non-@Identifier[core:damage]{damage}
-      effects applied to them. This is calculated after any
-      @Identifier[keyword:boosted]{boosts} or
-      @Identifier[keyword:deboosted]{deboosts}.</p>
+      <p>Target takes half as much @Identifier[core:damage]{damage} from this as they would otherwise and has no other
+      non-@Identifier[core:damage]{damage} effects applied to them. This is calculated after any
+      @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
   targets:
     - creature
 transfer: true

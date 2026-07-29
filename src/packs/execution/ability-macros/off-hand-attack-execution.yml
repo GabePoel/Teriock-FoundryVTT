@@ -1,13 +1,9 @@
 _id: 29b994da873c13a9
-_key: '!macros!29b994da873c13a9'
-command: >-
+_key: "!macros!29b994da873c13a9"
+command: |-
   const options = scope.execution.options;
-
   const actor = scope.execution.actor;
-
-  const armaments = actor.armaments.filter((a) => a.active &&
-  actor.system.wielding.attacker?.id !== a.id);
-
+  const armaments = actor.armaments.filter((a) => a.active && actor.system.wielding.attacker?.id !== a.id);
   if (armaments.length > 0) {
     const selectedArmament = await teriock.applications.dialogs.DocumentSelector.selectSingle(armaments, {
       hint: _loc("TERIOCK.DIALOGS.Select.Armament.hint"),

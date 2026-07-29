@@ -1,25 +1,23 @@
 _id: 24a1b8c9a33097bc
-_key: '!effects!24a1b8c9a33097bc'
+_key: "!effects!24a1b8c9a33097bc"
 img: systems/teriock/src/icons/abilities/combusting.webp
 name: Combusting
 system:
   automations:
-    UeNNIxvZO7GDi4Xq:
-      _id: UeNNIxvZO7GDi4Xq
+    - _id: UeNNIxvZO7GDi4Xq
       common:
         - shatter
       showConfirmationDialog: true
       type: common
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '60'
+    - _id: 7400b41f20d9f100
+      angle: "60"
       attachToToken: true
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: true
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
+      outerWidth: "0"
       regionType: emanation
       restriction:
         enabled: false
@@ -28,14 +26,12 @@ system:
       type: region
       updateTargets: true
       visibility: 2
-    29b275994cf9f5b1:
-      _id: 29b275994cf9f5b1
+    - _id: 29b275994cf9f5b1
       formula: 1d10[fire]
       impact: damage
       merge: true
       type: roll
-    5e9e1d2033fe152a:
-      _id: 5e9e1d2033fe152a
+    - _id: 5e9e1d2033fe152a
       executor: false
       relation: apply
       status: ruined
@@ -57,28 +53,23 @@ system:
   interaction: feat
   maneuver: reactive
   overview:
-    base: >-
-      <p>You @Identifier[condition:dead]{die} and become
-      @Identifier[condition:ruined]{ruined}.</p>
+    base: <p>You @Identifier[condition:dead]{die} and become @Identifier[condition:ruined]{ruined}.</p>
   powerSources:
     - martial
   range:
-    raw: '10'
+    raw: "10"
     unit: ft
   results:
     fail: >-
-      <p>@Identifier[core:targets]{Target} creatures take [[/damage 1d10[fire]]]
-      @Identifier[core:damage]{damage} and @Pack[teriock.equipment]{equipment}
-      they @Identifier[keyword:bearing]{bare} becomes
-      @Identifier[property:shattered]{shattered}.
-      @Identifier[core:targets]{Target} items that are not
-      @Identifier[keyword:bearing]{bared} by a creature are
-      @Identifier[property:shattered]{shattered}.</p>
+      <p>@Identifier[core:targets]{Target} creatures take [[/damage 1d10[fire]]] @Identifier[core:damage]{damage} and
+      @Pack[teriock.equipment]{equipment} they @Identifier[keyword:bearing]{bare} becomes
+      @Identifier[property:shattered]{shattered}. @Identifier[core:targets]{Target} items that are not
+      @Identifier[keyword:bearing]{bared} by a creature are @Identifier[property:shattered]{shattered}.</p>
   targets:
     - creature
     - item
   trigger: >-
-    <p>You @Identifier[condition:down]{drop}. This triggers automatically. You
-    cannot choose to not use it if you are able to.</p>
+    <p>You @Identifier[condition:down]{drop}. This triggers automatically. You cannot choose to not use it if you are
+    able to.</p>
 transfer: true
 type: ability

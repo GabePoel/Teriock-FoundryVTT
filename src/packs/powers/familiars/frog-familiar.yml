@@ -1,31 +1,28 @@
 _id: f94156e03c14504e
-_key: '!items!f94156e03c14504e'
+_key: "!items!f94156e03c14504e"
 effects:
   - _id: obJ7fic9MGtvixNW
-    _key: '!items.effects!f94156e03c14504e.obJ7fic9MGtvixNW'
+    _key: "!items.effects!f94156e03c14504e.obJ7fic9MGtvixNW"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2385fa510bf78937
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     name: Earthbind Touch
     system:
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
+        - _id: 800c70e6560525a8
           formula: (@h)d4[magic vine]
           heighten:
             - 1
           impact: damage
           type: roll
-        0b65894b82470568:
-          _id: 0b65894b82470568
+        - _id: 0b65894b82470568
           executor: false
           multi: false
           relation: include
           status: immobilized
           target: false
           type: status
-        5812b63d828a0227:
-          _id: 5812b63d828a0227
+        - _id: 5812b63d828a0227
           executor: false
           multi: false
           relation: include
@@ -36,34 +33,31 @@ effects:
         raw: 1
       delivery: hand
       duration:
-        raw: '1'
+        raw: "1"
         unit: minute
       elements:
         - nature
       endCondition: >-
-        <p>At the start of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           event: turn
           method: roll
           relation: target
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: start
           type: combat
       form: normal
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic vine]]]
-        @Identifier[core:damage]{damage} as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+        1d4[magic vine]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: earthbind-touch
       interaction: attack
       maneuver: active
@@ -74,12 +68,9 @@ effects:
       range:
         unit: contact
       results:
-        critHit: >-
-          <p>The @Identifier[core:targets]{target} automatically fails the first
-          [[/roll 2d4]] roll.</p>
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: >-
-          <p>@Identifier[core:targets]{Target} is
-          @Identifier[condition:grounded]{grounded} and
+          <p>@Identifier[core:targets]{Target} is @Identifier[condition:grounded]{grounded} and
           @Identifier[condition:immobilized]{immobilized}.</p>
       spell: true
       standard: true
@@ -88,7 +79,7 @@ effects:
     transfer: true
     type: ability
   - _id: frogTamer0000000
-    _key: '!items.effects!f94156e03c14504e.frogTamer0000000'
+    _key: "!items.effects!f94156e03c14504e.frogTamer0000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Frog Tamer
     system:
@@ -101,48 +92,45 @@ effects:
     transfer: true
     type: fluency
   - _id: UlUW3Zx0q3tNUMt5
-    _key: '!items.effects!f94156e03c14504e.UlUW3Zx0q3tNUMt5'
+    _key: "!items.effects!f94156e03c14504e.UlUW3Zx0q3tNUMt5"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.3TtZLD3ppn1UO5vG
     img: systems/teriock/src/icons/abilities/leaping.webp
     name: Leaping
     system:
       automations:
-        Arm4CqvFyyRVggkV:
-          _id: Arm4CqvFyyRVggkV
+        - _id: Arm4CqvFyyRVggkV
           movementAction: jump
           type: changeMovement
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
+        - _id: e789ed5e109ebd1a
           changes:
             - key: system.speedAdjustments.leapVertical
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
-              value: '1'
+              value: "1"
             - key: system.speedAdjustments.leapHorizontal
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
-              value: '2'
+              value: "2"
           type: changes
-        f025905e157ac261:
-          _id: f025905e157ac261
+        - _id: f025905e157ac261
           changes:
             - key: system.speedAdjustments.leapVertical
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
-              value: '2'
+              value: "2"
             - key: system.speedAdjustments.leapHorizontal
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
-              value: '3'
+              value: "3"
           competencies:
             - 1
             - 2
@@ -162,12 +150,10 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You vertically leap at @Identifier[core:movement-speed]{quarter
-          speed} and horizontally leap at @Identifier[core:movement-speed]{half
-          speed}.</p>
+          <p>You vertically leap at @Identifier[core:movement-speed]{quarter speed} and horizontally leap at
+          @Identifier[core:movement-speed]{half speed}.</p>
         proficient: >-
-          <p>You instead vertically leap at
-          @Identifier[core:movement-speed]{half speed} and horizontally leap at
+          <p>You instead vertically leap at @Identifier[core:movement-speed]{half speed} and horizontally leap at
           @Identifier[core:movement-speed]{full speed}.</p>
       powerSources:
         - martial
@@ -187,9 +173,7 @@ system:
     raw: 1
   description: <p>@Embed[creature:frog inline]</p>
   identifier: frog-familiar
-  instructions: >-
-    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
-    and delete the other one.</p>
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   type: familiar
 type: power

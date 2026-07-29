@@ -1,8 +1,8 @@
 _id: 6fc97d9708db26ab
-_key: '!items!6fc97d9708db26ab'
+_key: "!items!6fc97d9708db26ab"
 effects:
   - _id: batTamer00000000
-    _key: '!items.effects!6fc97d9708db26ab.batTamer00000000'
+    _key: "!items.effects!6fc97d9708db26ab.batTamer00000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Bat Tamer
     system:
@@ -15,22 +15,20 @@ effects:
     transfer: true
     type: fluency
   - _id: 9AR2MY4K8GGEFK73
-    _key: '!items.effects!6fc97d9708db26ab.9AR2MY4K8GGEFK73'
+    _key: "!items.effects!6fc97d9708db26ab.9AR2MY4K8GGEFK73"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.12c2bc74fed2e058
     img: systems/teriock/src/icons/abilities/fear-touch.webp
     name: Fear Touch
     system:
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
+        - _id: 800c70e6560525a8
           formula: (@h)d4[magic terror]
           heighten:
             - 1
           impact: damage
           type: roll
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
+        - _id: b4960732f0b9ed9f
           executor: true
           multi: false
           relation: include
@@ -41,21 +39,19 @@ effects:
         raw: 1
       delivery: hand
       duration:
-        raw: '1'
+        raw: "1"
         unit: minute
       effectTypes:
         - mental
       elements:
         - necromancy
       endCondition: >-
-        <p>At the end of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           crit:
             - 0
           event: turn
@@ -64,12 +60,11 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: end
           type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
+        - _id: 28294dbc80493c2c
           crit:
             - 1
           event: turn
@@ -78,15 +73,14 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 1
           timing: end
           type: combat
       form: normal
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic terror]]]
-        @Identifier[core:damage]{damage} as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+        1d4[magic terror]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: fear-touch
       interaction: attack
       maneuver: active
@@ -97,12 +91,8 @@ effects:
       range:
         unit: contact
       results:
-        critHit: >-
-          <p>The @Identifier[core:targets]{target} automatically fails the first
-          [[/roll 2d4]] roll.</p>
-        hit: >-
-          <p>@Identifier[core:targets]{Target} is
-          @Identifier[condition:frightened]{frightened}.</p>
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frightened]{frightened}.</p>
       spell: true
       standard: true
       targets:
@@ -110,22 +100,21 @@ effects:
     transfer: true
     type: ability
   - _id: jycmf3hOwJXsYswu
-    _key: '!items.effects!6fc97d9708db26ab.jycmf3hOwJXsYswu'
+    _key: "!items.effects!6fc97d9708db26ab.jycmf3hOwJXsYswu"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.aaaa08a40cf32777
     img: systems/teriock/src/icons/abilities/night-vision.webp
     name: Night Vision
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
+        - _id: e789ed5e109ebd1a
           changes:
             - key: system.senses.dark
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
-              value: '120'
+              value: "120"
           type: changes
       competence:
         raw: 1
@@ -142,8 +131,8 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You can see in the dark up to 60 feet as though it is bright light
-          and up to 120 feet as though it is dim light.</p>
+          <p>You can see in the dark up to 60 feet as though it is bright light and up to 120 feet as though it is dim
+          light.</p>
       powerSources:
         - martial
       range:
@@ -160,9 +149,7 @@ system:
     raw: 1
   description: <p>@Embed[creature:bat inline]</p>
   identifier: bat-familiar
-  instructions: >-
-    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
-    and delete the other one.</p>
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   type: familiar
 type: power

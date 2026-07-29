@@ -1,45 +1,40 @@
 _id: 65abf191497d73fc
-_key: '!items!65abf191497d73fc'
+_key: "!items!65abf191497d73fc"
 effects:
   - _id: nhtXlf0P8MUN69hX
-    _key: '!items.effects!65abf191497d73fc.nhtXlf0P8MUN69hX'
+    _key: "!items.effects!65abf191497d73fc.nhtXlf0P8MUN69hX"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
       affinities:
-        hPfBt6zwzwH60lYt:
-          _id: hPfBt6zwzwH60lYt
-          activeQualifier: '@flags.improvedBrace'
+        - _id: hPfBt6zwzwH60lYt
+          activeQualifier: "@flags.improvedBrace"
           amount: 1
           category: effectTypes
           type: takeDeboost
           value: damaging
       automations:
-        0BLOMYrODY3bzx8I:
-          _id: 0BLOMYrODY3bzx8I
+        - _id: 0BLOMYrODY3bzx8I
           competencies:
             - 0
           formula: 1d(max(6, @flags.braceDieSize))
           impact: setTempHp
           type: roll
-        dQvjSj38Nt3dcuZF:
-          _id: dQvjSj38Nt3dcuZF
+        - _id: dQvjSj38Nt3dcuZF
           competencies:
             - 1
           formula: (1 + @p)d(max(6, @flags.braceDieSize))
           impact: setTempHp
           type: roll
-        Eg4Omt9YhPTjNEEW:
-          _id: Eg4Omt9YhPTjNEEW
+        - _id: Eg4Omt9YhPTjNEEW
           competencies:
             - 2
           formula: (1 + @f)d(max(6, @flags.braceDieSize))
           impact: setTempHp
           type: roll
-        Rid5p1TlO90isbp4:
-          _id: Rid5p1TlO90isbp4
+        - _id: Rid5p1TlO90isbp4
           amount: 0
           impact: setTempHp
           morganti: false
@@ -55,8 +50,7 @@ effects:
       executionTime:
         base: a1
       expirations:
-        d1f6b6eaa581aa10:
-          _id: d1f6b6eaa581aa10
+        - _id: d1f6b6eaa581aa10
           triggers:
             - movement
           type: trigger
@@ -66,15 +60,10 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and
-          gain [[/roll 1d6]] @Identifier[core:temporary-hit-points]{temporary
-          HP} as long as you remain stationary.</p>
-        fluent: >-
-          <p>Instead gain [[/roll 1d6 + (@f)d6]]
-          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
-        proficient: >-
-          <p>Instead gain [[/roll 1d6 + (@p)d6]]
-          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP} as long as you remain stationary.</p>
+        fluent: <p>Instead gain [[/roll 1d6 + (@f)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+        proficient: <p>Instead gain [[/roll 1d6 + (@p)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
       powerSources:
         - martial
       range:
@@ -87,30 +76,27 @@ effects:
     transfer: true
     type: ability
   - _id: OdtFUzpnHtJ8IIvG
-    _key: '!items.effects!65abf191497d73fc.OdtFUzpnHtJ8IIvG'
+    _key: "!items.effects!65abf191497d73fc.OdtFUzpnHtJ8IIvG"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.2385fa510bf78937
     img: systems/teriock/src/icons/abilities/earthbind-touch.webp
     name: Earthbind Touch
     system:
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
+        - _id: 800c70e6560525a8
           formula: (@h)d4[magic vine]
           heighten:
             - 1
           impact: damage
           type: roll
-        0b65894b82470568:
-          _id: 0b65894b82470568
+        - _id: 0b65894b82470568
           executor: false
           multi: false
           relation: include
           status: immobilized
           target: false
           type: status
-        5812b63d828a0227:
-          _id: 5812b63d828a0227
+        - _id: 5812b63d828a0227
           executor: false
           multi: false
           relation: include
@@ -121,34 +107,31 @@ effects:
         raw: 1
       delivery: hand
       duration:
-        raw: '1'
+        raw: "1"
         unit: minute
       elements:
         - nature
       endCondition: >-
-        <p>At the start of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           event: turn
           method: roll
           relation: target
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: start
           type: combat
       form: normal
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic vine]]]
-        @Identifier[core:damage]{damage} as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+        1d4[magic vine]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: earthbind-touch
       interaction: attack
       maneuver: active
@@ -159,12 +142,9 @@ effects:
       range:
         unit: contact
       results:
-        critHit: >-
-          <p>The @Identifier[core:targets]{target} automatically fails the first
-          [[/roll 2d4]] roll.</p>
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: >-
-          <p>@Identifier[core:targets]{Target} is
-          @Identifier[condition:grounded]{grounded} and
+          <p>@Identifier[core:targets]{Target} is @Identifier[condition:grounded]{grounded} and
           @Identifier[condition:immobilized]{immobilized}.</p>
       spell: true
       standard: true
@@ -173,7 +153,7 @@ effects:
     transfer: true
     type: ability
   - _id: toadTamer0000000
-    _key: '!items.effects!65abf191497d73fc.toadTamer0000000'
+    _key: "!items.effects!65abf191497d73fc.toadTamer0000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Toad Tamer
     system:
@@ -193,9 +173,7 @@ system:
     raw: 1
   description: <p>@Embed[creature:toad inline]</p>
   identifier: toad-familiar
-  instructions: >-
-    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
-    and delete the other one.</p>
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   type: familiar
 type: power

@@ -1,11 +1,10 @@
 _id: 895e9d07d1ee287c
-_key: '!effects!895e9d07d1ee287c'
+_key: "!effects!895e9d07d1ee287c"
 img: systems/teriock/src/icons/abilities/mind-control.webp
 name: Mind Control
 system:
   automations:
-    f004b5e5538cefe9:
-      _id: f004b5e5538cefe9
+    - _id: f004b5e5538cefe9
       executor: false
       relation: include
       status: charmed
@@ -19,11 +18,11 @@ system:
         type: tag
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: sight
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   effectTypes:
     - control
@@ -31,45 +30,41 @@ system:
   elements:
     - storm
   endCondition: >-
-    <p>At the start of each of the @Identifier[core:targets]{target's}
-    @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of these
-    dice roll a 4, this effect ends.</p>
+    <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
   executionTime:
     base: a1
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       event: turn
       method: roll
       relation: target
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: start
       type: combat
   featSaveAttribute: int
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, the maximum length of the command can be increased by 1 word.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the maximum length of the command can
+    be increased by 1 word.</p>
   identifier: mind-control
   interaction: feat
   maneuver: active
   powerSources:
     - magical
   range:
-    raw: '60'
+    raw: "60"
     unit: ft
   results:
     fail: >-
-      <p>@Identifier[core:targets]{Target} is
-      @Identifier[condition:charmed]{charmed}. In addition, you may provide a 1
-      word command that the target must follow for the duration of this spell.
-      If the command is directly harmful to the target, this spell
-      @Identifier[core:fizzles]{fizzles} and they do not need to follow it. The
-      target must understand the language that the command was given in.</p>
+      <p>@Identifier[core:targets]{Target} is @Identifier[condition:charmed]{charmed}. In addition, you may provide a 1
+      word command that the target must follow for the duration of this spell. If the command is directly harmful to the
+      target, this spell @Identifier[core:fizzles]{fizzles} and they do not need to follow it. The target must
+      understand the language that the command was given in.</p>
   rotator: true
   spell: true
   standard: true

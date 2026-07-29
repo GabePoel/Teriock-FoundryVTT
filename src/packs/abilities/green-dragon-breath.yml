@@ -1,26 +1,24 @@
 _id: 5fe39473ea0f225f
-_key: '!effects!5fe39473ea0f225f'
+_key: "!effects!5fe39473ea0f225f"
 img: systems/teriock/src/icons/abilities/green-dragon-breath.webp
 name: Green Dragon Breath
 system:
   automations:
-    92F2TVX8YlI7wrz9:
-      _id: 92F2TVX8YlI7wrz9
+    - _id: 92F2TVX8YlI7wrz9
       common:
         - destroy
       showConfirmationDialog: true
       type: common
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.dragon'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.dragon"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
-      radius: '@ability.range + 5 * @h'
+      outerWidth: "0"
+      radius: "@ability.range + 5 * @h"
       regionType: cone
       restriction:
         enabled: true
@@ -31,8 +29,7 @@ system:
       type: region
       updateTargets: true
       visibility: 2
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
+    - _id: 800c70e6560525a8
       formula: (2 * @h)d10[magic vine]
       heighten:
         - 1
@@ -44,7 +41,7 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
@@ -56,32 +53,27 @@ system:
   featSaveAttribute: mov
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, deal an additional [[/damage 2d10[magic vine]]]
-    @Identifier[core:damage]{damage}. Additionally, the
-    @Identifier[core:range]{range} of this increases by 5 feet.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+    2d10[magic vine]]] @Identifier[core:damage]{damage}. Additionally, the @Identifier[core:range]{range} of this
+    increases by 5 feet.</p>
   identifier: green-dragon-breath
   interaction: feat
   maneuver: active
   powerSources:
     - magical
   range:
-    raw: '30'
+    raw: "30"
     unit: ft
   results:
     fail: >-
-      <p>All @Identifier[property:magic]{magic} @Pack[teriock.equipment]{items}
-      @Identifier[core:targets]{targeted} and
-      @Identifier[keyword:bearing]{beared} by @Identifier[core:targets]{targets}
-      are @Identifier[property:destroyed]{destroyed}.</p>
+      <p>All @Identifier[property:magic]{magic} @Pack[teriock.equipment]{items} @Identifier[core:targets]{targeted} and
+      @Identifier[keyword:bearing]{beared} by @Identifier[core:targets]{targets} are
+      @Identifier[property:destroyed]{destroyed}.</p>
     save: >-
-      <p>Only the @Identifier[property:magic]{magic}
-      @Pack[teriock.equipment]{items} that are not being
-      @Identifier[keyword:using]{used} are
-      @Identifier[property:destroyed]{destroyed}. Target takes half as much
-      @Identifier[core:damage]{damage} from this as they would otherwise. This
-      is calculated after any @Identifier[keyword:boosted]{boosts} or
-      @Identifier[keyword:deboosted]{deboosts}.</p>
+      <p>Only the @Identifier[property:magic]{magic} @Pack[teriock.equipment]{items} that are not being
+      @Identifier[keyword:using]{used} are @Identifier[property:destroyed]{destroyed}. Target takes half as much
+      @Identifier[core:damage]{damage} from this as they would otherwise. This is calculated after any
+      @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
   targets:
     - creature
     - item

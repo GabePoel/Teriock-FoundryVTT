@@ -1,8 +1,7 @@
 _id: d91c0c5ced0c6a58
-_key: '!macros!d91c0c5ced0c6a58'
-command: >-
+_key: "!macros!d91c0c5ced0c6a58"
+command: |-
   const illusionLevels = TERIOCK.config.illusion.level;
-
   const chosenIllusionLevel = await tm.dialogs.ChoiceSelector.prompt(
     illusionLevels,
     {
@@ -16,22 +15,14 @@ command: >-
       title: _loc("TERIOCK.DIALOGS.Select.IllusionLevel.title"),
     },
   );
-
   let dc = "none";
-
   if (chosenIllusionLevel === "minor") dc = 6;
-
   if (chosenIllusionLevel === "full") dc = 12;
-
   if (chosenIllusionLevel === "greater") dc = 18;
-
-  const activations = scope.execution.activations.filter(a => a.type === "feat"
-  && a.options.attribute === "int");
-
+  const activations = scope.execution.activations.filter(a => a.type === "feat" && a.options.attribute === "int");
   if (typeof dc === "number") {
     for (const a of activations) a._source.options.threshold = `${dc - 2 * scope.execution.heightened}`;
   }
-
   for (let i = 0; i < scope.execution.rolls.length; i++) {
     const r = scope.execution.rolls[i];
     if (r.options.styles.dice.classes.includes("feat")) {

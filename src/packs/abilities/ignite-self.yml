@@ -1,26 +1,23 @@
 _id: c2620c6ebb7e826f
-_key: '!effects!c2620c6ebb7e826f'
+_key: "!effects!c2620c6ebb7e826f"
 img: systems/teriock/src/icons/abilities/ignite-self.webp
 name: Ignite Self
 system:
   automations:
-    3lQebubTXmBzorqW:
-      _id: 3lQebubTXmBzorqW
+    - _id: 3lQebubTXmBzorqW
       category: armament
       changeType: add
       key: system.damage
-      qualifier: '@dmg'
+      qualifier: "@dmg"
       type: childChange
       value: 1d4[fire]
-    29b275994cf9f5b1:
-      _id: 29b275994cf9f5b1
+    - _id: 29b275994cf9f5b1
       formula: 1d4[fire]
       impact: damage
       merge: true
       trigger: turnStart
       type: roll
-    b48fe6066c4cf8f1:
-      _id: b48fe6066c4cf8f1
+    - _id: b48fe6066c4cf8f1
       executor: false
       relation: include
       status: burned
@@ -30,7 +27,7 @@ system:
     raw: 0
   delivery: self
   duration:
-    raw: '10'
+    raw: "10"
     unit: minute
   effectTypes:
     - automatic
@@ -42,13 +39,11 @@ system:
   maneuver: reactive
   overview:
     base: >-
-      <p>You immediately catch ablaze! While on fire, your
-      @Identifier[core:standard-and-critical-damage]{standard damage} increases
-      by [[/damage 1d4[fire]]] @Identifier[core:damage]{damage} and you take
-      [[/damage 1d4[fire]]] @Identifier[core:damage]{damage} at the start of
-      each of your @Identifier[core:turns]{turns}. You also count as
-      @Identifier[condition:burned]{burned} regardless of whether you're
-      @Identifier[rule:up]{up} or @Identifier[condition:down]{down}.</p>
+      <p>You immediately catch ablaze! While on fire, your @Identifier[core:standard-and-critical-damage]{standard
+      damage} increases by [[/damage 1d4[fire]]] @Identifier[core:damage]{damage} and you take [[/damage 1d4[fire]]]
+      @Identifier[core:damage]{damage} at the start of each of your @Identifier[core:turns]{turns}. You also count as
+      @Identifier[condition:burned]{burned} regardless of whether you're @Identifier[rule:up]{up} or
+      @Identifier[condition:down]{down}.</p>
   powerSources:
     - alchemical
   range:
@@ -56,7 +51,7 @@ system:
   targets:
     - self
   trigger: >-
-    <p>You take @Identifier[damage:fire]{fire damage}. This triggers
-    automatically. You cannot choose to not use it if you are able to.</p>
+    <p>You take @Identifier[damage:fire]{fire damage}. This triggers automatically. You cannot choose to not use it if
+    you are able to.</p>
 transfer: true
 type: ability

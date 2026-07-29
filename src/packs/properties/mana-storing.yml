@@ -1,19 +1,17 @@
 _id: faf4afc8f41e5518
-_key: '!effects!faf4afc8f41e5518'
+_key: "!effects!faf4afc8f41e5518"
 img: systems/teriock/src/icons/properties/mana-storing.webp
 name: Mana Storing
 system:
   automations:
-    l4rM5VwfWLCUKVDc:
-      _id: l4rM5VwfWLCUKVDc
+    - _id: l4rM5VwfWLCUKVDc
       formula: (@property.max / 4)d4
       showConfirmationDialog: true
       showDialog: true
       targetParent: true
       trigger: dawn
       type: changeQuantity
-    q7NnSZ2OIzRup4jF:
-      _id: q7NnSZ2OIzRup4jF
+    - _id: q7NnSZ2OIzRup4jF
       amount: 1
       display:
         label: Restore 1 MP
@@ -25,19 +23,14 @@ system:
   consumable: true
   consumptionAmount: 1
   description: >-
-    <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held within
-    it that creatures can use to power their own
-    @Pack[teriock.abilities]{abilities}. Mana storing items will always have a
-    number N associated with them (1, by default, if no number is listed). This
-    number refers to a "mana die" analogous to those that creatures have. It is
-    always [[/roll 1d4]] (3 MP), which means the item stores a maximum of N × 4
-    @Identifier[core:hit-points-and-mana-points]{MP}. At dawn, if
-    @Identifier[ability:attune]{attuned} to the [[lookup name style=lc]] item,
-    roll [[/roll d4]]. The item regains up to this much spent
-    @Identifier[core:hit-points-and-mana-points]{MP}. If dawn comes and nobody
-    is @Identifier[ability:attune]{attuned} to a [[lookup name]] item, it
-    releases all @Identifier[core:hit-points-and-mana-points]{MP} it had
-    stored.</p>
+    <p>A <b>[[lookup name style=lc]]</b> item has some latent energy held within it that creatures can use to power
+    their own @Pack[teriock.abilities]{abilities}. Mana storing items will always have a number N associated with them
+    (1, by default, if no number is listed). This number refers to a "mana die" analogous to those that creatures have.
+    It is always [[/roll 1d4]] (3 MP), which means the item stores a maximum of N × 4
+    @Identifier[core:hit-points-and-mana-points]{MP}. At dawn, if @Identifier[ability:attune]{attuned} to the [[lookup
+    name style=lc]] item, roll [[/roll d4]]. The item regains up to this much spent
+    @Identifier[core:hit-points-and-mana-points]{MP}. If dawn comes and nobody is @Identifier[ability:attune]{attuned}
+    to a [[lookup name]] item, it releases all @Identifier[core:hit-points-and-mana-points]{MP} it had stored.</p>
   form: normal
   identifier: mana-storing
   powerSources:

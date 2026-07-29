@@ -1,8 +1,8 @@
 _id: 100fb18d0812833e
-_key: '!items!100fb18d0812833e'
+_key: "!items!100fb18d0812833e"
 effects:
   - _id: UOgFBVrt5unmCZlb
-    _key: '!items.effects!100fb18d0812833e.UOgFBVrt5unmCZlb'
+    _key: "!items.effects!100fb18d0812833e.UOgFBVrt5unmCZlb"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.72d1984ca37f9f43
     img: systems/teriock/src/icons/properties/armor-piercing.webp
@@ -12,30 +12,26 @@ effects:
       applyIfDeattuned: true
       competence:
         raw: 0
-      description: >-
-        <p>An item with this property is @Identifier[keyword:armor-voiding]{AV0}
-        when wielded in two hands.</p>
+      description: <p>An item with this property is @Identifier[keyword:armor-voiding]{AV0} when wielded in two hands.</p>
       form: intrinsic
       identifier: armor-piercing
     transfer: true
     type: property
   - _id: PWtoetMZ9Mi0gNta
-    _key: '!items.effects!100fb18d0812833e.PWtoetMZ9Mi0gNta'
+    _key: "!items.effects!100fb18d0812833e.PWtoetMZ9Mi0gNta"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.a1af0c263d4267a5
     img: systems/teriock/src/icons/abilities/freezing-strike.webp
     name: Freezing Strike
     system:
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
+        - _id: 800c70e6560525a8
           formula: (@h)d4[magic ice]
           heighten:
             - 1
           impact: damage
           type: roll
-        09ed285450c5de7b:
-          _id: 09ed285450c5de7b
+        - _id: 09ed285450c5de7b
           executor: false
           multi: false
           relation: include
@@ -46,21 +42,19 @@ effects:
         raw: 0
       delivery: weapon
       duration:
-        raw: '1'
+        raw: "1"
         unit: minute
       effectTypes:
         - temporal
       elements:
         - storm
       endCondition: >-
-        <p>At the start of each of the @Identifier[core:targets]{target's}
-        actions, they roll [[/roll 2d4]]. If either of these dice roll a 4, this
-        effect ends.</p>
+        <p>At the start of each of the @Identifier[core:targets]{target's} actions, they roll [[/roll 2d4]]. If either
+        of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           crit:
             - 0
           event: action
@@ -69,12 +63,11 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: start
           type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
+        - _id: 28294dbc80493c2c
           crit:
             - 1
           event: action
@@ -83,7 +76,7 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 1
           timing: start
           type: combat
@@ -92,9 +85,8 @@ effects:
         amount: 1
         enabled: true
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic ice]]]
-        @Identifier[core:damage]{damage} as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+        1d4[magic ice]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: freezing-strike
       interaction: attack
       maneuver: active
@@ -105,26 +97,21 @@ effects:
       range:
         unit: contact
       results:
-        critHit: >-
-          <p>The @Identifier[core:targets]{target} automatically fails the first
-          [[/roll 2d4]] roll.</p>
-        hit: >-
-          <p>@Identifier[core:targets]{Target} is
-          @Identifier[condition:frozen]{frozen}.</p>
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frozen]{frozen}.</p>
       targets:
         - creature
     transfer: true
     type: ability
   - _id: 1EO2Yxp6wl6EfVCr
-    _key: '!items.effects!100fb18d0812833e.1EO2Yxp6wl6EfVCr'
+    _key: "!items.effects!100fb18d0812833e.1EO2Yxp6wl6EfVCr"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.5894bcd8755bdac8
     img: systems/teriock/src/icons/abilities/hack.webp
     name: Hack
     system:
       automations:
-        d873eb939c3b5951:
-          _id: d873eb939c3b5951
+        - _id: d873eb939c3b5951
           hacks:
             - arm
             - leg
@@ -144,8 +131,8 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The
-          @Identifier[damage:hack]{damage} gets dealt accordingly.</p>
+          <p>As you attack, choose either <i>arm</i> or <i>leg</i>. The @Identifier[damage:hack]{damage} gets dealt
+          accordingly.</p>
       piercing:
         raw: 0
       powerSources:
@@ -154,13 +141,11 @@ effects:
         unit: contact
       results:
         critHit: >-
-          <p>The @Identifier[core:targets]{target} takes 2
-          @Identifier[damage:hack]{hack damage} on either arms or legs,
+          <p>The @Identifier[core:targets]{target} takes 2 @Identifier[damage:hack]{hack damage} on either arms or legs,
           depending on what you chose.</p>
         hit: >-
-          <p>The @Identifier[core:targets]{target} takes 1
-          @Identifier[damage:hack]{hack damage} on either an arm or leg,
-          depending on what you chose.</p>
+          <p>The @Identifier[core:targets]{target} takes 1 @Identifier[damage:hack]{hack damage} on either an arm or
+          leg, depending on what you chose.</p>
       skill: true
       standard: true
       targets:
@@ -169,28 +154,25 @@ effects:
     transfer: true
     type: ability
   - _id: kw5J0AvEGmFFVw84
-    _key: '!items.effects!100fb18d0812833e.kw5J0AvEGmFFVw84'
+    _key: "!items.effects!100fb18d0812833e.kw5J0AvEGmFFVw84"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
       automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
+        - _id: 1728b3a84ea27844
           common:
             - bag
           showConfirmationDialog: true
           type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
+        - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
           impact: damage
           type: roll
-        tnG4HOJcOpBMkG4W:
-          _id: tnG4HOJcOpBMkG4W
+        - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
@@ -201,7 +183,7 @@ effects:
       costs:
         primary:
           mp:
-            formula: '1'
+            formula: "1"
             type: formula
       delivery: weapon
       duration:
@@ -217,13 +199,11 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>@Identifier[core:targets]{Target} takes an additional [[/damage
-          5[lethal]]] @Identifier[core:damage]{damage}. This also has all
-          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
-          types} of the triggering @Identifier[core:attack-interaction]{attack}.
-          If the triggering @Identifier[core:attack-interaction]{attack} was a
-          critical hit, this deals 10 @Identifier[core:damage]{damage}
-          instead.</p>
+          <p>@Identifier[core:targets]{Target} takes an additional [[/damage 5[lethal]]]
+          @Identifier[core:damage]{damage}. This also has all
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} of the triggering
+          @Identifier[core:attack-interaction]{attack}. If the triggering @Identifier[core:attack-interaction]{attack}
+          was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
       range:
@@ -233,13 +213,12 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just hit a creature with an
-        @Identifier[core:attack-interaction]{attack} that dealt them
+        <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
     transfer: true
     type: ability
   - _id: 2NUbdpSCrYIIuTFD
-    _key: '!items.effects!100fb18d0812833e.2NUbdpSCrYIIuTFD'
+    _key: "!items.effects!100fb18d0812833e.2NUbdpSCrYIIuTFD"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.e502a65e78bf2102
     img: systems/teriock/src/icons/properties/versatile.webp
@@ -250,15 +229,14 @@ effects:
       competence:
         raw: 0
       description: >-
-        <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be
-        used in one or two hands. The two-handed damage value appears in
-        parentheses next to the one-handed value.</p>
+        <p>A weapon with the <b>[[lookup name style=lc]]</b> property can be used in one or two hands. The two-handed
+        damage value appears in parentheses next to the one-handed value.</p>
       form: intrinsic
       identifier: versatile
     transfer: true
     type: property
   - _id: lU4awaXin8c9SC60
-    _key: '!items.effects!100fb18d0812833e.lU4awaXin8c9SC60'
+    _key: "!items.effects!100fb18d0812833e.lU4awaXin8c9SC60"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
     img: systems/teriock/src/icons/properties/weapon.webp
@@ -282,7 +260,7 @@ folder: 9e47cf966e0cd702
 img: systems/teriock/src/assets/items/ice-axe-of-crom.webp
 name: Ice Axe of Crom
 system:
-  attackPenalty: '-4'
+  attackPenalty: "-4"
   bv:
     raw: 2
   competence:
@@ -298,11 +276,9 @@ system:
   identifier: ice-axe-of-crom
   minStr: -1
   notes: >-
-    <p>Made by the @Identifier[creature:dwarf]{dwarves} of the Teriock
-    mountains, these items are only found in the Far East near Odilathen.
-    Sometimes use by pirates on the Inner Sea, these weapons are not often
-    encountered anymore due to the retreat of the dwarves to their ancestral
-    caves in the early Second Age.</p>
+    <p>Made by the @Identifier[creature:dwarf]{dwarves} of the Teriock mountains, these items are only found in the Far
+    East near Odilathen. Sometimes use by pirates on the Inner Sea, these weapons are not often encountered anymore due
+    to the retreat of the dwarves to their ancestral caves in the early Second Age.</p>
   powerLevel: magic
   range:
     long:

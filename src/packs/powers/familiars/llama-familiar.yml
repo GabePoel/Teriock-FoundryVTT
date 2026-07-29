@@ -1,8 +1,8 @@
 _id: 99e4635407229c15
-_key: '!items!99e4635407229c15'
+_key: "!items!99e4635407229c15"
 effects:
   - _id: FIAE5OT5GemOezCO
-    _key: '!items.effects!99e4635407229c15.FIAE5OT5GemOezCO'
+    _key: "!items.effects!99e4635407229c15.FIAE5OT5GemOezCO"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.b0bcfcca93a41eab
     img: systems/teriock/src/icons/abilities/disable-ray.webp
@@ -14,32 +14,29 @@ effects:
         primary:
           mp:
             description: >-
-              <p>This costs 0 @Identifier[core:hit-points-and-mana-points]{MP}
-              if the triggering @Pack[teriock.abilities]{ability} was used on
-              you or some @Pack[teriock.equipment]{equipment} you
-              @Identifier[keyword:bearing]{bear}. It costs 1
-              @Identifier[core:hit-points-and-mana-points]{MP} otherwise.</p>
+              <p>This costs 0 @Identifier[core:hit-points-and-mana-points]{MP} if the triggering
+              @Pack[teriock.abilities]{ability} was used on you or some @Pack[teriock.equipment]{equipment} you
+              @Identifier[keyword:bearing]{bear}. It costs 1 @Identifier[core:hit-points-and-mana-points]{MP}
+              otherwise.</p>
             type: description
       delivery: missile
       duration:
-        raw: '1'
+        raw: "1"
         unit: minute
       endCondition: >-
-        <p>At the end of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: r1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           event: turn
           method: roll
           relation: target
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: end
           type: combat
@@ -48,47 +45,39 @@ effects:
       interaction: attack
       maneuver: reactive
       overview:
-        proficient: >-
-          <p>This also makes the effect of that
-          @Pack[teriock.abilities]{ability}
-          @Identifier[core:fizzles]{fizzle}.</p>
+        proficient: <p>This also makes the effect of that @Pack[teriock.abilities]{ability} @Identifier[core:fizzles]{fizzle}.</p>
       piercing:
         raw: 1
       powerSources:
         - spiritual
       range:
-        raw: '60'
+        raw: "60"
         unit: ft
-      requirements: >-
-        <p>You may only @Identifier[core:targets]{target} the triggering
-        creature.</p>
+      requirements: <p>You may only @Identifier[core:targets]{target} the triggering creature.</p>
       results:
         hit: >-
-          <p>@Identifier[core:targets]{Target} becomes
-          @Identifier[keyword:incapable]{incapable} of the
+          <p>@Identifier[core:targets]{Target} becomes @Identifier[keyword:incapable]{incapable} of the
           @Pack[teriock.abilities]{ability} they were using.</p>
       skill: true
       standard: true
       targets:
         - creature
       trigger: >-
-        <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic}
-        @Wiki[Category:Active abilities]{active} or @Wiki[Category:Reactive
-        abilities]{reactive ability} that isn't a @Wiki[Category:Spells]{spell}
-        against a different creature or some @Pack[teriock.equipment]{equipment}
-        that different creature @Identifier[keyword:bearing]{bares}.</p>
+        <p>Another creature uses a non-@Identifier[power:basic-abilities]{basic} @Wiki[Category:Active
+        abilities]{active} or @Wiki[Category:Reactive abilities]{reactive ability} that isn't a
+        @Wiki[Category:Spells]{spell} against a different creature or some @Pack[teriock.equipment]{equipment} that
+        different creature @Identifier[keyword:bearing]{bares}.</p>
     transfer: true
     type: ability
   - _id: rTvuWsdbTnEaWTCn
-    _key: '!items.effects!99e4635407229c15.rTvuWsdbTnEaWTCn'
+    _key: "!items.effects!99e4635407229c15.rTvuWsdbTnEaWTCn"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.eae89799c230fd18
     img: systems/teriock/src/icons/abilities/endure.webp
     name: Endure
     system:
       automations:
-        d873eb939c3b5951:
-          _id: d873eb939c3b5951
+        - _id: d873eb939c3b5951
           hacks:
             - arm
             - leg
@@ -113,22 +102,15 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>You take the triggering @Identifier[core:damage]{damage} as a
-          @Identifier[damage:hack]{limb hack} instead. All
-          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
-          types} still apply. If the hit was critical, you instead take it as
-          <i>two</i> @Identifier[damage:hack]{limb hacks}. If you attempted to
-          @Identifier[core:block-interaction]{block} the triggering
-          @Identifier[core:attack-interaction]{attack}, then a limb that
-          @Identifier[keyword:using]{used} whatever
-          @Pack[teriock.equipment]{item} you
-          @Identifier[core:block-interaction]{blocked} with is the one that's
-          @Identifier[damage:hack]{hacked}. Otherwise, if the
-          @Identifier[core:damage]{damage} was dealt by a creature, they choose
-          which limb is affected. If not, it is random. Only an
-          un-@Identifier[damage:hack]{hacked} limb can be used for this. If
-          that's not possible, you take the @Identifier[core:damage]{damage}
-          normally.</p>
+          <p>You take the triggering @Identifier[core:damage]{damage} as a @Identifier[damage:hack]{limb hack} instead.
+          All @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} still apply. If the hit was
+          critical, you instead take it as <i>two</i> @Identifier[damage:hack]{limb hacks}. If you attempted to
+          @Identifier[core:block-interaction]{block} the triggering @Identifier[core:attack-interaction]{attack}, then a
+          limb that @Identifier[keyword:using]{used} whatever @Pack[teriock.equipment]{item} you
+          @Identifier[core:block-interaction]{blocked} with is the one that's @Identifier[damage:hack]{hacked}.
+          Otherwise, if the @Identifier[core:damage]{damage} was dealt by a creature, they choose which limb is
+          affected. If not, it is random. Only an un-@Identifier[damage:hack]{hacked} limb can be used for this. If
+          that's not possible, you take the @Identifier[core:damage]{damage} normally.</p>
       powerSources:
         - martial
       range:
@@ -138,12 +120,12 @@ effects:
       targets:
         - self
       trigger: >-
-        <p>You are hit by an @Identifier[core:attack-interaction]{attack} that
-        would @Identifier[core:damage]{damage} you.</p>
+        <p>You are hit by an @Identifier[core:attack-interaction]{attack} that would @Identifier[core:damage]{damage}
+        you.</p>
     transfer: true
     type: ability
   - _id: llamaTamer000000
-    _key: '!items.effects!99e4635407229c15.llamaTamer000000'
+    _key: "!items.effects!99e4635407229c15.llamaTamer000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Llama Tamer
     system:
@@ -163,9 +145,7 @@ system:
     raw: 1
   description: <p>@Embed[creature:llama inline]</p>
   identifier: llama-familiar
-  instructions: >-
-    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
-    and delete the other one.</p>
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   type: familiar
 type: power

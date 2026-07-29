@@ -1,22 +1,18 @@
 _id: 4oKL6zrNPkYdXkj1
-_key: '!effects!4oKL6zrNPkYdXkj1'
+_key: "!effects!4oKL6zrNPkYdXkj1"
 img: systems/teriock/src/icons/abilities/regeneration-touch.webp
 name: Regeneration Touch
 system:
   automations:
-    f2ebb4a9ad0d1848:
-      _id: f2ebb4a9ad0d1848
+    - _id: f2ebb4a9ad0d1848
       all: false
       attachDocuments: true
       automatic: true
       data: >-
-        {"system":{"limitation":"<p>You must spend 1
-        @Identifier[core:hit-points-and-mana-points]{MP} or
-        @Identifier[core:healing]{healing} in this way consumes a
-        @Identifier[core:hit-points-and-mana-points]{hit die} as normal (except
-        that it can @Wiki[Category:Revival effects]{revive} you). This can only
-        @Wiki[Category:Revival effects]{revive} creatures that have been
-        @Identifier[condition:dead]{dead} for 1 minute or less.</p>"}}
+        {"system":{"limitation":"<p>You must spend 1 @Identifier[core:hit-points-and-mana-points]{MP} or
+        @Identifier[core:healing]{healing} in this way consumes a @Identifier[core:hit-points-and-mana-points]{hit die}
+        as normal (except that it can @Wiki[Category:Revival effects]{revive} you). This can only @Wiki[Category:Revival
+        effects]{revive} creatures that have been @Identifier[condition:dead]{dead} for 1 minute or less.</p>"}}
       identifiers:
         - ability:regenerating
       multi: false
@@ -33,27 +29,26 @@ system:
         type: tag
   delivery: hand
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   effectTypes:
     - regeneration
   elements:
     - nature
   endCondition: >-
-    <p>At the start of each of your @Identifier[core:turns]{turns}, you roll
-    [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
+    <p>At the start of each of your @Identifier[core:turns]{turns}, you roll [[/roll 2d4]]. If either of these dice roll
+    a 4, this effect ends.</p>
   executionTime:
     base: a1
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       event: turn
       method: roll
       relation: executor
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: start
       type: combat
@@ -70,14 +65,11 @@ system:
     unit: contact
   results:
     hit: >-
-      <p>@Identifier[core:targets]{Target} gains
-      @Identifier[keyword:limited]{Limited}
+      <p>@Identifier[core:targets]{Target} gains @Identifier[keyword:limited]{Limited}
       @Identifier[ability:regenerating]{Regenerating}. They must spend 1
-      @Identifier[core:hit-points-and-mana-points]{MP} or
-      @Identifier[core:healing]{healing} from
-      @Identifier[ability:regenerating]{Regenerating} still requires a
-      @Identifier[core:hit-points-and-mana-points]{hit die} (but it can still
-      @Wiki[Category:Revival effects]{revive} them).</p>
+      @Identifier[core:hit-points-and-mana-points]{MP} or @Identifier[core:healing]{healing} from
+      @Identifier[ability:regenerating]{Regenerating} still requires a @Identifier[core:hit-points-and-mana-points]{hit
+      die} (but it can still @Wiki[Category:Revival effects]{revive} them).</p>
   rotator: true
   spell: true
   standard: true

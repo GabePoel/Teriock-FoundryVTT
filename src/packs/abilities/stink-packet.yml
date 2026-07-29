@@ -1,11 +1,10 @@
 _id: 68bbb7cc4d72397e
-_key: '!effects!68bbb7cc4d72397e'
+_key: "!effects!68bbb7cc4d72397e"
 img: systems/teriock/src/icons/abilities/stink-packet.webp
 name: Stink Packet
 system:
   automations:
-    18537e76761a45dc:
-      _id: 18537e76761a45dc
+    - _id: 18537e76761a45dc
       executor: false
       relation: include
       status: blind
@@ -19,21 +18,19 @@ system:
   effectTypes:
     - sensory
   endCondition: >-
-    <p>At the end of each of the @Identifier[core:targets]{target's}
-    @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of these
-    dice roll a 4, this effect ends.</p>
+    <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
   executionTime:
     base: a1
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       event: turn
       method: roll
       relation: target
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: end
       type: combat
@@ -46,20 +43,15 @@ system:
   powerSources:
     - alchemical
   range:
-    raw: '20'
+    raw: "20"
     unit: ft
-  requirements: >-
-    <p>@Identifier[core:targets]{Target} must not be
-    @Identifier[condition:anosmatic]{anosmatic}.</p>
+  requirements: <p>@Identifier[core:targets]{Target} must not be @Identifier[condition:anosmatic]{anosmatic}.</p>
   results:
     hit: >-
-      <p>@Identifier[core:targets]{Target} is
-      @Identifier[condition:blind]{blinded}, loses their largest remaining
-      @Identifier[core:hit-points-and-mana-points]{hit die}, and loses their
-      largest remaining @Identifier[core:hit-points-and-mana-points]{mana die}.
-      It is though those dice are spent, but without providing any
-      @Identifier[core:healing]{healing} or @Wiki[Category:Revitalization
-      effects]{revitalization}.</p>
+      <p>@Identifier[core:targets]{Target} is @Identifier[condition:blind]{blinded}, loses their largest remaining
+      @Identifier[core:hit-points-and-mana-points]{hit die}, and loses their largest remaining
+      @Identifier[core:hit-points-and-mana-points]{mana die}. It is though those dice are spent, but without providing
+      any @Identifier[core:healing]{healing} or @Wiki[Category:Revitalization effects]{revitalization}.</p>
   targets:
     - creature
 transfer: true

@@ -1,19 +1,17 @@
 _id: NrCsatKWGADDVSWS
-_key: '!effects!NrCsatKWGADDVSWS'
+_key: "!effects!NrCsatKWGADDVSWS"
 img: systems/teriock/src/icons/abilities/light-touch.webp
 name: Light Touch
 system:
   automations:
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
+    - _id: 800c70e6560525a8
       formula: (@h)d4[magic holy]
       heighten:
         - 1
       impact: damage
       merge: true
       type: roll
-    747b3e9c9b617af6:
-      _id: 747b3e9c9b617af6
+    - _id: 747b3e9c9b617af6
       executor: false
       relation: include
       status: lighted
@@ -23,19 +21,17 @@ system:
     raw: 0
   delivery: hand
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   elements:
     - life
   endCondition: >-
-    <p>At the end of each of the @Identifier[core:targets]{target's}
-    @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of these
-    dice roll a 4, this effect ends.</p>
+    <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
   executionTime:
     base: a1
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       crit:
         - 0
       event: turn
@@ -44,12 +40,11 @@ system:
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: end
       type: combat
-    28294dbc80493c2c:
-      _id: 28294dbc80493c2c
+    - _id: 28294dbc80493c2c
       crit:
         - 1
       event: turn
@@ -58,15 +53,14 @@ system:
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 1
       timing: end
       type: combat
   form: normal
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, deal an additional [[/damage 1d4[magic holy]]]
-    @Identifier[core:damage]{damage} as well.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+    1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
   identifier: light-touch
   interaction: attack
   maneuver: active
@@ -77,12 +71,8 @@ system:
   range:
     unit: contact
   results:
-    critHit: >-
-      <p>The @Identifier[core:targets]{target} automatically fails the first
-      [[/roll 2d4]] roll.</p>
-    hit: >-
-      <p>@Identifier[core:targets]{Target} is
-      @Identifier[condition:lighted]{lighted} to a creature of your choice.</p>
+    critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+    hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:lighted]{lighted} to a creature of your choice.</p>
   spell: true
   standard: true
   targets:

@@ -1,10 +1,10 @@
 _id: 9goBty5ZLeja5Noc
-_key: '!items!9goBty5ZLeja5Noc'
+_key: "!items!9goBty5ZLeja5Noc"
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.e55b7bdfc9a44e5e
 effects:
   - _id: 0qq9MUxz5NFJh1tW
-    _key: '!items.effects!9goBty5ZLeja5Noc.0qq9MUxz5NFJh1tW'
+    _key: "!items.effects!9goBty5ZLeja5Noc.0qq9MUxz5NFJh1tW"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f17e1c273c579c38
     flags:
@@ -15,22 +15,21 @@ effects:
     name: Gamesman
     system:
       automations:
-        e789ed5e109ebd1a:
-          _id: e789ed5e109ebd1a
+        - _id: e789ed5e109ebd1a
           changes:
             - key: system.tradecrafts.hunter.score
               phase: derived
               priority: 10
               target: Actor
               type: upgrade
-              value: '2'
+              value: "2"
           type: changes
       competence:
         raw: 1
       costs:
         primary:
           mp:
-            formula: '0'
+            formula: "0"
       delivery: self
       duration:
         unit: unlimited
@@ -42,11 +41,9 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>You are an @Identifier[keyword:expertise]{expert}
-          @Identifier[tradecraft:hunter]{hunter}. In addition, you have
-          @Identifier[keyword:adept]{adept} @Identifier[ability:slay]{Slay} for
-          one species of your choice. You can change the species once per a
-          @Identifier[core:short-rest]{short rest}.</p>
+          <p>You are an @Identifier[keyword:expertise]{expert} @Identifier[tradecraft:hunter]{hunter}. In addition, you
+          have @Identifier[keyword:adept]{adept} @Identifier[ability:slay]{Slay} for one species of your choice. You can
+          change the species once per a @Identifier[core:short-rest]{short rest}.</p>
       powerSources:
         - martial
       range:
@@ -58,7 +55,7 @@ effects:
     transfer: true
     type: ability
   - _id: W9ekYaonCEkM8hNy
-    _key: '!items.effects!9goBty5ZLeja5Noc.W9ekYaonCEkM8hNy'
+    _key: "!items.effects!9goBty5ZLeja5Noc.W9ekYaonCEkM8hNy"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.a4f96105cc140a51
     flags:
@@ -74,21 +71,19 @@ effects:
       duration:
         unit: instant
       endCondition: >-
-        <p>At the end of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: r1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           event: turn
           method: roll
           relation: target
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: end
           type: combat
@@ -104,10 +99,8 @@ effects:
       results:
         fail: <p>The @Identifier[core:interactions]{attack's} effect applies.</p>
         save: >-
-          <p>The @Identifier[core:interactions]{attack's} effect
-          @Identifier[core:fizzles]{fizzles} and the
-          @Identifier[core:attack-interaction]{attacker} is
-          @Identifier[condition:snared]{snared}.</p>
+          <p>The @Identifier[core:interactions]{attack's} effect @Identifier[core:fizzles]{fizzles} and the
+          @Identifier[core:attack-interaction]{attacker} is @Identifier[condition:snared]{snared}.</p>
       skill: true
       standard: true
       targets:
@@ -116,7 +109,7 @@ effects:
     transfer: true
     type: ability
   - _id: QTxAnSLkbmB40cOm
-    _key: '!items.effects!9goBty5ZLeja5Noc.QTxAnSLkbmB40cOm'
+    _key: "!items.effects!9goBty5ZLeja5Noc.QTxAnSLkbmB40cOm"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
     img: systems/teriock/src/icons/abilities/slay.webp
@@ -124,21 +117,18 @@ effects:
     system:
       _sup: 0qq9MUxz5NFJh1tW
       automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
+        - _id: 1728b3a84ea27844
           common:
             - bag
           showConfirmationDialog: true
           type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
+        - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
           impact: damage
           type: roll
-        tnG4HOJcOpBMkG4W:
-          _id: tnG4HOJcOpBMkG4W
+        - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
@@ -149,7 +139,7 @@ effects:
       costs:
         primary:
           mp:
-            formula: '1'
+            formula: "1"
             type: formula
         tweaks:
           adept: 1
@@ -164,19 +154,15 @@ effects:
       form: normal
       identifier: slay
       interaction: manifest
-      limitation: >-
-        <p>Only usable against one species, as specified when you use <a
-        class="mw-selflink selflink">Gamesman</a>.</p>
+      limitation: <p>Only usable against one species, as specified when you use <a class="mw-selflink selflink">Gamesman</a>.</p>
       maneuver: reactive
       overview:
         base: >-
-          <p>@Identifier[core:targets]{Target} takes an additional [[/damage
-          5[lethal]]] @Identifier[core:damage]{damage}. This also has all
-          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
-          types} of the triggering @Identifier[core:attack-interaction]{attack}.
-          If the triggering @Identifier[core:attack-interaction]{attack} was a
-          critical hit, this deals 10 @Identifier[core:damage]{damage}
-          instead.</p>
+          <p>@Identifier[core:targets]{Target} takes an additional [[/damage 5[lethal]]]
+          @Identifier[core:damage]{damage}. This also has all
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} of the triggering
+          @Identifier[core:attack-interaction]{attack}. If the triggering @Identifier[core:attack-interaction]{attack}
+          was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
       range:
@@ -186,8 +172,7 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just hit a creature with an
-        @Identifier[core:attack-interaction]{attack} that dealt them
+        <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
     transfer: true
     type: ability
@@ -201,15 +186,12 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>As precise and accurate as a well-crafted
-    @Identifier[equipment:arrow]{arrow}, @Identifier[class:archer]{Archers}
-    don't mess around. They prefer to keep their distance, as that is where they
-    are the most effective, never letting anyone get too close to them.
-    @Identifier[class:archer]{Archers} are direct and focused and thus make the
-    best guards. Ever vigilant, @Identifier[class:archer]{Archers} are always
-    looking ahead as, if taken by surprise, they are easily killed. If you are
-    playing an @Identifier[class:archer]{Archer} be direct, and on target,
-    sturdy and perhaps high strung, watchful of the future and of your back.</p>
+    <p>As precise and accurate as a well-crafted @Identifier[equipment:arrow]{arrow}, @Identifier[class:archer]{Archers}
+    don't mess around. They prefer to keep their distance, as that is where they are the most effective, never letting
+    anyone get too close to them. @Identifier[class:archer]{Archers} are direct and focused and thus make the best
+    guards. Ever vigilant, @Identifier[class:archer]{Archers} are always looking ahead as, if taken by surprise, they
+    are easily killed. If you are playing an @Identifier[class:archer]{Archer} be direct, and on target, sturdy and
+    perhaps high strung, watchful of the future and of your back.</p>
   identifier: rank-4-archer
   innate: false
   maxAv: 2

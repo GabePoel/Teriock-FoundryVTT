@@ -1,20 +1,19 @@
 _id: 1f632a7709f3c506
-_key: '!effects!1f632a7709f3c506'
+_key: "!effects!1f632a7709f3c506"
 img: systems/teriock/src/icons/abilities/black-dragonfly-breath.webp
 name: Black Dragonfly Breath
 system:
   automations:
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.dragon'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.dragon"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
-      radius: '@ability.range + 5 * @h'
+      outerWidth: "0"
+      radius: "@ability.range + 5 * @h"
       regionType: cone
       restriction:
         enabled: true
@@ -25,8 +24,7 @@ system:
       type: region
       updateTargets: true
       visibility: 2
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
+    - _id: 800c70e6560525a8
       formula: (4 + 2 * @h)d10[magic terror]
       impact: damage
       merge: true
@@ -36,7 +34,7 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
@@ -50,27 +48,22 @@ system:
   featSaveAttribute: mov
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, deal an additional [[/damage 2d10[magic terror]]]
-    @Identifier[core:damage]{damage}. Additionally, the
-    @Identifier[core:range]{range} of this increases by 5 feet.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+    2d10[magic terror]]] @Identifier[core:damage]{damage}. Additionally, the @Identifier[core:range]{range} of this
+    increases by 5 feet.</p>
   identifier: black-dragonfly-breath
   interaction: feat
   maneuver: active
   powerSources:
     - magical
   range:
-    raw: '15'
+    raw: "15"
     unit: ft
   results:
-    fail: >-
-      <p>@Identifier[core:targets]{Target} takes [[/damage 4d10[magic terror]]]
-      @Identifier[core:damage]{damage}.</p>
+    fail: <p>@Identifier[core:targets]{Target} takes [[/damage 4d10[magic terror]]] @Identifier[core:damage]{damage}.</p>
     save: >-
-      <p>Target takes half as much @Identifier[core:damage]{damage} from this as
-      they would otherwise. This is calculated after any
-      @Identifier[keyword:boosted]{boosts} or
-      @Identifier[keyword:deboosted]{deboosts}.</p>
+      <p>Target takes half as much @Identifier[core:damage]{damage} from this as they would otherwise. This is
+      calculated after any @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
   targets:
     - creature
 transfer: true

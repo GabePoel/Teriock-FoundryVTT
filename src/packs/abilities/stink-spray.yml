@@ -1,39 +1,35 @@
 _id: ed731092e7a1c6d7
-_key: '!effects!ed731092e7a1c6d7'
+_key: "!effects!ed731092e7a1c6d7"
 img: systems/teriock/src/icons/abilities/stink-spray.webp
 name: Stink Spray
 system:
   affinities:
-    11RCtOPdFaMrgfGn:
-      _id: 11RCtOPdFaMrgfGn
+    - _id: 11RCtOPdFaMrgfGn
       category: statuses
       type: immunity
       value: odorless
-    IRYnhWSymAtwDWAi:
-      _id: IRYnhWSymAtwDWAi
+    - _id: IRYnhWSymAtwDWAi
       category: statuses
       type: immunity
       value: hidden
   automations:
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
+    - _id: e789ed5e109ebd1a
       changes:
         - key: system.attributes.snk.score.raw
           priority: 50
           target: Actor
           type: downgrade
-          value: '-3'
+          value: "-3"
       type: changes
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.normal'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.normal"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
+      outerWidth: "0"
       regionType: cone
       restriction:
         enabled: true
@@ -45,11 +41,11 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
-    raw: '1'
+    raw: "1"
     unit: week
   executionTime:
     base: a1
@@ -61,17 +57,14 @@ system:
   powerSources:
     - alchemical
   range:
-    raw: '15'
+    raw: "15"
     unit: ft
   results:
     fail: >-
-      <p>@Identifier[core:targets]{Target} is covered with a terrible stench
-      that is extremely hard to remove. Their @Identifier[core:sneak]{SNK} is
-      set to a maximum of -3, they are @Identifier[keyword:incapable]{incapable}
-      of and @Identifier[keyword:immunity]{immune} to becoming
-      @Identifier[condition:odorless]{odorless} or
-      @Identifier[condition:hidden]{hidden} to creatures that are not
-      @Identifier[condition:anosmatic]{anosmatic}.</p>
+      <p>@Identifier[core:targets]{Target} is covered with a terrible stench that is extremely hard to remove. Their
+      @Identifier[core:sneak]{SNK} is set to a maximum of -3, they are @Identifier[keyword:incapable]{incapable} of and
+      @Identifier[keyword:immunity]{immune} to becoming @Identifier[condition:odorless]{odorless} or
+      @Identifier[condition:hidden]{hidden} to creatures that are not @Identifier[condition:anosmatic]{anosmatic}.</p>
   targets:
     - creature
 transfer: true

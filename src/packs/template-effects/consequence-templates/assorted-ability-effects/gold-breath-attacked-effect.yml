@@ -1,8 +1,6 @@
 _id: Jt6prRJXBGVtrBnu
-_key: '!effects!Jt6prRJXBGVtrBnu'
-description: >-
-  <p>The next time you pull from the @Identifier[core:death-bag]{death bag},
-  pull 10 additional stones.</p>
+_key: "!effects!Jt6prRJXBGVtrBnu"
+description: <p>The next time you pull from the @Identifier[core:death-bag]{death bag}, pull 10 additional stones.</p>
 duration:
   expired: false
   units: seconds
@@ -11,28 +9,25 @@ img: systems/teriock/src/icons/abilities/golden-dragon-breath.webp
 name: Gold Breath Attacked Effect
 system:
   automations:
-    kIHEHK49L1WuKCiu:
-      _id: kIHEHK49L1WuKCiu
+    - _id: kIHEHK49L1WuKCiu
       changes:
         - key: system.deathBag.pull
           priority: 75
           target: Actor
           type: add
-          value: '10'
+          value: "10"
       type: changes
   competence:
     raw: 0
   critical: false
   expirations:
-    2ebc871d99c5e852:
-      _id: 2ebc871d99c5e852
+    - _id: 2ebc871d99c5e852
       event: turn
       relation: target
       skip: 0
       timing: start
       type: combat
-    086e9e54675f791f:
-      _id: 086e9e54675f791f
+    - _id: 086e9e54675f791f
       triggers:
         - executeDeathBag
       type: trigger

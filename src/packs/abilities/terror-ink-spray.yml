@@ -1,40 +1,36 @@
 _id: 5b812ca38efec9de
-_key: '!effects!5b812ca38efec9de'
+_key: "!effects!5b812ca38efec9de"
 img: systems/teriock/src/icons/abilities/terror-ink-spray.webp
 name: Terror Ink Spray
 system:
   automations:
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.normal'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.normal"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
+      outerWidth: "0"
       regionType: cone
       restriction:
         enabled: true
       trigger: executeInput
       type: region
       updateTargets: true
-    29b275994cf9f5b1:
-      _id: 29b275994cf9f5b1
+    - _id: 29b275994cf9f5b1
       formula: 2d10[terror]
       impact: damage
       merge: true
       type: roll
-    5f92ecb1bcd34991:
-      _id: 5f92ecb1bcd34991
+    - _id: 5f92ecb1bcd34991
       executor: false
       relation: include
       status: hidden
       target: false
       type: status
-    5tZMz9shUBA3isBs:
-      _id: 5tZMz9shUBA3isBs
+    - _id: 5tZMz9shUBA3isBs
       amount: 15
       impact: hide
       morganti: false
@@ -45,7 +41,7 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
@@ -62,13 +58,12 @@ system:
   powerSources:
     - martial
   range:
-    raw: '45'
+    raw: "45"
     unit: ft
   results:
     fail: >-
-      <p>The target gets covered with a pitch black ink. Creatures and items
-      take [[/damage 2d10[terror]]] @Identifier[core:damage]{damage} and become
-      @Identifier[condition:hidden]{hidden} with a hidden DC of 15 while in
+      <p>The target gets covered with a pitch black ink. Creatures and items take [[/damage 2d10[terror]]]
+      @Identifier[core:damage]{damage} and become @Identifier[condition:hidden]{hidden} with a hidden DC of 15 while in
       affected areas until this is cleaned off.</p>
   targets:
     - area

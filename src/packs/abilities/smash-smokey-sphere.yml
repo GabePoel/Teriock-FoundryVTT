@@ -1,20 +1,19 @@
 _id: bb29439f6c5c63c2
-_key: '!effects!bb29439f6c5c63c2'
+_key: "!effects!bb29439f6c5c63c2"
 img: systems/teriock/src/icons/abilities/smash-smokey-sphere.webp
 name: Smash Smokey Sphere
 system:
   automations:
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '60'
+    - _id: 7400b41f20d9f100
+      angle: "60"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
-      radius: '@ability.expansion.range'
+      outerWidth: "0"
+      radius: "@ability.expansion.range"
       regionType: circle
       restriction:
         enabled: false
@@ -23,15 +22,13 @@ system:
       targeting: true
       trigger: executeInput
       type: region
-    18537e76761a45dc:
-      _id: 18537e76761a45dc
+    - _id: 18537e76761a45dc
       executor: false
       relation: include
       status: blind
       target: false
       type: status
-    270d4c101b6df930:
-      _id: 270d4c101b6df930
+    - _id: 270d4c101b6df930
       executor: false
       relation: apply
       status: blind
@@ -42,14 +39,14 @@ system:
   consumeSource: true
   delivery: item
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   executionTime:
     base: a1
   expansion:
     featSaveAttribute: per
     range:
-      raw: '20'
+      raw: "20"
       unit: ft
     type: detonate
   form: normal
@@ -61,14 +58,10 @@ system:
   range:
     unit: contact
   requirements: >-
-    <p>Use [[lookup name]] by interacting with the
-    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
-    @Identifier[core:maneuvers]{maneuver} and
-    @Identifier[core:abilities]{execution time} for the ability.</p>
+    <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts as
+    the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the ability.</p>
   results:
-    fail: >-
-      <p>Creatures in @Identifier[core:targets]{targeted} area become
-      @Identifier[condition:blind]{blind}.</p>
+    fail: <p>Creatures in @Identifier[core:targets]{targeted} area become @Identifier[condition:blind]{blind}.</p>
   targets:
     - area
     - creature

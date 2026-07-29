@@ -1,62 +1,56 @@
 _id: d30330f9d3be457c
-_key: '!items!d30330f9d3be457c'
+_key: "!items!d30330f9d3be457c"
 effects:
   - _id: A6ztUixgTm6Qrva4
-    _key: '!items.effects!d30330f9d3be457c.A6ztUixgTm6Qrva4'
+    _key: "!items.effects!d30330f9d3be457c.A6ztUixgTm6Qrva4"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.09653aa7d237cf8f
     img: systems/teriock/src/icons/abilities/bite.webp
     name: Bite
     system:
       automations:
-        SSt00nG9WUEpsaDV:
-          _id: SSt00nG9WUEpsaDV
+        - _id: SSt00nG9WUEpsaDV
           changeType: upgrade
           competencies:
             - 0
           key: system.damage
           priority: 10
-          qualifier: '@prop.biting'
+          qualifier: "@prop.biting"
           target: armament
           type: childChange
           value: 1d4
-        Qu3wFDMJp5Glvj3R:
-          _id: Qu3wFDMJp5Glvj3R
+        - _id: Qu3wFDMJp5Glvj3R
           changeType: upgrade
           competencies:
             - 1
           key: system.damage
           priority: 10
-          qualifier: '@prop.biting'
+          qualifier: "@prop.biting"
           target: armament
           type: childChange
           value: 1d6
-        b7iQNyYdqIYyHGzo:
-          _id: b7iQNyYdqIYyHGzo
+        - _id: b7iQNyYdqIYyHGzo
           changeType: upgrade
           competencies:
             - 2
           key: system.damage
           priority: 10
-          qualifier: '@prop.biting'
+          qualifier: "@prop.biting"
           target: armament
           type: childChange
           value: 1d8
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
+        - _id: 29b275994cf9f5b1
           formula: 1d4
           impact: damage
           type: roll
-        5e4d195ed81a10cc:
-          _id: 5e4d195ed81a10cc
+        - _id: 5e4d195ed81a10cc
           competencies:
             - 1
             - 2
           formula: 1d6
           impact: damage
           type: roll
-        3f7fa7707643426f:
-          _id: 3f7fa7707643426f
+        - _id: 3f7fa7707643426f
           competencies:
             - 2
           formula: 1d8
@@ -75,15 +69,11 @@ effects:
       maneuver: passive
       overview:
         base: >-
-          <p>Your @Identifier[body:mouth]{mouth} and other
-          @Identifier[property:biting]{biting items} count as a
-          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon}
-          for the purposes of abilities that @Identifier[core:targets]{target}
-          or are delivered by it (although it cannot be
-          @Identifier[property:shattered]{shattered} or
-          @Identifier[property:destroyed]{destroyed}). You may
-          @Identifier[core:attack-interaction]{attack} with it and its damage
-          die is now [[/damage 1d4]].</p>
+          <p>Your @Identifier[body:mouth]{mouth} and other @Identifier[property:biting]{biting items} count as a
+          @UUID[Compendium.teriock.tables.RollTable.63e9a3bd88895816]{weapon} for the purposes of abilities that
+          @Identifier[core:targets]{target} or are delivered by it (although it cannot be
+          @Identifier[property:shattered]{shattered} or @Identifier[property:destroyed]{destroyed}). You may
+          @Identifier[core:attack-interaction]{attack} with it and its damage die is now [[/damage 1d4]].</p>
         fluent: <p>The damage die is instead [[/damage 1d8]].</p>
         proficient: <p>The damage die is instead [[/damage 1d6]].</p>
       powerSources:
@@ -95,22 +85,20 @@ effects:
     transfer: true
     type: ability
   - _id: ZuoO9dAECKpOdTPR
-    _key: '!items.effects!d30330f9d3be457c.ZuoO9dAECKpOdTPR'
+    _key: "!items.effects!d30330f9d3be457c.ZuoO9dAECKpOdTPR"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.12c2bc74fed2e058
     img: systems/teriock/src/icons/abilities/fear-touch.webp
     name: Fear Touch
     system:
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
+        - _id: 800c70e6560525a8
           formula: (@h)d4[magic terror]
           heighten:
             - 1
           impact: damage
           type: roll
-        b4960732f0b9ed9f:
-          _id: b4960732f0b9ed9f
+        - _id: b4960732f0b9ed9f
           executor: true
           multi: false
           relation: include
@@ -121,21 +109,19 @@ effects:
         raw: 1
       delivery: hand
       duration:
-        raw: '1'
+        raw: "1"
         unit: minute
       effectTypes:
         - mental
       elements:
         - necromancy
       endCondition: >-
-        <p>At the end of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           crit:
             - 0
           event: turn
@@ -144,12 +130,11 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: end
           type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
+        - _id: 28294dbc80493c2c
           crit:
             - 1
           event: turn
@@ -158,15 +143,14 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 1
           timing: end
           type: combat
       form: normal
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic terror]]]
-        @Identifier[core:damage]{damage} as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+        1d4[magic terror]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: fear-touch
       interaction: attack
       maneuver: active
@@ -177,12 +161,8 @@ effects:
       range:
         unit: contact
       results:
-        critHit: >-
-          <p>The @Identifier[core:targets]{target} automatically fails the first
-          [[/roll 2d4]] roll.</p>
-        hit: >-
-          <p>@Identifier[core:targets]{Target} is
-          @Identifier[condition:frightened]{frightened}.</p>
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:frightened]{frightened}.</p>
       spell: true
       standard: true
       targets:
@@ -190,7 +170,7 @@ effects:
     transfer: true
     type: ability
   - _id: insectTamer00000
-    _key: '!items.effects!d30330f9d3be457c.insectTamer00000'
+    _key: "!items.effects!d30330f9d3be457c.insectTamer00000"
     img: icons/environment/settlement/stables-logo.webp
     name: Insect Tamer
     system:
@@ -210,9 +190,7 @@ system:
     raw: 1
   description: <p>@Embed[creature:insect inline]</p>
   identifier: insect-familiar
-  instructions: >-
-    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
-    and delete the other one.</p>
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   type: familiar
 type: power

@@ -1,50 +1,40 @@
 _id: 784d022aa6b16299
-_key: '!effects!784d022aa6b16299'
+_key: "!effects!784d022aa6b16299"
 img: systems/teriock/src/icons/abilities/skill-share.webp
 name: Skill Share
 system:
   automations:
-    pZTzCOb2arggrQQw:
-      _id: pZTzCOb2arggrQQw
+    - _id: pZTzCOb2arggrQQw
       attachDocuments: true
       automatic: false
       competencies:
         - 0
       local:
-        qualifier: >-
-          and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-          lte(@class.rank, 1))
+        qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1))
       multi: false
       separate: false
       type: addDocuments
-    DKrkwLcllE5f9bjQ:
-      _id: DKrkwLcllE5f9bjQ
+    - _id: DKrkwLcllE5f9bjQ
       attachDocuments: true
       automatic: false
       competencies:
         - 1
       local:
-        qualifier: >-
-          and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-          lte(@class.rank, 1 + @p))
+        qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @p))
       multi: false
       separate: false
       type: addDocuments
-    LTtFZkqLk2QnwOfK:
-      _id: LTtFZkqLk2QnwOfK
+    - _id: LTtFZkqLk2QnwOfK
       attachDocuments: true
       automatic: false
       competencies:
         - 2
       local:
-        qualifier: >-
-          and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro,
-          lte(@class.rank, 1 + @f))
+        qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @f))
       multi: false
       separate: false
       type: addDocuments
-    XdlHsYQu4RHDULLu:
-      _id: XdlHsYQu4RHDULLu
+    - _id: XdlHsYQu4RHDULLu
       competence:
         raw: 0
       prevent: false
@@ -57,7 +47,7 @@ system:
     raw: 0
   delivery: sight
   duration:
-    raw: '1'
+    raw: "1"
     unit: hour
   effectTypes:
     - contract
@@ -70,29 +60,23 @@ system:
   maneuver: active
   overview:
     base: >-
-      <p>@Identifier[core:targets]{Target} gains one
-      @Pack[teriock.abilities]{ability} of your choice that you have from your
-      first rank in a @Pack[teriock.classes]{class}. The
-      @Pack[teriock.abilities]{ability} must not be @Wiki[Category:Elder Sorcery
-      abilities]{Elder Sorcery}, must not be a @Wiki[Category:Contract
-      effects]{contract effect}, must be one you are
-      @Identifier[core:proficiency-bonus]{proficient} in, and must be one you
-      aren't @Identifier[keyword:incapable]{incapable} of. The
-      @Identifier[core:targets]{target} also becomes
-      @Identifier[keyword:incapable]{incapable} of [[lookup name]]. You may only
-      have this active on one creature at a time.</p>
+      <p>@Identifier[core:targets]{Target} gains one @Pack[teriock.abilities]{ability} of your choice that you have from
+      your first rank in a @Pack[teriock.classes]{class}. The @Pack[teriock.abilities]{ability} must not be
+      @Wiki[Category:Elder Sorcery abilities]{Elder Sorcery}, must not be a @Wiki[Category:Contract effects]{contract
+      effect}, must be one you are @Identifier[core:proficiency-bonus]{proficient} in, and must be one you aren't
+      @Identifier[keyword:incapable]{incapable} of. The @Identifier[core:targets]{target} also becomes
+      @Identifier[keyword:incapable]{incapable} of [[lookup name]]. You may only have this active on one creature at a
+      time.</p>
     fluent: >-
-      <p>You can now share @Pack[teriock.abilities]{abilities} you have from any
-      of your first 1 + @Identifier[core:fluency-bonus]{F} ranks in a
-      @Pack[teriock.classes]{class}.</p>
+      <p>You can now share @Pack[teriock.abilities]{abilities} you have from any of your first 1 +
+      @Identifier[core:fluency-bonus]{F} ranks in a @Pack[teriock.classes]{class}.</p>
     proficient: >-
-      <p>You can now share @Pack[teriock.abilities]{abilities} you have from any
-      of your first 1 + @Identifier[core:proficiency-bonus]{P} ranks in a
-      @Pack[teriock.classes]{class}.</p>
+      <p>You can now share @Pack[teriock.abilities]{abilities} you have from any of your first 1 +
+      @Identifier[core:proficiency-bonus]{P} ranks in a @Pack[teriock.classes]{class}.</p>
   powerSources:
     - magical
   range:
-    raw: '30'
+    raw: "30"
     unit: ft
   skill: true
   standard: true

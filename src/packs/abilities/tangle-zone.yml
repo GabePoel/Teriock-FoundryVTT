@@ -1,34 +1,31 @@
 _id: 9c8344f3a305d048
-_key: '!effects!9c8344f3a305d048'
+_key: "!effects!9c8344f3a305d048"
 img: systems/teriock/src/icons/abilities/tangle-zone.webp
 name: Tangle Zone
 system:
   automations:
-    72ce567009179bea:
-      _id: 72ce567009179bea
+    - _id: 72ce567009179bea
       duration:
-        raw: '@h'
+        raw: "@h"
         unit: day
       heighten:
         - 1
       type: duration
-    GQPhZDxecpLrpjrD:
-      _id: GQPhZDxecpLrpjrD
+    - _id: GQPhZDxecpLrpjrD
       attribute: str
-      bonus: '0'
+      bonus: "0"
       threshold: 10 + @c + @h
       type: feat
-    kIuEh8irSpHGyM6y:
-      _id: kIuEh8irSpHGyM6y
-      angle: '60'
+    - _id: kIuEh8irSpHGyM6y
+      angle: "60"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: false
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
-      radius: '30'
+      outerWidth: "0"
+      radius: "30"
       regionType: circle
       restriction:
         enabled: true
@@ -37,14 +34,12 @@ system:
       targeting: false
       type: region
       visibility: 2
-    29b275994cf9f5b1:
-      _id: 29b275994cf9f5b1
+    - _id: 29b275994cf9f5b1
       formula: 1d4[vine]
       impact: damage
       merge: true
       type: roll
-    bda27199d76e509a:
-      _id: bda27199d76e509a
+    - _id: bda27199d76e509a
       executor: false
       relation: apply
       status: snared
@@ -55,53 +50,47 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: hand
   duration:
-    raw: '8'
+    raw: "8"
     unit: hour
   elements:
     - nature
   executionTime:
     base: 10 Minutes
     slow:
-      raw: '10'
+      raw: "10"
       unit: minute
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       event: turn
       method: roll
       relation: target
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: start
       type: combat
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, the @Identifier[core:duration]{duration} of this effect increases by
-    24 hours.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+    @Identifier[core:duration]{duration} of this effect increases by 24 hours.</p>
   identifier: tangle-zone
   interaction: manifest
   maneuver: slow
   overview:
     base: >-
-      <p>You enchant an area no larger than 30 feet in any direction. If
-      desired, this area provides @Identifier[core:cover]{half cover}. Any
-      creature @Identifier[core:movement]{moving} at least 5 feet through this
-      area must make a @Identifier[core:strength]{STR}
-      @Identifier[core:feat-interaction]{feat save} or become
-      @Identifier[condition:snared]{snared}. At the start of each of the
-      @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they
-      roll [[/roll 2d4]]. If either of these dice roll a 4, this effect ends. In
-      addition, any creature @Identifier[core:movement]{moving} through this
-      area takes [[/damage 1d4[vine]]] @Identifier[core:damage]{damage} for
-      every 5 feet they move through it.</p>
+      <p>You enchant an area no larger than 30 feet in any direction. If desired, this area provides
+      @Identifier[core:cover]{half cover}. Any creature @Identifier[core:movement]{moving} at least 5 feet through this
+      area must make a @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat save} or become
+      @Identifier[condition:snared]{snared}. At the start of each of the @Identifier[core:targets]{target's}
+      @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of these dice roll a 4, this effect ends. In
+      addition, any creature @Identifier[core:movement]{moving} through this area takes [[/damage 1d4[vine]]]
+      @Identifier[core:damage]{damage} for every 5 feet they move through it.</p>
   powerSources:
     - magical
     - primal

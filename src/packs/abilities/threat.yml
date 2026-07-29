@@ -1,11 +1,10 @@
 _id: 9843feda70d00cc1
-_key: '!effects!9843feda70d00cc1'
+_key: "!effects!9843feda70d00cc1"
 img: systems/teriock/src/icons/abilities/threat.webp
 name: Threat
 system:
   automations:
-    b4960732f0b9ed9f:
-      _id: b4960732f0b9ed9f
+    - _id: b4960732f0b9ed9f
       executor: true
       relation: include
       status: frightened
@@ -15,17 +14,15 @@ system:
     raw: 0
   delivery: weapon
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   endCondition: >-
-    <p>At the start of each of the @Identifier[core:targets]{target's}
-    @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of these
-    dice roll a 4, this effect ends.</p>
+    <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
   executionTime:
     base: a1
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       crit:
         - 0
       event: turn
@@ -34,12 +31,11 @@ system:
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: start
       type: combat
-    28294dbc80493c2c:
-      _id: 28294dbc80493c2c
+    - _id: 28294dbc80493c2c
       crit:
         - 1
       event: turn
@@ -48,7 +44,7 @@ system:
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 1
       timing: start
       type: combat
@@ -63,12 +59,8 @@ system:
   range:
     unit: contact
   results:
-    critHit: >-
-      <p>The @Identifier[core:targets]{target} automatically fails the first
-      [[/roll 2d4]] roll.</p>
-    hit: >-
-      <p>@Identifier[core:targets]{Target} becomes
-      @Identifier[condition:frightened]{frightened}.</p>
+    critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+    hit: <p>@Identifier[core:targets]{Target} becomes @Identifier[condition:frightened]{frightened}.</p>
   skill: true
   standard: true
   targets:

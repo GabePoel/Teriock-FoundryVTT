@@ -4,7 +4,14 @@ import path from "path";
 
 import { toKebabCase, toKebabCaseFull } from "../../src/module/helpers/string.mjs";
 import { cleanDocument } from "./clean-fields.mjs";
-import { EXPAND_ADVENTURES, FOLDERS, YAML } from "./constants.mjs";
+import {
+  DOCUMENT_COLLECTION_KEYS,
+  EXPAND_ADVENTURES,
+  FOLDERS,
+  PSEUDO_COLLECTION_KEYS,
+  YAML,
+  YAML_OPTIONS,
+} from "./constants.mjs";
 
 /**
  * @typedef {object} CompendiumNode
@@ -65,6 +72,7 @@ async function unpackPack(pack, buildRegistry) {
     transformFolderName,
     transformName,
     yaml: YAML,
+    yamlOptions: YAML_OPTIONS,
   };
   state.pack = pack;
   state.buildRegistry = buildRegistry;
@@ -144,10 +152,15 @@ function transformFolderName(doc) {
  */
 function cleanEntry(doc) {
   cleanDocument(doc);
-  sortKeys(doc);
-  if (doc.system?.affinities) { sortMechanics(doc.system.affinities); }
-  if (doc.system?.automations) { sortMechanics(doc.system.automations); }
-  if (doc.system?.expirations) { sortMechanics(doc.system.expirations); }
+  // if (typeof doc._id !== "string") { doc._id = doc._id.toString() }
+  if (doc.system) {
+    for (const key of PSEUDO_COLLECTION_KEYS) {
+      if (doc.system[key]) {
+        const sorted = sortMechanics(doc.system[key]);
+        if (sorted) { doc.system[key] = sorted; }
+      }
+    }
+  }
   if (doc._stats) {
     delete doc._stats.coreVersion;
     delete doc._stats.lastModifiedBy;
@@ -170,28 +183,8 @@ function transformEntry(doc) {
   }
   cleanEntry(doc);
   if (doc.system) { conformDataValues(doc.system); }
-  ["cards", "categories", "effects", "items", "notes", "pages", "results"].forEach(key =>
-    doc[key]?.forEach(d => transformEntry(d))
-  );
+  DOCUMENT_COLLECTION_KEYS.forEach(key => doc[key]?.forEach(d => transformEntry(d)));
   if (!doc._key.includes("scene")) { conformDataValues(doc); }
-}
-
-/**
- * Sort keys in an object in place.
- * @param {object} obj
- */
-function sortKeys(obj) {
-  if (typeof obj !== "object" || !obj) { return; }
-  const keys = Object.keys(obj).sort();
-  const cache = { ...obj };
-  for (const key in obj) { delete obj[key]; }
-  for (const key of keys) {
-    obj[key] = cache[key];
-    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) { sortKeys(obj[key]); }
-    if (typeof obj[key] === "object" && Array.isArray(obj[key])) {
-      for (const i of obj[key]) { sortKeys(i); }
-    }
-  }
 }
 
 /**
@@ -249,7 +242,7 @@ function conformDataValues(obj) {
  */
 
 /**
- * Sorts mechanics (automations and expirations) consistently.
+ * Sorts mechanics consistently.
  * @param {Record<string, MinimalMechanicData>} mechanics
  * @returns {Record<string, MinimalMechanicData>}
  */
@@ -279,10 +272,10 @@ function sortMechanics(mechanics) {
 
   // TODO: Remove this once I'm confident all expirations are properly migrated
   if (Object.keys(mechanics).some((k) => k.length !== 16)) {
-    return mechanics;
+    return null;
   }
 
-  const sortableArray = Object.entries(mechanics).map(([key, m]) => {
+  const sortableArray = Object.values(mechanics).map((m) => {
     m.competencies ??= [0, 1, 2];
     m.competencies.sort();
     m.heighten ??= [0, 1];
@@ -302,7 +295,7 @@ function sortMechanics(mechanics) {
     const cStr = `${Number(c.includes(0))}${Number(c.includes(1))}`;
     const cSort = PAIR_STRING_MAP[cStr] || "0";
 
-    return { data: m, key, sortKey: m.type + compSort + hSort + cSort };
+    return { data: m, sortKey: m.type + compSort + hSort + cSort };
   });
 
   sortableArray.sort((a, b) => {
@@ -311,14 +304,12 @@ function sortMechanics(mechanics) {
     return 0;
   });
 
-  for (const key of Object.keys(mechanics)) { delete mechanics[key]; }
-  for (const item of sortableArray) {
-    if (item.data.competencies.length === 3) { delete item.data.competencies; }
-    if (item.data.heighten.length === 2) { delete item.data.heighten; }
-    if (item.data.crit?.length === 2) { delete item.data.crit; }
-    mechanics[item.key] = item.data;
-  }
-  return mechanics;
+  return sortableArray.map(({ data }) => {
+    if (data.competencies.length === 3) { delete data.competencies; }
+    if (data.heighten.length === 2) { delete data.heighten; }
+    if (data.crit?.length === 2) { delete data.crit; }
+    return data;
+  });
 }
 
 /**

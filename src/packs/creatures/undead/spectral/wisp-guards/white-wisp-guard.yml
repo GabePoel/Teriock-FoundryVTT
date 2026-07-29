@@ -1,49 +1,45 @@
 _id: d614c092db51c2c8
-_key: '!actors!d614c092db51c2c8'
+_key: "!actors!d614c092db51c2c8"
 folder: 6c73074fd40cac00
 img: systems/teriock/src/icons/creatures/white-wisp-guard.webp
 items:
   - _id: d614c092db51c2c8
-    _key: '!actors.items!d614c092db51c2c8.d614c092db51c2c8'
+    _key: "!actors.items!d614c092db51c2c8.d614c092db51c2c8"
     _stats:
       compendiumSource: Compendium.teriock.species.Item.d614c092db51c2c8
     effects:
       - _id: 2kzdINqe2tnW0rNW
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.2kzdINqe2tnW0rNW
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.2kzdINqe2tnW0rNW"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.OJa7qEXpvUsuQzvQ
         img: systems/teriock/src/icons/abilities/animate-dead.webp
         name: Animate Dead
         system:
           automations:
-            iSxkhemk7psQTxpR:
-              _id: iSxkhemk7psQTxpR
+            - _id: iSxkhemk7psQTxpR
               changes:
                 - key: system.hp.max
                   phase: special
                   priority: 50
                   target: Actor
                   type: multiply
-                  value: '0.5'
+                  value: "0.5"
                 - key: system.mp.max
                   phase: special
                   priority: 50
                   target: Actor
                   type: multiply
-                  value: '0.5'
+                  value: "0.5"
               competencies:
                 - 0
                 - 1
               type: changes
-            ZdtyUjiggvt0bxgX:
-              _id: ZdtyUjiggvt0bxgX
+            - _id: ZdtyUjiggvt0bxgX
               common:
                 - revive
               showConfirmationDialog: true
               type: common
-            ZlgI0KUafWT3wE27:
-              _id: ZlgI0KUafWT3wE27
+            - _id: ZlgI0KUafWT3wE27
               competence:
                 raw: 0
               competencies:
@@ -56,8 +52,7 @@ items:
               preventThreshold: false
               setCompetence: inherit
               type: override
-            6v7WhWcAO2fARRYl:
-              _id: 6v7WhWcAO2fARRYl
+            - _id: 6v7WhWcAO2fARRYl
               amount: 999999
               competencies:
                 - 1
@@ -68,8 +63,7 @@ items:
               morganti: false
               showDialog: false
               type: take
-            YHHJxY54wT2k778U:
-              _id: YHHJxY54wT2k778U
+            - _id: YHHJxY54wT2k778U
               amount: 999999
               competencies:
                 - 1
@@ -90,7 +84,7 @@ items:
                 type: tag
             primary:
               mp:
-                formula: '1'
+                formula: "1"
                 type: formula
           delivery: hand
           duration:
@@ -102,8 +96,7 @@ items:
           executionTime:
             base: a1
           expirations:
-            c32fbccf9d83e581:
-              _id: c32fbccf9d83e581
+            - _id: c32fbccf9d83e581
               method: automatic
               triggers:
                 - shortRest
@@ -115,31 +108,23 @@ items:
           maneuver: active
           overview:
             base: >-
-              <p>@Identifier[core:targets]{Target} is
-              @Identifier[rule:alive]{alive} (but still
-              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}).
-              It's @Identifier[core:hit-points-and-mana-points]{HP} and
-              @Identifier[core:hit-points-and-mana-points]{MP} are both
-              increased to 1 if they were less than that value. However, the
-              target's maximum @Identifier[core:hit-points-and-mana-points]{HP}
-              and @Identifier[core:hit-points-and-mana-points]{MP} are both
-              halved to a minimum of 1. This effect lasts until the
-              @Identifier[core:targets]{target} completes a
-              @Identifier[core:short-rest]{short rest}. This does not
-              <i>count</i> as a @Wiki[Category:Revival effects]{revival effect}
-              although it acts as one.</p>
+              <p>@Identifier[core:targets]{Target} is @Identifier[rule:alive]{alive} (but still
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}). It's
+              @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
+              both increased to 1 if they were less than that value. However, the target's maximum
+              @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
+              both halved to a minimum of 1. This effect lasts until the @Identifier[core:targets]{target} completes a
+              @Identifier[core:short-rest]{short rest}. This does not <i>count</i> as a @Wiki[Category:Revival
+              effects]{revival effect} although it acts as one.</p>
             fluent: >-
               <p>Target's @Identifier[core:hit-points-and-mana-points]{HP} and
-              @Identifier[core:hit-points-and-mana-points]{MP} are no longer
-              halved.</p>
+              @Identifier[core:hit-points-and-mana-points]{MP} are no longer halved.</p>
             proficient: >-
-              <p>@Identifier[core:targets]{Target} has all
-              @Identifier[core:hit-points-and-mana-points]{HP} and
-              @Identifier[core:hit-points-and-mana-points]{MP} restored, but its
-              maximum @Identifier[core:hit-points-and-mana-points]{HP} and
-              @Identifier[core:hit-points-and-mana-points]{MP} are still halved.
-              This does not count as a @Wiki[Category:Healing effects]{healing
-              effect} or a @Wiki[Category:Revival effects]{revival effect}.</p>
+              <p>@Identifier[core:targets]{Target} has all @Identifier[core:hit-points-and-mana-points]{HP} and
+              @Identifier[core:hit-points-and-mana-points]{MP} restored, but its maximum
+              @Identifier[core:hit-points-and-mana-points]{HP} and @Identifier[core:hit-points-and-mana-points]{MP} are
+              still halved. This does not count as a @Wiki[Category:Healing effects]{healing effect} or a
+              @Wiki[Category:Revival effects]{revival effect}.</p>
           piercing:
             raw: 2
           powerSources:
@@ -147,8 +132,7 @@ items:
           range:
             unit: contact
           requirements: >-
-            <p>@Identifier[core:targets]{Target} is
-            @Identifier[condition:dead]{dead} and
+            <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead} and
             @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
           spell: true
           standard: true
@@ -157,16 +141,14 @@ items:
         transfer: true
         type: ability
       - _id: aJPjoXr5V57ZRyMm
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.aJPjoXr5V57ZRyMm
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.aJPjoXr5V57ZRyMm"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.0ab65ceea762bb46
         img: systems/teriock/src/icons/abilities/attack-resistance.webp
         name: Attack Resistance
         system:
           affinities:
-            VYVCQh90IYJBSK1s:
-              _id: VYVCQh90IYJBSK1s
+            - _id: VYVCQh90IYJBSK1s
               category: other
               competence:
                 raw: 0
@@ -188,15 +170,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @Identifier[keyword:resistance]{resistant} to being hit
-              by non-critical @Identifier[core:attack-interaction]{attacks} when
-              the @Identifier[core:attack-interaction]{attack roll} is less than
-              your @Identifier[core:armor-class]{AC} + 2. If you
-              @Identifier[core:block-interaction]{block} the
-              @Identifier[core:attack-interaction]{attack}, you
-              @Identifier[keyword:resistance]{resist} it if it is less than or
-              equal to your @Identifier[core:armor-class]{AC} +
-              @Identifier[core:block-interaction]{BV} + 2.</p>
+              <p>You are @Identifier[keyword:resistance]{resistant} to being hit by non-critical
+              @Identifier[core:attack-interaction]{attacks} when the @Identifier[core:attack-interaction]{attack roll}
+              is less than your @Identifier[core:armor-class]{AC} + 2. If you @Identifier[core:block-interaction]{block}
+              the @Identifier[core:attack-interaction]{attack}, you @Identifier[keyword:resistance]{resist} it if it is
+              less than or equal to your @Identifier[core:armor-class]{AC} + @Identifier[core:block-interaction]{BV} +
+              2.</p>
           powerSources:
             - magical
           range:
@@ -206,16 +185,14 @@ items:
         transfer: true
         type: ability
       - _id: gj6HiQRVjSBr2rGG
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.gj6HiQRVjSBr2rGG
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.gj6HiQRVjSBr2rGG"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.2f4f5e357e9b92c7
         img: systems/teriock/src/icons/abilities/ethereal-shift.webp
         name: Ethereal Shift
         system:
           automations:
-            067cb526e2f9e98f:
-              _id: 067cb526e2f9e98f
+            - _id: 067cb526e2f9e98f
               executor: false
               multi: false
               relation: include
@@ -227,11 +204,11 @@ items:
           costs:
             primary:
               mp:
-                formula: '1'
+                formula: "1"
                 type: formula
           delivery: self
           duration:
-            raw: '1'
+            raw: "1"
             unit: hour
           elements:
             - necromancy
@@ -242,9 +219,7 @@ items:
           interaction: manifest
           maneuver: active
           overview:
-            base: >-
-              <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest
-              back into the Material Realm.</p>
+            base: <p>You go @Identifier[condition:ethereal]{Ethereal} or manifest back into the Material Realm.</p>
           powerSources:
             - magical
           range:
@@ -257,8 +232,7 @@ items:
         transfer: true
         type: ability
       - _id: UErtstn5l7Phnr3l
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.UErtstn5l7Phnr3l
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.UErtstn5l7Phnr3l"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.a609aa9a4e997d71
         img: systems/teriock/src/icons/abilities/full-undead.webp
@@ -279,17 +253,14 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You count as being @Identifier[keyword:undead]{undead} for the
-              purposes of @Pack[teriock.abilities]{abilities},
-              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage},
-              and other @Wiki[Category:Effects]{effects}. You also gain
-              @Identifier[ability:ethereal-senses]{Ethereal Senses},
+              <p>You count as being @Identifier[keyword:undead]{undead} for the purposes of
+              @Pack[teriock.abilities]{abilities},
+              @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage}, and other
+              @Wiki[Category:Effects]{effects}. You also gain @Identifier[ability:ethereal-senses]{Ethereal Senses},
               @Identifier[ability:healing-sensitivity]{Healing Sensitivity},
-              @Identifier[ability:impure-durability]{Impure Durability},
-              @Identifier[ability:mana-drain-grasp]{Mana Drain Grasp},
-              @Identifier[ability:undead-mind]{Undead Mind}, and
-              @Identifier[ability:undying-durability]{Undying
-              Durability}.</p><div class="expandable-table"></div>
+              @Identifier[ability:impure-durability]{Impure Durability}, @Identifier[ability:mana-drain-grasp]{Mana
+              Drain Grasp}, @Identifier[ability:undead-mind]{Undead Mind}, and
+              @Identifier[ability:undying-durability]{Undying Durability}.</p><div class="expandable-table"></div>
           powerSources:
             - magical
           range:
@@ -299,8 +270,7 @@ items:
         transfer: true
         type: ability
       - _id: PIXx3UgLuX5bs3KA
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.PIXx3UgLuX5bs3KA
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.PIXx3UgLuX5bs3KA"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a18ca3d154552f3
         img: systems/teriock/src/icons/abilities/ghostlike.webp
@@ -330,23 +300,21 @@ items:
         transfer: true
         type: ability
       - _id: 39UyjCx0carGA39k
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.39UyjCx0carGA39k
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.39UyjCx0carGA39k"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.4c9a5b331aeeff5b
         img: systems/teriock/src/icons/abilities/incorporeal.webp
         name: Incorporeal
         system:
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
+            - _id: e789ed5e109ebd1a
               changes:
                 - key: system.weight.self
                   phase: derived
                   priority: 10
                   target: Actor
                   type: override
-                  value: '0'
+                  value: "0"
               type: changes
           competence:
             raw: 1
@@ -363,12 +331,10 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You cannot wear
-              @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor}
-              and you may pass through non-@Identifier[property:silver]{silver}
-              walls while @Identifier[condition:ethereal]{Ethereal}. You are
-              also @Identifier[keyword:immunity]{immune} to being
-              @Identifier[condition:snared]{snared} and have no weight.</p>
+              <p>You cannot wear @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} and you may pass
+              through non-@Identifier[property:silver]{silver} walls while @Identifier[condition:ethereal]{Ethereal}.
+              You are also @Identifier[keyword:immunity]{immune} to being @Identifier[condition:snared]{snared} and have
+              no weight.</p>
           powerSources:
             - martial
           range:
@@ -378,8 +344,7 @@ items:
         transfer: true
         type: ability
       - _id: ZqezovQJmpVFktoM
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.ZqezovQJmpVFktoM
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.ZqezovQJmpVFktoM"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.db77687509a7309d
         img: systems/teriock/src/icons/abilities/normal-intelligence.webp
@@ -409,8 +374,7 @@ items:
         transfer: true
         type: ability
       - _id: OS07mQOeHO3TJzFo
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.OS07mQOeHO3TJzFo
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.OS07mQOeHO3TJzFo"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.1c52eda8919d34a7
         img: systems/teriock/src/icons/abilities/normal-movement.webp
@@ -440,8 +404,7 @@ items:
         transfer: true
         type: ability
       - _id: e12pGquyhpcv26HO
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.e12pGquyhpcv26HO
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.e12pGquyhpcv26HO"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.8249d99c527d09b1
         img: systems/teriock/src/icons/abilities/normal-perception.webp
@@ -471,8 +434,7 @@ items:
         transfer: true
         type: ability
       - _id: uLepsQCczvxucaTv
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.uLepsQCczvxucaTv
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.uLepsQCczvxucaTv"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1a9a7ab79b2dc14
         img: systems/teriock/src/icons/abilities/tiny-strength.webp
@@ -502,32 +464,28 @@ items:
         transfer: true
         type: ability
       - _id: 2dwv17WiKmCHwvEE
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.2dwv17WiKmCHwvEE
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.2dwv17WiKmCHwvEE"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.24a2a3db4a940311
         img: systems/teriock/src/icons/abilities/zombify.webp
         name: Zombify
         system:
           automations:
-            72ce567009179bea:
-              _id: 72ce567009179bea
+            - _id: 72ce567009179bea
               duration:
-                raw: '@h'
+                raw: "@h"
                 unit: hour
               heighten:
                 - 1
               type: duration
-            838ba57012685987:
-              _id: 838ba57012685987
+            - _id: 838ba57012685987
               competencies:
                 - 2
               duration:
-                raw: '1'
+                raw: "1"
                 unit: hour
               type: duration
-            ngQVntiCQ8Ruot8n:
-              _id: ngQVntiCQ8Ruot8n
+            - _id: ngQVntiCQ8Ruot8n
               all: false
               automatic: true
               competence:
@@ -557,7 +515,7 @@ items:
                 type: tag
           delivery: hand
           duration:
-            raw: '1'
+            raw: "1"
             unit: minute
           effectTypes:
             - control
@@ -568,19 +526,16 @@ items:
             base: a1
           form: normal
           heightened: >-
-            <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, the
-            @Identifier[core:duration]{duration} of this effect increases by 1
-            hour.</p>
+            <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+            @Identifier[core:duration]{duration} of this effect increases by 1 hour.</p>
           identifier: zombify
           interaction: attack
           invoked: true
           maneuver: active
           overview:
             fluent: >-
-              <p>The base @Identifier[core:duration]{duration} of this effect is
-              1 hour and the @Identifier[creature:zombie]{zombie} is a
-              @Identifier[core:minions]{minion} under your command.</p>
+              <p>The base @Identifier[core:duration]{duration} of this effect is 1 hour and the
+              @Identifier[creature:zombie]{zombie} is a @Identifier[core:minions]{minion} under your command.</p>
             proficient: <p>[[lookup name]] is @Identifier[keyword:warded]{warded}.</p>
           piercing:
             raw: 2
@@ -588,21 +543,16 @@ items:
             - magical
           range:
             unit: contact
-          requirements: >-
-            <p>@Identifier[core:targets]{Target} is
-            @Identifier[condition:dead]{dead}.</p>
+          requirements: <p>@Identifier[core:targets]{Target} is @Identifier[condition:dead]{dead}.</p>
           results:
             hit: >-
-              <p>@Identifier[core:targets]{Target} is reanimated as a
-              @Identifier[creature:zombie]{zombie}. It is not under your
-              command, but is hostile to everyone other than you that is not
-              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{another
-              zombie}. The @Identifier[creature:zombie]{zombie} keeps the
-              @Identifier[core:size]{size} it had before, but loses all other
-              traits and abilities. If the @Identifier[core:targets]{target} was
-              already
-              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{some
-              kind of zombie}, then it is reanimated as that type.</p>
+              <p>@Identifier[core:targets]{Target} is reanimated as a @Identifier[creature:zombie]{zombie}. It is not
+              under your command, but is hostile to everyone other than you that is not
+              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{another zombie}. The
+              @Identifier[creature:zombie]{zombie} keeps the @Identifier[core:size]{size} it had before, but loses all
+              other traits and abilities. If the @Identifier[core:targets]{target} was already
+              @UUID[Compendium.teriock.tables.RollTable.249fb1db4a91e504]{some kind of zombie}, then it is reanimated as
+              that type.</p>
           spell: true
           standard: true
           targets:
@@ -610,8 +560,7 @@ items:
         transfer: true
         type: ability
       - _id: K8sMIS3xP5mFQQE7
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.K8sMIS3xP5mFQQE7
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.K8sMIS3xP5mFQQE7"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.3a19d7ff7a1f3b26
         img: systems/teriock/src/icons/abilities/undying-durability.webp
@@ -619,18 +568,15 @@ items:
         system:
           _sup: UErtstn5l7Phnr3l
           affinities:
-            HaVjAr78BgQGd92W:
-              _id: HaVjAr78BgQGd92W
+            - _id: HaVjAr78BgQGd92W
               category: statuses
               type: immunity
               value: poisoned
-            OlGtbdaImhaj6OiM:
-              _id: OlGtbdaImhaj6OiM
+            - _id: OlGtbdaImhaj6OiM
               category: statuses
               type: immunity
               value: suffocating
-            W3eMyYlHd3WnCnAm:
-              _id: W3eMyYlHd3WnCnAm
+            - _id: W3eMyYlHd3WnCnAm
               category: statuses
               type: immunity
               value: unconscious
@@ -651,15 +597,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to
-              @Identifier[condition:unconscious]{unconsciousness},
-              @Identifier[condition:suffocating]{suffocating}, and being
-              @Identifier[condition:poisoned]{poisoned}. You do not
-              @Identifier[condition:down]{drop} due to being at negative
-              @Identifier[core:hit-points-and-mana-points]{HP}. You still
-              @Identifier[condition:dead]{die} when you reach half your maximum
-              @Identifier[core:hit-points-and-mana-points]{HP} below zero. You
-              also do not have to @Identifier[core:drowning]{breathe}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to @Identifier[condition:unconscious]{unconsciousness},
+              @Identifier[condition:suffocating]{suffocating}, and being @Identifier[condition:poisoned]{poisoned}. You
+              do not @Identifier[condition:down]{drop} due to being at negative
+              @Identifier[core:hit-points-and-mana-points]{HP}. You still @Identifier[condition:dead]{die} when you
+              reach half your maximum @Identifier[core:hit-points-and-mana-points]{HP} below zero. You also do not have
+              to @Identifier[core:drowning]{breathe}.</p>
           powerSources:
             - magical
           range:
@@ -669,8 +612,7 @@ items:
         transfer: true
         type: ability
       - _id: tfCOOsm32XRc9vuO
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.tfCOOsm32XRc9vuO
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.tfCOOsm32XRc9vuO"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.646bdfc53ff71572
         img: systems/teriock/src/icons/abilities/healing-sensitivity.webp
@@ -692,16 +634,12 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>@Identifier[core:healing]{Healing} can be used to
-              @Identifier[core:damage]{damage} you. If the creature providing
-              you @Identifier[core:healing]{healing} specifies that they are
-              doing so "for damage" then you roll your <i>largest</i>
-              @Identifier[core:hit-points-and-mana-points]{hit die} and take
-              that much @Identifier[damage:holy]{holy}
-              @Identifier[damage:magic]{magic damage} instead of the normal
-              @Identifier[core:healing]{healing} effect. This does not consume
-              any of your @Identifier[core:hit-points-and-mana-points]{hit
-              dice}.</p>
+              <p>@Identifier[core:healing]{Healing} can be used to @Identifier[core:damage]{damage} you. If the creature
+              providing you @Identifier[core:healing]{healing} specifies that they are doing so "for damage" then you
+              roll your <i>largest</i> @Identifier[core:hit-points-and-mana-points]{hit die} and take that much
+              @Identifier[damage:holy]{holy} @Identifier[damage:magic]{magic damage} instead of the normal
+              @Identifier[core:healing]{healing} effect. This does not consume any of your
+              @Identifier[core:hit-points-and-mana-points]{hit dice}.</p>
           powerSources:
             - magical
           range:
@@ -711,8 +649,7 @@ items:
         transfer: true
         type: ability
       - _id: D8npA123qlq32QYg
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.D8npA123qlq32QYg
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.D8npA123qlq32QYg"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.97218864bf0987c8
         img: systems/teriock/src/icons/abilities/impure-durability.webp
@@ -720,8 +657,7 @@ items:
         system:
           _sup: UErtstn5l7Phnr3l
           affinities:
-            uevhIJEJYaY0sz5X:
-              _id: uevhIJEJYaY0sz5X
+            - _id: uevhIJEJYaY0sz5X
               category: other
               type: immunity
               value: Non-Magical Non-Silver Damage
@@ -740,10 +676,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to
-              non-@Identifier[damage:magic]{magic}
-              non-@Identifier[damage:silver]{silver}
-              @Identifier[core:damage]{damage}.</p>
+              <p>You are @Identifier[keyword:immunity]{immune} to non-@Identifier[damage:magic]{magic}
+              non-@Identifier[damage:silver]{silver} @Identifier[core:damage]{damage}.</p>
           powerSources:
             - magical
           range:
@@ -753,8 +687,7 @@ items:
         transfer: true
         type: ability
       - _id: 2IXyDTuhS3gSgdF4
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.2IXyDTuhS3gSgdF4
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.2IXyDTuhS3gSgdF4"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.1e47c2f1c0cd5428
         img: systems/teriock/src/icons/abilities/undead-mind.webp
@@ -762,13 +695,11 @@ items:
         system:
           _sup: UErtstn5l7Phnr3l
           affinities:
-            EEiHRIyCxZhUuw07:
-              _id: EEiHRIyCxZhUuw07
+            - _id: EEiHRIyCxZhUuw07
               category: statuses
               type: immunity
               value: charmed
-            Glnnr440sVehTfZ5:
-              _id: Glnnr440sVehTfZ5
+            - _id: Glnnr440sVehTfZ5
               category: statuses
               type: immunity
               value: frightened
@@ -789,10 +720,8 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You are @Identifier[keyword:immunity]{immune} to being
-              @Identifier[condition:frightened]{frightened} and
-              @Identifier[condition:charmed]{charmed}. The effects of [[lookup
-              name]] are maintained even if
+              <p>You are @Identifier[keyword:immunity]{immune} to being @Identifier[condition:frightened]{frightened}
+              and @Identifier[condition:charmed]{charmed}. The effects of [[lookup name]] are maintained even if
               @Identifier[condition:transformed]{transformed}.</p>
           powerSources:
             - magical
@@ -803,8 +732,7 @@ items:
         transfer: true
         type: ability
       - _id: mFVeH3tCHtrjKdoE
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.mFVeH3tCHtrjKdoE
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.mFVeH3tCHtrjKdoE"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.778a406e64cdfa53
         img: systems/teriock/src/icons/abilities/mana-drain-grasp.webp
@@ -812,13 +740,11 @@ items:
         system:
           _sup: UErtstn5l7Phnr3l
           automations:
-            iAyFzPzJgTNeDbbH:
-              _id: iAyFzPzJgTNeDbbH
+            - _id: iAyFzPzJgTNeDbbH
               consumeStatDice: true
               forHarm: false
               type: revitalize
-            157afc517847f562:
-              _id: 157afc517847f562
+            - _id: 157afc517847f562
               formula: 1d8[mana]
               impact: drain
               type: roll
@@ -844,30 +770,21 @@ items:
             unit: contact
           results:
             critHit: >-
-              <p>Deal [[/drain 2d8[mana]]]
-              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-              to the target. If this @Identifier[condition:dead]{kills} the
-              @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize} twice. This
-              @Identifier[core:revitalizing]{revitalization} is the only part of
-              this that is a @Wiki[Category:Revitalization
-              effects]{revitalization effect}.</p>
+              <p>Deal [[/drain 2d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize} twice. This @Identifier[core:revitalizing]{revitalization} is
+              the only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
             hit: >-
-              <p>Deal [[/drain 1d8[mana]]]
-              @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain}
-              to the target. If this @Identifier[condition:dead]{kills} the
-              @Identifier[core:targets]{target}, you
-              @Identifier[core:revitalizing]{revitalize}. This
-              @Identifier[core:revitalizing]{revitalization} is the only part of
-              this that is a @Wiki[Category:Revitalization
-              effects]{revitalization effect}.</p>
+              <p>Deal [[/drain 1d8[mana]]] @UUID[Compendium.teriock.rules.JournalEntry.drain00000000000]{drain} to the
+              target. If this @Identifier[condition:dead]{kills} the @Identifier[core:targets]{target}, you
+              @Identifier[core:revitalizing]{revitalize}. This @Identifier[core:revitalizing]{revitalization} is the
+              only part of this that is a @Wiki[Category:Revitalization effects]{revitalization effect}.</p>
           targets:
             - creature
         transfer: true
         type: ability
       - _id: qXcf8A4Qtdl3jROo
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.qXcf8A4Qtdl3jROo
+        _key: "!actors.items.effects!d614c092db51c2c8.d614c092db51c2c8.qXcf8A4Qtdl3jROo"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.iVgITml3cqPn1n2F
         img: systems/teriock/src/icons/abilities/ethereal-senses.webp
@@ -875,15 +792,14 @@ items:
         system:
           _sup: UErtstn5l7Phnr3l
           automations:
-            e789ed5e109ebd1a:
-              _id: e789ed5e109ebd1a
+            - _id: e789ed5e109ebd1a
               changes:
                 - key: system.senses.ethereal
                   phase: derived
                   priority: 10
                   target: Actor
                   type: upgrade
-                  value: '120'
+                  value: "120"
               type: changes
           competence:
             raw: 1
@@ -902,8 +818,7 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You can see and hear spirits and
-              @Identifier[condition:ethereal]{Ethereal} creatures within 120
+              <p>You can see and hear spirits and @Identifier[condition:ethereal]{Ethereal} creatures within 120
               feet.</p>
           powerSources:
             - magical
@@ -924,14 +839,10 @@ items:
       competence:
         raw: 1
       description: >-
-        <p>These lights are used to keep
-        @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}
-        armies up and running. They have no attacks except
-        @Wiki[Category:Spells]{spells}, but are very hard to deal with.</p>
+        <p>These lights are used to keep @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} armies up
+        and running. They have no attacks except @Wiki[Category:Spells]{spells}, but are very hard to deal with.</p>
       identifier: white-wisp-guard
-      innateRanks: >-
-        <p>Innately @Pack[teriock.classes]{rank} 1
-        @Identifier[class:life-mage]{Life Mage}.</p>
+      innateRanks: <p>Innately @Pack[teriock.classes]{rank} 1 @Identifier[class:life-mage]{Life Mage}.</p>
       size:
         enabled: true
         value: 0.25
@@ -949,21 +860,19 @@ items:
         ringImg: systems/teriock/src/icons/tokens/white-wisp-guard.webp
     type: species
   - _id: m0wIEP0pRViu7oF7
-    _key: '!actors.items!d614c092db51c2c8.m0wIEP0pRViu7oF7'
+    _key: "!actors.items!d614c092db51c2c8.m0wIEP0pRViu7oF7"
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.2eb28f45a753186c
     effects:
       - _id: 06z0wz68hsmApPL9
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.06z0wz68hsmApPL9
+        _key: "!actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.06z0wz68hsmApPL9"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.dccbed24e9bf8cf1
         img: systems/teriock/src/icons/abilities/hibernation-shield.webp
         name: Hibernation Shield
         system:
           automations:
-            deef79aff6bd9b44:
-              _id: deef79aff6bd9b44
+            - _id: deef79aff6bd9b44
               all: false
               attachDocuments: true
               automatic: true
@@ -976,24 +885,22 @@ items:
             raw: 1
           delivery: sight
           duration:
-            raw: '24'
+            raw: "24"
             unit: hour
           elements:
             - life
           endCondition: >-
-            <p>The break of dawn or the @Identifier[core:targets]{target} is no
-            longer @Identifier[condition:down]{down}.</p>
+            <p>The break of dawn or the @Identifier[core:targets]{target} is no longer
+            @Identifier[condition:down]{down}.</p>
           executionTime:
             base: r1
           expirations:
-            05f6d4dd9db56877:
-              _id: 05f6d4dd9db56877
+            - _id: 05f6d4dd9db56877
               statuses:
                 absent:
                   - down
               type: status
-            d1f6b6eaa581aa10:
-              _id: d1f6b6eaa581aa10
+            - _id: d1f6b6eaa581aa10
               method: automatic
               triggers:
                 - dawn
@@ -1004,24 +911,16 @@ items:
           maneuver: reactive
           overview:
             base: >-
-              <p>@Identifier[core:targets]{Target} gains
-              @Identifier[ability:hibernation]{Hibernation}. You may target
-              yourself with this as you go
-              @Identifier[condition:down]{down}.</p>
-            fluent: >-
-              <p>You may target up to @Identifier[core:fluency-bonus]{F}
-              creatures.</p>
-            proficient: >-
-              <p>You may target up to @Identifier[core:proficiency-bonus]{P}
-              creatures.</p>
+              <p>@Identifier[core:targets]{Target} gains @Identifier[ability:hibernation]{Hibernation}. You may target
+              yourself with this as you go @Identifier[condition:down]{down}.</p>
+            fluent: <p>You may target up to @Identifier[core:fluency-bonus]{F} creatures.</p>
+            proficient: <p>You may target up to @Identifier[core:proficiency-bonus]{P} creatures.</p>
           powerSources:
             - magical
           range:
-            raw: '10'
+            raw: "10"
             unit: ft
-          requirements: >-
-            <p>@Identifier[core:targets]{Target} must be
-            @Identifier[condition:down]{down}.</p>
+          requirements: <p>@Identifier[core:targets]{Target} must be @Identifier[condition:down]{down}.</p>
           spell: true
           standard: true
           targets:
@@ -1030,8 +929,7 @@ items:
         transfer: true
         type: ability
       - _id: JhNbjfOBP4vq6fDO
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.JhNbjfOBP4vq6fDO
+        _key: "!actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.JhNbjfOBP4vq6fDO"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.3dea135aaa9525d7
         flags:
@@ -1041,15 +939,13 @@ items:
         name: Light Ray
         system:
           automations:
-            800c70e6560525a8:
-              _id: 800c70e6560525a8
+            - _id: 800c70e6560525a8
               formula: (@h)d4[magic holy]
               heighten:
                 - 1
               impact: damage
               type: roll
-            747b3e9c9b617af6:
-              _id: 747b3e9c9b617af6
+            - _id: 747b3e9c9b617af6
               executor: false
               multi: false
               relation: include
@@ -1060,15 +956,14 @@ items:
             raw: 1
           delivery: missile
           duration:
-            raw: '1'
+            raw: "1"
             unit: minute
           elements:
             - life
           executionTime:
             base: a1
           expirations:
-            66672059c7a29a30:
-              _id: 66672059c7a29a30
+            - _id: 66672059c7a29a30
               crit:
                 - 0
               event: turn
@@ -1077,8 +972,7 @@ items:
               skip: 0
               timing: end
               type: combat
-            28294dbc80493c2c:
-              _id: 28294dbc80493c2c
+            - _id: 28294dbc80493c2c
               crit:
                 - 1
               event: turn
@@ -1089,10 +983,8 @@ items:
               type: combat
           form: normal
           heightened: >-
-            <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
-            additional [[/damage 1d4[magic holy]]]
-            @Identifier[core:damage]{damage} as well.</p>
+            <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+            1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
           identifier: light-ray
           interaction: attack
           maneuver: active
@@ -1101,18 +993,15 @@ items:
           powerSources:
             - magical
           range:
-            raw: '60'
+            raw: "60"
             unit: ft
           results:
             critHit: >-
-              <p>If you want, @Identifier[core:targets]{target} is
-              @Identifier[condition:lighted]{lighted} until the end of your next
-              @Identifier[core:turns]{turn}.</p>
+              <p>If you want, @Identifier[core:targets]{target} is @Identifier[condition:lighted]{lighted} until the end
+              of your next @Identifier[core:turns]{turn}.</p>
             hit: >-
-              <p>@Identifier[core:targets]{Target} is
-              @Identifier[condition:lighted]{lighted} to a creature of your
-              choice until the end of their next
-              @Identifier[core:turns]{turn}.</p>
+              <p>@Identifier[core:targets]{Target} is @Identifier[condition:lighted]{lighted} to a creature of your
+              choice until the end of their next @Identifier[core:turns]{turn}.</p>
           spell: true
           standard: true
           targets:
@@ -1120,24 +1009,21 @@ items:
         transfer: true
         type: ability
       - _id: oGy0WqGTsolvIjRT
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.oGy0WqGTsolvIjRT
+        _key: "!actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.oGy0WqGTsolvIjRT"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.91cdb554fcab2b2a
         img: systems/teriock/src/icons/abilities/medicine-ball.webp
         name: Medicine Ball
         system:
           automations:
-            T6TT7QmjNrgdtZT7:
-              _id: T6TT7QmjNrgdtZT7
+            - _id: T6TT7QmjNrgdtZT7
               consumeStatDice: true
               forHarm: false
               heighten:
                 - 0
               noStatDice: false
               type: heal
-            SzYkTqcVV5k6LOGg:
-              _id: SzYkTqcVV5k6LOGg
+            - _id: SzYkTqcVV5k6LOGg
               consumeStatDice: false
               forHarm: false
               heighten:
@@ -1157,12 +1043,9 @@ items:
             base: a1
           form: normal
           heightened: >-
-            <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent,
-            @Identifier[core:healing]{heal} the
-            @Identifier[core:targets]{target} again. This does not consume their
-            @Wiki[Core:Hit Dice]{hit dice} (including the @Wiki[Core:Hit
-            Dice]{hit dice} for the initial
+            <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent,
+            @Identifier[core:healing]{heal} the @Identifier[core:targets]{target} again. This does not consume their
+            @Wiki[Core:Hit Dice]{hit dice} (including the @Wiki[Core:Hit Dice]{hit dice} for the initial
             @Identifier[core:healing]{healing}).</p>
           identifier: medicine-ball
           interaction: attack
@@ -1172,15 +1055,11 @@ items:
           powerSources:
             - magical
           range:
-            raw: '30'
+            raw: "30"
             unit: ft
           results:
-            critHit: >-
-              <p>Double the amount of times target
-              @Identifier[core:healing]{heals}.</p>
-            hit: >-
-              <p>@Identifier[core:targets]{Target}
-              @Identifier[core:healing]{heals}.</p>
+            critHit: <p>Double the amount of times target @Identifier[core:healing]{heals}.</p>
+            hit: <p>@Identifier[core:targets]{Target} @Identifier[core:healing]{heals}.</p>
           spell: true
           standard: true
           targets:
@@ -1188,23 +1067,20 @@ items:
         transfer: true
         type: ability
       - _id: DuPrz66O8MibMz5a
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.DuPrz66O8MibMz5a
+        _key: "!actors.items.effects!d614c092db51c2c8.m0wIEP0pRViu7oF7.DuPrz66O8MibMz5a"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.5e1e504688ac1250
         img: systems/teriock/src/icons/abilities/resurrect.webp
         name: Resurrect
         system:
           automations:
-            1728b3a84ea27844:
-              _id: 1728b3a84ea27844
+            - _id: 1728b3a84ea27844
               common:
                 - bag
                 - revive
               showConfirmationDialog: true
               type: common
-            okAIhhAxPRM1XaZt:
-              _id: okAIhhAxPRM1XaZt
+            - _id: okAIhhAxPRM1XaZt
               consumeStatDice: false
               forHarm: true
               noStatDice: false
@@ -1222,52 +1098,43 @@ items:
           executionTime:
             base: 10 Minutes
             slow:
-              raw: '10'
+              raw: "10"
               unit: minute
           form: normal
           heightened: >-
-            <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, target can
-            have been @Identifier[condition:dead]{dead} for an additional 24
-            hours. If @Identifier[core:targets]{target} is
-            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
-            they are @Identifier[core:healing]{healed} an additional time.</p>
+            <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, target can have been
+            @Identifier[condition:dead]{dead} for an additional 24 hours. If @Identifier[core:targets]{target} is
+            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, they are
+            @Identifier[core:healing]{healed} an additional time.</p>
           identifier: resurrect
           interaction: manifest
           maneuver: slow
           overview:
             base: >-
-              <p>If @Identifier[core:targets]{target} is
-              @Identifier[condition:dead]{dead}, they are brought back to life
-              with 1 @Identifier[core:hit-points-and-mana-points]{HP}. If
-              @Identifier[core:targets]{target} is
-              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
-              you can choose to have them be @Identifier[core:healing]{healed}
-              for @Identifier[core:damage]{damage}. [[lookup name]] does not
-              count as a @Wiki[Category:Healing effects]{healing effect} unless
-              you choose to @Identifier[core:healing]{heal} with it.</p>
+              <p>If @Identifier[core:targets]{target} is @Identifier[condition:dead]{dead}, they are brought back to
+              life with 1 @Identifier[core:hit-points-and-mana-points]{HP}. If @Identifier[core:targets]{target} is
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, you can choose to have them be
+              @Identifier[core:healing]{healed} for @Identifier[core:damage]{damage}. [[lookup name]] does not count as
+              a @Wiki[Category:Healing effects]{healing effect} unless you choose to @Identifier[core:healing]{heal}
+              with it.</p>
             fluent: >-
               <p>If @Identifier[core:targets]{target} is
-              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
-              they are @Identifier[core:healing]{healed} for
-              @Identifier[core:damage]{damage}
-              @Identifier[core:fluency-bonus]{F} times.</p>
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, they are
+              @Identifier[core:healing]{healed} for @Identifier[core:damage]{damage} @Identifier[core:fluency-bonus]{F}
+              times.</p>
             proficient: >-
               <p>If @Identifier[core:targets]{target} is
-              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead},
-              they are @Identifier[core:healing]{healed} for
-              @Identifier[core:damage]{damage}
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}, they are
+              @Identifier[core:healing]{healed} for @Identifier[core:damage]{damage}
               @Identifier[core:proficiency-bonus]{P} times.</p>
           powerSources:
             - magical
           range:
-            raw: '5'
+            raw: "5"
             unit: ft
           requirements: >-
-            <p>@Identifier[core:targets]{Target} is
-            @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}
-            or has @Identifier[condition:dead]{died} within the last 24
-            hours.</p>
+            <p>@Identifier[core:targets]{Target} is @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}
+            or has @Identifier[condition:dead]{died} within the last 24 hours.</p>
           ritual: true
           spell: true
           standard: true
@@ -1285,15 +1152,12 @@ items:
       competence:
         raw: 1
       description: >-
-        <p>The true healers of the world, they are committed to sustaining all
-        life. The truly altruistic characters, @Identifier[class:life-mage]{Life
-        Mages} are known to enter battles on neither side, healing anyone and
-        everyone who they can. Obsessed with keeping people alive and conquering
-        death, @Identifier[class:life-mage]{Life Mages} are not as righteous as
-        the Paladin but much more humble and kind. Shying away from combat, they
-        prefer to stand behind the troops, healing when needed. If you are
-        playing a @Identifier[class:life-mage]{Life Mage} be helpful, kind and
-        loving, protective but committed to saving lives and fighting death.</p>
+        <p>The true healers of the world, they are committed to sustaining all life. The truly altruistic characters,
+        @Identifier[class:life-mage]{Life Mages} are known to enter battles on neither side, healing anyone and everyone
+        who they can. Obsessed with keeping people alive and conquering death, @Identifier[class:life-mage]{Life Mages}
+        are not as righteous as the Paladin but much more humble and kind. Shying away from combat, they prefer to stand
+        behind the troops, healing when needed. If you are playing a @Identifier[class:life-mage]{Life Mage} be helpful,
+        kind and loving, protective but committed to saving lives and fighting death.</p>
       identifier: rank-1-life-mage
       maxAv: 0
       number: 1
@@ -1307,21 +1171,19 @@ items:
           formula: 1d12
     type: rank
   - _id: 4a095aaed0254ec3
-    _key: '!actors.items!d614c092db51c2c8.4a095aaed0254ec3'
+    _key: "!actors.items!d614c092db51c2c8.4a095aaed0254ec3"
     _stats:
       compendiumSource: Compendium.teriock.classes.Item.4a095aaed0254ec3
     effects:
       - _id: NGCuRUaVtXnxAbRe
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.4a095aaed0254ec3.NGCuRUaVtXnxAbRe
+        _key: "!actors.items.effects!d614c092db51c2c8.4a095aaed0254ec3.NGCuRUaVtXnxAbRe"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.ac35fb736d8bd407
         img: systems/teriock/src/icons/abilities/arcane-ray.webp
         name: Arcane Ray
         system:
           automations:
-            800c70e6560525a8:
-              _id: 800c70e6560525a8
+            - _id: 800c70e6560525a8
               formula: (1 + @h)d4[magic]
               impact: damage
               type: roll
@@ -1336,10 +1198,8 @@ items:
             base: a1
           form: normal
           heightened: >-
-            <p>For each additional
-            @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an
-            additional [[/damage 1d4[magic]]]
-            @Identifier[core:damage]{damage}.</p>
+            <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+            1d4[magic]]] @Identifier[core:damage]{damage}.</p>
           identifier: arcane-ray
           interaction: attack
           maneuver: active
@@ -1348,15 +1208,11 @@ items:
           powerSources:
             - magical
           range:
-            raw: '60'
+            raw: "60"
             unit: ft
           results:
-            critHit: >-
-              <p>Double the @Identifier[core:damage]{damage dice} dealt by this
-              @Pack[teriock.abilities]{ability}.</p>
-            hit: >-
-              <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to
-              @Identifier[core:targets]{target}.</p>
+            critHit: <p>Double the @Identifier[core:damage]{damage dice} dealt by this @Pack[teriock.abilities]{ability}.</p>
+            hit: <p>Deal [[/damage 1d4[magic]]] @Identifier[core:damage]{damage} to @Identifier[core:targets]{target}.</p>
           spell: true
           standard: true
           targets:
@@ -1364,8 +1220,7 @@ items:
         transfer: true
         type: ability
       - _id: aCWLNsvSFjEuLTyl
-        _key: >-
-          !actors.items.effects!d614c092db51c2c8.4a095aaed0254ec3.aCWLNsvSFjEuLTyl
+        _key: "!actors.items.effects!d614c092db51c2c8.4a095aaed0254ec3.aCWLNsvSFjEuLTyl"
         _stats:
           compendiumSource: Compendium.teriock.abilities.ActiveEffect.30358f2e8d9b3a0a
         img: systems/teriock/src/icons/abilities/staff-touch.webp
@@ -1384,26 +1239,19 @@ items:
           maneuver: passive
           overview:
             base: >-
-              <p>You may use your @Identifier[property:magelore]{magelore} items
-              as though they were your @Identifier[body:hand]{hand}. This makes
-              them @Identifier[property:handy]{handy} and
-              @Identifier[property:prehensile]{prehensile}. You are not
-              @Identifier[core:proficiency-bonus]{proficient} nor
-              @Identifier[core:fluency-bonus]{fluent} with
-              @Pack[teriock.abilities]{abilities} you use through your
+              <p>You may use your @Identifier[property:magelore]{magelore} items as though they were your
+              @Identifier[body:hand]{hand}. This makes them @Identifier[property:handy]{handy} and
+              @Identifier[property:prehensile]{prehensile}. You are not @Identifier[core:proficiency-bonus]{proficient}
+              nor @Identifier[core:fluency-bonus]{fluent} with @Pack[teriock.abilities]{abilities} you use through your
               @Identifier[property:magelore]{magelore} items.</p>
             fluent: >-
-              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an
-              @Pack[teriock.abilities]{ability} you use through your
-              @Identifier[property:magelore]{magelore} items, you regain the
-              @Identifier[core:fluency-bonus]{fluency bonus} for that
-              @Pack[teriock.abilities]{ability}.</p>
+              <p>If you are @Identifier[core:fluency-bonus]{fluent} with an @Pack[teriock.abilities]{ability} you use
+              through your @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:fluency-bonus]{fluency bonus} for that @Pack[teriock.abilities]{ability}.</p>
             proficient: >-
-              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with
-              an @Pack[teriock.abilities]{ability} you use through your
-              @Identifier[property:magelore]{magelore} items, you regain the
-              @Identifier[core:proficiency-bonus]{proficiency bonus} for that
-              @Pack[teriock.abilities]{ability}.</p>
+              <p>If you are @Identifier[core:proficiency-bonus]{proficient} with an @Pack[teriock.abilities]{ability}
+              you use through your @Identifier[property:magelore]{magelore} items, you regain the
+              @Identifier[core:proficiency-bonus]{proficiency bonus} for that @Pack[teriock.abilities]{ability}.</p>
           powerSources:
             - magical
           range:
@@ -1421,12 +1269,10 @@ items:
       competence:
         raw: 1
       description: >-
-        <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical
-        spells} and each class has a different approach, but are generally all
-        quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most
-        mages prefer to hang back and cast at their enemies from afar or use
-        their magic to control the flow of a battle while avoiding messy
-        melees.</p>
+        <p>Mages wield powerful @Wiki[Category:Magically powered spells]{magical spells} and each class has a different
+        approach, but are generally all quite vulnerable in direct @Identifier[core:combat]{combat}. Thus most mages
+        prefer to hang back and cast at their enemies from afar or use their magic to control the flow of a battle while
+        avoiding messy melees.</p>
       identifier: mage
     type: archetype
 name: White Wisp Guard

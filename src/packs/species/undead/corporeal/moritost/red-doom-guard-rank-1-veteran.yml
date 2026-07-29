@@ -1,47 +1,42 @@
 _id: lpSUkMNkGHuzAJoi
-_key: '!items!lpSUkMNkGHuzAJoi'
+_key: "!items!lpSUkMNkGHuzAJoi"
 _stats:
   compendiumSource: Compendium.teriock.classes.Item.ce7640052630fc9b
 effects:
   - _id: j5OCoQExiifYlXXK
-    _key: '!items.effects!lpSUkMNkGHuzAJoi.j5OCoQExiifYlXXK'
+    _key: "!items.effects!lpSUkMNkGHuzAJoi.j5OCoQExiifYlXXK"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.746fee84700f8918
     img: systems/teriock/src/icons/abilities/brace.webp
     name: Brace
     system:
       affinities:
-        hPfBt6zwzwH60lYt:
-          _id: hPfBt6zwzwH60lYt
-          activeQualifier: '@flags.improvedBrace'
+        - _id: hPfBt6zwzwH60lYt
+          activeQualifier: "@flags.improvedBrace"
           amount: 1
           category: effectTypes
           type: takeDeboost
           value: damaging
       automations:
-        0BLOMYrODY3bzx8I:
-          _id: 0BLOMYrODY3bzx8I
+        - _id: 0BLOMYrODY3bzx8I
           competencies:
             - 0
           formula: 1d(max(6, @flags.braceDieSize))
           impact: setTempHp
           type: roll
-        dQvjSj38Nt3dcuZF:
-          _id: dQvjSj38Nt3dcuZF
+        - _id: dQvjSj38Nt3dcuZF
           competencies:
             - 1
           formula: (1 + @p)d(max(6, @flags.braceDieSize))
           impact: setTempHp
           type: roll
-        Eg4Omt9YhPTjNEEW:
-          _id: Eg4Omt9YhPTjNEEW
+        - _id: Eg4Omt9YhPTjNEEW
           competencies:
             - 2
           formula: (1 + @f)d(max(6, @flags.braceDieSize))
           impact: setTempHp
           type: roll
-        Rid5p1TlO90isbp4:
-          _id: Rid5p1TlO90isbp4
+        - _id: Rid5p1TlO90isbp4
           amount: 0
           impact: setTempHp
           morganti: false
@@ -57,8 +52,7 @@ effects:
       executionTime:
         base: a1
       expirations:
-        d1f6b6eaa581aa10:
-          _id: d1f6b6eaa581aa10
+        - _id: d1f6b6eaa581aa10
           triggers:
             - movement
           type: trigger
@@ -68,15 +62,10 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and
-          gain [[/roll 1d6]] @Identifier[core:temporary-hit-points]{temporary
-          HP} as long as you remain stationary.</p>
-        fluent: >-
-          <p>Instead gain [[/roll 1d6 + (@f)d6]]
-          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
-        proficient: >-
-          <p>Instead gain [[/roll 1d6 + (@p)d6]]
-          @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+          <p>Lose all @Identifier[core:temporary-hit-points]{temporary HP} and gain [[/roll 1d6]]
+          @Identifier[core:temporary-hit-points]{temporary HP} as long as you remain stationary.</p>
+        fluent: <p>Instead gain [[/roll 1d6 + (@f)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
+        proficient: <p>Instead gain [[/roll 1d6 + (@p)d6]] @Identifier[core:temporary-hit-points]{temporary HP}.</p>
       powerSources:
         - martial
       range:
@@ -89,15 +78,14 @@ effects:
     transfer: true
     type: ability
   - _id: Nel4kQU109RUj1k2
-    _key: '!items.effects!lpSUkMNkGHuzAJoi.Nel4kQU109RUj1k2'
+    _key: "!items.effects!lpSUkMNkGHuzAJoi.Nel4kQU109RUj1k2"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.612719b68991bdad
     img: systems/teriock/src/icons/abilities/improvised-armor-and-shields.webp
     name: Improvised Armor and Shields
     system:
       automations:
-        DH9D04yber5kvwnW:
-          _id: DH9D04yber5kvwnW
+        - _id: DH9D04yber5kvwnW
           all: false
           attachDocuments: true
           automatic: true
@@ -106,7 +94,7 @@ effects:
             identifiers:
               - property:improvised
             overrideData: false
-          data: '{"name":"Improvised @base"}'
+          data: "{\"name\":\"Improvised @base\"}"
           multi: true
           overrideData: true
           separate: true
@@ -114,8 +102,7 @@ effects:
           uuids:
             - Compendium.teriock.equipment.Folder.ed3267c1d2c3a7f4
             - Compendium.teriock.equipment.Folder.f596232e51f64ef9
-        FKc997ohmjSZ7IvR:
-          _id: FKc997ohmjSZ7IvR
+        - _id: FKc997ohmjSZ7IvR
           competence:
             raw: 0
           makeEffect: false
@@ -126,7 +113,7 @@ effects:
         raw: 1
       delivery: self
       duration:
-        raw: '8'
+        raw: "8"
         unit: hour
       executionTime:
         base: Short Rest
@@ -138,24 +125,17 @@ effects:
       maneuver: slow
       overview:
         base: >-
-          <p>During a @Identifier[core:short-rest]{short rest}, you may scavenge
-          materials and make 1 piece of
-          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} or
-          a @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}.
-          It is @Identifier[property:improvised]{improvised}. Any
-          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} you
-          make in this way counts as a number of items equal to the
-          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor's}
-          @Identifier[core:armor-class]{AV} for the purpose of this ability.
-          Only common @Identifier[damage:mundane]{mundane} items can typically
-          be made in this way, but the @Identifier[core:game-master]{GM} may
-          specify if other options are available to you.</p>
-        fluent: >-
-          <p>You can instead make up to @Identifier[core:fluency-bonus]{F}
-          items.</p>
-        proficient: >-
-          <p>You can instead make up to @Identifier[core:proficiency-bonus]{P}
-          items.</p>
+          <p>During a @Identifier[core:short-rest]{short rest}, you may scavenge materials and make 1 piece of
+          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} or a
+          @UUID[Compendium.teriock.tables.RollTable.f596232e51f64ef9]{shield}. It is
+          @Identifier[property:improvised]{improvised}. Any
+          @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor} you make in this way counts as a number of
+          items equal to the @UUID[Compendium.teriock.tables.RollTable.ed3267c1d2c3a7f4]{armor's}
+          @Identifier[core:armor-class]{AV} for the purpose of this ability. Only common
+          @Identifier[damage:mundane]{mundane} items can typically be made in this way, but the
+          @Identifier[core:game-master]{GM} may specify if other options are available to you.</p>
+        fluent: <p>You can instead make up to @Identifier[core:fluency-bonus]{F} items.</p>
+        proficient: <p>You can instead make up to @Identifier[core:proficiency-bonus]{P} items.</p>
       powerSources:
         - martial
       range:
@@ -167,35 +147,29 @@ effects:
     transfer: true
     type: ability
   - _id: shn8qx3LbBe4ktYg
-    _key: '!items.effects!lpSUkMNkGHuzAJoi.shn8qx3LbBe4ktYg'
+    _key: "!items.effects!lpSUkMNkGHuzAJoi.shn8qx3LbBe4ktYg"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.5451b5caee0b5380
     img: systems/teriock/src/icons/abilities/partner-awaken.webp
     name: Partner Awaken
     system:
       automations:
-        1687edd16f473940:
-          _id: 1687edd16f473940
+        - _id: 1687edd16f473940
           all: false
           attachDocuments: true
           automatic: true
-          data: >-
-            {"system":{"limitation":"<p>Only usable on the other participant in
-            the Partner Awaken.</p>"}}
+          data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
           identifiers:
             - ability:instant-awaken
           multi: false
           overrideData: true
           separate: false
           type: addDocuments
-        691afda974d67b4a:
-          _id: 691afda974d67b4a
+        - _id: 691afda974d67b4a
           all: false
           attachDocuments: true
           automatic: true
-          data: >-
-            {"system":{"limitation":"<p>Only usable on the other participant in
-            the Partner Awaken.</p>"}}
+          data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
           identifiers:
             - ability:reactive-awaken
           multi: false
@@ -206,7 +180,7 @@ effects:
         raw: 1
       delivery: sight
       duration:
-        raw: '1'
+        raw: "1"
         unit: hour
       endCondition: <p>You use [[lookup name]] again.</p>
       executionTime:
@@ -217,17 +191,14 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You and the @Identifier[core:targets]{target} gain
-          @Identifier[keyword:limited]{Limited}
-          @Identifier[ability:instant-awaken]{Instant Awaken} and
-          @Identifier[keyword:limited]{Limited}
-          @Identifier[ability:reactive-awaken]{Reactive Awaken} (only usable on
-          each other). You may only have this active on one creature at a
-          time.</p>
+          <p>You and the @Identifier[core:targets]{target} gain @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:instant-awaken]{Instant Awaken} and @Identifier[keyword:limited]{Limited}
+          @Identifier[ability:reactive-awaken]{Reactive Awaken} (only usable on each other). You may only have this
+          active on one creature at a time.</p>
       powerSources:
         - martial
       range:
-        raw: '30'
+        raw: "30"
         unit: ft
       skill: true
       standard: true
@@ -245,16 +216,13 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Jaded and tough, these warriors act as if they have seen it all.
-    Obviously they are not all seasoned warriors, but the training of a
-    @Identifier[class:veteran]{Veteran} involves a great deal of time in battle,
-    so even a first rank @Identifier[class:veteran]{Veteran} has seen more
-    action than other first rank warriors. The strategy of the
-    @Identifier[class:veteran]{Veteran} is to be an immovable wall, and hold the
-    line. @Identifier[class:veteran]{Veterans} rely on defense in battle, always
-    working to better ensure their protection, which is why they survive to be
-    veterans. If you are a @Identifier[class:veteran]{Veteran} be jaded,
-    unimpressed, hard, and pessimistic.</p>
+    <p>Jaded and tough, these warriors act as if they have seen it all. Obviously they are not all seasoned warriors,
+    but the training of a @Identifier[class:veteran]{Veteran} involves a great deal of time in battle, so even a first
+    rank @Identifier[class:veteran]{Veteran} has seen more action than other first rank warriors. The strategy of the
+    @Identifier[class:veteran]{Veteran} is to be an immovable wall, and hold the line.
+    @Identifier[class:veteran]{Veterans} rely on defense in battle, always working to better ensure their protection,
+    which is why they survive to be veterans. If you are a @Identifier[class:veteran]{Veteran} be jaded, unimpressed,
+    hard, and pessimistic.</p>
   identifier: rank-1-veteran
   innate: false
   maxAv: 4

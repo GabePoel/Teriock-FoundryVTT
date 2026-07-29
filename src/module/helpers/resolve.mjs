@@ -114,23 +114,3 @@ export async function ensureNoChildren(document, identifiers) {
   for (const deletedArray of deletedArrays) { deletedDocs.push(...deletedArray.filter(Boolean)); }
   return deletedDocs;
 }
-
-/**
- * Attempt to add a compendium source for some document.
- * @param {AnyCommonDocument} document
- * @returns {Promise<void>}
- */
-export async function inferCompendiumSource(document) {
-  const ref = await teriock.helpers.utils.fromIdentifier(document.typedIdentifier);
-  if (ref?.uuid) { await document.update({ "_stats.compendiumSource": ref.uuid }); }
-}
-
-/**
- * Attempt to add a compendium source for some document's children.
- * @param {AnyCommonDocument} document
- * @returns {Promise<void>}
- */
-export async function inferChildCompendiumSources(document) {
-  const children = (await document.getChildArray()).filter(Boolean);
-  await Promise.all(children.map(async c => await inferCompendiumSource(c)));
-}

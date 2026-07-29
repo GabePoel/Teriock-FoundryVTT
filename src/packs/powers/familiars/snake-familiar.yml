@@ -1,30 +1,28 @@
 _id: 177f14009521cab2
-_key: '!items!177f14009521cab2'
+_key: "!items!177f14009521cab2"
 effects:
   - _id: iaIlHIRvPyhxJuQV
-    _key: '!items.effects!177f14009521cab2.iaIlHIRvPyhxJuQV'
+    _key: "!items.effects!177f14009521cab2.iaIlHIRvPyhxJuQV"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.9c9a75c65c73fc72
     img: systems/teriock/src/icons/abilities/crit-elite.webp
     name: Crit Elite
     system:
       automations:
-        0KocEo3PeZJ7lNkM:
-          _id: 0KocEo3PeZJ7lNkM
+        - _id: 0KocEo3PeZJ7lNkM
           changeType: add
           key: system.boosts.damage
-          qualifier: '@dmg'
+          qualifier: "@dmg"
           target: armament
           type: childChange
-          value: '1'
-        oW9DJP28vFdRwT2y:
-          _id: oW9DJP28vFdRwT2y
+          value: "1"
+        - _id: oW9DJP28vFdRwT2y
           changeType: override
           key: system.vitals
-          qualifier: '@dmg'
+          qualifier: "@dmg"
           target: armament
           type: childChange
-          value: 'true'
+          value: "true"
       competence:
         raw: 1
       delivery: self
@@ -34,8 +32,7 @@ effects:
       executionTime:
         base: a1
       expirations:
-        lTiZALQhWDYH7uP2:
-          _id: lTiZALQhWDYH7uP2
+        - _id: lTiZALQhWDYH7uP2
           method: automatic
           triggers:
             - executeArmament
@@ -47,23 +44,17 @@ effects:
       maneuver: active
       overview:
         base: >-
-          <p>You aim with deadly precision, causing the next
-          @Identifier[core:attack-interaction]{attack} you make with an item to
-          be @Identifier[keyword:boosted]{boosted}. This
-          @Identifier[core:attack-interaction]{attack} must hit the
-          @Identifier[core:targets]{target's}
-          @Identifier[core:vitals-target]{vitals}
-          (@Identifier[core:armor-class]{AC} + 3) or the
-          @Identifier[core:attack-interaction]{attack} does nothing. Only the
-          @Identifier[core:damage]{damage} from the item itself can be
-          @Identifier[keyword:boosted]{boosted} in this way.</p>
+          <p>You aim with deadly precision, causing the next @Identifier[core:attack-interaction]{attack} you make with
+          an item to be @Identifier[keyword:boosted]{boosted}. This @Identifier[core:attack-interaction]{attack} must
+          hit the @Identifier[core:targets]{target's} @Identifier[core:vitals-target]{vitals}
+          (@Identifier[core:armor-class]{AC} + 3) or the @Identifier[core:attack-interaction]{attack} does nothing. Only
+          the @Identifier[core:damage]{damage} from the item itself can be @Identifier[keyword:boosted]{boosted} in this
+          way.</p>
       powerSources:
         - martial
       range:
         unit: self
-      requirements: >-
-        <p>You are not @Identifier[core:sustained]{sustaining} [[lookup
-        name]].</p>
+      requirements: <p>You are not @Identifier[core:sustained]{sustaining} [[lookup name]].</p>
       skill: true
       standard: true
       sustained: true
@@ -72,28 +63,25 @@ effects:
     transfer: true
     type: ability
   - _id: 208X9rXRFVKMIllx
-    _key: '!items.effects!177f14009521cab2.208X9rXRFVKMIllx'
+    _key: "!items.effects!177f14009521cab2.208X9rXRFVKMIllx"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.91b30624f59c08d8
     img: systems/teriock/src/icons/abilities/slay.webp
     name: Slay
     system:
       automations:
-        1728b3a84ea27844:
-          _id: 1728b3a84ea27844
+        - _id: 1728b3a84ea27844
           common:
             - bag
           showConfirmationDialog: true
           type: common
-        29b275994cf9f5b1:
-          _id: 29b275994cf9f5b1
+        - _id: 29b275994cf9f5b1
           display:
             label: Roll 5 Damage
           formula: 5[lethal]
           impact: damage
           type: roll
-        tnG4HOJcOpBMkG4W:
-          _id: tnG4HOJcOpBMkG4W
+        - _id: tnG4HOJcOpBMkG4W
           display:
             label: Roll 10 Damage
           formula: 10[lethal]
@@ -104,7 +92,7 @@ effects:
       costs:
         primary:
           mp:
-            formula: '1'
+            formula: "1"
             type: formula
         tweaks:
           gifted: 1
@@ -122,13 +110,11 @@ effects:
       maneuver: reactive
       overview:
         base: >-
-          <p>@Identifier[core:targets]{Target} takes an additional [[/damage
-          5[lethal]]] @Identifier[core:damage]{damage}. This also has all
-          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage
-          types} of the triggering @Identifier[core:attack-interaction]{attack}.
-          If the triggering @Identifier[core:attack-interaction]{attack} was a
-          critical hit, this deals 10 @Identifier[core:damage]{damage}
-          instead.</p>
+          <p>@Identifier[core:targets]{Target} takes an additional [[/damage 5[lethal]]]
+          @Identifier[core:damage]{damage}. This also has all
+          @UUID[Compendium.teriock.rules.JournalEntry.damage0000000000]{damage types} of the triggering
+          @Identifier[core:attack-interaction]{attack}. If the triggering @Identifier[core:attack-interaction]{attack}
+          was a critical hit, this deals 10 @Identifier[core:damage]{damage} instead.</p>
       powerSources:
         - martial
       range:
@@ -138,13 +124,12 @@ effects:
       targets:
         - creature
       trigger: >-
-        <p>You have just hit a creature with an
-        @Identifier[core:attack-interaction]{attack} that dealt them
+        <p>You have just hit a creature with an @Identifier[core:attack-interaction]{attack} that dealt them
         @Identifier[core:damage]{damage} from it.</p>
     transfer: true
     type: ability
   - _id: snakeTamer000000
-    _key: '!items.effects!177f14009521cab2.snakeTamer000000'
+    _key: "!items.effects!177f14009521cab2.snakeTamer000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Snake Tamer
     system:
@@ -164,9 +149,7 @@ system:
     raw: 1
   description: <p>@Embed[creature:snake inline]</p>
   identifier: snake-familiar
-  instructions: >-
-    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
-    and delete the other one.</p>
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   type: familiar
 type: power

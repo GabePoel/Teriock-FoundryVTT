@@ -1,19 +1,18 @@
 _id: b9412f4b155b52b3
-_key: '!effects!b9412f4b155b52b3'
+_key: "!effects!b9412f4b155b52b3"
 img: systems/teriock/src/icons/abilities/earthquake-aura.webp
 name: Earthquake Aura
 system:
   automations:
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '60'
+    - _id: 7400b41f20d9f100
+      angle: "60"
       attachToToken: true
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: true
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
+      outerWidth: "0"
       regionType: emanation
       restriction:
         enabled: false
@@ -21,21 +20,18 @@ system:
       trigger: executeInput
       type: region
       updateTargets: true
-    29b275994cf9f5b1:
-      _id: 29b275994cf9f5b1
+    - _id: 29b275994cf9f5b1
       formula: 1d6
       impact: damage
       merge: true
       type: roll
-    5d57231066693cee:
-      _id: 5d57231066693cee
+    - _id: 5d57231066693cee
       executor: false
       relation: include
       status: snared
       target: false
       type: status
-    8941220db1fa8721:
-      _id: 8941220db1fa8721
+    - _id: 8941220db1fa8721
       executor: false
       relation: apply
       status: prone
@@ -45,27 +41,25 @@ system:
     raw: 0
   delivery: aura
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   effectTypes:
     - damaging
     - loud
   endCondition: >-
-    <p>At the start of each of the @Identifier[core:targets]{target's}
-    @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of these
-    dice roll a 4, this effect ends.</p>
+    <p>At the start of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll [[/roll
+    2d4]]. If either of these dice roll a 4, this effect ends.</p>
   executionTime:
     base: a1
   expirations:
-    66672059c7a29a30:
-      _id: 66672059c7a29a30
+    - _id: 66672059c7a29a30
       event: turn
       method: roll
       relation: target
       roll:
         comparison: gte
         formula: 2d4kh1
-        threshold: '4'
+        threshold: "4"
       skip: 0
       timing: start
       type: combat
@@ -78,14 +72,13 @@ system:
     - magical
     - primal
   range:
-    raw: '10'
+    raw: "10"
     unit: ft
   requirements: <p>@Identifier[core:targets]{Target} is touching the ground.</p>
   results:
     fail: >-
-      <p>Deal [[/damage 1d6]] @Identifier[core:damage]{damage} to target. They
-      are @Identifier[condition:snared]{snared} and knocked
-      @Identifier[condition:prone]{prone}.</p>
+      <p>Deal [[/damage 1d6]] @Identifier[core:damage]{damage} to target. They are @Identifier[condition:snared]{snared}
+      and knocked @Identifier[condition:prone]{prone}.</p>
   targets:
     - creature
 transfer: true

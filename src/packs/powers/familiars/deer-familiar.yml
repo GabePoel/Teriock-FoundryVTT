@@ -1,16 +1,15 @@
 _id: 3c9b956461443a90
-_key: '!items!3c9b956461443a90'
+_key: "!items!3c9b956461443a90"
 effects:
   - _id: OETxl49OzNR2BZkZ
-    _key: '!items.effects!3c9b956461443a90.OETxl49OzNR2BZkZ'
+    _key: "!items.effects!3c9b956461443a90.OETxl49OzNR2BZkZ"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.f1ec4acb8d744ed9
     img: systems/teriock/src/icons/abilities/alert.webp
     name: Alert
     system:
       affinities:
-        PHF4TrcfCcaKl6DO:
-          _id: PHF4TrcfCcaKl6DO
+        - _id: PHF4TrcfCcaKl6DO
           category: other
           type: resistance
           value: Being Surprised
@@ -29,9 +28,7 @@ effects:
       interaction: manifest
       maneuver: passive
       overview:
-        base: >-
-          <p>You @Identifier[keyword:resistance]{resist} being
-          @Identifier[core:surprise-rounds]{surprised}.</p>
+        base: <p>You @Identifier[keyword:resistance]{resist} being @Identifier[core:surprise-rounds]{surprised}.</p>
       powerSources:
         - martial
       range:
@@ -45,7 +42,7 @@ effects:
     transfer: true
     type: ability
   - _id: deerTamer0000000
-    _key: '!items.effects!3c9b956461443a90.deerTamer0000000'
+    _key: "!items.effects!3c9b956461443a90.deerTamer0000000"
     img: icons/environment/settlement/stables-logo.webp
     name: Deer Tamer
     system:
@@ -58,22 +55,20 @@ effects:
     transfer: true
     type: fluency
   - _id: rgxGlI8Ahf5gIYBx
-    _key: '!items.effects!3c9b956461443a90.rgxGlI8Ahf5gIYBx'
+    _key: "!items.effects!3c9b956461443a90.rgxGlI8Ahf5gIYBx"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.NrCsatKWGADDVSWS
     img: systems/teriock/src/icons/abilities/light-touch.webp
     name: Light Touch
     system:
       automations:
-        800c70e6560525a8:
-          _id: 800c70e6560525a8
+        - _id: 800c70e6560525a8
           formula: (@h)d4[magic holy]
           heighten:
             - 1
           impact: damage
           type: roll
-        747b3e9c9b617af6:
-          _id: 747b3e9c9b617af6
+        - _id: 747b3e9c9b617af6
           executor: false
           multi: false
           relation: include
@@ -84,19 +79,17 @@ effects:
         raw: 1
       delivery: hand
       duration:
-        raw: '1'
+        raw: "1"
         unit: minute
       elements:
         - life
       endCondition: >-
-        <p>At the end of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           crit:
             - 0
           event: turn
@@ -105,12 +98,11 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: end
           type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
+        - _id: 28294dbc80493c2c
           crit:
             - 1
           event: turn
@@ -119,15 +111,14 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 1
           timing: end
           type: combat
       form: normal
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-        spent, deal an additional [[/damage 1d4[magic holy]]]
-        @Identifier[core:damage]{damage} as well.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+        1d4[magic holy]]] @Identifier[core:damage]{damage} as well.</p>
       identifier: light-touch
       interaction: attack
       maneuver: active
@@ -138,12 +129,9 @@ effects:
       range:
         unit: contact
       results:
-        critHit: >-
-          <p>The @Identifier[core:targets]{target} automatically fails the first
-          [[/roll 2d4]] roll.</p>
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
         hit: >-
-          <p>@Identifier[core:targets]{Target} is
-          @Identifier[condition:lighted]{lighted} to a creature of your
+          <p>@Identifier[core:targets]{Target} is @Identifier[condition:lighted]{lighted} to a creature of your
           choice.</p>
       spell: true
       standard: true
@@ -159,9 +147,7 @@ system:
     raw: 1
   description: <p>@Embed[creature:deer inline]</p>
   identifier: deer-familiar
-  instructions: >-
-    <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain
-    and delete the other one.</p>
+  instructions: <p>Select one @Pack[teriock.abilities]{ability} from [[lookup name]] to gain and delete the other one.</p>
   maxAv: 0
   type: familiar
 type: power

@@ -1,35 +1,32 @@
 _id: e1a13d2ffd5a41f4
-_key: '!effects!e1a13d2ffd5a41f4'
+_key: "!effects!e1a13d2ffd5a41f4"
 img: systems/teriock/src/icons/abilities/mithril-dragonfly-breath.webp
 name: Mithril Dragonfly Breath
 system:
   automations:
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.dragon'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.dragon"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
+      outerWidth: "0"
       regionType: cone
       restriction:
         enabled: true
       trigger: executeInput
       type: region
       updateTargets: true
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
+    - _id: 800c70e6560525a8
       formula: (2 * @h)d10[magic]
       heighten:
         - 1
       impact: damage
       merge: true
       type: roll
-    Stx4e9I6TE0hfR7H:
-      _id: Stx4e9I6TE0hfR7H
+    - _id: Stx4e9I6TE0hfR7H
       executor: false
       relation: include
       status: immobilized
@@ -40,39 +37,34 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
-    raw: '10'
+    raw: "10"
     unit: minute
   executionTime:
     base: a1
   featSaveAttribute: mov
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, deal an additional [[/damage 2d10[magic]]]
-    @Identifier[core:damage]{damage}. Additionally, the
-    @Identifier[core:range]{range} of this increases by 5 feet.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+    2d10[magic]]] @Identifier[core:damage]{damage}. Additionally, the @Identifier[core:range]{range} of this increases
+    by 5 feet.</p>
   identifier: mithril-dragonfly-breath
   interaction: feat
   maneuver: active
   powerSources:
     - magical
   range:
-    raw: '15'
+    raw: "15"
     unit: ft
   results:
-    fail: >-
-      <p>@Identifier[core:targets]{Target} is
-      @Identifier[condition:immobilized]{immobilized}.</p>
+    fail: <p>@Identifier[core:targets]{Target} is @Identifier[condition:immobilized]{immobilized}.</p>
     save: >-
-      <p>@Identifier[core:targets]{Target} is
-      @Identifier[condition:slowed]{slowed} and takes half as much
-      @Identifier[core:damage]{damage} from this as they would otherwise. This
-      is calculated after any @Identifier[keyword:boosted]{boosts} or
-      @Identifier[keyword:deboosted]{deboosts}.</p>
+      <p>@Identifier[core:targets]{Target} is @Identifier[condition:slowed]{slowed} and takes half as much
+      @Identifier[core:damage]{damage} from this as they would otherwise. This is calculated after any
+      @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
   targets:
     - creature
 transfer: true

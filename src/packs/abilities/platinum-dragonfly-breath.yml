@@ -1,38 +1,34 @@
 _id: 611a5488618a2eed
-_key: '!effects!611a5488618a2eed'
+_key: "!effects!611a5488618a2eed"
 img: systems/teriock/src/icons/abilities/platinum-dragonfly-breath.webp
 name: Platinum Dragonfly Breath
 system:
   automations:
-    1728b3a84ea27844:
-      _id: 1728b3a84ea27844
+    - _id: 1728b3a84ea27844
       common:
         - bag
       type: common
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.dragon'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.dragon"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
+      outerWidth: "0"
       regionType: cone
       restriction:
         enabled: true
       trigger: executeInput
       type: region
       updateTargets: true
-    29b275994cf9f5b1:
-      _id: 29b275994cf9f5b1
+    - _id: 29b275994cf9f5b1
       formula: 4d10[holy lethal magic]
       impact: damage
       merge: true
       type: roll
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
+    - _id: 800c70e6560525a8
       formula: (2 * @h)d10[magic holy]
       heighten:
         - 1
@@ -44,7 +40,7 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
@@ -57,14 +53,11 @@ system:
   featSaveAttribute: mov
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, deal an additional [[/damage 2d10[magic holy]]]
-    @Identifier[core:damage]{damage}. This extra
-    @Identifier[core:damage]{damage} applies regardless of whether or not the
-    @Identifier[core:targets]{target} is
-    @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.
-    Additionally, the @Identifier[core:range]{range} of this increases by 5
-    feet.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+    2d10[magic holy]]] @Identifier[core:damage]{damage}. This extra @Identifier[core:damage]{damage} applies regardless
+    of whether or not the @Identifier[core:targets]{target} is
+    @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}. Additionally, the
+    @Identifier[core:range]{range} of this increases by 5 feet.</p>
   identifier: platinum-dragonfly-breath
   interaction: feat
   maneuver: active
@@ -72,23 +65,19 @@ system:
     - divine
     - magical
   range:
-    raw: '15'
+    raw: "15"
     unit: ft
   results:
     fail: >-
-      <p>@Identifier[core:targets]{Target} takes [[/damage 4d10[holy lethal
-      magic]]] @Identifier[core:damage]{damage} if they are
-      @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}. If
-      this @Identifier[condition:dead]{kills} the target, they are instantly
-      "exorcised" (as though an @Identifier[ability:exorcism]{Exorcism}
-      @Wiki[Category:Ritual delivery abilities]{ritual} had just been completed
+      <p>@Identifier[core:targets]{Target} takes [[/damage 4d10[holy lethal magic]]] @Identifier[core:damage]{damage} if
+      they are @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}. If this
+      @Identifier[condition:dead]{kills} the target, they are instantly "exorcised" (as though an
+      @Identifier[ability:exorcism]{Exorcism} @Wiki[Category:Ritual delivery abilities]{ritual} had just been completed
       on them).</p>
     save: >-
-      <p>Target takes half as much @Identifier[core:damage]{damage} from this as
-      they would otherwise and has no other non-@Identifier[core:damage]{damage}
-      effects applied to them. This is calculated after any
-      @Identifier[keyword:boosted]{boosts} or
-      @Identifier[keyword:deboosted]{deboosts}.</p>
+      <p>Target takes half as much @Identifier[core:damage]{damage} from this as they would otherwise and has no other
+      non-@Identifier[core:damage]{damage} effects applied to them. This is calculated after any
+      @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
   targets:
     - creature
 transfer: true

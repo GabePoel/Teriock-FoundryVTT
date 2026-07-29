@@ -1,11 +1,10 @@
 _id: d88e9a7ec2f4b866
-_key: '!effects!d88e9a7ec2f4b866'
+_key: "!effects!d88e9a7ec2f4b866"
 img: systems/teriock/src/icons/abilities/golden-dragonfly-breath.webp
 name: Golden Dragonfly Breath
 system:
   automations:
-    cC9CXA9YzqJrZjzO:
-      _id: cC9CXA9YzqJrZjzO
+    - _id: cC9CXA9YzqJrZjzO
       all: true
       attachDocuments: true
       automatic: false
@@ -15,24 +14,22 @@ system:
       multi: true
       separate: true
       type: addDocuments
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '@angle.dragon'
+    - _id: 7400b41f20d9f100
+      angle: "@angle.dragon"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
+      outerWidth: "0"
       regionType: cone
       restriction:
         enabled: true
       trigger: executeInput
       type: region
       updateTargets: true
-    800c70e6560525a8:
-      _id: 800c70e6560525a8
+    - _id: 800c70e6560525a8
       formula: (2 * @h)d10[magic spiritual]
       heighten:
         - 1
@@ -44,7 +41,7 @@ system:
   costs:
     primary:
       mp:
-        formula: '1'
+        formula: "1"
         type: formula
   delivery: cone
   duration:
@@ -54,10 +51,9 @@ system:
   featSaveAttribute: mov
   form: special
   heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, deal an additional [[/damage 2d10[magic spiritual]]]
-    @Identifier[core:damage]{damage}. Additionally, the
-    @Identifier[core:range]{range} of this increases by 5 feet.</p>
+    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, deal an additional [[/damage
+    2d10[magic spiritual]]] @Identifier[core:damage]{damage}. Additionally, the @Identifier[core:range]{range} of this
+    increases by 5 feet.</p>
   identifier: golden-dragonfly-breath
   interaction: feat
   maneuver: active
@@ -65,19 +61,16 @@ system:
     - magical
     - spiritual
   range:
-    raw: '15'
+    raw: "15"
     unit: ft
   results:
     fail: >-
-      <p>The next time the @Identifier[core:targets]{target} would pull from the
-      @Identifier[core:death-bag]{death bag}, they pull 5 additional stones. If
-      they attacked you, they instead pull 10.</p>
+      <p>The next time the @Identifier[core:targets]{target} would pull from the @Identifier[core:death-bag]{death bag},
+      they pull 5 additional stones. If they attacked you, they instead pull 10.</p>
     save: >-
-      <p>@Identifier[core:targets]{Target} pulls half as many additional stones.
-      Target takes half as much @Identifier[core:damage]{damage} from this as
-      they would otherwise. This is calculated after any
-      @Identifier[keyword:boosted]{boosts} or
-      @Identifier[keyword:deboosted]{deboosts}.</p>
+      <p>@Identifier[core:targets]{Target} pulls half as many additional stones. Target takes half as much
+      @Identifier[core:damage]{damage} from this as they would otherwise. This is calculated after any
+      @Identifier[keyword:boosted]{boosts} or @Identifier[keyword:deboosted]{deboosts}.</p>
   targets:
     - creature
 transfer: true

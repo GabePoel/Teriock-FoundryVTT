@@ -1,11 +1,10 @@
 _id: fd13dcadccda11dc
-_key: '!effects!fd13dcadccda11dc'
+_key: "!effects!fd13dcadccda11dc"
 img: systems/teriock/src/icons/abilities/smash-potion-of-bones.webp
 name: Smash Potion of Bones
 system:
   automations:
-    GcMGu7L9Xwau2FVz:
-      _id: GcMGu7L9Xwau2FVz
+    - _id: GcMGu7L9Xwau2FVz
       changes:
         - key: token.texture.src
           phase: derived
@@ -18,7 +17,7 @@ system:
           priority: 30
           target: Actor
           type: override
-          value: 'true'
+          value: "true"
         - key: token.ring.subject.texture
           phase: derived
           priority: 30
@@ -26,17 +25,16 @@ system:
           type: override
           value: systems/teriock/src/icons/tokens/skeleton.webp
       type: changes
-    7400b41f20d9f100:
-      _id: 7400b41f20d9f100
-      angle: '60'
+    - _id: 7400b41f20d9f100
+      angle: "60"
       attachToToken: false
       automatic: true
       deleteOnTurnChange: true
       expandWithToken: false
-      innerWidth: '0'
+      innerWidth: "0"
       multi: false
-      outerWidth: '0'
-      radius: '@ability.expansion.range'
+      outerWidth: "0"
+      radius: "@ability.expansion.range"
       regionType: circle
       restriction:
         enabled: true
@@ -44,8 +42,7 @@ system:
       trigger: executeInput
       type: region
       updateTargets: true
-    b4960732f0b9ed9f:
-      _id: b4960732f0b9ed9f
+    - _id: b4960732f0b9ed9f
       executor: false
       relation: include
       status: frightened
@@ -56,22 +53,20 @@ system:
   consumeSource: true
   delivery: item
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   effectTypes:
     - illusion
     - mental
   endCondition: >-
-    <p>The @Identifier[keyword:illusionary]{illusion} is successfully
-    @Identifier[ability:disbelieve]{disbelieved}. The
-    @Identifier[core:targets]{target} only needs to succeed once, not once for
-    each other target.</p>
+    <p>The @Identifier[keyword:illusionary]{illusion} is successfully @Identifier[ability:disbelieve]{disbelieved}. The
+    @Identifier[core:targets]{target} only needs to succeed once, not once for each other target.</p>
   executionTime:
     base: a1
   expansion:
     featSaveAttribute: int
     range:
-      raw: '10'
+      raw: "10"
       unit: ft
     type: detonate
   form: normal
@@ -83,17 +78,13 @@ system:
   range:
     unit: contact
   requirements: >-
-    <p>Use [[lookup name]] by interacting with the
-    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
-    @Identifier[core:maneuvers]{maneuver} and
-    @Identifier[core:abilities]{execution time} for the ability.</p>
+    <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts as
+    the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the ability.</p>
   results:
     fail: >-
-      <p>@Identifier[core:targets]{Target} becomes
-      @Identifier[condition:frightened]{frightened} of you and every other
-      target. You all appear as @Identifier[creature:skeleton]{skeletons} to
-      each other instead of your true forms. This is a
-      @Identifier[keyword:illusionary]{minor illusion}.</p>
+      <p>@Identifier[core:targets]{Target} becomes @Identifier[condition:frightened]{frightened} of you and every other
+      target. You all appear as @Identifier[creature:skeleton]{skeletons} to each other instead of your true forms. This
+      is a @Identifier[keyword:illusionary]{minor illusion}.</p>
   targets:
     - area
     - creature

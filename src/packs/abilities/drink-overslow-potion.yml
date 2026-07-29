@@ -1,11 +1,10 @@
 _id: 8e0e1abf7af46ec3
-_key: '!effects!8e0e1abf7af46ec3'
+_key: "!effects!8e0e1abf7af46ec3"
 img: systems/teriock/src/icons/abilities/drink-overslow-potion.webp
 name: Drink Overslow Potion
 system:
   automations:
-    8edb379ab757090c:
-      _id: 8edb379ab757090c
+    - _id: 8edb379ab757090c
       all: false
       attachDocuments: true
       automatic: true
@@ -14,17 +13,15 @@ system:
       multi: false
       separate: false
       type: addDocuments
-    e789ed5e109ebd1a:
-      _id: e789ed5e109ebd1a
+    - _id: e789ed5e109ebd1a
       changes:
         - key: system.attributes.int.score
           priority: 40
           target: Actor
           type: add
-          value: '-2'
+          value: "-2"
       type: changes
-    ca0696ba7cfc9ec1:
-      _id: ca0696ba7cfc9ec1
+    - _id: ca0696ba7cfc9ec1
       executor: false
       relation: include
       status: slowed
@@ -35,7 +32,7 @@ system:
   consumeSource: true
   delivery: item
   duration:
-    raw: '1'
+    raw: "1"
     unit: minute
   executionTime:
     base: a1
@@ -45,18 +42,15 @@ system:
   maneuver: active
   overview:
     base: >-
-      <p>You gain @Identifier[ability:overslow-blood]{Overslow Blood}, become
-      @Identifier[condition:slowed]{slowed}, and have your
-      @Identifier[core:intelligence]{INT} decreased by 2.</p>
+      <p>You gain @Identifier[ability:overslow-blood]{Overslow Blood}, become @Identifier[condition:slowed]{slowed}, and
+      have your @Identifier[core:intelligence]{INT} decreased by 2.</p>
   powerSources:
     - alchemical
   range:
     unit: contact
   requirements: >-
-    <p>Use [[lookup name]] by interacting with the
-    @Pack[teriock.equipment]{equipment} that provides it. That counts as the
-    @Identifier[core:maneuvers]{maneuver} and
-    @Identifier[core:abilities]{execution time} for the ability.</p>
+    <p>Use [[lookup name]] by interacting with the @Pack[teriock.equipment]{equipment} that provides it. That counts as
+    the @Identifier[core:maneuvers]{maneuver} and @Identifier[core:abilities]{execution time} for the ability.</p>
   targets:
     - self
 transfer: true

@@ -1,8 +1,8 @@
 _id: a8e542220f79385c
-_key: '!items!a8e542220f79385c'
+_key: "!items!a8e542220f79385c"
 effects:
   - _id: 3qoQMnlYSPfYspa4
-    _key: '!items.effects!a8e542220f79385c.3qoQMnlYSPfYspa4'
+    _key: "!items.effects!a8e542220f79385c.3qoQMnlYSPfYspa4"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.db4302ece692ddea
     img: systems/teriock/src/icons/properties/ammunition.webp
@@ -11,34 +11,32 @@ effects:
       applyIfDampened: true
       applyIfDeattuned: true
       automations:
-        parameterChanges:
-          _id: parameterChanges
+        - _id: parameterChanges
           changes:
             - key: system.range.ranged
               phase: setup
               priority: 10
               target: Item
               type: override
-              value: 'true'
+              value: "true"
             - key: system.ammunition.enabled
               phase: setup
               priority: 10
               target: Item
               type: override
-              value: 'true'
+              value: "true"
           type: changes
       competence:
         raw: 0
       description: >-
-        <p>A weapon with this property is @Identifier[property:ranged]{ranged}
-        and requires some sort of [[lookup name style=lc]] (arrows, rocks,
-        darts, etc.) to @Identifier[core:attack-interaction]{attack} with.</p>
+        <p>A weapon with this property is @Identifier[property:ranged]{ranged} and requires some sort of [[lookup name
+        style=lc]] (arrows, rocks, darts, etc.) to @Identifier[core:attack-interaction]{attack} with.</p>
       form: intrinsic
       identifier: ammunition
     transfer: true
     type: property
   - _id: cumbersome000000
-    _key: '!items.effects!a8e542220f79385c.cumbersome000000'
+    _key: "!items.effects!a8e542220f79385c.cumbersome000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.eac47e503515cd7d
     img: systems/teriock/src/icons/properties/cumbersome.webp
@@ -48,30 +46,25 @@ effects:
       applyIfDeattuned: true
       applyIfUnequipped: false
       automations:
-        parameterChanges:
-          _id: parameterChanges
+        - _id: parameterChanges
           changes:
             - key: system.encumbranceLevel
               phase: derived
               priority: 10
               target: Actor
               type: add
-              value: '1'
+              value: "1"
           type: changes
       competence:
         raw: 0
       description: >-
-        <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item}
-        <i>always</i> makes its user
-        @Identifier[condition:encumbered]{encumbered}, regardless of how much
-        they are @Identifier[core:carrying-capacity]{carrying}. If the user
-        would have not been @Identifier[condition:encumbered]{encumbered}
-        otherwise, they are @Identifier[condition:encumbered]{lightly
-        encumbered}. If they would have been
-        @Identifier[condition:encumbered]{lightly encumbered} otherwise, they
-        are @Identifier[condition:encumbered]{heavily encumbered}. And if they
-        would have been @Identifier[condition:encumbered]{heavily encumbered}
-        otherwise, they are rendered
+        <p>A <b>[[lookup name style=lc]]</b> @Pack[teriock.equipment]{item} <i>always</i> makes its user
+        @Identifier[condition:encumbered]{encumbered}, regardless of how much they are
+        @Identifier[core:carrying-capacity]{carrying}. If the user would have not been
+        @Identifier[condition:encumbered]{encumbered} otherwise, they are @Identifier[condition:encumbered]{lightly
+        encumbered}. If they would have been @Identifier[condition:encumbered]{lightly encumbered} otherwise, they are
+        @Identifier[condition:encumbered]{heavily encumbered}. And if they would have been
+        @Identifier[condition:encumbered]{heavily encumbered} otherwise, they are rendered
         @Identifier[condition:immobilized]{immobile}.</p>
       form: flaw
       identifier: cumbersome
@@ -79,7 +72,7 @@ effects:
     transfer: true
     type: property
   - _id: fragile000000000
-    _key: '!items.effects!a8e542220f79385c.fragile000000000'
+    _key: "!items.effects!a8e542220f79385c.fragile000000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.7b3e6d546e3b26f7
     img: systems/teriock/src/icons/properties/fragile.webp
@@ -90,19 +83,17 @@ effects:
       competence:
         raw: 0
       description: >-
-        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It
-        becomes @Identifier[property:shattered]{shattered} if it is used to
-        @Identifier[core:block-interaction]{block} or if it is the
-        @Wiki[Category:Item target abilities]{target of an ability} that deals
-        it @Wiki[Category:Damaging effects]{damage}. If it would become
-        @Identifier[property:shattered]{shattered} through some other means, it
-        is instead @Identifier[property:destroyed]{destroyed}.</p>
+        <p>An item that's <b>[[lookup name style=lc]]</b> is easily broken. It becomes
+        @Identifier[property:shattered]{shattered} if it is used to @Identifier[core:block-interaction]{block} or if it
+        is the @Wiki[Category:Item target abilities]{target of an ability} that deals it @Wiki[Category:Damaging
+        effects]{damage}. If it would become @Identifier[property:shattered]{shattered} through some other means, it is
+        instead @Identifier[property:destroyed]{destroyed}.</p>
       form: flaw
       identifier: fragile
     transfer: true
     type: property
   - _id: involved00000000
-    _key: '!items.effects!a8e542220f79385c.involved00000000'
+    _key: "!items.effects!a8e542220f79385c.involved00000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.1ca310c46eab9536
     img: systems/teriock/src/icons/properties/involved.webp
@@ -113,20 +104,15 @@ effects:
       competence:
         raw: 0
       description: >-
-        <p>Using an <b>[[lookup name style=lc]]</b>
-        @Identifier[property:involved]{item} is more complicated than a regular
-        one and gives other creatures a chance to interfere. Doing any of the
-        following with an @Identifier[property:involved]{involved item} counts
-        as a valid trigger for
-        @Identifier[ability:opportunity-attack]{opportunity
-        attacks}.</p><ul><li>@Identifier[ability:reload]{Reloading}
+        <p>Using an <b>[[lookup name style=lc]]</b> @Identifier[property:involved]{item} is more complicated than a
+        regular one and gives other creatures a chance to interfere. Doing any of the following with an
+        @Identifier[property:involved]{involved item} counts as a valid trigger for
+        @Identifier[ability:opportunity-attack]{opportunity attacks}.</p><ul><li>@Identifier[ability:reload]{Reloading}
         it.</li><li>@Identifier[core:attack-interaction]{Attacking} with
-        it.</li><li>@Identifier[ability:interact]{Interacting} with it to
-        somehow activate it. Not all @Identifier[ability:interact]{interactions}
-        involving an @Identifier[property:involved]{involved item} count.
-        Drawing a @Identifier[equipment:pistol]{pistol} wouldn't, but sliding
-        pieces around in some [[lookup name style=lc]] puzzle box
-        would.</li></ul>
+        it.</li><li>@Identifier[ability:interact]{Interacting} with it to somehow activate it. Not all
+        @Identifier[ability:interact]{interactions} involving an @Identifier[property:involved]{involved item} count.
+        Drawing a @Identifier[equipment:pistol]{pistol} wouldn't, but sliding pieces around in some [[lookup name
+        style=lc]] puzzle box would.</li></ul>
       form: flaw
       identifier: involved
       powerSources:
@@ -134,7 +120,7 @@ effects:
     transfer: true
     type: property
   - _id: loading000000000
-    _key: '!items.effects!a8e542220f79385c.loading000000000'
+    _key: "!items.effects!a8e542220f79385c.loading000000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.b59d68ed12d46377
     img: systems/teriock/src/icons/properties/loading.webp
@@ -145,16 +131,15 @@ effects:
       competence:
         raw: 0
       description: >-
-        <p>An item with the <b>[[lookup name style=lc]]</b> property must be
-        reloaded after making an @Identifier[core:attack-interaction]{attack}
-        with it. Anyone can do this using
+        <p>An item with the <b>[[lookup name style=lc]]</b> property must be reloaded after making an
+        @Identifier[core:attack-interaction]{attack} with it. Anyone can do this using
         @Identifier[ability:reload]{Reload}.</p>
       form: flaw
       identifier: loading
     transfer: true
     type: property
   - _id: twoHanded0000000
-    _key: '!items.effects!a8e542220f79385c.twoHanded0000000'
+    _key: "!items.effects!a8e542220f79385c.twoHanded0000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.5409959443770534
     img: systems/teriock/src/icons/properties/two-handed.webp
@@ -166,14 +151,13 @@ effects:
         raw: 0
       description: >-
         <p>An item with the <b>[[lookup name style=lc]]</b> property cannot be
-        @Identifier[core:attack-interaction]{attacked} with unless it is wielded
-        in two hands.</p>
+        @Identifier[core:attack-interaction]{attacked} with unless it is wielded in two hands.</p>
       form: flaw
       identifier: two-handed
     transfer: true
     type: property
   - _id: wep0000000000000
-    _key: '!items.effects!a8e542220f79385c.wep0000000000000'
+    _key: "!items.effects!a8e542220f79385c.wep0000000000000"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.891de334396620e1
     img: systems/teriock/src/icons/properties/weapon.webp
@@ -191,7 +175,7 @@ effects:
     transfer: true
     type: property
   - _id: cP8C1asZAOr9IziF
-    _key: '!items.effects!a8e542220f79385c.cP8C1asZAOr9IziF'
+    _key: "!items.effects!a8e542220f79385c.cP8C1asZAOr9IziF"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.b528592e5a4583e3
     img: systems/teriock/src/icons/properties/missile.webp
@@ -200,15 +184,14 @@ effects:
       applyIfDampened: true
       applyIfDeattuned: true
       automations:
-        parameterChanges:
-          _id: parameterChanges
+        - _id: parameterChanges
           changes:
             - key: system.range.melee
               phase: derived
               priority: 10
               target: Item
               type: override
-              value: 'false'
+              value: "false"
           type: changes
       competence:
         raw: 0
@@ -221,7 +204,7 @@ effects:
     transfer: true
     type: property
   - _id: f2OGOaUKHympWJUM
-    _key: '!items.effects!a8e542220f79385c.f2OGOaUKHympWJUM'
+    _key: "!items.effects!a8e542220f79385c.f2OGOaUKHympWJUM"
     _stats:
       compendiumSource: Compendium.teriock.properties.ActiveEffect.87e86f2640702582
     img: systems/teriock/src/icons/properties/ranged.webp
@@ -231,29 +214,24 @@ effects:
       applyIfDampened: true
       applyIfDeattuned: true
       automations:
-        parameterChanges:
-          _id: parameterChanges
+        - _id: parameterChanges
           changes:
             - key: system.range.ranged
               phase: derived
               priority: 10
               target: Item
               type: override
-              value: 'true'
+              value: "true"
           type: changes
       competence:
         raw: 0
       description: >-
-        <p>Weapons with this property can hit targets at a distance. A weapon
-        that can be used to make a [[lookup name style=lc]] attack has a range
-        in parentheses after specifying if it requires
-        @Identifier[property:ammunition]{ammunition} or if is
-        @Identifier[property:thrown]{thrown}. The range lists two numbers. The
-        first is the weapon's normal range in feet, and the second indicates the
-        weapon's long range. When attacking a target beyond normal range, you
-        have @Identifier[core:disadvantage]{disadvantage} on the
-        @Identifier[core:attack-interaction]{attack roll}. You can't attack a
-        target beyond the weapon's long range.</p>
+        <p>Weapons with this property can hit targets at a distance. A weapon that can be used to make a [[lookup name
+        style=lc]] attack has a range in parentheses after specifying if it requires
+        @Identifier[property:ammunition]{ammunition} or if is @Identifier[property:thrown]{thrown}. The range lists two
+        numbers. The first is the weapon's normal range in feet, and the second indicates the weapon's long range. When
+        attacking a target beyond normal range, you have @Identifier[core:disadvantage]{disadvantage} on the
+        @Identifier[core:attack-interaction]{attack roll}. You can't attack a target beyond the weapon's long range.</p>
       form: intrinsic
       identifier: ranged
     transfer: true
@@ -264,7 +242,7 @@ name: Musket
 system:
   ammunition:
     type: bullet
-  attackPenalty: '-4'
+  attackPenalty: "-4"
   competence:
     raw: 0
   consumable: false
@@ -278,11 +256,11 @@ system:
   powerLevel: mundane
   range:
     long:
-      raw: '120'
+      raw: "120"
       unit: ft
     melee: true
     ranged: false
     short:
-      raw: '40'
+      raw: "40"
   weight: 10
 type: equipment

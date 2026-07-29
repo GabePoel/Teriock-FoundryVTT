@@ -2,7 +2,7 @@ import { compilePack } from "@foundryvtt/foundryvtt-cli";
 import { promises as fs } from "fs";
 
 import { toCamelCase } from "../../src/module/helpers/string.mjs";
-import { BASIC_STATS, FOLDERS, YAML } from "./constants.mjs";
+import { BASIC_STATS, DOCUMENT_COLLECTION_KEYS, FOLDERS, PSEUDO_COLLECTION_KEYS, YAML } from "./constants.mjs";
 
 const MODULE_ROOT_DIR = process.cwd();
 
@@ -23,4 +23,12 @@ for (const pack of packs) {
  */
 function transformEntry(doc) {
   doc._stats = Object.assign(doc._stats ?? {}, BASIC_STATS);
+  if (doc.system) {
+    for (const key of PSEUDO_COLLECTION_KEYS) {
+      if (Array.isArray(doc.system[key])) {
+        doc.system[key] = Object.fromEntries(doc.system[key].map((m) => [m._id, m]));
+      }
+    }
+  }
+  DOCUMENT_COLLECTION_KEYS.forEach(key => doc[key]?.forEach(d => transformEntry(d)));
 }

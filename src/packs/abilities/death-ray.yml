@@ -1,16 +1,14 @@
 _id: b231c43502dd9d39
-_key: '!effects!b231c43502dd9d39'
+_key: "!effects!b231c43502dd9d39"
 img: systems/teriock/src/icons/abilities/death-ray.webp
 name: Death Ray
 system:
   automations:
-    1728b3a84ea27844:
-      _id: 1728b3a84ea27844
+    - _id: 1728b3a84ea27844
       common:
         - bag
       type: common
-    71e51b18552837f1:
-      _id: 71e51b18552837f1
+    - _id: 71e51b18552837f1
       formula: (2 + @h)d6
       impact: kill
       merge: true
@@ -27,9 +25,7 @@ system:
   executionTime:
     base: a1
   form: normal
-  heightened: >-
-    <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP}
-    spent, roll an additional [[/kill 1d6]].</p>
+  heightened: <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, roll an additional [[/kill 1d6]].</p>
   identifier: death-ray
   interaction: attack
   maneuver: active
@@ -38,20 +34,17 @@ system:
   powerSources:
     - magical
   range:
-    raw: '60'
+    raw: "60"
     unit: ft
   requirements: >-
-    <p>@Identifier[core:targets]{Target} is neither
-    @Identifier[condition:dead]{dead} nor
+    <p>@Identifier[core:targets]{Target} is neither @Identifier[condition:dead]{dead} nor
     @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}.</p>
   results:
     critHit: <p>Double the number of dice rolled.</p>
     hit: >-
       <p>Roll [[/kill 2d6]] if this is greater than or equal to the number of
-      @Identifier[core:hit-points-and-mana-points]{HP} the
-      @Identifier[core:targets]{target} has, they
-      @Identifier[condition:dead]{die}. This does not deal
-      @Identifier[core:damage]{damage}.</p>
+      @Identifier[core:hit-points-and-mana-points]{HP} the @Identifier[core:targets]{target} has, they
+      @Identifier[condition:dead]{die}. This does not deal @Identifier[core:damage]{damage}.</p>
   spell: true
   standard: true
   targets:

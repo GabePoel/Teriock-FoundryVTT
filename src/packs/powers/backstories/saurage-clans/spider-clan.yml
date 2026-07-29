@@ -1,16 +1,15 @@
 _id: 8ec5fc2ab4b8f564
-_key: '!items!8ec5fc2ab4b8f564'
+_key: "!items!8ec5fc2ab4b8f564"
 effects:
   - _id: XnBQxLi8T9HOgIBv
-    _key: '!items.effects!8ec5fc2ab4b8f564.XnBQxLi8T9HOgIBv'
+    _key: "!items.effects!8ec5fc2ab4b8f564.XnBQxLi8T9HOgIBv"
     _stats:
       compendiumSource: Compendium.teriock.abilities.ActiveEffect.6f1e35c05a5589d6
     img: systems/teriock/src/icons/abilities/snare.webp
     name: Snare
     system:
       automations:
-        5d57231066693cee:
-          _id: 5d57231066693cee
+        - _id: 5d57231066693cee
           executor: false
           multi: false
           relation: include
@@ -23,14 +22,12 @@ effects:
       duration:
         unit: unlimited
       endCondition: >-
-        <p>At the end of each of the @Identifier[core:targets]{target's}
-        @Identifier[core:turns]{turns}, they roll [[/roll 2d4]]. If either of
-        these dice roll a 4, this effect ends.</p>
+        <p>At the end of each of the @Identifier[core:targets]{target's} @Identifier[core:turns]{turns}, they roll
+        [[/roll 2d4]]. If either of these dice roll a 4, this effect ends.</p>
       executionTime:
         base: a1
       expirations:
-        66672059c7a29a30:
-          _id: 66672059c7a29a30
+        - _id: 66672059c7a29a30
           crit:
             - 0
           event: turn
@@ -39,12 +36,11 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 0
           timing: end
           type: combat
-        28294dbc80493c2c:
-          _id: 28294dbc80493c2c
+        - _id: 28294dbc80493c2c
           crit:
             - 1
           event: turn
@@ -53,7 +49,7 @@ effects:
           roll:
             comparison: gte
             formula: 2d4kh1
-            threshold: '4'
+            threshold: "4"
           skip: 1
           timing: end
           type: combat
@@ -68,12 +64,8 @@ effects:
       range:
         unit: contact
       results:
-        critHit: >-
-          <p>The @Identifier[core:targets]{target} automatically fails the first
-          [[/roll 2d4]] roll.</p>
-        hit: >-
-          <p>@Identifier[core:targets]{Target} is
-          @Identifier[condition:snared]{snared}.</p>
+        critHit: <p>The @Identifier[core:targets]{target} automatically fails the first [[/roll 2d4]] roll.</p>
+        hit: <p>@Identifier[core:targets]{Target} is @Identifier[condition:snared]{snared}.</p>
       skill: true
       standard: true
       targets:
@@ -87,9 +79,8 @@ system:
   competence:
     raw: 1
   description: >-
-    <p>Each of the eight @Identifier[creature:desert-saurage]{desert saurage}
-    clans has a different distinct @Pack[teriock.abilities]{ability}, piece of
-    jewelry, and color.</p>
+    <p>Each of the eight @Identifier[creature:desert-saurage]{desert saurage} clans has a different distinct
+    @Pack[teriock.abilities]{ability}, piece of jewelry, and color.</p>
   identifier: spider-clan
   maxAv: 4
   type: backstory
