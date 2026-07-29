@@ -88,6 +88,9 @@ function cleanActiveEffect(doc) {
     delete doc.system.mundane;
   }
   if (!doc.system.applyIfDeattuned) { delete doc.system.applyIfDeattuned; }
+  if (doc.system?.transformation?.enabled === false) {
+    delete doc.system.transformation;
+  }
 }
 
 /**
@@ -206,6 +209,9 @@ function cleanArmament(doc) {
   if (isZero(doc.system.damage?.twoHanded)) { delete doc.system.damage.twoHanded; }
   if (!doc.system.spellTurning) { delete doc.system.spellTurning; }
   if (!doc.system.warded) { delete doc.system.warded; }
+  if (doc.system.range?.long?.unit && doc.system.range?.short?.unit) {
+    delete doc.system.range.short.unit;
+  }
 }
 
 /**
