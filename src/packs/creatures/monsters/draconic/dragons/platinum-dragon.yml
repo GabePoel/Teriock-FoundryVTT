@@ -206,6 +206,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -250,6 +251,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -456,6 +458,7 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 7400b41f20d9f100
               all: false
@@ -463,12 +466,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -477,16 +488,22 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 4d10[holy lethal magic]
               impact: damage
+              trigger: null
               type: roll
             - _id: 800c70e6560525a8
+              display: {}
               formula: (2 * @h)d10[magic holy]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -548,16 +565,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -999,6 +1022,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1413,6 +1437,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1490,6 +1515,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1535,11 +1561,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1548,7 +1583,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1623,11 +1660,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1636,7 +1682,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1946,6 +1994,7 @@ items:
               common:
                 - null
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -2004,10 +2053,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2100,11 +2145,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: circle
               restriction:
                 enabled: false
@@ -2113,7 +2167,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           delivery: aura
@@ -2190,11 +2246,16 @@ items:
               all: false
               attachDocuments: false
               automatic: true
+              display: {}
               identifiers:
                 - power:divine-gift
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2273,6 +2334,7 @@ items:
               consumeStatDice: true
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -2328,12 +2390,15 @@ items:
         system:
           automations:
             - _id: 9ad6dfd8be12f59a
+              display: {}
               macro: Compendium.teriock.execution.Macro.e805e3fad6cedde3
               trigger: preExecute
               type: abilityMacro
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 1d4
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2424,6 +2489,7 @@ items:
               category: effectTypes
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: mental
@@ -2690,22 +2756,27 @@ items:
               common:
                 - destroy
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 6743b131768d36be
               all: false
               automatic: true
               bonus: "0"
               multi: false
+              threshold: null
               tradecrafts:
                 - priest
+              trigger: null
               type: tradecraft
             - _id: 7fe78a2b814687c0
               all: false
               automatic: true
               bonus: "0"
               multi: false
+              threshold: null
               tradecrafts:
                 - priest
+              trigger: null
               type: tradecraft
           competence:
             raw: 1
@@ -2714,12 +2785,12 @@ items:
               hp:
                 description: >-
                   <p>An amount of @Identifier[core:hit-points-and-mana-points]{HP} equal to the [[/tc priest]]{priest
-                  check's} DC. Paid only on failure.</p>
+                  check's} @Identifier[core:difficulty-class]{DC}. Paid only on failure.</p>
                 type: description
               mp:
                 description: >-
                   <p>An amount of @Identifier[core:hit-points-and-mana-points]{MP} equal to the [[/tc priest]]{priest
-                  check's} DC. Paid only on failure.</p>
+                  check's} @Identifier[core:difficulty-class]{DC}. Paid only on failure.</p>
                 type: description
           delivery: sight
           duration:
@@ -2738,13 +2809,13 @@ items:
           overview:
             base: >-
               <p>When this ritual is completed, make a [[/tc priest]]{priest check} to see if the
-              @Identifier[core:targets]{targeted} item is [[lookup name style=lc]]ed. The check's DC is entirely up to
-              @Identifier[core:game-master]{GM} discretion, but the following can be used as a
-              benchmark.</p><ul><li>Non-passively magic items: 4</li><li>Common passively magic items:
-              8</li><li>Uncommon passively magic items: 12</li><li>Rare passively magic items: 16</li><li>Mythic
-              passively magic items: 20</li><li>Legendary passively magic items: 50+</li></ul><p>These benchmarks are
-              for reference only and the @Identifier[core:game-master]{GM} may adjust them as they see fit. Item rarity
-              may or may not correspond to how challenging it is to [[lookup name style=lc]].</p>
+              @Identifier[core:targets]{targeted} item is [[lookup name style=lc]]ed. The check's
+              @Identifier[core:difficulty-class]{DC} is entirely up to @Identifier[core:game-master]{GM} discretion, but
+              the following can be used as a benchmark.</p><ul><li>Non-passively magic items: 4</li><li>Common passively
+              magic items: 8</li><li>Uncommon passively magic items: 12</li><li>Rare passively magic items:
+              16</li><li>Mythic passively magic items: 20</li><li>Legendary passively magic items: 50+</li></ul><p>These
+              benchmarks are for reference only and the @Identifier[core:game-master]{GM} may adjust them as they see
+              fit. Item rarity may or may not correspond to how challenging it is to [[lookup name style=lc]].</p>
             fluent: >-
               <p>You may add @Identifier[core:fluency-bonus]{F} to the [[/tc priest]]{priest check} regardless of
               whether or not you are fluent in @Identifier[tradecraft:priest]{priest}.</p>
@@ -2759,12 +2830,13 @@ items:
           results:
             fail: >-
               <p>You pay an amount of @Identifier[core:hit-points-and-mana-points]{MP} and
-              @Identifier[core:hit-points-and-mana-points]{HP} equal to the [[/tc priest]]{priest check's} DC.</p>
+              @Identifier[core:hit-points-and-mana-points]{HP} equal to the [[/tc priest]]{priest check's}
+              @Identifier[core:difficulty-class]{DC}.</p>
             save: >-
               <p>The item is @Identifier[property:destroyed]{destroyed} and any @Wiki[Category:Magical
               properties]{magical properties} of it are removed. An amount of
-              @Identifier[core:hit-points-and-mana-points]{MP} equal to 20 times the [[/tc priest]]{priest check's} DC
-              is released (although you do not gain it).</p>
+              @Identifier[core:hit-points-and-mana-points]{MP} equal to 20 times the [[/tc priest]]{priest check's}
+              @Identifier[core:difficulty-class]{DC} is released (although you do not gain it).</p>
           ritual: true
           skill: true
           standard: true
@@ -2786,12 +2858,12 @@ items:
               hp:
                 description: >-
                   <p>An amount of @Identifier[core:hit-points-and-mana-points]{HP} equal to the [[/tc priest]]{priest
-                  check's} DC. Paid only on failure.</p>
+                  check's} @Identifier[core:difficulty-class]{DC}. Paid only on failure.</p>
                 type: description
               mp:
                 description: >-
                   <p>An amount of @Identifier[core:hit-points-and-mana-points]{MP} equal to the [[/tc priest]]{priest
-                  check's} DC. Paid only on failure.</p>
+                  check's} @Identifier[core:difficulty-class]{DC}. Paid only on failure.</p>
                 type: description
           delivery: sight
           duration:
@@ -2815,15 +2887,16 @@ items:
               effects]{reanimation effects} that @Identifier[core:targets]{target} them during this time
               @Identifier[core:fizzles]{fizzle}.</p><p>When this ritual is completed, make a [[/tc priest]]{priest
               check} to see if the @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}
-              @Identifier[core:targets]{target} is destroyed. The check's DC is typically equal to the
-              @Wiki[Category:Creatures by BR]{battle rating} of the target's
+              @Identifier[core:targets]{target} is destroyed. The check's @Identifier[core:difficulty-class]{DC} is
+              typically equal to the @Wiki[Category:Creatures by BR]{battle rating} of the target's
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead type}. The
-              @Identifier[core:game-master]{GM} may adjust the DC based on other factors as they see fit.</p><p>[[lookup
-              name]] can also be used to cleanse effects other than being
+              @Identifier[core:game-master]{GM} may adjust the @Identifier[core:difficulty-class]{DC} based on other
+              factors as they see fit.</p><p>[[lookup name]] can also be used to cleanse effects other than being
               @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead}. The @Identifier[core:game-master]{GM}
-              decides the DC of the [[/tc priest]]{priest check} based on the severity of the effect being cleansed. If
-              the check is successful, the effect is removed and the @Identifier[core:targets]{target} is destroyed in a
-              similar manner to an @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} target. The
+              decides the @Identifier[core:difficulty-class]{DC} of the [[/tc priest]]{priest check} based on the
+              severity of the effect being cleansed. If the check is successful, the effect is removed and the
+              @Identifier[core:targets]{target} is destroyed in a similar manner to an
+              @UUID[Compendium.teriock.tables.RollTable.d79e65e12c44614e]{undead} target. The
               @Identifier[core:targets]{target} pulls stones from the [[/bag]]{death bag} based on the severity of the
               effect being cleansed (see @Identifier[core:game-master]{GM}).</p>
             fluent: >-
@@ -2840,7 +2913,8 @@ items:
           results:
             fail: >-
               <p>You pay an amount of @Identifier[core:hit-points-and-mana-points]{MP} and
-              @Identifier[core:hit-points-and-mana-points]{HP} equal to the [[/tc priest]]{priest check's} DC.</p>
+              @Identifier[core:hit-points-and-mana-points]{HP} equal to the [[/tc priest]]{priest check's}
+              @Identifier[core:difficulty-class]{DC}.</p>
             save: >-
               <p>The @Identifier[core:targets]{target} is "destroyed". They @Identifier[condition:dead]{die}, they are
               @Identifier[condition:ruined]{ruined}, and they pull additional stones from the
@@ -2964,11 +3038,16 @@ items:
               all: false
               attachDocuments: false
               automatic: true
+              display: {}
               identifiers:
                 - power:zone-of-divinity
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: self

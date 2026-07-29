@@ -39,6 +39,7 @@ export default class ApplicableEffectSystem
       affinities.HexproofAffinity,
       affinities.HexsealAffinity,
       affinities.ImmunityAffinity,
+      affinities.IncapabilityAffinity,
       affinities.ResistanceAffinity,
       affinities.TakeBoostAffinity,
       affinities.TakeDeboostAffinity,

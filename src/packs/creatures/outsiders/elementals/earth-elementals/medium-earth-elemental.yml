@@ -95,6 +95,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -135,11 +136,13 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 7OuG6efyOs2VWpp3
               activeQualifier: not(@status.frozen)
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -189,6 +192,7 @@ items:
             - _id: mvK4c8TZMXpIOZ1k
               activeQualifier: not(@status.down)
               category: elements
+              img: null
               type: hexseal
               value: nature
           competence:
@@ -421,6 +425,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -497,10 +502,14 @@ items:
               consumeStatDice: true
               forHarm: false
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d6[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -571,6 +580,11 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
@@ -719,6 +733,7 @@ items:
                 raw: 0
               identifiers:
                 - species:tree
+              img: null
               level: minor
               multi: false
               override:
@@ -726,6 +741,8 @@ items:
               reset:
                 - gp
                 - hp
+              ring: null
+              ringImg: null
               setCompetence: override
               suppress:
                 - body
@@ -734,6 +751,7 @@ items:
                 - rank
                 - species
               type: transformation
+              uuids: []
           competence:
             raw: 1
           delivery: missile
@@ -893,10 +911,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -1165,6 +1179,8 @@ items:
               automatic: true
               competence:
                 raw: 0
+              identifiers: []
+              img: null
               level: full
               multi: false
               override:
@@ -1173,6 +1189,8 @@ items:
               reset:
                 - gp
                 - hp
+              ring: null
+              ringImg: null
               setCompetence: override
               suppress:
                 - body
@@ -1250,20 +1268,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:earthbind-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: f8698f0406646514
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:earthbind-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: ZnqPryFKHegsj30g
               light:
                 alpha: 0.5
@@ -1343,12 +1371,17 @@ items:
                 @Identifier[core:hit-points-and-mana-points]{hit die} as normal (except that it can
                 @Wiki[Category:Revival effects]{revive} you). This can only @Wiki[Category:Revival effects]{revive}
                 creatures that have been @Identifier[condition:dead]{dead} for 1 minute or less.</p>"}}
+              display: {}
               identifiers:
                 - ability:regenerating
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -1421,6 +1454,11 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
@@ -1483,6 +1521,7 @@ items:
               common:
                 - destroy
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1650,8 +1689,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

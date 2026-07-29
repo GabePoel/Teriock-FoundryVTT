@@ -520,50 +520,6 @@ system:
     @Identifier[ability:supernatural-strength]{Supernatural Strength} if at least @Identifier[core:size]{size} 6.
     @Identifier[ability:monstrous-strength]{Monstrous Strength} if at least @Identifier[core:size]{size} 8.</p>
   automations:
-    - _id: 056bba8fd332660a
-      add:
-        - ability:monstrous-strength
-      qualifier: and(gte(@species.size, 8), lt(@species.size, 99))
-      remove:
-        - ability:beastly-strength
-        - ability:giant-strength
-        - ability:improved-strength
-        - ability:supernatural-strength
-      trigger: updateDocument
-      type: toggleChildren
-    - _id: 1d5376fc7aec0a48
-      add:
-        - ability:beastly-strength
-      qualifier: and(gte(@species.size, 0), lt(@species.size, 3))
-      remove:
-        - ability:giant-strength
-        - ability:improved-strength
-        - ability:monstrous-strength
-        - ability:supernatural-strength
-      trigger: updateDocument
-      type: toggleChildren
-    - _id: 37634d0e6b2fae07
-      add:
-        - ability:giant-strength
-      qualifier: and(gte(@species.size, 4), lt(@species.size, 6))
-      remove:
-        - ability:beastly-strength
-        - ability:improved-strength
-        - ability:monstrous-strength
-        - ability:supernatural-strength
-      trigger: updateDocument
-      type: toggleChildren
-    - _id: ab3de966a8f99c9c
-      add:
-        - ability:supernatural-strength
-      qualifier: and(gte(@species.size, 6), lt(@species.size, 8))
-      remove:
-        - ability:beastly-strength
-        - ability:giant-strength
-        - ability:improved-strength
-        - ability:monstrous-strength
-      trigger: updateDocument
-      type: toggleChildren
     - _id: b7dc74afdec1a704
       add:
         - ability:improved-strength
@@ -571,7 +527,51 @@ system:
       remove:
         - ability:beastly-strength
         - ability:giant-strength
+        - ability:supernatural-strength
         - ability:monstrous-strength
+      trigger: updateDocument
+      type: toggleChildren
+    - _id: 1d5376fc7aec0a48
+      add:
+        - ability:beastly-strength
+      qualifier: and(gte(@species.size, 0), lt(@species.size, 3))
+      remove:
+        - ability:improved-strength
+        - ability:giant-strength
+        - ability:supernatural-strength
+        - ability:monstrous-strength
+      trigger: updateDocument
+      type: toggleChildren
+    - _id: 37634d0e6b2fae07
+      add:
+        - ability:giant-strength
+      qualifier: and(gte(@species.size, 4), lt(@species.size, 6))
+      remove:
+        - ability:improved-strength
+        - ability:beastly-strength
+        - ability:supernatural-strength
+        - ability:monstrous-strength
+      trigger: updateDocument
+      type: toggleChildren
+    - _id: ab3de966a8f99c9c
+      add:
+        - ability:supernatural-strength
+      qualifier: and(gte(@species.size, 6), lt(@species.size, 8))
+      remove:
+        - ability:improved-strength
+        - ability:beastly-strength
+        - ability:giant-strength
+        - ability:monstrous-strength
+      trigger: updateDocument
+      type: toggleChildren
+    - _id: 056bba8fd332660a
+      add:
+        - ability:monstrous-strength
+      qualifier: and(gte(@species.size, 8), lt(@species.size, 99))
+      remove:
+        - ability:improved-strength
+        - ability:beastly-strength
+        - ability:giant-strength
         - ability:supernatural-strength
       trigger: updateDocument
       type: toggleChildren

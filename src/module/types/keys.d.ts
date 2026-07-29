@@ -1,4 +1,4 @@
-import { config, data, display, index } from "../constants/_module.mjs";
+import { config, display, index, statuses } from "../constants/_module.mjs";
 import { settings } from "../setup/system-settings.mjs";
 
 declare global {
@@ -78,8 +78,8 @@ declare global {
     // Status Keys
     export type HackableBodyPart = keyof typeof config.hack;
     export type Condition = keyof typeof index.conditions;
-    export type Cover = (typeof data.cover)[keyof typeof data.cover]["id"];
-    export type Hack = (typeof data.hacks)[keyof typeof data.hacks]["id"];
+    export type Cover = (typeof statuses.cover)[keyof typeof statuses.cover]["id"];
+    export type Hack = (typeof statuses.hacks)[keyof typeof statuses.hacks]["id"];
     export type Status = Condition | Cover | Hack;
 
     // Attunement Keys

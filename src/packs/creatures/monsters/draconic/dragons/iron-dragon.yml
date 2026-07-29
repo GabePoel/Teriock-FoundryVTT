@@ -244,6 +244,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -288,6 +289,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -340,12 +342,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -354,12 +364,16 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (2 * @h)d10[magic]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -538,16 +552,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -989,6 +1009,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1403,6 +1424,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1480,6 +1502,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1525,11 +1548,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1538,7 +1570,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1613,11 +1647,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1626,7 +1669,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1777,6 +1822,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Being Surprised (Outside Towns)
@@ -1838,6 +1884,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Conjured Missile Spells
@@ -1882,6 +1929,7 @@ items:
               category: properties
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: ranged
@@ -2012,25 +2060,35 @@ items:
                 label: Apply Ally Effect
               identifiers:
                 - consequence:gladiator-skills-ally-effect
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
+              uuids: []
             - _id: WedUG7hLjDbJNzZY
               all: false
               attachDocuments: false
               automatic: true
               children:
+                data: "{}"
                 enabled: true
                 identifiers:
                   - power:gladiator-skills-hit-die-power
                 overrideData: false
+                uuids: []
               display:
                 label: Apply Executor Effect
               identifiers:
                 - consequence:gladiator-skills-executor-effect
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
+              uuids: []
             - _id: FyGy4uoglXanPjex
               activeQualifier: "@status.dueling"
               changeType: upgrade
@@ -2043,6 +2101,8 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
             - _id: 5B0LdRTMIqOiMDEu
               amount: 1
@@ -2051,6 +2111,7 @@ items:
               impact: drain
               morganti: false
               showDialog: false
+              trigger: null
               type: take
           competence:
             raw: 1
@@ -2291,6 +2352,7 @@ items:
               consumeStatDice: true
               forHarm: false
               noStatDice: true
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -2335,6 +2397,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -2380,11 +2443,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -2393,7 +2465,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -2503,22 +2577,32 @@ items:
               automatic: true
               competencies:
                 - 1
+              display: {}
               identifiers:
                 - ability:fast
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: qy0rKWHv0DFoFgqJ
               all: false
               attachDocuments: true
               automatic: true
               competencies:
                 - 2
+              display: {}
               identifiers:
                 - ability:swift
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: mmCTbgaQIg38Y0II
               executor: false
               multi: false
@@ -2528,9 +2612,11 @@ items:
               type: status
             - _id: mY9vQJGkj2Kf1RTw
               amount: 15
+              display: {}
               impact: gainTempHp
               morganti: false
               showDialog: false
+              trigger: null
               type: take
           competence:
             raw: 1
@@ -2544,6 +2630,7 @@ items:
           expirations:
             - _id: b50b3ee67eddc9f9
               statuses:
+                absent: []
                 present:
                   - dead
               type: status
@@ -2617,8 +2704,10 @@ items:
           _sup: dbJPDVq2wmgowY99
           automations:
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 1d4[psychic]
               impact: damage
+              trigger: null
               type: roll
             - _id: b4960732f0b9ed9f
               executor: false
@@ -2952,6 +3041,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Non-Self Conjured Spells

@@ -262,9 +262,10 @@ effects:
       overview:
         base: >-
           <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
-          @Identifier[core:feat-interaction]{save} is greater than your @Wiki[Core:Passive Attributes]{passive}
-          @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden DC. If
-          not, use your @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
+          @Identifier[core:feat-interaction]{save} is greater than your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden
+          @Identifier[core:difficulty-class]{DC}. If not, use your @Identifier[core:passive-attributes]{passive}
+          @Identifier[core:sneak]{sneak}.</p>
       powerSources:
         - martial
       range:
@@ -596,19 +597,9 @@ system:
         - ability:beastly-strength
       qualifier: and(gte(@species.size, 3), lt(@species.size, 4))
       remove:
-        - ability:giant-strength
-        - ability:improved-strength
         - ability:normal-strength
-      trigger: updateDocument
-      type: toggleChildren
-    - _id: 37634d0e6b2fae07
-      add:
-        - ability:giant-strength
-      qualifier: and(gte(@species.size, 5), lt(@species.size, 99))
-      remove:
-        - ability:beastly-strength
         - ability:improved-strength
-        - ability:normal-strength
+        - ability:giant-strength
       trigger: updateDocument
       type: toggleChildren
     - _id: 554a612832c648e9
@@ -617,8 +608,8 @@ system:
       qualifier: and(gte(@species.size, 0), lt(@species.size, 3))
       remove:
         - ability:beastly-strength
-        - ability:giant-strength
         - ability:improved-strength
+        - ability:giant-strength
       trigger: updateDocument
       type: toggleChildren
     - _id: b7dc74afdec1a704
@@ -627,8 +618,18 @@ system:
       qualifier: and(gte(@species.size, 4), lt(@species.size, 5))
       remove:
         - ability:beastly-strength
-        - ability:giant-strength
         - ability:normal-strength
+        - ability:giant-strength
+      trigger: updateDocument
+      type: toggleChildren
+    - _id: 37634d0e6b2fae07
+      add:
+        - ability:giant-strength
+      qualifier: and(gte(@species.size, 5), lt(@species.size, 99))
+      remove:
+        - ability:beastly-strength
+        - ability:normal-strength
+        - ability:improved-strength
       trigger: updateDocument
       type: toggleChildren
   br: 4

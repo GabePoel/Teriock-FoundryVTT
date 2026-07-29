@@ -215,16 +215,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -270,11 +276,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -283,10 +298,14 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 2d10[terror]
               impact: damage
+              trigger: null
               type: roll
             - _id: 5f92ecb1bcd34991
               executor: false
@@ -297,9 +316,11 @@ items:
               type: status
             - _id: 5tZMz9shUBA3isBs
               amount: 15
+              display: {}
               impact: hide
               morganti: false
               showDialog: false
+              trigger: null
               type: take
           competence:
             raw: 1
@@ -328,8 +349,8 @@ items:
           results:
             fail: >-
               <p>The target gets covered with a pitch black ink. Creatures and items take [[/damage 2d10[terror]]]
-              @Identifier[core:damage]{damage} and become @Identifier[condition:hidden]{hidden} with a hidden DC of 15
-              while in affected areas until this is cleaned off.</p>
+              @Identifier[core:damage]{damage} and become @Identifier[condition:hidden]{hidden} with a hidden
+              @Identifier[core:difficulty-class]{DC} of 15 while in affected areas until this is cleaned off.</p>
           targets:
             - area
             - creature

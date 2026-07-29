@@ -21,6 +21,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Non-Self Conjured Spells
@@ -62,18 +63,22 @@ items:
           affinities:
             - _id: 2SGEPU635vkgznfV
               category: statuses
+              img: null
               type: immunity
               value: allured
             - _id: RT16m3U0BI3FNkvA
               category: statuses
+              img: null
               type: immunity
               value: frenzied
             - _id: n7Dd3JcVMBqNFFEU
               category: statuses
+              img: null
               type: immunity
               value: frenzied
             - _id: ug99tkS0qQe8PRXF
               category: statuses
+              img: null
               type: immunity
               value: charmed
           competence:
@@ -116,17 +121,22 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 8HKmB76Ft338yIWV
               activeQualifier: "@status.down"
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
             - _id: JBf8TF0QndAYSO6i
               activeQualifier: "@status.down"
               consumeStatDice: false
               forHarm: false
+              substitution: ""
+              trigger: null
               type: revitalize
           competence:
             raw: 1
@@ -332,16 +342,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -383,6 +399,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -427,20 +444,9 @@ items:
             - ability:beastly-strength
           qualifier: and(gte(@species.size, 3), lt(@species.size, 4))
           remove:
-            - ability:giant-strength
-            - ability:improved-strength
             - ability:normal-strength
-            - ability:supernatural-strength
-          trigger: updateDocument
-          type: toggleChildren
-        - _id: 37634d0e6b2fae07
-          add:
-            - ability:giant-strength
-          qualifier: and(gte(@species.size, 6), lt(@species.size, 8))
-          remove:
-            - ability:beastly-strength
             - ability:improved-strength
-            - ability:normal-strength
+            - ability:giant-strength
             - ability:supernatural-strength
           trigger: updateDocument
           type: toggleChildren
@@ -450,7 +456,29 @@ items:
           qualifier: and(gte(@species.size, 0), lt(@species.size, 3))
           remove:
             - ability:beastly-strength
+            - ability:improved-strength
             - ability:giant-strength
+            - ability:supernatural-strength
+          trigger: updateDocument
+          type: toggleChildren
+        - _id: b7dc74afdec1a704
+          add:
+            - ability:improved-strength
+          qualifier: and(gte(@species.size, 4), lt(@species.size, 6))
+          remove:
+            - ability:beastly-strength
+            - ability:normal-strength
+            - ability:giant-strength
+            - ability:supernatural-strength
+          trigger: updateDocument
+          type: toggleChildren
+        - _id: 37634d0e6b2fae07
+          add:
+            - ability:giant-strength
+          qualifier: and(gte(@species.size, 6), lt(@species.size, 8))
+          remove:
+            - ability:beastly-strength
+            - ability:normal-strength
             - ability:improved-strength
             - ability:supernatural-strength
           trigger: updateDocument
@@ -461,20 +489,9 @@ items:
           qualifier: and(gte(@species.size, 8), lt(@species.size, 99))
           remove:
             - ability:beastly-strength
-            - ability:giant-strength
-            - ability:improved-strength
             - ability:normal-strength
-          trigger: updateDocument
-          type: toggleChildren
-        - _id: b7dc74afdec1a704
-          add:
             - ability:improved-strength
-          qualifier: and(gte(@species.size, 4), lt(@species.size, 6))
-          remove:
-            - ability:beastly-strength
             - ability:giant-strength
-            - ability:normal-strength
-            - ability:supernatural-strength
           trigger: updateDocument
           type: toggleChildren
       br: 6

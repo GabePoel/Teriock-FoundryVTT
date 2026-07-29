@@ -58,6 +58,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -98,11 +99,13 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 7OuG6efyOs2VWpp3
               activeQualifier: not(@status.frozen)
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -272,6 +275,7 @@ items:
             - _id: cXSvkQbwFoO3fFtf
               activeQualifier: not(@status.down)
               category: elements
+              img: null
               type: hexseal
               value: storm
           competence:
@@ -384,6 +388,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -539,10 +544,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (@h)d4[magic ice]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 09ed285450c5de7b
               executor: false
@@ -628,6 +635,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -712,8 +720,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d6[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -776,8 +786,8 @@ items:
           overview:
             proficient: >-
               <p>You also know what <i>type</i> of @Identifier[keyword:illusionary]{illusion} it is (Minor, Full, or
-              Greater) as well as the DC needed to @Identifier[ability:disbelieve]{Disbelieve} it. This does not count
-              as "disbelieving" the illusion.</p>
+              Greater) as well as the @Identifier[core:difficulty-class]{DC} needed to
+              @Identifier[ability:disbelieve]{Disbelieve} it. This does not count as "disbelieving" the illusion.</p>
           piercing:
             raw: 2
           powerSources:
@@ -884,8 +894,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

@@ -149,6 +149,7 @@ items:
             - _id: xZIxOJyyEtQRrD73
               activeQualifier: not(@status.down)
               category: elements
+              img: null
               type: immunity
               value: flame
           competence:
@@ -256,11 +257,16 @@ items:
             - _id: Hd5o6s1SdA8C7IfT
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: true
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
               executor: false
@@ -284,9 +290,10 @@ items:
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
-              @Identifier[core:feat-interaction]{save} is greater than your @Wiki[Core:Passive Attributes]{passive}
-              @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden DC.
-              If not, use your @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
+              @Identifier[core:feat-interaction]{save} is greater than your
+              @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak} (10 + 2 ×
+              @Identifier[core:sneak]{SNK}), then you use it as your hidden @Identifier[core:difficulty-class]{DC}. If
+              not, use your @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
           powerSources:
             - martial
           range:
@@ -482,10 +489,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (@h)d4[magic ice]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 09ed285450c5de7b
               executor: false
@@ -603,8 +612,9 @@ items:
             base: >-
               <p>You crawl at @Identifier[core:movement-speed]{half speed} and can @Identifier[ability:move]{Move} at
               @Identifier[core:movement-speed]{half speed} speed while @Identifier[condition:hidden]{hidden}.
-              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a DC 10
-              @Identifier[core:sneak]{SNK} @Identifier[core:feat-interaction]{feat save} to keep from breaking your
+              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a
+              @Identifier[core:difficulty-class]{DC} 10 @Identifier[core:sneak]{SNK}
+              @Identifier[core:feat-interaction]{feat save} to keep from breaking your
               @Identifier[condition:hidden]{hiding}.</p>
             proficient: >-
               <p>You crawl at @Identifier[core:movement-speed]{full speed} and can @Identifier[ability:move]{Move} at
@@ -637,6 +647,7 @@ items:
             - _id: F2M0w5nw61kVua0H
               activeQualifier: not(@status.down)
               category: elements
+              img: null
               type: immunity
               value: storm
           competence:
@@ -712,11 +723,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -725,7 +745,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -798,6 +820,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -839,6 +862,7 @@ items:
           affinities:
             - _id: uevhIJEJYaY0sz5X
               category: other
+              img: null
               type: immunity
               value: Non-Magical Non-Silver Damage
           competence:
@@ -914,14 +938,17 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
+              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
+              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -1013,10 +1040,12 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
+              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
+              img: null
               type: immunity
               value: frightened
           competence:
@@ -1059,10 +1088,14 @@ items:
             - _id: iAyFzPzJgTNeDbbH
               consumeStatDice: true
               forHarm: false
+              substitution: ""
+              trigger: null
               type: revitalize
             - _id: 157afc517847f562
+              display: {}
               formula: 1d8[mana]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1

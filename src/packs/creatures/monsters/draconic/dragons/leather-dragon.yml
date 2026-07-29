@@ -206,6 +206,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -250,6 +251,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -294,6 +296,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 7400b41f20d9f100
               all: false
@@ -301,12 +304,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -315,12 +326,16 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (2 * @h)d10[magic]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -537,16 +552,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -988,6 +1009,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1402,6 +1424,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1479,6 +1502,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1524,11 +1548,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1537,7 +1570,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1612,11 +1647,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1625,7 +1669,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1738,6 +1784,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -2491,29 +2538,37 @@ items:
               automatic: true
               competencies:
                 - 0
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
                 identifiers:
                   - ability:drop-prone
                   - ability:stand-up
+                qualifier: ""
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
             - _id: c3tMiZNqKXm8sQNW
               all: false
               automatic: true
               competencies:
                 - 1
                 - 2
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
                 identifiers:
                   - ability:drop-prone
                   - ability:move
                   - ability:stand-up
+                qualifier: ""
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: self
@@ -2561,6 +2616,7 @@ items:
         system:
           automations:
             - _id: 9b7d937fb93aaace
+              display: {}
               macro: Compendium.teriock.execution.Macro.UqkWyQDB563ezNf8
               trigger: preExecute
               type: abilityMacro
@@ -2571,12 +2627,17 @@ items:
               data: >-
                 {"system":{"limitation":"<p>You only get the benefits of [[lookup name]] against creatures of the chosen
                 species.</p>"}}
+              display: {}
               identifiers:
                 - ability:flanking
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
             - _id: ee273265cebdd16d
               all: false
               attachDocuments: true
@@ -2584,12 +2645,17 @@ items:
               data: >-
                 {"system":{"limitation":"<p>You can only use [[lookup name]] against the chosen
                 species.</p>","costs":{"tweaks":{"gifted":1}}}}
+              display: {}
               identifiers:
                 - ability:snare
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: self
@@ -2637,8 +2703,10 @@ items:
               automatic: true
               bonus: "0"
               multi: false
+              threshold: null
               tradecrafts:
                 - hunter
+              trigger: null
               type: tradecraft
           competence:
             raw: 1
@@ -2807,12 +2875,15 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 2aMxINqwqega0QYr
               activeQualifier: "@status.down"
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1
@@ -2857,6 +2928,7 @@ items:
               activeQualifier: "@status.down"
               amount: 1
               category: effectTypes
+              img: null
               type: takeDeboost
               value: damaging
           competence:
@@ -2897,6 +2969,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: unconscious
@@ -2905,6 +2978,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Dropping From Negative MP
@@ -2952,11 +3026,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: fssE9eYY29PbhNon
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1

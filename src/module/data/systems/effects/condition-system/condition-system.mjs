@@ -4,6 +4,7 @@ import { objectMap } from "../../../../helpers/utils.mjs";
 import * as dataMixins from "../../../mixins/_module.mjs";
 import * as systemMixins from "../../mixins/_module.mjs";
 import BaseEffectSystem from "../base-effect-system/base-effect-system.mjs";
+import { toCamelCase } from "../../../../helpers/string.mjs";
 
 /**
  * Condition-specific effect data model.
@@ -75,7 +76,9 @@ export default class ConditionSystem
     if (yes === false) { return false; }
 
     // If this is a known condition, have it use the static ID.
-    if (Object.keys(TERIOCK.content.conditions).includes(data?.system?.identifier)) { options.keepId = true; }
+    if (
+      data?.system?.identifier && Object.keys(TERIOCK.statuses.conditions).includes(toCamelCase(data.system.identifier))
+    ) { options.keepId = true; }
     if (data.disabled === true) { return false; }
   }
 

@@ -59,6 +59,7 @@ items:
             - _id: 3Ek9P1OLigJEFmkk
               activeQualifier: not(@status.down)
               category: elements
+              img: null
               type: hexseal
               value: life
           competence:
@@ -97,6 +98,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -137,11 +139,13 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 7OuG6efyOs2VWpp3
               activeQualifier: not(@status.frozen)
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -384,6 +388,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -460,11 +465,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:hibernation
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: sight
@@ -483,6 +493,7 @@ items:
               statuses:
                 absent:
                   - down
+                present: []
               type: status
             - _id: d1f6b6eaa581aa10
               method: automatic
@@ -524,10 +535,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (@h)d4[magic holy]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 747b3e9c9b617af6
               executor: false
@@ -606,6 +619,8 @@ items:
               heighten:
                 - 0
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
             - _id: SzYkTqcVV5k6LOGg
               consumeStatDice: false
@@ -613,6 +628,8 @@ items:
               heighten:
                 - 1
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1
@@ -663,11 +680,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: okAIhhAxPRM1XaZt
               consumeStatDice: false
               forHarm: true
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1
@@ -851,8 +871,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

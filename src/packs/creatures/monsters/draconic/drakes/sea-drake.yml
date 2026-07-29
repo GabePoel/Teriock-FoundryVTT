@@ -313,11 +313,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -326,10 +335,14 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 2d10[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -436,6 +449,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -481,11 +495,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -494,7 +517,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -815,6 +840,7 @@ items:
               common:
                 - standardDamage
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
@@ -856,6 +882,12 @@ items:
         img: systems/teriock/src/icons/abilities/skill-share.webp
         name: Skill Share
         system:
+          affinities:
+            - _id: M5H0FZSqdzBuueLq
+              category: abilities
+              img: ""
+              type: incapability
+              value: skillShare
           automations:
             - _id: pZTzCOb2arggrQQw
               all: false
@@ -863,41 +895,60 @@ items:
               automatic: false
               competencies:
                 - 0
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: DKrkwLcllE5f9bjQ
               all: false
               attachDocuments: true
               automatic: false
               competencies:
                 - 1
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @p))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: LTtFZkqLk2QnwOfK
               all: false
               attachDocuments: true
               automatic: false
               competencies:
                 - 2
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @f))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: XdlHsYQu4RHDULLu
               competence:
                 raw: 0
+              data: "{}"
+              display:
+                label: ""
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
+              rollBonus: ""
               setCompetence: override
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -1043,20 +1094,26 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
+              display: {}
               formula: 1d8
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
+              display: {}
               formula: 1d10
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d12
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

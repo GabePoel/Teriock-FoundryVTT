@@ -48,6 +48,7 @@ items:
           affinities:
             - _id: IX1B1awspdkdHmV9
               category: damageTypes
+              img: null
               type: immunity
               value: fire
           competence:
@@ -125,11 +126,16 @@ items:
             - _id: Hd5o6s1SdA8C7IfT
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: true
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
               executor: false
@@ -154,9 +160,10 @@ items:
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
-              @Identifier[core:feat-interaction]{save} is greater than your @Wiki[Core:Passive Attributes]{passive}
-              @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden DC.
-              If not, use your @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
+              @Identifier[core:feat-interaction]{save} is greater than your
+              @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak} (10 + 2 ×
+              @Identifier[core:sneak]{SNK}), then you use it as your hidden @Identifier[core:difficulty-class]{DC}. If
+              not, use your @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
           powerSources:
             - martial
           range:
@@ -191,6 +198,7 @@ items:
               category: damageTypes
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: holy
@@ -361,12 +369,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: iCn9pFDIGFJWxm6H
               activeQualifier: and(not(@status.burned), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -476,8 +486,9 @@ items:
             base: >-
               <p>You crawl at @Identifier[core:movement-speed]{half speed} and can @Identifier[ability:move]{Move} at
               @Identifier[core:movement-speed]{half speed} speed while @Identifier[condition:hidden]{hidden}.
-              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a DC 10
-              @Identifier[core:sneak]{SNK} @Identifier[core:feat-interaction]{feat save} to keep from breaking your
+              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a
+              @Identifier[core:difficulty-class]{DC} 10 @Identifier[core:sneak]{SNK}
+              @Identifier[core:feat-interaction]{feat save} to keep from breaking your
               @Identifier[condition:hidden]{hiding}.</p>
             proficient: >-
               <p>You crawl at @Identifier[core:movement-speed]{full speed} and can @Identifier[ability:move]{Move} at
@@ -509,6 +520,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:

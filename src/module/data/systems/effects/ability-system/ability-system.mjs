@@ -83,6 +83,7 @@ export default class AbilitySystem
       affinities.HexproofAffinity,
       affinities.HexsealAffinity,
       affinities.ImmunityAffinity,
+      affinities.IncapabilityAffinity,
       affinities.ResistanceAffinity,
       affinities.TakeBoostAffinity,
       affinities.TakeDeboostAffinity,

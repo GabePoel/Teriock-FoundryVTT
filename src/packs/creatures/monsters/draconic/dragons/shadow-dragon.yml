@@ -244,6 +244,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -288,6 +289,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -456,6 +458,7 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 7400b41f20d9f100
               all: false
@@ -463,12 +466,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -477,10 +488,14 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (20 + 5 * @h)[lethal magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -534,16 +549,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -985,6 +1006,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1399,6 +1421,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1476,6 +1499,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1521,11 +1545,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1534,7 +1567,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1609,11 +1644,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1622,7 +1666,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1963,6 +2009,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Being Surprised (Inside Towns)
@@ -2013,18 +2060,21 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
               display:
                 label: Roll 5 Damage
               formula: 5[lethal]
               impact: damage
+              trigger: null
               type: roll
             - _id: tnG4HOJcOpBMkG4W
               display:
                 label: Roll 10 Damage
               formula: 10[lethal]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2075,6 +2125,7 @@ items:
         system:
           automations:
             - _id: 14cf30d977e3b585
+              display: {}
               macro: Compendium.teriock.execution.Macro.090fd08ae26477da
               trigger: preExecute
               type: abilityMacro
@@ -2342,12 +2393,17 @@ items:
                 etc.) that you prepare.</p>","limitation":"<p>You may only [[lookup name]] in the location you have
                 prepared and you do not get the attribute improvement from this ability. You also do not remain
                 @Identifier[condition:hidden]{hidden} if you leave this location.</p>"}}
+              display: {}
               identifiers:
                 - ability:hide
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 3M3REt0RFM6rEUgs
               all: false
               angle: "60"
@@ -2362,20 +2418,30 @@ items:
                   }
                 }
               deleteOnTurnChange: false
+              display: {}
               excludeToken: true
               expandWithToken: false
               height: "5"
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               overrideData: true
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: rectangle
               restriction:
                 enabled: false
                 priority: 0
                 type: move
               targeting: false
+              trigger: null
               type: region
+              uuids: []
               visibility: 2
               width: "5"
           competence:
@@ -2681,21 +2747,27 @@ items:
               type: childChange
               value: 1d8
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 1d4
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
                 - 2
+              display: {}
               formula: 1d6
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d8
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2830,11 +2902,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:active-bow-out
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: sight
@@ -2967,20 +3044,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:poison-item
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: bfc1d19721518c86
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:poison-strike
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:

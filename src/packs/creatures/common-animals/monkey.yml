@@ -143,6 +143,7 @@ items:
               common:
                 - standardDamage
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
@@ -368,6 +369,7 @@ items:
               common:
                 - standardDamage
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
@@ -587,22 +589,13 @@ items:
         <p>@Identifier[ability:normal-strength]{Normal Strength} if at least @Identifier[core:size]{size} 2.
         @Identifier[ability:beastly-strength]{Beastly Strength} if at least @Identifier[core:size]{size} 3.</p>
       automations:
-        - _id: 1d5376fc7aec0a48
-          add:
-            - ability:beastly-strength
-          qualifier: and(gte(@species.size, 3), lt(@species.size, 99))
-          remove:
-            - ability:low-strength
-            - ability:normal-strength
-          trigger: updateDocument
-          type: toggleChildren
         - _id: 554a612832c648e9
           add:
             - ability:normal-strength
           qualifier: and(gte(@species.size, 2), lt(@species.size, 3))
           remove:
-            - ability:beastly-strength
             - ability:low-strength
+            - ability:beastly-strength
           trigger: updateDocument
           type: toggleChildren
         - _id: e052984bed228186
@@ -610,8 +603,17 @@ items:
             - ability:low-strength
           qualifier: and(gte(@species.size, 0), lt(@species.size, 2))
           remove:
-            - ability:beastly-strength
             - ability:normal-strength
+            - ability:beastly-strength
+          trigger: updateDocument
+          type: toggleChildren
+        - _id: 1d5376fc7aec0a48
+          add:
+            - ability:beastly-strength
+          qualifier: and(gte(@species.size, 3), lt(@species.size, 99))
+          remove:
+            - ability:normal-strength
+            - ability:low-strength
           trigger: updateDocument
           type: toggleChildren
       br: 6

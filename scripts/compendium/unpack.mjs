@@ -152,7 +152,6 @@ function transformFolderName(doc) {
  */
 function cleanEntry(doc) {
   cleanDocument(doc);
-  // if (typeof doc._id !== "string") { doc._id = doc._id.toString() }
   if (doc.system) {
     for (const key of PSEUDO_COLLECTION_KEYS) {
       if (doc.system[key]) {
@@ -269,11 +268,6 @@ function sortMechanics(mechanics) {
     acc[arr.join("")] = key;
     return acc;
   }, {});
-
-  // TODO: Remove this once I'm confident all expirations are properly migrated
-  if (Object.keys(mechanics).some((k) => k.length !== 16)) {
-    return null;
-  }
 
   const sortableArray = Object.values(mechanics).map((m) => {
     m.competencies ??= [0, 1, 2];

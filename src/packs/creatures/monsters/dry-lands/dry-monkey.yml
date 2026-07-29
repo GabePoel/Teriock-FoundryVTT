@@ -65,6 +65,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Dropping From Negative HP
@@ -72,6 +73,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: unconscious
@@ -115,6 +117,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Non-Self Conjured Spells
@@ -157,11 +160,16 @@ items:
             - _id: Hd5o6s1SdA8C7IfT
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: true
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
               executor: false
@@ -185,9 +193,10 @@ items:
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
-              @Identifier[core:feat-interaction]{save} is greater than your @Wiki[Core:Passive Attributes]{passive}
-              @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden DC.
-              If not, use your @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
+              @Identifier[core:feat-interaction]{save} is greater than your
+              @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak} (10 + 2 ×
+              @Identifier[core:sneak]{SNK}), then you use it as your hidden @Identifier[core:difficulty-class]{DC}. If
+              not, use your @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
           powerSources:
             - martial
           range:
@@ -432,8 +441,9 @@ items:
             base: >-
               <p>You crawl at @Identifier[core:movement-speed]{half speed} and can @Identifier[ability:move]{Move} at
               @Identifier[core:movement-speed]{half speed} speed while @Identifier[condition:hidden]{hidden}.
-              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a DC 10
-              @Identifier[core:sneak]{SNK} @Identifier[core:feat-interaction]{feat save} to keep from breaking your
+              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a
+              @Identifier[core:difficulty-class]{DC} 10 @Identifier[core:sneak]{SNK}
+              @Identifier[core:feat-interaction]{feat save} to keep from breaking your
               @Identifier[condition:hidden]{hiding}.</p>
             proficient: >-
               <p>You crawl at @Identifier[core:movement-speed]{full speed} and can @Identifier[ability:move]{Move} at
@@ -724,21 +734,27 @@ items:
               type: childChange
               value: 1d8
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 1d4
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
                 - 2
+              display: {}
               formula: 1d6
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d8
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

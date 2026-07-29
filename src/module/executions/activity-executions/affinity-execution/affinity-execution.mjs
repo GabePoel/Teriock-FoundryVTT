@@ -54,11 +54,7 @@ export default class AffinityExecution extends BaseExecution {
    * @returns {string}
    */
   get img() {
-    if (this.affinity?.img) { return this.affinity.img; }
-    return getImage(
-      TERIOCK.config.affinity.types[this.type]?.imgCategory,
-      parseIdentifier(TERIOCK.config.affinity.types[this.type]?.identifier).identifier,
-    );
+    return this.affinity?.img ?? TERIOCK.config.affinity.types[this.type]?.img;
   }
 
   /** @inheritDoc */

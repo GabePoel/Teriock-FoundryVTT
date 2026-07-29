@@ -244,6 +244,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -288,6 +289,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -463,12 +465,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -477,10 +487,14 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (4 + 2 * @h)d10[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -534,16 +548,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -1015,6 +1035,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1429,6 +1450,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1588,6 +1610,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1633,11 +1656,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1646,7 +1678,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1721,11 +1755,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1734,7 +1777,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1987,8 +2032,10 @@ items:
               common:
                 - awaken
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: A9CRT8qXUznJPqK1
+              display: {}
               distance: "10"
               movementAction: walk
               origin: executor
@@ -2000,11 +2047,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: false
@@ -2013,7 +2069,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           delivery: aura
@@ -2167,6 +2225,7 @@ items:
               common:
                 - awaken
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -2244,6 +2303,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: snared
@@ -2251,6 +2311,7 @@ items:
               category: damageTypes
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: hack
@@ -2258,6 +2319,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: immobilized
@@ -2377,6 +2439,7 @@ items:
               common:
                 - standardDamage
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
@@ -2418,6 +2481,12 @@ items:
         img: systems/teriock/src/icons/abilities/skill-share.webp
         name: Skill Share
         system:
+          affinities:
+            - _id: M5H0FZSqdzBuueLq
+              category: abilities
+              img: ""
+              type: incapability
+              value: skillShare
           automations:
             - _id: pZTzCOb2arggrQQw
               all: false
@@ -2425,41 +2494,60 @@ items:
               automatic: false
               competencies:
                 - 0
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: DKrkwLcllE5f9bjQ
               all: false
               attachDocuments: true
               automatic: false
               competencies:
                 - 1
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @p))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: LTtFZkqLk2QnwOfK
               all: false
               attachDocuments: true
               automatic: false
               competencies:
                 - 2
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @f))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: XdlHsYQu4RHDULLu
               competence:
                 raw: 0
+              data: "{}"
+              display:
+                label: ""
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
+              rollBonus: ""
               setCompetence: override
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -2605,20 +2693,26 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
+              display: {}
               formula: 1d8
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
+              display: {}
               formula: 1d10
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d12
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -3025,6 +3119,7 @@ items:
               common:
                 - standardDamage
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
@@ -3077,10 +3172,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -3118,8 +3209,10 @@ items:
               automatic: true
               bonus: "0"
               multi: false
+              threshold: null
               tradecrafts:
                 - mariner
+              trigger: null
               type: tradecraft
           competence:
             raw: 1
@@ -3174,11 +3267,14 @@ items:
               attachDocuments: true
               automatic: true
               children:
+                data: "{}"
                 enabled: true
                 identifiers:
                   - property:improvised
                 overrideData: false
+                uuids: []
               data: "{\"name\":\"Improvised @base\"}"
+              display: {}
               identifiers:
                 - equipment:anchor
                 - equipment:ladder
@@ -3187,10 +3283,14 @@ items:
                 - equipment:rudder
                 - equipment:sail
                 - equipment:wheel
+              local:
+                identifiers: []
+                qualifier: ""
               multi: true
               overrideData: true
               separate: true
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: self

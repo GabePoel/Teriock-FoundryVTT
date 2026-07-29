@@ -38,6 +38,7 @@ items:
               common:
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: ZlgI0KUafWT3wE27
               competence:
@@ -45,12 +46,16 @@ items:
               competencies:
                 - 0
                 - 1
+              data: "{}"
+              display: {}
               makeEffect: true
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
             - _id: 6v7WhWcAO2fARRYl
               amount: 999999
@@ -62,6 +67,7 @@ items:
               impact: revitalizing
               morganti: false
               showDialog: false
+              trigger: null
               type: take
             - _id: YHHJxY54wT2k778U
               amount: 999999
@@ -73,6 +79,7 @@ items:
               impact: healing
               morganti: false
               showDialog: false
+              trigger: null
               type: take
           competence:
             raw: 1
@@ -152,6 +159,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Non-Critical Attacks
@@ -492,12 +500,16 @@ items:
                 raw: 0
               identifiers:
                 - species:zombie
+              img: null
+              level: null
               multi: false
               override:
                 - art
               reset:
                 - hp
                 - mp
+              ring: null
+              ringImg: null
               setCompetence: override
               suppress:
                 - body
@@ -505,6 +517,7 @@ items:
                 - rank
                 - species
               type: transformation
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -607,10 +620,12 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
+              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
+              img: null
               type: immunity
               value: frightened
           competence:
@@ -652,14 +667,17 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
+              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
+              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -704,6 +722,7 @@ items:
           affinities:
             - _id: uevhIJEJYaY0sz5X
               category: other
+              img: null
               type: immunity
               value: Non-Magical Non-Silver Damage
           competence:
@@ -743,10 +762,14 @@ items:
             - _id: iAyFzPzJgTNeDbbH
               consumeStatDice: true
               forHarm: false
+              substitution: ""
+              trigger: null
               type: revitalize
             - _id: 157afc517847f562
+              display: {}
               formula: 1d8[mana]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -873,8 +896,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic fire]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -921,10 +946,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d8[fire magic]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1002,6 +1029,7 @@ items:
           automations:
             - _id: 32BRYYbao0OafqCz
               attribute: mov
+              bonus: ""
               threshold: 10 + @c
               type: feat
             - _id: YxFIjavyUBnxf6OV
@@ -1010,19 +1038,31 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: false
                 priority: 0
                 type: move
               targeting: true
+              trigger: null
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           costs:
@@ -1058,17 +1098,17 @@ items:
               <p>The next @Wiki[Category:Conjured spells]{conjured} @Wiki[Category:Missile delivery spells]{missile
               spell} cast on the target @Identifier[core:detonate-expansion]{detonates} (emanates in a 10 foot radius
               @Identifier[core:aura-delivery]{aura} from the target). This is a @Identifier[core:movement]{MOV}
-              @Identifier[core:feat-interaction]{feat save} using <i>your</i> DC. Do not add your
-              @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC. This
-              @Identifier[core:detonate-expansion]{detonating} @Identifier[core:aura-delivery]{aura} is
-              @Wiki[Category:Loud effects]{loud}.</p>
+              @Identifier[core:feat-interaction]{feat save} using <i>your</i> @Identifier[core:difficulty-class]{DC}. Do
+              not add your @Identifier[core:proficiency-bonus]{proficiency bonus} to the
+              @Identifier[core:difficulty-class]{DC}. This @Identifier[core:detonate-expansion]{detonating}
+              @Identifier[core:aura-delivery]{aura} is @Wiki[Category:Loud effects]{loud}.</p>
             fluent: >-
-              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the
-              @Identifier[core:feat-interaction]{feat save DC}.</p>
+              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the [[:Core:Feat
+              Interaction|feat save @Identifier[core:difficulty-class]{DC}]].</p>
             proficient: >-
-              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the
-              @Identifier[core:feat-interaction]{feat save DC} and you may @Identifier[core:targets]{target} creatures
-              other than yourself.</p>
+              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the [[:Core:Feat
+              Interaction|feat save @Identifier[core:difficulty-class]{DC}]] and you may
+              @Identifier[core:targets]{target} creatures other than yourself.</p>
           powerSources:
             - magical
           range:
@@ -1121,11 +1161,16 @@ items:
             - _id: FoFDvat2UIccUJn4
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: true
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -1171,11 +1216,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:flaming
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 72ce567009179bea
               duration:
                 raw: "@h"
@@ -1262,8 +1312,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

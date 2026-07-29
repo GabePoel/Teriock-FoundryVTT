@@ -89,11 +89,7 @@ export default class BaseAffinity extends CritMechanicMixin(MechanicPseudoDocume
   /** @inheritDoc */
   prepareData() {
     if (!this.img) {
-      const fallback = this.document?.img
-        ?? getImage(
-          TERIOCK.config.affinity.types[this.type]?.imgCategory,
-          parseIdentifier(TERIOCK.config.affinity.types[this.type]?.identifier).identifier,
-        );
+      const fallback = this.document?.img ?? TERIOCK.config.affinity.types[this.type].img;
       if (this.category === "other") { this.img = fallback; }
       else { this.img = getImage(
           TERIOCK.config.affinity.categories[this.category]?.imgCategory,

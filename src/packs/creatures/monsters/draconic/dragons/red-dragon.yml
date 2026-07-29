@@ -244,6 +244,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -288,6 +289,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -458,12 +460,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -472,10 +482,14 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (4 + 2 * @h)d10[magic fire]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -530,16 +544,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -981,6 +1001,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1395,6 +1416,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1472,6 +1494,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1517,11 +1540,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1530,7 +1562,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1605,11 +1639,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1618,7 +1661,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1954,10 +1999,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2266,6 +2307,7 @@ items:
               category: damageTypes
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: fire
@@ -2278,8 +2320,10 @@ items:
               type: childChange
               value: 1d4[fire magic]
             - _id: dYuGyhEwQceIhEHF
+              display: {}
               formula: 1d4[fire magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2335,6 +2379,7 @@ items:
           _sup: cirogt3aILQXokIv
           automations:
             - _id: hEOQSeJ8HpNRH1gY
+              display: {}
               macro: Compendium.teriock.execution.Macro.cd1820f5e1a2f6fd
               trigger: executeSpell
               type: abilityMacro
@@ -2449,20 +2494,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:burning-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: d032756e5fee7434
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:inferno-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: E2w7M2N45twcSWyA
               light:
                 alpha: 0.5
@@ -2569,8 +2624,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic fire]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2617,10 +2674,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d8[fire magic]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2698,6 +2757,7 @@ items:
           automations:
             - _id: 32BRYYbao0OafqCz
               attribute: mov
+              bonus: ""
               threshold: 10 + @c
               type: feat
             - _id: YxFIjavyUBnxf6OV
@@ -2706,19 +2766,31 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: false
                 priority: 0
                 type: move
               targeting: true
+              trigger: null
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           costs:
@@ -2754,17 +2826,17 @@ items:
               <p>The next @Wiki[Category:Conjured spells]{conjured} @Wiki[Category:Missile delivery spells]{missile
               spell} cast on the target @Identifier[core:detonate-expansion]{detonates} (emanates in a 10 foot radius
               @Identifier[core:aura-delivery]{aura} from the target). This is a @Identifier[core:movement]{MOV}
-              @Identifier[core:feat-interaction]{feat save} using <i>your</i> DC. Do not add your
-              @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC. This
-              @Identifier[core:detonate-expansion]{detonating} @Identifier[core:aura-delivery]{aura} is
-              @Wiki[Category:Loud effects]{loud}.</p>
+              @Identifier[core:feat-interaction]{feat save} using <i>your</i> @Identifier[core:difficulty-class]{DC}. Do
+              not add your @Identifier[core:proficiency-bonus]{proficiency bonus} to the
+              @Identifier[core:difficulty-class]{DC}. This @Identifier[core:detonate-expansion]{detonating}
+              @Identifier[core:aura-delivery]{aura} is @Wiki[Category:Loud effects]{loud}.</p>
             fluent: >-
-              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the
-              @Identifier[core:feat-interaction]{feat save DC}.</p>
+              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the [[:Core:Feat
+              Interaction|feat save @Identifier[core:difficulty-class]{DC}]].</p>
             proficient: >-
-              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the
-              @Identifier[core:feat-interaction]{feat save DC} and you may @Identifier[core:targets]{target} creatures
-              other than yourself.</p>
+              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the [[:Core:Feat
+              Interaction|feat save @Identifier[core:difficulty-class]{DC}]] and you may
+              @Identifier[core:targets]{target} creatures other than yourself.</p>
           powerSources:
             - magical
           range:
@@ -2794,11 +2866,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:flaming
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 72ce567009179bea
               duration:
                 raw: "@h"
@@ -2880,11 +2957,16 @@ items:
             - _id: FoFDvat2UIccUJn4
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: true
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -3094,10 +3176,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -3189,12 +3267,16 @@ items:
             - _id: VX8HRH0mBRK2ACXr
               all: false
               automatic: false
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @spell, @time.a1)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -3391,20 +3473,20 @@ items:
             - _id: pMFd0Bm7jcnG7BdF
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
                 identifiers:
                   - ability:fire-ball
                   - ability:flame-ray
+                qualifier: ""
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -3438,12 +3520,16 @@ items:
             - _id: bJn9LIvdgJ11S1tr
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@spell, @delivery.missile, @pro)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -3588,10 +3674,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -3670,16 +3752,18 @@ items:
             base: >-
               <p>In addition to the custom rotator spells you create, you can learn @Wiki[Category:Rotator
               spells]{spells} created by others. When you come across a fully created spell using only words you are
-              @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + @Identifier[core:elder-sorcery]{OP}
-              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save} to attempt to learn it
-              over the course of a @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your
-              rotator spell list. If you fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn
-              that spell again. The @Identifier[core:game-master]{GM} may modify the DC based on the spell's complexity,
-              your knowledge of the spell, any special training you receive, if the spell's creator is there to assist
-              you, or for any other factors they see fit. You may also attempt to learn words that you come across as
-              long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
-              @Identifier[core:game-master]{GM} may adjust the DC for these as they see fit as well, but the default is
-              DC 15 + OP @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
+              @Identifier[core:fluency-bonus]{fluent} in, can make a @Identifier[core:difficulty-class]{DC} 12 +
+              @Identifier[core:elder-sorcery]{OP} @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save} to attempt to learn it over the course of a
+              @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your rotator spell list. If you
+              fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell again. The
+              @Identifier[core:game-master]{GM} may modify the @Identifier[core:difficulty-class]{DC} based on the
+              spell's complexity, your knowledge of the spell, any special training you receive, if the spell's creator
+              is there to assist you, or for any other factors they see fit. You may also attempt to learn words that
+              you come across as long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+              @Identifier[core:game-master]{GM} may adjust the @Identifier[core:difficulty-class]{DC} for these as they
+              see fit as well, but the default is @Identifier[core:difficulty-class]{DC} 15 + OP
+              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
             proficient: >-
               <p>You are @Identifier[core:fluency-bonus]{fluent} in @Identifier[ability:elder-sorcery-creation]{Elder
               Sorcery Creation}, @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder Sorcery Words}, and
@@ -3710,20 +3794,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:magelore
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: TUjBJXUmGzXEFt79
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:magic
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: WDPfYxMp2lWJxkW4
               all: false
               attachDocuments: true
@@ -3744,12 +3838,16 @@ items:
                     }
                   }
                 }
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @spell, not(@es), @delivery.ray)
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
             - _id: Tu4qrPot571fIQao
               changes:
                 - key: system.tier.raw
@@ -3838,6 +3936,7 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 3a62dd96319ca135
               executor: false
@@ -3939,8 +4038,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

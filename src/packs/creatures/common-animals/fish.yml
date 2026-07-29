@@ -88,11 +88,16 @@ items:
             - _id: Hd5o6s1SdA8C7IfT
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: true
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
               executor: false
@@ -116,9 +121,10 @@ items:
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
-              @Identifier[core:feat-interaction]{save} is greater than your @Wiki[Core:Passive Attributes]{passive}
-              @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden DC.
-              If not, use your @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
+              @Identifier[core:feat-interaction]{save} is greater than your
+              @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak} (10 + 2 ×
+              @Identifier[core:sneak]{SNK}), then you use it as your hidden @Identifier[core:difficulty-class]{DC}. If
+              not, use your @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
           powerSources:
             - martial
           range:
@@ -495,26 +501,15 @@ items:
         @Identifier[ability:beastly-strength]{Beastly Strength} if at least @Identifier[core:size]{size} 4.
         @Identifier[ability:improved-strength]{Improved Strength} if at least @Identifier[core:size]{size} 5.</p>
       automations:
-        - _id: 1d5376fc7aec0a48
+        - _id: e052984bed228186
           add:
-            - ability:beastly-strength
-          qualifier: and(gte(@species.size, 4), lt(@species.size, 5))
-          remove:
-            - ability:improved-strength
             - ability:low-strength
-            - ability:normal-strength
-            - ability:tiny-strength
-          trigger: updateDocument
-          type: toggleChildren
-        - _id: 554a612832c648e9
-          add:
-            - ability:normal-strength
-          qualifier: and(gte(@species.size, 2), lt(@species.size, 4))
+          qualifier: and(gte(@species.size, 1), lt(@species.size, 2))
           remove:
+            - ability:tiny-strength
+            - ability:normal-strength
             - ability:beastly-strength
             - ability:improved-strength
-            - ability:low-strength
-            - ability:tiny-strength
           trigger: updateDocument
           type: toggleChildren
         - _id: a9b217158f9a89e2
@@ -522,10 +517,32 @@ items:
             - ability:tiny-strength
           qualifier: and(gte(@species.size, 0), lt(@species.size, 1))
           remove:
-            - ability:beastly-strength
-            - ability:improved-strength
             - ability:low-strength
             - ability:normal-strength
+            - ability:beastly-strength
+            - ability:improved-strength
+          trigger: updateDocument
+          type: toggleChildren
+        - _id: 554a612832c648e9
+          add:
+            - ability:normal-strength
+          qualifier: and(gte(@species.size, 2), lt(@species.size, 4))
+          remove:
+            - ability:low-strength
+            - ability:tiny-strength
+            - ability:beastly-strength
+            - ability:improved-strength
+          trigger: updateDocument
+          type: toggleChildren
+        - _id: 1d5376fc7aec0a48
+          add:
+            - ability:beastly-strength
+          qualifier: and(gte(@species.size, 4), lt(@species.size, 5))
+          remove:
+            - ability:low-strength
+            - ability:tiny-strength
+            - ability:normal-strength
+            - ability:improved-strength
           trigger: updateDocument
           type: toggleChildren
         - _id: b7dc74afdec1a704
@@ -533,21 +550,10 @@ items:
             - ability:improved-strength
           qualifier: and(gte(@species.size, 5), lt(@species.size, 99))
           remove:
-            - ability:beastly-strength
             - ability:low-strength
-            - ability:normal-strength
             - ability:tiny-strength
-          trigger: updateDocument
-          type: toggleChildren
-        - _id: e052984bed228186
-          add:
-            - ability:low-strength
-          qualifier: and(gte(@species.size, 1), lt(@species.size, 2))
-          remove:
+            - ability:normal-strength
             - ability:beastly-strength
-            - ability:improved-strength
-            - ability:normal-strength
-            - ability:tiny-strength
           trigger: updateDocument
           type: toggleChildren
       br: 1

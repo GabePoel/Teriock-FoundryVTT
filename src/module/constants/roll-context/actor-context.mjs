@@ -42,6 +42,7 @@ const actorContext = {
   ac: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.ac.label",
   ap: "TERIOCK.SYSTEMS.Attack.FIELDS.attackPenalty.label",
   av: "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.value.label",
+  "av.base": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.base.label",
   "av.nat": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.nat.label",
   "av.worn": "TERIOCK.SYSTEMS.BaseActor.FIELDS.defense.av.worn.label",
   av0: "TERIOCK.TERMS.Properties.armorVoiding",

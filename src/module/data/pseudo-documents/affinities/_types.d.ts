@@ -3,6 +3,7 @@ import {
   HexproofAffinity,
   HexsealAffinity,
   ImmunityAffinity,
+  IncapabilityAffinity,
   ResistanceAffinity,
   TakeBoostAffinity,
   TakeDeboostAffinity,
@@ -19,6 +20,7 @@ declare global {
     takeBoost: TakeBoostAffinity;
     takeDeboost: TakeDeboostAffinity;
     vulnerability: VulnerabilityAffinity;
+    incapability: IncapabilityAffinity;
   }
 
   namespace Teriock.Affinities {

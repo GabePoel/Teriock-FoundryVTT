@@ -171,6 +171,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -432,20 +433,26 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
+              display: {}
               formula: 1d6[toxic]
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
+              display: {}
               formula: 1d8[toxic]
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d10[toxic]
               impact: damage
+              trigger: null
               type: roll
             - _id: 743730f25f256b10
               executor: false
@@ -532,6 +539,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -961,6 +969,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1014,11 +1023,12 @@ items:
             unit: unlimited
           endCondition: >-
             <p>The @Identifier[condition:snared]{snare} caused by this ability does not end on its own. It can be
-            escaped by @Identifier[ability:interact]{interacting} with the web making a DC 25
-            @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat save}. This can be done either by
-            the creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The DC
-            is reduced by 1 for every additional creature of @Identifier[core:size]{size} 1 or larger that is assisting
-            the @Identifier[core:targets]{target}.</p>
+            escaped by @Identifier[ability:interact]{interacting} with the web making a
+            @Identifier[core:difficulty-class]{DC} 25 @Identifier[core:strength]{STR}
+            @Identifier[core:feat-interaction]{feat save}. This can be done either by the creature that is
+            @Identifier[condition:snared]{snared} or by another that attempts to free them. The
+            @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
+            @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
           form: normal
@@ -1060,11 +1070,12 @@ items:
             unit: unlimited
           endCondition: >-
             <p>The @Identifier[condition:snared]{snare} caused by this ability does not end on its own. It can be
-            escaped by @Identifier[ability:interact]{interacting} with the web making a DC 25
-            @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat save}. This can be done either by
-            the creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The DC
-            is reduced by 1 for every additional creature of @Identifier[core:size]{size} 1 or larger that is assisting
-            the @Identifier[core:targets]{target}.</p>
+            escaped by @Identifier[ability:interact]{interacting} with the web making a
+            @Identifier[core:difficulty-class]{DC} 25 @Identifier[core:strength]{STR}
+            @Identifier[core:feat-interaction]{feat save}. This can be done either by the creature that is
+            @Identifier[condition:snared]{snared} or by another that attempts to free them. The
+            @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
+            @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
           form: normal
@@ -1107,11 +1118,12 @@ items:
             unit: unlimited
           endCondition: >-
             <p>The @Identifier[condition:snared]{snare} caused by this ability does not end on its own. It can be
-            escaped by @Identifier[ability:interact]{interacting} with the web making a DC 25
-            @Identifier[core:strength]{STR} @Identifier[core:feat-interaction]{feat save}. This can be done either by
-            the creature that is @Identifier[condition:snared]{snared} or by another that attempts to free them. The DC
-            is reduced by 1 for every additional creature of @Identifier[core:size]{size} 1 or larger that is assisting
-            the @Identifier[core:targets]{target}.</p>
+            escaped by @Identifier[ability:interact]{interacting} with the web making a
+            @Identifier[core:difficulty-class]{DC} 25 @Identifier[core:strength]{STR}
+            @Identifier[core:feat-interaction]{feat save}. This can be done either by the creature that is
+            @Identifier[condition:snared]{snared} or by another that attempts to free them. The
+            @Identifier[core:difficulty-class]{DC} is reduced by 1 for every additional creature of
+            @Identifier[core:size]{size} 1 or larger that is assisting the @Identifier[core:targets]{target}.</p>
           executionTime:
             base: a1
           form: normal
@@ -1180,10 +1192,13 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 71e51b18552837f1
+              display: {}
               formula: (2 + @h)d6
               impact: kill
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1369,8 +1384,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic terror]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1538,12 +1555,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              hp:
-                formula: "0"
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -1621,16 +1632,18 @@ items:
             base: >-
               <p>In addition to the custom rotator spells you create, you can learn @Wiki[Category:Rotator
               spells]{spells} created by others. When you come across a fully created spell using only words you are
-              @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + @Identifier[core:elder-sorcery]{OP}
-              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save} to attempt to learn it
-              over the course of a @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your
-              rotator spell list. If you fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn
-              that spell again. The @Identifier[core:game-master]{GM} may modify the DC based on the spell's complexity,
-              your knowledge of the spell, any special training you receive, if the spell's creator is there to assist
-              you, or for any other factors they see fit. You may also attempt to learn words that you come across as
-              long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
-              @Identifier[core:game-master]{GM} may adjust the DC for these as they see fit as well, but the default is
-              DC 15 + OP @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
+              @Identifier[core:fluency-bonus]{fluent} in, can make a @Identifier[core:difficulty-class]{DC} 12 +
+              @Identifier[core:elder-sorcery]{OP} @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save} to attempt to learn it over the course of a
+              @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your rotator spell list. If you
+              fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell again. The
+              @Identifier[core:game-master]{GM} may modify the @Identifier[core:difficulty-class]{DC} based on the
+              spell's complexity, your knowledge of the spell, any special training you receive, if the spell's creator
+              is there to assist you, or for any other factors they see fit. You may also attempt to learn words that
+              you come across as long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+              @Identifier[core:game-master]{GM} may adjust the @Identifier[core:difficulty-class]{DC} for these as they
+              see fit as well, but the default is @Identifier[core:difficulty-class]{DC} 15 + OP
+              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
             proficient: >-
               <p>You are @Identifier[core:fluency-bonus]{fluent} in @Identifier[ability:elder-sorcery-creation]{Elder
               Sorcery Creation}, @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder Sorcery Words}, and
@@ -1661,6 +1674,11 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
@@ -1731,6 +1749,11 @@ items:
               all: false
               attachDocuments: false
               automatic: true
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
@@ -1911,10 +1934,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2222,20 +2241,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:animate-dead
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 66d7ecce476652ad
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:zombify
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2244,9 +2273,6 @@ items:
                 type: tag
               verbal:
                 type: tag
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             raw: "8"
@@ -2351,12 +2377,16 @@ items:
             - _id: PKZXkwmO94niPsUb
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @time.a1)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2404,20 +2434,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 3b2978862c7f9d50
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: JB09RCj8EnrKPqjG
               light:
                 alpha: 0.5
@@ -2605,8 +2645,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

@@ -902,24 +902,6 @@ system:
     <p>@Identifier[ability:supernatural-strength]{Supernatural Strength} if at least @Identifier[core:size]{size} 6.
     @Identifier[ability:monstrous-strength]{Monstrous Strength} if at least @Identifier[core:size]{size} 12.</p>
   automations:
-    - _id: 056bba8fd332660a
-      add:
-        - ability:monstrous-strength
-      qualifier: and(gte(@species.size, 12), lt(@species.size, 99))
-      remove:
-        - ability:giant-strength
-        - ability:supernatural-strength
-      trigger: updateDocument
-      type: toggleChildren
-    - _id: 37634d0e6b2fae07
-      add:
-        - ability:giant-strength
-      qualifier: and(gte(@species.size, 0), lt(@species.size, 6))
-      remove:
-        - ability:monstrous-strength
-        - ability:supernatural-strength
-      trigger: updateDocument
-      type: toggleChildren
     - _id: ab3de966a8f99c9c
       add:
         - ability:supernatural-strength
@@ -927,6 +909,24 @@ system:
       remove:
         - ability:giant-strength
         - ability:monstrous-strength
+      trigger: updateDocument
+      type: toggleChildren
+    - _id: 37634d0e6b2fae07
+      add:
+        - ability:giant-strength
+      qualifier: and(gte(@species.size, 0), lt(@species.size, 6))
+      remove:
+        - ability:supernatural-strength
+        - ability:monstrous-strength
+      trigger: updateDocument
+      type: toggleChildren
+    - _id: 056bba8fd332660a
+      add:
+        - ability:monstrous-strength
+      qualifier: and(gte(@species.size, 12), lt(@species.size, 99))
+      remove:
+        - ability:supernatural-strength
+        - ability:giant-strength
       trigger: updateDocument
       type: toggleChildren
   br: 25

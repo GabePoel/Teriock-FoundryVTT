@@ -485,18 +485,21 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
               display:
                 label: Roll 5 Damage
               formula: 5[lethal]
               impact: damage
+              trigger: null
               type: roll
             - _id: tnG4HOJcOpBMkG4W
               display:
                 label: Roll 10 Damage
               formula: 10[lethal]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -586,10 +589,12 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
+              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
+              img: null
               type: immunity
               value: frightened
           competence:
@@ -678,14 +683,17 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
+              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
+              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -731,10 +739,14 @@ items:
             - _id: xreyNK2IzDp9qCUE
               consumeStatDice: true
               forHarm: false
+              substitution: ""
+              trigger: null
               type: revitalize
             - _id: 157afc517847f562
+              display: {}
               formula: 1d8[mana]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -782,6 +794,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -920,10 +933,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -1231,20 +1240,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:animate-dead
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 66d7ecce476652ad
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:zombify
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -1253,9 +1272,6 @@ items:
                 type: tag
               verbal:
                 type: tag
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             raw: "8"
@@ -1360,12 +1376,16 @@ items:
             - _id: PKZXkwmO94niPsUb
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @time.a1)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -1413,20 +1433,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 3b2978862c7f9d50
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: JB09RCj8EnrKPqjG
               light:
                 alpha: 0.5
@@ -1531,10 +1561,13 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 71e51b18552837f1
+              display: {}
               formula: (2 + @h)d6
               impact: kill
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1720,8 +1753,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic terror]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1952,11 +1987,18 @@ items:
               attachDocuments: true
               automatic: true
               children:
+                data: "{}"
                 enabled: true
                 identifiers:
                   - property:improvised
                 overrideData: false
+                uuids: []
               data: "{\"name\":\"Improvised @base\"}"
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: true
               overrideData: true
               separate: true
@@ -1967,12 +2009,16 @@ items:
             - _id: mKNQhZp094oZbMh0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
               makeEffect: false
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -2016,12 +2062,14 @@ items:
         system:
           automations:
             - _id: 6CT5NSb2WmH7cNNn
+              display: {}
               distance: "10"
               movementAction: walk
               origin: executor
               originBarrier: true
               type: move
             - _id: XHbIO38NtGB9Mcad
+              display: {}
               distance: "20"
               movementAction: walk
               origin: executor
@@ -2169,8 +2217,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

@@ -247,6 +247,7 @@ items:
             - _id: Dc03b4Mkm0JKkeo9
               amount: 1
               category: effectTypes
+              img: null
               type: takeDeboost
               value: damaging
           competence:
@@ -340,18 +341,22 @@ items:
           affinities:
             - _id: 6cV7jWQ7Cw2JO44h
               category: statuses
+              img: null
               type: immunity
               value: frenzied
             - _id: F1AoyKmaYImGd34B
               category: statuses
+              img: null
               type: immunity
               value: frightened
             - _id: QvNjVsVhJtMrRosF
               category: statuses
+              img: null
               type: immunity
               value: goaded
             - _id: p5tXQvLJSzv7w8cO
               category: statuses
+              img: null
               type: immunity
               value: allured
           competence:
@@ -389,6 +394,7 @@ items:
         system:
           automations:
             - _id: 63c7106d02025d43
+              display: {}
               macro: Compendium.teriock.execution.Macro.989bee0dce350480
               trigger: preExecute
               type: abilityMacro
@@ -484,6 +490,7 @@ items:
           affinities:
             - _id: uwOYmc8mNN1jL3We
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -521,10 +528,12 @@ items:
           affinities:
             - _id: FNFs7lvzhiFH7Uvn
               category: equipment
+              img: null
               type: immunity
               value: arrow
             - _id: tPwKcAdyCg31MgdV
               category: other
+              img: null
               type: immunity
               value: Vitals Targeting Abilities
           competence:
@@ -729,10 +738,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (@h)d4[magic ice]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 09ed285450c5de7b
               executor: false
@@ -818,6 +829,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -902,8 +914,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d6[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -966,8 +980,8 @@ items:
           overview:
             proficient: >-
               <p>You also know what <i>type</i> of @Identifier[keyword:illusionary]{illusion} it is (Minor, Full, or
-              Greater) as well as the DC needed to @Identifier[ability:disbelieve]{Disbelieve} it. This does not count
-              as "disbelieving" the illusion.</p>
+              Greater) as well as the @Identifier[core:difficulty-class]{DC} needed to
+              @Identifier[ability:disbelieve]{Disbelieve} it. This does not count as "disbelieving" the illusion.</p>
           piercing:
             raw: 2
           powerSources:
@@ -1140,10 +1154,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -1404,12 +1414,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: false
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: 30 + 10 * @h
+              radiusX: ""
+              radiusY: ""
               regionType: circle
               restriction:
                 enabled: false
@@ -1418,7 +1436,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           costs:
@@ -1479,6 +1499,7 @@ items:
           _sup: 1klgEP0n84zFa2hg
           automations:
             - _id: 63c7106d02025d43
+              display: {}
               macro: Compendium.teriock.execution.Macro.989bee0dce350480
               trigger: preExecute
               type: abilityMacro
@@ -1595,12 +1616,16 @@ items:
             - _id: R7rIJDoFAEvz00wl
               all: false
               automatic: false
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -1650,20 +1675,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:blizzard-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 75dff24942d5b933
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:shock-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: I1BIPKXYQZ1rA5JU
               light:
                 alpha: 0.5
@@ -1770,8 +1805,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

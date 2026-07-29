@@ -54,6 +54,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Dropping From Negative HP
@@ -61,6 +62,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: unconscious
@@ -172,6 +174,7 @@ items:
               impact: healing
               morganti: false
               showDialog: false
+              trigger: null
               type: take
             - _id: nHOGCKUblyJkPB7q
               amount: 999999
@@ -180,6 +183,7 @@ items:
               impact: revitalizing
               morganti: false
               showDialog: false
+              trigger: null
               type: take
           competence:
             raw: 1
@@ -277,20 +281,26 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
+              display: {}
               formula: 1d6[toxic]
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
+              display: {}
               formula: 1d8[toxic]
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d10[toxic]
               impact: damage
+              trigger: null
               type: roll
             - _id: 743730f25f256b10
               executor: false
@@ -377,6 +387,7 @@ items:
             - _id: WCOWPl5PVXo46Bmp
               activeQualifier: not(@status.down)
               category: other
+              img: null
               type: immunity
               value: Spells
           competence:
@@ -448,6 +459,8 @@ items:
               consumeStatDice: true
               forHarm: false
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1
@@ -484,6 +497,7 @@ items:
         system:
           automations:
             - _id: ZR5M1EqyW9yIqfCp
+              display: {}
               distance: "10"
               movementAction: walk
               origin: executor
@@ -495,11 +509,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: false
@@ -508,7 +531,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           delivery: aura
@@ -651,24 +676,24 @@ items:
         @Identifier[ability:supernatural-strength]{Supernatural Strength} if at least @Identifier[core:size]{size} 9.
         @Identifier[ability:monstrous-strength]{Monstrous Strength} if at least @Identifier[core:size]{size} 10.</p>
       automations:
-        - _id: 056bba8fd332660a
-          add:
-            - ability:monstrous-strength
-          qualifier: and(gte(@species.size, 10), lt(@species.size, 99))
-          remove:
-            - ability:giant-strength
-            - ability:improved-strength
-            - ability:supernatural-strength
-          trigger: updateDocument
-          type: toggleChildren
         - _id: 37634d0e6b2fae07
           add:
             - ability:giant-strength
           qualifier: and(gte(@species.size, 7), lt(@species.size, 10))
           remove:
             - ability:improved-strength
-            - ability:monstrous-strength
             - ability:supernatural-strength
+            - ability:monstrous-strength
+          trigger: updateDocument
+          type: toggleChildren
+        - _id: b7dc74afdec1a704
+          add:
+            - ability:improved-strength
+          qualifier: and(gte(@species.size, 0), lt(@species.size, 7))
+          remove:
+            - ability:giant-strength
+            - ability:supernatural-strength
+            - ability:monstrous-strength
           trigger: updateDocument
           type: toggleChildren
         - _id: ab3de966a8f99c9c
@@ -681,13 +706,13 @@ items:
             - ability:monstrous-strength
           trigger: updateDocument
           type: toggleChildren
-        - _id: b7dc74afdec1a704
+        - _id: 056bba8fd332660a
           add:
-            - ability:improved-strength
-          qualifier: and(gte(@species.size, 0), lt(@species.size, 7))
+            - ability:monstrous-strength
+          qualifier: and(gte(@species.size, 10), lt(@species.size, 99))
           remove:
             - ability:giant-strength
-            - ability:monstrous-strength
+            - ability:improved-strength
             - ability:supernatural-strength
           trigger: updateDocument
           type: toggleChildren

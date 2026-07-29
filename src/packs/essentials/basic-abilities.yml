@@ -154,9 +154,10 @@ effects:
       overview:
         base: >-
           <p>You attempt a @Identifier[core:tradecrafts]{tradecraft check}. The @Identifier[core:game-master]{GM}
-          chooses which @UUID[Compendium.teriock.rules.JournalEntry.tradecraft000000]{tradecraft} and what the DC is.
-          They may also specify who should or shouldn't have knowledge of the result of the [[/roll d20]] roll.</p><div
-          class="metadata" data-type="embedded-table" data-table-name="Tradecraft Checks"></div>
+          chooses which @UUID[Compendium.teriock.rules.JournalEntry.tradecraft000000]{tradecraft} and what the
+          @Identifier[core:difficulty-class]{DC} is. They may also specify who should or shouldn't have knowledge of the
+          result of the [[/roll d20]] roll.</p><div class="metadata" data-type="embedded-table"
+          data-table-name="Tradecraft Checks"></div>
       powerSources:
         - martial
       range:
@@ -179,23 +180,19 @@ effects:
     name: Attempt Hide
     system:
       automations:
-        0b0d1426453abb55:
-          _id: 0b0d1426453abb55
+        - _id: djJtvPmsCICnQ8CS
+          competence:
+            raw: 0
+          preventFeat: false
+          preventThreshold: true
+          type: override
+        - _id: 0b0d1426453abb55
           executor: false
           multi: false
           relation: apply
           status: hidden
           target: false
           type: status
-        djJtvPmsCICnQ8CS:
-          _id: djJtvPmsCICnQ8CS
-          competence:
-            raw: 0
-          preventFeat: false
-          preventThreshold: true
-          type: override
-        undefined:
-          prevent: false
       basic: true
       competence:
         raw: 1
@@ -215,7 +212,7 @@ effects:
           @Identifier[core:sneak]{SNK} @Identifier[core:feat-interaction]{save} is greater than the
           @Identifier[core:perception]{passive perception} (10 + 2 × @Identifier[core:perception]{PER}) of any creatures
           that could see you, you become @Identifier[condition:hidden]{hidden} from them. The value you rolled is your
-          hidden DC.</p>
+          hidden @Identifier[core:difficulty-class]{DC}.</p>
       powerSources:
         - martial
       range:
@@ -764,8 +761,8 @@ effects:
       featSaveAttribute: int
       form: intrinsic
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the DC of the [[lookup name]]
-        decreases by 2.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+        @Identifier[core:difficulty-class]{DC} of the [[lookup name]] decreases by 2.</p>
       identifier: disbelieve
       interaction: feat
       maneuver: active
@@ -773,10 +770,11 @@ effects:
         base: >-
           <p>The @Identifier[core:targets]{target} of [[lookup name]] can be anything that you suspect might be an
           @Identifier[keyword:illusionary]{illusion}. Instead of the @Identifier[core:targets]{target} making the
-          @Identifier[core:feat-interaction]{feat save}, you do. The DC of the [[lookup name]] is determined by the type
-          of @Identifier[keyword:illusionary]{illusion} are you @Identifier[core:targets]{targeting}. If you
-          @Identifier[keyword:resistance]{resist} or are @Identifier[keyword:immunity]{immune} to @Wiki[Category:Mental
-          effects]{mental effects}, then you are @Identifier[core:fluency-bonus]{fluent} in [[lookup name]].</p>
+          @Identifier[core:feat-interaction]{feat save}, you do. The @Identifier[core:difficulty-class]{DC} of the
+          [[lookup name]] is determined by the type of @Identifier[keyword:illusionary]{illusion} are you
+          @Identifier[core:targets]{targeting}. If you @Identifier[keyword:resistance]{resist} or are
+          @Identifier[keyword:immunity]{immune} to @Wiki[Category:Mental effects]{mental effects}, then you are
+          @Identifier[core:fluency-bonus]{fluent} in [[lookup name]].</p>
         fluent: <p>You are @Identifier[keyword:adept]{adept} at [[lookup name]].</p>
       powerSources:
         - unknown
@@ -896,22 +894,17 @@ effects:
           common:
             - awaken
           showConfirmationDialog: true
+          trigger: ""
           type: common
         - _id: 06acda516847cfdb
           all: false
           automatic: true
           bonus: "0"
           multi: false
+          threshold: "10"
           tradecrafts:
             - herbalist
-          type: tradecraft
-        - _id: f040e7fac700bed1
-          all: false
-          automatic: true
-          bonus: "0"
-          multi: false
-          tradecrafts:
-            - herbalist
+          trigger: ""
           type: tradecraft
       basic: true
       competence:
@@ -928,7 +921,7 @@ effects:
       interaction: manifest
       maneuver: active
       overview:
-        base: <p>Make a DC 10 [[/tc herbalist]]{herbalist check}.</p>
+        base: <p>Make a @Identifier[core:difficulty-class]{DC} 10 [[/tc herbalist]]{herbalist check}.</p>
       powerSources:
         - martial
       range:
@@ -1458,11 +1451,11 @@ effects:
         unit: self
       results:
         fail: >-
-          <p>You do not see any @Identifier[condition:hidden]{hidden} creatures with a hidden DC greater than your
-          roll.</p>
+          <p>You do not see any @Identifier[condition:hidden]{hidden} creatures with a hidden
+          @Identifier[core:difficulty-class]{DC} greater than your roll.</p>
         save: >-
-          <p>You see any @Identifier[condition:hidden]{hidden} creatures with a hidden DC less than or equal to your
-          roll.</p>
+          <p>You see any @Identifier[condition:hidden]{hidden} creatures with a hidden
+          @Identifier[core:difficulty-class]{DC} less than or equal to your roll.</p>
       targets:
         - self
     transfer: true
@@ -1832,15 +1825,16 @@ effects:
       featSaveAttribute: int
       form: intrinsic
       heightened: >-
-        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the DC of the [[lookup name]]
-        decreases by 2.</p>
+        <p>For each additional @Identifier[core:hit-points-and-mana-points]{MP} spent, the
+        @Identifier[core:difficulty-class]{DC} of the [[lookup name]] decreases by 2.</p>
       identifier: self-revert
       interaction: feat
       maneuver: active
       overview:
         base: >-
-          <p>Instead of your normal @Identifier[core:feat-interaction]{feat save DC}, the DC of [[lookup name]] is
-          determined by the type of @Identifier[condition:transformed]{transformation}.</p>
+          <p>Instead of your normal [[:Core:Feat Interaction|feat save @Identifier[core:difficulty-class]{DC}]], the
+          @Identifier[core:difficulty-class]{DC} of [[lookup name]] is determined by the type of
+          @Identifier[condition:transformed]{transformation}.</p>
         fluent: <p>You are @Identifier[keyword:adept]{adept} at [[lookup name]].</p>
       powerSources:
         - primal

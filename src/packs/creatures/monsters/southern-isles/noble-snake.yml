@@ -20,6 +20,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Breath Weapons
@@ -612,6 +613,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Being Surprised (Outside Towns)
@@ -673,6 +675,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Conjured Missile Spells
@@ -717,6 +720,7 @@ items:
               category: properties
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: ranged
@@ -843,29 +847,37 @@ items:
               activeQualifier: "@flags.improvedBrace"
               amount: 1
               category: effectTypes
+              img: null
               type: takeDeboost
               value: damaging
           automations:
             - _id: 0BLOMYrODY3bzx8I
               competencies:
                 - 0
+              display: {}
               formula: 1d(max(6, @flags.braceDieSize))
               impact: setTempHp
+              trigger: null
               type: roll
             - _id: dQvjSj38Nt3dcuZF
               competencies:
                 - 1
+              display: {}
               formula: (1 + @p)d(max(6, @flags.braceDieSize))
               impact: setTempHp
+              trigger: null
               type: roll
             - _id: Eg4Omt9YhPTjNEEW
               competencies:
                 - 2
+              display: {}
               formula: (1 + @f)d(max(6, @flags.braceDieSize))
               impact: setTempHp
+              trigger: null
               type: roll
             - _id: Rid5p1TlO90isbp4
               amount: 0
+              display: {}
               impact: setTempHp
               morganti: false
               showDialog: false
@@ -919,11 +931,18 @@ items:
               attachDocuments: true
               automatic: true
               children:
+                data: "{}"
                 enabled: true
                 identifiers:
                   - property:improvised
                 overrideData: false
+                uuids: []
               data: "{\"name\":\"Improvised @base\"}"
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: true
               overrideData: true
               separate: true
@@ -934,12 +953,16 @@ items:
             - _id: FKc997ohmjSZ7IvR
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
               makeEffect: false
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -991,23 +1014,33 @@ items:
               attachDocuments: true
               automatic: true
               data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
+              display: {}
               identifiers:
                 - ability:instant-awaken
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 691afda974d67b4a
               all: false
               attachDocuments: true
               automatic: true
               data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
+              display: {}
               identifiers:
                 - ability:reactive-awaken
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: sight
@@ -1088,25 +1121,35 @@ items:
                 label: Apply Ally Effect
               identifiers:
                 - consequence:gladiator-skills-ally-effect
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
+              uuids: []
             - _id: WedUG7hLjDbJNzZY
               all: false
               attachDocuments: false
               automatic: true
               children:
+                data: "{}"
                 enabled: true
                 identifiers:
                   - power:gladiator-skills-hit-die-power
                 overrideData: false
+                uuids: []
               display:
                 label: Apply Executor Effect
               identifiers:
                 - consequence:gladiator-skills-executor-effect
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
+              uuids: []
             - _id: FyGy4uoglXanPjex
               activeQualifier: "@status.dueling"
               changeType: upgrade
@@ -1119,6 +1162,8 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
             - _id: 5B0LdRTMIqOiMDEu
               amount: 1
@@ -1127,6 +1172,7 @@ items:
               impact: drain
               morganti: false
               showDialog: false
+              trigger: null
               type: take
           competence:
             raw: 1
@@ -1453,36 +1499,53 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: false
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "30"
+              radiusX: ""
+              radiusY: ""
               regionType: circle
               restriction:
                 enabled: true
                 priority: 0
                 type: move
               targeting: false
+              trigger: null
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: eb15e1b671a010f5
+              display: {}
               formula: 1d10
               impact: gainTempHp
+              trigger: null
               type: roll
             - _id: fc2613f22401a088
               competencies:
                 - 1
                 - 2
+              display: {}
               formula: 1d10 + (@p)d10
               impact: gainTempHp
+              trigger: null
               type: roll
             - _id: a678f22a0f730677
               competencies:
                 - 2
+              display: {}
               formula: 1d10 + (@f)d10
               impact: gainTempHp
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1649,6 +1712,7 @@ items:
           _sup: WPnSLdXPauH6iDwJ
           automations:
             - _id: 28f5387f29e5aae1
+              display: {}
               macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
               trigger: executeFeat
               type: abilityMacro

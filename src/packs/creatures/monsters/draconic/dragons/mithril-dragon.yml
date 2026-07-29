@@ -206,6 +206,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -250,6 +251,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -326,12 +328,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -340,12 +350,16 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (2 * @h)d10[magic]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: H1gYV0NUjBum8t3Q
               executor: false
@@ -497,16 +511,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -986,6 +1006,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1400,6 +1421,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1477,6 +1499,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1522,11 +1545,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1535,7 +1567,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1610,11 +1644,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1623,7 +1666,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1939,16 +1984,22 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:runic
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: q5g5DHz1N2MlQrXH
               common:
                 - reforge
                 - repair
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -2099,29 +2150,37 @@ items:
               activeQualifier: "@flags.improvedBrace"
               amount: 1
               category: effectTypes
+              img: null
               type: takeDeboost
               value: damaging
           automations:
             - _id: 0BLOMYrODY3bzx8I
               competencies:
                 - 0
+              display: {}
               formula: 1d(max(6, @flags.braceDieSize))
               impact: setTempHp
+              trigger: null
               type: roll
             - _id: dQvjSj38Nt3dcuZF
               competencies:
                 - 1
+              display: {}
               formula: (1 + @p)d(max(6, @flags.braceDieSize))
               impact: setTempHp
+              trigger: null
               type: roll
             - _id: Eg4Omt9YhPTjNEEW
               competencies:
                 - 2
+              display: {}
               formula: (1 + @f)d(max(6, @flags.braceDieSize))
               impact: setTempHp
+              trigger: null
               type: roll
             - _id: Rid5p1TlO90isbp4
               amount: 0
+              display: {}
               impact: setTempHp
               morganti: false
               showDialog: false
@@ -2175,11 +2234,18 @@ items:
               attachDocuments: true
               automatic: true
               children:
+                data: "{}"
                 enabled: true
                 identifiers:
                   - property:improvised
                 overrideData: false
+                uuids: []
               data: "{\"name\":\"Improvised @base\"}"
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: true
               overrideData: true
               separate: true
@@ -2190,12 +2256,16 @@ items:
             - _id: FKc997ohmjSZ7IvR
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
               makeEffect: false
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -2247,23 +2317,33 @@ items:
               attachDocuments: true
               automatic: true
               data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
+              display: {}
               identifiers:
                 - ability:instant-awaken
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 691afda974d67b4a
               all: false
               attachDocuments: true
               automatic: true
               data: "{\"system\":{\"limitation\":\"<p>Only usable on the other participant in the Partner Awaken.</p>\"}}"
+              display: {}
               identifiers:
                 - ability:reactive-awaken
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: sight
@@ -2395,6 +2475,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Mediator Tradecrafts (Braced, Fortified, Guard Duty)
@@ -2403,6 +2484,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Frightened (Braced, Fortified, Guard Duty)
@@ -2411,6 +2493,7 @@ items:
               category: other
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: Being Surprised (Braced, Fortified, Guard Duty)
@@ -2531,36 +2614,53 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: false
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "30"
+              radiusX: ""
+              radiusY: ""
               regionType: circle
               restriction:
                 enabled: true
                 priority: 0
                 type: move
               targeting: false
+              trigger: null
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: eb15e1b671a010f5
+              display: {}
               formula: 1d10
               impact: gainTempHp
+              trigger: null
               type: roll
             - _id: fc2613f22401a088
               competencies:
                 - 1
                 - 2
+              display: {}
               formula: 1d10 + (@p)d10
               impact: gainTempHp
+              trigger: null
               type: roll
             - _id: a678f22a0f730677
               competencies:
                 - 2
+              display: {}
               formula: 1d10 + (@f)d10
               impact: gainTempHp
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2727,6 +2827,7 @@ items:
           _sup: WPnSLdXPauH6iDwJ
           automations:
             - _id: 28f5387f29e5aae1
+              display: {}
               macro: Compendium.teriock.execution.Macro.4bd2e8ab01c2430b
               trigger: executeFeat
               type: abilityMacro
@@ -2899,6 +3000,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -2990,11 +3092,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:runic
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:

@@ -22,12 +22,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -36,12 +44,16 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (2 * @h)d10[magic ice]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: dozfNCs9FQ7NhV4L
               executor: false
@@ -306,6 +318,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -350,6 +363,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -518,16 +532,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -1007,6 +1027,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1421,6 +1442,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1498,6 +1520,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1543,11 +1566,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1556,7 +1588,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1631,11 +1665,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1644,7 +1687,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -1794,10 +1839,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2036,10 +2077,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2117,16 +2154,18 @@ items:
             base: >-
               <p>In addition to the custom rotator spells you create, you can learn @Wiki[Category:Rotator
               spells]{spells} created by others. When you come across a fully created spell using only words you are
-              @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + @Identifier[core:elder-sorcery]{OP}
-              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save} to attempt to learn it
-              over the course of a @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your
-              rotator spell list. If you fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn
-              that spell again. The @Identifier[core:game-master]{GM} may modify the DC based on the spell's complexity,
-              your knowledge of the spell, any special training you receive, if the spell's creator is there to assist
-              you, or for any other factors they see fit. You may also attempt to learn words that you come across as
-              long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
-              @Identifier[core:game-master]{GM} may adjust the DC for these as they see fit as well, but the default is
-              DC 15 + OP @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
+              @Identifier[core:fluency-bonus]{fluent} in, can make a @Identifier[core:difficulty-class]{DC} 12 +
+              @Identifier[core:elder-sorcery]{OP} @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save} to attempt to learn it over the course of a
+              @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your rotator spell list. If you
+              fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell again. The
+              @Identifier[core:game-master]{GM} may modify the @Identifier[core:difficulty-class]{DC} based on the
+              spell's complexity, your knowledge of the spell, any special training you receive, if the spell's creator
+              is there to assist you, or for any other factors they see fit. You may also attempt to learn words that
+              you come across as long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+              @Identifier[core:game-master]{GM} may adjust the @Identifier[core:difficulty-class]{DC} for these as they
+              see fit as well, but the default is @Identifier[core:difficulty-class]{DC} 15 + OP
+              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
             proficient: >-
               <p>You are @Identifier[core:fluency-bonus]{fluent} in @Identifier[ability:elder-sorcery-creation]{Elder
               Sorcery Creation}, @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder Sorcery Words}, and
@@ -2230,12 +2269,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: false
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: 10 + 15 * @h
+              radiusX: ""
+              radiusY: ""
               regionType: circle
               restriction:
                 enabled: false
@@ -2244,7 +2291,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           costs:
@@ -2551,10 +2600,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2815,12 +2860,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: false
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: 30 + 10 * @h
+              radiusX: ""
+              radiusY: ""
               regionType: circle
               restriction:
                 enabled: false
@@ -2829,7 +2882,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           costs:
@@ -2890,6 +2945,7 @@ items:
           _sup: 1klgEP0n84zFa2hg
           automations:
             - _id: 63c7106d02025d43
+              display: {}
               macro: Compendium.teriock.execution.Macro.989bee0dce350480
               trigger: preExecute
               type: abilityMacro
@@ -3006,12 +3062,16 @@ items:
             - _id: R7rIJDoFAEvz00wl
               all: false
               automatic: false
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -3061,20 +3121,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:blizzard-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 75dff24942d5b933
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:shock-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: I1BIPKXYQZ1rA5JU
               light:
                 alpha: 0.5
@@ -3237,20 +3307,20 @@ items:
             - _id: Eny3zxX22Ce5EhbM
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
                 identifiers:
                   - ability:ice-ball
                   - ability:lightning-ray
+                qualifier: ""
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -3284,12 +3354,16 @@ items:
             - _id: bJn9LIvdgJ11S1tr
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@spell, @delivery.missile, @pro)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -3421,10 +3495,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (@h)d4[magic ice]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 09ed285450c5de7b
               executor: false
@@ -3510,6 +3586,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -3594,8 +3671,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d6[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -3658,8 +3737,8 @@ items:
           overview:
             proficient: >-
               <p>You also know what <i>type</i> of @Identifier[keyword:illusionary]{illusion} it is (Minor, Full, or
-              Greater) as well as the DC needed to @Identifier[ability:disbelieve]{Disbelieve} it. This does not count
-              as "disbelieving" the illusion.</p>
+              Greater) as well as the @Identifier[core:difficulty-class]{DC} needed to
+              @Identifier[ability:disbelieve]{Disbelieve} it. This does not count as "disbelieving" the illusion.</p>
           piercing:
             raw: 2
           powerSources:
@@ -3879,8 +3958,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

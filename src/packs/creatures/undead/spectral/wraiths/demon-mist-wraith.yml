@@ -38,6 +38,7 @@ items:
               common:
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: ZlgI0KUafWT3wE27
               competence:
@@ -45,12 +46,16 @@ items:
               competencies:
                 - 0
                 - 1
+              data: "{}"
+              display: {}
               makeEffect: true
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
             - _id: 6v7WhWcAO2fARRYl
               amount: 999999
@@ -62,6 +67,7 @@ items:
               impact: revitalizing
               morganti: false
               showDialog: false
+              trigger: null
               type: take
             - _id: YHHJxY54wT2k778U
               amount: 999999
@@ -73,6 +79,7 @@ items:
               impact: healing
               morganti: false
               showDialog: false
+              trigger: null
               type: take
           competence:
             raw: 1
@@ -202,10 +209,13 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 157afc517847f562
+              display: {}
               formula: 3d8[memory lethal]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -251,6 +261,7 @@ items:
             - _id: mNwpI0oUe5IbWMa5
               competencies:
                 - 0
+              display: {}
               distance: 1d10
               movementAction: blink
               origin: random
@@ -259,6 +270,7 @@ items:
             - _id: 7sjwIPb8joKrTdKu
               competencies:
                 - 1
+              display: {}
               distance: 1d(10 * (1 + @p))
               movementAction: blink
               origin: random
@@ -267,6 +279,7 @@ items:
             - _id: 6v5hoTcxJEX0QREG
               competencies:
                 - 2
+              display: {}
               distance: 1d(10 * (1 + @f))
               movementAction: blink
               origin: random
@@ -695,8 +708,10 @@ items:
         system:
           automations:
             - _id: 157afc517847f562
+              display: {}
               formula: 1d8[memory]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -830,18 +845,21 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
               display:
                 label: Roll 5 Damage
               formula: 5[lethal]
               impact: damage
+              trigger: null
               type: roll
             - _id: tnG4HOJcOpBMkG4W
               display:
                 label: Roll 10 Damage
               formula: 10[lethal]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -961,6 +979,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -999,10 +1018,12 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
+              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
+              img: null
               type: immunity
               value: frightened
           competence:
@@ -1092,10 +1113,14 @@ items:
             - _id: xreyNK2IzDp9qCUE
               consumeStatDice: true
               forHarm: false
+              substitution: ""
+              trigger: null
               type: revitalize
             - _id: 157afc517847f562
+              display: {}
               formula: 1d8[mana]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1143,14 +1168,17 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
+              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
+              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -1301,10 +1329,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -1612,20 +1636,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:animate-dead
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 66d7ecce476652ad
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:zombify
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -1634,9 +1668,6 @@ items:
                 type: tag
               verbal:
                 type: tag
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             raw: "8"
@@ -1741,12 +1772,16 @@ items:
             - _id: PKZXkwmO94niPsUb
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @time.a1)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -1794,20 +1829,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 3b2978862c7f9d50
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: JB09RCj8EnrKPqjG
               light:
                 alpha: 0.5
@@ -1953,11 +1998,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:triumphant-awaken
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: self
@@ -2371,6 +2421,7 @@ items:
           automations:
             - _id: dWnCYT88hEWY1U3u
               activeQualifier: "@flags.disarmKnockback"
+              display: {}
               distance: "10"
               movementAction: walk
               origin: executor
@@ -2378,6 +2429,7 @@ items:
               type: move
             - _id: ow9J5qYNcoLGDsL3
               activeQualifier: "@flags.disarmKnockback"
+              display: {}
               distance: "20"
               movementAction: walk
               origin: executor
@@ -2386,12 +2438,17 @@ items:
             - _id: zGqyHWcKnNUWmna8
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
                 identifiers:
                   - ability:catch-item
+                qualifier: ""
               multi: false
+              trigger: null
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: weapon
@@ -2469,6 +2526,7 @@ items:
               category: effectTypes
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: truthDetecting
@@ -2555,8 +2613,9 @@ items:
             base: >-
               <p>You crawl at @Identifier[core:movement-speed]{half speed} and can @Identifier[ability:move]{Move} at
               @Identifier[core:movement-speed]{half speed} speed while @Identifier[condition:hidden]{hidden}.
-              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a DC 10
-              @Identifier[core:sneak]{SNK} @Identifier[core:feat-interaction]{feat save} to keep from breaking your
+              Additionally, @Wiki[Category:Movement effects]{movement effects} only require a
+              @Identifier[core:difficulty-class]{DC} 10 @Identifier[core:sneak]{SNK}
+              @Identifier[core:feat-interaction]{feat save} to keep from breaking your
               @Identifier[condition:hidden]{hiding}.</p>
             proficient: >-
               <p>You crawl at @Identifier[core:movement-speed]{full speed} and can @Identifier[ability:move]{Move} at
@@ -2623,10 +2682,13 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 71e51b18552837f1
+              display: {}
               formula: (2 + @h)d6
               impact: kill
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2812,8 +2874,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic terror]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -2957,10 +3021,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -3221,12 +3281,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: false
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: 30 + 10 * @h
+              radiusX: ""
+              radiusY: ""
               regionType: circle
               restriction:
                 enabled: false
@@ -3235,7 +3303,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           costs:
@@ -3296,6 +3366,7 @@ items:
           _sup: 1klgEP0n84zFa2hg
           automations:
             - _id: 63c7106d02025d43
+              display: {}
               macro: Compendium.teriock.execution.Macro.989bee0dce350480
               trigger: preExecute
               type: abilityMacro
@@ -3412,12 +3483,16 @@ items:
             - _id: R7rIJDoFAEvz00wl
               all: false
               automatic: false
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @spell, @time.a1, not(@delivery.item))
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -3467,20 +3542,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:blizzard-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 75dff24942d5b933
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:shock-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: I1BIPKXYQZ1rA5JU
               light:
                 alpha: 0.5
@@ -3590,6 +3675,7 @@ items:
               common:
                 - standardDamage
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: d873eb939c3b5951
               hacks:
@@ -3631,6 +3717,12 @@ items:
         img: systems/teriock/src/icons/abilities/skill-share.webp
         name: Skill Share
         system:
+          affinities:
+            - _id: M5H0FZSqdzBuueLq
+              category: abilities
+              img: ""
+              type: incapability
+              value: skillShare
           automations:
             - _id: pZTzCOb2arggrQQw
               all: false
@@ -3638,41 +3730,60 @@ items:
               automatic: false
               competencies:
                 - 0
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: DKrkwLcllE5f9bjQ
               all: false
               attachDocuments: true
               automatic: false
               competencies:
                 - 1
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @p))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: LTtFZkqLk2QnwOfK
               all: false
               attachDocuments: true
               automatic: false
               competencies:
                 - 2
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @parent.rank, not(@es), not(@effect.contract), @pro, lte(@class.rank, 1 + @f))
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: XdlHsYQu4RHDULLu
               competence:
                 raw: 0
+              data: "{}"
+              display:
+                label: ""
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
+              rollBonus: ""
               setCompetence: override
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -3818,20 +3929,26 @@ items:
             - _id: 29b275994cf9f5b1
               competencies:
                 - 0
+              display: {}
               formula: 1d8
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
+              display: {}
               formula: 1d10
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d12
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -3915,10 +4032,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (@h)d4[magic ice]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 09ed285450c5de7b
               executor: false
@@ -4004,6 +4123,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -4088,8 +4208,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d6[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -4152,8 +4274,8 @@ items:
           overview:
             proficient: >-
               <p>You also know what <i>type</i> of @Identifier[keyword:illusionary]{illusion} it is (Minor, Full, or
-              Greater) as well as the DC needed to @Identifier[ability:disbelieve]{Disbelieve} it. This does not count
-              as "disbelieving" the illusion.</p>
+              Greater) as well as the @Identifier[core:difficulty-class]{DC} needed to
+              @Identifier[ability:disbelieve]{Disbelieve} it. This does not count as "disbelieving" the illusion.</p>
           piercing:
             raw: 2
           powerSources:
@@ -4407,8 +4529,10 @@ items:
               common:
                 - awaken
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: A9CRT8qXUznJPqK1
+              display: {}
               distance: "10"
               movementAction: walk
               origin: executor
@@ -4420,11 +4544,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: false
@@ -4433,7 +4566,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           delivery: aura
@@ -4547,11 +4682,18 @@ items:
               attachDocuments: true
               automatic: true
               children:
+                data: "{}"
                 enabled: true
                 identifiers:
                   - property:improvised
                 overrideData: false
+                uuids: []
               data: "{\"name\":\"Improvised @base\"}"
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: true
               overrideData: true
               separate: true
@@ -4562,12 +4704,16 @@ items:
             - _id: mKNQhZp094oZbMh0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
               makeEffect: false
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -4611,12 +4757,14 @@ items:
         system:
           automations:
             - _id: 6CT5NSb2WmH7cNNn
+              display: {}
               distance: "10"
               movementAction: walk
               origin: executor
               originBarrier: true
               type: move
             - _id: XHbIO38NtGB9Mcad
+              display: {}
               distance: "20"
               movementAction: walk
               origin: executor
@@ -4762,6 +4910,12 @@ items:
         img: systems/teriock/src/icons/abilities/disable-ray.webp
         name: Disable Ray
         system:
+          affinities:
+            - _id: wICmwklIudhfa5Ra
+              category: other
+              img: ""
+              type: incapability
+              value: Disabled Ability
           competence:
             raw: 1
           costs:
@@ -4837,6 +4991,7 @@ items:
               common:
                 - glue
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -4883,11 +5038,16 @@ items:
             - _id: Hd5o6s1SdA8C7IfT
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: true
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
             - _id: 0b0d1426453abb55
               executor: false
@@ -4911,9 +5071,10 @@ items:
           overview:
             base: >-
               <p>You become @Identifier[condition:hidden]{hidden}. If the result of your @Identifier[core:sneak]{SNK}
-              @Identifier[core:feat-interaction]{save} is greater than your @Wiki[Core:Passive Attributes]{passive}
-              @Identifier[core:sneak]{sneak} (10 + 2 × @Identifier[core:sneak]{SNK}), then you use it as your hidden DC.
-              If not, use your @Wiki[Core:Passive Attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
+              @Identifier[core:feat-interaction]{save} is greater than your
+              @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak} (10 + 2 ×
+              @Identifier[core:sneak]{SNK}), then you use it as your hidden @Identifier[core:difficulty-class]{DC}. If
+              not, use your @Identifier[core:passive-attributes]{passive} @Identifier[core:sneak]{sneak}.</p>
           powerSources:
             - martial
           range:
@@ -4988,6 +5149,7 @@ items:
               common:
                 - unglue
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -5050,60 +5212,6 @@ items:
           disabled: false
           formula: 1d10
     type: rank
-  - _id: 57a3f724d5743aa3
-    _key: "!actors.items!fdec3f206b747460.57a3f724d5743aa3"
-    _stats:
-      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
-    effects:
-      - _id: 4XNvcPLM4s2CAFYb
-        _key: "!actors.items.effects!fdec3f206b747460.57a3f724d5743aa3.4XNvcPLM4s2CAFYb"
-        _stats:
-          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
-        img: systems/teriock/src/icons/abilities/semi-techniques.webp
-        name: Semi Techniques
-        system:
-          competence:
-            raw: 1
-          delivery: self
-          duration:
-            unit: unlimited
-          executionTime:
-            base: passive
-          form: normal
-          identifier: semi-techniques
-          interaction: manifest
-          maneuver: passive
-          overview:
-            base: >-
-              <p>For every 2 ranks you train in @Identifier[archetype:semi]{semi classes}, you gain a
-              @Wiki[Category:Semi guildmaster abilities]{semi guildmaster ability} of your choice.</p>
-          powerSources:
-            - martial
-          range:
-            unit: self
-          skill: true
-          standard: true
-          targets:
-            - self
-        transfer: true
-        type: ability
-    folder: 57a3f724d5743aa3
-    img: systems/teriock/src/icons/archetypes/semi.webp
-    name: Semi
-    system:
-      competence:
-        raw: 1
-      description: >-
-        <p>Semis are classes that fill tactical or support roles in @Identifier[core:combat]{combat}. Some are very
-        skilled in close combat and have a variety of @Wiki[Category:Semi archetype skills]{skills} to achieve their
-        aim, and others are more suited to fighting at range. All are classes that combine well with either
-        @Identifier[archetype:warrior]{warriors} or @Identifier[archetype:mage]{mages}, making semis the most versatile
-        class archetype.</p>
-      identifier: semi
-      instructions: >-
-        <p>Add @Pack[teriock.abilities]{abilities} from @Identifier[ability:semi-techniques] here when you gain
-        them.</p>
-    type: archetype
   - _id: 4a095aaed0254ec3
     _key: "!actors.items!fdec3f206b747460.4a095aaed0254ec3"
     _stats:
@@ -5118,8 +5226,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -5329,6 +5439,60 @@ items:
       identifier: warrior
       instructions: >-
         <p>Add @Pack[teriock.abilities]{abilities} from @Identifier[ability:warrior-techniques] here when you gain
+        them.</p>
+    type: archetype
+  - _id: 57a3f724d5743aa3
+    _key: "!actors.items!fdec3f206b747460.57a3f724d5743aa3"
+    _stats:
+      compendiumSource: Compendium.teriock.classes.Item.57a3f724d5743aa3
+    effects:
+      - _id: 4XNvcPLM4s2CAFYb
+        _key: "!actors.items.effects!fdec3f206b747460.57a3f724d5743aa3.4XNvcPLM4s2CAFYb"
+        _stats:
+          compendiumSource: Compendium.teriock.abilities.ActiveEffect.e72cfa283068ef0a
+        img: systems/teriock/src/icons/abilities/semi-techniques.webp
+        name: Semi Techniques
+        system:
+          competence:
+            raw: 1
+          delivery: self
+          duration:
+            unit: unlimited
+          executionTime:
+            base: passive
+          form: normal
+          identifier: semi-techniques
+          interaction: manifest
+          maneuver: passive
+          overview:
+            base: >-
+              <p>For every 2 ranks you train in @Identifier[archetype:semi]{semi classes}, you gain a
+              @Wiki[Category:Semi guildmaster abilities]{semi guildmaster ability} of your choice.</p>
+          powerSources:
+            - martial
+          range:
+            unit: self
+          skill: true
+          standard: true
+          targets:
+            - self
+        transfer: true
+        type: ability
+    folder: 57a3f724d5743aa3
+    img: systems/teriock/src/icons/archetypes/semi.webp
+    name: Semi
+    system:
+      competence:
+        raw: 1
+      description: >-
+        <p>Semis are classes that fill tactical or support roles in @Identifier[core:combat]{combat}. Some are very
+        skilled in close combat and have a variety of @Wiki[Category:Semi archetype skills]{skills} to achieve their
+        aim, and others are more suited to fighting at range. All are classes that combine well with either
+        @Identifier[archetype:warrior]{warriors} or @Identifier[archetype:mage]{mages}, making semis the most versatile
+        class archetype.</p>
+      identifier: semi
+      instructions: >-
+        <p>Add @Pack[teriock.abilities]{abilities} from @Identifier[ability:semi-techniques] here when you gain
         them.</p>
     type: archetype
 name: Demon Mist Wraith

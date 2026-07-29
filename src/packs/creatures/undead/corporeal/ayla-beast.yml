@@ -43,12 +43,12 @@ items:
           results:
             hit: >-
               <p>@Identifier[core:targets]{Target} is infected with a disease that takes 10 minutes to manifest. During
-              this time, the disease can be removed with @Identifier[ability:cure-illness]{Cure Illness} and a DC 15
-              @Identifier[tradecraft:herbalist]{herbalist} check. Afterwards, it can only be removed with effects akin
-              to @Identifier[ability:exorcism]{Exorcism}. Once the disease is manifested, the
-              @Identifier[core:targets]{target's} spirit must follow directions you provide to it. You do not need to
-              share any language with the @Identifier[core:targets]{target} or their spirit. This is more akin to a
-              "hive mind", where they implicitly understand you needs and directives.</p>
+              this time, the disease can be removed with @Identifier[ability:cure-illness]{Cure Illness} and a
+              @Identifier[core:difficulty-class]{DC} 15 @Identifier[tradecraft:herbalist]{herbalist} check. Afterwards,
+              it can only be removed with effects akin to @Identifier[ability:exorcism]{Exorcism}. Once the disease is
+              manifested, the @Identifier[core:targets]{target's} spirit must follow directions you provide to it. You
+              do not need to share any language with the @Identifier[core:targets]{target} or their spirit. This is more
+              akin to a "hive mind", where they implicitly understand you needs and directives.</p>
           targets:
             - creature
         transfer: true
@@ -107,8 +107,10 @@ items:
               type: childChange
               value: 1d12
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 1d12
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -282,12 +284,16 @@ items:
                 raw: 0
               identifiers:
                 - ability:zombify
+              img: null
+              level: null
               multi: false
               override:
                 - art
               reset:
                 - hp
                 - mp
+              ring: null
+              ringImg: null
               setCompetence: override
               suppress:
                 - body
@@ -295,6 +301,7 @@ items:
                 - rank
                 - species
               type: transformation
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -472,12 +479,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: iCn9pFDIGFJWxm6H
               activeQualifier: and(not(@status.burned), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -525,16 +534,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -578,18 +593,21 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
               display:
                 label: Roll 5 Damage
               formula: 5[lethal]
               impact: damage
+              trigger: null
               type: roll
             - _id: tnG4HOJcOpBMkG4W
               display:
                 label: Roll 10 Damage
               formula: 10[lethal]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -744,6 +762,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -829,10 +848,12 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
+              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
+              img: null
               type: immunity
               value: frightened
           competence:
@@ -874,14 +895,17 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
+              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
+              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -927,10 +951,14 @@ items:
             - _id: xreyNK2IzDp9qCUE
               consumeStatDice: true
               forHarm: false
+              substitution: ""
+              trigger: null
               type: revitalize
             - _id: 157afc517847f562
+              display: {}
               formula: 1d8[mana]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1207,6 +1235,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1

@@ -70,6 +70,7 @@ export default function ActorCombatPart(Base) {
         return {
           ac: this.defense.ac,
           av: this.defense.av.value,
+          "av.base": this.defense.av.base,
           "av.nat": this.defense.av.natural,
           "av.worn": this.defense.av.worn,
           bv: this.defense.bv,

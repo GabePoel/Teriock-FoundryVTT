@@ -96,7 +96,7 @@ export default function ActorAffinitiesPart(Base) {
        */
       addVirtualAffinity(type, category, value, provider, amount = 0) {
         const config = affinityConfig.types[type] || {};
-        const fallback = getImage(config.imgCategory, parseIdentifier(config.identifier).identifier);
+        const fallback = config.img;
         this.#addAffinity({
           amount,
           category,
@@ -188,6 +188,8 @@ export default function ActorAffinitiesPart(Base) {
         this.#addConditionAffinity("defyingDeath", "resistance", "statuses", "dead");
         this.#addConditionAffinity("defyingDeath", "resistance", "statuses", "unconscious");
         this.#addConditionAffinity("allured", "binding", "statuses", "allured");
+        this.#addConditionAffinity("burned", "incapability", "other", _loc("TERIOCK.AFFINITIES.Condition.burned"));
+        this.#addConditionAffinity("silenced", "incapability", "other", _loc("TERIOCK.AFFINITIES.Condition.silenced"));
       }
 
       /**

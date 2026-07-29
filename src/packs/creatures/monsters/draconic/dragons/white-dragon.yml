@@ -206,6 +206,7 @@ items:
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -250,6 +251,7 @@ items:
               activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
+              substitution: ""
               trigger: turnStart
               type: revitalize
           competence:
@@ -456,16 +458,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -541,12 +549,20 @@ items:
               attachToToken: false
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: false
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
               radius: "@ability.range + 5 * @h"
+              radiusX: ""
+              radiusY: ""
               regionType: cone
               restriction:
                 enabled: true
@@ -555,12 +571,16 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: 800c70e6560525a8
+              display: {}
               formula: (2 * @h)d10[magic holy]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 9A8B9ICqPwMHiAQB
               executor: false
@@ -990,6 +1010,7 @@ items:
               common:
                 - identify
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1404,6 +1425,7 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
           competence:
             raw: 1
@@ -1481,6 +1503,7 @@ items:
               category: statuses
               competence:
                 raw: 0
+              img: null
               setCompetence: inherit
               type: resistance
               value: frightened
@@ -1526,11 +1549,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1539,7 +1571,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: false
               multi: false
@@ -1614,11 +1648,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: true
@@ -1627,7 +1670,9 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: b4960732f0b9ed9f
               executor: true
               multi: false
@@ -2004,10 +2049,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2269,6 +2310,11 @@ items:
               competencies:
                 - 0
                 - 1
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
@@ -2280,6 +2326,11 @@ items:
               automatic: true
               competencies:
                 - 2
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: true
               separate: false
               type: addDocuments
@@ -2357,6 +2408,7 @@ items:
           _sup: BtjyB6cjHw37lX9f
           automations:
             - _id: PtV9W97cgaeTZC1z
+              display: {}
               macro: Compendium.teriock.execution.Macro.VTttYAvc7gP0Uwgd
               trigger: executeAbility
               type: abilityMacro
@@ -2364,11 +2416,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:warded
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2422,20 +2479,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:light-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: db4756dbc366378e
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:light-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: Lu71V2L9hiMtzyQr
               light:
                 alpha: 0.5
@@ -2509,11 +2576,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: b44n6ppQ1MLfhoxg
               consumeStatDice: false
               forHarm: true
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1
@@ -2597,20 +2667,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:healing-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 94f4cb28d83a43f6
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:cure-illness
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2752,20 +2832,20 @@ items:
             - _id: X1yoOCJGcyr8gR2X
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
                 identifiers:
                   - ability:light-ray
                   - ability:medicine-ball
+                qualifier: ""
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2799,12 +2879,16 @@ items:
             - _id: bJn9LIvdgJ11S1tr
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@spell, @delivery.missile, @pro)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2930,10 +3014,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2983,12 +3063,16 @@ items:
             - _id: HeyBF3KxuHVI6712
               all: false
               automatic: false
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @spell, @time.a1)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -3164,11 +3248,16 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:hibernation
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: sight
@@ -3187,6 +3276,7 @@ items:
               statuses:
                 absent:
                   - down
+                present: []
               type: status
             - _id: d1f6b6eaa581aa10
               method: automatic
@@ -3228,10 +3318,12 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (@h)d4[magic holy]
               heighten:
                 - 1
               impact: damage
+              trigger: null
               type: roll
             - _id: 747b3e9c9b617af6
               executor: false
@@ -3310,6 +3402,8 @@ items:
               heighten:
                 - 0
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
             - _id: SzYkTqcVV5k6LOGg
               consumeStatDice: false
@@ -3317,6 +3411,8 @@ items:
               heighten:
                 - 1
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1
@@ -3367,11 +3463,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: okAIhhAxPRM1XaZt
               consumeStatDice: false
               forHarm: true
               noStatDice: false
+              substitution: ""
+              trigger: null
               type: heal
           competence:
             raw: 1
@@ -3527,10 +3626,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -3609,16 +3704,18 @@ items:
             base: >-
               <p>In addition to the custom rotator spells you create, you can learn @Wiki[Category:Rotator
               spells]{spells} created by others. When you come across a fully created spell using only words you are
-              @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + @Identifier[core:elder-sorcery]{OP}
-              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save} to attempt to learn it
-              over the course of a @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your
-              rotator spell list. If you fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn
-              that spell again. The @Identifier[core:game-master]{GM} may modify the DC based on the spell's complexity,
-              your knowledge of the spell, any special training you receive, if the spell's creator is there to assist
-              you, or for any other factors they see fit. You may also attempt to learn words that you come across as
-              long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
-              @Identifier[core:game-master]{GM} may adjust the DC for these as they see fit as well, but the default is
-              DC 15 + OP @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
+              @Identifier[core:fluency-bonus]{fluent} in, can make a @Identifier[core:difficulty-class]{DC} 12 +
+              @Identifier[core:elder-sorcery]{OP} @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save} to attempt to learn it over the course of a
+              @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your rotator spell list. If you
+              fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell again. The
+              @Identifier[core:game-master]{GM} may modify the @Identifier[core:difficulty-class]{DC} based on the
+              spell's complexity, your knowledge of the spell, any special training you receive, if the spell's creator
+              is there to assist you, or for any other factors they see fit. You may also attempt to learn words that
+              you come across as long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+              @Identifier[core:game-master]{GM} may adjust the @Identifier[core:difficulty-class]{DC} for these as they
+              see fit as well, but the default is @Identifier[core:difficulty-class]{DC} 15 + OP
+              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
             proficient: >-
               <p>You are @Identifier[core:fluency-bonus]{fluent} in @Identifier[ability:elder-sorcery-creation]{Elder
               Sorcery Creation}, @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder Sorcery Words}, and
@@ -3660,21 +3757,30 @@ items:
                     "invoked": 1
                   }
                 }
+              display: {}
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @spell, not(@es), @delivery.ray)
               multi: false
               overrideData: true
               separate: false
               type: addDocuments
+              uuids: []
             - _id: g7vdRcjuuf35GPZ1
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - property:magelore
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 8v0Wg06rCbu8V2LX
               changes:
                 - key: system.tier.raw
@@ -3767,6 +3873,7 @@ items:
                 raw: 0
               heighten:
                 - 1
+              img: null
               setCompetence: inherit
               type: resistance
               value: awakening
@@ -3777,11 +3884,20 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: false
@@ -3790,24 +3906,32 @@ items:
               targeting: true
               trigger: executeInput
               type: region
+              uuids: []
               visibility: 2
+              width: ""
             - _id: e1c7d7174b360e93
               competencies:
                 - 0
+              display: {}
               formula: (1 + @h)d8
               impact: sleep
+              trigger: null
               type: roll
             - _id: ebd880725105dde4
               competencies:
                 - 1
+              display: {}
               formula: (1 + @p + @h)d8
               impact: sleep
+              trigger: null
               type: roll
             - _id: a394fca7e6444945
               competencies:
                 - 2
+              display: {}
               formula: (1 + @f + @h)d8
               impact: sleep
+              trigger: null
               type: roll
             - _id: PXielxmkr3bcWsV4
               executor: false
@@ -3977,8 +4101,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

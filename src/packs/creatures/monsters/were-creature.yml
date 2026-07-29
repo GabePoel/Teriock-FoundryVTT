@@ -77,21 +77,27 @@ items:
               type: childChange
               value: 1d8
             - _id: 29b275994cf9f5b1
+              display: {}
               formula: 1d4
               impact: damage
+              trigger: null
               type: roll
             - _id: 5e4d195ed81a10cc
               competencies:
                 - 1
                 - 2
+              display: {}
               formula: 1d6
               impact: damage
+              trigger: null
               type: roll
             - _id: 3f7fa7707643426f
               competencies:
                 - 2
+              display: {}
               formula: 1d8
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -162,12 +168,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: iCn9pFDIGFJWxm6H
               activeQualifier: and(not(@status.burned), not(@status.frozen))
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -234,9 +242,10 @@ items:
           results:
             fail: >-
               <p>Over the coming month, the @Identifier[core:targets]{target} will become a
-              @Identifier[creature:were-creature]{were-creature}. The DC for @Identifier[ability:cure-illness]{Cure
-              Illness} starts at 1, immediately following the bite. But with every day that passes, the DC increases by
-              1. After 30 days, they become a @Identifier[creature:were-creature]{were-creature} and
+              @Identifier[creature:were-creature]{were-creature}. The @Identifier[core:difficulty-class]{DC} for
+              @Identifier[ability:cure-illness]{Cure Illness} starts at 1, immediately following the bite. But with
+              every day that passes, the @Identifier[core:difficulty-class]{DC} increases by 1. After 30 days, they
+              become a @Identifier[creature:were-creature]{were-creature} and
               @Identifier[ability:were-creature-transformation]{transform} for the first time.</p>
           targets:
             - creature
@@ -257,20 +266,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:impure-durability
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: add5b03e2d5fc333
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:aggressive
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           delivery: self

@@ -347,12 +347,14 @@ items:
                 - bag
                 - revive
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: HMVJizUXvyQ9mtt9
               activeQualifier: not(@status.frozen)
               consumeStatDice: false
               forHarm: false
               noStatDice: false
+              substitution: ""
               trigger: turnStart
               type: heal
           competence:
@@ -400,16 +402,22 @@ items:
               common:
                 - shatter
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: OwcEEEPMXNoWUKl0
               competence:
                 raw: 0
+              data: "{}"
+              display: {}
+              makeEffect: null
               preventAttack: false
               preventBlockCone: false
               preventFeat: false
               preventThreshold: false
               rollBonus: "@av"
               setCompetence: inherit
+              targetsActor: null
+              targetsArmament: null
               type: override
           competence:
             raw: 1
@@ -453,18 +461,21 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 29b275994cf9f5b1
               display:
                 label: Roll 5 Damage
               formula: 5[lethal]
               impact: damage
+              trigger: null
               type: roll
             - _id: tnG4HOJcOpBMkG4W
               display:
                 label: Roll 10 Damage
               formula: 10[lethal]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -778,6 +789,7 @@ items:
           affinities:
             - _id: NxGVe5qLdm9laW3Q
               category: damageTypes
+              img: null
               type: immunity
               value: mundane
           competence:
@@ -816,10 +828,12 @@ items:
           affinities:
             - _id: EEiHRIyCxZhUuw07
               category: statuses
+              img: null
               type: immunity
               value: charmed
             - _id: Glnnr440sVehTfZ5
               category: statuses
+              img: null
               type: immunity
               value: frightened
           competence:
@@ -862,10 +876,14 @@ items:
             - _id: xreyNK2IzDp9qCUE
               consumeStatDice: true
               forHarm: false
+              substitution: ""
+              trigger: null
               type: revitalize
             - _id: 157afc517847f562
+              display: {}
               formula: 1d8[mana]
               impact: drain
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -913,14 +931,17 @@ items:
           affinities:
             - _id: HaVjAr78BgQGd92W
               category: statuses
+              img: null
               type: immunity
               value: poisoned
             - _id: OlGtbdaImhaj6OiM
               category: statuses
+              img: null
               type: immunity
               value: suffocating
             - _id: W3eMyYlHd3WnCnAm
               category: statuses
+              img: null
               type: immunity
               value: unconscious
           competence:
@@ -1282,10 +1303,13 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 71e51b18552837f1
+              display: {}
               formula: (2 + @h)d6
               impact: kill
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1471,8 +1495,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic terror]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -1606,20 +1632,20 @@ items:
             - _id: qApOHCicX4ZC0TSa
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
                 identifiers:
                   - ability:death-ray
                   - ability:terror-ball
+                qualifier: ""
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -1653,12 +1679,16 @@ items:
             - _id: bJn9LIvdgJ11S1tr
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@spell, @delivery.missile, @pro)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -1744,12 +1774,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              hp:
-                formula: "0"
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -1827,16 +1851,18 @@ items:
             base: >-
               <p>In addition to the custom rotator spells you create, you can learn @Wiki[Category:Rotator
               spells]{spells} created by others. When you come across a fully created spell using only words you are
-              @Identifier[core:fluency-bonus]{fluent} in, can make a DC 12 + @Identifier[core:elder-sorcery]{OP}
-              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save} to attempt to learn it
-              over the course of a @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your
-              rotator spell list. If you fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn
-              that spell again. The @Identifier[core:game-master]{GM} may modify the DC based on the spell's complexity,
-              your knowledge of the spell, any special training you receive, if the spell's creator is there to assist
-              you, or for any other factors they see fit. You may also attempt to learn words that you come across as
-              long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
-              @Identifier[core:game-master]{GM} may adjust the DC for these as they see fit as well, but the default is
-              DC 15 + OP @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
+              @Identifier[core:fluency-bonus]{fluent} in, can make a @Identifier[core:difficulty-class]{DC} 12 +
+              @Identifier[core:elder-sorcery]{OP} @Identifier[core:intelligence]{INT}
+              @Identifier[core:feat-interaction]{feat save} to attempt to learn it over the course of a
+              @Identifier[core:long-rest]{long rest}. If you succeed, you can add it to your rotator spell list. If you
+              fail, you are @Identifier[keyword:incapable]{incapable} of attempting to learn that spell again. The
+              @Identifier[core:game-master]{GM} may modify the @Identifier[core:difficulty-class]{DC} based on the
+              spell's complexity, your knowledge of the spell, any special training you receive, if the spell's creator
+              is there to assist you, or for any other factors they see fit. You may also attempt to learn words that
+              you come across as long as they are of elements you are @Identifier[core:fluency-bonus]{fluent} in. The
+              @Identifier[core:game-master]{GM} may adjust the @Identifier[core:difficulty-class]{DC} for these as they
+              see fit as well, but the default is @Identifier[core:difficulty-class]{DC} 15 + OP
+              @Identifier[core:intelligence]{INT} @Identifier[core:feat-interaction]{feat save}.</p>
             proficient: >-
               <p>You are @Identifier[core:fluency-bonus]{fluent} in @Identifier[ability:elder-sorcery-creation]{Elder
               Sorcery Creation}, @Identifier[ability:celestial-elder-sorcery-words]{Celestial Elder Sorcery Words}, and
@@ -1867,6 +1893,11 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
@@ -1937,6 +1968,11 @@ items:
               all: false
               attachDocuments: false
               automatic: true
+              display: {}
+              identifiers: []
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: true
               type: addDocuments
@@ -2117,10 +2153,6 @@ items:
               type: changes
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2428,20 +2460,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:animate-dead
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 66d7ecce476652ad
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:zombify
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2450,9 +2492,6 @@ items:
                 type: tag
               verbal:
                 type: tag
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             raw: "8"
@@ -2557,12 +2596,16 @@ items:
             - _id: PKZXkwmO94niPsUb
               all: false
               automatic: true
+              data: "{}"
               expandTables: false
+              identifiers: []
               local:
+                identifiers: []
                 qualifier: and(@ability, @time.a1)
               multi: false
               trigger: execute
               type: useDocuments
+              uuids: []
           competence:
             raw: 1
           costs:
@@ -2610,20 +2653,30 @@ items:
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-aura
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: 3b2978862c7f9d50
               all: false
               attachDocuments: true
               automatic: true
+              display: {}
               identifiers:
                 - ability:fear-touch
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               separate: false
               type: addDocuments
+              uuids: []
             - _id: JB09RCj8EnrKPqjG
               light:
                 alpha: 0.5
@@ -2769,10 +2822,6 @@ items:
         system:
           competence:
             raw: 1
-          costs:
-            primary:
-              mp:
-                formula: "0"
           delivery: self
           duration:
             unit: unlimited
@@ -2996,8 +3045,10 @@ items:
         system:
           automations:
             - _id: 800c70e6560525a8
+              display: {}
               formula: (1 + @h)d4[magic]
               impact: damage
+              trigger: null
               type: roll
           competence:
             raw: 1

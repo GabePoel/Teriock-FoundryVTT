@@ -20,10 +20,13 @@ items:
               common:
                 - bag
               showConfirmationDialog: true
+              trigger: null
               type: common
             - _id: 71e51b18552837f1
+              display: {}
               formula: (2 + @h)d6
               impact: kill
+              trigger: null
               type: roll
           competence:
             raw: 1
@@ -72,6 +75,12 @@ items:
         img: systems/teriock/src/icons/abilities/disable-ray.webp
         name: Disable Ray
         system:
+          affinities:
+            - _id: wICmwklIudhfa5Ra
+              category: other
+              img: ""
+              type: incapability
+              value: Disabled Ability
           competence:
             raw: 1
           costs:
@@ -324,6 +333,7 @@ items:
           automations:
             - _id: mXGdgQY5cJXHpv31
               attribute: mov
+              bonus: ""
               threshold: 10 + @c
               type: feat
             - _id: WbvSgSpGns0SR1JS
@@ -332,19 +342,31 @@ items:
               attachToToken: true
               automatic: true
               deleteOnTurnChange: true
+              display: {}
               excludeToken: true
               expandWithToken: true
+              height: ""
+              identifiers: []
               innerWidth: "0"
+              local:
+                identifiers: []
+                qualifier: ""
               multi: false
               outerWidth: "0"
+              radius: ""
+              radiusX: ""
+              radiusY: ""
               regionType: emanation
               restriction:
                 enabled: false
                 priority: 0
                 type: move
               targeting: true
+              trigger: null
               type: region
+              uuids: []
               visibility: 2
+              width: ""
           competence:
             raw: 1
           delivery: self
@@ -363,15 +385,16 @@ items:
               <p>@Wiki[Category:Conjured spells]{Conjured} @Wiki[Category:Missile delivery spells]{missile spells} cast
               on you @Identifier[core:detonate-expansion]{detonate} (emanate in a 10 foot radius
               @Identifier[core:aura-delivery]{aura} from you). This is a @Identifier[core:movement]{MOV}
-              @Identifier[core:feat-interaction]{feat save} using <i>your</i> DC. Do not add your
-              @Identifier[core:proficiency-bonus]{proficiency bonus} to the DC. This detonating
-              @Identifier[core:aura-delivery]{aura delivery} is @Wiki[Category:Loud effects]{loud}.</p>
+              @Identifier[core:feat-interaction]{feat save} using <i>your</i> @Identifier[core:difficulty-class]{DC}. Do
+              not add your @Identifier[core:proficiency-bonus]{proficiency bonus} to the
+              @Identifier[core:difficulty-class]{DC}. This detonating @Identifier[core:aura-delivery]{aura delivery} is
+              @Wiki[Category:Loud effects]{loud}.</p>
             fluent: >-
-              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the
-              @Identifier[core:feat-interaction]{feat save DC}.</p>
+              <p>Your @Identifier[core:fluency-bonus]{fluency bonus} is now included in the [[:Core:Feat
+              Interaction|feat save @Identifier[core:difficulty-class]{DC}]].</p>
             proficient: >-
-              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the
-              @Identifier[core:feat-interaction]{feat save DC}.</p>
+              <p>Your @Identifier[core:proficiency-bonus]{proficiency bonus} is now included in the [[:Core:Feat
+              Interaction|feat save @Identifier[core:difficulty-class]{DC}]].</p>
           powerSources:
             - magical
           range:

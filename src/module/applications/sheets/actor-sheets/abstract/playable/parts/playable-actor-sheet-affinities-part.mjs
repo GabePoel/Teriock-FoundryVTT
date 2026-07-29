@@ -20,12 +20,7 @@ export default function PlayableActorSheetAffinitiesPart(Base) {
       _prepareAffinityButtonContext(context) {
         context.affinityButtons = Object.entries(affinityConfig.types).filter(([, type]) => type.button).map(
           ([key, type]) => {
-            return {
-              affinityType: key,
-              img: getImage(type.imgCategory, parseIdentifier(type.identifier).identifier),
-              label: type.label,
-              tooltip: type.button,
-            };
+            return { affinityType: key, img: type.img, label: type.label, tooltip: type?.button };
           },
         );
       }
