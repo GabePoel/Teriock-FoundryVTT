@@ -45,22 +45,13 @@ export default function StatGiverSystemMixin(Base) {
                 k => [
                   k,
                   new fields.EmbeddedDataField(StatPoolModel, {
-                    initial: { disabled: false, formula: this._initialStatPoolFormula, spent: [], stat: k },
+                    initial: { disabled: false, formula: this._initialStatPoolFormula, spent: [] },
                   }),
                 ]
               ),
             ),
           ),
         });
-      }
-
-      /** @inheritDoc */
-      static migrateData(source, options, state) {
-        for (const stat of POOL_STATS) {
-          const pool = foundry.utils.getProperty(source, `statDice.${stat}`);
-          if (foundry.utils.getType(pool) === "Object" && !pool.stat) { pool.stat = stat; }
-        }
-        return super.migrateData(source, options, state);
       }
 
       /** @inheritDoc */

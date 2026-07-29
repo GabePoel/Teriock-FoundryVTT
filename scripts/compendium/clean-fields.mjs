@@ -28,6 +28,7 @@ export function cleanDocument(doc) {
     if (doc.system.affinities) { cleanAffinities(doc.system.affinities); }
     if (doc.system.automations) { cleanAutomations(doc.system.automations); }
     if (doc.system.expirations) { cleanExpirations(doc.system.expirations); }
+    if (doc.system.statDice) { cleanStatDice(doc.system.statDice); }
     if (doc.type === "ability") { cleanAbility(doc); }
     if (doc.type === "body") { cleanBody(doc); }
     if (doc.type === "creature") { cleanCreature(doc); }
@@ -173,6 +174,15 @@ function cleanPiercing(piercing) {
 
   // Clean Current Keys
   if (isZero(piercing.raw)) { delete piercing.raw; }
+}
+
+/**
+ * @param {Record<string, object>} statDice
+ */
+function cleanStatDice(statDice) {
+  for (const pool of Object.values(statDice)) {
+    if (pool && typeof pool === "object") { delete pool.stat; }
+  }
 }
 
 /**

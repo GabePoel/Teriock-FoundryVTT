@@ -11,12 +11,11 @@ import { StatDie } from "../../pseudo-documents/_module.mjs";
 const { fields } = foundry.data;
 const { Collection } = foundry.utils;
 
-const POOL_STATS = Object.keys(statConfig).filter(k => statConfig[k].pool?.enabled);
-
 /**
  * @extends {Teriock.Models.StatPoolModelData}
  * @property {StatGiverSystem} parent
  * @property {Set<number>} spent
+ * @property {Teriock.Keys.DieStat} stat
  * @implements {Teriock.Functionality.StatProvider}
  */
 export default class StatPoolModel extends BaseDataModel {
@@ -35,7 +34,6 @@ export default class StatPoolModel extends BaseDataModel {
         required: true,
       }),
       spent: new fields.SetField(new fields.NumberField()),
-      stat: new fields.StringField({ choices: POOL_STATS, nullable: false, required: true }),
     };
   }
 
@@ -48,10 +46,7 @@ export default class StatPoolModel extends BaseDataModel {
       delete source.faces;
       delete source.number;
     }
-    if (!source.stat && state?.parentPath) {
-      const match = state.parentPath.match(/\.statDice\.(\w+)$/);
-      if (match) { source.stat = match[1]; }
-    }
+    delete source.stat;
     return super.migrateData(source, options, state);
   }
 
@@ -152,6 +147,14 @@ export default class StatPoolModel extends BaseDataModel {
       });
     }
     return panels;
+  }
+
+  /**
+   * The stat this corresponds to.
+   * @return {Teriock.Keys.DieStat}
+   */
+  get stat() {
+    return this.schema.name || "";
   }
 
   /** @inheritDoc */

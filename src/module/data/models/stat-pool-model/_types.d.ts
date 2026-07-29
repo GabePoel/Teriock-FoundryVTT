@@ -4,7 +4,6 @@ declare global {
       disabled: boolean;
       formula: Teriock.System.FormulaString;
       spent: Set<number>;
-      stat: Teriock.Keys.DieStat;
     };
   }
 
