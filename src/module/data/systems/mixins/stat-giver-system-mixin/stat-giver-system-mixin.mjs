@@ -134,7 +134,7 @@ export default function StatGiverSystemMixin(Base) {
           ...super.getLocalRollData(),
           ...Object.fromEntries(
             POOL_STATS.flatMap(
-              k => [[k, this.statDice[k].formula], [`${k}.disabled`, Number(this.statDice[k].disabled)], [
+              k => [[k, this.statDice[k].formula || 0], [`${k}.disabled`, Number(this.statDice[k].disabled)], [
                 `${k}.value`,
                 Number(this.statDice[k].value),
               ]]

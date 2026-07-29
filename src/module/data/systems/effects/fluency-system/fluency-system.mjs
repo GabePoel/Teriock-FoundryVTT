@@ -117,7 +117,11 @@ export default class FluencySystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return { ...super.getLocalRollData(), field: this._source.field, tc: this._source.tradecraft };
+    return {
+      ...super.getLocalRollData(),
+      field: this._source.field || 0,
+      tc: this._source.tradecraft || 0,
+    };
   }
 
   /** @inheritDoc */

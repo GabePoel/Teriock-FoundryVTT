@@ -128,13 +128,14 @@ export default class PropertySystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
+    const data = {
       ...super.getLocalRollData(),
-      [`dmg.type.${this._source.damageType}`]: 1,
       [`form.${this.form}`]: 1,
-      "dmg.extra": this.extraDamage,
-      "dmg.type": this._source.damageType,
+      "dmg.extra": this.extraDamage || 0,
+      "dmg.type": this._source.damageType || 0,
       form: this.form,
     };
+    if (this._source.damageType) { data[`dmg.type.${this._source.damageType}`] = 1; }
+    return data;
   }
 }

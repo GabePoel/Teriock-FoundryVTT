@@ -358,21 +358,21 @@ export default function ArmamentSystemMixin(Base) {
       getLocalRollData() {
         const data = super.getLocalRollData();
         Object.assign(data, {
-          [`style.${this.fightingStyle}`]: 1,
           armament: 1,
           av: this.av.value,
           bv: this.bv.value,
-          dmg: this.damage.base,
-          "dmg.2h": this.damage.twoHanded,
+          dmg: this.damage.base || 0,
+          "dmg.2h": this.damage.twoHanded || 0,
           range: this.range.long.rollValue,
           "range.long": this.range.long.rollValue,
           "range.melee": Number(this.range.melee),
           "range.ranged": Number(this.range.ranged),
           "range.short": this.range.short.rollValue,
           spellTurning: Number(this.spellTurning),
-          style: this.fightingStyle,
+          style: this.fightingStyle || 0,
           vitals: Number(this.vitals),
         });
+        if (this.fightingStyle) { data[`style.${this.fightingStyle}`] = 1; }
         for (const type of this.damage.types) { data[`dmg.type.${type}`] = 1; }
         for (const p of this.props || new Set()) { data[`prop.${p}`] = 1; }
         for (const impact of this.impacts) { data[`impact.${impact}`] = 1; }

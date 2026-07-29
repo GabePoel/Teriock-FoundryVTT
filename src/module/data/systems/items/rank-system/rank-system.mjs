@@ -245,17 +245,18 @@ export default class RankSystem
 
   /** @inheritDoc */
   getLocalRollData() {
-    return {
+    const data = {
       ...super.getLocalRollData(),
-      [`archetype.${this._source.archetype}`]: 1,
-      [`class.${this._source.class}`]: 1,
-      [`origin.${this.origin}`]: 1,
-      archetype: this._source.archetype,
-      class: this._source.class,
+      archetype: this._source.archetype || 0,
+      class: this._source.class || 0,
       maxAv: this.maxAv,
       number: this.number,
-      origin: this.origin,
+      origin: this.origin || 0,
     };
+    if (this._source.archetype) { data[`archetype.${this._source.archetype}`] = 1; }
+    if (this._source.class) { data[`class.${this._source.class}`] = 1; }
+    if (this.origin) { data[`origin.${this.origin}`] = 1; }
+    return data;
   }
 
   /** @inheritDoc */

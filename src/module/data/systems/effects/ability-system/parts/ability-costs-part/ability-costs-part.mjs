@@ -168,7 +168,7 @@ export default function AbilityCostsPart(Base) {
           ...Object.fromEntries(
             Object.entries(this.costs.primary).map((
               [k, v],
-            ) => [`costs.${k}`, v.type === "formula" ? v.formula : v.type === "description" ? "x" : 0]),
+            ) => [`costs.${k}`, v.type === "formula" ? (v.formula || 0) : v.type === "description" ? "x" : 0]),
           ),
         });
       }
