@@ -134,10 +134,10 @@ export default function AbilityEquipmentPart(Base) {
         const reference = (await fromIdentifier(`equipment:${equipmentType}`))?.toObject(true)
           || { system: { equipmentType }, type: "equipment" };
         let img;
-        if (equipmentType.titleCase() === "Scroll") {
+        if (equipmentType.toLowerCase() === "scroll") {
           if (this.elements.size === 1) {
             img = getImage("consumables", `${this.elements.first().titleCase()} Spell Scroll`);
-          } else { img = getImage("consumables", "Celestial Spell Scroll"); }
+          } else { img = TERIOCK.display.iconManifest.consumables.celestialSpellScroll; }
         }
         let out = foundry.utils.mergeObject(reference, {
           name: _loc("TERIOCK.SYSTEMS.Ability.DIALOG.MakeScroll.name", {

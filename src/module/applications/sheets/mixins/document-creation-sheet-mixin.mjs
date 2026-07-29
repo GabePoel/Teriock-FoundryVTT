@@ -1,5 +1,4 @@
 import { makeIconClass } from "../../../helpers/icon.mjs";
-import { getImage } from "../../../helpers/path.mjs";
 import { toKebabCase } from "../../../helpers/string.mjs";
 import { TeriockDialog } from "../../api/_module.mjs";
 import { DocumentSelector, selectClassDialog, selectTradecraftDialog } from "../../dialogs/_module.mjs";
@@ -89,11 +88,11 @@ export default function DocumentCreationSheetMixin(Base) {
       async _onCreateFluency() {
         const tc = await selectTradecraftDialog();
         if (tc) {
-          const f = TERIOCK.config.tradecraft.tradecrafts[tc].field;
+          const f = TERIOCK.config.tradecraft.tradecrafts[tc]?.field;
           await this.document.createChildDocuments("ActiveEffect", [{
-            img: getImage("tradecrafts", TERIOCK.index.tradecrafts[tc]),
+            img: TERIOCK.config.tradecraft.tradecrafts[tc]?.img,
             name: _loc("TERIOCK.SHEETS.Common.MENU.Create.fluency", {
-              tradecraft: TERIOCK.config.tradecraft.tradecrafts[tc].label,
+              tradecraft: TERIOCK.config.tradecraft.tradecrafts[tc]?.label,
             }),
             system: { field: f, tradecraft: tc },
             type: "fluency",
@@ -152,7 +151,7 @@ async function resolveCreateObject(type) {
     type,
   };
   if (!TERIOCK.config.document[type]?.importDialog) { return obj; }
-  const label = TERIOCK.config.document[type].label;
+  const label = TERIOCK.config.document[type]?.label;
   const typeName = label.toLowerCase();
   const decision = await TeriockDialog.prompt({
     buttons: [{

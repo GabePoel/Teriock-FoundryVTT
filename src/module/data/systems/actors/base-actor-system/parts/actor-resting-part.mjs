@@ -37,9 +37,9 @@ export default function ActorRestingPart(Base) {
             itemUpdates.push(itemUpdate);
           }
         }
-        if (options.conditions) { statuses.push(...Object.values(TERIOCK.data.conditions).map(s => s.id)); }
-        if (options.hacks) { statuses.push(...Object.values(TERIOCK.data.hacks).map(s => s.id)); }
-        if (options.cover) { statuses.push(...Object.values(TERIOCK.data.cover).map(s => s.id)); }
+        if (options.conditions) { statuses.push(...Object.values(TERIOCK.statuses.conditions).map(s => s.id)); }
+        if (options.hacks) { statuses.push(...Object.values(TERIOCK.statuses.hacks).map(s => s.id)); }
+        if (options.cover) { statuses.push(...Object.values(TERIOCK.statuses.cover).map(s => s.id)); }
         if (options.combat) {
           actorUpdate["system.combat.attackPenalty"] = 0;
           actorUpdate["system.combat.hasReaction"] = true;

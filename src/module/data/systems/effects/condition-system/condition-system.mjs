@@ -56,7 +56,7 @@ export default class ConditionSystem
    * @returns {string}
    */
   get conditionKey() {
-    return foundry.utils.invertObject(objectMap(TERIOCK.data.conditions, (c) => c._id))[this.parent.id];
+    return foundry.utils.invertObject(objectMap(TERIOCK.statuses.conditions, (c) => c._id))[this.parent.id];
   }
 
   /** @inheritDoc */

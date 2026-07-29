@@ -68,6 +68,7 @@ export default function ActorSensesPart(Base) {
         const hidingChange = this.#cachedHidingScore !== this.detection.hiding;
         const perceivingChange = this.#cachedPerceivingScore !== this.detection.perceiving;
         if (hidingChange || perceivingChange) {
+          /** @type {TeriockToken[]} */
           const tokens = this.actor.getDependentTokens({ scenes: canvas.scene }).filter(t => t.rendered).map(t =>
             t.object
           );

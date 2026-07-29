@@ -1,4 +1,3 @@
-import { getImage } from "../../helpers/path.mjs";
 import EtherealLightPlaceableMixin from "./ethereal-light-placeable-mixin.mjs";
 
 const { Token } = foundry.canvas.placeables;
@@ -28,7 +27,7 @@ export default class TeriockToken extends EtherealLightPlaceableMixin(Token) {
     await super._drawEffects();
     const promises = [];
     if (this.document.hasStatusEffect("encumbered") && this.document?.actor?.system.encumbranceLevel > 0) {
-      promises.push(this._drawEffect(getImage("conditions", "Encumbered")));
+      promises.push(this._drawEffect(TERIOCK.statuses.conditions.encumbered.img));
     }
     let overlayImg;
     if (this.document.hasStatusEffect("down") || this.document.hasStatusEffect("unconscious")) {

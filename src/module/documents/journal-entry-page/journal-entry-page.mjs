@@ -1,7 +1,6 @@
 import documentConfig from "../../constants/config/document-config.mjs";
 import { mixClasses } from "../../helpers/construction.mjs";
 import { createElement } from "../../helpers/html.mjs";
-import { getImage } from "../../helpers/path.mjs";
 import * as documentMixins from "../mixins/_module.mjs";
 
 const { JournalEntryPage } = foundry.documents;
@@ -28,7 +27,8 @@ export default class TeriockJournalEntryPage
    * @return {string}
    */
   get img() {
-    return this.system?.img || this.getFlag("teriock", "journalImage") || getImage("powers", "learned-elder-sorceries");
+    return this.system?.img || this.getFlag("teriock", "journalImage")
+      || TERIOCK.display.iconManifest.powers.learnedElderSorceries;
   }
 
   /** @inheritDoc */

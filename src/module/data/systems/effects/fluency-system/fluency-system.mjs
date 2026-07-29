@@ -1,6 +1,5 @@
 import { iconManifest } from "../../../../constants/display/_module.mjs";
 import { mixClasses } from "../../../../helpers/construction.mjs";
-import { getImage } from "../../../../helpers/path.mjs";
 import { dotJoin, toCamelCase } from "../../../../helpers/string.mjs";
 import { getName } from "../../../../helpers/utils.mjs";
 import { fieldField, tradecraftField } from "../../../fields/tools/builders.mjs";
@@ -94,9 +93,9 @@ export default class FluencySystem
     const yes = await super._preCreate(data, options, user);
     if (yes === false) { return false; }
 
-    if (!foundry.utils.hasProperty(data, "img")) { this.parent.updateSource({
-        img: getImage("tradecrafts", "Artist"),
-      }); }
+    if (!foundry.utils.hasProperty(data, "img")) {
+      this.parent.updateSource({ img: TERIOCK.display.iconManifest.tradecrafts.artist });
+    }
   }
 
   /** @inheritDoc */
@@ -111,7 +110,7 @@ export default class FluencySystem
       if (foundry.utils.hasProperty(changes, "system.tradecraft")) {
         tradecraft = foundry.utils.getProperty(changes, "system.tradecraft");
       }
-      foundry.utils.setProperty(changes, "img", getImage("tradecrafts", TERIOCK.index.tradecrafts[tradecraft]));
+      foundry.utils.setProperty(changes, "img", TERIOCK.config.tradecraft.tradecrafts[tradecraft]?.img);
     }
   }
 

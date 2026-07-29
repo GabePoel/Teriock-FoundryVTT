@@ -259,7 +259,7 @@ export const icons = {
     gp: "ms-poker-chip",
     hp: "ms-favorite",
     hpOff: "mdi-heart-off",
-    hpOn: "ms-cardio-load",
+    hpOn: "mdi-heart-half-full",
     lp: "ms-hourglass",
     mp: "ms-water-drop",
     mpOff: "ms-invert-colors-off",

@@ -1,7 +1,6 @@
 import { TeriockTextEditor } from "../../applications/ux/_module.mjs";
 import { deathBagSchema } from "../../data/fields/tools/builders.mjs";
 import { BaseRoll } from "../../dice/rolls/_module.mjs";
-import { getImage } from "../../helpers/path.mjs";
 import { DocumentExecution } from "../abstract/_module.mjs";
 
 /**
@@ -129,7 +128,7 @@ export default class DeathBagExecution extends DocumentExecution {
         title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.description"),
       }, { text: outcome, title: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.outcome") }],
       icon: TERIOCK.display.icons.ui.deathBag,
-      image: getImage("misc", "Death Bag"),
+      image: TERIOCK.display.iconManifest.misc.deathBag,
       name: _loc("TERIOCK.DIALOGS.DeathBag.PANEL.name"),
     };
     this.panels.push(await TeriockTextEditor.enrichPanel(resultPanel));

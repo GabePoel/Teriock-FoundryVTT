@@ -104,7 +104,11 @@ foundry.helpers.Hooks.once("init", function() {
     );
   }
   for (const k of Object.keys(CONFIG.statusEffects)) { delete CONFIG.statusEffects[k]; }
-  Object.assign(CONFIG.statusEffects, { ...TERIOCK.data.conditions, ...TERIOCK.data.cover, ...TERIOCK.data.hacks });
+  Object.assign(CONFIG.statusEffects, {
+    ...TERIOCK.statuses.conditions,
+    ...TERIOCK.statuses.cover,
+    ...TERIOCK.statuses.hacks,
+  });
 
   // Configure UI Components
   // =======================

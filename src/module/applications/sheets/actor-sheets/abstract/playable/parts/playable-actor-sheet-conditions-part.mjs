@@ -23,12 +23,12 @@ export default function PlayableActorSheetConditionsPart(Base) {
           associations: [],
           bars: [],
           blocks: [{
-            text: TERIOCK.data.conditions[condition].description,
+            text: TERIOCK.statuses.conditions[condition].description,
             title: _loc("TERIOCK.SYSTEMS.Child.FIELDS.description.label"),
           }],
           icon: TERIOCK.config.document.condition.icon,
-          image: TERIOCK.data.conditions[condition].img,
-          name: TERIOCK.data.conditions[condition].name,
+          image: TERIOCK.statuses.conditions[condition].img,
+          name: TERIOCK.statuses.conditions[condition].name,
         };
         /** @type {TeriockTokenDocument[]} */
         const tokenDocs = Array.from(this.document.system.conditionInformation[condition]?.trackers ?? []).map(uuid =>

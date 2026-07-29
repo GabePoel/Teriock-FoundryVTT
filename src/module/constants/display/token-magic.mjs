@@ -1,4 +1,4 @@
-import { hacks } from "../data.mjs";
+import { hacks } from "../statuses.mjs";
 
 const tokenMagic = {
   burned: {

@@ -64,7 +64,12 @@ declare global {
       morganti?: boolean;
       multiplier: number;
       /** Stat pool configuration */
-      pool?: { enabled: boolean, img: string, panel: { name: string, text: string } };
+      pool?: {
+        enabled: boolean;
+        icons: { disabled: string, enabled: string };
+        img: string;
+        panel: { name: string, text: string };
+      };
       /** DSN appearance options */
       style?: { colorset: string };
       transformationReset?: { initial: boolean, update: Record<string, unknown> };

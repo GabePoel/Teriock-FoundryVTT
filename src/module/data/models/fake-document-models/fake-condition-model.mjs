@@ -90,6 +90,6 @@ export default class FakeConditionModel extends BaseFakeDocumentModel {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    this.img ??= TERIOCK.data.conditions[this.conditionKey]?.img;
+    this.img ??= TERIOCK.statuses.conditions[this.conditionKey]?.img;
   }
 }
