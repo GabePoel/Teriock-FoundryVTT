@@ -264,6 +264,12 @@ export default function AbilityUsagePart(Base) {
       }
 
       /** @inheritDoc */
+      prepareBaseData() {
+        super.prepareBaseData();
+        if (this.maneuver === "passive") { this.executionTime.base = "passive" }
+      }
+
+      /** @inheritDoc */
       prepareCleanupData() {
         if (!TERIOCK.config.ability.delivery[this.delivery].allowPiercing) { this.piercing.raw = 0; }
         super.prepareCleanupData();
