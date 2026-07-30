@@ -5,12 +5,7 @@ name: Improved Healing Factor
 system:
   automations:
     - _id: Suc9ayhHqRkmjAwZ
-      activeQualifier: not(@status.dead)
-      conditions:
-        absent:
-          - burned
-          - dead
-          - frozen
+      activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
       consumeStatDice: false
       trigger: turnStart
       type: heal

@@ -10,10 +10,7 @@ system:
         - revive
       type: common
     - _id: iCn9pFDIGFJWxm6H
-      conditions:
-        absent:
-          - burned
-          - frozen
+      activeQualifier: and(not(@status.burned), not(@status.frozen))
       consumeStatDice: false
       trigger: turnStart
       type: heal

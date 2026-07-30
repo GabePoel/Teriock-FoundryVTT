@@ -5,11 +5,7 @@ name: Improved Revitalizing Factor
 system:
   automations:
     - _id: T0uGlilXyRymTD1v
-      activeQualifier: not(@status.dead)
-      conditions:
-        absent:
-          - dead
-          - frozen
+      activeQualifier: and(not(@status.dead), not(@status.frozen))
       consumeStatDice: false
       trigger: turnStart
       type: revitalize

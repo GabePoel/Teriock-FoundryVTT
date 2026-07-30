@@ -5,11 +5,7 @@ name: Revitalizing Factor
 system:
   automations:
     - _id: 9bz4uD8seuEOCOeq
-      activeQualifier: not(@status.down)
-      conditions:
-        absent:
-          - down
-          - frozen
+      activeQualifier: and(not(@status.down), not(@status.frozen))
       consumeStatDice: false
       trigger: turnStart
       type: revitalize

@@ -5,12 +5,7 @@ name: Healing Factor
 system:
   automations:
     - _id: KwiYWSHcXERan3Q4
-      activeQualifier: not(@status.down)
-      conditions:
-        absent:
-          - burned
-          - down
-          - frozen
+      activeQualifier: and(not(@status.down), not(@status.burned), not(@status.frozen))
       consumeStatDice: false
       trigger: turnStart
       type: heal

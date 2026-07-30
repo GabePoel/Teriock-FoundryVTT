@@ -224,7 +224,7 @@ effects:
     system:
       automations:
         - _id: Suc9ayhHqRkmjAwZ
-          activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.dead), not(@status.frozen))
+          activeQualifier: and(not(@status.dead), not(@status.burned), not(@status.frozen))
           consumeStatDice: false
           trigger: turnStart
           type: heal
@@ -266,7 +266,7 @@ effects:
     system:
       automations:
         - _id: T0uGlilXyRymTD1v
-          activeQualifier: and(not(@status.dead), not(@status.dead), not(@status.frozen))
+          activeQualifier: and(not(@status.dead), not(@status.frozen))
           consumeStatDice: false
           trigger: turnStart
           type: revitalize
@@ -1498,13 +1498,9 @@ system:
     value: 10
   statDice:
     hp:
-      faces: 10
-      number:
-        raw: "@species.size"
+      formula: (@species.size)d10
     mp:
-      faces: 12
-      number:
-        raw: "@species.size - 6"
+      formula: (@species.size - 6)d12
   traits:
     - draconic
     - monstrous
