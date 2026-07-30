@@ -61,12 +61,23 @@ items:
           affinities:
             - _id: WI1Odx3ncFMWs3tE
               category: other
+              img: ""
               type: resistance
               value: Dropping From Negative HP
             - _id: hVBGhvp2iMA3rtHg
               category: statuses
               type: resistance
               value: unconscious
+          automations:
+            - _id: kBnStvJk9WvWBids
+              changes:
+                - key: system.hp.causes.unconscious
+                  phase: derived
+                  priority: 10
+                  target: Actor
+                  type: override
+                  value: "false"
+              type: changes
           competence:
             raw: 1
           delivery: self
